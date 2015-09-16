@@ -6,3 +6,4 @@ env/
 *~
 \#*\#
 .tox/
+dumps/
