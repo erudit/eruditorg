@@ -26,3 +26,11 @@ A `SECRET_KEY` and either a `DEBUG` or an `ALLOWED_HOSTS`:
 DEBUG = True
 SECRET_KEY = 'INSECURE'
 ```
+
+# Running the tests
+
+You can run the tests with:
+
+```
+$ tox
+```
