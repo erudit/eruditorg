@@ -11,6 +11,63 @@ YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
 
 # abstracts
 
+class Person(models.Model):
+    """Personne"""
+
+    lastname = models.CharField(
+        max_length=50
+    )
+
+    firstname = models.CharField(
+        max_length=50
+    )
+
+    email = models.EmailField()
+
+    organisation = models.ForeignKey(
+        "Organisation"
+    )
+
+
+class Organisation(models.Model):
+    """Organisation"""
+
+    name = models.CharField(
+        max_length=120
+    )
+
+    street = models.CharField(
+        max_length=200,
+    )
+
+    postal_code = models.CharField(
+        max_length=50,
+    )
+
+    city = models.CharField(
+        max_length=50,
+    )
+
+    province = models.CharField(
+        max_length=50,
+    )
+
+    country = models.CharField(
+        max_length=50,
+    )
+
+    # TODO: use PhoneNumberField
+    telephone = models.CharField(
+        max_length=20
+    )
+
+    # fax = models.CharField(
+    # max_length=20
+    # )
+
+    url = models.URLField()
+
+
 class Common(models.Model):
     """Common fields to each Model"""
 
