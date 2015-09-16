@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from erudit.models import (
-    Library, Journal, JournalComment, Issue, Publisher
+    Library, Journal, JournalComment, Issue, Publisher,
+    Organisation, Person
 )
 
 
@@ -162,3 +163,5 @@ admin.site.register(Journal, JournalAdmin)
 # admin.site.register(JournalComment, JournalCommentAdmin)
 admin.site.register(Issue)
 admin.site.register(Publisher)
+admin.site.register(Organisation)
+admin.site.register(Person)
