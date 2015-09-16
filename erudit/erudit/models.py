@@ -2,6 +2,7 @@ from datetime import datetime as dt
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import gettext as _
 
 
 # choices
@@ -15,14 +16,18 @@ class Person(models.Model):
     """Personne"""
 
     lastname = models.CharField(
-        max_length=50
+        max_length=50,
+        verbose_name=_("Nom")
     )
 
     firstname = models.CharField(
-        max_length=50
+        max_length=50,
+        verbose_name=_("Prénom")
     )
 
-    email = models.EmailField()
+    email = models.EmailField(
+        verbose_name=_("Courriel")
+    )
 
     organisation = models.ForeignKey(
         "Organisation"
@@ -33,32 +38,39 @@ class Organisation(models.Model):
     """Organisation"""
 
     name = models.CharField(
-        max_length=120
+        max_length=120,
+        verbose_name=_("Nom")
     )
 
     street = models.CharField(
         max_length=200,
+        verbose_name=_("Adresse")
     )
 
     postal_code = models.CharField(
         max_length=50,
+        verbose_name=_("Code postal")
     )
 
     city = models.CharField(
         max_length=50,
+        verbose_name=_("Ville")
     )
 
     province = models.CharField(
         max_length=50,
+        verbose_name=_("Province")
     )
 
     country = models.CharField(
         max_length=50,
+        verbose_name=_("Pays")
     )
 
     # TODO: use PhoneNumberField
     telephone = models.CharField(
-        max_length=20
+        max_length=20,
+        verbose_name=_("Téléphone")
     )
 
     # fax = models.CharField(
