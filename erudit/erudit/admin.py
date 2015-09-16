@@ -1,15 +1,14 @@
 from django.contrib import admin
 
-from erudit.models import Library #, LibraryComment
-from erudit.models import Journal, JournalComment
-from erudit.models import Issue #, IssueComment
-from erudit.models import Publisher #, PublisherComment
+from erudit.models import (
+    Library, Journal, JournalComment, Issue, Publisher
+)
 
-# abstracts
 
 class CommonAdmin(admin.ModelAdmin):
 
-    readonly_fields = ['user_created', 'user_modified', 'date_created', 'date_modified']
+    readonly_fields = [
+        'user_created', 'user_modified', 'date_created', 'date_modified']
 
     fieldsets = [
         ('Système', {
@@ -35,12 +34,12 @@ class CommentAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
             'fields': (
-              ('date', 'author',),
+                ('date', 'author',),
             )
         }),
         (None, {
             'fields': (
-              'comment',
+                'comment',
             )
         }),
     ]
@@ -58,12 +57,12 @@ class JournalCommentInline(admin.TabularInline):
     fieldsets = [
         (None, {
             'fields': (
-              ('date', 'author',),
+                ('date', 'author',),
             )
         }),
         (None, {
             'fields': (
-              'comment',
+                'comment',
             )
         }),
     ]
@@ -72,13 +71,25 @@ class JournalCommentInline(admin.TabularInline):
 #        obj.author = request.user
 #        obj.save()
 
+
 class JournalAdmin(CommonAdmin):
 
-    search_fields = ['code', 'name', 'display_name', 'issn_print', 'issn_web', 'url', 'address',]
+    search_fields = [
+        'code', 'name', 'display_name', 'issn_print',
+        'issn_web', 'url', 'address',
+    ]
 
-    list_display = ('__str__', 'code', 'type', 'open_access', 'url', 'active', 'date_modified')
+    list_display = (
+        '__str__', 'code', 'type', 'open_access',
+        'url', 'active', 'date_modified'
+    )
+
     list_display_links = ('__str__', 'code')
-    list_filter = ['publisher', 'type', 'paper', 'open_access', 'active']
+
+    list_filter = [
+        'publisher', 'type', 'paper', 'open_access', 'active'
+    ]
+
     list_editable = ['type', 'active', ]
 
     inlines = [
@@ -124,6 +135,7 @@ class JournalAdmin(CommonAdmin):
             ),
         }),
     ]
+
     fieldsets.extend(CommonAdmin.fieldsets)
 
     def save_formset(self, request, form, formset, change):
@@ -133,12 +145,13 @@ class JournalAdmin(CommonAdmin):
             instance.save()
         formset.save_m2m()
 
+
 class JournalCommentAdmin(CommentAdmin):
 
     fieldsets = [
         (None, {
             'fields': (
-              'journal',
+                'journal',
             )
         }),
     ]
@@ -146,6 +159,6 @@ class JournalCommentAdmin(CommentAdmin):
 
 admin.site.register(Library)
 admin.site.register(Journal, JournalAdmin)
-#admin.site.register(JournalComment, JournalCommentAdmin)
+# admin.site.register(JournalComment, JournalCommentAdmin)
 admin.site.register(Issue)
 admin.site.register(Publisher)
