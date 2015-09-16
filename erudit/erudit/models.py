@@ -15,30 +15,41 @@ class Common(models.Model):
     """Common fields to each Model"""
 
     # system
-    user_created = models.ForeignKey(User, related_name='+',
+    user_created = models.ForeignKey(
+        User,
+        related_name='+',
         verbose_name="Créé par",
     )
-    date_created = models.DateField(auto_now_add=True,
+    date_created = models.DateField(
+        auto_now_add=True,
         verbose_name="Créé le",
     )
-    user_modified = models.ForeignKey(User, related_name='+',
+    user_modified = models.ForeignKey(
+        User,
+        related_name='+',
         verbose_name="Modifié par",
     )
-    date_modified = models.DateField(auto_now=True,
+
+    date_modified = models.DateField(
+        auto_now=True,
         verbose_name="Modifié le",
     )
 
     class Meta:
         abstract = True
 
+
 class Named(models.Model):
 
     # identification
-    name = models.CharField(max_length=255,
+    name = models.CharField(
+        max_length=255,
         verbose_name="Nom",
         help_text="Nom officiel",
     )
-    display_name = models.CharField(max_length=255,
+
+    display_name = models.CharField(
+        max_length=255,
         null=True, blank=True,
         verbose_name="Nom d'affichage",
         help_text="Nom à utiliser dans tout affichage",
@@ -53,13 +64,16 @@ class Named(models.Model):
 
 class Comment(models.Model):
 
-    author = models.ForeignKey(User, related_name='+',
+    author = models.ForeignKey(
+        User,
+        related_name='+',
         verbose_name="Soumis par",
     )
     comment = models.TextField(
         verbose_name="Commentaire",
     )
-    date = models.DateTimeField(auto_now=True,
+    date = models.DateTimeField(
+        auto_now=True,
         verbose_name="Soumis le",
     )
 
@@ -67,17 +81,15 @@ class Comment(models.Model):
         abstract = True
         verbose_name = "Commentaire"
         verbose_name_plural = "Commentaires"
-        ordering = ['date',]
+        ordering = ['date']
 
-
-#class Status(models.Model):
+# class Status(models.Model):
 #    status = models.CharField(max_length=255)
 
 #    class Meta:
 #        abstract = True
-
-
 # core
+
 
 class Library(models.Model):
     """Bibliothèque"""
@@ -88,30 +100,42 @@ class Journal(Common, Named):
     """Revue"""
 
     # identification
-    code = models.CharField(max_length=255,
+    code = models.CharField(
+        max_length=255,
         help_text="Identifiant unique (utilisé dans URL Érudit)",
     )
-    issn_print = models.CharField(max_length=255,
+
+    issn_print = models.CharField(
+        max_length=255,
         null=True, blank=True,
         verbose_name="ISSN imprimé",
     )
-    issn_web = models.CharField(max_length=255,
+
+    issn_web = models.CharField(
+        max_length=255,
         null=True, blank=True,
         verbose_name="ISSN web",
     )
-    formerly = models.ForeignKey('Journal',
+
+    formerly = models.ForeignKey(
+        'Journal',
         null=True, blank=True,
         verbose_name="Anciennement",
         help_text="Choisir l'ancien nom de la revue",
     )
 
-    publisher = models.ForeignKey('Publisher',
-        null=True, blank=True,
+    publisher = models.ForeignKey(
+        'Publisher',
+        null=True,
+        blank=True,
         related_name='journals',
         verbose_name="Éditeur",
     )
-    type = models.ForeignKey('JournalType',
-        null=True, blank=True,
+
+    type = models.ForeignKey(
+        'JournalType',
+        null=True,
+        blank=True,
         verbose_name="Type",
     )
 
@@ -168,7 +192,7 @@ class Journal(Common, Named):
     class Meta:
         verbose_name = "Revue"
         verbose_name_plural = "Revues"
-        ordering = ['name',]
+        ordering = ['name']
 
 
 class JournalType(models.Model):
@@ -193,7 +217,7 @@ class Issue(models.Model):
 
     open_access = models.BooleanField()
 
-    #status { in_production, published }
+    # status { in_production, published }
 
 
 class Publisher(models.Model):
@@ -203,14 +227,14 @@ class Publisher(models.Model):
 
 # comments
 
-#class LibraryComment(Common, Comment):
+# class LibraryComment(Common, Comment):
 #    library = models.ForeignKey('Library', related_name='comments')
 
 class JournalComment(Comment):
     journal = models.ForeignKey('Journal', related_name='comments')
 
-#class IssueComment(Common, Comment):
+# class IssueComment(Common, Comment):
 #    issue = models.ForeignKey('Issue', related_name='comments')
 
-#class PublisherComment(Common, Comment):
+# class PublisherComment(Common, Comment):
 #    publisher = models.ForeignKey('Publisher', related_name='comments')
