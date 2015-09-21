@@ -1,52 +1,146 @@
 from django.db import models
-from erudit import models as e
+
+from django.utils.translation import gettext as _
 
 
-class SubscriptionPrice(models.Model):
-    """Tarif d'abonnement"""
+class Client(models.Model):
 
-    journal
-    zone
-    type # individual, organisation ?
+    verbose_name = _("Client")
 
-    price
-    currency
-    year
-    #date_start
-    #date_end
+    lastname = models.CharField(
+        max_length=50,
+        verbose_name=_("Nom")
+    )
 
-    approved
-    date_approved
+    firstname = models.CharField(
+        max_length=50,
+        verbose_name=_("Prénom")
+    )
 
-class SubscriptionPriceType(models.Model):
-    name
+    email = models.EmailField(
+        verbose_name=_("Courriel")
+    )
 
-class SubscriptionPriceModificationNotice(models.Model):
-    """Avis de modification de tarif d'abonnement"""
+    organisation = models.CharField(
+        max_length=200
+    )
 
-    subscription_price
-    date_sent
+    email = models.EmailField()
 
-class SubscriptionZone(models.Model):
-    """Zone d'abonnement"""
-    # {UE, CA, other}
+    address = models.TextField(
+        null=True, blank=True,
+        verbose_name="Adresse",
+    )
 
-class Subscription(models.Model):
+    city = models.CharField(
+        max_length=50,
+        verbose_name=_("Ville")
+    )
 
-    person | organisation
-    journal
-    subscription_price
+    province = models.CharField(
+        max_length=50,
+        verbose_name=_("Province")
+    )
 
-class IndividualSubscription(models.Model):
+    country = models.CharField(
+        max_length=50,
+        verbose_name=_("Pays")
+    )
 
-class OrganisationalSubscription(models.Model):
+    postal_code = models.CharField(
+        max_length=50,
+        verbose_name=_("Code postal")
+    )
 
 
-class Basket(models.Model):
-    """Panier"""
+class RenewalNotice(models.Model):
+    """ RenewalNotice
 
-    # {all, sc_soc, sc_hum, discovery, legal}
-    code
-    name
-    journals
+    A notice that is sent every year to remind the client to
+    remind their subscription """
 
+    verbose_name = _("Avis de renouvellement")
+
+    paying_customer = models.ForeignKey(
+        'Client',
+        related_name="paid_renewals"
+    )
+
+    receiving_customer = models.ForeignKey(
+        'Client',
+        related_name="received_renewals"
+    )
+
+    po_number = models.CharField(
+        max_length=30
+    )
+
+    amount_total = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    rebate = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    raw_amount = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    federal_tax = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    provincial_tax = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    harmonized_tax = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    net_amount = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    currency = models.CharField(
+        max_length=5,
+    )
+
+    date_created = models.DateField()
+
+    products = models.ManyToManyField(
+        'Product'
+    )
+
+    def get_notice_number(self):
+        pass
+
+
+class Product(models.Model):
+
+    verbose_name = _("Produit")
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    description = models.CharField(
+        max_length=200
+    )
+
+    amount = models.DecimalField(
+        max_digits=7,
+        decimal_places=2
+    )
+
+    titles = models.ManyToManyField(
+        'subscription.Product'
+    )

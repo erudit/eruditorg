@@ -67,18 +67,6 @@ class Organisation(models.Model):
         verbose_name=_("Pays")
     )
 
-    # TODO: use PhoneNumberField
-    telephone = models.CharField(
-        max_length=20,
-        verbose_name=_("Téléphone")
-    )
-
-    # fax = models.CharField(
-    # max_length=20
-    # )
-
-    url = models.URLField()
-
 
 class Common(models.Model):
     """Common fields to each Model"""
@@ -152,13 +140,6 @@ class Comment(models.Model):
         verbose_name_plural = "Commentaires"
         ordering = ['date']
 
-# class Status(models.Model):
-#    status = models.CharField(max_length=255)
-
-#    class Meta:
-#        abstract = True
-# core
-
 
 class Library(models.Model):
     """Bibliothèque"""
@@ -213,10 +194,12 @@ class Journal(Common, Named):
         verbose_name="Papier",
         help_text="Est publiée également en version papier?",
     )
+
     open_access = models.BooleanField(
         default=True,
         verbose_name="Open access",
     )
+
     issues_per_year = models.IntegerField(
         null=True, blank=True,
         verbose_name="Numéros par année",
@@ -227,15 +210,11 @@ class Journal(Common, Named):
         null=True, blank=True,
         verbose_name="URL",
     )
+
     address = models.TextField(
         null=True, blank=True,
         verbose_name="Adresse",
     )
-
-    # contact
-#    contact_admin
-#    contact_finance
-#    contact_production
 
     # status
     active = models.BooleanField(
