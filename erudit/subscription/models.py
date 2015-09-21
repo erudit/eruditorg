@@ -16,6 +16,10 @@ class Client(models.Model):
         verbose_name=_("Prénom"),
     )
 
+    erudit_number = models.CharField(
+        max_length=120
+    )
+
     email = models.EmailField(
         null=True, blank=True,
         verbose_name=_("Courriel"),
@@ -203,7 +207,7 @@ class RenewalNotice(models.Model):
     )
 
     def get_notice_number(self):
-        pass
+        return ""
 
     class Meta:
         verbose_name = _("Avis de renouvellement")
@@ -263,6 +267,9 @@ class Product(models.Model):
         blank=True,
         verbose_name="Titres",
     )
+
+    def is_basket(self):
+        return self.titles.count() > 0
 
     class Meta:
         verbose_name = _("Produit")
