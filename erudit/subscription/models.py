@@ -52,14 +52,23 @@ class Client(models.Model):
         verbose_name=_("Code postal")
     )
 
+    class Meta:
+        verbose_name = _("Client")
+        verbose_name_plural = _("Clients")
+
+    def __str__(self):
+        return "{} ({}, {})".format(
+            self.organisation,
+            self.lastname,
+            self.firstname
+        )
+
 
 class RenewalNotice(models.Model):
     """ RenewalNotice
 
     A notice that is sent every year to remind the client to
     remind their subscription """
-
-    verbose_name = _("Avis de renouvellement")
 
     paying_customer = models.ForeignKey(
         'Client',
@@ -123,10 +132,17 @@ class RenewalNotice(models.Model):
     def get_notice_number(self):
         pass
 
+    class Meta:
+        verbose_name = _("Avis de renouvellement")
+        verbose_name_plural = _("Avis de renouvellement")
+
+    def __str__(self):
+        return "Avis ({})".format(
+            self.paying_customer,
+        )
+
 
 class Product(models.Model):
-
-    verbose_name = _("Produit")
 
     title = models.CharField(
         max_length=200
@@ -144,3 +160,10 @@ class Product(models.Model):
     titles = models.ManyToManyField(
         'subscription.Product'
     )
+
+    class Meta:
+        verbose_name = _("Produit")
+        verbose_name_plural = _("Produits")
+
+    def __str__(self):
+        return self.title
