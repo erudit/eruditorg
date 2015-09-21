@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'erudit',
     'subscription',
+    'post_office'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,6 +63,8 @@ TEMPLATES = [
         },
     },
 ]
+
+EMAIL_BACKEND = 'post_office.EmailBackend'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
 
