@@ -88,4 +88,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-from .settings_env import *
+from .settings_env import *  # noqa
