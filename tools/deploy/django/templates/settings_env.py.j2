@@ -1,0 +1,27 @@
+import os
+
+ALLOWED_HOSTS = ['{{ hostname }}']
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEBUG = {{ debug_mode }}
+
+SECRET_KEY = '{{ secret_key }}'
+
+DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    'NAME': '{{ database_name }}',                      # Or path to database file if using sqlite3.
+    'USER': '{{ database_user }}',
+    'PASSWORD': '{{ database_password }}',
+    'HOST': 'localhost',
+    }
+}
+
+STATIC_ROOT = "{{ project_root }}/static"
+MEDIA_ROOT = "{{ project_root }}/media"
+
+EMAIL_HOST = "localhost"
+
+victor_username = "{{ victor_username }}"
+victor_password = "{{ victor_password }}"
+victor_url = "{{ victor_url }}"

@@ -1,0 +1,20 @@
+debug_mode: True
+
+project_host: ""
+project_user: "zenon"
+project_env: "local"
+
+database_name: "{{ project_name }}-{{ project_env }}"
+database_user: "zenon"
+database_password: "change_me"
+
+project_root: "/opt/{{ project_name }}-{{ project_env }}"
+virtualenv_root: "{{ project_root }}/env"
+port: "8888"
+branch: "master"
+
+secret_key: "insecure"
+
+victor_url: "{{ PRIVATE_VICTOR_URL }}"
+victor_username: "{{ PRIVATE_VICTOR_USERNAME }}"
+victor_password: "{{ PRIVATE_VICTOR_PASSWORD }}"

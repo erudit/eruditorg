@@ -1,0 +1,21 @@
+---
+- name: Pull sources from the repository
+  sudo: yes
+  git: >
+    repo={{ repo_url }}
+    dest={{ project_root }}
+    version={{ branch }}
+    force=yes
+    accept_hostkey=yes
+  tags:
+    - update
+    - provision
+
+- name: Give permissions to user and apache
+  sudo: true
+  shell: chown -R {{ project_user }}:www-data {{ project_root }} -R
+  tags:
+    - base
+    - user
+    - provision
+    - app

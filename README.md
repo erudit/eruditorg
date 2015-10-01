@@ -1,31 +1,24 @@
 # INSTALLATION
 
-On a freshly cloned repository:
+For an initial deployment:
 
-You need to create a `settings_env.py` configuration file in `erudit/erudit`. This file requires at least the following:
+1. Edit the `local` section of the `hosts` file and add the IP address of your server / vm
 
-
-A database coniguration:
-
-```
-import os
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-```
-
-A `SECRET_KEY` and either a `DEBUG` or an `ALLOWED_HOSTS`:
+2. Run the `provision` play:
 
 ```
-DEBUG = True
-SECRET_KEY = 'INSECURE'
+$ ansible-playbook playbook.yml -i hosts -t provision -l local --ask-vault-pass
 ```
+
+Where `local` is the the target environment.
+
+# Deploying updates
+
+```
+$ ansible-playbook playbook.yml -i hosts -t update -l local --ask-vault-pass
+```
+
+Where `local` is the the target environment.
 
 # Running the tests
 

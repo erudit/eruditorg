@@ -1,0 +1,20 @@
+---
+- name: configure a python3 virtualenv
+  sudo: yes
+  file: path=/usr/lib/python3/dist-packages/virtualenv.py mode=655
+  file: src=/usr/lib/python3/dist-packages/virtualenv.py dest=/usr/bin/virtualenv3 state=link
+
+- name: Install Requirements.
+  environment: host_locale_dict
+  sudo_user: >
+    {{ project_user }}
+  pip: >
+    requirements={{ project_root}}/requirements.txt
+    virtualenv={{ virtualenv_root }}
+    virtualenv_command="/usr/bin/virtualenv -p python{{ python_version }}"
+  tags:
+    - packages
+    - application
+    - pip
+    - app
+    - provision

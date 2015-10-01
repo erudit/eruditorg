@@ -1,0 +1,7 @@
+- include: init.yml
+- include: packages.yml
+- include: git.yml
+- include: venv.yml
+- include: settings.yml
+- include: database.yml
+- include: commands.yml

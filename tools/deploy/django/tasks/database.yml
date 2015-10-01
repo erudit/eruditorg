@@ -1,0 +1,34 @@
+---
+- name: Initialize auth
+  sudo_user: "{{ project_user }}"
+  django_manage: >
+    command="migrate auth"
+    app_path={{ project_root }}/erudit/
+    settings=erudit.settings
+    virtualenv={{ virtualenv_root }}
+  tags:
+    - provision
+
+- name: Backup the database
+  sudo_user: "postgres"
+  command: "pg_dump -d {{ database_name }} -f /tmp/{{ project_name }}-backup.sql"
+  tags:
+    - update
+
+- name: Fetch the backup
+  fetch: src="/tmp/{{ project_name }}-backup.sql" dest="../../dumps/{{ project_name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}.sql" flat=yes
+  tags:
+    - update
+
+- name: Apply migrations
+  sudo_user: "{{ project_user }}"
+  django_manage: >
+    command=migrate
+    app_path={{ project_root }}/erudit/
+    settings=erudit.settings
+    virtualenv={{ virtualenv_root }}
+  tags:
+    - database
+    - app
+    - update
+    - provision

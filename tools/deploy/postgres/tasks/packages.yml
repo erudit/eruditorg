@@ -1,0 +1,14 @@
+- name: Install postgresql
+  apt: name={{ item }} state=latest
+  sudo: true
+  with_items:
+    - postgresql
+    - postgresql-server-dev-all
+    - python-psycopg2
+    - python3-psycopg2
+  tags:
+    - provision
+
+- debug: msg="System {{ database_name }}"
+  tags:
+    - provision

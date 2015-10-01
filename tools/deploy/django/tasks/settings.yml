@@ -1,0 +1,9 @@
+---
+- name: Install settings
+  sudo: yes
+  sudo_user: "{{ project_user }}"
+  template: >
+    src=settings_env.py.j2
+    dest={{ project_root }}/erudit/erudit/settings_env.py
+  tags:
+    - provision
