@@ -7,6 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('post_office', '0002_add_i18n_and_backend_alias'),
     ]
 
     operations = [

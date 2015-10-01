@@ -35,8 +35,8 @@ INSTALLED_APPS = (
     'erudit',
     'editor',
     'subscription',
-    'post_office',
     'grappelli',
+    'post_office',
     # Other apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_select2',
     'datetimewidget',
-    'plupload'
+    'plupload',
+
 )
 
 STATICFILES_FINDERS = (
@@ -87,7 +88,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                "django.core.context_processors.request",
+                'django.core.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.template.context_processors.static',
