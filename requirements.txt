@@ -5,3 +5,4 @@ py==1.4.30
 tox==2.1.1
 virtualenv==13.1.2
 psycopg2==2.6.1
+django-grappelli==2.7.1
