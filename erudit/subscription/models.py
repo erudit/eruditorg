@@ -1,11 +1,9 @@
 from django.db import models
-
 from django.utils.translation import gettext as _
 
+from post_office.models import Email
 
 class Client(models.Model):
-
-    verbose_name = _("Client")
 
     lastname = models.CharField(
         max_length=100,
@@ -14,32 +12,40 @@ class Client(models.Model):
 
     firstname = models.CharField(
         max_length=100,
-        verbose_name=_("Prénom")
+        null=True, blank=True,
+        verbose_name=_("Prénom"),
+    )
+
+    firstname = models.CharField(
+        max_length=50,
+        null=True, blank=True,
     )
 
     email = models.EmailField(
-        verbose_name=_("Courriel")
+        null=True, blank=True,
+        verbose_name=_("Courriel"),
+        help_text="L'avis de renouvellement sera envoyé à cette adresse",
     )
 
     organisation = models.CharField(
-        max_length=200
+        max_length=200,
+        null=True, blank=True,
     )
-
-    email = models.EmailField()
 
     civic = models.TextField(
-        null=True, blank=True,
-        verbose_name="Adresse",
-    )
-
-    street = models.TextField(
         null=True, blank=True,
         verbose_name="Numéro civique"
     )
 
+    street = models.TextField(
+        null=True, blank=True,
+        verbose_name="Rue"
+    )
+
     city = models.CharField(
         max_length=100,
-        verbose_name=_("Ville")
+        null=True, blank=True,
+        verbose_name=_("Ville"),
     )
 
     pobox = models.CharField(
@@ -54,12 +60,14 @@ class Client(models.Model):
 
     country = models.CharField(
         max_length=100,
-        verbose_name=_("Pays")
+        null=True, blank=True,
+        verbose_name=_("Pays"),
     )
 
     postal_code = models.CharField(
         max_length=50,
-        verbose_name=_("Code postal")
+        null=True, blank=True,
+        verbose_name=_("Code postal"),
     )
 
     exemption_code = models.CharField(
@@ -75,6 +83,7 @@ class Client(models.Model):
     class Meta:
         verbose_name = _("Client")
         verbose_name_plural = _("Clients")
+        ordering = ['organisation', ]
 
     def __str__(self):
         return "{} ({}, {})".format(
@@ -97,61 +106,105 @@ class RenewalNotice(models.Model):
 
     paying_customer = models.ForeignKey(
         'Client',
-        related_name="paid_renewals"
+        related_name="paid_renewals",
+        null=True, blank=True,
+        verbose_name="Client payeur",
     )
 
     receiving_customer = models.ForeignKey(
         'Client',
-        related_name="received_renewals"
+        related_name="received_renewals",
+        null=True, blank=True,
+        verbose_name="Client receveur",
     )
 
     po_number = models.CharField(
-        max_length=30
+        max_length=30,
+        null=True, blank=True,
+        verbose_name="Bon de commande",
+        help_text="Numéro de bon de commande",
     )
 
     amount_total = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Montant total",
+        help_text="Montant des articles demandés (sous-total avant Rabais)",
     )
 
     rebate = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Rabais",
+        help_text="Applicable avant taxes, sur Montant total",
     )
 
     raw_amount = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Montant brut",
+        help_text="Montant total - Rabais (sous-total après Rabais)",
     )
 
     federal_tax = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Taxe fédérale",
     )
 
     provincial_tax = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Taxe provinciale",
     )
 
     harmonized_tax = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Taxe harmonisée",
     )
 
     net_amount = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Montant net",
+        help_text="Montant brut + Taxes (total facturable, taxes incl.)",
     )
 
     currency = models.CharField(
         max_length=5,
+        null=True, blank=True,
+        verbose_name="Devise",
     )
 
-    date_created = models.DateField()
+    date_created = models.DateField(
+        null=True, blank=True,
+        verbose_name="Date de création",
+    )
 
     products = models.ManyToManyField(
-        'Product'
+        'Product',
+        blank=True,
+        verbose_name="Produits",
+    )
+
+    sent_emails = models.ManyToManyField(
+        Email,
+        blank=True,
+        verbose_name="Courriels envoyés",
+    )
+
+    status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',
+        null=True, blank=True,
+        verbose_name="État",
+        help_text="Choisir ou ajouter une option à volonté (tagger l'Avis pour suivi)",
     )
 
     def get_notice_number(self):
@@ -160,11 +213,30 @@ class RenewalNotice(models.Model):
     class Meta:
         verbose_name = _("Avis de renouvellement")
         verbose_name_plural = _("Avis de renouvellement")
+        ordering = ['paying_customer',]
 
     def __str__(self):
-        return "Avis ({})".format(
+        return "Avis : {}".format(
             self.paying_customer,
         )
+
+
+class RenewalNoticeStatus(models.Model):
+    """États d'Avis de renouvellement"""
+
+    name = models.CharField(max_length=255,
+        verbose_name="Nom",
+    )
+
+    def __str__(self):
+        return "{:s}".format(
+            self.name,
+        )
+
+    class Meta:
+        verbose_name = "État d'Avis de renouvellement"
+        verbose_name_plural = "États d'Avis de renouvellement"
+        ordering = ['name',]
 
 
 class Product(models.Model):
@@ -174,25 +246,33 @@ class Product(models.Model):
     )
 
     title = models.CharField(
-        max_length=200
+        max_length=200,
+        null=True, blank=True,
+        verbose_name="Titre",
     )
 
     description = models.CharField(
-        max_length=200
+        max_length=200,
+        null=True, blank=True,
     )
 
     amount = models.DecimalField(
         max_digits=7,
-        decimal_places=2
+        decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Montant 2016",
     )
 
     titles = models.ManyToManyField(
-        'subscription.Product'
+        'subscription.Product',
+        blank=True,
+        verbose_name="Titres",
     )
 
     class Meta:
         verbose_name = _("Produit")
         verbose_name_plural = _("Produits")
+        ordering = ['title',]
 
     def __str__(self):
         return self.title
