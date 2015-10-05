@@ -17,9 +17,5 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-
-    # subscriptions
-    url(r'^abonnements/', include('subscription.urls')),
+    url(r'avis', 'subscription.views.email', name='notice'),
 ]
