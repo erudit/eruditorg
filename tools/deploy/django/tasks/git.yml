@@ -20,3 +20,5 @@
     - provision
     - update
     - app
+  notify:
+    - reload the project

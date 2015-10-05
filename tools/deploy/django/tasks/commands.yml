@@ -9,3 +9,5 @@
   tags:
     - provision
     - update
+  notify:
+    - reload the project
