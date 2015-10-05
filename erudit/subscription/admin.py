@@ -26,7 +26,8 @@ class ClientAdmin(admin.ModelAdmin):
         ('Coordonnées', {
             'fields': (
                 'email',
-                'address',
+                'civic',
+                'street',
                 ('city', 'province'),
                 ('country', 'postal_code'),
             )
@@ -35,7 +36,17 @@ class ClientAdmin(admin.ModelAdmin):
 
 
 class RenewealNoticeAdmin(admin.ModelAdmin):
-    search_fields = ['renewal_number', 'po_number', 'paying_customer', 'receiving_customer', ]
+    search_fields = [
+        'renewal_number',
+        'po_number',
+        'paying_customer__organisation',
+        'receiving_customer__organisation',
+        'paying_customer__lastname',
+        'paying_customer__firstname',
+        'receiving_customer__lastname',
+        'receiving_customer__firstname'
+    ]
+
     list_display = ['renewal_number', 'paying_customer', 'receiving_customer', 'net_amount', 'status',]
     list_display_link = ['po_number', ]
     list_filter = ['currency', 'status',]
@@ -45,7 +56,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Identification', {
             'fields': (
-                'po_number',
+                ('renewal_number', 'po_number'),
                 ('paying_customer', 'receiving_customer'),
             )
         }),
