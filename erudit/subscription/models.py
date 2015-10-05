@@ -27,14 +27,24 @@ class Client(models.Model):
 
     email = models.EmailField()
 
-    address = models.TextField(
+    civic = models.TextField(
         null=True, blank=True,
         verbose_name="Adresse",
+    )
+
+    street = models.TextField(
+        null=True, blank=True,
+        verbose_name="Numéro civique"
     )
 
     city = models.CharField(
         max_length=50,
         verbose_name=_("Ville")
+    )
+
+    pobox = models.CharField(
+        max_length=50,
+        verbose_name=_("Casier postal")
     )
 
     province = models.CharField(
@@ -50,6 +60,16 @@ class Client(models.Model):
     postal_code = models.CharField(
         max_length=50,
         verbose_name=_("Code postal")
+    )
+
+    exemption_code = models.CharField(
+        max_length=1,
+        verbose_name=_("Code d'exemption")
+    )
+
+    currency = models.CharField(
+        max_length=3,
+        verbose_name=_("Devise")
     )
 
     class Meta:
@@ -69,6 +89,11 @@ class RenewalNotice(models.Model):
 
     A notice that is sent every year to remind the client to
     remind their subscription """
+
+    renewal_number = models.CharField(
+        max_length=10,
+        verbose_name="Numéro d'avis"
+    )
 
     paying_customer = models.ForeignKey(
         'Client',
@@ -143,6 +168,10 @@ class RenewalNotice(models.Model):
 
 
 class Product(models.Model):
+
+    code = models.CharField(
+        max_length=30
+    )
 
     title = models.CharField(
         max_length=200
