@@ -7,6 +7,8 @@ DEBUG = {{ debug_mode }}
 
 SECRET_KEY = '{{ secret_key }}'
 
+GRAPPELLI_ADMIN_TITLE = '{{ verbose_project_name }} - {{ project_env }}'
+
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
