@@ -1,7 +1,7 @@
 from django.db import models
-
 from django.utils.translation import gettext as _
 
+from post_office.models import Email
 
 class Client(models.Model):
 
@@ -165,6 +165,12 @@ class RenewalNotice(models.Model):
         'Product',
         blank=True,
         verbose_name="Produits",
+    )
+
+    sent_emails = models.ManyToManyField(
+        Email,
+        blank=True,
+        verbose_name="Courriels envoyés",
     )
 
     status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',

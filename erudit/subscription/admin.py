@@ -42,6 +42,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
     list_display_link = ['po_number', ]
     list_filter = ['currency', 'status',]
     list_editable = ['status',]
+    readonly_fields = ['sent_emails',]
     fieldsets = [
         ('Identification', {
             'fields': (
@@ -63,6 +64,11 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         ('Produits', {
             'fields': (
                 'products',
+            )
+        }),
+        ('Envois', {
+            'fields': (
+                'sent_emails',
             )
         }),
         ('Suivi', {
