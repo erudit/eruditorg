@@ -16,11 +16,6 @@ class Client(models.Model):
         verbose_name=_("Prénom"),
     )
 
-    firstname = models.CharField(
-        max_length=50,
-        null=True, blank=True,
-    )
-
     email = models.EmailField(
         null=True, blank=True,
         verbose_name=_("Courriel"),
