@@ -8,12 +8,12 @@ class Client(models.Model):
     verbose_name = _("Client")
 
     lastname = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=_("Nom")
     )
 
     firstname = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=_("Prénom")
     )
 
@@ -38,22 +38,22 @@ class Client(models.Model):
     )
 
     city = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=_("Ville")
     )
 
     pobox = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=_("Casier postal")
     )
 
     province = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=_("Province")
     )
 
     country = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=_("Pays")
     )
 
@@ -91,7 +91,7 @@ class RenewalNotice(models.Model):
     remind their subscription """
 
     renewal_number = models.CharField(
-        max_length=10,
+        max_length=20,
         verbose_name="Numéro d'avis"
     )
 
