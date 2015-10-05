@@ -44,11 +44,12 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'paying_customer__lastname',
         'paying_customer__firstname',
         'receiving_customer__lastname',
-        'receiving_customer__firstname'
+        'receiving_customer__firstname',
+        'comment',
     ]
 
     list_display = ['renewal_number', 'paying_customer', 'receiving_customer', 'net_amount', 'status',]
-    list_display_link = ['po_number', ]
+    list_display_link = ['renewal_number', ]
     list_filter = ['currency', 'status',]
     list_editable = ['status',]
     filter_horizontal = ('products',)
@@ -83,8 +84,8 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
         ('Suivi', {
             'fields': (
-                'date_created',
-                'status',
+                ('status', 'date_created', ),
+                'comment',
             )
         }),
     ]

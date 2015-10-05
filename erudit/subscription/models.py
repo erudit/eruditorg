@@ -211,6 +211,12 @@ class RenewalNotice(models.Model):
         help_text="Choisir ou ajouter une option à volonté (tagger l'Avis pour suivi)",
     )
 
+    comment = models.TextField(
+        null=True, blank=True,
+        verbose_name="Commentaire",
+        help_text="Commentaire libre pour suivi de l'avis",
+    )
+
     class Meta:
         verbose_name = _("Avis de renouvellement")
         verbose_name_plural = _("Avis de renouvellement")
