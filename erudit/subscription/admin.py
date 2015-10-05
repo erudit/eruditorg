@@ -35,6 +35,16 @@ class ClientAdmin(admin.ModelAdmin):
     ]
 
 
+def _country(obj):
+    output = ""
+    if obj and obj.paying_customer:
+        output = "{:s}".format(
+            obj.paying_customer.country,
+        )
+    return output
+_country.short_description = 'Pays'
+
+
 class RenewealNoticeAdmin(admin.ModelAdmin):
     search_fields = [
         'renewal_number',
@@ -46,14 +56,31 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'receiving_customer__lastname',
         'receiving_customer__firstname',
         'comment',
+        'paying_customer__country',
     ]
 
-    list_display = ['renewal_number', 'paying_customer', 'receiving_customer', 'net_amount', 'status',]
+    list_display = [
+        'renewal_number',
+        'paying_customer',
+        'receiving_customer',
+        #'has_basket',
+        #'has_rebate',
+        'net_amount',
+        'currency',
+        'status',
+        _country,
+    ]
     list_display_link = ['renewal_number', ]
-    list_filter = ['currency', 'status',]
+    list_filter = ['currency', 'status', 'rebate', 
+        'paying_customer__country',
+        #'has_basket',
+        #'has_rebate',
+    ]
     list_editable = ['status',]
     filter_horizontal = ('products',)
-    readonly_fields = ['sent_emails',]
+    readonly_fields = ['sent_emails', 
+        #'has_basket',
+    ]
     fieldsets = [
         ('Identification', {
             'fields': (
