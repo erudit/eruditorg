@@ -3,7 +3,6 @@ from subscription.models import (
     Client, Product, RenewalNotice, RenewalNoticeStatus
 )
 
-
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description',]
     list_display = ['title', 'description', 'amount',]
@@ -36,12 +35,12 @@ class ClientAdmin(admin.ModelAdmin):
 
 
 class RenewealNoticeAdmin(admin.ModelAdmin):
-    pass
     search_fields = ['renewal_number', 'po_number', 'paying_customer', 'receiving_customer', ]
     list_display = ['renewal_number', 'paying_customer', 'receiving_customer', 'net_amount', 'status',]
     list_display_link = ['po_number', ]
     list_filter = ['currency', 'status',]
     list_editable = ['status',]
+    filter_horizontal = ('products',)
     readonly_fields = ['sent_emails',]
     fieldsets = [
         ('Identification', {
