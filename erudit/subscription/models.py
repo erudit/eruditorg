@@ -102,7 +102,7 @@ class RenewalNotice(models.Model):
         decimal_places=2,
         null=True, blank=True,
         verbose_name="Montant total",
-        help_text="Montant des articles demandés (sous-total avant rabais)",
+        help_text="Montant des articles demandés (sous-total avant Rabais)",
     )
 
     rebate = models.DecimalField(
@@ -110,7 +110,7 @@ class RenewalNotice(models.Model):
         decimal_places=2,
         null=True, blank=True,
         verbose_name="Rabais",
-        help_text="Applicable avant taxes, sur montant total",
+        help_text="Applicable avant taxes, sur Montant total",
     )
 
     raw_amount = models.DecimalField(
@@ -118,7 +118,7 @@ class RenewalNotice(models.Model):
         decimal_places=2,
         null=True, blank=True,
         verbose_name="Montant brut",
-        help_text="Montant total - rabais (sous-total après rabais)",
+        help_text="Montant total - Rabais (sous-total après Rabais)",
     )
 
     federal_tax = models.DecimalField(
@@ -147,7 +147,7 @@ class RenewalNotice(models.Model):
         decimal_places=2,
         null=True, blank=True,
         verbose_name="Montant net",
-        help_text="Montant brut + taxes (total facturable, taxes incl.)",
+        help_text="Montant brut + Taxes (total facturable, taxes incl.)",
     )
 
     currency = models.CharField(
@@ -163,14 +163,14 @@ class RenewalNotice(models.Model):
 
     products = models.ManyToManyField(
         'Product',
-        null=True, blank=True,
+        blank=True,
         verbose_name="Produits",
     )
 
     status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',
         null=True, blank=True,
         verbose_name="État",
-        help_text="Choisir ou ajouter une option à volonté (tag pour mémoire)",
+        help_text="Choisir ou ajouter une option à volonté (tagger l'Avis pour suivi)",
     )
 
     def get_notice_number(self):
@@ -182,13 +182,13 @@ class RenewalNotice(models.Model):
         ordering = ['paying_customer',]
 
     def __str__(self):
-        return "Avis ({})".format(
+        return "Avis : {}".format(
             self.paying_customer,
         )
 
 
 class RenewalNoticeStatus(models.Model):
-    """États d'avis de renouvellement"""
+    """États d'Avis de renouvellement"""
 
     name = models.CharField(max_length=255,
         verbose_name="Nom",
@@ -200,8 +200,8 @@ class RenewalNoticeStatus(models.Model):
         )
 
     class Meta:
-        verbose_name = "État d'avis de renouvellement"
-        verbose_name_plural = "États d'avis de renouvellement"
+        verbose_name = "État d'Avis de renouvellement"
+        verbose_name_plural = "États d'Avis de renouvellement"
         ordering = ['name',]
 
 
@@ -222,13 +222,12 @@ class Product(models.Model):
         max_digits=7,
         decimal_places=2,
         null=True, blank=True,
-        verbose_name="Montant",
         verbose_name="Montant 2016",
     )
 
     titles = models.ManyToManyField(
         'subscription.Product',
-        null=True, blank=True,
+        blank=True,
         verbose_name="Titres",
     )
 
