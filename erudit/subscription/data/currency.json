@@ -1,0 +1,1 @@
+[{"model": "subscription.currency", "pk": 1, "fields": {"name": "Dollar canadien", "code": "CAD"}}, {"model": "subscription.currency", "pk": 2, "fields": {"name": "Euro", "code": "EUR"}}, {"model": "subscription.currency", "pk": 3, "fields": {"name": "Dollar am\u00e9ricain", "code": "USD"}}]

@@ -4,6 +4,58 @@ from django.utils.translation import gettext as _
 from post_office.models import Email
 
 
+class Country(models.Model):
+    code = models.CharField(
+        max_length=255,
+        null=True, blank=True,
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Nom")
+    )
+    currency = models.ForeignKey(
+        'Currency',
+        null=True, blank=True,
+        verbose_name="Devise",
+        related_name='pays'
+    )
+
+    def __str__(self):
+        return "{:s} [{:s}]".format(
+            self.name,
+            self.code,
+        )
+
+    class Meta:
+        verbose_name = _("Pays")
+        verbose_name_plural = _("Pays")
+        ordering = [
+            'name',
+        ]
+
+
+class Currency(models.Model):
+    code = models.CharField(
+        max_length=255,
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Nom")
+    )
+
+    def __str__(self):
+        return "{:s}".format(
+            self.code,
+        )
+
+    class Meta:
+        verbose_name = _("Devise")
+        verbose_name_plural = _("Devises")
+        ordering = [
+            'code',
+        ]
+
+
 class Client(models.Model):
 
     lastname = models.CharField(
@@ -80,19 +132,19 @@ class Client(models.Model):
         verbose_name=_("Devise")
     )
 
+    def __str__(self):
+        return "{:s} ({:s}, {:s})".format(
+            self.organisation,
+            self.lastname,
+            self.firstname,
+        )
+
     class Meta:
         verbose_name = _("Client")
         verbose_name_plural = _("Clients")
         ordering = [
             'organisation',
         ]
-
-    def __str__(self):
-        return "{} ({}, {})".format(
-            self.organisation,
-            self.lastname,
-            self.firstname
-        )
 
 
 NOTICE_STATUS_CHOICES = (
@@ -318,6 +370,16 @@ class RenewalNotice(models.Model):
             errors.append(error)
 
         # currency is correct?
+        # test 4
+        error = {
+            'code': 4,
+            'msg': """La Devise et le Pays ne concordent pas avec 
+            les données de référence.
+            """,
+            'proof': "",
+        }
+        #currency = Currency.objects.get(code=self.currency)
+        #country = Country.objects.get(name=self.country)
 
         return errors
 
@@ -353,7 +415,7 @@ class RenewalNotice(models.Model):
         super(RenewalNotice, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "Avis : {}".format(
+        return "Avis : {:s}".format(
             self.renewal_number,
         )
 
@@ -403,12 +465,12 @@ class Product(models.Model):
     def is_basket(self):
         return self.titles.count() > 0
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = _("Produit")
         verbose_name_plural = _("Produits")
         ordering = [
             'title',
         ]
-
-    def __str__(self):
-        return self.title

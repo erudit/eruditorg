@@ -6,9 +6,47 @@ from post_office import mail
 
 from subscription.models import (
     Client, Product, RenewalNotice,
+    Country, Currency
 )
 
 from subscription import report
+
+
+class CountryAdmin(admin.ModelAdmin):
+    search_fields = (
+        'code',
+        'name',
+        'currency__code',
+    )
+    list_display = (
+        'code',
+        'name',
+        'currency',
+    )
+    list_display_link = (
+        'name',
+    )
+    list_editable = (
+        'code',
+        'currency',
+    )
+
+
+class CurrencyAdmin(admin.ModelAdmin):
+    search_fields = (
+        'code',
+        'name',
+    )
+    list_display = (
+        'code',
+        'name',
+    )
+    list_display_link = (
+        'code',
+    )
+    list_editable = (
+        'name',
+    )
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -196,3 +234,5 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(RenewalNotice, RenewealNoticeAdmin)
+admin.site.register(Country, CountryAdmin)
+admin.site.register(Currency, CurrencyAdmin)
