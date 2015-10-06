@@ -13,7 +13,7 @@ from subscription import report
 
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description', ]
-    list_display = ['title', 'description', 'amount', ]
+    list_display = ['title', 'description', 'amount', 'hide_in_renewal_items']
     list_display_link = ['title', ]
     list_editable = ['amount', ]
 

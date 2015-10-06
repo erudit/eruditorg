@@ -307,6 +307,11 @@ class Product(models.Model):
         verbose_name="Titres",
     )
 
+    hide_in_renewal_items = models.BooleanField(
+        default=False,
+        verbose_name=_("Ne pas afficher dans la liste d'items des avis"),
+    )
+
     def is_basket(self):
         return self.titles.count() > 0
 
