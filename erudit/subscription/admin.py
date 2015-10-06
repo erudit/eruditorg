@@ -1,17 +1,25 @@
 from django.contrib import admin
+from django.core.files.base import ContentFile
+from django.utils.translation import gettext as _
+
+from post_office import mail
+
 from subscription.models import (
     Client, Product, RenewalNotice, RenewalNoticeStatus
 )
 
+from subscription import report
+
+
 class ProductAdmin(admin.ModelAdmin):
-    search_fields = ['title', 'description',]
-    list_display = ['title', 'description', 'amount',]
-    list_display_link = ['title',]
-    list_editable = ['amount',]
+    search_fields = ['title', 'description', ]
+    list_display = ['title', 'description', 'amount', ]
+    list_display_link = ['title', ]
+    list_editable = ['amount', ]
 
 
 class ClientAdmin(admin.ModelAdmin):
-    pass
+
     search_fields = ['firstname', 'lastname', 'organisation', 'email', 'postal_code',]
     list_display = ['firstname', 'lastname', 'organisation', 'email',]
     list_display_link = ['firstname', 'lastname',]
@@ -76,6 +84,24 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'has_basket',
         #'has_rebate',
     ]
+
+    def create_test_email(modeladmin, request, queryset):
+        """ Create a renewal email for this RenewalNotice """
+        for renewal in queryset.all():
+            report_data = report.generate_report(renewal)
+            pdf = ContentFile(report_data)
+
+            mail.send(
+                request.user.email,
+                request.user.email,
+                attachments={
+                    'avis.pdf': pdf
+                },
+                # template='avis_de_renouvellement',
+            )
+
+    create_test_email.short_description = _("Envoyer un courriel de test")
+
     list_editable = ['status',]
     filter_horizontal = ('products',)
     readonly_fields = ['sent_emails', ]
@@ -115,6 +141,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
     ]
 
+    actions = [create_test_email]
 
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
