@@ -189,7 +189,7 @@ def generate_report(renewal):
         for item_number, product in enumerate(renewal.products.all()):
             if product.is_basket():
                 items = []
-                for item_number, title in enumerate(product.titles()):
+                for item_number, title in enumerate(product.titles.all()):
                     items.append(
                         [item_number, title.title, ""]
                     )
