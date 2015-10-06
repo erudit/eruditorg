@@ -12,19 +12,49 @@ from subscription import report
 
 
 class ProductAdmin(admin.ModelAdmin):
-    search_fields = ['title', 'description', ]
-    list_display = ['title', 'description', 'amount', 'hide_in_renewal_items']
-    list_display_link = ['title', ]
-    list_editable = ['amount', ]
+    search_fields = (
+        'title',
+        'description',
+    )
+    list_display = (
+        'title',
+        'description',
+        'amount',
+        'hide_in_renewal_items'
+    )
+    list_display_link = (
+        'title',
+    )
+    list_editable = (
+        'amount',
+    )
 
 
 class ClientAdmin(admin.ModelAdmin):
-
-    search_fields = ['firstname', 'lastname', 'organisation', 'email', 'postal_code',]
-    list_display = ['firstname', 'lastname', 'organisation', 'email',]
-    list_display_link = ['firstname', 'lastname',]
-    list_filter = ['organisation', 'city', 'province', 'country',]
-    fieldsets = [
+    search_fields = (
+        'firstname',
+        'lastname',
+        'organisation',
+        'email',
+        'postal_code',
+    )
+    list_display = (
+        'firstname',
+        'lastname',
+        'organisation',
+        'email',
+    )
+    list_display_link = (
+        'firstname',
+        'lastname',
+    )
+    list_filter = (
+        'organisation',
+        'city',
+        'province',
+        'country',
+    )
+    fieldsets = (
         ('Identification', {
             'fields': (
                 ('firstname', 'lastname'),
@@ -40,7 +70,7 @@ class ClientAdmin(admin.ModelAdmin):
                 ('country', 'postal_code'),
             )
         }),
-    ]
+    )
 
 
 def _country(obj):
@@ -54,7 +84,7 @@ _country.short_description = 'Pays'
 
 
 class RenewealNoticeAdmin(admin.ModelAdmin):
-    search_fields = [
+    search_fields = (
         'renewal_number',
         'po_number',
         'paying_customer__organisation',
@@ -65,25 +95,27 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'receiving_customer__firstname',
         'comment',
         'paying_customer__country',
-    ]
-
-    list_display = [
+    )
+    list_display = (
         'renewal_number',
         'paying_customer',
         'receiving_customer',
         'has_basket',
-        #'has_rebate',
         'net_amount',
         'currency',
         'status',
         _country,
-    ]
-    list_display_link = ['renewal_number', ]
-    list_filter = ['currency', 'status', 'rebate', 
+    )
+    list_display_link = (
+        'renewal_number',
+    )
+    list_filter = (
+        'currency',
+        'status',
+        'rebate',
         'paying_customer__country',
         'has_basket',
-        #'has_rebate',
-    ]
+    )
 
     def create_test_email(modeladmin, request, queryset):
         """ Create a renewal email for this RenewalNotice """
@@ -102,10 +134,17 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 
     create_test_email.short_description = _("Envoyer un courriel de test")
 
-    list_editable = ['status',]
-    filter_horizontal = ('products',)
-    readonly_fields = ['sent_emails', ]
-    fieldsets = [
+    list_editable = (
+        'status',
+    )
+    filter_horizontal = (
+        'products',
+    )
+    readonly_fields = (
+        'sent_emails',
+    )
+
+    fieldsets = (
         ('Identification', {
             'fields': (
                 ('renewal_number', 'po_number'),
@@ -139,7 +178,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
                 'comment',
             )
         }),
-    ]
+    )
 
     actions = [create_test_email]
 

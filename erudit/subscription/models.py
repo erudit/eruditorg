@@ -83,7 +83,9 @@ class Client(models.Model):
     class Meta:
         verbose_name = _("Client")
         verbose_name_plural = _("Clients")
-        ordering = ['organisation', ]
+        ordering = [
+            'organisation',
+        ]
 
     def __str__(self):
         return "{} ({}, {})".format(
@@ -207,10 +209,11 @@ class RenewalNotice(models.Model):
         verbose_name="Courriels envoyés",
     )
 
-    status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',
+    status = models.ForeignKey(
+        'RenewalNoticeStatus',
+        related_name='renewal_notices',
         null=True, blank=True,
         verbose_name="État",
-        help_text="Choisir ou ajouter une option à volonté (tagger l'Avis pour suivi)",
     )
 
     comment = models.TextField(
@@ -256,13 +259,16 @@ class RenewalNotice(models.Model):
     class Meta:
         verbose_name = _("Avis de renouvellement")
         verbose_name_plural = _("Avis de renouvellement")
-        ordering = ['paying_customer',]
+        ordering = [
+            'paying_customer',
+        ]
 
 
 class RenewalNoticeStatus(models.Model):
     """États d'Avis de renouvellement"""
 
-    name = models.CharField(max_length=255,
+    name = models.CharField(
+        max_length=255,
         verbose_name="Nom",
     )
 
@@ -274,7 +280,9 @@ class RenewalNoticeStatus(models.Model):
     class Meta:
         verbose_name = "État d'Avis de renouvellement"
         verbose_name_plural = "États d'Avis de renouvellement"
-        ordering = ['name',]
+        ordering = [
+            'name',
+        ]
 
 
 class Product(models.Model):
@@ -318,7 +326,9 @@ class Product(models.Model):
     class Meta:
         verbose_name = _("Produit")
         verbose_name_plural = _("Produits")
-        ordering = ['title',]
+        ordering = [
+            'title',
+        ]
 
     def __str__(self):
         return self.title
