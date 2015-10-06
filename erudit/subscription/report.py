@@ -186,30 +186,33 @@ def generate_report(renewal):
 
     def get_items(renewal):
         items = []
-        for item_number, product in enumerate(renewal.products.all(), 1):
-            if product.is_basket():
-                items = []
-                for item_number, title in enumerate(product.titles.all(), 1):
-                    items.append(
-                        [item_number, title.title, ""]
-                    )
-                return items
-            # TODO display description if not in a basket
-            items.append([item_number, product.title, ""])
-        return items
+        basket = renewal.get_basket()
+
+        if basket:
+            items = []
+            for item_number, title in enumerate(basket.titles.all(), 1):
+                items.append(
+                    [item_number, title.title, ""]
+                )
+            return items
+        else:
+            for item_number, product in enumerate(renewal.products.all(), 1):
+                # TODO display description if not in a basket
+                items.append([item_number, product.title, product.amount])
+            return items
 
     def get_items_price():
         items = []
 
         basket = renewal.get_basket()
-
-        items.append(
-            [
-                "",
-                "Prix du panier / Collection price",
-                basket.amount
-            ]
-        )
+        if basket:
+            items.append(
+                [
+                    "",
+                    "Prix du panier / Collection price",
+                    basket.amount
+                ]
+            )
 
         rebate_spacer_inserted = False
         if renewal.rebate:
