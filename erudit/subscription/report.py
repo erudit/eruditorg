@@ -190,13 +190,13 @@ def generate_report(renewal):
 
         if basket:
             items = []
-            for item_number, title in enumerate(basket.titles.all(), 1):
+            for item_number, title in enumerate(basket.titles.filter(hide_in_renewal_items=False), 1):
                 items.append(
                     [item_number, title.title, ""]
                 )
             return items
         else:
-            for item_number, product in enumerate(renewal.products.all(), 1):
+            for item_number, product in enumerate(renewal.products.filter(hide_in_renewal_items=False), 1):
                 # TODO display description if not in a basket
                 items.append([item_number, product.title, product.amount])
             return items
