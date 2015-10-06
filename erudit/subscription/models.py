@@ -207,9 +207,6 @@ class RenewalNotice(models.Model):
         verbose_name="Courriels envoyés",
     )
 
-    def get_premium(self):
-        return self.products.filter(code='Premium').first()
-
     status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',
         null=True, blank=True,
         verbose_name="État",
@@ -222,6 +219,9 @@ class RenewalNotice(models.Model):
         help_text="Commentaire libre pour suivi de l'avis",
     )
 
+    def get_premium(self):
+        return self.products.filter(code='Premium').first()
+
     def get_basket(self):
         return self.products.filter(titles__isnull=False).first()
 
@@ -229,8 +229,8 @@ class RenewalNotice(models.Model):
         pass
 
     def test_has_basket(self):
-        """Renewal Notice has a basket 
-        if one of its product has many titles 
+        """Renewal Notice has a basket
+        if one of its product has many titles
         (Basket = Product of Products)
         """
         has_basket = False
