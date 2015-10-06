@@ -138,7 +138,7 @@ class RenewalNotice(models.Model):
     amount_total = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Montant total",
         help_text="Montant des articles demandés (sous-total avant Rabais)",
     )
@@ -146,7 +146,7 @@ class RenewalNotice(models.Model):
     rebate = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Rabais",
         help_text="Applicable avant taxes, sur Montant total",
     )
@@ -154,7 +154,7 @@ class RenewalNotice(models.Model):
     raw_amount = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Montant brut",
         help_text="Montant total - Rabais (sous-total après Rabais)",
     )
@@ -162,28 +162,28 @@ class RenewalNotice(models.Model):
     federal_tax = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Taxe fédérale",
     )
 
     provincial_tax = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Taxe provinciale",
     )
 
     harmonized_tax = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Taxe harmonisée",
     )
 
     net_amount = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Montant net",
         help_text="Montant brut + Taxes (total facturable, taxes incl.)",
     )
@@ -216,6 +216,20 @@ class RenewalNotice(models.Model):
         verbose_name="Produits",
     )
 
+    no_error = models.BooleanField(
+        editable=False,
+        default=True,
+        verbose_name="Sans erreur",
+        help_text="Renseigné automatiquement par système.",
+    )
+
+    error_msg = models.TextField(
+        editable=False,
+        default="",
+        verbose_name="Messages d'erreur",
+        help_text="Renseigné automatiquement par système si existe erreur(s).",
+    )
+
     sent_emails = models.ManyToManyField(
         Email,
         blank=True,
@@ -244,6 +258,69 @@ class RenewalNotice(models.Model):
     def get_notice_number(self):
         pass
 
+    def error_check(self):
+        """Checks for business logic errors and returns a
+        list of errors.
+
+        Each error is a dict of
+        * an error code (number of the rule that failed)
+        * an error message (explaining the rule that failed)
+        * a proof (string showing the data causing the failure)
+
+        'error' and 'error_msg' fields are filled by the save method
+        using 'error_check' method.
+        """
+        errors = []
+
+        # amounts are correct?
+        # test 1
+        error = {
+            'code': 1,
+            'msg': "Montant des produits demandés différent du Montant total",
+            'proof': "",
+        }
+        total_products = sum([p.amount for p in self.products.all()])
+        if self.amount_total != total_products:
+            proof = "Montant total: {:s}, Montant des produits: {:s}".format(
+                str(self.amount_total),
+                str(total_products),
+            )
+            error['proof'] = proof
+            errors.append(error)
+
+        # test 2
+        error = {
+            'code': 2,
+            'msg': "Montant brut est différent du Montant total - Rabais",
+            'proof': "",
+        }
+        if self.raw_amount != (self.amount_total - self.rebate):
+            proof = "Montant brut: {:s}, Montant total - rabais: {:s}".format(
+                str(self.raw_amount),
+                str(self.amount_total - self.rebate),
+            )
+            error['proof'] = proof
+            errors.append(error)
+
+        # test 3
+        error = {
+            'code': 3,
+            'msg': "Montant net est différent du Montant brut + taxes",
+            'proof': "",
+        }
+        taxes = self.federal_tax + self.provincial_tax + self.harmonized_tax
+        if self.net_amount != (self.raw_amount + taxes):
+            proof = "Montant net: {:s}, Montant brut + taxes: {:s}".format(
+                str(self.net_amount),
+                str(self.raw_amount + taxes),
+            )
+            error['proof'] = proof
+            errors.append(error)
+
+        # currency is correct?
+
+        return errors
+
     def test_has_basket(self):
         """Renewal Notice has a basket
         if one of its product has many titles
@@ -260,6 +337,17 @@ class RenewalNotice(models.Model):
         self.has_basket = False
         if self.test_has_basket():
             self.has_basket = True
+
+        # error check
+        if self.error_check():
+            self.no_error = False
+            for error in self.error_check():
+                msg = "ERREUR {:d} : {:s}\n    Preuve : {:s}\n\n".format(
+                    error['code'],
+                    error['msg'],
+                    error['proof'],
+                )
+                self.error_msg = msg
 
         # Call the "real" save() method.
         super(RenewalNotice, self).save(*args, **kwargs)
@@ -297,7 +385,7 @@ class Product(models.Model):
     amount = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        null=True, blank=True,
+        default=0.0,
         verbose_name="Montant 2016",
     )
 
