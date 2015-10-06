@@ -186,10 +186,10 @@ def generate_report(renewal):
 
     def get_items(renewal):
         items = []
-        for item_number, product in enumerate(renewal.products.all()):
+        for item_number, product in enumerate(renewal.products.all(), 1):
             if product.is_basket():
                 items = []
-                for item_number, title in enumerate(product.titles.all()):
+                for item_number, title in enumerate(product.titles.all(), 1):
                     items.append(
                         [item_number, title.title, ""]
                     )
