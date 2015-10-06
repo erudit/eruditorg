@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 from post_office import mail
 
 from subscription.models import (
-    Client, Product, RenewalNotice, RenewalNoticeStatus
+    Client, Product, RenewalNotice,
 )
 
 from subscription import report
@@ -190,4 +190,3 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(RenewalNotice, RenewealNoticeAdmin)
-admin.site.register(RenewalNoticeStatus)

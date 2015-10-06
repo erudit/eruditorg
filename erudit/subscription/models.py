@@ -95,6 +95,14 @@ class Client(models.Model):
         )
 
 
+NOTICE_STATUS_CHOICES = (
+    ('DONT', 'Ne pas envoyer'),
+    ('TODO', 'À envoyer'),
+    ('SENT', 'Envoyé'),
+    ('REDO', 'À ré-envoyer'),
+)
+
+
 class RenewalNotice(models.Model):
     """ RenewalNotice
 
@@ -214,10 +222,10 @@ class RenewalNotice(models.Model):
         verbose_name="Courriels envoyés",
     )
 
-    status = models.ForeignKey(
-        'RenewalNoticeStatus',
-        related_name='renewal_notices',
-        null=True, blank=True,
+    status = models.CharField(
+        max_length=4,
+        choices=NOTICE_STATUS_CHOICES,
+        default='DONT',
         verbose_name="État",
     )
 
@@ -266,27 +274,6 @@ class RenewalNotice(models.Model):
         verbose_name_plural = _("Avis de renouvellement")
         ordering = [
             'paying_customer',
-        ]
-
-
-class RenewalNoticeStatus(models.Model):
-    """États d'Avis de renouvellement"""
-
-    name = models.CharField(
-        max_length=255,
-        verbose_name="Nom",
-    )
-
-    def __str__(self):
-        return "{:s}".format(
-            self.name,
-        )
-
-    class Meta:
-        verbose_name = "État d'Avis de renouvellement"
-        verbose_name_plural = "États d'Avis de renouvellement"
-        ordering = [
-            'name',
         ]
 
 
