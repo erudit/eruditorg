@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
+from django.template.loader import get_template
 
 from post_office import mail
 
@@ -166,13 +167,21 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
             report_data = report.generate_report(renewal)
             pdf = ContentFile(report_data)
 
+            template = get_template('subscription_renewal_email.html')
+            context = {'renewal_number': renewal.renewal_number}
+            html_message = template.render(context)
+
             mail.send(
                 request.user.email,
                 request.user.email,
                 attachments={
                     '{}.pdf'.format(renewal.renewal_number): pdf
                 },
-                # template='avis_de_renouvellement',
+                message=html_message,
+                html_message=html_message,
+                subject='{} - Avis de renouvellement'.format(
+                    renewal.renewal_number
+                )
             )
 
     create_test_email.short_description = _("Envoyer un courriel de test")
