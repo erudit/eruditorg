@@ -207,9 +207,8 @@ class RenewalNotice(models.Model):
         verbose_name="Courriels envoyés",
     )
 
-    @property
-    def has_premium(self):
-        return self.products.filter(code='Premium').count()
+    def get_premium(self):
+        return self.products.filter(code='Premium').first()
 
     status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',
         null=True, blank=True,

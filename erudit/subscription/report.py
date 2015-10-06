@@ -221,13 +221,15 @@ def generate_report(renewal):
                 ],
             )
 
-        if renewal.has_premium:
+        premium = renewal.get_premium()
+
+        if premium:
             first_item = "" if rebate_spacer_inserted else Spacer(0, 0.25 * inch)
             items.append(
                 [
                     first_item,
-                    "Services premium",
-                    "10,00"
+                    premium.title,
+                    premium.amount,
                 ],
             )
 
