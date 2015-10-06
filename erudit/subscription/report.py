@@ -247,8 +247,9 @@ def generate_report(renewal):
                 wrap_label("TVQ / PST"),
                 renewal.provincial_tax
             ],
-            [Spacer(0, 0.25 * inch), wrap_label("<b>Total, Devise / Currency</b>"), wrap_p("<b>{}</b> CDN$".format(
-                renewal.amount_total
+            [Spacer(0, 0.25 * inch), wrap_label("<b>Total, Devise / Currency</b>"), wrap_p("<b>{}</b> {}".format(
+                renewal.net_amount,
+                renewal.currency,
             ))],
         ])
 
