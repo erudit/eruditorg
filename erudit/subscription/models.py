@@ -192,6 +192,11 @@ class RenewalNotice(models.Model):
         verbose_name="Avec panier",
     )
 
+    has_rebate = models.BooleanField(
+        default=False,
+        verbose_name="Avec rabais",
+    )
+
     date_created = models.DateField(
         null=True, blank=True,
         verbose_name="Date de création",

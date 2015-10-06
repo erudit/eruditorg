@@ -101,6 +101,8 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'paying_customer',
         'receiving_customer',
         'has_basket',
+        'has_rebate',
+        'rebate',
         'net_amount',
         'currency',
         'status',
@@ -115,6 +117,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'rebate',
         'paying_customer__country',
         'has_basket',
+        'has_rebate',
     )
 
     def create_test_email(modeladmin, request, queryset):
@@ -136,6 +139,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 
     list_editable = (
         'status',
+        'has_rebate',
     )
     filter_horizontal = (
         'products',
