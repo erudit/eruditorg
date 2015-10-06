@@ -114,3 +114,19 @@ Le script s'attend à y trouver les fichiers suivants:
 
                 notice.products.add(product)
                 notice.save()
+
+        with open(path + 'panierstitres.csv') as csv_file:
+            reader = csv.DictReader(csv_file)
+
+            for row in reader:
+                if Product.objects.filter(code=row['product_code']).exists():
+                    basket = Product.objects.get(
+                        code=row['basket_code']
+                    )
+
+                    product = Product.objects.get(
+                        code=row['product_code']
+                    )
+
+                    basket.titles.add(product)
+                    basket.save()

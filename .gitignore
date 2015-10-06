@@ -7,3 +7,4 @@ env/
 \#*\#
 .tox/
 dumps/
+erudit/post_office_attachments/*

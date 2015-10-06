@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -65,6 +64,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# Put this in settings.py
+POST_OFFICE = {
+    'DEFAULT_PRIORITY': 'now',
+}
 
 EMAIL_BACKEND = 'post_office.EmailBackend'
 
