@@ -143,7 +143,7 @@ def generate_report(renewal):
         [wrap_label("No d’identification Érudit / Érudit’s ID Number"),
          wrap_label("Numéro de facture / Invoice Number")],
         [wrap_value(renewal.paying_customer.erudit_number),
-         wrap_value(renewal.get_notice_number())],
+         wrap_value(renewal.renewal_number)],
         [wrap_label("Courriel / Email"),
          wrap_label("No de bon de commande / PO Number")],
         [wrap_value(renewal.paying_customer.email),
@@ -199,22 +199,36 @@ def generate_report(renewal):
         return items
 
     def get_items_price():
-        return [
+        items = []
+        items.append(
             [
                 "",
                 "Prix du panier / Collection price",
                 ""
-            ],
-            [
-                Spacer(0, 0.25 * inch),
-                "Rabais institutionnel",
-                renewal.rebate
-            ],
-            [
-                "",
-                "Services premium",
-                "10,00"
-            ],
+            ]
+        )
+
+        rebate_spacer_inserted = False
+        if renewal.rebate:
+            items.append(
+                [
+                    Spacer(0, 0.25 * inch),
+                    "Rabais institutionnel",
+                    renewal.rebate
+                ],
+            )
+
+        if renewal.has_premium:
+            first_item = "" if rebate_spacer_inserted else Spacer(0, 0.25 * inch)
+            items.append(
+                [
+                    first_item,
+                    "Services premium",
+                    "10,00"
+                ],
+            )
+
+        items.extend([
             [
                 Spacer(0, 0.25 * inch),
                 wrap_label("TPS / GST"),
@@ -228,7 +242,9 @@ def generate_report(renewal):
             [Spacer(0, 0.25 * inch), wrap_label("<b>Total, Devise / Currency</b>"), wrap_p("<b>{}</b> CDN$".format(
                 renewal.amount_total
             ))],
-        ]
+        ])
+
+        return items
 
     items_data = []
     items_header = get_items_header()
@@ -240,11 +256,13 @@ def generate_report(renewal):
     items_data.extend(items_price)
 
     nb_rows_header_items = len(items_header) + len(items)
-    
+
+    row_heights = [0.2 * inch] * nb_rows_header_items + [None] * len(items_price)
+
     items = Table(
         items_data,
         repeatRows=2,
-        rowHeights=[0.2 * inch,] * nb_rows_header_items + [None,] * 6,
+        rowHeights=row_heights,
         colWidths=("10%", "60%", "30%")
     )
 
@@ -256,13 +274,6 @@ def generate_report(renewal):
     ])
 
     Story.append(items)
-
-    items = Table(
-        items_data,
-        repeatRows=2,
-        rowHeights=[0.2 * inch,] * nb_rows_header_items + [None,] * 6,
-        colWidths=("10%", "60%", "30%")
-    )
 
     Story.append(Spacer(0, 0.25 * inch))
 
@@ -281,7 +292,7 @@ def generate_report(renewal):
         ('BOX', (0, 0), (-1, -1), 2, colors.lightgrey),
         ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ])
-    
+
     Story.append(payment_instructions)
 
     doc.build(Story, onLaterPages=myLaterPages, canvasmaker=NumberedCanvas)

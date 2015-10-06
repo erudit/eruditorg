@@ -3,6 +3,7 @@ from django.utils.translation import gettext as _
 
 from post_office.models import Email
 
+
 class Client(models.Model):
 
     lastname = models.CharField(
@@ -200,14 +201,15 @@ class RenewalNotice(models.Model):
         verbose_name="Courriels envoyés",
     )
 
+    @property
+    def has_premium(self):
+        return self.products.filter(code='Premium').count()
+
     status = models.ForeignKey('RenewalNoticeStatus', related_name='renewal_notices',
         null=True, blank=True,
         verbose_name="État",
         help_text="Choisir ou ajouter une option à volonté (tagger l'Avis pour suivi)",
     )
-
-    def get_notice_number(self):
-        return ""
 
     class Meta:
         verbose_name = _("Avis de renouvellement")
