@@ -200,11 +200,14 @@ def generate_report(renewal):
 
     def get_items_price():
         items = []
+
+        basket = renewal.get_basket()
+
         items.append(
             [
                 "",
                 "Prix du panier / Collection price",
-                ""
+                basket.amount
             ]
         )
 

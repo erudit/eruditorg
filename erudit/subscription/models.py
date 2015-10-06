@@ -223,6 +223,8 @@ class RenewalNotice(models.Model):
         help_text="Commentaire libre pour suivi de l'avis",
     )
 
+    def get_basket(self):
+        return self.products.filter(titles__isnull=False).first()
 
     def get_notice_number(self):
         pass
