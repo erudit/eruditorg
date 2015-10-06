@@ -95,7 +95,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
                 request.user.email,
                 request.user.email,
                 attachments={
-                    'avis.pdf': pdf
+                    '{}.pdf'.format(renewal.renewal_number): pdf
                 },
                 # template='avis_de_renouvellement',
             )
