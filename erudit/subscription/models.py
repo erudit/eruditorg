@@ -184,6 +184,12 @@ class RenewalNotice(models.Model):
         verbose_name="Devise",
     )
 
+    has_basket = models.BooleanField(
+        default=False,
+        editable=False,
+        verbose_name="Avec panier",
+    )
+
     date_created = models.DateField(
         null=True, blank=True,
         verbose_name="Date de création",
@@ -217,15 +223,39 @@ class RenewalNotice(models.Model):
         help_text="Commentaire libre pour suivi de l'avis",
     )
 
+
+    def get_notice_number(self):
+        pass
+
+    def test_has_basket(self):
+        """Renewal Notice has a basket 
+        if one of its product has many titles 
+        (Basket = Product of Products)
+        """
+        has_basket = False
+        for product in self.products.all():
+            if len(product.titles.all()) > 0:
+                has_basket = True
+        return has_basket
+
+    def save(self, *args, **kwargs):
+        # has_basket
+        self.has_basket = False
+        if self.test_has_basket():
+            self.has_basket = True
+
+        # Call the "real" save() method.
+        super(RenewalNotice, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return "Avis : {}".format(
+            self.renewal_number,
+        )
+
     class Meta:
         verbose_name = _("Avis de renouvellement")
         verbose_name_plural = _("Avis de renouvellement")
         ordering = ['paying_customer',]
-
-    def __str__(self):
-        return "Avis : {}".format(
-            self.paying_customer,
-        )
 
 
 class RenewalNoticeStatus(models.Model):

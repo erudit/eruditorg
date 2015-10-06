@@ -63,7 +63,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'renewal_number',
         'paying_customer',
         'receiving_customer',
-        #'has_basket',
+        'has_basket',
         #'has_rebate',
         'net_amount',
         'currency',
@@ -73,14 +73,12 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
     list_display_link = ['renewal_number', ]
     list_filter = ['currency', 'status', 'rebate', 
         'paying_customer__country',
-        #'has_basket',
+        'has_basket',
         #'has_rebate',
     ]
     list_editable = ['status',]
     filter_horizontal = ('products',)
-    readonly_fields = ['sent_emails', 
-        #'has_basket',
-    ]
+    readonly_fields = ['sent_emails', ]
     fieldsets = [
         ('Identification', {
             'fields': (
