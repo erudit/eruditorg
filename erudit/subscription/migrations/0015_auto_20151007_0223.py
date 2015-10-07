@@ -32,9 +32,8 @@ def import_countries(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('subscription', '0014_auto_20151006_2001'),
+        ('subscription', '0002_auto_20151007_1917'),
     ]
-
     operations = [
         migrations.RunPython(import_currencies),
         migrations.RunPython(import_countries),
