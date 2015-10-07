@@ -441,6 +441,20 @@ class RenewalNotice(models.Model):
                 error['proof'] = proof
                 errors.append(error)
 
+        # email is correct?
+        # test 7
+        error = {
+            'code': 7,
+            'msg': "Aucun courriel associé au Client payeur",
+            'proof': "",
+        }
+        if not self.paying_customer.email:
+            proof = "Courriel: {:s}".format(
+                self.paying_customer.email,
+            )
+            error['proof'] = proof
+            errors.append(error)
+
         return errors
 
     def test_has_basket(self):
