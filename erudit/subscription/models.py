@@ -374,13 +374,13 @@ class RenewalNotice(models.Model):
         # test 4
         error = {
             'code': 4,
-            'msg': """La Devise et le Pays ne concordent pas avec 
+            'msg': """La Devise et le Pays ne concordent pas avec
             les données de référence.
             """,
             'proof': "",
         }
-        #currency = Currency.objects.get(code=self.currency)
-        #country = Country.objects.get(name=self.country)
+        # currency = Currency.objects.get(code=self.currency)
+        # country = Country.objects.get(name=self.country)
 
         return errors
 
