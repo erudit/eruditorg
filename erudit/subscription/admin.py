@@ -83,6 +83,9 @@ class ClientAdmin(admin.ModelAdmin):
         'lastname',
         'organisation',
         'email',
+        'country',
+        'currency',
+        'exemption_code',
     )
     list_display_link = (
         'firstname',
@@ -106,8 +109,15 @@ class ClientAdmin(admin.ModelAdmin):
                 'email',
                 'civic',
                 'street',
+                'pobox',
                 ('city', 'province'),
                 ('country', 'postal_code'),
+            )
+        }),
+        ('Finance', {
+            'fields': (
+                'exemption_code',
+                'currency',
             )
         }),
     )

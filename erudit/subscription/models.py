@@ -102,11 +102,13 @@ class Client(models.Model):
 
     pobox = models.CharField(
         max_length=100,
+        null=True, blank=True,
         verbose_name=_("Casier postal")
     )
 
     province = models.CharField(
         max_length=100,
+        null=True, blank=True,
         verbose_name=_("Province")
     )
 
@@ -124,11 +126,13 @@ class Client(models.Model):
 
     exemption_code = models.CharField(
         max_length=1,
+        null=True, blank=True,
         verbose_name=_("Code d'exemption")
     )
 
     currency = models.CharField(
         max_length=3,
+        null=True, blank=True,
         verbose_name=_("Devise")
     )
 
