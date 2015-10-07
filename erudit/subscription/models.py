@@ -310,7 +310,7 @@ class RenewalNotice(models.Model):
     def get_notice_number(self):
         pass
 
-    def error_check(self):
+    def has_errors(self):
         """Checks for business logic errors and returns a
         list of errors.
 
@@ -320,7 +320,7 @@ class RenewalNotice(models.Model):
         * a proof (string showing the data causing the failure)
 
         'error' and 'error_msg' fields are filled by the save method
-        using 'error_check' method.
+        using 'has_errors' method.
         """
         errors = []
 
@@ -331,6 +331,7 @@ class RenewalNotice(models.Model):
             'msg': "Montant des produits demandés différent du Montant total",
             'proof': "",
         }
+
         total_products = sum([p.amount for p in self.products.all()])
         if self.amount_total != total_products:
             proof = "Montant total: {:s}, Montant des produits: {:s}".format(
@@ -401,9 +402,9 @@ class RenewalNotice(models.Model):
             self.has_basket = True
 
         # error check
-        if self.error_check():
+        if self.has_errors():
             self.no_error = False
-            for error in self.error_check():
+            for error in self.has_errors():
                 msg = "ERREUR {:d} : {:s}\n    Preuve : {:s}\n\n".format(
                     error['code'],
                     error['msg'],
