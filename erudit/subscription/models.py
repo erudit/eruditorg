@@ -351,7 +351,7 @@ class RenewalNotice(models.Model):
             'msg': "Montant brut est différent du Montant total - Rabais",
             'proof': "",
         }
-        if self.raw_amount != (self.amount_total - self.rebate):
+        if self.raw_amount != (float(self.amount_total) - float(self.rebate)):
             proof = "Montant brut: {:s}, Montant total - rabais: {:s}".format(
                 str(self.raw_amount),
                 str(self.amount_total - self.rebate),
