@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from django.template.loader import get_template
 
 from post_office import mail
+from post_office.models import Email
 
 from subscription.models import (
     Client, Product, RenewalNotice,
@@ -171,7 +172,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
             context = {'renewal_number': renewal.renewal_number}
             html_message = template.render(context)
 
-            mail.send(
+            emails = mail.send(
                 request.user.email,
                 request.user.email,
                 attachments={
@@ -183,6 +184,12 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
                     renewal.renewal_number
                 )
             )
+
+            renewal.sent_emails.add(
+                emails
+            )
+
+            renewal.save()
 
     create_test_email.short_description = _("Envoyer un courriel de test")
 
