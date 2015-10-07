@@ -7,7 +7,6 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('post_office', '0003_auto_20150922_1846'),
     ]
 
     operations = [
