@@ -430,7 +430,7 @@ class RenewalNotice(models.Model):
                 except:
                     pass
             # USD : only other accepted Currency and for all other Countries
-            elif currency != 'USD':
+            else:
                 fail = True
 
             if fail:
