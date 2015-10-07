@@ -58,13 +58,13 @@ Le script s'attend à y trouver les fichiers suivants:
                     )
 
         # import clients
+        Client.objects.all().delete()
         load_csv_file_in_model("clients.csv", Client)
 
         Product.objects.all().delete()
         load_csv_file_in_model("titres.csv", Product, generate_pk=True)
 
         # import basket / products
-
         load_csv_file_in_model("paniers.csv", Product, generate_pk=True)
 
         RenewalNotice.objects.all().delete()
