@@ -378,13 +378,68 @@ class RenewalNotice(models.Model):
         # test 4
         error = {
             'code': 4,
-            'msg': """La Devise et le Pays ne concordent pas avec
-            les données de référence.
-            """,
+            'msg': "Aucune Devise associée",
             'proof': "",
         }
-        # currency = Currency.objects.get(code=self.currency)
-        # country = Country.objects.get(name=self.country)
+        if not self.currency:
+            proof = "Devise: {:s}".format(
+                self.currency,
+            )
+            error['proof'] = proof
+            errors.append(error)
+
+        # test 5
+        error = {
+            'code': 5,
+            'msg': "Aucun Pays associé au Client payeur",
+            'proof': "",
+        }
+        if not self.paying_customer.country:
+            proof = "Pays: {:s}".format(
+                self.paying_customer.country,
+            )
+            error['proof'] = proof
+            errors.append(error)
+
+        # test 6
+        error = {
+            'code': 6,
+            'msg': """La Devise et le Pays ne concordent pas avec
+            les données de référence.""",
+            'proof': "",
+        }
+        currency = self.currency.upper()
+        country = self.paying_customer.country
+        if currency and country:
+            fail = False
+            # CAD and EUR must follow Country in reference data
+            if currency in ('CAD', 'EUR'):
+                try:
+                    curr = Currency.objects.get(code__iexact=currency)
+                    country = Country.objects.get(
+                        name__iexact=country,
+                        currency=curr,
+                    )
+                except:
+                    fail = True
+            # USD cannot be used for Country in reference data
+            elif currency == 'USD':
+                try:
+                    Country.objects.get(name__iexact=country)
+                    fail = True
+                except:
+                    pass
+            # USD : only other accepted Currency and for all other Countries
+            elif currency != 'USD':
+                fail = True
+
+            if fail:
+                proof = "Devise: {:s}, Pays: {:s}".format(
+                    currency,
+                    country,
+                )
+                error['proof'] = proof
+                errors.append(error)
 
         return errors
 
@@ -415,7 +470,7 @@ class RenewalNotice(models.Model):
                     error['msg'],
                     error['proof'],
                 )
-                self.error_msg = msg
+                self.error_msg = self.error_msg + msg
 
         # Call the "real" save() method.
         super(RenewalNotice, self).save(*args, **kwargs)
