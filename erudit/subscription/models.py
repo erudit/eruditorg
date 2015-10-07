@@ -401,9 +401,9 @@ class RenewalNotice(models.Model):
 
     def save(self, *args, **kwargs):
         # has_basket
-        self.has_basket = False
-        if self.test_has_basket():
-            self.has_basket = True
+        if not self.id:
+            super(RenewalNotice, self).save(*args, **kwargs)
+        self.has_basket = self.test_has_basket()
 
         self.no_error = True
         self.error_msg = ""
