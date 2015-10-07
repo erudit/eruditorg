@@ -12,5 +12,6 @@
     - python-virtualenv
     - python3-virtualenv
     - python3-pip
+    - libjpeg-dev
   tags:
     - provision
