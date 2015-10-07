@@ -6,3 +6,5 @@ tox==2.1.1
 virtualenv==13.1.2
 psycopg2==2.6.1
 django-grappelli==2.7.1
+Pillow==2.9.0
+reportlab==3.2.0
