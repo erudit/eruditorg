@@ -409,7 +409,7 @@ class RenewalNotice(models.Model):
             'proof': "",
         }
         currency = self.currency.upper()
-        country = self.paying_customer.country
+        country = self.receiving_customer.country
         if currency and country:
             fail = False
             # CAD and EUR must follow Country in reference data
