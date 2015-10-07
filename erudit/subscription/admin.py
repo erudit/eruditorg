@@ -156,7 +156,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'net_amount',
         'currency',
         _country,
-        'no_error',
+        'is_correct',
         'status',
     )
     list_display_link = (
@@ -169,7 +169,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'paying_customer__country',
         'has_basket',
         'has_rebate',
-        'no_error',
+        'is_correct',
     )
 
     def create_test_email(modeladmin, request, queryset):
@@ -212,7 +212,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
     )
     readonly_fields = (
         'sent_emails',
-        'no_error',
+        'is_correct',
         'error_msg',
     )
 
@@ -248,7 +248,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
             'fields': (
                 ('status', 'date_created', ),
                 'comment',
-                'no_error',
+                'is_correct',
                 'error_msg',
             )
         }),

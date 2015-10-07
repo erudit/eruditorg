@@ -272,10 +272,10 @@ class RenewalNotice(models.Model):
         verbose_name="Produits",
     )
 
-    no_error = models.BooleanField(
+    is_correct = models.BooleanField(
         editable=False,
         default=True,
-        verbose_name="Sans erreur",
+        verbose_name="Est correct?",
         help_text="Renseigné automatiquement par système.",
     )
 
@@ -474,10 +474,12 @@ class RenewalNotice(models.Model):
             super(RenewalNotice, self).save(*args, **kwargs)
         self.has_basket = self.test_has_basket()
 
-        self.no_error = True
+        # errors
+        self.is_correct = True
+
         self.error_msg = ""
         if self.has_errors():
-            self.no_error = False
+            self.is_correct = False
             for error in self.has_errors():
                 msg = "ERREUR {:d} : {:s}\n    Preuve : {:s}\n\n".format(
                     error['code'],
