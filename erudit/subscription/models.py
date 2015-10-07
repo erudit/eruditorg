@@ -401,7 +401,8 @@ class RenewalNotice(models.Model):
         if self.test_has_basket():
             self.has_basket = True
 
-        # error check
+        self.no_error = True
+        self.error_msg = ""
         if self.has_errors():
             self.no_error = False
             for error in self.has_errors():
