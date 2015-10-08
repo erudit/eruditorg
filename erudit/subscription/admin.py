@@ -4,7 +4,6 @@ from django.utils.translation import gettext as _
 from django.template.loader import get_template
 
 from post_office import mail
-from post_office.models import Email
 
 from subscription.models import (
     Client, Product, RenewalNotice,
@@ -72,6 +71,7 @@ class ProductAdmin(admin.ModelAdmin):
     filter_horizontal = (
         'titles',
     )
+
 
 class ClientAdmin(admin.ModelAdmin):
     search_fields = (
@@ -175,6 +175,16 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'is_correct',
     )
 
+    def flag_dont_send(modeladmin, request, queryset):
+        queryset.update(status='DONT')
+
+    flag_dont_send.short_description = _("Marquer comme « Ne pas envoyer »")
+
+    def flag_send(modeladmin, request, queryset):
+        queryset.update(status='TODO')
+
+    flag_send.short_description = _("Marquer comme « À envoyer »")
+
     def create_test_email(modeladmin, request, queryset):
         """ Create a renewal email for this RenewalNotice """
         for renewal in queryset.all():
@@ -257,7 +267,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
     )
 
-    actions = [create_test_email]
+    actions = [create_test_email, flag_dont_send, flag_send]
 
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
