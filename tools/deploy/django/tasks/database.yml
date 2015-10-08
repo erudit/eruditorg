@@ -14,11 +14,13 @@
   command: "pg_dump -d {{ database_name }} -f /tmp/{{ project_name }}-backup.sql"
   tags:
     - update
+    - backup
 
 - name: Fetch the backup
   fetch: src="/tmp/{{ project_name }}-backup.sql" dest="../../dumps/{{ project_name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}.sql" flat=yes
   tags:
     - update
+    - backup
 
 - name: Apply migrations
   sudo_user: "{{ project_user }}"
