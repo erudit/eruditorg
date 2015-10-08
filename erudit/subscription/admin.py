@@ -69,6 +69,9 @@ class ProductAdmin(admin.ModelAdmin):
         'amount',
     )
 
+    filter_horizontal = (
+        'titles',
+    )
 
 class ClientAdmin(admin.ModelAdmin):
     search_fields = (
