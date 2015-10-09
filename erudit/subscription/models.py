@@ -20,6 +20,11 @@ class Country(models.Model):
         related_name='pays'
     )
 
+    locale = models.CharField(
+        max_length=5,
+        verbose_name=_("Locale")
+    )
+
     def __str__(self):
         return "{:s} [{:s}]".format(
             self.name,
