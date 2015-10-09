@@ -142,7 +142,7 @@ def generate_report(renewal):
             wrap_value("07/10/2015")],
         [wrap_label("No d’identification Érudit / Érudit’s ID Number"),
          wrap_label("Numéro de facture / Invoice Number")],
-        [wrap_value(renewal.paying_customer.erudit_number),
+        [wrap_value(str(renewal.paying_customer.pk)),
          wrap_value(renewal.renewal_number)],
         [wrap_label("Courriel / Email"),
          wrap_label("No de bon de commande / PO Number")],
@@ -158,7 +158,7 @@ def generate_report(renewal):
          wrap_label("No d'identification Érudit / Érudit's ID Number")],
         [
             wrap_value(renewal.receiving_customer.organisation),
-            wrap_value(renewal.receiving_customer.erudit_number)],
+            wrap_value(str(renewal.receiving_customer.pk))],
         [wrap_label("Contact client / Customer contact"),
          wrap_label("Courriel client / Customer email")],
         [wrap_value("{} {}".format(
@@ -289,7 +289,6 @@ def generate_report(renewal):
     payment_instructions = Table([
         [wrap_p("<b>Modalités de paiement / Payment instructions</b>", style=centered_section_header)],
         [wrap_p("Par chèque payable à l'ordre du Consortium"), wrap_p("By cheque payable at the order of the Consortium")],
-        [wrap_p("Par virement bancaire (ajouter 15$ de frais)"), wrap_p("By bank transfer (add 15$ CAN of fee)")],
         [wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link),
          wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link)]
     ],
