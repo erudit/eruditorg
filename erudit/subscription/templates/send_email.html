@@ -1,0 +1,29 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <ul>
+      <h2>{{ test }} Confirmation de l'envoi des courriels {{ test }}</h2>
+      <table border=1>
+        <thead>
+          <td>Numéro de l'avis</td>
+          <td>Organisation</td>
+          <td>Courriel client</td>
+          <td>Courriel client</td>
+        </thead>
+        {% for renewal in renewals %}
+        <tr>
+          <td>{{ renewal.renewal_number }}</td>
+          <td>{{ renewal.paying_customer.organisation }}</td>
+          <td>{{ renewal.paying_customer.email }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </ul>
+    <form method="post">
+      <input type="hidden" name="doit" value="1" />
+      {% csrf_token %}
+      <input type="submit"></input>
+    </form>
+  </body>
+</html>

@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
 from django.template.loader import get_template
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from post_office import mail
 
@@ -187,32 +189,14 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 
     def create_test_email(modeladmin, request, queryset):
         """ Create a renewal email for this RenewalNotice """
-        for renewal in queryset.all():
-            report_data = report.generate_report(renewal)
-            pdf = ContentFile(report_data)
+        selected = [str(r.pk) for r in queryset.all()]
 
-            template = get_template('subscription_renewal_email.html')
-            context = {'renewal_number': renewal.renewal_number}
-            html_message = template.render(context)
+        url = reverse('confirm_test')
 
-            emails = mail.send(
-                request.user.email,
-                request.user.email,
-                attachments={
-                    '{}.pdf'.format(renewal.renewal_number): pdf
-                },
-                message=html_message,
-                html_message=html_message,
-                subject='{} - Avis de renouvellement'.format(
-                    renewal.renewal_number
-                )
-            )
-
-            renewal.sent_emails.add(
-                emails
-            )
-
-            renewal.save()
+        return HttpResponseRedirect("{}?ids={}".format(
+            url,
+            ",".join(selected))
+        )
 
     create_test_email.short_description = _("Envoyer un courriel de test")
 

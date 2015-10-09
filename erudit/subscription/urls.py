@@ -17,5 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'confirm_test', 'subscription.views.confirm_test', name='confirm_test'),
+    url(r'confirm_send', 'subscription.views.confirm_send', name='confirm_send'),
     url(r'avis', 'subscription.views.email', name='notice'),
 ]
