@@ -1,6 +1,8 @@
 from io import BytesIO, StringIO
 import locale
 
+from django.contrib.staticfiles import finders
+
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.rl_config import defaultPageSize
@@ -53,6 +55,7 @@ def myLaterPages(canvas, doc):
     canvas.saveState()
     canvas.restoreState()
 
+
 def generate_report(renewal):
 
     try:
@@ -100,7 +103,6 @@ def generate_report(renewal):
 
     centered_text.alignment = TA_CENTER
 
-
     # styles.add(centered_section_header)
 
     def wrap_p(string, style=styles["Normal"]):
@@ -115,7 +117,7 @@ def generate_report(renewal):
     doc = SimpleDocTemplate(content, pagesize=letter)
     Story = []
     img = Image(
-        settings.BASE_DIR + "/static/erudit.png",
+        finders.find("erudit.png"),
         width=4 *
         inch,
         height=1.029 * inch
