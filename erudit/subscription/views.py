@@ -44,10 +44,10 @@ def confirm_test(request):
                 emails
             )
 
+            renewal.save()
+
             urls = reverse('admin:subscription_renewalnotice_changelist')
             return HttpResponseRedirect(urls)
-
-            renewal.save()
 
     renewals = [
         r for r
