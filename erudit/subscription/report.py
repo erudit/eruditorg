@@ -345,7 +345,7 @@ def generate_report(renewal):
 
     payment_instructions = Table([
         [wrap_p("<b>Modalités de paiement / Payment instructions</b>", style=centered_section_header)],
-        [wrap_p("Par chèque payable à l'ordre du Consortium Érudit, SENC"), wrap_p("By cheque payable at the order of the Consortium Érudit, SENC")],
+        [wrap_p("Par chèque payable à l'ordre du Consortium Érudit, SENC"), wrap_p("By cheque payable to the order of the Consortium Érudit, SENC")],
         [wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link),
          wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link)]
     ],
