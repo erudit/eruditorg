@@ -235,9 +235,19 @@ def generate_report(renewal):
         else:
             for item_number, product in enumerate(renewal.products.filter(hide_in_renewal_items=False), 1):
                 # TODO display description if not in a basket
-                items.append([item_number, product.title, locale.currency(
-                    product.amount, symbol=False,
-                )])
+                items.append([
+                    item_number,
+                    wrap_p(
+                        product.title
+                    ),
+                    wrap_p(
+                        locale.currency(
+                            product.amount,
+                            symbol=False,
+                        ),
+                        style=right_text
+                    )
+                    ])
 
         premium = renewal.get_premium()
         if premium:
@@ -349,12 +359,12 @@ def generate_report(renewal):
 
     nb_rows_header_items = len(items_header) + len(items)
 
-    row_heights = [0.2 * inch] * nb_rows_header_items + [None] * len(items_price)
+    #row_heights = [0.2 * inch] * nb_rows_header_items + [None] * len(items_price)
 
     items = Table(
         items_data,
         repeatRows=2,
-        rowHeights=row_heights,
+        #rowHeights=row_heights,
         colWidths=("10%", "60%", "20%", "10%")
     )
 
