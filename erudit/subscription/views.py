@@ -35,6 +35,7 @@ def _send_emails(request, renewals, is_test=True):
         emails = mail.send(
             recipient,
             settings.RENEWAL_FROM_EMAIL,
+            bcc=[request.user.email],
             attachments={
                 '{}.pdf'.format(renewal.renewal_number): pdf
             },
