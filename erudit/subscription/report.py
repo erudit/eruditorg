@@ -233,10 +233,12 @@ def generate_report(renewal):
                 [
                     item_number + 1,
                     premium.title,
-                    locale.currency(
-                        premium.amount,
-                        symbol=False,
-                    ),
+                    wrap_p(
+                        locale.currency(
+                            premium.amount,
+                            symbol=False,
+                        )
+                    )
                 ],
             )
 
@@ -252,9 +254,11 @@ def generate_report(renewal):
                 [
                     "",
                     "Prix du panier / Collection price",
-                    locale.currency(
-                        basket.amount,
-                        symbol=False,
+                    wrap_p(
+                        locale.currency(
+                            basket.amount,
+                            symbol=False,
+                        )
                     )
                 ]
             )
@@ -275,15 +279,22 @@ def generate_report(renewal):
             [
                 Spacer(0, 0.25 * inch),
                 wrap_label("TPS / GST"),
-                locale.currency(
-                    renewal.federal_tax,
-                    symbol=False,
+                wrap_p(
+                    locale.currency(
+                        renewal.federal_tax,
+                        symbol=False,
+                    )
                 )
             ],
             [
                 "",
                 wrap_label("TVQ / PST"),
-                renewal.provincial_tax
+                wrap_p(
+                    locale.currency(
+                        renewal.provincial_tax,
+                        symbol=False,
+                    )
+                )
             ],
             [
                 Spacer(0, 0.25 * inch),
