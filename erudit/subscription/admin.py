@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
 from django.template.loader import get_template
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from post_office import mail
 
@@ -187,34 +189,33 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 
     def create_test_email(modeladmin, request, queryset):
         """ Create a renewal email for this RenewalNotice """
-        for renewal in queryset.all():
-            report_data = report.generate_report(renewal)
-            pdf = ContentFile(report_data)
+        selected = [str(r.pk) for r in queryset.all()]
 
-            template = get_template('subscription_renewal_email.html')
-            context = {'renewal_number': renewal.renewal_number}
-            html_message = template.render(context)
+        if len(selected) > 0:
+            url = reverse('confirm_test')
 
-            emails = mail.send(
-                request.user.email,
-                request.user.email,
-                attachments={
-                    '{}.pdf'.format(renewal.renewal_number): pdf
-                },
-                message=html_message,
-                html_message=html_message,
-                subject='{} - Avis de renouvellement'.format(
-                    renewal.renewal_number
-                )
+            return HttpResponseRedirect("{}?ids={}".format(
+                url,
+                ",".join(selected))
             )
-
-            renewal.sent_emails.add(
-                emails
-            )
-
-            renewal.save()
 
     create_test_email.short_description = _("Envoyer un courriel de test")
+
+    def create_email(modeladmin, request, queryset):
+        """ Create a renewal email for this RenewalNotice """
+        selected = [str(r.pk) for r in queryset.filter(
+            status__in=('TODO', 'REDO',)
+        )]
+
+        if len(selected) > 0:
+            url = reverse('confirm_send')
+
+            return HttpResponseRedirect("{}?ids={}".format(
+                url,
+                ",".join(selected))
+            )
+
+    create_email.short_description = _("Envoyer le courriel")
 
     list_editable = (
         'status',
@@ -267,7 +268,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
     )
 
-    actions = [create_test_email, flag_dont_send, flag_send]
+    actions = [create_test_email, flag_dont_send, flag_send, create_email]
 
 # Register your models here.
 admin.site.register(Product, ProductAdmin)

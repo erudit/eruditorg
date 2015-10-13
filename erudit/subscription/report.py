@@ -1,6 +1,7 @@
 from io import BytesIO, StringIO
+import locale
 
-import PIL
+from django.contrib.staticfiles import finders
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
@@ -9,9 +10,14 @@ from reportlab.lib.units import inch, mm
 from reportlab.lib.colors import Color
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
 from reportlab.platypus.flowables import Image
 from reportlab.platypus.tables import Table, TableStyle
 from reportlab.pdfgen import canvas
+
+from subscription.models import Country
+
+from erudit import settings
 
 PAGE_HEIGHT = defaultPageSize[1]
 PAGE_WIDTH = defaultPageSize[0]
@@ -52,6 +58,17 @@ def myLaterPages(canvas, doc):
 
 
 def generate_report(renewal):
+
+    try:
+        country = Country.objects.get(
+            name=renewal.paying_customer.country
+        )
+        active_locale = country.locale
+    except Country.DoesNotExist:
+        active_locale = 'en_US'
+
+    locale.setlocale(locale.LC_MONETARY, active_locale)
+
     content = BytesIO()
     link = styles["Normal"].clone(name="Link")
     link.textColor = Color(0, 0.39, 0.76)
@@ -59,7 +76,6 @@ def generate_report(renewal):
 
     label = styles["Normal"].clone(name="Label")
     label.textColor = colors.grey
-    # styles.add(label)
 
     value = styles["Normal"].clone(name="value")
     value.firstLineIndent = 20
@@ -75,6 +91,19 @@ def generate_report(renewal):
     )
 
     centered_section_header.alignment = TA_CENTER
+
+    centered_label = styles["Normal"].clone(
+        name="CenteredLabel"
+    )
+    centered_label.textColor = colors.grey
+    centered_label.alignment = TA_CENTER
+
+    centered_text = styles["Normal"].clone(
+        name="CenteredText"
+    )
+
+    centered_text.alignment = TA_CENTER
+
     # styles.add(centered_section_header)
 
     def wrap_p(string, style=styles["Normal"]):
@@ -86,10 +115,10 @@ def generate_report(renewal):
     def wrap_label(string):
         return Paragraph(string, style=label)
 
-    doc = SimpleDocTemplate(content)
+    doc = SimpleDocTemplate(content, pagesize=letter)
     Story = []
     img = Image(
-        "/home/dcormier/erudit/projets/admin/erudit/subscription/static/erudit.png",
+        finders.find("erudit.png"),
         width=4 *
         inch,
         height=1.029 * inch
@@ -109,8 +138,11 @@ def generate_report(renewal):
         ['Pavillon 3744 Jean-Brillant, bureau 6500'],
         ['Case postale 6128, succ. Centre-ville'],
         ['Montréal (Québec) CANADA, H3C 3J7'],
-        [Paragraph('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>',
-                   style=link)],
+        [Paragraph(
+            '<a href="mailto:{email}"><u>{email}</u></a>'.format(
+                email=settings.RENEWAL_FROM_EMAIL
+            ),
+            style=link)],
     ], rowHeights=0.20 * inch)
 
     address.setStyle([
@@ -142,7 +174,7 @@ def generate_report(renewal):
             wrap_value("07/10/2015")],
         [wrap_label("No d’identification Érudit / Érudit’s ID Number"),
          wrap_label("Numéro de facture / Invoice Number")],
-        [wrap_value(renewal.paying_customer.erudit_number),
+        [wrap_value(str(renewal.paying_customer.pk)),
          wrap_value(renewal.renewal_number)],
         [wrap_label("Courriel / Email"),
          wrap_label("No de bon de commande / PO Number")],
@@ -158,7 +190,7 @@ def generate_report(renewal):
          wrap_label("No d'identification Érudit / Érudit's ID Number")],
         [
             wrap_value(renewal.receiving_customer.organisation),
-            wrap_value(renewal.receiving_customer.erudit_number)],
+            wrap_value(str(renewal.receiving_customer.pk))],
         [wrap_label("Contact client / Customer contact"),
          wrap_label("Courriel client / Customer email")],
         [wrap_value("{} {}".format(
@@ -194,45 +226,58 @@ def generate_report(renewal):
                 items.append(
                     [item_number, title.title, ""]
                 )
-            return items
         else:
             for item_number, product in enumerate(renewal.products.filter(hide_in_renewal_items=False), 1):
                 # TODO display description if not in a basket
-                items.append([item_number, product.title, product.amount])
-            return items
+                items.append([item_number, product.title, locale.currency(
+                    product.amount, symbol=False,
+                )])
+
+        premium = renewal.get_premium()
+        if premium:
+            items.append(
+                [
+                    item_number + 1,
+                    premium.title,
+                    wrap_p(
+                        locale.currency(
+                            premium.amount,
+                            symbol=False,
+                        )
+                    )
+                ],
+            )
+
+        return items
 
     def get_items_price():
         items = []
 
         basket = renewal.get_basket()
+
         if basket:
             items.append(
                 [
                     "",
                     "Prix du panier / Collection price",
-                    basket.amount
+                    wrap_p(
+                        locale.currency(
+                            basket.amount,
+                            symbol=False,
+                        )
+                    )
                 ]
             )
 
-        rebate_spacer_inserted = False
         if renewal.rebate:
             items.append(
                 [
                     Spacer(0, 0.25 * inch),
                     "Rabais institutionnel",
-                    renewal.rebate
-                ],
-            )
-
-        premium = renewal.get_premium()
-
-        if premium:
-            first_item = "" if rebate_spacer_inserted else Spacer(0, 0.25 * inch)
-            items.append(
-                [
-                    first_item,
-                    premium.title,
-                    premium.amount,
+                    locale.currency(
+                        renewal.rebate,
+                        symbol=False,
+                    )
                 ],
             )
 
@@ -240,17 +285,35 @@ def generate_report(renewal):
             [
                 Spacer(0, 0.25 * inch),
                 wrap_label("TPS / GST"),
-                renewal.federal_tax
+                wrap_p(
+                    locale.currency(
+                        renewal.federal_tax,
+                        symbol=False,
+                    )
+                )
             ],
             [
                 "",
                 wrap_label("TVQ / PST"),
-                renewal.provincial_tax
+                wrap_p(
+                    locale.currency(
+                        renewal.provincial_tax,
+                        symbol=False,
+                    )
+                )
             ],
-            [Spacer(0, 0.25 * inch), wrap_label("<b>Total, Devise / Currency</b>"), wrap_p("<b>{}</b> {}".format(
-                renewal.net_amount,
-                renewal.currency,
-            ))],
+            [
+                Spacer(0, 0.25 * inch),
+                wrap_label("<b>Total</b>"),
+                wrap_p(
+                    "<b>{}</b>".format(
+                        locale.currency(
+                            renewal.net_amount,
+                            international=True,
+                        )
+                    )
+                ),
+            ],
         ])
 
         return items
@@ -288,10 +351,16 @@ def generate_report(renewal):
 
     payment_instructions = Table([
         [wrap_p("<b>Modalités de paiement / Payment instructions</b>", style=centered_section_header)],
-        [wrap_p("Par chèque payable à l'ordre du Consortium"), wrap_p("By cheque payable at the order of the Consortium")],
-        [wrap_p("Par virement bancaire (ajouter 15$ de frais)"), wrap_p("By bank transfer (add 15$ CAN of fee)")],
-        [wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link),
-         wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link)]
+        [wrap_p("Par chèque payable à l'ordre du Consortium Érudit, SENC"), wrap_p("By cheque payable to the order of the Consortium Érudit, SENC")],
+        [wrap_p(
+            '<a href="mailto:{email}"><u>{email}</u></a>'.format(
+                email=settings.RENEWAL_FROM_EMAIL
+            ),
+            style=link),
+         wrap_p(
+             '<a href="mailto:{email}"><u>{email}</u></a>'.format(
+                 email=settings.RENEWAL_FROM_EMAIL
+             ), style=link)]
     ],
         colWidths=("50%", "50%",)
     )
@@ -304,6 +373,20 @@ def generate_report(renewal):
 
     Story.append(payment_instructions)
 
-    doc.build(Story, onLaterPages=myLaterPages, canvasmaker=NumberedCanvas)
+    gst_pst = Table([
+        [
+            wrap_p("<b>No de TPS / GST No</b>", style=centered_label),
+            wrap_p("<b>No de TVQ / PST No</b>", style=centered_label),
+        ],
+        [
+            wrap_p("801663741RT0001", style=centered_text),
+            wrap_p("1211883894TQ0001", style=centered_text)
+        ],
+    ])
 
+    Story.append(Spacer(0, 0.25 * inch))
+    Story.append(gst_pst)
+
+    doc.build(Story, onLaterPages=myLaterPages, canvasmaker=NumberedCanvas)
+    locale.setlocale(locale.LC_MONETARY, '')
     return content.getvalue()
