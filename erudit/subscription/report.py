@@ -8,7 +8,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.rl_config import defaultPageSize
 from reportlab.lib.units import inch, mm
 from reportlab.lib.colors import Color
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus.flowables import Image
@@ -103,6 +103,12 @@ def generate_report(renewal):
     )
 
     centered_text.alignment = TA_CENTER
+
+    right_text = styles["Normal"].clone(
+        name="RightText"
+    )
+
+    right_text.alignment = TA_RIGHT
 
     # styles.add(centered_section_header)
 
@@ -243,8 +249,10 @@ def generate_report(renewal):
                         locale.currency(
                             premium.amount,
                             symbol=False,
-                        )
-                    )
+                        ),
+                        style=right_text
+                    ),
+                    ""
                 ],
             )
 
@@ -264,8 +272,10 @@ def generate_report(renewal):
                         locale.currency(
                             basket.amount,
                             symbol=False,
-                        )
-                    )
+                        ),
+                        style=right_text
+                    ),
+                    ""
                 ]
             )
 
@@ -274,10 +284,14 @@ def generate_report(renewal):
                 [
                     Spacer(0, 0.25 * inch),
                     "Rabais institutionnel",
-                    locale.currency(
-                        renewal.rebate,
-                        symbol=False,
-                    )
+                    wrap_p(
+                        locale.currency(
+                            renewal.rebate,
+                            symbol=False,
+                        ),
+                        style=right_text
+                    ),
+                    ""
                 ],
             )
 
@@ -289,8 +303,10 @@ def generate_report(renewal):
                     locale.currency(
                         renewal.federal_tax,
                         symbol=False,
-                    )
-                )
+                    ),
+                    style=right_text
+                ),
+                ""
             ],
             [
                 "",
@@ -299,8 +315,10 @@ def generate_report(renewal):
                     locale.currency(
                         renewal.provincial_tax,
                         symbol=False,
-                    )
-                )
+                    ),
+                    style=right_text
+                ),
+                ""
             ],
             [
                 Spacer(0, 0.25 * inch),
@@ -310,9 +328,11 @@ def generate_report(renewal):
                         locale.currency(
                             renewal.net_amount,
                             international=True,
-                        )
-                    )
+                        ),
+                    ),
+                    style=right_text
                 ),
+                ""
             ],
         ])
 
@@ -335,13 +355,13 @@ def generate_report(renewal):
         items_data,
         repeatRows=2,
         rowHeights=row_heights,
-        colWidths=("10%", "60%", "30%")
+        colWidths=("10%", "60%", "20%", "10%")
     )
 
     items.setStyle([
         ('SPAN', (0, 0), (1, 0)),
-        ('LINEBELOW', (0, 'splitlast'), (2, 'splitlast'), 2, colors.lightgrey),
-        ('LINEABOVE', (0, 'splitfirst'), (2, 'splitfirst'), 3, colors.white),
+        ('LINEBELOW', (0, 'splitlast'), (3, 'splitlast'), 2, colors.lightgrey),
+        ('LINEABOVE', (0, 'splitfirst'), (3, 'splitfirst'), 3, colors.white),
         ('BOX', (0, 0), (-1, -1), 2, colors.lightgrey),
     ])
 
