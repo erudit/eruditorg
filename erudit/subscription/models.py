@@ -161,6 +161,7 @@ NOTICE_STATUS_CHOICES = (
     ('TODO', 'À envoyer'),
     ('SENT', 'Envoyé'),
     ('REDO', 'À ré-envoyer'),
+    ('LATE', 'Envoyer plus tard'),
 )
 
 
