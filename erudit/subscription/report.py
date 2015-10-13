@@ -55,9 +55,13 @@ def myLaterPages(canvas, doc):
 
 def generate_report(renewal):
 
-    country = Country.objects.get(
-        name=renewal.paying_customer.country
-    )
+    try:
+        country = Country.objects.get(
+            name=renewal.paying_customer.country
+        )
+        active_locale = country.locale
+    except Country.DoesNotExist:
+        active_locale = 'en_US'
 
     locale.setlocale(locale.LC_ALL, country.locale)
 
