@@ -63,7 +63,7 @@ def generate_report(renewal):
     except Country.DoesNotExist:
         active_locale = 'en_US'
 
-    locale.setlocale(locale.LC_ALL, country.locale)
+    locale.setlocale(locale.LC_MONETARY, active_locale)
 
     content = BytesIO()
     link = styles["Normal"].clone(name="Link")
@@ -364,5 +364,5 @@ def generate_report(renewal):
     Story.append(gst_pst)
 
     doc.build(Story, onLaterPages=myLaterPages, canvasmaker=NumberedCanvas)
-
+    locale.setlocale(locale.LC_MONETARY, '')
     return content.getvalue()
