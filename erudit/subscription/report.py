@@ -16,6 +16,7 @@ from reportlab.platypus.tables import Table, TableStyle
 from reportlab.pdfgen import canvas
 
 from subscription.models import Country
+
 from erudit import settings
 
 PAGE_HEIGHT = defaultPageSize[1]
@@ -137,8 +138,11 @@ def generate_report(renewal):
         ['Pavillon 3744 Jean-Brillant, bureau 6500'],
         ['Case postale 6128, succ. Centre-ville'],
         ['Montréal (Québec) CANADA, H3C 3J7'],
-        [Paragraph('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>',
-                   style=link)],
+        [Paragraph(
+            '<a href="mailto:{email}"><u>{email}</u></a>'.format(
+                email=settings.RENEWAL_FROM_EMAIL
+            ),
+            style=link)],
     ], rowHeights=0.20 * inch)
 
     address.setStyle([
@@ -348,8 +352,15 @@ def generate_report(renewal):
     payment_instructions = Table([
         [wrap_p("<b>Modalités de paiement / Payment instructions</b>", style=centered_section_header)],
         [wrap_p("Par chèque payable à l'ordre du Consortium Érudit, SENC"), wrap_p("By cheque payable to the order of the Consortium Érudit, SENC")],
-        [wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link),
-         wrap_p('<a href="mailto:erudit-abonnements@umontreal.ca"><u>erudit-abonnements@umontreal.ca</u></a>', style=link)]
+        [wrap_p(
+            '<a href="mailto:{email}"><u>{email}</u></a>'.format(
+                email=settings.RENEWAL_FROM_EMAIL
+            ),
+            style=link),
+         wrap_p(
+             '<a href="mailto:{email}"><u>{email}</u></a>'.format(
+                 email=settings.RENEWAL_FROM_EMAIL
+             ), style=link)]
     ],
         colWidths=("50%", "50%",)
     )

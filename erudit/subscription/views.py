@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 
 from post_office import mail
 
+from erudit import settings
+
 from subscription.models import RenewalNotice
 from subscription import report
 
@@ -32,7 +34,7 @@ def _send_emails(request, renewals, is_test=True):
 
         emails = mail.send(
             recipient,
-            'erudit-abonnements@umontreal.ca',
+            settings.RENEWAL_FROM_EMAIL,
             attachments={
                 '{}.pdf'.format(renewal.renewal_number): pdf
             },
