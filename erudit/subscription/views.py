@@ -30,7 +30,7 @@ def _send_emails(request, renewals, is_test=True):
         if is_test:
             recipient = request.user.email
         else:
-            recipient = request.user.email
+            recipient = renewal.paying_customer.email
 
         emails = mail.send(
             recipient,
