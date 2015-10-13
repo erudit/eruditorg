@@ -191,14 +191,31 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         """ Create a renewal email for this RenewalNotice """
         selected = [str(r.pk) for r in queryset.all()]
 
-        url = reverse('confirm_test')
+        if len(selected) > 0:
+            url = reverse('confirm_test')
 
-        return HttpResponseRedirect("{}?ids={}".format(
-            url,
-            ",".join(selected))
-        )
+            return HttpResponseRedirect("{}?ids={}".format(
+                url,
+                ",".join(selected))
+            )
 
     create_test_email.short_description = _("Envoyer un courriel de test")
+
+    def create_email(modeladmin, request, queryset):
+        """ Create a renewal email for this RenewalNotice """
+        selected = [str(r.pk) for r in queryset.filter(
+            status__in=('TODO', 'REDO',)
+        )]
+
+        if len(selected) > 0:
+            url = reverse('confirm_send')
+
+            return HttpResponseRedirect("{}?ids={}".format(
+                url,
+                ",".join(selected))
+            )
+
+    create_email.short_description = _("Envoyer le courriel")
 
     list_editable = (
         'status',
@@ -251,7 +268,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
     )
 
-    actions = [create_test_email, flag_dont_send, flag_send]
+    actions = [create_test_email, flag_dont_send, flag_send, create_email]
 
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
