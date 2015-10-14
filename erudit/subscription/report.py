@@ -226,6 +226,7 @@ def generate_report(renewal):
         items = []
         basket = renewal.get_basket()
 
+        item_number = 0
         if basket:
             items = []
             for item_number, title in enumerate(basket.titles.filter(hide_in_renewal_items=False), 1):
