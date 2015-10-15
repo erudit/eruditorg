@@ -151,6 +151,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'comment',
         'paying_customer__country',
     )
+
     list_display = (
         'renewal_number',
         'paying_customer',
@@ -163,6 +164,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         _country,
         'is_correct',
         'status',
+        'has_been_answered',
     )
     list_display_link = (
         'renewal_number',
@@ -175,6 +177,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         'has_basket',
         'has_rebate',
         'is_correct',
+        'has_been_answered',
     )
 
     def flag_dont_send(modeladmin, request, queryset):
@@ -260,7 +263,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
         ('Suivi', {
             'fields': (
-                ('status', 'date_created', ),
+                ('status', 'date_created', 'has_been_answered' ),
                 'comment',
                 'is_correct',
                 'error_msg',

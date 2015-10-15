@@ -267,6 +267,11 @@ class RenewalNotice(models.Model):
         verbose_name="Avec rabais",
     )
 
+    has_been_answered = models.BooleanField(
+        default=False,
+        verbose_name=_("A répondu")
+    )
+
     date_created = models.DateField(
         null=True, blank=True,
         verbose_name="Date de création",
