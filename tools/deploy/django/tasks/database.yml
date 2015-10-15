@@ -11,13 +11,13 @@
 
 - name: Backup the database
   sudo_user: "postgres"
-  command: "pg_dump -d {{ database_name }} -f /tmp/{{ project_name }}-backup.sql"
+  command: "pg_dump -d {{ database_name }} -f /tmp/{{ project_name }}-{{ project_env }}-backup.sql"
   tags:
     - update
     - backup
 
 - name: Fetch the backup
-  fetch: src="/tmp/{{ project_name }}-backup.sql" dest="../../dumps/{{ project_name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}.sql" flat=yes
+  fetch: src="/tmp/{{ project_name }}-{{ project_env }}-backup.sql" dest="../../dumps/{{ project_name }}-{{ project_env }}-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}.sql" flat=yes
   tags:
     - update
     - backup
