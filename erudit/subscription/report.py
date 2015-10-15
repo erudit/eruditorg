@@ -1,4 +1,4 @@
-from io import BytesIO, StringIO
+from io import BytesIO
 import locale
 
 from django.contrib.staticfiles import finders
@@ -191,7 +191,8 @@ def generate_report(renewal):
     Story.append(paying_customer_info)
 
     receiving_customer_info = Table([
-        [wrap_p("<b>Information client / Customer Information</b>", style=label)],
+        [wrap_p("<b>Information client / Customer Information</b>",
+                style=label)],
         [wrap_label("Client / Customer"),
          wrap_label("No d'identification Érudit / Érudit's ID Number")],
         [
@@ -199,11 +200,14 @@ def generate_report(renewal):
             wrap_value(str(renewal.receiving_customer.pk))],
         [wrap_label("Contact client / Customer contact"),
          wrap_label("Courriel client / Customer email")],
-        [wrap_value("{} {}".format(
-            renewal.receiving_customer.firstname or "",
-            renewal.receiving_customer.lastname or ""
-        ),),
-         wrap_value(renewal.receiving_customer.email)]
+        [
+            wrap_value(
+                "{} {}".format(
+                    renewal.receiving_customer.firstname or "",
+                    renewal.receiving_customer.lastname or ""
+                ),
+            ),
+            wrap_value(renewal.receiving_customer.email)]
     ])
 
     Story.append(Spacer(0, 0.25 * inch))
@@ -219,7 +223,11 @@ def generate_report(renewal):
     def get_items_header():
         return [
             [wrap_p("<b>Description</b>", style=label), "", ""],
-            [wrap_label("<i>Item</i>"), wrap_label("<i>Titre / Title</i>"), ""],
+            [
+                wrap_label("<i>Item</i>"),
+                wrap_label("<i>Titre / Title</i>"),
+                ""
+            ],
         ]
 
     def get_items(renewal):
@@ -229,12 +237,14 @@ def generate_report(renewal):
         item_number = 0
         if basket:
             items = []
-            for item_number, title in enumerate(basket.titles.filter(hide_in_renewal_items=False), 1):
+            for item_number, title in enumerate(
+                    basket.titles.filter(hide_in_renewal_items=False), 1):
                 items.append(
                     [item_number, title.title, ""]
                 )
         else:
-            for item_number, product in enumerate(renewal.products.filter(hide_in_renewal_items=False), 1):
+            for item_number, product in enumerate(
+                    renewal.products.filter(hide_in_renewal_items=False), 1):
                 # TODO display description if not in a basket
                 items.append([
                     item_number,
@@ -358,14 +368,15 @@ def generate_report(renewal):
     items_data.extend(items)
     items_data.extend(items_price)
 
-    nb_rows_header_items = len(items_header) + len(items)
+    # nb_rows_header_items = len(items_header) + len(items)
 
-    #row_heights = [0.2 * inch] * nb_rows_header_items + [None] * len(items_price)
+    # row_heights = [0.2 * inch] * nb_rows_header_items + [None] *\
+    # len(items_price)
 
     items = Table(
         items_data,
         repeatRows=2,
-        #rowHeights=row_heights,
+        # rowHeights=row_heights,
         colWidths=("10%", "60%", "20%", "10%")
     )
 
@@ -381,8 +392,20 @@ def generate_report(renewal):
     Story.append(Spacer(0, 0.25 * inch))
 
     payment_instructions = Table([
-        [wrap_p("<b>Modalités de paiement / Payment instructions</b>", style=centered_section_header)],
-        [wrap_p("Par chèque payable à l'ordre du Consortium Érudit, SENC"), wrap_p("By cheque payable to the order of the Consortium Érudit, SENC")],
+        [
+            wrap_p(
+                "<b>Modalités de paiement / Payment instructions</b>",
+                style=centered_section_header
+            )
+        ],
+        [
+            wrap_p(
+                "Par chèque payable à l'ordre du Consortium Érudit, SENC"
+            ),
+            wrap_p(
+                "By cheque payable to the order of the Consortium Érudit, SENC"
+            )
+        ],
         [wrap_p(
             '<a href="mailto:{email}"><u>{email}</u></a>'.format(
                 email=settings.RENEWAL_FROM_EMAIL

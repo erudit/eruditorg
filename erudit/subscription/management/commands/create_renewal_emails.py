@@ -1,11 +1,10 @@
-import csv
-
-from django.core.management.base import BaseCommand, CommandError
-from django.core.files.base import ContentFile, File
+from django.core.management.base import BaseCommand
+from django.core.files.base import ContentFile
 from post_office import mail
 
-from subscription.models import Client, Product, RenewalNotice
+from subscription.models import RenewalNotice
 from subscription import report
+
 
 class Command(BaseCommand):
 

@@ -1,18 +1,12 @@
 from django.contrib import admin
-from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
-from django.template.loader import get_template
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
-from post_office import mail
 
 from subscription.models import (
     Client, Product, RenewalNotice,
     Country, Currency
 )
-
-from subscription import report
 
 
 class CountryAdmin(admin.ModelAdmin):
@@ -263,7 +257,7 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
         }),
         ('Suivi', {
             'fields': (
-                ('status', 'date_created', 'has_been_answered' ),
+                ('status', 'date_created', 'has_been_answered'),
                 'comment',
                 'is_correct',
                 'error_msg',
