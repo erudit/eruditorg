@@ -132,7 +132,7 @@ def _country(obj):
 _country.short_description = 'Pays'
 
 
-class RenewealNoticeAdmin(admin.ModelAdmin):
+class RenewalNoticeAdmin(admin.ModelAdmin):
     search_fields = (
         'renewal_number',
         'po_number',
@@ -270,6 +270,6 @@ class RenewealNoticeAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Client, ClientAdmin)
-admin.site.register(RenewalNotice, RenewealNoticeAdmin)
+admin.site.register(RenewalNotice, RenewalNoticeAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Currency, CurrencyAdmin)
