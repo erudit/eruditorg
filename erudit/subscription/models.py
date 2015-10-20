@@ -316,6 +316,14 @@ class RenewalNotice(models.Model):
         help_text="Commentaire libre pour suivi de l'avis",
     )
 
+    has_renewed = models.BooleanField(
+        verbose_name=_("Renouvellement confirmé")
+    )
+
+    has_refused = models.BooleanField(
+        verbose_name=_("Renouvellement refusé")
+    )
+
     def get_premium(self):
         return self.products.filter(code='Premium').first()
 

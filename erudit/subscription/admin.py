@@ -159,10 +159,14 @@ class RenewalNoticeAdmin(admin.ModelAdmin):
         'is_correct',
         'status',
         'has_been_answered',
+        'has_renewed',
+        'has_refused',
     )
+
     list_display_link = (
         'renewal_number',
     )
+
     list_filter = (
         'currency',
         'status',
@@ -172,6 +176,8 @@ class RenewalNoticeAdmin(admin.ModelAdmin):
         'has_rebate',
         'is_correct',
         'has_been_answered',
+        'has_renewed',
+        'has_refused',
     )
 
     def flag_dont_send(modeladmin, request, queryset):
@@ -257,7 +263,8 @@ class RenewalNoticeAdmin(admin.ModelAdmin):
         }),
         ('Suivi', {
             'fields': (
-                ('status', 'date_created', 'has_been_answered'),
+                ('status', 'date_created'),
+                ('has_been_answered', 'has_renewed', 'has_refused'),
                 'comment',
                 'is_correct',
                 'error_msg',
