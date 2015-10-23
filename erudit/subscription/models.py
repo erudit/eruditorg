@@ -332,6 +332,16 @@ class RenewalNotice(models.Model):
     def get_basket(self):
         return self.products.filter(titles__isnull=False).first()
 
+    def get_items_for_renewal(self):
+        """ Return all the items of this RenewalNotice """
+
+        basket = self.get_basket()
+        titles = self.products.filter(
+            titles__isnull=True,
+            hide_in_renewal_items=False
+        )
+        return basket, titles
+
     def get_notice_number(self):
         pass
 

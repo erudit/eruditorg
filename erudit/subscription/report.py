@@ -230,37 +230,41 @@ def generate_report(renewal):
             ],
         ]
 
-    def get_items(renewal):
+    def _get_basket_items(basket, item_number):
         items = []
-        basket = renewal.get_basket()
+        for item_number, title in enumerate(
+                basket.titles.filter(
+                    hide_in_renewal_items=False), item_number + 1):
+            items.append(
+                [item_number, title.title, ""]
+            )
+        return item_number, items
 
-        item_number = 0
-        if basket:
-            items = []
-            for item_number, title in enumerate(
-                    basket.titles.filter(hide_in_renewal_items=False), 1):
-                items.append(
-                    [item_number, title.title, ""]
-                )
-        else:
-            for item_number, product in enumerate(
-                    renewal.products.filter(hide_in_renewal_items=False), 1):
-                # TODO display description if not in a basket
-                items.append([
-                    item_number,
-                    wrap_p(
-                        product.title
+    def _get_title_items(titles, item_number):
+        items = []
+
+        for item_number, product in enumerate(
+                titles, item_number + 1):
+
+            # TODO display description if not in a basket
+            items.append([
+                item_number,
+                wrap_p(
+                    product.title
+                ),
+                wrap_p(
+                    locale.currency(
+                        product.amount,
+                        symbol=False,
                     ),
-                    wrap_p(
-                        locale.currency(
-                            product.amount,
-                            symbol=False,
-                        ),
-                        style=right_text
-                    )
-                    ])
+                    style=right_text
+                )
+            ])
 
-        premium = renewal.get_premium()
+        return item_number, items
+
+    def _get_premium_items(premium, item_number):
+        items = []
         if premium:
             items.append(
                 [
@@ -276,13 +280,55 @@ def generate_report(renewal):
                     ""
                 ],
             )
+        return item_number + 1, items
 
-        return items
+    def get_items(renewal):
+        items = []
+        basket, titles = renewal.get_items_for_renewal()
 
-    def get_items_price():
+        item_number = 0
+
+        if basket:
+
+            item_number, basket_items = _get_basket_items(
+                basket, item_number
+            )
+
+            item_number, premium_items = _get_premium_items(
+                renewal.get_premium(), item_number
+            )
+
+            items.extend(
+                basket_items
+            )
+
+            items.extend(
+                premium_items
+            )
+
+        else:
+            item_number, title_items = _get_title_items(
+                titles, item_number
+            )
+
+            item_number, premium_items = _get_premium_items(
+                renewal.get_premium(), item_number
+            )
+
+            items.extend(
+                title_items
+            )
+
+            items.extend(
+                premium_items
+            )
+
+        return item_number, items
+
+    def get_items_price(item_number):
         items = []
 
-        basket = renewal.get_basket()
+        basket, titles = renewal.get_items_for_renewal()
 
         if basket:
             items.append(
@@ -316,9 +362,34 @@ def generate_report(renewal):
                 ],
             )
 
+        if basket:
+            item_number, title_items = _get_title_items(
+                titles, item_number
+            )
+
+            items.extend(
+                title_items
+            )
+
+        if renewal.raw_amount:
+            items.append(
+                [
+                    Spacer(0, 0.25 * inch),
+                    wrap_label("Sous-total"),
+                    wrap_p(
+                        locale.currency(
+                            renewal.raw_amount,
+                            symbol=False,
+                        ),
+                        style=right_text
+                    ),
+                    ""
+                ]
+            )
+
         items.extend([
             [
-                Spacer(0, 0.25 * inch),
+                Spacer(0, 0.25 * inch) if not renewal.raw_amount else "",
                 wrap_label("TPS / GST"),
                 wrap_p(
                     locale.currency(
@@ -361,17 +432,12 @@ def generate_report(renewal):
 
     items_data = []
     items_header = get_items_header()
-    items = get_items(renewal)
-    items_price = get_items_price()
+    item_number, items = get_items(renewal)
+    items_price = get_items_price(item_number)
 
     items_data.extend(items_header)
     items_data.extend(items)
     items_data.extend(items_price)
-
-    # nb_rows_header_items = len(items_header) + len(items)
-
-    # row_heights = [0.2 * inch] * nb_rows_header_items + [None] *\
-    # len(items_price)
 
     items = Table(
         items_data,
