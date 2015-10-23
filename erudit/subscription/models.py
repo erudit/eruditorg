@@ -317,11 +317,13 @@ class RenewalNotice(models.Model):
     )
 
     has_renewed = models.BooleanField(
-        verbose_name=_("Renouvellement confirmé")
+        verbose_name=_("Renouvellement confirmé"),
+        default=False,
     )
 
     has_refused = models.BooleanField(
-        verbose_name=_("Renouvellement refusé")
+        verbose_name=_("Renouvellement refusé"),
+        default=False,
     )
 
     def get_premium(self):
