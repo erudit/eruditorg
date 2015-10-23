@@ -1,0 +1,17 @@
+mail:
+  image: python:3.4
+  command: python -m smtpd -n -c PureProxy 0.0.0.0:25
+  ports:
+    - "25:25"
+db:
+  image: postgres
+web:
+  build: .
+  command: python erudit/manage.py runserver 0.0.0.0:8000
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+  links:
+    - db
+    - mail
