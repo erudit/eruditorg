@@ -7,8 +7,8 @@
     python_version: 3.4
     project_name: zenon
     verbose_project_name: Zénon
-    repo_url: https://github.com/erudit/admin.git
-    # pip needs the locale to be explicitly set to en_US.UTF-8, otherwise 
+    repo_url: https://github.com/erudit/zenon.git
+    # pip needs the locale to be explicitly set to en_US.UTF-8, otherwise
     # it will fail if any package has an utf-8 character in it's readme
     # because ansible sets the locale to C
     host_locale: en_CA.UTF-8
