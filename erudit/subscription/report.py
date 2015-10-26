@@ -240,13 +240,21 @@ def generate_report(renewal):
             )
         return item_number, items
 
-    def _get_title_items(titles, item_number):
+    def _get_title_items(titles, item_number, has_basket=False):
         items = []
+
+        # If there is a basket before the titles, add an empty line
+        # to separate it from the rest.
+        if has_basket and titles:
+            items.append([
+                "",
+                "",
+                "",
+            ])
 
         for item_number, product in enumerate(
                 titles, item_number + 1):
 
-            # TODO display description if not in a basket
             items.append([
                 item_number,
                 wrap_p(
@@ -364,7 +372,7 @@ def generate_report(renewal):
 
         if basket:
             item_number, title_items = _get_title_items(
-                titles, item_number
+                titles, item_number, has_basket=True
             )
 
             items.extend(
