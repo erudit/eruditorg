@@ -414,12 +414,12 @@ class RenewalNotice(models.Model):
         # test 3
         error = {
             'code': 3,
-            'msg': "Si une TVH est spécifiée, il ne devrait pas y avoir de TPS ou de TVQ",
+            'msg': "Si une TVH est spécifiée, il ne devrait pas y avoir\
+ de TPS ou de TVQ",
             'proof': "",
         }
 
         if self.harmonized_tax and (self.federal_tax or self.provincial_tax):
-            import ipdb; ipdb.set_trace()
             proof = "TPS {0}, TVQ: {1}, TVH: {2}".format(
                 self.federal_tax,
                 self.provincial_tax,
@@ -427,7 +427,6 @@ class RenewalNotice(models.Model):
             )
             error['proof'] = proof
             errors.append(error)
-
 
         # currency is correct?
         # test 4
