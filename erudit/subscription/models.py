@@ -396,7 +396,13 @@ class RenewalNotice(models.Model):
             'msg': "Montant net est différent du Montant brut + taxes",
             'proof': "",
         }
-        taxes = self.federal_tax + self.provincial_tax + self.harmonized_tax
+        # The harmonized_tax is the combination of the provincial tax
+        # and the federal tax
+        # http://www.cra-arc.gc.ca/tx/bsnss/tpcs/gst-tps/gnrl/menu-eng.html
+        if self.harmonized_tax:
+            taxes = self.harmonized_tax
+        else:
+            taxes = self.federal_tax + self.provincial_tax
         if self.net_amount != (self.raw_amount + taxes):
             proof = "Montant net: {:s}, Montant brut + taxes: {:s}".format(
                 str(self.net_amount),
@@ -404,6 +410,24 @@ class RenewalNotice(models.Model):
             )
             error['proof'] = proof
             errors.append(error)
+
+        # test 3
+        error = {
+            'code': 3,
+            'msg': "Si une TVH est spécifiée, il ne devrait pas y avoir de TPS ou de TVQ",
+            'proof': "",
+        }
+
+        if self.harmonized_tax and (self.federal_tax or self.provincial_tax):
+            import ipdb; ipdb.set_trace()
+            proof = "TPS {0}, TVQ: {1}, TVH: {2}".format(
+                self.federal_tax,
+                self.provincial_tax,
+                self.harmonized_tax
+            )
+            error['proof'] = proof
+            errors.append(error)
+
 
         # currency is correct?
         # test 4
