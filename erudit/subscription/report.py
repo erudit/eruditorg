@@ -395,31 +395,50 @@ def generate_report(renewal):
                 ]
             )
 
+        if renewal.harmonized_tax:
+            items.extend([
+                [
+                    Spacer(0, 0.25 * inch) if not renewal.raw_amount else "",
+                    wrap_label("TVH / HST"),
+                    wrap_p(
+                        locale.currency(
+                            renewal.harmonized_tax,
+                            symbol=False,
+                        ),
+                        style=right_text
+                    ),
+                    ""
+
+                ]
+            ])
+        else:
+            items.extend([
+                [
+                    Spacer(0, 0.25 * inch) if not renewal.raw_amount else "",
+                    wrap_label("TPS / GST"),
+                    wrap_p(
+                        locale.currency(
+                            renewal.federal_tax,
+                            symbol=False,
+                        ),
+                        style=right_text
+                    ),
+                    ""
+                ],
+                [
+                    "",
+                    wrap_label("TVQ / PST"),
+                    wrap_p(
+                        locale.currency(
+                            renewal.provincial_tax,
+                            symbol=False,
+                        ),
+                        style=right_text
+                    ),
+                    ""
+                ],
+            ])
         items.extend([
-            [
-                Spacer(0, 0.25 * inch) if not renewal.raw_amount else "",
-                wrap_label("TPS / GST"),
-                wrap_p(
-                    locale.currency(
-                        renewal.federal_tax,
-                        symbol=False,
-                    ),
-                    style=right_text
-                ),
-                ""
-            ],
-            [
-                "",
-                wrap_label("TVQ / PST"),
-                wrap_p(
-                    locale.currency(
-                        renewal.provincial_tax,
-                        symbol=False,
-                    ),
-                    style=right_text
-                ),
-                ""
-            ],
             [
                 Spacer(0, 0.25 * inch),
                 wrap_label("<b>Total</b>"),
