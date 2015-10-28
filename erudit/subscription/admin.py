@@ -86,9 +86,10 @@ class ClientAdmin(admin.ModelAdmin):
         'currency',
         'exemption_code',
     )
-    list_display_link = (
+    list_display_links = (
         'firstname',
         'lastname',
+        'organisation',
     )
     list_filter = (
         'organisation',
