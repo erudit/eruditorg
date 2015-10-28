@@ -86,7 +86,7 @@ class Client(models.Model):
 
     organisation = models.CharField(
         max_length=200,
-        null=True, blank=True,
+        null=False, blank=False, default=""
     )
 
     civic = models.TextField(
