@@ -13,10 +13,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+DEBUG = True
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+
+SECRET_KEY = 'INSECURE'
 
 ALLOWED_HOSTS = []
 
@@ -65,12 +69,26 @@ TEMPLATES = [
     },
 ]
 
+# Database configuration
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+    }
+}
+
 # Put this in settings.py
 POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',
 }
 
 EMAIL_BACKEND = 'post_office.EmailBackend'
+EMAIL_HOST = "mail"
+EMAIL_PORT = '25'
+RENEWAL_FROM_EMAIL = 'admin@localhost'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
 
