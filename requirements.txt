@@ -1,10 +1,20 @@
 Django==1.8.4
+django-appconf==1.0.1
+# Use the git version of django-compressor to have URL Rewriting in debug mode
+# See #179
+git+https://github.com/django-compressor/django-compressor.git#compressor
+django-crispy-forms==1.5.2
+django-datetime-widget==0.9.3
+django-grappelli==2.7.1
 django-post-office==2.0.2
+jsonfield==1.0.3
+libsass==0.9.1
+Pillow==2.9.0
 pluggy==0.3.0
+psycopg2==2.6.1
 py==1.4.30
+pytz==2015.7
+reportlab==3.2.0
+six==1.10.0
 tox==2.1.1
 virtualenv==13.1.2
-psycopg2==2.6.1
-django-grappelli==2.7.1
-Pillow==2.9.0
-reportlab==3.2.0

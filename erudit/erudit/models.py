@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
-
 # choices
 
 YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
@@ -272,6 +271,9 @@ class Publisher(models.Model):
     """Éditeur"""
     name = models.CharField(max_length=255)
 
+    members = models.ManyToManyField(
+        User
+    )
 
 # comments
 

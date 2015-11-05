@@ -16,10 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from erudit.views import publisher
+
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
+    # editeur
+    url(r'^editeur/', publisher),
+
     # subscriptions
     url(r'^abonnements/', include('subscription.urls')),
+
 ]
