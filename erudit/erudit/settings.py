@@ -37,6 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
+    'crispy_forms',
+    'django_select2',
+    'datetimewidget',
+    'plupload',
+    # Erudit apps
     'erudit',
     'editor',
     'subscription',
@@ -53,6 +58,8 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-sass', 'sassc {infile} {outfile}'),
 )
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

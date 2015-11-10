@@ -3,6 +3,7 @@ django-appconf==1.0.1
 # Use the git version of django-compressor to have URL Rewriting in debug mode
 # See #179
 git+https://github.com/django-compressor/django-compressor.git#compressor
+django_select2
 django-crispy-forms==1.5.2
 django-datetime-widget==0.9.3
 django-grappelli==2.7.1

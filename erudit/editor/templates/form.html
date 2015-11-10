@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% crispy form %}
+{% endblock %}
