@@ -144,6 +144,11 @@ class Comment(models.Model):
 
 class Library(models.Model):
     """Bibliothèque"""
+
+    class Meta:
+        verbose_name = _("Bibliothèque")
+        verbose_name_plural = _("Bibliothèques")
+
     name = models.CharField(max_length=255)
 
 
