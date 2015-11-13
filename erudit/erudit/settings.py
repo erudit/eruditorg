@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'compressor',
     'erudit',
+    'editor',
     'subscription',
     'post_office'
 )
