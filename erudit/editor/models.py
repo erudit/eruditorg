@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 
 
-class JournalSubmission(models.Model):
+class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
     journal = models.ForeignKey(
         'erudit.journal',
@@ -33,6 +33,13 @@ class JournalSubmission(models.Model):
         upload_to='uploads',
         verbose_name=_("Fichier")
     )
+
+    def __str__(self):
+        return "{} - {}, volume {}".format(
+            self.date_created,
+            self.journal,
+            self.volume
+        )
 
     class Meta:
         verbose_name = _("Envoi de numéro")
