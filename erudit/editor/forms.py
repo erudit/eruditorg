@@ -9,12 +9,12 @@ from django_select2.forms import Select2Widget
 
 from plupload.forms import PlUploadFormField
 
-from editor.models import JournalSubmission
+from editor.models import IssueSubmission
 
 
-class JournalSubmissionForm(forms.ModelForm):
+class IssueSubmissionForm(forms.ModelForm):
     class Meta:
-        model = JournalSubmission
+        model = IssueSubmission
 
         fields = [
             'journal',
@@ -48,7 +48,7 @@ class JournalSubmissionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
 
-        super(JournalSubmissionForm, self).__init__(*args, **kwargs)
+        super(IssueSubmissionForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'

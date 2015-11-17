@@ -8,8 +8,8 @@ from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
 from erudit.models import Journal, Publisher
-from editor.models import JournalSubmission
-from editor.forms import JournalSubmissionForm
+from editor.models import IssueSubmission
+from editor.forms import IssueSubmissionForm
 
 
 class LoginRequiredMixin(object):
@@ -30,16 +30,16 @@ class DashboardView(LoginRequiredMixin, ListView):
             members=self.request.user
         )
 
-        return JournalSubmission.objects.filter(
+        return IssueSubmission.objects.filter(
             journal__publisher=publishers
         ).order_by(
             'journal__publisher'
         )
 
 
-class JournalSubmissionCreate(LoginRequiredMixin, CreateView):
-    model = JournalSubmission
-    form_class = JournalSubmissionForm
+class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
+    model = IssueSubmission
+    form_class = IssueSubmissionForm
     template_name = 'form.html'
 
     def get_context_data(self, **kwargs):
@@ -57,7 +57,7 @@ class JournalSubmissionCreate(LoginRequiredMixin, CreateView):
         return form
 
 
-class JournalSubmissionUpdate(UpdateView):
-    model = JournalSubmission
-    form_class = JournalSubmissionForm
+class IssueSubmissionUpdate(UpdateView):
+    model = IssueSubmission
+    form_class = IssueSubmissionForm
     template_name = 'form.html'

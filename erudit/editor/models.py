@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 
 
-class JournalSubmission(models.Model):
+class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
     journal = models.ForeignKey(
         'erudit.journal',
