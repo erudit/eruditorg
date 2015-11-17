@@ -16,17 +16,28 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     {% compress css %}
     <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/bootstrap/sass/_bootstrap.scss' %}" />
+    <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/main.scss' %}" />
     {% endcompress %}
+    <style>
+    body {
+      padding-top: 50px;
+      padding-bottom: 20px;
+    }
+    </style>
     <script src="{% static 'vendor/jquery/jquery-2.1.4.js' %}"></script>
     <!-- <script src="{% static 'vendor/modernizr/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script> -->
     {% block extrahead %}
     {% endblock %}
   </head>
   <body>
-    <div class="container-fluid">
-      {% block content %}
-      {% endblock %}
-    </div>
+    {% block header %}
+    {% endblock %}
+    {% block nav %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
     <script src="{% static 'vendor/bootstrap/js/bootstrap.js' %}"></script>
   </body>
 </html>
