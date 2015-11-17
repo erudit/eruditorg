@@ -1,0 +1,47 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+@font-face{font-family:'DINBold';src:url('../fonts/din-bold-webfont.eot');src:url('../fonts/din-bold-webfont.eot?#iefix') format("embedded-opentype"),url('../fonts/din-bold-webfont.woff') format("woff"),url('../fonts/din-bold-webfont.ttf') format("truetype");font-weight:normal;font-style:normal}
+@font-face{font-family:'DINLight';src:url('../fonts/din-light-webfont.eot');src:url('../fonts/din-light-webfont.eot?#iefix') format("embedded-opentype"),url('../fonts/din-light-webfont.woff') format("woff"),url('../fonts/din-light-webfont.ttf') format("truetype");font-weight:normal;font-style:normal}
+@font-face{font-family:'DINRegular';src:url('../fonts/din-regular-webfont.eot');src:url('../fonts/din-regular-webfont.eot?#iefix') format("embedded-opentype"),url('../fonts/din-regular-webfont.woff') format("woff"),url('../fonts/din-regular-webfont.ttf') format("truetype");font-weight:normal;font-style:normal}
+@font-face{font-family:'DINMedium';src:url('../fonts/din-medium-webfont.eot');src:url('../fonts/din-medium-webfont.eot?#iefix') format("embedded-opentype"),url('../fonts/din-medium-webfont.woff') format("woff"),url('../fonts/din-medium-webfont.ttf') format("truetype");font-weight:normal;font-style:normal}
+
+// typography
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,900,300italic,400italic,700italic,900italic);
+
+$font-size: 18px !default;
+
+/// Headings font family
+/// @type List
+$font-face-headings: 'DINRegular', sans-serif;
+
+/// Content font family
+/// @type List
+$font-face-body: 'Open Sans', sans-serif;
+
+/// Code (monospace) font family
+/// @type List
+$font-face-code: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
+
+// palette - greys
+// @type Color
+$colour-faint-grey: #E5E5E5 !default;
+$colour-pale-grey: $colour-faint-grey * 0.75 !default;
+$colour-medium-grey: $colour-faint-grey * 0.5 !default;
+$colour-dark-grey: $colour-faint-grey * 0.25 !default;
+
+// palette - colours
+// @type Color
+$colour-primary: #6F0046 !default; // main brand colour
+$colour-secondary: #0050A2 !default;
+$colour-warning: #E8304B !default;
+$colour-success: #36C957 !default;
+
+// Container's maximum width
+// Below that is 100%
+// @type Length
+$max-width: 1200px !default;
+
+// Navbar height
+$navbar-height: 70px;
