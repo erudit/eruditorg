@@ -57,7 +57,7 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
         return form
 
 
-class IssueSubmissionUpdate(UpdateView):
+class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionForm
     template_name = 'form.html'
