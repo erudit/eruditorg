@@ -1,3 +1,5 @@
+cssselect==0.9.1
+decorator==4.0.4
 Django==1.8.4
 django-appconf==1.0.1
 # Use the git version of django-compressor to have URL Rewriting in debug mode
@@ -10,6 +12,7 @@ django-grappelli==2.7.1
 django-post-office==2.0.2
 jsonfield==1.0.3
 libsass==0.9.1
+lxml==3.5.0
 Pillow==2.9.0
 pluggy==0.3.0
 psycopg2==2.6.1

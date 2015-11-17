@@ -1,4 +1,5 @@
 from datetime import datetime
+from lxml import etree
 
 from django.test import RequestFactory
 from django.core.urlresolvers import reverse
@@ -53,9 +54,10 @@ class TestIssueSubmissionView(BaseEruditTestCase):
         uploading so that file chunks are associated with the issue
         submission."""
         self.client.login(username='david', password='top_secret')
-        result = self.client.get(reverse('editor:add'))
+        response = self.client.get(reverse('editor:add'))
+        root = etree.HTML(response.content)
         self.assertFalse(
-            'id_submission_file' in str(result.content),
+            root.cssselect('#id_submission_file'),
             "The rendered template should not contain an id_submission_file input"
         )
 
@@ -68,11 +70,13 @@ class TestIssueSubmissionView(BaseEruditTestCase):
         """
         self.client.login(username='david', password='top_secret')
 
-        result = self.client.get(
+        response = self.client.get(
             reverse('editor:update', kwargs={'pk': self.issue_submission.pk})
         )
 
+        root = etree.HTML(response.content)
+
         self.assertTrue(
-            'id_submission_file' in str(result.content),
+            root.cssselect('#id_submission_file'),
             "The rendered upload template should contain an id_submission_file input"
         )

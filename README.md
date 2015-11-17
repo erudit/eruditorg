@@ -1,4 +1,10 @@
 # Installation
+
+## System dependencies
+
+* libxml-devel
+* libxslt-devel
+
 ## Local setup
 
 On Ubuntu 14.04
