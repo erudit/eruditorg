@@ -4,8 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
-from django.contrib.admin.widgets import AdminDateWidget
-
 # choices
 
 YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
