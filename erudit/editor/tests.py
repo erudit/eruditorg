@@ -1,12 +1,13 @@
 from datetime import datetime
 
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 
 from editor.models import IssueSubmission
 from erudit.tests import BaseEruditTestCase
+
 
 class TestIssueSubmissionView(BaseEruditTestCase):
 
@@ -45,3 +46,33 @@ class TestIssueSubmissionView(BaseEruditTestCase):
             result, TemplateResponse
         )
 
+    def test_cannot_upload_while_adding(self):
+        """ Test upload widget absence in creation
+
+        We need to save it before the IssueSubmission before
+        uploading so that file chunks are associated with the issue
+        submission."""
+        self.client.login(username='david', password='top_secret')
+        result = self.client.get(reverse('editor:add'))
+        self.assertFalse(
+            'id_submission_file' in str(result.content),
+            "The rendered template should not contain an id_submission_file input"
+        )
+
+    def test_can_upload_while_updating(self):
+        """ Test upload widget presence in update
+
+        The file upload widget should be present on update forms.
+        Files are uploaded to an existing IssueSubmission so
+        progress can be tracked.
+        """
+        self.client.login(username='david', password='top_secret')
+
+        result = self.client.get(
+            reverse('editor:update', kwargs={'pk': self.issue_submission.pk})
+        )
+
+        self.assertTrue(
+            'id_submission_file' in str(result.content),
+            "The rendered upload template should contain an id_submission_file input"
+        )

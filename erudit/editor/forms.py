@@ -22,7 +22,6 @@ class IssueSubmissionForm(forms.ModelForm):
             'date_created',
             'contact',
             'comment',
-            'submission_file'
         ]
 
         widgets = {
@@ -38,17 +37,9 @@ class IssueSubmissionForm(forms.ModelForm):
             'contact': Select2Widget,
         }
 
-    submission_file = PlUploadFormField(
-        path='uploads',
-        label=_("Fichier"),
-        options={
-            "max_file_size": '5000mb'
-        }
-    )
-
     def __init__(self, *args, **kwargs):
 
-        super(IssueSubmissionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
@@ -59,3 +50,25 @@ class IssueSubmissionForm(forms.ModelForm):
         self.helper.add_input(
             Submit('submit', _("Envoyer le fichier"))
         )
+
+
+class IssueSubmissionUploadForm(IssueSubmissionForm):
+
+    class Meta(IssueSubmissionForm.Meta):
+
+        fields = (
+            'journal',
+            'volume',
+            'date_created',
+            'contact',
+            'comment',
+            'submission_file',
+        )
+
+    submission_file = PlUploadFormField(
+        path='uploads',
+        label=_("Fichier"),
+        options={
+            "max_file_size": '5000mb'
+        }
+    )

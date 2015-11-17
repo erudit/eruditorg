@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 from erudit.models import Journal, Publisher
 from editor.models import IssueSubmission
-from editor.forms import IssueSubmissionForm
+from editor.forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
 
 class LoginRequiredMixin(object):
@@ -59,5 +59,5 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
 
 class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
     model = IssueSubmission
-    form_class = IssueSubmissionForm
+    form_class = IssueSubmissionUploadForm
     template_name = 'form.html'

@@ -31,7 +31,8 @@ class IssueSubmission(models.Model):
 
     submission_file = models.FileField(
         upload_to='uploads',
-        verbose_name=_("Fichier")
+        verbose_name=_("Fichier"),
+        blank=True, null=True
     )
 
     def __str__(self):
