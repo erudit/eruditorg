@@ -68,34 +68,6 @@ class Organisation(models.Model):
     )
 
 
-class Common(models.Model):
-    """Common fields to each Model"""
-
-    # system
-    user_created = models.ForeignKey(
-        User,
-        related_name='+',
-        verbose_name="Créé par",
-    )
-    date_created = models.DateField(
-        auto_now_add=True,
-        verbose_name="Créé le",
-    )
-    user_modified = models.ForeignKey(
-        User,
-        related_name='+',
-        verbose_name="Modifié par",
-    )
-
-    date_modified = models.DateField(
-        auto_now=True,
-        verbose_name="Modifié le",
-    )
-
-    class Meta:
-        abstract = True
-
-
 class Named(models.Model):
 
     # identification
@@ -146,7 +118,7 @@ class Library(models.Model):
     name = models.CharField(max_length=255)
 
 
-class Journal(Common, Named):
+class Journal(Named):
     """Revue"""
 
     # identification
@@ -275,14 +247,14 @@ class Publisher(models.Model):
 
 # comments
 
-# class LibraryComment(Common, Comment):
+# class LibraryComment(Comment):
 #    library = models.ForeignKey('Library', related_name='comments')
 
 class JournalComment(Comment):
     journal = models.ForeignKey('Journal', related_name='comments')
 
-# class IssueComment(Common, Comment):
+# class IssueComment(Comment):
 #    issue = models.ForeignKey('Issue', related_name='comments')
 
-# class PublisherComment(Common, Comment):
+# class PublisherComment(Comment):
 #    publisher = models.ForeignKey('Publisher', related_name='comments')
