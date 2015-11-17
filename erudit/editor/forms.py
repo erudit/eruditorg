@@ -39,7 +39,10 @@ class JournalSubmissionForm(forms.ModelForm):
         }
 
     submission_file = PlUploadFormField(
-        path='uploads'
+        path='uploads',
+        options={
+            "max_file_size": '5000mb'
+        }
     )
 
     def __init__(self, *args, **kwargs):
