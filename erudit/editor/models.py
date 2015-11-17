@@ -34,6 +34,13 @@ class JournalSubmission(models.Model):
         verbose_name=_("Fichier")
     )
 
+    def __str__(self):
+        return "{} - {}, volume {}".format(
+            self.date_created,
+            self.journal,
+            self.volume
+        )
+
     class Meta:
         verbose_name = _("Envoi de numéro")
         verbose_name_plural = _("Envois de numéros")
