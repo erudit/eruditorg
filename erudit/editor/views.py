@@ -1,12 +1,15 @@
 import datetime
 
 from django.template.context_processors import csrf
+
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import ListView
+
 from django.contrib.auth.decorators import login_required
 
-from erudit.models import Journal
-from editor.models import JournalSubmission
-from editor.forms import JournalSubmissionForm
+from erudit.models import Journal, Publisher
+from editor.models import IssueSubmission
+from editor.forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
 
 class LoginRequiredMixin(object):
@@ -17,9 +20,26 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-class JournalSubmissionCreate(LoginRequiredMixin, CreateView):
-    model = JournalSubmission
-    form_class = JournalSubmissionForm
+class DashboardView(LoginRequiredMixin, ListView):
+
+    template_name = 'dashboard.html'
+
+    def get_queryset(self):
+
+        publishers = Publisher.objects.filter(
+            members=self.request.user
+        )
+
+        return IssueSubmission.objects.filter(
+            journal__publisher=publishers
+        ).order_by(
+            'journal__publisher'
+        )
+
+
+class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
+    model = IssueSubmission
+    form_class = IssueSubmissionForm
     template_name = 'form.html'
 
     def get_context_data(self, **kwargs):
@@ -37,5 +57,7 @@ class JournalSubmissionCreate(LoginRequiredMixin, CreateView):
         return form
 
 
-class JournalSubmissionUpdate(UpdateView):
-    model = JournalSubmission
+class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
+    model = IssueSubmission
+    form_class = IssueSubmissionUploadForm
+    template_name = 'form.html'

@@ -9,12 +9,12 @@ from django_select2.forms import Select2Widget
 
 from plupload.forms import PlUploadFormField
 
-from editor.models import JournalSubmission
+from editor.models import IssueSubmission
 
 
-class JournalSubmissionForm(forms.ModelForm):
+class IssueSubmissionForm(forms.ModelForm):
     class Meta:
-        model = JournalSubmission
+        model = IssueSubmission
 
         fields = [
             'journal',
@@ -22,7 +22,6 @@ class JournalSubmissionForm(forms.ModelForm):
             'date_created',
             'contact',
             'comment',
-            'submission_file'
         ]
 
         widgets = {
@@ -38,13 +37,9 @@ class JournalSubmissionForm(forms.ModelForm):
             'contact': Select2Widget,
         }
 
-    submission_file = PlUploadFormField(
-        path='uploads'
-    )
-
     def __init__(self, *args, **kwargs):
 
-        super(JournalSubmissionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
@@ -55,3 +50,25 @@ class JournalSubmissionForm(forms.ModelForm):
         self.helper.add_input(
             Submit('submit', _("Envoyer le fichier"))
         )
+
+
+class IssueSubmissionUploadForm(IssueSubmissionForm):
+
+    class Meta(IssueSubmissionForm.Meta):
+
+        fields = (
+            'journal',
+            'volume',
+            'date_created',
+            'contact',
+            'comment',
+            'submission_file',
+        )
+
+    submission_file = PlUploadFormField(
+        path='uploads',
+        label=_("Fichier"),
+        options={
+            "max_file_size": '5000mb'
+        }
+    )

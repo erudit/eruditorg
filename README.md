@@ -1,4 +1,15 @@
 # Installation
+
+## System dependencies
+
+On Ubuntu 14.04 :
+
+  python 3.4
+  libx11-dev
+=======
+* libxml-devel
+* libxslt-devel
+
 ## Local setup
 
 On Ubuntu 14.04

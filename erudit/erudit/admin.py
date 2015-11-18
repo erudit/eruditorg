@@ -6,28 +6,6 @@ from erudit.models import (
 )
 
 
-class CommonAdmin(admin.ModelAdmin):
-
-    readonly_fields = [
-        'user_created', 'user_modified', 'date_created', 'date_modified']
-
-    fieldsets = [
-        ('Système', {
-            'classes': ('collapse',),
-            'fields': (
-                ('date_created', 'user_created',),
-                ('date_modified', 'user_modified',),
-            ),
-        }),
-    ]
-
-    def save_model(self, request, obj, form, change):
-        if getattr(obj, 'user_created', None) is None:
-            obj.user_created = request.user
-        obj.user_modified = request.user
-        obj.save()
-
-
 class CommentAdmin(admin.ModelAdmin):
 
     readonly_fields = ['author', 'date']
@@ -73,7 +51,7 @@ class JournalCommentInline(admin.TabularInline):
 #        obj.save()
 
 
-class JournalAdmin(CommonAdmin):
+class JournalAdmin(admin.ModelAdmin):
 
     search_fields = [
         'code', 'name', 'display_name', 'issn_print',
@@ -82,7 +60,7 @@ class JournalAdmin(CommonAdmin):
 
     list_display = (
         '__str__', 'code', 'type', 'open_access',
-        'url', 'active', 'date_modified'
+        'url', 'active',
     )
 
     list_display_links = ('__str__', 'code')
@@ -136,8 +114,6 @@ class JournalAdmin(CommonAdmin):
             ),
         }),
     ]
-
-    fieldsets.extend(CommonAdmin.fieldsets)
 
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)

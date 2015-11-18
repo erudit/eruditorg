@@ -18,6 +18,8 @@ COMPRESS = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = BASE_DIR + '/static'
+MEDIA_ROOT = BASE_DIR + '/media'
+UPLOAD_ROOT = MEDIA_ROOT + '/uploads'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
