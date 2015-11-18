@@ -8,3 +8,10 @@ nav.sidenav {
   height: 100%;
   background: white;
 }
+
+@media (max-width: 992px) {
+  nav.sidenav {
+    display: none;
+    width: 0;
+  }
+}
