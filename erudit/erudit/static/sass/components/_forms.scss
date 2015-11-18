@@ -7,10 +7,7 @@ $legends: 'center';
 
 // control inputs borders - choose true or false
 $inputs-rounded: false;
-$inputs-boxed: false;
-
-// icons - choose true or false
-$icons: false;
+$inputs-boxed: true;
 
 // form alignment / layout : labels and inputs - choose horizontal or vertical
 $label-align: 'vertical';
@@ -185,7 +182,7 @@ form {
 	&:valid {}
 	&:invalid {}
 	.form-group {
-		margin-bottom: 1.75em;
+		margin-bottom: 2em;
 		padding: 0 1em;
 		&:last-child {
 			margin-bottom: 1em;
@@ -394,4 +391,11 @@ button[disabled] {
 /* select2 */
 .select2 {
   width: 100% !important;
+  &.select2-container .select2-selection--single {
+    @extend select;
+    .select2-selection__arrow {
+      height: 100%;
+      top: 0;
+    }
+  }
 }
