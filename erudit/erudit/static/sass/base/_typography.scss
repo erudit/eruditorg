@@ -1,19 +1,19 @@
 /**
- * Basic typography style for copy text
- */
+* Basic typography style for copy text
+*/
 
 body {
-	background-color: $colour-faint-grey * 1.08;
-	line-height: 1.75;
-	font-family: $font-face-body;
-    font-smooth: always;
-    -webkit-font-smoothing: antialiased;
-    font-weight: 400;
-    color: $colour-dark-grey;
+  background-color: $colour-faint-grey * 1.08;
+  line-height: 1.75;
+  font-family: $font-face-body;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  color: $colour-dark-grey;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  
+
 }
 
 h1, h2, h3, h4 {
@@ -27,30 +27,30 @@ h1 {
 }
 
 h2 {
-	font-size: 1.424em;
+  font-size: 1.424em;
 }
 
 h3 {
-	font-size: 1.266em;
+  font-size: 1.266em;
 }
 
 h4 {
-	font-size: 1.125em;
+  font-size: 1.125em;
 }
 
 small {
-	font-size: 0.889em;
+  font-size: 0.889em;
 }
 
 a {
-	color: $colour-secondary;
-	@include transition(all, 200ms, ease);
-	&:hover, &:focus, &:active, &:active:focus {
-		text-decoration: underline;
-		color: $colour-secondary * 0.75;
-	}
+  color: $colour-secondary;
+  @include transition(all, 200ms, ease);
+  &:hover, &:focus, &:active, &:active:focus {
+    text-decoration: underline;
+    color: $colour-secondary * 0.75;
+  }
 }
 ::selection, ::-moz-selection {
-    background: $colour-secondary;
-    color: #FFF;
+  background: $colour-secondary;
+  color: #FFF;
 }
