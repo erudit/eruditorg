@@ -1,14 +1,19 @@
 nav.navbar {
-  background-color: $colour-dark-grey;
+  background-color: #EEE;
   border: 0;
   line-height: 50px;
   a {
     color: #FFF;
   }
-  .navbar-brand {
+  .navbar-logo {
     width: 300px;
-    background-color: rgba(255, 255, 255, 0.2);
+    height: 50px;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.95);
     text-align: center;
+    img {
+      height: 40px;
+    }
   }
   .navbar-page_title h1 {
     color: #EEE;
