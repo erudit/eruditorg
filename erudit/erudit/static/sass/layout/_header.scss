@@ -1,0 +1,25 @@
+nav.navbar {
+  background-color: #EEE;
+  border: 0;
+  line-height: 50px;
+  a {
+    color: #FFF;
+  }
+  .navbar-logo {
+    width: 300px;
+    height: 50px;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    img {
+      height: 40px;
+    }
+  }
+  .navbar-page_title h1 {
+    color: #EEE;
+    text-align: center;
+    margin: 0;
+    font-size: 20px;
+    line-height: 50px;
+  }
+}

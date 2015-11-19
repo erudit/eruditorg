@@ -2,6 +2,11 @@
 
 ## System dependencies
 
+On Ubuntu 14.04 :
+
+  python 3.4
+  libx11-dev
+=======
 * libxml-devel
 * libxslt-devel
 
@@ -80,3 +85,7 @@ You can run the tests with:
 ```
 $ tox
 ```
+
+# Developing the UI
+
+All styling is done in the `sass` directory, which is based on the [7-1 architecture pattern](http://sass-guidelin.es/#architecture). Each subdirectory contains a `README.md` with further information regarding its proper use.

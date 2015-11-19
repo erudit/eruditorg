@@ -7,5 +7,7 @@ env/
 \#*\#
 .tox/
 dumps/
-static/
+/erudit/static/
 post_office_attachments/
+src/
+.DS_Store

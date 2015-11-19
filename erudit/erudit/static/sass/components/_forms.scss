@@ -1,0 +1,401 @@
+// --- config --- //
+// fieldsets - choose one of four options: none, boxed, top, fill
+$fieldsets: 'boxed';
+
+// legend - choose center or left
+$legends: 'center';
+
+// control inputs borders - choose true or false
+$inputs-rounded: false;
+$inputs-boxed: true;
+
+// form alignment / layout : labels and inputs - choose horizontal or vertical
+$label-align: 'vertical';
+
+// --- directives --- //
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin background-size($size) {
+  -webkit-background-size: $size;
+  -moz-background-size: $size;
+  -o-background-size: $size;
+  background-size: $size;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+/* reset default styles */
+form,
+input,
+textarea,
+select,
+option,
+optgroup,
+button,
+legend, legend.panel-heading, .panel-default > legend.panel-heading,
+fieldset, fieldset.form-wrapper, fieldset.panel > .panel-body,
+.form-control,
+form .row {
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+  outline: none;
+  /* font-family: $font; */
+  font-size: $font-size;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  float: none;
+  background: none;
+  border: none;
+  &:hover, &:active, &:focus, &:focus:active {
+  }
+}
+
+.description {
+  background: #FFF;
+  color: $colour-medium-grey;
+  padding: 0.5em 1em;
+}
+
+legend, legend.panel-heading, .panel-default > legend.panel-heading {
+  width: inherit;
+  border: 0;
+  margin-bottom: 0;
+}
+
+// --- control directives --- //
+@if $fieldsets == 'none' {
+  fieldset, fieldset.form-wrapper{
+    border: 0;
+  }
+} @elseif $fieldsets == 'top' {
+  fieldset, fieldset.form-wrapper{
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: $colour-medium-grey;
+  }
+  legend, legend.panel-heading, .panel-default > legend.panel-heading {
+    padding: 0 0.15em;
+  }
+} @elseif $fieldsets == 'fill' {
+  fieldset, fieldset.form-wrapper{
+    padding: 0.25em;
+    border: 0;
+  }
+  legend, legend.panel-heading, .panel-default > legend.panel-heading{
+    width: 100%;
+    background-color: #FFF;
+  }
+  @if $inputs-boxed == false{
+    input {
+      background-color: transparent;
+    }
+  } @else {
+
+  }
+} @elseif $fieldsets == 'boxed' {
+  fieldset, fieldset.form-wrapper{
+    padding: 0.5em;
+    border: 1px solid $colour-medium-grey;
+  }
+  legend, legend.panel-heading, .panel-default > legend.panel-heading{
+    margin-left: 0.5em;
+  }
+}
+
+@if $legends == 'center' {
+  legend, legend.panel-heading, .panel-default > legend.panel-heading{
+    text-align: center;
+  }
+} @elseif $legends == 'left' {
+  fieldset, fieldset.form-wrapper{
+    padding: 0.25em 0;
+  }
+  legend, legend.panel-heading, .panel-default > legend.panel-heading{
+    text-align: left;
+  }
+}
+
+@if $inputs-rounded == false {
+  $border-radius: 0px !global;
+  @if $inputs-boxed == false {
+    $border-width: 1px !global;
+    $border-width-inputs: 0 0 1px 0 !global;
+  } @else {
+    $border-width: 1px !global;
+  }
+} @else {
+  $border-radius: 0.25em !global;
+  $border-width: 1px !global;
+}
+
+@if $inputs-boxed == true {
+  $input-padding: $font-size*0.35 !global;
+  $border-width-inputs: 1px !global;
+} @else {
+  $input-padding: 0.25em !global;
+}
+
+@if $label-align == 'horizontal' {
+  .form-group > label,
+  .form-group > input {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1em;
+  }
+} @elseif $label-align == 'vertical' {
+  .form-group > label,
+  .form-group > input,
+  .form-group > select,
+  .form-group > textarea {
+    display: block;
+    margin: 0.5em 0;
+  }
+}
+
+form {
+  // padding: 0.5em;
+  &:valid {}
+  &:invalid {}
+  .form-group {
+    margin-bottom: 2em;
+    padding: 0 1em;
+    &:last-child {
+      margin-bottom: 1em;
+    }
+  }
+}
+fieldset, fieldset.form-wrapper{
+  margin-bottom: 3em;
+  background-color: #FFF;
+  &:last-child {
+    margin-bottom: 1em;
+  }
+}
+legend, legend.panel-heading, .panel-default > legend.panel-heading{
+  letter-spacing: 1px;
+  font-size: $font-size * 1.05;
+  color: $colour-dark-grey;
+  // background-color: #FFF;
+  // background-color: $colour-primary-dark;
+  // outline: 1px solid $colour-primary-dark;
+}
+label {
+  margin: 1em 0;
+  color: $colour-dark-grey;
+  font-size: $font-size * 0.8;
+  font-weight: normal;
+  display: block;
+}
+.required label:after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
+}
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="time"],
+input[type="week"],
+input[type="month"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+select,
+datalist,
+textarea,
+input[list],
+.form-control {
+  padding: $input-padding;
+  height: $font-size + 24;
+  border-width: $border-width;
+  border-style: solid;
+  border-color: $colour-pale-grey;
+  color: $colour-dark-grey;
+  background: transparent;
+  @include border-radius($border-radius);
+  &:hover {
+    border-color: $colour-primary;
+  }
+  &:active, &:focus {
+    border-color: $colour-primary;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="time"],
+input[type="week"],
+input[type="month"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"] {
+  border-width: $border-width-inputs;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  // margin: 0 $font-size/3;
+  vertical-align: middle;
+  &:hover {}
+  &:active, &:focus {}
+}
+
+input[type="file"],
+input[type="color"],
+input[type="range"] {
+  border: none;
+  font-size: 0.75em;
+  line-height: 1em;
+  width: auto;
+  &:hover {}
+  &:active, &:focus {}
+}
+select,
+datalist,
+textarea,
+input[list] {
+  border-width: 1px 1px 1px 1px;
+}
+
+/* buttons */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="image"],
+.btn, .btn-default {
+  cursor: pointer;
+  padding: $font-size*0.5 $font-size*0.75;
+  // padding: 1em;
+  height: $font-size + 24;
+  border: 1px solid $colour-medium-grey;
+  border-radius: $border-radius;
+  background-color: $colour-medium-grey;
+  color: $colour-faint-grey;
+  height: auto;
+  margin: 0.75em 0.75em 0 0;
+  @include transition(all, 300ms, ease);
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover, &:active, &:focus, &:active:focus {
+    color: $colour-faint-grey;
+    background-color: $colour-dark-grey*1.15;
+    border: 1px solid $colour-dark-grey*1.15;
+  }
+}
+
+
+button[type="submit"],
+input[type="submit"],
+.btn-primary {
+  border: none;
+  color: white;
+  background-color: $colour-primary;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 1em;
+  &:hover {
+    background-color: $colour-primary*0.75;
+    color: white;
+    border: none;
+  }
+  &:active, &:focus, &:active:focus {
+    background-color: $colour-primary*0.75;
+    color: white;
+    border: none;
+  }
+}
+button[type="reset"],
+input[type="reset"] {
+  // padding: 1em;
+  border: none;
+  text-decoration: underline;
+  color: $colour-dark-grey;
+  background-color: #FFF;
+  &:hover, &:active, &:focus, &:active:focus {
+    color: $colour-dark-grey;
+    background: none;
+    border: none;
+    text-decoration: none;
+  }
+}
+
+.btn-add {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+/* disabled */
+input[disabled],
+textarea[disabled],
+select[disabled],
+option[disabled],
+button[disabled] {
+  cursor: not-allowed;
+  color: $colour-medium-grey;
+  background-color: $colour-faint-grey;
+}
+
+
+/* remove extra borders and padding for mobile viewing */
+@media(max-width:768px) {
+  form {
+    padding: 0;
+    fieldset, fieldset.form-wrapper{
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+    }
+    .form-group {
+      padding: 0.25em;
+    }
+  }
+}
+
+/* select2 */
+.select2 {
+  width: 100% !important;
+  &.select2-container .select2-selection--single {
+    @extend select;
+    .select2-selection__arrow {
+      height: 100%;
+      top: 0;
+    }
+  }
+}

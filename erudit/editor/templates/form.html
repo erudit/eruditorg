@@ -1,10 +1,22 @@
-{% extends "base.html" %}
+{% extends "base_editor.html" %}
 {% load i18n staticfiles %}
 
 {% block extrahead %}
 {{ form.media }}
 {% endblock %}
+
 {% load crispy_forms_tags %}
 {% block content %}
-{% crispy form %}
+  <main class="main">
+    <div class="container-fluid">
+      <div class="col-md-6 col-md-offset-3 col-xs-12">
+        <section class="card card-upload_form">
+          <h2>Déposer des fichiers de production</h1>
+          <div class="">
+            {% crispy form %}
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
 {% endblock %}

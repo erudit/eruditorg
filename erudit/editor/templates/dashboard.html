@@ -1,14 +1,23 @@
-{% extends "base.html" %}
+{% extends "base_editor.html" %}
+{% load i18n staticfiles %}
+
 {% block content %}
-<h1>Tableau de bord</h1>
-{% for issue_submission in object_list %}
-{% ifchanged issue_submission.journal.publisher %}
-{{ issue_submission.journal.publisher.name }}
-<ul>
-{% endifchanged %}
-  <li><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a></li>
-{% ifchanged issue_submission.journal.publisher %}
-</ul>
-{% endifchanged %}
-{% endfor %}
+
+<main class="main">
+  <div class="container-fluid">
+    <h1>Tableau de bord</h1>
+    <div class="col-md-6 col-md-offset-3 col-xs-12">
+      {% for issue_submission in object_list %}
+      {% ifchanged issue_submission.journal.publisher %}
+      {{ issue_submission.journal.publisher.name }}
+      <ul>
+        {% endifchanged %}
+        <li><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a></li>
+        {% ifchanged issue_submission.journal.publisher %}
+      </ul>
+      {% endifchanged %}
+      {% endfor %}
+    </div>
+  </div>
+</main>
 {% endblock %}
