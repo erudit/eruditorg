@@ -43,8 +43,6 @@ class IssueSubmissionForm(forms.ModelForm):
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-vertical'
-        # self.helper.label_class = 'col-xs-12'
-        # self.helper.field_class = 'col-xs-12'
         self.helper.form_method = 'post'
 
         self.helper.add_input(
