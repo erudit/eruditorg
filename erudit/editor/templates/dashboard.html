@@ -2,21 +2,72 @@
 {% load i18n staticfiles %}
 
 {% block content %}
-
 <main class="main">
   <div class="container-fluid">
-    <h1>Tableau de bord</h1>
-    <div class="col-md-6 col-md-offset-3 col-xs-12">
-      {% for issue_submission in object_list %}
-      {% ifchanged issue_submission.journal.publisher %}
-      {{ issue_submission.journal.publisher.name }}
-      <ul>
-        {% endifchanged %}
-        <li><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a></li>
+    {# <h1>Tableau de bord</h1>#}
+    <div class="col-md-4 col-xs-12">
+      <section class="card card-issue_submissions">
+        <h2>Votre compte</h2>
+        <h3>Utilisateur</h3>
+        <ul>
+          <li>Prénom Nom</li>
+          <li>Transmission des fichiers de production</li>
+          <li><a href="mailto:">courriel@courriel.ca</a></li>
+        </ul>
+        <h3>Revue 1</h3>
+        <ul>
+          <li><a href="#">Nom de la revue</a></li>
+          <li>Revue savante</li>
+          <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
+          <li>Éditeur&nbsp;: Nom de l'éditeur</li>
+          <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
+        </ul>
+        <h3>Revue 2</h3>
+        <ul>
+          <li><a href="#">Nom de la revue</a></li>
+          <li>Revue savante</li>
+          <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
+          <li>Éditeur&nbsp;: Nom de l'éditeur</li>
+          <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
+        </ul>
+      </section>
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <section class="card card-issue_submissions">
+        <h2>Historique du dépôt de fichiers</h2>
+        <table>
+          <thead></thead>
+          <tbody>
+            {% for issue_submission in object_list %}
+            <tr>
+              <td>
+                {% ifchanged issue_submission.journal.publisher %}
+                {{ issue_submission.journal.publisher.name }}
+                {% endifchanged %}
+              </td>
+              <td>
+                <a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </div>
+    <div class="col-md-4 col-xs-12">
+      <section class="card card-issue_submissions">
+        <h2>Historique du dépôt de fichiers</h2>
+        {% for issue_submission in object_list %}
         {% ifchanged issue_submission.journal.publisher %}
-      </ul>
-      {% endifchanged %}
-      {% endfor %}
+        {{ issue_submission.journal.publisher.name }}
+        <ul>
+          {% endifchanged %}
+          <li><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a></li>
+          {% ifchanged issue_submission.journal.publisher %}
+        </ul>
+        {% endifchanged %}
+        {% endfor %}
+      </section>
     </div>
   </div>
 </main>
