@@ -1,14 +1,19 @@
 nav.sidenav {
   display: block;
   position: fixed;
-  top: 0;
+  top: 50px;
   bottom: 0;
   left: 0;
   width: 300px;
   height: 100%;
   background-color: white;
-}
+  ul {
+    list-style: none;
+    li {
 
+    }
+  }
+}
 @media (max-width: 992px) {
   nav.sidenav {
     display: none;
