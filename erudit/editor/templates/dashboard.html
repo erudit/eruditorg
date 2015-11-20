@@ -5,7 +5,7 @@
 <main class="main">
   <div class="container-fluid">
     {# <h1>Tableau de bord</h1>#}
-    <div class="col-md-4 col-xs-12">
+    <div class="col-sm-4 col-xs-12">
       <section class="card card-issue_submissions">
         <h2>Votre compte</h2>
         <h3>Utilisateur</h3>
@@ -32,41 +32,35 @@
         </ul>
       </section>
     </div>
-    <div class="col-md-4 col-xs-12">
+    <div class="col-sm-4 col-xs-12">
       <section class="card card-issue_submissions">
         <h2>Historique du dépôt de fichiers</h2>
         <table>
-          <thead></thead>
-          <tbody>
-            {% for issue_submission in object_list %}
+          <thead>
             <tr>
+              <th>Date</th>
+              <th>Éditeur</th>
+              <th>Fichier (revue, volumaison, numéro)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for issue_submission in object_list reversed %}
+            <tr>
+              <td>
+                {{ issue_submission.date_created }}
+              </td>
               <td>
                 {% ifchanged issue_submission.journal.publisher %}
                 {{ issue_submission.journal.publisher.name }}
                 {% endifchanged %}
               </td>
               <td>
-                <a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a>
+                <a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission.journal }}, {{ issue_submission.volume }}</a>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
-      </section>
-    </div>
-    <div class="col-md-4 col-xs-12">
-      <section class="card card-issue_submissions">
-        <h2>Historique du dépôt de fichiers</h2>
-        {% for issue_submission in object_list %}
-        {% ifchanged issue_submission.journal.publisher %}
-        {{ issue_submission.journal.publisher.name }}
-        <ul>
-          {% endifchanged %}
-          <li><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission }}</a></li>
-          {% ifchanged issue_submission.journal.publisher %}
-        </ul>
-        {% endifchanged %}
-        {% endfor %}
       </section>
     </div>
   </div>

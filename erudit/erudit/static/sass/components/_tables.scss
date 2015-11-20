@@ -1,0 +1,21 @@
+table {
+  font-size: 0.85em;
+  width: 100%;
+  thead {
+    tr {}
+    th {
+      white-space: nowrap;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 1px solid $colour-faint-grey;
+      &:last-child {
+        border: 0;
+      }
+    }
+    td {
+      padding: 1em 0;
+    }
+  }
+}
