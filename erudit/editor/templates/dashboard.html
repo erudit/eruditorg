@@ -3,36 +3,35 @@
 
 {% block content %}
 <main class="main">
+  <header>
+    <h1><span class="user-space">Espace éditeur</span> Tableau de bord</h1>
+  </header>
   <div class="container-fluid">
-    {# <h1>Tableau de bord</h1>#}
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-sm-6 col-xs-12">
       <section class="card card-issue_submissions">
         <h2>Votre compte</h2>
-        <h3>Utilisateur</h3>
+        <h3>Prénom Nom</h3>
         <ul>
-          <li>Prénom Nom</li>
           <li>Transmission des fichiers de production</li>
           <li><a href="mailto:">courriel@courriel.ca</a></li>
         </ul>
-        <h3>Revue 1</h3>
+        <h3><a href="#" target="_blank">Nom de la revue</a></h3>
         <ul>
-          <li><a href="#">Nom de la revue</a></li>
           <li>Revue savante</li>
           <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
           <li>Éditeur&nbsp;: Nom de l'éditeur</li>
           <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
         </ul>
-        <h3>Revue 2</h3>
+        <h3><a href="#" target="_blank">Nom de la revue</a></h3>
         <ul>
-          <li><a href="#">Nom de la revue</a></li>
-          <li>Revue savante</li>
+          <li>Revue culturelle</li>
           <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
           <li>Éditeur&nbsp;: Nom de l'éditeur</li>
           <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
         </ul>
       </section>
     </div>
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-sm-6 col-xs-12">
       <section class="card card-issue_submissions">
         <h2>Historique du dépôt de fichiers</h2>
         <table>
@@ -44,7 +43,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for issue_submission in object_list|dictsortreversed:"date_created" %}
+            {% for issue_submission in object_list|dictsortreversed:"date_created"|slice:":5" %}
             {% ifchanged %}
             <tr>
               <th colspan="3" class="multicol ">{{ issue_submission.journal }}</th>
@@ -53,11 +52,15 @@
             <tr>
               <td>{{ issue_submission.date_created|date:"c" }}</td>
               <td><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission.year }}, volume {{ issue_submission.volume }}, numéro {{ issue_submission.number }}</a></td>
-              <td>Reçu</td>
+              <td><span class="glyphicon glyphicon-ok"></span></td>
             </tr>
             {% endfor %}
           </tbody>
+          <caption>Cinq derniers fichiers déposés</caption>
         </table>
+        <div class="text-right more-info">
+          <button class="btn btn-primary btn-add"><a href="{% url 'editor:add' %}"><span class="icon glyphicon glyphicon-plus"></span></a></button>
+        </div>
       </section>
     </div>
   </div>

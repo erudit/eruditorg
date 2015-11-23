@@ -7,20 +7,50 @@ nav.navbar {
     color: #FFF;
   }
   .navbar-logo {
-    width: 300px;
+    width: 20%;
     height: 70px;
-    // text-align: center;
-    margin-left: 20px;
+    margin-left: 15px;
+    display: inline-block;
     img {
       height: 40px;
     }
   }
-  .navbar-page_title {
-    h1 {
+  .navbar-user {
+    right: 15px;
+    position: absolute;
+    display: inline-block;
+    a {
+      cursor: pointer;
+      &:hover, &:active, &:focus, &:active:focus {
+        text-decoration: none;
+      }
+    }
+    .profile-pic {
+      background: #FFF;
       color: #000;
-      margin: 0 auto;
+      height: 40px;
+      width: 40px;
       font-size: 20px;
-      line-height: 70px;
+      padding: 10px 0;
+      margin-right: 10px;
+      @include border-radius(20px);
+      vertical-align: middle;
+      text-align: center;
+    }
+    .dropdown-menu {
+      @include border-radius(0);
+      box-shadow: none;
+      padding: 0;
+      li {
+        border-bottom: 1px solid $colour-faint-grey;
+        a {
+          color: $colour-dark-grey;
+          padding: 10px;
+        }
+        &:last-child {
+          border: 0;
+        }
+      }
     }
   }
 }

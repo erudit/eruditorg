@@ -5,7 +5,7 @@ nav.sidenav {
   top: 70px;
   bottom: 0;
   left: 0;
-  width: 300px;
+  width: 20%;
   height: 100%;
   background-color: #FFF;
   border-right: 1px solid $colour-pale-grey;
@@ -20,10 +20,12 @@ nav.sidenav {
       a {
         display: block;
         padding-left: 15px;
-        height: 70px;
-        line-height: 70px;
+        height: 50px;
+        line-height: 50px;
         font-size: 14px;
         color: $colour-dark-grey;
+        display: table;
+        width: 100%;
         &:hover, &:active, &:focus, &:active:focus {
           text-decoration: none;
           border-color: $colour-pale-grey;
@@ -35,6 +37,11 @@ nav.sidenav {
         }
       }
     }
+  }
+  .icon {
+    font-size: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
   }
 }
 @media (max-width: 992px) {

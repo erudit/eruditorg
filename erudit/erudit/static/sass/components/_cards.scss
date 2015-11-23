@@ -12,4 +12,11 @@
     margin: 0 0 1.5em 0;
     border-bottom: 1px solid $colour-pale-grey;
   }
+  &.card-issue_submissions {
+    caption {
+      caption-side: bottom;
+      text-align: right;
+      font-style: italic;
+    }
+  }
 }
