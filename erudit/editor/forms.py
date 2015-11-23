@@ -18,7 +18,9 @@ class IssueSubmissionForm(forms.ModelForm):
 
         fields = [
             'journal',
+            'year',
             'volume',
+            'number',
             'date_created',
             'contact',
             'comment',
@@ -31,6 +33,8 @@ class IssueSubmissionForm(forms.ModelForm):
                 bootstrap_version=3,
                 options={
                     'todayHighlight': True,
+                    'clearBtn': False,
+                    'format': 'yyyy/mm/dd',
                 }
             ),
             'journal': Select2Widget,
@@ -56,7 +60,9 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
 
         fields = (
             'journal',
+            'year',
             'volume',
+            'number',
             'date_created',
             'contact',
             'comment',
