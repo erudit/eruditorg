@@ -54,6 +54,10 @@
               <td><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission.year }}, volume {{ issue_submission.volume }}, numéro {{ issue_submission.number }}</a></td>
               <td><span class="glyphicon glyphicon-ok"></span></td>
             </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" class="text-center">Il n'y a aucun fichier dans votre historique.</td>
+            </tr>
             {% endfor %}
           </tbody>
           <caption>Cinq derniers fichiers déposés</caption>
