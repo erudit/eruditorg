@@ -1,25 +1,26 @@
 nav.navbar {
-  background-color: #EEE;
+  background-color: $colour-primary;
   border: 0;
-  line-height: 50px;
+  line-height: 70px;
+  width: 100%;
   a {
     color: #FFF;
   }
   .navbar-logo {
     width: 300px;
-    height: 50px;
-    display: block;
-    background-color: rgba(255, 255, 255, 0.95);
-    text-align: center;
+    height: 70px;
+    // text-align: center;
+    margin-left: 20px;
     img {
       height: 40px;
     }
   }
-  .navbar-page_title h1 {
-    color: #EEE;
-    text-align: center;
-    margin: 0;
-    font-size: 20px;
-    line-height: 50px;
+  .navbar-page_title {
+    h1 {
+      color: #000;
+      margin: 0 auto;
+      font-size: 20px;
+      line-height: 70px;
+    }
   }
 }

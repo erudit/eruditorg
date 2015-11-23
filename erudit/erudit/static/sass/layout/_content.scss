@@ -1,5 +1,10 @@
 main, .main {
+  z-index: 5;
   padding-left: 300px;
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 992px) {

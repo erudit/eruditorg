@@ -5,6 +5,7 @@ table {
     tr {}
     th {
       white-space: nowrap;
+      color: $colour-medium-grey;
     }
   }
   tbody {
@@ -16,6 +17,11 @@ table {
     }
     td {
       padding: 1em 0;
+    }
+    th.multicol {
+      padding: 1em 0;
+      font-weight: 400;
+      color: #000;
     }
   }
 }

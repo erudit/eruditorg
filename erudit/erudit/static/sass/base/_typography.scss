@@ -3,7 +3,6 @@
 */
 
 body {
-  background-color: $colour-faint-grey * 1.08;
   line-height: 1.75;
   font-family: $font-face-body;
   font-smooth: always;
@@ -43,14 +42,20 @@ small {
 }
 
 a {
-  color: $colour-secondary;
+  color: $colour-primary;
   @include transition(all, 200ms, ease);
   &:hover, &:focus, &:active, &:active:focus {
     text-decoration: underline;
-    color: $colour-secondary * 0.75;
+    color: $colour-primary * 0.75;
   }
 }
-::selection, ::-moz-selection {
-  background: $colour-secondary;
+
+::selection {
+  background: $colour-primary;
+  color: #FFF;
+}
+
+::-moz-selection {
+  background: $colour-primary;
   color: #FFF;
 }

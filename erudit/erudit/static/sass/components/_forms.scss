@@ -7,7 +7,7 @@ $legends: 'center';
 
 // control inputs borders - choose true or false
 $inputs-rounded: false;
-$inputs-boxed: true;
+$inputs-boxed: false;
 
 // form alignment / layout : labels and inputs - choose horizontal or vertical
 $label-align: 'vertical';
@@ -216,6 +216,9 @@ label {
   color: red;
   font-weight: bold;
 }
+textarea {
+  min-height: 100px;
+}
 input[type="text"],
 input[type="password"],
 input[type="date"],
@@ -234,6 +237,7 @@ datalist,
 textarea,
 input[list],
 .form-control {
+  width: 100%;
   padding: $input-padding;
   height: $font-size + 24;
   border-width: $border-width;
