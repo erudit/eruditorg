@@ -1,4 +1,4 @@
-Django==1.8.4
+Django==1.8.7
 django-post-office==2.0.2
 pluggy==0.3.0
 py==1.4.30
