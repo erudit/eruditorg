@@ -1,6 +1,10 @@
 {% extends "base_editor.html" %}
 {% load i18n staticfiles %}
 
+{% block pagetitle %}
+Tableau de bord | Espace éditeurs | Érudit
+{% endblock %}
+
 {% block content %}
 <main class="main">
   <header>
@@ -37,6 +41,7 @@
         <table>
           <thead>
             <tr>
+              <th>Revue</th>
               <th>Date</th>
               <th>Année, volumaison, numéro</th>
               <th>Statut</th>
@@ -44,12 +49,12 @@
           </thead>
           <tbody>
             {% for issue_submission in object_list|dictsortreversed:"date_created"|slice:":5" %}
-            {% ifchanged %}
             <tr>
-              <th colspan="3" class="multicol ">{{ issue_submission.journal }}</th>
-            </tr>
-            {% endifchanged %}
-            <tr>
+              {% ifchanged %}
+              <td>{{ issue_submission.journal }}</td>
+              {% else %}
+              <td></td>
+              {% endifchanged %}
               <td>{{ issue_submission.date_created|date:"c" }}</td>
               <td><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission.year }}, volume {{ issue_submission.volume }}, numéro {{ issue_submission.number }}</a></td>
               <td><span class="glyphicon glyphicon-ok"></span></td>
