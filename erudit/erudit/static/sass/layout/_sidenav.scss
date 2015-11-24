@@ -5,7 +5,7 @@ nav.sidenav {
   top: 70px;
   bottom: 0;
   left: 0;
-  width: 20%;
+  width: 15%;
   height: 100%;
   background-color: #FFF;
   border-right: 1px solid $colour-pale-grey;
@@ -19,7 +19,7 @@ nav.sidenav {
       }
       a {
         display: block;
-        padding-left: 15px;
+        padding-left: 10px;
         height: 50px;
         line-height: 50px;
         font-size: 14px;
@@ -46,7 +46,9 @@ nav.sidenav {
 }
 @media (max-width: 992px) {
   nav.sidenav {
-    display: none;
-    width: 0;
+    width: 46px;
+    .sidenav-label {
+      display: none;
+    }
   }
 }

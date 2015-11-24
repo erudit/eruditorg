@@ -1,6 +1,6 @@
 main, .main {
   z-index: 5;
-  padding-left: 20%;
+  padding-left: 15%;
   position: absolute;
   top: 70px;
   width: 100%;
@@ -11,7 +11,7 @@ main, .main {
     padding: 0 20px;
     display: table;
     h1 {
-      font-size: 20px;
+      font-size: 24px;
       display: table-cell;
       vertical-align: middle;
       color: $colour-dark-grey;
@@ -26,6 +26,6 @@ main, .main {
 
 @media (max-width: 992px) {
   main, .main {
-    padding-left: 0;
+    padding-left: 45px;
   }
 }

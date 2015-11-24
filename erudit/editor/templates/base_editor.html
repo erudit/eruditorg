@@ -26,11 +26,17 @@
 {% block nav %}
 <nav class="sidenav">
   <ul>
-    <li><a href="{% url 'editor:add' %}"><span class="icon icon-upload"></span> Fichiers de production</a></li>
-    <li><a href="#"><span class="icon icon-epub"></span> Dépôt EPUB</a></li>
-    <li><a href="#"><span class="icon icon-"></span> Option 1</a></li>
-    <li><a href="#"><span class="icon icon-"></span> Option 2</a></li>
-    <li><a href="#"><span class="icon icon-"></span> Option 3</a></li>
+    <li>
+      <a href="{% url 'editor:add' %}" {% url 'editor:add' as add_url %}{% if request.get_full_path == add_url %}class="active"{% endif %}>
+        <span class="icon glyphicon glyphicon-upload"></span> <span class="sidenav-label">Fichiers de production</span>
+      </a>
+    </li>
+    <li><a href="#"><span class="icon icon-epub"></span> <span class="sidenav-label">Dépôt EPUB</span></a></li>
+    <li><a href="#"><span class="icon glyphicon glyphicon-signal"></span> <span class="sidenav-label">Statistiques</span></a></li>
+    <li><a href="#"><span class="icon glyphicon glyphicon-usd"></span> <span class="sidenav-label">Factures et état de compte</span></a></li>
+    <li><a href="#"><span class="icon glyphicon glyphicon-send"></span> <span class="sidenav-label">Soumission d'articles</span></a></li>
+    <li><a href="#"><span class="icon glyphicon glyphicon-comment"></span> <span class="sidenav-label">Communications</span></a></li>
+    <li><a href="#"><span class="icon glyphicon glyphicon-question-sign"></span> <span class="sidenav-label">Guides et documentation</span></a></li>
   </ul>
 </nav>
 {% endblock %}
