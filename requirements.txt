@@ -4,9 +4,9 @@ Django==1.8.4
 django-appconf==1.0.1
 django-compressor==1.5
 django-crispy-forms==1.5.2
--e git+https://github.com/asaglimbeni/django-datetime-widget.git@244d9e382ad7d9aa0b8e849aa261a5c302b52e88#egg=django_datetime_widget-master
+-e git+https://github.com/asaglimbeni/django-datetime-widget.git@master#egg=django_datetime_widget-master
 django-grappelli==2.7.1
--e git+https://github.com/erudit/django-plupload.git@1666c5e1b3547c857760e2b45e37a077ba83f605#egg=django_plupload-origin_latest-dev
+-e git+https://github.com/erudit/django-plupload.git@dev#egg=django_plupload-origin_latest-dev
 django-post-office==2.0.2
 Django-Select2==5.2.1
 ipdb==0.8.1
