@@ -211,10 +211,21 @@ label {
   font-weight: normal;
   display: block;
 }
-.required label:after {
-  content: ' *';
-  color: red;
-  font-weight: bold;
+// label.required:after {
+//   content: ' *';
+//   color: red;
+//   font-weight: bold;
+// }
+label:not(.required):after {
+  content: ' (facultatif)';
+  color: $colour-pale-grey;
+  font-size: 0.85em;
+}
+.error {
+  input {
+    border-color: $colour-warning;
+    background-color: rgba($colour-warning, 0.15);
+  }
 }
 textarea {
   min-height: 100px;
