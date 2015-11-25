@@ -10,9 +10,19 @@ class IssueSubmission(models.Model):
         verbose_name=_("Revue"),
     )
 
+    year = models.CharField(
+        max_length=4,
+        verbose_name=_("Année")
+    )
+
     volume = models.CharField(
         max_length=100,
         verbose_name=_("Volume")
+    )
+
+    number = models.CharField(
+        max_length=100,
+        verbose_name=_("Numéro")
     )
 
     date_created = models.DateField(

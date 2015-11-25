@@ -7,7 +7,7 @@ $legends: 'center';
 
 // control inputs borders - choose true or false
 $inputs-rounded: false;
-$inputs-boxed: true;
+$inputs-boxed: false;
 
 // form alignment / layout : labels and inputs - choose horizontal or vertical
 $label-align: 'vertical';
@@ -207,7 +207,7 @@ legend, legend.panel-heading, .panel-default > legend.panel-heading{
 label {
   margin: 1em 0;
   color: $colour-dark-grey;
-  font-size: $font-size * 0.8;
+  // font-size: $font-size * 0.8;
   font-weight: normal;
   display: block;
 }
@@ -215,6 +215,9 @@ label {
   content: ' *';
   color: red;
   font-weight: bold;
+}
+textarea {
+  min-height: 100px;
 }
 input[type="text"],
 input[type="password"],
@@ -234,6 +237,7 @@ datalist,
 textarea,
 input[list],
 .form-control {
+  width: 100%;
   padding: $input-padding;
   height: $font-size + 24;
   border-width: $border-width;
@@ -356,9 +360,16 @@ input[type="reset"] {
 }
 
 .btn-add {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  padding: 0;
+  @include border-radius(20px);
+  .icon {
+    line-height: 40px;
+    text-align: center;
+    color: #FFF;
+  }
 }
 
 /* disabled */
@@ -398,4 +409,12 @@ button[disabled] {
       top: 0;
     }
   }
+}
+
+/* bootstrap overrides */
+.input-group-addon {
+  @include border-radius(0);
+  border: 0;
+  background: $colour-primary;
+  color: #FFF;
 }

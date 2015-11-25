@@ -3,12 +3,12 @@
 */
 
 body {
-  background-color: $colour-faint-grey * 1.08;
   line-height: 1.75;
   font-family: $font-face-body;
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
+  font-size: 16px;
   color: $colour-dark-grey;
 }
 
@@ -43,14 +43,20 @@ small {
 }
 
 a {
-  color: $colour-secondary;
+  color: $colour-primary;
   @include transition(all, 200ms, ease);
   &:hover, &:focus, &:active, &:active:focus {
     text-decoration: underline;
-    color: $colour-secondary * 0.75;
+    color: $colour-primary * 0.75;
   }
 }
-::selection, ::-moz-selection {
-  background: $colour-secondary;
+
+::selection {
+  background: #000;
+  color: #FFF;
+}
+
+::-moz-selection {
+  background: #000;
   color: #FFF;
 }
