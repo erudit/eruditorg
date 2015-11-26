@@ -7,6 +7,8 @@ from django.views.generic import ListView
 
 from django.contrib.auth.decorators import login_required
 
+from django.core.urlresolvers import reverse
+
 from erudit.models import Journal, Publisher
 from editor.models import IssueSubmission
 from editor.forms import IssueSubmissionForm, IssueSubmissionUploadForm
@@ -61,3 +63,6 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'form.html'
+
+    def get_success_url(self):
+        return reverse('editor:dashboard')

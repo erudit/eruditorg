@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    url('^', include('django.contrib.auth.urls')),
+
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^editeur/', include('editor.urls', namespace='editor'),),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
 
+    url(r'', RedirectView.as_view(url="/editeur/", permanent=False)),
 
     # subscriptions
     url(r'^abonnements/', include('subscription.urls')),
-    url(r'^$', 'plupload.views.upload'),
 ]
