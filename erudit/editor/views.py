@@ -1,5 +1,3 @@
-import datetime
-
 from django.template.context_processors import csrf
 
 from django.views.generic.edit import CreateView, UpdateView
@@ -54,7 +52,6 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
         form.fields['journal'].queryset = Journal.objects.all()
         form.fields['journal'].initial = form.fields['journal'].queryset.first()
         form.fields['contact'].initial = form.fields['contact'].queryset.first()
-        form.fields['date_created'].initial = datetime.date.today
 
         return form
 
