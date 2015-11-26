@@ -28,6 +28,7 @@ class IssueSubmission(models.Model):
 
     date_created = models.DateField(
         verbose_name=_("Date de l'envoi"),
+        auto_now_add=True
     )
 
     contact = models.ForeignKey(

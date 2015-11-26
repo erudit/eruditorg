@@ -4,7 +4,6 @@ from django.utils.translation import gettext as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
-from datetimewidget.widgets import DateWidget
 from django_select2.forms import Select2Widget
 
 from plupload.forms import PlUploadFormField
@@ -21,22 +20,11 @@ class IssueSubmissionForm(forms.ModelForm):
             'year',
             'volume',
             'number',
-            'date_created',
             'contact',
             'comment',
         ]
 
         widgets = {
-            'date_created': DateWidget(
-                attrs={'id': "date_created"},
-                usel10n=True,
-                bootstrap_version=3,
-                options={
-                    'todayHighlight': True,
-                    'clearBtn': False,
-                    'format': 'yyyy/mm/dd',
-                }
-            ),
             'journal': Select2Widget,
             'contact': Select2Widget,
         }
@@ -63,7 +51,6 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
             'year',
             'volume',
             'number',
-            'date_created',
             'contact',
             'comment',
             'submission_file',

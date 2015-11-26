@@ -5,6 +5,7 @@ from django.test import RequestFactory
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
+from django.contrib.auth.models import User
 
 from editor.models import IssueSubmission
 from erudit.tests import BaseEruditTestCase
@@ -15,7 +16,9 @@ class TestIssueSubmissionView(BaseEruditTestCase):
     def setUp(self):
         super().setUp()
         self.factory = RequestFactory()
-
+        self.user = User.objects.create_user(
+            username='dcormier', email='david.cormier@erudit.org', password='top_secret'
+        )
         self.issue_submission = IssueSubmission.objects.create(
             journal=self.journal,
             volume="2",
@@ -59,6 +62,32 @@ class TestIssueSubmissionView(BaseEruditTestCase):
         self.assertFalse(
             root.cssselect('#id_submission_file'),
             "The rendered template should not contain an id_submission_file input"
+        )
+
+    def test_can_create_issuesubmission(self):
+        """ Test that we can create an issue submission
+        """
+        issue_submission_count = IssueSubmission.objects.count()
+        data = {
+            'journal': 1,
+            'year': '2015',
+            'volume': '2',
+            'number': '2',
+            'contact': 1,
+            'comment': 'lorem ipsum dolor sit amet',
+        }
+
+        self.client.login(username='david', password='top_secret')
+
+        self.client.post(
+            reverse('editor:add'),
+            data
+        )
+
+        self.assertEquals(
+            IssueSubmission.objects.count(),
+            issue_submission_count + 1,
+            "An issue submission should have been added"
         )
 
     def test_can_upload_while_updating(self):
