@@ -93,6 +93,8 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_URL = '/login/'
+
 # Database configuration
 
 DATABASES = {
