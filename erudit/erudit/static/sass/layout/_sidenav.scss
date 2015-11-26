@@ -35,6 +35,14 @@ nav.sidenav {
         &.active {
           background-color: $colour-faint-grey;
         }
+        &.disabled {
+          color: $colour-pale-grey;
+          &:hover, &:active, &:focus, &:active:focus {
+            cursor: default;
+            background: none;
+            color: $colour-pale-grey;
+          }
+        }
       }
     }
   }

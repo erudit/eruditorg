@@ -200,32 +200,12 @@ legend, legend.panel-heading, .panel-default > legend.panel-heading{
   letter-spacing: 1px;
   font-size: $font-size * 1.05;
   color: $colour-dark-grey;
-  // background-color: #FFF;
-  // background-color: $colour-primary-dark;
-  // outline: 1px solid $colour-primary-dark;
 }
 label {
   margin: 1em 0;
   color: $colour-dark-grey;
-  // font-size: $font-size * 0.8;
   font-weight: normal;
   display: block;
-}
-// label.required:after {
-//   content: ' *';
-//   color: red;
-//   font-weight: bold;
-// }
-label:not(.required):after {
-  content: ' (facultatif)';
-  color: $colour-pale-grey;
-  font-size: 0.85em;
-}
-.error {
-  input {
-    border-color: $colour-warning;
-    background-color: rgba($colour-warning, 0.15);
-  }
 }
 textarea {
   min-height: 100px;
@@ -394,6 +374,24 @@ button[disabled] {
   background-color: $colour-faint-grey;
 }
 
+/* required, optional and errors */
+label.required:after {
+  content: ' *';
+  color: $colour-pale-grey;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+label:not(.required):after {
+  content: ' (facultatif)';
+  color: $colour-pale-grey;
+  font-size: 0.85em;
+}
+.error {
+  input {
+    border-color: $colour-warning;
+    background-color: rgba($colour-warning, 0.15);
+  }
+}
 
 /* remove extra borders and padding for mobile viewing */
 @media(max-width:768px) {
