@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 
 class IssueSubmission(models.Model):
@@ -51,6 +52,10 @@ class IssueSubmission(models.Model):
             self.journal,
             self.volume
         )
+
+    def get_absolute_url(self):
+        """ Return the absolute URL for this model """
+        return reverse('editor:update', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("Envoi de numéro")
