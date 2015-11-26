@@ -27,5 +27,4 @@ urlpatterns = [
 
     # subscriptions
     url(r'^abonnements/', include('subscription.urls')),
-    url(r'^$', 'plupload.views.upload'),
 ]
