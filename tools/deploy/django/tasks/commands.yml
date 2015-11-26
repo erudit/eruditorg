@@ -1,5 +1,5 @@
 ---
-- name: Collect static files
+- name: Collect static file
   sudo_user: "{{ project_user }}"
   django_manage: >
     command=collectstatic
@@ -11,3 +11,12 @@
     - update
   notify:
     - reload the project
+    - update permissions
+    - change file permissions
+
+- name: reload the project
+  file: path={{ project_root }}/erudit/erudit/wsgi.py state=touch
+  sudo_user: '{{ project_user }}'
+  tags:
+    - update
+    - provision

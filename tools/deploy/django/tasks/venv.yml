@@ -19,3 +19,5 @@
     - app
     - provision
     - update
+  notify:
+    - change file permissions
