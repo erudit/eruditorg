@@ -100,7 +100,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'HOST': 'db',
+        'PASSWORD': '',
+        'HOST': 'localhost',
     }
 }
 
@@ -135,5 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
-from .settings_env import *  # noqa
+try:
+    from .settings_env import *  # noqa
+except ImportError:
+    pass
