@@ -11,7 +11,9 @@ Espace éditeur | Érudit
     <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
       <section class="card card-login">
         <div class="erudit-logo">
-          <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
+          <a href="http://erudit.org/" target="_blank">
+            <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
+          </a>
         </div>
         <form class="form-vertical" method="post">
           {% csrf_token %}
@@ -20,22 +22,20 @@ Espace éditeur | Érudit
             {{ form.username }}
           </div>
           <div class="form-group">
-            <label for="id_username">Nom d'utilisateur</label>
+            <label for="id_password">Mot de passe</label>
             {{ form.password }}
           </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>
-                <input type="checkbox"> Se souvenir de moi
-              </label>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a href="#">Mot de passe oublié&nbsp;?</a>
+          <div class="form-group">
+            <div class="text-right">
+              <a href="{% url 'password_reset' %}">Mot de passe oublié&nbsp;?</a>
             </div>
           </div>
           <div class="form-group text-center">
             <button type="submit" class="btn btn-primary" id="submit-id-submit">Connexion</button>
           </div>
+          <p class="card-footer">
+            <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
+          </p>
         </form>
       </section>
     </div>
