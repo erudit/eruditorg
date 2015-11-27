@@ -1,17 +1,44 @@
 {% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block pagetitle %}
+Espace éditeur | Érudit
+{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-  <div class="col-md-4 col-md-offset-4 col-xs-12">
-    <section class="card card-login">
-      <form class="form-vertical" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" id="submit-id-submit">Connexion</button>
+<div class="container-fluid login-page">
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+      <section class="card card-login">
+        <div class="erudit-logo">
+          <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
         </div>
-      </form>
-    </section>
+        <form class="form-vertical" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="id_username">Nom d'utilisateur</label>
+            {{ form.username }}
+          </div>
+          <div class="form-group">
+            <label for="id_username">Nom d'utilisateur</label>
+            {{ form.password }}
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>
+                <input type="checkbox"> Se souvenir de moi
+              </label>
+            </div>
+            <div class="col-sm-6 text-right">
+              <a href="#">Mot de passe oublié&nbsp;?</a>
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" id="submit-id-submit">Connexion</button>
+          </div>
+        </form>
+      </section>
+    </div>
   </div>
 </div>
 {% endblock %}
