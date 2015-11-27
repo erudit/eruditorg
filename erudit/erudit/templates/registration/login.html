@@ -1,15 +1,53 @@
-{% extends "base_editor.html" %}
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block pagetitle %}
+Espace éditeur | Érudit
+{% endblock %}
 
 {% block content %}
-  <div class="container-fluid">
-    <div class="col-md-6 col-md-offset-3 col-xs-12">
-      <form class="row form-vertical" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" id="submit-id-submit">Enregistrer</button>
+<div class="container-fluid login-page">
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+      <section class="card card-login">
+        <div class="erudit-logo">
+          <a href="http://erudit.org/" target="_blank">
+            <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
+          </a>
         </div>
-      </form>
+        <form class="form-vertical" method="post">
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+          <div class="col-xs-12">
+            {% for error in form.non_field_errors %}
+            <p class="alert alert-warning">{{ error }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="form-group">
+            <label for="id_username">Nom d'utilisateur</label>
+            {{ form.username }}
+            <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
+          </div>
+          <div class="form-group">
+            <label for="id_password">Mot de passe</label>
+            {{ form.password }}
+            <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
+          </div>
+          <div class="form-group">
+            <div class="text-right">
+              <a href="{% url 'password_reset' %}">Mot de passe oublié&nbsp;?</a>
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" id="submit-id-submit">Connexion</button>
+          </div>
+          <p class="card-footer">
+            <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
+          </p>
+        </form>
+      </section>
     </div>
   </div>
+</div>
 {% endblock %}

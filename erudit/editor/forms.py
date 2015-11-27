@@ -12,6 +12,9 @@ from editor.models import IssueSubmission
 
 
 class IssueSubmissionForm(forms.ModelForm):
+
+    required_css_class = 'required'
+
     class Meta:
         model = IssueSubmission
 
@@ -31,6 +34,7 @@ class IssueSubmissionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
 
+        kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
 
         self.helper = FormHelper()
