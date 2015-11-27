@@ -60,6 +60,10 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-sass', 'sassc {infile} {outfile}'),
 )
 
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
