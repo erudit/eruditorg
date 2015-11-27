@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 DEBUG = True
-COMPRESS = True
+COMPRESS_ENABLED = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = BASE_DIR + '/static'
@@ -118,7 +118,6 @@ EMAIL_PORT = '25'
 RENEWAL_FROM_EMAIL = 'admin@localhost'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
