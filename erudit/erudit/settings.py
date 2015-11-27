@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 DEBUG = True
-COMPRESS = True
+COMPRESS_ENABLED = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = BASE_DIR + '/static'
@@ -60,6 +60,10 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-sass', 'sassc {infile} {outfile}'),
 )
 
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
@@ -118,7 +122,6 @@ EMAIL_PORT = '25'
 RENEWAL_FROM_EMAIL = 'admin@localhost'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
