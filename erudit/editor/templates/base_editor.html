@@ -14,7 +14,7 @@
           <ul class="dropdown-menu dropdown-menu-right">
             <li><a href="#">Aide</a></li>
             <li><a href="#">Paramètres</a></li>
-            <li><a href="#">Déconnexion</a></li>
+            <li><a href="{% url 'logout' %}?next={% url 'editor:dashboard' %}">Déconnexion</a></li>
           </ul>
         </div>
       </div>
@@ -31,12 +31,12 @@
         <span class="icon glyphicon glyphicon-upload"></span> <span class="sidenav-label">Fichiers de production</span>
       </a>
     </li>
-    <li><a href="#"><span class="icon icon-epub"></span> <span class="sidenav-label">Dépôt EPUB</span></a></li>
-    <li><a href="#"><span class="icon glyphicon glyphicon-signal"></span> <span class="sidenav-label">Statistiques</span></a></li>
-    <li><a href="#"><span class="icon glyphicon glyphicon-usd"></span> <span class="sidenav-label">Factures et état de compte</span></a></li>
-    <li><a href="#"><span class="icon glyphicon glyphicon-send"></span> <span class="sidenav-label">Soumission d'articles</span></a></li>
-    <li><a href="#"><span class="icon glyphicon glyphicon-comment"></span> <span class="sidenav-label">Communications</span></a></li>
-    <li><a href="#"><span class="icon glyphicon glyphicon-question-sign"></span> <span class="sidenav-label">Guides et documentation</span></a></li>
+    <li><a href="#" class="disabled"><span class="icon icon-epub"></span> <span class="sidenav-label">Dépôt EPUB</span></a></li>
+    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-signal"></span> <span class="sidenav-label">Statistiques</span></a></li>
+    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-usd"></span> <span class="sidenav-label">Factures et état de compte</span></a></li>
+    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-send"></span> <span class="sidenav-label">Soumission d'articles</span></a></li>
+    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-comment"></span> <span class="sidenav-label">Communications</span></a></li>
+    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-question-sign"></span> <span class="sidenav-label">Guides et documentation</span></a></li>
   </ul>
 </nav>
 {% endblock %}
