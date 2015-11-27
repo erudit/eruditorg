@@ -40,3 +40,17 @@
   </ul>
 </nav>
 {% endblock %}
+
+{% block content %}
+<main class="main">
+  <header>
+    <h1>
+      <span class="user-space">{% block zone-title %}Espace éditeurs{% endblock %}</span> {% block page-title %}{% endblock %}
+    </h1>
+  </header>
+  <div class="container-fluid">
+    {% block content-main %}
+    {% endblock %}
+  </div>
+</main>
+{% endblock %}
