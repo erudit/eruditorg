@@ -22,7 +22,9 @@ Fichiers de production | Espace éditeurs | Érudit
         <form class="form-vertical" method="post">
           {% csrf_token %}
           {% if form.errors %}
-          <p class="alert alert-warning text-center"><span class="glyphicon glyphicon-exclamation-sign"></span> Veuillez remplir les champs obligatoires.</p>
+          <div class="col-xs-12">
+            <p class="alert alert-warning">Veuillez remplir les champs obligatoires.</p>
+          </div>
           {% endif %}
           <div class="form-group col-xs-12 {% if form.journal.errors %}error{% endif %}">
             {{ form.journal.label_tag }}
