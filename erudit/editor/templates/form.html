@@ -2,11 +2,11 @@
 {% load i18n staticfiles %}
 
 {% block page-title %}
-Dépôt de numéros
+Ajout d'un numéro
 {% endblock %}
 
 {% block breadcrumbs %}
-    <a href="{% url 'editor:dashboard' %}">{{ block.super }}</a> » <a href="{% url 'editor:issues' %}">Dépôt de numéros</a> » Ajout de numéros
+  {{ block.super }} / <a href="{% url 'editor:issues' %}">Dépôt de numéros</a> / Ajout d'un numéro
 {% endblock %}
 
 {% block extrahead %}

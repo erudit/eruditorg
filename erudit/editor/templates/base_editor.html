@@ -27,7 +27,7 @@
 <nav class="sidenav">
   <ul>
     <li>
-      <a href="{% url 'editor:issues' %}" {% url 'editor:issues' as add_url %}{% if request.get_full_path == add_url %}class="active"{% endif %}>
+      <a href="{% url 'editor:issues' %}" {% url 'editor:issues' as issues %}{% if request.get_full_path == issues %}class="active"{% endif %}>
         <span class="icon glyphicon glyphicon-upload"></span> <span class="sidenav-label">Dépôt de numéros</span>
       </a>
     </li>
@@ -48,7 +48,12 @@
       <span class="user-space">{% block zone-title %}Espace éditeurs{% endblock %}</span> {% block page-title %}{% endblock %}
     </h1>
     <div class="breadcrumbs">
-      {% block breadcrumbs %}Espace éditeurs » Tableau de bord{% endblock %}
+      {% block breadcrumbs %}
+      {% url 'editor:dashboard' as dashboard %}
+      {% if request.get_full_path != dashboard %}
+      <a href="{% url 'editor:dashboard' %}">Tableau de bord</a>
+      {% endif %}
+      {% endblock %}
     </div>
   </header>
   <div class="container-fluid">

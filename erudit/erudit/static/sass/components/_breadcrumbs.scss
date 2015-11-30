@@ -1,5 +1,10 @@
 .breadcrumbs {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: right;
+  margin-top: 1.5em;
+  font-size: 0.85em;
+  a {
+    color: rgba(0, 0, 0, 0.5);
+    &:hover, &:focus, &:active, &:active:focus {
+      text-decoration: none;
+    }
+  }
 }
