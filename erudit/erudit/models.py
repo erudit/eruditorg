@@ -126,6 +126,14 @@ class Journal(Named):
     """Revue"""
 
     # identification
+    series_id = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        verbose_name=_("Identifiant Edinum")
+    )
+    """ The Edinum series_id for this Journal """
+
     code = models.CharField(
         max_length=255,
         help_text="Identifiant unique (utilisé dans URL Érudit)",
