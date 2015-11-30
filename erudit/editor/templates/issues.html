@@ -2,35 +2,15 @@
 {% load i18n staticfiles %}
 
 {% block page-title %}
-Tableau de bord
+Dépôt de numéros
+{% endblock %}
+
+{% block breadcrumbs %}
+    <a href="{% url 'editor:dashboard' %}">{{ block.super }}</a> » Dépôt de numéros
 {% endblock %}
 
 {% block content-main %}
-<div class="col-sm-6 col-xs-12">
-  <section class="card card-issue_submissions">
-    <h2>Votre compte</h2>
-    <h3>Prénom Nom</h3>
-    <ul>
-      <li>Transmission des fichiers de production</li>
-      <li><a href="mailto:">courriel@courriel.ca</a></li>
-    </ul>
-    <h3><a href="#" target="_blank">Nom de la revue</a></h3>
-    <ul>
-      <li>Revue savante</li>
-      <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
-      <li>Éditeur&nbsp;: Nom de l'éditeur</li>
-      <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
-    </ul>
-    <h3><a href="#" target="_blank">Nom de la revue</a></h3>
-    <ul>
-      <li>Revue culturelle</li>
-      <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
-      <li>Éditeur&nbsp;: Nom de l'éditeur</li>
-      <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
-    </ul>
-  </section>
-</div>
-<div class="col-sm-6 col-xs-12">
+<div class="col-sm-6 col-sm-offset-3 col-xs-12">
   <section class="card card-issue_submissions">
     <h2>Historique du dépôt de numéros</h2>
     <table>
@@ -43,7 +23,7 @@ Tableau de bord
         </tr>
       </thead>
       <tbody>
-        {% for issue_submission in object_list|dictsortreversed:"date_created"|slice:":3" %}
+        {% for issue_submission in object_list|dictsortreversed:"date_created" %}
         <tr>
           {% ifchanged %}
           <td>{{ issue_submission.journal }}</td>
@@ -60,7 +40,6 @@ Tableau de bord
         </tr>
         {% endfor %}
       </tbody>
-      <caption>Trois derniers fichiers déposés (<a href="{% url 'editor:issues' %}">Voir l'historique complet</a>)</caption>
     </table>
     <div class="text-right more-info">
       <button class="btn btn-primary btn-add"><a href="{% url 'editor:add' %}"><span class="icon glyphicon glyphicon-plus"></span></a></button>

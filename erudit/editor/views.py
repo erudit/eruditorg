@@ -69,3 +69,20 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('editor:dashboard')
+
+
+class IssueSubmissionList(LoginRequiredMixin, ListView):
+
+    template_name = 'issues.html'
+
+    def get_queryset(self):
+
+        publishers = Publisher.objects.filter(
+            members=self.request.user
+        )
+
+        return IssueSubmission.objects.filter(
+            journal__publisher=publishers
+        ).order_by(
+            'journal__publisher'
+        )
