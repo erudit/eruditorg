@@ -227,7 +227,7 @@ class JournalType(models.Model):
 
 
 class Issue(models.Model):
-    """Numéro"""
+    """ Numéro """
 
     # identification
     journal = models.ForeignKey('Journal', related_name='issues')
@@ -246,11 +246,47 @@ class Issue(models.Model):
 
 class Publisher(models.Model):
     """Éditeur"""
+
+    synced_with_edinum = models.BooleanField(
+        verbose_name=_("Synchronisé avec Edinum"),
+        default=False
+    )
+    """ This publisher is synced with the Edinum database
+
+    When a publisher account is synced with edinum, it's person_id
+    and name will be filled automatically with the values from Edinum.
+
+    The date at which the last synchronization was made will be kept in
+    the sync_date field.
+    """
+
+    person_id = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        verbose_name=_("Identifiant Edinum")
+    )
+    """ The Edinum person_id for this Publisher """
+
+    sync_date = models.DateField(null=True, blank=True)
+    """ Date at which the model was last synchronized with Edinum """
+
     name = models.CharField(max_length=255)
+    """ Name of the publisher """
 
     members = models.ManyToManyField(
         User
     )
+    """ Users accounts associated to this this publisher """
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Éditeur"
+        verbose_name_plural = "Éditeurs"
+        ordering = ['name']
+
 
 # comments
 
