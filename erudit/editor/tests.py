@@ -103,18 +103,19 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         """ Test that we can create an issue submission
         """
         issue_submission_count = IssueSubmission.objects.count()
+
         data = {
-            'journal': 1,
+            'journal': self.journal.pk,
             'year': '2015',
             'volume': '2',
             'number': '2',
-            'contact': 1,
+            'contact': self.user.pk,
             'comment': 'lorem ipsum dolor sit amet',
         }
 
         self.client.login(username='david', password='top_secret')
 
-        self.client.post(
+        response = self.client.post(
             reverse('editor:add'),
             data
         )
