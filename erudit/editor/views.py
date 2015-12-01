@@ -52,7 +52,6 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
         form.fields['journal'].queryset = Journal.objects.all()
         form.fields['journal'].initial = form.fields['journal'].queryset.first()
         form.fields['contact'].initial = form.fields['contact'].queryset.first()
-
         return form
 
 
@@ -60,6 +59,13 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'form.html'
+
+    def get_form(self, form_class):
+        form = super().get_form(form_class)
+        if self.get_object().status in (
+                IssueSubmission.VALID, IssueSubmission.SUBMITTED):
+            form.disable_form()
+        return form
 
     def dispatch(self, request, *args, **kwargs):
         submission = IssueSubmission.objects.get(pk=kwargs['pk'])

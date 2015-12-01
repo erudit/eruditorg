@@ -32,6 +32,16 @@ class IssueSubmissionForm(forms.ModelForm):
             'contact': Select2Widget,
         }
 
+    def disable_form(self):
+        """ Disable all the fields of this form """
+        fields = (
+            'year', 'journal', 'contact', 'number',
+            'volume', 'comment', 'submission_file',
+        )
+
+        for field in fields:
+            self.fields[field].widget.attrs['disabled'] = True
+
     def __init__(self, *args, **kwargs):
 
         kwargs.setdefault('label_suffix', '')
