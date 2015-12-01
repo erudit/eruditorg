@@ -27,8 +27,8 @@
 <nav class="sidenav">
   <ul>
     <li>
-      <a href="{% url 'editor:add' %}" {% url 'editor:add' as add_url %}{% if request.get_full_path == add_url %}class="active"{% endif %}>
-        <span class="icon glyphicon glyphicon-upload"></span> <span class="sidenav-label">Fichiers de production</span>
+      <a href="{% url 'editor:issues' %}" {% url 'editor:issues' as issues %}{% if request.get_full_path == issues %}class="active"{% endif %}>
+        <span class="icon glyphicon glyphicon-upload"></span> <span class="sidenav-label">Dépôt de numéros</span>
       </a>
     </li>
     <li><a href="#" class="disabled"><span class="icon icon-epub"></span> <span class="sidenav-label">Dépôt EPUB</span></a></li>
@@ -39,4 +39,26 @@
     <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-question-sign"></span> <span class="sidenav-label">Guides et documentation</span></a></li>
   </ul>
 </nav>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+  <header>
+    <h1>
+      <span class="user-space">{% block zone-title %}Espace éditeurs{% endblock %}</span> {% block page-title %}{% endblock %}
+    </h1>
+  </header>
+  <div class="container-fluid">
+    <div class="breadcrumbs">
+      {% block breadcrumbs %}
+      {% url 'editor:dashboard' as dashboard %}
+      {% if request.get_full_path != dashboard %}
+      <a href="{% url 'editor:dashboard' %}">Tableau de bord</a>
+      {% endif %}
+      {% endblock %}
+    </div>
+    {% block content-main %}
+    {% endblock %}
+  </div>
+</main>
 {% endblock %}

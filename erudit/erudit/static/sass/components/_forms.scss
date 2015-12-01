@@ -387,7 +387,7 @@ label:not(.required):after {
   font-size: 0.85em;
 }
 .error {
-  input {
+  input, .select2 {
     border-color: $colour-warning;
     background-color: rgba($colour-warning, 0.15);
   }
