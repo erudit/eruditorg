@@ -8,6 +8,23 @@ from erudit.models import Publisher
 
 class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
+
+    DRAFT = "D"
+    SUBMITTED = "S"
+    VALID = "V"
+
+    STATUS_CHOICES = (
+        (DRAFT, _("Brouillon")),
+        (SUBMITTED, _("Soumis")),
+        (VALID, _("Validé"))
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS_CHOICES,
+        default=DRAFT
+    )
+
     journal = models.ForeignKey(
         'erudit.journal',
         verbose_name=_("Revue"),
