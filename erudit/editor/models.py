@@ -3,6 +3,8 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+from erudit.models import Publisher
+
 
 class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
@@ -57,6 +59,22 @@ class IssueSubmission(models.Model):
     def get_absolute_url(self):
         """ Return the absolute URL for this model """
         return reverse('editor:update', kwargs={'pk': self.pk})
+
+    def has_access(self, user):
+        """ Determine if the user has access to this IssueSubmission
+
+        A user has access to an IssueSubmission if it is a member of the
+        publisher of the journal.
+        """
+        if not user:
+            return False
+
+        return bool(
+            Publisher.objects.filter(
+                journals=self.journal,
+                members=user
+            ).count()
+        )
 
     class Meta:
         verbose_name = _("Envoi de numéro")
