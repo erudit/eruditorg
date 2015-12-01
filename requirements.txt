@@ -30,3 +30,4 @@ six==1.10.0
 tox==2.1.1
 traitlets==4.0.0
 virtualenv==13.1.2
+pymysql
