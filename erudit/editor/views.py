@@ -4,8 +4,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 
 from django.contrib.auth.decorators import login_required
-
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 from erudit.models import Journal, Publisher
 from editor.models import IssueSubmission
@@ -60,6 +60,12 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        submission = IssueSubmission.objects.get(pk=kwargs['pk'])
+        if not submission.has_access(request.user):
+            return HttpResponseRedirect(reverse('editor:dashboard'))
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('editor:dashboard')

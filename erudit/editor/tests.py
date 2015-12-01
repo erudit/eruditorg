@@ -5,20 +5,16 @@ from django.test import RequestFactory
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from django.contrib.auth.models import User
 
 from editor.models import IssueSubmission
 from erudit.tests import BaseEruditTestCase
 
 
-class TestIssueSubmissionView(BaseEruditTestCase):
+class BaseEditorTestCase(BaseEruditTestCase):
 
     def setUp(self):
         super().setUp()
-        self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='dcormier', email='david.cormier@erudit.org', password='top_secret'
-        )
+
         self.issue_submission = IssueSubmission.objects.create(
             journal=self.journal,
             volume="2",
@@ -26,6 +22,21 @@ class TestIssueSubmissionView(BaseEruditTestCase):
             contact=self.user,
             submission_file=""
         )
+
+        self.other_issue_submission = IssueSubmission.objects.create(
+            journal=self.other_journal,
+            volume="2",
+            date_created=datetime.now(),
+            contact=self.user,
+            submission_file=""
+        )
+
+
+class TestIssueSubmissionView(BaseEditorTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.factory = RequestFactory()
 
     def test_editor_views_are_login_protected(self):
         """ Editor views should all be login protected """
@@ -40,6 +51,30 @@ class TestIssueSubmissionView(BaseEruditTestCase):
             reverse('editor:update', kwargs={'pk': self.issue_submission.pk})
         )
         self.assertIsInstance(result, HttpResponseRedirect)
+
+    def test_user_can_only_access_his_submissions(self):
+        """ A user should only be able to see his editor's submissions """
+        login = self.client.login(
+            username=self.user.username,
+            password="top_secret"
+        )
+
+        self.assertTrue(
+            login
+        )
+
+        response = self.client.get(
+            reverse(
+                'editor:update',
+                kwargs={'pk': self.other_issue_submission.pk}
+            )
+        )
+
+        self.assertIsInstance(
+            response,
+            HttpResponseRedirect,
+            "The user should not be able to access another editor's submissions"  # noqa
+        )
 
     def test_logged_add_journalsubmission(self):
         """ Logged users should be able to see journal submissions """
@@ -61,7 +96,7 @@ class TestIssueSubmissionView(BaseEruditTestCase):
         root = etree.HTML(response.content)
         self.assertFalse(
             root.cssselect('#id_submission_file'),
-            "The rendered template should not contain an id_submission_file input"
+            "The rendered template should not contain an id_submission_file input"  # noqa
         )
 
     def test_can_create_issuesubmission(self):
@@ -107,5 +142,5 @@ class TestIssueSubmissionView(BaseEruditTestCase):
 
         self.assertTrue(
             root.cssselect('#id_submission_file'),
-            "The rendered upload template should contain an id_submission_file input"
+            "The rendered upload template should contain an id_submission_file input"  # noqa
         )
