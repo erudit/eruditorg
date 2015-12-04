@@ -178,9 +178,6 @@ legend, legend.panel-heading, .panel-default > legend.panel-heading {
 }
 
 form {
-  // padding: 0.5em;
-  &:valid {}
-  &:invalid {}
   .form-group {
     margin-bottom: 0.75em;
     padding: 0 1em;
@@ -295,13 +292,10 @@ input[type="image"],
 .btn, .btn-default {
   cursor: pointer;
   padding: $font-size*0.5 $font-size*0.75;
-  // padding: 1em;
   height: $font-size + 24;
-  border: 1px solid $colour-medium-grey;
+  border: 1px solid $colour-dark-grey;
   border-radius: $border-radius;
-  background-color: $colour-medium-grey;
-  color: $colour-faint-grey;
-  height: auto;
+  color: $colour-dark-grey;
   margin: 0.75em 0.75em 0 0;
   @include transition(all, 300ms, ease);
   &:last-child {
@@ -323,7 +317,6 @@ input[type="submit"],
   background-color: $colour-primary;
   letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 1em;
   &:hover {
     background-color: $colour-primary*0.75;
     color: white;

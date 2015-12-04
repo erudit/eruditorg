@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}
-Connexion
-{% endblock %}
+{% block page-title %}{% trans 'Connexion' %}{% endblock %}
 
-{% block zone-title %}
-Espace éditeurs
-{% endblock %}
+{% block zone-title %}{% trans 'Espace éditeurs' %}{% endblock %}
 
 {% block content %}
 <main class="login-page">
@@ -30,22 +26,22 @@ Espace éditeurs
             </div>
             {% endif %}
             <div class="form-group">
-              <label for="id_username">Nom d'utilisateur</label>
+              <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
               {{ form.username }}
               <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
             </div>
             <div class="form-group">
-              <label for="id_password">Mot de passe</label>
+              <label for="id_password">{% trans "Mot de passe" %}</label>
               {{ form.password }}
               <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
             </div>
             <div class="form-group">
               <div class="text-right">
-                <a href="{% url 'password_reset' %}">Mot de passe oublié&nbsp;?</a>
+                <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
               </div>
             </div>
             <div class="form-group text-center">
-              <button type="submit" class="btn btn-primary" id="submit-id-submit">Connexion</button>
+              <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
             </div>
             <p class="card-footer">
               <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
