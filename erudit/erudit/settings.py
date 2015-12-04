@@ -31,7 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # Erudit apps
+    'erudit',
+    'editor',
+    'subscription',
+    'post_office',
     'grappelli',
+    # Other apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,12 +48,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_select2',
     'datetimewidget',
-    'plupload',
-    # Erudit apps
-    'erudit',
-    'editor',
-    'subscription',
-    'post_office'
+    'plupload'
 )
 
 STATICFILES_FINDERS = (
@@ -128,7 +129,7 @@ WSGI_APPLICATION = 'erudit.wsgi.application'
 
 LANGUAGE_CODE = 'fr-ca'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
