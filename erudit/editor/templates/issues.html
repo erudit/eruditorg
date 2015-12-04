@@ -32,7 +32,15 @@ Dépôt de numéros
           {% endifchanged %}
           <td>{{ issue_submission.date_created|date:"c" }}</td>
           <td><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission.year }}, volume {{ issue_submission.volume }}, numéro {{ issue_submission.number }}</a></td>
-          <td><span class="glyphicon glyphicon-ok"></span></td>
+          <td>
+            {% if issue_submission.status == 'D' %}
+            {% trans "Brouillon" %}
+            {% elif issue_submission.status == 'S' %}
+            {% trans "Soumis" %}
+            {% elif issue_submission.status == 'V' %}
+            {% trans "Validé" %}
+            {% endif %}
+          </td>
         </tr>
         {% empty %}
         <tr>
