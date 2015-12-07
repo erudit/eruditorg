@@ -11,6 +11,59 @@ YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
 
 # abstracts
 
+class Edinum(models.Model):
+    """ Basic class for models that are synced with Edinum
+
+    When an is synced with edinum, it's edinum_id and other attributes are
+    filled automatically with values from the Edinum database.
+
+    The date at which the last synchronization was made will be kept in
+    the sync_date field."""
+
+    synced_with_edinum = models.BooleanField(
+        verbose_name=_("Synchronisé avec Edinum"),
+        default=False
+    )
+    """ Determines if this particular object is synced with the Edinum database """  # noqa
+
+    edinum_id = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        verbose_name=_("Identifiant Edinum")
+    )
+    """ The Edinum person_id for this Publisher """
+
+    sync_date = models.DateField(null=True, blank=True)
+    """ Date at which the model was last synchronized with Edinum """
+
+    class Meta:
+        abstract = True
+
+
+class MandragoreProfile(models.Model):
+    """ Store variables that are related to this user's Mandragore profile
+    """
+    user = models.OneToOneField(User)
+
+    synced_with_mandragore = models.BooleanField(
+        verbose_name=_("Synchronisé avec Mandragore"),
+        default=False
+    )
+    """ Determines if this particular object is synced with the Edinum database """  # noqa
+
+    mandragore_id = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        verbose_name=_("Identifiant Mandragore")
+    )
+    """ The Mandragore person_id for this User """
+
+    sync_date = models.DateField(null=True, blank=True)
+    """ Date at which the model was last synchronized with Mandragore """
+
+
 class Person(models.Model):
     """Personne"""
 
@@ -122,10 +175,23 @@ class Library(models.Model):
     name = models.CharField(max_length=255)
 
 
-class Journal(Named):
-    """Revue"""
+class Journal(Named, Edinum):
+    """ Revue """
 
     # identification
+    series_id = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        verbose_name=_("Identifiant Edinum")
+    )
+    """ The Edinum series_id for this Journal """
+
+    subtitle = models.CharField(
+        max_length=255,
+        null=True, blank=True
+    )
+
     code = models.CharField(
         max_length=255,
         help_text="Identifiant unique (utilisé dans URL Érudit)",
@@ -227,7 +293,7 @@ class JournalType(models.Model):
 
 
 class Issue(models.Model):
-    """Numéro"""
+    """ Numéro """
 
     # identification
     journal = models.ForeignKey('Journal', related_name='issues')
@@ -244,13 +310,24 @@ class Issue(models.Model):
     # status { in_production, published }
 
 
-class Publisher(models.Model):
+class Publisher(Edinum, models.Model):
     """Éditeur"""
+
     name = models.CharField(max_length=255)
+    """ Name of the publisher """
 
     members = models.ManyToManyField(
         User
     )
+    """ Users accounts associated to this this publisher """
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Éditeur"
+        verbose_name_plural = "Éditeurs"
+        ordering = ['name']
 
 # comments
 
