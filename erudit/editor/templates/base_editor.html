@@ -10,10 +10,10 @@
           <a href="{% url 'editor:dashboard' %}"><img src="{% static 'img/logo-erudit-blanc.png' %}"/></a>
         </div>
         <div class="navbar-user dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown"><span class="profile-pic glyphicon glyphicon-user"></span> Prénom <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown"><span class="profile-pic glyphicon glyphicon-user"></span> {{ user.first_name }} <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-right">
-            <li><a href="#">Aide</a></li>
-            <li><a href="#">Paramètres</a></li>
+            <li><a href="#" class="disabled">Aide</a></li>
+            <li><a href="#" class="disabled">Paramètres</a></li>
             <li><a href="{% url 'logout' %}?next={% url 'editor:dashboard' %}">Déconnexion</a></li>
           </ul>
         </div>
@@ -28,7 +28,7 @@
   <ul>
     <li>
       <a href="{% url 'editor:issues' %}" {% url 'editor:issues' as issues %}{% if request.get_full_path == issues %}class="active"{% endif %}>
-        <span class="icon glyphicon glyphicon-upload"></span> <span class="sidenav-label">Dépôt de numéros</span>
+        <span class="icon fa fa-folder-open-o"></span> <span class="sidenav-label">Dépôt de numéros</span>
       </a>
     </li>
     <li><a href="#" class="disabled"><span class="icon icon-epub"></span> <span class="sidenav-label">Dépôt EPUB</span></a></li>
