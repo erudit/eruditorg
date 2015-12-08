@@ -1,6 +1,7 @@
 table {
   font-size: 0.85em;
   width: 100%;
+  margin-bottom: 1em;
   thead {
     tr {}
     th {
@@ -16,7 +17,7 @@ table {
       }
     }
     td {
-      padding: 0.85em 0;
+      padding: 0.85em 0.25em;
     }
     th.multicol {
       padding: 1em 0;

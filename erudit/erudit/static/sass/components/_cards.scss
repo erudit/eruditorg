@@ -1,6 +1,6 @@
 .card {
   background: #FFF;
-  margin: 2em auto;
+  margin: 1em auto;
   padding: 10px;
   > h2 {
     text-align: center;
@@ -11,12 +11,48 @@
     padding: 1em 0;
     margin: 0 0 1.5em 0;
     border-bottom: 1px solid $colour-pale-grey;
+    small {
+      display: block;
+      margin-top: 0.5em;
+    }
+  }
+  ul {
+    padding-left: 0;
+    list-style: none;
+  }
+  .card-label, .card-value {
+    display: block;
+    line-height: 1.25;
+  }
+  .card-label {
+    color: $colour-medium-grey;
+    font-size: 0.9em;
+  }
+  .card-value {
+    margin-bottom: 1em;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
   &.card-issue_submissions {
-    caption {
-      caption-side: bottom;
-      text-align: right;
-      font-style: italic;
+    button {
+      margin-top: 0;
+    }
+    .card-section {
+      border-right: 1px solid $colour-faint-grey;
+      height: 400px;
+      &:last-child {
+        border: 0;
+      }
+      h3 {
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 1em;
+      }
+      .submission-date {
+        color: $colour-medium-grey;
+        font-size: 0.85em;
+      }
     }
   }
 }

@@ -46,6 +46,14 @@ nav.navbar {
         a {
           color: $colour-dark-grey;
           padding: 10px;
+          &.disabled {
+            color: $colour-pale-grey;
+            &:hover, &:active, &:focus, &:active:focus {
+              cursor: default;
+              background: none;
+              color: $colour-pale-grey;
+            }
+          }
         }
         &:last-child {
           border: 0;

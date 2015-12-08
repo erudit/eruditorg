@@ -1,69 +1,84 @@
 {% extends "base_editor.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}
-Tableau de bord
-{% endblock %}
+{% block page-title %}{% trans "Tableau de bord" %}{% endblock %}
 
 {% block content-main %}
+<!-- User info -->
 <div class="col-sm-6 col-xs-12">
-  <section class="card card-issue_submissions">
-    <h2>Votre compte</h2>
-    <h3>Prénom Nom</h3>
-    <ul>
-      <li>Transmission des fichiers de production</li>
-      <li><a href="mailto:">courriel@courriel.ca</a></li>
-    </ul>
-    <h3><a href="#" target="_blank">Nom de la revue</a></h3>
-    <ul>
-      <li>Revue savante</li>
-      <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
-      <li>Éditeur&nbsp;: Nom de l'éditeur</li>
-      <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
-    </ul>
-    <h3><a href="#" target="_blank">Nom de la revue</a></h3>
-    <ul>
-      <li>Revue culturelle</li>
-      <li>Direction / rédaction&nbsp;: Prénom Nom, <a href="mailto:">courriel@courriel.ca</a></li>
-      <li>Éditeur&nbsp;: Nom de l'éditeur</li>
-      <li>ISSN&nbsp;: 1234-1234 (imprimé) 1234-1234 (numérique)</li>
-    </ul>
+  <section class="card card-user">
+    <h2><span class="fa fa-user"></span> {% trans "Votre profil" %}</h2>
+    <p>
+      <span class="card-label">{% trans "Prénom et nom" %}</span>
+      <span class="card-value">{{ user.first_name}} {{ user.last_name }}</span>
+    </p>
+    <p>
+      <span class="card-label">{% trans "Nom d'utilisateur" %}</span>
+      <span class="card-value">{{ user }}</span>
+    </p>
+    <p>
+      <span class="card-label">{% trans "Courriel" %}</span>
+      <span class="card-value"><a href="mailto:{{ user.email }}">{{ user.email }}</a></span>
+    </p>
+    <p>
+      <small>
+        {% blocktrans %}
+        Afin de modifier votre profil, veuillez nous contacter à l'adresse suivante&nbsp;:
+        <a href="mailto:edition@erudit.org?subject=Compte%20Espace%20éditeur%20(utilisateur%20:%20{{ user }})">edition@erudit.org</a>
+        {% endblocktrans %}
+      </small>
+    </p>
   </section>
 </div>
+<!-- Issue submission history -->
 <div class="col-sm-6 col-xs-12">
   <section class="card card-issue_submissions">
-    <h2>Historique du dépôt de numéros</h2>
+    <h2>
+      <span class="fa fa-folder-open-o"></span>
+      {% trans "Historique des dépôts de numéros"  %}
+      {% url 'editor:issues' as all_issues %}
+      {% blocktrans %}
+      <small class="full-page">(<a href="{{ all_issues }}">Voir l'historique complet</a>)</small>
+      {% endblocktrans %}
+    </h2>
     <table>
       <thead>
         <tr>
-          <th>Revue</th>
-          <th>Date</th>
-          <th>Année, volumaison, numéro</th>
-          <th>Statut</th>
+          <th>{% trans "Date" %}</th>
+          <th>{% trans "Revue et numéro" %}</th>
+          <th>{% trans "État" %}</th>
         </tr>
       </thead>
       <tbody>
         {% for issue_submission in object_list|dictsortreversed:"date_created"|slice:":3" %}
         <tr>
-          {% ifchanged %}
-          <td>{{ issue_submission.journal }}</td>
-          {% else %}
-          <td></td>
-          {% endifchanged %}
-          <td>{{ issue_submission.date_created|date:"c" }}</td>
-          <td><a href="{% url 'editor:update' issue_submission.pk %}">{{ issue_submission.year }}, volume {{ issue_submission.volume }}, numéro {{ issue_submission.number }}</a></td>
-          <td><span class="glyphicon glyphicon-ok"></span></td>
+          <td>
+            {{ issue_submission.date_created|date:"c" }}
+          </td>
+          <td>
+            <a href="{% url 'editor:update' issue_submission.pk %}">
+              {{ issue_submission.journal }}. {{ issue_submission.year }}, {% trans "volume" %} {{ issue_submission.volume }}, {% trans "numéro" %} {{ issue_submission.number }}
+            </a>
+          </td>
+          <td>
+            {% if issue_submission.status == 'D' %}
+            {% trans "Brouillon" %}
+            {% elif issue_submission.status == 'S' %}
+            {% trans "Soumis" %}
+            {% elif issue_submission.status == 'V' %}
+            {% trans "Validé" %}
+            {% endif %}
+          </td>
         </tr>
         {% empty %}
         <tr>
-          <td colspan="3" class="text-center">Il n'y a aucun fichier dans votre historique.</td>
+          <td colspan="3" class="text-center">{% trans "Il n'y a aucun fichier dans votre historique." %}</td>
         </tr>
         {% endfor %}
       </tbody>
-      <caption>Trois derniers fichiers déposés (<a href="{% url 'editor:issues' %}">Voir l'historique complet</a>)</caption>
     </table>
     <div class="text-right more-info">
-      <button class="btn btn-primary btn-add"><a href="{% url 'editor:add' %}"><span class="icon glyphicon glyphicon-plus"></span></a></button>
+      <a href="{% url 'editor:add' %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
     </div>
   </section>
 </div>
