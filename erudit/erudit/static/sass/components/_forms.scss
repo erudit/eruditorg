@@ -317,12 +317,15 @@ input[type="submit"],
   background-color: $colour-primary;
   letter-spacing: 1px;
   text-transform: uppercase;
-  &:hover {
-    background-color: $colour-primary*0.75;
-    color: white;
-    border: none;
+  a {
+    color: #FFF;
+    &:hover, &:active, &:focus, &:active:focus {
+      background-color: $colour-primary*0.75;
+      color: white;
+      border: none;
+    }
   }
-  &:active, &:focus, &:active:focus {
+  &:hover, &:active, &:focus, &:active:focus {
     background-color: $colour-primary*0.75;
     color: white;
     border: none;
@@ -330,7 +333,6 @@ input[type="submit"],
 }
 button[type="reset"],
 input[type="reset"] {
-  // padding: 1em;
   border: none;
   text-decoration: underline;
   color: $colour-dark-grey;
@@ -340,19 +342,6 @@ input[type="reset"] {
     background: none;
     border: none;
     text-decoration: none;
-  }
-}
-
-.btn-add {
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
-  padding: 0;
-  @include border-radius(20px);
-  .icon {
-    line-height: 40px;
-    text-align: center;
-    color: #FFF;
   }
 }
 

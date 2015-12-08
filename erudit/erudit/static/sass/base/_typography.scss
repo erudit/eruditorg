@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
   font-size: 16px;
-  color: #161919;
+  color: $colour-text;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -43,11 +43,11 @@ small {
 }
 
 a {
-  color: $colour-primary;
+  color: $colour-primary-light;
   @include transition(all, 200ms, ease);
   &:hover, &:focus, &:active, &:active:focus {
-    text-decoration: underline;
-    color: $colour-primary * 0.75;
+    text-decoration: none;
+    color: $colour-primary;
   }
 }
 
