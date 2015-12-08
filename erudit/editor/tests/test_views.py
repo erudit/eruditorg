@@ -4,7 +4,9 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 
+from erudit.models import Journal
 from editor.models import IssueSubmission
+from editor.views import IssueSubmissionCreate
 
 from editor.tests.base import BaseEditorTestCase
 
@@ -117,4 +119,51 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         self.assertTrue(
             root.cssselect('#id_submission_file'),
             "The rendered upload template should contain an id_submission_file input"  # noqa
+        )
+
+    def test_user_is_only_allowed_to_upload_to_his_journals(self):
+        """ Test list of journals in the form
+
+        Make sure the list contains all the journals the user upload to
+        and only that """
+        request = self.factory.get(reverse('editor:add'))
+        request.user = self.user
+        form = IssueSubmissionCreate(request=request).get_form()
+
+        user_journals = set(
+            Journal.objects.get_journals_of_user(
+                self.user,
+                file_upload_allowed=True
+            )
+        )
+
+        form_journals = set(
+            form.fields['journal'].queryset
+        )
+
+        self.assertEquals(
+            user_journals,
+            form_journals
+        )
+
+    def test_user_can_only_select_publisher_contacts(self):
+        """ Test list of contacts
+
+        Make sure the list contains all the contacts of the publisher
+        and only that """
+        request = self.factory.get(reverse('editor:add'))
+        request.user = self.user
+        form = IssueSubmissionCreate(request=request).get_form()
+
+        user_contacts = set(
+            u for p in self.user.publishers.all() for u in p.members.all()
+        )
+
+        form_contacts = set(
+            form.fields['contact'].queryset
+        )
+
+        self.assertEquals(
+            user_contacts,
+            form_contacts
         )
