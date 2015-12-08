@@ -4,11 +4,11 @@
 {% block page-title %}{% trans "Dépôt de numéros" %}{% endblock %}
 
 {% block breadcrumbs %}
-    {{ block.super }} / {% trans "Dépôt de numéros" %}
+  {{ block.super }} / {% trans "Dépôt de numéros" %}
 {% endblock %}
 
 {% block content-main %}
-<div class="col-sm-6 col-sm-offset-3 col-xs-12">
+<div class="col-md-6 col-md-offset-3 col-xs-12">
   <section class="card card-issue_submissions">
     <h2>{% trans "Historique des dépôts de numéros"  %}</h2>
     <table>
@@ -27,9 +27,7 @@
             {{ issue_submission.date_created|date:"c" }}
           </td>
           <td>
-          {% ifchanged %}
           {{ issue_submission.journal }}
-          {% endifchanged %}
           </td>
           <td>
             <a href="{% url 'editor:update' issue_submission.pk %}">
