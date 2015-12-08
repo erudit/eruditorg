@@ -317,7 +317,8 @@ class Publisher(Edinum, models.Model):
     """ Name of the publisher """
 
     members = models.ManyToManyField(
-        User
+        User,
+        related_name="publishers"
     )
     """ Users accounts associated to this this publisher """
 
