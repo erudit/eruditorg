@@ -175,6 +175,20 @@ class Library(models.Model):
     name = models.CharField(max_length=255)
 
 
+class JournalManager(models.Manager):
+
+    def get_journals_of_user(self, user, file_upload_allowed=False):
+        """ Return the journals associated to this user
+
+        The journals of the user are journals of all the publishers the
+        user is associated with.
+
+        :param file_upload_allowed: limit to the journals for which the user
+            is allowed to upload files
+        """
+        return self.filter(publisher=user.publishers.all())
+
+
 class Journal(Named, Edinum):
     """ Revue """
 
@@ -279,6 +293,8 @@ class Journal(Named, Edinum):
     def has_active_contract(self):
         pass
 
+    objects = JournalManager()
+
     class Meta:
         verbose_name = "Revue"
         verbose_name_plural = "Revues"
@@ -317,17 +333,18 @@ class Publisher(Edinum, models.Model):
     """ Name of the publisher """
 
     members = models.ManyToManyField(
-        User
+        User,
+        related_name="publishers"
     )
     """ Users accounts associated to this this publisher """
-
-    def __str__(self):
-        return self.name
 
     class Meta:
         verbose_name = "Éditeur"
         verbose_name_plural = "Éditeurs"
         ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 # comments
 

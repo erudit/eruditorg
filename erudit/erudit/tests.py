@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 
 from erudit.models import Journal, Publisher
@@ -7,6 +7,8 @@ from erudit.models import Journal, Publisher
 class BaseEruditTestCase(TestCase):
 
     def setUp(self):
+
+        self.factory = RequestFactory()
 
         self.user = User.objects.create_user(
             username='david',
@@ -48,4 +50,16 @@ class BaseEruditTestCase(TestCase):
             code='test',
             name='Autre revue de test',
             publisher=self.other_publisher,
+        )
+
+    def test_get_journals_of_user(self):
+
+        user_journals = Journal.objects.get_journals_of_user(self.user)
+
+        self.assertTrue(
+            self.journal in user_journals
+        )
+
+        self.assertTrue(
+            len(user_journals) == 1
         )

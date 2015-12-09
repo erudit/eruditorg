@@ -3,6 +3,7 @@ from django.template.context_processors import csrf
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -49,8 +50,19 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
 
     def get_form(self, form_class):
         form = super().get_form(form_class)
-        form.fields['journal'].queryset = Journal.objects.all()
+
+        form.fields['journal'].queryset = Journal.objects.get_journals_of_user(
+            self.request.user,
+            file_upload_allowed=True
+        )
+
         form.fields['journal'].initial = form.fields['journal'].queryset.first()
+
+        publisher_members = User.objects.filter(
+            publishers=self.request.user.publishers.all()
+        ).distinct()
+
+        form.fields['contact'].queryset = publisher_members
         form.fields['contact'].initial = form.fields['contact'].queryset.first()
         return form
 
