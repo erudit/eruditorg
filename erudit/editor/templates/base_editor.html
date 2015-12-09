@@ -7,14 +7,24 @@
     <div class="container-fluid">
       <div class="row">
         <div class="navbar-logo">
-          <a href="{% url 'editor:dashboard' %}"><img src="{% static 'img/logo-erudit-blanc.png' %}"/></a>
+          <a href="{% url 'editor:dashboard' %}">
+            <img src="{% static 'img/logo-erudit-blanc.png' %}"/>
+          </a>
         </div>
         <div class="navbar-user dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown"><span class="profile-pic glyphicon glyphicon-user"></span> {{ user.first_name }} <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <span class="profile-pic glyphicon glyphicon-user"></span>
+            {% if user.first_name %}
+            {{ user.first_name }}
+            {% else %}
+            {{ user }}
+            {% endif %}
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu dropdown-menu-right">
-            <li><a href="#" class="disabled">Aide</a></li>
-            <li><a href="#" class="disabled">Paramètres</a></li>
-            <li><a href="{% url 'logout' %}?next={% url 'editor:dashboard' %}">Déconnexion</a></li>
+            <li><a href="#" class="disabled">{% trans "Aide" %}</a></li>
+            <li><a href="#" class="disabled">{% trans "Paramètres" %}</a></li>
+            <li><a href="{% url 'logout' %}?next={% url 'editor:dashboard' %}">{% trans "Déconnexion" %}</a></li>
           </ul>
         </div>
       </div>
@@ -28,15 +38,44 @@
   <ul>
     <li>
       <a href="{% url 'editor:issues' %}" {% url 'editor:issues' as issues %}{% if request.get_full_path == issues %}class="active"{% endif %}>
-        <span class="icon fa fa-folder-open-o"></span> <span class="sidenav-label">Dépôt de numéros</span>
+        <span class="icon fa fa-folder-open-o"></span> <span class="sidenav-label">{% trans "Dépôt de numéros" %}</span>
       </a>
     </li>
-    <li><a href="#" class="disabled"><span class="icon icon-epub"></span> <span class="sidenav-label">Dépôt EPUB</span></a></li>
-    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-signal"></span> <span class="sidenav-label">Statistiques</span></a></li>
-    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-usd"></span> <span class="sidenav-label">Factures et état de compte</span></a></li>
-    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-send"></span> <span class="sidenav-label">Soumission d'articles</span></a></li>
-    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-comment"></span> <span class="sidenav-label">Communications</span></a></li>
-    <li><a href="#" class="disabled"><span class="icon glyphicon glyphicon-question-sign"></span> <span class="sidenav-label">Guides et documentation</span></a></li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon icon-epub"></span> <span class="sidenav-label">{% trans "Dépôt EPUB" %}</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon glyphicon glyphicon-signal"></span> <span class="sidenav-label">{% trans "Statistiques" %}</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon glyphicon glyphicon-usd"></span> <span class="sidenav-label">{% trans "Factures et état de compte" %}</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon glyphicon glyphicon-send"></span> <span class="sidenav-label">{% trans "Gestion des manuscrits" %}</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon glyphicon glyphicon-comment"></span> <span class="sidenav-label">{% trans "Communications" %}</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon glyphicon glyphicon-question-sign"></span> <span class="sidenav-label">{% trans "Guides et documentation" %}</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="disabled">
+        <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Gestion des utilisateurs" %}</span>
+      </a>
+    </li>
   </ul>
 </nav>
 {% endblock %}
@@ -45,7 +84,7 @@
 <main class="main">
   <header>
     <h1>
-      <span class="user-space">{% block zone-title %}Espace éditeurs{% endblock %}</span> {% block page-title %}{% endblock %}
+      <span class="user-space">{% block zone-title %}{% trans "Espace éditeurs" %}{% endblock %}</span> {% block page-title %}{% endblock %}
     </h1>
   </header>
   <div class="container-fluid">
@@ -53,7 +92,7 @@
       {% block breadcrumbs %}
       {% url 'editor:dashboard' as dashboard %}
       {% if request.get_full_path != dashboard %}
-      <a href="{% url 'editor:dashboard' %}">Tableau de bord</a>
+      <a href="{% url 'editor:dashboard' %}">{% trans "Tableau de bord" %}</a>
       {% endif %}
       {% endblock %}
     </div>
