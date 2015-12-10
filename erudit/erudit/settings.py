@@ -121,6 +121,7 @@ EMAIL_BACKEND = 'post_office.EmailBackend'
 EMAIL_HOST = "mail"
 EMAIL_PORT = '25'
 RENEWAL_FROM_EMAIL = 'admin@localhost'
+DEFAULT_FROM_EMAIL = 'admin@localhost'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
 
