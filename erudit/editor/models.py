@@ -31,13 +31,14 @@ class IssueSubmission(models.Model):
     )
 
     year = models.CharField(
-        max_length=4,
+        max_length=9,
         verbose_name=_("Année")
     )
 
     volume = models.CharField(
         max_length=100,
-        verbose_name=_("Volume")
+        verbose_name=_("Volume"),
+        blank=True, null=True
     )
 
     number = models.CharField(
