@@ -1,8 +1,13 @@
 from django.contrib import admin
 
 from erudit.models import (
-    Library, Journal, JournalComment, Issue, Publisher,
-    Organisation, Person
+    Person,
+    Organisation,
+    Library,
+    Journal,
+    JournalType,
+    Issue,
+    Publisher,
 )
 
 
@@ -28,29 +33,6 @@ class CommentAdmin(admin.ModelAdmin):
         obj.save()
 
 
-class JournalCommentInline(admin.TabularInline):
-    model = JournalComment
-
-    readonly_fields = ['author', 'date']
-
-    fieldsets = [
-        (None, {
-            'fields': (
-                ('date', 'author',),
-            )
-        }),
-        (None, {
-            'fields': (
-                'comment',
-            )
-        }),
-    ]
-
-#    def save_model(self, request, obj, form, change):
-#        obj.author = request.user
-#        obj.save()
-
-
 class JournalAdmin(admin.ModelAdmin):
 
     search_fields = [
@@ -70,10 +52,6 @@ class JournalAdmin(admin.ModelAdmin):
     ]
 
     list_editable = ['type', 'active', ]
-
-    inlines = [
-        JournalCommentInline,
-    ]
 
     fieldsets = [
         ('Identification', {
@@ -123,21 +101,10 @@ class JournalAdmin(admin.ModelAdmin):
         formset.save_m2m()
 
 
-class JournalCommentAdmin(CommentAdmin):
-
-    fieldsets = [
-        (None, {
-            'fields': (
-                'journal',
-            )
-        }),
-    ]
-    fieldsets.extend(CommentAdmin.fieldsets)
-
+admin.site.register(Person)
+admin.site.register(Organisation)
 admin.site.register(Library)
 admin.site.register(Journal, JournalAdmin)
-# admin.site.register(JournalComment, JournalCommentAdmin)
+admin.site.register(JournalType)
 admin.site.register(Issue)
 admin.site.register(Publisher)
-admin.site.register(Organisation)
-admin.site.register(Person)
