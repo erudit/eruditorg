@@ -14,6 +14,7 @@
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>{% trans "Date" %}</th>
           <th>{% trans "Revue" %}</th>
           <th>{% trans "Année, volumaison, numéro" %}</th>
@@ -23,6 +24,8 @@
       <tbody>
         {% for issue_submission in object_list|dictsortreversed:"date_created" %}
         <tr>
+          <td class="table-ordered_row">
+          </td>
           <td>
             {{ issue_submission.date_created|date:"c" }}
           </td>
