@@ -1,0 +1,57 @@
+.login-page {
+  padding-left: 0;
+  label {
+    font-size: 0.85em;
+    &:not(.required):after {
+      content: '';
+    }
+  }
+  input {
+    border: 1px solid $colour-pale-grey;
+  }
+  small {
+    color: $colour-pale-grey;
+    font-size: 0.85em;
+  }
+  .erudit-logo {
+    margin: 25px 0 30px 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $colour-faint-grey;
+    img {
+      width: 35%;
+      margin: auto;
+    }
+  }
+  .card {
+    padding: 10px;
+    margin-top: 100px;
+    border: 0;
+  }
+  .card-footer {
+    text-align: center;
+  }
+}
+.reset-password-page {
+  .erudit-logo {
+    margin: 15px 0;
+    padding-bottom: 15px;
+    img {
+      width: 20%;
+    }
+  }
+  .card {
+    > h1 {
+      text-align: center;
+      font-size: 1em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: $colour-primary;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #E5E5E5;
+    }
+    p {
+      font-size: 0.85em;
+    }
+  }
+}

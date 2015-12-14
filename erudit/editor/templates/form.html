@@ -1,0 +1,63 @@
+{% extends "base_editor.html" %}
+{% load i18n staticfiles %}
+
+{% block page-title %}
+Ajout d'un numéro
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }} / <a href="{% url 'editor:issues' %}">Dépôt de numéros</a> / Ajout d'un numéro
+{% endblock %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content-main %}
+<div class="col-md-6 col-md-offset-3 col-xs-12">
+  <section class="card card-upload_form">
+    <h2><span class="fa fa-folder-open-o"></span> Déposer des fichiers de production</h2>
+    <form class="form-vertical" method="post">
+      {% csrf_token %}
+      {% if form.errors %}
+      <div class="col-xs-12">
+        <p class="alert alert-warning">Veuillez remplir les champs obligatoires.</p>
+      </div>
+      {% endif %}
+      <div class="form-group col-xs-12 {% if form.journal.errors %}error{% endif %}">
+        {{ form.journal.label_tag }}
+        {{ form.journal }}
+      </div>
+      <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
+        {{ form.year.label_tag }}
+        {{ form.year }}
+      </div>
+      <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
+        {{ form.volume.label_tag }}
+        {{ form.volume }}
+      </div>
+      <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
+        {{ form.number.label_tag }}
+        {{ form.number }}
+      </div>
+      <div class="form-group col-xs-12">
+        {{ form.contact.label_tag }}
+        {{ form.contact }}
+      </div>
+      <div class="form-group col-xs-12">
+        {{ form.comment.label_tag }}
+        {{ form.comment }}
+      </div>
+      <div class="form-group col-xs-12 {% if form.submission_file.errors %}error{% endif %}">
+        {{ form.submission_file.label_tag }}
+        {{ form.submission_file }}
+      </div>
+      <div class="form-group text-right">
+        <button type="reset" class="btn" id="submit-id-reset">Annuler</button>
+        <button type="submit" class="btn btn-primary" id="submit-id-submit">Enregistrer</button>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

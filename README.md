@@ -1,4 +1,5 @@
-# Installation
+[![Build Status](https://secure.travis-ci.org/erudit/zenon.svg?branch=master)](https://secure.travis-ci.org/erudit/zenon?branch=master)
+[![Coverage](https://codecov.io/github/erudit/zenon/coverage.svg?branch=master)](https://codecov.io/github/erudit/zenon?branch=master)# Installation
 
 ## System dependencies
 
@@ -6,6 +7,9 @@ On Ubuntu 14.04 :
 
   python 3.4
   libx11-dev
+=======
+* libxml-devel
+* libxslt-devel
 
 ## Local setup
 
@@ -82,3 +86,7 @@ You can run the tests with:
 ```
 $ tox
 ```
+
+# Developing the UI
+
+All styling is done in the `sass` directory, which is based on the [7-1 architecture pattern](http://sass-guidelin.es/#architecture). Each subdirectory contains a `README.md` with further information regarding its proper use.

@@ -1,0 +1,37 @@
+main, .main {
+  z-index: 5;
+  padding-left: 15%;
+  padding-bottom: 150px;
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  > header {
+    width: 100%;
+    background: #FFF;
+    height: 175px;
+    padding: 0 20px;
+    display: table;
+    background-image: url('../img/photos/library.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    h1 {
+      font-size: 30px;
+      display: table-cell;
+      vertical-align: middle;
+      color: #FFF;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .user-space {
+      font-size: 15px;
+      text-transform: uppercase;
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  main, .main {
+    padding-left: 45px;
+  }
+}

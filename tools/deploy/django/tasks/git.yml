@@ -11,14 +11,14 @@
     - update
     - provision
 
-- name: Give permissions to user and apache
+- name: give ownership to project user
   sudo: true
-  shell: chown -R {{ project_user }}:www-data {{ project_root }} -R
+  file:
+    path: "{{ project_root }}"
+    owner: "{{ project_user }}"
+    group: www-data
+    recurse: true
   tags:
-    - base
-    - user
-    - provision
+    - testperms
     - update
-    - app
-  notify:
-    - reload the project
+    - provision

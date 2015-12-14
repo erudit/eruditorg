@@ -1,0 +1,41 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+$font-size: 18px !default;
+
+/// Headings font family
+/// @type List
+// $font-face-headings: 'DINRegular', sans-serif;
+
+/// Content font family
+/// @type List
+$font-face-body: 'Source Sans Pro', sans-serif;
+
+/// Code (monospace) font family
+/// @type List
+$font-face-code: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
+
+// palette - greys
+// @type Color
+$colour-faint-grey: #E5E5E5 !default;
+$colour-pale-grey: $colour-faint-grey * 0.75 !default;
+$colour-medium-grey: $colour-faint-grey * 0.5 !default;
+$colour-dark-grey: $colour-faint-grey * 0.25 !default;
+
+// palette - colours
+// @type Color
+$colour-primary: #AF2329 !default; // main brand colour
+$colour-primary-light: #EA363E !default;
+$colour-accent: #4CCBDC !default;
+$colour-warning: #E8304B !default;
+$colour-success: #36C957 !default;
+$colour-text: #212121;
+
+// Container's maximum width
+// Below that is 100%
+// @type Length
+$max-width: 1200px !default;
+
+// Navbar height
+$navbar-height: 70px;

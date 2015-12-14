@@ -14,8 +14,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 DEBUG = True
+COMPRESS_ENABLED = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = BASE_DIR + '/static'
+MEDIA_ROOT = BASE_DIR + '/media'
+UPLOAD_ROOT = MEDIA_ROOT + '/uploads'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -27,18 +31,42 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # Erudit apps
+    'erudit',
+    'editor',
+    'subscription',
+    'post_office',
     'grappelli',
+    # Other apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'erudit',
-    'subscription',
-    'post_office'
+    'compressor',
+    'crispy_forms',
+    'django_select2',
+    'datetimewidget',
+    'plupload'
 )
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-sass', 'sassc {infile} {outfile}'),
+)
+
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,12 +90,15 @@ TEMPLATES = [
                 "django.core.context_processors.request",
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+LOGIN_URL = '/login/'
 
 # Database configuration
 
@@ -76,7 +107,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'HOST': 'db',
+        'PASSWORD': '',
+        'HOST': 'localhost',
     }
 }
 
@@ -92,13 +124,12 @@ RENEWAL_FROM_EMAIL = 'admin@localhost'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'fr-ca'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
@@ -111,5 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
-from .settings_env import *  # noqa
+try:
+    from .settings_env import *  # noqa
+except ImportError:
+    pass
