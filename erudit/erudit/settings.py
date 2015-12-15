@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'erudit',
     'editor',
     'subscription',
+    'individual_subscription',
     'grappelli',
     'post_office',
     # Other apps
