@@ -1,76 +1,106 @@
 [![Build Status](https://secure.travis-ci.org/erudit/zenon.svg?branch=master)](https://secure.travis-ci.org/erudit/zenon?branch=master)
 [![Coverage](https://codecov.io/github/erudit/zenon/coverage.svg?branch=master)](https://codecov.io/github/erudit/zenon?branch=master)
-# Installation
 
-## System dependencies
+# Installing on Ubuntu 14.04
 
-On Ubuntu 14.04 :
-
-  python 3.4
-  libx11-dev
-=======
-* libxml-devel
-* libxslt-devel
-
-## Local setup
-
-On Ubuntu 14.04
-
-1. Install the latest docker
-
-  To install the latest docker-engine, follow the steps documented on the docker website:
-
-  https://docs.docker.com/installation/ubuntulinux/
-
-2. Add your user to the docker group
+## Make sure git is installed:
 
   ```
-  $ sudo usermod -a -G docker $USER
+  $ sudo apt-get install git
   ```
 
-3. Install docker-compose
+## Clone the repository:
 
   ```
-  # curl -L https://github.com/docker/compose/releases/download/1.5.0rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-  # chmod +x /usr/local/bin/docker-compose
+  $ git clone https://github.com/erudit/zenon.git
   ```
 
-  Ref: https://docs.docker.com/compose/install/
+## Install the system dependencies:
 
-4. Clone the git repository
+```
+$ sudo apt-get install -y python3.4-venv python3-dev postgresql postgresql-server-dev-all libxml2-dev libxslt1-dev zlib1g-dev python3-pip
+```
 
-  <pre>
-  $ git clone https://github.com/erudit/zenon
-  </pre>
+## Setup the virtualenv
 
-5. Create a 'settings_env.py' file
+Create the virtualenv:
 
-  The settings_env.py file overrides the general settings with environment specific settings.The settings.py contains all the required settings to setup a local environment.
+```
+$ pyvenv-3.4 env
+```
 
-  <pre>
-  $ touch erudit/erudit/settings_env.py
-  </pre>
+Activate the virtualenv:
 
-6. Build the images
+```
+$ . env/bin/activate
+```
 
-  At this point, you have everything necessary to build
+Install the project dependencies:
 
-  ```
-  $ docker-compose up
-  ```
+```
+$ pip install -r requirements.txt
+```
 
-7. Apply the migrations
+## Database
 
-  ```
-  $ docker-compose run python erudit/manage.py migrate auth
-  $ docker-compose run python erudit/manage.py migrate
-  ```
+First, create the database:
 
-8. Create a superuser
+```
+$ sudo su - postgres
+$ createdb zenon
+$ logout
+```
 
-  ```
-  $ docker-compose run python erudit/manage.py createsuperuser
-  ```
+### Using the default configuration
+
+The default configuration connects to database `zenon` with user `postgres` and no password.
+If you do not want this, and would rather use a password, please follow the [postgresql documentation](http://www.postgresql.org/docs/8.0/static/sql-createuser.html) on how to create a user and update the `settings.py` file accordingly.
+
+Allow local connections over TCP/IP.
+
+Edit the `pg_hba.conf` file:
+
+```
+$ sudo vim /etc/postgresql/9.3/main/pg_hba.conf
+```
+
+And replace the following line:
+
+```
+host    all             all             127.0.0.1/32            md5
+```
+
+With:
+
+```
+host    all             all             127.0.0.1/32            trust
+```
+
+Reload the postgresql configuration:
+
+```
+$ sudo /etc/init.d postgresql reload
+```
+
+## Django
+
+Run the migrations:
+
+```
+$ python erudit/manage.py migrate
+```
+
+Create a superuser:
+
+```
+$ python erudit/manage.py createsuperuser
+```
+
+You can now run the development server
+
+```
+$ python erudit/manage.py runserver
+```
 
 # Documentation
 
@@ -89,14 +119,6 @@ You will then be able to build the docoumentation using the `Makefile` in the `d
   $ make html
   ```
 
-# Deploying updates
-
-```
-$ ansible-playbook playbook.yml -i hosts -t update -l local --ask-vault-pass
-```
-
-Where `local` is the the target environment.
-
 # Running the tests
 
 You can run the tests with:
@@ -104,6 +126,10 @@ You can run the tests with:
 ```
 $ tox
 ```
+
+# Contributing patches
+
+Please refer to CONTRIBUTING.md for contribution guidelines
 
 # Developing the UI
 

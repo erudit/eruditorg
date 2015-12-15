@@ -52,6 +52,15 @@ INSTALLED_APPS = (
 
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'zenon',
+        'USER': 'postgres',
+        'HOST': 'localhost',
+    },
+}
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
