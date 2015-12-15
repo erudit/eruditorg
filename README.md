@@ -1,5 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/erudit/zenon.svg?branch=master)](https://secure.travis-ci.org/erudit/zenon?branch=master)
-[![Coverage](https://codecov.io/github/erudit/zenon/coverage.svg?branch=master)](https://codecov.io/github/erudit/zenon?branch=master)# Installation
+[![Coverage](https://codecov.io/github/erudit/zenon/coverage.svg?branch=master)](https://codecov.io/github/erudit/zenon?branch=master)
+# Installation
 
 ## System dependencies
 
