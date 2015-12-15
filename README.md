@@ -72,6 +72,23 @@ On Ubuntu 14.04
   $ docker-compose run python erudit/manage.py createsuperuser
   ```
 
+# Documentation
+
+The project's documentation is built with [Sphinx](http://www.sphinx-doc.org/)
+
+Building the documentation is optional. For this reason, `sphinx` is not listed in requirements.txt
+If you wish to build the documentation, you must first install sphinx in your virtualenv.
+
+  ```
+  $ pip install sphinx
+  ```
+
+You will then be able to build the docoumentation using the `Makefile` in the `docs` directory:
+
+  ```
+  $ make html
+  ```
+
 # Deploying updates
 
 ```
