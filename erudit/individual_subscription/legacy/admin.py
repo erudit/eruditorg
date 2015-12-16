@@ -8,4 +8,7 @@ class VerboseModelAdmin(admin.ModelAdmin):
         super(VerboseModelAdmin, self).__init__(model, admin_site)
 
 for model in apps.get_app_config('individual_subscription').get_models():
-    admin.site.register(model, VerboseModelAdmin)
+    try:
+        admin.site.register(model, VerboseModelAdmin)
+    except:
+        pass
