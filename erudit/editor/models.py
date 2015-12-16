@@ -60,10 +60,8 @@ class IssueSubmission(models.Model):
         blank=True, null=True
     )
 
-    submission_file = models.FileField(
-        upload_to='uploads',
-        verbose_name=_("Fichier"),
-        blank=True, null=True
+    submissions = models.ManyToManyField(
+        'plupload.ResumableFile'
     )
 
     def __str__(self):

@@ -36,7 +36,7 @@ class IssueSubmissionForm(forms.ModelForm):
         """ Disable all the fields of this form """
         fields = (
             'year', 'journal', 'contact', 'number',
-            'volume', 'comment', 'submission_file',
+            'volume', 'comment', 'submissions',
         )
 
         for field in fields:
@@ -67,13 +67,14 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
             'number',
             'contact',
             'comment',
-            'submission_file',
+            'submissions',
         )
 
-    submission_file = PlUploadFormField(
+    submissions = PlUploadFormField(
         path='uploads',
         label=_("Fichier"),
         options={
-            "max_file_size": '5000mb'
+            "max_file_size": '15000mb',
+            "drop_element": 'drop_element'
         }
     )
