@@ -11,7 +11,11 @@ class IndividualAccount(models.Model):
     """
     email = models.CharField(max_length=120, verbose_name=_("Courriel"))
     password = models.CharField(max_length=50, verbose_name=_("Mot de passe"))
-    organization_policy = models.ForeignKey("OrganizationPolicy", verbose_name=_("Accès de l'organisation"),)
+    organization_policy = models.ForeignKey(
+        "OrganizationPolicy",
+        verbose_name=_("Accès de l'organisation"),
+        related_name="accounts"
+    )
     firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
     lastname = models.CharField(max_length=30, verbose_name=_("Nom"))
 
@@ -56,3 +60,7 @@ class OrganizationPolicy(models.Model):
 
     def __str__(self):
         return '{} ({})'.format(self.organization, self.id)
+
+    @property
+    def total_accounts(self):
+        return self.accounts.count()
