@@ -1,4 +1,3 @@
-# from .legacy.legacy_models import *  # NOQA
 from datetime import datetime
 
 from django.db import models
@@ -29,6 +28,9 @@ class IndividualAccount(models.Model):
             self.organization_policy.date_activation = datetime.now()
             self.organization_policy.save()
         super(IndividualAccount, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '{} {} ({})'.format(self.firstname, self.lastname, self.id)
 
 
 class OrganizationPolicy(models.Model):

@@ -1,0 +1,44 @@
+Installation
+============
+
+settings_env.py configuration sample
+------------------------------------
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'zenon',
+        'USER': 'zenon',
+        'HOST': '127.0.0.1',
+    },
+    'legacy_individual_subscription': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'zenon',
+        'USER': 'zenon',
+        'PASSWORD': 'zenon',
+        'HOST': 'localhost',
+    }
+}
+
+DATABASE_ROUTERS = ['individual_subscription.router.LegacyRouter']  # NOQA
+
+
+Use
+===
+
+Migrate abonnes
+---------------
+
+python manage.py individual_subscription import_abonnes
+
+
+Cleanup notes (After migration system)
+======================================
+
+* Remove database handler (settings_env.py)
+
+* Remove database router (settings_env.py)
+
+* Remove legacy folder from individual_subscription app django
+
+* Remove import from individual_subscription/management/commands/individual_subscription.py

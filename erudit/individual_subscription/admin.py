@@ -5,7 +5,14 @@ from .models import IndividualAccount, OrganizationPolicy
 
 
 class IndividualAccountAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('organization_policy', )
+    list_display = (
+        'id',
+        'firstname',
+        'lastname',
+        'email',
+        'organization_policy',
+    )
 
 
 class IndividualAccountInline(admin.TabularInline):
@@ -35,5 +42,3 @@ class OrganizationPolicyAdmin(admin.ModelAdmin):
 
 admin.site.register(IndividualAccount, IndividualAccountAdmin)
 admin.site.register(OrganizationPolicy, OrganizationPolicyAdmin)
-
-# from .legacy import admin as legacy_admin  # NOQA
