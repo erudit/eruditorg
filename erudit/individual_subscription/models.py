@@ -1,4 +1,5 @@
 # from .legacy.legacy_models import *  # NOQA
+from datetime import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -23,12 +24,33 @@ class IndividualAccount(models.Model):
         verbose_name = _("Compte personnel")
         verbose_name_plural = _("Comptes personnels")
 
+    def save(self, *args, **kwargs):
+        if not self.pk and self.organization_policy.date_activation is None:
+            self.organization_policy.date_activation = datetime.now()
+            self.organization_policy.save()
+        super(IndividualAccount, self).save(*args, **kwargs)
+
 
 class OrganizationPolicy(models.Model):
     """
     Entity which describe who and what resource, an organization can access.
     (Wikipedia, AEIQ, Revue).
+    date activation is stamp as soon as the first account is created
     """
+    date_creation = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_("Date de création")
+    )
+    date_modification = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_("Date de modification")
+    )
+    date_activation = models.DateTimeField(
+        blank=True,
+        null=True,
+        verbose_name=_("Date d'activation")
+    )
+
     organization = models.ForeignKey("erudit.Organisation", verbose_name=_("Organisation"),)
 
     comment = models.TextField(verbose_name=_("Commentaire"), blank=True)
