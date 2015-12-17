@@ -7,6 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('subscription', '0021_auto_20151214_1350'),
         ('erudit', '0013_auto_20151214_1350'),
     ]
 
@@ -14,34 +15,36 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IndividualAccount',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('email', models.CharField(verbose_name='Courriel', max_length=120)),
-                ('password', models.CharField(verbose_name='Mot de passe', max_length=50)),
-                ('firstname', models.CharField(verbose_name='Prénom', max_length=30)),
-                ('lastname', models.CharField(verbose_name='Nom', max_length=30)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('email', models.CharField(max_length=120, verbose_name='Courriel')),
+                ('password', models.CharField(max_length=50, verbose_name='Mot de passe')),
+                ('firstname', models.CharField(max_length=30, verbose_name='Prénom')),
+                ('lastname', models.CharField(max_length=30, verbose_name='Nom')),
             ],
             options={
-                'verbose_name': 'Compte personnel',
                 'verbose_name_plural': 'Comptes personnels',
+                'verbose_name': 'Compte personnel',
             },
         ),
         migrations.CreateModel(
-            name='Organization',
+            name='OrganizationPolicy',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('name', models.CharField(verbose_name='Nom', max_length=255)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('comment', models.CharField(max_length=255, verbose_name='Commentaire')),
                 ('max_accounts', models.PositiveSmallIntegerField(verbose_name='Maximum de comptes')),
                 ('access_full', models.BooleanField(verbose_name='Accès à toutes les ressources', default=False)),
-                ('access_journal', models.ManyToManyField(verbose_name='Revue', to='erudit.Journal')),
+                ('access_basket', models.ManyToManyField(verbose_name='Panier', to='subscription.Basket')),
+                ('access_journal', models.ManyToManyField(verbose_name='Revues', to='erudit.Journal')),
+                ('organization', models.ForeignKey(verbose_name='Organisation', to='erudit.Organisation')),
             ],
             options={
-                'verbose_name': 'Organisation',
-                'verbose_name_plural': 'Organisations',
+                'verbose_name_plural': 'Accès des organisations',
+                'verbose_name': "Accès de l'organisation",
             },
         ),
         migrations.AddField(
             model_name='individualaccount',
-            name='organization',
-            field=models.ForeignKey(verbose_name='Organisation', to='individual_subscription.Organization'),
+            name='organization_policy',
+            field=models.ForeignKey(verbose_name="Accès de l'organisation", to='individual_subscription.OrganizationPolicy'),
         ),
     ]

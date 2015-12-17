@@ -11,7 +11,7 @@ class IndividualAccount(models.Model):
     """
     email = models.CharField(max_length=120, verbose_name=_("Courriel"))
     password = models.CharField(max_length=50, verbose_name=_("Mot de passe"))
-    organization = models.ForeignKey("Organization", verbose_name=_("Organisation"),)
+    organization_policy = models.ForeignKey("OrganizationPolicy", verbose_name=_("Accès de l'organisation"),)
     firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
     lastname = models.CharField(max_length=30, verbose_name=_("Nom"))
 
@@ -20,15 +20,14 @@ class IndividualAccount(models.Model):
         verbose_name_plural = _("Comptes personnels")
 
 
-class Organization(models.Model):
+class OrganizationPolicy(models.Model):
     """
-    Entity which deals with member individual accounts :
-    Wikipedia, AEIQ, Revue.
+    Entity which describe who and what resource, an organization can access.
+    (Wikipedia, AEIQ, Revue).
     """
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_("Nom")
-    )
+    organization = models.ForeignKey("erudit.Organisation", verbose_name=_("Organisation"),)
+
+    comment = models.TextField(verbose_name=_("Commentaire"), blank=True)
 
     max_accounts = models.PositiveSmallIntegerField(
         verbose_name=_("Maximum de comptes")
@@ -42,14 +41,18 @@ class Organization(models.Model):
     access_journal = models.ManyToManyField(
         "erudit.journal",
         verbose_name=_("Revues"),
+        blank=True,
     )
 
-    # TODO not yet in erudit models
-    # access_basket = models.ManyToManyField(
-    #    "Basket",
-    #    verbose_name=_("Panier"),
-    # )
+    access_basket = models.ManyToManyField(
+        "subscription.Basket",
+        verbose_name=_("Paniers"),
+        blank=True,
+    )
 
     class Meta:
-        verbose_name = _("Organisation")
-        verbose_name_plural = _("Organisations")
+        verbose_name = _("Accès de l'organisation")
+        verbose_name_plural = _("Accès des organisations")
+
+    def __str__(self):
+        return '{} ({})'.format(self.organization, self.id)
