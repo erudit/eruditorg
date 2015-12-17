@@ -32,6 +32,7 @@ class Abonne(models.Model):
     class Meta:
         managed = False
         db_table = 'abonne'
+        app_label = 'legacy'
 
     def __str__(self):
         return '{} [type: {}] {}'.format(self.abonneid, self.categorieid, self.abonne)
@@ -48,6 +49,7 @@ class Abonneaccess(models.Model):
     class Meta:
         managed = False
         db_table = 'abonneaccess'
+        app_label = 'legacy'
 
 
 class Abonneindividus(models.Model):
@@ -60,6 +62,7 @@ class Abonneindividus(models.Model):
     class Meta:
         managed = False
         db_table = 'abonneindividus'
+        app_label = 'legacy'
 
 
 class Abonnement(models.Model):
@@ -82,6 +85,7 @@ class Abonnement(models.Model):
     class Meta:
         managed = False
         db_table = 'abonnement'
+        app_label = 'legacy'
 
 
 class Abonnepanier(models.Model):
@@ -92,6 +96,7 @@ class Abonnepanier(models.Model):
     class Meta:
         managed = False
         db_table = 'abonnepanier'
+        app_label = 'legacy'
 
 
 class Adresse(models.Model):
@@ -112,6 +117,7 @@ class Adresse(models.Model):
     class Meta:
         managed = False
         db_table = 'adresse'
+        app_label = 'legacy'
 
 
 class Adressesip(models.Model):
@@ -122,6 +128,7 @@ class Adressesip(models.Model):
     class Meta:
         managed = False
         db_table = 'adressesip'
+        app_label = 'legacy'
 
 
 class Categorie(models.Model):
@@ -136,6 +143,7 @@ class Categorie(models.Model):
     class Meta:
         managed = False
         db_table = 'categorie'
+        app_label = 'legacy'
 
     def __str__(self):
         return '{} {}'.format(self.categorieid, self.categorie)
@@ -158,6 +166,7 @@ class Commande(models.Model):
     class Meta:
         managed = False
         db_table = 'commande'
+        app_label = 'legacy'
 
 
 class Consortium(models.Model):
@@ -168,6 +177,7 @@ class Consortium(models.Model):
     class Meta:
         managed = False
         db_table = 'consortium'
+        app_label = 'legacy'
 
 
 class Contact(models.Model):
@@ -190,6 +200,7 @@ class Contact(models.Model):
     class Meta:
         managed = False
         db_table = 'contact'
+        app_label = 'legacy'
 
 
 class Devise(models.Model):
@@ -199,6 +210,7 @@ class Devise(models.Model):
     class Meta:
         managed = False
         db_table = 'devise'
+        app_label = 'legacy'
 
 
 class Editeur(models.Model):
@@ -209,6 +221,7 @@ class Editeur(models.Model):
     class Meta:
         managed = False
         db_table = 'editeur'
+        app_label = 'legacy'
 
 
 class Facture(models.Model):
@@ -239,6 +252,7 @@ class Facture(models.Model):
     class Meta:
         managed = False
         db_table = 'facture'
+        app_label = 'legacy'
 
 
 class Historique(models.Model):
@@ -248,6 +262,7 @@ class Historique(models.Model):
     class Meta:
         managed = False
         db_table = 'historique'
+        app_label = 'legacy'
 
 
 class Historiquerevue(models.Model):
@@ -259,6 +274,7 @@ class Historiquerevue(models.Model):
         managed = False
         db_table = 'historiquerevue'
         unique_together = (('historiqueid', 'revueid'),)
+        app_label = 'legacy'
 
 
 class Individu(models.Model):
@@ -270,6 +286,7 @@ class Individu(models.Model):
     class Meta:
         managed = False
         db_table = 'individu'
+        app_label = 'legacy'
 
 
 class Intip(models.Model):
@@ -282,6 +299,7 @@ class Intip(models.Model):
     class Meta:
         managed = False
         db_table = 'intip'
+        app_label = 'legacy'
 
 
 class Ls(models.Model):
@@ -295,6 +313,7 @@ class Ls(models.Model):
     class Meta:
         managed = False
         db_table = 'ls'
+        app_label = 'legacy'
 
 
 class Paiement(models.Model):
@@ -308,6 +327,7 @@ class Paiement(models.Model):
     class Meta:
         managed = False
         db_table = 'paiement'
+        app_label = 'legacy'
 
 
 class Panier(models.Model):
@@ -319,6 +339,7 @@ class Panier(models.Model):
     class Meta:
         managed = False
         db_table = 'panier'
+        app_label = 'legacy'
 
 
 class Panierrevue(models.Model):
@@ -329,6 +350,7 @@ class Panierrevue(models.Model):
     class Meta:
         managed = False
         db_table = 'panierrevue'
+        app_label = 'legacy'
 
 
 class Pays(models.Model):
@@ -343,6 +365,7 @@ class Pays(models.Model):
     class Meta:
         managed = False
         db_table = 'pays'
+        app_label = 'legacy'
 
 
 class Prixrevue(models.Model):
@@ -357,6 +380,7 @@ class Prixrevue(models.Model):
     class Meta:
         managed = False
         db_table = 'prixrevue'
+        app_label = 'legacy'
 
 
 class Provetetat(models.Model):
@@ -370,6 +394,7 @@ class Provetetat(models.Model):
     class Meta:
         managed = False
         db_table = 'provetetat'
+        app_label = 'legacy'
 
 
 class Rapport2007(models.Model):
@@ -393,6 +418,7 @@ class Rapport2007(models.Model):
     class Meta:
         managed = False
         db_table = 'rapport2007'
+        app_label = 'legacy'
 
 
 class Rapport2008(models.Model):
@@ -418,6 +444,7 @@ class Rapport2008(models.Model):
     class Meta:
         managed = False
         db_table = 'rapport2008'
+        app_label = 'legacy'
 
 
 class Rapport2009(models.Model):
@@ -448,6 +475,7 @@ class Rapport2009(models.Model):
     class Meta:
         managed = False
         db_table = 'rapport2009'
+        app_label = 'legacy'
 
 
 class Rapport2010(models.Model):
@@ -479,6 +507,7 @@ class Rapport2010(models.Model):
     class Meta:
         managed = False
         db_table = 'rapport2010'
+        app_label = 'legacy'
 
 
 class Rapport2011(models.Model):
@@ -510,6 +539,7 @@ class Rapport2011(models.Model):
     class Meta:
         managed = False
         db_table = 'rapport2011'
+        app_label = 'legacy'
 
 
 class Rapportconsolide(models.Model):
@@ -537,6 +567,7 @@ class Rapportconsolide(models.Model):
     class Meta:
         managed = False
         db_table = 'rapportconsolide'
+        app_label = 'legacy'
 
 
 class Rapportjuinseptembre2008(models.Model):
@@ -566,6 +597,7 @@ class Rapportjuinseptembre2008(models.Model):
     class Meta:
         managed = False
         db_table = 'rapportjuinseptembre2008'
+        app_label = 'legacy'
 
 
 class Revenus(models.Model):
@@ -595,6 +627,7 @@ class Revenus(models.Model):
     class Meta:
         managed = False
         db_table = 'revenus'
+        app_label = 'legacy'
 
 
 class Revenus2008(models.Model):
@@ -606,6 +639,7 @@ class Revenus2008(models.Model):
     class Meta:
         managed = False
         db_table = 'revenus2008'
+        app_label = 'legacy'
 
 
 class Revue(models.Model):
@@ -631,6 +665,7 @@ class Revue(models.Model):
     class Meta:
         managed = False
         db_table = 'revue'
+        app_label = 'legacy'
 
     def __str__(self):
         return '{} {}'.format(self.revueid, self.titrerev)
@@ -651,6 +686,7 @@ class Revueabonne(models.Model):
     class Meta:
         managed = False
         db_table = 'revueabonne'
+        app_label = 'legacy'
 
 
 class Revuefiltre(models.Model):
@@ -668,16 +704,18 @@ class Revuefiltre(models.Model):
     class Meta:
         managed = False
         db_table = 'revuefiltre'
+        app_label = 'legacy'
 
 
 class Revueindividus(models.Model):
-    abonneindividusid = models.ForeignKey(Abonneindividus, db_column='abonneIndividusID')  # Field name made lowercase.
-    revueid = models.ForeignKey(Revue, db_column='revueID')  # Field name made lowercase.
+    abonneindividusid = models.ForeignKey('Abonneindividus', db_column='abonneIndividusID')  # Field name made lowercase.
+    revueid = models.ForeignKey('Revue', db_column='revueID')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'revueindividus'
         unique_together = (('abonneindividusid', 'revueid'),)
+        app_label = 'legacy'
 
 
 class Tauxchange(models.Model):
@@ -691,6 +729,7 @@ class Tauxchange(models.Model):
     class Meta:
         managed = False
         db_table = 'tauxchange'
+        app_label = 'legacy'
 
 
 class Tauxtaxe(models.Model):
@@ -702,6 +741,7 @@ class Tauxtaxe(models.Model):
     class Meta:
         managed = False
         db_table = 'tauxtaxe'
+        app_label = 'legacy'
 
 
 class Tauxtaxeequisoft(models.Model):
@@ -713,6 +753,7 @@ class Tauxtaxeequisoft(models.Model):
     class Meta:
         managed = False
         db_table = 'tauxtaxeequisoft'
+        app_label = 'legacy'
 
 
 class Telephone(models.Model):
@@ -724,6 +765,7 @@ class Telephone(models.Model):
     class Meta:
         managed = False
         db_table = 'telephone'
+        app_label = 'legacy'
 
 
 class Typeabonnement(models.Model):
@@ -735,6 +777,7 @@ class Typeabonnement(models.Model):
     class Meta:
         managed = False
         db_table = 'typeabonnement'
+        app_label = 'legacy'
 
 
 class Typeadresse(models.Model):
@@ -745,6 +788,7 @@ class Typeadresse(models.Model):
     class Meta:
         managed = False
         db_table = 'typeadresse'
+        app_label = 'legacy'
 
 
 class Typecontact(models.Model):
@@ -755,6 +799,7 @@ class Typecontact(models.Model):
     class Meta:
         managed = False
         db_table = 'typecontact'
+        app_label = 'legacy'
 
 
 class Typetelephone(models.Model):
@@ -765,6 +810,7 @@ class Typetelephone(models.Model):
     class Meta:
         managed = False
         db_table = 'typetelephone'
+        app_label = 'legacy'
 
 
 class Urlrapportrevenus(models.Model):
@@ -781,6 +827,7 @@ class Urlrapportrevenus(models.Model):
     class Meta:
         managed = False
         db_table = 'urlrapportrevenus'
+        app_label = 'legacy'
 
 
 class Valeurdefaut(models.Model):
@@ -792,3 +839,4 @@ class Valeurdefaut(models.Model):
     class Meta:
         managed = False
         db_table = 'valeurdefaut'
+        app_label = 'legacy'
