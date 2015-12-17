@@ -13,7 +13,14 @@ class IndividualAccountInline(admin.TabularInline):
 
 
 class OrganizationPolicyAdmin(admin.ModelAdmin):
-    list_display = ('organization', 'comment', 'max_accounts', )
+    list_display = (
+        'organization',
+        'comment',
+        'ratio',
+        'date_activation',
+        'date_modification',
+        'date_creation',
+    )
     filter_horizontal = ("access_journal", "access_basket")
     inlines = (IndividualAccountInline, )
     fieldsets = (
@@ -21,6 +28,10 @@ class OrganizationPolicyAdmin(admin.ModelAdmin):
         (_("Droits d'accès"), {'fields': (
             'access_full', 'access_journal', 'access_basket', )}),
     )
+
+    def ratio(self, obj):
+            return "{} / {}".format(obj.total_accounts, obj.max_accounts)
+    ratio.short_description = _("Ratio d'utilisation")
 
 admin.site.register(IndividualAccount, IndividualAccountAdmin)
 admin.site.register(OrganizationPolicy, OrganizationPolicyAdmin)
