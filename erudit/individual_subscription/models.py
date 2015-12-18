@@ -1,5 +1,6 @@
 from datetime import datetime
 import hashlib
+from random import choice
 import base64
 
 from django.conf import settings
@@ -38,12 +39,15 @@ class IndividualAccount(models.Model):
             if not (self.password == old_crypted_password):
                 self.update_password(self.password)
         else:
-            new_password = self.sha1(self.email)[:8]
+            new_password = self.generate_password()
             self.update_password(new_password)
         super(IndividualAccount, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{} {} ({})'.format(self.firstname, self.lastname, self.id)
+
+    def generate_password(self):
+        return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])
 
     def update_password(self, password):
         self.password = self.sha1(password)
