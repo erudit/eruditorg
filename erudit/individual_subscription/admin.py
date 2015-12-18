@@ -15,10 +15,6 @@ class IndividualAccountAdmin(admin.ModelAdmin):
     )
 
 
-class IndividualAccountInline(admin.TabularInline):
-    model = IndividualAccount
-
-
 class OrganizationPolicyAdmin(admin.ModelAdmin):
     list_display = (
         'organization',
@@ -27,11 +23,11 @@ class OrganizationPolicyAdmin(admin.ModelAdmin):
         'date_activation',
         'date_modification',
         'date_creation',
+
     )
     filter_horizontal = ("access_journal", "access_basket")
-    inlines = (IndividualAccountInline, )
     fieldsets = (
-        (None, {'fields': ('organization', 'comment', 'max_accounts')}),
+        (None, {'fields': ('organization', 'comment', 'max_accounts', )}),
         (_("Droits d'accès"), {'fields': (
             'access_full', 'access_journal', 'access_basket', )}),
     )

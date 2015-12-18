@@ -154,6 +154,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
+
 try:
     from .settings_env import *  # noqa
 except ImportError:
