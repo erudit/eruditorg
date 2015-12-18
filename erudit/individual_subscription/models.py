@@ -1,5 +1,8 @@
 from datetime import datetime
+import hashlib
+import base64
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -10,7 +13,7 @@ class IndividualAccount(models.Model):
     to access protected content.
     """
     email = models.CharField(max_length=120, verbose_name=_("Courriel"))
-    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"))
+    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
     organization_policy = models.ForeignKey(
         "OrganizationPolicy",
         verbose_name=_("Accès de l'organisation"),
@@ -24,13 +27,35 @@ class IndividualAccount(models.Model):
         verbose_name_plural = _("Comptes personnels")
 
     def save(self, *args, **kwargs):
+        # Stamp first user created date
         if not self.pk and self.organization_policy.date_activation is None:
             self.organization_policy.date_activation = datetime.now()
             self.organization_policy.save()
+
+        # Password encryption
+        if self.pk:
+            old_crypted_password = IndividualAccount.objects.get(pk=self.pk).password
+            if not (self.password == old_crypted_password):
+                self.update_password(self.password)
+        else:
+            new_password = self.sha1(self.email)[:8]
+            self.update_password(new_password)
         super(IndividualAccount, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{} {} ({})'.format(self.firstname, self.lastname, self.id)
+
+    def update_password(self, password):
+        self.password = self.sha1(password)
+        # TODO mail to user te new password
+
+    def sha1(self, msg, salt=None):
+        "Crypt function from legacy system"
+        if salt is None:
+            salt = settings.INDIVIDUAL_SUBSCRIPTION_SALT
+        to_sha = msg.encode('utf-8') + salt.encode('utf-8')
+        hashy = hashlib.sha1(to_sha).digest()
+        return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
 
 
 class OrganizationPolicy(models.Model):
