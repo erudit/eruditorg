@@ -7,6 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('plupload', '__first__'),
         ('editor', '0006_issuesubmission_status'),
     ]
 
