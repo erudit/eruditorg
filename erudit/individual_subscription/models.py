@@ -1,9 +1,9 @@
-from datetime import datetime
 import hashlib
 from random import choice
 import base64
 
 from django.conf import settings
+from django.utils import timezone
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -30,7 +30,7 @@ class IndividualAccount(models.Model):
     def save(self, *args, **kwargs):
         # Stamp first user created date
         if not self.pk and self.organization_policy.date_activation is None:
-            self.organization_policy.date_activation = datetime.now()
+            self.organization_policy.date_activation = timezone.now()
             self.organization_policy.save()
 
         # Password encryption
@@ -69,14 +69,19 @@ class OrganizationPolicy(models.Model):
     date activation is stamp as soon as the first account is created
     """
     date_creation = models.DateTimeField(
-        auto_now_add=True,
+        editable=False,
+        null=True,
+        default=timezone.now,
         verbose_name=_("Date de création")
     )
     date_modification = models.DateTimeField(
-        auto_now=True,
+        editable=False,
+        null=True,
+        default=timezone.now,
         verbose_name=_("Date de modification")
     )
     date_activation = models.DateTimeField(
+        editable=False,
         blank=True,
         null=True,
         verbose_name=_("Date d'activation")
@@ -111,9 +116,24 @@ class OrganizationPolicy(models.Model):
         verbose_name = _("Accès de l'organisation")
         verbose_name_plural = _("Accès des organisations")
 
-    def __str__(self):
-        return '{} ({})'.format(self.organization, self.id)
-
     @property
     def total_accounts(self):
         return self.accounts.count()
+
+    def __str__(self):
+        return '{} ({})'.format(self.organization, self.id)
+
+    def save(self, *args, **kwargs):
+        self.date_modification = timezone.now()
+        super(OrganizationPolicy, self).save(*args, **kwargs)
+
+
+class IndividualAccountJournal(models.Model):
+    """
+    Class association to define who can access the journal
+    """
+    journal = models.ForeignKey("erudit.journal", verbose_name=_("Revue"),)
+    account = models.ForeignKey("IndividualAccount", verbose_name=_("Compte personnel"),)
+
+    class Meta:
+        unique_together = (('journal', 'account'),)

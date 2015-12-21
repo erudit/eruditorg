@@ -1,6 +1,11 @@
 from django.test import TestCase
+from django.core.management import call_command
+
+from erudit.factories import JournalFactory
+from erudit.models import Journal
 
 from .factories import OrganizationPolicyFactory, IndividualAccountFactory
+from .models import IndividualAccountJournal
 
 
 class OrganizationPolicyTestCase(TestCase):
@@ -50,3 +55,50 @@ class IndividualAccountTestCase(TestCase):
         password = account.password
         account.save()
         self.assertEqual(account.password, password)
+
+
+class IndividualAccountJournalTestCase(TestCase):
+
+    def test_add_full_access(self):
+        policy = OrganizationPolicyFactory()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        JournalFactory.create_batch(10)
+        policy.access_full = True
+        policy.save()
+        call_command('individual_account_permissions')
+        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
+
+    def test_run_command_twice(self):
+        policy = OrganizationPolicyFactory()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        JournalFactory.create_batch(10)
+        policy.access_full = True
+        policy.save()
+        call_command('individual_account_permissions')
+        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
+        call_command('individual_account_permissions')
+        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
+
+    def test_removed_account(self):
+        policy = OrganizationPolicyFactory()
+        dude_to_delete = IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        JournalFactory.create_batch(10)
+        policy.access_full = True
+        policy.save()
+        call_command('individual_account_permissions')
+        dude_to_delete.delete()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 10)
+
+    def test_removed_journal(self):
+        policy = OrganizationPolicyFactory()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        JournalFactory.create_batch(10)
+        policy.access_full = True
+        policy.save()
+        call_command('individual_account_permissions')
+        Journal.objects.first().delete()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 18)
