@@ -37,7 +37,7 @@
                 </a>
               </h3>
             </div>
-            <div id="issue-metadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="issue-metadata-heading">
+            <div id="issue-metadata" class="panel-collapse collapse {% if not object.pk %}in{% endif %}" role="tabpanel" aria-labelledby="issue-metadata-heading">
               <div class="panel-body">
                 <div class="form-group col-xs-12 {% if form.journal.errors %}error{% endif %}">
                   {{ form.journal.label_tag }}
@@ -63,32 +63,32 @@
                   {{ form.comment.label_tag }}
                   {{ form.comment }}
                 </div>
-                <div class="form-group text-right">
-                  <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
-                  <button type="submit" id="submit-id-submit" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#issue-upload">{% trans "Suivant" %}</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="issue-upload-heading">
+              <h3 class="panel-title">
+                {% if object.pk %}
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#issue-upload" aria-expanded="false" aria-controls="issue-upload">
+                  <span class="fa accordion-toggle"></span> {% trans "Fichiers" %}
+                </a>
+                {% else %}
+                 <div class="text-muted"><span class="fa accordion-toggle"></span> {% trans "Fichiers" %}</div>
+                {% endif %}
+              </h3>
+            </div>
+            <div id="issue-upload" class="panel-collapse collapse {% if object.pk %}in{% endif %}" role="tabpanel" aria-labelledby="issue-upload-heading">
+              <div class="panel-body">
+                <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
+                  {{ form.submissions }}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="panel">
-          <div class="panel-heading" role="tab" id="issue-upload-heading">
-            <h3 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#issue-upload" aria-expanded="false" aria-controls="issue-upload">
-                {% trans "Dépôt" %}
-              </a>
-            </h3>
-          </div>
-          <div id="issue-upload" class="panel-collapse collapse" role="tabpanel" aria-labelledby="issue-upload-heading">
-            <div class="panel-body">
-              <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-                {{ form.submissions }}
-              </div>
-              <div class="form-group text-right">
-                <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
-                <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Envoyer" %}</button>
-              </div>
-            </div>
+          <div class="form-group text-right">
+            <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
+            <button type="submit" class="btn btn-primary" id="submit-id-submit">{% if object.pk %}{% trans "Envoyer" %}{% else %}{% trans "Enregistrer" %}{% endif %}</button>
           </div>
         </div>
       </form>
