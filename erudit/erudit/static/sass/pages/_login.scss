@@ -23,35 +23,26 @@
     }
   }
   .card {
-    padding: 10px;
     margin-top: 100px;
     border: 0;
   }
-  .card-footer {
+  .card-header {
+    background-color: #FFF;
+  }
+  .card-header, .card-footer {
     text-align: center;
   }
 }
 .reset-password-page {
+  p {
+    line-height: 1.5;
+    font-size: 0.85em;
+  }
   .erudit-logo {
     margin: 15px 0;
     padding-bottom: 15px;
     img {
       width: 20%;
-    }
-  }
-  .card {
-    > h1 {
-      text-align: center;
-      font-size: 1em;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: $colour-primary;
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #E5E5E5;
-    }
-    p {
-      font-size: 0.85em;
     }
   }
 }
