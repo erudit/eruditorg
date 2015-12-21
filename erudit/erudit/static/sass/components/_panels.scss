@@ -1,22 +1,23 @@
 .panel-group {
-  margin: 0 20px 20px 20px;
+  margin: 20px;
   .panel {
-    border-color: rgba(0, 0, 0, 0.75);
+    box-shadow: none;
     @include border-radius(0);
   }
   .panel-heading {
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-    color: #FFF;
     @include border-radius(0);
     a {
-      display: block;
-      width: 100%;
-      padding: 10px 15px;
-      color: #FFF;
       &:hover, &:active, &:focus, &:active:focus {
-        color: #FFF;
       }
+    }
+    .collapsed .accordion-toggle:before {
+      content: "\f078"
+    }
+    .accordion-toggle:before {
+      content: "\f077"
+    }
+    & + .panel-collapse > .panel-body {
+      border: 0;
     }
   }
 }

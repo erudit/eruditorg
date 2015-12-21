@@ -15,54 +15,58 @@
 {% block content-main %}
 <div class="col-md-6 col-md-offset-3 col-xs-12">
   <section class="card card-upload_form">
-    <h2><span class="fa fa-folder-open-o"></span> {% trans "Déposer des fichiers de production" %}</h2>
-    <form class="form-vertical clearfix" method="post">
-      {% csrf_token %}
-      {% if form.errors %}
-      <div class="row">
-        <div class="col-xs-12">
-          <p class="alert alert-warning">{% trans "Veuillez remplir les champs obligatoires." %}</p>
-        </div>
-      </div>
-      {% endif %}
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel">
-          <div class="panel-heading" role="tab" id="issue-metadata-heading">
-            <h3 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#issue-metadata" aria-expanded="true" aria-controls="issue-metadata">
-                {% trans "Métadonnées" %}
-              </a>
-            </h3>
+    <div class="card-header">
+      <h2>{% trans "Déposer des fichiers de production" %}</h2>
+    </div>
+    <div class="card-body">
+      <form class="row form-vertical" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="alert alert-warning">{% trans "Veuillez remplir les champs obligatoires." %}</p>
           </div>
-          <div id="issue-metadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="issue-metadata-heading">
-            <div class="panel-body">
-              <div class="form-group col-xs-12 {% if form.journal.errors %}error{% endif %}">
-                {{ form.journal.label_tag }}
-                {{ form.journal }}
-              </div>
-              <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
-                {{ form.year.label_tag }}
-                {{ form.year }}
-              </div>
-              <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
-                {{ form.volume.label_tag }}
-                {{ form.volume }}
-              </div>
-              <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
-                {{ form.number.label_tag }}
-                {{ form.number }}
-              </div>
-              <div class="form-group col-xs-12">
-                {{ form.contact.label_tag }}
-                {{ form.contact }}
-              </div>
-              <div class="form-group col-xs-12">
-                {{ form.comment.label_tag }}
-                {{ form.comment }}
-              </div>
-              <div class="form-group text-right">
-                <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
-                <button id="submit-next" class="btn btn-primary" data-toggle="collapse" data-target="#issue-upload">{% trans "Suivant" %}</button>
+        </div>
+        {% endif %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="issue-metadata-heading">
+              <h3 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#issue-metadata" aria-expanded="true" aria-controls="issue-metadata">
+                  <span class="fa accordion-toggle"></span> {% trans "Métadonnées" %}
+                </a>
+              </h3>
+            </div>
+            <div id="issue-metadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="issue-metadata-heading">
+              <div class="panel-body">
+                <div class="form-group col-xs-12 {% if form.journal.errors %}error{% endif %}">
+                  {{ form.journal.label_tag }}
+                  {{ form.journal }}
+                </div>
+                <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
+                  {{ form.year.label_tag }}
+                  {{ form.year }}
+                </div>
+                <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
+                  {{ form.volume.label_tag }}
+                  {{ form.volume }}
+                </div>
+                <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
+                  {{ form.number.label_tag }}
+                  {{ form.number }}
+                </div>
+                <div class="form-group col-xs-12">
+                  {{ form.contact.label_tag }}
+                  {{ form.contact }}
+                </div>
+                <div class="form-group col-xs-12">
+                  {{ form.comment.label_tag }}
+                  {{ form.comment }}
+                </div>
+                <div class="form-group text-right">
+                  <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
+                  <button type="submit" id="submit-id-submit" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#issue-upload">{% trans "Suivant" %}</button>
+                </div>
               </div>
             </div>
           </div>
@@ -78,9 +82,8 @@
           <div id="issue-upload" class="panel-collapse collapse" role="tabpanel" aria-labelledby="issue-upload-heading">
             <div class="panel-body">
               <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-                {{ form.submission }}
+                {{ form.submissions }}
               </div>
-
               <div class="form-group text-right">
                 <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
                 <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Envoyer" %}</button>
@@ -88,8 +91,8 @@
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </section>
 </div>
 {% endblock %}
