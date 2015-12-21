@@ -3,6 +3,9 @@ table {
   width: 100%;
   margin: 1em 0;
   counter-reset: row-number;
+  th, td {
+    padding: 1em 0.5em;
+  }
   thead {
     tr {}
     th {
@@ -19,7 +22,6 @@ table {
       }
     }
     td {
-      padding: 0.85em 0.25em;
       vertical-align: top;
       &.table-ordered_row:before {
         content: counter(row-number);
