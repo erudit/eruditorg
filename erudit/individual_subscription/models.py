@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from erudit.models import Journal
+
 
 class IndividualAccount(models.Model):
     """
@@ -62,7 +64,41 @@ class IndividualAccount(models.Model):
         return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
 
 
-class OrganizationPolicy(models.Model):
+class FlatAccessMixin(object):
+    """
+    Mixin to generate Flat access legacy from new organisation model.
+    """
+    def fa_cleanup(self):
+        IndividualAccountJournal.objects.filter(
+            account__in=self.accounts.all()
+        ).delete()
+
+    def fa_link_journals(self, journals):
+        for account in self.accounts.all():
+            for journal in journals:
+                rule, created = IndividualAccountJournal.objects.get_or_create(
+                    account=account,
+                    journal=journal)
+
+    def fa_link_baskets(self):
+        for basket in self.access_basket.all():
+            self.fa_link_journals(basket.journals.all())
+
+    def generate_flat_access(self):
+        # Cleanup
+        self.fa_cleanup()
+
+        # Full access
+        if self.access_full:
+            journals = Journal.objects.all()
+            self.fa_link_journals(journals)
+
+        # Journals from basket access
+        if self.access_basket.count() > 0:
+            self.fa_link_baskets()
+
+
+class OrganizationPolicy(FlatAccessMixin, models.Model):
     """
     Entity which describe who and what resource, an organization can access.
     (Wikipedia, AEIQ, Revue).

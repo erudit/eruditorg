@@ -1,7 +1,6 @@
 from django.test import TestCase
-from django.core.management import call_command
 
-from erudit.factories import JournalFactory
+from erudit.factories import JournalFactory, BasketFactory
 from erudit.models import Journal
 
 from .factories import OrganizationPolicyFactory, IndividualAccountFactory
@@ -59,16 +58,6 @@ class IndividualAccountTestCase(TestCase):
 
 class IndividualAccountJournalTestCase(TestCase):
 
-    def test_add_full_access(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
-        JournalFactory.create_batch(10)
-        policy.access_full = True
-        policy.save()
-        call_command('individual_account_permissions')
-        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
-
     def test_run_command_twice(self):
         policy = OrganizationPolicyFactory()
         IndividualAccountFactory(organization_policy=policy)
@@ -76,9 +65,9 @@ class IndividualAccountJournalTestCase(TestCase):
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
-        call_command('individual_account_permissions')
+        policy.generate_flat_access()
         self.assertEqual(IndividualAccountJournal.objects.count(), 20)
-        call_command('individual_account_permissions')
+        policy.generate_flat_access()
         self.assertEqual(IndividualAccountJournal.objects.count(), 20)
 
     def test_removed_account(self):
@@ -88,7 +77,7 @@ class IndividualAccountJournalTestCase(TestCase):
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
-        call_command('individual_account_permissions')
+        policy.generate_flat_access()
         dude_to_delete.delete()
         self.assertEqual(IndividualAccountJournal.objects.count(), 10)
 
@@ -99,6 +88,55 @@ class IndividualAccountJournalTestCase(TestCase):
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
-        call_command('individual_account_permissions')
+        policy.generate_flat_access()
         Journal.objects.first().delete()
         self.assertEqual(IndividualAccountJournal.objects.count(), 18)
+
+
+class IndividualAccountJournalFullAccessTestCase(TestCase):
+
+    def test_add_full_access(self):
+        policy = OrganizationPolicyFactory()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        JournalFactory.create_batch(10)
+        policy.access_full = True
+        policy.save()
+        policy.generate_flat_access()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
+
+
+class IndividualAccountJournalBasketTestCase(TestCase):
+
+    def test_link_baskets(self):
+        policy = OrganizationPolicyFactory()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        basket1 = BasketFactory()
+        basket1.journals = JournalFactory.create_batch(2)
+        basket1.save()
+        basket2 = BasketFactory()
+        basket2.journals = JournalFactory.create_batch(3)
+        basket2.save()
+        policy.access_basket = [basket1, basket2, ]
+        policy.save()
+        policy.generate_flat_access()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 10)
+
+    def test_remove_journal_from_baskets(self):
+        policy = OrganizationPolicyFactory()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        basket1 = BasketFactory()
+        basket1.journals = JournalFactory.create_batch(2)
+        basket1.save()
+        basket2 = BasketFactory()
+        basket2.journals = JournalFactory.create_batch(3)
+        basket2.save()
+        policy.access_basket = [basket1, basket2, ]
+        policy.save()
+        policy.generate_flat_access()
+        basket1.journals = []
+        basket1.save()
+        policy.generate_flat_access()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 6)
