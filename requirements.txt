@@ -2,7 +2,7 @@ cssselect==0.9.1
 decorator==4.0.4
 Django==1.8.7
 django-appconf==1.0.1
-django-compressor==1.5
+django-compressor==1.6
 django-crispy-forms==1.5.2
 -e git+https://github.com/asaglimbeni/django-datetime-widget.git@master#egg=django_datetime_widget-master
 django-grappelli==2.7.1
@@ -31,3 +31,4 @@ tox==2.1.1
 traitlets==4.0.0
 virtualenv==13.1.2
 pymysql
+simplejson
