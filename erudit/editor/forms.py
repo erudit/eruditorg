@@ -75,6 +75,8 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         label=_("Fichier"),
         options={
             "max_file_size": '15000mb',
-            "drop_element": 'drop_element'
+            "drop_element": 'drop_element',
+            "container": 'drop_element',
+            "browse_button": 'pickfiles'
         }
     )

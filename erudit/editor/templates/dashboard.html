@@ -36,6 +36,7 @@
               </td>
               <td>
                 <a href="{% url 'editor:update' issue_submission.pk %}">
+                  {{ issue_submission.journal }}.
                   {{ issue_submission.year }},
                   {% if issue_submission.volume %}
                   {% trans "vol." %} {{ issue_submission.volume }},
