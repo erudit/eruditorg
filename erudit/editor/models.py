@@ -31,13 +31,14 @@ class IssueSubmission(models.Model):
     )
 
     year = models.CharField(
-        max_length=4,
+        max_length=9,
         verbose_name=_("Année")
     )
 
     volume = models.CharField(
         max_length=100,
-        verbose_name=_("Volume")
+        verbose_name=_("Volume"),
+        blank=True, null=True
     )
 
     number = models.CharField(
@@ -60,10 +61,8 @@ class IssueSubmission(models.Model):
         blank=True, null=True
     )
 
-    submission_file = models.FileField(
-        upload_to='uploads',
-        verbose_name=_("Fichier"),
-        blank=True, null=True
+    submissions = models.ManyToManyField(
+        'plupload.ResumableFile'
     )
 
     def __str__(self):

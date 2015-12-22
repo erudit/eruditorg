@@ -4,55 +4,70 @@
 {% block page-title %}{% trans "Dépôt de numéros" %}{% endblock %}
 
 {% block breadcrumbs %}
-  {{ block.super }} / {% trans "Dépôt de numéros" %}
+{{ block.super }} / {% trans "Dépôt de numéros" %}
 {% endblock %}
 
 {% block content-main %}
-<div class="col-md-6 col-md-offset-3 col-xs-12">
+<div class="col-md-10 col-md-offset-1 col-xs-12">
   <section class="card card-issue_submissions">
-    <h2>{% trans "Historique des dépôts de numéros"  %}</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>{% trans "Date" %}</th>
-          <th>{% trans "Revue" %}</th>
-          <th>{% trans "Année, volumaison, numéro" %}</th>
-          <th>{% trans "Statut" %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-        <tr>
-          <td>
-            {{ issue_submission.date_created|date:"c" }}
-          </td>
-          <td>
-          {{ issue_submission.journal }}
-          </td>
-          <td>
-            <a href="{% url 'editor:update' issue_submission.pk %}">
-              {{ issue_submission.year }}, {% trans "volume" %} {{ issue_submission.volume }}, {% trans "numéro" %} {{ issue_submission.number }}
-            </a>
-          </td>
-          <td>
-            {% if issue_submission.status == 'D' %}
-            {% trans "Brouillon" %}
-            {% elif issue_submission.status == 'S' %}
-            {% trans "Soumis" %}
-            {% elif issue_submission.status == 'V' %}
-            {% trans "Validé" %}
-            {% endif %}
-          </td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td colspan="4" class="text-center">{% trans "Il n'y a aucun fichier dans votre historique." %}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <div class="text-right more-info">
-      <a href="{% url 'editor:add' %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Historique des dépôts de numéros" %}</h2>
+      </div>
+      <div class="col-sm-6 text-right">
+        <a href="{% url 'editor:add' %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
+      </div>
+    </div>
+    <div class="row card-body">
+      <div class="col-xs-12">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>{% trans "Date" %}</th>
+              <th>{% trans "Revue" %}</th>
+              <th>{% trans "Année, volumaison, numéro" %}</th>
+              <th>{% trans "Statut" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for issue_submission in object_list|dictsortreversed:"date_created" %}
+            <tr>
+              <td class="table-ordered_row">
+              </td>
+              <td>
+                {{ issue_submission.date_created|date:"c" }}
+              </td>
+              <td>
+                {{ issue_submission.journal }}
+              </td>
+              <td>
+                <a href="{% url 'editor:update' issue_submission.pk %}">
+                  {{ issue_submission.year }},
+                  {% if issue_submission.volume %}
+                  {% trans "vol." %} {{ issue_submission.volume }},
+                  {% endif %}
+                  {% trans "n°" %} {{ issue_submission.number }}
+                </a>
+              </td>
+              <td>
+                {% if issue_submission.status == 'D' %}
+                {% trans "Brouillon" %}
+                {% elif issue_submission.status == 'S' %}
+                {% trans "Soumis" %}
+                {% elif issue_submission.status == 'V' %}
+                {% trans "Validé" %}
+                {% endif %}
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center">{% trans "Il n'y a aucun fichier dans votre historique." %}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 </div>

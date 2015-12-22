@@ -13,7 +13,6 @@ class BaseEditorTestCase(BaseEruditTestCase):
             volume="2",
             date_created=datetime.now(),
             contact=self.user,
-            submission_file=""
         )
 
         self.other_issue_submission = IssueSubmission.objects.create(
@@ -21,5 +20,4 @@ class BaseEditorTestCase(BaseEruditTestCase):
             volume="2",
             date_created=datetime.now(),
             contact=self.user,
-            submission_file=""
         )

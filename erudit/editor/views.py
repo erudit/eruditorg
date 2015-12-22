@@ -74,9 +74,17 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
 
     def get_form(self, form_class):
         form = super().get_form(form_class)
-        if self.get_object().status in (
+
+        object = self.get_object()
+        if object.status in (
                 IssueSubmission.VALID, IssueSubmission.SUBMITTED):
             form.disable_form()
+
+        form.fields['submissions'].widget.set_model_reference(
+            "editor.IssueSubmission",
+            object.pk
+        )
+
         return form
 
     def dispatch(self, request, *args, **kwargs):
@@ -84,6 +92,12 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
         if not submission.has_access(request.user):
             return HttpResponseRedirect(reverse('editor:dashboard'))
         return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = "editor.IssueSubmission"
+        context['model_pk'] = self.object.pk
+        return context
 
     def get_success_url(self):
         return reverse('editor:dashboard')
