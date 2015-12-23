@@ -1,7 +1,11 @@
 table {
   font-size: 0.85em;
   width: 100%;
-  margin-bottom: 1em;
+  margin: 1em 0;
+  counter-reset: row-number;
+  th, td {
+    padding: 1em 0.5em;
+  }
   thead {
     tr {}
     th {
@@ -12,12 +16,20 @@ table {
   tbody {
     tr {
       border-bottom: 1px solid $colour-faint-grey;
+      counter-increment: row-number;
       &:last-child {
         border: 0;
       }
     }
     td {
-      padding: 0.85em 0.25em;
+      vertical-align: top;
+      &.table-ordered_row:before {
+        content: counter(row-number);
+        color: $colour-pale-grey;
+      }
+      &.table-date {
+        white-space: nowrap;
+      }
     }
     th.multicol {
       padding: 1em 0;

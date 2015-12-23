@@ -311,7 +311,7 @@ input[type="image"],
 button[type="submit"],
 input[type="submit"],
 .btn-primary {
-  border: none;
+  border: 1px solid $colour-primary;
   color: white;
   background-color: $colour-primary;
   letter-spacing: 1px;
@@ -326,8 +326,8 @@ input[type="submit"],
   }
   &:hover, &:active, &:focus, &:active:focus {
     background-color: $colour-primary*0.75;
+    border: 1px solid $colour-primary*0.75;
     color: white;
-    border: none;
   }
 }
 button[type="reset"],
@@ -360,11 +360,6 @@ label.required:after {
   content: ' *';
   color: $colour-pale-grey;
   font-weight: bold;
-  font-size: 0.85em;
-}
-label:not(.required):after {
-  content: ' (facultatif)';
-  color: $colour-pale-grey;
   font-size: 0.85em;
 }
 .error {

@@ -1,0 +1,27 @@
+.panel-group {
+  margin: 20px;
+  .panel {
+    box-shadow: none;
+    @include border-radius(0);
+  }
+  .panel-heading {
+    @include border-radius(0);
+    a {
+      &:hover, &:active, &:focus, &:active:focus {
+      }
+    }
+    .collapsed .accordion-toggle:before {
+      content: "\f078"
+    }
+    .accordion-toggle:before {
+      content: "\f077"
+    }
+    & + .panel-collapse > .panel-body {
+      border: 0;
+    }
+  }
+  .panel-title {
+    font-size: 1.15em;
+    text-transform: uppercase;
+  }
+}

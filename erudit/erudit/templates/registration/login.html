@@ -11,42 +11,44 @@
     <div class="row">
       <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
         <section class="card card-login">
-          <div class="erudit-logo">
-            <a href="http://erudit.org/" target="_blank">
-              <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
-            </a>
-          </div>
-          <form class="form-vertical" method="post">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <div class="col-xs-12">
-              {% for error in form.non_field_errors %}
-              <p class="alert alert-warning">{{ error }}</p>
-              {% endfor %}
+          <div class="card-body">
+            <div class="erudit-logo">
+              <a href="http://erudit.org/" target="_blank">
+                <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
+              </a>
             </div>
-            {% endif %}
-            <div class="form-group">
-              <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
-              {{ form.username }}
-              <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
-            </div>
-            <div class="form-group">
-              <label for="id_password">{% trans "Mot de passe" %}</label>
-              {{ form.password }}
-              <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
-            </div>
-            <div class="form-group">
-              <div class="text-right">
-                <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+            <form class="form-vertical" method="post">
+              {% csrf_token %}
+              {% if form.non_field_errors %}
+              <div class="col-xs-12">
+                {% for error in form.non_field_errors %}
+                <p class="alert alert-warning">{{ error }}</p>
+                {% endfor %}
               </div>
-            </div>
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
-            </div>
-            <p class="card-footer">
-              <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
-            </p>
-          </form>
+              {% endif %}
+              <div class="form-group">
+                <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
+                {{ form.username }}
+                <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
+              </div>
+              <div class="form-group">
+                <label for="id_password">{% trans "Mot de passe" %}</label>
+                {{ form.password }}
+                <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
+              </div>
+              <div class="form-group">
+                <div class="text-right">
+                  <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+                </div>
+              </div>
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
+              </div>
+              <p class="card-footer">
+                <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
+              </p>
+            </form>
+          </div>
         </section>
       </div>
     </div>

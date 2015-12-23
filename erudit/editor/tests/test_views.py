@@ -70,8 +70,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         response = self.client.get(reverse('editor:add'))
         root = etree.HTML(response.content)
         self.assertFalse(
-            root.cssselect('#id_submission_file'),
-            "The rendered template should not contain an id_submission_file input"  # noqa
+            root.cssselect('#id_submissions'),
+            "The rendered template should not contain an id_submissions"  # noqa
         )
 
     def test_can_create_issuesubmission(self):
@@ -117,8 +117,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         root = etree.HTML(response.content)
 
         self.assertTrue(
-            root.cssselect('#id_submission_file'),
-            "The rendered upload template should contain an id_submission_file input"  # noqa
+            root.cssselect('#id_submissions'),
+            "The rendered upload template should contain an id_submissions input"  # noqa
         )
 
     def test_user_is_only_allowed_to_upload_to_his_journals(self):
