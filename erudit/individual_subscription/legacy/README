@@ -31,6 +31,18 @@ Migrate abonnes
 
 python manage.py individual_subscription import_abonnes
 
+Link abonnes
+------------
+
+Linking is done from CSV files (which could be exploded in several xls files)
+
+pip install csvkit
+
+in2csv Wikipedia1.xls >> wikipedia.csv 
+in2csv Wikipedia2.xls >> wikipedia.csv 
+
+python manage.py individual_subscription link_abonnes wikipedia.csv
+
 
 Cleanup notes (After migration system)
 ======================================
