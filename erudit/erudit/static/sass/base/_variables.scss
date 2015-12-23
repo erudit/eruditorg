@@ -10,7 +10,7 @@ $font-size: 18px !default;
 
 /// Content font family
 /// @type List
-$font-face-body: 'Source Sans Pro', sans-serif;
+$font-face-body: 'Open Sans', sans-serif;
 
 /// Code (monospace) font family
 /// @type List
@@ -39,3 +39,6 @@ $max-width: 1200px !default;
 
 // Navbar height
 $navbar-height: 70px;
+
+// Sidenav width
+$sidenav-width: 250px;

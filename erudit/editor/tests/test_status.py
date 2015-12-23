@@ -20,7 +20,6 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
             volume="2",
             date_created=datetime.now(),
             contact=self.user,
-            submission_file="",
             status=IssueSubmission.DRAFT
         )
 
@@ -29,7 +28,6 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
             volume="2",
             date_created=datetime.now(),
             contact=self.user,
-            submission_file="",
             status=IssueSubmission.SUBMITTED
         )
 
@@ -38,7 +36,6 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
             volume="2",
             date_created=datetime.now(),
             contact=self.user,
-            submission_file="",
             status=IssueSubmission.VALID
         )
 
