@@ -140,3 +140,43 @@ class IndividualAccountJournalBasketTestCase(TestCase):
         basket1.save()
         policy.generate_flat_access()
         self.assertEqual(IndividualAccountJournal.objects.count(), 6)
+
+    def test_remove_account(self):
+        policy = OrganizationPolicyFactory()
+        dude_to_delete = IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        basket1 = BasketFactory()
+        basket1.journals = JournalFactory.create_batch(2)
+        basket1.save()
+        basket2 = BasketFactory()
+        basket2.journals = JournalFactory.create_batch(3)
+        basket2.save()
+        policy.access_basket = [basket1, basket2, ]
+        policy.save()
+        policy.generate_flat_access()
+        dude_to_delete.delete()
+        policy.generate_flat_access()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 5)
+
+
+class IndividualAccountJournalCustomTestCase(TestCase):
+
+    def test_link_journals(self):
+        policy = OrganizationPolicyFactory()
+        policy.access_journal = JournalFactory.create_batch(2)
+        policy.save()
+        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        policy.generate_flat_access()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 4)
+
+    def test_remove_account(self):
+        policy = OrganizationPolicyFactory()
+        policy.access_journal = JournalFactory.create_batch(2)
+        policy.save()
+        dude_to_delete = IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(organization_policy=policy)
+        policy.generate_flat_access()
+        dude_to_delete.delete()
+        policy.generate_flat_access()
+        self.assertEqual(IndividualAccountJournal.objects.count(), 2)

@@ -97,6 +97,10 @@ class FlatAccessMixin(object):
         if self.access_basket.count() > 0:
             self.fa_link_baskets()
 
+        # Journals selected
+        if self.access_journal.count() > 0:
+            self.fa_link_journals(self.access_journal.all())
+
 
 class OrganizationPolicy(FlatAccessMixin, models.Model):
     """
@@ -167,7 +171,10 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
 class IndividualAccountJournal(models.Model):
     """
     Class association to define who can access the journal
+    This class is used to make the glue with erudit.org system auth perms.
     """
+    # TODO define where to target this models (router.py will make the trick to popule
+    # in the right database)
     journal = models.ForeignKey("erudit.journal", verbose_name=_("Revue"),)
     account = models.ForeignKey("IndividualAccount", verbose_name=_("Compte personnel"),)
 
