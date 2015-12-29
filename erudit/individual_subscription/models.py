@@ -132,7 +132,9 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
     comment = models.TextField(verbose_name=_("Commentaire"), blank=True)
 
     max_accounts = models.PositiveSmallIntegerField(
-        verbose_name=_("Maximum de comptes")
+        verbose_name=_("Maximum de comptes"),
+        blank=True,
+        null=True,
     )
 
     access_full = models.BooleanField(
