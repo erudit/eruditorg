@@ -33,3 +33,4 @@ virtualenv==13.1.2
 pymysql
 factory_boy==2.6.0
 simplejson
+django-filters==0.2.1

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block header %}
+<header>
+  <nav class="navbar navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="navbar-logo">
+            <img src="{% static 'img/logo-erudit-blanc.png' %}"/>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+{% endblock %}
+
+{% block nav %}
+<nav class="sidenav">
+  <ul>
+    <li>
+    <a href="{% url 'individual_subscription:account_list' %}">
+        <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Gestion des utilisateurs" %}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+  <header>
+    <h1>
+      <span class="user-space">{% block zone-title %}{% trans "Espace organisation" %}{% endblock %}</span> {% block page-title %}{% endblock %}
+    </h1>
+  </header>
+    {% block content-main %}
+    {% endblock %}
+  </div>
+</main>
+{% endblock %}

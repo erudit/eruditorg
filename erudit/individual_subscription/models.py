@@ -154,6 +154,13 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
         blank=True,
     )
 
+    managers = models.ManyToManyField(
+        "auth.User",
+        verbose_name=_("Gestionnaires des comptes"),
+        blank=True,
+        related_name='organizations_managed',
+    )
+
     class Meta:
         verbose_name = _("Accès de l'organisation")
         verbose_name_plural = _("Accès des organisations")
