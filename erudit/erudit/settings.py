@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'django_select2',
     'datetimewidget',
     'plupload',
+    'django_filters',
 
 )
 

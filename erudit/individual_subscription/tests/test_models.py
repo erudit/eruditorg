@@ -3,8 +3,8 @@ from django.test import TestCase
 from erudit.factories import JournalFactory, BasketFactory
 from erudit.models import Journal
 
-from .factories import OrganizationPolicyFactory, IndividualAccountFactory
-from .models import IndividualAccountJournal
+from ..factories import OrganizationPolicyFactory, IndividualAccountFactory
+from ..models import IndividualAccountJournal
 
 
 class OrganizationPolicyTestCase(TestCase):

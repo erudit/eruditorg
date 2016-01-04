@@ -1,0 +1,44 @@
+{% extends "individual_subscription/base.html" %}
+{% load i18n %}
+
+{% block content-main %}
+
+<h1>{{ object_list|length }} {% trans "Comptes personnels" %}</h1>
+
+<h2>{% trans 'Filtrage' %}</h2>
+<form action="" method="get" class="filter">
+    {{ filter.form.as_p }}
+    <input type="submit" />
+</form>
+
+<h2>{% trans 'Résultats' %}</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                {% trans '#' %}
+            </th>
+            <th>
+                {% trans 'Nom' %}
+            </th>
+            <th>
+                {% trans 'Prénom' %}
+            </th>
+            <th>
+                {% trans 'Courriel' %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in object_list %}
+        <tr>
+            <th scope="row">{{ account.id }}</th>
+            <td>{{ account.lastname }}</td>
+            <td>{{ account.firstname }}</td>
+            <td>{{ account.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
