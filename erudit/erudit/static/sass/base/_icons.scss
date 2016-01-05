@@ -1,3 +1,7 @@
+/**
+* Style for icon fonts used everywhere
+*/
+
 @font-face {
   font-family: 'icomoon';
   src:url('../fonts/icomoon.eot?8d2tpe');
@@ -17,8 +21,6 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

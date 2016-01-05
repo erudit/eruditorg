@@ -1,10 +1,6 @@
 .card {
   margin: 1em auto;
   padding: 10px;
-  ul {
-    padding-left: 0;
-    list-style: none;
-  }
   .card-header {
     padding: 0.75em 0;
   }
@@ -15,26 +11,5 @@
   .card-footer {
     background-color: #FFF;
     padding: 0.75em;
-  }
-  &.card-issue_submissions {
-    button {
-      margin-top: 0;
-    }
-    .card-section {
-      border-right: 1px solid $colour-faint-grey;
-      height: 400px;
-      &:last-child {
-        border: 0;
-      }
-      h3 {
-        margin: 0;
-        text-transform: uppercase;
-        font-size: 1em;
-      }
-      .submission-date {
-        color: $colour-medium-grey;
-        font-size: 0.85em;
-      }
-    }
   }
 }

@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
-
+/// Border-radius vendor prefixes
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
@@ -9,6 +9,7 @@
   border-radius: $radius;
 }
 
+/// Background-sizes vendor prefixes
 @mixin background-size($size) {
   -webkit-background-size: $size;
   -moz-background-size: $size;
@@ -16,6 +17,7 @@
   background-size: $size;
 }
 
+/// Box-shadow vendor prefixes
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
   @if $inset {
     -webkit-box-shadow:inset $top $left $blur $color;
@@ -28,6 +30,7 @@
   }
 }
 
+/// Transition vendor prefixes
 @mixin transition($transition-property, $transition-time, $method) {
   -webkit-transition: $transition-property $transition-time $method;
   -moz-transition: $transition-property $transition-time $method;
@@ -35,15 +38,6 @@
   -o-transition: $transition-property $transition-time $method;
   transition: $transition-property $transition-time $method;
 }
-
-@mixin vertical-align {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
 
 /// Event wrapper
 /// @author Harry Roberts
