@@ -9,4 +9,14 @@ form.filter  {
     display: none;
   }
 
+  p * {
+    float: left;
+    margin-left: 8px;
+  }
+
+  input[type="submit"] {
+    margin-top: 0;
+    margin-left: 12px;
+  }
+
 }

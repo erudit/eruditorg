@@ -1,11 +1,12 @@
 from django.views.generic.edit import CreateView, UpdateView
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth.decorators import user_passes_test
 from django_filters.views import FilterView
 
 from editor.views import LoginRequiredMixin
 
-from .forms import IndividualAccountFilter
+from .forms import IndividualAccountFilter, IndividualAccountForm
 from .models import IndividualAccount
 
 
@@ -43,6 +44,15 @@ class IndividualAccountList(OrganizationCheckMixin, FilterView):
 
 class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
     model = IndividualAccount
+    form_class = IndividualAccountForm
+
+    def get_success_url(self):
+        return reverse('individual_subscription:account_list')
+
+    def get_form_kwargs(self):
+        kwargs = super(IndividualAccountCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 
 class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
