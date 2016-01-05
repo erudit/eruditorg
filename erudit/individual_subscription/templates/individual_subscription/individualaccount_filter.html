@@ -3,15 +3,24 @@
 
 {% block content-main %}
 
-<h1>{{ object_list|length }} {% trans "Comptes personnels" %}</h1>
+<h1>{{ object_list|length }} {% trans "Comptes personnels" %} </h1>
 
-<h2>{% trans 'Filtrage' %}</h2>
+<h4>{% trans 'Actions' %}</h4>
+
+<a class="btn btn-primary" 
+   href="{% url 'individual_subscription:account_add' %}">
+  {% trans "Ajouter un compte" %}
+</a>
+
+
+<h4>{% trans 'Filtrage' %}</h4>
 <form action="" method="get" class="filter">
     {{ filter.form.as_p }}
     <input type="submit" />
 </form>
 
-<h2>{% trans 'Résultats' %}</h2>
+<h4>{% trans 'Résultats' %}</h4>
+
 <table class="table table-striped">
     <thead>
         <tr>

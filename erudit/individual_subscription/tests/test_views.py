@@ -51,3 +51,21 @@ class AccountListViewTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['object_list']), 2)
+
+
+class AccountCreateViewTestCase(TestCase):
+
+    def setUp(self):
+        self.url = reverse('individual_subscription:account_add')
+
+    def test_filtered_organization(self):
+        policy = OrganizationPolicyFactory()
+        policy2 = OrganizationPolicyFactory()
+        user = User.objects.create_user(username='manager', password='manager')
+        self.client.login(username=user.username, password='manager')
+        policy.managers.add(user)
+        policy.save()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, str(policy))
+        self.assertNotContains(response, str(policy2))
