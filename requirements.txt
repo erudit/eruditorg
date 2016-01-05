@@ -6,7 +6,7 @@ django-compressor==1.6
 django-crispy-forms==1.5.2
 -e git+https://github.com/asaglimbeni/django-datetime-widget.git@master#egg=django_datetime_widget-master
 django-grappelli==2.7.1
--e git+https://github.com/erudit/django-plupload.git@dev#egg=django_plupload-origin_latest-dev
+git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-resumable-uploads
 django-post-office==2.0.2
 Django-Select2==5.2.1
 ipdb==0.8.1
