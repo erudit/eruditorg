@@ -1,11 +1,13 @@
 import hashlib
 from random import choice
 import base64
+from datetime import timedelta
 
 from django.conf import settings
 from django.utils import timezone
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from erudit.models import Journal
 
@@ -33,7 +35,8 @@ class IndividualAccount(models.Model):
         # Stamp first user created date
         if not self.pk and self.organization_policy.date_activation is None:
             self.organization_policy.date_activation = timezone.now()
-            self.organization_policy.save()
+            self.organization_policy.date_renew = self.organization_policy.date_activation
+            self.organization_policy.renew()
 
         # Password encryption
         if self.pk:
@@ -121,10 +124,18 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
         verbose_name=_("Date de modification")
     )
     date_activation = models.DateTimeField(
-        editable=False,
         blank=True,
         null=True,
-        verbose_name=_("Date d'activation")
+        verbose_name=_("Date d'activation"),
+        help_text=_("Ce champs se remplit automatiquement. Il est éditable uniquement pour les données existantes qui n'ont pas cette information")
+    )
+    date_renew = models.DateTimeField(
+        null=True,
+        verbose_name=_("Date de renouvellement")
+    )
+    renew_cycle = models.PositiveSmallIntegerField(
+        verbose_name=_("Cycle du renouvellement (en jours)"),
+        default=365,
     )
 
     organization = models.ForeignKey("erudit.Organisation", verbose_name=_("Organisation"),)
@@ -175,6 +186,14 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
     def save(self, *args, **kwargs):
         self.date_modification = timezone.now()
         super(OrganizationPolicy, self).save(*args, **kwargs)
+
+    def renew(self):
+        if self.date_activation is None:
+            raise ValidationError(_("Il n'y a pas de date d'activiation de spécifiée"))
+        if self.date_renew is None:
+            self.date_renew = self.date_activation
+        self.date_renew = self.date_renew + timedelta(days=self.renew_cycle)
+        self.save()
 
 
 class IndividualAccountJournal(models.Model):
