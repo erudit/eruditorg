@@ -22,12 +22,10 @@ urlpatterns = [
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-
     url(r'^editeur/', include('editor.urls', namespace='editor'), name='login'),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
-
-    url(r'', RedirectView.as_view(url="/editeur/", permanent=False)),
-
     # subscriptions
     url(r'^abonnements/', include('subscription.urls')),
+    url(r'', RedirectView.as_view(url="/editeur/", permanent=False)),
+
 ]
