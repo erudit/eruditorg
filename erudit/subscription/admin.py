@@ -97,6 +97,7 @@ class ClientAdmin(admin.ModelAdmin):
         'province',
         'country',
     )
+
     fieldsets = (
         ('Identification', {
             'fields': (
@@ -161,6 +162,7 @@ class RenewalNoticeAdmin(admin.ModelAdmin):
         'status',
         'has_been_answered',
         'has_renewed',
+        'is_paid',
         'has_refused',
     )
 
@@ -265,7 +267,7 @@ class RenewalNoticeAdmin(admin.ModelAdmin):
         ('Suivi', {
             'fields': (
                 ('status', 'date_created'),
-                ('has_been_answered', 'has_renewed', 'has_refused'),
+                ('has_been_answered', 'is_paid', 'has_renewed', 'has_refused'),
                 'comment',
                 'is_correct',
                 'error_msg',
