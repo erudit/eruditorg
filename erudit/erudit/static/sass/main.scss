@@ -1,23 +1,31 @@
 @charset 'UTF-8';
 
-// Base - config & helpers
+// 1. Configuration and helpers
 @import
-  'base/variables',
-  'base/functions',
-  'base/mixins',
+  'utils/variables',
+  'utils/functions',
+  'utils/mixins';
+
+// 2. Vendors
+@import
+  'vendor/normalize';
+
+// 3. Base stuff
+@import
+  'base/base',
+  'base/fonts',
   'base/icons',
   'base/typography',
-  'base/base',
-  'base/fonts';
+  'base/helpers';
 
-// Layout-related sections
+// 4. Layout-related sections
 @import
   'layout/header',
   'layout/sidenav',
   'layout/content',
   'layout/footer';
 
-// Components
+// 5. Components
 @import
   'components/tables',
   'components/tooltips',
@@ -32,6 +40,10 @@
   'components/fileupload',
   'components/panels';
 
-  // Page-specific styles
-  @import
-    'pages/login';
+// 6. Page-specific styles
+@import
+  'pages/login';
+
+// 7. Themes
+@import
+  'themes/default';
