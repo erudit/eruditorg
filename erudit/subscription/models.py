@@ -5,14 +5,17 @@ from post_office.models import Email
 
 
 class Country(models.Model):
+
     code = models.CharField(
         max_length=255,
         null=True, blank=True,
     )
+
     name = models.CharField(
         max_length=255,
         verbose_name=_("Nom")
     )
+
     currency = models.ForeignKey(
         'Currency',
         null=True, blank=True,
@@ -288,6 +291,12 @@ class RenewalNotice(models.Model):
         default=True,
         verbose_name="Est correct?",
         help_text="Renseigné automatiquement par système.",
+    )
+
+    is_paid = models.BooleanField(
+        default=False,
+        verbose_name=_("Payé"),
+        help_text="Avis de renouvellement payé"
     )
 
     error_msg = models.TextField(
