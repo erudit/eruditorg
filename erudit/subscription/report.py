@@ -61,7 +61,7 @@ def generate_report(renewal):
 
     try:
         country = Country.objects.get(
-            name=renewal.paying_customer.country
+            name=renewal.receiving_customer.country
         )
         active_locale = country.locale
     except Country.DoesNotExist:
