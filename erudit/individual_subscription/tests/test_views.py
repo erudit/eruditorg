@@ -69,3 +69,32 @@ class AccountCreateViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, str(policy))
         self.assertNotContains(response, str(policy2))
+
+
+class AccountDeleteViewTestCase(TestCase):
+
+    def test_permissions_ok(self):
+        policy = OrganizationPolicyFactory()
+        user = User.objects.create_user(username='manager', password='manager')
+        self.client.login(username=user.username, password='manager')
+        policy.managers.add(user)
+        policy.save()
+
+        account = IndividualAccountFactory(organization_policy=policy)
+        url = reverse('individual_subscription:account_delete',
+                      args=(account.pk, ))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_permissions_ko(self):
+        policy = OrganizationPolicyFactory()
+        user = User.objects.create_user(username='manager', password='manager')
+        self.client.login(username=user.username, password='manager')
+        policy.managers.add(user)
+        policy.save()
+
+        account = IndividualAccountFactory()
+        url = reverse('individual_subscription:account_delete',
+                      args=(account.pk, ))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)

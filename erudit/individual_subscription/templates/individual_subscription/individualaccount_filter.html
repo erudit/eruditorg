@@ -16,7 +16,7 @@
 <h4>{% trans 'Filtrage' %}</h4>
 <form action="" method="get" class="filter">
     {{ filter.form.as_p }}
-    <input type="submit" />
+    <input type="submit" class="btn" />
 </form>
 
 <h4>{% trans 'Résultats' %}</h4>
@@ -36,6 +36,12 @@
             <th>
                 {% trans 'Courriel' %}
             </th>
+            <th>
+                {% trans 'Organisation' %}
+            </th>
+            <th>
+                {% trans 'Actions' %}
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -45,6 +51,8 @@
             <td>{{ account.lastname }}</td>
             <td>{{ account.firstname }}</td>
             <td>{{ account.email }}</td>
+            <td>{{ account.organization_policy }}</td>
+            <td><a href="{% url 'individual_subscription:account_delete' account.pk %}">{% trans 'Supprimer' %}</a></td>
         </tr>
         {% endfor %}
     </tbody>

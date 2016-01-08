@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.decorators import user_passes_test
@@ -28,10 +28,6 @@ class OrganizationCheckMixin(LoginRequiredMixin):
         fct = user_passes_test(cls.check_access)
         return fct(view)
 
-
-class IndividualAccountList(OrganizationCheckMixin, FilterView):
-    filterset_class = IndividualAccountFilter
-
     def get_queryset(self):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return IndividualAccount.objects.all()
@@ -40,6 +36,10 @@ class IndividualAccountList(OrganizationCheckMixin, FilterView):
             return IndividualAccount.objects.filter(organization_policy__in=org_ids)
         else:
             return IndividualAccount.objects.none()
+
+
+class IndividualAccountList(OrganizationCheckMixin, FilterView):
+    filterset_class = IndividualAccountFilter
 
 
 class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
@@ -57,3 +57,10 @@ class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
 
 class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
+
+
+class IndividualAccountDelete(OrganizationCheckMixin, DeleteView):
+    model = IndividualAccount
+
+    def get_success_url(self):
+        return reverse('individual_subscription:account_list')
