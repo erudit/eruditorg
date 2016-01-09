@@ -6,7 +6,8 @@ from django_filters.views import FilterView
 
 from editor.views import LoginRequiredMixin
 
-from .forms import IndividualAccountFilter, IndividualAccountForm
+from .forms import (IndividualAccountFilter, IndividualAccountForm,
+                    IndividualAccountResetPwdForm)
 from .models import IndividualAccount
 
 
@@ -29,13 +30,14 @@ class OrganizationCheckMixin(LoginRequiredMixin):
         return fct(view)
 
     def get_queryset(self):
+        qs = IndividualAccount.objects.select_related('organization_policy')
         if self.request.user.is_superuser or self.request.user.is_staff:
-            return IndividualAccount.objects.all()
+            return qs.all()
         elif self.request.user.organizations_managed.count() > 0:
             org_ids = [o.id for o in self.request.user.organizations_managed.all()]
-            return IndividualAccount.objects.filter(organization_policy__in=org_ids)
+            return qs.filter(organization_policy__in=org_ids)
         else:
-            return IndividualAccount.objects.none()
+            return qs.none()
 
 
 class IndividualAccountList(OrganizationCheckMixin, FilterView):
@@ -45,6 +47,7 @@ class IndividualAccountList(OrganizationCheckMixin, FilterView):
 class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
     model = IndividualAccount
     form_class = IndividualAccountForm
+    template_name = 'individual_subscription/individualaccount_create.html'
 
     def get_success_url(self):
         return reverse('individual_subscription:account_list')
@@ -57,10 +60,24 @@ class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
 
 class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
+    template_name = 'individual_subscription/individualaccount_update.html'
+    fields = ['firstname', 'lastname', 'email', ]
+
+    def get_success_url(self):
+        return reverse('individual_subscription:account_list')
 
 
 class IndividualAccountDelete(OrganizationCheckMixin, DeleteView):
     model = IndividualAccount
+
+    def get_success_url(self):
+        return reverse('individual_subscription:account_list')
+
+
+class IndividualAccountResetPwd(OrganizationCheckMixin, UpdateView):
+    model = IndividualAccount
+    form_class = IndividualAccountResetPwdForm
+    template_name = 'individual_subscription/individualaccount_reset_pwd.html'
 
     def get_success_url(self):
         return reverse('individual_subscription:account_list')

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from ..factories import OrganizationPolicyFactory, IndividualAccountFactory
+from ..models import IndividualAccount
 
 
 class AccountListViewTestCase(TestCase):
@@ -98,3 +99,24 @@ class AccountDeleteViewTestCase(TestCase):
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
+
+
+class AccountResetPwdViewTestCase(TestCase):
+
+    def test_empty_pwd(self):
+        policy = OrganizationPolicyFactory()
+        user = User.objects.create_user(username='manager', password='manager')
+        self.client.login(username=user.username, password='manager')
+        policy.managers.add(user)
+        policy.save()
+
+        account = IndividualAccountFactory(organization_policy=policy)
+        old_pwd = account.password
+        url = reverse('individual_subscription:account_reset_pwd',
+                      args=(account.pk, ))
+        response = self.client.post(url, {'password': ''})
+        self.assertEqual(response.status_code, 302)
+        same_account = IndividualAccount.objects.get(id=account.pk)
+        self.assertEqual(IndividualAccount.objects.count(), 1)
+        self.assertNotEqual(same_account.password, old_pwd)
+        self.assertEqual(same_account.email, account.email)
