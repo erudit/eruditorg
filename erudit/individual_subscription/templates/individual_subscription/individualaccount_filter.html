@@ -52,7 +52,11 @@
             <td>{{ account.firstname }}</td>
             <td>{{ account.email }}</td>
             <td>{{ account.organization_policy }}</td>
-            <td><a href="{% url 'individual_subscription:account_delete' account.pk %}">{% trans 'Supprimer' %}</a></td>
+            <td>
+              <a href="{% url 'individual_subscription:account_update' account.pk %}">{% trans 'Modifier' %}</a> | 
+              <a href="{% url 'individual_subscription:account_reset_pwd' account.pk %}">{% trans 'Réinitialiser mot de passe' %}</a> | 
+              <a href="{% url 'individual_subscription:account_delete' account.pk %}">{% trans 'Supprimer' %}</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

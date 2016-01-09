@@ -1,0 +1,16 @@
+{% extends "individual_subscription/base.html" %}
+{% load i18n %}
+
+{% block content-main %}
+
+<h1>{% trans "Réinitialiser le mode de passe de " %} {{ object }}</h1>
+
+{% trans 'Vous pouvez laissez le champs vide pour générer un mot de passe aléatoire.' %}
+
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn"/>
+  <a class="btn" href="{% url 'individual_subscription:account_list' %}">{% trans 'Annuler' %}</a>
+</form>
+
+{% endblock %}
