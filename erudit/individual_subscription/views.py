@@ -30,7 +30,7 @@ class OrganizationCheckMixin(LoginRequiredMixin):
         return fct(view)
 
     def get_queryset(self):
-        qs = IndividualAccount.objects.select_related('organization_policy')
+        qs = IndividualAccount.objects.select_related('organization_policy').order_by('-id')
         if self.request.user.is_superuser or self.request.user.is_staff:
             return qs.all()
         elif self.request.user.organizations_managed.count() > 0:
@@ -42,6 +42,7 @@ class OrganizationCheckMixin(LoginRequiredMixin):
 
 class IndividualAccountList(OrganizationCheckMixin, FilterView):
     filterset_class = IndividualAccountFilter
+    paginate_by = 10
 
 
 class IndividualAccountCreate(OrganizationCheckMixin, CreateView):

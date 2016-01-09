@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'datetimewidget',
     'plupload',
     'django_filters',
-
+    'spurl',
 )
 
 DATABASES = {
