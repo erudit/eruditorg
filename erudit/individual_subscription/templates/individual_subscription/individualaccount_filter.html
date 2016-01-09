@@ -1,15 +1,15 @@
 {% extends "individual_subscription/base.html" %}
-{% load i18n %}
+{% load i18n spurl %}
 
 {% block content-main %}
 
-<h1>{{ object_list|length }} {% trans "Comptes personnels" %} </h1>
+
+<h1>{% if is_paginated %}{{ paginator.count }}{% else %}{{object_list|length }}{% endif %} {% trans "Comptes personnels" %} </h1>
 
 <h4>{% trans 'Actions' %}</h4>
 
-<a class="btn btn-primary" 
-   href="{% url 'individual_subscription:account_add' %}">
-  {% trans "Ajouter un compte" %}
+<a class="btn btn-primary" href="{% url 'individual_subscription:account_add' %}">
+    {% trans "Ajouter un compte" %}
 </a>
 
 
@@ -19,7 +19,24 @@
     <input type="submit" class="btn" />
 </form>
 
-<h4>{% trans 'Résultats' %}</h4>
+<h4>{% trans 'Résultats paginés' %}
+
+{% if is_paginated %}
+        <span class="step-links">
+          {% if page_obj.has_previous %}
+            <a href='{% spurl base=request.get_full_path set_query="page={{ page_obj.previous_page_number }}" %}'>&lt;</a>
+          {% endif %}
+
+            {{ page_obj.number }} / {{ paginator.num_pages }}
+
+          {% if page_obj.has_next %}
+            <a href='{% spurl base=request.get_full_path set_query="page={{ page_obj.next_page_number }}" %}'>&gt;</a>
+          {% endif %}
+        </span>
+{% endif %}
+
+</h4>
+
 
 <table class="table table-striped">
     <thead>
@@ -53,9 +70,15 @@
             <td>{{ account.email }}</td>
             <td>{{ account.organization_policy }}</td>
             <td>
-              <a href="{% url 'individual_subscription:account_update' account.pk %}">{% trans 'Modifier' %}</a> | 
-              <a href="{% url 'individual_subscription:account_reset_pwd' account.pk %}">{% trans 'Réinitialiser mot de passe' %}</a> | 
-              <a href="{% url 'individual_subscription:account_delete' account.pk %}">{% trans 'Supprimer' %}</a>
+                <a href="{% url 'individual_subscription:account_update' account.pk %}">
+                    {% trans 'Modifier' %}
+                </a>|
+                <a href="{% url 'individual_subscription:account_reset_pwd' account.pk %}">
+                    {% trans 'Réinitialiser mot de passe' %}
+                </a>|
+                <a href="{% url 'individual_subscription:account_delete' account.pk %}">
+                    {% trans 'Supprimer' %}
+                </a>
             </td>
         </tr>
         {% endfor %}
