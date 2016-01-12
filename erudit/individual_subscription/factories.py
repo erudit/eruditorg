@@ -8,7 +8,7 @@ class PolicyFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'individual_subscription.Policy'
 
-    organization = factory.SubFactory(OrganisationFactory)
+    content_object = factory.SubFactory(OrganisationFactory)
     max_accounts = 10
 
 

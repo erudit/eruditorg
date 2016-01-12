@@ -2,8 +2,10 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.models import LogEntry, CHANGE
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.admin import GenericStackedInline
+from django.core.urlresolvers import reverse
 
-from .models import IndividualAccount, Policy
+from .models import IndividualAccount, Policy, Organisation
 
 
 class IndividualAccountAdmin(admin.ModelAdmin):
@@ -13,25 +15,15 @@ class IndividualAccountAdmin(admin.ModelAdmin):
         'firstname',
         'lastname',
         'email',
-        'policy',
     )
 
 
-class PolicyAdmin(admin.ModelAdmin):
-    list_display = (
-        'organization',
-        'comment',
-        'ratio',
-        'date_activation',
-        'date_renew',
-        'date_modification',
-        'date_creation',
-
-    )
+class PolicyInline(GenericStackedInline):
+    model = Policy
+    max_num = 1
     filter_horizontal = ("access_journal", "access_basket")
     fieldsets = (
         (None, {'fields': (
-            'organization',
             'comment',
             'max_accounts',
             'renew_cycle',
@@ -40,7 +32,55 @@ class PolicyAdmin(admin.ModelAdmin):
         (_("Droits d'accès"), {'fields': (
             'access_full', 'access_journal', 'access_basket', )}),
     )
+
+
+class OrganisationAdmin(admin.ModelAdmin):
+    inlines = (PolicyInline, )
+    fields = ('name', )
+    readonly_fields = ('name', )
+
+    def has_add_permission(self, request):
+        """
+        Only provide policy settings for existing Organizations.
+        """
+        return False
+
+
+class PolicyAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'content_type',
+        '_content_object',
+        'comment',
+        'ratio',
+        'date_activation',
+        'renew_cycle',
+        'date_renew',
+        'date_modification',
+        'date_creation',
+
+    )
+    list_filters = ('content_type', )
+    filter_horizontal = ("access_journal", "access_basket")
+    fieldsets = (
+        (None, {'fields': (
+            'comment',
+            'max_accounts',
+            'renew_cycle',
+            'date_activation',
+        )}),
+        (_("Droits d'accès"), {'fields': (
+            'access_full', 'access_journal', 'access_basket', )}),
+        (_("Recouplage objet"), {'classes': ('collapse', ), 'fields': (
+            'content_type', 'object_id', )}),
+    )
     actions = ['renew', ]
+
+    def has_add_permission(self, request):
+        """
+        Content type / object can't be selected
+        """
+        return False
 
     def ratio(self, obj):
         if not obj.max_accounts:
@@ -49,6 +89,19 @@ class PolicyAdmin(admin.ModelAdmin):
             maxi = obj.max_accounts
         return "{} / {}".format(obj.total_accounts, maxi)
     ratio.short_description = _("Ratio d'utilisation")
+
+    def _content_object(self, obj):
+        """
+        Link is hardcoded to the proxy model overriden in this app!
+        """
+        if not obj.content_object:
+            return
+        url = reverse("admin:individual_subscription_{}_change".format(
+            obj.content_object.__class__.__name__.lower()),
+            args=(obj.content_object.id, ))
+        return "<a href='{}'>{}</a>".format(url, obj.content_object)
+    _content_object.short_description = _("Objet")
+    _content_object.allow_tags = True
 
     def renew(self, request, queryset):
         for obj in queryset:
@@ -66,3 +119,4 @@ class PolicyAdmin(admin.ModelAdmin):
 
 admin.site.register(IndividualAccount, IndividualAccountAdmin)
 admin.site.register(Policy, PolicyAdmin)
+admin.site.register(Organisation, OrganisationAdmin)
