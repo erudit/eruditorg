@@ -3,21 +3,21 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.models import LogEntry, CHANGE
 from django.contrib.contenttypes.models import ContentType
 
-from .models import IndividualAccount, OrganizationPolicy
+from .models import IndividualAccount, Policy
 
 
 class IndividualAccountAdmin(admin.ModelAdmin):
-    list_filter = ('organization_policy', )
+    list_filter = ('policy', )
     list_display = (
         'id',
         'firstname',
         'lastname',
         'email',
-        'organization_policy',
+        'policy',
     )
 
 
-class OrganizationPolicyAdmin(admin.ModelAdmin):
+class PolicyAdmin(admin.ModelAdmin):
     list_display = (
         'organization',
         'comment',
@@ -65,4 +65,4 @@ class OrganizationPolicyAdmin(admin.ModelAdmin):
     renew.short_description = _("Renouveller l'inscription")
 
 admin.site.register(IndividualAccount, IndividualAccountAdmin)
-admin.site.register(OrganizationPolicy, OrganizationPolicyAdmin)
+admin.site.register(Policy, PolicyAdmin)

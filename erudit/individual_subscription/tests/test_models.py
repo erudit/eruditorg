@@ -3,27 +3,27 @@ from django.test import TestCase
 from erudit.factories import JournalFactory, BasketFactory
 from erudit.models import Journal
 
-from ..factories import OrganizationPolicyFactory, IndividualAccountFactory
+from ..factories import PolicyFactory, IndividualAccountFactory
 from ..models import IndividualAccountJournal
 
 
 class OrganizationPolicyTestCase(TestCase):
 
     def test_total_accounts(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         self.assertEqual(policy.total_accounts, 2)
 
     def test_date_activation(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         self.assertIsNone(policy.date_activation)
 
-        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(policy=policy)
         self.assertIsNotNone(policy.date_activation)
 
         first_date_activation = policy.date_activation
-        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(policy=policy)
         self.assertEqual(policy.date_activation, first_date_activation)
 
 
@@ -59,9 +59,9 @@ class IndividualAccountTestCase(TestCase):
 class IndividualAccountJournalTestCase(TestCase):
 
     def test_run_command_twice(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
@@ -71,9 +71,9 @@ class IndividualAccountJournalTestCase(TestCase):
         self.assertEqual(IndividualAccountJournal.objects.count(), 20)
 
     def test_removed_account(self):
-        policy = OrganizationPolicyFactory()
-        dude_to_delete = IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        dude_to_delete = IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
@@ -82,9 +82,9 @@ class IndividualAccountJournalTestCase(TestCase):
         self.assertEqual(IndividualAccountJournal.objects.count(), 10)
 
     def test_removed_journal(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
@@ -96,9 +96,9 @@ class IndividualAccountJournalTestCase(TestCase):
 class IndividualAccountJournalFullAccessTestCase(TestCase):
 
     def test_add_full_access(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         JournalFactory.create_batch(10)
         policy.access_full = True
         policy.save()
@@ -109,9 +109,9 @@ class IndividualAccountJournalFullAccessTestCase(TestCase):
 class IndividualAccountJournalBasketTestCase(TestCase):
 
     def test_link_baskets(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         basket1 = BasketFactory()
         basket1.journals = JournalFactory.create_batch(2)
         basket1.save()
@@ -124,9 +124,9 @@ class IndividualAccountJournalBasketTestCase(TestCase):
         self.assertEqual(IndividualAccountJournal.objects.count(), 10)
 
     def test_remove_journal_from_baskets(self):
-        policy = OrganizationPolicyFactory()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         basket1 = BasketFactory()
         basket1.journals = JournalFactory.create_batch(2)
         basket1.save()
@@ -142,9 +142,9 @@ class IndividualAccountJournalBasketTestCase(TestCase):
         self.assertEqual(IndividualAccountJournal.objects.count(), 6)
 
     def test_remove_account(self):
-        policy = OrganizationPolicyFactory()
-        dude_to_delete = IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        policy = PolicyFactory()
+        dude_to_delete = IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         basket1 = BasketFactory()
         basket1.journals = JournalFactory.create_batch(2)
         basket1.save()
@@ -162,20 +162,20 @@ class IndividualAccountJournalBasketTestCase(TestCase):
 class IndividualAccountJournalCustomTestCase(TestCase):
 
     def test_link_journals(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         policy.access_journal = JournalFactory.create_batch(2)
         policy.save()
-        IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         policy.generate_flat_access()
         self.assertEqual(IndividualAccountJournal.objects.count(), 4)
 
     def test_remove_account(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         policy.access_journal = JournalFactory.create_batch(2)
         policy.save()
-        dude_to_delete = IndividualAccountFactory(organization_policy=policy)
-        IndividualAccountFactory(organization_policy=policy)
+        dude_to_delete = IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
         policy.generate_flat_access()
         dude_to_delete.delete()
         policy.generate_flat_access()

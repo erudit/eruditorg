@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from ..factories import OrganizationPolicyFactory, IndividualAccountFactory
+from ..factories import PolicyFactory, IndividualAccountFactory
 from ..models import IndividualAccount
 
 
@@ -18,7 +18,7 @@ class AccountListViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302, response.url)
 
     def test_staff(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         user = User.objects.create_user(username='staff', password='staff')
         user.is_staff = True
         user.save()
@@ -28,7 +28,7 @@ class AccountListViewTestCase(TestCase):
         self.assertContains(response, str(policy))
 
     def test_valid_manager(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
@@ -42,11 +42,11 @@ class AccountListViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302, response.url)
 
     def test_filtered_listing(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
         policy.managers.add(user)
         policy.save()
-        IndividualAccountFactory.create_batch(2, organization_policy=policy)
+        IndividualAccountFactory.create_batch(2, policy=policy)
         IndividualAccountFactory.create_batch(3)
         self.client.login(username=user.username, password='manager')
         response = self.client.get(self.url)
@@ -60,8 +60,8 @@ class AccountCreateViewTestCase(TestCase):
         self.url = reverse('individual_subscription:account_add')
 
     def test_filtered_organization(self):
-        policy = OrganizationPolicyFactory()
-        policy2 = OrganizationPolicyFactory()
+        policy = PolicyFactory()
+        policy2 = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
@@ -75,20 +75,20 @@ class AccountCreateViewTestCase(TestCase):
 class AccountDeleteViewTestCase(TestCase):
 
     def test_permissions_ok(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
 
-        account = IndividualAccountFactory(organization_policy=policy)
+        account = IndividualAccountFactory(policy=policy)
         url = reverse('individual_subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_permissions_ko(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
@@ -104,13 +104,13 @@ class AccountDeleteViewTestCase(TestCase):
 class AccountResetPwdViewTestCase(TestCase):
 
     def test_empty_pwd(self):
-        policy = OrganizationPolicyFactory()
+        policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
 
-        account = IndividualAccountFactory(organization_policy=policy)
+        account = IndividualAccountFactory(policy=policy)
         old_pwd = account.password
         url = reverse('individual_subscription:account_reset_pwd',
                       args=(account.pk, ))

@@ -30,12 +30,12 @@ class OrganizationCheckMixin(LoginRequiredMixin):
         return fct(view)
 
     def get_queryset(self):
-        qs = IndividualAccount.objects.select_related('organization_policy').order_by('-id')
+        qs = IndividualAccount.objects.order_by('-id')
         if self.request.user.is_superuser or self.request.user.is_staff:
             return qs.all()
         elif self.request.user.organizations_managed.count() > 0:
             org_ids = [o.id for o in self.request.user.organizations_managed.all()]
-            return qs.filter(organization_policy__in=org_ids)
+            return qs.filter(policy__in=org_ids)
         else:
             return qs.none()
 
