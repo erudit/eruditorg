@@ -19,9 +19,9 @@ class IndividualAccount(models.Model):
     """
     email = models.CharField(max_length=120, verbose_name=_("Courriel"))
     password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
-    organization_policy = models.ForeignKey(
-        "OrganizationPolicy",
-        verbose_name=_("Accès de l'organisation"),
+    policy = models.ForeignKey(
+        "Policy",
+        verbose_name=_("Accès"),
         related_name="accounts"
     )
     firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
@@ -33,10 +33,10 @@ class IndividualAccount(models.Model):
 
     def save(self, *args, **kwargs):
         # Stamp first user created date
-        if not self.pk and self.organization_policy.date_activation is None:
-            self.organization_policy.date_activation = timezone.now()
-            self.organization_policy.date_renew = self.organization_policy.date_activation
-            self.organization_policy.renew()
+        if not self.pk and self.policy.date_activation is None:
+            self.policy.date_activation = timezone.now()
+            self.policy.date_renew = self.policy.date_activation
+            self.policy.renew()
 
         # Password encryption
         if self.pk:
@@ -109,7 +109,7 @@ class FlatAccessMixin(object):
             self.fa_link_journals(self.access_journal.all())
 
 
-class OrganizationPolicy(FlatAccessMixin, models.Model):
+class Policy(FlatAccessMixin, models.Model):
     """
     Entity which describe who and what resource, an organization can access.
     (Wikipedia, AEIQ, Revue).
@@ -154,7 +154,7 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
 
     access_full = models.BooleanField(
         default=False,
-        verbose_name=_("Accès à toutes les ressources")
+        verbose_name=_("Accès à tous les produits")
     )
 
     access_journal = models.ManyToManyField(
@@ -177,8 +177,8 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
     )
 
     class Meta:
-        verbose_name = _("Accès de l'organisation")
-        verbose_name_plural = _("Accès des organisations")
+        verbose_name = _("Accès aux produits")
+        verbose_name_plural = _("Accès aux produits")
 
     @property
     def total_accounts(self):
@@ -189,7 +189,7 @@ class OrganizationPolicy(FlatAccessMixin, models.Model):
 
     def save(self, *args, **kwargs):
         self.date_modification = timezone.now()
-        super(OrganizationPolicy, self).save(*args, **kwargs)
+        super(Policy, self).save(*args, **kwargs)
 
     def renew(self):
         if self.date_activation is None:

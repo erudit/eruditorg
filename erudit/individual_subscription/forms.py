@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import django_filters
 
-from .models import IndividualAccount, OrganizationPolicy
+from .models import IndividualAccount, Policy
 
 
 class IndividualAccountFilter(django_filters.FilterSet):
@@ -13,22 +13,22 @@ class IndividualAccountFilter(django_filters.FilterSet):
         fields = {
             'firstname': ['icontains', ],
             'lastname': ['icontains', ],
-            'organization_policy': ['exact', ]
+            'policy': ['exact', ]
         }
 
 
 class IndividualAccountForm(ModelForm):
     class Meta:
         model = IndividualAccount
-        fields = ['firstname', 'lastname', 'email', 'organization_policy', ]
+        fields = ['firstname', 'lastname', 'email', 'policy', ]
 
     def __init__(self, user, *args, **kwargs):
         super(IndividualAccountForm, self).__init__(*args, **kwargs)
         org_ids = [o.id for o in user.organizations_managed.all()]
         if not (user.is_staff or user.is_superuser):
-            self.fields['organization_policy'] = forms.ModelChoiceField(
-                queryset=OrganizationPolicy.objects.filter(id__in=org_ids),
-                label=OrganizationPolicy._meta.verbose_name)
+            self.fields['policy'] = forms.ModelChoiceField(
+                queryset=Policy.objects.filter(id__in=org_ids),
+                label=Policy._meta.verbose_name)
 
 
 class IndividualAccountResetPwdForm(ModelForm):
