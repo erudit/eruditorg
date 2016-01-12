@@ -2,12 +2,14 @@ import csv
 import os
 
 from django.core.management.base import BaseCommand
+from django.db import connections
 
 from erudit.models import Journal, Organisation
+from erudit.factories import OrganisationFactory
 
 from .legacy_models import Abonneindividus
-from ..models import IndividualAccount, OrganizationPolicy
-from ..factories import OrganizationPolicyFactory
+from ..models import IndividualAccount, Policy
+from ..factories import PolicyFactory
 
 
 class Command(BaseCommand):
@@ -41,13 +43,13 @@ class Command(BaseCommand):
                 table. Importation canceled.")
             return
 
-        dummy_organization_policy = OrganizationPolicyFactory()
+        dummy_organization_policy = PolicyFactory(content_object=OrganisationFactory())
         self.stdout.write("Dummy policy organization and its policy was created \
             to allow creation in the new system. Don't forget to remove one.")
 
         for old_abonne in Abonneindividus.objects.all():
             new_account = IndividualAccount(
-                organization_policy=dummy_organization_policy,
+                policy=dummy_organization_policy,
                 id=old_abonne.abonneindividusid,
                 email=old_abonne.courriel,
                 firstname=old_abonne.prenom,
@@ -55,14 +57,15 @@ class Command(BaseCommand):
                 password=old_abonne.password)
             new_account.save()
 
-    def link_abonnes(self):
+    def link_abonnes_from_csv(self):
         # Create policy from filename if it does not exist
         filename = self.args[1]
         basename = os.path.basename(filename)
         if '.' in basename:
             basename = basename.split('.')[0]
         organization = Organisation.objects.get(name__iexact=basename)
-        policy, created = OrganizationPolicy.objects.get_or_create(organization=organization)
+        policy = Policy(content_object=organization)
+        policy.save()
         print(policy)
 
         with open(filename, 'r') as csvfile:
@@ -75,7 +78,7 @@ class Command(BaseCommand):
                 try:
                     account = IndividualAccount.objects.\
                         get(email__iexact=email)
-                    account.organization_policy = policy
+                    account.policy = policy
                     account.save()
                 except Exception:
                     print('{} {}'.format('account', email))
@@ -87,3 +90,35 @@ class Command(BaseCommand):
                     journal = Journal.objects.get(id=journal_id)
                     policy.access_journal.add(journal)
                     policy.save()
+
+    def link_abonnes_from_acces(self):
+        dummy_policy_id = self.args[1]
+        accounts = IndividualAccount.objects.filter(policy_id=dummy_policy_id)
+        cursor = connections['legacy_individual_subscription'].cursor()
+        for account in accounts:
+            cursor.execute("SELECT revueID FROM Revueindividus WHERE abonneIndividusID = {}".format(account.id))
+            publishers = []
+            journals = []
+            rows = cursor.fetchall()
+            for row in rows:
+                try:
+                    journal = Journal.objects.get(id=row[0])
+                    journals.append(journal)
+                    publishers.append(journal.publisher)
+                except Journal.DoesNotExist:
+                    publishers.append("XXX No revue {}".format(row[0]))
+
+            pubs = [str(p) for p in publishers]
+            auto_name = "!!{}".format("|".join(pubs))[0:119]
+            organization, created = Organisation.objects.get_or_create(name=auto_name)
+            policies = [p for p in Policy.objects.all() if p.content_object == organization]
+            if len(policies) == 1:
+                policy = policies[0]
+            else:
+                policy = Policy(content_object=organization)
+                policy.save()
+            for journal in journals:
+                policy.access_journal.add(journal)
+            policy.save()
+            account.policy = policy
+            account.save()

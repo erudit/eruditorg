@@ -8,8 +8,16 @@ from django.utils import timezone
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 from erudit.models import Journal
+from erudit.models import Organisation as CoreOrganisation
+
+
+class Organisation(CoreOrganisation):
+    class Meta:
+        proxy = True
 
 
 class IndividualAccount(models.Model):
@@ -142,7 +150,14 @@ class Policy(FlatAccessMixin, models.Model):
         default=365,
     )
 
-    organization = models.ForeignKey("erudit.Organisation", verbose_name=_("Organisation"),)
+    content_type = models.ForeignKey(
+        ContentType,
+        limit_choices_to={'model__in': ('organisation', 'user', ),
+                          'app_label__in': ('individual_subscription', 'auth', )},
+        verbose_name=_('Type'),
+    )
+    content_object = GenericForeignKey('content_type', 'object_id')
+    object_id = models.PositiveIntegerField()
 
     comment = models.TextField(verbose_name=_("Commentaire"), blank=True)
 
@@ -185,7 +200,7 @@ class Policy(FlatAccessMixin, models.Model):
         return self.accounts.count()
 
     def __str__(self):
-        return '{} ({})'.format(self.organization, self.id)
+        return '{} [{}#{}]'.format(self.content_object, self.content_type, self.id)
 
     def save(self, *args, **kwargs):
         self.date_modification = timezone.now()
