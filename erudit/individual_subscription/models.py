@@ -40,9 +40,13 @@ class IndividualAccount(models.Model):
 
         # Password encryption
         if self.pk:
-            old_crypted_password = IndividualAccount.objects.get(pk=self.pk).password
-            if not (self.password == old_crypted_password):
-                self.update_password(self.password)
+            if IndividualAccount.objects.filter(pk=self.pk).count() == 1:
+                old_crypted_password = IndividualAccount.objects.get(pk=self.pk).password
+                if not (self.password == old_crypted_password):
+                    self.update_password(self.password)
+            else:
+                # Not yet in Db, so the password is set in constructor already crypted
+                pass
         else:
             new_password = self.generate_password()
             self.update_password(new_password)
