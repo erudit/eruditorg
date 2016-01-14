@@ -34,14 +34,46 @@ python manage.py individual_subscription import_abonnes
 Link abonnes
 ------------
 
-Linking is done from CSV files (which could be exploded in several xls files)
+* Linking is done from CSV files (which could be exploded in several xls files)
 
 pip install csvkit
 
 in2csv Wikipedia1.xls >> wikipedia.csv 
 in2csv Wikipedia2.xls >> wikipedia.csv 
 
-python manage.py individual_subscription link_abonnes wikipedia.csv
+python manage.py individual_subscription link_abonnes_from_csv wikipedia.csv
+
+* Scan from legacy flat access
+
+python manage.py individual_subscription link_abonnes_from_acces <id_dummy_org>
+
+
+Sample script to reset db
+=========================
+
+psql -d template1 -c 'DROP DATABASE zenon;'
+psql -d template1 -c 'CREATE DATABASE zenon OWNER zenon;'
+python manage.py migrate
+
+python manage.py loaddata publisher.json
+python manage.py loaddata journal.json
+
+python manage.py individual_subscription import_abonnes
+
+python manage.py shell <<EOF
+from erudit.models import Organisation
+Organisation.objects.get_or_create(name="AIEQ")
+EOF
+python manage.py individual_subscription link_abonnes_from_csv ../AIEQ.csv
+python manage.py shell <<EOF
+from erudit.models import Organisation
+Organisation.objects.get_or_create(name="wikipedia")
+EOF
+python manage.py individual_subscription link_abonnes_from_csv ../wikipedia.csv
+
+python manage.py individual_subscription link_abonnes_from_acces 1
+
+python manage.py createsuperuser
 
 
 Cleanup notes (After migration system)

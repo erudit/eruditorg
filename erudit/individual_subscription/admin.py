@@ -27,13 +27,14 @@ class PolicyInline(GenericStackedInline):
 class IndividualAccountAdmin(admin.ModelAdmin):
     inlines = (PolicyInline, )
     search_fields = ('id', 'firstname', 'lastname', 'email', )
-    list_filter = ('policy', )
+    list_filter = ('policy', 'active', )
     list_display = (
         'id',
         'firstname',
         'lastname',
         'email',
         'policy',
+        'active',
     )
 
     def save_formset(self, request, form, formset, change):

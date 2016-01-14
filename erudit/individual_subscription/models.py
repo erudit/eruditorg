@@ -40,6 +40,7 @@ class IndividualAccount(models.Model):
     )
     firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
     lastname = models.CharField(max_length=30, verbose_name=_("Nom"))
+    active = models.BooleanField(default=True, verbose_name=_("Actif"))
 
     class Meta:
         verbose_name = _("Compte personnel")
