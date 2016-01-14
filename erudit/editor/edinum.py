@@ -8,13 +8,14 @@ from django.conf import settings
 from erudit.models import Publisher, Journal
 
 EDINUM_SQL_QUERY = """
-SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, sp.shortname, t.Subtitle
+SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, sp.shortname, li.code, t.Subtitle
 FROM edinum.contributionseries cs
 JOIN title t ON cs.SeriesID = t.SeriesID
 JOIN contribution c ON cs.ContributionID = c.ID
 JOIN artificialperson ap ON c.PersonID = ap.PersonID
 JOIN seriesproduction sp ON t.SeriesId = sp.SeriesID
-WHERE ContributiontypeID = '3';"""  # noqa
+JOIN localidentifier li ON sp.LocalIdentifierId = li.id
+WHERE ContributiontypeID = '3'; """  # noqa
 
 log = logging.getLogger(__name__)
 
@@ -36,7 +37,8 @@ def fetch_publishers_from_edinum():
 
 
 def create_or_update_journal(
-        publisher, journal_id, journal_name, journal_shortname, journal_subtitle):
+        publisher, journal_id, journal_name,
+        journal_shortname, journal_localidentifier, journal_subtitle):
     journal_count = Journal.objects.filter(
         edinum_id=journal_id
     ).count()

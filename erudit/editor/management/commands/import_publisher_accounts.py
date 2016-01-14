@@ -21,7 +21,8 @@ class Command(BaseCommand):
 
         for publisher_row in fetch_publishers_from_edinum():
             (person_id, publisher_name, series_id, journal_id,
-             journal_name, journal_shortname, journal_subtitle) = publisher_row
+             journal_name, journal_shortname, journal_localidentifier,
+             journal_subtitle) = publisher_row
 
             if person_id not in self.created_or_updated_publishers:
                 publisher = create_or_update_publisher(
@@ -37,6 +38,7 @@ class Command(BaseCommand):
                     journal_id,
                     journal_name,
                     journal_shortname,
+                    journal_localidentifier,
                     journal_subtitle
                 )
 

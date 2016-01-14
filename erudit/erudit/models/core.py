@@ -243,6 +243,13 @@ class Journal(Named, Edinum):
         help_text=_("Choisir l'ancien nom de la revue"),
     )
 
+    localidentifier = models.CharField(
+        max_length=50,
+        null=True, blank=True,
+        verbose_name=_("Identifiant Fedora")
+    )
+    """Fedora commons identifier"""
+
     publisher = models.ForeignKey(
         'Publisher',
         null=True, blank=True,
