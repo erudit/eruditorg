@@ -95,6 +95,9 @@ class Command(BaseCommand):
         dummy_policy_id = self.args[1]
         accounts = IndividualAccount.objects.filter(policy_id=dummy_policy_id)
         cursor = connections['legacy_individual_subscription'].cursor()
+
+        journals_account_volumetry = {}
+
         for account in accounts:
             cursor.execute("SELECT revueID FROM Revueindividus WHERE abonneIndividusID = {}".format(account.id))
             publishers = []
@@ -108,17 +111,34 @@ class Command(BaseCommand):
                 except Journal.DoesNotExist:
                     publishers.append("XXX No revue {}".format(row[0]))
 
-            pubs = [str(p) for p in publishers]
-            auto_name = "!!{}".format("|".join(pubs))[0:119]
-            organization, created = Organisation.objects.get_or_create(name=auto_name)
-            policies = [p for p in Policy.objects.all() if p.content_object == organization]
-            if len(policies) == 1:
-                policy = policies[0]
-            else:
-                policy = Policy(content_object=organization)
+                jids = sorted([j.id for j in journals])
+                key = "|".join([str(j) for j in jids])
+                if key not in journals_account_volumetry:
+                    journals_account_volumetry[key] = []
+                journals_account_volumetry[key].append(account)
+
+        for k, accounts in journals_account_volumetry.items():
+            # Journal policy
+            if k is not '' and len(k.split('|')) == 1 and len(accounts) > 1:
+                journal = Journal.objects.get(id=k)
+                policy = Policy(content_object=journal)
                 policy.save()
-            for journal in journals:
                 policy.access_journal.add(journal)
-            policy.save()
-            account.policy = policy
-            account.save()
+                policy.save()
+                for account in accounts:
+                    account.policy = policy
+                    account.save()
+
+            # Individual policy
+            if k is not '' and len(accounts) == 1:
+                account = accounts[0]
+                ids = k.split('|')
+                journals = Journal.objects.filter(id__in=ids)
+                policy = Policy(content_object=account)
+                policy.save()
+                for journal in journals:
+                    policy.access_journal.add(journal)
+                policy.save()
+
+                account.policy = policy
+                account.save()
