@@ -3,6 +3,7 @@ import os
 
 from django.core.management.base import BaseCommand
 from django.db import connections
+from django.contrib.contenttypes.models import ContentType
 
 from erudit.models import Journal, Organisation
 from erudit.factories import OrganisationFactory
@@ -96,13 +97,17 @@ class Command(BaseCommand):
         accounts = IndividualAccount.objects.filter(policy_id=dummy_policy_id)
         cursor = connections['legacy_individual_subscription'].cursor()
 
-        journals_account_volumetry = {}
+        journals_account_volumetry = {"": []}
 
         for account in accounts:
             cursor.execute("SELECT revueID FROM Revueindividus WHERE abonneIndividusID = {}".format(account.id))
             publishers = []
             journals = []
             rows = cursor.fetchall()
+
+            if len(rows) == 0:
+                journals_account_volumetry[""].append(account)
+
             for row in rows:
                 try:
                     journal = Journal.objects.get(id=row[0])
@@ -118,6 +123,12 @@ class Command(BaseCommand):
                 journals_account_volumetry[key].append(account)
 
         for k, accounts in journals_account_volumetry.items():
+            # Not any access
+            if k is '':
+                for account in accounts:
+                    account.active = False
+                    account.save()
+
             # Journal policy
             if k is not '' and len(k.split('|')) == 1 and len(accounts) > 1:
                 journal = Journal.objects.get(id=k)
@@ -134,8 +145,12 @@ class Command(BaseCommand):
                 account = accounts[0]
                 ids = k.split('|')
                 journals = Journal.objects.filter(id__in=ids)
-                policy = Policy(content_object=account)
-                policy.save()
+                ct = ContentType.objects.get(app_label=account._meta.app_label, model=account.__class__.__name__.lower())
+                if Policy.objects.filter(content_type=ct, object_id=account.id).count():
+                    policy = Policy.objects.get(content_type=ct, object_id=account.id)
+                else:
+                    policy = Policy(content_object=account)
+                    policy.save()
                 for journal in journals:
                     policy.access_journal.add(journal)
                 policy.save()
