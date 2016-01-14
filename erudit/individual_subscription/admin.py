@@ -8,18 +8,6 @@ from django.core.urlresolvers import reverse
 from .models import IndividualAccount, Policy, Organisation, Journal
 
 
-class IndividualAccountAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'firstname', 'lastname', 'email', )
-    list_filter = ('policy', )
-    list_display = (
-        'id',
-        'firstname',
-        'lastname',
-        'email',
-        'policy',
-    )
-
-
 class PolicyInline(GenericStackedInline):
     model = Policy
     max_num = 1
@@ -34,6 +22,28 @@ class PolicyInline(GenericStackedInline):
         (_("Droits d'accès"), {'fields': (
             'access_full', 'access_journal', 'access_basket', )}),
     )
+
+
+class IndividualAccountAdmin(admin.ModelAdmin):
+    inlines = (PolicyInline, )
+    search_fields = ('id', 'firstname', 'lastname', 'email', )
+    list_filter = ('policy', )
+    list_display = (
+        'id',
+        'firstname',
+        'lastname',
+        'email',
+        'policy',
+    )
+
+    def save_formset(self, request, form, formset, change):
+        super(IndividualAccountAdmin, self).save_formset(request, form, formset, change)
+        policies = [instance for instance in formset.save(commit=False) if instance.__class__ == Policy]
+        if len(policies) > 1:
+            raise Exception(_("Une seule règle d'accès ne peut être gérée pour l'instant"))
+        if len(policies) == 1:
+            form.instance.policy = policies[0]
+            form.instance.save()
 
 
 class OrganisationAdmin(admin.ModelAdmin):
