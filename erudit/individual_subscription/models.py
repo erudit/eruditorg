@@ -158,8 +158,7 @@ class Policy(FlatAccessMixin, models.Model):
 
     content_type = models.ForeignKey(
         ContentType,
-        limit_choices_to={'model__in': ('organisation', 'user', ),
-                          'app_label__in': ('individual_subscription', 'auth', )},
+        limit_choices_to=models.Q(app_label='erudit', model__in=('organisation', 'journal')) | models.Q(model='individualaccount'),
         verbose_name=_('Type'),
     )
     content_object = GenericForeignKey('content_type', 'object_id')

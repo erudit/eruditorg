@@ -96,7 +96,7 @@ class PolicyAdmin(admin.ModelAdmin):
         'date_creation',
 
     )
-    list_filters = ('content_type', )
+    list_filter = ('content_type', )
     filter_horizontal = ("access_journal", "access_basket")
     fieldsets = (
         (None, {'fields': (
