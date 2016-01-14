@@ -5,16 +5,18 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
-from .models import IndividualAccount, Policy, Organisation
+from .models import IndividualAccount, Policy, Organisation, Journal
 
 
 class IndividualAccountAdmin(admin.ModelAdmin):
+    search_fields = ('id', 'firstname', 'lastname', 'email', )
     list_filter = ('policy', )
     list_display = (
         'id',
         'firstname',
         'lastname',
         'email',
+        'policy',
     )
 
 
@@ -42,6 +44,30 @@ class OrganisationAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         """
         Only provide policy settings for existing Organizations.
+        """
+        return False
+
+    def has_delete_permission(self, request, pk=None):
+        """
+        Only provide policy settings for existing Organizations.
+        """
+        return False
+
+
+class JournalAdmin(admin.ModelAdmin):
+    inlines = (PolicyInline, )
+    fields = ('name', )
+    readonly_fields = ('name', )
+
+    def has_add_permission(self, request):
+        """
+        Only provide policy settings for existing Journal.
+        """
+        return False
+
+    def has_delete_permission(self, request, pk=None):
+        """
+        Only provide policy settings for existing Journal.
         """
         return False
 
@@ -120,3 +146,4 @@ class PolicyAdmin(admin.ModelAdmin):
 admin.site.register(IndividualAccount, IndividualAccountAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
+admin.site.register(Journal, JournalAdmin)

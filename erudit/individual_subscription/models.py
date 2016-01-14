@@ -11,13 +11,19 @@ from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
-from erudit.models import Journal
 from erudit.models import Organisation as CoreOrganisation
+from erudit.models import Journal as CoreJournal
 
 
 class Organisation(CoreOrganisation):
     class Meta:
         proxy = True
+
+
+class Journal(CoreJournal):
+    class Meta:
+        proxy = True
+        verbose_name = _('Revue')
 
 
 class IndividualAccount(models.Model):
@@ -105,7 +111,7 @@ class FlatAccessMixin(object):
 
         # Full access
         if self.access_full:
-            journals = Journal.objects.all()
+            journals = CoreJournal.objects.all()
             self.fa_link_journals(journals)
 
         # Journals from basket access
