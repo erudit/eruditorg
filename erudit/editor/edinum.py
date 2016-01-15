@@ -8,12 +8,14 @@ from django.conf import settings
 from erudit.models import Publisher, Journal
 
 EDINUM_SQL_QUERY = """
-SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, t.Subtitle
+SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, sp.shortname, li.code, t.Subtitle
 FROM edinum.contributionseries cs
 JOIN title t ON cs.SeriesID = t.SeriesID
 JOIN contribution c ON cs.ContributionID = c.ID
 JOIN artificialperson ap ON c.PersonID = ap.PersonID
-WHERE ContributiontypeID = '3';"""
+JOIN seriesproduction sp ON t.SeriesId = sp.SeriesID
+JOIN localidentifier li ON sp.LocalIdentifierId = li.id
+WHERE ContributiontypeID = '3'; """  # noqa
 
 log = logging.getLogger(__name__)
 
@@ -35,7 +37,8 @@ def fetch_publishers_from_edinum():
 
 
 def create_or_update_journal(
-        publisher, journal_id, journal_name, journal_subtitle):
+        publisher, journal_id, journal_name,
+        journal_shortname, journal_localidentifier, journal_subtitle):
     journal_count = Journal.objects.filter(
         edinum_id=journal_id
     ).count()
@@ -55,6 +58,7 @@ def create_or_update_journal(
         else:
             journal.publisher = publisher
             journal.name = journal_name
+            journal.code = journal_shortname
             journal.subtitle = journal_subtitle
             journal.sync_date = datetime.now()
             journal.save()
@@ -62,12 +66,14 @@ def create_or_update_journal(
     else:
         journal = Journal(
             name=journal_name,
+            code=journal_shortname,
             subtitle=journal_subtitle,
             synced_with_edinum=True,
             edinum_id=journal_id,
             publisher=publisher,
             sync_date=datetime.now(),
         )
+
         journal.save()
         return journal
 
