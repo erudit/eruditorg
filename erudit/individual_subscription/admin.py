@@ -5,13 +5,31 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
-from .models import IndividualAccount, Policy, Organisation, Journal
+from .models import (IndividualAccount, Policy, PolicyEvent,
+                     Organisation, Journal)
+
+
+class PolicyEventAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'date_creation',
+        'policy',
+        'code',
+        'message',
+    )
+    search_fields = ('message', 'code', )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, pk=None):
+        return request.user.is_superuser
 
 
 class PolicyInline(GenericStackedInline):
     model = Policy
     max_num = 1
-    filter_horizontal = ("access_journal", "access_basket")
+    filter_horizontal = ("managers", "access_journal", "access_basket")
     fieldsets = (
         (None, {'fields': (
             'comment',
@@ -98,18 +116,16 @@ class PolicyAdmin(admin.ModelAdmin):
 
     )
     list_filter = ('content_type', )
-    filter_horizontal = ("access_journal", "access_basket")
+    filter_horizontal = ("managers", "access_journal", "access_basket")
     fieldsets = (
         (None, {'fields': (
-            'comment',
+            'managers',
             'max_accounts',
             'renew_cycle',
             'date_activation',
         )}),
         (_("Droits d'accès"), {'fields': (
             'access_full', 'access_journal', 'access_basket', )}),
-        (_("Recouplage objet"), {'classes': ('collapse', ), 'fields': (
-            'content_type', 'object_id', )}),
     )
     actions = ['renew', ]
 
@@ -158,3 +174,4 @@ admin.site.register(IndividualAccount, IndividualAccountAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Journal, JournalAdmin)
+admin.site.register(PolicyEvent, PolicyEventAdmin)

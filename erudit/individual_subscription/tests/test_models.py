@@ -4,7 +4,7 @@ from erudit.factories import JournalFactory, BasketFactory
 from erudit.models import Journal
 
 from ..factories import PolicyFactory, IndividualAccountFactory
-from ..models import IndividualAccountJournal
+from ..models import IndividualAccountJournal, PolicyEvent
 
 
 class OrganizationPolicyTestCase(TestCase):
@@ -180,3 +180,31 @@ class IndividualAccountJournalCustomTestCase(TestCase):
         dude_to_delete.delete()
         policy.generate_flat_access()
         self.assertEqual(IndividualAccountJournal.objects.count(), 2)
+
+
+class EventTestCase(TestCase):
+
+    def test_event_with_no_pb(self):
+        policy = PolicyFactory(max_accounts=2)
+        policy.save()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
+        policy.notify_limit_reached()
+        self.assertEqual(PolicyEvent.objects.count(), 0)
+
+    def test_over(self):
+        policy = PolicyFactory(max_accounts=1)
+        policy.save()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
+        policy.notify_limit_reached()
+        self.assertEqual(PolicyEvent.objects.count(), 1)
+
+    def test_no_spam_event(self):
+        policy = PolicyFactory(max_accounts=1)
+        policy.save()
+        IndividualAccountFactory(policy=policy)
+        IndividualAccountFactory(policy=policy)
+        policy.notify_limit_reached()
+        policy.notify_limit_reached()
+        self.assertEqual(PolicyEvent.objects.count(), 1)
