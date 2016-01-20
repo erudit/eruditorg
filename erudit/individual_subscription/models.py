@@ -70,6 +70,7 @@ class IndividualAccount(models.Model):
                 # Not yet in Db, so the password is set in constructor already crypted
                 pass
         else:
+            self.mail_account()
             new_password = self.generate_password()
             self.update_password(new_password)
         super(IndividualAccount, self).save(*args, **kwargs)
@@ -95,6 +96,19 @@ class IndividualAccount(models.Model):
             message=html_message,
             html_message=html_message,
             subject=_("erudit.org : mot de passe")
+        )
+
+    def mail_account(self):
+        template = get_template('individual_subscription/mail/new_account.html')
+        context = {'object': self}
+        html_message = template.render(context)
+        recipient = self.email
+        mail.send(
+            recipient,
+            settings.RENEWAL_FROM_EMAIL,
+            message=html_message,
+            html_message=html_message,
+            subject=_("erudit.org : création de votre compte")
         )
 
     def sha1(self, msg, salt=None):
