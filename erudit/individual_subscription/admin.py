@@ -57,7 +57,8 @@ class IndividualAccountAdmin(admin.ModelAdmin):
 
     def save_formset(self, request, form, formset, change):
         super(IndividualAccountAdmin, self).save_formset(request, form, formset, change)
-        policies = [instance for instance in formset.save(commit=False) if instance.__class__ == Policy]
+        policies = [instance for instance in formset.save(commit=False) if
+                    instance.__class__ == Policy]
         if len(policies) > 1:
             raise Exception(_("Une seule règle d'accès ne peut être gérée pour l'instant"))
         if len(policies) == 1:
@@ -165,7 +166,8 @@ class PolicyAdmin(admin.ModelAdmin):
                 object_id=obj.pk,
                 object_repr=str(obj),
                 action_flag=CHANGE,
-                change_message=_("Renouvellement jusqu'à %s (%s jours)" % (obj.date_renew, obj.renew_cycle)),
+                change_message=_("Renouvellement jusqu'à %s (%s jours)" % (
+                    obj.date_renew, obj.renew_cycle)),
             )
             self.message_user(request, "%s a été renouvellée jusqu'à %s." % (obj, obj.date_renew))
     renew.short_description = _("Renouveller l'inscription")

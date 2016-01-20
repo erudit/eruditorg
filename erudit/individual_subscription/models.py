@@ -208,7 +208,8 @@ class Policy(FlatAccessMixin, models.Model):
         blank=True,
         null=True,
         verbose_name=_("Date d'activation"),
-        help_text=_("Ce champs se remplit automatiquement. Il est éditable uniquement pour les données existantes qui n'ont pas cette information")
+        help_text=_("Ce champs se remplit automatiquement. \
+            Il est éditable uniquement pour les données existantes qui n'ont pas cette information")
     )
     date_renew = models.DateTimeField(
         null=True,
@@ -221,7 +222,9 @@ class Policy(FlatAccessMixin, models.Model):
 
     content_type = models.ForeignKey(
         ContentType,
-        limit_choices_to=models.Q(app_label='erudit', model__in=('organisation', 'journal')) | models.Q(model='individualaccount'),
+        limit_choices_to=models.Q(
+            app_label='erudit', model__in=('organisation', 'journal')
+        ) | models.Q(model='individualaccount'),
         verbose_name=_('Type'),
     )
     content_object = GenericForeignKey('content_type', 'object_id')
