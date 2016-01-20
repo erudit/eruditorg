@@ -19,4 +19,5 @@ class IndividualAccountFactory(factory.django.DjangoModelFactory):
 
     firstname = factory.Sequence(lambda n: 'prenom{}'.format(n))
     lastname = factory.Sequence(lambda n: 'nom{}'.format(n))
+    email = factory.Sequence(lambda n: 'mail{}@erudit.test'.format(n))
     policy = factory.SubFactory(PolicyFactory)

@@ -80,9 +80,22 @@ class IndividualAccount(models.Model):
     def generate_password(self):
         return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])
 
-    def update_password(self, password):
-        self.password = self.sha1(password)
-        # TODO mail to user te new password
+    def update_password(self, plain_password):
+        self.password = self.sha1(plain_password)
+        self.mail_password(plain_password)
+
+    def mail_password(self, plain_password):
+        template = get_template('individual_subscription/mail/new_password.html')
+        context = {'object': self, 'plain_password': plain_password, }
+        html_message = template.render(context)
+        recipient = self.email
+        mail.send(
+            recipient,
+            settings.RENEWAL_FROM_EMAIL,
+            message=html_message,
+            html_message=html_message,
+            subject=_("erudit.org : mot de passe")
+        )
 
     def sha1(self, msg, salt=None):
         "Crypt function from legacy system"
