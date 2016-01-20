@@ -100,7 +100,9 @@ class Command(BaseCommand):
         journals_account_volumetry = {"": []}
 
         for account in accounts:
-            cursor.execute("SELECT revueID FROM Revueindividus WHERE abonneIndividusID = {}".format(account.id))
+            sql = "SELECT revueID FROM Revueindividus \
+WHERE abonneIndividusID = {}".format(account.id)
+            cursor.execute(sql)
             publishers = []
             journals = []
             rows = cursor.fetchall()
@@ -145,7 +147,10 @@ class Command(BaseCommand):
                 account = accounts[0]
                 ids = k.split('|')
                 journals = Journal.objects.filter(id__in=ids)
-                ct = ContentType.objects.get(app_label=account._meta.app_label, model=account.__class__.__name__.lower())
+                ct = ContentType.objects.get(
+                    app_label=account._meta.app_label,
+                    model=account.__class__.__name__.lower()
+                )
                 if Policy.objects.filter(content_type=ct, object_id=account.id).count():
                     policy = Policy.objects.get(content_type=ct, object_id=account.id)
                 else:
