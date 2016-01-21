@@ -1,5 +1,5 @@
-[![Build Status](https://secure.travis-ci.org/erudit/zenon.svg?branch=master)](https://secure.travis-ci.org/erudit/zenon?branch=master)
-[![Coverage](https://codecov.io/github/erudit/zenon/coverage.svg?branch=master)](https://codecov.io/github/erudit/zenon?branch=master)
+[![Build Status](https://secure.travis-ci.org/erudit/eruditorg.svg?branch=master)](https://secure.travis-ci.org/erudit/eruditorg?branch=master)
+[![Coverage](https://codecov.io/github/erudit/eruditorg/coverage.svg?branch=master)](https://codecov.io/github/erudit/eruditorg?branch=master)
 
 # Installing on Ubuntu 14.04
 
