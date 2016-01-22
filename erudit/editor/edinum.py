@@ -59,6 +59,7 @@ def create_or_update_journal(
             journal.publisher = publisher
             journal.name = journal_name
             journal.code = journal_shortname
+            journal.localidentifier = journal_localidentifier
             journal.subtitle = journal_subtitle
             journal.sync_date = datetime.now()
             journal.save()
@@ -68,6 +69,7 @@ def create_or_update_journal(
             name=journal_name,
             code=journal_shortname,
             subtitle=journal_subtitle,
+            localidentifier=journal_localidentifier,
             synced_with_edinum=True,
             edinum_id=journal_id,
             publisher=publisher,

@@ -57,6 +57,7 @@ class JournalAdmin(admin.ModelAdmin):
         ('Identification', {
             'fields': (
                 ('code', 'formerly'),
+                ('localidentifier',),
                 ('name', 'display_name'),
                 ('issn_print', 'issn_web'),
             ),

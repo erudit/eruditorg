@@ -1,5 +1,5 @@
-[![Build Status](https://secure.travis-ci.org/erudit/zenon.svg?branch=master)](https://secure.travis-ci.org/erudit/zenon?branch=master)
-[![Coverage](https://codecov.io/github/erudit/zenon/coverage.svg?branch=master)](https://codecov.io/github/erudit/zenon?branch=master)
+[![Build Status](https://secure.travis-ci.org/erudit/eruditorg.svg?branch=master)](https://secure.travis-ci.org/erudit/eruditorg?branch=master)
+[![Coverage](https://codecov.io/github/erudit/eruditorg/coverage.svg?branch=master)](https://codecov.io/github/erudit/eruditorg?branch=master)
 
 # Installing on Ubuntu 14.04
 
@@ -102,6 +102,47 @@ You can now run the development server
 $ python erudit/manage.py runserver
 ```
 
+## Retrieving documents and setting up the search engine
+
+Erudit stores its documents in [Fedora Commons](http://www.fedorarepository.org/) and uses the [Solr](http://lucene.apache.org/solr/) search platform. If you need to work on a part of the project that is related to any of these parts, we provide a virtual machine with the required tools.
+
+### Installing the developer virtual machine (VM)
+
+Clone the developer VM.
+
+```
+$ git clone git@github.com:erudit/vm-dev.git
+```
+
+Follow the instructions in the `vm-dev` project's [README.md](https://github.com/erudit/vm-dev/blob/master/README.md)
+
+Log in the VM.
+
+```
+$ vagrant ssh
+```
+
+In the VM, clone the `vm-config` project:
+
+```
+$ git clone https://gitlab.erudit.team/erudit/vm-config.git
+```
+
+*Note: this repository is private. If you need credentials, ask us on IRC.*
+
+Follow the instructions in `vm-config`' [README.md](https://gitlab.erudit.team/erudit/vm-config/blob/master/README.md).
+
+### Using the developer VM
+
+The developer VM provides two services: Fedora Commons and Solr.
+
+* Solr is located at `http://192.168.10.150:8080/solr/`
+* Fedora is located at `http://192.168.10.150:8080/fedora/`
+
+### Connecting to Fedora and Solr from Django
+
+*TBD*
+
 # Documentation
 
 The project's documentation is built with [Sphinx](http://www.sphinx-doc.org/)
@@ -129,4 +170,8 @@ $ tox
 
 # Contributing patches
 
-Please refer to CONTRIBUTING.md for contribution guidelines
+Please refer to CONTRIBUTING.md for contribution guidelines.
+
+# Additional information
+
+If you have further questions or if you wish to discuss the project, please join us on **#erudit** on [Freenode](http://www.freenode.org/).
