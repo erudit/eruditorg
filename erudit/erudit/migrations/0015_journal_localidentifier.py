@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journal',
             name='localidentifier',
-            field=models.CharField(max_length=50, blank=True, verbose_name='Identifiant Fedora', null=True),
+            field=models.CharField(null=True, verbose_name='Identifiant Fedora', max_length=50, blank=True),
         ),
     ]

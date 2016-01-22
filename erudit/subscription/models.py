@@ -25,7 +25,9 @@ class Country(models.Model):
 
     locale = models.CharField(
         max_length=5,
-        verbose_name=_("Locale")
+        verbose_name=_("Locale"),
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
