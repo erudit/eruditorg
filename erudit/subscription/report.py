@@ -17,7 +17,7 @@ from reportlab.pdfgen import canvas
 
 from subscription.models import Country
 
-from erudit import settings
+from base import settings
 
 PAGE_HEIGHT = defaultPageSize[1]
 PAGE_WIDTH = defaultPageSize[0]

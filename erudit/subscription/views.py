@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 from post_office import mail
 
-from erudit import settings
+from base import settings
 
 from subscription.models import RenewalNotice
 from subscription import report
