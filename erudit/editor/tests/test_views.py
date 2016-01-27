@@ -1,10 +1,10 @@
 from lxml import etree
 
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 
-from erudit.models import Journal
 from editor.models import IssueSubmission
 from editor.views import IssueSubmissionCreate
 
@@ -130,12 +130,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         request.user = self.user
         form = IssueSubmissionCreate(request=request).get_form()
 
-        user_journals = set(
-            Journal.objects.get_journals_of_user(
-                self.user,
-                file_upload_allowed=True
-            )
-        )
+        user_journals = set(self.user.journals.all())
 
         form_journals = set(
             form.fields['journal'].queryset
@@ -146,7 +141,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             form_journals
         )
 
-    def test_user_can_only_select_publisher_contacts(self):
+    def test_user_can_only_select_journal_contacts(self):
         """ Test list of contacts
 
         Make sure the list contains all the contacts of the publisher
@@ -155,9 +150,9 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         request.user = self.user
         form = IssueSubmissionCreate(request=request).get_form()
 
-        user_contacts = set(
-            u for p in self.user.publishers.all() for u in p.members.all()
-        )
+        user_contacts = set(User.objects.filter(
+            journals=self.user.journals.all()
+        ).distinct())
 
         form_contacts = set(
             form.fields['contact'].queryset
@@ -167,3 +162,14 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             user_contacts,
             form_contacts
         )
+
+    def test_user_can_only_list_where_he_has_journal_membership(self):
+        """ Test list of issue submissions
+
+        Make sure the list contains only issue submission link to a journal
+        with his membership"""
+        self.client.login(username=self.user.username, password='top_secret')
+        response = self.client.get(reverse('editor:issues'), user=self.user)
+        journal_ids = [j.id for j in self.user.journals.all()]
+        issues = set(IssueSubmission.objects.filter(journal__in=journal_ids))
+        self.assertEqual(set(response.context_data['object_list']), issues)

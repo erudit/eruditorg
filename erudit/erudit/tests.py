@@ -26,40 +26,24 @@ class BaseEruditTestCase(TestCase):
             name='Éditeur de test',
         )
 
-        # Add a publisher
-        self.publisher.members.add(self.user)
-        self.publisher.save()
-
         self.other_publisher = Publisher.objects.create(
             name='Autre éditeur de test',
         )
 
-        # Add a second publisher
-        self.other_publisher.members.add(self.other_user)
-        self.other_publisher.save()
-
-        # Add a journal
+        # Add a journal with a member
         self.journal = Journal.objects.create(
             code='test',
             name='Revue de test',
             publisher=self.publisher,
         )
+        self.journal.members.add(self.user)
+        self.journal.save()
 
-        # Add a second journal
+        # Add a second journal with another member
         self.other_journal = Journal.objects.create(
             code='test',
             name='Autre revue de test',
             publisher=self.other_publisher,
         )
-
-    def test_get_journals_of_user(self):
-
-        user_journals = Journal.objects.get_journals_of_user(self.user)
-
-        self.assertTrue(
-            self.journal in user_journals
-        )
-
-        self.assertTrue(
-            len(user_journals) == 1
-        )
+        self.other_journal.members.add(self.other_user)
+        self.other_journal.save()
