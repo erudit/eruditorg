@@ -1,0 +1,47 @@
+{
+  "name": "Erudit.org",
+  "description": "TODO",
+  "main": "index.js",
+  "authors": [
+    "Erudit Team"
+  ],
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "keywords": [
+    "Erudit"
+  ],
+  "homepage": "https://github.com/erudit/eruditorg",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.0",
+    "blockui": "latest",
+    "isInViewport": "latest",
+    "sticky-kit": "latest",
+    "modernizr": "latest",
+    "bootstrap-sass": "latest",
+    "select2": "latest",
+    "jquery.validation": "latest",
+    "jquery.maskedinput": "latest",
+    "animate.css": "latest",
+    "ionicons": "latest",
+    "font-awesome": "latest",
+    "imagesloaded": "~3.1.8",
+    "blazy": "latest",
+    "swiper": "~3.3.0",
+    "inline-svg": "latest",
+    "bourbon": "latest"
+  },
+  "install" : {
+    "path" : "foobar",
+    "sources" : {
+      "bootstrap-sass" : "assets/*"
+    }
+  }
+}
