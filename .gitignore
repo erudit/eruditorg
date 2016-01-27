@@ -11,3 +11,8 @@ dumps/
 post_office_attachments/
 src/
 .DS_Store
+/node_modules
+Vagrantfile
+/vagrant_data
+.vagrant
+vagrant
