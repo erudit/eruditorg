@@ -12,6 +12,30 @@ class MandragoreError(Exception):
     pass
 
 
+class pymysql_connection():
+
+    def __init__(self, host=None, username=None, password=None, database=None):
+        self.username = username
+        self.password = password
+        self.host = host
+        self.database = database
+
+    def __enter__(self):
+
+        self.conn = pymysql.connect(
+            host=self.host,
+            unix_socket='/tmp/mysql.sock',
+            user=self.username,
+            passwd=self.password,
+            db=self.database,
+        )
+
+        return self.conn.cursor()
+
+    def __exit__(self, type, value, traceback):
+        self.conn.close()
+
+
 def create_mandragore_profile_for_user(person_id, user):
     """ Create a mandragore profile for this person """
     mandragoreprofile = MandragoreProfile()
@@ -24,6 +48,7 @@ def create_mandragore_profile_for_user(person_id, user):
 
 
 def fetch_accounts_from_mandragore():
+
     MANDRAGORE_ACCOUNT_QUERY = """
     SELECT cu.NomUtilisateur, pc.Adresse, cu.PersonneId, cft.CollectionID FROM
     CompteUtilisateur cu,
@@ -37,17 +62,14 @@ def fetch_accounts_from_mandragore():
 
     mandragore = settings.EXTERNAL_DATABASES['mandragore']
 
-    conn = pymysql.connect(
+    with pymysql_connection(
         host=mandragore['HOST'],
-        unix_socket='/tmp/mysql.sock',
-        user=mandragore['USER'],
-        passwd=mandragore['PASSWORD'],
-        db=mandragore['NAME'],
-    )
-
-    cur = conn.cursor()
-    cur.execute(MANDRAGORE_ACCOUNT_QUERY)
-    return cur.fetchall()
+        username=mandragore['USER'],
+        password=mandragore['PASSWORD'],
+        database=mandragore['NAME']
+    ) as cur:
+        cur.execute(MANDRAGORE_ACCOUNT_QUERY)
+        return cur.fetchall()
 
 
 def fetch_users_from_edinum(person_ids_to_fetch):
@@ -194,16 +216,8 @@ def get_list_as_sql(item_list):
 
 def open_connection_and_fetchall(
         host=None, user=None, passwd=None, db=None, query=None):
-    conn = pymysql.connect(
-        host=host,
-        unix_socket='/tmp/mysql.sock',
-        user=user,
-        passwd=passwd,
-        db=db,
-    )
 
-    cur = conn.cursor()
-    cur.execute(query)
-    results = cur.fetchall()
-    conn.close()
-    return results
+    with pymysql_connection(host=host, username=user, password=passwd, database=db) as cur:
+        cur.execute(query)
+        results = cur.fetchall()
+        return results
