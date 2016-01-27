@@ -3,8 +3,6 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from erudit.models import Publisher
-
 
 class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
@@ -85,12 +83,7 @@ class IssueSubmission(models.Model):
         if not user:
             return False
 
-        return bool(
-            Publisher.objects.filter(
-                journals=self.journal,
-                members=user
-            ).count()
-        )
+        return bool(user.journals.filter(id=self.journal.id).count())
 
     class Meta:
         verbose_name = _("Envoi de numéro")

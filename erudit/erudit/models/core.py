@@ -196,17 +196,7 @@ class Library(models.Model):
 
 
 class JournalManager(models.Manager):
-
-    def get_journals_of_user(self, user, file_upload_allowed=False):
-        """ Return the journals associated to this user
-
-        The journals of the user are journals of all the publishers the
-        user is associated with.
-
-        :param file_upload_allowed: limit to the journals for which the user
-            is allowed to upload files
-        """
-        return self.filter(publisher=user.publishers.all())
+    pass
 
 
 class Journal(Named, Edinum):
@@ -296,6 +286,13 @@ class Journal(Named, Edinum):
         default=True,
         verbose_name=_("Actif"),
         help_text=_("Une revue inactive n'édite plus de numéros"),
+    )
+
+    # users who can interact this object (coupled with permissions)
+    members = models.ManyToManyField(
+        User,
+        related_name="journals",
+        verbose_name=_("Membres")
     )
 
     # issues
@@ -414,12 +411,6 @@ class Publisher(Edinum):
         max_length=255,
         verbose_name=_("Nom"),
     )
-
-    members = models.ManyToManyField(
-        User,
-        related_name="publishers"
-    )
-    """ Users accounts associated to this this publisher """
 
     def __str__(self):
         return "{:s}".format(

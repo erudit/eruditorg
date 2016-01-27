@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
-from erudit.models import Journal, Publisher
 from editor.models import IssueSubmission
 from editor.forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
@@ -26,15 +25,11 @@ class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'dashboard.html'
 
     def get_queryset(self):
-
-        publishers = Publisher.objects.filter(
-            members=self.request.user
-        )
-
+        journal_ids = [j.id for j in self.request.user.journals.all()]
         return IssueSubmission.objects.filter(
-            journal__publisher=publishers
+            journal__in=journal_ids
         ).order_by(
-            'journal__publisher'
+            'journal'
         )
 
 
@@ -51,18 +46,15 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
     def get_form(self, form_class):
         form = super().get_form(form_class)
 
-        form.fields['journal'].queryset = Journal.objects.get_journals_of_user(
-            self.request.user,
-            file_upload_allowed=True
-        )
+        form.fields['journal'].queryset = self.request.user.journals.all()
 
         form.fields['journal'].initial = form.fields['journal'].queryset.first()
 
-        publisher_members = User.objects.filter(
-            publishers=self.request.user.publishers.all()
+        journals_members = User.objects.filter(
+            journals=self.request.user.journals.all()
         ).distinct()
 
-        form.fields['contact'].queryset = publisher_members
+        form.fields['contact'].queryset = journals_members
         form.fields['contact'].initial = form.fields['contact'].queryset.first()
         return form
 
@@ -108,13 +100,9 @@ class IssueSubmissionList(LoginRequiredMixin, ListView):
     template_name = 'issues.html'
 
     def get_queryset(self):
-
-        publishers = Publisher.objects.filter(
-            members=self.request.user
-        )
-
+        journal_ids = [j.id for j in self.request.user.journals.all()]
         return IssueSubmission.objects.filter(
-            journal__publisher=publishers
+            journal__in=journal_ids
         ).order_by(
-            'journal__publisher'
+            'journal'
         )
