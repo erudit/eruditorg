@@ -37,7 +37,7 @@ class JournalAdmin(admin.ModelAdmin):
 
     search_fields = [
         'code', 'name', 'display_name', 'issn_print',
-        'issn_web', 'url', 'address',
+        'issn_web', 'url', 'address', 'members'
     ]
 
     list_display = (
@@ -50,6 +50,10 @@ class JournalAdmin(admin.ModelAdmin):
     list_filter = [
         'publisher', 'type', 'paper', 'open_access', 'active'
     ]
+
+    filter_horizontal = (
+        'members',
+    )
 
     list_editable = ['type', 'active', ]
 
@@ -85,6 +89,11 @@ class JournalAdmin(admin.ModelAdmin):
                 'url',
                 'address',
             ),
+        }),
+        ('Membres', {
+            'fields': (
+                'members',
+            )
         }),
         ('État', {
             'classes': ('collapse',),

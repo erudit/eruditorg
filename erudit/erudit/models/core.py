@@ -291,7 +291,8 @@ class Journal(Named, Edinum):
     # users who can interact this object (coupled with permissions)
     members = models.ManyToManyField(
         User,
-        related_name="journals"
+        related_name="journals",
+        verbose_name=_("Membres")
     )
 
     # issues
