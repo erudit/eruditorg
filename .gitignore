@@ -35,13 +35,16 @@ vagrant
 /erudit/erudit/static/vendor/**/composer.json
 /erudit/erudit/static/vendor/**/*.nuspec
 /erudit/erudit/static/vendor/**/bower.json
+/erudit/erudit/static/vendor/**/.bower.json
 /erudit/erudit/static/vendor/**/gruntfile.js
 /erudit/erudit/static/vendor/**/gulpfile.js
 /erudit/erudit/static/vendor/**/index.js
+/erudit/erudit/static/vendor/**/package.js
 /erudit/erudit/static/vendor/**/package.json
 /erudit/erudit/static/vendor/**/component.json
 /erudit/erudit/static/vendor/**/*.md
 /erudit/erudit/static/vendor/**/*.html
 /erudit/erudit/static/vendor/**/*.txt
 /erudit/erudit/static/vendor/**/LICENSE
+/erudit/erudit/static/vendor/**/Makefile
 /erudit/erudit/static/vendor/**/demo/
