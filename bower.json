@@ -31,10 +31,17 @@
     "jquery.maskedinput": "latest",
     "animate.css": "latest",
     "ionicons": "latest",
+    "font-awesome": "latest",
     "imagesloaded": "~3.1.8",
     "blazy": "latest",
     "swiper": "~3.3.0",
     "inline-svg": "latest",
     "bourbon": "latest"
+  },
+  "install" : {
+    "path" : "foobar",
+    "sources" : {
+      "bootstrap-sass" : "assets/*"
+    }
   }
 }

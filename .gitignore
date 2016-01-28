@@ -16,3 +16,32 @@ Vagrantfile
 /vagrant_data
 .vagrant
 vagrant
+
+
+#
+# bower - keep adding to this list as needed
+# ignore cruft that comes with bower components
+#
+erudit/erudit/static/vendor/**/src
+erudit/erudit/static/vendor/**/source
+erudit/erudit/static/vendor/**/spec
+erudit/erudit/static/vendor/**/doc
+erudit/erudit/static/vendor/**/docs
+erudit/erudit/static/vendor/**/.bowerrc
+erudit/erudit/static/vendor/**/.gitignore
+erudit/erudit/static/vendor/**/.npmignore
+erudit/erudit/static/vendor/**/.jshintignore
+erudit/erudit/static/vendor/**/.jshintrc
+erudit/erudit/static/vendor/**/composer.json
+erudit/erudit/static/vendor/**/*.nuspec
+erudit/erudit/static/vendor/**/bower.json
+erudit/erudit/static/vendor/**/gruntfile.js
+erudit/erudit/static/vendor/**/gulpfile.js
+erudit/erudit/static/vendor/**/index.js
+erudit/erudit/static/vendor/**/package.json
+erudit/erudit/static/vendor/**/component.json
+erudit/erudit/static/vendor/**/*.md
+erudit/erudit/static/vendor/**/*.html
+erudit/erudit/static/vendor/**/*.txt
+erudit/erudit/static/vendor/**/LICENSE
+erudit/erudit/static/vendor/**/demo/
