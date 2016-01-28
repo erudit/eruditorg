@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # Erudit apps
+    'base',
     'erudit',
     'editor',
     'subscription',
@@ -90,7 +91,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'erudit.urls'
+ROOT_URLCONF = 'base.urls'
 
 TEMPLATES = [
     {
