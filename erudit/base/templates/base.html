@@ -26,8 +26,6 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-16x16.png' %}" sizes="16x16" />
 
     {% compress css %}
-    <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss' %}" />
-    <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" />
     <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/main.scss' %}" />
     {% endcompress %}
 
@@ -36,7 +34,7 @@
       background: rgba(0, 0, 0, 0.05);
     }
     </style>
-    <script src="{% static 'vendor/jquery/jquery-2.1.4.js' %}"></script>
+    <script src="{% static 'vendor/jquery/dist/jquery.js' %}"></script>
     {% block extrahead %}
     {% endblock %}
   </head>
