@@ -18,5 +18,5 @@ gulp.task('sass', function() {
 
 gulp.task('watch', function() {
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch('../../erudit/erudit/static/sass/**.scss', ['sass']);
+  gulp.watch('../../erudit/erudit/static/sass/**/*.scss', ['sass']);
 });
