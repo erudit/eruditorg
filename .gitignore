@@ -47,4 +47,7 @@ vagrant
 /erudit/erudit/static/vendor/**/*.txt
 /erudit/erudit/static/vendor/**/LICENSE
 /erudit/erudit/static/vendor/**/Makefile
+/erudit/erudit/static/vendor/**/test/
+/erudit/erudit/static/vendor/**/vendor/
 /erudit/erudit/static/vendor/**/demo/
+/erudit/erudit/static/vendor/**/png/
