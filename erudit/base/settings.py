@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'plupload',
     'django_filters',
     'spurl',
+    'rules.apps.AutodiscoverRulesConfig',
 )
 
 DATABASES = {
@@ -111,6 +112,13 @@ TEMPLATES = [
         },
     },
 ]
+
+# Authentication
+
+AUTHENTICATION_BACKENDS = (
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 LOGIN_URL = '/login/'
 

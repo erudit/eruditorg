@@ -19,7 +19,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         result = self.client.get(reverse('editor:add'))
         self.assertIsInstance(result, HttpResponseRedirect)
 
-        result = self.client.get(reverse('editor:dashboard'))
+        result = self.client.get(reverse('editor:issues'))
         self.assertIsInstance(result, HttpResponseRedirect)
 
         result = self.client.get(

@@ -4,33 +4,13 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
-from editor.models import IssueSubmission
-from editor.forms import IssueSubmissionForm, IssueSubmissionUploadForm
+from userspace.views import LoginRequiredMixin
 
-
-class LoginRequiredMixin(object):
-
-    @classmethod
-    def as_view(cls, **initkwargs):
-        view = super().as_view(**initkwargs)
-        return login_required(view)
-
-
-class DashboardView(LoginRequiredMixin, ListView):
-
-    template_name = 'dashboard.html'
-
-    def get_queryset(self):
-        journal_ids = [j.id for j in self.request.user.journals.all()]
-        return IssueSubmission.objects.filter(
-            journal__in=journal_ids
-        ).order_by(
-            'journal'
-        )
+from .models import IssueSubmission
+from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
 
 class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
@@ -82,7 +62,7 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         submission = IssueSubmission.objects.get(pk=kwargs['pk'])
         if not submission.has_access(request.user):
-            return HttpResponseRedirect(reverse('editor:dashboard'))
+            return HttpResponseRedirect(reverse('editor:issues'))
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -92,7 +72,7 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('editor:dashboard')
+        return reverse('editor:issues')
 
 
 class IssueSubmissionList(LoginRequiredMixin, ListView):
