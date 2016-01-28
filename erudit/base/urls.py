@@ -22,12 +22,17 @@ urlpatterns = [
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^editeur/', include('editor.urls', namespace='editor'), name='login'),
-    url(r'^organisations/', include('individual_subscription.urls',
-        namespace='individual_subscription')),
+    url(r'^espace-utilisateur/$',
+        include('userspace.urls', namespace='userspace'),
+        name="login"),
+    url(r'^espace-utilisateur/editeur/',
+        include('editor.urls', namespace='editor')),
+    url(r'^espace-utilisateur/organisations/',
+        include('individual_subscription.urls',
+                namespace='individual_subscription')),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
     # subscriptions
     url(r'^abonnements/', include('subscription.urls')),
-    url(r'', RedirectView.as_view(url="/editeur/", permanent=False)),
+    url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 
 ]
