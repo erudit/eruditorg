@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'base',
     'erudit',
     'editor',
+    'userspace',
     'subscription',
     'individual_subscription',
     'grappelli',
