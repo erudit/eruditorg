@@ -50,7 +50,7 @@ class MandragoreBackendTestCase(TestCase):
                 username='test_user', password='test_password'
             )
 
-        self.assertEqual(user, self.user)
+            self.assertEqual(user, self.user)
 
     @override_settings(EXTERNAL_DATABASES={'mandragore': 'dummy'})
     @mock.patch('base.backends.get_user_from_mandragore', new=mock.MagicMock(
