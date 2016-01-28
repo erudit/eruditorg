@@ -47,6 +47,24 @@ def create_mandragore_profile_for_user(person_id, user):
     return mandragoreprofile
 
 
+def get_user_from_mandragore(username):
+    MANDRAGORE_USER_QUERY = """
+    SELECT NomUtilisateur, MotDePasse FROM CompteUtilisateur WHERE NomUtilisateur="{}"
+    """
+
+    mandragore = settings.EXTERNAL_DATABASES['mandragore']
+
+    with pymysql_connection(
+        host=mandragore['HOST'],
+        username=mandragore['USER'],
+        password=mandragore['PASSWORD'],
+        database=mandragore['NAME']
+    ) as cur:
+        cur.execute(MANDRAGORE_USER_QUERY.format(username))
+        users = cur.fetchall()
+        return users[0]
+
+
 def fetch_accounts_from_mandragore():
 
     MANDRAGORE_ACCOUNT_QUERY = """
@@ -166,7 +184,7 @@ def get_mandragore_user(username, person_id=None, additional_values=None):
         * If person_id is specified, that this user is linked to the
           proper Mandragore profile
 
-     Raise MandragoreException when any of these conditions is not met. """
+     Raise MandragoreError when any of these conditions is not met. """
 
     user = User.objects.get(username=username)
 
