@@ -85,8 +85,6 @@ PIPELINE = {
     },
 }
 
-PIPELINE['CSS_COMPRESSOR'] = None
-
 PIPELINE['COMPILERS'] = (
   'pipeline.compilers.sass.SASSCompiler',
 )
