@@ -13,7 +13,7 @@ gulp.task('sass', function() {
   return gulp.src('../../erudit/erudit/static/sass/main.scss')
     .pipe(sass())
     .on('error', sass.logError)
-    .pipe(gulp.dest('../../erudit/erudit/static/sass/'));
+    .pipe(gulp.dest('../../erudit/erudit/static/css/'));
 });
 
 gulp.task('watch', function() {

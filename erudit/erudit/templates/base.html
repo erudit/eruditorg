@@ -1,4 +1,4 @@
-{% load compress %}
+{% load pipeline %}
 {% load static from staticfiles %}
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -25,18 +25,22 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-32x32.png' %}" sizes="32x32" />
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-16x16.png' %}" sizes="16x16" />
 
-    {% compress css %}
-    <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss' %}" />
-    <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/main.scss' %}" />
-    {% endcompress %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
+    {% stylesheet 'erudit_main' %}
+
+    {# {% compress css %}#}
+    {# <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss' %}" />#}
+    {# <link rel="stylesheet" type="text/x-sass" href="{% static 'vendor/font-awesome/scss/font-awesome.scss' %}" />#}
+    {# <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/main.scss' %}" />#}
+    {# {% endcompress %}#}
 
     <style>
     body {
       background: rgba(0, 0, 0, 0.05);
     }
     </style>
-    <script src="{% static 'vendor/jquery/jquery-2.1.4.js' %}"></script>
+    {# <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>#}
     {% block extrahead %}
     {% endblock %}
   </head>
@@ -50,6 +54,7 @@
     {% endblock %}
     {% block footer %}
     {% endblock %}
-    <script src="{% static 'vendor/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+    {# <script src="{% static 'vendor/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>#}
+    <script src="{% static 'vendor/js/scripts.js' %}"></script>
   </body>
 </html>

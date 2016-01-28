@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'compressor',
+    'pipeline',
     'crispy_forms',
     'django_select2',
     'datetimewidget',
@@ -66,17 +66,34 @@ DATABASES = {
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
-COMPRESS_PRECOMPILERS = (
-    ('text/x-sass', 'sassc {infile} {outfile}'),
+PIPELINE = {
+    'PIPELINE_ENABLED': True,
+    'STYLESHEETS': {
+        # main css theme for erudit.org
+        'erudit_main': {
+            'source_filenames': (
+              'sass/main.scss',
+            ),
+            'output_filename': 'css/main.min.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    },
+}
+
+PIPELINE['CSS_COMPRESSOR'] = None
+
+PIPELINE['COMPILERS'] = (
+  'pipeline.compilers.sass.SASSCompiler',
 )
 
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter'
-]
+PIPELINE['SASS_BINARY'] = '/usr/local/bin/sassc'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
