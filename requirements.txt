@@ -7,6 +7,9 @@ django-crispy-forms==1.5.2
 -e git+https://github.com/asaglimbeni/django-datetime-widget.git@master#egg=django_datetime_widget-master
 django-grappelli==2.7.1
 git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-resumable-uploads
+-e git+https://github.com/erudit/eulxml.git@python3-support#egg=eulxml
+-e git+https://github.com/erudit/eulfedora.git@python3-support#egg=eulfedora
+-e git+https://github.com/erudit/liberuditarticle.git@master#egg=liberuditarticle
 django-post-office==2.0.2
 Django-Select2==5.2.1
 ipdb==0.8.1

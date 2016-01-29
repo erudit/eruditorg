@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'erudit',
     'editor',
     'userspace',
+    'journal',
     'subscription',
     'individual_subscription',
     'grappelli',
@@ -166,6 +167,11 @@ AUTHENTICATION_BACKENDS = [
 STATIC_URL = '/static/'
 
 INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
+
+# Fedora settings
+FEDORA_ROOT = 'http://192.168.10.150:8080/fedora/'
+FEDORA_USER = 'fedoraAdmin'
+FEDORA_PASSWORD = 'fedoraAdmin'
 
 try:
     from .settings_env import *  # noqa

@@ -22,6 +22,7 @@ urlpatterns = [
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    # User space urls
     url(r'^espace-utilisateur/$',
         include('userspace.urls', namespace='userspace'),
         name="login"),
@@ -30,8 +31,12 @@ urlpatterns = [
     url(r'^espace-utilisateur/organisations/',
         include('individual_subscription.urls',
                 namespace='individual_subscription')),
+    # Public website urls
+    url(r'^revue/', include('journal.urls', namespace='journal')),
+    url(r'^organisations/', include('individual_subscription.urls',
+        namespace='individual_subscription')),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
-    # subscriptions
+    # TODO: move to user space
     url(r'^abonnements/', include('subscription.urls')),
     url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 
