@@ -113,13 +113,6 @@ TEMPLATES = [
     },
 ]
 
-# Authentication
-
-AUTHENTICATION_BACKENDS = (
-    'rules.permissions.ObjectPermissionBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 LOGIN_URL = '/login/'
 
 # Database configuration
@@ -162,6 +155,7 @@ USE_TZ = True
 
 
 AUTHENTICATION_BACKENDS = [
+    'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'base.backends.MandragoreBackend',
 ]
