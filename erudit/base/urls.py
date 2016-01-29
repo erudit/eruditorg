@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^editeur/', include('editor.urls', namespace='editor'), name='login'),
+    url(r'^revue/', include('journal.urls', namespace='journal')),
     url(r'^organisations/', include('individual_subscription.urls',
         namespace='individual_subscription')),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
