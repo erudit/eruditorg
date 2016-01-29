@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n staticfiles %}
+{% load i18n staticfiles rules %}
 
 {% block header %}
 <header>
@@ -41,11 +41,14 @@
         <span class="icon fa fa-folder-open-o"></span> <span class="sidenav-label">{% trans "Dépôt de numéros" %}</span>
       </a>
     </li>
+    {% has_perm 'individual_subscription.manage_account' request.user as can_manage_individual_subscription %}
+    {% if can_manage_individual_subscription %}
     <li>
     <a href="{% url 'individual_subscription:account_list' %}">
         <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Gestion des utilisateurs" %}</span>
       </a>
     </li>
+    {% endif %}
     <li>
       <a href="#" class="disabled">
         <span class="icon icon-epub"></span> <span class="sidenav-label">{% trans "Dépôt EPUB" %}</span>
