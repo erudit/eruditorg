@@ -20,5 +20,7 @@ def can_manage_account(user, account=None):
     else:
         return can_manage_policy(user, account.policy)
 
-rules.add_perm('individual_subscription.manage_policy', is_superuser | is_staff | can_manage_policy)
-rules.add_perm('individual_subscription.manage_account', is_superuser | is_staff | can_manage_account)
+rules.add_perm('individual_subscription.manage_policy',
+               is_superuser | is_staff | can_manage_policy)
+rules.add_perm('individual_subscription.manage_account',
+               is_superuser | is_staff | can_manage_account)
