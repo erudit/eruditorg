@@ -54,7 +54,6 @@ INSTALLED_APPS = (
     'plupload',
     'django_filters',
     'spurl',
-    'eruditarticle.apps.django_app',
 )
 
 DATABASES = {
