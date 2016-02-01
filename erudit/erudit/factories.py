@@ -14,6 +14,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'erudit.journal'
 
+    code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
 
 
