@@ -74,17 +74,6 @@ class IssueSubmission(models.Model):
         """ Return the absolute URL for this model """
         return reverse('editor:update', kwargs={'pk': self.pk})
 
-    def has_access(self, user):
-        """ Determine if the user has access to this IssueSubmission
-
-        A user has access to an IssueSubmission if it is a member of the
-        publisher of the journal.
-        """
-        if not user:
-            return False
-
-        return bool(user.journals.filter(id=self.journal.id).count())
-
     class Meta:
         verbose_name = _("Envoi de numéro")
         verbose_name_plural = _("Envois de numéros")
