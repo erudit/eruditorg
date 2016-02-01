@@ -35,3 +35,4 @@ factory_boy==2.6.0
 simplejson
 django-spurl==0.6.4
 django-filter==0.11.0
+rules==1.1.1

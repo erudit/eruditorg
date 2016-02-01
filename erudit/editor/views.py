@@ -4,36 +4,26 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
 
-from editor.models import IssueSubmission
-from editor.forms import IssueSubmissionForm, IssueSubmissionUploadForm
+from rules.contrib.views import PermissionRequiredMixin
 
-
-class LoginRequiredMixin(object):
-
-    @classmethod
-    def as_view(cls, **initkwargs):
-        view = super().as_view(**initkwargs)
-        return login_required(view)
+from userspace.views import LoginRequiredMixin
+from .models import IssueSubmission
+from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
 
-class DashboardView(LoginRequiredMixin, ListView):
-
-    template_name = 'dashboard.html'
+class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
+    permission_required = 'editor.manage_issuesubmission'
 
     def get_queryset(self):
-        journal_ids = [j.id for j in self.request.user.journals.all()]
-        return IssueSubmission.objects.filter(
-            journal__in=journal_ids
-        ).order_by(
-            'journal'
-        )
+        qs = super(IssueSubmissionCheckMixin, self).get_queryset()
+        ids = [issue.id for issue in qs if self.request.user.has_perm(
+               'editor.manage_issuesubmission', issue)]
+        return qs.filter(id__in=ids)
 
 
-class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
+class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
     model = IssueSubmission
     form_class = IssueSubmissionForm
     template_name = 'form.html'
@@ -59,7 +49,7 @@ class IssueSubmissionCreate(LoginRequiredMixin, CreateView):
         return form
 
 
-class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
+class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'form.html'
@@ -79,12 +69,6 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
 
         return form
 
-    def dispatch(self, request, *args, **kwargs):
-        submission = IssueSubmission.objects.get(pk=kwargs['pk'])
-        if not submission.has_access(request.user):
-            return HttpResponseRedirect(reverse('editor:dashboard'))
-        return super().dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = "editor.IssueSubmission"
@@ -92,17 +76,9 @@ class IssueSubmissionUpdate(LoginRequiredMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('editor:dashboard')
+        return reverse('editor:issues')
 
 
-class IssueSubmissionList(LoginRequiredMixin, ListView):
-
+class IssueSubmissionList(IssueSubmissionCheckMixin, ListView):
+    model = IssueSubmission
     template_name = 'issues.html'
-
-    def get_queryset(self):
-        journal_ids = [j.id for j in self.request.user.journals.all()]
-        return IssueSubmission.objects.filter(
-            journal__in=journal_ids
-        ).order_by(
-            'journal'
-        )
