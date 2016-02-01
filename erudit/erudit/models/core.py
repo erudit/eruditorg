@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+from eruditarticle.conf import settings as eruditarticle_settings
 
 
 # choices
@@ -294,6 +295,14 @@ class Journal(Named, Edinum):
         related_name="journals",
         verbose_name=_("Membres")
     )
+
+    def get_pid(self):
+        if self.localidentifier:
+            return eruditarticle_settings.PID_PREFIX + self.localidentifier
+
+    @property
+    def pid(self):
+        return self.get_pid()
 
     # issues
     def first_issue(self):

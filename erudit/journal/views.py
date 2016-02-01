@@ -4,7 +4,7 @@ from django.http import Http404
 from django.views.generic import DetailView
 
 from erudit.models import Journal
-from erudit.repository import repo
+from eruditarticle.repository import repo
 from eruditarticle.fedora import JournalDigitalObject
 
 
@@ -23,6 +23,11 @@ class JournalDetailView(DetailView):
         context = super(JournalDetailView, self).get_context_data(**kwargs)
 
         # Fetches the journal from the fedora repository
-        f_journal = JournalDigitalObject(repo.api, self.object.localidentifier)
+        if self.object.pid:
+            print(repo.api)
+            print(self.object.pid)
+            f_journal = JournalDigitalObject(repo.api, self.object.pid)
+            print(f_journal.name)
+            context['fedora_journal'] = f_journal
 
         return context
