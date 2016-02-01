@@ -24,10 +24,7 @@ class JournalDetailView(DetailView):
 
         # Fetches the journal from the fedora repository
         if self.object.pid:
-            print(repo.api)
-            print(self.object.pid)
             f_journal = JournalDigitalObject(repo.api, self.object.pid)
-            print(f_journal.name)
             context['fedora_journal'] = f_journal
 
         return context
