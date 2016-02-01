@@ -207,8 +207,9 @@ class Journal(FedoraMixin, Named, Edinum):
     """Revue"""
 
     # identification
-    code = models.CharField(
+    code = models.SlugField(
         max_length=255,
+        unique=True,
         verbose_name=_("Code"),
         help_text=_("Identifiant unique (utilisé dans URL Érudit)"),
     )
