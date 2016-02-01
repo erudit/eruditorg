@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django_filters',
     'spurl',
     'rules.apps.AutodiscoverRulesConfig',
+    'eruditarticle.apps.django_app',
 )
 
 DATABASES = {
