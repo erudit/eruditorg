@@ -11,3 +11,4 @@ dumps/
 post_office_attachments/
 src/
 .DS_Store
+.coverage
