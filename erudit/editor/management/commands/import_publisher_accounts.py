@@ -1,7 +1,8 @@
 import logging
 
-from editor.edinum import (
+from erudit.utils.edinum import (
     fetch_publishers_from_edinum,
+    fetch_publisher_journals_from_edinum,
     create_or_update_publisher,
     create_or_update_journal
 )

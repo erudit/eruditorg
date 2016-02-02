@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from erudit.models import Publisher
 
 from editor.tests.base import BaseEditorTestCase
-from editor.mandragore import (
+from erudit.utils.mandragore import (
     create_mandragore_profile_for_user,
     user_coherent_with_mandragore,
     can_create_mandragore_user,
@@ -14,7 +14,7 @@ from editor.mandragore import (
     get_mandragore_user
 )
 
-from editor.edinum import (
+from erudit.utils.edinum import (
     create_or_update_publisher,
     create_or_update_journal
 )

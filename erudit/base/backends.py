@@ -4,7 +4,7 @@ from django.contrib.auth.backends import ModelBackend
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
-from editor.mandragore import get_user_from_mandragore
+from erudit.utils.mandragore import get_user_from_mandragore
 
 
 class MandragoreBackend(ModelBackend):
