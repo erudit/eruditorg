@@ -36,7 +36,7 @@
 {% block nav %}
 <nav class="sidenav"> {# TODO handle class active for menu #}
   <ul>
-    
+
     {% has_perm 'editor.manage_issuesubmission' request.user as can_manage_issuesubmission %}
     {% if can_manage_issuesubmission %}
     <li>
@@ -92,13 +92,13 @@
 <main class="main">
   <header>
     <h1>
-      <span class="user-space">{% block zone-title %}{% trans "Mon espace" %}{% endblock %}</span> {% block page-title %}{% endblock %}
+      <span class="user-space">{% block zone-title %}{% trans "Espace utilisateur" %}{% endblock %}</span> {% block page-title %}{% endblock %}
     </h1>
   </header>
   <div class="container-fluid">
     <div class="breadcrumbs">
       {% block breadcrumbs %}
-      TODO : breadcrumbs
+      {% trans "Espace utilisateur" %}
       {% endblock %}
     </div>
     {% block content-main %}
