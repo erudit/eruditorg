@@ -4,9 +4,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from eruditarticle.objects import EruditJournal
+from eruditarticle.objects import EruditPublication
 
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.fedora.objects import JournalDigitalObject
+from erudit.fedora.objects import PublicationDigitalObject
 
 
 # choices
@@ -357,7 +359,7 @@ class JournalType(models.Model):
         ordering = ['name', ]
 
 
-class Issue(models.Model):
+class Issue(FedoraMixin, models.Model):
     """Numéro"""
 
     # identification
@@ -402,7 +404,26 @@ class Issue(models.Model):
         help_text=_("Cocher si ce numéro est en accès libre"),
     )
 
+    localidentifier = models.CharField(
+        max_length=50,
+        null=True, blank=True,
+        verbose_name=_("Identifiant Fedora")
+    )
+
     # status { in_production, published }
+
+    # Fedora-related methods
+    # --
+
+    def get_fedora_model(self):
+        return PublicationDigitalObject
+
+    def get_erudit_class(self):
+        return EruditPublication
+
+    def get_full_identifier(self):
+        if self.localidentifier and self.journal.localidentifier:
+            return '.'.join([self.journal.localidentifier, self.localidentifier])
 
     def __str__(self):
         return "{:s} {:s} {:s} {:s}".format(
