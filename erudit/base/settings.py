@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'base',
     'erudit',
     'editor',
+    'userspace',
     'subscription',
     'individual_subscription',
     'grappelli',
@@ -53,6 +54,7 @@ INSTALLED_APPS = (
     'plupload',
     'django_filters',
     'spurl',
+    'rules.apps.AutodiscoverRulesConfig',
 )
 
 DATABASES = {
@@ -153,6 +155,7 @@ USE_TZ = True
 
 
 AUTHENTICATION_BACKENDS = [
+    'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'base.backends.MandragoreBackend',
 ]

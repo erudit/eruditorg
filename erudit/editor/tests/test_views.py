@@ -2,7 +2,7 @@ from lxml import etree
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponseNotFound
 from django.template.response import TemplateResponse
 
 from editor.models import IssueSubmission
@@ -19,7 +19,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         result = self.client.get(reverse('editor:add'))
         self.assertIsInstance(result, HttpResponseRedirect)
 
-        result = self.client.get(reverse('editor:dashboard'))
+        result = self.client.get(reverse('editor:issues'))
         self.assertIsInstance(result, HttpResponseRedirect)
 
         result = self.client.get(
@@ -27,8 +27,10 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         )
         self.assertIsInstance(result, HttpResponseRedirect)
 
-    def test_user_can_only_access_his_submissions(self):
-        """ A user should only be able to see his editor's submissions """
+    def test_user_filtered_issuesubmissions(self):
+        """ A user should only be able to see the editor's submissions
+            related to his journal's membership.
+        """
         login = self.client.login(
             username=self.user.username,
             password="top_secret"
@@ -47,8 +49,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
         self.assertIsInstance(
             response,
-            HttpResponseRedirect,
-            "The user should not be able to access another editor's submissions"  # noqa
+            HttpResponseNotFound,
+            "The user should not be able to access another editor's submissions where he is not member"  # noqa
         )
 
     def test_logged_add_journalsubmission(self):

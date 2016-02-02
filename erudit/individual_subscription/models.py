@@ -192,6 +192,11 @@ class Policy(FlatAccessMixin, models.Model):
     (Wikipedia, AEIQ, Revue).
     date activation is stamp as soon as the first account is created
     """
+    # this field store __str__ value with generic relation info which is
+    # stressfully for the database
+    generated_title = models.CharField(max_length=120, verbose_name=_("Titre"),
+                                       blank=True,
+                                       editable=False)
     date_creation = models.DateTimeField(
         editable=False,
         null=True,
@@ -271,7 +276,11 @@ class Policy(FlatAccessMixin, models.Model):
         return self.accounts.count()
 
     def __str__(self):
-        return '{} [{}#{}]'.format(self.content_object, self.content_type, self.id)
+        if not self.generated_title and self.pk:
+            self.generated_title = '{} [{}#{}]'.format(
+                self.content_object, self.content_type, self.id)
+            self.save()
+        return self.generated_title
 
     def save(self, *args, **kwargs):
         self.date_modification = timezone.now()

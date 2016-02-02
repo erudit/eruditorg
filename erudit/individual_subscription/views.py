@@ -1,8 +1,8 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 
-from django.contrib.auth.decorators import user_passes_test
 from django_filters.views import FilterView
+from rules.contrib.views import PermissionRequiredMixin
 
 from editor.views import LoginRequiredMixin
 
@@ -11,33 +11,14 @@ from .forms import (IndividualAccountFilter, IndividualAccountForm,
 from .models import IndividualAccount
 
 
-class OrganizationCheckMixin(LoginRequiredMixin):
-
-    @classmethod
-    def check_access(cls, user):
-        if user.is_superuser or user.is_staff:
-            return True
-        elif hasattr(user, 'organizations_managed') and \
-                user.organizations_managed.count() > 0:
-            return True
-        else:
-            return False
-
-    @classmethod
-    def as_view(cls, **initkwargs):
-        view = super().as_view(**initkwargs)
-        fct = user_passes_test(cls.check_access)
-        return fct(view)
+class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
+    permission_required = 'individual_subscription.manage_account'
 
     def get_queryset(self):
         qs = IndividualAccount.objects.order_by('-id')
-        if self.request.user.is_superuser or self.request.user.is_staff:
-            return qs.all()
-        elif self.request.user.organizations_managed.count() > 0:
-            org_ids = [o.id for o in self.request.user.organizations_managed.all()]
-            return qs.filter(policy__in=org_ids)
-        else:
-            return qs.none()
+        ids = [account.id for account in qs if self.request.user.has_perm(
+               'individual_subscription.manage_account', account)]
+        return qs.filter(id__in=ids)
 
 
 class IndividualAccountList(OrganizationCheckMixin, FilterView):
