@@ -6,6 +6,7 @@ import pymysql
 from django.conf import settings
 
 from erudit.models import Publisher, Journal
+from erudit.utils.pymysql import pymysql_connection
 
 EDINUM_SQL_QUERY = """
 SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, sp.shortname, li.code, t.Subtitle
@@ -36,11 +37,30 @@ def fetch_publishers_from_edinum():
     return cur.fetchall()
 
 
+def fetch_publisher_journals_from_edinum():
+    PUBLISHER_JOURNALS_QUERY = """SELECT c.PersonID, t.id as journal_id
+FROM edinum.contributionseries cs
+JOIN title t ON cs.SeriesID = t.SeriesID
+JOIN contribution c ON cs.ContributionID = c.ID
+WHERE ContributiontypeID = '3';"""
+    edinum = settings.EXTERNAL_DATABASES['edinum']
+
+    with pymysql_connection(
+        host=edinum['HOST'],
+        username=edinum['USER'],
+        password=edinum['PASSWORD'],
+        database=edinum['NAME']
+    ) as cur:
+        cur.execute(PUBLISHER_JOURNALS_QUERY)
+        return cur.fetchall()
+
+
 def create_or_update_journal(
         publisher, journal_id, journal_name,
         journal_shortname, journal_localidentifier, journal_subtitle):
+
     journal_count = Journal.objects.filter(
-        edinum_id=journal_id
+        code=journal_shortname
     ).count()
 
     if journal_count > 1:
@@ -49,7 +69,7 @@ def create_or_update_journal(
         return None
 
     elif journal_count == 1:
-        journal = Journal.objects.get(edinum_id=journal_id)
+        journal = Journal.objects.get(code=journal_shortname)
 
         if not journal.synced_with_edinum:
             warn = "Found a journal with id {}. However, it is not synced with edinum. Not updating"  # noqa
