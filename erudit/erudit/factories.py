@@ -9,6 +9,12 @@ class OrganisationFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: 'organization{}'.format(n))
 
 
+class PublisherFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = 'erudit.Publisher'
+
+
 class JournalFactory(factory.django.DjangoModelFactory):
 
     class Meta:
@@ -16,6 +22,17 @@ class JournalFactory(factory.django.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
+
+    @factory.post_generation
+    def publishers(self, create, extracted, **kwargs):
+        if not create:
+            # Simple build, do nothing.
+            return
+
+        if extracted:
+            # A list of groups were passed in, use them
+            for group in extracted:
+                self.publishers.add(group)
 
 
 class IssueFactory(factory.django.DjangoModelFactory):

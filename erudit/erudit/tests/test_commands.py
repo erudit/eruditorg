@@ -1,10 +1,10 @@
 # from datetime import datetime
 from django.contrib.auth.models import User
 
-from erudit.models import Publisher, Journal
+from erudit.models import Publisher
 
 from editor.tests.base import BaseEditorTestCase
-from editor.mandragore import (
+from erudit.utils.mandragore import (
     create_mandragore_profile_for_user,
     user_coherent_with_mandragore,
     can_create_mandragore_user,
@@ -14,10 +14,12 @@ from editor.mandragore import (
     get_mandragore_user
 )
 
-from editor.edinum import (
+from erudit.utils.edinum import (
     create_or_update_publisher,
     create_or_update_journal
 )
+
+from erudit.factories import JournalFactory, PublisherFactory
 
 
 class TestCommands(BaseEditorTestCase):
@@ -157,7 +159,17 @@ class TestCommands(BaseEditorTestCase):
         publisher = create_or_update_publisher("123456", "dcormier2")
         self.assertIsNone(publisher)
 
-    def test_create_or_update_journal(self):
+    def test_can_create_journal_and_publisher(self):
+        publisher = create_or_update_publisher("123456", "dcormier")
+        journal = create_or_update_journal(
+            publisher, "123", "Journal of journals", "joj", "", ""
+        )
+
+        self.assertEquals(
+            journal.edinum_id, "123"
+        )
+
+    def test_can_update_journal(self):
         publisher = create_or_update_publisher("123456", "dcormier")
         journal = create_or_update_journal(
             publisher, "123", "Journal of journals", "joj", "", ""
@@ -181,8 +193,12 @@ class TestCommands(BaseEditorTestCase):
             "Journal"
         )
 
-        # create another journal with the same edinum_id
-        Journal.objects.create(name="test", publisher=publisher, edinum_id="123")
+    def test_cannot_create_journal_if_nonedinum_journal_exists(self):
+        """ Cannot create a journal if a non edinum journal with the same shortname exists """
+        publisher = PublisherFactory.create()
+
+        journal = JournalFactory.create(code='testj', edinum_id="123", publishers=[publisher])
+
         journal = create_or_update_journal(
             publisher, "123", "test", "testj", "", ""
         )
