@@ -18,6 +18,15 @@ class JournalFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
 
 
+class IssueFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = 'erudit.issue'
+
+    journal = factory.SubFactory(JournalFactory)
+    localidentifier = factory.Sequence(lambda n: 'issue-{}'.format(n))
+
+
 class BasketFactory(factory.django.DjangoModelFactory):
 
     class Meta:
