@@ -194,10 +194,10 @@ class TestCommands(BaseEditorTestCase):
         )
 
     def test_cannot_create_journal_if_nonedinum_journal_exists(self):
-        # create another journal with the same edinum_id
+        """ Cannot create a journal if a non edinum journal with the same shortname exists """
         publisher = PublisherFactory.create()
 
-        journal = JournalFactory.create(edinum_id="123", publishers=[publisher])
+        journal = JournalFactory.create(code='testj', edinum_id="123", publishers=[publisher])
 
         journal = create_or_update_journal(
             publisher, "123", "test", "testj", "", ""
