@@ -247,9 +247,8 @@ class Journal(FedoraMixin, Named, Edinum):
     )
     """Fedora commons identifier"""
 
-    publisher = models.ForeignKey(
+    publishers = models.ManyToManyField(
         'Publisher',
-        null=True, blank=True,
         related_name='journals',
         verbose_name=_("Éditeur"),
     )

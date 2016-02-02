@@ -48,11 +48,12 @@ class JournalAdmin(admin.ModelAdmin):
     list_display_links = ('__str__', 'code')
 
     list_filter = [
-        'publisher', 'type', 'paper', 'open_access', 'active'
+        'publishers', 'type', 'paper', 'open_access', 'active'
     ]
 
     filter_horizontal = (
         'members',
+        'publishers',
     )
 
     list_editable = ['type', 'active', ]
@@ -68,7 +69,8 @@ class JournalAdmin(admin.ModelAdmin):
         }),
         (None, {
             'fields': (
-                ('publisher', 'type'),
+                ('publishers',),
+                ('type'),
             ),
         }),
         (None, {

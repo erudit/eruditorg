@@ -56,12 +56,13 @@ def create_or_update_journal(
             log.warn({"msg": warn.format(journal_id)})
             return None
         else:
-            journal.publisher = publisher
             journal.name = journal_name
             journal.code = journal_shortname
             journal.localidentifier = journal_localidentifier
             journal.subtitle = journal_subtitle
             journal.sync_date = datetime.now()
+            journal.save()
+            journal.publishers.add(publisher)
             journal.save()
             return journal
     else:
@@ -72,10 +73,10 @@ def create_or_update_journal(
             localidentifier=journal_localidentifier,
             synced_with_edinum=True,
             edinum_id=journal_id,
-            publisher=publisher,
             sync_date=datetime.now(),
         )
-
+        journal.save()
+        journal.publishers.add(publisher)
         journal.save()
         return journal
 
