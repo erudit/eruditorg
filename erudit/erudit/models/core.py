@@ -3,6 +3,10 @@ from datetime import datetime as dt
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+from eruditarticle.objects import EruditJournal
+
+from erudit.fedora.modelmixins import FedoraMixin
+from erudit.fedora.objects import JournalDigitalObject
 
 
 # choices
@@ -199,7 +203,7 @@ class JournalManager(models.Manager):
     pass
 
 
-class Journal(Named, Edinum):
+class Journal(FedoraMixin, Named, Edinum):
     """Revue"""
 
     # identification
@@ -295,6 +299,15 @@ class Journal(Named, Edinum):
         related_name="journals",
         verbose_name=_("Membres")
     )
+
+    # Fedora-related methods
+    # --
+
+    def get_fedora_model(self):
+        return JournalDigitalObject
+
+    def get_erudit_class(self):
+        return EruditJournal
 
     # issues
     def first_issue(self):
