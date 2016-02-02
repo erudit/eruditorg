@@ -11,9 +11,21 @@ class FedoraMixin(object):
     The FedoraMixin defines a common way to associate Django models and its
     instances to eulfedora's models and Erudit's objects'
     """
+    def get_full_identifier(self):
+        """
+        Returns the full identifier of the considered object. By default the FedoraMixin
+        assumes that this identifier can be accessed through a ``localidentifier`` model
+        field. But it can be computed from parent objects in order to get identifiers of
+        the form: nb1.nb2.
+        """
+        return self.localidentifier
+
     def get_pid(self):
-        pid = self.localidentifier
-        return settings.PID_PREFIX + pid if pid else None
+        """
+        Returns the full PID of the considered object.
+        """
+        identifier = self.get_full_identifier()
+        return settings.PID_PREFIX + identifier if identifier else None
 
     @property
     def pid(self):
