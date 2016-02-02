@@ -17,6 +17,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
+from . import urls_compat
+
+
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
 
@@ -38,6 +41,10 @@ urlpatterns = [
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
     # TODO: move to user space
     url(r'^abonnements/', include('subscription.urls')),
-    url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 
+    # Compatibility URLs
+    url('^', include(urls_compat.urlpatterns)),
+
+    # Catchall
+    url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 ]
