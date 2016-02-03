@@ -34,7 +34,7 @@
     {% endblock %}
   </head>
   <body>
-    
+
     {% block header %}
     {% endblock %}
     {% block nav %}
@@ -47,8 +47,8 @@
 
     {# scripts #}
     {% if DEBUG %}
-    <script src="{% static 'scripts/build/erudit-scripts-dev.js' %}"></script>
     <script src="{% static 'scripts/build/erudit-vendors-dev.js' %}"></script>
+    <script src="{% static 'scripts/build/erudit-scripts-dev.js' %}"></script>    
     {% else %}
     {% javascript 'erudit_vendors' %}
     {% javascript 'erudit_scripts' %}

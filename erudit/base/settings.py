@@ -92,6 +92,7 @@ PIPELINE = {
     'JAVASCRIPT' : {
         # main js file for erudit.org
         'erudit_plugins': {
+            # TODO : move this list in a common JS config file for Gulp and Pipeline
             'source_filenames': (
               'vendor/jquery/dist/jquery.min.js',
               'vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
