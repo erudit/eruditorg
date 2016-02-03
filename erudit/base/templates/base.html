@@ -30,11 +30,11 @@
     {% else %}
     {% stylesheet 'erudit_main' %}
     {% endif %}
-    <script src="{% static 'vendor/jquery/dist/jquery.js' %}"></script>
     {% block extrahead %}
     {% endblock %}
   </head>
   <body>
+    
     {% block header %}
     {% endblock %}
     {% block nav %}
@@ -53,6 +53,9 @@
     {% javascript 'erudit_vendors' %}
     {% javascript 'erudit_scripts' %}
     {% endif %}
+
+    {% block footerscript %}
+    {% endblock %}
 
   </body>
 </html>
