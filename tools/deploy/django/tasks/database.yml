@@ -4,7 +4,7 @@
   django_manage: >
     command="migrate auth"
     app_path={{ project_root }}/erudit/
-    settings=erudit.settings
+    settings=base.settings
     virtualenv={{ virtualenv_root }}
   tags:
     - provision
@@ -27,7 +27,7 @@
   django_manage: >
     command=migrate
     app_path={{ project_root }}/erudit/
-    settings=erudit.settings
+    settings=base.settings
     virtualenv={{ virtualenv_root }}
   tags:
     - database
