@@ -85,11 +85,8 @@ personname pn WHERE pn.ID in (%s);"""
 
 
 def fetch_series_from_edinum(series_ids_to_fetch):
-    EDINUM_SERIE_QUERY = """SELECT s.ID, ap.PersonId from Series s, contributionseries cs, contribution c, artificialperson ap WHERE
-s.ID = cs.SeriesID AND
-cs.ContributionID = c.ID AND
-c.PersonID = ap.PersonID AND
-c.ContributiontypeID = '3' AND
+    EDINUM_SERIE_QUERY = """SELECT s.ID, t.id from Series s, title t WHERE
+s.ID = t.SeriesID AND
 s.ID IN (%s);"""  # noqa
 
     if not series_ids_to_fetch:
