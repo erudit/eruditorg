@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.views.generic.base import RedirectView
+from django.views.generic import RedirectView
+from django.views.generic import TemplateView
 
+from . import views
 from . import urls_compat
 
 
@@ -25,6 +27,9 @@ urlpatterns = [
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^pdf-viewer\.html$',
+        TemplateView.as_view(template_name='pdf/viewer.html'), name='pdf-viewer'),
 
     # User space urls
     url(r'^espace-utilisateur/$',
