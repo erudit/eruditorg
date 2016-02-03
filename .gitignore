@@ -11,17 +11,25 @@ dumps/
 post_office_attachments/
 src/
 .DS_Store
+<<<<<<< HEAD
 .coverage
+=======
+>>>>>>> 2b882dd20c8a0c8765f44a0331c0c51a7d05483d
 /node_modules
 Vagrantfile
 /vagrant_data
 .vagrant
 vagrant
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b882dd20c8a0c8765f44a0331c0c51a7d05483d
 #
 # bower - keep adding to this list as needed
 # ignore cruft that comes with bower components
 #
+<<<<<<< HEAD
 /erudit/base/static/vendor/**/src
 /erudit/base/static/vendor/**/source
 /erudit/base/static/vendor/**/spec
@@ -51,3 +59,34 @@ vagrant
 /erudit/base/static/vendor/**/vendor/
 /erudit/base/static/vendor/**/demo/
 /erudit/base/static/vendor/**/png/
+=======
+/erudit/erudit/static/vendor/**/src
+/erudit/erudit/static/vendor/**/source
+/erudit/erudit/static/vendor/**/spec
+/erudit/erudit/static/vendor/**/doc
+/erudit/erudit/static/vendor/**/docs
+/erudit/erudit/static/vendor/**/.bowerrc
+/erudit/erudit/static/vendor/**/.gitignore
+/erudit/erudit/static/vendor/**/.npmignore
+/erudit/erudit/static/vendor/**/.jshintignore
+/erudit/erudit/static/vendor/**/.jshintrc
+/erudit/erudit/static/vendor/**/composer.json
+/erudit/erudit/static/vendor/**/*.nuspec
+/erudit/erudit/static/vendor/**/bower.json
+/erudit/erudit/static/vendor/**/.bower.json
+/erudit/erudit/static/vendor/**/gruntfile.js
+/erudit/erudit/static/vendor/**/gulpfile.js
+/erudit/erudit/static/vendor/**/index.js
+/erudit/erudit/static/vendor/**/package.js
+/erudit/erudit/static/vendor/**/package.json
+/erudit/erudit/static/vendor/**/component.json
+/erudit/erudit/static/vendor/**/*.md
+/erudit/erudit/static/vendor/**/*.html
+/erudit/erudit/static/vendor/**/*.txt
+/erudit/erudit/static/vendor/**/LICENSE
+/erudit/erudit/static/vendor/**/Makefile
+/erudit/erudit/static/vendor/**/test/
+/erudit/erudit/static/vendor/**/vendor/
+/erudit/erudit/static/vendor/**/demo/
+/erudit/erudit/static/vendor/**/png/
+>>>>>>> 2b882dd20c8a0c8765f44a0331c0c51a7d05483d

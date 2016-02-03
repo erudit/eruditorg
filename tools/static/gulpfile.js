@@ -10,13 +10,13 @@ function swallowError (error) {
 };
 
 gulp.task('sass', function() {
-  return gulp.src('../../erudit/erudit/static/sass/main.scss')
+  return gulp.src('../../erudit/base/static/sass/main.scss')
     .pipe(sass())
     .on('error', sass.logError)
-    .pipe(gulp.dest('../../erudit/erudit/static/css/'));
+    .pipe(gulp.dest('../../erudit/base/static/css/'));
 });
 
 gulp.task('watch', function() {
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch('../../erudit/erudit/static/sass/**/*.scss', ['sass']);
+  gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass']);
 });
