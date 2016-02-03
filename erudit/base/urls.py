@@ -35,7 +35,7 @@ urlpatterns = [
         include('individual_subscription.urls',
                 namespace='individual_subscription')),
     # Public website urls
-    url(r'^revue/', include('journal.urls', namespace='journal')),
+    url(r'^', include('journal.urls', namespace='journal')),
     url(r'^organisations/', include('individual_subscription.urls',
         namespace='individual_subscription')),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),

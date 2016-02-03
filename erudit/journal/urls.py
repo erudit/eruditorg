@@ -8,7 +8,7 @@ from .views import JournalDetailView
 
 
 urlpatterns = [
-    url(r'^(?P<code>[\w-]+)/$', JournalDetailView.as_view(), name='journal-detail'),
+    url(r'^journal/(?P<code>[\w-]+)/$', JournalDetailView.as_view(), name='journal-detail'),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
