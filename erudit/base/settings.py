@@ -68,10 +68,13 @@ DATABASES = {
 }
 
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.FileSystemFinder',
+    'pipeline.finders.AppDirectoriesFinder',
+    'pipeline.finders.CachedFileFinder',
     'pipeline.finders.PipelineFinder',
 )
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 PIPELINE = {
     'PIPELINE_ENABLED': True,
@@ -89,13 +92,12 @@ PIPELINE = {
     },
 }
 
+# django-pipeline settings
 PIPELINE['COMPILERS'] = (
   'pipeline.compilers.sass.SASSCompiler',
 )
 
 PIPELINE['SASS_BINARY'] = '/usr/local/bin/sassc'
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
