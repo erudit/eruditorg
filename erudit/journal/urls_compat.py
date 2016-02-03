@@ -7,6 +7,8 @@ from base.views import DummyView
 
 
 unsupported_patterns = [
+    r'^iderudit/(?P<code>[\w-]+)$',
+
     r'^revue/(?P<code>[\w-]+)/rss.xml$',
     r'^revue/(?P<code>[\w-]+)/(?P<year>\d{4})/(?P<v>[\w-]+)/(?P<issue>[\w-]+)/?$',
     r'^revue/(?P<code>[\w-]+)/(?P<year>\d{4})/(?P<v>[\w-]+)/(?P<issue>[\w-]+)/index.html?$',
@@ -26,6 +28,11 @@ unsupported_patterns = [
      '(?P<issue>[\w-]+)/(?P<article>[\w-]+).html?$'),
     r'^culture/(?P<code>[\w-]+)/auteurs.html?$',
     r'^culture/(?P<code>[\w-]+)/thematique.html?$',
+
+    r'^feuilletage/index.html?$',
+    r'^feuilletage_(?P<code1>[\w-]+)\.(?P<code2>[\w-]+)@(?P<id>[0-9]+)$',
+    (r'^feuilletage_(?P<code1>[\w-]+)\.(?P<code2>[\w-]+)@(?P<id>[0-9]+)'
+     '(?:\&(?P<key>[\w-]+)=(?P<val>[\w-]+))*$'),
 ]
 
 urlpatterns = [
