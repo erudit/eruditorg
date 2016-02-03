@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 
-from erudit.models import Journal, Publisher
+from erudit.models import Publisher
 from erudit.factories import JournalFactory
 
 
@@ -32,15 +32,11 @@ class BaseEruditTestCase(TestCase):
         )
 
         # Add a journal with a member
-        self.journal = JournalFactory.create(publisher=self.publisher)
+        self.journal = JournalFactory.create(publishers=[self.publisher])
         self.journal.members.add(self.user)
         self.journal.save()
 
         # Add a second journal with another member
-        self.other_journal = Journal.objects.create(
-            code='test',
-            name='Autre revue de test',
-            publisher=self.other_publisher,
-        )
+        self.other_journal = JournalFactory.create(publishers=[self.other_publisher])
         self.other_journal.members.add(self.other_user)
         self.other_journal.save()

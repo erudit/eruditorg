@@ -1,7 +1,10 @@
 import logging
 
-from editor.edinum import (
+from erudit.models.core import Publisher, Journal
+
+from erudit.utils.edinum import (
     fetch_publishers_from_edinum,
+    fetch_publisher_journals_from_edinum,
     create_or_update_publisher,
     create_or_update_journal
 )
@@ -32,14 +35,23 @@ class Command(BaseCommand):
 
                 self.created_or_updated_publishers.append(person_id)
 
-            if journal_id not in self.created_or_updated_journals:
-                create_or_update_journal(
-                    publisher,
-                    journal_id,
-                    journal_name,
-                    journal_shortname,
-                    journal_localidentifier,
-                    journal_subtitle
-                )
+            create_or_update_journal(
+                publisher,
+                journal_id,
+                journal_name,
+                journal_shortname,
+                journal_localidentifier,
+                journal_subtitle
+            )
 
-                self.created_or_updated_journals.append(journal_id)
+            self.created_or_updated_journals.append(journal_shortname)
+
+        publisher_journals = fetch_publisher_journals_from_edinum()
+
+        for journal_sn in self.created_or_updated_journals:
+            journal = Journal.objects.get(code=journal_sn)
+            # journal.publishers.all().delete()
+            for publisher_id, journal_id in publisher_journals:
+                if journal_id == journal.edinum_id:
+                    publisher = Publisher.objects.get(edinum_id=publisher_id)
+                    journal.publishers.add(publisher)
