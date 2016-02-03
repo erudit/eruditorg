@@ -1,6 +1,7 @@
 var gulp       = require('gulp'),
     rename     = require('gulp-rename'),
     sass       = require('gulp-sass'),
+    concat     = require('gulp-concat'),
     path       = require('path');
 
 // display (or swallow?) an error in console
@@ -22,7 +23,34 @@ gulp.task('sass-erudit-main', function() {
     .pipe(gulp.dest('../../erudit/base/static/css/'));
 });
 
+gulp.task('scripts-erudit-main', function() {
+  return gulp.src(['../../erudit/base/static/scripts/**/*.js', '!../../erudit/base/static/scripts/build/**'])
+    .pipe(concat('erudit-scripts.js'))
+    .pipe(rename(function (path) {
+      path.dirname += "/build";
+      path.basename += "-dev";
+      path.extname = ".js"
+    }))
+    .pipe(gulp.dest('../../erudit/base/static/scripts/'));
+});
+
+gulp.task('scripts-erudit-vendors', function() {
+  return gulp.src([
+      '../../erudit/base/static/vendor/jquery/dist/jquery.min.js',
+      '../../erudit/base/static/bootstrap-sass/assets/javascripts/bootstrap.js'
+    ])
+    .pipe(concat('erudit-vendors.js'))
+    .pipe(rename(function (path) {
+      path.dirname += "/build";
+      path.basename += "-dev";
+      path.extname = ".js"
+    }))
+    .pipe(gulp.dest('../../erudit/base/static/scripts/'));
+});
+
 gulp.task('watch', function() {
   // watch any less file /css directory, ** is for recursive mode
   gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass-erudit-main']);
+  // watch any js file /js directory, ** is for recursive mode
+  gulp.watch('../../erudit/base/static/scripts/**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors']);
 });

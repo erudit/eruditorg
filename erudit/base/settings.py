@@ -89,6 +89,22 @@ PIPELINE = {
             },
         },
     },
+    'JAVASCRIPT' : {
+        # main js file for erudit.org
+        'erudit_plugins': {
+            'source_filenames': (
+              'vendor/jquery/dist/jquery.min.js',
+              'vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
+            ),
+            'output_filename': 'js/erudit-vendors.min.js',
+        },
+        'erudit_scripts': {
+            'source_filenames': (
+              'scripts/*.js',
+            ),
+            'output_filename': 'js/erudit-scripts.min.js',
+        },
+    }
 }
 
 # django-pipeline settings

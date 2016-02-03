@@ -6842,6 +6842,9 @@ html {
 *, *::before, *::after {
   box-sizing: inherit; }
 
+body {
+  background: #f3f3f3; }
+
 @font-face {
   font-family: 'Open Sans Light';
   src: url("../fonts/OpenSans-Light.eot");

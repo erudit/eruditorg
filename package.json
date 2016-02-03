@@ -25,6 +25,7 @@
     "bower": "1.7.7",
     "gulp": "3.9.0",
     "gulp-sass": "2.1.1",
-    "gulp-rename": "1.2.2"
+    "gulp-rename": "1.2.2",
+    "gulp-concat": "2.6.0"
   }
 }

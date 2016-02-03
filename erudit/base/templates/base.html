@@ -30,12 +30,6 @@
     {% else %}
     {% stylesheet 'erudit_main' %}
     {% endif %}
-
-    <style>
-    body {
-      background: rgba(0, 0, 0, 0.05);
-    }
-    </style>
     <script src="{% static 'vendor/jquery/dist/jquery.js' %}"></script>
     {% block extrahead %}
     {% endblock %}
@@ -49,7 +43,16 @@
     {% endblock %}
     {% block footer %}
     {% endblock %}
-    <script src="{% static 'vendor/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
+
+    {# scripts #}
+    {% if DEBUG %}
+    <script src="{% static 'scripts/build/erudit-scripts-dev.js' %}"></script>
+    <script src="{% static 'scripts/build/erudit-vendors-dev.js' %}"></script>
+    {% else %}
+    {% javascript 'erudit_vendors' %}
+    {% javascript 'erudit_scripts' %}
+    {% endif %}
 
   </body>
 </html>
