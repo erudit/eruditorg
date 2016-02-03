@@ -1,5 +1,4 @@
-
-{% load compress %}
+{% load pipeline %}
 {% load static from staticfiles %}
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -51,5 +50,6 @@
     {% block footer %}
     {% endblock %}
     <script src="{% static 'vendor/bootstrap-sass/assets/javascripts/bootstrap.js' %}"></script>
+
   </body>
 </html>
