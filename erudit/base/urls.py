@@ -39,6 +39,7 @@ urlpatterns = [
     # Public website urls
     url(r'^', include('journal.urls', namespace='journal')),
     url(r'^livre/', include('book.urls', namespace='book')),
+    url(r'^recherche/', include('search.urls', namespace='search')),
     url(r'^these/', include('thesis.urls', namespace='thesis')),
     url(r'^organisations/', include('individual_subscription.urls',
         namespace='individual_subscription')),

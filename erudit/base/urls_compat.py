@@ -3,6 +3,8 @@
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
+from .views import DummyView
+
 
 urlpatterns = [
     url(r'^index.html?$',
@@ -20,4 +22,6 @@ urlpatterns = [
         RedirectView.as_view(pattern_name='password_reset', permanent=True)),
     url(r'^client/updatePassword\.jsp$',
         RedirectView.as_view(pattern_name='password_change', permanent=True)),
+
+    url(r'^rss.xml$', DummyView.as_view()),
 ]
