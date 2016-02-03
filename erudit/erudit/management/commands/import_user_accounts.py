@@ -3,7 +3,7 @@ import logging
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
-from erudit.models import Publisher
+from erudit.models import Journal
 
 from erudit.utils.mandragore import (
     fetch_accounts_from_mandragore,
@@ -36,7 +36,7 @@ class Command(BaseCommand):
         # local association tables for this.
         person_ids_to_fetch = set()
         persons_collections = {}
-        collections_editor = {}
+        collections_journals = {}
 
         # Retrieve the accounts from Mandragore
         for (username, email, person_id,
@@ -77,19 +77,19 @@ class Command(BaseCommand):
                 first_name=firstname, last_name=familyname
             )
 
-        # Add the users to the publisher
-        for (id, editor_id) in fetch_series_from_edinum(persons_collections.values()):
-            collections_editor[id] = editor_id
+        # Add the users to the journal
+        for (id, journal_id) in fetch_series_from_edinum(persons_collections.values()):
+            collections_journals[id] = journal_id
 
         for person_id, collection in persons_collections.items():
             try:
-                publisher_id = collections_editor[collection]
-                publisher = Publisher.objects.get(edinum_id=publisher_id)
+                journal_id = collections_journals[collection]
+                journal = Journal.objects.get(edinum_id=journal_id)
                 to_add = persons_to_add[person_id]
                 to_add.save()
 
-                publisher.members.add(to_add)
-                publisher.save()
+                journal.members.add(to_add)
+                journal.save()
             except Exception as e:
                 log.error(
                     e
