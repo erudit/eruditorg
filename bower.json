@@ -37,11 +37,5 @@
     "swiper": "~3.3.0",
     "inline-svg": "latest",
     "bourbon": "latest"
-  },
-  "install" : {
-    "path" : "foobar",
-    "sources" : {
-      "bootstrap-sass" : "assets/*"
-    }
   }
 }
