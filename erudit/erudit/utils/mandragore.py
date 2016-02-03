@@ -22,6 +22,25 @@ def create_mandragore_profile_for_user(person_id, user):
     return mandragoreprofile
 
 
+def update_user_password(username, the_hash):
+    """ Update the password of the user in mandragore """
+    MANDRAGORE_UPDATE_QUERY = """
+    UPDATE CompteUtilisateur set MotDePasse="{}" WHERE NomUtilisateur="{}"
+    """
+    mandragore = settings.EXTERNAL_DATABASES['mandragore']
+
+    with pymysql_connection(
+        host=mandragore['HOST'],
+        username=mandragore['USER'],
+        password=mandragore['PASSWORD'],
+        database=mandragore['NAME']
+    ) as cur:
+        cur.execute(MANDRAGORE_UPDATE_QUERY.format(
+            the_hash,
+            username
+        ))
+
+
 def get_user_from_mandragore(username):
     MANDRAGORE_USER_QUERY = """
     SELECT NomUtilisateur, MotDePasse FROM CompteUtilisateur WHERE NomUtilisateur="{}"
