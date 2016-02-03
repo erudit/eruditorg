@@ -4,7 +4,7 @@
   django_manage: >
     command=collectstatic
     app_path={{ project_root }}/erudit/
-    settings=erudit.settings
+    settings=base.settings
     virtualenv={{ virtualenv_root }}
   tags:
     - provision
@@ -19,7 +19,7 @@
   django_manage: >
     command=compress
     app_path={{ project_root }}/erudit/
-    settings=erudit.settings
+    settings=base.settings
     virtualenv={{ virtualenv_root }}
   tags:
     - provision

@@ -17,11 +17,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
+from . import urls_compat
+
+
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
     # User space urls
     url(r'^espace-utilisateur/$',
         include('userspace.urls', namespace='userspace'),
@@ -31,13 +35,21 @@ urlpatterns = [
     url(r'^espace-utilisateur/organisations/',
         include('individual_subscription.urls',
                 namespace='individual_subscription')),
+
     # Public website urls
-    url(r'^revue/', include('journal.urls', namespace='journal')),
+    url(r'^', include('journal.urls', namespace='journal')),
+    url(r'^livre/', include('book.urls', namespace='book')),
+    url(r'^recherche/', include('search.urls', namespace='search')),
+    url(r'^these/', include('thesis.urls', namespace='thesis')),
     url(r'^organisations/', include('individual_subscription.urls',
         namespace='individual_subscription')),
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
     # TODO: move to user space
     url(r'^abonnements/', include('subscription.urls')),
-    url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 
+    # Compatibility URLs
+    url('^', include(urls_compat.urlpatterns)),
+
+    # Catchall
+    url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 ]

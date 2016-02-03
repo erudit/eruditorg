@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 
 from erudit.models import Publisher
 
-from editor.mandragore import (
+from erudit.utils.mandragore import (
     fetch_accounts_from_mandragore,
     fetch_users_from_edinum,
     fetch_series_from_edinum,
