@@ -6,6 +6,12 @@
   sudo npm install --save-dev
 ```
 
+### copy Gulp ENV sample file
+
+```
+  cp ./tools/static/.env.json.sample ./tools/static/.env.json
+```
+
 ### start Gulp
 
 ```
