@@ -2,7 +2,8 @@ var gulp       = require('gulp'),
     rename     = require('gulp-rename'),
     sass       = require('gulp-sass'),
     concat     = require('gulp-concat'),
-    path       = require('path');
+    path       = require('path'),
+    livereload = require('gulp-livereload');
 
 // display (or swallow?) an error in console
 // also prevent error to stop the gulp watch process unless restart
@@ -20,7 +21,8 @@ gulp.task('sass-erudit-main', function() {
       path.basename += "-dev";
       path.extname = ".css"
     }))
-    .pipe(gulp.dest('../../erudit/base/static/css/'));
+    .pipe(gulp.dest('../../erudit/base/static/css/'))
+    .pipe(livereload());
 });
 
 gulp.task('scripts-erudit-main', function() {
@@ -31,7 +33,8 @@ gulp.task('scripts-erudit-main', function() {
       path.basename += "-dev";
       path.extname = ".js"
     }))
-    .pipe(gulp.dest('../../erudit/base/static/scripts/'));
+    .pipe(gulp.dest('../../erudit/base/static/scripts/'))
+    .pipe(livereload());
 });
 
 gulp.task('scripts-erudit-vendors', function() {
@@ -49,8 +52,15 @@ gulp.task('scripts-erudit-vendors', function() {
 });
 
 gulp.task('watch', function() {
+  // start live reload server
+  livereload.listen({ host: null });
+  // livereload({ start: true });
+
   // watch any less file /css directory, ** is for recursive mode
   gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass-erudit-main']);
   // watch any js file /js directory, ** is for recursive mode
   gulp.watch('../../erudit/base/static/scripts/**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors']);
+
+  /* Trigger a live reload on any Django template changes */
+  gulp.watch('../../erudit/base/templates/**/*.html').on('change', livereload.changed);
 });

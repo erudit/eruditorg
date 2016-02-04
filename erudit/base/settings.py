@@ -67,13 +67,13 @@ DATABASES = {
     },
 }
 
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
 )
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 PIPELINE = {
     'PIPELINE_ENABLED': True,
@@ -91,7 +91,7 @@ PIPELINE = {
     },
     'JAVASCRIPT' : {
         # main js file for erudit.org
-        'erudit_plugins': {
+        'erudit_vendors': {
             # TODO : move this list in a common JS config file for Gulp and Pipeline
             'source_filenames': (
               'vendor/jquery/dist/jquery.min.js',
