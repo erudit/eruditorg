@@ -13,7 +13,7 @@ class pymysql_connection():
 
         self.conn = pymysql.connect(
             host=self.host,
-            unix_socket='/tmp/mysql.sock',
+            unix_socket='/var/lib/mysql/mysql.sock',
             user=self.username,
             passwd=self.password,
             db=self.database,
@@ -22,4 +22,5 @@ class pymysql_connection():
         return self.conn.cursor()
 
     def __exit__(self, type, value, traceback):
+        self.conn.commit()
         self.conn.close()

@@ -22,7 +22,7 @@ import shlex
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../erudit'))
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erudit.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'base.settings')
 import django
 django.setup()
 
@@ -36,6 +36,7 @@ django.setup()
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -277,6 +278,11 @@ texinfo_documents = [
    author, 'ruditorg', 'One line description of project.',
    'Miscellaneous'),
 ]
+
+intersphinx_mapping = {
+    'python': ('http://python.readthedocs.org/en/stable/', None),
+    'django': ('http://docs.djangoproject.com/en/1.8/', 'https://docs.djangoproject.com/en/1.8/_objects/'),
+    }
 
 # Documents to append as an appendix to all manuals.
 #texinfo_appendices = []
