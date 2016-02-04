@@ -94,8 +94,9 @@ PIPELINE = {
         'erudit_vendors': {
             # TODO : move this list in a common JS config file for Gulp and Pipeline
             'source_filenames': (
-              'vendor/jquery/dist/jquery.min.js',
-              'vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
+              'vendor/jquery/dist/jquery.js',
+              'vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
+              'vendor/inline-svg/dist/inlineSVG.min.js',
             ),
             'output_filename': 'js/erudit-vendors.min.js',
         },
@@ -113,6 +114,7 @@ PIPELINE['COMPILERS'] = (
   'pipeline.compilers.sass.SASSCompiler',
 )
 
+PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE['SASS_BINARY'] = '/usr/local/bin/sassc'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
