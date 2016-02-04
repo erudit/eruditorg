@@ -13,10 +13,26 @@ from permissions.models import Rule
 
 
 class RuleForm(ModelForm):
-    journal = forms.ModelChoiceField(queryset=Journal.objects.none(),
+    """
+    This form provides a way to define rules based on user journal membership
+    (logged user), to filter available journals, users and permisions.
+    journals are filtred from journal membership
+    users are filtered with all users from same journals membership
+    permissions are filtred from a special class method
+    """
+    permission_filters = (
+        'userspace.manage_permissions',
+        'editor.manage_issuesubmission',
+        'individual_subscription.manage_account',
+    )
+
+    journal = forms.ModelChoiceField(label=_("Revue"),
+                                     queryset=Journal.objects.none(),
                                      empty_label=None)
-    user = forms.ModelChoiceField(queryset=User.objects.none(), empty_label=None)
-    permission = forms.ChoiceField()
+    user = forms.ModelChoiceField(label=_("User"),
+                                  queryset=User.objects.none(),
+                                  empty_label=None)
+    permission = forms.ChoiceField(label=_("Permission"))
 
     class Meta:
         model = Rule
@@ -31,19 +47,36 @@ class RuleForm(ModelForm):
         chain = itertools.chain(*us)
         users = [u.id for u in list(chain)]
         self.fields['user'].queryset = User.objects.filter(id__in=users)
-        declared_rules = [(perm, _(perm)) for perm in permissions.keys()]
+        declared_rules = [(perm, _(perm)) for perm in permissions.keys()
+                          if perm in self.get_permission_filters()]
         self.fields['permission'].choices = declared_rules
 
+    def get_permission_filters(self):
+        """
+        Function used to filter permissions available in the ChoiceField.
+        """
+        return self.permission_filters
+
     def clean(self):
+        """
+        check data integrity for the couple user / journal.
+        (Ideally, the field user should be filtered based on journal selection.)
+        """
         cleaned_data = super(RuleForm, self).clean()
         self.user = cleaned_data.get("user")
         self.journal = cleaned_data.get("journal")
 
         if not bool(self.journal.members.filter(id=self.user.id).count()):
-            raise forms.ValidationError(
-                _("This user is not a member of that journal"))
+            journals = ", ".join([str(j) for j in self.user.journals.all()])
+            raise forms.ValidationError("{} {}".format(
+                _("Cet utilisateur n'est pas un membre de cette revue.\
+                   Ses revues sont :"),
+                journals))
 
     def save(self, *args, **kw):
+        """
+        Create the generic rule from form data
+        """
         instance = super(RuleForm, self).save(commit=False)
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         instance.content_type = ct
