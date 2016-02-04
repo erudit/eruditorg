@@ -1,0 +1,13 @@
+{% extends "base_userspace.html" %}
+{% load i18n %}
+
+{% block content-main %}
+
+<h1>{% trans "Ajouter un accès" %} </h1>
+
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" />
+</form>
+
+{% endblock %}

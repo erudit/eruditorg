@@ -31,14 +31,14 @@ urlpatterns = [
         TemplateView.as_view(template_name='pdf/viewer.html'), name='pdf-viewer'),
 
     # User space urls
-    url(r'^espace-utilisateur/$',
-        include('userspace.urls', namespace='userspace'),
-        name="login"),
     url(r'^espace-utilisateur/editeur/',
         include('editor.urls', namespace='editor')),
     url(r'^espace-utilisateur/organisations/',
         include('individual_subscription.urls',
                 namespace='individual_subscription')),
+    url(r'^espace-utilisateur/',
+        include('userspace.urls', namespace='userspace'),
+        name="login"),
 
     # Public website urls
     url(r'^', include('journal.urls', namespace='journal')),
@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^these/', include('thesis.urls', namespace='thesis')),
     url(r'^organisations/', include('individual_subscription.urls',
         namespace='individual_subscription')),
+
     url(r'^upload/', include('plupload.urls', namespace='plupload'),),
     # TODO: move to user space
     url(r'^abonnements/', include('subscription.urls')),
