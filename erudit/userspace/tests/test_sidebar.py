@@ -31,7 +31,7 @@ class MenuTestCase(TestCase):
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertNotContains(response, url)
 
-    def test_menu_issuesubscription_presence(self):
+    def test_menu_issuesubmission_presence(self):
         journal = JournalFactory()
         user = UserFactory(username="user")
         user.set_password("user")
