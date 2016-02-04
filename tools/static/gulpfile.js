@@ -3,7 +3,11 @@ var gulp       = require('gulp'),
     sass       = require('gulp-sass'),
     concat     = require('gulp-concat'),
     path       = require('path'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    env        = require('gulp-env');
+
+// get env variables
+env(".env");
 
 // display (or swallow?) an error in console
 // also prevent error to stop the gulp watch process unless restart
@@ -52,9 +56,10 @@ gulp.task('scripts-erudit-vendors', function() {
 });
 
 gulp.task('watch', function() {
+
   // start live reload server
   // host null will make it work for Vagrant
-  livereload.listen({ host: null });
+  livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
 
   // watch any less file /css directory, ** is for recursive mode
   gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass-erudit-main']);

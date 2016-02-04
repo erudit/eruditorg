@@ -103,6 +103,9 @@ PIPELINE = {
         'erudit_scripts': {
             'source_filenames': (
               'scripts/*.js',
+            #   'scripts/components/*.js',
+              'scripts/modules/*.js',
+              'scripts/sections/*.js',
             ),
             'output_filename': 'js/erudit-scripts.min.js',
         },
