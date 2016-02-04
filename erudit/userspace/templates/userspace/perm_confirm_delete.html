@@ -1,0 +1,14 @@
+{% extends "base_individual_subscription.html" %}
+{% load i18n %}
+
+{% block content-main %}
+
+<h1>{% trans "Confirmer la suppression de" %} {{ object }}?</h1>
+
+<form action="" method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <input class="btn" type="submit" value="{% trans 'Confirmer' %}"/>
+  <a class="btn" href="{% url 'userspace:perm_list' %}">{% trans 'Annuler' %}</a>
+</form>
+
+{% endblock %}

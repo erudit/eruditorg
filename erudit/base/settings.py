@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     # Erudit apps
     'base',
     'erudit',
+    'permissions',
     'editor',
     'userspace',
     'journal',

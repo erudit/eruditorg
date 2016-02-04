@@ -46,6 +46,12 @@
     </li>
     {% endif %}
 
+    <li>
+    <a href="{% url 'userspace:perm_list' %}">
+        <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Permissions" %}</span>
+      </a>
+    </li>
+
     {% has_perm 'individual_subscription.manage_account' request.user as can_manage_individual_subscription %}
     {% if can_manage_individual_subscription %}
     <li>

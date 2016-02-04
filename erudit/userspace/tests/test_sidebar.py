@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 
 from individual_subscription.factories import PolicyFactory
 from erudit.factories import JournalFactory
-from .factories import UserFactory
+from ..factories import UserFactory
 
 
 class MenuTestCase(TestCase):

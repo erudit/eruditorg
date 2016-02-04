@@ -1,0 +1,66 @@
+{% extends "base_userspace.html" %}
+{% load i18n spurl %}
+
+{% block content-main %}
+
+
+<h1>{% trans "Permissions" %} </h1>
+
+<a class="btn btn-primary" href="{% url 'userspace:perm_create' %}">
+    {% trans "Ajouter un accès" %}
+</a>
+
+
+{% if is_paginated %}
+        <span class="step-links">
+          {% if page_obj.has_previous %}
+            <a href='{% spurl base=request.get_full_path set_query="page={{ page_obj.previous_page_number }}" %}'>&lt;</a>
+          {% endif %}
+
+            {{ page_obj.number }} / {{ paginator.num_pages }}
+
+          {% if page_obj.has_next %}
+            <a href='{% spurl base=request.get_full_path set_query="page={{ page_obj.next_page_number }}" %}'>&gt;</a>
+          {% endif %}
+        </span>
+{% endif %}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                {% trans '#' %}
+            </th>
+            <th>
+                {% trans 'Utilisateur' %}
+            </th>
+            <th>
+                {% trans 'Permission' %}
+            </th>
+            <th>
+                {% trans 'Journal' %}
+            </th>
+            <th>
+                {% trans 'Actions' %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rule in object_list %}
+        <tr>
+            <th scope="row">{{ rule.id }}</th>
+            <td>{{ rule.user }}</td>
+            <td>{{ rule.permission }}</td>
+            <td>{{ rule.content_object }}</td>
+            <td>
+                <a href="{% url 'userspace:perm_delete' rule.pk %}">
+                    {% trans 'Supprimer' %}
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
