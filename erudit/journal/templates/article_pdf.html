@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block content %}
+    <iframe src="{% url 'pdf-viewer' %}?file={% url 'journal:article-raw-pdf' journal_id issue_id article_id %}" width="500" height="700" />
+{% endblock content %}
