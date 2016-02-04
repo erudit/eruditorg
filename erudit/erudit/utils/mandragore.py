@@ -22,6 +22,25 @@ def create_mandragore_profile_for_user(person_id, user):
     return mandragoreprofile
 
 
+def update_user_password(username, the_hash):
+    """ Update the password of the user in mandragore """
+    MANDRAGORE_UPDATE_QUERY = """
+    UPDATE CompteUtilisateur set MotDePasse="{}" WHERE NomUtilisateur="{}"
+    """
+    mandragore = settings.EXTERNAL_DATABASES['mandragore']
+
+    with pymysql_connection(
+        host=mandragore['HOST'],
+        username=mandragore['USER'],
+        password=mandragore['PASSWORD'],
+        database=mandragore['NAME']
+    ) as cur:
+        cur.execute(MANDRAGORE_UPDATE_QUERY.format(
+            the_hash,
+            username
+        ))
+
+
 def get_user_from_mandragore(username):
     MANDRAGORE_USER_QUERY = """
     SELECT NomUtilisateur, MotDePasse FROM CompteUtilisateur WHERE NomUtilisateur="{}"
@@ -85,11 +104,8 @@ personname pn WHERE pn.ID in (%s);"""
 
 
 def fetch_series_from_edinum(series_ids_to_fetch):
-    EDINUM_SERIE_QUERY = """SELECT s.ID, ap.PersonId from Series s, contributionseries cs, contribution c, artificialperson ap WHERE
-s.ID = cs.SeriesID AND
-cs.ContributionID = c.ID AND
-c.PersonID = ap.PersonID AND
-c.ContributiontypeID = '3' AND
+    EDINUM_SERIE_QUERY = """SELECT s.ID, t.id from Series s, title t WHERE
+s.ID = t.SeriesID AND
 s.ID IN (%s);"""  # noqa
 
     if not series_ids_to_fetch:
