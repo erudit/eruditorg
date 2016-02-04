@@ -2,10 +2,12 @@
 
 from django.http import Http404
 from django.http import HttpResponse
+from django.template import RequestContext
 from django.views.generic import DetailView
 from django.views.generic import TemplateView
 from django.views.generic import View
 from eulfedora.util import RequestFailed
+from PyPDF2 import PdfFileMerger
 from requests.exceptions import ConnectionError
 
 from erudit.fedora.conf import settings as fedora_settings
@@ -13,8 +15,13 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.repository import api
 from erudit.models import Journal
 
+from .pdf import generate_pdf
+
 
 class JournalDetailView(DetailView):
+    """
+    Displays a journal.
+    """
     model = Journal
     context_object_name = 'journal'
     template_name = 'journal_detail.html'
@@ -27,6 +34,9 @@ class JournalDetailView(DetailView):
 
 
 class ArticlePdfView(TemplateView):
+    """
+    Displays a page allowing to browse the PDF file associated with an article.
+    """
     template_name = 'article_pdf.html'
 
     def get_context_data(self, **kwargs):
@@ -38,6 +48,9 @@ class ArticlePdfView(TemplateView):
 
 
 class ArticleRawPdfView(View):
+    """
+    Returns the PDF file associated with an article.
+    """
     def get(self, request, journalid, issueid, articleid):
         full_pid = fedora_settings.PID_PREFIX + '.'.join([journalid, issueid, articleid])
         fedora_article = ArticleDigitalObject(api, full_pid)
@@ -47,7 +60,23 @@ class ArticleRawPdfView(View):
         except (RequestFailed, ConnectionError):
             raise Http404
 
-        response = HttpResponse(pdf_content, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(articleid)
+        # Prepares the response ; a PDF object
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=rawr.pdf'
+
+        # Generates the cover page
+        coverpage = self.generate_coverpage(request, fedora_article)
+
+        # Merges the cover page and the full article
+        merger = PdfFileMerger()
+        merger.append(coverpage)
+        merger.append(pdf_content)
+        merger.write(response)
+        merger.close()
 
         return response
+
+    def generate_coverpage(self, request, fedora_article, context={}):
+        return generate_pdf(
+            'article_pdf_coverpage.html', context=RequestContext(request).update(context),
+            base_url=request.build_absolute_uri('/'))
