@@ -6,6 +6,7 @@ from django.views.generic import DetailView
 from django.views.generic import TemplateView
 from django.views.generic import View
 from eulfedora.util import RequestFailed
+from requests.exceptions import ConnectionError
 
 from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.objects import ArticleDigitalObject
@@ -43,7 +44,7 @@ class ArticleRawPdfView(View):
 
         try:
             pdf_content = fedora_article.pdf.content
-        except RequestFailed:
+        except (RequestFailed, ConnectionError):
             raise Http404
 
         response = HttpResponse(pdf_content, content_type='application/pdf')
