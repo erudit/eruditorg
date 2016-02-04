@@ -8,6 +8,22 @@
         <style type="text/css">
             /* All styles should go here */
 
+            @page {
+                size: letter portrait;
+
+                @frame header_frame {
+                    -pdf-frame-content: header_content;
+                    left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+                }
+                @frame content_frame {
+                    left: 40pt; right: 40pt; top: 20pt; height: 1000px;
+                }
+                @frame footer_frame {
+                    -pdf-frame-content: footer_content;
+                    left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+                }
+            }
+
             .top-image {
                 text-align: right;
             }
