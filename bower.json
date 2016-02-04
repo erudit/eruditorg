@@ -36,6 +36,7 @@
     "blazy": "latest",
     "swiper": "~3.3.0",
     "inline-svg": "latest",
-    "bourbon": "latest"
+    "bourbon": "latest",
+    "pdfjs-build": "~0.8.1"
   }
 }
