@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
-from . import views
 from . import urls_compat
 
 
