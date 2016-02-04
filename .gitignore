@@ -11,6 +11,7 @@ dumps/
 post_office_attachments/
 src/
 .DS_Store
+npm-debug.log
 .coverage
 /node_modules
 Vagrantfile
@@ -23,7 +24,6 @@ tools/static/.env.json
 # bower - keep adding to this list as needed
 # ignore cruft that comes with bower components
 #
-
 /erudit/base/static/vendor/**/src
 /erudit/base/static/vendor/**/source
 /erudit/base/static/vendor/**/spec
