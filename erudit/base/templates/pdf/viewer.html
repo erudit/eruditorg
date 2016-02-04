@@ -10,6 +10,7 @@
 
     {% compress css %}
     <link rel="stylesheet" href="{% static 'vendor/pdfjs-build/generic/web/viewer.css' %}"/>
+    <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/pages/_pdf_viewer.scss' %}" />
     {% endcompress %}
 
     {% compress js %}
@@ -32,7 +33,7 @@
 
   </head>
 
-  <body tabindex="1">
+  <body tabindex="1" class="pdf-viewer-page">
     <div id="outerContainer" class="loadingInProgress">
 
       <div id="sidebarContainer">
@@ -135,7 +136,7 @@
                 <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
                   <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
                 </button>
-                <div class="toolbarButtonSpacer"></div>
+                &nbsp;&nbsp;<a href="/"><img id="eruditLogo" src="{% static 'img/logo-erudit-blanc.png' %}" alt="" /></a>
                 <button id="viewFind" class="toolbarButton group hiddenSmallView" title="Find in Document" tabindex="5" data-l10n-id="findbar">
                    <span data-l10n-id="findbar_label">Find</span>
                 </button>
@@ -179,7 +180,7 @@
                   <span data-l10n-id="tools_label">Tools</span>
                 </button>
               </div>
-              <div class="outerCenter">
+              <div class="outerCenter hiddenSmallView">
                 <div class="innerCenter" id="toolbarViewerMiddle">
                   <div class="splitToolbarButton">
                     <button id="zoomOut" class="toolbarButton zoomOut" title="Zoom Out" tabindex="9" data-l10n-id="zoom_out">
