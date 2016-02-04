@@ -53,8 +53,8 @@ gulp.task('scripts-erudit-vendors', function() {
 
 gulp.task('watch', function() {
   // start live reload server
+  // host null will make it work for Vagrant
   livereload.listen({ host: null });
-  // livereload({ start: true });
 
   // watch any less file /css directory, ** is for recursive mode
   gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass-erudit-main']);
