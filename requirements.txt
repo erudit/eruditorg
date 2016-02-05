@@ -39,3 +39,5 @@ simplejson
 django-spurl==0.6.4
 django-filter==0.11.0
 rules==1.1.1
+PyPDF2==1.25.1
+WeasyPrint==0.26

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import codecs
+import io
 import os
 import unittest.mock
 
@@ -38,12 +38,13 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         self.factory = RequestFactory()
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, pdfm):
+    @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_ds, mock_pdf):
         # Setup
-        with codecs.open(
-                os.path.join(FIXTURE_ROOT, 'dummy.pdf'),
-                encoding='ISO8859-1', mode='rb') as f:
-            pdfm.content = f.read()
+        with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
+            mock_pdf.content = io.BytesIO()
+            mock_pdf.content.write(f.read())
+        mock_ds = ['ERUDITXSD300', ]  # noqa
 
         journal_id = 'dummy139'
         issue_id = 'dummy1515298'
