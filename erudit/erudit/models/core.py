@@ -361,7 +361,7 @@ class JournalType(models.Model):
 
 
 class Issue(FedoraMixin, models.Model):
-    """Numéro"""
+    """ An issue of a journal"""
 
     # identification
     journal = models.ForeignKey(
