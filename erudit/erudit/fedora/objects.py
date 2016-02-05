@@ -25,6 +25,14 @@ class PublicationDigitalObject(models.DigitalObject):
 
 class ArticleDigitalObject(models.DigitalObject):
     CONTENT_MODELS = [MODEL_PID_PREFIX + 'unitCModel', ]
+    erudit_xsd201 = models.XmlDatastream('ERUDITXSD201', 'Erudit XSD201', XmlObject)
     erudit_xsd300 = models.XmlDatastream('ERUDITXSD300', 'Erudit XSD300', XmlObject)
     unit = models.XmlDatastream('UNIT', 'Unit', XmlObject)
     pdf = models.FileDatastream('PDF', 'PDF', defaults={'mimetype': 'application/pdf', })
+
+    @property
+    def xml_content(self):
+        if 'ERUDITXSD300' in self.ds_list:
+            return self.erudit_xsd300.content.serialize()
+        elif 'ERUDITXSD201' in self.ds_list:
+            return self.erudit_xsd201.content.serialize()
