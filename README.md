@@ -1,5 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/erudit/eruditorg.svg?branch=master)](https://secure.travis-ci.org/erudit/eruditorg?branch=master)
 [![Coverage](https://codecov.io/github/erudit/eruditorg/coverage.svg?branch=master)](https://codecov.io/github/erudit/eruditorg?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/eruditorg/badge/?version=latest)](http://eruditorg.readthedocs.org/fr/latest/?badge=latest)
 
 # Installing on Ubuntu 14.04
 
@@ -167,6 +168,10 @@ You can run the tests with:
 ```
 $ tox
 ```
+
+# Documentation 
+
+Please visit http://eruditorg.readthedocs.org/fr/latest/
 
 # Contributing patches
 
