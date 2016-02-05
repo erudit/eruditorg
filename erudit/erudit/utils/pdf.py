@@ -8,6 +8,9 @@ from weasyprint import HTML
 
 
 def generate_pdf(template_name, file_object=None, context=None, base_url=None):
+    """
+    Generates a PDF into the given file object from a specific Django template.
+    """
     tmpl = get_template(template_name)
     html = tmpl.render(Context(context))
     if file_object is None:

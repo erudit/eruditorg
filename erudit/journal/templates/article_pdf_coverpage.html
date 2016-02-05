@@ -10,18 +10,6 @@
 
             @page {
                 size: letter portrait;
-
-                @frame header_frame {
-                    -pdf-frame-content: header_content;
-                    left: 50pt; width: 512pt; top: 50pt; height: 40pt;
-                }
-                @frame content_frame {
-                    left: 40pt; right: 40pt; top: 20pt; height: 1000px;
-                }
-                @frame footer_frame {
-                    -pdf-frame-content: footer_content;
-                    left: 50pt; width: 512pt; top: 772pt; height: 20pt;
-                }
             }
 
             .top-image {
@@ -51,7 +39,7 @@
             <img src="{% static "img/logo-erudit.png" %}" alt="" />
         </div>
         <hr />
-        <h1 class="main-title">{% trans "Article" %}</h1>
+        <h1 class="main-title">{% trans "Article" as i18n_article_title %}{{ article_object.title|default:i18n_article_title }}</h1>
         <br />
 
         <div id="footer_content">

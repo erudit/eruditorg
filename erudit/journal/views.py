@@ -7,6 +7,7 @@ from django.views.generic import DetailView
 from django.views.generic import TemplateView
 from django.views.generic import View
 from eulfedora.util import RequestFailed
+from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 from requests.exceptions import ConnectionError
 
@@ -14,8 +15,7 @@ from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.repository import api
 from erudit.models import Journal
-
-from .pdf import generate_pdf
+from erudit.utils.pdf import generate_pdf
 
 
 class JournalDetailView(DetailView):
@@ -55,6 +55,7 @@ class ArticleRawPdfView(View):
         full_pid = fedora_settings.PID_PREFIX + '.'.join([journalid, issueid, articleid])
         fedora_article = ArticleDigitalObject(api, full_pid)
 
+        # Fetches the PDF content of the article
         try:
             pdf_content = fedora_article.pdf.content
         except (RequestFailed, ConnectionError):
@@ -65,7 +66,13 @@ class ArticleRawPdfView(View):
         response['Content-Disposition'] = 'attachment; filename=rawr.pdf'
 
         # Generates the cover page
-        coverpage = self.generate_coverpage(request, fedora_article)
+        coverpage_context = {
+            'fedora_article': fedora_article,
+            'fedora_object': EruditArticle(fedora_article.xml_content),
+        }
+        coverpage = generate_pdf(
+            'article_pdf_coverpage.html', context=RequestContext(request).update(coverpage_context),
+            base_url=request.build_absolute_uri('/'))
 
         # Merges the cover page and the full article
         merger = PdfFileMerger()
@@ -75,8 +82,3 @@ class ArticleRawPdfView(View):
         merger.close()
 
         return response
-
-    def generate_coverpage(self, request, fedora_article, context={}):
-        return generate_pdf(
-            'article_pdf_coverpage.html', context=RequestContext(request).update(context),
-            base_url=request.build_absolute_uri('/'))
