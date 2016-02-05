@@ -170,7 +170,7 @@ STATIC_URL = '/static/'
 INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
 
 # Fedora settings
-FEDORA_ROOT = 'http://192.168.10.150:8080/fedora/'
+FEDORA_ROOT = 'http://10.1.1.33:8080/fedora/'
 FEDORA_USER = 'fedoraAdmin'
 FEDORA_PASSWORD = 'fedoraAdmin'
 

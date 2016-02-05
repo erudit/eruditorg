@@ -11,6 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   overview
+   core_models
+   fedora
    backends
 
 Indices and tables

@@ -215,6 +215,7 @@ class Journal(FedoraMixin, Named, Edinum):
         verbose_name=_("Code"),
         help_text=_("Identifiant unique (utilisé dans URL Érudit)"),
     )
+    """ The ``shortname`` of a Journal"""
 
     issn_print = models.CharField(
         max_length=255,
@@ -245,7 +246,8 @@ class Journal(FedoraMixin, Named, Edinum):
         null=True, blank=True,
         verbose_name=_("Identifiant Fedora")
     )
-    """Fedora commons identifier"""
+    """Fedora commons identifier. Used to implement the
+    :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin."""
 
     publishers = models.ManyToManyField(
         'Publisher',
@@ -359,7 +361,7 @@ class JournalType(models.Model):
 
 
 class Issue(FedoraMixin, models.Model):
-    """Numéro"""
+    """ An issue of a journal"""
 
     # identification
     journal = models.ForeignKey(
