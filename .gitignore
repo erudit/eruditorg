@@ -19,6 +19,8 @@ Vagrantfile
 .vagrant
 vagrant
 
+docs/_build
+
 #
 # bower - keep adding to this list as needed
 # ignore cruft that comes with bower components

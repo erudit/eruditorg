@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Érudit.org'
-copyright = '2015, David Cormier'
+copyright = '2016 Érudit'
 author = 'David Cormier'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -231,7 +231,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   (master_doc, 'ruditorg.tex', 'Érudit.org Documentation',
-   'David Cormier', 'manual'),
+   'Érudit', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
