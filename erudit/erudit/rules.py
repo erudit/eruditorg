@@ -13,5 +13,5 @@ def can_manage_journal(user, journal=None):
         return bool(journal.members.filter(id=user.id).count())
 
 
-rules.add_perm('editor.manage_journal',
+rules.add_perm('erudit.manage_journal',
                is_superuser | is_staff | can_manage_journal)
