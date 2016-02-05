@@ -10,7 +10,7 @@ git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-res
 -e git+https://github.com/erudit/eulxml.git@python3-support#egg=eulxml
 -e git+https://github.com/erudit/eulfedora.git@python3-support#egg=eulfedora
 -e git+https://github.com/erudit/liberuditarticle.git@master#egg=liberuditarticle
-django-post-office==2.0.2
+django-post-office==2.0.5
 Django-Select2==5.2.1
 ipdb==0.8.1
 ipython==4.0.0
