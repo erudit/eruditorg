@@ -3,10 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Érudit.org's documentation!
-======================================
-
-Contents:
+Documentation de Érudit.org
+===========================
 
 .. toctree::
    :maxdepth: 2
@@ -16,8 +14,8 @@ Contents:
    fedora
    backends
 
-Indices and tables
-==================
+Index et tableaux
+=================
 
 * :ref:`genindex`
 * :ref:`modindex`
