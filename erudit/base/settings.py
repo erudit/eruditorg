@@ -49,7 +49,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
-    'compressor',
     'crispy_forms',
     'django_select2',
     'datetimewidget',
@@ -73,7 +72,6 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
     'pipeline.finders.PipelineFinder',
 )
 
@@ -90,8 +88,18 @@ PIPELINE = {
                 'media': 'screen,projection',
             },
         },
+        'pdfjs': {
+            'source_filenames': (
+              'vendor/pdfjs-build/generic/web/viewer.css',
+              'sass/pages/_pdf_viewer.scss',
+            ),
+            'output_filename': 'css/pdfjs.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
     },
-    'JAVASCRIPT' : {
+    'JAVASCRIPT': {
         # main js file for erudit.org
         'erudit_vendors': {
             # TODO : move this list in a common JS config file for Gulp and Pipeline
@@ -105,11 +113,19 @@ PIPELINE = {
         'erudit_scripts': {
             'source_filenames': (
               'scripts/*.js',
-            #   'scripts/components/*.js',
               'scripts/modules/*.js',
               'scripts/sections/*.js',
             ),
             'output_filename': 'js/erudit-scripts.min.js',
+        },
+        'pdfjs': {
+            'source_filenames': (
+              'vendor/pdfjs-build/generic/web/compatibility.js',
+              'vendor/pdfjs-build/generic/web/l10n.js',
+              'vendor/pdfjs-build/generic/build/pdf.js',
+              'vendor/pdfjs-build/generic/web/viewer.js',
+            ),
+            'output_filename': 'js/pdfjs.min.js',
         },
     }
 }
@@ -121,15 +137,6 @@ PIPELINE['COMPILERS'] = (
 
 PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE['SASS_BINARY'] = '/usr/local/bin/sassc'
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-sass', 'sassc {infile} {outfile}'),
-)
-
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter'
-]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (

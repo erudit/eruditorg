@@ -29,6 +29,18 @@ gulp.task('sass-erudit-main', function() {
     .pipe(livereload());
 });
 
+gulp.task('sass-erudit-pdfjs', function() {
+  return gulp.src('../../erudit/base/static/sass/pages/pdf_viewer.scss')
+    .pipe(sass())
+    .on('error', sass.logError)
+    .pipe(rename(function (path) {
+      path.dirname += "/";
+      path.basename += "-dev";
+      path.extname = ".css"
+    }))
+    .pipe(gulp.dest('../../erudit/base/static/css/'));
+});
+
 gulp.task('scripts-erudit-main', function() {
   return gulp.src(['../../erudit/base/static/scripts/**/*.js', '!../../erudit/base/static/scripts/build/**'])
     .pipe(concat('erudit-scripts.js'))
@@ -62,7 +74,7 @@ gulp.task('watch', function() {
   livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
 
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass-erudit-main']);
+  gulp.watch('../../erudit/base/static/sass/**/*.scss', ['sass-erudit-main', 'sass-erudit-pdfjs']);
   // watch any js file /js directory, ** is for recursive mode
   gulp.watch('../../erudit/base/static/scripts/**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors']);
 
