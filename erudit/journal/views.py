@@ -63,7 +63,7 @@ class ArticleRawPdfView(View):
 
         # Prepares the response ; a PDF object
         response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename=rawr.pdf'
+        response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(articleid)
 
         # Generates the cover page
         coverpage_context = {
