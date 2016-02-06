@@ -1,18 +1,16 @@
 Aperçu du modèle de données
 ===========================
 
-Cette section décrit les liens entre Fedora Commons, Solr, Django, eulfedora,
-et liberuditarticle.
+Cette section décrit les liens entre Fedora Commons, Solr, Django, eulfedora et liberuditarticle.
 
-En bref
--------
+Résumé
+------
 
-* Le projet Django a des modèles qui décrivent les objets stockés dans Fedora Commons;
-* Tous les articles et revues sont stockées dans Fedora Commons;
-* Le projet Django utilise eulfedora pour récupérer les objets Fedora Commons;
-* La librairie liberuditarticle est utilisée pour parser le contenu des articles;
-* Les documents Solr sont des descriptions des articles;
-
+* Les modèles Django décrivent les objets stockés dans Fedora Commons;
+* Les articles et revues sont stockées dans Fedora Commons;
+* Django utilise eulfedora pour récupérer les objets Fedora Commons;
+* liberuditarticle est utilisé pour parser le contenu des articles;
+* Les documents Solr sont des descriptions des objets Fedora Commons.
 
 Modèles Django
 --------------
@@ -51,4 +49,50 @@ Nous utilisons la librairie `liberuditarticle`_ pour extraire l'information pert
 Solr
 ----
 
-TODO
+Cette section décrit les champs d'un document indexé dans Solr.
+
+Correspondance entre le document indexé dans Solr et les modèles Django
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On utilise les identifiants de l'article pour faire la correspondance entre le document Solr, Django et Fedora.
+
+* ``ID``: identifie l'article dans Fedora. Correspond au ``localidentifier``  d'un ``Article`` (*pas encore implémenté*)
+* ``NumeroID``: identifie le numéro dans Fedora. Correspond au :py:attr:`localidentifier <erudit.models.core.Issue.localidentifier>` d'un :py:class:`Issue <erudit.models.core.Issue>`
+* ``RevueID`` identifie la publication dans Fedora. Correspond à :py:attr:`localidentifier <erudit.models.core.Journal.localidentifier>` de :py:class:`Journal <erudit.models.core.Journal>`
+
+
+Recherche générale
+^^^^^^^^^^^^^^^^^^
+* ``Titre_fr``, ``Titre_en``: titres de l'article en français et en anglais;
+* ``Resume_fr``, ``Resume_en``: résumé de l'article en français et en anglais;
+* ``Auteur_tri``: (*à vérifier*) auteur principal de l'article;
+* ``Auteur_fac``: liste des auteurs de l'article;
+* ``AuteurNP_fac``: (*à vérifier*) liste des auteurs de l'article dans un format plus pratique pour la citation;
+* ``Affiliation_fac``: affiliation de l'auteur;
+* ``RefBiblio_aff``: références bibliographiques de l'article;
+* ``ISSNNum``: ISSN de l'article;
+* ``ISBNNum``: ISBN du livre;
+
+À identifier: mots clé, ouvrage recensé.
+
+Recherche par **Types**
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``Corpus_fac``: identifie le corpus duquel fait partie le document. Utilisé pour faire la recherche par **type**. Prend une des valeurs suivantes:
+    * ``article``: article de revue scientifique;
+    * ``culturel``: article de revue culturelle;
+    * ...
+
+
+Recherche par **Date**
+^^^^^^^^^^^^^^^^^^^^^^
+
+* ``AnneePublication``: année de publication de l'article;
+* ``DateAjoutErudit``: date d'ajout de l'article dans érudit
+
+Recherche par **Fonds**
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``Fonds_fac``: identifie le fond duquel l'article fait partie. Utilisé pour la recherche par **fonds**. Prend une des valeurs suivantes:
+    * ``Érudit``: stocké sur Érudit;
+    * ...

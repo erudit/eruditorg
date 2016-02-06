@@ -369,6 +369,7 @@ class Issue(FedoraMixin, models.Model):
         related_name='issues',
         verbose_name=_("Revue"),
     )
+
     year = models.IntegerField(
         choices=YEARS,
         null=True, blank=True,
@@ -410,6 +411,7 @@ class Issue(FedoraMixin, models.Model):
         null=True, blank=True,
         verbose_name=_("Identifiant Fedora")
     )
+    """ The ``Fedora`` identifier of an issue """
 
     # status { in_production, published }
 
