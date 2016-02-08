@@ -79,9 +79,12 @@ Recherche par **Types**
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 * ``Corpus_fac``: identifie le corpus duquel fait partie le document. Utilisé pour faire la recherche par **type**. Prend une des valeurs suivantes:
-    * ``article``: article de revue scientifique;
-    * ``culturel``: article de revue culturelle;
-    * ...
+    * ``Article``: article de revue scientifique;
+    * ``Culturel``: article de revue culturelle;
+    * ``Actes``: actes de colloque;
+    * ``Thèses``: thèses;
+    * ``Livres``: livres;
+    * ``Depot``: document déposé dans le dépôt de données (littérature grise)
 
 
 Recherche par **Date**
@@ -95,4 +98,5 @@ Recherche par **Fonds**
 
 * ``Fonds_fac``: identifie le fond duquel l'article fait partie. Utilisé pour la recherche par **fonds**. Prend une des valeurs suivantes:
     * ``Érudit``: stocké sur Érudit;
-    * ...
+    * ``UNB``: *University of New-Brunswick*;
+    * ``Persée``: Persée;
