@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.views.generic import DetailView
+from django.views.generic import ListView
+from django.views.generic import RedirectView
 from django.views.generic import TemplateView
+from django.views.generic import UpdateView
 from django.views.generic import View
 from eulfedora.util import RequestFailed
 from eruditarticle.objects import EruditArticle
@@ -16,6 +21,43 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.repository import api
 from erudit.models import Journal
 from erudit.utils.pdf import generate_pdf
+
+from .rules_helpers import get_editable_journals
+
+
+class JournalInformationDispatchView(RedirectView):
+    """
+    Redirects the user either to a list of Journal instances if he can edit
+    many journals or to an update view of the considered journal.
+    If the user cannot edit any journal, a permission denied error is returned.
+    """
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        journal_qs = get_editable_journals(self.request.user)
+        journal_count = journal_qs.count()
+        if journal_count > 1:
+            return reverse('journal:journal-list')
+        elif journal_count:
+            return reverse('journal:journal-update', args=(journal_qs.first().code))
+        else:
+            # No Journal instance can be edited
+            raise PermissionDenied
+
+
+class JournalListView(ListView):
+    """
+    Displays a list of Journal instances.
+    """
+    model = Journal
+    # TODO
+
+
+class JournalUpdateView(UpdateView):
+    """
+    Displays a for; to update journal information.
+    """
+    # TODO
 
 
 class JournalDetailView(DetailView):
