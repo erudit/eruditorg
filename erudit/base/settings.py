@@ -82,7 +82,7 @@ PIPELINE = {
         # main css theme for erudit.org
         'erudit_main': {
             'source_filenames': (
-              'sass/main.scss',
+                'sass/main.scss',
             ),
             'output_filename': 'css/main.min.css',
             'extra_context': {
@@ -91,8 +91,8 @@ PIPELINE = {
         },
         'pdfjs': {
             'source_filenames': (
-              'vendor/pdfjs-build/generic/web/viewer.css',
-              'sass/pages/_pdf_viewer.scss',
+                'vendor/pdfjs-build/generic/web/viewer.css',
+                'sass/pages/_pdf_viewer.scss',
             ),
             'output_filename': 'css/pdfjs.css',
             'extra_context': {
@@ -105,26 +105,26 @@ PIPELINE = {
         'erudit_vendors': {
             # TODO : move this list in a common JS config file for Gulp and Pipeline
             'source_filenames': (
-              'vendor/jquery/dist/jquery.js',
-              'vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
-              'vendor/inline-svg/dist/inlineSVG.min.js',
+                'vendor/jquery/dist/jquery.js',
+                'vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
+                'vendor/inline-svg/dist/inlineSVG.min.js',
             ),
             'output_filename': 'js/erudit-vendors.min.js',
         },
         'erudit_scripts': {
             'source_filenames': (
-              'scripts/*.js',
-              'scripts/modules/*.js',
-              'scripts/sections/*.js',
+                'scripts/*.js',
+                'scripts/modules/*.js',
+                'scripts/sections/*.js',
             ),
             'output_filename': 'js/erudit-scripts.min.js',
         },
         'pdfjs': {
             'source_filenames': (
-              'vendor/pdfjs-build/generic/web/compatibility.js',
-              'vendor/pdfjs-build/generic/web/l10n.js',
-              'vendor/pdfjs-build/generic/build/pdf.js',
-              'vendor/pdfjs-build/generic/web/viewer.js',
+                'vendor/pdfjs-build/generic/web/compatibility.js',
+                'vendor/pdfjs-build/generic/web/l10n.js',
+                'vendor/pdfjs-build/generic/build/pdf.js',
+                'vendor/pdfjs-build/generic/web/viewer.js',
             ),
             'output_filename': 'js/pdfjs.min.js',
         },
@@ -133,7 +133,7 @@ PIPELINE = {
 
 # django-pipeline settings
 PIPELINE['COMPILERS'] = (
-  'pipeline.compilers.sass.SASSCompiler',
+    'pipeline.compilers.sass.SASSCompiler',
 )
 
 PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.jsmin.JSMinCompressor'
