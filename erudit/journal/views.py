@@ -15,6 +15,7 @@ from eulfedora.util import RequestFailed
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 from requests.exceptions import ConnectionError
+from rules.contrib.views import PermissionRequiredMixin
 
 from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.objects import ArticleDigitalObject
@@ -23,6 +24,7 @@ from erudit.models import Journal
 from erudit.utils.pdf import generate_pdf
 
 from .rules_helpers import get_editable_journals
+from .viewmixins import JournalDetailMixin
 
 
 class JournalInformationDispatchView(RedirectView):
@@ -39,7 +41,8 @@ class JournalInformationDispatchView(RedirectView):
         if journal_count > 1:
             return reverse('journal:journal-list')
         elif journal_count:
-            return reverse('journal:journal-update', args=(journal_qs.first().code))
+            return reverse(
+                'journal:journal-update', kwargs={'code': journal_qs.first().code})
         else:
             # No Journal instance can be edited
             raise PermissionDenied
@@ -50,29 +53,29 @@ class JournalListView(ListView):
     Displays a list of Journal instances.
     """
     model = Journal
+    template_name = 'journal_list.html'
     # TODO
 
 
-class JournalUpdateView(UpdateView):
+class JournalUpdateView(PermissionRequiredMixin, JournalDetailMixin, UpdateView):
     """
     Displays a for; to update journal information.
     """
+    context_object_name = 'journal'
+    fields = []
+    model = Journal
+    permission_required = ['journal.edit_journal', ]
+    template_name = 'journal_update.html'
     # TODO
 
 
-class JournalDetailView(DetailView):
+class JournalDetailView(JournalDetailMixin, DetailView):
     """
     Displays a journal.
     """
-    model = Journal
     context_object_name = 'journal'
+    model = Journal
     template_name = 'journal_detail.html'
-
-    def get_object(self):
-        try:
-            return Journal.objects.get(code=self.kwargs['code'])
-        except Journal.DoesNotExist:
-            raise Http404
 
 
 class ArticlePdfView(TemplateView):
