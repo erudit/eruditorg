@@ -8,7 +8,14 @@ from . import views
 
 
 urlpatterns = [
+    url(r'^journal/information/$',
+        views.JournalInformationDispatchView.as_view(), name='journal-information'),
+
+    url(r'^journal/$', views.JournalListView.as_view(), name='journal-list'),
+
     url(r'^journal/(?P<code>[\w-]+)/$', views.JournalDetailView.as_view(), name='journal-detail'),
+    url(r'^journal/(?P<code>[\w-]+)/update/$',
+        views.JournalUpdateView.as_view(), name='journal-update'),
 
     url(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$',
         views.ArticlePdfView.as_view(), name='article-pdf'),
