@@ -50,11 +50,14 @@ class JournalInformationDispatchView(RedirectView):
 
 class JournalListView(ListView):
     """
-    Displays a list of Journal instances.
+    Displays a list of Journal instances that can be edited by the current user.
     """
+    context_object_name = 'journals'
     model = Journal
     template_name = 'journal_list.html'
-    # TODO
+
+    def get_queryset(self):
+        return get_editable_journals(self.request.user)
 
 
 class JournalUpdateView(PermissionRequiredMixin, JournalDetailMixin, UpdateView):

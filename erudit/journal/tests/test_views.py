@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
+from erudit.factories import JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.tests import BaseEruditTestCase
 from journal.views import ArticleRawPdfView
@@ -49,6 +50,20 @@ class TestJournalInformationDispatchView(BaseEruditTestCase):
         response = self.client.get(url, follow=True)
         # Check
         self.assertEqual(response.status_code, 403)
+
+
+class TestJournalListView(BaseEruditTestCase):
+    def test_includes_only_journals_that_can_be_edited_by_the_current_user(self):
+        # Setup
+        for _ in range(6):
+            JournalFactory.create(publishers=[self.publisher])
+        self.client.login(username='david', password='top_secret')
+        url = reverse('journal:journal-list')
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['journals']), [self.journal, ])
 
 
 class TestArticlePdfView(BaseEruditTestCase):
