@@ -37,6 +37,15 @@
 <nav class="sidenav"> {# TODO handle class active for menu #}
   <ul>
 
+    {% has_perm 'journal.edit_journal' request.user as can_edit_journal %}
+    {% if can_edit_journal %}
+    <li>
+      <a href="{% url 'journal:journal-information' %}">
+        <span class="icon fa fa-folder-o"></span> <span class="sidenav-label">{% trans "Informations de la revue" %}</span>
+      </a>
+    </li>
+    {% endif %}
+
     {% has_perm 'editor.manage_issuesubmission' request.user as can_manage_issuesubmission %}
     {% if can_manage_issuesubmission %}
     <li>
