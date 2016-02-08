@@ -1,5 +1,5 @@
-{% load static %}
-{% load compress %}
+{% load pipeline %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html dir="ltr" mozdisallowselectionprint moznomarginboxes>
   <head>
@@ -8,23 +8,20 @@
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
 
-    {% compress css %}
-    <link rel="stylesheet" href="{% static 'vendor/pdfjs-build/generic/web/viewer.css' %}"/>
-    <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/pages/_pdf_viewer.scss' %}" />
-    {% endcompress %}
-
-    {% compress js %}
-    <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/compatibility.js' %}"></script>
-    {% endcompress %}
 
     <link rel="resource" type="application/l10n" href="{% static 'vendor/pdfjs-build/generic/web/locale/locale.properties' %}"/>
 
-    {% compress js %}
+    {% if DEBUG %}
+    <link rel="stylesheet" href="{% static 'vendor/pdfjs-build/generic/web/viewer.css' %}"/>
+    <link rel="stylesheet" type="text/stylesheet" href="{% static 'css/pdf_viewer-dev.css' %}" />
     <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/l10n.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/build/pdf.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/debugger.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/viewer.js' %}"></script>
-    {% endcompress %}
+    {% else %}
+    {% stylesheet 'pdfjs' %}
+    {% javascript 'pdfjs' %}
+    {% endif %}
 
     <script type="text/javascript">
         PDFJS.imageResourcesPath = "{% static 'vendor/pdfjs-build/generic/web/images/' %}";
