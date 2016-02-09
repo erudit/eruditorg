@@ -7,10 +7,11 @@ from erudit.models import Journal
 
 
 class JournalInformation(models.Model):
-    journal = models.OneToOneField(Journal, verbose_name=_('Journal'))
+    journal = models.OneToOneField(
+        Journal, verbose_name=_('Journal'), related_name='information')
 
     # Information fields
-    about = models.TextField(verbose_name=_('Revue'))
+    about = models.TextField(verbose_name=_('Revue'), blank=True, null=True)
     editorial_policy = models.TextField(
         verbose_name=_('Politique éditoriale'), blank=True, null=True)
     subscriptions = models.TextField(verbose_name=_('Abonnements'), blank=True, null=True)
