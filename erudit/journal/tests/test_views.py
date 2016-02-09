@@ -27,7 +27,7 @@ class TestJournalInformationDispatchView(BaseEruditTestCase):
         response = self.client.get(url, follow=True)
         # Check
         last_url, status_code = response.redirect_chain[-1]
-        self.assertTrue(last_url.endswith(reverse('journal:journal-list')))
+        self.assertTrue(last_url.endswith(reverse('journal:journal-information-list')))
 
     def test_redirects_to_the_update_view_of_a_journal_if_the_user_can_edit_one_journal(self):
         # Setup
@@ -38,7 +38,7 @@ class TestJournalInformationDispatchView(BaseEruditTestCase):
         # Check
         last_url, status_code = response.redirect_chain[-1]
         self.assertTrue(last_url.endswith(
-            reverse('journal:journal-update', kwargs={'code': self.journal.code})))
+            reverse('journal:journal-information-update', kwargs={'code': self.journal.code})))
 
     def test_returns_a_403_error_if_the_user_cannot_edit_any_journal(self):
         # Setup
@@ -52,13 +52,13 @@ class TestJournalInformationDispatchView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
 
-class TestJournalListView(BaseEruditTestCase):
+class TestJournalInformationListView(BaseEruditTestCase):
     def test_includes_only_journals_that_can_be_edited_by_the_current_user(self):
         # Setup
         for _ in range(6):
             JournalFactory.create(publishers=[self.publisher])
         self.client.login(username='david', password='top_secret')
-        url = reverse('journal:journal-list')
+        url = reverse('journal:journal-information-list')
         # Run
         response = self.client.get(url)
         # Check

@@ -39,30 +39,33 @@ class JournalInformationDispatchView(RedirectView):
         journal_qs = get_editable_journals(self.request.user)
         journal_count = journal_qs.count()
         if journal_count > 1:
-            return reverse('journal:journal-list')
+            return reverse('journal:journal-information-list')
         elif journal_count:
             return reverse(
-                'journal:journal-update', kwargs={'code': journal_qs.first().code})
+                'journal:journal-information-update', kwargs={'code': journal_qs.first().code})
         else:
             # No Journal instance can be edited
             raise PermissionDenied
 
 
-class JournalListView(ListView):
+class JournalInformationListView(ListView):
     """
-    Displays a list of Journal instances that can be edited by the current user.
+    Displays a list of Journal instances whose information can be edited by
+    the current user.
     """
     context_object_name = 'journals'
     model = Journal
+    paginate_by = 36
     template_name = 'journal_list.html'
 
     def get_queryset(self):
-        return get_editable_journals(self.request.user)
+        qs = get_editable_journals(self.request.user)
+        return qs.order_by('name')
 
 
-class JournalUpdateView(PermissionRequiredMixin, JournalDetailMixin, UpdateView):
+class JournalInformationUpdateView(PermissionRequiredMixin, JournalDetailMixin, UpdateView):
     """
-    Displays a for; to update journal information.
+    Displays a form to update journal information.
     """
     context_object_name = 'journal'
     fields = []
