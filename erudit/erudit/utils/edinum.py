@@ -37,6 +37,17 @@ def fetch_publishers_from_edinum():
     return cur.fetchall()
 
 
+def fetch_collections_from_edinum():
+    COLLECTIONS_QUERY = "SELECT id, Name from Collection;"
+    edinum = settings.EXTERNAL_DATABASES['edinum']
+    with pymysql_connection(
+        host=edinum['HOST'],
+        username=edinum['USER'],
+        password=edinum['PASSWORD'],
+        database=edinum['NAME']
+    ) as cur:
+        cur.execute(COLLECTIONS_QUERY)
+        return cur.fetchall()
 def fetch_publisher_journals_from_edinum():
     PUBLISHER_JOURNALS_QUERY = """SELECT c.PersonID, t.id as journal_id
 FROM edinum.contributionseries cs
