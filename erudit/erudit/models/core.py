@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
+from erudit.fedora.conf import settings as fedora_settings
 
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.fedora.objects import JournalDigitalObject
@@ -319,6 +320,13 @@ class Journal(FedoraMixin, Named, Edinum):
     # Fedora-related methods
     # --
 
+    def get_full_identifier(self):
+        return "{}:{}.{}".format(
+            fedora_settings.PIDSPACE,
+            self.collection.code,
+            self.localidentifier
+        )
+
     def get_fedora_model(self):
         return JournalDigitalObject
 
@@ -439,8 +447,10 @@ class Issue(FedoraMixin, models.Model):
 
     def get_full_identifier(self):
         if self.localidentifier and self.journal.localidentifier:
-            return '.'.join([self.journal.localidentifier, self.localidentifier])
-
+            return "{}.{}".format(
+                self.journal.get_full_identifier(),
+                self.localidentifier
+            )
     def __str__(self):
         return "{:s} {:s} {:s} {:s}".format(
             self.journal.code,

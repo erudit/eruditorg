@@ -47,7 +47,7 @@ class TestIssue(BaseEruditTestCase):
         self.issue.localidentifier = 'dummy1234'
         self.issue.save()
         # Run & check
-        self.assertEqual(self.issue.get_full_identifier(), 'dummy139.dummy1234')
+        self.assertEqual(self.issue.get_full_identifier(), 'erudit:erudit.dummy139.dummy1234')
 
     def test_cannot_have_a_full_identifier_without_localidentifier(self):
         # Setup
