@@ -216,6 +216,11 @@ class JournalManager(models.Manager):
 class Journal(FedoraMixin, Named, Edinum):
     """Revue"""
 
+    collection = models.ForeignKey(
+        'Collection',
+        null=True, blank=True
+    )
+
     # identification
     code = models.SlugField(
         max_length=255,
