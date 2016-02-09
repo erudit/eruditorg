@@ -149,6 +149,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
@@ -166,6 +167,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
                 'base.context_processors.common_settings',
             ],
         },
@@ -203,6 +205,11 @@ WSGI_APPLICATION = 'erudit.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'fr-ca'
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('fr-ca', 'Français'),
+)
 
 TIME_ZONE = 'EST'
 
