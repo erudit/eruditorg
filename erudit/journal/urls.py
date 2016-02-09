@@ -2,27 +2,29 @@
 
 from django.conf.urls import include
 from django.conf.urls import url
+from django.utils.translation import ugettext_lazy as _
 
 from . import urls_compat
 from . import views
 
 
 urlpatterns = [
-    url(r'^journal/information/$',
+    url(_(r'^journal/information/$'),
         views.JournalInformationDispatchView.as_view(), name='journal-information'),
+    url(_(r'^journal/information/liste/$'),
+        views.JournalInformationListView.as_view(), name='journal-information-list'),
+    url(_(r'^journal/information/(?P<code>[\w-]+)/edition/$'),
+        views.JournalInformationUpdateView.as_view(), name='journal-information-update'),
 
-    url(r'^journal/$', views.JournalListView.as_view(), name='journal-list'),
+    url(_(r'^journal/(?P<code>[\w-]+)/$'),
+        views.JournalDetailView.as_view(), name='journal-detail'),
 
-    url(r'^journal/(?P<code>[\w-]+)/$', views.JournalDetailView.as_view(), name='journal-detail'),
-    url(r'^journal/(?P<code>[\w-]+)/update/$',
-        views.JournalUpdateView.as_view(), name='journal-update'),
-
-    url(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$',
+    url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
         views.ArticlePdfView.as_view(), name='article-pdf'),
 
-    url(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)\.pdf$',
+    url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)\.pdf$'),
         views.ArticleRawPdfView.as_view(), name='article-raw-pdf'),
-    url(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/raw/$',
+    url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/raw/$'),
         views.ArticleRawPdfView.as_view(), name='article-raw-pdf'),
 
     # Compatibility URLs

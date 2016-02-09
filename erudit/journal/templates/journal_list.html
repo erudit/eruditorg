@@ -1,3 +1,29 @@
-{% extends "base.html" %}
+{% extends "base_userspace.html" %}
+{% load i18n %}
 
-{% block content %}TODO{% endblock content %}
+{% block content-main %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <br />
+        <p class="lead">{% trans "Veuillez sélectionner une revue à éditer" %}</p>
+      </div>
+    </div>
+    <div class="row">
+    {% for journal in journals %}
+      <div class="col-md-4">
+        <a class="btn btn-default btn-block" href="{% url 'journal:journal-information-update' journal.code %}">
+          {{ journal.name }}
+        </a>
+      </div>
+    {% empty %}
+      <div class="well">{% trans "Vous ne pouvez éditer aucun journal" %}</div>
+    {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {% include "partials/pagination.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock content-main %}
