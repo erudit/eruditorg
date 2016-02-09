@@ -24,7 +24,7 @@ from erudit.models import Journal
 from erudit.utils.pdf import generate_pdf
 
 from .rules_helpers import get_editable_journals
-from .viewmixins import JournalDetailMixin
+from .viewmixins import JournalCodeDetailMixin
 
 
 class JournalInformationDispatchView(RedirectView):
@@ -63,7 +63,7 @@ class JournalInformationListView(ListView):
         return qs.order_by('name')
 
 
-class JournalInformationUpdateView(PermissionRequiredMixin, JournalDetailMixin, UpdateView):
+class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMixin, UpdateView):
     """
     Displays a form to update journal information.
     """
@@ -75,7 +75,7 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalDetailMixin, 
     # TODO
 
 
-class JournalDetailView(JournalDetailMixin, DetailView):
+class JournalDetailView(JournalCodeDetailMixin, DetailView):
     """
     Displays a journal.
     """
