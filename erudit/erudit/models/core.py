@@ -201,6 +201,14 @@ class Library(models.Model):
         ordering = ['name', ]
 
 
+class Collection(Edinum):
+    """ The collection of issues """
+    name = models.CharField(max_length=200)
+
+    code = models.CharField(
+        max_length=10,
+        null=True, blank=True,
+    )
 class JournalManager(models.Manager):
     pass
 

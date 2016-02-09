@@ -8,6 +8,7 @@ from erudit.models import (
     JournalType,
     Issue,
     Publisher,
+    Collection,
 )
 
 from permissions.admin import RuleInline
@@ -40,6 +41,26 @@ class JournalRuleInline(RuleInline):
         'userspace.manage_permissions',
         'editor.manage_journal',
     )
+
+
+class CollectionAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'code', 'name',
+    )
+
+    fieldsets = [
+        ('Collection', {
+            'fields': (
+                ('name', 'code',)
+            )
+        }),
+        ('Identification', {
+            'fields': (
+                'edinum_id', 'synced_with_edinum', 'sync_date'
+            ),
+        }),
+    ]
 
 
 class JournalAdmin(admin.ModelAdmin):
@@ -130,3 +151,4 @@ admin.site.register(Journal, JournalAdmin)
 admin.site.register(JournalType)
 admin.site.register(Issue)
 admin.site.register(Publisher)
+admin.site.register(Collection, CollectionAdmin)
