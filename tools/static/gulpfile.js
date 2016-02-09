@@ -42,14 +42,14 @@ gulp.task('sass-erudit-pdfjs', function() {
 });
 
 gulp.task('scripts-erudit-main', function() {
-  return gulp.src(['../../erudit/base/static/scripts/**/*.js', '!../../erudit/base/static/scripts/build/**'])
+  return gulp.src(['../../erudit/base/static/scripts/**/*.js'])
     .pipe(concat('erudit-scripts.js'))
     .pipe(rename(function (path) {
       path.dirname += "/build";
       path.basename += "-dev";
       path.extname = ".js"
     }))
-    .pipe(gulp.dest('../../erudit/base/static/scripts/'))
+    .pipe(gulp.dest('../../erudit/base/static/js/'))
     .pipe(livereload());
 });
 
@@ -64,7 +64,7 @@ gulp.task('scripts-erudit-vendors', function() {
       path.basename += "-dev";
       path.extname = ".js"
     }))
-    .pipe(gulp.dest('../../erudit/base/static/scripts/'));
+    .pipe(gulp.dest('../../erudit/base/static/js/'));
 });
 
 gulp.task('watch', function() {
