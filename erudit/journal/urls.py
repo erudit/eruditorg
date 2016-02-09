@@ -9,14 +9,14 @@ from . import views
 
 
 urlpatterns = [
-    url(_(r'^journal/information/$'),
+    url(_(r'^revue/information/$'),
         views.JournalInformationDispatchView.as_view(), name='journal-information'),
-    url(_(r'^journal/information/liste/$'),
+    url(_(r'^revue/information/liste/$'),
         views.JournalInformationListView.as_view(), name='journal-information-list'),
-    url(_(r'^journal/information/(?P<code>[\w-]+)/edition/$'),
+    url(_(r'^revue/information/(?P<code>[\w-]+)/edition/$'),
         views.JournalInformationUpdateView.as_view(), name='journal-information-update'),
 
-    url(_(r'^journal/(?P<code>[\w-]+)/$'),
+    url(_(r'^revue/(?P<code>[\w-]+)/$'),
         views.JournalDetailView.as_view(), name='journal-detail'),
 
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
