@@ -207,11 +207,11 @@ WSGI_APPLICATION = 'erudit.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'fr-ca'
+LANGUAGE_CODE = 'fr'
 
 LANGUAGES = (
+    ('fr', 'Français'),
     ('en', 'English'),
-    ('fr-ca', 'Français'),
 )
 
 TIME_ZONE = 'EST'

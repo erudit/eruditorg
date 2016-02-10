@@ -21,9 +21,7 @@ class JournalInformationForm(forms.ModelForm):
         fields = []
 
     def __init__(self, *args, **kwargs):
-        language_code = kwargs.pop('language_code')
-        self.language_code = language_code.replace('-', '_')
-
+        self.language_code = kwargs.pop('language_code')
         super(JournalInformationForm, self).__init__(*args, **kwargs)
 
         # Initializes the i18n form fields

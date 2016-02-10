@@ -89,14 +89,14 @@ class TestJournalInformationUpdateView(BaseEruditTestCase):
         # Check
         self.assertEqual(response_1.status_code, 200)
         self.assertEqual(response_2.status_code, 200)
-        self.assertEqual(response_1.context['selected_language'], 'fr-ca')
+        self.assertEqual(response_1.context['selected_language'], 'fr')
         self.assertEqual(response_2.context['selected_language'], 'en')
 
     def test_can_be_used_to_update_journal_information_using_the_current_lang(self):
         # Setup
         self.client.login(username='david', password='top_secret')
         post_data = {
-            'about_fr_ca': 'Ceci est un test',
+            'about_fr': 'Ceci est un test',
         }
         url = reverse('journal:journal-information-update', kwargs={'code': self.journal.code})
         # Run
@@ -104,7 +104,7 @@ class TestJournalInformationUpdateView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 302)
         info = JournalInformation.objects.get(journal=self.journal)
-        self.assertEqual(info.about_fr_ca, post_data['about_fr_ca'])
+        self.assertEqual(info.about_fr, post_data['about_fr'])
 
     def test_can_be_used_to_update_journal_information_using_a_specific_lang(self):
         # Setup
