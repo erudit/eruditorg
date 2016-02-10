@@ -76,6 +76,7 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
     lang_get_parameter = 'lang'
     model = JournalInformation
     permission_required = ['journal.edit_journal', ]
+    raise_exception = True
     template_name = 'journal_information_update.html'
 
     @property
@@ -88,6 +89,9 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
         journal = self.get_journal()
         journal_info, dummy = JournalInformation.objects.get_or_create(journal=journal)
         return journal_info
+
+    def get_permission_object(self):
+        return self.get_object().journal
 
     def get_form_kwargs(self):
         kwargs = super(JournalInformationUpdateView, self).get_form_kwargs()

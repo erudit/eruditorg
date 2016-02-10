@@ -11,6 +11,7 @@ from django.test import RequestFactory
 from erudit.factories import JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.tests import BaseEruditTestCase
+from journal.models import JournalInformation
 from journal.views import ArticleRawPdfView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
@@ -64,6 +65,61 @@ class TestJournalInformationListView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['journals']), [self.journal, ])
+
+
+class TestJournalInformationUpdateView(BaseEruditTestCase):
+    def test_cannot_be_accessed_by_users_who_cannot_edit_journals(self):
+        # Setup
+        User.objects.create_user(
+            username='test', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='test', password='top_secret')
+        url = reverse('journal:journal-information-update', kwargs={'code': self.journal.code})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_embed_the_selected_language_into_the_context(self):
+        # Setup
+        self.client.login(username='david', password='top_secret')
+        url = reverse('journal:journal-information-update', kwargs={'code': self.journal.code})
+        # Run
+        response_1 = self.client.get(url)
+        response_2 = self.client.get(url, {'lang': 'en'})
+        # Check
+        self.assertEqual(response_1.status_code, 200)
+        self.assertEqual(response_2.status_code, 200)
+        self.assertEqual(response_1.context['selected_language'], 'fr-ca')
+        self.assertEqual(response_2.context['selected_language'], 'en')
+
+    def test_can_be_used_to_update_journal_information_using_the_current_lang(self):
+        # Setup
+        self.client.login(username='david', password='top_secret')
+        post_data = {
+            'about_fr_ca': 'Ceci est un test',
+        }
+        url = reverse('journal:journal-information-update', kwargs={'code': self.journal.code})
+        # Run
+        response = self.client.post(url, post_data, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 302)
+        info = JournalInformation.objects.get(journal=self.journal)
+        self.assertEqual(info.about_fr_ca, post_data['about_fr_ca'])
+
+    def test_can_be_used_to_update_journal_information_using_a_specific_lang(self):
+        # Setup
+        self.client.login(username='david', password='top_secret')
+        post_data = {
+            'about_en': 'This is a test',
+        }
+        url = '{}?lang=en'.format(
+            reverse('journal:journal-information-update', kwargs={'code': self.journal.code}))
+        # Run
+        response = self.client.post(url, post_data, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 302)
+        info = JournalInformation.objects.get(journal=self.journal)
+        self.assertEqual(info.about_en, post_data['about_en'])
 
 
 class TestArticlePdfView(BaseEruditTestCase):
