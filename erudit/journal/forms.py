@@ -24,11 +24,16 @@ class JournalInformationForm(forms.ModelForm):
         self.language_code = kwargs.pop('language_code')
         super(JournalInformationForm, self).__init__(*args, **kwargs)
 
-        # Initializes the i18n form fields
+        # Fetches proper labels for for translatable fields: this is necessary
+        # in order to remove language indications from labels (eg. "Team [en]")
         i18n_fields_label = {
             self.get_i18n_field_name(fname): self._meta.model._meta.get_field(fname).verbose_name
             for fname in self.i18n_field_bases}
+
+        # All translatable fields are TextField and will use CKEditor
         i18n_field_widgets = {fname: CKEditorWidget() for fname in self.i18n_field_names}
+
+        # Inserts the translatable fields into the form fields.
         self.fields.update(
             fields_for_model(self.Meta.model, fields=self.i18n_field_names,
                              labels=i18n_fields_label, widgets=i18n_field_widgets))
