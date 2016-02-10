@@ -210,8 +210,6 @@ class Collection(Edinum):
         max_length=10,
         null=True, blank=True,
     )
-class JournalManager(models.Manager):
-    pass
 
 
 class Journal(FedoraMixin, Named, Edinum):
@@ -353,8 +351,6 @@ class Journal(FedoraMixin, Named, Edinum):
             self.code,
         )
 
-    objects = JournalManager()
-
     class Meta:
         verbose_name = _("Revue")
         verbose_name_plural = _("Revues")
@@ -451,6 +447,7 @@ class Issue(FedoraMixin, models.Model):
                 self.journal.get_full_identifier(),
                 self.localidentifier
             )
+
     def __str__(self):
         return "{:s} {:s} {:s} {:s}".format(
             self.journal.code,
