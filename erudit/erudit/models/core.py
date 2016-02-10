@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
+from erudit.fedora.conf import settings as fedora_settings
 
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.fedora.objects import JournalDigitalObject
@@ -201,12 +202,23 @@ class Library(models.Model):
         ordering = ['name', ]
 
 
-class JournalManager(models.Manager):
-    pass
+class Collection(Edinum):
+    """ The collection of issues """
+    name = models.CharField(max_length=200)
+
+    code = models.CharField(
+        max_length=10,
+        null=True, blank=True,
+    )
 
 
 class Journal(FedoraMixin, Named, Edinum):
     """Revue"""
+
+    collection = models.ForeignKey(
+        'Collection',
+        null=True, blank=True
+    )
 
     # identification
     code = models.SlugField(
@@ -306,6 +318,13 @@ class Journal(FedoraMixin, Named, Edinum):
     # Fedora-related methods
     # --
 
+    def get_full_identifier(self):
+        return "{}:{}.{}".format(
+            fedora_settings.PIDSPACE,
+            self.collection.code,
+            self.localidentifier
+        )
+
     def get_fedora_model(self):
         return JournalDigitalObject
 
@@ -331,8 +350,6 @@ class Journal(FedoraMixin, Named, Edinum):
             self.name,
             self.code,
         )
-
-    objects = JournalManager()
 
     class Meta:
         verbose_name = _("Revue")
@@ -426,7 +443,10 @@ class Issue(FedoraMixin, models.Model):
 
     def get_full_identifier(self):
         if self.localidentifier and self.journal.localidentifier:
-            return '.'.join([self.journal.localidentifier, self.localidentifier])
+            return "{}.{}".format(
+                self.journal.get_full_identifier(),
+                self.localidentifier
+            )
 
     def __str__(self):
         return "{:s} {:s} {:s} {:s}".format(

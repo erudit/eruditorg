@@ -22,8 +22,8 @@ class TestFedoraMixin(TestCase):
         # Setup
         obj = DummyModel()
         # Run & check
-        self.assertEqual(obj.get_pid(), 'erudit:erudit.dummy139')
-        self.assertEqual(obj.pid, 'erudit:erudit.dummy139')
+        self.assertEqual(obj.get_full_identifier(), 'dummy139')
+        self.assertEqual(obj.pid, 'dummy139')
 
     def test_can_return_the_eulfedora_model(self):
         # Setup

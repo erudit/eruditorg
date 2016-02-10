@@ -162,7 +162,7 @@ class TestCommands(BaseEditorTestCase):
     def test_can_create_journal_and_publisher(self):
         publisher = create_or_update_publisher("123456", "dcormier")
         journal = create_or_update_journal(
-            publisher, "123", "Journal of journals", "joj", "", ""
+            publisher, "123", "Journal of journals", "joj", "", "", None
         )
 
         self.assertEquals(
@@ -172,7 +172,7 @@ class TestCommands(BaseEditorTestCase):
     def test_can_update_journal(self):
         publisher = create_or_update_publisher("123456", "dcormier")
         journal = create_or_update_journal(
-            publisher, "123", "Journal of journals", "joj", "", ""
+            publisher, "123", "Journal of journals", "joj", "", "", None
         )
 
         self.assertEquals(
@@ -180,7 +180,7 @@ class TestCommands(BaseEditorTestCase):
         )
 
         journal_2 = create_or_update_journal(
-            publisher, "123", "Journal", "joj", "", ""
+            publisher, "123", "Journal", "joj", "", "", None
         )
 
         self.assertEquals(
@@ -200,7 +200,7 @@ class TestCommands(BaseEditorTestCase):
         journal = JournalFactory.create(code='testj', edinum_id="123", publishers=[publisher])
 
         journal = create_or_update_journal(
-            publisher, "123", "test", "testj", "", ""
+            publisher, "123", "test", "testj", "", "", None
         )
 
         self.assertIsNone(journal)
