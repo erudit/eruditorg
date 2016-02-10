@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.utils.translation import get_language
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
@@ -23,6 +25,8 @@ from erudit.fedora.repository import api
 from erudit.models import Journal
 from erudit.utils.pdf import generate_pdf
 
+from .forms import JournalInformationForm
+from .models import JournalInformation
 from .rules_helpers import get_editable_journals
 from .viewmixins import JournalCodeDetailMixin
 
@@ -68,11 +72,38 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
     Displays a form to update journal information.
     """
     context_object_name = 'journal'
-    fields = []
-    model = Journal
+    form_class = JournalInformationForm
+    lang_get_parameter = 'lang'
+    model = JournalInformation
     permission_required = ['journal.edit_journal', ]
     template_name = 'journal_update.html'
-    # TODO
+
+    @property
+    def selected_language(self):
+        languages = [l[0] for l in settings.LANGUAGES]
+        get_lang = self.request.GET.get(self.lang_get_parameter, None)
+        return get_lang if get_lang in languages else get_language()
+
+    def get_object(self):
+        journal = self.get_journal()
+        journal_info, dummy = JournalInformation.objects.get_or_create(journal=journal)
+        return journal_info
+
+    def get_form_kwargs(self):
+        kwargs = super(JournalInformationUpdateView, self).get_form_kwargs()
+        kwargs['language_code'] = self.selected_language
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(JournalInformationUpdateView, self).get_context_data(**kwargs)
+        context['journal_code'] = self.kwargs['code']
+        context['selected_language'] = self.selected_language
+        return context
+
+    def get_success_url(self):
+        return '{url}?{lang_get_parameter}={lang_value}'.format(
+            url=reverse('journal:journal-information-update', kwargs={'code': self.kwargs['code']}),
+            lang_get_parameter=self.lang_get_parameter, lang_value=self.selected_language)
 
 
 class JournalDetailView(JournalCodeDetailMixin, DetailView):

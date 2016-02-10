@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'django_filters',
     'spurl',
     'rules.apps.AutodiscoverRulesConfig',
+    'ckeditor',
 )
 
 DATABASES = {
