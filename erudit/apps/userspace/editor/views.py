@@ -6,13 +6,26 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from rules.contrib.views import PermissionRequiredMixin
+from navutils import Breadcrumb
 
-from core.editor.models import IssueSubmission
+from userspace.views import UserspaceBreadcrumbsMixin
 from core.userspace.viewmixins import LoginRequiredMixin
-
+from core.editor.models import IssueSubmission
 from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
+
+
+class IssueSubmissionBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
+
+    def get_breadcrumbs(self):
+        breadcrumbs = super(IssueSubmissionBreadcrumbsMixin,
+                            self).get_breadcrumbs()
+        breadcrumbs.append(Breadcrumb(
+            _("Dépôts de numéros"),
+            pattern_name='editor:issues'))
+        return breadcrumbs
 
 
 class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
@@ -25,10 +38,12 @@ class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
         return qs.filter(id__in=ids)
 
 
-class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
+class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
+                            IssueSubmissionCheckMixin, CreateView):
     model = IssueSubmission
     form_class = IssueSubmissionForm
     template_name = 'userspace/editor/form.html'
+    title = _("Faire un dépôt de numéros")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -49,7 +64,8 @@ class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
         return context
 
 
-class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
+class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin,
+                            IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'userspace/editor/form.html'
@@ -62,6 +78,9 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
     def get_permission_object(self):
         obj = self.get_object()
         return obj.journal
+
+    def get_title(self):
+        return _("Modifier un dépôt de numéros")
 
     def get_form(self, form_class):
         form = super().get_form(form_class)
@@ -91,6 +110,7 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
         return reverse('userspace:editor:issues')
 
 
-class IssueSubmissionList(IssueSubmissionCheckMixin, ListView):
+class IssueSubmissionList(IssueSubmissionBreadcrumbsMixin,
+                          IssueSubmissionCheckMixin, ListView):
     model = IssueSubmission
     template_name = 'userspace/editor/issues.html'
