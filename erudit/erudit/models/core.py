@@ -203,13 +203,20 @@ class Library(models.Model):
 
 
 class Collection(Edinum):
-    """ The collection of issues """
+    """ A collection of Journals
+
+    Set of :py:class:`Journals <erudit.models.core.Journal>` for which a partner
+    provides digital publishing services """
+
     name = models.CharField(max_length=200)
+    """ The name of the collection """
 
     code = models.CharField(
         max_length=10,
         null=True, blank=True,
     )
+    """ The code of the collection. There should be a correspondence between the
+    code of the collection and the ``Fonds_fac`` field in Solr. """
 
 
 class Journal(FedoraMixin, Named, Edinum):
@@ -219,6 +226,8 @@ class Journal(FedoraMixin, Named, Edinum):
         'Collection',
         null=True, blank=True
     )
+    """ The :py:class`collection <erudit.models.core.Collection>` of which this
+    ``Journal`` is part"""
 
     # identification
     code = models.SlugField(
@@ -234,17 +243,20 @@ class Journal(FedoraMixin, Named, Edinum):
         null=True, blank=True,
         verbose_name=_("ISSN imprimé"),
     )
+    """ The print ISSN of the journal """
 
     issn_web = models.CharField(
         max_length=255,
         null=True, blank=True,
         verbose_name=_("ISSN web"),
     )
+    """ The web ISSN of the journal """
 
     subtitle = models.CharField(
         max_length=255,
         null=True, blank=True,
     )
+    """ The subtitle of the journal """
 
     formerly = models.ForeignKey(
         'Journal',
@@ -252,6 +264,7 @@ class Journal(FedoraMixin, Named, Edinum):
         verbose_name=_("Anciennement"),
         help_text=_("Choisir l'ancien nom de la revue"),
     )
+    """ The former name of the journal """
 
     localidentifier = models.CharField(
         max_length=50,
@@ -266,18 +279,21 @@ class Journal(FedoraMixin, Named, Edinum):
         related_name='journals',
         verbose_name=_("Éditeur"),
     )
+    """ The publishers of the journal """
 
     type = models.ForeignKey(
         'JournalType',
         null=True, blank=True,
         verbose_name=_("Type"),
     )
+    """ The type of the journal """
 
     paper = models.NullBooleanField(
         default=None,
         verbose_name=_("Papier"),
         help_text=_("Est publiée également en version papier?"),
     )
+    """ Defines whether this Journal is printed in paper or not """
 
     open_access = models.NullBooleanField(
         default=None,
@@ -295,11 +311,13 @@ class Journal(FedoraMixin, Named, Edinum):
         null=True, blank=True,
         verbose_name=_("URL"),
     )
+    """ URL of the home page of the Journal """
 
     address = models.TextField(
         null=True, blank=True,
         verbose_name=_("Adresse"),
     )
+    """ Address of the journal """
 
     # status
     active = models.BooleanField(
@@ -307,6 +325,8 @@ class Journal(FedoraMixin, Named, Edinum):
         verbose_name=_("Actif"),
         help_text=_("Une revue inactive n'édite plus de numéros"),
     )
+    """ Whether the Journal is active or not. An inactive journal is
+    a journal that still publish issues """
 
     # users who can interact this object (coupled with permissions)
     members = models.ManyToManyField(
@@ -314,6 +334,7 @@ class Journal(FedoraMixin, Named, Edinum):
         related_name="journals",
         verbose_name=_("Membres")
     )
+    """ Users that are part of this journal's organization """
 
     # Fedora-related methods
     # --
@@ -358,9 +379,7 @@ class Journal(FedoraMixin, Named, Edinum):
 
 
 class JournalType(models.Model):
-    """Type de revue
-    ex.: Savante, Culturelle
-    """
+    """ The type of the Journal """
     name = models.CharField(
         max_length=255,
         verbose_name=_("Nom"),
