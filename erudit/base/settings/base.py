@@ -50,7 +50,9 @@ INSTALLED_APPS = (
     'plupload',
     'django_filters',
     'spurl',
-    'rules.apps.AutodiscoverRulesConfig',
+    'rules',
+    'navutils',
+
     'ckeditor',
     'raven.contrib.django.raven_compat',
 
@@ -191,10 +193,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'base.context_processors.common_settings',
+                'navutils.context_processors.menus',
             ],
         },
     },
 ]
+
 
 LOGIN_URL = '/login/'
 
