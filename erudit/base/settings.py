@@ -56,7 +56,8 @@ INSTALLED_APPS = (
     'plupload',
     'django_filters',
     'spurl',
-    'rules.apps.AutodiscoverRulesConfig',
+    'rules',
+    'navutils',
 )
 
 DATABASES = {
@@ -167,10 +168,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'base.context_processors.common_settings',
+                'navutils.context_processors.menus',
             ],
         },
     },
 ]
+
 
 LOGIN_URL = '/login/'
 
