@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'modeltranslation',
+
     # Erudit apps
     'base',
     'erudit',
@@ -57,6 +59,7 @@ INSTALLED_APPS = (
     'django_filters',
     'spurl',
     'rules.apps.AutodiscoverRulesConfig',
+    'ckeditor',
 )
 
 DATABASES = {
@@ -149,6 +152,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
@@ -166,6 +170,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
                 'base.context_processors.common_settings',
             ],
         },
@@ -202,7 +207,12 @@ WSGI_APPLICATION = 'erudit.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'fr-ca'
+LANGUAGE_CODE = 'fr'
+
+LANGUAGES = (
+    ('fr', 'Français'),
+    ('en', 'English'),
+)
 
 TIME_ZONE = 'EST'
 
