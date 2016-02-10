@@ -69,7 +69,10 @@ class JournalInformationListView(ListView):
 
 class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMixin, UpdateView):
     """
-    Displays a form to update journal information.
+    Displays a form to update journal information. JournalInformation instances
+    can hold information in many languages. The language used to save the values
+    provided by the form can be controlled using a GET parameter whose name is
+    defined using the `lang_get_parameter` attribute.
     """
     context_object_name = 'journal'
     form_class = JournalInformationForm
@@ -91,6 +94,8 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
         return journal_info
 
     def get_permission_object(self):
+        # Note: we work on a JournalInformation instance but the permission check
+        # is performed against a Journal instance.
         return self.get_object().journal
 
     def get_form_kwargs(self):

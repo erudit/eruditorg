@@ -7,6 +7,9 @@ from erudit.models import Journal
 
 
 class JournalInformation(models.Model):
+    """
+    Stores the information related to a specific Journal instance.
+    """
     journal = models.OneToOneField(
         Journal, verbose_name=_('Journal'), related_name='information')
 
