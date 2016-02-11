@@ -10,16 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+from unipath import Path
 
 DEBUG = True
 COMPRESS_ENABLED = True
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT = BASE_DIR + '/static'
-MEDIA_ROOT = BASE_DIR + '/media'
-UPLOAD_ROOT = MEDIA_ROOT + '/uploads'
+BASE_DIR = Path(__file__)
+ROOT_DIR = BASE_DIR.ancestor(4)
+
+STATIC_ROOT = ROOT_DIR.child('static')
+MEDIA_ROOT = ROOT_DIR.child('media')
+UPLOAD_ROOT = MEDIA_ROOT.child('uploads')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -88,6 +89,10 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
+)
+
+STATICFILES_DIRS = (
+    ROOT_DIR.child('erudit', 'static'),
 )
 
 PIPELINE = {
@@ -172,7 +177,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, '../templates'),
+            ROOT_DIR.child('erudit', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
