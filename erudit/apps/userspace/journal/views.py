@@ -56,7 +56,10 @@ class JournalInformationListView(JournalBreadcrumbsMixin, ListView):
         return qs.order_by('name')
 
 
-class JournalInformationUpdateView(JournalBreadcrumbsMixin, PermissionRequiredMixin, JournalCodeDetailMixin, UpdateView):
+class JournalInformationUpdateView(JournalBreadcrumbsMixin,
+                                   PermissionRequiredMixin,
+                                   JournalCodeDetailMixin,
+                                   UpdateView):
     """
     Displays a form to update journal information. JournalInformation instances
     can hold information in many languages. The language used to save the values
