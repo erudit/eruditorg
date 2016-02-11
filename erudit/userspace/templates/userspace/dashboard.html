@@ -1,4 +1,5 @@
-{% extends "base_editor.html" %}
+{% extends "base_userspace.html" %}
+
 {% load i18n staticfiles %}
 
 {% block page-title %}{% trans "Bonjour" %} {{ request.user.first_name }} {{ request.user.last_name }}{% endblock %}
