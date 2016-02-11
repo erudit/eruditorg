@@ -6,7 +6,12 @@
 
 <a class="{% if node.id != 'userspace' and node.get_url in request.path %}active{% endif %}
           {% if node.id == 'userspace' and node.get_url == request.path %}active{% endif %}"
-    href="{{ node.get_url }}" {% for attr, value in node.link_attrs.items %} {{ attr }}="{{ value }}"{% endfor %}>{% block node_label %}{{ node.label }}{% endblock %}</a>
+          href="{{ node.get_url }}" {% for attr, value in node.link_attrs.items %} {{ attr }}="{{ value }}"{% endfor %}>
+          
+          <span class="icon fa {{ node.context.icon }}"></span>
+          <span class="sidenav-label">{{ node.label }}</span>
+</a>
+
     {% if viewable_children %}
     <ul class="{% block submenu_class %}sub-menu dropdown{% endblock %}">
         {% for children_node in viewable_children %}
