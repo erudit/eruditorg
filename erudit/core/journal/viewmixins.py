@@ -2,12 +2,27 @@
 
 from django.db.models import Q
 from django.http import Http404
-from ipware.ip import get_ip
 from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
+
+from ipware.ip import get_ip
+from navutils import Breadcrumb
 
 from core.subscription.models import InstitutionalAccount
 from core.subscription.models import InstitutionIPAddressRange
 from erudit.models import Journal
+from userspace.views import UserspaceBreadcrumbsMixin
+
+
+class JournalBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
+
+    def get_breadcrumbs(self):
+        breadcrumbs = super(JournalBreadcrumbsMixin,
+                            self).get_breadcrumbs()
+        breadcrumbs.append(Breadcrumb(
+            _("Revues"),
+            pattern_name='journal:journal-information'))
+        return breadcrumbs
 
 
 class JournalCodeDetailMixin(object):
