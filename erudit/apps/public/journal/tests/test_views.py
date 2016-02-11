@@ -8,10 +8,32 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
 from apps.public.journal.views import ArticleRawPdfView
+from erudit.factories import CollectionFactory
+from erudit.factories import JournalFactory
+from erudit.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.tests import BaseEruditTestCase
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
+
+
+class TestJournalDetailView(BaseEruditTestCase):
+    def test_can_embed_the_journal_information_in_the_context_if_available(self):
+        # Setup
+        collection = CollectionFactory.create()
+        journal_1 = JournalFactory.create(collection=collection)
+        journal_2 = JournalFactory.create(collection=collection)
+        journal_info = JournalInformationFactory.create(journal=journal_1)
+        url_1 = reverse('journal:journal-detail', kwargs={'code': journal_1.code})
+        url_2 = reverse('journal:journal-detail', kwargs={'code': journal_2.code})
+        # Run
+        response_1 = self.client.get(url_1)
+        response_2 = self.client.get(url_2)
+        # Check
+        self.assertEqual(response_1.status_code, 200)
+        self.assertEqual(response_2.status_code, 200)
+        self.assertEqual(response_1.context['journal_info'], journal_info)
+        self.assertTrue('journal_info' not in response_2.context)
 
 
 class TestArticlePdfView(BaseEruditTestCase):

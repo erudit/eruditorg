@@ -15,6 +15,14 @@ class PublisherFactory(factory.django.DjangoModelFactory):
         model = 'erudit.Publisher'
 
 
+class CollectionFactory(factory.django.DjangoModelFactory):
+    code = factory.Sequence(lambda n: 'journal-{}'.format(n))
+    name = factory.Sequence(lambda n: 'Revue{}'.format(n))
+
+    class Meta:
+        model = 'erudit.Collection'
+
+
 class JournalFactory(factory.django.DjangoModelFactory):
 
     class Meta:
