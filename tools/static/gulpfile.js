@@ -10,7 +10,7 @@ var gulp       = require('gulp'),
 env(".env");
 
 /* DIRS */
-var static_dir = '../../erudit/base/static/';
+var static_dir = '../../erudit/static/';
 
 var css_dir = static_dir + 'css/';
 var js_dir = static_dir + 'js/';
