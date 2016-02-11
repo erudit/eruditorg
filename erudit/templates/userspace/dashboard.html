@@ -1,9 +1,99 @@
 {% extends "base_userspace.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}{% trans "Bonjour" %} {{ request.user.first_name }} {{ request.user.last_name }}{% endblock %}
-
+{% block page-title %}{% trans "Tableau de bord" %}{% endblock %}
 
 {% block content-main %}
-Placeholder
+<!-- Issue submission history -->
+<div class="col-sm-10 col-sm-offset-1 col-xs-12">
+  <section class="card card-issue_submissions">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>
+          {% trans "Historique des dépôts"  %}
+          {% url 'editor:issues' as all_issues %}
+        </h2>
+      </div>
+      <div class="text-right col-sm-6">
+        <a href="{% url 'editor:add' %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
+      </div>
+    </div>
+    <div class="row card-body">
+      <div class="col-xs-12">
+        <table>
+          <thead>
+            <tr>
+              <th>{% trans "Date" %}</th>
+              <th>{% trans "Revue et numéro" %}</th>
+              <th>{% trans "État" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for issue_submission in object_list|dictsortreversed:"date_created"|slice:":3" %}
+            <tr>
+              <td>
+                {{ issue_submission.date_created|date:"c" }}
+              </td>
+              <td>
+                <a href="{% url 'editor:update' issue_submission.pk %}">
+                  {{ issue_submission.journal }}.
+                  {{ issue_submission.year }},
+                  {% if issue_submission.volume %}
+                  {% trans "vol." %} {{ issue_submission.volume }},
+                  {% endif %}
+                  {% trans "n°" %} {{ issue_submission.number }}
+                </a>
+              </td>
+              <td>
+                {% if issue_submission.status == 'D' %}
+                {% trans "Brouillon" %}
+                {% elif issue_submission.status == 'S' %}
+                {% trans "Soumis" %}
+                {% elif issue_submission.status == 'V' %}
+                {% trans "Validé" %}
+                {% endif %}
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" class="text-center">{% trans "Il n'y a aucun fichier dans votre historique." %}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="text-center">
+          {% blocktrans %}
+          <small class="full-page"><a href="{{ all_issues }}" class="btn btn-secondary">Voir l'historique complet</a></small>
+          {% endblocktrans %}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- User info -->
+<div class="col-sm-10 col-sm-offset-1 col-xs-12">
+  <section class="card card-user">
+    <div class="card-header">
+      <h2>{% trans "Votre profil" %}</h2>
+    </div>
+    <div class="row card-body">
+      <div class="col-sm-6">
+        <h3>{{ user.first_name}} {{ user.last_name }}</h3>
+      </div>
+      <div class="col-sm-6">
+        <p>
+          {{ user }} <br/><a href="mailto:{{ user.email }}">{{ user.email }}</a>
+        </p>
+        <p>
+          <small>
+            {% blocktrans %}
+            Afin de modifier votre profil, veuillez nous contacter à l'adresse suivante&nbsp;:
+            <a href="mailto:edition@erudit.org?subject=Compte%20Espace%20éditeur%20(utilisateur%20:%20{{ user }})">edition@erudit.org</a>
+            {% endblocktrans %}
+          </small>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
 {% endblock %}
