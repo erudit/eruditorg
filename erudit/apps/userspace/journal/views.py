@@ -4,17 +4,19 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.utils.translation import get_language
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
 from rules.contrib.views import PermissionRequiredMixin
 
 from core.journal.rules_helpers import get_editable_journals
-from core.journal.viewmixins import JournalCodeDetailMixin
+from core.journal.viewmixins import JournalCodeDetailMixin, JournalBreadcrumbsMixin
 from erudit.models import Journal
 from erudit.models import JournalInformation
 
 from .forms import JournalInformationForm
+from .rules_helpers import get_editable_journals
 
 
 class JournalInformationDispatchView(RedirectView):
@@ -39,7 +41,7 @@ class JournalInformationDispatchView(RedirectView):
             raise PermissionDenied
 
 
-class JournalInformationListView(ListView):
+class JournalInformationListView(JournalBreadcrumbsMixin, ListView):
     """
     Displays a list of Journal instances whose information can be edited by
     the current user.
@@ -54,7 +56,7 @@ class JournalInformationListView(ListView):
         return qs.order_by('name')
 
 
-class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMixin, UpdateView):
+class JournalInformationUpdateView(JournalBreadcrumbsMixin, PermissionRequiredMixin, JournalCodeDetailMixin, UpdateView):
     """
     Displays a form to update journal information. JournalInformation instances
     can hold information in many languages. The language used to save the values
@@ -68,6 +70,9 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
     permission_required = ['journal.edit_journal', ]
     raise_exception = True
     template_name = 'userspace/journal/journal_information_update.html'
+
+    def get_title(self):
+        return _("Éditer une revue")
 
     @property
     def selected_language(self):
