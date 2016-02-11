@@ -66,7 +66,8 @@ class ArticleRawPdfView(View):
             'fedora_object': EruditArticle(fedora_article.xml_content),
         }
         coverpage = generate_pdf(
-            'article_pdf_coverpage.html', context=RequestContext(request).update(coverpage_context),
+            'public/journal/article_pdf_coverpage.html',
+            context=RequestContext(request).update(coverpage_context),
             base_url=request.build_absolute_uri('/'))
 
         # Merges the cover page and the full article
