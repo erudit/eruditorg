@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.http import HttpResponse
 from django.template import RequestContext
@@ -26,6 +27,19 @@ class JournalDetailView(JournalCodeDetailMixin, DetailView):
     context_object_name = 'journal'
     model = Journal
     template_name = 'public/journal/journal_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(JournalDetailView, self).get_context_data(**kwargs)
+
+        # Fetches the JournalInformation instance associated to the current journal
+        try:
+            journal_info = self.object.information
+        except ObjectDoesNotExist:
+            pass
+        else:
+            context['journal_info'] = journal_info
+
+        return context
 
 
 class ArticlePdfView(TemplateView):
