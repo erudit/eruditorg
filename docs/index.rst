@@ -9,6 +9,7 @@ Documentation de Érudit.org
 .. toctree::
    :maxdepth: 2
 
+   structure
    overview
    core_models
    fedora
