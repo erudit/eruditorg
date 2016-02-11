@@ -47,7 +47,7 @@ class JournalInformationListView(ListView):
     context_object_name = 'journals'
     model = Journal
     paginate_by = 36
-    template_name = 'journal/journal_information_list.html'
+    template_name = 'userspace/journal/journal_information_list.html'
 
     def get_queryset(self):
         qs = get_editable_journals(self.request.user)
@@ -67,7 +67,7 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
     model = JournalInformation
     permission_required = ['journal.edit_journal', ]
     raise_exception = True
-    template_name = 'journal/journal_information_update.html'
+    template_name = 'userspace/journal/journal_information_update.html'
 
     @property
     def selected_language(self):

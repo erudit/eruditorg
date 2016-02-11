@@ -27,7 +27,7 @@ class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
 class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
     model = IssueSubmission
     form_class = IssueSubmissionForm
-    template_name = 'editor/form.html'
+    template_name = 'userspace/editor/form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
 class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
-    template_name = 'editor/form.html'
+    template_name = 'userspace/editor/form.html'
 
     def get_form(self, form_class):
         form = super().get_form(form_class)
@@ -82,4 +82,4 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
 
 class IssueSubmissionList(IssueSubmissionCheckMixin, ListView):
     model = IssueSubmission
-    template_name = 'editor/issues.html'
+    template_name = 'userspace/editor/issues.html'

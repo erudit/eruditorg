@@ -25,14 +25,14 @@ class JournalDetailView(JournalCodeDetailMixin, DetailView):
     """
     context_object_name = 'journal'
     model = Journal
-    template_name = 'journal/journal_detail.html'
+    template_name = 'public/journal/journal_detail.html'
 
 
 class ArticlePdfView(TemplateView):
     """
     Displays a page allowing to browse the PDF file associated with an article.
     """
-    template_name = 'journal/article_pdf.html'
+    template_name = 'public/journal/article_pdf.html'
 
     def get_context_data(self, **kwargs):
         context = super(ArticlePdfView, self).get_context_data(**kwargs)

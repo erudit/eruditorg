@@ -13,14 +13,14 @@ from erudit.utils.pdf import generate_pdf
 class TestGeneratePdfTool(TestCase):
     def test_generates_a_pdf_into_a_bytes_stream_by_default(self):
         # Run & check
-        pdf = generate_pdf('journal/article_pdf_coverpage.html')
+        pdf = generate_pdf('public/journal/article_pdf_coverpage.html')
         self.assertTrue(isinstance(pdf, io.BytesIO))
 
     def test_can_generate_a_pdf_into_a_http_response(self):
         # Setup
         response = HttpResponse(content_type='application/pdf')
         # Run & check
-        generate_pdf('journal/article_pdf_coverpage.html', file_object=response)
+        generate_pdf('public/journal/article_pdf_coverpage.html', file_object=response)
         self.assertTrue(isinstance(response.content, bytes))
         self.assertTrue(response.tell())
 

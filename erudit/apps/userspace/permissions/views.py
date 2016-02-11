@@ -27,13 +27,13 @@ class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
 
 class PermissionsListView(PermissionsCheckMixin, ListView):
     model = Rule
-    template_name = 'userspace/perm_list.html'
+    template_name = 'userspace/permissions/perm_list.html'
 
 
 class PermissionsCreateView(PermissionsCheckMixin, CreateView):
     model = Rule
     form_class = RuleForm
-    template_name = 'userspace/perm_create.html'
+    template_name = 'userspace/permissions/perm_create.html'
 
     def get_form_kwargs(self):
         kwargs = super(PermissionsCreateView, self).get_form_kwargs()
@@ -46,7 +46,7 @@ class PermissionsCreateView(PermissionsCheckMixin, CreateView):
 
 class PermissionsDeleteView(PermissionsCheckMixin, DeleteView):
     model = Rule
-    template_name = 'userspace/perm_confirm_delete.html'
+    template_name = 'userspace/permissions/perm_confirm_delete.html'
 
     def get_success_url(self):
         return reverse('userspace:perm_list')

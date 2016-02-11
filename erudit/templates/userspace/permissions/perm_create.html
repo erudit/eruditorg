@@ -1,9 +1,9 @@
-{% extends "individual_subscription/base_individual_subscription.html" %}
+{% extends "userspace/base.html" %}
 {% load i18n %}
 
 {% block content-main %}
 
-<h1>{% trans "Modifier le compte de " %} {{ object }}</h1>
+<h1>{% trans "Ajouter un accès" %} </h1>
 
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}

@@ -32,7 +32,7 @@ urlpatterns = i18n_patterns(
 
     # The PDF viewer exposes a PDF.js template
     url(r'^pdf-viewer\.html$',
-        TemplateView.as_view(template_name='pdf/viewer.html'), name='pdf-viewer'),
+        TemplateView.as_view(template_name='pdf_viewer.html'), name='pdf-viewer'),
 
     # Apps
     url(r'^', include('apps.public.urls')),

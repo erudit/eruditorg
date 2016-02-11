@@ -24,12 +24,13 @@ class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
 class IndividualAccountList(OrganizationCheckMixin, FilterView):
     filterset_class = IndividualAccountFilter
     paginate_by = 10
+    template_name = 'userspace/individual_subscription/individualaccount_filter.html'
 
 
 class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
     model = IndividualAccount
     form_class = IndividualAccountForm
-    template_name = 'individual_subscription/individualaccount_create.html'
+    template_name = 'userspace/individual_subscription/individualaccount_create.html'
 
     def get_success_url(self):
         return reverse('userspace:individual_subscription:account_list')
@@ -42,7 +43,7 @@ class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
 
 class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
-    template_name = 'individual_subscription/individualaccount_update.html'
+    template_name = 'userspace/individual_subscription/individualaccount_update.html'
     fields = ['firstname', 'lastname', 'email', ]
 
     def get_success_url(self):
@@ -51,6 +52,7 @@ class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
 
 class IndividualAccountDelete(OrganizationCheckMixin, DeleteView):
     model = IndividualAccount
+    template_name = 'userspace/individual_subscription/individualaccount_confirm_delete.html'
 
     def get_success_url(self):
         return reverse('userspace:individual_subscription:account_list')
@@ -59,7 +61,7 @@ class IndividualAccountDelete(OrganizationCheckMixin, DeleteView):
 class IndividualAccountResetPwd(OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
     form_class = IndividualAccountResetPwdForm
-    template_name = 'individual_subscription/individualaccount_reset_pwd.html'
+    template_name = 'userspace/individual_subscription/individualaccount_reset_pwd.html'
 
     def get_success_url(self):
         return reverse('userspace:individual_subscription:account_list')
