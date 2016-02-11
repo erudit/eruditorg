@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
@@ -27,31 +28,15 @@ urlpatterns = i18n_patterns(
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^upload/', include('plupload.urls', namespace='plupload')),
 
+    # The PDF viewer exposes a PDF.js template
     url(r'^pdf-viewer\.html$',
         TemplateView.as_view(template_name='pdf/viewer.html'), name='pdf-viewer'),
 
-    # User space urls
-    url(r'^espace-utilisateur/editeur/',
-        include('editor.urls', namespace='editor')),
-    url(r'^espace-utilisateur/organisations/',
-        include('individual_subscription.urls',
-                namespace='individual_subscription')),
-    url(r'^espace-utilisateur/',
-        include('userspace.urls', namespace='userspace'),
-        name="login"),
-
-    # Public website urls
-    url(r'^', include('journal.urls', namespace='journal')),
-    url(r'^livre/', include('book.urls', namespace='book')),
-    url(r'^recherche/', include('search.urls', namespace='search')),
-    url(r'^these/', include('thesis.urls', namespace='thesis')),
-    url(r'^organisations/', include('individual_subscription.urls',
-        namespace='individual_subscription')),
-
-    url(r'^upload/', include('plupload.urls', namespace='plupload'),),
-    # TODO: move to user space
-    url(r'^abonnements/', include('subscription.urls')),
+    # Apps
+    url(r'^', include('apps.public.urls')),
+    url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),

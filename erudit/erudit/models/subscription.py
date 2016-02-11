@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from subscription import models as s
+from core.subscription import models as s
 
 from .core import Journal, YEARS
 

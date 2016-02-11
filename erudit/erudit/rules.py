@@ -1,8 +1,8 @@
 import rules
 
-from userspace.rules import is_superuser, is_staff
+from core.userspace.rules import is_superuser, is_staff
 
-from erudit.models import Journal
+from .models import Journal
 
 
 @rules.predicate

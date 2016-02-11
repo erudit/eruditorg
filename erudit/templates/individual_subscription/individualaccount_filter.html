@@ -8,7 +8,7 @@
 
 <h4>{% trans 'Actions' %}</h4>
 
-<a class="btn btn-primary" href="{% url 'individual_subscription:account_add' %}">
+<a class="btn btn-primary" href="{% url 'userspace:individual_subscription:account_add' %}">
     {% trans "Ajouter un compte" %}
 </a>
 
@@ -70,13 +70,13 @@
             <td>{{ account.email }}</td>
             <td>{{ account.organization_policy }}</td>
             <td>
-                <a href="{% url 'individual_subscription:account_update' account.pk %}">
+                <a href="{% url 'userspace:individual_subscription:account_update' account.pk %}">
                     {% trans 'Modifier' %}
                 </a>|
-                <a href="{% url 'individual_subscription:account_reset_pwd' account.pk %}">
+                <a href="{% url 'userspace:individual_subscription:account_reset_pwd' account.pk %}">
                     {% trans 'Réinitialiser mot de passe' %}
                 </a>|
-                <a href="{% url 'individual_subscription:account_delete' account.pk %}">
+                <a href="{% url 'userspace:individual_subscription:account_delete' account.pk %}">
                     {% trans 'Supprimer' %}
                 </a>
             </td>

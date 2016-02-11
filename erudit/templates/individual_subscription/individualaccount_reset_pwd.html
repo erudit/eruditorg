@@ -10,7 +10,7 @@
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" class="btn"/>
-  <a class="btn" href="{% url 'individual_subscription:account_list' %}">{% trans 'Annuler' %}</a>
+  <a class="btn" href="{% url 'userspace:individual_subscription:account_list' %}">{% trans 'Annuler' %}</a>
 </form>
 
 {% endblock %}

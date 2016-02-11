@@ -1,17 +1,19 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from erudit.models import (
     Person,
     Organisation,
     Library,
     Journal,
+    JournalInformation,
     JournalType,
     Issue,
     Publisher,
     Collection,
 )
 
-from permissions.admin import RuleInline
+from core.permissions.admin import RuleInline
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -144,6 +146,10 @@ class JournalAdmin(admin.ModelAdmin):
         formset.save_m2m()
 
 
+class JournalInformationAdmin(TranslationAdmin):
+    pass
+
+
 admin.site.register(Person)
 admin.site.register(Organisation)
 admin.site.register(Library)
@@ -152,3 +158,4 @@ admin.site.register(JournalType)
 admin.site.register(Issue)
 admin.site.register(Publisher)
 admin.site.register(Collection, CollectionAdmin)
+admin.site.register(JournalInformation, JournalInformationAdmin)

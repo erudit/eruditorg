@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+
+from django.conf.urls import include
+from django.conf.urls import url
+from django.utils.translation import ugettext_lazy as _
+
+
+urlpatterns = [
+    url(r'^', include('apps.userspace.dashboard.urls')),
+
+    url(_(r'^editeur/'), include('apps.userspace.editor.urls', namespace='editor')),
+    url(_(r'^revue/'), include('apps.userspace.journal.urls', namespace='journal')),
+    url(_(r'^permissions/'), include('apps.userspace.permissions.urls', namespace='permissions')),
+    url(_(r'^organisations/'), include('apps.userspace.individual_subscription.urls',
+        namespace='individual_subscription')),
+]

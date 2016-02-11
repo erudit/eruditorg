@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
+from core.subscription import models as s
+
 from .core import Journal
-from subscription import models as s
 
 
 class Quotation(models.Model):

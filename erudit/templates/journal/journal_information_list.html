@@ -12,7 +12,7 @@
     <div class="row">
     {% for journal in journals %}
       <div class="col-md-4">
-        <a class="btn btn-default btn-block" href="{% url 'journal:journal-information-update' journal.code %}">
+        <a class="btn btn-default btn-block" href="{% url 'userspace:journal:journal-information-update' journal.code %}">
           {{ journal.name }}
         </a>
       </div>

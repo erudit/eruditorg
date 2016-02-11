@@ -14,7 +14,7 @@
         <ul class="nav nav-pills">
           {% for langcode, langname in LANGUAGES %}
           <li role="presentation"{% if langcode == selected_language %} class="active"{% endif %}>
-            <a href="{% url 'journal:journal-information-update' code=journal_code %}?lang={{ langcode }}">{{ langname }}</a>
+            <a href="{% url 'userspace:journal:journal-information-update' code=journal_code %}?lang={{ langcode }}">{{ langname }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -24,7 +24,7 @@
       <div class="col-md-12">
         <form  class="form-vertical"
                method="post"
-               action="{% url 'journal:journal-information-update' code=journal_code %}?lang={{ selected_language }}">
+               action="{% url 'userspace:journal:journal-information-update' code=journal_code %}?lang={{ selected_language }}">
           {% crispy form %}
         </form>
       </div>

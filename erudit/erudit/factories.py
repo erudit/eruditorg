@@ -35,6 +35,13 @@ class JournalFactory(factory.django.DjangoModelFactory):
                 self.publishers.add(group)
 
 
+class JournalInformationFactory(factory.django.DjangoModelFactory):
+    journal = factory.SubFactory(JournalFactory)
+
+    class Meta:
+        model = 'erudit.journalinformation'
+
+
 class IssueFactory(factory.django.DjangoModelFactory):
 
     class Meta:

@@ -6,7 +6,7 @@
 
 <h1>{% trans "Permissions" %} </h1>
 
-<a class="btn btn-primary" href="{% url 'userspace:perm_create' %}">
+<a class="btn btn-primary" href="{% url 'userspace:permissions:perm_create' %}">
     {% trans "Ajouter un accès" %}
 </a>
 
@@ -54,7 +54,7 @@
             <td>{{ rule.permission }}</td>
             <td>{{ rule.content_object }}</td>
             <td>
-                <a href="{% url 'userspace:perm_delete' rule.pk %}">
+                <a href="{% url 'userspace:permissions:perm_delete' rule.pk %}">
                     {% trans 'Supprimer' %}
                 </a>
             </td>

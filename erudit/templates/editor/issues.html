@@ -15,7 +15,7 @@
         <h2>{% trans "Historique des dépôts de numéros" %}</h2>
       </div>
       <div class="col-sm-6 text-right">
-        <a href="{% url 'editor:add' %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
+        <a href="{% url 'userspace:editor:add' %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
       </div>
     </div>
     <div class="row card-body">
@@ -42,7 +42,7 @@
                 {{ issue_submission.journal }}
               </td>
               <td>
-                <a href="{% url 'editor:update' issue_submission.pk %}">
+                <a href="{% url 'userspace:editor:update' issue_submission.pk %}">
                   {{ issue_submission.year }},
                   {% if issue_submission.volume %}
                   {% trans "vol." %} {{ issue_submission.volume }},

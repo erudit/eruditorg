@@ -1,9 +1,8 @@
 # from datetime import datetime
 from django.contrib.auth.models import User
 
+from core.editor.tests.base import BaseEditorTestCase
 from erudit.models import Publisher
-
-from editor.tests.base import BaseEditorTestCase
 from erudit.utils.mandragore import (
     create_mandragore_profile_for_user,
     user_coherent_with_mandragore,
