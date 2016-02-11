@@ -7,6 +7,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.utils.translation import get_language
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
@@ -28,7 +29,7 @@ from erudit.utils.pdf import generate_pdf
 from .forms import JournalInformationForm
 from .models import JournalInformation
 from .rules_helpers import get_editable_journals
-from .viewmixins import JournalCodeDetailMixin
+from .viewmixins import JournalCodeDetailMixin, JournalBreadcrumbsMixin
 
 
 class JournalInformationDispatchView(RedirectView):
@@ -52,7 +53,7 @@ class JournalInformationDispatchView(RedirectView):
             raise PermissionDenied
 
 
-class JournalInformationListView(ListView):
+class JournalInformationListView(JournalBreadcrumbsMixin, ListView):
     """
     Displays a list of Journal instances whose information can be edited by
     the current user.
@@ -67,7 +68,10 @@ class JournalInformationListView(ListView):
         return qs.order_by('name')
 
 
-class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMixin, UpdateView):
+class JournalInformationUpdateView(JournalBreadcrumbsMixin,
+                                   PermissionRequiredMixin,
+                                   JournalCodeDetailMixin,
+                                   UpdateView):
     """
     Displays a form to update journal information. JournalInformation instances
     can hold information in many languages. The language used to save the values
@@ -81,6 +85,9 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
     permission_required = ['journal.edit_journal', ]
     raise_exception = True
     template_name = 'journal_information_update.html'
+
+    def get_title(self):
+        return _("Éditer une revue")
 
     @property
     def selected_language(self):

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n staticfiles rules %}
+{% load i18n staticfiles rules navutils_tags %}
 
 {% block header %}
 <header>
@@ -34,44 +34,13 @@
 {% endblock %}
 
 {% block nav %}
-<nav class="sidenav"> {# TODO handle class active for menu #}
+
+<nav class="sidenav">
+{% render_menu menu=menus.main user=request.user %}
+</nav>
+{% comment %}
+<nav class="sidenav">
   <ul>
-
-    {% has_perm 'journal.edit_journal' request.user as can_edit_journal %}
-    {% if can_edit_journal %}
-    <li>
-      <a href="{% url 'journal:journal-information' %}">
-        <span class="icon fa fa-folder-o"></span> <span class="sidenav-label">{% trans "Informations de la revue" %}</span>
-      </a>
-    </li>
-    {% endif %}
-
-    {% has_perm 'editor.manage_issuesubmission' request.user as can_manage_issuesubmission %}
-    {% if can_manage_issuesubmission %}
-    <li>
-      <a href="{% url 'editor:issues' %}" {% url 'editor:issues' as issues %}>
-        <span class="icon fa fa-folder-open-o"></span> <span class="sidenav-label">{% trans "Dépôt de numéros" %}</span>
-      </a>
-    </li>
-    {% endif %}
-
-    {% has_perm 'userspace.manage_permissions' request.user as can_manage_permissions %}
-    {% if can_manage_permissions %}
-    <li>
-    <a href="{% url 'userspace:perm_list' %}">
-        <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Permissions" %}</span>
-      </a>
-    </li>
-    {% endif %}
-
-    {% has_perm 'individual_subscription.manage_account' request.user as can_manage_individual_subscription %}
-    {% if can_manage_individual_subscription %}
-    <li>
-    <a href="{% url 'individual_subscription:account_list' %}">
-        <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Gestion des utilisateurs" %}</span>
-      </a>
-    </li>
-    {% endif %}
     <li>
       <a href="#" class="disabled">
         <span class="icon icon-epub"></span> <span class="sidenav-label">{% trans "Dépôt EPUB" %}</span>
@@ -104,6 +73,7 @@
     </li>
   </ul>
 </nav>
+{% endcomment %}
 {% endblock %}
 
 {% block content %}
@@ -116,7 +86,7 @@
   <div class="container-fluid">
     <div class="breadcrumbs">
       {% block breadcrumbs %}
-      {% trans "Espace utilisateur" %}
+      {% render_breadcrumbs breadcrumbs %}
       {% endblock %}
     </div>
     {% block content-main %}

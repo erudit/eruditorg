@@ -1,0 +1,10 @@
+{% load navutils_tags %}
+
+<li class="{% block crumb_class %}crumb{% if crumb.css_class %} {{ crumb.css_class }}{% endif %}{% endblock %}{% if last %} active{% endif %}">
+
+{% if last %}
+{{ crumb.label }}
+{% else %}
+<a href="{{ crumb.get_url }}">{{ crumb.label }}</a>
+{% endif %}
+</li>

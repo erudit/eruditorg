@@ -3,12 +3,22 @@ from django.views.generic import (TemplateView, CreateView,
                                   DeleteView, ListView)
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext_lazy as _
 
 from rules.contrib.views import PermissionRequiredMixin
+from navutils import BreadcrumbsMixin, Breadcrumb
 
 from permissions.models import Rule
 
 from .forms import RuleForm
+
+
+class UserspaceBreadcrumbsMixin(BreadcrumbsMixin):
+    def get_breadcrumbs(self):
+        breadcrumbs = super(UserspaceBreadcrumbsMixin, self).get_breadcrumbs()
+        breadcrumbs.append(Breadcrumb(_("Mon espace"),
+                                      pattern_name='userspace:dashboard'))
+        return breadcrumbs
 
 
 class LoginRequiredMixin(object):
@@ -19,7 +29,7 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(UserspaceBreadcrumbsMixin, LoginRequiredMixin, TemplateView):
     template_name = 'userspace/dashboard.html'
 
 
@@ -33,15 +43,27 @@ class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
         return qs.filter(content_type=ct, object_id__in=ids)
 
 
-class PermissionsListView(PermissionsCheckMixin, ListView):
+class PermissionsBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
+
+    def get_breadcrumbs(self):
+        breadcrumbs = super(PermissionsBreadcrumbsMixin, self).get_breadcrumbs()
+        breadcrumbs.append(Breadcrumb(_("Permissions"),
+                                      pattern_name='userspace:perm_list'))
+        return breadcrumbs
+
+
+class PermissionsListView(PermissionsBreadcrumbsMixin,
+                          PermissionsCheckMixin, ListView):
     model = Rule
     template_name = 'userspace/perm_list.html'
 
 
-class PermissionsCreateView(PermissionsCheckMixin, CreateView):
+class PermissionsCreateView(PermissionsBreadcrumbsMixin,
+                            PermissionsCheckMixin, CreateView):
     model = Rule
     form_class = RuleForm
     template_name = 'userspace/perm_create.html'
+    title = _("Ajouter une permission")
 
     def get_form_kwargs(self):
         kwargs = super(PermissionsCreateView, self).get_form_kwargs()
@@ -52,9 +74,13 @@ class PermissionsCreateView(PermissionsCheckMixin, CreateView):
         return reverse('userspace:perm_list')
 
 
-class PermissionsDeleteView(PermissionsCheckMixin, DeleteView):
+class PermissionsDeleteView(PermissionsBreadcrumbsMixin,
+                            PermissionsCheckMixin, DeleteView):
     model = Rule
     template_name = 'userspace/perm_confirm_delete.html'
+
+    def get_title(self):
+        return _("Supprimer une permission")
 
     def get_success_url(self):
         return reverse('userspace:perm_list')
