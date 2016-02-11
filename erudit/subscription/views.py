@@ -14,7 +14,7 @@ from subscription import report
 
 def email(request):
     c = {}
-    return render(request, 'subscription_renewal_email.html', context=c)
+    return render(request, 'subscription/subscription_renewal_email.html', context=c)
 
 
 def _send_emails(request, renewals, is_test=True):
@@ -23,7 +23,7 @@ def _send_emails(request, renewals, is_test=True):
         report_data = report.generate_report(renewal)
         pdf = ContentFile(report_data)
 
-        template = get_template('subscription_renewal_email.html')
+        template = get_template('subscription/subscription_renewal_email.html')
         context = {'renewal_number': renewal.renewal_number}
         html_message = template.render(context)
 
@@ -75,7 +75,7 @@ def confirm_test(request):
 
     return render(
         request,
-        'send_email.html',
+        'subscription/send_email.html',
         context={
             'renewals': renewals,
             'test': 'TEST'
@@ -103,7 +103,7 @@ def confirm_send(request):
 
     return render(
         request,
-        'send_email.html',
+        'subscription/send_email.html',
         context={
             'renewals': renewals,
         }

@@ -60,7 +60,7 @@ class JournalInformationListView(ListView):
     context_object_name = 'journals'
     model = Journal
     paginate_by = 36
-    template_name = 'journal_information_list.html'
+    template_name = 'journal/journal_information_list.html'
 
     def get_queryset(self):
         qs = get_editable_journals(self.request.user)
@@ -80,7 +80,7 @@ class JournalInformationUpdateView(PermissionRequiredMixin, JournalCodeDetailMix
     model = JournalInformation
     permission_required = ['journal.edit_journal', ]
     raise_exception = True
-    template_name = 'journal_information_update.html'
+    template_name = 'journal/journal_information_update.html'
 
     @property
     def selected_language(self):
@@ -121,14 +121,14 @@ class JournalDetailView(JournalCodeDetailMixin, DetailView):
     """
     context_object_name = 'journal'
     model = Journal
-    template_name = 'journal_detail.html'
+    template_name = 'journal/journal_detail.html'
 
 
 class ArticlePdfView(TemplateView):
     """
     Displays a page allowing to browse the PDF file associated with an article.
     """
-    template_name = 'article_pdf.html'
+    template_name = 'journal/article_pdf.html'
 
     def get_context_data(self, **kwargs):
         context = super(ArticlePdfView, self).get_context_data(**kwargs)
@@ -162,7 +162,8 @@ class ArticleRawPdfView(View):
             'fedora_object': EruditArticle(fedora_article.xml_content),
         }
         coverpage = generate_pdf(
-            'article_pdf_coverpage.html', context=RequestContext(request).update(coverpage_context),
+            'journal/article_pdf_coverpage.html',
+            context=RequestContext(request).update(coverpage_context),
             base_url=request.build_absolute_uri('/'))
 
         # Merges the cover page and the full article
