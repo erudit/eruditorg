@@ -35,8 +35,8 @@ urlpatterns = i18n_patterns(
         TemplateView.as_view(template_name='pdf_viewer.html'), name='pdf-viewer'),
 
     # Apps
-    url(r'^', include('apps.public.urls')),
     url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
+    url(r'^', include('apps.public.urls')),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
