@@ -1,13 +1,44 @@
 {% extends "base_userspace.html" %}
 {% load i18n %}
 
+{% block page-title %}{% trans "Permissions" %}{% endblock %}
+
+{% load crispy_forms_tags %}
 {% block content-main %}
-
-<h1>{% trans "Ajouter un accès" %} </h1>
-
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" />
-</form>
-
+<div class="col-md-6 col-md-offset-3 col-xs-12">
+  <section class="card card-upload_form">
+    <div class="card-header">
+      <h2>{% trans "Ajouter un accès" %}</h2>
+    </div>
+    <div class="card-body">
+      <form class="row form-vertical" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="alert alert-warning">{% trans "Veuillez remplir les champs obligatoires." %}</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="form-group col-xs-12 {% if form.journal.errors %}error{% endif %}">
+          {{ form.journal.label_tag }}
+          {{ form.journal }}
+        </div>
+        <div class="form-group col-sm-12 {% if form.user.errors %}error{% endif %}">
+          {{ form.user.label_tag }}
+          {{ form.user }}
+        </div>
+        <div class="form-group col-sm-12 {% if form.permission.errors %}error{% endif %}">
+          {{ form.permission.label_tag }}
+          {{ form.permission }}
+        </div>
+        <div class="form-group text-right">
+          <button type="submit" class="btn btn-primary" id="submit-id-submit">
+            {% trans "Enregistrer" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
 {% endblock %}

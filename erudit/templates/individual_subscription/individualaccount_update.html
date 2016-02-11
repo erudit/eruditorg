@@ -1,13 +1,24 @@
 {% extends "individual_subscription/base_individual_subscription.html" %}
 {% load i18n %}
 
+{% load crispy_forms_tags %}
 {% block content-main %}
-
-<h1>{% trans "Modifier le compte de " %} {{ object }}</h1>
-
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" />
-</form>
-
+<div class="col-md-6 col-md-offset-3 col-xs-12">
+  <section class="card card-upload_form">
+    <div class="card-header">
+      <h2>{% trans "Modifier le compte de " %} {{ object }}</h2>
+    </div>
+    <div class="card-body">
+      <form action="" class="row" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group text-right">
+          <button type="submit" class="btn btn-primary" id="submit-id-submit">
+            {% trans "Confirmer" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
 {% endblock %}
