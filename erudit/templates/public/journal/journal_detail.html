@@ -2,5 +2,49 @@
 {% load i18n staticfiles %}
 
 {% block content %}
-    <h1>{{ journal.fedora_object.name }}</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ journal.fedora_object.name }}</h1>
+        </div>
+      </div>
+      {% if journal_info %}
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#about" aria-controls="about" role="tab" data-toggle="tab">{% trans "À propos" %}</a>
+              </li>
+              <li role="presentation">
+                <a href="#editorial_policy" aria-controls="editorial_policy" role="tab" data-toggle="tab">{% trans "Politique éditoriale" %}</a>
+              </li>
+              <li role="presentation">
+                <a href="#subscriptions" aria-controls="subscriptions" role="tab" data-toggle="tab">{% trans "Abonnements" %}</a>
+              </li>
+              <li role="presentation">
+                <a href="#team" aria-controls="team" role="tab" data-toggle="tab">{% trans "Équipe" %}</a>
+              </li>
+            </ul>
+            {% trans "Aucune information" as tab_empty_msg %}
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="about">
+                {{ journal_info.about|default:tab_empty_msg|safe }}
+              </div>
+              <div role="tabpanel" class="tab-pane" id="editorial_policy">
+                {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
+              </div>
+              <div role="tabpanel" class="tab-pane" id="subscriptions">
+                {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
+              </div>
+              <div role="tabpanel" class="tab-pane" id="team">
+                {{ journal_info.team|default:tab_empty_msg|safe }}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
 {% endblock content %}
