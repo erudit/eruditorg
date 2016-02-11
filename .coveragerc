@@ -6,3 +6,4 @@ exclude_lines =
 omit =
     *manage*
     *migrations*
+    *legacy_models*
