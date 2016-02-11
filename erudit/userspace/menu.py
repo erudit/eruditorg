@@ -10,6 +10,7 @@ userspace = menu.Node(
     id='userspace',
     label=_('Mon espace'),
     pattern_name='userspace:dashboard',
+    context={'icon': 'fa-home'},
 )
 main_menu.register(userspace)
 
@@ -18,6 +19,7 @@ journal = menu.AnyPermissionsNode(
     label=_('Information de la revue'),
     pattern_name='journal:journal-information',
     permissions=['journal.edit_journal', ],
+    context={'icon': 'fa-folder-o'},
 )
 
 editor = menu.AnyPermissionsNode(
@@ -25,6 +27,7 @@ editor = menu.AnyPermissionsNode(
     label=_('Dépôts de numéros'),
     pattern_name='editor:issues',
     permissions=['editor.manage_issuesubmission', ],
+    context={'icon': 'fa-folder-open-o'},
 )
 
 permissions = menu.AnyPermissionsNode(
@@ -32,6 +35,7 @@ permissions = menu.AnyPermissionsNode(
     label=_('Permissions'),
     pattern_name='userspace:perm_list',
     permissions=['userspace.manage_permissions', ],
+    context={'icon': 'fa-lock'},
 )
 
 individual_subscription = menu.AnyPermissionsNode(
@@ -39,6 +43,7 @@ individual_subscription = menu.AnyPermissionsNode(
     label=_('Abonnements individuels'),
     pattern_name='individual_subscription:account_list',
     permissions=['individual_subscription.manage_account', ],
+    context={'icon': 'fa-users'},
 )
 
 userspace.children.append(journal)
