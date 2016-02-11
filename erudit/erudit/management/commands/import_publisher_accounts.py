@@ -1,6 +1,6 @@
 import logging
 
-from erudit.models.core import Publisher, Journal
+from erudit.models.core import Publisher, Journal, Collection
 
 from erudit.utils.edinum import (
     fetch_publishers_from_edinum,
@@ -25,7 +25,7 @@ class Command(BaseCommand):
         for publisher_row in fetch_publishers_from_edinum():
             (person_id, publisher_name, series_id, journal_id,
              journal_name, journal_shortname, journal_localidentifier,
-             journal_subtitle) = publisher_row
+             coll_id, journal_subtitle) = publisher_row
 
             if person_id not in self.created_or_updated_publishers:
                 publisher = create_or_update_publisher(
@@ -35,13 +35,19 @@ class Command(BaseCommand):
 
                 self.created_or_updated_publishers.append(person_id)
 
+            try:
+                journal_collection = Collection.objects.get(edinum_id=coll_id)
+            except:
+                journal_collection = None
+
             create_or_update_journal(
                 publisher,
                 journal_id,
                 journal_name,
                 journal_shortname,
                 journal_localidentifier,
-                journal_subtitle
+                journal_subtitle,
+                journal_collection
             )
 
             self.created_or_updated_journals.append(journal_shortname)

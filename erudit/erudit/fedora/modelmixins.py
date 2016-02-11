@@ -2,7 +2,6 @@
 
 from django.utils.functional import cached_property
 
-from .conf import settings
 from .repository import api
 
 
@@ -20,16 +19,9 @@ class FedoraMixin(object):
         """
         return self.localidentifier
 
-    def get_pid(self):
-        """
-        Returns the full PID of the considered object.
-        """
-        identifier = self.get_full_identifier()
-        return settings.PID_PREFIX + identifier if identifier else None
-
     @property
     def pid(self):
-        return self.get_pid()
+        return self.get_full_identifier()
 
     def get_fedora_model(self):
         """

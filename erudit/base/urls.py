@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
@@ -21,7 +22,7 @@ from django.views.generic import TemplateView
 from . import urls_compat
 
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     url('^', include('django.contrib.auth.urls')),
 
     url(r'^grappelli/', include('grappelli.urls')),
@@ -57,4 +58,4 @@ urlpatterns = [
 
     # Catchall
     url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
-]
+)

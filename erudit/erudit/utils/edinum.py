@@ -37,6 +37,19 @@ def fetch_publishers_from_edinum():
     return cur.fetchall()
 
 
+def fetch_collections_from_edinum():
+    COLLECTIONS_QUERY = "SELECT id, Name from Collection;"
+    edinum = settings.EXTERNAL_DATABASES['edinum']
+    with pymysql_connection(
+        host=edinum['HOST'],
+        username=edinum['USER'],
+        password=edinum['PASSWORD'],
+        database=edinum['NAME']
+    ) as cur:
+        cur.execute(COLLECTIONS_QUERY)
+        return cur.fetchall()
+
+
 def fetch_publisher_journals_from_edinum():
     PUBLISHER_JOURNALS_QUERY = """SELECT c.PersonID, t.id as journal_id
 FROM edinum.contributionseries cs
@@ -57,7 +70,7 @@ WHERE ContributiontypeID = '3';"""
 
 def create_or_update_journal(
         publisher, journal_id, journal_name,
-        journal_shortname, journal_localidentifier, journal_subtitle):
+        journal_shortname, journal_localidentifier, journal_subtitle, journal_collection):
 
     journal_count = Journal.objects.filter(
         code=journal_shortname
@@ -81,6 +94,7 @@ def create_or_update_journal(
             journal.localidentifier = journal_localidentifier
             journal.subtitle = journal_subtitle
             journal.sync_date = datetime.now()
+            journal.collection = journal_collection
             journal.save()
             journal.publishers.add(publisher)
             journal.save()
@@ -91,6 +105,7 @@ def create_or_update_journal(
             code=journal_shortname,
             subtitle=journal_subtitle,
             localidentifier=journal_localidentifier,
+            collection=journal_collection,
             synced_with_edinum=True,
             edinum_id=journal_id,
             sync_date=datetime.now(),
