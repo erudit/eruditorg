@@ -22,4 +22,7 @@ urlpatterns = [
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
+
+    # Journal catchall
+    url(r'^(?P<code>[\w-]+)/$', views.JournalDetailView.as_view(), name='journal-detail'),
 ]
