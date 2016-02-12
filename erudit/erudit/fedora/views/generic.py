@@ -59,10 +59,10 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         Returns the PID of the fedora object that will be retrieved by the view.
 
         By default this has the same requires as the
-        `django.views.generic.detail.SingleObjectMixin.get_object` method because the
-        considered object is expected to be an instance of a Fedora Django model, which is
-        helpful to retrieve the Fedora PID. But subclasses can override this to control the
-        way the Fedora PID is generated.
+        :meth:`get_object<django:django.views.generic.detail.SingleObjectMixin.get_object>` method
+        because the considered object is expected to be an instance of a Fedora Django model,
+        which is helpful to retrieve the Fedora PID. But subclasses can override this to control
+        the way the Fedora PID is generated.
         """
         try:
             obj = self.get_object()
