@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
+
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 
@@ -25,6 +27,46 @@ class TestJournal(BaseEruditTestCase):
         self.journal.save()
         # Run & check
         self.assertEqual(self.journal.pid, 'erudit:erudit.dummy139')
+
+    def test_can_return_its_published_issues(self):
+        # Setup
+        issue_1 = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        IssueFactory.create(journal=self.journal, date_published=None)
+        # Run & check
+        self.assertEqual(list(self.journal.published_issues), [issue_1, issue_2, ])
+
+    def test_can_return_its_first_issue(self):
+        # Setup
+        issue_1 = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        IssueFactory.create(journal=self.journal, date_published=None)
+        # Run & check
+        self.assertEqual(self.journal.first_issue, issue_1)
+
+    def test_can_return_its_last_issue(self):
+        # Setup
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        IssueFactory.create(journal=self.journal, date_published=None)
+        # Run & check
+        self.assertEqual(self.journal.last_issue, issue_2)
+
+    def test_can_return_its_last_issue_with_open_access(self):
+        # Setup
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=2))
+        issue_2 = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1),
+            open_access=True)
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), open_access=False)
+        IssueFactory.create(journal=self.journal, date_published=None, open_access=True)
+        # Run & check
+        self.assertEqual(self.journal.last_oa_issue, issue_2)
 
 
 class TestIssue(BaseEruditTestCase):

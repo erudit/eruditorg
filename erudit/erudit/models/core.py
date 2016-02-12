@@ -353,17 +353,26 @@ class Journal(FedoraMixin, Named, Edinum):
         return EruditJournal
 
     # issues
+
+    @property
+    def published_issues(self):
+        return self.issues.filter(date_published__isnull=False)
+
+    @property
     def first_issue(self):
         """ Return the first published issue of this Journal """
-        pass
+        return self.published_issues.order_by('date_published').first()
 
+    @property
     def last_issue(self):
         """ Return the last published Issue of this Journal """
-        pass
+        return self.published_issues.order_by('-date_published').first()
 
+    @property
     def last_oa_issue(self):
         """ Return the last published Issue of this Journal that is available in open access """
-        pass
+        return self.published_issues.filter(open_access=True) \
+            .order_by('-date_published').first()
 
     # contract
     def has_active_contract(self):
@@ -471,12 +480,11 @@ class Issue(FedoraMixin, models.Model):
             )
 
     def __str__(self):
-        return "{:s} {:s} {:s} {:s}".format(
-            self.journal.code,
-            str(self.year),
-            self.volume,
-            self.number,
-        )
+        if self.volume and self.number and self.year:
+            return "{:s} {:s} {:s} {:s}".format(
+                self.journal.code, str(self.year),
+                self.volume, self.number)
+        return self.journal.code
 
     class Meta:
         verbose_name = _("Numéro")
