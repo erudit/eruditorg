@@ -17,7 +17,7 @@
         <h2>{% trans "Dernier numéro" %}</h2>
         <div class="row">
           <div class="col-md-3">
-            <img src="http://placehold.it/150x250" alt="" />
+            <img src="{% url 'journal:issue-coverpage' latest_issue.pk %}" alt="" />
           </div>
           <div class="col-md-9">
             TODO: issue metadata

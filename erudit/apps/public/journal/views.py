@@ -11,8 +11,10 @@ from core.journal.viewmixins import JournalCodeDetailMixin
 from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
+from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Journal
+from erudit.models import Issue
 from erudit.utils.pdf import generate_pdf
 
 
@@ -50,6 +52,16 @@ class JournalRawLogoView(JournalCodeDetailMixin, FedoraFileDatastreamView):
     datastream_name = 'logo'
     fedora_object_class = JournalDigitalObject
     model = Journal
+
+
+class IssueRawCoverpageView(FedoraFileDatastreamView):
+    """
+    Returns the image file associated with an Issue instance.
+    """
+    content_type = 'image/jpeg'
+    datastream_name = 'coverpage'
+    fedora_object_class = PublicationDigitalObject
+    model = Issue
 
 
 class ArticlePdfView(TemplateView):

@@ -14,6 +14,9 @@ urlpatterns = [
     url(_(r'^revue/(?P<code>[\w-]+)/logo.jpg$'),
         views.JournalRawLogoView.as_view(), name='journal-logo'),
 
+    url(_(r'^numero/(?P<pk>[\d-]+)/logo.jpg$'),
+        views.IssueRawCoverpageView.as_view(), name='issue-coverpage'),
+
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
         views.ArticlePdfView.as_view(), name='article-pdf'),
 
