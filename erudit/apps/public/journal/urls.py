@@ -11,6 +11,8 @@ from . import views
 urlpatterns = [
     url(_(r'^revue/(?P<code>[\w-]+)/$'),
         views.JournalDetailView.as_view(), name='journal-detail'),
+    url(_(r'^revue/(?P<code>[\w-]+)/logo.jpg$'),
+        views.JournalRawLogoView.as_view(), name='journal-logo'),
 
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
         views.ArticlePdfView.as_view(), name='article-pdf'),
