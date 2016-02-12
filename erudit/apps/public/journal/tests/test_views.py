@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
 import io
 import os
 import unittest.mock
@@ -9,6 +10,7 @@ from django.test import RequestFactory
 
 from apps.public.journal.views import ArticleRawPdfView
 from erudit.factories import CollectionFactory
+from erudit.factories import IssueFactory
 from erudit.factories import JournalFactory
 from erudit.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
@@ -34,6 +36,38 @@ class TestJournalDetailView(BaseEruditTestCase):
         self.assertEqual(response_2.status_code, 200)
         self.assertEqual(response_1.context['journal_info'], journal_info)
         self.assertTrue('journal_info' not in response_2.context)
+
+    def test_can_embed_the_publicated_issues_in_the_context(self):
+        # Setup
+        collection = CollectionFactory.create()
+        journal = JournalFactory.create(collection=collection)
+        JournalInformationFactory.create(journal=journal)
+        issue_1 = IssueFactory.create(
+            journal=journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now())
+        IssueFactory.create(journal=journal, date_published=None)
+        url = reverse('journal:journal-detail', kwargs={'code': journal.code})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['issues']), [issue_2, issue_1])
+
+    def test_can_embed_the_latest_issue_in_the_context(self):
+        # Setup
+        collection = CollectionFactory.create()
+        journal = JournalFactory.create(collection=collection)
+        JournalInformationFactory.create(journal=journal)
+        IssueFactory.create(
+            journal=journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now())
+        IssueFactory.create(journal=journal, date_published=None)
+        url = reverse('journal:journal-detail', kwargs={'code': journal.code})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['latest_issue'], issue_2)
 
 
 class TestArticlePdfView(BaseEruditTestCase):

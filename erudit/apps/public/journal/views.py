@@ -39,6 +39,10 @@ class JournalDetailView(JournalCodeDetailMixin, DetailView):
         else:
             context['journal_info'] = journal_info
 
+        # Fetches the published issues and the latest issue associated with the current journal
+        context['issues'] = self.object.published_issues.order_by('-date_published')
+        context['latest_issue'] = self.object.last_issue
+
         return context
 
 
