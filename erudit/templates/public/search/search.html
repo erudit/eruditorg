@@ -1,0 +1,37 @@
+{% extends "public/search/base.html" %}
+{% load i18n staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block page-title %}{% trans "Recherche" %}{% endblock %}
+
+{% block content-main %}
+<div class="search-form">
+    {% crispy form %}
+</div>
+
+<div class="search-results">
+    <h2>{% trans "Résultats" %}</h2>
+    <p>{{ results_count }} {% trans "résultats trouvé" %}</p>
+    <p>{% trans "Page" %} {{ current_page }} {% trans "de" %} {{ page_count }}</p>
+    {% if documents %}
+    <ul>
+        {% for document in documents %}
+        <li>
+            <p>{{ document.Titre_fr }}</p>
+            {% if document.Auteur_fac %}
+            <ul>
+                {% for author in document.Auteur_fac %}
+                <li>{{ author }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if document.AnneePublication %}
+            <p>{{ document.AnneePublication }}</p>
+            {% endif %}
+            <p><a href="#{{ document.ID }}">{% trans "Consulter le document" %}</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock content-main %}
