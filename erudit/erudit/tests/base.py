@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 
@@ -44,3 +45,7 @@ class BaseEruditTestCase(TestCase):
         self.other_journal = JournalFactory.create(publishers=[self.other_publisher])
         self.other_journal.members.add(self.other_user)
         self.other_journal.save()
+
+    def tearDown(self):
+        super(BaseEruditTestCase, self).tearDown()
+        cache.clear()

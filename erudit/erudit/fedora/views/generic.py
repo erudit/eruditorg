@@ -8,6 +8,7 @@ that involve Fedora and datastreams.
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
 from django.views.generic import View
 from django.views.generic.detail import SingleObjectMixin
 from eulfedora.util import RequestFailed
@@ -21,12 +22,17 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
     The FedoraFileDatastreamView CBV can be used to expose Fedora file datastreams
     through Django views.
     """
+    cache_timeout = 60  # This is expressed in seconds
     http_method_names = ['get', ]
 
     # The following attributes should be specified on each subclass
     content_type = None
     datastream_name = None
     fedora_object_class = None
+
+    def dispatch(self, *args, **kwargs):
+        return cache_page(self.cache_timeout)(
+            super(FedoraFileDatastreamView, self).dispatch)(*args, **kwargs)
 
     def get(self, request, **kwargs):
         self.request = request
