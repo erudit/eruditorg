@@ -354,12 +354,15 @@ class Journal(FedoraMixin, Named, Edinum):
 
     # issues
     def first_issue(self):
+        """ Return the first published issue of this Journal """
         pass
 
     def last_issue(self):
+        """ Return the last published Issue of this Journal """
         pass
 
     def last_oa_issue(self):
+        """ Return the last published Issue of this Journal that is available in open access """
         pass
 
     # contract
