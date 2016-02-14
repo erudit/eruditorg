@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import rules
-
-from core.userspace.rules import is_staff
-from core.userspace.rules import is_superuser
+from rules.predicates import is_staff, is_superuser
 
 from .rules_helpers import get_editable_journals
 

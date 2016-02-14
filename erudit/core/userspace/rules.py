@@ -1,17 +1,8 @@
 from django.contrib.contenttypes.models import ContentType
 import rules
-
+from rules.predicates import is_staff, is_superuser
 from core.permissions.models import Rule
-
-
-@rules.predicate
-def is_superuser(user):
-    return user.is_superuser
-
-
-@rules.predicate
-def is_staff(user):
-    return user.is_staff
+from core.permissions.predicates import HasPermission
 
 
 @rules.predicate
@@ -29,4 +20,5 @@ def can_manage_permissions(user, journal=None):
             permission='userspace.manage_permissions').count())
 
 rules.add_perm('userspace.manage_permissions',
-               is_superuser | is_staff | can_manage_permissions)
+               is_superuser | is_staff |
+               HasPermission("userspace.manage_permissions"))
