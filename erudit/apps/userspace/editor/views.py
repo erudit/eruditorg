@@ -20,7 +20,7 @@ class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
     def get_queryset(self):
         qs = super(IssueSubmissionCheckMixin, self).get_queryset()
         ids = [issue.id for issue in qs if self.request.user.has_perm(
-               'editor.manage_issuesubmission', issue)]
+               'editor.manage_issuesubmission', issue.journal)]
         return qs.filter(id__in=ids)
 
 
@@ -36,8 +36,11 @@ class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
 
     def get_form(self, form_class):
         form = super().get_form(form_class)
-
-        form.fields['journal'].queryset = self.request.user.journals.all()
+        qs = self.request.user.journals.all()
+        ids = [j.id for j in qs if self.request.user.has_perm(
+               'editor.manage_issuesubmission', j)]
+        qs.filter(id__in=ids)
+        form.fields['journal'].queryset = qs.filter(id__in=ids)
 
         form.fields['journal'].initial = form.fields['journal'].queryset.first()
 
@@ -54,6 +57,10 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'userspace/editor/form.html'
+
+    def get_permission_object(self):
+        obj = self.get_object()
+        return obj.journal
 
     def get_form(self, form_class):
         form = super().get_form(form_class)

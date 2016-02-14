@@ -11,13 +11,15 @@ class HasPermission(object):
     permission name.
     """
 
-    def __new__(cls, permission_name):
+    def __new__(cls, permission_name, foreign_key=None):
         def check(user, obj=None):
             if obj is None:
                 return bool(Rule.objects.filter(
                     user=user,
                     permission=permission_name).count())
             else:
+                if foreign_key:
+                    obj = getattr(obj, foreign_key)
                 app_label = obj._meta.app_label
                 model_name = obj.__class__.__name__.lower()
                 ct = ContentType.objects.get(app_label=app_label,
