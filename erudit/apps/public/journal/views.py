@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -62,6 +63,26 @@ class JournalRawLogoView(JournalCodeDetailMixin, FedoraFileDatastreamView):
     datastream_name = 'logo'
     fedora_object_class = JournalDigitalObject
     model = Journal
+
+
+class IssueDetailView(DetailView):
+    """
+    Displays an Issue instance.
+    """
+    context_object_name = 'issue'
+    model = Issue
+    template_name = 'public/journal/issue_detail.html'
+
+    def get_object(self, queryset=None):
+        if 'pk' in self.kwargs:
+            return super(IssueDetailView, self).get_object(queryset)
+        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueDetailView, self).get_context_data(**kwargs)
+
+        # TODO: fetches the articles associatd with the issue
+        return context
 
 
 class IssueRawCoverpageView(FedoraFileDatastreamView):

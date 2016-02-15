@@ -88,6 +88,29 @@ class TestArticlePdfView(BaseEruditTestCase):
         self.assertEqual(response.context['article_id'], article_id)
 
 
+class TestIssueDetailView(BaseEruditTestCase):
+    def test_works_with_pks(self):
+        # Setup
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        url = reverse('public:journal:issue-detail', kwargs={
+            'journal_code': self.journal.code, 'pk': issue.pk})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_works_with_localidentifiers(self):
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        url = reverse('public:journal:issue-detail', kwargs={
+            'journal_code': self.journal.code, 'localidentifier': issue.localidentifier})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+
 class TestArticleRawPdfView(BaseEruditTestCase):
     def setUp(self):
         super(TestArticleRawPdfView, self).setUp()

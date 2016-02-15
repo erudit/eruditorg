@@ -1,6 +1,8 @@
 {% extends "public/base.html" %}
 {% load i18n staticfiles %}
 
+{% block page-title %}{{ journal.name }}{% endblock page-title %}
+
 {% block content %}
   <div class="container">
     <div class="row">
@@ -77,14 +79,10 @@
     <div class="row">
       {% for issue in issues %}
       <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-3">
-            <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="" />
-          </div>
-          <div class="col-md-9">
-            <h3>#{{ issue.pk }}</h3>
-          </div>
-        </div>
+        <a class="btn btn-default btn-block"
+           href="{% url 'public:journal:issue-detail' journal_code=journal.code localidentifier=issue.localidentifier %}">
+          #{{ issue.pk }}
+        </a>
       </div>
       {% endfor %}
     </div>
