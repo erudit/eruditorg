@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12">
         <h1>{{ journal.name }}</h1>
-        <img src="{% url 'journal:journal-logo' journal.code %}" alt="" />
+        <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="" />
       </div>
     </div>
 
@@ -17,7 +17,7 @@
         <h2>{% trans "Dernier numéro" %}</h2>
         <div class="row">
           <div class="col-md-3">
-            <img src="{% url 'journal:issue-coverpage' latest_issue.pk %}" alt="" />
+            <img src="{% url 'public:journal:issue-coverpage' latest_issue.pk %}" alt="" />
           </div>
           <div class="col-md-9">
             TODO: issue metadata
@@ -79,7 +79,7 @@
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-3">
-            <img src="{% url 'journal:issue-coverpage' issue.pk %}" alt="" />
+            <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="" />
           </div>
           <div class="col-md-9">
             <h3>#{{ issue.pk }}</h3>
