@@ -12,3 +12,10 @@ Objects
 
  .. automodule :: erudit.fedora.objects
     :members:
+
+Generic views
+-------------
+
+ .. automodule :: erudit.fedora.views.generic
+    :members:
+    :show-inheritance:

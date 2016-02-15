@@ -111,7 +111,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         request = self.factory.get(url)
 
         # Run
-        response = ArticleRawPdfView.as_view()(request, journal_id, issue_id, article_id)
+        response = ArticleRawPdfView.as_view()(
+            request, journalid=journal_id, issueid=issue_id, articleid=article_id)
 
         # Check
         self.assertEqual(response.status_code, 200)
