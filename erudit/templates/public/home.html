@@ -22,8 +22,9 @@
       <div class="row">
         {% for issue in latest_issues %}
         <div class="col-md-6">
-          <a href="#">
-            <span class="title">#{{ issue.id }}</span>
+          <a class="btn btn-default btn-block"
+             href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+            #{{ issue.id }}
           </a>
         </div>
         {% endfor %}

@@ -16,6 +16,6 @@ class HomeView(TemplateView):
 
         # Includes the latest issues
         context['latest_issues'] = Issue.objects.filter(date_published__isnull=False) \
-            .order_by('-date_published')[:6]
+            .select_related('journal').order_by('-date_published')[:6]
 
         return context
