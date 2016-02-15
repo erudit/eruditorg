@@ -390,11 +390,25 @@ class Journal(FedoraMixin, Named, Edinum):
         ordering = ['name']
 
 
+JOURNAL_TYPE_CODE_CHOICES = [
+    ('C', _('Culturel')),
+    ('S', _('Savant')),
+]
+
+
 class JournalType(models.Model):
     """ The type of the Journal """
     name = models.CharField(
         max_length=255,
-        verbose_name=_("Nom"),
+        verbose_name=_('Nom'),
+        blank=True, null=True,
+    )
+
+    code = models.SlugField(
+        verbose_name=_('Code'),
+        max_length=2,
+        choices=JOURNAL_TYPE_CODE_CHOICES,
+        unique=True,
     )
 
     def __str__(self):
