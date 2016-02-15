@@ -3,6 +3,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.views.generic import DetailView
+from django.views.generic import ListView
 from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
@@ -16,6 +17,15 @@ from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Journal
 from erudit.models import Issue
 from erudit.utils.pdf import generate_pdf
+
+
+class JournalListView(ListView):
+    """
+    Displays a list of Journal instances.
+    """
+    context_object_name = 'journals'
+    model = Journal
+    template_name = 'public/journal/journal_list.html'
 
 
 class JournalDetailView(JournalCodeDetailMixin, DetailView):

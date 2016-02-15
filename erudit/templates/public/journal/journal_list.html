@@ -1,0 +1,23 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page-title %}{% trans "Revues" %}{% endblock page-title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        {% for journal in journals %}
+        <div class="col-md-4">
+          <a class="btn btn-default btn-block" href="{% url 'public:journal:journal-detail' journal.code %}">
+            {{ journal.name }}
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

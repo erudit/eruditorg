@@ -9,6 +9,9 @@ from . import views
 
 
 urlpatterns = [
+    url(_(r'^revues/$'),
+        views.JournalListView.as_view(), name='journal-list'),
+
     url(_(r'^revue/(?P<code>[\w-]+)/$'),
         views.JournalDetailView.as_view(), name='journal-detail'),
     url(_(r'^revue/(?P<code>[\w-]+)/logo.jpg$'),
