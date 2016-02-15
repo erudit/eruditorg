@@ -68,5 +68,27 @@
     </div>
     {% endif %}
 
+    {% if issues %}
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Historique des numéros" %}</h2>
+      </div>
+    </div>
+    <div class="row">
+      {% for issue in issues %}
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="{% url 'journal:issue-coverpage' issue.pk %}" alt="" />
+          </div>
+          <div class="col-md-9">
+            <h3>#{{ issue.pk }}</h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
   </div>
 {% endblock content %}
