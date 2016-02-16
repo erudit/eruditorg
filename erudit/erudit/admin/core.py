@@ -9,6 +9,7 @@ from erudit.models import (
     JournalInformation,
     JournalType,
     Issue,
+    Article,
     Publisher,
     Collection,
 )
@@ -63,6 +64,20 @@ class CollectionAdmin(admin.ModelAdmin):
             ),
         }),
     ]
+
+
+class IssueAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'journal', 'year', 'volume', 'number', 'title',
+    )
+
+
+class ArticleAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'issue', 'title'
+    )
 
 
 class JournalAdmin(admin.ModelAdmin):
@@ -153,9 +168,10 @@ class JournalInformationAdmin(TranslationAdmin):
 admin.site.register(Person)
 admin.site.register(Organisation)
 admin.site.register(Library)
+admin.site.register(Article, ArticleAdmin)
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(JournalType)
-admin.site.register(Issue)
+admin.site.register(Issue, IssueAdmin)
 admin.site.register(Publisher)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
