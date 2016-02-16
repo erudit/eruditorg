@@ -41,6 +41,12 @@ class MenuTestCase(TestCase):
         journal.members.add(user)
         journal.save()
 
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Rule.objects.create(content_type=ct,
+                            user=user,
+                            object_id=journal.id,
+                            permission="editor.manage_issuesubmission")
+
         url = reverse('userspace:editor:issues')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))

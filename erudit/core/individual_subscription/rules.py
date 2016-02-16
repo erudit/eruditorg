@@ -1,11 +1,11 @@
 import rules
+from rules.predicates import is_staff, is_superuser
 
-from core.userspace.rules import is_superuser, is_staff
 from .models import Policy
 
 
 @rules.predicate
-def can_manage_policy(user, policy=None):
+def is_policy_manager(user, policy=None):
     if policy is None:
         return bool(Policy.objects.filter(managers=user).count())
     else:
@@ -13,13 +13,13 @@ def can_manage_policy(user, policy=None):
 
 
 @rules.predicate
-def can_manage_account(user, account=None):
+def is_account_manager(user, account=None):
     if account is None:
         return bool(Policy.objects.filter(managers=user).count())
     else:
-        return can_manage_policy(user, account.policy)
+        return is_policy_manager(user, account.policy)
 
 rules.add_perm('individual_subscription.manage_policy',
-               is_superuser | is_staff | can_manage_policy)
+               is_superuser | is_staff | is_policy_manager)
 rules.add_perm('individual_subscription.manage_account',
-               is_superuser | is_staff | can_manage_account)
+               is_superuser | is_staff | is_account_manager)

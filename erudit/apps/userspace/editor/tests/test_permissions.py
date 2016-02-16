@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 
+from core.permissions.models import Rule
 from core.editor.factories import IssueSubmissionFactory
 from core.userspace.factories import UserFactory
 from erudit.factories import JournalFactory
@@ -33,6 +35,14 @@ class ViewsTestCase(TestCase):
                           password="user")
         url = reverse('userspace:editor:issues')
         response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Rule.objects.create(content_type=ct,
+                            user=self.user_granted,
+                            object_id=journal.id,
+                            permission="editor.manage_issuesubmission")
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_issuesubmission_add_restricted(self):
@@ -50,6 +60,14 @@ class ViewsTestCase(TestCase):
         self.client.login(username=self.user_granted.username,
                           password="user")
         url = reverse('userspace:editor:add')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Rule.objects.create(content_type=ct,
+                            user=self.user_granted,
+                            object_id=journal.id,
+                            permission="editor.manage_issuesubmission")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -72,6 +90,14 @@ class ViewsTestCase(TestCase):
                           password="user")
         url = reverse('userspace:editor:update', args=(issue.pk, ))
         response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Rule.objects.create(content_type=ct,
+                            user=self.user_granted,
+                            object_id=journal.id,
+                            permission="editor.manage_issuesubmission")
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
 
@@ -81,7 +107,8 @@ class RulesTestCase(TestCase):
         issue = IssueSubmissionFactory()
         user = UserFactory()
 
-        is_granted = user.has_perm('editor.manage_issuesubmission', issue)
+        is_granted = user.has_perm('editor.manage_issuesubmission',
+                                   issue.journal)
         self.assertEqual(is_granted, False)
 
     def test_user_can_manage(self):
@@ -89,9 +116,15 @@ class RulesTestCase(TestCase):
         user = UserFactory()
         journal.members.add(user)
         journal.save()
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Rule.objects.create(content_type=ct,
+                            user=user,
+                            object_id=journal.id,
+                            permission="editor.manage_issuesubmission")
         issue = IssueSubmissionFactory(journal=journal)
 
-        is_granted = user.has_perm('editor.manage_issuesubmission', issue)
+        is_granted = user.has_perm('editor.manage_issuesubmission',
+                                   issue.journal)
         self.assertEqual(is_granted, True)
 
     def test_superuser_can_manage(self):
