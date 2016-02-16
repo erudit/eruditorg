@@ -58,7 +58,7 @@ class FedoraMixin(object):
         Returns the liberuditarticle's object associated with the considered Django object.
         """
         # TODO: this should be updated when the work on liberuditarticle is done.
-        return self.erudit_class()
+        return self.erudit_class(self.fedora_object.xml_content)
 
     @property
     def erudit_object(self):
