@@ -16,6 +16,11 @@ class JournalDigitalObject(models.DigitalObject):
     logo = models.FileDatastream(
         'LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
 
+    @property
+    def xml_content(self):  # pragma: no cover
+        # TODO: add a way to retrieve Journal XML content
+        return ''
+
 
 class PublicationDigitalObject(models.DigitalObject):
     """ Fedora object of an :py:class:`Issue <erudit.models.core.Issue>` """
@@ -26,6 +31,14 @@ class PublicationDigitalObject(models.DigitalObject):
     coverpage = models.FileDatastream(
         'COVERPAGE', 'Coverpage', defaults={'mimetype': 'image/jpeg', })
     pages = models.XmlDatastream('PAGES', 'Pages', XmlObject)
+
+    @property
+    def xml_content(self):
+        """ Returns the XML content of the publication.
+
+        The XML content comes from the ``SUMMARY`` datastream.
+        """
+        return self.summary.content.serialize()
 
 
 class ArticleDigitalObject(models.DigitalObject):
@@ -39,7 +52,7 @@ class ArticleDigitalObject(models.DigitalObject):
 
     @property
     def xml_content(self):
-        """ Return the parsed XML content of the article
+        """ Return the XML content of the article
 
         An Article object contains datastreams for one or more of the
         following schema specifications.

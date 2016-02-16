@@ -5,6 +5,7 @@
 {% block page-title %}{% trans "Accueil" %}{% endblock page-title %}
 
 {% block content %}
+{% trans "inconnu" as i18n_unknown %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -24,7 +25,9 @@
         <div class="col-md-6">
           <a class="btn btn-default btn-block"
              href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
-            #{{ issue.id }}
+             {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
+               Numéro {{ number }} - {{ date }}
+             {% endblocktrans %}
           </a>
         </div>
         {% endfor %}

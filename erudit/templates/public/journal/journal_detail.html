@@ -4,6 +4,7 @@
 {% block page-title %}{{ journal.name }}{% endblock page-title %}
 
 {% block content %}
+  {% trans "inconnu" as i18n_unknown %}
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -22,7 +23,12 @@
             <img src="{% url 'public:journal:issue-coverpage' latest_issue.pk %}" alt="" />
           </div>
           <div class="col-md-9">
-            TODO: issue metadata
+            <p class="number">
+            {% blocktrans trimmed with number=latest_issue.erudit_object.number|default:i18n_unknown date=latest_issue.date_published|date:"F Y" %}
+              Numéro {{ number }} - {{ date }}
+            {% endblocktrans %}
+            </p>
+            <p class="theme"><b>{{ latest_issue.erudit_object.theme }}</b></p>
           </div>
         </div>
       </div>
@@ -81,7 +87,9 @@
       <div class="col-md-6">
         <a class="btn btn-default btn-block"
            href="{% url 'public:journal:issue-detail' journal_code=journal.code localidentifier=issue.localidentifier %}">
-          #{{ issue.pk }}
+          {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
+            Numéro {{ number }} - {{ date }}
+          {% endblocktrans %}
         </a>
       </div>
       {% endfor %}
