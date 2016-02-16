@@ -9,10 +9,18 @@ from . import views
 
 
 urlpatterns = [
+    url(_(r'^revues/$'),
+        views.JournalListView.as_view(), name='journal-list'),
+
     url(_(r'^revue/(?P<code>[\w-]+)/$'),
         views.JournalDetailView.as_view(), name='journal-detail'),
     url(_(r'^revue/(?P<code>[\w-]+)/logo.jpg$'),
         views.JournalRawLogoView.as_view(), name='journal-logo'),
+
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<pk>\d+)/$'),
+        views.IssueDetailView.as_view(), name='issue-detail'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<localidentifier>[\w-]+)/$'),
+        views.IssueDetailView.as_view(), name='issue-detail'),
 
     url(_(r'^numero/(?P<pk>[\d-]+)/logo.jpg$'),
         views.IssueRawCoverpageView.as_view(), name='issue-coverpage'),

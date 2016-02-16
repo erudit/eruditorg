@@ -26,8 +26,8 @@ class TestJournalDetailView(BaseEruditTestCase):
         journal_1 = JournalFactory.create(collection=collection)
         journal_2 = JournalFactory.create(collection=collection)
         journal_info = JournalInformationFactory.create(journal=journal_1)
-        url_1 = reverse('journal:journal-detail', kwargs={'code': journal_1.code})
-        url_2 = reverse('journal:journal-detail', kwargs={'code': journal_2.code})
+        url_1 = reverse('public:journal:journal-detail', kwargs={'code': journal_1.code})
+        url_2 = reverse('public:journal:journal-detail', kwargs={'code': journal_2.code})
         # Run
         response_1 = self.client.get(url_1)
         response_2 = self.client.get(url_2)
@@ -46,7 +46,7 @@ class TestJournalDetailView(BaseEruditTestCase):
             journal=journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
         issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now())
         IssueFactory.create(journal=journal, date_published=None)
-        url = reverse('journal:journal-detail', kwargs={'code': journal.code})
+        url = reverse('public:journal:journal-detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
         # Check
@@ -62,7 +62,7 @@ class TestJournalDetailView(BaseEruditTestCase):
             journal=journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
         issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now())
         IssueFactory.create(journal=journal, date_published=None)
-        url = reverse('journal:journal-detail', kwargs={'code': journal.code})
+        url = reverse('public:journal:journal-detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
         # Check
@@ -76,7 +76,7 @@ class TestArticlePdfView(BaseEruditTestCase):
         journal_id = 'arbo139'
         issue_id = 'arbo1515298'
         article_id = '1001942ar'
-        url = reverse('journal:article-pdf', args=(
+        url = reverse('public:journal:article-pdf', args=(
             journal_id, issue_id, article_id
         ))
         # Run
@@ -86,6 +86,29 @@ class TestArticlePdfView(BaseEruditTestCase):
         self.assertEqual(response.context['journal_id'], journal_id)
         self.assertEqual(response.context['issue_id'], issue_id)
         self.assertEqual(response.context['article_id'], article_id)
+
+
+class TestIssueDetailView(BaseEruditTestCase):
+    def test_works_with_pks(self):
+        # Setup
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        url = reverse('public:journal:issue-detail', kwargs={
+            'journal_code': self.journal.code, 'pk': issue.pk})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_works_with_localidentifiers(self):
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        url = reverse('public:journal:issue-detail', kwargs={
+            'journal_code': self.journal.code, 'localidentifier': issue.localidentifier})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
 
 
 class TestArticleRawPdfView(BaseEruditTestCase):
@@ -105,7 +128,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         journal_id = 'dummy139'
         issue_id = 'dummy1515298'
         article_id = '1001942du'
-        url = reverse('journal:article-raw-pdf', args=(
+        url = reverse('public:journal:article-raw-pdf', args=(
             journal_id, issue_id, article_id
         ))
         request = self.factory.get(url)
@@ -127,7 +150,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         journal_id = 'dummy139'
         issue_id = 'dummy1515298'
         article_id = '1001942du'
-        url = reverse('journal:article-raw-pdf', args=(
+        url = reverse('public:journal:article-raw-pdf', args=(
             journal_id, issue_id, article_id
         ))
         # Run

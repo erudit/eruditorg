@@ -1,0 +1,42 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page-title %}{% trans "Accueil" %}{% endblock page-title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center"><img src="{% static "img/logo-erudit.png" %}" alt="" /></h1>
+    </div>
+  </div>
+  {% if latest_issues %}
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{% trans "Derniers numéros diffusés" %}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        {% for issue in latest_issues %}
+        <div class="col-md-6">
+          <a class="btn btn-default btn-block"
+             href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+            #{{ issue.id }}
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <a href="{% url 'public:journal:journal-list' %}">{% trans "Toutes les revues" %}</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
