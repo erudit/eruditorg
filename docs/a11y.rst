@@ -1,0 +1,87 @@
+Accessibilité
+=============
+
+Le projet doit être accessible aux personnes à visibilité réduite, donc il doit être facile
+d'utilisation lorsque navigué à l'aide de liseuses vocales.
+
+Bien qu'il existe des outils pour répertorier automatiquement des manquements au niveau a11y, ces
+outils ne pourront jamais remplir le rôle de l'évaluation humaine. Donc, l'approche par rapport à
+l'a11y ne doit pas être basée principalement sur ces outils.
+
+C'est pourquoi l'approche favorisée ici en est une basée sur des scénarios spécifiques, évalués par
+des humains.
+
+Fonctionnement
+--------------
+
+Il est difficile de reproduire l'expérience d'un aveugle sur un site parce qu'il faut non
+seulement installer des outils spécialisés, mais apprendre à s'en servir. Par contre, il est assez
+facile de reproduire des conditions qui nous en rapprochent assez bien:
+
+1. Désactiver tous les styles (Dans firefox: View -> Page Style -> No Style)
+2. `Désactiver les images <http://www.ghacks.net/2015/03/24/how-to-turn-off-images-in-firefox/>`_
+3. Déconnecter sa souris
+
+Ce sont dans ces conditions qu'on exécute les scénarios ci-dessous. On note ensuite toutes les
+difficultés de navigation qu'on rencontre et on crée un ticket pour régler ces difficultés. Il est
+aussi recommandé d'écrire des tests automatisés pour éviter des régressions.
+
+**Attention:** Parce que la refonte est trop récente pour qu'il soit possible d'y développer des
+scénarios stables, les scénarios ci-dessous sont des exemples de scénarios pour **l'ancien** site.
+
+Il faudra refaire des scénarios quand la refonte sera assez avancée.
+
+Scénario 1: Recherche de littérature secondaire
+-----------------------------------------------
+
+But: Faire une recherche des ouvrages disponibles qui parlent d'Arendt, voir le nombre de
+résultats, jeter un coup d'oeil aux premiers résultats, lire le résumé du premier résultat, et
+en télécharger le PDF.
+
+Expérience:
+
+* Date de l'expérience: 16/02/2016
+* http://www.erudit.org/
+* Tab 12 fois pour "Recherche détaillée" je choisis ce lien
+* Nouvelle page
+* Aucune description des champs de recherche
+* Tab 19 fois pour aller au premier champ de recherche
+* Taper Arendt
+* Tab 1 fois pour le sélecteur de type
+* Choisir Titre, résumé, mots-clé
+* Tab 7 fois pour aller à "Cherche", lancer la recherche
+* Passer au travers beaucoup, **beaucoup** de contenu avant d'arriver aux résultats
+* Deviner que ce qu'on voit (Tous [71], etc.) est le nombre de résutats
+* Deviner qu'on est arrivé au premier résultat avec "L'action collective pensée par Hannah Arendt"
+* Deviner que le résumé est après le lien "Consulter le document".
+* Lire le résumé
+* Faire la même chose pour quelques résultats en dessous
+* Choisir le premier lien "Consulter le document"
+* Nouvelle page
+* Tab 31 fois jusqu'au lien "Texte intégral PDF"
+
+Recommandations:
+
+*Ces recommandations, étant faites sans grande familiarité avec les grands principes du a11y, sont
+probablement incomplètes.*
+
+* Utiliser des balises ``h1`` et ``h2`` pour séparer les grandes sections des différentes pages.
+* Utiliser des balises ``ul/li`` pour faire l'énumération d'éléments (comme par exemple un listing
+  de résultats)
+* Ajouter un lien "Aller au contenu" pour éviter d'avoir à "tabber" à chaque fois au travers toute
+  la navigation du site.
+* Dans les résultats de recherche, ajouter un lien "Aller aux résutats de recherche" pour permettre
+  de rapidement passer au travers tous les champs d'options. Il y en a vraiment beaucoup.
+
+Rôle des outils automatiques
+----------------------------
+
+Quoi faire avec les outils de détection automatique de violations a11y comme par exemple
+`pa11y <https://github.com/springernature/pa11y>`_? On peut les considérer un peu comme un
+validateur W3C: Il est nécessaire d'être conforme à de tels outils, mais cette confirmité n'est
+pas suffisante pour s'assurer une accessibilité adéquate.
+
+Donc, le projet inclut des vérifications automatiques du type ``pa11y`` et il est important
+de régler les violations qu'on y trouve, mais nos vrais "générateurs d'accessibilité" sont nos
+scénarios. *Note: pas encore. l'intégration à pa11y sera faite plus tard.*
+

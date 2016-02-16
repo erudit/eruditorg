@@ -14,6 +14,7 @@ Documentation de Érudit.org
    core_models
    fedora
    backends
+   a11y
 
 Index et tableaux
 =================
