@@ -432,6 +432,12 @@ class Issue(FedoraMixin, models.Model):
         verbose_name=_("Revue"),
     )
 
+    title = models.CharField(
+        max_length=255,
+        null=True, blank=True,
+    )
+    """ The title of the issue """
+
     year = models.IntegerField(
         choices=YEARS,
         null=True, blank=True,
@@ -504,6 +510,43 @@ class Issue(FedoraMixin, models.Model):
         verbose_name = _("Numéro")
         verbose_name_plural = _("Numéros")
         ordering = ['journal', 'year', 'volume', 'number', ]
+
+
+class Article(models.Model, FedoraMixin):
+
+    surtitle = models.CharField(
+        max_length=500,
+        null=True, blank=True,
+    )
+
+    title = models.CharField(
+        max_length=500,
+        null=True, blank=True,
+    )
+    """ The title of the issue """
+
+    localidentifier = models.CharField(
+        max_length=50,
+        null=True, blank=True,
+        verbose_name=_("Identifiant Fedora")
+    )
+    """ The ``Fedora`` identifier of an article """
+
+    processing = models.CharField(
+        max_length=1,
+        choices=(
+            ('C', _('Complet')),
+            ('M', _('Minimal')),
+        )
+    )
+    """ Type of processing of the article """
+
+    # identification
+    issue = models.ForeignKey(
+        'Issue',
+        related_name='issues',
+        verbose_name=_("Numéro"),
+    )
 
 
 class Publisher(Edinum):
