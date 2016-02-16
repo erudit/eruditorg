@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.utils.functional import cached_property
+from eulfedora.util import RequestFailed
 
 from .repository import api
 
@@ -57,9 +59,16 @@ class FedoraMixin(object):
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
-        # TODO: this should be updated when the work on liberuditarticle is done.
-        return self.erudit_class(self.fedora_object.xml_content)
+        try:
+            # TODO: this should be updated when the work on liberuditarticle is done.
+            return self.erudit_class(self.fedora_object.xml_content)
+        except RequestFailed:
+            if settings.DEBUG:
+                # This case can appear really often during development if the
+                # Fedora dataset contains only a few entries.
+                return None
+            raise
 
-    @property
+    @cached_property
     def erudit_object(self):
         return self.get_erudit_object()
