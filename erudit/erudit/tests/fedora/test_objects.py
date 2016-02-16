@@ -5,7 +5,22 @@ import unittest.mock
 from django.test import TestCase
 
 from erudit.fedora.objects import ArticleDigitalObject
+from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.repository import api
+
+
+class TestPublicationDigitalObject(TestCase):
+    @unittest.mock.patch.object(PublicationDigitalObject, 'summary')
+    @unittest.mock.patch.object(PublicationDigitalObject, '_get_datastreams')
+    def test_can_return_its_xml_content_from_the_SUMMARY_datastrean(
+            self, mock_ds, mock_summary):
+        # Setup
+        mock_ds.return_value = ['SUMMARY', ]  # noqa
+        mock_summary.content = unittest.mock.MagicMock()
+        mock_summary.content.serialize = unittest.mock.MagicMock(return_value='summary')
+        publication = PublicationDigitalObject(api, 'test')
+        # Run & check
+        self.assertEqual(publication.xml_content, 'summary')
 
 
 class TestArticleDigitalObject(TestCase):

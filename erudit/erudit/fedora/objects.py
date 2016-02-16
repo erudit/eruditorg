@@ -17,7 +17,7 @@ class JournalDigitalObject(models.DigitalObject):
         'LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
 
     @property
-    def xml_content(self):
+    def xml_content(self):  # pragma: no cover
         # TODO: add a way to retrieve Journal XML content
         return ''
 
