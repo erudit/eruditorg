@@ -432,6 +432,12 @@ class Issue(FedoraMixin, models.Model):
         verbose_name=_("Revue"),
     )
 
+    title = models.CharField(
+        max_length=255,
+        null=True, blank=True,
+    )
+    """ The title of the issue """
+
     year = models.IntegerField(
         choices=YEARS,
         null=True, blank=True,
