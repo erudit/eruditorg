@@ -20,7 +20,16 @@ class Solr(object):
             "relevance": "score",
             "year": "AnneePublication",
             "author": "Auteur_tri",
-            "title": "Titre_fr",
+            "title": "Titre_idx",
+        }
+        self.filter_fields = {
+            "years": "AnneePublication",
+            # "article_types": "Corpus_fac",
+            "languages": "Langue",
+            # "collections": "",
+            "authors": "Auteur_tri",
+            "funds": "Fonds_fac",
+            "publication_types": "Corpus_fac",
         }
 
     def search(self, params):
@@ -35,12 +44,13 @@ class Solr(object):
             return {}
 
         else:
-            # try:
-            return response.json()
-            # except:
-            #    return {}
+            try:
+                return response.json()
+            except:
+                return {}
 
-    def simple_search(self, search_term, sort="relevance", sort_order="asc", start_at=0, results_per_query=10, ):
+    def simple_search(self, search_term, sort="relevance", sort_order="asc",
+                      start_at=0, results_per_query=10):
         """Simple search
 
         - search_term: search term to look for
@@ -65,7 +75,9 @@ class Solr(object):
         }
 
         # String to search for
-        params["q"] = "{simple_search_index}:{search_term}".format(simple_search_index=self.simple_search_index, search_term=search_term)
+        params["q"] = "{simple_search_index}:{search_term}".format(
+            simple_search_index=self.simple_search_index, search_term=search_term
+        )
 
         # Sort param
         if not (sort == "default"):
@@ -73,12 +85,17 @@ class Solr(object):
             sort_field = self.sort_fields.get(sort, None)
 
             if sort_field:
-                params["sort"] = "{sort_field} {sort_order}".format(sort_field=sort_field, sort_order=sort_order)
+                params["sort"] = "{sort_field} {sort_order}".format(
+                    sort_field=sort_field, sort_order=sort_order
+                )
 
         # Results per query
         params["rows"] = results_per_query
 
         # Start position (for pagination)
         params["start"] = start_at
+
+        # Filter fields params
+        params["filter.fields"] = (self.filter_fields.values())
 
         return self.search(params=params)
