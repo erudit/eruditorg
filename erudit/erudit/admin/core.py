@@ -68,8 +68,12 @@ class CollectionAdmin(admin.ModelAdmin):
 
 class IssueAdmin(admin.ModelAdmin):
 
+    search_fields = [
+        'id', 'localidentifier'
+    ]
+
     list_display = (
-        'journal', 'year', 'volume', 'number', 'title',
+        'journal', 'year', 'volume', 'number', 'title', 'localidentifier',
     )
 
 

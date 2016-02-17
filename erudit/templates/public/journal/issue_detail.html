@@ -3,3 +3,14 @@
 {% load static %}
 
 {% block page-title %}{{ issue.localidentifier }}{% endblock page-title %}
+
+{% block content %}
+  <h1>{{ issue.title }}</h1>
+
+  {% for article in articles %}
+    <article>
+      <h3>{{ article.title }}</h3>
+    </article>
+  {% endfor %}
+
+{% endblock %}

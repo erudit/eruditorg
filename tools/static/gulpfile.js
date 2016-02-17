@@ -24,7 +24,7 @@ var vendor_dir = static_dir + 'vendor/';
 function swallowError (error) {
   console.log(error.toString());
   this.emit('end');
-};
+}
 
 gulp.task('sass-erudit-main', function() {
   return gulp.src(sass_dir + 'main.scss')
@@ -33,7 +33,7 @@ gulp.task('sass-erudit-main', function() {
     .pipe(rename(function (path) {
       path.dirname += "/";
       path.basename += "-dev";
-      path.extname = ".css"
+      path.extname = ".css";
     }))
     .pipe(gulp.dest(css_dir))
     .pipe(livereload());
@@ -46,7 +46,7 @@ gulp.task('sass-erudit-pdfjs', function() {
     .pipe(rename(function (path) {
       path.dirname += "/";
       path.basename += "-dev";
-      path.extname = ".css"
+      path.extname = ".css";
     }))
     .pipe(gulp.dest(css_dir));
 });
@@ -57,7 +57,7 @@ gulp.task('scripts-erudit-main', function() {
     .pipe(rename(function (path) {
       path.dirname += "/build";
       path.basename += "-dev";
-      path.extname = ".js"
+      path.extname = ".js";
     }))
     .pipe(gulp.dest(js_dir))
     .pipe(livereload());
@@ -72,7 +72,7 @@ gulp.task('scripts-erudit-vendors', function() {
     .pipe(rename(function (path) {
       path.dirname += "/build";
       path.basename += "-dev";
-      path.extname = ".js"
+      path.extname = ".js";
     }))
     .pipe(gulp.dest(js_dir));
 });
