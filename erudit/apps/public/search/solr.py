@@ -19,7 +19,16 @@ class Solr(object):
             "relevance": "score",
             "year": "AnneePublication",
             "author": "Auteur_tri",
-            "title": "Titre_fr",
+            "title": "Titre_idx",
+        }
+        self.filter_fields = {
+            "years": "AnneePublication",
+            # "article_types": "Corpus_fac",
+            "languages": "Langue",
+            # "collections": "",
+            "authors": "Auteur_tri",
+            "funds": "Fonds_fac",
+            "publication_types": "Corpus_fac",
         }
 
     def search(self, params):
@@ -34,10 +43,10 @@ class Solr(object):
             return {}
 
         else:
-            # try:
-            return response.json()
-            # except:
-            #    return {}
+            try:
+                return response.json()
+            except:
+                return {}
 
     def simple_search(self, search_term, sort="relevance", sort_order="asc", start_at=0, results_per_query=10, ):
         """Simple search
@@ -79,5 +88,8 @@ class Solr(object):
 
         # Start position (for pagination)
         params["start"] = start_at
+
+        # Filter fields params
+        params["filter.fields"] = (self.filter_fields.values())
 
         return self.search(params=params)

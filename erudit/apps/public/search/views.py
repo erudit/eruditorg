@@ -38,18 +38,18 @@ class Search(FormView):
             return None
 
         else:
-            # try:
-            solr_conn = solr.Solr()
-            return solr_conn.simple_search(
-                search_term=self.search_term,
-                sort=self.sort,
-                sort_order=self.sort_order,
-                start_at=self.start_at,
-                results_per_query=self.results_per_query,
-            )
+            try:
+                solr_conn = solr.Solr()
+                return solr_conn.simple_search(
+                    search_term=self.search_term,
+                    sort=self.sort,
+                    sort_order=self.sort_order,
+                    start_at=self.start_at,
+                    results_per_query=self.results_per_query,
+                )
 
-            # except:
-            #    return None
+            except:
+                return None
 
     def get(self, request, *args, **kwargs):
         """We want this form to handle GET method"""
@@ -59,7 +59,8 @@ class Search(FormView):
         """We want this form to handle GET method"""
         kwargs = super(Search, self).get_form_kwargs()
 
-        if self.request.method == "GET":
+        # If no search term, then not a search yet
+        if self.request.GET.get("search_term", None):
             kwargs.update({'data': self.request.GET})
 
         return kwargs
