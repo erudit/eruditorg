@@ -17,6 +17,7 @@ from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Journal
 from erudit.models import Issue
+from erudit.models import Article
 from erudit.utils.pdf import generate_pdf
 
 
@@ -76,12 +77,14 @@ class IssueDetailView(DetailView):
     def get_object(self, queryset=None):
         if 'pk' in self.kwargs:
             return super(IssueDetailView, self).get_object(queryset)
+
+        # TODO: this could not work because localidentifier are not uniques in model
         return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
 
     def get_context_data(self, **kwargs):
         context = super(IssueDetailView, self).get_context_data(**kwargs)
 
-        # TODO: fetches the articles associatd with the issue
+        context['articles'] = Article.objects.filter(issue__in=[self.get_object().pk])
         return context
 
 
