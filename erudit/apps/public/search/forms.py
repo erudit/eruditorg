@@ -40,7 +40,7 @@ class SearchFormHelper(FormHelper):
         self.form_id = 'id-search'
         self.form_class = 'search'
         self.form_method = 'get'
-        self.form_action = urlresolvers.reverse("search:search")
+        self.form_action = urlresolvers.reverse("public:search:search")
 
         self.layout = Layout(
             Div(
