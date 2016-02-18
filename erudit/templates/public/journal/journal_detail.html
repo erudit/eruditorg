@@ -90,7 +90,6 @@
           {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
             Numéro {{ number }} - {{ date }}
           {% endblocktrans %}
-          {{ issue.pk }}
         </a>
       </div>
       {% endfor %}

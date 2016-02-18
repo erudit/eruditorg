@@ -25,6 +25,9 @@ urlpatterns = [
     url(_(r'^numero/(?P<pk>[\d-]+)/logo.jpg$'),
         views.IssueRawCoverpageView.as_view(), name='issue-coverpage'),
 
+    url(_(r'^article/(?P<journalid>[\w-]+)/(?P<issueid>[\w-]+)/(?P<articleid>[.\w-]+)/$'),
+        views.ArticleDetailView.as_view(), name='article-detail'),
+
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
         views.ArticlePdfView.as_view(), name='article-pdf'),
 

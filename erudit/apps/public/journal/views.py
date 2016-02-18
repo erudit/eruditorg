@@ -97,6 +97,25 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     model = Issue
 
 
+class ArticleDetailView(JournalCodeDetailMixin, TemplateView):
+    """
+    Displays an Article page.
+    """
+    template_name = 'public/journal/article_detail.html'
+
+    def get_fedora_object_pid(self):
+        return fedora_settings.PID_PREFIX + '.'.join(
+            [self.kwargs['journalid'], self.kwargs['issueid'], self.kwargs['articleid']])
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context['journal_id'] = self.kwargs['journalid']
+        context['issue_id'] = self.kwargs['issueid']
+        context['article_id'] = self.kwargs['articleid']
+        context['fedora_object'] = self.get_fedora_object_pid()
+        return context
+
+
 class ArticlePdfView(TemplateView):
     """
     Displays a page allowing to browse the PDF file associated with an article.
