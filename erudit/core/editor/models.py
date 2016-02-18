@@ -74,7 +74,8 @@ class IssueSubmission(models.Model):
 
     @transition(field=status, source=DRAFT, target=SUBMITTED,
                 permission=lambda user: user.has_perm(
-                    'editor.manage_issuesubmission'))
+                    'editor.manage_issuesubmission'),
+                custom=dict(verbose_name=("Soumettre")))
     def submit(self):
         """
         Send issue for review
@@ -83,8 +84,9 @@ class IssueSubmission(models.Model):
 
     @transition(field=status, source=SUBMITTED, target=VALID,
                 permission=lambda user: user.has_perm(
-                    'editor.review_issuesubmission'))
-    def accept(self):
+                    'editor.review_issuesubmission'),
+                custom=dict(verbose_name=_("Approuver")))
+    def approve(self):
         """
         Validate the issue
         """
@@ -92,7 +94,8 @@ class IssueSubmission(models.Model):
 
     @transition(field=status, source=SUBMITTED, target=DRAFT,
                 permission=lambda user: user.has_perm(
-                    'editor.review_issuesubmission'))
+                    'editor.review_issuesubmission'),
+                custom=dict(verbose_name=_("Marquer à corriger")))
     def refuse(self):
         """
         Resend the issue for modifications
