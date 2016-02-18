@@ -374,6 +374,10 @@ class Journal(FedoraMixin, Named, Edinum):
         return self.published_issues.filter(open_access=True) \
             .order_by('-date_published').first()
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse("public:journal:journal-detail", args=[self.code])
+
     # contract
     def has_active_contract(self):
         pass
@@ -498,6 +502,10 @@ class Issue(FedoraMixin, models.Model):
                 self.journal.get_full_identifier(),
                 self.localidentifier
             )
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse("public:journal:issue-detail", args=[self.journal.code, self.localidentifier])
 
     def __str__(self):
         if self.volume and self.number and self.year:

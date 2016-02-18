@@ -12,7 +12,7 @@
       <div class="row">
         {% for journal in journals %}
         <div class="col-md-4">
-          <a class="btn btn-default btn-block" href="{% url 'public:journal:journal-detail' journal.code %}">
+          <a class="btn btn-default btn-block" href="{{ journal.get_absolute_url }}">
             {{ journal.name }}
           </a>
         </div>

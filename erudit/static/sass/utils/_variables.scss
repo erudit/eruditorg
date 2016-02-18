@@ -43,6 +43,16 @@ $navbar-height: 70px;
 /// Sidenav width
 $sidenav-width: 250px;
 
+/**
+* gutter and margins
+*/
+
+// from bootstarp grid system
+$grid-gutter-width:         22px;
+
+// horizontal is half gutter size, vertical double the gutter
+$margin-horizontal-default: $grid-gutter-width / 2;
+$margin-vertical-default:   $grid-gutter-width * 2;
 
 // -----------------------------------------------------------------------------
 // Bootstrap's Defaults Override
@@ -187,8 +197,6 @@ $screen-lg-max:              ($screen-xl-min - 1);
 
 //** Number of columns in the grid.
 $grid-columns:              12;
-//** Padding between columns. Gets divided in half for the left and right.
-$grid-gutter-width:         30px;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
 $grid-float-breakpoint:     $screen-sm-min;

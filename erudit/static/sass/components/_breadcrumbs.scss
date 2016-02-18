@@ -1,10 +1,21 @@
-.breadcrumbs {
-  margin-top: 1.5em;
-  font-size: 0.85em;
+/**
+* default breadcrumb
+*/
+
+#breadcrumb {
+  margin-bottom: $margin-vertical-default;
+  color: $gray-light;
+
+  p {
+    font-size: 14px;
+  }
+
   a {
-    color: rgba(0, 0, 0, 0.5);
-    &:hover, &:focus, &:active, &:active:focus {
-      text-decoration: none;
+    color: $gray-light;
+    &:last-child {
+      color: $gray-base;
+      @include fw-bold();
     }
   }
+
 }

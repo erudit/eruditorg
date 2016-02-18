@@ -1,7 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n staticfiles %}
 
-{% block breadcrumb %}{{ block.super }} / <a href="#">issue name</a> / <a href="#">{{ fedora_object }}</a> {% endblock %}
+{% block breadcrumb %}{{ block.super }} / <a href="{% url 'public:journal:issue-detail' journal_code=journal_id localidentifier=issue_id %}">Issue name</a> / <a href="#">{{ fedora_object }}</a> {% endblock %}
 
 {% block content %}
 

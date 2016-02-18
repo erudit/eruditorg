@@ -83,6 +83,7 @@ class IssueDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(IssueDetailView, self).get_context_data(**kwargs)
 
+        context['journal'] = self.get_object().journal
         context['articles'] = Article.objects.filter(issue=self.get_object())
         return context
 

@@ -14,3 +14,15 @@
 @mixin fw-medium() {
   font-family: $font-family-sans-serif-medium;
 }
+
+@mixin fw-medium-italic() {
+  font-family: $font-family-sans-serif-medium-italic;
+}
+
+@mixin fw-bold() {
+  font-family: $font-family-sans-serif-bold;
+}
+
+@mixin fw-bold-italic() {
+  font-family: $font-family-sans-serif-bold-italic;
+}
