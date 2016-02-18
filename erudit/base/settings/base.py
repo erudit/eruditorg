@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'rules.apps.AutodiscoverRulesConfig',
     'ckeditor',
     'raven.contrib.django.raven_compat',
+    'django_fsm',
 
     # Érudit apps
     'base',

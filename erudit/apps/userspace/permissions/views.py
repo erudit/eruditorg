@@ -41,7 +41,7 @@ class PermissionsCreateView(PermissionsCheckMixin, CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse('userspace:perm_list')
+        return reverse('userspace:permissions:perm_list')
 
 
 class PermissionsDeleteView(PermissionsCheckMixin, DeleteView):
@@ -49,7 +49,7 @@ class PermissionsDeleteView(PermissionsCheckMixin, DeleteView):
     template_name = 'userspace/permissions/perm_confirm_delete.html'
 
     def get_success_url(self):
-        return reverse('userspace:perm_list')
+        return reverse('userspace:permissions:perm_list')
 
     def get_permission_object(self):
         rule = self.get_object()

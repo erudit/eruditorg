@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 
 from rules.contrib.views import PermissionRequiredMixin
 
+from erudit.utils.workflow import WorkflowMixin
 from core.editor.models import IssueSubmission
 from core.userspace.viewmixins import LoginRequiredMixin
 
@@ -49,7 +50,7 @@ class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
         return context
 
 
-class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
+class IssueSubmissionUpdate(WorkflowMixin, IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'userspace/editor/form.html'
@@ -82,9 +83,15 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = "editor.IssueSubmission"
         context['model_pk'] = self.object.pk
+
         # In this view, we have a widget, plupload, that injects JS in the page. This JS needs
         # jquery. Because of this, we need to load jquery in the header rather than in the footer.
         context['put_js_in_head'] = True
+
+        transitions = self.object.\
+            get_available_user_status_transitions(self.request.user)
+        context['transitions'] = transitions
+
         return context
 
     def get_success_url(self):

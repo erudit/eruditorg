@@ -23,6 +23,7 @@ class RuleForm(ModelForm):
     permission_filters = (
         'userspace.manage_permissions',
         'editor.manage_issuesubmission',
+        'editor.review_issuesubmission',
         'individual_subscription.manage_account',
     )
 
