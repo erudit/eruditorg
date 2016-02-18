@@ -8,7 +8,9 @@ import unittest.mock
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
+from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleRawPdfView
+from erudit.factories import ArticleFactory
 from erudit.factories import CollectionFactory
 from erudit.factories import IssueFactory
 from erudit.factories import JournalFactory
@@ -107,6 +109,41 @@ class TestIssueDetailView(BaseEruditTestCase):
             'journal_code': self.journal.code, 'localidentifier': issue.localidentifier})
         # Run
         response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+
+class TestArticleDetailView(BaseEruditTestCase):
+    def setUp(self):
+        super(TestArticleDetailView, self).setUp()
+        self.factory = RequestFactory()
+
+    def test_works_with_pks(self):
+        # Setup
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue)
+        url = reverse('public:journal:article-detail', kwargs={
+            'journal_code': self.journal.code, 'issue_localid': issue.localidentifier,
+            'pk': article.pk})
+        request = self.factory.get(url)
+        # Run
+        response = ArticleDetailView.as_view()(
+            request, localid=article.localidentifier)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_works_with_localidentifiers(self):
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue)
+        url = reverse('public:journal:article-detail', kwargs={
+            'journal_code': self.journal.code, 'issue_localid': issue.localidentifier,
+            'localid': article.localidentifier})
+        request = self.factory.get(url)
+        # Run
+        response = ArticleDetailView.as_view()(
+            request, localid=article.localidentifier)
         # Check
         self.assertEqual(response.status_code, 200)
 
