@@ -259,6 +259,8 @@ FEDORA_ROOT = 'http://10.1.1.33:8080/fedora/'
 FEDORA_USER = 'fedoraAdmin'
 FEDORA_PASSWORD = 'fedoraAdmin'
 
+SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
+
 try:
     from .settings_env import *  # noqa
 except ImportError:
