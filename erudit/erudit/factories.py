@@ -59,6 +59,15 @@ class IssueFactory(factory.django.DjangoModelFactory):
     localidentifier = factory.Sequence(lambda n: 'issue-{}'.format(n))
 
 
+class ArticleFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = 'erudit.article'
+
+    issue = factory.SubFactory(IssueFactory)
+    localidentifier = factory.Sequence(lambda n: 'article-{}'.format(n))
+
+
 class BasketFactory(factory.django.DjangoModelFactory):
 
     class Meta:
