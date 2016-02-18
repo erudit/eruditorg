@@ -20,7 +20,7 @@
     <article>
       <h3>{{ article.title }}</h3>
       <nav>
-        <a href="{% url 'public:journal:article-detail' journalid=issue.journal.code issueid=issue.localidentifier articleid=article.id %}" class="btn-default">{% trans "HTML" %}</a>
+        <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn-default">{% trans "HTML" %}</a>
         <a href="{% url 'public:journal:article-pdf' journalid=issue.journal.code issueid=issue.localidentifier articleid=article.id %}" class="btn-default">{% trans "PDF" %}</a>
       </nav>
     </article>

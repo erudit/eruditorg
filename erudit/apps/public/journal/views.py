@@ -98,23 +98,19 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     model = Issue
 
 
-class ArticleDetailView(JournalCodeDetailMixin, TemplateView):
+class ArticleDetailView(DetailView):
     """
     Displays an Article page.
     """
+    context_object_name = 'article'
+    model = Article
     template_name = 'public/journal/article_detail.html'
 
-    def get_fedora_object_pid(self):
-        return fedora_settings.PID_PREFIX + '.'.join(
-            [self.kwargs['journalid'], self.kwargs['issueid'], self.kwargs['articleid']])
+    def get_object(self, queryset=None):
+        if 'pk' in self.kwargs:
+            return super(ArticleDetailView, self).get_object(queryset)
 
-    def get_context_data(self, **kwargs):
-        context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        context['journal_id'] = self.kwargs['journalid']
-        context['issue_id'] = self.kwargs['issueid']
-        context['article_id'] = self.kwargs['articleid']
-        context['fedora_object'] = self.get_fedora_object_pid()
-        return context
+        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
 
 class ArticlePdfView(TemplateView):
