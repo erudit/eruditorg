@@ -5,10 +5,6 @@
 
 {% block data-controller %}userspace:editor:form{% endblock data-controller %}
 
-{% block breadcrumbs %}
-{{ block.super }} / <a href="{% url 'userspace:editor:issues' %}">{% trans "Dépôt de numéros" %}</a> / {% trans "Ajout d'un numéro" %}
-{% endblock %}
-
 {% block extrahead %}
 {{ form.media }}
 {% endblock %}
@@ -91,7 +87,12 @@
           </div>
           <div class="form-group text-right">
             <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
-            <button type="submit" class="btn btn-primary" id="submit-id-submit">{% if object.pk %}{% trans "Envoyer" %}{% else %}{% trans "Enregistrer" %}{% endif %}</button>
+            <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+            {% if object.pk %}
+            {% for t in transitions %}
+            <button type="submit" class="btn btn-primary" name="transition" value="{{ t.name }}">{% trans t.name %}</button>
+            {% endfor %}
+            {% endif %}
           </div>
         </div>
       </form>

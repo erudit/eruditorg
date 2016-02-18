@@ -3,6 +3,8 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+from django_fsm import FSMField, transition
+
 
 class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
@@ -17,11 +19,7 @@ class IssueSubmission(models.Model):
         (VALID, _("Validé"))
     )
 
-    status = models.CharField(
-        max_length=1,
-        choices=STATUS_CHOICES,
-        default=DRAFT
-    )
+    status = FSMField(default=DRAFT, protected=True)
 
     journal = models.ForeignKey(
         'erudit.journal',
@@ -73,6 +71,33 @@ class IssueSubmission(models.Model):
     def get_absolute_url(self):
         """ Return the absolute URL for this model """
         return reverse('userspace:editor:update', kwargs={'pk': self.pk})
+
+    @transition(field=status, source=DRAFT, target=SUBMITTED,
+                permission=lambda user: user.has_perm(
+                    'editor.manage_issuesubmission'))
+    def submit(self):
+        """
+        Send issue for review
+        """
+        pass
+
+    @transition(field=status, source=SUBMITTED, target=VALID,
+                permission=lambda user: user.has_perm(
+                    'editor.review_issuesubmission'))
+    def accept(self):
+        """
+        Validate the issue
+        """
+        pass
+
+    @transition(field=status, source=SUBMITTED, target=DRAFT,
+                permission=lambda user: user.has_perm(
+                    'editor.review_issuesubmission'))
+    def refuse(self):
+        """
+        Resend the issue for modifications
+        """
+        pass
 
     class Meta:
         verbose_name = _("Envoi de numéro")
