@@ -39,3 +39,20 @@
   position: absolute;
   width: 1px;
 }
+
+
+/**
+* Unstyle a list element
+*/
+
+ul, ol {
+  &.unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

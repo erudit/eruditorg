@@ -1,6 +1,23 @@
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
+
+// vertical centered
+@mixin vertical-centered($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-filter: blur(0);
+  @include translate(0,-50%);
+}
+
+/// Translate
+@mixin translate($transform) {
+  -webkit-transform: $transform;
+      -ms-transform: $transform;
+       -o-transform: $transform;
+          transform: $transform;
+}
+
 /// Border-radius vendor prefixes
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;

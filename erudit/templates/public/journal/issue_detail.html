@@ -1,8 +1,10 @@
-{% extends "public/base.html" %}
+{% extends "public/journal/journal_base.html" %}
 {% load i18n %}
 {% load static %}
 
 {% block page-title %}{{ issue.localidentifier }}{% endblock page-title %}
+
+{% block breadcrumb %}{{ block.super }} / <a href="#">{{ issue.localidentifier }}</a> {% endblock %}
 
 {% block content %}
   <h1>{{ issue.title }}</h1>

@@ -1,0 +1,16 @@
+/**
+* Font-weight functions
+*/
+
+
+@mixin fw-normal() {
+  font-family: $font-family-sans-serif-regular;
+}
+
+@mixin fw-normal-italic() {
+  font-family: $font-family-sans-serif-regular-italic;
+}
+
+@mixin fw-medium() {
+  font-family: $font-family-sans-serif-medium;
+}
