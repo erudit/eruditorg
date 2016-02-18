@@ -90,7 +90,7 @@
             <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
             {% if object.pk %}
             {% for t in transitions %}
-            <button type="submit" class="btn btn-primary" name="transition" value="{{ t.name }}">{% trans t.name %}</button>
+            <button type="submit" class="btn btn-primary" name="transition" value="{{ t.name }}">{{ t.custom.verbose_name }}</button>
             {% endfor %}
             {% endif %}
           </div>
