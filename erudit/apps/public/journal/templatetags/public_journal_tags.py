@@ -26,7 +26,6 @@ def render_article(context, article):
     xsl = xsl_template.render(context)
 
     # Performs the XSLT transformation
-    print(io.StringIO(str(xsl)))
     lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
     html_transform = et.XSLT(lxsl)
 

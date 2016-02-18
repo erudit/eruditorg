@@ -1,0 +1,1025 @@
+<article xmlns="http://www.erudit.org/xsd/article" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.erudit.org/xsd/article http://www.erudit.org/xsd/article/3.0.0/eruditarticle.xsd" qualtraitement="complet" idproprio="1001940ar" typeart="article" lang="fr" ordseq="4" idref="th1">
+  <admin>
+    <infoarticle>
+      <idpublic scheme="doi">10.7202/1001940ar</idpublic>
+      <pagination>
+            <ppage>0</ppage>
+            <dpage>0</dpage>
+
+
+
+        </pagination>
+    </infoarticle>
+    <revue id="arbo139" lang="fr en">
+      <titrerev>Arborescences</titrerev>
+      <sstitrerev>Revue d'études françaises</sstitrerev>
+      <titrerevabr>arbo</titrerevabr>
+      <idissnnum>1925-5357</idissnnum>
+      <directeur sexe="feminin">
+        <fonction lang="fr">Directrice</fonction>
+        <nompers>
+          <prenom>Corinne</prenom>
+          <nomfamille>Denoyelle</nomfamille>
+        </nompers>
+      </directeur>
+      <directeur sexe="masculin">
+        <fonction lang="fr">Directrice adjointe</fonction>
+        <nompers>
+          <prenom>Maud</prenom>
+          <nomfamille>Pillet</nomfamille>
+        </nompers>
+      </directeur>
+      <redacteurchef typerc="invite" idrefs="th1" sexe="feminin">
+        <nompers>
+          <prenom>Anne-Marie</prenom>
+          <nomfamille>Brousseau</nomfamille>
+        </nompers>
+      </redacteurchef>
+      <redacteurchef typerc="regulier" sexe="feminin">
+        <fonction lang="fr">Rédactrice en chef</fonction>
+        <nompers>
+          <prenom>Corinne</prenom>
+          <nomfamille>Denoyelle</nomfamille>
+        </nompers>
+      </redacteurchef>
+    </revue>
+    <numero id="arbo1515298">
+      <nonumero>1</nonumero>
+      <pub>
+        <periode>Mars</periode>
+        <annee>2011</annee>
+      </pub>
+      <pubnum>
+        <date typedate="publication">2011-04-11</date>
+      </pubnum>
+      <grtheme id="th1">
+        <theme>Identités linguistiques, langues identitaires : à la croisée du prescriptivisme et du patriotisme</theme>
+      </grtheme>
+    </numero>
+    <editeur>
+      <nomorg>Département d'études françaises, Université de Toronto</nomorg>
+    </editeur>
+    <prodnum>
+      <nomorg>Érudit</nomorg>
+    </prodnum>
+    <diffnum>
+      <nomorg>Érudit</nomorg>
+    </diffnum>
+    <schema nom="Erudit Article" version="3.0.0" lang="fr"/>
+    <droitsauteur>Tous droits réservés © <nomorg>Département d'études françaises, Université de Toronto</nomorg>, 2011</droitsauteur>
+  </admin>
+  <liminaire>
+    <grtitre><surtitre>I – Le locuteur devant la prescription : perception des normes et des usages au Canada français</surtitre>
+                <titre>Discours épilinguistiques en francophonie manitobaine : une vue d’ensemble</titre>
+
+        </grtitre>
+    <grauteur>
+      <auteur id="au1">
+        <nompers>
+          <prenom>Sandrine</prenom>
+          <nomfamille>Hallion</nomfamille>
+        </nompers>
+        <affiliation>
+          <alinea>Collège universitaire de Saint-Boniface</alinea>
+        </affiliation>
+      </auteur>
+    </grauteur>
+    <resume typeresume="resume" lang="fr">
+      <alinea>Tout locuteur formule des jugements de valeur sur la ou les langues qu’il parle ou qui l’entourent. L’examen de discours épilinguistiques dans le contexte de la francophonie minoritaire du Manitoba permet de répertorier un certain nombre de réflexions qui forment un réseau de représentations sur une gamme de pratiques linguistiques allant de l’emploi du « français correct » à celui de l’anglais, en passant par l’usage de toutes les variétés linguistiques de la « zone vernaculaire » qui s’étend entre ces deux pôles. L’analyse de ces discours donne une vue d’ensemble des sentiments des francophones vis-à-vis des langues ou des variétés de langues qu’ils emploient ou qu’ils côtoient. Il s’agira dans cet article de présenter ce panorama à partir de l’étude de trois types de corpus : 1) des entrevues semi-dirigées ; 2) des témoignages de jeunes francophones du secondaire recueillis sur un forum de discussion sur Internet ; 3) des documents écrits du type introductions de glossaire, articles scientifiques et articles de journaux. Cet examen mettra au jour des perceptions courantes, prévisibles et récurrentes, observées ailleurs en francophonie. Le rôle que peuvent jouer ces représentations de la langue dans le processus de changement linguistique sera finalement évoqué.</alinea>
+    </resume>
+    <resume typeresume="resume" lang="en">
+      <alinea>All speakers make value judgements on the language(s) that they speak or encounter. The study of epilinguistic speech in Manitoba’s French-speaking minority allows for the compilation of a series of reflections concerning a variety of linguistic practices ranging from the use of “correct French” to that of English and encompassing all of the linguistic varieties in the “vernacular zone” existing between these two extremes. The analysis of these reflections provides an overview of Francophones’ feelings towards the languages or linguistic varieties that they speak or encounter. This article presents this panoramic view based on the study of three types of corpora: 1) semi-directed interviews; 2) testimonials from young highschool Francophones collected from an Internet discussion group; 3) written documents such as introductions to glossaries, scientific articles, and newspaper articles. This study reveals current predictable and recurring attitudes observed elsewhere in French-speaking communities. The role that these representations of language can play in the process of linguistic change will be discussed.</alinea>
+    </resume>
+    <grmotcle lang="fr">
+      <motcle>discours épilinguistiques</motcle>
+      <motcle> Manitoba</motcle>
+      <motcle>francophonie</motcle>
+      <motcle>normes subjectives</motcle>
+      <motcle>changement linguistique</motcle>
+    </grmotcle>
+  </liminaire>
+  <corps>
+    <section1 id="s1n1">
+      <no>1</no>
+      <epigraphe>
+        <bloccitation>
+          <alinea>Le stéréotype est de longue durée, imperméable à l’expérience, même contraire à
+            son contenu, gardant sa force persuasive même à travers des générations.</alinea>
+        </bloccitation>
+        <source>Bochmann, 2001 : 101, note 1</source>
+      </epigraphe>
+    </section1>
+    <section1 id="s1n2">
+      <no>2</no>
+      <titre>1. Introduction</titre>
+      <para id="pa1"><no>1</no>
+        <alinea>Les représentations épilinguistiques, cet « ensemble ondoyant des conceptions
+          ordinaires que se font les locuteurs des langues qu’ils parlent », pour reprendre la
+          définition qu’en donne Paul Laurendeau (2004 : 431), se traduisent au Manitoba, comme
+          ailleurs, par différents types de discours dont l’analyse permet de documenter les
+          manifestations des jugements esthétiques sur la langue française en contexte francophone
+          manitobain. L’examen de ces discours permet également de faire l’inventaire de la
+          terminologie employée au Manitoba francophone pour tenter de classer et de caractériser
+          diverses variétés de français dont on peut chercher en outre à cerner les particularités.
+          Comme le rappelle Lafontaine (1997 : 59), l’analyse « classique » des attitudes
+          linguistiques – c’est-à-dire celle qui s’appuie sur les sentiments des locuteurs vis-à-vis
+          des variétés linguistiques qu’ils emploient et/ou avec lesquelles ils sont en contact plus
+          ou moins étroit – a ses limites dans la mesure où elle ne donne qu’un aperçu « grossier »
+          de la situation à l’étude et que les opinions qu’elle révèle sont destinées à se dissoudre
+          dès lors qu’elles sont soumises à une analyse plus fine. Cette méthode reste toutefois
+          valide pour « débroussailler un nouveau terrain » (Lafontaine 1997 : 59), afin de mettre
+          au jour les stéréotypes présents dans une communauté linguistique donnée. C’est dans cette
+          perspective de défrichement que se situe cette étude.</alinea>
+      </para>
+      <para id="pa2"><no>2</no>
+        <alinea>Le français au Manitoba se caractérise par ce qu’on a coutume d’appeler sa position
+          « minoritaire », adjectif renvoyant à une réalité statistique puisqu’un peu moins de 4 %
+          de la population totale de la province déclarait le français comme langue maternelle
+          unique au recensement de 2006. Cette position confère en contrepartie à la langue anglaise
+          le statut de langue majoritaire. Ce concept de « minoritaire » renvoie également à une
+          réalité sociale, le français restant somme toute, à l’heure actuelle, et malgré la percée
+          de cette langue dans la sphère publique, un code bien moins légitime que l’anglais à
+          l’échelle provinciale. Cet environnement bilingue a naturellement des conséquences sur les
+          variétés de français parlées dans la province qui témoignent à divers degrés de phénomènes
+          d’emprunts et d’alternances de langues. Les variétés mixtes qui découlent du contact
+          linguistique sont, à quelques exceptions près, perçues négativement, ce qui n’a rien de
+          surprenant en situation de diglossie. D’autre part, la francophonie manitobaine bénéficie
+          de bonnes assises institutionnelles, médiatiques et scolaires qui forment un réseau de
+          diffusion de représentations normatives endogènes – lorsque le « bon usage » émane de
+          représentants actifs<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi> appartenant à la communauté
+          linguistique (des locuteurs Franco-Manitobains) – et exogènes – lorsque le « bon usage »
+          émane de représentants actifs extérieurs à la communauté linguistique (essentiellement des
+          locuteurs venus du Québec, de l’Europe et de l’Afrique francophones). L’existence d’un
+          pourcentage grandissant d’immigrants francophones venus d’Europe, et surtout d’Afrique,
+          impose également la présence, au sein même de la communauté linguistique, de modèles
+          passifs externes souvent valorisés. Dans ce contexte, les discours épilinguistiques se
+          focalisent sur certains éléments courants, prévisibles<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi> et
+          récurrents qui tissent un réseau de représentations sur la langue. </alinea>
+      </para>
+    </section1>
+    <section1 id="s1n3">
+      <no>3</no>
+      <titre>2. Les corpus exploités</titre>
+      <para id="pa3"><no>3</no>
+        <alinea>Les corpus exploités pour cette étude sont de trois types et se composent :1) de
+          transcriptions de corpus oraux constitués à partir d’entrevues semi-dirigées comportant
+          des questions classiques susceptibles de provoquer des discours épilinguistiques ; 2) de
+          témoignages de jeunes francophones du secondaire recueillis sur un forum de discussion
+          accessible sur le site Internet de Facebook ; et 3) de documents écrits du type
+          introductions de glossaires, d’articles scientifiques et d’articles de journaux. </alinea>
+      </para>
+      <para id="pa4"><no>4</no>
+        <alinea>Les corpus oraux ont été recueillis auprès d’un échantillon de 33 locuteurs
+          franco-manitobains entre 1995 et 1997. Notons que l’échantillon de locuteurs interviewés
+          comprend un nombre élevé de personnes ayant suivi une formation postsecondaire. Le
+          questionnaire utilisé lors des enquêtes contient un certain nombre de questions propres à
+          créer des conditions d’insécurité linguistique – d’autant que l’intervieweuse est
+          Française – et à susciter la verbalisation de stéréotypes linguistiques courants au sein
+          de la communauté francophone locale. Les questions posées aux participants sont, par
+          exemple : <marquage typemarq="italique">Estimez-vous avoir une bonne compétence en
+          français ? Comment qualifieriez-vous le français que vous utilisez ? Quelle est votre
+          définition du « bon français », du « français correct » ? Êtes-vous conscient des écarts
+          qui existent entre le français du Manitoba, celui du Québec, celui de France ? Vous
+          sentez-vous menacé par l’anglais ?</marquage> </alinea>
+      </para>
+      <para id="pa5"><no>5</no>
+        <alinea>À mi-chemin entre l’oral et l’écrit<renvoi id="re1no3" idref="no3" typeref="note">3</renvoi>, les
+          témoignages de jeunes Franco-Manitobains accessibles sur un forum de discussion portant
+          sur des questions reliées aux langues et à l’identité constituent la deuxième source de
+          données exploitées. À la fin du mois de mai 2008, une élève du Collège Louis-Riel, école
+          secondaire francophone de Winnipeg, cherche à relever le pari lancé par un ami : trouver
+          en un mois 50 élèves de son école (sur environ 650-700 élèves) qui déclarent se sentir
+          plus à l’aise en français qu’en anglais et les inviter à se manifester sur le forum ouvert
+          à cet effet sur Internet. Les interventions des élèves témoignent notamment de la
+          perception négative dont font l’objet les variétés mixtes de français issues du contact
+          intense avec l’anglais. Ce genre de discours constitue un matériau intéressant dans la
+          mesure où il provient de la génération francophone montante, élite de demain, et qu’il
+          permet de juger de la pérennité des représentations épilinguistiques. Il révèle également
+          que, comme le constate Annette Boudreau pour l’Acadie (1991), ces jeunes ont une forte
+          conscience linguistique qui est due au contexte de réflexion métalinguistique constante en
+          milieu francophone minoritaire. </alinea>
+      </para>
+      <para id="pa6"><no>6</no>
+        <alinea>Enfin, les documents écrits se composent d’introductions de glossaires ou de
+          recueils de mots ou d’expressions. Ce sont également des articles scientifiques ou de
+          journaux abordant des questions linguistiques de manière plus ou moins objective. Les
+          corpus écrits ont pour principal intérêt de constituer des vecteurs durables – « les
+          paroles s’envolent, les écrits restent » – et légitimes – ils émanent des élites
+          culturelle et universitaire locales – de représentations et de reproduction des
+          stéréotypes linguistiques. </alinea>
+      </para>
+    </section1>
+    <section1 id="s1n4">
+      <no>4</no>
+      <titre>3. Perceptions linguistiques au Manitoba</titre>
+      <para id="pa7"><no>7</no>
+        <alinea>Il est possible de présenter brièvement et schématiquement la situation du français
+          au Manitoba en signalant l’existence d’un éventail de pratiques linguistiques allant de
+          l’emploi du « français correct », la variété prestigieuse et légitime, à celui de
+          l’anglais, code linguistique majoritaire assujettissant et « abâtardissant » le français.
+          Entre ces deux pôles, se situe ce que j’appellerai la « zone vernaculaire », soumise à la
+          double pression de ces pôles. Les regards portés sur cette gamme d’usages par des
+          locuteurs francophones de la province permettent de révéler un certain nombre de
+          représentations courantes dans la francophonie manitobaine. </alinea>
+      </para>
+      <para id="pa8"><no>8</no>
+        <alinea>Deux phénomènes récurrents ont été mis au jour par les recherches menées sur les
+          attitudes linguistiques en contexte multilingue. Notons que cette notion de multilinguisme
+          renvoie à la présence de codes linguistiques différents mais également à celle de variétés
+          d’une même langue en concurrence. D’une part, on observe chez les locuteurs de la variété
+          dominée une autodépréciation de leur vernaculaire, dévalorisation interne qui est
+          symptomatique d’une situation d’insécurité linguistique. D’autre part, cette même variété
+          dominée et non légitime fait l’objet d’une perception positive, souvent de type affectif,
+          et s’associe à des valeurs comme la sympathie, la douceur, etc. Elle est aussi jugée comme
+          la variété appropriée dans certains contextes, surtout informels. Les locuteurs lui
+          confèrent donc un « prestige latent ». Dans le même temps, d’autres valeurs, comme
+          l’élégance, la clarté, la pureté, etc., sont ordinairement associées à la variété
+          prestigieuse légitime (cf. Lafontaine 1997 : 58).</alinea>
+      </para>
+      <para id="pa9"><no>9</no>
+        <alinea>Ces deux tendances se retrouvent au Manitoba. Les trois extraits suivants témoignent
+        du phénomène d’autodépréciation du vernaculaire.</alinea>
+        <exemple id="ex1">
+          <no>1</no>
+          <bloccitation>
+            <alinea> Moi, je parle dans un registre… un registre de langue euh… populaire, familier…
+          […] au meilleur de mes capacités, c'est populaire et familier […]. Je peux pas parler
+          comme ceux qui passent à la Radio-Canada ; parce que je suis pas assez instruit et puis,
+          les influences de l'anglais est énorme !</alinea>
+            <source>I31<renvoi id="re1no4" idref="no4" typeref="note">4</renvoi></source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex2">
+          <no>2</no>
+          <bloccitation>
+            <verbatim typeverb="dialogue">
+              <bloc>
+                <ligne>I. – Comment tu le qualifierais, ton français ?</ligne>
+                <ligne>P. – Oh ! [Rire nerveux]. Je pense que, « médiocre », je peux même dire.</ligne>
+              </bloc>
+            </verbatim>
+            <source>I30</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex3">
+          <no>3</no>
+          <bloccitation>
+            <alinea>…les standards sont encore une fois si bas, on se contente d’un français
+          médiocre, entrecoupé par des expressions et même des phrases en anglais, ce qui prouve le
+          manque d’aisance en français…</alinea>
+            <source>Forum, 8 juin 2008</source>
+          </bloccitation>
+        </exemple>
+      </para>
+      <para id="pa10"><no>10</no>
+        <alinea>La deuxième tendance se trouve illustrée par la série d’extraits reproduite
+          ci-dessous. Dans l’extrait (4), le participant associe sa pratique du vernaculaire à une
+          pratique positive (fierté) qu’il relie à l’estime qu’il ressent pour sa famille.
+          L’analogie établie dans l’extrait (5) montre que la variété vernaculaire suscite des
+          associations valorisantes de nature affective. Le vernaculaire est aussi une variété de
+          français adéquate dans les contextes informels (6) alors que la variété prestigieuse est
+          associée à des valeurs comme la clarté (7) ou la beauté (8).</alinea>
+         <exemple id="ex4">
+           <no>4</no>
+           <bloccitation>
+             <alinea>Mais… je suis très fier du français que je parle… parce que, je suis fier de ma
+          famille, et puis… ceux qui… je ne dis jamais que je ne parle pas le bon
+          français</alinea>
+             <source>I31</source>
+           </bloccitation>
+         </exemple>
+         <exemple id="ex5">
+           <no>5</no>
+           <bloccitation>
+             <alinea>[notre langage] c'est un langage doux, qui coule comme la rivière et le vent de
+             l'Ouest là</alinea>
+             <source>I5</source>
+           </bloccitation>
+         </exemple>
+         <exemple id="ex6">
+           <no>6</no>
+           <bloccitation>
+             <alinea>le bon français c'est ce que tu parles dans ton milieu. […] mon français est
+          supérieur, quand je suis dans ma famille ; mon français est bien quand je parle avec mes
+          amis</alinea>
+             <source>I31</source>
+           </bloccitation>
+         </exemple>
+         <exemple id="ex7">
+           <no>7</no>
+           <bloccitation>
+             <alinea>Disons, toi tu es Française, tu viens de la France, pour moi tu parles très
+             bien. Tu t'exprimes très bien.</alinea>
+             <source>I5</source>
+           </bloccitation>
+         </exemple>
+         <exemple id="ex8">
+           <no>8</no>
+           <bloccitation>
+             <alinea>je trouve beau ! le français de la France. C'est celui-là que j'aime !.
+             </alinea>
+             <source>I18</source>
+           </bloccitation>
+         </exemple>
+      </para>
+      <para id="pa11"><no>11</no>
+        <alinea>Comme je l’ai déjà signalé, les discours épilinguistiques se focalisent en outre sur
+          certains éléments courants, prévisibles et récurrents dont on peut proposer le classement
+          suivant : (i) la dévalorisation des variétés prestigieuses ; (ii) la recherche de
+          l’intercompréhension, du mot juste et de l’équilibre ; (iii) la dévalorisation des
+          variétés anglicisées et la valorisation des archaïsmes ; (iv) la revendication des
+          variétés anglicisées. Chacune de ces catégories sera détaillée dans les sections qui vont
+          suivre. </alinea>
+      </para>
+      <section2 id="s2n1">
+        <no>4.
+				1</no>
+        <titre>3.1 Dévalorisation des variétés prestigieuses</titre>
+        <para id="pa12"><no>12</no>
+        <alinea>Le pluriel est ici employé dans la mesure où il n’y a pas de consensus dans
+          l’identification d’une variété modèle valorisée. Il s’agit tantôt d’une variété exogène
+          venue de France (9) ou d’autres pays francophones (10 et 11), tantôt d’une variété
+          globalisante identifiée sous l’étiquette « français international » (12), tantôt de
+          variétés canadiennes endogènes comme « le bon français du Québec » (13) ou de la variété
+          emblématique appelée « le français de Radio-Canada » (14). </alinea>
+        <exemple id="ex9">
+          <no>9</no>
+          <bloccitation>
+           <alinea>« le bon français »… mais on pense toujours aux Français, vous avez un excellent
+           français !</alinea>
+            <source>I33</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex10">
+          <no>10</no>
+          <bloccitation>
+            <alinea>mon mari a une belle prononciation. Lui… lui… euh… sa mère… bien, sa grand-mère
+          et son grand-père sont venus de la Suisse, alors oh ! c'est beau ! [Rires]. Et puis mes
+          enfants ont pris ça de… de… de lui !</alinea>
+            <source>I18</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex11">
+          <no>11</no>
+          <bloccitation>
+            <alinea>La norme c'est… on devrait être… les Africains, eux et les pays fran… français
+          en Afrique, eux […] eux ils parlent un très bon français aussi, beaucoup moins d'erreurs
+          que… mais ils ont pas le… autant d'influence que nous !</alinea>
+            <source>I31</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex12">
+          <no>12</no>
+          <bloccitation>
+            <alinea>I. – Quelle est pour vous, la définition du « bon français » ? P. – Bien… en ce
+          moment, c'est… c'est le français international. Qu'on… qui est reconnu comme étant, le
+          « bon français ». […] Alors, le « bon français » semble être celui qui… qui est
+          international aussi, alors tout le monde peut… comprendre, oui.</alinea>
+            <source>I18</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex13">
+          <no>13</no>
+          <bloccitation>
+            <alinea>Le Québec a… a dit : « Le bon français, c'est le français de France », et nous
+          disons ben, le… c'est le bon franç… c'est du Québec, nous autres a d… c'est un peu, le bon
+          français de France, on avait moins de contacts avec la France que le Québec ; alors c'est
+          un peu ça là, tu sais… […] le bon français du Québec.</alinea>
+            <source>I10</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex14">
+          <no>14</no>
+          <bloccitation>
+            <alinea>Juste pour répondre, je dirais peut-être, quelqu'un qui comm… le français de
+          Radio-Canada, ça c'est le français qui serait peut-être… Parce qu'il y a… il y a pas
+          d'erreurs, c'est un français peut-être moins… plus neutre si tu veux, il y a pas le…
+          l'intonation régionale… Puis ça serait peut-être… tu sais, si on voulait apprendre le
+          français, ça serait peut-être le meilleur… tu sais.</alinea>
+            <source>I16</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa13"><no>13</no>
+        <alinea>La valorisation des variétés prestigieuses, en particulier lorsqu’elles ont une
+          origine exogène, connaît toutefois des limites. Ces variétés peuvent être condamnées
+          lorsque leur valorisation s’accompagne d’une dépréciation du vernaculaire venue de
+          l’extérieur. Le locuteur perçoit cette dernière comme une atteinte au lien affectif et
+          identitaire qu’il entretient avec la variété dont il fait usage. Plusieurs facteurs
+          contribuent à la perception négative des variétés prestigieuses. Certains dénoncent le
+          laxisme français en matière d’emprunts à l’anglais. D’autres invoquent l’inauthenticité et
+          la préciosité de variétés prestigieuses, mais inadéquates en contexte local. Ces
+          différentes perceptions seront maintenant tour à tour considérées.</alinea>
+      </para>
+        <section3 id="s3n1">
+          <no>4.
+				1.
+				1</no>
+          <titre>3.1.1 Lien affectif et identitaire avec le vernaculaire</titre>
+          <para id="pa14"><no>14</no>
+        <alinea>Certains discours de revendication illustrent la pression normative qui s’exerce sur
+          des variétés locales dévalorisées et la recherche d’une légitimité, tout aussi valable que
+          celle accordée aux variétés prestigieuses, au nom de l’attachement affectif et identitaire
+          (15 et 16). </alinea>
+        <exemple id="ex15">
+          <no>15</no>
+          <bloccitation>
+            <alinea>j'aime pas qu'on me <marquage typemarq="gras">dévalorise<renvoi id="re1no5" idref="no5" typeref="note">5</renvoi></marquage><marquage typemarq="gras"> pour autant. Tu sais, je… je veux rester
+          fière de… de ce… de ce que je suis</marquage> là ! Pis je suis certaine que les Français
+          que… qui viennent ici, pis qu'on leur dit : « Oh ! vous parlez un français qui est pas…
+          compréhensible, trop trop pour ici », c'est pareil pour eux. Tu sais, ils vont dire :
+          « Ben – tu sais – mais moi c'est du vrai français ». Mais, ton vrai français… pour moi là,
+          <marquage typemarq="gras">mon vrai français c'est le mien</marquage>.</alinea>
+            <source>I5</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex16">
+          <no>16</no>
+          <bloccitation>
+            <alinea><marquage typemarq="gras">j'aime </marquage>le français de mon père là, parce
+          que <marquage typemarq="gras">c'est à lui</marquage> ! [Petit rire]… puis… tu sais, c'est…
+              Pourquoi juger ou rab… <marquage typemarq="gras">rabaisser</marquage>… son français ?
+          </alinea>
+            <source>I18</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex17">
+          <no>17</no>
+          <bloccitation>
+            <alinea>quand il y a du monde qui dit : « Oh ben, c'est… c'est pas comme ça, c'est… on
+          dit 'la' telle chose ». Peut-être ils pensent qu'ils aident mais l… normalement, le façon
+          qu'ils disent, moi je me trouve c'est… une façon de… d'<marquage typemarq="gras">abaisser</marquage> quelqu'un, pis moi, forget it là : « Si tu aimes pas <marquage typemarq="gras">mon français</marquage>, je vais vous parler en anglais ».</alinea>
+            <source>I19</source>
+          </bloccitation>
+        </exemple>
+      </para>
+          <para id="pa15"><no>15</no>
+        <alinea>L’extrait (17) montre en outre que le poids de la norme peut contribuer à faire
+          « basculer » le locuteur francophone dans le pôle opposé du continuum linguistique,
+          c’est-à-dire l’anglais. Ce type de conséquence se retrouve ailleurs en francophonie
+          minoritaire au Canada comme en témoignent les remarques suivantes formulées pour le
+          Nouveau-Brunswick : « Si [la] variété de langue [des francophones qui parlent un français
+          plus ou moins éloigné du standard] est dévalorisée, ils pourraient se tourner vers
+          l’anglais, où ils savent que leurs productions ne seront pas jugées et qu’ils peuvent
+          s’abriter derrière le fait que ce n’est pas leur langue maternelle » (Boudreau et Gadet
+          1998). </alinea>
+      </para>
+        </section3>
+        <section3 id="s3n2">
+          <no>4.
+				1.
+				2</no>
+          <titre>3.1.2 Perception d’un laxisme français en matière d’emprunts à l’anglais</titre>
+          <para id="pa16"><no>16</no>
+        <alinea>Le discours qui dénonce l’anglomanie française (18) est récurrent. Il s’accompagne
+          d’exemples typiques, « rituels » (Laurendeau 2007 : 33), pris dans le lexique. Les plus
+          fréquemment cités pour illustrer « les niaiseries qui se passent en France » (I31) sont
+          les emprunts à l’anglais<marquage typemarq="italique"> week-end </marquage>et<marquage typemarq="italique"> parking</marquage>. </alinea>
+        <exemple id="ex18">
+          <no>18</no>
+          <bloccitation>
+            <alinea>par rapport à vos anglicismes, flagrants là, je pense que [notre français] est
+          supérieur, mais… parce que jamais moi, je dirais : « Tu vois le parking là… », et pis « le
+          jogging », et pis « le… building », pis « le smoking », pis « le… » jamais jamais qu'on
+          parlerait comme ça nous, c'est pas du français pour nous ça. Alors… de ce point de vue-là,
+          on est peut-être plus euh… plus pur</alinea>
+            <source>I20</source>
+          </bloccitation>
+        </exemple>
+      </para>
+          <para id="pa17"><no>17</no>
+        <alinea>Les francophones jugent souvent que, de ce côté-là, le Québec fournit un modèle plus
+        valable que celui provenant de la France : </alinea>
+         <exemple id="ex19">
+           <no>19</no>
+           <bloccitation>
+             <alinea>j'écoute là… la radio euh… la télévision française puis, tout ce bagage de
+          vocabulaire an… anglais, américain ! Je dis, ils se forcent vraiment pas pour… le Québec
+          se force un peu plus que la France pour inventer des mots fran… francophones, puis je les
+          félicite pour ça puis je voudrais… que… qu'on le dise aux Français, que c'est dommage
+          qu'ils ai… ils n'aident pas… ils ne nous aident pas en faisant ça</alinea>
+             <source>I10</source>
+           </bloccitation>
+         </exemple>
+       </para>
+        </section3>
+        <section3 id="s3n3">
+          <no>4.
+				1.
+				3</no>
+          <titre>3.1.3 Conscience que le « bon français » est une abstraction de la langue écrite</titre>
+          <para id="pa18"><no>18</no>
+        <alinea>Pour certains, le « bon français », le « français correct » relève du fantasme
+          puisqu’il ne se réalise complètement chez aucun des locuteurs de cette langue (20). Dans
+          l’extrait (21), cette abstraction, que le français de l’Académie représente par
+          excellence, est perçue comme un code non fonctionnel à l’oral :</alinea>
+         <exemple id="ex20">
+           <no>20</no>
+           <bloccitation>
+             <alinea>le français correct n'existe nulle part, finalement…</alinea>
+             <source>I20</source>
+           </bloccitation>
+         </exemple>
+         <exemple id="ex21">
+           <no>21</no>
+           <bloccitation>
+             <alinea>pour moi, il y a pas de bon français […]. Je suppose que, je pourrais dire, bon
+          ben : « Le français de l'Académie française, ça c'est… tu sais – ça c'est le… », comme ça.
+          Mais, qui parle comme ça, tu sais ?</alinea>
+             <source>I16</source>
+           </bloccitation>
+         </exemple>
+       </para>
+        </section3>
+        <section3 id="s3n4">
+          <no>4.
+				1.
+				4</no>
+          <titre>3.1.4 Le sentiment d’une préciosité, d’une inadéquation au contexte local des variétés prestigieuses</titre>
+          <para id="pa19"><no>19</no>
+        <alinea>La variété prestigieuse, qui dans l’extrait (22) est identifiée à « l’usage
+          parisien », apparaît également inadéquate en contexte local. Ce modèle s’accompagne d’une
+          préciosité que l’on rejette et que l’on déprécie : </alinea>
+        <exemple id="ex22">
+          <no>22</no>
+          <bloccitation>
+           <alinea>[…] le français canadien n’a peut-être pas le panache du caniche qu’est le
+          Parisian French, mais il est certain qu’on ne prend pas au Canada l’usage parisien comme
+          la norme. </alinea>
+           <source>Léveillé, 2005 : 84</source>
+          </bloccitation>
+        </exemple>
+      </para>
+          <para id="pa20"><no>20</no>
+        <alinea>Dans un même ordre d’idées, l’extrait (23) dénonce l’atténuation excessive de traits
+          linguistiques (ici phonétiques) caractéristiques de la variété locale de français dans le
+          discours de certains représentants de l’élite locale. Cet évitement, perçu comme une sorte
+          de trahison, semble inadapté, même en situation formelle : </alinea>
+         <exemple id="ex23">
+           <no>23</no>
+           <bloccitation>
+             <alinea>On n’a qu’à allumer le téléviseur sur notre unique chaîne française locale pour
+          entendre tous les soirs de la semaine à notre bulletin de nouvelles locales, l’animatrice,
+          originaire d’ici, prononcer le nom de notre province à la française, ou peut-être à la
+          québécoise. Bon, je comprends qu’un bulletin de nouvelles ne se fasse pas lire en
+          « joual » de La Broquerie ou de Sainte-Anne, mais quand même le « a » à la fin de
+          <marquage typemarq="italique">Manitoba</marquage> n’est pas celui de <marquage typemarq="italique">patate</marquage> ou de <marquage typemarq="italique">tache</marquage>
+          . </alinea>
+             <source>Le Réveil, 2005 : 20</source>
+           </bloccitation>
+         </exemple>
+      </para>
+          <para id="pa21"><no>21</no>
+        <alinea>L’emploi de la dénomination <marquage typemarq="italique">joual</marquage> pour
+          désigner des variétés topolectales, et vraisemblablement sociostylistiques, du français du
+          Manitoba peut ici surprendre. Traditionnellement associé au parler populaire de Montréal,
+          ce terme à connotation péjorative connaît pourtant un sens étendu signalé notamment par
+          Claude Poirier dans son <marquage typemarq="italique">Dictionnaire historique du français
+          québécois.</marquage> Il y renvoie en effet à « toute variété linguistique considérée
+          comme déviante par rapport à une norme donnée » (1998 : <marquage typemarq="italique">joual</marquage>). C’est dans ce sens qu’il est employé dans le corpus examiné. </alinea>
+      </para>
+        </section3>
+      </section2>
+      <section2 id="s2n2">
+        <no>4.
+				2</no>
+        <titre>3.2 Recherche de l’intercompréhension, du mot juste et de l’équilibre</titre>
+        <para id="pa22"><no>22</no>
+        <alinea>Un deuxième élément qui revient régulièrement dans les discours est celui qui
+          présente la recherche du mot juste et de l’équilibre comme les garants de la qualité de la
+          langue. On ne condamne pas ouvertement l’habitude française de parler trop vite qui, dans
+          les extraits (24) et (25), est davantage analysée comme une faiblesse de l’auditeur que
+          comme une incompétence du présentateur (il ne faut pas perdre de vue que l’intervieweuse
+          est d’origine française) ; mais on valorise l’intercompréhension (26) et le parler des
+          locuteurs qui réussissent à trouver un savant dosage dans le choix des mots et des
+          expressions (27). </alinea>
+        <exemple id="ex24">
+          <no>24</no>
+          <bloccitation>
+            <alinea>Moi j'ai parfois de la difficulté… à comprendre les présentateurs ou les
+          annonceurs. D'abord, leur débit est tellement rapide… l'accent est différent, qui faut…
+          [il fait] qu'on est obligé de… d'écouter avec plus de… d'attention. Et, des fois les mots
+          s'agrippent l'un après l'autre, pis on manque… on manque le sens d'une phrase…
+          </alinea>
+            <source>I7</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex25">
+          <no>25</no>
+          <bloccitation>
+            <alinea>quand on… on regarde les programmes de télévision qui viennent de France là, on
+          a de la difficulté à comprendre, parfois. Je sais pas si ils parlent trop vite, ou bien
+          donc… que i… articulent pas assez, mais on a de la misère pis ils ont des… des accents
+          qu'on… qu'on est pas habitué.</alinea>
+            <source>I9</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex26">
+          <no>26</no>
+          <bloccitation>
+            <alinea>Pour moi, la définition du français correct, c'est d'être communiqué puis
+          s'entendre d'une personne à l'autre. Si on comprend qu'est-ce que l'autre personne dit,
+          pour moi c'est ça qui est très important.</alinea>
+            <source>I13</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex27">
+          <no>27</no>
+          <bloccitation>
+            <alinea>[le « bon français »] c'est pas… pas nécessairement parler à la française, mais
+          un français avec les… les mots justes, et puis euh… on dit que… tu sais, il y a des
+          expressions pour… pour tout exprimer, alors, c'est quelqu'un qui a un beau… [un] bon
+          vocabulaire… qui peut varier ses expressions puis… et puis, pas… pas bourré d'anglicismes.
+          </alinea>
+            <source>I9</source>
+          </bloccitation>
+        </exemple>
+      </para>
+      </section2>
+      <section2 id="s2n3">
+        <no>4.
+				3</no>
+        <titre>3.3 Dévalorisation des variétés anglicisées et valorisation des archaïsmes</titre>
+        <para id="pa23"><no>23</no>
+        <alinea>La remarque du dernier extrait permet d’enchaîner sur la troisième tendance que l’on
+          peut identifier dans les discours et les écrits consultés. Il s’agit de celle qui consiste
+          à condamner les variétés anglicisées du français local, tendance qui va bien souvent de
+          pair avec la valorisation des survivances d’un état plus ancien de la langue française,
+          liée au fantasme de la pureté des origines<renvoi id="re1no6" idref="no6" typeref="note">6</renvoi>. Cette
+          association entre anglicismes à proscrire et archaïsmes à préserver est ancienne dans
+          l’histoire du prescriptivisme au Canada français<renvoi id="re1no7" idref="no7" typeref="note">7</renvoi>. Au
+          Manitoba, on la retrouve dans des introductions de glossaires ou de recueils de mots.
+          Liliane Rodriguez remarque dans son recueil d’archaïsmes courants au Manitoba français
+          qu’il faut « chérir les premiers [les archaïsmes] pour mieux guérir les seconds [les
+          anglicismes] » (1984 : 88-89). En 2006, dans l’introduction à son dictionnaire
+          d’anglicismes, Antoine Gaborieau reprend ce leitmotiv en préconisant la réhabilitation des
+          archaïsmes, ces vestiges du « vieux français » qui « [font] partie de notre héritage
+          culturel français et québécois » (2006 : 11) et déplore « les anglicismes qui pullulent
+          dans notre parler, à tel point que nous n’employons presque aucune phrase qui ne soit
+          farcie de ces expressions étrangères à notre patrimoine culturel » (2006 : 13). </alinea>
+      </para>
+        <para id="pa24"><no>24</no>
+        <alinea>En situation d’entrevue, le sentiment vis-à-vis des archaïsmes est parfois esquissé
+          comme le montre l’extrait (28) ; cette composante de la variété locale semble lui conférer
+          une plus grande légitimité surtout du fait qu’elle permet de rattacher cette variété à son
+          origine française et à atténuer le facteur « contact linguistique » comme principal
+          facteur de différenciation linguistique. </alinea>
+        <exemple id="ex28">
+          <no>28</no>
+          <bloccitation>
+            <alinea>mon père… parle un « canayen » là, fort ! Et puis… hum… je sais pas si les
+          Français de la France comprendraient ce qu'il dit… Mais, pourquoi est-ce qu'il parle comme
+          ça ? C'est… je suis pas certaine mais, j'ai… une fois, j'ai ouvert le livre de Tristan et
+          Is… Tristan et Iseult, mais il y avait du v… vieux français comme ça de… que mon père
+          dit ! Je me demandais : « Est-ce que ça vient de la France ? Est-ce que c'est ça ? Est-ce
+          que c'est du vieux français ? ». […] il y a des gens qui vont dire : « Oh ! mais, c'est
+          pas du bon français ça ! ». Moi, je dis : « Hum ! ». C'est… c'est pas bien ! C'est… il me
+          semble c'est ju… c'est… c'est leur français ! […] Alors, peut-être qu'ils ont un… un
+          français qui est… qui est plus vieux… parce que, ils sont pas tellement assimilés mes
+          parents ! Ma mère a de la difficulté à parler en anglais !</alinea>
+            <source>I18</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa25"><no>25</no>
+        <alinea>Dans le contexte manitobain, les phénomènes de mélanges linguistiques liés au
+          contact intense du français avec l’anglais concernent tout un chacun, à divers degrés. La
+          condamnation des variétés anglicisées du français est assez générale dans les discours
+          (29). Ces variétés sont souvent identifiées sous l’appellation de « franglais » (30).
+        </alinea>
+        <exemple id="ex29">
+          <no>29</no>
+          <bloccitation>
+            <alinea>je pense que quand tu parles le français, tu devrais être capable de le parler
+          sans constamment te lancer des expressions anglaises. Ça c'est pas un bon français !
+          </alinea>
+            <source>I32</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex30">
+          <no>30</no>
+          <bloccitation>
+            <alinea>notre fran… franglais… à part d'avoir des mots anglais, on a toute des
+          tournures de phrases anglaises puis les… les personnes s'en rendent pas compte ! On leur
+          dit : « Mais c'est pas français ça ! »</alinea>
+            <source>I10</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa26"><no>26</no>
+        <alinea>L’usage des variétés anglicisées les plus stigmatisées s’associe à des facteurs
+          géographiques et sociaux : ce sont des variétés rurales (31) dont l’emploi est plus
+          fréquent chez les personnes moins éduquées (32). </alinea>
+        <exemple id="ex31">
+          <no>31</no>
+          <bloccitation>
+            <alinea>Et il y a des villages où le français est… est très… très pauvre. Parce qu'il
+          est… il est très très assimilé, il y a beaucoup beaucoup d'anglais, et il y a une mauvaise
+          prononciation, c'est-à-dire qu'il y a une prononciation qui est difformée, qui… qui n'est
+          même pas du vieux français, qui est une prononciation… je sais pas, anglaise… Alors ça
+          c'est pas… bon </alinea>
+            <source>I11</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex32">
+          <no>32</no>
+          <bloccitation>
+            <alinea>dépendant de l'éducation des parents… le français des enfants varie. Et puis
+          aussi de ce qu'ils peuvent assimiler à l'école… Si ils font… juste un peu à l'école, puis
+          un peu à la maison, puis partout ailleurs c'est anglais, leur français est encore moins…
+          moins bon.</alinea>
+            <source>I14</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa27"><no>27</no>
+        <alinea>L’emploi d’anglicismes ou du « franglais » s’associe en outre à une faiblesse (33),
+        à une paresse intellectuelle (34) ou à l’indifférence (35) : </alinea>
+        <exemple id="ex33">
+          <no>33</no>
+          <bloccitation>
+            <alinea>Je veux dire faut que je fasse attention à mes anglicismes. Ça c'est un… ça
+          c'est une faiblesse, puis je me dis… j'ai pas d'excuse. Mais, des fois, le mot français ne
+          vient pas.</alinea>
+            <source>I6</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex34">
+          <no>34</no>
+          <bloccitation>
+            <alinea>la qualité du... du français laisse beaucoup à désirer et puis c’est...
+          c’est... du franglais qu’on dit ! Oh c’est terrible ! Moi, je lutte contre ça, je trouve
+          que c’est... c’est massacrant. Euh c’est... quand on entend des mots anglais, les mots...
+          euh c’est une paresse puis aussi, une paresse intellectuelle à se forcer, trouver les bons
+          termes alors on va au plus... au mot qui vient le plus vite, c’est le mot anglais
+          </alinea>
+            <source>I10</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex35">
+          <no>35</no>
+          <bloccitation>
+            <alinea>je vais faire certaine que cette phrase fait du sens : Si j’aurais payé
+          attention à<marquage typemarq="italique"> c’qu’on parlait de, j’aurais tourné rouge<renvoi id="re1no8" idref="no8" typeref="note">8</renvoi></marquage>.</alinea>
+            <alinea> C’est le langage moyen des franco-manitobains [sic] qui sont indifférents face à
+          leur français ! […] UN ANGLICISME, CE <marquage typemarq="majuscule">n’est pas du
+          français</marquage> ! ! Si vous ne faites pas d’effort de parler français, en français,
+          c’est-à-dire sans le parsemer d’expressions anglophones ou d’anglicismes, ne vous dites
+          pas plus à l’aise en français qu’en anglais.</alinea>
+            <source>Forum, 21 juin 2008</source>
+          </bloccitation>
+        </exemple>
+      </para>
+      </section2>
+      <section2 id="s2n4">
+        <no>4.
+				4</no>
+        <titre>3.4 Revendication des variétés anglicisées</titre>
+        <para id="pa28"><no>28</no>
+        <alinea>Si certains luttent contre la mixité linguistique (cf. le témoignage en (34)),
+          d’autres constatent que les mélanges de codes font naturellement partie de la réalité
+          linguistique qu’ils vivent (36 et 37), sans pour autant chercher à passer à l’étape de
+          revendication de ces usages. </alinea>
+        <exemple id="ex36">
+          <no>36</no>
+          <bloccitation>
+            <alinea>Ici, au Manitoba, si on peut pas s… trouver le mot, on le dit en anglais !
+            C'est… tout simplement.</alinea>
+            <source>I23</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex37">
+          <no>37</no>
+          <bloccitation>
+            <alinea>Mais c'est parce que c'est tellement… c'est devenu tellement naturel ! Tu viens
+          que tu as… tu as… tu as pas… plus ou moins une maîtrise de la langue française, pis plus
+          ou moins une maîtrise de la langue anglaise… pis quand tu parles, ben ! tu sautes d'un à
+          l'autre</alinea>
+            <source>I32</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa29"><no>29</no>
+        <alinea>Dans l’extrait suivant (38), l’anecdote racontée révèle l’intégration profonde de
+          certaines expressions en anglais dont on ne connaît pas l’équivalent en français.
+        </alinea>
+        <exemple id="ex38">
+          <no>38</no>
+          <bloccitation>
+            <alinea>chez nous on avait des anglicismes, d'abord hein. Alors, je les ai pas tous
+          perdus. Je suis arrivée à la supérieure générale, une fois, jeune novice moi pis, mon père
+          il voulait que j'appelle plus souvent chez nous. Puis, il m'a dit, il dit : « Reverse the
+          call… Il dit – pis, on va le payer nous autres ». Fait que j'arrive à la… la… à la
+          supérieure générale, moi pis… me rappelle était couchée […]. Pis je dis : « Papa aimerait
+          bien ça que j'a… que j'appelle plus souvent à la maison, pis reverse the call ». Oh ! [ma
+          chère] ! Oh ! elle, c'était une Québécoise ! [Rires]. Je me suis lé fait dire ! Puis
+          « reverse the call », moi j'avais jamais rien entendu d'autre ! Je savais même pas comment
+          dire ça en français, hein.</alinea>
+            <source>I6</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa30"><no>30</no>
+        <alinea>Le discours de revendication de l’usage de variétés de français anglicisées est très
+          rare en situation d’entrevue où prime le sentiment que ces variétés n’ont aucune
+          légitimité. Lorsqu’il se rencontre, il s’appuie sur l’argument de l’importance de la
+          conservation de l’usage du français, quel que soit son niveau de correction (« Peut-être
+          je le re… je parle le français comme une vache, mais au moins je le parle », I19), et il
+          met de nouveau en relief le fait qu’une trop grande recherche de la perfection peut mener
+          au basculement vers l’usage exclusif de l’anglais (39). </alinea>
+        <exemple id="ex39">
+          <no>39</no>
+          <bloccitation>
+           <alinea>en jeunesse, qu'est-ce qui m'achalait le plus – pis j'ai vu ça un petit peu
+          [de] même ici, quand je travaille au Musée – si je parlais, pis il y a quelqu'un qui me
+          corrigeait ! « Okay, fine, je vais parler en anglais ». Tu sais. Pis c'est ça que…
+          j'haïssais ça en jeunesse, pis je dis : « Écoute », tu sais, « dans certaines cas on
+          devrait être content qu'on peut parler en français. Mal, bien, in between, ça fait [pas
+          de, bout] [différence]… c'est… c'est important, mais c'est… on… on se comprenne ».
+           </alinea>
+            <source>I19</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa31"><no>31</no>
+        <alinea>Ce discours de revendication linguistique et identitaire se retrouve parfois chez
+          les jeunes dans certains écrits de nature polémique, comme des articles de journaux (40)
+          ou des oeuvres fictives de création littéraire (41). </alinea>
+        <exemple id="ex40">
+          <no>40</no>
+          <bloccitation>
+            <alinea>J’ai dû subir tout au long de ma jeunesse, de mes collègues de classe et
+          d’autres gens, l’emploi de l’expression « franglais ». Cette expression m’a toujours
+          dégoûtée, ce n’est pas parce qu’on appelle sa poubelle « la garbage » ou qu’on dit « que
+          le show était awesome » qu’on ne parle pas français pour autant.</alinea>
+            <source>Le Réveil, 2005 : 20</source>
+          </bloccitation>
+        </exemple>
+        <exemple id="ex41">
+          <no>41</no>
+          <bloccitation>
+            <alinea>Je fais jusse dire que les Francos, on est aussi raciste envers nous-mêmes
+          qu’envers les anglophones. Je veux dire, moé je suis bilingue pis tous les
+          Franco-Manitobains que je connais sont bilingues. Cossé tu veux ? L’anglais icitte, ça
+          s’attrape comme un rhume. Mais quand un ostie d’anglophone apprend le français, on se plie
+          le cul en quatre pour le féliciter. Moé, parsonne me félicite pour avoir appris le
+          français. Au contraire, je me fais chier dessus par les anglophones parce que je suis
+          Franco pis je me fais chier dessus par les Francos parce que je parle mal.</alinea>
+           <source>Prescott, 2001 : 50-51</source>
+          </bloccitation>
+        </exemple>
+      </para>
+        <para id="pa32"><no>32</no>
+        <alinea>Ce type de protestation s’inscrit toutefois dans le cadre d’actes individuels et
+          ponctuels, à visées souvent provocatrices, et ne se trouve pas relayé au niveau collectif.
+          Au début des années 1990, ce discours revendicatif était loin de faire l’objet d’un
+          consensus au sein de la communauté franco-manitobaine si on en croit les vives réactions
+          qu’avaient suscitées les présentations de la pièce de Marc Prescott <marquage typemarq="italique">Sex, Lies et les Franco-Manitobains </marquage>dont est tiré l’extrait
+          (41). Certains membres de la communauté y avaient effectivement condamné l’emploi d’un
+          langage jugé trop vulgaire et le recours à l’anglais ou au franglais y était pour beaucoup
+          dans la réception négative de l’oeuvre (cf. Entretien inédit avec Marc Prescott, juillet
+          2006). La pièce de Prescott, remontée à Saint-Boniface tout récemment (2009), n’a pas
+          particulièrement provoqué de débats passionnels et on peut sans doute y voir une évolution
+          des mentalités. Pourtant, rien n’indique qu’on assiste à l’heure actuelle à une prise en
+          charge par les représentants de l’élite francophone d’un discours de légitimation de
+          l’usage de variétés anglicisées de français. </alinea>
+      </para>
+      </section2>
+    </section1>
+    <section1 id="s1n5">
+      <no>5</no>
+      <titre>4. Conclusion</titre>
+      <para id="pa33"><no>33</no>
+        <alinea>L’examen des principales attitudes linguistiques observées en contexte
+          franco-manitobain nous a permis de constater que ces dernières correspondent à des schémas
+          de perception courants au sein de l’espace francophone multilingue. Au Manitoba, comme
+          dans d’autres communautés franco-canadiennes aux prises avec un modèle normatif endogène
+          ou exogène du français et en contact étroit avec la langue anglaise, les discours
+          épilinguistiques portent sur la gamme d’usages qui se situent entre le pôle du « français
+          correct » et celui de l’anglais. Ces discours révèlent diverses tendances qui, au-delà de
+          celles traditionnellement mises au jour par les études sur les attitudes linguistiques,
+          vont de la dévalorisation argumentée des variétés prestigieuses à la revendication de
+          l’usage de variétés anglicisées du français chez certains acteurs de la communauté, cette
+          dernière tendance demeurant essentiellement d’ordre individuel. </alinea>
+      </para>
+      <para id="pa34"><no>34</no>
+        <alinea>Comme chercheurs, nous souhaitons décrire et valoriser les phénomènes liés à la
+          variation et au changement linguistiques. Ils s’associent en effet à la richesse
+          patrimoniale et présentent un intérêt particulier pour l’étude du langage. Si le travail
+          de description du linguiste peut contribuer à la connaissance des particularités des
+          différentes variétés d’une même langue, il apparaît toutefois que l’acceptation, voire la
+          revendication de certaines variétés de la langue, comme les variétés anglicisées au
+          Manitoba, reste du ressort de la communauté linguistique qui en fait usage. Ainsi, le
+          processus de changement linguistique dû au contact des langues semble bien simple
+          lorsqu’il est objectivement énoncé : « Il y a un temps – court – où les unités et les
+          structures peuvent être considérées comme des emprunts ou comme des faits d’interlangue ou
+          comme des innovations, il y a un temps <marquage typemarq="italique">où elles font
+          partie<renvoi id="re1no9" idref="no9" typeref="note">9</renvoi></marquage> du répertoire linguistique partagé par
+          les membres du groupe » (Moreau, 1999 : 42). L’analyse des attitudes linguistiques en
+          contexte francophone minoritaire montre pourtant que les normes subjectives jouent un rôle
+          paralysant dans le processus d’intégration et de légitimation de ce type de changement
+          linguistique. Au Manitoba, dans leur pratique quotidienne du français, les locuteurs
+          francophones partagent bien des traits imputables au contact avec l’anglais et adoptent
+          des comportements linguistiques en adéquation avec leur environnement bilingue. Comme nous
+          l’avons montré, ces traits et ces comportements, à de rares exceptions près, sont
+          cependant condamnés dans les discours. Les variétés anglicisées non légitimes qui
+          apparaissent au bas de la hiérarchie linguistique constituent pourtant, pour certains
+          francophones, leur seule ressource d’expression en français. Une trop grande dépréciation
+          au sein même de la communauté linguistique de ces usages linguistiques risque alors de
+          « décourage[r] les locuteurs respectifs, les privant non seulement de leur conscience de
+          soi, mais aussi de leur capacité d’expression en les faisant se taire » (Bochmann 2001 :
+          95) … en français. </alinea>
+      </para>
+    </section1>
+  </corps>
+  <partiesann>
+    <grnotebio>
+      <notebio id="nb1" idrefs="au1" lang="fr">
+        <alinea>Sandrine Hallion est professeure agrégée et enseigne la linguistique française au Département de lettres du Collège universitaire de Saint-Boniface à Winnipeg (Manitoba, Canada). Ses travaux portent en particulier sur la description et la comparaison des variétés du français parlé au Canada, surtout dans l’Ouest. Elle a publié plusieurs articles sur cette problématique, notamment « Similarités morphosyntaxiques des parlers français de l’ouest canadien » publié en 2006 dans R. Papen et G. Chevalier (dir.), <marquage typemarq="italique">Les variétés de français en Amérique du Nord. Évolution, innovation et description</marquage>.</alinea>
+      </notebio>
+    </grnotebio>
+    <grbiblio>
+      <biblio>
+        <refbiblio id="rb1">Bochmann, Klaus. 2001. Notre langue, votre patois, leur baragouin : stéréotypes et représentations des langues. <marquage typemarq="italique">Hermès</marquage> 30 : 93-102.</refbiblio>
+        <refbiblio id="rb2">Boudreau, Annette. 1991. Les rapports que les jeunes Acadiens et Acadiennes entretiennent avec leur langue et avec la langue. <marquage typemarq="italique">Égalité</marquage> 30 : 13-37. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="http://www.umoncton.ca/egalite/article30.html" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.umoncton.ca/egalite/article30.html</liensimple></refbiblio>
+        <refbiblio id="rb3">Boudreau, Annette et Françoise Gadet. 1998. Attitudes en situation minoritaire. L’exemple de l’Acadie. Dans <marquage typemarq="italique">Francophonies. Recueil d’études offert en hommage à Suzanne Lafage</marquage>, sous la direction de Ambroise Queffélec. Nice : Didier Érudition. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="http://www.unice.fr/ILF-CNRS/ofcaf/12/Boudreau.htm" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.unice.fr/ILF-CNRS/ofcaf/12/Boudreau.htm</liensimple></refbiblio>
+        <refbiblio id="rb4">Entretien inédit avec Marc Prescott (juillet 2006).</refbiblio>
+        <refbiblio id="rb5">Entrevue avec Jean-Denis Gendron. 2008. Qu’est-ce qu’il a, mon accent ?, <marquage typemarq="italique">Québec Sciences</marquage>, octobre 2008 : 26-28.</refbiblio>
+        <refbiblio id="rb6">Forum de discussion sur le site Internet de Facebook : « Oui Yan, j’viens du CLR et je suis plus confortable en parlant en français ». Consulté le 22 décembre 2009. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="http://www.facebook.com/group.php?gid=18686351606&amp;ref=search&amp;sid=1286753440.3154815349..1" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.facebook.com/group.php?gid=18686351606&amp;ref=search&amp;sid=1286753440.3154815349..1</liensimple></refbiblio>
+        <refbiblio id="rb7">Fournier, Robert. 2001-2202. <marquage typemarq="italique">Français d’Icitte. Une grammaire basilectale</marquage>. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="http://pages.infinit.net/noulawi/GFICh2JSP.htm" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://pages.infinit.net/noulawi/GFICh2JSP.htm</liensimple></refbiblio>
+        <refbiblio id="rb8">Gaborieau, Antoine. 2006. <marquage typemarq="italique">Le petit Gabi. Dictionnaire des anglicismes du Canada français</marquage>. Saint-Boniface : Éditions des Plaines.</refbiblio>
+        <refbiblio id="rb9">Hallion, Sandrine. 2000. Étude du français parlé au Manitoba. Thèse de doctorat, Université Aix-Marseille I – Université de Provence.</refbiblio>
+        <refbiblio id="rb10">Lafontaine, Dominique. 1997. Attitudes linguistiques. Dans <marquage typemarq="italique">Sociolinguistique. Concepts de base</marquage>, sous la direction de Marie-Louise Moreau, 56-60. Liège : Mardaga. </refbiblio>
+        <refbiblio id="rb11">Laurendeau, Paul. 2004. Joual-franglais-français : la proximité dans l’épilinguistique. Dans <marquage typemarq="italique">Des langues collatérales – Problèmes linguistiques, sociolinguistiques et glottopolitiques de la proximité linguistique</marquage>, sous la direction de Jean-Michel Éloy. La collection Espace discursif, T.II, 431-446. Paris : L’Harmattan. </refbiblio>
+        <refbiblio id="rb12">Laurendeau, Paul. 2007. Avoir un méchant langage. Du comportement social dans les représentations épilinguistiques de la culture vernaculaire : le cas du Québec francophone. <marquage typemarq="italique">Glottopol</marquage> 9 : 22-48. <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="http://www.univ-rouen.fr/dyalang/glottopol/telecharger/numero_9/gpl9_02laurendeau.pdf" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">http://www.univ-rouen.fr/dyalang/glottopol/telecharger/numero_9/gpl9_02laurendeau.pdf</liensimple></refbiblio>
+        <refbiblio id="rb13">Le Réveil. 2005. <marquage typemarq="italique">Journal mensuel des étudiants du Collège universitaire de Saint-Boniface</marquage>, vol. 44, édition 8 : 20-21.</refbiblio>
+        <refbiblio id="rb14">Léveillé, Roger. 2005. Rapport des écrivains franco-manitobains à la langue française. Dans <marquage typemarq="italique">Parade ou les autres</marquage>, 83-110. Saint-Boniface : Les Éditions du Blé.</refbiblio>
+        <refbiblio id="rb15">Moreau, Marie-Louise. 1999. Pluralité des normes et des appartenances : Convergences et divergences en situation pédagogique. <marquage typemarq="italique">Terminogramme</marquage> 91-92 : 41-63.</refbiblio>
+        <refbiblio id="rb16">Poirier, Claude, dir. 1998. <marquage typemarq="italique">Dictionnaire historique du français québécois. Monographies lexicographiques de québécismes</marquage>. Sainte-Foy : Les Presses de l'Université Laval.</refbiblio>
+        <refbiblio id="rb17">Prescott, Marc. 2001. <marquage typemarq="italique">Big, bullshit, sex, lies et les Franco-Manitobains</marquage>. Dans la collection Rouge. Saint-Boniface : Les Éditions du Blé.</refbiblio>
+        <refbiblio id="rb18">Rodriguez, Liliane. 1984. <marquage typemarq="italique">Mots d’hier, mots d’aujourd’hui</marquage>. Saint-Boniface : Éditions des Plaines. </refbiblio>
+      </biblio>
+    </grbiblio>
+    <grnote>
+      <note id="no1">
+        <no>1</no>
+        <alinea>Les représentants actifs sont les membres de l’élite culturelle, les journalistes,
+          les enseignants et professeurs, agents légitimes de diffusion de la norme. Les
+          représentants passifs sont de simples locuteurs de la communauté dont les usages sont
+          érigés en modèles.</alinea>
+      </note>
+      <note id="no2">
+        <no>2</no>
+        <alinea>L’adjectif courant renvoie à la fréquence de ces représentations au sein de la
+          communauté linguistique, l’adjectif prévisible au fait qu’elles ont été observées ailleurs
+          en francophonie.</alinea>
+      </note>
+      <note id="no3">
+        <no>3</no>
+        <alinea>La remarque suivante illustre bien le caractère hybride de ce médium : « […] sur le
+          web, j’écris comme je parle » (<liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:href="http://www.new.facebook.com/wall.php?id=18686351606" xlink:type="simple">
+          http://www.new.facebook.com/wall.php?id=18686351606</liensimple>)</alinea>
+      </note>
+      <note id="no4">
+        <no>4</no>
+        <alinea>Informateur numéro 31 (I31). Tous les exemples accompagnés de ce type de référence
+          sont issus de Hallion (2000).</alinea>
+      </note>
+      <note id="no5">
+        <no>5</no>
+        <alinea>Les caractères gras sont utilisés pour mettre en relief la récurrence de certains
+          termes et de certaines opinions.</alinea>
+      </note>
+      <note id="no6">
+        <no>6</no>
+        <alinea>Le mythe de la pureté conservée par le français canadien apparaît dans une entrevue
+          récente (octobre 2008) avec Jean-Denis Gendron. On y trouve, dans le sous-titre, la
+          remarque suivante : « Les Québécois ne parlent pas « mal ». Leur accent est aussi pur que
+          celui qui prévalait à la cour de Louis XIV. En fait, ce sont les Français qui ont changé
+          d’accent […] » (Entrevue avec Jean-Denis Gendron : 26). Un locuteur franco-manitobain
+          reprend cette opinion commune : « Il y a des gens qui disent que le Qué… le… le français
+          au Québec… des gens qui disent… c'est une opinion, je pense… que le français du Québec
+          c'est le français qui est peut-être le plus pur parce que, il a pas beaucoup changé depuis
+          des centaines d'années. Tandis que… en France, il a… il a évolué ; tandis qu'au Québec, le
+          vieux fran… c'est beaucoup comme du vieux français qui se parlait autre… euh autrement…
+          autrefois au Québec… euh en France, excuse (Hallion, 2000 : I25).</alinea>
+      </note>
+      <note id="no7">
+        <no>7</no>
+        <alinea>Entre autres, Ernest Gagnon signalait en 1892 : « Les archaïsmes, que nous devons
+          conserver comme de vieux joyaux de famille, et les anglicismes, dont nous devons nous
+          débarasser [sic] avec le plus d’application possible » (cité dans Fournier,
+          2001-2002).</alinea>
+      </note>
+      <note id="no8">
+        <no>8</no>
+        <alinea>On a affaire ici à ce que Paul Laurendeau appelle un « exemple rituel » (2007 :
+          33).</alinea>
+      </note>
+      <note id="no9">
+        <no>9</no>
+        <alinea>C’est Moreau qui souligne.</alinea>
+      </note>
+    </grnote>
+  </partiesann>
+</article>
