@@ -4,11 +4,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from eruditarticle.objects import EruditJournal
-from eruditarticle.objects import EruditPublication
+from eruditarticle.objects import EruditPublication, EruditArticle
 
 from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.modelmixins import FedoraMixin
-from erudit.fedora.objects import JournalDigitalObject
+from erudit.fedora.objects import JournalDigitalObject, ArticleDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 
 
@@ -547,6 +547,19 @@ class Article(models.Model, FedoraMixin):
         related_name='issues',
         verbose_name=_("Numéro"),
     )
+
+    def get_fedora_model(self):
+        return ArticleDigitalObject
+
+    def get_erudit_class(self):
+        return EruditArticle
+
+    def get_full_identifier(self):
+        if self.localidentifier and self.issue.localidentifier:
+            return "{}.{}".format(
+                self.issue.get_full_identifier(),
+                self.localidentifier
+            )
 
 
 class Publisher(Edinum):

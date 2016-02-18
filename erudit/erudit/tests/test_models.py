@@ -7,7 +7,7 @@ from eruditarticle.objects import EruditPublication
 
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
-from erudit.factories import IssueFactory
+from erudit.factories import IssueFactory, ArticleFactory
 
 from .base import BaseEruditTestCase
 
@@ -98,7 +98,7 @@ class TestIssue(BaseEruditTestCase):
         # Run & check
         self.assertIsNone(self.issue.get_full_identifier())
 
-    def test_do_not_have_a_full_identifier_if_the_journal_has_no_localidentifier(self):
+    def test_issue_do_not_have_a_full_identifier_if_the_journal_has_no_localidentifier(self):
         # Setup
         self.journal.localidentifier = None
         self.journal.save()
@@ -115,3 +115,20 @@ class TestIssue(BaseEruditTestCase):
         self.issue.save()
         # Run & check
         self.assertEqual(self.issue.pid, 'erudit:erudit.dummy139.dummy1234')
+
+
+class TestArticle(BaseEruditTestCase):
+
+    def setUp(self):
+        super(TestArticle, self).setUp()
+        self.issue = IssueFactory.create(journal=self.journal)
+        self.article = ArticleFactory.create(issue=self.issue)
+
+    def test_article_do_not_have_a_full_identifier_if_the_issue_has_no_localidentifier(self):
+        # Setup
+        self.issue.localidentifier = None
+        self.issue.save()
+        self.article.localidentifier = 'dummy1234'
+        self.article.save()
+        # Run & check
+        self.assertIsNone(self.article.get_full_identifier())
