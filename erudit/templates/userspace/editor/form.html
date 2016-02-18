@@ -6,6 +6,10 @@
 {% block data-controller %}userspace:editor:form{% endblock data-controller %}
 
 {% block extrahead %}
+<script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+{% endblock %}
+
+{% block footerscript %}
 {{ form.media }}
 {% endblock %}
 
