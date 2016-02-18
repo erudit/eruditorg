@@ -42,12 +42,14 @@
   'components/alerts',
   'components/breadcrumbs',
   'components/fileupload',
+  'components/lists',
   'components/panels';
 
 // 6. Page-specific styles
 @import
   'pages/login',
-  'pages/individual_subscription';
+  'pages/individual_subscription',
+  'pages/article-detail';
 
 // 7. Themes
 @import

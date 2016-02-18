@@ -54,6 +54,10 @@ $grid-gutter-width:         22px;
 $margin-horizontal-default: $grid-gutter-width / 2;
 $margin-vertical-default:   $grid-gutter-width * 2;
 
+// horizontal is half gutter size, vertical double the gutter
+$padding-horizontal-default: $grid-gutter-width / 2;
+$padding-vertical-default:   $grid-gutter-width / 2;
+
 // -----------------------------------------------------------------------------
 // Bootstrap's Defaults Override
 // -----------------------------------------------------------------------------

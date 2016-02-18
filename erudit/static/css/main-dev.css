@@ -4412,6 +4412,10 @@ html {
   -webkit-text-size-adjust: 100%;
   /* 2 */ }
 
+* {
+  margin: 0;
+  padding: 0; }
+
 /**
  * Remove default margin.
  */
@@ -4563,9 +4567,6 @@ svg:not(:root) {
 /**
  * Address margin not present in IE 8/9 and Safari.
  */
-figure {
-  margin: 1em 40px; }
-
 /**
  * Address differences between Firefox and other browsers.
  */
@@ -4819,79 +4820,6 @@ body {
   font-style: normal; }
 
 /**
-* Open Sans
-*/
-@font-face {
-  font-family: 'Open Sans Light';
-  src: url("../fonts/open-sans/OpenSans-Light.eot");
-  src: url("../fonts/open-sans/OpenSans-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-Light.woff") format("woff"), url("../fonts/open-sans/OpenSans-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Open Sans Light Italic';
-  src: url("../fonts/open-sans/OpenSansLight-Italic.eot");
-  src: url("../fonts/open-sans/OpenSansLight-Italic.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSansLight-Italic.woff") format("woff"), url("../fonts/open-sans/OpenSansLight-Italic.ttf") format("truetype");
-  font-weight: 300;
-  font-style: italic; }
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url("../fonts/open-sans/OpenSans.eot");
-  src: url("../fonts/open-sans/OpenSans.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans.woff") format("woff"), url("../fonts/open-sans/OpenSans.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Open Sans Italic';
-  src: url("../fonts/open-sans/OpenSans-Italic.eot");
-  src: url("../fonts/open-sans/OpenSans-Italic.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-Italic.woff") format("woff"), url("../fonts/open-sans/OpenSans-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic; }
-
-@font-face {
-  font-family: 'Open Sans Semibold';
-  src: url("../fonts/open-sans/OpenSans-Semibold.eot");
-  src: url("../fonts/open-sans/OpenSans-Semibold.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-Semibold.woff") format("woff"), url("../fonts/open-sans/OpenSans-Semibold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Open Sans Semibold Italic';
-  src: url("../fonts/open-sans/OpenSans-SemiboldItalic.eot");
-  src: url("../fonts/open-sans/OpenSans-SemiboldItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-SemiboldItalic.woff") format("woff"), url("../fonts/open-sans/OpenSans-SemiboldItalic.ttf") format("truetype");
-  font-weight: 600;
-  font-style: italic; }
-
-@font-face {
-  font-family: 'Open Sans Bold';
-  src: url("../fonts/open-sans/OpenSans-Bold.eot");
-  src: url("../fonts/open-sans/OpenSans-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-Bold.woff") format("woff"), url("../fonts/open-sans/OpenSans-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Open Sans Bold Italic';
-  src: url("../fonts/open-sans/OpenSans-BoldItalic.eot");
-  src: url("../fonts/open-sans/OpenSans-BoldItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-BoldItalic.woff") format("woff"), url("../fonts/open-sans/OpenSans-BoldItalic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic; }
-
-@font-face {
-  font-family: 'Open Sans Extrabold';
-  src: url("../fonts/open-sans/OpenSans-Extrabold.eot");
-  src: url("../fonts/open-sans/OpenSans-Extrabold.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-Extrabold.woff") format("woff"), url("../fonts/open-sans/OpenSans-Extrabold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Open Sans Extrabold Italic';
-  src: url("../fonts/open-sans/OpenSans-ExtraboldItalic.eot");
-  src: url("../fonts/open-sans/OpenSans-ExtraboldItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/OpenSans-ExtraboldItalic.woff") format("woff"), url("../fonts/open-sans/OpenSans-ExtraboldItalic.ttf") format("truetype");
-  font-weight: 800;
-  font-style: italic; }
-
-/**
 * Style for icon fonts used everywhere
 */
 @font-face {
@@ -5068,6 +4996,24 @@ mark,
 .mono-space {
   font-family: "Maax-RegularMono", Menlo, Monaco, Consolas, "Courier New", monospace !important; }
 
+.normal {
+  font-family: "Maax", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.italic, em, i {
+  font-family: "Maax-Italic", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.bold, strong, b {
+  font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.italic strong,
+em strong,
+strong em,
+i strong,
+strong i,
+b i,
+i b {
+  font-family: "Maax-Bolditalic", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 .text-muted {
   color: #979797; }
 
@@ -5227,6 +5173,13 @@ address {
   width: 1px; }
 
 /**
+* reset child columns
+*/
+.child-column-fit [class*="col-"] {
+  padding-left: 0;
+  padding-right: 0; }
+
+/**
 * remove margin or padding
 */
 .no-margin {
@@ -5245,6 +5198,12 @@ ul.unstyled, ol.unstyled {
   ul.unstyled li, ol.unstyled li {
     margin: 0;
     padding: 0; }
+
+/**
+* color classes
+*/
+.color-red {
+  color: #FF4242; }
 
 /**
 * variables related
@@ -5864,6 +5823,27 @@ label.required:after {
       color: #000;
       font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
+/**
+* Definition List (DL)
+*/
+dl dd:before, dl dd:after {
+  content: " ";
+  display: table; }
+
+dl dd:after {
+  clear: both; }
+
+dl dt {
+  float: left;
+  width: 40px;
+  clear: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+dl dd {
+  margin-left: 60px; }
+
 .panel-group {
   margin: 20px; }
   .panel-group .panel {
@@ -5936,3 +5916,59 @@ form.filter p * {
 form.filter input[type="submit"] {
   margin-top: 0;
   margin-left: 12px; }
+
+/**
+* Article detail
+*/
+section#article-detail {
+  /**
+  * default for elements
+  */
+  /**
+  * Utils class
+  */
+  /**
+  * main article header
+  */
+  /**
+  * Article body
+  */ }
+  section#article-detail a {
+    color: #FF4242; }
+  section#article-detail .sep-line {
+    height: 1px;
+    margin-bottom: 44px;
+    position: relative; }
+    section#article-detail .sep-line:before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      border-top: 1px solid #000;
+      position: absolute;
+      top: 0; }
+  section#article-detail .border-top {
+    position: relative; }
+    section#article-detail .border-top:before {
+      content: "";
+      display: block;
+      height: 1px;
+      border-top: 1px solid #000;
+      position: absolute;
+      top: 0;
+      left: 11px;
+      right: 11px; }
+  section#article-detail header.article-header h2 {
+    margin: 0;
+    font-size: 36px;
+    line-height: 1.4em;
+    font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  section#article-detail header.article-header hgroup {
+    padding-top: 29.33333px;
+    padding-bottom: 29.33333px; }
+    section#article-detail header.article-header hgroup p, section#article-detail header.article-header hgroup h3, section#article-detail header.article-header hgroup h4, section#article-detail header.article-header hgroup h5 {
+      margin-bottom: 5px; }
+    section#article-detail header.article-header hgroup p:last-child, section#article-detail header.article-header hgroup h3:last-child, section#article-detail header.article-header hgroup h4:last-child, section#article-detail header.article-header hgroup h5:last-child {
+      margin-bottom: 0; }
+  section#article-detail .article-body {
+    padding-top: 44px; }

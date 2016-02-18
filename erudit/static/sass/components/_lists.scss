@@ -1,0 +1,24 @@
+/**
+* Definition List (DL)
+*/
+
+$dl-horizontal-offset: 60px;
+
+dl {
+
+  dd {
+    @include clearfix; // Clear the floated `dt` if an empty `dd` is present
+  }
+
+  dt {
+    float: left;
+    width: ($dl-horizontal-offset - 20);
+    clear: left;
+    @include text-overflow;
+  }
+
+  dd {
+    margin-left: $dl-horizontal-offset;
+  }
+
+}

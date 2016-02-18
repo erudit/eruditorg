@@ -41,6 +41,15 @@
 }
 
 /**
+* reset child columns
+*/
+
+.child-column-fit [class*="col-"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/**
 * remove margin or padding
 */
 
@@ -61,4 +70,13 @@ ul, ol {
       padding: 0;
     }
   }
+}
+
+
+/**
+* color classes
+*/
+
+.color-red {
+  color: $color-red;
 }

@@ -112,6 +112,26 @@ mark,
 .serif               { font-family: $font-family-serif !important; }
 .mono-space          { font-family: $font-family-monospace !important; }
 
+// font weight
+.normal           { @include fw-normal(); }
+
+// italics: em, i, .italic
+.italic, em, i    { @include fw-normal-italic(); }
+
+// bolds: strong, b, .bold
+.bold, strong, b  { @include fw-bold(); }
+
+// bold italics
+.italic strong,
+em strong,
+strong em,
+i strong,
+strong i,
+b i,
+i b {
+  @include fw-bold-italic();
+}
+
 // Contextual colors
 .text-muted {
   color: $text-muted;
