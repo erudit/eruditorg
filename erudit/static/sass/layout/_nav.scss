@@ -27,7 +27,7 @@
       line-height: 14px;
       position: relative;
       padding-right: 25px;
-      @include fw-medium();
+      @include fw-sans-medium();
 
       &:hover {
         color: $color-red;
@@ -64,7 +64,7 @@
   // -----------------------------------------------------------------------------
   // This file contains all styles related to the header of the site/application.
   // -----------------------------------------------------------------------------
-  
+
   nav.navbar {
     background-color: $colour-primary;
     border: 0;

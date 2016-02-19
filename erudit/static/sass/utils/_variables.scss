@@ -91,12 +91,21 @@ $link-hover-decoration: underline;
 //## Font, line-height, and color for body text, headings, and more.
 
 $font-family-sans-serif:  "Maax", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-serif:       "FreightTextBook", Georgia, "Times New Roman", Times, serif;
+
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   "Maax-RegularMono", Menlo, Monaco, Consolas, "Courier New", monospace;
 $font-family-base:        $font-family-sans-serif;
 
-// font-weight font families variation
+// serif font-weight font families variation
+$font-family-serif-regular:         "FreightTextBook", Georgia, "Times New Roman", Times, serif;
+$font-family-serif-regular-italic:  "FreightTextBookItalic", Georgia, "Times New Roman", Times, serif;
+
+$font-family-serif-bold:            "FreightTextBold", Georgia, "Times New Roman", Times, serif;
+$font-family-serif-bold-italic:     "FreightTextBoldItalic", Georgia, "Times New Roman", Times, serif;
+
+
+// sans serif font-weight font families variation
 $font-family-sans-serif-regular:         "Maax", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-sans-serif-regular-italic:  "Maax-Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 

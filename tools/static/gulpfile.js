@@ -89,5 +89,5 @@ gulp.task('watch', function() {
   gulp.watch(scripts_dir + '**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors']);
 
   /* Trigger a live reload on any Django template changes */
-  gulp.watch(templates_dirs + '**/*.html').on('change', livereload.changed);
+  gulp.watch([templates_dirs + '**/*.html', templates_dirs + '**/*.xls']).on('change', livereload.changed);
 });

@@ -2,26 +2,42 @@
 * Font-weight functions
 */
 
-@mixin fw-normal() {
+@mixin fw-sans-normal() {
   font-family: $font-family-sans-serif-regular;
 }
 
-@mixin fw-normal-italic() {
+@mixin fw-sans-normal-italic() {
   font-family: $font-family-sans-serif-regular-italic;
 }
 
-@mixin fw-medium() {
+@mixin fw-sans-medium() {
   font-family: $font-family-sans-serif-medium;
 }
 
-@mixin fw-medium-italic() {
+@mixin fw-sans-medium-italic() {
   font-family: $font-family-sans-serif-medium-italic;
 }
 
-@mixin fw-bold() {
+@mixin fw-sans-bold() {
   font-family: $font-family-sans-serif-bold;
 }
 
-@mixin fw-bold-italic() {
+@mixin fw-sans-bold-italic() {
   font-family: $font-family-sans-serif-bold-italic;
+}
+
+@mixin fw-serif-normal() {
+  font-family: $font-family-serif-regular;
+}
+
+@mixin fw-serif-normal-italic() {
+  font-family: $font-family-serif-regular-italic;
+}
+
+@mixin fw-serif-bold() {
+  font-family: $font-family-serif-bold;
+}
+
+@mixin fw-serif-bold-italic() {
+  font-family: $font-family-serif-bold-italic;
 }

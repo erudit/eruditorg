@@ -32,7 +32,7 @@ CONTROLLERS = {
       // Do something
     },
   },
-}
+};
 
 
 /*
@@ -96,7 +96,7 @@ $(document).ready(ROUTER.init);
 
 ROUTER.registerController('public:journal:article-detail', {
   init: function() {
-    alert("Article detail");
+    console.log("Article detail");
   },
 });
 

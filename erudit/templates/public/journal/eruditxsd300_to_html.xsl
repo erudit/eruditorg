@@ -42,86 +42,98 @@
 	</xsl:template>
 
 	<xsl:template match="article">
-		<section id="meta" class="meta">
-			<div class="row">
-				<div class="col-md-8">
-					<div class="grtitre">
-						<h1>
-							<xsl:if test="liminaire/grtitre/titre">
-								<xsl:apply-templates select="liminaire/grtitre/titre"/>
-							</xsl:if>
-							<xsl:if test="liminaire/grtitre/sstitre">
-								<xsl:apply-templates select="liminaire/grtitre/sstitre"/>
-							</xsl:if>
-							<xsl:if test="liminaire/grtitre/trefbiblio">
-								<xsl:apply-templates select="liminaire/grtitre/trefbiblio"/>
-							</xsl:if>
-						</h1>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="coverpage">
-						<img src="todo" alt="Couverture du numéro" class="img-responsive"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="infoarticle">
-							<div class="grcontributeur">
-								<xsl:apply-templates select="liminaire/grauteur/auteur"/>
-							</div>
-							<div class="idpublic">
-								<div class="uri">
-									URI&#160;
-									<a href="{$uriStart}{$iderudit}">
-										<xsl:value-of select="$uriStart"/>
-										<xsl:value-of select="$iderudit"/>
-									</a>
-								</div>
-								<div class="doi">
-									DOI&#160;
-									<a href="{$doiStart}10.7202/{$iderudit}">
-										10.7202/<xsl:value-of select="$iderudit"/>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="refpapier">
-							<div>
-								<xsl:apply-templates select="../article/@typeart"/> de la revue
-							</div>
-							<div>
-								<a href="{$urlSavant}{$titreAbrege}">
-									<xsl:value-of select="admin/revue/titrerev"/>
-								</a>
-							</div>
-							<div>
-								<xsl:value-of select="admin/numero/grtheme/theme"/>
-							</div>
-							<div>
-								<xsl:apply-templates select="admin/numero" mode="refpapier"/>
-							</div>
-							<xsl:apply-templates select="admin/droitsauteur"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<hr/>
+
+		<!-- main header for article -->
+		<header class="row article-header">
+
+			<hgroup class="col-xs-12 child-column-fit border-top">
+
+				<aside class="col-sm-8">
+					<h2>
+						<xsl:if test="liminaire/grtitre/titre">
+							<xsl:apply-templates select="liminaire/grtitre/titre"/>
+						</xsl:if>
+					</h2>
+					<h3>
+						<xsl:if test="liminaire/grtitre/sstitre">
+							<xsl:apply-templates select="liminaire/grtitre/sstitre"/>
+						</xsl:if>
+						<xsl:if test="liminaire/grtitre/trefbiblio">
+							<xsl:apply-templates select="liminaire/grtitre/trefbiblio"/>
+						</xsl:if>
+					</h3>
+				</aside>
+
+				<!-- TODO: cover image -->
+				<aside class="col-sm-4">
+					<figure class="journal-logo">
+						<img src="http://www.erudit.org/revue/logosmall/erudit:erudit.rse22.jpg" alt="Couverture du numéro" class="img-responsive"/>
+					</figure>
+				</aside>
+
+			</hgroup>
+
+			<!-- meta authors -->
+			<hgroup class="meta-authors col-sm-6 border-top">
+
+				<xsl:apply-templates select="liminaire/grauteur/auteur"/>
+
+				<dl class="mono-space idpublic">
+					<dt>URI</dt>
+					<dd>
+						<a href="{$uriStart}{$iderudit}">
+							<xsl:value-of select="$uriStart"/>
+							<xsl:value-of select="$iderudit"/>
+						</a>
+					</dd>
+					<dt>DOI</dt>
+					<dd>
+						<a href="{$doiStart}10.7202/{$iderudit}">
+							10.7202/<xsl:value-of select="$iderudit"/>
+						</a>
+					</dd>
+				</dl>
+
+				<xsl:apply-templates select="admin/droitsauteur"/>
+
+			</hgroup>
+
+			<!-- meta magazine -->
+			<hgroup class="meta-magazine col-sm-6 border-top">
+
+				<h4>
+					<xsl:apply-templates select="../article/@typeart"/> de la revue
+				</h4>
+
+				<h4>
+					<a href="{$urlSavant}{$titreAbrege}">
+						<xsl:value-of select="admin/revue/titrerev"/>
+					</a>
+				</h4>
+
+				<xsl:value-of select="admin/numero/grtheme/theme"/>
+				<xsl:apply-templates select="admin/numero" mode="refpapier"/>
+
+
+			</hgroup>
+
+
+		</header>
+
+		<!-- <hr/> -->
 
 		<!--=== plan de l'article ===-->
-		<div class="row">
+		<div id="article-content" class="row border-top">
 			<xsl:if test="//corps">
-				<div class="col-md-3">
-					<section class="planarticle">
-						<h2>Plan de l’article</h2>
+				<aside class="col-md-4 article-table-of-contents" role="contents">
 						<nav>
-							<ul>
+							<header>
+								<h4>Plan de l’article</h4>
+							</header>
+							<ul class="unstyled">
 								<li class="debutArticle">
-									<a href="#">
-										<em>À propos de cet article</em>
+									<a href="#article-content">
+										<em>Retour au début</em>
 									</a>
 								</li>
 								<xsl:if test="//resume">
@@ -129,6 +141,9 @@
 										<a href="#resume">Résumé</a>
 									</li>
 								</xsl:if>
+								<li>
+									<a href="#corps">Corps</a>
+								</li>
 								<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
 								<xsl:if test="//grannexe">
 									<li>
@@ -167,39 +182,50 @@
 								</xsl:if>
 							</ul>
 						</nav>
-					</section>
-				</div>
+
+				</aside>
 			</xsl:if>
-			<div class="col-md-6 col-md-offset-1">
-				<xsl:apply-templates select="//resume"/>
-			</div>
+
+			<aside class="article-body col-md-8">
+
+				<!-- ********* Resume ******** -->
+				<xsl:if test="//resume">
+				<section id="resume" class="article-section resumes" role="section">
+					<xsl:apply-templates select="//resume"/>
+				</section>
+				</xsl:if>
+
+				<!-- ********* Corps ******** -->
+				<section id="corps" class="article-section corps" role="section">
+					<xsl:apply-templates select="//corps"/>
+				</section>
+
+				<!-- ********* parties annexes ******** -->
+				<!-- ********* chaque annexe aura une <section> ******** -->
+				<xsl:apply-templates select="partiesann[node()]"/>
+
+				<!-- ********* listes figures / tableaux  ******** -->
+				<section id="listes" class="article-section listes" role="section">
+
+				  <xsl:if test="//tableau">
+					<article id="tableau">
+					  <h4>Liste des tableaux</h4>
+					  <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
+					</article>
+				  </xsl:if>
+
+				  <xsl:if test="//figure">
+					<article id="figure">
+					  <h4>Liste des figures</h4>
+					  <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
+					</article>
+				  </xsl:if>
+
+				</section>
+
+			</aside>
 		</div>
 
-		<!-- ********* Corps ******** -->
-		<xsl:apply-templates select="corps"/>
-
-		<!--=== parties annexes ===-->
-		<xsl:apply-templates select="partiesann[node()]"/>
-
-		<!--=== listes figures / tableaux ===-->
-		<div class="row">
-		  <div class="col-md-6 col-md-offset-4">
-			<section id="listes" class="listes">
-			  <xsl:if test="//tableau">
-				<article id="tableau">
-				  <h1>Liste des tableaux</h1>
-				  <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
-				</article>
-			  </xsl:if>
-			  <xsl:if test="//figure">
-				<article id="figure">
-				  <h1>Liste des figures</h1>
-				  <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
-				</article>
-			  </xsl:if>
-			</section>
-		  </div>
-		</div>
 
 	</xsl:template>
 
@@ -207,15 +233,10 @@
 
 	<!--====== CORPS ======-->
 	<xsl:template match="corps">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-4">
-				<section class="{name()}">
-					<xsl:apply-templates/>
-				</section>
-				<hr/>
-			</div>
-		</div>
+			<h4>Corps</h4>
+			<xsl:apply-templates/>
 	</xsl:template>
+
 	<xsl:template match="section1">
 		<a id="{@id}">
 			<xsl:text>
@@ -308,15 +329,15 @@
 		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
 	</xsl:template>
 	<xsl:template match="para">
-		<div class="para">
+		<p class="para">
 			<xsl:apply-templates select="no" mode="para"/>
 			<xsl:apply-templates select="*[not(self::no)]"/>
-		</div>
+		</p>
 	</xsl:template>
 	<xsl:template match="alinea">
-		<div class="alinea">
+		<p class="alinea">
 			<xsl:apply-templates/>
-		</div>
+		</p>
 	</xsl:template>
 	<xsl:template match="no" mode="para">
 		<div class="nopara">
@@ -1221,18 +1242,14 @@
 
   <!--=== PARTIESANN ===-->
   <xsl:template match="partiesann">
-      <div class="row">
-          <div class="col-md-6 col-md-offset-4">
-              <section id="partiesann">
-                  <xsl:apply-templates/>
-              </section>
-              <hr/>
-          </div>
-      </div>
+    <!-- <section id="partiesann"> -->
+    <xsl:apply-templates/>
+    <!-- </section> -->
   </xsl:template>
+
   <xsl:template match="grannexe | merci | grnotebio | grnote | grbiblio">
-      <div id="{name()}">
-          <h1>
+      <footer id="{name()}" class="article-notes {name()}" role="contentinfo">
+          <h4>
               <xsl:choose>
                   <xsl:when test="self::grannexe">
                       <xsl:apply-templates select="self::grannexe" mode="heading"/>
@@ -1250,13 +1267,13 @@
                       <xsl:apply-templates select="self::grbiblio" mode="heading"/>
                   </xsl:when>
               </xsl:choose>
-          </h1>
+          </h4>
           <xsl:apply-templates select="*[not(self::titre)]"/>
-      </div>
+      </footer>
   </xsl:template>
   <!-- annexe -->
   <xsl:template match="annexe">
-      <div class="annexe">
+      <div class="article-section-content" role="subsection">
           <xsl:if test="no or titre">
               <h2 class="titreann">
                   <xsl:if test="titre and no">
@@ -1357,9 +1374,9 @@
   </xsl:template>
   <!-- biblio -->
   <xsl:template match="biblio">
-      <div class="{name()}">
+      <!-- <ul class="{name()}" role="note"> -->
           <xsl:apply-templates/>
-      </div>
+      <!-- </ul> -->
   </xsl:template>
   <xsl:template match="divbiblio">
       <div class="divbiblio">
@@ -1367,13 +1384,13 @@
       </div>
   </xsl:template>
   <xsl:template match="biblio/titre">
-      <h2 class="{name()}">
+      <h5 class="{name()}">
           <xsl:apply-templates/>
-      </h2>
+      </h5>
   </xsl:template>
   <xsl:template match="refbiblio">
       <xsl:variable name="valeurNO" select="no"/>
-      <div class="refbiblio">
+      <article class="refbiblio" role="note">
           <a class="no" id="{@id}">
               <xsl:choose>
                   <xsl:when test="$valeurNO">
@@ -1386,7 +1403,7 @@
           <xsl:apply-templates select="node()[name() != 'idpublic' and name() != 'no']"/>
           <xsl:text></xsl:text>
           <xsl:apply-templates select="idpublic"/>
-      </div>
+      </article>
   </xsl:template>
 
 <!--=== LISTE TAB / LISTE FIG ===-->
@@ -1533,26 +1550,28 @@
 		<xsl:value-of select="normalize-space(.)"/>
 	</xsl:template>
 
-    <xsl:template match="grauteur/auteur">
-		<div class="contributeur">
+	<xsl:template match="grauteur/auteur">
+		<div class="author">
 			<xsl:apply-templates select="*" mode="lim"/>
 		</div>
 	</xsl:template>
+
 	<xsl:template match="auteur">
-		<div class="{name()}">
+		<span class="{name()}">
 			<xsl:value-of select="."/>
-		</div>
+		</span>
 	</xsl:template>
 
 	<xsl:template match="auteur/nompers" mode="lim">
 		<xsl:if test="child::node()/child::text()">
-			<div class="{name()}">
+			<h3 class="{name()}">
 				<xsl:call-template name="element_nompers_affichage">
 					<xsl:with-param name="nompers" select="."/>
 				</xsl:call-template>
-			</div>
+			</h3>
 		</xsl:if>
 	</xsl:template>
+
 	<xsl:template match="prefixe | prenom | autreprenom | nomfamille | suffixe">
 		<xsl:apply-templates/>
 		<xsl:if test="position() != last()">
@@ -1560,6 +1579,7 @@
 			</xsl:text>
 		</xsl:if>
 	</xsl:template>
+
 	<xsl:template match="auteur/affiliation" mode="lim">
 		<div class="affiliation">
 			<xsl:apply-templates select="fonction"/>
@@ -1569,13 +1589,14 @@
 			<xsl:apply-templates select="alinea"/>
 		</div>
 	</xsl:template>
+
 	<xsl:template match="admin//membre | admin//fonction | admin//divorg | admin//nomorg | admin//adresse | article//affiliation/alinea" mode="lim">
-      <div class="{name()}">
-        <xsl:apply-templates/>
-        <xsl:text>
-        </xsl:text>
-      </div>
-    </xsl:template>
+    <div class="{name()}">
+      <xsl:apply-templates/>
+      <xsl:text>
+      </xsl:text>
+    </div>
+  </xsl:template>
 
 	<!-- element_nompers_affichage -->
 	<xsl:template name="element_nompers_affichage">
@@ -1640,14 +1661,14 @@
 
 	<!-- numpublication -->
 	<xsl:template match="admin/numero" mode="refpapier">
-		<div class="volumaison">
+		<h4 class="volumaison">
 			<xsl:for-each select="volume | nonumero[1] | pub/periode | pub/annee | pagination">
 				<xsl:apply-templates select="."/>
 				<xsl:if test="position() != last()">
 					<xsl:text>, </xsl:text>
 				</xsl:if>
 			</xsl:for-each>
-		</div>
+		</h4>
 	</xsl:template>
 	<xsl:template match="numero/volume">
 		<span class="{name()}">
@@ -1688,66 +1709,84 @@
     </xsl:template>
 
 	<!-- droitauteur -->
-    <xsl:template match="droitsauteur">
-      <div class="{name()}">
-        <xsl:apply-templates/>
-      </div>
-    </xsl:template>
+  <xsl:template match="droitsauteur">
+    <h4 class="{name()}">
+      <xsl:apply-templates/>
+    </h4>
+  </xsl:template>
 
 	<!-- resume -->
 	<xsl:template match="//resume">
-		<div id="{name()}" class="{name()}">
+		<article id="{name()}-{@lang}" class="{name()}">
 			<xsl:if test="@lang='fr'">
-				<h2>Résumé</h2>
-				<xsl:apply-templates/>
+				<h4>Résumé</h4>
+				<p>
+					<xsl:apply-templates/>
+				</p>
 				<xsl:if test="//grmotcle[@lang='fr']/motcle">
-					<div class="motcle">
-						<span class="etiquette">Mots clés : </span>
+					<footer class="keywords">
+						<h5>Mots clés : </h5>
+						<ul class="inline">
 						<xsl:for-each select="//grmotcle[@lang='fr']/motcle">
-							<xsl:apply-templates/>
-							<xsl:if test="position() != last()">
-								<xsl:text>, </xsl:text>
-							</xsl:if>
+							<li class="keyword">
+								<xsl:apply-templates/>
+								<xsl:if test="position() != last()">
+									<xsl:text>, </xsl:text>
+								</xsl:if>
+							</li>
 						</xsl:for-each>
-					</div>
+						</ul>
+					</footer>
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='en'">
-			<h2>Abstract</h2>
-				<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='en']" mode="lim"/>
-				<xsl:apply-templates select="alinea"/>
+				<h4>Abstract</h4>
+				<p>
+					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='en']" mode="lim"/>
+					<xsl:apply-templates select="alinea"/>
+				</p>
 				<xsl:if test="//grmotcle[@lang='en']/motcle">
-					<div class="motcle">
-					<span class="etiquette">Keywords : </span>
-					<xsl:for-each select="//grmotcle[@lang='en']/motcle">
-						<xsl:apply-templates/>
-						<xsl:if test="position() != last()">
-							<xsl:text>, </xsl:text>
-						</xsl:if>
-					</xsl:for-each>
-					</div>
+					<footer class="keywords">
+						<h5>Keywords : </h5>
+						<ul class="inline">
+						<xsl:for-each select="//grmotcle[@lang='en']/motcle">
+							<li class="keyword">
+								<xsl:apply-templates/>
+								<xsl:if test="position() != last()">
+									<xsl:text>, </xsl:text>
+								</xsl:if>
+							</li>
+						</xsl:for-each>
+						</ul>
+					</footer>
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='es'">
-				<h2>Resumen</h2>
-				<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='es']" mode="lim"/>
-				<xsl:apply-templates select="alinea"/>
-				<xsl:apply-templates/>
+				<h4>Resumen</h4>
+				<p>
+					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='es']" mode="lim"/>
+					<xsl:apply-templates select="alinea"/>
+					<xsl:apply-templates/>
+				</p>				
 				<xsl:if test="//grmotcle[@lang='es']/motcle">
-					<div class="motcle">
-						<span class="etiquette">Palabras clave : </span>
+					<footer class="keywords">
+						<h5>Palabras clave : </h5>
+						<ul class="inline">
 						<xsl:for-each select="//grmotcle[@lang='es']/motcle">
-							<xsl:apply-templates/>
-							<xsl:if test="position() != last()">
-								<xsl:text>, </xsl:text>
-							</xsl:if>
+							<li class="keyword">
+								<xsl:apply-templates/>
+								<xsl:if test="position() != last()">
+									<xsl:text>, </xsl:text>
+								</xsl:if>
+							</li>
 						</xsl:for-each>
-					</div>
+						</ul>
+					</footer>
 				</xsl:if>
 			</xsl:if>
-		</div>
-		<hr/>
+		</article>
 	</xsl:template>
+
 	<xsl:template match="resume/alinea">
 		<xsl:apply-templates/>
 	</xsl:template>
