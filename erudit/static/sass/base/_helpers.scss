@@ -41,7 +41,8 @@
 }
 
 /**
-* reset child columns
+* Reset Bootstrap's columns padding
+* Bootstrap adds padding to each col-x elements, add this class on parent .row element to fit them
 */
 
 .child-column-fit [class*="col-"] {

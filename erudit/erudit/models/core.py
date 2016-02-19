@@ -3,7 +3,7 @@ from datetime import datetime as dt
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse as reverse_url
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, EruditArticle
 
@@ -376,7 +376,7 @@ class Journal(FedoraMixin, Named, Edinum):
             .order_by('-date_published').first()
 
     def get_absolute_url(self):
-        return reverse(
+        return reverse_url(
             "public:journal:journal-detail",
             args=[self.code]
         )
@@ -507,7 +507,7 @@ class Issue(FedoraMixin, models.Model):
             )
 
     def get_absolute_url(self):
-        return reverse(
+        return reverse_url(
             "public:journal:issue-detail",
             args=[self.journal.code, self.localidentifier]
         )
