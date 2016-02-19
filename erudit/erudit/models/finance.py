@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from core.subscription import models as s
-
+from .core import Currency
 from .core import Journal
 
 
@@ -28,7 +27,7 @@ class QuotationItem(models.Model):
         decimal_places=2,
         null=True, blank=True,
     )
-    currency = models.ForeignKey(s.Currency, null=True, blank=True,)
+    currency = models.ForeignKey(Currency, null=True, blank=True,)
 
 
 INVOICE_STATUS_CHOICES = [
@@ -84,7 +83,7 @@ class Invoice(models.Model):
         verbose_name=_("Total"),
     )
     currency = models.ForeignKey(
-        s.Currency,
+        Currency,
         null=True, blank=True,
         verbose_name=_("Devise"),
     )

@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('erudit', '0030_auto_20160216_1513'),
+        ('erudit', '0001_initial'),
         ('contenttypes', '0002_remove_content_type_name'),
     ]
 

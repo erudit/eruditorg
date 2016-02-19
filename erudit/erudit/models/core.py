@@ -616,3 +616,25 @@ class JournalInformation(models.Model):
 
     def __str__(self):
         return self.journal.name
+
+
+class Currency(models.Model):
+    code = models.CharField(
+        max_length=255,
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Nom")
+    )
+
+    def __str__(self):
+        return "{:s}".format(
+            self.code,
+        )
+
+    class Meta:
+        verbose_name = _("Devise")
+        verbose_name_plural = _("Devises")
+        ordering = [
+            'code',
+        ]

@@ -71,7 +71,6 @@ INSTALLED_APPS = (
     'core.individual_subscription',
     'core.journal',
     'core.permissions',
-    'core.subscription',
     'core.userspace',
 )
 

@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from core.subscription import models as s
-
+from .core import Currency
 from .core import Journal
 
 
@@ -52,7 +51,7 @@ class Grant(models.Model):
         verbose_name=_("Montant"),
     )
     currency = models.ForeignKey(
-        s.Currency,
+        Currency,
         null=True, blank=True,
         verbose_name=_("Devise"),
     )
