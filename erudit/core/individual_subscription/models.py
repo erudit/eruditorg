@@ -136,10 +136,6 @@ class FlatAccessMixin(object):
                     account=account,
                     journal=journal)
 
-    def fa_link_baskets(self):
-        for basket in self.access_basket.all():
-            self.fa_link_journals(basket.journals.all())
-
     def generate_flat_access(self):
         # Cleanup
         self.fa_cleanup()
@@ -148,10 +144,6 @@ class FlatAccessMixin(object):
         if self.access_full:
             journals = CoreJournal.objects.all()
             self.fa_link_journals(journals)
-
-        # Journals from basket access
-        if self.access_basket.count() > 0:
-            self.fa_link_baskets()
 
         # Journals selected
         if self.access_journal.count() > 0:
@@ -251,12 +243,6 @@ class Policy(FlatAccessMixin, models.Model):
     access_journal = models.ManyToManyField(
         "erudit.journal",
         verbose_name=_("Revues"),
-        blank=True,
-    )
-
-    access_basket = models.ManyToManyField(
-        "subscription.Basket",
-        verbose_name=_("Paniers"),
         blank=True,
     )
 

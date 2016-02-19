@@ -29,7 +29,7 @@ class PolicyEventAdmin(admin.ModelAdmin):
 class PolicyInline(GenericStackedInline):
     model = Policy
     max_num = 1
-    filter_horizontal = ("managers", "access_journal", "access_basket")
+    filter_horizontal = ("managers", "access_journal", )
     fieldsets = (
         (None, {'fields': (
             'comment',
@@ -38,7 +38,7 @@ class PolicyInline(GenericStackedInline):
             'date_activation',
         )}),
         (_("Droits d'accès"), {'fields': (
-            'access_full', 'access_journal', 'access_basket', )}),
+            'access_full', 'access_journal', )}),
     )
 
 
@@ -117,7 +117,7 @@ class PolicyAdmin(admin.ModelAdmin):
 
     )
     list_filter = ('content_type', )
-    filter_horizontal = ("managers", "access_journal", "access_basket")
+    filter_horizontal = ("managers", "access_journal", )
     fieldsets = (
         (None, {'fields': (
             'managers',
@@ -126,7 +126,7 @@ class PolicyAdmin(admin.ModelAdmin):
             'date_activation',
         )}),
         (_("Droits d'accès"), {'fields': (
-            'access_full', 'access_journal', 'access_basket', )}),
+            'access_full', 'access_journal', )}),
     )
     actions = ['renew', ]
 

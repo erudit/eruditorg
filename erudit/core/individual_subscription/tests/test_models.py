@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from erudit.factories import JournalFactory, BasketFactory
+from erudit.factories import JournalFactory
 from erudit.models import Journal
 
 from ..factories import PolicyFactory, IndividualAccountFactory
@@ -104,59 +104,6 @@ class IndividualAccountJournalFullAccessTestCase(TestCase):
         policy.save()
         policy.generate_flat_access()
         self.assertEqual(IndividualAccountJournal.objects.count(), 20)
-
-
-class IndividualAccountJournalBasketTestCase(TestCase):
-
-    def test_link_baskets(self):
-        policy = PolicyFactory()
-        IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        basket1 = BasketFactory()
-        basket1.journals = JournalFactory.create_batch(2)
-        basket1.save()
-        basket2 = BasketFactory()
-        basket2.journals = JournalFactory.create_batch(3)
-        basket2.save()
-        policy.access_basket = [basket1, basket2, ]
-        policy.save()
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 10)
-
-    def test_remove_journal_from_baskets(self):
-        policy = PolicyFactory()
-        IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        basket1 = BasketFactory()
-        basket1.journals = JournalFactory.create_batch(2)
-        basket1.save()
-        basket2 = BasketFactory()
-        basket2.journals = JournalFactory.create_batch(3)
-        basket2.save()
-        policy.access_basket = [basket1, basket2, ]
-        policy.save()
-        policy.generate_flat_access()
-        basket1.journals = []
-        basket1.save()
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 6)
-
-    def test_remove_account(self):
-        policy = PolicyFactory()
-        dude_to_delete = IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        basket1 = BasketFactory()
-        basket1.journals = JournalFactory.create_batch(2)
-        basket1.save()
-        basket2 = BasketFactory()
-        basket2.journals = JournalFactory.create_batch(3)
-        basket2.save()
-        policy.access_basket = [basket1, basket2, ]
-        policy.save()
-        policy.generate_flat_access()
-        dude_to_delete.delete()
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 5)
 
 
 class IndividualAccountJournalCustomTestCase(TestCase):
