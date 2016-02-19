@@ -5,6 +5,8 @@ This module defines generic class-based views to use in order to achieve common 
 that involve Fedora and datastreams.
 """
 
+import logging
+
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.http import HttpResponse
@@ -15,6 +17,8 @@ from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
 from ..repository import api
+
+logger = logging.getLogger(__name__)
 
 
 class FedoraFileDatastreamView(SingleObjectMixin, View):
@@ -82,7 +86,17 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         response = self.get_response_object()
         try:
             content = self.get_datastream_content(fedora_object)
-        except (RequestFailed, ConnectionError):
+        except RequestFailed:  # pragma: no cover
+            # This means that the datastream content could not be retrieved
+            # for the considered PID. In that case a 404 response should be
+            # returned.
+            raise Http404
+        except ConnectionError:
+            # This means that the Fedora repository can not be accessed ; this
+            # error should be logged.
+            logger.error('Fedora repository unavailable', exc_info=True, extra={
+                'request': self.request,
+            })
             raise Http404
         self.write_datastream_content(response, content)
         return response
