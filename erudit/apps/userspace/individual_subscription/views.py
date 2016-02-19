@@ -7,7 +7,7 @@ from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
 from core.individual_subscription.models import IndividualAccount
-from userspace.views import UserspaceBreadcrumbsMixin
+from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
 from core.userspace.viewmixins import LoginRequiredMixin
 
 from .forms import (IndividualAccountFilter, IndividualAccountForm,

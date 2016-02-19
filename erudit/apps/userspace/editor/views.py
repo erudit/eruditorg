@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
-from userspace.views import UserspaceBreadcrumbsMixin
+from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
 from core.userspace.viewmixins import LoginRequiredMixin
 from core.editor.models import IssueSubmission
 from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
