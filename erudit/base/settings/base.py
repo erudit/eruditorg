@@ -257,9 +257,9 @@ STATIC_URL = '/static/'
 INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
 
 # Fedora settings
-FEDORA_ROOT = 'http://10.1.1.33:8080/fedora/'
-FEDORA_USER = 'fedoraAdmin'
-FEDORA_PASSWORD = 'fedoraAdmin'
+FEDORA_ROOT = 'http://10.1.1.33:8080/fedora'
+FEDORA_USER = 'fcAdmin'
+FEDORA_PASSWORD = 'fcAdmin'
 
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
 

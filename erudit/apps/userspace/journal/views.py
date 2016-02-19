@@ -16,7 +16,7 @@ from erudit.models import Journal
 from erudit.models import JournalInformation
 
 from .forms import JournalInformationForm
-from .rules_helpers import get_editable_journals
+from core.journal.rules_helpers import get_editable_journals
 
 
 class JournalInformationDispatchView(RedirectView):

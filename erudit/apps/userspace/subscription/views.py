@@ -3,12 +3,14 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from django_filters.views import FilterView
+
 from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
-from core.subscription.models import IndividualAccount
 from core.userspace.viewmixins import LoginRequiredMixin
-from userspace.views import UserspaceBreadcrumbsMixin
+from core.subscription.models import IndividualAccount
+
+from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
 
 from .forms import (IndividualAccountFilter, IndividualAccountForm,
                     IndividualAccountResetPwdForm)

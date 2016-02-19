@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from navutils import menu
 
-
+import ipdb; ipdb.set_trace()
 main_menu = menu.Menu('main')
 menu.register(main_menu)
 
