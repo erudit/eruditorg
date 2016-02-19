@@ -66,7 +66,6 @@ INSTALLED_APPS = (
     'apps.userspace.individual_subscription',
     'apps.userspace.journal',
     'apps.userspace.permissions',
-    'apps.userspace.subscription',
     'core.editor',
     'core.individual_subscription',
     'core.journal',
