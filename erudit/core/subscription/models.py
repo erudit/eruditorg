@@ -86,7 +86,7 @@ class IndividualAccount(models.Model):
         self.mail_password(plain_password)
 
     def mail_password(self, plain_password):
-        template = get_template('userspace/individual_subscription/mail/new_password.html')
+        template = get_template('userspace/subscription/mail/new_password.html')
         context = {'object': self, 'plain_password': plain_password, }
         html_message = template.render(context)
         recipient = self.email
@@ -99,7 +99,7 @@ class IndividualAccount(models.Model):
         )
 
     def mail_account(self):
-        template = get_template('userspace/individual_subscription/mail/new_account.html')
+        template = get_template('userspace/subscription/mail/new_account.html')
         context = {'object': self}
         html_message = template.render(context)
         recipient = self.email
@@ -254,7 +254,7 @@ class Policy(models.Model):
         if self.max_accounts and self.total_accounts > self.max_accounts:
             date = timezone.now() - timedelta(days=EVENT_SILENCE_DAYS)
             if PolicyEvent.objects.filter(policy=self, date_creation__gt=date).count() == 0:
-                template = get_template('userspace/individual_subscription/mail/limit_reached.html')
+                template = get_template('userspace/subscription/mail/limit_reached.html')
                 context = {'policy': self}
                 html_message = template.render(context)
 

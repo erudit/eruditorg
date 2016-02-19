@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import django_filters
 
-from core.individual_subscription.models import IndividualAccount, Policy
+from core.subscription.models import IndividualAccount, Policy
 
 
 class IndividualAccountFilter(django_filters.FilterSet):

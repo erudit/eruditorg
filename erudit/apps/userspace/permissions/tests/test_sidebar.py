@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
-from core.individual_subscription.factories import PolicyFactory
+from core.subscription.factories import PolicyFactory
 from core.permissions.models import Rule
 from core.userspace.factories import UserFactory
 from erudit.factories import JournalFactory
@@ -18,7 +18,7 @@ class MenuTestCase(TestCase):
         policy.managers.add(user)
         policy.save()
 
-        url = reverse('userspace:individual_subscription:account_list')
+        url = reverse('userspace:subscription:account_list')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertContains(response, url)

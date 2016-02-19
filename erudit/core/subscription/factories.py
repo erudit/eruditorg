@@ -6,7 +6,7 @@ from erudit.factories import OrganisationFactory
 class PolicyFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        model = 'individual_subscription.Policy'
+        model = 'subscription.Policy'
 
     content_object = factory.SubFactory(OrganisationFactory)
     max_accounts = 10
@@ -15,7 +15,7 @@ class PolicyFactory(factory.django.DjangoModelFactory):
 class IndividualAccountFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        model = 'individual_subscription.IndividualAccount'
+        model = 'subscription.IndividualAccount'
 
     firstname = factory.Sequence(lambda n: 'prenom{}'.format(n))
     lastname = factory.Sequence(lambda n: 'nom{}'.format(n))

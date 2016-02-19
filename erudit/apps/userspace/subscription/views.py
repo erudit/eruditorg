@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django_filters.views import FilterView
 from rules.contrib.views import PermissionRequiredMixin
 
-from core.individual_subscription.models import IndividualAccount
+from core.subscription.models import IndividualAccount
 from core.userspace.viewmixins import LoginRequiredMixin
 
 from .forms import (IndividualAccountFilter, IndividualAccountForm,
@@ -24,16 +24,16 @@ class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
 class IndividualAccountList(OrganizationCheckMixin, FilterView):
     filterset_class = IndividualAccountFilter
     paginate_by = 10
-    template_name = 'userspace/individual_subscription/individualaccount_filter.html'
+    template_name = 'userspace/subscription/individualaccount_filter.html'
 
 
 class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
     model = IndividualAccount
     form_class = IndividualAccountForm
-    template_name = 'userspace/individual_subscription/individualaccount_create.html'
+    template_name = 'userspace/subscription/individualaccount_create.html'
 
     def get_success_url(self):
-        return reverse('userspace:individual_subscription:account_list')
+        return reverse('userspace:subscription:account_list')
 
     def get_form_kwargs(self):
         kwargs = super(IndividualAccountCreate, self).get_form_kwargs()
@@ -43,25 +43,25 @@ class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
 
 class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
-    template_name = 'userspace/individual_subscription/individualaccount_update.html'
+    template_name = 'userspace/subscription/individualaccount_update.html'
     fields = ['firstname', 'lastname', 'email', ]
 
     def get_success_url(self):
-        return reverse('userspace:individual_subscription:account_list')
+        return reverse('userspace:subscription:account_list')
 
 
 class IndividualAccountDelete(OrganizationCheckMixin, DeleteView):
     model = IndividualAccount
-    template_name = 'userspace/individual_subscription/individualaccount_confirm_delete.html'
+    template_name = 'userspace/subscription/individualaccount_confirm_delete.html'
 
     def get_success_url(self):
-        return reverse('userspace:individual_subscription:account_list')
+        return reverse('userspace:subscription:account_list')
 
 
 class IndividualAccountResetPwd(OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
     form_class = IndividualAccountResetPwdForm
-    template_name = 'userspace/individual_subscription/individualaccount_reset_pwd.html'
+    template_name = 'userspace/subscription/individualaccount_reset_pwd.html'
 
     def get_success_url(self):
-        return reverse('userspace:individual_subscription:account_list')
+        return reverse('userspace:subscription:account_list')

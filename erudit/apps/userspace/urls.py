@@ -11,6 +11,6 @@ urlpatterns = [
     url(_(r'^editeur/'), include('apps.userspace.editor.urls', namespace='editor')),
     url(_(r'^revue/'), include('apps.userspace.journal.urls', namespace='journal')),
     url(_(r'^permissions/'), include('apps.userspace.permissions.urls', namespace='permissions')),
-    url(_(r'^organisations/'), include('apps.userspace.individual_subscription.urls',
-        namespace='individual_subscription')),
+    url(_(r'^organisations/'), include('apps.userspace.subscription.urls',
+        namespace='subscription')),
 ]

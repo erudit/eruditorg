@@ -2,14 +2,14 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from core.individual_subscription.factories import PolicyFactory, IndividualAccountFactory
-from core.individual_subscription.models import IndividualAccount
+from core.subscription.factories import PolicyFactory, IndividualAccountFactory
+from core.subscription.models import IndividualAccount
 
 
 class AccountListViewTestCase(TestCase):
 
     def setUp(self):
-        self.url = reverse('userspace:individual_subscription:account_list')
+        self.url = reverse('userspace:subscription:account_list')
 
     def test_user(self):
         user = User.objects.create_user(username='user', password='user')
@@ -57,7 +57,7 @@ class AccountListViewTestCase(TestCase):
 class AccountCreateViewTestCase(TestCase):
 
     def setUp(self):
-        self.url = reverse('userspace:individual_subscription:account_add')
+        self.url = reverse('userspace:subscription:account_add')
 
     def test_filtered_organization(self):
         policy = PolicyFactory()
@@ -82,7 +82,7 @@ class AccountDeleteViewTestCase(TestCase):
         policy.save()
 
         account = IndividualAccountFactory(policy=policy)
-        url = reverse('userspace:individual_subscription:account_delete',
+        url = reverse('userspace:subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -95,7 +95,7 @@ class AccountDeleteViewTestCase(TestCase):
         policy.save()
 
         account = IndividualAccountFactory()
-        url = reverse('userspace:individual_subscription:account_delete',
+        url = reverse('userspace:subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -112,7 +112,7 @@ class AccountResetPwdViewTestCase(TestCase):
 
         account = IndividualAccountFactory(policy=policy)
         old_pwd = account.password
-        url = reverse('userspace:individual_subscription:account_reset_pwd',
+        url = reverse('userspace:subscription:account_reset_pwd',
                       args=(account.pk, ))
         response = self.client.post(url, {'password': ''})
         self.assertEqual(response.status_code, 302)

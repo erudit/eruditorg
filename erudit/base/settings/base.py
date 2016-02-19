@@ -63,13 +63,13 @@ INSTALLED_APPS = (
     'apps.public.thesis',
     'apps.userspace.dashboard',
     'apps.userspace.editor',
-    'apps.userspace.individual_subscription',
     'apps.userspace.journal',
     'apps.userspace.permissions',
+    'apps.userspace.subscription',
     'core.editor',
-    'core.individual_subscription',
     'core.journal',
     'core.permissions',
+    'core.subscription',
     'core.userspace',
 )
 

@@ -69,7 +69,7 @@
     {% has_perm 'individual_subscription.manage_account' request.user as can_manage_individual_subscription %}
     {% if can_manage_individual_subscription %}
     <li>
-    <a href="{% url 'userspace:individual_subscription:account_list' %}">
+    <a href="{% url 'userspace:subscription:account_list' %}">
         <span class="icon glyphicon fa fa-users"></span> <span class="sidenav-label">{% trans "Gestion des utilisateurs" %}</span>
       </a>
     </li>

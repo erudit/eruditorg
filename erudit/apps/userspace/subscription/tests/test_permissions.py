@@ -2,7 +2,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-from core.individual_subscription.factories import PolicyFactory, IndividualAccountFactory
+from core.subscription.factories import PolicyFactory, IndividualAccountFactory
 from core.userspace.factories import UserFactory
 
 
@@ -20,7 +20,7 @@ class ViewsTestCase(TestCase):
     def test_acccount_list_restricted(self):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_list')
+        url = reverse('userspace:subscription:account_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -31,14 +31,14 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_list')
+        url = reverse('userspace:subscription:account_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_acccount_add_restricted(self):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_add')
+        url = reverse('userspace:subscription:account_add')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -49,7 +49,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_add')
+        url = reverse('userspace:subscription:account_add')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -58,7 +58,7 @@ class ViewsTestCase(TestCase):
         account = IndividualAccountFactory(policy=policy)
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_update',
+        url = reverse('userspace:subscription:account_update',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -71,7 +71,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_update',
+        url = reverse('userspace:subscription:account_update',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -83,7 +83,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_delete',
+        url = reverse('userspace:subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -96,7 +96,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_delete',
+        url = reverse('userspace:subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -108,7 +108,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_reset_pwd',
+        url = reverse('userspace:subscription:account_reset_pwd',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -121,7 +121,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:individual_subscription:account_reset_pwd',
+        url = reverse('userspace:subscription:account_reset_pwd',
                       args=(account.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
