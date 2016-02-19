@@ -19,6 +19,11 @@ dl {
 
   dd {
     margin-left: $dl-horizontal-offset;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
 }
