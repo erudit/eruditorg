@@ -5843,7 +5843,12 @@ dl dt {
   white-space: nowrap; }
 
 dl dd {
-  margin-left: 60px; }
+  margin-left: 60px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; }
 
 .panel-group {
   margin: 20px; }
@@ -5923,7 +5928,7 @@ form.filter input[type="submit"] {
 */
 section#article-detail {
   /**
-  * default for elements
+  * default for html elements
   */
   /**
   * Utils class
@@ -5936,18 +5941,6 @@ section#article-detail {
   */ }
   section#article-detail a {
     color: #FF4242; }
-  section#article-detail .sep-line {
-    height: 1px;
-    margin-bottom: 44px;
-    position: relative; }
-    section#article-detail .sep-line:before {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 1px;
-      border-top: 1px solid #000;
-      position: absolute;
-      top: 0; }
   section#article-detail .border-top {
     position: relative; }
     section#article-detail .border-top:before {
@@ -5964,12 +5957,29 @@ section#article-detail {
     font-size: 36px;
     line-height: 1.4em;
     font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  section#article-detail header.article-header dl {
+    margin-top: 22px;
+    margin-bottom: 22px; }
   section#article-detail header.article-header hgroup {
     padding-top: 29.33333px;
     padding-bottom: 29.33333px; }
-    section#article-detail header.article-header hgroup p, section#article-detail header.article-header hgroup h3, section#article-detail header.article-header hgroup h4, section#article-detail header.article-header hgroup h5 {
+    section#article-detail header.article-header hgroup div.author {
+      margin-bottom: 22px; }
+    section#article-detail header.article-header hgroup h3 {
+      margin-bottom: 0;
+      font-size: 18px; }
+    section#article-detail header.article-header hgroup h4 {
+      font-size: 14px;
       margin-bottom: 5px; }
-    section#article-detail header.article-header hgroup p:last-child, section#article-detail header.article-header hgroup h3:last-child, section#article-detail header.article-header hgroup h4:last-child, section#article-detail header.article-header hgroup h5:last-child {
+    section#article-detail header.article-header hgroup h4.affiliation {
+      margin-top: 7.33333px;
       margin-bottom: 0; }
+    section#article-detail header.article-header hgroup p {
+      margin: 0; }
+  section#article-detail header.article-header figure.journal-logo img {
+    float: right; }
+    @media (max-width: 767px) {
+      section#article-detail header.article-header figure.journal-logo img {
+        float: none; } }
   section#article-detail .article-body {
     padding-top: 44px; }
