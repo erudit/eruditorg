@@ -1,10 +1,97 @@
-{% extends "public/base.html" %}
+{% extends "public/journal/journal_base.html" %}
 {% load i18n staticfiles %}
 
+{% block breadcrumb %}{{ block.super }} / <a href="{{ article.issue.journal.get_absolute_url }}">Journal</a> / <a href="{{ article.issue.get_absolute_url }}">Issue 0 2016</a> / <a href="#">{{ fedora_object }}</a> {% endblock %}
+
 {% block content %}
-  <h1>Article detail</h1>
-  <h4 class="mono-space">Fedora object: {{ fedora_object }}</h4>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+
+{# ################################ #}
+{# <DO NOT REMOVE : test markup     #}
+{# ################################ #}
+
+<section id="article-detail" class="container">
+
+  {# main article header #}
+  <header class="row article-header">
+
+    <hgroup class="col-xs-12 child-column-fit border-top">
+
+        <aside class="col-sm-8">
+          <h2>Régulation de p16<sup>INK4a</sup>, sénescence et oncogenèse</h2>
+        </aside>
+
+        <aside class="col-sm-4">
+          <figure class="journal-logo">
+            <img src="http://www.erudit.org/revue/logosmall/erudit:erudit.rse22.jpg" alt="titre" class="img-responsive pull-right" />
+          </figure>
+        </aside>
+
+    </hgroup>
+
+    <hgroup class="col-sm-6 border-top">
+
+      <h3 class="authors h4">
+        <strong role="author">Wei Wen Chien</strong> et <strong>Martine Ffrench</strong>
+      </h3>
+
+      <dl class="mono-space">
+        <dt>URI</dt>
+        <dd><a href="#">http://id.erudit.org/iderudit/013821ar</a></dd>
+        <dt>DOI</dt>
+        <dd><a href="#">10.7202/013821ar</a></dd>
+      </dl>
+
+      <h5 class="copyrights">
+        Tous droits réservés © M/S : médecine sciences, 2006
+      </h5>
+
+    </hgroup>
+
+    <hgroup class="col-sm-6 border-top">
+
+      <h5>Un article de la revue</h5>
+      <h5 class="bold"><a href="#">M/S : médecine sciences</a></h5>
+      <h5 class=""><a href="#">Biophotonique et imagerie</a></h5>
+      <h5 class="">Volume 22, numéro 10, octobre, 2006</h5>
+      <h5>p. 865-871</h5>
+    </hgroup>
+
+  </header>
+
+
+  {# article body text #}
+  <div class="article-body row border-top">
+
+    {# <div class="sep-line col-xs-12"></div>#}
+
+    <aside class="col-sm-4">
+      nav here
+    </aside>
+
+    <aside class="col-sm-8">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </aside>
+
+  </div>
+
+</section>
+
+{# ################################ #}
+{# <DO NOT REMOVE : test markup     #}
+{# ################################ #}
+
 {% endblock content %}

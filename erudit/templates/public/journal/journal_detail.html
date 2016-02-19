@@ -1,4 +1,4 @@
-{% extends "public/base.html" %}
+{% extends "public/journal/journal_base.html" %}
 {% load i18n staticfiles %}
 
 {% block page-title %}{{ journal.name }}{% endblock page-title %}
@@ -86,7 +86,7 @@
       {% for issue in issues %}
       <div class="col-md-6">
         <a class="btn btn-default btn-block"
-           href="{% url 'public:journal:issue-detail' journal_code=journal.code localidentifier=issue.localidentifier %}">
+           href="{{ issue.get_absolute_url }}">
           {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
             Numéro {{ number }} - {{ date }}
           {% endblocktrans %}

@@ -1,0 +1,91 @@
+/**
+* Article detail
+*/
+
+section#article-detail {
+
+  /**
+  * default for elements
+  */
+
+  a {
+    color: $color-red;
+  }
+
+  .sep-line {
+    height: 1px;
+    margin-bottom: $margin-vertical-default;
+    position: relative;
+    &:before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      border-top: 1px solid $gray-base;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  /**
+  * Utils class
+  */
+  // add a vertical line before each hgroup
+  .border-top {
+    position: relative;
+    &:before {
+      content: "";
+      display: block;
+      height: 1px;
+      border-top: 1px solid $gray-base;
+      position: absolute;
+      top: 0;
+      left: $grid-gutter-width/2;
+      right: $grid-gutter-width/2;
+    }
+  }
+
+
+  /**
+  * main article header
+  */
+
+
+  header.article-header {
+
+    h2 {
+      // padding-bottom: $margin-vertical-default/2;
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.4em;
+      @include fw-bold();
+    }
+
+    hgroup {
+      padding-top: $margin-vertical-default/1.5;
+      padding-bottom: $margin-vertical-default/1.5;
+
+      p, h3, h4, h5 {
+        margin-bottom: 5px;
+      }
+
+      // remove margin on some last-child elements
+      p, h3, h4, h5 {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+    }
+
+  }
+
+
+  /**
+  * Article body
+  */
+  .article-body {
+    padding-top: $margin-vertical-default;
+  }
+
+}

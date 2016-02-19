@@ -33,10 +33,10 @@
     {% block extrahead %}
     {% endblock %}
   </head>
-  <body>
+  <body class="{% block body_class %}{% endblock %}">
 
     {% block header %}
-    {% endblock %}
+    {% endblock %}    
     {% block nav %}
     {% endblock %}
     {% block content %}

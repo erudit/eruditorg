@@ -16,9 +16,10 @@ html {
  * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
  */
 *, *::before, *::after {
-  box-sizing: inherit;
+  // Actually, prefer the border-box model from bootstrap, TODO: discuss
+  // box-sizing: inherit;
 }
 
 body {
-  background: #f3f3f3;
+  background: $body-bg;
 }

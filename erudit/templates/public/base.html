@@ -1,1 +1,51 @@
 {% extends "base.html" %}
+{% load static i18n %}
+
+{% block body_class %}public{% endblock %}
+
+{# public page header #}
+{% block header %}
+<header id="site-header">
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <h1 id="brand" class="col-md-4">
+        <a href="/">
+          <img src="{% static 'svg/logo-erudit.svg' %}" alt="Erudit" />
+        </a>
+      </h1>
+
+      <nav id="main-nav" class="col-md-8">
+        <ul class="unstyled">
+          {% block mainnav %}
+            <li>
+              <a href="{% url 'public:journal:journal-list' %}" class="main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down"></i></a>
+            </li>
+            <li>
+              <a href="#" class="main-section">{% trans "About" %} <i class="ion-ios-arrow-down"></i></a>
+            </li>
+            <li>
+              <a href="#" class="main-section">{% trans "Connection" %}  <i class="ion-ios-arrow-down"></i></a>
+            </li>
+            <li>
+              <a href="#" class="search"><i class="ion-ios-search-strong"></i></a>
+            </li>
+          {% endblock %}
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+
+</header>
+
+<nav id="breadcrumb" class="container">
+  <div class="row">
+      <p class="col-xs-12 no-margin">
+        <a href="/">Érudit</a> {% block breadcrumb %}{% endblock %}
+      </p>
+  </div>
+</nav>
+
+{% endblock %}

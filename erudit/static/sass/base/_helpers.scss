@@ -39,3 +39,45 @@
   position: absolute;
   width: 1px;
 }
+
+/**
+* Reset Bootstrap's columns padding
+* Bootstrap adds padding to each col-x elements, add this class on parent .row element to fit them
+*/
+
+.child-column-fit [class*="col-"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/**
+* remove margin or padding
+*/
+
+.no-margin  { margin: 0 !important;  }
+.no-padding { padding: 0 !important; }
+
+/**
+* Unstyle a list element
+*/
+
+ul, ol {
+  &.unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+
+/**
+* color classes
+*/
+
+.color-red {
+  color: $color-red;
+}

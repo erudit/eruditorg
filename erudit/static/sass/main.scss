@@ -4,12 +4,13 @@
 @import
   'utils/variables',
   'utils/functions',
+  'utils/font-styles',
   'utils/mixins';
 
 // 2. Vendors
 @import
   '../vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-  '../vendor/font-awesome/scss/font-awesome.scss',
+  '../vendor/ionicons/css/ionicons.css',
   'vendor/normalize';
 
 // 3. Base stuff
@@ -23,6 +24,7 @@
 // 4. Layout-related sections
 @import
   'layout/header',
+  'layout/nav',
   'layout/sidenav',
   'layout/content',
   'layout/footer';
@@ -40,12 +42,14 @@
   'components/alerts',
   'components/breadcrumbs',
   'components/fileupload',
+  'components/lists',
   'components/panels';
 
 // 6. Page-specific styles
 @import
   'pages/login',
-  'pages/individual_subscription';
+  'pages/individual_subscription',
+  'pages/article-detail';
 
 // 7. Themes
 @import

@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+from django.core.urlresolvers import reverse as reverse_url
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, EruditArticle
 
@@ -374,6 +375,12 @@ class Journal(FedoraMixin, Named, Edinum):
         return self.published_issues.filter(open_access=True) \
             .order_by('-date_published').first()
 
+    def get_absolute_url(self):
+        return reverse_url(
+            "public:journal:journal-detail",
+            args=[self.code]
+        )
+
     # contract
     def has_active_contract(self):
         pass
@@ -498,6 +505,12 @@ class Issue(FedoraMixin, models.Model):
                 self.journal.get_full_identifier(),
                 self.localidentifier
             )
+
+    def get_absolute_url(self):
+        return reverse_url(
+            "public:journal:issue-detail",
+            args=[self.journal.code, self.localidentifier]
+        )
 
     def __str__(self):
         if self.volume and self.number and self.year:
