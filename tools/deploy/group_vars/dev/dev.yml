@@ -21,3 +21,5 @@ victor_url: "{{ PRIVATE_VICTOR_URL }}"
 victor_username: "{{ PRIVATE_VICTOR_USERNAME }}"
 victor_password: "{{ PRIVATE_VICTOR_PASSWORD }}"
 email_host: "{{ PRIVATE_EMAIL_HOST }}"
+
+sentry_dsn: "{{ PRIVATE_SENTRY_DSN }}"

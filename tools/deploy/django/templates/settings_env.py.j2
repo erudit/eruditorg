@@ -29,6 +29,11 @@ MEDIA_ROOT = "{{ project_root }}/media"
 
 EMAIL_HOST = "{{ email_host }}"
 
+# Raven settings
+RAVEN_CONFIG = {
+    'dsn': '{{ sentry_dsn }}',
+}
+
 victor_username = "{{ victor_username }}"
 victor_password = "{{ victor_password }}"
 victor_url = "{{ victor_url }}"
