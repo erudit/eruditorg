@@ -120,36 +120,6 @@ class IndividualAccount(models.Model):
         return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
 
 
-class FlatAccessMixin(object):
-    """
-    Mixin to generate Flat access legacy from new organisation model.
-    """
-    def fa_cleanup(self):
-        IndividualAccountJournal.objects.filter(
-            account__in=self.accounts.all()
-        ).delete()
-
-    def fa_link_journals(self, journals):
-        for account in self.accounts.all():
-            for journal in journals:
-                rule, created = IndividualAccountJournal.objects.get_or_create(
-                    account=account,
-                    journal=journal)
-
-    def generate_flat_access(self):
-        # Cleanup
-        self.fa_cleanup()
-
-        # Full access
-        if self.access_full:
-            journals = CoreJournal.objects.all()
-            self.fa_link_journals(journals)
-
-        # Journals selected
-        if self.access_journal.count() > 0:
-            self.fa_link_journals(self.access_journal.all())
-
-
 class PolicyEvent(models.Model):
     """
     """
@@ -178,7 +148,7 @@ class PolicyEvent(models.Model):
         ordering = ('-date_creation', )
 
 
-class Policy(FlatAccessMixin, models.Model):
+class Policy(models.Model):
     """
     Entity which describe who and what resource, an organization can access.
     (Wikipedia, AEIQ, Revue).
@@ -303,17 +273,3 @@ class Policy(FlatAccessMixin, models.Model):
                     emails = "!!!"
                 msg = "Destinataires: {} Message: {}".format(emails, html_message)
                 PolicyEvent(policy=self, code='LIMIT_REACHED', message=msg).save()
-
-
-class IndividualAccountJournal(models.Model):
-    """
-    Class association to define who can access the journal
-    This class is used to make the glue with erudit.org system auth perms.
-    """
-    # TODO define where to target this models (router.py will make the trick to popule
-    # in the right database)
-    journal = models.ForeignKey("erudit.journal", verbose_name=_("Revue"),)
-    account = models.ForeignKey("IndividualAccount", verbose_name=_("Compte personnel"),)
-
-    class Meta:
-        unique_together = (('journal', 'account'),)

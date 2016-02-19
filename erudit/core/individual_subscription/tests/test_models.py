@@ -1,10 +1,7 @@
 from django.test import TestCase
 
-from erudit.factories import JournalFactory
-from erudit.models import Journal
-
 from ..factories import PolicyFactory, IndividualAccountFactory
-from ..models import IndividualAccountJournal, PolicyEvent
+from ..models import PolicyEvent
 
 
 class OrganizationPolicyTestCase(TestCase):
@@ -54,79 +51,6 @@ class IndividualAccountTestCase(TestCase):
         password = account.password
         account.save()
         self.assertEqual(account.password, password)
-
-
-class IndividualAccountJournalTestCase(TestCase):
-
-    def test_run_command_twice(self):
-        policy = PolicyFactory()
-        IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        JournalFactory.create_batch(10)
-        policy.access_full = True
-        policy.save()
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
-
-    def test_removed_account(self):
-        policy = PolicyFactory()
-        dude_to_delete = IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        JournalFactory.create_batch(10)
-        policy.access_full = True
-        policy.save()
-        policy.generate_flat_access()
-        dude_to_delete.delete()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 10)
-
-    def test_removed_journal(self):
-        policy = PolicyFactory()
-        IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        JournalFactory.create_batch(10)
-        policy.access_full = True
-        policy.save()
-        policy.generate_flat_access()
-        Journal.objects.first().delete()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 18)
-
-
-class IndividualAccountJournalFullAccessTestCase(TestCase):
-
-    def test_add_full_access(self):
-        policy = PolicyFactory()
-        IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        JournalFactory.create_batch(10)
-        policy.access_full = True
-        policy.save()
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 20)
-
-
-class IndividualAccountJournalCustomTestCase(TestCase):
-
-    def test_link_journals(self):
-        policy = PolicyFactory()
-        policy.access_journal = JournalFactory.create_batch(2)
-        policy.save()
-        IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 4)
-
-    def test_remove_account(self):
-        policy = PolicyFactory()
-        policy.access_journal = JournalFactory.create_batch(2)
-        policy.save()
-        dude_to_delete = IndividualAccountFactory(policy=policy)
-        IndividualAccountFactory(policy=policy)
-        policy.generate_flat_access()
-        dude_to_delete.delete()
-        policy.generate_flat_access()
-        self.assertEqual(IndividualAccountJournal.objects.count(), 2)
 
 
 class EventTestCase(TestCase):
