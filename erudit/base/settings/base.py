@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'spurl',
     'rules.apps.AutodiscoverRulesConfig',
     'ckeditor',
+    'raven.contrib.django.raven_compat',
 
     # Érudit apps
     'base',
@@ -260,6 +261,56 @@ FEDORA_USER = 'fedoraAdmin'
 FEDORA_PASSWORD = 'fedoraAdmin'
 
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
+
+# Logging settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'tags': {'custom-tag': 'x'},
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
+
+# Raven settings
+RAVEN_CONFIG = {
+    'dsn': None,
+}
 
 try:
     from .settings_env import *  # noqa
