@@ -12,7 +12,7 @@ from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
 from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
-from core.userspace.viewmixins import LoginRequiredMixin
+from apps.userspace.viewmixins import LoginRequiredMixin
 from core.editor.models import IssueSubmission
 from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
@@ -24,7 +24,7 @@ class IssueSubmissionBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
                             self).get_breadcrumbs()
         breadcrumbs.append(Breadcrumb(
             _("Dépôts de numéros"),
-            pattern_name='editor:issues'))
+            pattern_name='userspace:editor:issues'))
         return breadcrumbs
 
 

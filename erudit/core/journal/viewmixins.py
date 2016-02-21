@@ -11,18 +11,6 @@ from navutils import Breadcrumb
 from core.subscription.models import InstitutionalAccount
 from core.subscription.models import InstitutionIPAddressRange
 from erudit.models import Journal
-from userspace.views import UserspaceBreadcrumbsMixin
-
-
-class JournalBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
-
-    def get_breadcrumbs(self):
-        breadcrumbs = super(JournalBreadcrumbsMixin,
-                            self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(
-            _("Revues"),
-            pattern_name='journal:journal-information'))
-        return breadcrumbs
 
 
 class JournalCodeDetailMixin(object):

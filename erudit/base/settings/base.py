@@ -32,30 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'grappelli',
-    'modeltranslation',
-    'post_office',
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'pipeline',
-    'crispy_forms',
-    'django_select2',
-    'datetimewidget',
-    'plupload',
-    'django_filters',
-    'spurl',
-    'rules',
-    'navutils',
-
-    'ckeditor',
-    'raven.contrib.django.raven_compat',
-
     # Érudit apps
     'base',
     'erudit',
@@ -65,14 +41,42 @@ INSTALLED_APPS = (
     'apps.public.thesis',
     'apps.userspace.dashboard',
     'apps.userspace.editor',
+    'apps.userspace.individual_subscription',
     'apps.userspace.journal',
     'apps.userspace.permissions',
     'apps.userspace.subscription',
     'core.editor',
+    'core.individual_subscription',
     'core.journal',
     'core.permissions',
     'core.subscription',
     'core.userspace',
+
+    #  third-party apps
+    'grappelli',
+    'modeltranslation',
+    'post_office',
+
+    # Django apps
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    #  third-party apps
+    'pipeline',
+    'crispy_forms',
+    'django_select2',
+    'datetimewidget',
+    'plupload',
+    'django_filters',
+    'spurl',
+    'rules',
+    'navutils',
+    'ckeditor',
+    'raven.contrib.django.raven_compat',
 )
 
 DATABASES = {

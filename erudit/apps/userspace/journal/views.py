@@ -10,13 +10,13 @@ from django.views.generic import RedirectView
 from django.views.generic import UpdateView
 from rules.contrib.views import PermissionRequiredMixin
 
+from core.journal.viewmixins import JournalCodeDetailMixin
 from core.journal.rules_helpers import get_editable_journals
-from core.journal.viewmixins import JournalCodeDetailMixin, JournalBreadcrumbsMixin
 from erudit.models import Journal
 from erudit.models import JournalInformation
 
 from .forms import JournalInformationForm
-from core.journal.rules_helpers import get_editable_journals
+from .viewmixins import JournalBreadcrumbsMixin
 
 
 class JournalInformationDispatchView(RedirectView):
