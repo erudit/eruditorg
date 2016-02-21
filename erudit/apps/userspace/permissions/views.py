@@ -1,48 +1,18 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import (TemplateView, CreateView,
                                   DeleteView, ListView)
-from django.contrib.auth.decorators import login_required
-from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 
-from rules.contrib.views import PermissionRequiredMixin
-from navutils import BreadcrumbsMixin, Breadcrumb
-
 from core.permissions.models import Rule
-from core.userspace.viewmixins import LoginRequiredMixin
-
+from apps.userspace.viewmixins import (LoginRequiredMixin,
+                                       UserspaceBreadcrumbsMixin)
+from apps.userspace.permissions.viewmixins import (PermissionsCheckMixin,
+                                                   PermissionsBreadcrumbsMixin)
 from .forms import RuleForm
-
-
-class UserspaceBreadcrumbsMixin(BreadcrumbsMixin):
-    def get_breadcrumbs(self):
-        breadcrumbs = super(UserspaceBreadcrumbsMixin, self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(_("Mon espace"),
-                                      pattern_name='userspace:dashboard'))
-        return breadcrumbs
 
 
 class DashboardView(UserspaceBreadcrumbsMixin, LoginRequiredMixin, TemplateView):
     template_name = 'userspace/dashboard.html'
-
-
-class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
-    permission_required = 'userspace.manage_permissions'
-
-    def get_queryset(self):
-        qs = super(PermissionsCheckMixin, self).get_queryset()
-        ct = ContentType.objects.get(app_label="erudit", model="journal")
-        ids = [j.id for j in self.request.user.journals.all()]
-        return qs.filter(content_type=ct, object_id__in=ids)
-
-
-class PermissionsBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
-
-    def get_breadcrumbs(self):
-        breadcrumbs = super(PermissionsBreadcrumbsMixin, self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(_("Permissions"),
-                                      pattern_name='userspace:perm_list'))
-        return breadcrumbs
 
 
 class PermissionsListView(PermissionsBreadcrumbsMixin,
@@ -64,7 +34,7 @@ class PermissionsCreateView(PermissionsBreadcrumbsMixin,
         return kwargs
 
     def get_success_url(self):
-        return reverse('userspace:perm_list')
+        return reverse('userspace:permissions:perm_list')
 
 
 class PermissionsDeleteView(PermissionsBreadcrumbsMixin,
@@ -76,7 +46,7 @@ class PermissionsDeleteView(PermissionsBreadcrumbsMixin,
         return _("Supprimer une permission")
 
     def get_success_url(self):
-        return reverse('userspace:perm_list')
+        return reverse('userspace:permissions:perm_list')
 
     def get_permission_object(self):
         rule = self.get_object()

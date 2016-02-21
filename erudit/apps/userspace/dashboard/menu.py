@@ -2,7 +2,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from navutils import menu
 
-import ipdb; ipdb.set_trace()
 main_menu = menu.Menu('main')
 menu.register(main_menu)
 
@@ -17,7 +16,7 @@ main_menu.register(userspace)
 journal = menu.AnyPermissionsNode(
     id='journal',
     label=_('Information de la revue'),
-    pattern_name='journal:journal-information',
+    pattern_name='userspace:journal:journal-information',
     permissions=['journal.edit_journal', ],
     context={'icon': 'fa-folder-o'},
 )
@@ -25,7 +24,7 @@ journal = menu.AnyPermissionsNode(
 editor = menu.AnyPermissionsNode(
     id='editor',
     label=_('Dépôts de numéros'),
-    pattern_name='editor:issues',
+    pattern_name='userspace:editor:issues',
     permissions=['editor.manage_issuesubmission', ],
     context={'icon': 'fa-folder-open-o'},
 )
@@ -33,7 +32,7 @@ editor = menu.AnyPermissionsNode(
 permissions = menu.AnyPermissionsNode(
     id='permissions',
     label=_('Permissions'),
-    pattern_name='userspace:perm_list',
+    pattern_name='userspace:permissions:perm_list',
     permissions=['userspace.manage_permissions', ],
     context={'icon': 'fa-lock'},
 )
@@ -41,7 +40,7 @@ permissions = menu.AnyPermissionsNode(
 individual_subscription = menu.AnyPermissionsNode(
     id='individual_subscription',
     label=_('Abonnements individuels'),
-    pattern_name='individual_subscription:account_list',
+    pattern_name='userspace:individual_subscription:account_list',
     permissions=['individual_subscription.manage_account', ],
     context={'icon': 'fa-users'},
 )
