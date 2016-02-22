@@ -120,7 +120,8 @@ class TestArticleDetailView(BaseEruditTestCase):
 
     def test_works_with_pks(self):
         # Setup
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), open_access=True)
         article = ArticleFactory.create(issue=issue)
         url = reverse('public:journal:article-detail', kwargs={
             'journal_code': self.journal.code, 'issue_localid': issue.localidentifier,
@@ -135,7 +136,8 @@ class TestArticleDetailView(BaseEruditTestCase):
     def test_works_with_localidentifiers(self):
         # Setup
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            open_access=True)
         article = ArticleFactory.create(issue=issue)
         url = reverse('public:journal:article-detail', kwargs={
             'journal_code': self.journal.code, 'issue_localid': issue.localidentifier,
