@@ -574,6 +574,12 @@ class Article(models.Model, FedoraMixin):
                 self.localidentifier
             )
 
+    @property
+    def open_access(self):
+        """ Returns a boolean indicating if the article is in open access. """
+        return self.issue.open_access or (
+            self.issue.open_access is None and self.issue.journal.open_access)
+
 
 class Publisher(Edinum):
     """Éditeur"""

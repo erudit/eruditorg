@@ -132,3 +132,25 @@ class TestArticle(BaseEruditTestCase):
         self.article.save()
         # Run & check
         self.assertIsNone(self.article.get_full_identifier())
+
+    def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, open_access=True)
+        article_1 = ArticleFactory.create(issue=issue_1)
+        issue_2 = IssueFactory.create(journal=self.journal, open_access=False)
+        article_2 = ArticleFactory.create(issue=issue_2)
+        # Run 1 check
+        self.assertTrue(article_1.open_access)
+        self.assertFalse(article_2.open_access)
+
+    def test_knows_if_it_is_in_open_access_if_its_journal_is_in_open_access(self):
+        # Setup
+        self.journal.open_access = True
+        self.journal.save()
+        issue_1 = IssueFactory.create(journal=self.journal, open_access=None)
+        article_1 = ArticleFactory.create(issue=issue_1)
+        issue_2 = IssueFactory.create(journal=self.journal, open_access=False)
+        article_2 = ArticleFactory.create(issue=issue_2)
+        # Run 1 check
+        self.assertTrue(article_1.open_access)
+        self.assertFalse(article_2.open_access)
