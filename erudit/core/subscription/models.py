@@ -1,4 +1,5 @@
 import hashlib
+import ipaddress
 from random import choice
 import base64
 from datetime import timedelta
@@ -124,6 +125,46 @@ class IndividualAccount(models.Model):
         to_sha = msg.encode('utf-8') + salt.encode('utf-8')
         hashy = hashlib.sha1(to_sha).digest()
         return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
+
+
+class InstitutionalAccount(models.Model):
+    """
+    An institutional account defines how an institution can access
+    protected content.
+    """
+    institution = models.ForeignKey(CoreOrganisation, verbose_name=_('Organisation'))
+    policy = models.ForeignKey(
+        'Policy', verbose_name=_('Accès'), related_name='institutional_accounts')
+
+    class Meta:
+        verbose_name = _('Compte institutionnel')
+        verbose_name_plural = _('Comptes institutionnel')
+
+    def __str__(self):
+        return str(self.institution)
+
+
+class InstitutionIPAddressRange(models.Model):
+    institutional_account = models.ForeignKey(
+        InstitutionalAccount, verbose_name=_('Compte institutionnel'))
+    ip_start = models.GenericIPAddressField(verbose_name=_('Adresse IP de début'))
+    ip_end = models.GenericIPAddressField(verbose_name=_('Adresse IP de fin'))
+
+    class Meta:
+        verbose_name = _('Plage d\'adresses IP d\'institution')
+        verbose_name_plural = _('Plages d\'adresses IP d\'institution')
+
+    def __str__(self):
+        return '{institution} / {start} - {end}'.format(
+            institution=self.institutional_account, start=self.ip_start, end=self.ip_end)
+
+    def clean(self):
+        super(InstitutionIPAddressRange, self).clean()
+        start = ipaddress.ip_address(self.ip_start)
+        end = ipaddress.ip_address(self.ip_end)
+        if start > end:
+            raise ValidationError(_(
+                'L\'adresse IP de début doit être inférieure à l\'adresse IP de fin'))
 
 
 class PolicyEvent(models.Model):

@@ -6,7 +6,8 @@ from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
 from .models import (IndividualAccount, Policy, PolicyEvent,
-                     Organisation, Journal)
+                     Organisation, Journal, InstitutionalAccount,
+                     InstitutionIPAddressRange)
 
 
 class PolicyEventAdmin(admin.ModelAdmin):
@@ -178,8 +179,11 @@ class PolicyAdmin(admin.ModelAdmin):
             self.message_user(request, "%s a été renouvellée jusqu'à %s." % (obj, obj.date_renew))
     renew.short_description = _("Renouveller l'inscription")
 
+
 admin.site.register(IndividualAccount, IndividualAccountAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(PolicyEvent, PolicyEventAdmin)
+admin.site.register(InstitutionalAccount)
+admin.site.register(InstitutionIPAddressRange)

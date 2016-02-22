@@ -1,6 +1,12 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from ..factories import PolicyFactory, IndividualAccountFactory
+from erudit.factories import OrganisationFactory
+
+from ..factories import (
+    PolicyFactory, IndividualAccountFactory,
+    InstitutionalAccountFactory, InstitutionIPAddressRangeFactory
+)
 from ..models import PolicyEvent
 
 
@@ -79,3 +85,18 @@ class EventTestCase(TestCase):
         policy.notify_limit_reached()
         policy.notify_limit_reached()
         self.assertEqual(PolicyEvent.objects.count(), 1)
+
+
+class TestInstitutionIPAddressRange(TestCase):
+    def setUp(self):
+        self.policy = PolicyFactory.create(max_accounts=2)
+        self.organisation = OrganisationFactory.create()
+        self.institutional_account = InstitutionalAccountFactory(
+            institution=self.organisation, )
+
+    def test_cannot_be_saved_with_an_incoherent_ip_range(self):
+        # Run & check
+        with self.assertRaises(ValidationError):
+            ip_range = InstitutionIPAddressRangeFactory.build(
+                ip_start='192.168.1.3', ip_end='192.168.1.2')
+            ip_range.clean()
