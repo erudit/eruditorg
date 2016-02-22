@@ -8,7 +8,7 @@ django-crispy-forms==1.5.2
 django-grappelli==2.7.1
 git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-resumable-uploads
 eulxml==1.0.1
--e git+https://github.com/erudit/eulfedora.git@python3-support#egg=eulfedora
+eulfedora==1.5.0
 -e git+https://github.com/erudit/liberuditarticle.git@master#egg=liberuditarticle
 django-post-office==2.0.5
 Django-Select2==5.2.1
