@@ -1,108 +1,67 @@
-from django.conf import settings
-from django.shortcuts import render  # noq
-from django.core.files.base import ContentFile
-from django.template.loader import get_template
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from post_office import mail
 
-from core.subscription import report
-from core.subscription.models import RenewalNotice
+from django_filters.views import FilterView
+from rules.contrib.views import PermissionRequiredMixin
 
+from core.subscription.models import IndividualAccount
+from core.userspace.viewmixins import LoginRequiredMixin
 
-def email(request):
-    c = {}
-    return render(request, 'userspace/subscription/subscription_renewal_email.html', context=c)
-
-
-def _send_emails(request, renewals, is_test=True):
-
-    for renewal in renewals:
-        report_data = report.generate_report(renewal)
-        pdf = ContentFile(report_data)
-
-        template = get_template('userspace/subscription/subscription_renewal_email.html')
-        context = {'renewal_number': renewal.renewal_number}
-        html_message = template.render(context)
-
-        if is_test:
-            recipient = request.user.email
-        else:
-            recipient = renewal.paying_customer.email
-
-        emails = mail.send(
-            recipient,
-            settings.RENEWAL_FROM_EMAIL,
-            bcc=[request.user.email],
-            attachments={
-                '{}.pdf'.format(renewal.renewal_number): pdf
-            },
-            message=html_message,
-            html_message=html_message,
-            subject='{} - Avis de renouvellement'.format(
-                renewal.renewal_number
-            )
-        )
-
-        renewal.sent_emails.add(
-            emails
-        )
-
-        if not is_test:
-            renewal.status = 'SENT'
-            renewal.save()
+from .forms import (IndividualAccountFilter, IndividualAccountForm,
+                    IndividualAccountResetPwdForm)
 
 
-def confirm_test(request):
+class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
+    permission_required = 'individual_subscription.manage_account'
 
-    ids = request.GET.get('ids').split(',')
-
-    if request.POST.get('doit'):
-        _send_emails(
-            request,
-            RenewalNotice.objects.filter(pk__in=ids)
-        )
-
-        urls = reverse('admin:subscription_renewalnotice_changelist')
-        return HttpResponseRedirect(urls)
-
-    renewals = [
-        r for r
-        in RenewalNotice.objects.filter(pk__in=ids)
-    ]
-
-    return render(
-        request,
-        'userspace/subscription/send_email.html',
-        context={
-            'renewals': renewals,
-            'test': 'TEST'
-        }
-    )
+    def get_queryset(self):
+        qs = IndividualAccount.objects.order_by('-id')
+        ids = [account.id for account in qs if self.request.user.has_perm(
+               'individual_subscription.manage_account', account)]
+        return qs.filter(id__in=ids)
 
 
-def confirm_send(request):
-    ids = request.GET.get('ids').split(',')
+class IndividualAccountList(OrganizationCheckMixin, FilterView):
+    filterset_class = IndividualAccountFilter
+    paginate_by = 10
+    template_name = 'userspace/subscription/individualaccount_filter.html'
 
-    if request.POST.get('doit'):
-        _send_emails(
-            request,
-            RenewalNotice.objects.filter(pk__in=ids),
-            is_test=False
-        )
 
-        urls = reverse('admin:subscription_renewalnotice_changelist')
-        return HttpResponseRedirect(urls)
+class IndividualAccountCreate(OrganizationCheckMixin, CreateView):
+    model = IndividualAccount
+    form_class = IndividualAccountForm
+    template_name = 'userspace/subscription/individualaccount_create.html'
 
-    renewals = [
-        r for r
-        in RenewalNotice.objects.filter(pk__in=ids)
-    ]
+    def get_success_url(self):
+        return reverse('userspace:subscription:account_list')
 
-    return render(
-        request,
-        'userspace/subscription/send_email.html',
-        context={
-            'renewals': renewals,
-        }
-    )
+    def get_form_kwargs(self):
+        kwargs = super(IndividualAccountCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+class IndividualAccountUpdate(OrganizationCheckMixin, UpdateView):
+    model = IndividualAccount
+    template_name = 'userspace/subscription/individualaccount_update.html'
+    fields = ['firstname', 'lastname', 'email', ]
+
+    def get_success_url(self):
+        return reverse('userspace:subscription:account_list')
+
+
+class IndividualAccountDelete(OrganizationCheckMixin, DeleteView):
+    model = IndividualAccount
+    template_name = 'userspace/subscription/individualaccount_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('userspace:subscription:account_list')
+
+
+class IndividualAccountResetPwd(OrganizationCheckMixin, UpdateView):
+    model = IndividualAccount
+    form_class = IndividualAccountResetPwdForm
+    template_name = 'userspace/subscription/individualaccount_reset_pwd.html'
+
+    def get_success_url(self):
+        return reverse('userspace:subscription:account_list')

@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('erudit', '0004_auto_20151117_1915'),
+        ('erudit', '0001_initial'),
         ('editor', '0001_squashed_0004_auto_20151112_2037'),
     ]
 

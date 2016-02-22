@@ -3,6 +3,6 @@
 from django.apps import AppConfig
 
 
-class SubscriptionConfig(AppConfig):
+class IndividualSubscriptionConfig(AppConfig):
     label = 'userspace_subscription'
     name = 'apps.userspace.subscription'

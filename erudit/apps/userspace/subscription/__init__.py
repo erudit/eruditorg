@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-default_app_config = 'apps.userspace.subscription.apps.SubscriptionConfig'
+default_app_config = 'apps.userspace.subscription.apps.IndividualSubscriptionConfig'

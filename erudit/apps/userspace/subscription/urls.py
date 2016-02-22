@@ -1,35 +1,21 @@
-"""erudit URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
 from django.conf.urls import url
+from django.utils.translation import ugettext_lazy as _
 
-from . import views
 
+from .views import (
+    IndividualAccountCreate,
+    IndividualAccountUpdate,
+    IndividualAccountDelete,
+    IndividualAccountList,
+    IndividualAccountResetPwd,
+)
 
 urlpatterns = [
-    url(
-        r'confirm_test',
-        views.confirm_test,
-        name='confirm_test'
-    ),
-    url(
-        r'confirm_send',
-        views.confirm_send,
-        name='confirm_send'),
-    url(
-        r'avis',
-        views.email,
-        name='notice'),
+    url(_(r'^acces/$'), IndividualAccountList.as_view(), name='account_list'),
+    url(_(r'^acces/ajout'), IndividualAccountCreate.as_view(), name='account_add'),
+    url(_(r'^acces/supprimer/(?P<pk>[0-9]+)/$'), IndividualAccountDelete.as_view(),
+        name='account_delete'),
+    url(_(r'^acces/(?P<pk>[0-9]+)/$'), IndividualAccountUpdate.as_view(), name='account_update'),
+    url(_(r'^acces/nouveau-mdp/(?P<pk>[0-9]+)/$'), IndividualAccountResetPwd.as_view(),
+        name='account_reset_pwd'),
 ]

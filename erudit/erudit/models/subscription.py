@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from core.subscription import models as s
-
+from .core import Currency
 from .core import Journal, YEARS
 
 
@@ -34,7 +33,7 @@ class SubscriptionPrice(models.Model):
         verbose_name=_("Prix"),
     )
     currency = models.ForeignKey(
-        s.Currency,
+        Currency,
         null=True, blank=True,
         verbose_name=_("Devise"),
     )
@@ -66,7 +65,6 @@ class SubscriptionPrice(models.Model):
             'type',
             'zone',
         ]
-        app_label = 'subscription'
 
 
 class SubscriptionType(models.Model):
@@ -92,7 +90,6 @@ class SubscriptionType(models.Model):
         verbose_name = _("Type d'abonnement")
         verbose_name_plural = _("Types d'abonnement")
         ordering = ['name', ]
-        app_label = 'subscription'
 
 
 class SubscriptionZone(models.Model):
@@ -118,7 +115,6 @@ class SubscriptionZone(models.Model):
         verbose_name = _("Zone d'abonnement")
         verbose_name_plural = _("Zones d'abonnement")
         ordering = ['name', ]
-        app_label = 'subscription'
 
 
 class Basket(models.Model):
@@ -149,4 +145,3 @@ class Basket(models.Model):
         verbose_name = _("Panier")
         verbose_name_plural = _("Paniers")
         ordering = ['name', ]
-        app_label = 'subscription'

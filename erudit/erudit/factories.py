@@ -71,6 +71,6 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 class BasketFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        model = 'subscription.Basket'
+        model = 'erudit.Basket'
 
     name = factory.Sequence(lambda n: 'Basket{}'.format(n))

@@ -1,618 +1,275 @@
+import hashlib
+from random import choice
+import base64
+from datetime import timedelta
+
+from django.conf import settings
+from django.utils import timezone
 from django.db import models
-from django.utils.translation import gettext as _
+from django.template.loader import get_template
+from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
-from post_office.models import Email
+from post_office import mail
+
+from erudit.models import Organisation as CoreOrganisation
+from erudit.models import Journal as CoreJournal
 
 
-class Country(models.Model):
+# When a notification is sent, don't spam users until this elapsed time
+EVENT_SILENCE_DAYS = getattr(settings, "EVENT_SILENCE_DAYS ", 30)
 
+
+class Organisation(CoreOrganisation):
+    class Meta:
+        proxy = True
+
+
+class Journal(CoreJournal):
+    class Meta:
+        proxy = True
+        verbose_name = _('Revue')
+
+
+class IndividualAccount(models.Model):
+    """
+    Personal account used in erudit.org
+    to access protected content.
+    """
+    email = models.CharField(max_length=120, verbose_name=_("Courriel"))
+    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
+    policy = models.ForeignKey(
+        "Policy",
+        verbose_name=_("Accès"),
+        related_name="accounts"
+    )
+    firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
+    lastname = models.CharField(max_length=30, verbose_name=_("Nom"))
+    active = models.BooleanField(default=True, verbose_name=_("Actif"))
+
+    class Meta:
+        verbose_name = _("Compte personnel")
+        verbose_name_plural = _("Comptes personnels")
+
+    def save(self, *args, **kwargs):
+        # Stamp first user created date
+        if not self.pk and self.policy.date_activation is None:
+            self.policy.date_activation = timezone.now()
+            self.policy.date_renew = self.policy.date_activation
+            self.policy.renew()
+
+        # Password encryption
+        if self.pk:
+            if IndividualAccount.objects.filter(pk=self.pk).count() == 1:
+                old_crypted_password = IndividualAccount.objects.get(pk=self.pk).password
+                if not (self.password == old_crypted_password):
+                    self.update_password(self.password)
+            else:
+                # Not yet in Db, so the password is set in constructor already crypted
+                pass
+        else:
+            self.mail_account()
+            new_password = self.generate_password()
+            self.update_password(new_password)
+        super(IndividualAccount, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '{} {} ({})'.format(self.firstname, self.lastname, self.id)
+
+    def generate_password(self):
+        return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])
+
+    def update_password(self, plain_password):
+        self.password = self.sha1(plain_password)
+        self.mail_password(plain_password)
+
+    def mail_password(self, plain_password):
+        template = get_template('userspace/subscription/mail/new_password.html')
+        context = {'object': self, 'plain_password': plain_password, }
+        html_message = template.render(context)
+        recipient = self.email
+        mail.send(
+            recipient,
+            settings.RENEWAL_FROM_EMAIL,
+            message=html_message,
+            html_message=html_message,
+            subject=_("erudit.org : mot de passe")
+        )
+
+    def mail_account(self):
+        template = get_template('userspace/subscription/mail/new_account.html')
+        context = {'object': self}
+        html_message = template.render(context)
+        recipient = self.email
+        mail.send(
+            recipient,
+            settings.RENEWAL_FROM_EMAIL,
+            message=html_message,
+            html_message=html_message,
+            subject=_("erudit.org : création de votre compte")
+        )
+
+    def sha1(self, msg, salt=None):
+        "Crypt function from legacy system"
+        if salt is None:
+            salt = settings.INDIVIDUAL_SUBSCRIPTION_SALT
+        to_sha = msg.encode('utf-8') + salt.encode('utf-8')
+        hashy = hashlib.sha1(to_sha).digest()
+        return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
+
+
+class PolicyEvent(models.Model):
+    """
+    """
+    date_creation = models.DateTimeField(
+        editable=False,
+        null=True,
+        default=timezone.now,
+        verbose_name=_("Date de création")
+    )
+    policy = models.ForeignKey(
+        'Policy',
+        verbose_name=_('Accès aux produits'),
+    )
     code = models.CharField(
-        max_length=255,
-        null=True, blank=True,
+        max_length=120,
+        verbose_name=_("Code"),
+        choices=(
+                ('LIMIT_REACHED', _('Limite atteinte')),
+        )
+    )
+    message = models.TextField(verbose_name=_("Texte"), blank=True)
+
+    class Meta:
+        verbose_name = _("Évènement sur les accès")
+        verbose_name_plural = _("Évènements sur les accès")
+        ordering = ('-date_creation', )
+
+
+class Policy(models.Model):
+    """
+    Entity which describe who and what resource, an organization can access.
+    (Wikipedia, AEIQ, Revue).
+    date activation is stamp as soon as the first account is created
+    """
+    # this field store __str__ value with generic relation info which is
+    # stressfully for the database
+    generated_title = models.CharField(max_length=120, verbose_name=_("Titre"),
+                                       blank=True,
+                                       editable=False)
+    date_creation = models.DateTimeField(
+        editable=False,
+        null=True,
+        default=timezone.now,
+        verbose_name=_("Date de création")
+    )
+    date_modification = models.DateTimeField(
+        editable=False,
+        null=True,
+        default=timezone.now,
+        verbose_name=_("Date de modification")
+    )
+    date_activation = models.DateTimeField(
+        blank=True,
+        null=True,
+        verbose_name=_("Date d'activation"),
+        help_text=_("Ce champs se remplit automatiquement. \
+            Il est éditable uniquement pour les données existantes qui n'ont pas cette information")
+    )
+    date_renew = models.DateTimeField(
+        null=True,
+        verbose_name=_("Date de renouvellement")
+    )
+    renew_cycle = models.PositiveSmallIntegerField(
+        verbose_name=_("Cycle du renouvellement (en jours)"),
+        default=365,
     )
 
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_("Nom")
+    content_type = models.ForeignKey(
+        ContentType,
+        limit_choices_to=models.Q(
+            app_label='erudit', model__in=('organisation', 'journal')
+        ) | models.Q(model='individualaccount'),
+        verbose_name=_('Type'),
     )
+    content_object = GenericForeignKey('content_type', 'object_id')
+    object_id = models.PositiveIntegerField()
 
-    currency = models.ForeignKey(
-        'Currency',
-        null=True, blank=True,
-        verbose_name="Devise",
-        related_name='pays'
-    )
+    comment = models.TextField(verbose_name=_("Commentaire"), blank=True)
 
-    locale = models.CharField(
-        max_length=5,
-        verbose_name=_("Locale"),
+    max_accounts = models.PositiveSmallIntegerField(
+        verbose_name=_("Maximum de comptes"),
         blank=True,
         null=True,
     )
 
-    def __str__(self):
-        return "{:s} [{:s}]".format(
-            self.name,
-            self.code,
-        )
-
-    class Meta:
-        verbose_name = _("Pays")
-        verbose_name_plural = _("Pays")
-        ordering = [
-            'name',
-        ]
-
-
-class Currency(models.Model):
-    code = models.CharField(
-        max_length=255,
-    )
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_("Nom")
-    )
-
-    def __str__(self):
-        return "{:s}".format(
-            self.code,
-        )
-
-    class Meta:
-        verbose_name = _("Devise")
-        verbose_name_plural = _("Devises")
-        ordering = [
-            'code',
-        ]
-
-
-class Client(models.Model):
-
-    lastname = models.CharField(
-        max_length=100,
-        verbose_name=_("Nom")
-    )
-
-    firstname = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Prénom"),
-    )
-
-    erudit_number = models.CharField(
-        max_length=120
-    )
-
-    email = models.EmailField(
-        null=True, blank=True,
-        verbose_name=_("Courriel"),
-        help_text="L'avis de renouvellement sera envoyé à cette adresse",
-    )
-
-    organisation = models.CharField(
-        max_length=200,
-        null=False, blank=False, default=""
-    )
-
-    civic = models.TextField(
-        null=True, blank=True,
-        verbose_name="Numéro civique"
-    )
-
-    street = models.TextField(
-        null=True, blank=True,
-        verbose_name="Rue"
-    )
-
-    city = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Ville"),
-    )
-
-    pobox = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Casier postal")
-    )
-
-    province = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Province")
-    )
-
-    country = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Pays"),
-    )
-
-    postal_code = models.CharField(
-        max_length=50,
-        null=True, blank=True,
-        verbose_name=_("Code postal"),
-    )
-
-    exemption_code = models.CharField(
-        max_length=1,
-        null=True, blank=True,
-        verbose_name=_("Code d'exemption")
-    )
-
-    currency = models.CharField(
-        max_length=3,
-        null=True, blank=True,
-        verbose_name=_("Devise")
-    )
-
-    def __str__(self):
-        return "{:s} ({:s}, {:s})".format(
-            self.organisation,
-            self.lastname,
-            self.firstname,
-        )
-
-    class Meta:
-        verbose_name = _("Client")
-        verbose_name_plural = _("Clients")
-        ordering = [
-            'organisation',
-        ]
-
-
-NOTICE_STATUS_CHOICES = (
-    ('DONT', 'Ne pas envoyer'),
-    ('TODO', 'À envoyer'),
-    ('SENT', 'Envoyé'),
-    ('REDO', 'À ré-envoyer'),
-    ('LATE', 'Envoyer plus tard'),
-)
-
-
-class RenewalNotice(models.Model):
-    """ RenewalNotice
-
-    A notice that is sent every year to remind the client to
-    remind their subscription """
-
-    renewal_number = models.CharField(
-        max_length=20,
-        verbose_name="Numéro d'avis"
-    )
-
-    paying_customer = models.ForeignKey(
-        'Client',
-        related_name="paid_renewals",
-        null=True, blank=True,
-        verbose_name="Client payeur",
-    )
-
-    receiving_customer = models.ForeignKey(
-        'Client',
-        related_name="received_renewals",
-        null=True, blank=True,
-        verbose_name="Client receveur",
-    )
-
-    po_number = models.CharField(
-        max_length=30,
-        null=True, blank=True,
-        verbose_name="Bon de commande",
-        help_text="Numéro de bon de commande",
-    )
-
-    amount_total = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Montant total",
-        help_text="Montant des articles demandés (sous-total avant Rabais)",
-    )
-
-    rebate = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Rabais",
-        help_text="Applicable avant taxes, sur Montant total",
-    )
-
-    raw_amount = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Montant brut",
-        help_text="Montant total - Rabais (sous-total après Rabais)",
-    )
-
-    federal_tax = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Taxe fédérale",
-    )
-
-    provincial_tax = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Taxe provinciale",
-    )
-
-    harmonized_tax = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Taxe harmonisée",
-    )
-
-    net_amount = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Montant net",
-        help_text="Montant brut + Taxes (total facturable, taxes incl.)",
-    )
-
-    currency = models.CharField(
-        max_length=5,
-        null=True, blank=True,
-        verbose_name="Devise",
-    )
-
-    has_basket = models.BooleanField(
+    access_full = models.BooleanField(
         default=False,
-        editable=False,
-        verbose_name="Avec panier",
+        verbose_name=_("Accès à tous les produits")
     )
 
-    has_rebate = models.BooleanField(
-        default=False,
-        verbose_name="Avec rabais",
-    )
-
-    has_been_answered = models.BooleanField(
-        default=False,
-        verbose_name=_("A répondu")
-    )
-
-    date_created = models.DateField(
-        null=True, blank=True,
-        verbose_name="Date de création",
-    )
-
-    products = models.ManyToManyField(
-        'Product',
+    access_journal = models.ManyToManyField(
+        "erudit.journal",
+        verbose_name=_("Revues"),
         blank=True,
-        verbose_name="Produits",
     )
 
-    is_correct = models.BooleanField(
-        editable=False,
-        default=True,
-        verbose_name="Est correct?",
-        help_text="Renseigné automatiquement par système.",
-    )
-
-    is_paid = models.BooleanField(
-        default=False,
-        verbose_name=_("Payé"),
-        help_text="Avis de renouvellement payé"
-    )
-
-    error_msg = models.TextField(
-        editable=False,
-        default="",
-        verbose_name="Messages d'erreur",
-        help_text="Renseigné automatiquement par système si existe erreur(s).",
-    )
-
-    sent_emails = models.ManyToManyField(
-        Email,
+    managers = models.ManyToManyField(
+        "auth.User",
+        verbose_name=_("Gestionnaires des comptes"),
         blank=True,
-        verbose_name="Courriels envoyés",
+        related_name='organizations_managed',
     )
 
-    status = models.CharField(
-        max_length=4,
-        choices=NOTICE_STATUS_CHOICES,
-        default='DONT',
-        verbose_name="État",
-    )
+    class Meta:
+        verbose_name = _("Accès aux produits")
+        verbose_name_plural = _("Accès aux produits")
 
-    comment = models.TextField(
-        null=True, blank=True,
-        verbose_name="Commentaire",
-        help_text="Commentaire libre pour suivi de l'avis",
-    )
+    @property
+    def total_accounts(self):
+        return self.accounts.count()
 
-    has_renewed = models.BooleanField(
-        verbose_name=_("Renouvellement confirmé"),
-        default=False,
-    )
-
-    has_refused = models.BooleanField(
-        verbose_name=_("Renouvellement refusé"),
-        default=False,
-    )
-
-    def get_premium(self):
-        return self.products.filter(code='Premium').first()
-
-    def get_basket(self):
-        return self.products.filter(titles__isnull=False).first()
-
-    def get_items_for_renewal(self):
-        """ Return all the items of this RenewalNotice """
-
-        basket = self.get_basket()
-        titles = self.products.filter(
-            titles__isnull=True,
-            hide_in_renewal_items=False
-        )
-        return basket, titles
-
-    def get_notice_number(self):
-        pass
-
-    def has_errors(self):
-        """Checks for business logic errors and returns a
-        list of errors.
-
-        Each error is a dict of
-        * an error code (number of the rule that failed)
-        * an error message (explaining the rule that failed)
-        * a proof (string showing the data causing the failure)
-
-        'error' and 'error_msg' fields are filled by the save method
-        using 'has_errors' method.
-        """
-        errors = []
-
-        # amounts are correct?
-        # test 1
-        error = {
-            'code': 1,
-            'msg': "Montant des produits demandés différent du Montant total",
-            'proof': "",
-        }
-
-        total_products = sum([p.amount for p in self.products.all()])
-        if self.amount_total != total_products:
-            proof = "Montant total: {:s}, Montant des produits: {:s}".format(
-                str(self.amount_total),
-                str(total_products),
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        # test 2
-        error = {
-            'code': 2,
-            'msg': "Montant brut est différent du Montant total - Rabais",
-            'proof': "",
-        }
-        if self.raw_amount != (float(self.amount_total) - float(self.rebate)):
-            proof = "Montant brut: {:s}, Montant total - rabais: {:s}".format(
-                str(self.raw_amount),
-                str(self.amount_total - self.rebate),
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        # test 3
-        error = {
-            'code': 3,
-            'msg': "Montant net est différent du Montant brut + taxes",
-            'proof': "",
-        }
-        # The harmonized_tax is the combination of the provincial tax
-        # and the federal tax
-        # http://www.cra-arc.gc.ca/tx/bsnss/tpcs/gst-tps/gnrl/menu-eng.html
-        if self.harmonized_tax:
-            taxes = self.harmonized_tax
-        else:
-            taxes = self.federal_tax + self.provincial_tax
-        if self.net_amount != (self.raw_amount + taxes):
-            proof = "Montant net: {:s}, Montant brut + taxes: {:s}".format(
-                str(self.net_amount),
-                str(self.raw_amount + taxes),
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        # test 3
-        error = {
-            'code': 3,
-            'msg': "Si une TVH est spécifiée, il ne devrait pas y avoir\
- de TPS ou de TVQ",
-            'proof': "",
-        }
-
-        if self.harmonized_tax and (self.federal_tax or self.provincial_tax):
-            proof = "TPS {0}, TVQ: {1}, TVH: {2}".format(
-                self.federal_tax,
-                self.provincial_tax,
-                self.harmonized_tax
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        # currency is correct?
-        # test 4
-        error = {
-            'code': 4,
-            'msg': "Aucune Devise associée",
-            'proof': "",
-        }
-        if not self.currency:
-            proof = "Devise: {:s}".format(
-                self.currency,
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        # test 5
-        error = {
-            'code': 5,
-            'msg': "Aucun Pays associé au Client payeur",
-            'proof': "",
-        }
-        if not self.paying_customer.country:
-            proof = "Pays: {:s}".format(
-                self.paying_customer.country,
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        # test 6
-        error = {
-            'code': 6,
-            'msg': """La Devise et le Pays ne concordent pas avec
-            les données de référence.""",
-            'proof': "",
-        }
-        currency = self.currency.upper()
-        country = self.receiving_customer.country
-        if currency and country:
-            fail = False
-            # CAD and EUR must follow Country in reference data
-            if currency in ('CAD', 'EUR'):
-                try:
-                    curr = Currency.objects.get(code__iexact=currency)
-                    country = Country.objects.get(
-                        name__iexact=country,
-                        currency=curr,
-                    )
-                except:
-                    fail = True
-            # USD cannot be used for Country in reference data
-            elif currency == 'USD':
-                try:
-                    Country.objects.get(name__iexact=country)
-                    fail = True
-                except:
-                    pass
-            # USD : only other accepted Currency and for all other Countries
-            else:
-                fail = True
-
-            if fail:
-                proof = "Devise: {:s}, Pays: {:s}".format(
-                    currency,
-                    country,
-                )
-                error['proof'] = proof
-                errors.append(error)
-
-        # email is correct?
-        # test 7
-        error = {
-            'code': 7,
-            'msg': "Aucun courriel associé au Client payeur",
-            'proof': "",
-        }
-        if not self.paying_customer.email:
-            proof = "Courriel: {:s}".format(
-                self.paying_customer.email,
-            )
-            error['proof'] = proof
-            errors.append(error)
-
-        return errors
-
-    def test_has_basket(self):
-        """Renewal Notice has a basket
-        if one of its product has many titles
-        (Basket = Product of Products)
-        """
-        has_basket = False
-        for product in self.products.all():
-            if len(product.titles.all()) > 0:
-                has_basket = True
-        return has_basket
+    def __str__(self):
+        if not self.generated_title and self.pk:
+            self.generated_title = '{} [{}#{}]'.format(
+                self.content_object, self.content_type, self.id)
+            self.save()
+        return self.generated_title
 
     def save(self, *args, **kwargs):
-        # has_basket
-        if not self.id:
-            super(RenewalNotice, self).save(*args, **kwargs)
-        self.has_basket = self.test_has_basket()
+        self.date_modification = timezone.now()
+        super(Policy, self).save(*args, **kwargs)
 
-        # errors
-        self.is_correct = True
+    def renew(self):
+        if self.date_activation is None:
+            raise ValidationError(_("Il n'y a pas de date d'activiation de spécifiée"))
+        if self.date_renew is None:
+            self.date_renew = self.date_activation
+        self.date_renew = self.date_renew + timedelta(days=self.renew_cycle)
+        self.save()
 
-        self.error_msg = ""
-        if self.has_errors():
-            self.is_correct = False
-            for error in self.has_errors():
-                msg = "ERREUR {:d} : {:s}\n    Preuve : {:s}\n\n".format(
-                    error['code'],
-                    error['msg'],
-                    error['proof'],
+    def notify_limit_reached(self):
+        if self.max_accounts and self.total_accounts > self.max_accounts:
+            date = timezone.now() - timedelta(days=EVENT_SILENCE_DAYS)
+            if PolicyEvent.objects.filter(policy=self, date_creation__gt=date).count() == 0:
+                template = get_template('userspace/subscription/mail/limit_reached.html')
+                context = {'policy': self}
+                html_message = template.render(context)
+
+                recipients = [u.email for u in self.managers.all() if u.email]
+                mail.send(
+                    recipients,
+                    settings.RENEWAL_FROM_EMAIL,
+                    message=html_message,
+                    html_message=html_message,
+                    subject=_("Avis de dépassement") + '#{}'.format(self.id)
                 )
-                self.error_msg = self.error_msg + msg
 
-        # Call the "real" save() method.
-        super(RenewalNotice, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return "Avis : {:s}".format(
-            self.renewal_number,
-        )
-
-    class Meta:
-        verbose_name = _("Avis de renouvellement")
-        verbose_name_plural = _("Avis de renouvellement")
-        ordering = [
-            'paying_customer',
-        ]
-
-
-class Product(models.Model):
-
-    code = models.CharField(
-        max_length=30
-    )
-
-    title = models.CharField(
-        max_length=200,
-        null=True, blank=True,
-        verbose_name="Titre",
-    )
-
-    description = models.CharField(
-        max_length=200,
-        null=True, blank=True,
-    )
-
-    amount = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        default=0.0,
-        verbose_name="Montant 2016",
-    )
-
-    titles = models.ManyToManyField(
-        'subscription.Product',
-        blank=True,
-        verbose_name="Titres",
-    )
-
-    hide_in_renewal_items = models.BooleanField(
-        default=False,
-        verbose_name=_("Ne pas afficher dans la liste d'items des avis"),
-    )
-
-    def is_basket(self):
-        return self.titles.count() > 0
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = _("Produit")
-        verbose_name_plural = _("Produits")
-        ordering = [
-            'title',
-        ]
+                if len(recipients) > 0:
+                    emails = ",".join(recipients)
+                else:
+                    emails = "!!!"
+                msg = "Destinataires: {} Message: {}".format(emails, html_message)
+                PolicyEvent(policy=self, code='LIMIT_REACHED', message=msg).save()

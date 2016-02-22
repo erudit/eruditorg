@@ -1,285 +1,179 @@
 from django.contrib import admin
-from django.utils.translation import gettext as _
-from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin.models import LogEntry, CHANGE
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
-from .models import (
-    Client, Product, RenewalNotice,
-    Country, Currency
-)
+from .models import (IndividualAccount, Policy, PolicyEvent,
+                     Organisation, Journal)
 
 
-class CountryAdmin(admin.ModelAdmin):
-    search_fields = (
-        'code',
-        'name',
-        'currency__code',
-    )
+class PolicyEventAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
+        'date_creation',
+        'policy',
         'code',
-        'name',
-        'currency',
+        'message',
     )
-    list_display_link = (
-        'name',
-    )
-    list_editable = (
-        'code',
-        'currency',
-    )
+    search_fields = ('message', 'code', )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, pk=None):
+        return request.user.is_superuser
 
 
-class CurrencyAdmin(admin.ModelAdmin):
-    search_fields = (
-        'code',
-        'name',
-    )
-    list_display = (
-        'code',
-        'name',
-    )
-    list_display_link = (
-        'code',
-    )
-    list_editable = (
-        'name',
-    )
-
-
-class ProductAdmin(admin.ModelAdmin):
-    search_fields = (
-        'title',
-        'description',
-    )
-    list_display = (
-        'title',
-        'description',
-        'amount',
-        'hide_in_renewal_items'
-    )
-    list_display_link = (
-        'title',
-    )
-    list_editable = (
-        'amount',
-    )
-
-    filter_horizontal = (
-        'titles',
-    )
-
-
-class ClientAdmin(admin.ModelAdmin):
-    search_fields = (
-        'firstname',
-        'lastname',
-        'organisation',
-        'email',
-        'postal_code',
-    )
-    list_display = (
-        'firstname',
-        'lastname',
-        'organisation',
-        'email',
-        'country',
-        'currency',
-        'exemption_code',
-    )
-    list_display_links = (
-        'firstname',
-        'lastname',
-        'organisation',
-    )
-    list_filter = (
-        'organisation',
-        'city',
-        'province',
-        'country',
-    )
-
+class PolicyInline(GenericStackedInline):
+    model = Policy
+    max_num = 1
+    filter_horizontal = ("managers", "access_journal", )
     fieldsets = (
-        ('Identification', {
-            'fields': (
-                ('firstname', 'lastname'),
-                'organisation',
-            )
-        }),
-        ('Coordonnées', {
-            'fields': (
-                'email',
-                'civic',
-                'street',
-                'pobox',
-                ('city', 'province'),
-                ('country', 'postal_code'),
-            )
-        }),
-        ('Finance', {
-            'fields': (
-                'exemption_code',
-                'currency',
-            )
-        }),
+        (None, {'fields': (
+            'comment',
+            'max_accounts',
+            'renew_cycle',
+            'date_activation',
+        )}),
+        (_("Droits d'accès"), {'fields': (
+            'access_full', 'access_journal', )}),
     )
 
 
-def _country(obj):
-    output = ""
-    if obj and obj.paying_customer:
-        output = "{:s}".format(
-            obj.paying_customer.country,
-        )
-    return output
-_country.short_description = 'Pays'
+class IndividualAccountAdmin(admin.ModelAdmin):
+    inlines = (PolicyInline, )
+    search_fields = ('id', 'firstname', 'lastname', 'email', )
+    list_filter = ('policy', 'active', )
+    list_display = (
+        'id',
+        'firstname',
+        'lastname',
+        'email',
+        'policy',
+        'active',
+    )
+
+    def save_formset(self, request, form, formset, change):
+        super(IndividualAccountAdmin, self).save_formset(request, form, formset, change)
+        policies = [instance for instance in formset.save(commit=False) if
+                    instance.__class__ == Policy]
+        if len(policies) > 1:
+            raise Exception(_("Une seule règle d'accès ne peut être gérée pour l'instant"))
+        if len(policies) == 1:
+            form.instance.policy = policies[0]
+            form.instance.save()
 
 
-class RenewalNoticeAdmin(admin.ModelAdmin):
-    search_fields = (
-        'renewal_number',
-        'po_number',
-        'paying_customer__organisation',
-        'receiving_customer__organisation',
-        'paying_customer__lastname',
-        'paying_customer__firstname',
-        'receiving_customer__lastname',
-        'receiving_customer__firstname',
+class OrganisationAdmin(admin.ModelAdmin):
+    inlines = (PolicyInline, )
+    fields = ('name', )
+    readonly_fields = ('name', )
+
+    def has_add_permission(self, request):
+        """
+        Only provide policy settings for existing Organizations.
+        """
+        return False
+
+    def has_delete_permission(self, request, pk=None):
+        """
+        Only provide policy settings for existing Organizations.
+        """
+        return False
+
+
+class JournalAdmin(admin.ModelAdmin):
+    inlines = (PolicyInline, )
+    fields = ('name', )
+    readonly_fields = ('name', )
+
+    def has_add_permission(self, request):
+        """
+        Only provide policy settings for existing Journal.
+        """
+        return False
+
+    def has_delete_permission(self, request, pk=None):
+        """
+        Only provide policy settings for existing Journal.
+        """
+        return False
+
+
+class PolicyAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'content_type',
+        '_content_object',
         'comment',
-        'paying_customer__country',
+        'ratio',
+        'date_activation',
+        'renew_cycle',
+        'date_renew',
+        'date_modification',
+        'date_creation',
+
     )
-
-    list_display = (
-        'renewal_number',
-        'paying_customer',
-        'receiving_customer',
-        'has_basket',
-        'has_rebate',
-        'rebate',
-        'net_amount',
-        'currency',
-        _country,
-        'is_correct',
-        'status',
-        'has_been_answered',
-        'has_renewed',
-        'is_paid',
-        'has_refused',
-    )
-
-    list_display_link = (
-        'renewal_number',
-    )
-
-    list_filter = (
-        'currency',
-        'status',
-        'rebate',
-        'paying_customer__country',
-        'has_basket',
-        'has_rebate',
-        'is_correct',
-        'has_been_answered',
-        'has_renewed',
-        'has_refused',
-    )
-
-    def flag_dont_send(modeladmin, request, queryset):
-        queryset.update(status='DONT')
-
-    flag_dont_send.short_description = _("Marquer comme « Ne pas envoyer »")
-
-    def flag_send(modeladmin, request, queryset):
-        queryset.update(status='TODO')
-
-    flag_send.short_description = _("Marquer comme « À envoyer »")
-
-    def create_test_email(modeladmin, request, queryset):
-        """ Create a renewal email for this RenewalNotice """
-        selected = [str(r.pk) for r in queryset.all()]
-
-        if len(selected) > 0:
-            url = reverse('confirm_test')
-
-            return HttpResponseRedirect("{}?ids={}".format(
-                url,
-                ",".join(selected))
-            )
-
-    create_test_email.short_description = _("Envoyer un courriel de test")
-
-    def create_email(modeladmin, request, queryset):
-        """ Create a renewal email for this RenewalNotice """
-        selected = [str(r.pk) for r in queryset.filter(
-            status__in=('TODO', 'REDO',)
-        )]
-
-        if len(selected) > 0:
-            url = reverse('confirm_send')
-
-            return HttpResponseRedirect("{}?ids={}".format(
-                url,
-                ",".join(selected))
-            )
-
-    create_email.short_description = _("Envoyer le courriel")
-
-    list_editable = (
-        'status',
-        'has_rebate',
-    )
-    filter_horizontal = (
-        'products',
-    )
-    readonly_fields = (
-        'sent_emails',
-        'is_correct',
-        'error_msg',
-    )
-
+    list_filter = ('content_type', )
+    filter_horizontal = ("managers", "access_journal", )
     fieldsets = (
-        ('Identification', {
-            'fields': (
-                ('renewal_number', 'po_number'),
-                ('paying_customer', 'receiving_customer'),
-            )
-        }),
-        ('Montants', {
-            'fields': (
-                'currency',
-                ('amount_total', 'rebate'),
-                ('raw_amount',),
-                ('federal_tax',),
-                ('provincial_tax',),
-                ('harmonized_tax',),
-                ('net_amount',),
-            )
-        }),
-        ('Produits', {
-            'fields': (
-                'products',
-            )
-        }),
-        ('Envois', {
-            'fields': (
-                'sent_emails',
-            )
-        }),
-        ('Suivi', {
-            'fields': (
-                ('status', 'date_created'),
-                ('has_been_answered', 'is_paid', 'has_renewed', 'has_refused'),
-                'comment',
-                'is_correct',
-                'error_msg',
-            )
-        }),
+        (None, {'fields': (
+            'managers',
+            'max_accounts',
+            'renew_cycle',
+            'date_activation',
+        )}),
+        (_("Droits d'accès"), {'fields': (
+            'access_full', 'access_journal', )}),
     )
+    actions = ['renew', ]
 
-    actions = [create_test_email, flag_dont_send, flag_send, create_email]
+    def has_add_permission(self, request):
+        """
+        Content type / object can't be selected
+        """
+        return False
 
-# Register your models here.
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Client, ClientAdmin)
-admin.site.register(RenewalNotice, RenewalNoticeAdmin)
-admin.site.register(Country, CountryAdmin)
-admin.site.register(Currency, CurrencyAdmin)
+    def ratio(self, obj):
+        if not obj.max_accounts:
+            maxi = "~"
+        else:
+            maxi = obj.max_accounts
+        return "{} / {}".format(obj.total_accounts, maxi)
+    ratio.short_description = _("Ratio d'utilisation")
+
+    def _content_object(self, obj):
+        """
+        Link is hardcoded to the proxy model overriden in this app!
+        """
+        if not obj.content_object:
+            return
+        url = reverse("admin:individual_subscription_{}_change".format(
+            obj.content_object.__class__.__name__.lower()),
+            args=(obj.content_object.id, ))
+        return "<a href='{}'>{}</a>".format(url, obj.content_object)
+    _content_object.short_description = _("Objet")
+    _content_object.allow_tags = True
+
+    def renew(self, request, queryset):
+        for obj in queryset:
+            obj.renew()
+            LogEntry.objects.log_action(
+                user_id=request.user.pk,
+                content_type_id=ContentType.objects.get_for_model(obj).pk,
+                object_id=obj.pk,
+                object_repr=str(obj),
+                action_flag=CHANGE,
+                change_message=_("Renouvellement jusqu'à %s (%s jours)" % (
+                    obj.date_renew, obj.renew_cycle)),
+            )
+            self.message_user(request, "%s a été renouvellée jusqu'à %s." % (obj, obj.date_renew))
+    renew.short_description = _("Renouveller l'inscription")
+
+admin.site.register(IndividualAccount, IndividualAccountAdmin)
+admin.site.register(Policy, PolicyAdmin)
+admin.site.register(Organisation, OrganisationAdmin)
+admin.site.register(Journal, JournalAdmin)
+admin.site.register(PolicyEvent, PolicyEventAdmin)
