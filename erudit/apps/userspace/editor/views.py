@@ -1,3 +1,5 @@
+import json
+
 from django.template.context_processors import csrf
 
 from django.views.generic.edit import CreateView, UpdateView
@@ -36,6 +38,14 @@ class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(csrf(self.request))
+        form = context['form']
+
+        membership = {}
+        for journal in form.fields['journal'].queryset:
+            membership[journal.pk] = [
+                v[0] for v in journal.members.values_list('id')]
+
+        context.update({'journals': json.dumps(membership)})
         return context
 
 
