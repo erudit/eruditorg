@@ -3,6 +3,7 @@ import ipaddress
 from random import choice
 import base64
 from datetime import timedelta
+from functools import reduce
 
 from django.conf import settings
 from django.utils import timezone
@@ -165,6 +166,15 @@ class InstitutionIPAddressRange(models.Model):
         if start > end:
             raise ValidationError(_(
                 'L\'adresse IP de début doit être inférieure à l\'adresse IP de fin'))
+
+    @property
+    def ip_addresses(self):
+        """ Returns the list of IP addresses contained in the current range. """
+        start = ipaddress.ip_address(self.ip_start)
+        end = ipaddress.ip_address(self.ip_end)
+        return reduce(
+            lambda ips, ipn: ips + list(ipn),
+            ipaddress.summarize_address_range(start, end), [])
 
 
 class PolicyEvent(models.Model):
