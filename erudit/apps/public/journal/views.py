@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 
+from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import JournalCodeDetailMixin
 from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.objects import ArticleDigitalObject
@@ -98,7 +99,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     model = Issue
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(ArticleAccessCheckMixin, DetailView):
     """
     Displays an Article page.
     """
