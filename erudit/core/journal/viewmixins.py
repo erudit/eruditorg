@@ -3,7 +3,6 @@
 from django.db.models import Q
 from django.http import Http404
 from ipware.ip import get_ip
-from rules.contrib.views import PermissionRequiredMixin
 
 from core.subscription.models import InstitutionalAccount
 from core.subscription.models import InstitutionIPAddressRange
@@ -24,21 +23,38 @@ class JournalCodeDetailMixin(object):
         return self.get_journal()
 
 
-class ArticleAccessCheckMixin(PermissionRequiredMixin):
+class ArticleAccessCheckMixin(object):
     """
     Defines a way to check whether the current user can browse a
     given Érudit article.
     """
     def get_article(self):
-        return self.get_permission_object()
+        """ Returns the considered article.
 
-    def has_permission(self):
+        By default the method will try to fetch the article using the
+        :meth:`get_object<django:django.views.generic.detail.SingleObjectMixin.get_object>` method.
+        But subclasses can override this to control the way the article is retrieved.
+        """
+        return self.get_object()
+
+    def get_context_data(self, **kwargs):
+        """ Inserts a flag indicating if the article can be accessed in the context. """
+        context = super(ArticleAccessCheckMixin, self).get_context_data(**kwargs)
+        context['article_access_granted'] = self.has_access()
+        return context
+
+    def has_access(self):
+        """ Returns a boolean indicating if the article can be accessed.
+
+        The following verifications are performed in order to determine if an article
+        can be browsed:
+
+            1- it is in open access
+            2- the current user has access to it with its individual account
+            3- the current IP address is inside on of the IP address ranges allowed
+               to access to it
+        """
         article = self.get_article()
-        # An article can be browsed if...
-        #   1- it is in open access
-        #   2- the current user has access to it with its individual account
-        #   3- the current IP address is inside on of the IP address ranges allowed
-        #      to access to it
 
         # 1- Is the article in open access?
         if article.open_access:

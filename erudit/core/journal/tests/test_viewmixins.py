@@ -58,7 +58,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.has_permission())
+        self.assertFalse(view.has_access())
 
     def test_can_grant_access_to_an_article_if_it_is_in_open_access(self):
         # Setup
@@ -74,7 +74,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view = MyView()
 
         # Run # check
-        self.assertTrue(view.has_permission())
+        self.assertTrue(view.has_access())
 
     def test_can_grant_access_to_an_article_if_it_is_associatd_to_an_institutional_account(self):
         # Setup
@@ -105,4 +105,25 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.has_permission())
+        self.assertTrue(view.has_access())
+
+    def test_inserts_a_flag_into_the_context(self):
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            open_access=True)
+        article = ArticleFactory.create(issue=issue)
+
+        class MyViewAncestor(object):
+            def get_context_data(self, **kwargs):
+                return {}
+
+        class MyView(ArticleAccessCheckMixin, MyViewAncestor):
+            def get_article(self):
+                return article
+
+        view = MyView()
+
+        # Run # check
+        self.assertTrue(view.has_access())
+        self.assertTrue(view.get_context_data()['article_access_granted'])
