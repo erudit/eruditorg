@@ -37,13 +37,19 @@ class IndividualAccount(models.Model):
     """
     Personal account used in erudit.org
     to access protected content.
+    An account should always be linked with a policy, which determines its
+    access rights.
+    The policy itself is linked either with an account or an organization.
     """
     email = models.CharField(max_length=120, verbose_name=_("Courriel"))
     password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
     policy = models.ForeignKey(
         "Policy",
         verbose_name=_("Accès"),
-        related_name="accounts"
+        related_name="accounts",
+        blank=True,
+        null=True,
+        help_text=_("Laisser vide si la politique d'accès aux produits est définie plus bas")
     )
     firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
     lastname = models.CharField(max_length=30, verbose_name=_("Nom"))

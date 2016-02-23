@@ -27,6 +27,12 @@ class PolicyEventAdmin(admin.ModelAdmin):
 
 
 class PolicyInline(GenericStackedInline):
+    """
+    Policy can be created in Django admin from IndividualAccount or Organization.
+    (Note : if you create a policy from IndividualAccount, this one will be
+    automatically set to the account policy property, so you don't have to select
+    anything in this case.)
+    """
     model = Policy
     max_num = 1
     filter_horizontal = ("managers", "access_journal", )
