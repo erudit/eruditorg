@@ -73,31 +73,6 @@ class Named(models.Model):
         abstract = True
 
 
-# core
-
-class MandragoreProfile(models.Model):
-    """ Store variables that are related to this user's Mandragore profile
-    """
-    user = models.OneToOneField(User)
-
-    synced_with_mandragore = models.BooleanField(
-        verbose_name=_("Synchronisé avec Mandragore"),
-        default=False
-    )
-    """ Determines if this particular object is synced with the Edinum database """  # noqa
-
-    mandragore_id = models.CharField(
-        max_length=7,
-        null=True,
-        blank=True,
-        verbose_name=_("Identifiant Mandragore")
-    )
-    """ The Mandragore person_id for this User """
-
-    sync_date = models.DateField(null=True, blank=True)
-    """ Date at which the model was last synchronized with Mandragore """
-
-
 class Person(models.Model):
     """Personne"""
 
@@ -130,9 +105,32 @@ class Person(models.Model):
         )
 
     class Meta:
-        verbose_name = _("Personne")
-        verbose_name_plural = _("Personnes")
-        ordering = ['lastname', ]
+        abstract = True
+
+
+# core
+
+class MandragoreProfile(models.Model):
+    """ Store variables that are related to this user's Mandragore profile
+    """
+    user = models.OneToOneField(User)
+
+    synced_with_mandragore = models.BooleanField(
+        verbose_name=_("Synchronisé avec Mandragore"),
+        default=False
+    )
+    """ Determines if this particular object is synced with the Edinum database """  # noqa
+
+    mandragore_id = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        verbose_name=_("Identifiant Mandragore")
+    )
+    """ The Mandragore person_id for this User """
+
+    sync_date = models.DateField(null=True, blank=True)
+    """ Date at which the model was last synchronized with Mandragore """
 
 
 class Organisation(models.Model):
@@ -541,6 +539,9 @@ class EruditDocument(models.Model):
 
 class Article(EruditDocument, FedoraMixin):
 
+    # An article can have many authors
+    authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
+
     surtitle = models.CharField(
         max_length=500,
         null=True, blank=True,
@@ -590,6 +591,20 @@ class Article(EruditDocument, FedoraMixin):
     class Meta:
         verbose_name = _("Article")
         verbose_name_plural = _("Articles")
+
+
+class Author(Person):
+    suffix = models.CharField(max_length=20, verbose_name=_('Suffixe'), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Auteur')
+        verbose_name_plural = _('Auteurs')
+
+    def __str__(self):
+        if self.suffix:
+            return _('{suffix} {firstname} {lastname}').format(
+                suffix=self.suffix, firstname=self.firstname, lastname=self.lastname)
+        return super(Author, self).__str__()
 
 
 class Publisher(Edinum):
