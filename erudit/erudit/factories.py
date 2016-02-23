@@ -1,4 +1,7 @@
 import factory
+from faker import Factory
+
+faker = Factory.create()
 
 
 class OrganisationFactory(factory.django.DjangoModelFactory):
@@ -74,3 +77,11 @@ class BasketFactory(factory.django.DjangoModelFactory):
         model = 'erudit.Basket'
 
     name = factory.Sequence(lambda n: 'Basket{}'.format(n))
+
+
+class AuthorFactory(factory.django.DjangoModelFactory):
+    lastname = faker.last_name()
+    firstname = faker.first_name()
+
+    class Meta:
+        model = 'erudit.Author'
