@@ -79,9 +79,17 @@ class IssueAdmin(admin.ModelAdmin):
 
 class ArticleAdmin(admin.ModelAdmin):
 
+    search_fields = [
+        'id', 'title', 'localidentifier'
+    ]
+
     list_display = (
-        'issue', 'title'
+        'issue', 'localidentifier', 'title'
     )
+
+    list_filter = [
+        'issue'
+    ]
 
 
 class JournalAdmin(admin.ModelAdmin):

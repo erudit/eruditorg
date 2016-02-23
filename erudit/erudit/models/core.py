@@ -525,7 +525,21 @@ class Issue(FedoraMixin, models.Model):
         ordering = ['journal', 'year', 'volume', 'number', ]
 
 
-class Article(models.Model, FedoraMixin):
+class EruditDocument(models.Model):
+
+    localidentifier = models.CharField(
+        max_length=50,
+        null=True, blank=True,
+        verbose_name=_("Identifiant Fedora")
+    )
+    """ The ``Fedora`` identifier of an article """
+
+    class Meta:
+        verbose_name = _("Document Érudit")
+        verbose_name_plural = _("Documents Érudit")
+
+
+class Article(EruditDocument, FedoraMixin):
 
     surtitle = models.CharField(
         max_length=500,
@@ -537,13 +551,6 @@ class Article(models.Model, FedoraMixin):
         null=True, blank=True,
     )
     """ The title of the issue """
-
-    localidentifier = models.CharField(
-        max_length=50,
-        null=True, blank=True,
-        verbose_name=_("Identifiant Fedora")
-    )
-    """ The ``Fedora`` identifier of an article """
 
     processing = models.CharField(
         max_length=1,
@@ -579,6 +586,10 @@ class Article(models.Model, FedoraMixin):
         """ Returns a boolean indicating if the article is in open access. """
         return self.issue.open_access or (
             self.issue.open_access is None and self.issue.journal.open_access)
+
+    class Meta:
+        verbose_name = _("Article")
+        verbose_name_plural = _("Articles")
 
 
 class Publisher(Edinum):
