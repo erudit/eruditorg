@@ -2,7 +2,7 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
 from erudit.models import (
-    Person,
+    Author,
     Organisation,
     Library,
     Journal,
@@ -169,7 +169,7 @@ class JournalInformationAdmin(TranslationAdmin):
     pass
 
 
-admin.site.register(Person)
+admin.site.register(Author)
 admin.site.register(Organisation)
 admin.site.register(Library)
 admin.site.register(Article, ArticleAdmin)
