@@ -3,6 +3,7 @@
 from django.db.models import Q
 from django.http import Http404
 from ipware.ip import get_ip
+from django.utils.functional import cached_property
 
 from core.subscription.models import InstitutionalAccount
 from core.subscription.models import InstitutionIPAddressRange
@@ -20,6 +21,10 @@ class JournalCodeDetailMixin(object):
             raise Http404
 
     def get_object(self, queryset=None):
+        return self.get_journal()
+
+    @cached_property
+    def journal(self):
         return self.get_journal()
 
 
