@@ -49,3 +49,30 @@ class BaseEruditTestCase(TestCase):
     def tearDown(self):
         super(BaseEruditTestCase, self).tearDown()
         cache.clear()
+
+    def extract_post_args(self, dom_elem):
+        """Returns a ``post()``-ready dict of all input/select values in ``dom_elem``.
+
+        ``dom_elem`` being an element extracted from an etree-parsed DOM.
+
+        If you have multiple forms in your response, be sure to supply a sub-element if you don't
+        want all inputs in the page to be included.
+        """
+        result = {}
+        for input in dom_elem.iterdescendants('input'):
+            if input.attrib['type'] == 'checkbox':
+                value = 'on' if input.attrib.get('checked') else ''
+            else:
+                value = input.attrib.get('value', '')
+            result[input.attrib['name']] = value
+        for select in dom_elem.iterdescendants('select'):
+            options = list(select.xpath('option[@selected=\'selected\']'))
+            if 'multiple' in select.attrib:
+                value = [elem.get('value') for elem in options]
+            else:
+                try:
+                    value = options[0].get('value')
+                except IndexError:
+                    value = ''
+            result[select.attrib['name']] = value
+        return result

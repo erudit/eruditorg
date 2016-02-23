@@ -52,6 +52,29 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             "The user should not be able to access another editor's submissions where he is not member"  # noqa
         )
 
+    def test_sumit_changes_to_issue(self):
+        """ Submitting changes to an issue doesn't crash.
+
+            Previously, we would crash due to a bad reverse match.
+        """
+        self.client.login(
+            username=self.user.username,
+            password="top_secret"
+        )
+        url = reverse(
+            'userspace:editor:update',
+            kwargs={'pk': self.issue_submission.pk}
+        )
+        response = self.client.get(url)
+        root = etree.HTML(response.content)
+        args = self.extract_post_args(root)
+        # The issue in our DB doesn't have a year or number, but they are required, so here we go.
+        args['year'] = '2016'
+        args['number'] = '01'
+        response = self.client.post(url, data=args)
+        expected_url = reverse('userspace:editor:issues')
+        self.assertRedirects(response, expected_url)
+
     def test_logged_add_journalsubmission(self):
         """ Logged users should be able to see journal submissions """
         self.client.login(username='david', password='top_secret')
