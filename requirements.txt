@@ -46,7 +46,6 @@ django-pipeline-forgiving==1.0.0
 jsmin==2.2.0
 django-modeltranslation==0.11
 django-ckeditor==5.0.3
-Unipath==1.1
 raven==5.10.2
 sqlparse==0.1.18
 django-ipware==1.1.3
