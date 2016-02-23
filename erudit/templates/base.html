@@ -30,13 +30,16 @@
     {% else %}
     {% stylesheet 'erudit_main' %}
     {% endif %}
+    {% if put_js_in_head %}
+        {% include 'partials/global_js_include.html' %}
+    {% endif %}
     {% block extrahead %}
     {% endblock %}
   </head>
   <body class="{% block body_class %}{% endblock %}">
 
     {% block header %}
-    {% endblock %}    
+    {% endblock %}
     {% block nav %}
     {% endblock %}
     {% block content %}
@@ -45,13 +48,8 @@
     {% endblock %}
 
 
-    {# scripts #}
-    {% if DEBUG %}
-    <script src="{% static 'js/build/erudit-vendors-dev.js' %}"></script>
-    <script src="{% static 'js/build/erudit-scripts-dev.js' %}"></script>
-    {% else %}
-    {% javascript 'erudit_vendors' %}
-    {% javascript 'erudit_scripts' %}
+    {% if not put_js_in_head %}
+        {% include 'partials/global_js_include.html' %}
     {% endif %}
 
     {% block footerscript %}

@@ -81,6 +81,9 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = "editor.IssueSubmission"
         context['model_pk'] = self.object.pk
+        # In this view, we have a widget, plupload, that injects JS in the page. This JS needs
+        # jquery. Because of this, we need to load jquery in the header rather than in the footer.
+        context['put_js_in_head'] = True
         return context
 
     def get_success_url(self):
