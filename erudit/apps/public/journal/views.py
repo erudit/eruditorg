@@ -79,7 +79,7 @@ class JournalAuthorsListView(JournalCodeDetailMixin, ListView):
         try:
             assert self.letter is not None
             self.letter = str(self.letter).lower()
-            assert 'a' <= self.letter <= 'z'
+            assert len(self.letter) == 1 and 'a' <= self.letter <= 'z'
         except AssertionError:
             self.letter = None
 
