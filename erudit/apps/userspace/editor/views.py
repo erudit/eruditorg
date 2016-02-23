@@ -84,7 +84,7 @@ class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('editor:issues')
+        return reverse('userspace:editor:issues')
 
 
 class IssueSubmissionList(IssueSubmissionCheckMixin, ListView):
