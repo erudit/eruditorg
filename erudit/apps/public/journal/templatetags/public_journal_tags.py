@@ -18,9 +18,7 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def render_article(context, article):
-    """
-    Renders the given article instance as HTML.
-    """
+    """ Renders the given article instance as HTML. """
     # Tries to fetch the HTML content of the article from the cache
     cache_key = 'article-html-content-{article_id}-{lang}'.format(
         article_id=article.id, lang=translation.get_language())
@@ -46,3 +44,10 @@ def render_article(context, article):
             cache_key, str(html_content), journal_settings.ARTICLE_HTML_CONTENT_CACHE_TIMEOUT)
 
     return mark_safe(html_content)
+
+
+@register.filter
+def author_articles(author, journal):
+    """ Returns all the articles of the author in the considered journal. """
+    return author.article_set.select_related('issue') \
+        .filter(issue__journal_id=journal.id)

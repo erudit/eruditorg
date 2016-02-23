@@ -1,7 +1,7 @@
 import logging
 
 from django.core.management.base import BaseCommand
-from erudit.models.core import Journal, Issue, Article
+from erudit.models.core import Author, Journal, Issue, Article
 
 log = logging.getLogger(__name__)
 
@@ -13,87 +13,109 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         for journal in Journal.objects.all():
-            try:
-                print("=" * 50)
-                print("Importing {}".format(journal.localidentifier))
-                print("=" * 50)
-                journal_xml = journal.get_fedora_object().getObjectXml()
-                issues = journal_xml.node.findall('.//numero')
-                for issue_xml in issues:
-                    domain, journal_pid, issue_pid = issue_xml.get('pid').split('.')
-                    try:
-                        journal = Journal.objects.get(localidentifier=journal_pid)
-                        issue = Issue(
-                            journal=journal,
-                            localidentifier=issue_pid
-                        )
-                        fedora_object = issue.get_fedora_object()
-                        summary = fedora_object.getDatastreamObject('SUMMARY')
-                        issue.year = summary.content.node.find('.//annee').text
-                        volume = summary.content.node.find('.//numero/volume')
-                        if volume is not None:
-                            issue.volume = volume.text
+            self.import_journal(journal)
 
-                        number = summary.content.node.find('.//nonumero')
-                        if number is not None:
-                            issue.number = number.text
-                        issue.title = summary.content.node.find('.//liminaire//titre').text
+    def import_journal(self, journal):
+        try:
+            print("=" * 50)
+            print("Importing {}".format(journal.localidentifier))
+            print("=" * 50)
+            journal_xml = journal.get_fedora_object().getObjectXml()
+            issues = journal_xml.node.findall('.//numero')
+            for issue_xml in issues:
+                self.import_issue(issue_xml)
 
-                        date_produced = summary.content.node.find('.//originator')
+        except Exception:
+            log.error('Journal with code "{}" does not exist'.format(
+                journal.localidentifier
+            ))
 
-                        date_published = summary.content.node.find('.//pubnum/date')
-                        if date_published is not None:
-                            issue.date_published = date_published.text
-                        if date_produced is not None:
-                            issue.date_produced = date_produced.get('date')
-                        elif date_published is not None:
-                            issue.date_produced = date_published.text
+    def import_issue(self, issue_xml):
+        domain, journal_pid, issue_pid = issue_xml.get('pid').split('.')
+        try:
+            journal = Journal.objects.get(localidentifier=journal_pid)
+            issue = Issue(
+                journal=journal,
+                localidentifier=issue_pid
+            )
+            fedora_object = issue.get_fedora_object()
+            summary = fedora_object.getDatastreamObject('SUMMARY')
+            issue.year = summary.content.node.find('.//annee').text
+            volume = summary.content.node.find('.//numero/volume')
+            if volume is not None:
+                issue.volume = volume.text
 
-                        issue.save()
-                        print("Imported {}".format(
-                            issue.get_full_identifier()
-                        ))
+            number = summary.content.node.find('.//nonumero')
+            if number is not None:
+                issue.number = number.text
+            issue.title = summary.content.node.find('.//liminaire//titre').text
 
-                        for article_xml in summary.content.node.findall('.//article'):
+            date_produced = summary.content.node.find('.//originator')
 
-                            id_article = article_xml.get('idproprio')
-                            processing = article_xml.get('qualtraitement')
+            date_published = summary.content.node.find('.//pubnum/date')
+            if date_published is not None:
+                issue.date_published = date_published.text
+            if date_produced is not None:
+                issue.date_produced = date_produced.get('date')
+            elif date_published is not None:
+                issue.date_produced = date_published.text
 
-                            if processing == 'minimal':
-                                processing = 'M'
-                            elif processing == 'complet':
-                                processing = 'C'
-                            elif processing == '':
-                                processing = 'M'
-                            else:
-                                raise ValueError()
+            issue.save()
+            print("Imported {}".format(
+                issue.get_full_identifier()
+            ))
 
-                            article = Article(
-                                issue=issue,
-                                localidentifier=id_article,
-                                processing=processing,
-                            )
+            for article_xml in summary.content.node.findall('.//article'):
 
-                            title = article_xml.find('.//liminaire//titre')
+                id_article = article_xml.get('idproprio')
+                processing = article_xml.get('qualtraitement')
 
-                            if title is not None:
-                                article.title = title.text
-                            surtitle = article_xml.find('.//liminaire//surtitre')
-                            if surtitle is not None:
-                                article.surtitle = surtitle.text
+                if processing == 'minimal':
+                    processing = 'M'
+                elif processing == 'complet':
+                    processing = 'C'
+                elif processing == '':
+                    processing = 'M'
+                else:
+                    raise ValueError()
 
-                            article.save()
-                            print("* Imported {}".format(
-                                article.get_full_identifier()
-                            ))
+                article = Article(
+                    issue=issue,
+                    localidentifier=id_article,
+                    processing=processing,
+                )
 
-                    except Exception as e:
-                        print("Cannot import {}: {}".format(
-                            issue.get_full_identifier(),
-                            e
-                        ))
+                title = article_xml.find('.//liminaire//titre')
 
-            except Exception:
-                log.error('Journal with code "{}" does not exist'.format(
-                    journal.localidentifier
+                if title is not None:
+                    article.title = title.text
+                surtitle = article_xml.find('.//liminaire//surtitre')
+                if surtitle is not None:
+                    article.surtitle = surtitle.text
+
+                article.save()
+
+                for author_xml in article_xml.findall('.//liminaire//grauteur//auteur'):
+                    firstname_xml = author_xml.find('.//nompers/prenom')
+                    firstname = firstname_xml.text if firstname_xml is not None else None
+                    lastname_xml = author_xml.find('.//nompers/nomfamille')
+                    lastname = lastname_xml.text if lastname_xml is not None else None
+                    suffix_xml = author_xml.find('.//nompers/suffixe')
+                    suffix = suffix_xml.text if suffix_xml is not None else None
+
+                    author, dummy = Author.objects.get_or_create(
+                        firstname=firstname, lastname=lastname)
+                    author.suffix = suffix
+                    author.save()
+
+                    article.authors.add(author)
+
+                print("* Imported {}".format(
+                    article.get_full_identifier()
                 ))
+
+        except Exception as e:
+            print("Cannot import {}: {}".format(
+                issue.get_full_identifier(),
+                e
+            ))

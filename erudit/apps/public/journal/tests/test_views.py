@@ -11,6 +11,7 @@ from django.test import RequestFactory
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleRawPdfView
 from erudit.factories import ArticleFactory
+from erudit.factories import AuthorFactory
 from erudit.factories import CollectionFactory
 from erudit.factories import IssueFactory
 from erudit.factories import JournalFactory
@@ -70,6 +71,81 @@ class TestJournalDetailView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['latest_issue'], issue_2)
+
+
+class TestJournalAuthorsListView(BaseEruditTestCase):
+    def test_provides_only_authors_for_the_first_available_letter_by_default(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(issue=issue_1)
+
+        author_1 = AuthorFactory.create(lastname='btest')
+        author_2 = AuthorFactory.create(lastname='ctest1')
+        author_3 = AuthorFactory.create(lastname='ctest2')
+
+        article_1.authors.add(author_1)
+        article_1.authors.add(author_2)
+        article_1.authors.add(author_3)
+        url = reverse('public:journal:journal-authors-list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url)
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['authors']), [author_1, ])
+
+    def test_inserts_the_current_letter_in_the_context(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(issue=issue_1)
+
+        author_1 = AuthorFactory.create(lastname='btest')
+        author_2 = AuthorFactory.create(lastname='ctest1')
+        author_3 = AuthorFactory.create(lastname='ctest2')
+
+        article_1.authors.add(author_1)
+        article_1.authors.add(author_2)
+        article_1.authors.add(author_3)
+        url = reverse('public:journal:journal-authors-list', kwargs={'code': self.journal.code})
+
+        # Run
+        response_1 = self.client.get(url)
+        response_2 = self.client.get(url, {'letter': 'c'})
+        response_3 = self.client.get(url, {'letter': 'invalid'})
+
+        # Check
+        self.assertEqual(response_1.status_code, 200)
+        self.assertEqual(response_2.status_code, 200)
+        self.assertEqual(response_3.status_code, 200)
+        self.assertEqual(response_1.context['letter'], 'b')
+        self.assertEqual(response_2.context['letter'], 'c')
+        self.assertEqual(response_3.context['letter'], 'b')
+
+    def test_inserts_a_dict_with_the_letters_counts_in_the_context(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(issue=issue_1)
+
+        author_1 = AuthorFactory.create(lastname='btest')
+        author_2 = AuthorFactory.create(lastname='ctest1')
+        author_3 = AuthorFactory.create(lastname='ctest2')
+
+        article_1.authors.add(author_1)
+        article_1.authors.add(author_2)
+        article_1.authors.add(author_3)
+        url = reverse('public:journal:journal-authors-list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url)
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['letters_counts']), 26)
+        self.assertEqual(response.context['letters_counts']['b'], 1)
+        self.assertEqual(response.context['letters_counts']['c'], 2)
+        for letter in 'adefghijklmnopqrstuvwxyz':
+            self.assertEqual(response.context['letters_counts'][letter], 0)
 
 
 class TestArticlePdfView(BaseEruditTestCase):

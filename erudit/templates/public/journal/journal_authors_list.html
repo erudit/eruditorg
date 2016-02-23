@@ -1,0 +1,51 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load public_journal_tags %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{% trans "Tous les auteurs" %}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      {% for letter, count in letters_counts.items %}
+        {% if count > 0 %}
+          <a href="{% url 'public:journal:journal-authors-list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a>
+        {% else %}
+          <span class="text-muted">{{ letter|upper }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="col-md-9">
+      {% for author in authors %}
+        <div class="well">
+          <h3>
+          {% blocktrans trimmed with lastname=author.lastname firstname=author.firstname %}
+            {{ lastname }}, {{ firstname }}
+          {% endblocktrans %}
+          </h3>
+          <div class="author-articles-wrapper">
+            <ul>
+              {% for article in author|author_articles:journal %}
+                <li>
+                  {% spaceless %}
+                    &laquo;
+                    <a href="{% url 'public:journal:article-detail' journal_code=journal.code issue_localid=article.issue.localidentifier pk=article.id %}">
+                      {{ article.title }}
+                    </a>
+                    &raquo;
+                    &nbsp;{{ journal.name }},&nbsp;n°{{ article.issue.number }},&nbsp;{{ article.issue.date_published.year }}
+                  {% endspaceless %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
