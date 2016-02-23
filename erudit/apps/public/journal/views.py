@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from collections import OrderedDict
+from string import ascii_lowercase
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
+from django.utils.functional import cached_property
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
@@ -15,9 +19,10 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
+from erudit.models import Article
+from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
-from erudit.models import Article
 from erudit.utils.pdf import generate_pdf
 
 
@@ -53,6 +58,71 @@ class JournalDetailView(JournalCodeDetailMixin, DetailView):
         context['issues'] = self.object.published_issues.order_by('-date_published')
         context['latest_issue'] = self.object.last_issue
 
+        return context
+
+
+class JournalAuthorsListView(JournalCodeDetailMixin, ListView):
+    """
+    Displays a list of authors associated with a specific journal.
+    """
+    context_object_name = 'authors'
+    model = Author
+    template_name = 'public/journal/journal_authors_list.html'
+
+    def get(self, request, *args, **kwargs):
+        self.init_get_parameters(request)
+        return super(JournalAuthorsListView, self).get(request, *args, **kwargs)
+
+    def init_get_parameters(self, request):
+        """ Initializes and verify GET parameters. """
+        self.letter = request.GET.get('letter', None)
+        try:
+            assert self.letter is not None
+            self.letter = str(self.letter).lower()
+            assert 'a' <= self.letter <= 'z'
+        except AssertionError:
+            self.letter = None
+
+    def get_base_queryset(self):
+        """ Returns the base queryset that will be used to retrieve the authors. """
+        return Author.objects.prefetch_related('article_set') \
+            .filter(article__issue__journal_id=self.journal.id).order_by('lastname') \
+            .distinct()
+
+    def get_letters_queryset_dict(self):
+        """ Returns an ordered dict containing an Author queryset for each letter. """
+        qs = self.get_base_queryset()
+
+        letter_qsdict = OrderedDict()
+        for letter in ascii_lowercase:
+            letter_qsdict[letter] = qs.filter(lastname__istartswith=letter)
+
+        return letter_qsdict
+
+    def get_queryset(self):
+        qs = self.get_base_queryset()
+        qsdict = self.get_letters_queryset_dict()
+
+        if self.letter is None:
+            first_author = qs.first()
+            self.letter = first_author.lastname[0].lower() if first_author else 'a'
+
+        return qsdict[self.letter]
+
+    @cached_property
+    def letters_counts(self):
+        """ Returns an ordered dict containing the number of authors for each letter. """
+        qsdict = self.get_letters_queryset_dict()
+        letters_counts = OrderedDict()
+        for letter, qs in qsdict.items():
+            letters_counts[letter] = qs.count()
+        return letters_counts
+
+    def get_context_data(self, **kwargs):
+        context = super(JournalAuthorsListView, self).get_context_data(**kwargs)
+        context['journal'] = self.journal
+        context['letter'] = self.letter
+        context['letters_counts'] = self.letters_counts
         return context
 
 
