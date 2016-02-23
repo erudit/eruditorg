@@ -1,5 +1,7 @@
 from django import forms
 from django.utils.translation import gettext as _
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -43,7 +45,7 @@ class IssueSubmissionForm(forms.ModelForm):
             self.fields[field].widget.attrs['disabled'] = True
 
     def __init__(self, *args, **kwargs):
-
+        user = kwargs.pop('user')
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
 
@@ -54,6 +56,31 @@ class IssueSubmissionForm(forms.ModelForm):
         self.helper.add_input(
             Submit('submit', _("Envoyer le fichier"))
         )
+        self.populate_select(user)
+
+    def populate_select(self, user):
+        qs = user.journals.all()
+        ids = [j.id for j in qs if user.has_perm(
+               'editor.manage_issuesubmission', j)]
+        qs.filter(id__in=ids)
+        self.fields['journal'].queryset = qs.filter(id__in=ids)
+
+        self.fields['journal'].initial = self.fields['journal'].queryset.first()
+
+        journals_members = User.objects.filter(
+            journals=user.journals.all()
+        ).distinct()
+
+        self.fields['contact'].queryset = journals_members
+        self.fields['contact'].initial = self.fields['contact'].queryset.first()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        journal = cleaned_data.get("journal")
+        contact = cleaned_data.get("contact")
+        if not journal.members.filter(id=contact.id).count():
+            raise ValidationError(
+                _("Ce contact n'est pas membre de cette revue."))
 
 
 class IssueSubmissionUploadForm(IssueSubmissionForm):

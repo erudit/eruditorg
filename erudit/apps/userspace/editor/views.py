@@ -1,9 +1,10 @@
+import json
+
 from django.template.context_processors import csrf
 
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from rules.contrib.views import PermissionRequiredMixin
@@ -29,34 +30,34 @@ class IssueSubmissionCreate(IssueSubmissionCheckMixin, CreateView):
     form_class = IssueSubmissionForm
     template_name = 'userspace/editor/form.html'
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(csrf(self.request))
+        form = context['form']
+
+        membership = {}
+        for journal in form.fields['journal'].queryset:
+            membership[journal.pk] = [
+                v[0] for v in journal.members.values_list('id')]
+
+        context.update({'journals': json.dumps(membership)})
         return context
-
-    def get_form(self, form_class):
-        form = super().get_form(form_class)
-        qs = self.request.user.journals.all()
-        ids = [j.id for j in qs if self.request.user.has_perm(
-               'editor.manage_issuesubmission', j)]
-        qs.filter(id__in=ids)
-        form.fields['journal'].queryset = qs.filter(id__in=ids)
-
-        form.fields['journal'].initial = form.fields['journal'].queryset.first()
-
-        journals_members = User.objects.filter(
-            journals=self.request.user.journals.all()
-        ).distinct()
-
-        form.fields['contact'].queryset = journals_members
-        form.fields['contact'].initial = form.fields['contact'].queryset.first()
-        return form
 
 
 class IssueSubmissionUpdate(IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'userspace/editor/form.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
     def get_permission_object(self):
         obj = self.get_object()
