@@ -1,6 +1,7 @@
 from math import ceil
 from django.views.generic import FormView
 
+from erudit.models import EruditDocument
 from . import solr, forms
 
 DOCUMENT_TYPES = {
@@ -15,7 +16,7 @@ DOCUMENT_TYPES = {
 
 
 class Search(FormView):
-    # model = models.Vehicle
+    model = EruditDocument
     object_list = []
     results_count = None
     paginate_by = 25
@@ -26,7 +27,8 @@ class Search(FormView):
     template_name = "public/search/search.html"
     form_class = forms.SearchForm
 
-    def fetch_data(self, form):
+    def get_solr_data(self, form):
+        """Query solr"""
         self.search_term = form.cleaned_data.get("search_term", None)
         self.sort = form.cleaned_data.get("sort", None)
         self.sort_order = form.cleaned_data.get("sort_order", None)
@@ -50,6 +52,18 @@ class Search(FormView):
 
             except:
                 return None
+
+    def get_queryset(self, solr_data):
+        """Query Django models using Solr data"""
+
+        doc_ids = []
+        for doc in solr_data["response"]["docs"]:
+            doc_id = doc.get("ID", None)
+
+            if doc_id:
+                doc_ids.append(doc_id)
+
+        return self.model.objects.all().filter(localidentifier__in=doc_ids)
 
     def get(self, request, *args, **kwargs):
         """We want this form to handle GET method"""
@@ -76,10 +90,10 @@ class Search(FormView):
         return initial
 
     def form_valid(self, form):
-        data = self.fetch_data(form=form)
+        solr_data = self.get_solr_data(form=form)
 
         try:
-            self.results_count = data["response"]["numFound"]
+            self.results_count = solr_data["response"]["numFound"]
         except:
             self.results_count = 0
 
@@ -88,10 +102,7 @@ class Search(FormView):
         except:
             self.page_count = 1
 
-        try:
-            self.object_list = data["response"]["docs"]
-        except:
-            self.object_list = []
+        self.object_list = self.get_queryset(solr_data=solr_data)
 
         # return super(Search, self).form_valid(form)
         return self.render_to_response(self.get_context_data(form=form))

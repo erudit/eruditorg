@@ -1,5 +1,5 @@
 {% extends "public/search/base.html" %}
-{% load i18n staticfiles %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
@@ -17,18 +17,7 @@
     <ul>
         {% for document in documents %}
         <li>
-            <p>{{ document.Titre_fr }}</p>
-            {% if document.Auteur_fac %}
-            <ul>
-                {% for author in document.Auteur_fac %}
-                <li>{{ author }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% if document.AnneePublication %}
-            <p>{{ document.AnneePublication }}</p>
-            {% endif %}
-            <p><a href="#{{ document.ID }}">{% trans "Consulter le document" %}</a></p>
+            {% if document.article %}{% include "public/search/_article_preview.html" with article=document.article %}{% endif %}
         </li>
         {% endfor %}
     </ul>
