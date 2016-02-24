@@ -1,8 +1,17 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 {% load static %}
+{% load pipeline %}
 
 {% block page-title %}{% trans "Accueil" %}{% endblock page-title %}
+
+{% block extrahead %}
+  {% if DEBUG %}
+    <link rel="stylesheet" href="{% static 'vendor/video.js/dist/video-js.min.css' %}" />
+  {% else %}
+    {% stylesheet 'videojs' %}
+  {% endif %}
+{% endblock extrahead %}
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
@@ -59,6 +68,15 @@
     <div class="col-md-4">
       <div class="well">
         <h4>{% trans "À propos" %}</h4>
+        <video
+          id="about_erudit_video"
+          class="video-js vjs-default-skin"
+          controls
+          preload="auto"
+          width="auto" height="auto"
+          data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'
+        >
+        </video>
         <a href="http://apropos.erudit.org" class="btn btn-block btn-primary">{% trans "En savoir plus" %}</a>
         <br />
         <p>{% lorem 30 w random %}</p>
@@ -67,3 +85,12 @@
   </div>
 </div>
 {% endblock content %}
+
+{% block footerscript %}
+  {% if DEBUG %}
+    <script type="text/javascript" src="{% static 'vendor/video.js/dist/video.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendor/videojs-vimeo/src/Vimeo.js' %}"></script>
+  {% else %}
+    {% javascript 'videojs' %}
+  {% endif %}
+{% endblock footerscript %}
