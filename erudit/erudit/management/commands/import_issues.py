@@ -20,8 +20,12 @@ class Command(BaseCommand):
             print("=" * 50)
             print("Importing {}".format(journal.localidentifier))
             print("=" * 50)
-            journal_xml = journal.get_fedora_object().getObjectXml()
-            issues = journal_xml.node.findall('.//numero')
+            journal_object = journal.get_fedora_object()
+
+            publications = journal_object.getDatastreamObject('PUBLICATIONS')
+
+            issues = publications.content.node.findall('.//numero')
+
             for issue_xml in issues:
                 self.import_issue(issue_xml)
 
