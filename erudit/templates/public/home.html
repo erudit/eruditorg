@@ -41,5 +41,24 @@
       <a href="{% url 'public:journal:journal-list' %}">{% trans "Toutes les revues" %}</a>
     </div>
   </div>
+  <br />
+  <div class="row">
+    <div class="col-md-8">
+      <div class="well">
+        <h4>{% trans "Actualités" %}</h4>
+        <div class="entries-wrapper">
+          {% for entry in latest_news %}
+            <div class="entry">
+              <a href="{{ entry.link }}">{{ entry.title }}</a>
+              <p class="summary">{{ entry.summary|safe }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      TODO
+    </div>
+  </div>
 </div>
 {% endblock content %}
