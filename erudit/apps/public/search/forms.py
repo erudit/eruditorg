@@ -50,7 +50,7 @@ class SearchFormHelper(FormHelper):
                         Field('search_term', tabIndex=1),
                         Field('sort', tabIndex=2),
                         Field('sort_order', tabIndex=3),
-                        Field('page', tabIndex=4),
+                        # Field('page', tabIndex=4),
                     ),
                 ),
 
@@ -79,8 +79,7 @@ class SearchForm(forms.Form):
     sort_order = forms.ChoiceField(
         label=_("Ordre"), widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
     )
-    # page = forms.IntegerField(label=_("Page"), widget=forms.HiddenInput, initial=1, )
-    page = forms.IntegerField(label=_("Page"), widget=forms.TextInput, required=False, initial=1, )
+    page = forms.IntegerField(label=_("Page"), widget=forms.HiddenInput, initial=1, )
 
     # years_filter = forms.MultipleChoiceField(label=_("Années de publication"), choices={}, widget=forms.CheckboxSelectMultiple, required=False, )  # noqa
     # languages_filter = forms.MultipleChoiceField(label=_("Langues"), choices={}, widget=forms.CheckboxSelectMultiple, required=False, )  # noqa

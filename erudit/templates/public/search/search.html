@@ -1,5 +1,6 @@
 {% extends "public/search/base.html" %}
 {% load i18n %}
+{% load search_tags %}
 {% load crispy_forms_tags %}
 
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
@@ -9,11 +10,11 @@
     {% crispy form %}
 </div>
 
+{% if documents %}
 <div class="search-results">
     <h2>{% trans "Résultats" %}</h2>
     <p>{{ results_count }} {% trans "résultats trouvé" %}</p>
     <p>{% trans "Page" %} {{ current_page }} {% trans "de" %} {{ page_count }}</p>
-    {% if documents %}
     <ul>
         {% for document in documents %}
         <li>
@@ -21,6 +22,8 @@
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
 </div>
+
+{% search_result_pagination %}
+{% endif %}
 {% endblock content %}

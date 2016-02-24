@@ -1,0 +1,8 @@
+<div class="pagination">
+    <h3>PAGINATION</h3>
+    <ul>
+        {% for page_url in pages_urls %}
+        <li><a href="{{ page_url.url }}" class="{% if page_url.page == current_page %}selected{% endif %}">{{ page_url.page }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
