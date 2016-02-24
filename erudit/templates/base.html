@@ -36,7 +36,11 @@
     {% block extrahead %}
     {% endblock %}
   </head>
-  <body class="{% block body_class %}{% endblock %}">
+  <body
+      class="{% block body_class %}{% endblock %}"
+      data-controller="{% block data-controller %}{% endblock data-controller %}"
+      data-action="{% block data-action %}{% endblock data-action %}"
+    >
 
     {% block header %}
     {% endblock %}

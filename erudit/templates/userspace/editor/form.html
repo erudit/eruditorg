@@ -3,6 +3,8 @@
 
 {% block page-title %}{% trans "Ajout d'un numéro" %}{% endblock %}
 
+{% block data-controller %}userspace:editor:form{% endblock data-controller %}
+
 {% block breadcrumbs %}
 {{ block.super }} / <a href="{% url 'userspace:editor:issues' %}">{% trans "Dépôt de numéros" %}</a> / {% trans "Ajout d'un numéro" %}
 {% endblock %}
@@ -11,29 +13,9 @@
 {{ form.media }}
 {% endblock %}
 
-{% block footerscript %}
-<script>
-  var journals = {{ journals|safe }};
-  function resetContactField() {
-    $("#id_contact").val("");
-    $("#id_contact").find("option").hide();
-  }
-  $(document).ready(function() {
-    resetContactField();
-    $("#id_journal").change(function(){
-      var journal_id = $(this).val();
-      var members = journals[journal_id];
-      resetContactField();
-      for (len = members.length, i=0; i<len; ++i) {
-        $("#id_contact").find("option[value='"+members[i]+"']").show();
-      }
-    });
-  });
-</script>
-{% endblock %}
-
 {% load crispy_forms_tags %}
 {% block content-main %}
+<div id="id_editor_form_metadata" data-journals="{{ journals|safe }}"></div>
 <div class="col-md-6 col-md-offset-3 col-xs-12">
   <section class="card card-upload_form">
     <div class="card-header">
