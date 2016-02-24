@@ -5,16 +5,38 @@ Développement front-end javascript
 
 Principes
 ^^^^^^^^^
-Lorsqu'une page doit exécuter du javascript custom:
 
-* On place ce javascript dans un fichier qui a le nom de la page
-* Ce fichier est placé dans le répertoire propre à l'app de laquelle la page fait partie
-* **Décrire brièvement le mécanisme d'abonnement entre le routeur et le controlleur**
-* Chaque page identifie le controlleur qui lui est associé en spécifiant un ``data-attribute`` dans le tag ``<body>``
+* Chaque page faisant intervenir un script Javascript doit être associé à un unique fichier Javascript.
+* Ce fichier doit être placé dans le répertoire propre à l'application correspondant à la page considérée (dans ``static/scripts/controllers/``)
+
+Chaque script associé à une page obéit à une notion de "Contrôleur". Ce contrôleur doit être enregistré auprès
+d'un "Routeur" dont la fonction est de déterminer le contrôleur à exécuter en fonction de la page affichée.
+
+Concrètement ce routeur inspecte le contenu de la balise ``<body>`` et recherche la présence de deux *data-attributes* :
+
+* ``data-controller`` : la valeur de cet attribut sert à définir le contrôleur qui sera exécuté
+* ``data-action``: la valeur de cet attribut sert à définir une action spécifique du contrôleur en question à exécuter. L'utilisation de ``data-action`` n'est pas obligatoire
+
+Pour chaque contrôleur une action ``init`` est obligatoire et est systématiquement exécutée au chargement de la page, quelle que soit la valeur de l'attribut ``data-action``.
 
 Exemple
 ^^^^^^^
-* **Exemple de code avec dépôt de fichier dans espace utilisateur**
+
+Voici un exemple de contrôleur associé à la vue détail d'un article :
+
+::
+
+    ROUTER.registerController('public:journal:article-detail', {
+      init: function() {
+        // The init action is mandatory
+        console.log("Article detail");
+      },
+      other_action: function() {
+        // Do something else here
+      },
+    });
+
+Ce script permet la création d'un contrôleur et l'enregistrement de celui-ci auprès du routeur global. Si une page dont la balise ``<body>`` contient un attribut ``data-controller`` - avec pour valeur ``public:journal:article-detail`` - est chargée, alors ce contrôleur sera appellé.
 
 Organisation du code javascript
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -22,18 +44,22 @@ Organisation du code javascript
 Structure des répertoires javascript::
 
     .
-    ├── build
-    │   ├── erudit-scripts-dev.js
-    │   └── erudit-vendors-dev.js
+    ├── js
+    │   ├── build
+    │   │   ├── erudit-scripts-dev.js
+    │   │   └── erudit-vendors-dev.js
     │
-    ├── controllers
-    │   └── public
-    │       └── journal
-    │           └── article.js
-    │   └── userspace
-    │       └── editor
-    │       └── journal
-    └── mains.js
+    ├── scripts
+    │   ├── controllers
+    │   │   └── public
+    │   │       └── journal
+    │   │           └── articleDetail.js
+    │   │   └── userspace
+    │   │       └── editor
+    │   │           └── [...]
+    │   │       └── journal
+    │   │           └── [...]
+    │   └── mains.js
 
 
 Utilisation de django-pipeline
