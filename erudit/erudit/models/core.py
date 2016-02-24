@@ -606,6 +606,11 @@ class Author(Person):
                 suffix=self.suffix, firstname=self.firstname, lastname=self.lastname)
         return super(Author, self).__str__()
 
+    def articles_in_journal(self, journal):
+        """ Returns the articles written by the author for a given journal. """
+        return self.article_set.select_related('issue') \
+            .filter(issue__journal_id=journal.id)
+
 
 class Publisher(Edinum):
     """Éditeur"""

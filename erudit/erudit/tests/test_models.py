@@ -7,7 +7,10 @@ from eruditarticle.objects import EruditPublication
 
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
-from erudit.factories import IssueFactory, ArticleFactory
+from erudit.factories import ArticleFactory
+from erudit.factories import AuthorFactory
+from erudit.factories import IssueFactory
+from erudit.factories import JournalFactory
 
 from .base import BaseEruditTestCase
 
@@ -154,3 +157,24 @@ class TestArticle(BaseEruditTestCase):
         # Run 1 check
         self.assertTrue(article_1.open_access)
         self.assertFalse(article_2.open_access)
+
+
+class TestAuthor(BaseEruditTestCase):
+    def test_can_return_articles_written_for_a_given_journal(self):
+        # Setup
+        other_journal = JournalFactory.create(publishers=[self.publisher])
+        other_issue = IssueFactory.create(
+            journal=other_journal, date_published=dt.datetime.now(), localidentifier='test')
+        other_article = ArticleFactory.create(issue=other_issue)
+
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue)
+
+        author = AuthorFactory.create()
+
+        article.authors.add(author)
+        other_article.authors.add(author)
+
+        # Run
+        self.assertEqual(list(author.articles_in_journal(self.journal)), [article, ])
