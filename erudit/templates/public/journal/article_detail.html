@@ -2,6 +2,8 @@
 {% load i18n staticfiles %}
 {% load public_journal_tags %}
 
+{% block data-controller %}public:journal:article-detail{% endblock data-controller %}
+
 {% block breadcrumb %}{{ block.super }} / <a href="{{ article.issue.journal.get_absolute_url }}">Journal</a> / <a href="{{ article.issue.get_absolute_url }}">Issue 0 2016</a> / <a href="#">{{ fedora_object }}</a> {% endblock %}
 
 {% block content %}

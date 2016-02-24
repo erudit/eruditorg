@@ -15,6 +15,9 @@ Documentation de Érudit.org
    fedora
    backends
    a11y
+   javascript
+
+* :ref:`javascript`
 
 Index et tableaux
 =================

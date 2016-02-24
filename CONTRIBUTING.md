@@ -31,3 +31,4 @@
 * Does the front-end generally follow these [guidelines](https://github.com/bendc/frontend-guidelines)?
 * Does the Sass respect the [7-1 architecture pattern](http://sass-guidelin.es/#architecture)?
 * Do the classes adhere to a consistent naming convention using hyphens for Sass and camelCase for JavaScript?
+** Do the code follow the project's [javascript development guidelines](eruditorg.readthedocs.org/fr/latest/javascript.html) ?
