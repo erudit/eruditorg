@@ -13,7 +13,7 @@
 ## Clone the repository:
 
   ```
-  $ git clone https://github.com/erudit/zenon.git
+  $ git clone https://github.com/erudit/eruditorg.git
   ```
 
 ## Install the system dependencies:
@@ -169,7 +169,7 @@ You can run the tests with:
 $ tox
 ```
 
-# Documentation 
+# Documentation
 
 Please visit http://eruditorg.readthedocs.org/fr/latest/
 
