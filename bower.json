@@ -37,6 +37,8 @@
     "swiper": "~3.3.0",
     "inline-svg": "latest",
     "bourbon": "latest",
-    "pdfjs-build": "~0.8.1"
+    "pdfjs-build": "~0.8.1",
+    "video.js": "^5.8.0",
+    "videojs-vimeo": "^2.0.0"
   }
 }

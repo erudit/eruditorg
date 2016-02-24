@@ -117,6 +117,15 @@ PIPELINE = {
                 'media': 'screen,projection',
             },
         },
+        'videojs': {
+            'source_filenames': (
+                'vendor/video.js/dist/video-js.min.css',
+            ),
+            'output_filename': 'css/videojs.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
     },
     'JAVASCRIPT': {
         # main js file for erudit.org
@@ -145,6 +154,13 @@ PIPELINE = {
                 'vendor/pdfjs-build/generic/web/viewer.js',
             ),
             'output_filename': 'js/pdfjs.min.js',
+        },
+        'videojs': {
+            'source_filenames': (
+                'vendor/video.js/dist/video.min.js',
+                'vendor/videojs-vimeo/src/Vimeo.js',
+            ),
+            'output_filename': 'js/videojs.min.js',
         },
     }
 }
