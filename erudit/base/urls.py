@@ -13,6 +13,8 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
+from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
@@ -44,3 +46,14 @@ urlpatterns = i18n_patterns(
     # Catchall
     url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 )
+
+# In DEBUG mode, serve media files through Django.
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    from django.views.static import serve
+    urlpatterns += staticfiles_urlpatterns()
+    # Remove leading and trailing slashes so the regex matches.
+    media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
+    urlpatterns += [
+        url(r'^%s/(?P<path>.*)$' % media_url, serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
