@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('erudit', '0003_auto_20160219_1716'),
-        ('subscription', '0001_initial'),
+        ('subscription', '0002_auto_20160222_2055'),
     ]
 
     operations = [
