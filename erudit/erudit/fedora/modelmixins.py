@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.utils.functional import cached_property
 from eulfedora.util import RequestFailed
+from requests.exceptions import ConnectionError
 
 from .repository import api
 
@@ -62,10 +63,11 @@ class FedoraMixin(object):
         try:
             xml_content = self.fedora_object.xml_content
             return self.erudit_class(xml_content) if xml_content else None
-        except RequestFailed:  # pragma: no cover
+        except (RequestFailed, ConnectionError):  # pragma: no cover
             if settings.DEBUG:
-                # In DEBUG mode RequestFailed errors can occur really often because
-                # the dataset provided by the Fedora repository is not complete.
+                # In DEBUG mode RequestFailed or ConnectionError errors can occur
+                # really often because the dataset provided by the Fedora repository
+                # is not complete.
                 return
             raise
 
