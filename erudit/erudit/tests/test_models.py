@@ -94,22 +94,6 @@ class TestIssue(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.issue.get_full_identifier(), 'erudit:erudit.dummy139.dummy1234')
 
-    def test_cannot_have_a_full_identifier_without_localidentifier(self):
-        # Setup
-        self.issue.localidentifier = None
-        self.issue.save()
-        # Run & check
-        self.assertIsNone(self.issue.get_full_identifier())
-
-    def test_issue_do_not_have_a_full_identifier_if_the_journal_has_no_localidentifier(self):
-        # Setup
-        self.journal.localidentifier = None
-        self.journal.save()
-        self.issue.localidentifier = 'dummy1234'
-        self.issue.save()
-        # Run & check
-        self.assertIsNone(self.issue.get_full_identifier())
-
     def test_can_return_an_appropriate_fedora_pid(self):
         # Setup
         self.journal.localidentifier = 'dummy139'
@@ -126,15 +110,6 @@ class TestArticle(BaseEruditTestCase):
         super(TestArticle, self).setUp()
         self.issue = IssueFactory.create(journal=self.journal)
         self.article = ArticleFactory.create(issue=self.issue)
-
-    def test_article_do_not_have_a_full_identifier_if_the_issue_has_no_localidentifier(self):
-        # Setup
-        self.issue.localidentifier = None
-        self.issue.save()
-        self.article.localidentifier = 'dummy1234'
-        self.article.save()
-        # Run & check
-        self.assertIsNone(self.article.get_full_identifier())
 
     def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
         # Setup
@@ -164,11 +139,11 @@ class TestAuthor(BaseEruditTestCase):
         # Setup
         other_journal = JournalFactory.create(publishers=[self.publisher])
         other_issue = IssueFactory.create(
-            journal=other_journal, date_published=dt.datetime.now(), localidentifier='test')
+            journal=other_journal, date_published=dt.datetime.now())
         other_article = ArticleFactory.create(issue=other_issue)
 
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            journal=self.journal, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
 
         author = AuthorFactory.create()

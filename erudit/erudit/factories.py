@@ -33,6 +33,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
+    localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
 
     @factory.post_generation
     def publishers(self, create, extracted, **kwargs):
@@ -59,7 +60,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
         model = 'erudit.issue'
 
     journal = factory.SubFactory(JournalFactory)
-    localidentifier = factory.Sequence(lambda n: 'issue-{}'.format(n))
+    localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
 
 
 class ArticleFactory(factory.django.DjangoModelFactory):
@@ -68,7 +69,7 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         model = 'erudit.article'
 
     issue = factory.SubFactory(IssueFactory)
-    localidentifier = factory.Sequence(lambda n: 'article-{}'.format(n))
+    localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
 
 
 class BasketFactory(factory.django.DjangoModelFactory):
