@@ -45,8 +45,6 @@ section#article-detail {
   /**
   * main article header
   */
-
-
   header.article-header {
 
     h2 {
@@ -92,6 +90,17 @@ section#article-detail {
 
     }
 
+    .meta-authors {
+
+    }
+
+    .meta-magazine {
+      .meta-magazine--title {
+        display: block;
+        margin-top: 5px;
+      }
+    }
+
     // logo is pushed to right
     figure.journal-logo {
       img {
@@ -105,29 +114,215 @@ section#article-detail {
   }
 
   /**
+  * main article sticky header
+  */
+  header.article-header-sticky {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 10;
+    will-change: transform;
+    @include translate(-50%, -100%);
+    @include transition(transform 0.3s ease-out);
+
+    .border-bottom {
+      max-height: 130px;
+      overflow: hidden;
+      border-bottom: 1px solid $gray-base;
+      background: $body-bg;
+    }
+
+    h1#brand {
+
+      a {
+        display: block;
+        width: 100%;
+        padding: 50% 25% 0 25%;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2em;
+      @include fw-sans-bold();
+    }
+
+    dl {
+      margin-top: $margin-vertical-default/2;
+      margin-bottom: $margin-vertical-default/2;
+    }
+
+    hgroup {
+      padding-top: $margin-vertical-default/3;
+      padding-bottom: $margin-vertical-default/3;
+
+      h3 {
+        margin-bottom: 0;
+        font-size: $font-size-h4;
+      }
+
+      h4 {
+        font-size: $font-size-h5;
+        margin-bottom: 5px;
+      }
+
+      .affiliation {
+        margin-top: $margin-vertical-default/6;
+        margin-bottom: 0;
+      }
+
+      p {
+        margin: 0;
+      }
+
+    }
+
+    .meta-magazine {
+      .meta-magazine--title {
+        display: block;
+        margin-top: 5px;
+      }
+    }
+
+  }
+
+  /**
+  * article table of contents
+  */
+  /**
   * article table of contents
   */
   .article-table-of-contents {
     padding-top: $margin-vertical-default;
+    position: relative;
+    will-change: transform;
+    @include transition(transform 0.3s ease-out);
 
-    nav {
-      width: 175px;
+    h4 {
+      margin-bottom: 1em;
+    }
 
-      li {
-        border-bottom: 1px solid #000;
-        padding-top: $margin-vertical-default/3;
-        padding-bottom: $margin-vertical-default/3;
-        font-size: 12px;
-        line-height: 12px;
+    li {
+      padding: 1em 0;
+
+      &.border-top:before {
+        left: 0;
       }
 
       a {
         color: $text-color;
-        &:hover {
+        text-decoration: none;
+
+        &.active, &:hover, &:active {
           color: $color-red;
         }
       }
+    }
 
+  }
+
+
+  /**
+  * article toolbox
+  */
+  .article-tools {
+    position: relative;
+    padding-top: $margin-vertical-default;
+    margin-right: $grid-gutter-width / 2;
+    width: 50px;
+    z-index: 10;
+    will-change: transform;
+    @include transition(transform 0.3s ease-out);
+
+    ul, li {
+      width: 100%;
+    }
+    li {
+      position: relative;
+      height: 50px;
+      margin: 0 0 1px 0;
+      padding: 0;
+      display: block;
+
+      button {
+        position: relative;
+        display: block;
+        margin: 0;
+        min-width: 50px;
+        height: 100%;
+        background: $colour-accent;
+        border: none;
+        color: #fff;
+        font-size: 0.8em;
+        white-space: nowrap;
+        float: right;
+        @include transition(none);
+
+        .tools-label {
+          display: none;
+          padding: 4px 6px 0 40px;
+          @include fw-sans-medium();
+        }
+
+        .erudicon {
+          position: absolute;
+          font-size: 14px;
+        }
+
+        .erudicon-tools-pdf { font-size: 8px; top: 21px; left: 15px; }
+        .erudicon-tools-quote { font-size: 10px; top: 20px; left: 19px;  }
+        .erudicon-tools-save { font-size: 18px; top: 17px; left: 20px; }
+        .erudicon-tools-more { font-size: 4px; top: 24px; left: 18px; }
+        .erudicon-tools-share { top: 18px; left: 18px; }
+        .erudicon-tools-print { top: 18px; left: 19px; }
+        .erudicon-tools-fullscreen { top: 17px; left: 19px; }
+      }
+
+      html.pointerevents &, html.touchevents & {
+        button.more {
+          display: none;
+        }
+      }
+
+      html.no-pointerevents.no-touchevents & {
+        ul {
+          position: absolute;
+          top: 0;
+          right: 51px;
+          display: none;
+          width: auto;
+
+          button {
+            float: none;
+            width: 100%;
+
+            .tools-label {
+              display: block;
+              padding-right: 50px;
+            }
+          }
+        }
+      }
+
+      html.no-pointerevents.no-touchevents &:hover,
+      &:active {
+        & > button {
+          background: $colour-dark-grey;
+
+          .tools-label {
+            display: block;
+          }
+        }
+
+        ul {
+          display: block !important;
+        }
+      }
     }
 
   }

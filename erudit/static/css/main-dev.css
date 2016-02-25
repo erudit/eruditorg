@@ -5,13 +5,50 @@
 /**
 * Font-weight functions
 */
+@import url(../vendor/ionicons/css/ionicons.css);
+@font-face {
+  font-family: "erudicon";
+  src: url("/static/fonts/erudicon/erudicon.eot");
+  src: url("/static/fonts/erudicon/erudicon.eot?#iefix") format("eot"), url("/static/fonts/erudicon/erudicon.woff") format("woff"), url("/static/fonts/erudicon/erudicon.ttf") format("truetype"), url("/static/fonts/erudicon/erudicon.svg#erudicon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+.erudicon:before {
+  display: inline-block;
+  font-family: "erudicon";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.erudicon-tools-fullscreen:before {
+  content: "\EA01"; }
+
+.erudicon-tools-more:before {
+  content: "\EA02"; }
+
+.erudicon-tools-pdf:before {
+  content: "\EA03"; }
+
+.erudicon-tools-print:before {
+  content: "\EA04"; }
+
+.erudicon-tools-quote:before {
+  content: "\EA05"; }
+
+.erudicon-tools-save:before {
+  content: "\EA06"; }
+
+.erudicon-tools-share:before {
+  content: "\EA07"; }
+
 /**
 * Create a top or bottom border for Bootstrap's grid cell
 */
 /**
 * Vendors prefixes
 */
-@import url(../vendor/ionicons/css/ionicons.css);
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -6055,7 +6092,16 @@ section#article-detail {
   * main article header
   */
   /**
+  * main article sticky header
+  */
+  /**
   * article table of contents
+  */
+  /**
+  * article table of contents
+  */
+  /**
+  * article toolbox
   */
   /**
   * Article body
@@ -6112,25 +6158,166 @@ section#article-detail {
       display: none; }
     section#article-detail header.article-header hgroup p {
       margin: 0; }
+  section#article-detail header.article-header .meta-magazine .meta-magazine--title {
+    display: block;
+    margin-top: 5px; }
   section#article-detail header.article-header figure.journal-logo img {
     float: right; }
     @media (max-width: 767px) {
       section#article-detail header.article-header figure.journal-logo img {
         float: none; } }
+  section#article-detail header.article-header-sticky {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 10;
+    will-change: transform;
+    -webkit-transform: translate(-50%, -100%);
+    -ms-transform: translate(-50%, -100%);
+    -o-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    -webkit-transition: transform 0.3s ease-out;
+    -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out; }
+    section#article-detail header.article-header-sticky .border-bottom {
+      max-height: 130px;
+      overflow: hidden;
+      border-bottom: 1px solid #000;
+      background: #fff; }
+    section#article-detail header.article-header-sticky h1#brand a {
+      display: block;
+      width: 100%;
+      padding: 50% 25% 0 25%; }
+      section#article-detail header.article-header-sticky h1#brand a img {
+        width: 100%; }
+    section#article-detail header.article-header-sticky h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2em;
+      font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    section#article-detail header.article-header-sticky dl {
+      margin-top: 22px;
+      margin-bottom: 22px; }
+    section#article-detail header.article-header-sticky hgroup {
+      padding-top: 14.66667px;
+      padding-bottom: 14.66667px; }
+      section#article-detail header.article-header-sticky hgroup h3 {
+        margin-bottom: 0;
+        font-size: 20px; }
+      section#article-detail header.article-header-sticky hgroup h4 {
+        font-size: 14px;
+        margin-bottom: 5px; }
+      section#article-detail header.article-header-sticky hgroup .affiliation {
+        margin-top: 7.33333px;
+        margin-bottom: 0; }
+      section#article-detail header.article-header-sticky hgroup p {
+        margin: 0; }
+    section#article-detail header.article-header-sticky .meta-magazine .meta-magazine--title {
+      display: block;
+      margin-top: 5px; }
   section#article-detail .article-table-of-contents {
-    padding-top: 44px; }
-    section#article-detail .article-table-of-contents nav {
-      width: 175px; }
-      section#article-detail .article-table-of-contents nav li {
-        border-bottom: 1px solid #000;
-        padding-top: 14.66667px;
-        padding-bottom: 14.66667px;
-        font-size: 12px;
-        line-height: 12px; }
-      section#article-detail .article-table-of-contents nav a {
-        color: #333333; }
-        section#article-detail .article-table-of-contents nav a:hover {
+    padding-top: 44px;
+    position: relative;
+    will-change: transform;
+    -webkit-transition: transform 0.3s ease-out;
+    -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out; }
+    section#article-detail .article-table-of-contents h4 {
+      margin-bottom: 1em; }
+    section#article-detail .article-table-of-contents li {
+      padding: 1em 0; }
+      section#article-detail .article-table-of-contents li.border-top:before {
+        left: 0; }
+      section#article-detail .article-table-of-contents li a {
+        color: #333333;
+        text-decoration: none; }
+        section#article-detail .article-table-of-contents li a.active, section#article-detail .article-table-of-contents li a:hover, section#article-detail .article-table-of-contents li a:active {
           color: #FF4242; }
+  section#article-detail .article-tools {
+    position: relative;
+    padding-top: 44px;
+    margin-right: 11px;
+    width: 50px;
+    z-index: 10;
+    will-change: transform;
+    -webkit-transition: transform 0.3s ease-out;
+    -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out; }
+    section#article-detail .article-tools ul, section#article-detail .article-tools li {
+      width: 100%; }
+    section#article-detail .article-tools li {
+      position: relative;
+      height: 50px;
+      margin: 0 0 1px 0;
+      padding: 0;
+      display: block; }
+      section#article-detail .article-tools li button {
+        position: relative;
+        display: block;
+        margin: 0;
+        min-width: 50px;
+        height: 100%;
+        background: #FF4242;
+        border: none;
+        color: #fff;
+        font-size: 0.8em;
+        white-space: nowrap;
+        float: right;
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none; }
+        section#article-detail .article-tools li button .tools-label {
+          display: none;
+          padding: 4px 6px 0 40px;
+          font-family: "Maax-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        section#article-detail .article-tools li button .erudicon {
+          position: absolute;
+          font-size: 14px; }
+        section#article-detail .article-tools li button .erudicon-tools-pdf {
+          font-size: 8px;
+          top: 21px;
+          left: 15px; }
+        section#article-detail .article-tools li button .erudicon-tools-quote {
+          font-size: 10px;
+          top: 20px;
+          left: 19px; }
+        section#article-detail .article-tools li button .erudicon-tools-save {
+          font-size: 18px;
+          top: 17px;
+          left: 20px; }
+        section#article-detail .article-tools li button .erudicon-tools-more {
+          font-size: 4px;
+          top: 24px;
+          left: 18px; }
+        section#article-detail .article-tools li button .erudicon-tools-share {
+          top: 18px;
+          left: 18px; }
+        section#article-detail .article-tools li button .erudicon-tools-print {
+          top: 18px;
+          left: 19px; }
+        section#article-detail .article-tools li button .erudicon-tools-fullscreen {
+          top: 17px;
+          left: 19px; }
+      html.pointerevents section#article-detail .article-tools li button.more, html.touchevents section#article-detail .article-tools li button.more {
+        display: none; }
+      html.no-pointerevents.no-touchevents section#article-detail .article-tools li ul {
+        position: absolute;
+        top: 0;
+        right: 51px;
+        display: none;
+        width: auto; }
+        html.no-pointerevents.no-touchevents section#article-detail .article-tools li ul button {
+          float: none;
+          width: 100%; }
+          html.no-pointerevents.no-touchevents section#article-detail .article-tools li ul button .tools-label {
+            display: block;
+            padding-right: 50px; }
+      html.no-pointerevents.no-touchevents section#article-detail .article-tools li:hover > button, section#article-detail .article-tools li:active > button {
+        background: #393939; }
+        html.no-pointerevents.no-touchevents section#article-detail .article-tools li:hover > button .tools-label, section#article-detail .article-tools li:active > button .tools-label {
+          display: block; }
+      html.no-pointerevents.no-touchevents section#article-detail .article-tools li:hover ul, section#article-detail .article-tools li:active ul {
+        display: block !important; }
   section#article-detail .article-body {
     padding-top: 44px;
     padding-right: 160px; }

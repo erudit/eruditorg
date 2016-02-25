@@ -103,10 +103,7 @@
 
 				<h4>
 					<xsl:apply-templates select="../article/@typeart"/> de la revue
-				</h4>
-
-				<h4>
-					<a href="{$urlSavant}{$titreAbrege}">
+					<a class="meta-magazine--title" href="{$urlSavant}{$titreAbrege}">
 						<xsl:value-of select="admin/revue/titrerev"/>
 					</a>
 				</h4>
@@ -114,10 +111,42 @@
 				<xsl:value-of select="admin/numero/grtheme/theme"/>
 				<xsl:apply-templates select="admin/numero" mode="refpapier"/>
 
-
 			</hgroup>
 
+		</header>
 
+		<!--=== sticky header for article ===-->
+		<header class="container article-header-sticky hidden-xs hidden-sm">
+			<div class="border-bottom">
+				<div class="row no-margin">
+					<h1 id="brand" class="col-md-1">
+						<a href="/">
+							<img src="/static/svg/logo-erudit-small.svg" alt="Erudit" class="img-responsive" />
+						</a>
+					</h1>
+
+					<hgroup class="col-md-7">
+						<h2>
+							<xsl:if test="liminaire/grtitre/titre">
+								<xsl:apply-templates select="liminaire/grtitre/titre"/>
+							</xsl:if>
+						</h2>
+					</hgroup>
+
+					<!-- meta magazine -->
+					<hgroup class="meta-magazine col-md-4">
+						<h4>
+							<xsl:apply-templates select="../article/@typeart"/> de la revue
+							<a class="meta-magazine--title bold" href="{$urlSavant}{$titreAbrege}">
+								<xsl:value-of select="admin/revue/titrerev"/>
+							</a>
+						</h4>
+
+						<xsl:value-of select="admin/numero/grtheme/theme"/>
+						<xsl:apply-templates select="admin/numero" mode="refpapier"/>
+					</hgroup>
+				</div>
+			</div>
 		</header>
 
 		<!-- <hr/> -->
@@ -125,56 +154,56 @@
 		<!--=== plan de l'article ===-->
 		<div id="article-content" class="row border-top">
 			<xsl:if test="//corps">
-				<aside class="col-md-4 article-table-of-contents" role="contents">
+				<aside class="col-md-3 article-table-of-contents" role="contents">
 						<nav>
 							<header>
 								<h4>Plan de l’article</h4>
 							</header>
 							<ul class="unstyled">
-								<li class="debutArticle">
+								<li class="debutArticle italic">
 									<a href="#article-content">
 										<em>Retour au début</em>
 									</a>
 								</li>
 								<xsl:if test="//resume">
-									<li>
+									<li class="border-top">
 										<a href="#resume">Résumé</a>
 									</li>
 								</xsl:if>
-								<li>
+								<li class="border-top">
 									<a href="#corps">Corps</a>
 								</li>
 								<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
 								<xsl:if test="//grannexe">
-									<li>
+									<li class="border-top">
 										<a href="#grannexe">
 											<xsl:apply-templates select="//grannexe" mode="heading"/>
 										</a>
 									</li>
 								</xsl:if>
 								<xsl:if test="//merci">
-									<li>
+									<li class="border-top">
 										<a href="#merci">
 											<xsl:apply-templates select="//merci" mode="heading"/>
 										</a>
 									</li>
 								</xsl:if>
 								<xsl:if test="//grnotebio">
-									<li>
+									<li class="border-top">
 										<a href="#grnotebio">
 											<xsl:apply-templates select="//grnotebio" mode="heading"/>
 										</a>
 									</li>
 								</xsl:if>
 								<xsl:if test="//grnote">
-									<li>
+									<li class="border-top">
 										<a href="#grnote">
 											<xsl:apply-templates select="//grnote" mode="heading"/>
 										</a>
 									</li>
 								</xsl:if>
 								<xsl:if test="//grbiblio">
-									<li>
+									<li class="border-top">
 										<a href="#grbiblio">
 											<xsl:apply-templates select="//grbiblio" mode="heading"/>
 										</a>
@@ -182,11 +211,59 @@
 								</xsl:if>
 							</ul>
 						</nav>
+				</aside>
 
+				<aside class="pull-right article-tools">
+					<ul class="unstyled">
+						<li>
+							<button>
+								<span class="erudicon erudicon-tools-pdf"></span>
+								<span class="tools-label">Télécharger</span>
+							</button>
+						</li>
+						<li>
+							<button>
+								<span class="erudicon erudicon-tools-quote"></span>
+								<span class="tools-label">Citer cette article</span>
+							</button>
+						</li>
+						<li>
+							<button>
+								<span class="erudicon erudicon-tools-save"></span>
+								<span class="tools-label">Sauvegarder</span>
+							</button>
+						</li>
+						<li>
+							<button class="more">
+								<span class="erudicon erudicon-tools-more"></span>
+							</button>
+
+							<ul class="unstyled">
+								<li>
+									<button>
+										<span class="erudicon erudicon-tools-share"></span>
+										<span class="tools-label">Partager</span>
+									</button>
+								</li>
+								<li>
+									<button>
+										<span class="erudicon erudicon-tools-print"></span>
+										<span class="tools-label">Imprimer</span>
+									</button>
+								</li>
+								<li>
+									<button>
+										<span class="erudicon erudicon-tools-fullscreen"></span>
+										<span class="tools-label">Mode zen</span>
+									</button>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</aside>
 			</xsl:if>
 
-			<aside class="article-body col-md-8">
+			<aside class="article-body col-md-7 col-md-offset-1">
 
 				<!-- ********* Resume ******** -->
 				<xsl:if test="//resume">
@@ -225,7 +302,6 @@
 
 			</aside>
 		</div>
-
 
 	</xsl:template>
 
