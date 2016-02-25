@@ -1,3 +1,4 @@
+import urllib
 from math import ceil
 from django.views.generic import FormView
 
@@ -59,9 +60,9 @@ class Search(FormView):
                     sort_order=self.sort_order,
                     start_at=self.start_at,
                     results_per_query=self.results_per_query,
-                    limit_filter_fields=self.limit_filter_fields
+                    limit_filter_fields=self.limit_filter_fields,
+                    selected_filters=self.selected_filters,
                 )
-
             except:
                 return None
 
@@ -93,8 +94,11 @@ class Search(FormView):
 
         # Get selected filter fields
         for field in self.limit_filter_fields:
-            filter_name = "{field}_filter".format(field=field)
-            self.selected_filters[filter_name] = self.request.GET.getlist(filter_name)
+            filter_value = self.request.GET.getlist(field)
+            # Don't fill selected_filters with empty values
+            if filter_value:
+                cleaned_value = [urllib.parse.unquote_plus(value) for value in filter_value]
+                self.selected_filters[field] = cleaned_value
 
         return initial
 

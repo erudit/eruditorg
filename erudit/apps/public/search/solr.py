@@ -84,14 +84,20 @@ class Solr(object):
         }
 
         # Results count
-        cleaned_data["results_count"] = raw_data["response"]["numFound"]
+        try:
+            cleaned_data["results_count"] = raw_data["response"]["numFound"]
+        except:
+            pass
 
         # List of documents IDs
-        for doc in raw_data["response"]["docs"]:
-            doc_id = doc.get("ID", None)
+        try:
+            for doc in raw_data["response"]["docs"]:
+                doc_id = doc.get("ID", None)
 
-            if doc_id:
-                cleaned_data["doc_ids"].append(doc_id)
+                if doc_id:
+                    cleaned_data["doc_ids"].append(doc_id)
+        except:
+            pass
 
         # Possible filters
         # Loop through all filters we are interested in
@@ -115,8 +121,23 @@ class Solr(object):
 
         return cleaned_data
 
+    def build_query_filters(self, selected_filters):
+        """Will return query filter in the form of:
+        Langue:(fr) Annee(2010 OR 2011 OR 2012)
+        """
+        query_filters = []
+        for filter_name, filter_values in selected_filters.items():
+            solr_field_name = self.filter_fields[filter_name]["field"]
+            query_filters.append("{field}:({values})".format(
+                field=solr_field_name,
+                values=" OR ".join(filter_values))
+            )
+
+        return " ".join(query_filters)
+
     def simple_search(self, search_term, sort="relevance", sort_order="asc",
-                      limit_filter_fields=FILTER_FIELDS, start_at=0, results_per_query=10):
+                      limit_filter_fields=FILTER_FIELDS, selected_filters={},
+                      start_at=0, results_per_query=10):
         """Simple search
 
         - search_term: search term to look for
@@ -131,6 +152,10 @@ class Solr(object):
             - asc
             - desc
 
+        - limit_filter_fields: limited list of filter
+
+        - selected_filters: selected filter for query
+
         - start_at: Used with pagination. Row number to start at
 
         - results_per_query: Used with pagination. Number of results per query to return
@@ -142,8 +167,15 @@ class Solr(object):
 
         # String to search for
         params["q"] = "{simple_search_index}:{search_term}".format(
-            simple_search_index=self.simple_search_index, search_term=search_term
+            simple_search_index=self.simple_search_index,
+            search_term=search_term
         )
+
+        if selected_filters:
+            params["q"] = "{base_search} {filters}".format(
+                base_search=params["q"],
+                filters=self.build_query_filters(selected_filters=selected_filters)
+            )
 
         # Sort param
         if not (sort == "default"):
