@@ -133,7 +133,7 @@ class RulesTestCase(TestCase):
         policy = PolicyFactory()
         user = UserFactory()
 
-        is_granted = user.has_perm('individual_subscription.manage_policy', policy)
+        is_granted = user.has_perm('subscription.manage_policy', policy)
         self.assertEqual(is_granted, False)
 
     def test_user_can_manage(self):
@@ -142,19 +142,19 @@ class RulesTestCase(TestCase):
         policy.managers.add(user)
         policy.save()
 
-        is_granted = user.has_perm('individual_subscription.manage_policy', policy)
+        is_granted = user.has_perm('subscription.manage_policy', policy)
         self.assertEqual(is_granted, True)
 
     def test_superuser_can_manage(self):
         policy = PolicyFactory()
         user = UserFactory(is_superuser=True)
 
-        is_granted = user.has_perm('individual_subscription.manage_policy', policy)
+        is_granted = user.has_perm('subscription.manage_policy', policy)
         self.assertEqual(is_granted, True)
 
     def test_staff_can_manage(self):
         policy = PolicyFactory()
         user = UserFactory(is_staff=True)
 
-        is_granted = user.has_perm('individual_subscription.manage_policy', policy)
+        is_granted = user.has_perm('subscription.manage_policy', policy)
         self.assertEqual(is_granted, True)

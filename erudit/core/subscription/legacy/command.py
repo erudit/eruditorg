@@ -95,7 +95,7 @@ class Command(BaseCommand):
     def link_abonnes_from_acces(self):
         dummy_policy_id = self.args[1]
         accounts = IndividualAccount.objects.filter(policy_id=dummy_policy_id)
-        cursor = connections['legacy_individual_subscription'].cursor()
+        cursor = connections['legacy_subscription'].cursor()
 
         journals_account_volumetry = {"": []}
 

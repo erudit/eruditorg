@@ -3,10 +3,8 @@
 from django.db.models import Q
 from django.http import Http404
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
 
 from ipware.ip import get_ip
-from navutils import Breadcrumb
 
 from core.subscription.models import InstitutionalAccount
 from core.subscription.models import InstitutionIPAddressRange

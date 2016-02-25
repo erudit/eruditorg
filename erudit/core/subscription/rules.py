@@ -19,7 +19,7 @@ def is_account_manager(user, account=None):
     else:
         return is_policy_manager(user, account.policy)
 
-rules.add_perm('individual_subscription.manage_policy',
+rules.add_perm('subscription.manage_policy',
                is_superuser | is_staff | is_policy_manager)
-rules.add_perm('individual_subscription.manage_account',
+rules.add_perm('subscription.manage_account',
                is_superuser | is_staff | is_account_manager)

@@ -23,7 +23,7 @@ class RuleForm(ModelForm):
     permission_filters = (
         'userspace.manage_permissions',
         'editor.manage_issuesubmission',
-        'individual_subscription.manage_account',
+        'subscription.manage_account',
     )
 
     journal = forms.ModelChoiceField(label=_("Revue"),

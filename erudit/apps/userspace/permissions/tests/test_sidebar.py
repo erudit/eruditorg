@@ -10,7 +10,7 @@ from erudit.factories import JournalFactory
 
 class MenuTestCase(TestCase):
 
-    def test_menu_individual_subscription_presence(self):
+    def test_menu_subscription_presence(self):
         policy = PolicyFactory()
         user = UserFactory(username="user")
         user.set_password("user")
@@ -23,7 +23,7 @@ class MenuTestCase(TestCase):
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertContains(response, url)
 
-    def test_menu_individual_subscription_absence(self):
+    def test_menu_subscription_absence(self):
         user = UserFactory(username="user")
         user.set_password("user")
         user.save()

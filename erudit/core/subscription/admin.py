@@ -157,7 +157,7 @@ class PolicyAdmin(admin.ModelAdmin):
         """
         if not obj.content_object:
             return
-        url = reverse("admin:individual_subscription_{}_change".format(
+        url = reverse("admin:subscription_{}_change".format(
             obj.content_object.__class__.__name__.lower()),
             args=(obj.content_object.id, ))
         return "<a href='{}'>{}</a>".format(url, obj.content_object)

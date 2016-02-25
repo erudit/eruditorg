@@ -15,15 +15,15 @@ class IndividualAccountBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
                             self).get_breadcrumbs()
         breadcrumbs.append(Breadcrumb(
             _("Abonnements individuels"),
-            pattern_name='userspace:individual_subscription:account_list'))
+            pattern_name='userspace:subscription:account_list'))
         return breadcrumbs
 
 
 class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
-    permission_required = 'individual_subscription.manage_account'
+    permission_required = 'subscription.manage_account'
 
     def get_queryset(self):
         qs = IndividualAccount.objects.order_by('-id')
         ids = [account.id for account in qs if self.request.user.has_perm(
-               'individual_subscription.manage_account', account)]
+               'subscription.manage_account', account)]
         return qs.filter(id__in=ids)

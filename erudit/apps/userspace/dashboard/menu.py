@@ -37,15 +37,15 @@ permissions = menu.AnyPermissionsNode(
     context={'icon': 'fa-lock'},
 )
 
-individual_subscription = menu.AnyPermissionsNode(
-    id='individual_subscription',
+subscription = menu.AnyPermissionsNode(
+    id='subscription',
     label=_('Abonnements individuels'),
-    pattern_name='userspace:individual_subscription:account_list',
-    permissions=['individual_subscription.manage_account', ],
+    pattern_name='userspace:subscription:account_list',
+    permissions=['subscription.manage_account', ],
     context={'icon': 'fa-users'},
 )
 
 userspace.children.append(journal)
 userspace.children.append(editor)
 userspace.children.append(permissions)
-userspace.children.append(individual_subscription)
+userspace.children.append(subscription)
