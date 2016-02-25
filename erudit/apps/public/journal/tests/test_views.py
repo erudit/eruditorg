@@ -7,6 +7,7 @@ import unittest.mock
 
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
+from django.test.utils import override_settings
 
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleRawPdfView
@@ -22,6 +23,7 @@ from erudit.tests import BaseEruditTestCase
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
+@override_settings(DEBUG=True)
 class TestJournalDetailView(BaseEruditTestCase):
     def test_can_embed_the_journal_information_in_the_context_if_available(self):
         # Setup
@@ -166,6 +168,7 @@ class TestArticlePdfView(BaseEruditTestCase):
         self.assertEqual(response.context['article_id'], article_id)
 
 
+@override_settings(DEBUG=True)
 class TestIssueDetailView(BaseEruditTestCase):
     def test_works_with_pks(self):
         # Setup
@@ -189,6 +192,7 @@ class TestIssueDetailView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
 
 
+@override_settings(DEBUG=True)
 class TestArticleDetailView(BaseEruditTestCase):
     def setUp(self):
         super(TestArticleDetailView, self).setUp()

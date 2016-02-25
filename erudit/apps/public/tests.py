@@ -3,11 +3,13 @@
 import datetime as dt
 
 from django.core.urlresolvers import reverse
+from django.test.utils import override_settings
 
 from erudit.factories import IssueFactory
 from erudit.tests import BaseEruditTestCase
 
 
+@override_settings(DEBUG=True)
 class TestHomeView(BaseEruditTestCase):
     def test_embeds_the_latest_issues_into_the_context(self):
         # Setup

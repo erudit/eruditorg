@@ -43,11 +43,11 @@ class TestAuthorArticlesFilter(BaseEruditTestCase):
         # Setup
         other_journal = JournalFactory.create(publishers=[self.publisher])
         other_issue = IssueFactory.create(
-            journal=other_journal, date_published=dt.datetime.now(), localidentifier='test')
+            journal=other_journal, date_published=dt.datetime.now())
         other_article = ArticleFactory.create(issue=other_issue)
 
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            journal=self.journal, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
 
         author = AuthorFactory.create()

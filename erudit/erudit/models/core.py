@@ -267,7 +267,7 @@ class Journal(FedoraMixin, Named, Edinum):
 
     localidentifier = models.CharField(
         max_length=50,
-        null=True, blank=True,
+        unique=True,
         verbose_name=_("Identifiant Fedora")
     )
     """Fedora commons identifier. Used to implement the
@@ -481,12 +481,12 @@ class Issue(FedoraMixin, models.Model):
 
     localidentifier = models.CharField(
         max_length=50,
-        null=True, blank=True,
+        unique=True,
         verbose_name=_("Identifiant Fedora")
     )
     """ The ``Fedora`` identifier of an issue """
 
-    # status { in_production, published }
+    # status { in_production, published }ull=True, blank=True,
 
     # Fedora-related methods
     # --
@@ -498,11 +498,10 @@ class Issue(FedoraMixin, models.Model):
         return EruditPublication
 
     def get_full_identifier(self):
-        if self.localidentifier and self.journal.localidentifier:
-            return "{}.{}".format(
-                self.journal.get_full_identifier(),
-                self.localidentifier
-            )
+        return "{}.{}".format(
+            self.journal.get_full_identifier(),
+            self.localidentifier
+        )
 
     def get_absolute_url(self):
         return reverse_url(
@@ -527,7 +526,7 @@ class EruditDocument(models.Model):
 
     localidentifier = models.CharField(
         max_length=50,
-        null=True, blank=True,
+        unique=True,
         verbose_name=_("Identifiant Fedora")
     )
     """ The ``Fedora`` identifier of an article """
@@ -576,11 +575,10 @@ class Article(EruditDocument, FedoraMixin):
         return EruditArticle
 
     def get_full_identifier(self):
-        if self.localidentifier and self.issue.localidentifier:
-            return "{}.{}".format(
-                self.issue.get_full_identifier(),
-                self.localidentifier
-            )
+        return "{}.{}".format(
+            self.issue.get_full_identifier(),
+            self.localidentifier
+        )
 
     @property
     def open_access(self):
