@@ -1,4 +1,5 @@
 from .core import *   # noqa
+from .event import *   # noqa
 from .dissemination import *  # noqa
 from .finance import *  # noqa
 from .grant import *  # noqa

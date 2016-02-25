@@ -13,6 +13,7 @@ from navutils import Breadcrumb
 
 from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
 from apps.userspace.viewmixins import LoginRequiredMixin
+from erudit.models.event import Event
 from core.editor.models import IssueSubmission
 from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
 
@@ -61,7 +62,16 @@ class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
                 v[0] for v in journal.members.values_list('id')]
 
         context.update({'journals': json.dumps(membership)})
+        # In this view, we have a widget, django_select2, that has its JS loaded in the "extrahead"
+        # block through {{ form.media }}. Because this outputs CSS at the same time as JS, we can't
+        # move this to the footer, so we need jquery in the head.
+        context['put_js_in_head'] = True
         return context
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        Event.create_submission(author=self.request.user, submission=form.instance)
+        return result
 
 
 class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin,
