@@ -49,3 +49,26 @@
 </nav>
 
 {% endblock %}
+
+{% block footer %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <p class="lead">{% trans "Votre accès Érudit" %}</p>
+          {% if request.subscription_type == 'institution' %}
+            <p class="text-muted">{{ request.institutional_account.institution.name }}</p>
+            {% if request.institutional_account.badge %}
+              <img src="{{ request.institutional_account.badge.url }}" alt="" />
+            {% endif %}
+          {% elif request.subscription_type == 'individual' %}
+
+          {% elif request.subscription_type == 'open_access' %}
+            <p class="text-muted">{% trans "Libre accès" %}</p>
+          {% endif %}
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+{% endblock footer %}

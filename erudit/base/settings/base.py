@@ -187,6 +187,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'core.subscription.middleware.SubscriptionMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
@@ -204,6 +205,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.template.context_processors.static',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
@@ -271,6 +273,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
 
