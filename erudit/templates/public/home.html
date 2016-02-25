@@ -1,8 +1,17 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 {% load static %}
+{% load pipeline %}
 
 {% block page-title %}{% trans "Accueil" %}{% endblock page-title %}
+
+{% block extrahead %}
+  {% if DEBUG %}
+    <link rel="stylesheet" href="{% static 'vendor/video.js/dist/video-js.min.css' %}" />
+  {% else %}
+    {% stylesheet 'videojs' %}
+  {% endif %}
+{% endblock extrahead %}
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
@@ -35,11 +44,75 @@
     </div>
   </div>
   {% endif %}
+  {% if upcoming_journals %}
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Prochainement disponible" %}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          {% for journal in upcoming_journals %}
+          <div class="col-md-4">
+            <div class="image-wrapper">
+              <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="{{ journal.name }}" />
+            </div>
+            <h3>{{ journal.name }}</h3>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
   <br />
   <div class="row">
     <div class="col-md-12">
       <a href="{% url 'public:journal:journal-list' %}">{% trans "Toutes les revues" %}</a>
     </div>
   </div>
+  <br />
+  <div class="row">
+    <div class="col-md-8">
+      <div class="well">
+        <h4>{% trans "Actualités" %}</h4>
+        <div class="entries-wrapper">
+          {% for entry in latest_news %}
+            <div class="entry">
+              <a href="{{ entry.link }}">{{ entry.title }}</a>
+              <p class="summary">{{ entry.summary|safe }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="well">
+        <h4>{% trans "À propos" %}</h4>
+        <video
+          id="about_erudit_video"
+          class="video-js vjs-default-skin"
+          controls
+          preload="auto"
+          width="auto" height="auto"
+          data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'
+        >
+        </video>
+        <a href="http://apropos.erudit.org" class="btn btn-block btn-primary">{% trans "En savoir plus" %}</a>
+        <br />
+        <p>{% lorem 30 w random %}</p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
+
+{% block footerscript %}
+  {% if DEBUG %}
+    <script type="text/javascript" src="{% static 'vendor/video.js/dist/video.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendor/videojs-vimeo/src/Vimeo.js' %}"></script>
+  {% else %}
+    {% javascript 'videojs' %}
+  {% endif %}
+{% endblock footerscript %}
