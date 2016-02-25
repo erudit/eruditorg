@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 from feedparser import parse as rss_parse
 
 from erudit.models import Issue
+from erudit.models import Journal
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +29,9 @@ class HomeView(TemplateView):
         # Includes the 'apropos' news ; note that this is a temporary behavior as
         # these news will likely be included in the new Érudit website in the future.
         context['latest_news'] = self.fetch_apropos_news()
+
+        # Includes some upcoming journals
+        context['upcoming_journals'] = Journal.upcoming_objects.order_by('?')[:3]
 
         return context
 

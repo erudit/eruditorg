@@ -44,6 +44,28 @@
     </div>
   </div>
   {% endif %}
+  {% if upcoming_journals %}
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Prochainement disponible" %}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          {% for journal in upcoming_journals %}
+          <div class="col-md-4">
+            <div class="image-wrapper">
+              <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="{{ journal.name }}" />
+            </div>
+            <h3>{{ journal.name }}</h3>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
   <br />
   <div class="row">
     <div class="col-md-12">
