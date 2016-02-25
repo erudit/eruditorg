@@ -161,7 +161,7 @@ PIPELINE = {
         'videojs': {
             'source_filenames': (
                 'vendor/video.js/dist/video.min.js',
-                'vendor/videojs-vimeo/src/Vimeo.js',
+                'vendor/videojs-vimeo/dist/Vimeo.js',
             ),
             'output_filename': 'js/videojs.min.js',
         },

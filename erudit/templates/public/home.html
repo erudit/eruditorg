@@ -111,7 +111,7 @@
 {% block footerscript %}
   {% if DEBUG %}
     <script type="text/javascript" src="{% static 'vendor/video.js/dist/video.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendor/videojs-vimeo/src/Vimeo.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendor/videojs-vimeo/dist/Vimeo.js' %}"></script>
   {% else %}
     {% javascript 'videojs' %}
   {% endif %}
