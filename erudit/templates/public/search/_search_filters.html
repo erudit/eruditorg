@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load search_tags %}
+
+{% if filter_choices %}
+<fieldset>
+    <legend>{% trans "Filtrer les résultats" %}</legend>
+    <div>
+        {% for filter_choice_name, filter_choice_details in filter_choices.items %}
+        <div id="div_id_{{ filter_choice_name }}_filter" class="form-group">
+            <label for="id_{{ filter_choice_name }}_filter_0" class="control-label ">{{ filter_choice_details.label }}</label>
+            <div class="controls">
+                {% for label, count in filter_choice_details.values.items %}
+                <div class="checkbox"><label class=""><input type="checkbox" name="{{ filter_choice_name }}_filter" id="id_{{ filter_choice_name }}_filter_{{ forloop.counter }}" value="{{ label }}" {% is_search_filter_value_selected selected_filters filter_choice_name|add:"_filter" label %}>{{ label }} ({{ count }})</label></div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+</div>
+</fieldset>
+{% endif %}

@@ -26,6 +26,18 @@ class Search(FormView):
     context_object_name = "documents"
     template_name = "public/search/search.html"
     form_class = forms.SearchForm
+    solr_conn = solr.Solr()
+    limit_filter_fields = [
+        "years",
+        "article_types",
+        "languages",
+        "collections",
+        "authors",
+        "funds",
+        "publication_types",
+    ]   # Filter fields available
+    filter_choices = {}
+    selected_filters = {}
 
     def get_solr_data(self, form):
         """Query solr"""
@@ -41,28 +53,20 @@ class Search(FormView):
 
         else:
             try:
-                solr_conn = solr.Solr()
-                return solr_conn.simple_search(
+                return self.solr_conn.simple_search(
                     search_term=self.search_term,
                     sort=self.sort,
                     sort_order=self.sort_order,
                     start_at=self.start_at,
                     results_per_query=self.results_per_query,
+                    limit_filter_fields=self.limit_filter_fields
                 )
 
             except:
                 return None
 
-    def get_queryset(self, solr_data):
+    def get_queryset(self, doc_ids):
         """Query Django models using Solr data"""
-
-        doc_ids = []
-        for doc in solr_data["response"]["docs"]:
-            doc_id = doc.get("ID", None)
-
-            if doc_id:
-                doc_ids.append(doc_id)
-
         return self.model.objects.all().filter(localidentifier__in=doc_ids)
 
     def get(self, request, *args, **kwargs):
@@ -87,22 +91,31 @@ class Search(FormView):
         initial["sort_order"] = self.request.GET.get("sort_order", None)
         initial["page"] = self.request.GET.get("page", 1)
 
+        # Get selected filter fields
+        for field in self.limit_filter_fields:
+            filter_name = "{field}_filter".format(field=field)
+            self.selected_filters[filter_name] = self.request.GET.getlist(filter_name)
+
         return initial
 
     def form_valid(self, form):
         solr_data = self.get_solr_data(form=form)
 
-        try:
-            self.results_count = solr_data["response"]["numFound"]
-        except:
-            self.results_count = 0
+        if solr_data:
+            # Number of results returned by Solr
+            self.results_count = solr_data["results_count"]
 
-        try:
-            self.page_count = ceil(self.results_count / self.results_per_query)
-        except:
-            self.page_count = 1
+            # Number of pages
+            try:
+                self.page_count = ceil(self.results_count / self.results_per_query)
+            except:
+                self.page_count = 1
 
-        self.object_list = self.get_queryset(solr_data=solr_data)
+            # Buld available filters
+            self.filter_choices = solr_data["filter_choices"]
+
+            # Get EruditDocument objects from returned IDs
+            self.object_list = self.get_queryset(doc_ids=solr_data["doc_ids"])
 
         # return super(Search, self).form_valid(form)
         return self.render_to_response(self.get_context_data(form=form))
@@ -114,5 +127,7 @@ class Search(FormView):
         context["results_count"] = self.results_count
         context["page_count"] = self.page_count
         context["current_page"] = self.page
+        context["filter_choices"] = self.filter_choices
+        context["selected_filters"] = self.selected_filters
 
         return context

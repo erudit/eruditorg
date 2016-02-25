@@ -30,3 +30,19 @@ def search_result_pagination(context, ):
         pages_urls.append({"page": (page_number + 1), "url": page_url})
 
     return {"pages_urls": pages_urls, "current_page": current_page, "page_count": page_count}
+
+
+@register.inclusion_tag("public/search/_search_filters.html", takes_context=True)
+def search_filters(context, ):
+    filter_choices = context["filter_choices"]
+    selected_filters = context["selected_filters"]
+
+    return {"filter_choices": filter_choices, "selected_filters": selected_filters}
+
+
+@register.simple_tag
+def is_search_filter_value_selected(selected_filters, filter_name, filter_value):
+    if str(filter_value) in selected_filters.get(filter_name, []):
+        return 'checked="checked"'
+    else:
+        return ""
