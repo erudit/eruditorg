@@ -5,6 +5,12 @@
 /**
 * Font-weight functions
 */
+/**
+* Create a top or bottom border for Bootstrap's grid cell
+*/
+/**
+* Vendors prefixes
+*/
 @import url(../vendor/ionicons/css/ionicons.css);
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -356,7 +362,7 @@ h3, .h3 {
   font-size: 24px; }
 
 h4, .h4 {
-  font-size: 18px; }
+  font-size: 20px; }
 
 h5, .h5 {
   font-size: 14px; }
@@ -3192,7 +3198,7 @@ tbody.collapse.in {
       padding: 0 5px;
       color: #ccc; }
   .breadcrumb > .active {
-    color: #979797; }
+    color: #AF2329; }
 
 .pagination {
   display: inline-block;
@@ -4769,7 +4775,10 @@ html {
  * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
  */
 body {
-  background: #fff; }
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  -moz-osx-font-smoothing: grayscale; }
 
 /**
 * Freight Text
@@ -4943,7 +4952,7 @@ h3, .h3 {
   font-size: 24px; }
 
 h4, .h4 {
-  font-size: 18px; }
+  font-size: 20px; }
 
 h5, .h5 {
   font-size: 14px; }
@@ -5370,6 +5379,50 @@ main, .main {
   main, .main {
     padding-left: 45px; } }
 
+/**
+* Main site footer
+*/
+footer#site-footer {
+  margin-top: 44px;
+  /**
+  * Footer nav elements
+  */
+  /**
+  * bottom part
+  */
+  /**
+  * social icons
+  */ }
+  footer#site-footer #footer-nav {
+    padding-top: 88px;
+    padding-bottom: 44px;
+    font-size: 18px;
+    position: relative; }
+    footer#site-footer #footer-nav:before {
+      content: "";
+      display: block;
+      height: 1px;
+      border-top: 3px solid #000;
+      position: absolute;
+      left: 11px;
+      right: 11px;
+      top: 0; }
+    footer#site-footer #footer-nav li {
+      margin-bottom: 5px; }
+  footer#site-footer #footer-legal {
+    background-color: #000;
+    padding-top: 44px;
+    padding-bottom: 44px;
+    color: #fff; }
+    footer#site-footer #footer-legal p {
+      margin-bottom: 0; }
+    footer#site-footer #footer-legal a {
+      color: #fff; }
+  footer#site-footer .social-icons {
+    font-size: 24px; }
+    footer#site-footer .social-icons a {
+      margin-right: 7px; }
+
 table {
   font-size: 0.85em;
   width: 100%;
@@ -5751,6 +5804,57 @@ label.required:after {
   background: #AF2329;
   color: #FFF; }
 
+/**
+* Default drop down
+*/
+.dropdown {
+  position: relative; }
+  .dropdown a {
+    -webkit-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms; }
+  .dropdown > a.select {
+    display: block;
+    padding: 11px 22px;
+    border: 1px solid #000;
+    font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #fff; }
+    .dropdown > a.select i {
+      float: right; }
+  .dropdown > ul {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    list-style: none;
+    margin: 0; }
+    .dropdown > ul li {
+      margin: 0 !important; }
+    .dropdown > ul a {
+      padding: 11px 22px;
+      border: 1px solid #000;
+      border-top: none;
+      display: block; }
+      .dropdown > ul a:hover {
+        background-color: #000;
+        color: #fff;
+        text-decoration: none; }
+  .dropdown:hover > a {
+    background-color: #000;
+    color: #fff;
+    text-decoration: none; }
+    .dropdown:hover > a i {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+      margin-top: -5px; }
+  .dropdown:hover > ul {
+    display: block;
+    width: 100%; }
+
 .alert {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -5967,6 +6071,9 @@ section#article-detail {
   */
   /**
   * Footer elements (grannexe | merci | grnotebio | grnote | grbiblio)
+  */
+  /**
+  * Related articles
   */ }
   section#article-detail a {
     color: #FF4242; }
@@ -5978,9 +6085,9 @@ section#article-detail {
       height: 1px;
       border-top: 1px solid #000;
       position: absolute;
-      top: 0;
       left: 11px;
-      right: 11px; }
+      right: 11px;
+      top: 0; }
   section#article-detail header.article-header h2 {
     margin: 0;
     font-size: 36px;
@@ -5996,7 +6103,7 @@ section#article-detail {
       margin-bottom: 22px; }
     section#article-detail header.article-header hgroup h3 {
       margin-bottom: 0;
-      font-size: 18px;
+      font-size: 20px;
       font-family: "Maax-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
     section#article-detail header.article-header hgroup h4 {
       font-size: 14px;
@@ -6070,6 +6177,24 @@ section#article-detail {
           display: block; } }
   section#article-detail .article-notes h5 {
     font-size: 24px; }
+  section#article-detail .article-notes p {
+    font-family: "FreightTextBook", Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.5em; }
+    section#article-detail .article-notes p .normal {
+      font-family: "FreightTextBook", Georgia, "Times New Roman", Times, serif; }
+    section#article-detail .article-notes p .italic, section#article-detail .article-notes p em, section#article-detail .article-notes p i {
+      font-family: "FreightTextBookItalic", Georgia, "Times New Roman", Times, serif; }
+    section#article-detail .article-notes p .bold, section#article-detail .article-notes p strong, section#article-detail .article-notes p b {
+      font-family: "FreightTextBold", Georgia, "Times New Roman", Times, serif; }
+    section#article-detail .article-notes p .italic strong,
+    section#article-detail .article-notes p em strong,
+    section#article-detail .article-notes p strong em,
+    section#article-detail .article-notes p i strong,
+    section#article-detail .article-notes p strong i,
+    section#article-detail .article-notes p b i,
+    section#article-detail .article-notes p i b {
+      font-family: "FreightTextBoldItalic", Georgia, "Times New Roman", Times, serif; }
   section#article-detail .article-notes article {
     position: relative;
     margin-bottom: 22px;
@@ -6095,3 +6220,37 @@ section#article-detail {
       left: -35px;
       text-align: right;
       width: 25px; }
+  section#article-detail .related-articles {
+    padding-top: 44px;
+    padding-bottom: 44px;
+    margin-bottom: 44px;
+    position: relative; }
+    section#article-detail .related-articles:before {
+      content: "";
+      display: block;
+      height: 1px;
+      border-top: 2px solid #979797;
+      position: absolute;
+      left: 11px;
+      right: 11px;
+      top: 0; }
+    section#article-detail .related-articles > header h2 {
+      margin-bottom: 88px; }
+    section#article-detail .related-articles article {
+      position: relative;
+      padding-top: 22px; }
+      section#article-detail .related-articles article:before {
+        content: "";
+        display: block;
+        height: 1px;
+        border-top: 1px solid #979797;
+        position: absolute;
+        left: 11px;
+        right: 11px;
+        top: 0; }
+      section#article-detail .related-articles article a {
+        color: #333333; }
+      section#article-detail .related-articles article h4 {
+        margin-bottom: 22px; }
+      section#article-detail .related-articles article h5 {
+        color: #979797; }

@@ -334,6 +334,10 @@ RAVEN_CONFIG = {
     'dsn': None,
 }
 
+# MailChimp settings
+MAILCHIMP_UUID = ""
+MAILCHIMP_ACTION_URL = ""
+
 try:
     from .settings_env import *  # noqa
 except ImportError:

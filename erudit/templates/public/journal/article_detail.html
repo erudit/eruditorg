@@ -33,7 +33,34 @@
 
   {% endif %}
 
+  {# XSL transformation article render #}
   {% render_article article %}
+
+  {# article footer with related articles #}
+  {% if related_articles %}
+  <footer class="related-articles row">
+
+    <header class="col-xs-12">
+      <h2>Pour aller plus loin</h2>
+    </header>
+
+    {% for related_article in related_articles %}
+    <article class="related-article col-sm-6 col-md-3">
+      <h4>
+        <a href="{{ related_article.get_absolute_url }}">{{ related_article.title }}</a>
+      </h4>
+      <footer class="meta">
+        {% if related_article.authors.all|length > 0 %}
+        <h5 class="h4">Par {{ related_article.authors.all|join:", " }}</h5>
+        {% endif %}
+      </footer>
+    </article>
+    {% endfor %}
+
+    <div class="clearfix"></div>
+
+  </footer>
+  {% endif %}
 
 </section>
 

@@ -14,7 +14,11 @@
 
 {% block content %}
 
-  <h1>{{ issue.title }}</h1>
+<section id="issue-detail" class="container">
+
+  <header>
+    <h1>{{ issue.title }}</h1>
+  </header>
 
   {% for article in articles %}
     <article>
@@ -25,5 +29,7 @@
       </nav>
     </article>
   {% endfor %}
+
+</section>
 
 {% endblock %}

@@ -38,17 +38,7 @@ section#article-detail {
 
   // add a vertical line before each hgroup
   .border-top {
-    position: relative;
-    &:before {
-      content: "";
-      display: block;
-      height: 1px;
-      border-top: 1px solid $gray-base;
-      position: absolute;
-      top: 0;
-      left: $grid-gutter-width/2;
-      right: $grid-gutter-width/2;
-    }
+    @include grid-cell-border();
   }
 
 
@@ -213,6 +203,10 @@ section#article-detail {
       font-size: $font-size-h3;
     }
 
+    p {
+      @include paragraph-text-style(14px);
+    }
+
     article {
       position: relative;
       margin-bottom: $margin-vertical-default/2;
@@ -229,6 +223,44 @@ section#article-detail {
 
   }
 
+
+  /**
+  * Related articles
+  */
+
+  .related-articles {
+    padding-top: $margin-vertical-default;
+    padding-bottom: $margin-vertical-default;
+    margin-bottom: $margin-vertical-default;
+    @include grid-cell-border($direction: 'top', $border-width: 2px, $border-color: $gray-light);
+    // @include grid-cell-border($direction: 'bottom', $border-width: 3px);
+
+    > header {
+      // margin-bottom: $margin-vertical-default/2;
+      h2 {
+        margin-bottom: $margin-vertical-default*2;
+      }
+    }
+
+    article {
+      @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $gray-light);
+      padding-top: $margin-vertical-default/2;
+
+      a {
+        color: $text-color;
+      }
+
+      h4 {
+        margin-bottom: $margin-vertical-default/2;
+      }
+
+      h5 {
+        color: $gray-light;
+      }
+
+    }
+
+  }
 
 
 }

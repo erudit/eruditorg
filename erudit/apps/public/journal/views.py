@@ -183,6 +183,17 @@ class ArticleDetailView(ArticleAccessCheckMixin, DetailView):
 
         return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
+    def get_context_data(self, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+
+        # Get all article from associated Issue
+        related_articles = Article.objects.all().filter(issue=self.get_object().issue)
+
+        # return 4 randomly
+        context['related_articles'] = related_articles.order_by('?')[:4]
+
+        return context
+
 
 class ArticlePdfView(TemplateView):
     """

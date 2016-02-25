@@ -1767,7 +1767,7 @@
 					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='es']" mode="lim"/>
 					<xsl:apply-templates select="alinea"/>
 					<xsl:apply-templates/>
-				</p>				
+				</p>
 				<xsl:if test="//grmotcle[@lang='es']/motcle">
 					<footer class="keywords">
 						<h5>Palabras clave : </h5>
