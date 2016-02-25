@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
-from core.individual_subscription.models import IndividualAccount
+from core.subscription.models import IndividualAccount
 from apps.userspace.viewmixins import (LoginRequiredMixin,
                                        UserspaceBreadcrumbsMixin)
 

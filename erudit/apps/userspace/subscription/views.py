@@ -6,7 +6,7 @@ from django_filters.views import FilterView
 from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
-from core.userspace.viewmixins import LoginRequiredMixin
+from apps.userspace.viewmixins import LoginRequiredMixin
 from core.subscription.models import IndividualAccount
 
 from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
