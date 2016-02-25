@@ -7,10 +7,11 @@ from django.core.urlresolvers import reverse as reverse_url
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, EruditArticle
 
-from erudit.fedora.conf import settings as fedora_settings
-from erudit.fedora.modelmixins import FedoraMixin
-from erudit.fedora.objects import JournalDigitalObject, ArticleDigitalObject
-from erudit.fedora.objects import PublicationDigitalObject
+from ..fedora.conf import settings as fedora_settings
+from ..fedora.modelmixins import FedoraMixin
+from ..fedora.objects import JournalDigitalObject, ArticleDigitalObject
+from ..fedora.objects import PublicationDigitalObject
+from ..managers import JournalUpcomingManager
 
 
 # choices
@@ -336,6 +337,14 @@ class Journal(FedoraMixin, Named, Edinum):
         verbose_name=_("Membres")
     )
     """ Users that are part of this journal's organization """
+
+    upcoming = models.BooleanField(
+        default=False,
+        verbose_name=_('Prochainement disponible'),
+    )
+
+    objects = models.Manager()
+    upcoming_objects = JournalUpcomingManager()
 
     # Fedora-related methods
     # --
