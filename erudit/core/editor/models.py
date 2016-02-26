@@ -1,9 +1,21 @@
+from copy import deepcopy
+
 from django.db import models
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 from django_fsm import FSMField, transition
+
+
+class LastVersionManager(models.Manager):
+    """
+    Return only last version issues
+    """
+    def get_queryset(self):
+        qs = super(LastVersionManager, self).get_queryset()
+        return qs.filter(parent__isnull=True)
 
 
 class IssueSubmission(models.Model):
@@ -19,7 +31,10 @@ class IssueSubmission(models.Model):
         (VALID, _("Validé"))
     )
 
-    status = FSMField(default=DRAFT, protected=True)
+    objects = models.Manager()
+    head = LastVersionManager()
+
+    status = FSMField(default=DRAFT, protected=False)
 
     journal = models.ForeignKey(
         'erudit.journal',
@@ -42,9 +57,13 @@ class IssueSubmission(models.Model):
         verbose_name=_("Numéro")
     )
 
-    date_created = models.DateField(
+    date_created = models.DateTimeField(
         verbose_name=_("Date de l'envoi"),
-        auto_now_add=True
+    )
+
+    date_modified = models.DateTimeField(
+        verbose_name=_("Date de modification"),
+        auto_now=True
     )
 
     contact = models.ForeignKey(
@@ -60,6 +79,9 @@ class IssueSubmission(models.Model):
     submissions = models.ManyToManyField(
         'plupload.ResumableFile'
     )
+
+    parent = models.OneToOneField(
+        'self', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return "{} - {}, volume {}".format(
@@ -100,7 +122,37 @@ class IssueSubmission(models.Model):
         """
         Resend the issue for modifications
         """
-        pass
+        copy = self.save_version()
+        copy.status = IssueSubmission.DRAFT
+        copy.save()
+
+    def save_version(self):
+        if self.parent is not None:
+            raise Exception(
+                "Version can't be created. This object is already one.")
+
+        copy = deepcopy(self)
+        copy.id = None
+        copy.date_created = self.date_created
+        copy.save()
+        self.parent = copy
+        self._save()
+        return copy
+
+    def _save(self, *args, **kwargs):
+        """
+        original save method renamed
+        """
+        super().save(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        """
+        Ensure an old version can't be modified.
+        """
+        if self.date_created is None:
+            self.date_created = timezone.now()
+        if self.parent is None:
+            super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = _("Envoi de numéro")
