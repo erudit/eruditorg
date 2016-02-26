@@ -1,37 +1,41 @@
 {% extends "public/search/base.html" %}
-{% load i18n staticfiles %}
+{% load i18n %}
+{% load search_tags %}
 {% load crispy_forms_tags %}
 
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
 
-{% block content-main %}
-<div class="search-form">
+{% block content %}
+<div class="container">
+<div class="search-form">
+    <form  action="{% url 'public:search:search' %}" id="id-search" class="search" method="get" >
     {% crispy form %}
+
+    {% search_filters %}
+
+    <div class="form-group">
+        <div class="controls ">
+            <input type="submit" name="submit" value="Recherche" class="btn btn-primary btn btn-primary" id="submit-id-submit"/>
+        </div>
+    </div>
+    </form>
 </div>
 
+{% if documents %}
 <div class="search-results">
     <h2>{% trans "Résultats" %}</h2>
     <p>{{ results_count }} {% trans "résultats trouvé" %}</p>
     <p>{% trans "Page" %} {{ current_page }} {% trans "de" %} {{ page_count }}</p>
-    {% if documents %}
     <ul>
         {% for document in documents %}
         <li>
-            <p>{{ document.Titre_fr }}</p>
-            {% if document.Auteur_fac %}
-            <ul>
-                {% for author in document.Auteur_fac %}
-                <li>{{ author }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% if document.AnneePublication %}
-            <p>{{ document.AnneePublication }}</p>
-            {% endif %}
-            <p><a href="#{{ document.ID }}">{% trans "Consulter le document" %}</a></p>
+            {% if document.article %}{% include "public/search/_article_preview.html" with article=document.article %}{% endif %}
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
 </div>
-{% endblock content-main %}
+
+{% search_result_pagination %}
+{% endif %}
+{% endblock content %}
+</div>

@@ -589,6 +589,16 @@ class Article(EruditDocument, FedoraMixin):
             self.localidentifier
         )
 
+    def get_absolute_url(self):
+        return reverse_url(
+            "public:journal:article-detail",
+            args=[
+                self.issue.journal.code,
+                self.issue.localidentifier,
+                self.localidentifier
+            ]
+        )
+
     @property
     def open_access(self):
         """ Returns a boolean indicating if the article is in open access. """
