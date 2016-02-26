@@ -10,7 +10,8 @@ class ReportingQuery(object):
     """
     filter_query_config = {
         'journal': '(RevueAbr:{journal} OR RevueID:{journal})',
-        'author': '(Auteur_tri:"{author}" OR Auteur_fac:"{author}")',
+        'author': '(Auteur_tri:*{author}* OR Auteur_fac:*{author}*)',
+        'year': 'AnneePublication:{year}',
     }
 
     def __init__(self, search=None, qs='*:*'):
