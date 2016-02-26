@@ -9,8 +9,19 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ReportingFilterForm(forms.Form):
-    journal = forms.CharField(max_length=255, label=_('Code revue'), required=False)
     author = forms.CharField(max_length=255, label=_('Auteur'), required=False)
+    journal = forms.CharField(max_length=255, label=_('Code revue'), required=False)
+    type = forms.ChoiceField(
+        label=_('Type'), required=False,
+        choices=[
+            ('', '----'),
+            ('Article', _('Article')),
+            ('Culturel', _('Culturel')),
+            ('Actes', _('Actes')),
+            ('Thèses', _('Thèses')),
+            ('Livres', _('Livres')),
+            ('Depot', _('Depot')),
+        ])
     year = forms.ChoiceField(label=_('Année'), required=False,)
 
     def __init__(self, *args, **kwargs):
@@ -18,7 +29,8 @@ class ReportingFilterForm(forms.Form):
         now_dt = dt.datetime.now()
 
         # Update some fields
-        self.fields['year'].choices = [(y, y) for y in range(now_dt.year-50, now_dt.year)]
+        self.fields['year'].choices = [('', '----')] \
+            + [(y, y) for y in range(now_dt.year-50, now_dt.year)]
 
         # TODO: remove crispy-forms
         self.helper = FormHelper()

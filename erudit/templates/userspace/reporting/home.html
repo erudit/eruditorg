@@ -30,6 +30,10 @@
             <b>{% trans "Répartition par auteur:" %}</b>&nbsp;
             {% for a in author_agg %}<span class="text-muted">{{ a.0 }}</span> ({{ a.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
           </div>
+          <div>
+            <b>{% trans "Répartition par type:" %}</b>&nbsp;
+            {% for t in type_agg %}<span class="text-muted">{{ t.0 }}</span> ({{ t.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
         {% else %}
           <b>
           {% blocktrans count counter=articles_count %}

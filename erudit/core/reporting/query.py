@@ -9,8 +9,9 @@ class ReportingQuery(object):
     information on the Érudit Solr index.
     """
     filter_query_config = {
-        'journal': '(RevueAbr:{journal} OR RevueID:{journal})',
         'author': '(Auteur_tri:*{author}* OR Auteur_fac:*{author}*)',
+        'journal': '(RevueAbr:{journal} OR RevueID:{journal})',
+        'type': 'Corpus_fac:{type}',
         'year': 'AnneePublication:{year}',
     }
 
@@ -39,7 +40,7 @@ class ReportingQuery(object):
         return default_search.search(self._qs, **{
             'rows': 1000000000,
             'facet': 'true',
-            'facet.field': ['NumeroID', 'AnneePublication', 'Auteur_tri', ],
+            'facet.field': ['NumeroID', 'AnneePublication', 'Auteur_tri', 'Corpus_fac', ],
         })
 
     results = property(get_results)

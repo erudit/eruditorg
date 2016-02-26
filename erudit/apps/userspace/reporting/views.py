@@ -49,10 +49,14 @@ class ReportingHomeView(FormView):
         author_facet = results.facets['facet_fields']['Auteur_tri']
         author_agg = list(zip(*[iter(author_facet)]*2))
 
+        # Prepares articles counts per type
+        type_facet = results.facets['facet_fields']['Corpus_fac']
+        type_agg = list(zip(*[iter(type_facet)]*2))
+
         return self.render_to_response(
             self.get_context_data(
                 form=form, results=results, year_agg=year_agg, issue_agg=issue_agg,
-                author_agg=author_agg))
+                author_agg=author_agg, type_agg=type_agg))
 
     def get_context_data(self, **kwargs):
         context = super(ReportingHomeView, self).get_context_data(**kwargs)
