@@ -2738,6 +2738,9 @@ section#article-detail {
   * each resume
   */
   /**
+  * Paragraph number
+  */
+  /**
   * keywords
   */
   /**
@@ -2858,6 +2861,8 @@ section#article-detail {
         text-decoration: none; }
         section#article-detail .article-table-of-contents li a.active, section#article-detail .article-table-of-contents li a:hover, section#article-detail .article-table-of-contents li a:active {
           color: #FF4242; }
+      section#article-detail .article-table-of-contents li ol li {
+        padding: 0.25em 0; }
   section#article-detail .article-tools {
     position: relative;
     padding-top: 44px;
@@ -2944,12 +2949,14 @@ section#article-detail {
       html.no-pointerevents.no-touchevents section#article-detail .article-tools li:hover ul, section#article-detail .article-tools li:active ul {
         display: block !important; }
   section#article-detail .article-body {
-    padding-top: 44px;
-    padding-right: 160px; }
+    padding-top: 44px; }
     section#article-detail .article-body h4 {
       margin-bottom: 22px;
       font-size: 30px;
       font-family: "Maax-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    section#article-detail .article-body h4.sub-section-title {
+      margin-top: 44px;
+      font-size: 20px; }
     section#article-detail .article-body p {
       font-family: "FreightTextBook", Georgia, "Times New Roman", Times, serif;
       font-size: 18px;
@@ -2968,6 +2975,17 @@ section#article-detail {
       section#article-detail .article-body p b i,
       section#article-detail .article-body p i b {
         font-family: "FreightTextBoldItalic", Georgia, "Times New Roman", Times, serif; }
+    section#article-detail .article-body blockquote, section#article-detail .article-body cite {
+      border-left: 1px solid #eeeeee;
+      margin-top: 44px;
+      margin-bottom: 44px;
+      padding-left: 44px;
+      padding-right: 44px; }
+      section#article-detail .article-body blockquote h1, section#article-detail .article-body blockquote h2, section#article-detail .article-body blockquote h3, section#article-detail .article-body blockquote h4, section#article-detail .article-body blockquote h5, section#article-detail .article-body blockquote p, section#article-detail .article-body cite h1, section#article-detail .article-body cite h2, section#article-detail .article-body cite h3, section#article-detail .article-body cite h4, section#article-detail .article-body cite h5, section#article-detail .article-body cite p {
+        font-family: "FreightTextBookItalic", Georgia, "Times New Roman", Times, serif; }
+      section#article-detail .article-body blockquote .source, section#article-detail .article-body cite .source {
+        font-family: "FreightTextBoldItalic", Georgia, "Times New Roman", Times, serif;
+        font-size: 14px; }
   section#article-detail .article-section {
     margin-bottom: 88px; }
   section#article-detail .resume {
@@ -2975,6 +2993,15 @@ section#article-detail {
     font-family: "FreightTextBook", Georgia, "Times New Roman", Times, serif;
     font-size: 18px;
     line-height: 1.5em; }
+  section#article-detail .nopara {
+    display: inline-block;
+    position: relative;
+    left: -40px;
+    bottom: -30px;
+    width: 25px;
+    text-align: right;
+    font-family: "FreightTextBold", Georgia, "Times New Roman", Times, serif;
+    font-size: 18px; }
   section#article-detail .keywords {
     margin-top: 22px; }
     section#article-detail .keywords h5 {

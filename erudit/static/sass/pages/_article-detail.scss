@@ -222,6 +222,14 @@ section#article-detail {
           color: $color-red;
         }
       }
+
+      // second level ol
+      ol {        
+        li {
+          padding: 0.25em 0;
+        }
+      }
+
     }
 
   }
@@ -333,7 +341,7 @@ section#article-detail {
   */
   .article-body {
     padding-top: $margin-vertical-default;
-    padding-right: $article-toolbar-width * 2;
+    // padding-right: $article-toolbar-width * 2;
 
     // first level headings
     h4 {
@@ -342,9 +350,31 @@ section#article-detail {
       @include fw-sans-medium();
     }
 
+    h4.sub-section-title {
+      margin-top: $margin-vertical-default;
+      font-size: $font-size-h4;
+    }
+
     // P
     p {
       @include paragraph-text-style();
+    }
+
+    blockquote, cite {
+      border-left: 1px solid $gray-lighter;
+      margin-top: $margin-vertical-default;
+      margin-bottom: $margin-vertical-default;
+      padding-left: $grid-gutter-width * 2;
+      padding-right: $grid-gutter-width * 2;
+
+      h1, h2, h3, h4, h5, p {
+        @include fw-serif-normal-italic();
+      }
+
+      .source {
+        @include fw-serif-bold-italic();
+        font-size: 14px;
+      }
     }
 
   }
@@ -363,9 +393,23 @@ section#article-detail {
     margin-bottom: $margin-vertical-default*2;
 
     // default font style
-    font-family: $font-family-serif-regular;
+    @include fw-serif-normal();
     font-size: 18px;
     line-height: 1.5em;
+  }
+
+  /**
+  * Paragraph number
+  */
+  .nopara {
+    display: inline-block;
+    position: relative;
+    left: -40px;
+    bottom: -30px;
+    width: 25px;
+    text-align: right;
+    @include fw-serif-bold();
+    font-size: 18px;
   }
 
   /**

@@ -172,8 +172,10 @@
 								</xsl:if>
 								<li class="border-top">
 									<a href="#corps">Corps</a>
+									<ol class="unstyled">
+										<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
+									</ol>
 								</li>
-								<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
 								<xsl:if test="//grannexe">
 									<li class="border-top">
 										<a href="#grannexe">
@@ -319,12 +321,12 @@
 			</xsl:text>
 		</a>
 		<xsl:if test="titre">
-			<xsl:element name="h2">
+			<h4 class="sub-section-title">
 				<xsl:if test="titre/@traitementparticulier">
 					<xsl:attribute name="class">special</xsl:attribute>
 				</xsl:if>
 				<xsl:apply-templates select="titre"/>
-			</xsl:element>
+			</h4>
 		</xsl:if>
 		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
 	</xsl:template>
@@ -416,11 +418,10 @@
 		</p>
 	</xsl:template>
 	<xsl:template match="no" mode="para">
-		<div class="nopara">
+		<h5 class="nopara">
 			<xsl:apply-templates/>
-			<xsl:text>
-			</xsl:text>
-		</div>
+			<!-- <xsl:text></xsl:text> -->
+		</h5>
 	</xsl:template>
 	<xsl:template match="section1/alinea|section2/alinea|section3/alinea|section4/alinea|section5/alinea|section6/alinea|grannexe/alinea"  priority="1">
 		<p class="horspara">
@@ -460,9 +461,7 @@
 		<br/>
 	</xsl:template>
 	<xsl:template match="titre">
-		<span class="titre">
 			<xsl:apply-templates/>
-		</span>
 	</xsl:template>
 	<xsl:template match="elemliste">
 		<li>
@@ -1351,7 +1350,7 @@
   <xsl:template match="annexe">
       <div class="article-section-content" role="subsection">
           <xsl:if test="no or titre">
-              <h2 class="titreann">
+              <h4 class="titreann">
                   <xsl:if test="titre and no">
                       <xsl:apply-templates select="no"/>
                       <xsl:text>. </xsl:text>
@@ -1362,7 +1361,7 @@
                   <xsl:if test="no and not(titre)">
                       <xsl:apply-templates select="no"/>
                   </xsl:if>
-              </h2>
+              </h4>
           </xsl:if>
           <xsl:apply-templates select="section1"/>
           <xsl:apply-templates select="noteann"/>
