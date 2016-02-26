@@ -29,18 +29,22 @@ class Search(FormView):
     context_object_name = "documents"
     template_name = "public/search/search.html"
     form_class = forms.SearchForm
-    solr_conn = solr.Solr()
-    limit_filter_fields = [
-        "years",
-        "article_types",
-        "languages",
-        "collections",
-        "authors",
-        "funds",
-        "publication_types",
-    ]   # Filter fields available
-    filter_choices = {}
-    selected_filters = {}
+
+    def __init__(self, *args, **kwargs):
+        self.solr_conn = solr.Solr()
+        self.limit_filter_fields = [
+            "years",
+            "article_types",
+            "languages",
+            "collections",
+            "authors",
+            "funds",
+            "publication_types",
+        ]   # Filter fields available
+        self.filter_choices = {}
+        self.selected_filters = {}
+
+        return super(Search, self).__init__(*args, **kwargs)
 
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):

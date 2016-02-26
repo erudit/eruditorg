@@ -6,7 +6,8 @@
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
 
 {% block content %}
-<div class="search-form">
+<div class="container">
+<div class="search-form">
     <form  action="{% url 'public:search:search' %}" id="id-search" class="search" method="get" >
     {% crispy form %}
 
@@ -37,3 +38,4 @@
 {% search_result_pagination %}
 {% endif %}
 {% endblock content %}
+</div>
