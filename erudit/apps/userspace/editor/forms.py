@@ -38,12 +38,11 @@ class IssueSubmissionForm(forms.ModelForm):
         """ Disable all the fields of this form """
         fields = (
             'year', 'journal', 'contact', 'number',
-            'volume', 'comment',
-            'submissions',
+            'volume', 'comment', 'submissions',
         )
 
         for field in fields:
-            self.fields[field].widget.attrs['readonly'] = True
+            self.fields[field].widget.attrs['disabled'] = True
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
