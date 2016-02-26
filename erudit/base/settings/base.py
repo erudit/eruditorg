@@ -43,10 +43,12 @@ INSTALLED_APPS = (
     'apps.userspace.editor',
     'apps.userspace.journal',
     'apps.userspace.permissions',
+    'apps.userspace.reporting',
     'apps.userspace.subscription',
     'core.editor',
     'core.journal',
     'core.permissions',
+    'core.reporting',
     'core.subscription',
     'core.userspace',
 

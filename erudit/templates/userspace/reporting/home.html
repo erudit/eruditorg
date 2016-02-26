@@ -1,0 +1,45 @@
+{% extends "userspace/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags  %}
+
+{% block content-main %}
+  {% crispy form %}
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        {% if results|length >= 0 %}
+          <div>
+            <b>
+              {% blocktrans count counter=results|length %}
+                {{ counter }} article trouvé !
+              {% plural %}
+                {{ counter }} articles trouvés !
+              {% endblocktrans %}
+            </b>
+          </div>
+          <div>
+            <b>{% trans "Répartition par année:" %}</b>&nbsp;
+            {% for y in year_agg %}<span class="text-muted">{{ y.0 }}</span> ({{ y.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
+            <b>{% trans "Répartition par numéro:" %}</b>&nbsp;
+            {% for i in issue_agg %}<span class="text-muted">{{ i.0 }}</span> ({{ i.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
+            <b>{% trans "Répartition par auteur:" %}</b>&nbsp;
+            {% for a in author_agg %}<span class="text-muted">{{ a.0 }}</span> ({{ a.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+        {% else %}
+          <b>
+          {% blocktrans count counter=articles_count %}
+            Le corpus comporte {{ counter }} article.
+          {% plural %}
+            Le corpus comporte {{ counter }} articles.
+          {% endblocktrans %}
+          </b>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content-main %}
