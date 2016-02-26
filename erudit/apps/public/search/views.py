@@ -1,6 +1,8 @@
 import urllib
 from math import ceil
 from django.views.generic import FormView
+from django.views.decorators.cache import never_cache
+from django.utils.decorators import method_decorator
 
 from erudit.models import EruditDocument
 from . import solr, forms
@@ -40,6 +42,10 @@ class Search(FormView):
     filter_choices = {}
     selected_filters = {}
 
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        return super(Search, self).dispatch(*args, **kwargs)
+
     def get_solr_data(self, form):
         """Query solr"""
         self.search_term = form.cleaned_data.get("search_term", None)
@@ -72,7 +78,13 @@ class Search(FormView):
 
     def get(self, request, *args, **kwargs):
         """We want this form to handle GET method"""
-        return self.post(request, *args, **kwargs)
+        # return self.post(request, *args, **kwargs)
+
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def get_form_kwargs(self):
         """We want this form to handle GET method"""
@@ -94,11 +106,13 @@ class Search(FormView):
 
         # Get selected filter fields
         for field in self.limit_filter_fields:
-            filter_value = self.request.GET.getlist(field)
-            # Don't fill selected_filters with empty values
-            if filter_value:
-                cleaned_value = [urllib.parse.unquote_plus(value) for value in filter_value]
-                self.selected_filters[field] = cleaned_value
+            if self.request.GET.get(field, None):
+                filter_value = self.request.GET.getlist(field, None)
+                # Don't fill selected_filters with empty values
+                if filter_value:
+                    # Clean and quote filters
+                    cleaned_value = [urllib.parse.unquote_plus(value) for value in filter_value]
+                    self.selected_filters[field] = cleaned_value
 
         return initial
 

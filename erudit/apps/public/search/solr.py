@@ -68,13 +68,13 @@ class Solr(object):
 
         # If error, return empty results
         if not (response.status_code == requests.codes.ok):
-            return {}
+            return response.url, {}
 
         else:
             try:
-                return response.json()
+                return response.url, response.json()
             except:
-                return {}
+                return None, {}
 
     def clean_data(self, raw_data):
         cleaned_data = {
@@ -128,9 +128,14 @@ class Solr(object):
         query_filters = []
         for filter_name, filter_values in selected_filters.items():
             solr_field_name = self.filter_fields[filter_name]["field"]
+            # Wrap filters in quotes
+            filter_values = [
+                '"{filter_value}"'.format(filter_value=filter_value) for
+                filter_value in filter_values
+            ]
             query_filters.append("{field}:({values})".format(
                 field=solr_field_name,
-                values=" OR ".join(filter_values))
+                values=' OR '.join(filter_values))
             )
 
         return " ".join(query_filters)
@@ -203,4 +208,5 @@ class Solr(object):
                 pass
         params["facet.field"] = facet_fields
 
-        return self.clean_data(raw_data=self.search(params=params))
+        query_url, raw_data = self.search(params=params)
+        return self.clean_data(raw_data=raw_data)
