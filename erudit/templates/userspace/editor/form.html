@@ -9,6 +9,9 @@
 {{ form.media }}
 {% endblock %}
 
+{% block footerscript %}
+{% endblock %}
+
 {% load crispy_forms_tags %}
 {% block content-main %}
 <div id="id_editor_form_metadata" data-journals="{{ journals|safe }}"></div>
