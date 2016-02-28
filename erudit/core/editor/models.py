@@ -2,9 +2,9 @@ from copy import deepcopy
 
 from django.db import models
 from django.utils.translation import gettext as _
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.utils import timezone
 
 from django_fsm import FSMField, transition
 
@@ -58,12 +58,15 @@ class IssueSubmission(models.Model):
     )
 
     date_created = models.DateTimeField(
+        editable=False,
+        null=True,
         verbose_name=_("Date de l'envoi"),
     )
 
     date_modified = models.DateTimeField(
+        editable=False,
+        null=True,
         verbose_name=_("Date de modification"),
-        auto_now=True
     )
 
     contact = models.ForeignKey(
@@ -149,6 +152,7 @@ class IssueSubmission(models.Model):
         """
         Ensure an old version can't be modified.
         """
+        self.date_modified = timezone.now()
         if self.date_created is None:
             self.date_created = timezone.now()
         if self.parent is None:
