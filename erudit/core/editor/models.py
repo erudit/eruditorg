@@ -152,9 +152,9 @@ class IssueSubmission(models.Model):
         """
         Ensure an old version can't be modified.
         """
-        self.date_modified = timezone.now()
         if self.date_created is None:
             self.date_created = timezone.now()
+        self.date_modified = timezone.now()
         if self.parent is None:
             super().save(*args, **kwargs)
 
