@@ -53,3 +53,4 @@ django-navutils==0.5.4
 feedparser==5.2.1
 django-fsm==2.3.0
 pysolr==3.4.0
+fake-factory==0.5.3
