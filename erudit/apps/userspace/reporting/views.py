@@ -2,7 +2,8 @@
 
 from django.views.generic import FormView
 
-from core.reporting.query import ReportingQuery
+from core.reporting.search import search
+from core.solrq.query import Q
 
 from .forms import ReportingFilterForm
 
@@ -33,8 +34,19 @@ class ReportingHomeView(FormView):
 
     def form_valid(self, form):
         # Prepares the Reporting query
-        rq = ReportingQuery()
-        rq = rq.filter(**{k: v for k, v in form.cleaned_data.items() if v})
+        rq = search
+        for k, v in form.cleaned_data.items():
+            if not v:
+                continue
+
+            if isinstance(v, list):
+                q = Q(**{k: v[0]})
+                for iv in v[1:]:
+                    q |= Q(**{k: iv})
+                rq = rq.filter(q)
+            else:
+                rq = rq.filter(**{k: v})
+
         results = rq.results
 
         # Prepares articles counts per year
@@ -66,6 +78,6 @@ class ReportingHomeView(FormView):
         context = super(ReportingHomeView, self).get_context_data(**kwargs)
 
         # Includes the total number of articles in the context
-        context['articles_count'] = ReportingQuery().results.hits
+        context['articles_count'] = search.results.hits
 
         return context

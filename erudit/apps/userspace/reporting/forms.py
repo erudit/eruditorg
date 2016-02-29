@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 class ReportingFilterForm(forms.Form):
     author = forms.CharField(max_length=255, label=_('Auteur'), required=False)
     journal = forms.CharField(max_length=255, label=_('Code revue'), required=False)
-    type = forms.ChoiceField(
+    type = forms.MultipleChoiceField(
         label=_('Type'), required=False,
         choices=[
             ('', '----'),
