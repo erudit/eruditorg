@@ -41,6 +41,10 @@ class ReportingHomeView(FormView):
         year_facet = results.facets['facet_fields']['AnneePublication']
         year_agg = list(zip(*[iter(year_facet)]*2))
 
+        # Prepares articles counts per journal
+        journal_facet = results.facets['facet_fields']['RevueID']
+        journal_agg = list(zip(*[iter(journal_facet)]*2))
+
         # Prepares articles counts per issue
         issue_facet = results.facets['facet_fields']['NumeroID']
         issue_agg = list(zip(*[iter(issue_facet)]*2))
@@ -55,8 +59,8 @@ class ReportingHomeView(FormView):
 
         return self.render_to_response(
             self.get_context_data(
-                form=form, results=results, year_agg=year_agg, issue_agg=issue_agg,
-                author_agg=author_agg, type_agg=type_agg))
+                form=form, results=results, year_agg=year_agg, journal_agg=journal_agg,
+                issue_agg=issue_agg, author_agg=author_agg, type_agg=type_agg))
 
     def get_context_data(self, **kwargs):
         context = super(ReportingHomeView, self).get_context_data(**kwargs)

@@ -40,7 +40,14 @@ class ReportingQuery(object):
         return default_search.search(self._qs, **{
             'rows': 0,
             'facet': 'true',
-            'facet.field': ['NumeroID', 'AnneePublication', 'Auteur_tri', 'Corpus_fac', ],
+            'facet.field': [
+                'RevueID',
+                'NumeroID',
+                'AnneePublication',
+                'Auteur_tri',
+                'Corpus_fac',
+            ],
+            'facet.sort': 'index',
         })
 
     results = property(get_results)

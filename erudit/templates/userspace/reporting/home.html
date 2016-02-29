@@ -23,6 +23,10 @@
             {% for y in year_agg %}<span class="text-muted">{{ y.0 }}</span> ({{ y.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
           </div>
           <div>
+            <b>{% trans "Répartition par revue:" %}</b>&nbsp;
+            {% for j in journal_agg %}<span class="text-muted">{{ j.0 }}</span> ({{ j.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
             <b>{% trans "Répartition par numéro:" %}</b>&nbsp;
             {% for i in issue_agg %}<span class="text-muted">{{ i.0 }}</span> ({{ i.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
           </div>
