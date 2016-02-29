@@ -62,6 +62,6 @@ class ReportingHomeView(FormView):
         context = super(ReportingHomeView, self).get_context_data(**kwargs)
 
         # Includes the total number of articles in the context
-        context['articles_count'] = len(ReportingQuery().results)
+        context['articles_count'] = ReportingQuery().results.hits
 
         return context

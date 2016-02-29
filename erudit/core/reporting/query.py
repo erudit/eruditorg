@@ -38,7 +38,7 @@ class ReportingQuery(object):
     def get_results(self):
         """ Triggers the search and returns the results. """
         return default_search.search(self._qs, **{
-            'rows': 1000000000,
+            'rows': 0,
             'facet': 'true',
             'facet.field': ['NumeroID', 'AnneePublication', 'Auteur_tri', 'Corpus_fac', ],
         })
