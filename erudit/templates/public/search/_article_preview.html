@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<h3>{{ article.erudit_object.title }}</h3>
+{% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
+
+{% if article.erudit_object.authors %}
+<ul>
+    {% for author in article.erudit_object.authors %}
+    <li>{{ author.firstname }} {{ author.lastname }} ({{author.affiliations|join:","}})</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if article.year %}
+<p>{{ article.year }}</p>
+{% endif %}
+
+<p><a href="{{ article.get_absolute_url }}">{% trans "Consulter le document" %}</a></p>

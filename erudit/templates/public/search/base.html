@@ -1,1 +1,6 @@
-{% extends "userspace/base.html" %}
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:search:search' %}">{% trans "Recherche" %}</a>
+{% endblock %}
