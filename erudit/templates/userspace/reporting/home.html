@@ -1,0 +1,63 @@
+{% extends "userspace/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags  %}
+
+{% block content-main %}
+  {% crispy form %}
+  <div class="row">
+    <div class="col-md-12">
+      <a href="{% url 'userspace:reporting:csv-issue-export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
+        {% trans "CSV / Numéro" %}
+      </a>
+      <a href="{% url 'userspace:reporting:csv-journal-export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
+        {% trans "CSV / Revue" %}
+      </a>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        {% if results.hits >= 0 %}
+          <div>
+            <b>
+              {% blocktrans count counter=results.hits %}
+                {{ counter }} article trouvé !
+              {% plural %}
+                {{ counter }} articles trouvés !
+              {% endblocktrans %}
+            </b>
+          </div>
+          <div>
+            <b>{% trans "Répartition par année:" %}</b>&nbsp;
+            {% for y in year_agg %}<span class="text-muted">{{ y.0 }}</span> ({{ y.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
+            <b>{% trans "Répartition par revue:" %}</b>&nbsp;
+            {% for j in journal_agg %}<span class="text-muted">{{ j.0 }}</span> ({{ j.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
+            <b>{% trans "Répartition par numéro:" %}</b>&nbsp;
+            {% for i in issue_agg %}<span class="text-muted">{{ i.0 }}</span> ({{ i.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
+            <b>{% trans "Répartition par auteur:" %}</b>&nbsp;
+            {% for a in author_agg %}<span class="text-muted">{{ a.0 }}</span> ({{ a.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+          <div>
+            <b>{% trans "Répartition par type:" %}</b>&nbsp;
+            {% for t in type_agg %}<span class="text-muted">{{ t.0 }}</span> ({{ t.1 }}){% if not forloop.last %}, {% endif %}{% endfor %}
+          </div>
+        {% else %}
+          <b>
+          {% blocktrans count counter=articles_count %}
+            Le corpus comporte {{ counter }} article.
+          {% plural %}
+            Le corpus comporte {{ counter }} articles.
+          {% endblocktrans %}
+          </b>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content-main %}

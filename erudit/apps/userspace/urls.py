@@ -13,4 +13,5 @@ urlpatterns = [
     url(_(r'^permissions/'), include('apps.userspace.permissions.urls', namespace='permissions')),
     url(_(r'^organisations/'), include('apps.userspace.subscription.urls',
         namespace='subscription')),
+    url(_(r'^reporting/'), include('apps.userspace.reporting.urls', namespace='reporting')),
 ]
