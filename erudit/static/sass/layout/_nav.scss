@@ -30,7 +30,7 @@
       @include fw-sans-medium();
 
       &:hover {
-        color: $color-red;
+        color: $coral-red;
         text-decoration: none;
       }
 
@@ -109,16 +109,16 @@
         box-shadow: none;
         padding: 0;
         li {
-          border-bottom: 1px solid $colour-faint-grey;
+          border-bottom: 1px solid $light-grey;
           a {
-            color: $colour-dark-grey;
+            color: $dark-grey;
             padding: 10px;
             &.disabled {
-              color: $colour-pale-grey;
+              color: $light-grey;
               &:hover, &:active, &:focus, &:active:focus {
                 cursor: default;
                 background: none;
-                color: $colour-pale-grey;
+                color: $light-grey;
               }
             }
           }

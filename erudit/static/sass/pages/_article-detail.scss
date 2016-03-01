@@ -28,7 +28,7 @@ section#article-detail {
   */
 
   a {
-    color: $color-red;
+    color: $coral-red;
   }
 
 
@@ -219,7 +219,7 @@ section#article-detail {
         text-decoration: none;
 
         &.active, &:hover, &:active {
-          color: $color-red;
+          color: $coral-red;
         }
       }
 
@@ -320,7 +320,7 @@ section#article-detail {
       html.no-pointerevents.no-touchevents &:hover,
       &:active {
         & > button {
-          background: $colour-dark-grey;
+          background: $dark-grey;
 
           .tools-label {
             display: block;

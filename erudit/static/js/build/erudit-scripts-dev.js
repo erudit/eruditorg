@@ -94,26 +94,47 @@ ROUTER = {
 
 $(document).ready(ROUTER.init);
 
+ROUTER.registerController('public:home', {
 
-ROUTER.registerController('userspace:editor:form', {
   init: function() {
-    var journals = $('#id_editor_form_metadata').data('journals');
-    function resetContactField() {
-      $("#id_contact").val("");
-      $("#id_contact").find("option").hide();
-    }
-    $(document).ready(function() {
-      resetContactField();
-      $("#id_journal").change(function(){
-        var journal_id = $(this).val();
-        var members = journals[journal_id];
-        resetContactField();
-        for (len = members.length, i=0; i<len; ++i) {
-          $("#id_contact").find("option[value='"+members[i]+"']").show();
-        }
-      });
-    });
+  	this.layout();
+    this.sticky_elements();
+    this.smooth_scroll();
   },
+
+  layout : function () {
+
+  	var window_height 		= $(window).height(),
+  		sticky_nav_height 	= $('#homepage-content .homepage--sticky-nav').outerHeight(),
+  		header_height 		= window_height / 3 >> 0,
+  		search_height 		= window_height - header_height - sticky_nav_height;
+
+  	$('#homepage-header').css('height', header_height);
+  	$('#homepage-content .search-module').css('height', search_height);
+
+  	console.log( window_height, sticky_nav_height, header_height, search_height );
+  },
+
+  sticky_elements : function () {
+  	$('#homepage-content .homepage--sticky-nav').stick_in_parent();
+  },
+
+  smooth_scroll : function () {
+  	$('#homepage-content .homepage--sticky-nav').on('click', 'a', function(e) {
+  		if( e ) {
+  			e.preventDefault();
+  			e.stopPropagation();
+  		};
+
+  		var target = $(this).attr('href').replace('#', '');
+  		if( !target ) return false;
+
+		$('html, body').animate( { scrollTop: $('#homepage-content a[name="'+target+'"]').offset().top }, 750 );
+		return false;
+  	});
+  }
+
+
 });
 
 ROUTER.registerController('public:journal:article-detail', {
@@ -152,4 +173,25 @@ ROUTER.registerController('public:journal:article-detail', {
   }
 
 
+});
+
+ROUTER.registerController('userspace:editor:form', {
+  init: function() {
+    var journals = $('#id_editor_form_metadata').data('journals');
+    function resetContactField() {
+      $("#id_contact").val("");
+      $("#id_contact").find("option").hide();
+    }
+    $(document).ready(function() {
+      resetContactField();
+      $("#id_journal").change(function(){
+        var journal_id = $(this).val();
+        var members = journals[journal_id];
+        resetContactField();
+        for (len = members.length, i=0; i<len; ++i) {
+          $("#id_contact").find("option[value='"+members[i]+"']").show();
+        }
+      });
+    });
+  },
 });
