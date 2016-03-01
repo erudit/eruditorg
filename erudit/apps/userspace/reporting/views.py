@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
 
+import csv
+
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.http import StreamingHttpResponse
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
+from core.reporting.client import client
+from core.reporting.search import ReportingSearch
 from core.reporting.search import search
+from core.reporting.utils import Echo
 from core.solrq.query import Q
 
 from .forms import ReportingFilterForm
 
 
-class ReportingHomeView(FormView):
+class ReportingFormView(FormView):
     """
-    Just a proof of concept view that allows to filter and to perform
-    aggregations on the Érudit Solr index.
+    A generic view that defines the use of a form to filter articles in order
+    to get a article counts from Solr.
     """
     form_class = ReportingFilterForm
     http_method_names = ['get', ]
-    template_name = 'userspace/reporting/home.html'
-
-    def get(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
 
     def get_form_kwargs(self):
         kwargs = {
@@ -32,10 +33,17 @@ class ReportingHomeView(FormView):
         }
         return kwargs
 
-    def form_valid(self, form):
+    def get_solr_search(self):
+        return search
+
+    def get_results_from_cleaned_data(self, cleaned_data):
+        """
+        Returns the pysolr Results instance by using the form' cleaned
+        data as filters.
+        """
         # Prepares the Reporting query
-        rq = search
-        for k, v in form.cleaned_data.items():
+        rq = self.get_solr_search()
+        for k, v in cleaned_data.items():
             if not v:
                 continue
 
@@ -48,6 +56,25 @@ class ReportingHomeView(FormView):
                 rq = rq.filter(**{k: v})
 
         results = rq.results
+        return results
+
+
+class ReportingHomeView(ReportingFormView):
+    """
+    Just a proof of concept view that allows to filter and to perform
+    aggregations on the Érudit Solr index.
+    """
+    template_name = 'userspace/reporting/home.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        results = self.get_results_from_cleaned_data(form.cleaned_data)
 
         # Prepares articles counts per year
         year_facet = results.facets['facet_fields']['AnneePublication']
@@ -81,3 +108,48 @@ class ReportingHomeView(FormView):
         context['articles_count'] = search.results.hits
 
         return context
+
+
+class ReportingCsvView(ReportingFormView):
+    def get(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return HttpResponseRedirect(reverse('userspace:reporting:home'))
+
+    def get_solr_search(self):
+        search = ReportingSearch(client)
+        search.extra_params = {
+            'rows': 1000000,
+            'group': 'true',
+            'group.field': 'NumeroID',
+            'fl': 'RevueID,AnneePublication',
+            'sort': 'RevueID asc, AnneePublication asc',
+        }
+        return search
+
+    def form_valid(self, form):
+        results = self.get_results_from_cleaned_data(form.cleaned_data)
+
+        # Prepares the CSV
+        pseudo_buffer = Echo()
+        writer = csv.writer(pseudo_buffer)
+
+        # Prepares the rows of the CSV
+        rows = [[_("Revue"), _("Numéro"), _("Année"), _("Nombre d'articles"), ]]
+        for group in results.grouped['NumeroID']['groups']:
+            rows.append([
+                group['doclist']['docs'][0]['RevueID'],
+                group['groupValue'],
+                group['doclist']['docs'][0]['AnneePublication'],
+                group['doclist']['numFound'],
+            ])
+
+        # Prepares the response ; we use a StreamingHttpResponse because we
+        # can generate very large responses.
+        response = StreamingHttpResponse(
+            (writer.writerow(row) for row in rows), content_type="text/csv")
+        response['Content-Disposition'] = 'attachment; filename"'
+
+        return response

@@ -4,6 +4,13 @@
 
 {% block content-main %}
   {% crispy form %}
+  <div class="row">
+    <div class="col-md-12">
+      <a href="{% url 'userspace:reporting:csv-export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
+        {% trans "Exporter les résultats au format CSV" %}
+      </a>
+    </div>
+  </div>
   <br />
   <div class="row">
     <div class="col-md-12">
