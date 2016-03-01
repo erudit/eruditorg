@@ -38,7 +38,7 @@ class TestJournal(BaseEruditTestCase):
         issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
         IssueFactory.create(journal=self.journal, date_published=None)
         # Run & check
-        self.assertEqual(list(self.journal.published_issues), [issue_1, issue_2, ])
+        self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
 
     def test_can_return_its_first_issue(self):
         # Setup
