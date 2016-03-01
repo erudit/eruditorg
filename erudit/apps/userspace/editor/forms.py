@@ -30,8 +30,8 @@ class IssueSubmissionForm(forms.ModelForm):
         ]
 
         widgets = {
-            'journal': Select2Widget,
-            'contact': Select2Widget,
+            'journal': Select2Widget(),
+            'contact': Select2Widget(),
         }
 
     def disable_form(self):
@@ -64,22 +64,28 @@ class IssueSubmissionForm(forms.ModelForm):
         ids = [j.id for j in qs if user.has_perm(
                'editor.manage_issuesubmission', j)]
         qs.filter(id__in=ids)
-        self.fields['journal'].queryset = qs.filter(id__in=ids)
 
-        self.fields['journal'].initial = self.fields['journal'].queryset.first()
+        journal_qs = qs.filter(id__in=ids)
+        journal_first = journal_qs.first()
+        self.fields['journal'].queryset = journal_qs
+        if journal_first:
+            self.fields['journal'].initial = journal_first.id
 
         journals_members = User.objects.filter(
             journals=user.journals.all()
         ).distinct()
 
+        journals_members
+        member_first = journals_members.first()
         self.fields['contact'].queryset = journals_members
-        self.fields['contact'].initial = self.fields['contact'].queryset.first()
+        if member_first:
+            self.fields['contact'].initial = member_first.id
 
     def clean(self):
         cleaned_data = super().clean()
         journal = cleaned_data.get("journal")
         contact = cleaned_data.get("contact")
-        if not journal.members.filter(id=contact.id).count():
+        if contact and not journal.members.filter(id=contact.id).count():
             raise ValidationError(
                 _("Ce contact n'est pas membre de cette revue."))
 
