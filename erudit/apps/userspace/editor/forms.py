@@ -38,7 +38,8 @@ class IssueSubmissionForm(forms.ModelForm):
         """ Disable all the fields of this form """
         fields = (
             'year', 'journal', 'contact', 'number',
-            'volume', 'comment', 'submissions',
+            'volume', 'comment',
+            'submissions',
         )
 
         for field in fields:

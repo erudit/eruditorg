@@ -75,6 +75,7 @@ INSTALLED_APPS = (
     'navutils',
     'ckeditor',
     'raven.contrib.django.raven_compat',
+    'django_fsm',
 )
 
 DATABASES = {

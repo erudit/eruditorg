@@ -1,4 +1,3 @@
-from datetime import datetime
 from lxml import etree
 
 from django.core.urlresolvers import reverse
@@ -18,7 +17,6 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
         self.draft_submission = IssueSubmission.objects.create(
             journal=self.journal,
             volume="2",
-            date_created=datetime.now(),
             contact=self.user,
             status=IssueSubmission.DRAFT
         )
@@ -26,7 +24,6 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
         self.submitted_submission = IssueSubmission.objects.create(
             journal=self.journal,
             volume="2",
-            date_created=datetime.now(),
             contact=self.user,
             status=IssueSubmission.SUBMITTED
         )
@@ -34,7 +31,6 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
         self.valid_submission = IssueSubmission.objects.create(
             journal=self.journal,
             volume="2",
-            date_created=datetime.now(),
             contact=self.user,
             status=IssueSubmission.VALID
         )

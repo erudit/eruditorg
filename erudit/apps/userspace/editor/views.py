@@ -8,35 +8,13 @@ from django.views.generic import ListView
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from rules.contrib.views import PermissionRequiredMixin
-from navutils import Breadcrumb
-
-from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
-from apps.userspace.viewmixins import LoginRequiredMixin
 from erudit.models.event import Event
+
+from erudit.utils.workflow import WorkflowMixin
 from core.editor.models import IssueSubmission
 from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
-
-
-class IssueSubmissionBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
-
-    def get_breadcrumbs(self):
-        breadcrumbs = super(IssueSubmissionBreadcrumbsMixin,
-                            self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(
-            _("Dépôts de numéros"),
-            pattern_name='userspace:editor:issues'))
-        return breadcrumbs
-
-
-class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
-    permission_required = 'editor.manage_issuesubmission'
-
-    def get_queryset(self):
-        qs = super(IssueSubmissionCheckMixin, self).get_queryset()
-        ids = [issue.id for issue in qs if self.request.user.has_perm(
-               'editor.manage_issuesubmission', issue.journal)]
-        return qs.filter(id__in=ids)
+from .viewmixins import (IssueSubmissionBreadcrumbsMixin,
+                         IssueSubmissionCheckMixin)
 
 
 class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
@@ -74,7 +52,8 @@ class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
         return result
 
 
-class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin,
+class IssueSubmissionUpdate(WorkflowMixin,
+                            IssueSubmissionBreadcrumbsMixin,
                             IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
@@ -111,9 +90,15 @@ class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin,
         context = super().get_context_data(**kwargs)
         context['model_name'] = "editor.IssueSubmission"
         context['model_pk'] = self.object.pk
+
         # In this view, we have a widget, plupload, that injects JS in the page. This JS needs
         # jquery. Because of this, we need to load jquery in the header rather than in the footer.
         context['put_js_in_head'] = True
+
+        transitions = self.object.\
+            get_available_user_status_transitions(self.request.user)
+        context['transitions'] = transitions
+
         return context
 
     def get_success_url(self):
