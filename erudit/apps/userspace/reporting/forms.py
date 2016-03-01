@@ -14,7 +14,6 @@ class ReportingFilterForm(forms.Form):
     type = forms.MultipleChoiceField(
         label=_('Type'), required=False,
         choices=[
-            ('', '----'),
             ('Article', _('Article')),
             ('Culturel', _('Culturel')),
             ('Actes', _('Actes')),
@@ -22,15 +21,21 @@ class ReportingFilterForm(forms.Form):
             ('Livres', _('Livres')),
             ('Depot', _('Depot')),
         ])
-    year = forms.ChoiceField(label=_('Année'), required=False,)
+    year = forms.MultipleChoiceField(label=_('Année'), required=False,)
+    collection = forms.MultipleChoiceField(
+        label=_('Type'), required=False,
+        choices=[
+            ('Érudit', _('Érudit')),
+            ('UNB', _('UNB')),
+            ('Persée', _('Persée')),
+        ])
 
     def __init__(self, *args, **kwargs):
         super(ReportingFilterForm, self).__init__(*args, **kwargs)
         now_dt = dt.datetime.now()
 
         # Update some fields
-        self.fields['year'].choices = [('', '----')] \
-            + [(y, y) for y in range(now_dt.year-50, now_dt.year)]
+        self.fields['year'].choices = [(y, y) for y in range(now_dt.year-50, now_dt.year)]
 
         # TODO: remove crispy-forms
         self.helper = FormHelper()

@@ -8,6 +8,7 @@ from .client import client
 class ReportingSearch(Search):
     filters_mapping = {
         'author': '(Auteur_tri:*{author}* OR Auteur_fac:*{author}*)',
+        'collection': 'Fonds_fac:{collection}',
         'journal': '(RevueAbr:{journal} OR RevueID:{journal})',
         'type': 'Corpus_fac:{type}',
         'year': 'AnneePublication:{year}',

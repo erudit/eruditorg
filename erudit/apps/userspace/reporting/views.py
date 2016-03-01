@@ -36,9 +36,9 @@ class ReportingFormView(FormView):
     def get_solr_search(self):
         return search
 
-    def get_results_from_cleaned_data(self, cleaned_data):
+    def get_query_from_cleaned_data(self, cleaned_data):
         """
-        Returns the pysolr Results instance by using the form' cleaned
+        Returns the Query instance by using the form' cleaned
         data as filters.
         """
         # Prepares the Reporting query
@@ -55,6 +55,14 @@ class ReportingFormView(FormView):
             else:
                 rq = rq.filter(**{k: v})
 
+        return rq
+
+    def get_results_from_cleaned_data(self, cleaned_data):
+        """
+        Returns the pysolr Results instance by using the form' cleaned
+        data as filters.
+        """
+        rq = self.get_query_from_cleaned_data(cleaned_data)
         results = rq.results
         return results
 
@@ -129,6 +137,16 @@ class ReportingCsvView(ReportingFormView):
         }
         return search
 
+    def get_query_from_cleaned_data(self, cleaned_data):
+        rq = super(ReportingCsvView, self).get_query_from_cleaned_data(cleaned_data)
+        # We only want to retrieve 'Article' / 'Culturel' docs
+        rq.filter(Q(type='Article') | Q(type='Culturel'))
+        return rq
+
+    def get_csv_rows(self, results):
+        """ Returns the rows to insert into the final CSV. """
+        raise NotImplementedError
+
     def form_valid(self, form):
         results = self.get_results_from_cleaned_data(form.cleaned_data)
 
@@ -136,6 +154,31 @@ class ReportingCsvView(ReportingFormView):
         pseudo_buffer = Echo()
         writer = csv.writer(pseudo_buffer)
 
+        # Prepares the rows of the CSV
+        rows = self.get_csv_rows(results)
+
+        # Prepares the response ; we use a StreamingHttpResponse because we
+        # can generate very large responses.
+        response = StreamingHttpResponse(
+            (writer.writerow(row) for row in rows), content_type="text/csv")
+        response['Content-Disposition'] = 'attachment; filename"'
+
+        return response
+
+
+class ReportingIssueCsvView(ReportingCsvView):
+    def get_solr_search(self):
+        search = ReportingSearch(client)
+        search.extra_params = {
+            'rows': 1000000,
+            'group': 'true',
+            'group.field': 'NumeroID',
+            'fl': 'RevueID,AnneePublication',
+            'sort': 'RevueID asc, AnneePublication asc',
+        }
+        return search
+
+    def get_csv_rows(self, results):
         # Prepares the rows of the CSV
         rows = [[_("Revue"), _("Numéro"), _("Année"), _("Nombre d'articles"), ]]
         for group in results.grouped['NumeroID']['groups']:
@@ -145,11 +188,27 @@ class ReportingCsvView(ReportingFormView):
                 group['doclist']['docs'][0]['AnneePublication'],
                 group['doclist']['numFound'],
             ])
+        return rows
 
-        # Prepares the response ; we use a StreamingHttpResponse because we
-        # can generate very large responses.
-        response = StreamingHttpResponse(
-            (writer.writerow(row) for row in rows), content_type="text/csv")
-        response['Content-Disposition'] = 'attachment; filename"'
 
-        return response
+class ReportingJournalCsvView(ReportingCsvView):
+    def get_solr_search(self):
+        search = ReportingSearch(client)
+        search.extra_params = {
+            'rows': 1000000,
+            'group': 'true',
+            'group.field': 'RevueID',
+            'fl': 'RevueID',
+            'sort': 'RevueID asc',
+        }
+        return search
+
+    def get_csv_rows(self, results):
+        # Prepares the rows of the CSV
+        rows = [[_("Revue"), _("Nombre d'articles"), ]]
+        for group in results.grouped['RevueID']['groups']:
+            rows.append([
+                group['groupValue'],
+                group['doclist']['numFound'],
+            ])
+        return rows
