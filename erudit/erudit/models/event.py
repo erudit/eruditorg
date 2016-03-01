@@ -6,6 +6,11 @@ from django.utils.translation import gettext_lazy as _
 from django.template import defaultfilters
 
 
+# Implementation note: If you look around to see where these events are recorded, you'll see that
+# they's recorded at the view level. At first sight, using signals seems like a more proper hook
+# to use for event recording, but the problem is that we want to fill the ``author`` field and
+# we need to access the request for that. The request is not available during signal handling.
+
 class Event(models.Model):
     """ Tracks important events in the system.
 
@@ -47,7 +52,7 @@ class Event(models.Model):
 
     @classmethod
     def change_submission_status(cls, author, submission, old_status):
-        comment = "{} --> {}".format(old_status, submission.get_status_display())
+        comment = "{} --> {}".format(old_status, submission.status)
         return cls.objects.create(
             type=cls.TYPE_SUBMISSION_STATUS_CHANGE,
             author=author,

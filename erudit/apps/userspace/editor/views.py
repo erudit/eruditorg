@@ -101,6 +101,17 @@ class IssueSubmissionUpdate(WorkflowMixin,
 
         return context
 
+    def apply_transition(self, *args, **kwargs):
+        old_status = self.object.status
+        result = super().apply_transition(*args, **kwargs)
+        if self.object.status != old_status:
+            Event.change_submission_status(
+                author=self.request.user,
+                submission=self.object,
+                old_status=old_status
+            )
+        return result
+
     def get_success_url(self):
         return reverse('userspace:editor:issues')
 
