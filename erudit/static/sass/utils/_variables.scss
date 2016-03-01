@@ -2,6 +2,8 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
+$base-url: '/static/';
+
 /// Base font size
 $font-size: 18px;
 
@@ -13,24 +15,14 @@ $font-face-body: 'Maax', Helvetica, Arial, sans-serif;
 /// @type List
 $font-face-code: 'Maax-RegularMono', 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
 
-/// palette - greys
-/// @type Color
-$colour-faint-grey: #E5E5E5;
-$colour-pale-grey: $colour-faint-grey * 0.75;
-$colour-medium-grey: $colour-faint-grey * 0.5;
-$colour-dark-grey: $colour-faint-grey * 0.25;
-
 /// palette - colours
 /// @type Color
-$colour-primary: #AF2329; // main brand colour
-$colour-primary-light: #EA363E;
-$colour-accent: #FF4242;
-$colour-warning: #E8304B;
+$colour-primary: $coral-red; // main brand colour
+$colour-primary-light: $coral-red;
+$colour-accent: $coral-red;
+$colour-warning: $coral-red;
 $colour-success: #36C957;
-$colour-text: #212121;
-
-// Erudit.org color palette
-$color-red:       #FF4242;
+$colour-text: $black;
 
 /// Container's maximum width
 /// Below that is 100%

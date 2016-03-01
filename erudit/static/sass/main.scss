@@ -2,6 +2,7 @@
 
 // 1. Configuration and helpers
 @import
+  'utils/colors',
   'utils/variables',
   'utils/functions',
   'utils/font-styles',
@@ -48,6 +49,7 @@
 
 // 6. Page-specific styles
 @import
+  'pages/homepage',
   'pages/login',
   'pages/individual_subscription',
   'pages/article-detail';

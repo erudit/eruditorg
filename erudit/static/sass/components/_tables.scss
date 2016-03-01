@@ -9,12 +9,12 @@ table {
   thead {
     th {
       white-space: nowrap;
-      color: $colour-medium-grey;
+      color: $mid-grey;
     }
   }
   tbody {
     tr {
-      border-bottom: 1px solid $colour-faint-grey;
+      border-bottom: 1px solid $light-grey;
       counter-increment: row-number;
       &:last-child {
         border: 0;
@@ -24,7 +24,7 @@ table {
       vertical-align: top;
       &.table-ordered_row:before {
         content: counter(row-number);
-        color: $colour-pale-grey;
+        color: $light-grey;
       }
       &.table-date {
         white-space: nowrap;
