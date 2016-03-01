@@ -1,3 +1,54 @@
-// -----------------------------------------------------------------------------
-// This file contains all styles related to the footer of the site/application.
-// -----------------------------------------------------------------------------
+/**
+* Main site footer
+*/
+
+
+footer#site-footer {
+  margin-top: $margin-vertical-default;
+
+  /**
+  * Footer nav elements
+  */
+
+  #footer-nav {
+    padding-top: $margin-vertical-default*2;
+    padding-bottom: $margin-vertical-default;
+    font-size: 18px;
+    @include grid-cell-border($border-width: 3px);
+
+    li {
+      margin-bottom: 5px;
+    }
+    
+  }
+
+  /**
+  * bottom part
+  */
+  #footer-legal {
+    background-color: $gray-base;
+    padding-top: $margin-vertical-default;
+    padding-bottom: $margin-vertical-default;
+    color: #fff;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: #fff;
+    }
+
+  }
+
+  /**
+  * social icons
+  */
+  .social-icons {
+    font-size: 24px;
+    a {
+      margin-right: 7px;
+    }
+  }
+
+}

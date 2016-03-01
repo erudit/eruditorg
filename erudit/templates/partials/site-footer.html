@@ -1,0 +1,112 @@
+{% load i18n %}
+{% load static %}
+
+<footer id="site-footer" role="contentinfo">
+
+  <div id="footer-nav" class="container">
+    <div class="row">
+
+      {# newsletter #}
+      <aside class="col-sm-6">
+
+        <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <fieldset class="col-sm-8">
+            <h4 class="legend">{% trans "Abonnez-vous à notre infolettre" %}</h4>
+            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+            <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
+            <div class="hidden"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+          </fieldset>
+        </form>
+
+
+      </aside>
+
+      {# nav items #}
+      <aside class="col-sm-6">
+
+        <nav class="child-column-fit">
+
+          <aside class="col-md-6">
+            <ul class="unstyled">
+              <li><a href="#"><strong>{% trans "À propos" %}</strong></a></li>
+              <li><a href="#"><strong>{% trans "Abonnements" %}</strong></a></li>
+            </ul>
+          </aside>
+
+          <aside class="col-md-6">
+            <nav class="dropdown">
+              <a href="#" class="select">{% trans "Français" %} <i class="ion-ios-arrow-down"></i></a>
+              <ul>
+                <li><a href="#">{% trans "Français" %}</a></li>
+                <li><a href="#">{% trans "English" %}</a></li>
+              </ul>
+            </nav>
+          </aside>
+
+          <hr class="col-xs-12">
+
+          <aside class="col-md-6">
+            <ul class="unstyled">
+              <li><a href="#"><strong>{% trans "Publications" %}</strong></a></li>
+              <li><a href="#">{% trans "Revues" %}</a></li>
+              <li><a href="#">{% trans "Livres & actes" %}</a></li>
+              <li><a href="#">{% trans "Thèses" %}</a></li>
+              <li><a href="#">{% trans "Littérature grise" %}</a></li>
+            </ul>
+          </aside>
+
+          <aside class="col-md-6">
+            <ul class="unstyled">
+              <li><a href="#"><strong>{% trans "Aide" %}</strong></a></li>
+              <li><a href="#"><strong>{% trans "Plan du site" %}</strong></a></li>
+              <li><a href="#"><strong>{% trans "Nous contacter" %}</strong></a></li>
+            </ul>
+          </aside>
+
+        </nav>
+
+      </aside>
+    </div>
+  </div>
+
+  <div id="footer-legal">
+
+      <div class="container">
+
+        <div class="row">
+
+          <aside class="col-sm-6">
+            <img src="{% static 'svg/logo-erudit.svg' %}" alt="Erudit" class="svg" />
+          </aside>
+
+          <aside class="col-sm-6 child-column-fit">
+
+            <nav class="col-sm-6">
+              <p class="no-margin">
+                {% trans "© 2016 Consortium Érudit" %}
+              </p>
+              <p class="no-margin">
+                <a href="#">{% trans "Conditions d'utilisations" %}</a>
+              </p>
+            </nav>
+
+            <nav class="col-sm-6">
+              <h5 class="no-margin">{% trans "Suivez-nous" %}</h5>
+              <ul class="social-icons inline">
+                <li><a href="https://www.facebook.com/%C3%89rudit-141469165320/"><i class="ion-social-facebook"></i></a></li>
+                <li><a href="https://twitter.com/eruditorg"><i class="ion-social-twitter"></i></a></li>
+                <li><a href="https://github.com/erudit/"><i class="ion-social-github"></i></a></li>
+                <li><a href="#"><i class="ion-social-linkedin"></i></a></li>
+                <li><a href="#"><i class="ion-social-rss"></i></a></li>
+              </ul>
+            </nav>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+  </div>
+
+</footer>

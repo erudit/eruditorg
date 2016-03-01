@@ -22,4 +22,7 @@ html {
 
 body {
   background: $body-bg;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  -moz-osx-font-smoothing: grayscale;
 }

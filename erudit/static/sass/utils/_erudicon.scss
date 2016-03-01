@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "erudicon";
+  src: url('/static/fonts/erudicon/erudicon.eot');
+  src: url('/static/fonts/erudicon/erudicon.eot?#iefix') format('eot'),
+    url('/static/fonts/erudicon/erudicon.woff') format('woff'),
+    url('/static/fonts/erudicon/erudicon.ttf') format('truetype'),
+    url('/static/fonts/erudicon/erudicon.svg#erudicon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.erudicon:before {
+  display: inline-block;
+  font-family: "erudicon";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.erudicon-tools-fullscreen:before { content: "\EA01" }
+.erudicon-tools-more:before { content: "\EA02" }
+.erudicon-tools-pdf:before { content: "\EA03" }
+.erudicon-tools-print:before { content: "\EA04" }
+.erudicon-tools-quote:before { content: "\EA05" }
+.erudicon-tools-save:before { content: "\EA06" }
+.erudicon-tools-share:before { content: "\EA07" }

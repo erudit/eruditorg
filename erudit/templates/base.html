@@ -30,6 +30,13 @@
     {% else %}
     {% stylesheet 'erudit_main' %}
     {% endif %}
+
+    {% if DEBUG %}
+    <script src="{% static 'js/build/modernizr-dev.js' %}"></script>
+    {% else %}
+    {% javascript 'modernizr' %}
+    {% endif %}
+
     {% if put_js_in_head %}
         {% include 'partials/global_js_include.html' %}
     {% endif %}

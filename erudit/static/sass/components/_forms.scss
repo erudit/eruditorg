@@ -162,6 +162,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="image"],
 .btn, .btn-default {
+  display: inline-block;
   cursor: pointer;
   padding: $font-size*0.5 $font-size*0.75;
   border: 1px solid $colour-dark-grey;

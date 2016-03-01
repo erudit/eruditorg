@@ -32,7 +32,7 @@ CONTROLLERS = {
       // Do something
     },
   },
-}
+};
 
 
 /*

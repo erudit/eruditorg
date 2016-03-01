@@ -14,6 +14,8 @@ def common_settings(request):
     from django.contrib.sites.models import get_current_site
     COMMON_CONTEXT = {
         "DEBUG": settings.DEBUG,
+        "MAILCHIMP_UUID": settings.MAILCHIMP_UUID,
+        "MAILCHIMP_ACTION_URL": settings.MAILCHIMP_ACTION_URL,
         "HOSTNAME": HOSTNAME,
         "CURRENT_DOMAIN": get_current_site(request).domain,
     }

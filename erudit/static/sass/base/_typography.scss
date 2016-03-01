@@ -64,6 +64,7 @@ h6, .h6 { font-size: $font-size-h6; }
 // -------------------------
 
 p {
+  font-size: $font-size-base;
   margin: 0 0 ($line-height-computed / 2);
 }
 
@@ -112,25 +113,62 @@ mark,
 .serif               { font-family: $font-family-serif !important; }
 .mono-space          { font-family: $font-family-monospace !important; }
 
-// font weight
-.normal           { @include fw-normal(); }
+// font style
+@mixin font-styles($fonf-family: "sans") {
 
-// italics: em, i, .italic
-.italic, em, i    { @include fw-normal-italic(); }
+  @if $fonf-family == "sans" {
 
-// bolds: strong, b, .bold
-.bold, strong, b  { @include fw-bold(); }
+    // font weight normal
+    .normal           { @include fw-sans-normal(); }
 
-// bold italics
-.italic strong,
-em strong,
-strong em,
-i strong,
-strong i,
-b i,
-i b {
-  @include fw-bold-italic();
+    // italics: em, i, .italic
+    .italic, em, i    { @include fw-sans-normal-italic(); }
+
+    // bolds: strong, b, .bold
+    .bold, strong, b  { @include fw-sans-bold(); }
+
+    // bold italics
+    .italic strong,
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-sans-bold-italic();
+    }
+
+  }
+
+  @if $fonf-family == "serif" {
+
+    // font weight normal
+    .normal           { @include fw-serif-normal(); }
+
+    // italics: em, i, .italic
+    .italic, em, i    { @include fw-serif-normal-italic(); }
+
+    // bolds: strong, b, .bold
+    .bold, strong, b  { @include fw-serif-bold(); }
+
+    // bold italics
+    .italic strong,
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-serif-bold-italic();
+    }
+
+  }
+
 }
+
+// appy default font style : sans serif
+@include font-styles('sans');
+
 
 // Contextual colors
 .text-muted {
@@ -148,85 +186,6 @@ i b {
   border-bottom: 1px solid $page-header-border-color;
 }
 
-
-// Lists
-// -------------------------
-
-// Unordered and Ordered lists
-ul,
-ol {
-  margin-top: 0;
-  margin-bottom: ($line-height-computed / 2);
-  ul,
-  ol {
-    margin-bottom: 0;
-  }
-}
-
-// List options
-
-// [converter] extracted from `.list-unstyled` for libsass compatibility
-@mixin list-unstyled {
-  padding-left: 0;
-  list-style: none;
-}
-// [converter] extracted as `@mixin list-unstyled` for libsass compatibility
-.list-unstyled {
-  @include list-unstyled;
-}
-
-
-// Inline turns list items into inline-block
-.list-inline {
-  @include list-unstyled;
-  margin-left: -5px;
-
-  > li {
-    display: inline-block;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-}
-
-// Description Lists
-dl {
-  margin-top: 0; // Remove browser default
-  margin-bottom: $line-height-computed;
-}
-dt,
-dd {
-  line-height: $line-height-base;
-}
-dt {
-  font-weight: bold;
-}
-dd {
-  margin-left: 0; // Undo browser default
-}
-
-// Horizontal description lists
-//
-// Defaults to being stacked without any of the below styles applied, until the
-// grid breakpoint is reached (default of ~768px).
-
-.dl-horizontal {
-  dd {
-    @include clearfix; // Clear the floated `dt` if an empty `dd` is present
-  }
-
-  @media (min-width: $grid-float-breakpoint) {
-    dt {
-      float: left;
-      width: ($dl-horizontal-offset - 20);
-      clear: left;
-      text-align: right;
-      @include text-overflow;
-    }
-    dd {
-      margin-left: $dl-horizontal-offset;
-    }
-  }
-}
 
 
 // Misc

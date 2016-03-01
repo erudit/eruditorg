@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="23px" height="33px" viewBox="0 0 23 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5 (25232) - http://www.bohemiancoding.com/sketch -->
+    <title>é</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Interaction-&amp;-states---Article-metadata-+-end-of-article" sketch:type="MSArtboardGroup" transform="translate(-129.000000, -2066.000000)">
+            <g id="Liminaire-de-l'article" sketch:type="MSLayerGroup" transform="translate(25.000000, 687.000000)">
+                <g id="Liminaire" transform="translate(0.000000, 1201.000000)" sketch:type="MSShapeGroup">
+                    <g id="Browser" transform="translate(0.000000, 72.000000)">
+                        <g id="Article-content" transform="translate(53.000000, 73.000000)">
+                            <g id="Sticky-scroll" transform="translate(31.000000, 0.000000)">
+                                <g id="é" transform="translate(20.000000, 33.000000)">
+                                    <path d="M11.3672038,14.3822012 C14.5450016,14.3822012 17.2342505,16.5263818 18.0903259,19.4572762 L4.63580127,19.4572762 C5.49251365,16.5263818 8.17794071,14.3822012 11.3672038,14.3822012 M0,21.4639104 C0,27.7968275 5.08868045,32.9310345 11.3672038,32.9310345 C11.5850444,32.9310345 11.8054329,32.9220361 12.0226366,32.912395 L12.0226366,28.5089834 C11.8054329,28.5308365 11.5863184,28.5424059 11.3672038,28.5424059 C8.17794071,28.5424059 5.49251365,26.3995107 4.63580127,23.4699019 L18.0903259,23.4699019 L22.5560586,23.4660454 C22.6726224,22.8033805 22.7254902,22.1554986 22.7254902,21.4639104 C22.7254902,15.131636 17.6393576,10 11.3672038,10 C5.08868045,10 0,15.131636 0,21.4639104 Z" id="Fill-7" fill="#FF4242"></path>
+                                    <path d="M18.2351179,0 C17.394609,2.81117577 14.9543596,4.90248903 12,5.1331632 L12,9.65517241 C17.394609,9.38870397 21.8113121,5.32274025 22.7647059,0 L18.2351179,0 Z" id="Fill-8" fill="#000000"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
