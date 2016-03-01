@@ -13,6 +13,7 @@ from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 
+from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import JournalCodeDetailMixin
 from erudit.fedora.conf import settings as fedora_settings
@@ -36,7 +37,7 @@ class JournalListView(ListView):
     template_name = 'public/journal/journal_list.html'
 
 
-class JournalDetailView(JournalCodeDetailMixin, DetailView):
+class JournalDetailView(FedoraServiceRequiredMixin, JournalCodeDetailMixin, DetailView):
     """
     Displays a journal.
     """
@@ -137,7 +138,7 @@ class JournalRawLogoView(JournalCodeDetailMixin, FedoraFileDatastreamView):
     model = Journal
 
 
-class IssueDetailView(DetailView):
+class IssueDetailView(FedoraServiceRequiredMixin, DetailView):
     """
     Displays an Issue instance.
     """
@@ -169,7 +170,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     model = Issue
 
 
-class ArticleDetailView(ArticleAccessCheckMixin, DetailView):
+class ArticleDetailView(FedoraServiceRequiredMixin, ArticleAccessCheckMixin, DetailView):
     """
     Displays an Article page.
     """
@@ -195,7 +196,7 @@ class ArticleDetailView(ArticleAccessCheckMixin, DetailView):
         return context
 
 
-class ArticlePdfView(TemplateView):
+class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
     """
     Displays a page allowing to browse the PDF file associated with an article.
     """
