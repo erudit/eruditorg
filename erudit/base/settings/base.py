@@ -293,6 +293,7 @@ FEDORA_USER = 'fcAdmin'
 FEDORA_PASSWORD = 'fcAdmin'
 
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
+SOLR_ADMIN = 'http://10.1.1.33:8080/solr/admin/cores/'
 
 # Logging settings
 LOGGING = {

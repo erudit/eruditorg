@@ -4,6 +4,7 @@ from django.views.generic import FormView
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 
+from base.viewmixins import SolrServiceRequiredMixin
 from erudit.models import EruditDocument
 from . import solr, forms
 
@@ -18,7 +19,7 @@ DOCUMENT_TYPES = {
 }
 
 
-class Search(FormView):
+class Search(SolrServiceRequiredMixin, FormView):
     model = EruditDocument
     object_list = []
     results_count = None

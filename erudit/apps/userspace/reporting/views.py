@@ -8,6 +8,7 @@ from django.http import StreamingHttpResponse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
+from base.viewmixins import SolrServiceRequiredMixin
 from core.reporting.client import client
 from core.reporting.search import ReportingSearch
 from core.reporting.search import search
@@ -17,7 +18,7 @@ from core.solrq.query import Q
 from .forms import ReportingFilterForm
 
 
-class ReportingFormView(FormView):
+class ReportingFormView(SolrServiceRequiredMixin, FormView):
     """
     A generic view that defines the use of a form to filter articles in order
     to get a article counts from Solr.
