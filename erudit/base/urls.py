@@ -21,12 +21,18 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
+from django.views.i18n import javascript_catalog
 
 from . import urls_compat
 
 
+js_info_dict = {
+    'packages': ('base', ),
+}
+
 urlpatterns = i18n_patterns(
     url('^', include('django.contrib.auth.urls')),
+    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
