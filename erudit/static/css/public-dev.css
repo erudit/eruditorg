@@ -21,26 +21,29 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.erudicon-tools-fullscreen:before {
+.erudicon-arrow-up:before {
   content: "\EA01"; }
 
-.erudicon-tools-more:before {
+.erudicon-tools-fullscreen:before {
   content: "\EA02"; }
 
-.erudicon-tools-pdf:before {
+.erudicon-tools-more:before {
   content: "\EA03"; }
 
-.erudicon-tools-print:before {
+.erudicon-tools-pdf:before {
   content: "\EA04"; }
 
-.erudicon-tools-quote:before {
+.erudicon-tools-print:before {
   content: "\EA05"; }
 
-.erudicon-tools-save:before {
+.erudicon-tools-quote:before {
   content: "\EA06"; }
 
-.erudicon-tools-share:before {
+.erudicon-tools-save:before {
   content: "\EA07"; }
+
+.erudicon-tools-share:before {
+  content: "\EA08"; }
 
 /**
 * Create a top or bottom border for Bootstrap's grid cell
@@ -1831,10 +1834,10 @@ ul.unstyled, ol.unstyled {
   color: #ff4242; }
 
 .color-white {
-  color: #ffffff; }
+  color: #fff; }
 
 .color-black {
-  color: #000000; }
+  color: #000; }
 
 .color-dark-grey {
   color: #707070; }
@@ -1856,24 +1859,26 @@ header#site-header h1#brand {
   height: 35px; }
 
 /**
+* see _header.scss for shared styling between public and user space
+*/
+/**
 * Erudit Public #page-header
 */
-.public header#site-header {
+header#site-header {
   padding: 40px 44px;
   position: relative;
-  margin-bottom: 44px;
   border-bottom: 1px solid #d7d7d7; }
-  .public header#site-header .container-fluid {
+  header#site-header .container-fluid {
     max-width: 1600px; }
 
 /**
 * Main Erudit Public site nav
 */
-.public nav#main-nav {
+nav#main-nav {
   text-align: right;
   position: relative;
   height: 35px; }
-  .public nav#main-nav ul {
+  nav#main-nav ul {
     position: relative;
     top: 50%;
     -webkit-filter: blur(0);
@@ -1881,20 +1886,20 @@ header#site-header h1#brand {
     -ms-transform: translate(0, -50%);
     -o-transform: translate(0, -50%);
     transform: translate(0, -50%); }
-  .public nav#main-nav li {
+  nav#main-nav li {
     display: inline-block;
     margin-left: 22px; }
-  .public nav#main-nav a.main-section {
+  nav#main-nav a.main-section {
     display: block;
     font-size: 16px;
     line-height: 14px;
     position: relative;
     padding-right: 25px;
     font-family: "Maax-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-    .public nav#main-nav a.main-section:hover {
+    nav#main-nav a.main-section:hover {
       color: #ff4242;
       text-decoration: none; }
-    .public nav#main-nav a.main-section i {
+    nav#main-nav a.main-section i {
       font-size: 22px;
       right: 0;
       position: absolute;
@@ -1904,70 +1909,10 @@ header#site-header h1#brand {
       -ms-transform: translate(0, -50%);
       -o-transform: translate(0, -50%);
       transform: translate(0, -50%); }
-  .public nav#main-nav a.search i {
+  nav#main-nav a.search i {
     font-size: 30px;
     position: relative;
     bottom: -5px; }
-
-/**
-* User space
-*/
-.userspace nav.navbar {
-  background-color: #ff4242;
-  border: 0;
-  line-height: 70px;
-  width: 100%; }
-  .userspace nav.navbar a {
-    color: #FFF; }
-  .userspace nav.navbar .navbar-logo {
-    width: 250px;
-    height: 70px;
-    margin-left: 15px;
-    display: inline-block; }
-    .userspace nav.navbar .navbar-logo img {
-      height: 40px; }
-  .userspace nav.navbar .navbar-user {
-    right: 15px;
-    position: absolute;
-    display: inline-block; }
-    .userspace nav.navbar .navbar-user a {
-      cursor: pointer; }
-      .userspace nav.navbar .navbar-user a:hover, .userspace nav.navbar .navbar-user a:active, .userspace nav.navbar .navbar-user a:focus, .userspace nav.navbar .navbar-user a:active:focus {
-        text-decoration: none; }
-    .userspace nav.navbar .navbar-user .profile-pic {
-      background: #FFF;
-      color: #000;
-      height: 40px;
-      width: 40px;
-      font-size: 20px;
-      padding: 10px 0;
-      margin-right: 10px;
-      -webkit-border-radius: 20px;
-      -moz-border-radius: 20px;
-      -ms-border-radius: 20px;
-      border-radius: 20px;
-      vertical-align: middle;
-      text-align: center; }
-    .userspace nav.navbar .navbar-user .dropdown-menu {
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      -ms-border-radius: 0;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0; }
-      .userspace nav.navbar .navbar-user .dropdown-menu li {
-        border-bottom: 1px solid #f7f7f7; }
-        .userspace nav.navbar .navbar-user .dropdown-menu li a {
-          color: #707070;
-          padding: 10px; }
-          .userspace nav.navbar .navbar-user .dropdown-menu li a.disabled {
-            color: #f7f7f7; }
-            .userspace nav.navbar .navbar-user .dropdown-menu li a.disabled:hover, .userspace nav.navbar .navbar-user .dropdown-menu li a.disabled:active, .userspace nav.navbar .navbar-user .dropdown-menu li a.disabled:focus, .userspace nav.navbar .navbar-user .dropdown-menu li a.disabled:active:focus {
-              cursor: default;
-              background: none;
-              color: #f7f7f7; }
-        .userspace nav.navbar .navbar-user .dropdown-menu li:last-child {
-          border: 0; }
 
 nav.sidenav {
   z-index: 10;
@@ -2019,7 +1964,7 @@ nav.sidenav {
 
 @media (max-width: 992px) {
   nav.sidenav {
-    width: 48px; }
+    width: 46px; }
     nav.sidenav .sidenav-label {
       display: none; } }
 
@@ -2333,7 +2278,6 @@ input[type="submit"],
 input[type="reset"],
 input[type="image"],
 .btn, .btn-default {
-  display: inline-block;
   cursor: pointer;
   padding: 9px 13.5px;
   border: 1px solid #707070;
@@ -2558,6 +2502,16 @@ label.required:after {
     #breadcrumb a:last-child {
       color: #000;
       font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/**
+* public site breadcrumb
+*/
+#breadcrumb {
+  margin-bottom: 0;
+  padding: 44px 0; }
+  #breadcrumb p {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #707070; }
 
 /**
 * Unordered and Ordered lists
@@ -2882,6 +2836,68 @@ form.filter p * {
 form.filter input[type="submit"] {
   margin-top: 0;
   margin-left: 12px; }
+
+body.journal-list #breadcrumb {
+  background: #f7f7f7; }
+
+#journal-list .disciplines {
+  background: #f7f7f7;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  font-size: 18px; }
+  #journal-list .disciplines ul {
+    margin-top: 35px;
+    list-style: none; }
+
+#journal-list .discipline {
+  padding-top: 90px; }
+  #journal-list .discipline .discipline--title .title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative; }
+    #journal-list .discipline .discipline--title .title:before {
+      content: "";
+      display: block;
+      height: 1px;
+      border-top: 1px solid #000000;
+      position: absolute;
+      left: 11px;
+      right: 11px;
+      top: 0; }
+    #journal-list .discipline .discipline--title .title a {
+      display: inline-block;
+      margin-left: 5px;
+      color: #707070;
+      font-size: 24px;
+      outline: none; }
+  #journal-list .discipline .discipline--articles {
+    padding: 60px 0 0 0; }
+    #journal-list .discipline .discipline--articles h3 {
+      letter-spacing: 0.8px;
+      font-family: "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    #journal-list .discipline .discipline--articles .article {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 50px;
+      position: relative; }
+      #journal-list .discipline .discipline--articles .article:before {
+        content: "";
+        display: block;
+        height: 1px;
+        border-top: 1px solid #707070;
+        position: absolute;
+        left: 11px;
+        right: 11px;
+        top: 0; }
+      #journal-list .discipline .discipline--articles .article h4 {
+        font-size: 18px; }
+      #journal-list .discipline .discipline--articles .article h5 {
+        margin-bottom: 20px; }
+    #journal-list .discipline .discipline--articles.discipline--articles--default .col:nth-child(4n+1),
+    #journal-list .discipline .discipline--articles.discipline--articles--small .col:nth-child(6n+1) {
+      clear: both; }
+    #journal-list .discipline .discipline--articles:nth-child(odd) {
+      background: #f7f7f7; }
 
 /**
 * page specific variables

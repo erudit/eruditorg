@@ -10,16 +10,16 @@
     }
   }
   input {
-    border: 1px solid $light-grey;
+    border: 1px solid $colour-pale-grey;
   }
   small {
-    color: $light-grey;
+    color: $colour-pale-grey;
     font-size: 0.85em;
   }
   .erudit-logo {
     margin: 25px 0 30px 0;
     padding-bottom: 30px;
-    border-bottom: 1px solid $light-grey;
+    border-bottom: 1px solid $colour-faint-grey;
     img {
       width: 35%;
       margin: auto;

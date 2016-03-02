@@ -29,7 +29,17 @@ CONTROLLERS = {
    */
   common: {
     init: function() {
-      // Do something
+      // scroll window to top
+      $('#scroll-top').on('click', function(e) {
+
+        if( e ) {
+          e.preventDefault();
+          e.stopPropagation();
+        };
+
+        $('html, body').animate( { scrollTop: 0 }, 750 );
+        return false;
+      });
     },
   },
 };

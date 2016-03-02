@@ -15,6 +15,22 @@ $font-face-body: 'Maax', Helvetica, Arial, sans-serif;
 /// @type List
 $font-face-code: 'Maax-RegularMono', 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
 
+//// Erudit.org color palette
+//// @type Color
+$coral-red: 	#ff4242;
+$black: 		#000000;
+$dark-grey: 	#707070;
+$mid-grey: 		#cccccc;
+$light-grey: 	#f7f7f7;
+$white: 		#ffffff;
+
+/// palette - greys
+/// @type Color
+$colour-faint-grey: $light-grey;
+$colour-pale-grey: $light-grey;
+$colour-medium-grey: $mid-grey;
+$colour-dark-grey: $dark-grey;
+
 /// palette - colours
 /// @type Color
 $colour-primary: $coral-red; // main brand colour
@@ -23,6 +39,9 @@ $colour-accent: $coral-red;
 $colour-warning: $coral-red;
 $colour-success: #36C957;
 $colour-text: $black;
+
+// Erudit.org color palette
+$color-red:       $coral-red;
 
 /// Container's maximum width
 /// Below that is 100%

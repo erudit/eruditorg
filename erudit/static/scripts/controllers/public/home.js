@@ -15,8 +15,6 @@ ROUTER.registerController('public:home', {
 
   	$('#homepage-header').css('height', header_height);
   	$('#homepage-content .search-module').css('height', search_height);
-
-  	console.log( window_height, sticky_nav_height, header_height, search_height );
   },
 
   sticky_elements : function () {

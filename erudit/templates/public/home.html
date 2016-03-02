@@ -164,7 +164,7 @@
             <div class="col-md-12">
               <ul class="row">
                 {% for i in 'xxxxxxxxxxxxxxxxxx' %}
-                <li class="col-md-3"><a href="#">{% lorem 2 w random %}</a></li>
+                <li class="col-md-3"><a href="{% url 'public:journal:journal-list' %}#">{% lorem 2 w random %}</a></li>
                 {% endfor %}
               </ul>            
             </div>
@@ -242,7 +242,7 @@
       <div class="col-md-3 publications--item">
         <h2 class="h2 color-red publications--item--title">{% trans "Revues" %}</h2>
         <p class="publications--item--summary">{% trans "Plus de 130 revues savantes et culturelles parmi 30 disciplines des sciences humaines et sociales." %}</p>
-        <p><a href="#" class="color-dark-grey">{% trans "Voir les publications" %}</a></p>
+        <p><a href="{% url 'public:journal:journal-list' %}" class="color-dark-grey">{% trans "Voir les publications" %}</a></p>
       </div>
       <div class="col-md-3 publications--item">
         <h2 class="h2 color-red publications--item--title">{% trans "Livres et actes" %}</h2>

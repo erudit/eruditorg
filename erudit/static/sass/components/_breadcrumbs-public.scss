@@ -1,0 +1,13 @@
+/**
+* public site breadcrumb
+*/
+
+#breadcrumb {
+	margin-bottom: 0;
+	padding: $margin-vertical-default 0;
+	
+	p {
+		padding-bottom: 15px;
+		border-bottom: 1px solid $dark-grey;
+	}
+}

@@ -29,7 +29,17 @@ CONTROLLERS = {
    */
   common: {
     init: function() {
-      // Do something
+      // scroll window to top
+      $('#scroll-top').on('click', function(e) {
+
+        if( e ) {
+          e.preventDefault();
+          e.stopPropagation();
+        };
+
+        $('html, body').animate( { scrollTop: 0 }, 750 );
+        return false;
+      });
     },
   },
 };
@@ -111,8 +121,6 @@ ROUTER.registerController('public:home', {
 
   	$('#homepage-header').css('height', header_height);
   	$('#homepage-content .search-module').css('height', search_height);
-
-  	console.log( window_height, sticky_nav_height, header_height, search_height );
   },
 
   sticky_elements : function () {
@@ -170,6 +178,30 @@ ROUTER.registerController('public:journal:article-detail', {
   		});
 
 
+  }
+
+
+});
+
+ROUTER.registerController('public:journal:journal-list', {
+
+  init: function() {
+    this.smooth_scroll();
+  },
+
+  smooth_scroll : function () {
+  	$('#journal-list .disciplines').on('click', 'a', function(e) {
+  		if( e ) {
+  			e.preventDefault();
+  			e.stopPropagation();
+  		};
+
+  		var target = $(this).attr('href').replace('#', '');
+  		if( !target ) return false;
+
+		$('html, body').animate( { scrollTop: $('#journal-list a[name="'+target+'"]').offset().top }, 750 );
+		return false;
+  	});
   }
 
 

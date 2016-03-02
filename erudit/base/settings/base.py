@@ -101,12 +101,22 @@ STATICFILES_DIRS = (
 PIPELINE = {
     'PIPELINE_ENABLED': True,
     'STYLESHEETS': {
-        # main css theme for erudit.org
-        'erudit_main': {
+        # public css theme for erudit.org
+        'erudit_public': {
             'source_filenames': (
-                'sass/main.scss',
+                'sass/public.scss',
             ),
-            'output_filename': 'css/main.min.css',
+            'output_filename': 'css/public.min.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+        # userspace css theme for erudit.org
+        'erudit_userspace': {
+            'source_filenames': (
+                'sass/userspace.scss',
+            ),
+            'output_filename': 'css/userspace.min.css',
             'extra_context': {
                 'media': 'screen,projection',
             },
