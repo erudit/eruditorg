@@ -30,8 +30,21 @@ function swallowError (error) {
   this.emit('end');
 }
 
-gulp.task('sass-erudit-main', function() {
-  return gulp.src(sass_dir + 'main.scss')
+gulp.task('sass-erudit-public', function() {
+  return gulp.src(sass_dir + 'public.scss')
+    .pipe(sass())
+    .on('error', sass.logError)
+    .pipe(rename(function (path) {
+      path.dirname += "/";
+      path.basename += "-dev";
+      path.extname = ".css";
+    }))
+    .pipe(gulp.dest(css_dir))
+    .pipe(livereload());
+});
+
+gulp.task('sass-erudit-userspace', function() {
+  return gulp.src(sass_dir + 'userspace.scss')
     .pipe(sass())
     .on('error', sass.logError)
     .pipe(rename(function (path) {
@@ -140,7 +153,7 @@ gulp.task('watch', function() {
   livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
 
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch(sass_dir + '**/*.scss', ['sass-erudit-main', 'sass-erudit-pdfjs', 'modernizr']);
+  gulp.watch(sass_dir + '**/*.scss', ['sass-erudit-public', 'sass-erudit-userspace', 'sass-erudit-pdfjs', 'modernizr']);
   // watch any js file /js directory, ** is for recursive mode
   gulp.watch(scripts_dir + '**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors', 'modernizr']);
   // watch any svg file /iconfont directory, ** is for recursive mode

@@ -1,0 +1,18 @@
+/**
+* see _header.scss for shared styling between public and user space
+*/
+
+/**
+* Erudit Public #page-header
+*/
+header#site-header {
+  padding: 40px ($grid-gutter-width * 2);
+  position: relative;
+  //margin-bottom: $margin-vertical-default;
+  border-bottom: 1px solid lighten($gray-light, 25%);
+
+  .container-fluid {
+    max-width: $screen-xl;
+  }
+
+}

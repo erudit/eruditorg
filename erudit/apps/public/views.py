@@ -25,7 +25,7 @@ class HomeView(FedoraServiceRequiredMixin, TemplateView):
 
         # Includes the latest issues
         context['latest_issues'] = Issue.objects.filter(date_published__isnull=False) \
-            .select_related('journal').order_by('-date_published')[:6]
+            .select_related('journal').order_by('-date_published')[:5]
 
         # Includes the 'apropos' news ; note that this is a temporary behavior as
         # these news will likely be included in the new Érudit website in the future.
@@ -57,7 +57,7 @@ class HomeView(FedoraServiceRequiredMixin, TemplateView):
                 logger.error('Apropos feeds unavailable ({})'.format(feed_url),
                              exc_info=True, extra={'request': self.request, })
                 return []
-            entries = parsed.get('entries', [])[:3]
+            entries = parsed.get('entries', [])[:6]
 
             # Stores the entries in the cache
             cache.set(entries_cache_key, entries, 60 * 60)  # 1 hour

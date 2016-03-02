@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% load i18n staticfiles rules navutils_tags %}
+{% load pipeline %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+{% if DEBUG %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/userspace-dev.css' %}" />
+{% else %}
+{% stylesheet 'erudit_userspace' %}
+{% endif %}
+{% endblock %}
 
 {% block body_class %}userspace{% endblock %}
 

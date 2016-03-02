@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% load static i18n %}
+{% load pipeline %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+{% if DEBUG %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/public-dev.css' %}" />
+{% else %}
+{% stylesheet 'erudit_public' %}
+{% endif %}
+{% endblock %}
 
 {% block body_class %}public{% endblock %}
 
@@ -40,12 +50,16 @@
 
 </header>
 
-<nav id="breadcrumb" class="container">
-  <div class="row">
-      <p class="col-xs-12 no-margin">
-        <a href="/">Érudit</a> {% block breadcrumb %}{% endblock %}
-      </p>
-  </div>
+<nav id="breadcrumb" class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="no-margin">
+          <a href="/">Érudit</a> {% block breadcrumb %}{% endblock %}
+        </p>
+      </div>
+    </div>    
+  </div>  
 </nav>
 
 {% endblock %}

@@ -79,5 +79,25 @@ ul, ol {
 */
 
 .color-red {
-  color: $color-red;
+  color: $colour-accent;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.color-black {
+  color: #000;
+}
+
+.color-dark-grey {
+  color: $colour-dark-grey;
+}
+
+.color-mid-grey {
+  color: $colour-medium-grey;
+}
+
+.color-light-grey {
+  color: $colour-pale-grey;
 }

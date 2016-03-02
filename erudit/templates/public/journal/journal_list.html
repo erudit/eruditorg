@@ -3,10 +3,126 @@
 {% load static %}
 
 {% block page-title %}{% trans "Revues" %}{% endblock page-title %}
+{% block body_class %}public journal-list{% endblock %}
+{% block data-controller %}public:journal:journal-list{% endblock data-controller %}
 
 {% block content %}
+<div id="journal-list">
 
-<div class="container">
+  
+  <!-- DISCIPLINES -->
+  <div class="disciplines container-fluid">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h1 class="h2">{% trans "Disciplines" %}</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <ul class="row">
+              {% for i in 'xxxxxxxxxxxxxxxxxx' %}
+              <li class="col-md-3"><a href="#discipline-name">{% lorem 2 w random %}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <a name="discipline-name" class="invisible">Nom de la discipline</a>
+  <div class="discipline container-fluid">
+    <div class="row discipline--title">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 title">
+            <h2 class="no-margin">Nom de la discipline <a href="#top" id="scroll-top" class="erudicon erudicon-arrow-up"></a></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row discipline--articles discipline--articles--default">
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-3">
+            <h3 class="h4 color-red">Érudit</h3>
+          </div>
+          {% for i in 'abcdefghi' %}
+          <div class="col col-md-3 article">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4>Nom de la revue</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-8">
+                <p class="color-dark-grey">Description</p>
+              </div>
+              <div class="col-xs-4">
+                <img src="http://placehold.it/300x300" alt="Nom de la revue" class="img-responsive">
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="row discipline--articles discipline--articles--small">
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-2">
+            <h3 class="h4 color-red">Persée</h3>
+          </div>
+          {% for i in 'abcdefghi' %}
+          <div class="col col-md-2 article">
+            <div class="row">
+              <div class="col-xs-12">
+                <h5>Nom de la revue</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <img src="http://placehold.it/300x500" alt="Nom de la revue" class="img-responsive">
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="row discipline--articles discipline--articles--default">
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-3">
+            <h3 class="h4 color-red">UNB Librairies</h3>
+          </div>
+          {% for i in 'a' %}
+          <div class="col col-md-3 article">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4>Nom de la revue</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-8">
+                <p class="color-dark-grey">Description</p>
+              </div>
+              <div class="col-xs-4">
+                <img src="http://placehold.it/300x300" alt="Nom de la revue" class="img-responsive">
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!--
   <div class="row">
     <div class="col-md-12">
       <div class="row">
@@ -20,5 +136,6 @@
       </div>
     </div>
   </div>
+  -->
 </div>
 {% endblock %}

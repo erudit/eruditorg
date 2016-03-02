@@ -16,23 +16,3 @@ header#site-header {
   }
 
 }
-
-/**
-* Erudit Public #page-header
-*/
-
-.public {
-
-  header#site-header {
-    padding: 40px ($grid-gutter-width * 2);
-    position: relative;
-    margin-bottom: $margin-vertical-default;
-    border-bottom: 1px solid lighten($gray-light, 25%);
-
-    .container-fluid {
-      max-width: $screen-xl;
-    }
-
-  }
-
-}

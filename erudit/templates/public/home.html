@@ -4,6 +4,7 @@
 {% load pipeline %}
 
 {% block page-title %}{% trans "Accueil" %}{% endblock page-title %}
+{% block data-controller %}public:home{% endblock data-controller %}
 
 {% block extrahead %}
   {% if DEBUG %}
@@ -13,37 +14,115 @@
   {% endif %}
 {% endblock extrahead %}
 
-{% block content %}
-{% trans "inconnu" as i18n_unknown %}
-<div class="container">
+{% block header %}
+<header id="homepage-header" class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
-      <h1 class="text-center"><img src="{% static "img/logo-erudit.png" %}" alt="" /></h1>
-    </div>
-  </div>
-  {% if latest_issues %}
-  <div class="row">
-    <div class="col-md-12">
-      <h2>{% trans "Derniers numéros diffusés" %}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
+    <div class="container">
       <div class="row">
-        {% for issue in latest_issues %}
-        <div class="col-md-6">
-          <a class="btn btn-default btn-block"
-             href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
-             {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
-               Numéro {{ number }} - {{ date }}
-             {% endblocktrans %}
+        <h1 id="brand" class="col-md-4">
+          <a href="/">
+            <img src="{% static 'svg/logo-erudit-white.svg' %}" alt="Erudit" />
           </a>
-        </div>
-        {% endfor %}
+        </h1>
+      
+        <aside id="homepage-top-nav" class="pull-right">
+          <nav>
+            <ul class="unstyled">
+              <li>
+                <a href="#" class="main-section">{% trans "Connexion" %}</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="select">{% trans "Français" %} <i class="ion-ios-arrow-down"></i></a>
+                <ul>
+                  <li><a href="#">{% trans "Français" %}</a></li>
+                  <li><a href="#">{% trans "English" %}</a></li>
+                </ul>
+              </li>
+            </ul>            
+          </nav>
+        </aside>
+      </div>
+      <div class="row headline">
+        <div class="col-xs-12">
+          <p class="h1 color-white no-margin">{% trans "Promouvoir et diffuser <br>la recherche et la création" %}</p>
+        </div>        
       </div>
     </div>
   </div>
+</header>
+{% endblock %}
+
+{% block content %}
+{% trans "inconnu" as i18n_unknown %}
+<div id="homepage-content">
+  
+  <!-- STICKY NAVIGATION -->
+  <nav class="container-fluid text-center homepage--sticky-nav">
+    <ul class="unstyled">
+      {% if latest_issues %}
+      <li><a href="#latest-issues">{% trans "Derniers numéros" %}</a></li>
+      {% endif %}
+      <li><a href="#disciplines">{% trans "Disciplines" %}</a></li>
+      <li><a href="#news">{% trans "Nouvelles" %}</a></li>
+      <li><a href="#about-erudit">{% trans "À propos" %}</a></li>
+      <li><a href="#publications">{% trans "Publications" %}</a></li>
+    </ul>
+  </nav>
+  
+  <!-- SEARCH -->
+  <div class="container">
+    <div class="row search-module">
+      <div class="col-md-10 col-md-offset-1">
+        <form action="#">
+          <div class="form-group search-group row">
+            <label for="search" class="h2">{% trans "Explorez parmi plus de 200 000 publications savantes et culturelles." %}</label>
+            <input name="search" type="search" class="form-control" placeholder="{% trans "Rechercher par auteur, titre, mots-clés&hellip;" %}">
+            <button type="submit" class="btn btn-lg"><span class="ion ion-ios-search"></span></button>
+          </div>
+          <div class="form-group row">
+            <a href="#" class="color-red small">{% trans "Recherche détaillée" %}</a>
+          </div>
+        </form>
+      </div>   
+    </div>
+  </div>
+
+
+  <!-- LATEST ISSUES -->
+  {% if latest_issues %}
+  <a name="latest-issues" class="invisible">{% trans "Derniers numéros" %}</a>
+  <div class="container">
+    <hr class="section-separator">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Derniers numéros" %}</h2>
+      </div>
+    </div>
+    <div class="row latest-issues">
+      {% for issue in latest_issues %}
+      <article class="{% if forloop.first %}col-md-8{% elif forloop.counter < 4 %}col-md-4{% else %}col-md-6{% endif %} latest-issues--article">
+        <a class="" href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="h5 color-red">Catégorie</p>
+              <h3 class="h2 latest-issues--article--issue">Nom de la revue</h3>
+              <p class="latest-issues--article--title">Titre du numéro</p>
+              <p class="latest-issues--article--details">Volume. Numéro. Année</p>
+            </div>
+            <div class="col-md-6">
+              <img src="http://placehold.it/350x450" alt="Titre du numéro - Nom de la revue" class="img-responsive">
+            </div>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
   {% endif %}
+
+
+
+  <!--
   {% if upcoming_journals %}
     <br />
     <div class="row">
@@ -66,47 +145,129 @@
       </div>
     </div>
   {% endif %}
-  <br />
-  <div class="row">
-    <div class="col-md-12">
-      <a href="{% url 'public:journal:journal-list' %}">{% trans "Toutes les revues" %}</a>
+  -->
+
+
+
+  <!-- DISCIPLINES -->
+  <a name="disciplines" class="invisible">{% trans "Disciplines" %}</a>
+  <div class="container-fluid disciplines">
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <a name="latest-issue" class="invisible"></a>
+              <h2><a href="{% url 'public:journal:journal-list' %}">{% trans "Disciplines" %}</a></h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="row">
+                {% for i in 'xxxxxxxxxxxxxxxxxx' %}
+                <li class="col-md-3"><a href="{% url 'public:journal:journal-list' %}#">{% lorem 2 w random %}</a></li>
+                {% endfor %}
+              </ul>            
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  
+  <!-- NEWS -->
+  <a name="news" class="invisible">{% trans "Nouvelles" %}</a>
+  <div class="container">
+    <hr class="section-separator">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Nouvelles" %}</h2>
+      </div>
+    </div>
+
+    <div class="row news">
+      {% for entry in latest_news %}
+      <article class="col-md-4 news--article">
+        <p class="h5 color-red">Catégorie</p>
+        <h3 class="h2"><a href="{{ entry.link }}">{{ entry.title }}</a></h3>       
+        <p class="summary">{{ entry.summary|safe }}</p>
+        <time class="color-dark-grey" datetime="2001-05-15">22 Février 2016</time>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <a href="#" class="btn btn-primary btn-lg">{% trans "Toutes les nouvelles d'Érudit" %}</a>
+      </div>      
     </div>
   </div>
-  <br />
-  <div class="row">
-    <div class="col-md-8">
-      <div class="well">
-        <h4>{% trans "Actualités" %}</h4>
-        <div class="entries-wrapper">
-          {% for entry in latest_news %}
-            <div class="entry">
-              <a href="{{ entry.link }}">{{ entry.title }}</a>
-              <p class="summary">{{ entry.summary|safe }}</p>
-            </div>
-          {% endfor %}
+  
+  
+  
+  <!-- ABOUT ERUDIT.ORG -->
+  <a name="about-erudit" class="invisible">{% trans "erudit.org" %}</a>
+  <div class="container">
+    <hr class="section-separator">
+    <div class="row about-erudit">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="col-md-3"><h1 class="about-erudit--logo">erudit.<br>org</h1></div>
+          <div class="col-md-3">
+            <p class="about-erudit--definition">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales: revues, livres et actes, thèses, littérature grise." %}</p>
+            <p><a href="http://apropos.erudit.org" class="about-erudit--read-more">{% trans "En savoir plus" %}</a></p>
+          </div>
+          <div class="col-md-6">
+            <!-- width="1280" height="720" -->
+            <video
+              id="about_erudit_video"
+              class="video-js vjs-default-skin"
+              controls
+              preload="auto"
+              data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'
+            >
+            </video>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="well">
-        <h4>{% trans "À propos" %}</h4>
-        <video
-          id="about_erudit_video"
-          class="video-js vjs-default-skin"
-          controls
-          preload="auto"
-          width="auto" height="auto"
-          data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'
-        >
-        </video>
-        <a href="http://apropos.erudit.org" class="btn btn-block btn-primary">{% trans "En savoir plus" %}</a>
-        <br />
-        <p>{% lorem 30 w random %}</p>
+  </div>
+
+
+
+  <!-- PUBLICATIONS -->
+  <a name="publications" class="invisible">{% trans "Publications" %}</a>
+  <div class="container publications">
+    <div class="row">
+      <div class="col-md-3 publications--item">
+        <h2 class="h2 color-red publications--item--title">{% trans "Revues" %}</h2>
+        <p class="publications--item--summary">{% trans "Plus de 130 revues savantes et culturelles parmi 30 disciplines des sciences humaines et sociales." %}</p>
+        <p><a href="{% url 'public:journal:journal-list' %}" class="color-dark-grey">{% trans "Voir les publications" %}</a></p>
+      </div>
+      <div class="col-md-3 publications--item">
+        <h2 class="h2 color-red publications--item--title">{% trans "Livres et actes" %}</h2>
+        <p class="publications--item--summary">{% trans "61 livres savants et actes de colloques en sciences humaines et sociales." %}</p>
+        <p><a href="#" class="color-dark-grey">{% trans "Voir les livres et actes" %}</a></p>
+      </div>
+      <div class="col-md-3 publications--item">
+        <h2 class="h2 color-red publications--item--title">{% trans "Thèses" %}</h2>
+        <p class="publications--item--summary">{% trans "Plus de 56 000 mémoires et  thèses indexés de 7 universités canadiennes." %}</p>
+        <p><a href="#" class="color-dark-grey">{% trans "Voir les thèses" %}</a></p>
+      </div>
+      <div class="col-md-3 publications--item">
+        <h2 class="h2 color-red publications--item--title">{% trans "Littérature grise" %}</h2>
+        <p class="publications--item--summary">{% trans "Près de 3 300 publications scientifiques parmi plus de 37 centres de recherche canadiens." %}</p>
+        <p><a href="#" class="color-dark-grey">{% trans "Voir les documents et rapports" %}</a></p>
       </div>
     </div>
   </div>
+
 </div>
 {% endblock content %}
+
+{% block footer %}
+{% include "partials/site-footer.html" %}
+{% endblock %}
 
 {% block footerscript %}
   {% if DEBUG %}

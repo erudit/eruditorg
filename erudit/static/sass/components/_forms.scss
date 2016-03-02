@@ -130,7 +130,7 @@ input[type="radio"] {
   margin: 0;
   vertical-align: middle;
   &:hover {}
-  &:active, &:focus {}
+  &:active, &:focus {}
 }
 
 input[type="file"],
@@ -141,7 +141,7 @@ input[type="range"] {
   line-height: 1em;
   width: auto;
   &:hover {}
-  &:active, &:focus {}
+  &:active, &:focus {}
 }
 
 select,
@@ -162,7 +162,6 @@ input[type="submit"],
 input[type="reset"],
 input[type="image"],
 .btn, .btn-default {
-  display: inline-block;
   cursor: pointer;
   padding: $font-size*0.5 $font-size*0.75;
   border: 1px solid $colour-dark-grey;

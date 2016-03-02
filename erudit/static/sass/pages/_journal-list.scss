@@ -1,0 +1,70 @@
+body.journal-list #breadcrumb {
+	background: $light-grey;
+}
+
+#journal-list {
+
+	.disciplines {
+		background: $light-grey;
+		padding-top: 20px;
+		padding-bottom: 60px;
+		font-size: 18px;
+	
+		ul {
+			margin-top: 35px;
+			list-style: none;
+		}
+	}
+
+	.discipline {
+		padding-top: 90px;
+
+		.discipline--title {
+			.title {
+				padding-top: 20px;
+				padding-bottom: 20px;
+				@include grid-cell-border('top', 1px, $black);
+				
+				a {
+					display: inline-block;
+					margin-left: 5px;
+					color: $dark-grey;
+					font-size: 24px;
+					outline: none;
+				}
+			}			
+		}
+		
+		.discipline--articles {
+			padding: 60px 0 0 0;
+
+			h3 {
+				letter-spacing: 0.8px;
+				@include fw-sans-bold();
+			}
+
+			.article {
+				padding-top: 20px;
+				padding-bottom: 20px;
+				margin-bottom: 50px;
+				@include grid-cell-border('top', 1px, $dark-grey);
+
+				h4 {
+					font-size: 18px;
+				}
+				h5 {
+					margin-bottom: 20px;
+				}
+			}
+
+			&.discipline--articles--default .col:nth-child(4n+1),
+			&.discipline--articles--small .col:nth-child(6n+1) {
+				clear: both;
+			}
+
+			&:nth-child(odd) {
+				background: $light-grey;
+			}
+		}		
+	}
+}

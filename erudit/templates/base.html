@@ -25,11 +25,8 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-32x32.png' %}" sizes="32x32" />
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-16x16.png' %}" sizes="16x16" />
 
-    {% if DEBUG %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main-dev.css' %}" />
-    {% else %}
-    {% stylesheet 'erudit_main' %}
-    {% endif %}
+    {% block stylesheets %}
+    {% endblock %}
 
     {% if DEBUG %}
     <script src="{% static 'js/build/modernizr-dev.js' %}"></script>
