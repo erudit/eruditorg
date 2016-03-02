@@ -68,16 +68,13 @@
               </div>
             </div>
           </div>
+          {% if object.pk %}
           <div class="panel">
             <div class="panel-heading" role="tab" id="issue-upload-heading">
               <h3 class="panel-title">
-                {% if object.pk %}
                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#issue-upload" aria-expanded="false" aria-controls="issue-upload">
                   <span class="fa accordion-toggle"></span> {% trans "Fichiers" %}
                 </a>
-                {% else %}
-                 <div class="text-muted collapsed"><span class="fa accordion-toggle"></span> {% trans "Fichiers" %}</div>
-                {% endif %}
               </h3>
             </div>
             <div id="issue-upload" class="panel-collapse collapse {% if object.pk %}in{% endif %}" role="tabpanel" aria-labelledby="issue-upload-heading">
@@ -88,6 +85,7 @@
               </div>
             </div>
           </div>
+          {% endif %}
           <div class="form-group text-right">
             <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
             <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
