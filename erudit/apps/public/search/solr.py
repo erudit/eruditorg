@@ -3,6 +3,22 @@ import requests
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+# Search fields
+SEARCH_FIELDS = {
+    "all": "TexteComplet",
+    "meta": "Metadonnees",
+    "full_text": "TexteIntegral",
+    "title_abstract_keywords": "TitreResumeMots",
+    "title": "Titre_idx",
+    "author": "Auteur_idx",
+    "author_affiliation": "Affiliation_idx",
+    "journal_title": "TitreCollection_idx",
+    "bibliography": "RefBiblio_idx",
+    "title_reviewd": "TitreRefBiblio_idx",
+    "issn": "ISSN",
+    "isbn": "ISBN",
+}
+
 # Fields available for sorting
 SORT_FIELDS = {
     "relevance": "score",
@@ -121,11 +137,11 @@ class Solr(object):
 
         return cleaned_data
 
-    def build_query_filters(self, selected_filters):
+    def bulid_filters_query(self, selected_filters):
         """Will return query filter in the form of:
         Langue:(fr) Annee(2010 OR 2011 OR 2012)
         """
-        query_filters = []
+        filters_query = []
         for filter_name, filter_values in selected_filters.items():
             solr_field_name = self.filter_fields[filter_name]["field"]
             # Wrap filters in quotes
@@ -133,16 +149,43 @@ class Solr(object):
                 '"{filter_value}"'.format(filter_value=filter_value) for
                 filter_value in filter_values
             ]
-            query_filters.append("{field}:({values})".format(
+            filters_query.append("{field}:({values})".format(
                 field=solr_field_name,
                 values=' OR '.join(filter_values))
             )
 
-        return " ".join(query_filters)
+        return " ".join(filters_query)
+
+    def build_advanced_search_query(self, advanced_search):
+        """Will build query for advanced search in the form of:
+        (Titre_idx:"foo" OR Auteur_idx:"foo bar" AND - Titre_idx:"foo")
+        """
+        advanced_search_query = []
+        for search_item in advanced_search:
+            # If no search term specified, than not a search
+            if search_item["search_term"]:
+                # Only use operator if
+                if advanced_search_query or (search_item["search_operator"] == "NOT"):
+                    operator = search_item["search_operator"]
+                else:
+                    operator = ""
+
+                advanced_search_query.append(
+                    "{operator} {field}:{term}".format(
+                        operator=operator,
+                        field=SEARCH_FIELDS[search_item["search_field"]],
+                        # term='"{search_term}"'.format(
+                        #     search_term=search_item["search_term"]
+                        # ),
+                        term=search_item["search_term"],
+                    )
+                )
+
+        return "({query_string})".format(query_string=" ".join(advanced_search_query))
 
     def simple_search(self, search_term, sort="relevance", sort_order="asc",
                       limit_filter_fields=FILTER_FIELDS, selected_filters={},
-                      start_at=0, results_per_query=10):
+                      advanced_search=[], start_at=0, results_per_query=10):
         """Simple search
 
         - search_term: search term to look for
@@ -177,9 +220,17 @@ class Solr(object):
         )
 
         if selected_filters:
-            params["q"] = "{base_search} {filters}".format(
+            params["q"] = "{base_search} {filters_query}".format(
                 base_search=params["q"],
-                filters=self.build_query_filters(selected_filters=selected_filters)
+                filters_query=self.bulid_filters_query(selected_filters=selected_filters)
+            )
+
+        if advanced_search:
+            params["q"] = "{base_search} {advanced_search_query}".format(
+                base_search=params["q"],
+                advanced_search_query=self.build_advanced_search_query(
+                    advanced_search=advanced_search
+                )
             )
 
         # Sort param
@@ -209,4 +260,5 @@ class Solr(object):
         params["facet.field"] = facet_fields
 
         query_url, raw_data = self.search(params=params)
+        # toto
         return self.clean_data(raw_data=raw_data)

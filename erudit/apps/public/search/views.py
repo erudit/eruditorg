@@ -44,6 +44,7 @@ class Search(SolrServiceRequiredMixin, FormView):
         ]   # Filter fields available
         self.filter_choices = {}
         self.selected_filters = {}
+        self.advanced_search = []
 
         return super(Search, self).__init__(*args, **kwargs)
 
@@ -60,22 +61,41 @@ class Search(SolrServiceRequiredMixin, FormView):
         self.results_per_query = self.paginate_by
         self.start_at = ((self.page - 1) * self.results_per_query)
 
-        if not self.search_term:
+        for i in range(10):
+            advanced_search_operator = form.cleaned_data.get(
+                "advanced_search_operator{counter}".format(counter=i+1), None
+            )
+            advanced_search_term = form.cleaned_data.get(
+                "advanced_search_term{counter}".format(counter=i+1), None
+            )
+            advanced_search_field = form.cleaned_data.get(
+                "advanced_search_field{counter}".format(counter=i+1), None
+            )
+
+            if advanced_search_term:
+                self.advanced_search.append({
+                    "search_operator": advanced_search_operator,
+                    "search_term": advanced_search_term,
+                    "search_field": advanced_search_field,
+                })
+
+        if not (self.search_term or advanced_search_term):
             return None
 
         else:
-            try:
-                return self.solr_conn.simple_search(
-                    search_term=self.search_term,
-                    sort=self.sort,
-                    sort_order=self.sort_order,
-                    start_at=self.start_at,
-                    results_per_query=self.results_per_query,
-                    limit_filter_fields=self.limit_filter_fields,
-                    selected_filters=self.selected_filters,
-                )
-            except:
-                return None
+            # try:
+            return self.solr_conn.simple_search(
+                search_term=self.search_term,
+                sort=self.sort,
+                sort_order=self.sort_order,
+                start_at=self.start_at,
+                results_per_query=self.results_per_query,
+                limit_filter_fields=self.limit_filter_fields,
+                selected_filters=self.selected_filters,
+                advanced_search=self.advanced_search,
+            )
+            # except:
+            #    return None
 
     def get_queryset(self, doc_ids):
         """Query Django models using Solr data"""
