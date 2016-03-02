@@ -9,6 +9,7 @@ from crispy_forms.layout import Submit
 from django_select2.forms import Select2Widget
 
 from plupload.forms import PlUploadFormField
+from plupload.models import ResumableFile
 
 from core.editor.models import IssueSubmission
 
@@ -88,6 +89,7 @@ class IssueSubmissionForm(forms.ModelForm):
         if contact and not journal.members.filter(id=contact.id).count():
             raise ValidationError(
                 _("Ce contact n'est pas membre de cette revue."))
+        return cleaned_data
 
 
 class IssueSubmissionUploadForm(IssueSubmissionForm):
@@ -114,3 +116,30 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
             "browse_button": 'pickfiles'
         }
     )
+
+    def __init__(self, *args, **kwargs):
+        super(IssueSubmissionUploadForm, self).__init__(*args, **kwargs)
+
+        # Update some fields
+        initial_files = self.instance.submissions.all() \
+            .values_list('id', flat=True)
+        self.fields['submissions'].initial = ','.join(map(str, initial_files))
+
+    def save(self, commit=True):
+        submissions = self.cleaned_data.pop('submissions', '')
+        instance = super(IssueSubmissionUploadForm, self).save(commit)
+
+        # Saves the resumable files associated to the submission
+        if commit:
+            instance.submissions.clear()
+            if submissions:
+                file_ids = submissions.split(',')
+                for fid in file_ids:
+                    try:
+                        rfile = ResumableFile.objects.get(id=fid)
+                    except ResumableFile.DoesNotExist:
+                        pass
+                    else:
+                        instance.submissions.add(rfile)
+
+        return instance
