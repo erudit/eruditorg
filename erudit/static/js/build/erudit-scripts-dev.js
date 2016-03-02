@@ -225,7 +225,7 @@ ROUTER.registerController('userspace:editor:form', {
       }
     });
 
-    $('form').submit(function(ev) {
+    function checkUploads(ev) {
       var filesAddedCount = $('#id_submissions').data('files-added');
       var filesUploadingCount = $('#id_submissions').data('files-uploading');
       if (!filesAddedCount && !filesUploadingCount) {
@@ -243,6 +243,10 @@ ROUTER.registerController('userspace:editor:form', {
       }
 
       ev.preventDefault();
-    });
+    }
+
+    $('form').submit(checkUploads);
+    $('a:not(form a)').click(checkUploads);
+    window.onbeforeunload = checkUploads;
   },
 });
