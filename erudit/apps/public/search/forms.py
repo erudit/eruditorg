@@ -60,6 +60,12 @@ AVAILABILITY_CHOICES = (
     ((date.today() - timedelta(days=365)), _("1 an")),
 )
 
+FUNDS_CHOICES = (
+    ("Érudit", _("Érudit")),
+    ("UNB", _("UNB (University of New-Brunswick)")),
+    ("Persée", _("Persée")),
+)
+
 
 def get_years_range(year_start=1900, year_end=(date.today().year+1), reverse=False,
                     add_empty_choice=False, empty_string=""):
@@ -154,6 +160,9 @@ class SearchFormHelper(FormHelper):
                         Field('pub_year_end'),
                         Field('available_since'),
                     ),
+                    Div(
+                        Field('funds_limit'),
+                    ),
                 ),
             ),
         )
@@ -217,6 +226,11 @@ class SearchForm(forms.Form):
     available_since = forms.ChoiceField(
         label=_("Dans Érudit depuis"), widget=forms.Select,
         choices=AVAILABILITY_CHOICES, required=False
+    )
+
+    funds_limit = forms.MultipleChoiceField(
+        label=_("Fonds"), widget=forms.CheckboxSelectMultiple,
+        choices=FUNDS_CHOICES, required=False
     )
 
     def __init__(self, *args, **kwargs):

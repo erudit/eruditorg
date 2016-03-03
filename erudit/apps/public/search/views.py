@@ -91,6 +91,10 @@ class Search(SolrServiceRequiredMixin, FormView):
         self.search_extras["available_since"] = \
             data.get("available_since", None)
 
+        # Document available since date
+        self.search_extras["funds"] = \
+            data.get("funds_limit", None)
+
         # Sorting / Pagination
         self.sort = data.get("sort", None)
         self.sort_order = data.get("sort_order", None)

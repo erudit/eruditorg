@@ -12,6 +12,10 @@ ALL_FIELDS = {
         "field": "DateAjoutIndex",
         "label": _("Date d'ajout à Érudit")
     },
+    "funds": {
+        "field": "Fonds_fac",
+        "label": _("Fonds")
+    },
 }
 
 # Search fields
@@ -203,6 +207,7 @@ class Solr(object):
     def bulid_search_extras_query(self, search_extras):
         publication_date = search_extras.get("publication_date", {})
         available_since = search_extras.get("available_since", {})
+        funds = search_extras.get("funds", {})
 
         search_extras_query = []
 
@@ -219,6 +224,12 @@ class Solr(object):
             search_extras_query.append("{field}:[{available_since} TO NOW]".format(
                 field=ALL_FIELDS["date_added"]["field"],
                 available_since=self.format_solr_date(date_string=available_since),
+            ))
+
+        if funds:
+            search_extras_query.append("{field}:({funds})".format(
+                field=ALL_FIELDS["funds"]["field"],
+                funds=" OR ".join(funds),
             ))
 
         return " ".join(search_extras_query)
