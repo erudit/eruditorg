@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.core import urlresolvers
@@ -47,6 +49,29 @@ ADVANCED_SEARCH_FIELDS = (
     ("issn", _("ISSN")),
     ("isbn", _("ISBN")),
 )
+
+AVAILABILITY_CHOICES = (
+    ("", ""),
+    ((date.today() - timedelta(days=1)), _("1 jour")),
+    ((date.today() - timedelta(days=7)), _("1 semaine")),
+    ((date.today() - timedelta(days=14)), _("2 semaines")),
+    ((date.today() - timedelta(days=31)), _("1 mois")),
+    ((date.today() - timedelta(days=183)), _("6 mois")),
+    ((date.today() - timedelta(days=365)), _("1 an")),
+)
+
+
+def get_years_range(year_start=1900, year_end=(date.today().year+1), reverse=False,
+                    add_empty_choice=False, empty_string=""):
+    if not reverse:
+        years_range = [(str(year), str(year)) for year in range(year_start, year_end)]
+    else:
+        years_range = [(str(year), str(year)) for year in reversed(range(year_start, year_end))]
+
+    if add_empty_choice:
+        years_range.insert(0, ("", empty_string))
+
+    return years_range
 
 
 class SearchFormHelper(FormHelper):
@@ -124,6 +149,11 @@ class SearchFormHelper(FormHelper):
                         Field('advanced_search_term10'),
                         Field('advanced_search_field10'),
                     ),
+                    Div(
+                        Field('pub_year_start'),
+                        Field('pub_year_end'),
+                        Field('available_since'),
+                    ),
                 ),
             ),
         )
@@ -173,6 +203,20 @@ class SearchForm(forms.Form):
     advanced_search_term5 = forms.CharField(label="", widget=forms.TextInput, required=False, )
     advanced_search_field5 = forms.ChoiceField(
         label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+    )
+
+    pub_year_start = forms.ChoiceField(
+        label=_("Publiés entre"), widget=forms.Select,
+        choices=get_years_range(add_empty_choice=True), required=False
+    )
+    pub_year_end = forms.ChoiceField(
+        label="", widget=forms.Select,
+        choices=get_years_range(reverse=True, add_empty_choice=True), required=False
+    )
+
+    available_since = forms.ChoiceField(
+        label=_("Dans Érudit depuis"), widget=forms.Select,
+        choices=AVAILABILITY_CHOICES, required=False
     )
 
     def __init__(self, *args, **kwargs):

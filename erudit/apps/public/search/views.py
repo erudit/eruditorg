@@ -45,6 +45,7 @@ class Search(SolrServiceRequiredMixin, FormView):
         self.filter_choices = {}
         self.selected_filters = {}
         self.advanced_search = []
+        self.search_extras = {}
 
         return super(Search, self).__init__(*args, **kwargs)
 
@@ -54,21 +55,20 @@ class Search(SolrServiceRequiredMixin, FormView):
 
     def get_solr_data(self, form):
         """Query solr"""
-        self.search_term = form.cleaned_data.get("search_term", None)
-        self.sort = form.cleaned_data.get("sort", None)
-        self.sort_order = form.cleaned_data.get("sort_order", None)
-        self.page = form.cleaned_data.get("page", 1)
-        self.results_per_query = self.paginate_by
-        self.start_at = ((self.page - 1) * self.results_per_query)
+        data = form.cleaned_data
 
+        # Simple search
+        self.search_term = data.get("search_term", None)
+
+        # Advanced search
         for i in range(10):
-            advanced_search_operator = form.cleaned_data.get(
+            advanced_search_operator = data.get(
                 "advanced_search_operator{counter}".format(counter=i+1), None
             )
-            advanced_search_term = form.cleaned_data.get(
+            advanced_search_term = data.get(
                 "advanced_search_term{counter}".format(counter=i+1), None
             )
-            advanced_search_field = form.cleaned_data.get(
+            advanced_search_field = data.get(
                 "advanced_search_field{counter}".format(counter=i+1), None
             )
 
@@ -79,23 +79,44 @@ class Search(SolrServiceRequiredMixin, FormView):
                     "search_field": advanced_search_field,
                 })
 
+        # Publication year
+        if data.get("pub_year_start", None) or data.get("pub_year_end", None):
+            self.search_extras["publication_date"] = {}
+            self.search_extras["publication_date"]["pub_year_start"] = \
+                data.get("pub_year_start", None)
+            self.search_extras["publication_date"]["pub_year_end"] = \
+                data.get("pub_year_end", None)
+
+        # Document available since date
+        self.search_extras["available_since"] = \
+            data.get("available_since", None)
+
+        # Sorting / Pagination
+        self.sort = data.get("sort", None)
+        self.sort_order = data.get("sort_order", None)
+        self.page = data.get("page", 1)
+        self.results_per_query = self.paginate_by
+        self.start_at = ((self.page - 1) * self.results_per_query)
+
+        # If nothing has been searched for, return nothing
         if not (self.search_term or advanced_search_term):
             return None
 
         else:
-            # try:
-            return self.solr_conn.simple_search(
-                search_term=self.search_term,
-                sort=self.sort,
-                sort_order=self.sort_order,
-                start_at=self.start_at,
-                results_per_query=self.results_per_query,
-                limit_filter_fields=self.limit_filter_fields,
-                selected_filters=self.selected_filters,
-                advanced_search=self.advanced_search,
-            )
-            # except:
-            #    return None
+            try:
+                return self.solr_conn.search(
+                    search_term=self.search_term,
+                    advanced_search=self.advanced_search,
+                    search_extras=self.search_extras,
+                    sort=self.sort,
+                    sort_order=self.sort_order,
+                    start_at=self.start_at,
+                    results_per_query=self.results_per_query,
+                    limit_filter_fields=self.limit_filter_fields,
+                    selected_filters=self.selected_filters,
+                    )
+            except:
+                return None
 
     def get_queryset(self, doc_ids):
         """Query Django models using Solr data"""

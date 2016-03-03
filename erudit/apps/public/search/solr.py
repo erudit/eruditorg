@@ -3,6 +3,17 @@ import requests
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+ALL_FIELDS = {
+    "years": {
+        "field": "AnneePublication",
+        "label": _("Années de publication")
+    },
+    "date_added": {
+        "field": "DateAjoutIndex",
+        "label": _("Date d'ajout à Érudit")
+    },
+}
+
 # Search fields
 SEARCH_FIELDS = {
     "all": "TexteComplet",
@@ -63,7 +74,7 @@ FILTER_FIELDS = {
 class Solr(object):
     """Connects to Solr
 
-    - simple_search: looks for search term with simple sorting options
+    - search: looks for search term with simple sorting options
     - advanced_seaerch: Advanced search
     """
 
@@ -71,11 +82,11 @@ class Solr(object):
         super(Solr, self).__init__()
         self.base_url = base_url
         self.result_format_paramt = "json"
-        self.simple_search_index = "TexteComplet"
+        self.search_index = "TexteComplet"
         self.sort_fields = SORT_FIELDS
         self.filter_fields = FILTER_FIELDS
 
-    def search(self, params):
+    def call_api(self, params):
         """Does actual search on Solr based on params received from higher up functions"""
         search_url = "{base_url}select".format(base_url=self.base_url)
 
@@ -91,6 +102,12 @@ class Solr(object):
                 return response.url, response.json()
             except:
                 return None, {}
+
+    def format_solr_date(self, date_string):
+        if "T" not in date_string.upper():
+            return "{date_string}T23:59:59Z".format(date_string=date_string)
+        else:
+            return date_string
 
     def clean_data(self, raw_data):
         cleaned_data = {
@@ -183,9 +200,32 @@ class Solr(object):
 
         return "({query_string})".format(query_string=" ".join(advanced_search_query))
 
-    def simple_search(self, search_term, sort="relevance", sort_order="asc",
-                      limit_filter_fields=FILTER_FIELDS, selected_filters={},
-                      advanced_search=[], start_at=0, results_per_query=10):
+    def bulid_search_extras_query(self, search_extras):
+        publication_date = search_extras.get("publication_date", {})
+        available_since = search_extras.get("available_since", {})
+
+        search_extras_query = []
+
+        if publication_date:
+            pub_year_start = publication_date.get("pub_year_start", "*")
+            pub_year_end = publication_date.get("pub_year_end", "*")
+            search_extras_query.append("{field}:[{pub_year_start} TO {pub_year_end}]".format(
+                field=ALL_FIELDS["years"]["field"],
+                pub_year_start=pub_year_start,
+                pub_year_end=pub_year_end
+            ))
+
+        if available_since:
+            search_extras_query.append("{field}:[{available_since} TO NOW]".format(
+                field=ALL_FIELDS["date_added"]["field"],
+                available_since=self.format_solr_date(date_string=available_since),
+            ))
+
+        return " ".join(search_extras_query)
+
+    def search(self, search_term, sort="relevance", sort_order="asc",
+               limit_filter_fields=FILTER_FIELDS, selected_filters={},
+               advanced_search=[], search_extras={}, start_at=0, results_per_query=10):
         """Simple search
 
         - search_term: search term to look for
@@ -214,8 +254,8 @@ class Solr(object):
         }
 
         # String to search for
-        params["q"] = "{simple_search_index}:{search_term}".format(
-            simple_search_index=self.simple_search_index,
+        params["q"] = "{search_index}:{search_term}".format(
+            search_index=self.search_index,
             search_term=search_term
         )
 
@@ -230,6 +270,14 @@ class Solr(object):
                 base_search=params["q"],
                 advanced_search_query=self.build_advanced_search_query(
                     advanced_search=advanced_search
+                )
+            )
+
+        if search_extras:
+            params["q"] = "{base_search} {search_extras_query}".format(
+                base_search=params["q"],
+                search_extras_query=self.bulid_search_extras_query(
+                    search_extras=search_extras
                 )
             )
 
@@ -259,6 +307,5 @@ class Solr(object):
                 pass
         params["facet.field"] = facet_fields
 
-        query_url, raw_data = self.search(params=params)
-        # toto
+        query_url, raw_data = self.call_api(params=params)
         return self.clean_data(raw_data=raw_data)
