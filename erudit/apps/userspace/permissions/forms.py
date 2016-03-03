@@ -8,11 +8,11 @@ from django.contrib.contenttypes.models import ContentType
 
 from rules.permissions import permissions
 
-from core.permissions.models import Rule
+from core.permissions.models import ObjectPermission
 from erudit.models import Journal
 
 
-class RuleForm(ModelForm):
+class ObjectPermissionForm(ModelForm):
     """
     This form provides a way to define rules based on user journal membership
     (logged user), to filter available journals, users and permisions.
@@ -36,12 +36,12 @@ class RuleForm(ModelForm):
     permission = forms.ChoiceField(label=_("Permission"))
 
     class Meta:
-        model = Rule
+        model = ObjectPermission
         fields = ['journal', 'user', 'permission', ]
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
-        super(RuleForm, self).__init__(*args, **kwargs)
+        super(ObjectPermissionForm, self).__init__(*args, **kwargs)
         journals_with_manage_permissions = user.journals.all()
         self.fields['journal'].queryset = journals_with_manage_permissions
         us = [j.members.all() for j in journals_with_manage_permissions]
@@ -63,7 +63,7 @@ class RuleForm(ModelForm):
         check data integrity for the couple user / journal.
         (Ideally, the field user should be filtered based on journal selection.)
         """
-        cleaned_data = super(RuleForm, self).clean()
+        cleaned_data = super(ObjectPermissionForm, self).clean()
         self.user = cleaned_data.get("user")
         self.journal = cleaned_data.get("journal")
 
@@ -78,7 +78,7 @@ class RuleForm(ModelForm):
         """
         Create the generic rule from form data
         """
-        instance = super(RuleForm, self).save(commit=False)
+        instance = super(ObjectPermissionForm, self).save(commit=False)
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         instance.content_type = ct
         instance.object_id = self.journal.id

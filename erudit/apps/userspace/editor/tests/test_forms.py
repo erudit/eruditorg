@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.contrib.contenttypes.models import ContentType
 
-from core.permissions.models import Rule
+from core.permissions.models import ObjectPermission
 from core.userspace.factories import UserFactory
+from core.editor.rules import MANAGE_ISSUESUBMISSION
 from erudit.factories import JournalFactory
 
 from ..forms import IssueSubmissionForm
@@ -13,10 +14,11 @@ class IssueSubmissionTestCase(TestCase):
     def authorize_user_on_journal(self, user, journal):
         ct = ContentType.objects.get(
             app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="editor.manage_issuesubmission")
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            permission=MANAGE_ISSUESUBMISSION)
 
     def test_journal_filter(self):
         user = UserFactory()

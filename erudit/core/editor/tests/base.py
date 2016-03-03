@@ -1,7 +1,8 @@
 from django.contrib.contenttypes.models import ContentType
 
 from erudit.tests import BaseEruditTestCase
-from core.permissions.models import Rule
+from core.permissions.models import ObjectPermission
+from core.editor.rules import MANAGE_ISSUESUBMISSION
 
 from ..models import IssueSubmission
 
@@ -24,7 +25,8 @@ class BaseEditorTestCase(BaseEruditTestCase):
         )
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=self.user,
-                            object_id=self.journal.id,
-                            permission="editor.manage_issuesubmission")
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=self.user,
+            object_id=self.journal.id,
+            permission=MANAGE_ISSUESUBMISSION)

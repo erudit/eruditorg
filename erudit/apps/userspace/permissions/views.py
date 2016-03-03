@@ -3,12 +3,12 @@ from django.views.generic import (TemplateView, CreateView,
                                   DeleteView, ListView)
 from django.utils.translation import ugettext_lazy as _
 
-from core.permissions.models import Rule
+from core.permissions.models import ObjectPermission
 from apps.userspace.viewmixins import (LoginRequiredMixin,
                                        UserspaceBreadcrumbsMixin)
 from apps.userspace.permissions.viewmixins import (PermissionsCheckMixin,
                                                    PermissionsBreadcrumbsMixin)
-from .forms import RuleForm
+from .forms import ObjectPermissionForm
 
 
 class DashboardView(UserspaceBreadcrumbsMixin, LoginRequiredMixin, TemplateView):
@@ -17,14 +17,14 @@ class DashboardView(UserspaceBreadcrumbsMixin, LoginRequiredMixin, TemplateView)
 
 class PermissionsListView(PermissionsBreadcrumbsMixin,
                           PermissionsCheckMixin, ListView):
-    model = Rule
+    model = ObjectPermission
     template_name = 'userspace/permissions/perm_list.html'
 
 
 class PermissionsCreateView(PermissionsBreadcrumbsMixin,
                             PermissionsCheckMixin, CreateView):
-    model = Rule
-    form_class = RuleForm
+    model = ObjectPermission
+    form_class = ObjectPermissionForm
     template_name = 'userspace/permissions/perm_create.html'
     title = _("Ajouter une permission")
 
@@ -39,7 +39,7 @@ class PermissionsCreateView(PermissionsBreadcrumbsMixin,
 
 class PermissionsDeleteView(PermissionsBreadcrumbsMixin,
                             PermissionsCheckMixin, DeleteView):
-    model = Rule
+    model = ObjectPermission
     template_name = 'userspace/permissions/perm_confirm_delete.html'
 
     def get_title(self):

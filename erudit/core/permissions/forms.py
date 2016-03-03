@@ -3,18 +3,18 @@ from django.utils.translation import ugettext_lazy as _
 
 from rules.permissions import permissions
 
-from .models import Rule
+from .models import ObjectPermission
 
 
-class RuleForm(forms.ModelForm):
+class ObjectPermissionForm(forms.ModelForm):
 
     permission = forms.ChoiceField()
 
     class Meta:
-        model = Rule
+        model = ObjectPermission
         fields = ('user', 'group', 'permission', )
 
     def __init__(self, *args, **kwargs):
-        super(RuleForm, self).__init__(*args, **kwargs)
+        super(ObjectPermissionForm, self).__init__(*args, **kwargs)
         permission_rules = [(perm, _(perm)) for perm in permissions.keys()]
         self.fields['permission'].choices = permission_rules
