@@ -66,6 +66,15 @@ FUNDS_CHOICES = (
     ("Persée", _("Persée")),
 )
 
+PUB_TYPES_CHOICES = (
+    ("Article", _("Article de revue scientifique")),
+    ("Culturel", _("Article de revue culturelle")),
+    ("Actes", _("Actes de colloque")),
+    ("Thèses", _("Thèses")),
+    ("Livres", _("Livres")),
+    ("Depot", _("Document déposé dans le dépôt de données (littérature grise)")),
+)
+
 
 def get_years_range(year_start=1900, year_end=(date.today().year+1), reverse=False,
                     add_empty_choice=False, empty_string=""):
@@ -163,6 +172,9 @@ class SearchFormHelper(FormHelper):
                     Div(
                         Field('funds_limit'),
                     ),
+                    Div(
+                        Field('pub_types'),
+                    ),
                 ),
             ),
         )
@@ -231,6 +243,11 @@ class SearchForm(forms.Form):
     funds_limit = forms.MultipleChoiceField(
         label=_("Fonds"), widget=forms.CheckboxSelectMultiple,
         choices=FUNDS_CHOICES, required=False
+    )
+
+    pub_types = forms.MultipleChoiceField(
+        label=_("Types de publication"), widget=forms.CheckboxSelectMultiple,
+        choices=PUB_TYPES_CHOICES, required=False
     )
 
     def __init__(self, *args, **kwargs):

@@ -16,6 +16,10 @@ ALL_FIELDS = {
         "field": "Fonds_fac",
         "label": _("Fonds")
     },
+    "publication_types": {
+        "field": "Corpus_fac",
+        "label": _("Types de publication")
+    },
 }
 
 # Search fields
@@ -206,8 +210,9 @@ class Solr(object):
 
     def bulid_search_extras_query(self, search_extras):
         publication_date = search_extras.get("publication_date", {})
-        available_since = search_extras.get("available_since", {})
-        funds = search_extras.get("funds", {})
+        available_since = search_extras.get("available_since", None)
+        funds = search_extras.get("funds", None)
+        pub_types = search_extras.get("pub_types", None)
 
         search_extras_query = []
 
@@ -229,6 +234,12 @@ class Solr(object):
         if funds:
             search_extras_query.append("{field}:({funds})".format(
                 field=ALL_FIELDS["funds"]["field"],
+                funds=" OR ".join(funds),
+            ))
+
+        if pub_types:
+            search_extras_query.append("{field}:({funds})".format(
+                field=ALL_FIELDS["publication_types"]["field"],
                 funds=" OR ".join(funds),
             ))
 
