@@ -1,0 +1,33 @@
+/**
+* various page headers
+*/
+
+.page-header-main {
+
+  hgroup {
+    padding-bottom: $margin-vertical-default;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 36px;
+    line-height: 1.4em;
+    @include fw-sans-bold();
+  }
+
+  h3 {
+    margin-bottom: 0;
+    font-size: $font-size-h4;
+    // @include fw-sans-medium();
+  }
+
+  figure.logo {
+    img {
+      float: right;
+      @media (max-width: $screen-xs-max) {
+        float: none;
+      }
+    }
+  }
+
+}

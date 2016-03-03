@@ -26,13 +26,13 @@ ROUTER.registerController('public:home', {
   		if( e ) {
   			e.preventDefault();
   			e.stopPropagation();
-  		};
+  		}
 
   		var target = $(this).attr('href').replace('#', '');
   		if( !target ) return false;
 
-		$('html, body').animate( { scrollTop: $('#homepage-content a[name="'+target+'"]').offset().top }, 750 );
-		return false;
+		  $('html, body').animate( { scrollTop: $('#homepage-content a[name="'+target+'"]').offset().top }, 750 );
+		  return false;
   	});
   }
 

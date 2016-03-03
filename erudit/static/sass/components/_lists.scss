@@ -36,7 +36,7 @@ ol {
 }
 
 // Inline turns list items into inline-block
-ol,ul {
+ol, ul {
 
   &.inline {
     @include list-unstyled;

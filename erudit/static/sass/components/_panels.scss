@@ -1,5 +1,78 @@
+/**
+* sidebar block
+*/
+
+.sidebar-block {
+  margin-bottom: $margin-vertical-default;
+  > header {
+    margin-bottom: $margin-vertical-default/2;
+  }
+}
+
+/**
+* Collapse accordion
+*/
+
+.collapse-group {
+
+  a[data-toggle="collapse"] {
+
+    &:hover, &:active {
+      color: $color-red;
+      text-decoration: none;
+    }
+
+    &:focus {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    i.collapse-chevron {
+      font-size: 18px;
+      position: relative;
+      top: 6px;
+    }
+
+    // position: relative;
+    // i.collapse-chevron {
+    //   @include transition(transform 150ms);
+    //   // @include rotate(180deg);
+    // }
+    // &.collapsed {
+    //   i.collapse-chevron {
+    //     top: -5px;
+    //     @include rotate(180deg);
+    //   }
+    // }
+  }
+
+  .panel-collapse {
+    overflow: hidden;
+  }
+
+  .collapsing {
+    @include transition(all 500ms);
+  }
+
+  .collapse {
+    overflow: hidden;
+    height: 0;
+    &.in {
+      height: auto;
+      overflow: visible;
+    }
+  }
+}
+
+
+
+
+/**
+* default panels
+*/
 .panel-group {
   margin: 20px;
+  border: 1px solid red;
   .panel {
     box-shadow: none;
     @include border-radius(0);

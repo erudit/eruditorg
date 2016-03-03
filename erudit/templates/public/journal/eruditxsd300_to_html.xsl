@@ -44,7 +44,7 @@
 	<xsl:template match="article">
 
 		<!-- main header for article -->
-		<header class="row article-header">
+		<header class="row page-header-main article-header">
 
 			<hgroup class="col-xs-12 child-column-fit border-top">
 
@@ -66,7 +66,7 @@
 
 				<!-- TODO: cover image -->
 				<aside class="col-sm-4">
-					<figure class="journal-logo">
+					<figure class="logo">
 						<img src="http://www.erudit.org/revue/logosmall/erudit:erudit.rse22.jpg" alt="Couverture du numéro" class="img-responsive"/>
 					</figure>
 				</aside>

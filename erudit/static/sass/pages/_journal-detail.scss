@@ -1,0 +1,26 @@
+/**
+* Journal about page
+*/
+
+#journal-detail {
+
+  .journal-infos {
+
+    .journal-info-block {
+      border-top: 1px solid $gray-base;
+      padding-top: 25px;
+      padding-bottom: $margin-vertical-default;
+
+      h3 {
+        margin: 0 0 15px 0;
+      }
+
+      .content {
+        // margin: 10px 0 15px 0;
+      }
+
+    }
+
+  }
+
+}

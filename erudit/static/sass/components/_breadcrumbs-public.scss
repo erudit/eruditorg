@@ -5,9 +5,11 @@
 #breadcrumb {
 	margin-bottom: 0;
 	padding: $margin-vertical-default 0;
-	
-	p {
+
+	// border at bottom bottom
+	.container > .row > div {
+		@include grid-cell-border($direction: 'bottom');
 		padding-bottom: 15px;
-		border-bottom: 1px solid $dark-grey;
 	}
+
 }

@@ -123,7 +123,8 @@ class JournalAdmin(admin.ModelAdmin):
             'fields': (
                 ('code', 'formerly'),
                 ('localidentifier',),
-                ('name', 'display_name'),
+                ('name', 'display_name',),
+                ('subtitle',),
                 ('issn_print', 'issn_web'),
             ),
         }),

@@ -24,7 +24,7 @@
             <img src="{% static 'svg/logo-erudit-white.svg' %}" alt="Erudit" />
           </a>
         </h1>
-      
+
         <aside id="homepage-top-nav" class="pull-right">
           <nav>
             <ul class="unstyled">
@@ -38,14 +38,14 @@
                   <li><a href="#">{% trans "English" %}</a></li>
                 </ul>
               </li>
-            </ul>            
+            </ul>
           </nav>
         </aside>
       </div>
       <div class="row headline">
         <div class="col-xs-12">
           <p class="h1 color-white no-margin">{% trans "Promouvoir et diffuser <br>la recherche et la création" %}</p>
-        </div>        
+        </div>
       </div>
     </div>
   </div>
@@ -55,7 +55,7 @@
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 <div id="homepage-content">
-  
+
   <!-- STICKY NAVIGATION -->
   <nav class="container-fluid text-center homepage--sticky-nav">
     <ul class="unstyled">
@@ -68,7 +68,7 @@
       <li><a href="#publications">{% trans "Publications" %}</a></li>
     </ul>
   </nav>
-  
+
   <!-- SEARCH -->
   <div class="container">
     <div class="row search-module">
@@ -83,7 +83,7 @@
             <a href="#" class="color-red small">{% trans "Recherche détaillée" %}</a>
           </div>
         </form>
-      </div>   
+      </div>
     </div>
   </div>
 
@@ -166,7 +166,7 @@
                 {% for i in 'xxxxxxxxxxxxxxxxxx' %}
                 <li class="col-md-3"><a href="{% url 'public:journal:journal-list' %}#">{% lorem 2 w random %}</a></li>
                 {% endfor %}
-              </ul>            
+              </ul>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@
   </div>
 
 
-  
+
   <!-- NEWS -->
   <a name="news" class="invisible">{% trans "Nouvelles" %}</a>
   <div class="container">
@@ -189,7 +189,7 @@
       {% for entry in latest_news %}
       <article class="col-md-4 news--article">
         <p class="h5 color-red">Catégorie</p>
-        <h3 class="h2"><a href="{{ entry.link }}">{{ entry.title }}</a></h3>       
+        <h3 class="h2"><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
         <p class="summary">{{ entry.summary|safe }}</p>
         <time class="color-dark-grey" datetime="2001-05-15">22 Février 2016</time>
       </article>
@@ -199,12 +199,12 @@
     <div class="row">
       <div class="col-xs-12 text-center">
         <a href="#" class="btn btn-primary btn-lg">{% trans "Toutes les nouvelles d'Érudit" %}</a>
-      </div>      
+      </div>
     </div>
   </div>
-  
-  
-  
+
+
+
   <!-- ABOUT ERUDIT.ORG -->
   <a name="about-erudit" class="invisible">{% trans "erudit.org" %}</a>
   <div class="container">
@@ -251,7 +251,7 @@
       </div>
       <div class="col-md-3 publications--item">
         <h2 class="h2 color-red publications--item--title">{% trans "Thèses" %}</h2>
-        <p class="publications--item--summary">{% trans "Plus de 56 000 mémoires et  thèses indexés de 7 universités canadiennes." %}</p>
+        <p class="publications--item--summary">{% trans "Plus de 56 000 mémoires et thèses indexés de 7 universités canadiennes." %}</p>
         <p><a href="#" class="color-dark-grey">{% trans "Voir les thèses" %}</a></p>
       </div>
       <div class="col-md-3 publications--item">

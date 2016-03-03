@@ -101,16 +101,6 @@ section#article-detail {
       }
     }
 
-    // logo is pushed to right
-    figure.journal-logo {
-      img {
-        float: right;
-        @media (max-width: $screen-xs-max) {
-          float: none;
-        }
-      }
-    }
-
   }
 
   /**
@@ -224,7 +214,7 @@ section#article-detail {
       }
 
       // second level ol
-      ol {        
+      ol {
         li {
           padding: 0.25em 0;
         }
@@ -372,8 +362,11 @@ section#article-detail {
       }
 
       .source {
-        @include fw-serif-bold-italic();
+        @include fw-serif-bold();
         font-size: 14px;
+        em, i {
+          @include fw-serif-bold-italic();
+        }
       }
     }
 

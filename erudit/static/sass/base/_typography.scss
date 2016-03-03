@@ -27,6 +27,17 @@ h1, h2, h3, h4, h5, h6,
     line-height: 1;
     color: $headings-small-color;
   }
+
+  // add border at top or bottom of the heading
+  &.border-top {
+    padding-top: $margin-vertical-default/4;
+    border-top: 1px solid $gray-base;
+  }
+  &.border-bottom {
+    padding-bottom: $margin-vertical-default/4;
+    border-bottom: 1px solid $gray-base;
+  }
+
 }
 
 h1, .h1,

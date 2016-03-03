@@ -109,7 +109,7 @@ gulp.task('iconfont', function(){
       timestamp: runTimestamp
     }))
     .on('glyphs', function(glyphs, options) {
-      // CSS templating, e.g. 
+      // CSS templating, e.g.
       gulp.src(iconfont_dir + 'template.scss')
         .pipe(consolidate('lodash', {
           glyphs: glyphs,
@@ -155,7 +155,7 @@ gulp.task('watch', function() {
   // watch any less file /css directory, ** is for recursive mode
   gulp.watch(sass_dir + '**/*.scss', ['sass-erudit-public', 'sass-erudit-userspace', 'sass-erudit-pdfjs', 'modernizr']);
   // watch any js file /js directory, ** is for recursive mode
-  gulp.watch(scripts_dir + '**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors', 'modernizr']);
+  gulp.watch(scripts_dir + '**/*.js', ['scripts-erudit-main', 'scripts-erudit-vendors']);
   // watch any svg file /iconfont directory, ** is for recursive mode
   gulp.watch(iconfont_dir + '**/*.svg', ['iconfont']);
 

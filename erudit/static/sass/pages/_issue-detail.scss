@@ -1,0 +1,63 @@
+section#issue-detail {
+
+	.issue-detail--resume {
+		figure {
+			margin-bottom: 50px;
+		}
+		h2 {
+			padding-bottom: 40px;
+		}
+		small {
+			display: block;
+			margin-bottom: 10px;
+		}
+	}
+
+	.issue-detail--meta_blocks {
+		padding-bottom: $margin-vertical-default/4;
+  	border-bottom: 1px solid $gray-base;
+	}
+
+	/**
+	* Page header overides
+	*/
+	.page-header-main {
+
+		h2 {
+			margin-bottom: 90px;
+		}
+
+		h3 {
+			font-size: 28px;
+			margin-bottom: 40px;
+		}
+	}
+
+	/**
+	* list of articles
+	*/
+	.issue-detail--articles {
+
+		header {
+			h3 {
+				padding-top: 40px;
+			}
+		}
+
+		article.issue-article {
+			padding-top: 40px;
+			padding-bottom: 40px;
+			border-bottom: 1px solid rgba(0,0,0,0.5);
+
+			h4 {
+				@include fw-sans-medium();
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+
+}

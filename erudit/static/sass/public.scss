@@ -46,7 +46,9 @@
   'components/breadcrumbs-public',
   'components/fileupload',
   'components/lists',
-  'components/panels';
+  'components/panels',
+  'components/buttons',
+  'components/page-headers';
 
 // 6. Page-specific styles
 @import
@@ -54,6 +56,10 @@
   'pages/login',
   'pages/individual_subscription',
   'pages/journal-list',
+  'pages/journals',
+  'pages/journal-detail',
+  'pages/issues',
+  'pages/issue-detail',
   'pages/article-detail';
 
 // 7. Themes
