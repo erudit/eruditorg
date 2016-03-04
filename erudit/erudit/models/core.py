@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
+from django.utils.text import slugify
 from django.core.urlresolvers import reverse as reverse_url
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, EruditArticle
@@ -381,6 +382,11 @@ class Journal(FedoraMixin, Named, Edinum):
         """ Return the last published Issue of this Journal that is available in open access """
         return self.published_issues.filter(open_access=True) \
             .order_by('-date_published').first()
+
+    @property
+    def letter_prefix(self):
+        """ Return its name first letter """
+        return slugify(self.name[0]).upper()
 
     def get_absolute_url(self):
         return reverse_url(

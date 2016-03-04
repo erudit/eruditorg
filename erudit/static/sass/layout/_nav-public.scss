@@ -14,7 +14,7 @@ nav#main-nav {
 
   li {
     display: inline-block;
-    margin-left: $grid-gutter-width;
+    margin-left: $grid-gutter-width * 2;
   }
 
   // main section nav items with drop-downs

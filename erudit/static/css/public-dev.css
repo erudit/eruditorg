@@ -1958,7 +1958,7 @@ nav#main-nav {
     transform: translate(0, -50%); }
   nav#main-nav li {
     display: inline-block;
-    margin-left: 22px; }
+    margin-left: 44px; }
   nav#main-nav a.main-section {
     display: block;
     font-size: 16px;
@@ -3058,7 +3058,6 @@ body.journal-list #breadcrumb {
 .journal-meta li {
   margin-bottom: 22px; }
   .journal-meta li h5 {
-    font-size: 12px;
     margin: 0 0 4px 0; }
   .journal-meta li p {
     margin: 0; }
@@ -3135,9 +3134,9 @@ section#issue-detail {
     margin-bottom: 50px; }
   section#issue-detail .issue-detail--resume h2 {
     padding-bottom: 40px; }
-  section#issue-detail .issue-detail--resume small {
-    display: block;
-    margin-bottom: 10px; }
+  section#issue-detail .issue-detail--resume h5 {
+    margin-bottom: 5px;
+    color: #333333; }
   section#issue-detail .issue-detail--meta_blocks {
     padding-bottom: 11px;
     border-bottom: 1px solid #000; }

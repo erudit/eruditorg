@@ -4,13 +4,16 @@ section#issue-detail {
 		figure {
 			margin-bottom: 50px;
 		}
+
 		h2 {
 			padding-bottom: 40px;
 		}
-		small {
-			display: block;
-			margin-bottom: 10px;
+
+		h5 {
+			margin-bottom: 5px;
+			color: $gray-dark;
 		}
+
 	}
 
 	.issue-detail--meta_blocks {
