@@ -6,6 +6,23 @@ from core.subscription.factories import PolicyFactory, IndividualAccountFactory
 from core.subscription.models import IndividualAccount
 
 
+class LoginTestCase(TestCase):
+
+    def test_login_ok(self):
+        account = IndividualAccountFactory()
+        account.password = '123qwe'
+        account.save()
+        status = self.client.login(username=account.username, password='123qwe')
+        self.assertTrue(status)
+
+    def test_login_ko(self):
+        account = IndividualAccountFactory()
+        account.password = '123qwe'
+        account.save()
+        status = self.client.login(username=account.username, password='111')
+        self.assertFalse(status)
+
+
 class AccountListViewTestCase(TestCase):
 
     def setUp(self):

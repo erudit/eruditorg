@@ -65,10 +65,10 @@
         {% for account in object_list %}
         <tr>
             <th scope="row">{{ account.id }}</th>
-            <td>{{ account.lastname }}</td>
-            <td>{{ account.firstname }}</td>
+            <td>{{ account.last_name }}</td>
+            <td>{{ account.first_name }}</td>
             <td>{{ account.email }}</td>
-            <td>{{ account.organization_policy }}</td>
+            <td>{{ account.policy }}</td>
             <td>
                 <a href="{% url 'userspace:subscription:account_update' account.pk %}">
                     {% trans 'Modifier' %}

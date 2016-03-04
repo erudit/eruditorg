@@ -11,8 +11,8 @@ class IndividualAccountFilter(django_filters.FilterSet):
     class Meta:
         model = IndividualAccount
         fields = {
-            'firstname': ['icontains', ],
-            'lastname': ['icontains', ],
+            'first_name': ['icontains', ],
+            'last_name': ['icontains', ],
             'policy': ['exact', ]
         }
 
@@ -20,7 +20,7 @@ class IndividualAccountFilter(django_filters.FilterSet):
 class IndividualAccountForm(ModelForm):
     class Meta:
         model = IndividualAccount
-        fields = ['firstname', 'lastname', 'email', 'policy', ]
+        fields = ['first_name', 'last_name', 'email', 'policy', ]
 
     def __init__(self, user, *args, **kwargs):
         super(IndividualAccountForm, self).__init__(*args, **kwargs)
@@ -42,5 +42,8 @@ class IndividualAccountResetPwdForm(ModelForm):
         model = IndividualAccount
         fields = ['password', ]
 
-    def __init__(self, *args, **kwargs):
-        super(IndividualAccountResetPwdForm, self).__init__(*args, **kwargs)
+    def save(self, **kwargs):
+        # password should not be specify here, but empty value are not set
+        # to the instance property
+        self.instance.password = self.cleaned_data['password']
+        return super().save(**kwargs)
