@@ -1,18 +1,17 @@
 from django.test import TestCase
 
+from base.factories import UserFactory
 from erudit.factories import JournalFactory
 
-from core.userspace.factories import UserFactory
-
-from ..forms import RuleForm
+from ..forms import AuthorizationForm
 
 
-class RuleFormTestCase(TestCase):
+class AuthorizationFormTestCase(TestCase):
 
     def test_journal_init(self):
         user = UserFactory()
         data = {'user': user}
-        form = RuleForm(**data)
+        form = AuthorizationForm(**data)
         self.assertEqual(len(form.fields['journal'].choices), 0)
 
     def test_journal_filter(self):
@@ -24,7 +23,7 @@ class RuleFormTestCase(TestCase):
         journal_in.save()
 
         journal_not_in = JournalFactory()
-        form = RuleForm(**data)
+        form = AuthorizationForm(**data)
         choices = [c[0] for c in form.fields['journal'].choices]
         self.assertTrue(journal_in.id in choices)
         self.assertFalse(journal_not_in.id in choices)
@@ -32,7 +31,7 @@ class RuleFormTestCase(TestCase):
     def test_user_init(self):
         user = UserFactory()
         data = {'user': user}
-        form = RuleForm(**data)
+        form = AuthorizationForm(**data)
         self.assertEqual(len(form.fields['user'].choices), 0)
 
     def test_user_filter(self):
@@ -48,15 +47,8 @@ class RuleFormTestCase(TestCase):
 
         journal_not_in = JournalFactory()
         journal_not_in.members.add(user_not_in)
-        form = RuleForm(**data)
+        form = AuthorizationForm(**data)
         choices = [c[0] for c in form.fields['user'].choices]
         self.assertTrue(user.id in choices)
         self.assertTrue(user_in.id in choices)
         self.assertFalse(user_not_in.id in choices)
-
-    def test_permission_filter(self):
-        user = UserFactory()
-        data = {'user': user}
-        form = RuleForm(**data)
-        choices = set([c[0] for c in form.fields['permission'].choices])
-        self.assertEqual(choices, set(form.get_permission_filters()))

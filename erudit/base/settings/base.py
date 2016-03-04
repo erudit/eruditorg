@@ -39,20 +39,19 @@ INSTALLED_APPS = (
     'apps.public.journal',
     'apps.public.search',
     'apps.public.thesis',
+    'apps.userspace.authorization',
     'apps.userspace.dashboard',
     'apps.userspace.editor',
     'apps.userspace.journal',
-    'apps.userspace.permissions',
     'apps.userspace.reporting',
     'apps.userspace.subscription',
+    'core.authorization',
     'core.editor',
     'core.journal',
-    'core.permissions',
     'core.reporting',
     'core.subscription',
-    'core.userspace',
 
-    #  third-party apps
+    # Third-party apps
     'grappelli',
     'modeltranslation',
     'post_office',
@@ -65,7 +64,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #  third-party apps
+    # Third-party apps
     'pipeline',
     'crispy_forms',
     'django_select2',
