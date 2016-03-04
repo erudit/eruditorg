@@ -2,8 +2,10 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
+from core.editor.rules import MANAGE_ISSUESUBMISSION
+from core.userspace.rules import MANAGE_PERMISSION
 from core.subscription.factories import PolicyFactory
-from core.permissions.models import Rule
+from core.permissions.models import ObjectPermission
 from core.userspace.factories import UserFactory
 from erudit.factories import JournalFactory
 
@@ -42,10 +44,11 @@ class MenuTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="editor.manage_issuesubmission")
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            permission=MANAGE_ISSUESUBMISSION)
 
         url = reverse('userspace:editor:issues')
         self.client.login(username="user", password="user")
@@ -71,10 +74,11 @@ class MenuTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="userspace.manage_permissions")
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            permission=MANAGE_PERMISSION)
 
         url = reverse('userspace:permissions:perm_list')
         self.client.login(username="user", password="user")

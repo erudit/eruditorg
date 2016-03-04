@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
 
-class Rule(models.Model):
+class ObjectPermission(models.Model):
     date_creation = models.DateTimeField(
         editable=False,
         null=True,

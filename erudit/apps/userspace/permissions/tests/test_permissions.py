@@ -2,8 +2,9 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
-from core.permissions.models import Rule
+from core.permissions.models import ObjectPermission
 from core.userspace.factories import UserFactory
+from core.userspace.rules import MANAGE_PERMISSION
 from erudit.factories import JournalFactory
 
 
@@ -38,10 +39,11 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=self.user_granted,
-                            object_id=journal.id,
-                            permission="userspace.manage_permissions")
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            permission=MANAGE_PERMISSION)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
@@ -69,10 +71,11 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=self.user_granted,
-                            object_id=journal.id,
-                            permission='userspace.manage_permissions')
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            permission=MANAGE_PERMISSION)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
@@ -88,10 +91,11 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        rule = Rule.objects.create(content_type=ct,
-                                   user=self.user_granted,
-                                   object_id=journal.id,
-                                   permission='userspace.manage_permissions')
+        rule = ObjectPermission.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            permission=MANAGE_PERMISSION)
 
         url = reverse('userspace:permissions:perm_delete', args=(rule.pk, ))
 
@@ -109,10 +113,11 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        rule = Rule.objects.create(content_type=ct,
-                                   user=self.user_granted,
-                                   object_id=journal.id,
-                                   permission='userspace.manage_permissions')
+        rule = ObjectPermission.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            permission=MANAGE_PERMISSION)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
@@ -121,7 +126,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class RulesTestCase(TestCase):
+class ObjectPermissionsTestCase(TestCase):
 
     def test_user_cant_manage(self):
         user = UserFactory()
@@ -140,10 +145,12 @@ class RulesTestCase(TestCase):
         journal.members.add(user)
         journal.save()
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="userspace.manage_permissions")
+        ObjectPermission.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            permission=MANAGE_PERMISSION)
+
         is_granted = user.has_perm('userspace.manage_permissions', journal)
         self.assertEqual(is_granted, True)
 
