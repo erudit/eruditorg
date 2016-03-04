@@ -9,7 +9,8 @@ from erudit.models import EruditDocument
 from . import solr, forms
 
 
-class Search(SolrServiceRequiredMixin, FormView):
+# class Search(SolrServiceRequiredMixin, FormView):
+class Search(FormView):
     model = EruditDocument
     object_list = []
     results_count = None
@@ -97,20 +98,20 @@ class Search(SolrServiceRequiredMixin, FormView):
             return None
 
         else:
-            # try:
-            return self.solr_conn.search(
-                search_term=self.search_term,
-                advanced_search=self.advanced_search,
-                search_extras=self.search_extras,
-                sort=self.sort,
-                sort_order=self.sort_order,
-                start_at=self.start_at,
-                results_per_query=self.results_per_query,
-                limit_filter_fields=self.limit_filter_fields,
-                selected_filters=self.selected_filters,
-                )
-            # except:
-            #     return None
+            try:
+                return self.solr_conn.search(
+                    search_term=self.search_term,
+                    advanced_search=self.advanced_search,
+                    search_extras=self.search_extras,
+                    sort=self.sort,
+                    sort_order=self.sort_order,
+                    start_at=self.start_at,
+                    results_per_query=self.results_per_query,
+                    limit_filter_fields=self.limit_filter_fields,
+                    selected_filters=self.selected_filters,
+                    )
+            except:
+                return None
 
     def get_queryset(self, doc_ids):
         """Query Django models using Solr data"""
