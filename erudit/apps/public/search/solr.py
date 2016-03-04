@@ -291,7 +291,7 @@ class Solr(object):
         facet_fields = []
         for limit_filter_field in limit_filter_fields:
             try:
-                facet_fields.append(self.filter_fields[limit_filter_field]["field"])
+                facet_fields.append(self.filter_fields[limit_filter_field])
             except:
                 pass
         params["facet.field"] = facet_fields
