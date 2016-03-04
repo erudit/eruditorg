@@ -105,9 +105,13 @@
           <div class="row">
             <div class="col-md-6">
               <p class="h5 color-red">Catégorie</p>
-              <h3 class="h2 latest-issues--article--issue">Nom de la revue</h3>
-              <p class="latest-issues--article--title">Titre du numéro</p>
-              <p class="latest-issues--article--details">Volume. Numéro. Année</p>
+              <h3 class="h2 latest-issues--article--issue">{{ issue.journal.name }}</h3>
+              <p class="latest-issues--article--title">{{ issue.title }}</p>
+              <p class="latest-issues--article--details">
+              {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
+                Numéro {{ number }} - {{ date }}
+              {% endblocktrans %}
+              </p>
             </div>
             <div class="col-md-6">
               <img src="http://placehold.it/350x450" alt="Titre du numéro - Nom de la revue" class="img-responsive">
