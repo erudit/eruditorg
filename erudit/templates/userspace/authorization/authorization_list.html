@@ -4,9 +4,9 @@
 {% block content-main %}
 
 
-<h1>{% trans "Permissions" %} </h1>
+<h1>{% trans "Autorisations" %} </h1>
 
-<a class="btn btn-primary" href="{% url 'userspace:permissions:perm_create' %}">
+<a class="btn btn-primary" href="{% url 'userspace:authorization:authorization_create' %}">
     {% trans "Ajouter un accès" %}
 </a>
 
@@ -36,7 +36,7 @@
                 {% trans 'Utilisateur' %}
             </th>
             <th>
-                {% trans 'Permission' %}
+                {% trans 'Autorisation' %}
             </th>
             <th>
                 {% trans 'Journal' %}
@@ -47,14 +47,14 @@
         </tr>
     </thead>
     <tbody>
-        {% for rule in object_list %}
+        {% for authorization in object_list %}
         <tr>
-            <th scope="row">{{ rule.id }}</th>
-            <td>{{ rule.user }}</td>
-            <td>{{ rule.permission }}</td>
-            <td>{{ rule.content_object }}</td>
+            <th scope="row">{{ authorization.id }}</th>
+            <td>{{ authorization.user }}</td>
+            <td>{{ authorization.get_authorization_codename_display }}</td>
+            <td>{{ authorization.content_object }}</td>
             <td>
-                <a href="{% url 'userspace:permissions:perm_delete' rule.pk %}">
+                <a href="{% url 'userspace:authorization:authorization_delete' authorization.pk %}">
                     {% trans 'Supprimer' %}
                 </a>
             </td>

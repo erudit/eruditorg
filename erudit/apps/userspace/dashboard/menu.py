@@ -29,11 +29,11 @@ editor = menu.AnyPermissionsNode(
     context={'icon': 'fa-folder-open-o'},
 )
 
-permissions = menu.AnyPermissionsNode(
-    id='permissions',
-    label=_('Permissions'),
-    pattern_name='userspace:permissions:perm_list',
-    permissions=['userspace.manage_permissions', ],
+authorization = menu.AnyPermissionsNode(
+    id='autorisation',
+    label=_('Autorisations'),
+    pattern_name='userspace:authorization:authorization_list',
+    permissions=['authorization.manage_authorizations', ],
     context={'icon': 'fa-lock'},
 )
 
@@ -47,5 +47,5 @@ subscription = menu.AnyPermissionsNode(
 
 userspace.children.append(journal)
 userspace.children.append(editor)
-userspace.children.append(permissions)
+userspace.children.append(authorization)
 userspace.children.append(subscription)

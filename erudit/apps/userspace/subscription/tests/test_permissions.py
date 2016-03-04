@@ -2,8 +2,8 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
+from base.factories import UserFactory
 from core.subscription.factories import PolicyFactory, IndividualAccountFactory
-from core.userspace.factories import UserFactory
 
 
 class ViewsTestCase(TestCase):

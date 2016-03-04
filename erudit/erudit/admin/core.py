@@ -14,8 +14,6 @@ from erudit.models import (
     Collection,
 )
 
-from core.permissions.admin import RuleInline
-
 
 class CommentAdmin(admin.ModelAdmin):
 
@@ -37,13 +35,6 @@ class CommentAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         obj.save()
-
-
-class JournalRuleInline(RuleInline):
-    permission_filters = (
-        'userspace.manage_permissions',
-        'editor.manage_journal',
-    )
 
 
 class CollectionAdmin(admin.ModelAdmin):
@@ -93,8 +84,6 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 class JournalAdmin(admin.ModelAdmin):
-    inlines = (JournalRuleInline, )
-
     search_fields = [
         'code', 'name', 'display_name', 'issn_print',
         'issn_web', 'url', 'address', 'members'

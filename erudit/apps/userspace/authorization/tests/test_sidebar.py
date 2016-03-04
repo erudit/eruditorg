@@ -2,9 +2,10 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
+from base.factories import UserFactory
+from core.authorization.defaults import AuthorizationConfig as AC
+from core.authorization.models import Authorization
 from core.subscription.factories import PolicyFactory
-from core.permissions.models import Rule
-from core.userspace.factories import UserFactory
 from erudit.factories import JournalFactory
 
 
@@ -42,10 +43,11 @@ class MenuTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="editor.manage_issuesubmission")
+        Authorization.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_issuesubmission.codename)
 
         url = reverse('userspace:editor:issues')
         self.client.login(username="user", password="user")
@@ -71,12 +73,13 @@ class MenuTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="userspace.manage_permissions")
+        Authorization.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
 
-        url = reverse('userspace:permissions:perm_list')
+        url = reverse('userspace:authorization:authorization_list')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertContains(response, url)
@@ -86,7 +89,7 @@ class MenuTestCase(TestCase):
         user.set_password("user")
         user.save()
 
-        url = reverse('userspace:permissions:perm_list')
+        url = reverse('userspace:authorization:authorization_list')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertNotContains(response, url)

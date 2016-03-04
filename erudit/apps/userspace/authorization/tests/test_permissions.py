@@ -2,8 +2,9 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
-from core.permissions.models import Rule
-from core.userspace.factories import UserFactory
+from core.authorization.defaults import AuthorizationConfig as AC
+from core.authorization.models import Authorization
+from base.factories import UserFactory
 from erudit.factories import JournalFactory
 
 
@@ -21,7 +22,7 @@ class ViewsTestCase(TestCase):
     def test_permission_list_restricted(self):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:permissions:perm_list')
+        url = reverse('userspace:authorization:authorization_list')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
@@ -38,21 +39,22 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=self.user_granted,
-                            object_id=journal.id,
-                            permission="userspace.manage_permissions")
+        Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:permissions:perm_list')
+        url = reverse('userspace:authorization:authorization_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_permission_create_restricted(self):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:permissions:perm_create')
+        url = reverse('userspace:authorization:authorization_create')
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
@@ -69,14 +71,15 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=self.user_granted,
-                            object_id=journal.id,
-                            permission='userspace.manage_permissions')
+        Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:permissions:perm_create')
+        url = reverse('userspace:authorization:authorization_create')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -88,12 +91,13 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        rule = Rule.objects.create(content_type=ct,
-                                   user=self.user_granted,
-                                   object_id=journal.id,
-                                   permission='userspace.manage_permissions')
+        authorization = Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
 
-        url = reverse('userspace:permissions:perm_delete', args=(rule.pk, ))
+        url = reverse('userspace:authorization:authorization_delete', args=(authorization.pk, ))
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
@@ -109,14 +113,15 @@ class ViewsTestCase(TestCase):
         journal.save()
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        rule = Rule.objects.create(content_type=ct,
-                                   user=self.user_granted,
-                                   object_id=journal.id,
-                                   permission='userspace.manage_permissions')
+        authorization = Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:permissions:perm_delete', args=(rule.pk, ))
+        url = reverse('userspace:authorization:authorization_delete', args=(authorization.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -126,12 +131,12 @@ class RulesTestCase(TestCase):
     def test_user_cant_manage(self):
         user = UserFactory()
         journal = JournalFactory()
-        is_granted = user.has_perm('userspace.manage_permissions', journal)
+        is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, False)
 
         journal.members.add(user)
         journal.save()
-        is_granted = user.has_perm('userspace.manage_permissions', journal)
+        is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, False)
 
     def test_user_can_manage(self):
@@ -140,21 +145,22 @@ class RulesTestCase(TestCase):
         journal.members.add(user)
         journal.save()
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        Rule.objects.create(content_type=ct,
-                            user=user,
-                            object_id=journal.id,
-                            permission="userspace.manage_permissions")
-        is_granted = user.has_perm('userspace.manage_permissions', journal)
+        Authorization.objects.create(
+            content_type=ct,
+            user=user,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
+        is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, True)
 
     def test_superuser_can_manage(self):
         user = UserFactory(is_superuser=True)
         journal = JournalFactory()
-        is_granted = user.has_perm('userspace.manage_permissions', journal)
+        is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, True)
 
     def test_staff_can_manage(self):
         user = UserFactory(is_staff=True)
         journal = JournalFactory()
-        is_granted = user.has_perm('userspace.manage_permissions', journal)
+        is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, True)
