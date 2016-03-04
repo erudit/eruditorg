@@ -12,6 +12,8 @@ class AuthorizationDef(object):
 
 
 class AuthorizationConfig(object):
+    """ Defines the authorizations that can be given to users in the Érudit application. """
+
     can_manage_authorizations = AuthorizationDef(
         'authorization:can_manage_authorizations', _("Peut gérer les autorisation"))
     """
