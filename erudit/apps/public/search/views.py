@@ -4,7 +4,7 @@ from django.views.generic import FormView
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 
-from base.viewmixins import SolrServiceRequiredMixin
+# from base.viewmixins import SolrServiceRequiredMixin
 from erudit.models import EruditDocument
 from . import solr, forms
 
