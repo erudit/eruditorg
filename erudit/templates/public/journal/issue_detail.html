@@ -14,11 +14,143 @@
 
 {% block content %}
 
-<section id="issue-detail" class="container">
+{% trans "inconnu" as i18n_unknown %}
 
-  <header>
-    <h1>{{ issue.title }}</h1>
-  </header>
+<section id="issue-detail">
+
+  <div class="container">
+    <div class="row">
+
+      {# Journal information (on right side except mobile) #}
+      <aside class="col-sm-push-9 col-sm-3">
+
+        <div class="sidebar-block clearfix issue-detail--resume">
+
+          <figure class="col-xs-6 col-xs-offset-3 no-padding">
+            <a href="{{ journal.get_absolute_url }}"><img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{{ issue.title }}" /></a>
+          </figure>
+
+          <header class="col-xs-12 no-padding no-margin">
+            <h5 class="mono-space gray-lighter">{% trans "De la revue" %}</h5>
+            <h2 class="h4 border-bottom no-margin"><a href="{{ journal.get_absolute_url }}">{{ journal.name }}</a></h2>
+          </header>
+
+        </div>
+
+        {# journal meta infos #}
+        <div class="sidebar-block journal-meta">
+
+          <ul class="meta-blocks list-unstyled">
+
+            {% if journal.members.all %}
+            <li>
+              <h5 class="mono-space">{% trans "Direction" %}</h5>
+              {% for member in journal.members.all %}
+              <p>{{ member.get_full_name }}</p>
+              {% endfor %}
+            </li>
+            {% endif %}
+
+            {% if journal.publishers.all %}
+            <li>
+              <h5 class="mono-space">
+                {% blocktrans count total=journal.publishers.all|length %}
+                Éditeur
+                {% plural %}
+                Éditeurs
+                {% endblocktrans %}
+              </h5>
+              {% for publisher in journal.publishers.all %}
+              <p>{{ publisher.name }}</p>
+              {% endfor %}
+            </li>
+            {% endif %}
+
+            {% if journal.issn_print or journal.issn_web %}
+            <li>
+              <h5 class="mono-space">{% trans "ISSN" %}</h5>
+              {% if journal.issn_print %}
+              <p>{{ journal.issn_print }} ({% trans "imprimé" %})</p>
+              <p>{{ journal.issn_web }} ({% trans "numérique" %})</p>
+              {% endif %}
+            </li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </aside>
+
+      {# Journal about #}
+      <aside class="col-sm-8 col-sm-pull-3">
+
+        <header class="page-header-main">
+            <h2>{{ issue.title }}</h2>
+            <h3>{% trans "Sommaire" %}</h3>
+        </header>
+
+        <section class="issue-detail--articles">
+
+          <header>
+            <h3 class="border-top color-red h4">{% trans "Articles" %}</h3>
+          </header>
+
+          {% for article in articles %}
+          <article class="issue-article">
+            <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+            <p>{{ article.authors.all|join:", " }}</p>
+            <p>Pages xxx-zzz</p>
+          </article>
+          {% endfor %}
+
+        </section>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <footer class="past-issues">
+
+      <div class="container">
+
+        <div class="row">
+
+          <header class="past-issues--header col-xs-12">
+            <h3 class="h2 no-margin">{% trans "Anciens numéros de L’Actualité économique" %}</h3>
+          </header>
+
+        </div>
+
+        <div class="row">
+          {% for published_issue in journal.published_issues|dictsortreversed:"date_published" %}
+          {% if published_issue != issue %}
+          <article class="issue-list-item--inverted col-md-2 col-sm-4">
+            <a href="{{ published_issue.get_absolute_url }}">
+              <figure>
+                <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" alt="{{ published_issue.name }}" />
+              </figure>
+              <header>
+                <h5>
+                  {% blocktrans trimmed with number=published_issue.erudit_object.number|default:i18n_unknown date=published_issue.date_published|date:"F Y" %}
+                    Numéro {{ number }}<br>{{ date }}
+                  {% endblocktrans %}
+                </h5>
+              </header>
+            </a>
+          </article>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+      </div>
+
+  </footer>
+
+
+  <!--
+  *************************************
+  TO REMOVE WHEN DATA WILL BE VALIDATED
+  *************************************
 
   {% for article in articles %}
     <article>
@@ -29,6 +161,7 @@
       </nav>
     </article>
   {% endfor %}
+  -->
 
 </section>
 

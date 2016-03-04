@@ -1,4 +1,12 @@
 /**
+* erudit subscription badge
+*/
+
+footer#erudit-subscription-type {
+  margin-top: $margin-vertical-default;
+}
+
+/**
 * Main site footer
 */
 
@@ -19,7 +27,7 @@ footer#site-footer {
     li {
       margin-bottom: 5px;
     }
-    
+
   }
 
   /**

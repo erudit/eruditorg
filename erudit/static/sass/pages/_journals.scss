@@ -1,0 +1,19 @@
+/**
+* Generic elements for journals pages
+*/
+
+
+.journal-meta {
+
+  li {
+    margin-bottom: $margin-vertical-default/2;
+    h5 {
+      // font-size: 12px;
+      margin: 0 0 4px 0;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+}

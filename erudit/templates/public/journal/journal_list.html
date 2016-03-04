@@ -9,7 +9,7 @@
 {% block content %}
 <div id="journal-list">
 
-  
+
   <!-- DISCIPLINES -->
   <div class="disciplines container-fluid">
     <div class="row">
@@ -32,8 +32,8 @@
     </div>
   </div>
 
-
   <a name="discipline-name" class="invisible">Nom de la discipline</a>
+
   <div class="discipline container-fluid">
     <div class="row discipline--title">
       <div class="container">
@@ -44,6 +44,7 @@
         </div>
       </div>
     </div>
+
     <div class="row discipline--articles discipline--articles--default">
       <div class="container">
         <div class="row">
@@ -70,6 +71,7 @@
         </div>
       </div>
     </div>
+
     <div class="row discipline--articles discipline--articles--small">
       <div class="container">
         <div class="row">
@@ -93,6 +95,7 @@
         </div>
       </div>
     </div>
+
     <div class="row discipline--articles discipline--articles--default">
       <div class="container">
         <div class="row">
@@ -119,23 +122,74 @@
         </div>
       </div>
     </div>
-  </div>
 
-  
-  <!--
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        {% for journal in journals %}
-        <div class="col-md-4">
-          <a class="btn btn-default btn-block" href="{{ journal.get_absolute_url }}">
-            {{ journal.name }}
-          </a>
+    <div class="discipline container-fluid">
+      <div class="row discipline--title">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 title">
+              <h2 class="no-margin">{% trans "Classement alphabétique" %} <a href="#top" id="scroll-top" class="erudicon erudicon-arrow-up"></a></h2>
+            </div>
+          </div>
         </div>
-        {% endfor %}
       </div>
     </div>
-  </div>
-  -->
+
+    {# regroup each magazine by first letter #}
+    {% regroup journals|dictsort:"letter_prefix" by letter_prefix as journals_list_groups %}
+    {% for journal_group in journals_list_groups %}
+    <div class="row discipline--articles discipline--articles--default">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col col-md-3">
+
+            <h3 class="h4 color-red">
+              {% if not journal_group.grouper %}
+                {% trans "Autres" %}
+              {% else %}
+                {{ journal_group.grouper }}
+              {% endif %}
+            </h3>
+          </div>
+
+          {% for journal in journal_group.list %}
+          <article class="col col-md-3 article">
+            <header class="row">
+              <h4 class="col-xs-12">
+                <a class="" href="{{ journal.get_absolute_url }}">
+                  {{ journal.name }}
+                </a>
+              </h4>
+            </header>
+            <footer class="row">
+              <div class="col-xs-8">
+                {% if journal.subtitle %}
+                <p class="color-dark-grey">{{ journal.subtitle }}</p>
+                {% endif %}
+              </div>
+              <div class="col-xs-4">
+                <a class="" href="{{ journal.get_absolute_url }}">
+                  {# <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />#}
+                  <img src="http://placehold.it/300x300" alt="{{ journal.name }}" class="img-responsive">
+                </a>
+              </div>
+            </footer>
+
+          </article>
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  {% endfor %}
+
 </div>
 {% endblock %}

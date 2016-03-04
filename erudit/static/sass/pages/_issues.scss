@@ -1,0 +1,64 @@
+/**
+* Past issues footer
+*/
+
+.past-issues {
+  margin-top: $margin-vertical-default * 2;
+  background-color: $gray-lighter;
+  padding: $margin-vertical-default 0;
+
+  .past-issues--header {
+    padding-bottom: $margin-vertical-default;
+  }
+
+}
+
+
+/**
+* issue list thumbnail
+*/
+
+
+.issue-list-item {
+  height: 200px;
+  overflow: hidden;
+  padding-top: $margin-vertical-default/2;
+  margin-bottom: $margin-vertical-default/2;
+
+  a {
+    color: $color-red;
+    @include transition(color 500ms);
+    &:hover {
+      text-decoration: none;
+      color: $gray-base;
+    }
+
+  }
+
+  figure {
+    img {
+      display: block;
+      max-width: 60%;
+      border: 1px solid $gray-base;
+    }
+
+  }
+}
+
+// issue item variation with border on top
+.issue-list-item--default {
+  @extend .issue-list-item;
+  @include grid-cell-border($direction: 'top');
+}
+
+// issue item variation with border on top, figure cover is first
+.issue-list-item--inverted {
+  @extend .issue-list-item;
+  padding-top: 0;
+  height: 250px;  
+  header {
+    border-top: 1px solid #000;
+    padding-top: $margin-vertical-default/2;
+    margin-top: $margin-vertical-default/2;
+  }
+}

@@ -58,19 +58,20 @@
           <a href="/">Érudit</a> {% block breadcrumb %}{% endblock %}
         </p>
       </div>
-    </div>    
-  </div>  
+    </div>
+  </div>
 </nav>
 
 {% endblock %}
 
 {% block footer %}
 
-<div class="container">
+<footer id="erudit-subscription-type" class="container margin-top">
+
   <div class="row">
-    <div class="col-md-12">
-      <div class="text-center">
-        <p class="lead">{% trans "Votre accès Érudit" %}</p>
+    <header class="col-md-12">
+      <div class="alert alert-warning">
+        <h5 class="bold">{% trans "Votre accès Érudit" %}</h5>
         {% if request.subscription_type == 'institution' %}
           <p class="text-muted">{{ request.institutional_account.institution.name }}</p>
           {% if request.institutional_account.badge %}
@@ -82,10 +83,10 @@
           <p class="text-muted">{% trans "Libre accès" %}</p>
         {% endif %}
       </div>
-      <br />
-    </div>
+    </header>
   </div>
-</div>
+
+</footer>
 
 {% include "partials/site-footer.html" %}
 

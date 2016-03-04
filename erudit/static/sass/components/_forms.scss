@@ -62,13 +62,13 @@ fieldset {
 legend {
   letter-spacing: 1px;
   font-size: $font-size * 1.05;
-  color: $colour-dark-grey;
+  color: $gray-dark;
 }
 
 /* labels */
 label {
   margin: 0.25em 0;
-  color: $colour-dark-grey;
+  color: $gray-dark;
   font-weight: normal;
   display: block;
 }
@@ -97,8 +97,8 @@ input[list],
   height: $font-size + 24;
   border-width: $border-width;
   border-style: solid;
-  border-color: $colour-pale-grey;
-  color: $colour-dark-grey;
+  border-color: $gray-light;
+  color: $gray-dark;
   background: transparent;
   @include border-radius(0px);
   &:hover {
@@ -164,18 +164,18 @@ input[type="image"],
 .btn, .btn-default {
   cursor: pointer;
   padding: $font-size*0.5 $font-size*0.75;
-  border: 1px solid $colour-dark-grey;
+  border: 1px solid $gray-dark;
   border-radius: 0px;
-  color: $colour-dark-grey;
+  color: $gray-dark;
   margin: 0.75em 0.75em 0 0;
   @include transition(all, 300ms, ease);
   &:last-child {
     margin-right: 0;
   }
   &:hover, &:active, &:focus, &:active:focus {
-    color: $colour-faint-grey;
-    background-color: $colour-dark-grey*1.15;
-    border: 1px solid $colour-dark-grey*1.15;
+    color: $gray-light;
+    background-color: $gray-dark*1.15;
+    border: 1px solid $gray-dark*1.15;
   }
 }
 
@@ -208,10 +208,10 @@ button[type="reset"],
 input[type="reset"] {
   border: none;
   text-decoration: underline;
-  color: $colour-dark-grey;
+  color: $gray-dark;
   background-color: #FFF;
   &:hover, &:active, &:focus, &:active:focus {
-    color: $colour-dark-grey;
+    color: $gray-dark;
     background: none;
     border: none;
     text-decoration: none;
@@ -225,14 +225,14 @@ select[disabled],
 option[disabled],
 button[disabled] {
   cursor: not-allowed;
-  color: $colour-medium-grey;
-  background-color: $colour-faint-grey;
+  color: $gray-light;
+  background-color: $gray-lighter;
 }
 
 /* required or optional input labels */
 label.required:after {
   content: ' *';
-  color: $colour-pale-grey;
+  color: $gray-light;
   font-weight: bold;
   font-size: 0.85em;
 }
