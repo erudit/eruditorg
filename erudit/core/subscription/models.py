@@ -61,7 +61,8 @@ class IndividualAccount(User):
         self.username = self.email
 
         # Stamp first user created date
-        if not self.pk and self.policy.date_activation is None:  # TODO userspace allow empty selection for policy
+        # TODO userspace allow empty selection for policy
+        if not self.pk and self.policy.date_activation is None:
             self.policy.date_activation = timezone.now()
             self.policy.date_renew = self.policy.date_activation
             self.policy.renew()
