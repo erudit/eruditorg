@@ -283,7 +283,7 @@ USE_TZ = True
 
 
 AUTHENTICATION_BACKENDS = [
-    'rules.permissions.AuthorizationBackend',
+    'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'base.backends.MandragoreBackend',
 ]
