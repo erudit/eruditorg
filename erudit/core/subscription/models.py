@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 
 from post_office import mail
 
@@ -35,7 +36,7 @@ class Journal(CoreJournal):
         verbose_name = _('Revue')
 
 
-class IndividualAccount(models.Model):
+class IndividualAccount(User):
     """
     Personal account used in erudit.org
     to access protected content.
@@ -43,8 +44,6 @@ class IndividualAccount(models.Model):
     access rights.
     The policy itself is linked either with an account or an organization.
     """
-    email = models.CharField(max_length=120, verbose_name=_("Courriel"))
-    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
     policy = models.ForeignKey(
         "Policy",
         verbose_name=_("Accès"),
@@ -53,17 +52,16 @@ class IndividualAccount(models.Model):
         null=True,
         help_text=_("Laisser vide si la politique d'accès aux produits est définie plus bas")
     )
-    firstname = models.CharField(max_length=30, verbose_name=_("Prénom"))
-    lastname = models.CharField(max_length=30, verbose_name=_("Nom"))
-    active = models.BooleanField(default=True, verbose_name=_("Actif"))
 
     class Meta:
         verbose_name = _("Compte personnel")
         verbose_name_plural = _("Comptes personnels")
 
     def save(self, *args, **kwargs):
+        self.username = self.email
+
         # Stamp first user created date
-        if not self.pk and self.policy.date_activation is None:
+        if not self.pk and self.policy.date_activation is None:  # TODO userspace allow empty selection for policy
             self.policy.date_activation = timezone.now()
             self.policy.date_renew = self.policy.date_activation
             self.policy.renew()
@@ -84,7 +82,7 @@ class IndividualAccount(models.Model):
         super(IndividualAccount, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '{} {} ({})'.format(self.firstname, self.lastname, self.id)
+        return '{} {} ({})'.format(self.first_name, self.last_name, self.id)
 
     def generate_password(self):
         return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])

@@ -17,8 +17,8 @@ class IndividualAccountFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'subscription.IndividualAccount'
 
-    firstname = factory.Sequence(lambda n: 'prenom{}'.format(n))
-    lastname = factory.Sequence(lambda n: 'nom{}'.format(n))
+    first_name = factory.Sequence(lambda n: 'prenom{}'.format(n))
+    last_name = factory.Sequence(lambda n: 'nom{}'.format(n))
     email = factory.Sequence(lambda n: 'mail{}@erudit.test'.format(n))
     policy = factory.SubFactory(PolicyFactory)
 

@@ -39,7 +39,7 @@ class IndividualAccountUpdate(IndividualAccountBreadcrumbsMixin,
                               OrganizationCheckMixin, UpdateView):
     model = IndividualAccount
     template_name = 'userspace/subscription/individualaccount_update.html'
-    fields = ['firstname', 'lastname', 'email', ]
+    fields = ['first_name', 'last_name', 'email', ]
 
     def get_title(self):
         return _("Modifier un compte")

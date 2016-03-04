@@ -51,15 +51,15 @@ class PolicyInline(GenericStackedInline):
 
 class IndividualAccountAdmin(admin.ModelAdmin):
     inlines = (PolicyInline, )
-    search_fields = ('id', 'firstname', 'lastname', 'email', )
-    list_filter = ('policy', 'active', )
+    search_fields = ('id', 'first_name', 'last_name', 'email', )
+    list_filter = ('policy', 'is_active', )
     list_display = (
         'id',
-        'firstname',
-        'lastname',
+        'first_name',
+        'last_name',
         'email',
         'policy',
-        'active',
+        'is_active',
     )
 
     def save_formset(self, request, form, formset, change):
