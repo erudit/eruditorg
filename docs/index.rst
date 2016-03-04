@@ -16,6 +16,7 @@ Documentation de Érudit.org
    backends
    a11y
    javascript
+   permissions
 
 * :ref:`javascript`
 
