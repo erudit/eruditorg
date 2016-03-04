@@ -8,16 +8,6 @@ from base.viewmixins import SolrServiceRequiredMixin
 from erudit.models import EruditDocument
 from . import solr, forms
 
-DOCUMENT_TYPES = {
-    "journal": [
-        "article",
-        "culturel",
-    ],
-    "book": [],
-    "thesis": [],
-    "document": [],
-}
-
 
 class Search(SolrServiceRequiredMixin, FormView):
     model = EruditDocument

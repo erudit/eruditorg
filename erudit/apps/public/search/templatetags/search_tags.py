@@ -46,3 +46,8 @@ def is_search_filter_value_selected(selected_filters, filter_name, filter_value)
         return 'checked="checked"'
     else:
         return ""
+
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key, None)

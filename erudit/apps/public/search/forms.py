@@ -19,16 +19,6 @@ SORT_ORDER_CHOICES = (
     ("desc", _("Décroissant")),
 )
 
-FILTER_FIELDS = {
-    "years": _("Années de publication"),
-    # "article_types": _("Types d'articles"),
-    "languages": _("Langues"),
-    # "collections": _("Collections"),
-    "authors": _("Auteurs"),
-    "funds": _("Fonds"),
-    "publication_types": _("Types de publication"),
-}
-
 OPERATORS = (
     ("AND", _("Et")),
     ("OR", _("Ou")),
