@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 
 from base.factories import UserFactory
-from core.subscription.factories import PolicyFactory, IndividualAccountFactory
+from core.subscription.factories import PolicyFactory, IndividualAccountProfileFactory
 
 
 class ViewsTestCase(TestCase):
@@ -55,7 +55,7 @@ class ViewsTestCase(TestCase):
 
     def test_acccount_update_restricted(self):
         policy = PolicyFactory()
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
         self.client.login(username=self.user_non_granted.username,
                           password="user")
         url = reverse('userspace:subscription:account_update',
@@ -67,7 +67,7 @@ class ViewsTestCase(TestCase):
         policy = PolicyFactory()
         policy.managers.add(self.user_granted)
         policy.save()
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
@@ -79,7 +79,7 @@ class ViewsTestCase(TestCase):
     def test_acccount_delete_restricted(self):
         policy = PolicyFactory()
         policy.save()
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
 
         self.client.login(username=self.user_non_granted.username,
                           password="user")
@@ -92,7 +92,7 @@ class ViewsTestCase(TestCase):
         policy = PolicyFactory()
         policy.managers.add(self.user_granted)
         policy.save()
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
@@ -104,7 +104,7 @@ class ViewsTestCase(TestCase):
     def test_acccount_reset_password_restricted(self):
         policy = PolicyFactory()
         policy.save()
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
 
         self.client.login(username=self.user_non_granted.username,
                           password="user")
@@ -117,7 +117,7 @@ class ViewsTestCase(TestCase):
         policy = PolicyFactory()
         policy.managers.add(self.user_granted)
         policy.save()
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
