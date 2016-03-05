@@ -1,5 +1,6 @@
 import factory
 
+from core.userspace.factories import UserFactory
 from erudit.factories import OrganisationFactory
 
 
@@ -12,15 +13,13 @@ class PolicyFactory(factory.django.DjangoModelFactory):
     max_accounts = 10
 
 
-class IndividualAccountFactory(factory.django.DjangoModelFactory):
+class IndividualAccountProfileFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        model = 'subscription.IndividualAccount'
+        model = 'subscription.IndividualAccountProfile'
 
-    firstname = factory.Sequence(lambda n: 'prenom{}'.format(n))
-    lastname = factory.Sequence(lambda n: 'nom{}'.format(n))
-    email = factory.Sequence(lambda n: 'mail{}@erudit.test'.format(n))
     policy = factory.SubFactory(PolicyFactory)
+    user = factory.SubFactory(UserFactory)
 
 
 class InstitutionalAccountFactory(factory.django.DjangoModelFactory):

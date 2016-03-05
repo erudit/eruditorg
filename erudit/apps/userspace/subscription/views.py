@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django_filters.views import FilterView
 
-from core.subscription.models import IndividualAccount
+from core.subscription.models import IndividualAccountProfile
 
 from .viewmixins import (IndividualAccountBreadcrumbsMixin,
                          OrganizationCheckMixin)
@@ -20,7 +20,7 @@ class IndividualAccountList(IndividualAccountBreadcrumbsMixin,
 
 class IndividualAccountCreate(IndividualAccountBreadcrumbsMixin,
                               OrganizationCheckMixin, CreateView):
-    model = IndividualAccount
+    model = IndividualAccountProfile
     form_class = IndividualAccountForm
 
     template_name = 'userspace/subscription/individualaccount_create.html'
@@ -37,9 +37,14 @@ class IndividualAccountCreate(IndividualAccountBreadcrumbsMixin,
 
 class IndividualAccountUpdate(IndividualAccountBreadcrumbsMixin,
                               OrganizationCheckMixin, UpdateView):
-    model = IndividualAccount
+    model = IndividualAccountProfile
     template_name = 'userspace/subscription/individualaccount_update.html'
-    fields = ['firstname', 'lastname', 'email', ]
+    form_class = IndividualAccountForm
+
+    def get_form_kwargs(self):
+        kwargs = super(IndividualAccountUpdate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
     def get_title(self):
         return _("Modifier un compte")
@@ -50,7 +55,7 @@ class IndividualAccountUpdate(IndividualAccountBreadcrumbsMixin,
 
 class IndividualAccountDelete(IndividualAccountBreadcrumbsMixin,
                               OrganizationCheckMixin, DeleteView):
-    model = IndividualAccount
+    model = IndividualAccountProfile
     template_name = 'userspace/subscription/individualaccount_confirm_delete.html'
 
     def get_title(self):
@@ -62,7 +67,7 @@ class IndividualAccountDelete(IndividualAccountBreadcrumbsMixin,
 
 class IndividualAccountResetPwd(IndividualAccountBreadcrumbsMixin,
                                 OrganizationCheckMixin, UpdateView):
-    model = IndividualAccount
+    model = IndividualAccountProfile
     form_class = IndividualAccountResetPwdForm
     template_name = 'userspace/subscription/individualaccount_reset_pwd.html'
 

@@ -3,8 +3,8 @@ import crypt
 
 from django.contrib.auth.backends import ModelBackend
 from django.conf import settings
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
+from django.apps import apps
 from erudit.utils.mandragore import (
     get_user_from_mandragore,
     update_user_password
@@ -49,7 +49,7 @@ class MandragoreBackend(ModelBackend):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
-            raise PermissionDenied()
+            return
 
         # Being connected to the "Mandragore" database is not
         # mandatory. Thus we do not raise `PermissionDenied` but
@@ -73,3 +73,21 @@ class MandragoreBackend(ModelBackend):
         if user_pass == mand_pw:
             user.set_password = types.MethodType(set_password_mandragore, user)
             return user
+
+
+class AbonnementIndividuelBackend(ModelBackend):
+    """ Authenticate users against IndividualAccount with sha1 custom
+    encryption from old system.
+    """
+
+    def authenticate(self, username=None, password=None):
+        Profile = apps.get_model(
+            app_label='subscription',
+            model_name='IndividualAccountProfile')
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return
+
+        if profile.sha1(password) == profile.password:
+            return profile.user

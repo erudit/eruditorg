@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
-from .models import (IndividualAccount, Policy, PolicyEvent,
+from .models import (IndividualAccountProfile, Policy, PolicyEvent,
                      Organisation, Journal, InstitutionalAccount,
                      InstitutionIPAddressRange)
 
@@ -49,21 +49,31 @@ class PolicyInline(GenericStackedInline):
     )
 
 
-class IndividualAccountAdmin(admin.ModelAdmin):
+class IndividualAccountProfileAdmin(admin.ModelAdmin):
     inlines = (PolicyInline, )
-    search_fields = ('id', 'firstname', 'lastname', 'email', )
-    list_filter = ('policy', 'active', )
+    search_fields = ('id', 'user__first_name', 'user__last_name', 'user__email', )
+    list_filter = ('policy', 'user__is_active', )
     list_display = (
-        'id',
-        'firstname',
-        'lastname',
-        'email',
+        '_email',
+        '_first_name',
+        '_last_name',
         'policy',
-        'active',
     )
 
+    def _email(self, obj):
+        return obj.user.email
+    short_description = _('Courriel')
+
+    def _first_name(self, obj):
+        return obj.user.first_name
+    short_description = _('Prénom')
+
+    def _last_name(self, obj):
+        return obj.user.first_name
+    short_description = _('Nom')
+
     def save_formset(self, request, form, formset, change):
-        super(IndividualAccountAdmin, self).save_formset(request, form, formset, change)
+        super(IndividualAccountProfileAdmin, self).save_formset(request, form, formset, change)
         policies = [instance for instance in formset.save(commit=False) if
                     instance.__class__ == Policy]
         if len(policies) > 1:
@@ -180,7 +190,7 @@ class PolicyAdmin(admin.ModelAdmin):
     renew.short_description = _("Renouveller l'inscription")
 
 
-admin.site.register(IndividualAccount, IndividualAccountAdmin)
+admin.site.register(IndividualAccountProfile, IndividualAccountProfileAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Journal, JournalAdmin)

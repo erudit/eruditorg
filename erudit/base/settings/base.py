@@ -287,6 +287,7 @@ AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'base.backends.MandragoreBackend',
+    'base.backends.AbonnementIndividuelBackend',
 ]
 
 # Static files (CSS, JavaScript, Images)

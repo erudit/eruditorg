@@ -2,7 +2,6 @@ from unittest import mock
 
 from django.test import TestCase, override_settings
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
 
 from base.backends import MandragoreBackend
 
@@ -19,11 +18,10 @@ class MandragoreBackendTestCase(TestCase):
         self.backend = MandragoreBackend()
 
     def test_invalid_username(self):
-
-        with self.assertRaises(PermissionDenied):
-            self.backend.authenticate(
-                username='test_wrong_username', password='test_password'
-            )
+        user = self.backend.authenticate(
+            username='test_wrong_username', password='test_password'
+        )
+        self.assertIsNone(user)
 
     def test_no_externaldb_in_settings(self):
         with self.settings(EXTERNAL_DATABASES=None):
