@@ -2,24 +2,26 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from core.subscription.factories import PolicyFactory, IndividualAccountFactory
-from core.subscription.models import IndividualAccount
+from core.subscription.factories import PolicyFactory, IndividualAccountProfileFactory
+from core.subscription.models import IndividualAccountProfile
 
 
 class LoginTestCase(TestCase):
 
     def test_login_ok(self):
-        account = IndividualAccountFactory()
+        account = IndividualAccountProfileFactory()
         account.password = '123qwe'
         account.save()
-        status = self.client.login(username=account.username, password='123qwe')
+        status = self.client.login(username=account.user.username,
+                                   password='123qwe')
         self.assertTrue(status)
 
     def test_login_ko(self):
-        account = IndividualAccountFactory()
+        account = IndividualAccountProfileFactory()
         account.password = '123qwe'
         account.save()
-        status = self.client.login(username=account.username, password='111')
+        status = self.client.login(username=account.user.username,
+                                   password='111')
         self.assertFalse(status)
 
 
@@ -63,8 +65,8 @@ class AccountListViewTestCase(TestCase):
         user = User.objects.create_user(username='manager', password='manager')
         policy.managers.add(user)
         policy.save()
-        IndividualAccountFactory.create_batch(2, policy=policy)
-        IndividualAccountFactory.create_batch(3)
+        IndividualAccountProfileFactory.create_batch(2, policy=policy)
+        IndividualAccountProfileFactory.create_batch(3)
         self.client.login(username=user.username, password='manager')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
@@ -98,7 +100,7 @@ class AccountDeleteViewTestCase(TestCase):
         policy.managers.add(user)
         policy.save()
 
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
         url = reverse('userspace:subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
@@ -111,7 +113,7 @@ class AccountDeleteViewTestCase(TestCase):
         policy.managers.add(user)
         policy.save()
 
-        account = IndividualAccountFactory()
+        account = IndividualAccountProfileFactory()
         url = reverse('userspace:subscription:account_delete',
                       args=(account.pk, ))
         response = self.client.get(url)
@@ -127,13 +129,13 @@ class AccountResetPwdViewTestCase(TestCase):
         policy.managers.add(user)
         policy.save()
 
-        account = IndividualAccountFactory(policy=policy)
+        account = IndividualAccountProfileFactory(policy=policy)
         old_pwd = account.password
         url = reverse('userspace:subscription:account_reset_pwd',
                       args=(account.pk, ))
         response = self.client.post(url, {'password': ''})
         self.assertEqual(response.status_code, 302)
-        same_account = IndividualAccount.objects.get(id=account.pk)
-        self.assertEqual(IndividualAccount.objects.count(), 1)
+        same_account = IndividualAccountProfile.objects.get(id=account.pk)
+        self.assertEqual(IndividualAccountProfile.objects.count(), 1)
         self.assertNotEqual(same_account.password, old_pwd)
-        self.assertEqual(same_account.email, account.email)
+        self.assertEqual(same_account.user, account.user)

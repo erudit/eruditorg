@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from rules.contrib.views import PermissionRequiredMixin
 from navutils import Breadcrumb
 
-from core.subscription.models import IndividualAccount
+from core.subscription.models import IndividualAccountProfile
 from apps.userspace.viewmixins import (LoginRequiredMixin,
                                        UserspaceBreadcrumbsMixin)
 
@@ -23,7 +23,7 @@ class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
     permission_required = 'subscription.manage_account'
 
     def get_queryset(self):
-        qs = IndividualAccount.objects.order_by('-id')
+        qs = IndividualAccountProfile.objects.order_by('-id')
         ids = [account.id for account in qs if self.request.user.has_perm(
                'subscription.manage_account', account)]
         return qs.filter(id__in=ids)

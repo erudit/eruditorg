@@ -36,7 +36,7 @@ class Journal(CoreJournal):
         verbose_name = _('Revue')
 
 
-class IndividualAccount(User):
+class IndividualAccountProfile(models.Model):
     """
     Personal account used in erudit.org
     to access protected content.
@@ -44,6 +44,8 @@ class IndividualAccount(User):
     access rights.
     The policy itself is linked either with an account or an organization.
     """
+    user = models.OneToOneField(User, verbose_name=_('Utilisateur'))
+    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
     policy = models.ForeignKey(
         "Policy",
         verbose_name=_("Accès"),
@@ -58,8 +60,6 @@ class IndividualAccount(User):
         verbose_name_plural = _("Comptes personnels")
 
     def save(self, *args, **kwargs):
-        self.username = self.email
-
         # Stamp first user created date
         # TODO userspace allow empty selection for policy
         if not self.pk and self.policy.date_activation is None:
@@ -69,8 +69,8 @@ class IndividualAccount(User):
 
         # Password encryption
         if self.pk:
-            if IndividualAccount.objects.filter(pk=self.pk).count() == 1:
-                old_crypted_password = IndividualAccount.objects.get(pk=self.pk).password
+            if IndividualAccountProfile.objects.filter(pk=self.pk).count() == 1:
+                old_crypted_password = IndividualAccountProfile.objects.get(pk=self.pk).password
                 if not (self.password == old_crypted_password):
                     self.update_password(self.password)
             else:
@@ -80,10 +80,10 @@ class IndividualAccount(User):
             self.mail_account()
             new_password = self.generate_password()
             self.update_password(new_password)
-        super(IndividualAccount, self).save(*args, **kwargs)
+        super(IndividualAccountProfile, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '{} {} ({})'.format(self.first_name, self.last_name, self.id)
+        return '{} {} ({})'.format(self.user.first_name, self.user.last_name, self.id)
 
     def generate_password(self):
         return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])
@@ -96,7 +96,7 @@ class IndividualAccount(User):
         template = get_template('userspace/subscription/mail/new_password.html')
         context = {'object': self, 'plain_password': plain_password, }
         html_message = template.render(context)
-        recipient = self.email
+        recipient = self.user.email
         mail.send(
             recipient,
             settings.RENEWAL_FROM_EMAIL,
@@ -109,7 +109,7 @@ class IndividualAccount(User):
         template = get_template('userspace/subscription/mail/new_account.html')
         context = {'object': self}
         html_message = template.render(context)
-        recipient = self.email
+        recipient = self.user.email
         mail.send(
             recipient,
             settings.RENEWAL_FROM_EMAIL,
