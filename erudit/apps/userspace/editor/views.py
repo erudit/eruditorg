@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import json
+import logging
 import mimetypes
 import os
 
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.http import HttpResponse
 from django.template.context_processors import csrf
 from django.utils.translation import ugettext_lazy as _
@@ -23,6 +25,8 @@ from .forms import IssueSubmissionForm
 from .forms import IssueSubmissionUploadForm
 from .viewmixins import IssueSubmissionBreadcrumbsMixin
 from .viewmixins import IssueSubmissionCheckMixin
+
+logger = logging.getLogger(__name__)
 
 
 class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
@@ -140,7 +144,13 @@ class IssueSubmissionAttachmentView(PermissionRequiredMixin, DetailView):
     def render_to_response(self, context, **response_kwargs):
         filename = os.path.basename(self.object.path)
 
-        fsock = open(self.object.path, 'rb')
+        try:
+            fsock = open(self.object.path, 'rb')
+        except FileNotFoundError:
+            # The feed is not available.
+            logger.error('Resumable file not found: {}'.format(self.object.path),
+                         exc_info=True, extra={'request': self.request, })
+            raise Http404
 
         # Try to guess the content type of the given file
         content_type, _ = mimetypes.guess_type(self.object.path)

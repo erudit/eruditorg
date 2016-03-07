@@ -262,3 +262,17 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'text/plain')
         self.assertEqual(response['Content-Disposition'], 'attachment; filename=dummy.kyz')
+
+    def test_raises_http404_if_the_file_does_not_exist(self):
+        # Setup
+        rfile = ResumableFile.objects.create(
+            path='/dummy/dummy.png', filesize=1, uploadsize=1)
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 404)
