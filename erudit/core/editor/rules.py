@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 import rules
-from rules.predicates import is_superuser, is_staff
+from rules.predicates import is_staff
+from rules.predicates import is_superuser
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.predicates import HasAuthorization
@@ -15,6 +18,5 @@ rules.add_perm(
 
 rules.add_perm(
     'editor.review_issuesubmission',
-    is_superuser | is_staff |
-    is_journal_member & HasAuthorization(AC.can_manage_issuesubmission),
+    is_superuser | HasAuthorization(AC.can_review_issuesubmission),
 )
