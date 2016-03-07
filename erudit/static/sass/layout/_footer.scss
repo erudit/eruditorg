@@ -39,6 +39,13 @@ footer#site-footer {
     padding-bottom: $margin-vertical-default;
     color: #fff;
 
+    .logo {
+      width: 150px;
+      path, circle {
+        fill: #fff;
+      }
+    }
+
     p {
       margin-bottom: 0;
     }

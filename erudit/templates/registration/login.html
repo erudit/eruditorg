@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "public/base.html"|pjax:request %}
 {% load i18n staticfiles %}
 
 {% block page-title %}{% trans 'Connexion' %}{% endblock %}
@@ -6,17 +6,14 @@
 {% block zone-title %}{% trans 'Espace éditeurs' %}{% endblock %}
 
 {% block content %}
-<main class="login-page">
+<section id="login-page" data-controller="userspace:login">
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
         <section class="card card-login">
           <div class="card-body">
-            <div class="erudit-logo">
-              <a href="http://erudit.org/" target="_blank">
-                <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
-              </a>
-            </div>
+
             <form class="form-vertical" method="post">
               {% csrf_token %}
               {% if form.non_field_errors %}
@@ -48,10 +45,12 @@
                 <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
               </p>
             </form>
+            
           </div>
         </section>
       </div>
     </div>
   </div>
-</main>
+
+</section>
 {% endblock %}

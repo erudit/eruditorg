@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'raven.contrib.django.raven_compat',
     'django_fsm',
+    'easy_pjax',
 )
 
 DATABASES = {

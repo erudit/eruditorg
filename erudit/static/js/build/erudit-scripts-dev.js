@@ -67,7 +67,7 @@ ROUTER = {
    * @param {string} action - The name of the action to execute (can be null).
    */
   execAction: function(controller, action){
-    action = (action === undefined) ? 'init' : action;
+    action = (action === undefined || action.length === 0) ? 'init' : action;
 
     if (controller !== '' && CONTROLLERS[controller] && typeof CONTROLLERS[controller][action] == 'function') {
       CONTROLLERS[controller][action]();
@@ -88,21 +88,112 @@ ROUTER = {
    */
   init: function(){
     if (document.body) {
-      var body = document.body,
-      controller = body.getAttribute('data-controller'),
-      action = body.getAttribute('data-action');
+      // commons init site's wide functions
+      ROUTER.execAction('commons:main');
 
-      ROUTER.execAction('common');  // common init action
-      if (controller) {
-        ROUTER.execAction(controller);  // init action
-        ROUTER.execAction(controller, action);
-      }
+      // find any controllers in source
+      ROUTER.findControllers();
     }
   },
+
+  findControllers : function() {
+    $(document).find('[data-controller]').not('[data-controller-initialized]').each(function() {
+      var controller = $(this).data('controller'),
+          action     = $(this).data('action');
+
+      if (controller) {
+        console.warn('Controller found : ', controller);
+        console.warn('Action found : ', action);
+
+        // init found controller
+        ROUTER.execAction(controller, action);
+
+        // set element as initialized
+        $(this).attr('data-controller-initialized', 'true');
+      }
+
+    });
+  }
+
 };
 
 
 $(document).ready(ROUTER.init);
+
+ROUTER.registerController('commons:main', {
+
+  init: function() {
+  	console.log('init communs main');
+
+    // main init
+    this.svg();
+    this.xhr();
+
+    // init UI components
+    ROUTER.execAction('commons:modals');
+  },
+
+  // transform any .svg element inlined
+  svg : function() {
+    inlineSVG.init({
+      svgSelector: 'img.inline-svg', // the class attached to all images that should be inlined
+      initClass: 'js-inlinesvg', // class added to <html>
+    });
+  },
+
+  // after any XHR call
+  xhr : function() {
+    $(document).ajaxComplete(function() {
+      // init ROUTER controllers
+      ROUTER.findControllers();
+    });
+  }
+
+});
+
+ROUTER.registerController('commons:modals', {
+
+  init: function() {
+    this.register();
+  },
+
+  register : function() {
+    //
+    $('[data-open-modal-ajax]').magnificPopup({
+      mainClass: 'mfp-fade',
+      removalDelay: 300,
+      type: 'ajax',
+      closeOnBgClick: false,
+      ajax: {
+        settings: {
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-PJAX', 'true');
+          }
+        }
+      },
+      callbacks: {
+        beforeOpen: function() {
+          previousURL = window.location.pathname;
+        },
+        open: function() {
+          history.replaceState(null, null, $(this.currItem.el).attr('href'));
+        },
+        close: function() {
+          history.replaceState(null, null, previousURL);
+        }
+      }
+    });
+  }
+
+});
+
+ROUTER.registerController('userspace:login', {
+
+  init: function() {
+  	console.log("Login init yo!");
+  }
+
+});
 
 ROUTER.registerController('public:home', {
 
@@ -143,6 +234,54 @@ ROUTER.registerController('public:home', {
   }
 
 
+});
+
+ROUTER.registerController('userspace:editor:form', {
+  init: function() {
+    var journals = $('#id_editor_form_metadata').data('journals');
+    function resetContactField() {
+      $("#id_contact").val("");
+      $("#id_contact").find("option").hide();
+    }
+
+    resetContactField();
+    $("#id_journal").change(function(){
+      var journal_id = $(this).val();
+      var members = journals[journal_id];
+      resetContactField();
+      for (len = members.length, i=0; i<len; ++i) {
+        $("#id_contact").find("option[value='"+members[i]+"']").show();
+      }
+    });
+
+    var quitConfirm = false;
+    function checkUploads(ev) {
+      if (quitConfirm) { return; }
+
+      var filesAddedCount = $('#id_submissions').data('files-added');
+      var filesUploadingCount = $('#id_submissions').data('files-uploading');
+      if (!filesAddedCount && !filesUploadingCount) {
+        quitConfirm = true;
+        return;
+      }
+
+      if(filesAddedCount) {
+        r = confirm(gettext("Certains de vos fichiers n'ont pas étés téléversés. Êtes-vous sûr ?"));
+        if (r == true) { quitConfirm = true; return; }
+      }
+
+      if(filesUploadingCount) {
+        r = confirm(gettext("Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"));
+        if (r == true) { quitConfirm = true; return; }
+      }
+
+      ev.preventDefault();
+    }
+
+    $('form').submit(checkUploads);
+    $('a:not(form a)').click(checkUploads);
+    window.onbeforeunload = checkUploads;
+  },
 });
 
 ROUTER.registerController('public:journal:article-detail', {
@@ -205,52 +344,4 @@ ROUTER.registerController('public:journal:journal-list', {
   }
 
 
-});
-
-ROUTER.registerController('userspace:editor:form', {
-  init: function() {
-    var journals = $('#id_editor_form_metadata').data('journals');
-    function resetContactField() {
-      $("#id_contact").val("");
-      $("#id_contact").find("option").hide();
-    }
-
-    resetContactField();
-    $("#id_journal").change(function(){
-      var journal_id = $(this).val();
-      var members = journals[journal_id];
-      resetContactField();
-      for (len = members.length, i=0; i<len; ++i) {
-        $("#id_contact").find("option[value='"+members[i]+"']").show();
-      }
-    });
-
-    var quitConfirm = false;
-    function checkUploads(ev) {
-      if (quitConfirm) { return; }
-
-      var filesAddedCount = $('#id_submissions').data('files-added');
-      var filesUploadingCount = $('#id_submissions').data('files-uploading');
-      if (!filesAddedCount && !filesUploadingCount) {
-        quitConfirm = true;
-        return;
-      }
-
-      if(filesAddedCount) {
-        r = confirm(gettext("Certains de vos fichiers n'ont pas étés téléversés. Êtes-vous sûr ?"));
-        if (r == true) { quitConfirm = true; return; }
-      }
-
-      if(filesUploadingCount) {
-        r = confirm(gettext("Certains de vos fichiers ne sont pas complètement téléversés. Êtes-vous sûr ?"));
-        if (r == true) { quitConfirm = true; return; }
-      }
-
-      ev.preventDefault();
-    }
-
-    $('form').submit(checkUploads);
-    $('a:not(form a)').click(checkUploads);
-    window.onbeforeunload = checkUploads;
-  },
 });
