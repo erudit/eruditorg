@@ -3,8 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from navutils import Breadcrumb
 from rules.contrib.views import PermissionRequiredMixin
 
-from apps.userspace.permissions.views import UserspaceBreadcrumbsMixin
 from apps.userspace.viewmixins import LoginRequiredMixin
+from apps.userspace.viewmixins import UserspaceBreadcrumbsMixin
 
 
 class IssueSubmissionBreadcrumbsMixin(UserspaceBreadcrumbsMixin):

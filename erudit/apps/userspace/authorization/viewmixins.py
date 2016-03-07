@@ -9,7 +9,7 @@ from apps.userspace.viewmixins import (LoginRequiredMixin,
 
 
 class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
-    permission_required = 'userspace.manage_permissions'
+    permission_required = 'authorization.manage_authorizations'
 
     def get_queryset(self):
         qs = super(PermissionsCheckMixin, self).get_queryset()
@@ -24,5 +24,5 @@ class PermissionsBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
         breadcrumbs = super(PermissionsBreadcrumbsMixin, self).get_breadcrumbs()
         breadcrumbs.append(Breadcrumb(
             _("Permissions"),
-            pattern_name='userspace:permissions:perm_list'))
+            pattern_name='userspace:authorization:authorization_list'))
         return breadcrumbs
