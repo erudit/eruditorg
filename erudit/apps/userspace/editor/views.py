@@ -1,20 +1,28 @@
+# -*- coding: utf-8 -*-
+
 import json
-
-from django.template.context_processors import csrf
-
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import ListView
+import mimetypes
+import os
 
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
+from django.template.context_processors import csrf
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.views.generic import ListView
+from django.views.generic import UpdateView
+from plupload.models import ResumableFile
+from rules.contrib.views import PermissionRequiredMixin
 
-from erudit.models.event import Event
-
-from erudit.utils.workflow import WorkflowMixin
 from core.editor.models import IssueSubmission
-from .forms import IssueSubmissionForm, IssueSubmissionUploadForm
-from .viewmixins import (IssueSubmissionBreadcrumbsMixin,
-                         IssueSubmissionCheckMixin)
+from erudit.models.event import Event
+from erudit.utils.workflow import WorkflowMixin
+
+from .forms import IssueSubmissionForm
+from .forms import IssueSubmissionUploadForm
+from .viewmixins import IssueSubmissionBreadcrumbsMixin
+from .viewmixins import IssueSubmissionCheckMixin
 
 
 class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
@@ -120,3 +128,30 @@ class IssueSubmissionList(IssueSubmissionBreadcrumbsMixin,
                           IssueSubmissionCheckMixin, ListView):
     model = IssueSubmission
     template_name = 'userspace/editor/issues.html'
+
+
+class IssueSubmissionAttachmentView(PermissionRequiredMixin, DetailView):
+    """
+    Returns an IssueSubmission attachment.
+    """
+    model = ResumableFile
+    raise_exception = True
+
+    def render_to_response(self, context, **response_kwargs):
+        filename = os.path.basename(self.object.path)
+
+        fsock = open(self.object.path, 'rb')
+
+        # Try to guess the content type of the given file
+        content_type, _ = mimetypes.guess_type(self.object.path)
+        if not content_type:
+            content_type = 'text/plain'
+
+        response = HttpResponse(fsock, content_type=content_type)
+        response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+
+        return response
+
+    def has_permission(self):
+        return self.request.user.has_perm('editor.manage_issuesubmission') \
+            or self.request.user.has_perm('editor.review_issuesubmission')
