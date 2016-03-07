@@ -3,6 +3,7 @@
 import os
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseNotFound
 from django.http.response import HttpResponseRedirect
@@ -10,6 +11,8 @@ from django.template.response import TemplateResponse
 from lxml import etree
 from plupload.models import ResumableFile
 
+from core.authorization.defaults import AuthorizationConfig as AC
+from core.authorization.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.tests.base import BaseEditorTestCase
 
@@ -224,6 +227,50 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         response = self.client.get(url, follow=False)
         # Check
         self.assertEqual(response.status_code, 403)
+
+    def test_can_be_browsed_by_users_who_can_manage_issue_submissions(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.journal.members.add(user)
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal),
+            object_id=self.journal.id,
+            user=user,
+            authorization_codename=AC.can_manage_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_can_be_browsed_by_users_who_can_review_issue_submissions(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        AuthorizationFactory.create(
+            user=user, authorization_codename=AC.can_review_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 200)
 
     def test_embed_the_correct_http_headers_in_the_response(self):
         # Setup
