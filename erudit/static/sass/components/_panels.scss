@@ -33,17 +33,6 @@
       top: 6px;
     }
 
-    // position: relative;
-    // i.collapse-chevron {
-    //   @include transition(transform 150ms);
-    //   // @include rotate(180deg);
-    // }
-    // &.collapsed {
-    //   i.collapse-chevron {
-    //     top: -5px;
-    //     @include rotate(180deg);
-    //   }
-    // }
   }
 
   .panel-collapse {
@@ -64,19 +53,67 @@
   }
 }
 
+/**
+* Panel defaults
+*/
 
+.panel {
+  margin-bottom: $line-height-computed;
+  background-color: $panel-bg;
+  border: 1px solid #000;
+
+  // Optional heading
+  .panel-heading {
+    padding: $panel-heading-padding;
+    border-bottom: 1px solid transparent;
+    background-color: #000;
+    color: #fff;
+  }
+
+  // Panel contents
+  .panel-body {
+    padding: $panel-body-padding;
+    @include clearfix;
+  }
+
+  // Within heading, strip any `h*` tag of its default margins for spacing.
+  .panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: inherit;
+
+    > a,
+    > small,
+    > .small,
+    > small > a,
+    > .small > a {
+      color: inherit;
+    }
+  }
+
+  // Optional footer (stays gray in every modifier class)
+  .panel-footer {
+    padding: $panel-footer-padding;
+    background-color: $panel-footer-bg;
+    border-top: 1px solid $panel-inner-border;
+    @include border-bottom-radius(($panel-border-radius - 1));
+  }
+
+}
 
 
 /**
 * default panels
+* deprecated
 */
-.panel-group {
+.panel-group--deprecated {
   margin: 20px;
-  border: 1px solid red;
+
   .panel {
     box-shadow: none;
     @include border-radius(0);
   }
+
   .panel-heading {
     @include border-radius(0);
     a {

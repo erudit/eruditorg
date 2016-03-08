@@ -545,10 +545,9 @@ button {
 
 
 /**
-* animation
+* Fade-In Theme;
 */
 
-/* overlay at start */
 .mfp-fade {
 
   &.mfp-bg {
@@ -556,41 +555,80 @@ button {
     @include transition(opacity 0.3s);
   }
 
+  // content
   &.mfp-wrap .mfp-content {
-    // opacity: 0;
+    @include transition-delay(0);
+    @include transition-property(transform);
+    @include transition-duration(0.25s);
     @include translate(0,-200%);
-    @include transition(all 0.75s);
-    .mfp-close {
-      // opacity: 0;
-      @include transition-delay(0.5s);
-      @include transition-property(transform);
-      @include transition-duration(1s);
-      @include translate(100%,0);
+  }
+
+  // close button
+  .mfp-close {
+    // position
+    right: 40px;
+
+    // transition
+    @include transition-delay(0.5s);
+    @include transition-property(transform);
+    @include transition-duration(1s);
+    @include translate(200%,0);
+
+    // style
+    opacity: 1;
+    border: none;
+    color: $color-red;
+    font-size: 48px;
+
+    // hover
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      background-color: transparent;
+      color: $gray-base;
     }
   }
 
   // ready state
   &.mfp-ready {
+
     &.mfp-bg {
-      opacity: 0.8;
+      opacity: 0.9;
     }
+
     &.mfp-wrap .mfp-content {
-      // opacity: 1;
       @include translate(0,0);
-      .mfp-close {
-        @include translate(0,0);
-      }
     }
+
+    .mfp-close {
+      @include translate(0,0);
+    }
+
   }
 
   // removing
   &.mfp-removing {
+
     &.mfp-bg {
-      opacity: 0.8;
+      opacity: 0;
+      @include transition-delay(0.35s);
+      @include transition-property(opacity);
+      @include transition-duration(0.75s);
     }
+
     &.mfp-wrap .mfp-content {
-      @include transition(all 0.15s);
+      @include transition-property(transform);
+      @include transition-duration(0.25s);
       @include translate(0,-200%);
+    }
+
+    .mfp-close {
+      // transition
+      @include transition-delay(0.35s);
+      @include transition-property(transform);
+      @include transition-duration(0.5s);
+      @include translate(200%,0);
     }
   }
 }

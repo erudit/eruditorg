@@ -5,17 +5,31 @@
 
 {% block zone-title %}{% trans 'Espace éditeurs' %}{% endblock %}
 
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'login' %}">{% trans "Connexion" %}</a>
+{% endblock %}
+
 {% block content %}
 <section id="login-page" data-controller="userspace:login">
 
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
-        <section class="card card-login">
-          <div class="card-body">
 
-            <form class="form-vertical" method="post">
+    <div class="row">
+
+      <aside class="{% if request.is_ajax %}col-lg-4 col-md-5 col-sm-6 col-xs-12{% else %}col-lg-4 col-sm-6 col-xs-12{% endif %} col-centered">
+
+        <div class="panel">
+
+          <header class="panel-heading">
+            <h2 class="h3 panel-title text-center h1">{% trans "Connexion à votre compte" %}</h2>
+          </header>
+
+          <div class="panel-body">
+
+            <form id="id-login-form" method="post">
+
               {% csrf_token %}
+
               {% if form.non_field_errors %}
               <div class="col-xs-12">
                 {% for error in form.non_field_errors %}
@@ -23,33 +37,42 @@
                 {% endfor %}
               </div>
               {% endif %}
+
               <div class="form-group">
                 <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
                 {{ form.username }}
                 <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
               </div>
+
               <div class="form-group">
                 <label for="id_password">{% trans "Mot de passe" %}</label>
                 {{ form.password }}
                 <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
               </div>
+
               <div class="form-group">
                 <div class="text-right">
-                  <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+                  <small><a href="{% url 'password_reset' %}" data-open-modal-ajax>{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
                 </div>
               </div>
+
               <div class="form-group text-center">
+                {% if request.is_ajax %}
+                <a href="#" class="btn btn-cancel" data-close-modal>{% trans "Annuler" %}</a>
+                {% endif %}
                 <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
               </div>
-              <p class="card-footer">
-                <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
-              </p>
-            </form>
-            
+
+            </div>
+
           </div>
-        </section>
+
+        </aside>
+
       </div>
+
     </div>
+
   </div>
 
 </section>
