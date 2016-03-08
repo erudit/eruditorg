@@ -2,6 +2,7 @@
 
 from .base import *  # noqa
 
+
 class DisableMigrations(object):
     def __contains__(self, item):
         return True
