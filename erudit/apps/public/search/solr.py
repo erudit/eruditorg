@@ -148,24 +148,24 @@ class Solr(object):
 
         return " ".join(filters_query)
 
-    def build_advanced_search_query(self, advanced_search):
+    def build_search_query(self, search_elements):
         """Will build query for advanced search in the form of:
         (Titre_idx:"foo" OR Auteur_idx:"foo bar" AND - Titre_idx:"foo")
         """
-        advanced_search_query = []
-        for search_item in advanced_search:
+        search_query = []
+        for search_item in search_elements:
             # If no search term specified, than not a search
             if search_item["search_term"]:
                 # Only use operator if
-                if advanced_search_query or (search_item["search_operator"] == "NOT"):
+                if search_query or (search_item["search_operator"] == "NOT"):
                     operator = search_item["search_operator"]
                 else:
                     operator = ""
 
-                advanced_search_query.append(
+                search_query.append(
                     "{operator} {field}:{term}".format(
                         operator=operator,
-                        field=self.search_fields[search_item["search_field"]],
+                        field=self.search_fields.get(search_item["search_field"], "all"),
                         # term='"{search_term}"'.format(
                         #     search_term=search_item["search_term"]
                         # ),
@@ -173,7 +173,7 @@ class Solr(object):
                     )
                 )
 
-        return "({query_string})".format(query_string=" ".join(advanced_search_query))
+        return "({query_string})".format(query_string=" ".join(search_query))
 
     def bulid_search_extras_query(self, search_extras):
         publication_date = search_extras.get("publication_date", {})
@@ -212,12 +212,12 @@ class Solr(object):
 
         return " ".join(search_extras_query)
 
-    def search(self, search_term, sort="relevance", sort_order="asc",
+    def search(self, search_elements=[], sort="relevance", sort_order="asc",
                limit_filter_fields=FILTER_FIELDS, selected_filters={},
-               advanced_search=[], search_extras={}, start_at=0, results_per_query=10):
-        """Simple search
+               search_extras={}, start_at=0, results_per_query=10):
+        """search
 
-        - search_term: search term to look for
+        - search_elements: search terms to look for
 
         - sort:
             - "relevance": score
@@ -242,25 +242,15 @@ class Solr(object):
             "wt": self.result_format_paramt,
         }
 
-        # String to search for
-        params["q"] = "{search_index}:{search_term}".format(
-            search_index=self.search_index,
-            search_term=search_term
+        # If nothing to search, don't search
+        if not search_elements:
+            return None
+
+        params["q"] = "{search_query}".format(
+            search_query=self.build_search_query(
+                search_elements=search_elements
+            )
         )
-
-        if selected_filters:
-            params["q"] = "{base_search} {filters_query}".format(
-                base_search=params["q"],
-                filters_query=self.bulid_filters_query(selected_filters=selected_filters)
-            )
-
-        if advanced_search:
-            params["q"] = "{base_search} {advanced_search_query}".format(
-                base_search=params["q"],
-                advanced_search_query=self.build_advanced_search_query(
-                    advanced_search=advanced_search
-                )
-            )
 
         if search_extras:
             params["q"] = "{base_search} {search_extras_query}".format(
@@ -268,6 +258,12 @@ class Solr(object):
                 search_extras_query=self.bulid_search_extras_query(
                     search_extras=search_extras
                 )
+            )
+
+        if selected_filters:
+            params["q"] = "{base_search} {filters_query}".format(
+                base_search=params["q"],
+                filters_query=self.bulid_filters_query(selected_filters=selected_filters)
             )
 
         # Sort param

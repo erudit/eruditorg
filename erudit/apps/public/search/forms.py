@@ -25,6 +25,11 @@ OPERATORS = (
     ("NOT", _("Sauf")),
 )
 
+BASIC_SEARCH_OPERATORS = (
+    ("", _("")),
+    ("NOT", _("Sauf")),
+)
+
 ADVANCED_SEARCH_FIELDS = (
     ("all", _("Tous les champs")),
     ("meta", _("Tous les champs (sauf texte intégral)")),
@@ -97,9 +102,9 @@ class SearchFormHelper(FormHelper):
                 Fieldset(
                     "",
                     Div(
-                        Field('search_term', tabIndex=1),
-                        Field('sort', tabIndex=2),
-                        Field('sort_order', tabIndex=3),
+                        Field('basic_search_operator', tabIndex=1),
+                        Field('basic_search_term', tabIndex=2),
+                        Field('basic_search_field', tabIndex=3),
                     ),
                 ),
                 Fieldset(
@@ -166,19 +171,29 @@ class SearchFormHelper(FormHelper):
                         Field('pub_types'),
                     ),
                 ),
+                Fieldset(
+                    "",
+                    Div(
+                        Field('sort'),
+                        Field('sort_order'),
+                    ),
+                ),
             ),
         )
 
 
 class SearchForm(forms.Form):
-    search_term = forms.CharField(label=_("Recherche"), widget=forms.TextInput, required=False, )
-    sort = forms.ChoiceField(
-        label=_("Tri"), widget=forms.Select, choices=SORT_CHOICES, required=False
-    )
-    sort_order = forms.ChoiceField(
-        label=_("Ordre"), widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
-    )
     page = forms.IntegerField(label=_("Page"), widget=forms.HiddenInput, initial=1, )
+
+    basic_search_operator = forms.ChoiceField(
+        label="", widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
+    )
+    basic_search_term = forms.CharField(
+        label=_("Recherche"), widget=forms.TextInput, required=False,
+    )
+    basic_search_field = forms.ChoiceField(
+        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+    )
 
     advanced_search_operator1 = forms.ChoiceField(
         label="", widget=forms.Select, choices=OPERATORS, required=False
@@ -238,6 +253,12 @@ class SearchForm(forms.Form):
     pub_types = forms.MultipleChoiceField(
         label=_("Types de publication"), widget=forms.CheckboxSelectMultiple,
         choices=PUB_TYPES_CHOICES, required=False
+    )
+    sort = forms.ChoiceField(
+        label=_("Tri"), widget=forms.Select, choices=SORT_CHOICES, required=False
+    )
+    sort_order = forms.ChoiceField(
+        label=_("Ordre"), widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
     )
 
     def __init__(self, *args, **kwargs):

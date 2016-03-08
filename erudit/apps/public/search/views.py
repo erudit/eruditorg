@@ -35,7 +35,7 @@ class Search(FormView):
         ]   # Filter fields available
         self.filter_choices = {}
         self.selected_filters = {}
-        self.advanced_search = []
+        self.search_elements = []
         self.search_extras = {}
 
         return super(Search, self).__init__(*args, **kwargs)
@@ -49,7 +49,16 @@ class Search(FormView):
         data = form.cleaned_data
 
         # Simple search
-        self.search_term = data.get("search_term", None)
+        basic_search_operator = data.get("basic_search_operator", None)
+        basic_search_term = data.get("basic_search_term", None)
+        basic_search_field = data.get("basic_search_field", None)
+
+        if basic_search_term:
+            self.search_elements.append({
+                "search_operator": basic_search_operator,
+                "search_term": basic_search_term,
+                "search_field": basic_search_field,
+            })
 
         # Advanced search
         for i in range(10):
@@ -64,7 +73,7 @@ class Search(FormView):
             )
 
             if advanced_search_term:
-                self.advanced_search.append({
+                self.search_elements.append({
                     "search_operator": advanced_search_operator,
                     "search_term": advanced_search_term,
                     "search_field": advanced_search_field,
@@ -94,14 +103,13 @@ class Search(FormView):
         self.start_at = ((self.page - 1) * self.results_per_query)
 
         # If nothing has been searched for, return nothing
-        if not (self.search_term or advanced_search_term):
+        if not (self.search_elements):
             return None
 
         else:
             try:
                 return self.solr_conn.search(
-                    search_term=self.search_term,
-                    advanced_search=self.advanced_search,
+                    search_elements=self.search_elements,
                     search_extras=self.search_extras,
                     sort=self.sort,
                     sort_order=self.sort_order,
@@ -131,19 +139,12 @@ class Search(FormView):
         """We want this form to handle GET method"""
         kwargs = super(Search, self).get_form_kwargs()
 
-        # If no search term, then not a search yet
-        if self.request.GET.get("search_term", None):
-            kwargs.update({'data': self.request.GET})
+        kwargs.update({'data': self.request.GET})
 
         return kwargs
 
     def get_initial(self):
         initial = super(Search, self).get_initial()
-
-        initial["search_term"] = self.request.GET.get("search_term", None)
-        initial["sort"] = self.request.GET.get("sort", None)
-        initial["sort_order"] = self.request.GET.get("sort_order", None)
-        initial["page"] = self.request.GET.get("page", 1)
 
         # Get selected filter fields
         for field in self.limit_filter_fields:
@@ -156,6 +157,11 @@ class Search(FormView):
                     self.selected_filters[field] = cleaned_value
 
         return initial
+
+    def form_invalid(self, form):
+        # We kinda cheat here
+        # Because we handle all in GET, landing on page == invalid form
+        return super(Search, self).form_invalid(form)
 
     def form_valid(self, form):
         solr_data = self.get_solr_data(form=form)
