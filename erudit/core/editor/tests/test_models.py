@@ -16,6 +16,15 @@ class IssueSubmissionTestCase(TestCase):
         self.assertNotEqual(issue.id, copy.id)
         self.assertEqual(issue.parent, copy)
 
+    def test_knows_if_it_is_submitted(self):
+        # Setup
+        issue_1 = IssueSubmissionFactory.create()
+        issue_2 = IssueSubmissionFactory.create()
+        issue_2.submit()
+        # Run & check
+        self.assertFalse(issue_1.is_submitted)
+        self.assertTrue(issue_2.is_submitted)
+
 
 class IssueSubmissionWorkflowTestCase(TestCase):
 

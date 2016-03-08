@@ -97,6 +97,10 @@ class IssueSubmission(models.Model):
         """ Return the absolute URL for this model """
         return reverse('userspace:editor:update', kwargs={'pk': self.pk})
 
+    @property
+    def is_submitted(self):
+        return self.status == self.SUBMITTED
+
     @transition(field=status, source=DRAFT, target=SUBMITTED,
                 permission=lambda user: user.has_perm(
                     'editor.manage_issuesubmission'),
