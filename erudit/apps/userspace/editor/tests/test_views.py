@@ -1,13 +1,24 @@
-from lxml import etree
+# -*- coding: utf-8 -*-
+
+import os
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
-from django.http.response import HttpResponseRedirect, HttpResponseNotFound
+from django.http.response import HttpResponseNotFound
+from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
+from lxml import etree
+from plupload.models import ResumableFile
 
-from apps.userspace.editor.views import IssueSubmissionCreate
+from core.authorization.defaults import AuthorizationConfig as AC
+from core.authorization.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.tests.base import BaseEditorTestCase
+
+from ..views import IssueSubmissionCreate
+
+FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
 class TestIssueSubmissionView(BaseEditorTestCase):
@@ -197,3 +208,118 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         journal_ids = [j.id for j in self.user.journals.all()]
         issues = set(IssueSubmission.objects.filter(journal__in=journal_ids))
         self.assertEqual(set(response.context_data['object_list']), issues)
+
+
+class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
+    def test_cannot_be_browsed_by_users_who_cannot_download_submission_files(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.client.login(username='dummy', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_can_be_browsed_by_users_who_can_manage_issue_submissions(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.journal.members.add(user)
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal),
+            object_id=self.journal.id,
+            user=user,
+            authorization_codename=AC.can_manage_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_can_be_browsed_by_users_who_can_review_issue_submissions(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        AuthorizationFactory.create(
+            user=user, authorization_codename=AC.can_review_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url, follow=False)
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_embed_the_correct_http_headers_in_the_response(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'image/png')
+        self.assertEqual(response['Content-Disposition'], 'attachment; filename=pixel.png')
+
+    def test_is_able_to_handle_unknown_file_content_types(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'dummy.kyz'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'dummy.kyz'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/plain')
+        self.assertEqual(response['Content-Disposition'], 'attachment; filename=dummy.kyz')
+
+    def test_raises_http404_if_the_file_does_not_exist(self):
+        # Setup
+        rfile = ResumableFile.objects.create(
+            path='/dummy/dummy.png', filesize=1, uploadsize=1)
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        self.issue_submission.submissions.add(rfile)
+        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 404)

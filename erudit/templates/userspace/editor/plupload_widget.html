@@ -1,0 +1,86 @@
+{% load i18n %}
+
+<script type="text/javascript" src="{{ STATIC_URL}}/js/moxie.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL}}/js/plupload.full.min.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL}}/js/plupload_widget.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}/css/plupload.css">
+
+
+<input{{ final_attrs }} style="display: none;">
+
+<div class="upload-container">
+  <table class="upload-table">
+    <thead>
+      <tr>
+        <th colspan="2" class="heading-name">{% trans "Fichier" %}</th>
+        <th class="heading-size">{% trans "Taille" %}</th>
+        <th class="heading-status">{% trans "Statut" %}</th>
+        <th class="heading-delete"></th>
+      </tr>
+    </thead>
+    <tbody id="filelist">
+      {% for file in files %}
+      <tr data-resumable-file-id="{{ file.id }}" data-resumable-file-name="{{ file.filename }}">
+        <td class="file-type">
+          <span class="icon-file"></span>
+        </td>
+        <td class="file-name">
+          {% if file.is_complete %}
+            <a href="{% url 'userspace:editor:attachment-detail' file.id %}">{{ file.filename }}</a>
+          {% else %}
+            {{ file.filename }}
+          {% endif %}
+        </td>
+        <td class="file-size">
+          {{ file.filesize }}
+        </td>
+        <td class="file-status">
+          <span class="progress-bar" role="progressbar" aria-valuenow="{{ file.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.percent }}%;">{{ file.percent }}%</span>
+        </td>
+        <td class="file-delete"><a href="#" class="delete-file icon-upload icon-delete"></a></td>
+      </tr>
+      {% endfor %}
+      {% comment %}
+      TODO: faire fonctionner le fallback
+      <tr>
+        <td colspan="5">{% trans "Votre navigateur ne supporte pas les technologies Flash, Silverlight ou HTML5." %}</td>
+      </tr>
+      {% endcomment %}
+      <tr id="drop_element" class="drop">
+        <td colspan="5">
+          <div class="drop-circle">
+            <div class="drop-message">
+              <div class="drop-icon"><span class="icon-action icon-upload"></span></div>
+              <div class="drop-text">{% trans "Glissez-déposez vos fichiers de production ici." %}</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">
+          <a id="pickfiles" class="upload-action" href="javascript:;"><span class="icon-action icon-add"></span> {% trans "Ajouter les fichiers" %}</a>
+          <a id="uploadfiles" class="upload-action" href="javascript:;"><span class="icon-action icon-upload"></span> {% trans "Téléverser" %}</a>
+        </td>
+        <td class="file-size">
+          <strong><span id="file-size-total"></span></strong>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<script type="text/javascript">
+var json_params = JSON.parse('{{ json_params }}');
+var filesizes = JSON.parse('{{ files_json }}');
+$(function() {
+  create_uploader(
+    json_params,
+    filesizes
+  );
+});
+</script>
