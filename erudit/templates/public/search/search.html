@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="container">
-<div class="search-form">
+<div class="search-form">
     <form  action="{% url 'public:search:search' %}" id="id-search" class="search" method="get" >
     {% crispy form %}
 
@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <div class="controls ">
-            <input type="submit" name="submit" value="Recherche" class="btn btn-primary btn btn-primary" id="submit-id-submit"/>
+            <button type="submit" class="btn btn-lg">{% trans "Recherche" %}<span class="ion ion-ios-search"></span></button>
         </div>
     </div>
     </form>

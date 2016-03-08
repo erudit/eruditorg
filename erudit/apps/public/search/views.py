@@ -4,22 +4,13 @@ from django.views.generic import FormView
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 
-from base.viewmixins import SolrServiceRequiredMixin
+# from base.viewmixins import SolrServiceRequiredMixin
 from erudit.models import EruditDocument
 from . import solr, forms
 
-DOCUMENT_TYPES = {
-    "journal": [
-        "article",
-        "culturel",
-    ],
-    "book": [],
-    "thesis": [],
-    "document": [],
-}
 
-
-class Search(SolrServiceRequiredMixin, FormView):
+# class Search(SolrServiceRequiredMixin, FormView):
+class Search(FormView):
     model = EruditDocument
     object_list = []
     results_count = None
@@ -44,6 +35,8 @@ class Search(SolrServiceRequiredMixin, FormView):
         ]   # Filter fields available
         self.filter_choices = {}
         self.selected_filters = {}
+        self.search_elements = []
+        self.search_extras = {}
 
         return super(Search, self).__init__(*args, **kwargs)
 
@@ -53,27 +46,78 @@ class Search(SolrServiceRequiredMixin, FormView):
 
     def get_solr_data(self, form):
         """Query solr"""
-        self.search_term = form.cleaned_data.get("search_term", None)
-        self.sort = form.cleaned_data.get("sort", None)
-        self.sort_order = form.cleaned_data.get("sort_order", None)
-        self.page = form.cleaned_data.get("page", 1)
+        data = form.cleaned_data
+
+        # Simple search
+        basic_search_operator = data.get("basic_search_operator", None)
+        basic_search_term = data.get("basic_search_term", None)
+        basic_search_field = data.get("basic_search_field", None)
+
+        if basic_search_term:
+            self.search_elements.append({
+                "search_operator": basic_search_operator,
+                "search_term": basic_search_term,
+                "search_field": basic_search_field,
+            })
+
+        # Advanced search
+        for i in range(10):
+            advanced_search_operator = data.get(
+                "advanced_search_operator{counter}".format(counter=i+1), None
+            )
+            advanced_search_term = data.get(
+                "advanced_search_term{counter}".format(counter=i+1), None
+            )
+            advanced_search_field = data.get(
+                "advanced_search_field{counter}".format(counter=i+1), None
+            )
+
+            if advanced_search_term:
+                self.search_elements.append({
+                    "search_operator": advanced_search_operator,
+                    "search_term": advanced_search_term,
+                    "search_field": advanced_search_field,
+                })
+
+        # Publication year
+        if data.get("pub_year_start", None) or data.get("pub_year_end", None):
+            self.search_extras["publication_date"] = {}
+            self.search_extras["publication_date"]["pub_year_start"] = \
+                data.get("pub_year_start", None)
+            self.search_extras["publication_date"]["pub_year_end"] = \
+                data.get("pub_year_end", None)
+
+        # Document available since date
+        self.search_extras["available_since"] = \
+            data.get("available_since", None)
+
+        # Document available since date
+        self.search_extras["funds"] = \
+            data.get("funds_limit", None)
+
+        # Sorting / Pagination
+        self.sort = data.get("sort", None)
+        self.sort_order = data.get("sort_order", None)
+        self.page = data.get("page", 1)
         self.results_per_query = self.paginate_by
         self.start_at = ((self.page - 1) * self.results_per_query)
 
-        if not self.search_term:
+        # If nothing has been searched for, return nothing
+        if not (self.search_elements):
             return None
 
         else:
             try:
-                return self.solr_conn.simple_search(
-                    search_term=self.search_term,
+                return self.solr_conn.search(
+                    search_elements=self.search_elements,
+                    search_extras=self.search_extras,
                     sort=self.sort,
                     sort_order=self.sort_order,
                     start_at=self.start_at,
                     results_per_query=self.results_per_query,
                     limit_filter_fields=self.limit_filter_fields,
                     selected_filters=self.selected_filters,
-                )
+                    )
             except:
                 return None
 
@@ -95,19 +139,12 @@ class Search(SolrServiceRequiredMixin, FormView):
         """We want this form to handle GET method"""
         kwargs = super(Search, self).get_form_kwargs()
 
-        # If no search term, then not a search yet
-        if self.request.GET.get("search_term", None):
-            kwargs.update({'data': self.request.GET})
+        kwargs.update({'data': self.request.GET})
 
         return kwargs
 
     def get_initial(self):
         initial = super(Search, self).get_initial()
-
-        initial["search_term"] = self.request.GET.get("search_term", None)
-        initial["sort"] = self.request.GET.get("sort", None)
-        initial["sort_order"] = self.request.GET.get("sort_order", None)
-        initial["page"] = self.request.GET.get("page", 1)
 
         # Get selected filter fields
         for field in self.limit_filter_fields:
@@ -120,6 +157,11 @@ class Search(SolrServiceRequiredMixin, FormView):
                     self.selected_filters[field] = cleaned_value
 
         return initial
+
+    def form_invalid(self, form):
+        # We kinda cheat here
+        # Because we handle all in GET, landing on page == invalid form
+        return super(Search, self).form_invalid(form)
 
     def form_valid(self, form):
         solr_data = self.get_solr_data(form=form)

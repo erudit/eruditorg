@@ -1,7 +1,29 @@
 import requests
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+
+# Search fields
+SEARCH_FIELDS = {
+    "all": "TexteComplet",
+    "meta": "Metadonnees",
+    "full_text": "TexteIntegral",
+    "title_abstract_keywords": "TitreResumeMots",
+    "title": "Titre_idx",
+    "author": "Auteur_idx",
+    "author_affiliation": "Affiliation_idx",
+    "journal_title": "TitreCollection_idx",
+    "bibliography": "RefBiblio_idx",
+    "title_reviewd": "TitreRefBiblio_idx",
+    "issn": "ISSN",
+    "isbn": "ISBN",
+}
+
+EXTRA_SEARCH_FIELDS = {
+    "years": "AnneePublication",
+    "date_added": "DateAjoutIndex",
+    "funds": "Fonds_fac",
+    "publication_types": "Corpus_fac",
+}
 
 # Fields available for sorting
 SORT_FIELDS = {
@@ -13,41 +35,20 @@ SORT_FIELDS = {
 
 # Fields available for filtering
 FILTER_FIELDS = {
-    "years": {
-        "field": "AnneePublication",
-        "label": _("Années de publication")
-    },
-    "article_types": {
-     "field": "TypeArticle_fac",
-     "label": _("Types d'articles")
-    },
-    "languages": {
-        "field": "Langue",
-        "label": _("Langues")
-    },
-    "collections": {
-     "field": "TitreCollection_fac",
-     "label": _("Collections")
-    },
-    "authors": {
-        "field": "Auteur_tri",
-        "label": _("Auteurs")
-    },
-    "funds": {
-        "field": "Fonds_fac",
-        "label": _("Fonds")
-    },
-    "publication_types": {
-        "field": "Corpus_fac",
-        "label": _("Types de publication")
-    },
+    "years": "AnneePublication",
+    "article_types": "TypeArticle_fac",
+    "languages": "Langue",
+    "collections": "TitreCollection_fac",
+    "authors": "Auteur_tri",
+    "funds": "Fonds_fac",
+    "publication_types": "Corpus_fac",
 }
 
 
 class Solr(object):
     """Connects to Solr
 
-    - simple_search: looks for search term with simple sorting options
+    - search: looks for search term with simple sorting options
     - advanced_seaerch: Advanced search
     """
 
@@ -55,11 +56,13 @@ class Solr(object):
         super(Solr, self).__init__()
         self.base_url = base_url
         self.result_format_paramt = "json"
-        self.simple_search_index = "TexteComplet"
-        self.sort_fields = SORT_FIELDS
+        self.search_index = "TexteComplet"
+        self.search_fields = SEARCH_FIELDS
+        self.extra_search_fields = EXTRA_SEARCH_FIELDS
         self.filter_fields = FILTER_FIELDS
+        self.sort_fields = SORT_FIELDS
 
-    def search(self, params):
+    def call_api(self, params):
         """Does actual search on Solr based on params received from higher up functions"""
         search_url = "{base_url}select".format(base_url=self.base_url)
 
@@ -75,6 +78,12 @@ class Solr(object):
                 return response.url, response.json()
             except:
                 return None, {}
+
+    def format_solr_date(self, date_string):
+        if "T" not in date_string.upper():
+            return "{date_string}T23:59:59Z".format(date_string=date_string)
+        else:
+            return date_string
 
     def clean_data(self, raw_data):
         cleaned_data = {
@@ -101,11 +110,11 @@ class Solr(object):
 
         # Possible filters
         # Loop through all filters we are interested in
-        for django_field_name, field_details in self.filter_fields.items():
+        for django_field_name, solr_field_name in self.filter_fields.items():
             try:
                 # If filter found in solr data, try to format it in nicer dict
                 filter_field_choices = \
-                    raw_data["facet_counts"]["facet_fields"][field_details["field"]]
+                    raw_data["facet_counts"]["facet_fields"][solr_field_name]
                 filter_field_choices_dict = {
                     filter_field_choices[i]:
                         filter_field_choices[i+1] for i in range(0, len(filter_field_choices), 2)
@@ -113,7 +122,6 @@ class Solr(object):
 
                 # Add to dictionnary of filters
                 cleaned_data["filter_choices"][django_field_name] = {
-                    "label": field_details["label"],
                     "values": filter_field_choices_dict,
                 }
             except:
@@ -121,31 +129,95 @@ class Solr(object):
 
         return cleaned_data
 
-    def build_query_filters(self, selected_filters):
+    def bulid_filters_query(self, selected_filters):
         """Will return query filter in the form of:
         Langue:(fr) Annee(2010 OR 2011 OR 2012)
         """
-        query_filters = []
+        filters_query = []
         for filter_name, filter_values in selected_filters.items():
-            solr_field_name = self.filter_fields[filter_name]["field"]
+            solr_field_name = self.filter_fields[filter_name]
             # Wrap filters in quotes
             filter_values = [
                 '"{filter_value}"'.format(filter_value=filter_value) for
                 filter_value in filter_values
             ]
-            query_filters.append("{field}:({values})".format(
+            filters_query.append("{field}:({values})".format(
                 field=solr_field_name,
                 values=' OR '.join(filter_values))
             )
 
-        return " ".join(query_filters)
+        return " ".join(filters_query)
 
-    def simple_search(self, search_term, sort="relevance", sort_order="asc",
-                      limit_filter_fields=FILTER_FIELDS, selected_filters={},
-                      start_at=0, results_per_query=10):
-        """Simple search
+    def build_search_query(self, search_elements):
+        """Will build query for advanced search in the form of:
+        (Titre_idx:"foo" OR Auteur_idx:"foo bar" AND - Titre_idx:"foo")
+        """
+        search_query = []
+        for search_item in search_elements:
+            # If no search term specified, than not a search
+            if search_item["search_term"]:
+                # Only use operator if
+                if search_query or (search_item["search_operator"] == "NOT"):
+                    operator = search_item["search_operator"]
+                else:
+                    operator = ""
 
-        - search_term: search term to look for
+                search_query.append(
+                    "{operator} {field}:{term}".format(
+                        operator=operator,
+                        field=self.search_fields.get(search_item["search_field"], "all"),
+                        # term='"{search_term}"'.format(
+                        #     search_term=search_item["search_term"]
+                        # ),
+                        term=search_item["search_term"],
+                    )
+                )
+
+        return "({query_string})".format(query_string=" ".join(search_query))
+
+    def bulid_search_extras_query(self, search_extras):
+        publication_date = search_extras.get("publication_date", {})
+        available_since = search_extras.get("available_since", None)
+        funds = search_extras.get("funds", None)
+        pub_types = search_extras.get("pub_types", None)
+
+        search_extras_query = []
+
+        if publication_date:
+            pub_year_start = publication_date.get("pub_year_start", "*")
+            pub_year_end = publication_date.get("pub_year_end", "*")
+            search_extras_query.append("{field}:[{pub_year_start} TO {pub_year_end}]".format(
+                field=self.extra_search_fields["years"],
+                pub_year_start=pub_year_start,
+                pub_year_end=pub_year_end
+            ))
+
+        if available_since:
+            search_extras_query.append("{field}:[{available_since} TO NOW]".format(
+                field=self.extra_search_fields["date_added"],
+                available_since=self.format_solr_date(date_string=available_since),
+            ))
+
+        if funds:
+            search_extras_query.append("{field}:({funds})".format(
+                field=self.extra_search_fields["funds"],
+                funds=" OR ".join(funds),
+            ))
+
+        if pub_types:
+            search_extras_query.append("{field}:({funds})".format(
+                field=self.extra_search_fields["publication_types"],
+                funds=" OR ".join(funds),
+            ))
+
+        return " ".join(search_extras_query)
+
+    def search(self, search_elements=[], sort="relevance", sort_order="asc",
+               limit_filter_fields=FILTER_FIELDS, selected_filters={},
+               search_extras={}, start_at=0, results_per_query=10):
+        """search
+
+        - search_elements: search terms to look for
 
         - sort:
             - "relevance": score
@@ -170,16 +242,28 @@ class Solr(object):
             "wt": self.result_format_paramt,
         }
 
-        # String to search for
-        params["q"] = "{simple_search_index}:{search_term}".format(
-            simple_search_index=self.simple_search_index,
-            search_term=search_term
+        # If nothing to search, don't search
+        if not search_elements:
+            return None
+
+        params["q"] = "{search_query}".format(
+            search_query=self.build_search_query(
+                search_elements=search_elements
+            )
         )
 
-        if selected_filters:
-            params["q"] = "{base_search} {filters}".format(
+        if search_extras:
+            params["q"] = "{base_search} {search_extras_query}".format(
                 base_search=params["q"],
-                filters=self.build_query_filters(selected_filters=selected_filters)
+                search_extras_query=self.bulid_search_extras_query(
+                    search_extras=search_extras
+                )
+            )
+
+        if selected_filters:
+            params["q"] = "{base_search} {filters_query}".format(
+                base_search=params["q"],
+                filters_query=self.bulid_filters_query(selected_filters=selected_filters)
             )
 
         # Sort param
@@ -203,10 +287,10 @@ class Solr(object):
         facet_fields = []
         for limit_filter_field in limit_filter_fields:
             try:
-                facet_fields.append(self.filter_fields[limit_filter_field]["field"])
+                facet_fields.append(self.filter_fields[limit_filter_field])
             except:
                 pass
         params["facet.field"] = facet_fields
 
-        query_url, raw_data = self.search(params=params)
+        query_url, raw_data = self.call_api(params=params)
         return self.clean_data(raw_data=raw_data)
