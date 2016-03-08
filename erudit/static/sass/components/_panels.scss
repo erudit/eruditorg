@@ -64,7 +64,7 @@
 
   // Optional heading
   .panel-heading {
-    padding: $panel-heading-padding;
+    padding: $padding-base-vertical * 2 $padding-base-horizontal;
     border-bottom: 1px solid transparent;
     background-color: #000;
     color: #fff;

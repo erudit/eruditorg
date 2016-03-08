@@ -3,7 +3,21 @@
 */
 
 section#login-page {
-  
+
+  form {
+
+    input[type="text"],
+    input[type="password"] {
+      @include fw-sans-medium-italic();
+    }
+
+    .checkbox {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+  }
+
 }
 
 // TODO: to remove

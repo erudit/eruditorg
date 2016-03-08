@@ -16,12 +16,18 @@
 
     <div class="row">
 
-      <aside class="{% if request.is_ajax %}col-lg-4 col-md-5 col-sm-6 col-xs-12{% else %}col-lg-4 col-sm-6 col-xs-12{% endif %} col-centered">
+      <aside class="
+        {% if request.is_ajax %}
+          col-lg-3 col-md-5 col-sm-6 col-xs-12 col-centered
+        {% else %}
+          col-lg-4 col-sm-6 col-xs-12 col-centered
+        {% endif %}"
+      >
 
         <div class="panel">
 
           <header class="panel-heading">
-            <h2 class="h3 panel-title text-center h1">{% trans "Connexion à votre compte" %}</h2>
+            <h2 class="h4 panel-title text-center h1">{% trans "Connexion à votre compte" %}</h2>
           </header>
 
           <div class="panel-body">
@@ -50,17 +56,26 @@
                 <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
               </div>
 
-              <div class="form-group">
-                <div class="text-right">
-                  <small><a href="{% url 'password_reset' %}" data-open-modal-ajax>{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
-                </div>
+              <div class="form-group row child-column-fit">
+                <aside class="col-sm-6">
+                  <div class="checkbox">
+                    <label for="id-remember-me">
+                      <input type="checkbox" id="id-remember-me" name="name" value="remember"> {% trans "Se souvenir de moi?" %}
+                    </label>
+                  </div>
+                </aside>
+                <aside class="col-sm-6 text-right">
+                  <p class="no-margin">
+                    <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+                  </p>
+                </aside>
               </div>
 
               <div class="form-group text-center">
                 {% if request.is_ajax %}
-                <a href="#" class="btn btn-cancel" data-close-modal>{% trans "Annuler" %}</a>
+                <button type="reset" class="btn btn-default btn-lg" id="submit-id-submit" data-close-modal>{% trans "Annuler" %}</button>
                 {% endif %}
-                <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
+                <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Connexion" %}</button>
               </div>
 
             </div>

@@ -2655,7 +2655,7 @@ input[list],
   border-style: solid;
   border-color: #979797;
   color: #333333;
-  background: transparent;
+  background: #f7f7f7;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   -ms-border-radius: 0px;
@@ -2732,7 +2732,7 @@ input[type="number"],
 input[type="tel"],
 input[type="url"],
 input[type="search"] {
-  border-width: 0 0 1px 0; }
+  border-width: 0 0 2px 0; }
 
 input[type="checkbox"],
 input[type="radio"] {
@@ -2757,108 +2757,7 @@ textarea {
   min-height: 100px; }
 
 /* buttons */
-button,
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-input[type="image"],
-.btn, .btn-default {
-  cursor: pointer;
-  padding: 9px 13.5px;
-  border: 1px solid #333333;
-  border-radius: 0px;
-  color: #333333;
-  margin: 0.75em 0.75em 0 0;
-  -webkit-transition: all, 300ms, ease;
-  -o-transition: all, 300ms, ease;
-  transition: all, 300ms, ease; }
-  button:last-child,
-  input[type="button"]:last-child,
-  input[type="submit"]:last-child,
-  input[type="reset"]:last-child,
-  input[type="image"]:last-child,
-  .btn:last-child, .btn-default:last-child {
-    margin-right: 0; }
-  button:hover, button:active, button:focus, button:active:focus,
-  input[type="button"]:hover,
-  input[type="button"]:active,
-  input[type="button"]:focus,
-  input[type="button"]:active:focus,
-  input[type="submit"]:hover,
-  input[type="submit"]:active,
-  input[type="submit"]:focus,
-  input[type="submit"]:active:focus,
-  input[type="reset"]:hover,
-  input[type="reset"]:active,
-  input[type="reset"]:focus,
-  input[type="reset"]:active:focus,
-  input[type="image"]:hover,
-  input[type="image"]:active,
-  input[type="image"]:focus,
-  input[type="image"]:active:focus,
-  .btn:hover,
-  .btn:active,
-  .btn:focus,
-  .btn:active:focus, .btn-default:hover, .btn-default:active, .btn-default:focus, .btn-default:active:focus {
-    color: #979797;
-    background-color: #3b3b3b;
-    border: 1px solid #3b3b3b; }
-
-/* primary call-to-actions and submit buttons */
-button[type="submit"],
-input[type="submit"],
-.btn-primary {
-  border: 1px solid #AF2329;
-  color: white;
-  background-color: #AF2329;
-  letter-spacing: 1px;
-  text-transform: uppercase; }
-  button[type="submit"] a,
-  input[type="submit"] a,
-  .btn-primary a {
-    color: #FFF; }
-    button[type="submit"] a:hover, button[type="submit"] a:active, button[type="submit"] a:focus, button[type="submit"] a:active:focus,
-    input[type="submit"] a:hover,
-    input[type="submit"] a:active,
-    input[type="submit"] a:focus,
-    input[type="submit"] a:active:focus,
-    .btn-primary a:hover,
-    .btn-primary a:active,
-    .btn-primary a:focus,
-    .btn-primary a:active:focus {
-      background-color: #831a1f;
-      color: white;
-      border: none; }
-  button[type="submit"]:hover, button[type="submit"]:active, button[type="submit"]:focus, button[type="submit"]:active:focus,
-  input[type="submit"]:hover,
-  input[type="submit"]:active,
-  input[type="submit"]:focus,
-  input[type="submit"]:active:focus,
-  .btn-primary:hover,
-  .btn-primary:active,
-  .btn-primary:focus,
-  .btn-primary:active:focus {
-    background-color: #831a1f;
-    border: 1px solid #831a1f;
-    color: white; }
-
 /* reset and cancel buttons */
-button[type="reset"],
-input[type="reset"] {
-  border: none;
-  text-decoration: underline;
-  color: #333333;
-  background-color: #FFF; }
-  button[type="reset"]:hover, button[type="reset"]:active, button[type="reset"]:focus, button[type="reset"]:active:focus,
-  input[type="reset"]:hover,
-  input[type="reset"]:active,
-  input[type="reset"]:focus,
-  input[type="reset"]:active:focus {
-    color: #333333;
-    background: none;
-    border: none;
-    text-decoration: none; }
-
 /* disabled inputs and buttons */
 input[disabled],
 textarea[disabled],
@@ -2881,6 +2780,73 @@ label.required:after {
 .error input, .error .select2 {
   border-color: #E8304B;
   background-color: rgba(232, 48, 75, 0.15); }
+
+/**
+* Checkboxes and radios (forked from Bootstrap)
+*/
+.radio,
+.checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .radio label,
+  .checkbox label {
+    min-height: 20px;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: 14px; }
+
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 4px \9; }
+
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: -5px; }
+
+.radio-inline,
+.checkbox-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer; }
+
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px; }
+
+input[type="radio"][disabled], input[type="radio"].disabled,
+fieldset[disabled] input[type="radio"],
+input[type="checkbox"][disabled],
+input[type="checkbox"].disabled,
+fieldset[disabled]
+input[type="checkbox"] {
+  cursor: not-allowed; }
+
+.radio-inline.disabled,
+fieldset[disabled] .radio-inline,
+.checkbox-inline.disabled,
+fieldset[disabled]
+.checkbox-inline {
+  cursor: not-allowed; }
+
+.radio.disabled label,
+fieldset[disabled] .radio label,
+.checkbox.disabled label,
+fieldset[disabled]
+.checkbox label {
+  cursor: not-allowed; }
 
 /* remove extra borders and padding for mobile viewing */
 @media (max-width: 768px) {
@@ -3115,7 +3081,7 @@ dl dd {
   background-color: #fff;
   border: 1px solid #000; }
   .panel .panel-heading {
-    padding: 10px 15px;
+    padding: 12px 12px;
     border-bottom: 1px solid transparent;
     background-color: #000;
     color: #fff; }
@@ -3173,6 +3139,14 @@ dl dd {
 /**
 * Login page
 */
+section#login-page form input[type="text"],
+section#login-page form input[type="password"] {
+  font-family: "Maax-Mediumitalic", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+section#login-page form .checkbox {
+  margin-top: 0;
+  margin-bottom: 0; }
+
 .login-page {
   padding-left: 0; }
   .login-page label {
