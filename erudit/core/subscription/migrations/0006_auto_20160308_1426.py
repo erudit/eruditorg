@@ -9,16 +9,17 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('subscription', '0006_auto_20160303_2205'),
+        ('subscription', '0005_merge'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='IndividualAccountProfile',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('policy', models.ForeignKey(verbose_name='Accès', related_name='accounts', null=True, blank=True, help_text="Laisser vide si la politique d'accès aux produits est définie plus bas", to='subscription.Policy')),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('password', models.CharField(verbose_name='Mot de passe', blank=True, max_length=50)),
+                ('policy', models.ForeignKey(to='subscription.Policy', help_text="Laisser vide si la politique d'accès aux produits est définie plus bas", verbose_name='Accès', null=True, related_name='accounts', blank=True)),
+                ('user', models.OneToOneField(verbose_name='Utilisateur', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'Compte personnel',
@@ -28,10 +29,6 @@ class Migration(migrations.Migration):
         migrations.RemoveField(
             model_name='individualaccount',
             name='policy',
-        ),
-        migrations.RemoveField(
-            model_name='individualaccount',
-            name='user_ptr',
         ),
         migrations.DeleteModel(
             name='IndividualAccount',
