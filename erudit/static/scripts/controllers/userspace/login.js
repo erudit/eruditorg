@@ -2,8 +2,6 @@ var controlerName = 'userspace:login';
 
 ROUTER.registerController(controlerName, {
 
-  // formElement: function() { return $("form#id-login-form"); },
-
   init: function() {
     // set variables
     this.formElement = $("form#id-login-form");

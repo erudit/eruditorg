@@ -1278,31 +1278,6 @@
 
   ModernizrProto.prefixedCSSValue = prefixedCSSValue;
   
-/*!
-{
-  "name": "SVG",
-  "property": "svg",
-  "caniuse": "svg",
-  "tags": ["svg"],
-  "authors": ["Erik Dahlstrom"],
-  "polyfills": [
-    "svgweb",
-    "raphael",
-    "amplesdk",
-    "canvg",
-    "svg-boilerplate",
-    "sie",
-    "dojogfx",
-    "fabricjs"
-  ]
-}
-!*/
-/* DOC
-Detects support for SVG in `<embed>` or `<object>` elements.
-*/
-
-  Modernizr.addTest('svg', !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
-
 
   /**
    * Modernizr.hasEvent() detects support for a given event
@@ -1379,27 +1354,6 @@ Detects support for SVG in `<embed>` or `<object>` elements.
 
   ModernizrProto.hasEvent = hasEvent;
   
-/*!
-{
-  "name": "input[search] search event",
-  "property": "search",
-  "tags": ["input","search"],
-  "authors": ["Calvin Webster"],
-  "notes": [{
-    "name": "Wufoo demo",
-    "href": "https://www.wufoo.com/html5/types/5-search.html?"
-  }, {
-    "name": "CSS Tricks",
-    "href": "https://css-tricks.com/webkit-html5-search-inputs/"
-  }]
-}
-!*/
-/* DOC
-There is a custom `search` event implemented in webkit browsers when using an `input[search]` element.
-*/
-
-  Modernizr.addTest('inputsearchevent',  hasEvent('search'));
-
 /*!
 {
   "name": "DOM Pointer Events API",
@@ -1588,6 +1542,52 @@ This test will also return `true` for Firefox 4 Multitouch support.
     }
     return bool;
   });
+
+/*!
+{
+  "name": "SVG",
+  "property": "svg",
+  "caniuse": "svg",
+  "tags": ["svg"],
+  "authors": ["Erik Dahlstrom"],
+  "polyfills": [
+    "svgweb",
+    "raphael",
+    "amplesdk",
+    "canvg",
+    "svg-boilerplate",
+    "sie",
+    "dojogfx",
+    "fabricjs"
+  ]
+}
+!*/
+/* DOC
+Detects support for SVG in `<embed>` or `<object>` elements.
+*/
+
+  Modernizr.addTest('svg', !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
+
+/*!
+{
+  "name": "input[search] search event",
+  "property": "search",
+  "tags": ["input","search"],
+  "authors": ["Calvin Webster"],
+  "notes": [{
+    "name": "Wufoo demo",
+    "href": "https://www.wufoo.com/html5/types/5-search.html?"
+  }, {
+    "name": "CSS Tricks",
+    "href": "https://css-tricks.com/webkit-html5-search-inputs/"
+  }]
+}
+!*/
+/* DOC
+There is a custom `search` event implemented in webkit browsers when using an `input[search]` element.
+*/
+
+  Modernizr.addTest('inputsearchevent',  hasEvent('search'));
 
 
   // Run each test

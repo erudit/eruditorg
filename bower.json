@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
+    "requirejs": "latest",
     "jquery": "2.2.0",
     "blockui": "latest",
     "isInViewport": "latest",
