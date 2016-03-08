@@ -84,8 +84,10 @@ gulp.task('scripts-erudit-vendors', function() {
   return gulp.src([
       vendor_dir + 'jquery/dist/jquery.min.js',
       vendor_dir + 'bootstrap-sass/assets/javascripts/bootstrap.js',
+      vendor_dir + 'jquery.validation/dist/jquery.validate.js',
       vendor_dir + 'inline-svg/dist/inlineSVG.min.js',
       vendor_dir + 'sticky-kit/jquery.sticky-kit.js',
+      vendor_dir + 'magnific-popup/dist/jquery.magnific-popup.js',
       vendor_dir + 'get-prefix/dist/get-prefix.js'
     ])
     .pipe(concat('erudit-vendors.js'))

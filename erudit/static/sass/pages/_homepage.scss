@@ -3,11 +3,12 @@
 	min-height: 200px;
 	background: #c90722 image('homepage-header.jpg') no-repeat scroll center center;
 	background-size: auto 100%;
-	
+
 	> .row, .container {
 		height: 100%;
 		position: relative;
 	}
+
 	#homepage-top-nav {
 		@include fw-sans-medium();
 		color: #fff;
@@ -54,7 +55,7 @@
 				  }
 				}
 			}
-			
+
 			&:hover {
 				> a {
 				  background-color: transparent;
@@ -73,7 +74,7 @@
 
 
 #homepage-content {
-	
+
 	a.invisible {
 		display: block;
 		height: 0px;
@@ -122,8 +123,14 @@
 				height: 53px;
 				bottom: 9px;
 				right: -6px;
-				font-size: 28px;
+				font-size: 34px;
 				background-color: $coral-red;
+				padding: 0;
+				color: #fff;
+				span {
+					position: relative;
+					bottom: -2px;
+				}
 			}
 		}
 	}
@@ -134,14 +141,14 @@
 			margin-bottom: 65px;
 			padding-top: 36px;
 			@include grid-cell-border('top', 1px, #cccccc);
-			
+
 			img {
 				width: 100%;
 			}
 
 			.latest-issues--article--issue {
 				@include fw-sans-bold();
-			}			
+			}
 
 			&:first-child {
 				.latest-issues--article--issue {
@@ -170,7 +177,7 @@
 		padding-top: 60px;
 		padding-bottom: 60px;
 		font-size: 18px;
-	
+
 		ul {
 			margin-top: 35px;
 			list-style: none;

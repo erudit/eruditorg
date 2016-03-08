@@ -1,24 +1,41 @@
-{% extends "base.html" %}
+{% extends "public/base.html"|pjax:request %}
 {% load i18n staticfiles %}
 
 {% block page-title %}{% trans 'Connexion' %}{% endblock %}
 
 {% block zone-title %}{% trans 'Espace éditeurs' %}{% endblock %}
 
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'login' %}">{% trans "Connexion" %}</a>
+{% endblock %}
+
 {% block content %}
-<main class="login-page">
+<section id="login-page" data-controller="userspace:login">
+
   <div class="container-fluid">
+
     <div class="row">
-      <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
-        <section class="card card-login">
-          <div class="card-body">
-            <div class="erudit-logo">
-              <a href="http://erudit.org/" target="_blank">
-                <img src="{% static 'img/logo-erudit.png' %}" class="img-responsive"/>
-              </a>
-            </div>
-            <form class="form-vertical" method="post">
+
+      <aside class="
+        {% if request.is_ajax %}
+          col-lg-3 col-md-5 col-sm-6 col-xs-12 col-centered
+        {% else %}
+          col-lg-4 col-sm-6 col-xs-12 col-centered
+        {% endif %}"
+      >
+
+        <div class="panel">
+
+          <header class="panel-heading">
+            <h2 class="h4 panel-title text-center h1">{% trans "Connexion à votre compte" %}</h2>
+          </header>
+
+          <div class="panel-body">
+
+            <form id="id-login-form" method="post">
+
               {% csrf_token %}
+
               {% if form.non_field_errors %}
               <div class="col-xs-12">
                 {% for error in form.non_field_errors %}
@@ -26,32 +43,52 @@
                 {% endfor %}
               </div>
               {% endif %}
+
               <div class="form-group">
                 <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
                 {{ form.username }}
                 <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
               </div>
+
               <div class="form-group">
                 <label for="id_password">{% trans "Mot de passe" %}</label>
                 {{ form.password }}
                 <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
               </div>
-              <div class="form-group">
-                <div class="text-right">
-                  <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
-                </div>
+
+              <div class="form-group row child-column-fit">
+                <aside class="col-sm-6">
+                  <div class="checkbox">
+                    <label for="id-remember-me">
+                      <input type="checkbox" id="id-remember-me" name="name" value="remember"> {% trans "Se souvenir de moi?" %}
+                    </label>
+                  </div>
+                </aside>
+                <aside class="col-sm-6 text-right">
+                  <p class="no-margin">
+                    <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+                  </p>
+                </aside>
               </div>
+
               <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Connexion" %}</button>
+                {% if request.is_ajax %}
+                <button type="reset" class="btn btn-default btn-lg" id="submit-id-submit" data-close-modal>{% trans "Annuler" %}</button>
+                {% endif %}
+                <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Connexion" %}</button>
               </div>
-              <p class="card-footer">
-                <a href="http://erudit.org/" target="_blank"><small>erudit.org</small></a>
-              </p>
-            </form>
+
+            </div>
+
           </div>
-        </section>
+
+        </aside>
+
       </div>
+
     </div>
+
   </div>
-</main>
+
+</section>
 {% endblock %}

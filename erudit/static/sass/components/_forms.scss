@@ -1,6 +1,6 @@
 // form control variables
 $border-width: 1px !global;
-$border-width-inputs: 0 0 1px 0 !global;
+$border-width-inputs: 0 0 2px 0 !global;
 $input-padding: 0.25em !global;
 
 /* reset default styles */
@@ -99,8 +99,9 @@ input[list],
   border-style: solid;
   border-color: $gray-light;
   color: $gray-dark;
-  background: transparent;
+  background: $gray-lighter;
   @include border-radius(0px);
+
   &:hover {
     border-color: $colour-primary;
   }
@@ -156,67 +157,67 @@ textarea {
 }
 
 /* buttons */
-button,
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-input[type="image"],
-.btn, .btn-default {
-  cursor: pointer;
-  padding: $font-size*0.5 $font-size*0.75;
-  border: 1px solid $gray-dark;
-  border-radius: 0px;
-  color: $gray-dark;
-  margin: 0.75em 0.75em 0 0;
-  @include transition(all, 300ms, ease);
-  &:last-child {
-    margin-right: 0;
-  }
-  &:hover, &:active, &:focus, &:active:focus {
-    color: $gray-light;
-    background-color: $gray-dark*1.15;
-    border: 1px solid $gray-dark*1.15;
-  }
-}
-
-/* primary call-to-actions and submit buttons */
-button[type="submit"],
-input[type="submit"],
-.btn-primary {
-  border: 1px solid $colour-primary;
-  color: white;
-  background-color: $colour-primary;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  a {
-    color: #FFF;
-    &:hover, &:active, &:focus, &:active:focus {
-      background-color: $colour-primary*0.75;
-      color: white;
-      border: none;
-    }
-  }
-  &:hover, &:active, &:focus, &:active:focus {
-    background-color: $colour-primary*0.75;
-    border: 1px solid $colour-primary*0.75;
-    color: white;
-  }
-}
+// button,
+// input[type="button"],
+// input[type="submit"],
+// input[type="reset"],
+// input[type="image"],
+// .btn, .btn-default {
+//   cursor: pointer;
+//   padding: $font-size*0.5 $font-size*0.75;
+//   border: 1px solid $gray-dark;
+//   border-radius: 0px;
+//   color: $gray-dark;
+//   margin: 0.75em 0.75em 0 0;
+//   @include transition(all, 300ms, ease);
+//   &:last-child {
+//     margin-right: 0;
+//   }
+//   &:hover, &:active, &:focus, &:active:focus {
+//     color: $gray-light;
+//     background-color: $gray-dark*1.15;
+//     border: 1px solid $gray-dark*1.15;
+//   }
+// }
+//
+// /* primary call-to-actions and submit buttons */
+// button[type="submit"],
+// input[type="submit"],
+// .btn-primary {
+//   border: 1px solid $colour-primary;
+//   color: white;
+//   background-color: $colour-primary;
+//   letter-spacing: 1px;
+//   text-transform: uppercase;
+//   a {
+//     color: #FFF;
+//     &:hover, &:active, &:focus, &:active:focus {
+//       background-color: $colour-primary*0.75;
+//       color: white;
+//       border: none;
+//     }
+//   }
+//   &:hover, &:active, &:focus, &:active:focus {
+//     background-color: $colour-primary*0.75;
+//     border: 1px solid $colour-primary*0.75;
+//     color: white;
+//   }
+// }
 
 /* reset and cancel buttons */
-button[type="reset"],
-input[type="reset"] {
-  border: none;
-  text-decoration: underline;
-  color: $gray-dark;
-  background-color: #FFF;
-  &:hover, &:active, &:focus, &:active:focus {
-    color: $gray-dark;
-    background: none;
-    border: none;
-    text-decoration: none;
-  }
-}
+// button[type="reset"],
+// input[type="reset"] {
+//   border: none;
+//   text-decoration: underline;
+//   color: $gray-dark;
+//   background-color: #FFF;
+//   &:hover, &:active, &:focus, &:active:focus {
+//     color: $gray-dark;
+//     background: none;
+//     border: none;
+//     text-decoration: none;
+//   }
+// }
 
 /* disabled inputs and buttons */
 input[disabled],
@@ -242,6 +243,89 @@ label.required:after {
   input, .select2 {
     border-color: $colour-warning;
     background-color: rgba($colour-warning, 0.15);
+  }
+}
+
+
+/**
+* Checkboxes and radios (forked from Bootstrap)
+*/
+
+.radio,
+.checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  label {
+    min-height: $line-height-computed; // Ensure the input doesn't jump when there is no text
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: $font-size-base;   
+  }
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 4px \9;
+}
+
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+// Radios and checkboxes on same line
+.radio-inline,
+.checkbox-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px; // space out consecutive inline controls
+}
+
+// Apply same disabled cursor tweak as for inputs
+// Some special care is needed because <label>s don't inherit their parent's `cursor`.
+//
+// Note: Neither radios nor checkboxes can be readonly.
+input[type="radio"],
+input[type="checkbox"] {
+  &[disabled],
+  &.disabled,
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+  }
+}
+// These classes are used directly on <label>s
+.radio-inline,
+.checkbox-inline {
+  &.disabled,
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+  }
+}
+// These classes are used on elements with <label> descendants
+.radio,
+.checkbox {
+  &.disabled,
+  fieldset[disabled] & {
+    label {
+      cursor: $cursor-disabled;
+    }
   }
 }
 

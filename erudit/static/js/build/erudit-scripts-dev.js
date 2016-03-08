@@ -29,17 +29,6 @@ CONTROLLERS = {
    */
   common: {
     init: function() {
-      // scroll window to top
-      $('#scroll-top').on('click', function(e) {
-
-        if( e ) {
-          e.preventDefault();
-          e.stopPropagation();
-        };
-
-        $('html, body').animate( { scrollTop: 0 }, 750 );
-        return false;
-      });
     },
   },
 };
@@ -67,7 +56,7 @@ ROUTER = {
    * @param {string} action - The name of the action to execute (can be null).
    */
   execAction: function(controller, action){
-    action = (action === undefined) ? 'init' : action;
+    action = (action === undefined || action.length === 0) ? 'init' : action;
 
     if (controller !== '' && CONTROLLERS[controller] && typeof CONTROLLERS[controller][action] == 'function') {
       CONTROLLERS[controller][action]();
@@ -88,21 +77,142 @@ ROUTER = {
    */
   init: function(){
     if (document.body) {
-      var body = document.body,
-      controller = body.getAttribute('data-controller'),
-      action = body.getAttribute('data-action');
+      // commons init site's wide functions
+      ROUTER.execAction('commons:main');
 
-      ROUTER.execAction('common');  // common init action
-      if (controller) {
-        ROUTER.execAction(controller);  // init action
-        ROUTER.execAction(controller, action);
-      }
+      // find any controllers in source
+      ROUTER.findControllers();
     }
   },
+
+  findControllers : function() {
+    $(document).find('[data-controller]').not('[data-controller-initialized]').each(function() {
+      var controller = $(this).data('controller'),
+          action     = $(this).data('action');
+
+      if (controller) {
+        console.warn('Controller found : ', controller);
+        console.warn('Action found : ', action);
+
+        // init found controller
+        ROUTER.execAction(controller, action);
+
+        // set element as initialized
+        $(this).attr('data-controller-initialized', 'true');
+      }
+
+    });
+  }
+
 };
 
 
 $(document).ready(ROUTER.init);
+
+ROUTER.registerController('commons:main', {
+
+  init: function() {
+    // main init
+    this.scrollToTop();
+    this.svg();
+    this.xhr();
+
+    // init UI components
+    ROUTER.execAction('commons:modals');
+  },
+
+  scrollToTop : function() {
+    // scroll window to top
+    $('#scroll-top').on('click', function(e) {
+
+      if( e ) {
+        e.preventDefault();
+        e.stopPropagation();
+      };
+
+      $('html, body').animate( { scrollTop: 0 }, 750 );
+      return false;
+    });
+  },
+
+  // transform any .svg element inlined
+  svg : function() {
+    inlineSVG.init({
+      svgSelector: 'img.inline-svg', // the class attached to all images that should be inlined
+      initClass: 'js-inlinesvg', // class added to <html>
+    });
+  },
+
+  // after any XHR call
+  xhr : function() {
+    $(document).ajaxComplete(function() {
+      // init ROUTER controllers
+      ROUTER.findControllers();
+    });
+  }
+
+});
+
+ROUTER.registerController('commons:modals', {
+
+  init: function() {
+    this.registerModals();
+    this.triggerCloseElements();
+  },
+
+  /*
+   * Register different type of modal windows
+   */
+  registerModals : function() {
+
+    /*
+     * AJAX modal type
+     */
+    $('[data-open-modal-ajax]').magnificPopup({
+      mainClass: 'mfp-fade',
+      removalDelay: 750,
+      type: 'ajax',
+      closeOnBgClick: false,
+      closeBtnInside: false,
+      ajax: {
+        settings: {
+          // this enable Django to handle the request as PJAX template
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-PJAX', 'true');
+          }
+        }
+      },
+      callbacks: {
+        // store current location
+        beforeOpen: function() {
+          previousURL = window.location.pathname;
+        },
+        // on open, replaceState with current modal window XHR request url
+        open: function() {
+          history.replaceState(null, null, $(this.currItem.el).attr('href'));
+        },
+        // replace state with previous url before modal was open
+        close: function() {
+          history.replaceState(null, null, previousURL);
+        }
+      }
+    });
+
+
+  },
+
+  /*
+   * Close elements for any modal
+   */
+  triggerCloseElements : function() {
+    $(document).on('click', '[data-close-modal]', function(event) {
+      event.preventDefault();
+      /* Act on the event */
+      $.magnificPopup.close();
+    });
+  }
+
+});
 
 ROUTER.registerController('public:home', {
 
@@ -142,6 +252,36 @@ ROUTER.registerController('public:home', {
   	});
   }
 
+
+});
+
+var controlerName = 'userspace:login';
+
+ROUTER.registerController(controlerName, {
+
+  // formElement: function() { return $("form#id-login-form"); },
+
+  init: function() {
+    // set variables
+    this.formElement = $("form#id-login-form");
+
+    // methods
+    this.validateForm();
+  },
+
+  validateForm : function() {
+    var $form = CONTROLLERS[controlerName].formElement;
+    $form.validate({
+      rules : {
+        username: {
+          required: true
+        },
+        password: {
+          required: true
+        }
+      }
+    });
+  }
 
 });
 

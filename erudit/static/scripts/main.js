@@ -29,17 +29,6 @@ CONTROLLERS = {
    */
   common: {
     init: function() {
-      // scroll window to top
-      $('#scroll-top').on('click', function(e) {
-
-        if( e ) {
-          e.preventDefault();
-          e.stopPropagation();
-        };
-
-        $('html, body').animate( { scrollTop: 0 }, 750 );
-        return false;
-      });
     },
   },
 };
@@ -67,7 +56,7 @@ ROUTER = {
    * @param {string} action - The name of the action to execute (can be null).
    */
   execAction: function(controller, action){
-    action = (action === undefined) ? 'init' : action;
+    action = (action === undefined || action.length === 0) ? 'init' : action;
 
     if (controller !== '' && CONTROLLERS[controller] && typeof CONTROLLERS[controller][action] == 'function') {
       CONTROLLERS[controller][action]();
@@ -88,17 +77,33 @@ ROUTER = {
    */
   init: function(){
     if (document.body) {
-      var body = document.body,
-      controller = body.getAttribute('data-controller'),
-      action = body.getAttribute('data-action');
+      // commons init site's wide functions
+      ROUTER.execAction('commons:main');
 
-      ROUTER.execAction('common');  // common init action
-      if (controller) {
-        ROUTER.execAction(controller);  // init action
-        ROUTER.execAction(controller, action);
-      }
+      // find any controllers in source
+      ROUTER.findControllers();
     }
   },
+
+  findControllers : function() {
+    $(document).find('[data-controller]').not('[data-controller-initialized]').each(function() {
+      var controller = $(this).data('controller'),
+          action     = $(this).data('action');
+
+      if (controller) {
+        console.warn('Controller found : ', controller);
+        console.warn('Action found : ', action);
+
+        // init found controller
+        ROUTER.execAction(controller, action);
+
+        // set element as initialized
+        $(this).attr('data-controller-initialized', 'true');
+      }
+
+    });
+  }
+
 };
 
 
