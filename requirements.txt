@@ -55,3 +55,4 @@ django-fsm==2.3.0
 pysolr==3.4.0
 fake-factory==0.5.3
 gunicorn==19.4.5
+html2text==2016.1.8
