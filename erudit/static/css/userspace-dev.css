@@ -2396,7 +2396,7 @@ nav.sidenav {
   z-index: 10;
   display: block;
   position: fixed;
-  top: 70px;
+  top: 85px;
   bottom: 0;
   left: 0;
   width: 250px;
@@ -2407,8 +2407,12 @@ nav.sidenav {
   -o-transition: all, 300ms, ease;
   transition: all, 300ms, ease; }
   nav.sidenav ul {
-    list-style: none;
-    padding: 0; }
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    nav.sidenav ul li {
+      margin: 0;
+      padding: 0; }
     nav.sidenav ul li {
       margin-top: 10px; }
       nav.sidenav ul li:last-child {
@@ -2421,24 +2425,30 @@ nav.sidenav {
         font-size: 12px;
         color: #333333;
         display: table;
-        width: 100%; }
+        width: 100%;
+        -webkit-transition: all, 300ms, ease;
+        -o-transition: all, 300ms, ease;
+        transition: all, 300ms, ease; }
         nav.sidenav ul li a:hover, nav.sidenav ul li a:active, nav.sidenav ul li a:focus, nav.sidenav ul li a:active:focus {
           text-decoration: none;
           border-color: #979797;
           background-color: #979797;
           color: #222222; }
         nav.sidenav ul li a.active {
-          background-color: #979797; }
+          background-color: #000;
+          color: #fff; }
         nav.sidenav ul li a.disabled {
-          color: #979797; }
+          color: #f7f7f7; }
           nav.sidenav ul li a.disabled:hover, nav.sidenav ul li a.disabled:active, nav.sidenav ul li a.disabled:focus, nav.sidenav ul li a.disabled:active:focus {
             cursor: default;
             background: none;
             color: #979797; }
   nav.sidenav .icon {
     font-size: 25px;
-    margin-right: 10px;
-    vertical-align: middle; }
+    vertical-align: middle;
+    width: 45px;
+    text-align: center;
+    display: inline-block; }
 
 @media (max-width: 992px) {
   nav.sidenav {
@@ -2451,7 +2461,7 @@ main, .main {
   padding-left: 250px;
   padding-bottom: 150px;
   position: absolute;
-  top: 70px;
+  top: 85px;
   width: 100%; }
   main > header, .main > header {
     width: 100%;

@@ -5,7 +5,7 @@ nav.sidenav {
   z-index: 10;
   display: block;
   position: fixed;
-  top: 70px;
+  top: 85px;
   bottom: 0;
   left: 0;
   width: $sidenav-width;
@@ -13,14 +13,17 @@ nav.sidenav {
   background-color: #FFF;
   border-right: 1px solid $gray-light;
   @include transition(all, 300ms, ease);
+
   ul {
-    list-style: none;
-    padding: 0;
+    @include list-unstyled;
+
     li {
       margin-top: 10px;
+
       &:last-child {
         border-bottom: 0;
       }
+
       a {
         display: block;
         padding-left: 10px;
@@ -30,6 +33,7 @@ nav.sidenav {
         color: $gray-dark;
         display: table;
         width: 100%;
+        @include transition(all, 300ms, ease);
         &:hover, &:active, &:focus, &:active:focus {
           text-decoration: none;
           border-color: $gray-light;
@@ -37,10 +41,11 @@ nav.sidenav {
           color: $gray-darker;
         }
         &.active {
-          background-color: $gray-light;
+          background-color: $gray-base;
+          color: #fff;
         }
         &.disabled {
-          color: $gray-light;
+          color: $gray-lighter;
           &:hover, &:active, &:focus, &:active:focus {
             cursor: default;
             background: none;
@@ -52,8 +57,10 @@ nav.sidenav {
   }
   .icon {
     font-size: 25px;
-    margin-right: 10px;
     vertical-align: middle;
+    width: 45px;
+    text-align: center;
+    display: inline-block;
   }
 }
 @media (max-width: 992px) {
