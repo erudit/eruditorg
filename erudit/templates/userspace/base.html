@@ -14,34 +14,46 @@
 {% block body_class %}userspace{% endblock %}
 
 {% block header %}
-<header>
-  <nav class="navbar navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="navbar-logo">
-          <a href="{% url 'userspace:dashboard' %}">
-            <img src="{% static 'img/logo-erudit-blanc.png' %}"/>
-          </a>
-        </div>
-        <div class="navbar-user dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">
-            <span class="profile-pic glyphicon glyphicon-user"></span>
-            {% if user.first_name %}
-            {{ user.first_name }}
-            {% else %}
-            {{ user }}
-            {% endif %}
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li><a href="#" class="disabled">{% trans "Aide" %}</a></li>
-            <li><a href="#" class="disabled">{% trans "Paramètres" %}</a></li>
-            <li><a href="{% url 'logout' %}?next={% url 'userspace:dashboard' %}">{% trans "Déconnexion" %}</a></li>
-          </ul>
-        </div>
-      </div>
+
+<header id="site-header">
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <h1 id="brand" class="col-md-4">
+        <a href="{% url 'userspace:dashboard' %}">
+          <img src="{% static 'img/logo-erudit-blanc.png' %}"/>
+        </a>
+      </h1>
+
+      <nav id="main-nav" class="col-md-8">
+
+        <ul>
+          <li class="dropdown text-left">
+            <a href="#" class="select">
+              <i class="user ion-person"></i>
+              {% if user.first_name %}
+              {{ user.first_name }}
+              {% else %}
+              {{ user }}
+              {% endif %}
+              <i class="ion-ios-arrow-down caret"></i>
+            </a>
+            <ul class="">
+              <li><a href="#" class="disabled">{% trans "Aide" %}</a></li>
+              <li><a href="#" class="disabled">{% trans "Paramètres" %}</a></li>
+              <li><a href="{% url 'logout' %}?next={% url 'userspace:dashboard' %}">{% trans "Déconnexion" %}</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+
     </div>
-  </nav>
+
+  </div>
+
 </header>
 {% endblock %}
 
@@ -59,7 +71,7 @@
     </h1>
   </header>
   <div class="container-fluid">
-    <div class="breadcrumbs">
+    <div id="breadcrumb">
       {% block breadcrumbs %}
       {% render_breadcrumbs breadcrumbs %}
       {% endblock %}

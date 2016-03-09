@@ -7,8 +7,8 @@
 
 <form action="" method="post">{% csrf_token %}
   {{ form.as_p }}
-  <input class="btn" type="submit" value="{% trans 'Confirmer' %}"/>
-  <a class="btn" href="{% url 'userspace:subscription:account_list' %}">{% trans 'Annuler' %}</a>
+  <input class="btn btn-primary" type="submit" value="{% trans 'Confirmer' %}"/>
+  <a class="btn btn-default" href="{% url 'userspace:subscription:account_list' %}">{% trans 'Annuler' %}</a>
 </form>
 
 {% endblock %}

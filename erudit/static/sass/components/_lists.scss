@@ -19,17 +19,6 @@ ol {
   }
 }
 
-// [converter] extracted from `.list-unstyled` for libsass compatibility
-@mixin list-unstyled {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  li {
-    margin: 0;
-    padding: 0;
-  }
-}
-
 // [converter] extracted as `@mixin list-unstyled` for libsass compatibility
 .list-unstyled {
   @include list-unstyled;

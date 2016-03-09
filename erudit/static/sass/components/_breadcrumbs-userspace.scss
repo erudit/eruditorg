@@ -1,0 +1,30 @@
+/**
+* public site breadcrumb
+*/
+
+#breadcrumb {
+	padding: $margin-vertical-default/3 0;
+	border-bottom: 1px solid #000;
+
+	ul {
+    @include list-unstyled();
+    li {
+      display: inline-block;
+			font-size: 14px;
+
+			&:after {
+				content: "/";
+			}
+
+			&:last-child {
+		    color: $gray-base;
+		    @include fw-sans-bold();
+				&:after {
+					content: none;
+					display: none;
+				}
+		  }
+    }
+  }
+
+}

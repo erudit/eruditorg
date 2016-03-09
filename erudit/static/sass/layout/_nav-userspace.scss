@@ -1,68 +1,120 @@
-// -----------------------------------------------------------------------------
-// This file contains all styles related to the header of the site/application.
-// -----------------------------------------------------------------------------
+/**
+* Erudit userspace nav
+*/
 
-nav.navbar {
-  background-color: $colour-primary;
-  border: 0;
-  line-height: 70px;
-  width: 100%;
-  a {
-    color: #FFF;
-  }
-  .navbar-logo {
-    width: $sidenav-width;
-    height: 70px;
-    margin-left: 15px;
-    display: inline-block;
-    img {
-      height: 40px;
-    }
-  }
-  .navbar-user {
-    right: 15px;
-    position: absolute;
-    display: inline-block;
-    a {
-      cursor: pointer;
-      &:hover, &:active, &:focus, &:active:focus {
-        text-decoration: none;
-      }
-    }
-    .profile-pic {
-      background: #FFF;
-      color: #000;
-      height: 40px;
-      width: 40px;
-      font-size: 20px;
-      padding: 10px 0;
-      margin-right: 10px;
-      @include border-radius(20px);
-      vertical-align: middle;
+nav#main-nav {
+  text-align: right;
+  position: relative;
+  padding-top: 15px;
+  font-size: 18px;
+  margin: 0;
+
+  .dropdown {
+    width: 200px;
+    margin: 0;
+
+    .user {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: rgba(255,255,255,0.5);
       text-align: center;
+      left: -25px;
+      border-radius: 50%;
+      padding-top: 2px;
+      color: #fff;
+      @include translate(0,-15%);
     }
-    .dropdown-menu {
-      @include border-radius(0);
-      box-shadow: none;
-      padding: 0;
-      li {
-        border-bottom: 1px solid $colour-faint-grey;
-        a {
-          color: $colour-dark-grey;
-          padding: 10px;
-          &.disabled {
-            color: $colour-pale-grey;
-            &:hover, &:active, &:focus, &:active:focus {
-              cursor: default;
-              background: none;
-              color: $colour-pale-grey;
-            }
-          }
-        }
-        &:last-child {
-          border: 0;
-        }
+
+    > a {
+      padding-left: 15px;
+    }
+
+    > ul {
+      padding-left: 15px;
+    }
+
+    &:hover {
+      > ul {
+        background-color: $colour-primary;
       }
     }
   }
+
+  > ul > li {
+    display: inline-block;
+    margin-left: $grid-gutter-width * 2;
+  }
+
 }
+
+
+// // -----------------------------------------------------------------------------
+// // This file contains all styles related to the header of the site/application.
+// // -----------------------------------------------------------------------------
+//
+// nav.navbar {
+//   background-color: $colour-primary;
+//   border: 0;
+//   line-height: 70px;
+//   width: 100%;
+//   border: 1px solid red;
+//   a {
+//     color: #FFF;
+//   }
+//   .navbar-logo {
+//     width: $sidenav-width;
+//     height: 70px;
+//     margin-left: 15px;
+//     display: inline-block;
+//     img {
+//       height: 40px;
+//     }
+//   }
+//   .navbar-user {
+//     right: 15px;
+//     position: absolute;
+//     display: inline-block;
+//     a {
+//       cursor: pointer;
+//       &:hover, &:active, &:focus, &:active:focus {
+//         text-decoration: none;
+//       }
+//     }
+//     .profile-pic {
+//       background: #FFF;
+//       color: #000;
+//       height: 40px;
+//       width: 40px;
+//       font-size: 20px;
+//       padding: 10px 0;
+//       margin-right: 10px;
+//       @include border-radius(20px);
+//       vertical-align: middle;
+//       text-align: center;
+//     }
+//     .dropdown-menu {
+//       @include border-radius(0);
+//       box-shadow: none;
+//       padding: 0;
+//       li {
+//         border-bottom: 1px solid $colour-faint-grey;
+//         a {
+//           color: $colour-dark-grey;
+//           padding: 10px;
+//           &.disabled {
+//             color: $colour-pale-grey;
+//             &:hover, &:active, &:focus, &:active:focus {
+//               cursor: default;
+//               background: none;
+//               color: $colour-pale-grey;
+//             }
+//           }
+//         }
+//         &:last-child {
+//           border: 0;
+//         }
+//       }
+//     }
+//   }
+// }

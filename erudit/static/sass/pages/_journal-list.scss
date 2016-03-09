@@ -9,7 +9,7 @@ body.journal-list #breadcrumb {
 		padding-top: 20px;
 		padding-bottom: 60px;
 		font-size: 18px;
-	
+
 		ul {
 			margin-top: 35px;
 			list-style: none;
@@ -24,7 +24,7 @@ body.journal-list #breadcrumb {
 				padding-top: 20px;
 				padding-bottom: 20px;
 				@include grid-cell-border('top', 1px, $black);
-				
+
 				a {
 					display: inline-block;
 					margin-left: 5px;
@@ -32,9 +32,9 @@ body.journal-list #breadcrumb {
 					font-size: 24px;
 					outline: none;
 				}
-			}			
+			}
 		}
-		
+
 		.discipline--articles {
 			padding: 60px 0 0 0;
 
@@ -43,18 +43,8 @@ body.journal-list #breadcrumb {
 				@include fw-sans-bold();
 			}
 
-			.article {
-				padding-top: 20px;
-				padding-bottom: 20px;
-				margin-bottom: 50px;
-				@include grid-cell-border('top', 1px, $dark-grey);
-
-				h4 {
-					font-size: 18px;
-				}
-				h5 {
-					margin-bottom: 20px;
-				}
+			.journal-thumbnail {
+				// nada
 			}
 
 			&.discipline--articles--default .col:nth-child(4n+1),
@@ -65,6 +55,6 @@ body.journal-list #breadcrumb {
 			&:nth-child(odd) {
 				background: $light-grey;
 			}
-		}		
+		}
 	}
 }

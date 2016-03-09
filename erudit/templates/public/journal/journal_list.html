@@ -156,7 +156,8 @@
           </div>
 
           {% for journal in journal_group.list %}
-          <article class="col col-md-3 article">
+          <article class="col col-md-3 journal-thumbnail">
+
             <header class="row">
               <h4 class="col-xs-12">
                 <a class="" href="{{ journal.get_absolute_url }}">
@@ -164,6 +165,7 @@
                 </a>
               </h4>
             </header>
+
             <footer class="row">
               <div class="col-xs-8">
                 {% if journal.subtitle %}

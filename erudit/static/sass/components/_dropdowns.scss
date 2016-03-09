@@ -1,8 +1,70 @@
 /**
-* Default drop down
+* Dropdown default
 */
 
 .dropdown {
+  position: relative;
+
+  a {
+    @include transition(all 250ms);
+  }
+
+  > a.select {
+    display: block;
+    i.caret {
+      float: right;
+      margin-left: $grid-gutter-width;
+    }
+  }
+
+  > ul {
+    display: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: $zindex-dropdown;
+    list-style: none;
+    margin: 0;
+    text-align: left !important;
+
+    li {
+      margin: 0;
+      padding: 0 12px 0 0;
+      display: block;
+    }
+
+    a {
+      padding: 10px 0;
+      display: block;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &:hover {
+    > a {
+      // background-color: $gray-base;
+      color: #fff;
+      text-decoration: none;
+      .caret {
+        @include rotate(180deg);
+        margin-top: -5px;
+      }
+    }
+    > ul {
+      display: block;
+      width: 100%;
+    }
+  }
+
+}
+
+/**
+* Drop down with buttons like elements
+*/
+
+.dropdown-buttons {
   position: relative;
 
   a {
@@ -15,9 +77,8 @@
     border: 1px solid $gray-base;
     @include fw-sans-bold();
     background-color: #fff;
-    i {
+    i.caret {
       float: right;
-      // @include transition(all 250ms);
     }
   }
 

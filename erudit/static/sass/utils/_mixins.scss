@@ -2,6 +2,17 @@
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
 
+// remove any style from a list
+@mixin list-unstyled() {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 // vertical centered
 @mixin vertical-centered($position: relative) {
   position: $position;

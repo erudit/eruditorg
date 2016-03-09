@@ -51,6 +51,16 @@
 }
 
 /**
+* Center a single Bootstrap's column
+*/
+
+.col-centered {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/**
 * remove margin or padding
 */
 

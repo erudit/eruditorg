@@ -2,7 +2,29 @@
 * Generic elements for journals pages
 */
 
+/**
+* journal thumbnail item
+*/
 
+.journal-thumbnail {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
+  @include grid-cell-border('top', 1px, $dark-grey);
+
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    margin-bottom: 20px;
+  }
+
+}
+
+
+/**
+* journal meta infos on sidebars
+*/
 .journal-meta {
 
   li {
