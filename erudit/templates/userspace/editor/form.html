@@ -98,6 +98,8 @@
                 href="{% url 'userspace:editor:transition-approve' object.pk %}"
               {% elif t.name == 'refuse' %}
                 href="{% url 'userspace:editor:transition-refuse' object.pk %}"
+              {% elif t.name == 'archive' %}
+                href="{% url 'userspace:editor:transition-archive' object.pk %}"
               {% endif %}
                 class="btn btn-primary">{{ t.custom.verbose_name }}</a>
             {% endfor %}
