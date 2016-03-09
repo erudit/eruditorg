@@ -37,6 +37,7 @@ class Search(FormView):
         self.selected_filters = {}
         self.search_elements = []
         self.search_extras = {}
+        self.query_url = None
 
         return super(Search, self).__init__(*args, **kwargs)
 
@@ -163,7 +164,7 @@ class Search(FormView):
         return initial
 
     def form_valid(self, form):
-        solr_data = self.get_solr_data(form=form)
+        self.query_url, solr_data = self.get_solr_data(form=form)
 
         if solr_data:
             # Number of results returned by Solr
@@ -196,5 +197,6 @@ class Search(FormView):
         context["current_page"] = self.page
         context["filter_choices"] = self.filter_choices
         context["selected_filters"] = self.selected_filters
+        context["query_url"] = self.query_url
 
         return context

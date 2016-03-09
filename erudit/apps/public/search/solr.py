@@ -295,4 +295,4 @@ class Solr(object):
         params["facet.field"] = facet_fields
 
         query_url, raw_data = self.call_api(params=params)
-        return self.clean_data(raw_data=raw_data)
+        return query_url, self.clean_data(raw_data=raw_data)
