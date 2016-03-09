@@ -1,5 +1,4 @@
 from django.core.urlresolvers import reverse
-from lxml import etree
 
 from erudit.models import Event
 from core.editor.models import IssueSubmission
@@ -52,17 +51,8 @@ class TestIssueSubmissionEvents(BaseEditorTestCase):
         """
         self.client.login(username='david', password='top_secret')
 
-        url = reverse('userspace:editor:update', args=(self.issue_submission.pk, ))
-        response = self.client.get(url)
-
-        root = etree.HTML(response.content)
-        data = self.extract_post_args(root)
-        # self.issue_submission lacks some required fields...
-        data['year'] = '2015'
-        data['number'] = '2'
-        data['transition'] = 'submit'
-
-        response = self.client.post(url, data)
+        url = reverse('userspace:editor:transition-submit', args=(self.issue_submission.pk, ))
+        self.client.post(url)
 
         event = self.expect_new_event()
 

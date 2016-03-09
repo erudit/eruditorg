@@ -171,6 +171,9 @@ class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
     success_message = _('Le numéro a été soumis avec succès')
     transition_name = 'submit'
 
+    def get_permission_object(self):
+        return self.get_object().journal
+
 
 class IssueSubmissionApproveView(IssueSubmissionTransitionView):
     question = _('Voulez-vous approuver le numéro ?')
