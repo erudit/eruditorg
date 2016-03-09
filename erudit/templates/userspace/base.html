@@ -64,6 +64,9 @@
       {% render_breadcrumbs breadcrumbs %}
       {% endblock %}
     </div>
+    <div class="messages-wrapper">
+      {% include "partials/messages.html" %}
+    </div>
     {% block content-main %}
     {% endblock %}
   </div>
