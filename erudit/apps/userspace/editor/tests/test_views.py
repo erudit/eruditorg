@@ -323,3 +323,158 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 404)
+
+
+class TestIssueSubmissionSubmitView(BaseEditorTestCase):
+    def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
+        # Setup
+        User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+
+        self.client.login(username='dummy', password='top_secret')
+        url = reverse('userspace:editor:transition-submit', args=(self.issue_submission.pk, ))
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_can_submit_an_issue_submission(self):
+        # Setup
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.journal.members.add(user)
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal),
+            object_id=self.journal.id,
+            user=user,
+            authorization_codename=AC.can_manage_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        url = reverse('userspace:editor:transition-submit', args=(self.issue_submission.pk, ))
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        self.issue_submission.refresh_from_db()
+        self.assertEqual(self.issue_submission.status, IssueSubmission.SUBMITTED)
+
+
+class TestIssueSubmissionApproveView(BaseEditorTestCase):
+    def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
+        # Setup
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.journal.members.add(user)
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal),
+            object_id=self.journal.id,
+            user=user,
+            authorization_codename=AC.can_manage_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        url = reverse('userspace:editor:transition-approve', args=(self.issue_submission.pk, ))
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_can_approve_an_issue_submission(self):
+        # Setup
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:editor:transition-approve', args=(self.issue_submission.pk, ))
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        self.issue_submission.refresh_from_db()
+        self.assertEqual(self.issue_submission.status, IssueSubmission.VALID)
+
+
+class TestIssueSubmissionRefuseView(BaseEditorTestCase):
+    def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
+        # Setup
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.journal.members.add(user)
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal),
+            object_id=self.journal.id,
+            user=user,
+            authorization_codename=AC.can_manage_issuesubmission.codename)
+
+        self.client.login(username='dummy', password='top_secret')
+        url = reverse('userspace:editor:transition-refuse', args=(self.issue_submission.pk, ))
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_can_refuse_an_issue_submission(self):
+        # Setup
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:editor:transition-refuse', args=(self.issue_submission.pk, ))
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        new_version = IssueSubmission.head.first()
+        self.assertEqual(new_version.status, IssueSubmission.DRAFT)
+
+
+class TestIssueSubmissionArchiveView(BaseEditorTestCase):
+    def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
+        # Setup
+        User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+
+        self.client.login(username='dummy', password='top_secret')
+        url = reverse('userspace:editor:transition-archive', args=(self.issue_submission.pk, ))
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_can_archive_an_issue_submission(self):
+        # Setup
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:editor:transition-archive', args=(self.issue_submission.pk, ))
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        self.issue_submission.refresh_from_db()
+        self.assertEqual(self.issue_submission.status, IssueSubmission.ARCHIVED)

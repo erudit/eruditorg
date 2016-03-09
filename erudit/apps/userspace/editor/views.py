@@ -123,6 +123,7 @@ class IssueSubmissionTransitionView(
         SingleObjectTemplateResponseMixin, BaseDetailView):
     context_object_name = 'issue_submission'
     model = IssueSubmission
+    raise_exception = True
     template_name = 'userspace/editor/issuesubmission_transition.html'
 
     # The following attributes should be defined in subclasses
