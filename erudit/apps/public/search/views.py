@@ -184,10 +184,6 @@ class Search(FormView):
         # return super(Search, self).form_valid(form)
         return self.render_to_response(self.get_context_data(form=form))
 
-    def form_invalid(self, form):
-        errors = form.errors
-        tata
-
     def get_context_data(self, **kwargs):
         if 'form' not in kwargs:
             kwargs['form'] = self.get_form()
