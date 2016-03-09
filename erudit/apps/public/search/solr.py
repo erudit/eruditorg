@@ -165,7 +165,9 @@ class Solr(object):
                 search_query.append(
                     "{operator} {field}:{term}".format(
                         operator=operator,
-                        field=self.search_fields.get(search_item["search_field"], "all"),
+                        field=self.search_fields.get(
+                            search_item["search_field"], self.search_fields["all"]
+                        ),
                         # term='"{search_term}"'.format(
                         #     search_term=search_item["search_term"]
                         # ),
