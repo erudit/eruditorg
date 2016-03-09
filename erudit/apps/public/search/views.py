@@ -98,7 +98,7 @@ class Search(FormView):
         # Sorting / Pagination
         self.sort = data.get("sort", None)
         self.sort_order = data.get("sort_order", None)
-        self.page = data.get("page", 1)
+        self.page = data.get("page", 1) if data.get("page", 1) else 1
         self.results_per_query = self.paginate_by
         self.start_at = ((self.page - 1) * self.results_per_query)
 
@@ -127,13 +127,17 @@ class Search(FormView):
 
     def get(self, request, *args, **kwargs):
         """We want this form to handle GET method"""
-        # return self.post(request, *args, **kwargs)
+        # If not searching for anything, then don't handle search
+        if "basic_search_term" not in request.GET:
+            return self.render_to_response(self.get_context_data())
 
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
         else:
-            return self.form_invalid(form)
+            return self.post(request=request, *args, **kwargs)
+            # form = self.get_form()
+            # if form.is_valid():
+            #     return self.form_valid(form)
+            # else:
+            #     return self.form_invalid(form)
 
     def get_form_kwargs(self):
         """We want this form to handle GET method"""
@@ -158,11 +162,6 @@ class Search(FormView):
 
         return initial
 
-    def form_invalid(self, form):
-        # We kinda cheat here
-        # Because we handle all in GET, landing on page == invalid form
-        return super(Search, self).form_invalid(form)
-
     def form_valid(self, form):
         solr_data = self.get_solr_data(form=form)
 
@@ -185,7 +184,14 @@ class Search(FormView):
         # return super(Search, self).form_valid(form)
         return self.render_to_response(self.get_context_data(form=form))
 
+    def form_invalid(self, form):
+        errors = form.errors
+        tata
+
     def get_context_data(self, **kwargs):
+        if 'form' not in kwargs:
+            kwargs['form'] = self.get_form()
+
         context = super(Search, self).get_context_data(**kwargs)
 
         context[self.context_object_name] = self.object_list
