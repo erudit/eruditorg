@@ -196,9 +196,6 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
     success_message = _('Le numéro a été archivé avec succès')
     transition_name = 'archive'
 
-    def get_permission_object(self):
-        return self.get_object().journal
-
 
 class IssueSubmissionList(IssueSubmissionBreadcrumbsMixin,
                           IssueSubmissionCheckMixin, ListView):
