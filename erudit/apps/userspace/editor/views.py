@@ -192,16 +192,12 @@ class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
 
 class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
     question = _('Voulez-vous archiver le numéro ?')
-    permission_required = 'editor.manage_issuesubmission'
+    permission_required = 'editor.review_issuesubmission'
     success_message = _('Le numéro a été archivé avec succès')
     transition_name = 'archive'
 
     def get_permission_object(self):
         return self.get_object().journal
-
-    def has_permission(self):
-        return (self.request.user.has_perms('editor.manage_issuesubmission') or
-                self.request.user.has_perms('editor.review_issuesubmission'))
 
 
 class IssueSubmissionList(IssueSubmissionBreadcrumbsMixin,
