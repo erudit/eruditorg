@@ -1,0 +1,12 @@
+{% extends "base_email.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% url 'userspace:editor:update' issue.pk as issue_url %}
+  <p>{% trans "Un nouveau numéro a été soumis!" %}</p>
+  <p>
+    <a href="http://{{ site.domain }}{{ issue_url }}">
+      {% blocktrans with url=issue_url %}Consulter numéro{% endblocktrans %}
+    </a>
+  </p>
+{% endblock content %}

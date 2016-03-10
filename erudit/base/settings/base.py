@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
     # Third-party apps
@@ -281,6 +282,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
