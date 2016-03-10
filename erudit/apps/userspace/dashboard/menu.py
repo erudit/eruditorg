@@ -16,7 +16,7 @@ main_menu.register(userspace)
 journal = menu.AnyPermissionsNode(
     id='journal',
     label=_('Information de la revue'),
-    pattern_name='userspace:journal:journal-information',
+    pattern_name='userspace:journal:information:update',
     permissions=['journal.edit_journal', ],
     context={'icon': 'ion-ios-book-outline'},
 )
@@ -32,7 +32,7 @@ editor = menu.AnyPermissionsNode(
 authorization = menu.AnyPermissionsNode(
     id='autorisation',
     label=_('Autorisations'),
-    pattern_name='userspace:authorization:authorization_list',
+    pattern_name='userspace:journal:authorization:list',
     permissions=['authorization.manage_authorizations', ],
     context={'icon': 'ion-ios-locked-outline'},
 )
@@ -40,7 +40,7 @@ authorization = menu.AnyPermissionsNode(
 subscription = menu.AnyPermissionsNode(
     id='subscription',
     label=_('Abonnements individuels'),
-    pattern_name='userspace:subscription:account_list',
+    pattern_name='userspace:journal:subscription:account_list',
     permissions=['subscription.manage_account', ],
     context={'icon': 'ion-ios-people-outline'},
 )
