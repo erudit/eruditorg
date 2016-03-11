@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import json
 import logging
 import mimetypes
 import os
@@ -42,21 +41,14 @@ class IssueSubmissionCreate(JournalScopeMixin, IssueSubmissionBreadcrumbsMixin,
     title = _("Faire un dépôt de numéros")
 
     def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
+        kwargs = super(IssueSubmissionCreate, self).get_form_kwargs()
+        kwargs.update({'journal': self.current_journal})
         kwargs.update({'user': self.request.user})
         return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(csrf(self.request))
-        form = context['form']
-
-        membership = {}
-        for journal in form.fields['journal'].queryset:
-            membership[journal.pk] = [
-                v[0] for v in journal.members.values_list('id')]
-
-        context.update({'journals': json.dumps(membership)})
         # In this view, we have a widget, django_select2, that has its JS loaded in the "extrahead"
         # block through {{ form.media }}. Because this outputs CSS at the same time as JS, we can't
         # move this to the footer, so we need jquery in the head.
@@ -77,6 +69,7 @@ class IssueSubmissionUpdate(
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
+        kwargs.update({'journal': self.current_journal})
         kwargs.update({'user': self.request.user})
         return kwargs
 
@@ -205,6 +198,10 @@ class IssueSubmissionList(JournalScopeMixin, IssueSubmissionBreadcrumbsMixin,
                           IssueSubmissionCheckMixin, ListView):
     model = IssueSubmission
     template_name = 'userspace/journal/editor/issues.html'
+
+    def get_queryset(self):
+        qs = super(IssueSubmissionList, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
 
 
 class IssueSubmissionAttachmentView(JournalScopeMixin, PermissionRequiredMixin, DetailView):

@@ -4,6 +4,7 @@ import os
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseNotFound
 from django.http.response import HttpResponseRedirect
@@ -65,7 +66,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             "The user should not be able to access another editor's submissions where he is not member"  # noqa
         )
 
-    def test_sumit_changes_to_issue(self):
+    def test_submit_changes_to_issue(self):
         """ Submitting changes to an issue doesn't crash.
 
             Previously, we would crash due to a bad reverse match.
@@ -162,27 +163,6 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             "The rendered upload template should contain an id_submissions input"  # noqa
         )
 
-    def test_user_is_only_allowed_to_upload_to_his_journals(self):
-        """ Test list of journals in the form
-
-        Make sure the list contains all the journals the user upload to
-        and only that """
-        request = self.factory.get(
-            reverse('userspace:journal:editor:add', args=(self.journal.pk, )))
-        request.user = self.user
-        form = IssueSubmissionCreate(request=request).get_form()
-
-        user_journals = set(self.user.journals.all())
-
-        form_journals = set(
-            form.fields['journal'].queryset
-        )
-
-        self.assertEquals(
-            user_journals,
-            form_journals
-        )
-
     def test_user_can_only_select_journal_contacts(self):
         """ Test list of contacts
 
@@ -191,7 +171,12 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         request = self.factory.get(
             reverse('userspace:journal:editor:add'), args=(self.journal.pk, ))
         request.user = self.user
-        form = IssueSubmissionCreate(request=request).get_form()
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        view = IssueSubmissionCreate(request=request, journal_pk=self.journal.pk)
+        view.current_journal = self.journal
+        form = view.get_form()
 
         user_contacts = set(User.objects.filter(
             journals=self.user.journals.all()
