@@ -76,7 +76,7 @@
         <form  action="{% url 'public:search:search' %}" id="id-search" class="search" method="get" >
           <div class="form-group search-group row">
             <label for="search" class="h2">{% trans "Explorez parmi plus de 200 000 publications savantes et culturelles." %}</label>
-            <input name="search_term" type="search" class="form-control" placeholder="{% trans "Rechercher par auteur, titre, mots-clés&hellip;" %}">
+            <input name="basic_search_term" type="search" class="form-control" placeholder="{% trans "Rechercher par auteur, titre, mots-clés&hellip;" %}">
             <button type="submit" class="btn btn-lg"><span class="ion ion-ios-search"></span></button>
           </div>
           <div class="form-group row">

@@ -6,6 +6,10 @@
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
 
 {% block content %}
+<!--
+Query URL: {{ query_url|safe }}
+-->
+
 <div class="container">
 <div class="search-form">
     <form  action="{% url 'public:search:search' %}" id="id-search" class="search" method="get" >

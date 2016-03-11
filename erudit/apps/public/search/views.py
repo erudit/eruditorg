@@ -37,6 +37,7 @@ class Search(FormView):
         self.selected_filters = {}
         self.search_elements = []
         self.search_extras = {}
+        self.query_url = None
 
         return super(Search, self).__init__(*args, **kwargs)
 
@@ -98,7 +99,7 @@ class Search(FormView):
         # Sorting / Pagination
         self.sort = data.get("sort", None)
         self.sort_order = data.get("sort_order", None)
-        self.page = data.get("page", 1)
+        self.page = data.get("page", 1) if data.get("page", 1) else 1
         self.results_per_query = self.paginate_by
         self.start_at = ((self.page - 1) * self.results_per_query)
 
@@ -127,13 +128,17 @@ class Search(FormView):
 
     def get(self, request, *args, **kwargs):
         """We want this form to handle GET method"""
-        # return self.post(request, *args, **kwargs)
+        # If not searching for anything, then don't handle search
+        if "basic_search_term" not in request.GET:
+            return self.render_to_response(self.get_context_data())
 
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
         else:
-            return self.form_invalid(form)
+            return self.post(request=request, *args, **kwargs)
+            # form = self.get_form()
+            # if form.is_valid():
+            #     return self.form_valid(form)
+            # else:
+            #     return self.form_invalid(form)
 
     def get_form_kwargs(self):
         """We want this form to handle GET method"""
@@ -158,13 +163,8 @@ class Search(FormView):
 
         return initial
 
-    def form_invalid(self, form):
-        # We kinda cheat here
-        # Because we handle all in GET, landing on page == invalid form
-        return super(Search, self).form_invalid(form)
-
     def form_valid(self, form):
-        solr_data = self.get_solr_data(form=form)
+        self.query_url, solr_data = self.get_solr_data(form=form)
 
         if solr_data:
             # Number of results returned by Solr
@@ -186,6 +186,9 @@ class Search(FormView):
         return self.render_to_response(self.get_context_data(form=form))
 
     def get_context_data(self, **kwargs):
+        if 'form' not in kwargs:
+            kwargs['form'] = self.get_form()
+
         context = super(Search, self).get_context_data(**kwargs)
 
         context[self.context_object_name] = self.object_list
@@ -194,5 +197,6 @@ class Search(FormView):
         context["current_page"] = self.page
         context["filter_choices"] = self.filter_choices
         context["selected_filters"] = self.selected_filters
+        context["query_url"] = self.query_url
 
         return context

@@ -183,7 +183,9 @@ class SearchFormHelper(FormHelper):
 
 
 class SearchForm(forms.Form):
-    page = forms.IntegerField(label=_("Page"), widget=forms.HiddenInput, initial=1, )
+    page = forms.IntegerField(
+        label=_("Page"), widget=forms.HiddenInput, required=False, initial=1
+    )
 
     basic_search_operator = forms.ChoiceField(
         label="", widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
