@@ -12,4 +12,11 @@
 		padding-bottom: 15px;
 	}
 
+	a {
+		&:last-child {
+	    color: $gray-base;
+	    @include fw-sans-bold();
+	  }
+	}
+
 }

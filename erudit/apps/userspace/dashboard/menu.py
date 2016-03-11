@@ -9,7 +9,7 @@ userspace = menu.Node(
     id='userspace',
     label=_('Mon espace'),
     pattern_name='userspace:dashboard',
-    context={'icon': 'fa-home'},
+    context={'icon': 'ion-ios-home-outline'},
 )
 main_menu.register(userspace)
 
@@ -18,7 +18,7 @@ journal = menu.AnyPermissionsNode(
     label=_('Information de la revue'),
     pattern_name='userspace:journal:journal-information',
     permissions=['journal.edit_journal', ],
-    context={'icon': 'fa-folder-o'},
+    context={'icon': 'ion-ios-book-outline'},
 )
 
 editor = menu.AnyPermissionsNode(
@@ -26,7 +26,7 @@ editor = menu.AnyPermissionsNode(
     label=_('Dépôts de numéros'),
     pattern_name='userspace:editor:issues',
     permissions=['editor.manage_issuesubmission', ],
-    context={'icon': 'fa-folder-open-o'},
+    context={'icon': 'ion-ios-copy-outline'},
 )
 
 authorization = menu.AnyPermissionsNode(
@@ -34,7 +34,7 @@ authorization = menu.AnyPermissionsNode(
     label=_('Autorisations'),
     pattern_name='userspace:authorization:authorization_list',
     permissions=['authorization.manage_authorizations', ],
-    context={'icon': 'fa-lock'},
+    context={'icon': 'ion-ios-locked-outline'},
 )
 
 subscription = menu.AnyPermissionsNode(
@@ -42,7 +42,7 @@ subscription = menu.AnyPermissionsNode(
     label=_('Abonnements individuels'),
     pattern_name='userspace:subscription:account_list',
     permissions=['subscription.manage_account', ],
-    context={'icon': 'fa-users'},
+    context={'icon': 'ion-ios-people-outline'},
 )
 
 userspace.children.append(journal)

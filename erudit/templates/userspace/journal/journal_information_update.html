@@ -11,9 +11,9 @@
     <div class="row">
       <div class="col-md-12">
         <br />
-        <ul class="nav nav-pills">
+        <ul class="tabs-group">
           {% for langcode, langname in LANGUAGES %}
-          <li role="presentation"{% if langcode == selected_language %} class="active"{% endif %}>
+          <li role="presentation" class="tab {% if langcode == selected_language %}active{% endif %}">
             <a href="{% url 'userspace:journal:journal-information-update' code=journal_code %}?lang={{ langcode }}">{{ langname }}</a>
           </li>
           {% endfor %}

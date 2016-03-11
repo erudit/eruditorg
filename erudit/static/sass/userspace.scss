@@ -23,7 +23,7 @@
 
 // 4. Layout-related sections
 @import
-  'layout/header',
+  'layout/header-userspace',
   'layout/nav-userspace',
   'layout/sidenav',
   'layout/content',
@@ -41,12 +41,17 @@
   'components/dropdowns',
   'components/alerts',
   'components/breadcrumbs',
+  'components/breadcrumbs-userspace',
   'components/fileupload',
   'components/lists',
-  'components/panels';
+  'components/forms',
+  'components/buttons',
+  'components/panels',
+  'components/tabs';
 
 // 6. Page-specific styles
 @import
+  'pages/journals',
   'pages/login',
   'pages/individual_subscription';
 
