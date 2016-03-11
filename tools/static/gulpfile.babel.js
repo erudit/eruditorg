@@ -24,7 +24,7 @@ import webpackStream from 'webpack-stream';
 env('.env');
 
 /* Global variables */
-const root_dir = '../../'
+const root_dir = '../../';
 const static_dir = root_dir + 'erudit/static/';
 const templates_dirs = root_dir + 'erudit/templates/';
 const PROD_ENV = gutil.env.production;

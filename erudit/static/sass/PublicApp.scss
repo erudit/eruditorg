@@ -3,20 +3,22 @@
 // 1. Configuration and helpers
 @import
   'vars/public',
+  'utils/mixins',
+  'utils/utils',
+  'utils/responsive-utilities',
   'utils/functions',
   'utils/font-styles',
-  'utils/erudicon',
-  'utils/mixins';
+  'utils/erudicon';
 
 // 2. Vendors
-$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
 $ionicons-font-path: "~ionicons/fonts";
 @import "~ionicons/scss/ionicons";
-@import "vendor/normalize";
 
 // 3. Base stuff
 @import
+  'base/normalize',
+  'base/scaffolding',
+  'base/grid',
   'base/base',
   'base/fonts',
   'base/icons',
