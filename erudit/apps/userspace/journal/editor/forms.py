@@ -1,13 +1,10 @@
-from django import forms
-from django.utils.translation import gettext as _
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+# -*- coding: utf-8 -*-
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-
+from django import forms
+from django.utils.translation import gettext as _
 from django_select2.forms import Select2Widget
-
 from plupload.forms import PlUploadFormField
 from plupload.models import ResumableFile
 
@@ -22,7 +19,6 @@ class IssueSubmissionForm(forms.ModelForm):
         model = IssueSubmission
 
         fields = [
-            'journal',
             'year',
             'volume',
             'number',
@@ -38,7 +34,7 @@ class IssueSubmissionForm(forms.ModelForm):
     def disable_form(self):
         """ Disable all the fields of this form """
         fields = (
-            'year', 'journal', 'contact', 'number',
+            'year', 'contact', 'number',
             'volume', 'comment',
             'submissions',
         )
@@ -47,9 +43,10 @@ class IssueSubmissionForm(forms.ModelForm):
             self.fields[field].widget.attrs['disabled'] = True
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        self.journal = kwargs.pop('journal')
+        self.user = kwargs.pop('user')
         kwargs.setdefault('label_suffix', '')
-        super().__init__(*args, **kwargs)
+        super(IssueSubmissionForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-vertical'
@@ -58,38 +55,16 @@ class IssueSubmissionForm(forms.ModelForm):
         self.helper.add_input(
             Submit('submit', _("Envoyer le fichier"))
         )
-        self.populate_select(user)
+        self.populate_select(self.user)
+
+        self.instance.journal = self.journal
 
     def populate_select(self, user):
-        qs = user.journals.all()
-        ids = [j.id for j in qs if user.has_perm(
-               'editor.manage_issuesubmission', j)]
-        qs.filter(id__in=ids)
-
-        journal_qs = qs.filter(id__in=ids)
-        journal_first = journal_qs.first()
-        self.fields['journal'].queryset = journal_qs
-        if journal_first:
-            self.fields['journal'].initial = journal_first.id
-
-        journals_members = User.objects.filter(
-            journals=user.journals.all()
-        ).distinct()
-
-        journals_members
+        journals_members = self.journal.members.all()
         member_first = journals_members.first()
         self.fields['contact'].queryset = journals_members
         if member_first:
             self.fields['contact'].initial = member_first.id
-
-    def clean(self):
-        cleaned_data = super().clean()
-        journal = cleaned_data.get("journal")
-        contact = cleaned_data.get("contact")
-        if contact and not journal.members.filter(id=contact.id).count():
-            raise ValidationError(
-                _("Ce contact n'est pas membre de cette revue."))
-        return cleaned_data
 
 
 class IssueSubmissionUploadForm(IssueSubmissionForm):
@@ -97,7 +72,6 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
     class Meta(IssueSubmissionForm.Meta):
 
         fields = (
-            'journal',
             'year',
             'volume',
             'number',
