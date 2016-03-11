@@ -5,21 +5,24 @@ import logging
 import mimetypes
 import os
 
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+from django.views.generic.detail import BaseDetailView
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from plupload.models import ResumableFile
 from rules.contrib.views import PermissionRequiredMixin
 
 from core.editor.models import IssueSubmission
 from erudit.models.event import Event
-from erudit.utils.workflow import WorkflowMixin
 
 from .forms import IssueSubmissionForm
 from .forms import IssueSubmissionUploadForm
@@ -64,9 +67,7 @@ class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
         return result
 
 
-class IssueSubmissionUpdate(WorkflowMixin,
-                            IssueSubmissionBreadcrumbsMixin,
-                            IssueSubmissionCheckMixin, UpdateView):
+class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin, IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
     template_name = 'userspace/editor/form.html'
@@ -113,19 +114,87 @@ class IssueSubmissionUpdate(WorkflowMixin,
 
         return context
 
-    def apply_transition(self, *args, **kwargs):
+    def get_success_url(self):
+        return reverse('userspace:editor:issues')
+
+
+class IssueSubmissionTransitionView(
+        PermissionRequiredMixin, IssueSubmissionBreadcrumbsMixin,
+        SingleObjectTemplateResponseMixin, BaseDetailView):
+    context_object_name = 'issue_submission'
+    model = IssueSubmission
+    raise_exception = True
+    template_name = 'userspace/editor/issuesubmission_transition.html'
+
+    # The following attributes should be defined in subclasses
+    question = None
+    success_message = None
+    transition_name = None
+
+    def apply_transition(self, request, *args, **kwargs):
+        """ Applies a specific transition and redirects the user to the success URL. """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+
         old_status = self.object.status
-        result = super().apply_transition(*args, **kwargs)
+
+        # Applies the transition
+        transition = getattr(self.object, self.transition_name)
+        transition()
+        self.object.save()
+
+        # Records the event
         if self.object.status != old_status:
             Event.change_submission_status(
                 author=self.request.user,
                 submission=self.object,
                 old_status=old_status
             )
-        return result
+
+        return HttpResponseRedirect(success_url)
+
+    def post(self, request, *args, **kwargs):
+        return self.apply_transition(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('userspace:editor:issues')
+        messages.success(self.request, self.success_message)
+        return reverse('userspace:editor:update', args=(self.object.pk, ))
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueSubmissionTransitionView, self).get_context_data(**kwargs)
+        context['question'] = self.question
+        return context
+
+
+class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
+    question = _('Voulez-vous soumettre le numéro ?')
+    permission_required = 'editor.manage_issuesubmission'
+    success_message = _('Le numéro a été soumis avec succès')
+    transition_name = 'submit'
+
+    def get_permission_object(self):
+        return self.get_object().journal
+
+
+class IssueSubmissionApproveView(IssueSubmissionTransitionView):
+    question = _('Voulez-vous approuver le numéro ?')
+    permission_required = 'editor.review_issuesubmission'
+    success_message = _('Le numéro a été approuvé avec succès')
+    transition_name = 'approve'
+
+
+class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
+    question = _('Voulez-vous refuser le numéro ?')
+    permission_required = 'editor.review_issuesubmission'
+    success_message = _('Le numéro a été refusé avec succès')
+    transition_name = 'refuse'
+
+
+class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
+    question = _('Voulez-vous archiver le numéro ?')
+    permission_required = 'editor.review_issuesubmission'
+    success_message = _('Le numéro a été archivé avec succès')
+    transition_name = 'archive'
 
 
 class IssueSubmissionList(IssueSubmissionBreadcrumbsMixin,
@@ -146,7 +215,7 @@ class IssueSubmissionAttachmentView(PermissionRequiredMixin, DetailView):
 
         try:
             fsock = open(self.object.path, 'rb')
-        except FileNotFoundError:
+        except FileNotFoundError:  # noqa
             # The feed is not available.
             logger.error('Resumable file not found: {}'.format(self.object.path),
                          exc_info=True, extra={'request': self.request, })

@@ -26,6 +26,8 @@ def send_production_team_email(sender, instance, name, source, target, **kwargs)
         return
 
     emails = production_team.user_set.values_list('email', flat=True)
+    if not emails:
+        return
 
     email = Email(
         emails,

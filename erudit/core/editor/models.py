@@ -24,11 +24,13 @@ class IssueSubmission(models.Model):
     DRAFT = "D"
     SUBMITTED = "S"
     VALID = "V"
+    ARCHIVED = "A"
 
     STATUS_CHOICES = (
         (DRAFT, _("Brouillon")),
         (SUBMITTED, _("Soumis")),
-        (VALID, _("Validé"))
+        (VALID, _("Validé")),
+        (ARCHIVED, _("Archivé"))
     )
 
     objects = models.Manager()
@@ -132,6 +134,17 @@ class IssueSubmission(models.Model):
         copy = self.save_version()
         copy.status = IssueSubmission.DRAFT
         copy.save()
+
+    @transition(field=status, source='*', target=ARCHIVED,
+                permission=lambda user: (
+                    user.has_perm('editor.manage_issuesubmission') or
+                    user.has_perm('editor.review_issuesubmission')),
+                custom=dict(verbose_name=("Archiver")))
+    def archive(self):
+        """
+        Archives the issue
+        """
+        pass
 
     def save_version(self):
         if self.parent is not None:
