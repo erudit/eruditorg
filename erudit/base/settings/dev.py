@@ -17,6 +17,8 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'erudit' / 'static'),
 )
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
