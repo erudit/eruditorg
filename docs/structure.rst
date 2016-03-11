@@ -21,6 +21,7 @@ Aperçu::
   │       └── tests
   └── templates
       ├── base.html
+      ├── base_email.html
       ├── 404.html
       ├── 500.html
       ├── partials
@@ -49,4 +50,4 @@ Contient les modèles qui sont utilisés par les apps.
 
 **templates**
 
-Les templates du projet. Réplique la hiérarchie qui est sous apps.
+Les templates du projet. Réplique la hiérarchie qui est sous apps. Il convient de noter que les emails envoyés depuis l'application Érudit doivent hériter du template ``base_email.html``.
