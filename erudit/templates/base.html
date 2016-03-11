@@ -25,12 +25,12 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-16x16.png' %}" sizes="16x16" />
 
     {% block stylesheets %}
-    {% endblock %}
+    {% endblock stylesheets %}
 
     <script src="{% static 'js/modernizr.js' %}"></script>
 
     {% block extrahead %}
-    {% endblock %}
+    {% endblock extrahead %}
   </head>
   <body
       class="{% block body_class %}{% endblock %}"
@@ -52,7 +52,7 @@
     {% endblock scripts %}
 
     {% block footerscript %}
-    {% endblock %}
+    {% endblock footerscript %}
 
   </body>
 </html>

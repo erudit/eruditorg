@@ -357,6 +357,9 @@ RAVEN_CONFIG = {
     'dsn': None,
 }
 
+# CKEditor settings
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
 # MailChimp settings
 MAILCHIMP_UUID = ""
 MAILCHIMP_ACTION_URL = ""
