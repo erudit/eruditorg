@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
 
+from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
 
+section_apps_urlpatterns = [
+    url(_(r'^autorisations/'),
+        include('apps.userspace.journal.authorization.urls', namespace='authorization')),
+    url(_(r'^editeur/'),
+        include('apps.userspace.journal.editor.urls', namespace='editor')),
+    url(_(r'^informations/'),
+        include('apps.userspace.journal.information.urls', namespace='information')),
+    url(_(r'^abonnements/'),
+        include('apps.userspace.journal.subscription.urls', namespace='subscription')),
+]
+
 urlpatterns = [
-    url(_(r'^information/$'),
-        views.JournalInformationDispatchView.as_view(), name='journal-information'),
-    url(_(r'^information/liste/$'),
-        views.JournalInformationListView.as_view(), name='journal-information-list'),
-    url(_(r'^information/(?P<code>[\w-]+)/edition/$'),
-        views.JournalInformationUpdateView.as_view(), name='journal-information-update'),
+    url(r'^$', views.JournalSectionEntryPointView.as_view(), name='entrypoint'),
+    url(r'^(?:(?P<journal_pk>\d+)/)?', include(section_apps_urlpatterns)),
 ]
