@@ -26,14 +26,16 @@ class TestIssueSubmissionView(BaseEditorTestCase):
     def test_editor_views_are_login_protected(self):
         """ Editor views should all be login protected """
 
-        result = self.client.get(reverse('userspace:editor:add'))
-        self.assertIsInstance(result, HttpResponseRedirect)
-
-        result = self.client.get(reverse('userspace:editor:issues'))
+        result = self.client.get(reverse('userspace:journal:editor:add', args=(self.journal.pk, )))
         self.assertIsInstance(result, HttpResponseRedirect)
 
         result = self.client.get(
-            reverse('userspace:editor:update', kwargs={'pk': self.issue_submission.pk})
+            reverse('userspace:journal:editor:issues', args=(self.journal.pk, )))
+        self.assertIsInstance(result, HttpResponseRedirect)
+
+        result = self.client.get(
+            reverse('userspace:journal:editor:update', kwargs={
+                'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
         )
         self.assertIsInstance(result, HttpResponseRedirect)
 
@@ -52,8 +54,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
         response = self.client.get(
             reverse(
-                'userspace:editor:update',
-                kwargs={'pk': self.other_issue_submission.pk}
+                'userspace:journal:editor:update',
+                kwargs={'journal_pk': self.journal.pk, 'pk': self.other_issue_submission.pk}
             )
         )
 
@@ -73,8 +75,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             password="top_secret"
         )
         url = reverse(
-            'userspace:editor:update',
-            kwargs={'pk': self.issue_submission.pk}
+            'userspace:journal:editor:update',
+            kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
         )
         response = self.client.get(url)
         root = etree.HTML(response.content)
@@ -83,14 +85,16 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         args['year'] = '2016'
         args['number'] = '01'
         response = self.client.post(url, data=args)
-        expected_url = reverse('userspace:editor:issues')
+        expected_url = reverse('userspace:journal:editor:issues',
+                               kwargs={'journal_pk': self.journal.pk})
         self.assertRedirects(response, expected_url)
 
     def test_logged_add_journalsubmission(self):
         """ Logged users should be able to see journal submissions """
         self.client.login(username='david', password='top_secret')
 
-        result = self.client.get(reverse('userspace:editor:add'))
+        result = self.client.get(reverse('userspace:journal:editor:add',
+                                 kwargs={'journal_pk': self.journal.pk}))
         self.assertIsInstance(
             result, TemplateResponse
         )
@@ -102,7 +106,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         uploading so that file chunks are associated with the issue
         submission."""
         self.client.login(username='david', password='top_secret')
-        response = self.client.get(reverse('userspace:editor:add'))
+        response = self.client.get(
+            reverse('userspace:journal:editor:add', kwargs={'journal_pk': self.journal.pk}))
         root = etree.HTML(response.content)
         self.assertFalse(
             root.cssselect('#id_submissions'),
@@ -126,7 +131,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         self.client.login(username='david', password='top_secret')
 
         self.client.post(
-            reverse('userspace:editor:add'),
+            reverse('userspace:journal:editor:add', args=(self.journal.pk, )),
             data
         )
 
@@ -146,7 +151,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         self.client.login(username='david', password='top_secret')
 
         response = self.client.get(
-            reverse('userspace:editor:update', kwargs={'pk': self.issue_submission.pk})
+            reverse('userspace:journal:editor:update', kwargs={
+                'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
         )
 
         root = etree.HTML(response.content)
@@ -161,7 +167,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
         Make sure the list contains all the journals the user upload to
         and only that """
-        request = self.factory.get(reverse('userspace:editor:add'))
+        request = self.factory.get(
+            reverse('userspace:journal:editor:add', args=(self.journal.pk, )))
         request.user = self.user
         form = IssueSubmissionCreate(request=request).get_form()
 
@@ -181,7 +188,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
         Make sure the list contains all the contacts of the publisher
         and only that """
-        request = self.factory.get(reverse('userspace:editor:add'))
+        request = self.factory.get(
+            reverse('userspace:journal:editor:add'), args=(self.journal.pk, ))
         request.user = self.user
         form = IssueSubmissionCreate(request=request).get_form()
 
@@ -204,7 +212,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         Make sure the list contains only issue submission link to a journal
         with his membership"""
         self.client.login(username=self.user.username, password='top_secret')
-        response = self.client.get(reverse('userspace:editor:issues'), user=self.user)
+        response = self.client.get(
+            reverse('userspace:journal:editor:issues', args=(self.journal.pk, )), user=self.user)
         journal_ids = [j.id for j in self.user.journals.all()]
         issues = set(IssueSubmission.objects.filter(journal__in=journal_ids))
         self.assertEqual(set(response.context_data['object_list']), issues)
@@ -222,7 +231,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             username='dummy', email='dummy@xyz.com', password='top_secret')
         self.client.login(username='dummy', password='top_secret')
         self.issue_submission.submissions.add(rfile)
-        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        url = reverse('userspace:journal:editor:attachment-detail', kwargs={'pk': rfile.pk})
         # Run
         response = self.client.get(url, follow=False)
         # Check
@@ -246,9 +255,10 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
 
         self.client.login(username='dummy', password='top_secret')
         self.issue_submission.submissions.add(rfile)
-        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        url = reverse('userspace:journal:editor:attachment-detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url, follow=False)
+        response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
 
@@ -266,9 +276,10 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
 
         self.client.login(username='dummy', password='top_secret')
         self.issue_submission.submissions.add(rfile)
-        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        url = reverse('userspace:journal:editor:attachment-detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url, follow=False)
+        response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
 
@@ -283,7 +294,8 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
         self.issue_submission.submissions.add(rfile)
-        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        url = reverse('userspace:journal:editor:attachment-detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
         response = self.client.get(url)
         # Check
@@ -302,7 +314,8 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
         self.issue_submission.submissions.add(rfile)
-        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        url = reverse('userspace:journal:editor:attachment-detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
         response = self.client.get(url)
         # Check
@@ -318,7 +331,8 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
         self.issue_submission.submissions.add(rfile)
-        url = reverse('userspace:editor:attachment-detail', args=(rfile.pk, ))
+        url = reverse('userspace:journal:editor:attachment-detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
         response = self.client.get(url)
         # Check
@@ -332,7 +346,8 @@ class TestIssueSubmissionSubmitView(BaseEditorTestCase):
             username='dummy', email='dummy@xyz.com', password='top_secret')
 
         self.client.login(username='dummy', password='top_secret')
-        url = reverse('userspace:editor:transition-submit', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-submit',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
         response = self.client.post(url)
@@ -352,7 +367,8 @@ class TestIssueSubmissionSubmitView(BaseEditorTestCase):
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
         self.client.login(username='dummy', password='top_secret')
-        url = reverse('userspace:editor:transition-submit', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-submit', args=(
+            self.journal.pk, self.issue_submission.pk, ))
 
         # Run
         response = self.client.post(url)
@@ -376,7 +392,8 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
         self.client.login(username='dummy', password='top_secret')
-        url = reverse('userspace:editor:transition-approve', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-approve',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
         response = self.client.post(url)
@@ -390,7 +407,8 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
             username='admin', email='admin@xyz.com', password='top_secret')
 
         self.client.login(username='admin', password='top_secret')
-        url = reverse('userspace:editor:transition-approve', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-approve',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         self.issue_submission.submit()
         self.issue_submission.save()
@@ -417,7 +435,8 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
         self.client.login(username='dummy', password='top_secret')
-        url = reverse('userspace:editor:transition-refuse', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-refuse',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
         response = self.client.post(url)
@@ -431,7 +450,8 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
             username='admin', email='admin@xyz.com', password='top_secret')
 
         self.client.login(username='admin', password='top_secret')
-        url = reverse('userspace:editor:transition-refuse', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-refuse',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         self.issue_submission.submit()
         self.issue_submission.save()
@@ -452,7 +472,8 @@ class TestIssueSubmissionArchiveView(BaseEditorTestCase):
             username='dummy', email='dummy@xyz.com', password='top_secret')
 
         self.client.login(username='dummy', password='top_secret')
-        url = reverse('userspace:editor:transition-archive', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-archive',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
         response = self.client.post(url)
@@ -466,7 +487,8 @@ class TestIssueSubmissionArchiveView(BaseEditorTestCase):
             username='admin', email='admin@xyz.com', password='top_secret')
 
         self.client.login(username='admin', password='top_secret')
-        url = reverse('userspace:editor:transition-archive', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-archive',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
 
         self.issue_submission.submit()
         self.issue_submission.save()

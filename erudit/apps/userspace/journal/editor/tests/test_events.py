@@ -34,7 +34,7 @@ class TestIssueSubmissionEvents(BaseEditorTestCase):
 
         self.client.login(username='david', password='top_secret')
 
-        url = reverse('userspace:editor:add')
+        url = reverse('userspace:journal:editor:add', args=(self.journal.pk, ))
         self.client.post(url, data)
 
         event = self.expect_new_event()
@@ -51,7 +51,8 @@ class TestIssueSubmissionEvents(BaseEditorTestCase):
         """
         self.client.login(username='david', password='top_secret')
 
-        url = reverse('userspace:editor:transition-submit', args=(self.issue_submission.pk, ))
+        url = reverse('userspace:journal:editor:transition-submit', args=(
+            self.journal.pk, self.issue_submission.pk, ))
         self.client.post(url)
 
         event = self.expect_new_event()

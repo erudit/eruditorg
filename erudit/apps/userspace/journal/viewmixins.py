@@ -57,9 +57,12 @@ class JournalScopeMixin(object):
         if not scoped_url:
             # Redirects to the scoped URL
             resolver_match = self.request.resolver_match
+            args = resolver_match.args
+            kwargs = resolver_match.kwargs.copy()
+            kwargs.update({'journal_pk': journal.pk})
             return HttpResponseRedirect(
                 reverse(':'.join([resolver_match.namespace, resolver_match.url_name]),
-                        kwargs={'journal_pk': journal.pk}))
+                        args=args, kwargs=kwargs))
 
         self.init_current_journal(journal)
 

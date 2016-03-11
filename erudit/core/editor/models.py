@@ -97,7 +97,8 @@ class IssueSubmission(models.Model):
 
     def get_absolute_url(self):
         """ Return the absolute URL for this model """
-        return reverse('userspace:editor:update', kwargs={'pk': self.pk})
+        return reverse('userspace:journal:editor:update',
+                       kwargs={'journal_pk': self.journal.pk, 'pk': self.pk})
 
     @property
     def is_submitted(self):

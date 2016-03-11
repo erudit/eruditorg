@@ -10,6 +10,8 @@ from . import views
 section_apps_urlpatterns = [
     url(_(r'^autorisations/'),
         include('apps.userspace.journal.authorization.urls', namespace='authorization')),
+    url(_(r'^editeur/'),
+        include('apps.userspace.journal.editor.urls', namespace='editor')),
     url(_(r'^informations/'),
         include('apps.userspace.journal.information.urls', namespace='information')),
     url(_(r'^abonnements/'),

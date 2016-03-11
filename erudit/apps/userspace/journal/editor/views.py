@@ -24,6 +24,8 @@ from rules.contrib.views import PermissionRequiredMixin
 from core.editor.models import IssueSubmission
 from erudit.models.event import Event
 
+from ..viewmixins import JournalScopeMixin
+
 from .forms import IssueSubmissionForm
 from .forms import IssueSubmissionUploadForm
 from .viewmixins import IssueSubmissionBreadcrumbsMixin
@@ -32,11 +34,11 @@ from .viewmixins import IssueSubmissionCheckMixin
 logger = logging.getLogger(__name__)
 
 
-class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
+class IssueSubmissionCreate(JournalScopeMixin, IssueSubmissionBreadcrumbsMixin,
                             IssueSubmissionCheckMixin, CreateView):
     model = IssueSubmission
     form_class = IssueSubmissionForm
-    template_name = 'userspace/editor/form.html'
+    template_name = 'userspace/journal/editor/form.html'
     title = _("Faire un dépôt de numéros")
 
     def get_form_kwargs(self):
@@ -67,10 +69,11 @@ class IssueSubmissionCreate(IssueSubmissionBreadcrumbsMixin,
         return result
 
 
-class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin, IssueSubmissionCheckMixin, UpdateView):
+class IssueSubmissionUpdate(
+        JournalScopeMixin, IssueSubmissionBreadcrumbsMixin, IssueSubmissionCheckMixin, UpdateView):
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
-    template_name = 'userspace/editor/form.html'
+    template_name = 'userspace/journal/editor/form.html'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -115,16 +118,16 @@ class IssueSubmissionUpdate(IssueSubmissionBreadcrumbsMixin, IssueSubmissionChec
         return context
 
     def get_success_url(self):
-        return reverse('userspace:editor:issues')
+        return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
 
 
 class IssueSubmissionTransitionView(
-        PermissionRequiredMixin, IssueSubmissionBreadcrumbsMixin,
+        JournalScopeMixin, PermissionRequiredMixin, IssueSubmissionBreadcrumbsMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
     context_object_name = 'issue_submission'
     model = IssueSubmission
     raise_exception = True
-    template_name = 'userspace/editor/issuesubmission_transition.html'
+    template_name = 'userspace/journal/editor/issuesubmission_transition.html'
 
     # The following attributes should be defined in subclasses
     question = None
@@ -158,7 +161,8 @@ class IssueSubmissionTransitionView(
 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
-        return reverse('userspace:editor:update', args=(self.object.pk, ))
+        return reverse('userspace:journal:editor:update',
+                       args=(self.current_journal.pk, self.object.pk, ))
 
     def get_context_data(self, **kwargs):
         context = super(IssueSubmissionTransitionView, self).get_context_data(**kwargs)
@@ -197,13 +201,13 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
     transition_name = 'archive'
 
 
-class IssueSubmissionList(IssueSubmissionBreadcrumbsMixin,
+class IssueSubmissionList(JournalScopeMixin, IssueSubmissionBreadcrumbsMixin,
                           IssueSubmissionCheckMixin, ListView):
     model = IssueSubmission
-    template_name = 'userspace/editor/issues.html'
+    template_name = 'userspace/journal/editor/issues.html'
 
 
-class IssueSubmissionAttachmentView(PermissionRequiredMixin, DetailView):
+class IssueSubmissionAttachmentView(JournalScopeMixin, PermissionRequiredMixin, DetailView):
     """
     Returns an IssueSubmission attachment.
     """

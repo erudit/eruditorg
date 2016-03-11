@@ -1,4 +1,4 @@
-{% extends "userspace/editor/base.html" %}
+{% extends "userspace/journal/editor/base.html" %}
 {% load i18n staticfiles %}
 
 {% block page-title %}{% trans "Ajout d'un numéro" %}{% endblock %}
@@ -93,13 +93,13 @@
             {% for t in transitions %}
               <a
               {% if t.name == 'submit' %}
-                href="{% url 'userspace:editor:transition-submit' object.pk %}"
+                href="{% url 'userspace:journal:editor:transition-submit' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'approve' %}
-                href="{% url 'userspace:editor:transition-approve' object.pk %}"
+                href="{% url 'userspace:journal:editor:transition-approve' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'refuse' %}
-                href="{% url 'userspace:editor:transition-refuse' object.pk %}"
+                href="{% url 'userspace:journal:editor:transition-refuse' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'archive' %}
-                href="{% url 'userspace:editor:transition-archive' object.pk %}"
+                href="{% url 'userspace:journal:editor:transition-archive' scope_current_journal.pk object.pk %}"
               {% endif %}
                 class="btn btn-primary">{{ t.custom.verbose_name }}</a>
             {% endfor %}

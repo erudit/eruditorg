@@ -1,17 +1,20 @@
-from django.test import TestCase
-from django.core.urlresolvers import reverse
+# -*- coding: utf-8 -*-
+
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 
 from base.factories import UserFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
 from core.editor.factories import IssueSubmissionFactory
 from erudit.factories import JournalFactory
+from erudit.tests import BaseEruditTestCase
 
 
-class ViewsTestCase(TestCase):
+class ViewsTestCase(BaseEruditTestCase):
 
     def setUp(self):
+        super(ViewsTestCase, self).setUp()
         self.user_granted = UserFactory(username="user_granted")
         self.user_granted.set_password("user")
         self.user_granted.save()
@@ -23,7 +26,7 @@ class ViewsTestCase(TestCase):
     def test_issuesubmission_restricted(self):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:editor:issues')
+        url = reverse('userspace:journal:editor:issues', args=(self.journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -34,7 +37,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:editor:issues')
+        url = reverse('userspace:journal:editor:issues', args=(self.journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -50,7 +53,7 @@ class ViewsTestCase(TestCase):
     def test_issuesubmission_add_restricted(self):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:editor:add')
+        url = reverse('userspace:journal:editor:add', args=(self.journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -61,7 +64,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:editor:add')
+        url = reverse('userspace:journal:editor:add', args=(self.journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -79,7 +82,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_non_granted.username,
                           password="user")
-        url = reverse('userspace:editor:update', args=(issue.pk, ))
+        url = reverse('userspace:journal:editor:update', args=(self.journal.pk, issue.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404,)
 
@@ -91,7 +94,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:editor:update', args=(issue.pk, ))
+        url = reverse('userspace:journal:editor:update', args=(self.journal.pk, issue.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
@@ -105,7 +108,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class RulesTestCase(TestCase):
+class RulesTestCase(BaseEruditTestCase):
 
     def test_user_cant_manage(self):
         issue = IssueSubmissionFactory()
