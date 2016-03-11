@@ -12,6 +12,11 @@ INTERNAL_IPS = (
     '127.0.0.1',
 )
 
+STATICFILES_DIRS = (
+    str(ROOT_DIR / 'erudit' / 'static' / 'build_dev'),
+    str(ROOT_DIR / 'erudit' / 'static'),
+)
+
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )

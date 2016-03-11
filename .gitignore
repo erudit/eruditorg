@@ -13,6 +13,7 @@ src/
 npm-debug.log
 .coverage
 /node_modules
+/bower_components
 Vagrantfile
 /vagrant_data
 .vagrant
@@ -25,10 +26,7 @@ static/*
 
 docs/_build
 
-#
-# bower - keep adding to this list as needed
-# ignore cruft that comes with bower components
-#
+/erudit/static/build_dev/
 /erudit/static/vendor/**/src
 /erudit/static/vendor/**/source
 /erudit/static/vendor/**/spec

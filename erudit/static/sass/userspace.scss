@@ -8,10 +8,11 @@
   'utils/mixins';
 
 // 2. Vendors
-@import
-  '../vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-  '../vendor/ionicons/css/ionicons.css',
-  'vendor/normalize';
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+$ionicons-font-path: "~ionicons/fonts";
+@import "~ionicons/scss/ionicons";
+@import "vendor/normalize";
 
 // 3. Base stuff
 @import

@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 {% load i18n staticfiles rules navutils_tags %}
-{% load pipeline %}
 {% load staticfiles %}
 
 {% block stylesheets %}
-{% if DEBUG %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/userspace-dev.css' %}" />
-{% else %}
-{% stylesheet 'erudit_userspace' %}
-{% endif %}
-{% endblock %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/userspace.css' %}" />
+{% endblock stylesheets %}
 
 {% block body_class %}userspace{% endblock %}
 
@@ -84,3 +79,7 @@
   </div>
 </main>
 {% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{% static 'js/UserspaceApp.js' %}"></script>
+{% endblock scripts %}
