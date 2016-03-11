@@ -31,6 +31,7 @@ class AuthorizationForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
+        authorization_codename = kwargs.pop('codename', None)
         super(AuthorizationForm, self).__init__(*args, **kwargs)
         journals_with_manage_permissions = user.journals.all()
         self.fields['journal'].queryset = journals_with_manage_permissions
@@ -38,6 +39,11 @@ class AuthorizationForm(ModelForm):
         chain = itertools.chain(*us)
         users = [u.id for u in list(chain)]
         self.fields['user'].queryset = User.objects.filter(id__in=users)
+
+        if authorization_codename:
+            choices = self.fields['authorization_codename'].choices
+            choices = [(c[0], c[1]) for c in choices if c[0] == authorization_codename]
+            self.fields['authorization_codename'].choices = choices
 
     def clean(self):
         """

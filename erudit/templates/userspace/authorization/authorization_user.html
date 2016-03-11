@@ -1,0 +1,32 @@
+{% extends "userspace/base.html" %}
+{% load i18n spurl %}
+
+{% block content-main %}
+
+
+<h1>{% trans "Autorisations" %} </h1>
+
+{% for choice, app_authorizations in authorizations.items %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans choice.1 %}</h3>
+  </div>
+  <div class="panel-body">
+        <a class="btn btn-primary" href="{% url 'userspace:authorization:authorization_create' %}?codename={{ choice.0 }}"> {% trans "Ajouter" %} </a>
+        
+        <br /> <br />
+
+        <ul>
+        {% for auth in app_authorizations %}
+        <li>{{ auth.user.first_name }} {{ auth.user.last_name }} ({{ auth.user.email }})
+        <a class="btn" alt="{% trans 'supprimer' %}"
+          href="{% url 'userspace:authorization:authorization_delete' auth.pk %}">
+            <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span></a>
+        </li>
+        {% endfor %}
+        </ul>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
