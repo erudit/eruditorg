@@ -9,7 +9,5 @@ urlpatterns = [
     url(r'^', include('apps.userspace.dashboard.urls')),
 
     url(_(r'^revue/'), include('apps.userspace.journal.urls', namespace='journal')),
-
-    url(_(r'^editeur/'), include('apps.userspace.editor.urls', namespace='editor')),
     url(_(r'^reporting/'), include('apps.userspace.reporting.urls', namespace='reporting')),
 ]

@@ -14,7 +14,7 @@ class IssueSubmissionBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
                             self).get_breadcrumbs()
         breadcrumbs.append(Breadcrumb(
             _("Dépôts de numéros"),
-            pattern_name='userspace:editor:issues'))
+            pattern_name='userspace:journal:editor:issues'))
         return breadcrumbs
 
 

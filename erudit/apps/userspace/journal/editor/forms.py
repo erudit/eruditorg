@@ -124,7 +124,8 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         initial_files = self.instance.submissions.all() \
             .values_list('id', flat=True)
         self.fields['submissions'].initial = ','.join(map(str, initial_files))
-        self.fields['submissions'].widget.template_name = 'userspace/editor/plupload_widget.html'
+        self.fields['submissions'].widget.template_name = \
+            'userspace/journal/editor/plupload_widget.html'
 
     def save(self, commit=True):
         submissions = self.cleaned_data.pop('submissions', '')

@@ -29,7 +29,7 @@
         </td>
         <td class="file-name">
           {% if file.is_complete %}
-            <a href="{% url 'userspace:editor:attachment-detail' file.id %}">{{ file.filename }}</a>
+            <a href="{% url 'userspace:journal:editor:attachment-detail' pk=file.id %}">{{ file.filename }}</a>
           {% else %}
             {{ file.filename }}
           {% endif %}

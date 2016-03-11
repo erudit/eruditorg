@@ -46,7 +46,8 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
 
     def test_a_draft_submission_is_editable(self):
         result = self.client.get(
-            reverse('userspace:editor:update', kwargs={'pk': self.draft_submission.pk})
+            reverse('userspace:journal:editor:update', kwargs={
+                'journal_pk': self.journal.pk, 'pk': self.draft_submission.pk})
         )
 
         self.assertFalse(
@@ -56,7 +57,8 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
 
     def test_a_submitted_submission_is_not_editable(self):
         result = self.client.get(
-            reverse('userspace:editor:update', kwargs={'pk': self.submitted_submission.pk})
+            reverse('userspace:journal:editor:update', kwargs={
+                'journal_pk': self.journal.pk, 'pk': self.submitted_submission.pk})
         )
 
         self.assertTrue(
@@ -66,7 +68,8 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
 
     def test_a_valid_submission_is_not_editable(self):
         result = self.client.get(
-            reverse('userspace:editor:update', kwargs={'pk': self.valid_submission.pk})
+            reverse('userspace:journal:editor:update', kwargs={
+                'journal_pk': self.journal.pk, 'pk': self.valid_submission.pk})
         )
 
         self.assertTrue(

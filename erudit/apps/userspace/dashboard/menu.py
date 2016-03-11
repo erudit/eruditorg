@@ -24,7 +24,7 @@ journal = menu.AnyPermissionsNode(
 editor = menu.AnyPermissionsNode(
     id='editor',
     label=_('Dépôts de numéros'),
-    pattern_name='userspace:editor:issues',
+    pattern_name='userspace:journal:editor:issues',
     permissions=['editor.manage_issuesubmission', ],
     context={'icon': 'ion-ios-copy-outline'},
 )

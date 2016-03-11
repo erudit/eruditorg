@@ -29,7 +29,7 @@ class MenuTestCase(TestCase):
         user.set_password("user")
         user.save()
 
-        url = reverse('userspace:editor:issues')
+        url = reverse('userspace:journal:editor:issues')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertNotContains(response, url)
@@ -49,7 +49,7 @@ class MenuTestCase(TestCase):
             object_id=journal.id,
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
-        url = reverse('userspace:editor:issues')
+        url = reverse('userspace:journal:editor:issues')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertContains(response, url)
@@ -59,7 +59,7 @@ class MenuTestCase(TestCase):
         user.set_password("user")
         user.save()
 
-        url = reverse('userspace:editor:issues')
+        url = reverse('userspace:journal:editor:issues')
         self.client.login(username="user", password="user")
         response = self.client.get(reverse('userspace:dashboard'))
         self.assertNotContains(response, url)
