@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 {% load static i18n %}
-{% load pipeline %}
 {% load staticfiles %}
 
 {% block stylesheets %}
-{% if DEBUG %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/public-dev.css' %}" />
-{% else %}
-{% stylesheet 'erudit_public' %}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
 {% endif %}
-{% endblock %}
+{% endblock stylesheets %}
 
 {% block body_class %}public{% endblock %}
 
@@ -91,3 +88,7 @@
 {% include "partials/site-footer.html" %}
 
 {% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/PublicApp.js' %}"></script>
+{% endblock scripts %}

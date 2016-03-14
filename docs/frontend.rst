@@ -1,17 +1,23 @@
 Développement front-end
 =======================
 
+
 Configuration de Gulp
 ---------------------
 
-1. Installer le paquet NPM
+1. Installer les dépendances Node au moyen de ``npm`` :
 
 ::
 
-    sudo npm install --save-dev
+    npm install
 
+2. Installer les dépendances frontend au moyen de ``bower`` :
 
-2. Configurer l'environnement Gulp
+::
+
+    bower install
+
+3. Configurer l'environnement Gulp
 
 À partir du fichier fourni dans le dépôt
 
@@ -20,14 +26,36 @@ Configuration de Gulp
     cp ./tools/static/.env.json.sample ./tools/static/.env.json
 
 
-3. Démarrer Gulp
+Compilation des assets
+----------------------
+
+La compilation de tous les assets du projet peut être réalisée au moyen de la tâche Gulp ``build``. Il convient de noter que deux modes d'exécution peuvent être utilisés avec la configuration Gulp du projet : production et développement. Par défaut toutes les tâches Gulp sont exécutées en mode "développement".
+
+Ainsi pour lancer la compilation des assets du projet en mode "développement", il faut exécuter la commande suivante :
 
 ::
 
-    ./node_modules/.bin/gulp --gulpfile ./tools/static/gulpfile.js watch
+    npm run gulp -- build
+
+Cette commande va construire tous les assets du projet et les placer dans le répertoire ``./erudit/static/build_dev/``. La particularité de ces assets provient du fait qu'ils ne sont pas minifiés afin d'accélérer leur construction. Il faut également noter que le contenu de ``./erudit/static/build_dev/`` n'est pas commité.
+
+En mode "production", tous les assets construits sont minifiés et placés dans le répertoire ``./erudit/static/build/`` (ce dernier est commité). Pour déclencher la construction des assets en mode "production" il faut utiliser la commande suivante :
+
+::
+
+    npm run gulp -- build --production
+
+Cette commande devrait être systématiquement exécutée avant de créer un commit impliquant des modifications des assets.
 
 
-4. Configurer le live reload
+Live reloading
+--------------
+
+Le *live reloading* est fourni par la tâche Gulp ``watch`` :
+
+::
+
+    npm run gulp -- watch
 
 Pour utiliser le *live reload* dans votre browser, utiliser l'extension chrome:
 
@@ -39,6 +67,29 @@ Au besoin, il faudra forwarder le port de la vm-dev:
 
     config.vm.network :forwarded_port, guest: 35729, host: 35729
 
+
+Hot reloading
+-------------
+
+Le *hot reloading* permet de mettre à jour les fichiers JS/CSS spécifiques à l'application Érudit et d'appliquer les changements sans avoir à recharger la page. Pour utiliser le *hot reloading* il est nécessaire d'exécuter au moins une fois la commande de construction des assets en mode "développement" :
+
+::
+
+    npm run gulp -- build
+
+Il est ensuite nécessaire de démarrer un micro serveur chargé de servir les fichiers JS/CSS Érudit et de déclencher les mises à jour des pages au moyen de la tâche ``webpack-dev-server`` :
+
+::
+
+    npm run gulp -- webpack-dev-server
+
+Enfin, il faut ajouter le paramètre suivant au fichier de configuration local ``settings_env.py`` :
+
+::
+
+    WEBPACK_DEV_SERVER_URL = 'http://localhost:8080'
+
+Il convient de noter qu'en cas d'utilisation du *hot reloading* le contenu des fichiers CSS construits est placé au sein des applications JS (eg. *PublicApp.js* ou *UserspaceApp.js*) et est dynamiquement injecté dans la page.
 
 Développement front-end javascript
 ----------------------------------
@@ -68,7 +119,9 @@ Voici un exemple de contrôleur associé à la vue détail d'un article :
 
 ::
 
-    ROUTER.registerController('public:journal:article-detail', {
+    // controllers/ArticleDetailController.js
+
+    export default {
       init: function() {
         // The init action is mandatory
         console.log("Article detail");
@@ -76,9 +129,27 @@ Voici un exemple de contrôleur associé à la vue détail d'un article :
       other_action: function() {
         // Do something else here
       },
-    });
+    };
 
-Ce script permet la création d'un contrôleur et l'enregistrement de celui-ci auprès du routeur global. Si une page dont la balise ``<body>`` contient un attribut ``data-controller`` - avec pour valeur ``public:journal:article-detail`` - est chargée, alors ce contrôleur sera appellé.
+Ce script permet la création d'un contrôleur. L'enregistrement de ce contrôleur peut être réaliser de la façon suivante :
+
+::
+
+    // MyApp.js
+
+    import 'babel-polyfill';
+
+    import DOMRouter from './core/DOMRouter';
+    import ArticleDetailController from './controllers/ArticleDetailController';
+
+
+    // Defines the router and initializes it!
+    let router = new DOMRouter({
+        'public:journal:article-detail': ArticleDetailController,
+    });
+    $(document).ready(function(ev) { router.init(); });
+
+Si une page dont la balise ``<body>`` contient un attribut ``data-controller`` - avec pour valeur ``public:journal:article-detail`` - est chargée, alors ce contrôleur sera appellé.
 
 Organisation du code javascript
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -86,28 +157,26 @@ Organisation du code javascript
 Structure des répertoires javascript::
 
     .
-    ├── js
-    │   ├── build
+    ├── build
+    │   └── [...]
     │   │   ├── erudit-scripts-dev.js
     │   │   └── erudit-vendors-dev.js
     │
-    ├── scripts
+    ├── build_dev
+    │
+    ├── js
     │   ├── controllers
     │   │   └── public
-    │   │       └── journal
-    │   │           └── articleDetail.js
+    │   │   │   └── journal
+    │   │   │   │   └── ArticleDetailController.js
+    │   │   │   │   └── JournalListController.js
+    │   │   │   └── HomeController.js
+    │   │   │   └── index.js
     │   │   └── userspace
     │   │       └── editor
-    │   │           └── [...]
-    │   │       └── journal
-    │   │           └── [...]
-    │   └── mains.js
-
-
-Utilisation de django-pipeline
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* On utilise 3 sets
-    * ``vendor``: les scripts des tiers;
-    * ``public``: les scripts du site public;
-    * ``userspace``: les scripts de l'espace utilisateur
+    │   │       │   └── FormController.js
+    │   │       └── index.js
+    │   └── core
+    │   │   └── DOMRouter.js
+    │   └── PublicApp.js
+    │   └── UserspaceApp.js

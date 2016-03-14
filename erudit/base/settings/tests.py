@@ -18,6 +18,8 @@ DATABASES = {
     }
 }
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.remove('raven.contrib.django.raven_compat')
 

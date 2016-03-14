@@ -12,6 +12,14 @@ INTERNAL_IPS = (
     '127.0.0.1',
 )
 
+STATICFILES_DIRS = (
+    str(ROOT_DIR / 'erudit' / 'static' / 'build_dev'),
+    str(ROOT_DIR / 'erudit' / 'static' / 'build'),
+    str(ROOT_DIR / 'erudit' / 'static'),
+)
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
@@ -19,3 +27,8 @@ MIDDLEWARE_CLASSES += (
 INSTALLED_APPS += (
     'debug_toolbar',
 )
+
+# Copy these lines into your ``settings_env`` module and uncomment them
+# in order to use hot reloading!
+
+# WEBPACK_DEV_SERVER_URL = 'http://localhost:8080'

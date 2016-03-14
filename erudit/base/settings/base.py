@@ -67,7 +67,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
-    'pipeline',
     'crispy_forms',
     'django_select2',
     'datetimewidget',
@@ -90,15 +89,15 @@ DATABASES = {
     },
 }
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
 )
 
 STATICFILES_DIRS = (
+    str(ROOT_DIR / 'erudit' / 'static' / 'build'),
     str(ROOT_DIR / 'erudit' / 'static'),
 )
 
@@ -357,6 +356,9 @@ LOGGING = {
 RAVEN_CONFIG = {
     'dsn': None,
 }
+
+# CKEditor settings
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
 # MailChimp settings
 MAILCHIMP_UUID = ""

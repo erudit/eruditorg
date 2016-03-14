@@ -1,4 +1,3 @@
-{% load pipeline %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html dir="ltr" mozdisallowselectionprint moznomarginboxes>
@@ -9,23 +8,13 @@
     <title>PDF.js viewer</title>
 
 
-    <link rel="resource" type="application/l10n" href="{% static 'vendor/pdfjs-build/generic/web/locale/locale.properties' %}"/>
-
-    {% if DEBUG %}
-    <link rel="stylesheet" href="{% static 'vendor/pdfjs-build/generic/web/viewer.css' %}"/>
-    <link rel="stylesheet" type="text/stylesheet" href="{% static 'css/pdf_viewer-dev.css' %}" />
-    <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/l10n.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/build/pdf.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/debugger.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vendor/pdfjs-build/generic/web/viewer.js' %}"></script>
-    {% else %}
-    {% stylesheet 'pdfjs' %}
-    {% javascript 'pdfjs' %}
-    {% endif %}
+    <link rel="resource" type="application/l10n" href="{% static 'locale/pdf-viewer/locale.properties' %}"/>
+    <link rel="stylesheet" href="{% static 'css/pdf-viewer.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/pdf-viewer.js' %}"></script>
 
     <script type="text/javascript">
-        PDFJS.imageResourcesPath = "{% static 'vendor/pdfjs-build/generic/web/images/' %}";
-        PDFJS.workerSrc = "{% static 'vendor/pdfjs-build/generic/build/pdf.worker.js' %}";
+        PDFJS.imageResourcesPath = "{% static 'css/images/pdf-viewer/' %}";
+        PDFJS.workerSrc = "{% static 'js/pdf.worker.js' %}";
     </script>
 
   </head>

@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 {% load i18n staticfiles rules navutils_tags %}
-{% load pipeline %}
 {% load staticfiles %}
 
 {% block stylesheets %}
-{% if DEBUG %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/userspace-dev.css' %}" />
-{% else %}
-{% stylesheet 'erudit_userspace' %}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/UserspaceApp.css' %}" />
 {% endif %}
-{% endblock %}
+{% endblock stylesheets %}
 
 {% block body_class %}userspace{% endblock %}
 
@@ -84,3 +81,7 @@
   </div>
 </main>
 {% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/UserspaceApp.js' %}"></script>
+{% endblock scripts %}
