@@ -1,17 +1,8 @@
 {% load i18n %}
 
-<script type="text/javascript" src="{{ STATIC_URL}}/js/moxie.js"></script>
-
-<script type="text/javascript" src="{{ STATIC_URL}}/js/plupload.full.min.js"></script>
-
-<script type="text/javascript" src="{{ STATIC_URL}}/js/plupload_widget.js"></script>
-
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}/css/plupload.css">
-
-
 <input{{ final_attrs }} style="display: none;">
 
-<div class="upload-container">
+<div class="upload-container" data-json-params='{{ json_params|safe }}' data-filesizes='{{ files_json|safe }}'>
   <table class="upload-table">
     <thead>
       <tr>
@@ -73,14 +64,3 @@
     </tfoot>
   </table>
 </div>
-
-<script type="text/javascript">
-var json_params = JSON.parse('{{ json_params }}');
-var filesizes = JSON.parse('{{ files_json }}');
-$(function() {
-  create_uploader(
-    json_params,
-    filesizes
-  );
-});
-</script>
