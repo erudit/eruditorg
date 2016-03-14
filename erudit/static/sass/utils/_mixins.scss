@@ -64,6 +64,14 @@
   @include translate(0,-50%);
 }
 
+@mixin parent-box-centered($position: absolute) {
+  position: $position;
+  top: 50%;
+  left: 50%;
+  -webkit-filter: blur(0);
+  @include translate(-50%,-50%);
+}
+
 
 /// Border-radius vendor prefixes
 @mixin border-radius($radius) {

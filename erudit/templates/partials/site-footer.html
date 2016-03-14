@@ -9,12 +9,16 @@
       {# newsletter #}
       <aside class="col-sm-6">
 
-        <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" class="newsletter-form" name="mc-embedded-subscribe-form" target="_blank">
+          <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
           <fieldset class="col-sm-8">
             <h4 class="legend">{% trans "Abonnez-vous à notre infolettre" %}</h4>
-            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-            <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
-            <div class="hidden"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+            <div class="-input-group">
+              <div class="input-group-btn">
+                <input type="email" value="" name="EMAIL" required class="required email" id="mce-EMAIL" placeholder="{% trans "nom@courriel.com" %}">
+                <input type="submit" value="{% trans "S'inscrire" %}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-dark">
+              </div>
+            </div>
           </fieldset>
         </form>
 
@@ -76,7 +80,7 @@
         <div class="row">
 
           <aside class="col-sm-6">
-            <img src="{% static 'svg/logo-erudit.svg' %}" alt="Erudit" class="svg" />
+            <img src="{% static 'svg/logo-erudit-white.svg' %}" alt="Erudit" class="svg" />
           </aside>
 
           <aside class="col-sm-6 child-column-fit">

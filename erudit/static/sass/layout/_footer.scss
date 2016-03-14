@@ -15,6 +15,22 @@ footer#site-footer {
   margin-top: $margin-vertical-default;
 
   /**
+  * Newsletter
+  */
+  .newsletter-form {
+
+    // .form-group
+
+    input[type="email"] {
+      border-width: 0;
+      padding-top: $padding-base-vertical - 1;
+      padding-bottom: $padding-base-vertical - 1;
+      @include fw-sans-normal-italic();
+    }
+
+  }
+
+  /**
   * Footer nav elements
   */
 
