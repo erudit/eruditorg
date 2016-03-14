@@ -14,6 +14,7 @@ INTERNAL_IPS = (
 
 STATICFILES_DIRS = (
     str(ROOT_DIR / 'erudit' / 'static' / 'build_dev'),
+    str(ROOT_DIR / 'erudit' / 'static' / 'build'),
     str(ROOT_DIR / 'erudit' / 'static'),
 )
 

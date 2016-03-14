@@ -26,7 +26,9 @@ static/*
 
 docs/_build
 
-/erudit/static/build_dev/
+/erudit/static/build_dev/*
+!erudit/static/build_dev/.gitkeep
+
 /erudit/static/vendor/**/src
 /erudit/static/vendor/**/source
 /erudit/static/vendor/**/spec

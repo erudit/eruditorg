@@ -4,20 +4,29 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import gulp from 'gulp';
 import concat from 'gulp-concat';
 import consolidate from 'gulp-consolidate';
+import env from 'gulp-env';
 import iconfont from 'gulp-iconfont';
+import livereload from 'gulp-livereload';
 import minifyCSS from 'gulp-minify-css';
 import modernizr from 'gulp-modernizr';
 import rename from 'gulp-rename';
 import sass from 'gulp-sass';
 import uglify from 'gulp-uglify';
 import gutil from 'gulp-util';
+import path from 'path';
 import named from 'vinyl-named';
 import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
 import webpackStream from 'webpack-stream';
+
+
+/* Get env variables */
+env('.env');
 
 /* Global variables */
 const root_dir = '../../'
 const static_dir = root_dir + 'erudit/static/';
+const templates_dirs = root_dir + 'erudit/templates/';
 const PROD_ENV = gutil.env.production;
 
 /* DIRS */
@@ -31,76 +40,60 @@ var iconfont_dir = static_dir + 'iconfont';
 
 
 /*
- * Webpack taks
+ * Global webpack config
+ * ~~~~~~~~~~~~~~~~~~~~~
+ */
+
+let extractCSS = new ExtractTextPlugin('css/[name].css', { allChunks: true });
+var webpackConfig = {
+  output: {
+    filename: 'js/[name].js',
+  },
+  resolve: {
+    modulesDirectories: ['node_modules', bower_dir],
+    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json', 'scss'],
+  },
+  module: {
+    loaders: [
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.scss$/i, loader: extractCSS.extract(['css','sass'], { publicPath: '../'}) },
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.txt$/, loader: 'raw-loader' },
+      { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'url-loader?limit=10000' },
+      { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' },
+    ],
+  },
+  plugins: [
+    extractCSS,
+    ...(PROD_ENV ? [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false }
+      })
+    ] : []),
+  ],
+}
+
+
+/*
+ * Webpack task
  * ~~~~~~~~~~~~
  */
 
-/* Task to build our CSS applications. */
-gulp.task('build-css-applications', function () {
-  let extractCSS = new ExtractTextPlugin('[name].css');
-  return gulp.src([sass_dir + '/public.scss', sass_dir + '/userspace.scss'])
+/* Task to build our JS and CSS applications. */
+gulp.task('build-webpack-assets', function () {
+  return gulp.src([
+        js_dir + '/PublicApp.js', js_dir + '/UserspaceApp.js',
+        sass_dir + '/PublicApp.scss', sass_dir + '/UserspaceApp.scss',
+      ])
     .pipe(named())
-    .pipe(webpackStream({
-      output: {
-        filename: '[name].css',
-      },
-      resolve: {
-        modulesDirectories: [bower_dir],
-        extensions: ['', 'scss'],
-      },
-      module: {
-        loaders: [
-          { test: /\.scss$/i, loader: extractCSS.extract(['css','sass']) },
-          { test: /\.json$/, loader: 'json-loader' },
-          { test: /\.txt$/, loader: 'raw-loader' },
-          { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'url-loader?limit=10000' },
-          { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' }
-        ],
-      },
-      plugins: [
-        extractCSS,
-        ...(PROD_ENV ? [
-          new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false }
-          })
-        ] : []),
-      ]
-    }))
-    .pipe(gulp.dest(build_dir + '/css'));
-});
-
-/* Task to build our Javascript applications. */
-gulp.task('build-js-applications', function() {
-  return gulp.src([js_dir + '/PublicApp.js', js_dir + '/UserspaceApp.js'])
-    .pipe(named())
-    .pipe(webpackStream({
-      output: {
-        filename: '[name].js',
-      },
-      resolve: {
-        modulesDirectories: ['node_modules', bower_dir],
-        extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'],
-      },
-      module: {
-        loaders: [
-          { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }
-        ],
-      },
-      plugins: [
-        ...(PROD_ENV ? [
-          new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false }
-          })
-        ] : []),
-      ],
-    }))
-    .pipe(gulp.dest(build_dir + '/js'));
+    .pipe(webpackStream(webpackConfig))
+    .pipe(gulp.dest(build_dir));
 });
 
 
 /*
- * Other taks
- * ~~~~~~~~~~
+ * Other tasks
+ * ~~~~~~~~~~~
  */
 
 gulp.task('build-modernizr', function(){
@@ -200,11 +193,59 @@ gulp.task('build-pdfjs', [
 
 
 /*
- * Global taks
- * ~~~~~~~~~~~
+ * Global tasks
+ * ~~~~~~~~~~~~
  */
 
 gulp.task('build', [
   'build-modernizr', 'build-iconfont', 'build-videojs', 'build-pdfjs',
-  'build-css-applications', 'build-js-applications',
+  'build-webpack-assets',
 ]);
+
+
+/*
+ * Development tasks
+ * ~~~~~~~~~~~~~~~~~
+ */
+
+gulp.task('webpack-dev-server', function(callback) {
+  var devWebpackConfig = Object.create(webpackConfig);
+  devWebpackConfig.devtool = 'eval';
+  devWebpackConfig.debug = true;
+  devWebpackConfig.entry = {
+    PublicApp: [js_dir + '/PublicApp.js', sass_dir + '/PublicApp.scss', ],
+    UserspaceApp: [js_dir + '/UserspaceApp.js', sass_dir + '/UserspaceApp.scss', ],
+  };
+  devWebpackConfig.output = {
+    path: path.resolve(__dirname, static_dir),
+    publicPath: 'static/',
+    filename: 'js/[name].js'
+  };
+
+  // Start a webpack-dev-server
+  new WebpackDevServer(webpack(devWebpackConfig), {
+    contentBase: path.resolve(__dirname, static_dir, '..'),
+    publicPath: '/static/',
+    hot: true,
+    inline: true,
+  }).listen(8080, 'localhost', function(err) {
+    if(err) throw new gutil.PluginError('webpack-dev-server', err);
+    gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
+  });
+});
+
+gulp.task('watch', function() {
+  // start live reload server
+  // host null will make it work for Vagrant
+  livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
+
+  // watch any less file /css directory, ** is for recursive mode
+  gulp.watch(sass_dir + '/**/*.scss', ['build-webpack-assets', 'build-pdfjs-css', 'build-modernizr']);
+  // watch any js file /js directory, ** is for recursive mode
+  gulp.watch(js_dir + '/**/*.js', ['build-webpack-assets', ]);
+  // watch any svg file /iconfont directory, ** is for recursive mode
+  gulp.watch(iconfont_dir + '/**/*.svg', ['iconfont']);
+
+  /* Trigger a live reload on any Django template changes */
+  gulp.watch([templates_dirs + '/**/*.html', templates_dirs + '**/*.xls']).on('change', livereload.changed);
+});
