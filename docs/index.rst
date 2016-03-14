@@ -17,7 +17,7 @@ Documentation de Érudit.org
    a11y
    permissions
    emails
-   javascript
+   frontend
 
 Index et tableaux
 =================
