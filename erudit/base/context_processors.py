@@ -13,7 +13,6 @@ def common_settings(request):
     """Passing custom CONSTANT in Settings into RequestContext."""
     from django.contrib.sites.models import get_current_site
     COMMON_CONTEXT = {
-        "DEBUG": settings.DEBUG,
         "MAILCHIMP_UUID": settings.MAILCHIMP_UUID,
         "MAILCHIMP_ACTION_URL": settings.MAILCHIMP_ACTION_URL,
         "HOSTNAME": HOSTNAME,
@@ -25,5 +24,10 @@ def common_settings(request):
         COMMON_CONTEXT.update(settings.EXTRA_CONTEXT)
     except:
         pass
+
+    if settings.DEBUG:
+        COMMON_CONTEXT.update({
+            "WEBPACK_DEV_SERVER_URL": getattr(settings, 'WEBPACK_DEV_SERVER_URL', ''),
+        })
 
     return COMMON_CONTEXT

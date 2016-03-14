@@ -3,7 +3,9 @@
 {% load staticfiles %}
 
 {% block stylesheets %}
+{% if not WEBPACK_DEV_SERVER_URL %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/UserspaceApp.css' %}" />
+{% endif %}
 {% endblock stylesheets %}
 
 {% block body_class %}userspace{% endblock %}
@@ -81,5 +83,5 @@
 {% endblock %}
 
 {% block scripts %}
-  <script type="text/javascript" src="{% static 'js/UserspaceApp.js' %}"></script>
+  <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/UserspaceApp.js' %}"></script>
 {% endblock scripts %}

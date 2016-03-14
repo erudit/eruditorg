@@ -3,7 +3,9 @@
 {% load staticfiles %}
 
 {% block stylesheets %}
+{% if not WEBPACK_DEV_SERVER_URL %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
+{% endif %}
 {% endblock stylesheets %}
 
 {% block body_class %}public{% endblock %}
@@ -88,5 +90,5 @@
 {% endblock %}
 
 {% block scripts %}
-  <script type="text/javascript" src="{% static 'js/PublicApp.js' %}"></script>
+  <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/PublicApp.js' %}"></script>
 {% endblock scripts %}

@@ -27,3 +27,8 @@ MIDDLEWARE_CLASSES += (
 INSTALLED_APPS += (
     'debug_toolbar',
 )
+
+# Copy these lines into your ``settings_env`` module and uncomment them
+# in order to use hot reloading!
+
+# WEBPACK_DEV_SERVER_URL = 'http://localhost:8080'
