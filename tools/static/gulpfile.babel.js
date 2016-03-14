@@ -147,12 +147,16 @@ gulp.task('build-videojs-js', function() {
     .pipe(PROD_ENV ? uglify() : gutil.noop())
     .pipe(gulp.dest(build_dir + '/js'))
 });
+gulp.task('build-pdfjs-js-map', function() {
+  return gulp.src(bower_dir + '/video.js/dist/video.min.js.map')
+    .pipe(gulp.dest(build_dir + '/js'));
+});
 gulp.task('build-videojs-css', function() {
   return gulp.src(bower_dir + '/video.js/dist/video-js.min.css')
     .pipe(rename('videojs.css'))
     .pipe(gulp.dest(build_dir + '/css'));
 });
-gulp.task('build-videojs', ['build-videojs-js', 'build-videojs-css', ]);
+gulp.task('build-videojs', ['build-videojs-js','build-pdfjs-js-map', 'build-videojs-css', ]);
 
 gulp.task('build-pdfjs-css', function() {
   return gulp.src([
