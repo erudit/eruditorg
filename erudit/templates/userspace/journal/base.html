@@ -1,0 +1,12 @@
+{% extends "userspace/base.html" %}
+{% load userspace_journal_tags %}
+
+{% block inner_nav %}
+<li class="select">
+  <select id="id_journal_chooser" onChange="window.location.href=this.value">
+    {% for j in scope_user_journals %}
+      <option value="{% journal_url j %}" {% if j.id == scope_current_journal.id %}selected{% endif %}>{{ j.name }}</option>
+    {% endfor %}
+  </select>
+</li>
+{% endblock inner_nav %}
