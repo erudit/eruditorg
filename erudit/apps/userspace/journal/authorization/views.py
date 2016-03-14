@@ -7,12 +7,30 @@ from django.views.generic import DeleteView
 from django.views.generic import ListView
 
 from core.authorization.models import Authorization
+from core.authorization.defaults import AuthorizationConfig
 
 from ..viewmixins import JournalScopeMixin
 
 from .forms import AuthorizationForm
 from .viewmixins import PermissionsCheckMixin
 from .viewmixins import PermissionsBreadcrumbsMixin
+
+
+class AuthorizationUserView(
+        JournalScopeMixin, PermissionsBreadcrumbsMixin, PermissionsCheckMixin, ListView):
+    model = Authorization
+    template_name = 'userspace/journal/authorization/authorization_user.html'
+
+    def get_authorizations_per_app(self):
+        data = {}
+        for choice in AuthorizationConfig.get_choices():
+            data[choice] = self.object_list.filter(authorization_codename=choice[0])
+        return data
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['authorizations'] = self.get_authorizations_per_app()
+        return data
 
 
 class AuthorizationListView(
@@ -31,6 +49,7 @@ class AuthorizationCreateView(
     def get_form_kwargs(self):
         kwargs = super(AuthorizationCreateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        kwargs['codename'] = self.request.GET.get('codename')
         return kwargs
 
     def get_success_url(self):
