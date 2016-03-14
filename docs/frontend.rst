@@ -1,5 +1,47 @@
+Développement front-end
+=======================
+
+Configuration de Gulp
+---------------------
+
+1. Installer le paquet NPM
+
+::
+
+    sudo npm install --save-dev
+
+
+2. Configurer l'environnement Gulp
+
+À partir du fichier fourni dans le dépôt
+
+::
+
+    cp ./tools/static/.env.json.sample ./tools/static/.env.json
+
+
+3. Démarrer Gulp
+
+::
+
+    ./node_modules/.bin/gulp --gulpfile ./tools/static/gulpfile.js watch
+
+
+4. Configurer le live reload
+
+Pour utiliser le *live reload* dans votre browser, utiliser l'extension chrome:
+
+https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei
+
+Au besoin, il faudra forwarder le port de la vm-dev:
+
+::
+
+    config.vm.network :forwarded_port, guest: 35729, host: 35729
+
+
 Développement front-end javascript
-==================================
+----------------------------------
 
 * On utilise du ``DOM-based Routing`` tel que décrit dans http://www.paulirish.com/2009/markup-based-unobtrusive-comprehensive-dom-ready-execution/
 
