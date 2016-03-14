@@ -45,6 +45,7 @@ var iconfont_dir = static_dir + 'iconfont';
  */
 
 let extractCSS = new ExtractTextPlugin('css/[name].css', { allChunks: true });
+let provideJQuery = new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery', });
 var webpackConfig = {
   output: {
     filename: 'js/[name].js',
@@ -63,8 +64,14 @@ var webpackConfig = {
       { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' },
     ],
   },
+  externals: {
+    // require("jquery") is external and available
+    //  on the global var jQuery
+    'jquery': 'jQuery'
+  },
   plugins: [
     extractCSS,
+    provideJQuery,
     ...(PROD_ENV ? [
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
