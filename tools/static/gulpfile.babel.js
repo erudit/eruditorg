@@ -212,15 +212,37 @@ gulp.task('webpack-dev-server', function(callback) {
   var devWebpackConfig = Object.create(webpackConfig);
   devWebpackConfig.devtool = 'eval';
   devWebpackConfig.debug = true;
+  devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
-    PublicApp: [js_dir + '/PublicApp.js', sass_dir + '/PublicApp.scss', ],
-    UserspaceApp: [js_dir + '/UserspaceApp.js', sass_dir + '/UserspaceApp.scss', ],
+    PublicApp: [
+      js_dir + '/PublicApp.js', sass_dir + '/PublicApp.scss',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+    ],
+    UserspaceApp: [
+      js_dir + '/UserspaceApp.js', sass_dir + '/UserspaceApp.scss',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+    ],
+  };
+  devWebpackConfig.module = {
+    loaders: [
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.scss$/i, loaders: ['style', 'css', 'sass', ] },
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.txt$/, loader: 'raw-loader' },
+      { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'url-loader?limit=10000' },
+      { test: /\.(eot|ttf|wav|mp3|otf)(\?v=[0-9]\.[0-9]\.[0-9])?(\?[0-9a-zA-Z]*)?$/, loader: 'file-loader' },
+    ],
   };
   devWebpackConfig.output = {
     path: path.resolve(__dirname, static_dir),
-    publicPath: 'static/',
+    publicPath: 'http://localhost:8080/static/',
     filename: 'js/[name].js'
   };
+  devWebpackConfig.plugins = [
+    new webpack.HotModuleReplacementPlugin(),
+  ];
 
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(devWebpackConfig), {
