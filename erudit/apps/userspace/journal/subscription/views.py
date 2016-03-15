@@ -14,19 +14,16 @@ from ..viewmixins import JournalScopeMixin
 from .forms import IndividualAccountFilter
 from .forms import IndividualAccountForm
 from .forms import IndividualAccountResetPwdForm
-from .viewmixins import IndividualAccountBreadcrumbsMixin
 from .viewmixins import OrganizationCheckMixin
 
 
-class IndividualAccountList(JournalScopeMixin, IndividualAccountBreadcrumbsMixin,
-                            OrganizationCheckMixin, FilterView):
+class IndividualAccountList(JournalScopeMixin, OrganizationCheckMixin, FilterView):
     filterset_class = IndividualAccountFilter
     paginate_by = 10
     template_name = 'userspace/journal/subscription/individualaccount_filter.html'
 
 
-class IndividualAccountCreate(JournalScopeMixin, IndividualAccountBreadcrumbsMixin,
-                              OrganizationCheckMixin, CreateView):
+class IndividualAccountCreate(JournalScopeMixin, OrganizationCheckMixin, CreateView):
     model = IndividualAccountProfile
     form_class = IndividualAccountForm
 
@@ -43,8 +40,7 @@ class IndividualAccountCreate(JournalScopeMixin, IndividualAccountBreadcrumbsMix
         return kwargs
 
 
-class IndividualAccountUpdate(JournalScopeMixin, IndividualAccountBreadcrumbsMixin,
-                              OrganizationCheckMixin, UpdateView):
+class IndividualAccountUpdate(JournalScopeMixin, OrganizationCheckMixin, UpdateView):
     model = IndividualAccountProfile
     form_class = IndividualAccountForm
     template_name = 'userspace/journal/subscription/individualaccount_update.html'
@@ -57,8 +53,7 @@ class IndividualAccountUpdate(JournalScopeMixin, IndividualAccountBreadcrumbsMix
                        args=(self.current_journal.pk, ))
 
 
-class IndividualAccountDelete(JournalScopeMixin, IndividualAccountBreadcrumbsMixin,
-                              OrganizationCheckMixin, DeleteView):
+class IndividualAccountDelete(JournalScopeMixin, OrganizationCheckMixin, DeleteView):
     model = IndividualAccountProfile
     template_name = 'userspace/journal/subscription/individualaccount_confirm_delete.html'
 
@@ -70,8 +65,7 @@ class IndividualAccountDelete(JournalScopeMixin, IndividualAccountBreadcrumbsMix
                        args=(self.current_journal.pk, ))
 
 
-class IndividualAccountResetPwd(JournalScopeMixin, IndividualAccountBreadcrumbsMixin,
-                                OrganizationCheckMixin, UpdateView):
+class IndividualAccountResetPwd(JournalScopeMixin, OrganizationCheckMixin, UpdateView):
     model = IndividualAccountProfile
     form_class = IndividualAccountResetPwdForm
     template_name = 'userspace/journal/subscription/individualaccount_reset_pwd.html'

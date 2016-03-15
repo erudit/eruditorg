@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'apps.public.journal',
     'apps.public.search',
     'apps.public.thesis',
-    'apps.userspace.dashboard',
+    'apps.userspace',
     'apps.userspace.journal',
     'apps.userspace.journal.authorization',
     'apps.userspace.journal.editor',

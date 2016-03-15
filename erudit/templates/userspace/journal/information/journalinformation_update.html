@@ -1,10 +1,17 @@
-{% extends "userspace/base.html" %}
+{% extends "userspace/journal/base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+
+{% block page-title %}{% trans "Informations de la revue" %}{% endblock page-title %}
 
 {% block extrahead %}
   {{ form.media.css }}
 {% endblock extrahead %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Informations de la revue" %}</li>
+{% endblock breadcrumb_end %}
 
 {% block content-main %}
   <div class="container-fluid">
