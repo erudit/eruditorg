@@ -1,6 +1,13 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n spurl %}
 
+{% block page-title %}{% trans "Autorisations" %}{% endblock page-title %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Autorisations" %}</li>
+{% endblock breadcrumb_end %}
+
 {% block content-main %}
 
 

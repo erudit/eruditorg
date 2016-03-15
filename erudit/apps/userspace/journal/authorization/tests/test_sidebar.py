@@ -12,27 +12,20 @@ from erudit.factories import JournalFactory
 class MenuTestCase(TestCase):
 
     def test_menu_subscription_presence(self):
+        journal = JournalFactory()
         policy = PolicyFactory()
         user = UserFactory(username="user")
         user.set_password("user")
         user.save()
+        journal.members.add(user)
+        journal.save()
         policy.managers.add(user)
         policy.save()
 
         url = reverse('userspace:journal:subscription:account_list')
         self.client.login(username="user", password="user")
-        response = self.client.get(reverse('userspace:dashboard'))
+        response = self.client.get(reverse('userspace:dashboard'), follow=True)
         self.assertContains(response, url)
-
-    def test_menu_subscription_absence(self):
-        user = UserFactory(username="user")
-        user.set_password("user")
-        user.save()
-
-        url = reverse('userspace:journal:editor:issues')
-        self.client.login(username="user", password="user")
-        response = self.client.get(reverse('userspace:dashboard'))
-        self.assertNotContains(response, url)
 
     def test_menu_issuesubmission_presence(self):
         journal = JournalFactory()
@@ -51,18 +44,8 @@ class MenuTestCase(TestCase):
 
         url = reverse('userspace:journal:editor:issues')
         self.client.login(username="user", password="user")
-        response = self.client.get(reverse('userspace:dashboard'))
+        response = self.client.get(reverse('userspace:dashboard'), follow=True)
         self.assertContains(response, url)
-
-    def test_menu_issuesubmission_absence(self):
-        user = UserFactory(username="user")
-        user.set_password("user")
-        user.save()
-
-        url = reverse('userspace:journal:editor:issues')
-        self.client.login(username="user", password="user")
-        response = self.client.get(reverse('userspace:dashboard'))
-        self.assertNotContains(response, url)
 
     def test_menu_permission_presence(self):
         journal = JournalFactory()
@@ -81,15 +64,14 @@ class MenuTestCase(TestCase):
 
         url = reverse('userspace:journal:authorization:list')
         self.client.login(username="user", password="user")
-        response = self.client.get(reverse('userspace:dashboard'))
+        response = self.client.get(reverse('userspace:dashboard'), follow=True)
         self.assertContains(response, url)
 
-    def test_menu_permission_absence(self):
+    def test_permission_denied(self):
         user = UserFactory(username="user")
         user.set_password("user")
         user.save()
 
-        url = reverse('userspace:journal:authorization:list')
         self.client.login(username="user", password="user")
-        response = self.client.get(reverse('userspace:dashboard'))
-        self.assertNotContains(response, url)
+        response = self.client.get(reverse('userspace:dashboard'), follow=True)
+        self.assertEqual(response.status_code, 403)

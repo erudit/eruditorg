@@ -1,4 +1,5 @@
 {% extends "userspace/base.html" %}
+
 {% load userspace_journal_tags %}
 
 {% block inner_nav %}
@@ -12,3 +13,9 @@
 </li>
 {% endif %}
 {% endblock inner_nav %}
+
+{% block nav %}
+<nav class="sidenav">
+{% include "userspace/journal/partials/menu.html" %}
+</nav>
+{% endblock nav %}

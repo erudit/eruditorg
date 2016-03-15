@@ -8,6 +8,7 @@ from . import views
 
 
 section_apps_urlpatterns = [
+    url(r'^$', views.HomeView.as_view(), name='home'),
     url(_(r'^autorisations/'),
         include('apps.userspace.journal.authorization.urls', namespace='authorization')),
     url(_(r'^editeur/'),

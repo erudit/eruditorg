@@ -3,6 +3,12 @@
 
 {% block page-title %}{{ question }}{% endblock %}
 
+{% block breadcrumb_end %}
+{{ block.super }}
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de numéros" %}</a></li>
+<li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
+{% endblock breadcrumb_end %}
+
 {% block content-main %}
 <div class="row">
   <div class="col-xs-12">

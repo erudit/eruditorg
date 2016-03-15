@@ -1,11 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext_lazy as _
-
 from rules.contrib.views import PermissionRequiredMixin
-from navutils import Breadcrumb
 
-from apps.userspace.viewmixins import (LoginRequiredMixin,
-                                       UserspaceBreadcrumbsMixin)
+from base.viewmixins import LoginRequiredMixin
 
 
 class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
@@ -16,13 +12,3 @@ class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         ids = [j.id for j in self.request.user.journals.all()]
         return qs.filter(content_type=ct, object_id__in=ids)
-
-
-class PermissionsBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
-
-    def get_breadcrumbs(self):
-        breadcrumbs = super(PermissionsBreadcrumbsMixin, self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(
-            _("Permissions"),
-            pattern_name='userspace:journal:authorization:list'))
-        return breadcrumbs

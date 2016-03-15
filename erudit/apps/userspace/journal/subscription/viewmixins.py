@@ -1,22 +1,7 @@
-from django.utils.translation import ugettext_lazy as _
-
 from rules.contrib.views import PermissionRequiredMixin
-from navutils import Breadcrumb
 
+from apps.userspace.viewmixins import LoginRequiredMixin
 from core.subscription.models import IndividualAccountProfile
-from apps.userspace.viewmixins import (LoginRequiredMixin,
-                                       UserspaceBreadcrumbsMixin)
-
-
-class IndividualAccountBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
-
-    def get_breadcrumbs(self):
-        breadcrumbs = super(IndividualAccountBreadcrumbsMixin,
-                            self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(
-            _("Abonnements individuels"),
-            pattern_name='userspace:journal:subscription:account_list'))
-        return breadcrumbs
 
 
 class OrganizationCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):

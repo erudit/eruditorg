@@ -1,6 +1,14 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n %}
 
+{% block page-title %}{% trans "Ajouter un accès" %}{% endblock page-title %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li><a href="{% url 'userspace:journal:authorization:list' %}">{% trans "Autorisations" %}</a></li>
+<li>{% trans "Ajouter un accès" %}</li>
+{% endblock breadcrumb_end %}
+
 {% block content-main %}
 
 <h1>{% trans "Ajouter un accès" %} </h1>
