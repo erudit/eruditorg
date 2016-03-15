@@ -7,7 +7,6 @@ class Figures {
   }
 
   init() {
-    console.log("Figures init");
     this.svg();
   }
 

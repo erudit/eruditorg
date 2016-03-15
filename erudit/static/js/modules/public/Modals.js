@@ -11,11 +11,7 @@ class Modals {
   init() {
     this.registerModals();
     this.triggerCloseElements();
-  }
-
-  foobar() {
-    console.log('Foobar called!');
-  }
+  }  
 
   /*
    * Register different type of modal windows
