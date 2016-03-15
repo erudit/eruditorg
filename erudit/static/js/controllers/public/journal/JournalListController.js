@@ -9,7 +9,7 @@ export default {
   		if( e ) {
   			e.preventDefault();
   			e.stopPropagation();
-  		};
+  		}
 
   		var target = $(this).attr('href').replace('#', '');
   		if( !target ) return false;
