@@ -1,27 +1,45 @@
+import '!!script!jquery.validation/dist/jquery.validate.min';
+import '!!script!jquery.validation/src/localization/messages_fr';
 import '!!script!magnific-popup/dist/jquery.magnific-popup.min';
 
-class Modals {
+// form ID
+export const formSelector = "form#id-login-form";
+
+export function LoginFormValidation() {
+  $(formSelector).validate({
+    rules : {
+      username: {
+        required: true
+      },
+      password: {
+        required: true
+      }
+    }
+  });
+}
+
+class LoginModal {
 
   constructor() {
     this.previousURL = null;
+    this.modalSelector = "#login-modal";
 
+    // auto init
     this.init();
   }
 
   init() {
-    this.registerModals();
-    this.triggerCloseElements();
-  }  
+    this.modal();
+    this.modalClose();
+  }
 
   /*
-   * Register different type of modal windows
+   * Register login modal
    */
-  registerModals() {
+  modal() {
+    var _ = this;
 
-    /*
-     * AJAX modal type
-     */
-    $('[data-open-modal-ajax]').magnificPopup({
+    $(this.modalSelector).magnificPopup({
       mainClass: 'mfp-fade',
       removalDelay: 750,
       type: 'ajax',
@@ -38,27 +56,28 @@ class Modals {
       callbacks: {
         // store current location
         beforeOpen: function() {
-          Modals.previousURL = window.location.pathname;
-          console.log(Modals.previousURL);
+          _.previousURL = window.location.pathname;
         },
         // on open, replaceState with current modal window XHR request url
         open: function() {
           history.replaceState(null, null, $(this.currItem.el).attr('href'));
         },
+        // when ajax content is added in DOM
+        ajaxContentAdded : function() {
+          LoginFormValidation();
+        },
         // replace state with previous url before modal was open
         close: function() {
-          history.replaceState(null, null, Modals.previousURL);
+          history.replaceState(null, null, _.previousURL);
         }
       }
     });
-
-
   }
 
   /*
-   * Close elements for any modal
-   */
-  triggerCloseElements() {
+  * Close elements for any modal
+  */
+  modalClose() {
     $(document).on('click', '[data-close-modal]', function(event) {
       event.preventDefault();
       /* Act on the event */
@@ -68,4 +87,4 @@ class Modals {
 
 }
 
-export default Modals;
+export default LoginModal;
