@@ -93,14 +93,15 @@ textarea,
 input[list],
 .form-control {
   width: 100%;
-  padding: $input-padding;
-  height: $font-size + 24;
+  padding: $padding-base-vertical $padding-base-horizontal;
   border-width: $border-width;
   border-style: solid;
   border-color: $gray-light;
   color: $gray-dark;
   background: $gray-lighter;
-  @include border-radius(0px);
+  vertical-align: middle;
+
+  @include placeholder($gray-dark);
 
   &:hover {
     border-color: $colour-primary;
@@ -152,72 +153,14 @@ input[list] {
   border-width: 1px 1px 1px 1px;
 }
 
+select,
+option {
+  height: $font-size + 24;
+}
+
 textarea {
   min-height: 100px;
 }
-
-/* buttons */
-// button,
-// input[type="button"],
-// input[type="submit"],
-// input[type="reset"],
-// input[type="image"],
-// .btn, .btn-default {
-//   cursor: pointer;
-//   padding: $font-size*0.5 $font-size*0.75;
-//   border: 1px solid $gray-dark;
-//   border-radius: 0px;
-//   color: $gray-dark;
-//   margin: 0.75em 0.75em 0 0;
-//   @include transition(all, 300ms, ease);
-//   &:last-child {
-//     margin-right: 0;
-//   }
-//   &:hover, &:active, &:focus, &:active:focus {
-//     color: $gray-light;
-//     background-color: $gray-dark*1.15;
-//     border: 1px solid $gray-dark*1.15;
-//   }
-// }
-//
-// /* primary call-to-actions and submit buttons */
-// button[type="submit"],
-// input[type="submit"],
-// .btn-primary {
-//   border: 1px solid $colour-primary;
-//   color: white;
-//   background-color: $colour-primary;
-//   letter-spacing: 1px;
-//   text-transform: uppercase;
-//   a {
-//     color: #FFF;
-//     &:hover, &:active, &:focus, &:active:focus {
-//       background-color: $colour-primary*0.75;
-//       color: white;
-//       border: none;
-//     }
-//   }
-//   &:hover, &:active, &:focus, &:active:focus {
-//     background-color: $colour-primary*0.75;
-//     border: 1px solid $colour-primary*0.75;
-//     color: white;
-//   }
-// }
-
-/* reset and cancel buttons */
-// button[type="reset"],
-// input[type="reset"] {
-//   border: none;
-//   text-decoration: underline;
-//   color: $gray-dark;
-//   background-color: #FFF;
-//   &:hover, &:active, &:focus, &:active:focus {
-//     color: $gray-dark;
-//     background: none;
-//     border: none;
-//     text-decoration: none;
-//   }
-// }
 
 /* disabled inputs and buttons */
 input[disabled],

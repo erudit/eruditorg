@@ -3,19 +3,22 @@
 // 1. Configuration and helpers
 @import
   'vars/userspace',
+  'utils/mixins',
+  'utils/utils',
+  'utils/responsive-utilities',
   'utils/functions',
   'utils/font-styles',
-  'utils/mixins';
+  'utils/erudicon';
 
 // 2. Vendors
-$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
 $ionicons-font-path: "~ionicons/fonts";
 @import "~ionicons/scss/ionicons";
-@import "vendor/normalize";
 
 // 3. Base stuff
 @import
+  'base/normalize',
+  'base/scaffolding',
+  'base/grid',
   'base/base',
   'base/fonts',
   'base/icons',
@@ -39,6 +42,7 @@ $ionicons-font-path: "~ionicons/fonts";
   'components/navtabs',
   'components/search',
   'components/forms',
+  'components/input-groups',
   'components/dropdowns',
   'components/alerts',
   'components/breadcrumbs',
@@ -48,7 +52,8 @@ $ionicons-font-path: "~ionicons/fonts";
   'components/forms',
   'components/buttons',
   'components/panels',
-  'components/tabs';
+  'components/tabs',
+  'components/pagination';
 
 // 6. Page-specific styles
 @import

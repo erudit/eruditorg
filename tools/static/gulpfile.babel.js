@@ -24,7 +24,7 @@ import webpackStream from 'webpack-stream';
 env('.env');
 
 /* Global variables */
-const root_dir = '../../'
+const root_dir = '../../';
 const static_dir = root_dir + 'erudit/static/';
 const templates_dirs = root_dir + 'erudit/templates/';
 const PROD_ENV = gutil.env.production;
@@ -71,7 +71,7 @@ var webpackConfig = {
       })
     ] : []),
   ],
-}
+};
 
 
 /*
@@ -145,7 +145,7 @@ gulp.task('build-videojs-js', function() {
       ])
     .pipe(concat('videojs.js'))
     .pipe(PROD_ENV ? uglify() : gutil.noop())
-    .pipe(gulp.dest(build_dir + '/js'))
+    .pipe(gulp.dest(build_dir + '/js'));
 });
 gulp.task('build-pdfjs-js-map', function() {
   return gulp.src(bower_dir + '/video.js/dist/video.min.js.map')
@@ -178,7 +178,7 @@ gulp.task('build-pdfjs-js', function() {
       ])
     .pipe(concat('pdf-viewer.js'))
     .pipe(PROD_ENV ? uglify() : gutil.noop())
-    .pipe(gulp.dest(build_dir + '/js'))
+    .pipe(gulp.dest(build_dir + '/js'));
 });
 gulp.task('build-pdfjs-locale', function() {
   return gulp.src(bower_dir + '/pdfjs-build/generic/web/locale/**/*')
