@@ -45,7 +45,6 @@ var iconfont_dir = static_dir + 'iconfont';
  */
 
 let extractCSS = new ExtractTextPlugin('css/[name].css', { allChunks: true });
-let provideJQuery = new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery', });
 var webpackConfig = {
   output: {
     filename: 'js/[name].js',
@@ -71,7 +70,6 @@ var webpackConfig = {
   },
   plugins: [
     extractCSS,
-    provideJQuery,
     ...(PROD_ENV ? [
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
