@@ -2,6 +2,7 @@
 {% load userspace_journal_tags %}
 
 {% block inner_nav %}
+{% if scope_user_journals|length > 1 %}
 <li class="select">
   <select id="id_journal_chooser" onChange="window.location.href=this.value">
     {% for j in scope_user_journals %}
@@ -9,4 +10,5 @@
     {% endfor %}
   </select>
 </li>
+{% endif %}
 {% endblock inner_nav %}
