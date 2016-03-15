@@ -5,12 +5,14 @@
 
 {% block zone-title %}{% trans 'Espace éditeurs' %}{% endblock %}
 
+{% block data-controller %}public:login{% endblock data-controller %}
+
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'login' %}">{% trans "Connexion" %}</a>
 {% endblock %}
 
 {% block content %}
-<section id="login-page" data-controller="userspace:login">
+<section id="login-page">
 
   <div class="container-fluid">
 
@@ -32,7 +34,7 @@
 
           <div class="panel-body">
 
-            <form id="id-login-form" method="post">
+            <form action="{% url 'login' %}" id="id-login-form" method="post">
 
               {% csrf_token %}
 

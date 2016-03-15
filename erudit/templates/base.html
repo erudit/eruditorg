@@ -27,6 +27,10 @@
     {% block stylesheets %}
     {% endblock stylesheets %}
 
+    <script>
+      var LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
+    </script>
+
     <script src="{% static 'js/modernizr.js' %}"></script>
 
     {% block extrahead %}

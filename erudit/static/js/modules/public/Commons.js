@@ -1,5 +1,3 @@
-
-
 class Commons {
 
   constructor() {
@@ -8,7 +6,6 @@ class Commons {
 
   init() {
     this.scrollToTop();
-    this.xhr();
   }
 
   /*
@@ -26,16 +23,6 @@ class Commons {
      return false;
    });
  }
-
- /*
-  * after any XHR call
-  */
-  xhr() {
-    $(document).ajaxComplete(function() {
-      console.log("ajax call");
-      // ROUTER.findControllers();
-    });
-  }
 
 }
 

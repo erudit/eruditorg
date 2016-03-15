@@ -1,11 +1,11 @@
 import Commons from './Commons';
-import Modals from './Modals';
 import Figures from './Figures';
+import LoginModal from './Login';
 
 const modules = {
   'Commons': new Commons(),
-  'Modals': new Modals(),
-  'Figures': new Figures()
+  'Figures': new Figures(),
+  'LoginModal': new LoginModal()
 };
 
 export default modules;
