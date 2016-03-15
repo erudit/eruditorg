@@ -38,6 +38,6 @@
   },
   "scripts": {
     "gulp": "cd tools/static && gulp",
-    "hello": "echo Hello, scripts!"
+    "bower": "bower install"
   }
 }

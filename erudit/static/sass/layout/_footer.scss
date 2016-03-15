@@ -55,6 +55,13 @@ footer#site-footer {
     padding-bottom: $margin-vertical-default;
     color: #fff;
 
+    svg {
+      width: 100px;
+      path, circle {
+        fill: #fff;
+      }
+    }
+
     p {
       margin-bottom: 0;
     }

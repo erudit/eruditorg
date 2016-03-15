@@ -271,7 +271,7 @@ gulp.task('watch', function() {
   livereload.listen({ host: eval( process.env.LIVE_RELOAD_IP ) });
 
   // watch any less file /css directory, ** is for recursive mode
-  gulp.watch(sass_dir + '/**/*.scss', ['build-webpack-assets', 'build-pdfjs-css', 'build-modernizr']);
+  gulp.watch(sass_dir + '/**/*.scss', ['build-modernizr', 'build-pdfjs-css', 'build-webpack-assets', ]);
   // watch any js file /js directory, ** is for recursive mode
   gulp.watch(js_dir + '/**/*.js', ['build-webpack-assets', ]);
   // watch any svg file /iconfont directory, ** is for recursive mode
