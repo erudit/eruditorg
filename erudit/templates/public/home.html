@@ -28,11 +28,7 @@
                 <a href="{% url 'login' %}" class="main-section" id="login-modal">{% trans "Connexion" %}</a>
               </li>
               <li class="dropdown text-right">
-                <a href="#" class="select">{% trans "Français" %} <i class="ion-ios-arrow-down"></i></a>
-                <ul>
-                  <li><a href="#">{% trans "Français" %}</a></li>
-                  <li><a href="#">{% trans "English" %}</a></li>
-                </ul>
+                {% include "partials/language-switch-nav.html" %}
               </li>
             </ul>
           </nav>
@@ -79,7 +75,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <a href="{% url 'public:search:search' %}" class="color-red">{% trans "Recherche détaillée" %}</a>
+            <a href="{% url 'public:search:search' %}" class="color-red">{% trans "Recherche avancée" %}</a>
           </div>
         </form>
       </div>

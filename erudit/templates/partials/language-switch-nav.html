@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<a href="#" class="select">{{ LANGUAGE_CODE|language_name_local|title }} <i class="ion-ios-arrow-down caret"></i></a>
+<ul>
+  {% for language in LANGUAGES %}
+  {% get_language_info for language.0 as lang %}
+  <li><a href="/{{ language.0 }}/" {% if language.0 != LANGUAGE_CODE %}class="active"{% endif %}>{{ lang.name_local|title }}</a></li>
+  {% endfor %}
+</ul>

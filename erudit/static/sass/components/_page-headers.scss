@@ -30,4 +30,17 @@
     }
   }
 
+  // add border at top or bottom of the heading
+  &.border-top {
+    @include grid-cell-border($direction: 'top');
+  }
+
+  &.border-bottom {
+    @include grid-cell-border($direction: 'bottom');
+    margin-bottom: $margin-vertical-default/2;
+    hgroup {
+      padding-bottom: $margin-vertical-default/2;
+    }
+  }
+
 }

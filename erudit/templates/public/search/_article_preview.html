@@ -1,18 +1,33 @@
 {% load i18n %}
+{% load search_tags %}
 
-<h3>{{ article.erudit_object.title }}</h3>
-{% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
+<article class="search-result-item">
 
-{% if article.erudit_object.authors %}
-<ul>
-    {% for author in article.erudit_object.authors %}
-    <li>{{ author.firstname }} {{ author.lastname }} ({{author.affiliations|join:","}})</li>
-    {% endfor %}
-</ul>
-{% endif %}
+  <header>
 
-{% if article.year %}
-<p>{{ article.year }}</p>
-{% endif %}
+    {% if search_elements and search_elements.0.search_operator != 'NOT' %}
+      <h3>{{ article.erudit_object.title|highlight:search_elements.0.search_term }}</h3>
+      {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle|highlight:search_elements.0.search_term }}</h4>{% endif %}
+    {% else %}
+      <h3>{{ article.erudit_object.title }}</h3>
+      {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
+    {% endif %}
 
-<p><a href="{{ article.get_absolute_url }}">{% trans "Consulter le document" %}</a></p>
+  </header>
+
+
+  {% if article.erudit_object.authors %}
+  <ul>
+      {% for author in article.erudit_object.authors %}
+      <li>{{ author.firstname }} {{ author.lastname }} ({{author.affiliations|join:","}})</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if article.year %}
+  <p>{{ article.year }}</p>
+  {% endif %}
+
+  <p><a href="{{ article.get_absolute_url }}">{% trans "Consulter le document" %}</a></p>
+
+</article>

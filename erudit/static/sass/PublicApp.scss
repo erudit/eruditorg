@@ -53,12 +53,14 @@ $ionicons-font-path: "~ionicons/fonts";
   'components/lists',
   'components/panels',
   'components/buttons',
-  'components/page-headers';
+  'components/page-headers',
+  'components/pagination';
 
 // 6. Page-specific styles
 @import
   'pages/homepage',
   'pages/login',
+  'pages/search',
   'pages/individual_subscription',
   'pages/journal-list',
   'pages/journals',

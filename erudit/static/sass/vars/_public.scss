@@ -14,6 +14,7 @@ $dark-grey: #707070;
 $mid-grey: #cccccc;
 $light-grey: #f7f7f7;
 $white: #ffffff;
+$yellow: #ffea5d;
 
 // from bootstrap
 $brand-primary:         $coral-red;//darken(#428bca, 6.5%) !default; // #337ab7
@@ -559,7 +560,7 @@ $state-info-bg:                  #d9edf7 !default;
 $state-info-border:              darken(adjust-hue($state-info-bg, -10), 7%) !default;
 
 $state-warning-text:             #8a6d3b !default;
-$state-warning-bg:               #fcf8e3 !default;
+$state-warning-bg:               $yellow !default;
 $state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%) !default;
 
 $state-danger-text:              #a94442 !default;

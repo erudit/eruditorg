@@ -10,36 +10,81 @@
 Query URL: {{ query_url|safe }}
 -->
 
-<div class="container">
-<div class="search-form">
-    <form  action="{% url 'public:search:search' %}" id="id-search" class="search" method="get" >
-    {% crispy form %}
+<section id="search-page" class="container">
 
-    {% search_filters %}
+  <div class="row">
 
-    <div class="form-group">
-        <div class="controls ">
-            <button type="submit" class="btn btn-lg">{% trans "Recherche" %}<span class="ion ion-ios-search"></span></button>
+    <header class="page-header-main search-header col-xs-12 border-bottom">
+      <hgroup>
+        <h2>{% trans "Résultats de recherche" %}</h2>
+        {% if documents %}
+        <h3><strong>{{ results_count }}</strong> {% trans "résultats trouvé pour la requête :" %}</h3>
+        <h4 class="mono-space search-terms">
+          {% for search_element in search_elements %}
+          {# {{ search_element }}#}
+          <span class="search-operator">{{ search_element.search_operator }}</span> ({{ search_element.search_field }} : {{ search_element.search_term }})
+          {% endfor %}
+        </h4>
+
+        {% else %}
+        <h3>{% trans "Aucun document trouvé" %}</h3>
+        {% endif %}
+
+      </hgroup>
+    </header>
+
+  </div>
+
+  <div class="row">
+
+    {# search form side #}
+    <aside class="col-sm-3">
+
+      <form action="{% url 'public:search:search' %}" id="id-search" method="get" >
+
+        {% crispy form %}
+
+        {% search_filters %}
+
+        <div class="form-group">
+            <div class="controls ">
+                <button type="submit" class="btn btn-lg">{% trans "Recherche" %}<span class="ion ion-ios-search"></span></button>
+            </div>
         </div>
-    </div>
-    </form>
-</div>
+      </form>
 
-{% if documents %}
-<div class="search-results">
-    <h2>{% trans "Résultats" %}</h2>
-    <p>{{ results_count }} {% trans "résultats trouvé" %}</p>
-    <p>{% trans "Page" %} {{ current_page }} {% trans "de" %} {{ page_count }}</p>
-    <ul>
-        {% for document in documents %}
-        <li>
-            {% if document.article %}{% include "public/search/_article_preview.html" with article=document.article %}{% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+    </aside>
 
-{% search_result_pagination %}
-{% endif %}
+    {# search results #}
+    <main class="col-sm-7 col-sm-push-2">
+
+      {{ search_elements.search_term }}
+
+      {% if documents %}
+
+        <ol>
+          {% for document in documents %}
+          <li>
+              {% if document.article %}{% include "public/search/_article_preview.html" with article=document.article %}{% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+
+        <p>{% trans "Page" %} {{ current_page }} {% trans "de" %} {{ page_count }}</p>
+        {% search_result_pagination %}
+
+      {% else %}
+
+        <h3>{% trans "Aucun document trouvé." %}</h3>
+
+      {% endif %}
+
+    </main>
+
+
+
+  </div>
+
+</section>
+
 {% endblock content %}
-</div>

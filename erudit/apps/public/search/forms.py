@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.core import urlresolvers
 
-from crispy_forms.layout import Layout, Field, Fieldset, Div
+from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML
 from crispy_forms.helper import FormHelper
 
 SORT_CHOICES = (
@@ -71,7 +71,7 @@ PUB_TYPES_CHOICES = (
 )
 
 
-def get_years_range(year_start=1900, year_end=(date.today().year+1), reverse=False,
+def get_years_range(year_start=1900, year_end=(date.today().year + 1), reverse=False,
                     add_empty_choice=False, empty_string=""):
     if not reverse:
         years_range = [(str(year), str(year)) for year in range(year_start, year_end)]
@@ -102,8 +102,9 @@ class SearchFormHelper(FormHelper):
                 Fieldset(
                     "",
                     Div(
-                        Field('basic_search_operator', tabIndex=1),
-                        Field('basic_search_term', tabIndex=2),
+                        Field('basic_search_term', tabIndex=1),
+                        HTML('<button type="submit"><i class="ion ion-ios-search"></i></button>'),
+                        Field('basic_search_operator', tabIndex=2),
                         Field('basic_search_field', tabIndex=3),
                     ),
                 ),
