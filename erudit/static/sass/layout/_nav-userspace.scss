@@ -9,6 +9,15 @@ nav#main-nav {
   font-size: 18px;
   margin: 0;
 
+  li.select{
+    margin-right: 30px;
+    margin-bottom: 0;
+
+    .select2-selection{
+      height: 30px;
+    }
+  }
+
   .dropdown {
     width: 200px;
     margin: 0;
