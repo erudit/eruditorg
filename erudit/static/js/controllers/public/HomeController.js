@@ -1,3 +1,5 @@
+import '!!script!sticky-kit/jquery.sticky-kit.min';
+
 export default {
 
   init: function() {

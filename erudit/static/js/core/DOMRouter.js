@@ -9,10 +9,10 @@ class DOMRouter {
    * @param {string} action - The name of the action to execute.
    */
   execAction(controller, action) {
-      if (controller !== '' && this.controllers[controller] && typeof this.controllers[controller][action] == 'function') {
-        this.controllers[controller][action]();
-      }
+    if (controller !== '' && this.controllers[controller] && typeof this.controllers[controller][action] == 'function') {
+      this.controllers[controller][action]();
     }
+  }
 
   /*
    * Initializes the router object.
