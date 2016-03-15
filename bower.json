@@ -26,7 +26,7 @@
     "sticky-kit": "latest",
     "modernizr": "latest",
     "bootstrap-sass": "latest",
-    "select2": "latest",
+    "select2": "^4.0.2",
     "jquery.validation": "latest",
     "jquery.maskedinput": "latest",
     "animate.css": "latest",
