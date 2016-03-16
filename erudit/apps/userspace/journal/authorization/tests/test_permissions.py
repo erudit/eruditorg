@@ -103,12 +103,12 @@ class ViewsTestCase(TestCase):
                       args=(journal.pk, authorization.pk, ))
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
         journal.members.add(self.user_non_granted)
         journal.save()
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.get(url, follow=True)
+        self.assertEqual(response.status_code, 200)
 
     def test_permission_delete_granted(self):
         journal = JournalFactory()
