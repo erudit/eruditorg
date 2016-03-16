@@ -1,4 +1,23 @@
 //
+// Search page pagination
+// --------------------------------------------------
+
+.search-pagination {
+  // border: 1px solid red;
+  text-align: center;
+  a {
+    font-size: 18px;
+    margin: 0 7px;
+    display: inline-block;
+  }
+  .page-position {
+    display: inline-block;
+    font-size: 14px;
+    @include fw-sans-bold;
+  }
+}
+
+//
 // Pagination (multiple pages)
 // --------------------------------------------------
 .pagination {

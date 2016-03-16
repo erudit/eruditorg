@@ -184,9 +184,6 @@ section#article-detail {
   /**
   * article table of contents
   */
-  /**
-  * article table of contents
-  */
   .article-table-of-contents {
     padding-top: $margin-vertical-default;
     position: relative;
@@ -220,154 +217,6 @@ section#article-detail {
         }
       }
 
-    }
-
-  }
-
-
-  /**
-  * article toolbox
-  */
-  .article-tools {
-    position: relative;
-    padding-top: $margin-vertical-default;
-    margin-right: $grid-gutter-width / 2;
-    width: 50px;
-    z-index: 10;
-    will-change: transform;
-    @include transition(transform 0.3s ease-out);
-
-    ul, li {
-      width: 100%;
-    }
-    li {
-      position: relative;
-      height: 50px;
-      margin: 0 0 1px 0;
-      padding: 0;
-      display: block;
-
-      button {
-        position: relative;
-        display: block;
-        margin: 0;
-        min-width: 50px;
-        height: 100%;
-        background: $brand-primary;
-        border: none;
-        color: #fff;
-        font-size: 0.8em;
-        white-space: nowrap;
-        float: right;
-        @include transition(none);
-
-        .tools-label {
-          display: none;
-          padding: 4px 6px 0 40px;
-          @include fw-sans-medium();
-        }
-
-        .erudicon {
-          position: absolute;
-          font-size: 14px;
-        }
-
-        .erudicon-tools-pdf { font-size: 8px; top: 21px; left: 15px; }
-        .erudicon-tools-quote { font-size: 10px; top: 20px; left: 19px;  }
-        .erudicon-tools-save { font-size: 18px; top: 17px; left: 20px; }
-        .erudicon-tools-more { font-size: 4px; top: 24px; left: 18px; }
-        .erudicon-tools-share { top: 18px; left: 18px; }
-        .erudicon-tools-print { top: 18px; left: 19px; }
-        .erudicon-tools-fullscreen { top: 17px; left: 19px; }
-      }
-
-      html.pointerevents &, html.touchevents & {
-        button.more {
-          display: none;
-        }
-      }
-
-      html.no-pointerevents.no-touchevents & {
-        ul {
-          position: absolute;
-          top: 0;
-          right: 51px;
-          display: none;
-          width: auto;
-
-          button {
-            float: none;
-            width: 100%;
-
-            .tools-label {
-              display: block;
-              padding-right: 50px;
-            }
-          }
-        }
-      }
-
-      html.no-pointerevents.no-touchevents &:hover,
-      &:active {
-        & > button {
-          background: $dark-grey;
-
-          .tools-label {
-            display: block;
-          }
-        }
-
-        ul {
-          display: block !important;
-        }
-      }
-    }
-
-  }
-
-
-  /**
-  * Article body
-  */
-  .article-body {
-    padding-top: $margin-vertical-default;
-    // padding-right: $article-toolbar-width * 2;
-
-    // first level headings
-    h4 {
-      margin-bottom: $margin-vertical-default/2;
-      font-size: $font-size-h2;
-      @include fw-sans-medium();
-    }
-
-    h4.sub-section-title {
-      margin-top: $margin-vertical-default;
-      font-size: $font-size-h4;
-    }
-
-    // P
-    p {
-      @include paragraph-text-style();
-    }
-
-    blockquote, cite {
-      border-left: 1px solid $gray-lighter;
-      margin-top: $margin-vertical-default;
-      margin-bottom: $margin-vertical-default;
-      padding-left: $grid-gutter-width * 2;
-      padding-right: $grid-gutter-width * 2;
-
-      h1, h2, h3, h4, h5, p {
-        @include fw-serif-normal-italic();
-      }
-
-      .source {
-        @include fw-serif-bold();
-        font-size: 14px;
-        em, i {
-          @include fw-serif-bold-italic();
-        }
-      }
     }
 
   }
@@ -493,6 +342,128 @@ section#article-detail {
     }
 
   }
+}
 
+
+/**
+* article toolbox on side
+*/
+.article-tools {
+  position: relative;
+  padding-top: $margin-vertical-default;
+  margin-right: $grid-gutter-width / 2;
+  width: 50px;
+  z-index: 10;
+  will-change: transform;
+  @include transition(transform 0.3s ease-out);
+
+  ul, li {
+    width: 100%;
+  }
+
+  li {
+    position: relative;
+    height: 50px;
+    margin: 0 0 1px 0 !important;
+    padding: 0;
+    display: block;
+
+    button {
+      position: relative;
+      display: block;
+      margin: 0;
+      min-width: 50px;
+      height: 100%;
+      background: $colour-accent;
+      border: none;
+      color: #fff;
+      font-size: 0.8em;
+      white-space: nowrap;
+      float: right;
+      @include transition(none);
+
+      .tools-label {
+        display: none;
+        padding: 4px 6px 0 40px;
+        @include fw-sans-medium();
+      }
+
+      .erudicon {
+        position: absolute;
+        font-size: 14px;
+        left: 50%;
+        top: 50%;
+        @include translate(-50%,-35%);
+      }
+
+      .erudicon-tools-pdf { font-size: 8px; }
+      .erudicon-tools-quote { font-size: 10px; }
+      .erudicon-tools-save { font-size: 18px; }
+      .erudicon-tools-more { font-size: 4px;  }
+      .erudicon-tools-share {  }
+      .erudicon-tools-print {  }
+      .erudicon-tools-fullscreen {  }
+    }
+
+    html.pointerevents &, html.touchevents & {
+      button.more {
+        display: none;
+      }
+    }
+
+    html.no-pointerevents.no-touchevents & {
+      ul {
+        position: absolute;
+        top: 0;
+        right: 51px;
+        display: none;
+        width: auto;
+
+        button {
+          float: none;
+          width: 100%;
+
+          .tools-label {
+            display: block;
+            padding-right: 50px;
+          }
+        }
+      }
+    }
+
+    html.no-pointerevents.no-touchevents &:hover,
+    &:active {
+      & > button {
+        background: $dark-grey;
+
+        .tools-label {
+          display: block;
+        }
+      }
+
+      ul {
+        display: block !important;
+      }
+    }
+  }
+
+  /**
+  * compact mode
+  */
+  &.compact {
+
+    li {
+      height: 30px;
+      button {
+        min-width: 30px;
+        .erudicon {
+          font-size: 10px;
+        }
+        .erudicon-tools-pdf { font-size: 6px; }
+        .erudicon-tools-quote { font-size: 8px; }
+        .erudicon-tools-save { font-size: 12px; }
+      }
+    }
+  }
 
 }

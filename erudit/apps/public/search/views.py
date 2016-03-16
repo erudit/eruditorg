@@ -194,6 +194,7 @@ class Search(FormView):
         context[self.context_object_name] = self.object_list
         context["results_count"] = self.results_count
         context["page_count"] = self.page_count
+        context["start_at"] = self.start_at
         context["current_page"] = self.page
         context["search_elements"] = self.search_elements
         context["filter_choices"] = self.filter_choices

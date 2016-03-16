@@ -99,78 +99,103 @@ class SearchFormHelper(FormHelper):
 
         self.layout = Layout(
             Div(
+                HTML("<header><h3>%s</h3></header>" % _("Filtres")),
                 Fieldset(
                     "",
                     Div(
-                        Field('basic_search_term', tabIndex=1),
-                        HTML('<button type="submit"><i class="ion ion-ios-search"></i></button>'),
+                        Div(
+                            Field('basic_search_term', tabIndex=1),
+                            HTML(
+                                '<button type="submit"><i class="ion ion-ios-search"></i></button>'
+                            ),
+                            css_class="basic-search-field",
+                        ),
                         Field('basic_search_operator', tabIndex=2),
                         Field('basic_search_field', tabIndex=3),
                     ),
                 ),
                 Fieldset(
                     _("Recherche avancée"),
+                    HTML(
+                        "<a href='#' class='btn btn-default btn-sm'> \
+                            %s <i class='ion-ios-arrow-down caret'></i> \
+                        </a>"
+                        % _("Options de recherche avancées")),
                     Div(
-                        Field('advanced_search_operator1'),
-                        Field('advanced_search_term1'),
-                        Field('advanced_search_field1'),
+                        Div(
+                            Field('advanced_search_operator1'),
+                            Field('advanced_search_term1'),
+                            Field('advanced_search_field1'),
+                            css_class="search-operator show",
+                        ),
+                        Div(
+                            Field('advanced_search_operator2'),
+                            Field('advanced_search_term2'),
+                            Field('advanced_search_field2'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator3'),
+                            Field('advanced_search_term3'),
+                            Field('advanced_search_field3'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator4'),
+                            Field('advanced_search_term4'),
+                            Field('advanced_search_field4'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator5'),
+                            Field('advanced_search_term5'),
+                            Field('advanced_search_field5'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator6'),
+                            Field('advanced_search_term6'),
+                            Field('advanced_search_field6'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator7'),
+                            Field('advanced_search_term7'),
+                            Field('advanced_search_field7'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator8'),
+                            Field('advanced_search_term8'),
+                            Field('advanced_search_field8'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator9'),
+                            Field('advanced_search_term9'),
+                            Field('advanced_search_field9'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator10'),
+                            Field('advanced_search_term10'),
+                            Field('advanced_search_field10'),
+                            css_class="search-operator hide",
+                        ),
+                        Div(
+                            Field('pub_year_start'),
+                            Field('pub_year_end'),
+                            Field('available_since'),
+                        ),
+                        Div(
+                            Field('funds_limit'),
+                        ),
+                        Div(
+                            Field('pub_types'),
+                        ),
+                        css_class="advanced-search-fields",
                     ),
-                    Div(
-                        Field('advanced_search_operator2'),
-                        Field('advanced_search_term2'),
-                        Field('advanced_search_field2'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator3'),
-                        Field('advanced_search_term3'),
-                        Field('advanced_search_field3'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator4'),
-                        Field('advanced_search_term4'),
-                        Field('advanced_search_field4'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator5'),
-                        Field('advanced_search_term5'),
-                        Field('advanced_search_field5'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator6'),
-                        Field('advanced_search_term6'),
-                        Field('advanced_search_field6'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator7'),
-                        Field('advanced_search_term7'),
-                        Field('advanced_search_field7'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator8'),
-                        Field('advanced_search_term8'),
-                        Field('advanced_search_field8'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator9'),
-                        Field('advanced_search_term9'),
-                        Field('advanced_search_field9'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator10'),
-                        Field('advanced_search_term10'),
-                        Field('advanced_search_field10'),
-                    ),
-                    Div(
-                        Field('pub_year_start'),
-                        Field('pub_year_end'),
-                        Field('available_since'),
-                    ),
-                    Div(
-                        Field('funds_limit'),
-                    ),
-                    Div(
-                        Field('pub_types'),
-                    ),
+                    css_class="advanced-search",
                 ),
                 Fieldset(
                     "",
@@ -189,13 +214,13 @@ class SearchForm(forms.Form):
     )
 
     basic_search_operator = forms.ChoiceField(
-        label="", widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
+        label=_("Inclure?"), widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
     )
     basic_search_term = forms.CharField(
         label=_("Recherche"), widget=forms.TextInput, required=False,
     )
     basic_search_field = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+        label=_("Champs"), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
     )
 
     advanced_search_operator1 = forms.ChoiceField(

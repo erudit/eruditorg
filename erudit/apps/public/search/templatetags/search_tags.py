@@ -30,7 +30,31 @@ def search_result_pagination(context, ):
 
         pages_urls.append({"page": (page_number + 1), "url": page_url})
 
-    return {"pages_urls": pages_urls, "current_page": current_page, "page_count": page_count}
+    # next page
+    if current_page > 1:
+        prev_page = pages_urls[(current_page - 1) - 1]
+    else:
+        prev_page = None
+
+    # next page
+    if current_page < page_count:
+        next_page = pages_urls[(current_page - 1) + 1]
+    else:
+        next_page = None
+
+    # first and last
+    first_page = pages_urls[0]
+    last_page = pages_urls[page_count - 1]
+
+    return {
+        "pages_urls": pages_urls,
+        "current_page": current_page,
+        "prev_page": prev_page,
+        "next_page": next_page,
+        "first_page": first_page,
+        "last_page": last_page,
+        "page_count": page_count
+    }
 
 
 @register.inclusion_tag("public/search/_search_filters.html", takes_context=True)

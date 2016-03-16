@@ -3,7 +3,7 @@
 
 {% if filter_choices %}
 <fieldset>
-    <legend>{% trans "Filtrer les résultats" %}</legend>
+    {# <legend>{% trans "Filtrer les résultats" %}</legend>#}
     <div>
         {% with filter_choices|get_item:"years" as years_filter %}
         {% include "public/search/_checkboxes_filter.html" with title="Années" filter=years_filter %}

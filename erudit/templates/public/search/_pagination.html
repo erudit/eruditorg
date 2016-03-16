@@ -1,9 +1,23 @@
+{% load i18n %}
+
 {# Search result pagination #}
 <nav>
-  {# <h3>PAGINATION</h3>#}
-  <ul class="pagination">
-    {% for page_url in pages_urls %}
-    <li class="{% if page_url.page == current_page %}active{% endif %}"><a href="{{ page_url.url }}">{{ page_url.page }}</a></li>
-    {% endfor %}
+  <ul class="search-pagination">
+    {% if current_page > 1 %}
+    <a href="{{ first_page.url }}"> <i class="ion-ios-arrow-backward"></i> </a>
+    {% endif %}
+    {% if prev_page %}
+    <a href="{{ prev_page.url }}"> <i class="ion-ios-arrow-left"></i> </a>
+    {% endif %}
+    <span class="page-position">{% trans "Page" %} {{ current_page }} {% trans "de" %} {{ page_count }}</span>
+    {% if next_page %}
+    <a href="{{ next_page.url }}"> <i class="ion-ios-arrow-right"></i> </a>
+    {% endif %}
+    {% if current_page < page_count %}
+    <a href="{{ last_page.url }}"> <i class="ion-ios-arrow-forward"></i> </a>
+    {% endif %}    
+    {# {% for page_url in pages_urls %}#}
+    {# <li class="{% if page_url.page == current_page %}active{% endif %}"><a href="{{ page_url.url }}">{{ page_url.page }}</a></li>#}
+    {# {% endfor %}#}
   </ul>
 </nav>

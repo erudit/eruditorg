@@ -1,33 +1,59 @@
 {% load i18n %}
 {% load search_tags %}
 
+{% trans "inconnu" as i18n_unknown %}
+
 <article class="search-result-item">
 
   <header>
 
+    <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+
+    {# authors #}
+    {% if article.erudit_object.authors %}
+    <h4 class="authors h5">
+      {% for author in article.erudit_object.authors %}
+      <span class="author">{{ author.firstname }} {{ author.lastname }}</span>{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </h4>
+    {% endif %}
+
     {% if search_elements and search_elements.0.search_operator != 'NOT' %}
-      <h3>{{ article.erudit_object.title|highlight:search_elements.0.search_term }}</h3>
+      <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.title|highlight:search_elements.0.search_term }}</a></h3>
       {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle|highlight:search_elements.0.search_term }}</h4>{% endif %}
     {% else %}
-      <h3>{{ article.erudit_object.title }}</h3>
+      <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.title }}</a></h3>
       {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
     {% endif %}
 
   </header>
 
+  <footer class="meta">
+    <h5>{{ article.issue.title }}</h5>
+    {% blocktrans trimmed with number=article.issue.erudit_object.number|default:i18n_unknown date=article.issue.date_published|date:"F Y" %}
+    <h5>Numéro {{ number }} - {{ date }} - Pages XX à XX</h5>
+    {% endblocktrans %}
+  </footer>
 
-  {% if article.erudit_object.authors %}
-  <ul>
-      {% for author in article.erudit_object.authors %}
-      <li>{{ author.firstname }} {{ author.lastname }} ({{author.affiliations|join:","}})</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
+  <nav class="article-tools compact">
+    <ul class="unstyled">
+      <li>
+        <button><span class="erudicon erudicon-tools-pdf"></span><span class="tools-label">Télécharger</span></button>
+      </li>
+      <li>
+        <button><span class="erudicon erudicon-tools-quote"></span><span class="tools-label">Citer cette article</span></button>
+      </li>
+      <li>
+        <button><span class="erudicon erudicon-tools-save"></span><span class="tools-label">Sauvegarder</span></button>
+      </li>
+    </ul>
+  </nav>
 
-  {% if article.year %}
-  <p>{{ article.year }}</p>
-  {% endif %}
 
-  <p><a href="{{ article.get_absolute_url }}">{% trans "Consulter le document" %}</a></p>
+  {# {% if article.year %}#}
+  {# <p>{{ article.year }}</p>#}
+  {# {% endif %}#}
+
+  {# <p><a href="{{ article.get_absolute_url }}">{% trans "Consulter le document" %}</a></p>#}
 
 </article>
