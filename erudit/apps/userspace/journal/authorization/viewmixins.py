@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.contenttypes.models import ContentType
 from rules.contrib.views import PermissionRequiredMixin
 
@@ -10,5 +12,7 @@ class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
     def get_queryset(self):
         qs = super(PermissionsCheckMixin, self).get_queryset()
         ct = ContentType.objects.get(app_label="erudit", model="journal")
-        ids = [j.id for j in self.request.user.journals.all()]
-        return qs.filter(content_type=ct, object_id__in=ids)
+        return qs.filter(content_type=ct, object_id=self.current_journal.pk)
+
+    def get_permission_object(self):
+        return self.current_journal

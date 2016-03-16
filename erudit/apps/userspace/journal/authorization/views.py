@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
@@ -19,7 +20,13 @@ from .viewmixins import PermissionsCheckMixin
 class AuthorizationUserView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, ListView):
     menu_journal = 'authorization'
     model = Authorization
+    permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_user.html'
+
+    def get_queryset(self):
+        qs = super(PermissionsCheckMixin, self).get_queryset()
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        return qs.filter(content_type=ct, object_id=self.current_journal.pk)
 
     def get_authorizations_per_app(self):
         data = {}
@@ -37,6 +44,7 @@ class AuthorizationCreateView(JournalScopeMixin, MenuItemMixin, PermissionsCheck
     menu_journal = 'authorization'
     model = Authorization
     form_class = AuthorizationForm
+    permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_create.html'
     title = _('Ajouter une autorisation')
 
@@ -53,6 +61,7 @@ class AuthorizationCreateView(JournalScopeMixin, MenuItemMixin, PermissionsCheck
 class AuthorizationDeleteView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, DeleteView):
     menu_journal = 'authorization'
     model = Authorization
+    permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_confirm_delete.html'
     title = _('Supprimer une autorisation')
 
