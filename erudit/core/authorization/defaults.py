@@ -15,25 +15,25 @@ class AuthorizationConfig(object):
     """ Defines the authorizations that can be given to users in the Érudit application. """
 
     can_manage_authorizations = AuthorizationDef(
-        'authorization:can_manage_authorizations', _("Peut gérer les autorisation"))
+        'authorization:can_manage_authorizations', _("Autorisations"))
     """
     This authorization defines the ability to add or delete authorizations to specific users.
     """
 
     can_manage_account = AuthorizationDef(
-        'subscriptions:can_manage_account', _("Peut gérer les abonnements individuels"))
+        'subscriptions:can_manage_account', _("Abonnements individuels"))
     """
     This authorization defines the ability to handle the subscriptions of the account.
     """
 
     can_manage_issuesubmission = AuthorizationDef(
-        'subscriptions:can_manage_issuesubmission', _('Peut gérer les numéros'))
+        'subscriptions:can_manage_issuesubmission', _('Dépôt de fichiers'))
     """
     This authorization defines the ability to handle issue submissions.
     """
 
     can_review_issuesubmission = AuthorizationDef(
-        'subscriptions:can_review_issuesubmission', _('Peut valider les numéros'))
+        'subscriptions:can_review_issuesubmission', _('Valider les numéros'))
     """
     This authorization defines the ability to review issue submissions.
     """
