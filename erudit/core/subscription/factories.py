@@ -1,6 +1,6 @@
 import factory
 
-from core.userspace.factories import UserFactory
+from base.factories import UserFactory
 from erudit.factories import OrganisationFactory
 
 

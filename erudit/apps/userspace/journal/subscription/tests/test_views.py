@@ -52,6 +52,7 @@ class AccountListViewTestCase(BaseEruditTestCase):
     def test_valid_manager(self):
         policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
+        self.journal.members.add(user)
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
@@ -79,16 +80,19 @@ class AccountListViewTestCase(BaseEruditTestCase):
 class AccountCreateViewTestCase(BaseEruditTestCase):
     def setUp(self):
         super(AccountCreateViewTestCase, self).setUp()
-        self.url = reverse('userspace:journal:subscription:account_add', args=(self.journal.pk, ))
+        self.url = reverse('userspace:journal:subscription:account_add',
+                           kwargs={'journal_pk': self.journal.pk})
 
     def test_filtered_organization(self):
         policy = PolicyFactory()
         policy2 = PolicyFactory()
-        user = User.objects.create_user(username='manager', password='manager')
+        user = User.objects.create_user(
+            username='manager', password='manager')
+        self.journal.members.add(user)
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, str(policy))
         self.assertNotContains(response, str(policy2))
@@ -97,31 +101,33 @@ class AccountCreateViewTestCase(BaseEruditTestCase):
 class AccountDeleteViewTestCase(BaseEruditTestCase):
     def test_permissions_ok(self):
         policy = PolicyFactory()
-        user = User.objects.create_user(username='manager', password='manager')
+        user = User.objects.create_superuser(
+            username='manager', password='manager', email='foo@bar.xyz')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
 
         account = IndividualAccountProfileFactory(policy=policy)
         url = reverse('userspace:journal:subscription:account_delete',
-                      args=(self.journal.pk, account.pk, ))
+                      kwargs={'journal_pk': self.journal.pk, 'pk': account.pk})
 
         account = IndividualAccountProfileFactory(policy=policy)
         url = reverse('userspace:journal:subscription:account_delete',
-                      args=(self.journal.pk, account.pk, ))
+                      kwargs={'journal_pk': self.journal.pk, 'pk': account.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_permissions_ko(self):
         policy = PolicyFactory()
-        user = User.objects.create_user(username='manager', password='manager')
+        user = User.objects.create_user(
+            username='manager', password='manager')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
 
         account = IndividualAccountProfileFactory()
         url = reverse('userspace:journal:subscription:account_delete',
-                      args=(self.journal.pk, account.pk, ))
+                      kwargs={'journal_pk': self.journal.pk, 'pk': account.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
@@ -129,7 +135,8 @@ class AccountDeleteViewTestCase(BaseEruditTestCase):
 class AccountResetPwdViewTestCase(BaseEruditTestCase):
     def test_empty_pwd(self):
         policy = PolicyFactory()
-        user = User.objects.create_user(username='manager', password='manager')
+        user = User.objects.create_superuser(
+            username='manager', password='manager', email='foo@bar.xyz')
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
@@ -137,8 +144,8 @@ class AccountResetPwdViewTestCase(BaseEruditTestCase):
         account = IndividualAccountProfileFactory(policy=policy)
         old_pwd = account.password
         url = reverse('userspace:journal:subscription:account_reset_pwd',
-                      args=(self.journal.pk, account.pk, ))
-        response = self.client.post(url, {'password': ''})
+                      kwargs={'journal_pk': self.journal.pk, 'pk': account.pk})
+        response = self.client.post(url, {'password': ''}, follow=False)
         self.assertEqual(response.status_code, 302)
         same_account = IndividualAccountProfile.objects.get(id=account.pk)
         self.assertEqual(IndividualAccountProfile.objects.count(), 1)

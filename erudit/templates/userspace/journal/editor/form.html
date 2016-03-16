@@ -13,6 +13,12 @@
 {{ form.media.js }}
 {% endblock footerscript %}
 
+{% block breadcrumb_end %}
+{{ block.super }}
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de numéros" %}</a></li>
+<li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
+{% endblock breadcrumb_end %}
+
 {% load crispy_forms_tags %}
 {% block content-main %}
 <div class="col-md-6 col-xs-12 col-centered">

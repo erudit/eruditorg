@@ -3,6 +3,11 @@
 
 {% block page-title %}{% trans "Dépôt de numéros" %}{% endblock %}
 
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Dépôt de numéros" %}</li>
+{% endblock breadcrumb_end %}
+
 {% block content-main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
   <section class="card card-issue_submissions">

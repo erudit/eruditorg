@@ -1,6 +1,11 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n spurl %}
 
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Abonnements individuels" %}</li>
+{% endblock breadcrumb_end %}
+
 {% block content-main %}
 
 

@@ -1,24 +1,11 @@
-from django.utils.translation import ugettext_lazy as _
+# -*- coding: utf-8 -*-
 
-from navutils import Breadcrumb
 from rules.contrib.views import PermissionRequiredMixin
 
-from apps.userspace.viewmixins import LoginRequiredMixin
-from apps.userspace.viewmixins import UserspaceBreadcrumbsMixin
+from base.viewmixins import LoginRequiredMixin
 
 
-class IssueSubmissionBreadcrumbsMixin(UserspaceBreadcrumbsMixin):
-
-    def get_breadcrumbs(self):
-        breadcrumbs = super(IssueSubmissionBreadcrumbsMixin,
-                            self).get_breadcrumbs()
-        breadcrumbs.append(Breadcrumb(
-            _("Dépôts de numéros"),
-            pattern_name='userspace:journal:editor:issues'))
-        return breadcrumbs
-
-
-class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
+class IssueSubmissionCheckMixin(LoginRequiredMixin, PermissionRequiredMixin):
     permission_required = 'editor.manage_issuesubmission'
 
     def get_queryset(self):

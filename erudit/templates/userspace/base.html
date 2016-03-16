@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n staticfiles rules navutils_tags %}
+{% load i18n staticfiles rules %}
 {% load staticfiles %}
 
 {% block stylesheets %}
@@ -54,23 +54,20 @@
 </header>
 {% endblock %}
 
-{% block nav %}
-<nav class="sidenav">
-{% render_menu menu=menus.main user=request.user %}
-</nav>
-{% endblock %}
-
 {% block content %}
 <main class="main">
   <header>
     <h1>
-      <span class="user-space">{% block zone-title %}{% trans "Espace utilisateur" %}{% endblock %}</span> {% block page-title %}{% endblock %}
+      <span class="user-space">{% block zone-title %}{% trans "Espace utilisateur" %}{% endblock %}</span> {% block page-title %}{{ title }}{% endblock %}
     </h1>
   </header>
   <div class="container-fluid">
     <div id="breadcrumb">
       {% block breadcrumbs %}
-      {% render_breadcrumbs breadcrumbs %}
+      <ul class="breadcrumb">
+        <li><a href="{% url 'userspace:dashboard' %}">{% trans "Mon espace" %}</a></li>
+        {% block breadcrumb_end %}{% endblock breadcrumb_end %}
+      </ul>
       {% endblock %}
     </div>
     <div class="messages-wrapper">

@@ -1,25 +1,32 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
 
-from core.authorization.models import Authorization
+from base.viewmixins import MenuItemMixin
 from core.authorization.defaults import AuthorizationConfig
+from core.authorization.models import Authorization
 
 from ..viewmixins import JournalScopeMixin
 
 from .forms import AuthorizationForm
 from .viewmixins import PermissionsCheckMixin
-from .viewmixins import PermissionsBreadcrumbsMixin
 
 
-class AuthorizationUserView(
-        JournalScopeMixin, PermissionsBreadcrumbsMixin, PermissionsCheckMixin, ListView):
+class AuthorizationUserView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, ListView):
+    menu_journal = 'authorization'
     model = Authorization
+    permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_user.html'
+
+    def get_queryset(self):
+        qs = super(PermissionsCheckMixin, self).get_queryset()
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        return qs.filter(content_type=ct, object_id=self.current_journal.pk)
 
     def get_authorizations_per_app(self):
         data = {}
@@ -33,18 +40,13 @@ class AuthorizationUserView(
         return data
 
 
-class AuthorizationListView(
-        JournalScopeMixin, PermissionsBreadcrumbsMixin, PermissionsCheckMixin, ListView):
-    model = Authorization
-    template_name = 'userspace/journal/authorization/authorization_list.html'
-
-
-class AuthorizationCreateView(
-        JournalScopeMixin, PermissionsBreadcrumbsMixin, PermissionsCheckMixin, CreateView):
+class AuthorizationCreateView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, CreateView):
+    menu_journal = 'authorization'
     model = Authorization
     form_class = AuthorizationForm
+    permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_create.html'
-    title = _("Ajouter une autorisation")
+    title = _('Ajouter une autorisation')
 
     def get_form_kwargs(self):
         kwargs = super(AuthorizationCreateView, self).get_form_kwargs()
@@ -56,13 +58,12 @@ class AuthorizationCreateView(
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
 
 
-class AuthorizationDeleteView(
-        JournalScopeMixin, PermissionsBreadcrumbsMixin, PermissionsCheckMixin, DeleteView):
+class AuthorizationDeleteView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, DeleteView):
+    menu_journal = 'authorization'
     model = Authorization
+    permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_confirm_delete.html'
-
-    def get_title(self):
-        return _("Supprimer une autorisation")
+    title = _('Supprimer une autorisation')
 
     def get_success_url(self):
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
