@@ -220,6 +220,19 @@ class Collection(Edinum):
     code of the collection and the ``Fonds_fac`` field in Solr. """
 
 
+class Discipline(models.Model):
+    """ Discipline """
+    name = models.CharField(max_length=255, verbose_name=_('Nom'))
+    code = models.CharField(max_length=255, unique=True, verbose_name=_('Code'))
+
+    class Meta:
+        verbose_name = _('Discipline')
+        verbose_name_plural = _('Disciplines')
+
+    def __str__(self):
+        return self.name
+
+
 class Journal(FedoraMixin, Named, Edinum):
     """Revue"""
 
@@ -341,6 +354,12 @@ class Journal(FedoraMixin, Named, Edinum):
         default=False,
         verbose_name=_('Prochainement disponible'),
     )
+
+    disciplines = models.ManyToManyField(
+        Discipline,
+        related_name='journals',
+    )
+    """ The disciplines associated with the journal. """
 
     objects = models.Manager()
     upcoming_objects = JournalUpcomingManager()

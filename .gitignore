@@ -58,3 +58,5 @@ docs/_build
 /erudit/static/vendor/**/vendor/
 /erudit/static/vendor/**/demo/
 /erudit/static/vendor/**/png/
+
+/erudit/erudit/management/commands/fixtures/

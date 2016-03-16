@@ -12,6 +12,7 @@ from erudit.models import (
     Article,
     Publisher,
     Collection,
+    Discipline,
 )
 
 
@@ -81,6 +82,10 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = [
         'issue'
     ]
+
+
+class DisciplineInline(admin.TabularInline):
+    model = Journal.disciplines.through
 
 
 class JournalAdmin(admin.ModelAdmin):
@@ -155,6 +160,8 @@ class JournalAdmin(admin.ModelAdmin):
         }),
     ]
 
+    inlines = [DisciplineInline, ]
+
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)
         for instance in instances:
@@ -164,6 +171,10 @@ class JournalAdmin(admin.ModelAdmin):
 
 
 class JournalInformationAdmin(TranslationAdmin):
+    pass
+
+
+class DisciplineAdmin(TranslationAdmin):
     pass
 
 
@@ -177,3 +188,4 @@ admin.site.register(Issue, IssueAdmin)
 admin.site.register(Publisher)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
+admin.site.register(Discipline, DisciplineAdmin)
