@@ -16,7 +16,6 @@ from PyPDF2 import PdfFileMerger
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import JournalCodeDetailMixin
-from erudit.fedora.conf import settings as fedora_settings
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
@@ -219,8 +218,8 @@ class ArticleRawPdfView(FedoraFileDatastreamView):
     fedora_object_class = ArticleDigitalObject
 
     def get_fedora_object_pid(self):
-        return fedora_settings.PID_PREFIX + '.'.join(
-            [self.kwargs['journalid'], self.kwargs['issueid'], self.kwargs['articleid']])
+        article = get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        return article.pid
 
     def get_response_object(self):
         response = super(ArticleRawPdfView, self).get_response_object()
