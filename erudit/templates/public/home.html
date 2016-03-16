@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block page-title %}{% trans "Accueil" %}{% endblock page-title %}
+
 {% block data-controller %}public:home{% endblock data-controller %}
 
 {% block extrahead %}
@@ -24,7 +25,7 @@
           <nav>
             <ul class="unstyled">
               <li>
-                <a href="{% url 'login' %}" class="main-section" data-open-modal-ajax>{% trans "Connexion" %}</a>
+                <a href="{% url 'login' %}" class="main-section" id="login-modal">{% trans "Connexion" %}</a>
               </li>
               <li class="dropdown text-right">
                 <a href="#" class="select">{% trans "Français" %} <i class="ion-ios-arrow-down"></i></a>

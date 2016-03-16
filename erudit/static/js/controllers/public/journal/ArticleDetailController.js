@@ -1,3 +1,4 @@
+import '!!script!sticky-kit/jquery.sticky-kit.min';
 import getPrefix from 'get-prefix/dist/get-prefix';
 
 export default {
