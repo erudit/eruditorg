@@ -138,7 +138,6 @@ class IssueSubmission(models.Model):
 
     @transition(field=status, source='*', target=ARCHIVED,
                 permission=lambda user: (
-                    user.has_perm('editor.manage_issuesubmission') or
                     user.has_perm('editor.review_issuesubmission')),
                 custom=dict(verbose_name=("Archiver")))
     def archive(self):
