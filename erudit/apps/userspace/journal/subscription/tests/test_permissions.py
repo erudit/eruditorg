@@ -133,14 +133,14 @@ class ViewsTestCase(BaseEruditTestCase):
 class RulesTestCase(BaseEruditTestCase):
     def test_user_cant_manage(self):
         policy = PolicyFactory()
-        user = UserFactory()
+        user = UserFactory.create()
 
         is_granted = user.has_perm('subscription.manage_policy', policy)
         self.assertEqual(is_granted, False)
 
     def test_user_can_manage(self):
         policy = PolicyFactory()
-        user = UserFactory()
+        user = UserFactory.create()
         policy.managers.add(user)
         policy.save()
 
@@ -149,7 +149,7 @@ class RulesTestCase(BaseEruditTestCase):
 
     def test_superuser_can_manage(self):
         policy = PolicyFactory()
-        user = UserFactory(is_superuser=True)
+        user = UserFactory.create(is_superuser=True)
 
         is_granted = user.has_perm('subscription.manage_policy', policy)
         self.assertEqual(is_granted, True)

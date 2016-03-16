@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from rules.contrib.views import PermissionRequiredMixin
 
-from apps.userspace.viewmixins import LoginRequiredMixin
+from base.viewmixins import LoginRequiredMixin
 
 
-class IssueSubmissionCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
+class IssueSubmissionCheckMixin(LoginRequiredMixin, PermissionRequiredMixin):
     permission_required = 'editor.manage_issuesubmission'
 
     def get_queryset(self):

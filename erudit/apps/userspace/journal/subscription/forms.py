@@ -51,7 +51,7 @@ class IndividualAccountForm(forms.Form):
         email = self.cleaned_data['email'].lower()
         policy = self.cleaned_data['policy']
 
-        if self.instance:
+        if hasattr(self, 'instance'):
             user = self.instance.user
             profile = self.instance
         else:

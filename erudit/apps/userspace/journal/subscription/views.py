@@ -7,6 +7,7 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django_filters.views import FilterView
 
+from base.viewmixins import MenuItemMixin
 from core.subscription.models import IndividualAccountProfile
 
 from ..viewmixins import JournalScopeMixin
@@ -17,13 +18,15 @@ from .forms import IndividualAccountResetPwdForm
 from .viewmixins import OrganizationCheckMixin
 
 
-class IndividualAccountList(JournalScopeMixin, OrganizationCheckMixin, FilterView):
+class IndividualAccountList(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, FilterView):
     filterset_class = IndividualAccountFilter
+    menu_journal = 'subscription'
     paginate_by = 10
     template_name = 'userspace/journal/subscription/individualaccount_filter.html'
 
 
-class IndividualAccountCreate(JournalScopeMixin, OrganizationCheckMixin, CreateView):
+class IndividualAccountCreate(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, CreateView):
+    menu_journal = 'subscription'
     model = IndividualAccountProfile
     form_class = IndividualAccountForm
 
@@ -40,38 +43,38 @@ class IndividualAccountCreate(JournalScopeMixin, OrganizationCheckMixin, CreateV
         return kwargs
 
 
-class IndividualAccountUpdate(JournalScopeMixin, OrganizationCheckMixin, UpdateView):
+class IndividualAccountUpdate(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, UpdateView):
+    menu_journal = 'subscription'
     model = IndividualAccountProfile
     form_class = IndividualAccountForm
     template_name = 'userspace/journal/subscription/individualaccount_update.html'
 
-    def get_title(self):
-        return _("Modifier un compte")
+    def get_form_kwargs(self):
+        kwargs = super(IndividualAccountUpdate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
     def get_success_url(self):
         return reverse('userspace:journal:subscription:account_list',
                        args=(self.current_journal.pk, ))
 
 
-class IndividualAccountDelete(JournalScopeMixin, OrganizationCheckMixin, DeleteView):
+class IndividualAccountDelete(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, DeleteView):
+    menu_journal = 'subscription'
     model = IndividualAccountProfile
     template_name = 'userspace/journal/subscription/individualaccount_confirm_delete.html'
 
-    def get_title(self):
-        return _("Supprimer un compte")
-
     def get_success_url(self):
         return reverse('userspace:journal:subscription:account_list',
                        args=(self.current_journal.pk, ))
 
 
-class IndividualAccountResetPwd(JournalScopeMixin, OrganizationCheckMixin, UpdateView):
+class IndividualAccountResetPwd(
+        JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, UpdateView):
+    menu_journal = 'subscription'
     model = IndividualAccountProfile
     form_class = IndividualAccountResetPwdForm
     template_name = 'userspace/journal/subscription/individualaccount_reset_pwd.html'
-
-    def get_title(self):
-        return _("Réinitialiser le mot de passe d'un compte")
 
     def get_success_url(self):
         return reverse('userspace:journal:subscription:account_list',
