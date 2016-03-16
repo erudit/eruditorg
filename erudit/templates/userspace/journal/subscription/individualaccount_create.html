@@ -1,6 +1,16 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>
+  <a href="{% url 'userspace:journal:subscription:account_list' journal_pk=scope_current_journal.pk %}">
+    {% trans "Abonnements individuels" %}
+  </a>
+</li>
+<li>{% trans "Ajouter un compte" %}</li>
+{% endblock breadcrumb_end %}
+
 {% block content-main %}
 
 <h1>{% trans "Ajouter un compte" %} </h1>

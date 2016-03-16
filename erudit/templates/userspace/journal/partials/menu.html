@@ -1,4 +1,10 @@
 {% load i18n %}
+{% load rules %}
+
+{% has_perm 'journal.edit_journal' request.user scope_current_journal as can_manage_information %}
+{% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+{% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
+{% has_perm 'subscription.manage_account' request.user scope_current_journal as can_manage_account %}
 
 <ul class="main-menu">
   <li class="userspace menu-item has-children has-dropdown">
@@ -7,6 +13,7 @@
       <span class="sidenav-label">{% trans "Mon espace" %}</span>
     </a>
     <ul class="sub-menu dropdown">
+      {% if can_manage_information %}
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'information' %}class="active"{% endif %}>
@@ -14,6 +21,8 @@
           <span class="sidenav-label">{% trans "Informations de la revue" %}</span>
         </a>
       </li>
+      {% endif %}
+      {% if can_manage_issuesubmission %}
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:editor:issues' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'editor' %}class="active"{% endif %}>
@@ -21,6 +30,8 @@
           <span class="sidenav-label">{% trans "Dépôts de numéros" %}</span>
         </a>
       </li>
+      {% endif %}
+      {% if can_manage_authorizations %}
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'authorization' %}class="active"{% endif %}>
@@ -28,6 +39,16 @@
           <span class="sidenav-label">{% trans "Autorisations" %}</span>
         </a>
       </li>
+      {% endif %}
+      {% if can_manage_account %}
+      <li class="journal menu-item">
+        <a href="{% url 'userspace:journal:subscription:account_list' journal_pk=scope_current_journal.pk %}"
+           {% if menu_journal == 'subscription' %}class="active"{% endif %}>
+          <span class="icon fa ion-ios-people-outline"></span>
+          <span class="sidenav-label">{% trans "Abonnements individuels" %}</span>
+        </a>
+      </li>
+      {% endif %}
     </ul>
   </li>
 </ul>

@@ -6,7 +6,6 @@ from urllib.parse import urljoin
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from pysolr import SolrCoreAdmin
 import requests
 from requests.exceptions import ConnectionError
@@ -29,9 +28,10 @@ class MenuItemMixin(object):
 
 
 class LoginRequiredMixin(object):
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super().as_view(**initkwargs)
+        return login_required(view)
 
 
 class FedoraServiceRequiredMixin(object):
