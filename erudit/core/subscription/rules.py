@@ -17,7 +17,8 @@ def is_account_manager(user, account=None):
     if account is None:
         return bool(Policy.objects.filter(managers=user).count())
     else:
-        return is_policy_manager(user, account.policy)
+        if hasattr(account, 'policy'):
+            return is_policy_manager(user, account.policy)
 
 rules.add_perm('subscription.manage_policy',
                is_superuser | is_staff | is_policy_manager)
