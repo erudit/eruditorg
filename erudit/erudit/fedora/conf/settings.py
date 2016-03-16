@@ -8,6 +8,3 @@ FEDORA_USER = getattr(settings, 'FEDORA_USER', 'fedoraAdmin')
 FEDORA_PASSWORD = getattr(settings, 'FEDORA_PASSWORD', 'fedoraAdmin')
 
 PIDSPACE = getattr(settings, 'ERUDIT_PIDSPACE', 'erudit')
-OBJECT_ID_PREFIX = getattr(settings, 'ERUDIT_OBJECT_ID_PREFIX', 'erudit.')
-
-PID_PREFIX = '{0}:{1}'.format(PIDSPACE, OBJECT_ID_PREFIX)

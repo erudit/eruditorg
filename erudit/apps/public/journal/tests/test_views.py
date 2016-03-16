@@ -244,9 +244,11 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             mock_pdf.content.write(f.read())
         mock_ds = ['ERUDITXSD300', ]  # noqa
 
-        journal_id = 'dummy139'
-        issue_id = 'dummy1515298'
-        article_id = '1001942du'
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue)
+        journal_id = self.journal.localidentifier
+        issue_id = issue.localidentifier
+        article_id = article.localidentifier
         url = reverse('public:journal:article-raw-pdf', args=(
             journal_id, issue_id, article_id
         ))
