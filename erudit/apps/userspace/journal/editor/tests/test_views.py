@@ -215,7 +215,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         User.objects.create_user(
             username='dummy', email='dummy@xyz.com', password='top_secret')
         self.client.login(username='dummy', password='top_secret')
-        self.issue_submission.submissions.add(rfile)
+        self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment-detail', kwargs={'pk': rfile.pk})
         # Run
         response = self.client.get(url, follow=False)
@@ -239,7 +239,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
         self.client.login(username='dummy', password='top_secret')
-        self.issue_submission.submissions.add(rfile)
+        self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment-detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
@@ -260,7 +260,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             user=user, authorization_codename=AC.can_review_issuesubmission.codename)
 
         self.client.login(username='dummy', password='top_secret')
-        self.issue_submission.submissions.add(rfile)
+        self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment-detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
@@ -278,7 +278,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         User.objects.create_superuser(
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
-        self.issue_submission.submissions.add(rfile)
+        self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment-detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
@@ -298,7 +298,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         User.objects.create_superuser(
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
-        self.issue_submission.submissions.add(rfile)
+        self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment-detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
@@ -315,7 +315,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         User.objects.create_superuser(
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
-        self.issue_submission.submissions.add(rfile)
+        self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment-detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
@@ -446,8 +446,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
 
         # Check
         self.assertEqual(response.status_code, 302)
-        new_version = IssueSubmission.head.first()
-        self.assertEqual(new_version.status, IssueSubmission.DRAFT)
+        self.assertEqual(self.issue_submission.files_versions.count(), 2)
 
 
 class TestIssueSubmissionArchiveView(BaseEditorTestCase):

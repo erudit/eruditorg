@@ -85,14 +85,14 @@ class IssueSubmissionUpdate(
     def get_form(self, form_class):
         form = super().get_form(form_class)
 
-        object = self.get_object()
-        if object.status in (
+        obj = self.get_object()
+        if obj.status in (
                 IssueSubmission.VALID, IssueSubmission.SUBMITTED):
             form.disable_form()
 
         form.fields['submissions'].widget.set_model_reference(
-            "editor.IssueSubmission",
-            object.pk
+            "editor.IssueSubmissionFilesVersion",
+            obj.last_files_version.pk
         )
 
         return form

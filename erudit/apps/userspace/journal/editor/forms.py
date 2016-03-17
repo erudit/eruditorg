@@ -95,7 +95,7 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
         super(IssueSubmissionUploadForm, self).__init__(*args, **kwargs)
 
         # Update some fields
-        initial_files = self.instance.submissions.all() \
+        initial_files = self.instance.last_files_version.submissions.all() \
             .values_list('id', flat=True)
         self.fields['submissions'].initial = ','.join(map(str, initial_files))
         self.fields['submissions'].widget.template_name = \
@@ -107,7 +107,8 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
 
         # Saves the resumable files associated to the submission
         if commit:
-            instance.submissions.clear()
+            fversion = instance.last_files_version
+            fversion.submissions.clear()
             if submissions:
                 file_ids = submissions.split(',')
                 for fid in file_ids:
@@ -116,6 +117,6 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
                     except ResumableFile.DoesNotExist:
                         pass
                     else:
-                        instance.submissions.add(rfile)
+                        fversion.submissions.add(rfile)
 
         return instance

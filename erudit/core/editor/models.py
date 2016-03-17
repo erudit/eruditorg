@@ -1,21 +1,11 @@
-from copy import deepcopy
+# -*- coding: utf-8 -*-
 
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import gettext as _
-from django.utils import timezone
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 
 from django_fsm import FSMField, transition
-
-
-class LastVersionManager(models.Manager):
-    """
-    Return only last version issues
-    """
-    def get_queryset(self):
-        qs = super(LastVersionManager, self).get_queryset()
-        return qs.filter(parent__isnull=True)
 
 
 class IssueSubmission(models.Model):
@@ -32,9 +22,6 @@ class IssueSubmission(models.Model):
         (VALID, _("Validé")),
         (ARCHIVED, _("Archivé"))
     )
-
-    objects = models.Manager()
-    head = LastVersionManager()
 
     status = FSMField(default=DRAFT, protected=False)
 
@@ -60,19 +47,19 @@ class IssueSubmission(models.Model):
     )
 
     date_created = models.DateTimeField(
+        auto_now_add=True,
         editable=False,
-        null=True,
         verbose_name=_("Date de l'envoi"),
     )
 
     date_modified = models.DateTimeField(
+        auto_now=True,
         editable=False,
-        null=True,
         verbose_name=_("Date de modification"),
     )
 
     contact = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         verbose_name=_("Personne contact")
     )
 
@@ -81,12 +68,9 @@ class IssueSubmission(models.Model):
         blank=True, null=True
     )
 
-    submissions = models.ManyToManyField(
-        'plupload.ResumableFile'
-    )
-
-    parent = models.OneToOneField(
-        'self', null=True, blank=True, on_delete=models.SET_NULL)
+    class Meta:
+        verbose_name = _("Envoi de numéro")
+        verbose_name_plural = _("Envois de numéros")
 
     def __str__(self):
         return "{} - {}, volume {}".format(
@@ -132,9 +116,7 @@ class IssueSubmission(models.Model):
         """
         Resend the issue for modifications
         """
-        copy = self.save_version()
-        copy.status = IssueSubmission.DRAFT
-        copy.save()
+        self.save_version()
 
     @transition(field=status, source='*', target=ARCHIVED,
                 permission=lambda user: (
@@ -146,35 +128,31 @@ class IssueSubmission(models.Model):
         """
         pass
 
-    def save_version(self):
-        if self.parent is not None:
-            raise Exception(
-                "Version can't be created. This object is already one.")
-
-        copy = deepcopy(self)
-        copy.id = None
-        copy.date_created = self.date_created
-        copy.save()
-        self.parent = copy
-        self._save()
-        return copy
-
-    def _save(self, *args, **kwargs):
-        """
-        original save method renamed
-        """
-        super().save(*args, **kwargs)
-
     def save(self, *args, **kwargs):
-        """
-        Ensure an old version can't be modified.
-        """
-        if self.date_created is None:
-            self.date_created = timezone.now()
-        self.date_modified = timezone.now()
-        if self.parent is None:
-            super().save(*args, **kwargs)
+        created = self.pk is None
+        super(IssueSubmission, self).save(*args, **kwargs)
+        if created:
+            # The IssueSubmission instance is being created ; so we force
+            # the creation of an IssueSubmissionFilesVersion instance.
+            self.save_version()
+
+    def save_version(self):
+        return IssueSubmissionFilesVersion.objects.create(issue_submission=self)
+
+    @property
+    def last_files_version(self):
+        return self.files_versions.order_by('-created').first()
+
+
+class IssueSubmissionFilesVersion(models.Model):
+    """ An issue submission files version. """
+    issue_submission = models.ForeignKey(
+        IssueSubmission, related_name='files_versions', verbose_name=_('Envoi de numéro'))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
+    updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
+    submissions = models.ManyToManyField('plupload.ResumableFile')
 
     class Meta:
-        verbose_name = _("Envoi de numéro")
-        verbose_name_plural = _("Envois de numéros")
+        ordering = ['created', ]
+        verbose_name = _("Version de fichiers d'un envoi de numéro")
+        verbose_name_plural = _("Versions de fichiers d'envois de numéro")
