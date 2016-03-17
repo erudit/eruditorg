@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from .models import IssueSubmission
+from .models import IssueSubmissionFilesVersion
 
 
 class IssueSubmissionAdmin(admin.ModelAdmin):
@@ -9,17 +12,22 @@ class IssueSubmissionAdmin(admin.ModelAdmin):
         'id',
         'journal',
         'contact',
-        '_parent',
         'date_created',
         'date_modified',
     )
     list_filter = ('journal', 'status', )
 
-    def _parent(self, obj):
-        if obj.parent:
-            return obj.parent.id
-        else:
-            return dict(IssueSubmission.STATUS_CHOICES)[obj.status]
-    _parent.short_description = _("Statut")
+
+class IssueSubmissionFilesVersionAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'issue_submission',
+        'files_count',
+    )
+
+    def files_count(self, obj):
+        return obj.submissions.count()
+    files_count.short_description = _('Nombre de fichiers')
 
 admin.site.register(IssueSubmission, IssueSubmissionAdmin)
+admin.site.register(IssueSubmissionFilesVersion, IssueSubmissionFilesVersionAdmin)

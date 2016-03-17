@@ -1,6 +1,6 @@
 cssselect==0.9.1
 decorator==4.0.4
-Django==1.8.7
+Django==1.8.11
 django-appconf==1.0.1
 django-compressor==1.6
 django-crispy-forms==1.5.2

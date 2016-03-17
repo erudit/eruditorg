@@ -1,20 +1,18 @@
-from django.test import TestCase
+# -* coding: utf-8 -*-
+
+from erudit.tests import BaseEruditTestCase
 
 from ..factories import IssueSubmissionFactory
 from ..models import IssueSubmission
 
 
-class IssueSubmissionTestCase(TestCase):
+class IssueSubmissionTestCase(BaseEruditTestCase):
 
     def test_version(self):
-        issue = IssueSubmissionFactory()
-        copy = issue.save_version()
-        self.assertEqual(issue.journal, copy.journal)
-        self.assertEqual(issue.contact, copy.contact)
-        self.assertEqual(issue.date_created, copy.date_created)
-        self.assertNotEqual(issue.date_modified, copy.date_modified)
-        self.assertNotEqual(issue.id, copy.id)
-        self.assertEqual(issue.parent, copy)
+        issue = IssueSubmissionFactory.create(journal=self.journal)
+        new_files_version = issue.save_version()
+        self.assertEqual(issue.files_versions.count(), 2)
+        self.assertEqual(issue.last_files_version, new_files_version)
 
     def test_knows_if_it_is_submitted(self):
         # Setup
@@ -26,7 +24,7 @@ class IssueSubmissionTestCase(TestCase):
         self.assertTrue(issue_2.is_submitted)
 
 
-class IssueSubmissionWorkflowTestCase(TestCase):
+class IssueSubmissionWorkflowTestCase(BaseEruditTestCase):
 
     def test_refuse(self):
         issue = IssueSubmissionFactory()
@@ -34,5 +32,5 @@ class IssueSubmissionWorkflowTestCase(TestCase):
         issue.refuse()
 
         issues = IssueSubmission.objects.all().order_by('id')
-        self.assertEqual(issues.count(), 2)
-        self.assertEqual(issues[0].parent, issues[1])
+        self.assertEqual(issues.count(), 1)
+        self.assertEqual(issues.first().files_versions.count(), 2)
