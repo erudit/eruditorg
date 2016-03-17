@@ -166,8 +166,8 @@
           <div class="row">
             <div class="col-md-12">
               <ul class="row">
-                {% for i in 'xxxxxxxxxxxxxxxxxx' %}
-                <li class="col-md-3"><a href="{% url 'public:journal:journal-list' %}#">{% lorem 2 w random %}</a></li>
+                {% for discipline in disciplines %}
+                <li class="col-md-3"><a href="{% url 'public:journal:journal-list' %}#">{{ discipline }}</a></li>
                 {% endfor %}
               </ul>
             </div>
