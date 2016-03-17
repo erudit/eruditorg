@@ -2,11 +2,11 @@
 {% load search_tags %}
 
 {% if filter %}
-<div id="div_id_{{ filter.label }}" class="form-group">
-    <label for="id_{{ filter.label }}_0" class="control-label ">{% trans title %}</label>
+<div id="div_id_{{ filter_label }}" class="form-group">
+    <label for="id_{{ filter_label }}_0" class="control-label ">{% trans title %}</label>
     <div class="controls">
         {% for label, count in filter.values.items %}
-        <div class="checkbox"><label class=""><input type="checkbox" name="{{ filter.label }}" id="id_{{ filter.label }}_{{ forloop.counter }}" value="{{ label }}" {% is_search_filter_value_selected selected_filters filter.label label %}>{{ label }} ({{ count }})</label></div>
+        <div class="checkbox"><label class=""><input type="checkbox" name="{{ filter_label }}" id="id_{{ filter_label }}_{{ forloop.counter }}" value="{{ label }}" {% is_search_filter_value_selected selected_filters filter_label label %}>{{ label }} ({{ count }})</label></div>
         {% endfor %}
     </div>
 </div>

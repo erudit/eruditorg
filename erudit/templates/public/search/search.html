@@ -38,8 +38,6 @@ Query URL: {{ query_url|safe }}
     {# search form side #}
     <aside class="col-sm-3 search-form">
 
-      <form action="{% url 'public:search:search' %}" id="id-search" method="get" >
-
         {% crispy form %}
 
         {% search_filters %}
@@ -58,6 +56,29 @@ Query URL: {{ query_url|safe }}
 
       {% if documents %}
 
+        <nav class="result-sorting">
+          <ul class="unstyled">
+            <li class="label">
+              <h5>{% trans "Classé par" %}</h5>
+            </li>
+            <li class="dropdown-buttons dropdown-sml">
+              <a href="#" class="select">{% trans "Ordre croissant" %} <i class="ion-ios-arrow-down caret"></i></a>
+              <ul>
+
+              </ul>
+            </li>
+            <li class="label">
+              {% trans "Trier par..." %}
+            </li>
+            <li class="dropdown-buttons dropdown-sml">
+              <a href="#" class="select">{% trans "Pertinance" %} <i class="ion-ios-arrow-down caret"></i></a>
+              <ul>
+
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
         {% search_result_pagination %}
 
         <ol class="unstyled results">
@@ -67,7 +88,7 @@ Query URL: {{ query_url|safe }}
           </li>
           {% endfor %}
         </ol>
-        
+
         {% search_result_pagination %}
 
       {% else %}

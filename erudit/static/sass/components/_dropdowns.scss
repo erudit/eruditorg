@@ -111,9 +111,10 @@
 
   &:hover {
     > a {
-      background-color: $gray-base;
-      color: #fff;
+      background-color: $gray-base !important;
+      color: #fff !important;
       text-decoration: none;
+      border-color: $gray-base !important;
       i {
         @include rotate(180deg);
         margin-top: -5px;
@@ -122,6 +123,24 @@
     > ul {
       display: block;
       width: 100%;
+    }
+  }
+
+  /**
+  * variations
+  */
+  &.dropdown-sml {
+    > a.select {
+      display: block;
+      padding: ($grid-gutter-width / 4) ($grid-gutter-width/2);
+      border: 2px solid $gray-mid;
+      border-radius: 2px;
+      @include fw-sans-normal();
+      i.caret {
+        float: right;
+        position: relative;
+        top: 2px;
+      }
     }
   }
 

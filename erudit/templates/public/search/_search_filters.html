@@ -6,31 +6,31 @@
     {# <legend>{% trans "Filtrer les résultats" %}</legend>#}
     <div>
         {% with filter_choices|get_item:"years" as years_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Années" filter=years_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Années" filter_label="years" filter=years_filter %}
         {% endwith %}
 
         {% with filter_choices|get_item:"article_types" as article_types_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Types d'articles" filter=article_types_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Types d'articles" filter_label="article_types" filter=article_types_filter %}
         {% endwith %}
 
         {% with filter_choices|get_item:"languages" as languages_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Langues" filter=languages_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Langues" filter_label="languages" filter=languages_filter %}
         {% endwith %}
 
         {% with filter_choices|get_item:"collections" as collections_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Collections" filter=collections_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Collections" filter_label="collections" filter=collections_filter %}
         {% endwith %}
 
         {% with filter_choices|get_item:"authors" as authors_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Auteurs" filter=authors_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Auteurs" filter_label="authors" filter=authors_filter %}
         {% endwith %}
 
         {% with filter_choices|get_item:"funds" as funds_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Fonds" filter=funds_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Fonds" filter_label="funds" filter=funds_filter %}
         {% endwith %}
 
         {% with filter_choices|get_item:"publication_types" as publication_types_filter %}
-        {% include "public/search/_checkboxes_filter.html" with title="Types de publications" filter=publication_types_filter %}
+        {% include "public/search/_checkboxes_filter.html" with title="Types de publications" filter_label="publication_types" filter=publication_types_filter %}
         {% endwith %}
     </div>
 </fieldset>

@@ -8,6 +8,7 @@ section#search-page {
   * main header
   */
   header.search-header {
+    margin-bottom: $margin-vertical-default;
     h3, h4 {
       margin: $margin-vertical-default/3 0;
     }
@@ -32,6 +33,26 @@ section#search-page {
 
 }
 
+/**
+* sorting and ordering
+*/
+
+nav.result-sorting {
+  @include clearfix;
+  ul {
+    float: right;
+    li {
+      display: inline-block;
+      &.label {
+        padding: 0 10px;
+      }
+      &.dropdown-buttons {
+        width: 200px;
+      }
+    }
+  }
+}
+
 
 /**
 * search results
@@ -39,7 +60,6 @@ section#search-page {
 
 .search-results {
   ol.results {
-
   }
 }
 
@@ -49,8 +69,8 @@ section#search-page {
 
 .search-result-item {
   position: relative;
-  padding-bottom: $margin-vertical-default/2;
   padding-right: 100px;
+  padding-bottom: $margin-vertical-default/2;
   margin-bottom: $margin-vertical-default/2;
   border-bottom: 1px solid $gray-mid;
 

@@ -3,17 +3,47 @@
 // --------------------------------------------------
 
 .search-pagination {
-  // border: 1px solid red;
   text-align: center;
+  padding: $margin-vertical-default 0;
+
   a {
     font-size: 18px;
+    line-height: 18px;
     margin: 0 7px;
     display: inline-block;
+    color: $color-red;
+    position: relative;
+    top: 2px;
   }
+
   .page-position {
     display: inline-block;
     font-size: 14px;
-    @include fw-sans-bold;
+    font-family: $font-family-monospace;
+  }
+
+  .left-bar {
+    &:after {
+      content: "";
+      height: 13px;
+      width: 1px;
+      border-left: 1px solid $color-red;
+      position: absolute;
+      top: 3px;
+      left: -1px;
+    }
+  }
+
+  .right-bar {
+    &:after {
+      content: "";
+      height: 13px;
+      width: 1px;
+      border-left: 1px solid $color-red;
+      position: absolute;
+      top: 3px;
+      right: -1px;
+    }
   }
 }
 
