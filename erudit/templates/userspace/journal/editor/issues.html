@@ -19,57 +19,46 @@
         <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
       </div>
     </div>
-    <div class="row card-body">
-      <div class="col-xs-12">
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>{% trans "Date" %}</th>
-              <th>{% trans "Revue" %}</th>
-              <th>{% trans "Année, volumaison, numéro" %}</th>
-              <th>{% trans "Statut" %}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-            <tr>
-              <td class="table-ordered_row">
-              </td>
-              <td>
-                {{ issue_submission.date_created|date:"c" }}
-              </td>
-              <td>
-                {{ issue_submission.journal }}
-              </td>
-              <td>
-                <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}">
-                  {{ issue_submission.year }},
-                  {% if issue_submission.volume %}
-                  {% trans "vol." %} {{ issue_submission.volume }},
-                  {% endif %}
-                  {% trans "n°" %} {{ issue_submission.number }}
-                </a>
-              </td>
-              <td>
-                {% if issue_submission.status == 'D' %}
-                {% trans "Brouillon" %}
-                {% elif issue_submission.status == 'S' %}
-                {% trans "Soumis" %}
-                {% elif issue_submission.status == 'V' %}
-                {% trans "Validé" %}
-                {% endif %}
-              </td>
-            </tr>
-            {% empty %}
-            <tr>
-              <td colspan="4" class="text-center">{% trans "Il n'y a aucun fichier dans votre historique." %}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <ul id="id_issuesubmission_list" class="row card-body">
+    {% for issue_submission in object_list|dictsortreversed:"date_created" %}
+      <li class="col-xs-12">
+        <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}"
+           class="btn btn-link btn-block">
+          <span class="pull-right">
+            <span class="status">
+              {% if issue_submission.status == 'D' %}
+              {% trans "Brouillon" %}
+              {% elif issue_submission.status == 'S' %}
+              {% trans "Soumis" %}
+              {% elif issue_submission.status == 'V' %}
+              {% trans "Validé" %}
+              {% endif %}
+            </span>
+          </span>
+          <span class="title">
+            {{ issue_submission.year }},
+            {% if issue_submission.volume %}
+            {% trans "vol." %} {{ issue_submission.volume }},
+            {% endif %}
+            {% trans "n°" %} {{ issue_submission.number }}
+          </span>
+          <span class="metadata-wrapper">
+            <span class="metadata">
+              <span class="metadata-title">{% trans "Revue" %}</span>
+              <span class="metadata-value">{{ issue_submission.journal.name }}</span>
+            </span>
+            <span class="metadata">
+              <span class="metadata-value"><i>
+                {% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
+                  Ajouté le {{ created }}
+                {% endblocktrans %}
+              </i></span>
+            </span>
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
   </section>
 </div>
 {% endblock %}
