@@ -7,6 +7,7 @@ from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
 
+from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.authorization.defaults import AuthorizationConfig
 from core.authorization.models import Authorization
@@ -17,7 +18,8 @@ from .forms import AuthorizationForm
 from .viewmixins import PermissionsCheckMixin
 
 
-class AuthorizationUserView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, ListView):
+class AuthorizationUserView(
+        LoginRequiredMixin, JournalScopeMixin, PermissionsCheckMixin, MenuItemMixin, ListView):
     menu_journal = 'authorization'
     model = Authorization
     permission_required = 'authorization.manage_authorizations'
@@ -40,7 +42,8 @@ class AuthorizationUserView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMi
         return data
 
 
-class AuthorizationCreateView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, CreateView):
+class AuthorizationCreateView(
+        LoginRequiredMixin, JournalScopeMixin, PermissionsCheckMixin, MenuItemMixin, CreateView):
     menu_journal = 'authorization'
     model = Authorization
     form_class = AuthorizationForm
@@ -58,7 +61,8 @@ class AuthorizationCreateView(JournalScopeMixin, MenuItemMixin, PermissionsCheck
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
 
 
-class AuthorizationDeleteView(JournalScopeMixin, MenuItemMixin, PermissionsCheckMixin, DeleteView):
+class AuthorizationDeleteView(
+        LoginRequiredMixin, JournalScopeMixin, PermissionsCheckMixin, MenuItemMixin, DeleteView):
     menu_journal = 'authorization'
     model = Authorization
     permission_required = 'authorization.manage_authorizations'

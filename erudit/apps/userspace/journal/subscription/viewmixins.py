@@ -2,11 +2,10 @@
 
 from rules.contrib.views import PermissionRequiredMixin
 
-from base.viewmixins import LoginRequiredMixin
 from core.subscription.models import IndividualAccountProfile
 
 
-class OrganizationCheckMixin(LoginRequiredMixin, PermissionRequiredMixin):
+class OrganizationCheckMixin(PermissionRequiredMixin):
     permission_required = 'subscription.manage_account'
 
     def get_queryset(self):

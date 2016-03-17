@@ -7,6 +7,7 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django_filters.views import FilterView
 
+from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.subscription.models import IndividualAccountProfile
 
@@ -18,14 +19,16 @@ from .forms import IndividualAccountResetPwdForm
 from .viewmixins import OrganizationCheckMixin
 
 
-class IndividualAccountList(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, FilterView):
+class IndividualAccountList(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                            OrganizationCheckMixin, FilterView):
     filterset_class = IndividualAccountFilter
     menu_journal = 'subscription'
     paginate_by = 10
     template_name = 'userspace/journal/subscription/individualaccount_filter.html'
 
 
-class IndividualAccountCreate(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, CreateView):
+class IndividualAccountCreate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                              OrganizationCheckMixin, CreateView):
     menu_journal = 'subscription'
     model = IndividualAccountProfile
     form_class = IndividualAccountForm
@@ -43,7 +46,8 @@ class IndividualAccountCreate(JournalScopeMixin, MenuItemMixin, OrganizationChec
         return kwargs
 
 
-class IndividualAccountUpdate(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, UpdateView):
+class IndividualAccountUpdate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                              OrganizationCheckMixin, UpdateView):
     menu_journal = 'subscription'
     model = IndividualAccountProfile
     form_class = IndividualAccountForm
@@ -59,7 +63,8 @@ class IndividualAccountUpdate(JournalScopeMixin, MenuItemMixin, OrganizationChec
                        args=(self.current_journal.pk, ))
 
 
-class IndividualAccountDelete(JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, DeleteView):
+class IndividualAccountDelete(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                              OrganizationCheckMixin, DeleteView):
     menu_journal = 'subscription'
     model = IndividualAccountProfile
     template_name = 'userspace/journal/subscription/individualaccount_confirm_delete.html'
@@ -70,7 +75,7 @@ class IndividualAccountDelete(JournalScopeMixin, MenuItemMixin, OrganizationChec
 
 
 class IndividualAccountResetPwd(
-        JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, UpdateView):
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, UpdateView):
     menu_journal = 'subscription'
     model = IndividualAccountProfile
     form_class = IndividualAccountResetPwdForm
