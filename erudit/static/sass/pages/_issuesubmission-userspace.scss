@@ -1,0 +1,40 @@
+ul#id_issuesubmission_list{
+  list-style: none;
+
+  li{
+    padding: 0;
+    background: $gray-lighter;
+
+    &:hover, &:focus{
+      text-decoration: none;
+      background: darken($gray-lighter, 2%);
+    }
+
+    a{
+      text-align: left;
+
+      &:hover, &:focus{
+        text-decoration: none;
+      }
+
+      span.title{
+        display: block;
+      }
+
+      span.metadata-wrapper{
+        display: block;
+
+        span.metadata{
+          margin-right: 10px;
+          padding: 4px 0;
+          display: inline-block;
+          font-family: $font-family-sans-serif;
+
+          .metadata-title{
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
