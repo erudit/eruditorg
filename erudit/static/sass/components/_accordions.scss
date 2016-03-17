@@ -1,0 +1,21 @@
+/**
+* Accordions system
+* (based on Akkordion vanilla JS plugin)
+*/
+
+
+.akkordion {
+
+  .icon {
+    float: right;
+    position: relative;
+    top: -1px;
+  }
+
+  [data-akkordion-active] {
+    .icon {
+      @include rotate(180deg);
+    }
+  }
+
+}

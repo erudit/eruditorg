@@ -99,7 +99,9 @@ class SearchFormHelper(FormHelper):
 
         self.layout = Layout(
             Div(
-                HTML("<header><h3>%s</h3></header>" % _("Filtres")),
+                HTML(
+                    "<header class='search-header'><h3 class='h2'>%s</h3></header>" % _("Filtres")
+                ),
                 Fieldset(
                     "",
                     Div(
@@ -115,12 +117,13 @@ class SearchFormHelper(FormHelper):
                     ),
                 ),
                 Fieldset(
-                    _("Recherche avancée"),
+                    "",
                     HTML(
-                        "<a href='#' class='btn btn-default btn-sm'> \
-                            %s <i class='ion-ios-arrow-down caret'></i> \
-                        </a>"
-                        % _("Options de recherche avancées")),
+                        '<label class="control-label akkordion-title"> \
+                            %s <i class="ion-ios-arrow-down icon"></i> \
+                        </label>'
+                        % _("Options de recherche avancées")
+                    ),
                     Div(
                         Div(
                             Field('advanced_search_operator1'),
@@ -132,55 +135,55 @@ class SearchFormHelper(FormHelper):
                             Field('advanced_search_operator2'),
                             Field('advanced_search_term2'),
                             Field('advanced_search_field2'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator3'),
                             Field('advanced_search_term3'),
                             Field('advanced_search_field3'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator4'),
                             Field('advanced_search_term4'),
                             Field('advanced_search_field4'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator5'),
                             Field('advanced_search_term5'),
                             Field('advanced_search_field5'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator6'),
                             Field('advanced_search_term6'),
                             Field('advanced_search_field6'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator7'),
                             Field('advanced_search_term7'),
                             Field('advanced_search_field7'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator8'),
                             Field('advanced_search_term8'),
                             Field('advanced_search_field8'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator9'),
                             Field('advanced_search_term9'),
                             Field('advanced_search_field9'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('advanced_search_operator10'),
                             Field('advanced_search_term10'),
                             Field('advanced_search_field10'),
-                            css_class="search-operator hide",
+                            css_class="search-operator -hide",
                         ),
                         Div(
                             Field('pub_year_start'),
@@ -193,9 +196,9 @@ class SearchFormHelper(FormHelper):
                         Div(
                             Field('pub_types'),
                         ),
-                        css_class="advanced-search-fields",
+                        css_class="advanced-search-fields akkordion-content",
                     ),
-                    css_class="advanced-search",
+                    css_class="advanced-search akkordion hide",
                 ),
                 Fieldset(
                     "",
@@ -283,10 +286,10 @@ class SearchForm(forms.Form):
         choices=PUB_TYPES_CHOICES, required=False
     )
     sort = forms.ChoiceField(
-        label=_("Tri"), widget=forms.Select, choices=SORT_CHOICES, required=False
+        label=False, widget=forms.Select, choices=SORT_CHOICES, required=False
     )
     sort_order = forms.ChoiceField(
-        label=_("Ordre"), widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
+        label=False, widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
     )
 
     def __init__(self, *args, **kwargs):

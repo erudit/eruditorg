@@ -65,6 +65,14 @@ def search_filters(context, ):
     return {"filter_choices": filter_choices, "selected_filters": selected_filters}
 
 
+@register.assignment_tag
+def is_search_filter_has_values(selected_filters, filter_name):
+    if len(selected_filters.get(filter_name, [])) > 0:
+        return True
+    else:
+        return False
+
+
 @register.simple_tag
 def is_search_filter_value_selected(selected_filters, filter_name, filter_value):
     if str(filter_value) in selected_filters.get(filter_name, []):

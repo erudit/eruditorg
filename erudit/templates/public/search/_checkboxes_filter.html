@@ -2,9 +2,10 @@
 {% load search_tags %}
 
 {% if filter %}
-<div id="div_id_{{ filter_label }}" class="form-group">
-    <label for="id_{{ filter_label }}_0" class="control-label ">{% trans title %}</label>
-    <div class="controls">
+{% is_search_filter_has_values selected_filters filter_label as has_selected_values %}
+<div id="div_id_{{ filter_label }}" class="form-group akkordion" data-akkordion-single="true">
+    <label for="id_{{ filter_label }}_0" class="control-label akkordion-title">{% trans title %} <i class="icon ion-ios-arrow-down caret"></i></label>
+    <div class="controls akkordion-content {% if has_selected_values %}akkordion-active{% endif %}">
         {% for label, count in filter.values.items %}
         <div class="checkbox"><label class=""><input type="checkbox" name="{{ filter_label }}" id="id_{{ filter_label }}_{{ forloop.counter }}" value="{{ label }}" {% is_search_filter_value_selected selected_filters filter_label label %}>{{ label }} ({{ count }})</label></div>
         {% endfor %}

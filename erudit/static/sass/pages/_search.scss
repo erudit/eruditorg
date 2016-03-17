@@ -22,11 +22,47 @@ section#search-page {
 
 .search-form {
 
+  header.search-header {
+    margin-bottom: 20px;
+  }
+
+  // input style
+  input[type='text'],
+  input[type='search'] {
+    border: 1px solid $gray-base;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  // first level labels
+  label.control-label {
+    border-top: 1px solid $gray-base;
+    padding-top: 10px;
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    @include fw-sans-bold;
+  }
+
+  // basic search-form
+  .basic-search-field {
+    position: relative;
+    input {
+      padding-right: 40px;
+    }
+    button {
+      position: absolute;
+      bottom: -2px;
+      right: 10px;
+      color: $color-red;
+      font-size: 32px;
+    }
+  }
+
   // advanced search
   .advanced-search {
 
     .advanced-search-fields {
-      display: none;
+      // display: none;
     }
 
   }

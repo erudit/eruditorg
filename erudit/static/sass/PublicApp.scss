@@ -13,6 +13,7 @@
 // 2. Vendors
 $ionicons-font-path: "~ionicons/fonts";
 @import "~ionicons/scss/ionicons";
+@import "~akkordion/dist/akkordion.css";
 @import 'vendor/magnific-popup/magnific-popup.scss';
 
 // 3. Base stuff
@@ -54,7 +55,8 @@ $ionicons-font-path: "~ionicons/fonts";
   'components/panels',
   'components/buttons',
   'components/page-headers',
-  'components/pagination';
+  'components/pagination',
+  'components/accordions';
 
 // 6. Page-specific styles
 @import

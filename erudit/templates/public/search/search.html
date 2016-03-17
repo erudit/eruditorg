@@ -5,6 +5,8 @@
 
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
 
+{% block data-controller %}public:search{% endblock data-controller %}
+
 {% block content %}
 <!--
 Query URL: {{ query_url|safe }}
@@ -24,7 +26,6 @@ Query URL: {{ query_url|safe }}
         {% endif %}
         <h4 class="mono-space search-terms">
           {% for search_element in search_elements %}
-          {# {{ search_element }}#}
           <span class="search-operator">{{ search_element.search_operator }}</span> ({{ search_element.search_field }} : {{ search_element.search_term }})
           {% endfor %}
         </h4>
@@ -38,15 +39,17 @@ Query URL: {{ query_url|safe }}
     {# search form side #}
     <aside class="col-sm-3 search-form">
 
-        {% crispy form %}
+      <form action="{% url 'public:search:search' %}" id="id-search" method="get" >
 
+        {% crispy form %}
         {% search_filters %}
 
         <div class="form-group">
             <div class="controls ">
-                <button type="submit" class="btn btn-lg">{% trans "Recherche" %}<span class="ion ion-ios-search"></span></button>
+                <button type="submit" class="btn btn-default">{% trans "Recherche" %}<span class="ion ion-ios-search"></span></button>
             </div>
         </div>
+
       </form>
 
     </aside>
@@ -61,20 +64,16 @@ Query URL: {{ query_url|safe }}
             <li class="label">
               <h5>{% trans "Classé par" %}</h5>
             </li>
-            <li class="dropdown-buttons dropdown-sml">
+            <li class="dropdown-buttons dropdown-sml" id="search-nav-sort-by">
               <a href="#" class="select">{% trans "Ordre croissant" %} <i class="ion-ios-arrow-down caret"></i></a>
-              <ul>
-
-              </ul>
+              <ul></ul>
             </li>
             <li class="label">
               {% trans "Trier par..." %}
             </li>
-            <li class="dropdown-buttons dropdown-sml">
+            <li class="dropdown-buttons dropdown-sml" id="search-nav-order-by">
               <a href="#" class="select">{% trans "Pertinance" %} <i class="ion-ios-arrow-down caret"></i></a>
-              <ul>
-
-              </ul>
+              <ul></ul>
             </li>
           </ul>
         </nav>

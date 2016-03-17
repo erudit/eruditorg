@@ -403,6 +403,14 @@ section#article-detail {
       .erudicon-tools-share {  }
       .erudicon-tools-print {  }
       .erudicon-tools-fullscreen {  }
+
+      &:hover {
+        background-color: #000 !important;
+        .erudicon {
+          color: #fff !important;
+        }
+      }
+
     }
 
     html.pointerevents &, html.touchevents & {
@@ -461,7 +469,7 @@ section#article-detail {
         }
         .erudicon-tools-pdf { font-size: 6px; }
         .erudicon-tools-quote { font-size: 8px; }
-        .erudicon-tools-save { font-size: 12px; }
+        .erudicon-tools-save { font-size: 12px; }        
       }
     }
   }
