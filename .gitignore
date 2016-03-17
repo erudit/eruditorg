@@ -11,6 +11,7 @@ post_office_attachments/
 src/
 .DS_Store
 npm-debug.log
+npm-debug.log.*
 .coverage
 /node_modules
 /bower_components
