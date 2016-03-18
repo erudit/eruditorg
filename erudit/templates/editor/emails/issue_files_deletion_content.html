@@ -1,0 +1,12 @@
+{% extends "base_email.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% url 'userspace:journal:editor:update' issue.journal.pk issue.pk as issue_url %}
+  <p>{% trans "Les fichiers des numéros suivant seront supprimés dans cinq jours." %}</p>
+  <ul>
+  {% for issue in issue_submissions %}
+    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}">{{ issue }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock content %}

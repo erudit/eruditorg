@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 from pathlib import Path
 
+from celery.schedules import crontab
+
 DEBUG = True
 COMPRESS_ENABLED = True
 
@@ -354,6 +356,22 @@ LOGGING = {
 # Raven settings
 RAVEN_CONFIG = {
     'dsn': None,
+}
+
+# Celery settings
+# -----------------------------------
+
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'EST'
+CELERY_TASK_RESULT_EXPIRES = None
+
+CELERYBEAT_SCHEDULE = {
+    'issuesubmission-files-removal': {
+        'task': 'core.editor.tasks.handle_issuesubmission_files_removal',
+        'schedule': crontab(minute=0, hour=0),  # Executed daily at midnight
+    },
 }
 
 # MailChimp settings
