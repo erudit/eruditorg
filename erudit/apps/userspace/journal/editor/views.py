@@ -34,8 +34,9 @@ from .viewmixins import IssueSubmissionCheckMixin
 logger = logging.getLogger(__name__)
 
 
-class IssueSubmissionCreate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                            IssueSubmissionCheckMixin, CreateView):
+class IssueSubmissionCreate(
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin,
+        CreateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionForm
@@ -63,8 +64,9 @@ class IssueSubmissionCreate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin
         return result
 
 
-class IssueSubmissionUpdate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                            IssueSubmissionCheckMixin, UpdateView):
+class IssueSubmissionUpdate(
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin,
+        UpdateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
@@ -111,15 +113,17 @@ class IssueSubmissionUpdate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin
             get_available_user_status_transitions(self.request.user)
         context['transitions'] = transitions
 
+        context['status_tracks'] = self.object.status_tracks.all()
+
         return context
 
     def get_success_url(self):
         return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
 
 
-class IssueSubmissionTransitionView(LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin,
-                                    MenuItemMixin, SingleObjectTemplateResponseMixin,
-                                    BaseDetailView):
+class IssueSubmissionTransitionView(
+        LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin, MenuItemMixin,
+        SingleObjectTemplateResponseMixin, BaseDetailView):
     context_object_name = 'issue_submission'
     menu_journal = 'editor'
     model = IssueSubmission
@@ -198,8 +202,8 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
     transition_name = 'archive'
 
 
-class IssueSubmissionList(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                          IssueSubmissionCheckMixin, ListView):
+class IssueSubmissionList(
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin, ListView):
     menu_journal = 'editor'
     model = IssueSubmission
     template_name = 'userspace/journal/editor/issues.html'

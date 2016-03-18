@@ -88,6 +88,50 @@
             </div>
           </div>
           {% endif %}
+          {% if status_tracks %}
+          <div class="panel">
+            <div class="panel-heading" role="tab" id="issue-history-heading">
+              <h3 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#issue-upload" aria-expanded="false" aria-controls="issue-upload">
+                  <span class="fa accordion-toggle"></span> {% trans "Historique" %}
+                </a>
+              </h3>
+            </div>
+            <div id="issue-history" class="panel-collapse collapse {% if object.pk %}in{% endif %}" role="tabpanel" aria-labelledby="issue-upload-heading">
+              <div class="panel-body">
+                <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
+                  <ul>
+                  {% for track in status_tracks %}
+                    <li>
+                      {% if track.status == "D" %}
+                        {% trans "Marqué à corriger le" as status_prefix %}
+                      {% elif track.status == "S" %}
+                        {% trans "Soumis le" as status_prefix %}
+                      {% elif track.status == "V" %}
+                        {% trans "Validé le" as status_prefix %}
+                      {% elif track.status == "A" %}
+                        {% trans "Archivé le" as status_prefix %}
+                      {% endif %}
+                      {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
+                        {{ prefix }} {{ date }}
+                      {% endblocktrans %}
+                      {% if track.files_version and track.files_version.submissions.exists %}
+                        <br />
+                        <p>
+                          <strong>{% trans "Fichiers :" %}</strong>&nbsp;
+                          {% for f in track.files_version.submissions.all %}
+                            <a href="{% url 'userspace:journal:editor:attachment-detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                          {% endfor %}
+                        </p>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
           <div class="form-group text-right">
             <button type="reset" class="btn btn-default" id="submit-id-reset">{% trans "Annuler" %}</button>
             <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
