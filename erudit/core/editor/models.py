@@ -144,6 +144,22 @@ class IssueSubmission(models.Model):
         return self.files_versions.order_by('-created').first()
 
 
+class IssueSubmissionStatusTrack(models.Model):
+    """ Tracks the changes of an issue submission status. """
+    issue_submission = models.ForeignKey(
+        IssueSubmission, related_name='status_tracks', verbose_name=_('Changements de statut'))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
+    status = models.CharField(max_length=100, verbose_name=_('statut'))
+    files_version = models.ForeignKey(
+        'IssueSubmissionFilesVersion', verbose_name=_('Version des fichiers'),
+        blank=True, null=True)
+
+    class Meta:
+        ordering = ['created', ]
+        verbose_name = _("Changement de statut d'un envoi de numéro")
+        verbose_name_plural = _("Changements de statut d'envois de numéro")
+
+
 class IssueSubmissionFilesVersion(models.Model):
     """ An issue submission files version. """
     issue_submission = models.ForeignKey(
