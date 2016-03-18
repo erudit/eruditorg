@@ -17,8 +17,8 @@ def register_status_track(sender, instance, name, source, target, **kwargs):
     status_track = IssueSubmissionStatusTrack.objects.create(
         issue_submission=instance, status=instance.status)
 
-    # If the IssueSubmission instance was submitted or refused, attaches the last files version to
+    # If the IssueSubmission instance was submitted, attaches the last files version to
     # the status track.
-    if instance.status in [IssueSubmission.SUBMITTED, IssueSubmission.DRAFT, ]:
+    if instance.status == IssueSubmission.SUBMITTED:
         status_track.files_version = instance.last_files_version
         status_track.save()
