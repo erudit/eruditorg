@@ -20,6 +20,7 @@ from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from plupload.models import ResumableFile
 from rules.contrib.views import PermissionRequiredMixin
 
+from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.editor.models import IssueSubmission
 from erudit.models.event import Event
@@ -33,8 +34,8 @@ from .viewmixins import IssueSubmissionCheckMixin
 logger = logging.getLogger(__name__)
 
 
-class IssueSubmissionCreate(
-        JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin, CreateView):
+class IssueSubmissionCreate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                            IssueSubmissionCheckMixin, CreateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionForm
@@ -62,8 +63,8 @@ class IssueSubmissionCreate(
         return result
 
 
-class IssueSubmissionUpdate(
-        JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin, UpdateView):
+class IssueSubmissionUpdate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                            IssueSubmissionCheckMixin, UpdateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
@@ -116,9 +117,9 @@ class IssueSubmissionUpdate(
         return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
 
 
-class IssueSubmissionTransitionView(
-        JournalScopeMixin, PermissionRequiredMixin, MenuItemMixin,
-        SingleObjectTemplateResponseMixin, BaseDetailView):
+class IssueSubmissionTransitionView(LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin,
+                                    MenuItemMixin, SingleObjectTemplateResponseMixin,
+                                    BaseDetailView):
     context_object_name = 'issue_submission'
     menu_journal = 'editor'
     model = IssueSubmission
@@ -197,7 +198,8 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
     transition_name = 'archive'
 
 
-class IssueSubmissionList(JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin, ListView):
+class IssueSubmissionList(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
+                          IssueSubmissionCheckMixin, ListView):
     menu_journal = 'editor'
     model = IssueSubmission
     template_name = 'userspace/journal/editor/issues.html'
@@ -207,7 +209,8 @@ class IssueSubmissionList(JournalScopeMixin, MenuItemMixin, IssueSubmissionCheck
         return qs.filter(journal=self.current_journal)
 
 
-class IssueSubmissionAttachmentView(JournalScopeMixin, PermissionRequiredMixin, DetailView):
+class IssueSubmissionAttachmentView(
+        LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin, DetailView):
     """
     Returns an IssueSubmission attachment.
     """

@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import rules
-from rules.predicates import is_superuser, is_staff
+from rules.predicates import is_authenticated
+from rules.predicates import is_staff
+from rules.predicates import is_superuser
 
 from .models import Journal
 
@@ -13,4 +17,4 @@ def is_journal_member(user, journal=None):
 
 
 rules.add_perm('erudit.manage_journal',
-               is_superuser | is_staff | is_journal_member)
+               is_authenticated & (is_superuser | is_staff | is_journal_member))

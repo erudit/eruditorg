@@ -3,10 +3,8 @@
 from django.contrib.contenttypes.models import ContentType
 from rules.contrib.views import PermissionRequiredMixin
 
-from base.viewmixins import LoginRequiredMixin
 
-
-class PermissionsCheckMixin(PermissionRequiredMixin, LoginRequiredMixin):
+class PermissionsCheckMixin(PermissionRequiredMixin):
     permission_required = 'authorization.manage_authorizations'
 
     def get_queryset(self):

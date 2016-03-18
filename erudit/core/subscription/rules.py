@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import rules
-from rules.predicates import is_staff, is_superuser
+from rules.predicates import is_authenticated
+from rules.predicates import is_staff
+from rules.predicates import is_superuser
 
 from .models import Policy
 
@@ -20,7 +24,8 @@ def is_account_manager(user, account=None):
         if hasattr(account, 'policy'):
             return is_policy_manager(user, account.policy)
 
+
 rules.add_perm('subscription.manage_policy',
-               is_superuser | is_staff | is_policy_manager)
+               is_authenticated & (is_superuser | is_staff | is_policy_manager))
 rules.add_perm('subscription.manage_account',
-               is_superuser | is_staff | is_account_manager)
+               is_authenticated & (is_superuser | is_staff | is_account_manager))

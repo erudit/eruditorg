@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 
 from base.factories import GroupFactory
@@ -58,3 +59,12 @@ class TestHasAuthorizationPredicate(BaseEruditTestCase):
         # Run & check
         self.assertTrue(auth_check_1(self.user, self.journal))
         self.assertFalse(auth_check_2(self.user, self.journal))
+
+    def test_knows_that_anonymous_users_cannot_have_authorizations(self):
+        # Setup
+        user = AnonymousUser()
+        auth_check_1 = HasAuthorization(AC.can_manage_authorizations, 'collection')
+        auth_check_2 = HasAuthorization(AC.can_manage_account, 'collection')
+        # Run & check
+        self.assertFalse(auth_check_1(user, self.journal))
+        self.assertFalse(auth_check_2(user, self.journal))

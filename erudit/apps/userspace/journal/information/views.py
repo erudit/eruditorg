@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 from rules.contrib.views import PermissionRequiredMixin
 
+from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from erudit.models import JournalInformation
 
@@ -16,7 +17,7 @@ from .forms import JournalInformationForm
 
 
 class JournalInformationUpdateView(
-        JournalScopeMixin, MenuItemMixin, PermissionRequiredMixin, UpdateView):
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, PermissionRequiredMixin, UpdateView):
     """
     Displays a form to update journal information. JournalInformation instances
     can hold information in many languages. The language used to save the values

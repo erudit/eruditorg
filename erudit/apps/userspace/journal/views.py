@@ -15,7 +15,7 @@ class HomeView(LoginRequiredMixin, JournalScopeMixin, TemplateView):
     template_name = 'userspace/journal/home.html'
 
 
-class JournalSectionEntryPointView(RedirectView):
+class JournalSectionEntryPointView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
