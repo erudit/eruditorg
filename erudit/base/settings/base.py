@@ -356,6 +356,15 @@ RAVEN_CONFIG = {
     'dsn': None,
 }
 
+# Celery settings
+# -----------------------------------
+
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'EST'
+CELERY_TASK_RESULT_EXPIRES = None
+
 # MailChimp settings
 MAILCHIMP_UUID = ""
 MAILCHIMP_ACTION_URL = ""

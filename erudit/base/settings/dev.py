@@ -26,7 +26,12 @@ MIDDLEWARE_CLASSES += (
 
 INSTALLED_APPS += (
     'debug_toolbar',
+    'djcelery',
+    'kombu.transport.django',
 )
+
+BROKER_URL = 'django://'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 
 # Copy these lines into your ``settings_env`` module and uncomment them
 # in order to use hot reloading!
