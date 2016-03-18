@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import rules
-from rules.predicates import is_staff, is_superuser
+from rules.predicates import is_authenticated
+from rules.predicates import is_staff
+from rules.predicates import is_superuser
 
 from .rules_helpers import get_editable_journals
 
@@ -14,5 +16,6 @@ def can_edit_journal(user, journal=None):
     else:
         return bool(journal.members.filter(id=user.id).count())
 
+
 rules.add_perm('journal.edit_journal',
-               is_superuser | is_staff | can_edit_journal)
+               is_authenticated & (is_superuser | is_staff | can_edit_journal))

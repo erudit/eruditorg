@@ -20,6 +20,10 @@ class HasAuthorization(object):
             if isinstance(authorization, AuthorizationDef) else authorization
 
         def check(user, obj=None):
+            if user.is_anonymous():
+                # Anonymous users cannot have authorizations.
+                return False
+
             user_model = get_user_model()
             user_groups_related_name = user_model.groups.field.related_query_name()
 
