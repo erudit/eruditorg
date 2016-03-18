@@ -18,6 +18,7 @@ npm-debug.log.*
 Vagrantfile
 /vagrant_data
 .vagrant
+celerybeat-schedule
 vagrant
 tools/static/.env.json
 media/*
