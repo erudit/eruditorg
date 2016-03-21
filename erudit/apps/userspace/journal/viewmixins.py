@@ -12,6 +12,11 @@ from erudit.models import Journal
 
 
 class JournalScopeMixin(object):
+    """
+    The JournalScopeMixin provides a way to associate a view with a specific Journal instance. The
+    Journal instance must have the current user in its members. If not a PermissionDenied error will
+    be returned.
+    """
     scope_session_key = 'userspace:journal-management:current-journal-id'
 
     def dispatch(self, request, *args, **kwargs):
