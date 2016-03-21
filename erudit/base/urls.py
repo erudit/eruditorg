@@ -61,5 +61,11 @@ if settings.DEBUG:
     # Remove leading and trailing slashes so the regex matches.
     media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
     urlpatterns += [
+        # Test 503, 500, 404 and 403 pages
+        url(r'^403/$', TemplateView.as_view(template_name='403.html')),
+        url(r'^404/$', TemplateView.as_view(template_name='404.html')),
+        url(r'^500/$', TemplateView.as_view(template_name='500.html')),
+        url(r'^503/$', TemplateView.as_view(template_name='503.html')),
+
         url(r'^%s/(?P<path>.*)$' % media_url, serve, {'document_root': settings.MEDIA_ROOT}),
     ]
