@@ -97,7 +97,7 @@
                 {# TODO : add this to model #}
                 <li>
                   <h5 class="mono-space">{% trans "Période de publication" %}</h5>
-                  <p>1924 - 2016</p>
+                  <p>{{ journal.erudit_object.publication_period }}</p>
                 </li>
 
                 {% if journal.first_issue %}
