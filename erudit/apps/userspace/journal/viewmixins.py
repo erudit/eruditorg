@@ -79,5 +79,10 @@ class JournalScopeMixin(object):
 class JournalScopePermissionRequiredMixin(JournalScopeMixin, PermissionRequiredMixin):
     raise_exception = True
 
+    def get_context_data(self, **kwargs):
+        context = super(JournalScopePermissionRequiredMixin, self).get_context_data(**kwargs)
+        context['journal_permission_required'] = self.permission_required
+        return context
+
     def get_permission_object(self):
         return self.current_journal
