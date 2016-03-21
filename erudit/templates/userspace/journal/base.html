@@ -7,8 +7,11 @@
 <li class="select">
   <select id="id_journal_chooser" onChange="window.location.href=this.value">
     {% for j in scope_user_journals %}
-      {% has_perm journal_permission_required request.user j as can_switch %}
-      <option value="{% journal_url j %}" {% if j.id == scope_current_journal.id %}selected{% endif %}{% if not can_switch %} disabled{% endif %}>{{ j.name }}</option>
+      {% if journal_permission_required %}{% has_perm journal_permission_required request.user j as can_switch %}{% endif %}
+      <option
+        value="{% journal_url j %}"
+        {% if j.id == scope_current_journal.id %}selected{% endif %}
+        {% if can_switch != None and not can_switch %} disabled{% endif %}>{{ j.name }}</option>
     {% endfor %}
   </select>
 </li>
