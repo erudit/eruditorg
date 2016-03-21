@@ -15,7 +15,7 @@ rules.add_perm(
     'editor.manage_issuesubmission',
     is_authenticated & (
         is_superuser | is_staff |
-        is_journal_member & HasAuthorization(AC.can_manage_issuesubmission)
+        (is_journal_member & HasAuthorization(AC.can_manage_issuesubmission))
     ),
 )
 

@@ -23,7 +23,7 @@ class ViewsTestCase(BaseEruditTestCase):
                           password="user")
         url = reverse('userspace:journal:subscription:account_list', args=(self.journal.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
     def test_acccount_list_granted(self):
         policy = PolicyFactory()
@@ -32,6 +32,7 @@ class ViewsTestCase(BaseEruditTestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
+        self.journal.members.add(self.user_granted)
         url = reverse('userspace:journal:subscription:account_list', args=(self.journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -41,7 +42,7 @@ class ViewsTestCase(BaseEruditTestCase):
                           password="user")
         url = reverse('userspace:journal:subscription:account_add', args=(self.journal.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
     def test_acccount_add_granted(self):
         policy = PolicyFactory()
@@ -50,6 +51,7 @@ class ViewsTestCase(BaseEruditTestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
+        self.journal.members.add(self.user_granted)
         url = reverse('userspace:journal:subscription:account_add', args=(self.journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -62,7 +64,7 @@ class ViewsTestCase(BaseEruditTestCase):
         url = reverse('userspace:journal:subscription:account_update',
                       args=(self.journal.pk, account.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 403)
 
     # def test_account_update_granted(self):
     #     policy = PolicyFactory()
@@ -89,7 +91,7 @@ class ViewsTestCase(BaseEruditTestCase):
         url = reverse('userspace:journal:subscription:account_delete',
                       args=(self.journal.pk, account.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 403)
 
     def test_acccount_delete_granted(self):
         policy = PolicyFactory()
@@ -99,6 +101,7 @@ class ViewsTestCase(BaseEruditTestCase):
 
         self.client.login(username=self.user_granted.username,
                           password="user")
+        self.journal.members.add(self.user_granted)
         url = reverse('userspace:journal:subscription:account_delete',
                       args=(self.journal.pk, account.pk, ))
         response = self.client.get(url)
@@ -114,7 +117,7 @@ class ViewsTestCase(BaseEruditTestCase):
         url = reverse('userspace:journal:subscription:account_reset_pwd',
                       args=(self.journal.pk, account.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 403)
 
     def test_acccount_reset_password_granted(self):
         policy = PolicyFactory()
@@ -122,6 +125,7 @@ class ViewsTestCase(BaseEruditTestCase):
         policy.save()
         account = IndividualAccountProfileFactory(policy=policy)
 
+        self.journal.members.add(self.user_granted)
         self.client.login(username=self.user_granted.username,
                           password="user")
         url = reverse('userspace:journal:subscription:account_reset_pwd',

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
+from rules.contrib.views import PermissionRequiredMixin
 
 from core.journal.rules_helpers import get_editable_journals
 from erudit.models import Journal
@@ -44,6 +45,8 @@ class JournalScopeMixin(object):
         current_journal_id = self.kwargs.get('journal_pk', None) \
             or self.request.session.get(self.scope_session_key, None)
 
+        journal = None
+
         if current_journal_id is not None:
             journal = get_object_or_404(Journal, id=current_journal_id)
         else:
@@ -51,8 +54,10 @@ class JournalScopeMixin(object):
             user_journal_count = user_journals_qs.count()
             if user_journal_count:
                 journal = user_journals_qs.first()
-            else:
-                raise PermissionDenied
+
+        # Returns a 403 error if the user is not a member of the journal
+        if journal is None or not self.user_journals.filter(id=journal.id).exists():
+            raise PermissionDenied
 
         if not scoped_url:
             # Redirects to the scoped URL
@@ -69,3 +74,10 @@ class JournalScopeMixin(object):
     @cached_property
     def user_journals(self):
         return self.get_user_journals()
+
+
+class JournalScopePermissionRequiredMixin(JournalScopeMixin, PermissionRequiredMixin):
+    raise_exception = True
+
+    def get_permission_object(self):
+        return self.current_journal

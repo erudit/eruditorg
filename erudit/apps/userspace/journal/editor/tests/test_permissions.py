@@ -15,11 +15,11 @@ class ViewsTestCase(BaseEruditTestCase):
 
     def setUp(self):
         super(ViewsTestCase, self).setUp()
-        self.user_granted = UserFactory(username="user_granted")
+        self.user_granted = UserFactory.create(username="user_granted")
         self.user_granted.set_password("user")
         self.user_granted.save()
 
-        self.user_non_granted = UserFactory(username="user_non_granted")
+        self.user_non_granted = UserFactory.create(username="user_non_granted")
         self.user_non_granted.set_password("user")
         self.user_non_granted.save()
 
@@ -28,18 +28,18 @@ class ViewsTestCase(BaseEruditTestCase):
                           password="user")
         url = reverse('userspace:journal:editor:issues', args=(self.journal.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
     def test_issuesubmission_granted(self):
         journal = JournalFactory()
-        journal.members.add(self.user_granted)
         journal.save()
+        journal.members.add(self.user_granted)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:journal:editor:issues', args=(self.journal.pk, ))
+        url = reverse('userspace:journal:editor:issues', kwargs={'journal_pk': journal.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         Authorization.objects.create(
@@ -55,18 +55,18 @@ class ViewsTestCase(BaseEruditTestCase):
                           password="user")
         url = reverse('userspace:journal:editor:add', args=(self.journal.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
     def test_issuesubmission_add_granted(self):
         journal = JournalFactory()
-        journal.members.add(self.user_granted)
         journal.save()
+        journal.members.add(self.user_granted)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:journal:editor:add', args=(self.journal.pk, ))
+        url = reverse('userspace:journal:editor:add', kwargs={'journal_pk': journal.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         Authorization.objects.create(
@@ -84,19 +84,20 @@ class ViewsTestCase(BaseEruditTestCase):
                           password="user")
         url = reverse('userspace:journal:editor:update', args=(self.journal.pk, issue.pk, ))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404,)
+        self.assertEqual(response.status_code, 403)
 
     def test_issuesubmission_update_granted(self):
         journal = JournalFactory()
-        journal.members.add(self.user_granted)
         journal.save()
+        journal.members.add(self.user_granted)
         issue = IssueSubmissionFactory(journal=journal)
 
         self.client.login(username=self.user_granted.username,
                           password="user")
-        url = reverse('userspace:journal:editor:update', args=(self.journal.pk, issue.pk, ))
+        url = reverse('userspace:journal:editor:update', kwargs={
+            'journal_pk': journal.pk, 'pk': issue.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 403)
 
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         Authorization.objects.create(

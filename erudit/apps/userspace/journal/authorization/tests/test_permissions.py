@@ -29,10 +29,10 @@ class ViewsTestCase(TestCase):
         url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
     def test_permission_list_granted(self):
         journal = JournalFactory()
@@ -62,10 +62,10 @@ class ViewsTestCase(TestCase):
         url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
     def test_permission_create_granted(self):
         journal = JournalFactory()
@@ -92,6 +92,9 @@ class ViewsTestCase(TestCase):
         journal = JournalFactory()
         journal.save()
 
+        self.client.login(username=self.user_granted.username,
+                          password="user")
+
         ct = ContentType.objects.get(app_label="erudit", model="journal")
         authorization = Authorization.objects.create(
             content_type=ct,
@@ -103,9 +106,9 @@ class ViewsTestCase(TestCase):
                       args=(journal.pk, authorization.pk, ))
 
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 403)
 
-        journal.members.add(self.user_non_granted)
+        journal.members.add(self.user_granted)
         journal.save()
         response = self.client.get(url, follow=True)
         self.assertEqual(response.status_code, 200)

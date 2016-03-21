@@ -18,28 +18,26 @@ from django.views.generic import UpdateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from plupload.models import ResumableFile
-from rules.contrib.views import PermissionRequiredMixin
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.editor.models import IssueSubmission
 from erudit.models.event import Event
 
-from ..viewmixins import JournalScopeMixin
+from ..viewmixins import JournalScopePermissionRequiredMixin
 
 from .forms import IssueSubmissionForm
 from .forms import IssueSubmissionUploadForm
-from .viewmixins import IssueSubmissionCheckMixin
 
 logger = logging.getLogger(__name__)
 
 
 class IssueSubmissionCreate(
-        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin,
-        CreateView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionForm
+    permission_required = 'editor.manage_issuesubmission'
     template_name = 'userspace/journal/editor/form.html'
     title = _("Faire un dépôt de numéros")
 
@@ -65,11 +63,11 @@ class IssueSubmissionCreate(
 
 
 class IssueSubmissionUpdate(
-        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin,
-        UpdateView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
+    permission_required = 'editor.manage_issuesubmission'
     template_name = 'userspace/journal/editor/form.html'
 
     def get_form_kwargs(self):
@@ -122,7 +120,7 @@ class IssueSubmissionUpdate(
 
 
 class IssueSubmissionTransitionView(
-        LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin, MenuItemMixin,
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
     context_object_name = 'issue_submission'
     menu_journal = 'editor'
@@ -203,9 +201,10 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
 
 
 class IssueSubmissionList(
-        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, IssueSubmissionCheckMixin, ListView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     menu_journal = 'editor'
     model = IssueSubmission
+    permission_required = 'editor.manage_issuesubmission'
     template_name = 'userspace/journal/editor/issues.html'
 
     def get_queryset(self):
@@ -214,7 +213,7 @@ class IssueSubmissionList(
 
 
 class IssueSubmissionAttachmentView(
-        LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin, DetailView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, DetailView):
     """
     Returns an IssueSubmission attachment.
     """

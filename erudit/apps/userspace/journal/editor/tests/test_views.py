@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
-from django.http.response import HttpResponseNotFound
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from lxml import etree
@@ -60,11 +59,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             )
         )
 
-        self.assertIsInstance(
-            response,
-            HttpResponseNotFound,
-            "The user should not be able to access another editor's submissions where he is not member"  # noqa
-        )
+        self.assertEqual(response.status_code, 403)
 
     def test_submit_changes_to_issue(self):
         """ Submitting changes to an issue doesn't crash.
@@ -258,6 +253,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             username='dummy', email='dummy@xyz.com', password='top_secret')
         AuthorizationFactory.create(
             user=user, authorization_codename=AC.can_review_issuesubmission.codename)
+        self.journal.members.add(user)
 
         self.client.login(username='dummy', password='top_secret')
         self.issue_submission.last_files_version.submissions.add(rfile)
