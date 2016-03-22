@@ -72,7 +72,7 @@ class ArticleAccessCheckMixin(object):
         # 3- Is the current IP address allowed to access the article as an institution?
         ip = get_ip(self.request)
         institutional_subscriptions = JournalAccessSubscription.objects.filter(
-            Q(access_full=True) |
+            Q(full_access=True) |
             Q(journal=article.issue.journal) |
             Q(journals__id=article.issue.journal_id),
             organisation__isnull=False)

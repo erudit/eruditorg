@@ -17,7 +17,7 @@ class TestHasAuthorizationPredicate(BaseEruditTestCase):
         AuthorizationFactory.create(
             user=self.user, authorization_codename=AC.can_manage_authorizations.codename)
         auth_check_1 = HasAuthorization(AC.can_manage_authorizations)
-        auth_check_2 = HasAuthorization(AC.can_manage_account)
+        auth_check_2 = HasAuthorization(AC.can_manage_individual_subscription)
         # Run & check
         self.assertTrue(auth_check_1(self.user))
         self.assertFalse(auth_check_2(self.user))
@@ -29,7 +29,7 @@ class TestHasAuthorizationPredicate(BaseEruditTestCase):
         AuthorizationFactory.create(
             group=group, authorization_codename=AC.can_manage_authorizations.codename)
         auth_check_1 = HasAuthorization(AC.can_manage_authorizations)
-        auth_check_2 = HasAuthorization(AC.can_manage_account)
+        auth_check_2 = HasAuthorization(AC.can_manage_individual_subscription)
         # Run & check
         self.assertTrue(auth_check_1(self.user))
         self.assertFalse(auth_check_2(self.user))
@@ -42,7 +42,7 @@ class TestHasAuthorizationPredicate(BaseEruditTestCase):
             user=self.user, authorization_codename=AC.can_manage_authorizations.codename,
             content_type=content_type, object_id=object_id)
         auth_check_1 = HasAuthorization(AC.can_manage_authorizations)
-        auth_check_2 = HasAuthorization(AC.can_manage_account)
+        auth_check_2 = HasAuthorization(AC.can_manage_individual_subscription)
         # Run & check
         self.assertTrue(auth_check_1(self.user, self.journal))
         self.assertFalse(auth_check_2(self.user, self.journal))
@@ -55,7 +55,7 @@ class TestHasAuthorizationPredicate(BaseEruditTestCase):
             user=self.user, authorization_codename=AC.can_manage_authorizations.codename,
             content_type=content_type, object_id=object_id)
         auth_check_1 = HasAuthorization(AC.can_manage_authorizations, 'collection')
-        auth_check_2 = HasAuthorization(AC.can_manage_account, 'collection')
+        auth_check_2 = HasAuthorization(AC.can_manage_individual_subscription, 'collection')
         # Run & check
         self.assertTrue(auth_check_1(self.user, self.journal))
         self.assertFalse(auth_check_2(self.user, self.journal))
@@ -64,7 +64,7 @@ class TestHasAuthorizationPredicate(BaseEruditTestCase):
         # Setup
         user = AnonymousUser()
         auth_check_1 = HasAuthorization(AC.can_manage_authorizations, 'collection')
-        auth_check_2 = HasAuthorization(AC.can_manage_account, 'collection')
+        auth_check_2 = HasAuthorization(AC.can_manage_individual_subscription, 'collection')
         # Run & check
         self.assertFalse(auth_check_1(user, self.journal))
         self.assertFalse(auth_check_2(user, self.journal))
