@@ -5,26 +5,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
-from .models import (Policy, PolicyEvent,
+from .models import (Policy,
                      Organisation, Journal, InstitutionalAccount,
                      InstitutionIPAddressRange)
-
-
-class PolicyEventAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'date_creation',
-        'policy',
-        'code',
-        'message',
-    )
-    search_fields = ('message', 'code', )
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_delete_permission(self, request, pk=None):
-        return request.user.is_superuser
 
 
 class PolicyInline(GenericStackedInline):
@@ -159,6 +142,5 @@ class PolicyAdmin(admin.ModelAdmin):
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Journal, JournalAdmin)
-admin.site.register(PolicyEvent, PolicyEventAdmin)
 admin.site.register(InstitutionalAccount)
 admin.site.register(InstitutionIPAddressRange)

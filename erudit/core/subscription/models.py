@@ -4,22 +4,15 @@ import ipaddress
 from datetime import timedelta
 from functools import reduce
 
-from django.conf import settings
 from django.db import models
-from django.template.loader import get_template
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from post_office import mail
 
 from erudit.models import Organisation as CoreOrganisation
 from erudit.models import Journal as CoreJournal
-
-
-# When a notification is sent, don't spam users until this elapsed time
-EVENT_SILENCE_DAYS = getattr(settings, "EVENT_SILENCE_DAYS ", 30)
 
 
 class Organisation(CoreOrganisation):
@@ -80,34 +73,6 @@ class InstitutionIPAddressRange(models.Model):
         return reduce(
             lambda ips, ipn: ips + list(ipn),
             ipaddress.summarize_address_range(start, end), [])
-
-
-class PolicyEvent(models.Model):
-    """
-    """
-    date_creation = models.DateTimeField(
-        editable=False,
-        null=True,
-        default=timezone.now,
-        verbose_name=_("Date de création")
-    )
-    policy = models.ForeignKey(
-        'Policy',
-        verbose_name=_('Accès aux produits'),
-    )
-    code = models.CharField(
-        max_length=120,
-        verbose_name=_("Code"),
-        choices=(
-                ('LIMIT_REACHED', _('Limite atteinte')),
-        )
-    )
-    message = models.TextField(verbose_name=_("Texte"), blank=True)
-
-    class Meta:
-        verbose_name = _("Évènement sur les accès")
-        verbose_name_plural = _("Évènements sur les accès")
-        ordering = ('-date_creation', )
 
 
 class Policy(models.Model):
@@ -211,27 +176,3 @@ class Policy(models.Model):
             self.date_renew = self.date_activation
         self.date_renew = self.date_renew + timedelta(days=self.renew_cycle)
         self.save()
-
-    def notify_limit_reached(self):
-        if self.max_accounts and self.total_accounts > self.max_accounts:
-            date = timezone.now() - timedelta(days=EVENT_SILENCE_DAYS)
-            if PolicyEvent.objects.filter(policy=self, date_creation__gt=date).count() == 0:
-                template = get_template('userspace/journal/subscription/mail/limit_reached.html')
-                context = {'policy': self}
-                html_message = template.render(context)
-
-                recipients = [u.email for u in self.managers.all() if u.email]
-                mail.send(
-                    recipients,
-                    settings.RENEWAL_FROM_EMAIL,
-                    message=html_message,
-                    html_message=html_message,
-                    subject=_("Avis de dépassement") + '#{}'.format(self.id)
-                )
-
-                if len(recipients) > 0:
-                    emails = ",".join(recipients)
-                else:
-                    emails = "!!!"
-                msg = "Destinataires: {} Message: {}".format(emails, html_message)
-                PolicyEvent(policy=self, code='LIMIT_REACHED', message=msg).save()
