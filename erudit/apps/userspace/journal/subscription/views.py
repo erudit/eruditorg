@@ -17,15 +17,16 @@ from .forms import JournalAccessSubscriptionForm
 
 class IndividualJournalAccessSubscriptionListView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+    context_object_name = 'subscriptions'
     menu_journal = 'subscription'
     model = JournalAccessSubscription
     paginate_by = 10
     permission_required = 'subscription.manage_individual_subscription'
-    template_name = 'userspace/journal/subscription/individualaccount_filter.html'
+    template_name = 'userspace/journal/subscription/individualsubscription_list.html'
 
     def get_queryset(self):
         qs = super(IndividualJournalAccessSubscriptionListView, self).get_queryset()
-        return qs.filter(journal=self.current_journal)
+        return qs.filter(user__isnull=False, journal=self.current_journal)
 
 
 class IndividualJournalAccessSubscriptionCreateView(
