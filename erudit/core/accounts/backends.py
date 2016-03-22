@@ -1,14 +1,15 @@
-import types
-import crypt
+# -*- coding: utf-8 -*-
 
-from django.contrib.auth.backends import ModelBackend
+import crypt
+import types
+
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.apps import apps
-from erudit.utils.mandragore import (
-    get_user_from_mandragore,
-    update_user_password
-)
+from django.contrib.auth.backends import ModelBackend
+
+from .mandragore import get_user_from_mandragore
+from .mandragore import update_user_password
 
 
 def set_password_mandragore(self, raw_password):
@@ -82,8 +83,8 @@ class AbonnementIndividuelBackend(ModelBackend):
 
     def authenticate(self, username=None, password=None):
         Profile = apps.get_model(
-            app_label='subscription',
-            model_name='IndividualAccountProfile')
+            app_label='accounts',
+            model_name='AbonnementProfile')
         try:
             profile = Profile.objects.get(user__username=username)
         except Profile.DoesNotExist:

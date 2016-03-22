@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import factory
 
-from base.factories import UserFactory
 from erudit.factories import OrganisationFactory
 
 
@@ -11,15 +12,6 @@ class PolicyFactory(factory.django.DjangoModelFactory):
 
     content_object = factory.SubFactory(OrganisationFactory)
     max_accounts = 10
-
-
-class IndividualAccountProfileFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = 'subscription.IndividualAccountProfile'
-
-    policy = factory.SubFactory(PolicyFactory)
-    user = factory.SubFactory(UserFactory)
 
 
 class InstitutionalAccountFactory(factory.django.DjangoModelFactory):

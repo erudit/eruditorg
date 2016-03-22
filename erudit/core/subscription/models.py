@@ -1,20 +1,17 @@
-import hashlib
+# -*- coding: utf-*-
+
 import ipaddress
-from random import choice
-import base64
 from datetime import timedelta
 from functools import reduce
 
 from django.conf import settings
-from django.utils import timezone
 from django.db import models
 from django.template.loader import get_template
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User
-
 from post_office import mail
 
 from erudit.models import Organisation as CoreOrganisation
@@ -34,97 +31,6 @@ class Journal(CoreJournal):
     class Meta:
         proxy = True
         verbose_name = _('Revue')
-
-
-class IndividualAccountProfile(models.Model):
-    """
-    Personal account used in erudit.org
-    to access protected content.
-    An account should always be linked with a policy, which determines its
-    access rights.
-    The policy itself is linked either with an account or an organization.
-    """
-    user = models.OneToOneField(User, verbose_name=_('Utilisateur'))
-    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
-    policy = models.ForeignKey(
-        "Policy",
-        verbose_name=_("Accès"),
-        related_name="accounts",
-        blank=True,
-        null=True,
-        help_text=_("Laisser vide si la politique d'accès aux produits est définie plus bas")
-    )
-
-    class Meta:
-        verbose_name = _("Compte personnel")
-        verbose_name_plural = _("Comptes personnels")
-
-    def save(self, *args, **kwargs):
-        # Stamp first user created date
-        # TODO userspace allow empty selection for policy
-        if not self.pk and self.policy.date_activation is None:
-            self.policy.date_activation = timezone.now()
-            self.policy.date_renew = self.policy.date_activation
-            self.policy.renew()
-
-        # Password encryption
-        if self.pk:
-            if IndividualAccountProfile.objects.filter(pk=self.pk).count() == 1:
-                old_crypted_password = IndividualAccountProfile.objects.get(pk=self.pk).password
-                if not (self.password == old_crypted_password):
-                    self.update_password(self.password)
-            else:
-                # Not yet in Db, so the password is set in constructor already crypted
-                pass
-        else:
-            self.mail_account()
-            new_password = self.generate_password()
-            self.update_password(new_password)
-        super(IndividualAccountProfile, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return '{} {} ({})'.format(self.user.first_name, self.user.last_name, self.id)
-
-    def generate_password(self):
-        return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])
-
-    def update_password(self, plain_password):
-        self.password = self.sha1(plain_password)
-        self.mail_password(plain_password)
-
-    def mail_password(self, plain_password):
-        template = get_template('userspace/journal/subscription/mail/new_password.html')
-        context = {'object': self, 'plain_password': plain_password, }
-        html_message = template.render(context)
-        recipient = self.user.email
-        mail.send(
-            recipient,
-            settings.RENEWAL_FROM_EMAIL,
-            message=html_message,
-            html_message=html_message,
-            subject=_("erudit.org : mot de passe")
-        )
-
-    def mail_account(self):
-        template = get_template('userspace/journal/subscription/mail/new_account.html')
-        context = {'object': self}
-        html_message = template.render(context)
-        recipient = self.user.email
-        mail.send(
-            recipient,
-            settings.RENEWAL_FROM_EMAIL,
-            message=html_message,
-            html_message=html_message,
-            subject=_("erudit.org : création de votre compte")
-        )
-
-    def sha1(self, msg, salt=None):
-        "Crypt function from legacy system"
-        if salt is None:
-            salt = settings.INDIVIDUAL_SUBSCRIPTION_SALT
-        to_sha = msg.encode('utf-8') + salt.encode('utf-8')
-        hashy = hashlib.sha1(to_sha).digest()
-        return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
 
 
 class InstitutionalAccount(models.Model):

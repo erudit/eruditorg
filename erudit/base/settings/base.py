@@ -46,9 +46,10 @@ INSTALLED_APPS = (
     'apps.userspace.journal.authorization',
     'apps.userspace.journal.editor',
     'apps.userspace.journal.information',
-    'apps.userspace.journal.subscription',
+    # 'apps.userspace.journal.subscription',
     'apps.userspace.reporting',
     'core.authorization',
+    'core.accounts',
     'core.editor',
     'core.journal',
     'core.reporting',
@@ -288,8 +289,8 @@ SITE_ID = 1
 AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'base.backends.MandragoreBackend',
-    'base.backends.AbonnementIndividuelBackend',
+    'core.accounts.backends.MandragoreBackend',
+    'core.accounts.backends.AbonnementIndividuelBackend',
 ]
 
 # Static files (CSS, JavaScript, Images)

@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.urlresolvers import reverse
 
-from .models import (IndividualAccountProfile, Policy, PolicyEvent,
+from .models import (Policy, PolicyEvent,
                      Organisation, Journal, InstitutionalAccount,
                      InstitutionIPAddressRange)
 
@@ -47,40 +47,6 @@ class PolicyInline(GenericStackedInline):
         (_("Droits d'accès"), {'fields': (
             'access_full', 'access_journal', )}),
     )
-
-
-class IndividualAccountProfileAdmin(admin.ModelAdmin):
-    inlines = (PolicyInline, )
-    search_fields = ('id', 'user__first_name', 'user__last_name', 'user__email', )
-    list_filter = ('policy', 'user__is_active', )
-    list_display = (
-        '_email',
-        '_first_name',
-        '_last_name',
-        'policy',
-    )
-
-    def _email(self, obj):
-        return obj.user.email
-    short_description = _('Courriel')
-
-    def _first_name(self, obj):
-        return obj.user.first_name
-    short_description = _('Prénom')
-
-    def _last_name(self, obj):
-        return obj.user.first_name
-    short_description = _('Nom')
-
-    def save_formset(self, request, form, formset, change):
-        super(IndividualAccountProfileAdmin, self).save_formset(request, form, formset, change)
-        policies = [instance for instance in formset.save(commit=False) if
-                    instance.__class__ == Policy]
-        if len(policies) > 1:
-            raise Exception(_("Une seule règle d'accès ne peut être gérée pour l'instant"))
-        if len(policies) == 1:
-            form.instance.policy = policies[0]
-            form.instance.save()
 
 
 class OrganisationAdmin(admin.ModelAdmin):
@@ -190,7 +156,6 @@ class PolicyAdmin(admin.ModelAdmin):
     renew.short_description = _("Renouveller l'inscription")
 
 
-admin.site.register(IndividualAccountProfile, IndividualAccountProfileAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Journal, JournalAdmin)

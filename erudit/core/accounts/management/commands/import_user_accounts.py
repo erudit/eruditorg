@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 
 from django.contrib.auth.models import User
@@ -5,15 +7,13 @@ from django.core.management.base import BaseCommand
 
 from erudit.models import Journal
 
-from erudit.utils.mandragore import (
-    fetch_accounts_from_mandragore,
-    fetch_users_from_edinum,
-    fetch_series_from_edinum,
-    can_create_mandragore_user,
-    create_or_update_mandragore_user,
-    user_coherent_with_mandragore,
-    MandragoreError
-)
+from core.accounts.mandragore import can_create_mandragore_user
+from core.accounts.mandragore import create_or_update_mandragore_user
+from core.accounts.mandragore import fetch_accounts_from_mandragore
+from core.accounts.mandragore import fetch_series_from_edinum
+from core.accounts.mandragore import fetch_users_from_edinum
+from core.accounts.mandragore import MandragoreError
+from core.accounts.mandragore import user_coherent_with_mandragore
 
 log = logging.getLogger(__name__)
 
