@@ -109,8 +109,8 @@ $font-family-sans-serif-bold-italic:    "Maax-Bolditalic", "Helvetica Neue", Hel
 
 // font sizes
 $font-size-base:          16px;
-$font-size-large:         1.125em;
-$font-size-small:         0.707em;
+$font-size-large:         ceil(($font-size-base * 1.125)); // ~18px
+$font-size-small:         ceil(($font-size-base * 0.707)); // ~12px
 
 $font-size-h1:            3.998em;
 $font-size-h2:            2.827em;
