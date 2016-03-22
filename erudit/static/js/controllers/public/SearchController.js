@@ -31,7 +31,7 @@ export default {
   */
   sortingDropdown(select, nav) {
     var options         = select.find('option'),
-        dropdownSelect  = nav.find("a.select"),
+        dropdownSelect  = nav.find("a.select > .text"),
         selectedText    = options.filter(":selected").text(),
         dropdown        = nav.find("> ul");
 

@@ -206,6 +206,7 @@ class SearchFormHelper(FormHelper):
                         Field('sort'),
                         Field('sort_order'),
                     ),
+                    css_class="hide",
                 ),
             ),
         )

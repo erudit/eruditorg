@@ -14,7 +14,8 @@
 $ionicons-font-path: "~ionicons/fonts";
 @import "~ionicons/scss/ionicons";
 @import "~akkordion/dist/akkordion.css";
-@import 'vendor/magnific-popup/magnific-popup.scss';
+@import "~hint.css/hint.base.css";
+@import 'vendor/magnific-popup/magnific-popup.scss'; // forked source for needed source changes
 
 // 3. Base stuff
 @import
@@ -45,6 +46,7 @@ $ionicons-font-path: "~ionicons/fonts";
   'components/navtabs',
   'components/search',
   'components/forms',
+  'components/forms-checkbox',
   'components/input-groups',
   'components/dropdowns',
   'components/alerts',

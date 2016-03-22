@@ -42,6 +42,7 @@
     "videojs-vimeo": "^2.0.0",
     "get-prefix": "~1.0.0",
     "magnific-popup": "~1.1.0",
-    "akkordion": "0.2.4"
+    "akkordion": "0.2.4",
+    "hint.css": "2.2.0"
   }
 }

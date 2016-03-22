@@ -18,7 +18,7 @@ Query URL: {{ query_url|safe }}
 
     <header class="page-header-main search-header col-xs-12 border-bottom">
       <hgroup>
-        <h2>{% trans "Résultats de recherche" %}</h2>
+        <h2>{% trans "Résultats de recherche" %} <span class="hint--top hint--no-animate" data-hint="{% trans "Help text!" %}"><i class="ion-help-circled"></i></span></h2>
         {% if documents %}
         <h3><strong>{{ results_count }}</strong> {% trans "résultats trouvé pour la requête :" %}</h3>
         {% else %}
@@ -44,10 +44,8 @@ Query URL: {{ query_url|safe }}
         {% crispy form %}
         {% search_filters %}
 
-        <div class="form-group">
-            <div class="controls ">
-                <button type="submit" class="btn btn-default">{% trans "Recherche" %}<span class="ion ion-ios-search"></span></button>
-            </div>
+        <div class="form-action col-xs-9 col-centered">
+          <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
         </div>
 
       </form>
@@ -65,14 +63,14 @@ Query URL: {{ query_url|safe }}
               <h5>{% trans "Classé par" %}</h5>
             </li>
             <li class="dropdown-buttons dropdown-sml" id="search-nav-sort-by">
-              <a href="#" class="select">{% trans "Ordre croissant" %} <i class="ion-ios-arrow-down caret"></i></a>
+              <a href="#" class="select"><span class="text">{% trans "Ordre croissant" %}</span> <i class="ion-ios-arrow-down caret"></i></a>
               <ul></ul>
             </li>
             <li class="label">
               {% trans "Trier par..." %}
             </li>
             <li class="dropdown-buttons dropdown-sml" id="search-nav-order-by">
-              <a href="#" class="select">{% trans "Pertinance" %} <i class="ion-ios-arrow-down caret"></i></a>
+              <a href="#" class="select"><span class="text">{% trans "Pertinance" %}</span> <i class="ion-ios-arrow-down caret"></i></a>
               <ul></ul>
             </li>
           </ul>

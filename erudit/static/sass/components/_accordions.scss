@@ -9,7 +9,11 @@
   .icon {
     float: right;
     position: relative;
-    top: -1px;
+    top: 2px;
+  }
+
+  .akkordion-content {
+    padding-bottom: $margin-vertical-default/2;
   }
 
   [data-akkordion-active] {

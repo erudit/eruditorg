@@ -2,9 +2,9 @@
 {% load search_tags %}
 
 {% if filter_choices %}
-<fieldset class="refine-search-filters">
+<fieldset class="search-filters">
   {# <legend>{% trans "Filtrer les résultats" %}</legend>#}
-    
+
   {% with filter_choices|get_item:"years" as years_filter %}
   {% include "public/search/_checkboxes_filter.html" with title="Années" filter_label="years" filter=years_filter %}
   {% endwith %}
@@ -26,11 +26,11 @@
   {% endwith %}
 
   {% with filter_choices|get_item:"funds" as funds_filter %}
-  {% include "public/search/_checkboxes_filter.html" with title="Fonds" filter_label="funds" filter=funds_filter %}
+  {% include "public/search/_checkboxes_filter.html" with title="Fonds" filter_label="funds" help_text="Help text" filter=funds_filter %}
   {% endwith %}
 
   {% with filter_choices|get_item:"publication_types" as publication_types_filter %}
-  {% include "public/search/_checkboxes_filter.html" with title="Types de publications" filter_label="publication_types" filter=publication_types_filter %}
+  {% include "public/search/_checkboxes_filter.html" with title="Types de publications" filter_label="publication_types" help_text="Type publication help text.." filter=publication_types_filter %}
   {% endwith %}
 
 </fieldset>

@@ -26,12 +26,36 @@ section#search-page {
     margin-bottom: 20px;
   }
 
+  // fieldset defaults
+  fieldset {
+    margin: 0 0 10px 0;
+  }
+
   // input style
   input[type='text'],
   input[type='search'] {
     border: 1px solid $gray-base;
     padding: 12px;
     font-size: 16px;
+  }
+
+  // select style
+  select {
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 0;
+    border: 1px solid $gray-base;
+    padding: 12px;
+    height: auto;
+    position: relative;
+    @include fw-sans-normal;
+    background: #fff url(../iconfont/chevron-down.svg) no-repeat 95% center;
+    option {
+      height: auto;
+      line-height: auto;
+      @include fw-sans-normal;
+    }
+
   }
 
   // first level labels
@@ -63,6 +87,16 @@ section#search-page {
 
     .advanced-search-fields {
       // display: none;
+    }
+
+  }
+
+  // search filters in accordions
+  .search-filters {
+    // border-bottom: 1px solid $gray-base;
+
+    .form-group {
+      margin-bottom: 0;
     }
 
   }
