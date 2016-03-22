@@ -5,9 +5,8 @@ from django.test import TestCase
 
 from erudit.factories import OrganisationFactory
 
-from ..factories import InstitutionalAccountFactory
 from ..factories import InstitutionIPAddressRangeFactory
-from ..factories import PolicyFactory
+from ..factories import JournalAccessSubscriptionFactory
 from ..middleware import SubscriptionMiddleware
 
 
@@ -18,12 +17,11 @@ class TestSubscriptionMiddleware(TestCase):
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_institution(self):
         # Setup
-        policy = PolicyFactory.create(max_accounts=2)
         organisation = OrganisationFactory.create()
-        institutional_account = InstitutionalAccountFactory(
-            institution=organisation, policy=policy)
+        subscription = JournalAccessSubscriptionFactory(
+            organisation=organisation)
         InstitutionIPAddressRangeFactory.create(
-            institutional_account=institutional_account,
+            subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
 
         request = self.factory.get('/')
@@ -38,7 +36,7 @@ class TestSubscriptionMiddleware(TestCase):
 
         # Check
         self.assertEqual(request.subscription_type, 'institution')
-        self.assertEqual(request.institutional_account, institutional_account)
+        self.assertEqual(request.subscription, subscription)
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_open_access(self):
         # Setup

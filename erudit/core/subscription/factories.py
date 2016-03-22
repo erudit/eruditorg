@@ -2,18 +2,24 @@
 
 import factory
 
+from base.factories import UserFactory
+
 from erudit.factories import OrganisationFactory
 
+from .models import InstitutionIPAddressRange
+from .models import JournalAccessSubscription
 
-class InstitutionalAccountFactory(factory.django.DjangoModelFactory):
+
+class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
+    user = factory.SubFactory(UserFactory)
+    organisation = factory.SubFactory(OrganisationFactory)
+
     class Meta:
-        model = 'subscription.InstitutionalAccount'
-
-    institution = factory.SubFactory(OrganisationFactory)
+        model = JournalAccessSubscription
 
 
 class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = 'subscription.InstitutionIPAddressRange'
+    subscription = factory.SubFactory(JournalAccessSubscriptionFactory)
 
-    institutional_account = factory.SubFactory(InstitutionalAccountFactory)
+    class Meta:
+        model = InstitutionIPAddressRange

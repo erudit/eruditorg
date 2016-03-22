@@ -18,11 +18,11 @@ class SubscriptionMiddleware(object):
         # an institutional IP address range.
         ip = get_ip(request)
         ip_range = InstitutionIPAddressRange.objects \
-            .select_related('institutional_account') \
+            .select_related('subscription') \
             .filter(ip_start__lte=ip, ip_end__gte=ip).first()
         if ip_range is not None:
             request.subscription_type = 'institution'
-            request.institutional_account = ip_range.institutional_account
+            request.subscription = ip_range.subscription
             return
 
         # TODO: try to determine if the user has an individual account
