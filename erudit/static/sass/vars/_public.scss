@@ -69,9 +69,9 @@ $body-bg:               #fff;
 $text-color:            $gray-dark;
 
 //** Global textual link color.
-$link-color:            $gray-base;
-//** Link hover color set via `darken()` function.
-$link-hover-color:      darken($link-color, 15%);
+$link-color:            $coral-red;
+//** Link hover color
+$link-hover-color:      $upsdell-red;
 //** Link hover decoration.
 $link-hover-decoration: underline;
 
