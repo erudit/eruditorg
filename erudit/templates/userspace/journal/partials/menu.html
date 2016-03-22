@@ -4,7 +4,7 @@
 {% has_perm 'journal.edit_journal' request.user scope_current_journal as can_manage_information %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
-{% has_perm 'subscription.manage_account' request.user scope_current_journal as can_manage_account %}
+{% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_account %}
 
 <ul class="main-menu">
   <li class="userspace menu-item has-children has-dropdown">
