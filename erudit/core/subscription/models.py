@@ -31,12 +31,23 @@ class JournalAccessSubscription(AbstractSubscription):
         Journal, verbose_name=_('Revue'), blank=True, null=True, related_name='+')
     collection = models.ForeignKey(
         Collection, verbose_name=_('Collection'), blank=True, null=True, related_name='+')
-    journals = models.ManyToManyField(Journal, verbose_name=_('Revues'), related_name='+')
+    journals = models.ManyToManyField(
+        Journal, verbose_name=_('Revues'), related_name='+', blank=True)
     full_access = models.BooleanField(default=False, verbose_name=_('Accès complet'))
 
     class Meta:
         verbose_name = _('Abonnement aux revues')
         verbose_name_plural = _('Abonnements aux revues')
+
+    def __str__(self):
+        dest = self.user if self.user else self.organisation
+        if self.journal_id:
+            return '{} - {}'.format(dest, self.journal)
+        elif self.collection_id:
+            return '{} - {}'.format(dest, self.collection)
+        elif self.full_access:
+            return _('{} - Accès complet').format(dest)
+        return _('{} - Accès multiples').format(dest)
 
 
 class InstitutionIPAddressRange(models.Model):
@@ -51,7 +62,7 @@ class InstitutionIPAddressRange(models.Model):
 
     def __str__(self):
         return '{institution} / {start} - {end}'.format(
-            institution=self.institutional_account, start=self.ip_start, end=self.ip_end)
+            institution=self.subscription, start=self.ip_start, end=self.ip_end)
 
     def clean(self):
         super(InstitutionIPAddressRange, self).clean()
@@ -90,3 +101,6 @@ class JournalManagementPlan(models.Model):
     class Meta:
         verbose_name = _("Forfait de gestion d'une revue")
         verbose_name_plural = _("Forfaits de gestion de revues")
+
+    def __str__(self):
+        return self.code if not self.title else self.title
