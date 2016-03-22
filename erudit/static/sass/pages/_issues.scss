@@ -26,7 +26,7 @@
   margin-bottom: $margin-vertical-default/2;
 
   a {
-    color: $color-red;
+    color: $brand-primary;
     @include transition(color 500ms);
     &:hover {
       text-decoration: none;

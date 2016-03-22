@@ -4,49 +4,23 @@
 
 $base-url: '/static/';
 
-/// Base font size
-$font-size: 18px;
-
-/// Content font family
-/// @type List
-$font-face-body: 'Maax', Helvetica, Arial, sans-serif;
-
 
 //// Erudit.org color palette
 //// @type Color
 $coral-red: #ff4242;
+$upsdell-red: #AF2329;
 $black:  #000000;
 $dark-grey: #707070;
 $mid-grey: #cccccc;
 $light-grey: #f7f7f7;
 $white: #ffffff;
 
-/// palette - greys
-/// @type Color
-$colour-faint-grey: $light-grey;
-$colour-pale-grey: $light-grey;
-$colour-medium-grey: $mid-grey;
-$colour-dark-grey: $dark-grey;
-
-/// palette - colours
-/// @type Color
-$colour-primary: $coral-red; // main brand colour
-$colour-primary-light: $coral-red;
-$colour-accent: $coral-red;
-$colour-warning: $coral-red;
-$colour-danger: $coral-red;
-$colour-success: #36C957;
-$colour-text: $black;
-
 // from bootstrap
-$brand-primary:         darken(#428bca, 6.5%) !default; // #337ab7
-$brand-success:         #5cb85c !default;
-$brand-info:            #5bc0de !default;
-$brand-warning:         #f0ad4e !default;
-$brand-danger:          #d9534f !default;
-
-// Erudit.org color palette
-$color-red:       $coral-red;
+$brand-primary:         $coral-red;//darken(#428bca, 6.5%) !default; // #337ab7
+$brand-success:         #36C957 !default;
+$brand-info:            $coral-red !default;
+$brand-warning:         $coral-red !default;
+$brand-danger:          $coral-red !default;
 
 /// Container's maximum width
 /// Below that is 100%
@@ -182,7 +156,7 @@ $border-radius-small:       3px !default;
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
 //** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $colour-primary !default;
+$component-active-bg:       $brand-primary !default;
 
 //** Width of the `border` for generating carets that indicator dropdowns.
 $caret-width-base:          4px !default;
@@ -222,23 +196,23 @@ $btn-default-bg:                 $gray-light !default;
 $btn-default-border:             $gray-light !default;
 
 $btn-primary-color:              #fff !default;
-$btn-primary-bg:                 $colour-primary !default;
+$btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
 $btn-success-color:              #fff !default;
-$btn-success-bg:                 $colour-success !default;
+$btn-success-bg:                 $brand-success !default;
 $btn-success-border:             darken($btn-success-bg, 5%) !default;
 
 $btn-info-color:                 #fff !default;
-$btn-info-bg:                    $colour-accent !default;
+$btn-info-bg:                    $brand-info !default;
 $btn-info-border:                darken($btn-info-bg, 5%) !default;
 
 $btn-warning-color:              #fff !default;
-$btn-warning-bg:                 $colour-warning !default;
+$btn-warning-bg:                 $brand-warning !default;
 $btn-warning-border:             darken($btn-warning-bg, 5%) !default;
 
 $btn-danger-color:               #fff !default;
-$btn-danger-bg:                  $colour-danger !default;
+$btn-danger-bg:                  $brand-danger !default;
 $btn-danger-border:              darken($btn-danger-bg, 5%) !default;
 
 $btn-link-disabled-color:        $gray-light !default;

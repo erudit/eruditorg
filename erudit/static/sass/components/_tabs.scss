@@ -19,8 +19,8 @@
       border-color: $gray-light;
       border-style: solid;
       &:hover {
-        background-color: $colour-primary;
-        border-color: $colour-primary;
+        background-color: $brand-primary;
+        border-color: $brand-primary;
         color: #fff;
         text-decoration: none;
       }
@@ -29,9 +29,9 @@
 
     &.active {
       a {
-        background-color: $colour-primary;
+        background-color: $brand-primary;
         color: #fff;
-        border-color: $colour-primary;
+        border-color: $brand-primary;
       }
     }
 

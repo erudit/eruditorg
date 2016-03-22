@@ -19,7 +19,7 @@ form .row {
   margin-right: 0;
   box-sizing: border-box;
   outline: none;
-  font-size: $font-size;
+  font-size: $font-size-large;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -61,7 +61,7 @@ fieldset {
 
 legend {
   letter-spacing: 1px;
-  font-size: $font-size * 1.05;
+  font-size: $font-size-large * 1.05;
   color: $gray-dark;
 }
 
@@ -104,10 +104,10 @@ input[list],
   @include placeholder($gray-dark);
 
   &:hover {
-    border-color: $colour-primary;
+    border-color: $brand-primary;
   }
   &:active, &:focus {
-    border-color: $colour-primary;
+    border-color: $brand-primary;
   }
 }
 
@@ -155,7 +155,7 @@ input[list] {
 
 select,
 option {
-  height: $font-size + 24;
+  height: $font-size-large + 24;
 }
 
 textarea {
@@ -184,8 +184,8 @@ label.required:after {
 /* error inputs */
 .error {
   input, .select2 {
-    border-color: $colour-warning;
-    background-color: rgba($colour-warning, 0.15);
+    border-color: $brand-warning;
+    background-color: rgba($brand-warning, 0.15);
   }
 }
 
@@ -303,6 +303,6 @@ input[type="checkbox"] {
 .input-group-addon {
   @include border-radius(0);
   border: 0;
-  background: $colour-primary;
+  background: $brand-primary;
   color: #FFF;
 }
