@@ -145,7 +145,7 @@ nav.result-sorting {
   border-bottom: 1px solid $gray-mid;
 
   header {
-    margin-bottom: $margin-vertical-default/2;
+    margin-bottom: $margin-vertical-default/3;
 
     h5.position {
       position: absolute;
@@ -173,8 +173,27 @@ nav.result-sorting {
   }
 
   footer.meta {
+    color: $gray;
     h5 {
       margin: 0;
+    }
+  }
+
+  summary {
+    margin-top: $margin-vertical-default/3;
+    h5 {
+      .icon {
+        float: inherit;
+      }
+    }
+    .summary-content {
+      background-color: $gray-lighter;
+      padding: 10px;
+      p {
+        // padding: 10px;
+        font-size: 14px;
+        margin: 0;
+      }
     }
   }
 

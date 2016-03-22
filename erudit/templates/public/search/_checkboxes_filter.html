@@ -8,8 +8,8 @@
     <div class="controls akkordion-content {% if has_selected_values %}akkordion-active{% endif %}">
         {% for label, count in filter.values.items %}
 
-        {# wrap in accordion after 10 #}
-        {% if forloop.counter == 10 %}
+        {# wrap in accordion after 10th #}
+        {% if forloop.counter == 11 %}
         {# open div #}
         <div class="akkordion" data-akkordion-single="true">
           <h5 class="akkordion-title color-red pull-right">{% trans "+ Autres..." %}</h5>
@@ -21,7 +21,8 @@
               <label for="id_{{ filter_label }}_{{ forloop.counter }}" class="">{{ label }} ({{ count }})</label>
             </div>
 
-        {% if forloop.counter >= 10 and forloop.last %}
+        {# close accordion when last with at least 11 items #}
+        {% if forloop.counter >= 11 and forloop.last %}
           {# close accordion content #}
           </div>
           {# close accordion main #}
