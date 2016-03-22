@@ -227,7 +227,10 @@ class SearchForm(forms.Form):
         label=_("Recherche"), widget=forms.TextInput, required=False,
     )
     basic_search_field = forms.ChoiceField(
-        label=_("Inclure les champs"), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+        label=_("Inclure les champs"),
+        widget=forms.Select,
+        choices=ADVANCED_SEARCH_FIELDS,
+        required=False
     )
 
     advanced_search_operator1 = forms.ChoiceField(
