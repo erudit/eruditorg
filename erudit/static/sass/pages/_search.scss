@@ -22,8 +22,11 @@ section#search-page {
 
 .search-form {
 
-  header.search-header {
-    margin-bottom: 20px;
+  header.search-filters-header {
+    margin-bottom: 10px;
+    h3 {
+      margin: 0;
+    }
   }
 
   // fieldset defaults
@@ -77,7 +80,7 @@ section#search-page {
       position: absolute;
       bottom: -2px;
       right: 10px;
-      color: $color-red;
+      color: $brand-primary;
       font-size: 32px;
     }
   }
@@ -163,7 +166,7 @@ nav.result-sorting {
 
     h3 {
       @include fw-sans-bold();
-      margin: 5px 0;
+      margin: 10px 0;
     }
 
     h4 {

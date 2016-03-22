@@ -374,7 +374,7 @@ section#article-detail {
       margin: 0;
       min-width: 50px;
       height: 100%;
-      background: $colour-accent;
+      background: $brand-primary;
       border: none;
       color: #fff;
       font-size: 0.8em;
@@ -469,7 +469,7 @@ section#article-detail {
         }
         .erudicon-tools-pdf { font-size: 6px; }
         .erudicon-tools-quote { font-size: 8px; }
-        .erudicon-tools-save { font-size: 12px; }        
+        .erudicon-tools-save { font-size: 12px; }
       }
     }
   }

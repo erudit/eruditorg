@@ -100,7 +100,10 @@ class SearchFormHelper(FormHelper):
         self.layout = Layout(
             Div(
                 HTML(
-                    "<header class='search-header'><h3 class='h2'>%s</h3></header>" % _("Filtres")
+                    "<header class='search-filters-header'> \
+                        <h3 class='h4'>%s</h3> \
+                    </header>"
+                    % _("Filtres")
                 ),
                 Fieldset(
                     "",

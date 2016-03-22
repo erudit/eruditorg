@@ -21,7 +21,8 @@
   > ul {
     display: none;
     position: absolute;
-    width: 100%;
+    min-width: 100%;
+    width: auto;
     left: 0;
     z-index: $zindex-dropdown;
     list-style: none;
@@ -37,6 +38,7 @@
     a {
       padding: 10px 0;
       display: block;
+      width: 100%;
       &:hover {
         text-decoration: underline;
       }
@@ -49,6 +51,7 @@
       color: #fff;
       text-decoration: none;
       .caret {
+        display: inline-block;
         @include rotate(180deg);
         margin-top: -5px;
       }

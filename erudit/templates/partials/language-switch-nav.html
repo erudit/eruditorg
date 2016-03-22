@@ -2,7 +2,7 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
-<a href="#" class="select">{{ LANGUAGE_CODE|language_name_local|title }} <i class="ion-ios-arrow-down caret"></i></a>
+<a href="#" class="select main-section">{{ LANGUAGE_CODE|language_name_local|title }} <i class="ion-ios-arrow-down caret"></i></a>
 <ul>
   {% for language in LANGUAGES %}
   {% get_language_info for language.0 as lang %}

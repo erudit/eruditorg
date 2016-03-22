@@ -11,7 +11,7 @@
 
     {# authors #}
     {% if article.erudit_object.authors %}
-    <h4 class="authors h5">
+    <h4 class="authors h6">
       {% for author in article.erudit_object.authors %}
       <span class="author">{{ author.firstname }} {{ author.lastname }}</span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
@@ -19,10 +19,10 @@
     {% endif %}
 
     {% if search_elements and search_elements.0.search_operator != 'NOT' %}
-      <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.title|highlight:search_elements.0.search_term }}</a></h3>
+      <h3 class="h4"><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.title|highlight:search_elements.0.search_term }}</a></h3>
       {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle|highlight:search_elements.0.search_term }}</h4>{% endif %}
     {% else %}
-      <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.title }}</a></h3>
+      <h3 class="h4"><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.title }}</a></h3>
       {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
     {% endif %}
 
