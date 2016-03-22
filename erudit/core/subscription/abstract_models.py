@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
+
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,3 +20,11 @@ class AbstractSubscription(models.Model):
 
     class Meta:
         abstract = True
+
+    def renew(self):
+        if self.date_activation is None:
+            raise ValidationError(_("Aucune date d'activation n'est spécifiée!"))
+        if self.date_renew is None:
+            self.date_renew = self.date_activation
+        self.date_renew = self.date_renew + dt.timedelta(days=self.renew_cycle)
+        self.save()
