@@ -17,9 +17,12 @@ class JournalDigitalObject(models.DigitalObject):
         'LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
 
     @property
-    def xml_content(self):  # pragma: no cover
-        # TODO: add a way to retrieve Journal XML content
-        return ''
+    def xml_content(self):
+        """ Returns the XML content of the publications.
+
+        The XML content comes from the ``PUBLICATIONS`` datastream.
+        """
+        return self.publications.content.serialize()
 
 
 class PublicationDigitalObject(models.DigitalObject):
