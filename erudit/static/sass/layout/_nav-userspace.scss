@@ -45,7 +45,7 @@ nav#main-nav {
 
     &:hover {
       > ul {
-        background-color: $colour-primary;
+        background-color: $brand-primary;
       }
     }
   }
@@ -63,7 +63,7 @@ nav#main-nav {
 // // -----------------------------------------------------------------------------
 //
 // nav.navbar {
-//   background-color: $colour-primary;
+//   background-color: $brand-primary;
 //   border: 0;
 //   line-height: 70px;
 //   width: 100%;
