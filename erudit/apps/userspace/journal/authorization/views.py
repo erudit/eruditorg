@@ -12,22 +12,21 @@ from base.viewmixins import MenuItemMixin
 from core.authorization.defaults import AuthorizationConfig
 from core.authorization.models import Authorization
 
-from ..viewmixins import JournalScopeMixin
+from ..viewmixins import JournalScopePermissionRequiredMixin
 
 from .forms import AuthorizationForm
-from .viewmixins import PermissionsCheckMixin
 
 
 class AuthorizationUserView(
-        LoginRequiredMixin, JournalScopeMixin, PermissionsCheckMixin, MenuItemMixin, ListView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     menu_journal = 'authorization'
     model = Authorization
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_user.html'
 
     def get_queryset(self):
-        qs = super(PermissionsCheckMixin, self).get_queryset()
-        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        qs = super(AuthorizationUserView, self).get_queryset()
+        ct = ContentType.objects.get(app_label='erudit', model='journal')
         return qs.filter(content_type=ct, object_id=self.current_journal.pk)
 
     def get_authorizations_per_app(self):
@@ -43,7 +42,7 @@ class AuthorizationUserView(
 
 
 class AuthorizationCreateView(
-        LoginRequiredMixin, JournalScopeMixin, PermissionsCheckMixin, MenuItemMixin, CreateView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
     menu_journal = 'authorization'
     model = Authorization
     form_class = AuthorizationForm
@@ -62,7 +61,7 @@ class AuthorizationCreateView(
 
 
 class AuthorizationDeleteView(
-        LoginRequiredMixin, JournalScopeMixin, PermissionsCheckMixin, MenuItemMixin, DeleteView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     menu_journal = 'authorization'
     model = Authorization
     permission_required = 'authorization.manage_authorizations'

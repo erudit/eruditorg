@@ -37,7 +37,7 @@ class AccountListViewTestCase(BaseEruditTestCase):
         user = User.objects.create_user(username='user', password='user')
         self.client.login(username=user.username, password='user')
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 302, response.url)
+        self.assertEqual(response.status_code, 403)
 
     def test_staff(self):
         policy = PolicyFactory()
@@ -67,6 +67,7 @@ class AccountListViewTestCase(BaseEruditTestCase):
     def test_filtered_listing(self):
         policy = PolicyFactory()
         user = User.objects.create_user(username='manager', password='manager')
+        self.journal.members.add(user)
         policy.managers.add(user)
         policy.save()
         IndividualAccountProfileFactory.create_batch(2, policy=policy)
@@ -121,6 +122,7 @@ class AccountDeleteViewTestCase(BaseEruditTestCase):
         policy = PolicyFactory()
         user = User.objects.create_user(
             username='manager', password='manager')
+        self.journal.members.add(user)
         self.client.login(username=user.username, password='manager')
         policy.managers.add(user)
         policy.save()
