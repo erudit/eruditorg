@@ -173,6 +173,12 @@ class Organisation(models.Model):
         verbose_name=_("Pays")
     )
 
+    badge = models.ImageField(
+        verbose_name=_('Badge'),
+        blank=True, null=True,
+        upload_to='organisation_badges',
+    )
+
     def __str__(self):
         return "{:s}".format(
             self.name,

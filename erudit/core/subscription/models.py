@@ -135,9 +135,6 @@ class InstitutionalAccount(models.Model):
     institution = models.ForeignKey(CoreOrganisation, verbose_name=_('Organisation'))
     policy = models.ForeignKey(
         'Policy', verbose_name=_('Accès'), related_name='institutional_accounts')
-    badge = models.ImageField(
-        verbose_name=_('Badge'), blank=True, null=True,
-        upload_to='institutional_accounts_badges')
 
     class Meta:
         verbose_name = _('Compte institutionnel')
