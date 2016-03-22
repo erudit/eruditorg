@@ -12,7 +12,6 @@ $check-icon: $fa-var-check !default;
   #{$parent} input[type="radio"]:checked + label {
     &::before {
       background-color: $color;
-      // border-color: $color;
     }
     &::after{
       color: #fff;
@@ -38,13 +37,13 @@ $check-icon: $fa-var-check !default;
 .checkbox{
   padding-left: 20px;
 
-  label{
+  label {
     display: inline-block;
     vertical-align: middle;
     position: relative;
     padding-left: 5px;
 
-    &::before{
+    &::before {
       content: "";
       display: inline-block;
       position: absolute;
@@ -57,7 +56,7 @@ $check-icon: $fa-var-check !default;
       @include transition(border 0.15s, color 0.15s);
     }
 
-    &::after{
+    &::after {
       display: inline-block;
       position: absolute;
       width: 16px;

@@ -26,7 +26,10 @@ Query URL: {{ query_url|safe }}
         {% endif %}
         <h4 class="mono-space search-terms">
           {% for search_element in search_elements %}
-          <span class="search-operator">{{ search_element.search_operator }}</span> ({{ search_element.search_field }} : {{ search_element.search_term }})
+            {% if search_element.search_operator %}
+            <span class="search-operator">{{ search_element.search_operator }}</span>
+            {% endif %}
+            ({{ search_element.search_field }} : {{ search_element.search_term }})
           {% endfor %}
         </h4>
       </hgroup>

@@ -56,7 +56,7 @@ class Search(FormView):
 
         if basic_search_term:
             self.search_elements.append({
-                "search_operator": basic_search_operator,
+                "search_operator": "NOT" if basic_search_operator else basic_search_operator,
                 "search_term": basic_search_term,
                 "search_field": basic_search_field,
             })

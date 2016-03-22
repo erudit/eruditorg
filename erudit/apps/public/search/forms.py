@@ -217,14 +217,17 @@ class SearchForm(forms.Form):
         label=_("Page"), widget=forms.HiddenInput, required=False, initial=1
     )
 
-    basic_search_operator = forms.ChoiceField(
-        label=_("Inclure?"), widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
+    basic_search_operator = forms.BooleanField(
+        label=_("Exclure des résultats?"), required=False
     )
+    # basic_search_operator = forms.ChoiceField(
+    #     label=_("Inclure?"), widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
+    # )
     basic_search_term = forms.CharField(
         label=_("Recherche"), widget=forms.TextInput, required=False,
     )
     basic_search_field = forms.ChoiceField(
-        label=_("Champs"), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+        label=_("Inclure les champs"), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
     )
 
     advanced_search_operator1 = forms.ChoiceField(
