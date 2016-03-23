@@ -20,22 +20,22 @@ class AuthorizationConfig(object):
     This authorization defines the ability to add or delete authorizations to specific users.
     """
 
-    can_manage_account = AuthorizationDef(
-        'subscriptions:can_manage_account', _("Abonnements individuels"))
-    """
-    This authorization defines the ability to handle the subscriptions of the account.
-    """
-
     can_manage_issuesubmission = AuthorizationDef(
-        'subscriptions:can_manage_issuesubmission', _('Dépôt de fichiers'))
+        'editor:can_manage_issuesubmission', _('Dépôt de fichiers'))
     """
     This authorization defines the ability to handle issue submissions.
     """
 
     can_review_issuesubmission = AuthorizationDef(
-        'subscriptions:can_review_issuesubmission', _('Valider les numéros'))
+        'editor:can_review_issuesubmission', _('Valider les numéros'))
     """
     This authorization defines the ability to review issue submissions.
+    """
+
+    can_manage_individual_subscription = AuthorizationDef(
+        'subscriptions:can_manage_individual_subscription', _('Valider les numéros'))
+    """
+    This authorization defines the ability to handle the individual subscriptions to journals.
     """
 
     @classmethod

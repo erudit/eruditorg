@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from datetime import datetime
 
-from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth.models import User
 
-from erudit.models import MandragoreProfile
 from erudit.utils.pymysql import pymysql_connection
+
+from .models import MandragoreProfile
 
 
 class MandragoreError(Exception):

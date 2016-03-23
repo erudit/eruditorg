@@ -1,0 +1,57 @@
+{% extends "userspace/journal/subscription/base.html" %}
+{% load i18n %}
+
+{% block page-title %}{% trans "Abonnements individuels" %}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Abonnements individuels" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content-main %}
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <section class="card card-issue_submissions">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Abonnements individuels" %}</h2>
+      </div>
+      <div class="col-sm-6 text-right">
+        <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Inscrire un utilisateur" %}</a>
+      </div>
+    </div>
+    <ul id="id_subscription_list" class="row card-body">
+    {% for subscription in subscriptions %}
+      <li class="col-xs-12">
+        <div class="content-wrapper">
+          <span class="actions pull-right">
+            <a href="{% url 'userspace:journal:subscription:delete' journal_pk=scope_current_journal.pk pk=subscription.pk %}"
+               class="btn btn-danger">{% trans "Supprimer" %}</a>
+          </span>
+          <span class="title">
+            {{ subscription.user.get_full_name|default:subscription.user.username }}
+          </span>
+          <span class="metadata-wrapper">
+            <span class="metadata">
+              <span class="metadata-title">{% trans "Revue" %}</span>
+              <span class="metadata-value">{{ subscription.journal.name }}</span>
+            </span>
+            <span class="metadata">
+              <span class="metadata-value"><i>
+                {% blocktrans trimmed with created=subscription.created|date:"SHORT_DATE_FORMAT" %}
+                  Créé le {{ created }}
+                {% endblocktrans %}
+              </i></span>
+            </span>
+          </span>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+    <div class="row">
+      <div class="col-xs-12">
+        {% include "partials/pagination.html" %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content-main %}

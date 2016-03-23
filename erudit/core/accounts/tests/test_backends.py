@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from unittest import mock
 
-from django.test import TestCase, override_settings
 from django.contrib.auth.models import User
+from django.test import TestCase, override_settings
 
-from base.backends import MandragoreBackend
+from ..backends import MandragoreBackend
 
 
 class MandragoreBackendTestCase(TestCase):
@@ -39,7 +41,7 @@ class MandragoreBackendTestCase(TestCase):
             self.assertIsNone(user)
 
     @override_settings(EXTERNAL_DATABASES={'mandragore': 'dummy'})
-    @mock.patch('base.backends.get_user_from_mandragore', new=mock.MagicMock(
+    @mock.patch('core.accounts.backends.get_user_from_mandragore', new=mock.MagicMock(
         return_value=('test_user', '$6$salt$passwd')))
     def test_authentication_success(self):
 
@@ -51,7 +53,7 @@ class MandragoreBackendTestCase(TestCase):
             self.assertEqual(user, self.user)
 
     @override_settings(EXTERNAL_DATABASES={'mandragore': 'dummy'})
-    @mock.patch('base.backends.get_user_from_mandragore', new=mock.MagicMock(
+    @mock.patch('core.accounts.backends.get_user_from_mandragore', new=mock.MagicMock(
         return_value=('test_user', '$6$salt$passwd')))
     def test_wrong_password(self):
         user = self.backend.authenticate(

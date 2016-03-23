@@ -1,37 +1,25 @@
+# -*- coding: utf-8 -*-
+
 import factory
 
 from base.factories import UserFactory
+
 from erudit.factories import OrganisationFactory
 
-
-class PolicyFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = 'subscription.Policy'
-
-    content_object = factory.SubFactory(OrganisationFactory)
-    max_accounts = 10
+from .models import InstitutionIPAddressRange
+from .models import JournalAccessSubscription
 
 
-class IndividualAccountProfileFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = 'subscription.IndividualAccountProfile'
-
-    policy = factory.SubFactory(PolicyFactory)
+class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
+    organisation = factory.SubFactory(OrganisationFactory)
 
-
-class InstitutionalAccountFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = 'subscription.InstitutionalAccount'
-
-    institution = factory.SubFactory(OrganisationFactory)
-    policy = factory.SubFactory(PolicyFactory)
+        model = JournalAccessSubscription
 
 
 class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = 'subscription.InstitutionIPAddressRange'
+    subscription = factory.SubFactory(JournalAccessSubscriptionFactory)
 
-    institutional_account = factory.SubFactory(InstitutionalAccountFactory)
+    class Meta:
+        model = InstitutionIPAddressRange

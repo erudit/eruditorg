@@ -1,86 +1,57 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import DeleteView
-from django.views.generic.edit import UpdateView
-from django_filters.views import FilterView
+from django.views.generic import CreateView
+from django.views.generic import DeleteView
+from django.views.generic import ListView
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
-from core.subscription.models import IndividualAccountProfile
+from core.subscription.models import JournalAccessSubscription
 
-from ..viewmixins import JournalScopeMixin
+from ..viewmixins import JournalScopePermissionRequiredMixin
 
-from .forms import IndividualAccountFilter
-from .forms import IndividualAccountForm
-from .forms import IndividualAccountResetPwdForm
-from .viewmixins import OrganizationCheckMixin
+from .forms import JournalAccessSubscriptionCreateForm
 
 
-class IndividualAccountList(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                            OrganizationCheckMixin, FilterView):
-    filterset_class = IndividualAccountFilter
+class IndividualJournalAccessSubscriptionListView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+    context_object_name = 'subscriptions'
     menu_journal = 'subscription'
+    model = JournalAccessSubscription
     paginate_by = 10
-    template_name = 'userspace/journal/subscription/individualaccount_filter.html'
+    permission_required = 'subscription.manage_individual_subscription'
+    template_name = 'userspace/journal/subscription/individualsubscription_list.html'
+
+    def get_queryset(self):
+        qs = super(IndividualJournalAccessSubscriptionListView, self).get_queryset()
+        return qs.filter(user__isnull=False, journal=self.current_journal)
 
 
-class IndividualAccountCreate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                              OrganizationCheckMixin, CreateView):
+class IndividualJournalAccessSubscriptionCreateView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
+    form_class = JournalAccessSubscriptionCreateForm
     menu_journal = 'subscription'
-    model = IndividualAccountProfile
-    form_class = IndividualAccountForm
-
-    template_name = 'userspace/journal/subscription/individualaccount_create.html'
-    title = _("Créer un compte")
+    model = JournalAccessSubscription
+    permission_required = 'subscription.manage_individual_subscription'
+    template_name = 'userspace/journal/subscription/individualsubscription_create.html'
 
     def get_success_url(self):
-        return reverse('userspace:journal:subscription:account_list',
-                       args=(self.current_journal.pk, ))
-
-    def get_form_kwargs(self):
-        kwargs = super(IndividualAccountCreate, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
-        return kwargs
+        return reverse(
+            'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
 
 
-class IndividualAccountUpdate(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                              OrganizationCheckMixin, UpdateView):
+class IndividualJournalAccessSubscriptionDeleteView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+    context_object_name = 'subscription'
     menu_journal = 'subscription'
-    model = IndividualAccountProfile
-    form_class = IndividualAccountForm
-    template_name = 'userspace/journal/subscription/individualaccount_update.html'
-
-    def get_form_kwargs(self):
-        kwargs = super(IndividualAccountUpdate, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
-        return kwargs
+    model = JournalAccessSubscription
+    permission_required = 'subscription.manage_individual_subscription'
+    template_name = 'userspace/journal/subscription/individualsubscription_delete.html'
 
     def get_success_url(self):
-        return reverse('userspace:journal:subscription:account_list',
-                       args=(self.current_journal.pk, ))
-
-
-class IndividualAccountDelete(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin,
-                              OrganizationCheckMixin, DeleteView):
-    menu_journal = 'subscription'
-    model = IndividualAccountProfile
-    template_name = 'userspace/journal/subscription/individualaccount_confirm_delete.html'
-
-    def get_success_url(self):
-        return reverse('userspace:journal:subscription:account_list',
-                       args=(self.current_journal.pk, ))
-
-
-class IndividualAccountResetPwd(
-        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, OrganizationCheckMixin, UpdateView):
-    menu_journal = 'subscription'
-    model = IndividualAccountProfile
-    form_class = IndividualAccountResetPwdForm
-    template_name = 'userspace/journal/subscription/individualaccount_reset_pwd.html'
-
-    def get_success_url(self):
-        return reverse('userspace:journal:subscription:account_list',
-                       args=(self.current_journal.pk, ))
+        messages.success(self.request, _("L'abonnement a été supprimé avec succès"))
+        return reverse(
+            'userspace:journal:subscription:list', args=(self.current_journal.pk, ))

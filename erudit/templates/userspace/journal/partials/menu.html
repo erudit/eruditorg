@@ -4,7 +4,7 @@
 {% has_perm 'journal.edit_journal' request.user scope_current_journal as can_manage_information %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
-{% has_perm 'subscription.manage_account' request.user scope_current_journal as can_manage_account %}
+{% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_account %}
 
 <ul class="main-menu">
   <li class="userspace menu-item has-children has-dropdown">
@@ -42,7 +42,7 @@
       {% endif %}
       {% if can_manage_account %}
       <li class="journal menu-item">
-        <a href="{% url 'userspace:journal:subscription:account_list' journal_pk=scope_current_journal.pk %}"
+        <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'subscription' %}class="active"{% endif %}>
           <span class="icon fa ion-ios-people-outline"></span>
           <span class="sidenav-label">{% trans "Abonnements individuels" %}</span>

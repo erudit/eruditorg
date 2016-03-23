@@ -112,29 +112,6 @@ class Person(models.Model):
 
 # core
 
-class MandragoreProfile(models.Model):
-    """ Store variables that are related to this user's Mandragore profile
-    """
-    user = models.OneToOneField(User)
-
-    synced_with_mandragore = models.BooleanField(
-        verbose_name=_("Synchronisé avec Mandragore"),
-        default=False
-    )
-    """ Determines if this particular object is synced with the Edinum database """  # noqa
-
-    mandragore_id = models.CharField(
-        max_length=7,
-        null=True,
-        blank=True,
-        verbose_name=_("Identifiant Mandragore")
-    )
-    """ The Mandragore person_id for this User """
-
-    sync_date = models.DateField(null=True, blank=True)
-    """ Date at which the model was last synchronized with Mandragore """
-
-
 class Organisation(models.Model):
     """Organisation"""
 
@@ -171,6 +148,12 @@ class Organisation(models.Model):
         max_length=50,
         null=True, blank=True,
         verbose_name=_("Pays")
+    )
+
+    badge = models.ImageField(
+        verbose_name=_('Badge'),
+        blank=True, null=True,
+        upload_to='organisation_badges',
     )
 
     def __str__(self):

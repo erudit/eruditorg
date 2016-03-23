@@ -6,8 +6,8 @@ from django.utils.functional import cached_property
 
 from ipware.ip import get_ip
 
-from core.subscription.models import InstitutionalAccount
 from core.subscription.models import InstitutionIPAddressRange
+from core.subscription.models import JournalAccessSubscription
 from erudit.models import Journal
 
 
@@ -71,11 +71,14 @@ class ArticleAccessCheckMixin(object):
 
         # 3- Is the current IP address allowed to access the article as an institution?
         ip = get_ip(self.request)
-        institution_accounts = InstitutionalAccount.objects.filter(
-            Q(policy__access_full=True) | Q(policy__access_journal=article.issue.journal))
-        institutional_access = institution_accounts.exists() and \
+        institutional_subscriptions = JournalAccessSubscription.objects.filter(
+            Q(full_access=True) |
+            Q(journal=article.issue.journal) |
+            Q(journals__id=article.issue.journal_id),
+            organisation__isnull=False)
+        institutional_access = institutional_subscriptions.exists() and \
             InstitutionIPAddressRange.objects.filter(
-                institutionaccount__in=institution_accounts,
+                subscription__in=institutional_subscriptions,
                 ip_start__lte=ip, ip_end__gte=ip).exists()
         if institutional_access:
             return True

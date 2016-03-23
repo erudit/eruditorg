@@ -5,9 +5,8 @@ import datetime as dt
 from django.http import Http404
 from django.test import RequestFactory
 
-from core.subscription.factories import InstitutionalAccountFactory
 from core.subscription.factories import InstitutionIPAddressRangeFactory
-from core.subscription.factories import PolicyFactory
+from core.subscription.factories import JournalAccessSubscriptionFactory
 from erudit.factories import ArticleFactory
 from erudit.factories import IssueFactory
 from erudit.factories import OrganisationFactory
@@ -83,13 +82,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             open_access=True)
         article = ArticleFactory.create(issue=issue)
 
-        policy = PolicyFactory.create(max_accounts=2)
-        policy.access_journal.add(self.journal)
         organisation = OrganisationFactory.create()
-        institutional_account = InstitutionalAccountFactory(
-            institution=organisation, policy=policy)
+        subscription = JournalAccessSubscriptionFactory(
+            organisation=organisation)
         InstitutionIPAddressRangeFactory.build(
-            institutional_account=institutional_account,
+            subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
 
         class MyView(ArticleAccessCheckMixin):

@@ -4,7 +4,7 @@
 {% block breadcrumb_end %}
 {{ block.super }}
 <li>
-  <a href="{% url 'userspace:journal:subscription:account_list' journal_pk=scope_current_journal.pk %}">
+  <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}">
     {% trans "Abonnements individuels" %}
   </a>
 </li>
@@ -12,12 +12,8 @@
 {% endblock breadcrumb_end %}
 
 {% block content-main %}
-
-<h1>{% trans "Ajouter un compte" %} </h1>
-
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="btn btn-primary" />
-</form>
-
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <h1>{% trans "Ajouter un compte" %} </h1>
+  TODO
+</div>
 {% endblock %}
