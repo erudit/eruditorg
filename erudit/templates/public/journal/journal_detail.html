@@ -252,8 +252,11 @@
           </header>
 
           {% for issue in issues %}
-          <article class="issue-list-item--default col-md-2 col-sm-4">
+          <article class="issue-list-item--inverted col-md-2 col-sm-4">
             <a href="{{ issue.get_absolute_url }}">
+              <figure class="small">
+                <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.name }}" />
+              </figure>
               <header>
                 <h5>
                   {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
@@ -261,9 +264,6 @@
                   {% endblocktrans %}
                 </h5>
               </header>
-              <figure>
-                <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.name }}" />
-              </figure>
             </a>
           </article>
           {% endfor %}
