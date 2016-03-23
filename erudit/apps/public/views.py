@@ -26,16 +26,16 @@ class HomeView(FedoraServiceRequiredMixin, TemplateView):
 
         # Includes the latest issues
         context['latest_issues'] = Issue.objects.filter(date_published__isnull=False) \
-            .select_related('journal').order_by('-date_published')[:5]
+            .select_related('journal').order_by('-date_published')[:8]
 
         # Includes the 'apropos' news ; note that this is a temporary behavior as
         # these news will likely be included in the new Érudit website in the future.
         context['latest_news'] = self.fetch_apropos_news()
 
         # Includes some upcoming journals
-        context['upcoming_journals'] = Journal.upcoming_objects.order_by('?')[:3]
+        # context['upcoming_journals'] = Journal.upcoming_objects.order_by('?')[:3]
 
-        context['disciplines'] = Discipline.objects.all()
+        # context['disciplines'] = Discipline.objects.all()
 
         return context
 

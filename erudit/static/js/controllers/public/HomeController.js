@@ -1,11 +1,11 @@
-import '!!script!sticky-kit/jquery.sticky-kit.min';
+//import '!!script!sticky-kit/jquery.sticky-kit.min';
 
 export default {
 
   init: function() {
   	this.layout();
-    this.sticky_elements();
-    this.smooth_scroll();
+    //this.sticky_elements();
+    //this.smooth_scroll();
   },
 
   layout : function () {
@@ -17,7 +17,7 @@ export default {
 
   	$('#homepage-header').css('height', header_height);
   	$('#homepage-content .search-module').css('height', search_height);
-  },
+  }/*,
 
   sticky_elements : function () {
   	$('#homepage-content .homepage--sticky-nav').stick_in_parent();
@@ -36,5 +36,5 @@ export default {
 		  $('html, body').animate( { scrollTop: $('#homepage-content a[name="'+target+'"]').offset().top }, 750 );
 		  return false;
   	});
-  }
+  }*/
 };
