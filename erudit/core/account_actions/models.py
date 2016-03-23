@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import signals
 from .conf import settings as account_actions_settings
+from .core.key import gen_action_key
 
 
 @python_2_unicode_compatible
@@ -54,6 +55,10 @@ class AccountActionToken(models.Model):
         return '{0} - {1}'.format(self.created, self.action)
 
     def save(self, *args, **kwargs):
+        creation = self.pk is None
+        if creation and not self.key:
+            self.key = gen_action_key()
+
         old_instance = self.__class__._default_manager.get(pk=self.pk) if self.pk else None
         super(AccountActionToken, self).save(*args, **kwargs)
 
