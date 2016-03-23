@@ -16,14 +16,17 @@
         <h2>{% trans "Abonnements individuels" %}</h2>
       </div>
       <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un nouvel abonnement" %}</a>
+        <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Inscrire un utilisateur" %}</a>
       </div>
     </div>
     <ul id="id_subscription_list" class="row card-body">
     {% for subscription in subscriptions %}
       <li class="col-xs-12">
-        <a href="{% url 'userspace:journal:subscription:update' scope_current_journal.pk subscription.pk %}"
-           class="btn btn-link btn-block">
+        <div class="content-wrapper">
+          <span class="actions pull-right">
+            <a href="{% url 'userspace:journal:subscription:delete' journal_pk=scope_current_journal.pk pk=subscription.pk %}"
+               class="btn btn-danger">{% trans "Supprimer" %}</a>
+          </span>
           <span class="title">
             {{ subscription.user.get_full_name|default:subscription.user.username }}
           </span>
@@ -40,7 +43,7 @@
               </i></span>
             </span>
           </span>
-        </a>
+        </div>
       </li>
     {% endfor %}
     </ul>

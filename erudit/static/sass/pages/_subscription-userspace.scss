@@ -10,15 +10,12 @@ ul#id_subscription_list{
       background: darken($gray-lighter, 2%);
     }
 
-    a{
-      text-align: left;
-
-      &:hover, &:focus{
-        text-decoration: none;
-      }
+    div.content-wrapper{
+      padding: 12px 16px;
 
       span.title{
         display: block;
+        font-weight: bold;
       }
 
       span.metadata-wrapper{
