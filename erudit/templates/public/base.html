@@ -29,8 +29,8 @@
             <li class="dropdown">
               <a href="{% url 'public:journal:journal-list' %}" class="select main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down caret"></i></a>
               <ul>
-                <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Par disciplines" %}</a></li>
-                <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Ordre alphabéthique" %}</a></li>
+                <li><a href="{% url 'public:journal:journal-list' %}?sorting=disciplines">{% trans "Par disciplines" %}</a></li>
+                <li><a href="{% url 'public:journal:journal-list' %}?sorting=name">{% trans "Ordre alphabéthique" %}</a></li>
               </ul>
             </li>
             <li>
