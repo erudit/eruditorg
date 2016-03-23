@@ -49,7 +49,7 @@
 
                 {% if journal.members.all %}
                 <li>
-                  <h5 class="mono-space">{% trans "Direction" %}</h5>
+                  <h6 class="mono-space">{% trans "Direction" %}</h6>
                   {% for member in journal.members.all %}
                   <p>{{ member.get_full_name }}</p>
                   {% endfor %}
@@ -58,13 +58,13 @@
 
                 {% if journal.publishers.all %}
                 <li>
-                  <h5 class="mono-space">
+                  <h6 class="mono-space">
                     {% blocktrans count total=journal.publishers.all|length %}
                     Éditeur
                     {% plural %}
                     Éditeurs
                     {% endblocktrans %}
-                  </h5>
+                  </h6>
                   {% for publisher in journal.publishers.all %}
                   <p>{{ publisher.name }}</p>
                   {% endfor %}
@@ -73,7 +73,7 @@
 
                 {% if journal.issn_print or journal.issn_web %}
                 <li>
-                  <h5 class="mono-space">{% trans "ISSN" %}</h5>
+                  <h6 class="mono-space">{% trans "ISSN" %}</h6>
                   {% if journal.issn_print %}
                   <p><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</p>
                   <p><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</p>
@@ -83,7 +83,7 @@
 
                 {% if journal.issues_per_year %}
                 <li>
-                  <h5 class="mono-space">{% trans "Fréquence" %}</h5>
+                  <h6 class="mono-space">{% trans "Fréquence" %}</h6>
                   <p>
                     {% blocktrans count issues_per_year=journal.issues_per_year %}
                     {{ issues_per_year }} numéro par année
@@ -96,19 +96,19 @@
 
                 {# TODO : add this to model #}
                 <li>
-                  <h5 class="mono-space">{% trans "Période de publication" %}</h5>
+                  <h6 class="mono-space">{% trans "Période de publication" %}</h6>
                   <p>{{ journal.erudit_object.publication_period }}</p>
                 </li>
 
                 {% if journal.first_issue %}
                 <li>
-                  <h5 class="mono-space">{% trans "Disponible dans Érudit depuis" %}</h5>
+                  <h6 class="mono-space">{% trans "Disponible dans Érudit depuis" %}</h6>
                   <p>{{ journal.first_issue.date_published|date:"Y" }}</p>
                 </li>
                 {% endif %}
 
                 <li>
-                  <h5 class="mono-space">{% trans "Type de support" %}</h5>
+                  <h6 class="mono-space">{% trans "Type de support" %}</h6>
                   <p>
                     {% if journal.paper %}
                     {% trans "Numérique et papier" %}
@@ -119,7 +119,7 @@
                 </li>
 
                 <li>
-                  <h5 class="mono-space">{% trans "Politique d'accès" %}</h5>
+                  <h6 class="mono-space">{% trans "Politique d'accès" %}</h6>
                   {% if journal.open_access %}
                   <p>{% trans "Disponible en libre accès" %}</p>
                   {% else %}
@@ -159,7 +159,7 @@
 
               {% if journal_info.about %}
               <div class="journal-info-block">
-                <h3 class="h2">{% trans "À propos" %}</h3>
+                <h3>{% trans "À propos" %}</h3>
                 <div class="content">
                     {{ journal_info.about|default:tab_empty_msg|safe }}
                     {% if journal.url %}
@@ -174,68 +174,55 @@
               </div>
               {% endif %}
 
-              <div class="collapse-group">
-
-                {% if journal_info.editorial_policy %}
-                <div class="journal-info-block" role="tab" id="journal-info-editorial-policy" role="tabpanel">
-                  <h3 class="h2">
-                    <a role="button" data-toggle="collapse" href="#journal-info-editorial-policy-content" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
-                      {% trans "Politique éditoriale" %}
-                      <i class="collapse-chevron ion-chevron-down pull-right"></i>
-                    </a>
-                  </h3>
-                  <div id="journal-info-editorial-policy-content" class="content panel-collapse collapse" aria-labelledby="journal-info-editorial-policy">
-                      {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
-                  </div>
+              {% if journal_info.editorial_policy %}
+              <div class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
+                <h3 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
+                    {% trans "Politique éditoriale" %}
+                    <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
+                </h3>
+                <div id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
+                    {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
                 </div>
-                {% endif %}
-
-                {% if journal_info.subscriptions %}
-                <div class="journal-info-block" role="tab" id="journal-info-subscriptions" role="tabpanel">
-                  <h3 class="h2">
-                    <a role="button" data-toggle="collapse" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
-                      {% trans "Abonnements" %}
-                      <i class="collapse-chevron ion-chevron-down pull-right"></i>
-                    </a>
-                  </h3>
-                  <div id="journal-info-subscriptions-content" class="content panel-collapse collapse" aria-labelledby="journal-info-subscriptions">
-                      {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
-                  </div>
-                </div>
-                {% endif %}
-
-
-                {% if journal_info.team %}
-                <div class="journal-info-block" role="tab" id="journal-info-authors" role="tabpanel">
-                  <h3 class="h2">
-                    <a role="button" data-toggle="collapse" href="#journal-info-authors-content" aria-expanded="false" aria-controls="journal-info-authors-content">
-                      {% trans "Index des auteurs" %}
-                      <i class="collapse-chevron ion-chevron-down pull-right"></i>
-                    </a>
-                  </h3>
-                  <div id="journal-info-authors-content" class="content panel-collapse collapse" aria-labelledby="journal-info-authors">
-                    <p>
-                        <a href="{% url 'public:journal:journal-authors-list' journal.code %}">{% trans "Voir les auteurs" %}</a>
-                    </p>
-                  </div>
-                </div>
-                {% endif %}
-
-                {% if journal_info.team %}
-                <div class="journal-info-block" role="tab" id="journal-info-team" role="tabpanel">
-                  <h3 class="h2">
-                    <a role="button" data-toggle="collapse" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
-                      {% trans "Équipe" %}
-                      <i class="collapse-chevron ion-chevron-down pull-right"></i>
-                    </a>
-                  </h3>
-                  <div id="journal-info-team-content" class="content panel-collapse collapse" aria-labelledby="journal-info-team">
-                      {{ journal_info.team|default:tab_empty_msg|safe }}
-                  </div>
-                </div>
-                {% endif %}
-
               </div>
+              {% endif %}
+
+              {% if journal_info.subscriptions %}
+              <div class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
+                <h3 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
+                  {% trans "Abonnements" %}
+                  <i class="collapse-chevron ion-chevron-down pull-right"></i>
+                </h3>
+                <div id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
+                    {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
+                </div>
+              </div>
+              {% endif %}
+
+              {% if journal_info.team %}
+              <div class="journal-info-block akkordion" role="tab" id="journal-info-authors" role="tabpanel">
+                <h3 class="akkordion-title" href="#journal-info-authors-content" aria-expanded="false" aria-controls="journal-info-authors-content">
+                  {% trans "Index des auteurs" %}
+                  <i class="collapse-chevron ion-chevron-down pull-right"></i>
+                </h3>
+                <div id="journal-info-authors-content" class="akkordion-content" aria-labelledby="journal-info-authors">
+                  <p>
+                      <a href="{% url 'public:journal:journal-authors-list' journal.code %}">{% trans "Voir les auteurs" %}</a>
+                  </p>
+                </div>
+              </div>
+              {% endif %}
+
+              {% if journal_info.team %}
+              <div class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
+                <h3 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
+                  {% trans "Équipe" %}
+                  <i class="collapse-chevron ion-chevron-down pull-right"></i>
+                </h3>
+                <div id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
+                    {{ journal_info.team|default:tab_empty_msg|safe }}
+                </div>
+              </div>
+              {% endif %}
 
             </section>
             {% endif %}

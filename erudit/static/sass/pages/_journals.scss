@@ -31,15 +31,15 @@
 * journal meta infos on sidebars
 */
 .journal-meta {
-
+  border-bottom: 1px solid $gray-base;
   li {
     margin-bottom: $margin-vertical-default/2;
-    h5 {
-      // font-size: 12px;
+    h6 {
       margin: 0 0 4px 0;
     }
     p {
       margin: 0;
+      font-size: 14px;
     }
   }
 
