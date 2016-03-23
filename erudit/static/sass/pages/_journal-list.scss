@@ -4,22 +4,47 @@ body.journal-list #breadcrumb {
 
 #journal-list {
 
-	.disciplines {
+	// sorting header with title
+	.sorting-index {
 		background: $light-grey;
-		padding-top: 20px;
+		padding-top: 0px;
 		padding-bottom: 60px;
 		font-size: 18px;
 
-		ul {
-			margin-top: 35px;
-			list-style: none;
+		h2 {
+			margin-top: 0;
+			margin-bottom: $margin-vertical-default;
+		}
+
+		nav.index {
+			@include content-columns(4, $grid-gutter-width/2);
+			@media (max-width: $screen-sm-max) {
+				@include content-columns(2, $grid-gutter-width/2);
+			}
+			@media (max-width: $screen-xs-max) {
+				@include content-columns(1, $grid-gutter-width/2);
+			}
+
+			h5 {
+				font-size: 18px;
+			}
+
 		}
 	}
 
-	.discipline {
+	// each sorting group
+	.sorting-group {
 		padding-top: 90px;
 
-		.discipline--title {
+		&.even {
+			background: $light-grey;
+		}
+
+		&.odd {
+			background: #fff;
+		}
+
+		.sorting-group--title {
 			.title {
 				padding-top: 20px;
 				padding-bottom: 20px;
@@ -35,7 +60,7 @@ body.journal-list #breadcrumb {
 			}
 		}
 
-		.discipline--articles {
+		.sorting-group--articles {
 			padding: 60px 0 0 0;
 
 			h3 {
@@ -43,18 +68,14 @@ body.journal-list #breadcrumb {
 				@include fw-sans-bold();
 			}
 
-			.journal-thumbnail {
-				// nada
-			}
-
-			&.discipline--articles--default .col:nth-child(4n+1),
-			&.discipline--articles--small .col:nth-child(6n+1) {
+			&.sorting-group--articles--default .col:nth-child(4n+1),
+			&.sorting-group--articles--small .col:nth-child(6n+1) {
 				clear: both;
 			}
 
-			&:nth-child(odd) {
-				background: $light-grey;
-			}
+			// &:nth-child(odd) {
+			// 	background: $light-grey;
+			// }
 		}
 	}
 }

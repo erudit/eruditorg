@@ -20,6 +20,7 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
+from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Author
 from erudit.models import Journal
@@ -34,6 +35,23 @@ class JournalListView(ListView):
     context_object_name = 'journals'
     model = Journal
     template_name = 'public/journal/journal_list.html'
+
+    def get(self, request, *args, **kwargs):
+        self.init_get_parameters(request)
+        return super(JournalListView, self).get(request, *args, **kwargs)
+
+    def init_get_parameters(self, request):
+        """ Initializes GET parameters. """
+        self.sorting = request.GET.get('sorting', 'disciplines')
+        self.sorting_template = "public/journal/_journal_list_sort_%s.html" % self.sorting
+
+    def get_context_data(self, **kwargs):
+        context = super(JournalListView, self).get_context_data(**kwargs)
+
+        context['disciplines'] = Discipline.objects.all().order_by('name')
+        context['sorting_template'] = self.sorting_template
+
+        return context
 
 
 class JournalDetailView(FedoraServiceRequiredMixin, JournalCodeDetailMixin, DetailView):

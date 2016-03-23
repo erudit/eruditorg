@@ -10,13 +10,18 @@
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 50px;
-  @include grid-cell-border('top', 1px, $dark-grey);
+  @include grid-cell-border('top', 1px, $gray-mid);
 
   h4 {
     font-size: 18px;
   }
+
   h5 {
     margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 14px;
   }
 
 }

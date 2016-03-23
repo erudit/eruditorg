@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<article class="col col-md-3 journal-thumbnail">
+
+  <header class="row">
+    <h4 class="col-xs-12">
+      <a class="" href="{{ journal.get_absolute_url }}">
+        {{ journal.name }}
+      </a>
+    </h4>
+  </header>
+
+  <footer class="row">
+    <div class="col-xs-8 color-dark-grey">
+      {% if journal.subtitle %}
+      <p class="color-dark-grey">{{ journal.subtitle }}</p>
+      {% endif %}
+      {% if journal.type.code == 'S' %}
+      <p class="bold">{% trans "Révisé par les pairs" %}</p>
+      {% endif %}
+    </div>
+    <div class="col-xs-4">
+      <a class="" href="{{ journal.get_absolute_url }}">
+        <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
+      </a>
+    </div>
+  </footer>
+
+</article>

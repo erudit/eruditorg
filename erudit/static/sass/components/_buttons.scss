@@ -6,7 +6,7 @@
 // --------------------------------------------------
 
 .btn {
-  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $btn-border-radius-base);
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, 1.15, $btn-border-radius-base);
   @include user-select(none);
   @include fw-sans-medium;
   display: inline-block;
@@ -17,7 +17,7 @@
   touch-action: manipulation;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   white-space: nowrap;
 
   // icon
@@ -75,6 +75,9 @@ a.btn {
 }
 .btn-primary {
   @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+.btn-primary-outlined {
+  @include button-variant($brand-primary, transparent, $brand-primary);
 }
 .btn-dark {
   @include button-variant(#fff, $gray-base, transparent);

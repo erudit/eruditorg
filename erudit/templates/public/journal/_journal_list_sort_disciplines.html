@@ -1,0 +1,65 @@
+{% load i18n %}
+
+{# index header for each Discipline #}
+<header class="sorting-index container-fluid">
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 clearfix">
+          <h2 class="h3 bold pull-left">{% trans "Disciplines" %}</h2>
+          <nav class="pull-right">
+            <a href="{% url 'public:journal:journal-list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <nav class="col-xs-12 index">
+
+          {% for discipline in disciplines %}
+          <h5><a href="#discipline-{{ discipline.code }}">{{ discipline }}</a></h5>
+          {% endfor %}
+
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+{# each magazine per discipline #}
+{% for discipline in disciplines %}
+
+{% if discipline.journals.all|length > 0 %}
+
+<a name="discipline-{{ discipline.code }}" class="invisible">{{ discipline }}</a>
+
+<div class="sorting-group container-fluid {% cycle "odd" "even" %}">
+
+  <header class="row sorting-group--title">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 title">
+          <h2 class="no-margin h3">{{ discipline }} <a href="#top" id="scroll-top" class="erudicon erudicon-arrow-up"></a></h2>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="row sorting-group--articles sorting-group--articles--default">
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-3">
+          <h3 class="h4 color-red">Érudit </h3>
+        </div>
+        {% for journal in discipline.journals.all %}
+        {% include "public/journal/_journal_list_preview.html" with journal=journal %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+</div>
+{# end each discipline #}
+
+{% endif %}
+
+{% endfor %}
