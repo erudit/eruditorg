@@ -7,14 +7,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0012_auto_20160322_1257'),
-        ('subscription', '0012_auto_20160322_1536'),
+        ('erudit', '0001_initial'),
+        ('subscription', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='journalaccesssubscription',
             name='sponsor',
-            field=models.ForeignKey(to='erudit.Organisation', null=True, blank=True, verbose_name='Commanditaire', related_name='sponsored_subscriptions'),
+            field=models.ForeignKey(to='erudit.Organisation', null=True, verbose_name='Commanditaire', related_name='sponsored_subscriptions', blank=True),
         ),
     ]

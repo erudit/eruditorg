@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account_actions', '0002_accountactiontoken_consumption_date'),
+        ('account_actions', '0001_initial'),
     ]
 
     operations = [
@@ -15,5 +15,10 @@ class Migration(migrations.Migration):
             model_name='accountactiontoken',
             name='active',
             field=models.BooleanField(verbose_name='Actif', default=True),
+        ),
+        migrations.AddField(
+            model_name='accountactiontoken',
+            name='consumption_date',
+            field=models.DateTimeField(verbose_name='Date de consommation', null=True, blank=True),
         ),
     ]

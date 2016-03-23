@@ -2,106 +2,87 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import django.utils.timezone
 from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
+        ('erudit', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('erudit', '0003_auto_20160219_1716'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IndividualAccount',
+            name='InstitutionIPAddressRange',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
-                ('email', models.CharField(verbose_name='Courriel', max_length=120)),
-                ('password', models.CharField(verbose_name='Mot de passe', blank=True, max_length=50)),
-                ('firstname', models.CharField(verbose_name='Prénom', max_length=30)),
-                ('lastname', models.CharField(verbose_name='Nom', max_length=30)),
-                ('active', models.BooleanField(verbose_name='Actif', default=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('ip_start', models.GenericIPAddressField(verbose_name='Adresse IP de début')),
+                ('ip_end', models.GenericIPAddressField(verbose_name='Adresse IP de fin')),
             ],
             options={
-                'verbose_name': 'Compte personnel',
-                'verbose_name_plural': 'Comptes personnels',
+                'verbose_name': "Plage d'adresses IP d'institution",
+                'verbose_name_plural': "Plages d'adresses IP d'institution",
             },
         ),
         migrations.CreateModel(
-            name='Policy',
+            name='JournalAccessSubscription',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
-                ('generated_title', models.CharField(editable=False, blank=True, max_length=120, verbose_name='Titre')),
-                ('date_creation', models.DateTimeField(verbose_name='Date de création', null=True, default=django.utils.timezone.now, editable=False)),
-                ('date_modification', models.DateTimeField(verbose_name='Date de modification', null=True, default=django.utils.timezone.now, editable=False)),
-                ('date_activation', models.DateTimeField(null=True, blank=True, help_text="Ce champs se remplit automatiquement.             Il est éditable uniquement pour les données existantes qui n'ont pas cette information", verbose_name="Date d'activation")),
-                ('date_renew', models.DateTimeField(null=True, verbose_name='Date de renouvellement')),
-                ('renew_cycle', models.PositiveSmallIntegerField(verbose_name='Cycle du renouvellement (en jours)', default=365)),
-                ('object_id', models.PositiveIntegerField()),
-                ('comment', models.TextField(verbose_name='Commentaire', blank=True)),
-                ('max_accounts', models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='Maximum de comptes')),
-                ('access_full', models.BooleanField(verbose_name='Accès à tous les produits', default=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(verbose_name='Titre', max_length=120, null=True, blank=True)),
+                ('created', models.DateTimeField(verbose_name='Date de création', auto_now_add=True)),
+                ('updated', models.DateTimeField(verbose_name='Date de modification', auto_now=True)),
+                ('date_activation', models.DateField(verbose_name="Date d'activation", null=True, blank=True)),
+                ('date_renew', models.DateField(verbose_name='Date de renouvellement', null=True, blank=True)),
+                ('renew_cycle', models.PositiveSmallIntegerField(verbose_name='Cycle du renouvellement (en jours)', null=True, blank=True)),
+                ('comment', models.TextField(verbose_name='Commentaire', null=True, blank=True)),
+                ('full_access', models.BooleanField(verbose_name='Accès complet', default=False)),
+                ('collection', models.ForeignKey(to='erudit.Collection', related_name='+', blank=True, verbose_name='Collection', null=True)),
+                ('journal', models.ForeignKey(to='erudit.Journal', related_name='+', blank=True, verbose_name='Revue', null=True)),
+                ('journals', models.ManyToManyField(verbose_name='Revues', to='erudit.Journal', related_name='_journalaccesssubscription_journals_+', blank=True)),
+                ('organisation', models.ForeignKey(to='erudit.Organisation', blank=True, verbose_name='Organisation', null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, blank=True, verbose_name='Utilisateur', null=True)),
             ],
             options={
-                'verbose_name': 'Accès aux produits',
-                'verbose_name_plural': 'Accès aux produits',
+                'verbose_name': 'Abonnement aux revues',
+                'verbose_name_plural': 'Abonnements aux revues',
             },
         ),
         migrations.CreateModel(
-            name='PolicyEvent',
+            name='JournalManagementPlan',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
-                ('date_creation', models.DateTimeField(verbose_name='Date de création', null=True, default=django.utils.timezone.now, editable=False)),
-                ('code', models.CharField(verbose_name='Code', choices=[('LIMIT_REACHED', 'Limite atteinte')], max_length=120)),
-                ('message', models.TextField(verbose_name='Texte', blank=True)),
-                ('policy', models.ForeignKey(to='subscription.Policy', verbose_name='Accès aux produits')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(verbose_name='Titre', max_length=255, null=True, blank=True)),
+                ('code', models.SlugField(verbose_name='Code', max_length=100, unique=True)),
+                ('max_accounts', models.PositiveSmallIntegerField(verbose_name='Maximum de comptes')),
             ],
             options={
-                'verbose_name': 'Évènement sur les accès',
-                'ordering': ('-date_creation',),
-                'verbose_name_plural': 'Évènements sur les accès',
+                'verbose_name': "Forfait de gestion d'une revue",
+                'verbose_name_plural': 'Forfaits de gestion de revues',
             },
         ),
         migrations.CreateModel(
-            name='Journal',
+            name='JournalManagementSubscription',
             fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(verbose_name='Titre', max_length=120, null=True, blank=True)),
+                ('created', models.DateTimeField(verbose_name='Date de création', auto_now_add=True)),
+                ('updated', models.DateTimeField(verbose_name='Date de modification', auto_now=True)),
+                ('date_activation', models.DateField(verbose_name="Date d'activation", null=True, blank=True)),
+                ('date_renew', models.DateField(verbose_name='Date de renouvellement', null=True, blank=True)),
+                ('renew_cycle', models.PositiveSmallIntegerField(verbose_name='Cycle du renouvellement (en jours)', null=True, blank=True)),
+                ('comment', models.TextField(verbose_name='Commentaire', null=True, blank=True)),
+                ('journal', models.ForeignKey(verbose_name='Revue', to='erudit.Journal')),
+                ('plan', models.ForeignKey(verbose_name='Forfait', to='subscription.JournalManagementPlan')),
             ],
             options={
-                'proxy': True,
-                'verbose_name': 'Revue',
+                'verbose_name': 'Abonnement de gestion de revue',
+                'verbose_name_plural': 'Abonnements de gestion de revue',
             },
-            bases=('erudit.journal',),
-        ),
-        migrations.CreateModel(
-            name='Organisation',
-            fields=[
-            ],
-            options={
-                'proxy': True,
-            },
-            bases=('erudit.organisation',),
         ),
         migrations.AddField(
-            model_name='policy',
-            name='access_journal',
-            field=models.ManyToManyField(verbose_name='Revues', blank=True, to='erudit.Journal'),
-        ),
-        migrations.AddField(
-            model_name='policy',
-            name='content_type',
-            field=models.ForeignKey(to='contenttypes.ContentType', verbose_name='Type'),
-        ),
-        migrations.AddField(
-            model_name='policy',
-            name='managers',
-            field=models.ManyToManyField(verbose_name='Gestionnaires des comptes', blank=True, related_name='organizations_managed', to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
-            model_name='individualaccount',
-            name='policy',
-            field=models.ForeignKey(verbose_name='Accès', related_name='accounts', to='subscription.Policy'),
+            model_name='institutionipaddressrange',
+            name='subscription',
+            field=models.ForeignKey(verbose_name='Abonnement aux revues', to='subscription.JournalAccessSubscription'),
         ),
     ]
