@@ -14,6 +14,4 @@ urlpatterns = [
     url(_(r'^acces/supprimer/(?P<pk>[0-9]+)/$'),
         views.IndividualJournalAccessSubscriptionDeleteView.as_view(),
         name='delete'),
-    url(_(r'^acces/(?P<pk>[0-9]+)/$'),
-        views.IndividualJournalAccessSubscriptionUpdateView.as_view(), name='update'),
 ]
