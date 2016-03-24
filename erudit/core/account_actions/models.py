@@ -14,6 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from . import signals
 from .conf import settings as account_actions_settings
 from .core.key import gen_action_key
+from .managers import PendingManager
 
 
 @python_2_unicode_compatible
@@ -46,6 +47,9 @@ class AccountActionToken(models.Model):
     content_type = models.ForeignKey(ContentType, verbose_name=_('Type'), blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
+
+    objects = models.Manager()
+    pending_objects = PendingManager()
 
     class Meta:
         verbose_name = _("Jeton d'action")
