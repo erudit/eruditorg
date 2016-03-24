@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import inspect
 
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import ugettext_lazy as _
 import six
 
 from .core.compat import with_metaclass
@@ -49,7 +50,37 @@ class AccountActionBase(with_metaclass(AccountActionMetaclass, object)):
     #
 
     # Optional attributes
+    landing_page_template_name = None
     title = None
+
+    def can_be_consumed(self, token, user):
+        """
+        Given a token, returns a boolean indicating if it can be consumed by the considered user.
+        The default implementation uses the AccountActionToken.is_consumed property.
+        """
+        return not token.is_consumed
+
+    def get_extra_context(self, token, user):
+        """
+        Given a token, returns a dictionary that can be used to extend the context of view that
+        uses the considered action.
+        The default implementation returns an empty dictionary.
+        """
+        return {}
+
+    def get_consumption_redirect_url(self, token):
+        """
+        Given a consumed token, returns the URL to which the user should be redirected after The
+        execution of the action.
+        The default implementation simply returns '/'.
+        """
+        return '/'
+
+    def get_consumption_success_message(self, token):
+        """
+        Given a consumed token, returns a success message.
+        """
+        return _('Action réalisée!')
 
     def send_notification_email(self, token):
         """
