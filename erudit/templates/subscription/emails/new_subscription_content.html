@@ -1,0 +1,12 @@
+{% extends "base_email.html" %}
+{% load i18n %}
+
+{% block content %}
+  <p>
+  {% blocktrans trimmed with journal=token.content_object %}
+    Une proposition d'abonnement à la revue <strong>{{ journal.name }}</strong> vous a été envoyée.
+  {% endblocktrans %}
+  </p>
+  <p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
+  <p><a href="#">{% trans "Accepter l'abonnement"}</a></p>
+{% endblock content %}

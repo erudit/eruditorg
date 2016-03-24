@@ -20,7 +20,7 @@
       </div>
     </div>
     <ul id="id_subscription_list" class="row card-body">
-    {% for subscription in subscriptions %}
+      {% for subscription in subscriptions %}
       <li class="col-xs-12">
         <div class="content-wrapper">
           <span class="actions pull-right">
@@ -45,7 +45,7 @@
           </span>
         </div>
       </li>
-    {% endfor %}
+      {% endfor %}
     </ul>
     <div class="row">
       <div class="col-xs-12">
@@ -53,5 +53,36 @@
       </div>
     </div>
   </section>
+  {% if pending_subscriptions %}
+  <section class="card card-pending_subscriptions">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Abonnements en attente d'acceptation" %}</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{% trans "Adresse e-mail" %}</th>
+              <th>{% trans "Prénom" %}</th>
+              <th>{% trans "Nom" %}</th>
+              <th>{% trans "Date d'expiration" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for psubscription in pending_subscriptions %}
+            <tr class="text-center">
+              <td>{{ forloop.counter }}</td>
+              <td>{{ psubscription.email }}</td>
+              <td>{{ psubscription.first_name }}</td>
+              <td>{{ psubscription.last_name }}</td>
+              <td>{{ psubscription.expiration_date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  {% endif %}
 </div>
 {% endblock content-main %}
