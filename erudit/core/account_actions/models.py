@@ -14,6 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from . import signals
 from .conf import settings as account_actions_settings
 from .core.key import gen_action_key
+from .managers import ConsumedManager
 from .managers import PendingManager
 
 
@@ -49,6 +50,7 @@ class AccountActionToken(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     objects = models.Manager()
+    consumed_objects = ConsumedManager()
     pending_objects = PendingManager()
 
     class Meta:
