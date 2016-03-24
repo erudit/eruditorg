@@ -92,3 +92,8 @@ class AccountActionToken(models.Model):
     def is_consumed(self):
         """ Returns a boolean indicating if the action token has been consumed. """
         return self.consumption_date is not None and self.user is not None
+
+    @property
+    def can_be_consumed(self):
+        """ Returns a boolean indicating if the action can be consumed. """
+        return not self.is_expired and not self.is_consumed

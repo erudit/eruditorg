@@ -56,9 +56,9 @@ class AccountActionBase(with_metaclass(AccountActionMetaclass, object)):
     def can_be_consumed(self, token, user):
         """
         Given a token, returns a boolean indicating if it can be consumed by the considered user.
-        The default implementation uses the AccountActionToken.is_consumed property.
+        The default implementation uses the AccountActionToken.can_be_consumed property.
         """
-        return not token.is_consumed
+        return token.can_be_consumed
 
     def get_extra_context(self, token, user):
         """

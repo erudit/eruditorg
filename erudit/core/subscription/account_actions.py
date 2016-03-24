@@ -15,7 +15,7 @@ class IndividualSubscriptionAction(AccountActionBase):
     landing_page_template_name = 'public/account_actions/individual_subscription_landing.html'
 
     def can_be_consumed(self, token, user):
-        return not token.is_consumed and not self._subscription_exists(token, user)
+        return token.can_be_consumed and not self._subscription_exists(token, user)
 
     def execute(self, token):
         JournalAccessSubscription.objects.create(

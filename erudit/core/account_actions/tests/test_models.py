@@ -77,3 +77,28 @@ class TestAccountActionToken(TestCase):
         # Run & check
         token.consume(user)
         self.assertEqual(test_signal, 1)
+
+    def test_knows_that_a_pending_token_can_be_consumed(self):
+        # Setup
+        token = AccountActionTokenFactory.create()
+        # Run & check
+        self.assertTrue(token.can_be_consumed)
+
+    def test_knows_that_an_expired_token_cannot_be_consumed(self):
+        # Setup
+        token = AccountActionTokenFactory.create()
+        token._meta.get_field_by_name('created')[0].auto_now_add = False
+        token.created = timezone.now() - dt.timedelta(days=100)
+        token.save()
+        token._meta.get_field_by_name('created')[0].auto_now_add = True
+        # Run & check
+        self.assertFalse(token.can_be_consumed)
+
+    def test_knows_that_a_consumed_token_cannot_be_consumed(self):
+        # Setup
+        user = User.objects.create_user(
+            username='test', password='not_secret', email='test@exampe.com')
+        token = AccountActionTokenFactory.create()
+        token.consume(user)
+        # Run & check
+        self.assertFalse(token.can_be_consumed)
