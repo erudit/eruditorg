@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.utils.functional import cached_property
-from django.views.generic.detail import BaseDetailView
+from django.views.generic import View
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from rules.contrib.views import PermissionRequiredMixin
 
@@ -18,13 +19,13 @@ from ..models import AccountActionToken
 logger = logging.getLogger(__name__)
 
 
-class AccountActionDetailView(SingleObjectTemplateResponseMixin, BaseDetailView):
+class AccountActionTokenMixin(SingleObjectMixin):
     context_object_name = 'token'
     key_url_kwargs = 'key'
     model = AccountActionToken
 
     def get_context_data(self, **kwargs):
-        context = super(AccountActionDetailView, self).get_context_data(**kwargs)
+        context = super(AccountActionTokenMixin, self).get_context_data(**kwargs)
         context['action'] = self.action
         context.update(self.action.get_extra_context(self.object, self.request.user))
         return context
@@ -58,14 +59,23 @@ class AccountActionDetailView(SingleObjectTemplateResponseMixin, BaseDetailView)
 
         return obj
 
+    def get_token(self):
+        return self.get_object()
+
     action = cached_property(get_action)
+    token = cached_property(get_token)
 
 
-class AccountActionLandingView(AccountActionDetailView):
+class AccountActionLandingView(AccountActionTokenMixin, SingleObjectTemplateResponseMixin, View):
     """
     This views provides a "landing" page in order to consume an action.
     """
     http_method_names = ['get', ]
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
     def get_template_names(self):
         if self.action.landing_page_template_name:
@@ -73,7 +83,7 @@ class AccountActionLandingView(AccountActionDetailView):
         return super(AccountActionLandingView, self).get_template_names()
 
 
-class AccountActionConsumeView(PermissionRequiredMixin, AccountActionDetailView):
+class AccountActionConsumeView(PermissionRequiredMixin, AccountActionTokenMixin, View):
     """
     This views can be used to "consume" an account action token. It will associate the token with
     the current user and execute the proper operations related to the considered action.
