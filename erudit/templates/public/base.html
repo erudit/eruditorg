@@ -86,7 +86,7 @@
             <img src="{{ request.institutional_account.badge.url }}" alt="" />
           {% endif %}
         {% elif request.subscription_type == 'individual' %}
-
+          <p class="text-muted">{% blocktrans trimmed with username=request.user.username %}Accès individuel ({{ username }}){% endblocktrans %}</p>
         {% elif request.subscription_type == 'open_access' %}
           <p class="text-muted">{% trans "Libre accès" %}</p>
         {% endif %}

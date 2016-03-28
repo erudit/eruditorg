@@ -3,6 +3,7 @@
 from ipware.ip import get_ip
 
 from .models import InstitutionIPAddressRange
+from .models import JournalAccessSubscription
 
 
 class SubscriptionMiddleware(object):
@@ -25,8 +26,12 @@ class SubscriptionMiddleware(object):
             request.subscription = ip_range.subscription
             return
 
-        # TODO: try to determine if the user has an individual account
-        # request.subscription_type = 'individual'
+        # Tries to determine if the user has an individual account
+        subscription = JournalAccessSubscription.objects.filter(user=request.user).exists() \
+            if request.user.is_authenticated() else False
+        if subscription:
+            request.subscription_type = 'individual'
+            return
 
         # In any other the user is is in open access.
         request.subscription_type = 'open_access'
