@@ -61,6 +61,17 @@
 
 {% endblock %}
 
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="messages-wrapper">
+      {% include "partials/messages.html" %}
+    </div>
+  </div>
+</div>
+{% block content %}{% endblock content %}
+{% endblock body %}
+
 {% block footer %}
 
 <footer id="erudit-subscription-type" class="container margin-top">
