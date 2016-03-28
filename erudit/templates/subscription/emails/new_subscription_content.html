@@ -3,10 +3,10 @@
 
 {% block content %}
   <p>
-  {% blocktrans trimmed with journal=token.content_object %}
-    Une proposition d'abonnement à la revue <strong>{{ journal.name }}</strong> vous a été envoyée.
+  {% blocktrans trimmed with journal_name=token.content_object.name %}
+    Une proposition d'abonnement à la revue <strong>{{ journal_name }}</strong> vous a été envoyée.
   {% endblocktrans %}
   </p>
   <p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
-  <p><a href="#">{% trans "Accepter l'abonnement"}</a></p>
+  <p><a href="http://{{ site.domain }}{% url 'public:account-actions:landing' key=token.key %}">{% trans "Accepter l'abonnement" %}</a></p>
 {% endblock content %}
