@@ -45,7 +45,7 @@ class AccountActionDetailView(SingleObjectTemplateResponseMixin, BaseDetailView)
         return action
 
     def get_object(self, queryset=None):
-        if queryset is None:
+        if queryset is None:  # pragma: no cover
             queryset = self.get_queryset()
 
         key = self.kwargs.get(self.key_url_kwargs)
@@ -74,6 +74,10 @@ class AccountActionLandingView(AccountActionDetailView):
 
 
 class AccountActionConsumeView(PermissionRequiredMixin, AccountActionDetailView):
+    """
+    This views can be used to "consume" an account action token. It will associate the token with
+    the current user and execute the proper operations related to the considered action.
+    """
     http_method_names = ['post', ]
     raise_exception = True
 

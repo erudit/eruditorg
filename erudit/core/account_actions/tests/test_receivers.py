@@ -15,7 +15,7 @@ execute_called = False
 class TestEmailNotificationAction(AccountActionBase):
     name = 'test-email-notification'
 
-    def execute(self, method):
+    def execute(self, method):  # pragma: no cover
         pass
 
     def send_notification_email(self, token):

@@ -11,7 +11,7 @@ from ..exceptions import ActionAlreadyRegistered
 class SimpleAction(AccountActionBase):
     name = 'simpleaction'
 
-    def execute(self, method):
+    def execute(self, method):  # pragma: no cover
         pass
 
 
