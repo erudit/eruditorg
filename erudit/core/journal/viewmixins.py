@@ -67,7 +67,15 @@ class ArticleAccessCheckMixin(object):
             return True
 
         # 2- Is the current user allowed to access the article?
-        # TODO: add
+        if not self.request.user.is_anonymous():
+            individual_subscriptions = JournalAccessSubscription.objects.filter(
+                Q(full_access=True) |
+                Q(journal=article.issue.journal) |
+                Q(journals__id=article.issue.journal_id),
+                user=self.request.user,
+            )
+            if individual_subscriptions.exists():
+                return True
 
         # 3- Is the current IP address allowed to access the article as an institution?
         ip = get_ip(self.request)
