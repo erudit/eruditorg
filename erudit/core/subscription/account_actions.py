@@ -1,5 +1,6 @@
 # -*- coding utf-8 -*-
 
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.account_actions import actions
@@ -25,6 +26,9 @@ class IndividualSubscriptionAction(AccountActionBase):
         return {
             'subscription_exists': self._subscription_exists(token, user),
         }
+
+    def get_consumption_redirect_url(self, token):
+        return reverse('public:journal:journal-detail', kwargs={'code': token.content_object.code})
 
     def get_consumption_success_message(self, token):
         return _('Votre abonnement a bien été pris en compte')
