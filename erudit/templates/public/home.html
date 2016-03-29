@@ -48,7 +48,7 @@
 </header>
 {% endblock %}
 
-{% block content %}
+{% block body %}
 {% trans "inconnu" as i18n_unknown %}
 <div id="homepage-content">
 
@@ -64,6 +64,14 @@
       <li><a href="#publications">{% trans "Publications" %}</a></li>
     </ul>
   </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="messages-wrapper">
+        {% include "partials/messages.html" %}
+      </div>
+    </div>
+  </div>
 
   <!-- SEARCH -->
   <div class="container">
@@ -266,7 +274,7 @@
   </div>
 
 </div>
-{% endblock content %}
+{% endblock body %}
 
 {% block footer %}
 {% include "partials/site-footer.html" %}

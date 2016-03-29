@@ -1,5 +1,6 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
@@ -14,6 +15,12 @@
 {% block content-main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
   <h1>{% trans "Ajouter un compte" %} </h1>
-  TODO
+  <div class="row">
+    <div class="col-md-12">
+      <form  class="form-vertical" method="post" action="">
+        {% crispy form %}
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}

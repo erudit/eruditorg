@@ -21,6 +21,7 @@ class JournalAccessSubscription(AbstractSubscription):
     The subscription can associate many Journal instances to the user or the organisation.
     A subscription for collection of journals or a "full access" subscription can also be specified.
     """
+    # The subscription can be associated either with a user or an organisation.
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'), blank=True, null=True)
     organisation = models.ForeignKey(
@@ -34,6 +35,11 @@ class JournalAccessSubscription(AbstractSubscription):
     journals = models.ManyToManyField(
         Journal, verbose_name=_('Revues'), related_name='+', blank=True)
     full_access = models.BooleanField(default=False, verbose_name=_('Accès complet'))
+
+    # The subscription can be sponsored by a specific organisation
+    sponsor = models.ForeignKey(
+        Organisation, verbose_name=_('Commanditaire'), blank=True, null=True,
+        related_name='sponsored_subscriptions')
 
     class Meta:
         verbose_name = _('Abonnement aux revues')

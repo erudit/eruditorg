@@ -2,6 +2,7 @@
 
 import datetime as dt
 
+from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
 from django.test import RequestFactory
 
@@ -52,6 +53,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
                 return article
 
         request = self.factory.get('/')
+        request.user = AnonymousUser()
 
         view = MyView()
         view.request = request
@@ -70,22 +72,46 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             def get_article(self):
                 return article
 
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
         view = MyView()
+        view.request = request
 
         # Run # check
         self.assertTrue(view.has_access())
 
-    def test_can_grant_access_to_an_article_if_it_is_associatd_to_an_institutional_account(self):
+    def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self):
         # Setup
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=True)
+            open_access=False)
+        article = ArticleFactory.create(issue=issue)
+
+        JournalAccessSubscriptionFactory.create(user=self.user, journal=self.journal)
+
+        class MyView(ArticleAccessCheckMixin):
+            def get_article(self):
+                return article
+
+        request = self.factory.get('/')
+        request.user = self.user
+        view = MyView()
+        view.request = request
+
+        # Run # check
+        self.assertTrue(view.has_access())
+
+    def test_can_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account(self):
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            open_access=False)
         article = ArticleFactory.create(issue=issue)
 
         organisation = OrganisationFactory.create()
-        subscription = JournalAccessSubscriptionFactory(
-            organisation=organisation)
-        InstitutionIPAddressRangeFactory.build(
+        subscription = JournalAccessSubscriptionFactory.create(
+            journal=self.journal, organisation=organisation)
+        InstitutionIPAddressRangeFactory.create(
             subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
 
@@ -94,6 +120,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
                 return article
 
         request = self.factory.get('/')
+        request.user = AnonymousUser()
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters

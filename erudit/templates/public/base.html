@@ -61,6 +61,17 @@
 
 {% endblock %}
 
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="messages-wrapper">
+      {% include "partials/messages.html" %}
+    </div>
+  </div>
+</div>
+{% block content %}{% endblock content %}
+{% endblock body %}
+
 {% block footer %}
 
 <footer id="erudit-subscription-type" class="container margin-top">
@@ -75,7 +86,7 @@
             <img src="{{ request.institutional_account.badge.url }}" alt="" />
           {% endif %}
         {% elif request.subscription_type == 'individual' %}
-
+          <p class="text-muted">{% blocktrans trimmed with username=request.user.username %}Accès individuel ({{ username }}){% endblocktrans %}</p>
         {% elif request.subscription_type == 'open_access' %}
           <p class="text-muted">{% trans "Libre accès" %}</p>
         {% endif %}

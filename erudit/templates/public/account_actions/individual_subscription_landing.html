@@ -1,0 +1,70 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page-title %}
+{% blocktrans trimmed with journal=token.content_object.name  %}
+  Abonnement à la revue {{ journal }}
+{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>
+        {% blocktrans trimmed with journal=token.content_object.name  %}
+          Abonnement à la revue {{ journal }}
+        {% endblocktrans %}
+      </h2>
+      {% if token.is_expired %}
+        <div class="alert alert-warning">
+          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          {% trans "Ce lien d'abonnement a expiré." %}
+        </div>
+      {% elif token.is_consumed %}
+        <div class="alert alert-warning">
+          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          {% trans "Ce lien d'abonnement a déjà été utilisé." %}
+        </div>
+      {% elif subscription_exists %}
+        <div class="alert alert-warning">
+          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          {% trans "Vous êtes déjà abonné à cette revue avec ce compte." %}
+        </div>
+      {% else %}
+        <p>
+          {% blocktrans trimmed with journal=token.content_object.name  %}
+            Voulez-vous vous abonner à la revue <strong>{{ journal }}</strong> ?
+          {% endblocktrans %}
+        </p>
+        <br />
+        {% if request.user.is_authenticated %}
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <form method="post" action="{% url 'public:account-actions:consume' key=token.key %}">
+                {% csrf_token %}
+                {% trans "S'abonner" as subscribe_text %}
+                <input type="submit" value="{{ subscribe_text }}" class="btn btn-block btn-info" />
+              </form>
+            </div>
+          </div>
+        {% else %}
+          <p>{% trans "Vous devez vous identifier pour vous abonner à cette revue." %}</p>
+          <br />
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <a href="{% url 'login' %}?next={% url 'public:account-actions:landing' key=token.key %}" class="btn btn-block btn-info">{% trans "S'identifier" %}</a>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <a href="{% url 'public:account-actions:register' key=token.key %}" class="btn btn-block btn-info">{% trans "Créer un compte" %}</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

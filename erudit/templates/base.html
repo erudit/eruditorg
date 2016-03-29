@@ -43,13 +43,17 @@
     >
 
     {% block header %}
-    {% endblock %}
+    {% endblock header %}
     {% block nav %}
-    {% endblock %}
+    {% endblock nav %}
+
+    {% block body %}
     {% block content %}
-    {% endblock %}
+    {% endblock content%}
+    {% endblock body %}
+
     {% block footer %}
-    {% endblock %}
+    {% endblock footer %}
 
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     {% block scripts %}

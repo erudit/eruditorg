@@ -1,0 +1,83 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page-title %}{% trans "Inscription" %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <aside class="col-lg-6 col-sm-8 col-xs-12 col-centered">
+      <div class="panel">
+        <header class="panel-heading">
+          <h2 class="h4 panel-title text-center h1">{% trans "Inscription" %}</h2>
+        </header>
+        <div class="panel-body">
+          <form action="" id="id_signup_form" method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="row">
+              <div class="col-md-12">
+                {% for error in form.non_field_errors %}
+                <p class="alert alert-warning">{{ error }}</p>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_username">{% trans "Nom d'utilisateur" %}</label>
+                  {{ form.username }}
+                  <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_username">{% trans "Adresse e-mail" %}</label>
+                  {{ form.email }}
+                  <div class="alert alert-error-text">{{ form.email.errors.as_text }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_username">{% trans "Prénom" %}</label>
+                  {{ form.first_name }}
+                  <div class="alert alert-error-text">{{ form.first_name.errors.as_text }}</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_username">{% trans "Nom" %}</label>
+                  {{ form.last_name }}
+                  <div class="alert alert-error-text">{{ form.last_name.errors.as_text }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_username">{{ form.password1.label }}</label>
+                  {{ form.password1 }}
+                  <div class="alert alert-error-text">{{ form.password1.errors.as_text }}</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_username">{{ form.password2.label }}</label>
+                  {{ form.password2 }}
+                  <div class="alert alert-error-text">{{ form.password2.errors.as_text }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Inscription" %}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock content %}
