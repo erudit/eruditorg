@@ -32,8 +32,8 @@
 
           <aside class="col-md-6">
             <ul class="unstyled">
-              <li><a href="#"><strong>{% trans "À propos" %}</strong></a></li>
-              <li><a href="#"><strong>{% trans "Abonnements" %}</strong></a></li>
+              <li class="disabled"><strong>{% trans "À propos" %}</strong></li>
+              <li class="disabled"><strong>{% trans "Abonnements" %}</strong></li>
             </ul>
           </aside>
 
@@ -47,18 +47,18 @@
 
           <aside class="col-md-6">
             <ul class="unstyled">
-              <li><a href="#"><strong>{% trans "Publications" %}</strong></a></li>
-              <li><a href="#">{% trans "Revues" %}</a></li>
-              <li><a href="#">{% trans "Livres & actes" %}</a></li>
-              <li><a href="#">{% trans "Thèses" %}</a></li>
-              <li><a href="#">{% trans "Littérature grise" %}</a></li>
+              <li><a href="{% url 'public:journal:journal-list' %}"><strong>{% trans "Publications" %}</strong></a></li>
+              <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a></li>
+              <li class="disabled">{% trans "Livres & actes" %}</li>
+              <li class="disabled">{% trans "Thèses" %}</li>
+              <li class="disabled">{% trans "Littérature grise" %}</li>
             </ul>
           </aside>
 
           <aside class="col-md-6">
             <ul class="unstyled">
-              <li><a href="#"><strong>{% trans "Aide" %}</strong></a></li>
-              <li><a href="#"><strong>{% trans "Plan du site" %}</strong></a></li>
+              <li class="disabled"><strong>{% trans "Aide" %}</strong></li>
+              <li class="disabled"><strong>{% trans "Plan du site" %}</strong></li>
               <li><a href="#"><strong>{% trans "Nous contacter" %}</strong></a></li>
             </ul>
           </aside>

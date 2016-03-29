@@ -78,6 +78,11 @@ a.btn {
 }
 .btn-primary-outlined {
   @include button-variant($brand-primary, transparent, $brand-primary);
+  &:hover {
+    color: $btn-primary-color;
+    background-color: $btn-primary-bg;
+    border-color: $btn-primary-bg;
+  }
 }
 .btn-dark {
   @include button-variant(#fff, $gray-base, transparent);
@@ -98,16 +103,6 @@ a.btn {
 .btn-danger {
   @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
 }
-.btn-primary-outlined {
-  @include button-variant($btn-primary-bg, transparent, $btn-primary-bg);
-
-  &:hover {
-    color: $btn-primary-color;
-    background-color: $btn-primary-bg;
-    border-color: $btn-primary-bg;
-  }
-}
-
 
 // Link buttons
 // -------------------------
