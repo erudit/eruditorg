@@ -1,5 +1,6 @@
 import urllib.parse as urlparse
 from django import template
+from django.utils.html import mark_safe
 
 register = template.Library()
 
@@ -29,7 +30,31 @@ def search_result_pagination(context, ):
 
         pages_urls.append({"page": (page_number + 1), "url": page_url})
 
-    return {"pages_urls": pages_urls, "current_page": current_page, "page_count": page_count}
+    # next page
+    if current_page > 1:
+        prev_page = pages_urls[(current_page - 1) - 1]
+    else:
+        prev_page = None
+
+    # next page
+    if current_page < page_count:
+        next_page = pages_urls[(current_page - 1) + 1]
+    else:
+        next_page = None
+
+    # first and last
+    first_page = pages_urls[0]
+    last_page = pages_urls[page_count - 1]
+
+    return {
+        "pages_urls": pages_urls,
+        "current_page": current_page,
+        "prev_page": prev_page,
+        "next_page": next_page,
+        "first_page": first_page,
+        "last_page": last_page,
+        "page_count": page_count
+    }
 
 
 @register.inclusion_tag("public/search/_search_filters.html", takes_context=True)
@@ -38,6 +63,14 @@ def search_filters(context, ):
     selected_filters = context["selected_filters"]
 
     return {"filter_choices": filter_choices, "selected_filters": selected_filters}
+
+
+@register.assignment_tag
+def is_search_filter_has_values(selected_filters, filter_name):
+    if len(selected_filters.get(filter_name, [])) > 0:
+        return True
+    else:
+        return False
 
 
 @register.simple_tag
@@ -51,3 +84,8 @@ def is_search_filter_value_selected(selected_filters, filter_name, filter_value)
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key, None)
+
+
+@register.filter
+def highlight(text, word):
+    return mark_safe(text.replace(word, "<mark class='highlight'>%s</mark>" % word))

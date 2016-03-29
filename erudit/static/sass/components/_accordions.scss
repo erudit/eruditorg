@@ -1,0 +1,28 @@
+/**
+* Accordions system
+* (based on Akkordion vanilla JS plugin)
+*/
+
+
+.akkordion {
+
+  .icon {
+    float: right;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+  }
+
+  .akkordion-content {
+    padding-bottom: $margin-vertical-default/2;
+  }
+
+  [data-akkordion-active] {
+    .icon {
+      position: relative;
+      top: -3px;
+      @include rotate(180deg);
+    }
+  }
+
+}

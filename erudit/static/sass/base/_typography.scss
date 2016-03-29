@@ -101,7 +101,8 @@ small,
 }
 
 mark,
-.mark {
+.mark,
+.highlight, {
   background-color: $state-warning-bg;
   padding: .2em;
 }

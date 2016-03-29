@@ -56,7 +56,7 @@ class Search(FormView):
 
         if basic_search_term:
             self.search_elements.append({
-                "search_operator": basic_search_operator,
+                "search_operator": "NOT" if basic_search_operator else basic_search_operator,
                 "search_term": basic_search_term,
                 "search_field": basic_search_field,
             })
@@ -64,13 +64,13 @@ class Search(FormView):
         # Advanced search
         for i in range(10):
             advanced_search_operator = data.get(
-                "advanced_search_operator{counter}".format(counter=i+1), None
+                "advanced_search_operator{counter}".format(counter=i + 1), None
             )
             advanced_search_term = data.get(
-                "advanced_search_term{counter}".format(counter=i+1), None
+                "advanced_search_term{counter}".format(counter=i + 1), None
             )
             advanced_search_field = data.get(
-                "advanced_search_field{counter}".format(counter=i+1), None
+                "advanced_search_field{counter}".format(counter=i + 1), None
             )
 
             if advanced_search_term:
@@ -118,7 +118,7 @@ class Search(FormView):
                     results_per_query=self.results_per_query,
                     limit_filter_fields=self.limit_filter_fields,
                     selected_filters=self.selected_filters,
-                    )
+                )
             except:
                 return None
 
@@ -194,7 +194,9 @@ class Search(FormView):
         context[self.context_object_name] = self.object_list
         context["results_count"] = self.results_count
         context["page_count"] = self.page_count
+        context["start_at"] = self.start_at
         context["current_page"] = self.page
+        context["search_elements"] = self.search_elements
         context["filter_choices"] = self.filter_choices
         context["selected_filters"] = self.selected_filters
         context["query_url"] = self.query_url

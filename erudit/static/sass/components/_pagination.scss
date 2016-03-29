@@ -1,4 +1,53 @@
 //
+// Search page pagination
+// --------------------------------------------------
+
+.search-pagination {
+  text-align: center;
+  padding: $margin-vertical-default 0;
+
+  a {
+    font-size: 18px;
+    line-height: 18px;
+    margin: 0 7px;
+    display: inline-block;
+    color: $brand-primary;
+    position: relative;
+    top: 2px;
+  }
+
+  .page-position {
+    display: inline-block;
+    font-size: 14px;
+    font-family: $font-family-monospace;
+  }
+
+  .left-bar {
+    &:after {
+      content: "";
+      height: 13px;
+      width: 1px;
+      border-left: 1px solid $brand-primary;
+      position: absolute;
+      top: 3px;
+      left: -1px;
+    }
+  }
+
+  .right-bar {
+    &:after {
+      content: "";
+      height: 13px;
+      width: 1px;
+      border-left: 1px solid $brand-primary;
+      position: absolute;
+      top: 3px;
+      right: -1px;
+    }
+  }
+}
+
+//
 // Pagination (multiple pages)
 // --------------------------------------------------
 .pagination {

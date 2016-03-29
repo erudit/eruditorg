@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the content of the site/application.
 // -----------------------------------------------------------------------------
-main, .main {
+#main-container {
   z-index: 5;
   padding-left: $sidenav-width;
   padding-bottom: 150px;

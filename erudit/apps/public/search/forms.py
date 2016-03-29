@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.core import urlresolvers
 
-from crispy_forms.layout import Layout, Field, Fieldset, Div
+from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML
 from crispy_forms.helper import FormHelper
 
 SORT_CHOICES = (
@@ -71,7 +71,7 @@ PUB_TYPES_CHOICES = (
 )
 
 
-def get_years_range(year_start=1900, year_end=(date.today().year+1), reverse=False,
+def get_years_range(year_start=1900, year_end=(date.today().year + 1), reverse=False,
                     add_empty_choice=False, empty_string=""):
     if not reverse:
         years_range = [(str(year), str(year)) for year in range(year_start, year_end)]
@@ -99,77 +99,109 @@ class SearchFormHelper(FormHelper):
 
         self.layout = Layout(
             Div(
+                HTML(
+                    "<header class='search-filters-header'> \
+                        <h3 class='h4'>%s</h3> \
+                    </header>"
+                    % _("Filtres")
+                ),
                 Fieldset(
                     "",
                     Div(
-                        Field('basic_search_operator', tabIndex=1),
-                        Field('basic_search_term', tabIndex=2),
+                        Div(
+                            Field('basic_search_term', tabIndex=1),
+                            HTML(
+                                '<button type="submit"><i class="ion ion-ios-search"></i></button>'
+                            ),
+                            css_class="basic-search-field",
+                        ),
+                        Field('basic_search_operator', tabIndex=2),
                         Field('basic_search_field', tabIndex=3),
                     ),
                 ),
                 Fieldset(
-                    _("Recherche avancée"),
-                    Div(
-                        Field('advanced_search_operator1'),
-                        Field('advanced_search_term1'),
-                        Field('advanced_search_field1'),
+                    "",
+                    HTML(
+                        '<label class="control-label akkordion-title"> \
+                            %s <i class="ion-ios-arrow-down icon"></i> \
+                        </label>'
+                        % _("Options de recherche avancées")
                     ),
                     Div(
-                        Field('advanced_search_operator2'),
-                        Field('advanced_search_term2'),
-                        Field('advanced_search_field2'),
+                        Div(
+                            Field('advanced_search_operator1'),
+                            Field('advanced_search_term1'),
+                            Field('advanced_search_field1'),
+                            css_class="search-operator show",
+                        ),
+                        Div(
+                            Field('advanced_search_operator2'),
+                            Field('advanced_search_term2'),
+                            Field('advanced_search_field2'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator3'),
+                            Field('advanced_search_term3'),
+                            Field('advanced_search_field3'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator4'),
+                            Field('advanced_search_term4'),
+                            Field('advanced_search_field4'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator5'),
+                            Field('advanced_search_term5'),
+                            Field('advanced_search_field5'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator6'),
+                            Field('advanced_search_term6'),
+                            Field('advanced_search_field6'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator7'),
+                            Field('advanced_search_term7'),
+                            Field('advanced_search_field7'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator8'),
+                            Field('advanced_search_term8'),
+                            Field('advanced_search_field8'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator9'),
+                            Field('advanced_search_term9'),
+                            Field('advanced_search_field9'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('advanced_search_operator10'),
+                            Field('advanced_search_term10'),
+                            Field('advanced_search_field10'),
+                            css_class="search-operator -hide",
+                        ),
+                        Div(
+                            Field('pub_year_start'),
+                            Field('pub_year_end'),
+                            Field('available_since'),
+                        ),
+                        Div(
+                            Field('funds_limit'),
+                        ),
+                        Div(
+                            Field('pub_types'),
+                        ),
+                        css_class="advanced-search-fields akkordion-content",
                     ),
-                    Div(
-                        Field('advanced_search_operator3'),
-                        Field('advanced_search_term3'),
-                        Field('advanced_search_field3'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator4'),
-                        Field('advanced_search_term4'),
-                        Field('advanced_search_field4'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator5'),
-                        Field('advanced_search_term5'),
-                        Field('advanced_search_field5'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator6'),
-                        Field('advanced_search_term6'),
-                        Field('advanced_search_field6'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator7'),
-                        Field('advanced_search_term7'),
-                        Field('advanced_search_field7'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator8'),
-                        Field('advanced_search_term8'),
-                        Field('advanced_search_field8'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator9'),
-                        Field('advanced_search_term9'),
-                        Field('advanced_search_field9'),
-                    ),
-                    Div(
-                        Field('advanced_search_operator10'),
-                        Field('advanced_search_term10'),
-                        Field('advanced_search_field10'),
-                    ),
-                    Div(
-                        Field('pub_year_start'),
-                        Field('pub_year_end'),
-                        Field('available_since'),
-                    ),
-                    Div(
-                        Field('funds_limit'),
-                    ),
-                    Div(
-                        Field('pub_types'),
-                    ),
+                    css_class="advanced-search akkordion hide",
                 ),
                 Fieldset(
                     "",
@@ -177,6 +209,7 @@ class SearchFormHelper(FormHelper):
                         Field('sort'),
                         Field('sort_order'),
                     ),
+                    css_class="hide",
                 ),
             ),
         )
@@ -187,14 +220,20 @@ class SearchForm(forms.Form):
         label=_("Page"), widget=forms.HiddenInput, required=False, initial=1
     )
 
-    basic_search_operator = forms.ChoiceField(
-        label="", widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
+    basic_search_operator = forms.BooleanField(
+        label=_("Exclure des résultats?"), required=False
     )
+    # basic_search_operator = forms.ChoiceField(
+    #     label=_("Inclure?"), widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
+    # )
     basic_search_term = forms.CharField(
         label=_("Recherche"), widget=forms.TextInput, required=False,
     )
     basic_search_field = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+        label=_("Inclure les champs"),
+        widget=forms.Select,
+        choices=ADVANCED_SEARCH_FIELDS,
+        required=False
     )
 
     advanced_search_operator1 = forms.ChoiceField(
@@ -257,10 +296,10 @@ class SearchForm(forms.Form):
         choices=PUB_TYPES_CHOICES, required=False
     )
     sort = forms.ChoiceField(
-        label=_("Tri"), widget=forms.Select, choices=SORT_CHOICES, required=False
+        label=False, widget=forms.Select, choices=SORT_CHOICES, required=False
     )
     sort_order = forms.ChoiceField(
-        label=_("Ordre"), widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
+        label=False, widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
     )
 
     def __init__(self, *args, **kwargs):

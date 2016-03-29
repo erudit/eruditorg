@@ -1,3 +1,5 @@
+import '!!script!akkordion/dist/akkordion.min.js';
+
 class Commons {
 
   constructor() {

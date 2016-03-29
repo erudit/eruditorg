@@ -7,6 +7,7 @@
 
   a {
     @include transition(all 250ms);
+    cursor: pointer;
   }
 
   > a.select {
@@ -20,7 +21,8 @@
   > ul {
     display: none;
     position: absolute;
-    width: 100%;
+    min-width: 100%;
+    width: auto;
     left: 0;
     z-index: $zindex-dropdown;
     list-style: none;
@@ -30,12 +32,13 @@
     li {
       margin: 0;
       padding: 0 12px 0 0;
-      display: block;
+      display: block !important;
     }
 
     a {
       padding: 10px 0;
       display: block;
+      width: 100%;
       &:hover {
         text-decoration: underline;
       }
@@ -48,6 +51,7 @@
       color: #fff;
       text-decoration: none;
       .caret {
+        display: inline-block;
         @include rotate(180deg);
         margin-top: -5px;
       }
@@ -69,6 +73,7 @@
 
   a {
     @include transition(all 250ms);
+    cursor: pointer;
   }
 
   > a.select {
@@ -94,6 +99,10 @@
 
     li {
       margin: 0 !important;
+      display: block !important;
+      &.selected {
+        @include fw-sans-bold();
+      }
     }
 
     a {
@@ -111,9 +120,10 @@
 
   &:hover {
     > a {
-      background-color: $gray-base;
-      color: #fff;
+      background-color: $gray-base !important;
+      color: #fff !important;
       text-decoration: none;
+      border-color: $gray-base !important;
       i {
         @include rotate(180deg);
         margin-top: -5px;
@@ -122,6 +132,24 @@
     > ul {
       display: block;
       width: 100%;
+    }
+  }
+
+  /**
+  * variations
+  */
+  &.dropdown-sml {
+    > a.select {
+      display: block;
+      padding: ($grid-gutter-width / 4) ($grid-gutter-width/2);
+      border: 2px solid $gray-mid;
+      // border-radius: 2px;
+      @include fw-sans-normal();
+      i.caret {
+        float: right;
+        position: relative;
+        top: 2px;
+      }
     }
   }
 
