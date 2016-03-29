@@ -9,8 +9,8 @@ from feedparser import parse as rss_parse
 
 from base.viewmixins import FedoraServiceRequiredMixin
 from erudit.models import Issue
-from erudit.models import Journal
-from erudit.models import Discipline
+# from erudit.models import Journal
+# from erudit.models import Discipline
 
 logger = logging.getLogger(__name__)
 
