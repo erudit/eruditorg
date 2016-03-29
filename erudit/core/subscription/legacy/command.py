@@ -60,7 +60,10 @@ class Command(BaseCommand):
         basename = os.path.basename(filename)
         if '.' in basename:
             basename = basename.split('.')[0]
-        organization = Organisation.objects.get(name__iexact=basename)  # noqa
+        try:
+            organization = Organisation.objects.get(name__iexact=basename)  # noqa
+        except Organisation.DoesNotExist:
+            organization = Organisation.objects.create(name=basename)
 
         with open(filename, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
@@ -78,11 +81,10 @@ class Command(BaseCommand):
 
                 # Define the journal in the policy
 
-                if isinstance(journal_id, int) and \
-                        Journal.objects.filter(id=journal_id).count() == 1:
+                if Journal.objects.filter(id=journal_id).count() == 1:
                     journal = Journal.objects.get(id=journal_id)
                     JournalAccessSubscription.objects.create(
-                        journal=journal, user=profile.user)
+                        journal=journal, user=profile.user, sponsor=organization)
 
     def link_abonnes_from_acces(self):
         abonne_profiles = AbonnementProfile.objects.all()
