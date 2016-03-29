@@ -281,8 +281,8 @@
 				<section id="corps" class="article-section corps" role="section">
 					<xsl:apply-templates select="//corps"/>
 				</section>
-				{% else %}
-				<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article-raw-pdf' article.issue.journal.localidentifier article.issue.localidentifier article.localidentifier %}" width="500" height="700" />
+				{% elif article.localidentifier %}
+				<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article-raw-pdf' article.localidentifier %}" width="500" height="700" />
 				{% endif %}
 
 				<!-- ********* parties annexes ******** -->
