@@ -1,16 +1,19 @@
+# -*- coding: utf-8 -*-
+
 import csv
 import os
 
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from django.db import connections
-from django.contrib.contenttypes.models import ContentType
 
-from erudit.models import Journal, Organisation
-from erudit.factories import OrganisationFactory
+from core.accounts.models import AbonnementProfile
+from erudit.models import Journal
+from erudit.models import Organisation
+
+from ..models import JournalAccessSubscription
 
 from .legacy_models import Abonneindividus
-from ..models import IndividualAccount, Policy
-from ..factories import PolicyFactory
 
 
 class Command(BaseCommand):
@@ -39,24 +42,17 @@ class Command(BaseCommand):
         self.stdout.write(str(Abonneindividus.objects.count()))
 
     def import_abonnes(self):
-        if IndividualAccount.objects.count() > 0:
+        if AbonnementProfile.objects.count() > 0:
             self.stdout.write("Some accounts are already present on destination \
                 table. Importation canceled.")
             return
 
-        dummy_organization_policy = PolicyFactory(content_object=OrganisationFactory())
-        self.stdout.write("Dummy policy organization and its policy was created \
-            to allow creation in the new system. Don't forget to remove one.")
-
         for old_abonne in Abonneindividus.objects.all():
-            new_account = IndividualAccount(
-                policy=dummy_organization_policy,
-                id=old_abonne.abonneindividusid,
-                email=old_abonne.courriel,
-                firstname=old_abonne.prenom,
-                lastname=old_abonne.nom,
-                password=old_abonne.password)
-            new_account.save()
+            user = User.objects.create(
+                username='abonne-{}'.format(old_abonne.abonneindividusid),
+                email=old_abonne.courriel, first_name=old_abonne.prenom, last_name=old_abonne.nom)
+            AbonnementProfile.objects.create(
+                id=old_abonne.abonneindividusid, user=user, password=old_abonne.password)
 
     def link_abonnes_from_csv(self):
         # Create policy from filename if it does not exist
@@ -64,10 +60,7 @@ class Command(BaseCommand):
         basename = os.path.basename(filename)
         if '.' in basename:
             basename = basename.split('.')[0]
-        organization = Organisation.objects.get(name__iexact=basename)
-        policy = Policy(content_object=organization)
-        policy.save()
-        print(policy)
+        organization = Organisation.objects.get(name__iexact=basename)  # noqa
 
         with open(filename, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
@@ -77,88 +70,68 @@ class Command(BaseCommand):
 
                 # Assign the policy to the account
                 try:
-                    account = IndividualAccount.objects.\
-                        get(email__iexact=email)
-                    account.policy = policy
-                    account.save()
+                    profile = AbonnementProfile.objects.\
+                        get(user__email__iexact=email)
                 except Exception:
                     print('{} {}'.format('account', email))
+                    continue
 
                 # Define the journal in the policy
 
                 if isinstance(journal_id, int) and \
                         Journal.objects.filter(id=journal_id).count() == 1:
                     journal = Journal.objects.get(id=journal_id)
-                    policy.access_journal.add(journal)
-                    policy.save()
+                    JournalAccessSubscription.objects.create(
+                        journal=journal, user=profile.user)
 
     def link_abonnes_from_acces(self):
-        dummy_policy_id = self.args[1]
-        accounts = IndividualAccount.objects.filter(policy_id=dummy_policy_id)
+        abonne_profiles = AbonnementProfile.objects.all()
         cursor = connections['legacy_subscription'].cursor()
 
         journals_account_volumetry = {"": []}
 
-        for account in accounts:
-            sql = "SELECT revueID FROM Revueindividus \
-WHERE abonneIndividusID = {}".format(account.id)
+        for profile in abonne_profiles:
+            sql = "SELECT revueID FROM revueindividus \
+WHERE abonneIndividusID = {}".format(profile.id)
             cursor.execute(sql)
-            publishers = []
             journals = []
             rows = cursor.fetchall()
 
             if len(rows) == 0:
-                journals_account_volumetry[""].append(account)
+                journals_account_volumetry[""].append(profile)
 
             for row in rows:
                 try:
                     journal = Journal.objects.get(id=row[0])
                     journals.append(journal)
-                    publishers.append(journal.publisher)
                 except Journal.DoesNotExist:
-                    publishers.append("XXX No revue {}".format(row[0]))
+                    pass
 
                 jids = sorted([j.id for j in journals])
                 key = "|".join([str(j) for j in jids])
                 if key not in journals_account_volumetry:
                     journals_account_volumetry[key] = []
-                journals_account_volumetry[key].append(account)
+                journals_account_volumetry[key].append(profile)
 
-        for k, accounts in journals_account_volumetry.items():
+        for k, profiles in journals_account_volumetry.items():
             # Not any access
             if k is '':
-                for account in accounts:
-                    account.active = False
-                    account.save()
+                for p in profiles:
+                    p.user.is_active = False
+                    p.user.save()
 
-            # Journal policy
-            if k is not '' and len(k.split('|')) == 1 and len(accounts) > 1:
+            # Journal subscription
+            if k is not '' and len(k.split('|')) == 1 and len(profiles) > 1:
                 journal = Journal.objects.get(id=k)
-                policy = Policy(content_object=journal)
-                policy.save()
-                policy.access_journal.add(journal)
-                policy.save()
-                for account in accounts:
-                    account.policy = policy
-                    account.save()
+                for p in profiles:
+                    JournalAccessSubscription.objects.create(
+                        journal=journal, user=p.user)
 
             # Individual policy
-            if k is not '' and len(accounts) == 1:
-                account = accounts[0]
+            if k is not '' and len(profiles) == 1:
+                profile = profiles[0]
                 ids = k.split('|')
                 journals = Journal.objects.filter(id__in=ids)
-                ct = ContentType.objects.get(
-                    app_label=account._meta.app_label,
-                    model=account.__class__.__name__.lower()
-                )
-                if Policy.objects.filter(content_type=ct, object_id=account.id).count():
-                    policy = Policy.objects.get(content_type=ct, object_id=account.id)
-                else:
-                    policy = Policy(content_object=account)
-                    policy.save()
                 for journal in journals:
-                    policy.access_journal.add(journal)
-                policy.save()
-
-                account.policy = policy
-                account.save()
+                    JournalAccessSubscription.objects.create(
+                        journal=journal, user=profile.user)

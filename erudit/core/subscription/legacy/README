@@ -11,7 +11,7 @@ DATABASES = {
         'USER': 'zenon',
         'HOST': '127.0.0.1',
     },
-    'legacy_individual_subscription': {
+    'legacy_subscription': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zenon',
         'USER': 'zenon',
@@ -20,7 +20,7 @@ DATABASES = {
     }
 }
 
-DATABASE_ROUTERS = ['individual_subscription.router.LegacyRouter']  # NOQA
+DATABASE_ROUTERS = ['core.subscription.legacy.router.LegacyRouter', ]
 
 
 Use
@@ -38,8 +38,8 @@ Link abonnes
 
 pip install csvkit
 
-in2csv Wikipedia1.xls >> wikipedia.csv 
-in2csv Wikipedia2.xls >> wikipedia.csv 
+in2csv Wikipedia1.xls >> wikipedia.csv
+in2csv Wikipedia2.xls >> wikipedia.csv
 
 python manage.py individual_subscription link_abonnes_from_csv wikipedia.csv
 
