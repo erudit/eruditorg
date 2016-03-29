@@ -6,9 +6,9 @@ import base64
 
 from django.conf import settings
 from django.db import models
-from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
-from post_office import mail
+
+from core.email import Email
 
 
 class AbonnementProfile(models.Model):
@@ -49,30 +49,20 @@ class AbonnementProfile(models.Model):
         self.mail_password(plain_password)
 
     def mail_password(self, plain_password):
-        template = get_template('userspace/journal/subscription/mail/new_password.html')
-        context = {'object': self, 'plain_password': plain_password, }
-        html_message = template.render(context)
-        recipient = self.user.email
-        mail.send(
-            recipient,
-            settings.RENEWAL_FROM_EMAIL,
-            message=html_message,
-            html_message=html_message,
-            subject=_("erudit.org : mot de passe")
-        )
+        email = Email(
+            [self.user.email, ],
+            html_template='userspace/journal/subscription/mail/new_password.html',
+            subject=_('erudit.org : mot de passe'),
+            extra_context={'object': self, 'plain_password': plain_password, })
+        email.send()
 
     def mail_account(self):
-        template = get_template('userspace/journal/subscription/mail/new_account.html')
-        context = {'object': self}
-        html_message = template.render(context)
-        recipient = self.user.email
-        mail.send(
-            recipient,
-            settings.RENEWAL_FROM_EMAIL,
-            message=html_message,
-            html_message=html_message,
-            subject=_("erudit.org : création de votre compte")
-        )
+        email = Email(
+            [self.user.email, ],
+            html_template='userspace/journal/subscription/mail/new_account.html',
+            subject=_('erudit.org : création de votre compte'),
+            extra_context={'object': self})
+        email.send()
 
     def sha1(self, msg, salt=None):
         "Crypt function from legacy system"
