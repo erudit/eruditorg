@@ -19,6 +19,11 @@ class AccountActionPool(object):
         self.discovered = False
 
     def discover(self):
+        """
+        Discovers all the 'account_actions' Python modules that can be defined inside each Django
+        application listed in INSTALLED_APPS. Discovering these modules is necessary to force the
+        registration of AccountActionBase subclasses.
+        """
         if self.discovered:
             return
         self.discovered = True
