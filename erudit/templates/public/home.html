@@ -51,22 +51,6 @@
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 <div id="homepage-content">
-
-  <!-- STICKY NAVIGATION -->
-  <!--
-  <nav class="container-fluid text-center homepage--sticky-nav">
-    <ul class="unstyled">
-      {% if latest_issues %}
-      <li><a href="#latest-issues">{% trans "Derniers numéros" %}</a></li>
-      {% endif %}
-      <li><a href="#disciplines">{% trans "Disciplines" %}</a></li>
-      <li><a href="#news">{% trans "Nouvelles" %}</a></li>
-      <li><a href="#about-erudit">{% trans "À propos" %}</a></li>
-      <li><a href="#publications">{% trans "Publications" %}</a></li>
-    </ul>
-  </nav>
-  -->
-
   
   <div class="glory">
     <div class="container">
@@ -93,17 +77,17 @@
         <!-- CATEGORIES -->
         <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-1 glory--journals">
           <ol class="h3 list-unstyled">
-            <li><span class="color-red">01.</span><a href="#">Lorem ispum</a></li>
-            <li><span class="color-red">02.</span><a href="#">asdfa alksd</a></li>
-            <li><span class="color-red">03.</span><a href="#">ask las laks</a></li>
-            <li><span class="color-red">04.</span><a href="#">asldkf lasdl</a></li>
+            <li><span class="color-red">01.</span><a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a></li>
+            <li class="disabled"><span class="color-red">02.</span>{% trans "Thèses" %}</li>
+            <li class="disabled"><span class="color-red">03.</span>{% trans "Livres et actes" %}</li>
+            <li class="disabled"><span class="color-red">04.</span>{% trans "Littérature grise" %}</li>
           </ol>
         </div>
         <!-- DISCIPLINES -->
         <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-1 glory--disciplines">
-          <h3 class="h3">35 disciplines</h3>
-          <p>sémiologie, cinéma, études urbaines, psychologie, études littéraires…</p>
-          <p><a href="#" class="color-red text-lowercase">{% trans "Voir toutes les disciplines" %}</a></p>
+          <h3 class="h3">{{ disciplines|length }} {% trans "disciplines" %}</h3>
+          <p>{{ disciplines|slice:":5"|join:", "|lower }}&hellip;</p>
+          <p><a href="{% url 'public:journal:journal-list' %}" class="color-red text-lowercase">{% trans "Voir toutes les disciplines" %}</a></p>
         </div>
       </div>
     </div>
@@ -125,11 +109,11 @@
         <a href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
           <div class="row">
             <div class="col-xs-8">
-              <p class="h5 color-red">Catégorie</p>
+              <p class="h5 color-red">{{ issue.journal.disciplines.all|join:", " }}</p>
               <h3 class="h4 latest-issues--article--issue">{{ issue.journal.name }}</h3>
             </div>
             <div class="col-xs-4">
-              <img src="http://placehold.it/130x160" alt="Titre du numéro - Nom de la revue" class="img-responsive">
+              <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive">
             </div>
             <div class="col-xs-12">
               <p class="latest-issues--article--title">{{ issue.title }}</p>
@@ -161,17 +145,17 @@
     <div class="row">
       {% for entry in latest_news %}
       <article class="col-sm-4 news--article">
-        <p class="h5 color-red">Catégorie</p>
+        <p class="h5 color-red">{{ entry.category }}</p>
         <h3 class="news--article--title"><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
-        <p class="summary">{{ entry.summary|safe }}</p>
-        <time class="color-dark-grey" datetime="2001-05-15">22 Février 2016</time>
+        <p class="summary">{{ entry.summary|safe|truncatewords_html:25 }}</p>
+        <time class="color-dark-grey" datetime="2001-05-15">{{ entry.published }}</time>
       </article>
       {% endfor %}
     </div>
 
     <div class="row">
       <div class="col-xs-12 text-center">
-        <a href="#" class="btn btn-primary-outlined news--btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
+        <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn btn-primary-outlined news--btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
       </div>
     </div>
   </div>

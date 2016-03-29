@@ -127,7 +127,7 @@
         font-size: 1.5em;
         width: 50px;
         height: 50px;
-        line-height: 50px;
+        line-height: 54px;
         padding: 0;
         margin: 0;
         border: none;
@@ -145,6 +145,10 @@
 
         &:last-child {
           margin-bottom: 0;
+        }
+
+        &.disabled {
+          color: $mid-grey;
         }
       }
       span {
@@ -178,7 +182,8 @@
   .latest-issues {
 
     .latest-issues--article {
-      margin-bottom: 60px;
+      margin-top: 20px;
+      margin-bottom: 40px;
       padding-top: 36px;
       @include grid-cell-border('top', 1px, #cccccc);
 
@@ -207,9 +212,9 @@
   
   .news {
     .news--article {
-      margin-top: 30px;
+      margin-top: 20px;
+      margin-bottom: 60px;
       padding-top: 18px;
-      padding-bottom: 50px;
       @include grid-cell-border('top', 1px, #cccccc);
 
       &:nth-child(3n+1) {
