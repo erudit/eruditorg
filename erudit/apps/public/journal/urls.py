@@ -18,6 +18,8 @@ urlpatterns = [
         views.JournalRawLogoView.as_view(), name='journal-logo'),
     url(_(r'^revue/(?P<code>[\w-]+)/auteurs/$'),
         views.JournalAuthorsListView.as_view(), name='journal-authors-list'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/rss\.xml$'),
+        views.LatestJournalIssueArticlesRSSView(), name='journal-issues-rss'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<pk>\d+)/$'),
         views.IssueDetailView.as_view(), name='issue-detail'),
