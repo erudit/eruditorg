@@ -66,6 +66,7 @@
               <th>{% trans "Prénom" %}</th>
               <th>{% trans "Nom" %}</th>
               <th>{% trans "Date d'expiration" %}</th>
+              <th>{% trans "Actions" %}</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +77,9 @@
               <td>{{ psubscription.first_name }}</td>
               <td>{{ psubscription.last_name }}</td>
               <td>{{ psubscription.expiration_date }}</td>
+              <td>
+                <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" title="{% trans 'Supprimer' %}">X</a>
+              </td>
             </tr>
             {% endfor %}
           </tbody>

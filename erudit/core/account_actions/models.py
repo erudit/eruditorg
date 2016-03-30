@@ -26,6 +26,9 @@ class AccountActionToken(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
 
+    # An account action token can be set to inactive.
+    active = models.BooleanField(verbose_name=_('Actif'), default=True)
+
     # The 'user' foreign key should be filled only when the action token is consumed.
     consumption_date = models.DateTimeField(
         verbose_name=_('Date de consommation'), blank=True, null=True)
@@ -60,6 +63,17 @@ class AccountActionToken(models.Model):
     def __str__(self):
         return '{0} - {1}'.format(self.created, self.action)
 
+    def cancel(self):
+        """ Cancels the token. """
+        self.active = False
+        self.save()
+
+    def consume(self, user):
+        """ Consumes the token for the given user. """
+        self.user = user
+        self.consumption_date = timezone.now()
+        self.save()
+
     def save(self, *args, **kwargs):
         creation = self.pk is None
         if creation and not self.key:
@@ -72,10 +86,10 @@ class AccountActionToken(models.Model):
         if old_instance and not old_instance.is_consumed and self.is_consumed:
             signals.action_token_consumed.send(sender=self, instance=self, consumer=self.user)
 
-    def consume(self, user):
-        self.user = user
-        self.consumption_date = timezone.now()
-        self.save()
+    @property
+    def can_be_consumed(self):
+        """ Returns a boolean indicating if the action can be consumed. """
+        return self.active and not self.is_expired and not self.is_consumed
 
     @property
     def expiration_date(self):
@@ -84,16 +98,11 @@ class AccountActionToken(models.Model):
             days=account_actions_settings.ACTION_TOKEN_VALIDITY_DURATION)
 
     @property
-    def is_expired(self):
-        """ Returns a boolean indicating if the action token has expired. """
-        return timezone.now() > self.expiration_date
-
-    @property
     def is_consumed(self):
         """ Returns a boolean indicating if the action token has been consumed. """
         return self.consumption_date is not None and self.user is not None
 
     @property
-    def can_be_consumed(self):
-        """ Returns a boolean indicating if the action can be consumed. """
-        return not self.is_expired and not self.is_consumed
+    def is_expired(self):
+        """ Returns a boolean indicating if the action token has expired. """
+        return timezone.now() > self.expiration_date

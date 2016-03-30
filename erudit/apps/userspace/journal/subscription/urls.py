@@ -12,6 +12,7 @@ urlpatterns = [
     url(_(r'^acces/ajout/'),
         views.IndividualJournalAccessSubscriptionCreateView.as_view(), name='create'),
     url(_(r'^acces/supprimer/(?P<pk>[0-9]+)/$'),
-        views.IndividualJournalAccessSubscriptionDeleteView.as_view(),
-        name='delete'),
+        views.IndividualJournalAccessSubscriptionDeleteView.as_view(), name='delete'),
+    url(_(r'^acces/annuler/(?P<pk>[0-9]+)/$'),
+        views.IndividualJournalAccessSubscriptionCancelView.as_view(), name='cancel'),
 ]

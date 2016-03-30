@@ -3,12 +3,15 @@
 import logging
 
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
+from django.views.generic.detail import BaseDetailView
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
@@ -103,5 +106,29 @@ class IndividualJournalAccessSubscriptionDeleteView(
 
     def get_success_url(self):
         messages.success(self.request, _("L'abonnement a été supprimé avec succès"))
+        return reverse(
+            'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
+
+
+class IndividualJournalAccessSubscriptionCancelView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
+        SingleObjectTemplateResponseMixin, BaseDetailView):
+    menu_journal = 'subscription'
+    model = AccountActionToken
+    permission_required = 'subscription.manage_individual_subscription'
+    template_name = 'userspace/journal/subscription/individualsubscription_cancel.html'
+
+    def get_queryset(self):
+        return AccountActionToken.pending_objects.filter(
+            content_type=ContentType.objects.get_for_model(self.current_journal))
+
+    def post(self, request, *args, **kwargs):
+        self.request = request
+        self.object = self.get_object()
+        self.object.cancel()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        messages.success(self.request, _("La proposition d'abonnement a été annulée avec succès"))
         return reverse(
             'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
