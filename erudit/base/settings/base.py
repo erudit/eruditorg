@@ -263,7 +263,12 @@ EMAIL_BACKEND = 'post_office.EmailBackend'
 EMAIL_HOST = "mail"
 EMAIL_PORT = '25'
 RENEWAL_FROM_EMAIL = 'admin@localhost'
+
 DEFAULT_FROM_EMAIL = 'ne-pas-repondre@erudit.org'
+TECH_EMAIL = 'tech@erudit.org'
+PUBLISHER_EMAIL = 'edition@erudit.org'
+COMMUNICATION_EMAIL = 'media@erudit.org'
+SUBSCRIPTION_EMAIL = 'client@erudit.org'
 
 WSGI_APPLICATION = 'erudit.wsgi.application'
 
