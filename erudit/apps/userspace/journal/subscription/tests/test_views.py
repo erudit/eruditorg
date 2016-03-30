@@ -38,6 +38,9 @@ class TestIndividualJournalAccessSubscriptionListView(BaseEruditTestCase):
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
 
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
+
         other_journal = JournalFactory.create()
         subscription_1 = JournalAccessSubscriptionFactory.create(
             user=self.user, journal=self.journal)
@@ -74,6 +77,9 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
 
         post_data = {
             'email': faker.email(),
@@ -127,6 +133,9 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
 
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
+
         post_data = {
             'email': faker.email(),
             'first_name': faker.first_name(),
@@ -168,6 +177,9 @@ class TestIndividualJournalAccessSubscriptionDeleteView(BaseEruditTestCase):
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
 
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
+
         subscription = JournalAccessSubscriptionFactory.create(
             user=self.user, journal=self.journal)
 
@@ -203,6 +215,9 @@ class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
 
         token = AccountActionTokenFactory.create(content_object=self.journal)
 
