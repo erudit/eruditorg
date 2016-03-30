@@ -17,9 +17,30 @@ header#site-header {
   h1#brand {
     font-size: inherit;
     margin: 0;
-    img {
+    img,
+    svg {
       height: $erudit-logo-height;
+      @include transition(all 250ms);
     }
+  }
+
+  a {
+    @include transition(all 250ms);
+  }
+
+  &.inverted {
+    background-color: $brand-primary;
+
+    a {
+      color: #fff !important;
+    }
+
+    svg {
+      path, circle {
+        fill: #fff;
+      }
+    }
+
   }
 
 }

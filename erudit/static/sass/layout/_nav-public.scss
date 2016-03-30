@@ -12,7 +12,12 @@ nav#main-nav {
     @include vertical-centered();
     > li {
       display: inline-block;
-      margin-left: 55px;
+      margin-left: 25px;
+
+      @media (min-width: $screen-lg) {
+        margin-left: 55px;
+      }
+
       &:first-child {
         margin-left: 0;
       }
@@ -58,6 +63,44 @@ nav#main-nav {
       position: relative;
       bottom: -5px;
     }
+  }
+
+  // search form
+  .search-form {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    @include translate(0,-50%);
+    background: $brand-primary;
+    pointer-events: none;
+    @include opacity(0);
+
+    form {
+      margin: 0;
+
+      .form-group:last-child {
+        margin-bottom: 0;
+      }
+
+      input[type="search"] {
+        margin: 0;
+        width: auto;
+        border-width: 2px;
+        border-color: #fff;
+        color: #fff;
+        padding: $padding-small-vertical $padding-small-horizontal;
+        background-color: transparent;
+        width: 80%;
+      }
+      button.btn.btn-primary-outlined {
+        border-color: #fff;
+        color: #fff;
+        line-height: inherit;
+        padding: $padding-small-vertical $padding-small-horizontal;
+        margin-left: -2px;
+      }
+    }
+
   }
 
 }

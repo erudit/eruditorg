@@ -42,7 +42,8 @@ class JournalListView(ListView):
 
     def init_get_parameters(self, request):
         """ Initializes GET parameters. """
-        self.sorting = request.GET.get('sorting', 'disciplines')
+        # default sorting is by name
+        self.sorting = request.GET.get('sorting', 'name')
         self.sorting_template = "public/journal/_journal_list_sort_%s.html" % self.sorting
 
     def get_context_data(self, **kwargs):

@@ -19,7 +19,7 @@
 
       <h1 id="brand" class="col-md-4">
         <a href="/">
-          <img src="{% static 'svg/logo-erudit.svg' %}" alt="Erudit" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg" alt="Erudit" />
         </a>
       </h1>
 
@@ -44,6 +44,9 @@
             </li>
             <li>
               <a href="#" class="search"><i class="ion-ios-search-strong"></i></a>
+            </li>
+            <li class="search-form">
+              {% include "public/search/_search-bar.html" %}
             </li>
           {% endblock %}
         </ul>

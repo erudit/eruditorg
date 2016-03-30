@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<form action="{% url 'public:search:search' %}" class="search-bar" method="get">
+  <div class="form-group">
+    <div class="input-group-btn">
+      <input name="basic_search_term" type="search" class="form-control">
+      <button type="submit" class="btn btn-primary-outlined">Rechercher</button>
+    </div>
+  </div>
+</form>
