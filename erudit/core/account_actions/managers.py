@@ -25,7 +25,7 @@ class PendingManager(BaseAccountActionTokenManager):
 
         qs = super(PendingManager, self).get_queryset()
         qs = qs.filter(
-            user__isnull=True, consumption_date__isnull=True, created__gte=dt_limit)
+            active=True, user__isnull=True, consumption_date__isnull=True, created__gte=dt_limit)
 
         return qs
 

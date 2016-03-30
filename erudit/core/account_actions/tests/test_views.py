@@ -137,6 +137,23 @@ class TestAccountActionConsumeView(TestCase):
         with self.assertRaises(PermissionDenied):
             view(request, key=token.key)
 
+    def test_return_an_http_403_error_if_the_token_is_inactive(self):
+        # Setup
+        actions.register(Action1)
+        token = AccountActionTokenFactory.create(action='action-1', active=False)
+
+        user = User.objects.create_user(
+            username='test', password='not_secret', email='test@exampe.com')
+
+        request = self.factory.post('/')
+        request.user = user
+
+        view = AccountActionConsumeView.as_view()
+
+        # Run & check
+        with self.assertRaises(PermissionDenied):
+            view(request, key=token.key)
+
     def test_can_consume_an_action_token(self):
         # Setup
         actions.register(Action1)

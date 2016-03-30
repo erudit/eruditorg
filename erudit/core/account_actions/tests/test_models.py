@@ -102,3 +102,9 @@ class TestAccountActionToken(TestCase):
         token.consume(user)
         # Run & check
         self.assertFalse(token.can_be_consumed)
+
+    def test_knows_that_an_inactive_token_cannot_be_consumed(self):
+        # Setup
+        token = AccountActionTokenFactory.create(active=False)
+        # Run & check
+        self.assertFalse(token.can_be_consumed)
