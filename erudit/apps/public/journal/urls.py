@@ -37,6 +37,8 @@ urlpatterns = [
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
         views.ArticlePdfView.as_view(), name='article-pdf'),
 
+    url(_(r'^article/(?P<articleid>[.\w-]+)\.pdf$'),
+        views.ArticleRawPdfView.as_view(), name='article-raw-pdf'),
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)\.pdf$'),
         views.ArticleRawPdfView.as_view(), name='article-raw-pdf'),
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/raw/$'),

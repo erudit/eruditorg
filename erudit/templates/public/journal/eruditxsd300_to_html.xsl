@@ -154,6 +154,7 @@
 		<!--=== plan de l'article ===-->
 		<div id="article-content" class="row border-top">
 			<xsl:if test="//corps">
+				{% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}
 				<aside class="col-md-3 article-table-of-contents" role="contents">
 						<nav>
 							<header>
@@ -214,6 +215,7 @@
 							</ul>
 						</nav>
 				</aside>
+				{% endif %}
 
 				<aside class="pull-right article-tools">
 					<ul class="unstyled">
@@ -274,10 +276,14 @@
 				</section>
 				</xsl:if>
 
+				{% if article.erudit_object.processing == 'complet' %}
 				<!-- ********* Corps ******** -->
 				<section id="corps" class="article-section corps" role="section">
 					<xsl:apply-templates select="//corps"/>
 				</section>
+				{% elif article.localidentifier %}
+				<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article-raw-pdf' article.localidentifier %}" width="500" height="700" />
+				{% endif %}
 
 				<!-- ********* parties annexes ******** -->
 				<!-- ********* chaque annexe aura une <section> ******** -->
