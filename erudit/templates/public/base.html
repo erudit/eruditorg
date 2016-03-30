@@ -8,11 +8,11 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block body_class %}public{% endblock %}
+{% block body_class %}public fixed-header{% endblock %}
 
 {# public page header #}
 {% block header %}
-<header id="site-header">
+<header id="site-header" class="{% block header_class %}fixed{% endblock %}">
 
   <div class="container-fluid">
     <div class="row">

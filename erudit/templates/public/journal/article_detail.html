@@ -4,6 +4,10 @@
 
 {% block data-controller %}public:journal:article-detail{% endblock data-controller %}
 
+{% block body_class %}public static-header{% endblock %}
+
+{% block header_class %}static{% endblock %}
+
 {% block breadcrumb %}{{ block.super }}
  / <a href="{{ article.issue.journal.get_absolute_url }}">{{ article.issue.journal.name }}</a>
  / <a href="{{ article.issue.get_absolute_url }}">
