@@ -4,6 +4,7 @@ exclude_lines =
     def __str__
     raise NotImplementedError
 omit =
+    *legacy_models*
     *manage*
     *migrations*
-    *legacy_models*
+    *tests*
