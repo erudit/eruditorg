@@ -34,7 +34,7 @@ class AuthorizationConfig(object):
     """
 
     can_manage_individual_subscription = AuthorizationDef(
-        'subscriptions:can_manage_individual_subscription', _('Valider les numéros'))
+        'subscriptions:can_manage_individual_subscription', _('Abonnements'))
     """
     This authorization defines the ability to handle the individual subscriptions to journals.
     """
