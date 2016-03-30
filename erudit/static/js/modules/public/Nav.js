@@ -1,4 +1,5 @@
-
+const siteHeader   = "header#site-header";
+const minTopScroll = 300;
 
 class Nav {
 
@@ -8,18 +9,38 @@ class Nav {
   }
 
   init() {
+    this.stickyHeader();
     this.searchBar();
   }
 
   /*
-   * Register login modal
+   * Search bar toggle in nav
+   */
+  stickyHeader() {
+
+    // toggle compact or regular header size
+    var headerSize = function() {
+      var top = $(window).scrollTop();
+      if (top >= minTopScroll) {
+        $(siteHeader).addClass('compact');
+      } else {
+        $(siteHeader).removeClass('compact');
+      }
+    };
+
+    // register event on window scroll
+    $(window).on('scroll', function(event) {
+      headerSize();
+    });
+  }
+
+  /*
+   * Search bar toggle in nav
    */
   searchBar() {
-    var siteHeader       = "header#site-header";
     var searchBarTrigger = "nav#main-nav [data-trigger-search-bar]";
     var searchBar        = "nav#main-nav .search-form";
-    var searchInput        = "nav#main-nav .search-form input.search-terms";
-    console.log("search bar init");
+    var searchInput      = "nav#main-nav .search-form input.search-terms";
 
     // show or hide search bar
     var toggleSearch = function() {

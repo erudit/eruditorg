@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block page-title %}{% trans "Revues" %}{% endblock page-title %}
-{% block body_class %}public journal-list{% endblock %}
+{% block body_class %}{{ block.super }} journal-list{% endblock %}
 {% block data-controller %}public:journal:journal-list{% endblock data-controller %}
 
 {% block content %}

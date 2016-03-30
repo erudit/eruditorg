@@ -6,7 +6,7 @@
 
 {% block data-controller %}public:home{% endblock data-controller %}
 
-{% block body_class %}home{% endblock %}
+{% block body_class %}{{ block.super }} home{% endblock %}
 
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/videojs.css' %}" />

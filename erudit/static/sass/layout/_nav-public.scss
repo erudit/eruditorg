@@ -74,6 +74,9 @@ nav#main-nav {
     background: $brand-primary;
     pointer-events: none;
     @include opacity(0);
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
 
     &.visible {
       pointer-events: all;
@@ -82,6 +85,11 @@ nav#main-nav {
 
     form {
       margin: 0;
+
+      .form-group {
+        padding: 0 35px 0 0;
+        position: relative;
+      }
 
       .form-group:last-child {
         margin-bottom: 0;
@@ -95,8 +103,9 @@ nav#main-nav {
         color: #fff;
         padding: $padding-small-vertical $padding-small-horizontal;
         background-color: transparent;
-        width: 80%;
+        width: 70%;
       }
+
       button.btn.btn-primary-outlined {
         border-color: #fff;
         color: #fff;
@@ -104,6 +113,18 @@ nav#main-nav {
         padding: $padding-small-vertical $padding-small-horizontal;
         margin-left: -2px;
       }
+
+      a.close {
+        cursor: pointer;
+        position: absolute;
+        display: block;
+        top: 0;
+        right: -30px;
+        color: #fff;
+        font-size: 30px;
+        z-index: 1;
+      }
+
     }
 
   }
