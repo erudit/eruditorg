@@ -181,3 +181,39 @@ class TestIndividualJournalAccessSubscriptionDeleteView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 302)
         self.assertFalse(JournalAccessSubscription.objects.exists())
+
+
+class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
+    def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
+        # Setup
+        token = AccountActionTokenFactory.create(content_object=self.journal)
+
+        self.client.login(username='david', password='top_secret')
+        url = reverse('userspace:journal:subscription:cancel', kwargs={
+            'journal_pk': self.journal.pk, 'pk': token.pk, })
+
+        # Run
+        response = self.client.get(url)
+
+        # Check
+        self.assertEqual(response.status_code, 403)
+
+    def test_can_cancel_an_action_token(self):
+        # Setup
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
+            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+
+        token = AccountActionTokenFactory.create(content_object=self.journal)
+
+        self.client.login(username='david', password='top_secret')
+        url = reverse('userspace:journal:subscription:cancel', kwargs={
+            'journal_pk': self.journal.pk, 'pk': token.pk, })
+
+        # Run
+        response = self.client.post(url, follow=False)
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        token.refresh_from_db()
+        self.assertFalse(token.active)
