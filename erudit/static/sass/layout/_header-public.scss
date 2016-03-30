@@ -9,6 +9,7 @@ header#site-header {
   padding: 40px ($grid-gutter-width * 2);
   position: relative;
   border-bottom: 1px solid lighten($gray-light, 25%);
+  @include transition(background-color 250ms);
 
   .container-fluid {
     max-width: $screen-xl;
@@ -20,7 +21,9 @@ header#site-header {
     img,
     svg {
       height: $erudit-logo-height;
-      @include transition(all 250ms);
+      path, circle {
+        @include transition(fill 250ms);
+      }
     }
   }
 

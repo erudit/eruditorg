@@ -75,6 +75,11 @@ nav#main-nav {
     pointer-events: none;
     @include opacity(0);
 
+    &.visible {
+      pointer-events: all;
+      @include opacity(1);
+    }
+
     form {
       margin: 0;
 
