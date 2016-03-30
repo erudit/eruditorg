@@ -2,7 +2,8 @@
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.http import Http404
+from django.utils.functional import cached_property
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
@@ -48,16 +49,39 @@ class AuthorizationCreateView(
     form_class = AuthorizationForm
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_create.html'
-    title = _('Ajouter une autorisation')
+
+    def get_authorization_definition(self):
+        """ Returns a tuple of the form (codename, label) for the considered authorization. """
+        authorization_labels_dict = dict(AuthorizationConfig.get_choices())
+        try:
+            codename = self.request.GET.get('codename', None)
+            assert codename is not None
+            assert codename in authorization_labels_dict
+        except AssertionError:
+            raise Http404
+        return codename, authorization_labels_dict[codename]
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorizationCreateView, self).get_context_data(**kwargs)
+        context['authorization_codename'], context['authorization_label'] \
+            = self.authorization_definition
+        return context
 
     def get_form_kwargs(self):
         kwargs = super(AuthorizationCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        kwargs['codename'] = self.request.GET.get('codename')
+        authorization_def = self.authorization_definition
+
+        kwargs.update({
+            'codename': authorization_def[0],
+            'journal': self.current_journal,
+        })
+
         return kwargs
 
     def get_success_url(self):
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+
+    authorization_definition = cached_property(get_authorization_definition)
 
 
 class AuthorizationDeleteView(
@@ -66,7 +90,6 @@ class AuthorizationDeleteView(
     model = Authorization
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_confirm_delete.html'
-    title = _('Supprimer une autorisation')
 
     def get_success_url(self):
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
