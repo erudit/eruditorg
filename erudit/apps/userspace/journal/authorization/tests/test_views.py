@@ -206,6 +206,31 @@ class TestAuthorizationCreateView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 404)
 
+    def test_can_return_an_http_403_error_if_the_journal_has_no_management_subscription(self):
+        # Setup
+        journal = JournalFactory()
+        journal.members.add(self.user_granted)
+        journal.save()
+
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
+
+        self.client.login(username=self.user_granted.username,
+                          password="user")
+
+        url = reverse('userspace:journal:authorization:create', args=(journal.pk, ))
+
+        # Run
+        response = self.client.get(
+            url, {'codename': AC.can_manage_individual_subscription.codename})
+
+        # Check
+        self.assertEqual(response.status_code, 403)
+
 
 class TestAuthorizationDeleteView(BaseEruditTestCase):
     def setUp(self):

@@ -12,7 +12,7 @@ from django.views.generic import ListView
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
-from core.authorization.defaults import AuthorizationConfig
+from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
 from core.subscription.models import JournalManagementSubscription
 
@@ -36,7 +36,7 @@ class AuthorizationUserView(
     def get_authorizations_per_app(self):
         data = {}
 
-        for choice in AuthorizationConfig.get_choices():
+        for choice in AC.get_choices():
             data[choice[0]] = {
                 'authorizations': self.object_list.filter(authorization_codename=choice[0]),
                 'label': choice[1],
@@ -44,10 +44,10 @@ class AuthorizationUserView(
 
         # Special case: the subscription authorizations cannot be granted if the current journal
         # is not associated with a management plan.
-        if AuthorizationConfig.can_manage_individual_subscription.codename in data:
+        if AC.can_manage_individual_subscription.codename in data:
             if not JournalManagementSubscription.objects.filter(journal=self.current_journal) \
                     .exists():
-                data.pop(AuthorizationConfig.can_manage_individual_subscription.codename)
+                data.pop(AC.can_manage_individual_subscription.codename)
 
         return data
 
@@ -67,7 +67,7 @@ class AuthorizationCreateView(
 
     def get_authorization_definition(self):
         """ Returns a tuple of the form (codename, label) for the considered authorization. """
-        authorization_labels_dict = dict(AuthorizationConfig.get_choices())
+        authorization_labels_dict = dict(AC.get_choices())
         try:
             codename = self.request.GET.get('codename', None)
             assert codename is not None
@@ -96,6 +96,15 @@ class AuthorizationCreateView(
     def get_success_url(self):
         messages.success(self.request, _("L'accès a été créé avec succès"))
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+
+    def has_permission(self):
+        has_perm = super(AuthorizationCreateView, self).has_permission()
+        auth_codename = self.authorization_definition[0]
+        if has_perm and auth_codename == AC.can_manage_individual_subscription.codename \
+                and not JournalManagementSubscription.objects.filter(
+                    journal=self.current_journal).exists():
+            return False
+        return has_perm
 
     authorization_definition = cached_property(get_authorization_definition)
 
