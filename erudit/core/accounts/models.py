@@ -46,15 +46,6 @@ class AbonnementProfile(models.Model):
 
     def update_password(self, plain_password):
         self.password = self.sha1(plain_password)
-        self.mail_password(plain_password)
-
-    def mail_password(self, plain_password):
-        email = Email(
-            [self.user.email, ],
-            html_template='userspace/journal/subscription/mail/new_password.html',
-            subject=_('erudit.org : mot de passe'),
-            extra_context={'object': self, 'plain_password': plain_password, })
-        email.send()
 
     def mail_account(self):
         email = Email(
