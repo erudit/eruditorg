@@ -4,7 +4,6 @@ const minTopScroll = 300;
 class Nav {
 
   constructor() {
-    // auto init
     this.init();
   }
 
@@ -20,11 +19,10 @@ class Nav {
 
     // toggle compact or regular header size
     var headerSize = function() {
-      var top = $(window).scrollTop();
-      if (top >= minTopScroll) {
-        $(siteHeader).addClass('compact');
+      if ( $(window).scrollTop() >= minTopScroll ) {
+        $(siteHeader).addClass('compact')
       } else {
-        $(siteHeader).removeClass('compact');
+        $(siteHeader).removeClass('compact')
       }
     };
 
@@ -48,17 +46,16 @@ class Nav {
       $(searchBar).toggleClass('visible');
       $(siteHeader).toggleClass('inverted');
 
-      if (!visible) {
-        $(searchInput).focus();
-      }
-
+      // focus to field when visible
+      if (!visible) $(searchInput).focus();
     }
 
+    // hide search bar when focus out
     $(searchInput).on('blur', function(event) {
       toggleSearch();
     });
 
-    // show/hide bar
+    // elements trigger
     $(searchBarTrigger).on('click', function(event) {
       event.preventDefault();
       toggleSearch();
