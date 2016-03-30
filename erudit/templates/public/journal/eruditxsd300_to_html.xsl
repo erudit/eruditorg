@@ -46,7 +46,7 @@
 		<!-- main header for article -->
 		<header class="row page-header-main article-header">
 
-			<hgroup class="col-xs-12 child-column-fit border-top">
+			<hgroup class="col-xs-12 child-column-fit">
 
 				<aside class="col-sm-8">
 					<h2>
@@ -71,6 +71,9 @@
 					</figure>
 				</aside>
 
+				<a href="#" class="pagination next-page"><span class="ion ion-ios-arrow-right"></span></a>
+				<a href="#" class="pagination previous-page"><span class="ion ion-ios-arrow-left"></span></a>
+
 			</hgroup>
 
 			<!-- meta authors -->
@@ -81,15 +84,21 @@
 				<dl class="mono-space idpublic">
 					<dt>URI</dt>
 					<dd>
-						<a href="{$uriStart}{$iderudit}">
+						<a href="{$uriStart}{$iderudit}" class="clipboard-data">
 							<xsl:value-of select="$uriStart"/>
 							<xsl:value-of select="$iderudit"/>
+
+							<span class="clipboard-msg clipboard-success">adresse copié</span>
+							<span class="clipboard-msg clipboard-error">une erreure s'est produite</span>
 						</a>
 					</dd>
 					<dt>DOI</dt>
 					<dd>
-						<a href="{$doiStart}10.7202/{$iderudit}">
+						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
 							10.7202/<xsl:value-of select="$iderudit"/>
+
+							<span class="clipboard-msg clipboard-success">adresse copié</span>
+							<span class="clipboard-msg clipboard-error">une erreure s'est produite</span>
 						</a>
 					</dd>
 				</dl>
@@ -107,10 +116,10 @@
 						<xsl:value-of select="admin/revue/titrerev"/>
 					</a>
 				</h4>
-
+				
 				<xsl:value-of select="admin/numero/grtheme/theme"/>
 				<xsl:apply-templates select="admin/numero" mode="refpapier"/>
-
+			
 			</hgroup>
 
 		</header>
@@ -141,10 +150,12 @@
 								<xsl:value-of select="admin/revue/titrerev"/>
 							</a>
 						</h4>
-
-						<xsl:value-of select="admin/numero/grtheme/theme"/>
+						
 						<xsl:apply-templates select="admin/numero" mode="refpapier"/>
 					</hgroup>
+
+					<a href="#" class="pagination next-page"><span class="ion ion-ios-arrow-right"></span></a>
+					<a href="#" class="pagination previous-page"><span class="ion ion-ios-arrow-left"></span></a>
 				</div>
 			</div>
 		</header>
@@ -171,7 +182,7 @@
 										<a href="#resume">Résumé</a>
 									</li>
 								</xsl:if>
-								<li class="border-top">
+								<li class="border-top article-table-of-contents--body">
 									<a href="#corps">Corps</a>
 									<ol class="unstyled">
 										<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
@@ -220,48 +231,42 @@
 				<aside class="pull-right article-tools">
 					<ul class="unstyled">
 						<li>
-							<button>
+							<button id="tool-download">
 								<span class="erudicon erudicon-tools-pdf"></span>
 								<span class="tools-label">Télécharger</span>
 							</button>
 						</li>
 						<li>
-							<button>
+							<button id="tool-cite">
 								<span class="erudicon erudicon-tools-quote"></span>
 								<span class="tools-label">Citer cette article</span>
 							</button>
 						</li>
+						<!--
 						<li>
-							<button>
+							<button id="tool-save">
 								<span class="erudicon erudicon-tools-save"></span>
 								<span class="tools-label">Sauvegarder</span>
 							</button>
 						</li>
+						-->
 						<li>
-							<button class="more">
-								<span class="erudicon erudicon-tools-more"></span>
+							<button id="tool-share">
+								<span class="erudicon erudicon-tools-share"></span>
+								<span class="tools-label">Partager</span>
 							</button>
-
-							<ul class="unstyled">
-								<li>
-									<button>
-										<span class="erudicon erudicon-tools-share"></span>
-										<span class="tools-label">Partager</span>
-									</button>
-								</li>
-								<li>
-									<button>
-										<span class="erudicon erudicon-tools-print"></span>
-										<span class="tools-label">Imprimer</span>
-									</button>
-								</li>
-								<li>
-									<button>
-										<span class="erudicon erudicon-tools-fullscreen"></span>
-										<span class="tools-label">Mode zen</span>
-									</button>
-								</li>
-							</ul>
+						</li>
+						<li>
+							<button id="tool-print">
+								<span class="erudicon erudicon-tools-print"></span>
+								<span class="tools-label">Imprimer</span>
+							</button>
+						</li>
+						<li>
+							<button id="tool-fullscreen">
+								<span class="erudicon erudicon-tools-fullscreen"></span>
+								<span class="tools-label">Mode zen</span>
+							</button>
 						</li>
 					</ul>
 				</aside>
@@ -322,95 +327,83 @@
 	</xsl:template>
 
 	<xsl:template match="section1">
-		<a id="{@id}">
-			<xsl:text>
-			</xsl:text>
-		</a>
-		<xsl:if test="titre">
-			<h4 class="sub-section-title">
-				<xsl:if test="titre/@traitementparticulier">
-					<xsl:attribute name="class">special</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates select="titre"/>
-			</h4>
-		</xsl:if>
-		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		<div id="{@id}">
+			<xsl:if test="titre">
+				<h4 class="sub-section-title">
+					<xsl:if test="titre/@traitementparticulier">
+						<xsl:attribute name="class">special</xsl:attribute>
+					</xsl:if>
+					<xsl:apply-templates select="titre"/>
+				</h4>
+			</xsl:if>
+			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		</div>
 	</xsl:template>
 	<xsl:template match="section2">
-	<a id="{@id}">
-		<xsl:text>
-		</xsl:text>
-		</a>
-		<xsl:if test="titre">
-			<xsl:element name="h3">
-				<xsl:if test="titre/@traitementparticulier">
-					<xsl:attribute name="class">special</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates select="titre"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		<div id="{@id}">
+			<xsl:if test="titre">
+				<xsl:element name="h3">
+					<xsl:if test="titre/@traitementparticulier">
+						<xsl:attribute name="class">special</xsl:attribute>
+					</xsl:if>
+					<xsl:apply-templates select="titre"/>
+				</xsl:element>
+			</xsl:if>
+			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		</div>
 	</xsl:template>
 	<xsl:template match="section3">
-		<a id="{@id}">
-			<xsl:text>
-			</xsl:text>
-		</a>
-		<xsl:if test="titre">
-			<xsl:element name="h4">
-				<xsl:if test="titre/@traitementparticulier">
-					<xsl:attribute name="class">special</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates select="titre"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		<div id="{@id}">
+			<xsl:if test="titre">
+				<xsl:element name="h4">
+					<xsl:if test="titre/@traitementparticulier">
+						<xsl:attribute name="class">special</xsl:attribute>
+					</xsl:if>
+					<xsl:apply-templates select="titre"/>
+				</xsl:element>
+			</xsl:if>
+			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		</div>
 	</xsl:template>
 	<xsl:template match="section4">
-		<a id="{@id}">
-			<xsl:text>
-			</xsl:text>
-		</a>
-		<xsl:if test="titre">
-			<xsl:element name="h5">
-				<xsl:if test="titre/@traitementparticulier">
-					<xsl:attribute name="class">special</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates select="titre"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		<div id="{@id}">
+			<xsl:if test="titre">
+				<xsl:element name="h5">
+					<xsl:if test="titre/@traitementparticulier">
+						<xsl:attribute name="class">special</xsl:attribute>
+					</xsl:if>
+					<xsl:apply-templates select="titre"/>
+				</xsl:element>
+			</xsl:if>
+			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		</div>
 	</xsl:template>
 	<xsl:template match="section5">
-		<a id="{@id}">
-			<xsl:text>
-			</xsl:text>
-		</a>
-		<xsl:if test="titre">
-			<xsl:element name="h6">
-				<xsl:if test="titre/@traitementparticulier">
-					<xsl:attribute name="class">special</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates select="titre"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		<div id="{@id}">
+			<xsl:if test="titre">
+				<xsl:element name="h6">
+					<xsl:if test="titre/@traitementparticulier">
+						<xsl:attribute name="class">special</xsl:attribute>
+					</xsl:if>
+					<xsl:apply-templates select="titre"/>
+				</xsl:element>
+			</xsl:if>
+			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		</div>
 	</xsl:template>
 	<xsl:template match="section6">
-		<a id="{@id}">
-			<xsl:text>
-			</xsl:text>
-		</a>
-		<xsl:if test="titre">
-			<xsl:element name="h6">
-				<xsl:attribute name="class">h7</xsl:attribute>
-				<xsl:if test="titre/@traitementparticulier">
-					<xsl:attribute name="class">special</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates select="titre"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		<div id="{@id}">
+			<xsl:if test="titre">
+				<xsl:element name="h6">
+					<xsl:attribute name="class">h7</xsl:attribute>
+					<xsl:if test="titre/@traitementparticulier">
+						<xsl:attribute name="class">special</xsl:attribute>
+					</xsl:if>
+					<xsl:apply-templates select="titre"/>
+				</xsl:element>
+			</xsl:if>
+			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
+		</div>
 	</xsl:template>
 	<xsl:template match="para">
 		<p class="para">
