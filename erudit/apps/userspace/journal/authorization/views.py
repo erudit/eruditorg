@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
@@ -79,6 +81,7 @@ class AuthorizationCreateView(
         return kwargs
 
     def get_success_url(self):
+        messages.success(self.request, _("L'accès a été créé avec succès"))
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
 
     authorization_definition = cached_property(get_authorization_definition)
@@ -92,6 +95,7 @@ class AuthorizationDeleteView(
     template_name = 'userspace/journal/authorization/authorization_confirm_delete.html'
 
     def get_success_url(self):
+        messages.success(self.request, _("L'accès a été supprimé avec succès"))
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
 
     def get_permission_object(self):
