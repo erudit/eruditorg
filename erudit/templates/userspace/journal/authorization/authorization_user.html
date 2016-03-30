@@ -19,13 +19,13 @@
     {% for choice, app_authorizations in authorizations.items %}
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">{% trans choice.1 %}</h3>
+        <h3 class="panel-title">{% trans app_authorizations.label %}</h3>
       </div>
       <div class="panel-body">
-        <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice.0 }}"> {% trans "Ajouter" %} </a>
+        <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}"> {% trans "Ajouter" %} </a>
         <br /> <br />
         <ul>
-        {% for auth in app_authorizations %}
+        {% for auth in app_authorizations.authorizations %}
         <li>{{ auth.user.get_full_name|default:auth.user.username }}{% if auth.user.email %} ({{ auth.user.email }}){% endif %}
           <a class="btn" alt="{% trans 'supprimer' %}" href="{% url 'userspace:journal:authorization:delete' auth.pk %}">
             <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span>

@@ -14,6 +14,7 @@ from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.authorization.defaults import AuthorizationConfig
 from core.authorization.models import Authorization
+from core.subscription.models import JournalManagementSubscription
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
@@ -34,8 +35,20 @@ class AuthorizationUserView(
 
     def get_authorizations_per_app(self):
         data = {}
+
         for choice in AuthorizationConfig.get_choices():
-            data[choice] = self.object_list.filter(authorization_codename=choice[0])
+            data[choice[0]] = {
+                'authorizations': self.object_list.filter(authorization_codename=choice[0]),
+                'label': choice[1],
+            }
+
+        # Special case: the subscription authorizations cannot be granted if the current journal
+        # is not associated with a management plan.
+        if AuthorizationConfig.can_manage_individual_subscription.codename in data:
+            if not JournalManagementSubscription.objects.filter(journal=self.current_journal) \
+                    .exists():
+                data.pop(AuthorizationConfig.can_manage_individual_subscription.codename)
+
         return data
 
     def get_context_data(self, **kwargs):

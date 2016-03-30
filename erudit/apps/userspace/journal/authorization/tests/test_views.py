@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from base.factories import UserFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
+from core.subscription.factories import JournalManagementPlanFactory
+from core.subscription.factories import JournalManagementSubscriptionFactory
 from erudit.factories import JournalFactory
 from erudit.tests.base import BaseEruditTestCase
 
@@ -53,6 +55,63 @@ class TestAuthorizationUserView(BaseEruditTestCase):
         url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+    def test_do_not_show_the_individual_subscription_authorization_section_without_management(self):
+        # Setup
+        journal = JournalFactory()
+        journal.members.add(self.user_granted)
+        journal.save()
+
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
+
+        self.client.login(username=self.user_granted.username,
+                          password="user")
+
+        url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
+
+        # Run
+        response = self.client.get(url, {'codename': AC.can_manage_authorizations.codename})
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            AC.can_manage_individual_subscription.codename
+            not in response.context['authorizations'])
+
+    def test_shows_the_individual_subscription_authorization_section_with_management(self):
+        # Setup
+        journal = JournalFactory()
+        journal.members.add(self.user_granted)
+        journal.save()
+
+        ct = ContentType.objects.get(app_label="erudit", model="journal")
+        Authorization.objects.create(
+            content_type=ct,
+            user=self.user_granted,
+            object_id=journal.id,
+            authorization_codename=AC.can_manage_authorizations.codename)
+
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
+
+        self.client.login(username=self.user_granted.username,
+                          password="user")
+
+        url = reverse('userspace:journal:authorization:list', args=(journal.pk, ))
+
+        # Run
+        response = self.client.get(url, {'codename': AC.can_manage_authorizations.codename})
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            AC.can_manage_individual_subscription.codename
+            in response.context['authorizations'])
 
 
 class TestAuthorizationCreateView(BaseEruditTestCase):
