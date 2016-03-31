@@ -37,7 +37,7 @@
               <a href="#" class="main-section">{% trans "À propos" %}</a>
             </li>
             <li>
-              <a href="{% url 'login' %}" class="main-section" id="login-modal">{% trans "Connexion" %}</a>
+              <a href="{% url 'public:auth:login' %}" class="main-section" id="login-modal">{% trans "Connexion" %}</a>
             </li>
             <li class="dropdown">
               {% include "partials/language-switch-nav.html" %}

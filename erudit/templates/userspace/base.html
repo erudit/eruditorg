@@ -41,7 +41,7 @@
             <ul class="">
               <li><a href="#" class="disabled">{% trans "Aide" %}</a></li>
               <li><a href="#" class="disabled">{% trans "Paramètres" %}</a></li>
-              <li><a href="{% url 'logout' %}?next={% url 'userspace:dashboard' %}">{% trans "Déconnexion" %}</a></li>
+              <li><a href="{% url 'public:auth:logout' %}?next=/">{% trans "Déconnexion" %}</a></li>
             </ul>
           </li>
         </ul>
