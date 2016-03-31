@@ -9,7 +9,6 @@ from feedparser import parse as rss_parse
 
 from base.viewmixins import FedoraServiceRequiredMixin
 from erudit.models import Issue
-# from erudit.models import Journal
 from erudit.models import Discipline
 
 logger = logging.getLogger(__name__)
@@ -31,9 +30,6 @@ class HomeView(FedoraServiceRequiredMixin, TemplateView):
         # Includes the 'apropos' news ; note that this is a temporary behavior as
         # these news will likely be included in the new Érudit website in the future.
         context['latest_news'] = self.fetch_apropos_news()
-
-        # Includes some upcoming journals
-        # context['upcoming_journals'] = Journal.upcoming_objects.order_by('?')[:3]
 
         context['disciplines'] = Discipline.objects.order_by('?')
 
