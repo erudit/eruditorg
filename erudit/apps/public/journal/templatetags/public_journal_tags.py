@@ -25,6 +25,9 @@ def render_article(context, article):
     html_content = cache.get(cache_key, None) if journal_settings.ARTICLE_HTML_CONTENT_USE_CACHE \
         else None
 
+    if 'article' not in context:
+        context['article'] = article
+
     if html_content is None:
         # Prepares the XML of the article
         article_xml = remove_xml_namespaces(et.fromstring(article.fedora_object.xml_content))
