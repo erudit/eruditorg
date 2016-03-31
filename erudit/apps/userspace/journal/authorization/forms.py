@@ -1,13 +1,13 @@
-import itertools
+# -*- coding: utf-8 -*-
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django import forms
-from django.forms import ModelForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.contenttypes.models import ContentType
 
 from core.authorization.models import Authorization
-from erudit.models import Journal
 
 
 class AuthorizationForm(ModelForm):
@@ -17,57 +17,36 @@ class AuthorizationForm(ModelForm):
     journals are filtred from journal membership
     users are filtered with all users from same journals membership
     """
-
-    journal = forms.ModelChoiceField(label=_("Revue"),
-                                     queryset=Journal.objects.none(),
-                                     empty_label=None)
-    user = forms.ModelChoiceField(label=_("User"),
-                                  queryset=User.objects.none(),
-                                  empty_label=None)
+    user = forms.ModelChoiceField(
+        label=_('Utilisateur'), queryset=User.objects.none(), empty_label=None)
 
     class Meta:
         model = Authorization
-        fields = ['journal', 'user', 'authorization_codename', ]
+        fields = ['user', ]
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
-        authorization_codename = kwargs.pop('codename', None)
+        self.authorization_codename = kwargs.pop('codename')
+        self.journal = kwargs.pop('journal')
+
         super(AuthorizationForm, self).__init__(*args, **kwargs)
-        journals_with_manage_permissions = user.journals.all()
-        self.fields['journal'].queryset = journals_with_manage_permissions
-        us = [j.members.all() for j in journals_with_manage_permissions]
-        chain = itertools.chain(*us)
-        users = [u.id for u in list(chain)]
-        self.fields['user'].queryset = User.objects.filter(id__in=users)
 
-        if authorization_codename:
-            choices = self.fields['authorization_codename'].choices
-            choices = [(c[0], c[1]) for c in choices if c[0] == authorization_codename]
-            self.fields['authorization_codename'].choices = choices
+        # Update some fields
+        self.fields['user'].queryset = self.journal.members.all()
 
-    def clean(self):
-        """
-        check data integrity for the couple user / journal.
-        (Ideally, the field user should be filtered based on journal selection.)
-        """
-        cleaned_data = super(AuthorizationForm, self).clean()
-        self.user = cleaned_data.get("user")
-        self.journal = cleaned_data.get("journal")
+        # TODO: remove crispy-forms
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.add_input(Submit('submit', _('Valider')))
 
-        if not bool(self.journal.members.filter(id=self.user.id).count()):
-            journals = ", ".join([str(j) for j in self.user.journals.all()])
-            raise forms.ValidationError("{} {}".format(
-                _("Cet utilisateur n'est pas un membre de cette revue.\
-                   Ses revues sont :"),
-                journals))
-
-    def save(self, *args, **kw):
+    def save(self, commit=True):
         """
         Create the generic rule from form data
         """
         instance = super(AuthorizationForm, self).save(commit=False)
-        ct = ContentType.objects.get(app_label="erudit", model="journal")
-        instance.content_type = ct
-        instance.object_id = self.journal.id
-        instance.save()
+        instance.authorization_codename = self.authorization_codename
+        instance.content_object = self.journal
+
+        if commit:
+            instance.save()
+
         return instance

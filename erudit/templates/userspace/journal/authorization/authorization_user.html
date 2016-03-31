@@ -9,31 +9,33 @@
 {% endblock breadcrumb_end %}
 
 {% block content-main %}
-
-
-<h1>{% trans "Autorisations" %} </h1>
-
-{% for choice, app_authorizations in authorizations.items %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{% trans choice.1 %}</h3>
-  </div>
-  <div class="panel-body">
-        <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice.0 }}"> {% trans "Ajouter" %} </a>
-
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <section class="card">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Autorisations" %}</h2>
+      </div>
+    </div>
+    {% for choice, app_authorizations in authorizations.items %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{% trans app_authorizations.label %}</h3>
+      </div>
+      <div class="panel-body">
+        <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}"> {% trans "Ajouter" %} </a>
         <br /> <br />
-
         <ul>
-        {% for auth in app_authorizations %}
-        <li>{{ auth.user.first_name }} {{ auth.user.last_name }} ({{ auth.user.email }})
-        <a class="btn" alt="{% trans 'supprimer' %}"
-          href="{% url 'userspace:journal:authorization:delete' auth.pk %}">
-            <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span></a>
+        {% for auth in app_authorizations.authorizations %}
+        <li>{{ auth.user.get_full_name|default:auth.user.username }}{% if auth.user.email %} ({{ auth.user.email }}){% endif %}
+          <a class="btn" alt="{% trans 'supprimer' %}" href="{% url 'userspace:journal:authorization:delete' auth.pk %}">
+            <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span>
+          </a>
         </li>
         {% endfor %}
         </ul>
-  </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
 </div>
-{% endfor %}
-
 {% endblock %}

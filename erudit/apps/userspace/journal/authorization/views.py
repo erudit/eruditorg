@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
+from django.http import Http404
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
@@ -9,8 +12,9 @@ from django.views.generic import ListView
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
-from core.authorization.defaults import AuthorizationConfig
+from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
+from core.subscription.models import JournalManagementSubscription
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
@@ -31,8 +35,20 @@ class AuthorizationUserView(
 
     def get_authorizations_per_app(self):
         data = {}
-        for choice in AuthorizationConfig.get_choices():
-            data[choice] = self.object_list.filter(authorization_codename=choice[0])
+
+        for choice in AC.get_choices():
+            data[choice[0]] = {
+                'authorizations': self.object_list.filter(authorization_codename=choice[0]),
+                'label': choice[1],
+            }
+
+        # Special case: the subscription authorizations cannot be granted if the current journal
+        # is not associated with a management plan.
+        if AC.can_manage_individual_subscription.codename in data:
+            if not JournalManagementSubscription.objects.filter(journal=self.current_journal) \
+                    .exists():
+                data.pop(AC.can_manage_individual_subscription.codename)
+
         return data
 
     def get_context_data(self, **kwargs):
@@ -48,16 +64,49 @@ class AuthorizationCreateView(
     form_class = AuthorizationForm
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_create.html'
-    title = _('Ajouter une autorisation')
+
+    def get_authorization_definition(self):
+        """ Returns a tuple of the form (codename, label) for the considered authorization. """
+        authorization_labels_dict = dict(AC.get_choices())
+        try:
+            codename = self.request.GET.get('codename', None)
+            assert codename is not None
+            assert codename in authorization_labels_dict
+        except AssertionError:
+            raise Http404
+        return codename, authorization_labels_dict[codename]
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorizationCreateView, self).get_context_data(**kwargs)
+        context['authorization_codename'], context['authorization_label'] \
+            = self.authorization_definition
+        return context
 
     def get_form_kwargs(self):
         kwargs = super(AuthorizationCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        kwargs['codename'] = self.request.GET.get('codename')
+        authorization_def = self.authorization_definition
+
+        kwargs.update({
+            'codename': authorization_def[0],
+            'journal': self.current_journal,
+        })
+
         return kwargs
 
     def get_success_url(self):
+        messages.success(self.request, _("L'accès a été créé avec succès"))
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+
+    def has_permission(self):
+        has_perm = super(AuthorizationCreateView, self).has_permission()
+        auth_codename = self.authorization_definition[0]
+        if has_perm and auth_codename == AC.can_manage_individual_subscription.codename \
+                and not JournalManagementSubscription.objects.filter(
+                    journal=self.current_journal).exists():
+            return False
+        return has_perm
+
+    authorization_definition = cached_property(get_authorization_definition)
 
 
 class AuthorizationDeleteView(
@@ -66,9 +115,9 @@ class AuthorizationDeleteView(
     model = Authorization
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_confirm_delete.html'
-    title = _('Supprimer une autorisation')
 
     def get_success_url(self):
+        messages.success(self.request, _("L'accès a été supprimé avec succès"))
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
 
     def get_permission_object(self):

@@ -1,5 +1,6 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block page-title %}{% trans "Ajouter un accès" %}{% endblock page-title %}
 
@@ -10,12 +11,19 @@
 {% endblock breadcrumb_end %}
 
 {% block content-main %}
-
-<h1>{% trans "Ajouter un accès" %} </h1>
-
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" />
-</form>
-
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <h1>{% trans "Ajouter un accès" %}</h1>
+  <p class="lead">
+    {% blocktrans trimmed with authorization_label=authorization_label %}
+      Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : <strong>{{ authorization_label }}</strong>
+    {% endblocktrans %}
+  </p>
+  <div class="row">
+    <div class="col-md-12">
+      <form  class="form-vertical" method="post" action="">
+        {% crispy form %}
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
