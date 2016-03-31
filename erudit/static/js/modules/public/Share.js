@@ -30,7 +30,7 @@ class ShareModal {
                     <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12 col-centered">\
                       <div class="panel">\
                         <header class="panel-heading">\
-                          <h2 class="h4 panel-title text-center">Partager cette article</h2>\
+                          <h2 class="h4 panel-title text-center">Partager cet article</h2>\
                         </header>\
                         <div class="panel-body share-modal--body">\
                           <ul class="unstyled">\

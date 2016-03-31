@@ -239,7 +239,7 @@
 						<li>
 							<button id="tool-quote">
 								<span class="erudicon erudicon-tools-quote"></span>
-								<span class="tools-label">Citer cette article</span>
+								<span class="tools-label">Citer cet article</span>
 							</button>
 						</li>
 						<!--
