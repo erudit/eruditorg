@@ -127,6 +127,23 @@
                   {% endif %}
                 </li>
 
+                {% if journal.disciplines.all|length > 0 %}
+                <li>
+                  <h6 class="mono-space">
+                    {% blocktrans count journal.disciplines.all|length as disciplines_count %}
+                    Discipline
+                    {% plural %}
+                    Disciplines
+                    {% endblocktrans %}
+                  </h6>
+                  <p>
+                    {% for discipline in journal.disciplines.all %}
+                    <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                  </p>
+                </li>
+                {% endif %}
+
               </ul>
 
             </div>
@@ -190,7 +207,7 @@
               <div class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
                 <h3 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
                   {% trans "Abonnements" %}
-                  <i class="collapse-chevron ion-chevron-down pull-right"></i>
+                  <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
                 </h3>
                 <div id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
                     {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
@@ -202,7 +219,7 @@
               <div class="journal-info-block akkordion" role="tab" id="journal-info-authors" role="tabpanel">
                 <h3 class="akkordion-title" href="#journal-info-authors-content" aria-expanded="false" aria-controls="journal-info-authors-content">
                   {% trans "Index des auteurs" %}
-                  <i class="collapse-chevron ion-chevron-down pull-right"></i>
+                  <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
                 </h3>
                 <div id="journal-info-authors-content" class="akkordion-content" aria-labelledby="journal-info-authors">
                   <p>
@@ -216,7 +233,7 @@
               <div class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
                 <h3 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
                   {% trans "Équipe" %}
-                  <i class="collapse-chevron ion-chevron-down pull-right"></i>
+                  <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
                 </h3>
                 <div id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
                     {{ journal_info.team|default:tab_empty_msg|safe }}
