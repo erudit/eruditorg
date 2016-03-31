@@ -228,7 +228,7 @@
 				</aside>
 				{% endif %}
 
-				<aside class="pull-right article-tools">
+				<aside class="pull-right toolbox">
 					<ul class="unstyled">
 						<li>
 							<button id="tool-download">
@@ -237,7 +237,7 @@
 							</button>
 						</li>
 						<li>
-							<button id="tool-cite">
+							<button id="tool-cite" data-mfp-src="http://www.google.com">
 								<span class="erudicon erudicon-tools-quote"></span>
 								<span class="tools-label">Citer cette article</span>
 							</button>
