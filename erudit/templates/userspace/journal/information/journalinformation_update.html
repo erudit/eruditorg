@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block page-title %}{% trans "Informations de la revue" %}{% endblock page-title %}
+{% block page-title %}{% trans "À propos" %}{% endblock page-title %}
 
 {% block extrahead %}
   {{ form.media.css }}
@@ -10,7 +10,7 @@
 
 {% block breadcrumb_end %}
 {{ block.super }}
-<li>{% trans "Informations de la revue" %}</li>
+<li>{% trans "À propos" %}</li>
 {% endblock breadcrumb_end %}
 
 {% block content-main %}

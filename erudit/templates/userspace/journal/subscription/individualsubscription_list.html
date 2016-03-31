@@ -1,11 +1,11 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
-{% block page-title %}{% trans "Abonnements individuels" %}{% endblock %}
+{% block page-title %}{% trans "Abonnements" %}{% endblock %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
-<li>{% trans "Abonnements individuels" %}</li>
+<li>{% trans "Abonnements" %}</li>
 {% endblock breadcrumb_end %}
 
 {% block content-main %}
@@ -13,10 +13,10 @@
   <section class="card card-issue_submissions">
     <div class="row card-header">
       <div class="col-sm-6">
-        <h2>{% trans "Abonnements individuels" %}</h2>
+        <h2>{% trans "Abonnements" %}</h2>
       </div>
       <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Inscrire un utilisateur" %}</a>
+        <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
       </div>
     </div>
     <ul id="id_subscription_list" class="row card-body">
@@ -57,7 +57,7 @@
   <section class="card card-pending_subscriptions">
     <div class="row card-header">
       <div class="col-sm-6">
-        <h2>{% trans "Abonnements en attente d'acceptation" %}</h2>
+        <h2>{% trans "Abonnements en attente" %}</h2>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -78,7 +78,11 @@
               <td>{{ psubscription.last_name }}</td>
               <td>{{ psubscription.expiration_date }}</td>
               <td>
-                <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" title="{% trans 'Supprimer' %}">X</a>
+                <span class="actions pull-right">
+                  <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" class="btn btn-danger" title="{% trans 'Supprimer' %}">
+                    {% trans "Supprimer" %}
+                  </a>
+                <span class="actions pull-right">
               </td>
             </tr>
             {% endfor %}

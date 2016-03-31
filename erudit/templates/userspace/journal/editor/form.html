@@ -1,7 +1,7 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}{% trans "Ajout d'un numéro" %}{% endblock %}
+{% block page-title %}{% trans "Dépôt de fichiers" %}{% endblock %}
 
 {% block data-controller %}userspace:editor:form{% endblock data-controller %}
 
@@ -15,7 +15,7 @@
 
 {% block breadcrumb_end %}
 {{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de numéros" %}</a></li>
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
 <li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
 {% endblock breadcrumb_end %}
 

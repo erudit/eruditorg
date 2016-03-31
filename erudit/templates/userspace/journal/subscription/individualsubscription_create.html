@@ -6,15 +6,15 @@
 {{ block.super }}
 <li>
   <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}">
-    {% trans "Abonnements individuels" %}
+    {% trans "Abonnements" %}
   </a>
 </li>
-<li>{% trans "Ajouter un compte" %}</li>
+<li>{% trans "Créer un abonnement" %}</li>
 {% endblock breadcrumb_end %}
 
 {% block content-main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <h1>{% trans "Ajouter un compte" %} </h1>
+  <h1>{% trans "Créer un abonnement" %} </h1>
   <div class="row">
     <div class="col-md-12">
       <form  class="form-vertical" method="post" action="">

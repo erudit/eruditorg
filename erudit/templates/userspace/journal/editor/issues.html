@@ -1,11 +1,11 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}{% trans "Dépôt de numéros" %}{% endblock %}
+{% block page-title %}{% trans "Dépôt de fichiers" %}{% endblock %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
-<li>{% trans "Dépôt de numéros" %}</li>
+<li>{% trans "Dépôt de fichiers" %}</li>
 {% endblock breadcrumb_end %}
 
 {% block content-main %}
@@ -13,10 +13,10 @@
   <section class="card card-issue_submissions">
     <div class="row card-header">
       <div class="col-sm-6">
-        <h2>{% trans "Historique des dépôts de numéros" %}</h2>
+        <h2>{% trans "Historique" %}</h2>
       </div>
       <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Déposer un nouveau numéro" %}</a>
+        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Dépôt de fichiers" %}</a>
       </div>
     </div>
     <ul id="id_issuesubmission_list" class="row card-body">

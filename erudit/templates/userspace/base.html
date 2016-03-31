@@ -59,14 +59,14 @@
 <main id="main-container" class="main">
   <header>
     <h1>
-      <span class="user-space">{% block zone-title %}{% trans "Espace utilisateur" %}{% endblock %}</span> {% block page-title %}{{ title }}{% endblock %}
+      <span class="user-space">{% block zone-title %}{{ scope_current_journal.name }}{% endblock %}</span> {% block page-title %}{{ title }}{% endblock %}
     </h1>
   </header>
   <div class="container-fluid">
     <div id="breadcrumb">
       {% block breadcrumbs %}
       <ul class="breadcrumb">
-        <li><a href="{% url 'userspace:dashboard' %}">{% trans "Mon espace" %}</a></li>
+        <li><a href="{% url 'userspace:dashboard' %}">{{ scope_current_journal.name }}</a></li>
         {% block breadcrumb_end %}{% endblock breadcrumb_end %}
       </ul>
       {% endblock %}
