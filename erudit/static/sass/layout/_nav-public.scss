@@ -12,11 +12,46 @@ nav#main-nav {
     @include vertical-centered();
     > li {
       display: inline-block;
-      margin-left: 55px;
+      margin-left: 25px;
+      // position: relative;
+
+      @media (min-width: $screen-lg) {
+        margin-left: 55px;
+      }
+
       &:first-child {
         margin-left: 0;
       }
+
+      // active section, add border at bottom
+      &.active {
+        > a:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 4px;
+          background-color: #000;
+          position: absolute;
+          left: -10px;
+          bottom: -47px;
+          @include transition(all 250ms);
+          z-index: 1;
+
+          // with parent <header> in compact mode
+          .compact & {
+            bottom: -22px;
+          }
+
+          // hide when inverted <header>
+          .inverted & {
+            display: none;
+          }
+        }
+      }
     }
+
+
+
   }
 
   // main section nav items with drop-downs
@@ -29,14 +64,19 @@ nav#main-nav {
     @include fw-sans-medium();
     color: $gray-base;
 
-    &:hover {
-      color: $upsdell-red;
+    &:hover,
+    &:active,
+    &:focus,
+    &.selected {
+      color: $brand-primary;
       text-decoration: none;
     }
 
     i {
       font-size: 16px;
+      margin-left: 22px;
     }
+
   }
 
   // dropdown font size adjustement
@@ -60,4 +100,115 @@ nav#main-nav {
     }
   }
 
+  // search form
+  .search-form {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    @include translate(0,-50%);
+    background: $brand-primary;
+    pointer-events: none;
+    @include opacity(0);
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    &.visible {
+      pointer-events: all;
+      @include opacity(1);
+    }
+
+    form {
+      margin: 0;
+
+      .form-group {
+        padding: 0 35px 0 0;
+        position: relative;
+      }
+
+      .form-group:last-child {
+        margin-bottom: 0;
+      }
+
+      input[type="search"] {
+        margin: 0;
+        width: auto;
+        border-width: 2px;
+        border-color: #fff;
+        color: #fff;
+        padding: $padding-small-vertical $padding-small-horizontal;
+        background-color: transparent;
+        width: 70%;
+      }
+
+      button.btn.btn-primary-outlined {
+        border-color: #fff;
+        color: #fff;
+        line-height: inherit;
+        padding: $padding-small-vertical $padding-small-horizontal;
+        margin-left: -2px;
+      }
+
+      a.close {
+        cursor: pointer;
+        position: absolute;
+        display: block;
+        top: 0;
+        right: -30px;
+        color: #fff;
+        font-size: 30px;
+        z-index: 1;
+      }
+
+    }
+
+  }
+
+}
+
+
+/**
+* Publications type nav
+*/
+
+nav.sub-nav {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -55px;
+  background-color: #fff;
+  border-bottom: 1px solid $gray-light;
+  z-index: $zindex-navbar - 1;
+  text-align: center;
+  pointer-events: none;
+  @include opacity(0);
+  @include translate(0,10%);
+  @include transition(all 250ms);
+
+  &.visible {
+    pointer-events: all;
+    @include opacity(1);
+    @include translate(0,0);
+  }
+
+
+
+  ul.menu-bar {
+    > li {
+      display: inline-block;
+      margin: 0 25px;
+      a {
+        display: block;
+        @include fw-sans-bold;
+        padding: 15px 25px;
+        @include transition(all 250ms);
+        &:hover,
+        &.active {
+          background-color: $brand-primary;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }

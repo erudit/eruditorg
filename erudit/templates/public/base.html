@@ -8,30 +8,28 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block body_class %}public{% endblock %}
+{% block body_class %}public fixed-header{% endblock %}
 
 {# public page header #}
 {% block header %}
-<header id="site-header">
+<header id="site-header" class="{% block header_class %}fixed{% endblock %}">
 
   <div class="container-fluid">
     <div class="row">
 
       <h1 id="brand" class="col-md-4">
         <a href="/">
-          <img src="{% static 'svg/logo-erudit.svg' %}" alt="Erudit" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg" alt="Erudit" />
         </a>
       </h1>
+
+      {% url 'public:journal:journal-list' as journal_list_url %}
 
       <nav id="main-nav" class="col-md-8">
         <ul class="unstyled menu-bar">
           {% block mainnav %}
-            <li class="dropdown">
-              <a href="{% url 'public:journal:journal-list' %}" class="select main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down caret"></i></a>
-              <ul>
-                <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Par disciplines" %}</a></li>
-                <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Ordre alphabéthique" %}</a></li>
-              </ul>
+            <li class="{% if journal_list_url in request.path %}active{% endif %}">
+              <a href="{% url 'public:journal:journal-list' %}" data-sub-nav="#publication-types" class="select main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down caret"></i></a>
             </li>
             <li>
               <a href="#" class="main-section">{% trans "À propos" %}</a>
@@ -43,9 +41,21 @@
               {% include "partials/language-switch-nav.html" %}
             </li>
             <li>
-              <a href="#" class="search"><i class="ion-ios-search-strong"></i></a>
+              <a href="#" data-trigger-search-bar class="search"><i class="ion-ios-search-strong"></i></a>
+            </li>
+            <li class="search-form">
+              {% include "public/search/_search-bar.html" %}
             </li>
           {% endblock %}
+        </ul>
+      </nav>
+
+      <nav class="sub-nav" id="publication-types">
+        <ul class="unstyled menu-bar">
+          <li><a href="{% url 'public:journal:journal-list' %}" class="{% if journal_list_url in request.path %}active{% endif %}">{% trans "Revues" %}</a></li>
+          <li><a href="{% url 'public:journal:journal-list' %}" class="">{% trans "Livres & Actes" %}</a></li>
+          <li><a href="{% url 'public:journal:journal-list' %}" class="">{% trans "Thèses" %}</a></li>
+          <li><a href="{% url 'public:journal:journal-list' %}" class="">{% trans "Littérature grise" %}</a></li>
         </ul>
       </nav>
 

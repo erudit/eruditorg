@@ -1,3 +1,16 @@
+
+/**
+* hide Breadcrumb on homepage
+*/
+body.home {
+  nav#breadcrumb {
+    display: none;
+  }
+}
+
+/**
+* Home main container
+*/
 #homepage-header {
   padding-top: 30px;
   min-height: 200px;
@@ -75,164 +88,198 @@
 
 #homepage-content {
 
-  a.invisible {
-    display: block;
-    height: 0px;
-  }
-  .section-separator {
-    border-color: #000;
-    margin-top: 100px;
-  }
+  .glory {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    background-color: $light-grey;
 
-  .homepage--sticky-nav {
-    position: relative;
-    background: $light-grey;
-    padding: 30px 0;
-    font-size: 16px;
-    z-index: $zindex-navbar-fixed;
-    @include fw-sans-medium();
+    .glory--header {
+      margin-bottom: 30px;
 
-    ul {
-      display: inline-block;
+      .glory--header--title {
+        @include fw-sans-bold();
+      }
     }
 
-    li {
-      display: inline-block;
-      padding: 0 $grid-gutter-width;
+    .glory--search,
+    .glory--journals,
+    .glory--disciplines {
+      @include grid-cell-border('top', 1px, $mid-grey);
+      padding-top: 25px;
+      margin-bottom: 25px;
+
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 0;
+      }
     }
 
-    &.is_stuck {
-      @include box-shadow(0 1px 20px rgba(0,0,0,0.1));
-    }
-  }
+    .glory--search {
+      margin-top: 0;
 
-  .search-module {
-    padding-top: 110px;
-    margin-left: -75px;
-
-    label {
-      @include fw-sans-bold();
-      margin-bottom: $margin-vertical-default/2;
-    }
-
-    .form-group {
-      position: relative;
-      margin-bottom: $margin-vertical-default/2;
-
-      input[type="search"] {
-        @include fw-sans-normal-italic();
-        border-width: 1px 1px 1px 1px;
-        border-color: #000;
-        padding: ($padding-large-vertical*2) $padding-base-horizontal;
+      .form-group {
+        padding-left: 0;
+        padding-right: 0;
       }
 
+      input[type="search"] {
+        border-width: $border-width;
+        border-right: none;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 15px;
+        box-sizing: border-box;
+        font-size: 16px;
+        @include placeholder($dark-grey);
+      }
+      .input-group-addon {
+        padding: 0;
+        border: none;
+        border-radius: 0;
+      }
       .btn {
-        height: 75px;
-        width: 75px;
-        text-align: center;
-        overflow: hidden;
-        position: relative;
-        span {
-          font-size: 40px;
-          @include parent-box-centered();
+        font-size: 1.5em;
+        width: 50px;
+        height: 50px;
+        line-height: 54px;
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+
+      a {
+        font-size: 16px;
+        letter-spacing: 0.3px;
+        @include fw-sans-medium();
+      }
+    }
+    .glory--journals {
+      li {
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &.disabled {
+          color: $mid-grey;
+        }
+      }
+      span {
+        display: inline-block;
+        width: 55px;
+      }
+    }
+    .glory--disciplines {
+      margin-bottom: 0;
+
+      p {
+        font-size: 18px;
+        line-height: 29px;
+      }
+
+      a {
+        font-size: 15px;
+
+        &:before {
+          content: '+ ';
         }
       }
     }
+  }
+
+  .section-separator {
+    border-color: #000;
+    margin-top: 50px;
   }
 
   .latest-issues {
 
     .latest-issues--article {
-      margin-bottom: 65px;
+      margin-top: 20px;
+      margin-bottom: 40px;
       padding-top: 36px;
       @include grid-cell-border('top', 1px, #cccccc);
 
+      @media (min-width: $screen-sm-min) AND (max-width: $screen-sm-max) {
+        &:nth-child(3n+1) {
+          clear: both;
+        }
+      }
+      @media (min-width: $screen-md-min) {
+        &:nth-child(4n+1) {
+          clear: both;
+        }
+      }
+
       img {
         width: 100%;
+        margin-bottom: 10px;
       }
 
       .latest-issues--article--issue {
+        font-size: 18px;
         @include fw-sans-bold();
       }
-
-      &:first-child {
-        .latest-issues--article--issue {
-          font-size: 40px;
-        }
-        .latest-issues--article--title,
-        .latest-issues--article--details {
-          font-size: 18px;
-        }
-      }
-
-      &:nth-child(2),
-      &:nth-child(3) {
-        margin-bottom: 10px;
-
-        .latest-issues--article--issue {
-          font-size: 20px;
-        }
-      }
-    }
-  }
-
-  .disciplines {
-    margin-top: 90px;
-    background: $light-grey;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    font-size: 18px;
-
-    ul {
-      margin-top: 35px;
-      list-style: none;
     }
   }
 
   .news {
     .news--article {
-      margin-top: 30px;
+      margin-top: 20px;
+      margin-bottom: 60px;
       padding-top: 18px;
-      padding-bottom: 50px;
       @include grid-cell-border('top', 1px, #cccccc);
 
       &:nth-child(3n+1) {
         clear: both;
       }
+
+      .news--article--title {
+        margin: 0 0 30px 0;
+        font-size: 28px;
+      }
+    }
+    .news--btn {
+      font-size: 16px;
+      padding: 0.5em 0;
+      display: block;
+
+      @media (min-width: $screen-sm-min) {
+        display: inline-block;
+        padding-left: 3em;
+        padding-right: 3em;
+      }
     }
   }
 
   .about-erudit {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 50px;
 
     .about-erudit--logo {
       font-size: 60px;
       line-height: 50px;
+      margin: 0 0 50px 0;
       @include fw-sans-bold();
     }
     .about-erudit--definition {
       font-size: 18px;
+      margin: 0 0 25px 0;
     }
-    .about-erudit--read-more {
-      color: #707070;
-    }
-  }
+    .about-erudit--video-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: percentage(9/16);
 
-  .publications {
-    margin-top: 90px;
+      .video-js {
+        width:100% !important;
+        height: auto !important;
 
-    .publications--item {
-      padding-top: 20px;
-      padding-bottom: 60px;
-      @include grid-cell-border('top', 1px, $dark-grey);
-
-      .publications--item--title {
-        @include fw-sans-bold();
-      }
-      .publications--item--summary {
-        font-size: 18px;
+        // To center Play Button, use this
+        //.vjs-big-play-button { top:0; left:0; right:0; bottom:0; margin:auto; }
       }
     }
   }
+
 }

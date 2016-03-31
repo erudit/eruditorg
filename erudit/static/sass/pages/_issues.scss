@@ -41,7 +41,11 @@
       max-width: 60%;
       border: 1px solid $gray-base;
     }
-
+    &.small {
+      img {
+        max-width: 40%;
+      }
+    }
   }
 }
 

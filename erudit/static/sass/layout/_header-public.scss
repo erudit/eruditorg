@@ -2,6 +2,12 @@
 * see _header.scss for shared styling between public and user space
 */
 
+$header-height: 116px;
+
+body.fixed-header {
+  padding-top: $header-height;
+}
+
 /**
 * Erudit Public #page-header
 */
@@ -9,7 +15,25 @@ header#site-header {
   padding: 40px ($grid-gutter-width * 2);
   position: relative;
   border-bottom: 1px solid lighten($gray-light, 25%);
+  @include transition(all 250ms);
+  background-color: #fff;
 
+  // fixed
+  &.fixed {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: $zindex-navbar;
+  }
+
+  // compact
+  &.compact {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  // container width
   .container-fluid {
     max-width: $screen-xl;
   }
@@ -17,9 +41,32 @@ header#site-header {
   h1#brand {
     font-size: inherit;
     margin: 0;
-    img {
+    img,
+    svg {
       height: $erudit-logo-height;
+      path, circle {
+        @include transition(fill 250ms);
+      }
     }
+  }
+
+  a {
+    @include transition(all 250ms);
+  }
+
+  &.inverted {
+    background-color: $brand-primary;
+
+    a {
+      color: #fff !important;
+    }
+
+    svg {
+      path, circle {
+        fill: #fff;
+      }
+    }
+
   }
 
 }

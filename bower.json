@@ -43,6 +43,8 @@
     "get-prefix": "~1.0.0",
     "magnific-popup": "~1.1.0",
     "akkordion": "0.2.4",
-    "hint.css": "2.2.0"
+    "hint.css": "2.2.0",
+    "clipboard.js": "~0.2.0",
+    "scrollspy": "~0.1.2"
   }
 }
