@@ -14,6 +14,7 @@ urlpatterns = [
         {'next_page': '/'}, name='logout'),
 
     # Password change
+    url(_(r'^mot-de-passe/$'), views.UserPasswordChangeView.as_view(), name='password_change'),
 
     # Password reset
     url(_(r'^mot-de-passe/reset/$'), 'django.contrib.auth.views.password_reset',
