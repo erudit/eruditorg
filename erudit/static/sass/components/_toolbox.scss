@@ -1,0 +1,99 @@
+/**
+* toolbox
+*/
+.toolbox {
+  position: relative;
+  padding-top: $margin-vertical-default;
+  margin-right: $grid-gutter-width / 2;
+  width: 50px;
+  z-index: 10;
+  will-change: transform;
+  @include transition(transform 0.3s ease-out);
+
+  ul, li {
+    width: 100%;
+  }
+  li {
+    position: relative;
+    height: 50px;
+    margin: 0 0 1px 0 !important;
+    padding: 0;
+    display: block;
+
+    button {
+      position: relative;
+      display: block;
+      margin: 0;
+      min-width: 50px;
+      height: 100%;
+      background: $brand-primary;
+      border: none;
+      color: #fff;
+      font-size: 0.8em;
+      white-space: nowrap;
+      float: right;
+      @include transition(none);
+
+      .tools-label {
+        display: none;
+        padding: 1px 15px 0 50px;
+        @include fw-sans-medium();
+      }
+
+      .erudicon {
+        position: absolute;
+        font-size: 14px;
+        left: 18px;
+        top: 50%;
+        @include translate(0,-35%);
+      }
+
+      .erudicon-tools-pdf { font-size: 8px; left: 15px; }
+      .erudicon-tools-quote { font-size: 10px; left: 20px; }
+      .erudicon-tools-save { font-size: 18px; }
+      .erudicon-tools-more { font-size: 4px;  }
+      .erudicon-tools-share { left: 17px; }
+      .erudicon-tools-print { }
+      .erudicon-tools-fullscreen { left: 19px; }
+
+      &:hover, &:active, &:active:focus {
+        background-color: $black;
+
+        .tools-label {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  /**
+  * compact mode
+  */
+  &.compact {
+
+    li {
+      height: 30px;
+
+      button {
+        min-width: 30px;
+        font-size: 0.65em;
+
+        .tools-label {
+          padding-left: 40px;
+        }
+
+        .erudicon {
+          font-size: 10px;
+          left: 11px;
+        }
+        .erudicon-tools-pdf { font-size: 6px; left: 7px; }
+        .erudicon-tools-quote { font-size: 8px; left: 10px; }
+        .erudicon-tools-save { font-size: 12px; }
+        .erudicon-tools-share { left: 10px; }
+      }
+    }
+  }
+
+
+}

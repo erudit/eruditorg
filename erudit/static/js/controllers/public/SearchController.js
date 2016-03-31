@@ -1,10 +1,14 @@
+import Toolbox from '../../modules/public/Toolbox';
+
 export const formSelector = "form#id-search";
 
 export default {
 
   init() {
     console.log("Search!");
+
     this.sorting();
+    this.toolbox();
   },
 
   /**
@@ -60,6 +64,13 @@ export default {
       event.preventDefault();
       select.val( val ).trigger('change');
       dropdownSelect.text( el.text() );
+    });
+  },
+
+
+  toolbox() {
+    $('#search-results .search-result-item .toolbox').each(function(){
+      new Toolbox($(this));
     });
   }
 

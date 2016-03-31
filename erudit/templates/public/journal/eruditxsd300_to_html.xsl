@@ -228,16 +228,16 @@
 				</aside>
 				{% endif %}
 
-				<aside class="pull-right article-tools">
+				<aside class="pull-right toolbox">
 					<ul class="unstyled">
 						<li>
-							<button id="tool-download">
+							<button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
 								<span class="erudicon erudicon-tools-pdf"></span>
 								<span class="tools-label">Télécharger</span>
 							</button>
 						</li>
 						<li>
-							<button id="tool-cite">
+							<button id="tool-quote">
 								<span class="erudicon erudicon-tools-quote"></span>
 								<span class="tools-label">Citer cette article</span>
 							</button>
