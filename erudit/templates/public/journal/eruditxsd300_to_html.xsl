@@ -237,7 +237,7 @@
 							</button>
 						</li>
 						<li>
-							<button id="tool-cite" data-mfp-src="http://www.google.com">
+							<button id="tool-quote" data-mfp-src="http://www.google.com">
 								<span class="erudicon erudicon-tools-quote"></span>
 								<span class="tools-label">Citer cette article</span>
 							</button>
