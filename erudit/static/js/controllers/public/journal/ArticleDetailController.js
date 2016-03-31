@@ -2,12 +2,14 @@ import '!!script!sticky-kit/jquery.sticky-kit.min';
 import '!!script!clipboard.js/clipboard.min';
 import '!!script!scrollspy/build/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
+import Toolbox from '../../../modules/public/Toolbox';
 
 export default {
 
   init: function() {
     this.article                = $('#article-detail');
     this.sticky_header_height   = 0;
+    this.toolbox                = new Toolbox( this.article.find('.toolbox') );
 
     this.sticky_elements();
     this.smooth_scroll();
@@ -19,7 +21,7 @@ export default {
 
   	var _this                 = this,
         $sticky_header 			  = this.article.find('.article-header-sticky'),
-  		  $sticky_elements 		  = this.article.find('.article-table-of-contents, .article-tools'),
+  		  $sticky_elements 		  = this.article.find('.article-table-of-contents, .toolbox'),
   		  transform 				    = getPrefix('transform');
 
     // save sticky header height
