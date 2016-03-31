@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import hashlib
-from random import choice
 import base64
 
 from django.conf import settings
@@ -23,29 +22,12 @@ class AbonnementProfile(models.Model):
         verbose_name_plural = _("Comptes personnels")
 
     def save(self, *args, **kwargs):
-        # Password encryption
-        if self.pk:
-            if AbonnementProfile.objects.filter(pk=self.pk).count() == 1:
-                old_crypted_password = AbonnementProfile.objects.get(pk=self.pk).password
-                if not (self.password == old_crypted_password):
-                    self.update_password(self.password)
-            else:
-                # Not yet in Db, so the password is set in constructor already crypted
-                pass
-        else:
+        if not self.pk:
             self.mail_account()
-            new_password = self.generate_password()
-            self.update_password(new_password)
         super(AbonnementProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{} {} ({})'.format(self.user.first_name, self.user.last_name, self.id)
-
-    def generate_password(self):
-        return ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789%*(-_=+)') for i in range(8)])
-
-    def update_password(self, plain_password):
-        self.password = self.sha1(plain_password)
 
     def mail_account(self):
         email = Email(
