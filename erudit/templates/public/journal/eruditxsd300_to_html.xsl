@@ -231,13 +231,13 @@
 				<aside class="pull-right toolbox">
 					<ul class="unstyled">
 						<li>
-							<button id="tool-download">
+							<button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
 								<span class="erudicon erudicon-tools-pdf"></span>
 								<span class="tools-label">Télécharger</span>
 							</button>
 						</li>
 						<li>
-							<button id="tool-quote" data-mfp-src="http://www.google.com">
+							<button id="tool-quote">
 								<span class="erudicon erudicon-tools-quote"></span>
 								<span class="tools-label">Citer cette article</span>
 							</button>
