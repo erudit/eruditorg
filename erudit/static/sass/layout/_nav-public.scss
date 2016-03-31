@@ -13,6 +13,7 @@ nav#main-nav {
     > li {
       display: inline-block;
       margin-left: 25px;
+      // position: relative;
 
       @media (min-width: $screen-lg) {
         margin-left: 55px;
@@ -21,7 +22,36 @@ nav#main-nav {
       &:first-child {
         margin-left: 0;
       }
+
+      // active section, add border at bottom
+      &.active {
+        > a:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 4px;
+          background-color: #000;
+          position: absolute;
+          left: -10px;
+          bottom: -47px;
+          @include transition(all 250ms);
+          z-index: 1;
+
+          // with parent <header> in compact mode
+          .compact & {
+            bottom: -22px;
+          }
+
+          // hide when inverted <header>
+          .inverted & {
+            display: none;
+          }
+        }
+      }
     }
+
+
+
   }
 
   // main section nav items with drop-downs
@@ -34,14 +64,19 @@ nav#main-nav {
     @include fw-sans-medium();
     color: $gray-base;
 
-    &:hover {
-      color: $upsdell-red;
+    &:hover,
+    &:active,
+    &:focus,
+    &.selected {
+      color: $brand-primary;
       text-decoration: none;
     }
 
     i {
       font-size: 16px;
+      margin-left: 22px;
     }
+
   }
 
   // dropdown font size adjustement
@@ -129,4 +164,51 @@ nav#main-nav {
 
   }
 
+}
+
+
+/**
+* Publications type nav
+*/
+
+nav.sub-nav {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -55px;
+  background-color: #fff;
+  border-bottom: 1px solid $gray-light;
+  z-index: $zindex-navbar - 1;
+  text-align: center;
+  pointer-events: none;
+  @include opacity(0);
+  @include translate(0,10%);
+  @include transition(all 250ms);
+
+  &.visible {
+    pointer-events: all;
+    @include opacity(1);
+    @include translate(0,0);
+  }
+
+
+
+  ul.menu-bar {
+    > li {
+      display: inline-block;
+      margin: 0 25px;
+      a {
+        display: block;
+        @include fw-sans-bold;
+        padding: 15px 25px;
+        @include transition(all 250ms);
+        &:hover,
+        &.active {
+          background-color: $brand-primary;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }

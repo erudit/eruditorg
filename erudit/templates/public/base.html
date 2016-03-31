@@ -23,15 +23,13 @@
         </a>
       </h1>
 
+      {% url 'public:journal:journal-list' as journal_list_url %}
+
       <nav id="main-nav" class="col-md-8">
         <ul class="unstyled menu-bar">
           {% block mainnav %}
-            <li class="dropdown">
-              <a href="{% url 'public:journal:journal-list' %}" class="select main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down caret"></i></a>
-              <ul>
-                <li><a href="{% url 'public:journal:journal-list' %}?sorting=disciplines">{% trans "Par disciplines" %}</a></li>
-                <li><a href="{% url 'public:journal:journal-list' %}?sorting=name">{% trans "Ordre alphabéthique" %}</a></li>
-              </ul>
+            <li class="{% if journal_list_url in request.path %}active{% endif %}">
+              <a href="{% url 'public:journal:journal-list' %}" data-sub-nav="#publication-types" class="select main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down caret"></i></a>
             </li>
             <li>
               <a href="#" class="main-section">{% trans "À propos" %}</a>
@@ -49,6 +47,15 @@
               {% include "public/search/_search-bar.html" %}
             </li>
           {% endblock %}
+        </ul>
+      </nav>
+
+      <nav class="sub-nav" id="publication-types">
+        <ul class="unstyled menu-bar">
+          <li><a href="{% url 'public:journal:journal-list' %}" class="{% if journal_list_url in request.path %}active{% endif %}">{% trans "Revues" %}</a></li>
+          <li><a href="{% url 'public:journal:journal-list' %}" class="">{% trans "Livres & Actes" %}</a></li>
+          <li><a href="{% url 'public:journal:journal-list' %}" class="">{% trans "Thèses" %}</a></li>
+          <li><a href="{% url 'public:journal:journal-list' %}" class="">{% trans "Littérature grise" %}</a></li>
         </ul>
       </nav>
 
