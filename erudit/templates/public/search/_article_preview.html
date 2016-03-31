@@ -47,13 +47,30 @@
   <nav class="toolbox compact">
     <ul class="unstyled">
       <li>
-        <button><span class="erudicon erudicon-tools-pdf"></span><span class="tools-label">Télécharger</span></button>
+        <button id="tool-download">
+          <span class="erudicon erudicon-tools-pdf"></span>
+          <span class="tools-label">Télécharger</span>
+        </button>
       </li>
       <li>
-        <button><span class="erudicon erudicon-tools-quote"></span><span class="tools-label">Citer cette article</span></button>
+        <button id="tool-quote">
+          <span class="erudicon erudicon-tools-quote"></span>
+          <span class="tools-label">Citer cette article</span>
+        </button>
       </li>
+      <!--
       <li>
-        <button><span class="erudicon erudicon-tools-save"></span><span class="tools-label">Sauvegarder</span></button>
+        <button id="tool-save">
+          <span class="erudicon erudicon-tools-save"></span>
+          <span class="tools-label">Sauvegarder</span>
+        </button>
+      </li>
+      -->
+      <li>
+        <button id="tool-share" data-title="{{ article.erudit_object.title }}" data-share-url="{{ article.get_absolute_url }}">
+          <span class="erudicon erudicon-tools-share"></span>
+          <span class="tools-label">Partager</span>
+        </button>
       </li>
     </ul>
   </nav>

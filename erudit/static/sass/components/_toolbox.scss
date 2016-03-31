@@ -74,8 +74,15 @@
 
     li {
       height: 30px;
+
       button {
         min-width: 30px;
+        font-size: 0.65em;
+
+        .tools-label {
+          padding-left: 40px;
+        }
+
         .erudicon {
           font-size: 10px;
           left: 11px;
@@ -83,6 +90,7 @@
         .erudicon-tools-pdf { font-size: 6px; left: 7px; }
         .erudicon-tools-quote { font-size: 8px; left: 10px; }
         .erudicon-tools-save { font-size: 12px; }
+        .erudicon-tools-share { left: 10px; }
       }
     }
   }
