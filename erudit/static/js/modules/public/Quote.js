@@ -24,12 +24,12 @@ class QuoteModal {
                         <div class="panel-body quote-modal--body">\
                         	<form action="#" id="id-login-form" method="post">\
                         		<div class="form-group">\
-									<textarea name="quote" id="quote" cols="30" rows="10" resizeable="no" placeholder="Votre citation..."></textarea>\
-								</div>\
-								<div class="form-group text-center">\
-									<button type="reset" class="btn btn-default btn-lg" id="submit-id-submit" data-close-modal>Annuler</button>\
-									<button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">Envoyer</button>\
-								</div>\
+            									<textarea name="quote" id="quote" cols="30" rows="10" resizeable="no" placeholder="Votre citation..."></textarea>\
+            								</div>\
+            								<div class="form-group text-center">\
+            									<button type="reset" class="btn btn-default btn-lg" id="submit-id-submit" data-close-modal>Annuler</button>\
+            									<button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit" disabled>Envoyer</button>\
+            								</div>\
                         	</form>\
                         </div>\
                       </div>\
