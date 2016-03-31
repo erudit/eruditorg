@@ -7,8 +7,8 @@ from .models import AccountActionToken
 
 class AccountActionTokenAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'key', 'email', 'first_name', 'last_name', 'active', 'expiration_date', 'is_expired',
-        'is_consumed', )
+        'id', 'key', 'email', 'first_name', 'last_name', 'action', 'active', 'expiration_date',
+        'is_expired', 'is_consumed', )
     list_display_links = ('id', 'key', 'email', )
 
 
