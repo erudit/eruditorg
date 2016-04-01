@@ -1,7 +1,14 @@
+# -*- coding: utf-8 -*-
+
 import logging
 
 from django.core.management.base import BaseCommand
-from erudit.models.core import Author, Journal, Issue, Article
+
+from apps.public.journal.templatetags.public_journal_tags import render_article
+from erudit.models.core import Article
+from erudit.models.core import Author
+from erudit.models.core import Journal
+from erudit.models.core import Issue
 
 log = logging.getLogger(__name__)
 
@@ -10,8 +17,11 @@ class Command(BaseCommand):
 
     help = """Importissues from edinum"""
 
-    def handle(self, *args, **options):
+    def add_arguments(self, parser):
+        parser.add_argument('--test-xslt', action='store_true', dest='test_xslt', default=False)
 
+    def handle(self, *args, **options):
+        self.test_xslt = options['test_xslt']
         for journal in Journal.objects.all():
             self.import_journal(journal)
 
@@ -117,6 +127,14 @@ class Command(BaseCommand):
                 print("* Imported {}".format(
                     article.get_full_identifier()
                 ))
+
+                if self.test_xslt:
+                    # Tests the XSLT transfornation of the current article
+                    try:
+                        render_article({}, article)
+                    except Exception as e:
+                        print(
+                            "/!\ However the article XML cannot be converted to HTML: {}".format(e))
 
         except Exception as e:
             print("Cannot import {}: {}".format(
