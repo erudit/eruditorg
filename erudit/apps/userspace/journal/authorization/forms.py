@@ -4,6 +4,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
@@ -30,8 +32,14 @@ class AuthorizationForm(ModelForm):
 
         super(AuthorizationForm, self).__init__(*args, **kwargs)
 
+        # Fetches existing authorizations for the considered (journal, codename)
+        authorizations = Authorization.objects.filter(
+            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
+            authorization_codename=self.authorization_codename)
+        authorized_user_ids = list(authorizations.values_list('user_id', flat=True))
+
         # Update some fields
-        self.fields['user'].queryset = self.journal.members.all()
+        self.fields['user'].queryset = self.journal.members.filter(~Q(id__in=authorized_user_ids))
 
         # TODO: remove crispy-forms
         self.helper = FormHelper()
