@@ -240,7 +240,7 @@ TEMPLATES = [
 ]
 
 
-LOGIN_URL = '/login/'
+LOGIN_URL = 'public:auth:login'
 
 # Database configuration
 

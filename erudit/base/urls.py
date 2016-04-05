@@ -32,7 +32,6 @@ js_info_dict = {
 }
 
 urlpatterns = i18n_patterns(
-    url('^', include('django.contrib.auth.urls')),
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
 
     url(r'^grappelli/', include('grappelli.urls')),

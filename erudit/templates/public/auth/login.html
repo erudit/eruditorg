@@ -8,7 +8,7 @@
 {% block data-controller %}public:login{% endblock data-controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'login' %}">{% trans "Connexion" %}</a>
+  {{ block.super }} / <a href="{% url 'public:auth:login' %}">{% trans "Connexion" %}</a>
 {% endblock %}
 
 {% block content %}
@@ -34,7 +34,7 @@
 
           <div class="panel-body">
 
-            <form action="{% url 'login' %}" id="id-login-form" method="post">
+            <form action="{% url 'public:auth:login' %}" id="id-login-form" method="post">
 
               {% csrf_token %}
 
@@ -68,7 +68,7 @@
                 </aside>
                 <aside class="col-sm-6 text-right">
                   <p class="no-margin">
-                    <small><a href="{% url 'password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+                    <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
                   </p>
                 </aside>
               </div>
