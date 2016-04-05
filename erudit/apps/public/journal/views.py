@@ -295,6 +295,15 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     template_name = 'public/journal/citation/article.ris'
 
 
+class ArticleBibCitationView(SingleArticleMixin, DetailView):
+    """
+    Returns the bib file of a specific article.
+    """
+    content_type = 'application/x-bibtex'
+    model = Article
+    template_name = 'public/journal/citation/article.bib'
+
+
 class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
     """
     Displays a page allowing to browse the PDF file associated with an article.
