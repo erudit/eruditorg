@@ -26,6 +26,9 @@
     <meta name="citation_lastpage" content="{{ article.erudit_object.last_page }}" />
   {% endif %}
   <meta name="citation_issn" content="{{ article.erudit_object.issn }}" />
+  {% if article.issue.volume %}
+    <meta name="citation_volume" content="{{ article.issue.volume }}" />
+  {% endif %}
   {% if article.issue.number %}
     <meta name="citation_issue" content="{{ article.issue.number }}" />
   {% endif %}
