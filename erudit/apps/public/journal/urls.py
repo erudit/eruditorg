@@ -42,6 +42,12 @@ urlpatterns = [
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
           'article/(?P<localid>[\w-]+)\.enw$'),
         views.ArticleEnwCitationView.as_view(), name='article-citation-enw'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<pk>\d+)\.ris$'),
+        views.ArticleRisCitationView.as_view(), name='article-citation-ris'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<localid>[\w-]+)\.ris$'),
+        views.ArticleRisCitationView.as_view(), name='article-citation-ris'),
 
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/$'),
         views.ArticlePdfView.as_view(), name='article-pdf'),

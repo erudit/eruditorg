@@ -286,6 +286,15 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     template_name = 'public/journal/citation/article.enw'
 
 
+class ArticleRisCitationView(SingleArticleMixin, DetailView):
+    """
+    Returns the ris file of a specific article.
+    """
+    content_type = 'application/x-research-info-systems'
+    model = Article
+    template_name = 'public/journal/citation/article.ris'
+
+
 class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
     """
     Displays a page allowing to browse the PDF file associated with an article.
