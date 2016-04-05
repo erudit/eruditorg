@@ -4,6 +4,42 @@
 
 {% block data-controller %}public:journal:article-detail{% endblock data-controller %}
 
+{% block meta_tags %}
+  <meta name="citation_title" content="{{ article.title }}" />
+  {% for author in article.erudit_object.authors %}
+    {% if author.firstname and author.lastname %}
+      <meta name="citation_author" content="{{ author.lastname }}, {{ author.firstname }}" />
+    {% endif %}
+    {% for aff in author.affiliations %}
+      <meta name="citation_author_institution" content="{{ aff }}" />
+    {% endfor %}
+  {% endfor %}
+  <meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
+  {% for abstract in article.erudit_object.abstracts %}
+    <meta name="citation_abstract" lang="{{ abstract.lang }}" content="{{ abstract.content }}" />
+  {% endfor %}
+  <meta name="citation_language" content="{{ article.erudit_object.lang }}" />
+  {% if article.erudit_object.first_page %}
+    <meta name="citation_firstpage" content="{{ article.erudit_object.first_page }}" />
+  {% endif %}
+  {% if article.erudit_object.last_page %}
+    <meta name="citation_lastpage" content="{{ article.erudit_object.last_page }}" />
+  {% endif %}
+  <meta name="citation_issn" content="{{ article.erudit_object.issn }}" />
+  {% if article.issue.number %}
+    <meta name="citation_issue" content="{{ article.issue.number }}" />
+  {% endif %}
+  <meta name="citation_publication_date" content="{{ article.erudit_object.publication_year }}" />
+  <meta name="citation_date" content="{{ article.erudit_object.publication_year }}" />
+  <meta name="citation_publisher" content="{{ article.erudit_object.publisher }}" />
+  <meta name="citation_doi" content="{{ article.erudit_object.doi }}" />
+  <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article-detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
+  <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article-raw-pdf' article.localidentifier %}" />
+  {% for keywords in article.erudit_object.keywords %}
+    <meta name="citation_keywords" lang="{{ keywords.lang }}" content="{% for k in keywords.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+  {% endfor %}
+{% endblock meta_tags %}
+
 {% block body_class %}public static-header{% endblock %}
 
 {% block header_class %}static{% endblock %}
@@ -53,8 +89,8 @@
       <a href="{{ related_article.get_absolute_url }}">
         <h4>{{ related_article.title }}</h4>
         {% if related_article.authors.all|length > 0 %}
-        <footer class="meta">          
-          <h5>Par {{ related_article.authors.all|join:", " }}</h5>          
+        <footer class="meta">
+          <h5>Par {{ related_article.authors.all|join:", " }}</h5>
         </footer>
         {% endif %}
       </a>
