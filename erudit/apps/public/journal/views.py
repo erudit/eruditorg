@@ -30,6 +30,8 @@ from erudit.models import Journal
 from erudit.models import Issue
 from erudit.utils.pdf import generate_pdf
 
+from .viewmixins import SingleArticleMixin
+
 
 class JournalListView(ListView):
     """
@@ -254,19 +256,14 @@ class LatestJournalIssueArticlesRSSView(Feed):
         return ",".join([str(author) for author in obj.authors.all()])
 
 
-class ArticleDetailView(FedoraServiceRequiredMixin, ArticleAccessCheckMixin, DetailView):
+class ArticleDetailView(
+        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin, DetailView):
     """
     Displays an Article page.
     """
     context_object_name = 'article'
     model = Article
     template_name = 'public/journal/article_detail.html'
-
-    def get_object(self, queryset=None):
-        if 'pk' in self.kwargs:
-            return super(ArticleDetailView, self).get_object(queryset)
-
-        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -278,6 +275,15 @@ class ArticleDetailView(FedoraServiceRequiredMixin, ArticleAccessCheckMixin, Det
         context['related_articles'] = related_articles.order_by('?')[:4]
 
         return context
+
+
+class ArticleEnwCitationView(SingleArticleMixin, DetailView):
+    """
+    Returns the enw file of a specific article.
+    """
+    content_type = 'application/x-endnote-refer'
+    model = Article
+    template_name = 'public/journal/citation/article.enw'
 
 
 class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
