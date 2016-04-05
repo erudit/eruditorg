@@ -24,6 +24,9 @@ STATIC_ROOT = str(ROOT_DIR / 'static')
 MEDIA_ROOT = str(ROOT_DIR / 'media')
 UPLOAD_ROOT = str(ROOT_DIR / 'media' / 'uploads')
 
+# URL of the admin page
+ADMIN_URL = 'admin/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 

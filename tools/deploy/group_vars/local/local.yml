@@ -21,3 +21,5 @@ victor_password: "{{ PRIVATE_VICTOR_PASSWORD }}"
 email_host: "localhost"
 
 sentry_dsn: "{{ PRIVATE_SENTRY_DSN }}"
+
+admin_url: "{{ PRIVATE_ADMIN_URL }}"

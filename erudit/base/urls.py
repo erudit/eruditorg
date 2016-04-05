@@ -35,7 +35,7 @@ urlpatterns = i18n_patterns(
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
 
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^upload/', include('plupload.urls', namespace='plupload')),
 
     # The PDF viewer exposes a PDF.js template
