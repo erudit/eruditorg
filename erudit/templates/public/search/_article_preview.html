@@ -53,7 +53,7 @@
         </button>
       </li>
       <li>
-        <button id="tool-quote">
+        <button id="tool-quote" data-modal-id="#id_quote_modal_{{ article.id }}">
           <span class="erudicon erudicon-tools-quote"></span>
           <span class="tools-label">Citer cet article</span>
         </button>
@@ -81,5 +81,9 @@
   {# {% endif %}#}
 
   {# <p><a href="{{ article.get_absolute_url }}">{% trans "Consulter le document" %}</a></p>#}
+
+  <div class="hidden">
+    {% include "public/journal/partials/article_citation_modal_content.html" %}
+  </div>
 
 </article>

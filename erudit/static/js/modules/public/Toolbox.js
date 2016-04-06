@@ -1,4 +1,4 @@
-import QuoteModal from './Quote';
+import CiteModal from './Cite';
 import ShareModal from './Share';
 
 class Toolbox {
@@ -12,7 +12,7 @@ class Toolbox {
 
   	this.el.on('click', '#tool-download', this.download);
 
-    this.quote = new QuoteModal( this.el.find('#tool-quote') );
+    this.citation = new CiteModal( this.el.find('#tool-quote') );
     this.share = new ShareModal( this.el.find('#tool-share') );
   }
 

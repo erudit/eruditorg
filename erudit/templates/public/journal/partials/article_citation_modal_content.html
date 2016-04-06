@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<section id="id_quote_modal_{{ article.id }}" class="quote-modal">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+        <div class="panel">
+          <header class="panel-heading">
+            <h2 class="h4 panel-title text-center">{% trans "Outils de citation" %}</h2>
+          </header>
+          <div class="panel-body quote-modal--body">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <h3 class="h4">{% trans "Comment citer cet article" %}</h3>
+                <hr />
+                <h3 class="h4">{% trans "Exporter la notice de cet article" %}</h3>
+                <a href="{% url 'public:journal:article-citation-enw' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-block btn-primary quote-export">
+                  <span class="show quote-export-title">.ENW</span>
+                  <small>EndNote, Zotero</small>
+                </a>
+                <a href="{% url 'public:journal:article-citation-ris' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-block btn-primary quote-export">
+                  <span class="show quote-export-title">.RIS</span>
+                  <small>Papers, Reference Manager, RefWorks, Zotero</small>
+                </a>
+                <a href="{% url 'public:journal:article-citation-bib' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-block btn-primary quote-export">
+                  <span class="show quote-export-title">.BIB</span>
+                  <small>BibTeX, JabRef, Mendeley, Zotero</small>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
