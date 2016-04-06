@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
 import logging
+import time
 
 from django.core.cache import cache
 from django.utils import translation
@@ -57,6 +59,10 @@ class HomeView(FedoraServiceRequiredMixin, TemplateView):
                              exc_info=True, extra={'request': self.request, })
                 return []
             entries = parsed.get('entries', [])[:6]
+
+            # Converts the 'published' time struct to a datetime object
+            for item in entries:
+                item['dt_published'] = dt.datetime.fromtimestamp(time.mktime(item.published_parsed))
 
             # Stores the entries in the cache
             cache.set(entries_cache_key, entries, 60 * 60)  # 1 hour

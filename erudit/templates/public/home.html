@@ -127,7 +127,7 @@
         <p class="h5 color-red">{{ entry.category }}</p>
         <h3 class="news--article--title"><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
         <p class="summary">{{ entry.summary|safe|truncatewords_html:25 }}</p>
-        <time class="color-dark-grey" datetime="2001-05-15">{{ entry.published }}</time>
+        <time class="color-dark-grey" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
       </article>
       {% endfor %}
     </div>
