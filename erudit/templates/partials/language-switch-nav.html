@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load base_urls_tags %}
 
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
@@ -6,6 +7,6 @@
 <ul>
   {% for language in LANGUAGES %}
   {% get_language_info for language.0 as lang %}
-  <li><a href="/{{ language.0 }}/" {% if language.0 != LANGUAGE_CODE %}class="active"{% endif %}>{{ lang.name_local|title }}</a></li>
+  <li><a href="{% trans_current_url language.0 %}" {% if language.0 != LANGUAGE_CODE %}class="active"{% endif %}>{{ lang.name_local|title }}</a></li>
   {% endfor %}
 </ul>
