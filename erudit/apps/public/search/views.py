@@ -51,15 +51,14 @@ class Search(FormView):
 
         # Simple search
         basic_search_operator = data.get("basic_search_operator", None)
-        basic_search_term = data.get("basic_search_term", None)
+        basic_search_term = data.get("basic_search_term", '*')
         basic_search_field = data.get("basic_search_field", None)
 
-        if basic_search_term:
-            self.search_elements.append({
-                "search_operator": "NOT" if basic_search_operator else basic_search_operator,
-                "search_term": basic_search_term,
-                "search_field": basic_search_field,
-            })
+        self.search_elements.append({
+            "search_operator": "NOT" if basic_search_operator else basic_search_operator,
+            "search_term": basic_search_term or '*',
+            "search_field": basic_search_field,
+        })
 
         # Advanced search
         for i in range(10):
@@ -128,17 +127,11 @@ class Search(FormView):
 
     def get(self, request, *args, **kwargs):
         """We want this form to handle GET method"""
-        # If not searching for anything, then don't handle search
-        if "basic_search_term" not in request.GET:
-            return self.render_to_response(self.get_context_data())
-
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
         else:
-            return self.post(request=request, *args, **kwargs)
-            # form = self.get_form()
-            # if form.is_valid():
-            #     return self.form_valid(form)
-            # else:
-            #     return self.form_invalid(form)
+            return self.form_invalid(form)
 
     def get_form_kwargs(self):
         """We want this form to handle GET method"""
