@@ -1,0 +1,10 @@
+%0 Journal Article
+%T {{ article.title }}
+%A {% with author=article.erudit_object.authors.0 %}{% if author and author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% endif %}{% endwith %}
+%J {{ article.issue.journal.name }}
+%V {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}
+%N {% if article.issue.number %}{{ article.issue.number }}{% endif %}
+%P {% if article.erudit_object.first_page and article.erudit_object.last_page %}{{ article.erudit_object.first_page }}-{{ article.erudit_object.last_page }}{% endif %}
+%@ {{ article.erudit_object.issn }}
+%D {{ article.erudit_object.publication_year }}
+%I {{ article.erudit_object.publisher }}

@@ -116,10 +116,10 @@
 						<xsl:value-of select="admin/revue/titrerev"/>
 					</a>
 				</h4>
-				
+
 				<xsl:value-of select="admin/numero/grtheme/theme"/>
 				<xsl:apply-templates select="admin/numero" mode="refpapier"/>
-			
+
 			</hgroup>
 
 		</header>
@@ -150,7 +150,7 @@
 								<xsl:value-of select="admin/revue/titrerev"/>
 							</a>
 						</h4>
-						
+
 						<xsl:apply-templates select="admin/numero" mode="refpapier"/>
 					</hgroup>
 
@@ -237,7 +237,7 @@
 							</button>
 						</li>
 						<li>
-							<button id="tool-quote">
+							<button id="tool-quote" data-modal-id="#id_quote_modal_{{ article.id }}">
 								<span class="erudicon erudicon-tools-quote"></span>
 								<span class="tools-label">Citer cet article</span>
 							</button>
