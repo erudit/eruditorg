@@ -11,13 +11,14 @@ from core.subscription.models import JournalAccessSubscription
 from erudit.models import Journal
 
 
-class JournalCodeDetailMixin(object):
+class SingleJournalMixin(object):
     """
     Simply allows retrieving a Journal instance using its code.
     """
     def get_journal(self):
         try:
-            return Journal.objects.get(code=self.kwargs['code'])
+            return Journal.objects.get(
+                Q(code=self.kwargs['code']) | Q(localidentifier=self.kwargs['code']))
         except Journal.DoesNotExist:
             raise Http404
 
