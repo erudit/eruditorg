@@ -7,105 +7,121 @@
     <div class="row">
 
       {# newsletter #}
-      <aside class="col-sm-6">
-
+      <div class="col-sm-6">
         <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" class="newsletter-form" name="mc-embedded-subscribe-form" target="_blank">
           <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
           <fieldset class="col-sm-8">
-            <h4 class="legend">{% trans "Abonnez-vous à notre infolettre" %}</h4>
-            <div class="-input-group">
+            <label for="mce-EMAIL">{% trans "Abonnez-vous à notre infolettre" %}</label>
+            <div class="input-group">
               <div class="input-group-btn">
                 <input type="email" value="" name="EMAIL" required class="required email" id="mce-EMAIL" placeholder="{% trans "nom@courriel.com" %}">
-                <input type="submit" value="{% trans "S'inscrire" %}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-dark">
+                <input type="submit" value="{% blocktrans %}S'inscrire{% endblocktrans %}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-dark">
               </div>
             </div>
           </fieldset>
         </form>
-
-
-      </aside>
+      </div>
 
       {# nav items #}
-      <aside class="col-sm-6">
+      <div class="col-sm-6">
 
-        <nav class="child-column-fit">
+        <div class="child-column-fit">
 
-          <aside class="col-md-6">
+          <div class="col-md-6">
             <ul class="unstyled">
               <li class="disabled"><strong>{% trans "À propos" %}</strong></li>
               <li class="disabled"><strong>{% trans "Abonnements" %}</strong></li>
             </ul>
-          </aside>
+          </div>
 
-          <aside class="col-md-6">
-            <nav class="dropdown-buttons">
+          <div class="col-md-6">
+            <div class="dropdown-buttons">
               {% include "partials/language-switch-nav.html" %}
-            </nav>
-          </aside>
+            </div>
+          </div>
 
           <hr class="col-xs-12">
 
-          <aside class="col-md-6">
+          <div class="col-md-6">
             <ul class="unstyled">
-              <li><a href="{% url 'public:journal:journal-list' %}"><strong>{% trans "Publications" %}</strong></a></li>
               <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a></li>
               <li class="disabled">{% trans "Livres & actes" %}</li>
               <li class="disabled">{% trans "Thèses" %}</li>
               <li class="disabled">{% trans "Littérature grise" %}</li>
             </ul>
-          </aside>
+          </div>
 
-          <aside class="col-md-6">
+          <div class="col-md-6">
             <ul class="unstyled">
               <li class="disabled"><strong>{% trans "Aide" %}</strong></li>
               <li class="disabled"><strong>{% trans "Plan du site" %}</strong></li>
               <li><a href="#"><strong>{% trans "Nous contacter" %}</strong></a></li>
             </ul>
-          </aside>
+          </div>
 
-        </nav>
+        </div>
 
-      </aside>
+      </div>
     </div>
   </div>
 
   <div id="footer-legal">
 
-      <div class="container">
+    <div class="container">
 
-        <div class="row">
+      <div class="row">
 
-          <aside class="col-sm-6">
-            <img src="{% static 'svg/logo-erudit.svg' %}" alt="Erudit" class="inline-svg" />
-          </aside>
+        <div class="col-sm-6">
+          <img src="{% static 'svg/logo-erudit.svg' %}" alt="{% blocktrans %}Logo d'Érudit{% endblocktrans %}" class="inline-svg" />
+        </div>
 
-          <aside class="col-sm-6 child-column-fit">
+        <div class="col-sm-6 child-column-fit">
 
-            <nav class="col-sm-6">
-              <p class="no-margin">
-                {% trans "© 2016 Consortium Érudit" %}
-              </p>
-              <p class="no-margin">
-                <a href="#">{% trans "Conditions d'utilisations" %}</a>
-              </p>
-            </nav>
+          <div class="col-sm-6">
+            <p>
+              © {% now "Y" %} {% trans "Consortium Érudit" %}
+            </p>
+            <p>
+              <a href="#">{% trans "Conditions d'utilisations" %}</a>
+            </p>
+          </div>
 
-            <nav class="col-sm-6">
-              <h5 class="no-margin">{% trans "Suivez-nous" %}</h5>
-              <ul class="social-icons inline">
-                <li><a href="https://www.facebook.com/%C3%89rudit-141469165320/"><i class="ion-social-facebook"></i></a></li>
-                <li><a href="https://twitter.com/eruditorg"><i class="ion-social-twitter"></i></a></li>
-                <li><a href="https://github.com/erudit/"><i class="ion-social-github"></i></a></li>
-                <li><a href="#"><i class="ion-social-linkedin"></i></a></li>
-                <li><a href="#"><i class="ion-social-rss"></i></a></li>
-              </ul>
-            </nav>
-
-          </aside>
+          <div class="col-sm-6">
+            <h5 class="no-margin">{% trans "Suivez-nous" %}</h5>
+            <ul class="social-icons inline">
+              <li>
+                <a href="https://www.facebook.com/%C3%89rudit-141469165320/">
+                  <span class="ion-social-facebook"></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/eruditorg">
+                  <span class="ion-social-twitter"></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/erudit/">
+                  <span class="ion-social-github"></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/company/3628951">
+                  <span class="ion-social-linkedin"></span>
+                </a>
+              </li>
+              <li>
+                <a href="rss.xml">
+                  <span class="ion-social-rss"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
 
         </div>
 
       </div>
+
+    </div>
 
   </div>
 

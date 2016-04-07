@@ -65,7 +65,7 @@
 }
 
 /**
-* Drop down with buttons like elements
+* Dropdown with button-like elements
 */
 
 .dropdown-buttons {
@@ -143,7 +143,6 @@
       display: block;
       padding: ($grid-gutter-width / 4) ($grid-gutter-width/2);
       border: 2px solid $gray-mid;
-      // border-radius: 2px;
       @include fw-sans-normal();
       i.caret {
         float: right;
