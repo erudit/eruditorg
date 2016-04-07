@@ -1,0 +1,28 @@
+.share-modal {
+
+	.panel {
+		border: none;
+
+    .panel-body {
+      padding: 0;
+
+      li {
+        margin-top: 1px !important;
+
+        .btn {
+          padding: 1.5em 0.5em;
+          text-align: left;
+
+          span {
+            display: inline-block;
+            text-align: center;
+            width: 30px;
+            margin-right: 1em;
+          }
+        }
+      }
+    }
+
+	}
+
+}
