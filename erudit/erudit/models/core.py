@@ -1,4 +1,5 @@
 from datetime import datetime as dt
+from functools import reduce
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -388,7 +389,9 @@ class Journal(FedoraMixin, Named, Edinum):
     @property
     def letter_prefix(self):
         """ Return its name first letter """
-        return slugify(self.name[0]).upper()
+        replacements = ('La ', 'Le ', 'L\'', '[', ']', )
+        _name = reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name)
+        return slugify(_name[0]).upper()
 
     def get_absolute_url(self):
         return reverse_url(
