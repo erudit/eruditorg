@@ -7,8 +7,9 @@ from django.utils.encoding import force_text
 import html2text
 from post_office import mail
 
+from base.context_managers import switch_language
+
 from .conf import settings as email_settings
-from .context_managers import switch_language
 
 
 class Email(object):
