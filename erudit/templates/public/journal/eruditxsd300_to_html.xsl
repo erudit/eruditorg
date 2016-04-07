@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 	<xsl:output method="html" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="*"/>
@@ -88,8 +88,8 @@
 							<xsl:value-of select="$uriStart"/>
 							<xsl:value-of select="$iderudit"/>
 
-							<span class="clipboard-msg clipboard-success">adresse copié</span>
-							<span class="clipboard-msg clipboard-error">une erreure s'est produite</span>
+							<span class="clipboard-msg clipboard-success">{% trans "adresse copié" }</span>
+							<span class="clipboard-msg clipboard-error">{% trans "une erreure s'est produite" %}</span>
 						</a>
 					</dd>
 					<dt>DOI</dt>
@@ -97,8 +97,8 @@
 						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
 							10.7202/<xsl:value-of select="$iderudit"/>
 
-							<span class="clipboard-msg clipboard-success">adresse copié</span>
-							<span class="clipboard-msg clipboard-error">une erreure s'est produite</span>
+							<span class="clipboard-msg clipboard-success">{% trans "adresse copié" %}"</span>
+							<span class="clipboard-msg clipboard-error">{% trans "une erreure s'est produite" %}</span>
 						</a>
 					</dd>
 				</dl>
@@ -111,7 +111,7 @@
 			<hgroup class="meta-magazine col-sm-6 border-top">
 
 				<h4>
-					<xsl:apply-templates select="../article/@typeart"/> de la revue
+					{% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
 					<a class="meta-magazine--title" href="{$urlSavant}{$titreAbrege}">
 						<xsl:value-of select="admin/revue/titrerev"/>
 					</a>
@@ -145,7 +145,7 @@
 					<!-- meta magazine -->
 					<hgroup class="meta-magazine col-md-4">
 						<h4>
-							<xsl:apply-templates select="../article/@typeart"/> de la revue
+							{% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
 							<a class="meta-magazine--title bold" href="{$urlSavant}{$titreAbrege}">
 								<xsl:value-of select="admin/revue/titrerev"/>
 							</a>
@@ -169,21 +169,21 @@
 				<aside class="col-md-3 article-table-of-contents" role="contents">
 						<nav>
 							<header>
-								<h4>Plan de l’article</h4>
+								<h4>{% trans "Plan de l’article" %}</h4>
 							</header>
 							<ul class="unstyled">
 								<li class="debutArticle italic">
 									<a href="#article-content">
-										<em>Retour au début</em>
+										<em>{% trans "Retour au début" %}</em>
 									</a>
 								</li>
 								<xsl:if test="//resume">
 									<li class="border-top">
-										<a href="#resume">Résumé</a>
+										<a href="#resume">{% trans "Résumé" %}"</a>
 									</li>
 								</xsl:if>
 								<li class="border-top article-table-of-contents--body">
-									<a href="#corps">Corps</a>
+									<a href="#corps">{% trans "Corps" %}</a>
 									<ol class="unstyled">
 										<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
 									</ol>
@@ -233,13 +233,13 @@
 						<li>
 							<button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
 								<span class="erudicon erudicon-tools-pdf"></span>
-								<span class="tools-label">Télécharger</span>
+								<span class="tools-label">{% trans "Télécharger" %}</span>
 							</button>
 						</li>
 						<li>
 							<button id="tool-quote" data-modal-id="#id_quote_modal_{{ article.id }}">
 								<span class="erudicon erudicon-tools-quote"></span>
-								<span class="tools-label">Citer cet article</span>
+								<span class="tools-label">{% trans "Citer cet article" %}</span>
 							</button>
 						</li>
 						<!--
@@ -253,19 +253,19 @@
 						<li>
 							<button id="tool-share">
 								<span class="erudicon erudicon-tools-share"></span>
-								<span class="tools-label">Partager</span>
+								<span class="tools-label">{% trans "Partager" %}</span>
 							</button>
 						</li>
 						<li>
 							<button id="tool-print">
 								<span class="erudicon erudicon-tools-print"></span>
-								<span class="tools-label">Imprimer</span>
+								<span class="tools-label">{% trans "Imprimer" %}</span>
 							</button>
 						</li>
 						<li>
 							<button id="tool-fullscreen">
 								<span class="erudicon erudicon-tools-fullscreen"></span>
-								<span class="tools-label">Mode zen</span>
+								<span class="tools-label">{% trans "Mode zen" %}</span>
 							</button>
 						</li>
 					</ul>
@@ -299,14 +299,14 @@
 
 				  <xsl:if test="//tableau">
 					<article id="tableau">
-					  <h4>Liste des tableaux</h4>
+					  <h4>{% trans "Liste des tableaux" %}</h4>
 					  <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
 					</article>
 				  </xsl:if>
 
 				  <xsl:if test="//figure">
 					<article id="figure">
-					  <h4>Liste des figures</h4>
+					  <h4>{% trans "Liste des figures" %}</h4>
 					  <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
 					</article>
 				  </xsl:if>
@@ -322,7 +322,7 @@
 
 	<!--====== CORPS ======-->
 	<xsl:template match="corps">
-			<h4>Corps</h4>
+			<h4>{% trans "Corps" %}</h4>
 			<xsl:apply-templates/>
 	</xsl:template>
 
@@ -331,7 +331,7 @@
 			<xsl:if test="titre">
 				<h4 class="sub-section-title">
 					<xsl:if test="titre/@traitementparticulier">
-						<xsl:attribute name="class">special</xsl:attribute>
+						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
 				</h4>
@@ -344,7 +344,7 @@
 			<xsl:if test="titre">
 				<xsl:element name="h3">
 					<xsl:if test="titre/@traitementparticulier">
-						<xsl:attribute name="class">special</xsl:attribute>
+						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
 				</xsl:element>
@@ -357,7 +357,7 @@
 			<xsl:if test="titre">
 				<xsl:element name="h4">
 					<xsl:if test="titre/@traitementparticulier">
-						<xsl:attribute name="class">special</xsl:attribute>
+						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
 				</xsl:element>
@@ -370,7 +370,7 @@
 			<xsl:if test="titre">
 				<xsl:element name="h5">
 					<xsl:if test="titre/@traitementparticulier">
-						<xsl:attribute name="class">special</xsl:attribute>
+						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
 				</xsl:element>
@@ -383,7 +383,7 @@
 			<xsl:if test="titre">
 				<xsl:element name="h6">
 					<xsl:if test="titre/@traitementparticulier">
-						<xsl:attribute name="class">special</xsl:attribute>
+						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
 				</xsl:element>
@@ -397,7 +397,7 @@
 				<xsl:element name="h6">
 					<xsl:attribute name="class">h7</xsl:attribute>
 					<xsl:if test="titre/@traitementparticulier">
-						<xsl:attribute name="class">special</xsl:attribute>
+						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
 				</xsl:element>
@@ -516,7 +516,7 @@
 				<xsl:apply-templates select="../no"/>
 				<xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
 				<span class="voirliste">
-					(<a href="#li{../@id}">Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if></a>)
+					(<a href="#li{../@id}">{% blocktrans %}Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>)
 				</span>
 				<xsl:apply-templates select="../legende/alinea | ../legende/bloccitation | ../legende/listenonord | ../legende/listeord | ../legende/listerelation | ../legende/objetmedia | ../legende/refbiblio | ../legende/tabtexte | ../legende/verbatim"/>
 				<xsl:apply-templates select="../notefig|../notetabl"/>
@@ -1536,7 +1536,7 @@
     <xsl:element name="sup">
         <xsl:if test="@traitementparticulier = 'oui'">
             <xsl:attribute name="class">
-                <xsl:text>special</xsl:text>
+                <xsl:text>{% trans "special" %}</xsl:text>
             </xsl:attribute>
         </xsl:if>
         <xsl:call-template name="syntaxe_texte_affichage">
@@ -1548,7 +1548,7 @@
     <xsl:element name="sub">
         <xsl:if test="@traitementparticulier">
             <xsl:attribute name="class">
-                <xsl:text>special</xsl:text>
+                <xsl:text>{% trans "special" %}</xsl:text>
             </xsl:attribute>
         </xsl:if>
         <xsl:call-template name="syntaxe_texte_affichage">
@@ -1568,7 +1568,7 @@
   <xsl:element name="sup">
 	  <xsl:if test="@traitementparticulier = 'oui'">
 		  <xsl:attribute name="class">
-			  <xsl:text>special</xsl:text>
+			  <xsl:text>{% trans "special" %}</xsl:text>
 		  </xsl:attribute>
 	  </xsl:if>
 	  <xsl:call-template name="syntaxe_texte_affichage">
@@ -1580,7 +1580,7 @@
   <xsl:element name="sub">
 	  <xsl:if test="@traitementparticulier">
 		  <xsl:attribute name="class">
-			  <xsl:text>special</xsl:text>
+			  <xsl:text>{% trans "special" %}</xsl:text>
 		  </xsl:attribute>
 	  </xsl:if>
 	  <xsl:call-template name="syntaxe_texte_affichage">
@@ -1613,10 +1613,10 @@
 
 	<xsl:template match="@typeart">
 		<xsl:choose>
-			<xsl:when test="$typeudoc = 'article'">Un article</xsl:when>
-			<xsl:when test="$typeudoc = 'compterendu'">Un compte rendu</xsl:when>
-			<xsl:when test="$typeudoc = 'note'">Une note</xsl:when>
-			<xsl:otherwise>Un document</xsl:otherwise>
+			<xsl:when test="$typeudoc = 'article'">{% trans "Un article" %}</xsl:when>
+			<xsl:when test="$typeudoc = 'compterendu'">{% trans "Un compte rendu" %}</xsl:when>
+			<xsl:when test="$typeudoc = 'note'">{% trans "Une note" %}</xsl:when>
+			<xsl:otherwise>{% trans "Un document" %}</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
@@ -1676,7 +1676,7 @@
 	<xsl:template name="element_nompers_affichage">
 		<xsl:param name="nompers"/>
 		<xsl:if test="$nompers[@typenompers = 'pseudonyme']">
-			<xsl:text>alias</xsl:text>
+			<xsl:text>{% trans "alias" %}</xsl:text>
 			<xsl:text>
 			</xsl:text>
 		</xsl:if>
@@ -1746,14 +1746,14 @@
 	</xsl:template>
 	<xsl:template match="numero/volume">
 		<span class="{name()}">
-			<xsl:text>Volume&#160;</xsl:text>
+			<xsl:text{% blocktrans %}>Volume&#160;{% endblocktrans %}</xsl:text>
 			<xsl:value-of select="."/>
 		</span>
 	</xsl:template>
 	<xsl:template match="numero/nonumero[1]">
 		<!-- template for first occurence of nonumero only; this allows the display of issues like Numéro 3-4 or Numéro 1-2-3 -->
 		<span class="{name()}">
-			<xsl:text>Numéro&#160;</xsl:text>
+			<xsl:text>{% blocktrans %}Numéro&#160;{% endblocktrans %}</xsl:text>
 			<!-- check if there are nonumero siblings -->
 			<xsl:for-each select="parent::numero/nonumero">
 				<xsl:value-of select="."/>
@@ -1879,8 +1879,8 @@
 				<xsl:when test="titre">
 					<xsl:value-of select="titre"/>
 				</xsl:when>
-				<xsl:when test="count(annexe) = 1">Annexe</xsl:when>
-				<xsl:otherwise>Annexes</xsl:otherwise>
+				<xsl:when test="count(annexe) = 1">{% trans "Annexe" %}</xsl:when>
+				<xsl:otherwise>{% trans "Annexes" %}</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
 		<xsl:if test="self::grnotebio">
@@ -1888,8 +1888,8 @@
 					<xsl:when test="titre">
 						<xsl:value-of select="titre"/>
 					</xsl:when>
-					<xsl:when test="count(notebio) = 1">Note biographique</xsl:when>
-					<xsl:otherwise>Notes biographiques</xsl:otherwise>
+					<xsl:when test="count(notebio) = 1">{% trans "Note biographique" %}</xsl:when>
+					<xsl:otherwise>{% trans "Notes biographiques" %}</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
 		<xsl:if test="self::grnote">
@@ -1897,8 +1897,8 @@
 				<xsl:when test="titre">
 					<xsl:value-of select="titre"/>
 				</xsl:when>
-				<xsl:when test="count(note) = 1">Note</xsl:when>
-				<xsl:otherwise>Notes</xsl:otherwise>
+				<xsl:when test="count(note) = 1">{% trans "Note" %}</xsl:when>
+				<xsl:otherwise>{% trans "Notes" %}</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
 		<xsl:if test="self::merci">
@@ -1906,13 +1906,13 @@
 			<xsl:when test="titre">
 				<xsl:value-of select="titre"/>
 			</xsl:when>
-			<xsl:otherwise>Remerciements</xsl:otherwise>
+			<xsl:otherwise>{% trans "Remerciements" %}</xsl:otherwise>
 		</xsl:choose>
 		</xsl:if>
 		<xsl:if test="self::grbiblio">
 			<xsl:choose>
-				<xsl:when test="count(biblio) = 1">Bibliographie</xsl:when>
-				<xsl:otherwise>Bibliographies</xsl:otherwise>
+				<xsl:when test="count(biblio) = 1">{% trans "Bibliographie" %}</xsl:when>
+				<xsl:otherwise>{% trans "Bibliographies" %}</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
