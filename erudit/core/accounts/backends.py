@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.db.models import Q
 
 from .mandragore import get_user_from_mandragore
 from .mandragore import update_user_password
@@ -123,7 +124,8 @@ class AbonnementIndividuelBackend(ModelBackend):
             app_label='accounts',
             model_name='AbonnementProfile')
         try:
-            profile = Profile.objects.get(user__username=username)
+            profile = Profile.objects.get(
+                Q(user__username=username) | Q(user__email=username))
         except Profile.DoesNotExist:
             return
 
