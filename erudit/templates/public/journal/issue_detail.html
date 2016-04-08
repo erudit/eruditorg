@@ -98,7 +98,7 @@
           {% for article_group in section_articles %}
             {% for article in article_group.list %}
               {% if forloop.first and article_group.grouper %}
-                <h4>{{ article_group.grouper }}</h4>
+                <h3 class="color-red h4 section">{{ article_group.grouper }}</h3>
               {% endif %}
               <article class="issue-article">
                 <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
