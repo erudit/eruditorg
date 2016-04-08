@@ -106,7 +106,7 @@
                 {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
                     <p>{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }}-{{ last_page }}{% endblocktrans %}</p>
-                  {% elif first_page %}
+                  {% elif first_page and first_page != "0" %}
                     <p>{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}</p>
                   {% endif %}
                 {% endwith %}
