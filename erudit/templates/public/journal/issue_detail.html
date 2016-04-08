@@ -94,12 +94,24 @@
             <h3 class="border-top color-red h4">{% trans "Articles" %}</h3>
           </header>
 
-          {% for article in articles %}
-          <article class="issue-article">
-            <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
-            <p>{{ article.authors.all|join:", " }}</p>
-            <p>Pages xxx-zzz</p>
-          </article>
+          {% regroup articles by erudit_object.section_title as section_articles %}
+          {% for article_group in section_articles %}
+            {% for article in article_group.list %}
+              {% if forloop.first and article_group.grouper %}
+                <h4>{{ article_group.grouper }}</h4>
+              {% endif %}
+              <article class="issue-article">
+                <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+                <p>{{ article.authors.all|join:", " }}</p>
+                {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
+                  {% if first_page and last_page and first_page != last_page %}
+                    <p>{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }}-{{ last_page }}{% endblocktrans %}</p>
+                  {% elif first_page %}
+                    <p>{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}</p>
+                  {% endif %}
+                {% endwith %}
+              </article>
+            {% endfor %}
           {% endfor %}
 
         </section>
