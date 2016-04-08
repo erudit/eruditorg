@@ -298,7 +298,7 @@ SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    'core.accounts.backends.EmailBackend',
     'core.accounts.backends.MandragoreBackend',
     'core.accounts.backends.AbonnementIndividuelBackend',
 ]

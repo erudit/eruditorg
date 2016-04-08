@@ -1,9 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationForm
 from django.contrib.auth.forms import PasswordChangeForm as BasePasswordChangeForm
+from django.utils.translation import ugettext_lazy as _
 
 from core.accounts.models import AbonnementProfile
+
+
+class AuthenticationForm(BaseAuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(AuthenticationForm, self).__init__(*args, **kwargs)
+
+        # Updates some fields
+        self.fields['username'].label = _("Nom d'utilisateur ou adresse e-mail")
 
 
 class PasswordChangeForm(BasePasswordChangeForm):
