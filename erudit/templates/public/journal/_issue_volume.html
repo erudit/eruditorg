@@ -4,5 +4,7 @@
     {{ title }}, {% blocktrans trimmed with first_page=first_page last_page=last_page %}p. {{ first_page }}-{{ last_page }}{% endblocktrans %}
   {% elif first_page and first_page != "0" %}
     {{ title }}, {% blocktrans trimmed with page=first_page %}p. {{ page }}{% endblocktrans %}
+  {% else %}
+    {{ title }}
   {% endif %}
 {% endwith %}
