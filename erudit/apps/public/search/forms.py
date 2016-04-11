@@ -8,7 +8,7 @@ from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML
 from crispy_forms.helper import FormHelper
 
 SORT_CHOICES = (
-    ("relevance", _("Pertinance")),
+    ("relevance", _("Pertinence")),
     ("year", _("Année")),
     ("author", _("Auteur")),  # not indexed in Solr
     # ("title", _("Titre")),    # not indexed in Solr
