@@ -4,12 +4,7 @@
 {% block page-title %}{{ issue.localidentifier }}{% endblock page-title %}
 
 {% block breadcrumb %}{{ block.super }}
-/ <a href="{{ issue.get_absolute_url }}">
-  {% trans "inconnu" as i18n_unknown %}
-  {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
-    Numéro {{ number }} - {{ date }}
-  {% endblocktrans %}
-  </a>
+/ <a href="{{ issue.get_absolute_url }}">{{ issue.volume_title }}</a>
 {% endblock %}
 
 {% block content %}
@@ -84,7 +79,13 @@
       <aside class="col-sm-8 col-sm-pull-3">
 
         <header class="page-header-main">
-            <h2>{{ issue.title }}</h2>
+            <p class="journal-title">{{ issue.journal.name }}</p>
+            {% if issue.title %}
+              <h2>{{ issue.title }}</h2>
+              <p class="lead">{% include "public/journal/_issue_volume.html" %}</p>
+            {% else %}
+              <h2>{% include "public/journal/_issue_volume.html" %}</h2>
+            {% endif %}
             <h3>{% trans "Sommaire" %}</h3>
         </header>
 

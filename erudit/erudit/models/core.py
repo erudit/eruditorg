@@ -2,6 +2,7 @@ from datetime import datetime as dt
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import formats
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse as reverse_url
@@ -504,6 +505,25 @@ class Issue(FedoraMixin, models.Model):
     """ The ``Fedora`` identifier of an issue """
 
     # status { in_production, published }ull=True, blank=True,
+
+    @property
+    def volume_title(self):
+        """ Returns a title for the current issue using its volume and its number. """
+        if self.volume and self.number and self.date_published:
+            return _(
+                'Volume {volume}, numéro {number}, {publication_date}'.format(
+                    volume=self.volume, number=self.number,
+                    publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
+        elif self.volume and self.date_published:
+            return _(
+                'Volume {volume}, {publication_date}'.format(
+                    volume=self.volume,
+                    publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
+        elif self.number and self.date_published:
+            return _(
+                'Numéro {number}, {publication_date}'.format(
+                    number=self.number,
+                    publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
 
     # Fedora-related methods
     # --
