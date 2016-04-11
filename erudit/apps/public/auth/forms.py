@@ -2,11 +2,20 @@
 
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationForm
 from django.contrib.auth.forms import PasswordChangeForm as BasePasswordChangeForm
 from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
-
+from django.utils.translation import ugettext_lazy as _
 from core.accounts.models import AbonnementProfile
 from core.email import Email
+
+
+class AuthenticationForm(BaseAuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(AuthenticationForm, self).__init__(*args, **kwargs)
+
+        # Updates some fields
+        self.fields['username'].label = _("Nom d'utilisateur ou adresse e-mail")
 
 
 class PasswordChangeForm(BasePasswordChangeForm):

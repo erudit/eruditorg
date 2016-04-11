@@ -1,15 +1,53 @@
 # -*- coding: utf-8 -*-
 
 import crypt
+import logging
 import types
 
 from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.db.models import Q
 
 from .mandragore import get_user_from_mandragore
 from .mandragore import update_user_password
+
+logger = logging.getLogger(__name__)
+
+
+class EmailBackend(ModelBackend):
+    """ Allows a user to login using his e-mail address or his username.
+
+    This backend should be used instead of the builtin `django.contrib.auth.backends.ModelBackend`
+    authentication backend.
+    """
+    def _get_user(self, email_or_username):
+        UserModel = get_user_model()
+
+        # Tries to fetch the user instance using the e-mail address or the username
+        try:
+            try:
+                validate_email(email_or_username)
+                user = UserModel.objects.get(email=email_or_username.lower())
+            except UserModel.MultipleObjectsReturned:
+                logger.warning(
+                    'Unable to authenticate {} because many users have '
+                    'the same e-mail address'.format(email_or_username), exc_info=True)
+                raise UserModel.DoesNotExist
+            except ValidationError:
+                user = UserModel.objects.get(username=email_or_username)
+        except UserModel.DoesNotExist:
+            return
+
+        return user
+
+    def authenticate(self, username=None, password=None, **kwargs):
+        user = self._get_user(username)
+        if user and user.check_password(password):
+            return user
 
 
 def set_password_mandragore(self, raw_password):
@@ -86,7 +124,8 @@ class AbonnementIndividuelBackend(ModelBackend):
             app_label='accounts',
             model_name='AbonnementProfile')
         try:
-            profile = Profile.objects.get(user__username=username)
+            profile = Profile.objects.get(
+                Q(user__username=username) | Q(user__email=username))
         except Profile.DoesNotExist:
             return
 

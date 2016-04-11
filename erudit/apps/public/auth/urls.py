@@ -10,7 +10,8 @@ from . import views
 urlpatterns = [
     # Sign in / sign out
     url(_(r'^connexion/$'), 'django.contrib.auth.views.login',
-        {'template_name': 'public/auth/login.html'}, name='login'),
+        {'template_name': 'public/auth/login.html',
+         'authentication_form': forms.AuthenticationForm, }, name='login'),
     url(_(r'^deconnexion/$'), 'django.contrib.auth.views.logout',
         {'next_page': '/'}, name='logout'),
 

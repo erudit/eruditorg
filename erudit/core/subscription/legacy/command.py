@@ -6,6 +6,7 @@ import os
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from django.db import connections
+from django.db.utils import IntegrityError
 
 from core.accounts.models import AbonnementProfile
 from erudit.models import Journal
@@ -48,9 +49,20 @@ class Command(BaseCommand):
             return
 
         for old_abonne in Abonneindividus.objects.all():
-            user = User.objects.create(
-                username='abonne-{}'.format(old_abonne.abonneindividusid),
-                email=old_abonne.courriel, first_name=old_abonne.prenom, last_name=old_abonne.nom)
+            username = old_abonne.prenom[0].lower() + \
+                old_abonne.nom.lower() if len(old_abonne.prenom) else old_abonne.nom.lower()
+            try:
+                user = User.objects.create(
+                    username=username[:30],
+                    email=old_abonne.courriel,
+                    first_name=old_abonne.prenom,
+                    last_name=old_abonne.nom)
+            except IntegrityError:
+                user = User.objects.create(
+                    username='abonne-{}'.format(old_abonne.abonneindividusid),
+                    email=old_abonne.courriel,
+                    first_name=old_abonne.prenom,
+                    last_name=old_abonne.nom)
             AbonnementProfile.objects.create(
                 id=old_abonne.abonneindividusid, user=user, password=old_abonne.password)
 
