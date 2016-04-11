@@ -81,7 +81,7 @@
         <header class="page-header-main">
             <p class="journal-title">{{ issue.journal.name }}</p>
             {% if issue.title %}
-              <h2>{{ issue.title }}</h2>
+              <h2>{{ issue.erudit_object.html_theme|safe }}</h2>
               <p class="lead">{% include "public/journal/_issue_volume.html" %}</p>
             {% else %}
               <h2>{% include "public/journal/_issue_volume.html" %}</h2>
@@ -102,7 +102,7 @@
                 <h3 class="color-red h4 section">{{ article_group.grouper }}</h3>
               {% endif %}
               <article class="issue-article">
-                <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+                <h4><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h4>
                 <p>{{ article.authors.all|join:", " }}</p>
                 {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
