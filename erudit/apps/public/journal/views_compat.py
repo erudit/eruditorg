@@ -12,9 +12,10 @@ from erudit.models import Issue
 
 class IssueDetailRedirectView(RedirectView):
     pattern_name = 'public:journal:issue-detail'
-    permanent = True
+    # permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
+        print(kwargs)
         issue_qs = Issue.objects.select_related('journal').filter(
             Q(journal__code=kwargs['journal_code']) |
             Q(journal__localidentifier=kwargs['journal_code']))
@@ -23,7 +24,9 @@ class IssueDetailRedirectView(RedirectView):
                 'journal_code': kwargs['journal_code'],
                 'localidentifier': kwargs['localidentifier'], })
         elif 'journal_code' in kwargs and 'v' in kwargs and 'n' in kwargs:
-            issue = get_object_or_404(issue_qs, volume=kwargs['v'], number=kwargs['n'])
+            reverse_kwargs = {'number': kwargs['n']} if not kwargs['v'] \
+                else {'volume': kwargs['v'], 'number': kwargs['n']}
+            issue = get_object_or_404(issue_qs, **reverse_kwargs)
             return reverse(self.pattern_name, kwargs={
                 'journal_code': kwargs['journal_code'],
                 'localidentifier': issue.localidentifier, })
