@@ -62,10 +62,8 @@ class Command(BaseCommand):
             number = summary.content.node.find('.//nonumero')
             if number is not None:
                 issue.number = number.text
-            try:
-                issue.title = summary.content.node.find('.//numero//grtheme/theme').text
-            except AttributeError:
-                issue.title = None
+
+            issue.title = issue.erudit_object.theme
 
             date_produced = summary.content.node.find('.//originator')
 
@@ -102,13 +100,8 @@ class Command(BaseCommand):
                     processing=processing,
                 )
 
-                title = article_xml.find('.//liminaire//titre')
-
-                if title is not None:
-                    article.title = title.text
-                surtitle = article_xml.find('.//liminaire//surtitre')
-                if surtitle is not None:
-                    article.surtitle = surtitle.text
+                article.title = article.erudit_object.title
+                article.surtitle = article.erudit_object.section_title
 
                 article.save()
 
