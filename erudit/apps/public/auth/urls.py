@@ -3,6 +3,7 @@
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
+from . import forms
 from . import views
 
 
@@ -19,6 +20,9 @@ urlpatterns = [
     # Password reset
     url(_(r'^mot-de-passe/reset/$'), 'django.contrib.auth.views.password_reset',
         {'template_name': 'public/auth/password_reset_form.html',
+         'email_template_name': 'public/auth/emails/password_reset_email.html',
+         'subject_template_name': 'public/auth/emails/password_reset_subject.txt',
+         'password_reset_form': forms.PasswordResetForm,
          'post_reset_redirect': 'public:auth:password_reset_done', }, name='password_reset'),
     url(_(r'^mot-de-passe/reset/done/$'), 'django.contrib.auth.views.password_reset_done',
         {'template_name': 'public/auth/password_reset_done.html'}, name='password_reset_done'),

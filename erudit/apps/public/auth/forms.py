@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm as BasePasswordChangeForm
+from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 
 from core.accounts.models import AbonnementProfile
+from core.email import Email
 
 
 class PasswordChangeForm(BasePasswordChangeForm):
@@ -32,3 +35,30 @@ class PasswordChangeForm(BasePasswordChangeForm):
             abonnementprofile_qs.delete()
 
         return instance
+
+
+class PasswordResetForm(BasePasswordResetForm):
+    def get_users(self, email):
+        """
+        Overrides the  builtin `PasswordResetForm.get_users` method because it returns all the User
+        instances who have usable passwords by default. We want to allow users without passwords
+        (that have been imported from the old 'abonnement' database) to reset their passwords.
+        """
+        active_users = get_user_model()._default_manager.filter(
+            email__iexact=email, is_active=True)
+        return (u for u in active_users if u.has_usable_password() or
+                AbonnementProfile.objects.filter(user=u).exists())
+
+    def send_mail(
+            self, subject_template_name, email_template_name, context, from_email, to_email,
+            **kwargs):
+        """
+        Overrides the  builtin `PasswordResetForm.send_mail` method to use the `core.email.Email`
+        tool.
+        """
+        email = Email(
+            to_email,
+            html_template=email_template_name,
+            subject_template=subject_template_name,
+            extra_context=context)
+        email.send()
