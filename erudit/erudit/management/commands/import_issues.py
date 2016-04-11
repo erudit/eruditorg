@@ -62,7 +62,10 @@ class Command(BaseCommand):
             number = summary.content.node.find('.//nonumero')
             if number is not None:
                 issue.number = number.text
-            issue.title = summary.content.node.find('.//liminaire//titre').text
+            try:
+                issue.title = summary.content.node.find('.//numero//grtheme/theme').text
+            except AttributeError:
+                issue.title = None
 
             date_produced = summary.content.node.find('.//originator')
 
