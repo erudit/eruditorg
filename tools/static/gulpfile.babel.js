@@ -161,7 +161,14 @@ gulp.task('build-videojs-css', function() {
     .pipe(rename('videojs.css'))
     .pipe(gulp.dest(build_dir + '/css'));
 });
-gulp.task('build-videojs', ['build-videojs-js','build-pdfjs-js-map', 'build-videojs-css', ]);
+
+gulp.task('build-videojs-fonts', function() {
+  return gulp.src(bower_dir + '/video.js/dist/font/VideoJS.eot')
+    .pipe(rename('VideoJS.eot'))
+    .pipe(gulp.dest(build_dir + '/css/font'));
+});
+
+gulp.task('build-videojs', ['build-videojs-js', 'build-pdfjs-js-map', 'build-videojs-css', 'build-videojs-fonts' ]);
 
 gulp.task('build-pdfjs-css', function() {
   return gulp.src([
