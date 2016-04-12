@@ -96,7 +96,7 @@
                   {% if issue.title %}<span class="latest-issues--article--theme">{{ issue.title }}</span>{% endif %}
                   <span class="latest-issues--article--volume">
                   {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
-                    Numéro {{ number }} - {{ date }}
+                    n<sup>o</sup> {{ number }}, {{ date }}
                   {% endblocktrans %}
                   </span>
                 </a>
