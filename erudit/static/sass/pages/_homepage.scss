@@ -1,4 +1,3 @@
-
 /**
 * hide Breadcrumb on homepage
 */
@@ -64,7 +63,6 @@ body.home {
           border: none;
           &:hover {
             background-color: transparent;
-            text-decoration: underline;
           }
         }
       }
@@ -102,33 +100,38 @@ body.home {
     }
 
     .glory--search,
-    .glory--journals,
+    .glory--publication-types,
     .glory--disciplines {
       @include grid-cell-border('top', 1px, $mid-grey);
       padding-top: 25px;
       margin-bottom: 25px;
-
       @media (min-width: $screen-sm-min) {
         margin-bottom: 0;
+      }
+      h3 {
+        margin: 0 0 20px 0;
+        line-height: 1;
+        font-size: 25px;
       }
     }
 
     .glory--search {
       margin-top: 0;
-
       .form-group {
         padding-left: 0;
         padding-right: 0;
       }
-
+      label {
+        margin: 0;
+      }
       input[type="search"] {
         border-width: $border-width;
         border-right: none;
         height: 50px;
         line-height: 50px;
-        padding: 0 15px;
         box-sizing: border-box;
         font-size: 16px;
+        background-color: $white;
         @include placeholder($dark-grey);
       }
       .input-group-addon {
@@ -144,34 +147,43 @@ body.home {
         padding: 0;
         margin: 0;
         border: none;
-      }
-
-      a {
-        font-size: 16px;
-        letter-spacing: 0.3px;
-        @include fw-sans-medium();
+        background-color: $coral-red;
+        color: #FFF;
       }
     }
-    .glory--journals {
-      li {
-        margin-bottom: 20px;
-
-        &:last-child {
-          margin-bottom: 0;
+    .glory--publication-types {
+      ol {
+        counter-reset: a 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        .glory--publication-types--item {
+          counter-increment: a 1;
+          margin: 0 0 20px 0;
+          line-height: 1;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          &.disabled {
+            color: $mid-grey;
+          }
+          &:before {
+            content: counter(a, decimal-leading-zero) '. ';
+            left: 0;
+            color: $coral-red;
+            font-size: 1.75em;
+          }
+          h3 {
+            display: inline;
+          }
+          a {
+            color: #000;
+          }
         }
-
-        &.disabled {
-          color: $mid-grey;
-        }
-      }
-      span {
-        display: inline-block;
-        width: 55px;
       }
     }
     .glory--disciplines {
       margin-bottom: 0;
-
       p {
         font-size: 18px;
         line-height: 29px;
@@ -200,25 +212,23 @@ body.home {
       padding-top: 36px;
       @include grid-cell-border('top', 1px, #cccccc);
 
-      @media (min-width: $screen-sm-min) AND (max-width: $screen-sm-max) {
-        &:nth-child(3n+1) {
-          clear: both;
-        }
-      }
-      @media (min-width: $screen-md-min) {
-        &:nth-child(4n+1) {
-          clear: both;
-        }
-      }
-
       img {
         width: 100%;
         margin-bottom: 10px;
       }
 
-      .latest-issues--article--issue {
+      .latest-issues--article--journal-title {
         font-size: 18px;
-        @include fw-sans-bold();
+        @include fw-sans-medium();
+      }
+      .latest-issues--article--theme,
+      .latest-issues--article--volume {
+        font-size: 16px;
+        display: block;
+        line-height: 1.25;
+      }
+      .latest-issues--article--theme {
+        margin-bottom: 0.5em;
       }
     }
   }
@@ -226,7 +236,7 @@ body.home {
   .news {
     .news--article {
       margin-top: 20px;
-      margin-bottom: 60px;
+      margin-bottom: x60px;
       padding-top: 18px;
       @include grid-cell-border('top', 1px, #cccccc);
 
@@ -238,11 +248,15 @@ body.home {
         margin: 0 0 30px 0;
         font-size: 28px;
       }
+
+      .news--article--date {
+        font-size: small;
+      }
     }
     .news--btn {
       font-size: 16px;
-      padding: 0.5em 0;
       display: block;
+      margin-top: 25px;
 
       @media (min-width: $screen-sm-min) {
         display: inline-block;
@@ -276,8 +290,13 @@ body.home {
         width:100% !important;
         height: auto !important;
 
-        // To center Play Button, use this
-        //.vjs-big-play-button { top:0; left:0; right:0; bottom:0; margin:auto; }
+        .vjs-big-play-button {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+        }
       }
     }
   }

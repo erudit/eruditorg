@@ -19,13 +19,11 @@
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: 2px solid transparent;
   white-space: nowrap;
-
   // icon
   .icon {
     font-size: 20px;
   }
 
-  &,
   &:active,
   &.active {
     &:focus,
@@ -39,6 +37,7 @@
   &.focus {
     color: $btn-default-color;
     text-decoration: none;
+    background-image: none;
   }
 
   &:active,
@@ -79,9 +78,10 @@ a.btn {
 .btn-primary-outlined {
   @include button-variant($brand-primary, transparent, $brand-primary);
   &:hover {
-    color: $btn-primary-color;
+    color: $btn-primary-color !important;
     background-color: $btn-primary-bg;
     border-color: $btn-primary-bg;
+    background-image: none !important;
   }
 }
 .btn-dark {
