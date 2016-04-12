@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the content of the site/application.
 // -----------------------------------------------------------------------------
-#main-container {
+main.userspace {
   z-index: 5;
   padding-left: $sidenav-width;
   padding-bottom: 150px;
@@ -34,7 +34,7 @@
 }
 
 @media (max-width: 992px) {
-  main, .main {
+  main.userspace {
     padding-left: 45px;
   }
 }
