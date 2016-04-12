@@ -1,5 +1,5 @@
 /**
-* This file override or add Erudit Public pages style
+* This file overrides or adds Erudit Public pages style
 */
 
 $base-url: '/static/';
@@ -73,7 +73,7 @@ $text-color:            $gray-dark;
 //** Global textual link color.
 $link-color:            $gray-base;
 //** Link hover color
-$link-hover-color:      $upsdell-red;
+$link-hover-color:      $coral-red;
 //** Link hover decoration.
 $link-hover-decoration: underline;
 
@@ -904,13 +904,13 @@ $pre-scrollable-max-height:   340px !default;
 //** Horizontal offset for forms and lists.
 $component-offset-horizontal: 180px !default;
 //** Text muted color
-$text-muted:                  $gray-light !default;
+$text-muted:                  $dark-grey !default;
 //** Abbreviations and acronyms border color
-$abbr-border-color:           $gray-light !default;
+$abbr-border-color:           $dark-grey !default;
 //** Headings small color
-$headings-small-color:        $gray-light !default;
+$headings-small-color:        $dark-grey !default;
 //** Blockquote small color
-$blockquote-small-color:      $gray-light !default;
+$blockquote-small-color:      $dark-grey !default;
 //** Blockquote font size
 $blockquote-font-size:        ($font-size-base * 1.25) !default;
 //** Blockquote border color
