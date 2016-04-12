@@ -13,10 +13,9 @@ nav#main-nav {
     > li {
       display: inline-block;
       margin-left: 25px;
-      // position: relative;
 
       @media (min-width: $screen-lg) {
-        margin-left: 55px;
+        margin-left: 25px;
       }
 
       &:first-child {
@@ -50,19 +49,18 @@ nav#main-nav {
       }
     }
 
-
-
   }
 
   // main section nav items with drop-downs
-  a.main-section {
+  .main-section {
     display: block;
     font-size: 16px;
     line-height: 14px;
     position: relative;
     padding-right: 25px;
+    margin-bottom: 10px;
+    color: #000;
     @include fw-sans-medium();
-    color: $gray-base;
 
     &:hover,
     &:active,
@@ -72,20 +70,27 @@ nav#main-nav {
       text-decoration: none;
     }
 
-    i {
-      font-size: 16px;
-      margin-left: 22px;
+    .caret {
+      margin-left: 10px;
     }
 
   }
 
   // dropdown font size adjustement
   .dropdown {
-    font-size: 0.85em;
     > ul {
-      padding: 5px 0;
+      background-color: #FFF;
+      border: 1px solid $mid-grey;
+      li {
+        border-bottom: 1px solid $mid-grey;
+      }
       a {
-        padding: 0;
+        &:hover, &:focus, &:active {
+          background: $coral-red;
+          color: #FFF;
+          text-decoration: none;
+          @include fw-sans-medium();
+        }
       }
     }
   }
@@ -93,7 +98,7 @@ nav#main-nav {
   // Search menu item
   a.search {
     color: $gray-base;
-    i {
+    span {
       font-size: 30px;
       position: relative;
       bottom: -5px;
