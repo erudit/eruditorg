@@ -1,12 +1,4 @@
 /**
-* TODO: not sure about this, remove?
-*/
-::selection, ::-moz-selection {
-  background: #000;
-  color: #fff;
-}
-
-/**
 * Basic typography (copy of Bootstrap's type.scss)
 */
 
@@ -71,12 +63,13 @@ h5, .h5 { font-size: $font-size-h5; }
 h6, .h6 { font-size: $font-size-h6; }
 
 
-// Body text
+// Basic copy text styles
 // -------------------------
 
 p {
   font-size: $font-size-base;
   margin: 0 0 ($line-height-computed / 2);
+  line-height: 1.25;
 }
 
 .lead {
@@ -87,6 +80,35 @@ p {
 
   @media (min-width: $screen-sm-min) {
     font-size: ($font-size-base * 1.5);
+  }
+}
+
+// Custom underline style for public main content links
+.public main {
+  a {
+    &:hover, &:focus, &:active {
+      color: #000;
+      text-decoration: none;
+      background-image: linear-gradient(to top,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0) 2px,
+        #000 2px,
+        #000 3px,
+        rgba(0, 0, 0, 0) 3px);
+    }
+  }
+  p a {
+    background-image: linear-gradient(to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0) 2px,
+      $dark-grey 2px,
+      $dark-grey 3px,
+      rgba(0, 0, 0, 0) 3px);
+  }
+  .glory {
+    a {
+      color: $coral-red;
+    }
   }
 }
 
@@ -215,6 +237,12 @@ abbr[data-original-title] {
   @extend .text-uppercase;
 }
 
+.category-tag {
+  color: $coral-red;
+  font-size: small;
+  margin: 0.5em 0;
+}
+
 // Blockquotes
 blockquote {
   padding: ($line-height-computed / 2) $line-height-computed;
@@ -274,54 +302,3 @@ address {
   font-style: normal;
   line-height: $line-height-base;
 }
-
-
-/**
-* Basic typography style for copy text
-*/
-
-// body {
-//   line-height: 1.25;
-//   font-family: $font-face-body;
-//   font-smooth: always;
-//   -webkit-font-smoothing: antialiased;
-//   font-weight: 400;
-//   font-size: 18px;
-//   letter-spacing: 0.02em;
-//   color: $colour-text;
-// }
-
-// h1, h2, h3, h4 {
-//   font-weight: inherit;
-//   line-height: 1.2;
-// }
-//
-// h1 {
-//   margin-top: 0;
-//   font-size: 1.602em;
-// }
-//
-// h2 {
-//   font-size: 1.424em;
-// }
-//
-// h3 {
-//   font-size: 1.266em;
-// }
-//
-// h4 {
-//   font-size: 1.125em;
-// }
-//
-// small {
-//   font-size: 0.889em;
-// }
-//
-// a {
-//   color: $colour-primary-light;
-//   @include transition(all, 200ms, ease);
-//   &:hover, &:focus, &:active, &:active:focus {
-//     text-decoration: none;
-//     color: $colour-primary;
-//   }
-// }
