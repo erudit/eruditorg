@@ -17,6 +17,7 @@ class pymysql_connection():
             user=self.username,
             passwd=self.password,
             db=self.database,
+            charset='utf8'
         )
 
         return self.conn.cursor()
