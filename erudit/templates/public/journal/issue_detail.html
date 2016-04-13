@@ -4,12 +4,7 @@
 {% block page-title %}{{ issue.localidentifier }}{% endblock page-title %}
 
 {% block breadcrumb %}{{ block.super }}
-/ <a href="{{ issue.get_absolute_url }}">
-  {% trans "inconnu" as i18n_unknown %}
-  {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
-    Numéro {{ number }} - {{ date }}
-  {% endblocktrans %}
-  </a>
+/ <a href="{{ issue.get_absolute_url }}">{{ issue.volume_title }}</a>
 {% endblock %}
 
 {% block content %}
@@ -84,7 +79,13 @@
       <aside class="col-sm-8 col-sm-pull-3">
 
         <header class="page-header-main">
-            <h2>{{ issue.title }}</h2>
+            <p class="journal-title">{{ issue.journal.name }}</p>
+            {% if issue.title %}
+              <h2>{{ issue.erudit_object.html_theme|safe }}</h2>
+              <p class="lead">{% include "public/journal/_issue_volume.html" %}</p>
+            {% else %}
+              <h2>{% include "public/journal/_issue_volume.html" %}</h2>
+            {% endif %}
             <h3>{% trans "Sommaire" %}</h3>
         </header>
 
@@ -101,7 +102,7 @@
                 <h3 class="color-red h4 section">{{ article_group.grouper }}</h3>
               {% endif %}
               <article class="issue-article">
-                <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+                <h4><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h4>
                 <p>{{ article.authors.all|join:", " }}</p>
                 {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
