@@ -31,10 +31,6 @@ header#site-header {
     padding-bottom: 15px;
   }
 
-  .container-fluid {
-    max-width: $screen-xl;
-  }
-
   h1#brand {
     font-size: inherit;
     margin: 0;
@@ -65,5 +61,4 @@ header#site-header {
     }
 
   }
-
 }
