@@ -1,4 +1,5 @@
 from datetime import datetime as dt
+from functools import reduce
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -387,8 +388,17 @@ class Journal(FedoraMixin, Named, Edinum):
 
     @property
     def letter_prefix(self):
-        """ Return its name first letter """
-        return slugify(self.name[0]).upper()
+        """ Returns its name first letter """
+        return slugify(self.sortable_name[0]).upper()
+
+    @property
+    def sortable_name(self):
+        """ Returns its name without some characters in order to ease sort operations.
+
+        This value should not be used to display the name of the Journal instance!
+        """
+        replacements = ('La ', 'Le ', 'L\'', '[', ']', )
+        return reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name)
 
     def get_absolute_url(self):
         return reverse_url(

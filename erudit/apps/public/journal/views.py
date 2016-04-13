@@ -46,6 +46,11 @@ class JournalListView(ListView):
         self.init_get_parameters(request)
         return super(JournalListView, self).get(request, *args, **kwargs)
 
+    def get_queryset(self):
+        qs = super(JournalListView, self).get_queryset()
+        qs = sorted(qs, key=lambda j: j.sortable_name)
+        return qs
+
     def init_get_parameters(self, request):
         """ Initializes GET parameters. """
         # default sorting is by name
