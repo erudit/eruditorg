@@ -59,12 +59,13 @@ body.home {
         box-sizing: border-box;
         font-size: 16px;
         background-color: $white;
+        @include border-radius(0);
         @include placeholder($dark-grey);
       }
       .input-group-addon {
         padding: 0;
         border: none;
-        border-radius: 0;
+        @include border-radius(0);
       }
       .btn {
         font-size: 1.5em;

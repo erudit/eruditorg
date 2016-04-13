@@ -48,7 +48,7 @@ section#article-detail {
     font-size: 40px;
     color: $dark-grey;
     transform: translate(0, -50%);
-    border-radius: 50%;
+    @include border-radius(50%);
     width: 50px;
     height: 50px;
     line-height: 58px;
