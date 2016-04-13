@@ -44,6 +44,7 @@
       .caret {
         display: inline-block;
         @include rotate(180deg);
+        @include backface-visibility(hidden);
       }
     }
     > ul {
