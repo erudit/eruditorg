@@ -14,14 +14,14 @@ from erudit.factories import OrganisationFactory
 from erudit.tests import BaseEruditTestCase
 
 from ..viewmixins import ArticleAccessCheckMixin
-from ..viewmixins import JournalCodeDetailMixin
+from ..viewmixins import SingleJournalMixin
 
 
-class TestJournalCodeDetailMixin(BaseEruditTestCase):
+class TestSingleJournalMixin(BaseEruditTestCase):
     def test_can_return_a_journal_based_on_its_code(self):
         # Setup
         code = self.journal.code
-        mixin = JournalCodeDetailMixin()
+        mixin = SingleJournalMixin()
         mixin.kwargs = {'code': code}
         # Run & check
         self.assertEqual(mixin.get_object(), self.journal)
@@ -29,7 +29,7 @@ class TestJournalCodeDetailMixin(BaseEruditTestCase):
     def test_returns_http_404_if_the_journal_does_not_exist(self):
         # Setup
         code = self.journal.code
-        mixin = JournalCodeDetailMixin()
+        mixin = SingleJournalMixin()
         mixin.kwargs = {'code': code + 'dummy'}
         # Run & check
         with self.assertRaises(Http404):

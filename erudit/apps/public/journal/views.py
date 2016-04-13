@@ -3,6 +3,7 @@
 from collections import OrderedDict
 from string import ascii_lowercase
 
+from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
@@ -18,7 +19,7 @@ import datetime
 
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
-from core.journal.viewmixins import JournalCodeDetailMixin
+from core.journal.viewmixins import SingleJournalMixin
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
@@ -60,7 +61,7 @@ class JournalListView(ListView):
         return context
 
 
-class JournalDetailView(FedoraServiceRequiredMixin, JournalCodeDetailMixin, DetailView):
+class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailView):
     """
     Displays a journal.
     """
@@ -86,7 +87,7 @@ class JournalDetailView(FedoraServiceRequiredMixin, JournalCodeDetailMixin, Deta
         return context
 
 
-class JournalAuthorsListView(JournalCodeDetailMixin, ListView):
+class JournalAuthorsListView(SingleJournalMixin, ListView):
     """
     Displays a list of authors associated with a specific journal.
     """
@@ -151,7 +152,7 @@ class JournalAuthorsListView(JournalCodeDetailMixin, ListView):
         return context
 
 
-class JournalRawLogoView(JournalCodeDetailMixin, FedoraFileDatastreamView):
+class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
     """
@@ -231,7 +232,8 @@ class LatestJournalIssueArticlesRSSView(Feed):
     def get_object(self, request, journal_code=None):
         """Get journal's latest issue"""
         try:
-            return Journal.objects.get(code=journal_code).last_issue
+            return Journal.objects.get(
+                Q(code=journal_code) | Q(localidentifier=journal_code)).last_issue
         except:
             return None
 
