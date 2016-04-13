@@ -35,7 +35,7 @@ class TestRenderArticleTemplateTag(BaseEruditTestCase):
         ret = render_article(Context({}), article)
         # Check
         self.assertTrue(ret is not None)
-        self.assertTrue(ret.startswith('<div class="article-wrapper">'))
+        self.assertTrue(ret.startswith('<div xmlns:v="variables-node" class="article-wrapper">'))
 
 
 class TestAuthorArticlesFilter(BaseEruditTestCase):
