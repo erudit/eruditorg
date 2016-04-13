@@ -1,5 +1,5 @@
 const siteHeader   = "header#site-header";
-const minTopScroll = 300;
+const minTopScroll = 200;
 
 class Nav {
 
@@ -66,12 +66,7 @@ class Nav {
 
       // focus to field when visible
       if (!visible) $(searchInput).focus();
-    }
-
-    // hide search bar when focus out
-    $(searchInput).on('blur', function(event) {
-      toggleSearch();
-    });
+    };
 
     // elements trigger
     $(searchBarTrigger).on('click', function(event) {
