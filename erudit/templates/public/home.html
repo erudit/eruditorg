@@ -15,105 +15,103 @@
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 <div id="homepage-content">
+  <h1 class="hidden">Érudit</h1>
 
-  <!-- STICKY NAVIGATION -->
-  <!--
-  <nav class="container-fluid text-center homepage--sticky-nav">
-    <ul class="unstyled">
-      {% if latest_issues %}
-      <li><a href="#latest-issues">{% trans "Derniers numéros" %}</a></li>
-      {% endif %}
-      <li><a href="#disciplines">{% trans "Disciplines" %}</a></li>
-      <li><a href="#news">{% trans "Nouvelles" %}</a></li>
-      <li><a href="#about-erudit">{% trans "À propos" %}</a></li>
-      <li><a href="#publications">{% trans "Publications" %}</a></li>
-    </ul>
-  </nav>
-  -->
-
-  <div class="glory">
+  <section class="glory">
     <div class="container">
       <div class="row">
         <header class="col-xs-12 col-md-10 col-lg-8 glory--header">
-          <h2 class="h2 glory--header--title">{% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}</h2>
+          <h2 class="glory--header--title">{% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}</h2>
         </header>
       </div>
       <div class="row">
         <!-- BASIC SEARCH -->
-        <div class="col-xs-12 col-sm-4 col-md-4 glory--search">
+        <div class="col-xs-12 col-sm-4 glory--search">
           <form action="{% url 'public:search:search' %}" id="id-search" method="get">
             <div class="form-group">
+              <label for="basic-search"><h3>Recherche</h3></label>
               <div class="input-group">
-                <input name="basic_search_term" type="search" class="form-control" placeholder="{% trans "Rechercher par auteur, mots-clés&hellip;" %}">
-                <div class="input-group-addon"><button type="submit" class="btn btn-warning"><span class="ion ion-ios-search"></span></div></button>
+                <input name="basic_search_term" id="basic-search" type="search" class="form-control" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}">
+                <div class="input-group-addon"><button type="submit" class="btn"><span class="ion ion-ios-search-strong"></span></div></button>
               </div>
             </div>
-            <div class="form-group">
-              <a href="{% url 'public:search:search' %}" class="color-red">{% trans "Recherche avancée" %}</a>
-            </div>
+            <a href="{% url 'public:search:search' %}">{% trans "Recherche avancée" %}</a>
           </form>
         </div>
-        <!-- CATEGORIES -->
-        <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-1 glory--journals">
-          <ol class="h3 list-unstyled">
-            <li><span class="color-red">01.</span><a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a></li>
-            <li class="disabled"><span class="color-red">02.</span>{% trans "Thèses" %}</li>
-            <li class="disabled"><span class="color-red">03.</span>{% trans "Livres et actes" %}</li>
-            <li class="disabled"><span class="color-red">04.</span>{% trans "Littérature grise" %}</li>
+        <!-- PUBLICATION TYPES -->
+        <div class="col-xs-12 col-sm-4 glory--publication-types">
+          <ol>
+            <li class="glory--publication-types--item">
+              <h3><a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a></h3>
+            </li>
+            <li class="glory--publication-types--item disabled">
+              <h3><a href="#">{% trans "Thèses" %}</a></h3>
+            </li>
+            <li class="glory--publication-types--item disabled">
+              <h3><a href="#">{% trans "Livres et actes" %}</a></h3>
+            </li>
+            <li class="glory--publication-types--item disabled">
+              <h3><a href="#">{% trans "Littérature grise" %}</a></h3>
+            </li>
           </ol>
         </div>
         <!-- DISCIPLINES -->
-        <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-1 glory--disciplines">
-          <h3 class="h3">{{ disciplines|length }} {% trans "disciplines" %}</h3>
-          <p>{{ disciplines|slice:":5"|join:", "|lower }}&hellip;</p>
-          <p><a href="{% url 'public:journal:journal-list' %}" class="color-red text-lowercase">{% trans "Voir toutes les disciplines" %}</a></p>
+        <div class="col-xs-12 col-sm-4 glory--disciplines">
+          <h3>{{ disciplines|length }} {% trans "disciplines" %}</h3>
+          <p>{{ disciplines|slice:":10"|join:", "|lower }}&hellip;</p>
+          <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines">{% trans "Voir toutes les disciplines" %}</a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
 
   <!-- LATEST ISSUES -->
   {% if latest_issues %}
-  <div class="container">
+  <section class="container">
     <hr class="section-separator">
     <div class="row">
       <div class="col-xs-12">
-        <h2 class="h2">{% trans "Derniers numéros" %}</h2>
+        <h2>{% trans "Derniers numéros" %}</h2>
       </div>
     </div>
     <div class="row latest-issues">
       {% for issue in latest_issues %}
-      <article class="col-xs-12 col-sm-4 col-md-3 latest-issues--article">
-        <a href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+      <article class="col-xs-12 col-sm-6 col-md-3 latest-issues--article">
           <div class="row">
-            <div class="col-xs-8">
-              <p class="h5 color-red">{{ issue.journal.disciplines.all|join:", " }}</p>
-              <h3 class="h4 latest-issues--article--issue">{{ issue.journal.name }}</h3>
+            <div class="col-xs-4 col-sm-6">
+              <a href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+                <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive">
+              </a>
             </div>
-            <div class="col-xs-4">
-              <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive">
-            </div>
-            <div class="col-xs-12">
-              <p class="latest-issues--article--title">{{ issue.title }}</p>
-              <p class="latest-issues--article--details">
-              {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
-                Numéro {{ number }} - {{ date }}
-              {% endblocktrans %}
-              </p>
+            <div class="col-xs-8 col-sm-12">
+              <p class="category-tag">{{ issue.journal.disciplines.all|join:", " }}</p>
+              <h3 class="latest-issues--article--journal-title">
+                <a href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+                  {{ issue.journal.name }}
+                </a>
+              </h3>
+              <h4>
+                <a href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
+                  {% if issue.title %}<span class="latest-issues--article--theme">{{ issue.title }}</span>{% endif %}
+                  <span class="latest-issues--article--volume">
+                  {% blocktrans trimmed with number=issue.erudit_object.number|default:i18n_unknown date=issue.date_published|date:"F Y" %}
+                    n<sup>o</sup> {{ number }}, {{ date }}
+                  {% endblocktrans %}
+                  </span>
+                </a>
+              </h4>
             </div>
           </div>
-        </a>
       </article>
       {% endfor %}
     </div>
-  </div>
+  </section>
   {% endif %}
 
 
-
   <!-- NEWS -->
-  <div class="container news">
+  <section class="container news">
     <hr class="section-separator">
     <div class="row">
       <div class="col-xs-12">
@@ -124,10 +122,10 @@
     <div class="row">
       {% for entry in latest_news %}
       <article class="col-sm-4 news--article">
-        <p class="h5 color-red">{{ entry.category }}</p>
-        <h3 class="news--article--title"><a href="{{ entry.link }}">{{ entry.title }}</a></h3>
-        <p class="summary">{{ entry.summary|safe|truncatewords_html:25 }}</p>
-        <time class="color-dark-grey" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
+        <p class="category-tag">{{ entry.category }}</p>
+        <h3 class="news--article--title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
+        <p class="summary">{{ entry.summary|safe|truncatewords_html:20 }}</p>
+        <time class="news--article--date text-muted" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
       </article>
       {% endfor %}
     </div>
@@ -137,20 +135,19 @@
         <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn btn-primary-outlined news--btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
       </div>
     </div>
-  </div>
-
+  </section>
 
 
   <!-- ABOUT ERUDIT.ORG -->
-  <div class="container">
+  <section class="container">
     <hr class="section-separator">
     <div class="row about-erudit">
       <div class="col-xs-12">
         <div class="row">
-          <div class="col-sm-4 col-md-3"><h1 class="about-erudit--logo">erudit.<br>org</h1></div>
+          <div class="col-sm-4 col-md-3"><h2 class="about-erudit--logo">erudit.<br>org</h2></div>
           <div class="col-sm-4 col-md-3">
             <p class="about-erudit--definition">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales: revues, livres et actes, thèses, littérature grise." %}</p>
-            <p><a href="http://apropos.erudit.org" class="color-dark-grey">{% trans "En savoir plus" %}</a></p>
+            <p><a href="http://apropos.erudit.org" target="_blank" class="text-muted">{% trans "En savoir plus" %}</a></p>
           </div>
           <div class="col-sm-4 col-md-6">
             <div class="about-erudit--video-container">
@@ -168,7 +165,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
 </div>
 {% endblock content %}

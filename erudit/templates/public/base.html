@@ -32,7 +32,7 @@
               <a href="{% url 'public:journal:journal-list' %}" data-sub-nav="#publication-types" class="select main-section">{% trans "Publications" %} <i class="ion-ios-arrow-down caret"></i></a>
             </li>
             <li>
-              <a href="#" class="main-section">{% trans "À propos" %}</a>
+              <a href="https://apropos.erudit.org/" target="_blank" class="main-section">{% trans "À propos" %}</a>
             </li>
             {% if request.user.is_anonymous %}
             <li>
@@ -92,7 +92,9 @@
     </div>
   </div>
 </div>
+<main role="main">
 {% block content %}{% endblock content %}
+</main>
 {% endblock body %}
 
 {% block footer %}
