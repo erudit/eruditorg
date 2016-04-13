@@ -15,7 +15,7 @@
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 <div id="homepage-content">
-  <h1 class="hidden">Érudit</h1>
+  <h1 class="hidden">{% trans "Accueil d’Érudit" %}</h1>
 
   <section class="glory">
     <div class="container">
@@ -81,7 +81,7 @@
           <div class="row">
             <div class="col-xs-4 col-sm-6">
               <a href="{% url 'public:journal:issue-detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
-                <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive">
+                <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive latest-issues--article--cover">
               </a>
             </div>
             <div class="col-xs-8 col-sm-12">
@@ -162,6 +162,29 @@
               </video>
             </div>
           </div>
+        </div>
+
+        <div class="row">
+          <article class="col-xs-6 col-md-3 about-erudit--article">
+            <h3 class="about-erudit--article--title">{% trans "Bibliothécaires" %}</h3>
+            <p>{% blocktrans %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktrans %}</p>
+            <p><a href="https://apropos.erudit.org/fr/bibliotheques/" target="_blank" class="text-muted">{% trans "Abonnez-vous" %}</a></p>
+          </article>
+          <article class="col-xs-6 col-md-3 about-erudit--article">
+            <h3 class="about-erudit--article--title">{% trans "Éditeurs" %}</h3>
+            <p>{% blocktrans %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktrans %}</p>
+            <p><a href="https://apropos.erudit.org/fr/editeurs/" target="_blank" class="text-muted">{% trans "Publiez avec nous" %}</a></p>
+          </article>
+          <article class="col-xs-6 col-md-3 about-erudit--article">
+            <h3 class="about-erudit--article--title">{% trans "Chercheurs" %}</h3>
+            <p>{% blocktrans %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktrans %}</p>
+            <p><a href="https://apropos.erudit.org/fr/chercheurs/" target="_blank" class="text-muted">{% trans "Explorez nos données" %}</a></p>
+          </article>
+          <article class="col-xs-6 col-md-3 about-erudit--article">
+            <h3 class="about-erudit--article--title">{% trans "Utilisateurs" %}</h3>
+            <p>{% blocktrans %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktrans %}</p>
+            <p><a href="https://apropos.erudit.org/fr/usagers/" target="_blank" class="text-muted">{% trans "Repérez des articles" %}</a></p>
+          </article>
         </div>
       </div>
     </div>

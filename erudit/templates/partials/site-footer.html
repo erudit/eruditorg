@@ -28,9 +28,9 @@
         <div class="child-column-fit">
 
           <div class="col-md-6">
-            <ul class="unstyled">
-              <li class="disabled"><strong>{% trans "À propos" %}</strong></li>
-              <li class="disabled"><strong>{% trans "Abonnements" %}</strong></li>
+            <ul class="unstyled footer-nav--about">
+              <li><a href="https://apropos.erudit.org/" target="_blank">{% trans "À propos" %}</a></li>
+              <li class="disabled">{% trans "Abonnements" %}</li>
             </ul>
           </div>
 
@@ -43,7 +43,7 @@
           <hr class="col-xs-12">
 
           <div class="col-md-6">
-            <ul class="unstyled">
+            <ul class="unstyled footer-nav--publication-types">
               <li><a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a></li>
               <li class="disabled">{% trans "Livres & actes" %}</li>
               <li class="disabled">{% trans "Thèses" %}</li>
@@ -52,10 +52,10 @@
           </div>
 
           <div class="col-md-6">
-            <ul class="unstyled">
-              <li class="disabled"><strong>{% trans "Aide" %}</strong></li>
-              <li class="disabled"><strong>{% trans "Plan du site" %}</strong></li>
-              <li><a href="#"><strong>{% trans "Nous contacter" %}</strong></a></li>
+            <ul class="unstyled footer-nav--help">
+              <li class="disabled">{% trans "Aide" %}</li>
+              <li class="disabled">{% trans "Plan du site" %}</li>
+              <li><a href="mailto:info@erudit.org?subject=Érudit">{% trans "Nous contacter" %}</a></li>
             </ul>
           </div>
 
@@ -87,7 +87,7 @@
           </div>
 
           <div class="col-sm-6">
-            <h5 class="no-margin">{% trans "Suivez-nous" %}</h5>
+            <p>{% trans "Suivez-nous" %}</p>
             <ul class="social-icons inline">
               <li>
                 <a href="https://www.facebook.com/%C3%89rudit-141469165320/">

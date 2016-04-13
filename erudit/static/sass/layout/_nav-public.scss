@@ -13,10 +13,9 @@ nav#main-nav {
     > li {
       display: inline-block;
       margin-left: 25px;
-      // position: relative;
 
       @media (min-width: $screen-lg) {
-        margin-left: 55px;
+        margin-left: 20px;
       }
 
       &:first-child {
@@ -25,7 +24,7 @@ nav#main-nav {
 
       // active section, add border at bottom
       &.active {
-        > a:after {
+        > .select:after {
           content: "";
           display: block;
           width: 100%;
@@ -50,19 +49,18 @@ nav#main-nav {
       }
     }
 
-
-
   }
 
   // main section nav items with drop-downs
-  a.main-section {
+  .main-section {
     display: block;
     font-size: 16px;
     line-height: 14px;
     position: relative;
     padding-right: 25px;
+    margin-bottom: 10px;
+    color: #000;
     @include fw-sans-medium();
-    color: $gray-base;
 
     &:hover,
     &:active,
@@ -72,28 +70,35 @@ nav#main-nav {
       text-decoration: none;
     }
 
-    i {
-      font-size: 16px;
-      margin-left: 22px;
+    .caret {
+      margin-left: 10px;
     }
 
   }
 
-  // dropdown font size adjustement
   .dropdown {
-    font-size: 0.85em;
     > ul {
-      padding: 5px 0;
+      background-color: #FFF;
+      border: 1px solid $mid-grey;
+      li {
+        border-bottom: 1px solid $mid-grey;
+      }
       a {
-        padding: 0;
+        &:hover, &:focus, &:active {
+          background: $coral-red;
+          color: #FFF;
+          text-decoration: none;
+          text-indent: 0.25em;
+          @include transition(text-indent 0.2s ease-out);
+          @include fw-sans-medium();
+        }
       }
     }
   }
 
   // Search menu item
-  a.search {
-    color: $gray-base;
-    i {
+  .search {
+    span {
       font-size: 30px;
       position: relative;
       bottom: -5px;
@@ -141,7 +146,7 @@ nav#main-nav {
         width: 70%;
       }
 
-      button.btn.btn-primary-outlined {
+      .btn.btn-primary-outlined {
         border-color: #fff;
         color: #fff;
         line-height: inherit;
@@ -149,7 +154,7 @@ nav#main-nav {
         margin-left: -2px;
       }
 
-      a.close {
+      .close {
         cursor: pointer;
         position: absolute;
         display: block;
@@ -158,6 +163,10 @@ nav#main-nav {
         color: #fff;
         font-size: 30px;
         z-index: 1;
+      }
+
+      .input-group-btn {
+        text-align: center;
       }
 
     }

@@ -46,7 +46,7 @@ section#search-page {
   select {
     -webkit-appearance: none;
     outline: none;
-    border-radius: 0;
+    @include border-radius(0);
     border: 1px solid $gray-base;
     padding: 12px;
     height: auto;

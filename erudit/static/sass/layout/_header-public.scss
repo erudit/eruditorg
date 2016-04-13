@@ -14,11 +14,10 @@ body.fixed-header {
 header#site-header {
   padding: 40px ($grid-gutter-width * 2);
   position: relative;
-  border-bottom: 1px solid lighten($gray-light, 25%);
-  @include transition(all 250ms);
+  border-bottom: 1px solid $mid-grey;
+  @include transition(all 0.15s);
   background-color: #fff;
 
-  // fixed
   &.fixed {
     position: fixed;
     width: 100%;
@@ -27,31 +26,27 @@ header#site-header {
     z-index: $zindex-navbar;
   }
 
-  // compact
   &.compact {
     padding-top: 15px;
     padding-bottom: 15px;
   }
 
-  // container width
-  .container-fluid {
-    max-width: $screen-xl;
-  }
-
   h1#brand {
     font-size: inherit;
     margin: 0;
+    top: -10px;
     img,
     svg {
-      height: $erudit-logo-height;
+      height: $erudit-logo-height + 10px;
+      padding-top: 10px;
       path, circle {
         @include transition(fill 250ms);
       }
     }
   }
 
-  a {
-    @include transition(all 250ms);
+  .caret {
+    margin-left: 10px;
   }
 
   &.inverted {
@@ -67,6 +62,59 @@ header#site-header {
       }
     }
 
+  }
+
+  #brand {
+    &:hover {
+      path {
+        @include animation(logo-dance 0.4s ease alternate infinite);
+        &:nth-child(1) {
+          @include animation-delay(0.05s);
+        }
+        &:nth-child(2) {
+          @include animation-delay(0.1s);
+        }
+        &:nth-child(3) {
+          @include animation-delay(0.15s);
+        }
+        &:nth-child(4) {
+          @include animation-delay(0.2s);
+        }
+        &:nth-child(5) {
+          @include animation-delay(0.25s);
+        }
+        &:nth-child(6) {
+          @include animation-delay(0.3s);
+        }
+        &:nth-child(7) {
+          @include animation-delay(0.35s);
+        }
+        &:nth-child(8) {
+          @include animation-delay(0.4s);
+        }
+      }
+    }
+    path {
+      @include animation(logo-stand 0.4s ease alternate infinite);
+    }
+  }
+
+  @include keyframes(logo-stand) {
+    0% {
+      @include translate(0, 0);
+    }
+    100% {
+      @include translate(0, 0);
+    }
+  }
+
+  @include keyframes(logo-dance) {
+    0% {
+      @include translate(0, 0px);
+    }
+    100% {
+      @include translate(0, -10px);
+    }
   }
 
 }

@@ -10,79 +10,6 @@ body.home {
 /**
 * Home main container
 */
-#homepage-header {
-  padding-top: 30px;
-  min-height: 200px;
-  background: #c90722 image('homepage-header.jpg') no-repeat scroll center center;
-  background-size: auto 100%;
-
-  > .row, .container {
-    height: 100%;
-    position: relative;
-  }
-
-  #homepage-top-nav {
-    @include fw-sans-medium();
-    color: #fff;
-
-    a {
-      color: #fff;
-    }
-
-    li {
-      display: inline-block;
-      padding: 0 $grid-gutter-width;
-
-      &:first-child {
-        padding-left: 0;
-      }
-      &:last-child {
-        padding-right: 0;
-      }
-    }
-
-    .dropdown {
-      > a.select {
-        border: none;
-        padding: 0;
-        background: none;
-
-        i {
-          margin-left: $grid-gutter-width / 2;
-        }
-      }
-      > ul {
-        background-color: transparent;
-
-        li {
-          padding: 0 0 0 $grid-gutter-width !important;
-        }
-
-        a {
-          padding: 3px 0 2px 0;
-          border: none;
-          &:hover {
-            background-color: transparent;
-          }
-        }
-      }
-
-      &:hover {
-        > a {
-          background-color: transparent;
-          color: #fff;
-        }
-      }
-    }
-  }
-
-  .headline {
-    position: absolute;
-    padding-bottom: 30px;
-    bottom: 0;
-  }
-}
-
 
 #homepage-content {
 
@@ -132,12 +59,13 @@ body.home {
         box-sizing: border-box;
         font-size: 16px;
         background-color: $white;
+        @include border-radius(0);
         @include placeholder($dark-grey);
       }
       .input-group-addon {
         padding: 0;
         border: none;
-        border-radius: 0;
+        @include border-radius(0);
       }
       .btn {
         font-size: 1.5em;
@@ -210,13 +138,16 @@ body.home {
       margin-top: 20px;
       margin-bottom: 40px;
       padding-top: 36px;
-      @include grid-cell-border('top', 1px, #cccccc);
+      @include grid-cell-border('top', 1px, $mid-grey);
 
       img {
         width: 100%;
         margin-bottom: 10px;
       }
-
+      .latest-issues--article--cover {
+        max-height: 160px;
+        width: auto;
+      }
       .latest-issues--article--journal-title {
         font-size: 18px;
         @include fw-sans-medium();
@@ -290,7 +221,7 @@ body.home {
       padding-bottom: percentage(9/16);
 
       .video-js {
-        width:100% !important;
+        width: 100% !important;
         height: auto !important;
 
         .vjs-big-play-button {
@@ -301,6 +232,16 @@ body.home {
           margin: auto;
         }
       }
+    }
+    .about-erudit--article {
+      margin-top: 35px;
+      padding-top: 20px;
+      @include grid-cell-border('top', 1px, #cccccc);
+    }
+    .about-erudit--article--title {
+      @include fw-sans-bold;
+      font-size: 1.5em;
+      color: $coral-red;
     }
   }
 

@@ -5,16 +5,11 @@
 .dropdown {
   position: relative;
 
-  a {
-    @include transition(all 250ms);
-    cursor: pointer;
-  }
-
-  > a.select {
+  > .select {
     display: block;
-    i.caret {
-      float: right;
-      margin-left: $grid-gutter-width;
+    cursor: pointer;
+    .caret {
+      @include transition(transform 0.3s ease-in);
     }
   }
 
@@ -27,37 +22,34 @@
     z-index: $zindex-dropdown;
     list-style: none;
     margin: 0;
-    text-align: left !important;
+    text-align: left;
 
     li {
       margin: 0;
-      padding: 0 12px 0 0;
-      display: block !important;
+      display: block;
     }
 
     a {
-      padding: 10px 0;
+      padding: 0.5em;
       display: block;
       width: 100%;
-      &:hover {
-      }
+      @include transition(text-indent 0.2s ease-in);
     }
   }
 
-  &:hover {
-    > a {
-      // background-color: $gray-base;
+  &:hover, &:focus, &:active, &:focus:active {
+    > .select {
       color: #fff;
       text-decoration: none;
       .caret {
         display: inline-block;
         @include rotate(180deg);
-        margin-top: -5px;
+        @include backface-visibility(hidden);
       }
     }
     > ul {
       display: block;
-      width: 100%;
+      width: auto;
     }
   }
 
@@ -70,18 +62,14 @@
 .dropdown-buttons {
   position: relative;
 
-  a {
-    @include transition(all 250ms);
+  > .select {
     cursor: pointer;
-  }
-
-  > a.select {
     display: block;
     padding: ($grid-gutter-width / 2) ($grid-gutter-width);
     border: 1px solid $gray-base;
     @include fw-sans-bold();
     background-color: #fff;
-    i.caret {
+    .caret {
       float: right;
     }
   }
@@ -123,7 +111,7 @@
       color: #fff !important;
       text-decoration: none;
       border-color: $gray-base !important;
-      i {
+      span {
         @include rotate(180deg);
         margin-top: -5px;
       }
