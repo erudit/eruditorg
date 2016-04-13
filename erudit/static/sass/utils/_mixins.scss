@@ -42,10 +42,10 @@
 
 
 /**
-* App specitif Mixins
+* App-specific Mixins
 */
 
-// remove any style from a list
+// Remove list styles
 @mixin list-unstyled() {
   margin: 0;
   padding: 0;
@@ -56,7 +56,7 @@
   }
 }
 
-// vertical centered
+// Vertical centering
 @mixin vertical-centered($position: relative) {
   position: $position;
   top: 50%;
@@ -72,6 +72,21 @@
   @include translate(-50%,-50%);
 }
 
+// Keyframe animations
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
 
 /// Border-radius vendor prefixes
 @mixin border-radius($radius) {
