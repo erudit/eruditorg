@@ -76,7 +76,6 @@ nav#main-nav {
 
   }
 
-  // dropdown font size adjustement
   .dropdown {
     > ul {
       background-color: #FFF;
@@ -98,8 +97,7 @@ nav#main-nav {
   }
 
   // Search menu item
-  a.search {
-    color: $gray-base;
+  .search {
     span {
       font-size: 30px;
       position: relative;
@@ -148,7 +146,7 @@ nav#main-nav {
         width: 70%;
       }
 
-      button.btn.btn-primary-outlined {
+      .btn.btn-primary-outlined {
         border-color: #fff;
         color: #fff;
         line-height: inherit;
@@ -156,7 +154,7 @@ nav#main-nav {
         margin-left: -2px;
       }
 
-      a.close {
+      .close {
         cursor: pointer;
         position: absolute;
         display: block;
@@ -165,6 +163,10 @@ nav#main-nav {
         color: #fff;
         font-size: 30px;
         z-index: 1;
+      }
+
+      .input-group-btn {
+        text-align: center;
       }
 
     }
