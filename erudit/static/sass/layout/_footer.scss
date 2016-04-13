@@ -14,6 +14,10 @@ footer#erudit-subscription-type {
 footer#site-footer {
   margin-top: $margin-vertical-default;
 
+  hr {
+    border-color: $mid-grey;
+  }
+
   /**
   * Newsletter
   */
@@ -48,6 +52,11 @@ footer#site-footer {
       }
     }
 
+    .footer-nav--about,
+    .footer-nav--help {
+      @include fw-sans-medium();
+    }
+
   }
 
   /**
@@ -64,10 +73,6 @@ footer#site-footer {
       path, circle {
         fill: #fff;
       }
-    }
-
-    p {
-      margin-bottom: 0;
     }
 
     a {
