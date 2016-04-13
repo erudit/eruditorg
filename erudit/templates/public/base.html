@@ -45,8 +45,28 @@
                 </li>
               </ul>
             </li>
-            <li>
-              <a href="https://apropos.erudit.org/" target="_blank" class="main-section">{% trans "À propos" %}</a>
+            <li class="dropdown">
+              <a href="https://apropos.erudit.org/" target="_blank" class="select main-section">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
+              <ul>
+                <li>
+                  <a href="https://apropos.erudit.org/bibliotheques" target="_blank">{% trans "Bibliothèques" %}</a>
+                </li>
+                <li>
+                  <a href="https://apropos.erudit.org/editeurs" target="_blank">{% trans "Éditeurs" %}</a>
+                </li>
+                <li>
+                  <a href="https://apropos.erudit.org/chercheurs" target="_blank">{% trans "Chercheurs" %}</a>
+                </li>
+                <li>
+                  <a href="https://apropos.erudit.org/usagers" target="_blank">{% trans "Utilisateurs" %}</a>
+                </li>
+                <li>
+                  <a href="https://apropos.erudit.org/collections" target="_blank">{% trans "Collections" %}</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              {% include "partials/language-switch-nav.html" %}
             </li>
             {% if request.user.is_anonymous %}
             <li>
@@ -56,14 +76,17 @@
             </li>
             {% else %}
             <li class="dropdown">
-              <a href="#" class="main-section">
-                {% trans "Mon compte" %}
-              </a>
+              <div class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></div>
+              <ul>
+                <li>
+                  <a href="{% url 'userspace:dashboard' %}">{% trans "Espace privé" %}</a>
+                </li>
+                <li>
+                  <a href="{% url 'public:auth:logout' %}?next=/">{% trans "Déconnexion" %}</a>
+                </li>
+              </ul>
             </li>
             {% endif %}
-            <li class="dropdown">
-              {% include "partials/language-switch-nav.html" %}
-            </li>
             <li>
               <a href="#" data-trigger-search-bar class="search"><span class="ion-ios-search-strong"></span></a>
             </li>

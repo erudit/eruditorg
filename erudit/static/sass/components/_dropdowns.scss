@@ -8,6 +8,9 @@
   > .select {
     display: block;
     cursor: pointer;
+    .caret {
+      @include transition(transform 0.3s ease-in);
+    }
   }
 
   > ul {
@@ -30,24 +33,22 @@
       padding: 0.5em;
       display: block;
       width: 100%;
-      &:hover {
-      }
+      @include transition(text-indent 0.2s ease-in);
     }
   }
 
   &:hover, &:focus, &:active, &:focus:active {
-    > a {
+    > .select {
       color: #fff;
       text-decoration: none;
       .caret {
         display: inline-block;
         @include rotate(180deg);
-        margin-top: -5px;
       }
     }
     > ul {
       display: block;
-      width: 100%;
+      width: auto;
     }
   }
 

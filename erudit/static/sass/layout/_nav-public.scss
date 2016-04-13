@@ -15,7 +15,7 @@ nav#main-nav {
       margin-left: 25px;
 
       @media (min-width: $screen-lg) {
-        margin-left: 25px;
+        margin-left: 20px;
       }
 
       &:first-child {
@@ -24,7 +24,7 @@ nav#main-nav {
 
       // active section, add border at bottom
       &.active {
-        > a:after {
+        > .select:after {
           content: "";
           display: block;
           width: 100%;
@@ -89,6 +89,8 @@ nav#main-nav {
           background: $coral-red;
           color: #FFF;
           text-decoration: none;
+          text-indent: 0.25em;
+          @include transition(text-indent 0.2s ease-out);
           @include fw-sans-medium();
         }
       }
