@@ -9,13 +9,15 @@ from erudit.models import Publisher, Journal
 from erudit.utils.pymysql import pymysql_connection
 
 EDINUM_SQL_QUERY = """
-SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, sp.shortname, li.code, t.Subtitle
+SELECT c.PersonID, ap.Name, cs.SeriesID, t.id as journal_id, t.name, sp.shortname, li.code, coll.id as collId, t.Subtitle
 FROM edinum.contributionseries cs
 JOIN title t ON cs.SeriesID = t.SeriesID
 JOIN contribution c ON cs.ContributionID = c.ID
 JOIN artificialperson ap ON c.PersonID = ap.PersonID
 JOIN seriesproduction sp ON t.SeriesId = sp.SeriesID
 JOIN localidentifier li ON sp.LocalIdentifierId = li.id
+JOIN series s on cs.SeriesID = s.ID
+JOIN collection coll on coll.ID = s.CollectionID
 WHERE ContributiontypeID = '3'; """  # noqa
 
 log = logging.getLogger(__name__)
@@ -30,6 +32,7 @@ def fetch_publishers_from_edinum():
         user=edinum['USER'],
         passwd=edinum['PASSWORD'],
         db=edinum['NAME'],
+        charset='utf8'
     )
 
     cur = conn.cursor()
@@ -38,7 +41,7 @@ def fetch_publishers_from_edinum():
 
 
 def fetch_collections_from_edinum():
-    COLLECTIONS_QUERY = "SELECT id, Name from Collection;"
+    COLLECTIONS_QUERY = "SELECT id, Name from collection;"
     edinum = settings.EXTERNAL_DATABASES['edinum']
     with pymysql_connection(
         host=edinum['HOST'],
