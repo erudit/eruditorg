@@ -65,9 +65,6 @@
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
-              {% include "partials/language-switch-nav.html" %}
-            </li>
             {% if request.user.is_anonymous %}
             <li>
               <a href="{% url 'public:auth:login' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal">
