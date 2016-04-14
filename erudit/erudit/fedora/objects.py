@@ -17,8 +17,9 @@ class JournalDigitalObject(models.DigitalObject):
     CONTENT_MODELS = [MODEL_PID_PREFIX + 'seriesCModel', ]
     publications = models.XmlDatastream('PUBLICATIONS', 'Publications', XmlObject)
     name = models.Relation(oains.setName)
-    logo = models.FileDatastream(
-        'LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
+    logo = models.FileDatastream('LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
+    oaiset_info = models.XmlDatastream('OAISET_INFO', 'OAISET Info', XmlObject)
+    publications = models.XmlDatastream('PUBLICATIONS', 'Publications', XmlObject)
 
     @property
     def xml_content(self):
