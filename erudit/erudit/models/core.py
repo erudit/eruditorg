@@ -48,6 +48,28 @@ class Named(models.Model):
         abstract = True
 
 
+class FedoraDated(models.Model):
+    """ Provides a creation date and an update date for Fedora-related models.
+
+    Note that these fields do not used the auto_now_add/auto_now attributes. So these values should
+    be set manually.
+    """
+    fedora_created = models.DateTimeField(
+        verbose_name=_('Date de création sur Fedora'),
+        blank=True,
+        null=True
+    )
+
+    fedora_updated = models.DateTimeField(
+        verbose_name=_('Date de modification sur Fedora'),
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        abstract = True
+
+
 class Person(models.Model):
     """Personne"""
 
@@ -189,7 +211,7 @@ class Discipline(models.Model):
         return self.name
 
 
-class Journal(FedoraMixin, Named, models.Model):
+class Journal(FedoraMixin, Named, FedoraDated):
     """Revue"""
 
     collection = models.ForeignKey(
@@ -326,7 +348,7 @@ class Journal(FedoraMixin, Named, models.Model):
     def get_full_identifier(self):
         return "{}:{}.{}".format(
             fedora_settings.PIDSPACE,
-            self.collection.code,
+            self.collection.localidentifier,
             self.localidentifier
         )
 
@@ -426,7 +448,7 @@ class JournalType(models.Model):
         ordering = ['name', ]
 
 
-class Issue(FedoraMixin, models.Model):
+class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal"""
 
     # identification
@@ -554,7 +576,7 @@ class EruditDocument(models.Model):
         verbose_name_plural = _("Documents Érudit")
 
 
-class Article(EruditDocument, FedoraMixin):
+class Article(EruditDocument, FedoraMixin, FedoraDated):
 
     # An article can have many authors
     authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
