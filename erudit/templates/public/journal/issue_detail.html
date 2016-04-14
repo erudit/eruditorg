@@ -1,5 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
-{% load i18n staticfiles %}
+{% load i18n %}
+{% load staticfiles %}
+{% load public_journal_tags %}
 
 {% block page-title %}{{ issue.localidentifier }}{% endblock page-title %}
 
@@ -97,7 +99,7 @@
 
           {% regroup articles by erudit_object.section_title as section_articles %}
           {% for article_group in section_articles %}
-            {% for article in article_group.list %}
+            {% for article in article_group.list|sort_by_ordseq %}
               {% if forloop.first and article_group.grouper %}
                 <h3 class="color-red h4 section">{{ article_group.grouper }}</h3>
               {% endif %}
