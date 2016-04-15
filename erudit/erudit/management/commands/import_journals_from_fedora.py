@@ -27,6 +27,18 @@ logger = logging.getLogger(__file__)
 
 
 class Command(BaseCommand):
+    """ Imports journal objects from a Fedora Commons repository.
+
+    The command is able to import a journal object - including its issues and its articles - from
+    a Fedora Commons repository. To do so, the command assumes that some journal collections
+    (:py:class`Collection <erudit.models.core.Collection>` instances) are already created in the
+    database.
+
+    By default the command will try to import the journal objects that have been modified since the
+    latest journal modification date stored in the database. If no journals can be found in the
+    database, the command will perform a full import.
+    """
+
     help = 'Import journals from Fedora'
 
     def add_arguments(self, parser):
