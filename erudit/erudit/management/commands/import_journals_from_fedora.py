@@ -9,6 +9,8 @@ from eruditarticle.utils import remove_xml_namespaces
 from eulfedora.util import RequestFailed
 import lxml.etree as et
 
+from apps.public.journal.templatetags.public_journal_tags import render_article
+
 from ...conf import settings as erudit_settings
 from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
@@ -33,10 +35,15 @@ class Command(BaseCommand):
             help='Perform a full import.')
 
         parser.add_argument(
+            '--test-xslt', action='store_true', dest='test_xslt', default=False,
+            help='Test the XSLT transformation of articles')
+
+        parser.add_argument(
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
+        self.test_xslt = options.get('test_xslt', False)
         self.journal_pid = options.get('journal_pid', None)
 
         # Import a journal PID manually
@@ -296,6 +303,18 @@ class Command(BaseCommand):
             author.save()
 
             article.authors.add(author)
+
+        # STEP 4: eventually test the XSLT transformation of the article
+        # --
+
+        if self.test_xslt:
+            try:
+                render_article({}, article)
+            except Exception as e:
+                msg = 'The article with PID "{}" cannot be rendered using XSLT: e'.format(
+                    article_pid, e)
+                self.stdout.write(self.style.ERROR('      ' + msg))
+                logger.error(msg, exc_info=True)
 
     def _get_journal_pids_to_import(self, query):
         """ Returns the PIDS corresponding to a given Fedora query. """
