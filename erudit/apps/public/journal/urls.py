@@ -38,6 +38,13 @@ urlpatterns = [
         views.ArticleDetailView.as_view(), name='article-detail'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<articlepk>\d+)/media/(?P<localidentifier>[.\w-]+)$'),
+        views.ArticleMediaView.as_view(), name='article-media'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<articleid>[\w-]+)/media/(?P<localidentifier>[.\w-]+)$'),
+        views.ArticleMediaView.as_view(), name='article-media'),
+
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
           'article/(?P<pk>\d+)\.enw$'),
         views.ArticleEnwCitationView.as_view(), name='article-citation-enw'),
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'

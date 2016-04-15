@@ -9,8 +9,6 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.test.utils import override_settings
 
-from apps.public.journal.views import ArticleDetailView
-from apps.public.journal.views import ArticleRawPdfView
 from erudit.factories import ArticleFactory
 from erudit.factories import AuthorFactory
 from erudit.factories import CollectionFactory
@@ -18,7 +16,12 @@ from erudit.factories import IssueFactory
 from erudit.factories import JournalFactory
 from erudit.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
+from erudit.fedora.objects import MediaDigitalObject
 from erudit.tests import BaseEruditTestCase
+
+from ..views import ArticleDetailView
+from ..views import ArticleMediaView
+from ..views import ArticleRawPdfView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -278,3 +281,32 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 404)
+
+
+class TestArticleMediaView(BaseEruditTestCase):
+    def setUp(self):
+        super(TestArticleMediaView, self).setUp()
+        self.factory = RequestFactory()
+
+    @unittest.mock.patch.object(MediaDigitalObject, 'content')
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_content):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), 'rb') as f:
+            mock_content.content = io.BytesIO()
+            mock_content.content.write(f.read())
+        mock_content.mimetype = 'image/png'
+
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue)
+        issue_id = issue.localidentifier
+        article_id = article.localidentifier
+        request = self.factory.get('/')
+
+        # Run
+        response = ArticleMediaView.as_view()(
+            request, journal_code=self.journal.code, issue_localid=issue_id, articleid=article_id,
+            localidentifier='test')
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'image/png')

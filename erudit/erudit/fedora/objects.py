@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from collections import OrderedDict
+
+import lxml.etree as et
+
 from eulfedora import models
 from eulfedora.rdfns import oai as oains
 from eulxml.xmlmap import XmlObject
@@ -50,6 +54,7 @@ class ArticleDigitalObject(models.DigitalObject):
     CONTENT_MODELS = [MODEL_PID_PREFIX + 'unitCModel', ]
     erudit_xsd201 = models.XmlDatastream('ERUDITXSD201', 'Erudit XSD201', XmlObject)
     erudit_xsd300 = models.XmlDatastream('ERUDITXSD300', 'Erudit XSD300', XmlObject)
+    infoimg = models.XmlDatastream('INFOIMG', 'INFOIMG', XmlObject)
     unit = models.XmlDatastream('UNIT', 'Unit', XmlObject)
     pdf = models.FileDatastream('PDF', 'PDF', defaults={'mimetype': 'application/pdf', })
 
@@ -84,3 +89,24 @@ class ArticleDigitalObject(models.DigitalObject):
             return self.erudit_xsd300.content.serialize()
         elif 'ERUDITXSD201' in self.ds_list:
             return self.erudit_xsd201.content.serialize()
+
+    @property
+    def infoimg_dict(self):
+        """ Returns the content of the INFOIMG datastream as a dictionary. """
+        infoimg_tree = et.fromstring(self.infoimg.content.serialize())
+        infoimg_dict = OrderedDict()
+        for im_tree in infoimg_tree.findall('im'):
+            infoimg_dict.update({
+                im_tree.get('id'): {
+                    'src': im_tree.find('src//nomImg').text,
+                    'plgr': im_tree.find('imPlGr//nomImg').text,
+                },
+            })
+        return infoimg_dict
+
+
+class MediaDigitalObject(models.DigitalObject):
+    """ Fedora object of a media file. """
+
+    CONTENT_MODELS = [MODEL_PID_PREFIX + 'mediaCModel', ]
+    content = models.FileDatastream('CONTENT', 'CONTENT')

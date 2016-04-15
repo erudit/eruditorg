@@ -83,7 +83,7 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         Writes the content of the fedora object's datastream to an HttpResponse object
         and return it.
         """
-        response = self.get_response_object()
+        response = self.get_response_object(fedora_object)
         try:
             content = self.get_datastream_content(fedora_object)
         except RequestFailed:  # pragma: no cover
@@ -101,20 +101,29 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         self.write_datastream_content(response, content)
         return response
 
-    def get_response_object(self):
+    def get_response_object(self, fedora_object):
         """
         Returns the HttpResponse object that will contain the content of datastream.
 
+        This method can be overriden in order to add extra headers if applicable.
+        """
+        content_type = self.get_content_type(fedora_object)
+        response = HttpResponse(content_type=content_type)
+        return response
+
+    def get_content_type(self, fedora_object):
+        """
+        Returns the content type that will be used to return the content of the file.
+
         By default this requires `self.content_type` to be specified but
-        subclasses can override this to change this. This method can also be overriden
+        subclasses can override this method to change this. This method can also be overriden
         in order to add extra headers if applicable.
         """
         if self.content_type is None:
             raise ImproperlyConfigured(
                 '{cls} is missing a content type. '
                 'Define {cls}.content_type.'.format(cls=self.__class__.__name__))
-        response = HttpResponse(content_type=self.content_type)
-        return response
+        return self.content_type
 
     def get_datastream_content(self, fedora_object):
         """

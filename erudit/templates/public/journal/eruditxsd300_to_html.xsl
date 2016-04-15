@@ -1,5 +1,5 @@
 {% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:v="variables-node">
 	<xsl:output method="html" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="*"/>
 
@@ -27,6 +27,14 @@
 	<xsl:variable name="doiStart">http://dx.doi.org/</xsl:variable>
 	<xsl:variable name="urlSavant">http://erudit.org/revue/</xsl:variable>
 	<xsl:variable name="urlCulturel">http://erudit.org/culture/</xsl:variable>
+
+	<v:variables>
+		{% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
+		<v:variable n="src-{{ imid }}" value="{{ infoimg.src }}" />
+		<v:variable n="plgr-{{ imid }}" value="{{ infoimg.plgr }}" />
+		{% endfor %}
+	</v:variables>
+	<xsl:variable name="vars" select="document('')//v:variables/v:variable" />
 
 	<!--=========== RESULT-DOCUMENT ===========-->
 	<!-- Savante, culturelle, ... -->
@@ -504,10 +512,12 @@
 		</figure>
 	</xsl:template>
 	<xsl:template match="figure/objetmedia|tableau/objetmedia">
-		<xsl:variable name="imgId" select="image/@id"/>
-		<xsl:variable name="nomImg" select="$infoimg/infoDoc/im[@id=$imgId]/imPlGr/nomImg"/>
+		<xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
+		<xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
+		<xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
+		<xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
 		<figure class="{name(..)}">
-			<img src="../images/{$nomImg}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
+			<img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
 			<figcaption>
 				<a id="{../@id}">
 					<xsl:text>
@@ -515,6 +525,9 @@
 				</a>
 				<xsl:apply-templates select="../no"/>
 				<xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
+				<span class="voirimage">
+					(<a href="{{ request.get_full_path }}media/{$imgPlGr}" target="_blank">{% blocktrans %}Image pleine grandeur{% endblocktrans %}</a>)
+				</span>
 				<span class="voirliste">
 					(<a href="#li{../@id}">{% blocktrans %}Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>)
 				</span>
@@ -590,7 +603,7 @@
 	<xsl:template match="objetmedia/image">
 		<xsl:variable name="nomImg" select="@*[local-name()='href']"/>
 		<span class="lien_img">
-			<img src="../images/{$nomImg}" class="objetmedia_img"/>
+			<img src="{{ request.get_full_path }}media/{$nomImg}" class="objetmedia_img"/>
 		</span>
 	</xsl:template>
 	<xsl:template match="objetmedia/texte">
@@ -1482,12 +1495,11 @@
 
 <!--=== LISTE TAB / LISTE FIG ===-->
 <xsl:template match="tableau/objetmedia | figure/objetmedia" mode="liste">
-    <xsl:variable name="imgId" select="image/@id"/>
-    <xsl:variable name="nomImg" select="$infoimg/infoDoc/im[@id=$imgId]/imPlGr/nomImg"/>
-    <xsl:variable name="imgwidth" select="$infoimg/infoDoc/im[@id=$imgId]/imPlGr/dimx"/>
+	<xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
+	<xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
     <xsl:for-each select=".">
         <figure class="{name(..)}" id="li{../@id}">
-            <img src="../images/{$nomImg}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
+            <img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
             <figcaption class="notitre">
                 <xsl:apply-templates select="../no" mode="liste"/>
                 <xsl:apply-templates select="../legende/titre" mode="liste"/>

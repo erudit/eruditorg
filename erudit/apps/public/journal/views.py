@@ -22,6 +22,7 @@ from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import SingleJournalMixin
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
+from erudit.fedora.objects import MediaDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Discipline
@@ -337,8 +338,8 @@ class ArticleRawPdfView(FedoraFileDatastreamView):
         article = get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
         return article.pid
 
-    def get_response_object(self):
-        response = super(ArticleRawPdfView, self).get_response_object()
+    def get_response_object(self, fedora_object):
+        response = super(ArticleRawPdfView, self).get_response_object(fedora_object)
         response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
             self.kwargs['articleid'])
         return response
@@ -361,3 +362,19 @@ class ArticleRawPdfView(FedoraFileDatastreamView):
         merger.append(content)
         merger.write(response)
         merger.close()
+
+
+class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
+    """
+    Returns an image file embedded in the INFOIMG datastream.
+    """
+    datastream_name = 'content'
+    fedora_object_class = MediaDigitalObject
+
+    def get_fedora_object_pid(self):
+        article = get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        issue_pid = article.issue.pid
+        return '{0}.{1}'.format(issue_pid, self.kwargs['localidentifier'])
+
+    def get_content_type(self, fedora_object):
+        return fedora_object.content.mimetype
