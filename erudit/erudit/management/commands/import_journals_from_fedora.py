@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import re
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -27,15 +28,37 @@ class Command(BaseCommand):
     help = 'Import journals from Fedora'
 
     def add_arguments(self, parser):
-        # Positional arguments
-
-        # Named (optional) arguments
         parser.add_argument(
             '--full', action='store_true', dest='full', default=False,
-            help='Perform a full import')
+            help='Perform a full import.')
+
+        parser.add_argument(
+            '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
+        self.journal_pid = options.get('journal_pid', None)
+
+        # Import a journal PID manually
+        if self.journal_pid:
+            self.stdout.write(self.style.MIGRATE_HEADING(
+                'Start importing journal with PID: {0}'.format(self.journal_pid)))
+
+            if not re.match(r'^\w+\:\w+\.\w+$', self.journal_pid):
+                self.stdout.write(self.style.ERROR(
+                    '  "{0}" is not a valid journal PID!'.format(self.journal_pid)))
+                return
+
+            collection_localidentifier = self.journal_pid.split(':')[1].split('.')[0]
+            try:
+                collection = Collection.objects.get(localidentifier=collection_localidentifier)
+            except Collection.DoesNotExist:
+                self.stdout.write(self.style.ERROR(
+                    'The "{0}" collection is not available.'.format(collection_localidentifier)))
+                return
+
+            self.import_journal(self.journal_pid, collection)
+            return
 
         # Imports each collection
         for collection_code in erudit_settings.FEDORA_COLLECTIONS:
@@ -50,8 +73,8 @@ class Command(BaseCommand):
 
     def import_collection(self, collection):
         """ Imports all the journals of a specific collection. """
-        self.stdout.write(
-            self.style.MIGRATE_HEADING('Start importing "{}" collection'.format(collection.code)))
+        self.stdout.write(self.style.MIGRATE_HEADING(
+            'Start importing "{}" collection'.format(collection.code)))
 
         latest_update_date = None
         if not self.full_import:
@@ -67,9 +90,8 @@ class Command(BaseCommand):
             collectionid=collection.localidentifier)
         if self.full_import or latest_update_date is None:
             if not self.full_import:
-                self.stdout.write(
-                    self.style.WARNING(
-                        '  No journals found... proceed to full import!'.format(collection.code)))
+                self.stdout.write(self.style.WARNING(
+                    '  No journals found... proceed to full import!'.format(collection.code)))
             journal_pids = self._get_journal_pids_to_import(base_fedora_query)
         else:
             # Fetches the PIDs of all the journals that have been update since the latest
@@ -84,16 +106,14 @@ class Command(BaseCommand):
             try:
                 self.import_journal(jpid, collection)
             except Exception as e:
-                self.stdout.write(
-                    self.style.ERROR(
-                        '    Unable to import the journal with PID "{0}": {1}'.format(jpid, e)))
+                self.stdout.write(self.style.ERROR(
+                    '    Unable to import the journal with PID "{0}": {1}'.format(jpid, e)))
 
     @transaction.atomic
     def import_journal(self, journal_pid, collection):
         """ Imports a journal using its PID. """
-        self.stdout.write(
-            self.style.MIGRATE_LABEL(
-                '    Start importing journal with PID: {0}'.format(journal_pid)))
+        self.stdout.write(self.style.MIGRATE_LABEL(
+            '    Start importing journal with PID: {0}'.format(journal_pid)))
 
         # STEP 1: fetches the full Journal fedora object
         # --
