@@ -71,7 +71,8 @@ class Command(BaseCommand):
         else:
             # Fetches the PIDs of all the journals that have been update since the latest
             # modification date.
-            pass
+            journal_pids = self._get_journal_pids_to_import(
+                base_fedora_query + ' mdate>{}'.format(latest_update_date.date().isoformat()))
 
         # STEP 2: import each journal using its PID
         # --
@@ -114,6 +115,7 @@ class Command(BaseCommand):
             journal = Journal()
             journal.localidentifier = journal_localidentifier
             journal.collection = collection
+            journal.fedora_created = fedora_journal.created
 
         oaiset_info_tree = remove_xml_namespaces(
             et.fromstring(fedora_journal.oaiset_info.content.serialize()))
@@ -127,6 +129,8 @@ class Command(BaseCommand):
         journal.code = xml_issue.get('revAbr') if xml_issue is not None else None
 
         journal_created = journal.id is None
+
+        journal.fedora_updated = fedora_journal.modified
         journal.save()
 
         # Associates the publisher to the Journal instance
@@ -175,6 +179,7 @@ class Command(BaseCommand):
             issue = Issue()
             issue.localidentifier = issue_localidentifier
             issue.journal = journal
+            issue.fedora_created = fedora_issue.created
 
         # Set the proper values on the Issue instance
         issue.year = issue.erudit_object.publication_year
@@ -185,6 +190,7 @@ class Command(BaseCommand):
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
 
+        issue.fedora_updated = fedora_issue.modified
         issue.save()
 
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
