@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static i18n %}
 {% load staticfiles %}
+{% load userspace_tags %}
 
 {% block stylesheets %}
 {% if not WEBPACK_DEV_SERVER_URL %}
@@ -75,8 +76,13 @@
             <li class="dropdown">
               <div class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></div>
               <ul>
+                {% if request.user|can_access_userspace %}
                 <li>
                   <a href="{% url 'userspace:dashboard' %}">{% trans "Espace privé" %}</a>
+                </li>
+                {% endif %}
+                <li>
+                  <a href="#">{% trans "Mon profil" %}</a>
                 </li>
                 <li>
                   <a href="{% url 'public:auth:logout' %}?next=/">{% trans "Déconnexion" %}</a>
