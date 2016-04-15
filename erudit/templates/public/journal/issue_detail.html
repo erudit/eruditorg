@@ -13,7 +13,7 @@
 
 {% trans "inconnu" as i18n_unknown %}
 
-<section id="issue-detail">
+<div id="issue-detail">
 
   <div class="container">
     <div class="row">
@@ -23,13 +23,15 @@
 
         <div class="sidebar-block clearfix issue-detail--resume">
 
-          <figure class="col-xs-6 col-xs-offset-3 no-padding">
-            <a href="{{ journal.get_absolute_url }}"><img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{{ issue.title }}" /></a>
-          </figure>
+          <div class="col-xs-6 no-padding">
+            <a href="{{ journal.get_absolute_url }}">
+              <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{{ issue.erudit_object.html_theme|safe }} {% trans 'de' %} {{ journal.name }}" />
+            </a>
+          </div>
 
           <header class="col-xs-12 no-padding no-margin">
-            <h5 class="mono-space gray-lighter">{% trans "De la revue" %}</h5>
-            <h2 class="h4 border-bottom no-margin"><a href="{{ journal.get_absolute_url }}">{{ journal.name }}</a></h2>
+            <div class="mono-space">{% trans "De la revue" %}</div>
+            <h2 class="h4 no-margin"><a href="{{ journal.get_absolute_url }}">{{ journal.name }}</a></h2>
           </header>
 
         </div>
@@ -37,7 +39,9 @@
         {# journal meta infos #}
         <div class="sidebar-block journal-meta">
 
-          <ul class="meta-blocks list-unstyled">
+          <h4 class="border-bottom">{% trans "Fiche" %}</h4>
+
+          <ul class="journal-meta list-unstyled">
 
             {% if journal.members.all %}
             <li>
@@ -67,18 +71,80 @@
             <li>
               <h5 class="mono-space">{% trans "ISSN" %}</h5>
               {% if journal.issn_print %}
-              <p>{{ journal.issn_print }} ({% trans "imprimé" %})</p>
-              <p>{{ journal.issn_web }} ({% trans "numérique" %})</p>
+              <p><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</p>
+              <p><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</p>
               {% endif %}
             </li>
             {% endif %}
 
+            {% if journal.issues_per_year %}
+            <li>
+              <h5 class="mono-space">{% trans "Fréquence" %}</h5>
+              <p>
+                {% blocktrans count issues_per_year=journal.issues_per_year %}
+                {{ issues_per_year }} numéro par année
+                {% plural %}
+                {{ issues_per_year }} numéros par année
+                {% endblocktrans %}
+              </p>
+            </li>
+            {% endif %}
+
+            <li>
+              <h5 class="mono-space">{% trans "Période de publication" %}</h5>
+              <p>{{ journal.erudit_object.publication_period }}</p>
+            </li>
+
+            {% if journal.first_issue %}
+            <li>
+              <h5 class="mono-space">{% trans "Disponible dans Érudit depuis" %}</h5>
+              <p>{{ journal.first_issue.date_published|date:"Y" }}</p>
+            </li>
+            {% endif %}
+
+            <li>
+              <h5 class="mono-space">{% trans "Type de support" %}</h5>
+              <p>
+                {% if journal.paper %}
+                {% trans "Numérique et papier" %}
+                {% else %}
+                {% trans "Numérique" %}
+                {% endif %}
+              </p>
+            </li>
+
+            <li>
+              <h5 class="mono-space">{% trans "Politique d'accès" %}</h5>
+              {% if journal.open_access %}
+              <p>{% trans "Disponible en libre accès" %}</p>
+              {% else %}
+              <p>{% trans "Non-disponible en libre accès" %}</p>
+              {% endif %}
+            </li>
+
+            {% if journal.disciplines.all|length > 0 %}
+            <li>
+              <h5 class="mono-space">
+                {% blocktrans count journal.disciplines.all|length as disciplines_count %}
+                Discipline
+                {% plural %}
+                Disciplines
+                {% endblocktrans %}
+              </h5>
+              <p>
+                {% for discipline in journal.disciplines.all %}
+                <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </p>
+            </li>
+            {% endif %}
           </ul>
+
         </div>
       </aside>
 
       {# Journal about #}
-      <aside class="col-sm-8 col-sm-pull-3">
+      <aside class="col-sm-9 col-sm-pull-3">
 
         <header class="page-header-main">
             <p class="journal-title">{{ issue.journal.name }}</p>
@@ -178,6 +244,6 @@
   {% endfor %}
   -->
 
-</section>
+</div>
 
 {% endblock %}
