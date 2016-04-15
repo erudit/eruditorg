@@ -165,14 +165,19 @@
                 <p class="title-tag section">{{ article_group.grouper }}</p>
                 {% endif %}
                 <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h3>
-                <p>{{ article.authors.all|join:", " }}</p>
-                {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
+                <p class="issue-detail--article-item--author">{{ article.authors.all|join:", " }}</p>
+                <p class="">
+                  {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
-                    <p>{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }}-{{ last_page }}{% endblocktrans %}</p>
+                  {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp. {{ first_page }}–{{ last_page }}{% endblocktrans %}
                   {% elif first_page and first_page != "0" %}
-                    <p>{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}</p>
+                  {% blocktrans trimmed with page=first_page %}p.  {{ page }}{% endblocktrans %}
                   {% endif %}
-                {% endwith %}
+                  {% endwith %}
+                </p>
+                <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
+                <a href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
+                </p>
               </li>
             {% endfor %}
           {% endfor %}
@@ -219,22 +224,6 @@
 
   </footer>
 
-
-  <!--
-  *************************************
-  TO REMOVE WHEN DATA WILL BE VALIDATED
-  *************************************
-
-  {% for article in articles %}
-    <article>
-      <h3>{{ article.title }}</h3>
-      <nav>
-        <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn-default">{% trans "HTML" %}</a>
-        <a href="{% url 'public:journal:article-pdf' journalid=issue.journal.code issueid=issue.localidentifier articleid=article.id %}" class="btn-default">{% trans "PDF" %}</a>
-      </nav>
-    </article>
-  {% endfor %}
-  -->
 
 </div>
 
