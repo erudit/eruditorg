@@ -13,6 +13,7 @@ from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.repository import api
 from ...models import Collection
+from ...models import Issue
 from ...models import Journal
 from ...models import Publisher
 
@@ -155,15 +156,36 @@ class Command(BaseCommand):
         # --
 
         try:
-            fedora_journal = PublicationDigitalObject(api, issue_pid)
-            assert fedora_journal.exists
+            fedora_issue = PublicationDigitalObject(api, issue_pid)
+            assert fedora_issue.exists
         except AssertionError:
             self.stdout.write(self.style.ERROR('  [FAIL]'))
             logger.error(
                 'The issue with PID "{}" seems to be inexistant'.format(issue_pid), exc_info=True)
             raise
 
-        # TODO
+        # STEP 2: creates or updates the issue object
+        # --
+
+        # Fetches the Issue instance... or creates a new one
+        issue_localidentifier = issue_pid.split('.')[-1]
+        try:
+            issue = Issue.objects.get(localidentifier=issue_localidentifier)
+        except Issue.DoesNotExist:
+            issue = Issue()
+            issue.localidentifier = issue_localidentifier
+            issue.journal = journal
+
+        # Set the proper values on the Issue instance
+        issue.year = issue.erudit_object.publication_year
+        issue.volume = issue.erudit_object.volume
+        issue.number = issue.erudit_object.number
+        issue.title = issue.erudit_object.theme
+        issue.date_published = issue.erudit_object.publication_date
+        issue.date_produced = issue.erudit_object.production_date \
+            or issue.erudit_object.publication_date
+
+        issue.save()
 
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
 
