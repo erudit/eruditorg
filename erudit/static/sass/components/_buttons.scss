@@ -111,7 +111,7 @@ a.btn {
 .btn-link {
   color: $link-color;
   font-weight: normal;
-  border-radius: 0;
+  @include border-radius(0);
 
   &,
   &:active,
