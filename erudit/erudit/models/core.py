@@ -611,7 +611,7 @@ class Article(EruditDocument, FedoraMixin):
     # identification
     issue = models.ForeignKey(
         'Issue',
-        related_name='issues',
+        related_name='articles',
         verbose_name=_("Numéro"),
     )
 
