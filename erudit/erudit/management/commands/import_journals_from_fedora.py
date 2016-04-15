@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
 import logging
 import re
 
@@ -53,10 +54,26 @@ class Command(BaseCommand):
         parser.add_argument(
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
+        parser.add_argument(
+            '--mdate', action='store', dest='mdate',
+            help='Modification date to use to retrieve journals to import (iso format).')
+
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.test_xslt = options.get('test_xslt', False)
         self.journal_pid = options.get('journal_pid', None)
+        self.modification_date = options.get('mdate', None)
+
+        # Handles a potential modification date option
+        try:
+            assert self.modification_date is not None
+            self.modification_date = dt.datetime.strptime(self.modification_date, '%Y-%m-%d').date()
+        except ValueError:
+            self.stdout.write(self.style.ERROR(
+                '"{0}" is not a valid modification date!'.format(self.modification_date)))
+            return
+        except AssertionError:
+            pass
 
         # Import a journal PID manually
         if self.journal_pid:
@@ -95,12 +112,12 @@ class Command(BaseCommand):
         self.stdout.write(self.style.MIGRATE_HEADING(
             'Start importing "{}" collection'.format(collection.code)))
 
-        latest_update_date = None
-        if not self.full_import:
+        latest_update_date = self.modification_date
+        if not self.full_import and latest_update_date is None:
             # Tries to fetch the date of the Journal instance with the more recent update date.
             latest_journal_update = Journal.objects.order_by('-fedora_updated').first()
-            latest_update_date = latest_journal_update.fedora_updated if latest_journal_update \
-                else None
+            latest_update_date = latest_journal_update.fedora_updated.date() \
+                if latest_journal_update else None
 
         # STEP 1: fetches the PIDs of the journals that will be imported
         # --
@@ -116,7 +133,7 @@ class Command(BaseCommand):
             # Fetches the PIDs of all the journals that have been update since the latest
             # modification date.
             journal_pids = self._get_journal_pids_to_import(
-                base_fedora_query + ' mdate>{}'.format(latest_update_date.date().isoformat()))
+                base_fedora_query + ' mdate>{}'.format(latest_update_date.isoformat()))
 
         # STEP 2: import each journal using its PID
         # --
