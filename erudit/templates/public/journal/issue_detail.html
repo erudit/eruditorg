@@ -143,34 +143,28 @@
         </div>
       </aside>
 
-      {# Journal about #}
-      <aside class="col-sm-9 col-sm-pull-3">
+      {# Issue summary #}
+      <section class="col-sm-9 col-sm-pull-3">
 
         <header class="page-header-main">
-            <p class="journal-title">{{ issue.journal.name }}</p>
-            {% if issue.title %}
-              <h2>{{ issue.erudit_object.html_theme|safe }}</h2>
-              <p class="lead">{% include "public/journal/_issue_volume.html" %}</p>
-            {% else %}
-              <h2>{% include "public/journal/_issue_volume.html" %}</h2>
-            {% endif %}
-            <h3>{% trans "Sommaire" %}</h3>
+            <p class="title-tag">{{ issue.journal.name }}</p>
+            <h1>
+              {% if issue.title %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
+              <span>{% include "public/journal/_issue_volume.html" %}</span>
+            </h1>
+            <h2>{% trans "Sommaire" %}</h2>
         </header>
 
-        <section class="issue-detail--articles">
-
-          <header>
-            <h3 class="border-top color-red h4">{% trans "Articles" %}</h3>
-          </header>
+        <ol class="issue-detail--articles unstyled">
 
           {% regroup articles by erudit_object.section_title as section_articles %}
           {% for article_group in section_articles %}
             {% for article in article_group.list|sort_by_ordseq %}
-              {% if forloop.first and article_group.grouper %}
-                <h3 class="color-red h4 section">{{ article_group.grouper }}</h3>
-              {% endif %}
-              <article class="issue-article">
-                <h4><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h4>
+              <li class="issue-detail--article-item">
+                {% if article_group.grouper %}
+                <p class="title-tag section">{{ article_group.grouper }}</p>
+                {% endif %}
+                <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h3>
                 <p>{{ article.authors.all|join:", " }}</p>
                 {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
@@ -179,13 +173,13 @@
                     <p>{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}</p>
                   {% endif %}
                 {% endwith %}
-              </article>
+              </li>
             {% endfor %}
           {% endfor %}
 
-        </section>
+        </ol>
 
-      </aside>
+      </section>
 
     </div>
   </div>
