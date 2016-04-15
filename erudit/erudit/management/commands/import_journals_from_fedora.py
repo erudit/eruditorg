@@ -9,9 +9,12 @@ from eulfedora.util import RequestFailed
 import lxml.etree as et
 
 from ...conf import settings as erudit_settings
+from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.repository import api
+from ...models import Article
+from ...models import Author
 from ...models import Collection
 from ...models import Issue
 from ...models import Journal
@@ -181,6 +184,9 @@ class Command(BaseCommand):
             issue.journal = journal
             issue.fedora_created = fedora_issue.created
 
+        summary_tree = remove_xml_namespaces(
+            et.fromstring(fedora_issue.summary.content.serialize()))
+
         # Set the proper values on the Issue instance
         issue.year = issue.erudit_object.publication_year
         issue.volume = issue.erudit_object.volume
@@ -193,7 +199,83 @@ class Command(BaseCommand):
         issue.fedora_updated = fedora_issue.modified
         issue.save()
 
+        # STEP 3: imports all the articles associated with the issue
+        # --
+
+        xml_article_nodes = summary_tree.findall('.//article')
+        for article_node in xml_article_nodes:
+            try:
+                apid = issue_pid + '.{0}'.format(article_node.get('idproprio'))
+                self._import_article(apid, issue)
+            except Exception as e:
+                self.stdout.write(self.style.ERROR('  [FAIL]'))
+                logger.error(
+                    'The issue\'s article with PID "{0}" cannot be imported: {1}'.format(apid, e),
+                    exc_info=True)
+                raise
+
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+
+    def _import_article(self, article_pid, issue):
+        """ Imports an article using its PID. """
+
+        # STEP 1: fetches the full Article fedora object
+        # --
+
+        try:
+            fedora_article = ArticleDigitalObject(api, article_pid)
+            assert fedora_article.exists
+        except AssertionError:
+            logger.error(
+                'The article with PID "{}" seems to be inexistant'.format(article_pid),
+                exc_info=True)
+            raise
+
+        # STEP 2: creates or updates the article object
+        # --
+
+        # Fetches the Article instance... or creates a new one
+        article_localidentifier = article_pid.split('.')[-1]
+        try:
+            article = Article.objects.get(localidentifier=article_localidentifier)
+        except Article.DoesNotExist:
+            article = Article()
+            article.localidentifier = article_localidentifier
+            article.issue = issue
+            article.fedora_created = fedora_article.created
+
+        # Set the proper values on the Article instance
+        processing = article.erudit_object.processing
+        processing_mapping = {'minimal': 'M', 'complet': 'C', '': 'M', }
+        try:
+            article.processing = processing_mapping[processing]
+        except KeyError:
+            raise ValueError(
+                'Unable to determine the processing type of the article '
+                'with PID {0}'.format(article_pid))
+        article.title = article.erudit_object.title
+        article.surtitle = article.erudit_object.section_title
+
+        article.fedora_updated = fedora_article.modified
+        article.save()
+
+        # STEP 3: creates or updates the authors of the article
+        # --
+
+        for author_xml in article.erudit_object.findall('liminaire//grauteur//auteur'):
+            firstname_xml = author_xml.find('.//nompers/prenom')
+            firstname = firstname_xml.text if firstname_xml is not None else ''
+            lastname_xml = author_xml.find('.//nompers/nomfamille')
+            lastname = lastname_xml.text if lastname_xml is not None else ''
+            suffix_xml = author_xml.find('.//nompers/suffixe')
+            suffix = suffix_xml.text if suffix_xml is not None else None
+
+            author, dummy = Author.objects.get_or_create(
+                firstname=firstname, lastname=lastname)
+            author.suffix = suffix
+            author.save()
+
+            article.authors.add(author)
 
     def _get_journal_pids_to_import(self, query):
         """ Returns the PIDS corresponding to a given Fedora query. """
