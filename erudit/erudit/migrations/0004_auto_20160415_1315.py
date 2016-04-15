@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0001_initial'),
+        ('erudit', '0003_auto_20160415_0924'),
     ]
 
     operations = [
@@ -48,14 +48,44 @@ class Migration(migrations.Migration):
             name='synced_with_edinum',
         ),
         migrations.AddField(
+            model_name='article',
+            name='fedora_created',
+            field=models.DateTimeField(verbose_name='Date de création sur Fedora', blank=True, null=True),
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='fedora_updated',
+            field=models.DateTimeField(verbose_name='Date de modification sur Fedora', blank=True, null=True),
+        ),
+        migrations.AddField(
             model_name='collection',
             name='localidentifier',
             field=models.CharField(blank=True, max_length=10, null=True),
         ),
+        migrations.AddField(
+            model_name='issue',
+            name='fedora_created',
+            field=models.DateTimeField(verbose_name='Date de création sur Fedora', blank=True, null=True),
+        ),
+        migrations.AddField(
+            model_name='issue',
+            name='fedora_updated',
+            field=models.DateTimeField(verbose_name='Date de modification sur Fedora', blank=True, null=True),
+        ),
+        migrations.AddField(
+            model_name='journal',
+            name='fedora_created',
+            field=models.DateTimeField(verbose_name='Date de création sur Fedora', blank=True, null=True),
+        ),
+        migrations.AddField(
+            model_name='journal',
+            name='fedora_updated',
+            field=models.DateTimeField(verbose_name='Date de modification sur Fedora', blank=True, null=True),
+        ),
         migrations.AlterField(
             model_name='collection',
             name='code',
-            field=models.CharField(max_length=10, default='code', unique=True),
+            field=models.CharField(unique=True, default='code', max_length=10),
             preserve_default=False,
         ),
     ]
