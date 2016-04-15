@@ -126,7 +126,7 @@ $ vagrant ssh
 In the VM, clone the `vm-config` project:
 
 ```
-$ git clone https://gitlab.erudit.team/erudit/vm-config.git
+$ GIT_SSL_NO_VERIFY=true git clone https://gitlab.erudit.team/erudit/vm-config.git
 ```
 
 *Note: this repository is private. If you need credentials, ask us on IRC.*
