@@ -203,17 +203,15 @@
         </div>
 
         <div class="row">
-          {% for published_issue in journal.published_issues|dictsortreversed:"date_published" %}
+          {% for published_issue in journal.published_issues|dictsortreversed:"date_published"|slice:":4" %}
           {% if published_issue != issue %}
-          <article class="issue-list-item--inverted col-md-2 col-sm-4">
+          <article class="issue-list-item--inverted col-xs-6 col-sm-3">
             <a href="{{ published_issue.get_absolute_url }}">
-              <figure>
-                <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" alt="{{ published_issue.name }}" />
-              </figure>
+              <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" alt="{{ published_issue.name }}" />
               <header>
                 <h5>
                   {% blocktrans trimmed with number=published_issue.erudit_object.number|default:i18n_unknown date=published_issue.date_published|date:"F Y" %}
-                    Numéro {{ number }}<br>{{ date }}
+                    N<sup>o</sup> {{ number }}<br>{{ date }}
                   {% endblocktrans %}
                 </h5>
               </header>
