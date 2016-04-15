@@ -53,3 +53,9 @@ def render_article(context, article):
 def author_articles(author, journal):
     """ Returns all the articles of the author in the considered journal. """
     return author.articles_in_journal(journal)
+
+
+@register.filter
+def sort_by_ordseq(erudit_objects):
+    """ Returns the erudit objects (issues or articles) sorted by their ordering number. """
+    return sorted(erudit_objects, key=lambda a: a.erudit_object.ordseq)
