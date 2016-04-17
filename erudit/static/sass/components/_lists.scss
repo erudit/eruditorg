@@ -53,14 +53,10 @@ dl {
     float: left;
     width: ($dl-horizontal-offset - 1);
     clear: left;
-    color: $gray-light;
-    @include text-overflow;
     font-weight: normal;
   }
 
   dd {
-    margin-left: $dl-horizontal-offset;
-    @include text-overflow;
   }
 
 }
