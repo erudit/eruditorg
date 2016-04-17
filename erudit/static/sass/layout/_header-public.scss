@@ -39,6 +39,7 @@ header#site-header {
     svg {
       height: $erudit-logo-height + 10px;
       padding-top: 10px;
+      overflow: visible;
       path, circle {
         @include transition(fill 250ms);
       }
