@@ -349,7 +349,7 @@ class Command(BaseCommand):
         """ Returns the PIDS corresponding to a given Fedora query. """
         self.stdout.write('  Determining journal PIDs to import...', ending='')
         try:
-            response = api.findObjects(query=query)
+            response = api.findObjects(query=query, chunksize=10000)
             # Tries to fetch the PIDs of the journals by parsing the response
             tree = et.fromstring(response.content)
             pid_nodes = tree.findall(
