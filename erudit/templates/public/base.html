@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static i18n %}
 {% load staticfiles %}
-{% load userspace_tags %}
+{% load rules %}
 
 {% block stylesheets %}
 {% if not WEBPACK_DEV_SERVER_URL %}
@@ -76,7 +76,8 @@
             <li class="dropdown">
               <div class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></div>
               <ul>
-                {% if request.user|can_access_userspace %}
+                {% has_perm 'userspace.access' request.user as can_access_userspace %}
+                {% if can_access_userspace %}
                 <li>
                   <a href="{% url 'userspace:dashboard' %}">{% trans "Espace privé" %}</a>
                 </li>
