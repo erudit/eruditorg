@@ -3,7 +3,12 @@
 {% load staticfiles %}
 {% load public_journal_tags %}
 
-{% block page-title %}{{ issue.localidentifier }}{% endblock page-title %}
+{% block zone-title %}{{ journal.name }}{% endblock %}
+
+{% block page-title %}
+{% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
+{% include "public/journal/_issue_volume.html" %}
+{% endblock page-title %}
 
 {% block breadcrumb %}{{ block.super }}
 / <a href="{{ issue.get_absolute_url }}">{{ issue.volume_title }}</a>
@@ -13,7 +18,7 @@
 
 {% trans "inconnu" as i18n_unknown %}
 
-<section id="issue-detail">
+<div id="issue-detail">
 
   <div class="container">
     <div class="row">
@@ -23,13 +28,16 @@
 
         <div class="sidebar-block clearfix issue-detail--resume">
 
-          <figure class="col-xs-6 col-xs-offset-3 no-padding">
-            <a href="{{ journal.get_absolute_url }}"><img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{{ issue.title }}" /></a>
-          </figure>
+          <div class="col-xs-6 no-padding">
+            <a href="{{ journal.get_absolute_url }}">
+              <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
+              {% include 'public/journal/_issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
+            </a>
+          </div>
 
           <header class="col-xs-12 no-padding no-margin">
-            <h5 class="mono-space gray-lighter">{% trans "De la revue" %}</h5>
-            <h2 class="h4 border-bottom no-margin"><a href="{{ journal.get_absolute_url }}">{{ journal.name }}</a></h2>
+            <div class="mono-space">{% trans "De la revue" %}</div>
+            <h2 class="h4 no-margin"><a href="{{ journal.get_absolute_url }}">{{ journal.name }}</a></h2>
           </header>
 
         </div>
@@ -37,89 +45,135 @@
         {# journal meta infos #}
         <div class="sidebar-block journal-meta">
 
-          <ul class="meta-blocks list-unstyled">
+          <h4 class="border-bottom">{% trans "Fiche" %}</h4>
+
+          <dl class="journal-meta--list">
 
             {% if journal.members.all %}
-            <li>
-              <h5 class="mono-space">{% trans "Direction" %}</h5>
-              {% for member in journal.members.all %}
-              <p>{{ member.get_full_name }}</p>
-              {% endfor %}
-            </li>
+            <dt class="mono-space">{% trans "Direction" %}</dt>
+            {% for member in journal.members.all %}
+            <p>{{ member.get_full_name }}</p>
+            {% endfor %}
             {% endif %}
 
             {% if journal.publishers.all %}
-            <li>
-              <h5 class="mono-space">
-                {% blocktrans count total=journal.publishers.all|length %}
-                Éditeur
-                {% plural %}
-                Éditeurs
-                {% endblocktrans %}
-              </h5>
-              {% for publisher in journal.publishers.all %}
-              <p>{{ publisher.name }}</p>
-              {% endfor %}
-            </li>
+            <dt class="mono-space">
+              {% blocktrans count total=journal.publishers.all|length %}
+              Éditeur
+              {% plural %}
+              Éditeurs
+              {% endblocktrans %}
+            </dt>
+            {% for publisher in journal.publishers.all %}
+            <dd>{{ publisher.name }}</dd>
+            {% endfor %}
             {% endif %}
 
             {% if journal.issn_print or journal.issn_web %}
-            <li>
-              <h5 class="mono-space">{% trans "ISSN" %}</h5>
-              {% if journal.issn_print %}
-              <p>{{ journal.issn_print }} ({% trans "imprimé" %})</p>
-              <p>{{ journal.issn_web }} ({% trans "numérique" %})</p>
-              {% endif %}
-            </li>
+            <dt class="mono-space">{% trans "ISSN" %}</dt>
+            {% if journal.issn_print %}
+            <dd><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
+            <dd><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</dd>
+            {% endif %}
             {% endif %}
 
-          </ul>
+            {% if journal.issues_per_year %}
+            <dt class="mono-space">{% trans "Fréquence" %}</dt>
+            <dd>
+              {% blocktrans count issues_per_year=journal.issues_per_year %}
+              {{ issues_per_year }} numéro par année
+              {% plural %}
+              {{ issues_per_year }} numéros par année
+              {% endblocktrans %}
+            </dd>
+            {% endif %}
+
+            <dt class="mono-space">{% trans "Période de publication" %}</dt>
+            <dd>{{ journal.erudit_object.publication_period }}</dd>
+
+
+            {% if journal.first_issue %}
+            <dt class="mono-space">{% trans "Disponible dans Érudit depuis" %}</dt>
+            <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
+            {% endif %}
+
+            <dt class="mono-space">{% trans "Type de support" %}</dt>
+            <dd>
+              {% if journal.paper %}
+              {% trans "Numérique et papier" %}
+              {% else %}
+              {% trans "Numérique" %}
+              {% endif %}
+            </dd>
+
+            <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
+            {% if journal.open_access %}
+            <dd>{% trans "Disponible en libre accès" %}</dd>
+            {% else %}
+            <dd>{% trans "Non-disponible en libre accès" %}</dd>
+            {% endif %}
+
+            {% if journal.disciplines.all|length > 0 %}
+            <dt class="mono-space">
+              {% blocktrans count journal.disciplines.all|length as disciplines_count %}
+              Discipline
+              {% plural %}
+              Disciplines
+              {% endblocktrans %}
+            </dt>
+            <dd>
+              {% for discipline in journal.disciplines.all %}
+              <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </dd>
+            {% endif %}
+
+          </dl>
+
         </div>
       </aside>
 
-      {# Journal about #}
-      <aside class="col-sm-8 col-sm-pull-3">
+      {# Issue summary #}
+      <section class="col-sm-9 col-sm-pull-3">
 
         <header class="page-header-main">
-            <p class="journal-title">{{ issue.journal.name }}</p>
-            {% if issue.title %}
-              <h2>{{ issue.erudit_object.html_theme|safe }}</h2>
-              <p class="lead">{% include "public/journal/_issue_volume.html" %}</p>
-            {% else %}
-              <h2>{% include "public/journal/_issue_volume.html" %}</h2>
-            {% endif %}
-            <h3>{% trans "Sommaire" %}</h3>
+            <p class="title-tag">{{ issue.journal.name }}</p>
+            <h1>
+              {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
+              <span>{% include "public/journal/_issue_volume.html" %}</span>
+            </h1>
+            <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
         </header>
 
-        <section class="issue-detail--articles">
-
-          <header>
-            <h3 class="border-top color-red h4">{% trans "Articles" %}</h3>
-          </header>
+        <ol class="issue-detail--articles unstyled">
 
           {% regroup articles by erudit_object.section_title as section_articles %}
           {% for article_group in section_articles %}
             {% for article in article_group.list|sort_by_ordseq %}
-              {% if forloop.first and article_group.grouper %}
-                <h3 class="color-red h4 section">{{ article_group.grouper }}</h3>
-              {% endif %}
-              <article class="issue-article">
-                <h4><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h4>
-                <p>{{ article.authors.all|join:", " }}</p>
-                {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
+              <li class="issue-detail--article-item">
+                {% if article_group.grouper %}
+                <p class="title-tag section">{{ article_group.grouper }}</p>
+                {% endif %}
+                <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h3>
+                <p class="issue-detail--article-item--author">{{ article.authors.all|join:", " }}</p>
+                <div class="mono-space">
+                  <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
+                  <a href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
+                  {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
-                    <p>{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }}-{{ last_page }}{% endblocktrans %}</p>
+                  {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
                   {% elif first_page and first_page != "0" %}
-                    <p>{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}</p>
+                  {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
                   {% endif %}
-                {% endwith %}
-              </article>
+                  {% endwith %}
+                </div>
+              </li>
             {% endfor %}
           {% endfor %}
 
-        </section>
+        </ol>
 
-      </aside>
+      </section>
 
     </div>
   </div>
@@ -131,28 +185,29 @@
         <div class="row">
 
           <header class="past-issues--header col-xs-12">
-            <h3 class="h2 no-margin">{% trans "Anciens numéros de L’Actualité économique" %}</h3>
+            <h3 class="h2 no-margin">
+              {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
+              <small>({{ journal.published_issues|length }} numéros)</small>
+            </h3>
           </header>
 
         </div>
 
         <div class="row">
-          {% for published_issue in journal.published_issues|dictsortreversed:"date_published" %}
+          {% for published_issue in journal.published_issues|dictsortreversed:"date_published"|slice:":4" %}
           {% if published_issue != issue %}
-          <article class="issue-list-item--inverted col-md-2 col-sm-4">
+          <div class="issue-list-item--inverted col-xs-6 col-sm-3">
             <a href="{{ published_issue.get_absolute_url }}">
-              <figure>
-                <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" alt="{{ published_issue.name }}" />
-              </figure>
+              <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" alt="{{ published_issue.name }}" />
               <header>
                 <h5>
                   {% blocktrans trimmed with number=published_issue.erudit_object.number|default:i18n_unknown date=published_issue.date_published|date:"F Y" %}
-                    Numéro {{ number }}<br>{{ date }}
+                    N<sup>o</sup> {{ number }}, <br>{{ date }}
                   {% endblocktrans %}
                 </h5>
               </header>
             </a>
-          </article>
+          </div>
           {% endif %}
           {% endfor %}
         </div>
@@ -162,22 +217,6 @@
   </footer>
 
 
-  <!--
-  *************************************
-  TO REMOVE WHEN DATA WILL BE VALIDATED
-  *************************************
-
-  {% for article in articles %}
-    <article>
-      <h3>{{ article.title }}</h3>
-      <nav>
-        <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn-default">{% trans "HTML" %}</a>
-        <a href="{% url 'public:journal:article-pdf' journalid=issue.journal.code issueid=issue.localidentifier articleid=article.id %}" class="btn-default">{% trans "PDF" %}</a>
-      </nav>
-    </article>
-  {% endfor %}
-  -->
-
-</section>
+</div>
 
 {% endblock %}

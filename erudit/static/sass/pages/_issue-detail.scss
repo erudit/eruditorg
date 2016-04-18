@@ -1,64 +1,72 @@
-section#issue-detail {
+#issue-detail {
 
-	.issue-detail--resume {
-		figure {
-			margin-bottom: 50px;
-		}
+  /**
+  * Page header overrides
+  */
+  .page-header-main {
 
-		h2 {
-			padding-bottom: 40px;
-		}
+    h2 {
+      font-size: 2em;
+      @include fw-sans-normal();
+    }
 
-		h5 {
-			margin-bottom: 5px;
-			color: $gray-dark;
-		}
+  }
 
-	}
+  /**
+  * List of articles
+  */
+  .issue-detail--articles {
 
-	.issue-detail--meta_blocks {
-		padding-bottom: $margin-vertical-default/4;
-  	border-bottom: 1px solid $gray-base;
-	}
+    .issue-detail--article-item {
+      padding: 1.5em 0;
+      border-bottom: 1px solid $mid-grey;
 
-	/**
-	* Page header overides
-	*/
-	.page-header-main {
+      &:last-child {
+        border-bottom: none;
+      }
 
-		h2 {
-			margin-bottom: 90px;
-		}
+      h3 {
+        margin-bottom: 0.5em;
+        font-size: 1.25em;
+        @include fw-sans-medium;
+      }
 
-		h3 {
-			font-size: 28px;
-			margin-bottom: 40px;
-		}
-	}
+      .issue-detail--article-item--author {
+        font-size: smaller;
+        margin-bottom: 1.75em;
+      }
 
-	/**
-	* list of articles
-	*/
-	.issue-detail--articles {
+      .btn-primary-outlined {
+        font-size: smaller;
+        padding: 0.5em 0.25em;
+        line-height: 1;
 
-		h3 {
-			padding-top: 40px;
-		}
+      }
 
-		article.issue-article {
-			padding-top: 40px;
-			padding-bottom: 40px;
-			border-bottom: 1px solid rgba(0,0,0,0.5);
+    }
 
-			h4 {
-				@include fw-sans-medium();
-			}
+  }
 
-			&:last-child {
-				border-bottom: none;
-			}
-		}
-	}
+  /**
+  * Journal metadata definition list overrides
+  */
+  .journal-meta--list {
 
+    dt, dd {
+      display: block;
+      float: none;
+      width: auto;
+    }
+
+    dt {
+      font-size: small;
+      margin-top: 1.25em;
+    }
+
+    dd {
+      margin-bottom: 1.25em;
+    }
+
+  }
 
 }

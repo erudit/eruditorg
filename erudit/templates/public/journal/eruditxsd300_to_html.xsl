@@ -96,8 +96,8 @@
 							<xsl:value-of select="$uriStart"/>
 							<xsl:value-of select="$iderudit"/>
 
-							<span class="clipboard-msg clipboard-success">{% trans "adresse copié" }</span>
-							<span class="clipboard-msg clipboard-error">{% trans "une erreure s'est produite" %}</span>
+							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
 					<dt>DOI</dt>
@@ -105,8 +105,8 @@
 						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
 							10.7202/<xsl:value-of select="$iderudit"/>
 
-							<span class="clipboard-msg clipboard-success">{% trans "adresse copié" %}"</span>
-							<span class="clipboard-msg clipboard-error">{% trans "une erreure s'est produite" %}</span>
+							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
 				</dl>

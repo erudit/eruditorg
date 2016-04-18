@@ -8,6 +8,18 @@
     padding-bottom: $margin-vertical-default;
   }
 
+  h1 {
+    @include fw-sans-bold();
+    font-size: 2.75em;
+    margin-bottom: 1em;
+
+    span + span {
+      @include fw-sans-normal();
+      display: block;
+    }
+    
+  }
+
   h2 {
     margin: 0;
     font-size: 36px;

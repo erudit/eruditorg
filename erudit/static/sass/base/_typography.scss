@@ -232,15 +232,18 @@ abbr[data-original-title] {
   cursor: help;
   border-bottom: 1px dotted $abbr-border-color;
 }
-.initialism {
-  font-size: 90%;
-  @extend .text-uppercase;
-}
 
-.category-tag {
+.category-tag,
+.title-tag {
   color: $coral-red;
   font-size: small;
   margin: 0.5em 0;
+  @include fw-sans-medium;
+  text-transform: uppercase;
+}
+
+.title-tag {
+  color: $dark-grey;
 }
 
 // Blockquotes
