@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0001_initial'),
+        ('erudit', '0002_auto_20160414_1321'),
     ]
 
     operations = [

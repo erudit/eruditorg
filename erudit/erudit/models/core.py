@@ -24,35 +24,6 @@ YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
 
 # abstracts
 
-class Edinum(models.Model):
-    """ Basic class for models that are synced with Edinum
-
-    When an is synced with edinum, it's edinum_id and other attributes are
-    filled automatically with values from the Edinum database.
-
-    The date at which the last synchronization was made will be kept in
-    the sync_date field."""
-
-    synced_with_edinum = models.BooleanField(
-        verbose_name=_("Synchronisé avec Edinum"),
-        default=False
-    )
-    """ Determines if this particular object is synced with the Edinum database """  # noqa
-
-    edinum_id = models.CharField(
-        max_length=7,
-        null=True,
-        blank=True,
-        verbose_name=_("Identifiant Edinum")
-    )
-    """ The Edinum person_id for this Publisher """
-
-    sync_date = models.DateField(null=True, blank=True)
-    """ Date at which the model was last synchronized with Edinum """
-
-    class Meta:
-        abstract = True
-
 
 class Named(models.Model):
 
@@ -72,6 +43,28 @@ class Named(models.Model):
 
     def __str__(self):
         return self.display_name or self.name
+
+    class Meta:
+        abstract = True
+
+
+class FedoraDated(models.Model):
+    """ Provides a creation date and an update date for Fedora-related models.
+
+    Note that these fields do not used the auto_now_add/auto_now attributes. So these values should
+    be set manually.
+    """
+    fedora_created = models.DateTimeField(
+        verbose_name=_('Date de création sur Fedora'),
+        blank=True,
+        null=True
+    )
+
+    fedora_updated = models.DateTimeField(
+        verbose_name=_('Date de modification sur Fedora'),
+        blank=True,
+        null=True
+    )
 
     class Meta:
         abstract = True
@@ -188,7 +181,7 @@ class Library(models.Model):
         ordering = ['name', ]
 
 
-class Collection(Edinum):
+class Collection(models.Model):
     """ A collection of Journals
 
     Set of :py:class:`Journals <erudit.models.core.Journal>` for which a partner
@@ -197,11 +190,11 @@ class Collection(Edinum):
     name = models.CharField(max_length=200)
     """ The name of the collection """
 
-    code = models.CharField(
-        max_length=10,
-        null=True, blank=True,
-    )
-    """ The code of the collection. There should be a correspondence between the
+    code = models.CharField(max_length=10, unique=True)
+    """ The code of the collection. It should be unique. """
+
+    localidentifier = models.CharField(max_length=10, blank=True, null=True)
+    """ The localidentifier of the collection. There should be a correspondence between the
     code of the collection and the ``Fonds_fac`` field in Solr. """
 
 
@@ -218,7 +211,7 @@ class Discipline(models.Model):
         return self.name
 
 
-class Journal(FedoraMixin, Named, Edinum):
+class Journal(FedoraMixin, Named, FedoraDated):
     """Revue"""
 
     collection = models.ForeignKey(
@@ -355,7 +348,7 @@ class Journal(FedoraMixin, Named, Edinum):
     def get_full_identifier(self):
         return "{}:{}.{}".format(
             fedora_settings.PIDSPACE,
-            self.collection.code,
+            self.collection.localidentifier,
             self.localidentifier
         )
 
@@ -455,7 +448,7 @@ class JournalType(models.Model):
         ordering = ['name', ]
 
 
-class Issue(FedoraMixin, models.Model):
+class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal"""
 
     # identification
@@ -583,7 +576,7 @@ class EruditDocument(models.Model):
         verbose_name_plural = _("Documents Érudit")
 
 
-class Article(EruditDocument, FedoraMixin):
+class Article(EruditDocument, FedoraMixin, FedoraDated):
 
     # An article can have many authors
     authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
@@ -667,7 +660,7 @@ class Author(Person):
             .filter(issue__journal_id=journal.id)
 
 
-class Publisher(Edinum):
+class Publisher(models.Model):
     """Éditeur"""
 
     name = models.CharField(

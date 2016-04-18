@@ -32,7 +32,7 @@ class BaseEruditTestCase(TestCase):
             name='Autre éditeur de test',
         )
 
-        erudit = Collection(code="erudit", name="Érudit")
+        erudit = Collection(code="erudit", localidentifier="erudit", name="Érudit")
         erudit.save()
 
         # Add a journal with a member
