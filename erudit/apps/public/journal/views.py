@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.functional import cached_property
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -283,6 +285,10 @@ class ArticleDetailView(
         context['related_articles'] = related_articles.order_by('?')[:4]
 
         return context
+
+    @method_decorator(ensure_csrf_cookie)
+    def dispatch(self, *args, **kwargs):
+        return super(ArticleDetailView, self).dispatch(*args, **kwargs)
 
 
 class ArticleEnwCitationView(SingleArticleMixin, DetailView):
