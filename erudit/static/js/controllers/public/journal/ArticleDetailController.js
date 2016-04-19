@@ -2,6 +2,7 @@ import '!!script!sticky-kit/jquery.sticky-kit.min';
 import '!!script!clipboard.js/clipboard.min';
 import '!!script!scrollspy/build/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
+import SavedCitationList from '../../../modules/public/SavedCitationList';
 import Toolbox from '../../../modules/public/Toolbox';
 
 export default {
@@ -10,6 +11,10 @@ export default {
     this.article                = $('#article-detail');
     this.sticky_header_height   = 0;
     this.toolbox                = new Toolbox( this.article.find('.toolbox') );
+
+    // Initializes the citation list
+    this.saved_citations = new SavedCitationList();
+    this.saved_citations.init();
 
     this.sticky_elements();
     this.smooth_scroll();
@@ -101,7 +106,7 @@ export default {
       nav: '.article-table-of-contents > nav > ul > li:not(.debutArticle) > a',
       className: 'is-inview',
       callback: function(elements) {
-        
+
         if( toc_body_anchor.hasClass('is-inview') ) toc_body.addClass('is-inview')
         else toc_body.removeClass('is-inview');
       }
