@@ -251,11 +251,11 @@
 							</button>
 						</li>
 						<li>
-							<button id="tool-citation-save" data-citation-save="#article-detail">
+							<button id="tool-citation-save" data-citation-save="#article-detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
 								<span class="erudicon erudicon-tools-save"></span>
 								<span class="tools-label">Sauvegarder</span>
 							</button>
-							<button id="tool-citation-remove" data-citation-remove="#article-detail">
+							<button id="tool-citation-remove" data-citation-remove="#article-detail"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
 								<span class="erudicon erudicon-tools-save"></span>
 								<span class="tools-label">Supprimer</span>
 							</button>
