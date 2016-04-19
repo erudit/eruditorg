@@ -12,7 +12,7 @@ class SavedCitationList(set):
         super(SavedCitationList, self).__init__(*args, **kwargs)
         self.request = request
         self.name = name
-        self.update(*request.session.get(self.name, []))
+        self.update(request.session.get(self.name, []))
 
     def save(self):
         """ Saves a list of citations into the user's session. """
