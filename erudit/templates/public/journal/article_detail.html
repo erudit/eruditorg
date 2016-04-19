@@ -60,7 +60,12 @@
 
 {% block content %}
 
-<section id="article-detail" class="container">
+<section
+    id="article-detail"
+    class="container"
+    data-article-id="{{ article.id }}"
+    {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
+  >
 
   {% if not article_access_granted %}
     <!--
