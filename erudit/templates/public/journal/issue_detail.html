@@ -147,9 +147,9 @@
 
         <ol class="issue-detail--articles unstyled">
 
-          {% regroup articles by erudit_object.section_title as section_articles %}
+          {% regroup articles|sort_by_ordseq by erudit_object.section_title as section_articles %}
           {% for article_group in section_articles %}
-            {% for article in article_group.list|sort_by_ordseq %}
+            {% for article in article_group.list %}
               <li class="issue-detail--article-item">
                 {% if article_group.grouper %}
                 <p class="title-tag section">{{ article_group.grouper }}</p>
