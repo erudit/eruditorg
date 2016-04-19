@@ -14,6 +14,10 @@ class SavedCitationList(set):
         self.name = name
         self.update(request.session.get(self.name, []))
 
+    def __contains__(self, article):
+        article_id = article.id if isinstance(article, Article) else article
+        return super(SavedCitationList, self).__contains__(article_id)
+
     def save(self):
         """ Saves a list of citations into the user's session. """
         self.request.session[self.name] = list(self)
