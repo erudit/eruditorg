@@ -3,6 +3,8 @@
 {% load staticfiles %}
 {% load public_journal_tags %}
 
+{% block data-controller %}public:journal:issue-detail{% endblock data-controller %}
+
 {% block zone-title %}{{ journal.name }}{% endblock %}
 
 {% block page-title %}
@@ -150,7 +152,7 @@
           {% regroup articles by erudit_object.section_title as section_articles %}
           {% for article_group in section_articles %}
             {% for article in article_group.list|sort_by_ordseq %}
-              <li class="issue-detail--article-item">
+              <li id="article-{{ article.id }}" class="issue-detail--article-item" data-article-id="{{ article.id }}">
                 {% if article_group.grouper %}
                 <p class="title-tag section">{{ article_group.grouper }}</p>
                 {% endif %}
@@ -159,6 +161,8 @@
                 <div class="mono-space">
                   <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
                   <a href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
+                  <a href="#" class="btn btn-primary-outlined" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Sauvegarder" %}</a>
+                  <a href="#" class="btn btn-primary-outlined" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Supprimer" %}</a>
                   {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
                   {% if first_page and last_page and first_page != last_page %}
                   {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
