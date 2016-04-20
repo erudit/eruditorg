@@ -17,6 +17,7 @@ from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.repository import api
+from ...fedora.repository import rest_api
 from ...models import Article
 from ...models import Author
 from ...models import Collection
@@ -348,20 +349,33 @@ class Command(BaseCommand):
     def _get_journal_pids_to_import(self, query):
         """ Returns the PIDS corresponding to a given Fedora query. """
         self.stdout.write('  Determining journal PIDs to import...', ending='')
-        try:
-            response = api.findObjects(query=query, chunksize=10000)
-            # Tries to fetch the PIDs of the journals by parsing the response
-            tree = et.fromstring(response.content)
-            pid_nodes = tree.findall(
-                './/type:pid', {"type": "http://www.fedora.info/definitions/1/0/types/"})
-            journal_pids = [n.text for n in pid_nodes]
-        except RequestFailed as e:
-            self.stdout.write(self.style.ERROR('  [FAIL]'))
-            logger.error('Unable to fetches the journal PIDs: {0}'.format(e), exc_info=True)
-            return
-        else:
-            self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
 
+        ns_type = {'type': 'http://www.fedora.info/definitions/1/0/types/'}
+        journal_pids = []
+        session_token = None
+        remaining_pids = True
+
+        while remaining_pids:
+            # The session token is used by the Fedora Commons repository to paginate a list of
+            # results. We have to use it in order to construct the list of PIDs to import!
+            session_token = session_token.text if session_token is not None else None
+            try:
+                response = rest_api.findObjects(query, chunksize=1000, session_token=session_token)
+                # Tries to fetch the PIDs of the journals by parsing the response
+                tree = et.fromstring(response.content)
+                pid_nodes = tree.findall('.//type:pid', ns_type)
+                session_token = tree.find('./type:listSession//type:token', ns_type)
+                _journal_pids = [n.text for n in pid_nodes]
+            except RequestFailed as e:
+                self.stdout.write(self.style.ERROR('  [FAIL]'))
+                logger.error('Unable to fetches the journal PIDs: {0}'.format(e), exc_info=True)
+                return
+            else:
+                journal_pids.extend(_journal_pids)
+
+            remaining_pids = len(_journal_pids) and session_token is not None
+
+        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
         if not len(journal_pids):
             self.stdout.write(self.style.WARNING('  No journal PIDs found'))
         else:
