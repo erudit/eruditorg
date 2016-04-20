@@ -582,12 +582,12 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
     authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
 
     surtitle = models.CharField(
-        max_length=500,
+        max_length=600,
         null=True, blank=True,
     )
 
     title = models.CharField(
-        max_length=500,
+        max_length=600,
         null=True, blank=True,
     )
     """ The title of the issue """
