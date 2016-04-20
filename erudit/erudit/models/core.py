@@ -75,6 +75,7 @@ class Person(models.Model):
 
     lastname = models.CharField(
         max_length=50,
+        null=True, blank=True,
         verbose_name=_("Nom"),
     )
 
