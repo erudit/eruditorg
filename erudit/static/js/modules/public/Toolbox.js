@@ -12,6 +12,7 @@ class Toolbox {
 
   	this.el.on('click', '#tool-download', this.download);
 
+    // Initializes modals
     this.citation = new CiteModal( this.el.find('#tool-quote') );
     this.share = new ShareModal( this.el.find('#tool-share') );
   }

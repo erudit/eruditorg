@@ -1,3 +1,4 @@
+import SavedCitationList from '../../modules/public/SavedCitationList';
 import Toolbox from '../../modules/public/Toolbox';
 
 export const formSelector = "form#id-search";
@@ -9,6 +10,10 @@ export default {
 
     this.sorting();
     this.toolbox();
+
+    // Initializes the citation list
+    this.saved_citations = new SavedCitationList();
+    this.saved_citations.init();
   },
 
   /**

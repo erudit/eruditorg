@@ -33,6 +33,7 @@ js_info_dict = {
 
 urlpatterns = i18n_patterns(
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
+    url(r'^jsreverse/$', 'django_js_reverse.views.urls_js', name='js_reverse'),
 
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),

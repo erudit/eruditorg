@@ -3,7 +3,7 @@
 
 {% trans "inconnu" as i18n_unknown %}
 
-<article class="search-result-item">
+<article id="article-{{ article.id }}" class="search-result-item" data-article-id="{{ article.id }}">
 
   <header>
 
@@ -49,23 +49,25 @@
       <li>
         <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
           <span class="erudicon erudicon-tools-pdf"></span>
-          <span class="tools-label">Télécharger</span>
+          <span class="tools-label">{% trans "Télécharger" %}</span>
         </button>
       </li>
       <li>
         <button id="tool-quote" data-modal-id="#id_quote_modal_{{ article.id }}">
           <span class="erudicon erudicon-tools-quote"></span>
-          <span class="tools-label">Citer cet article</span>
+          <span class="tools-label">{% trans "Citer cet article" %}</span>
         </button>
       </li>
-      <!--
       <li>
-        <button id="tool-save">
+        <button id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
           <span class="erudicon erudicon-tools-save"></span>
-          <span class="tools-label">Sauvegarder</span>
+          <span class="tools-label">{% trans "Sauvegarder" %}</span>
+        </button>
+        <button id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+          <span class="erudicon erudicon-tools-save"></span>
+          <span class="tools-label">{% trans "Supprimer" %}</span>
         </button>
       </li>
-      -->
       <li>
         <button id="tool-share" data-title="{{ article.erudit_object.title }}" data-share-url="{{ article.get_absolute_url }}">
           <span class="erudicon erudicon-tools-share"></span>

@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'base',
     'erudit',
     'apps.public.book',
+    'apps.public.citations',
     'apps.public.journal',
     'apps.public.search',
     'apps.public.thesis',
@@ -54,6 +55,7 @@ INSTALLED_APPS = (
     'core.authorization',
     'core.account_actions',
     'core.accounts',
+    'core.citations',
     'core.editor',
     'core.journal',
     'core.reporting',
@@ -85,6 +87,7 @@ INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
     'django_fsm',
     'easy_pjax',
+    'django_js_reverse',
 )
 
 DATABASES = {
@@ -122,6 +125,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'core.subscription.middleware.SubscriptionMiddleware',
+    'core.citations.middleware.SavedCitationListMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
@@ -292,8 +296,17 @@ CELERYBEAT_SCHEDULE = {
 }
 
 # MailChimp settings
+# -----------------------------------
+
 MAILCHIMP_UUID = ""
 MAILCHIMP_ACTION_URL = ""
+
+
+# Django JS reverse settings
+# -----------------------------------
+
+JS_REVERSE_INCLUDE_ONLY_NAMESPACES = ['public:citations', ]
+
 
 try:
     from .settings_env import *  # noqa

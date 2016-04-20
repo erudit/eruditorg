@@ -250,14 +250,16 @@
 								<span class="tools-label">{% trans "Citer cet article" %}</span>
 							</button>
 						</li>
-						<!--
 						<li>
-							<button id="tool-save">
+							<button id="tool-citation-save" data-citation-save="#article-detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
 								<span class="erudicon erudicon-tools-save"></span>
-								<span class="tools-label">Sauvegarder</span>
+								<span class="tools-label">{% trans "Sauvegarder" %}</span>
+							</button>
+							<button id="tool-citation-remove" data-citation-remove="#article-detail"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+								<span class="erudicon erudicon-tools-save"></span>
+								<span class="tools-label">{% trans "Supprimer" %}</span>
 							</button>
 						</li>
-						-->
 						<li>
 							<button id="tool-share">
 								<span class="erudicon erudicon-tools-share"></span>
