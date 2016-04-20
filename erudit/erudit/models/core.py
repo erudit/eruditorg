@@ -642,7 +642,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
 
 
 class Author(Person):
-    suffix = models.CharField(max_length=20, verbose_name=_('Suffixe'), blank=True, null=True)
+    suffix = models.CharField(max_length=50, verbose_name=_('Suffixe'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Auteur')
