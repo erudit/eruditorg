@@ -210,7 +210,11 @@ class Command(BaseCommand):
         xml_issue_nodes = publications_tree.findall('.//numero')
         for issue_node in xml_issue_nodes:
             ipid = issue_node.get('pid')
-            self._import_issue(ipid, journal)
+            if ipid.startswith(journal_pid):
+                # Imports the issue only if its PID is prefixed with the PID of the journal object.
+                # In any other case this means that the issue is associated with another journal and
+                # it will be imported later.
+                self._import_issue(ipid, journal)
 
     def _import_issue(self, issue_pid, journal):
         """ Imports an issue using its PID. """
