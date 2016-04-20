@@ -131,6 +131,8 @@ class Command(BaseCommand):
                     '  No journals found... proceed to full import!'.format(collection.code)))
             journal_pids = self._get_journal_pids_to_import(base_fedora_query)
         else:
+            self.stdout.write(
+                '  Importing objects modified since {}.'.format(latest_update_date.isoformat()))
             # Fetches the PIDs of all the journals that have been update since the latest
             # modification date.
             journal_pids = self._get_journal_pids_to_import(
