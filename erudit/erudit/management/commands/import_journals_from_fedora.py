@@ -76,7 +76,7 @@ class Command(BaseCommand):
         except AssertionError:
             pass
 
-        # Import a journal PID manually
+        # Imports a journal PID manually
         if self.journal_pid:
             self.stdout.write(self.style.MIGRATE_HEADING(
                 'Start importing journal with PID: {0}'.format(self.journal_pid)))
@@ -98,6 +98,7 @@ class Command(BaseCommand):
             return
 
         # Imports each collection
+        journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
         for collection_code in erudit_settings.FEDORA_COLLECTIONS:
             try:
                 collection = Collection.objects.get(code=collection_code)
@@ -106,7 +107,18 @@ class Command(BaseCommand):
                 logger.error(msg, exc_info=True)
                 self.stdout.write(self.style.ERROR(msg))
             else:
-                self.import_collection(collection)
+                _jc, _jec, _ic, _ac = self.import_collection(collection)
+                journal_count += _jc
+                journal_errored_count += _jec
+                issue_count += _ic
+                article_count += _ac
+
+        self.stdout.write(self.style.MIGRATE_HEADING(
+            '\nJournals imported: {journal_count} / Journals errored: {journal_errored_count} / '
+            'issues imported: {issue_count} / articles imported: {article_count}'.format(
+                journal_count=journal_count, journal_errored_count=journal_errored_count,
+                issue_count=issue_count, article_count=article_count,
+            )))
 
     def import_collection(self, collection):
         """ Imports all the journals of a specific collection. """
@@ -141,12 +153,20 @@ class Command(BaseCommand):
         # STEP 2: import each journal using its PID
         # --
 
+        journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
         for jpid in journal_pids:
             try:
-                self.import_journal(jpid, collection)
+                _ic, _ac = self.import_journal(jpid, collection)
             except Exception as e:
+                journal_errored_count += 1
                 self.stdout.write(self.style.ERROR(
                     '    Unable to import the journal with PID "{0}": {1}'.format(jpid, e)))
+            else:
+                journal_count += 1
+                issue_count += _ic
+                article_count += _ac
+
+        return journal_count, journal_errored_count, issue_count, article_count
 
     @transaction.atomic
     def import_journal(self, journal_pid, collection):
@@ -214,6 +234,8 @@ class Command(BaseCommand):
         # STEP 3: imports all the issues associated with the journal
         # --
 
+        issue_count, article_count = 0, 0
+
         xml_issue_nodes = publications_tree.findall('.//numero')
         for issue_node in xml_issue_nodes:
             ipid = issue_node.get('pid')
@@ -221,7 +243,11 @@ class Command(BaseCommand):
                 # Imports the issue only if its PID is prefixed with the PID of the journal object.
                 # In any other case this means that the issue is associated with another journal and
                 # it will be imported later.
-                self._import_issue(ipid, journal)
+                _ac = self._import_issue(ipid, journal)
+                issue_count += 1
+                article_count += _ac
+
+        return issue_count, article_count
 
     def _import_issue(self, issue_pid, journal):
         """ Imports an issue using its PID. """
@@ -270,6 +296,8 @@ class Command(BaseCommand):
         # STEP 3: imports all the articles associated with the issue
         # --
 
+        article_count = 0
+
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
@@ -281,8 +309,12 @@ class Command(BaseCommand):
                     'The issue\'s article with PID "{0}" cannot be imported: {1}'.format(apid, e),
                     exc_info=True)
                 raise
+            else:
+                article_count += 1
 
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+
+        return article_count
 
     def _import_article(self, article_pid, issue):
         """ Imports an article using its PID. """
