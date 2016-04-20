@@ -254,6 +254,11 @@ class Solr(object):
             )
         )
 
+        # Quick workaround: ensures that only Article and Culturel documents (provided by the
+        # "erudit" collection) are returned by Solr
+        params['q'] = '{0} TypeArticle_fac:("Article" OR "Culturel") Fonds_fac:("Érudit")'.format(
+            params['q'])
+
         if search_extras:
             params["q"] = "{base_search} {search_extras_query}".format(
                 base_search=params["q"],
