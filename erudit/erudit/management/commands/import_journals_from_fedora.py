@@ -196,8 +196,13 @@ class Command(BaseCommand):
         # Associates the publisher to the Journal instance
         xml_publisher = oaiset_info_tree.find('.//publisher')
         publisher_name = xml_publisher.text if xml_publisher is not None else None
-        publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
-        journal.publishers.add(publisher)
+        if publisher_name is not None:
+            publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
+            journal.publishers.add(publisher)
+        else:
+            logger.error(
+                'The journal with PID "{}" has been created or updated '
+                'without publisher'.format(journal_pid), exc_info=True)
 
         if journal_created:
             self.stdout.write('      Journal instance created: "{}"'.format(journal.name))
