@@ -93,6 +93,9 @@ class Query(object):
             if q.negated:
                 subqs = '*:* -{}'.format(subqs)
 
+            if subqs is None:
+                continue
+
             subqs = '({})'.format(subqs)
             subqs_list.append(subqs)
 
