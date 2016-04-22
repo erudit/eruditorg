@@ -71,6 +71,11 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if journals:
             filters.update({'journals': journals})
 
+        # Authors filter
+        authors = query_params.getlist('authors', [])
+        if authors:
+            filters.update({'authors': authors})
+
         return filters
 
     def apply_solr_filters(self, filters):
@@ -91,6 +96,8 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         languages = filters.get('languages', [])
 
         journals = filters.get('journals', [])
+
+        authors = filters.get('authors', [])
 
         # Main filters
         query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
@@ -127,6 +134,10 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if journals:
             sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
 
+        # Applies authors filter
+        if authors:
+            sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', authors)
+
         return sqs.get_results()
 
     def filter_queryset(self, request, queryset, view):
@@ -145,5 +156,5 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
     def _filter_solr_multiple(self, sqs, field, values):
         query = Q()
         for v in values:
-            query |= Q(**{field: v})
+            query |= Q(**{field: '"{}"'.format(v)})
         return sqs.filter(query)
