@@ -7,6 +7,7 @@ from django.views.generic import FormView
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
 from erudit.models import EruditDocument
 from erudit.serializers import EruditDocumentSerializer
@@ -16,8 +17,15 @@ from . import forms
 from . import solr
 
 
+class EruditDocumentPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
+
 class EruditDocumentListAPIView(ListAPIView):
     filter_backends = (filters.EruditDocumentSolrFilter, )
+    pagination_class = EruditDocumentPagination
     queryset = EruditDocument.objects.all()
     serializer_class = EruditDocumentSerializer
 
