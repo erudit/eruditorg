@@ -1,15 +1,27 @@
+# -*- coding: utf-8 -*-
+
+import math
 import urllib
-from math import ceil
+
 from django.views.generic import FormView
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
+from rest_framework import viewsets
 
-# from base.viewmixins import SolrServiceRequiredMixin
 from erudit.models import EruditDocument
-from . import solr, forms
+from erudit.serializers import EruditDocumentSerializer
+
+from . import filters
+from . import forms
+from . import solr
 
 
-# class Search(SolrServiceRequiredMixin, FormView):
+class EruditDocumentViewSet(viewsets.ModelViewSet):
+    filter_backends = (filters.EruditDocumentSolrFilter, )
+    queryset = EruditDocument.objects.all()
+    serializer_class = EruditDocumentSerializer
+
+
 class Search(FormView):
     model = EruditDocument
     object_list = []
@@ -165,7 +177,7 @@ class Search(FormView):
 
             # Number of pages
             try:
-                self.page_count = ceil(self.results_count / self.results_per_query)
+                self.page_count = math.ceil(self.results_count / self.results_per_query)
             except:
                 self.page_count = 1
 
