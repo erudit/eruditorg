@@ -61,6 +61,11 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if document_types:
             filters.update({'document_types': document_types})
 
+        # Languges filter
+        languages = query_params.getlist('languages', [])
+        if languages:
+            filters.update({'languages': languages})
+
         return filters
 
     def apply_solr_filters(self, filters):
@@ -77,6 +82,8 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         pub_year_end = filters.get('pub_year_end', None)
 
         document_types = filters.get('document_types', [])
+
+        languages = filters.get('languages', [])
 
         # Main filters
         query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
@@ -99,17 +106,15 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
             yend = pub_year_end if pub_year_end is not None else '*'
             sqs = sqs.filter(AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend))
         elif pub_years:
-            query = Q()
-            for y in pub_years:
-                query |= Q(AnneePublication=y)
-            sqs = sqs.filter(query)
+            sqs = self._filter_solr_multiple(sqs, 'AnneePublication', pub_years)
 
         # Applies types of documents filter
         if document_types:
-            query = Q()
-            for t in document_types:
-                query |= Q(TypeArticle_fac=t)
-            sqs = sqs.filter(query)
+            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', document_types)
+
+        # Applies languages filter
+        if languages:
+            sqs = self._filter_solr_multiple(sqs, 'Langue', languages)
 
         return sqs.get_results()
 
@@ -125,3 +130,9 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         localidentifiers = [r['ID'] for r in results.docs]
 
         return queryset.filter(localidentifier__in=localidentifiers)
+
+    def _filter_solr_multiple(self, sqs, field, values):
+        query = Q()
+        for v in values:
+            query |= Q(**{field: v})
+        return sqs.filter(query)
