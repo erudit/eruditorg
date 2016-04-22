@@ -15,6 +15,7 @@ class Q(object):
         self.params = params.copy()
         self.operator = self.default
         self.operands = []
+        self.negated = False
 
     def _combine(self, other, operator):
         if not isinstance(other, Q):
@@ -25,11 +26,21 @@ class Q(object):
         obj.operands.append(other if other.operands else other.params)
         return obj
 
+    def _negate(self):
+        self.negated = not self.negated
+
     def __or__(self, other):
         return self._combine(other, self.OR)
 
     def __and__(self, other):
         return self._combine(other, self.AND)
+
+    def __invert__(self):
+        obj = type(self)()
+        obj.operator = self.AND
+        obj.operands.append(self if self.operands else self.params)
+        obj._negate()
+        return obj
 
 
 class Query(object):
@@ -77,6 +88,11 @@ class Query(object):
                 subqs = self._get_q_querystring(qchild)
             else:
                 subqs = self._get_querystring_from_dict(qchild)
+
+            # Handles the case when the query is negated
+            if q.negated:
+                subqs = '*:* -{}'.format(subqs)
+
             subqs = '({})'.format(subqs)
             subqs_list.append(subqs)
 
