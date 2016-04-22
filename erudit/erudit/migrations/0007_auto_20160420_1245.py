@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('erudit', '0001_initial'),
+        ('erudit', '0006_auto_20160420_1231'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='article',
-            name='issue',
-            field=models.ForeignKey(to='erudit.Issue', related_name='articles', verbose_name='Numéro'),
+            model_name='author',
+            name='lastname',
+            field=models.CharField(verbose_name='Nom', null=True, blank=True, max_length=50),
         ),
     ]

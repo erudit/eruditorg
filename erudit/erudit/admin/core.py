@@ -47,13 +47,8 @@ class CollectionAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Collection', {
             'fields': (
-                ('name', 'code',)
+                ('name', 'code', 'localidentifier', )
             )
-        }),
-        ('Identification', {
-            'fields': (
-                'edinum_id', 'synced_with_edinum', 'sync_date'
-            ),
         }),
     ]
 
