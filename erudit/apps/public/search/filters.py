@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import django_filters
 from rest_framework import filters
 
 from core.solrq.query import Q
-from erudit.models import EruditDocument
 
 from . import solr_search
 
@@ -44,14 +42,30 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
                     'term': search_term, 'field': search_field, 'operator': search_operator, })
         filters.update({'advanced_q': advanced_q})
 
+        # Publication year filters
+        pub_years = query_params.getlist('years', [])
+        pub_year_start = query_params.get('pub_year_start', None)
+        pub_year_end = query_params.get('pub_year_end', None)
+        if pub_years:
+            filters.update({'pub_years': pub_years})
+        if pub_year_start:
+            filters.update({'pub_year_start': pub_year_start})
+        if pub_year_end:
+            filters.update({'pub_year_end': pub_year_end})
+
         return filters
 
     def apply_solr_filters(self, filters):
         """ Applies the solr filters and returns the list of results. """
         search = solr_search.get_search()
+
         qfield = filters['q']['field']
         qterm = filters['q']['term']
         advanced_q = filters.get('advanced_q', [])
+
+        pub_years = filters.get('pub_years', [])
+        pub_year_start = filters.get('pub_year_start', None)
+        pub_year_end = filters.get('pub_year_end', None)
 
         # Main filters
         query = Q(**{qfield: qterm})
@@ -65,8 +79,18 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
                 query |= Q(**{field: term})
             elif operator == self.OP_NOT:
                 query &= ~Q(**{field: term})
-
         sqs = search.filter(query)
+
+        # Applies publication year filters
+        if pub_year_start or pub_year_end:
+            ystart = pub_year_start if pub_year_start is not None else '*'
+            yend = pub_year_end if pub_year_end is not None else '*'
+            sqs = sqs.filter(AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend))
+        elif pub_years:
+            query = Q()
+            for y in pub_years:
+                query |= Q(AnneePublication=y)
+            sqs = sqs.filter(query)
 
         return sqs.get_results()
 
@@ -82,24 +106,3 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         localidentifiers = [r['ID'] for r in results.docs]
 
         return queryset.filter(localidentifier__in=localidentifiers)
-
-
-class _EruditDocumentSolrFilter(django_filters.FilterSet):
-    q = django_filters.MethodFilter(action='filter_by_q', distinct=True)
-
-    class Meta:
-        model = EruditDocument
-
-    def __init__(self, *args, **kwargs):
-        super(_EruditDocumentSolrFilter, self).__init__(*args, **kwargs)
-        self.solr_search = solr_search.get_search()
-
-    def filter_by_q(self, queryset, value):
-        return queryset
-
-    @property
-    def qs(self):
-        print(self.filters)
-        qs = super(_EruditDocumentSolrFilter, self).qs
-        print("O")
-        return qs
