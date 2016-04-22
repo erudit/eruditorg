@@ -28,7 +28,10 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         # Simple search parameters
         basic_search_term = query_params.get('basic_search_term', '*')
         basic_search_field = query_params.get('basic_search_field', 'all')
-        filters.update({'q': {'term': basic_search_term, 'field': basic_search_field, }})
+        basic_search_operator = query_params.get('basic_search_operator', None)
+        filters.update({'q': {
+            'term': basic_search_term, 'field': basic_search_field,
+            'operator': basic_search_operator}})
 
         # Advanced search parameters
         advanced_q = []
@@ -53,6 +56,11 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if pub_year_end:
             filters.update({'pub_year_end': pub_year_end})
 
+        # Types of documents filter
+        document_types = query_params.getlist('article_types', [])
+        if document_types:
+            filters.update({'document_types': document_types})
+
         return filters
 
     def apply_solr_filters(self, filters):
@@ -61,14 +69,18 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
 
         qfield = filters['q']['field']
         qterm = filters['q']['term']
+        qoperator = filters['q']['operator']
         advanced_q = filters.get('advanced_q', [])
 
         pub_years = filters.get('pub_years', [])
         pub_year_start = filters.get('pub_year_start', None)
         pub_year_end = filters.get('pub_year_end', None)
 
+        document_types = filters.get('document_types', [])
+
         # Main filters
-        query = Q(**{qfield: qterm})
+        query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
+            else ~Q(**{qfield: qterm})
         for qparams in advanced_q:
             term = qparams.get('term')
             field = qparams.get('field')
@@ -90,6 +102,13 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
             query = Q()
             for y in pub_years:
                 query |= Q(AnneePublication=y)
+            sqs = sqs.filter(query)
+
+        # Applies types of documents filter
+        if document_types:
+            query = Q()
+            for t in document_types:
+                query |= Q(TypeArticle_fac=t)
             sqs = sqs.filter(query)
 
         return sqs.get_results()
