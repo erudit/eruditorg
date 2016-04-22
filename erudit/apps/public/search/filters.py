@@ -160,20 +160,41 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if publication_types:
             sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', publication_types)
 
-        return sqs.get_results()
+        return sqs
+
+    def get_solr_sorting(self, request):
+        """ Get the Solr sorting string. """
+        sort = request.query_params.get('sort', 'relevance')
+        if sort == 'relevance':
+            return 'score desc'
+        elif sort == 'title_asc':
+            return 'Titre_tri asc'
+        elif sort == 'title_desc':
+            return 'Titre_tri desc'
+        elif sort == 'author_asc':
+            return 'Auteur_tri asc'
+        elif sort == 'author_desc':
+            return 'Auteur_tri desc'
 
     def filter_queryset(self, request, queryset, view):
         """ Filters the queryset by using the results provided by the Solr index. """
         # Firt we have to retrieve all the considered Solr filters
         filters = self.build_solr_filters(request.query_params.copy())
 
-        # Then apply the filters in order to get a list of results from the Solr index
-        results = self.apply_solr_filters(filters)
+        # Then apply the filters in order to get lazy query containing all the filters
+        solr_query = self.apply_solr_filters(filters)
+
+        # Trigger the execution of the query in order to get a list of results from the Solr index
+        results = solr_query.get_results(sort=self.get_solr_sorting(request))
 
         # Determines the localidentifiers of the documents in order to filter the queryset
         localidentifiers = [r['ID'] for r in results.docs]
 
-        return queryset.filter(localidentifier__in=localidentifiers)
+        queryset = queryset.filter(localidentifier__in=localidentifiers)
+        db_localidentifies = queryset.values_list('localidentifier', flat=True)
+        _localidentifiers = [lid for lid in localidentifiers if lid in db_localidentifies]
+
+        return _localidentifiers, queryset
 
     def _filter_solr_multiple(self, sqs, field, values):
         query = Q()
