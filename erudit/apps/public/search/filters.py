@@ -76,6 +76,11 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if authors:
             filters.update({'authors': authors})
 
+        # Funds filter
+        funds = query_params.getlist('funds', [])
+        if funds:
+            filters.update({'funds': funds})
+
         return filters
 
     def apply_solr_filters(self, filters):
@@ -99,6 +104,8 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
 
         authors = filters.get('authors', [])
 
+        funds = filters.get('funds', [])
+
         # Main filters
         query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
             else ~Q(**{qfield: qterm})
@@ -114,7 +121,7 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
                 query &= ~Q(**{field: term})
         sqs = search.filter(query)
 
-        # Applies publication year filters
+        # Applies the publication year filters
         if pub_year_start or pub_year_end:
             ystart = pub_year_start if pub_year_start is not None else '*'
             yend = pub_year_end if pub_year_end is not None else '*'
@@ -122,21 +129,25 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         elif pub_years:
             sqs = self._filter_solr_multiple(sqs, 'AnneePublication', pub_years)
 
-        # Applies types of documents filter
+        # Applies the types of documents filter
         if document_types:
             sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', document_types)
 
-        # Applies languages filter
+        # Applies the languages filter
         if languages:
             sqs = self._filter_solr_multiple(sqs, 'Langue', languages)
 
-        # Applies journals filter
+        # Applies the journals filter
         if journals:
             sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
 
-        # Applies authors filter
+        # Applies the authors filter
         if authors:
             sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', authors)
+
+        # Applies the funds filter
+        if funds:
+            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', funds)
 
         return sqs.get_results()
 
