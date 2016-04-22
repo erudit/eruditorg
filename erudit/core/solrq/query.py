@@ -115,8 +115,11 @@ class Query(object):
             qs = ' AND '.join([qs, subqs]) if qs else subqs
         return qs
 
-    def get_results(self):
+    def get_results(self, sort=None):
         """ Triggers the search and returns the results. """
-        return self.search.client.search(self._qs, **self.search.extra_params)
+        params = self.search.extra_params.copy()
+        if sort:
+            params.update({'sort': sort})
+        return self.search.client.search(self._qs, **params)
 
     results = property(get_results)
