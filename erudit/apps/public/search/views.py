@@ -6,7 +6,7 @@ import urllib
 from django.views.generic import FormView
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
-from rest_framework import viewsets
+from rest_framework.generics import ListAPIView
 
 from erudit.models import EruditDocument
 from erudit.serializers import EruditDocumentSerializer
@@ -16,7 +16,7 @@ from . import forms
 from . import solr
 
 
-class EruditDocumentViewSet(viewsets.ModelViewSet):
+class EruditDocumentListAPIView(ListAPIView):
     filter_backends = (filters.EruditDocumentSolrFilter, )
     queryset = EruditDocument.objects.all()
     serializer_class = EruditDocumentSerializer
