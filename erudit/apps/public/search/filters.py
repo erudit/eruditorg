@@ -61,10 +61,15 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         if document_types:
             filters.update({'document_types': document_types})
 
-        # Languges filter
+        # Languages filter
         languages = query_params.getlist('languages', [])
         if languages:
             filters.update({'languages': languages})
+
+        # Collections/journals filter
+        journals = query_params.getlist('collections', [])
+        if journals:
+            filters.update({'journals': journals})
 
         return filters
 
@@ -84,6 +89,8 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         document_types = filters.get('document_types', [])
 
         languages = filters.get('languages', [])
+
+        journals = filters.get('journals', [])
 
         # Main filters
         query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
@@ -115,6 +122,10 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         # Applies languages filter
         if languages:
             sqs = self._filter_solr_multiple(sqs, 'Langue', languages)
+
+        # Applies journals filter
+        if journals:
+            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
 
         return sqs.get_results()
 
