@@ -190,11 +190,20 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         # Determines the localidentifiers of the documents in order to filter the queryset
         localidentifiers = [r['ID'] for r in results.docs]
 
-        queryset = queryset.filter(localidentifier__in=localidentifiers)
-        db_localidentifies = queryset.values_list('localidentifier', flat=True)
-        _localidentifiers = [lid for lid in localidentifiers if lid in db_localidentifies]
+        # Determines the localidentifiers that are present in the database by keeping the order of
+        # the filtered results. We convert the list of localidentifiers returned from the DB to a
+        # set because checking for membership in a set or similar hash-based type is roughly O(1),
+        # compared to O(n) for membership in a list.
+        db_localidentifiers = queryset.values_list('localidentifier', flat=True)
+        db_filtered_localidentifiers = [
+            lid for lid in localidentifiers if lid in frozenset(db_localidentifiers)]
 
-        return _localidentifiers, queryset
+        # Note: we could've filtered the queryset using the list of localidentifiers. However this
+        # filter is aimed to be used along with the EruditDocumentPagination whic paginates the
+        # objects using the list of localidentifiers. So the objects are filtered at pagination-time
+        # anyway.
+
+        return db_filtered_localidentifiers, queryset
 
     def _filter_solr_multiple(self, sqs, field, values):
         query = Q()
