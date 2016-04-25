@@ -1,8 +1,19 @@
+# -*- coding: utf-8 -*-
+
 import urllib.parse as urlparse
+
 from django import template
 from django.utils.html import mark_safe
 
 register = template.Library()
+
+
+@register.filter
+def highlight(text, word):
+    return mark_safe(text.replace(word, '<mark class="highlight">{}</mark>'.format(word)))
+
+
+# TODO: remove the following templatetags
 
 
 @register.inclusion_tag("public/search/_pagination.html", takes_context=True)
@@ -84,8 +95,3 @@ def is_search_filter_value_selected(selected_filters, filter_name, filter_value)
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key, None)
-
-
-@register.filter
-def highlight(text, word):
-    return mark_safe(text.replace(word, "<mark class='highlight'>%s</mark>" % word))

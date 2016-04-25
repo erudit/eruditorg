@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load widget_tweaks %}
+
+<fieldset>
+  <div>
+    <div class="basic-search-field">
+      <div id="div_id_{{ search_form.basic_search_term.html_name }}" class="form-group{% if search_form.basic_search_term.errors %} has-error{% endif %}">
+        <div class="controls">
+          <label class="control-label" for="{{ search_form.basic_search_term.auto_id }}">{{ search_form.basic_search_term.label }}</label>
+          {{ search_form.basic_search_term|add_class:'form-control' }}
+          {% for error in search_form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+        <button type="submit"><i class="ion ion-ios-search"></i></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <div id="div_id_{{ search_form.basic_search_operator.html_name }}" class="checkbox">
+        {{ search_form.basic_search_operator|add_class:'form-control' }}
+        <label for="{{ search_form.basic_search_operator.auto_id }}">{{ search_form.basic_search_operator.label }}</label>
+        {% for error in search_form.basic_search_operator.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+    </div>
+    <div id="div_id_{{ search_form.basic_search_field.html_name }}" class="form-group{% if search_form.basic_search_field.errors %} has-error{% endif %}">
+      <div class="controls">
+        <label class="control-label" for="{{ search_form.basic_search_field.auto_id }}">{{ search_form.basic_search_field.label }}</label>
+        {{ search_form.basic_search_field|add_class:'form-control' }}
+        {% for error in search_form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+    </div>
+  </div>
+</fieldset>

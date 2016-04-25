@@ -1,0 +1,96 @@
+{% load i18n %}
+{% load public_search_tags %}
+
+{% trans "inconnu" as i18n_unknown %}
+{% url 'public:journal:article-detail' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
+
+<article id="article-{{ document.id }}" class="search-result-item" data-article-id="{{ document.id }}">
+  <header>
+    <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+    {# authors #}
+    {% if document.authors %}
+    <h4 class="authors h6">
+      {% for author in document.authors %}
+      <span class="author">{{ author.firstname }} {{ author.lastname }}</span>{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </h4>
+    {% endif %}
+    {% if search_elements and search_elements.0.operator != 'NOT' %}
+      <h3 class="h4">
+        <a href="{{ article_url }}">
+          {{ document.real_object.title|highlight:main_qterm }}
+        </a>
+      </h3>
+      {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle|highlight:main_qterm }}</h4>{% endif %}
+    {% else %}
+      <h3 class="h4">
+        <a href="{{ article_url }}">
+          {{ document.real_object.title }}
+        </a>
+      </h3>
+      {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
+    {% endif %}
+  </header>
+  <footer class="meta">
+    {% if document.real_object.issue_title %}<h5>{{ document.real_object.issue_title }}</h5>{% endif %}
+    <h5>
+    {% spaceless %}
+      {% blocktrans trimmed with number=document.real_object.issue_number|default:i18n_unknown date=document.real_object.issue_published %}
+        Numéro {{ number }} - {{ date }}
+      {% endblocktrans %}
+      {% with first_page=document.real_object.first_page last_page=document.real_object.last_page %}
+      {% if first_page and last_page and first_page != last_page %}
+      &nbsp;-&nbsp;{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }} à {{ last_page }}{% endblocktrans %}
+      {% elif first_page and first_page != "0" %}
+      &nbsp;-&nbsp;{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}
+      {% endif %}
+      {% endwith %}
+    {% endspaceless %}
+    </h5>
+  </footer>
+  {% if document.real_object.abstract %}
+  <summary class="akkordion" data-akkordion-single="true">
+    <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
+    <div class="summary-content akkordion-content">
+      <p>{{ document.real_object.abstract }}</p>
+    </div>
+  </summary>
+  {% else %}
+  <br /><br />
+  {% endif %}
+  <nav class="toolbox compact">
+    <ul class="unstyled">
+      <li>
+        <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' document.localidentifier %}">
+          <span class="erudicon erudicon-tools-pdf"></span>
+          <span class="tools-label">{% trans "Télécharger" %}</span>
+        </button>
+      </li>
+      <li>
+        <button id="tool-quote" data-modal-id="#id_quote_modal_{{ document.id }}">
+          <span class="erudicon erudicon-tools-quote"></span>
+          <span class="tools-label">{% trans "Citer cet article" %}</span>
+        </button>
+      </li>
+      <li>
+        <button id="tool-citation-save-{{ document.id }}" data-citation-save="#article-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+          <span class="erudicon erudicon-tools-save"></span>
+          <span class="tools-label">{% trans "Sauvegarder" %}</span>
+        </button>
+        <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#article-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+          <span class="erudicon erudicon-tools-save"></span>
+          <span class="tools-label">{% trans "Supprimer" %}</span>
+        </button>
+      </li>
+      <li>
+        <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ article_url }}">
+          <span class="erudicon erudicon-tools-share"></span>
+          <span class="tools-label">{% trans "Partager" %}</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <div class="hidden">
+    {% include "public/search/partials/results_citation_modal_content.html" %}
+  </div>
+</article>
