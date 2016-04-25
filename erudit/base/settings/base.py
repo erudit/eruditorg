@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'django_fsm',
     'easy_pjax',
     'django_js_reverse',
+    'widget_tweaks',
     'rest_framework',
 )
 
