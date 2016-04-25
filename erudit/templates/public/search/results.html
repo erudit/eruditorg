@@ -1,0 +1,71 @@
+{% extends "public/search/base.html" %}
+{% load i18n %}
+
+{% block page-title %}{% trans "Recherche" %}{% endblock %}
+
+{% block data-controller %}public:search:results{% endblock data-controller %}
+
+{% block content %}
+<section id="search-page" class="container">
+
+  {# Title and search summary #}
+  <div class="row">
+    <header class="page-header-main search-header col-xs-12 border-bottom">
+      <hgroup>
+        <h2>{% trans "Résultats de recherche" %} <span class="hint--top hint--no-animate" data-hint="{% trans "Help text!" %}"><i class="ion-help-circled"></i></span></h2>
+        {% if documents %}
+        <h3>
+        {% blocktrans trimmed count counter=results.pagination.count %}
+          <strong>{{ counter }}</strong> résultat trouvé pour la requête :
+        {% plural %}
+          <strong>{{ counter }}</strong> résultats trouvés pour la requête :
+        {% endblocktrans %}
+        </h3>
+        {% else %}
+        <h3>{% trans "Aucun document trouvé" %}</h3>
+        {% endif %}
+        {% if search_elements %}
+        <h4 class="mono-space search-terms">
+          {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
+        </h4>
+        {% endif %}
+      </hgroup>
+    </header>
+  </div>
+
+  <div class="row">
+    {# Filter form #}
+    <aside class="col-sm-3 search-form">
+      <form action="{% url 'public:search:results' %}" id="id-search" method="get" >
+        <header class='search-filters-header'><h3 class='h4'>{% trans "Filtres" %}</h3></header>
+        {% include "public/search/partials/results_search_form.html" %}
+        {% include "public/search/partials/results_filter_form.html" %}
+        <div class="form-action col-xs-9 col-centered">
+          <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
+        </div>
+      </form>
+    </aside>
+
+    {# Search results #}
+    <div id="search-results" class="col-sm-7 col-sm-push-2 search-results">
+      {% if documents %}
+        <nav class="result-sorting">
+          TODO
+        </nav>
+        {% include "public/search/partials/results_pagination.html" %}
+        <ol class="unstyled results">
+          {% for document in documents %}
+          <li>
+            {% include "public/search/partials/results_article_preview.html" %}
+          </li>
+          {% endfor %}
+        </ol>
+        {% include "public/search/partials/results_pagination.html" %}
+      {% else %}
+        <h3>{% trans "Aucun document trouvé." %}</h3>
+      {% endif %}
+    </div>
+  </div>
+
+</section>
+{% endblock content %}

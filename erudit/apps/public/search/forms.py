@@ -1,4 +1,6 @@
-from datetime import date, timedelta
+# -*- coding: utf-8 -*-
+
+import datetime as dt
 
 from django.utils.translation import ugettext_lazy as _
 from django import forms
@@ -47,12 +49,12 @@ ADVANCED_SEARCH_FIELDS = (
 
 AVAILABILITY_CHOICES = (
     ("", ""),
-    ((date.today() - timedelta(days=1)), _("1 jour")),
-    ((date.today() - timedelta(days=7)), _("1 semaine")),
-    ((date.today() - timedelta(days=14)), _("2 semaines")),
-    ((date.today() - timedelta(days=31)), _("1 mois")),
-    ((date.today() - timedelta(days=183)), _("6 mois")),
-    ((date.today() - timedelta(days=365)), _("1 an")),
+    ((dt.date.today() - dt.timedelta(days=1)), _("1 jour")),
+    ((dt.date.today() - dt.timedelta(days=7)), _("1 semaine")),
+    ((dt.date.today() - dt.timedelta(days=14)), _("2 semaines")),
+    ((dt.date.today() - dt.timedelta(days=31)), _("1 mois")),
+    ((dt.date.today() - dt.timedelta(days=183)), _("6 mois")),
+    ((dt.date.today() - dt.timedelta(days=365)), _("1 an")),
 )
 
 FUNDS_CHOICES = (
@@ -71,7 +73,7 @@ PUB_TYPES_CHOICES = (
 )
 
 
-def get_years_range(year_start=1900, year_end=(date.today().year + 1), reverse=False,
+def get_years_range(year_start=1900, year_end=(dt.date.today().year + 1), reverse=False,
                     add_empty_choice=False, empty_string=""):
     if not reverse:
         years_range = [(str(year), str(year)) for year in range(year_start, year_end)]
@@ -216,93 +218,71 @@ class SearchFormHelper(FormHelper):
 
 
 class SearchForm(forms.Form):
-    page = forms.IntegerField(
-        label=_("Page"), widget=forms.HiddenInput, required=False, initial=1
-    )
+    # page = forms.IntegerField(
+    #     label=_('Page'), widget=forms.HiddenInput, required=False, initial=1)
 
-    basic_search_operator = forms.BooleanField(
-        label=_("Exclure des résultats?"), required=False
-    )
-    # basic_search_operator = forms.ChoiceField(
-    #     label=_("Inclure?"), widget=forms.Select, choices=BASIC_SEARCH_OPERATORS, required=False
-    # )
+    basic_search_operator = forms.BooleanField(label=_('Exclure des résultats?'), required=False)
     basic_search_term = forms.CharField(
-        label=_("Recherche"), widget=forms.TextInput, required=False,
-    )
+        label=_('Recherche'), widget=forms.TextInput, required=False)
     basic_search_field = forms.ChoiceField(
-        label=_("Inclure les champs"),
-        widget=forms.Select,
-        choices=ADVANCED_SEARCH_FIELDS,
-        required=False
-    )
+        label=_('Inclure les champs'), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS,
+        required=False)
 
     advanced_search_operator1 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=OPERATORS, required=False
-    )
-    advanced_search_term1 = forms.CharField(label="", widget=forms.TextInput, required=False, )
+        label=None, widget=forms.Select, choices=OPERATORS, required=False)
+    advanced_search_term1 = forms.CharField(label=None, widget=forms.TextInput, required=False)
     advanced_search_field1 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
     )
     advanced_search_operator2 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=OPERATORS, required=False
-    )
-    advanced_search_term2 = forms.CharField(label="", widget=forms.TextInput, required=False, )
+        label=None, widget=forms.Select, choices=OPERATORS, required=False)
+    advanced_search_term2 = forms.CharField(label=None, widget=forms.TextInput, required=False)
     advanced_search_field2 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
-    )
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
     advanced_search_operator3 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=OPERATORS, required=False
-    )
-    advanced_search_term3 = forms.CharField(label="", widget=forms.TextInput, required=False, )
+        label=None, widget=forms.Select, choices=OPERATORS, required=False)
+    advanced_search_term3 = forms.CharField(label="", widget=forms.TextInput, required=False)
     advanced_search_field3 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
-    )
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
     advanced_search_operator4 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=OPERATORS, required=False
-    )
-    advanced_search_term4 = forms.CharField(label="", widget=forms.TextInput, required=False, )
+        label=None, widget=forms.Select, choices=OPERATORS, required=False)
+    advanced_search_term4 = forms.CharField(label=None, widget=forms.TextInput, required=False)
     advanced_search_field4 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
-    )
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
     advanced_search_operator5 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=OPERATORS, required=False
-    )
-    advanced_search_term5 = forms.CharField(label="", widget=forms.TextInput, required=False, )
+        label=None, widget=forms.Select, choices=OPERATORS, required=False)
+    advanced_search_term5 = forms.CharField(label=None, widget=forms.TextInput, required=False)
     advanced_search_field5 = forms.ChoiceField(
-        label="", widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
-    )
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
 
     pub_year_start = forms.ChoiceField(
-        label=_("Publiés entre"), widget=forms.Select,
-        choices=get_years_range(add_empty_choice=True), required=False
-    )
+        label=_('Publiés entre'), widget=forms.Select,
+        choices=get_years_range(add_empty_choice=True), required=False)
     pub_year_end = forms.ChoiceField(
-        label="", widget=forms.Select,
-        choices=get_years_range(reverse=True, add_empty_choice=True), required=False
-    )
+        label=None, widget=forms.Select,
+        choices=get_years_range(reverse=True, add_empty_choice=True), required=False)
 
     available_since = forms.ChoiceField(
-        label=_("Dans Érudit depuis"), widget=forms.Select,
-        choices=AVAILABILITY_CHOICES, required=False
-    )
+        label=_('Dans Érudit depuis'), widget=forms.Select, choices=AVAILABILITY_CHOICES,
+        required=False)
 
     funds_limit = forms.MultipleChoiceField(
-        label=_("Fonds"), widget=forms.CheckboxSelectMultiple,
-        choices=FUNDS_CHOICES, required=False
-    )
+        label=_('Fonds'), widget=forms.CheckboxSelectMultiple, choices=FUNDS_CHOICES,
+        required=False)
 
     pub_types = forms.MultipleChoiceField(
-        label=_("Types de publication"), widget=forms.CheckboxSelectMultiple,
-        choices=PUB_TYPES_CHOICES, required=False
-    )
+        label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
+        choices=PUB_TYPES_CHOICES, required=False)
     sort = forms.ChoiceField(
-        label=False, widget=forms.Select, choices=SORT_CHOICES, required=False
-    )
+        label=False, widget=forms.Select, choices=SORT_CHOICES, required=False)
     sort_order = forms.ChoiceField(
-        label=False, widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False
-    )
+        label=False, widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
 
         self.helper = SearchFormHelper()
+
+
+class FilterResultsForm(forms.Form):
+    pass

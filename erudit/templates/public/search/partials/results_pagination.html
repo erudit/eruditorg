@@ -1,0 +1,24 @@
+{% load i18n %}
+{% load base_urls_tags %}
+
+<nav>
+  <ul class="search-pagination">
+    {% if results.pagination.current_page > 1 %}
+    <a href="{% get_full_path_with_overrides page=1 %}"> <i class="ion-ios-arrow-left left-bar"></i> </a>
+    {% endif %}
+    {% if results.pagination.previous_page %}
+    <a href="{% get_full_path_with_overrides page=results.pagination.previous_page %}"> <i class="ion-ios-arrow-left"></i> </a>
+    {% endif %}
+    <span class="page-position">
+    {% blocktrans trimmed with current_page=results.pagination.current_page page_count=results.pagination.num_pages %}
+      Page {{ current_page }} de {{ page_count }}
+    {% endblocktrans %}
+    </span>
+    {% if results.pagination.next_page %}
+    <a href="{% get_full_path_with_overrides page=results.pagination.next_page %}"> <i class="ion-ios-arrow-right"></i> </a>
+    {% endif %}
+    {% if results.pagination.current_page < results.pagination.num_pages %}
+    <a href="{% get_full_path_with_overrides page=results.pagination.num_pages %}"> <i class="ion-ios-arrow-right right-bar"></i> </a>
+    {% endif %}
+  </ul>
+</nav>

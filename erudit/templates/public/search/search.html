@@ -1,6 +1,6 @@
 {% extends "public/search/base.html" %}
 {% load i18n %}
-{% load search_tags %}
+{% load public_search_tags %}
 {% load crispy_forms_tags %}
 
 {% block page-title %}{% trans "Recherche" %}{% endblock %}
@@ -84,7 +84,7 @@ Query URL: {{ query_url|safe }}
         <ol class="unstyled results">
           {% for document in documents %}
           <li>
-              {% if document.article %}{% include "public/search/_article_preview.html" with article=document.article %}{% endif %}
+            {% if document.article %}{% include "public/search/_article_preview.html" with article=document.article %}{% endif %}
           </li>
           {% endfor %}
         </ol>

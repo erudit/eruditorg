@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from rest_framework import filters
-
 from core.solrq.query import Q
 
 from . import solr_search
 
 
-class EruditDocumentSolrFilter(filters.BaseFilterBackend):
+class EruditDocumentSolrFilter(object):
     """ Filter that returns a list of EruditDocument instance based on Solr search results.
 
     This "filter" class can process many individual filters that should be translated to Solr
@@ -20,6 +18,16 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
     OP_OR = 'OR'
     OP_NOT = 'NOT'
     operators = [OP_AND, OP_OR, OP_NOT, ]
+
+    aggregation_correspondence = {
+        'AnneePublication': 'year',
+        'TypeArticle_fac': 'article_type',
+        'Langue': 'language',
+        'TitreCollection_fac': 'collection',
+        'Auteur_tri': 'author',
+        'Fonds_fac': 'fund',
+        'Corpus_fac': 'publication_type',
+    }
 
     def build_solr_filters(self, query_params={}):
         """ Return the filters to use to query the Solr index. """
@@ -176,7 +184,7 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         elif sort == 'author_desc':
             return 'Auteur_tri desc'
 
-    def filter_queryset(self, request, queryset, view):
+    def filter(self, request, queryset, view):
         """ Filters the queryset by using the results provided by the Solr index. """
         # Firt we have to retrieve all the considered Solr filters
         filters = self.build_solr_filters(request.query_params.copy())
@@ -198,12 +206,17 @@ class EruditDocumentSolrFilter(filters.BaseFilterBackend):
         db_filtered_localidentifiers = [
             lid for lid in localidentifiers if lid in frozenset(db_localidentifiers)]
 
-        # Note: we could've filtered the queryset using the list of localidentifiers. However this
-        # filter is aimed to be used along with the EruditDocumentPagination whic paginates the
-        # objects using the list of localidentifiers. So the objects are filtered at pagination-time
-        # anyway.
+        # Prepares the dictionnary containing aggregation results.
+        aggregations_dict = {}
+        for facet, flist in results.facets.get('facet_fields', {}).items():
+            fdict = {flist[i]: flist[i+1] for i in range(0, len(flist), 2)}
+            aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
 
-        return db_filtered_localidentifiers, queryset
+        # Note: we do not filter the queryset using the list of localidentifiers. This filter is
+        # aimed to be used along with the EruditDocumentPagination whic paginates the objects using
+        # the list of localidentifiers. So the objects are filtered at pagination-time anyway.
+
+        return db_filtered_localidentifiers, aggregations_dict
 
     def _filter_solr_multiple(self, sqs, field, values):
         query = Q()

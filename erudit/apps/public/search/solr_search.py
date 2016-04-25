@@ -29,6 +29,16 @@ class Search(BaseSearch):
     extra_params = {
         'rows': 1000000000,
         'fl': 'ID',
+        'facet': 'true',
+        'facet.field': [
+            'AnneePublication',
+            'TypeArticle_fac',
+            'Langue',
+            'TitreCollection_fac',
+            'Auteur_tri',
+            'Fonds_fac',
+            'Corpus_fac',
+        ],
     }
 
 
