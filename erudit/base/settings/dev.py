@@ -30,6 +30,11 @@ INSTALLED_APPS += (
     'kombu.transport.django',
 )
 
+TEMPLATES[0]['OPTIONS']['loaders'] = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
+
 BROKER_URL = 'django://'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 
