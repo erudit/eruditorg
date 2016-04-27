@@ -8,9 +8,9 @@
   <header>
     <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
     {# authors #}
-    {% if document.authors %}
+    {% if document.real_object.authors %}
     <h4 class="authors h6">
-      {% for author in document.authors %}
+      {% for author in document.real_object.authors %}
       <span class="author">{{ author.firstname }} {{ author.lastname }}</span>{% if not forloop.last %}, {% endif %}
       {% endfor %}
     </h4>
@@ -21,14 +21,14 @@
           {{ document.real_object.title|highlight:main_qterm }}
         </a>
       </h3>
-      {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle|highlight:main_qterm }}</h4>{% endif %}
+      {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle|highlight:main_qterm }}</h4>{% endif %}
     {% else %}
       <h3 class="h4">
         <a href="{{ article_url }}">
           {{ document.real_object.title }}
         </a>
       </h3>
-      {% if article.erudit_object.subtitle %}<h4>{{ article.erudit_object.subtitle }}</h4>{% endif %}
+      {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
     {% endif %}
   </header>
   <footer class="meta">

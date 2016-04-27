@@ -31,6 +31,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     abstract = serializers.SerializerMethodField()
     first_page = serializers.SerializerMethodField()
     last_page = serializers.SerializerMethodField()
+    subtitle = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
@@ -41,7 +42,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = erudit_models.Article
         fields = [
             'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
-            'issue_published', 'title', 'surtitle', 'processing', 'authors', 'abstract',
+            'issue_published', 'title', 'surtitle', 'subtitle', 'processing', 'authors', 'abstract',
             'first_page', 'last_page',
         ]
 
@@ -66,6 +67,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_last_page(self, obj):
         return obj.erudit_object.last_page
+
+    def get_subtitle(self, obj):
+        return obj.erudit_object.subtitle
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code
