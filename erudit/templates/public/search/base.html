@@ -2,5 +2,5 @@
 {% load i18n %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:search:search' %}">{% trans "Recherche" %}</a>
+  {{ block.super }} / <a href="{% url 'public:search:results' %}">{% trans "Recherche" %}</a>
 {% endblock %}
