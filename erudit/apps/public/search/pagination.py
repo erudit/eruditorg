@@ -37,21 +37,21 @@ class EruditDocumentPagination(PageNumberPagination):
         current page are returned.
         """
         page_size = self.get_page_size(request)
-        if not page_size:
+        if not page_size:  # pragma: no cover
             return None
 
         paginator = self.django_paginator_class(localidentifiers, page_size)
         page_number = request.query_params.get(self.page_query_param, 1)
-        if page_number in self.last_page_strings:
+        if page_number in self.last_page_strings:  # pragma: no cover
             page_number = paginator.num_pages
 
         try:
             self.page = paginator.page(page_number)
-        except InvalidPage:
+        except InvalidPage:  # pragma: no cover
             msg = self.invalid_page_message.format(page_number=page_number)
             raise NotFound(msg)
 
-        if paginator.num_pages > 1 and self.template is not None:
+        if paginator.num_pages > 1 and self.template is not None:  # pragma: no cover
             # The browsable API should display pagination controls.
             self.display_page_controls = True
 
