@@ -98,7 +98,15 @@
               <a href="#" data-trigger-search-bar class="search"><span class="ion-ios-search-strong"></span></a>
             </li>
             <li class="search-form">
-              {% include "public/search/partials/search_bar.html" %}
+              <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
+                <div class="form-group">
+                  <div class="input-group-btn">
+                    <input name="basic_search_term" type="search" class="search-terms form-control" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
+                    <button type="submit" class="btn btn-primary-outlined">{% trans 'Rechercher' %}</button>
+                    <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
+                  </div>
+                </div>
+              </form>
             </li>
           {% endblock %}
         </ul>

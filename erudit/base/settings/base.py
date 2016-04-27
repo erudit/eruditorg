@@ -138,7 +138,6 @@ TEMPLATES = [
         'DIRS': [
             str(ROOT_DIR / 'erudit' / 'templates'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.core.context_processors.request',
@@ -150,6 +149,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'base.context_processors.common_settings',
+            ],
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
             ],
         },
     },

@@ -5,8 +5,6 @@ import json
 from django.views.generic import View
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
-from django.views.decorators.cache import never_cache
-from django.utils.decorators import method_decorator
 from django.utils.encoding import smart_text
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.generics import ListAPIView
@@ -179,7 +177,3 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
 
     def forms_invalid(self, search_form, options_form):
         raise NotImplementedError
-
-    @method_decorator(never_cache)
-    def dispatch(self, *args, **kwargs):
-        return super(SearchResultsView, self).dispatch(*args, **kwargs)
