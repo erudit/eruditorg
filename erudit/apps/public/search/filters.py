@@ -172,7 +172,7 @@ class EruditDocumentSolrFilter(object):
 
     def get_solr_sorting(self, request):
         """ Get the Solr sorting string. """
-        sort = request.query_params.get('sort', 'relevance')
+        sort = request.query_params.get('sort_by', 'relevance')
         if sort == 'relevance':
             return 'score desc'
         elif sort == 'title_asc':
@@ -183,6 +183,10 @@ class EruditDocumentSolrFilter(object):
             return 'Auteur_tri asc'
         elif sort == 'author_desc':
             return 'Auteur_tri desc'
+        elif sort == 'pubdate_asc':
+            return 'DateAjoutErudit asc'
+        elif sort == 'pubdate_desc':
+            return 'DateAjoutErudit desc'
 
     def filter(self, request, queryset, view):
         """ Filters the queryset by using the results provided by the Solr index. """

@@ -104,22 +104,21 @@ section#search-page {
 
   }
 
-}
-
-/**
-* sorting and ordering
-*/
-
-nav.result-sorting {
-  @include clearfix;
-  ul {
-    float: right;
-    li {
+  // Sorting and ordering
+  .results-options {
+    label {
       display: inline-block;
-      &.label {
-        padding: 0 10px;
+      border: none;
+      @include fw-sans-normal;
+    }
+    select {
+      display: inline-block;
+
+      &#id_page_size {
+        width: 80px;
       }
-      &.dropdown-buttons {
+
+      &#id_sort_by {
         width: 200px;
       }
     }

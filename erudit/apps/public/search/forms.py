@@ -307,3 +307,19 @@ class ResultsFilterForm(forms.Form):
         return sorted([
             (v, '{v} ({count})'.format(v=v, count=c)) for v, c in aggregation_dict.items()],
             key=lambda x: x[0])
+
+
+class ResultsOptionsForm(forms.Form):
+    page_size = forms.ChoiceField(
+        label=_('Résultats par page'), choices=[(x, x) for x in (10, 25, 50)], required=False)
+    sort_by = forms.ChoiceField(
+        label=_('Trier par...'),
+        choices=[
+            ('relevance', _('Pertinence')),
+            ('title_asc', _('Titre (ordre croissant)')),
+            ('title_desc', _('Titre (ordre décroissant)')),
+            ('author_asc', _('Premier auteur (ordre croissant)')),
+            ('author_desc', _('Premier auteur (ordre décroissant)')),
+            ('pubdate_asc', _('Date de publication (ordre croissant)')),
+            ('pubdate_desc', _('Date de publication (ordre décroissant)')),
+        ], required=False)
