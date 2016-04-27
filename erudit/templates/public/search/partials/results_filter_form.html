@@ -1,5 +1,11 @@
 {% load i18n %}
 
 <fieldset class="search-filters">
-
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.years %}
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.article_types %}
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.languages %}
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.collections %}
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.authors %}
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.funds %}
+  {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.publication_types %}
 </fieldset>

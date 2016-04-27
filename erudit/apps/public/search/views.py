@@ -21,7 +21,7 @@ from erudit.serializers import EruditDocumentSerializer
 from . import filters
 from . import solr
 from .forms import ADVANCED_SEARCH_FIELDS
-from .forms import FilterResultsForm
+from .forms import ResultsFilterForm
 from .forms import SearchForm
 from .pagination import EruditDocumentPagination
 
@@ -61,46 +61,43 @@ class EruditDocumentListAPIView(ListAPIView):
 
 class SearchResultsView(TemplateResponseMixin, FormMixin, View):
     """ Display the results associated with a search for Érudit documents. """
-    filter_form_class = FilterResultsForm
-    filter_form_prefix = 'filter'
+    filter_form_class = ResultsFilterForm
     http_method_names = ['get', ]
     search_form_class = SearchForm
-    search_form_prefix = None
     template_name = 'public/search/results.html'
 
     def get(self, request, *args, **kwargs):
         # This view works only for GET requests
         search_form = self.get_search_form()
-        filter_form = self.get_filter_form()
-        search_form_valid, filter_form_valid = search_form.is_valid(), filter_form.is_valid()
-        if search_form_valid and filter_form_valid:
-            return self.forms_valid(search_form, filter_form)
+        if search_form.is_valid():
+            return self.form_valid(search_form)
         else:
-            return self.forms_invalid(search_form)
+            return self.form_invalid(search_form)
 
-    def get_search_form(self, form_class=None):
+    def get_search_form(self):
         """ Returns an instance of the search form to be used in this view. """
         return self.search_form_class(**self.get_search_form_kwargs())
 
     def get_search_form_kwargs(self):
         """ Returns the keyword arguments for instantiating the search form. """
-        kwargs = {'prefix': self.search_form_prefix}
+        form_kwargs = {}
 
         if self.request.method == 'GET':
-            kwargs.update({'data': self.request.GET, })
-        return kwargs
+            form_kwargs.update({'data': self.request.GET, })
+        return form_kwargs
 
-    def get_filter_form(self, form_class=None):
+    def get_filter_form(self, **kwargs):
         """ Returns an instance of the filter form to be used in this view. """
-        return self.filter_form_class(**self.get_filter_form_kwargs())
+        return self.filter_form_class(**self.get_filter_form_kwargs(**kwargs))
 
-    def get_filter_form_kwargs(self):
+    def get_filter_form_kwargs(self, **kwargs):
         """ Returns the keyword arguments for instantiating the filter form. """
-        kwargs = {'prefix': self.filter_form_prefix}
+        form_kwargs = {}
+        form_kwargs.update(kwargs)
 
         if self.request.method == 'GET':
-            kwargs.update({'data': self.request.GET, })
-        return kwargs
+            form_kwargs.update({'data': self.request.GET, })
+        return form_kwargs
 
     def get_search_elements(self):
         """ Returns the search query elements in a readable way.
@@ -150,7 +147,7 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
 
         return context
 
-    def forms_valid(self, search_form, filter_form):
+    def form_valid(self, search_form):
         # The form is valid so we have to retrieve the list of results by using the API view
         # returning EruditDocument documents.
         list_view = EruditDocumentListAPIView.as_view()
@@ -160,12 +157,15 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
         results_data = list_view(request).render().content
         results = json.loads(smart_text(results_data))
 
-        # Initializes the filters form
+        # Re-initializes the filters form in order to display it using choices generated from the
+        # aggregations embedded in the results.
+        filter_form = self.get_filter_form(api_results=results)
 
         return self.render_to_response(self.get_context_data(
-            search_form=search_form, results=results, documents=results.get('results')))
+            search_form=search_form, filter_form=filter_form, results=results,
+            documents=results.get('results')))
 
-    def forms_invalid(self, search_form, filter_form):
+    def form_invalid(self, search_form):
         raise NotImplementedError
 
     @method_decorator(never_cache)

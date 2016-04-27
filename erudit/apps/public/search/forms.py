@@ -205,14 +205,6 @@ class SearchFormHelper(FormHelper):
                     ),
                     css_class="advanced-search akkordion hide",
                 ),
-                Fieldset(
-                    "",
-                    Div(
-                        Field('sort'),
-                        Field('sort_order'),
-                    ),
-                    css_class="hide",
-                ),
             ),
         )
 
@@ -273,16 +265,45 @@ class SearchForm(forms.Form):
     pub_types = forms.MultipleChoiceField(
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
         choices=PUB_TYPES_CHOICES, required=False)
-    sort = forms.ChoiceField(
-        label=False, widget=forms.Select, choices=SORT_CHOICES, required=False)
-    sort_order = forms.ChoiceField(
-        label=False, widget=forms.Select, choices=SORT_ORDER_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
-
         self.helper = SearchFormHelper()
 
 
-class FilterResultsForm(forms.Form):
-    pass
+class ResultsFilterForm(forms.Form):
+    years = forms.MultipleChoiceField(label=_('Années'), required=False)
+    article_types = forms.MultipleChoiceField(label=_('Types d\'articles'), required=False)
+    languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
+    collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
+    authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
+    funds = forms.MultipleChoiceField(
+        label=_('Fonds'), help_text=_('Identifie le fond duquel le document fait partie'),
+        required=False)
+    publication_types = forms.MultipleChoiceField(
+        label=_('Types de publications'),
+        help_text=_('Identifie le corpus duquel le document fait partie'), required=False)
+
+    def __init__(self, *args, **kwargs):
+        # The filters form fields choices are initialized from search results
+        api_results = kwargs.pop('api_results', {})
+        aggregations = api_results.get('aggregations')
+        super(ResultsFilterForm, self).__init__(*args, **kwargs)
+
+        if aggregations:
+            self.fields['years'].choices = self._get_aggregation_choices(aggregations['year'])
+            self.fields['article_types'].choices = self._get_aggregation_choices(
+                aggregations['article_type'])
+            self.fields['languages'].choices = self._get_aggregation_choices(
+                aggregations['language'])
+            self.fields['collections'].choices = self._get_aggregation_choices(
+                aggregations['collection'])
+            self.fields['authors'].choices = self._get_aggregation_choices(aggregations['author'])
+            self.fields['funds'].choices = self._get_aggregation_choices(aggregations['fund'])
+            self.fields['publication_types'].choices = self._get_aggregation_choices(
+                aggregations['publication_type'])
+
+    def _get_aggregation_choices(self, aggregation_dict):
+        return sorted([
+            (v, '{v} ({count})'.format(v=v, count=c)) for v, c in aggregation_dict.items()],
+            key=lambda x: x[0])
