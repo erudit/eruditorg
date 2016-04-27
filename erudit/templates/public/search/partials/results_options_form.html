@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load widget_tweaks %}
+
+<fieldset>
+  <div class="row">
+    <div class="col-sm-5">
+      <div id="div_id_{{ options_form.page_size.html_name }}" class="form-group{% if options_form.page_size.errors %} has-error{% endif %}">
+        <div class="controls">
+          <label class="control-label" for="{{ options_form.page_size.auto_id }}">{{ options_form.page_size.label }}</label>
+          &nbsp;
+          {{ options_form.page_size|add_class:'form-control' }}
+          {% for error in options_form.page_size.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div id="div_id_{{ options_form.sort_by.html_name }}" class="form-group{% if options_form.sort_by.errors %} has-error{% endif %}">
+        <div class="controls">
+          <label class="control-label" for="{{ options_form.sort_by.auto_id }}">{{ options_form.sort_by.label }}</label>
+          &nbsp;
+          {{ options_form.sort_by|add_class:'form-control' }}
+          {% for error in options_form.sort_by.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

@@ -35,23 +35,24 @@
 
   <div class="row">
     {# Filter form #}
-    <aside class="col-sm-3 search-form">
-      <form action="{% url 'public:search:results' %}" id="id-search" method="get" >
-        <header class='search-filters-header'><h3 class='h4'>{% trans "Filtres" %}</h3></header>
-        {% include "public/search/partials/results_search_form.html" %}
-        {% include "public/search/partials/results_filter_form.html" %}
-        <div class="form-action col-xs-9 col-centered">
-          <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
-        </div>
-      </form>
-    </aside>
+    <form action="{% url 'public:search:results' %}" id="id-search" class="search-form" method="get">
+      <aside class="col-sm-3">
+          <header class='search-filters-header'><h3 class='h4'>{% trans "Filtres" %}</h3></header>
+          {% include "public/search/partials/results_search_form.html" %}
+          {% include "public/search/partials/results_filter_form.html" %}
+          <div class="form-action col-xs-9 col-centered">
+            <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
+          </div>
+
+      </aside>
+      <div class="col-sm-7 col-sm-push-2 results-options">
+        {% include "public/search/partials/results_options_form.html" %}
+      </div>
+    </form>
 
     {# Search results #}
     <div id="search-results" class="col-sm-7 col-sm-push-2 search-results">
       {% if documents %}
-        <nav class="result-sorting">
-          TODO
-        </nav>
         {% include "public/search/partials/results_pagination.html" %}
         <ol class="unstyled results">
           {% for document in documents %}

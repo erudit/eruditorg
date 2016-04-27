@@ -22,6 +22,7 @@ from . import filters
 from . import solr
 from .forms import ADVANCED_SEARCH_FIELDS
 from .forms import ResultsFilterForm
+from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .pagination import EruditDocumentPagination
 
@@ -63,16 +64,19 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
     """ Display the results associated with a search for Érudit documents. """
     filter_form_class = ResultsFilterForm
     http_method_names = ['get', ]
+    options_form_class = ResultsOptionsForm
     search_form_class = SearchForm
     template_name = 'public/search/results.html'
 
     def get(self, request, *args, **kwargs):
         # This view works only for GET requests
         search_form = self.get_search_form()
-        if search_form.is_valid():
-            return self.form_valid(search_form)
+        options_form = self.get_options_form()
+        search_form_valid, options_form_valid = search_form.is_valid(), options_form.is_valid()
+        if search_form_valid and options_form_valid:
+            return self.forms_valid(search_form, options_form)
         else:
-            return self.form_invalid(search_form)
+            return self.forms_invalid(search_form, options_form)
 
     def get_search_form(self):
         """ Returns an instance of the search form to be used in this view. """
@@ -94,6 +98,18 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
         """ Returns the keyword arguments for instantiating the filter form. """
         form_kwargs = {}
         form_kwargs.update(kwargs)
+
+        if self.request.method == 'GET':
+            form_kwargs.update({'data': self.request.GET, })
+        return form_kwargs
+
+    def get_options_form(self):
+        """ Returns an instance of the options form to be used in this view. """
+        return self.options_form_class(**self.get_options_form_kwargs())
+
+    def get_options_form_kwargs(self):
+        """ Returns the keyword arguments for instantiating the options form. """
+        form_kwargs = {}
 
         if self.request.method == 'GET':
             form_kwargs.update({'data': self.request.GET, })
@@ -147,7 +163,7 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
 
         return context
 
-    def form_valid(self, search_form):
+    def forms_valid(self, search_form, options_form):
         # The form is valid so we have to retrieve the list of results by using the API view
         # returning EruditDocument documents.
         list_view = EruditDocumentListAPIView.as_view()
@@ -157,15 +173,15 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
         results_data = list_view(request).render().content
         results = json.loads(smart_text(results_data))
 
-        # Re-initializes the filters form in order to display it using choices generated from the
+        # Initializes the filters form here in order to display it using choices generated from the
         # aggregations embedded in the results.
         filter_form = self.get_filter_form(api_results=results)
 
         return self.render_to_response(self.get_context_data(
-            search_form=search_form, filter_form=filter_form, results=results,
-            documents=results.get('results')))
+            search_form=search_form, filter_form=filter_form, options_form=options_form,
+            results=results, documents=results.get('results')))
 
-    def form_invalid(self, search_form):
+    def forms_invalid(self, search_form, options_form):
         raise NotImplementedError
 
     @method_decorator(never_cache)
