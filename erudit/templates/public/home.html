@@ -27,7 +27,7 @@
       <div class="row">
         <!-- BASIC SEARCH -->
         <div class="col-xs-12 col-sm-4 glory--search">
-          <form action="{% url 'public:search:search' %}" id="id-search" method="get">
+          <form action="{% url 'public:search:results' %}" id="id-search" method="get">
             <div class="form-group">
               <label for="basic-search"><h3>Recherche</h3></label>
               <div class="input-group">
@@ -35,7 +35,7 @@
                 <div class="input-group-addon"><button type="submit" class="btn"><span class="ion ion-ios-search-strong"></span></div></button>
               </div>
             </div>
-            <a href="{% url 'public:search:search' %}">{% trans "Recherche avancée" %}</a>
+            <a href="{% url 'public:search:results' %}">{% trans "Recherche avancée" %}</a>
           </form>
         </div>
         <!-- PUBLICATION TYPES -->
