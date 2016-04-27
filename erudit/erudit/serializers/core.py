@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.core.cache import cache
 from django.utils import formats
 from django.utils import translation
 from rest_framework import serializers
@@ -15,15 +16,23 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
         fields = ['id', 'localidentifier', 'real_object', ]
 
     def get_real_object(self, obj):
-        # This method should return a serialized representation of an Érudit document ; it could be
-        # an article, a thesis, a book, ...
-        # However there is a problem: it not currently possible to determine the correct model
-        # associated with an EruditDocument instance. For now we use only Article objects so we
-        # will make the assumption that all Érudit documents are article... But this problem should
-        # be resolved using polymorphism.
-        article = erudit_models.Article.objects.select_related('issue', 'issue__journal') \
-            .get(id=obj.id)
-        return ArticleSerializer(article).data
+        cache_key = 'eruditdocument-real-object-serialized-{}'.format(obj.id)
+        real_object_data = cache.get(cache_key, None)
+
+        if real_object_data is None:
+            # This method should return a serialized representation of an Érudit document ; it could
+            # be an article, a thesis, a book, ...
+            # However there is a problem: it not currently possible to determine the correct model
+            # associated with an EruditDocument instance. For now we use only Article objects so we
+            # will make the assumption that all Érudit documents are article... But this problem
+            # should be resolved using polymorphism.
+            article = erudit_models.Article.objects.select_related('issue', 'issue__journal') \
+                .get(id=obj.id)
+            real_object_data = ArticleSerializer(article).data
+            # Caches the content of the object for 1 hour
+            cache.set(cache_key, real_object_data, 60 * 60)
+
+        return real_object_data
 
 
 class ArticleSerializer(serializers.ModelSerializer):
