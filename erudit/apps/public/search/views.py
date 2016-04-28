@@ -42,7 +42,8 @@ class EruditDocumentListAPIView(ListAPIView):
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             response = self.get_paginated_response(serializer.data)
-        else:
+        else:  # pragma: no cover
+            # This can happen if we pass page_size = 0
             serializer = self.get_serializer(queryset, many=True)
             response = Response(serializer.data)
 
