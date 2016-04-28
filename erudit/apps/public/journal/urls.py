@@ -23,7 +23,7 @@ urlpatterns = [
         views.JournalAuthorsListView.as_view(), name='journal-authors-list'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/rss\.xml$'),
-        feeds.LatestJournalIssueArticlesFeed(), name='journal-issues-rss'),
+        feeds.LatestJournalArticlesFeed(), name='journal-articles-rss'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<pk>\d+)/$'),
         views.IssueDetailView.as_view(), name='issue-detail'),

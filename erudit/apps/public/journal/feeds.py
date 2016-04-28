@@ -5,9 +5,11 @@ import datetime as dt
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
+from django.utils import translation
 from django.utils.translation import gettext as _
 
 from base.feedgenerator import EruditRssFeedGenerator
+from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
 
@@ -42,34 +44,42 @@ class LatestIssuesFeed(Feed):
             .order_by('-date_published')
 
 
-class LatestJournalIssueArticlesFeed(Feed):
+class LatestJournalArticlesFeed(Feed):
+    """ Provides a list of latest articles associated with a journal. """
+    feed_type = EruditRssFeedGenerator
+
+    # Standard RSS elements
     title = _("Syndication d'Érudit")
-    link = 'http://www.erudit.org'
+    link = reverse_lazy('public:home')
+
+    # Item elements
+    title_template = 'public/journal/feeds/latest_journal_articles_title.html'
+    description_template = 'public/journal/feeds/latest_journal_articles_description.html'
+
+    def description(self):
+        """ Returns the feed's description as a normal Python string. """
+        return self.last_issue.volume_title
 
     def get_object(self, request, journal_code=None):
         """ Get the journal's latest issues. """
-        try:
-            return Journal.objects.get(
-                Q(code=journal_code) | Q(localidentifier=journal_code)).last_issue
-        except:
-            return None
+        self.journal = Journal.objects.get(Q(code=journal_code) | Q(localidentifier=journal_code))
+        self.last_issue = self.journal.last_issue
 
-    def title(self, obj):
-        return _("Érudit | ")
+    def get_context_data(self, **kwargs):
+        context = super(LatestJournalArticlesFeed, self).get_context_data(**kwargs)
+        obj = context.get('obj')
 
-    def description(self, obj):
-        return "{year} V{volume} N{number}".format(
-            year=obj.year, volume=obj.volume, number=obj.number
-        )
+        context['authors'] = obj.authors.all()
 
-    def link(self, obj):
-        return obj.get_absolute_url()
+        abstracts = obj.erudit_object.abstracts
+        lang = translation.get_language()
+        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
+        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
+        _abstract = abstracts[0]['content'] if len(abstracts) else None
+        context['abstract'] = _abstract_lang or _abstract
+
+        return context
 
     def items(self, obj):
-        return obj.issues.all()
-
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, obj):
-        return ",".join([str(author) for author in obj.authors.all()])
+        articles = Article.objects.filter(issue_id=self.last_issue)
+        return sorted(articles, key=lambda a: a.erudit_object.ordseq)

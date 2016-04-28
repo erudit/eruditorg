@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+import unittest.mock
 
 from django.test import RequestFactory
 
+from erudit.factories import ArticleFactory
 from erudit.factories import IssueFactory
+from erudit.fedora.modelmixins import FedoraMixin
 from erudit.tests.base import BaseEruditTestCase
 
 from ..feeds import LatestIssuesFeed
+from ..feeds import LatestJournalArticlesFeed
+
+
+def get_mocked_erudit_object():
+    m = unittest.mock.MagicMock()
+    m.ordseq = 1
+    return m
 
 
 class TestLatestIssuesFeed(BaseEruditTestCase):
@@ -29,3 +39,29 @@ class TestLatestIssuesFeed(BaseEruditTestCase):
         self.assertEqual(len(feed.items), 2)
         self.assertIn(issue1.get_absolute_url(), feed.items[0]['link'])
         self.assertIn(issue2.get_absolute_url(), feed.items[1]['link'])
+
+
+class TestLatestJournalArticlesFeed(BaseEruditTestCase):
+    def setUp(self):
+        super(TestLatestJournalArticlesFeed, self).setUp()
+        self.factory = RequestFactory()
+
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_return_all_the_articles_associated_with_the_last_issue_of_a_journal(self, mock_erudit_object):  # noqa
+        # Setup
+        mock_erudit_object.return_value = get_mocked_erudit_object()
+        issue1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article1 = ArticleFactory.create(issue=issue1)
+        article2 = ArticleFactory.create(issue=issue1)
+        issue2 = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=2))
+        ArticleFactory.create(issue=issue2)
+        request = self.factory.get('/')
+        # Run
+        f = LatestJournalArticlesFeed()
+        f.get_object(request, self.journal.code)
+        feed = f.get_feed(None, request)
+        # Check
+        self.assertEqual(len(feed.items), 2)
+        self.assertIn(article1.get_absolute_url(), feed.items[0]['link'])
+        self.assertIn(article2.get_absolute_url(), feed.items[1]['link'])
