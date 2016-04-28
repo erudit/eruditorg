@@ -15,6 +15,7 @@ class Q(object):
         self.params = params.copy()
         self.operator = self.default
         self.operands = []
+        self.negated = False
 
     def _combine(self, other, operator):
         if not isinstance(other, Q):
@@ -25,11 +26,21 @@ class Q(object):
         obj.operands.append(other if other.operands else other.params)
         return obj
 
+    def _negate(self):
+        self.negated = not self.negated
+
     def __or__(self, other):
         return self._combine(other, self.OR)
 
     def __and__(self, other):
         return self._combine(other, self.AND)
+
+    def __invert__(self):
+        obj = type(self)()
+        obj.operator = self.AND
+        obj.operands.append(self if self.operands else self.params)
+        obj._negate()
+        return obj
 
 
 class Query(object):
@@ -77,6 +88,14 @@ class Query(object):
                 subqs = self._get_q_querystring(qchild)
             else:
                 subqs = self._get_querystring_from_dict(qchild)
+
+            # Handles the case when the query is negated
+            if q.negated:
+                subqs = '*:* -{}'.format(subqs)
+
+            if subqs is None:
+                continue
+
             subqs = '({})'.format(subqs)
             subqs_list.append(subqs)
 
@@ -96,8 +115,11 @@ class Query(object):
             qs = ' AND '.join([qs, subqs]) if qs else subqs
         return qs
 
-    def get_results(self):
+    def get_results(self, sort=None):
         """ Triggers the search and returns the results. """
-        return self.search.client.search(self._qs, **self.search.extra_params)
+        params = self.search.extra_params.copy()
+        if sort:
+            params.update({'sort': sort})
+        return self.search.client.search(self._qs, **params)
 
     results = property(get_results)

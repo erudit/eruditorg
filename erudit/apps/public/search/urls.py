@@ -8,7 +8,9 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.Search.as_view(), name="search"),
+    url(r'^$', views.SearchResultsView.as_view(), name='results'),
+    url(r'^api/eruditdocuments/', views.EruditDocumentListAPIView.as_view(),
+        name='eruditdocument-api-list'),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),

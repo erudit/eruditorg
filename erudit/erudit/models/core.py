@@ -568,7 +568,8 @@ class EruditDocument(models.Model):
     localidentifier = models.CharField(
         max_length=50,
         unique=True,
-        verbose_name=_("Identifiant Fedora")
+        verbose_name=_("Identifiant Fedora"),
+        db_index=True
     )
     """ The ``Fedora`` identifier of an article """
 

@@ -69,6 +69,15 @@ class TestQ(SolrqTestCase):
         with self.assertRaises(TypeError):
             q = Q(foo='bar') | 'dummy'  # noqa
 
+    def test_can_handle_negations(self):
+        # Run & check
+        q = ~Q(foo='bar')
+        self.assertTrue(q.params is not None)
+        self.assertTrue(q.negated)
+        self.assertEqual(q.operator, 'AND')
+        self.assertEqual(len(q.operands), 1)
+        self.assertEqual(q.operands[0]['foo'], 'bar')
+
 
 class TestQuery(SolrqTestCase):
     def setUp(self):
@@ -112,6 +121,14 @@ class TestQuery(SolrqTestCase):
         self.assertEqual(
             query.filter(Q(foo='bar') | Q(foo='test'), xyz='xyz')._qs,
             '((*:*) AND ((foo:bar) OR (foo:test))) AND (xyz:xyz)')
+
+    def test_can_generate_correct_querystrings_using_q_objects_and_negations(self):
+        # Setup
+        query = Query(self.search)
+        # Run & check
+        self.assertEqual(
+            query.filter(Q(foo='bar') | ~Q(foo='test'), xyz='xyz')._qs,
+            '((*:*) AND ((foo:bar) OR ((*:* -foo:test)))) AND (xyz:xyz)')
 
     def test_can_use_filters_mapping(self):
         # Setup

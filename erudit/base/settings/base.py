@@ -88,6 +88,8 @@ INSTALLED_APPS = (
     'django_fsm',
     'easy_pjax',
     'django_js_reverse',
+    'widget_tweaks',
+    'rest_framework',
 )
 
 DATABASES = {
@@ -136,7 +138,6 @@ TEMPLATES = [
         'DIRS': [
             str(ROOT_DIR / 'erudit' / 'templates'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.core.context_processors.request',
@@ -148,6 +149,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'base.context_processors.common_settings',
+            ],
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
             ],
         },
     },
@@ -293,6 +300,13 @@ CELERYBEAT_SCHEDULE = {
         'task': 'core.editor.tasks.handle_issuesubmission_files_removal',
         'schedule': crontab(minute=0, hour=0),  # Executed daily at midnight
     },
+}
+
+# DRF settings
+# -----------------------------------
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend', ),
 }
 
 # MailChimp settings

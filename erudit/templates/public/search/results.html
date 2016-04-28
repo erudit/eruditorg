@@ -1,0 +1,292 @@
+{% extends "public/search/base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% load public_search_tags %}
+
+{% block page-title %}{% trans "Recherche" %}{% endblock %}
+
+{% block data-controller %}public:search:results{% endblock data-controller %}
+
+{% block content %}
+<section id="search-page" class="container">
+
+  {# Title and search summary #}
+  <div class="row">
+    <header class="page-header-main search-header col-xs-12 border-bottom">
+      <hgroup>
+        <h2>{% trans "Résultats de recherche" %} <span class="hint--top hint--no-animate" data-hint="{% trans "Help text!" %}"><i class="ion-help-circled"></i></span></h2>
+        {% if documents %}
+        <h3>
+        {% blocktrans trimmed count counter=results.pagination.count %}
+          <strong>{{ counter }}</strong> résultat trouvé pour la requête :
+        {% plural %}
+          <strong>{{ counter }}</strong> résultats trouvés pour la requête :
+        {% endblocktrans %}
+        </h3>
+        {% else %}
+        <h3>{% trans "Aucun document trouvé" %}</h3>
+        {% endif %}
+        {% if search_elements %}
+        <h4 class="mono-space search-terms">
+          {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
+        </h4>
+        {% endif %}
+      </hgroup>
+    </header>
+  </div>
+
+  <div class="row">
+    {# Filter form #}
+    <form action="{% url 'public:search:results' %}" id="id-search" class="search-form" method="get">
+      <aside class="col-sm-3">
+          <header class='search-filters-header'><h3 class='h4'>{% trans "Filtres" %}</h3></header>
+
+          {# Search form #}
+          <fieldset>
+            <div>
+              <div class="basic-search-field">
+                <div id="div_id_{{ search_form.basic_search_term.html_name }}" class="form-group{% if search_form.basic_search_term.errors %} has-error{% endif %}">
+                  <div class="controls">
+                    <label class="control-label" for="{{ search_form.basic_search_term.auto_id }}">{{ search_form.basic_search_term.label }}</label>
+                    {{ search_form.basic_search_term|add_class:'form-control' }}
+                    {% for error in search_form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                  </div>
+                  <button type="submit"><i class="ion ion-ios-search"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <div id="div_id_{{ search_form.basic_search_operator.html_name }}" class="checkbox">
+                  {{ search_form.basic_search_operator|add_class:'form-control' }}
+                  <label for="{{ search_form.basic_search_operator.auto_id }}">{{ search_form.basic_search_operator.label }}</label>
+                  {% for error in search_form.basic_search_operator.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+              </div>
+              <div id="div_id_{{ search_form.basic_search_field.html_name }}" class="form-group{% if search_form.basic_search_field.errors %} has-error{% endif %}">
+                <div class="controls">
+                  <label class="control-label" for="{{ search_form.basic_search_field.auto_id }}">{{ search_form.basic_search_field.label }}</label>
+                  {{ search_form.basic_search_field|add_class:'form-control' }}
+                  {% for error in search_form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+              </div>
+            </div>
+            {# The other fields associated with the search form are hidden... for now. #}
+            <div class="hidden">
+              {{ search_form.advanced_search_operator1 }}
+              {{ search_form.advanced_search_term1 }}
+              {{ search_form.advanced_search_field1 }}
+              {{ search_form.advanced_search_operator2 }}
+              {{ search_form.advanced_search_term2 }}
+              {{ search_form.advanced_search_field2 }}
+              {{ search_form.advanced_search_operator3 }}
+              {{ search_form.advanced_search_term3 }}
+              {{ search_form.advanced_search_field3 }}
+              {{ search_form.advanced_search_operator4 }}
+              {{ search_form.advanced_search_term4 }}
+              {{ search_form.advanced_search_field4 }}
+              {{ search_form.advanced_search_operator5 }}
+              {{ search_form.advanced_search_term5 }}
+              {{ search_form.advanced_search_field5 }}
+              {{ search_form.pub_year_start }}
+              {{ search_form.pub_year_end }}
+              {{ search_form.available_since }}
+              {{ search_form.funds_limit }}
+              {{ search_form.pub_types }}
+            </div>
+          </fieldset>
+
+          {# Filter form #}
+          {% if filter_form %}
+          <fieldset class="search-filters">
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.years %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.article_types %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.languages %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.collections %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.authors %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.funds %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.publication_types %}
+          </fieldset>
+          {% endif %}
+
+          <div class="form-action col-xs-9 col-centered">
+            <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
+          </div>
+
+      </aside>
+
+      {# Options form #}
+      <div class="col-sm-7 col-sm-push-2 results-options">
+        <fieldset>
+          <div class="row">
+            <div class="col-sm-5">
+              <div id="div_id_{{ options_form.page_size.html_name }}" class="form-group{% if options_form.page_size.errors %} has-error{% endif %}">
+                <div class="controls">
+                  <label class="control-label" for="{{ options_form.page_size.auto_id }}">{{ options_form.page_size.label }}</label>
+                  &nbsp;
+                  {{ options_form.page_size|add_class:'form-control' }}
+                  {% for error in options_form.page_size.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div id="div_id_{{ options_form.sort_by.html_name }}" class="form-group{% if options_form.sort_by.errors %} has-error{% endif %}">
+                <div class="controls">
+                  <label class="control-label" for="{{ options_form.sort_by.auto_id }}">{{ options_form.sort_by.label }}</label>
+                  &nbsp;
+                  {{ options_form.sort_by|add_class:'form-control' }}
+                  {% for error in options_form.sort_by.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+    </form>
+
+    {# Search results #}
+    <div id="search-results" class="col-sm-7 col-sm-push-2 search-results">
+      {% if documents %}
+        {% include "public/search/partials/results_pagination.html" %}
+        <ol class="unstyled results">
+          {% trans "inconnu" as i18n_unknown %}
+          {% for document in documents %}
+          <li>
+
+            {# Article preview #}
+            {% url 'public:journal:article-detail' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
+            <article id="article-{{ document.id }}" class="search-result-item" data-article-id="{{ document.id }}">
+              <header>
+                <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+                {# authors #}
+                {% if document.real_object.authors %}
+                <h4 class="authors h6">
+                  {% for author in document.real_object.authors %}
+                  <span class="author">{{ author.firstname }} {{ author.lastname }}</span>{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                </h4>
+                {% endif %}
+                {% if search_elements and search_elements.0.operator != 'NOT' %}
+                  <h3 class="h4">
+                    <a href="{{ article_url }}">
+                      {{ document.real_object.title|highlight:main_qterm }}
+                    </a>
+                  </h3>
+                  {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle|highlight:main_qterm }}</h4>{% endif %}
+                {% else %}
+                  <h3 class="h4">
+                    <a href="{{ article_url }}">
+                      {{ document.real_object.title }}
+                    </a>
+                  </h3>
+                  {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
+                {% endif %}
+              </header>
+              <footer class="meta">
+                {% if document.real_object.issue_title %}<h5>{{ document.real_object.issue_title }}</h5>{% endif %}
+                <h5>
+                {% spaceless %}
+                  {% blocktrans trimmed with number=document.real_object.issue_number|default:i18n_unknown date=document.real_object.issue_published %}
+                    Numéro {{ number }} - {{ date }}
+                  {% endblocktrans %}
+                  {% with first_page=document.real_object.first_page last_page=document.real_object.last_page %}
+                  {% if first_page and last_page and first_page != last_page %}
+                  &nbsp;-&nbsp;{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }} à {{ last_page }}{% endblocktrans %}
+                  {% elif first_page and first_page != "0" %}
+                  &nbsp;-&nbsp;{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}
+                  {% endif %}
+                  {% endwith %}
+                {% endspaceless %}
+                </h5>
+              </footer>
+              {% if document.real_object.abstract %}
+              <summary class="akkordion" data-akkordion-single="true">
+                <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
+                <div class="summary-content akkordion-content">
+                  <p>{{ document.real_object.abstract }}</p>
+                </div>
+              </summary>
+              {% else %}
+              <br /><br />
+              {% endif %}
+              <nav class="toolbox compact">
+                <ul class="unstyled">
+                  <li>
+                    <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' document.localidentifier %}">
+                      <span class="erudicon erudicon-tools-pdf"></span>
+                      <span class="tools-label">{% trans "Télécharger" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-quote" data-modal-id="#id_quote_modal_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-quote"></span>
+                      <span class="tools-label">{% trans "Citer cet article" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#article-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                    </button>
+                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#article-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Supprimer" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ article_url }}">
+                      <span class="erudicon erudicon-tools-share"></span>
+                      <span class="tools-label">{% trans "Partager" %}</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+              <div class="hidden">
+                <section id="id_quote_modal_{{ document.id }}" class="quote-modal">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                        <div class="panel">
+                          <header class="panel-heading">
+                            <h2 class="h4 panel-title text-center">{% trans "Outils de citation" %}</h2>
+                          </header>
+                          <div class="panel-body quote-modal--body">
+                            <div class="row">
+                              <div class="col-md-10 col-md-offset-1">
+                                <h3 class="h4">{% trans "Comment citer cet article" %}</h3>
+                                <hr />
+                                <h3 class="h4">{% trans "Exporter la notice de cet article" %}</h3>
+                                <a href="{% url 'public:journal:article-citation-enw' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-block btn-primary quote-export">
+                                  <span class="show quote-export-title">.ENW</span>
+                                  <small>EndNote, Zotero</small>
+                                </a>
+                                <a href="{% url 'public:journal:article-citation-ris' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-block btn-primary quote-export">
+                                  <span class="show quote-export-title">.RIS</span>
+                                  <small>Papers, Reference Manager, RefWorks, Zotero</small>
+                                </a>
+                                <a href="{% url 'public:journal:article-citation-bib' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-block btn-primary quote-export">
+                                  <span class="show quote-export-title">.BIB</span>
+                                  <small>BibTeX, JabRef, Mendeley, Zotero</small>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </article>
+
+          </li>
+          {% endfor %}
+        </ol>
+        {% include "public/search/partials/results_pagination.html" %}
+      {% else %}
+        <h3>{% trans "Aucun document trouvé." %}</h3>
+      {% endif %}
+    </div>
+  </div>
+
+</section>
+{% endblock content %}
