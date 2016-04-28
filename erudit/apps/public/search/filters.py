@@ -3,6 +3,7 @@
 from core.solrq.query import Q
 
 from . import solr_search
+from .conf import settings as search_settings
 
 
 class EruditDocumentSolrFilter(object):
@@ -12,8 +13,6 @@ class EruditDocumentSolrFilter(object):
     parameters in order to query a Solr index of Érudit documents. This filter should only be used
     on API views associated with EruditDocument-related models.
     """
-    max_advanced_search_parameters = 10
-
     OP_AND = 'AND'
     OP_OR = 'OR'
     OP_NOT = 'NOT'
@@ -43,7 +42,7 @@ class EruditDocumentSolrFilter(object):
 
         # Advanced search parameters
         advanced_q = []
-        for i in range(self.max_advanced_search_parameters):
+        for i in range(search_settings.MAX_ADVANCED_PARAMETERS):
             search_term = query_params.get('advanced_search_term{}'.format(i + 1), None)
             search_field = query_params.get('advanced_search_field{}'.format(i + 1), 'all')
             search_operator = query_params.get('advanced_search_operator{}'.format(i + 1), None)

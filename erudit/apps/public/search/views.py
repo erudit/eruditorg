@@ -14,6 +14,7 @@ from erudit.models import EruditDocument
 from erudit.serializers import EruditDocumentSerializer
 
 from . import filters
+from .conf import settings as search_settings
 from .forms import ADVANCED_SEARCH_FIELDS
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
@@ -119,7 +120,7 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
         """
         params = self.request.GET.copy()
         fields_correspondence = dict(ADVANCED_SEARCH_FIELDS)
-        operator_correspondance = {
+        operator_correspondence = {
             'AND': _('ET'),
             'OR': _('OU'),
             'NOT': _('NON'),
@@ -129,13 +130,13 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
 
         def elements(t, f, o):
             f = fields_correspondence.get(f, f)
-            o_, o = o, operator_correspondance.get(o, o)
+            o_, o = o, operator_correspondence.get(o, o)
             return {
                 'term': t,
                 'field': f,
                 'operator': o_,
                 'str': ('({field} : {term})'.format(field=f, term=t) if o is None
-                        else '{op} ({field} : {term})'.format(op=o, field=f, term=t)),
+                        else ' {op} ({field} : {term})'.format(op=o, field=f, term=t)),
             }
 
         q1_term = params.get('basic_search_term', '*')
@@ -143,6 +144,13 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
         q1_operator = params.get('basic_search_operator', None)
         q1_operator = 'NOT' if q1_operator is not None else None
         search_elements.append(elements(q1_term, q1_field, q1_operator))
+
+        for i in range(search_settings.MAX_ADVANCED_PARAMETERS):
+            q_term = params.get('advanced_search_term{}'.format(i + 1), None)
+            q_field = params.get('advanced_search_field{}'.format(i + 1), 'all')
+            q_operator = params.get('advanced_search_operator{}'.format(i + 1), None)
+            if q_term and q_operator in operator_correspondence:
+                search_elements.append(elements(q_term, q_field, q_operator))
 
         return search_elements
 
