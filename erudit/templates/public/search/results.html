@@ -95,6 +95,7 @@
           </fieldset>
 
           {# Filter form #}
+          {% if filter_form %}
           <fieldset class="search-filters">
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.years %}
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.article_types %}
@@ -104,6 +105,7 @@
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.funds %}
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.publication_types %}
           </fieldset>
+          {% endif %}
 
           <div class="form-action col-xs-9 col-centered">
             <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
