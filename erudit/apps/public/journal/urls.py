@@ -4,11 +4,14 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
+from . import feeds
 from . import urls_compat
 from . import views
 
 
 urlpatterns = [
+    url(_(r'^rss\.xml$'), feeds.LatestIssuesFeed(), name='latest-issues-rss'),
+
     url(_(r'^revues/$'),
         views.JournalListView.as_view(), name='journal-list'),
 
@@ -20,7 +23,7 @@ urlpatterns = [
         views.JournalAuthorsListView.as_view(), name='journal-authors-list'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/rss\.xml$'),
-        views.LatestJournalIssueArticlesRSSView(), name='journal-issues-rss'),
+        feeds.LatestJournalIssueArticlesFeed(), name='journal-issues-rss'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<pk>\d+)/$'),
         views.IssueDetailView.as_view(), name='issue-detail'),

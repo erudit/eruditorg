@@ -22,7 +22,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
-from apps.public.journal.views import LatestIssuesRSSView
 
 from . import urls_compat
 
@@ -42,8 +41,6 @@ urlpatterns = i18n_patterns(
     # The PDF viewer exposes a PDF.js template
     url(r'^pdf-viewer\.html$',
         TemplateView.as_view(template_name='pdf_viewer.html'), name='pdf-viewer'),
-
-    url(_(r'^rss\.xml$'), LatestIssuesRSSView(), name='latest-issues-rss'),
 
     # Apps
     url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
