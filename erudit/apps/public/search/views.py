@@ -157,12 +157,13 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
 
     def get_context_data(self, **kwargs):
         context = super(SearchResultsView, self).get_context_data(**kwargs)
-        results = context.get('results')
+        results = context.get('results', None)
 
-        context['main_qterm'] = self.request.GET.get('basic_search_term', '')
-        context['start_at'] = (results['pagination']['current_page'] - 1) \
-            * results['pagination']['page_size']
-        context['search_elements'] = self.get_search_elements()
+        if results:
+            context['main_qterm'] = self.request.GET.get('basic_search_term', '')
+            context['start_at'] = (results['pagination']['current_page'] - 1) \
+                * results['pagination']['page_size']
+            context['search_elements'] = self.get_search_elements()
 
         return context
 
@@ -185,4 +186,5 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
             results=results, documents=results.get('results')))
 
     def forms_invalid(self, search_form, options_form):
-        raise NotImplementedError
+        return self.render_to_response(self.get_context_data(
+            search_form=search_form, options_form=options_form))
