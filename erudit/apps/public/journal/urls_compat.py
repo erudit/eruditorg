@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^culture/(?P<code>[\w-]+)/auteurs\.html?$',
         RedirectView.as_view(pattern_name='public:journal:journal-authors-list', permanent=True)),
     url(r'^culture/(?P<journal_code>[\w-]+)/rss\.xml$',
-        RedirectView.as_view(pattern_name='public:journal:journal-issues-rss', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal-articles-rss', permanent=True)),
 
     # Issue
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]+)/$',

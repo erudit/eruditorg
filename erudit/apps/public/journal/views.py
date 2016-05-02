@@ -3,7 +3,6 @@
 from collections import OrderedDict
 from string import ascii_lowercase
 
-from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
@@ -13,11 +12,8 @@ from django.utils.functional import cached_property
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
-from django.contrib.syndication.views import Feed
-from django.utils.translation import gettext as _
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
-import datetime
 
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
@@ -170,37 +166,6 @@ class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
     model = Journal
 
 
-class LatestIssuesRSSView(Feed):
-    title = _("Syndication d'Érudit")
-    link = "http://www.erudit.org"
-    number_days = 90
-
-    def get_start_date(self):
-        return (datetime.datetime.now() + datetime.timedelta(-self.number_days))
-
-    def description(self, obj):
-        start_date = self.get_start_date()
-        now = datetime.datetime.now()
-
-        start_date_str = datetime.datetime.strftime(start_date, "%Y/%m/%d")
-        today_str = datetime.datetime.strftime(now, "%Y/%m/%d")
-
-        return "{start_date} - {today}".format(start_date=start_date_str, today=today_str)
-
-    def items(self):
-        start_date = self.get_start_date()
-
-        return Issue.objects.filter(date_published__gte=start_date).order_by('-date_published')
-
-        return
-
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, item):
-        return ""
-
-
 class IssueDetailView(FedoraServiceRequiredMixin, DetailView):
     """
     Displays an Issue instance.
@@ -231,39 +196,6 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     datastream_name = 'coverpage'
     fedora_object_class = PublicationDigitalObject
     model = Issue
-
-
-class LatestJournalIssueArticlesRSSView(Feed):
-    title = _("Syndication d'Érudit")
-    link = "http://www.erudit.org"
-
-    def get_object(self, request, journal_code=None):
-        """Get journal's latest issue"""
-        try:
-            return Journal.objects.get(
-                Q(code=journal_code) | Q(localidentifier=journal_code)).last_issue
-        except:
-            return None
-
-    def title(self, obj):
-        return _("Érudit | ")
-
-    def description(self, obj):
-        return "{year} V{volume} N{number}".format(
-            year=obj.year, volume=obj.volume, number=obj.number
-        )
-
-    def link(self, obj):
-        return obj.get_absolute_url()
-
-    def items(self, obj):
-        return obj.issues.all()
-
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, obj):
-        return ",".join([str(author) for author in obj.authors.all()])
 
 
 class ArticleDetailView(

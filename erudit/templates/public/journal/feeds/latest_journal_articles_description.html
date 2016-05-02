@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% for author in authors %}{{ author }}{% if not forloop.last %}, {% endif %}{% endfor %}
+{% if authors and abstract %} | : {% endif %}
+{% if abstract %}{{ abstract }}{% endif %}

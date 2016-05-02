@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% with title=obj.title|default:obj.journal.name volume=obj.volume number=obj.number %}
+  {% if volume and number %}
+    {% blocktrans trimmed with title=title volume=volume number=number %}{{ title}}, volume {{ volume }}, numéro {{ number }}{% endblocktrans %}
+  {% elif volume %}
+    {% blocktrans trimmed with title=title volume=volume %}{{ title}}, volume {{ volume }}{% endblocktrans %}
+  {% elif number %}
+    {% blocktrans trimmed with title=title number=number %}{{ title}}, numéro {{ number }}{% endblocktrans %}
+  {% else %}
+    {{ title}}
+  {% endif %}
+{% endwith %}
