@@ -82,31 +82,32 @@ $link-hover-decoration: underline;
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:  "Maax", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-serif:       "FreightTextBook", Georgia, "Times New Roman", Times, serif;
+$font-family-sans-serif:  "Maax-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif:       "FreightTextPro-Book", Georgia, "Times New Roman", Times, serif;
 
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-$font-face-code:          'Maax-RegularMono', 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
-$font-family-monospace:   "Maax-RegularMono", Menlo, Monaco, Consolas, "Courier New", monospace;
-$font-family-base:        $font-family-sans-serif;
+$font-face-code:              'Maax-Mono', 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
+$font-family-monospace:       "Maax-Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-monospace-talic: "Maax-MonoItalic", Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:             $font-family-sans-serif;
 
 // serif font-weight font families variation
-$font-family-serif-regular:         "FreightTextBook", Georgia, "Times New Roman", Times, serif;
-$font-family-serif-regular-italic:  "FreightTextBookItalic", Georgia, "Times New Roman", Times, serif;
+$font-family-serif-regular:         "FreightTextPro-Book", Georgia, "Times New Roman", Times, serif;
+$font-family-serif-regular-italic:  "FreightTextPro-BookItalic", Georgia, "Times New Roman", Times, serif;
 
-$font-family-serif-bold:            "FreightTextBold", Georgia, "Times New Roman", Times, serif;
-$font-family-serif-bold-italic:     "FreightTextBoldItalic", Georgia, "Times New Roman", Times, serif;
+$font-family-serif-bold:            "FreightTextPro-Bold", Georgia, "Times New Roman", Times, serif;
+$font-family-serif-bold-italic:     "FreightTextPro-BoldItalic", Georgia, "Times New Roman", Times, serif;
 
 
 // sans serif font-weight font families variation
-$font-family-sans-serif-regular:         "Maax", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif-regular:         "Maax-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-sans-serif-regular-italic:  "Maax-Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $font-family-sans-serif-medium:         "Maax-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-sans-serif-medium-italic:  "Maax-Mediumitalic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif-medium-italic:  "Maax-MediumItalic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $font-family-sans-serif-bold:           "Maax-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-sans-serif-bold-italic:    "Maax-Bolditalic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif-bold-italic:    "Maax-BoldItalic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
 // font sizes
