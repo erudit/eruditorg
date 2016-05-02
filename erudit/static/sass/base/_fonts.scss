@@ -25,7 +25,7 @@
        url('../fonts/freighttextpro/Serif-BookItalic.ttf')  format('truetype'),
        url('../fonts/freighttextpro/Serif-BookItalic.svg') format('svg');
   font-weight: normal;
-  font-style: normal;
+  font-style: italic;
 }
 
 @font-face {
@@ -35,7 +35,7 @@
        url('../fonts/freighttextpro/Serif-Bold.woff2') format('woff2'),
        url('../fonts/freighttextpro/Serif-Bold.ttf')  format('truetype'),
        url('../fonts/freighttextpro/Serif-Bold.svg') format('svg');
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
 }
 
@@ -46,8 +46,8 @@
        url('../fonts/freighttextpro/Serif-BoldItalic.woff2') format('woff2'),
        url('../fonts/freighttextpro/Serif-BoldItalic.ttf')  format('truetype'),
        url('../fonts/freighttextpro/Serif-BoldItalic.svg') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  font-weight: bold;
+  font-style: italic;
 }
 
 /**
@@ -55,82 +55,93 @@
 */
 
 @font-face {
-  font-family: 'Maax';
-  src: url('../fonts/maax/Maax.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax.otf')  format('opentype'),
-       url('../fonts/maax/Maax.woff') format('woff'),
-       url('../fonts/maax/Maax.ttf')  format('truetype'),
-       url('../fonts/maax/Maax.svg#Maax') format('svg');
+  font-family: 'Maax-Regular';
+  src: url('../fonts/maax/Sans-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-Regular.woff') format('woff'),
+       url('../fonts/maax/Sans-Regular.woff2') format('woff2'),
+       url('../fonts/maax/Sans-Regular.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-Regular.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Maax-Italic';
-  src: url('../fonts/maax/Maax-Italic.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax-Italic.otf')  format('opentype'),
-       url('../fonts/maax/Maax-Italic.woff') format('woff'),
-       url('../fonts/maax/Maax-Italic.ttf')  format('truetype'),
-       url('../fonts/maax/Maax-Italic.svg#Maax') format('svg');
+  src: url('../fonts/maax/Sans-Italic.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-Italic.woff') format('woff'),
+       url('../fonts/maax/Sans-Italic.woff2') format('woff2'),
+       url('../fonts/maax/Sans-Italic.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-Italic.svg') format('svg');
   font-weight: normal;
-  font-style: normal;
+  font-style: italic;
 }
 
 @font-face {
   font-family: 'Maax-Medium';
-  src: url('../fonts/maax/Maax-Medium.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax-Medium.otf')  format('opentype'),
-       url('../fonts/maax/Maax-Medium.woff') format('woff'),
-       url('../fonts/maax/Maax-Medium.ttf')  format('truetype'),
-       url('../fonts/maax/Maax-Medium.svg#Maax') format('svg');
-  font-weight: normal;
+  src: url('../fonts/maax/Sans-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-Medium.woff') format('woff'),
+       url('../fonts/maax/Sans-Medium.woff2') format('woff2'),
+       url('../fonts/maax/Sans-Medium.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-Medium.svg') format('svg');
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Maax-Mediumitalic';
-  src: url('../fonts/maax/Maax-Mediumitalic.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax-Mediumitalic.otf')  format('opentype'),
-       url('../fonts/maax/Maax-Mediumitalic.woff') format('woff'),
-       url('../fonts/maax/Maax-Mediumitalic.ttf')  format('truetype'),
-       url('../fonts/maax/Maax-Mediumitalic.svg#Maax') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'Maax-MediumItalic';
+  src: url('../fonts/maax/Sans-MediumItalic.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-MediumItalic.woff') format('woff'),
+       url('../fonts/maax/Sans-MediumItalic.woff2') format('woff2'),
+       url('../fonts/maax/Sans-MediumItalic.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-MediumItalic.svg') format('svg');
+  font-weight: 600;
+  font-style: italic;
 }
 
 @font-face {
   font-family: 'Maax-Bold';
-  src: url('../fonts/maax/Maax-Bold.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax-Bold.otf')  format('opentype'),
-       url('../fonts/maax/Maax-Bold.woff') format('woff'),
-       url('../fonts/maax/Maax-Bold.ttf')  format('truetype'),
-       url('../fonts/maax/Maax-Bold.svg#Maax') format('svg');
-  font-weight: normal;
+  src: url('../fonts/maax/Sans-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-Bold.woff') format('woff'),
+       url('../fonts/maax/Sans-Bold.woff2') format('woff2'),
+       url('../fonts/maax/Sans-Bold.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-Bold.svg') format('svg');
+  font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Maax-BoldItalic';
-  src: url('../fonts/maax/Maax-BoldItalic.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax-BoldItalic.otf')  format('opentype'),
-       url('../fonts/maax/Maax-BoldItalic.woff') format('woff'),
-       url('../fonts/maax/Maax-BoldItalic.ttf')  format('truetype'),
-       url('../fonts/maax/Maax-BoldItalic.svg#Maax') format('svg');
+  src: url('../fonts/maax/Sans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-BoldItalic.woff') format('woff'),
+       url('../fonts/maax/Sans-BoldItalic.woff2') format('woff2'),
+       url('../fonts/maax/Sans-BoldItalic.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-BoldItalic.svg') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+
+/**
+* Maax Mono
+*/
+
+@font-face {
+  font-family: 'Maax-Mono';
+  src: url('../fonts/maax/Sans-Mono.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-Mono.woff') format('woff'),
+       url('../fonts/maax/Sans-Mono.woff2') format('woff2'),
+       url('../fonts/maax/Sans-Mono.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-Mono.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-/**
-* Maax Regular Mono
-*/
-
 @font-face {
-  font-family: 'Maax-RegularMono';
-  src: url('../fonts/maax/Maax-RegularMono.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/maax/Maax-RegularMono.otf')  format('opentype'),
-       url('../fonts/maax/Maax-RegularMono.woff') format('woff'),
-       url('../fonts/maax/Maax-RegularMono.ttf')  format('truetype'),
-       url('../fonts/maax/Maax-RegularMono.svg#Maax') format('svg');
+  font-family: 'Maax-MonoItalic';
+  src: url('../fonts/maax/Sans-MonoItalic.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/maax/Sans-MonoItalic.woff') format('woff'),
+       url('../fonts/maax/Sans-MonoItalic.woff2') format('woff2'),
+       url('../fonts/maax/Sans-MonoItalic.ttf')  format('truetype'),
+       url('../fonts/maax/Sans-MonoItalic.svg') format('svg');
   font-weight: normal;
-  font-style: normal;
+  font-style: italic;
 }
