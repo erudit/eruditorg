@@ -109,8 +109,8 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_DIRS = (
-    str(ROOT_DIR / 'erudit' / 'static' / 'build'),
-    str(ROOT_DIR / 'erudit' / 'static'),
+    str(ROOT_DIR / 'eruditorg' / 'static' / 'build'),
+    str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
 
@@ -136,7 +136,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(ROOT_DIR / 'erudit' / 'templates'),
+            str(ROOT_DIR / 'eruditorg' / 'templates'),
         ],
         'OPTIONS': {
             'context_processors': [
@@ -191,7 +191,7 @@ PUBLISHER_EMAIL = 'edition@erudit.org'
 COMMUNICATION_EMAIL = 'media@erudit.org'
 SUBSCRIPTION_EMAIL = 'client@erudit.org'
 
-WSGI_APPLICATION = 'erudit.wsgi.application'
+WSGI_APPLICATION = 'eruditorg.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
