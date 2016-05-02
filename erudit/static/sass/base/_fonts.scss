@@ -3,15 +3,49 @@
 // -----------------------------------------------------------------------------
 
 /**
-* Freight Text
+* Freight Text Pro
 */
 
 @font-face {
-  font-family: 'FreightTextBook';
-  src: url('../fonts/freighttext/FreightTextBook.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/freighttext/FreightTextBook.woff') format('woff'),
-       url('../fonts/freighttext/FreightTextBook.ttf')  format('truetype'),
-       url('../fonts/freighttext/FreightTextBook.svg#Maax') format('svg');
+  font-family: 'FreightTextPro-Book';
+  src: url('../fonts/freighttextpro/Serif-Book.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/freighttextpro/Serif-Book.woff') format('woff'),
+       url('../fonts/freighttextpro/Serif-Book.woff2') format('woff2'),
+       url('../fonts/freighttextpro/Serif-Book.ttf')  format('truetype'),
+       url('../fonts/freighttextpro/Serif-Book.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreightTextPro-BookItalic';
+  src: url('../fonts/freighttextpro/Serif-BookItalic.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/freighttextpro/Serif-BookItalic.woff') format('woff'),
+       url('../fonts/freighttextpro/Serif-BookItalic.woff2') format('woff2'),
+       url('../fonts/freighttextpro/Serif-BookItalic.ttf')  format('truetype'),
+       url('../fonts/freighttextpro/Serif-BookItalic.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreightTextPro-Bold';
+  src: url('../fonts/freighttextpro/Serif-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/freighttextpro/Serif-Bold.woff') format('woff'),
+       url('../fonts/freighttextpro/Serif-Bold.woff2') format('woff2'),
+       url('../fonts/freighttextpro/Serif-Bold.ttf')  format('truetype'),
+       url('../fonts/freighttextpro/Serif-Bold.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreightTextPro-BoldItalic';
+  src: url('../fonts/freighttextpro/Serif-BoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/freighttextpro/Serif-BoldItalic.woff') format('woff'),
+       url('../fonts/freighttextpro/Serif-BoldItalic.woff2') format('woff2'),
+       url('../fonts/freighttextpro/Serif-BoldItalic.ttf')  format('truetype'),
+       url('../fonts/freighttextpro/Serif-BoldItalic.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
