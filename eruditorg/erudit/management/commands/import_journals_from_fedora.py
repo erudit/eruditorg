@@ -18,6 +18,10 @@ from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.repository import api
 from ...fedora.repository import rest_api
+from ...index import get_client
+from ...index.conf import settings as index_settings
+from ...index.documents import get_article_document_from_fedora
+from ...index.documents import get_bulk_operation_metadata
 from ...models import Article
 from ...models import Author
 from ...models import Collection
@@ -64,6 +68,8 @@ class Command(BaseCommand):
         self.test_xslt = options.get('test_xslt', False)
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
+
+        self.es_client = get_client()
 
         # Handles a potential modification date option
         try:
@@ -298,11 +304,13 @@ class Command(BaseCommand):
         # --
 
         article_count = 0
+        article_es_bulk_data = []
 
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
-                apid = issue_pid + '.{0}'.format(article_node.get('idproprio'))
+                localid = article_node.get('idproprio')
+                apid = issue_pid + '.{0}'.format(localid)
                 self._import_article(apid, issue)
             except Exception as e:
                 self.stdout.write(self.style.ERROR('  [FAIL]'))
@@ -312,6 +320,13 @@ class Command(BaseCommand):
                 raise
             else:
                 article_count += 1
+                article = Article.objects.get(localidentifier=localid)
+                article_es_bulk_data.append(get_bulk_operation_metadata(article))
+                article_es_bulk_data.append(get_article_document_from_fedora(article))
+                # index(self.es_client, get_article_document_from_fedora(article), article)
+
+        self.es_client.bulk(
+            index=index_settings.ES_INDEX_NAME, body=article_es_bulk_data, refresh=True)
 
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
 
