@@ -19,7 +19,6 @@ from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
 
@@ -50,9 +49,6 @@ urlpatterns = i18n_patterns(
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
-
-    # Catchall
-    url(r'', RedirectView.as_view(url="/espace-utilisateur/", permanent=False)),
 )
 
 # In DEBUG mode, serve media files through Django.

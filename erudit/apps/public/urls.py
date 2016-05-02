@@ -4,6 +4,7 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
+from . import urls_compat
 from . import views
 
 
@@ -17,6 +18,9 @@ urlpatterns = [
     url(_(r'^notices/'), include('apps.public.citations.urls', namespace='citations')),
     url(_(r'^recherche/'), include('apps.public.search.urls', namespace='search')),
     url(_(r'^these/'), include('apps.public.thesis.urls', namespace='thesis')),
+
+    # Compatibility URLs
+    url('^', include(urls_compat.urlpatterns)),
 
     # The journal URLs are at the end of the list because some of them are catchalls.
     url(r'^', include('apps.public.journal.urls', namespace='journal')),
