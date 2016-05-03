@@ -19,9 +19,16 @@ MAPPINGS = {
             },
             'publication_year': {'type': 'string'},
             'number': {'type': 'string'},
-            'issn': {'type': 'string'},
+            'issn': {
+                'type': 'string',
+                'copy_to': ['all', 'meta', ],
+            },
             'isbn': {'type': 'string'},
-            'authors': {'type': 'string', 'position_increment_gap': 100},
+            'authors': {
+                'type': 'string',
+                'position_increment_gap': 100,
+                'copy_to': ['all', 'meta', ],
+            },
         }
     }
 }
