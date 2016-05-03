@@ -23,11 +23,35 @@ MAPPINGS = {
                 'type': 'string',
                 'copy_to': ['all', 'meta', ],
             },
-            'isbn': {'type': 'string'},
+            'isbn': {
+                'type': 'string',
+                'copy_to': ['all', 'meta', ],
+            },
             'authors': {
                 'type': 'string',
                 'position_increment_gap': 100,
-                'copy_to': ['all', 'meta', ],
+                'copy_to': ['all', ],
+            },
+            'keywords': {
+                'type': 'string',
+                'position_increment_gap': 100,
+                'copy_to': ['all', ],
+            },
+            'abstracts': {
+                'type': 'string',
+                'copy_to': ['all', ],
+            },
+            'title': {
+                'type': 'string',
+                'copy_to': ['all', ],
+            },
+            'subtitle': {
+                'type': 'string',
+                'copy_to': ['all', ],
+            },
+            'text': {
+                'type': 'string',
+                'copy_to': ['all', ],
             },
         }
     }
