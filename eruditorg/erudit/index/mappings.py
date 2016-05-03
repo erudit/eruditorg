@@ -17,6 +17,7 @@ MAPPINGS = {
                 'store': True,
                 'copy_to': ['all', 'meta', ],
             },
+            'publication_date': {'type': 'date'},
             'publication_year': {'type': 'string'},
             'number': {'type': 'string'},
             'issn': {
@@ -39,6 +40,12 @@ MAPPINGS = {
                 'type': 'string',
                 'position_increment_gap': 100,
                 'copy_to': ['all', ],
+                'fields': {
+                    'sort': {
+                        'type': 'string',
+                        'analyzer': 'sort',
+                    },
+                },
             },
             'author_affiliations': {
                 'type': 'string',
@@ -57,6 +64,12 @@ MAPPINGS = {
             'title': {
                 'type': 'string',
                 'copy_to': ['all', ],
+                'fields': {
+                    'sort': {
+                        'type': 'string',
+                        'analyzer': 'sort',
+                    },
+                },
             },
             'subtitle': {
                 'type': 'string',

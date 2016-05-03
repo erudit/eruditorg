@@ -21,7 +21,7 @@ def get_article_document_from_fedora(article):
     issue = article.issue
 
     authors = [
-        '{0} {1}'.format(a['firstname'], a['lastname']) for a in article.erudit_object.authors]
+        '{0} {1}'.format(a['lastname'], a['firstname']) for a in article.erudit_object.authors]
     author_affiliations = list(itertools.chain.from_iterable([
         a.get('affiliations', []) for a in article.erudit_object.authors]))
     keywords = list(itertools.chain.from_iterable(
@@ -34,6 +34,7 @@ def get_article_document_from_fedora(article):
 
     _doc = {
         'localidentifier': article.localidentifier,
+        'publication_date': issue.erudit_object.publication_date,
         'publication_year': issue.erudit_object.publication_year,
         'number': issue.erudit_object.number,
         'issn': article.erudit_object.issn,
