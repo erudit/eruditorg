@@ -25,8 +25,8 @@ env('.env');
 
 /* Global variables */
 const root_dir = '../../';
-const static_dir = root_dir + 'erudit/static/';
-const templates_dirs = root_dir + 'erudit/templates/';
+const static_dir = root_dir + 'eruditorg/static/';
+const templates_dirs = root_dir + 'eruditorg/templates/';
 const PROD_ENV = gutil.env.production;
 
 /* DIRS */
