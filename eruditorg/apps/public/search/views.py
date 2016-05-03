@@ -25,7 +25,7 @@ from .pagination import EruditDocumentPagination
 class EruditDocumentListAPIView(ListAPIView):
     pagination_class = EruditDocumentPagination
     queryset = EruditDocument.objects.all()
-    search_engine_filter_backend = filters.EruditDocumentSolrFilter
+    search_engine_filter_backend = filters.EruditDocumentElasticsearchFilter
     serializer_class = EruditDocumentSerializer
 
     def list(self, request, *args, **kwargs):

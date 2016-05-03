@@ -1,35 +1,28 @@
 # -*- coding: utf-8 -*-
 
-from core.solrq.query import Q
+from elasticsearch_dsl import Q
+from elasticsearch_dsl import Search
 
-from . import solr_search
+from erudit.index import get_client
+from erudit.index.conf import settings as index_settings
+
 from .conf import settings as search_settings
 
 
-class EruditDocumentSolrFilter(object):
-    """ Filter that returns a list of EruditDocument instance based on Solr search results.
+class EruditDocumentElasticsearchFilter(object):
+    """ Filter that returns a list of EruditDocument instance based on Elasticsearch search results.
 
-    This "filter" class can process many individual filters that should be translated to Solr
-    parameters in order to query a Solr index of Érudit documents. This filter should only be used
-    on API views associated with EruditDocument-related models.
+    This "filter" class can process many individual filters that should be translated to
+    Elasticsearch parameters in order to query an Elasticsearch index of Érudit documents. This
+    filter should only be used on API views associated with EruditDocument-related models.
     """
     OP_AND = 'AND'
     OP_OR = 'OR'
     OP_NOT = 'NOT'
     operators = [OP_AND, OP_OR, OP_NOT, ]
 
-    aggregation_correspondence = {
-        'AnneePublication': 'year',
-        'TypeArticle_fac': 'article_type',
-        'Langue': 'language',
-        'TitreCollection_fac': 'collection',
-        'Auteur_tri': 'author',
-        'Fonds_fac': 'fund',
-        'Corpus_fac': 'publication_type',
-    }
-
-    def build_solr_filters(self, query_params={}):
-        """ Return the filters to use to query the Solr index. """
+    def build_es_filters(self, query_params={}):
+        """ Return the filters to use to query the Elasticsearch index. """
         filters = {}
 
         # Simple search parameters
@@ -95,9 +88,9 @@ class EruditDocumentSolrFilter(object):
 
         return filters
 
-    def apply_solr_filters(self, filters):
+    def apply_es_filters(self, filters):
         """ Applies the solr filters and returns the list of results. """
-        search = solr_search.get_search()
+        search = Search(using=get_client(), index=index_settings.ES_INDEX_NAME)
 
         qfield = filters['q']['field']
         qterm = filters['q']['term']
@@ -121,112 +114,71 @@ class EruditDocumentSolrFilter(object):
         publication_types = filters.get('publication_types', [])
 
         # Main filters
-        query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
-            else ~Q(**{qfield: qterm})
+        query = Q('term', **{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
+            else ~Q('term', **{qfield: qterm})
         for qparams in advanced_q:
             term = qparams.get('term')
             field = qparams.get('field')
             operator = qparams.get('operator')
             if operator == self.OP_AND:
-                query &= Q(**{field: term})
+                query &= Q('term', **{field: term})
             elif operator == self.OP_OR:
-                query |= Q(**{field: term})
+                query |= Q('term', **{field: term})
             elif operator == self.OP_NOT:
-                query &= ~Q(**{field: term})
-        sqs = search.filter(query)
+                query &= ~Q('term', **{field: term})
+        sqs = search.query('bool', filter=[query])
 
         # Applies the publication year filters
         if pub_year_start or pub_year_end:
             ystart = pub_year_start if pub_year_start is not None else '*'
             yend = pub_year_end if pub_year_end is not None else '*'
-            sqs = sqs.filter(AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend))
+            sqs = sqs.query('range', publication_year={'gte': ystart, 'lte': yend})
         elif pub_years:
-            sqs = self._filter_solr_multiple(sqs, 'AnneePublication', pub_years)
-
-        # Applies the types of documents filter
-        if document_types:
-            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', document_types)
-
-        # Applies the languages filter
-        if languages:
-            sqs = self._filter_solr_multiple(sqs, 'Langue', languages)
-
-        # Applies the journals filter
-        if journals:
-            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
-
-        # Applies the authors filter
-        if authors:
-            sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', authors)
-
-        # Applies the funds filter
-        if funds:
-            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', funds)
-
-        # Applies the publication types filter
-        if publication_types:
-            sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', publication_types)
+            sqs = sqs.filter('terms', publication_year=pub_years)
 
         return sqs
 
-    def get_solr_sorting(self, request):
-        """ Get the Solr sorting string. """
-        sort = request.query_params.get('sort_by', 'relevance')
+    def apply_es_sorting(self, es_query, query_params={}):
+        """ Sorts the list of results. """
+        sort = query_params.get('sort_by', 'relevance')
         if sort == 'relevance':
-            return 'score desc'
+            return es_query
         elif sort == 'title_asc':
-            return 'Titre_tri asc'
+            return es_query.sort('title.sort')
         elif sort == 'title_desc':
-            return 'Titre_tri desc'
+            return es_query.sort('-title.sort')
         elif sort == 'author_asc':
-            return 'Auteur_tri asc'
+            return es_query.sort({'authors.sort': {'order': 'asc', 'mode': 'min'}})
         elif sort == 'author_desc':
-            return 'Auteur_tri desc'
+            return es_query.sort({'authors.sort': {'order': 'desc', 'mode': 'min'}})
         elif sort == 'pubdate_asc':
-            return 'DateAjoutErudit asc'
+            return es_query.sort('publication_date')
         elif sort == 'pubdate_desc':
-            return 'DateAjoutErudit desc'
+            return es_query.sort('-publication_date')
 
     def filter(self, request, queryset, view):
-        """ Filters the queryset by using the results provided by the Solr index. """
-        # Firt we have to retrieve all the considered Solr filters.
-        filters = self.build_solr_filters(request.query_params.copy())
+        """ Filters the queryset by using the results provided by the Elasticsearch index. """
+        params = request.query_params.copy()
 
-        # Then apply the filters in order to get lazy query containing all the filters.
-        solr_query = self.apply_solr_filters(filters)
+        # Firt we have to retrieve all the considered Elasticsearch filters
+        filters = self.build_es_filters(params)
 
-        # TODO: this should be updated when we are sure that the set of Érudit documents provided by
-        # the database is the same as the one provided by the Solr search index.
-        solr_query = solr_query.filter(
-            Q(Corpus_fac='Article') | Q(Corpus_fac='Culturel'), Fonds_fac='Érudit')
+        # Then apply the filters in order to get lazy query containing all the filters
+        es_query = self.apply_es_filters(filters)
 
-        # Prepares the values used to paginate the results using Solr.
-        page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
-        page = request.query_params.get('page', 1)
-        try:
-            start = (int(page) - 1) * int(page_size)
-        except ValueError:  # pragma: no cover
-            start = 0
+        # Apply sorting
+        es_query = self.apply_es_sorting(es_query, params)
 
-        # Trigger the execution of the query in order to get a list of results from the Solr index.
-        results = solr_query.get_results(
-            sort=self.get_solr_sorting(request), rows=page_size, start=start)
+        # Trigger the execution of the query in order to get a list of results from the
+        # Elasticsearch index. Here we use "fields([])" in order to remove document sources from the
+        # returned results.
+        result = es_query.fields([])[:es_query.count()].execute()
 
-        # Determines the localidentifiers of the documents in order to filter the queryset and the
-        # total number of documents.
-        localidentifiers = [r['ID'] for r in results.docs]
-        documents_count = results.hits
+        # Determines the localidentifiers of the documents in order to filter the queryset
+        localidentifiers = [r.meta['id'] for r in result.hits]
 
         # Prepares the dictionnary containing aggregation results.
         aggregations_dict = {}
-        for facet, flist in results.facets.get('facet_fields', {}).items():
-            fdict = {flist[i]: flist[i+1] for i in range(0, len(flist), 2)}
-            aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
+        # TODO
 
-        return documents_count, localidentifiers, aggregations_dict
-
-    def _filter_solr_multiple(self, sqs, field, values):
-        query = Q()
-        for v in values:
-            query |= Q(**{field: '"{}"'.format(v)})
-        return sqs.filter(query)
+        return 0, localidentifiers, aggregations_dict
