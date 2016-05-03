@@ -23,7 +23,15 @@ MAPPINGS = {
                 'type': 'string',
                 'copy_to': ['all', 'meta', ],
             },
+            'issn_num': {
+                'type': 'string',
+                'copy_to': ['all', 'meta', ],
+            },
             'isbn': {
+                'type': 'string',
+                'copy_to': ['all', 'meta', ],
+            },
+            'isbn_num': {
                 'type': 'string',
                 'copy_to': ['all', 'meta', ],
             },
@@ -31,6 +39,11 @@ MAPPINGS = {
                 'type': 'string',
                 'position_increment_gap': 100,
                 'copy_to': ['all', ],
+            },
+            'author_affiliations': {
+                'type': 'string',
+                'position_increment_gap': 100,
+                'copy_to': ['all', 'meta', ],
             },
             'keywords': {
                 'type': 'string',
@@ -52,6 +65,10 @@ MAPPINGS = {
             'text': {
                 'type': 'string',
                 'copy_to': ['all', ],
+            },
+            'refbiblios': {
+                'type': 'string',
+                'copy_to': ['all', 'meta', ],
             },
         }
     }

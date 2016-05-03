@@ -22,22 +22,31 @@ def get_article_document_from_fedora(article):
 
     authors = [
         '{0} {1}'.format(a['firstname'], a['lastname']) for a in article.erudit_object.authors]
+    author_affiliations = list(itertools.chain.from_iterable([
+        a.get('affiliations', []) for a in article.erudit_object.authors]))
     keywords = list(itertools.chain.from_iterable(
         [kd.get('keywords', []) for kd in article.erudit_object.keywords]))
     abstracts = [ad.get('content') for ad in article.erudit_object.abstracts]
     text = article.erudit_object.stringify_children(article.erudit_object.find('corps'))
+    refbiblios = [
+        article.erudit_object.stringify_children(n)
+        for n in article.erudit_object.findall('refbiblio')]
 
-    return {
+    _doc = {
         'localidentifier': article.localidentifier,
         'publication_year': issue.erudit_object.publication_year,
         'number': issue.erudit_object.number,
         'issn': article.erudit_object.issn,
+        'issn_num': article.erudit_object.issn_num,
+        'isbn': article.erudit_object.isbn,
+        'isbn_num': article.erudit_object.isbn_num,
         'authors': authors,
+        'author_affiliations': author_affiliations,
         'keywords': keywords,
         'abstracts': abstracts,
         'title': article.erudit_object.title,
         'subtitle': article.erudit_object.subtitle,
         'text': text,
-
-        # 'isbn': ???,
+        'refbiblios': refbiblios,
     }
+    return {k: v if v is not None else '' for k, v in _doc.items()}
