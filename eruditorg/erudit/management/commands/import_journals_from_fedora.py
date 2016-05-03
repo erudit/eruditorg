@@ -325,8 +325,10 @@ class Command(BaseCommand):
                 article_es_bulk_data.append(get_article_document_from_fedora(article))
                 # index(self.es_client, get_article_document_from_fedora(article), article)
 
-        self.es_client.bulk(
+        res = self.es_client.bulk(
             index=index_settings.ES_INDEX_NAME, body=article_es_bulk_data, refresh=True)
+        if res['errors']:
+            self.stdout.write(self.style.WARNING('  Unable to properly index data: {}'.format(res)))
 
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
 
