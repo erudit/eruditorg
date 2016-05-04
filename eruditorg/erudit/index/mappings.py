@@ -45,6 +45,10 @@ MAPPINGS = {
                         'type': 'string',
                         'analyzer': 'sort',
                     },
+                    'raw': {
+                        'type': 'string',
+                        'index': 'not_analyzed',
+                    },
                 },
             },
             'author_affiliations': {
@@ -82,6 +86,22 @@ MAPPINGS = {
             'refbiblios': {
                 'type': 'string',
                 'copy_to': ['all', 'meta', ],
+            },
+            'article_type': {
+                'type': 'string',
+            },
+            'lang': {
+                'type': 'string',
+            },
+            'collection': {
+                'type': 'string',
+                'copy_to': ['all', 'meta', ],
+                'fields': {
+                    'raw': {
+                        'type': 'string',
+                        'index': 'not_analyzed',
+                    }
+                },
             },
         }
     }

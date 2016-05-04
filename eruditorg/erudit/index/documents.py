@@ -19,6 +19,7 @@ def get_bulk_operation_metadata(erudit_document):
 def get_article_document_from_fedora(article):
     """ Returns a dictionary corresponding to the given article by using Fedora. """
     issue = article.issue
+    journal = issue.journal
 
     authors = [
         '{0} {1}'.format(a['lastname'], a['firstname']) for a in article.erudit_object.authors]
@@ -49,5 +50,8 @@ def get_article_document_from_fedora(article):
         'subtitle': article.erudit_object.subtitle,
         'text': text,
         'refbiblios': refbiblios,
+        'article_type': article.erudit_object.article_type,
+        'lang': article.erudit_object.lang,
+        'collection': journal.name,
     }
     return {k: v if v is not None else '' for k, v in _doc.items()}
