@@ -21,6 +21,7 @@ def fake_get_results(**kwargs):
     results = unittest.mock.Mock()
     results.docs = [{'ID': a.localidentifier} for a in Article.objects.all()]
     results.facets = {'facet_fields': {'Corpus_fac': ['val1', 12, 'val2', 14, ], }}
+    results.hits = 50
     return results
 
 

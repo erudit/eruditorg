@@ -44,8 +44,8 @@ class Search(object):
         """ Returns a Query instance for the considered parameters. """
         return Query(self).filter(*args, **kwargs)
 
-    def get_results(self, sort=None):
+    def get_results(self, **kwargs):
         """ Returns te results of the search. """
-        return self.filter().get_results(sort=sort)
+        return self.filter().get_results(**kwargs)
 
     results = property(get_results)

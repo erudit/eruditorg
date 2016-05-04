@@ -275,5 +275,5 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        _, agg = filt.filter(request, EruditDocument.objects.all(), None)
+        _, _, agg = filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(agg, {'publication_type': {'val2': 14, 'val1': 12}})

@@ -20,14 +20,14 @@ class TestEruditDocumentPagination(BaseEruditTestCase):
         # Setup
         issue = IssueFactory.create(journal=self.journal)
         localidentifiers = []
-        for i in range(0, 50):
+        for i in range(0, 10):
             lid = 'lid-{0}'.format(i)
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid)
         request = Request(self.factory.get('/', data={'page': 1}))
         paginator = EruditDocumentPagination()
         # Run
-        object_list = paginator.paginate(localidentifiers, Article.objects.all(), request)
+        object_list = paginator.paginate(10, localidentifiers, Article.objects.all(), request)
         # Check
         self.assertEqual(
             object_list,
@@ -45,11 +45,11 @@ class TestEruditDocumentPagination(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={'page': 2}))
         paginator = EruditDocumentPagination()
         # Run
-        paginator.paginate(localidentifiers, Article.objects.all(), request)
+        paginator.paginate(200, localidentifiers, Article.objects.all(), request)
         response = paginator.get_paginated_response({})
         # Check
-        self.assertEqual(response.data['pagination']['count'], 50)
-        self.assertEqual(response.data['pagination']['num_pages'], 5)
+        self.assertEqual(response.data['pagination']['count'], 200)
+        self.assertEqual(response.data['pagination']['num_pages'], 20)
         self.assertEqual(response.data['pagination']['current_page'], 2)
         self.assertEqual(response.data['pagination']['next_page'], 3)
         self.assertEqual(response.data['pagination']['previous_page'], 1)

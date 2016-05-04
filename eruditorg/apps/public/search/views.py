@@ -32,13 +32,13 @@ class EruditDocumentListAPIView(ListAPIView):
         queryset = self.filter_queryset(self.get_queryset())
 
         # Applies the search engine filter backend in order to get a list of filtered
-        # EruditDocument localidentifiers and a dictionnary contening the result of aggregations
-        # that should be embedded in the final response object.
-        localidentifiers, aggregations_dict = self.search_engine_filter_backend() \
+        # EruditDocument localidentifiers, a dictionnary contening the result of aggregations
+        # that should be embedded in the final response object and a number of hits.
+        docs_count, localidentifiers, aggregations_dict = self.search_engine_filter_backend() \
             .filter(self.request, queryset, self)
 
         # Paginates the results
-        page = self.paginate(localidentifiers, queryset)
+        page = self.paginate(docs_count, localidentifiers, queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             response = self.get_paginated_response(serializer.data)
@@ -52,8 +52,9 @@ class EruditDocumentListAPIView(ListAPIView):
 
         return response
 
-    def paginate(self, localidentifiers, queryset):
-        return self.paginator.paginate(localidentifiers, queryset, self.request, view=self)
+    def paginate(self, docs_count, localidentifiers, queryset):
+        return self.paginator.paginate(
+            docs_count, localidentifiers, queryset, self.request, view=self)
 
 
 class SearchResultsView(TemplateResponseMixin, FormMixin, View):
