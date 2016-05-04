@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from elasticsearch_dsl import A
 from elasticsearch_dsl import Q
 from elasticsearch_dsl import Search
 
@@ -136,6 +137,22 @@ class EruditDocumentElasticsearchFilter(object):
         elif pub_years:
             sqs = sqs.filter('terms', publication_year=pub_years)
 
+        # Applies the types of documents filter
+        if document_types:
+            sqs = sqs.filter('terms', article_type=document_types)
+
+        # Applies the languages filter
+        if languages:
+            sqs = sqs.filter('terms', lang=languages)
+
+        # Applies the journals filter
+        if journals:
+            sqs = sqs.filter('terms', **{'collection.raw': journals})
+
+        # Applies the authors filter
+        if authors:
+            sqs = sqs.filter('terms', **{'authors.raw': authors})
+
         return sqs
 
     def apply_es_sorting(self, es_query, query_params={}):
@@ -169,6 +186,13 @@ class EruditDocumentElasticsearchFilter(object):
         # Apply sorting
         es_query = self.apply_es_sorting(es_query, params)
 
+        # Prepares aggregations
+        es_query.aggs.bucket('year', A('terms', field='publication_year'))
+        es_query.aggs.bucket('article_type', A('terms', field='article_type'))
+        es_query.aggs.bucket('language', A('terms', field='lang'))
+        es_query.aggs.bucket('collection', A('terms', field='collection.raw'))
+        es_query.aggs.bucket('author', A('terms', field='authors.raw'))
+
         # Prepares the values used to paginate the results using Elasticsearch.
         page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
         page = request.query_params.get('page', 1)
@@ -188,6 +212,8 @@ class EruditDocumentElasticsearchFilter(object):
 
         # Prepares the dictionnary containing aggregation results.
         aggregations_dict = {}
-        # TODO
+        for agg in result.aggregations:
+            fdict = {b['key']: b['doc_count'] for b in result.aggregations[agg]['buckets']}
+            aggregations_dict.update({agg: fdict})
 
         return es_query.count(), localidentifiers, aggregations_dict
