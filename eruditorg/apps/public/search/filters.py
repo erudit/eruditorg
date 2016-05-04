@@ -189,25 +189,33 @@ class EruditDocumentSolrFilter(object):
 
     def filter(self, request, queryset, view):
         """ Filters the queryset by using the results provided by the Solr index. """
-        # Firt we have to retrieve all the considered Solr filters
+        # Firt we have to retrieve all the considered Solr filters.
         filters = self.build_solr_filters(request.query_params.copy())
 
-        # Then apply the filters in order to get lazy query containing all the filters
+        # Then apply the filters in order to get lazy query containing all the filters.
         solr_query = self.apply_solr_filters(filters)
 
-        # Trigger the execution of the query in order to get a list of results from the Solr index
-        results = solr_query.get_results(sort=self.get_solr_sorting(request))
+        # TODO: this should be updated when we are sure that the set of Érudit documents provided by
+        # the database is the same as the one provided by the Solr search index.
+        solr_query = solr_query.filter(
+            Q(Corpus_fac='Article') | Q(Corpus_fac='Culturel'), Fonds_fac='Érudit')
 
-        # Determines the localidentifiers of the documents in order to filter the queryset
+        # Prepares the values used to paginate the results using Solr.
+        page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
+        page = request.query_params.get('page', 1)
+        try:
+            start = (int(page) - 1) * int(page_size)
+        except ValueError:  # pragma: no cover
+            start = 0
+
+        # Trigger the execution of the query in order to get a list of results from the Solr index.
+        results = solr_query.get_results(
+            sort=self.get_solr_sorting(request), rows=page_size, start=start)
+
+        # Determines the localidentifiers of the documents in order to filter the queryset and the
+        # total number of documents.
         localidentifiers = [r['ID'] for r in results.docs]
-
-        # Determines the localidentifiers that are present in the database by keeping the order of
-        # the filtered results. We convert the list of localidentifiers returned from the DB to a
-        # set because checking for membership in a set or similar hash-based type is roughly O(1),
-        # compared to O(n) for membership in a list.
-        db_localidentifiers = queryset.values_list('localidentifier', flat=True)
-        db_filtered_localidentifiers = [
-            lid for lid in localidentifiers if lid in frozenset(db_localidentifiers)]
+        documents_count = results.hits
 
         # Prepares the dictionnary containing aggregation results.
         aggregations_dict = {}
@@ -215,11 +223,7 @@ class EruditDocumentSolrFilter(object):
             fdict = {flist[i]: flist[i+1] for i in range(0, len(flist), 2)}
             aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
 
-        # Note: we do not filter the queryset using the list of localidentifiers. This filter is
-        # aimed to be used along with the EruditDocumentPagination whic paginates the objects using
-        # the list of localidentifiers. So the objects are filtered at pagination-time anyway.
-
-        return db_filtered_localidentifiers, aggregations_dict
+        return documents_count, localidentifiers, aggregations_dict
 
     def _filter_solr_multiple(self, sqs, field, values):
         query = Q()

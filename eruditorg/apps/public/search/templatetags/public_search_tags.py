@@ -10,4 +10,4 @@ register = template.Library()
 def highlight(text, word):
     """ Highlights a given text using a specific word. """
     return mark_safe(text.replace(word, '<mark class="highlight">{}</mark>'.format(word))) \
-        if len(word) else text
+        if len(word) and text else text

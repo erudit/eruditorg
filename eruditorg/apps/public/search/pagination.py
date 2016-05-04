@@ -5,9 +5,11 @@ from rest_framework.exceptions import NotFound
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from .conf import settings as search_settings
+
 
 class EruditDocumentPagination(PageNumberPagination):
-    page_size = 10
+    page_size = search_settings.DEFAULT_PAGE_SIZE
     page_size_query_param = 'page_size'
     max_page_size = 50
 
@@ -29,18 +31,19 @@ class EruditDocumentPagination(PageNumberPagination):
             'results': data,
         })
 
-    def paginate(self, localidentifiers, queryset, request, view=None):
+    def paginate(self, docs_count, localidentifiers, queryset, request, view=None):
         """
         This is the default implementation of the PageNumberPagination.paginate_queryset method ;
-        the only exception: the pagination is performed on a list of ordered localidentifiers.
-        But the EruditDocument instances corresponding to the localidentifiers associated with the
-        current page are returned.
+        the only exception: the pagination is performed on a dummy list of the same length as the
+        number of results returned by the search engine in use. But the EruditDocument instances
+        corresponding to the localidentifiers associated with the current page are returned. Note
+        that these localidentifiers have already been paginated by the search engine.
         """
         page_size = self.get_page_size(request)
         if not page_size:  # pragma: no cover
             return None
 
-        paginator = self.django_paginator_class(localidentifiers, page_size)
+        paginator = self.django_paginator_class(range(docs_count), page_size)
         page_number = request.query_params.get(self.page_query_param, 1)
         if page_number in self.last_page_strings:  # pragma: no cover
             page_number = paginator.num_pages
@@ -57,8 +60,7 @@ class EruditDocumentPagination(PageNumberPagination):
 
         self.request = request
 
-        current_localidentifiers = list(self.page)
-        queryset = queryset.filter(localidentifier__in=current_localidentifiers)
+        queryset = queryset.filter(localidentifier__in=localidentifiers)
         obj_dict = {obj.localidentifier: obj for obj in queryset}
-        obj_list = [obj_dict[lid] for lid in current_localidentifiers]
+        obj_list = [obj_dict[lid] for lid in localidentifiers if lid in obj_dict]
         return obj_list
