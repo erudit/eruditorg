@@ -169,10 +169,19 @@ class EruditDocumentElasticsearchFilter(object):
         # Apply sorting
         es_query = self.apply_es_sorting(es_query, params)
 
+        # Prepares the values used to paginate the results using Elasticsearch.
+        page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
+        page = request.query_params.get('page', 1)
+        try:
+            start = (int(page) - 1) * int(page_size)
+            end = int(page_size)
+        except ValueError:  # pragma: no cover
+            start = 0
+
         # Trigger the execution of the query in order to get a list of results from the
         # Elasticsearch index. Here we use "fields([])" in order to remove document sources from the
         # returned results.
-        result = es_query.fields([])[:es_query.count()].execute()
+        result = es_query.fields([])[start:end].execute()
 
         # Determines the localidentifiers of the documents in order to filter the queryset
         localidentifiers = [r.meta['id'] for r in result.hits]
@@ -181,4 +190,4 @@ class EruditDocumentElasticsearchFilter(object):
         aggregations_dict = {}
         # TODO
 
-        return 0, localidentifiers, aggregations_dict
+        return es_query.count(), localidentifiers, aggregations_dict
