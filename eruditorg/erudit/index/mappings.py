@@ -100,7 +100,25 @@ MAPPINGS = {
                     'raw': {
                         'type': 'string',
                         'index': 'not_analyzed',
-                    }
+                    },
+                },
+            },
+            'fund': {
+                'type': 'string',
+                'fields': {
+                    'raw': {
+                        'type': 'string',
+                        'index': 'not_analyzed',
+                    },
+                },
+            },
+            'corpus': {
+                'type': 'string',
+                'fields': {
+                    'raw': {
+                        'type': 'string',
+                        'index': 'not_analyzed',
+                    },
                 },
             },
         }

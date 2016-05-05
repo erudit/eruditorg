@@ -153,6 +153,14 @@ class EruditDocumentElasticsearchFilter(object):
         if authors:
             sqs = sqs.filter('terms', **{'authors.raw': authors})
 
+        # Applies the funds filter
+        if funds:
+            sqs = sqs.filter('terms', **{'fund.raw': funds})
+
+        # Applies the publication types filter
+        if publication_types:
+            sqs = sqs.filter('terms', **{'corpus.raw': publication_types})
+
         return sqs
 
     def apply_es_sorting(self, es_query, query_params={}):
@@ -192,6 +200,8 @@ class EruditDocumentElasticsearchFilter(object):
         es_query.aggs.bucket('language', A('terms', field='lang'))
         es_query.aggs.bucket('collection', A('terms', field='collection.raw'))
         es_query.aggs.bucket('author', A('terms', field='authors.raw'))
+        es_query.aggs.bucket('fund', A('terms', field='fund.raw'))
+        es_query.aggs.bucket('publication_type', A('terms', field='corpus.raw'))
 
         # Prepares the values used to paginate the results using Elasticsearch.
         page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)

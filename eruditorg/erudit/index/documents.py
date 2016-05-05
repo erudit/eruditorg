@@ -53,5 +53,7 @@ def get_article_document_from_fedora(article):
         'article_type': article.erudit_object.article_type,
         'lang': article.erudit_object.lang,
         'collection': journal.name,
+        'fund': journal.collection.name,
+        'corpus': journal.type.name if journal.type else None,
     }
     return {k: v if v is not None else '' for k, v in _doc.items()}
