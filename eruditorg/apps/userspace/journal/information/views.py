@@ -23,7 +23,7 @@ class JournalInformationUpdateView(
     provided by the form can be controlled using a GET parameter whose name is
     defined using the `lang_get_parameter` attribute.
     """
-    context_object_name = 'journal'
+    context_object_name = 'journal_info'
     form_class = JournalInformationForm
     lang_get_parameter = 'lang'
     menu_journal = 'information'
