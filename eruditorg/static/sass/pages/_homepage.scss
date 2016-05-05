@@ -72,7 +72,7 @@ body.home {
       @media (min-width: $screen-sm-min) {
         margin-bottom: 0;
       }
-      h3 {
+      h3, .h3 {
         margin: 0 0 20px 0;
         line-height: 1;
         font-size: 25px;
