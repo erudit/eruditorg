@@ -206,9 +206,10 @@ class Command(BaseCommand):
 
         # Set the proper values on the Journal instance
         xml_name = oaiset_info_tree.find('.//title')
-        xml_issue = publications_tree.find('.//numero')
+        xml_issue = publications_tree.xpath(
+            './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
         journal.name = xml_name.text if xml_name is not None else None
-        journal.code = xml_issue.get('revAbr') if xml_issue is not None else None
+        journal.code = xml_issue[0].get('revAbr') if xml_issue is not None else None
 
         journal_created = journal.id is None
 
