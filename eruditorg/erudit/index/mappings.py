@@ -121,6 +121,10 @@ MAPPINGS = {
                     },
                 },
             },
+            'theme': {
+                'type': 'string',
+                'copy_to': ['all', ],
+            },
         }
     }
 }
