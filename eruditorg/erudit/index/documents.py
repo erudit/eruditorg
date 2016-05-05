@@ -32,6 +32,9 @@ def get_article_document_from_fedora(article):
     refbiblios = [
         article.erudit_object.stringify_children(n)
         for n in article.erudit_object.findall('refbiblio')]
+    trefbiblios = [
+        article.erudit_object.stringify_children(n)
+        for n in article.erudit_object.findall('trefbiblio')]
 
     _doc = {
         'localidentifier': article.localidentifier,
@@ -50,6 +53,7 @@ def get_article_document_from_fedora(article):
         'subtitle': article.erudit_object.subtitle,
         'text': text,
         'refbiblios': refbiblios,
+        'trefbiblios': trefbiblios,
         'article_type': article.erudit_object.article_type,
         'lang': article.erudit_object.lang,
         'collection': journal.name,

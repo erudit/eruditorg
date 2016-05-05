@@ -115,19 +115,19 @@ class EruditDocumentElasticsearchFilter(object):
         publication_types = filters.get('publication_types', [])
 
         # Main filters
-        query = Q('term', **{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
-            else ~Q('term', **{qfield: qterm})
+        query = Q('match', **{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
+            else ~Q('match', **{qfield: qterm})
         for qparams in advanced_q:
             term = qparams.get('term')
             field = qparams.get('field')
             operator = qparams.get('operator')
             if operator == self.OP_AND:
-                query &= Q('term', **{field: term})
+                query &= Q('match', **{field: term})
             elif operator == self.OP_OR:
-                query |= Q('term', **{field: term})
+                query |= Q('match', **{field: term})
             elif operator == self.OP_NOT:
-                query &= ~Q('term', **{field: term})
-        sqs = search.query('bool', filter=[query])
+                query &= ~Q('match', **{field: term})
+        sqs = search.query('bool', must=[query])
 
         # Applies the publication year filters
         if pub_year_start or pub_year_end:

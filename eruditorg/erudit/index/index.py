@@ -10,7 +10,7 @@ INDEX_CONFIGURATION = {
     'settings': {
         'number_of_shards': index_settings.ES_INDEX_NUMBER_OF_SHARDS,
         'number_of_replicas': index_settings.ES_INDEX_NUMBER_OF_REPLICAS,
-        # We define here a "folding" filter in order to convert alphabetic, numeric, and symbolic
+        # The "folding" filter defined here is used to convert alphabetic, numeric, and symbolic
         # Unicode characters into their ASCII equivalents. We use the "preserve_original" option in
         # order to index original tokens and folded tokens. But perhaps explicit sub-fields using
         # the "folding" filter should be created as stated in the Elasticsearch documentation. See:
@@ -19,7 +19,7 @@ INDEX_CONFIGURATION = {
             'analyzer': {
                 'default': {
                     'tokenizer': 'standard',
-                    'filter': ['standard', 'folding', ],
+                    'filter': ['standard', 'lowercase', 'folding', ],
                 },
                 'sort': {
                     'type': 'custom',

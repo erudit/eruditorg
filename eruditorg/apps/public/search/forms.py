@@ -15,16 +15,16 @@ OPERATORS = (
 ADVANCED_SEARCH_FIELDS = (
     ('all', _('Tous les champs')),
     ('meta', _('Tous les champs (sauf texte intégral)')),
-    ('full_text', _('Texte intégral')),
+    ('text', _('Texte intégral')),
     ('title_abstract_keywords', _('Titre, résumé, mots-clés')),
     ('title', _('Titre')),
     ('author', _('Auteur')),
-    ('author_affiliation', _("Affiliation de l'auteur")),
-    ('journal_title', _('Titre de la revue')),
-    ('bibliography', _('Bibliographie')),
-    ('title_reviewd', _('Ouvrage recensé')),
-    ('issn', _('ISSN')),
-    ('isbn', _('ISBN')),
+    ('author_affiliations', _("Affiliation de l'auteur")),
+    ('collection', _('Titre de la revue')),
+    ('refbiblios', _('Bibliographie')),
+    ('trefbiblios', _('Ouvrage recensé')),
+    ('issn_full', _('ISSN')),
+    ('isbn_full', _('ISBN')),
 )
 
 AVAILABILITY_CHOICES = (
