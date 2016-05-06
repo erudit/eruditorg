@@ -4,10 +4,16 @@
 
 #journal-detail {
 
+  .latest-issue {
+    p {
+      margin: 1em 0;
+    }
+  }
+
   .journal-infos {
 
     .journal-info-block {
-      border-top: 1px solid $gray-base;
+      border-top: 1px solid #000;
       padding-top: 25px;
       padding-bottom: $margin-vertical-default;
 

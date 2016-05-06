@@ -47,26 +47,4 @@
 
   }
 
-  /**
-  * Journal metadata definition list overrides
-  */
-  .journal-meta--list {
-
-    dt, dd {
-      display: block;
-      float: none;
-      width: auto;
-    }
-
-    dt {
-      font-size: small;
-      margin-top: 1.25em;
-    }
-
-    dd {
-      margin-bottom: 1.25em;
-    }
-
-  }
-
 }
