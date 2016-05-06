@@ -96,6 +96,15 @@
   border-radius: $radius;
 }
 
+// Column-break-inside vendor prefixes
+@mixin column-break-inside($break) {
+  -webkit-column-break-inside: $break;
+  -moz-column-break-inside: $break;
+  -o-column-break-inside: $break;
+  -ms-column-break-inside: $break;
+  column-break-inside: $break;
+}
+
 
 /// Event wrapper
 /// @author Harry Roberts
