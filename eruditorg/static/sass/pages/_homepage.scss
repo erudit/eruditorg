@@ -13,6 +13,43 @@ body.home {
 
 #homepage-content {
 
+  // Custom underline style for homepage links
+  a {
+    &:hover, &:focus, &:active {
+      color: #000;
+      text-decoration: none;
+      background-image: linear-gradient(to top,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0) 2px,
+        #000 2px,
+        #000 3px,
+        rgba(0, 0, 0, 0) 3px);
+    }
+  }
+  p a {
+    background-image: linear-gradient(to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0) 2px,
+      $dark-grey 2px,
+      $dark-grey 3px,
+      rgba(0, 0, 0, 0) 3px);
+  }
+  .glory {
+    a {
+      color: $coral-red;
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+        text-decoration: none;
+        background-image: linear-gradient(to top,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0) 2px,
+          $coral-red 2px,
+          $coral-red 3px,
+          rgba(0, 0, 0, 0) 3px);
+      }
+    }
+  }
+
   .glory {
     padding-top: 50px;
     padding-bottom: 60px;
