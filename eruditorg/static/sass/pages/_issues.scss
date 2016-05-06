@@ -18,46 +18,54 @@
 * issue list thumbnail
 */
 
-
-.issue-list-item {
-  height: 200px;
-  overflow: hidden;
-  padding-top: $margin-vertical-default/2;
-  margin-bottom: $margin-vertical-default/2;
-
-  a {
-    color: $brand-primary;
-    @include transition(color 500ms);
-    &:hover {
-      text-decoration: none;
-      color: $gray-base;
-    }
-
-  }
-
-  figure {
-    img {
-      display: block;
-      max-width: 60%;
-      border: 1px solid $gray-base;
-    }
-    &.small {
-      img {
-        max-width: 40%;
-      }
+.year-list {
+  list-style: none;
+  margin: 0;
+  column-count: 4;
+  .year-list--item {
+    margin-bottom: 0;
+    padding-bottom: 2.5em;
+    line-height: 1.15;
+    @include column-break-inside(avoid);
+    h4 {
+      margin-bottom: 0.25em;
+      padding-bottom: 0.25em;
+      border-bottom: 1px solid $mid-grey;
     }
   }
 }
 
+.issue-list {
+  list-style: none;
+  margin: 0;
+  .issue-list--item {
+    margin: 0;
+    a {
+      font-size: smaller;
+      padding: 0.35em 0;
+      display: block;
+      @include transition(padding 0.15s ease-in);
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+        text-decoration: none;
+      }
+    }
+  }
+  .issue-list--theme {
+    @include fw-sans-bold;
+    display: block;
+    margin: 0.25em 0;
+  }
+}
+
+
 // issue item variation with border on top
 .issue-list-item--default {
-  @extend .issue-list-item;
   @include grid-cell-border($direction: 'top');
 }
 
 // issue item variation with border on top, figure cover is first
 .issue-list-item--inverted {
-  @extend .issue-list-item;
   padding-top: 0;
   height: 250px;
   header {

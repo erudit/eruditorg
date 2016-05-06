@@ -77,7 +77,7 @@ a.btn {
 }
 .btn-primary-outlined {
   @include button-variant($brand-primary, transparent, $brand-primary);
-  &:hover {
+  &:hover, &:active, &:focus, &:focus:active {
     color: $btn-primary-color !important;
     background-color: $btn-primary-bg;
     border-color: $btn-primary-bg;
