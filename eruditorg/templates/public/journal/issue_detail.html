@@ -30,14 +30,14 @@
 
         <div class="sidebar-block clearfix issue-detail--resume">
 
-          <div class="col-xs-6 no-padding">
+          <div>
             <a href="{{ journal.get_absolute_url }}">
               <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
               {% include 'public/journal/_issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
 
-          <header class="col-xs-12 no-padding no-margin">
+          <header>
             <div class="mono-space">{% trans "De la revue" %}</div>
             <h2 class="h4 no-margin"><a href="{{ journal.get_absolute_url }}">{{ journal.name }}</a></h2>
           </header>
@@ -47,7 +47,7 @@
         {# journal meta infos #}
         <div class="sidebar-block journal-meta">
 
-          <h4 class="border-bottom">{% trans "Fiche" %}</h4>
+          <h2>{% trans "Fiche" %}</h2>
 
           <dl class="journal-meta--list">
 
@@ -129,9 +129,8 @@
               {% endfor %}
             </dd>
             {% endif %}
-
           </dl>
-
+          <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="" class="img-responsive journal-logo" />
         </div>
       </aside>
 

@@ -9,280 +9,256 @@
 
 <section id="journal-detail">
 
-    {# top #}
-    <div class="container">
+  {# top #}
+  <div class="container">
 
-        <div class="row">
+    <div class="row">
 
-          {# Journal information (on right side except mobile) #}
-          <aside id="journal-informations" class="col-sm-push-9 col-sm-3">
+      {# Journal about #}
+      <div id="journal-about" class="col-sm-9">
+        <header class="page-header-main row">
+          <div class="col-sm-12">
+            <h1>
+              <span>{{ journal.name }}</span>
+              {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
+            </h1>
+          </div>
+        </header>
 
-            {# lastest issue #}
-            {% if latest_issue %}
-            <div class="sidebar-block clearfix">
+        {% if journal_info %}
+        <section class="journal-infos" role="tablist" aria-multiselectable="true">
 
-              <header>
-                <h4 class="border-bottom">{% trans "Dernier numéro" %}</h4>
-              </header>
+          {% trans "Aucune information" as tab_empty_msg %}
 
-              <p class="h5">
-              {% blocktrans trimmed with number=latest_issue.erudit_object.number|default:i18n_unknown date=latest_issue.date_published|date:"F Y" %}
-                Numéro {{ number }} - {{ date }}
-              {% endblocktrans %}
+          {% if journal_info.about %}
+          <div class="journal-info-block">
+            <h3>{% trans "À propos" %}</h3>
+            <div class="content">
+              {{ journal_info.about|default:tab_empty_msg|safe }}
+              {% if journal.url %}
+              <p><a href="{{ journal.url }}" class="mono-space color-red"><i class="ion-ios-arrow-thin-right"></i> {% trans "Site Web" %}</a></p>
+              {% endif %}
+              {% if journal_info.contact %}
+              <div class="mono-space">
+                {{ journal_info.contact|default:tab_empty_msg|safe }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if journal_info.editorial_policy %}
+          <div class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
+            <h3 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
+              {% trans "Politique éditoriale" %}
+              <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
+            </h3>
+            <div id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
+              {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if journal_info.subscriptions %}
+          <div class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
+            <h3 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
+              {% trans "Abonnements" %}
+              <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
+            </h3>
+            <div id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
+              {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if journal_info.team %}
+          <div class="journal-info-block akkordion" role="tab" id="journal-info-authors" role="tabpanel">
+            <h3 class="akkordion-title" href="#journal-info-authors-content" aria-expanded="false" aria-controls="journal-info-authors-content">
+              {% trans "Index des auteurs" %}
+              <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
+            </h3>
+            <div id="journal-info-authors-content" class="akkordion-content" aria-labelledby="journal-info-authors">
+              <p>
+                <a href="{% url 'public:journal:journal-authors-list' journal.code %}">{% trans "Voir les auteurs" %}</a>
               </p>
-
-              <figure class="col-xs-3 no-padding">
-                <a href="{{ latest_issue.get_absolute_url }}"><img src="{% url 'public:journal:issue-coverpage' latest_issue.pk %}" class="img-responsive" alt="{{ latest_issue.title }}" /></a>
-              </figure>
-
             </div>
-            {% endif %}
+          </div>
+          {% endif %}
 
-            {# journal meta infos #}
-            <div class="sidebar-block">
-
-              <header>
-                  <h4 class="border-bottom">{% trans "Fiche" %}</h4>
-              </header>
-
-              <ul class="journal-meta list-unstyled">
-
-                {% if journal.members.all %}
-                <li>
-                  <h6 class="mono-space">{% trans "Direction" %}</h6>
-                  {% for member in journal.members.all %}
-                  <p>{{ member.get_full_name }}</p>
-                  {% endfor %}
-                </li>
-                {% endif %}
-
-                {% if journal.publishers.all %}
-                <li>
-                  <h6 class="mono-space">
-                    {% blocktrans count total=journal.publishers.all|length %}
-                    Éditeur
-                    {% plural %}
-                    Éditeurs
-                    {% endblocktrans %}
-                  </h6>
-                  {% for publisher in journal.publishers.all %}
-                  <p>{{ publisher.name }}</p>
-                  {% endfor %}
-                </li>
-                {% endif %}
-
-                {% if journal.issn_print or journal.issn_web %}
-                <li>
-                  <h6 class="mono-space">{% trans "ISSN" %}</h6>
-                  {% if journal.issn_print %}
-                  <p><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</p>
-                  <p><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</p>
-                  {% endif %}
-                </li>
-                {% endif %}
-
-                {% if journal.issues_per_year %}
-                <li>
-                  <h6 class="mono-space">{% trans "Fréquence" %}</h6>
-                  <p>
-                    {% blocktrans count issues_per_year=journal.issues_per_year %}
-                    {{ issues_per_year }} numéro par année
-                    {% plural %}
-                    {{ issues_per_year }} numéros par année
-                    {% endblocktrans %}
-                  </p>
-                </li>
-                {% endif %}
-
-                {# TODO : add this to model #}
-                <li>
-                  <h6 class="mono-space">{% trans "Période de publication" %}</h6>
-                  <p>{{ journal.erudit_object.publication_period }}</p>
-                </li>
-
-                {% if journal.first_issue %}
-                <li>
-                  <h6 class="mono-space">{% trans "Disponible dans Érudit depuis" %}</h6>
-                  <p>{{ journal.first_issue.date_published|date:"Y" }}</p>
-                </li>
-                {% endif %}
-
-                <li>
-                  <h6 class="mono-space">{% trans "Type de support" %}</h6>
-                  <p>
-                    {% if journal.paper %}
-                    {% trans "Numérique et papier" %}
-                    {% else %}
-                    {% trans "Numérique" %}
-                    {% endif %}
-                  </p>
-                </li>
-
-                <li>
-                  <h6 class="mono-space">{% trans "Politique d'accès" %}</h6>
-                  {% if journal.open_access %}
-                  <p>{% trans "Disponible en libre accès" %}</p>
-                  {% else %}
-                  <p>{% trans "Non-disponible en libre accès" %}</p>
-                  {% endif %}
-                </li>
-
-                {% if journal.disciplines.all|length > 0 %}
-                <li>
-                  <h6 class="mono-space">
-                    {% blocktrans count journal.disciplines.all|length as disciplines_count %}
-                    Discipline
-                    {% plural %}
-                    Disciplines
-                    {% endblocktrans %}
-                  </h6>
-                  <p>
-                    {% for discipline in journal.disciplines.all %}
-                    <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                  </p>
-                </li>
-                {% endif %}
-
-              </ul>
-
+          {% if journal_info.team %}
+          <div class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
+            <h3 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
+              {% trans "Équipe" %}
+              <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
+            </h3>
+            <div id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
+              {{ journal_info.team|default:tab_empty_msg|safe }}
             </div>
+          </div>
+          {% endif %}
 
-          </aside>
-
-          {# Journal about #}
-          <section id="journal-about" class="col-sm-8 col-sm-pull-3">
-
-            <header class="page-header-main row">
-                <div class="col-sm-8">
-                  <h1>
-                    <span>{{ journal.name }}</span>
-                    {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
-                  </h1>
-                </div>
-                <div class="col-sm-4">
-                  <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="" class="img-responsive" />
-                </div>
-            </header>
-
-            {% if journal_info %}
-            <section class="journal-infos" role="tablist" aria-multiselectable="true">
-
-              {% trans "Aucune information" as tab_empty_msg %}
-
-              {% if journal_info.about %}
-              <div class="journal-info-block">
-                <h3>{% trans "À propos" %}</h3>
-                <div class="content">
-                    {{ journal_info.about|default:tab_empty_msg|safe }}
-                    {% if journal.url %}
-                    <p><a href="{{ journal.url }}" class="mono-space color-red"><i class="ion-ios-arrow-thin-right"></i> {% trans "Site Web" %}</a></p>
-                    {% endif %}
-                    {% if journal_info.contact %}
-                    <div class="mono-space">
-                      {{ journal_info.contact|default:tab_empty_msg|safe }}
-                    </div>
-                    {% endif %}
-                </div>
-              </div>
-              {% endif %}
-
-              {% if journal_info.editorial_policy %}
-              <div class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
-                <h3 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
-                    {% trans "Politique éditoriale" %}
-                    <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
-                </h3>
-                <div id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
-                    {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
-                </div>
-              </div>
-              {% endif %}
-
-              {% if journal_info.subscriptions %}
-              <div class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
-                <h3 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
-                  {% trans "Abonnements" %}
-                  <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
-                </h3>
-                <div id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
-                    {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
-                </div>
-              </div>
-              {% endif %}
-
-              {% if journal_info.team %}
-              <div class="journal-info-block akkordion" role="tab" id="journal-info-authors" role="tabpanel">
-                <h3 class="akkordion-title" href="#journal-info-authors-content" aria-expanded="false" aria-controls="journal-info-authors-content">
-                  {% trans "Index des auteurs" %}
-                  <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
-                </h3>
-                <div id="journal-info-authors-content" class="akkordion-content" aria-labelledby="journal-info-authors">
-                  <p>
-                      <a href="{% url 'public:journal:journal-authors-list' journal.code %}">{% trans "Voir les auteurs" %}</a>
-                  </p>
-                </div>
-              </div>
-              {% endif %}
-
-              {% if journal_info.team %}
-              <div class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
-                <h3 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
-                  {% trans "Équipe" %}
-                  <i class="collapse-chevron ion-chevron-down pull-right icon"></i>
-                </h3>
-                <div id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
-                    {{ journal_info.team|default:tab_empty_msg|safe }}
-                </div>
-              </div>
-              {% endif %}
-
-            </section>
-            {% endif %}
-
-          </section>
-
-        </div>
-
-    </div>
-
-    {% if issues %}
-    <section id="back-issues" class="back-issues">
-      <div class="container">
-
-        <div class="row">
-          <header class="back-issues--header col-xs-12">
-            <div class="pull-right">
-              <a href="#" class="btn btn-primary-outlined">{% trans "Voir les numéros thématiques" %}</a>
-            </div>
-            <h3>{% trans "Historique des numéros" %} ({{ issues|length }})</h3>
-          </header>
-        </div>
-
-        <div class="row">
-          {% regroup issues|dictsortreversed:"year" by year as year_list %}
-          <ul class="year-list col-xs-12">
-            {% for year in year_list %}
-            <li class="year-list--item"><h4 class="mono-space">{{ year.grouper }}</h4>
-                <ul class="issue-list">
-                  {% for issue in year.list %}
-                  <li class="issue-list--item">
-                    <a href="{{ issue.get_absolute_url }}">
-                      <span class="issue-list--volume">{% with title=issue.volume_title %}{{ issue.volume_title }}{% endwith %}</span>
-                      {% if issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
+        </section>
+        {% endif %}
 
       </div>
-    </section>
-    {% endif %}
 
+
+      {# Journal information (on right side except mobile) #}
+      <aside id="journal-meta" class="journal-meta col-sm-3">
+
+        {# lastest issue #}
+        {% if latest_issue %}
+        <div class="latest-issue sidebar-block clearfix">
+          <h2>{% trans "Dernier numéro" %}</h2>
+          <p>
+            <a href="{{ latest_issue.get_absolute_url }}">
+              <span class="issue-list--volume">{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
+              {% if latest_issue.erudit_object.html_theme %}
+              <br/>
+              <em>
+                <span class="issue-list--theme">{{ latest_issue.erudit_object.html_theme|safe }}</span>
+              </em>
+              {% endif %}
+            </a>
+          </p>
+          <a href="{{ latest_issue.get_absolute_url }}">
+            <img src="{% url 'public:journal:issue-coverpage' latest_issue.pk %}" class="img-responsive latest-issue--cover" alt="{{ latest_issue.title }}" />
+          </a>
+          <p>
+            <a href="#back-issues" class="btn btn-primary">
+              {% trans "Voir tous les numéros" %}
+            </a>
+          </p>
+        </div>
+        {% endif %}
+
+        {# journal meta infos #}
+        <div class="sidebar-block">
+          <h2>{% trans "Fiche" %}</h2>
+
+          <dl class="journal-meta--list">
+
+            {% if journal.members.all %}
+            <dt class="mono-space">{% trans "Direction" %}</dt>
+            {% for member in journal.members.all %}
+            <p>{{ member.get_full_name }}</p>
+            {% endfor %}
+            {% endif %}
+
+            {% if journal.publishers.all %}
+            <dt class="mono-space">
+              {% blocktrans count total=journal.publishers.all|length %}
+              Éditeur
+              {% plural %}
+              Éditeurs
+              {% endblocktrans %}
+            </dt>
+            {% for publisher in journal.publishers.all %}
+            <dd>{{ publisher.name }}</dd>
+            {% endfor %}
+            {% endif %}
+
+            {% if journal.issn_print or journal.issn_web %}
+            <dt class="mono-space">{% trans "ISSN" %}</dt>
+            {% if journal.issn_print %}
+            <dd><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
+            <dd><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</dd>
+            {% endif %}
+            {% endif %}
+
+            {% if journal.issues_per_year %}
+            <dt class="mono-space">{% trans "Fréquence" %}</dt>
+            <dd>
+              {% blocktrans count issues_per_year=journal.issues_per_year %}
+              {{ issues_per_year }} numéro par année
+              {% plural %}
+              {{ issues_per_year }} numéros par année
+              {% endblocktrans %}
+            </dd>
+            {% endif %}
+
+            <dt class="mono-space">{% trans "Période de publication" %}</dt>
+            <dd>{{ journal.erudit_object.publication_period }}</dd>
+
+
+            {% if journal.first_issue %}
+            <dt class="mono-space">{% trans "Disponible dans Érudit depuis" %}</dt>
+            <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
+            {% endif %}
+
+            <dt class="mono-space">{% trans "Type de support" %}</dt>
+            <dd>
+              {% if journal.paper %}
+              {% trans "Numérique et papier" %}
+              {% else %}
+              {% trans "Numérique" %}
+              {% endif %}
+            </dd>
+
+            <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
+            {% if journal.open_access %}
+            <dd>{% trans "Disponible en libre accès" %}</dd>
+            {% else %}
+            <dd>{% trans "Non-disponible en libre accès" %}</dd>
+            {% endif %}
+
+            {% if journal.disciplines.all|length > 0 %}
+            <dt class="mono-space">
+              {% blocktrans count journal.disciplines.all|length as disciplines_count %}
+              Discipline
+              {% plural %}
+              Disciplines
+              {% endblocktrans %}
+            </dt>
+            <dd>
+              {% for discipline in journal.disciplines.all %}
+              <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </dd>
+            {% endif %}
+
+          </dl>
+          <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="" class="img-responsive journal-logo" />
+        </div>
+      </aside>
+
+    </div>
+  </div>
+  {% if issues %}
+  <section id="back-issues" class="back-issues">
+    <div class="container">
+
+      <div class="row">
+        <header class="back-issues--header col-xs-12">
+          <div class="pull-right">
+            <a href="#" class="btn btn-primary-outlined">{% trans "Voir les numéros thématiques" %}</a>
+          </div>
+          <h2>{% trans "Historique des numéros" %} ({{ issues|length }})</h2>
+        </header>
+      </div>
+
+      <div class="row">
+        {% regroup issues|dictsortreversed:"year" by year as year_list %}
+        <ul class="year-list col-xs-12">
+          {% for year in year_list %}
+          <li class="year-list--item"><h4 class="mono-space">{{ year.grouper }}</h4>
+            <ul class="issue-list">
+              {% for issue in year.list %}
+              <li class="issue-list--item">
+                <a href="{{ issue.get_absolute_url }}">
+                  <span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
+                  {% if issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+  {% endif %}
 </section>
-
 {% endblock content %}
