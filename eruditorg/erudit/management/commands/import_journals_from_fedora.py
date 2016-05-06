@@ -4,6 +4,7 @@ import datetime as dt
 import logging
 import re
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from eruditarticle.utils import remove_xml_namespaces
@@ -294,7 +295,34 @@ class Command(BaseCommand):
         issue.fedora_updated = fedora_issue.modified
         issue.save()
 
-        # STEP 3: imports all the articles associated with the issue
+        # STEP 3: patches the journal associated with the issue
+        # --
+
+        # Journal name
+        journal_titles = issue.erudit_object.journal_titles or {}
+        assigned_langs = []
+        for lang, name in journal_titles.get('paral', {}).items():
+            try:
+                name_attr = 'name_{}'.format(lang)
+                assert hasattr(journal, name_attr)
+                setattr(journal, name_attr, name)
+            except AssertionError:  # pragma no cover
+                # Unsupported language?
+                pass
+            else:
+                assigned_langs.append(lang)
+        unassigned_langs = list(
+            set([l[0] for l in settings.LANGUAGES]).intersection(assigned_langs))
+        try:
+            main_lang = 'fr' if 'fr' not in assigned_langs else unassigned_langs[0]
+            setattr(journal, 'name_{}'.format(main_lang), journal_titles.get('main'))
+        except KeyError:  # pragma no cover
+            # This should not happen because each journal is supposed to have a "titrerev" value
+            pass
+
+        journal.save()
+
+        # STEP 4: imports all the articles associated with the issue
         # --
 
         article_count = 0
