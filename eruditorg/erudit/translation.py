@@ -10,7 +10,7 @@ from .models import JournalInformation
 
 class JournalTranslationOptions(TranslationOptions):
     fields = (
-        'name',
+        'name', 'subtitle',
     )
 
 

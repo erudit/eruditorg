@@ -299,27 +299,9 @@ class Command(BaseCommand):
         # --
 
         # Journal name
-        journal_titles = issue.erudit_object.journal_titles or {}
-        assigned_langs = []
-        for lang, name in journal_titles.get('paral', {}).items():
-            try:
-                name_attr = 'name_{}'.format(lang)
-                assert hasattr(journal, name_attr)
-                setattr(journal, name_attr, name)
-            except AssertionError:  # pragma no cover
-                # Unsupported language?
-                pass
-            else:
-                assigned_langs.append(lang)
-        unassigned_langs = list(
-            set([l[0] for l in settings.LANGUAGES]).intersection(assigned_langs))
-        try:
-            main_lang = 'fr' if 'fr' not in assigned_langs else unassigned_langs[0]
-            setattr(journal, 'name_{}'.format(main_lang), journal_titles.get('main'))
-        except KeyError:  # pragma no cover
-            # This should not happen because each journal is supposed to have a "titrerev" value
-            pass
-
+        self._patch_generic_journal_title(journal, 'name', issue.erudit_object.journal_titles or {})
+        self._patch_generic_journal_title(
+            journal, 'subtitle', issue.erudit_object.journal_subtitles or {})
         journal.save()
 
         # STEP 4: imports all the articles associated with the issue
@@ -454,3 +436,23 @@ class Command(BaseCommand):
             self.stdout.write('  {0} PIDs found!'.format(len(journal_pids)))
 
         return journal_pids
+
+    def _patch_generic_journal_title(self, journal, field_name, titles):
+        assigned_langs = []
+        for lang, name in titles.get('paral', {}).items():
+            try:
+                title_attr = '{0}_{1}'.format(field_name, lang)
+                assert hasattr(journal, title_attr)
+                setattr(journal, title_attr, name)
+            except AssertionError:  # pragma no cover
+                # Unsupported language?
+                pass
+            else:
+                assigned_langs.append(lang)
+        unassigned_langs = list(
+            set([l[0] for l in settings.LANGUAGES]).intersection(assigned_langs))
+        try:
+            main_lang = 'fr' if 'fr' not in assigned_langs else unassigned_langs[0]
+            setattr(journal, '{0}_{1}'.format(field_name, main_lang), titles.get('main'))
+        except KeyError:  # pragma no cover
+            pass
