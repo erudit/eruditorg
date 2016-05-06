@@ -74,6 +74,12 @@ a.btn {
 }
 .btn-primary {
   @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+  &:hover, &:active, &:focus, &:focus:active {
+    color: $btn-primary-bg !important;
+    background-color: $btn-primary-color;
+    border-color: $btn-primary-bg;
+    background-image: none !important;
+  }
 }
 .btn-primary-outlined {
   @include button-variant($brand-primary, transparent, $brand-primary);
@@ -101,7 +107,7 @@ a.btn {
 }
 // Danger and error appear as red
 .btn-danger {
-  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-bg);
 }
 
 // Link buttons

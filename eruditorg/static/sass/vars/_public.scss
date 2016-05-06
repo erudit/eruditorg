@@ -41,9 +41,9 @@ $sidenav-width: 250px;
 // from bootstarp grid system
 $grid-gutter-width:         22px;
 
-// horizontal is half gutter size, vertical double the gutter
+// horizontal is half gutter size, vertical 1.25x the gutter
 $margin-horizontal-default: $grid-gutter-width / 2;
-$margin-vertical-default:   $grid-gutter-width * 2;
+$margin-vertical-default:   $grid-gutter-width * 1.25;
 
 // horizontal is half gutter size, vertical double the gutter
 $padding-horizontal-default: $grid-gutter-width / 2;
@@ -200,7 +200,7 @@ $btn-default-border:             $gray-light !default;
 
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 $brand-primary !default;
-$btn-primary-border:             darken($btn-primary-bg, 5%) !default;
+$btn-primary-border:             $brand-primary !default;
 
 $btn-success-color:              #fff !default;
 $btn-success-bg:                 $brand-success !default;
@@ -208,15 +208,15 @@ $btn-success-border:             darken($btn-success-bg, 5%) !default;
 
 $btn-info-color:                 #fff !default;
 $btn-info-bg:                    $brand-info !default;
-$btn-info-border:                darken($btn-info-bg, 5%) !default;
+$btn-info-border:                $brand-info !default;
 
 $btn-warning-color:              #fff !default;
 $btn-warning-bg:                 $brand-warning !default;
-$btn-warning-border:             darken($btn-warning-bg, 5%) !default;
+$btn-warning-border:             $brand-info !default;
 
 $btn-danger-color:               #fff !default;
 $btn-danger-bg:                  $brand-danger !default;
-$btn-danger-border:              darken($btn-danger-bg, 5%) !default;
+$btn-danger-border:              $brand-info !default;
 
 $btn-link-disabled-color:        $gray-light !default;
 
