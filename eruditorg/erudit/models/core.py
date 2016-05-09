@@ -253,9 +253,6 @@ class Journal(FedoraMixin, FedoraDated):
     url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
     """ URL of the home page of the Journal """
 
-    address = models.TextField(null=True, blank=True, verbose_name=_('Adresse'))
-    """ Address of the journal """
-
     # Status of the journal
     active = models.BooleanField(
         default=True, verbose_name=_('Actif'),
