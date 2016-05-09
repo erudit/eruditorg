@@ -43,7 +43,8 @@ class TestRenderArticleTemplateTag(BaseEruditTestCase):
 class TestAuthorArticlesFilter(BaseEruditTestCase):
     def test_can_return_the_articles_associated_with_an_author_for_a_given_journal(self):
         # Setup
-        other_journal = JournalFactory.create(publishers=[self.publisher])
+        other_journal = JournalFactory.create(
+            collection=self.collection, publishers=[self.publisher])
         other_issue = IssueFactory.create(
             journal=other_journal, date_published=dt.datetime.now())
         other_article = ArticleFactory.create(issue=other_issue)

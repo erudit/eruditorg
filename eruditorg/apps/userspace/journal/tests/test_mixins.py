@@ -71,7 +71,7 @@ class TestJournalScopeMixin(BaseEruditTestCase):
             template_name = 'dummy.html'
 
         user = UserFactory.create()
-        journal = JournalFactory.create()
+        journal = JournalFactory.create(collection=self.collection)
         url = reverse(
             'userspace:journal:information:update', kwargs={'journal_pk': journal.pk})
         request = self.get_request(url)

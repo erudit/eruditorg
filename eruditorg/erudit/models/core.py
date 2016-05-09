@@ -190,138 +190,88 @@ class Discipline(models.Model):
 
 
 class Journal(FedoraMixin, FedoraDated):
-    """Revue"""
+    """ The main Journal model.
 
-    collection = models.ForeignKey(
-        'Collection',
-        null=True, blank=True
-    )
+    A journal is a collection of issues. It should be associated with a collection: Érudit, Persée,
+    etc. This model supports Fedora-based journals through the use of the ``localidentifier`` field.
+    Journals that are not provided by Fedora should use this field.
+    """
+
+    collection = models.ForeignKey('Collection')
     """ The :py:class`collection <erudit.models.core.Collection>` of which this
     ``Journal`` is part"""
 
-    # identification
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_("Nom"),
-        help_text=_("Nom officiel"),
-    )
+    type = models.ForeignKey('JournalType', null=True, blank=True, verbose_name=_('Type'))
+    """ The type of the journal """
 
-    # identification
+    name = models.CharField(max_length=255, verbose_name=_('Nom'), help_text=_('Nom officiel'))
+    """ The ``name`` of the journal """
+
     code = models.SlugField(
-        max_length=255,
-        unique=True,
-        verbose_name=_("Code"),
-        help_text=_("Identifiant unique (utilisé dans URL Érudit)"),
-    )
-    """ The ``shortname`` of a Journal"""
+        max_length=255, unique=True, verbose_name=_('Code'),
+        help_text=_('Identifiant unique (utilisé dans URL Érudit)'))
+    """ The shortname of the journal """
 
     issn_print = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-        verbose_name=_("ISSN imprimé"),
-    )
+        max_length=255, null=True, blank=True, verbose_name=_('ISSN imprimé'))
     """ The print ISSN of the journal """
 
-    issn_web = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-        verbose_name=_("ISSN web"),
-    )
+    issn_web = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('ISSN web'))
     """ The web ISSN of the journal """
 
-    subtitle = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-    )
+    subtitle = models.CharField(max_length=255, null=True, blank=True)
     """ The subtitle of the journal """
 
     formerly = models.ForeignKey(
-        'Journal',
-        null=True, blank=True,
-        verbose_name=_("Anciennement"),
-        help_text=_("Choisir l'ancien nom de la revue"),
-    )
-    """ The former name of the journal """
+        'Journal', null=True, blank=True, verbose_name=_('Anciennement'),
+        help_text=_("Choisir l'ancienne instance de la revue"))
+    """ The former version of the journal """
 
     localidentifier = models.CharField(
-        max_length=50,
-        unique=True,
-        verbose_name=_("Identifiant Fedora")
-    )
-    """Fedora commons identifier. Used to implement the
-    :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin."""
+        max_length=50, unique=True, verbose_name=_('Identifiant Fedora'))
+    """ Fedora commons identifier. Used to implement the
+    :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
     publishers = models.ManyToManyField(
-        'Publisher',
-        related_name='journals',
-        verbose_name=_("Éditeur"),
-    )
+        'Publisher', related_name='journals', verbose_name=_('Éditeurs'))
     """ The publishers of the journal """
 
-    type = models.ForeignKey(
-        'JournalType',
-        null=True, blank=True,
-        verbose_name=_("Type"),
-    )
-    """ The type of the journal """
-
     paper = models.NullBooleanField(
-        default=None,
-        verbose_name=_("Papier"),
-        help_text=_("Est publiée également en version papier?"),
+        default=None, verbose_name=_('Papier'),
+        help_text=_('Est publiée également en version papier?'),
     )
     """ Defines whether this Journal is printed in paper or not """
 
     open_access = models.NullBooleanField(
-        default=None,
-        verbose_name=_("Libre accès"),
-        help_text=_("Cette revue est en accès libre?"),
-    )
+        default=None, verbose_name=_('Libre accès'), help_text=_("Cette revue est en accès libre?"))
+    """ Defines whether the journal can be accessed by anyone """
 
     issues_per_year = models.IntegerField(
-        null=True, blank=True,
-        verbose_name=_("Numéros par année"),
-    )
+        null=True, blank=True, verbose_name=_('Numéros par année'))
+    """ Defines the number of issues per year """
 
-    # coordinates
-    url = models.URLField(
-        null=True, blank=True,
-        verbose_name=_("URL"),
-    )
+    url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
     """ URL of the home page of the Journal """
 
-    address = models.TextField(
-        null=True, blank=True,
-        verbose_name=_("Adresse"),
-    )
+    address = models.TextField(null=True, blank=True, verbose_name=_('Adresse'))
     """ Address of the journal """
 
-    # status
+    # Status of the journal
     active = models.BooleanField(
-        default=True,
-        verbose_name=_("Actif"),
+        default=True, verbose_name=_('Actif'),
         help_text=_("Une revue inactive n'édite plus de numéros"),
     )
     """ Whether the Journal is active or not. An inactive journal is
     a journal that still publish issues """
 
-    # users who can interact this object (coupled with permissions)
-    members = models.ManyToManyField(
-        User,
-        related_name="journals",
-        verbose_name=_("Membres")
-    )
+    # The field defines the users who can interact this object (coupled with permissions)
+    members = models.ManyToManyField(User, related_name='journals', verbose_name=_('Membres'))
     """ Users that are part of this journal's organization """
 
-    upcoming = models.BooleanField(
-        default=False,
-        verbose_name=_('Prochainement disponible'),
-    )
+    upcoming = models.BooleanField(default=False, verbose_name=_('Prochainement disponible'))
+    """ Defines whether the journal will be available soon or not. """
 
-    disciplines = models.ManyToManyField(
-        Discipline,
-        related_name='journals',
-    )
+    disciplines = models.ManyToManyField(Discipline, related_name='journals')
     """ The disciplines associated with the journal. """
 
     objects = models.Manager()

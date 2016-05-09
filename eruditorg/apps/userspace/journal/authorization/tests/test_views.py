@@ -24,7 +24,7 @@ class TestAuthorizationUserView(BaseEruditTestCase):
         self.user_non_granted.save()
 
     def test_permission_list_restricted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -39,7 +39,7 @@ class TestAuthorizationUserView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_permission_list_granted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -58,7 +58,7 @@ class TestAuthorizationUserView(BaseEruditTestCase):
 
     def test_do_not_show_the_individual_subscription_authorization_section_without_management(self):
         # Setup
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -85,7 +85,7 @@ class TestAuthorizationUserView(BaseEruditTestCase):
 
     def test_shows_the_individual_subscription_authorization_section_with_management(self):
         # Setup
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -126,7 +126,7 @@ class TestAuthorizationCreateView(BaseEruditTestCase):
         self.user_non_granted.save()
 
     def test_permission_create_restricted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -141,7 +141,7 @@ class TestAuthorizationCreateView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_permission_create_granted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -160,7 +160,7 @@ class TestAuthorizationCreateView(BaseEruditTestCase):
 
     def test_returns_an_http_404_error_if_the_codename_is_not_passed(self):
         # Setup
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -184,7 +184,7 @@ class TestAuthorizationCreateView(BaseEruditTestCase):
 
     def test_returns_an_http_404_error_if_the_codename_is_not_known(self):
         # Setup
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -208,7 +208,7 @@ class TestAuthorizationCreateView(BaseEruditTestCase):
 
     def test_can_return_an_http_403_error_if_the_journal_has_no_management_subscription(self):
         # Setup
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
@@ -247,7 +247,7 @@ class TestAuthorizationDeleteView(BaseEruditTestCase):
         self.client.login(username=self.user_non_granted.username,
                           password="user")
 
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.save()
 
         self.client.login(username=self.user_granted.username,
@@ -272,7 +272,7 @@ class TestAuthorizationDeleteView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_permission_delete_granted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(self.user_granted)
         journal.save()
 
