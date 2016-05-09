@@ -40,7 +40,7 @@ class Command(BaseCommand):
                     return s.replace('\x92', '’')
 
                 def get_row_html(title, contents):
-                    return '<h2>{}</h2>{}'.format(fix_encoding(title), contents)
+                    return '<h4>{}</h4>{}'.format(fix_encoding(title), contents)
 
                 return '\n'.join(get_row_html(title, contents) for title, contents in rows)
             else:
