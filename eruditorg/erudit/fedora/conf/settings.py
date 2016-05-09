@@ -8,3 +8,5 @@ FEDORA_USER = getattr(settings, 'FEDORA_USER', 'fedoraAdmin')
 FEDORA_PASSWORD = getattr(settings, 'FEDORA_PASSWORD', 'fedoraAdmin')
 
 PIDSPACE = getattr(settings, 'ERUDIT_PIDSPACE', 'erudit')
+
+FEDORA_XML_CONTENT_CACHE_TIMEOUT = getattr(settings, 'FEDORA_XML_CONTENT_CACHE_TIMEOUT', 60 * 60)
