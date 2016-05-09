@@ -10,27 +10,13 @@
 
   h1 {
     @include fw-sans-bold();
-    font-size: 2.75em;
     margin-bottom: 1em;
 
     span + span {
       @include fw-sans-normal();
       display: block;
     }
-    
-  }
 
-  h2 {
-    margin: 0;
-    font-size: 36px;
-    line-height: 1.4em;
-    @include fw-sans-bold();
-  }
-
-  h3 {
-    margin-bottom: 0;
-    font-size: $font-size-h4;
-    // @include fw-sans-medium();
   }
 
   figure.logo {
