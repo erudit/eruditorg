@@ -25,29 +25,6 @@ YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
 # abstracts
 
 
-class Named(models.Model):
-
-    # identification
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_("Nom"),
-        help_text=_("Nom officiel"),
-    )
-
-    display_name = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-        verbose_name=_("Nom d'affichage"),
-        help_text=_("Nom à utiliser dans tout affichage"),
-    )
-
-    def __str__(self):
-        return self.display_name or self.name
-
-    class Meta:
-        abstract = True
-
-
 class FedoraDated(models.Model):
     """ Provides a creation date and an update date for Fedora-related models.
 
@@ -212,7 +189,7 @@ class Discipline(models.Model):
         return self.name
 
 
-class Journal(FedoraMixin, Named, FedoraDated):
+class Journal(FedoraMixin, FedoraDated):
     """Revue"""
 
     collection = models.ForeignKey(
@@ -221,6 +198,13 @@ class Journal(FedoraMixin, Named, FedoraDated):
     )
     """ The :py:class`collection <erudit.models.core.Collection>` of which this
     ``Journal`` is part"""
+
+    # identification
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Nom"),
+        help_text=_("Nom officiel"),
+    )
 
     # identification
     code = models.SlugField(

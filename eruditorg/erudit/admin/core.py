@@ -85,7 +85,7 @@ class DisciplineInline(admin.TabularInline):
 
 class JournalAdmin(admin.ModelAdmin):
     search_fields = [
-        'code', 'name', 'display_name', 'issn_print',
+        'code', 'name', 'issn_print',
         'issn_web', 'url', 'address', 'members'
     ]
 
@@ -112,7 +112,7 @@ class JournalAdmin(admin.ModelAdmin):
             'fields': (
                 ('code', 'formerly'),
                 ('localidentifier',),
-                ('name', 'display_name',),
+                ('name', ),
                 ('subtitle',),
                 ('issn_print', 'issn_web'),
             ),
