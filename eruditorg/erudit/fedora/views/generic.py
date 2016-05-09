@@ -7,15 +7,16 @@ that involve Fedora and datastreams.
 
 import logging
 
+from django.core.cache import caches
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.http import HttpResponse
-from django.views.decorators.cache import cache_page
 from django.views.generic import View
 from django.views.generic.detail import SingleObjectMixin
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
+from ..conf import settings as fedora_settings
 from ..repository import api
 
 logger = logging.getLogger(__name__)
@@ -26,17 +27,13 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
     The FedoraFileDatastreamView CBV can be used to expose Fedora file datastreams
     through Django views.
     """
-    cache_timeout = 60  # This is expressed in seconds
+    cache_timeout = 60 * 60  # This is expressed in seconds
     http_method_names = ['get', ]
 
     # The following attributes should be specified on each subclass
     content_type = None
     datastream_name = None
     fedora_object_class = None
-
-    def dispatch(self, *args, **kwargs):
-        return cache_page(self.cache_timeout)(
-            super(FedoraFileDatastreamView, self).dispatch)(*args, **kwargs)
 
     def get(self, request, **kwargs):
         self.request = request
@@ -83,8 +80,12 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         Writes the content of the fedora object's datastream to an HttpResponse object
         and return it.
         """
-        response = self.get_response_object(fedora_object)
+        cache = self.get_cache()
+        content_key = 'erudit-fedora-file-{pid}'.format(pid=fedora_object.pid)
+        content = cache.get(content_key)
+
         try:
+            assert content is None
             content = self.get_datastream_content(fedora_object)
         except RequestFailed:  # pragma: no cover
             # This means that the datastream content could not be retrieved
@@ -98,7 +99,16 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
                 'request': self.request,
             })
             raise Http404
+        except AssertionError:
+            # We've just retrieved the content of the file from the file-based cache!
+            pass
+        else:
+            # Puts the content of the file in the file-based cache!
+            cache.set(content_key, content, self.cache_timeout)
+
+        response = self.get_response_object(fedora_object)
         self.write_datastream_content(response, content)
+
         return response
 
     def get_response_object(self, fedora_object):
@@ -124,6 +134,10 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
                 '{cls} is missing a content type. '
                 'Define {cls}.content_type.'.format(cls=self.__class__.__name__))
         return self.content_type
+
+    def get_cache(self):
+        """ Returns the cache to use to store file contents. """
+        return caches[fedora_settings.FEDORA_FILEBASED_CACHE_NAME]
 
     def get_datastream_content(self, fedora_object):
         """
