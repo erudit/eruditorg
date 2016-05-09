@@ -1,5 +1,5 @@
 /**
-* Past issues footer
+* Back issues section
 */
 
 .back-issues {
@@ -15,13 +15,13 @@
 
 
 /**
-* issue list thumbnail
+* Issue list thumbnails
 */
 
 .year-list {
   list-style: none;
   margin: 0;
-  column-count: 4;
+  @include column-count(4);
   .year-list--item {
     margin-bottom: 0;
     padding-bottom: 2.5em;
