@@ -23,6 +23,7 @@ from .pagination import EruditDocumentPagination
 
 
 class EruditDocumentListAPIView(ListAPIView):
+    authentication_classes = []
     pagination_class = EruditDocumentPagination
     queryset = EruditDocument.objects.all()
     search_engine_filter_backend = filters.EruditDocumentSolrFilter
