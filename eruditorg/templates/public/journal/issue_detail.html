@@ -197,22 +197,25 @@
         </div>
 
         <div class="row">
-          {% for published_issue in journal.published_issues|dictsortreversed:"date_published"|slice:":4" %}
-          {% if published_issue != issue %}
-          <div class="issue-list-item--inverted col-xs-6 col-sm-3">
-            <a href="{{ published_issue.get_absolute_url }}">
-              <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" alt="{{ published_issue.name }}" />
-              <header>
-                <h5>
-                  {% blocktrans trimmed with number=published_issue.erudit_object.number|default:i18n_unknown date=published_issue.date_published|date:"F Y" %}
-                    N<sup>o</sup> {{ number }}, <br>{{ date }}
-                  {% endblocktrans %}
-                </h5>
-              </header>
-            </a>
-          </div>
-          {% endif %}
-          {% endfor %}
+          <ul class="issue-list">
+            {% for published_issue in journal.published_issues|dictsortreversed:"date_published"|slice:":4" %}
+            {% if published_issue != issue %}
+            <li class="issue-list-item--inverted col-xs-6 col-sm-3">
+              <a href="{{ published_issue.get_absolute_url }}">
+                <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" class="img-responsive" alt="{{ published_issue.name }}" />
+                <header>
+                  <h5>
+                    <a href="{{ published_issue.get_absolute_url }}">
+                      <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
+                      {% if published_issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ published_issue.erudit_object.html_theme|safe }}</span>{% endif %}
+                    </a>
+                  </h5>
+                </header>
+              </a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
         </div>
 
       </div>

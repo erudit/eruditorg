@@ -1,5 +1,5 @@
 /**
-* Past issues footer
+* Back issues section
 */
 
 .back-issues {
@@ -15,13 +15,13 @@
 
 
 /**
-* issue list thumbnail
+* Issue list thumbnails
 */
 
 .year-list {
   list-style: none;
   margin: 0;
-  column-count: 4;
+  @include column-count(4);
   .year-list--item {
     margin-bottom: 0;
     padding-bottom: 2.5em;
@@ -66,8 +66,10 @@
 
 // issue item variation with border on top, figure cover is first
 .issue-list-item--inverted {
-  padding-top: 0;
-  height: 250px;
+  img {
+    padding-top: 0;
+    height: 200px;
+  }
   header {
     border-top: 1px solid #000;
     padding-top: $margin-vertical-default/2;
