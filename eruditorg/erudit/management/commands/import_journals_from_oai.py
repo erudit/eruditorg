@@ -81,7 +81,8 @@ class Command(BaseCommand):
         # Creates or updates the journal object
         # --
 
-        journal_code = journal_set.setSpec.split(':')[-1]
+        journal_code = '{collection_code}{spec}'.format(
+            collection_code=collection.code, spec=journal_set.setSpec.split(':')[-1])
         try:
             journal = Journal.objects.get(code=journal_code)
         except Journal.DoesNotExist:
