@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.conf import settings
+from django.core.cache import cache
 from django.utils.functional import cached_property
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
+from .conf import settings as fedora_settings
 from .repository import api
 
 
@@ -13,6 +15,8 @@ class FedoraMixin(object):
     The FedoraMixin defines a common way to associate Django models and its
     instances to eulfedora's models and Erudit's objects'
     """
+    fedora_xml_content_cache_timeout = fedora_settings.FEDORA_XML_CONTENT_CACHE_TIMEOUT
+
     def get_full_identifier(self):
         """
         Returns the full identifier of the considered object. By default the FedoraMixin
@@ -60,9 +64,12 @@ class FedoraMixin(object):
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
+        fedora_xml_content_key = 'fedora-object-{pid}'.format(pid=self.pid)
+        fedora_xml_content = cache.get(fedora_xml_content_key, None)
+
         try:
-            xml_content = self.fedora_object.xml_content
-            return self.erudit_class(xml_content) if xml_content else None
+            assert fedora_xml_content is None
+            fedora_xml_content = self.fedora_object.xml_content
         except (RequestFailed, ConnectionError):  # pragma: no cover
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
@@ -70,6 +77,15 @@ class FedoraMixin(object):
                 # is not complete.
                 return
             raise
+        except AssertionError:
+            # We've fetched the XML content from the cache so we just pass
+            pass
+        else:
+            # Stores the XML content of the object for further use
+            cache.set(
+                fedora_xml_content_key, fedora_xml_content, self.fedora_xml_content_cache_timeout)
+
+        return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
 
     @cached_property
     def erudit_object(self):

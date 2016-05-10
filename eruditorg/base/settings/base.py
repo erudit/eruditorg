@@ -176,6 +176,19 @@ DATABASES = {
     }
 }
 
+# Cache configuration
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'files': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/erudit_filebased',
+    },
+}
+
+
 # Put this in settings.py
 POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',

@@ -2,6 +2,7 @@
 
 import unittest.mock
 
+from django.core.cache import cache
 from django.test import TestCase
 from eruditarticle.objects import EruditArticle
 
@@ -59,3 +60,39 @@ class TestFedoraMixin(TestCase):
         # Run & check
         self.assertTrue(isinstance(obj.get_erudit_object(), EruditArticle))
         self.assertTrue(isinstance(obj.erudit_object, EruditArticle))
+
+    @unittest.mock.patch.object(cache, 'set')
+    @unittest.mock.patch.object(cache, 'get')
+    @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
+    @unittest.mock.patch.object(ArticleDigitalObject, '_get_datastreams')
+    def test_can_set_the_xml_content_in_the_cache_if_it_is_not_there_already(
+            self, mock_ds, mock_xsd300, cache_get, cache_set):
+        # Setup
+        mock_ds.return_value = ['ERUDITXSD300', ]  # noqa
+        mock_xsd300.content = unittest.mock.MagicMock()
+        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value='<article></article>')
+        cache_get.return_value = None
+        obj = DummyModel()
+        # Run
+        dummy = obj.erudit_object, EruditArticle  # noqa
+        # Check
+        self.assertEqual(cache_get.call_count, 1)
+        self.assertEqual(cache_set.call_count, 1)
+
+    @unittest.mock.patch.object(cache, 'set')
+    @unittest.mock.patch.object(cache, 'get')
+    @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
+    @unittest.mock.patch.object(ArticleDigitalObject, '_get_datastreams')
+    def test_can_fetch_the_xml_content_from_the_cache_if_applicable(
+            self, mock_ds, mock_xsd300, cache_get, cache_set):
+        # Setup
+        mock_ds.return_value = ['ERUDITXSD300', ]  # noqa
+        mock_xsd300.content = unittest.mock.MagicMock()
+        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value='<article></article>')
+        cache_get.return_value = '<article></article>'
+        obj = DummyModel()
+        # Run
+        dummy = obj.erudit_object, EruditArticle  # noqa
+        # Check
+        self.assertEqual(cache_get.call_count, 1)
+        self.assertEqual(cache_set.call_count, 0)
