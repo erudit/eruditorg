@@ -228,7 +228,7 @@ class Journal(FedoraMixin, FedoraDated):
     """ The former version of the journal """
 
     localidentifier = models.CharField(
-        max_length=50, unique=True, verbose_name=_('Identifiant Fedora'))
+        max_length=50, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ Fedora commons identifier. Used to implement the
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
