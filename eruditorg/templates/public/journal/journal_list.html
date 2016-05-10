@@ -9,7 +9,94 @@
 {% block content %}
 <div id="journal-list">
 
-  {% include sorting_template %}
+  <header class="sorting-index container-fluid">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 clearfix">
+            <h2 class="h3 bold pull-left">{% if sorting == 'name' %}{% trans "Revues par ordre alphabétique" %}{% elif sorting == 'disciplines' %}{% trans "Revues par disciplines" %}{% endif %}</h2>
+            <nav class="pull-right">
+              {% if sorting == 'name' %}
+              <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines" class="btn btn-primary-outlined">{% trans "Revues par disciplines" %}</a>
+              {% elif sorting == 'disciplines' %}
+              <a href="{% url 'public:journal:journal-list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
+              {% endif %}
+            </nav>
+          </div>
+        </div>
+        <div class="row">
+          <nav class="col-xs-12 index">
+            {% for objects_group in sorted_objects %}
+              {% if not objects_group.key %}
+                <h5 class="mono-space"><a href="#section-void">{% trans "Autres" %}</a></h5>
+              {% else %}
+                <h5 class="mono-space"><a href="#section-{{ objects_group.key }}">{{ objects_group.name }}</a></h5>
+              {% endif %}
+            {% endfor %}
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% for objects_group in sorted_objects %}
+  <a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible">{{ discipline }}</a>
+  <div class="sorting-group container-fluid {% cycle "odd" "even" %}">
+    <header class="row sorting-group--title">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 title">
+            <h2 class="no-margin h3">
+              {% if not objects_group.key %}
+                {% trans "Autres" %}
+              {% else %}
+                {{ objects_group.name }}
+              {% endif %}
+              <a href="#top" id="scroll-top" class="erudicon erudicon-arrow-up"></a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="row sorting-group--articles sorting-group--articles--default">
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-3">
+            <h3 class="h4 color-red">Érudit </h3>
+          </div>
+          {% for journal in objects_group.objects %}
+          <article class="col col-md-3 journal-thumbnail">
+            <header class="row">
+              <h4 class="col-xs-12">
+                <a class="" href="{{ journal.get_absolute_url }}">
+                  {{ journal.name }}
+                </a>
+              </h4>
+            </header>
+            <footer class="row">
+              <div class="col-xs-8 color-dark-grey">
+                {% if journal.subtitle %}
+                <p class="color-dark-grey">{{ journal.subtitle }}</p>
+                {% endif %}
+                {% if journal.type.code == 'S' %}
+                <p class="bold">{% trans "Révisé par les pairs" %}</p>
+                {% endif %}
+              </div>
+              <div class="col-xs-4">
+                {% if journal.provided_by_fedora %}
+                <a class="" href="{{ journal.get_absolute_url }}">
+                  <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
+                </a>
+                {% endif %}
+              </div>
+            </footer>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endfor %}
 
 </div>
 {% endblock %}
