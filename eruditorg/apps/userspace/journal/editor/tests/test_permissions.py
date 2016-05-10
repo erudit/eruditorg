@@ -31,7 +31,7 @@ class ViewsTestCase(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_issuesubmission_granted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.save()
         journal.members.add(self.user_granted)
 
@@ -58,7 +58,7 @@ class ViewsTestCase(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_issuesubmission_add_granted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.save()
         journal.members.add(self.user_granted)
 
@@ -78,7 +78,7 @@ class ViewsTestCase(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_issuesubmission_update_restricted(self):
-        issue = IssueSubmissionFactory()
+        issue = IssueSubmissionFactory(journal=self.journal)
 
         self.client.login(username=self.user_non_granted.username,
                           password="user")
@@ -87,7 +87,7 @@ class ViewsTestCase(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_issuesubmission_update_granted(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.save()
         journal.members.add(self.user_granted)
         issue = IssueSubmissionFactory(journal=journal)
@@ -112,7 +112,7 @@ class ViewsTestCase(BaseEruditTestCase):
 class RulesTestCase(BaseEruditTestCase):
 
     def test_user_cant_manage(self):
-        issue = IssueSubmissionFactory()
+        issue = IssueSubmissionFactory(journal=self.journal)
         user = UserFactory()
 
         is_granted = user.has_perm('editor.manage_issuesubmission',
@@ -120,7 +120,7 @@ class RulesTestCase(BaseEruditTestCase):
         self.assertEqual(is_granted, False)
 
     def test_user_can_manage(self):
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         user = UserFactory()
         journal.members.add(user)
         journal.save()
@@ -138,14 +138,14 @@ class RulesTestCase(BaseEruditTestCase):
 
     def test_superuser_can_manage(self):
         user = UserFactory(is_superuser=True)
-        issue = IssueSubmissionFactory()
+        issue = IssueSubmissionFactory(journal=self.journal)
 
         is_granted = user.has_perm('editor.manage_issuesubmission', issue)
         self.assertEqual(is_granted, True)
 
     def test_staff_can_manage(self):
         user = UserFactory(is_staff=True)
-        issue = IssueSubmissionFactory()
+        issue = IssueSubmissionFactory(journal=self.journal)
 
         is_granted = user.has_perm('editor.manage_issuesubmission', issue)
         self.assertEqual(is_granted, True)

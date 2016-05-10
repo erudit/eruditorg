@@ -41,7 +41,7 @@ class TestIndividualJournalAccessSubscriptionListView(BaseEruditTestCase):
         plan = JournalManagementPlanFactory.create(max_accounts=10)
         JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
 
-        other_journal = JournalFactory.create()
+        other_journal = JournalFactory.create(collection=self.collection)
         subscription_1 = JournalAccessSubscriptionFactory.create(
             user=self.user, journal=self.journal)
         JournalAccessSubscriptionFactory.create(

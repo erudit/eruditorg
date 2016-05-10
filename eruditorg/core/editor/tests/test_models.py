@@ -16,8 +16,8 @@ class IssueSubmissionTestCase(BaseEruditTestCase):
 
     def test_knows_if_it_is_submitted(self):
         # Setup
-        issue_1 = IssueSubmissionFactory.create()
-        issue_2 = IssueSubmissionFactory.create()
+        issue_1 = IssueSubmissionFactory.create(journal=self.journal)
+        issue_2 = IssueSubmissionFactory.create(journal=self.journal)
         issue_2.submit()
         # Run & check
         self.assertFalse(issue_1.is_submitted)
@@ -27,7 +27,7 @@ class IssueSubmissionTestCase(BaseEruditTestCase):
 class IssueSubmissionWorkflowTestCase(BaseEruditTestCase):
 
     def test_refuse(self):
-        issue = IssueSubmissionFactory()
+        issue = IssueSubmissionFactory(journal=self.journal)
         issue.submit()
         issue.refuse()
 

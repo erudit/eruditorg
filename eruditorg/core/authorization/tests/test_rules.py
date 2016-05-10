@@ -12,7 +12,7 @@ from erudit.tests.base import BaseEruditTestCase
 class TestManageAuthorizationRule(BaseEruditTestCase):
     def test_knows_if_a_user_cannot_manage_authorizations(self):
         user = UserFactory()
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, False)
 
@@ -23,7 +23,7 @@ class TestManageAuthorizationRule(BaseEruditTestCase):
 
     def test_knows_if_a_user_can_manage_authorizations(self):
         user = UserFactory()
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         journal.members.add(user)
         journal.save()
         ct = ContentType.objects.get(app_label="erudit", model="journal")
@@ -37,12 +37,12 @@ class TestManageAuthorizationRule(BaseEruditTestCase):
 
     def test_knows_that_a_superuser_can_manage_authorizations(self):
         user = UserFactory(is_superuser=True)
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, True)
 
     def test_knows_that_a_staff_member_can_manage_authorizations(self):
         user = UserFactory(is_staff=True)
-        journal = JournalFactory()
+        journal = JournalFactory(collection=self.collection)
         is_granted = user.has_perm('authorization.manage_authorizations', journal)
         self.assertEqual(is_granted, True)

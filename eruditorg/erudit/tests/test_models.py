@@ -71,6 +71,15 @@ class TestJournal(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.journal.last_oa_issue, issue_2)
 
+    def test_knows_if_it_is_provided_by_fedora(self):
+        # Run & check
+        self.journal.localidentifier = 'dummy139'
+        self.journal.save()
+        self.assertTrue(self.journal.provided_by_fedora)
+        self.journal.localidentifier = None
+        self.journal.save()
+        self.assertFalse(self.journal.provided_by_fedora)
+
 
 class TestIssue(BaseEruditTestCase):
     def setUp(self):
@@ -137,7 +146,8 @@ class TestArticle(BaseEruditTestCase):
 class TestAuthor(BaseEruditTestCase):
     def test_can_return_articles_written_for_a_given_journal(self):
         # Setup
-        other_journal = JournalFactory.create(publishers=[self.publisher])
+        other_journal = JournalFactory.create(
+            collection=self.collection, publishers=[self.publisher])
         other_issue = IssueFactory.create(
             journal=other_journal, date_published=dt.datetime.now())
         other_article = ArticleFactory.create(issue=other_issue)

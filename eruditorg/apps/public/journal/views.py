@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from collections import OrderedDict
+from itertools import groupby
 from string import ascii_lowercase
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
@@ -41,27 +43,27 @@ class JournalListView(ListView):
     model = Journal
     template_name = 'public/journal/journal_list.html'
 
+    def apply_sorting(self, objects):
+        if self.sorting == 'name':
+            grouped = groupby(
+                sorted(objects, key=lambda j: j.letter_prefix), key=lambda j: j.letter_prefix)
+            return [{'key': g[0], 'name': g[0], 'objects': sorted(
+                list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
+        elif self.sorting == 'disciplines':
+            disciplines = Discipline.objects.all().order_by('name')
+            return [{'key': d.code, 'name': d.name, 'objects': sorted(
+                d.journals.all(), key=lambda j: j.sortable_name)} for d in disciplines]
+
     def get(self, request, *args, **kwargs):
-        self.init_get_parameters(request)
+        sorting = self.request.GET.get('sorting', 'name')
+        self.sorting = sorting if sorting in ['name', 'disciplines', ] else 'name'
         return super(JournalListView, self).get(request, *args, **kwargs)
-
-    def get_queryset(self):
-        qs = super(JournalListView, self).get_queryset()
-        qs = sorted(qs, key=lambda j: j.sortable_name)
-        return qs
-
-    def init_get_parameters(self, request):
-        """ Initializes GET parameters. """
-        # default sorting is by name
-        self.sorting = request.GET.get('sorting', 'name')
-        self.sorting_template = "public/journal/_journal_list_sort_%s.html" % self.sorting
 
     def get_context_data(self, **kwargs):
         context = super(JournalListView, self).get_context_data(**kwargs)
-
+        context['sorting'] = self.sorting
+        context['sorted_objects'] = self.apply_sorting(context.get(self.context_object_name))
         context['disciplines'] = Discipline.objects.all().order_by('name')
-        context['sorting_template'] = self.sorting_template
-
         return context
 
 
@@ -72,6 +74,15 @@ class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailVi
     context_object_name = 'journal'
     model = Journal
     template_name = 'public/journal/journal_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.url and not self.object.issues.count():
+            # TODO: implement some kind of analytics to register this event
+            return HttpResponseRedirect(self.object.url)
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super(JournalDetailView, self).get_context_data(**kwargs)

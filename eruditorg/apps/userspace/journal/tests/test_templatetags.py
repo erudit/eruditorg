@@ -12,7 +12,7 @@ from ..templatetags.userspace_journal_tags import journal_url
 class TestJournalUrlSimpleTag(BaseEruditTestCase):
     def test_can_resolve_the_current_url_for_another_journal(self):
         # Setup
-        journal_2 = JournalFactory.create(publishers=[self.publisher])
+        journal_2 = JournalFactory.create(collection=self.collection, publishers=[self.publisher])
         factory = RequestFactory()
         base_url = reverse(
             'userspace:journal:information:update', kwargs={'journal_pk': self.journal.pk})

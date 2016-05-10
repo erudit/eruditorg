@@ -26,11 +26,11 @@ class IssueSubmissionTestCase(BaseEruditTestCase):
         user = UserFactory()
         user2 = UserFactory()
 
-        journal_in = JournalFactory()
+        journal_in = JournalFactory(collection=self.collection)
         journal_in.members.add(user)
         journal_in.save()
 
-        journal_not_in = JournalFactory()
+        journal_not_in = JournalFactory(collection=self.collection)
         journal_not_in.members.add(user2)
         journal_not_in.save()
 

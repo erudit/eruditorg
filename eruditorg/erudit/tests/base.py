@@ -34,15 +34,17 @@ class BaseEruditTestCase(TestCase):
 
         erudit = Collection(code="erudit", localidentifier="erudit", name="Érudit")
         erudit.save()
+        self.collection = erudit
 
         # Add a journal with a member
-        self.journal = JournalFactory.create(publishers=[self.publisher])
+        self.journal = JournalFactory.create(collection=erudit, publishers=[self.publisher])
         self.journal.members.add(self.user)
         self.journal.collection = erudit
         self.journal.save()
 
         # Add a second journal with another member
-        self.other_journal = JournalFactory.create(publishers=[self.other_publisher])
+        self.other_journal = JournalFactory.create(
+            collection=erudit, publishers=[self.other_publisher])
         self.other_journal.members.add(self.other_user)
         self.other_journal.save()
 
