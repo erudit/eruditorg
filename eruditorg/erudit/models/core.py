@@ -329,7 +329,8 @@ class Journal(FedoraMixin, FedoraDated):
         This value should not be used to display the name of the Journal instance!
         """
         replacements = ('La ', 'Le ', 'L\'', '[', ']', )
-        return reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name)
+        return slugify(
+            reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name))
 
     def get_absolute_url(self):
         return reverse_url(
