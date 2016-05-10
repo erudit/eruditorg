@@ -277,6 +277,11 @@ class Journal(FedoraMixin, FedoraDated):
     # Fedora-related methods
     # --
 
+    @property
+    def provided_by_fedora(self):
+        # We assume that the journals provided by a Fedora endpoint have a localidentifier.
+        return self.localidentifier is not None
+
     def get_full_identifier(self):
         return "{}:{}.{}".format(
             fedora_settings.PIDSPACE,

@@ -71,6 +71,15 @@ class TestJournal(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.journal.last_oa_issue, issue_2)
 
+    def test_knows_if_it_is_provided_by_fedora(self):
+        # Run & check
+        self.journal.localidentifier = 'dummy139'
+        self.journal.save()
+        self.assertTrue(self.journal.provided_by_fedora)
+        self.journal.localidentifier = None
+        self.journal.save()
+        self.assertFalse(self.journal.provided_by_fedora)
+
 
 class TestIssue(BaseEruditTestCase):
     def setUp(self):
