@@ -86,7 +86,7 @@ class DisciplineInline(admin.TabularInline):
 class JournalAdmin(admin.ModelAdmin):
     search_fields = [
         'code', 'name', 'issn_print',
-        'issn_web', 'url', 'address', 'members'
+        'issn_web', 'url', 'members'
     ]
 
     list_display = (
@@ -139,7 +139,6 @@ class JournalAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
             'fields': (
                 'url',
-                'address',
             ),
         }),
         ('Membres', {
