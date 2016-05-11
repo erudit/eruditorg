@@ -13,6 +13,7 @@ from erudit.models import Journal
 from erudit.models import Organisation
 
 from .abstract_models import AbstractSubscription
+from .abstract_models import AbstractSubscriptionPeriod
 
 
 class JournalAccessSubscription(AbstractSubscription):
@@ -54,6 +55,15 @@ class JournalAccessSubscription(AbstractSubscription):
         elif self.full_access:
             return _('{} - Accès complet').format(dest)
         return _('{} - Accès multiples').format(dest)
+
+
+class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
+    """ Defines a period in which a user or an organisation is allowed to access journals. """
+    subscription = models.ForeignKey(JournalAccessSubscription, verbose_name=_('Abonnement'))
+
+    class Meta:
+        verbose_name = _("Période d'abonnement aux revues")
+        verbose_name_plural = _("Périodes d'abonnement aux revues")
 
 
 class InstitutionIPAddressRange(models.Model):
@@ -110,3 +120,12 @@ class JournalManagementPlan(models.Model):
 
     def __str__(self):
         return self.code if not self.title else self.title
+
+
+class JournalManagementSubscriptionPeriod(AbstractSubscriptionPeriod):
+    """ Defines a period in which the member of a journal is allowed to manage subscriptions. """
+    subscription = models.ForeignKey(JournalManagementSubscription, verbose_name=_('Abonnement'))
+
+    class Meta:
+        verbose_name = _("Période d'abonnement de gestion de revue")
+        verbose_name_plural = _("Périodes d'abonnement de gestion de revue")

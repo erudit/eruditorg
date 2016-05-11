@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
-
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -12,19 +11,57 @@ class AbstractSubscription(models.Model):
     title = models.CharField(max_length=120, verbose_name=_('Titre'), blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
-    date_activation = models.DateField(verbose_name=_("Date d'activation"), blank=True, null=True)
-    date_renew = models.DateField(verbose_name=_('Date de renouvellement'), blank=True, null=True)
-    renew_cycle = models.PositiveSmallIntegerField(
-        verbose_name=_('Cycle du renouvellement (en jours)'), blank=True, null=True)
     comment = models.TextField(verbose_name=_('Commentaire'), blank=True, null=True)
 
     class Meta:
         abstract = True
 
-    def renew(self):
-        if self.date_activation is None:
-            raise ValidationError(_("Aucune date d'activation n'est spécifiée!"))
-        if self.date_renew is None:
-            self.date_renew = self.date_activation
-        self.date_renew = self.date_renew + dt.timedelta(days=self.renew_cycle)
-        self.save()
+
+class AbstractSubscriptionPeriod(models.Model):
+    """ Defines a period in which a subscription is valid. """
+    start = models.DateField(verbose_name=_('Date de début'))
+    end = models.DateField(verbose_name=_('Date de fin'))
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return '[{start} - {end}]'.format(start=self.start, end=self.end)
+
+    def clean(self):
+        super(AbstractSubscriptionPeriod, self).clean()
+
+        # First we have to verify that the considered period is coherent.
+        if self.start > self.end:
+            raise ValidationError(
+                _("La date de début d'une période d'abonnement ne doit pas être supérieure à la "
+                  "date de fin."))
+
+        # Then we have to verify that there are no concurrent periods that could be in contention
+        # with the considered period.
+        concurrent_periods = self.__class__._default_manager \
+            .filter(
+                Q(start__lte=self.start, end__gte=self.end) |  # Greater period
+                Q(start__gte=self.start, end__lte=self.end) |  # Smaller period
+                Q(start__lt=self.start, end__gte=self.start, end__lte=self.end) |  # Older period
+                Q(start__gte=self.start, start__lte=self.end, end__gt=self.end)  # Younger period
+            ) \
+            .filter(**{self.subscription_field_name: getattr(self, self.subscription_field_name)}) \
+            .exclude(pk=self.pk)
+
+        if concurrent_periods.exists():
+            raise ValidationError(
+                _("Cette période est en conflit avec une autre période pour cet abonnement."))
+
+    def get_subscription_field_name(self):
+        """ Returns the name of the foreign key to the subscription instance.
+
+        This is the name of the foreign key that associates the model that inherits from the
+        AbstractSubscriptionPeriod too a subclass of the AbstractSubscription abstract model.
+        It defaults to ``subscription``.
+        """
+        return 'subscription'
+
+    @property
+    def subscription_field_name(self):
+        return self.get_subscription_field_name()
