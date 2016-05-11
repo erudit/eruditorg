@@ -38,11 +38,12 @@ class ArticleAccessCheckMixin(object):
     def get_article(self):
         """ Returns the considered article.
 
-        By default the method will try to fetch the article using the
-        :meth:`get_object<django:django.views.generic.detail.SingleObjectMixin.get_object>` method.
-        But subclasses can override this to control the way the article is retrieved.
+        By default the method will try to fetch the article using the ``object`` attribute. If this
+        attribute is not available the
+        :meth:`get_object<django:django.views.generic.detail.SingleObjectMixin.get_object>` method
+        will be used. But subclasses can override this to control the way the article is retrieved.
         """
-        return self.get_object()
+        return self.object if hasattr(self, 'object') else self.get_object()
 
     def get_context_data(self, **kwargs):
         """ Inserts a flag indicating if the article can be accessed in the context. """

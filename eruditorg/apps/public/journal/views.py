@@ -189,13 +189,18 @@ class IssueDetailView(FedoraServiceRequiredMixin, DetailView):
         if 'pk' in self.kwargs:
             return super(IssueDetailView, self).get_object(queryset)
 
-        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+        return get_object_or_404(
+            Issue.objects.select_related('journal', 'journal__collection').all(),
+            localidentifier=self.kwargs['localidentifier'])
 
     def get_context_data(self, **kwargs):
         context = super(IssueDetailView, self).get_context_data(**kwargs)
 
-        context['journal'] = self.get_object().journal
-        context['articles'] = Article.objects.filter(issue=self.get_object())
+        context['journal'] = self.object.journal
+        context['articles'] = Article.objects \
+            .select_related('issue', 'issue__journal', 'issue__journal__collection') \
+            .prefetch_related('authors') \
+            .filter(issue=self.object)
         return context
 
 
@@ -222,7 +227,9 @@ class ArticleDetailView(
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
 
         # Get all article from associated Issue
-        related_articles = Article.objects.all().filter(issue=self.get_object().issue)
+        related_articles = Article.objects.select_related('issue', 'issue__journal') \
+            .prefetch_related('authors') \
+            .all().filter(issue=self.get_object().issue)
 
         # return 4 randomly
         context['related_articles'] = related_articles.order_by('?')[:4]
