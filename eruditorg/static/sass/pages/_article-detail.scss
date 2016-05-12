@@ -21,7 +21,7 @@ $article-toolbar-width: 80px;
 * Styles for article detail
 */
 
-section#article-detail {
+#article-detail {
 
   /**
   * default for html elements
@@ -41,89 +41,80 @@ section#article-detail {
     @include grid-cell-border();
   }
 
-  // pagination arrows
-  .pagination {
-    position: absolute;
-    top: 50%;
-    font-size: 40px;
-    color: $dark-grey;
-    transform: translate(0, -50%);
-    @include border-radius(50%);
-    width: 50px;
-    height: 50px;
-    line-height: 58px;
-    text-align: center;
-
-    &.next-page {
-      left: 100%;
-      margin-left: $grid-gutter-width/2;
-      padding-left: 4px;
-    }
-    &.previous-page {
-      right: 100%;
-      padding-right: 4px;
-      margin-right: $grid-gutter-width/2;
-    }
-
-    &:hover, &:active, &:active:focus {
-      color: $white;
-      background-color: $brand-primary;
-    }
-  }
-
-
   /**
   * main article header
   */
-  header.article-header {
+  .article-header {
     position: relative;
 
-    h2 {
-      margin: 0;
-      font-size: 36px;
-      line-height: 1.4em;
-      @include fw-sans-bold();
+    h1 {
+      margin-bottom: 0.25em;
+      font-size: 1.75em;
+      > span + span {
+        font-size: smaller;
+        margin-top: 0.5em;
+      }
     }
 
-    dl {
-      margin-top: $margin-vertical-default/2;
-      margin-bottom: $margin-vertical-default/2;
+    h2 {
+      margin: 1em 0 0 0;
+      font-size: 1.35em;
+    }
+
+    dl, p {
+      margin-top: $margin-vertical-default/2.75;
+      margin-bottom: $margin-vertical-default/2.75;
+      font-size: small;
+      line-height: 1.5;
     }
 
     hgroup {
       padding-top: $margin-vertical-default/1.5;
       padding-bottom: $margin-vertical-default/1.5;
 
-      div.author {
-        margin-bottom: $margin-vertical-default/2;
+      .grauteur {
+        list-style: none;
+        margin: 0;
       }
 
-      h3 {
-        margin-bottom: 0;
-        @include fw-sans-medium();
+      .auteur {
+        margin-bottom: $margin-vertical-default/2.75;
+
+        p {
+          margin: 0;
+          color: $dark-grey;
+        }
+
+        .nompers,
+        .nomorg {
+          color: #000;
+        }
+
       }
 
-      h4 {
-        margin-bottom: 5px;
+      .traducteur {
+        @extend em;
       }
 
       &.child-column-fit {
         padding-top: 0;
       }
 
-      .affiliation {
-        // margin-top: $margin-vertical-default/6;
-        // margin-bottom: 0;
-        //display: none;
-      }
-
-      p {
-        margin: 0;
-      }
-
     }
 
-    .meta-authors {
+    .sstitre {
+      font-size: 1.75em;
+      margin: 0 0 0.75em 0;
+      line-height: 1;
+    }
+
+    .issue-cover {
+      img {
+        float: right;
+      }
+    }
+
+    .meta-article {
       .clipboard-data {
         position: relative;
 
@@ -163,20 +154,80 @@ section#article-detail {
             animation-name: clipboardResponse;
           }
         }
+
         &.error {
           .clipboard-error {
             animation-name: clipboardResponse;
           }
         }
 
+        &:hover, &:active, &:focus, &:focus:active {
+          text-decoration: none;
+        }
+
       }
     }
 
-    .meta-magazine {
-      .meta-magazine--title {
+    .meta-journal {
+
+      .meta-journal--title {
         display: block;
         margin-top: 5px;
       }
+
+      .refpapier {
+
+      }
+
+      .theme {
+        display: block;
+        @include fw-sans-bold();
+      }
+
+      .pagination {
+        margin: 0;
+        display: inline;
+      }
+
+    }
+
+    .pagination-arrow {
+      position: absolute;
+      top: 50%;
+      font-size: 40px;
+      color: $dark-grey;
+      transform: translate(0, -50%);
+      @include border-radius(50%);
+      width: 50px;
+      height: 50px;
+      line-height: 58px;
+      text-align: center;
+
+      &.next-page {
+        left: 100%;
+        margin-left: $grid-gutter-width/2;
+        padding-left: 4px;
+      }
+      &.previous-page {
+        right: 100%;
+        padding-right: 4px;
+        margin-right: $grid-gutter-width/2;
+      }
+
+      &:hover, &:active, &:active:focus {
+        color: $white;
+        background-color: $brand-primary;
+      }
+    }
+
+    .notegen,
+    .histpapier,
+    .erratum {
+      font-size: small;
+    }
+
+    .histpapier {
+      font-style: italic;
     }
 
   }
@@ -251,15 +302,15 @@ section#article-detail {
 
     }
 
-    .meta-magazine {
-      .meta-magazine--title {
+    .meta-journal {
+      .meta-journal--title {
         display: block;
         margin-top: 10px;
         margin-bottom: 10px;
         color: $black;
       }
-      .meta-magazine--title,
-      .meta-magazine--theme,
+      .meta-journal--title,
+      .meta-journal--theme,
       .volumaison {
         overflow: hidden;
         white-space: nowrap;
@@ -367,7 +418,7 @@ section#article-detail {
   }
 
   /**
-  * each resume
+  * each abstract
   */
   .resume {
     margin-bottom: $margin-vertical-default*2;
@@ -488,5 +539,16 @@ section#article-detail {
 
   }
 
+  /**
+  * Typemarq
+  */
+
+  .majuscule {
+    text-transform: uppercase;
+  }
+
+  .petitecap {
+    font-variant: small-caps;
+  }
 
 }
