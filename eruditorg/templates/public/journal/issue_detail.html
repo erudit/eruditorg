@@ -13,7 +13,14 @@
 {% endblock page-title %}
 
 {% block breadcrumb %}{{ block.super }}
-/ <a href="{{ issue.get_absolute_url }}">{{ issue.volume_title }}</a>
+/
+<a href="{{ issue.get_absolute_url }}">
+  {% if issue.erudit_object.html_theme %}
+  {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
+  {% else %}
+  {% include "public/journal/_issue_volume.html" %}
+  {% endif %}
+</a>
 {% endblock %}
 
 {% block content %}
