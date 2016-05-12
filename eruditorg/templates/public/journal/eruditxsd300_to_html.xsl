@@ -1,11 +1,11 @@
 {% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:v="variables-node">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:v="variables-node" version="1.0">
 	<xsl:output method="html" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="*"/>
 
 	<!--=========== VARIABLES & PARAMETERS ===========-->
-    <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
-    <xsl:variable name="iderudit" select="article/@idproprio"/>
+  <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
+  <xsl:variable name="iderudit" select="article/@idproprio"/>
 	<xsl:variable name="typeudoc">
 		<xsl:choose>
 			<xsl:when test="article/@typeart='article'">
@@ -56,46 +56,47 @@
 
 			<hgroup class="col-xs-12 child-column-fit">
 
-				<aside class="col-sm-8">
-					<h2>
+				<div class="col-sm-9">
+					<h1>
 						<xsl:if test="liminaire/grtitre/titre">
-							<xsl:apply-templates select="liminaire/grtitre/titre"/>
-						</xsl:if>
-					</h2>
-					<h3>
-						<xsl:if test="liminaire/grtitre/sstitre">
-							<xsl:apply-templates select="liminaire/grtitre/sstitre"/>
+							<xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
 						</xsl:if>
 						<xsl:if test="liminaire/grtitre/trefbiblio">
-							<xsl:apply-templates select="liminaire/grtitre/trefbiblio"/>
+							<xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
 						</xsl:if>
-					</h3>
-				</aside>
+					</h1>
+
+          <xsl:if test="liminaire/grtitre/sstitre">
+            <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
+          </xsl:if>
+
+          <xsl:if test="liminaire/grauteur">
+            <ul class="grauteur">
+              <xsl:apply-templates select="liminaire/grauteur/auteur" mode="author"/>
+            </ul>
+          </xsl:if>
+				</div>
 
 				<!-- TODO: cover image -->
-				<aside class="col-sm-4">
-					<figure class="logo">
-						<img src="http://www.erudit.org/revue/logosmall/erudit:erudit.rse22.jpg" alt="Couverture du numéro" class="img-responsive"/>
-					</figure>
-				</aside>
+				<div class="issue-cover col-sm-3">
+					<img src="http://www.erudit.org/revue/logosmall/erudit:erudit.rse22.jpg" alt="Couverture du numéro" class="img-responsive"/>
+				</div>
 
-				<a href="#" class="pagination next-page"><span class="ion ion-ios-arrow-right"></span></a>
-				<a href="#" class="pagination previous-page"><span class="ion ion-ios-arrow-left"></span></a>
+				<a href="#" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>
+				<a href="#" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>
 
 			</hgroup>
 
-			<!-- meta authors -->
-			<hgroup class="meta-authors col-sm-6 border-top">
+			<!-- article metadata -->
+			<div class="meta-article col-sm-6 border-top">
 
-				<xsl:apply-templates select="liminaire/grauteur/auteur"/>
+        <xsl:apply-templates select="liminaire/erratum"/>
 
 				<dl class="mono-space idpublic">
 					<dt>URI</dt>
 					<dd>
 						<a href="{$uriStart}{$iderudit}" class="clipboard-data">
-							<xsl:value-of select="$uriStart"/>
-							<xsl:value-of select="$iderudit"/>
-
+							<xsl:value-of select="$uriStart"/><xsl:value-of select="$iderudit"/>
 							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
@@ -104,136 +105,130 @@
 					<dd>
 						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
 							10.7202/<xsl:value-of select="$iderudit"/>
-
 							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
 				</dl>
 
-				<xsl:apply-templates select="admin/droitsauteur"/>
+        <xsl:apply-templates select="liminaire/notegen"/>
+        <xsl:apply-templates select="admin/histpapier"/>
 
-			</hgroup>
-
-			<!-- meta magazine -->
-			<hgroup class="meta-magazine col-sm-6 border-top">
-
-				<h4>
-					{% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-					<a class="meta-magazine--title" href="{$urlSavant}{$titreAbrege}">
-						<xsl:value-of select="admin/revue/titrerev"/>
-					</a>
-				</h4>
-
-				<xsl:value-of select="admin/numero/grtheme/theme"/>
-				<xsl:apply-templates select="admin/numero" mode="refpapier"/>
-
-			</hgroup>
-
-		</header>
-
-		<!--=== sticky header for article ===-->
-		<header class="container article-header-sticky hidden-xs hidden-sm">
-			<div class="border-bottom">
-				<div class="row no-margin">
-					<h1 id="brand" class="col-md-1">
-						<a href="/">
-							<img src="/static/svg/logo-erudit-small.svg" alt="Erudit" class="img-responsive" />
-						</a>
-					</h1>
-
-					<hgroup class="col-md-7">
-						<h2>
-							<xsl:if test="liminaire/grtitre/titre">
-								<xsl:apply-templates select="liminaire/grtitre/titre"/>
-							</xsl:if>
-						</h2>
-					</hgroup>
-
-					<!-- meta magazine -->
-					<hgroup class="meta-magazine col-md-4">
-						<h4>
-							{% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-							<a class="meta-magazine--title bold" href="{$urlSavant}{$titreAbrege}">
-								<xsl:value-of select="admin/revue/titrerev"/>
-							</a>
-						</h4>
-
-						<xsl:apply-templates select="admin/numero" mode="refpapier"/>
-					</hgroup>
-
-					<a href="#" class="pagination next-page"><span class="ion ion-ios-arrow-right"></span></a>
-					<a href="#" class="pagination previous-page"><span class="ion ion-ios-arrow-left"></span></a>
-				</div>
 			</div>
+
+			<!-- journal metadata -->
+			<div class="meta-journal col-sm-6 border-top">
+        <p>
+          {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
+          <a href="{$urlSavant}{$titreAbrege}"><xsl:value-of select="admin/revue/titrerev"/></a>
+        </p>
+        <p class="refpapier">
+          <xsl:apply-templates select="admin/numero" mode="refpapier"/>
+          <xsl:if test="admin/infoarticle/pagination">
+            <xsl:apply-templates select="admin/infoarticle/pagination"/>
+          </xsl:if>
+          <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
+        </p>
+        <xsl:apply-templates select="admin/droitsauteur"/>
+			</div>
+
 		</header>
 
-		<!-- <hr/> -->
+    <!--=== sticky header for article ===-->
+    <header class="container article-header-sticky hidden-xs hidden-sm">
+      <div class="border-bottom">
+        <div class="row no-margin">
+          <h1 id="brand" class="col-md-1">
+            <a href="/">
+              <img src="/static/svg/logo-erudit-small.svg" alt="Erudit" class="img-responsive" />
+            </a>
+          </h1>
+
+          <hgroup class="col-md-7">
+            <h2>
+              <xsl:if test="liminaire/grtitre/titre">
+                <xsl:apply-templates select="liminaire/grtitre/titre"/>
+              </xsl:if>
+            </h2>
+          </hgroup>
+
+          <!-- meta journal -->
+          <hgroup class="meta-journal col-md-4">
+            <div>
+              {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
+              <a class="meta-journal--title bold" href="{$urlSavant}{$titreAbrege}">
+                <xsl:value-of select="admin/revue/titrerev"/>
+              </a>
+            </div>
+
+            <xsl:apply-templates select="admin/numero" mode="refpapier"/>
+          </hgroup>
+
+          <a href="#" class="pagination next-page"><span class="ion ion-ios-arrow-right"></span></a>
+          <a href="#" class="pagination previous-page"><span class="ion ion-ios-arrow-left"></span></a>
+        </div>
+      </div>
+    </header>
 
 		<!--=== plan de l'article ===-->
 		<div id="article-content" class="row border-top">
 			<xsl:if test="//corps">
 				{% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}
-				<aside class="col-md-3 article-table-of-contents" role="contents">
-						<nav>
-							<header>
-								<h4>{% trans "Plan de l’article" %}</h4>
-							</header>
-							<ul class="unstyled">
-								<li class="debutArticle italic">
-									<a href="#article-content">
-										<em>{% trans "Retour au début" %}</em>
-									</a>
-								</li>
-								<xsl:if test="//resume">
-									<li class="border-top">
-										<a href="#resume">{% trans "Résumé" %}"</a>
-									</li>
-								</xsl:if>
-								<li class="border-top article-table-of-contents--body">
-									<a href="#corps">{% trans "Corps" %}</a>
-									<ol class="unstyled">
-										<xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
-									</ol>
-								</li>
-								<xsl:if test="//grannexe">
-									<li class="border-top">
-										<a href="#grannexe">
-											<xsl:apply-templates select="//grannexe" mode="heading"/>
-										</a>
-									</li>
-								</xsl:if>
-								<xsl:if test="//merci">
-									<li class="border-top">
-										<a href="#merci">
-											<xsl:apply-templates select="//merci" mode="heading"/>
-										</a>
-									</li>
-								</xsl:if>
-								<xsl:if test="//grnotebio">
-									<li class="border-top">
-										<a href="#grnotebio">
-											<xsl:apply-templates select="//grnotebio" mode="heading"/>
-										</a>
-									</li>
-								</xsl:if>
-								<xsl:if test="//grnote">
-									<li class="border-top">
-										<a href="#grnote">
-											<xsl:apply-templates select="//grnote" mode="heading"/>
-										</a>
-									</li>
-								</xsl:if>
-								<xsl:if test="//grbiblio">
-									<li class="border-top">
-										<a href="#grbiblio">
-											<xsl:apply-templates select="//grbiblio" mode="heading"/>
-										</a>
-									</li>
-								</xsl:if>
-							</ul>
-						</nav>
-				</aside>
+        <nav class="col-md-3 article-table-of-contents" role="contents">
+          <h2>{% trans "Plan de l’article" %}</h2>
+          <ul class="unstyled">
+            <li class="debutArticle italic">
+              <a href="#">
+                <em>{% trans "Retour au début" %}</em>
+              </a>
+            </li>
+            <xsl:if test="//resume">
+              <li class="border-top">
+                <a href="#resume">{% trans "Résumé" %}</a>
+              </li>
+            </xsl:if>
+            <li class="border-top article-table-of-contents--body">
+              <ol class="unstyled">
+                <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
+              </ol>
+            </li>
+            <xsl:if test="//grannexe">
+              <li class="border-top">
+                <a href="#grannexe">
+                  <xsl:apply-templates select="//grannexe" mode="heading"/>
+                </a>
+              </li>
+            </xsl:if>
+            <xsl:if test="//merci">
+              <li class="border-top">
+                <a href="#merci">
+                  <xsl:apply-templates select="//merci" mode="heading"/>
+                </a>
+              </li>
+            </xsl:if>
+            <xsl:if test="//grnotebio">
+              <li class="border-top">
+                <a href="#grnotebio">
+                  <xsl:apply-templates select="//grnotebio" mode="heading"/>
+                </a>
+              </li>
+            </xsl:if>
+            <xsl:if test="//grnote">
+              <li class="border-top">
+                <a href="#grnote">
+                  <xsl:apply-templates select="//grnote" mode="heading"/>
+                </a>
+              </li>
+            </xsl:if>
+            <xsl:if test="//grbiblio">
+              <li class="border-top">
+                <a href="#grbiblio">
+                  <xsl:apply-templates select="//grbiblio" mode="heading"/>
+                </a>
+              </li>
+            </xsl:if>
+          </ul>
+        </nav>
 				{% endif %}
 
 				<aside class="pull-right toolbox">
@@ -332,7 +327,6 @@
 
 	<!--====== CORPS ======-->
 	<xsl:template match="corps">
-			<h4>{% trans "Corps" %}</h4>
 			<xsl:apply-templates/>
 	</xsl:template>
 
@@ -1495,204 +1489,236 @@
       </article>
   </xsl:template>
 
-<!--=== LISTE TAB / LISTE FIG ===-->
-<xsl:template match="tableau/objetmedia | figure/objetmedia" mode="liste">
-	<xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
-	<xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
+  <!--=== LISTE TAB / LISTE FIG ===-->
+  <xsl:template match="tableau/objetmedia | figure/objetmedia" mode="liste">
+    <xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
+    <xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
     <xsl:for-each select=".">
-        <figure class="{name(..)}" id="li{../@id}">
-            <img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
-            <figcaption class="notitre">
-                <xsl:apply-templates select="../no" mode="liste"/>
-                <xsl:apply-templates select="../legende/titre" mode="liste"/>
-                <!-- s'il y a des renvois dans la source ou la légende, plusieurs IDs sont créés. -->
-                <span class="allertexte">[
-                    <a href="#{../@id}">Aller au texte</a>]
-                </span>
-            </figcaption>
-        </figure>
+      <figure class="{name(..)}" id="li{../@id}">
+        <img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
+        <figcaption class="notitre">
+          <xsl:apply-templates select="../no" mode="liste"/>
+          <xsl:apply-templates select="../legende/titre" mode="liste"/>
+          <!-- s'il y a des renvois dans la source ou la légende, plusieurs IDs sont créés. -->
+          <span class="allertexte">[
+            <a href="#{../@id}">Aller au texte</a>]
+          </span>
+        </figcaption>
+      </figure>
     </xsl:for-each>
-</xsl:template>
-<!-- espacev -->
-<xsl:template match="espacev">
+  </xsl:template>
+  <!-- espacev -->
+  <xsl:template match="espacev">
     <div class="espacev" style="height: {@dim}">&#x00A0;</div>
-</xsl:template>
-<!-- espaceh -->
-<xsl:template match="espaceh">
+  </xsl:template>
+  <!-- espaceh -->
+  <xsl:template match="espaceh">
     <span class="espaceh" style="padding-left: {@dim}">&#x00A0;</span>
-</xsl:template>
-<!-- marquage -->
-<xsl:template match="marquage">
+  </xsl:template>
+  <!-- marquage -->
+  <xsl:template match="marquage">
     <xsl:choose>
-        <xsl:when test="@typemarq='gras'">
-            <strong>
-                <xsl:apply-templates/>
-            </strong>
-        </xsl:when>
-        <xsl:when test="@typemarq='italique'">
-            <em>
-                <xsl:apply-templates/>
-            </em>
-        </xsl:when>
-        <xsl:when test="@typemarq='taillep'">
-            <small>
-                <xsl:apply-templates/>
-            </small>
-        </xsl:when>
-        <xsl:otherwise>
-            <span class="{@typemarq}">
-                <xsl:apply-templates/>
-            </span>
-        </xsl:otherwise>
+      <xsl:when test="@typemarq='gras'">
+        <strong>
+          <xsl:apply-templates/>
+        </strong>
+      </xsl:when>
+      <xsl:when test="@typemarq='italique'">
+        <em>
+          <xsl:apply-templates/>
+        </em>
+      </xsl:when>
+      <xsl:when test="@typemarq='taillep'">
+        <small>
+          <xsl:apply-templates/>
+        </small>
+      </xsl:when>
+      <xsl:otherwise>
+        <span class="{@typemarq}">
+          <xsl:apply-templates/>
+        </span>
+      </xsl:otherwise>
     </xsl:choose>
-</xsl:template>
-<xsl:template match="exposant">
+  </xsl:template>
+
+  <xsl:template match="exposant">
     <xsl:element name="sup">
-        <xsl:if test="@traitementparticulier = 'oui'">
-            <xsl:attribute name="class">
-                <xsl:text>{% trans "special" %}</xsl:text>
-            </xsl:attribute>
-        </xsl:if>
-        <xsl:call-template name="syntaxe_texte_affichage">
-            <xsl:with-param name="texte" select="."/>
-        </xsl:call-template>
+      <xsl:if test="@traitementparticulier = 'oui'">
+        <xsl:attribute name="class">
+          <xsl:text>{% trans "special" %}</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="syntaxe_texte_affichage">
+        <xsl:with-param name="texte" select="."/>
+      </xsl:call-template>
     </xsl:element>
-</xsl:template>
-<xsl:template match="indice">
+  </xsl:template>
+
+  <xsl:template match="indice">
     <xsl:element name="sub">
-        <xsl:if test="@traitementparticulier">
-            <xsl:attribute name="class">
-                <xsl:text>{% trans "special" %}</xsl:text>
-            </xsl:attribute>
-        </xsl:if>
-        <xsl:call-template name="syntaxe_texte_affichage">
-            <xsl:with-param name="texte" select="."/>
-        </xsl:call-template>
+      <xsl:if test="@traitementparticulier">
+        <xsl:attribute name="class">
+          <xsl:text>{% trans "special" %}</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="syntaxe_texte_affichage">
+        <xsl:with-param name="texte" select="."/>
+      </xsl:call-template>
     </xsl:element>
-</xsl:template>
+  </xsl:template>
 
+  <xsl:template match="liensimple">
+    <a href="{@xlink:href}" id="{@id}">
+      <xsl:value-of select="."/>
+    </a>
+  </xsl:template>
 
-<!-- marquage pour plan -->
-<xsl:template match="marquage" mode="html_toc">
-  <span class="{@typemarq}">
-	  <xsl:apply-templates/>
-  </span>
-</xsl:template>
-<xsl:template match="exposant" mode="html_toc">
-  <xsl:element name="sup">
-	  <xsl:if test="@traitementparticulier = 'oui'">
-		  <xsl:attribute name="class">
-			  <xsl:text>{% trans "special" %}</xsl:text>
-		  </xsl:attribute>
-	  </xsl:if>
-	  <xsl:call-template name="syntaxe_texte_affichage">
-		  <xsl:with-param name="texte" select="."/>
-	  </xsl:call-template>
-  </xsl:element>
-</xsl:template>
-<xsl:template match="indice" mode="html_toc">
-  <xsl:element name="sub">
-	  <xsl:if test="@traitementparticulier">
-		  <xsl:attribute name="class">
-			  <xsl:text>{% trans "special" %}</xsl:text>
-		  </xsl:attribute>
-	  </xsl:if>
-	  <xsl:call-template name="syntaxe_texte_affichage">
-		  <xsl:with-param name="texte" select="."/>
-	  </xsl:call-template>
-  </xsl:element>
-</xsl:template>
-<!-- idpublic -->
-<xsl:template match="idpublic[@scheme = 'doi']">
-  <xsl:text>&#x0020;</xsl:text>
-  <a href="{$doiStart}{.}">
-	  <xsl:if test="contains( . , '10.7202')">
-		  <img src="../images/iconeErudit.png" title="ID public Érudit" alt="Icône pour les ID publics Érudit"/>
-	  </xsl:if>
-	  <xsl:text>DOI:</xsl:text>
-	  <xsl:value-of select="."/>
-  </a>
-</xsl:template>
-<xsl:template match="idpublic[@scheme='uri']">
-  <a href="{$uriStart}{.}">
-	  <xsl:text>URI:</xsl:text>
-	  <xsl:value-of select="."/>
-  </a>
-</xsl:template>
-<xsl:template match="liensimple">
-  <a href="{@href}">
-	  <xsl:value-of select="."/>
-  </a>
-</xsl:template>
+  <!-- idpublic -->
+  <xsl:template match="idpublic[@scheme = 'doi']">
+    <xsl:text>&#x0020;</xsl:text>
+    <a href="{$doiStart}{.}">
+      <xsl:if test="contains( . , '10.7202')">
+        <img src="../images/iconeErudit.png" title="ID public Érudit" alt="Icône pour les ID publics Érudit"/>
+      </xsl:if>
+      <xsl:text>DOI:</xsl:text>
+      <xsl:value-of select="."/>
+    </a>
+  </xsl:template>
+  <xsl:template match="idpublic[@scheme='uri']">
+    <a href="{$uriStart}{.}">
+      <xsl:text>URI:</xsl:text>
+      <xsl:value-of select="."/>
+    </a>
+  </xsl:template>
 
-	<xsl:template match="@typeart">
-		<xsl:choose>
-			<xsl:when test="$typeudoc = 'article'">{% trans "Un article" %}</xsl:when>
-			<xsl:when test="$typeudoc = 'compterendu'">{% trans "Un compte rendu" %}</xsl:when>
-			<xsl:when test="$typeudoc = 'note'">{% trans "Une note" %}</xsl:when>
-			<xsl:otherwise>{% trans "Un document" %}</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
+  <xsl:template match="@typeart">
+    <xsl:choose>
+      <xsl:when test="$typeudoc = 'article'">{% trans "Un article" %}</xsl:when>
+      <xsl:when test="$typeudoc = 'compterendu'">{% trans "Un compte rendu" %}</xsl:when>
+      <xsl:when test="$typeudoc = 'note'">{% trans "Une note" %}</xsl:when>
+      <xsl:otherwise>{% trans "Un document" %}</xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 
-	<xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/sstitre | article/liminaire/grtitre/trefbiblio" mode="title">
-		<xsl:value-of select="normalize-space(.)"/>
-	</xsl:template>
-
-	<xsl:template match="grauteur/auteur">
-		<div class="author">
-			<xsl:apply-templates select="*" mode="lim"/>
-		</div>
-	</xsl:template>
-
-	<xsl:template match="auteur">
-		<span class="{name()}">
-			<xsl:value-of select="."/>
-		</span>
-	</xsl:template>
-
-	<xsl:template match="auteur/nompers" mode="lim">
-		<xsl:if test="child::node()/child::text()">
-			<h3 class="{name()}">
-				<xsl:call-template name="element_nompers_affichage">
-					<xsl:with-param name="nompers" select="."/>
-				</xsl:call-template>
-			</h3>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="prefixe | prenom | autreprenom | nomfamille | suffixe">
-		<xsl:apply-templates/>
-		<xsl:if test="position() != last()">
-			<xsl:text>
-			</xsl:text>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="auteur/affiliation" mode="lim">
-		<div class="affiliation">
-			<xsl:apply-templates select="fonction"/>
-			<xsl:apply-templates select="divorg"/>
-			<xsl:apply-templates select="nomorg"/>
-			<xsl:apply-templates select="adresse"/>
-			<xsl:apply-templates select="alinea"/>
-		</div>
-	</xsl:template>
-
-	<xsl:template match="admin//membre | admin//fonction | admin//divorg | admin//nomorg | admin//adresse | article//affiliation/alinea" mode="lim">
-    <div class="{name()}">
+  <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio" mode="title">
+    <span class="{name()}">
       <xsl:apply-templates/>
-      <xsl:text>
-      </xsl:text>
+    </span>
+  </xsl:template>
+
+  <xsl:template match="article/liminaire/grtitre/sstitre" mode="title">
+    <p class="{name()}">
+      <xsl:apply-templates/>
+    </p>
+  </xsl:template>
+
+  <!-- auteur(s) -->
+  <xsl:template match="auteur" mode="author">
+    <xsl:param name="version"/>
+    <xsl:variable name="traducteur">
+      <xsl:if test="contribution/@typecontrib = 'trl'   or  contains(contribution ,  'Trad' )  "> traducteur</xsl:if>
+    </xsl:variable>
+    <li>
+
+      <xsl:attribute name="class">
+        <xsl:text>auteur</xsl:text>
+        <xsl:value-of select="$traducteur"/>
+      </xsl:attribute>
+
+      <xsl:if test="contribution/node()">
+        <xsl:choose>
+          <xsl:when test="contribution[1] = preceding-sibling::auteur[1]/contribution[1]">
+            <!-- Ne pas répéter la contribution égale à la précédente. -->
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:for-each select="contribution">
+              <p class="contribution">
+                <xsl:call-template name="syntaxe_texte_affichage">
+                  <xsl:with-param name="texte" select="."/>
+                </xsl:call-template>
+              </p>
+            </xsl:for-each>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+
+      <xsl:choose>
+        <xsl:when test="nompers">
+          <p class="nompers">
+            <xsl:call-template name="element_nompers_affichage">
+              <xsl:with-param name="nompers" select="nompers[1]"/>
+            </xsl:call-template>
+            <xsl:if test="nompers[2][@typenompers = 'pseudonyme']">
+              <xsl:text>, </xsl:text>
+              <xsl:call-template name="element_nompers_affichage">
+                <xsl:with-param name="nompers" select="nompers[2]"/>
+              </xsl:call-template>
+            </xsl:if>
+          </p>
+        </xsl:when>
+        <xsl:when test="nomorg/child::node()">
+          <p class="nomorg">
+            <xsl:call-template name="syntaxe_texte_affichage">
+              <xsl:with-param name="texte" select="nomorg"/>
+            </xsl:call-template>
+            <xsl:if test="membre">
+              <xsl:text>&#160;(</xsl:text>
+              <xsl:for-each select="membre">
+                <xsl:call-template name="element_nompers_affichage">
+                  <xsl:with-param name="nompers" select="nompers"></xsl:with-param>
+                </xsl:call-template>
+                <xsl:if test="position() != last()"><xsl:text>, </xsl:text></xsl:if>
+              </xsl:for-each>)
+            </xsl:if>
+          </p>
+        </xsl:when>
+      </xsl:choose>
+
+      <xsl:for-each select="affiliation/alinea">
+        <p class="affiliation">
+          <xsl:call-template name="syntaxe_texte_affichage">
+            <xsl:with-param name="texte" select="."/>
+          </xsl:call-template>
+        </p>
+      </xsl:for-each>
+
+      <xsl:for-each select="courriel">
+        <p class="courriel">
+          <xsl:call-template name="syntaxe_texte_affichage">
+            <xsl:with-param name="texte" select="."/>
+          </xsl:call-template>
+        </p>
+      </xsl:for-each>
+
+      <xsl:for-each select="siteweb">
+        <p class="courriel">
+          <xsl:call-template name="syntaxe_texte_affichage">
+            <xsl:with-param name="texte" select="."/>
+          </xsl:call-template>
+        </p>
+      </xsl:for-each>
+
+    </li>
+  </xsl:template>
+
+  <xsl:template match="article/liminaire/notegen | article/liminaire/erratum | admin/histpapier">
+    <div class="{name()}">
+      <xsl:if test="titre">
+        <h2>
+          <xsl:apply-templates select="titre"/>
+        </h2>
+      </xsl:if>
+      <xsl:apply-templates select="*[not(self::titre)]"/>
     </div>
   </xsl:template>
 
-	<!-- element_nompers_affichage -->
+  <!-- element_nompers_affichage -->
 	<xsl:template name="element_nompers_affichage">
 		<xsl:param name="nompers"/>
 		<xsl:if test="$nompers[@typenompers = 'pseudonyme']">
+      <xsl:text> </xsl:text>
 			<xsl:text>{% trans "alias" %}</xsl:text>
-			<xsl:text>
-			</xsl:text>
+      <xsl:text> </xsl:text>
 		</xsl:if>
 		<xsl:if test="$nompers/prefixe/node()">
 			<xsl:call-template name="syntaxe_texte_affichage">
@@ -1748,66 +1774,74 @@
 	</xsl:template>
 
 	<!-- numpublication -->
-	<xsl:template match="admin/numero" mode="refpapier">
-		<h4 class="volumaison">
-			<xsl:for-each select="volume | nonumero[1] | pub/periode | pub/annee | pagination">
-				<xsl:apply-templates select="."/>
-				<xsl:if test="position() != last()">
-					<xsl:text>, </xsl:text>
-				</xsl:if>
-			</xsl:for-each>
-		</h4>
-	</xsl:template>
-	<xsl:template match="numero/volume">
-		<span class="{name()}">
-			<xsl:text{% blocktrans %}>Volume&#160;{% endblocktrans %}</xsl:text>
-			<xsl:value-of select="."/>
-		</span>
-	</xsl:template>
-	<xsl:template match="numero/nonumero[1]">
-		<!-- template for first occurence of nonumero only; this allows the display of issues like Numéro 3-4 or Numéro 1-2-3 -->
-		<span class="{name()}">
-			<xsl:text>{% blocktrans %}Numéro&#160;{% endblocktrans %}</xsl:text>
-			<!-- check if there are nonumero siblings -->
-			<xsl:for-each select="parent::numero/nonumero">
-				<xsl:value-of select="."/>
-				<xsl:if test="position() != last()">
-					<xsl:text>–</xsl:text>
-				</xsl:if>
-			</xsl:for-each>
-		</span>
-	</xsl:template>
-	<xsl:template match="numero/periode | numero/annee">
-		<span class="{name()}">
-			<xsl:value-of select="."/>
-		</span>
-	</xsl:template>
-    <xsl:template match="pagination">
-      <span class="{name()}">
-        <xsl:choose>
-          <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
-          <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
-        </xsl:choose>
-      </span>
-    </xsl:template>
-    <xsl:template match="ppage|dpage">
-      <span class="{name()}">
+  <xsl:template match="admin/numero" mode="refpapier">
+    <span class="volumaison">
+      <xsl:for-each select="volume | nonumero[1] | pub/periode | pub/annee | pagination">
+        <xsl:apply-templates select="."/>
+        <xsl:if test="position() != last()">
+          <xsl:text>, </xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+    </span>
+  </xsl:template>
+  <xsl:template match="numero/volume">
+    <span class="{name()}">
+      <xsl:text{% blocktrans %}>Volume&#160;{% endblocktrans %}</xsl:text>
+      <xsl:value-of select="."/>
+    </span>
+  </xsl:template>
+  <xsl:template match="numero/nonumero[1]">
+    <!-- template for first occurence of nonumero only; this allows the display of issues like Numéro 3-4 or Numéro 1-2-3 -->
+    <span class="{name()}">
+      <xsl:text>{% blocktrans %}Numéro&#160;{% endblocktrans %}</xsl:text>
+      <!-- check if there are nonumero siblings -->
+      <xsl:for-each select="parent::numero/nonumero">
         <xsl:value-of select="."/>
-      </span>
-    </xsl:template>
+        <xsl:if test="position() != last()">
+          <xsl:text>–</xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+    </span>
+  </xsl:template>
+  <xsl:template match="numero/periode | numero/annee">
+    <span class="{name()}">
+      <xsl:value-of select="."/>
+    </span>
+  </xsl:template>
+  <xsl:template match="pagination">
+    <span class="{name()}">
+      <xsl:text>, </xsl:text>
+      <xsl:choose>
+        <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
+        <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
+      </xsl:choose>
+    </span>
+  </xsl:template>
+  <xsl:template match="ppage|dpage">
+    <span class="{name()}">
+      <xsl:value-of select="."/>
+    </span>
+  </xsl:template>
 
-	<!-- droitauteur -->
+  <!-- thematique -->
+  <xsl:template match="admin/numero/grtheme/theme" mode="refpapier">
+    <span class="{name()}">
+      <xsl:apply-templates select="."/>
+    </span>
+  </xsl:template>
+
+	<!-- droitsauteur -->
   <xsl:template match="droitsauteur">
-    <h4 class="{name()}">
-      <xsl:apply-templates/>
-    </h4>
+    <p class="{name()}">
+      <small><xsl:value-of select="."/></small>
+    </p>
   </xsl:template>
 
 	<!-- resume -->
 	<xsl:template match="//resume">
 		<article id="{name()}-{@lang}" class="{name()}">
 			<xsl:if test="@lang='fr'">
-				<h4>Résumé</h4>
+				<h2>Résumé</h2>
 				<p>
 					<xsl:apply-templates/>
 				</p>
@@ -1828,7 +1862,7 @@
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='en'">
-				<h4>Abstract</h4>
+				<h2>Abstract</h2>
 				<p>
 					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='en']" mode="lim"/>
 					<xsl:apply-templates select="alinea"/>
@@ -1850,7 +1884,7 @@
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='es'">
-				<h4>Resumen</h4>
+				<h2>Resumen</h2>
 				<p>
 					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='es']" mode="lim"/>
 					<xsl:apply-templates select="alinea"/>

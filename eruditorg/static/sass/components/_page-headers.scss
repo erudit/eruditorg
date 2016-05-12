@@ -12,7 +12,7 @@
     @include fw-sans-bold();
     margin-bottom: 1em;
 
-    span + span {
+    > span + span {
       @include fw-sans-normal();
       display: block;
     }
