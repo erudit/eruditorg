@@ -1,5 +1,5 @@
 {% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:v="variables-node" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="1.0">
 	<xsl:output method="html" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="*"/>
 
@@ -79,7 +79,6 @@
 
 				<!-- TODO: cover image -->
 				<div class="issue-cover col-sm-3">
-					<img src="http://www.erudit.org/revue/logosmall/erudit:erudit.rse22.jpg" alt="Couverture du numéro" class="img-responsive"/>
 				</div>
 
 				<a href="#" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>
@@ -1568,7 +1567,7 @@
   </xsl:template>
 
   <xsl:template match="liensimple">
-    <a href="{@xlink:href}" id="{@id}">
+    <a href="" id="{@id}">
       <xsl:value-of select="."/>
     </a>
   </xsl:template>
@@ -1846,8 +1845,8 @@
 					<xsl:apply-templates/>
 				</p>
 				<xsl:if test="//grmotcle[@lang='fr']/motcle">
-					<footer class="keywords">
-						<h5>Mots clés : </h5>
+					<div class="motscles">
+						<strong>Mots clés : </strong>
 						<ul class="inline">
 						<xsl:for-each select="//grmotcle[@lang='fr']/motcle">
 							<li class="keyword">
@@ -1858,18 +1857,18 @@
 							</li>
 						</xsl:for-each>
 						</ul>
-					</footer>
+					</div>
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='en'">
 				<h2>Abstract</h2>
-				<p>
-					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='en']" mode="lim"/>
-					<xsl:apply-templates select="alinea"/>
+				<xsl:apply-templates select="//grtitre/titreparal[@lang='en']" mode="abstract"/>
+        <p>
+					<xsl:apply-templates/>
 				</p>
 				<xsl:if test="//grmotcle[@lang='en']/motcle">
-					<footer class="keywords">
-						<h5>Keywords : </h5>
+					<div class="motscles">
+						<strong>Keywords : </strong>
 						<ul class="inline">
 						<xsl:for-each select="//grmotcle[@lang='en']/motcle">
 							<li class="keyword">
@@ -1880,19 +1879,18 @@
 							</li>
 						</xsl:for-each>
 						</ul>
-					</footer>
+					</div>
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='es'">
 				<h2>Resumen</h2>
-				<p>
-					<xsl:apply-templates select="//grtitre/grtitreparal/titreparal[@lang='es']" mode="lim"/>
-					<xsl:apply-templates select="alinea"/>
+				<xsl:apply-templates select="//grtitre/titreparal[@lang='es']" mode="abstract"/>
+        <p>
 					<xsl:apply-templates/>
 				</p>
 				<xsl:if test="//grmotcle[@lang='es']/motcle">
-					<footer class="keywords">
-						<h5>Palabras clave : </h5>
+					<div class="motscles">
+						<strong>Palabras clave : </strong>
 						<ul class="inline">
 						<xsl:for-each select="//grmotcle[@lang='es']/motcle">
 							<li class="keyword">
@@ -1903,11 +1901,19 @@
 							</li>
 						</xsl:for-each>
 						</ul>
-					</footer>
+					</div>
 				</xsl:if>
 			</xsl:if>
 		</article>
 	</xsl:template>
+
+  <xsl:template match="titreparal" mode="abstract">
+    <p>
+      <strong>
+        <xsl:apply-templates/>
+      </strong>
+    </p>
+  </xsl:template>
 
 	<xsl:template match="resume/alinea">
 		<xsl:apply-templates/>

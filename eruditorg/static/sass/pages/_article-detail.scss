@@ -446,15 +446,9 @@ $article-toolbar-width: 80px;
   /**
   * keywords
   */
-  .keywords {
+  .motscles {
     margin-top: $margin-vertical-default/2;
-    h5 {
-      display: inline-block;
-      @include fw-sans-bold();
-    }
     ul {
-      display: inline-block;
-      @include fw-sans-normal();
       @media (max-width: $screen-xs-max) {
         display: block;
       }
@@ -549,6 +543,20 @@ $article-toolbar-width: 80px;
 
   .petitecap {
     font-variant: small-caps;
+  }
+
+  .italique, em {
+    @include fw-serif-normal-italic;
+    .gras, strong {
+      @include fw-serif-bold-italic;
+    }
+  }
+
+  .gras, strong {
+    @include fw-serif-bold;
+    .italique, em {
+      @include fw-serif-bold-italic;
+    }
   }
 
 }
