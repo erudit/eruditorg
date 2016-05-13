@@ -2,7 +2,8 @@
 
 import json
 
-from django.views.generic import FormView
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
@@ -59,10 +60,23 @@ class EruditDocumentListAPIView(ListAPIView):
             docs_count, localidentifiers, queryset, self.request, view=self)
 
 
-class AdvancedSearchView(FormView):
+class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
     form_class = SearchForm
+    http_method_names = ['get', ]
     template_name = 'public/search/advanced_search.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.get_form()
+        if request.GET:
+            form.is_valid()
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def get_form_kwargs(self):
+        kwargs = {'initial': self.get_initial(), 'prefix': self.get_prefix()}
+        if self.request.GET:
+            kwargs.update({'data': self.request.GET})
+        return kwargs
 
 
 class SearchResultsView(TemplateResponseMixin, FormMixin, View):
@@ -195,5 +209,5 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
             results=results, documents=results.get('results')))
 
     def forms_invalid(self, search_form, options_form):
-        return self.render_to_response(self.get_context_data(
-            search_form=search_form, options_form=options_form))
+        return HttpResponseRedirect(
+            '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))

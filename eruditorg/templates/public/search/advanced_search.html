@@ -17,7 +17,7 @@
       </header>
     </div>
 
-    <form action="{% url 'public:search:results' %}" id="id-search" class="advanced-search-form" method="get">
+    <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form" method="get">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <div class="row">
@@ -35,6 +35,9 @@
                 <div class="controls">
                   {{ form.basic_search_term|add_class:'form-control' }}
                   {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+                <div class="alert alert-warning advanced-search-popup-error" style="display:none;">
+                  {% trans "Vous devez saisir une expression ou des mots-clés." %}
                 </div>
               </div>
             </div>
@@ -96,10 +99,14 @@
               <div class="row">
                 <div class="col-md-6">
                   {{ form.pub_year_start|add_class:'form-control' }}
-                  {% for error in form.pub_year_start.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
                 <div class="col-md-6">
                   {{ form.pub_year_end|add_class:'form-control' }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {% for error in form.pub_year_start.errors %}<p class="error">{{ error }}</p>{% endfor %}
                   {% for error in form.pub_year_end.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
               </div>

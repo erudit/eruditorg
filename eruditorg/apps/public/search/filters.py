@@ -86,14 +86,15 @@ class EruditDocumentSolrFilter(object):
         # Funds filter
         _funds = query_params.getlist('funds', [])
         _filter_funds = query_params.getlist('filter_funds', [])
-        funds = set(_funds).intersection(_filter_funds)
+        funds = set(_funds).intersection(_filter_funds) if _funds else _filter_funds
         if funds:
             filters.update({'funds': funds})
 
         # Publication types filter
         _publication_types = query_params.getlist('publication_types', [])
         _filter_publication_types = query_params.getlist('filter_publication_types', [])
-        publication_types = set(_publication_types).intersection(_filter_publication_types)
+        publication_types = set(_publication_types).intersection(_filter_publication_types) if \
+            _publication_types else _filter_publication_types
         if publication_types:
             filters.update({'publication_types': publication_types})
 
