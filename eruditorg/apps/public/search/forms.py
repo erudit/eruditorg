@@ -5,6 +5,8 @@ import datetime as dt
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 
+from erudit.models import Discipline
+
 
 OPERATORS = (
     ('AND', _('Et')),
@@ -39,17 +41,18 @@ AVAILABILITY_CHOICES = (
 
 FUNDS_CHOICES = (
     ('Érudit', _('Érudit')),
-    ('UNB', _('UNB (University of New-Brunswick)')),
     ('Persée', _('Persée')),
+    ('UNB', _('UNB Libraries')),
+    ('NRC', _('NRC Research Press')),
 )
 
 PUB_TYPES_CHOICES = (
-    ('Article', _('Article de revue scientifique')),
-    ('Culturel', _('Article de revue culturelle')),
-    ('Actes', _('Actes de colloque')),
+    ('Article', _('Savantes')),
+    ('Culturel', _('Culturelles')),
     ('Thèses', _('Thèses')),
     ('Livres', _('Livres')),
-    ('Depot', _('Document déposé dans le dépôt de données (littérature grise)')),
+    ('Actes', _('Actes')),
+    ('Depot', _('Littérature grise')),
 )
 
 
@@ -69,8 +72,7 @@ def get_years_range(
 
 class SearchForm(forms.Form):
     basic_search_operator = forms.BooleanField(label=_('Exclure des résultats?'), required=False)
-    basic_search_term = forms.CharField(
-        label=_('Recherche'), widget=forms.TextInput, required=False)
+    basic_search_term = forms.CharField(label=_('Recherche'), widget=forms.TextInput)
     basic_search_field = forms.ChoiceField(
         label=_('Inclure les champs'), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS,
         required=False)
@@ -79,8 +81,7 @@ class SearchForm(forms.Form):
         label=None, widget=forms.Select, choices=OPERATORS, required=False)
     advanced_search_term1 = forms.CharField(label=None, widget=forms.TextInput, required=False)
     advanced_search_field1 = forms.ChoiceField(
-        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
-    )
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
     advanced_search_operator2 = forms.ChoiceField(
         label=None, widget=forms.Select, choices=OPERATORS, required=False)
     advanced_search_term2 = forms.CharField(label=None, widget=forms.TextInput, required=False)
@@ -113,25 +114,51 @@ class SearchForm(forms.Form):
         label=_('Dans Érudit depuis'), widget=forms.Select, choices=AVAILABILITY_CHOICES,
         required=False)
 
-    funds_limit = forms.MultipleChoiceField(
+    funds = forms.MultipleChoiceField(
         label=_('Fonds'), widget=forms.CheckboxSelectMultiple, choices=FUNDS_CHOICES,
         required=False)
 
-    pub_types = forms.MultipleChoiceField(
+    publication_types = forms.MultipleChoiceField(
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
         choices=PUB_TYPES_CHOICES, required=False)
 
+    languages = forms.MultipleChoiceField(
+        label=_('Langues'),
+        choices=[('fr', _('Français')), ('en', _('Anglais')), ('es', _('Espagnol'))],
+        required=False)
+
+    disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+
+        # Update some fields
+        for fkey in ['basic_search_term', 'advanced_search_term1', 'advanced_search_term2',
+                     'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
+            self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
+
+        self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in Discipline.objects.all()]
+
+    def clean(self):
+        cleaned_data = super(SearchForm, self).clean()
+
+        # Validates publication year fields
+        pub_year_start = cleaned_data.get('pub_year_start', None)
+        pub_year_end = cleaned_data.get('pub_year_end', None)
+        if pub_year_start and pub_year_end and int(pub_year_start) > int(pub_year_end):
+            self.add_error('pub_year_start', _('Cette intervalle est incorrecte'))
+
 
 class ResultsFilterForm(forms.Form):
-    years = forms.MultipleChoiceField(label=_('Années'), required=False)
-    article_types = forms.MultipleChoiceField(label=_('Types d\'articles'), required=False)
-    languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
-    collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
-    authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
-    funds = forms.MultipleChoiceField(
+    filter_years = forms.MultipleChoiceField(label=_('Années'), required=False)
+    filter_article_types = forms.MultipleChoiceField(label=_('Types d\'articles'), required=False)
+    filter_languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
+    filter_collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
+    filter_authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
+    filter_funds = forms.MultipleChoiceField(
         label=_('Fonds'), help_text=_('Identifie le fond duquel le document fait partie'),
         required=False)
-    publication_types = forms.MultipleChoiceField(
+    filter_publication_types = forms.MultipleChoiceField(
         label=_('Types de publications'),
         help_text=_('Identifie le corpus duquel le document fait partie'), required=False)
 
@@ -142,16 +169,19 @@ class ResultsFilterForm(forms.Form):
         super(ResultsFilterForm, self).__init__(*args, **kwargs)
 
         if aggregations:
-            self.fields['years'].choices = self._get_aggregation_choices(aggregations['year'])
-            self.fields['article_types'].choices = self._get_aggregation_choices(
+            self.fields['filter_years'].choices = self._get_aggregation_choices(
+                aggregations['year'])
+            self.fields['filter_article_types'].choices = self._get_aggregation_choices(
                 aggregations['article_type'])
-            self.fields['languages'].choices = self._get_aggregation_choices(
+            self.fields['filter_languages'].choices = self._get_aggregation_choices(
                 aggregations['language'])
-            self.fields['collections'].choices = self._get_aggregation_choices(
+            self.fields['filter_collections'].choices = self._get_aggregation_choices(
                 aggregations['collection'])
-            self.fields['authors'].choices = self._get_aggregation_choices(aggregations['author'])
-            self.fields['funds'].choices = self._get_aggregation_choices(aggregations['fund'])
-            self.fields['publication_types'].choices = self._get_aggregation_choices(
+            self.fields['filter_authors'].choices = self._get_aggregation_choices(
+                aggregations['author'])
+            self.fields['filter_funds'].choices = self._get_aggregation_choices(
+                aggregations['fund'])
+            self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
                 aggregations['publication_type'])
 
     def _get_aggregation_choices(self, aggregation_dict):
