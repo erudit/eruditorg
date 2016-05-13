@@ -122,6 +122,11 @@ class SearchForm(forms.Form):
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
         choices=PUB_TYPES_CHOICES, required=False)
 
+    languages = forms.MultipleChoiceField(
+        label=_('Langues'),
+        choices=[('fr', _('Français')), ('en', _('Anglais')), ('es', _('Espagnol'))],
+        required=False)
+
     disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
 
     def __init__(self, *args, **kwargs):

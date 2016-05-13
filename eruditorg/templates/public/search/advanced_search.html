@@ -76,14 +76,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
-              <div class="controls">
-                <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
-                {{ form.disciplines|add_class:'form-control' }}
-                {% for error in form.disciplines.errors %}<p class="error">{{ error }}</p>{% endfor %}
-              </div>
+        <div class="col-md-4">
+          <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
+            <div class="controls">
+              <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
+              {{ form.disciplines|add_class:'form-control' }}
+              {% for error in form.disciplines.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id="div_id_{{ form.languages.html_name }}" class="form-group{% if form.languages.errors %} has-error{% endif %}">
+            <div class="controls">
+              <label class="control-label" for="{{ form.languages.auto_id }}">{{ form.languages.label }}</label>
+              {{ form.languages|add_class:'form-control' }}
+              {% for error in form.languages.errors %}<p class="error">{{ error }}</p>{% endfor %}
             </div>
           </div>
         </div>

@@ -8,8 +8,9 @@ export default {
     let $form = $('#id_search');
     let $addButton = $('#id_add_q_field');
 
-    // Initializes the disciplines chooser
+    // Initializes the Select2 choosers
     $('#id_disciplines').select2();
+    $('#id_languages').select2();
 
     // Initializes the search blocks
     $('#id_advanced_q_wrapper [data-q-id]').each(function() {
