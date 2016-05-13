@@ -57,6 +57,12 @@
 			<hgroup class="col-xs-12 child-column-fit">
 
 				<div class="col-sm-9">
+          <xsl:if test="liminaire/grtitre/surtitre">
+            <p class="title-tag">
+              <xsl:apply-templates select="liminaire/grtitre/surtitre" mode="title"/>
+              <xsl:apply-templates select="liminaire/grtitre/surtitreparal" mode="title"/>
+            </p>
+          </xsl:if>
 					<h1>
 						<xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
@@ -1594,14 +1600,23 @@
     </xsl:choose>
   </xsl:template>
 
+  <!-- article section title -->
+  <xsl:template match="liminaire/grtitre/surtitre | liminaire/grtitre/surtitreparal" mode="title">
+    <xsl:for-each select="child::node()">
+      <span class="surtitre">
+        <xsl:apply-templates select="."/>
+      </span>
+    </xsl:for-each>
+  </xsl:template>
+
   <!-- article title(s) -->
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
-      <xsl:apply-templates/> 
+      <xsl:apply-templates/>
     </span>
   </xsl:template>
 
-<!-- alternate title(s) for multilingual articles -->
+  <!-- alternate title(s) for multilingual articles -->
   <xsl:template match="article/liminaire/grtitre/titreparal | article/liminaire/grtitre/sstitreparal" mode="title">
     <xsl:if test="not(//resume)">
       <span class="{name()}">
