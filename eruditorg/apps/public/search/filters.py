@@ -32,6 +32,9 @@ class EruditDocumentSolrFilter(object):
         """ Return the filters to use to query the Solr index. """
         filters = {}
 
+        # STEP 1: register main search filters
+        # --
+
         # Simple search parameters
         basic_search_term = query_params.get('basic_search_term', '*')
         basic_search_field = query_params.get('basic_search_field', 'all')
@@ -52,54 +55,29 @@ class EruditDocumentSolrFilter(object):
                     'term': search_term, 'field': search_field, 'operator': search_operator, })
         filters.update({'advanced_q': advanced_q})
 
-        # Publication year filters
-        pub_years = query_params.getlist('filter_years', [])
+        # STEP 2: register other search filters
+        # --
+
+        # Publication year filter
         pub_year_start = query_params.get('pub_year_start', None)
         pub_year_end = query_params.get('pub_year_end', None)
-        if pub_years:
-            filters.update({'pub_years': pub_years})
         if pub_year_start:
             filters.update({'pub_year_start': pub_year_start})
         if pub_year_end:
             filters.update({'pub_year_end': pub_year_end})
 
-        # Types of documents filter
-        document_types = query_params.getlist('filter_article_types', [])
-        if document_types:
-            filters.update({'document_types': document_types})
-
         # Languages filter
-        _languages = query_params.getlist('languages', [])
-        _filter_languages = query_params.getlist('filter_languages', [])
-        languages = set(_languages).intersection(_filter_languages) if \
-            _languages and _filter_languages else (_languages or _filter_languages)
+        languages = query_params.getlist('languages', [])
         if languages:
             filters.update({'languages': languages})
 
-        # Collections/journals filter
-        journals = query_params.getlist('filter_collections', [])
-        if journals:
-            filters.update({'journals': journals})
-
-        # Authors filter
-        authors = query_params.getlist('filter_authors', [])
-        if authors:
-            filters.update({'authors': authors})
-
         # Funds filter
-        _funds = query_params.getlist('funds', [])
-        _filter_funds = query_params.getlist('filter_funds', [])
-        funds = set(_funds).intersection(_filter_funds) if _funds and _filter_funds \
-            else (_funds or _filter_funds)
+        funds = query_params.getlist('funds', [])
         if funds:
             filters.update({'funds': funds})
 
         # Publication types filter
-        _publication_types = query_params.getlist('publication_types', [])
-        _filter_publication_types = query_params.getlist('filter_publication_types', [])
-        publication_types = set(_publication_types).intersection(_filter_publication_types) if \
-            _publication_types and _filter_publication_types \
-            else (_publication_types or _filter_publication_types)
+        publication_types = query_params.getlist('publication_types', [])
         if publication_types:
             filters.update({'publication_types': publication_types})
 
@@ -108,34 +86,77 @@ class EruditDocumentSolrFilter(object):
         if disciplines:
             filters.update({'disciplines': disciplines})
 
+        # STEP 3: register filters that are related to aggregation results
+        # --
+
+        # Because of their nature these filters should be applied last.
+
+        # Publication years aggregation-filter
+        agg_pub_years = query_params.getlist('filter_years', [])
+        if agg_pub_years:
+            filters.update({'agg_pub_years': agg_pub_years})
+
+        # Languages aggregation-filter
+        agg_languages = query_params.getlist('filter_languages', [])
+        if agg_languages:
+            filters.update({'agg_languages': agg_languages})
+
+        # Types of documents aggregation-filter
+        agg_document_types = query_params.getlist('filter_article_types', [])
+        if agg_document_types:
+            filters.update({'agg_document_types': agg_document_types})
+
+        # Collections/journals aggregation-filter
+        agg_journals = query_params.getlist('filter_collections', [])
+        if agg_journals:
+            filters.update({'agg_journals': agg_journals})
+
+        # Authors aggregation-filter
+        agg_authors = query_params.getlist('filter_authors', [])
+        if agg_authors:
+            filters.update({'agg_authors': agg_authors})
+
+        # Funds aggregation-filter
+        agg_funds = query_params.getlist('filter_funds', [])
+        if agg_funds:
+            filters.update({'agg_funds': agg_funds})
+
+        # Publication types aggregation-filter
+        agg_publication_types = query_params.getlist('filter_publication_types', [])
+        if agg_publication_types:
+            filters.update({'agg_publication_types': agg_publication_types})
+
         return filters
 
     def apply_solr_filters(self, filters):
         """ Applies the solr filters and returns the list of results. """
         search = solr_search.get_search()
 
+        # Main search filters
         qfield = filters['q']['field']
         qterm = filters['q']['term']
         qoperator = filters['q']['operator']
         advanced_q = filters.get('advanced_q', [])
 
-        pub_years = filters.get('pub_years', [])
+        # Other search filters
         pub_year_start = filters.get('pub_year_start', None)
         pub_year_end = filters.get('pub_year_end', None)
-
-        document_types = filters.get('document_types', [])
-
         languages = filters.get('languages', [])
-
-        journals = filters.get('journals', [])
-
-        authors = filters.get('authors', [])
-
         funds = filters.get('funds', [])
-
         publication_types = filters.get('publication_types', [])
-
         disciplines = filters.get('disciplines', [])
+
+        # Aggregation filters
+        agg_pub_years = filters.get('agg_pub_years', [])
+        agg_languages = filters.get('agg_languages', [])
+        agg_document_types = filters.get('agg_document_types', [])
+        agg_journals = filters.get('agg_journals', [])
+        agg_authors = filters.get('agg_authors', [])
+        agg_funds = filters.get('agg_funds', [])
+        agg_publication_types = filters.get('agg_publication_types', [])
+
+        # STEP 1: applies the main search filters
+        # --
 
         # Main filters
         query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
@@ -152,29 +173,18 @@ class EruditDocumentSolrFilter(object):
                 query &= ~Q(**{field: term})
         sqs = search.filter(query)
 
+        # STEP 2: applies the other search filters
+        # --
+
         # Applies the publication year filters
         if pub_year_start or pub_year_end:
             ystart = pub_year_start if pub_year_start is not None else '*'
             yend = pub_year_end if pub_year_end is not None else '*'
             sqs = sqs.filter(AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend))
-        elif pub_years:
-            sqs = self._filter_solr_multiple(sqs, 'AnneePublication', pub_years)
-
-        # Applies the types of documents filter
-        if document_types:
-            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', document_types)
 
         # Applies the languages filter
         if languages:
             sqs = self._filter_solr_multiple(sqs, 'Langue', languages)
-
-        # Applies the journals filter
-        if journals:
-            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
-
-        # Applies the authors filter
-        if authors:
-            sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', authors)
 
         # Applies the funds filter
         if funds:
@@ -187,6 +197,37 @@ class EruditDocumentSolrFilter(object):
         # Applies the disciplines filter
         if disciplines:
             sqs = self._filter_solr_multiple(sqs, 'Discipline_fac', disciplines)
+
+        # STEP 3: applies the aggregation-related filters
+        # --
+
+        # Applies the publication year aggregation-filter
+        if agg_pub_years:
+            sqs = self._filter_solr_multiple(sqs, 'AnneePublication', agg_pub_years)
+
+        # Applies the languages aggregation-filter
+        if agg_languages:
+            sqs = self._filter_solr_multiple(sqs, 'Langue', agg_languages)
+
+        # Applies the types of documents aggregation-filter
+        if agg_document_types:
+            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', agg_document_types)
+
+        # Applies the journals aggregation-filter
+        if agg_journals:
+            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', agg_journals)
+
+        # Applies the authors aggregation-filter
+        if agg_authors:
+            sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', agg_authors)
+
+        # Applies the funds aggregation-filter
+        if agg_funds:
+            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', agg_funds)
+
+        # Applies the publication types aggregation-filter
+        if agg_publication_types:
+            sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', agg_publication_types)
 
         return sqs
 

@@ -171,15 +171,23 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_languages(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request_1 = Request(self.factory.get('/', data={
+            'basic_search_term': 'test',
+            'basic_search_field': 'meta',
+            'languages': ['fr', ],
+        }))
+        request_2 = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_languages': ['fr', ],
         }))
-        filt = EruditDocumentSolrFilter()
+        filt_1 = EruditDocumentSolrFilter()
+        filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
-        self.assertEqual(filt.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Langue:"fr"))')
+        filt_1.filter(request_1, EruditDocument.objects.all(), None)
+        filt_2.filter(request_2, EruditDocument.objects.all(), None)
+        self.assertEqual(filt_1.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Langue:"fr"))')
+        self.assertEqual(filt_2.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Langue:"fr"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_collections(self, mock_get_results):
@@ -216,30 +224,49 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_funds(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request_1 = Request(self.factory.get('/', data={
+            'basic_search_term': 'test',
+            'basic_search_field': 'meta',
+            'funds': ['Érudit', ],
+        }))
+        request_2 = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_funds': ['Érudit', ],
         }))
-        filt = EruditDocumentSolrFilter()
+        filt_1 = EruditDocumentSolrFilter()
+        filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
-        self.assertEqual(filt.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Fonds_fac:"Érudit"))')
+        filt_1.filter(request_1, EruditDocument.objects.all(), None)
+        filt_2.filter(request_2, EruditDocument.objects.all(), None)
+        self.assertEqual(
+            filt_1.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Fonds_fac:"Érudit"))')
+        self.assertEqual(
+            filt_2.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Fonds_fac:"Érudit"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_publication_types(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request_1 = Request(self.factory.get('/', data={
+            'basic_search_term': 'test',
+            'basic_search_field': 'meta',
+            'publication_types': ['Culturel', ],
+        }))
+        request_2 = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_publication_types': ['Culturel', ],
         }))
-        filt = EruditDocumentSolrFilter()
+        filt_1 = EruditDocumentSolrFilter()
+        filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt_1.filter(request_1, EruditDocument.objects.all(), None)
+        filt_2.filter(request_2, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Corpus_fac:"Culturel"))')
+            filt_1.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Corpus_fac:"Culturel"))')
+        self.assertEqual(
+            filt_2.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Corpus_fac:"Culturel"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_disciplines(self, mock_get_results):
