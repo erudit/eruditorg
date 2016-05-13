@@ -58,17 +58,12 @@
 
 				<div class="col-sm-9">
 					<h1>
-						<xsl:if test="liminaire/grtitre/titre">
-							<xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
-						</xsl:if>
-						<xsl:if test="liminaire/grtitre/trefbiblio">
-							<xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
-						</xsl:if>
-					</h1>
-
-          <xsl:if test="liminaire/grtitre/sstitre">
+						<xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
-          </xsl:if>
+						<xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
+            <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
+						<xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
+					</h1>
 
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur">
@@ -1599,19 +1594,23 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio" mode="title">
+  <!-- article title(s) -->
+  <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
-      <xsl:apply-templates/>
+      <xsl:apply-templates/> 
     </span>
   </xsl:template>
 
-  <xsl:template match="article/liminaire/grtitre/sstitre" mode="title">
-    <p class="{name()}">
-      <xsl:apply-templates/>
-    </p>
+<!-- alternate title(s) for multilingual articles -->
+  <xsl:template match="article/liminaire/grtitre/titreparal | article/liminaire/grtitre/sstitreparal" mode="title">
+    <xsl:if test="not(//resume)">
+      <span class="{name()}">
+        <xsl:apply-templates/>
+      </span>
+    </xsl:if>
   </xsl:template>
 
-  <!-- auteur(s) -->
+  <!-- author(s) - person or organisation -->
   <xsl:template match="auteur" mode="author">
     <xsl:param name="version"/>
     <xsl:variable name="traducteur">
