@@ -9,8 +9,10 @@ from erudit.factories import OrganisationFactory
 
 from .models import InstitutionIPAddressRange
 from .models import JournalAccessSubscription
+from .models import JournalAccessSubscriptionPeriod
 from .models import JournalManagementPlan
 from .models import JournalManagementSubscription
+from .models import JournalManagementSubscriptionPeriod
 
 
 class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
@@ -19,6 +21,13 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = JournalAccessSubscription
+
+
+class JournalAccessSubscriptionPeriodFactory(factory.DjangoModelFactory):
+    subscription = factory.SubFactory(JournalAccessSubscriptionFactory)
+
+    class Meta:
+        model = JournalAccessSubscriptionPeriod
 
 
 class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):
@@ -39,3 +48,10 @@ class JournalManagementSubscriptionFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = JournalManagementSubscription
+
+
+class JournalManagementSubscriptionPeriodFactory(factory.DjangoModelFactory):
+    subscription = factory.SubFactory(JournalManagementSubscriptionFactory)
+
+    class Meta:
+        model = JournalManagementSubscriptionPeriod

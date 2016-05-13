@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
 import ipaddress
 
 from django.core.exceptions import ValidationError
@@ -9,6 +10,7 @@ from erudit.factories import OrganisationFactory
 
 from ..factories import InstitutionIPAddressRangeFactory
 from ..factories import JournalAccessSubscriptionFactory
+from ..factories import JournalAccessSubscriptionPeriodFactory
 
 
 class TestInstitutionIPAddressRange(TestCase):
@@ -39,3 +41,81 @@ class TestInstitutionIPAddressRange(TestCase):
                 ipaddress.ip_address('192.168.1.5'),
             ]
         )
+
+
+class TestJournalAccessSubscriptionPeriod(TestCase):
+    def test_cannot_clean_an_incoherent_period(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription = JournalAccessSubscriptionFactory.create()
+        period = JournalAccessSubscriptionPeriodFactory.build(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+        # Run & check
+        with self.assertRaises(ValidationError):
+            period.clean()
+
+    def test_cannot_clean_a_period_that_has_a_larger_concurrent_period(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription = JournalAccessSubscriptionFactory.create()
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=8),
+            end=now_dt + dt.timedelta(days=14))
+        period = JournalAccessSubscriptionPeriodFactory.build(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=12))
+        # Run & check
+        with self.assertRaises(ValidationError):
+            period.clean()
+
+    def test_cannot_clean_a_period_that_has_an_inner_concurrent_period(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription = JournalAccessSubscriptionFactory.create()
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=9),
+            end=now_dt + dt.timedelta(days=11))
+        period = JournalAccessSubscriptionPeriodFactory.build(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=8),
+            end=now_dt + dt.timedelta(days=14))
+        # Run & check
+        with self.assertRaises(ValidationError):
+            period.clean()
+
+    def test_cannot_clean_a_period_that_has_an_older_concurrent_period(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription = JournalAccessSubscriptionFactory.create()
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=8),
+            end=now_dt + dt.timedelta(days=11))
+        period = JournalAccessSubscriptionPeriodFactory.build(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=12))
+        # Run & check
+        with self.assertRaises(ValidationError):
+            period.clean()
+
+    def test_cannot_clean_a_period_that_has_a_younger_concurrent_period(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription = JournalAccessSubscriptionFactory.create()
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=11),
+            end=now_dt + dt.timedelta(days=15))
+        period = JournalAccessSubscriptionPeriodFactory.build(
+            subscription=subscription,
+            start=now_dt + dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=12))
+        # Run & check
+        with self.assertRaises(ValidationError):
+            period.clean()
