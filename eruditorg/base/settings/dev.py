@@ -26,6 +26,8 @@ MIDDLEWARE_CLASSES += (
 
 INSTALLED_APPS += (
     'debug_toolbar',
+    'debug_toolbar_line_profiler',
+    'template_timings_panel',
     'djcelery',
     'kombu.transport.django',
 )
@@ -37,6 +39,20 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 BROKER_URL = 'django://'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar_line_profiler.panel.ProfilingPanel',
+    'template_timings_panel.panels.TemplateTimings.TemplateTimings',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+)
 
 # Copy these lines into your ``settings_env`` module and uncomment them
 # in order to use hot reloading!

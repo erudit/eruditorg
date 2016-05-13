@@ -8,7 +8,7 @@ from erudit.models import Article
 class SingleArticleMixin(object):
     def get_object(self, queryset=None):
         queryset = Article.objects.all() if queryset is None else queryset
-        queryset.select_related('issue', 'issue__journal')
+        queryset.select_related('issue', 'issue__journal').prefetch_related('authors')
         if 'pk' in self.kwargs:
             return super(SingleArticleMixin, self).get_object(queryset)
 
