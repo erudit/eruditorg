@@ -3,6 +3,27 @@
 from erudit.tests.base import BaseEruditTestCase
 
 from ..forms import ResultsFilterForm
+from ..forms import SearchForm
+
+
+class TestSearchForm(BaseEruditTestCase):
+    def test_cannot_validate_a_search_without_a_main_query(self):
+        # Setup
+        form_data = {}
+        # Run & check
+        form = SearchForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    def test_cannot_validate_a_search_with_a_incoherent_publication_years_period(self):
+        # Setup
+        form_data = {
+            'basic_search_term': 'test',
+            'pub_year_start': 2014,
+            'pub_year_end': 2012,
+        }
+        # Run & check
+        form = SearchForm(data=form_data)
+        self.assertFalse(form.is_valid())
 
 
 class TestResultsFilterForm(BaseEruditTestCase):

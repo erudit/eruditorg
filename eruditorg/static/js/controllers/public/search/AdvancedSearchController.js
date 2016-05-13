@@ -2,6 +2,7 @@ export default {
   init() {
     console.log("Advanced search!");
 
+    let $form = $('#id_search');
     let $addButton = $('#id_add_q_field');
 
     // Initializes the search blocks
@@ -49,6 +50,16 @@ export default {
       let $qUsed = $('#id_advanced_q_wrapper [data-q-id]').filter(function() { return $(this).data('q-used') == true });
       if ($qUsed.length < 5) {
         $addButton.show();
+      }
+    });
+
+    $form.submit(function(ev) {
+      $('.advanced-search-popup-error').hide();
+
+      let mainQueryTerm = $('#id_basic_search_term').val();
+      if (!mainQueryTerm) {
+        $('#div_id_basic_search_term .advanced-search-popup-error').show();
+        ev.preventDefault();
       }
     });
   },

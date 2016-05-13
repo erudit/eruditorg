@@ -70,8 +70,7 @@ def get_years_range(
 
 class SearchForm(forms.Form):
     basic_search_operator = forms.BooleanField(label=_('Exclure des résultats?'), required=False)
-    basic_search_term = forms.CharField(
-        label=_('Recherche'), widget=forms.TextInput, required=False)
+    basic_search_term = forms.CharField(label=_('Recherche'), widget=forms.TextInput)
     basic_search_field = forms.ChoiceField(
         label=_('Inclure les champs'), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS,
         required=False)
@@ -80,8 +79,7 @@ class SearchForm(forms.Form):
         label=None, widget=forms.Select, choices=OPERATORS, required=False)
     advanced_search_term1 = forms.CharField(label=None, widget=forms.TextInput, required=False)
     advanced_search_field1 = forms.ChoiceField(
-        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False
-    )
+        label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
     advanced_search_operator2 = forms.ChoiceField(
         label=None, widget=forms.Select, choices=OPERATORS, required=False)
     advanced_search_term2 = forms.CharField(label=None, widget=forms.TextInput, required=False)
@@ -129,6 +127,15 @@ class SearchForm(forms.Form):
         for fkey in ['basic_search_term', 'advanced_search_term1', 'advanced_search_term2',
                      'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
+
+    def clean(self):
+        cleaned_data = super(SearchForm, self).clean()
+
+        # Validates publication year fields
+        pub_year_start = cleaned_data.get('pub_year_start', None)
+        pub_year_end = cleaned_data.get('pub_year_end', None)
+        if pub_year_start and pub_year_end and int(pub_year_start) > int(pub_year_end):
+            self.add_error('pub_year_start', _('Cette intervalle est incorrecte'))
 
 
 class ResultsFilterForm(forms.Form):
