@@ -102,6 +102,28 @@ $article-toolbar-width: 80px;
 
     }
 
+    .title-tag {
+      margin-top: 0;
+    }
+
+    .surtitre,
+    .surtitreparal {
+      color: $dark-grey;
+
+      &::after {
+        content: ' / ';
+      }
+
+      &:last-of-type {
+
+        &::after {
+          content: none;
+        }
+
+      }
+
+    }
+
     .titre:first-child,
     .trefbiblio:only-child,
     .titreparal {
