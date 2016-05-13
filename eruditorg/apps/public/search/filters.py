@@ -53,7 +53,7 @@ class EruditDocumentSolrFilter(object):
         filters.update({'advanced_q': advanced_q})
 
         # Publication year filters
-        pub_years = query_params.getlist('years', [])
+        pub_years = query_params.getlist('filter_years', [])
         pub_year_start = query_params.get('pub_year_start', None)
         pub_year_end = query_params.get('pub_year_end', None)
         if pub_years:
@@ -64,32 +64,36 @@ class EruditDocumentSolrFilter(object):
             filters.update({'pub_year_end': pub_year_end})
 
         # Types of documents filter
-        document_types = query_params.getlist('article_types', [])
+        document_types = query_params.getlist('filter_article_types', [])
         if document_types:
             filters.update({'document_types': document_types})
 
         # Languages filter
-        languages = query_params.getlist('languages', [])
+        languages = query_params.getlist('filter_languages', [])
         if languages:
             filters.update({'languages': languages})
 
         # Collections/journals filter
-        journals = query_params.getlist('collections', [])
+        journals = query_params.getlist('filter_collections', [])
         if journals:
             filters.update({'journals': journals})
 
         # Authors filter
-        authors = query_params.getlist('authors', [])
+        authors = query_params.getlist('filter_authors', [])
         if authors:
             filters.update({'authors': authors})
 
         # Funds filter
-        funds = query_params.getlist('funds', [])
+        _funds = query_params.getlist('funds', [])
+        _filter_funds = query_params.getlist('filter_funds', [])
+        funds = set(_funds).intersection(_filter_funds)
         if funds:
             filters.update({'funds': funds})
 
         # Publication types filter
-        publication_types = query_params.getlist('publication_types', [])
+        _publication_types = query_params.getlist('publication_types', [])
+        _filter_publication_types = query_params.getlist('filter_publication_types', [])
+        publication_types = set(_publication_types).intersection(_filter_publication_types)
         if publication_types:
             filters.update({'publication_types': publication_types})
 

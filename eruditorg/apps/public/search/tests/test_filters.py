@@ -126,7 +126,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'years': [2015, 2016],
+            'filter_years': [2015, 2016],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
@@ -159,7 +159,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'article_types': ['Article', ],
+            'filter_article_types': ['Article', ],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
@@ -174,7 +174,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'languages': ['fr', ],
+            'filter_languages': ['fr', ],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
@@ -188,7 +188,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'collections': ['Arborescences', ],
+            'filter_collections': ['Arborescences', ],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
@@ -204,7 +204,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'authors': ['firstname, lastname', ],
+            'filter_authors': ['firstname, lastname', ],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
@@ -219,7 +219,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'funds': ['Érudit', ],
+            'filter_funds': ['Érudit', ],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
@@ -233,7 +233,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         request = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-            'publication_types': ['Culturel', ],
+            'filter_publication_types': ['Culturel', ],
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check

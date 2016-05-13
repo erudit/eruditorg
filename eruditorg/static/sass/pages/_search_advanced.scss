@@ -1,0 +1,94 @@
+/**
+* Advanced search page
+*/
+
+
+section#advanced-search-page {
+
+  /**
+  * main header
+  */
+  header.search-header {
+    margin-bottom: $margin-vertical-default;
+    h3, h4 {
+      margin: $margin-vertical-default/3 0;
+    }
+  }
+
+
+  /**
+  * search form
+  */
+
+  form.advanced-search-form {
+    // input style
+    input[type='text'],
+    input[type='search'] {
+      height: 46px;
+      background: #fff;
+      border: 1px solid $gray-base;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    // select style
+    select {
+      -webkit-appearance: none;
+      outline: none;
+      @include border-radius(0);
+      border: 1px solid $gray-base;
+      padding: 12px;
+      height: 46px;
+      position: relative;
+      @include fw-sans-normal;
+      background: #fff url(../iconfont/chevron-down.svg) no-repeat 95% center;
+      option {
+        height: auto;
+        line-height: auto;
+        @include fw-sans-normal;
+      }
+    }
+
+    #div_id_publication_types, #div_id_years, #div_id_funds {
+      border-top: 1px solid $gray-light;
+
+      label.control-label{
+        margin: 10px 0;
+      }
+    }
+
+    #div_id_publication_types, #div_id_funds {
+      ul {
+        margin: 0;
+        list-style: none;
+
+        li {
+          display: inline-block;
+
+          input {
+            width: auto;
+          }
+        }
+      }
+    }
+    #div_id_publication_types ul li { width: 32%; }
+    #div_id_funds ul li { width: 48%; }
+
+    a#id_add_q_field {
+      margin-top: 10px;
+      padding: 5px 0;
+      display: inline-block;
+    }
+
+    .remove-button-wrapper {
+      position: absolute;
+      top: 6px;
+      right: -40px;
+
+      i {
+        font-size: 30px;
+        color: $gray-dark;
+      }
+    }
+  }
+}

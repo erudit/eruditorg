@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load widget_tweaks %}
+
+<div id="id_qblock_{{ qnb }}" class="row" style="display:none;" data-q-id="{{ qnb }}" data-q-used="false">
+  <div class="col-md-2">
+    <div id="div_id_{{ qoperator_field.html_name }}" class="form-group{% if qoperator_field.errors %} has-error{% endif %}">
+      <div class="controls">
+        {{ qoperator_field|add_class:'form-control' }}
+        {% for error in qoperator_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div id="div_id_{{ qterm_field.html_name }}" class="form-group{% if qterm_field.errors %} has-error{% endif %}">
+      <div class="controls">
+        {{ qterm_field|add_class:'form-control' }}
+        {% for error in qterm_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="remove-button-wrapper"><a href="#" class="remove-qbox"><i class="ion-close-round"></i></a></div>
+    <div id="div_id_{{ qfield_field.html_name }}" class="form-group{% if qfield_field.errors %} has-error{% endif %}">
+      <div class="controls">
+        {{ qfield_field|add_class:'form-control' }}
+        {% for error in qfield_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
