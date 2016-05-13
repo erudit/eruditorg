@@ -98,6 +98,11 @@ class EruditDocumentSolrFilter(object):
         if publication_types:
             filters.update({'publication_types': publication_types})
 
+        # Disciplines filter
+        disciplines = query_params.getlist('disciplines', [])
+        if disciplines:
+            filters.update({'disciplines': disciplines})
+
         return filters
 
     def apply_solr_filters(self, filters):
@@ -124,6 +129,8 @@ class EruditDocumentSolrFilter(object):
         funds = filters.get('funds', [])
 
         publication_types = filters.get('publication_types', [])
+
+        disciplines = filters.get('disciplines', [])
 
         # Main filters
         query = Q(**{qfield: qterm}) if qoperator is None or qoperator != self.OP_NOT \
@@ -171,6 +178,10 @@ class EruditDocumentSolrFilter(object):
         # Applies the publication types filter
         if publication_types:
             sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', publication_types)
+
+        # Applies the disciplines filter
+        if disciplines:
+            sqs = self._filter_solr_multiple(sqs, 'Discipline_fac', disciplines)
 
         return sqs
 

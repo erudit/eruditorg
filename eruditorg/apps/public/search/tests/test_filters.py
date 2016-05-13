@@ -241,6 +241,21 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         self.assertEqual(
             filt.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Corpus_fac:"Culturel"))')
 
+    @unittest.mock.patch.object(Query, 'get_results')
+    def test_can_filter_on_disciplines(self, mock_get_results):
+        # Setup
+        mock_get_results.side_effect = fake_get_results
+        request = Request(self.factory.get('/', data={
+            'basic_search_term': 'test',
+            'basic_search_field': 'meta',
+            'disciplines': ['Littérature', ],
+        }))
+        filt = EruditDocumentSolrFilter()
+        # Run & check
+        filt.filter(request, EruditDocument.objects.all(), None)
+        self.assertEqual(
+            filt.sqs._qs, '((*:*) AND (Metadonnees:test)) AND ((Discipline_fac:"Littérature"))')
+
     def test_can_properly_determine_the_order_of_the_results(self):
         # Run & check
         request = Request(self.factory.get('/', data={'sort_by': 'relevance'}))

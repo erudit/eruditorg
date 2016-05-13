@@ -5,6 +5,8 @@ import datetime as dt
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 
+from erudit.models import Discipline
+
 
 OPERATORS = (
     ('AND', _('Et')),
@@ -120,6 +122,8 @@ class SearchForm(forms.Form):
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
         choices=PUB_TYPES_CHOICES, required=False)
 
+    disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
+
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
 
@@ -127,6 +131,8 @@ class SearchForm(forms.Form):
         for fkey in ['basic_search_term', 'advanced_search_term1', 'advanced_search_term2',
                      'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
+
+        self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in Discipline.objects.all()]
 
     def clean(self):
         cleaned_data = super(SearchForm, self).clean()
