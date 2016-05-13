@@ -1823,14 +1823,16 @@
   </xsl:template>
   <xsl:template match="pagination">
     <span class="{name()}">
-      <xsl:text>, </xsl:text>
-      <xsl:choose>
-        <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
-        <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
-      </xsl:choose>
+      <xsl:if test="ppage | dpage != '0'">
+        <xsl:text>, </xsl:text>
+        <xsl:choose>
+          <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
+          <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
     </span>
   </xsl:template>
-  <xsl:template match="ppage|dpage">
+  <xsl:template match="ppage | dpage">
     <span class="{name()}">
       <xsl:value-of select="."/>
     </span>
