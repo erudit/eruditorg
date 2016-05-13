@@ -2,6 +2,7 @@
 
 import json
 
+from django.views.generic import FormView
 from django.views.generic import View
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
@@ -56,6 +57,12 @@ class EruditDocumentListAPIView(ListAPIView):
     def paginate(self, docs_count, localidentifiers, queryset):
         return self.paginator.paginate(
             docs_count, localidentifiers, queryset, self.request, view=self)
+
+
+class AdvancedSearchView(FormView):
+    """ Displays the search form in order to perform advanced searches for Érudit documents. """
+    form_class = SearchForm
+    template_name = 'public/search/advanced_search.html'
 
 
 class SearchResultsView(TemplateResponseMixin, FormMixin, View):

@@ -41,7 +41,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['years'].choices,
+            form.fields['filter_years'].choices,
             [
                 ('2011', '2011 (36)'),
                 ('2013', '2013 (11)'),
@@ -51,7 +51,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['article_types'].choices,
+            form.fields['filter_article_types'].choices,
             [
                 ('Article', 'Article (99)'),
                 ('Autre', 'Autre (6)'),
@@ -62,7 +62,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['languages'].choices,
+            form.fields['filter_languages'].choices,
             [
                 ('en', 'en (9)'),
                 ('fr', 'fr (248)'),
@@ -72,7 +72,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['collections'].choices,
+            form.fields['filter_collections'].choices,
             [
                 ('Bar', 'Bar (151)'),
                 ('Foo', 'Foo (75)'),
@@ -82,7 +82,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['authors'].choices,
+            form.fields['filter_authors'].choices,
             [
                 ('test1, foo', 'test1, foo (2)'),
                 ('test2, bar', 'test2, bar (10)'),
@@ -92,7 +92,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['funds'].choices,
+            form.fields['filter_funds'].choices,
             [
                 ('Érudit', 'Érudit (257)'),
             ])
@@ -101,7 +101,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
         self.assertEqual(
-            form.fields['publication_types'].choices,
+            form.fields['filter_publication_types'].choices,
             [
                 ('Article', 'Article (106)'),
                 ('Culturel', 'Culturel (151)'),

@@ -97,13 +97,13 @@
           {# Filter form #}
           {% if filter_form %}
           <fieldset class="search-filters">
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.years %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.article_types %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.languages %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.collections %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.authors %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.funds %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.publication_types %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_years %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_languages %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_collections %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_authors %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_funds %}
+            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_publication_types %}
           </fieldset>
           {% endif %}
 
