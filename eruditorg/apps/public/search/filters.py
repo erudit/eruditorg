@@ -69,7 +69,10 @@ class EruditDocumentSolrFilter(object):
             filters.update({'document_types': document_types})
 
         # Languages filter
-        languages = query_params.getlist('filter_languages', [])
+        _languages = query_params.getlist('languages', [])
+        _filter_languages = query_params.getlist('filter_languages', [])
+        languages = set(_languages).intersection(_filter_languages) if \
+            _languages and _filter_languages else (_languages or _filter_languages)
         if languages:
             filters.update({'languages': languages})
 
@@ -86,7 +89,8 @@ class EruditDocumentSolrFilter(object):
         # Funds filter
         _funds = query_params.getlist('funds', [])
         _filter_funds = query_params.getlist('filter_funds', [])
-        funds = set(_funds).intersection(_filter_funds) if _funds else _filter_funds
+        funds = set(_funds).intersection(_filter_funds) if _funds and _filter_funds \
+            else (_funds or _filter_funds)
         if funds:
             filters.update({'funds': funds})
 
@@ -94,7 +98,8 @@ class EruditDocumentSolrFilter(object):
         _publication_types = query_params.getlist('publication_types', [])
         _filter_publication_types = query_params.getlist('filter_publication_types', [])
         publication_types = set(_publication_types).intersection(_filter_publication_types) if \
-            _publication_types else _filter_publication_types
+            _publication_types and _filter_publication_types \
+            else (_publication_types or _filter_publication_types)
         if publication_types:
             filters.update({'publication_types': publication_types})
 
