@@ -50,9 +50,9 @@ $article-toolbar-width: 80px;
     h1 {
       margin-bottom: 0.25em;
       font-size: 1.75em;
+      line-height: 1.15;
       > span + span {
-        font-size: smaller;
-        margin-top: 0.5em;
+        margin-top: 0.35em;
       }
     }
 
@@ -102,10 +102,58 @@ $article-toolbar-width: 80px;
 
     }
 
+    .title-tag {
+      margin-top: 0;
+    }
+
+    .surtitre,
+    .surtitreparal {
+      color: $dark-grey;
+
+      &::after {
+        content: ' / ';
+      }
+
+      &:last-of-type {
+
+        &::after {
+          content: none;
+        }
+
+      }
+
+    }
+
+    .titre:first-child,
+    .trefbiblio:only-child,
+    .titreparal {
+      @include fw-sans-bold();
+
+      em {
+        @include fw-sans-bold-italic();
+      }
+
+    }
+
+    .sstitre,
+    .sstitreparal,
+    .trefbiblio {
+      @include fw-sans-normal();
+      font-size: smaller;
+
+      em {
+        @include fw-sans-normal-italic();
+      }
+
+    }
+
+    .titreparal {
+      color: $dark-grey;
+
+    }
+
     .sstitre {
-      font-size: 1.75em;
-      margin: 0 0 0.75em 0;
-      line-height: 1;
+      margin: 0.35em 0;
     }
 
     .issue-cover {
@@ -173,10 +221,6 @@ $article-toolbar-width: 80px;
       .meta-journal--title {
         display: block;
         margin-top: 5px;
-      }
-
-      .refpapier {
-
       }
 
       .theme {
