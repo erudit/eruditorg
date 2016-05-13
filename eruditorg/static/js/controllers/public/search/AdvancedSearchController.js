@@ -1,9 +1,15 @@
+import Select2 from 'select2/dist/js/select2.full';
+
+
 export default {
   init() {
     console.log("Advanced search!");
 
     let $form = $('#id_search');
     let $addButton = $('#id_add_q_field');
+
+    // Initializes the disciplines chooser
+    $('#id_disciplines').select2();
 
     // Initializes the search blocks
     $('#id_advanced_q_wrapper [data-q-id]').each(function() {
