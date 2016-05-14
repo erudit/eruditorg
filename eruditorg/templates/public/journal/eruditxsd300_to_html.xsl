@@ -395,10 +395,9 @@
 		</p>
 	</xsl:template>
 	<xsl:template match="no" mode="para">
-		<h5 class="nopara">
+		<span class="nopara" id="{../@id}">
 			<xsl:apply-templates/>
-			<!-- <xsl:text></xsl:text> -->
-		</h5>
+		</span>
 	</xsl:template>
 	<xsl:template match="section1/alinea|section2/alinea|section3/alinea|section4/alinea|section5/alinea|section6/alinea|grannexe/alinea"  priority="1">
 		<p class="horspara">
