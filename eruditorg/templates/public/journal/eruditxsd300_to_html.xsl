@@ -1,5 +1,5 @@
 {% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
 	<xsl:output method="html" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="*"/>
 
@@ -52,7 +52,7 @@
 	<xsl:template match="article">
 
 		<!-- main header for article -->
-		<header class="row page-header-main article-header">
+		<header class="row page-header-main article-header" id="article-header">
 
 			<hgroup class="col-xs-12 child-column-fit">
 
@@ -134,42 +134,6 @@
 
 		</header>
 
-    <!--=== sticky header for article ===-->
-    <header class="container article-header-sticky hidden-xs hidden-sm">
-      <div class="border-bottom">
-        <div class="row no-margin">
-          <h1 id="brand" class="col-md-1">
-            <a href="/">
-              <img src="/static/svg/logo-erudit-small.svg" alt="Erudit" class="img-responsive" />
-            </a>
-          </h1>
-
-          <hgroup class="col-md-7">
-            <h2>
-              <xsl:if test="liminaire/grtitre/titre">
-                <xsl:apply-templates select="liminaire/grtitre/titre"/>
-              </xsl:if>
-            </h2>
-          </hgroup>
-
-          <!-- meta journal -->
-          <hgroup class="meta-journal col-md-4">
-            <div>
-              {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-              <a class="meta-journal--title bold" href="{$urlSavant}{$titreAbrege}">
-                <xsl:value-of select="admin/revue/titrerev"/>
-              </a>
-            </div>
-
-            <xsl:apply-templates select="admin/numero" mode="refpapier"/>
-          </hgroup>
-
-          <a href="#" class="pagination next-page"><span class="ion ion-ios-arrow-right"></span></a>
-          <a href="#" class="pagination previous-page"><span class="ion ion-ios-arrow-left"></span></a>
-        </div>
-      </div>
-    </header>
-
 		<!--=== plan de l'article ===-->
 		<div id="article-content" class="row border-top">
 			<xsl:if test="//corps">
@@ -177,54 +141,68 @@
         <nav class="col-md-3 article-table-of-contents" role="contents">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
-            <li class="debutArticle italic">
-              <a href="#">
+            <li class="scroll-top">
+              <a href="#article-header">
                 <em>{% trans "Retour au début" %}</em>
               </a>
             </li>
             <xsl:if test="//resume">
-              <li class="border-top">
+              <li>
                 <a href="#resume">{% trans "Résumé" %}</a>
               </li>
             </xsl:if>
-            <li class="border-top article-table-of-contents--body">
-              <ol class="unstyled">
-                <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc"/>
-              </ol>
-            </li>
-            <xsl:if test="//grannexe">
-              <li class="border-top">
-                <a href="#grannexe">
-                  <xsl:apply-templates select="//grannexe" mode="heading"/>
-                </a>
+            <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
+              <li class="article-toc--body">
+                <ul class="unstyled">
+                  <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-heading"/>
+                </ul>
               </li>
             </xsl:if>
-            <xsl:if test="//merci">
-              <li class="border-top">
-                <a href="#merci">
-                  <xsl:apply-templates select="//merci" mode="heading"/>
-                </a>
+            <xsl:for-each select="partiesann[1]">
+              <xsl:if test="grannexe">
+                <li>
+                  <a href="#grannexe">
+                    <xsl:apply-templates select="grannexe" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+              <xsl:if test="merci">
+                <li>
+                  <a href="#merci">
+                    <xsl:apply-templates select="merci" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+              <xsl:if test="grnotebio">
+                <li>
+                  <a href="#grnotebio">
+                    <xsl:apply-templates select="grnotebio" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+              <xsl:if test="grbiblio">
+                <li>
+                  <a href="#grbiblio">
+                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+              <xsl:if test="grnote">
+                <li>
+                  <a href="#grnote">
+                    <xsl:apply-templates select="grnote" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+            </xsl:for-each>
+            <xsl:if test="//figure">
+              <li>
+                <a href="#figures">{% trans "Liste des figures" %}</a>
               </li>
             </xsl:if>
-            <xsl:if test="//grnotebio">
-              <li class="border-top">
-                <a href="#grnotebio">
-                  <xsl:apply-templates select="//grnotebio" mode="heading"/>
-                </a>
-              </li>
-            </xsl:if>
-            <xsl:if test="//grnote">
-              <li class="border-top">
-                <a href="#grnote">
-                  <xsl:apply-templates select="//grnote" mode="heading"/>
-                </a>
-              </li>
-            </xsl:if>
-            <xsl:if test="//grbiblio">
-              <li class="border-top">
-                <a href="#grbiblio">
-                  <xsl:apply-templates select="//grbiblio" mode="heading"/>
-                </a>
+            <xsl:if test="//tableau">
+              <li>
+                <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
               </li>
             </xsl:if>
           </ul>
@@ -277,7 +255,7 @@
 				</aside>
 			</xsl:if>
 
-			<aside class="article-body col-md-7 col-md-offset-1">
+			<div class="article-body col-md-7 col-md-offset-1">
 
 				<!-- ********* Resume ******** -->
 				<xsl:if test="//resume">
@@ -299,26 +277,22 @@
 				<!-- ********* chaque annexe aura une <section> ******** -->
 				<xsl:apply-templates select="partiesann[node()]"/>
 
-				<!-- ********* listes figures / tableaux  ******** -->
-				<section id="listes" class="article-section listes" role="section">
+				<!-- Lists of tables and figures-->
+        <xsl:if test="//figure">
+          <section id="figures">
+            <h2>{% trans "Liste des figures" %}</h2>
+            <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
+          </section>
+        </xsl:if>
 
-				  <xsl:if test="//tableau">
-					<article id="tableau">
-					  <h4>{% trans "Liste des tableaux" %}</h4>
-					  <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
-					</article>
-				  </xsl:if>
+        <xsl:if test="//tableau">
+          <section id="tableaux">
+            <h2>{% trans "Liste des tableaux" %}</h2>
+            <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
+          </section>
+        </xsl:if>
 
-				  <xsl:if test="//figure">
-					<article id="figure">
-					  <h4>{% trans "Liste des figures" %}</h4>
-					  <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
-					</article>
-				  </xsl:if>
-
-				</section>
-
-			</aside>
+			</div>
 		</div>
 
 	</xsl:template>
@@ -1331,28 +1305,28 @@
   </xsl:template>
 
   <xsl:template match="grannexe | merci | grnotebio | grnote | grbiblio">
-      <footer id="{name()}" class="article-notes {name()}" role="contentinfo">
-          <h4>
+      <section id="{name()}" class="article-notes {name()}" role="contentinfo">
+          <h2>
               <xsl:choose>
                   <xsl:when test="self::grannexe">
-                      <xsl:apply-templates select="self::grannexe" mode="heading"/>
+                      <xsl:apply-templates select="self::grannexe" mode="toc-heading"/>
                   </xsl:when>
                   <xsl:when test="self::merci">
-                      <xsl:apply-templates select="self::merci" mode="heading"/>
+                      <xsl:apply-templates select="self::merci" mode="toc-heading"/>
                   </xsl:when>
                   <xsl:when test="self::grnotebio">
-                      <xsl:apply-templates select="self::grnotebio" mode="heading"/>
+                      <xsl:apply-templates select="self::grnotebio" mode="toc-heading"/>
                   </xsl:when>
                   <xsl:when test="self::grnote">
-                      <xsl:apply-templates select="self::grnote" mode="heading"/>
+                      <xsl:apply-templates select="self::grnote" mode="toc-heading"/>
                   </xsl:when>
                   <xsl:when test="self::grbiblio">
-                      <xsl:apply-templates select="self::grbiblio" mode="heading"/>
+                      <xsl:apply-templates select="self::grbiblio" mode="toc-heading"/>
                   </xsl:when>
               </xsl:choose>
-          </h4>
+          </h2>
           <xsl:apply-templates select="*[not(self::titre)]"/>
-      </footer>
+      </section>
   </xsl:template>
   <!-- annexe -->
   <xsl:template match="annexe">
@@ -1714,6 +1688,7 @@
     </li>
   </xsl:template>
 
+  <!-- admin notes: errata, article history, editor's notes... -->
   <xsl:template match="article/liminaire/notegen | article/liminaire/erratum | admin/histpapier">
     <div class="{name()}">
       <xsl:if test="titre">
@@ -1725,68 +1700,7 @@
     </div>
   </xsl:template>
 
-  <!-- element_nompers_affichage -->
-	<xsl:template name="element_nompers_affichage">
-		<xsl:param name="nompers"/>
-		<xsl:if test="$nompers[@typenompers = 'pseudonyme']">
-      <xsl:text> </xsl:text>
-			<xsl:text>{% trans "alias" %}</xsl:text>
-      <xsl:text> </xsl:text>
-		</xsl:if>
-		<xsl:if test="$nompers/prefixe/node()">
-			<xsl:call-template name="syntaxe_texte_affichage">
-				<xsl:with-param name="texte" select="$nompers/prefixe"/>
-			</xsl:call-template>
-			<xsl:text>
-			</xsl:text>
-		</xsl:if>
-		<xsl:if test="$nompers/prenom/node()">
-			<xsl:call-template name="syntaxe_texte_affichage">
-				<xsl:with-param name="texte" select="$nompers/prenom"/>
-			</xsl:call-template>
-		</xsl:if>
-		<xsl:if test="$nompers/autreprenom/node()">
-			<xsl:text>
-			</xsl:text>
-			<xsl:call-template name="syntaxe_texte_affichage">
-				<xsl:with-param name="texte" select="$nompers/autreprenom"/>
-			</xsl:call-template>
-		</xsl:if>
-		<xsl:if test="$nompers/nomfamille/node()">
-			<xsl:text>
-			</xsl:text>
-			<xsl:call-template name="syntaxe_texte_affichage">
-				<xsl:with-param name="texte" select="$nompers/nomfamille"/>
-			</xsl:call-template>
-		</xsl:if>
-		<xsl:for-each select="$nompers/suffixe[child::node()]">
-			<xsl:text>, </xsl:text>
-			<xsl:call-template name="syntaxe_texte_affichage">
-				<xsl:with-param name="texte" select="."/>
-			</xsl:call-template>
-		</xsl:for-each>
-	</xsl:template>
-
-	<!-- syntaxe_texte_affichage -->
-	<xsl:template name="syntaxe_texte_affichage">
-		<xsl:param name="texte" select="."/>
-		<xsl:for-each select="$texte/node()">
-			<xsl:choose>
-				<!-- #PCDATA -->
-				<xsl:when test="self::text()">
-					<xsl:value-of select="."/>
-				</xsl:when>
-				<!-- %texte -->
-				<xsl:otherwise>
-					<xsl:call-template name="entite_texte_affichage">
-						<xsl:with-param name="texte" select="."/>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:for-each>
-	</xsl:template>
-
-	<!-- numpublication -->
+	<!-- issue volume / number -->
   <xsl:template match="admin/numero" mode="refpapier">
     <span class="volumaison">
       <xsl:for-each select="volume | nonumero[1] | pub/periode | pub/annee | pagination">
@@ -1838,21 +1752,21 @@
     </span>
   </xsl:template>
 
-  <!-- thematique -->
+  <!-- themes -->
   <xsl:template match="admin/numero/grtheme/theme" mode="refpapier">
     <span class="{name()}">
       <xsl:apply-templates select="."/>
     </span>
   </xsl:template>
 
-	<!-- droitsauteur -->
+	<!-- copyright -->
   <xsl:template match="droitsauteur">
     <p class="{name()}">
       <small><xsl:value-of select="."/></small>
     </p>
   </xsl:template>
 
-	<!-- resume -->
+	<!-- abstracts -->
 	<xsl:template match="//resume">
 		<article id="{name()}-{@lang}" class="{name()}">
 			<xsl:if test="@lang='fr'">
@@ -1935,15 +1849,71 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<!-- toc -->
-    <xsl:template match="article/corps/section1/titre[not(@traitementparticulier='oui')]" mode="html_toc">
-      <li>
-        <a href="#{../@id}">
-          <xsl:apply-templates mode="html_toc"/>
-        </a>
-      </li>
-    </xsl:template>
-	<xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="heading">
+	<!-- table of contents headings -->
+  <xsl:template match="article/corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-heading">
+    <li>
+      <a href="#{../@id}">
+        <xsl:apply-templates mode="toc-heading"/>
+      </a>
+    </li>
+  </xsl:template>
+
+  <xsl:template match="renvoi | liensimple" mode="toc-heading">
+    <!-- do not display anything -->
+  </xsl:template>
+
+  <xsl:template match="marquage" mode="toc-heading">
+    <xsl:choose>
+      <xsl:when test="@typemarq='gras'">
+        <strong>
+          <xsl:apply-templates/>
+        </strong>
+      </xsl:when>
+      <xsl:when test="@typemarq='italique'">
+        <em>
+          <xsl:apply-templates/>
+        </em>
+      </xsl:when>
+      <xsl:when test="@typemarq='taillep'">
+        <small>
+          <xsl:apply-templates/>
+        </small>
+      </xsl:when>
+      <xsl:otherwise>
+        <span class="{@typemarq}">
+          <xsl:apply-templates/>
+        </span>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="exposant" mode="toc-heading">
+    <xsl:element name="sup">
+      <xsl:if test="@traitementparticulier = 'oui'">
+        <xsl:attribute name="class">
+          <xsl:text>{% trans "special" %}</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="syntaxe_texte_affichage">
+        <xsl:with-param name="texte" select="."/>
+      </xsl:call-template>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="indice" mode="toc-heading">
+    <xsl:element name="sub">
+      <xsl:if test="@traitementparticulier">
+        <xsl:attribute name="class">
+          <xsl:text>{% trans "special" %}</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="syntaxe_texte_affichage">
+        <xsl:with-param name="texte" select="."/>
+      </xsl:call-template>
+    </xsl:element>
+  </xsl:template>
+
+	<xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="toc-heading">
 		<xsl:if test="self::grannexe">
 			<xsl:choose>
 				<xsl:when test="titre">
@@ -1987,35 +1957,97 @@
 		</xsl:if>
 	</xsl:template>
 
-	<!-- entite_texte_affichage -->
-    <xsl:template name="entite_texte_affichage">
-      <xsl:param name="texte" select="."/>
-      <xsl:apply-templates select="$texte"/>
-    </xsl:template>
-    <!-- noteillustrationtype -->
-    <xsl:template name="noteillustrationtype">
-      <xsl:param name="noteIllustration"/>
-      <xsl:variable name="valeurID" select="$noteIllustration/@id"/>
-      <xsl:variable name="valeurIDREF" select="concat('re1', $valeurID)"/>
-      <div class="note">
-        <xsl:if test="$noteIllustration/no">
-          <a class="nonote" id="{$valeurID}">
-            <xsl:if test="//node()[@id = $valeurIDREF]">
-              <xsl:attribute name="href">
-                <xsl:value-of select="concat('#', $valeurIDREF)"/>
-              </xsl:attribute>
-            </xsl:if>
-            <xsl:text>[</xsl:text>
-            <xsl:call-template name="syntaxe_texte_affichage">
-              <xsl:with-param name="texte" select="$noteIllustration/no"/>
-            </xsl:call-template>
-            <xsl:text>]</xsl:text>
-          </a>
-        </xsl:if>
-        <xsl:for-each select="$noteIllustration/node()[name() != '' and name() != 'no']">
-          <xsl:apply-templates select="."/>
-        </xsl:for-each>
-      </div>
-    </xsl:template>
+  <!-- element_nompers_affichage -->
+	<xsl:template name="element_nompers_affichage">
+		<xsl:param name="nompers"/>
+		<xsl:if test="$nompers[@typenompers = 'pseudonyme']">
+      <xsl:text> </xsl:text>
+			<xsl:text>{% trans "alias" %}</xsl:text>
+      <xsl:text> </xsl:text>
+		</xsl:if>
+		<xsl:if test="$nompers/prefixe/node()">
+			<xsl:call-template name="syntaxe_texte_affichage">
+				<xsl:with-param name="texte" select="$nompers/prefixe"/>
+			</xsl:call-template>
+			<xsl:text>
+			</xsl:text>
+		</xsl:if>
+		<xsl:if test="$nompers/prenom/node()">
+			<xsl:call-template name="syntaxe_texte_affichage">
+				<xsl:with-param name="texte" select="$nompers/prenom"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="$nompers/autreprenom/node()">
+			<xsl:text>
+			</xsl:text>
+			<xsl:call-template name="syntaxe_texte_affichage">
+				<xsl:with-param name="texte" select="$nompers/autreprenom"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="$nompers/nomfamille/node()">
+			<xsl:text>
+			</xsl:text>
+			<xsl:call-template name="syntaxe_texte_affichage">
+				<xsl:with-param name="texte" select="$nompers/nomfamille"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:for-each select="$nompers/suffixe[child::node()]">
+			<xsl:text>, </xsl:text>
+			<xsl:call-template name="syntaxe_texte_affichage">
+				<xsl:with-param name="texte" select="."/>
+			</xsl:call-template>
+		</xsl:for-each>
+	</xsl:template>
+
+	<!-- syntaxe_texte_affichage -->
+	<xsl:template name="syntaxe_texte_affichage">
+		<xsl:param name="texte" select="."/>
+		<xsl:for-each select="$texte/node()">
+			<xsl:choose>
+				<!-- #PCDATA -->
+				<xsl:when test="self::text()">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<!-- %texte -->
+				<xsl:otherwise>
+					<xsl:call-template name="entite_texte_affichage">
+						<xsl:with-param name="texte" select="."/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:for-each>
+	</xsl:template>
+
+  <!-- entite_texte_affichage -->
+  <xsl:template name="entite_texte_affichage">
+    <xsl:param name="texte" select="."/>
+    <xsl:apply-templates select="$texte"/>
+  </xsl:template>
+
+  <!-- noteillustrationtype -->
+  <xsl:template name="noteillustrationtype">
+    <xsl:param name="noteIllustration"/>
+    <xsl:variable name="valeurID" select="$noteIllustration/@id"/>
+    <xsl:variable name="valeurIDREF" select="concat('re1', $valeurID)"/>
+    <div class="note">
+      <xsl:if test="$noteIllustration/no">
+        <a class="nonote" id="{$valeurID}">
+          <xsl:if test="//node()[@id = $valeurIDREF]">
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat('#', $valeurIDREF)"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:text>[</xsl:text>
+          <xsl:call-template name="syntaxe_texte_affichage">
+            <xsl:with-param name="texte" select="$noteIllustration/no"/>
+          </xsl:call-template>
+          <xsl:text>]</xsl:text>
+        </a>
+      </xsl:if>
+      <xsl:for-each select="$noteIllustration/node()[name() != '' and name() != 'no']">
+        <xsl:apply-templates select="."/>
+      </xsl:for-each>
+    </div>
+  </xsl:template>
 
 </xsl:stylesheet>
