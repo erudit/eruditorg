@@ -411,6 +411,12 @@ $article-toolbar-width: 80px;
       a.is-inview,
       &.is-inview a.is-insubview {
         color: $coral-red;
+
+        &.active, &:hover, &:active {
+          color: #FFF;
+        }
+
+
       }
 
       &:last-child {
