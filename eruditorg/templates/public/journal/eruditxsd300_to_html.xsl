@@ -141,7 +141,7 @@
         <nav class="col-md-3 article-table-of-contents" role="contents">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
-            <li class="scroll-top">
+            <li>
               <a href="#article-header">
                 <em>{% trans "Retour au début" %}</em>
               </a>

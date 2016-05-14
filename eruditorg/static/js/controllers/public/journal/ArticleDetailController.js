@@ -65,7 +65,7 @@ export default {
       var target = $(this).attr('href').replace('#', '');
       if( !target ) return false;
 
-      $('html, body').animate( { scrollTop: _this.article.find('.article-body #'+target).offset().top - _this.sticky_header_height - 30 }, 750 );
+      $('html, body').animate( { scrollTop: _this.article.find('#'+target).offset().top - _this.sticky_header_height - 30 }, 750 );
       return false;
     });
   },
@@ -103,7 +103,7 @@ export default {
         toc_body_anchor = toc_body.find('a');
 
     var spy = new ScrollSpy( spy_target, {
-      nav: '.article-table-of-contents > nav > ul > li:not(.debutArticle) > a',
+      nav: 'nav.article-table-of-contents ul li a',
       className: 'is-inview',
       callback: function(elements) {
 
