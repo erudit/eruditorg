@@ -368,42 +368,53 @@ $article-toolbar-width: 80px;
   /**
   * article table of contents
   */
+
   .article-table-of-contents {
     padding-top: $margin-vertical-default;
     position: relative;
     will-change: transform;
     @include transition(transform 0.3s ease-out);
 
-    h4 {
-      margin-bottom: 1em;
+    em {
+      @include fw-sans-normal-italic
+      strong {
+        @include fw-sans-bold-italic;
+      }
+    }
+
+    strong {
+      @include fw-sans-bold;
+      .em {
+        @include fw-sans-bold-italic;
+      }
     }
 
     li {
-      padding: 1em 0;
-
-      &.border-top:before {
-        left: 0;
-      }
+      border-bottom: 1px solid $mid-grey;
 
       a {
         color: $text-color;
         text-decoration: none;
+        display: block;
+        padding: 0.75em 0;
+        @include transition(padding 0.05s ease-in);
 
         &.active, &:hover, &:active {
-          color: $coral-red;
+          color: #FFF;
+          background-color: $coral-red;
+          padding: 0.75em 0.25em;
+          @include transition(padding 0.05s ease-out);
         }
-      }
 
-      // second level ol
-      ol {
-        li {
-          padding: 0.25em 0;
-        }
       }
 
       a.is-inview,
       &.is-inview a.is-insubview {
         color: $coral-red;
+      }
+
+      &:last-child {
+        border: none;
       }
 
     }
