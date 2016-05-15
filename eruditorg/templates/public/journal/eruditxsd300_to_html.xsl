@@ -1769,9 +1769,18 @@
 	<xsl:template match="//resume">
 		<article id="{name()}-{@lang}" class="{name()}">
 			<xsl:if test="@lang='fr'">
-				<h2>Résumé</h2>
+        <h2>
+          <xsl:choose>
+            <xsl:when test="titre">
+              <xsl:value-of select="titre"/>
+            </xsl:when>
+            <xsl:otherwise>
+              Résumé
+            </xsl:otherwise>
+          </xsl:choose>
+        </h2>
 				<p>
-					<xsl:apply-templates/>
+					<xsl:apply-templates select="*[not(self::titre)]"/>
 				</p>
 				<xsl:if test="//grmotcle[@lang='fr']/motcle">
 					<div class="motscles">
@@ -1790,10 +1799,19 @@
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='en'">
-				<h2>Abstract</h2>
+        <h2>
+          <xsl:choose>
+            <xsl:when test="titre">
+              <xsl:value-of select="titre"/>
+            </xsl:when>
+            <xsl:otherwise>
+              Abstract
+            </xsl:otherwise>
+          </xsl:choose>
+        </h2>
 				<xsl:apply-templates select="//grtitre/titreparal[@lang='en']" mode="abstract"/>
         <p>
-					<xsl:apply-templates/>
+					<xsl:apply-templates select="*[not(self::titre)]"/>
 				</p>
 				<xsl:if test="//grmotcle[@lang='en']/motcle">
 					<div class="motscles">
@@ -1812,10 +1830,19 @@
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="@lang='es'">
-				<h2>Resumen</h2>
+        <h2>
+          <xsl:choose>
+            <xsl:when test="titre">
+              <xsl:value-of select="titre"/>
+            </xsl:when>
+            <xsl:otherwise>
+              Resumen
+            </xsl:otherwise>
+          </xsl:choose>
+        </h2>
 				<xsl:apply-templates select="//grtitre/titreparal[@lang='es']" mode="abstract"/>
         <p>
-					<xsl:apply-templates/>
+					<xsl:apply-templates select="*[not(self::titre)]"/>
 				</p>
 				<xsl:if test="//grmotcle[@lang='es']/motcle">
 					<div class="motscles">
