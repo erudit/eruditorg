@@ -218,8 +218,8 @@
 							</button>
 						</li>
 						<li>
-							<button id="tool-quote" data-modal-id="#id_quote_modal_{{ article.id }}">
-								<span class="erudicon erudicon-tools-quote"></span>
+							<button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
+								<span class="erudicon erudicon-tools-cite"></span>
 								<span class="tools-label">{% trans "Citer cet article" %}</span>
 							</button>
 						</li>
