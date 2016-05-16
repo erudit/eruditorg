@@ -285,5 +285,5 @@ gulp.task('watch', function() {
   gulp.watch(iconfont_dir + '/**/*.svg', ['iconfont']);
 
   /* Trigger a live reload on any Django template changes */
-  gulp.watch([templates_dirs + '/**/*.html', templates_dirs + '**/*.xls']).on('change', livereload.changed);
+  gulp.watch([templates_dirs + '/**/*.html', templates_dirs + '**/*.xsl']).on('change', livereload.changed);
 });
