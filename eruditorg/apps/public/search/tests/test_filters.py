@@ -193,16 +193,26 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_collections(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request_1 = Request(self.factory.get('/', data={
+            'basic_search_term': 'test',
+            'basic_search_field': 'meta',
+            'journals': ['Arborescences', ],
+        }))
+        request_2 = Request(self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_collections': ['Arborescences', ],
         }))
-        filt = EruditDocumentSolrFilter()
+        filt_1 = EruditDocumentSolrFilter()
+        filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt_1.filter(request_1, EruditDocument.objects.all(), None)
+        filt_2.filter(request_2, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._qs,
+            filt_1.sqs._qs,
+            '((*:*) AND (Metadonnees:test)) AND ((TitreCollection_fac:"Arborescences"))')
+        self.assertEqual(
+            filt_2.sqs._qs,
             '((*:*) AND (Metadonnees:test)) AND ((TitreCollection_fac:"Arborescences"))')
 
     @unittest.mock.patch.object(Query, 'get_results')

@@ -8,7 +8,6 @@ from django.views.generic import View
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
 from django.utils.encoding import smart_text
-from django.utils.translation import ugettext_lazy as _
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
@@ -16,12 +15,11 @@ from erudit.models import EruditDocument
 from erudit.serializers import EruditDocumentSerializer
 
 from . import filters
-from .conf import settings as search_settings
-from .forms import ADVANCED_SEARCH_FIELDS
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .pagination import EruditDocumentPagination
+from .utils import get_search_elements
 
 
 class EruditDocumentListAPIView(ListAPIView):
@@ -134,50 +132,6 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
             form_kwargs.update({'data': self.request.GET, })
         return form_kwargs
 
-    def get_search_elements(self):
-        """ Returns the search query elements in a readable way.
-
-        This should be used to express a query using the following format:
-
-            (Titre, résumé, mots-clés : pedagogi*) ET (Titre, résumé, mots-clés : drama*) [...]
-
-        """
-        params = self.request.GET.copy()
-        fields_correspondence = dict(ADVANCED_SEARCH_FIELDS)
-        operator_correspondence = {
-            'AND': _('ET'),
-            'OR': _('OU'),
-            'NOT': _('NON'),
-        }
-
-        search_elements = []
-
-        def elements(t, f, o):
-            f = fields_correspondence.get(f, f)
-            o_, o = o, operator_correspondence.get(o, o)
-            return {
-                'term': t,
-                'field': f,
-                'operator': o_,
-                'str': ('({field} : {term})'.format(field=f, term=t) if o is None
-                        else ' {op} ({field} : {term})'.format(op=o, field=f, term=t)),
-            }
-
-        q1_term = params.get('basic_search_term', '*')
-        q1_field = params.get('basic_search_field', 'all')
-        q1_operator = params.get('basic_search_operator', None)
-        q1_operator = 'NOT' if q1_operator is not None else None
-        search_elements.append(elements(q1_term, q1_field, q1_operator))
-
-        for i in range(search_settings.MAX_ADVANCED_PARAMETERS):
-            q_term = params.get('advanced_search_term{}'.format(i + 1), None)
-            q_field = params.get('advanced_search_field{}'.format(i + 1), 'all')
-            q_operator = params.get('advanced_search_operator{}'.format(i + 1), None)
-            if q_term and q_operator in operator_correspondence:
-                search_elements.append(elements(q_term, q_field, q_operator))
-
-        return search_elements
-
     def get_context_data(self, **kwargs):
         context = super(SearchResultsView, self).get_context_data(**kwargs)
         results = context.get('results', None)
@@ -186,7 +140,7 @@ class SearchResultsView(TemplateResponseMixin, FormMixin, View):
             context['main_qterm'] = self.request.GET.get('basic_search_term', '')
             context['start_at'] = (results['pagination']['current_page'] - 1) \
                 * results['pagination']['page_size']
-            context['search_elements'] = self.get_search_elements()
+            context['search_elements'] = get_search_elements(self.request)
 
         return context
 

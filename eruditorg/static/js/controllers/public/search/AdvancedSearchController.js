@@ -3,7 +3,6 @@ import Select2 from 'select2/dist/js/select2.full';
 
 export default {
   init() {
-    console.log("Advanced search!");
 
     let $form = $('#id_search');
     let $addButton = $('#id_add_q_field');
@@ -11,6 +10,7 @@ export default {
     // Initializes the Select2 choosers
     $('#id_disciplines').select2();
     $('#id_languages').select2();
+    $('#id_journals').select2();
 
     // Initializes the search blocks
     $('#id_advanced_q_wrapper [data-q-id]').each(function() {

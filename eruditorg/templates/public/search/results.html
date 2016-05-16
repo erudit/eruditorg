@@ -7,6 +7,10 @@
 
 {% block data-controller %}public:search:results{% endblock data-controller %}
 
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a>
+{% endblock %}
+
 {% block content %}
 <section id="search-page" class="container">
 
@@ -69,6 +73,7 @@
               {{ search_form.publication_types }}
               {{ search_form.disciplines }}
               {{ search_form.languages }}
+              {{ search_form.journals }}
             </div>
           </fieldset>
 
