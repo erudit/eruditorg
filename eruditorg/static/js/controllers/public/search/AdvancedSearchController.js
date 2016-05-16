@@ -11,6 +11,7 @@ export default {
     // Initializes the Select2 choosers
     $('#id_disciplines').select2();
     $('#id_languages').select2();
+    $('#id_journals').select2();
 
     // Initializes the search blocks
     $('#id_advanced_q_wrapper [data-q-id]').each(function() {

@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 from erudit.models import Discipline
+from erudit.models import Journal
 
 
 OPERATORS = (
@@ -129,6 +130,8 @@ class SearchForm(forms.Form):
 
     disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
 
+    journals = forms.MultipleChoiceField(label=_('Revues'), required=False)
+
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
 
@@ -138,6 +141,7 @@ class SearchForm(forms.Form):
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
 
         self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in Discipline.objects.all()]
+        self.fields['journals'].choices = [(j.name_fr, j.name) for j in Journal.objects.all()]
 
     def clean(self):
         cleaned_data = super(SearchForm, self).clean()

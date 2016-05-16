@@ -94,6 +94,15 @@
             </div>
           </div>
         </div>
+        <div class="col-md-4">
+          <div id="div_id_{{ form.journals.html_name }}" class="form-group{% if form.journals.errors %} has-error{% endif %}">
+            <div class="controls">
+              <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
+              {{ form.journals|add_class:'form-control' }}
+              {% for error in form.journals.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-6">
