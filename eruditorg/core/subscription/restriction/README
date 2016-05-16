@@ -1,0 +1,33 @@
+Installation
+============
+
+settings_env.py configuration sample
+------------------------------------
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'zenon',
+        'USER': 'zenon',
+        'PASSWORD': 'notsecret',
+        'HOST': '',
+    },
+    'restriction': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'restriction',
+        'USER': 'zenon',
+        'PASSWORD': 'notsecret',
+        'HOST': '',
+    }
+}
+
+DATABASE_ROUTERS = ['core.subscription.restriction.router.RestrictionRouter', ]
+
+
+Use
+===
+
+Import restrictions
+-------------------
+
+python manage.py restriction import_restrictions
