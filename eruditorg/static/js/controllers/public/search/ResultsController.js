@@ -4,7 +4,6 @@ import Toolbox from '../../../modules/public/Toolbox';
 
 export default {
   init() {
-    console.log("Search!");
 
     this.toolbox();
 
