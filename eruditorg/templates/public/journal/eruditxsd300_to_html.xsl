@@ -57,18 +57,19 @@
 			<hgroup class="col-xs-12 child-column-fit">
 
 				<div class="col-sm-9">
-					<h1>
-						<xsl:if test="liminaire/grtitre/titre">
-							<xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
-						</xsl:if>
-						<xsl:if test="liminaire/grtitre/trefbiblio">
-							<xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
-						</xsl:if>
-					</h1>
-
-          <xsl:if test="liminaire/grtitre/sstitre">
-            <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
+          <xsl:if test="liminaire/grtitre/surtitre">
+            <p class="title-tag">
+              <xsl:apply-templates select="liminaire/grtitre/surtitre" mode="title"/>
+              <xsl:apply-templates select="liminaire/grtitre/surtitreparal" mode="title"/>
+            </p>
           </xsl:if>
+					<h1>
+						<xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
+            <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
+						<xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
+            <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
+						<xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
+					</h1>
 
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur">
@@ -1599,19 +1600,32 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio" mode="title">
+  <!-- article section title -->
+  <xsl:template match="liminaire/grtitre/surtitre | liminaire/grtitre/surtitreparal" mode="title">
+    <xsl:for-each select="child::node()">
+      <span class="surtitre">
+        <xsl:apply-templates select="."/>
+      </span>
+    </xsl:for-each>
+  </xsl:template>
+
+  <!-- article title(s) -->
+  <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
       <xsl:apply-templates/>
     </span>
   </xsl:template>
 
-  <xsl:template match="article/liminaire/grtitre/sstitre" mode="title">
-    <p class="{name()}">
-      <xsl:apply-templates/>
-    </p>
+  <!-- alternate title(s) for multilingual articles -->
+  <xsl:template match="article/liminaire/grtitre/titreparal | article/liminaire/grtitre/sstitreparal" mode="title">
+    <xsl:if test="not(//resume)">
+      <span class="{name()}">
+        <xsl:apply-templates/>
+      </span>
+    </xsl:if>
   </xsl:template>
 
-  <!-- auteur(s) -->
+  <!-- author(s) - person or organisation -->
   <xsl:template match="auteur" mode="author">
     <xsl:param name="version"/>
     <xsl:variable name="traducteur">
@@ -1809,14 +1823,16 @@
   </xsl:template>
   <xsl:template match="pagination">
     <span class="{name()}">
-      <xsl:text>, </xsl:text>
-      <xsl:choose>
-        <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
-        <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
-      </xsl:choose>
+      <xsl:if test="ppage | dpage != '0'">
+        <xsl:text>, </xsl:text>
+        <xsl:choose>
+          <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
+          <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
     </span>
   </xsl:template>
-  <xsl:template match="ppage|dpage">
+  <xsl:template match="ppage | dpage">
     <span class="{name()}">
       <xsl:value-of select="."/>
     </span>
