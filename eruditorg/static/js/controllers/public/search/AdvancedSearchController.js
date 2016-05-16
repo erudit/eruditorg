@@ -3,7 +3,6 @@ import Select2 from 'select2/dist/js/select2.full';
 
 export default {
   init() {
-    console.log("Advanced search!");
 
     let $form = $('#id_search');
     let $addButton = $('#id_add_q_field');
