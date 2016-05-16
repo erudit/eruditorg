@@ -307,12 +307,12 @@
 	<xsl:template match="section1">
 		<div id="{@id}">
 			<xsl:if test="titre">
-				<h4 class="sub-section-title">
+				<xsl:element name="h2">
 					<xsl:if test="titre/@traitementparticulier">
 						<xsl:attribute name="class">{% trans "special" %}</xsl:attribute>
 					</xsl:if>
 					<xsl:apply-templates select="titre"/>
-				</h4>
+				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
 		</div>
