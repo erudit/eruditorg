@@ -67,7 +67,8 @@ class RestrictionProfile(models.Model):
     """ Restriction account used in erudit.org to access protected content. """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
     organisation = models.OneToOneField(Organisation, verbose_name=_('Organisation'))
-    password = models.CharField(max_length=50, verbose_name=_('Mot de passe'), blank=True)
+    password = models.CharField(
+        max_length=50, verbose_name=_('Mot de passe'), blank=True, null=True)
     restriction_id = models.PositiveIntegerField(verbose_name=_('Identifiant DB Restriction'))
 
     class Meta:
