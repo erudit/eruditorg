@@ -9,12 +9,16 @@ from django.db import transaction
 from django.db.models import Q
 
 from core.accounts.models import RestrictionProfile
+from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalAccessSubscriptionPeriod
 from erudit.models import Journal
 from erudit.models import Organisation
 
 from .restriction_models import Abonne
+from .restriction_models import Adressesip
+from .restriction_models import Ipabonne
+from .restriction_models import Ipabonneinterval
 from .restriction_models import Revue
 from .restriction_models import Revueabonne
 
@@ -128,4 +132,39 @@ class Command(BaseCommand):
 
         subscription_period.save()
 
+        # STEP 4: creates the IP whitelist associated with the subscription
+        # --
+
+        restriction_subscriber_ips_set1 = Ipabonne.objects.filter(
+            abonneid=str(restriction_subscriber.pk))
+        for ip in restriction_subscriber_ips_set1:
+            ip_start, ip_end = self._get_ip_range_from_ip(ip.ip)
+            InstitutionIPAddressRange.objects.get_or_create(
+                subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+
+        restriction_subscriber_ips_set2 = Adressesip.objects.filter(
+            abonneid=restriction_subscriber.pk)
+        for ip in restriction_subscriber_ips_set2:
+            ip_start, ip_end = self._get_ip_range_from_ip(ip.ip)
+            InstitutionIPAddressRange.objects.get_or_create(
+                subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+
+        restriction_subscriber_ips_ranges = Ipabonneinterval.objects.filter(
+            abonneid=restriction_subscriber.pk)
+        for ip_range in restriction_subscriber_ips_ranges:
+            ip_start = self._get_ip(ip_range.debutinterval, repl='0')
+            ip_end = self._get_ip(ip_range.fininterval, repl='255')
+            InstitutionIPAddressRange.objects.get_or_create(
+                subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+
+    def _get_ip_range_from_ip(self, ip):
+        if '*' not in ip:
+            return ip, ip
+        return self._get_ip(ip, repl='0'), self._get_ip(ip, repl='255')
+
+    def _get_ip(self, ip, repl='0'):
+        ipl = ip.split('.')
+        ipl_new = [repl if n == '*' else n for n in ipl]
+        return '.'.join(ipl_new)
