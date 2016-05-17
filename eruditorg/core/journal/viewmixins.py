@@ -64,8 +64,8 @@ class ArticleAccessCheckMixin(object):
         """
         article = self.get_article()
 
-        # 1- Is the article in open access?
-        if article.open_access:
+        # 1- Is the article in open access? Is the article subject to a movable limitation?
+        if article.open_access or not article.has_movable_limitation:
             return True
 
         # 2- Is the current user allowed to access the article?

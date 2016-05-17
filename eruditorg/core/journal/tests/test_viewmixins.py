@@ -81,6 +81,27 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         # Run # check
         self.assertTrue(view.has_access())
 
+    def test_can_grant_access_to_an_article_has_no_movable_limitation(self):
+        # Setup
+        now_dt = dt.datetime.now()
+
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.date(now_dt.year - 5, 3, 20),
+            localidentifier='test', open_access=False)
+        article = ArticleFactory.create(issue=issue)
+
+        class MyView(ArticleAccessCheckMixin):
+            def get_article(self):
+                return article
+
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        view = MyView()
+        view.request = request
+
+        # Run # check
+        self.assertTrue(view.has_access())
+
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self):
         # Setup
         issue = IssueFactory.create(

@@ -11,6 +11,7 @@ from erudit.factories import ArticleFactory
 from erudit.factories import AuthorFactory
 from erudit.factories import IssueFactory
 from erudit.factories import JournalFactory
+from erudit.factories import JournalTypeFactory
 
 from .base import BaseEruditTestCase
 
@@ -122,6 +123,78 @@ class TestIssue(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.issue.pid, 'erudit:erudit.dummy139.dummy1234')
 
+    def test_knows_if_it_has_a_movable_limitation_in_case_of_scientific_journals(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        self.journal.type = JournalTypeFactory.create(code='S')
+        self.journal.save()
+        issue_1 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 3, 3, 20))
+        issue_2 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 1, 3, 20))
+        issue_3 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        # Run & check
+        self.assertTrue(issue_1.has_movable_limitation)
+        self.assertTrue(issue_2.has_movable_limitation)
+        self.assertFalse(issue_3.has_movable_limitation)
+
+    def test_knows_if_it_has_a_movable_limitation_in_case_of_non_scientific_journals(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        self.journal.type = JournalTypeFactory.create(code='C')
+        self.journal.save()
+        issue_1 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 3, 3, 20))
+        issue_2 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 1, 3, 20))
+        issue_3 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        # Run & check
+        self.assertFalse(issue_1.has_movable_limitation)
+        self.assertTrue(issue_2.has_movable_limitation)
+        self.assertFalse(issue_3.has_movable_limitation)
+
+    def test_knows_that_issues_with_open_access_has_no_movable_limitation(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        self.journal.type = JournalTypeFactory.create(code='C')
+        self.journal.save()
+        issue_1 = IssueFactory.create(
+            journal=self.journal, open_access=True,
+            date_published=dt.date(now_dt.year - 3, 3, 20))
+        issue_2 = IssueFactory.create(
+            journal=self.journal, open_access=True,
+            date_published=dt.date(now_dt.year - 1, 3, 20))
+        issue_3 = IssueFactory.create(
+            journal=self.journal, open_access=None,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        # Run & check
+        self.assertFalse(issue_1.has_movable_limitation)
+        self.assertFalse(issue_2.has_movable_limitation)
+        self.assertFalse(issue_3.has_movable_limitation)
+
+    def test_knows_that_an_issue_without_publication_date_has_no_movable_limitation(self):
+        # Setup
+        self.journal.type = JournalTypeFactory.create(code='C')
+        self.journal.save()
+        issue_1 = IssueFactory.create(
+            journal=self.journal, open_access=True, date_published=None)
+        issue_2 = IssueFactory.create(
+            journal=self.journal, open_access=True, date_published=None)
+        issue_3 = IssueFactory.create(
+            journal=self.journal, open_access=None, date_published=None)
+        # Run & check
+        self.assertFalse(issue_1.has_movable_limitation)
+        self.assertFalse(issue_2.has_movable_limitation)
+        self.assertFalse(issue_3.has_movable_limitation)
+
 
 class TestArticle(BaseEruditTestCase):
 
@@ -151,6 +224,28 @@ class TestArticle(BaseEruditTestCase):
         # Run 1 check
         self.assertTrue(article_1.open_access)
         self.assertFalse(article_2.open_access)
+
+    def test_knows_if_it_has_a_movable_limitation(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        self.journal.type = JournalTypeFactory.create(code='S')
+        self.journal.save()
+        issue_1 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 3, 3, 20))
+        issue_2 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 1, 3, 20))
+        issue_3 = IssueFactory.create(
+            journal=self.journal, open_access=False,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        article_1 = ArticleFactory.create(issue=issue_1)
+        article_2 = ArticleFactory.create(issue=issue_2)
+        article_3 = ArticleFactory.create(issue=issue_3)
+        # Run & check
+        self.assertTrue(article_1.has_movable_limitation)
+        self.assertTrue(article_2.has_movable_limitation)
+        self.assertFalse(article_3.has_movable_limitation)
 
 
 class TestAuthor(BaseEruditTestCase):
