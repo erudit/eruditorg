@@ -37,7 +37,8 @@ class TestJournal(BaseEruditTestCase):
         issue_1 = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
         issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        IssueFactory.create(journal=self.journal, date_published=None)
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
 
@@ -46,7 +47,8 @@ class TestJournal(BaseEruditTestCase):
         issue_1 = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
         IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        IssueFactory.create(journal=self.journal, date_published=None)
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(self.journal.first_issue, issue_1)
 
@@ -55,7 +57,8 @@ class TestJournal(BaseEruditTestCase):
         IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
         issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        IssueFactory.create(journal=self.journal, date_published=None)
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(self.journal.last_issue, issue_2)
 
@@ -68,7 +71,9 @@ class TestJournal(BaseEruditTestCase):
             open_access=True)
         IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), open_access=False)
-        IssueFactory.create(journal=self.journal, date_published=None, open_access=True)
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30),
+            open_access=True)
         # Run & check
         self.assertEqual(self.journal.last_oa_issue, issue_2)
 
@@ -175,21 +180,6 @@ class TestIssue(BaseEruditTestCase):
         issue_3 = IssueFactory.create(
             journal=self.journal, open_access=None,
             date_published=dt.date(now_dt.year - 5, 3, 20))
-        # Run & check
-        self.assertFalse(issue_1.has_movable_limitation)
-        self.assertFalse(issue_2.has_movable_limitation)
-        self.assertFalse(issue_3.has_movable_limitation)
-
-    def test_knows_that_an_issue_without_publication_date_has_no_movable_limitation(self):
-        # Setup
-        self.journal.type = JournalTypeFactory.create(code='C')
-        self.journal.save()
-        issue_1 = IssueFactory.create(
-            journal=self.journal, open_access=True, date_published=None)
-        issue_2 = IssueFactory.create(
-            journal=self.journal, open_access=True, date_published=None)
-        issue_3 = IssueFactory.create(
-            journal=self.journal, open_access=None, date_published=None)
         # Run & check
         self.assertFalse(issue_1.has_movable_limitation)
         self.assertFalse(issue_2.has_movable_limitation)

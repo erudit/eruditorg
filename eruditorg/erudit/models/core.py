@@ -301,7 +301,7 @@ class Journal(FedoraMixin, FedoraDated):
 
     @property
     def published_issues(self):
-        return self.issues.filter(date_published__isnull=False)
+        return self.issues.filter(date_published__lte=dt.datetime.now().date())
 
     @property
     def first_issue(self):
@@ -431,7 +431,6 @@ class Issue(FedoraMixin, FedoraDated):
         verbose_name=_("Date de production"),
     )
     date_published = models.DateField(
-        null=True, blank=True,
         verbose_name=_("Date de publication"),
     )
 
@@ -453,17 +452,17 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number. """
-        if self.volume and self.number and self.date_published:
+        if self.volume and self.number:
             return _(
                 'Volume {volume}, numéro {number}, {publication_date}'.format(
                     volume=self.volume, number=self.number,
                     publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
-        elif self.volume and self.date_published:
+        elif self.volume:
             return _(
                 'Volume {volume}, {publication_date}'.format(
                     volume=self.volume,
                     publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
-        elif self.number and self.date_published:
+        elif self.number:
             return _(
                 'Numéro {number}, {publication_date}'.format(
                     number=self.number,
@@ -473,7 +472,7 @@ class Issue(FedoraMixin, FedoraDated):
     def has_movable_limitation(self):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         open_access = self.open_access or (self.open_access is None and self.journal.open_access)
-        if self.date_published is not None and not open_access:
+        if not open_access:
             publication_year = self.date_published.year
             current_year = dt.datetime.now().year
             year_offset = 4 if self.journal.type and self.journal.type.code == 'S' else 2
