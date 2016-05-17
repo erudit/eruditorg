@@ -209,28 +209,28 @@
 				{% endif %}
 
         <!-- toolbox -->
-				<aside class="pull-right toolbox">
-					<ul class="unstyled">
-						<li>
-							<button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
-								<span class="erudicon erudicon-tools-pdf"></span>
-								<span class="tools-label">{% trans "Télécharger" %}</span>
-							</button>
-						</li>
-						<li>
-							<button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
-								<span class="erudicon erudicon-tools-cite"></span>
+        <aside class="pull-right toolbox">
+          <ul class="unstyled">
+            <li>
+              <button id="tool-citation-save" data-citation-save="#article-detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+                <span class="erudicon erudicon-tools-save"></span>
+                <span class="tools-label">{% trans "Sauvegarder" %}</span>
+              </button>
+              <button id="tool-citation-remove" data-citation-remove="#article-detail"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+                <span class="erudicon erudicon-tools-save"></span>
+                <span class="tools-label">{% trans "Supprimer" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
+                <span class="erudicon erudicon-tools-pdf"></span>
+                <span class="tools-label">{% trans "Télécharger" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
+                <span class="erudicon erudicon-tools-cite"></span>
 								<span class="tools-label">{% trans "Citer cet article" %}</span>
-							</button>
-						</li>
-						<li>
-							<button id="tool-citation-save" data-citation-save="#article-detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
-								<span class="erudicon erudicon-tools-save"></span>
-								<span class="tools-label">{% trans "Sauvegarder" %}</span>
-							</button>
-							<button id="tool-citation-remove" data-citation-remove="#article-detail"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
-								<span class="erudicon erudicon-tools-save"></span>
-								<span class="tools-label">{% trans "Supprimer" %}</span>
 							</button>
 						</li>
 						<li>
