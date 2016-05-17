@@ -80,6 +80,16 @@ class TestJournal(BaseEruditTestCase):
         self.journal.save()
         self.assertFalse(self.journal.provided_by_fedora)
 
+    def test_can_return_its_letter_prefix(self):
+        # Setup
+        journal_1 = JournalFactory.create(
+            name='Test', collection=self.collection, publishers=[self.publisher])
+        journal_2 = JournalFactory.create(
+            name=None, collection=self.collection, publishers=[self.publisher])
+        # Run & check
+        self.assertEqual(journal_1.letter_prefix, 'T')
+        self.assertIsNone(journal_2.letter_prefix)
+
 
 class TestIssue(BaseEruditTestCase):
     def setUp(self):
