@@ -8,6 +8,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from core.email import Email
+from erudit.models import Organisation
 
 
 class AbonnementProfile(models.Model):
@@ -60,3 +61,16 @@ class MandragoreProfile(models.Model):
 
     sync_date = models.DateField(blank=True, null=True)
     """ Date at which the model was last synchronized with Mandragore """
+
+
+class RestrictionProfile(models.Model):
+    """ Restriction account used in erudit.org to access protected content. """
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
+    organisation = models.OneToOneField(Organisation, verbose_name=_('Organisation'))
+    password = models.CharField(
+        max_length=50, verbose_name=_('Mot de passe'), blank=True, null=True)
+    restriction_id = models.PositiveIntegerField(verbose_name=_('Identifiant DB Restriction'))
+
+    class Meta:
+        verbose_name = _('Compte personnel Restriction')
+        verbose_name_plural = _('Comptes personnels Restriction')
