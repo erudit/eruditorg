@@ -1,3 +1,38 @@
+/**
+* modal windows / pop-ups
+*/
+
+.modal {
+  background: #FFF;
+  border: 1px solid #000;
+  padding: 0;
+
+  .modal-header {
+    color: #FFF;
+    background: #000;
+    padding: 0.5em 0.35em 0.35em 0.35em;
+    margin: 0;
+    text-align: center;
+    line-height: 1;
+    font-size: 1.5em;
+    @include fw-sans-medium;
+  }
+
+  .modal-body {
+    padding: 0.75em 1em;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+}
+
+/**
+* modal windows / pop-ups
+*/
+
 .share-modal {
 
 	.panel {
@@ -24,5 +59,27 @@
     }
 
 	}
+
+}
+
+.cite-modal {
+
+  .cite-export-title {
+    @extend .mono-space;
+  }
+
+  .cite-modal--style-list {
+
+    dt {
+      float: none;
+      @include fw-sans-medium;
+    }
+
+    dd {
+      margin-bottom: 1em;
+      font-size: smaller;
+    }
+
+  }
 
 }

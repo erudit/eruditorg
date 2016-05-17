@@ -194,18 +194,6 @@
               <nav class="toolbox compact">
                 <ul class="unstyled">
                   <li>
-                    <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' document.localidentifier %}">
-                      <span class="erudicon erudicon-tools-pdf"></span>
-                      <span class="tools-label">{% trans "Télécharger" %}</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button id="tool-quote" data-modal-id="#id_quote_modal_{{ document.id }}">
-                      <span class="erudicon erudicon-tools-quote"></span>
-                      <span class="tools-label">{% trans "Citer cet article" %}</span>
-                    </button>
-                  </li>
-                  <li>
                     <button id="tool-citation-save-{{ document.id }}" data-citation-save="#article-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
                       <span class="erudicon erudicon-tools-save"></span>
                       <span class="tools-label">{% trans "Sauvegarder" %}</span>
@@ -213,6 +201,18 @@
                     <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#article-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
                       <span class="erudicon erudicon-tools-save"></span>
                       <span class="tools-label">{% trans "Supprimer" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' document.localidentifier %}">
+                      <span class="erudicon erudicon-tools-pdf"></span>
+                      <span class="tools-label">{% trans "Télécharger" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-cite"></span>
+                      <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </button>
                   </li>
                   <li>
@@ -224,40 +224,30 @@
                 </ul>
               </nav>
               <div class="hidden">
-                <section id="id_quote_modal_{{ document.id }}" class="quote-modal">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                        <div class="panel">
-                          <header class="panel-heading">
-                            <h2 class="h4 panel-title text-center">{% trans "Outils de citation" %}</h2>
-                          </header>
-                          <div class="panel-body quote-modal--body">
-                            <div class="row">
-                              <div class="col-md-10 col-md-offset-1">
-                                <h3 class="h4">{% trans "Comment citer cet article" %}</h3>
-                                <hr />
-                                <h3 class="h4">{% trans "Exporter la notice de cet article" %}</h3>
-                                <a href="{% url 'public:journal:article-citation-enw' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-block btn-primary quote-export">
-                                  <span class="show quote-export-title">.ENW</span>
-                                  <small>EndNote, Zotero</small>
-                                </a>
-                                <a href="{% url 'public:journal:article-citation-ris' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-block btn-primary quote-export">
-                                  <span class="show quote-export-title">.RIS</span>
-                                  <small>Papers, Reference Manager, RefWorks, Zotero</small>
-                                </a>
-                                <a href="{% url 'public:journal:article-citation-bib' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-block btn-primary quote-export">
-                                  <span class="show quote-export-title">.BIB</span>
-                                  <small>BibTeX, JabRef, Mendeley, Zotero</small>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                  <div class="modal-body">
+                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                    <p>
+                      <a href="{% url 'public:journal:article-citation-enw' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.ENW</span>
+                      </a>
+                      EndNote, Zotero
+                    </p>
+                    <p>
+                      <a href="{% url 'public:journal:article-citation-ris' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.RIS</span>
+                      </a>
+                      Papers, Reference Manager, RefWorks, Zotero
+                    </p>
+                    <p>
+                      <a href="{% url 'public:journal:article-citation-bib' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.BIB</span>
+                      </a>
+                      BibTeX, JabRef, Mendeley, Zotero
+                    </p>
                   </div>
-                </section>
+                </div>
               </div>
             </article>
 
