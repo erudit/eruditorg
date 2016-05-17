@@ -565,19 +565,11 @@ button {
 
   // close button
   .mfp-close {
-    // position
-    right: 40px;
-
-    // transition
-    @include transition-delay(0.5s);
-    @include transition-property(transform);
-    @include transition-duration(1s);
-    @include translate(200%,0);
 
     // style
     opacity: 1;
     border: none;
-    color: $brand-primary;
+    color: #FFF;
     font-size: 48px;
 
     // hover
@@ -586,7 +578,7 @@ button {
     &:active {
       border: none;
       background-color: transparent;
-      color: $gray-base;
+      color: $coral-red;
     }
   }
 
