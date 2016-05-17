@@ -7,10 +7,33 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from erudit.factories import OrganisationFactory
+from erudit.tests.base import BaseEruditTestCase
 
 from ..factories import InstitutionIPAddressRangeFactory
 from ..factories import JournalAccessSubscriptionFactory
 from ..factories import JournalAccessSubscriptionPeriodFactory
+from ..factories import JournalManagementPlanFactory
+from ..factories import JournalManagementSubscriptionFactory
+from ..factories import JournalManagementSubscriptionPeriodFactory
+
+
+class TestJournalAccessSubscription(TestCase):
+    def test_knows_if_it_is_ongoing_or_not(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription_1 = JournalAccessSubscriptionFactory.create()
+        subscription_2 = JournalAccessSubscriptionFactory.create()
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription_1,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription_2,
+            start=now_dt + dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+        # Run & check
+        self.assertTrue(subscription_1.is_ongoing)
+        self.assertFalse(subscription_2.is_ongoing)
 
 
 class TestInstitutionIPAddressRange(TestCase):
@@ -119,3 +142,25 @@ class TestJournalAccessSubscriptionPeriod(TestCase):
         # Run & check
         with self.assertRaises(ValidationError):
             period.clean()
+
+
+class TestJournalManagementSubscription(BaseEruditTestCase):
+    def test_knows_if_it_is_ongoing_or_not(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        plan = JournalManagementPlanFactory.create(max_accounts=10)
+        subscription_1 = JournalManagementSubscriptionFactory.create(
+            journal=self.journal, plan=plan)
+        subscription_2 = JournalManagementSubscriptionFactory.create(
+            journal=self.journal, plan=plan)
+        JournalManagementSubscriptionPeriodFactory.create(
+            subscription=subscription_1,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+        JournalManagementSubscriptionPeriodFactory.create(
+            subscription=subscription_2,
+            start=now_dt + dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+        # Run & check
+        self.assertTrue(subscription_1.is_ongoing)
+        self.assertFalse(subscription_2.is_ongoing)
