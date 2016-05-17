@@ -3,8 +3,49 @@
 <div id="id_cite_modal_{{ article.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
   <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
   <div class="modal-body">
-    <h3>{% trans "Comment citer cet article" %}</h3>
-    <p>Blah bah</p>
+    <h3>{% trans "Citer cet article" %}</h3>
+    <dl class="cite-modal--style-list">
+      <dt>MLA</dt>
+      <dd>
+        {% for author in article.erudit_object.authors %}
+          {% if author.firstname and author.lastname %}
+            {{ author.lastname }}, {{ author.firstname }}.
+          {% endif %}
+        {% endfor %}
+        "{{ article.title }}."
+        <em>{{ article.issue.journal.name }}</em>
+        {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
+        ({{ article.erudit_object.publication_year }}): {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+      </dd>
+
+      <dt>APA</dt>
+      <dd>
+        {% for author in article.erudit_object.authors %}
+          {% if author.firstname and author.lastname %}
+            {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
+          {% endif %}
+        {% endfor %}
+        ({{ article.erudit_object.publication_year }}).
+        {{ article.title }}
+        <em>{{ article.issue.journal.name }}</em>,
+        {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %},
+        {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+      </dd>
+
+      <dt>Chicago</dt>
+      <dd>
+        {% for author in article.erudit_object.authors %}
+          {% if author.firstname and author.lastname %}
+            {{ author.lastname }}, {{ author.firstname }}.
+          {% endif %}
+        {% endfor %}
+        "{{ article.title }}."
+        <em>{{ article.issue.journal.name }}</em>
+        {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}no. {{ article.issue.number }}{% endif %}
+        ({{ article.erudit_object.publication_year }}): {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+      </dd>
+    </dl>
+
     <hr />
     <h3>{% trans "Exporter la notice de cet article" %}</h3>
     <p>
