@@ -21,8 +21,8 @@ class ShareModal {
     this.el.magnificPopup({
       mainClass: 'mfp-fade',
       removalDelay: 750,
-      closeOnBgClick: false,
-      closeBtnInside: false,
+      closeOnBgClick: true,
+      closeBtnInside: true,
       items: {
         src: '<section class="share-modal">\
                 <div class="container-fluid">\
@@ -52,36 +52,36 @@ class ShareModal {
 
           var $modal = $(this.content);
 
-          $modal.on('click', '#share-email', function(event){ 
+          $modal.on('click', '#share-email', function(event){
             event.preventDefault();
 
             SharingUtils.email( _.url, _.title );
             return false;
           });
 
-          $modal.on('click', '#share-twitter', function(event){ 
+          $modal.on('click', '#share-twitter', function(event){
             event.preventDefault();
-            
+
             SharingUtils.twitter( _.url, _.title );
             return false;
           });
 
-          $modal.on('click', '#share-facebook', function(event){ 
+          $modal.on('click', '#share-facebook', function(event){
             event.preventDefault();
-            
+
             SharingUtils.facebook( _.url, _.title );
             return false;
           });
 
-          $modal.on('click', '#share-linkedin', function(event){ 
+          $modal.on('click', '#share-linkedin', function(event){
             event.preventDefault();
-            
+
             SharingUtils.linkedin( _.url, _.title );
             return false;
-          }); 
+          });
 
         },
-        close: function() { 
+        close: function() {
           $(this.content).off('click');
         }
       }

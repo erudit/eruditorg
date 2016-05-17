@@ -11,7 +11,7 @@ class CiteModal {
       removalDelay: 750,
       type: 'ajax',
       closeOnBgClick: false,
-      closeBtnInside: false,
+      closeBtnInside: true,
       items: {
         src: el.data('modal-id'),
         type: 'inline'
