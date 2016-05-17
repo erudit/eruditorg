@@ -92,7 +92,7 @@ class Command(BaseCommand):
                 restriction_id=restriction_subscriber.pk)
         except RestrictionProfile.DoesNotExist:
             user = user_model.objects.create(
-                username='restriction-user-{0}'.format(restriction_subscriber.pk),
+                username=restriction_subscriber.courriel,
                 email=restriction_subscriber.courriel)
             organisation = Organisation.objects.create(name=restriction_subscriber.abonne[:120])
             restriction_profile = RestrictionProfile.objects.create(
@@ -112,7 +112,8 @@ class Command(BaseCommand):
             raise ImportException
 
         subscription, _ = JournalAccessSubscription.objects.get_or_create(
-            organisation=restriction_profile.organisation, journal=journal)
+            organisation=restriction_profile.organisation)
+        subscription.journals.add(journal)
 
         # STEP 3: creates the subscription period
         # --
@@ -125,12 +126,11 @@ class Command(BaseCommand):
         try:
             subscription_period.clean()
         except ValidationError:
-            self.stdout.write(self.style.ERROR(
-                '  Unable to create subscription period for RevueAbonne ID: {0}'.format(
-                    restriction_subscription.pk)))
-            raise ImportException
-
-        subscription_period.save()
+            # We are saving multiple periods for multiple journals under the same subscription
+            # instance so period validation errors can happen.
+            pass
+        else:
+            subscription_period.save()
 
         # STEP 4: creates the IP whitelist associated with the subscription
         # --
