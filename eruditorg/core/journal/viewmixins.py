@@ -70,25 +70,26 @@ class ArticleAccessCheckMixin(object):
 
         # 2- Is the current user allowed to access the article?
         if not self.request.user.is_anonymous():
-            individual_subscriptions = JournalAccessSubscription.objects.filter(
+            individual_subscription = JournalAccessSubscription.objects.filter(
                 Q(full_access=True) |
                 Q(journal=article.issue.journal) |
                 Q(journals__id=article.issue.journal_id),
                 user=self.request.user,
-            )
-            if individual_subscriptions.exists():
+            ).first()
+            if individual_subscription and individual_subscription.is_ongoing:
                 return True
 
         # 3- Is the current IP address allowed to access the article as an institution?
         ip = get_ip(self.request)
-        institutional_subscriptions = JournalAccessSubscription.objects.filter(
+        institutional_subscription = JournalAccessSubscription.objects.filter(
             Q(full_access=True) |
             Q(journal=article.issue.journal) |
             Q(journals__id=article.issue.journal_id),
-            organisation__isnull=False)
-        institutional_access = institutional_subscriptions.exists() and \
+            organisation__isnull=False).first()
+        institutional_access = institutional_subscription is not None and \
+            institutional_subscription.is_ongoing and \
             InstitutionIPAddressRange.objects.filter(
-                subscription__in=institutional_subscriptions,
+                subscription=institutional_subscription,
                 ip_start__lte=ip, ip_end__gte=ip).exists()
         if institutional_access:
             return True
