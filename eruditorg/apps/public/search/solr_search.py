@@ -12,18 +12,18 @@ client = pysolr.Solr(settings.SOLR_ROOT, timeout=10)
 
 class Search(BaseSearch):
     filters_mapping = {
-        'all': 'TexteComplet:{all}',
-        'meta': 'Metadonnees:{meta}',
-        'full_text': 'TexteIntegral:{full_text}',
-        'title_abstract_keywords': 'TitreResumeMots:{title_abstract_keywords}',
-        'title': 'Titre_idx:{title}',
-        'author': 'Auteur_idx:{author}',
-        'author_affiliation': 'Affiliation_idx:{author_affiliation}',
-        'journal_title': 'TitreCollection_idx:{journal_title}',
-        'bibliography': 'RefBiblio_idx:{bibliography}',
-        'title_reviewd': 'TitreRefBiblio_idx:{title_reviewd}',
-        'issn': 'ISSN:{issn}',
-        'isbn': 'ISBN:{isbn}',
+        'all': 'TexteComplet:"{all}"',
+        'meta': 'Metadonnees:"{meta}"',
+        'full_text': 'TexteIntegral:"{full_text}"',
+        'title_abstract_keywords': 'TitreResumeMots:"{title_abstract_keywords}"',
+        'title': 'Titre_idx:"{title}"',
+        'author': 'Auteur_idx:"{author}"',
+        'author_affiliation': 'Affiliation_idx:"{author_affiliation}"',
+        'journal_title': 'TitreCollection_idx:"{journal_title}"',
+        'bibliography': 'RefBiblio_idx:"{bibliography}"',
+        'title_reviewd': 'TitreRefBiblio_idx:"{title_reviewd}"',
+        'issn': 'ISSN:"{issn}"',
+        'isbn': 'ISBN:"{isbn}"',
     }
 
     extra_params = {

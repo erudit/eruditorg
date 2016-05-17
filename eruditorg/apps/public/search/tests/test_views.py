@@ -3,6 +3,7 @@
 import json
 import unittest.mock
 
+from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.utils.encoding import smart_text
 from django.utils.timezone import now
@@ -64,3 +65,15 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         # Check
         results = json.loads(smart_text(results_data))
         self.assertEqual(results['pagination']['count'], 50)
+
+
+class TestSearchResultsView(BaseEruditTestCase):
+    def test_redirects_to_the_advanced_search_form_if_no_parameters_are_present(self):
+        # Setup
+        url = reverse('public:search:results')
+        # Run
+        response = self.client.get(url, follow=True)
+        # Check
+        self.assertTrue(len(response.redirect_chain))
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertTrue(reverse('public:search:advanced_search') in last_url)
