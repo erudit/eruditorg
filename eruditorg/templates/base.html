@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block page-title %}{% endblock %} – {% block zone-title %}{% endblock %} – Érudit</title>
+    <title>{% block page_title %}{% endblock %} – {% block zone_title %}{% endblock %} – Érudit</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="application-name" content="Érudit"/>
@@ -52,8 +52,8 @@
   </head>
   <body
       class="{% block body_class %}{% endblock %}"
-      data-controller="{% block data-controller %}{% endblock data-controller %}"
-      data-action="{% block data-action %}{% endblock data-action %}"
+      data_controller="{% block data_controller %}{% endblock data_controller %}"
+      data_action="{% block data_action %}{% endblock data_action %}"
     >
 
     {% block header %}

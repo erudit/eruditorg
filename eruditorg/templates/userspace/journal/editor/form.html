@@ -1,9 +1,9 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}{% trans "Dépôt de fichiers" %}{% endblock %}
+{% block page_title %}{% trans "Dépôt de fichiers" %}{% endblock %}
 
-{% block data-controller %}userspace:editor:form{% endblock data-controller %}
+{% block data_controller %}userspace:editor:form{% endblock data_controller %}
 
 {% block extrahead %}
 {{ form.media.css }}
@@ -20,7 +20,7 @@
 {% endblock breadcrumb_end %}
 
 {% load crispy_forms_tags %}
-{% block content-main %}
+{% block content_main %}
 <div class="col-md-6 col-xs-12 col-centered">
   <section class="card card-upload_form">
     <div class="card-header">

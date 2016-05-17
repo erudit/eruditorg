@@ -1,7 +1,7 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
-{% block page-title %}{% trans "Confirmer la suppression de l'abonnement ?" %}{% endblock %}
+{% block page_title %}{% trans "Confirmer la suppression de l'abonnement ?" %}{% endblock %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
@@ -9,7 +9,7 @@
 <li>{% trans "Confirmer la suppression de l'abonnement ?" %}</li>
 {% endblock breadcrumb_end %}
 
-{% block content-main %}
+{% block content_main %}
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">
@@ -31,4 +31,4 @@
     </div>
   </div>
 </div>
-{% endblock content-main %}
+{% endblock content_main %}

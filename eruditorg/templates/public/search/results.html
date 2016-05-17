@@ -3,9 +3,9 @@
 {% load widget_tweaks %}
 {% load public_search_tags %}
 
-{% block page-title %}{% trans "Recherche" %}{% endblock %}
+{% block page_title %}{% trans "Recherche" %}{% endblock %}
 
-{% block data-controller %}public:search:results{% endblock data-controller %}
+{% block data_controller %}public:search:results{% endblock data_controller %}
 
 {% block breadcrumb %}
   {{ block.super }} / <a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a>

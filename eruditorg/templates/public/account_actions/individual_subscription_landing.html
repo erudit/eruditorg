@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block page-title %}
+{% block page_title %}
 {% blocktrans trimmed with journal=token.content_object.name  %}
   Abonnement à la revue {{ journal }}
 {% endblocktrans %}

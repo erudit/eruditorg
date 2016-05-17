@@ -3,14 +3,14 @@
 {% load staticfiles %}
 {% load public_journal_tags %}
 
-{% block data-controller %}public:journal:issue-detail{% endblock data-controller %}
+{% block data_controller %}public:journal:issue-detail{% endblock data_controller %}
 
-{% block zone-title %}{{ journal.name }}{% endblock %}
+{% block zone_title %}{{ journal.name }}{% endblock %}
 
-{% block page-title %}
+{% block page_title %}
 {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
 {% include "public/journal/_issue_volume.html" %}
-{% endblock page-title %}
+{% endblock page_title %}
 
 {% block breadcrumb %}{{ block.super }}
 /

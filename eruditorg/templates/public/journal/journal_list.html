@@ -2,9 +2,9 @@
 {% load i18n %}
 {% load static %}
 
-{% block page-title %}{% trans "Revues" %}{% endblock page-title %}
+{% block page_title %}{% trans "Revues" %}{% endblock page_title %}
 {% block body_class %}{{ block.super }} journal-list{% endblock %}
-{% block data-controller %}public:journal:journal-list{% endblock data-controller %}
+{% block data_controller %}public:journal:journal-list{% endblock data_controller %}
 
 {% block content %}
 <div id="journal-list">
