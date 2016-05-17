@@ -30,4 +30,4 @@ Use
 Import restrictions
 -------------------
 
-python manage.py restriction import_restrictions
+python manage.py restriction import_restriction
