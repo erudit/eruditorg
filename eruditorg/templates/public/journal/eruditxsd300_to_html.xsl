@@ -137,7 +137,7 @@
 			<xsl:if test="//corps">
 				{% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}
         <!-- article outline -->
-        <nav class="col-md-3 article-table-of-contents" role="navigation">
+        <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
             <li>
@@ -209,7 +209,8 @@
 				{% endif %}
 
         <!-- toolbox -->
-        <aside class="pull-right toolbox">
+        <aside class="pull-right toolbox hidden-xs hidden-sm">
+          <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled">
             <li>
               <button id="tool-citation-save" data-citation-save="#article-detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
