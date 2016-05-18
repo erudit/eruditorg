@@ -600,6 +600,77 @@ $article-toolbar-width: 80px;
   }
 
   /**
+  * tables & figures, and their lists
+  */
+  .grfigure, .grtableau {
+
+    .figure, .tableau {
+
+      &:not(:last-child) .voirliste {
+        display: none;
+      }
+
+    }
+
+    .legende {
+      margin-bottom: 0.75em;
+    }
+
+  }
+
+  .figure, .tableau {
+    margin-bottom: 1.5em;
+    padding: 1em 0;
+    border-top: 1px dotted $mid-grey;
+
+    img {
+      margin: auto;
+    }
+
+    figcaption {
+
+      .no {
+        display: block;
+        font-size: 14px;
+        line-height: 1;
+        @include fw-mono();
+      }
+
+      .legende {
+
+        .titre {
+          @include fw-sans-medium;
+        }
+
+      }
+
+      .notefigtab {
+        margin-bottom: 0.75em;
+
+        .alinea {
+          display: inline;
+          padding-left: 0.25em;
+        }
+
+      }
+
+      .source {
+        color: $dark-grey;
+        font-size: smaller;
+      }
+
+    }
+
+    .voirliste {
+      @include fw-sans-normal;
+      font-size: 14px;
+      margin: 0.75em 0;
+      text-align: right;
+    }
+
+  }
+
+  /**
   * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
 
