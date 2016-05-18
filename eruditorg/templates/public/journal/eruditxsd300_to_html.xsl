@@ -1,4 +1,4 @@
-{% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n %}{% load staticfiles %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
 	<xsl:output method="html" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="*"/>
@@ -307,7 +307,7 @@
     <xsl:text>&#x0020;</xsl:text>
     <a href="{$doiStart}{.}">
       <xsl:if test="contains( . , '10.7202')">
-        <img src="../images/iconeErudit.png" title="ID public Érudit" alt="Icône pour les ID publics Érudit"/>
+        <img src="{% static 'svg/logo-erudit-small.svg' %}" title="DOI Érudit" alt="Icône pour les DOIs Érudit" class="erudit-doi"/>
       </xsl:if>
       <xsl:text>DOI:</xsl:text>
       <xsl:value-of select="."/>

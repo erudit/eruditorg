@@ -484,6 +484,7 @@ $article-toolbar-width: 80px;
       &:first-of-type {
         margin-top: 0;
       }
+
     }
 
     /**
@@ -599,31 +600,14 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * Footer elements (grannexe | merci | grnotebio | grnote | grbiblio)
+  * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
 
-  .article-notes {
-
-    p {
-      @include paragraph-text-style(14px);
-    }
-
-    article {
-      position: relative;
-      margin-bottom: $margin-vertical-default/2;
-      @include paragraph-text-style(14px);
-
-      a.no {
-        position: absolute;
-        left: -35px;
-        text-align: right;
-        width: 25px;
-      }
-
-    }
-
+  .erudit-doi {
+    height: 15px;
+    vertical-align: baseline;
+    margin-right: 5px;
   }
-
 
   /**
   * Related articles
