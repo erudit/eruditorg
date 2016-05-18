@@ -16,9 +16,15 @@ class AuthorizationConfig(object):
     """ Defines the authorizations that can be given to users in the Érudit application. """
 
     can_manage_authorizations = AuthorizationDef(
-        'authorization:can_manage_authorizations', _("Autorisations"))
+        'authorization:can_manage_authorizations', _('Autorisations'))
     """
     This authorization defines the ability to add or delete authorizations to specific users.
+    """
+
+    can_edit_journal_information = AuthorizationDef(
+        'editor:can_edit_journal_information', _('Éditer les informations de revues'))
+    """
+    This authorization defines the ability to update journal information.
     """
 
     can_manage_issuesubmission = AuthorizationDef(

@@ -28,7 +28,7 @@ class JournalInformationUpdateView(
     lang_get_parameter = 'lang'
     menu_journal = 'information'
     model = JournalInformation
-    permission_required = 'journal.edit_journal'
+    permission_required = 'journal.edit_journal_information'
     raise_exception = True
     template_name = 'userspace/journal/information/journalinformation_update.html'
 
