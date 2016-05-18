@@ -320,7 +320,8 @@ class Journal(FedoraMixin, FedoraDated):
     @property
     def letter_prefix(self):
         """ Returns its name first letter """
-        return slugify(self.sortable_name[0]).upper()
+        sortable_name = self.sortable_name
+        return slugify(sortable_name[0]).upper() if sortable_name else None
 
     @property
     def sortable_name(self):
