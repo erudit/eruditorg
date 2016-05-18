@@ -137,7 +137,7 @@
 			<xsl:if test="//corps">
 				{% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}
         <!-- article outline -->
-        <nav class="col-md-3 article-table-of-contents" role="contents">
+        <nav class="col-md-3 article-table-of-contents" role="navigation">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
             <li>
@@ -259,14 +259,16 @@
 
 				<!-- abstract -->
 				<xsl:if test="//resume">
-				<section id="resume" class="article-section resumes" role="section">
+				<section id="resume" class="article-section resume" role="complementary">
+          <h2 class="hidden">{% trans "Résumé" %}</h2>
 					<xsl:apply-templates select="//resume"/>
 				</section>
 				</xsl:if>
 
 				{% if article.erudit_object.processing == 'complet' %}
 				<!-- body -->
-				<section id="corps" class="article-section corps" role="section">
+				<section id="corps" class="article-section corps" role="main">
+          <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
 					<xsl:apply-templates select="//corps"/>
 				</section>
 				{% elif article.localidentifier %}
@@ -527,7 +529,7 @@
 
   <!-- abstracts -->
   <xsl:template match="//resume">
-    <article id="{name()}-{@lang}" class="{name()}">
+    <section id="{name()}-{@lang}" class="{name()}">
       <xsl:if test="@lang='fr'">
         <h2>
           <xsl:choose>
@@ -620,7 +622,7 @@
           </div>
         </xsl:if>
       </xsl:if>
-    </article>
+    </section>
   </xsl:template>
 
   <xsl:template match="titreparal" mode="abstract">
@@ -749,7 +751,7 @@
 	</xsl:template>
 
 	<xsl:template match="section1">
-		<div id="{@id}">
+		<section id="{@id}">
 			<xsl:if test="titre">
 				<xsl:element name="h2">
 					<xsl:if test="titre/@traitementparticulier">
@@ -759,10 +761,10 @@
 				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
-		</div>
+		</section>
 	</xsl:template>
 	<xsl:template match="section2">
-		<div id="{@id}">
+		<section id="{@id}">
 			<xsl:if test="titre">
 				<xsl:element name="h3">
 					<xsl:if test="titre/@traitementparticulier">
@@ -772,10 +774,10 @@
 				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
-		</div>
+		</section>
 	</xsl:template>
 	<xsl:template match="section3">
-		<div id="{@id}">
+		<section id="{@id}">
 			<xsl:if test="titre">
 				<xsl:element name="h4">
 					<xsl:if test="titre/@traitementparticulier">
@@ -785,10 +787,10 @@
 				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
-		</div>
+		</section>
 	</xsl:template>
 	<xsl:template match="section4">
-		<div id="{@id}">
+		<section id="{@id}">
 			<xsl:if test="titre">
 				<xsl:element name="h5">
 					<xsl:if test="titre/@traitementparticulier">
@@ -798,10 +800,10 @@
 				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
-		</div>
+		</section>
 	</xsl:template>
 	<xsl:template match="section5">
-		<div id="{@id}">
+		<section id="{@id}">
 			<xsl:if test="titre">
 				<xsl:element name="h6">
 					<xsl:if test="titre/@traitementparticulier">
@@ -811,10 +813,10 @@
 				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
-		</div>
+		</section>
 	</xsl:template>
 	<xsl:template match="section6">
-		<div id="{@id}">
+		<section id="{@id}">
 			<xsl:if test="titre">
 				<xsl:element name="h6">
 					<xsl:attribute name="class">h7</xsl:attribute>
@@ -825,24 +827,20 @@
 				</xsl:element>
 			</xsl:if>
 			<xsl:apply-templates select="*[not(self::no)][not(self::titre)][not(self::titreparal)]"/>
-		</div>
+		</section>
 	</xsl:template>
 	<xsl:template match="para">
-		<p class="para">
+		<div class="{name()}" id="{@id}">
 			<xsl:apply-templates select="no" mode="para"/>
 			<xsl:apply-templates select="*[not(self::no)]"/>
-		</p>
+		</div>
 	</xsl:template>
 	<xsl:template match="alinea">
-		<p class="alinea">
+		<p class="{name()}">
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
-	<xsl:template match="no" mode="para">
-		<span class="nopara" id="{../@id}">
-			<xsl:apply-templates/>
-		</span>
-	</xsl:template>
+	<xsl:template match="no" mode="para"></xsl:template>
 	<xsl:template match="section1/alinea|section2/alinea|section3/alinea|section4/alinea|section5/alinea|section6/alinea|grannexe/alinea"  priority="1">
 		<p class="horspara">
 			<xsl:apply-templates/>
@@ -1762,7 +1760,7 @@
   </xsl:template>
 
   <xsl:template match="grannexe | merci | grnotebio | grnote | grbiblio">
-      <section id="{name()}" class="article-notes {name()}" role="contentinfo">
+      <section id="{name()}" class="article-section {name()}" role="complementary">
           <h2>
               <xsl:choose>
                   <xsl:when test="self::grannexe">
