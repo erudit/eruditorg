@@ -281,14 +281,14 @@
 
 				<!-- lists of tables & figures -->
         <xsl:if test="//figure">
-          <section id="figures">
+          <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
             <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
           </section>
         </xsl:if>
 
         <xsl:if test="//tableau">
-          <section id="tableaux">
+          <section id="tableaux" class="article-section tableaux" role="complementary">
             <h2>{% trans "Liste des tableaux" %}</h2>
             <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
           </section>
@@ -1920,17 +1920,18 @@
   <xsl:template match="tableau/objetmedia | figure/objetmedia" mode="liste">
     <xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
     <xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
+    <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
+    <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
     <xsl:for-each select=".">
       <figure class="{name(..)}" id="li{../@id}">
-        <img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
         <figcaption class="notitre">
-          <xsl:apply-templates select="../no" mode="liste"/>
-          <xsl:apply-templates select="../legende/titre" mode="liste"/>
-          <!-- s'il y a des renvois dans la source ou la légende, plusieurs IDs sont créés. -->
-          <span class="allertexte">[
-            <a href="#{../@id}">Aller au texte</a>]
-          </span>
+          <span class="allertexte"><a href="#{../@id}">-^</a></span>
+          <xsl:apply-templates select="../no"/>
+          <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
         </figcaption>
+        <a href="{{ request.get_full_path }}media/{$imgPlGr}" target="_blank">
+          <img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
+        </a>
       </figure>
     </xsl:for-each>
   </xsl:template>
