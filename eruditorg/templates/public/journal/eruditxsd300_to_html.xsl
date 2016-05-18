@@ -259,7 +259,7 @@
 
 				<!-- abstract -->
 				<xsl:if test="//resume">
-				<section id="resume" class="article-section resume" role="complementary">
+				<section id="resume" class="article-section grresume" role="complementary">
           <h2 class="hidden">{% trans "Résumé" %}</h2>
 					<xsl:apply-templates select="//resume"/>
 				</section>
