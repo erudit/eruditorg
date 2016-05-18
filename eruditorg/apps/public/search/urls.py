@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^$', views.SearchResultsView.as_view(), name='results'),
     url(r'^avancee/$', views.AdvancedSearchView.as_view(), name='advanced_search'),
     url(r'^api/eruditdocuments/', views.EruditDocumentListAPIView.as_view(),
-        name='eruditdocument-api-list'),
+        name='eruditdocument_api_list'),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),

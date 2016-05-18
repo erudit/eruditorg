@@ -1,4 +1,4 @@
-#issue-detail {
+#issue_detail {
 
   /**
   * Page header overrides
@@ -14,9 +14,9 @@
   /**
   * List of articles
   */
-  .issue-detail--articles {
+  .issue_detail--articles {
 
-    .issue-detail--article-item {
+    .issue_detail--article-item {
       padding: 1.5em 0;
       border-bottom: 1px solid $mid-grey;
 
@@ -30,7 +30,7 @@
         @include fw-sans-medium;
       }
 
-      .issue-detail--article-item--author {
+      .issue_detail--article-item--author {
         font-size: smaller;
         margin-bottom: 1.75em;
       }

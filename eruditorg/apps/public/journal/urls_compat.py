@@ -24,19 +24,19 @@ unsupported_patterns = [
 urlpatterns = [
     # Journal
     url(r'^revue/(?P<code>[\w-]+)/$',
-        RedirectView.as_view(pattern_name='public:journal:journal-detail', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_detail', permanent=True)),
     url(r'^revue/(?P<code>[\w-]+)/index\.html?$',
-        RedirectView.as_view(pattern_name='public:journal:journal-detail', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_detail', permanent=True)),
     url(r'^revue/(?P<code>[\w-]+)/auteurs\.html?$',
-        RedirectView.as_view(pattern_name='public:journal:journal-authors-list', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_authors_list', permanent=True)),
     url(r'^culture/(?P<code>[\w-]+)/$',
-        RedirectView.as_view(pattern_name='public:journal:journal-detail', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_detail', permanent=True)),
     url(r'^culture/(?P<code>[\w-]+)/index.html?$',
-        RedirectView.as_view(pattern_name='public:journal:journal-detail', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_detail', permanent=True)),
     url(r'^culture/(?P<code>[\w-]+)/auteurs\.html?$',
-        RedirectView.as_view(pattern_name='public:journal:journal-authors-list', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_authors_list', permanent=True)),
     url(r'^culture/(?P<journal_code>[\w-]+)/rss\.xml$',
-        RedirectView.as_view(pattern_name='public:journal:journal-articles-rss', permanent=True)),
+        RedirectView.as_view(pattern_name='public:journal:journal_articles_rss', permanent=True)),
 
     # Issue
     url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<n>[\w-]+)/$',

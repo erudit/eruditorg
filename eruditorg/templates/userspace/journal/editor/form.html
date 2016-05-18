@@ -120,7 +120,7 @@
                         <p>
                           <strong>{% trans "Fichiers :" %}</strong>&nbsp;
                           {% for f in track.files_version.submissions.all %}
-                            <a href="{% url 'userspace:journal:editor:attachment-detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                            <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
                           {% endfor %}
                         </p>
                       {% endif %}
@@ -139,13 +139,13 @@
             {% for t in transitions %}
               <a
               {% if t.name == 'submit' %}
-                href="{% url 'userspace:journal:editor:transition-submit' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_submit' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'approve' %}
-                href="{% url 'userspace:journal:editor:transition-approve' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_approve' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'refuse' %}
-                href="{% url 'userspace:journal:editor:transition-refuse' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_refuse' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'archive' %}
-                href="{% url 'userspace:journal:editor:transition-archive' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_archive' scope_current_journal.pk object.pk %}"
               {% endif %}
                 class="btn btn-primary">{{ t.custom.verbose_name }}</a>
             {% endfor %}

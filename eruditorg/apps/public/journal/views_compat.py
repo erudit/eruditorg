@@ -11,7 +11,7 @@ from erudit.models import Issue
 
 
 class IssueDetailRedirectView(RedirectView):
-    pattern_name = 'public:journal:issue-detail'
+    pattern_name = 'public:journal:issue_detail'
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
@@ -40,7 +40,7 @@ class IssueDetailRedirectView(RedirectView):
 
 
 class ArticleDetailRedirectView(RedirectView):
-    pattern_name = 'public:journal:article-detail'
+    pattern_name = 'public:journal:article_detail'
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):

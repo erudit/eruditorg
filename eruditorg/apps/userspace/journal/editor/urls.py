@@ -10,14 +10,14 @@ urlpatterns = [
     url(_(r'^numero/(?P<pk>[0-9]+)/$'), views.IssueSubmissionUpdate.as_view(), name='update'),
 
     url(_(r'^numero/(?P<pk>[0-9]+)/soumettre/$'),
-        views.IssueSubmissionSubmitView.as_view(), name='transition-submit'),
+        views.IssueSubmissionSubmitView.as_view(), name='transition_submit'),
     url(_(r'^numero/(?P<pk>[0-9]+)/approuver/$'),
-        views.IssueSubmissionApproveView.as_view(), name='transition-approve'),
+        views.IssueSubmissionApproveView.as_view(), name='transition_approve'),
     url(_(r'^numero/(?P<pk>[0-9]+)/refuser/$'),
-        views.IssueSubmissionRefuseView.as_view(), name='transition-refuse'),
+        views.IssueSubmissionRefuseView.as_view(), name='transition_refuse'),
     url(_(r'^numero/(?P<pk>[0-9]+)/archiver/$'),
-        views.IssueSubmissionArchiveView.as_view(), name='transition-archive'),
+        views.IssueSubmissionArchiveView.as_view(), name='transition_archive'),
 
     url(_(r'^numero/fichier/(?P<pk>[0-9]+)/$'),
-        views.IssueSubmissionAttachmentView.as_view(), name='attachment-detail'),
+        views.IssueSubmissionAttachmentView.as_view(), name='attachment_detail'),
 ]

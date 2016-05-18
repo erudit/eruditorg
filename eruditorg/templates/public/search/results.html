@@ -136,7 +136,7 @@
           <li>
 
             {# Article preview #}
-            {% url 'public:journal:article-detail' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
+            {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
             <article id="article-{{ document.id }}" class="search-result-item" data-article-id="{{ document.id }}">
               <header>
                 <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
@@ -204,7 +204,7 @@
                     </button>
                   </li>
                   <li>
-                    <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' document.localidentifier %}">
+                    <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' document.localidentifier %}">
                       <span class="erudicon erudicon-tools-pdf"></span>
                       <span class="tools-label">{% trans "Télécharger" %}</span>
                     </button>
@@ -229,19 +229,19 @@
                   <div class="modal-body">
                     <h3>{% trans "Exporter la notice de cet article" %}</h3>
                     <p>
-                      <a href="{% url 'public:journal:article-citation-enw' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                      <a href="{% url 'public:journal:article_citation_enw' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
                         <span class="show cite-export-title">.ENW</span>
                       </a>
                       EndNote, Zotero
                     </p>
                     <p>
-                      <a href="{% url 'public:journal:article-citation-ris' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                      <a href="{% url 'public:journal:article_citation_ris' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
                         <span class="show cite-export-title">.RIS</span>
                       </a>
                       Papers, Reference Manager, RefWorks, Zotero
                     </p>
                     <p>
-                      <a href="{% url 'public:journal:article-citation-bib' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                      <a href="{% url 'public:journal:article_citation_bib' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
                         <span class="show cite-export-title">.BIB</span>
                       </a>
                       BibTeX, JabRef, Mendeley, Zotero

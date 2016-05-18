@@ -13,7 +13,7 @@
     <div class="col-md-3">
       {% for letter, count in letters_counts.items %}
         {% if count > 0 %}
-          <a href="{% url 'public:journal:journal-authors-list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a>
+          <a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a>
         {% else %}
           <span class="text-muted">{{ letter|upper }}</span>
         {% endif %}
@@ -33,7 +33,7 @@
                 <li>
                   {% spaceless %}
                     &laquo;
-                    <a href="{% url 'public:journal:article-detail' journal_code=journal.code issue_localid=article.issue.localidentifier pk=article.id %}">
+                    <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_localid=article.issue.localidentifier pk=article.id %}">
                       {{ article.title }}
                     </a>
                     &raquo;
