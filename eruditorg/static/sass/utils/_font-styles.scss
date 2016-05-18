@@ -26,6 +26,14 @@
   font-family: $font-family-sans-serif-bold-italic;
 }
 
+@mixin fw-mono() {
+  font-family: $font-family-monospace;
+}
+
+@mixin fw-mono-italic() {
+  font-family: $font-family-monospace-italic;
+}
+
 @mixin fw-serif-normal() {
   font-family: $font-family-serif-regular;
 }
