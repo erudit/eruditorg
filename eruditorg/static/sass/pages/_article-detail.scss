@@ -9,7 +9,7 @@ $article-toolbar-width: 80px;
 * page specific mixins
 */
 
-@mixin paragraph-text-style($font-size: 18px, $font-style-family: 'serif') {
+@mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
   font-family: $font-family-serif-regular;
   font-size: $font-size;
   line-height: 1.5;
@@ -634,7 +634,7 @@ $article-toolbar-width: 80px;
     padding-top: $margin-vertical-default;
     padding-bottom: $margin-vertical-default;
     margin-bottom: $margin-vertical-default;
-    @include grid-cell-border($direction: 'top', $border-width: 2px, $border-color: $gray-light);
+    @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: #000);
 
     > header {
       h2 {
@@ -650,14 +650,14 @@ $article-toolbar-width: 80px;
         width: 100%;
         color: $text-color;
         padding: $margin-vertical-default/2 $grid-gutter-width/2;
-        @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $gray-light);
+        @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $mid-grey);
 
         h4 {
           margin-bottom: $margin-vertical-default/2;
         }
 
         h5 {
-          color: $gray-light;
+          color: $dark-grey;
           font-size: 18px;
         }
 
