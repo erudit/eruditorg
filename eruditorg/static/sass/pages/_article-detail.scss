@@ -428,10 +428,20 @@ $article-toolbar-width: 80px;
   }
 
   /**
+  * general full article styles incl. abstract, body, appendices
+  **/
+  .full-article {
+
+    > .article-section:first-child {
+      margin-top: $margin-vertical-default * 0.75;
+    }
+
+  }
+
+  /**
   * article body
   */
   .corps {
-    padding-top: $margin-vertical-default;
 
     // headings within the article
     h2 {
@@ -450,6 +460,10 @@ $article-toolbar-width: 80px;
         .gras, strong {
           @include fw-serif-normal-italic;
         }
+      }
+
+      &.special {
+        text-align: center;
       }
 
     }
@@ -506,18 +520,34 @@ $article-toolbar-width: 80px;
   * article body sections defaults
   */
   .article-section {
-    margin-bottom: $margin-vertical-default*2;
+    margin-bottom: $margin-vertical-default;
+
   }
 
   /**
-  * each abstract
+  * abstracts
   */
-  .resume {
-    margin-bottom: $margin-vertical-default*2;
+  .grresume {
+    margin-top: $margin-vertical-default;
+  }
 
-    // default font style
-    font-size: 14px;
-    line-height: 1.25em;
+  .resume {
+    margin: $margin-vertical-default*1.5 0;
+
+    h2 {
+      @include fw-serif-bold;
+    }
+
+    p, ul,
+    .titreparal, .motscles strong {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .titreparal, .motscles strong {
+      @include fw-sans-medium();
+    }
+
   }
 
   /**
