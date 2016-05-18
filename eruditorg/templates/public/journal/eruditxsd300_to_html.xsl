@@ -856,13 +856,13 @@
 		</span>
 	</xsl:template>
 	<xsl:template match="legende/titre | legende/sstitre">
-		<div class="legende">
-		<xsl:for-each select=".">
-			<div class="{name()}">
-				<xsl:apply-templates/>
-			</div>
-		</xsl:for-each>
-		</div>
+		<p class="legende">
+  		<xsl:for-each select=".">
+  			<strong class="{name()}">
+  				<xsl:apply-templates/>
+  			</strong>
+  		</xsl:for-each>
+    </p>
 	</xsl:template>
 	<xsl:template match="legende/titre | legende/sstitre" mode="liste">
 		<div class="legende">
@@ -915,44 +915,36 @@
 
   <!-- figures & tables -->
 	<xsl:template match="grfigure|grtableau">
-		<div class="{name()}">
+		<div class="{name()}" id="{@id}">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 
 	<xsl:template match="figure|tableau">
-		<!-- makes sure that there is only one image displayed for a figure or tableau div -->
-		<figure class="{name()}">
-			<xsl:apply-templates select="objetmedia"/>
-		</figure>
+		<xsl:apply-templates select="objetmedia"/>
 	</xsl:template>
 
-	<xsl:template match="figure/objetmedia|tableau/objetmedia">
-		<xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
-		<xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
-		<xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
-		<xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
-		<figure class="{name(..)}">
-			<img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
-			<figcaption>
-				<a id="{../@id}">
-					<xsl:text>
-					</xsl:text>
-				</a>
-				<xsl:apply-templates select="../no"/>
-				<xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
-				<span class="voirimage">
-					(<a href="{{ request.get_full_path }}media/{$imgPlGr}" target="_blank">{% blocktrans %}Image pleine grandeur{% endblocktrans %}</a>)
-				</span>
-				<span class="voirliste">
-					(<a href="#li{../@id}">{% blocktrans %}Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>)
-				</span>
-				<xsl:apply-templates select="../legende/alinea | ../legende/bloccitation | ../legende/listenonord | ../legende/listeord | ../legende/listerelation | ../legende/objetmedia | ../legende/refbiblio | ../legende/tabtexte | ../legende/verbatim"/>
-				<xsl:apply-templates select="../notefig|../notetabl"/>
-				<xsl:apply-templates select="../source"/>
-			</figcaption>
-		</figure>
-	</xsl:template>
+  <xsl:template match="figure/objetmedia|tableau/objetmedia">
+    <xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
+    <xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
+    <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
+    <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
+    <figure class="{name(..)}" id="{../@id}">
+      <figcaption>
+        <xsl:apply-templates select="../no"/>
+        <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
+        <xsl:apply-templates select="../legende/alinea | ../legende/bloccitation | ../legende/listenonord | ../legende/listeord | ../legende/listerelation | ../legende/objetmedia | ../legende/refbiblio | ../legende/tabtexte | ../legende/verbatim"/>
+        <xsl:apply-templates select="../notefig|../notetabl"/>
+        <xsl:apply-templates select="../source"/>
+      </figcaption>
+      <a href="{{ request.get_full_path }}media/{$imgPlGr}" target="_blank">
+        <img src="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}" class="img-responsive"/>
+      </a>
+      <p class="voirliste">
+        <a href="#li{../@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
+      </p>
+    </figure>
+  </xsl:template>
 
   <!-- equations, examples & insets/boxed text -->
 	<xsl:template match="grencadre|grequation|grexemple">
@@ -1535,9 +1527,9 @@
   <!-- sources -->
   <xsl:template match="source">
       <xsl:if test="text() or node()">
-          <div class="source">
+          <p class="source">
               <xsl:apply-templates/>
-          </div>
+          </p>
       </xsl:if>
   </xsl:template>
 
@@ -1866,6 +1858,7 @@
           <xsl:text>]</xsl:text>
       </a>
   </xsl:template>
+
   <xsl:template match="notefig|notetabl">
       <div class="notefigtab">
           <xsl:if test="no">
@@ -1876,16 +1869,15 @@
           <xsl:apply-templates select="*[not(self::no)]"/>
       </div>
   </xsl:template>
+
   <xsl:template match="tableau//notefig|tableau//notetabl|figure//notefig|figure//notetabl">
       <div class="notefigtab">
-          <xsl:if test="no">
-              <xsl:apply-templates select="no"/>
-          </xsl:if>
-          <xsl:apply-templates select="*[not(self::no)]"/>
+          <xsl:apply-templates/>
       </div>
   </xsl:template>
+
   <xsl:template match="notefig/no|notetabl/no">
-      <sup class="notefigtab">
+      <sup class="notefigtab" id="{../@id}">
           <xsl:apply-templates/>
       </sup>
   </xsl:template>
