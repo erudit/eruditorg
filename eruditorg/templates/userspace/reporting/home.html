@@ -6,10 +6,10 @@
   {% crispy form %}
   <div class="row">
     <div class="col-md-12">
-      <a href="{% url 'userspace:reporting:csv-issue-export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
+      <a href="{% url 'userspace:reporting:csv_issue_export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
         {% trans "CSV / Numéro" %}
       </a>
-      <a href="{% url 'userspace:reporting:csv-journal-export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
+      <a href="{% url 'userspace:reporting:csv_journal_export' %}?{{ request.GET.urlencode }}" class="btn btn-info">
         {% trans "CSV / Revue" %}
       </a>
     </div>
