@@ -39,6 +39,7 @@ $article-toolbar-width: 80px;
   // add a vertical line before each hgroup
   .border-top {
     @include grid-cell-border();
+    padding: 1em 11px;
   }
 
   /**
@@ -62,8 +63,6 @@ $article-toolbar-width: 80px;
     }
 
     dl, p {
-      margin-top: $margin-vertical-default/2.75;
-      margin-bottom: $margin-vertical-default/2.75;
       font-size: small;
       line-height: 1.5;
     }
