@@ -9,10 +9,10 @@ $article-toolbar-width: 80px;
 * page specific mixins
 */
 
-@mixin paragraph-text-style($font-size: 18px, $font-style-family: 'serif') {
+@mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
   font-family: $font-family-serif-regular;
   font-size: $font-size;
-  line-height: 1.5em;
+  line-height: 1.5;
   @include font-styles($font-style-family);
 }
 
@@ -39,6 +39,7 @@ $article-toolbar-width: 80px;
   // add a vertical line before each hgroup
   .border-top {
     @include grid-cell-border();
+    padding: 1em 11px;
   }
 
   /**
@@ -62,8 +63,6 @@ $article-toolbar-width: 80px;
     }
 
     dl, p {
-      margin-top: $margin-vertical-default/2.75;
-      margin-bottom: $margin-vertical-default/2.75;
       font-size: small;
       line-height: 1.5;
     }
@@ -366,7 +365,7 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * article table of contents
+  * article outline
   */
 
   .article-table-of-contents {
@@ -428,46 +427,92 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * Article body
+  * general full article styles incl. abstract, body, appendices
+  **/
+  .full-article {
+
+    > .article-section:first-child {
+      margin-top: $margin-vertical-default * 0.75;
+    }
+
+  }
+
+  /**
+  * article body
   */
-  .article-body {
-    padding-top: $margin-vertical-default;
-    // padding-right: $article-toolbar-width * 2;
+  .corps {
 
-    // first level headings
-    h4 {
-      margin-bottom: $margin-vertical-default/2;
-      @include fw-sans-medium();
+    // headings within the article
+    h2 {
+      border-top: 1px solid $mid-grey;
+      padding-top: 1em;
     }
 
-    h4.sub-section-title {
-      margin-top: $margin-vertical-default;
+    h2, h3, h4, h5, h6, .h7 {
+      @include fw-serif-bold();
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: $coral-red;
+
+      .italique, em {
+        @include fw-serif-bold-italic;
+        .gras, strong {
+          @include fw-serif-normal-italic;
+        }
+      }
+
+      &.special {
+        text-align: center;
+      }
+
     }
 
-    // P
-    p {
+    p, div {
       @include paragraph-text-style();
     }
 
     blockquote, cite {
-      border-left: 1px solid $gray-lighter;
+      border-left: 1px solid $mid-grey;
       margin-top: $margin-vertical-default;
       margin-bottom: $margin-vertical-default;
       padding-left: $grid-gutter-width * 2;
       padding-right: $grid-gutter-width * 2;
+    }
 
-      h1, h2, h3, h4, h5, p {
-        @include fw-serif-normal-italic();
+    .para {
+      margin-top: $margin-vertical-default;
+      &:first-of-type {
+        margin-top: 0;
       }
 
-      .source {
-        @include fw-serif-bold();
-        font-size: 14px;
-        em, i {
-          @include fw-serif-bold-italic();
-        }
+    }
+
+    /**
+    * Typemarq
+    */
+
+    .majuscule {
+      text-transform: uppercase;
+    }
+
+    .petitecap {
+      font-variant: small-caps;
+    }
+
+    .italique, em {
+      @include fw-serif-normal-italic;
+      .gras, strong {
+        @include fw-serif-bold-italic;
       }
     }
+
+    .gras, strong {
+      @include fw-serif-bold;
+      .italique, em {
+        @include fw-serif-bold-italic;
+      }
+    }
+
 
   }
 
@@ -475,74 +520,94 @@ $article-toolbar-width: 80px;
   * article body sections defaults
   */
   .article-section {
-    margin-bottom: $margin-vertical-default*2;
+    margin-bottom: $margin-vertical-default;
+
   }
 
   /**
-  * each abstract
+  * abstracts
   */
-  .resume {
-    margin-bottom: $margin-vertical-default*2;
+  .grresume {
+    margin-top: $margin-vertical-default;
+  }
 
-    // default font style
-    @include fw-serif-normal();
-    font-size: 18px;
-    line-height: 1.5em;
+  .resume {
+    margin: $margin-vertical-default*1.5 0;
+
+    h2 {
+      @include fw-serif-bold;
+    }
+
+    p, ul,
+    .titreparal, .motscles strong {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .titreparal, .motscles strong {
+      @include fw-sans-medium();
+    }
+
   }
 
   /**
   * Paragraph number
   */
-  .nopara {
-    display: inline-block;
-    position: relative;
-    left: -40px;
-    bottom: -30px;
-    width: 25px;
-    text-align: right;
-    @include fw-serif-bold();
-    font-size: 18px;
+  .corps {
+    counter-reset: nopara;
   }
+
+  .para::before {
+    counter-increment: nopara;
+    content: counter(nopara);
+    text-align: right;
+    @include fw-mono;
+    font-size: 14px;
+    color: $dark-grey;
+    width: 25px;
+    position: absolute;
+    left: -25px;
+    margin-top: 5px;
+  }
+
+  /**
+  * References and footnotes
+  */
+  .norenvoi, .nonote {
+    @include fw-sans-normal();
+    font-size: 0.85em;
+    vertical-align: top;
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+      color: #FFF;
+      background: $coral-red;
+    }
+  }
+
 
   /**
   * keywords
   */
   .motscles {
     margin-top: $margin-vertical-default/2;
+
     ul {
       @media (max-width: $screen-xs-max) {
         display: block;
       }
     }
-  }
 
+  }
 
   /**
-  * Footer elements (grannexe | merci | grnotebio | grnote | grbiblio)
+  * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
 
-  .article-notes {
-
-    p {
-      @include paragraph-text-style(14px);
-    }
-
-    article {
-      position: relative;
-      margin-bottom: $margin-vertical-default/2;
-      @include paragraph-text-style(14px);
-
-      a.no {
-        position: absolute;
-        left: -35px;
-        text-align: right;
-        width: 25px;
-      }
-
-    }
-
+  .erudit-doi {
+    height: 15px;
+    vertical-align: baseline;
+    margin-right: 5px;
   }
-
 
   /**
   * Related articles
@@ -552,7 +617,7 @@ $article-toolbar-width: 80px;
     padding-top: $margin-vertical-default;
     padding-bottom: $margin-vertical-default;
     margin-bottom: $margin-vertical-default;
-    @include grid-cell-border($direction: 'top', $border-width: 2px, $border-color: $gray-light);
+    @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: #000);
 
     > header {
       h2 {
@@ -568,14 +633,14 @@ $article-toolbar-width: 80px;
         width: 100%;
         color: $text-color;
         padding: $margin-vertical-default/2 $grid-gutter-width/2;
-        @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $gray-light);
+        @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $mid-grey);
 
         h4 {
           margin-bottom: $margin-vertical-default/2;
         }
 
         h5 {
-          color: $gray-light;
+          color: $dark-grey;
           font-size: 18px;
         }
 
@@ -592,32 +657,6 @@ $article-toolbar-width: 80px;
 
     }
 
-  }
-
-  /**
-  * Typemarq
-  */
-
-  .majuscule {
-    text-transform: uppercase;
-  }
-
-  .petitecap {
-    font-variant: small-caps;
-  }
-
-  .italique, em {
-    @include fw-serif-normal-italic;
-    .gras, strong {
-      @include fw-serif-bold-italic;
-    }
-  }
-
-  .gras, strong {
-    @include fw-serif-bold;
-    .italique, em {
-      @include fw-serif-bold-italic;
-    }
   }
 
 }

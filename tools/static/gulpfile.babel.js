@@ -136,9 +136,7 @@ gulp.task('build-iconfont', function(){
           fontName: 'erudicon',
           fontPath: '/static/fonts/erudicon/',
           className: 'erudicon'
-        }))
-        .pipe(rename('_erudicon.scss'))
-        .pipe(gulp.dest(sass_dir + '/utils/'));
+        }));
     })
     .pipe(gulp.dest(font_dir + '/erudicon/'));
 });
@@ -285,5 +283,5 @@ gulp.task('watch', function() {
   gulp.watch(iconfont_dir + '/**/*.svg', ['iconfont']);
 
   /* Trigger a live reload on any Django template changes */
-  gulp.watch([templates_dirs + '/**/*.html', templates_dirs + '**/*.xls']).on('change', livereload.changed);
+  gulp.watch([templates_dirs + '/**/*.html', templates_dirs + '**/*.xsl']).on('change', livereload.changed);
 });
