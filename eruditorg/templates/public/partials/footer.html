@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load base_urls_tags %}
 
 <footer id="site-footer" role="contentinfo">
 
@@ -36,7 +37,15 @@
 
           <div class="col-md-6">
             <div class="dropdown-buttons">
-              {% include "partials/language-switch-nav.html" %}
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              <div class="select main-section">{{ LANGUAGE_CODE|language_name_local|title }} <span class="ion-ios-arrow-down caret"></span></div>
+              <ul>
+                {% for language in LANGUAGES %}
+                {% get_language_info for language.0 as lang %}
+                <li><a href="{% trans_current_url language.0 %}" {% if language.0 != LANGUAGE_CODE %}class="btn btn-link active"{% else %}class="btn btn-link disabled"{% endif %}>{{ lang.name_local|title }}</a></li>
+                {% endfor %}
+              </ul>
             </div>
           </div>
 

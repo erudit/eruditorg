@@ -9,7 +9,7 @@
 
 {% block page_title %}
 {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
-{% include "public/journal/_issue_volume.html" %}
+{% include "public/journal/partials/issue_volume.html" %}
 {% endblock page_title %}
 
 {% block breadcrumb %}{{ block.super }}
@@ -18,7 +18,7 @@
   {% if issue.erudit_object.html_theme %}
   {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
   {% else %}
-  {% include "public/journal/_issue_volume.html" %}
+  {% include "public/journal/partials/issue_volume.html" %}
   {% endif %}
 </a>
 {% endblock %}
@@ -40,7 +40,7 @@
           <div>
             <a href="{{ journal.get_absolute_url }}">
               <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
-              {% include 'public/journal/_issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
+              {% include 'public/journal/partials/issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
 
@@ -148,7 +148,7 @@
             <p class="title-tag">{{ issue.journal.name }}</p>
             <h1>
               {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
-              <span>{% include "public/journal/_issue_volume.html" %}</span>
+              <span>{% include "public/journal/partials/issue_volume.html" %}</span>
             </h1>
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
         </header>
