@@ -255,7 +255,7 @@
 				</aside>
 			</xsl:if>
 
-			<div class="article-body col-md-7 col-md-offset-1">
+			<div class="full-article col-md-7 col-md-offset-1">
 
 				<!-- abstract -->
 				<xsl:if test="//resume">
@@ -626,11 +626,9 @@
   </xsl:template>
 
   <xsl:template match="titreparal" mode="abstract">
-    <p>
-      <strong>
-        <xsl:apply-templates/>
-      </strong>
-    </p>
+    <h3 class="{name()}">
+      <xsl:apply-templates/>
+    </h3>
   </xsl:template>
 
   <xsl:template match="resume/alinea">
