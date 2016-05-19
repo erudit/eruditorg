@@ -223,7 +223,7 @@
               </button>
             </li>
             <li>
-              <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
+              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </button>
