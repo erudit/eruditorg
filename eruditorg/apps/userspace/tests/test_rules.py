@@ -75,3 +75,16 @@ class TestUserspaceAccessRule(BaseEruditTestCase):
             authorization_codename=AC.can_manage_individual_subscription.codename)
         # Run & check
         self.assertTrue(user.has_perm('userspace.access'))
+
+    def test_knows_that_a_user_with_the_journal_information_edit_authorization_can_access_the_userspace(self):  # noqa
+        # Setup
+        user = User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+        self.journal.members.add(user)
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal),
+            object_id=self.journal.id,
+            user=user,
+            authorization_codename=AC.can_edit_journal_information.codename)
+        # Run & check
+        self.assertTrue(user.has_perm('userspace.access'))
