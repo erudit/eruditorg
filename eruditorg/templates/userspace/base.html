@@ -59,7 +59,7 @@
 <main role="main">
   <header>
     <h1>
-      <span class="user-space">{% block zone-title %}{{ scope_current_journal.name }}{% endblock %}</span> {% block page-title %}{{ title }}{% endblock %}
+      <span class="user-space">{% block zone_title %}{{ scope_current_journal.name }}{% endblock %}</span> {% block page_title %}{{ title }}{% endblock %}
     </h1>
   </header>
   <div class="container-fluid">
@@ -74,7 +74,7 @@
     <div class="messages-wrapper">
       {% include "partials/messages.html" %}
     </div>
-    {% block content-main %}
+    {% block content_main %}
     {% endblock %}
   </div>
 </main>

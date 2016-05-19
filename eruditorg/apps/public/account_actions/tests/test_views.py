@@ -35,7 +35,7 @@ class TestAccountActionRegisterView(BaseEruditTestCase):
         token = AccountActionTokenFactory.create(action='test-register')
 
         self.client.login(username='david', password='top_secret')
-        url = reverse('public:account-actions:register', kwargs={'key': token.key})
+        url = reverse('public:account_actions:register', kwargs={'key': token.key})
 
         # Run
         response = self.client.get(url)
@@ -50,7 +50,7 @@ class TestAccountActionRegisterView(BaseEruditTestCase):
         token.consume(self.user)
 
         self.client.logout()
-        url = reverse('public:account-actions:register', kwargs={'key': token.key})
+        url = reverse('public:account_actions:register', kwargs={'key': token.key})
 
         # Run
         response = self.client.get(url)
@@ -73,7 +73,7 @@ class TestAccountActionRegisterView(BaseEruditTestCase):
         }
 
         self.client.logout()
-        url = reverse('public:account-actions:register', kwargs={'key': token.key})
+        url = reverse('public:account_actions:register', kwargs={'key': token.key})
 
         # Run
         response = self.client.post(url, post_data, follow=False)
@@ -97,7 +97,7 @@ class TestAccountActionRegisterView(BaseEruditTestCase):
         }
 
         self.client.logout()
-        url = reverse('public:account-actions:register', kwargs={'key': token.key})
+        url = reverse('public:account_actions:register', kwargs={'key': token.key})
 
         # Run
         response = self.client.post(url, post_data, follow=False)

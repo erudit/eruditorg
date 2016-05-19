@@ -2,7 +2,7 @@
 {% load i18n staticfiles %}
 {% load public_journal_tags %}
 
-{% block data-controller %}public:journal:article-detail{% endblock data-controller %}
+{% block data_controller %}public:journal:article_detail{% endblock data_controller %}
 
 {% block meta_tags %}
   <meta name="citation_title" content="{{ article.title }}" />
@@ -36,8 +36,8 @@
   <meta name="citation_date" content="{{ article.erudit_object.publication_year }}" />
   <meta name="citation_publisher" content="{{ article.erudit_object.publisher }}" />
   <meta name="citation_doi" content="{{ article.erudit_object.doi }}" />
-  <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article-detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-  <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article-raw-pdf' article.localidentifier %}" />
+  <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
+  <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' article.localidentifier %}" />
   {% for keywords in article.erudit_object.keywords %}
     <meta name="citation_keywords" lang="{{ keywords.lang }}" content="{% for k in keywords.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
   {% endfor %}
@@ -62,7 +62,7 @@
 {% block content %}
 
 <section
-    id="article-detail"
+    id="article_detail"
     class="container"
     data-article-id="{{ article.id }}"
     {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}

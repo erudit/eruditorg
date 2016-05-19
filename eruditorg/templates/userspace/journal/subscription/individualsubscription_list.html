@@ -1,14 +1,14 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
-{% block page-title %}{% trans "Abonnements" %}{% endblock %}
+{% block page_title %}{% trans "Abonnements" %}{% endblock %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
 <li>{% trans "Abonnements" %}</li>
 {% endblock breadcrumb_end %}
 
-{% block content-main %}
+{% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
   <section class="card card-issue_submissions">
     <div class="row card-header">
@@ -93,4 +93,4 @@
   </section>
   {% endif %}
 </div>
-{% endblock content-main %}
+{% endblock content_main %}

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block page-title %}{% trans "À propos" %}{% endblock page-title %}
+{% block page_title %}{% trans "À propos" %}{% endblock page_title %}
 
 {% block extrahead %}
   {{ form.media.css }}
@@ -13,7 +13,7 @@
 <li>{% trans "À propos" %}</li>
 {% endblock breadcrumb_end %}
 
-{% block content-main %}
+{% block content_main %}
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-{% endblock content-main %}
+{% endblock content_main %}
 
 {% block footerscript %}
   {{ form.media.js }}

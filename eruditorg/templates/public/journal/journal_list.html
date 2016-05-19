@@ -2,12 +2,12 @@
 {% load i18n %}
 {% load static %}
 
-{% block page-title %}{% trans "Revues" %}{% endblock page-title %}
-{% block body_class %}{{ block.super }} journal-list{% endblock %}
-{% block data-controller %}public:journal:journal-list{% endblock data-controller %}
+{% block page_title %}{% trans "Revues" %}{% endblock page_title %}
+{% block body_class %}{{ block.super }} journal_list{% endblock %}
+{% block data_controller %}public:journal:journal_list{% endblock data_controller %}
 
 {% block content %}
-<div id="journal-list">
+<div id="journal_list">
 
   <header class="sorting-index container-fluid">
     <div class="row">
@@ -17,9 +17,9 @@
             <h2 class="h3 bold pull-left">{% if sorting == 'name' %}{% trans "Revues par ordre alphabétique" %}{% elif sorting == 'disciplines' %}{% trans "Revues par disciplines" %}{% endif %}</h2>
             <nav class="pull-right">
               {% if sorting == 'name' %}
-              <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines" class="btn btn-primary-outlined">{% trans "Revues par disciplines" %}</a>
+              <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines" class="btn btn-primary-outlined">{% trans "Revues par disciplines" %}</a>
               {% elif sorting == 'disciplines' %}
-              <a href="{% url 'public:journal:journal-list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
+              <a href="{% url 'public:journal:journal_list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
               {% endif %}
             </nav>
           </div>
@@ -85,7 +85,7 @@
               <div class="col-xs-4">
                 {% if journal.provided_by_fedora %}
                 <a class="" href="{{ journal.get_absolute_url }}">
-                  <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
+                  <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
                 </a>
                 {% endif %}
               </div>

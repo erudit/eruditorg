@@ -1,7 +1,7 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n %}
 
-{% block page-title %}{{ question }}{% endblock %}
+{% block page_title %}{{ question }}{% endblock %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
@@ -9,7 +9,7 @@
 <li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
 {% endblock breadcrumb_end %}
 
-{% block content-main %}
+{% block content_main %}
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">
@@ -27,4 +27,4 @@
     </div>
   </div>
 </div>
-{% endblock content-main %}
+{% endblock content_main %}

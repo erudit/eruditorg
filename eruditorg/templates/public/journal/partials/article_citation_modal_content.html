@@ -49,19 +49,19 @@
     <hr />
     <h3>{% trans "Exporter la notice de cet article" %}</h3>
     <p>
-      <a href="{% url 'public:journal:article-citation-enw' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary cite-export">
+      <a href="{% url 'public:journal:article_citation_enw' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary cite-export">
         <span class="show cite-export-title">.ENW</span>
       </a>
       EndNote, Zotero
     </p>
     <p>
-      <a href="{% url 'public:journal:article-citation-ris' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary cite-export">
+      <a href="{% url 'public:journal:article_citation_ris' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary cite-export">
         <span class="show cite-export-title">.RIS</span>
       </a>
       Papers, Reference Manager, RefWorks, Zotero
     </p>
     <p>
-      <a href="{% url 'public:journal:article-citation-bib' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary cite-export">
+      <a href="{% url 'public:journal:article_citation_bib' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary cite-export">
         <span class="show cite-export-title">.BIB</span>
       </a>
       BibTeX, JabRef, Mendeley, Zotero

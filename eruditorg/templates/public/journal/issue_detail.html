@@ -3,14 +3,14 @@
 {% load staticfiles %}
 {% load public_journal_tags %}
 
-{% block data-controller %}public:journal:issue-detail{% endblock data-controller %}
+{% block data_controller %}public:journal:issue_detail{% endblock data_controller %}
 
-{% block zone-title %}{{ journal.name }}{% endblock %}
+{% block zone_title %}{{ journal.name }}{% endblock %}
 
-{% block page-title %}
+{% block page_title %}
 {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
-{% include "public/journal/_issue_volume.html" %}
-{% endblock page-title %}
+{% include "public/journal/partials/issue_volume.html" %}
+{% endblock page_title %}
 
 {% block breadcrumb %}{{ block.super }}
 /
@@ -18,7 +18,7 @@
   {% if issue.erudit_object.html_theme %}
   {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
   {% else %}
-  {% include "public/journal/_issue_volume.html" %}
+  {% include "public/journal/partials/issue_volume.html" %}
   {% endif %}
 </a>
 {% endblock %}
@@ -27,7 +27,7 @@
 
 {% trans "inconnu" as i18n_unknown %}
 
-<div id="issue-detail">
+<div id="issue_detail">
 
   <div class="container">
     <div class="row">
@@ -35,12 +35,12 @@
       {# Journal information (on right side except mobile) #}
       <aside class="col-sm-push-9 col-sm-3">
 
-        <div class="sidebar-block clearfix issue-detail--resume">
+        <div class="sidebar-block clearfix issue_detail--resume">
 
           <div>
             <a href="{{ journal.get_absolute_url }}">
-              <img src="{% url 'public:journal:issue-coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
-              {% include 'public/journal/_issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
+              <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
+              {% include 'public/journal/partials/issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
 
@@ -132,12 +132,12 @@
             </dt>
             <dd>
               {% for discipline in journal.disciplines.all %}
-              <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+              <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
               {% endfor %}
             </dd>
             {% endif %}
           </dl>
-          <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="" class="img-responsive journal-logo" />
+          <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
         </div>
       </aside>
 
@@ -148,25 +148,25 @@
             <p class="title-tag">{{ issue.journal.name }}</p>
             <h1>
               {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
-              <span>{% include "public/journal/_issue_volume.html" %}</span>
+              <span>{% include "public/journal/partials/issue_volume.html" %}</span>
             </h1>
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
         </header>
 
-        <ol class="issue-detail--articles unstyled">
+        <ol class="issue_detail--articles unstyled">
 
           {% regroup articles|sort_by_ordseq by erudit_object.section_title as section_articles %}
           {% for article_group in section_articles %}
             {% for article in article_group.list %}
-              <li id="article-{{ article.id }}" class="issue-detail--article-item" data-article-id="{{ article.id }}">
+              <li id="article-{{ article.id }}" class="issue_detail--article-item" data-article-id="{{ article.id }}">
                 {% if article_group.grouper %}
                 <p class="title-tag section">{{ article_group.grouper }}</p>
                 {% endif %}
                 <h3><a href="{{ article.get_absolute_url }}">{{ article.erudit_object.html_title|safe }}</a></h3>
-                <p class="issue-detail--article-item--author">{{ article.authors.all|join:", " }}</p>
+                <p class="issue_detail--article-item--author">{{ article.authors.all|join:", " }}</p>
                 <div class="mono-space">
-                  <a href="{% url 'public:journal:article-detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
-                  <a href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
+                  <a href="{% url 'public:journal:article_detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
+                  <a href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
                   <a href="#" class="btn btn-primary-outlined" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Sauvegarder" %}</a>
                   <a href="#" class="btn btn-primary-outlined" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Supprimer" %}</a>
                   {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
@@ -209,7 +209,7 @@
             {% if published_issue != issue %}
             <li class="issue-list-item--inverted col-xs-6 col-sm-3">
               <a href="{{ published_issue.get_absolute_url }}">
-                <img src="{% url 'public:journal:issue-coverpage' published_issue.pk %}" class="img-responsive" alt="{{ published_issue.name }}" />
+                <img src="{% url 'public:journal:issue_coverpage' published_issue.pk %}" class="img-responsive" alt="{{ published_issue.name }}" />
                 <header>
                   <h5>
                     <a href="{{ published_issue.get_absolute_url }}">

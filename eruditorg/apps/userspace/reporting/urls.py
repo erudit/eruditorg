@@ -8,6 +8,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.ReportingHomeView.as_view(), name='home'),
-    url(_(r'^csv/numero/$'), views.ReportingIssueCsvView.as_view(), name='csv-issue-export'),
-    url(_(r'^csv/journal/$'), views.ReportingJournalCsvView.as_view(), name='csv-journal-export'),
+    url(_(r'^csv/numero/$'), views.ReportingIssueCsvView.as_view(), name='csv_issue_export'),
+    url(_(r'^csv/journal/$'), views.ReportingJournalCsvView.as_view(), name='csv_journal_export'),
 ]

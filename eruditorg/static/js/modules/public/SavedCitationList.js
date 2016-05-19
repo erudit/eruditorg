@@ -24,7 +24,7 @@ class SavedCitationList {
     let articleId = $article.data(this.options.articleIdDataAttribute);
     $.ajax({
       type: 'POST',
-      url: Urls['public:citations:add-citation'](articleId),
+      url: Urls['public:citations:add_citation'](articleId),
     }).done(function() {
       $article.data(_.options.articleIsSavedDataAttribute, true);
       $article.find(_.addButtonSelector).hide();
@@ -41,7 +41,7 @@ class SavedCitationList {
     let articleId = $article.data(this.options.articleIdDataAttribute);
     $.ajax({
       type: 'POST',
-      url: Urls['public:citations:remove-citation'](articleId),
+      url: Urls['public:citations:remove_citation'](articleId),
     }).done(function() {
       $article.data(_.options.articleIsSavedDataAttribute, false);
       $article.find(_.removeButtonSelector).hide();

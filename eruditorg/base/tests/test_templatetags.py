@@ -16,7 +16,7 @@ class TestTransCurrentUrlTag(TestCase):
 
     def test_can_translate_a_given_url_in_another_language(self):
         # Setup
-        url = reverse('public:journal:journal-list')
+        url = reverse('public:journal:journal_list')
         request = self.factory.get(url)
         request.resolver_match = resolve(url)
         t = Template(self.loadstatement + '{% trans_current_url "en" %}')

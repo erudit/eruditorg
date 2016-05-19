@@ -335,7 +335,7 @@ class Journal(FedoraMixin, FedoraDated):
 
     def get_absolute_url(self):
         return reverse_url(
-            "public:journal:journal-detail",
+            "public:journal:journal_detail",
             args=[self.code]
         )
 
@@ -484,7 +484,7 @@ class Issue(FedoraMixin, FedoraDated):
 
     def get_absolute_url(self):
         return reverse_url(
-            "public:journal:issue-detail",
+            "public:journal:issue_detail",
             args=[self.journal.code, self.localidentifier]
         )
 
@@ -562,7 +562,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
 
     def get_absolute_url(self):
         return reverse_url(
-            "public:journal:article-detail",
+            "public:journal:article_detail",
             args=[
                 self.issue.journal.code,
                 self.issue.localidentifier,

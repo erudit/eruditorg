@@ -1,13 +1,13 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}{{ journal.name }}{% endblock page-title %}
+{% block page_title %}{{ journal.name }}{% endblock page_title %}
 
 {% block content %}
 
 {% trans "inconnu" as i18n_unknown %}
 
-<section id="journal-detail">
+<section id="journal_detail">
 
   {# top #}
   <div class="container">
@@ -79,7 +79,7 @@
             </h3>
             <div id="journal-info-authors-content" class="akkordion-content" aria-labelledby="journal-info-authors">
               <p>
-                <a href="{% url 'public:journal:journal-authors-list' journal.code %}">{% trans "Voir les auteurs" %}</a>
+                <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Voir les auteurs" %}</a>
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@
             </a>
           </p>
           <a href="{{ latest_issue.get_absolute_url }}">
-            <img src="{% url 'public:journal:issue-coverpage' latest_issue.pk %}" class="img-responsive latest-issue--cover" alt="{{ latest_issue.title }}" />
+            <img src="{% url 'public:journal:issue_coverpage' latest_issue.pk %}" class="img-responsive latest-issue--cover" alt="{{ latest_issue.title }}" />
           </a>
           <p>
             <a href="#back-issues" class="btn btn-primary">
@@ -212,13 +212,13 @@
             </dt>
             <dd>
               {% for discipline in journal.disciplines.all %}
-              <a href="{% url 'public:journal:journal-list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+              <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines#discipline-{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
               {% endfor %}
             </dd>
             {% endif %}
 
           </dl>
-          <img src="{% url 'public:journal:journal-logo' journal.code %}" alt="" class="img-responsive journal-logo" />
+          <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
         </div>
       </aside>
 

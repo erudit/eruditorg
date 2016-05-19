@@ -12,9 +12,9 @@ const controllers = {
   'public:login': LoginController,
   'public:search:advanced-search': AdvancedSearchController,
   'public:search:results': ResultsController,
-  'public:journal:article-detail': ArticleDetailController,
-  'public:journal:issue-detail': IssueDetailController,
-  'public:journal:journal-list': JournalListController,
+  'public:journal:article_detail': ArticleDetailController,
+  'public:journal:issue_detail': IssueDetailController,
+  'public:journal:journal_list': JournalListController,
 };
 
 export default controllers;

@@ -223,7 +223,7 @@
               </button>
             </li>
             <li>
-              <button id="tool-download" data-href="{% url 'public:journal:article-raw-pdf' article.localidentifier %}">
+              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </button>
@@ -231,9 +231,9 @@
             <li>
               <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
                 <span class="erudicon erudicon-tools-cite"></span>
-								<span class="tools-label">{% trans "Citer cet article" %}</span>
-							</button>
-						</li>
+				<span class="tools-label">{% trans "Citer cet article" %}</span>
+			</button>
+			</li>
 						<li>
 							<button id="tool-share">
 								<span class="erudicon erudicon-tools-share"></span>
@@ -273,7 +273,7 @@
 					<xsl:apply-templates select="//corps"/>
 				</section>
 				{% elif article.localidentifier %}
-				<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article-raw-pdf' article.localidentifier %}" width="500" height="700" />
+				<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.localidentifier %}" width="500" height="700" />
 				{% endif %}
 
 				<!-- appendices -->

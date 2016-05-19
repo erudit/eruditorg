@@ -1,9 +1,9 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n staticfiles %}
 
-{% block page-title %}{% trans "Dépôt de fichiers" %}{% endblock %}
+{% block page_title %}{% trans "Dépôt de fichiers" %}{% endblock %}
 
-{% block data-controller %}userspace:editor:form{% endblock data-controller %}
+{% block data_controller %}userspace:editor:form{% endblock data_controller %}
 
 {% block extrahead %}
 {{ form.media.css }}
@@ -20,7 +20,7 @@
 {% endblock breadcrumb_end %}
 
 {% load crispy_forms_tags %}
-{% block content-main %}
+{% block content_main %}
 <div class="col-md-6 col-xs-12 col-centered">
   <section class="card card-upload_form">
     <div class="card-header">
@@ -120,7 +120,7 @@
                         <p>
                           <strong>{% trans "Fichiers :" %}</strong>&nbsp;
                           {% for f in track.files_version.submissions.all %}
-                            <a href="{% url 'userspace:journal:editor:attachment-detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                            <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
                           {% endfor %}
                         </p>
                       {% endif %}
@@ -139,13 +139,13 @@
             {% for t in transitions %}
               <a
               {% if t.name == 'submit' %}
-                href="{% url 'userspace:journal:editor:transition-submit' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_submit' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'approve' %}
-                href="{% url 'userspace:journal:editor:transition-approve' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_approve' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'refuse' %}
-                href="{% url 'userspace:journal:editor:transition-refuse' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_refuse' scope_current_journal.pk object.pk %}"
               {% elif t.name == 'archive' %}
-                href="{% url 'userspace:journal:editor:transition-archive' scope_current_journal.pk object.pk %}"
+                href="{% url 'userspace:journal:editor:transition_archive' scope_current_journal.pk object.pk %}"
               {% endif %}
                 class="btn btn-primary">{{ t.custom.verbose_name }}</a>
             {% endfor %}

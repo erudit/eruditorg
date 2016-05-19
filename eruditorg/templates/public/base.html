@@ -23,7 +23,7 @@
         </a>
       </h1>
 
-      {% url 'public:journal:journal-list' as journal_list_url %}
+      {% url 'public:journal:journal_list' as journal_list_url %}
 
       <nav id="main-nav" class="col-md-8">
         <h2 class="hidden">{% trans "Menu principal" %}</h2>
@@ -33,7 +33,7 @@
               <div class="select main-section">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></div>
               <ul>
                 <li>
-                  <a href="{% url 'public:journal:journal-list' %}">{% trans "Revues" %}</a>
+                  <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
                 </li>
                 <li>
                   <a href="#">{% trans "Livres et actes" %}</a>
@@ -168,7 +168,7 @@
 
 </footer>
 
-{% include "partials/site-footer.html" %}
+{% include "public/partials/footer.html" %}
 
 {% endblock %}
 

@@ -8,5 +8,5 @@
   {% endblocktrans %}
   </p>
   <p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
-  <p><a href="http://{{ site.domain }}{% url 'public:account-actions:landing' key=token.key %}">{% trans "Accepter l'abonnement" %}</a></p>
+  <p><a href="http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}">{% trans "Accepter l'abonnement" %}</a></p>
 {% endblock content %}
