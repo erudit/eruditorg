@@ -170,11 +170,14 @@ body.home {
   }
 
   .latest-issues {
+    list-style: none;
+    margin: 0;
 
     .latest-issues--article {
       margin-top: 20px;
       margin-bottom: 40px;
       padding-top: 36px;
+      height: 300px;
       @include grid-cell-border('top', 1px, $mid-grey);
 
       img {
@@ -182,7 +185,7 @@ body.home {
         margin-bottom: 10px;
       }
       .latest-issues--article--cover {
-        max-height: 160px;
+        height: 140px;
         width: auto;
       }
       .latest-issues--article--journal-title {
