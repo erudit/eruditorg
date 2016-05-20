@@ -2,7 +2,6 @@
 
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -11,24 +10,25 @@ from django.views.generic import DeleteView
 from django.views.generic import ListView
 
 from base.viewmixins import LoginRequiredMixin
-from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
 
 from .forms import AuthorizationForm
+from .viewmixins import RelatedAuthorizationsMixin
 
 
-class AuthorizationUserView(LoginRequiredMixin, ListView):
+class AuthorizationUserView(LoginRequiredMixin, RelatedAuthorizationsMixin, ListView):
     model = Authorization
 
     def get_queryset(self):
         qs = super(AuthorizationUserView, self).get_queryset()
-        ct = ContentType.objects.get(app_label='erudit', model='journal')
-        return qs.filter(content_type=ct, object_id=self.current_journal.pk)
+        target_instance = self.get_target_instance()
+        ct = ContentType.objects.get_for_model(target_instance)
+        return qs.filter(content_type=ct, object_id=target_instance.pk)
 
     def get_authorizations_per_app(self):
         data = {}
 
-        for choice in AC.get_choices():
+        for choice in self.get_related_authorization_choices():
             data[choice[0]] = {
                 'authorizations': self.object_list.filter(authorization_codename=choice[0]),
                 'label': choice[1],
@@ -41,14 +41,23 @@ class AuthorizationUserView(LoginRequiredMixin, ListView):
         data['authorizations'] = self.get_authorizations_per_app()
         return data
 
+    def get_target_instance(self):
+        """ Returns the considered target instance associated with authorizations. """
+        raise NotImplementedError
 
-class AuthorizationCreateView(LoginRequiredMixin, CreateView):
+
+class AuthorizationCreateView(LoginRequiredMixin, RelatedAuthorizationsMixin, CreateView):
     model = Authorization
     form_class = AuthorizationForm
 
+    def form_valid(self, form):
+        response = super(AuthorizationCreateView, self).form_valid(form)
+        messages.success(self.request, _("L'accès a été créé avec succès"))
+        return response
+
     def get_authorization_definition(self):
         """ Returns a tuple of the form (codename, label) for the considered authorization. """
-        authorization_labels_dict = dict(AC.get_choices())
+        authorization_labels_dict = dict(self.get_related_authorization_choices())
         try:
             codename = self.request.GET.get('codename', None)
             assert codename is not None
@@ -69,14 +78,14 @@ class AuthorizationCreateView(LoginRequiredMixin, CreateView):
 
         kwargs.update({
             'codename': authorization_def[0],
-            'journal': self.current_journal,
+            'target': self.get_target_instance(),
         })
 
         return kwargs
 
-    def get_success_url(self):
-        messages.success(self.request, _("L'accès a été créé avec succès"))
-        return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+    def get_target_instance(self):
+        """ Returns the target instance for which we want to create authorizations. """
+        raise NotImplementedError
 
     authorization_definition = cached_property(get_authorization_definition)
 
@@ -84,6 +93,7 @@ class AuthorizationCreateView(LoginRequiredMixin, CreateView):
 class AuthorizationDeleteView(LoginRequiredMixin, DeleteView):
     model = Authorization
 
-    def get_success_url(self):
+    def delete(self, request, *args, **kwargs):
+        response = super(AuthorizationDeleteView, self).delete(request, *args, **kwargs)
         messages.success(self.request, _("L'accès a été supprimé avec succès"))
-        return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+        return response

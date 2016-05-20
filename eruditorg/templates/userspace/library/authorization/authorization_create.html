@@ -1,0 +1,29 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}{% trans "Ajouter un accès" %}{% endblock page_title %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li><a href="{% url 'userspace:library:authorization:list' %}">{% trans "Autorisations" %}</a></li>
+<li>{% trans "Ajouter un accès" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <h1>{% trans "Ajouter un accès" %}</h1>
+  <p class="lead">
+    {% blocktrans trimmed with authorization_label=authorization_label %}
+      Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : <strong>{{ authorization_label }}</strong>
+    {% endblocktrans %}
+  </p>
+  <div class="row">
+    <div class="col-md-12">
+      <form  class="form-vertical" method="post" action="">
+        {% crispy form %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

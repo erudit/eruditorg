@@ -1,0 +1,24 @@
+{% load i18n %}
+{% load rules %}
+
+{% has_perm 'authorization.manage_authorizations' request.user scope_current_organisation as can_manage_authorizations %}
+
+<ul class="main-menu">
+  <li class="userspace menu-item has-children has-dropdown">
+    <a href="{% url 'userspace:library:home' organisation_pk=scope_current_organisation.pk %}">
+      <span class="icon fa ion-ios-home-outline"></span>
+      <span class="sidenav-label">{{ scope_current_organisation.name }}</span>
+    </a>
+    <ul class="sub-menu dropdown">
+      {% if can_manage_authorizations %}
+      <li class="organisation menu-item">
+        <a href="{% url 'userspace:library:authorization:list' organisation_pk=scope_current_organisation.pk %}"
+           {% if menu_library == 'authorization' %}class="active"{% endif %}>
+          <span class="icon fa ion-ios-locked-outline"></span>
+          <span class="sidenav-label">{% trans "Autorisations" %}</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </li>
+</ul>

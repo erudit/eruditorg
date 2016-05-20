@@ -18,6 +18,12 @@
 {% endif %}
 {% endblock inner_nav %}
 
+{% block nav %}
+<nav class="sidenav">
+{% include "userspace/library/partials/menu.html" %}
+</nav>
+{% endblock nav %}
+
 {% block content %}
 <div class="container-fluid">
   <div id="breadcrumb">

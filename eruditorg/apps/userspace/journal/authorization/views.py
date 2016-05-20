@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from django.core.urlresolvers import reverse
+
 from base.viewmixins import MenuItemMixin
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.subscription.models import JournalManagementSubscription
@@ -13,11 +15,20 @@ from ...generic_apps.authorization.views import AuthorizationUserView as BaseAut
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
 
+JOURNAL_AUTHORIZATIONS = [
+    AC.can_manage_authorizations,
+    AC.can_manage_issuesubmission,
+    AC.can_manage_individual_subscription,
+]
+
+
 class AuthorizationUserView(
         JournalScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationUserView):
     menu_journal = 'authorization'
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_user.html'
+
+    related_authorizations = JOURNAL_AUTHORIZATIONS
 
     def get_authorizations_per_app(self):
         data = super(AuthorizationUserView, self).get_authorizations_per_app()
@@ -31,12 +42,23 @@ class AuthorizationUserView(
 
         return data
 
+    def get_target_instance(self):
+        return self.current_journal
+
 
 class AuthorizationCreateView(
         JournalScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationCreateView):
     menu_journal = 'authorization'
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_create.html'
+
+    related_authorizations = JOURNAL_AUTHORIZATIONS
+
+    def get_success_url(self):
+        return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+
+    def get_target_instance(self):
+        return self.current_journal
 
     def has_permission(self):
         has_perm = super(AuthorizationCreateView, self).has_permission()
@@ -57,3 +79,6 @@ class AuthorizationDeleteView(
     def get_permission_object(self):
         authorization = self.get_object()
         return authorization.content_object
+
+    def get_success_url(self):
+        return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
