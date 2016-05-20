@@ -55,30 +55,11 @@
 </header>
 {% endblock %}
 
-{% block content %}
-<main role="main">
-  <header>
-    <h1>
-      <span class="user-space">{% block zone_title %}{{ scope_current_journal.name }}{% endblock %}</span> {% block page_title %}{{ title }}{% endblock %}
-    </h1>
-  </header>
-  <div class="container-fluid">
-    <div id="breadcrumb">
-      {% block breadcrumbs %}
-      <ul class="breadcrumb">
-        <li><a href="{% url 'userspace:dashboard' %}">{{ scope_current_journal.name }}</a></li>
-        {% block breadcrumb_end %}{% endblock breadcrumb_end %}
-      </ul>
-      {% endblock %}
-    </div>
-    <div class="messages-wrapper">
-      {% include "partials/messages.html" %}
-    </div>
-    {% block content_main %}
-    {% endblock %}
-  </div>
-</main>
-{% endblock %}
+{% block body %}
+  <main role="main">
+    {% block content %}{% endblock content %}
+  </main>
+{% endblock body %}
 
 {% block scripts %}
   <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/UserspaceApp.js' %}"></script>

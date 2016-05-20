@@ -1,3 +1,37 @@
 {% extends "userspace/base.html" %}
 {% load rules %}
-{% load userspace_journal_tags %}
+{% load userspace_library_tags %}
+
+{% block inner_nav %}
+{% if scope_user_organisations|length > 1 %}
+<li class="select">
+  <select id="id_scope_chooser" onChange="window.location.href=this.value">
+    {% for o in scope_user_organisations %}
+      {% if organisation_permission_required %}{% has_perm organisation_permission_required request.user o as can_switch %}{% endif %}
+      <option
+        value="{% library_url o %}"
+        {% if o.id == scope_current_organisation.id %}selected{% endif %}
+        {% if can_switch != None and not can_switch %} disabled{% endif %}>{{ o.name }}</option>
+    {% endfor %}
+  </select>
+</li>
+{% endif %}
+{% endblock inner_nav %}
+
+{% block content %}
+<div class="container-fluid">
+  <div id="breadcrumb">
+    {% block breadcrumbs %}
+    <ul class="breadcrumb">
+      <li><a href="{% url 'userspace:library:home' organisation_pk=scope_current_organisation.pk %}">{{ scope_current_organisation.name }}</a></li>
+      {% block breadcrumb_end %}{% endblock breadcrumb_end %}
+    </ul>
+    {% endblock %}
+  </div>
+  <div class="messages-wrapper">
+    {% include "partials/messages.html" %}
+  </div>
+  {% block content_main %}
+  {% endblock %}
+</div>
+{% endblock %}
