@@ -7,8 +7,9 @@ from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from rules.contrib.views import PermissionRequiredMixin
 
-from core.journal.rules_helpers import get_editable_organisations
 from erudit.models import Organisation
+
+from .shortcuts import get_managed_organisations
 
 
 class OrganisationScopeMixin(object):
@@ -33,7 +34,7 @@ class OrganisationScopeMixin(object):
 
     def get_user_organisations(self):
         """ Returns the organisations that can be accessed by the current user. """
-        return get_editable_organisations(self.request.user)
+        return get_managed_organisations(self.request.user)
 
     def init_current_organisation(self, organisation):
         """ Associates the current organisation to the view and saves its ID into the session. """

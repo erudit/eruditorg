@@ -6,8 +6,8 @@ from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 
 from base.viewmixins import LoginRequiredMixin
-from core.journal.rules_helpers import get_editable_organisations
 
+from .shortcuts import get_managed_organisations
 from .viewmixins import OrganisationScopeMixin
 
 
@@ -19,7 +19,7 @@ class LibrarySectionEntryPointView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
-        organisations_qs = get_editable_organisations(self.request.user)
+        organisations_qs = get_managed_organisations(self.request.user)
         organisations_count = organisations_qs.count()
         if organisations_count:
             return reverse(
