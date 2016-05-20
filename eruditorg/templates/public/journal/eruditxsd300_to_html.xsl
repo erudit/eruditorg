@@ -846,9 +846,7 @@
 		</p>
 	</xsl:template>
 	<xsl:template match="no">
-		<span class="no">
-			<xsl:apply-templates/>
-		</span>
+		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="no" mode="liste">
 		<span class="no">
@@ -1007,7 +1005,7 @@
   <!-- media objects -->
 	<xsl:template match="objetmedia/audio">
 		<xsl:variable name="nomAud" select="@*[local-name()='href']"/>
-		<audio id="{@id}" preload="metadata" controls="controls">
+		<audio id="{@id}" class="img-responsive" preload="metadata" controls="controls">
 			<source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}"/>
 		</audio>
 	</xsl:template>
@@ -1025,7 +1023,7 @@
 	<xsl:template match="objetmedia/video">
 		<xsl:variable name="videohref" select="@*[local-name()='href']"/>
 		<xsl:variable name="nomVid" select="substring-before($videohref, '.')"/>
-		<video id="{@id}" preload="metadata" controls="controls">
+		<video id="{@id}" class="img-responsive" preload="metadata" controls="controls">
 			<source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4"/>
 		</video>
 	</xsl:template>
@@ -1836,9 +1834,7 @@
       <div class="note" id="{@id}">
           <xsl:if test="no">
               <a href="#re1{@id}" class="nonote">
-                  <xsl:text>[</xsl:text>
-                  <xsl:apply-templates select="no"/>
-                  <xsl:text>] </xsl:text>
+                  <xsl:text>[</xsl:text><xsl:apply-templates select="no"/><xsl:text>]</xsl:text>
               </a>
           </xsl:if>
           <xsl:apply-templates select="alinea" mode="numero"/>

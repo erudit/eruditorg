@@ -470,13 +470,18 @@ $article-toolbar-width: 80px;
   /**
   * article body
   */
-  .corps {
+  .corps,
+  .merci,
+  .grnote,
+  .grnotebio,
+  .grannexe,
+  .grbiblio {
 
     p, div {
       @include paragraph-text-style();
     }
 
-    blockquote, cite {
+    blockquote {
       border-left: 1px solid $mid-grey;
       margin-top: $margin-vertical-default;
       margin-bottom: $margin-vertical-default;
@@ -518,6 +523,34 @@ $article-toolbar-width: 80px;
       }
     }
 
+    .souligne {
+      text-decoration: underline;
+    }
+
+    .espacefixe {
+      font-size: 14px;
+      @include fw-mono;
+      .italique, em {
+        @include fw-mono-italic;
+      }
+    }
+
+    .barre {
+      text-decoration: line-through;
+    }
+
+    .surligne {
+      border-style: solid none none none;
+      border-with: 1px;
+    }
+
+    .filet {
+      border: 1px solid $dark-grey;
+    }
+
+    .tailleg {
+      font-size: 1.25em;
+    }
 
   }
 
@@ -526,6 +559,7 @@ $article-toolbar-width: 80px;
   */
   .grresume {
     margin-top: $margin-vertical-default;
+    border-bottom: 1px solid #000;
 
     > .resume {
       margin: $margin-vertical-default*1.5 0;
@@ -593,6 +627,9 @@ $article-toolbar-width: 80px;
 
   }
 
+  .nonote {
+    margin-right: 0.5em;
+  }
 
   /**
   * keywords
