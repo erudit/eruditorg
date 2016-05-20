@@ -1353,14 +1353,14 @@
 	                          <td/>
 	                      </xsl:if>
 	                      <xsl:for-each select="lrsourcee">
-	                          <td class="header">
+	                          <th>
 	                              <xsl:apply-templates/>
-	                          </td>
+	                          </th>
 	                      </xsl:for-each>
 	                      <xsl:for-each select="lrciblee">
-	                          <td class="header">
+	                          <th>
 	                              <xsl:apply-templates/>
-	                          </td>
+	                          </th>
 	                      </xsl:for-each>
 	                  </tr>
 	              </xsl:if>
