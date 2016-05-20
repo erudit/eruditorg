@@ -1,4 +1,6 @@
-from datetime import datetime as dt
+# -*- coding: utf-8 -*-
+
+import datetime as dt
 from functools import reduce
 
 from django.db import models
@@ -19,7 +21,7 @@ from ..managers import JournalUpcomingManager
 
 # choices
 
-YEARS = tuple((n, n) for n in range(1900, dt.now().year + 6))
+YEARS = tuple((n, n) for n in range(1900, dt.datetime.now().year + 6))
 
 
 # abstracts
@@ -299,7 +301,7 @@ class Journal(FedoraMixin, FedoraDated):
 
     @property
     def published_issues(self):
-        return self.issues.filter(date_published__isnull=False)
+        return self.issues.filter(date_published__lte=dt.datetime.now().date())
 
     @property
     def first_issue(self):
@@ -429,7 +431,6 @@ class Issue(FedoraMixin, FedoraDated):
         verbose_name=_("Date de production"),
     )
     date_published = models.DateField(
-        null=True, blank=True,
         verbose_name=_("Date de publication"),
     )
 
@@ -451,21 +452,33 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number. """
-        if self.volume and self.number and self.date_published:
+        if self.volume and self.number:
             return _(
                 'Volume {volume}, numéro {number}, {publication_date}'.format(
                     volume=self.volume, number=self.number,
                     publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
-        elif self.volume and self.date_published:
+        elif self.volume:
             return _(
                 'Volume {volume}, {publication_date}'.format(
                     volume=self.volume,
                     publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
-        elif self.number and self.date_published:
+        elif self.number:
             return _(
                 'Numéro {number}, {publication_date}'.format(
                     number=self.number,
                     publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
+
+    @property
+    def has_movable_limitation(self):
+        """ Returns a boolean indicating if the issue has a movable limitation. """
+        open_access = self.open_access or (self.open_access is None and self.journal.open_access)
+        if not open_access:
+            publication_year = self.date_published.year
+            current_year = dt.datetime.now().year
+            year_offset = 4 if self.journal.type and self.journal.type.code == 'S' else 2
+            return True if publication_year <= current_year <= publication_year + year_offset \
+                else False
+        return False
 
     # Fedora-related methods
     # --
@@ -575,6 +588,10 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
         """ Returns a boolean indicating if the article is in open access. """
         return self.issue.open_access or (
             self.issue.open_access is None and self.issue.journal.open_access)
+
+    @property
+    def has_movable_limitation(self):
+        return self.issue.has_movable_limitation
 
     class Meta:
         verbose_name = _("Article")

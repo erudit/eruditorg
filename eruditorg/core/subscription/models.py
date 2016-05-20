@@ -1,10 +1,12 @@
 # -*- coding: utf-*-
 
+import datetime as dt
 import ipaddress
 from functools import reduce
 
 from django.conf import settings
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
@@ -56,6 +58,13 @@ class JournalAccessSubscription(AbstractSubscription):
             return _('{} - Accès complet').format(dest)
         return _('{} - Accès multiples').format(dest)
 
+    @cached_property
+    def is_ongoing(self):
+        """ Returns a boolean indicating if the subscription is ongoing or not. """
+        nowd = dt.datetime.now().date()
+        return JournalAccessSubscriptionPeriod.objects.filter(
+            subscription=self, start__lte=nowd, end__gte=nowd).exists()
+
 
 class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
     """ Defines a period in which a user or an organisation is allowed to access journals. """
@@ -106,6 +115,13 @@ class JournalManagementSubscription(AbstractSubscription):
     class Meta:
         verbose_name = _('Abonnement de gestion de revue')
         verbose_name_plural = _('Abonnements de gestion de revue')
+
+    @cached_property
+    def is_ongoing(self):
+        """ Returns a boolean indicating if the subscription is ongoing or not. """
+        nowd = dt.datetime.now().date()
+        return JournalManagementSubscriptionPeriod.objects.filter(
+            subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
 
 class JournalManagementPlan(models.Model):

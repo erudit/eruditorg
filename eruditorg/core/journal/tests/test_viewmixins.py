@@ -8,6 +8,7 @@ from django.test import RequestFactory
 
 from core.subscription.factories import InstitutionIPAddressRangeFactory
 from core.subscription.factories import JournalAccessSubscriptionFactory
+from core.subscription.factories import JournalAccessSubscriptionPeriodFactory
 from erudit.factories import ArticleFactory
 from erudit.factories import IssueFactory
 from erudit.factories import OrganisationFactory
@@ -80,7 +81,55 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         # Run # check
         self.assertTrue(view.has_access())
 
+    def test_can_grant_access_to_an_article_has_no_movable_limitation(self):
+        # Setup
+        now_dt = dt.datetime.now()
+
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.date(now_dt.year - 5, 3, 20),
+            localidentifier='test', open_access=False)
+        article = ArticleFactory.create(issue=issue)
+
+        class MyView(ArticleAccessCheckMixin):
+            def get_article(self):
+                return article
+
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        view = MyView()
+        view.request = request
+
+        # Run # check
+        self.assertTrue(view.has_access())
+
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self):
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            open_access=False)
+        article = ArticleFactory.create(issue=issue)
+
+        now_dt = dt.datetime.now()
+
+        subscription = JournalAccessSubscriptionFactory.create(user=self.user, journal=self.journal)
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+
+        class MyView(ArticleAccessCheckMixin):
+            def get_article(self):
+                return article
+
+        request = self.factory.get('/')
+        request.user = self.user
+        view = MyView()
+        view.request = request
+
+        # Run # check
+        self.assertTrue(view.has_access())
+
+    def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(self):  # noqa
         # Setup
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
@@ -99,7 +148,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.has_access())
+        self.assertFalse(view.has_access())
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account(self):
         # Setup
@@ -109,8 +158,16 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         article = ArticleFactory.create(issue=issue)
 
         organisation = OrganisationFactory.create()
+
+        now_dt = dt.datetime.now()
+
         subscription = JournalAccessSubscriptionFactory.create(
             journal=self.journal, organisation=organisation)
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+
         InstitutionIPAddressRangeFactory.create(
             subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
@@ -130,6 +187,38 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         # Run # check
         self.assertTrue(view.has_access())
+
+    def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(self):  # noqa
+        # Setup
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            open_access=False)
+        article = ArticleFactory.create(issue=issue)
+
+        organisation = OrganisationFactory.create()
+
+        subscription = JournalAccessSubscriptionFactory.create(
+            journal=self.journal, organisation=organisation)
+
+        InstitutionIPAddressRangeFactory.create(
+            subscription=subscription,
+            ip_start='192.168.1.2', ip_end='192.168.1.4')
+
+        class MyView(ArticleAccessCheckMixin):
+            def get_article(self):
+                return article
+
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        parameters = request.META.copy()
+        parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
+        request.META = parameters
+
+        view = MyView()
+        view.request = request
+
+        # Run # check
+        self.assertFalse(view.has_access())
 
     def test_inserts_a_flag_into_the_context(self):
         # Setup

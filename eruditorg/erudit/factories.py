@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+import datetime as dt
+
 import factory
 from faker import Factory
 
@@ -47,6 +51,11 @@ class JournalFactory(factory.django.DjangoModelFactory):
                 self.publishers.add(group)
 
 
+class JournalTypeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = 'erudit.JournalType'
+
+
 class JournalInformationFactory(factory.django.DjangoModelFactory):
     journal = factory.SubFactory(JournalFactory)
 
@@ -61,6 +70,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
 
     journal = factory.SubFactory(JournalFactory)
     localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
+    date_published = dt.datetime.now().date()
 
 
 class ArticleFactory(factory.django.DjangoModelFactory):
