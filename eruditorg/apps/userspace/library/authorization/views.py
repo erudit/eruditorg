@@ -16,6 +16,7 @@ from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 LIBRARY_AUTHORIZATIONS = [
     AC.can_manage_authorizations,
+    AC.can_manage_organisation_subscription_ips,
 ]
 
 

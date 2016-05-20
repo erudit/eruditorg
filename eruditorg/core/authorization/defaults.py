@@ -45,6 +45,14 @@ class AuthorizationConfig(object):
     This authorization defines the ability to handle the individual subscriptions to journals.
     """
 
+    can_manage_organisation_subscription_ips = AuthorizationDef(
+        'subscriptions:can_manage_organisation_subscription_ips',
+        _("Gestion des adresses IP de l'abonnement"))
+    """
+    This authorization defines the ability to handle the IPs of an organisation subscriptions to
+    journals.
+    """
+
     @classmethod
     def get_choices(cls, staff_only=False):
         vattrs = inspect.getmembers(cls)
