@@ -498,6 +498,69 @@ $article-toolbar-width: 80px;
     }
 
     /**
+    * lists
+    */
+
+    ul {
+
+      &.nul {
+        list-style: none;
+        margin-left: 1em;
+      }
+
+      &.carre {
+        list-style: square;
+      }
+
+      &.disque {
+        list-style: disc;
+      }
+
+      &.cercle {
+        list-style: circle;
+      }
+
+      &.tiret {
+          list-style: none;
+
+          li:before {
+            content: '– ';
+            @include fw-sans-normal;
+          }
+
+          .alinea {
+            display: inline;
+          }
+
+      }
+
+    }
+
+    ol {
+
+      &.decimal {
+        list-style: decimal;
+      }
+
+      &.lettremaj {
+        list-style: upper-alpha;
+      }
+
+      &.lettremin {
+        list-style: lower-alpha;
+      }
+
+      &.romainmaj {
+        list-style: upper-roman;
+      }
+
+      &.romainmin {
+        list-style: lower-roman;
+      }
+
+    }
+
+    /**
     * Typemarq
     */
 
@@ -592,7 +655,7 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * Paragraph number
+  * paragraph numbers
   */
   .corps {
     counter-reset: nopara;
