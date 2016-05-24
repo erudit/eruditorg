@@ -58,7 +58,7 @@
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-              <a href="{% url 'login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-info">{% trans "S'identifier" %}</a>
+              <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-info">{% trans "S'identifier" %}</a>
             </div>
           </div>
           <br />
