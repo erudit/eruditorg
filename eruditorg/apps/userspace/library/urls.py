@@ -11,6 +11,7 @@ section_apps_urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(_(r'^autorisations/'),
         include('apps.userspace.library.authorization.urls', namespace='authorization')),
+    url(_(r'^membres/'), include('apps.userspace.library.members.urls', namespace='members')),
     url(_(r'^plages-ip/'),
         include('apps.userspace.library.subscription_ips.urls', namespace='subscription_ips')),
 ]

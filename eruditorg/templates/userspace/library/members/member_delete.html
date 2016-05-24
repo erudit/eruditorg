@@ -1,0 +1,34 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Confirmer la retrait du membre ?" %}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk%}">{% trans "Membres" %}</a></li>
+<li>{% trans "Confirmer la retrait du membre ?" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Confirmer la retrait du membre ?" %}</h3>
+      </div>
+      <div class="panel-body">
+      <div class="warning-message">
+        {% blocktrans trimmed with name=member.get_full_name|default:member.username %}
+          Voulez-vous supprimer <strong>{{ name }}</strong> de l'organisation ?
+        {% endblocktrans %}
+      </div>
+        <form action="" method="post">{% csrf_token %}
+          <input type="hidden" name="post" value="yes" />
+          <input type="submit" value="{% trans "Oui" %}" class="btn btn-warning" />
+          <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk%}" class="btn">{% trans "Non" %}</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content_main %}

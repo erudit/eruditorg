@@ -1,0 +1,22 @@
+ul#id_member_list{
+  list-style: none;
+
+  li{
+    padding: 0;
+    background: $gray-lighter;
+
+    &:hover, &:focus{
+      text-decoration: none;
+      background: darken($gray-lighter, 2%);
+    }
+
+    div.content-wrapper{
+      padding: 12px 16px;
+
+      span.title{
+        display: block;
+        font-weight: bold;
+      }
+    }
+  }
+}

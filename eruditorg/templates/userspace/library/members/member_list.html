@@ -1,0 +1,84 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Membres" %}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Membres" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <section class="card card-members">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Membres" %}</h2>
+      </div>
+      <div class="col-sm-6 text-right">
+        <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">{% trans "Ajouter un membre" %}</a>
+      </div>
+    </div>
+    <ul id="id_member_list" class="row card-body">
+      {% for member in members %}
+      <li class="col-xs-12">
+        <div class="content-wrapper">
+          <span class="actions pull-right">
+            <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}"
+               class="btn btn-danger">{% trans "Supprimer" %}</a>
+          </span>
+          <span class="title">
+            {{ member.get_full_name|default:member.username }}
+          </span>
+          <br />
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="row">
+      <div class="col-xs-12">
+        {% include "partials/pagination.html" %}
+      </div>
+    </div>
+  </section>
+  {% if pending_members %}
+  <section class="card card-pending_members">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Membres en attente d'acceptation" %}</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{% trans "Adresse e-mail" %}</th>
+              <th>{% trans "Prénom" %}</th>
+              <th>{% trans "Nom" %}</th>
+              <th>{% trans "Date d'expiration" %}</th>
+              <th>{% trans "Actions" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pmember in pending_members %}
+            <tr class="text-center">
+              <td>{{ forloop.counter }}</td>
+              <td>{{ pmember.email }}</td>
+              <td>{{ pmember.first_name }}</td>
+              <td>{{ pmember.last_name }}</td>
+              <td>{{ pmember.expiration_date }}</td>
+              <td>
+                <span class="actions pull-right">
+                  <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" class="btn btn-danger" title="{% trans 'Supprimer' %}">
+                    {% trans "Supprimer" %}
+                  </a>
+                <span class="actions pull-right">
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock content_main %}
