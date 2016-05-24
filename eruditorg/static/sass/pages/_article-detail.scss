@@ -470,13 +470,18 @@ $article-toolbar-width: 80px;
   /**
   * article body
   */
-  .corps {
+  .corps,
+  .merci,
+  .grnote,
+  .grnotebio,
+  .grannexe,
+  .grbiblio {
 
     p, div {
       @include paragraph-text-style();
     }
 
-    blockquote, cite {
+    blockquote {
       border-left: 1px solid $mid-grey;
       margin-top: $margin-vertical-default;
       margin-bottom: $margin-vertical-default;
@@ -488,6 +493,120 @@ $article-toolbar-width: 80px;
       margin-top: $margin-vertical-default;
       &:first-of-type {
         margin-top: 0;
+      }
+
+    }
+
+    /**
+    * lists
+    */
+
+    ul {
+
+      &.nul {
+        list-style: none;
+        margin-left: 1em;
+      }
+
+      &.carre {
+        list-style: square;
+      }
+
+      &.disque {
+        list-style: disc;
+      }
+
+      &.cercle {
+        list-style: circle;
+      }
+
+      &.tiret {
+          list-style: none;
+
+          li:before {
+            content: '– ';
+            @include fw-sans-normal;
+          }
+
+          .alinea {
+            display: inline;
+          }
+
+      }
+
+    }
+
+    ol {
+
+      &.decimal {
+        list-style: decimal;
+      }
+
+      &.lettremaj {
+        list-style: upper-alpha;
+      }
+
+      &.lettremin {
+        list-style: lower-alpha;
+      }
+
+      &.romainmaj {
+        list-style: upper-roman;
+      }
+
+      &.romainmin {
+        list-style: lower-roman;
+      }
+
+    }
+
+    /**
+    * source / target tables
+    */
+
+    .listerelation {
+
+      tr {
+        border: 0;
+      }
+
+      th {
+        @include fw-serif-bold;
+        text-align: left;
+      }
+
+      td, th {
+        padding: 0.25em 0.5em;
+      }
+
+      &.type2, &.type5 {
+
+        .lrsource p {
+          @include fw-serif-bold;
+
+          em {
+            @include fw-serif-bold-italic;
+          }
+
+        }
+
+      }
+
+      &.type3, &.type6 {
+
+        .lrcible p {
+          @include fw-serif-normal-italic;
+
+        }
+
+      }
+
+      &.type4 {
+
+        .lrcible p {
+          margin-left: 1.5em;
+        }
+
       }
 
     }
@@ -518,7 +637,41 @@ $article-toolbar-width: 80px;
       }
     }
 
+    .souligne {
+      text-decoration: underline;
+    }
 
+    .espacefixe {
+      font-size: 14px;
+      @include fw-mono;
+      .italique, em {
+        @include fw-mono-italic;
+      }
+    }
+
+    .barre {
+      text-decoration: line-through;
+    }
+
+    .surligne {
+      border-style: solid none none none;
+      border-with: 1px;
+    }
+
+    .filet {
+      border: 1px solid $dark-grey;
+    }
+
+    .tailleg {
+      font-size: 1.25em;
+    }
+
+  }
+
+  .source {
+    color: $dark-grey;
+    font-size: smaller;
+    text-align: right;
   }
 
   /**
@@ -526,6 +679,7 @@ $article-toolbar-width: 80px;
   */
   .grresume {
     margin-top: $margin-vertical-default;
+    border-bottom: 1px solid #000;
 
     > .resume {
       margin: $margin-vertical-default*1.5 0;
@@ -558,7 +712,7 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * Paragraph number
+  * paragraph numbers
   */
   .corps {
     counter-reset: nopara;
@@ -593,6 +747,9 @@ $article-toolbar-width: 80px;
 
   }
 
+  .nonote {
+    margin-right: 0.5em;
+  }
 
   /**
   * keywords
@@ -661,11 +818,6 @@ $article-toolbar-width: 80px;
           padding-left: 0.25em;
         }
 
-      }
-
-      .source {
-        color: $dark-grey;
-        font-size: smaller;
       }
 
     }
