@@ -1925,7 +1925,7 @@
     <xsl:for-each select=".">
       <figure class="{name(..)}" id="li{../@id}">
         <figcaption class="notitre">
-          <span class="allertexte"><a href="#{../@id}">-^</a></span>
+          <span class="allertexte"><a href="#{../@id}">|^</a></span>
           <xsl:apply-templates select="../no"/>
           <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
         </figcaption>
