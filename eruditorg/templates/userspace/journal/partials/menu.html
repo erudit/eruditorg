@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load rules %}
 
-{% has_perm 'journal.edit_journal' request.user scope_current_journal as can_manage_information %}
+{% has_perm 'journal.edit_journal_information' request.user scope_current_journal as can_manage_information %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
 {% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_account %}

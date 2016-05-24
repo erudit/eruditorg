@@ -18,6 +18,7 @@ rules.add_perm(
         (
             is_journal_member &
             HasAnyAuthorization([
+                AC.can_edit_journal_information,
                 AC.can_manage_authorizations,
                 AC.can_manage_issuesubmission,
                 AC.can_manage_individual_subscription,

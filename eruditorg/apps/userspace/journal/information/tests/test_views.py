@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
+from core.authorization.defaults import AuthorizationConfig as AC
+from core.authorization.factories import AuthorizationFactory
 from erudit.models import JournalInformation
 from erudit.tests import BaseEruditTestCase
 
@@ -22,6 +25,9 @@ class TestJournalInformationUpdateView(BaseEruditTestCase):
 
     def test_embed_the_selected_language_into_the_context(self):
         # Setup
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
+            user=self.user, authorization_codename=AC.can_edit_journal_information.codename)
         self.client.login(username='david', password='top_secret')
         url = reverse('userspace:journal:information:update',
                       kwargs={'journal_pk': self.journal.pk})
@@ -36,6 +42,9 @@ class TestJournalInformationUpdateView(BaseEruditTestCase):
 
     def test_can_be_used_to_update_journal_information_using_the_current_lang(self):
         # Setup
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
+            user=self.user, authorization_codename=AC.can_edit_journal_information.codename)
         self.client.login(username='david', password='top_secret')
         post_data = {
             'about_fr': 'Ceci est un test',
@@ -51,6 +60,9 @@ class TestJournalInformationUpdateView(BaseEruditTestCase):
 
     def test_can_be_used_to_update_journal_information_using_a_specific_lang(self):
         # Setup
+        AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
+            user=self.user, authorization_codename=AC.can_edit_journal_information.codename)
         self.client.login(username='david', password='top_secret')
         post_data = {
             'about_en': 'This is a test',
