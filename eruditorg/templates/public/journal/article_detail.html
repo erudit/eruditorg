@@ -53,7 +53,7 @@
    {% if article.issue.erudit_object.html_theme %}
    {{ article.issue.erudit_object.html_theme|safe|truncatechars:50 }}
    {% else %}
-   {% include "public/journal/_issue_volume.html" %}
+   {% include "public/journal/partials/issue_volume.html" %}
    {% endif %}
    </a>
  / <a>{{ article.title|truncatechars:50 }}</a>
