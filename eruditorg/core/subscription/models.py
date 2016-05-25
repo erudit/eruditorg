@@ -91,8 +91,16 @@ class InstitutionIPAddressRange(models.Model):
 
     def clean(self):
         super(InstitutionIPAddressRange, self).clean()
-        start = ipaddress.ip_address(self.ip_start)
-        end = ipaddress.ip_address(self.ip_end)
+        try:
+            start = ipaddress.ip_address(self.ip_start)
+        except ValueError:
+            raise ValidationError(_(
+                '{0} n\'est pas une adresse IP valide').format(self.ip_start))
+        try:
+            end = ipaddress.ip_address(self.ip_end)
+        except ValueError:
+            raise ValidationError(_(
+                '{0} n\'est pas une adresse IP valide').format(self.ip_end))
         if start > end:
             raise ValidationError(_(
                 'L\'adresse IP de début doit être inférieure à l\'adresse IP de fin'))

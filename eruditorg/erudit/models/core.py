@@ -131,6 +131,12 @@ class Organisation(models.Model):
         upload_to='organisation_badges',
     )
 
+    members = models.ManyToManyField(
+        User,
+        related_name='organisations',
+        verbose_name=_('Membres'),
+    )
+
     def __str__(self):
         return "{:s}".format(
             self.name,

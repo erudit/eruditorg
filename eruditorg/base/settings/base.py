@@ -51,6 +51,8 @@ INSTALLED_APPS = (
     'apps.userspace.journal.editor',
     'apps.userspace.journal.information',
     'apps.userspace.journal.subscription',
+    'apps.userspace.library',
+    'apps.userspace.library.authorization',
     'apps.userspace.reporting',
     'core.authorization',
     'core.account_actions',

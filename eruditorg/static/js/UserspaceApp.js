@@ -17,6 +17,6 @@ $(document).ready(function(ev) {
   // Initializes the router
   router.init();
 
-  // Initializes the journal chooser
-  $('#id_journal_chooser').select2();
+  // Initializes the scope chooser
+  $('#id_scope_chooser').select2();
 });

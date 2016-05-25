@@ -13,7 +13,7 @@ class TestAuthorizationForm(BaseEruditTestCase):
     def test_initializes_the_user_field_with_the_current_journal_members(self):
         # Run & check
         form = AuthorizationForm(
-            codename=AC.can_manage_issuesubmission.codename, journal=self.journal)
+            codename=AC.can_manage_issuesubmission.codename, target=self.journal)
         self.assertEqual(list(form.fields['user'].queryset), list(self.journal.members.all()))
 
     def test_can_validate_a_basic_authorization(self):
@@ -22,7 +22,7 @@ class TestAuthorizationForm(BaseEruditTestCase):
             'user': self.user.id,
         }
         form = AuthorizationForm(
-            form_data, codename=AC.can_manage_issuesubmission.codename, journal=self.journal)
+            form_data, codename=AC.can_manage_issuesubmission.codename, target=self.journal)
         # Run & check
         self.assertTrue(form.is_valid())
 
@@ -32,7 +32,7 @@ class TestAuthorizationForm(BaseEruditTestCase):
             'user': self.user.id,
         }
         form = AuthorizationForm(
-            form_data, codename=AC.can_manage_issuesubmission.codename, journal=self.journal)
+            form_data, codename=AC.can_manage_issuesubmission.codename, target=self.journal)
         # Run & check
         self.assertTrue(form.is_valid())
         form.save()
@@ -54,7 +54,7 @@ class TestAuthorizationForm(BaseEruditTestCase):
             'user': self.user.id,
         }
         form = AuthorizationForm(
-            form_data, codename=AC.can_manage_issuesubmission.codename, journal=self.journal)
+            form_data, codename=AC.can_manage_issuesubmission.codename, target=self.journal)
         # Run & check
         self.assertFalse(form.is_valid())
         self.assertTrue('user' in form.errors)

@@ -1,0 +1,12 @@
+{% extends "base_email.html" %}
+{% load i18n %}
+
+{% block content %}
+  <p>
+  {% blocktrans trimmed with organisation_name=token.content_object.name %}
+    Une proposition vous a été envoyée afin de rejoindre l'organisation <strong>{{ organisation_name }}</strong>.
+  {% endblocktrans %}
+  </p>
+  <p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
+  <p><a href="http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}">{% trans "Accepter la proposition" %}</a></p>
+{% endblock content %}

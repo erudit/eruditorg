@@ -1,0 +1,54 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Plages d'adresses IP" %}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Plages d'adresses IP" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <section class="card card-issue_submissions">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Plages d'adresses IP" %}</h2>
+      </div>
+      <div class="col-sm-6 text-right">
+        <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">{% trans "Créer une plage d'adresse IP" %}</a>
+      </div>
+    </div>
+    <ul id="id_ip_range_list" class="row card-body">
+      {% for ip_range in subscription_ip_ranges %}
+      <li class="col-xs-12">
+        <div class="content-wrapper">
+          <span class="actions pull-right">
+            <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}"
+               class="btn btn-danger">{% trans "Supprimer" %}</a>
+          </span>
+          <span class="title">
+            {{ ip_range.subscription }}
+          </span>
+          <span class="metadata-wrapper">
+            <span class="metadata">
+              <span class="metadata-title">{% trans "Début" %}</span>
+              <span class="metadata-value">{{ ip_range.ip_start }}</span>
+            </span>
+            <span class="metadata">
+              <span class="metadata-title">{% trans "Fin" %}</span>
+              <span class="metadata-value">{{ ip_range.ip_end }}</span>
+            </span>
+          </span>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="row">
+      <div class="col-xs-12">
+        {% include "partials/pagination.html" %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content_main %}
