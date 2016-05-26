@@ -11,6 +11,17 @@
     padding: 60px 0 $margin-vertical-default 0;
   }
 
+  .arrow-up {
+    margin-top: 1em;
+    font-size: 2em;
+    @include fw-sans-bold;
+
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+    }
+
+  }
+
 }
 
 
