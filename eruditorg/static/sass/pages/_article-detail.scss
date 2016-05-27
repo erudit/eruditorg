@@ -1,12 +1,16 @@
 /**
-* page specific variables
+* Article detail page
+*/
+
+/**
+* Page-specific variables
 */
 
 $article-toolbar-width: 80px;
 
 
 /**
-* page specific mixins
+* Page-specific mixins
 */
 
 @mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
@@ -446,9 +450,9 @@ $article-toolbar-width: 80px;
         margin-bottom: 0.5em;
         color: $coral-red;
 
-        .italique, em {
+        em {
           @include fw-serif-bold-italic;
-          .gras, strong {
+          strong {
             @include fw-serif-normal-italic;
           }
         }
