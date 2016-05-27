@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from account_actions.action_base import AccountActionBase
+from account_actions.action_pool import actions
+from account_actions.test.factories import AccountActionTokenFactory
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from faker import Factory
 
-from core.account_actions.action_base import AccountActionBase
-from core.account_actions.action_pool import actions
-from core.account_actions.factories import AccountActionTokenFactory
 from erudit.tests.base import BaseEruditTestCase
 
 faker = Factory.create()

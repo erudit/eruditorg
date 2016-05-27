@@ -2,6 +2,7 @@
 
 import logging
 
+from account_actions.models import AccountActionToken
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
@@ -15,7 +16,6 @@ from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
-from core.account_actions.models import AccountActionToken
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
 

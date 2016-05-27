@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from account_actions.models import AccountActionToken
+from account_actions.test.factories import AccountActionTokenFactory
 from faker import Factory
 
-from core.account_actions.factories import AccountActionTokenFactory
-from core.account_actions.models import AccountActionToken
 from core.journal.account_actions import OrganisationMembershipAction
 from erudit.factories import OrganisationFactory
 from erudit.tests.base import BaseEruditTestCase

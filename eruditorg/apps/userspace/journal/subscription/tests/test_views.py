@@ -1,12 +1,12 @@
 # -*- coding; utf-8 -*-
 
+from account_actions.models import AccountActionToken
+from account_actions.test.factories import AccountActionTokenFactory
 from django.contrib.contenttypes.models import ContentType
 from django.core import mail
 from django.core.urlresolvers import reverse
 from faker import Factory
 
-from core.account_actions.factories import AccountActionTokenFactory
-from core.account_actions.models import AccountActionToken
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.factories import AuthorizationFactory
 from core.subscription.factories import JournalAccessSubscriptionFactory
