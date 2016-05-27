@@ -20,6 +20,7 @@ from PyPDF2 import PdfFileMerger
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import SingleJournalMixin
+from core.tracking.viewmixins import TrackingMetricMixin
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -215,13 +216,15 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 
 class ArticleDetailView(
-        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin, DetailView):
+        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
+        TrackingMetricMixin, DetailView):
     """
     Displays an Article page.
     """
     context_object_name = 'article'
     model = Article
     template_name = 'public/journal/article_detail.html'
+    tracking_metric_name = 'erudit_journal_article_view'
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -235,6 +238,11 @@ class ArticleDetailView(
         context['related_articles'] = related_articles.order_by('?')[:4]
 
         return context
+
+    def get_metric_fields(self):
+        return {
+            'localidentifier': self.object.localidentifier,
+        }
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
