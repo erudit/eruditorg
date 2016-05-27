@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from account_actions.models import AccountActionToken
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -14,7 +15,6 @@ from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
-from core.account_actions.models import AccountActionToken
 
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from account_actions.models import AccountActionToken
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from core.account_actions.models import AccountActionToken
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.models import JournalAccessSubscription
 

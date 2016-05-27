@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from account_actions.models import AccountActionToken
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from core.account_actions.models import AccountActionToken
 from core.journal.account_actions import OrganisationMembershipAction
 
 

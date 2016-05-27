@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from account_actions.views.generic import AccountActionLandingView as BaseAccountActionLandingView
+from account_actions.views.generic import AccountActionConsumeView  # noqa
+from account_actions.views.generic import AccountActionTokenMixin
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.views.generic import CreateView
 from rules.contrib.views import PermissionRequiredMixin
-
-from core.account_actions.views.generic import AccountActionLandingView \
-    as BaseAccountActionLandingView
-from core.account_actions.views.generic import AccountActionConsumeView  # noqa
-from core.account_actions.views.generic import AccountActionTokenMixin
 
 from .forms import AccountActionRegisterForm
 

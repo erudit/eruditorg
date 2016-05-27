@@ -1,10 +1,10 @@
 # -*- coding utf-8 -*-
 
+from account_actions.action_base import AccountActionBase
+from account_actions.action_pool import actions
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from core.account_actions import actions
-from core.account_actions.action_base import AccountActionBase
 from core.email import Email
 
 from .models import JournalAccessSubscription
