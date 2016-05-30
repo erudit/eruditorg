@@ -10,7 +10,7 @@ from .conf import settings as tracking_settings
 logger = logging.getLogger(__name__)
 
 
-def metric(metric_name, num=1, tags={}, **kwargs):
+def metric(metric_name, num=1, time=None, tags={}, **kwargs):
     """ Increments a specific metric.
 
     This function writes a point corresponding to a specific metric into an InfluxDB database. It
@@ -19,9 +19,11 @@ def metric(metric_name, num=1, tags={}, **kwargs):
 
     :param metric_name: The name of the metric to increment
     :param num: The number to increment the metric with (it defaults to 1)
+    :param time: The datetime associated with the metric event
     :param tags: The tags to store in the InfluxDB point
     :type metric_name: str
     :type num: int
+    :type time: datetime
     :type tags: dict
 
     """
@@ -32,6 +34,10 @@ def metric(metric_name, num=1, tags={}, **kwargs):
         'tags': tags,
         'fields': metric_fields,
     }
+
+    if time:
+        metric_json_body.update({'time': time})
+
     try:
         assert tracking_settings.ACTIVATED
         client = get_client()
