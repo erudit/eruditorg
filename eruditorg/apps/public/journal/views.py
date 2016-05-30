@@ -239,7 +239,7 @@ class ArticleDetailView(
 
         return context
 
-    def get_metric_fields(self):
+    def get_metric_tags(self):
         subscription = self.subscription
         return {
             'localidentifier': self.object.localidentifier,
