@@ -62,6 +62,7 @@ class ArticleAccessCheckMixin(object):
             3- the current IP address is inside on of the IP address ranges allowed
                to access to it
         """
+        self.subscription = None
         article = self.get_article()
 
         # 1- Is the article in open access? Is the article subject to a movable limitation?
@@ -77,6 +78,7 @@ class ArticleAccessCheckMixin(object):
                 user=self.request.user,
             ).first()
             if individual_subscription and individual_subscription.is_ongoing:
+                self.subscription = individual_subscription
                 return True
 
         # 3- Is the current IP address allowed to access the article as an institution?
@@ -92,6 +94,7 @@ class ArticleAccessCheckMixin(object):
                 subscription=institutional_subscription,
                 ip_start__lte=ip, ip_end__gte=ip).exists()
         if institutional_access:
+            self.subscription = institutional_subscription
             return True
 
         return False
