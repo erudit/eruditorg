@@ -224,7 +224,7 @@ class ArticleDetailView(
     context_object_name = 'article'
     model = Article
     template_name = 'public/journal/article_detail.html'
-    tracking_metric_name = 'erudit_journal_article_view'
+    tracking_metric_name = 'erudit__journal__article_view'
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -240,8 +240,10 @@ class ArticleDetailView(
         return context
 
     def get_metric_fields(self):
+        subscription = self.subscription
         return {
             'localidentifier': self.object.localidentifier,
+            'subscription_id': subscription.id if subscription else None,
         }
 
     @method_decorator(ensure_csrf_cookie)
