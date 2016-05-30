@@ -17,8 +17,12 @@ class TrackingMetricMixin(object):
         """ Returns the metric fields to embed in the point that will be created. """
         return {}
 
+    def get_metric_tags(self):
+        """ Returns the metric tags to embed in the point that will be created. """
+        return {}
+
     def incr_metric(self):
         """ Increments the metric associated with the considered view. """
         if self.tracking_metric_name is None:
             return metric
-        metric(self.tracking_metric_name, **self.get_metric_fields())
+        metric(self.tracking_metric_name, tags=self.get_metric_tags(), **self.get_metric_fields())
