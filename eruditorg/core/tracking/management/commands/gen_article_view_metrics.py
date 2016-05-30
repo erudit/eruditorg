@@ -68,6 +68,9 @@ class Command(BaseCommand):
                     'journal_localidentifier': article.issue.journal.localidentifier,
                     'issue_localidentifier': article.issue.localidentifier,
                     'localidentifier': article.localidentifier,
-                    'subscription_id': subscription_id})
+                    'subscription_id': subscription_id,
+                    'open_access': article.open_access or not article.has_movable_limitation,
+                    'view_type': random.choice(['html', 'pdf', ]),
+                    })
             self.stdout.write(self.style.MIGRATE_LABEL(
                 'Generated point {i}/{number}'.format(i=i, number=number)))

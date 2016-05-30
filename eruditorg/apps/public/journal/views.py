@@ -16,11 +16,11 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
+from rules.contrib.views import PermissionRequiredMixin
 
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import SingleJournalMixin
-from core.tracking.viewmixins import TrackingMetricMixin
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -33,6 +33,7 @@ from erudit.models import Journal
 from erudit.models import Issue
 from erudit.utils.pdf import generate_pdf
 
+from .viewmixins import ArticleViewTrackingMetricMixin
 from .viewmixins import SingleArticleMixin
 
 
@@ -217,14 +218,14 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 class ArticleDetailView(
         FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
-        TrackingMetricMixin, DetailView):
+        ArticleViewTrackingMetricMixin, DetailView):
     """
     Displays an Article page.
     """
     context_object_name = 'article'
     model = Article
     template_name = 'public/journal/article_detail.html'
-    tracking_metric_name = 'erudit__journal__article_view'
+    tracking_view_type = 'html'
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -238,15 +239,6 @@ class ArticleDetailView(
         context['related_articles'] = related_articles.order_by('?')[:4]
 
         return context
-
-    def get_metric_tags(self):
-        subscription = self.subscription
-        return {
-            'journal_localidentifier': self.object.issue.journal.localidentifier,
-            'issue_localidentifier': self.object.issue.localidentifier,
-            'localidentifier': self.object.localidentifier,
-            'subscription_id': subscription.id if subscription else None,
-        }
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
@@ -294,16 +286,23 @@ class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
         return context
 
 
-class ArticleRawPdfView(FedoraFileDatastreamView):
+class ArticleRawPdfView(
+        ArticleViewTrackingMetricMixin, ArticleAccessCheckMixin, PermissionRequiredMixin,
+        FedoraFileDatastreamView):
     """
     Returns the PDF file associated with an article.
     """
     content_type = 'application/pdf'
     datastream_name = 'pdf'
     fedora_object_class = ArticleDigitalObject
+    raise_exception = True
+    tracking_view_type = 'pdf'
+
+    def get_article(self):
+        return get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
 
     def get_fedora_object_pid(self):
-        article = get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        article = self.get_article()
         return article.pid
 
     def get_response_object(self, fedora_object):
@@ -311,6 +310,12 @@ class ArticleRawPdfView(FedoraFileDatastreamView):
         response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
             self.kwargs['articleid'])
         return response
+
+    def get_permission_object(self):
+        return self.get_article()
+
+    def has_permission(self):
+        return self.has_access()
 
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF
