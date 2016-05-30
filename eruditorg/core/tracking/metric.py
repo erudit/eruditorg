@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
+from requests.exceptions import ConnectionError
+
 from .client import get_client
+from .conf import settings as tracking_settings
+
+logger = logging.getLogger(__name__)
 
 
 def metric(metric_name, num=1, tags={}, **kwargs):
@@ -25,6 +32,14 @@ def metric(metric_name, num=1, tags={}, **kwargs):
         'tags': tags,
         'fields': metric_fields,
     }
-    client = get_client()
-    # Write the point into the InfluxDB database
-    client.write_points([metric_json_body])
+    try:
+        assert tracking_settings.ACTIVATED
+        client = get_client()
+    except AssertionError:
+        # The tracking is deactivated, so there's nothing else to do
+        pass
+    except ConnectionError:
+        logger.error('InfluxDB server unavailable', exc_info=True)
+    else:
+        # Write the point into the InfluxDB database
+        client.write_points([metric_json_body])
