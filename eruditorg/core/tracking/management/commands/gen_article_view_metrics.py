@@ -65,6 +65,8 @@ class Command(BaseCommand):
             metric(
                 'erudit__journal__article_view', time=dtime,
                 tags={
+                    'journal_localidentifier': article.issue.journal.localidentifier,
+                    'issue_localidentifier': article.issue.localidentifier,
                     'localidentifier': article.localidentifier,
                     'subscription_id': subscription_id})
             self.stdout.write(self.style.MIGRATE_LABEL(
