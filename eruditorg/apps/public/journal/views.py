@@ -242,6 +242,8 @@ class ArticleDetailView(
     def get_metric_tags(self):
         subscription = self.subscription
         return {
+            'journal_localidentifier': self.object.issue.journal.localidentifier,
+            'issue_localidentifier': self.object.issue.localidentifier,
             'localidentifier': self.object.localidentifier,
             'subscription_id': subscription.id if subscription else None,
         }
