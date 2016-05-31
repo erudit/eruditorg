@@ -15,7 +15,7 @@ from .counter import JournalReport1GOA
 
 class CounterJournalReportView(LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, View):
     http_method_names = ['get', ]
-    permission_required = 'subscription.manage_organisation_subscription_ips'
+    permission_required = 'subscription.access_library_stats'
     report_class = None
 
     def get(self, request, organisation_pk):
