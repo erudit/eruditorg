@@ -77,18 +77,25 @@ class CounterReport(object):
         _journals_data_mapping = {}  # Used to map the journal localIDs to the aggregations results
 
         for j in journals:
-            total_count = list(
-                self.reporting_period_total__results[
-                    ('erudit__journal__article_view',
-                     {'journal_localidentifier': j.localidentifier})])[0]['sum']
-            html_count = list(
-                self.reporting_period_html__results[
-                    ('erudit__journal__article_view',
-                     {'journal_localidentifier': j.localidentifier})])[0]['sum']
-            pdf_count = list(
-                self.reporting_period_pdf__results[
-                    ('erudit__journal__article_view',
-                     {'journal_localidentifier': j.localidentifier})])[0]['sum']
+            try:
+                total_count = list(
+                    self.reporting_period_total__results[
+                        ('erudit__journal__article_view',
+                         {'journal_localidentifier': j.localidentifier})])[0]['sum']
+                html_count = list(
+                    self.reporting_period_html__results[
+                        ('erudit__journal__article_view',
+                         {'journal_localidentifier': j.localidentifier})])[0]['sum']
+                pdf_count = list(
+                    self.reporting_period_pdf__results[
+                        ('erudit__journal__article_view',
+                         {'journal_localidentifier': j.localidentifier})])[0]['sum']
+            except IndexError:
+                # No aggregation results are available for this Journal instance
+                total_count = 0
+                html_count = 0
+                pdf_count = 0
+
             journal_data = {
                 'localidentifier': j.localidentifier,
                 'journal': j,
@@ -97,6 +104,7 @@ class CounterReport(object):
                 'reporting_period_pdf': pdf_count,
                 'months': [0 for _ in range(self.nmonths)]  # Will be filled later on
             }
+
             self.journals.append(journal_data)
             _journals_data_mapping.update({j.localidentifier: journal_data})
 
