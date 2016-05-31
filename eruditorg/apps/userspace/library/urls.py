@@ -14,6 +14,7 @@ section_apps_urlpatterns = [
     url(_(r'^membres/'), include('apps.userspace.library.members.urls', namespace='members')),
     url(_(r'^plages-ip/'),
         include('apps.userspace.library.subscription_ips.urls', namespace='subscription_ips')),
+    url(_(r'^statistiques/'), include('apps.userspace.library.stats.urls', namespace='stats')),
 ]
 
 urlpatterns = [
