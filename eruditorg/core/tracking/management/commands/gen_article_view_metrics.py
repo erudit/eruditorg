@@ -22,7 +22,7 @@ class Command(BaseCommand):
             help='Number of metric points to generate')
         parser.add_argument(
             '--start', action='store', dest='sdate',
-            help='Start date from wdthich the points will be generated (ISO format) '
+            help='Start date from which the points will be generated (ISO format) '
                  '- defaults to the current date minus 4 years')
 
     def handle(self, *args, **options):
