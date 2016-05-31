@@ -23,14 +23,19 @@ class ArticleViewTrackingMetricMixin(TrackingMetricMixin):
     tracking_metric_name = 'erudit__journal__article_view'
     tracking_view_type = 'html'
 
-    def get_metric_tags(self):
+    def get_metric_fields(self):
         article = self.get_article()
         subscription = self.subscription
         return {
-            'journal_localidentifier': article.issue.journal.localidentifier,
             'issue_localidentifier': article.issue.localidentifier,
             'localidentifier': article.localidentifier,
             'subscription_id': subscription.id if subscription else None,
+        }
+
+    def get_metric_tags(self):
+        article = self.get_article()
+        return {
+            'journal_localidentifier': article.issue.journal.localidentifier,
             'open_access': article.open_access or not article.has_movable_limitation,
             'view_type': self.tracking_view_type,
         }
