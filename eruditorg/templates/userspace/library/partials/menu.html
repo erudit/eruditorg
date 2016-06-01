@@ -4,6 +4,7 @@
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_organisation as can_manage_authorizations %}
 {% has_perm 'subscription.manage_organisation_subscription_ips' request.user scope_current_organisation as can_manage_organisation_subscription_ips %}
 {% has_perm 'journal.manage_organisation_members' request.user scope_current_organisation as can_manage_organisation_members %}
+{% has_perm 'userspace.access_library_stats' request.user scope_current_organisation as can_access_library_stats %}
 
 <ul class="main-menu">
   <li class="userspace menu-item has-children has-dropdown">
@@ -36,6 +37,15 @@
            {% if menu_library == 'members' %}class="active"{% endif %}>
           <span class="icon fa ion-ios-people-outline"></span>
           <span class="sidenav-label">{% trans "Membres" %}</span>
+        </a>
+      </li>
+      {% endif %}
+      {% if can_access_library_stats %}
+      <li class="organisation menu-item">
+        <a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}"
+           {% if menu_library == 'stats' %}class="active"{% endif %}>
+          <span class="icon fa ion-ios-locked-outline"></span>
+          <span class="sidenav-label">{% trans "Statistiques" %}</span>
         </a>
       </li>
       {% endif %}

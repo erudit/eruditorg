@@ -7,6 +7,7 @@ from . import views
 
 
 urlpatterns = [
+    url(r'^$', views.StatsLandingView.as_view(), name='landing'),
     url(_(r'^rapport/jr1/csv/$'),
         views.CounterJournalReport1CsvView.as_view(), name='jr1-csv-report'),
     url(_(r'^rapport/jr1-goa/csv/$'),

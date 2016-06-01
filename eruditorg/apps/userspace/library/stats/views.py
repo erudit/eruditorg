@@ -4,13 +4,28 @@ import csv
 import datetime as dt
 
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 from django.views.generic import View
 
 from base.viewmixins import LoginRequiredMixin
+from base.viewmixins import MenuItemMixin
 
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 from .counter import JournalReport1
 from .counter import JournalReport1GOA
+
+
+class StatsLandingView(
+        LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
+    menu_library = 'stats'
+    permission_required = 'subscription.access_library_stats'
+    template_name = 'userspace/library/stats/landing.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StatsLandingView, self).get_context_data(**kwargs)
+        current_year = dt.datetime.now().year
+        context['years'] = range(current_year, current_year - 20, -1)
+        return context
 
 
 class CounterJournalReportView(LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, View):
