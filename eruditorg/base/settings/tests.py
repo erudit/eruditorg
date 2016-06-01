@@ -26,3 +26,9 @@ INSTALLED_APPS.remove('raven.contrib.django.raven_compat')
 MIGRATION_MODULES = DisableMigrations()
 
 USE_DEBUG_EMAIL = False
+
+TRACKING_INFLUXDB_HOST = 'localhost'
+TRACKING_INFLUXDB_PORT = 8086
+TRACKING_INFLUXDB_DBNAME = 'erudit-metrics'
+TRACKING_INFLUXDB_USER = 'root'
+TRACKING_INFLUXDB_PASSWORD = 'root'
