@@ -70,7 +70,7 @@
               </div>
             </div>
           </div>
-          {% if object.pk and not object.is_submitted %}
+          {% if object.pk and not object.is_submitted and not object.is_archived and not object.is_validated %}
           <div class="panel">
             <div class="panel-heading" role="tab" id="issue-upload-heading">
               <h3 class="panel-title">
