@@ -7,10 +7,18 @@ class MetricCaptureMixin(object):
     """ This mixin create an InfluxDB point when the view is executed. """
     tracking_metric_name = None
 
+    def capture_metric(self, response):
+        """ Given a response object, returns True if the metric should be captured.
+
+        The default implementation returns True if the response's status code is 200.
+        """
+        return response.status_code == 200
+
     def dispatch(self, request, *args, **kwargs):
         self.request = request
         response = super(MetricCaptureMixin, self).dispatch(request, *args, **kwargs)
-        self.incr_metric()
+        if self.capture_metric(response):
+            self.incr_metric()
         return response
 
     def get_metric_fields(self):
