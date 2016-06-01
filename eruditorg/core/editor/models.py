@@ -88,6 +88,14 @@ class IssueSubmission(models.Model):
     def is_submitted(self):
         return self.status == self.SUBMITTED
 
+    @property
+    def is_archived(self):
+        return self.status == self.ARCHIVED
+
+    @property
+    def is_validated(self):
+        return self.status == self.VALID
+
     @transition(field=status, source=DRAFT, target=SUBMITTED,
                 permission=lambda user: user.has_perm(
                     'editor.manage_issuesubmission'),
@@ -118,7 +126,7 @@ class IssueSubmission(models.Model):
         """
         self.save_version()
 
-    @transition(field=status, source='*', target=ARCHIVED,
+    @transition(field=status, source=[DRAFT, SUBMITTED, VALID], target=ARCHIVED,
                 permission=lambda user: (
                     user.has_perm('editor.review_issuesubmission')),
                 custom=dict(verbose_name=("Archiver")))
