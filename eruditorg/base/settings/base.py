@@ -62,9 +62,9 @@ INSTALLED_APPS = (
     'core.citations',
     'core.editor',
     'core.journal',
+    'core.metrics',
     'core.reporting',
     'core.subscription',
-    'core.tracking',
 
     # Third-party apps
     'grappelli',

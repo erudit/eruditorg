@@ -6,7 +6,7 @@ import functools
 
 from dateutil.relativedelta import relativedelta
 
-from core.tracking.client import get_client
+from core.metrics.client import get_client
 from erudit.models import Journal
 
 

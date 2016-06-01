@@ -3,13 +3,13 @@
 from .metric import metric
 
 
-class TrackingMetricMixin(object):
+class MetricCaptureMixin(object):
     """ This mixin create an InfluxDB point when the view is executed. """
     tracking_metric_name = None
 
     def dispatch(self, request, *args, **kwargs):
         self.request = request
-        response = super(TrackingMetricMixin, self).dispatch(request, *args, **kwargs)
+        response = super(MetricCaptureMixin, self).dispatch(request, *args, **kwargs)
         self.incr_metric()
         return response
 

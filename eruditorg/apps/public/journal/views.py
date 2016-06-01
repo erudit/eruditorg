@@ -33,7 +33,7 @@ from erudit.models import Journal
 from erudit.models import Issue
 from erudit.utils.pdf import generate_pdf
 
-from .viewmixins import ArticleViewTrackingMetricMixin
+from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 
 
@@ -218,7 +218,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 class ArticleDetailView(
         FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
-        ArticleViewTrackingMetricMixin, DetailView):
+        ArticleViewMetricCaptureMixin, DetailView):
     """
     Displays an Article page.
     """
@@ -287,7 +287,7 @@ class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
 
 
 class ArticleRawPdfView(
-        ArticleViewTrackingMetricMixin, ArticleAccessCheckMixin, PermissionRequiredMixin,
+        ArticleViewMetricCaptureMixin, ArticleAccessCheckMixin, PermissionRequiredMixin,
         FedoraFileDatastreamView):
     """
     Returns the PDF file associated with an article.
