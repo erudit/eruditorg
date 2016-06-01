@@ -88,7 +88,7 @@ class IssueSubmissionUpdate(
 
         obj = self.get_object()
         if obj.status in (
-                IssueSubmission.VALID, IssueSubmission.SUBMITTED):
+                IssueSubmission.VALID, IssueSubmission.SUBMITTED, IssueSubmission.ARCHIVED):
             form.disable_form()
 
         form.fields['submissions'].widget.set_model_reference(
