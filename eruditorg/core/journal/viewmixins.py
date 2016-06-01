@@ -48,7 +48,7 @@ class ArticleAccessCheckMixin(object):
     def get_context_data(self, **kwargs):
         """ Inserts a flag indicating if the article can be accessed in the context. """
         context = super(ArticleAccessCheckMixin, self).get_context_data(**kwargs)
-        context['article_access_granted'] = self.has_access()
+        context['article_access_granted'] = self.article_access_granted
         return context
 
     def has_access(self):
@@ -98,3 +98,7 @@ class ArticleAccessCheckMixin(object):
             return True
 
         return False
+
+    @cached_property
+    def article_access_granted(self):
+        return self.has_access()
