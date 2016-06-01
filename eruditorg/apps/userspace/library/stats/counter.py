@@ -82,18 +82,23 @@ class CounterReport(object):
                     self.reporting_period_total__results[
                         ('erudit__journal__article_view',
                          {'journal_localidentifier': j.localidentifier})])[0]['sum']
+            except IndexError:
+                total_count = 0
+
+            try:
                 html_count = list(
                     self.reporting_period_html__results[
                         ('erudit__journal__article_view',
                          {'journal_localidentifier': j.localidentifier})])[0]['sum']
+            except IndexError:
+                html_count = 0
+
+            try:
                 pdf_count = list(
                     self.reporting_period_pdf__results[
                         ('erudit__journal__article_view',
                          {'journal_localidentifier': j.localidentifier})])[0]['sum']
             except IndexError:
-                # No aggregation results are available for this Journal instance
-                total_count = 0
-                html_count = 0
                 pdf_count = 0
 
             journal_data = {
