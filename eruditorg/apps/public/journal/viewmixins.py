@@ -2,7 +2,7 @@
 
 from django.http import Http404
 
-from core.tracking.metric import metric
+from core.metrics.metric import metric
 from erudit.models import Article
 
 
@@ -19,13 +19,13 @@ class SingleArticleMixin(object):
             raise Http404
 
 
-class ArticleViewTrackingMetricMixin(object):
+class ArticleViewMetricCaptureMixin(object):
     tracking_article_view_granted_metric_name = 'erudit__journal__article_view'
     tracking_view_type = 'html'
 
     def dispatch(self, request, *args, **kwargs):
         self.request = request
-        response = super(ArticleViewTrackingMetricMixin, self).dispatch(request, *args, **kwargs)
+        response = super(ArticleViewMetricCaptureMixin, self).dispatch(request, *args, **kwargs)
         if response.status_code == 200 and self.article_access_granted:
             # We register this metric only if the article can be viewed
             metric(
