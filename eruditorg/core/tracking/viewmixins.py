@@ -24,5 +24,5 @@ class TrackingMetricMixin(object):
     def incr_metric(self):
         """ Increments the metric associated with the considered view. """
         if self.tracking_metric_name is None:
-            return metric
+            return
         metric(self.tracking_metric_name, tags=self.get_metric_tags(), **self.get_metric_fields())
