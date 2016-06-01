@@ -133,8 +133,10 @@
           </div>
           {% endif %}
           <div class="form-group text-right">
+            {% if not object.is_submitted and not object.is_archived and not object.is_validated %}
             <button type="reset" class="btn btn-default" id="submit-id-reset">{% trans "Annuler" %}</button>
             <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+            {% endif %}
             {% if object.pk %}
             {% for t in transitions %}
               <a
