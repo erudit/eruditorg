@@ -23,6 +23,27 @@ class IssueSubmissionTestCase(BaseEruditTestCase):
         self.assertFalse(issue_1.is_submitted)
         self.assertTrue(issue_2.is_submitted)
 
+    def test_knows_if_it_is_validated(self):
+        # Setup
+        issue_1 = IssueSubmissionFactory.create(journal=self.journal)
+        issue_2 = IssueSubmissionFactory.create(journal=self.journal)
+        issue_2.submit()
+        issue_2.approve()
+        # Run & check
+        self.assertFalse(issue_1.is_validated)
+        self.assertTrue(issue_2.is_validated)
+
+    def test_knows_if_it_is_archived(self):
+        # Setup
+        issue_1 = IssueSubmissionFactory.create(journal=self.journal)
+        issue_2 = IssueSubmissionFactory.create(journal=self.journal)
+        issue_2.submit()
+        issue_2.approve()
+        issue_2.archive()
+        # Run & check
+        self.assertFalse(issue_1.is_archived)
+        self.assertTrue(issue_2.is_archived)
+
 
 class IssueSubmissionWorkflowTestCase(BaseEruditTestCase):
 

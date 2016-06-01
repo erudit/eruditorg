@@ -32,6 +32,8 @@
               {% trans "Soumis" %}
               {% elif issue_submission.status == 'V' %}
               {% trans "Validé" %}
+              {% elif issue_submission.status == 'A' %}
+              {% trans "Archivé" %}
               {% endif %}
             </span>
           </span>
