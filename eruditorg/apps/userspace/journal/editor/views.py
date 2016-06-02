@@ -67,7 +67,6 @@ class IssueSubmissionUpdate(
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
-    permission_required = 'editor.manage_issuesubmission'
     template_name = 'userspace/journal/editor/form.html'
 
     def get_form_kwargs(self):
@@ -117,6 +116,11 @@ class IssueSubmissionUpdate(
 
     def get_success_url(self):
         return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
+
+    def has_permission(self):
+        obj = self.get_permission_object()
+        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
+            or self.request.user.has_perm('editor.review_issuesubmission', obj)
 
 
 class IssueSubmissionTransitionView(
@@ -204,12 +208,16 @@ class IssueSubmissionList(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     menu_journal = 'editor'
     model = IssueSubmission
-    permission_required = 'editor.manage_issuesubmission'
     template_name = 'userspace/journal/editor/issues.html'
 
     def get_queryset(self):
         qs = super(IssueSubmissionList, self).get_queryset()
         return qs.filter(journal=self.current_journal)
+
+    def has_permission(self):
+        obj = self.get_permission_object()
+        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
+            or self.request.user.has_perm('editor.review_issuesubmission', obj)
 
 
 class IssueSubmissionAttachmentView(
@@ -242,5 +250,6 @@ class IssueSubmissionAttachmentView(
         return response
 
     def has_permission(self):
-        return self.request.user.has_perm('editor.manage_issuesubmission') \
-            or self.request.user.has_perm('editor.review_issuesubmission')
+        obj = self.get_permission_object()
+        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
+            or self.request.user.has_perm('editor.review_issuesubmission', obj)
