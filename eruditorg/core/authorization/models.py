@@ -35,7 +35,7 @@ class Authorization(models.Model):
     # The 'authorization_codename' defines the authorization that will be
     # granted to the considered user or group.
     authorization_codename = models.CharField(
-        choices=AuthorizationConfig.get_choices(), max_length=100)
+        choices=AuthorizationConfig.get_choices(include_staff_only=True), max_length=100)
 
     class Meta:
         verbose_name = _('Autorisation')

@@ -1,26 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from .defaults import AuthorizationConfig
 from .models import Authorization
 
 
-class AuthorizationAdminForm(forms.ModelForm):
-    class Meta:
-        model = Authorization
-        exclude = []
-
-    def __init__(self, *args, **kwargs):
-        super(AuthorizationAdminForm, self).__init__(*args, **kwargs)
-        self.fields['authorization_codename'].choices += AuthorizationConfig.get_choices(
-            staff_only=True)
-
-
 class AuthorizationAdmin(admin.ModelAdmin):
-    form = AuthorizationAdminForm
     list_display = (
         'id',
         'user',

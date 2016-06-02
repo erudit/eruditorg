@@ -61,8 +61,13 @@ class AuthorizationConfig(object):
     """
 
     @classmethod
-    def get_choices(cls, staff_only=False):
-        vattrs = inspect.getmembers(cls)
-        return [
-            (a[1].codename, a[1].label) for a in vattrs
-            if isinstance(a[1], AuthorizationDef) and a[1].staff_only == staff_only]
+    def get_choices(cls, include_staff_only=False):
+        authorizations = []
+        for vattr in inspect.getmembers(cls):
+            if isinstance(vattr[1], AuthorizationDef) and (
+                include_staff_only or not vattr[1].staff_only
+            ):
+                authorizations.append(
+                    (vattr[1].codename, vattr[1].label)
+                )
+        return authorizations
