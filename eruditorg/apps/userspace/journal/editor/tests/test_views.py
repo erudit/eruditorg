@@ -444,6 +444,27 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.issue_submission.files_versions.count(), 2)
 
+    def test_can_refuse_an_issue_submission_with_a_comment(self):
+        # Setup
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:journal:editor:transition_refuse',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        # Run
+        response = self.client.post(url, {'comment': 'This is a comment!'})
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.issue_submission.files_versions.count(), 2)
+        track = self.issue_submission.last_status_track
+        self.assertEqual(track.comment, 'This is a comment!')
+
 
 class TestIssueSubmissionArchiveView(BaseEditorTestCase):
     def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
