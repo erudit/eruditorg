@@ -124,6 +124,10 @@
                           {% endfor %}
                         </p>
                       {% endif %}
+                      {% if track.comment %}
+                        <p><strong>{% trans "Commentaire :" %}</strong></p>
+                        <small>{{ track.comment }}</small>
+                      {% endif %}
                     </li>
                   {% endfor %}
                   </ul>

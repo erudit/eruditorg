@@ -27,6 +27,7 @@ from erudit.models.event import Event
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
 from .forms import IssueSubmissionForm
+from .forms import IssueSubmissionTransitionCommentForm
 from .forms import IssueSubmissionUploadForm
 
 logger = logging.getLogger(__name__)
@@ -131,6 +132,7 @@ class IssueSubmissionTransitionView(
     model = IssueSubmission
     raise_exception = True
     template_name = 'userspace/journal/editor/issuesubmission_transition.html'
+    use_comment_form = False
 
     # The following attributes should be defined in subclasses
     question = None
@@ -148,6 +150,15 @@ class IssueSubmissionTransitionView(
         transition = getattr(self.object, self.transition_name)
         transition()
         self.object.save()
+
+        # Saves a potential comment if applicable
+        if self.use_comment_form:
+            form = IssueSubmissionTransitionCommentForm(data=request.POST)
+            comment = form.cleaned_data.get('comment', None) if form.is_valid() else None
+            if comment:
+                track = self.object.last_status_track
+                track.comment = comment
+                track.save()
 
         # Records the event
         if self.object.status != old_status:
@@ -170,6 +181,8 @@ class IssueSubmissionTransitionView(
     def get_context_data(self, **kwargs):
         context = super(IssueSubmissionTransitionView, self).get_context_data(**kwargs)
         context['question'] = self.question
+        if self.use_comment_form:
+            context['comment_form'] = IssueSubmissionTransitionCommentForm()
         return context
 
 
@@ -198,6 +211,7 @@ class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
     question = _('Voulez-vous refuser le numéro ?')
     success_message = _('Le numéro a été refusé avec succès')
     transition_name = 'refuse'
+    use_comment_form = True
 
     def has_permission(self):
         return self.request.user.has_perm('editor.review_issuesubmission')

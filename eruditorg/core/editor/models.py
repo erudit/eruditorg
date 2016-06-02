@@ -151,6 +151,10 @@ class IssueSubmission(models.Model):
     def last_files_version(self):
         return self.files_versions.order_by('-created').first()
 
+    @property
+    def last_status_track(self):
+        return self.status_tracks.order_by('-created').first()
+
 
 class IssueSubmissionStatusTrack(models.Model):
     """ Tracks the changes of an issue submission status. """
@@ -161,6 +165,10 @@ class IssueSubmissionStatusTrack(models.Model):
     files_version = models.ForeignKey(
         'IssueSubmissionFilesVersion', verbose_name=_('Version des fichiers'),
         blank=True, null=True)
+
+    # A comment can be written when the status of an issue submission is updated by a user.
+    # eg. when the status is changed from draft -> to submitted
+    comment = models.TextField(verbose_name=_('Commentaire'), blank=True, null=True)
 
     class Meta:
         ordering = ['created', ]

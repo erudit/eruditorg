@@ -1,5 +1,6 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% block page_title %}{{ question }}{% endblock %}
 
@@ -19,6 +20,18 @@
       <div class="panel-body">
       <div class="warning-message">{{ question }}</div>
         <form action="" method="post">{% csrf_token %}
+          {% if comment_form %}
+          <div class="row">
+            <div id="div_id_{{ comment_form.comment.html_name }}">
+              <div class="controls">
+                <label class="control-label" for="{{ comment_form.comment.auto_id }}">{{ comment_form.comment.label }}</label>
+                {{ comment_form.comment|add_class:'form-control' }}
+                {% for error in comment_form.comment.errors %}<p class="error">{{ error }}</p>{% endfor %}
+              </div>
+            </div>
+          </div>
+          <br />
+          {% endif %}
           <input type="hidden" name="post" value="yes" />
           <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />
           <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk object.pk %}" class="btn">{% trans "No" %}</a>
