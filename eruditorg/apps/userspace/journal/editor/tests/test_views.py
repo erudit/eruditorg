@@ -252,6 +252,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         user = User.objects.create_user(
             username='dummy', email='dummy@xyz.com', password='top_secret')
         AuthorizationFactory.create(
+            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=user, authorization_codename=AC.can_review_issuesubmission.codename)
         self.journal.members.add(user)
 

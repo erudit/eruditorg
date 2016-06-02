@@ -3,6 +3,7 @@
 
 {% has_perm 'journal.edit_journal_information' request.user scope_current_journal as can_manage_information %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+{% has_perm 'editor.review_issuesubmission' request.user scope_current_journal as can_review_issuesubmission %}
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
 {% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_account %}
 
@@ -22,7 +23,7 @@
         </a>
       </li>
       {% endif %}
-      {% if can_manage_issuesubmission %}
+      {% if can_manage_issuesubmission or can_review_issuesubmission %}
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:editor:issues' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'editor' %}class="active"{% endif %}>
