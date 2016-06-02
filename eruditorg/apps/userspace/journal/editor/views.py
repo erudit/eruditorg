@@ -120,7 +120,7 @@ class IssueSubmissionUpdate(
     def has_permission(self):
         obj = self.get_permission_object()
         return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
-            or self.request.user.has_perm('editor.review_issuesubmission', obj)
+            or self.request.user.has_perm('editor.review_issuesubmission')
 
 
 class IssueSubmissionTransitionView(
@@ -180,28 +180,36 @@ class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
     transition_name = 'submit'
 
     def get_permission_object(self):
+        # All the users who have the 'review_issuesubmission' authorization should be allowed to
+        # review all journals.
         return self.get_object().journal
 
 
 class IssueSubmissionApproveView(IssueSubmissionTransitionView):
     question = _('Voulez-vous approuver le numéro ?')
-    permission_required = 'editor.review_issuesubmission'
     success_message = _('Le numéro a été approuvé avec succès')
     transition_name = 'approve'
+
+    def has_permission(self):
+        return self.request.user.has_perm('editor.review_issuesubmission')
 
 
 class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
     question = _('Voulez-vous refuser le numéro ?')
-    permission_required = 'editor.review_issuesubmission'
     success_message = _('Le numéro a été refusé avec succès')
     transition_name = 'refuse'
+
+    def has_permission(self):
+        return self.request.user.has_perm('editor.review_issuesubmission')
 
 
 class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
     question = _('Voulez-vous archiver le numéro ?')
-    permission_required = 'editor.review_issuesubmission'
     success_message = _('Le numéro a été archivé avec succès')
     transition_name = 'archive'
+
+    def has_permission(self):
+        return self.request.user.has_perm('editor.review_issuesubmission')
 
 
 class IssueSubmissionList(
@@ -217,7 +225,7 @@ class IssueSubmissionList(
     def has_permission(self):
         obj = self.get_permission_object()
         return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
-            or self.request.user.has_perm('editor.review_issuesubmission', obj)
+            or self.request.user.has_perm('editor.review_issuesubmission')
 
 
 class IssueSubmissionAttachmentView(
@@ -252,4 +260,4 @@ class IssueSubmissionAttachmentView(
     def has_permission(self):
         obj = self.get_permission_object()
         return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
-            or self.request.user.has_perm('editor.review_issuesubmission', obj)
+            or self.request.user.has_perm('editor.review_issuesubmission')
