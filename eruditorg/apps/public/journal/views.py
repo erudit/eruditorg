@@ -16,6 +16,7 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
+from rules.contrib.views import PermissionRequiredMixin
 
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
@@ -32,6 +33,7 @@ from erudit.models import Journal
 from erudit.models import Issue
 from erudit.utils.pdf import generate_pdf
 
+from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 
 
@@ -215,13 +217,15 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 
 class ArticleDetailView(
-        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin, DetailView):
+        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
+        ArticleViewMetricCaptureMixin, DetailView):
     """
     Displays an Article page.
     """
     context_object_name = 'article'
     model = Article
     template_name = 'public/journal/article_detail.html'
+    tracking_view_type = 'html'
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -282,16 +286,23 @@ class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
         return context
 
 
-class ArticleRawPdfView(FedoraFileDatastreamView):
+class ArticleRawPdfView(
+        ArticleViewMetricCaptureMixin, ArticleAccessCheckMixin, PermissionRequiredMixin,
+        FedoraFileDatastreamView):
     """
     Returns the PDF file associated with an article.
     """
     content_type = 'application/pdf'
     datastream_name = 'pdf'
     fedora_object_class = ArticleDigitalObject
+    raise_exception = True
+    tracking_view_type = 'pdf'
+
+    def get_article(self):
+        return get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
 
     def get_fedora_object_pid(self):
-        article = get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        article = self.get_article()
         return article.pid
 
     def get_response_object(self, fedora_object):
@@ -299,6 +310,12 @@ class ArticleRawPdfView(FedoraFileDatastreamView):
         response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
             self.kwargs['articleid'])
         return response
+
+    def get_permission_object(self):
+        return self.get_article()
+
+    def has_permission(self):
+        return self.article_access_granted
 
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF

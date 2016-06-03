@@ -5,6 +5,8 @@ import io
 import os
 import unittest.mock
 
+from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.test.utils import override_settings
@@ -249,7 +251,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             mock_pdf.content.write(f.read())
         mock_ds = ['ERUDITXSD300', ]  # noqa
 
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1000))
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
@@ -258,6 +261,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             journal_id, issue_id, article_id
         ))
         request = self.factory.get(url)
+        request.user = AnonymousUser()
 
         # Run
         response = ArticleRawPdfView.as_view()(
@@ -283,6 +287,26 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 404)
+
+    def test_cannot_be_accessed_if_the_article_is_not_in_open_access(self):
+        # Setup
+        self.journal.open_access = False
+        self.journal.save()
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue)
+        journal_id = self.journal.localidentifier
+        issue_id = issue.localidentifier
+        article_id = article.localidentifier
+        url = reverse('public:journal:article_raw_pdf', args=(
+            journal_id, issue_id, article_id
+        ))
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+
+        # Run & check
+        with self.assertRaises(PermissionDenied):
+            ArticleRawPdfView.as_view()(
+                request, journalid=journal_id, issueid=issue_id, articleid=article_id)
 
 
 class TestArticleMediaView(BaseEruditTestCase):

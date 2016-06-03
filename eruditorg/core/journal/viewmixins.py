@@ -48,7 +48,7 @@ class ArticleAccessCheckMixin(object):
     def get_context_data(self, **kwargs):
         """ Inserts a flag indicating if the article can be accessed in the context. """
         context = super(ArticleAccessCheckMixin, self).get_context_data(**kwargs)
-        context['article_access_granted'] = self.has_access()
+        context['article_access_granted'] = self.article_access_granted
         return context
 
     def has_access(self):
@@ -62,6 +62,7 @@ class ArticleAccessCheckMixin(object):
             3- the current IP address is inside on of the IP address ranges allowed
                to access to it
         """
+        self.subscription = None
         article = self.get_article()
 
         # 1- Is the article in open access? Is the article subject to a movable limitation?
@@ -77,6 +78,7 @@ class ArticleAccessCheckMixin(object):
                 user=self.request.user,
             ).first()
             if individual_subscription and individual_subscription.is_ongoing:
+                self.subscription = individual_subscription
                 return True
 
         # 3- Is the current IP address allowed to access the article as an institution?
@@ -92,6 +94,11 @@ class ArticleAccessCheckMixin(object):
                 subscription=institutional_subscription,
                 ip_start__lte=ip, ip_end__gte=ip).exists()
         if institutional_access:
+            self.subscription = institutional_subscription
             return True
 
         return False
+
+    @cached_property
+    def article_access_granted(self):
+        return self.has_access()

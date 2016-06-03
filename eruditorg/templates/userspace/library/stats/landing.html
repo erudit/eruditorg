@@ -1,0 +1,46 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Statistiques" %}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Statistiques" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Journal Report 1 (R4)</h2>
+      <p class="lead">Number of Successful Full-Text Articles by Month and Journal</p>
+      <h3>{% trans "Exports au format CSV" %}</h3>
+      <div class="row">
+        {% for y in years %}
+          <div class="col-md-3">
+            <a href="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-primary">{{ y }}</a>
+            <br />
+          </div>
+        {% endfor %}
+      </div>
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Journal Report 1 GOA (R4)</h2>
+      <p class="lead">Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
+      <h3>{% trans "Exports au format CSV" %}</h3>
+      <div class="row">
+        {% for y in years %}
+          <div class="col-md-3">
+            <a href="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-primary">{{ y }}</a>
+            <br />
+          </div>
+        {% endfor %}
+      </div>
+      <br />
+    </div>
+  </div>
+</div>
+{% endblock content_main %}
