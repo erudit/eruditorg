@@ -21,6 +21,7 @@ from rules.contrib.views import PermissionRequiredMixin
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import SingleJournalMixin
+from core.metrics.metric import metric
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -80,7 +81,10 @@ class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailVi
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         if self.object.url and not self.object.issues.count():
-            # TODO: implement some kind of analytics to register this event
+            # Tracks the redirection
+            metric(
+                'erudit__journal__journal_redirect',
+                tags={'collection': self.object.collection.code, }, **{'code': self.object.code, })
             return HttpResponseRedirect(self.object.url)
 
         context = self.get_context_data(object=self.object)
