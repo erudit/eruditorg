@@ -22,12 +22,22 @@ class CounterReport(object):
     def __init__(self, dstart, dend, journal_queryset=None):
         self.start = dstart
         self.end = dend
-        rdelta = relativedelta(self.end, self.start)
-        self.nmonths = rdelta.years * 12 + rdelta.months + 1
+
+        month_periods = []
+        _current_date = self.start
+        while _current_date < self.end:
+            _, last_month_day = calendar.monthrange(_current_date.year, _current_date.month)
+            period_end = self.end if self.end.replace(day=1) == _current_date.replace(day=1) \
+                else _current_date.replace(day=last_month_day)
+            month_periods.append((_current_date, period_end))
+            _current_date += relativedelta(months=1)
+            _current_date = _current_date.replace(day=1)
+
         self.journal_queryset = self.filter_journal_queryset(
             journal_queryset or Journal.objects.filter(collection__localidentifier='erudit'))
         self.journal_localidentifiers = list(
             self.journal_queryset.values_list('localidentifier', flat=True))
+
         self.client = get_client()
 
         # Pre-build a dictionnary mapping journal localidentifiers to the corresponding instances
@@ -107,34 +117,45 @@ class CounterReport(object):
                 'reporting_period_total': total_count,
                 'reporting_period_html': html_count,
                 'reporting_period_pdf': pdf_count,
-                'months': [0 for _ in range(self.nmonths)]  # Will be filled later on
+                # Will be filled later on
+                'months': [
+                    {'start': p[0], 'end': p[1], 'count': 0, 'html_count': 0, 'pdf_count': 0}
+                    for p in month_periods],
             }
 
             self.journals.append(journal_data)
             _journals_data_mapping.update({j.localidentifier: journal_data})
 
         # Processes each month one by one.
-        current_date = self.start
-        i = 0
-        while current_date < self.end:
-            _, last_month_day = calendar.monthrange(current_date.year, current_date.month)
-            period_end = self.end if self.end.replace(day=1) == current_date.replace(day=1) \
-                else current_date.replace(day=last_month_day)
+        for i, period in enumerate(month_periods):
+            period_start, period_end = period
 
             # Fetches the results from the InfluxDB server for the current period of time.
-            results = self._query(start=current_date, end=period_end)
+            results = self._query(start=period_start, end=period_end)
+            html_results = self._query(
+                start=period_start, end=period_end, where='view_type = \'html\'')
+            pdf_results = self._query(
+                start=period_start, end=period_end, where='view_type = \'pdf\'')
 
             # Computes the total count corresponding to the returned results.
             total_count = self.get_agg_sum(results.items())
+            html_total_count = self.get_agg_sum(html_results.items())
+            pdf_total_count = self.get_agg_sum(pdf_results.items())
 
             # This value should be appended to the list of total counts per month.
-            self.total['months'].append(total_count)
+            self.total['months'].append({
+                'start': period_start,
+                'end': period_end,
+                'count': total_count,
+                'html_count': html_total_count,
+                'pdf_count': pdf_total_count,
+            })
 
             # Defines the period data item that will be inserted into the 'months' list.
             period_data = {
-                'start': current_date,
+                'start': period_start,
                 'end': period_end,
-                'period_title': current_date.strftime('%b-%Y'),
+                'period_title': period_start.strftime('%b-%Y'),
                 'total': total_count,
                 'journals': [],
             }
@@ -148,13 +169,17 @@ class CounterReport(object):
                     'journal': journals_dict[localidentifier],
                     'count': period_count,
                 })
-                _journals_data_mapping[localidentifier]['months'][i] = period_count
+                _journals_data_mapping[localidentifier]['months'][i]['count'] = period_count
+            for r in html_results.items():
+                period_count = list(r[1])[0]['sum']
+                localidentifier = r[0][1]['journal_localidentifier']
+                _journals_data_mapping[localidentifier]['months'][i]['html_count'] = period_count
+            for r in pdf_results.items():
+                period_count = list(r[1])[0]['sum']
+                localidentifier = r[0][1]['journal_localidentifier']
+                _journals_data_mapping[localidentifier]['months'][i]['pdf_count'] = period_count
 
             self.months.append(period_data)
-
-            current_date += relativedelta(months=1)
-            current_date = current_date.replace(day=1)
-            i += 1
 
         self.journals = sorted(self.journals, key=lambda i: i['journal'].sortable_name)
 
@@ -193,7 +218,7 @@ class CounterReport(object):
         lids_clause = ' OR '.join(
             'journal_localidentifier = \'{}\''.format(lid)
             for lid in self.journal_localidentifiers)
-        where_statement = 'WHERE time >= \'{start}\' AND time <= \'{end}\' {lids}'.format(
+        where_statement = 'WHERE (time >= \'{start}\' AND time <= \'{end}\' {lids})'.format(
             start=start, end=end,
             lids='AND ' + lids_clause if lids_clause else 'AND journal_localidentifier = \'none\'')
 
