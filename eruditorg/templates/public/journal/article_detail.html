@@ -5,6 +5,21 @@
 {% block data_controller %}public:journal:article_detail{% endblock data_controller %}
 
 {% block meta_tags %}
+<!-- Facebook / Open Graph -->
+<meta property="fb:app_id" content="128099979787">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ article.title }}">
+<meta property="og:site_name" content="Érudit">
+<meta property="og:locale" content="fr_CA">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@eruditorg">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:title" content="{{ article.title }} – Érudit">
+
+<!-- Google Scholar -->
   <meta name="citation_title" content="{{ article.title }}" />
   {% for author in article.erudit_object.authors %}
     {% if author.firstname and author.lastname %}
@@ -87,24 +102,28 @@
 
   {# article footer with related articles #}
   {% if related_articles %}
-  <footer class="related-articles row">
+  <footer class="related-articles">
 
-    <header class="col-xs-12">
-      <h2>{% trans "Autres articles de ce numéro" %}</h2>
-    </header>
+    <div class="row">
+      <header class="col-xs-12">
+        <h2>{% trans "Autres articles de ce numéro" %}</h2>
+      </header>
+    </div>
 
-    {% for related_article in related_articles %}
-    <article class="related-article col-sm-6 col-md-3">
-      <a href="{{ related_article.get_absolute_url }}">
-        <h4>{{ related_article.title }}</h4>
-        {% if related_article.authors.all|length > 0 %}
-        <footer class="meta">
-          <h5>Par {{ related_article.authors.all|join:", " }}</h5>
-        </footer>
-        {% endif %}
-      </a>
-    </article>
-    {% endfor %}
+    <div class="row">
+      {% for related_article in related_articles %}
+      <article class="related-article col-sm-6 col-md-3">
+        <a href="{{ related_article.get_absolute_url }}">
+          <h4>{{ related_article.title }}</h4>
+          {% if related_article.authors.all|length > 0 %}
+          <footer class="meta">
+            <h5>Par {{ related_article.authors.all|join:", " }}</h5>
+          </footer>
+          {% endif %}
+        </a>
+      </article>
+      {% endfor %}
+    </div>
 
   </footer>
   {% endif %}

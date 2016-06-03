@@ -12,6 +12,22 @@
 {% include "public/journal/partials/issue_volume.html" %}
 {% endblock page_title %}
 
+{% block meta_tags %}
+<!-- Facebook / Open Graph -->
+<meta property="fb:app_id" content="128099979787">
+<meta property="og:url" content="{{ request.build_absolute_uri|urlencode }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ issue.erudit_object.html_theme|safe }}">
+<meta property="og:site_name" content="Érudit">
+<meta property="og:locale" content="fr_CA">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@eruditorg">
+<meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}">
+<meta name="twitter:title" content="{{ issue.erudit_object.html_theme|safe }} – Érudit">
+{% endblock meta_tags %}
+
 {% block breadcrumb %}{{ block.super }}
 /
 <a href="{{ issue.get_absolute_url }}">
