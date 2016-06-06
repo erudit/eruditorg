@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import os
+import unittest.mock
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.messages.middleware import MessageMiddleware
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
+from influxdb import InfluxDBClient
 from lxml import etree
 from plupload.models import ResumableFile
 
@@ -16,12 +19,26 @@ from core.authorization.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.tests.base import BaseEditorTestCase
 
+from ..views import IssueSubmissionApproveView
+from ..views import IssueSubmissionArchiveView
 from ..views import IssueSubmissionCreate
+from ..views import IssueSubmissionRefuseView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
+_test_points = []
+
+
+def fake_write_points(points):
+    global _test_points
+    _test_points.extend(points)
+
 
 class TestIssueSubmissionView(BaseEditorTestCase):
+    def tearDown(self):
+        super(TestIssueSubmissionView, self).tearDown()
+        global _test_points
+        _test_points = []
 
     def test_editor_views_are_login_protected(self):
         """ Editor views should all be login protected """
@@ -198,6 +215,51 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         issues = set(IssueSubmission.objects.filter(journal__in=journal_ids))
         self.assertEqual(set(response.context_data['object_list']), issues)
 
+    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
+    def test_can_capture_a_metric_when_a_submission_is_created(
+            self, mock_write_points, mock_list_db, mock_create_db):
+        # Setup
+        mock_write_points.side_effect = fake_write_points
+
+        post_data = {
+            'journal': self.journal.pk,
+            'year': '2015',
+            'volume': '2',
+            'number': '2',
+            'contact': self.user.pk,
+            'comment': 'lorem ipsum dolor sit amet',
+        }
+
+        request = self.factory.post(
+            reverse('userspace:journal:editor:add', args=(self.journal.pk, )), post_data)
+        request.user = self.user
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+        view = IssueSubmissionCreate(request=request, journal_pk=self.journal.pk)
+        view.current_journal = self.journal
+
+        # Run
+        view.post(request)
+
+        # Check
+        global _test_points
+        self.assertEqual(len(_test_points), 1)
+        issuesubmission = IssueSubmission.objects.last()
+        self.assertEqual(
+            _test_points,
+            [{
+                'tags': {},
+                'fields': {
+                    'author_id': self.user.pk,
+                    'submission_id': issuesubmission.pk,
+                    'num': 1,
+                },
+                'measurement': 'erudit__issuesubmission__create',
+            }])
+
 
 class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
     def test_cannot_be_browsed_by_users_who_cannot_download_submission_files(self):
@@ -361,6 +423,11 @@ class TestIssueSubmissionSubmitView(BaseEditorTestCase):
 
 
 class TestIssueSubmissionApproveView(BaseEditorTestCase):
+    def tearDown(self):
+        super(TestIssueSubmissionApproveView, self).tearDown()
+        global _test_points
+        _test_points = []
+
     def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
         # Setup
         user = User.objects.create_user(
@@ -402,8 +469,56 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         self.issue_submission.refresh_from_db()
         self.assertEqual(self.issue_submission.status, IssueSubmission.VALID)
 
+    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
+    def test_can_capture_a_metric_on_status_change(
+            self, mock_write_points, mock_list_db, mock_create_db):
+        # Setup
+        mock_write_points.side_effect = fake_write_points
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        url = reverse('userspace:journal:editor:transition_approve',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        request = self.factory.post(url)
+        request.user = self.user
+        SessionMiddleware().process_request(request)
+        MessageMiddleware().process_request(request)
+        request.session.save()
+
+        view = IssueSubmissionApproveView(request=request, journal_pk=self.journal.pk)
+        view.request = request
+        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
+        view.current_journal = self.journal
+
+        # Run
+        view.post(request)
+
+        # Check
+        global _test_points
+        self.assertEqual(len(_test_points), 1)
+        self.assertEqual(
+            _test_points,
+            [{
+                'tags': {'old_status': 'S', 'new_status': 'V'},
+                'fields': {
+                    'author_id': self.user.pk,
+                    'submission_id': self.issue_submission.pk,
+                    'num': 1,
+                },
+                'measurement': 'erudit__issuesubmission__change_status',
+            }])
+
 
 class TestIssueSubmissionRefuseView(BaseEditorTestCase):
+    def tearDown(self):
+        super(TestIssueSubmissionRefuseView, self).tearDown()
+        global _test_points
+        _test_points = []
+
     def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
         # Setup
         user = User.objects.create_user(
@@ -465,8 +580,56 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         track = self.issue_submission.last_status_track
         self.assertEqual(track.comment, 'This is a comment!')
 
+    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
+    def test_can_capture_a_metric_on_status_change(
+            self, mock_write_points, mock_list_db, mock_create_db):
+        # Setup
+        mock_write_points.side_effect = fake_write_points
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        url = reverse('userspace:journal:editor:transition_refuse',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        request = self.factory.post(url)
+        request.user = self.user
+        SessionMiddleware().process_request(request)
+        MessageMiddleware().process_request(request)
+        request.session.save()
+
+        view = IssueSubmissionRefuseView(request=request, journal_pk=self.journal.pk)
+        view.request = request
+        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
+        view.current_journal = self.journal
+
+        # Run
+        view.post(request)
+
+        # Check
+        global _test_points
+        self.assertEqual(len(_test_points), 1)
+        self.assertEqual(
+            _test_points,
+            [{
+                'tags': {'old_status': 'S', 'new_status': 'D'},
+                'fields': {
+                    'author_id': self.user.pk,
+                    'submission_id': self.issue_submission.pk,
+                    'num': 1,
+                },
+                'measurement': 'erudit__issuesubmission__change_status',
+            }])
+
 
 class TestIssueSubmissionArchiveView(BaseEditorTestCase):
+    def tearDown(self):
+        super(TestIssueSubmissionArchiveView, self).tearDown()
+        global _test_points
+        _test_points = []
+
     def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
         # Setup
         User.objects.create_user(
@@ -501,3 +664,46 @@ class TestIssueSubmissionArchiveView(BaseEditorTestCase):
         self.assertEqual(response.status_code, 302)
         self.issue_submission.refresh_from_db()
         self.assertEqual(self.issue_submission.status, IssueSubmission.ARCHIVED)
+
+    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
+    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
+    def test_can_capture_a_metric_on_status_change(
+            self, mock_write_points, mock_list_db, mock_create_db):
+        # Setup
+        mock_write_points.side_effect = fake_write_points
+
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        url = reverse('userspace:journal:editor:transition_archive',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        request = self.factory.post(url)
+        request.user = self.user
+        SessionMiddleware().process_request(request)
+        MessageMiddleware().process_request(request)
+        request.session.save()
+
+        view = IssueSubmissionArchiveView(request=request, journal_pk=self.journal.pk)
+        view.request = request
+        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
+        view.current_journal = self.journal
+
+        # Run
+        view.post(request)
+
+        # Check
+        global _test_points
+        self.assertEqual(len(_test_points), 1)
+        self.assertEqual(
+            _test_points,
+            [{
+                'tags': {'old_status': 'S', 'new_status': 'A'},
+                'fields': {
+                    'author_id': self.user.pk,
+                    'submission_id': self.issue_submission.pk,
+                    'num': 1,
+                },
+                'measurement': 'erudit__issuesubmission__change_status',
+            }])
