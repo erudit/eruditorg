@@ -1993,9 +1993,18 @@
   </xsl:template>
 
   <xsl:template match="liensimple">
-    <a href="" id="{@id}">
+    <xsl:element name="a">
+      <xsl:attribute name="href">
+        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+      </xsl:attribute>
+      <xsl:attribute name="id">
+        <xsl:value-of select="@id"/>
+      </xsl:attribute>
+      <xsl:if test="not(starts-with( @href , 'http://www.erudit.org'))">
+        <xsl:attribute name="target">_blank</xsl:attribute>
+      </xsl:if>
       <xsl:value-of select="."/>
-    </a>
+    </xsl:element>
   </xsl:template>
 
   <!-- element_nompers_affichage -->
