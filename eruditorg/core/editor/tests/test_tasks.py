@@ -19,10 +19,10 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.archive()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = False
+        self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=30)
         self.issue_submission.save()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = True
+        self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
         _handle_issuesubmission_files_removal()
         # Check
@@ -36,10 +36,10 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.archive()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = False
+        self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
         self.issue_submission.save()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = True
+        self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
         _handle_issuesubmission_files_removal()
         # Check
@@ -52,10 +52,10 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.archive()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = False
+        self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
         self.issue_submission.save()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = True
+        self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
         _handle_issuesubmission_files_removal()
         # Check
@@ -69,10 +69,10 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.archive()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = False
+        self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
         self.issue_submission.save()
-        self.issue_submission._meta.get_field_by_name('date_modified')[0].auto_now = True
+        self.issue_submission._meta.get_field('date_modified').auto_now = True
         # Run
         _handle_issuesubmission_files_removal()
         # Check

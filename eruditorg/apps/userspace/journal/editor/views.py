@@ -85,7 +85,7 @@ class IssueSubmissionUpdate(
     def get_title(self):
         return _("Modifier un dépôt de numéros")
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super().get_form(form_class)
 
         obj = self.get_object()

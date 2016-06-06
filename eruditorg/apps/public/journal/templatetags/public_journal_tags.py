@@ -35,7 +35,7 @@ def render_article(context, article):
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
         xsl_template = loader.get_template('public/journal/eruditxsd300_to_html.xsl')
-        xsl = xsl_template.render(context)
+        xsl = xsl_template.render(context.flatten())
 
         # Performs the XSLT transformation
         lxsl = et.parse(io.BytesIO(force_bytes(xsl)))

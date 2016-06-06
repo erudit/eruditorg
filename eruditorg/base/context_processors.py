@@ -1,22 +1,13 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
 
-import socket
 from django.conf import settings
-
-try:
-    HOSTNAME = socket.gethostname()
-except:
-    HOSTNAME = 'localhost'
 
 
 def common_settings(request):
-    """Passing custom CONSTANT in Settings into RequestContext."""
-    from django.contrib.sites.models import get_current_site
+    """ Passing custom CONSTANT in Settings into RequestContext. """
     COMMON_CONTEXT = {
-        "MAILCHIMP_UUID": settings.MAILCHIMP_UUID,
-        "MAILCHIMP_ACTION_URL": settings.MAILCHIMP_ACTION_URL,
-        "HOSTNAME": HOSTNAME,
-        "CURRENT_DOMAIN": get_current_site(request).domain,
+        'MAILCHIMP_UUID': settings.MAILCHIMP_UUID,
+        'MAILCHIMP_ACTION_URL': settings.MAILCHIMP_ACTION_URL,
     }
 
     try:

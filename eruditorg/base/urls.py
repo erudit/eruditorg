@@ -21,6 +21,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
+from django_js_reverse import views as js_reverse_views
 
 from . import urls_compat
 
@@ -31,7 +32,7 @@ js_info_dict = {
 
 urlpatterns = i18n_patterns(
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
-    url(r'^jsreverse/$', 'django_js_reverse.views.urls_js', name='js_reverse'),
+    url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
