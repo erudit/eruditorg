@@ -14,5 +14,5 @@ class TestGetClient(TestCase):
     def test_can_return_an_influxdb_client_and_create_the_database(
             self, mock_list_db, mock_create_db):
         # Run & check
-        get_client()
+        get_client(reset=True)
         self.assertTrue(mock_create_db.call_count, 1)

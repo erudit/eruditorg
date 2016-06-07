@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+
+
 from .core import *   # noqa
 from .dissemination import *  # noqa
-from .event import *  # noqa
 from .finance import *  # noqa
 from .grant import *  # noqa
 from .legal import *  # noqa

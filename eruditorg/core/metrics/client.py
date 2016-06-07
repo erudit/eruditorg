@@ -8,9 +8,9 @@ from .conf import settings as metrics_settings
 _metrics_client = None
 
 
-def get_client():
+def get_client(reset=False):
     """ Returns the InfluxDBClient instance to use to store tracking metrics. """
-    if _metrics_client is None:
+    if _metrics_client is None or reset:
         global _metrics_client
 
         client = InfluxDBClient(

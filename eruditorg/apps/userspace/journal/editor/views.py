@@ -22,7 +22,7 @@ from plupload.models import ResumableFile
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.editor.models import IssueSubmission
-from erudit.models.event import Event
+from core.metrics.metric import metric
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
@@ -59,7 +59,9 @@ class IssueSubmissionCreate(
 
     def form_valid(self, form):
         result = super().form_valid(form)
-        Event.create_submission(author=self.request.user, submission=form.instance)
+        metric(
+            'erudit__issuesubmission__create',
+            author_id=self.request.user.id, submission_id=form.instance.id)
         return result
 
 
@@ -160,13 +162,12 @@ class IssueSubmissionTransitionView(
                 track.comment = comment
                 track.save()
 
-        # Records the event
+        # Capture a metric when the status changes
         if self.object.status != old_status:
-            Event.change_submission_status(
-                author=self.request.user,
-                submission=self.object,
-                old_status=old_status
-            )
+            metric(
+                'erudit__issuesubmission__change_status',
+                tags={'old_status': old_status, 'new_status': self.object.status},
+                author_id=self.request.user.id, submission_id=self.object.id)
 
         return HttpResponseRedirect(success_url)
 
