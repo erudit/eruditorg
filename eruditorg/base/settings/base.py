@@ -67,7 +67,6 @@ INSTALLED_APPS = (
     'core.subscription',
 
     # Third-party apps
-    'grappelli',
     'modeltranslation',
     'post_office',
 

@@ -36,7 +36,6 @@ urlpatterns = i18n_patterns(
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^upload/', include('plupload.urls', namespace='plupload')),
 
