@@ -34,8 +34,8 @@ class OrganisationMembershipAction(AccountActionBase):
     def send_notification_email(self, token):
         email = Email(
             [token.email, ],
-            html_template='userspace/library/members/emails/new_member_content.html',
-            subject_template='userspace/library/members/emails/new_member_subject.html',
+            html_template='emails/organisation/new_member_content.html',
+            subject_template='emails/organisation/new_member_subject.html',
             extra_context={'token': token})
         email.send()
 

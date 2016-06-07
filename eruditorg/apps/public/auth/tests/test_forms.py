@@ -125,8 +125,8 @@ class TestPasswordResetForm(BaseEruditTestCase):
         self.assertTrue(form.is_valid())
         form.save(
             domain_override=None,
-            subject_template_name='public/auth/emails/password_reset_subject.txt',
-            email_template_name='public/auth/emails/password_reset_email.html',
+            subject_template_name='emails/auth/password_reset_subject.txt',
+            email_template_name='emails/auth/password_reset_email.html',
             use_https=False, token_generator=default_token_generator,
             from_email=None, request=None, html_email_template_name=None)
         self.assertEqual(len(mail.outbox), 1)

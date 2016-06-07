@@ -47,8 +47,8 @@ def _handle_issuesubmission_files_removal():
 
         email = Email(
             list(emails),
-            html_template='editor/emails/issue_files_deletion_content.html',
-            subject_template='editor/emails/issue_files_deletion_subject.html',
+            html_template='emails/editor/issue_files_deletion_content.html',
+            subject_template='emails/editor/issue_files_deletion_subject.html',
             extra_context={'issue_submissions': issue_submissions_to_email})
         email.send()
 

@@ -22,8 +22,8 @@ urlpatterns = [
     # Password reset
     url(_(r'^mot-de-passe/reset/$'), auth_views.password_reset,
         {'template_name': 'public/auth/password_reset_form.html',
-         'email_template_name': 'public/auth/emails/password_reset_email.html',
-         'subject_template_name': 'public/auth/emails/password_reset_subject.txt',
+         'email_template_name': 'emails/auth/password_reset_email.html',
+         'subject_template_name': 'emails/auth/password_reset_subject.txt',
          'password_reset_form': forms.PasswordResetForm,
          'post_reset_redirect': 'public:auth:password_reset_done', }, name='password_reset'),
     url(_(r'^mot-de-passe/reset/done/$'), auth_views.password_reset_done,
