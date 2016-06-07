@@ -1,0 +1,8 @@
+include LICENSE
+include MANIFEST.in
+include *.rst
+recursive-include erudit/locale *
+recursive-include erudit *.html
+recursive-include erudit/templates *.txt
+global-exclude *.pyc
+recursive-exclude tests *

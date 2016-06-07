@@ -1,0 +1,21 @@
+# Force the use of the new container-based infrastructure
+sudo: false
+
+language: python
+python:
+  - "3.4"
+  - "3.5"
+env:
+  - DJANGO="django>=1.8,<1.9"
+  - DJANGO="django>=1.9,<1.10"
+
+matrix:
+  exclude:
+  - python: "3.3"
+    env: DJANGO="django>=1.9,<1.10"
+install:
+  - "pip install $DJANGO"
+script:
+  - make travis
+after_success:
+  - codecov
