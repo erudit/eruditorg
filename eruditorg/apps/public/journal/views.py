@@ -18,6 +18,7 @@ from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 from rules.contrib.views import PermissionRequiredMixin
 
+from base.pdf import generate_pdf
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import SingleJournalMixin
@@ -32,7 +33,6 @@ from erudit.models import Article
 from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
-from erudit.utils.pdf import generate_pdf
 
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
