@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load static i18n %}
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -11,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% block page_title %}{% endblock %}{% endblock title %} – Érudit</title>
-    <meta name="description" content="Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, littérature grise.">
+    <meta name="description" content="{% blocktrans %}Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, littérature grise.{% endblocktrans %}">
 
     <!-- Android -->
     <meta name="theme-color" content="#ff4242" />
@@ -35,11 +37,11 @@
 
     <!-- Internet Explorer -->
     <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta name="msapplication-TileImage" content="{% static 'mstile-144x144.png' %}" />
-    <meta name="msapplication-square70x70logo" content="{% static 'mstile-70x70.png' %}" />
-    <meta name="msapplication-square150x150logo" content="{% static 'mstile-150x150.png' %}" />
-    <meta name="msapplication-wide310x150logo" content="{% static 'mstile-310x150.png' %}" />
-    <meta name="msapplication-square310x310logo" content="{% static 'mstile-310x310.png' %}" />
+    <meta name="msapplication-TileImage" content="{% static 'img/favicon/mstile-144x144.png' %}" />
+    <meta name="msapplication-square70x70logo" content="{% static 'img/favicon/mstile-70x70.png' %}" />
+    <meta name="msapplication-square150x150logo" content="{% static 'img/favicon/mstile-150x150.png' %}" />
+    <meta name="msapplication-wide310x150logo" content="{% static 'img/favicon/mstile-310x150.png' %}" />
+    <meta name="msapplication-square310x310logo" content="{% static 'img/favicon/mstile-310x310.png' %}" />
 
     {% block meta_tags %}
     {% endblock meta_tags %}
