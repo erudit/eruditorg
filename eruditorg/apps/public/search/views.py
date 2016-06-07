@@ -12,13 +12,13 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
 from erudit.models import EruditDocument
-from erudit.serializers import EruditDocumentSerializer
 
 from . import filters
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .pagination import EruditDocumentPagination
+from .serializers import EruditDocumentSerializer
 from .utils import get_search_elements
 
 

@@ -5,7 +5,7 @@ from django.utils import formats
 from django.utils import translation
 from rest_framework import serializers
 
-from .. import models as erudit_models
+from erudit import models as erudit_models
 
 
 class EruditDocumentSerializer(serializers.ModelSerializer):
