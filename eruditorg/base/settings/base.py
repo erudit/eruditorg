@@ -81,7 +81,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
-    'crispy_forms',
     'django_select2',
     'account_actions',
     'plupload',
@@ -117,8 +116,6 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

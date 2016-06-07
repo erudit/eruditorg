@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -36,11 +34,6 @@ class AuthorizationForm(ModelForm):
         # Update some fields
         self.fields['user'].queryset = self.get_target_instance_members()\
             .filter(~Q(id__in=authorized_user_ids))
-
-        # TODO: remove crispy-forms
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.add_input(Submit('submit', _('Valider')))
 
     def get_target_instance_members(self):
         """ Returns the "members" of the instance for which we want to create authorizations.

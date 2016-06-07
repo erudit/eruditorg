@@ -1,6 +1,6 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n %}
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block page_title %}{% trans "Ajouter un accès" %}{% endblock page_title %}
 
@@ -20,8 +20,26 @@
   </p>
   <div class="row">
     <div class="col-md-12">
-      <form  class="form-vertical" method="post" action="">
-        {% crispy form %}
+      <form  class="form-vertical" method="post" action="">{% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="col-xs-12">
+          {% for error in form.non_field_errors %}
+          <p class="alert alert-warning">{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div id="div_id_{{ form.user.html_name }}" class="form-group{% if form.user.errors %} has-error{% endif %}">
+          <div class="controls">
+            <label class="control-label" for="{{ form.user.auto_id }}">{{ form.user.label }}</label>
+            {{ form.user|add_class:'form-control' }}
+            {% for error in form.user.errors %}<p class="error">{{ error }}</p>{% endfor %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="controls">
+            <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
+          </div>
+        </div>
       </form>
     </div>
   </div>

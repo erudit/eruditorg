@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from ckeditor.widgets import CKEditorWidget
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 from django.forms.models import fields_for_model
-from django.utils.translation import ugettext_lazy as _
 
 from erudit.models import JournalInformation
 
@@ -37,12 +34,6 @@ class JournalInformationForm(forms.ModelForm):
         self.fields.update(
             fields_for_model(self.Meta.model, fields=self.i18n_field_names,
                              labels=i18n_fields_label, widgets=i18n_field_widgets))
-
-        # TODO: remove crispy-forms
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-
-        self.helper.add_input(Submit('submit', _('Enregistrer')))
 
     @property
     def i18n_field_names(self):
