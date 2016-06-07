@@ -80,7 +80,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
-    'django_select2',
     'account_actions',
     'plupload',
     'django_filters',

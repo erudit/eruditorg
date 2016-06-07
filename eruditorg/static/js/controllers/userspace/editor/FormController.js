@@ -1,5 +1,10 @@
+import Select2 from 'select2/dist/js/select2.full';
+
+
 export default {
   init: function() {
+    $('#id_contact').select2();
+
     var quitConfirm = false;
     function checkUploads(ev) {
       if (quitConfirm) { return; }

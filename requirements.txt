@@ -5,7 +5,6 @@ eulxml==1.0.1
 eulfedora==1.5.0
 -e git+https://github.com/erudit/liberuditarticle.git@master#egg=liberuditarticle
 django-post-office==2.0.5
-Django-Select2==5.2.1
 jsonfield==1.0.3
 lxml==3.5.0
 path.py==8.1.2

@@ -2,7 +2,6 @@
 
 from django import forms
 from django.utils.translation import gettext as _
-from django_select2.forms import Select2Widget
 from plupload.forms import PlUploadFormField
 from plupload.models import ResumableFile
 
@@ -25,8 +24,7 @@ class IssueSubmissionForm(forms.ModelForm):
         ]
 
         widgets = {
-            'journal': Select2Widget(),
-            'contact': Select2Widget(),
+            'contact': forms.Select(),
         }
 
     def disable_form(self):

@@ -51,10 +51,6 @@ class IssueSubmissionCreate(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(csrf(self.request))
-        # In this view, we have a widget, django_select2, that has its JS loaded in the "extrahead"
-        # block through {{ form.media }}. Because this outputs CSS at the same time as JS, we can't
-        # move this to the footer, so we need jquery in the head.
-        context['put_js_in_head'] = True
         return context
 
     def form_valid(self, form):
@@ -104,10 +100,6 @@ class IssueSubmissionUpdate(
         context = super().get_context_data(**kwargs)
         context['model_name'] = "editor.IssueSubmission"
         context['model_pk'] = self.object.pk
-
-        # In this view, we have a widget, plupload, that injects JS in the page. This JS needs
-        # jquery. Because of this, we need to load jquery in the header rather than in the footer.
-        context['put_js_in_head'] = True
 
         transitions = self.object.\
             get_available_user_status_transitions(self.request.user)
