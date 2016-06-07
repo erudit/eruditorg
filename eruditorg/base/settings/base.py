@@ -83,11 +83,9 @@ INSTALLED_APPS = (
     # Third-party apps
     'crispy_forms',
     'django_select2',
-    'datetimewidget',
     'account_actions',
     'plupload',
     'django_filters',
-    'spurl',
     'rules',
     'ckeditor',
     'raven.contrib.django.raven_compat',
