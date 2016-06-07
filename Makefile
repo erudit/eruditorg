@@ -1,8 +1,8 @@
 .PHONY: install upgrade lint coverage travis docs
 
 install:
-	pip install -r requirements-dev.txt
-	pip install -e .
+	pip install -r requirements-dev.txt --process-dependency-links
+	pip install -e . --process-dependency-links
 
 upgrade:
 	pip install -r requirements-dev.txt -U
