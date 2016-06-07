@@ -8,8 +8,8 @@ from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
 from core.subscription.factories import JournalManagementPlanFactory
 from core.subscription.factories import JournalManagementSubscriptionFactory
-from erudit.factories import JournalFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalFactory
 
 
 class TestAuthorizationUserView(BaseEruditTestCase):

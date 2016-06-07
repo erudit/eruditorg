@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from faker import Factory
 
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 faker = Factory.create()
 

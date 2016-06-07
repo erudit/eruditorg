@@ -4,9 +4,9 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory
 
-from erudit.factories import ArticleFactory
-from erudit.factories import IssueFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
 
 from ..citations import SavedCitationList
 from ..models import SavedCitationList as DBSavedCitationList

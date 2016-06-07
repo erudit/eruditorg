@@ -5,8 +5,8 @@ from account_actions.test.factories import AccountActionTokenFactory
 from faker import Factory
 
 from core.journal.account_actions import OrganisationMembershipAction
-from erudit.factories import OrganisationFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import OrganisationFactory
 
 from ..forms import OrganisationMembershipTokenCreateForm
 

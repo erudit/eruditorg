@@ -2,7 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..models import IssueSubmission
 

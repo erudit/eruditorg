@@ -11,8 +11,8 @@ from core.subscription.factories import InstitutionIPAddressRangeFactory
 from core.subscription.factories import JournalAccessSubscriptionFactory
 from core.subscription.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.models import InstitutionIPAddressRange
-from erudit.factories import OrganisationFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import OrganisationFactory
 
 
 class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):

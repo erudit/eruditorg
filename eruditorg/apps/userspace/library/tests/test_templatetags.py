@@ -4,8 +4,8 @@ from django.core.urlresolvers import resolve
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
-from erudit.factories import OrganisationFactory
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import OrganisationFactory
 from ..templatetags.userspace_library_tags import library_url
 
 

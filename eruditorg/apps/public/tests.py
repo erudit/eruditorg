@@ -5,9 +5,9 @@ import datetime as dt
 from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
 
-from erudit.factories import IssueFactory
-from erudit.factories import JournalFactory
-from erudit.tests import BaseEruditTestCase
+from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
+from erudit.test import BaseEruditTestCase
 
 
 @override_settings(DEBUG=True)

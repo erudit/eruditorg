@@ -7,8 +7,8 @@ from base.factories import UserFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
 from core.editor.factories import IssueSubmissionFactory
-from erudit.factories import JournalFactory
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalFactory
 
 
 class ViewsTestCase(BaseEruditTestCase):

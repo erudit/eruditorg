@@ -4,8 +4,8 @@ from django.core.urlresolvers import resolve
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
-from erudit.factories import JournalFactory
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalFactory
 from ..templatetags.userspace_journal_tags import journal_url
 
 

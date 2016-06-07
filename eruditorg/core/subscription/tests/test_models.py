@@ -6,8 +6,8 @@ import ipaddress
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from erudit.factories import OrganisationFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import OrganisationFactory
 
 from ..factories import InstitutionIPAddressRangeFactory
 from ..factories import JournalAccessSubscriptionFactory

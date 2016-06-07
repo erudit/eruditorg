@@ -9,11 +9,11 @@ from django.utils.encoding import smart_text
 from django.utils.timezone import now
 
 from core.solrq.query import Query
-from erudit.factories import ArticleFactory
-from erudit.factories import IssueFactory
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.models import Article
-from erudit.tests.base import BaseEruditTestCase
 
 from ..views import EruditDocumentListAPIView
 

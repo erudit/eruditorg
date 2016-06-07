@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..templatetags.public_search_tags import highlight
 

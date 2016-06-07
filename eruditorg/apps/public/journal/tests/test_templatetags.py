@@ -6,12 +6,12 @@ import unittest.mock
 
 from django.template import Context
 
-from erudit.factories import ArticleFactory
-from erudit.factories import AuthorFactory
-from erudit.factories import IssueFactory
-from erudit.factories import JournalFactory
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import AuthorFactory
+from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
-from erudit.tests import BaseEruditTestCase
 
 from ..templatetags.public_journal_tags import author_articles
 from ..templatetags.public_journal_tags import render_article

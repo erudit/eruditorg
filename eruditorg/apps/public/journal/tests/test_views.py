@@ -11,15 +11,15 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.test.utils import override_settings
 
-from erudit.factories import ArticleFactory
-from erudit.factories import AuthorFactory
-from erudit.factories import CollectionFactory
-from erudit.factories import IssueFactory
-from erudit.factories import JournalFactory
-from erudit.factories import JournalInformationFactory
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import AuthorFactory
+from erudit.test.factories import CollectionFactory
+from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
+from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
-from erudit.tests import BaseEruditTestCase
 
 from ..views import ArticleDetailView
 from ..views import ArticleMediaView

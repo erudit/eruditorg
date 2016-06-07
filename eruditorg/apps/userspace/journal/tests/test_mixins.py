@@ -8,8 +8,8 @@ from django.test import RequestFactory
 from django.views.generic import TemplateView
 
 from base.factories import UserFactory
-from erudit.factories import JournalFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalFactory
 
 from ..viewmixins import JournalScopeMixin
 

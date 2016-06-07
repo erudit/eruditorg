@@ -8,9 +8,9 @@ from django.test import RequestFactory
 from django.utils.encoding import force_text
 
 from core.citations.middleware import SavedCitationListMiddleware
-from erudit.factories import ArticleFactory
-from erudit.factories import IssueFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
 
 from ..views import SavedCitationAddView
 from ..views import SavedCitationRemoveView

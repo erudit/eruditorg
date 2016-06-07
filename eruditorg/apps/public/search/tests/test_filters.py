@@ -7,7 +7,7 @@ from rest_framework.request import Request
 
 from core.solrq.query import Query
 from erudit.models import EruditDocument
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..filters import EruditDocumentSolrFilter as BaseEruditDocumentSolrFilter
 

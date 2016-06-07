@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from erudit.tests import BaseEruditTestCase
-
-from erudit.factories import JournalInformationFactory
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalInformationFactory
 
 from ..forms import JournalInformationForm
 

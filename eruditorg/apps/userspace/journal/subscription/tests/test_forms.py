@@ -6,7 +6,7 @@ from faker import Factory
 
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.factories import JournalAccessSubscriptionFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..forms import JournalAccessSubscriptionCreateForm
 

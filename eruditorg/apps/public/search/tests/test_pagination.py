@@ -3,10 +3,10 @@
 from django.test import RequestFactory
 from rest_framework.request import Request
 
-from erudit.factories import ArticleFactory
-from erudit.factories import IssueFactory
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
 from erudit.models import Article
-from erudit.tests.base import BaseEruditTestCase
 
 from ..pagination import EruditDocumentPagination
 

@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..forms import AuthorizationForm
 

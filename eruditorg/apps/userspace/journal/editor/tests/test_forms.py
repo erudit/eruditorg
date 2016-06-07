@@ -5,8 +5,8 @@ from django.contrib.contenttypes.models import ContentType
 from base.factories import UserFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
-from erudit.factories import JournalFactory
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalFactory
 
 from ..forms import IssueSubmissionForm
 

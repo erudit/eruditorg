@@ -1,7 +1,8 @@
 import factory
 
+from erudit.test.factories import JournalFactory
+
 from base.factories import UserFactory
-from erudit.factories import JournalFactory
 
 
 class IssueSubmissionFactory(factory.django.DjangoModelFactory):

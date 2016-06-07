@@ -2,7 +2,7 @@
 
 from django.contrib.auth.models import User
 
-from erudit.tests.base import BaseEruditTestCase
+from django.test import TestCase
 
 from ..mandragore import can_create_mandragore_user
 from ..mandragore import create_mandragore_profile_for_user
@@ -13,7 +13,14 @@ from ..mandragore import MandragoreError
 from ..mandragore import user_coherent_with_mandragore
 
 
-class TestCommands(BaseEruditTestCase):
+class TestCommands(TestCase):
+    def setUp(self):
+        super(TestCommands, self).setUp()
+        self.user = User.objects.create_user(
+            username='foobar',
+            email='foobar@erudit.org',
+            password='top_secret'
+        )
 
     def test_create_mandragore_profile_for_user(self):
 

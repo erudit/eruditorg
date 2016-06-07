@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.factories import AuthorizationFactory
 from erudit.models import JournalInformation
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 
 class TestJournalInformationUpdateView(BaseEruditTestCase):

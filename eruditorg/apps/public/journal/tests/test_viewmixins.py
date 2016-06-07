@@ -4,10 +4,10 @@ import datetime as dt
 
 from django.views.generic import DetailView
 
-from erudit.factories import ArticleFactory
-from erudit.factories import IssueFactory
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
 from erudit.models import Article
-from erudit.tests import BaseEruditTestCase
 
 from ..viewmixins import SingleArticleMixin
 

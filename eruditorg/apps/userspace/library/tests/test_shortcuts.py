@@ -7,8 +7,8 @@ from django.contrib.auth.models import AnonymousUser
 from base.factories import UserFactory
 from core.subscription.factories import JournalAccessSubscriptionFactory
 from core.subscription.factories import JournalAccessSubscriptionPeriodFactory
-from erudit.factories import OrganisationFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import OrganisationFactory
 
 from ..shortcuts import get_managed_organisations
 

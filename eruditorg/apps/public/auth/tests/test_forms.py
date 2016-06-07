@@ -5,7 +5,7 @@ from django.core import mail
 
 from core.accounts.factories import AbonnementProfileFactory
 from core.accounts.models import AbonnementProfile
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..forms import PasswordChangeForm
 from ..forms import PasswordResetForm

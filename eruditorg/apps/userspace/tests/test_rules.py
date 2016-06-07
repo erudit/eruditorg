@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.factories import AuthorizationFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 
 class TestUserspaceAccessRule(BaseEruditTestCase):

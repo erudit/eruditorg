@@ -5,10 +5,11 @@ import datetime as dt
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import OrganisationFactory
+
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.factories import AuthorizationFactory
-from erudit.factories import OrganisationFactory
-from erudit.tests import BaseEruditTestCase
 
 from ..factories import JournalAccessSubscriptionFactory
 from ..factories import JournalAccessSubscriptionPeriodFactory

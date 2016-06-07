@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
 from core.accounts.factories import AbonnementProfileFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 
 class TestUserPasswordChangeView(BaseEruditTestCase):

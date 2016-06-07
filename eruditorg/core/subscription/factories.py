@@ -4,8 +4,8 @@ import factory
 
 from base.factories import UserFactory
 
-from erudit.factories import JournalFactory
-from erudit.factories import OrganisationFactory
+from erudit.test.factories import JournalFactory
+from erudit.test.factories import OrganisationFactory
 
 from .models import InstitutionIPAddressRange
 from .models import JournalAccessSubscription

@@ -13,8 +13,8 @@ from core.subscription.factories import JournalAccessSubscriptionFactory
 from core.subscription.factories import JournalManagementPlanFactory
 from core.subscription.factories import JournalManagementSubscriptionFactory
 from core.subscription.models import JournalAccessSubscription
-from erudit.factories import JournalFactory
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import JournalFactory
 
 faker = Factory.create()
 

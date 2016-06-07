@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from erudit.tests.base import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..forms import ResultsFilterForm
 from ..forms import SearchForm

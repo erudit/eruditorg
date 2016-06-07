@@ -3,8 +3,9 @@
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 
+from erudit.test import BaseEruditTestCase
+
 from base.factories import GroupFactory
-from erudit.tests import BaseEruditTestCase
 
 from ..defaults import AuthorizationConfig as AC
 from ..factories import AuthorizationFactory

@@ -6,13 +6,14 @@ from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
 from django.test import RequestFactory
 
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
+from erudit.test.factories import OrganisationFactory
+
 from core.subscription.factories import InstitutionIPAddressRangeFactory
 from core.subscription.factories import JournalAccessSubscriptionFactory
 from core.subscription.factories import JournalAccessSubscriptionPeriodFactory
-from erudit.factories import ArticleFactory
-from erudit.factories import IssueFactory
-from erudit.factories import OrganisationFactory
-from erudit.tests import BaseEruditTestCase
 
 from ..viewmixins import ArticleAccessCheckMixin
 from ..viewmixins import SingleJournalMixin

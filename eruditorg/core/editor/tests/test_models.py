@@ -1,6 +1,6 @@
 # -* coding: utf-8 -*-
 
-from erudit.tests import BaseEruditTestCase
+from erudit.test import BaseEruditTestCase
 
 from ..factories import IssueSubmissionFactory
 from ..models import IssueSubmission
