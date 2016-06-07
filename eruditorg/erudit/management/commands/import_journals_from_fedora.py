@@ -7,11 +7,10 @@ import re
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.utils.encoding import smart_str
 from eruditarticle.utils import remove_xml_namespaces
 from eulfedora.util import RequestFailed
 import lxml.etree as et
-
-from apps.public.journal.templatetags.public_journal_tags import render_article
 
 from ...conf import settings as erudit_settings
 from ...fedora.objects import ArticleDigitalObject
@@ -50,8 +49,8 @@ class Command(BaseCommand):
             help='Perform a full import.')
 
         parser.add_argument(
-            '--test-xslt', action='store_true', dest='test_xslt', default=False,
-            help='Test the XSLT transformation of articles')
+            '--test-xslt', action='store', dest='test_xslt',
+            help='Python path to a function to test the XSLT transformation of articles')
 
         parser.add_argument(
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
@@ -62,9 +61,23 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
-        self.test_xslt = options.get('test_xslt', False)
+        self.test_xslt = options.get('test_xslt', None)
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
+
+        # Handles a potential XSLT test function
+        try:
+            assert self.test_xslt is not None
+            module, xslt_test_func = self.test_xslt.rsplit('.', 1)
+            module, xslt_test_func = smart_str(module), smart_str(xslt_test_func)
+            xslt_test_func = getattr(__import__(module, {}, {}, [xslt_test_func]), xslt_test_func)
+            self.xslt_test_func = xslt_test_func
+        except ImportError:
+            self.stdout.write(self.style.ERROR(
+                '"{0}" could not be imported!'.format(self.test_xslt)))
+            return
+        except AssertionError:
+            pass
 
         # Handles a potential modification date option
         try:
@@ -393,7 +406,7 @@ class Command(BaseCommand):
 
         if self.test_xslt:
             try:
-                render_article({}, article)
+                self.xslt_test_func({}, article)
             except Exception as e:
                 msg = 'The article with PID "{}" cannot be rendered using XSLT: e'.format(
                     article_pid, e)
