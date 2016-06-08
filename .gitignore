@@ -20,6 +20,7 @@ npm-debug.log.*
 Vagrantfile
 /vagrant_data
 .vagrant
+.cache
 celerybeat-schedule
 vagrant
 tools/static/.env.json
