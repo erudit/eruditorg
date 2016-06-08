@@ -156,6 +156,9 @@ TEMPLATES = [
                     'django.template.loaders.app_directories.Loader',
                 ]),
             ],
+            'builtins': [
+                'easy_pjax.templatetags.pjax_tags',
+            ],
         },
     },
 ]
