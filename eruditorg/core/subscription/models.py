@@ -65,6 +65,19 @@ class JournalAccessSubscription(AbstractSubscription):
         return JournalAccessSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
+    def get_journals(self):
+        """ Returns the Journal instances targetted by the subscription. """
+        if self.full_access:
+            return Journal.objects.all()
+
+        journal_ids = []
+        if self.journal_id:
+            journal_ids.append(self.journal_id)
+        if self.collection:
+            journal_ids.extend(list(Journal.objects.values_list('id', flat=True)))
+        journal_ids.extend(list(self.journals.all().values_list('id', flat=True)))
+        return Journal.objects.filter(id__in=journal_ids)
+
 
 class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
     """ Defines a period in which a user or an organisation is allowed to access journals. """
