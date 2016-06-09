@@ -33,6 +33,7 @@ class SushiWebServiceView(SoapWebServiceView):
             './/' + self.ns('sushi', 'ReportDefinition'), namespaces=self.request_nsmap)
         assert report_definition_node is not None, 'Invalid ReportDefinition'
 
+        # Fetches the start date and the end date
         begin_node = report_definition_node.find(
             './/' + self.ns('sushi', 'Begin'), namespaces=self.request_nsmap)
         end_node = report_definition_node.find(
@@ -46,6 +47,21 @@ class SushiWebServiceView(SoapWebServiceView):
             assert start_date <= end_date, 'Invalid range'
         except ValueError:
             raise AssertionError('Invalid range')
+
+        # Fetches the requestor and customer reference information
+        requestor_node = report_request_node.find(
+            './/' + self.ns('sushi', 'Requestor') + '/' + self.ns('sushi', 'ID'),
+            namespaces=self.request_nsmap)
+        assert requestor_node is not None, 'Invalid Requestor'
+        customer_reference_node = report_request_node.find(
+            './/' + self.ns('sushi', 'CustomerReference') + '/' + self.ns('sushi', 'ID'),
+            namespaces=self.request_nsmap)
+        assert requestor_node is not None, 'Invalid CustomerReference'
+        requestor_id, customer_reference = requestor_node.text, customer_reference_node.text  # noqa
+        # TODO: the requestor_id and the customer_reference should be used to filter the initial
+        # queryset of Journal instance that is used to fetch report data. This should be done by
+        # determining the subscription related with an organisation that is associated with the
+        # considered requestor_id / customer_reference.
 
         # Generates the report
         report_code = report_definition_node.attrib['Name']

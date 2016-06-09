@@ -69,7 +69,7 @@ class SoapWebServiceView(View):
 
     @cached_property
     def nsmap(self):
-        """ This property import loggingreturns the namespace dictionary.
+        """ This property returns the namespace dictionary.
 
         It constructs a dictionary mapping namespace prefixes to their corresponding urls. It can be
         used when building SOAP operation responses.
