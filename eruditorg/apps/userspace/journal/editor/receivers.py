@@ -27,7 +27,7 @@ def send_production_team_email(sender, instance, name, source, target, **kwargs)
 
     email = Email(
         emails,
-        html_template='userspace/journal/editor/emails/new_issue_submission_content.html',
-        subject_template='userspace/journal/editor/emails/new_issue_submission_subject.html',
+        html_template='emails/editor/new_issue_submission_content.html',
+        subject_template='emails/editor/new_issue_submission_subject.html',
         extra_context={'issue': instance})
     email.send()

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from account_actions.models import AccountActionToken
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -18,11 +16,6 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.journal = kwargs.pop('journal')
         super(JournalAccessSubscriptionCreateForm, self).__init__(*args, **kwargs)
-
-        # TODO: remove crispy-forms
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.add_input(Submit('submit', _('Valider')))
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

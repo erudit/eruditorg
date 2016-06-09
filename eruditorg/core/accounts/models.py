@@ -33,7 +33,7 @@ class AbonnementProfile(models.Model):
     def mail_account(self):
         email = Email(
             [self.user.email, ],
-            html_template='userspace/journal/subscription/mail/new_account.html',
+            html_template='emails/accounts/new_account.html',
             subject=_('erudit.org : création de votre compte'),
             extra_context={'object': self})
         email.send()

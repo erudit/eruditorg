@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 from django.utils.translation import gettext as _
-from django_select2.forms import Select2Widget
 from plupload.forms import PlUploadFormField
 from plupload.models import ResumableFile
 
@@ -27,8 +24,7 @@ class IssueSubmissionForm(forms.ModelForm):
         ]
 
         widgets = {
-            'journal': Select2Widget(),
-            'contact': Select2Widget(),
+            'contact': forms.Select(),
         }
 
     def disable_form(self):
@@ -48,13 +44,6 @@ class IssueSubmissionForm(forms.ModelForm):
         kwargs.setdefault('label_suffix', '')
         super(IssueSubmissionForm, self).__init__(*args, **kwargs)
 
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-vertical'
-        self.helper.form_method = 'post'
-
-        self.helper.add_input(
-            Submit('submit', _("Envoyer le fichier"))
-        )
         self.populate_select(self.user)
 
         self.instance.journal = self.journal

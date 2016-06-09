@@ -1,6 +1,6 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
@@ -17,8 +17,40 @@
   <h1>{% trans "Créer un abonnement" %} </h1>
   <div class="row">
     <div class="col-md-12">
-      <form  class="form-vertical" method="post" action="">
-        {% crispy form %}
+      <form  class="form-vertical" method="post" action="">{% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="col-xs-12">
+          {% for error in form.non_field_errors %}
+          <p class="alert alert-warning">{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div id="div_id_{{ form.email.html_name }}" class="form-group{% if form.email.errors %} has-error{% endif %}">
+          <div class="controls">
+            <label class="control-label" for="{{ form.email.auto_id }}">{{ form.email.label }}</label>
+            {{ form.email|add_class:'form-control' }}
+            {% for error in form.email.errors %}<p class="error">{{ error }}</p>{% endfor %}
+          </div>
+        </div>
+        <div id="div_id_{{ form.first_name.html_name }}" class="form-group{% if form.first_name.errors %} has-error{% endif %}">
+          <div class="controls">
+            <label class="control-label" for="{{ form.first_name.auto_id }}">{{ form.first_name.label }}</label>
+            {{ form.first_name|add_class:'form-control' }}
+            {% for error in form.first_name.errors %}<p class="error">{{ error }}</p>{% endfor %}
+          </div>
+        </div>
+        <div id="div_id_{{ form.last_name.html_name }}" class="form-group{% if form.last_name.errors %} has-error{% endif %}">
+          <div class="controls">
+            <label class="control-label" for="{{ form.last_name.auto_id }}">{{ form.last_name.label }}</label>
+            {{ form.last_name|add_class:'form-control' }}
+            {% for error in form.last_name.errors %}<p class="error">{{ error }}</p>{% endfor %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="controls">
+            <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
+          </div>
+        </div>
       </form>
     </div>
   </div>

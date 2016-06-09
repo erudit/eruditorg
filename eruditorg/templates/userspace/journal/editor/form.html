@@ -1,5 +1,6 @@
 {% extends "userspace/journal/editor/base.html" %}
-{% load i18n staticfiles %}
+{% load i18n %}
+{% load staticfiles %}
 
 {% block page_title %}{% trans "Dépôt de fichiers" %}{% endblock %}
 
@@ -19,7 +20,6 @@
 <li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
 {% endblock breadcrumb_end %}
 
-{% load crispy_forms_tags %}
 {% block content_main %}
 <div class="col-md-6 col-xs-12 col-centered">
   <section class="card card-upload_form">
@@ -27,8 +27,7 @@
       <h2>{% trans "Déposer des fichiers de production" %}</h2>
     </div>
     <div class="card-body">
-      <form class="row form-vertical" method="post">
-        {% csrf_token %}
+      <form class="row form-vertical" method="post">{% csrf_token %}
         {% if form.errors %}
         <div class="row">
           <div class="col-xs-12">

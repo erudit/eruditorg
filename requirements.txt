@@ -1,23 +1,12 @@
-cssselect==0.9.1
-decorator==4.0.4
-Django==1.8.11
-django-appconf==1.0.1
-django-compressor==1.6
-django-crispy-forms==1.5.2
--e git+https://github.com/asaglimbeni/django-datetime-widget.git@master#egg=django_datetime_widget-master
-django-grappelli==2.7.1
+Django==1.9.7
+git+https://github.com/erudit/erudit-core.git@0.1.0#egg=erudit-core
 git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-resumable-uploads
 git+https://github.com/erudit/django-account-actions.git@master#egg=django-account-actions
 eulxml==1.0.1
 eulfedora==1.5.0
--e git+https://github.com/erudit/liberuditarticle.git@master#egg=liberuditarticle
+-e git+https://github.com/erudit/liberuditarticle.git@0.1.0#egg=liberuditarticle
 django-post-office==2.0.5
-Django-Select2==5.2.1
-ipdb==0.8.1
-ipython==4.0.0
-ipython-genutils==0.1.0
 jsonfield==1.0.3
-libsass==0.9.1
 lxml==3.5.0
 path.py==8.1.2
 pexpect==4.0.1
@@ -31,13 +20,9 @@ pytz==2015.7
 reportlab==3.2.0
 simplegeneric==0.8.1
 six==1.10.0
-tox==2.1.1
 traitlets==4.0.0
-virtualenv==13.1.2
-pymysql
-factory_boy==2.6.0
-simplejson
-django-spurl==0.6.4
+PyMySQL==0.7.2
+simplejson==3.8.2
 django-filter==0.11.0
 rules==1.1.1
 PyPDF2==1.25.1
@@ -51,7 +36,6 @@ django-ipware==1.1.3
 feedparser==5.2.1
 django-fsm==2.3.0
 pysolr==3.4.0
-fake-factory==0.5.3
 gunicorn==19.4.5
 html2text==2016.1.8
 django-easy-pjax==1.3.0

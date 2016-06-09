@@ -5,9 +5,8 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from erudit.utils.pymysql import pymysql_connection
-
 from .models import MandragoreProfile
+from .utils.pymysql import pymysql_connection
 
 
 class MandragoreError(Exception):

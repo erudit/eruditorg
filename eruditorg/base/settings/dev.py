@@ -42,8 +42,6 @@ CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.timer.TimerPanel',
-    # 'debug_toolbar_line_profiler.panel.ProfilingPanel',
-    'template_timings_panel.panels.TemplateTimings.TemplateTimings',
     'debug_toolbar.panels.headers.HeadersPanel',
     'debug_toolbar.panels.request.RequestPanel',
     'debug_toolbar.panels.sql.SQLPanel',

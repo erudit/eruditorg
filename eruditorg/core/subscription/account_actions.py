@@ -36,8 +36,8 @@ class IndividualSubscriptionAction(AccountActionBase):
     def send_notification_email(self, token):
         email = Email(
             [token.email, ],
-            html_template='subscription/emails/new_subscription_content.html',
-            subject_template='subscription/emails/new_subscription_subject.html',
+            html_template='emails/subscription/journal/new_subscription_content.html',
+            subject_template='emails/subscription/journal/new_subscription_subject.html',
             extra_context={'token': token})
         email.send()
 

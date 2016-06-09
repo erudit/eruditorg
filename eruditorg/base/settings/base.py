@@ -67,7 +67,6 @@ INSTALLED_APPS = (
     'core.subscription',
 
     # Third-party apps
-    'grappelli',
     'modeltranslation',
     'post_office',
 
@@ -81,13 +80,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
-    'crispy_forms',
-    'django_select2',
-    'datetimewidget',
     'account_actions',
     'plupload',
     'django_filters',
-    'spurl',
     'rules',
     'ckeditor',
     'raven.contrib.django.raven_compat',
@@ -119,8 +114,6 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -162,6 +155,9 @@ TEMPLATES = [
                     'django.template.loaders.filesystem.Loader',
                     'django.template.loaders.app_directories.Loader',
                 ]),
+            ],
+            'builtins': [
+                'easy_pjax.templatetags.pjax_tags',
             ],
         },
     },
