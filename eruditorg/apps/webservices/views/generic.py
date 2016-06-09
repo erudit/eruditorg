@@ -46,7 +46,7 @@ class SoapWebServiceView(View):
         return super(SoapWebServiceView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request):
-        if self.wsdl_template_name is None:  # pragma: no cover
+        if self.wsdl_template_name is None:
             raise ImproperlyConfigured(
                 '{cls} is missing a WSDL template name. '
                 'Please define {cls}.wsdl_template_name'.format(cls=self.__class__.__name__))
@@ -78,7 +78,7 @@ class SoapWebServiceView(View):
         return {a[1]['prefix']: a[1]['url'] for a in vattrs if a[0].startswith('namespace_')}
 
     def post(self, request):
-        if self.service_name is None:  # pragma: no cover
+        if self.service_name is None:
             raise ImproperlyConfigured(
                 '{cls} is missing a service name. '
                 'Please define {cls}.service_name'.format(cls=self.__class__.__name__))
@@ -93,7 +93,7 @@ class SoapWebServiceView(View):
             assert operation_name in self.service_operations, 'Unknown operation'
             dom = et.fromstring(request.body)
             body_node = dom.find('.//' + self.ns('soap', 'Body'), namespaces=dom.nsmap)
-            assert body_node, 'Unable to parse the SOAP request'
+            assert body_node is not None, 'Unable to parse the SOAP request'
         except AssertionError as e:
             return self.soap_fault_client(e.args[0])
         except et.XMLSyntaxError:
@@ -107,7 +107,7 @@ class SoapWebServiceView(View):
         # Fetches the method associated with the current operation.
         try:
             exec_operation = getattr(self, self.service_operations[operation_name])
-        except AttributeError:  # pragma: no cover
+        except AttributeError:
             raise ImproperlyConfigured(
                 '{cls} is missing the {op} operation. '
                 'Please define the {meth} method'.format(
