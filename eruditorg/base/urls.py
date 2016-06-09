@@ -45,6 +45,7 @@ urlpatterns = i18n_patterns(
 
     # Apps
     url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
+    url(r'^webservices/', include('apps.webservices.urls', namespace='webservices')),
     url(r'^', include('apps.public.urls', namespace='public')),
 
     # Compatibility URLs
