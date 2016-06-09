@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic import View
 
+from erudit.models import Journal
+
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.counter.counter import JournalReport1
@@ -48,7 +50,8 @@ class CounterJournalReportView(LoginRequiredMixin, OrganisationScopePermissionRe
 
     def get_report_journal_queryset(self):
         """ Returns a queryset of the Journal instances that should be exposed in the report. """
-        return None
+        subscription = self.current_organisation.journalaccesssubscription_set.first()
+        return subscription.get_journals() if subscription else Journal.objects.none()
 
     def get_report_period(self, request):
         """ Returns a tuple (start date, end date) containing the period of the report. """
