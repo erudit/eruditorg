@@ -51,8 +51,7 @@ class SoapWebServiceView(View):
                 '{cls} is missing a WSDL template name. '
                 'Please define {cls}.wsdl_template_name'.format(cls=self.__class__.__name__))
         wsdl_template = loader.get_template(self.wsdl_template_name)
-        response = HttpResponse(wsdl_template.render({}), content_type='application/wsdl+xml')
-        response['Content-Disposition'] = 'attachment; filename={}.wsdl'.format(self.service_name)
+        response = HttpResponse(wsdl_template.render({}), content_type='text/xml')
         return response
 
     def get_soap_envelope(self, xml_node):
