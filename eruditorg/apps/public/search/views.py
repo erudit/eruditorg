@@ -5,6 +5,7 @@ import json
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import View
+from django.views.generic.base import ContextMixin
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
 from django.utils.encoding import smart_text
@@ -77,7 +78,7 @@ class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
         return kwargs
 
 
-class SearchResultsView(TemplateResponseMixin, FormMixin, View):
+class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
     """ Display the results associated with a search for Érudit documents. """
     filter_form_class = ResultsFilterForm
     http_method_names = ['get', ]
