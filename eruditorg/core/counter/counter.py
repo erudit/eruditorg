@@ -2,7 +2,6 @@
 
 import calendar
 import datetime as dt
-import functools
 
 from dateutil.relativedelta import relativedelta
 
@@ -34,7 +33,8 @@ class CounterReport(object):
             _current_date = _current_date.replace(day=1)
 
         self.journal_queryset = self.filter_journal_queryset(
-            journal_queryset or Journal.objects.filter(collection__localidentifier='erudit'))
+            journal_queryset if journal_queryset is not None
+            else Journal.objects.filter(collection__localidentifier='erudit'))
         self.journal_localidentifiers = list(
             self.journal_queryset.values_list('localidentifier', flat=True))
 
@@ -164,20 +164,23 @@ class CounterReport(object):
             for r in results.items():
                 period_count = list(r[1])[0]['sum']
                 localidentifier = r[0][1]['journal_localidentifier']
-                period_data['journals'].append({
-                    'localidentifier': localidentifier,
-                    'journal': journals_dict[localidentifier],
-                    'count': period_count,
-                })
-                _journals_data_mapping[localidentifier]['months'][i]['count'] = period_count
+                if localidentifier in self.journal_localidentifiers:
+                    period_data['journals'].append({
+                        'localidentifier': localidentifier,
+                        'journal': journals_dict[localidentifier],
+                        'count': period_count,
+                    })
+                    _journals_data_mapping[localidentifier]['months'][i]['count'] = period_count
             for r in html_results.items():
                 period_count = list(r[1])[0]['sum']
                 localidentifier = r[0][1]['journal_localidentifier']
-                _journals_data_mapping[localidentifier]['months'][i]['html_count'] = period_count
+                if localidentifier in self.journal_localidentifiers:
+                    _journals_data_mapping[localidentifier]['months'][i]['html_count'] = period_count  # noqa
             for r in pdf_results.items():
                 period_count = list(r[1])[0]['sum']
                 localidentifier = r[0][1]['journal_localidentifier']
-                _journals_data_mapping[localidentifier]['months'][i]['pdf_count'] = period_count
+                if localidentifier in self.journal_localidentifiers:
+                    _journals_data_mapping[localidentifier]['months'][i]['pdf_count'] = period_count
 
             self.months.append(period_data)
 
@@ -196,7 +199,11 @@ class CounterReport(object):
 
     def get_agg_sum(self, results):
         """ Given a list of aggregation results, returns the sum of all aggregations. """
-        return functools.reduce(lambda s, result: s+list(result[1])[0]['sum'], results, 0)
+        stotal = 0
+        for r in results:
+            if r[0][1]['journal_localidentifier'] in self.journal_localidentifiers:
+                stotal += list(r[1])[0]['sum']
+        return stotal
 
     def fetch_reporting_period_total(self):
         """ Returns the results related to the 'Reporting Period Total' column. """
@@ -215,12 +222,8 @@ class CounterReport(object):
 
         start = dt.datetime.combine(start if start else self.start, dt.datetime.min.time())
         end = dt.datetime.combine(end if end else self.end, dt.datetime.max.time())
-        lids_clause = ' OR '.join(
-            'journal_localidentifier = \'{}\''.format(lid)
-            for lid in self.journal_localidentifiers)
-        where_statement = 'WHERE (time >= \'{start}\' AND time <= \'{end}\' {lids})'.format(
-            start=start, end=end,
-            lids='AND ' + lids_clause if lids_clause else 'AND journal_localidentifier = \'none\'')
+        where_statement = 'WHERE (time >= \'{start}\' AND time <= \'{end}\')'.format(
+            start=start, end=end)
 
         if where:
             where_statement = '{0} AND {1}'.format(where_statement, where)
