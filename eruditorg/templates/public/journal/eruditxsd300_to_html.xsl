@@ -1893,7 +1893,7 @@
           <xsl:text>[…]</xsl:text>
         </xsl:attribute>
         <xsl:text>[</xsl:text>
-        <xsl:apply-templates/>
+        <xsl:value-of select="normalize-space()"/>
         <xsl:text>]</xsl:text>
       </xsl:element>
   </xsl:template>
