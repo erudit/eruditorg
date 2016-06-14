@@ -1860,7 +1860,7 @@
         </xsl:attribute>
         <xsl:attribute name="data-hint">
           <xsl:variable name="idref" select="@idref"/>
-          <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/alinea, 1, 200)"/>
+          <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200)"/>
           <xsl:text>[…]</xsl:text>
         </xsl:attribute>
         <xsl:text>[</xsl:text>
