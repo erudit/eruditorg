@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.1 - Under development
--------------------------
+0.1.1
+-----
 
 * Adds a SizeConstrainedImageField model field to define ImageField fields with size and dimensions constraints
 * Forces Organisation.badge images to be redimensioned to 140x140 pixels
