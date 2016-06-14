@@ -4,6 +4,8 @@ import datetime as dt
 
 from lxml import etree as et
 
+from erudit.models import Organisation
+
 from core.counter.counter import JournalReport1
 from core.counter.counter import JournalReport1GOA
 
@@ -48,7 +50,7 @@ class SushiWebServiceView(SoapWebServiceView):
         except ValueError:
             raise AssertionError('Invalid range')
 
-        # Fetches the requestor and customer reference information
+        # Fetches the requestor ID and customer reference information
         requestor_node = report_request_node.find(
             './/' + self.ns('sushi', 'Requestor') + '/' + self.ns('sushi', 'ID'),
             namespaces=self.request_nsmap)
@@ -58,16 +60,36 @@ class SushiWebServiceView(SoapWebServiceView):
             namespaces=self.request_nsmap)
         assert requestor_node is not None, 'Invalid CustomerReference'
         requestor_id, customer_reference = requestor_node.text, customer_reference_node.text  # noqa
-        # TODO: the requestor_id and the customer_reference should be used to filter the initial
-        # queryset of Journal instance that is used to fetch report data. This should be done by
-        # determining the subscription related with an organisation that is associated with the
-        # considered requestor_id / customer_reference.
+
+        # Converts the requestor ID and the customer reference to ints. These information should
+        # correspond to an ID of an Organisation instance.
+        try:
+            requestor_id = int(requestor_id)
+            customer_reference = int(customer_reference)
+            # We assume that the Requestor ID is the same as the customer reference
+            assert requestor_id == customer_reference
+        except (ValueError, TypeError, AssertionError):
+            raise AssertionError('Invalid (Requestor ID, Customer reference)')
+
+        # Tries to fetch the organisation corresponding to the Requestor ID / Customer Reference.
+        try:
+            organisation = Organisation.objects.get(id=requestor_id)
+        except Organisation.DoesNotExist:
+            raise AssertionError('Unknown Requestor ID and Customer Reference')
+
+        # Tries to fetch a valid subscription using the considered organisation
+        nowd = dt.datetime.now().date()
+        subscription = organisation.journalaccesssubscription_set.filter(
+            journalaccesssubscriptionperiod__start__lte=nowd,
+            journalaccesssubscriptionperiod__end__gte=nowd).first()
+        assert subscription is not None, 'Unable to find a valid subscription for the organisation'
+        journal_qs = subscription.get_journals()
 
         # Generates the report
         report_code = report_definition_node.attrib['Name']
         if report_code not in self.reports_map:
             raise ValueError('{rtype} reports are not provided'.format(rtype=report_code))
-        report = self.reports_map[report_code](start_date, end_date)
+        report = self.reports_map[report_code](start_date, end_date, journal_queryset=journal_qs)
 
         # ########################## #
         # Builds the report elements #

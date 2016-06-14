@@ -50,7 +50,11 @@ class CounterJournalReportView(LoginRequiredMixin, OrganisationScopePermissionRe
 
     def get_report_journal_queryset(self):
         """ Returns a queryset of the Journal instances that should be exposed in the report. """
-        subscription = self.current_organisation.journalaccesssubscription_set.first()
+        nowd = dt.datetime.now().date()
+        subscription = self.current_organisation.journalaccesssubscription_set.filter(
+            journalaccesssubscriptionperiod__start__lte=nowd,
+            journalaccesssubscriptionperiod__end__gte=nowd,
+        ).first()
         return subscription.get_journals() if subscription else Journal.objects.none()
 
     def get_report_period(self, request):
