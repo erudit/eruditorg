@@ -35,6 +35,7 @@ setup(
         'django-modeltranslation>=0.11',
         'eulfedora>=1.5.0',
         'lxml>=3.6.0',
+        'Pillow>=3.2.0',
         'Sickle>=0.5',
 
         # Érudit modules
