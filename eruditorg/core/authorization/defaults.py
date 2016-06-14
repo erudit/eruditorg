@@ -53,6 +53,14 @@ class AuthorizationConfig(object):
     journals.
     """
 
+    can_manage_organisation_subscription_information = AuthorizationDef(
+        'subscriptions:can_manage_organisation_subscription_information',
+        _("Gestion des informations d'un abonnement"))
+    """
+    This authorization defines the ability to manage the information of an organisation
+    subscription.
+    """
+
     can_manage_organisation_members = AuthorizationDef(
         'subscriptions:can_manage_organisation_members',
         _("Gestion des membres d'un abonnement"))

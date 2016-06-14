@@ -50,3 +50,13 @@ rules.add_perm(
         )
     ),
 )
+
+rules.add_perm(
+    'subscription.manage_organisation_subscription_information',
+    is_authenticated & (
+        is_superuser | is_staff | (
+            has_valid_subscription &
+            HasAuthorization(AC.can_manage_organisation_subscription_information)
+        )
+    ),
+)

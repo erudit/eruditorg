@@ -66,11 +66,16 @@ legend {
 }
 
 /* labels */
-label {
+label.control-label {
   margin: 0.25em 0;
   color: $gray-dark;
   font-weight: normal;
   display: block;
+}
+
+/* Help blocks */
+p.help-block{
+  margin-top: 5px;
 }
 
 /* input styles */
