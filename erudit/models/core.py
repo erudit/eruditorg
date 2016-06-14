@@ -17,6 +17,7 @@ from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import JournalDigitalObject, ArticleDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..managers import JournalUpcomingManager
+from ..modelfields import SizeConstrainedImageField
 
 
 # choices
@@ -125,10 +126,11 @@ class Organisation(models.Model):
         verbose_name=_("Pays")
     )
 
-    badge = models.ImageField(
+    badge = SizeConstrainedImageField(
         verbose_name=_('Badge'),
         blank=True, null=True,
         upload_to='organisation_badges',
+        width=140, height=140,
     )
 
     members = models.ManyToManyField(
