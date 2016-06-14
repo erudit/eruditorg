@@ -58,7 +58,7 @@ class SushiWebServiceView(SoapWebServiceView):
         customer_reference_node = report_request_node.find(
             './/' + self.ns('sushi', 'CustomerReference') + '/' + self.ns('sushi', 'ID'),
             namespaces=self.request_nsmap)
-        assert requestor_node is not None, 'Invalid CustomerReference'
+        assert customer_reference_node is not None, 'Invalid CustomerReference'
         requestor_id, customer_reference = requestor_node.text, customer_reference_node.text  # noqa
 
         # Converts the requestor ID and the customer reference to ints. These information should
