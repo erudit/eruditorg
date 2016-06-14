@@ -1,6 +1,8 @@
 {% extends "public/base.html" %}
 {% load i18n staticfiles cache %}
 
+{% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
+
 {% block page_title %}{{ journal.name }}{% endblock page_title %}
 
 {% block meta_tags %}
@@ -75,9 +77,6 @@
               <span>{{ journal.name }}</span>
               {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
             </h1>
-            <p class="text-right">
-              <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Index des auteurs" %}</a>
-            <p>
           </div>
         </header>
 
@@ -188,7 +187,7 @@
           </a>
           {% endif %}
           <p>
-            <a href="#back-issues" class="btn btn-primary">
+            <a href="#back-issues" class="btn btn-primary" title="{% trans 'Historique des numéros' %}">
               {% trans "Voir tous les numéros" %}
             </a>
           </p>
@@ -198,6 +197,12 @@
         {# journal meta infos #}
         <div class="sidebar-block">
           <h2>{% trans "Fiche" %}</h2>
+
+          <p>
+            <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">
+              {% trans "Index des auteurs" %}
+            </a>
+          <p>
 
           <dl class="journal-meta--list">
 
@@ -314,7 +319,7 @@
 
       <div class="row">
         <header class="back-issues--header col-xs-12">
-          <h2>{% trans "Historique des numéros" %} ({{ issues|length }})</h2>
+          <h2>{% trans "Historique des numéros" %}&nbsp;({{ issues|length }})</h2>
         </header>
       </div>
 
@@ -341,10 +346,8 @@
       </div>
 
       {% if issues|length > 50 %}
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <a href="#back-issues" class="arrow-up">|^</a>
-        </div>
+      <div class="text-center">
+        <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}">|^</a>
       </div>
       {% endif %}
 

@@ -187,6 +187,10 @@
 
         {% endif %}
 
+        <div class="text-center">
+          <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
+        </div>
+
       </section>
       {% endcache %}
 
@@ -212,6 +216,12 @@
         <div class="sidebar-block">
 
           <h3>{% trans "Fiche" %}</h3>
+
+          <p>
+            <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">
+              {% trans "Index des auteurs" %}
+            </a>
+          <p>
 
           <dl class="journal-meta--list">
 
@@ -348,7 +358,7 @@
             <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
               <h5>
                 <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-                {% if published_issue.html_title %}<br/><span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
+                {% if published_issue.html_title %}<span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
               </h5>
             </a>
           </div>
