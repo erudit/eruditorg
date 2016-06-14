@@ -56,7 +56,7 @@ export default {
 
     var _this = this;
 
-    this.article.find('.article-table-of-contents').on('click', 'a', function(e) {
+    this.article.on('click', 'a[href*="#"]', function(e) {
       if( e ) {
         e.preventDefault();
         e.stopPropagation();
