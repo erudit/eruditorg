@@ -106,9 +106,9 @@ class SushiWebServiceView(SoapWebServiceView):
         # Customer node
         customer_node = et.SubElement(counter_report_node, self.ns('counter', 'Customer'))
         customer_name_node = et.SubElement(customer_node, self.ns('counter', 'Name'))
-        customer_name_node.text = 'Organisation name'  # TODO
+        customer_name_node.text = organisation.name
         customer_id_node = et.SubElement(customer_node, self.ns('counter', 'ID'))
-        customer_id_node.text = 'Organisation ID'  # TODO
+        customer_id_node.text = str(organisation.id)
 
         for jdata in report.journals:
             reportitems_node = et.SubElement(customer_node, self.ns('counter', 'ReportItems'))
