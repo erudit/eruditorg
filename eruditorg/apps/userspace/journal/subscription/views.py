@@ -18,6 +18,7 @@ from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
+from core.subscription.shortcuts import get_journal_organisation_subscribers
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
 
@@ -40,6 +41,8 @@ class IndividualJournalAccessSubscriptionListView(
             .get_context_data(**kwargs)
         context['pending_subscriptions'] = AccountActionToken.pending_objects \
             .get_for_object(self.current_journal)
+        context['subscribed_organisations'] = get_journal_organisation_subscribers(
+            self.current_journal)
         return context
 
     def get_queryset(self):

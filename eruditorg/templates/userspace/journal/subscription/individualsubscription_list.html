@@ -53,6 +53,13 @@
       </div>
     </div>
   </section>
+  {% if subscribed_organisations %}
+  <section class="card card-subscribed_organisations">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
+        <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  {% endif %}
   {% if pending_subscriptions %}
   <section class="card card-pending_subscriptions">
     <div class="row card-header">
