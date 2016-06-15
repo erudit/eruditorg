@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.2 - Under development
--------------------------
+0.1.2
+-----
 
 * Adds a DisciplineFatory to test disciplines
 
