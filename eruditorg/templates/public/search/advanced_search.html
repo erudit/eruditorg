@@ -158,5 +158,40 @@
       </div>
     </form>
 
+    {% if saved_searches %}
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <h3>{% trans "Historique des recherches sauvegardées" %}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>{% trans "Requête" %}</th>
+              <th>{% trans "Résultats" %}</th>
+              <th>{% trans "Supprimer" %}</th>
+              <th>{% trans "Relancer" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for search in saved_searches %}
+            <tr class="text-center saved-search" data-uuid="{{ search.uuid }}">
+              <td>{{ forloop.counter }}</td>
+              <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
+              <td>{{ search.results_count }}</td>
+              <td><a href="#" class="remove-search"><i class="ion-close-round"></i></a></td>
+              <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}"><i class="ion-arrow-right-c"></i></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
   </section>
 {% endblock content %}

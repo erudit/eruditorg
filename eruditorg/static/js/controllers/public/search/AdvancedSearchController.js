@@ -69,5 +69,17 @@ export default {
         ev.preventDefault();
       }
     });
+
+    // Handles the deletion of a search
+    $('.remove-search').click(function(ev) {
+      let $searchBlock = $(this).parents('.saved-search');
+      $.ajax({
+        type: 'POST',
+        url: Urls['public:search:remove_search']($searchBlock.data('uuid')),
+      }).done(function() {
+        $searchBlock.remove();
+      });
+      ev.preventDefault();
+    });
   },
 };

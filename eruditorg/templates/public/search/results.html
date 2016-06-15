@@ -13,10 +13,14 @@
 
 {% block content %}
 <section id="search-page" class="container">
+  <div id="id_search_results_metadata" data-results-count="{{ results.pagination.count }}"></div>
 
   {# Title and search summary #}
   <div class="row">
     <header class="page-header-main search-header col-xs-12 border-bottom">
+      <div class="pull-right">
+        <a href="#" id="id_save_search" class="btn btn-primary">{% trans "Sauvegarder cette requête" %}</a>
+      </div>
       <hgroup>
         <h2>{% trans "Résultats de recherche" %} <span class="hint--top hint--no-animate" data-hint="{% trans "Help text!" %}"><i class="ion-help-circled"></i></span></h2>
         {% if documents %}

@@ -7,7 +7,7 @@ from .forms import ADVANCED_SEARCH_FIELDS
 from .forms import SearchForm
 
 
-def get_search_elements(request):
+def get_search_elements(queryparams):
         """ Returns the search query elements in a readable way.
 
         This should be used to express a query using the following format:
@@ -15,7 +15,7 @@ def get_search_elements(request):
             (Titre, résumé, mots-clés : pedagogi*) ET (Titre, résumé, mots-clés : drama*) [...]
 
         """
-        params = request.GET.copy()
+        params = queryparams.copy()
         fields_correspondence = dict(ADVANCED_SEARCH_FIELDS)
         operator_correspondence = {
             'AND': _('ET'),
