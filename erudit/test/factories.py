@@ -30,6 +30,14 @@ class CollectionFactory(factory.django.DjangoModelFactory):
         model = 'erudit.Collection'
 
 
+class DisciplineFactory(factory.django.DjangoModelFactory):
+    code = factory.Sequence(lambda n: 'discipline-{}'.format(n))
+    name = factory.Sequence(lambda n: 'Discipline{}'.format(n))
+
+    class Meta:
+        model = 'erudit.Discipline'
+
+
 class JournalFactory(factory.django.DjangoModelFactory):
 
     class Meta:
