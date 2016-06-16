@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 from base.settings.base import *  # noqa
 
 
@@ -11,12 +13,16 @@ class DisableMigrations(object):
         return 'notmigrations'
 
 
+TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ':memory:'
     }
 }
+
+MEDIA_ROOT = os.path.join(TEST_ROOT, '_testdata/media/')
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
