@@ -16,6 +16,7 @@ from erudit.models import Organisation
 
 from .abstract_models import AbstractSubscription
 from .abstract_models import AbstractSubscriptionPeriod
+from .managers import JournalAccessSubscriptionValidManager
 
 
 class JournalAccessSubscription(AbstractSubscription):
@@ -43,6 +44,9 @@ class JournalAccessSubscription(AbstractSubscription):
     sponsor = models.ForeignKey(
         Organisation, verbose_name=_('Commanditaire'), blank=True, null=True,
         related_name='sponsored_subscriptions')
+
+    objects = models.Manager()
+    valid_objects = JournalAccessSubscriptionValidManager()
 
     class Meta:
         verbose_name = _('Abonnement aux revues')

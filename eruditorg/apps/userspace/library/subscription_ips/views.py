@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
-
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -47,11 +45,8 @@ class InstitutionIPAddressRangeCreateView(
         return kwargs
 
     def get_current_subscription(self):
-        nowd = dt.datetime.now().date()
-        return JournalAccessSubscription.objects.filter(
-            organisation=self.current_organisation,
-            journalaccesssubscriptionperiod__start__lte=nowd,
-            journalaccesssubscriptionperiod__end__gte=nowd).first()
+        return JournalAccessSubscription.valid_objects.filter(
+            organisation=self.current_organisation).first()
 
     def get_success_url(self):
         messages.success(self.request, _("La plage d'adresse IP a été créée avec succès"))

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
-
 import rules
 from rules.predicates import is_authenticated
 from rules.predicates import is_staff
@@ -11,6 +9,7 @@ from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.predicates import HasAuthorization
 from erudit.rules import is_journal_member
 
+from .models import JournalAccessSubscription
 from .models import JournalManagementSubscription
 
 
@@ -21,12 +20,8 @@ def has_journal_management_subscription(user, journal):
 
 @rules.predicate
 def has_valid_subscription(user, organisation):
-    nowd = dt.datetime.now().date()
     return user.organisations.filter(id=organisation.id).exists() and \
-        organisation.journalaccesssubscription_set.filter(
-            journalaccesssubscriptionperiod__start__lte=nowd,
-            journalaccesssubscriptionperiod__end__gte=nowd,
-        ).exists()
+        JournalAccessSubscription.valid_objects.filter(organisation_id=organisation.id).exists()
 
 
 rules.add_perm(
