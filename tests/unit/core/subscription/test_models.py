@@ -4,11 +4,13 @@ import datetime as dt
 import ipaddress
 
 from django.core.exceptions import ValidationError
-from django.test import TestCase
+import pytest
 
-from erudit.test import BaseEruditTestCase
+from erudit.models import Journal
 from erudit.test.factories import OrganisationFactory
 
+from base.test import DBRequiredTestCase
+from base.test import EruditTestCase
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
@@ -17,7 +19,7 @@ from core.subscription.test.factories import JournalManagementSubscriptionFactor
 from core.subscription.test.factories import JournalManagementSubscriptionPeriodFactory
 
 
-class TestJournalAccessSubscription(TestCase):
+class TestJournalAccessSubscription(EruditTestCase):
     def test_knows_if_it_is_ongoing_or_not(self):
         # Setup
         now_dt = dt.datetime.now()
@@ -32,18 +34,32 @@ class TestJournalAccessSubscription(TestCase):
             start=now_dt + dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
         # Run & check
-        self.assertTrue(subscription_1.is_ongoing)
-        self.assertFalse(subscription_2.is_ongoing)
+        assert subscription_1.is_ongoing
+        assert not subscription_2.is_ongoing
+
+    def test_knows_its_underlying_journals(self):
+        # Setup
+        subscription_1 = JournalAccessSubscriptionFactory.create(full_access=True)
+        subscription_2 = JournalAccessSubscriptionFactory.create(journal=self.journal)
+        subscription_3 = JournalAccessSubscriptionFactory.create(collection=self.collection)
+        subscription_4 = JournalAccessSubscriptionFactory.create()
+        subscription_4.journals.add(self.journal)
+        # Run & check
+        assert list(subscription_1.get_journals()) == list(Journal.objects.all())
+        assert list(subscription_2.get_journals()) == [self.journal, ]
+        assert list(subscription_3.get_journals()) == [self.journal, ]
+        assert list(subscription_4.get_journals()) == [self.journal, ]
 
 
-class TestInstitutionIPAddressRange(TestCase):
-    def setUp(self):
+class TestInstitutionIPAddressRange(DBRequiredTestCase):
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.organisation = OrganisationFactory.create()
         self.subscription = JournalAccessSubscriptionFactory(organisation=self.organisation)
 
     def test_cannot_be_saved_with_an_incoherent_ip_range(self):
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             ip_range = InstitutionIPAddressRangeFactory.build(
                 subscription=self.subscription,
                 ip_start='192.168.1.3', ip_end='192.168.1.2')
@@ -57,16 +73,14 @@ class TestInstitutionIPAddressRange(TestCase):
         # Run
         ip_addresses = ip_range.ip_addresses
         # Check
-        self.assertEqual(
-            ip_addresses, [
-                ipaddress.ip_address('192.168.1.3'),
-                ipaddress.ip_address('192.168.1.4'),
-                ipaddress.ip_address('192.168.1.5'),
-            ]
-        )
+        assert ip_addresses == [
+            ipaddress.ip_address('192.168.1.3'),
+            ipaddress.ip_address('192.168.1.4'),
+            ipaddress.ip_address('192.168.1.5'),
+        ]
 
 
-class TestJournalAccessSubscriptionPeriod(TestCase):
+class TestJournalAccessSubscriptionPeriod(DBRequiredTestCase):
     def test_cannot_clean_an_incoherent_period(self):
         # Setup
         now_dt = dt.datetime.now()
@@ -76,7 +90,7 @@ class TestJournalAccessSubscriptionPeriod(TestCase):
             start=now_dt + dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             period.clean()
 
     def test_cannot_clean_a_period_that_has_a_larger_concurrent_period(self):
@@ -92,7 +106,7 @@ class TestJournalAccessSubscriptionPeriod(TestCase):
             start=now_dt + dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=12))
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             period.clean()
 
     def test_cannot_clean_a_period_that_has_an_inner_concurrent_period(self):
@@ -108,7 +122,7 @@ class TestJournalAccessSubscriptionPeriod(TestCase):
             start=now_dt + dt.timedelta(days=8),
             end=now_dt + dt.timedelta(days=14))
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             period.clean()
 
     def test_cannot_clean_a_period_that_has_an_older_concurrent_period(self):
@@ -124,7 +138,7 @@ class TestJournalAccessSubscriptionPeriod(TestCase):
             start=now_dt + dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=12))
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             period.clean()
 
     def test_cannot_clean_a_period_that_has_a_younger_concurrent_period(self):
@@ -140,11 +154,11 @@ class TestJournalAccessSubscriptionPeriod(TestCase):
             start=now_dt + dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=12))
         # Run & check
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             period.clean()
 
 
-class TestJournalManagementSubscription(BaseEruditTestCase):
+class TestJournalManagementSubscription(EruditTestCase):
     def test_knows_if_it_is_ongoing_or_not(self):
         # Setup
         now_dt = dt.datetime.now()
@@ -162,5 +176,5 @@ class TestJournalManagementSubscription(BaseEruditTestCase):
             start=now_dt + dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
         # Run & check
-        self.assertTrue(subscription_1.is_ongoing)
-        self.assertFalse(subscription_2.is_ongoing)
+        assert subscription_1.is_ongoing
+        assert not subscription_2.is_ongoing
