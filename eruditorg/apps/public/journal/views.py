@@ -4,6 +4,7 @@ from collections import OrderedDict
 from itertools import groupby
 from string import ascii_lowercase
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -248,11 +249,26 @@ class ArticleDetailView(
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        obj = context.get(self.context_object_name)
 
         # Get all article from associated Issue
         related_articles = Article.objects.select_related('issue', 'issue__journal') \
-            .prefetch_related('authors') \
-            .all().filter(issue=self.get_object().issue)
+            .prefetch_related('authors').filter(issue=obj.issue)
+
+        # Pick the previous article and the next article
+        try:
+            sorted_articles = list(sorted(related_articles, key=lambda a: a.erudit_object.ordseq))
+            obj_index = sorted_articles.index(obj)
+            previous_article = sorted_articles[obj_index - 1] if obj_index > 0 else None
+            next_article = sorted_articles[obj_index + 1] if obj_index + 1 < len(sorted_articles) \
+                else None
+        except AttributeError:  # pragma: no cover
+            # Passes the error if we are in DEBUG mode
+            if not settings.DEBUG:
+                raise
+        else:
+            context['previous_article'] = previous_article
+            context['next_article'] = next_article
 
         # return 4 randomly
         context['related_articles'] = related_articles.order_by('?')[:4]

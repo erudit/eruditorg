@@ -81,8 +81,8 @@
 				<div class="issue-cover col-sm-3">
 				</div>
 
-				<a href="#" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>
-				<a href="#" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>
+				{% if next_article %}<a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
+				{% if previous_article %}<a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
 
 			</hgroup>
 
