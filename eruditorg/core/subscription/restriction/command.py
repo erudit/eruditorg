@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+import os.path as op
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.db.models import Q
+from PIL import Image
 
 from core.accounts.models import RestrictionProfile
 from core.subscription.models import InstitutionIPAddressRange
@@ -15,6 +18,7 @@ from core.subscription.models import JournalAccessSubscriptionPeriod
 from erudit.models import Journal
 from erudit.models import Organisation
 
+from .conf import settings as restriction_settings
 from .restriction_models import Abonne
 from .restriction_models import Adressesip
 from .restriction_models import Ipabonne
@@ -28,7 +32,7 @@ class ImportException(Exception):
 
 
 class Command(BaseCommand):
-    args = '<action:import_restriction>'
+    args = '<action:import_restriction|gen_dummy_badges>'
     help = 'Import data from the "restriction" database'
 
     def handle(self, *args, **options):
@@ -41,6 +45,13 @@ class Command(BaseCommand):
         self.stdout.write(command)
         cmd = getattr(self, command)
         cmd()
+
+    def gen_dummy_badges(self):
+        for abonne in Abonne.objects.all():
+            if not abonne.icone:
+                continue
+            im = Image.frombytes('L', (100, 100), b"\x00" * 100 * 100)
+            im.save(op.join(restriction_settings.ABONNE_ICONS_PATH, abonne.icone))
 
     def import_restriction(self):
         considered_year = dt.datetime.now().year - 1
@@ -98,6 +109,15 @@ class Command(BaseCommand):
             restriction_profile = RestrictionProfile.objects.create(
                 restriction_id=restriction_subscriber.pk,
                 password=restriction_subscriber.motdepasse, user=user, organisation=organisation)
+
+            if restriction_subscriber.icone:
+                f = open(
+                    op.join(restriction_settings.ABONNE_ICONS_PATH, restriction_subscriber.icone),
+                    'rb')
+                image_file = File(f)
+                organisation.badge.save(restriction_subscriber.icone, image_file, save=True)
+                organisation.save()
+                f.close()
 
         # STEP 2: gets or creates a JournalAccessSubscription instance
         # --
