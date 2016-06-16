@@ -25,8 +25,7 @@ def has_valid_subscription(user, organisation):
     return user.organisations.filter(id=organisation.id).exists() and \
         organisation.journalaccesssubscription_set.filter(
             journalaccesssubscriptionperiod__start__lte=nowd,
-            journalaccesssubscriptionperiod__end__gte=nowd,
-        ).exists()
+            journalaccesssubscriptionperiod__end__gte=nowd).exists()
 
 
 rules.add_perm(

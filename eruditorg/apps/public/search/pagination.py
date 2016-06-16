@@ -24,8 +24,8 @@ class EruditDocumentPagination(PageNumberPagination):
                     self.page.previous_page_number()if self.page.has_previous() else None),
                 'page_size': self.page.paginator.per_page,
                 'links': {
-                   'next': self.get_next_link(),
-                   'previous': self.get_previous_link(),
+                    'next': self.get_next_link(),
+                    'previous': self.get_previous_link(),
                 },
             },
             'results': data,
