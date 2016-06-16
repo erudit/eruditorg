@@ -203,6 +203,8 @@ class SavedSearchAddView(View):
             results_count = request.POST.get('results_count', None)
             assert querystring is not None
             assert results_count is not None
+            parsed_qstring = urlparse.parse_qsl(querystring)
+            assert parsed_qstring
             results_count = int(results_count)
         except (AssertionError, ValueError):
             return JsonErrorResponse(ugettext("Querystring incorrecte"))

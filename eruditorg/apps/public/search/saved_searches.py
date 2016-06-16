@@ -33,4 +33,5 @@ class SavedSearchList(collections.deque):
         for search in self:
             if search.get('uuid') == uuid:
                 super(SavedSearchList, self).remove(search)
-                break
+                return
+        raise ValueError
