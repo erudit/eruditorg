@@ -1848,11 +1848,25 @@
   </xsl:template>
   <xsl:template match="renvoi">
       <xsl:text>&#160;</xsl:text>
-      <a href="#{@idref}" id="{@id}" class="norenvoi">
-          <xsl:text>[</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>]</xsl:text>
-      </a>
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+          <xsl:text>#</xsl:text><xsl:value-of select="@idref"/>
+        </xsl:attribute>
+        <xsl:attribute name="id">
+          <xsl:value-of select="@id"/>
+        </xsl:attribute>
+        <xsl:attribute name="class">
+          <xsl:text>norenvoi hint--bottom hint--no-animate</xsl:text>
+        </xsl:attribute>
+        <xsl:attribute name="data-hint">
+          <xsl:variable name="idref" select="@idref"/>
+          <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200)"/>
+          <xsl:text>[…]</xsl:text>
+        </xsl:attribute>
+        <xsl:text>[</xsl:text>
+        <xsl:value-of select="normalize-space()"/>
+        <xsl:text>]</xsl:text>
+      </xsl:element>
   </xsl:template>
 
   <xsl:template match="notefig|notetabl">
