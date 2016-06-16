@@ -8,24 +8,102 @@ import unittest.mock
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.test import Client
 from django.test import RequestFactory
 from django.test.utils import override_settings
+import pytest
 
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
+from erudit.test.factories import DisciplineFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
 
+from base.test.factories import UserFactory
+
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
+
+
+@pytest.mark.django_db
+class TestJournalListView(object):
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.client = Client()
+        self.user = UserFactory.create(username='foobar')
+        self.user.set_password('notsecret')
+        self.user.save()
+
+    def test_can_sort_journals_by_name(self):
+        # Setup
+        collection = CollectionFactory.create()
+        journal_1 = JournalFactory.create(collection=collection, name='ABC journal')
+        journal_2 = JournalFactory.create(collection=collection, name='ACD journal')
+        journal_3 = JournalFactory.create(collection=collection, name='DEF journal')
+        journal_4 = JournalFactory.create(collection=collection, name='GHI journal')
+        journal_5 = JournalFactory.create(collection=collection, name='GIJ journal')
+        journal_6 = JournalFactory.create(collection=collection, name='GJK journal')
+        url = reverse('public:journal:journal_list')
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 200
+        assert len(response.context['sorted_objects']) == 3
+        assert response.context['sorted_objects'][0]['key'] == 'A'
+        assert response.context['sorted_objects'][0]['collections'][0]['key'] == collection
+        assert response.context['sorted_objects'][0]['collections'][0]['objects'] == [
+            journal_1, journal_2, ]
+        assert response.context['sorted_objects'][1]['key'] == 'D'
+        assert response.context['sorted_objects'][1]['collections'][0]['key'] == collection
+        assert response.context['sorted_objects'][1]['collections'][0]['objects'] == [journal_3, ]
+        assert response.context['sorted_objects'][2]['key'] == 'G'
+        assert response.context['sorted_objects'][2]['collections'][0]['key'] == collection
+        assert response.context['sorted_objects'][2]['collections'][0]['objects'] == [
+            journal_4, journal_5, journal_6, ]
+
+    def test_can_sort_journals_by_disciplines(self):
+        # Setup
+        collection = CollectionFactory.create()
+        discipline_1 = DisciplineFactory.create(code='abc-discipline', name='ABC')
+        discipline_2 = DisciplineFactory.create(code='def-discipline', name='DEF')
+        discipline_3 = DisciplineFactory.create(code='ghi-discipline', name='GHI')
+        journal_1 = JournalFactory.create(collection=collection)
+        journal_1.disciplines.add(discipline_1)
+        journal_2 = JournalFactory.create(collection=collection)
+        journal_2.disciplines.add(discipline_1)
+        journal_3 = JournalFactory.create(collection=collection)
+        journal_3.disciplines.add(discipline_2)
+        journal_4 = JournalFactory.create(collection=collection)
+        journal_4.disciplines.add(discipline_3)
+        journal_5 = JournalFactory.create(collection=collection)
+        journal_5.disciplines.add(discipline_3)
+        journal_6 = JournalFactory.create(collection=collection)
+        journal_6.disciplines.add(discipline_3)
+        url = reverse('public:journal:journal_list')
+        # Run
+        response = self.client.get(url, {'sorting': 'disciplines'})
+        # Check
+        assert response.status_code == 200
+        assert len(response.context['sorted_objects']) == 3
+        assert response.context['sorted_objects'][0]['key'] == discipline_1.code
+        assert response.context['sorted_objects'][0]['collections'][0]['key'] == collection
+        assert response.context['sorted_objects'][0]['collections'][0]['objects'] == [
+            journal_1, journal_2, ]
+        assert response.context['sorted_objects'][1]['key'] == discipline_2.code
+        assert response.context['sorted_objects'][1]['collections'][0]['key'] == collection
+        assert response.context['sorted_objects'][1]['collections'][0]['objects'] == [journal_3, ]
+        assert response.context['sorted_objects'][2]['key'] == discipline_3.code
+        assert response.context['sorted_objects'][2]['collections'][0]['key'] == collection
+        assert response.context['sorted_objects'][2]['collections'][0]['objects'] == [
+            journal_4, journal_5, journal_6, ]
 
 
 @override_settings(DEBUG=True)

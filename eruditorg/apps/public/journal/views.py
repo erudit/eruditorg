@@ -50,12 +50,23 @@ class JournalListView(ListView):
         if self.sorting == 'name':
             grouped = groupby(
                 sorted(objects, key=lambda j: j.letter_prefix), key=lambda j: j.letter_prefix)
-            return [{'key': g[0], 'name': g[0], 'objects': sorted(
+            first_pass_results = [{'key': g[0], 'name': g[0], 'objects': sorted(
                 list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
         elif self.sorting == 'disciplines':
             disciplines = Discipline.objects.all().order_by('name')
-            return [{'key': d.code, 'name': d.name, 'objects': sorted(
+            first_pass_results = [{'key': d.code, 'name': d.name, 'objects': sorted(
                 d.journals.all(), key=lambda j: j.sortable_name)} for d in disciplines]
+
+        second_pass_results = []
+        for r in first_pass_results:
+            grouped = groupby(
+                sorted(r['objects'], key=lambda j: j.collection_id), key=lambda j: j.collection)
+            del r['objects']
+            r['collections'] = [{'key': g[0], 'objects': sorted(
+                list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
+            second_pass_results.append(r)
+
+        return second_pass_results
 
     def get(self, request, *args, **kwargs):
         sorting = self.request.GET.get('sorting', 'name')
@@ -68,6 +79,10 @@ class JournalListView(ListView):
         context['sorted_objects'] = self.apply_sorting(context.get(self.context_object_name))
         context['disciplines'] = Discipline.objects.all().order_by('name')
         return context
+
+    def get_queryset(self):
+        qs = super(JournalListView, self).get_queryset()
+        return qs.select_related('collection')
 
 
 class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailView):
