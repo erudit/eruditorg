@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import urllib.parse as urlparse
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -9,16 +10,21 @@ from django.views.generic.base import ContextMixin
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
 from django.utils.encoding import smart_text
+from django.utils.translation import ugettext
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
 from erudit.models import EruditDocument
+
+from base.http import JsonAckResponse
+from base.http import JsonErrorResponse
 
 from . import filters
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .pagination import EruditDocumentPagination
+from .saved_searches import SavedSearchList
 from .serializers import EruditDocumentSerializer
 from .utils import get_search_elements
 
@@ -70,6 +76,25 @@ class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
         if request.GET:
             form.is_valid()
         return self.render_to_response(self.get_context_data(form=form))
+
+    def get_context_data(self, **kwargs):
+        context = super(AdvancedSearchView, self).get_context_data(**kwargs)
+
+        # Prepares the saved searches, generates the search elements for each querystring and
+        # inserts them into the context.
+        saved_searches = SavedSearchList(self.request)
+        if saved_searches:
+            _saved_searches = reversed(sorted(saved_searches, key=lambda s: s['timestamp']))
+            sorted_saved_searches = []
+            for search in _saved_searches:
+                new_search = search.copy()
+                qsdict = dict(urlparse.parse_qsl(new_search['querystring']))
+                new_search['elements'] = get_search_elements(qsdict)
+                sorted_saved_searches.append(new_search)
+
+            context['saved_searches'] = sorted_saved_searches
+
+        return context
 
     def get_form_kwargs(self):
         kwargs = {'initial': self.get_initial(), 'prefix': self.get_prefix()}
@@ -141,7 +166,7 @@ class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
             context['main_qterm'] = self.request.GET.get('basic_search_term', '')
             context['start_at'] = (results['pagination']['current_page'] - 1) \
                 * results['pagination']['page_size']
-            context['search_elements'] = get_search_elements(self.request)
+            context['search_elements'] = get_search_elements(self.request.GET)
 
         return context
 
@@ -166,3 +191,42 @@ class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
     def forms_invalid(self, search_form, options_form):
         return HttpResponseRedirect(
             '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))
+
+
+class SavedSearchAddView(View):
+    """ Add a search's querystring to the list of saved searches associated to the current user. """
+    http_method_names = ['post', ]
+
+    def post(self, request):
+        try:
+            querystring = request.POST.get('querystring', None)
+            results_count = request.POST.get('results_count', None)
+            assert querystring is not None
+            assert results_count is not None
+            parsed_qstring = urlparse.parse_qsl(querystring)
+            assert parsed_qstring
+            results_count = int(results_count)
+        except (AssertionError, ValueError):
+            return JsonErrorResponse(ugettext("Querystring incorrecte"))
+
+        # Inserts the search into the saved searches set
+        searches = SavedSearchList(request)
+        searches.add(querystring, results_count)
+        searches.save()
+
+        return JsonAckResponse()
+
+
+class SavedSearchRemoveView(View):
+    """ Remove a saved search from the list of saved searches associated to the current user. """
+    http_method_names = ['post', ]
+
+    def post(self, request, uuid):
+        searches = SavedSearchList(request)
+        try:
+            searches.remove(uuid)
+        except ValueError:
+            return JsonErrorResponse(ugettext("Cette recherche n'est pas sauvegardée"))
+
+        searches.save()
+        return JsonAckResponse()

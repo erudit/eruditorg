@@ -33,4 +33,4 @@ class ReportingFilterForm(forms.Form):
         now_dt = dt.datetime.now()
 
         # Update some fields
-        self.fields['year'].choices = [(y, y) for y in range(now_dt.year-50, now_dt.year)]
+        self.fields['year'].choices = [(y, y) for y in range(now_dt.year - 50, now_dt.year)]

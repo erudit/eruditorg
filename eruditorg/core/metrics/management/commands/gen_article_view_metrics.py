@@ -68,7 +68,7 @@ class Command(BaseCommand):
                     'journal_localidentifier': article.issue.journal.localidentifier,
                     'open_access': article.open_access or not article.has_movable_limitation,
                     'view_type': random.choice(['html', 'pdf', ]),
-                    },
+                },
                 **{
                     'issue_localidentifier': article.issue.localidentifier,
                     'localidentifier': article.localidentifier,

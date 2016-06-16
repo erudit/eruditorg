@@ -292,7 +292,7 @@ class EruditDocumentSolrFilter(object):
         # Prepares the dictionnary containing aggregation results.
         aggregations_dict = {}
         for facet, flist in results.facets.get('facet_fields', {}).items():
-            fdict = {flist[i]: flist[i+1] for i in range(0, len(flist), 2)}
+            fdict = {flist[i]: flist[i + 1] for i in range(0, len(flist), 2)}
             aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
 
         return documents_count, localidentifiers, aggregations_dict

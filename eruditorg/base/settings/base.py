@@ -335,7 +335,7 @@ MAILCHIMP_ACTION_URL = ""
 # Django JS reverse settings
 # -----------------------------------
 
-JS_REVERSE_INCLUDE_ONLY_NAMESPACES = ['public:citations', ]
+JS_REVERSE_INCLUDE_ONLY_NAMESPACES = ['public:citations', 'public:search', ]
 
 
 try:
