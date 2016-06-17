@@ -88,6 +88,7 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 
     issue = factory.SubFactory(IssueFactory)
     localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
+    type = 'article'
 
 
 class BasketFactory(factory.django.DjangoModelFactory):

@@ -538,36 +538,33 @@ class EruditDocument(models.Model):
 
 
 class Article(EruditDocument, FedoraMixin, FedoraDated):
+    issue = models.ForeignKey('Issue', related_name='articles', verbose_name=_('Numéro'))
+    """ The issue of the article """
 
-    # An article can have many authors
     authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
+    """ An article can have many authors """
 
-    surtitle = models.CharField(
-        max_length=600,
-        null=True, blank=True,
-    )
+    surtitle = models.CharField(max_length=600, null=True, blank=True)
+    """ The surtitle of the article """
 
-    title = models.CharField(
-        max_length=600,
-        null=True, blank=True,
-    )
-    """ The title of the issue """
+    title = models.CharField(max_length=600, null=True, blank=True)
+    """ The title of the article """
 
-    processing = models.CharField(
-        max_length=1,
-        choices=(
-            ('C', _('Complet')),
-            ('M', _('Minimal')),
-        )
+    ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER = 'article', 'compterendu', 'autre'
+    TYPE_CHOICES = (
+        (ARTICLE_DEFAULT, _('Article')),
+        (ARTICLE_REPORT, _('Compte-rendu')),
+        (ARTICLE_OTHER, _('Autre')),
     )
+    type = models.CharField(max_length=64, choices=TYPE_CHOICES, verbose_name=_('Type'))
+
+    PROCESSING_FULL, PROCESSING_MINIMAL = 'C', 'M'
+    PROCESSING_CHOICES = (
+        (PROCESSING_FULL, _('Complet')),
+        (PROCESSING_MINIMAL, _('Minimal')),
+    )
+    processing = models.CharField(max_length=1, choices=PROCESSING_CHOICES)
     """ Type of processing of the article """
-
-    # identification
-    issue = models.ForeignKey(
-        'Issue',
-        related_name='articles',
-        verbose_name=_("Numéro"),
-    )
 
     def get_fedora_model(self):
         return ArticleDigitalObject

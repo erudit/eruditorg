@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.3 - Under development
+-------------------------
+
+* Adds a ``type`` field to the ``Article`` model
+
 0.1.2
 -----
 
