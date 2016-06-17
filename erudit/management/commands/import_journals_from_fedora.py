@@ -377,10 +377,13 @@ class Command(BaseCommand):
             raise ValueError(
                 'Unable to determine the processing type of the article '
                 'with PID {0}'.format(article_pid))
+
+        article.type = article.erudit_object.article_type
         article.title = article.erudit_object.title
         article.surtitle = article.erudit_object.section_title
 
         article.fedora_updated = fedora_article.modified
+        article.clean()
         article.save()
 
         # STEP 3: creates or updates the authors of the article
