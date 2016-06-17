@@ -392,60 +392,42 @@ class JournalType(models.Model):
 
 class Issue(FedoraMixin, FedoraDated):
     """ An issue of a journal"""
+    journal = models.ForeignKey('Journal', related_name='issues', verbose_name=_('Revue'))
+    """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
-    # identification
-    journal = models.ForeignKey(
-        'Journal',
-        related_name='issues',
-        verbose_name=_("Revue"),
-    )
-
-    title = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-    )
+    title = models.CharField(max_length=255, null=True, blank=True)
     """ The title of the issue """
 
-    year = models.IntegerField(
-        choices=YEARS,
-        null=True, blank=True,
-        verbose_name=_("Année"),
-    )
-    volume = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-        verbose_name=_("Volume"),
-    )
-    number = models.CharField(
-        max_length=255,
-        null=True, blank=True,
-        verbose_name=_("Numéro"),
-    )
-    special_issue = models.BooleanField(
-        default=False,
-        verbose_name=_("Numéro spécial"),
-        help_text=_("Cocher s'il s'agit d'un numéro spécial."),
-    )
+    year = models.IntegerField(choices=YEARS, null=True, blank=True, verbose_name=_('Année'))
+    """ The publication year of the issue """
 
-    date_produced = models.DateField(
-        null=True, blank=True,
-        verbose_name=_("Date de production"),
-    )
-    date_published = models.DateField(
-        verbose_name=_("Date de publication"),
-    )
+    volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
+    """ The volume of the issue """
+
+    number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Numéro'))
+    """ The number of the issue """
+
+    special_issue = models.BooleanField(
+        default=False, verbose_name=_('Numéro spécial'),
+        help_text=_("Cocher s'il s'agit d'un numéro spécial."))
+    """ Indicates if the issue is a special issue """
+
+    thematic_issue = models.BooleanField(default=False, verbose_name=_('Numéro thématique'))
+    """ Indicates if the issue is a thematic issue """
+
+    date_produced = models.DateField(null=True, blank=True, verbose_name=_('Date de production'))
+    """ The production date of the issue """
+
+    date_published = models.DateField(verbose_name=_('Date de publication'))
+    """ The publication date of the issue """
 
     open_access = models.NullBooleanField(
-        default=None,
-        verbose_name=_("Accès libre"),
-        help_text=_("Cocher si ce numéro est en accès libre"),
-    )
+        default=None, verbose_name=_('Accès libre'),
+        help_text=_("Cocher si ce numéro est en accès libre"))
+    """ Indicates whether the issue is in open access """
 
     localidentifier = models.CharField(
-        max_length=50,
-        unique=True,
-        verbose_name=_("Identifiant Fedora")
-    )
+        max_length=50, unique=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
 
     # status { in_production, published }ull=True, blank=True,

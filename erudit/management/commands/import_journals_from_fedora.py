@@ -301,6 +301,7 @@ class Command(BaseCommand):
         issue.volume = issue.erudit_object.volume
         issue.number = issue.erudit_object.number
         issue.title = issue.erudit_object.theme
+        issue.thematic_issue = issue.erudit_object.theme is not None
         issue.date_published = issue.erudit_object.publication_date
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date

@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.4 - Under development
+-------------------------
+
+* Adds a ``thematic_issue`` field to the ``Issue`` model and update the ``import_journals_from_fedora`` command
+
 0.1.3
 -----
 
