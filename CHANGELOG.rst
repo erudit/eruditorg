@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.3 - Under development
--------------------------
+0.1.3
+-----
 
 * Adds a ``type`` field to the ``Article`` model and update the ``import_journals_from_fedora`` command
 * Remove old ``get_absolute_url`` methods
