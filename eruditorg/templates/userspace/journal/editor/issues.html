@@ -12,16 +12,19 @@
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
   <section class="card card-issue_submissions">
+    {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+    {% if can_manage_issuesubmission %}
+    <div class="row">
+      <div class="col-md-6">
+        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Dépôt de fichiers" %}</a>
+        <br /><br />
+      </div>
+    </div>
+    {% endif %}
     <div class="row card-header">
       <div class="col-sm-6">
         <h2>{% trans "Historique" %}</h2>
       </div>
-      {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-      {% if can_manage_issuesubmission %}
-      <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Dépôt de fichiers" %}</a>
-      </div>
-      {% endif %}
     </div>
     <ul id="id_issuesubmission_list" class="row card-body">
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
