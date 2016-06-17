@@ -1,6 +1,7 @@
 {% extends "userspace/journal/editor/base.html" %}
 {% load i18n %}
 {% load staticfiles %}
+{% load rules %}
 
 {% block page_title %}{% trans "Dépôt de fichiers" %}{% endblock %}
 
@@ -26,6 +27,14 @@
     <div class="card-header">
       <h2>{% trans "Déposer des fichiers de production" %}</h2>
     </div>
+    {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+    {% if can_manage_issuesubmission and object.pk and object.is_draft %}
+    <div class="row">
+      <div class="col-md-6">
+        <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk object.pk %}" class="btn btn-primary">{% trans "Supprimer la demande" %}</a>
+      </div>
+    </div>
+    {% endif %}
     <div class="card-body">
       <form class="row form-vertical" method="post">{% csrf_token %}
         {% if form.errors %}
