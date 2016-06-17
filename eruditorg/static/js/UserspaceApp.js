@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 
 // Forces the evaluation of jQuery and some other related code in the global context
+import '!!script!akkordion/dist/akkordion.min.js';
 import '!!script!jquery/dist/jquery.min';
 import '!!script!bootstrap-sass/assets/javascripts/bootstrap.min';
 import '!!script!inline-svg/dist/inlineSVG.min';

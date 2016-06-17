@@ -13,6 +13,7 @@
 // 2. Vendors
 $ionicons-font-path: "~ionicons/fonts";
 @import "~ionicons/scss/ionicons";
+@import "~akkordion/dist/akkordion.css";
 @import "~select2/dist/css/select2";
 
 // 3. Base stuff
@@ -65,7 +66,8 @@ $ionicons-font-path: "~ionicons/fonts";
   'pages/issuesubmission-userspace',
   'pages/members-userspace',
   'pages/subscription-userspace',
-  'pages/subscription-ips-userspace';
+  'pages/subscription-ips-userspace',
+  'pages/homepage-userspace';
 
 // 7. Themes
 @import
