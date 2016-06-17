@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
@@ -233,6 +234,22 @@ class IssueSubmissionList(
         obj = self.get_permission_object()
         return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
             or self.request.user.has_perm('editor.review_issuesubmission')
+
+
+class IssueSubmissionDeleteView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+    menu_journal = 'editor'
+    model = IssueSubmission
+    raise_exception = True
+    template_name = 'userspace/journal/editor/delete.html'
+
+    def get_success_url(self):
+        messages.success(self.request, _('La soumission a été supprimée avec succès'))
+        return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
+
+    def has_permission(self):
+        obj = self.get_object()
+        return self.request.user.has_perm('editor.manage_issuesubmission') and obj.is_draft
 
 
 class IssueSubmissionAttachmentView(

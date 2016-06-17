@@ -707,3 +707,37 @@ class TestIssueSubmissionArchiveView(BaseEditorTestCase):
                 },
                 'measurement': 'erudit__issuesubmission__change_status',
             }])
+
+
+class TestIssueSubmissionDeleteView(BaseEditorTestCase):
+    def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
+        # Setup
+        User.objects.create_user(
+            username='dummy', email='dummy@xyz.com', password='top_secret')
+
+        self.client.login(username='dummy', password='top_secret')
+        url = reverse('userspace:journal:editor:delete',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        assert response.status_code == 403
+
+    def test_can_delete_an_issue_submission(self):
+        # Setup
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:journal:editor:delete',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+        deleted_pk = self.issue_submission.pk
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        self.assertEqual(response.status_code, 302)
+        assert deleted_pk not in IssueSubmission.objects.values_list('pk', flat=True)

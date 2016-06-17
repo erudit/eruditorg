@@ -18,6 +18,9 @@ urlpatterns = [
     url(_(r'^numero/(?P<pk>[0-9]+)/archiver/$'),
         views.IssueSubmissionArchiveView.as_view(), name='transition_archive'),
 
+    url(_(r'^numero/(?P<pk>[0-9]+)/supprimer/$'),
+        views.IssueSubmissionDeleteView.as_view(), name='delete'),
+
     url(_(r'^numero/fichier/(?P<pk>[0-9]+)/$'),
         views.IssueSubmissionAttachmentView.as_view(), name='attachment_detail'),
 ]
