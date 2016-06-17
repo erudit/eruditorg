@@ -3,6 +3,7 @@
 import datetime as dt
 import unittest.mock
 
+from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
 from erudit.test import BaseEruditTestCase
@@ -37,8 +38,12 @@ class TestLatestIssuesFeed(BaseEruditTestCase):
         feed = LatestIssuesFeed().get_feed(None, request)
         # Check
         self.assertEqual(len(feed.items), 2)
-        self.assertIn(issue1.get_absolute_url(), feed.items[0]['link'])
-        self.assertIn(issue2.get_absolute_url(), feed.items[1]['link'])
+        self.assertIn(
+            reverse('public:journal:issue_detail',
+                    args=[issue1.journal.code, issue1.localidentifier]), feed.items[0]['link'])
+        self.assertIn(
+            reverse('public:journal:issue_detail',
+                    args=[issue2.journal.code, issue2.localidentifier]), feed.items[1]['link'])
 
 
 class TestLatestJournalArticlesFeed(BaseEruditTestCase):
@@ -63,5 +68,17 @@ class TestLatestJournalArticlesFeed(BaseEruditTestCase):
         feed = f.get_feed(None, request)
         # Check
         self.assertEqual(len(feed.items), 2)
-        self.assertIn(article1.get_absolute_url(), feed.items[0]['link'])
-        self.assertIn(article2.get_absolute_url(), feed.items[1]['link'])
+        self.assertIn(
+            reverse('public:journal:article_detail',
+                    args=[
+                        article1.issue.journal.code,
+                        article1.issue.localidentifier,
+                        article1.localidentifier
+                    ]), feed.items[0]['link'])
+        self.assertIn(
+            reverse('public:journal:article_detail',
+                    args=[
+                        article2.issue.journal.code,
+                        article2.issue.localidentifier,
+                        article2.localidentifier
+                    ]), feed.items[1]['link'])

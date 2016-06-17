@@ -38,6 +38,11 @@ class LatestIssuesFeed(Feed):
         today_str = dt.datetime.strftime(dt.datetime.now(), '%Y/%m/%d')
         return '{start_date} - {today}'.format(start_date=start_date_str, today=today_str)
 
+    def item_link(self, item):
+        """ Returns the link of a feed item. """
+        return reverse_lazy(
+            'public:journal:issue_detail', args=[item.journal.code, item.localidentifier])
+
     def items(self):
         """ Returns the items to embed in the feed. """
         return Issue.objects.filter(date_published__gte=self.get_start_date()) \
@@ -79,6 +84,12 @@ class LatestJournalArticlesFeed(Feed):
         context['abstract'] = _abstract_lang or _abstract
 
         return context
+
+    def item_link(self, item):
+        """ Returns the link of a feed item. """
+        return reverse_lazy(
+            'public:journal:article_detail',
+            args=[item.issue.journal.code, item.issue.localidentifier, item.localidentifier])
 
     def items(self, obj):
         articles = Article.objects.filter(issue_id=self.last_issue)
