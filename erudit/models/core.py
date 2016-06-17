@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from django.utils import formats
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
-from django.core.urlresolvers import reverse as reverse_url
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, EruditArticle
 
@@ -343,12 +342,6 @@ class Journal(FedoraMixin, FedoraDated):
         return slugify(
             reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name))
 
-    def get_absolute_url(self):
-        return reverse_url(
-            "public:journal:journal_detail",
-            args=[self.code]
-        )
-
     # contract
     def has_active_contract(self):
         pass
@@ -503,12 +496,6 @@ class Issue(FedoraMixin, FedoraDated):
             self.localidentifier
         )
 
-    def get_absolute_url(self):
-        return reverse_url(
-            "public:journal:issue_detail",
-            args=[self.journal.code, self.localidentifier]
-        )
-
     def __str__(self):
         if self.volume and self.number and self.year:
             return "{:s} {:s} {:s} {:s}".format(
@@ -576,16 +563,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
         return "{}.{}".format(
             self.issue.get_full_identifier(),
             self.localidentifier
-        )
-
-    def get_absolute_url(self):
-        return reverse_url(
-            "public:journal:article_detail",
-            args=[
-                self.issue.journal.code,
-                self.issue.localidentifier,
-                self.localidentifier
-            ]
         )
 
     @property

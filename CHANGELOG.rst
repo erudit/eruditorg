@@ -5,6 +5,7 @@ Changelog
 -------------------------
 
 * Adds a ``type`` field to the ``Article`` model
+* Remove old ``get_absolute_url`` methods
 
 0.1.2
 -----
