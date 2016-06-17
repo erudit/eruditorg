@@ -21,7 +21,7 @@ class HomeView(LoginRequiredMixin, JournalScopeMixin, TemplateView):
         # Fetches the JournalInformation instance associated to the current journal
         try:
             journal_info = self.current_journal.information
-        except ObjectDoesNotExist:
+        except ObjectDoesNotExist:  # pragma: no cover
             pass
         else:
             context['journal_info'] = journal_info
