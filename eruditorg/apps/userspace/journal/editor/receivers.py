@@ -17,11 +17,11 @@ def send_production_team_email(sender, instance, name, source, target, **kwargs)
     if not instance.is_submitted:
         return
 
-    production_team = get_production_team_group()
-    if production_team is None:
+    production_team_group = get_production_team_group(instance.journal)
+    if production_team_group is None:
         return
 
-    emails = production_team.user_set.values_list('email', flat=True)
+    emails = production_team_group.user_set.values_list('email', flat=True)
     if not emails:
         return
 

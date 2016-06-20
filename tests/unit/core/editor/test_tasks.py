@@ -7,9 +7,9 @@ from django.core import mail
 from django.utils import timezone as tz
 from plupload.models import ResumableFile
 
-from core.editor.conf import settings as editor_settings
 from core.editor.tasks import _handle_issuesubmission_files_removal
 from core.editor.test import BaseEditorTestCase
+from core.editor.test.factories import ProductionTeamFactory
 
 
 class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
@@ -29,9 +29,9 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
 
     def test_sends_an_email_to_notify_the_production_team_5_days_before_removal(self):
         # Setup
-        production_team = Group.objects.create(
-            name='Production team', pk=editor_settings.PRODUCTION_TEAM_GROUP_ID)
-        self.user.groups.add(production_team)
+        group = Group.objects.create(name='Production team')
+        ProductionTeamFactory.create(group=group, identifier='main')
+        self.user.groups.add(group)
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.archive()
@@ -63,8 +63,8 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
 
     def test_do_not_send_an_email_if_the_production_team_is_empty(self):
         # Setup
-        Group.objects.create(
-            name='Production team', pk=editor_settings.PRODUCTION_TEAM_GROUP_ID)
+        group = Group.objects.create(name='Production team')
+        ProductionTeamFactory.create(group=group, identifier='main')
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
         self.issue_submission.archive()

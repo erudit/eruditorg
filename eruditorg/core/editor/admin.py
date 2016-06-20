@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import IssueSubmission
 from .models import IssueSubmissionFilesVersion
+from .models import ProductionTeam
 
 
 class IssueSubmissionAdmin(admin.ModelAdmin):
@@ -29,5 +30,11 @@ class IssueSubmissionFilesVersionAdmin(admin.ModelAdmin):
         return obj.submissions.count()
     files_count.short_description = _('Nombre de fichiers')
 
+
+class ProductionTeamAdmin(admin.ModelAdmin):
+    list_display = ('identifier', 'group', )
+
+
 admin.site.register(IssueSubmission, IssueSubmissionAdmin)
 admin.site.register(IssueSubmissionFilesVersion, IssueSubmissionFilesVersionAdmin)
+admin.site.register(ProductionTeam, ProductionTeamAdmin)
