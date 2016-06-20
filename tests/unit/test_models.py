@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+import io
+import unittest.mock
 
+from django.conf import settings
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 
@@ -183,6 +186,33 @@ class TestIssue(BaseEruditTestCase):
         self.assertFalse(issue_1.has_movable_limitation)
         self.assertFalse(issue_2.has_movable_limitation)
         self.assertFalse(issue_3.has_movable_limitation)
+
+    def test_knows_if_it_has_a_coverpage(self):
+        # Setup
+        with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
+            issue_1 = IssueFactory.create(journal=self.journal, open_access=True)
+            issue_2 = IssueFactory.create(journal=self.journal, open_access=True)
+            issue_1.fedora_object = unittest.mock.MagicMock()
+            issue_1.fedora_object.coverpage = unittest.mock.MagicMock()
+            issue_1.fedora_object.coverpage.content = io.BytesIO(f.read())
+            issue_2.fedora_object = unittest.mock.MagicMock()
+            issue_2.fedora_object.coverpage = unittest.mock.MagicMock()
+            issue_2.fedora_object.coverpage.content = ''
+
+        # Run & check
+        self.assertTrue(issue_1.has_coverpage)
+        self.assertFalse(issue_2.has_coverpage)
+
+    def test_knows_that_an_issue_with_an_empty_coverpage_has_no_coverpage(self):
+        # Setup
+        with open(settings.MEDIA_ROOT + '/coverpage_empty.png', 'rb') as f:
+            issue = IssueFactory.create(journal=self.journal, open_access=True)
+            issue.fedora_object = unittest.mock.MagicMock()
+            issue.fedora_object.coverpage = unittest.mock.MagicMock()
+            issue.fedora_object.coverpage.content = io.BytesIO(f.read())
+
+        # Run & check
+        self.assertFalse(issue.has_coverpage)
 
 
 class TestArticle(BaseEruditTestCase):

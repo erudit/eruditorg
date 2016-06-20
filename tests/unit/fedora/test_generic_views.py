@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import unittest.mock
-
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.test import RequestFactory
@@ -142,58 +140,3 @@ class TestFedoraFileDatastreamView(BaseEruditTestCase):
         # Run & check
         response = MyView.as_view()(request, pk=self.journal.pk)
         self.assertEqual(response['Content-Type'], 'image/jpeg')
-
-    @unittest.mock.patch.object(FedoraFileDatastreamView, 'get_cache')
-    def test_can_set_the_content_of_the_file_in_the_cache_if_it_is_not_there_already(
-            self, mock_get_cache):
-        # Setup
-        class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'logo'
-            fedora_object_class = JournalDigitalObject
-            model = Journal
-
-            def get_datastream_content(self, fedora_object):
-                return 'dummy'
-
-        mock_cache = unittest.mock.MagicMock()
-        mock_cache_get = unittest.mock.MagicMock()
-        mock_cache_get.return_value = None
-        mock_cache_set = unittest.mock.MagicMock()
-        mock_cache.get = mock_cache_get
-        mock_cache.set = mock_cache_set
-        mock_get_cache.return_value = mock_cache
-
-        request = self.factory.get('/')
-
-        # Run & check
-        MyView.as_view()(request, pk=self.journal.pk)
-        self.assertEqual(mock_cache_get.call_count, 1)
-        self.assertEqual(mock_cache_set.call_count, 1)
-
-    @unittest.mock.patch.object(FedoraFileDatastreamView, 'get_cache')
-    def test_can_use_the_content_of_the_file_in_the_cache_if_applicable(self, mock_get_cache):
-        # Setup
-        class MyView(FedoraFileDatastreamView):
-            content_type = 'image/jpeg'
-            datastream_name = 'logo'
-            fedora_object_class = JournalDigitalObject
-            model = Journal
-
-            def get_datastream_content(self, fedora_object):
-                return 'dummy'
-
-        mock_cache = unittest.mock.MagicMock()
-        mock_cache_get = unittest.mock.MagicMock()
-        mock_cache_get.return_value = 'content'
-        mock_cache_set = unittest.mock.MagicMock()
-        mock_cache.get = mock_cache_get
-        mock_cache.set = mock_cache_set
-        mock_get_cache.return_value = mock_cache
-
-        request = self.factory.get('/')
-
-        # Run & check
-        MyView.as_view()(request, pk=self.journal.pk)
-        self.assertEqual(mock_cache_get.call_count, 1)
-        self.assertEqual(mock_cache_set.call_count, 0)

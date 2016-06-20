@@ -18,6 +18,8 @@ FEDORA_PIDSPACE = getattr(settings, 'ERUDIT_FEDORA_PIDSPACE', 'erudit')
 FEDORA_XML_CONTENT_CACHE_TIMEOUT = getattr(
     settings, 'ERUDIT_FEDORA_XML_CONTENT_CACHE_TIMEOUT', 60 * 60)
 FEDORA_FILEBASED_CACHE_NAME = getattr(settings, 'ERUDIT_FEDORA_FILEBASED_CACHE_NAME', 'files')
+FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT = getattr(
+    settings, 'ERUDIT_FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT', 60 * 60)
 
 
 # The FEDORA_COLLECTIONS setting defines the collections whose journals can be retrieved using the

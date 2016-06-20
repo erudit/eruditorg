@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 
+import copy
 import datetime as dt
 from functools import reduce
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import formats
+from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication, EruditArticle
+from PIL import Image
 
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import JournalDigitalObject, ArticleDigitalObject
 from ..fedora.objects import PublicationDigitalObject
+from ..fedora.shortcuts import get_cached_datastream_content
 from ..managers import JournalUpcomingManager
 from ..modelfields import SizeConstrainedImageField
 
@@ -477,6 +481,20 @@ class Issue(FedoraMixin, FedoraDated):
             self.journal.get_full_identifier(),
             self.localidentifier
         )
+
+    @cached_property
+    def has_coverpage(self):
+        """ Returns a boolean indicating if the considered issue has a coverpage. """
+        content = get_cached_datastream_content(self.fedora_object, 'coverpage')
+        if not content:
+            return False
+
+        # Checks the content of the image in order to detect if it contains only one single color.
+        im = Image.open(copy.copy(content))
+        empty_coverpage = (len(im.getcolors()) == 1)
+        im.close()
+
+        return not empty_coverpage
 
     def __str__(self):
         if self.volume and self.number and self.year:

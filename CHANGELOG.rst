@@ -5,6 +5,7 @@ Changelog
 -------------------------
 
 * Adds a ``thematic_issue`` field to the ``Issue`` model and update the ``import_journals_from_fedora`` command
+* Adds a ``has_coverpage`` property on the ``Issue`` model
 
 0.1.3
 -----
