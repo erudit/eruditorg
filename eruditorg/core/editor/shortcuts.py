@@ -22,3 +22,8 @@ def get_production_team_group(journal=None):
             editor_settings.MAIN_PRODUCTION_TEAM_IDENTIFIER), exc_info=True)
         production_team_group = None
     return production_team_group
+
+
+def is_production_team_member(user):
+    """ Returns a boolean indicating if the given user is a member of a production team. """
+    return user.groups.filter(productionteam__isnull=False)
