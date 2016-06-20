@@ -4,14 +4,18 @@ import copy
 import datetime as dt
 from functools import reduce
 
-from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import models
 from django.utils import formats
 from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
+from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
-from eruditarticle.objects import EruditPublication, EruditArticle
+from eruditarticle.objects import EruditPublication
+from eulfedora.util import RequestFailed
+from requests.exceptions import ConnectionError
 from PIL import Image
 
 from ..conf import settings as erudit_settings
@@ -485,7 +489,13 @@ class Issue(FedoraMixin, FedoraDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
-        content = get_cached_datastream_content(self.fedora_object, 'coverpage')
+        try:
+            content = get_cached_datastream_content(self.fedora_object, 'coverpage')
+        except (RequestFailed, ConnectionError):  # pragma: no cover
+            if settings.DEBUG:
+                return False
+            raise
+
         if not content:
             return False
 
