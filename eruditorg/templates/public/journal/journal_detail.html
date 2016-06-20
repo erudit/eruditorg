@@ -135,7 +135,7 @@
         <div class="latest-issue sidebar-block clearfix">
           <h2>{% trans "Dernier numéro" %}</h2>
           <p>
-            <a href="{{ latest_issue.get_absolute_url }}">
+            <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.localidentifier %}">
               <span class="issue-list--volume">{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
               {% if latest_issue.erudit_object.html_theme %}
               <br/>
@@ -145,7 +145,7 @@
               {% endif %}
             </a>
           </p>
-          <a href="{{ latest_issue.get_absolute_url }}">
+          <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.localidentifier %}">
             <img src="{% url 'public:journal:issue_coverpage' latest_issue.pk %}" class="img-responsive latest-issue--cover" alt="{{ latest_issue.title }}" />
           </a>
           <p>
@@ -270,7 +270,7 @@
             <ul class="issue-list">
               {% for issue in year.list %}
               <li class="issue-list--item">
-                <a href="{{ issue.get_absolute_url }}">
+                <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.localidentifier %}">
                   <span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                   {% if issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
                 </a>
