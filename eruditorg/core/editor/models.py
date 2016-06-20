@@ -85,6 +85,10 @@ class IssueSubmission(models.Model):
                        kwargs={'journal_pk': self.journal.pk, 'pk': self.pk})
 
     @property
+    def is_draft(self):
+        return self.status == self.DRAFT
+
+    @property
     def is_submitted(self):
         return self.status == self.SUBMITTED
 

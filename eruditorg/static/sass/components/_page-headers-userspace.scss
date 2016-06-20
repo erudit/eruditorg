@@ -1,0 +1,19 @@
+#main-nav{
+  .select{
+    .select2{
+      height: 40px;
+
+      .select2-selection{
+        padding: 6px;
+        height: 40px;
+        border-color: $gray-dark;
+        border-radius: 0;
+        background: $gray-dark;
+
+        .select2-selection__rendered{
+          color: $gray-lighter;
+        }
+      }
+    }
+  }
+}
