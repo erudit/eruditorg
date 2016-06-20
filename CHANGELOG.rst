@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.5 - Under development
--------------------------
+0.1.5
+-----
 
 * Improve the ``has_coverpage`` property when the Fedora repository is not available
 
