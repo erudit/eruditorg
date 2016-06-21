@@ -14,6 +14,7 @@ from ..models import JournalType
 from ..models import Library
 from ..models import Organisation
 from ..models import Publisher
+from ..models import Thesis
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -172,6 +173,11 @@ class DisciplineAdmin(TranslationAdmin):
     pass
 
 
+class ThesisAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'author', 'url')
+    list_display_links = ('__str__', 'author')
+
+
 admin.site.register(Author)
 admin.site.register(Organisation)
 admin.site.register(Library)
@@ -183,3 +189,4 @@ admin.site.register(Publisher)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.register(Discipline, DisciplineAdmin)
+admin.site.register(Thesis, ThesisAdmin)

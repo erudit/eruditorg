@@ -5,6 +5,7 @@ Changelog
 -------------------------
 
 * Simplify the journal providers settings and replace them by a single ``JOURNAL_PROVIDERS`` setting
+* Adds the ``Thesis`` model
 
 0.1.6
 -----
