@@ -11,4 +11,4 @@ INFLUXDB_PASSWORD = getattr(settings, 'METRICS_INFLUXDB_PASSWORD', 'root')
 
 # This setting can be used to deactivate capturing metrics. It will silent any error that could be
 # logged if the InfluxDB server is not reachable.
-ACTIVATED = getattr(settings, 'METRICS_ACTIVATED', True)
+ACTIVATED = getattr(settings, 'METRICS_ACTIVATED', False)
