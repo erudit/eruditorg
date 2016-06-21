@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.6 - Under development
+-------------------------
+
+* Adds a ``publication_allowed_by_authors`` field on the ``Article`` model
+
 0.1.5
 -----
 

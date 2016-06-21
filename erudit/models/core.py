@@ -563,6 +563,10 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
     processing = models.CharField(max_length=1, choices=PROCESSING_CHOICES)
     """ Type of processing of the article """
 
+    publication_allowed_by_authors = models.BooleanField(
+        verbose_name=_("Publication autorisée par l'auteur"), default=True)
+    """ Defines if the article can be published on the Érudit platform according to the authors """
+
     def get_fedora_model(self):
         return ArticleDigitalObject
 
