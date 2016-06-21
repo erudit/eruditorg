@@ -386,6 +386,26 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             ArticleRawPdfView.as_view()(
                 request, journalid=journal_id, issueid=issue_id, articleid=article_id)
 
+    def test_cannot_be_accessed_if_the_publication_of_the_article_is_not_allowed_by_its_authors(self):  # noqa
+        # Setup
+        self.journal.open_access = False
+        self.journal.save()
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue, publication_allowed_by_authors=False)
+        journal_id = self.journal.localidentifier
+        issue_id = issue.localidentifier
+        article_id = article.localidentifier
+        url = reverse('public:journal:article_raw_pdf', args=(
+            journal_id, issue_id, article_id
+        ))
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+
+        # Run & check
+        with self.assertRaises(PermissionDenied):
+            ArticleRawPdfView.as_view()(
+                request, journalid=journal_id, issueid=issue_id, articleid=article_id)
+
 
 class TestArticleMediaView(BaseEruditTestCase):
     def setUp(self):

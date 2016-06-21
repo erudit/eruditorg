@@ -83,22 +83,14 @@
     {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
   >
 
-  {% if not article_access_granted %}
-    <!--
-    <div class="row">
-      <header class="col-md-12">
-        <div class="alert alert-warning">
-          <p class="no-margin">
-              {% trans "Vous ne pouvez pas accéder à cette ressource!" %}
-          </p>
-        </div>
-      </header>
+  {% if article.publication_allowed_by_authors %}
+    {# XSL transformation article render #}
+    {% render_article article %}
+  {% else %}
+    <div class="alert alert-warning">
+      {% trans "La diffusion de cet article sur Érudit n'a pas été autorisée par l'auteur." %}
     </div>
-    -->
   {% endif %}
-
-  {# XSL transformation article render #}
-  {% render_article article %}
 
   {# article footer with related articles #}
   {% if related_articles %}
