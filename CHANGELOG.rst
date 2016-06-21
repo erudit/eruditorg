@@ -5,6 +5,7 @@ Changelog
 -------------------------
 
 * Adds a ``publication_allowed_by_authors`` field on the ``Article`` model
+* Fixed an error occuring when searching for Journal instances through the Django admin
 
 0.1.5
 -----
