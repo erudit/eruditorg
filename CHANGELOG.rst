@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.7 - Under development
+-------------------------
+
+* Simplify the journal providers settings and replace them by a single ``JOURNAL_PROVIDERS`` setting
+
 0.1.6
 -----
 

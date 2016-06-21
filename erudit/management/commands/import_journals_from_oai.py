@@ -18,8 +18,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Imports the OAI-based collections
         journal_count, journal_errored_count = 0, 0
-        for code, collection_config in erudit_settings.OAI_PROVIDERS.items():
-            name = collection_config['name']
+        for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('oai'):
+            code = collection_config['collection_code']
+            name = collection_config['collection_title']
             endpoint = collection_config['endpoint']
             try:
                 collection = Collection.objects.get(code=code)

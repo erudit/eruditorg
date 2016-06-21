@@ -113,13 +113,14 @@ class Command(BaseCommand):
 
         # Imports each collection
         journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
-        for collection_code in erudit_settings.FEDORA_COLLECTIONS:
+        for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('fedora'):
+            collection_code = collection_config.get('collection_code')
             try:
                 collection = Collection.objects.get(code=collection_code)
             except Collection.DoesNotExist:
-                msg = 'The "{0}" collection is not available.'.format(collection_code)
-                logger.error(msg, exc_info=True)
-                self.stdout.write(self.style.ERROR(msg))
+                collection = Collection.objects.create(
+                    code=collection_code, name=collection_config.get('collection_title'),
+                    localidentifier=collection_config.get('localidentifier'))
             else:
                 _jc, _jec, _ic, _ac = self.import_collection(collection)
                 journal_count += _jc
