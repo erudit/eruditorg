@@ -350,7 +350,8 @@ class ArticleRawPdfView(
         return self.get_article()
 
     def has_permission(self):
-        return self.article_access_granted
+        obj = self.get_permission_object()
+        return obj.publication_allowed_by_authors and self.article_access_granted
 
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF
