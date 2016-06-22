@@ -41,3 +41,12 @@ DEFAULT_JOURNAL_PROVIDERS = {
     ],
 }
 JOURNAL_PROVIDERS = getattr(settings, 'ERUDIT_JOURNAL_PROVIDERS', DEFAULT_JOURNAL_PROVIDERS)
+
+
+# The THESIS_PROVIDERS setting defines the sets from which the thesis can be retrieved using the
+# import commands.
+DEFAULT_THESIS_PROVIDERS = {
+    'oai': [
+    ],
+}
+THESIS_PROVIDERS = getattr(settings, 'ERUDIT_THESIS_PROVIDERS', DEFAULT_THESIS_PROVIDERS)
