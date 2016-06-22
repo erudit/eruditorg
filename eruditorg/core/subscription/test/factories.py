@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime as dt
 
 import factory
 
@@ -28,6 +29,12 @@ class JournalAccessSubscriptionPeriodFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = JournalAccessSubscriptionPeriod
+
+
+class ValidJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPeriodFactory):
+
+    start = dt.datetime.now() - dt.timedelta(days=10)
+    end = dt.datetime.now() + dt.timedelta(days=10)
 
 
 class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):

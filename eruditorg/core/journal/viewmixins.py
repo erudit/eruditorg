@@ -6,7 +6,6 @@ from django.utils.functional import cached_property
 
 from ipware.ip import get_ip
 
-from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
 from erudit.models import Journal
 
@@ -83,21 +82,9 @@ class ArticleAccessCheckMixin(object):
 
         # 3- Is the current IP address allowed to access the article as an institution?
         ip = get_ip(self.request)
-        institutional_subscription = JournalAccessSubscription.objects.filter(
-            Q(full_access=True) |
-            Q(journal=article.issue.journal) |
-            Q(journals__id=article.issue.journal_id),
-            organisation__isnull=False).first()
-        institutional_access = institutional_subscription is not None and \
-            institutional_subscription.is_ongoing and \
-            InstitutionIPAddressRange.objects.filter(
-                subscription=institutional_subscription,
-                ip_start__lte=ip, ip_end__gte=ip).exists()
-        if institutional_access:
-            self.subscription = institutional_subscription
-            return True
 
-        return False
+        subscriptions = JournalAccessSubscription.valid_objects.get_for_ip_address(ip)
+        return any([s.provides_access_to(article) for s in subscriptions])
 
     @cached_property
     def article_access_granted(self):

@@ -5,8 +5,12 @@ import datetime as dt
 import pytest
 
 from core.subscription.models import JournalAccessSubscription
-from core.subscription.test.factories import JournalAccessSubscriptionFactory
+from core.subscription.test.factories import (
+    JournalAccessSubscriptionFactory,
+    ValidJournalAccessSubscriptionPeriodFactory
+)
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
+from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 
 
 @pytest.mark.django_db
@@ -26,3 +30,15 @@ class TestJournalAccessSubscriptionValidManager(object):
             end=now_dt + dt.timedelta(days=8))
         # Run & check
         assert list(JournalAccessSubscription.valid_objects.all()) == [subscription_1, ]
+
+    def test_can_return_subscriptions_for_an_ip(self):
+
+        subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
+
+        InstitutionIPAddressRangeFactory.create(
+            subscription=subscription_period.subscription,
+            ip_start='192.168.1.1',
+            ip_end='192.168.1.2',
+        )
+
+        assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]

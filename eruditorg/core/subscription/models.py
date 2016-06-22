@@ -69,6 +69,18 @@ class JournalAccessSubscription(AbstractSubscription):
         return JournalAccessSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
+    def provides_access_to(self, article):
+        """ Returns if the subscription has access to the given article """
+        if self.full_access:
+            return True
+
+        if self.journal == article.issue.journal:
+            return True
+
+        if article.issue.journal in self.journals.all():
+            return True
+        return False
+
     def get_journals(self):
         """ Returns the Journal instances targetted by the subscription. """
         if self.full_access:
