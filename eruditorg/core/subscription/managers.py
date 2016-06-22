@@ -12,3 +12,10 @@ class JournalAccessSubscriptionValidManager(models.Manager):
         return super(JournalAccessSubscriptionValidManager, self).get_queryset().filter(
             journalaccesssubscriptionperiod__start__lte=nowd,
             journalaccesssubscriptionperiod__end__gte=nowd)
+
+    def get_for_ip_address(self, ip_address):
+        """ Return all the subscriptions for the given ip address """
+        return self.get_queryset().filter(
+            institutionipaddressrange__ip_start__lte=ip_address,
+            institutionipaddressrange__ip_end__gte=ip_address
+        )
