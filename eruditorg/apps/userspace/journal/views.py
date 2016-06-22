@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView
@@ -13,6 +14,19 @@ from .viewmixins import JournalScopeMixin
 
 class HomeView(LoginRequiredMixin, JournalScopeMixin, TemplateView):
     template_name = 'userspace/journal/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+
+        # Fetches the JournalInformation instance associated to the current journal
+        try:
+            journal_info = self.current_journal.information
+        except ObjectDoesNotExist:  # pragma: no cover
+            pass
+        else:
+            context['journal_info'] = journal_info
+
+        return context
 
 
 class JournalSectionEntryPointView(LoginRequiredMixin, RedirectView):

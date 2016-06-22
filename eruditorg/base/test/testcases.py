@@ -22,6 +22,7 @@ class EruditTestCase(DBRequiredTestCase):
         # Setup a User instance
         self.user = UserFactory.create(username='foo', email='foobar@erudit.org')
         self.user.set_password('notreallysecret')
+        self.user.save()
 
         # Setup a basic publisher
         self.publisher = PublisherFactory.create(name='Test publisher')

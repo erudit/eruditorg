@@ -1,0 +1,75 @@
+
+@mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
+  font-family: $font-family-serif-regular;
+  font-size: $font-size;
+  line-height: 1.5;
+  @include font-styles($font-style-family);
+}
+
+.journal-infos {
+  .journal-info-block {
+    padding-top: 15px;
+    padding-bottom: $margin-vertical-default;
+
+    .akkordion-title {
+      margin: 0 0 15px 0;
+      font-size: 1.75em;
+
+      .icon {
+        color: $dark-grey;
+      }
+
+    }
+
+    .akkordion-content {
+
+      h1, h2, h3, h4, h5, h6 {
+        @include fw-serif-bold;
+        margin-top: 0.75em;
+        color: $coral-red;
+
+        em {
+          @include fw-serif-bold-italic;
+          strong {
+            @include fw-serif-normal-italic;
+          }
+        }
+
+      }
+
+      h1 { font-size: 1.5em; }
+
+      h2 { font-size: 1.35em; }
+
+      h3 { font-size: 1.2em }
+
+      h4 { font-size: 1.05em }
+
+      p {
+        @include paragraph-text-style;
+      }
+
+    }
+
+  }
+}
+
+.journal-meta--list {
+  border-bottom: 1px solid $mid-grey;
+
+  dt, dd {
+    display: block;
+    float: none;
+    width: auto;
+  }
+
+  dt {
+    font-size: small;
+    margin-top: 1.25em;
+  }
+
+  dd {
+    margin-bottom: 1.25em;
+  }
+
+}
