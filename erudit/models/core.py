@@ -57,6 +57,18 @@ class FedoraDated(models.Model):
         abstract = True
 
 
+class OAIDated(models.Model):
+    """ Provides a datestamp for OAI-related models.
+
+    Note that these fields do not used the auto_now_add/auto_now attributes. So these values should
+    be set manually.
+    """
+    oai_datestamp = models.DateTimeField(verbose_name=_('Datestamp OAI'), blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
 class Person(models.Model):
     """Personne"""
 
@@ -177,7 +189,7 @@ class Library(models.Model):
 
 
 class Collection(models.Model):
-    """ A collection of Journals
+    """ A collection of journales or theses.
 
     Set of :py:class:`Journals <erudit.models.core.Journal>` for which a partner
     provides digital publishing services """
@@ -594,7 +606,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
         verbose_name_plural = _("Articles")
 
 
-class Thesis(EruditDocument):
+class Thesis(EruditDocument, OAIDated):
     """ Represents a single thesis. """
     collection = models.ForeignKey(Collection, verbose_name=_('Collection'))
     """ The collection associated with the considered thesis. """

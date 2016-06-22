@@ -2,6 +2,7 @@
 
 import datetime as dt
 
+from dateutil.parser import parse as dt_parse
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 from django.core.validators import URLValidator
@@ -16,9 +17,32 @@ from ...models import Thesis
 class Command(BaseCommand):
     """ Imports thesis objects from OAI-PMH providers. """
 
-    help = 'Import thesus from OAI-PMH providers'
+    help = 'Import theses from OAI-PMH providers'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--full', action='store_true', dest='full', default=False,
+            help='Perform a full import.')
+
+        parser.add_argument(
+            '--mdate', action='store', dest='mdate',
+            help='Modification date to use to retrieve theses to import (iso format).')
 
     def handle(self, *args, **options):
+        self.full_import = options.get('full', False)
+        self.modification_date = options.get('mdate', None)
+
+        # Handles a potential modification date option
+        try:
+            assert self.modification_date is not None
+            self.modification_date = dt.datetime.strptime(self.modification_date, '%Y-%m-%d').date()
+        except ValueError:
+            self.stdout.write(self.style.ERROR(
+                '"{0}" is not a valid modification date!'.format(self.modification_date)))
+            return
+        except AssertionError:
+            pass
+
         # Imports the OAI-based collections
         thesis_count, thesis_errored_count = 0, 0
         for collection_config in erudit_settings.THESIS_PROVIDERS.get('oai'):
@@ -46,12 +70,31 @@ class Command(BaseCommand):
         self.stdout.write(self.style.MIGRATE_HEADING(
             'Start importing "{}" collection'.format(collection.code)))
 
+        latest_update_date = self.modification_date
+        if not self.full_import and latest_update_date is None:
+            # Tries to fetch the date of the Thesis instance with the more recent update date.
+            latest_thesis_updated = Thesis.objects \
+                .filter(collection=collection, oai_datestamp__isnull=False) \
+                .order_by('-oai_datestamp').first()
+            latest_update_date = latest_thesis_updated.oai_datestamp.date() \
+                if latest_thesis_updated else None
+
         sickle = Sickle(endpoint)
 
         # STEP 1: initializes an iterator of records using the "GetRecords" method
         # --
 
-        records = sickle.ListRecords(metadataPrefix='oai_dc', set=setspec)
+        oai_request_params = {'metadataPrefix': 'oai_dc', 'set': setspec}
+        if self.full_import or latest_update_date is None:
+            if not self.full_import:
+                self.stdout.write(self.style.WARNING(
+                    '  No theses found... proceed to full import!'))
+        else:
+            self.stdout.write(
+                '  Importing theses modified since {}.'.format(latest_update_date.isoformat()))
+            oai_request_params.update({'from': latest_update_date.isoformat()})
+
+        records = sickle.ListRecords(**oai_request_params)
 
         # STEP 2: imports each thesis
         # --
@@ -104,6 +147,7 @@ class Command(BaseCommand):
             thesis.collection = collection
 
         thesis.title = title
+        thesis.oai_datestamp = dt_parse(record.header.datestamp)
 
         author = thesis.author if thesis.author_id else Author()
         author_name_split = author_name.split(',')
