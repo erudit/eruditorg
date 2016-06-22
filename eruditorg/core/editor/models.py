@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import gettext as _
@@ -192,3 +193,15 @@ class IssueSubmissionFilesVersion(models.Model):
         ordering = ['created', ]
         verbose_name = _("Version de fichiers d'un envoi de numéro")
         verbose_name_plural = _("Versions de fichiers d'envois de numéro")
+
+
+class ProductionTeam(models.Model):
+    """ Represents an Érudit production team. """
+    group = models.OneToOneField(Group, verbose_name=_('Groupe'))
+    identifier = models.SlugField(
+        max_length=48, unique=True, verbose_name=_('Identifiant'), db_index=True)
+    journals = models.ManyToManyField('erudit.Journal', verbose_name=_('Revues'))
+
+    class Meta:
+        verbose_name = _('Équipe de production')
+        verbose_name_plural = _('Équipes de production')

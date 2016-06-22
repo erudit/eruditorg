@@ -3,4 +3,5 @@
 from django.conf import settings
 
 
-PRODUCTION_TEAM_GROUP_ID = getattr(settings, 'PRODUCTION_TEAM_GROUP_ID', 1)
+MAIN_PRODUCTION_TEAM_IDENTIFIER = getattr(
+    settings, 'EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER', 'main')

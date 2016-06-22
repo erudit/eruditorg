@@ -13,6 +13,7 @@ from .viewmixins import JournalScopeMixin
 
 
 class HomeView(LoginRequiredMixin, JournalScopeMixin, TemplateView):
+    allow_production_team_access = True
     template_name = 'userspace/journal/home.html'
 
     def get_context_data(self, **kwargs):

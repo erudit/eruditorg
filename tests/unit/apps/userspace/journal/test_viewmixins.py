@@ -7,10 +7,14 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.views.generic import TemplateView
 
+from erudit.models import Journal
 from erudit.test import BaseEruditTestCase
+from erudit.test.factories import CollectionFactory
 from erudit.test.factories import JournalFactory
 
+from base.test.factories import GroupFactory
 from base.test.factories import UserFactory
+from core.editor.test.factories import ProductionTeamFactory
 
 from apps.userspace.journal.viewmixins import JournalScopeMixin
 
@@ -82,3 +86,27 @@ class TestJournalScopeMixin(BaseEruditTestCase):
         # Run & check
         with self.assertRaises(PermissionDenied):
             my_view(request, journal_pk=self.journal.pk)
+
+    def test_can_return_all_the_journals_if_the_user_is_a_member_of_a_production_team(self):
+        # Setup
+        class MyView(JournalScopeMixin, TemplateView):
+            allow_production_team_access = True
+            template_name = 'dummy.html'
+
+        user = UserFactory.create()
+        group = GroupFactory.create(name='Production team')
+        ProductionTeamFactory.create(group=group, identifier='main')
+        user.groups.add(group)
+
+        journal = JournalFactory.create(collection=self.collection)
+        url = reverse(
+            'userspace:journal:information:update', kwargs={'journal_pk': journal.pk})
+        request = self.get_request(url)
+        request.user = user
+        my_view = MyView()
+        my_view.request = request
+
+        # Run & check
+        journals = my_view.get_user_journals()
+        assert journals
+        assert list(journals) == list(Journal.objects.filter(collection__code='erudit'))

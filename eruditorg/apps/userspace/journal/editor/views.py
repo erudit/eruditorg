@@ -64,6 +64,7 @@ class IssueSubmissionCreate(
 
 class IssueSubmissionUpdate(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
+    allow_production_team_access = True
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
@@ -122,6 +123,7 @@ class IssueSubmissionUpdate(
 class IssueSubmissionTransitionView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
+    allow_production_team_access = True
     context_object_name = 'issue_submission'
     menu_journal = 'editor'
     model = IssueSubmission
@@ -222,6 +224,7 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
 
 class IssueSubmissionList(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+    allow_production_team_access = True
     menu_journal = 'editor'
     model = IssueSubmission
     template_name = 'userspace/journal/editor/issues.html'
@@ -257,6 +260,7 @@ class IssueSubmissionAttachmentView(
     """
     Returns an IssueSubmission attachment.
     """
+    allow_production_team_access = True
     model = ResumableFile
     raise_exception = True
 
