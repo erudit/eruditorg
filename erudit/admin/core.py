@@ -48,7 +48,7 @@ class CollectionAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Collection', {
             'fields': (
-                ('name', 'code', 'localidentifier', )
+                ('name', 'code', 'localidentifier', 'logo', )
             )
         }),
     ]
