@@ -58,7 +58,7 @@
           <div class="row">
           {% for year in thesis_groups.by_publication_year %}
             <div class="col-md-6">
-              <a href="#" class="mono-space aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
+              <a href="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}" class="mono-space aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
             </div>
           {% endfor %}
           </div>
@@ -68,7 +68,7 @@
           <div class="row">
           {% for author in thesis_groups.by_author_name %}
             <div class="col-md-6">
-              <a href="#" class="mono-space aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
+              <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author.author_firstletter %}" class="mono-space aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
             </div>
           {% endfor %}
           </div>

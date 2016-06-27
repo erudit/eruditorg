@@ -3,9 +3,14 @@
 from collections import OrderedDict
 
 from django.db.models import Count
+from django.db.models import Q
 from django.db.models.functions import Substr
 from django.db.models.functions import Upper
+from django.shortcuts import get_object_or_404
+from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
+from django.views.generic import ListView
 from django.views.generic import TemplateView
 from erudit.models import Collection
 from erudit.models import Thesis
@@ -14,9 +19,7 @@ from core.thesis.shortcuts import get_thesis_collections
 
 
 class ThesisHomeView(TemplateView):
-    """
-    Displays the home page of thesis repositories.
-    """
+    """ Displays the home page of thesis repositories. """
     template_name = 'public/thesis/home.html'
 
     def get_context_data(self, **kwargs):
@@ -39,11 +42,10 @@ class ThesisHomeView(TemplateView):
 
 
 class ThesisCollectionHomeView(DetailView):
-    """
-    Displays the home page of a collection repository.
-    """
+    """ Displays the home page of a collection repository. """
     context_object_name = 'collection'
     model = Collection
+    pk_url_kwarg = 'collection_pk'
     template_name = 'public/thesis/collection_home.html'
 
     def get_context_data(self, **kwargs):
@@ -76,3 +78,105 @@ class ThesisCollectionHomeView(DetailView):
             .values('author_firstletter').annotate(total=Count('author_firstletter')) \
             .order_by('author_firstletter')
         return {'by_publication_year': publication_year_group, 'by_author_name': author_name_group}
+
+
+class BaseThesisListView(ListView):
+    """ Base view for displaying a list of theses associated with a collection. """
+    available_tris = OrderedDict((
+        ('author_asc', _('Auteur (croissant)')),
+        ('author_desc', _('Auteur (décroissant)')),
+        ('date_asc', _("Date d'ajout (croissant)")),
+        ('date_desc', _("Date d'ajout (décroissant)")),
+        ('title_asc', _('Titre (croissant)')),
+        ('title_desc', _('Titre (décroissant)')),
+    ))
+    collection_pk_url_kwarg = 'collection_pk'
+    context_object_name = 'theses'
+    model = Thesis
+    paginate_by = 20
+
+    def apply_sorting(self, qs):
+        sort_by = self.get_sort_by()
+        if sort_by == 'author_asc':
+            qs = qs.order_by('author__lastname')
+        elif sort_by == 'author_desc':
+            qs = qs.order_by('-author__lastname')
+        elif sort_by == 'date_asc':
+            qs = qs.order_by('oai_datestamp')
+        elif sort_by == 'date_desc':
+            qs = qs.order_by('-oai_datestamp')
+        elif sort_by == 'title_desc':
+            qs = qs.order_by('-title')
+        else:  # title_asc or other values...
+            qs = qs.order_by('title')
+        return qs
+
+    def get_collection(self):
+        return get_object_or_404(Collection, pk=self.kwargs.get(self.collection_pk_url_kwarg))
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseThesisListView, self).get_context_data(**kwargs)
+        context['collection'] = self.collection
+        context['available_tris'] = self.available_tris
+        context['sort_by'] = self.get_sort_by()
+
+        # Inserts randomly selected theses into the context ("At a glance" section).
+        context['random_theses'] = Thesis.objects.select_related('author') \
+            .filter(collection=self.collection).order_by('?')[:3]
+
+        return context
+
+    def get_queryset(self):
+        qs = super(BaseThesisListView, self).get_queryset()
+        qs = qs.select_related('collection', 'author').filter(collection=self.collection)
+        return self.apply_sorting(qs)
+
+    def get_sort_by(self):
+        sort_by = self.request.GET.get('sort_by', 'title_asc')
+        sort_by = sort_by if sort_by in self.available_tris else 'title_asc'
+        return sort_by
+
+    @cached_property
+    def collection(self):
+        return self.get_collection()
+
+
+class ThesisPublicationYearListView(BaseThesisListView):
+    """ Displays theses for a specific year. """
+    template_name = 'public/thesis/collection_list_per_year.html'
+    year_url_kwarg = 'publication_year'
+
+    def get_context_data(self, **kwargs):
+        context = super(ThesisPublicationYearListView, self).get_context_data(**kwargs)
+        context['publication_year'] = int(self.kwargs.get(self.year_url_kwarg))
+        context['other_publication_years'] = Thesis.objects.filter(collection=self.collection) \
+            .values('publication_year').annotate(total=Count('publication_year')) \
+            .order_by('-publication_year')
+        return context
+
+    def get_queryset(self):
+        qs = super(ThesisPublicationYearListView, self).get_queryset()
+        year = self.kwargs.get(self.year_url_kwarg)
+        return qs.filter(publication_year=year)
+
+
+class ThesisPublicationAuthorNameListView(BaseThesisListView):
+    """ Displays theses for a specific year. """
+    template_name = 'public/thesis/collection_list_per_author_name.html'
+    letter_url_kwarg = 'author_letter'
+
+    def get_context_data(self, **kwargs):
+        context = super(ThesisPublicationAuthorNameListView, self).get_context_data(**kwargs)
+        context['author_letter'] = self.kwargs.get(self.letter_url_kwarg).upper()
+        context['other_author_letters'] = Thesis.objects.filter(collection=self.collection) \
+            .annotate(author_firstletter=Upper(Substr('author__lastname', 1, 1))) \
+            .values('author_firstletter').annotate(total=Count('author_firstletter')) \
+            .order_by('author_firstletter')
+        return context
+
+    def get_queryset(self):
+        qs = super(ThesisPublicationAuthorNameListView, self).get_queryset()
+        letter = self.kwargs.get(self.letter_url_kwarg)
+        return qs.filter(
+            Q(author__lastname__startswith=letter.upper()) |
+            Q(author__lastname__startswith=letter.lower()))

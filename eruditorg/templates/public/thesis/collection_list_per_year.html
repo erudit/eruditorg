@@ -1,0 +1,24 @@
+{% extends "public/thesis/collection_list_base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock page_title %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:thesis:collection_list_per_year' collection.pk publication_year %}">{{ publication_year }}</a>
+{% endblock breadcrumb %}
+
+{% block inner_title %}{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock inner_title %}
+
+{% block inner_list_switcher %}
+<div id="div_id_switch_year" class="switcher-wrapper form-group">
+  <div class="controls">
+    <label class="mono-space control-label" for="switch_year">{% trans "Parcourir d'autres années" %}</label>
+    &nbsp;
+    <select id="switch_year" onChange="window.location.href=this.value">
+      {% for year in other_publication_years %}
+      <option value="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}?sort_by={{ sort_by }}"{% if year.publication_year == publication_year %} selected disabled{% endif %}>{{ year.publication_year }} ({{ year.total }})</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+{% endblock inner_list_switcher %}

@@ -1,0 +1,83 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block body_class %}{{ block.super }} thesis_collection_list{% endblock body_class %}
+{% block data_controller %}public:thesis:collection_list{% endblock data_controller %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
+   / <a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div id="collection_thesis_list">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 clearfix thesis-list-head">
+        {% if collection.logo %}
+        <div class="pull-right">
+          <span class="collection-logo">
+            <img src="{{ collection.logo.url }}" alt="" />
+          </span>
+        </div>
+        {% endif %}
+        <h2 class="h3 bold">{% block inner_title %}{% endblock inner_title %}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9 thesis-list-wrapper">
+        <h3>{% trans "Liste complète" %}</h3>
+        <div class="actions-wrapper">
+          <div id="div_id_sort_by" class="form-group">
+            <div class="controls">
+              <label class="control-label" for="sort_by">{% trans "Tri..." %}</label>
+              &nbsp;
+              <select id="sort_by" onChange="window.location.href=this.value">
+                {% for sort_option in available_tris.items %}
+                <option value="?sort_by={{ sort_option.0}}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="pagination-wrapper">{% include "public/thesis/partials/collection_list_pagination.html" %}</div>
+        <ul class="theses">
+        {% for thesis in theses %}
+          <li class="thesis">
+            <div class="pull-right">
+              <a href="#" class="thesis-extend"><i class="ion-plus-round"></i></a>
+              <a href="#" class="thesis-reduce"><i class="ion-minus-round"></i></a>
+            </div>
+            <div class="author-name">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</div>
+            <a href="{{ thesis.url }}" class="thesis-link">&laquo;&nbsp;{{ thesis.title }}&nbsp;&raquo;</a>
+            <div class="description">
+              {% if thesis.description %}{{ thesis.description }}{% else %}{% trans "Aucune description." %}{% endif %}
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+        <div class="pagination-wrapper">{% include "public/thesis/partials/collection_list_pagination.html" %}</div>
+      </div>
+      <div class="col-md-3 sidebar">
+        <div class="repository-metadata">
+          <h3>{% trans "Fiche de ce dépôt" %}</h3>
+          <dl>
+            <dt class="mono-space">{% trans "Nombre de thèses" %}</dt>
+            <dd>{{ paginator.count }}</dd>
+          </dl>
+          {% block inner_list_switcher %}{% endblock inner_list_switcher %}
+        </div>
+        <div class="at-a-glance">
+          <h3>{% trans "En un coup d'oeil" %}</h3>
+          {% for thesis in random_theses %}
+            <a href="{{ thesis.url }}" class="thesis-link">
+              <span class="thesis-title">{{ thesis.title }}</span>
+              <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
