@@ -5,8 +5,9 @@ Changelog
 -------------------------
 
 * Simplify the journal providers settings and replace them by a single ``JOURNAL_PROVIDERS`` setting
-* Adds the ``Thesis`` model
-* Adds the ``import_theses_from_oai`` command
+* Add the ``Thesis`` model
+* Add the ``import_theses_from_oai`` command
+* Add a ``logo`` field to the ``Collection`` model
 
 0.1.6
 -----

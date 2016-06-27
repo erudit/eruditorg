@@ -204,6 +204,13 @@ class Collection(models.Model):
     """ The localidentifier of the collection. There should be a correspondence between the
     code of the collection and the ``Fonds_fac`` field in Solr. """
 
+    logo = models.ImageField(verbose_name=_('Logo'), blank=True, null=True)
+    """ The logo that can be associated with a specific collection. """
+
+    class Meta:
+        verbose_name = _('Collection')
+        verbose_name_plural = _('Collections')
+
 
 class Discipline(models.Model):
     """ Discipline """
