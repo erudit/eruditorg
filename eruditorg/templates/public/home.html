@@ -85,11 +85,9 @@
           <div class="row">
             <div class="col-xs-4 col-sm-12">
               <p class="category-tag">{{ issue.journal.disciplines.all|join:", " }}</p>
-              {% if issue.has_coverpage %}
               <a href="{% url 'public:journal:issue_detail' journal_code=issue.journal.code localidentifier=issue.localidentifier %}">
                 <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive latest-issues--article--cover">
               </a>
-              {% endif %}
             </div>
             <div class="col-xs-8 col-sm-12">
               <h3 class="latest-issues--article--journal-title">
