@@ -1,0 +1,80 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{{ collection.name }}{% endblock page_title %}
+{% block body_class %}{{ block.super }} thesis_collection_home{% endblock body_class %}
+{% block data_controller %}public:thesis:collection_home{% endblock data_controller %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
+   / <a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div id="thesis_collection_home">
+  <header class="container-fluid collection-head">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 clearfix">
+            {% if collection.logo %}
+            <div class="pull-right">
+              <span class="collection-logo">
+                <img src="{{ collection.logo.url }}" alt="" />
+              </span>
+            </div>
+            {% endif %}
+            <h2 class="h3 bold">{{ collection.name }}</h2>
+            <div class="thesis-count">
+            {% blocktrans trimmed count counter=thesis_count %}
+              {{ counter }} thèse
+            {% plural %}
+              {{ counter }} thèses
+            {% endblocktrans %}
+            </div>
+          </div>
+        </div>
+        <div class="row new-thesis">
+          <div class="col-md-3">
+            <p><strong>{% trans "Nouveautés" %}</strong></p>
+          </div>
+          {% for thesis in recent_theses %}
+          <div class="col-md-3">
+            <a href="{{ thesis.url }}" class="recent-thesis">
+              <span class="thesis-title">{{ thesis.title }}</span>
+              <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="thesis-aggregation-links-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>{% trans "Par année" %}</h3>
+          <div class="row">
+          {% for year in thesis_groups.by_publication_year %}
+            <div class="col-md-6">
+              <a href="#" class="mono-space aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3>{% trans "Par nom d'auteur" %}</h3>
+          <div class="row">
+          {% for author in thesis_groups.by_author_name %}
+            <div class="col-md-6">
+              <a href="#" class="mono-space aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Thèses" %}{% endblock page_title %}
+{% block body_class %}{{ block.super }} thesis_home{% endblock body_class %}
+{% block data_controller %}public:thesis:thesis_home{% endblock data_controller %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:journal:journal_list' %}">{% trans "Thèses" %}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div id="thesis_home">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 clearfix">
+        <h2 class="h3 bold">{% trans "Thèses" %}</h2>
+        {% lorem 2 p %}
+      </div>
+    </div>
+
+    <div class="repositories-wrapper">
+      <header class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 title">
+              <h2 class="no-margin h3">{% trans "Par dépôt institutionnel" %}</h2>
+            </div>
+          </div>
+        </div>
+      </header>
+      <ul id="repositories" class="row">
+        {% for collection_info in collections_dict.values %}
+        <li class="col-md-3 repository">
+          <a href="{% url 'public:thesis:collection_home' collection_info.collection.pk %}" class="collection-link">
+            {% if collection_info.collection.logo %}
+            <span class="collection-logo">
+              <img src="{{ collection_info.collection.logo.url }}" alt="" />
+            </span>
+            {% endif %}
+            <span class="collection-title">{{ collection_info.collection.name }}</span>
+          </a>
+          <div class="thesis-count">
+          {% blocktrans trimmed count counter=collection_info.thesis_count %}
+            {{ counter }} thèse
+          {% plural %}
+            {{ counter }} thèses
+          {% endblocktrans %}
+          </div>
+          {% if collection_info.recent_theses %}
+          <div class="recent-theses">
+            <div class="recent-theses-title"><strong>{% trans "Nouveautés" %}</strong></div>
+            {% for thesis in collection_info.recent_theses %}
+            <a href="{{ thesis.url }}" class="thesis">{{ thesis.title }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}
