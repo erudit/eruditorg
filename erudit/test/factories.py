@@ -105,3 +105,14 @@ class AuthorFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'erudit.Author'
+
+
+class ThesisFactory(factory.django.DjangoModelFactory):
+    collection = factory.SubFactory(CollectionFactory)
+    author = factory.SubFactory(AuthorFactory)
+    title = factory.Sequence(lambda n: 'Thèse {}'.format(n))
+    url = faker.url()
+    publication_year = faker.year()
+
+    class Meta:
+        model = 'erudit.Thesis'
