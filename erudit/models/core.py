@@ -521,7 +521,8 @@ class Issue(FedoraMixin, FedoraDated):
 
         # Checks the content of the image in order to detect if it contains only one single color.
         im = Image.open(copy.copy(content))
-        empty_coverpage = (len(im.getcolors()) == 1)
+        extrema = im.convert('L').getextrema()
+        empty_coverpage = (extrema == (0, 0)) or (extrema == (255, 255))
         im.close()
 
         return not empty_coverpage
