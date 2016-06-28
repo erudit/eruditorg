@@ -6,7 +6,10 @@ from dateutil.parser import parse as dt_parse
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 from django.core.validators import URLValidator
+from django.db.models import Q
+from django.template.defaultfilters import slugify
 from sickle import Sickle
+from taggit.models import Tag
 
 from ...conf import settings as erudit_settings
 from ...models import Author
@@ -185,5 +188,15 @@ class Command(BaseCommand):
         thesis.description = thesis_description[0] if thesis_description else None
 
         thesis.save()
+
+        # Associates the keywords with the Thesis instance
+        keywords = list(set(record.metadata.get('subject', [])))
+        for kword in keywords:
+            try:
+                tag = Tag.objects.filter(Q(slug=slugify(kword)[:100]) | Q(name=kword[:100])).first()
+                assert tag is not None
+            except AssertionError:
+                tag = kword
+            thesis.keywords.add(tag)
 
         self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))

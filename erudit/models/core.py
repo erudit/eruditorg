@@ -15,8 +15,9 @@ from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 from eulfedora.util import RequestFailed
-from requests.exceptions import ConnectionError
 from PIL import Image
+from requests.exceptions import ConnectionError
+from taggit.managers import TaggableManager
 
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
@@ -632,6 +633,9 @@ class Thesis(EruditDocument, OAIDated):
 
     description = models.TextField(verbose_name=_('Résumé'), blank=True, null=True)
     """ A thesis can have a description. """
+
+    keywords = TaggableManager()
+    """ A thesis can be associated with multiple keywords. """
 
     class Meta:
         verbose_name = _('Thèse')
