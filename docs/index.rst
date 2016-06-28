@@ -18,6 +18,7 @@ Documentation de Érudit.org
    permissions
    emails
    frontend
+   depot-fichiers/depot-de-fichiers
 
 Index et tableaux
 =================
