@@ -8,6 +8,7 @@ Changelog
 * Add the ``Thesis`` model
 * Add the ``import_theses_from_oai`` command
 * Add a ``logo`` field to the ``Collection`` model
+* Fix the ``has_coverpage`` property on the ``Issue`` model
 
 0.1.6
 -----
