@@ -192,6 +192,9 @@ class Command(BaseCommand):
         # Associates the keywords with the Thesis instance
         keywords = list(set(record.metadata.get('subject', [])))
         for kword in keywords:
+            if not kword:
+                continue
+
             try:
                 tag = Tag.objects.filter(Q(slug=slugify(kword)[:100]) | Q(name=kword[:100])).first()
                 assert tag is not None
