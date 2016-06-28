@@ -116,14 +116,14 @@ class BaseThesisListView(ListView):
         context['sort_by'] = self.get_sort_by()
 
         # Inserts randomly selected theses into the context ("At a glance" section).
-        context['random_theses'] = Thesis.objects.select_related('author') \
-            .filter(collection=self.collection).order_by('?')[:3]
+        context['random_theses'] = self.get_queryset().order_by('?')[:3]
 
         return context
 
     def get_queryset(self):
         qs = super(BaseThesisListView, self).get_queryset()
-        qs = qs.select_related('collection', 'author').filter(collection=self.collection)
+        qs = qs.select_related('collection', 'author').prefetch_related('keywords') \
+            .filter(collection=self.collection)
         return self.apply_sorting(qs)
 
     def get_sort_by(self):

@@ -52,6 +52,9 @@
             <a href="{{ thesis.url }}" class="thesis-link">&laquo;&nbsp;{{ thesis.title }}&nbsp;&raquo;</a>
             <div class="description">
               {% if thesis.description %}{{ thesis.description }}{% else %}{% trans "Aucune description." %}{% endif %}
+              <br /><br />
+              <div class="keywords-title"><strong>{% trans "Mots-clés :" %}</strong></div>
+              <div class="keywords">{% for kw in thesis.keywords.all %}{{ kw.name }}{% if not forloop.last %}, {% endif %}{% empty %}{% trans "Aucun mot-clé" %}{% endfor %}</div>
             </div>
           </li>
         {% endfor %}
