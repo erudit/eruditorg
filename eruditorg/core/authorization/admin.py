@@ -20,6 +20,12 @@ class AuthorizationAdmin(admin.ModelAdmin):
     )
     list_filter = ('content_type', )
 
+    fieldsets = (
+        (_("Utilisateur"), {'fields': (('user', 'group',), )}),
+        (_("Autorisation"), {'fields': ('authorization_codename',)}),
+        (_("Cible"), {'fields': ('content_type', 'object_id',)}),
+    )
+
     def _content_object(self, obj):
         if not obj.content_object:
             return
