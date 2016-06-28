@@ -1,5 +1,5 @@
 Django==1.9.7
-git+https://github.com/erudit/erudit-core.git@0.1.8#egg=erudit-core
+git+https://github.com/erudit/erudit-core.git@0.1.7#egg=erudit-core
 git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-resumable-uploads
 git+https://github.com/erudit/django-account-actions.git@master#egg=django-account-actions
 eulxml==1.0.1
