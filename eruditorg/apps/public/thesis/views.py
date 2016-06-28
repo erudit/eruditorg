@@ -2,10 +2,7 @@
 
 from collections import OrderedDict
 
-from django.db.models import Count
 from django.db.models import Q
-from django.db.models.functions import Substr
-from django.db.models.functions import Upper
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -16,6 +13,8 @@ from erudit.models import Collection
 from erudit.models import Thesis
 
 from core.thesis.shortcuts import get_thesis_collections
+from core.thesis.shortcuts import get_thesis_counts_per_author_first_letter
+from core.thesis.shortcuts import get_thesis_counts_per_publication_year
 
 
 class ThesisHomeView(TemplateView):
@@ -71,12 +70,8 @@ class ThesisCollectionHomeView(DetailView):
     def get_thesis_groups(self):
         collection = self.object
         theses = Thesis.objects.select_related('author').filter(collection=collection)
-        publication_year_group = theses.values('publication_year') \
-            .annotate(total=Count('publication_year')).order_by('-publication_year')
-        author_name_group = theses \
-            .annotate(author_firstletter=Upper(Substr('author__lastname', 1, 1))) \
-            .values('author_firstletter').annotate(total=Count('author_firstletter')) \
-            .order_by('author_firstletter')
+        publication_year_group = get_thesis_counts_per_publication_year(theses)
+        author_name_group = get_thesis_counts_per_author_first_letter(theses)
         return {'by_publication_year': publication_year_group, 'by_author_name': author_name_group}
 
 
@@ -149,9 +144,8 @@ class ThesisPublicationYearListView(BaseThesisListView):
     def get_context_data(self, **kwargs):
         context = super(ThesisPublicationYearListView, self).get_context_data(**kwargs)
         context['publication_year'] = int(self.kwargs.get(self.year_url_kwarg))
-        context['other_publication_years'] = Thesis.objects.filter(collection=self.collection) \
-            .values('publication_year').annotate(total=Count('publication_year')) \
-            .order_by('-publication_year')
+        context['other_publication_years'] = get_thesis_counts_per_publication_year(
+            Thesis.objects.filter(collection=self.collection))
         return context
 
     def get_queryset(self):
@@ -168,10 +162,8 @@ class ThesisPublicationAuthorNameListView(BaseThesisListView):
     def get_context_data(self, **kwargs):
         context = super(ThesisPublicationAuthorNameListView, self).get_context_data(**kwargs)
         context['author_letter'] = self.kwargs.get(self.letter_url_kwarg).upper()
-        context['other_author_letters'] = Thesis.objects.filter(collection=self.collection) \
-            .annotate(author_firstletter=Upper(Substr('author__lastname', 1, 1))) \
-            .values('author_firstletter').annotate(total=Count('author_firstletter')) \
-            .order_by('author_firstletter')
+        context['other_author_letters'] = get_thesis_counts_per_author_first_letter(
+            Thesis.objects.filter(collection=self.collection))
         return context
 
     def get_queryset(self):
