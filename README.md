@@ -2,6 +2,8 @@
 [![Coverage](https://codecov.io/github/erudit/eruditorg/coverage.svg?branch=master)](https://codecov.io/github/erudit/eruditorg?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/eruditorg/badge/?version=latest)](http://eruditorg.readthedocs.org/fr/latest/?badge=latest)
 
+This readme only contains installation instructions for more information please refer to the [full documentation](https://eruditorg.readthedocs.org)
+
 # Installing on Ubuntu 14.04
 
 ## Make sure git is installed:
@@ -19,7 +21,7 @@
 ## Install the system dependencies:
 
 ```
-$ sudo apt-get install -y python3.4-venv python3-dev postgresql postgresql-server-dev-all libxml2-dev libxslt1-dev zlib1g-dev python3-pip
+$ sudo apt-get install -y python3.4-venv python3-dev mariadb-server libxml2-dev libxslt1-dev zlib1g-dev python3-pip
 ```
 
 ## Setup the virtualenv
@@ -47,41 +49,14 @@ $ pip install -r requirements.txt
 First, create the database:
 
 ```
-$ sudo su - postgres
-$ createdb zenon
-$ logout
+$ mysql
+$ create database eruditorg character set utf8;
 ```
 
 ### Using the default configuration
 
-The default configuration connects to database `zenon` with user `postgres` and no password.
-If you do not want this, and would rather use a password, please follow the [postgresql documentation](http://www.postgresql.org/docs/8.0/static/sql-createuser.html) on how to create a user and update the `settings.py` file accordingly.
-
-Allow local connections over TCP/IP.
-
-Edit the `pg_hba.conf` file:
-
-```
-$ sudo vim /etc/postgresql/9.3/main/pg_hba.conf
-```
-
-And replace the following line:
-
-```
-host    all             all             127.0.0.1/32            md5
-```
-
-With:
-
-```
-host    all             all             127.0.0.1/32            trust
-```
-
-Reload the postgresql configuration:
-
-```
-$ sudo /etc/init.d postgresql reload
-```
+The default configuration connects to database `eruditorg` with user `root` and no password.
+If you do not want this, and would rather use a password, please follow the [mariadb documentation](https://mariadb.com/kb/en/mariadb/set-password/) on how to create a user and update the `settings.py` file accordingly.
 
 ## Django
 
