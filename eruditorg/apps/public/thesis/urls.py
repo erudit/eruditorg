@@ -19,6 +19,13 @@ urlpatterns = [
         views.ThesisPublicationAuthorNameListView.as_view(),
         name='collection_list_per_author_name'),
 
+    url(_(r'^fond/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.enw$'),
+        views.ThesisEnwCitationView.as_view(), name='thesis_citation_enw'),
+    url(_(r'^fond/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.ris$'),
+        views.ThesisRisCitationView.as_view(), name='thesis_citation_ris'),
+    url(_(r'^fond/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.bib$'),
+        views.ThesisBibCitationView.as_view(), name='thesis_citation_bib'),
+
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 ]

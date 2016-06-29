@@ -104,7 +104,7 @@ class ThesisSerializer(serializers.ModelSerializer):
     class Meta:
         model = erudit_models.Thesis
         fields = [
-            'title', 'url', 'publication_year', 'description', 'author',
+            'title', 'url', 'publication_year', 'description', 'author', 'collection',
         ]
 
     def get_author(self, obj):

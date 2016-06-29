@@ -1,0 +1,5 @@
+TY  - THES
+T1  - {{ thesis.title }}
+A1  - {{ thesis.author.lastname }}, {{ thesis.author.firstname }}
+Y1  - {{ thesis.publication_year }}
+ER  -

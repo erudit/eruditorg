@@ -172,3 +172,24 @@ class ThesisPublicationAuthorNameListView(BaseThesisListView):
         return qs.filter(
             Q(author__lastname__startswith=letter.upper()) |
             Q(author__lastname__startswith=letter.lower()))
+
+
+class ThesisEnwCitationView(DetailView):
+    """ Returns the enw file of a specific thesis. """
+    content_type = 'application/x-endnote-refer'
+    model = Thesis
+    template_name = 'public/thesis/citation/thesis.enw'
+
+
+class ThesisRisCitationView(DetailView):
+    """ Returns the ris file of a specific thesis. """
+    content_type = 'application/x-research-info-systems'
+    model = Thesis
+    template_name = 'public/thesis/citation/thesis.ris'
+
+
+class ThesisBibCitationView(DetailView):
+    """ Returns the bib file of a specific thesis. """
+    content_type = 'application/x-bibtex'
+    model = Thesis
+    template_name = 'public/thesis/citation/thesis.bib'

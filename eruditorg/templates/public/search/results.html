@@ -302,6 +302,12 @@
                     </button>
                   </li>
                   <li>
+                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-cite"></span>
+                      <span class="tools-label">{% trans "Citer cet article" %}</span>
+                    </button>
+                  </li>
+                  <li>
                     <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ document.real_object.url }}">
                       <span class="erudicon erudicon-tools-share"></span>
                       <span class="tools-label">{% trans "Partager" %}</span>
@@ -309,6 +315,32 @@
                   </li>
                 </ul>
               </nav>
+              <div class="hidden">
+                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                  <div class="modal-body">
+                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                    <p>
+                      <a href="{% url 'public:thesis:thesis_citation_enw' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.ENW</span>
+                      </a>
+                      EndNote, Zotero
+                    </p>
+                    <p>
+                      <a href="{% url 'public:thesis:thesis_citation_ris' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.RIS</span>
+                      </a>
+                      Papers, Reference Manager, RefWorks, Zotero
+                    </p>
+                    <p>
+                      <a href="{% url 'public:thesis:thesis_citation_bib' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.BIB</span>
+                      </a>
+                      BibTeX, JabRef, Mendeley, Zotero
+                    </p>
+                  </div>
+                </div>
+              </div>
             </article>
             {% endif %}
 
