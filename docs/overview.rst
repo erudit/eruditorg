@@ -15,18 +15,22 @@ Résumé
 Modèles Django
 --------------
 
-Les trois modèles suivants sont utilisés pour récupérer les données:
+Les trois modèles suivants sont utilisés pour récupérer les données des articles scientifiques:
 
 * :py:class:`Journal <erudit.models.core.Journal>` (une revue, scientifique ou savante)
 * :py:class:`Issue <erudit.models.core.Issue>` (une publication de cette revue)
-* Article (*n'est pas encore implémenté*)
+* :py:class:`Article <erudit.models.core.Article>`
+
+Le modèle suivant est utilisé pour récupérer les données des Thèses:
+
+* :py:class:`Thesis <erudit.models.core.Thesis>`
 
 Récupération des données dans Fedora
 ------------------------------------
 
 Les modèles Django implémentent le :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>`.
 Le mixin implémente une méthode ``get_full_identifier()`` qui retourne l'identifiant qui permet de récupérer l'objet dans Fedora.
-``FedoraMixin`` utilise la librairie `eulfedora`_. pour se connecter à ``Fedora``
+:py:class:`~erudit.fedora.modelmixins.FedoraMixin` utilise la librairie `eulfedora`_. pour se connecter à ``Fedora``
 et retourne un objet d'un type défini dans le module :py:mod:`erudit.fedora.objects`
 Chaque type d'objet contenu dans Fedora présente des particularités.
 Le module :py:mod:`objects <erudit.fedora.objects>` permet de faire abstraction de ces particularités.
@@ -56,7 +60,7 @@ Correspondance entre le document indexé dans Solr et les modèles Django
 
 On utilise les identifiants de l'article pour faire la correspondance entre le document Solr, Django et Fedora.
 
-* ``ID``: identifie l'article dans Fedora. Correspond au ``localidentifier``  d'un ``Article`` (*pas encore implémenté*)
+* ``ID``: identifie l'article dans Fedora. Correspond au :py:attr:`~erudit.models.core.EruditDocument.localidentifier`  d'un :py:class:`~erudit.models.core.Article` 
 * ``NumeroID``: identifie le numéro dans Fedora. Correspond au :py:attr:`localidentifier <erudit.models.core.Issue.localidentifier>` d'un :py:class:`Issue <erudit.models.core.Issue>`
 * ``RevueID`` identifie la publication dans Fedora. Correspond à :py:attr:`localidentifier <erudit.models.core.Journal.localidentifier>` de :py:class:`Journal <erudit.models.core.Journal>`
 
