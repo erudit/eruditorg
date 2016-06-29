@@ -15,7 +15,7 @@ urlpatterns = [
 
     url(_(r'^fond/(?P<collection_pk>[\d-]+)/liste/annee/(?P<publication_year>[\d-]+)/$'),
         views.ThesisPublicationYearListView.as_view(), name='collection_list_per_year'),
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/liste/auteur/(?P<author_letter>[\w-])/$'),
+    url(_(r'^fond/(?P<collection_pk>[\d-]+)/liste/auteur/(?P<author_letter>[\w\'-])/$'),
         views.ThesisPublicationAuthorNameListView.as_view(),
         name='collection_list_per_author_name'),
 
