@@ -93,15 +93,6 @@ INSTALLED_APPS = (
     'rest_framework',
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'zenon',
-        'USER': 'postgres',
-        'HOST': 'localhost',
-    },
-}
-
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
@@ -170,11 +161,10 @@ LOGIN_URL = 'public:auth:login'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'eruditorg',
+        'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',
     }
 }
 
