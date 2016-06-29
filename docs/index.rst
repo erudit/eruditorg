@@ -6,19 +6,17 @@
 Documentation de Érudit.org
 ===========================
 
+Bienvenue sur la documentation de Érudit.org.
+La documentation se divise en deux sections: une référence de développement et un manuel technique pour les administrateurs.
+
+
+Pour démarrer, voir :doc:`tech/installation`
+
 .. toctree::
    :maxdepth: 2
 
-   structure
-   overview
-   core_models
-   fedora
-   backends
-   a11y
-   permissions
-   emails
-   frontend
-   depot-fichiers/depot-de-fichiers
+   dev/index
+   tech/index
 
 Index et tableaux
 =================
