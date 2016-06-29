@@ -3,4 +3,6 @@ Manuel technique
 
     .. toctree::
 
-        depot-de-fichiers
+        installation
+        site-public/index
+        espace-utilisateur/index
