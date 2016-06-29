@@ -16,6 +16,7 @@ from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 from eulfedora.util import RequestFailed
 from PIL import Image
+from polymorphic.models import PolymorphicModel
 from requests.exceptions import ConnectionError
 from taggit.managers import TaggableManager
 
@@ -540,7 +541,7 @@ class Issue(FedoraMixin, FedoraDated):
         ordering = ['journal', 'year', 'volume', 'number', ]
 
 
-class EruditDocument(models.Model):
+class EruditDocument(PolymorphicModel):
 
     localidentifier = models.CharField(
         max_length=50,

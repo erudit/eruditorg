@@ -1,6 +1,16 @@
 Changelog
 #########
 
+0.1.9 - Under development
+-------------------------
+
+* Add polymorphism to the ``EruditDocument`` model
+
+0.1.8
+-----
+
+* Fix ``setup`` module
+
 0.1.7
 -----
 

@@ -34,6 +34,7 @@ setup(
     install_requires=[
         'django>=1.8',
         'django-modeltranslation>=0.11',
+        'django-polymorphic>=0.9',
         'django-taggit>=0.20',
         'eulfedora>=1.5.0',
         'lxml>=3.6.0',
