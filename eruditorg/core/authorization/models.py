@@ -29,13 +29,20 @@ class Authorization(models.Model):
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
-    group = models.ForeignKey('auth.Group', blank=True, null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=True, null=True,
+        verbose_name=_("Utilisateur")
+    )
+    group = models.ForeignKey('auth.Group', blank=True, null=True, verbose_name=_("Groupe"))
 
     # The 'authorization_codename' defines the authorization that will be
     # granted to the considered user or group.
     authorization_codename = models.CharField(
-        choices=AuthorizationConfig.get_choices(include_staff_only=True), max_length=100)
+        choices=AuthorizationConfig.get_choices(include_staff_only=True),
+        max_length=100,
+        verbose_name="Autorisation"
+    )
 
     class Meta:
         verbose_name = _('Autorisation')
