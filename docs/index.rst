@@ -9,16 +9,8 @@ Documentation de Érudit.org
 .. toctree::
    :maxdepth: 2
 
-   structure
-   overview
-   core_models
-   fedora
-   backends
-   a11y
-   permissions
-   emails
-   frontend
-   depot-fichiers/depot-de-fichiers
+   dev/index
+   tech/index
 
 Index et tableaux
 =================
