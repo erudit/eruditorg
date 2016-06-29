@@ -68,6 +68,7 @@ INSTALLED_APPS = (
 
     # Third-party apps
     'modeltranslation',
+    'polymorphic',
     'taggit',
     'post_office',
 

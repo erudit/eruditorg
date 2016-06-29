@@ -9,26 +9,28 @@ from erudit import models as erudit_models
 
 
 class EruditDocumentSerializer(serializers.ModelSerializer):
+    document_type = serializers.SerializerMethodField()
     real_object = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.EruditDocument
-        fields = ['id', 'localidentifier', 'real_object', ]
+        fields = ['id', 'localidentifier', 'document_type', 'real_object', ]
+
+    def get_document_type(self, obj):
+        return {
+            erudit_models.Article: 'article',
+            erudit_models.Thesis: 'thesis',
+        }[obj.__class__]
 
     def get_real_object(self, obj):
         cache_key = 'eruditdocument-real-object-serialized-{}'.format(obj.id)
         real_object_data = cache.get(cache_key, None)
 
         if real_object_data is None:
-            # This method should return a serialized representation of an Érudit document ; it could
-            # be an article, a thesis, a book, ...
-            # However there is a problem: it not currently possible to determine the correct model
-            # associated with an EruditDocument instance. For now we use only Article objects so we
-            # will make the assumption that all Érudit documents are article... But this problem
-            # should be resolved using polymorphism.
-            article = erudit_models.Article.objects.select_related('issue', 'issue__journal') \
-                .get(id=obj.id)
-            real_object_data = ArticleSerializer(article).data
+            if isinstance(obj, erudit_models.Article):
+                real_object_data = ArticleSerializer(obj).data
+            elif isinstance(obj, erudit_models.Thesis):
+                real_object_data = ThesisSerializer(obj).data
             # Caches the content of the object for 1 hour
             cache.set(cache_key, real_object_data, 60 * 60)
 
@@ -94,3 +96,19 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_issue_published(self, obj):
         return formats.date_format(obj.issue.date_published, 'YEAR_MONTH_FORMAT')
+
+
+class ThesisSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField()
+
+    class Meta:
+        model = erudit_models.Thesis
+        fields = [
+            'title', 'url', 'publication_year', 'description', 'author',
+        ]
+
+    def get_author(self, obj):
+        return {
+            'lastname': obj.author.lastname,
+            'firstname': obj.author.firstname,
+        }

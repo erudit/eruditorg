@@ -81,4 +81,4 @@ class TestSavedCitationList(BaseEruditTestCase):
         self.assertEqual(DBSavedCitationList.objects.count(), 1)
         db_citation_list = DBSavedCitationList.objects.first()
         self.assertEqual(db_citation_list.user, self.user)
-        self.assertEqual(list(db_citation_list.articles.all()), [article, ])
+        self.assertEqual(list(db_citation_list.documents.all()), [article, ])

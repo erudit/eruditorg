@@ -139,9 +139,10 @@
           {% for document in documents %}
           <li>
 
+            {% if document.document_type == 'article' %}
             {# Article preview #}
             {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
-            <article id="article-{{ document.id }}" class="search-result-item" data-article-id="{{ document.id }}">
+            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}">
               <header>
                 <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
                 {# authors #}
@@ -198,11 +199,11 @@
               <nav class="toolbox compact">
                 <ul class="unstyled">
                   <li>
-                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#article-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
                       <span class="erudicon erudicon-tools-save"></span>
                       <span class="tools-label">{% trans "Sauvegarder" %}</span>
                     </button>
-                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#article-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
                       <span class="erudicon erudicon-tools-save"></span>
                       <span class="tools-label">{% trans "Supprimer" %}</span>
                     </button>
@@ -254,6 +255,62 @@
                 </div>
               </div>
             </article>
+            {% elif document.document_type == 'thesis' %}
+            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}">
+              <header>
+                <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+                {# authors #}
+                {% if document.real_object.author %}
+                <h4 class="authors h6">
+                  <span class="author">{{ document.real_object.author.firstname }} {{ document.real_object.author.lastname }}</span>
+                </h4>
+                {% endif %}
+                {% if search_elements and search_elements.0.operator != 'NOT' %}
+                  <h3 class="h4">
+                    <a href="{{ document.real_object.url }}">
+                      {{ document.real_object.title|highlight:main_qterm }}
+                    </a>
+                  </h3>
+                {% else %}
+                  <h3 class="h4">
+                    <a href="{{ article_url }}">
+                      {{ document.real_object.title }}
+                    </a>
+                  </h3>
+                {% endif %}
+              </header>
+              {% if document.real_object.description %}
+              <summary class="akkordion" data-akkordion-single="true">
+                <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
+                <div class="summary-content akkordion-content">
+                  <p>{{ document.real_object.description }}</p>
+                </div>
+              </summary>
+              {% else %}
+              <br /><br />
+              {% endif %}
+              <nav class="toolbox compact">
+                <ul class="unstyled">
+                  <li>
+                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                    </button>
+                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Supprimer" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ document.real_object.url }}">
+                      <span class="erudicon erudicon-tools-share"></span>
+                      <span class="tools-label">{% trans "Partager" %}</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </article>
+            {% endif %}
 
           </li>
           {% endfor %}

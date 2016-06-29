@@ -7,8 +7,8 @@ from . import views
 
 
 urlpatterns = [
-    url(_(r'^ajout/(?P<article_id>\d+)/$'),
+    url(_(r'^ajout/(?P<document_id>\d+)/$'),
         views.SavedCitationAddView.as_view(), name='add_citation'),
-    url(_(r'^suppression/(?P<article_id>\d+)/$'),
+    url(_(r'^suppression/(?P<document_id>\d+)/$'),
         views.SavedCitationRemoveView.as_view(), name='remove_citation'),
 ]
