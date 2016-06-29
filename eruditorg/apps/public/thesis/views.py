@@ -93,9 +93,9 @@ class BaseThesisListView(ListView):
     def apply_sorting(self, qs):
         sort_by = self.get_sort_by()
         if sort_by == 'author_asc':
-            qs = qs.order_by('author__lastname')
+            qs = qs.order_by('author__lastname', 'author__firstname')
         elif sort_by == 'author_desc':
-            qs = qs.order_by('-author__lastname')
+            qs = qs.order_by('-author__lastname', '-author__firstname')
         elif sort_by == 'date_asc':
             qs = qs.order_by('oai_datestamp')
         elif sort_by == 'date_desc':
