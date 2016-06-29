@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.9 - Under development
--------------------------
+0.1.9
+-----
 
 * Add polymorphism to the ``EruditDocument`` model
 
