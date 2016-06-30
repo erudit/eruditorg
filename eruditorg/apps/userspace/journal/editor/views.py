@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import itertools
 import logging
 import mimetypes
 import os
@@ -228,6 +229,14 @@ class IssueSubmissionList(
     menu_journal = 'editor'
     model = IssueSubmission
     template_name = 'userspace/journal/editor/issues.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueSubmissionList, self).get_context_data(**kwargs)
+        objects = context.get(self.context_object_name or 'object_list') \
+            .order_by('status', 'date_modified')
+        grouped = itertools.groupby(objects, key=lambda j: j.status)
+        context['grouped_submissions'] = {g[0]: list(g[1]) for g in grouped}
+        return context
 
     def get_queryset(self):
         qs = super(IssueSubmissionList, self).get_queryset()

@@ -14,10 +14,13 @@ from influxdb import InfluxDBClient
 from lxml import etree
 from plupload.models import ResumableFile
 
+from erudit.test.factories import JournalFactory
+
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
+from core.editor.test.factories import IssueSubmissionFactory
 
 from apps.userspace.journal.editor.views import IssueSubmissionApproveView
 from apps.userspace.journal.editor.views import IssueSubmissionArchiveView
@@ -32,6 +35,30 @@ _test_points = []
 def fake_write_points(points):
     global _test_points
     _test_points.extend(points)
+
+
+class TestIssueSubmissionList(BaseEditorTestCase):
+    def test_groups_issues_per_status(self):
+        # Setup
+        journal = JournalFactory.create(collection=self.collection)
+        issue_1 = IssueSubmissionFactory.create(journal=journal, status='D')
+        issue_2 = IssueSubmissionFactory.create(journal=journal, status='S')
+        issue_3 = IssueSubmissionFactory.create(journal=journal, status='S')
+        issue_4 = IssueSubmissionFactory.create(journal=journal, status='V')
+        issue_5 = IssueSubmissionFactory.create(journal=journal, status='D')
+        issue_6 = IssueSubmissionFactory.create(journal=journal, status='A')
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:journal:editor:issues', args=(journal.pk, ))
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 200
+        assert set(response.context['grouped_submissions']['D']) == set([issue_1, issue_5, ])
+        assert set(response.context['grouped_submissions']['S']) == set([issue_2, issue_3, ])
+        assert set(response.context['grouped_submissions']['V']) == set([issue_4, ])
+        assert set(response.context['grouped_submissions']['A']) == set([issue_6, ])
 
 
 class TestIssueSubmissionView(BaseEditorTestCase):
