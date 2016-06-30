@@ -34,6 +34,50 @@ from .forms import IssueSubmissionUploadForm
 logger = logging.getLogger(__name__)
 
 
+class IssueSubmissionListView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+    allow_production_team_access = True
+    menu_journal = 'editor'
+    model = IssueSubmission
+    template_name = 'userspace/journal/editor/issues.html'
+
+    def get_queryset(self):
+        qs = super(IssueSubmissionListView, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
+
+    def has_permission(self):
+        obj = self.get_permission_object()
+        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
+            or self.request.user.has_perm('editor.review_issuesubmission')
+
+
+class IssueSubmissionDetailView(
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DetailView):
+    allow_production_team_access = True
+    context_object_name = 'issue'
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
+    menu_journal = 'editor'
+    model = IssueSubmission
+    template_name = 'userspace/journal/editor/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueSubmissionDetailView, self).get_context_data(**kwargs)
+        transitions = self.object.\
+            get_available_user_status_transitions(self.request.user)
+        context['transitions'] = transitions
+        context['status_tracks'] = self.object.status_tracks.all()
+        return context
+
+    def get_queryset(self):
+        qs = super(IssueSubmissionDetailView, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
+
+    def has_permission(self):
+        obj = self.get_permission_object()
+        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
+            or self.request.user.has_perm('editor.review_issuesubmission')
+
+
 class IssueSubmissionCreate(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
     menu_journal = 'editor'
@@ -53,6 +97,11 @@ class IssueSubmissionCreate(
         context = super().get_context_data(**kwargs)
         context.update(csrf(self.request))
         return context
+
+    def get_success_url(self):
+        messages.success(self.request, _('La demande a été créé avec succès'))
+        return reverse(
+            'userspace:journal:editor:update', args=(self.current_journal.pk, self.object.pk, ))
 
     def form_valid(self, form):
         result = super().form_valid(form)
@@ -112,7 +161,9 @@ class IssueSubmissionUpdate(
         return context
 
     def get_success_url(self):
-        return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
+        messages.success(self.request, _('La demande a été enregistrée avec succès'))
+        return reverse(
+            'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
 
     def has_permission(self):
         obj = self.get_permission_object()
@@ -220,23 +271,6 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
 
     def has_permission(self):
         return self.request.user.has_perm('editor.review_issuesubmission')
-
-
-class IssueSubmissionListView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
-    allow_production_team_access = True
-    menu_journal = 'editor'
-    model = IssueSubmission
-    template_name = 'userspace/journal/editor/issues.html'
-
-    def get_queryset(self):
-        qs = super(IssueSubmissionListView, self).get_queryset()
-        return qs.filter(journal=self.current_journal)
-
-    def has_permission(self):
-        obj = self.get_permission_object()
-        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
-            or self.request.user.has_perm('editor.review_issuesubmission')
 
 
 class IssueSubmissionDeleteView(

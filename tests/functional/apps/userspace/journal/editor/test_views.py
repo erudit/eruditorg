@@ -98,8 +98,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         args['year'] = '2016'
         args['number'] = '01'
         response = self.client.post(url, data=args)
-        expected_url = reverse('userspace:journal:editor:issues',
-                               kwargs={'journal_pk': self.journal.pk})
+        expected_url = reverse('userspace:journal:editor:detail',
+                               args=(self.journal.pk, self.issue_submission.pk))
         self.assertRedirects(response, expected_url)
 
     def test_logged_add_journalsubmission(self):
@@ -238,6 +238,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         middleware = SessionMiddleware()
         middleware.process_request(request)
         request.session.save()
+        MessageMiddleware().process_request(request)
         view = IssueSubmissionCreate(request=request, journal_pk=self.journal.pk)
         view.current_journal = self.journal
 
