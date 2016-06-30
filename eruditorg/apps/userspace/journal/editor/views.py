@@ -222,7 +222,7 @@ class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
         return self.request.user.has_perm('editor.review_issuesubmission')
 
 
-class IssueSubmissionList(
+class IssueSubmissionListView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     allow_production_team_access = True
     menu_journal = 'editor'
@@ -230,7 +230,7 @@ class IssueSubmissionList(
     template_name = 'userspace/journal/editor/issues.html'
 
     def get_queryset(self):
-        qs = super(IssueSubmissionList, self).get_queryset()
+        qs = super(IssueSubmissionListView, self).get_queryset()
         return qs.filter(journal=self.current_journal)
 
     def has_permission(self):
