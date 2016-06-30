@@ -20,6 +20,28 @@
       <h2>{% trans "Dépôt de fichiers de production" %}</h2>
     </div>
     {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+    <div class="row">
+      <div class="col-md-12">
+        <br />
+        {% if issue.status == 'D' %}
+        <div class="alert alert-warning">
+          {% trans "Brouillon" %}
+        </div>
+        {% elif issue.status == 'S' %}
+        <div class="alert alert-warning">
+          {% trans "Demande soumise" %}
+        </div>
+        {% elif issue.status == 'V' %}
+        <div class="alert alert-success">
+          {% trans "Demande validée" %}
+        </div>
+        {% elif issue.status == 'A' %}
+        <div class="alert alert-info">
+          {% trans "Demande archivée" %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
     <div class="card-body">
       <div class="row">
         <div class="panel-group">
