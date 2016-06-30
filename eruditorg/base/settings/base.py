@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     # Third-party apps
     'modeltranslation',
     'post_office',
+    'taggit',
 
     # Django apps
     'django.contrib.admin',
