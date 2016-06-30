@@ -19,7 +19,7 @@ class SubscriptionMiddleware(object):
         # an institutional IP address range.
         ip = get_ip(request)
         ip_range = InstitutionIPAddressRange.objects \
-            .select_related('subscription') \
+            .select_related('subscription', 'subscription__organisation') \
             .filter(ip_start__lte=ip, ip_end__gte=ip).first()
         if ip_range is not None:
             request.subscription_type = 'institution'
