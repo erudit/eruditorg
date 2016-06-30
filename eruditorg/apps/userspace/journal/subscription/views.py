@@ -102,6 +102,7 @@ class IndividualJournalAccessSubscriptionCreateView(
 class IndividualJournalAccessSubscriptionDeleteView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     context_object_name = 'subscription'
+    force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
     menu_journal = 'subscription'
     model = JournalAccessSubscription
     permission_required = 'subscription.manage_individual_subscription'
@@ -120,6 +121,7 @@ class IndividualJournalAccessSubscriptionDeleteView(
 class IndividualJournalAccessSubscriptionCancelView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
+    force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
     menu_journal = 'subscription'
     model = AccountActionToken
     permission_required = 'subscription.manage_individual_subscription'

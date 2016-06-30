@@ -19,6 +19,7 @@ class JournalScopeMixin(object):
     be returned.
     """
     allow_production_team_access = False
+    force_scope_switch_to_pattern_name = None
     scope_session_key = 'userspace:journal-management:current-journal-id'
 
     def dispatch(self, request, *args, **kwargs):
@@ -31,6 +32,7 @@ class JournalScopeMixin(object):
         context = super(JournalScopeMixin, self).get_context_data(**kwargs)
         context['scope_current_journal'] = self.current_journal
         context['scope_user_journals'] = self.user_journals
+        context['force_scope_switch_to_pattern_name'] = self.force_scope_switch_to_pattern_name
         return context
 
     def get_user_journals(self):

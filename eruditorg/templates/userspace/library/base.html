@@ -9,7 +9,7 @@
     {% for o in scope_user_organisations %}
       {% if organisation_permission_required %}{% has_perm organisation_permission_required request.user o as can_switch %}{% endif %}
       <option
-        value="{% library_url o %}"
+        value="{% if not force_scope_switch_to_pattern_name %}{% library_url o %}{% else %}{% url force_scope_switch_to_pattern_name o.id %}{% endif %}"
         {% if o.id == scope_current_organisation.id %}selected{% endif %}
         {% if can_switch != None and not can_switch %} disabled{% endif %}>{{ o.name }}</option>
     {% endfor %}

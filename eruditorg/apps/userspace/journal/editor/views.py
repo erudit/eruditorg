@@ -65,6 +65,7 @@ class IssueSubmissionCreate(
 class IssueSubmissionUpdate(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
     allow_production_team_access = True
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
@@ -129,6 +130,7 @@ class IssueSubmissionTransitionView(
         SingleObjectTemplateResponseMixin, BaseDetailView):
     allow_production_team_access = True
     context_object_name = 'issue_submission'
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
     raise_exception = True
@@ -249,6 +251,7 @@ class IssueSubmissionList(
 
 class IssueSubmissionDeleteView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
     raise_exception = True

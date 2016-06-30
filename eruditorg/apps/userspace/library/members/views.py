@@ -59,6 +59,7 @@ class OrganisationMemberCreateView(
 class OrganisationMemberDeleteView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     context_object_name = 'member'
+    force_scope_switch_to_pattern_name = 'userspace:library:members:list'
     menu_library = 'members'
     permission_required = 'journal.manage_organisation_members'
     template_name = 'userspace/library/members/member_delete.html'
@@ -80,6 +81,7 @@ class OrganisationMemberDeleteView(
 class OrganisationMemberCancelView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
+    force_scope_switch_to_pattern_name = 'userspace:library:members:list'
     menu_library = 'members'
     model = AccountActionToken
     permission_required = 'journal.manage_organisation_members'
