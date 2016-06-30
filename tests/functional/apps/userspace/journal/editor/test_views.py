@@ -39,6 +39,7 @@ class TestIssueSubmissionDetailView(BaseEditorTestCase):
         # Setup
         self.issue_submission.submit()
         self.issue_submission.refuse()
+        self.issue_submission.save()
         User.objects.create_superuser(
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
@@ -279,6 +280,19 @@ class TestIssueSubmissionView(BaseEditorTestCase):
                 },
                 'measurement': 'erudit__issuesubmission__create',
             }])
+
+    def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self):
+        # Setup
+        self.issue_submission.submit()
+        self.issue_submission.save()
+        self.client.login(username=self.user.username, password='top_secret')
+        url = reverse(
+            'userspace:journal:editor:update',
+            kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 403
 
 
 class TestIssueSubmissionAttachmentView(BaseEditorTestCase):

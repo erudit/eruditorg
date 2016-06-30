@@ -14,9 +14,11 @@
 <div class="col-md-6 col-xs-12 col-centered">
   <section class="card">
     <div class="card-header">
+      {% if issue.is_draft %}
       <div class="pull-right">
         <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary btn-block">{% trans "Éditer la demande" %}</a>
       </div>
+      {% endif %}
       <h2>{% trans "Dépôt de fichiers de production" %}</h2>
     </div>
     {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}

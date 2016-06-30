@@ -167,8 +167,10 @@ class IssueSubmissionUpdate(
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return self.request.user.has_perm('editor.manage_issuesubmission', obj) \
-            or self.request.user.has_perm('editor.review_issuesubmission')
+        issue_submission = self.get_object()
+        return issue_submission.is_draft and (
+            self.request.user.has_perm('editor.manage_issuesubmission', obj) or
+            self.request.user.has_perm('editor.review_issuesubmission'))
 
 
 class IssueSubmissionTransitionView(
