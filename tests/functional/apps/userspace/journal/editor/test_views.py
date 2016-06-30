@@ -72,7 +72,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         response = self.client.get(
             reverse(
                 'userspace:journal:editor:update',
-                kwargs={'journal_pk': self.journal.pk, 'pk': self.other_issue_submission.pk}
+                kwargs={'journal_pk': self.other_journal.pk, 'pk': self.other_issue_submission.pk}
             )
         )
 

@@ -82,3 +82,6 @@ class AuthorizationDeleteView(
 
     def get_success_url(self):
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+
+    def get_target_instance(self):
+        return self.current_journal
