@@ -34,6 +34,25 @@ def fake_write_points(points):
     _test_points.extend(points)
 
 
+class TestIssueSubmissionDetailView(BaseEditorTestCase):
+    def test_includes_the_status_tracks_into_the_context(self):
+        # Setup
+        self.issue_submission.submit()
+        self.issue_submission.refuse()
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        url = reverse(
+            'userspace:journal:editor:detail', args=(self.journal.pk, self.issue_submission.pk))
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 200
+        assert len(response.context['status_tracks']) == 2
+        assert response.context['status_tracks'][0].status == 'S'
+        assert response.context['status_tracks'][1].status == 'D'
+
+
 class TestIssueSubmissionView(BaseEditorTestCase):
     def tearDown(self):
         super(TestIssueSubmissionView, self).tearDown()
