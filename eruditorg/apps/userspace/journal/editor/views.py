@@ -222,7 +222,7 @@ class IssueSubmissionTransitionView(
 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
-        return reverse('userspace:journal:editor:update',
+        return reverse('userspace:journal:editor:detail',
                        args=(self.current_journal.pk, self.object.pk, ))
 
     def get_context_data(self, **kwargs):
