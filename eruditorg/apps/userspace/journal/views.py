@@ -5,8 +5,10 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
+from erudit.models import Journal
 
 from base.viewmixins import LoginRequiredMixin
+from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 
 from .viewmixins import JournalScopeMixin
@@ -34,7 +36,9 @@ class JournalSectionEntryPointView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
-        journal_qs = get_editable_journals(self.request.user)
+        journal_qs = Journal.objects.filter(collection__code='erudit') \
+            if is_production_team_member(self.request.user) \
+            else get_editable_journals(self.request.user)
         journal_count = journal_qs.count()
         if journal_count:
             return reverse(
