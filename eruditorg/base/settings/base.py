@@ -71,6 +71,7 @@ INSTALLED_APPS = (
     'polymorphic',
     'taggit',
     'post_office',
+    'taggit',
 
     # Django apps
     'django.contrib.admin',

@@ -146,27 +146,27 @@
 
 {% block footer %}
 
+{% if request.subscription_type != 'open_access' %}
 <footer id="erudit-subscription-type" class="container margin-top">
 
   <div class="row">
     <header class="col-md-12">
-      <div class="alert alert-warning">
+      <div class="alert alert-warning text-center">
         <h5 class="bold">{% trans "Votre accès Érudit" %}</h5>
         {% if request.subscription_type == 'institution' %}
-          <p class="text-muted">{{ request.institutional_account.institution.name }}</p>
-          {% if request.institutional_account.badge %}
-            <img src="{{ request.institutional_account.badge.url }}" alt="" />
+          <p class="text-muted">{{ request.subscription.organisation.name }}</p>
+          {% if request.subscription.organisation.badge %}
+            <br />
+            <img src="{{ request.subscription.organisation.badge.url }}" alt="" />
           {% endif %}
         {% elif request.subscription_type == 'individual' %}
           <p class="text-muted">{% blocktrans trimmed with username=request.user.username %}Accès individuel ({{ username }}){% endblocktrans %}</p>
-        {% elif request.subscription_type == 'open_access' %}
-          <p class="text-muted">{% trans "Libre accès" %}</p>
         {% endif %}
       </div>
     </header>
   </div>
-
 </footer>
+{% endif %}
 
 {% include "public/partials/footer.html" %}
 
