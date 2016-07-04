@@ -13,6 +13,14 @@ nav#main-nav {
     margin-right: 30px;
     margin-bottom: 0;
 
+    .select2{
+      min-width: 250px !important;
+    }
+
+    .select2-selection__rendered{
+      text-align: left;
+    }
+
     .select2-selection{
       height: 30px;
     }
