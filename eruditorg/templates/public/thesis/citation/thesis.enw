@@ -1,0 +1,5 @@
+%0 Thesis
+%T {{ thesis.title }}
+%A {{ thesis.author.lastname }}, {{ thesis.author.firstname }}
+%D {{ thesis.publication_year }}
+%U {{ thesis.url }}

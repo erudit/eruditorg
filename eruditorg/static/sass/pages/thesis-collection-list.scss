@@ -1,0 +1,117 @@
+#collection_thesis_list{
+  .thesis-list-head{
+    margin-bottom: 20px;
+  }
+
+  .thesis-list-wrapper{
+    padding-right: 100px;
+
+    h3{
+      padding: 8px 0;
+      border-bottom: 2px solid $gray;
+    }
+
+    .actions-wrapper{
+      height: 50px;
+
+      #div_id_sort_by{
+        float: right;
+
+        label{
+          display: inline-block;
+        }
+
+        select{
+          display: inline-block;
+          width: auto !important;
+        }
+      }
+    }
+
+    ul.theses{
+      li.thesis{
+        .thesis-extend, .thesis-reduce{
+          font-size: 24px;
+          color: $coral-red;
+        }
+        .thesis-reduce{
+          display: none;
+        }
+
+        a.thesis-link{
+          font-weight: bold;
+
+          &:hover, &:focus{
+            text-decoration: none;
+          }
+        }
+
+        .description{
+          margin-top: 6px;
+          padding: 10px;
+          display: none;
+          background: $gray-lighter;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .sidebar{
+    h3{
+      padding: 8px 0;
+      border-bottom: 2px solid $gray;
+    }
+
+    dt, dd {
+      display: block;
+      float: none;
+      width: auto;
+    }
+
+    dt {
+      font-size: small;
+      margin-top: 1.25em;
+    }
+
+    dd {
+      margin-bottom: 1.25em;
+    }
+
+    .switcher-wrapper{
+      margin-bottom: 10px;
+      height: 70px;
+
+      label{
+        font-size: 14px;
+      }
+
+      select{
+        display: inline-block;
+        float: left;
+        width: auto !important;
+      }
+    }
+
+    .at-a-glance{
+      a.thesis-link{
+        margin: 8px 0;
+        display: block;
+
+        &:hover, &:focus{
+          text-decoration: none;
+        }
+
+        .thesis-title{
+          display: block;
+        }
+
+        .thesis-author{
+          display: block;
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

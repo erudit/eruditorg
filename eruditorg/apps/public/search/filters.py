@@ -270,7 +270,8 @@ class EruditDocumentSolrFilter(object):
         # TODO: this should be updated when we are sure that the set of Érudit documents provided by
         # the database is the same as the one provided by the Solr search index.
         solr_query = solr_query.filter(
-            Q(Corpus_fac='Article') | Q(Corpus_fac='Culturel'), Fonds_fac='Érudit')
+            Q(Corpus_fac='Article') | Q(Corpus_fac='Culturel') | Q(Corpus_fac='Thèses'),
+            Fonds_fac='Érudit')
 
         # Prepares the values used to paginate the results using Solr.
         page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)

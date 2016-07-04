@@ -5,6 +5,7 @@ import ResultsController from './search/ResultsController';
 import ArticleDetailController from './journal/ArticleDetailController';
 import IssueDetailController from './journal/IssueDetailController';
 import JournalListController from './journal/JournalListController';
+import CollectionListController from './thesis/CollectionListController';
 
 
 const controllers = {
@@ -15,6 +16,7 @@ const controllers = {
   'public:journal:article_detail': ArticleDetailController,
   'public:journal:issue_detail': IssueDetailController,
   'public:journal:journal_list': JournalListController,
+  'public:thesis:collection_list': CollectionListController,
 };
 
 export default controllers;

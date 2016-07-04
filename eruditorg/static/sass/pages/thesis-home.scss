@@ -1,0 +1,59 @@
+#thesis_home{
+  .repositories-wrapper{
+    margin-top: 20px;
+
+    .title{
+      padding-top: 20px;
+      padding-bottom: 20px;
+      @include grid-cell-border('top', 1px, $black);
+    }
+
+    ul#repositories{
+      list-style: none;
+
+      li.repository{
+        margin-bottom: 20px;
+        display: block;
+
+        a.collection-link{
+          display: block;
+
+          &:hover, &:focus{
+            text-decoration: none;
+          }
+
+          .collection-logo{
+            padding: 10px 0;
+            display: block;
+            border-bottom: 2px solid $gray-light;
+          }
+
+          .collection-title{
+            margin: 10px 0;
+            display: block;
+            height: 50px;
+            font-size: 18px;
+          }
+        }
+
+        .recent-theses{
+          margin-top: 15px;
+
+          a.thesis{
+            padding: 6px 0;
+            display: block;
+            border-bottom: 2px solid $gray-light;
+
+            &:hover, &:focus{
+              text-decoration: none;
+            }
+
+            &:last-child{
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

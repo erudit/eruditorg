@@ -1,0 +1,24 @@
+{% extends "public/thesis/collection_list_base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock page_title %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author_letter %}">{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}</a>
+{% endblock breadcrumb %}
+
+{% block inner_title %}{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock inner_title %}
+
+{% block inner_list_switcher %}
+<div id="div_id_switch_letter" class="switcher-wrapper form-group">
+  <div class="controls">
+    <label class="mono-space control-label" for="switch_letter">{% trans "Parcourir d'autres auteurs" %}</label>
+    &nbsp;
+    <select id="switch_letter" onChange="window.location.href=this.value">
+      {% for letter in other_author_letters %}
+      <option value="{% url 'public:thesis:collection_list_per_author_name' collection.pk letter.author_firstletter %}?sort_by={{ sort_by }}"{% if letter.author_firstletter == author_letter %} selected disabled{% endif %}>{{ letter.author_firstletter }} ({{ letter.total }})</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+{% endblock inner_list_switcher %}
