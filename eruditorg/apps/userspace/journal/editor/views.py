@@ -30,6 +30,7 @@ from ..viewmixins import JournalScopePermissionRequiredMixin
 from .forms import IssueSubmissionForm
 from .forms import IssueSubmissionTransitionCommentForm
 from .forms import IssueSubmissionUploadForm
+from .signals import userspace_post_transition
 
 logger = logging.getLogger(__name__)
 
@@ -129,6 +130,7 @@ class IssueSubmissionTransitionView(
     model = IssueSubmission
     raise_exception = True
     template_name = 'userspace/journal/editor/issuesubmission_transition.html'
+    transition_signal = userspace_post_transition
     use_comment_form = False
 
     # The following attributes should be defined in subclasses
@@ -163,6 +165,11 @@ class IssueSubmissionTransitionView(
                 'erudit__issuesubmission__change_status',
                 tags={'old_status': old_status, 'new_status': self.object.status},
                 author_id=self.request.user.id, submission_id=self.object.id)
+
+        # Send a signal in order to notify the update of the issue submission's status
+        self.transition_signal.send(
+            sender=self, issue_submission=self.object, transition_name=self.transition_name,
+            request=request)
 
         return HttpResponseRedirect(success_url)
 
