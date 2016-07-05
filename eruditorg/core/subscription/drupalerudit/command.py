@@ -98,7 +98,7 @@ class Command(BaseCommand):
                     UsersRoles.objects.using(db_id).filter(uid=drupal_user.uid)
                     .values_list('rid'))
             except OperationalError:
-                continue
+                self.stdout.write(self.style.WARNING('  inexistant DB: "{}"'.format(db_id)))
 
             if drupal_user_roles:
                 # Add the user to the members of the considered Journal
