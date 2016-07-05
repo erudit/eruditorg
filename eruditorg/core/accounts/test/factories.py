@@ -4,11 +4,11 @@ import factory
 
 from base.test.factories import UserFactory
 
-from ..models import AbonnementProfile
+from ..models import LegacyAccountProfile
 
 
-class AbonnementProfileFactory(factory.django.DjangoModelFactory):
+class LegacyAccountProfileFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
 
     class Meta:
-        model = AbonnementProfile
+        model = LegacyAccountProfile

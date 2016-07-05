@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
 from base.viewmixins import LoginRequiredMixin
-
-from .forms import PasswordChangeForm
 
 
 class UserPasswordChangeView(LoginRequiredMixin, FormView):

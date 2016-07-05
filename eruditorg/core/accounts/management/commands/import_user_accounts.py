@@ -7,13 +7,13 @@ from django.core.management.base import BaseCommand
 
 from erudit.models import Journal
 
-from core.accounts.mandragore import can_create_mandragore_user
-from core.accounts.mandragore import create_or_update_mandragore_user
-from core.accounts.mandragore import fetch_accounts_from_mandragore
-from core.accounts.mandragore import fetch_series_from_edinum
-from core.accounts.mandragore import fetch_users_from_edinum
-from core.accounts.mandragore import MandragoreError
-from core.accounts.mandragore import user_coherent_with_mandragore
+from core.accounts.utils.mandragore import can_create_mandragore_user
+from core.accounts.utils.mandragore import create_or_update_mandragore_user
+from core.accounts.utils.mandragore import fetch_accounts_from_mandragore
+from core.accounts.utils.mandragore import fetch_series_from_edinum
+from core.accounts.utils.mandragore import fetch_users_from_edinum
+from core.accounts.utils.mandragore import MandragoreError
+from core.accounts.utils.mandragore import user_coherent_with_mandragore
 
 log = logging.getLogger(__name__)
 
