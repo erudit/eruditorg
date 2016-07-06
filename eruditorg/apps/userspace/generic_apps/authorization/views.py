@@ -97,3 +97,13 @@ class AuthorizationDeleteView(LoginRequiredMixin, DeleteView):
         response = super(AuthorizationDeleteView, self).delete(request, *args, **kwargs)
         messages.success(self.request, _("L'accès a été supprimé avec succès"))
         return response
+
+    def get_queryset(self):
+        qs = super(AuthorizationDeleteView, self).get_queryset()
+        target_instance = self.get_target_instance()
+        ct = ContentType.objects.get_for_model(target_instance)
+        return qs.filter(content_type=ct, object_id=target_instance.pk)
+
+    def get_target_instance(self):
+        """ Returns the target instance for which we want to delete authorizations. """
+        raise NotImplementedError

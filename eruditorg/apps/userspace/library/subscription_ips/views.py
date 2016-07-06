@@ -57,10 +57,15 @@ class InstitutionIPAddressRangeCreateView(
 class InstitutionIPAddressRangeDeleteView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     context_object_name = 'ip_range'
+    force_scope_switch_to_pattern_name = 'userspace:library:subscription_ips:list'
     menu_library = 'subscription_ips'
     model = InstitutionIPAddressRange
     permission_required = 'subscription.manage_organisation_subscription_ips'
     template_name = 'userspace/library/subscription_ips/ipaddressrange_delete.html'
+
+    def get_queryset(self):
+        qs = super(InstitutionIPAddressRangeDeleteView, self).get_queryset()
+        return qs.filter(subscription__organisation=self.current_organisation)
 
     def get_success_url(self):
         messages.success(self.request, _("La plage d'adresse IP a été supprimée avec succès"))

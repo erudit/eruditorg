@@ -66,6 +66,7 @@ class IssueSubmissionCreate(
 class IssueSubmissionUpdate(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
     allow_production_team_access = True
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionUploadForm
@@ -112,6 +113,10 @@ class IssueSubmissionUpdate(
 
         return context
 
+    def get_queryset(self):
+        qs = super(IssueSubmissionUpdate, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
+
     def get_success_url(self):
         return reverse('userspace:journal:editor:issues', args=(self.current_journal.pk, ))
 
@@ -126,6 +131,7 @@ class IssueSubmissionTransitionView(
         SingleObjectTemplateResponseMixin, BaseDetailView):
     allow_production_team_access = True
     context_object_name = 'issue_submission'
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
     raise_exception = True
@@ -169,6 +175,10 @@ class IssueSubmissionTransitionView(
 
     def post(self, request, *args, **kwargs):
         return self.apply_transition(request, *args, **kwargs)
+
+    def get_queryset(self):
+        qs = super(IssueSubmissionTransitionView, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
@@ -250,10 +260,15 @@ class IssueSubmissionList(
 
 class IssueSubmissionDeleteView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+    force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
     raise_exception = True
     template_name = 'userspace/journal/editor/delete.html'
+
+    def get_queryset(self):
+        qs = super(IssueSubmissionDeleteView, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
         messages.success(self.request, _('La soumission a été supprimée avec succès'))

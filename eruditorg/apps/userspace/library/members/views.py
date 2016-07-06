@@ -2,7 +2,6 @@
 
 from account_actions.models import AccountActionToken
 from django.contrib import messages
-from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -60,6 +59,7 @@ class OrganisationMemberCreateView(
 class OrganisationMemberDeleteView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     context_object_name = 'member'
+    force_scope_switch_to_pattern_name = 'userspace:library:members:list'
     menu_library = 'members'
     permission_required = 'journal.manage_organisation_members'
     template_name = 'userspace/library/members/member_delete.html'
@@ -71,8 +71,7 @@ class OrganisationMemberDeleteView(
         return HttpResponseRedirect(success_url)
 
     def get_queryset(self):
-        user_model = get_user_model()
-        return user_model.objects.all()
+        return self.current_organisation.members.all()
 
     def get_success_url(self):
         messages.success(self.request, _("Le membre a été retiré de l'organisation avec succès"))
@@ -82,6 +81,7 @@ class OrganisationMemberDeleteView(
 class OrganisationMemberCancelView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
+    force_scope_switch_to_pattern_name = 'userspace:library:members:list'
     menu_library = 'members'
     model = AccountActionToken
     permission_required = 'journal.manage_organisation_members'
@@ -89,7 +89,8 @@ class OrganisationMemberCancelView(
 
     def get_queryset(self):
         return AccountActionToken.pending_objects.filter(
-            content_type=ContentType.objects.get_for_model(self.current_organisation))
+            content_type=ContentType.objects.get_for_model(self.current_organisation),
+            object_id=self.current_organisation.id)
 
     def post(self, request, *args, **kwargs):
         self.request = request

@@ -11,7 +11,7 @@
     {% for j in scope_user_journals %}
       {% if journal_permission_required %}{% has_perm journal_permission_required request.user j as can_switch %}{% endif %}
       <option
-        value="{% journal_url j %}"
+        value="{% if not force_scope_switch_to_pattern_name %}{% journal_url j %}{% else %}{% url force_scope_switch_to_pattern_name j.id %}{% endif %}"
         {% if j.id == scope_current_journal.id %}selected{% endif %}
         {% if can_switch != None and not can_switch %} disabled{% endif %}>{{ j.name }}</option>
     {% endfor %}

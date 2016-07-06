@@ -51,6 +51,7 @@ class AuthorizationCreateView(
 
 class AuthorizationDeleteView(
         OrganisationScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationDeleteView):
+    force_scope_switch_to_pattern_name = 'userspace:library:authorization:list'
     menu_library = 'authorization'
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/library/authorization/authorization_confirm_delete.html'
@@ -62,3 +63,6 @@ class AuthorizationDeleteView(
     def get_success_url(self):
         return reverse(
             'userspace:library:authorization:list', args=(self.current_organisation.id, ))
+
+    def get_target_instance(self):
+        return self.current_organisation

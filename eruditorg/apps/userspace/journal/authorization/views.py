@@ -72,6 +72,7 @@ class AuthorizationCreateView(
 
 class AuthorizationDeleteView(
         JournalScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationDeleteView):
+    force_scope_switch_to_pattern_name = 'userspace:journal:authorization:list'
     menu_journal = 'authorization'
     permission_required = 'authorization.manage_authorizations'
     template_name = 'userspace/journal/authorization/authorization_confirm_delete.html'
@@ -82,3 +83,6 @@ class AuthorizationDeleteView(
 
     def get_success_url(self):
         return reverse('userspace:journal:authorization:list', args=(self.current_journal.id, ))
+
+    def get_target_instance(self):
+        return self.current_journal

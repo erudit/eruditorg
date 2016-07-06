@@ -18,6 +18,7 @@ class OrganisationScopeMixin(object):
     instance. The Organisation instance must have the current user in its members. If not a
     PermissionDenied error will be returned.
     """
+    force_scope_switch_to_pattern_name = None
     scope_session_key = 'userspace:library-management:current-organisation-id'
 
     def dispatch(self, request, *args, **kwargs):
@@ -30,6 +31,7 @@ class OrganisationScopeMixin(object):
         context = super(OrganisationScopeMixin, self).get_context_data(**kwargs)
         context['scope_current_organisation'] = self.current_organisation
         context['scope_user_organisations'] = self.user_organisations
+        context['force_scope_switch_to_pattern_name'] = self.force_scope_switch_to_pattern_name
         return context
 
     def get_user_organisations(self):

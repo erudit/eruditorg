@@ -102,10 +102,15 @@ class IndividualJournalAccessSubscriptionCreateView(
 class IndividualJournalAccessSubscriptionDeleteView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     context_object_name = 'subscription'
+    force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
     menu_journal = 'subscription'
     model = JournalAccessSubscription
     permission_required = 'subscription.manage_individual_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_delete.html'
+
+    def get_queryset(self):
+        qs = super(IndividualJournalAccessSubscriptionDeleteView, self).get_queryset()
+        return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
         messages.success(self.request, _("L'abonnement a été supprimé avec succès"))
@@ -116,6 +121,7 @@ class IndividualJournalAccessSubscriptionDeleteView(
 class IndividualJournalAccessSubscriptionCancelView(
         LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
+    force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
     menu_journal = 'subscription'
     model = AccountActionToken
     permission_required = 'subscription.manage_individual_subscription'
@@ -123,7 +129,8 @@ class IndividualJournalAccessSubscriptionCancelView(
 
     def get_queryset(self):
         return AccountActionToken.pending_objects.filter(
-            content_type=ContentType.objects.get_for_model(self.current_journal))
+            content_type=ContentType.objects.get_for_model(self.current_journal),
+            object_id=self.current_journal.id)
 
     def post(self, request, *args, **kwargs):
         self.request = request
