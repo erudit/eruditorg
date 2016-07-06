@@ -7,7 +7,6 @@ from functools import reduce
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils import formats
 from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
@@ -464,21 +463,21 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number. """
+        erudit_object = self.erudit_object
+        publication_period = erudit_object.publication_period if erudit_object else self.year
         if self.volume and self.number:
             return _(
                 'Volume {volume}, numéro {number}, {publication_date}'.format(
-                    volume=self.volume, number=self.number,
-                    publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
+                    volume=self.volume, number=self.number, publication_date=publication_period))
         elif self.volume:
             return _(
                 'Volume {volume}, {publication_date}'.format(
-                    volume=self.volume,
-                    publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
+                    volume=self.volume, publication_date=publication_period))
         elif self.number:
             return _(
                 'Numéro {number}, {publication_date}'.format(
-                    number=self.number,
-                    publication_date=formats.date_format(self.date_published, 'YEAR_MONTH_FORMAT')))
+                    number=self.number, publication_date=publication_period))
+        return publication_period
 
     @property
     def has_movable_limitation(self):

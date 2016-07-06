@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.11 - Under development
+--------------------------
+
+* Ensure that issues without number or volume can always have a title
+
 0.1.10
 ------
 
