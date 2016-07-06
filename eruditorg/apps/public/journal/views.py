@@ -149,8 +149,8 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
     def get_base_queryset(self):
         """ Returns the base queryset that will be used to retrieve the authors. """
         return Author.objects.prefetch_related('article_set') \
-            .filter(article__issue__journal_id=self.journal.id).order_by('lastname') \
-            .distinct()
+            .filter(lastname__isnull=False, article__issue__journal_id=self.journal.id) \
+            .order_by('lastname').distinct()
 
     def get_letters_queryset_dict(self):
         """ Returns an ordered dict containing an Author queryset for each letter. """
