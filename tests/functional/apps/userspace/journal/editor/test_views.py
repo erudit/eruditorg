@@ -37,28 +37,24 @@ def fake_write_points(points):
     _test_points.extend(points)
 
 
-class TestIssueSubmissionList(BaseEditorTestCase):
-    def test_groups_issues_per_status(self):
+class TestIssueSubmissionDetailView(BaseEditorTestCase):
+    def test_includes_the_status_tracks_into_the_context(self):
         # Setup
-        journal = JournalFactory.create(collection=self.collection)
-        issue_1 = IssueSubmissionFactory.create(journal=journal, status='D')
-        issue_2 = IssueSubmissionFactory.create(journal=journal, status='S')
-        issue_3 = IssueSubmissionFactory.create(journal=journal, status='S')
-        issue_4 = IssueSubmissionFactory.create(journal=journal, status='V')
-        issue_5 = IssueSubmissionFactory.create(journal=journal, status='D')
-        issue_6 = IssueSubmissionFactory.create(journal=journal, status='A')
+        self.issue_submission.submit()
+        self.issue_submission.refuse()
+        self.issue_submission.save()
         User.objects.create_superuser(
             username='admin', email='admin@xyz.com', password='top_secret')
         self.client.login(username='admin', password='top_secret')
-        url = reverse('userspace:journal:editor:issues', args=(journal.pk, ))
+        url = reverse(
+            'userspace:journal:editor:detail', args=(self.journal.pk, self.issue_submission.pk))
         # Run
         response = self.client.get(url)
         # Check
         assert response.status_code == 200
-        assert set(response.context['grouped_submissions']['D']) == set([issue_1, issue_5, ])
-        assert set(response.context['grouped_submissions']['S']) == set([issue_2, issue_3, ])
-        assert set(response.context['grouped_submissions']['V']) == set([issue_4, ])
-        assert set(response.context['grouped_submissions']['A']) == set([issue_6, ])
+        assert len(response.context['status_tracks']) == 2
+        assert response.context['status_tracks'][0].status == 'S'
+        assert response.context['status_tracks'][1].status == 'D'
 
 
 class TestIssueSubmissionView(BaseEditorTestCase):
@@ -125,8 +121,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         args['year'] = '2016'
         args['number'] = '01'
         response = self.client.post(url, data=args)
-        expected_url = reverse('userspace:journal:editor:issues',
-                               kwargs={'journal_pk': self.journal.pk})
+        expected_url = reverse('userspace:journal:editor:detail',
+                               args=(self.journal.pk, self.issue_submission.pk))
         self.assertRedirects(response, expected_url)
 
     def test_logged_add_journalsubmission(self):
@@ -265,6 +261,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         middleware = SessionMiddleware()
         middleware.process_request(request)
         request.session.save()
+        MessageMiddleware().process_request(request)
         view = IssueSubmissionCreate(request=request, journal_pk=self.journal.pk)
         view.current_journal = self.journal
 
@@ -286,6 +283,19 @@ class TestIssueSubmissionView(BaseEditorTestCase):
                 },
                 'measurement': 'erudit__issuesubmission__create',
             }])
+
+    def test_cannot_update_an_issue_submission_if_it_is_not_a_draft(self):
+        # Setup
+        self.issue_submission.submit()
+        self.issue_submission.save()
+        self.client.login(username=self.user.username, password='top_secret')
+        url = reverse(
+            'userspace:journal:editor:update',
+            kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 403
 
 
 class TestIssueSubmissionAttachmentView(BaseEditorTestCase):

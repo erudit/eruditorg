@@ -26,22 +26,48 @@
         <h2>{% trans "Historique" %}</h2>
       </div>
     </div>
-    {% if grouped_submissions.D %}
-    <h3>{% trans "Brouillons" %}</h3>
-    {% include "userspace/journal/editor/partials/issuesubmission_list.html" with issues=grouped_submissions.D %}
-    {% endif %}
-    {% if grouped_submissions.S %}
-    <h3>{% trans "Demandes soumises" %}</h3>
-    {% include "userspace/journal/editor/partials/issuesubmission_list.html" with issues=grouped_submissions.S %}
-    {% endif %}
-    {% if grouped_submissions.V %}
-    <h3>{% trans "Demandes validées" %}</h3>
-    {% include "userspace/journal/editor/partials/issuesubmission_list.html" with issues=grouped_submissions.V %}
-    {% endif %}
-    {% if grouped_submissions.A %}
-    <h3>{% trans "Demandes archivées" %}</h3>
-    {% include "userspace/journal/editor/partials/issuesubmission_list.html" with issues=grouped_submissions.A %}
-    {% endif %}
+    <ul id="id_issuesubmission_list" class="row card-body">
+    {% for issue_submission in object_list|dictsortreversed:"date_created" %}
+      <li class="col-xs-12">
+        <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
+           class="btn btn-link btn-block">
+          <span class="pull-right">
+            <span class="status">
+              {% if issue_submission.status == 'D' %}
+              {% trans "Brouillon" %}
+              {% elif issue_submission.status == 'S' %}
+              {% trans "Soumis" %}
+              {% elif issue_submission.status == 'V' %}
+              {% trans "Validé" %}
+              {% elif issue_submission.status == 'A' %}
+              {% trans "Archivé" %}
+              {% endif %}
+            </span>
+          </span>
+          <span class="title">
+            {{ issue_submission.year }},
+            {% if issue_submission.volume %}
+            {% trans "vol." %} {{ issue_submission.volume }},
+            {% endif %}
+            {% trans "n°" %} {{ issue_submission.number }}
+          </span>
+          <span class="metadata-wrapper">
+            <span class="metadata">
+              <span class="metadata-title">{% trans "Revue" %}</span>
+              <span class="metadata-value">{{ issue_submission.journal.name }}</span>
+            </span>
+            <span class="metadata">
+              <span class="metadata-value"><i>
+                {% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
+                  Ajouté le {{ created }}
+                {% endblocktrans %}
+              </i></span>
+            </span>
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
   </section>
 </div>
 {% endblock %}
