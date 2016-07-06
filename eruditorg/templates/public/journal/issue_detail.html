@@ -5,11 +5,9 @@
 
 {% block data_controller %}public:journal:issue_detail{% endblock data_controller %}
 
-{% block zone_title %}{{ journal.name }}{% endblock %}
-
 {% block page_title %}
 {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
-{% include "public/journal/partials/issue_volume.html" %}
+{% include "public/journal/partials/issue_volume.html" %} – {{ journal.name }}
 {% endblock page_title %}
 
 {% block meta_tags %}

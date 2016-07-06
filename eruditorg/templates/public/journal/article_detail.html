@@ -2,6 +2,14 @@
 {% load i18n staticfiles %}
 {% load public_journal_tags %}
 
+{% block page_title %}
+{{ article.title }} –
+{% if article.issue.erudit_object.html_theme %}{{ article.issue.erudit_object.html_theme|safe }}
+{% else %}{% include "public/journal/partials/issue_volume.html" %}
+{% endif %} –
+{{ article.issue.journal.name }}
+{% endblock page_title %}
+
 {% block data_controller %}public:journal:article_detail{% endblock data_controller %}
 
 {% block meta_tags %}
