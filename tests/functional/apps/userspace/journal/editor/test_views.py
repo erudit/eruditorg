@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.messages.middleware import MessageMiddleware
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.core import mail
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
@@ -549,6 +550,29 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
                 'measurement': 'erudit__issuesubmission__change_status',
             }])
 
+    def test_sends_a_notification_email(self):
+        # Setup
+        u = User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:journal:editor:transition_approve',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        self.issue_submission.contact = u
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        assert response.status_code == 302
+        self.issue_submission.refresh_from_db()
+        assert self.issue_submission.status == IssueSubmission.VALID
+        assert len(mail.outbox) == 1
+        assert mail.outbox[0].to[0] == u.email
+
 
 class TestIssueSubmissionRefuseView(BaseEditorTestCase):
     def tearDown(self):
@@ -659,6 +683,29 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
                 },
                 'measurement': 'erudit__issuesubmission__change_status',
             }])
+
+    def test_sends_a_notification_email(self):
+        # Setup
+        u = User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+
+        self.client.login(username='admin', password='top_secret')
+        url = reverse('userspace:journal:editor:transition_refuse',
+                      args=(self.journal.pk, self.issue_submission.pk, ))
+
+        self.issue_submission.contact = u
+        self.issue_submission.submit()
+        self.issue_submission.save()
+
+        # Run
+        response = self.client.post(url)
+
+        # Check
+        assert response.status_code == 302
+        self.issue_submission.refresh_from_db()
+        assert self.issue_submission.status == IssueSubmission.DRAFT
+        assert len(mail.outbox) == 1
+        assert mail.outbox[0].to[0] == u.email
 
 
 class TestIssueSubmissionArchiveView(BaseEditorTestCase):
