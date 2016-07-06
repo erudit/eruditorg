@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.10 - Under development
+--------------------------
+
+* Fix an ``AttributeError`` that occured when fetching image information associated with Fedora articles
+
 0.1.9
 -----
 
