@@ -315,6 +315,7 @@ class TestArticleDetailView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
 
 
+@override_settings(DEBUG=True)
 class TestArticleRawPdfView(BaseEruditTestCase):
     def setUp(self):
         super(TestArticleRawPdfView, self).setUp()

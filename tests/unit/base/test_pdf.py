@@ -4,23 +4,35 @@ import io
 import os.path as op
 
 from django.http import HttpResponse
-from django.test import TestCase
 from django.test.utils import override_settings
+from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
+from erudit.test.testcases import BaseEruditTestCase
 
 from base.pdf import generate_pdf
 
 
-class TestGeneratePdfTool(TestCase):
+@override_settings(DEBUG=True)
+class TestGeneratePdfTool(BaseEruditTestCase):
     def test_generates_a_pdf_into_a_bytes_stream_by_default(self):
+        # Setup
+        issue = IssueFactory.create(journal=self.journal)
+        article = ArticleFactory.create(issue=issue)
         # Run & check
-        pdf = generate_pdf('public/journal/article_pdf_coverpage.html')
+        pdf = generate_pdf('public/journal/article_pdf_coverpage.html', context={
+            'article': article, 'issue': issue, 'journal': issue.journal})
         self.assertTrue(isinstance(pdf, io.BytesIO))
 
     def test_can_generate_a_pdf_into_a_http_response(self):
         # Setup
+        issue = IssueFactory.create(journal=self.journal)
+        article = ArticleFactory.create(issue=issue)
         response = HttpResponse(content_type='application/pdf')
         # Run & check
-        generate_pdf('public/journal/article_pdf_coverpage.html', file_object=response)
+        generate_pdf(
+            'public/journal/article_pdf_coverpage.html',
+            file_object=response, context={
+                'article': article, 'issue': issue, 'journal': issue.journal})
         self.assertTrue(isinstance(response.content, bytes))
         self.assertTrue(response.tell())
 
