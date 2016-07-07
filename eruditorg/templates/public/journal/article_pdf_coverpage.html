@@ -201,7 +201,7 @@
         <div class="content">
           <div class="sub-title">
             {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
-            <span>{% include "public/journal/partials/issue_volume.html" %}</span>
+            <span>{{ issue.volume_title }}</span>
           </div>
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.localidentifier %}">
             &#8594;&nbsp;{% trans "Aller au sommaire du numéro" %}
