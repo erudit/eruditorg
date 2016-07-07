@@ -355,8 +355,12 @@ class ArticleRawPdfView(
 
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF
+        article = self.get_article()
         xml_content = self.fedora_object.xml_content
         coverpage_context = {
+            'article': article,
+            'issue': article.issue,
+            'journal': article.issue.journal,
             'fedora_article': self.fedora_object,
             'erudit_article': EruditArticle(xml_content) if xml_content else None,
         }
