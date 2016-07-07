@@ -1,8 +1,0 @@
-{% load i18n %}
-{% with title=issue.volume_title first_page=issue.erudit_object.first_page %}
-  {% if first_page and first_page != "0" %}
-    {{ title }}, {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
-  {% else %}
-    {{ title }}
-  {% endif %}
-{% endwith %}

@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load public_journal_tags %}
 
+{% block title %}{% trans "Index des auteurs" %}{% endblock title %}
+
 {% block content %}
 <div class="container">
   <div class="row">
@@ -37,7 +39,7 @@
                       {{ article.title }}
                     </a>
                     &raquo;
-                    &nbsp;{{ journal.name }},&nbsp;n°{{ article.issue.number }},&nbsp;{{ article.issue.date_published.year }}
+                    &nbsp;{{ journal.name }},&nbsp;{{ article.issue.volume_title_with_pages }}
                   {% endspaceless %}
                 </li>
               {% endfor %}
