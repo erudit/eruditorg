@@ -5,6 +5,7 @@ Changelog
 --------------------------
 
 * Ensure that issues without number or volume can always have a title
+* Add a way to get issue titles including first page and last page
 
 0.1.10
 ------

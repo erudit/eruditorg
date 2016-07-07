@@ -480,6 +480,21 @@ class Issue(FedoraMixin, FedoraDated):
         return publication_period
 
     @property
+    def volume_title_with_pages(self):
+        """ Returns a title for the current issue using its volume, its number and its pages. """
+        erudit_object = self.erudit_object
+        first_page = erudit_object.first_page if erudit_object else None
+        last_page = erudit_object.last_page if erudit_object else None
+
+        if first_page and last_page and (first_page != '0' and first_page != last_page):
+            return _('{title}, p. {first_page}-{last_page}').format(
+                title=self.volume_title, first_page=first_page, last_page=last_page)
+        elif first_page and first_page != '0':
+            return _('{title}, p. {first_page}').format(
+                title=self.volume_title, first_page=first_page)
+        return self.volume_title
+
+    @property
     def has_movable_limitation(self):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         open_access = self.open_access or (self.open_access is None and self.journal.open_access)
