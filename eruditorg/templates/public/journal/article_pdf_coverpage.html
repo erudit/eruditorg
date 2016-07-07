@@ -257,11 +257,7 @@
             reproduction) est assujettie à sa politique d'utilisation que vous pouvez consulter en ligne. [<a href="https://apropos.erudit.org/fr/usagers/politique-dutilisation/">https://apropos.erudit.org/fr/usagers/politique-dutilisation/</a>]
           {% endblocktrans %}
           </div>
-          <div id="journal_copyright">
-          {% blocktrans with journal_name=journal.name publication_year=issue.year %}
-            Tous droits réservés &copy; {{ journal_name }}, {{ publication_year }}
-          {% endblocktrans %}
-          </div>
+          <div id="journal_copyright">{{ issue.erudit_object.droitsauteur.0.text }}</div>
         </div>
       </div>
       <div id="footer_2">
