@@ -145,9 +145,11 @@
               {% endif %}
             </a>
           </p>
+          {% if issue.has_coverpage %}
           <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.localidentifier %}">
             <img src="{% url 'public:journal:issue_coverpage' latest_issue.pk %}" class="img-responsive latest-issue--cover" alt="{{ latest_issue.title }}" />
           </a>
+          {% endif %}
           <p>
             <a href="#back-issues" class="btn btn-primary">
               {% trans "Voir tous les numéros" %}

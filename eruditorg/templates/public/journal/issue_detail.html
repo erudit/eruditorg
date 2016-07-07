@@ -53,12 +53,14 @@
 
         <div class="sidebar-block clearfix issue_detail--resume">
 
+          {% if issue.has_coverpage %}
           <div>
             <a href="{% url 'public:journal:journal_detail' journal.code %}">
               <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
               {% include 'public/journal/partials/issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
+          {% endif %}
 
           <header>
             <div class="mono-space">{% trans "De la revue" %}</div>
@@ -225,7 +227,7 @@
             {% if published_issue != issue %}
             <li class="issue-list-item--inverted col-xs-6 col-sm-3">
               <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.localidentifier %}">
-                <img src="{% url 'public:journal:issue_coverpage' published_issue.pk %}" class="img-responsive" alt="{{ published_issue.name }}" />
+                {% if issue.has_coverpage %}<img src="{% url 'public:journal:issue_coverpage' published_issue.pk %}" class="img-responsive" alt="{{ published_issue.name }}" />{% endif %}
                 <header>
                   <h5>
                     <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.localidentifier %}">
