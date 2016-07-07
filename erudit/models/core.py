@@ -465,19 +465,14 @@ class Issue(FedoraMixin, FedoraDated):
         """ Returns a title for the current issue using its volume and its number. """
         erudit_object = self.erudit_object
         publication_period = erudit_object.publication_period if erudit_object else self.year
-        if self.volume and self.number:
+        number = self.number if self.number else _('hors série')
+        if self.volume and number:
             return _(
                 'Volume {volume}, numéro {number}, {publication_date}'.format(
-                    volume=self.volume, number=self.number, publication_date=publication_period))
-        elif self.volume:
-            return _(
-                'Volume {volume}, {publication_date}'.format(
-                    volume=self.volume, publication_date=publication_period))
-        elif self.number:
-            return _(
-                'Numéro {number}, {publication_date}'.format(
-                    number=self.number, publication_date=publication_period))
-        return publication_period
+                    volume=self.volume, number=number, publication_date=publication_period))
+        return _(
+            'Numéro {number}, {publication_date}'.format(
+                number=number, publication_date=publication_period))
 
     @property
     def volume_title_with_pages(self):
