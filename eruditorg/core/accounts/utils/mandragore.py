@@ -5,8 +5,8 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from .models import MandragoreProfile
-from .utils.pymysql import pymysql_connection
+from ..models import LegacyAccountProfile
+from .pymysql import pymysql_connection
 
 
 class MandragoreError(Exception):
@@ -15,9 +15,10 @@ class MandragoreError(Exception):
 
 def create_mandragore_profile_for_user(person_id, user):
     """ Create a mandragore profile for this person """
-    mandragoreprofile = MandragoreProfile()
-    mandragoreprofile.mandragore_id = person_id
-    mandragoreprofile.synced_with_mandragore = True
+    mandragoreprofile = LegacyAccountProfile()
+    mandragoreprofile.origin = LegacyAccountProfile.DB_MANDRAGORE
+    mandragoreprofile.legacy_id = person_id
+    mandragoreprofile.synced_with_origin = True
     mandragoreprofile.user = user
     mandragoreprofile.sync_date = datetime.now()
     mandragoreprofile.save()
@@ -135,7 +136,8 @@ def can_create_mandragore_user(username, person_id):
     if User.objects.filter(username=username).exists():
         return False
 
-    if MandragoreProfile.objects.filter(mandragore_id=person_id).exists():
+    if LegacyAccountProfile.objects.filter(
+            origin=LegacyAccountProfile.DB_MANDRAGORE, legacy_id=person_id).exists():
         return False
 
     return True
@@ -181,16 +183,19 @@ def get_mandragore_user(username, person_id=None, additional_values=None):
 
     user = User.objects.get(username=username)
 
-    if not hasattr(user, "mandragoreprofile"):
+    try:
+        mandragoreprofile = LegacyAccountProfile.objects \
+            .filter(origin=LegacyAccountProfile.DB_MANDRAGORE).get(user=user)
+    except LegacyAccountProfile.DoesNotExist:
         raise MandragoreError(
             "The user does not have a Mandragore profile"
         )
 
-    if user.mandragoreprofile.mandragore_id != str(person_id):
+    if mandragoreprofile.legacy_id != str(person_id):
         raise MandragoreError(
             "Mandragore id mismatch. Expected: {}, Actual: {}".format(
                 person_id,
-                user.mandragoreprofile.mandragore_id
+                mandragoreprofile.legacy_id
             )
         )
 
@@ -206,9 +211,12 @@ def user_coherent_with_mandragore(user, mandragore_values):
             user.username, mandragore_values['username']
         )
 
-    if user.mandragoreprofile.mandragore_id != str(mandragore_values['person_id']):  # noqa
+    mandragoreprofile = LegacyAccountProfile.objects \
+        .filter(origin=LegacyAccountProfile.DB_MANDRAGORE).get(user=user)
+
+    if mandragoreprofile.legacy_id != str(mandragore_values['person_id']):  # noqa
         return False, "Person_id mismatch: {} != {}".format(
-            user.mandragoreprofile.mandragore_id,
+            mandragoreprofile.legacy_id,
             mandragore_values['person_id']
         )
 

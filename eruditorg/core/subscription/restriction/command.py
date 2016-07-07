@@ -11,7 +11,7 @@ from django.db import transaction
 from django.db.models import Q
 from PIL import Image
 
-from core.accounts.models import RestrictionProfile
+from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalAccessSubscriptionPeriod
@@ -120,16 +120,18 @@ class Command(BaseCommand):
         # --
 
         try:
-            restriction_profile = RestrictionProfile.objects.get(
-                restriction_id=restriction_subscriber.pk)
-        except RestrictionProfile.DoesNotExist:
+            restriction_profile = LegacyAccountProfile.objects \
+                .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
+                .get(legacy_id=str(restriction_subscriber.pk))
+        except LegacyAccountProfile.DoesNotExist:
             user = user_model.objects.create(
                 username=restriction_subscriber.courriel,
                 email=restriction_subscriber.courriel)
             organisation = Organisation.objects.create(name=restriction_subscriber.abonne[:120])
-            restriction_profile = RestrictionProfile.objects.create(
-                restriction_id=restriction_subscriber.pk,
-                password=restriction_subscriber.motdepasse, user=user, organisation=organisation)
+            restriction_profile = LegacyAccountProfile.objects.create(
+                origin=LegacyAccountProfile.DB_RESTRICTION,
+                legacy_id=str(restriction_subscriber.pk),
+                user=user, organisation=organisation)
 
             if restriction_subscriber.icone:
                 f = open(

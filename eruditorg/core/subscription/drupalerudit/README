@@ -1,0 +1,33 @@
+Installation
+============
+
+settings_env.py configuration sample
+------------------------------------
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'zenon',
+        'USER': 'zenon',
+        'PASSWORD': 'notsecret',
+        'HOST': '',
+    },
+    'drupalerudit': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'drupalerudit_shared_tables',
+        'USER': 'zenon',
+        'PASSWORD': 'notsecret',
+        'HOST': '',
+    }
+}
+
+DATABASE_ROUTERS = ['core.subscription.drupalerudit.router.DrupalEruditRouter', ]
+
+
+Use
+===
+
+Import users
+------------
+
+python manage.py drupalerudit import_users

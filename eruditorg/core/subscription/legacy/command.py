@@ -8,7 +8,8 @@ from django.core.management.base import BaseCommand
 from django.db import connections
 from django.db.utils import IntegrityError
 
-from core.accounts.models import AbonnementProfile
+from core.accounts.hashers import PBKDF2WrappedAbonnementsSHA1PasswordHasher
+from core.accounts.models import LegacyAccountProfile
 from erudit.models import Journal
 from erudit.models import Organisation
 
@@ -43,7 +44,8 @@ class Command(BaseCommand):
         self.stdout.write(str(Abonneindividus.objects.count()))
 
     def import_abonnes(self):
-        if AbonnementProfile.objects.count() > 0:
+        if LegacyAccountProfile.objects \
+                .filter(origin=LegacyAccountProfile.DB_ABONNEMENTS).count() > 0:
             self.stdout.write("Some accounts are already present on destination \
                 table. Importation canceled.")
             return
@@ -63,8 +65,12 @@ class Command(BaseCommand):
                     email=old_abonne.courriel,
                     first_name=old_abonne.prenom,
                     last_name=old_abonne.nom)
-            AbonnementProfile.objects.create(
-                id=old_abonne.abonneindividusid, user=user, password=old_abonne.password)
+            hasher = PBKDF2WrappedAbonnementsSHA1PasswordHasher()
+            user.password = hasher.encode_sha1_hash(old_abonne.password, hasher.salt())
+            user.save()
+            LegacyAccountProfile.objects.create(
+                origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
+                legacy_id=str(old_abonne.abonneindividusid))
 
     def link_abonnes_from_csv(self):
         # Create policy from filename if it does not exist
@@ -85,8 +91,8 @@ class Command(BaseCommand):
 
                 # Assign the policy to the account
                 try:
-                    profile = AbonnementProfile.objects.\
-                        get(user__email__iexact=email)
+                    profile = LegacyAccountProfile.objects.\
+                        get(origin=LegacyAccountProfile.DB_ABONNEMENTS, user__email__iexact=email)
                 except Exception:
                     print('{} {}'.format('account', email))
                     continue
@@ -99,14 +105,15 @@ class Command(BaseCommand):
                         journal=journal, user=profile.user, sponsor=organization)
 
     def link_abonnes_from_acces(self):
-        abonne_profiles = AbonnementProfile.objects.all()
+        abonne_profiles = LegacyAccountProfile.objects \
+            .filter(origin=LegacyAccountProfile.DB_ABONNEMENTS)
         cursor = connections['legacy_subscription'].cursor()
 
         journals_account_volumetry = {"": []}
 
         for profile in abonne_profiles:
             sql = "SELECT revueID FROM revueindividus \
-WHERE abonneIndividusID = {}".format(profile.id)
+WHERE abonneIndividusID = {}".format(profile.legacy_id)
             cursor.execute(sql)
             journals = []
             rows = cursor.fetchall()

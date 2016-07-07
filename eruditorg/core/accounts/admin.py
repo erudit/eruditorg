@@ -3,10 +3,10 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from .models import AbonnementProfile
+from .models import LegacyAccountProfile
 
 
-class AbonnementProfileAdmin(admin.ModelAdmin):
+class LegacyAccountProfileAdmin(admin.ModelAdmin):
     search_fields = ('id', 'user__first_name', 'user__last_name', 'user__email', )
     list_filter = ('user__is_active', )
     list_display = (
@@ -28,4 +28,4 @@ class AbonnementProfileAdmin(admin.ModelAdmin):
     short_description = _('Nom')
 
 
-admin.site.register(AbonnementProfile, AbonnementProfileAdmin)
+admin.site.register(LegacyAccountProfile, LegacyAccountProfileAdmin)

@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 
 from django.test import TestCase
 
-from core.accounts.mandragore import can_create_mandragore_user
-from core.accounts.mandragore import create_mandragore_profile_for_user
-from core.accounts.mandragore import create_or_update_mandragore_user
-from core.accounts.mandragore import get_list_as_sql
-from core.accounts.mandragore import get_mandragore_user
-from core.accounts.mandragore import MandragoreError
-from core.accounts.mandragore import user_coherent_with_mandragore
+from core.accounts.models import LegacyAccountProfile
+from core.accounts.utils.mandragore import can_create_mandragore_user
+from core.accounts.utils.mandragore import create_mandragore_profile_for_user
+from core.accounts.utils.mandragore import create_or_update_mandragore_user
+from core.accounts.utils.mandragore import get_list_as_sql
+from core.accounts.utils.mandragore import get_mandragore_user
+from core.accounts.utils.mandragore import MandragoreError
+from core.accounts.utils.mandragore import user_coherent_with_mandragore
 
 
 class TestCommands(TestCase):
@@ -29,7 +30,7 @@ class TestCommands(TestCase):
         )
 
         self.assertTrue(
-            mandragore_profile.synced_with_mandragore
+            mandragore_profile.synced_with_origin
         )
 
     def test_user_coherent_with_mandragore(self):
@@ -101,9 +102,11 @@ class TestCommands(TestCase):
         user = create_or_update_mandragore_user(
             '1234', username="fengels", first_name="Friedrich", last_name="Engels"
         )
+        mandragoreprofile = LegacyAccountProfile.objects \
+            .filter(origin=LegacyAccountProfile.DB_MANDRAGORE, user=user).first()
 
         self.assertIsNotNone(
-            user.mandragoreprofile
+            mandragoreprofile
         )
 
         self.assertEquals(

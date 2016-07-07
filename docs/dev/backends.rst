@@ -1,5 +1,16 @@
-Backends
-========
+Gestion de l'authentification
+=============================
 
- .. automodule :: base.backends
-    :members:
+
+Modèles de données
+------------------
+
+.. automodule :: core.accounts.models
+   :members:
+
+
+Hashers
+-------
+
+.. automodule :: core.accounts.hashers
+  :members:

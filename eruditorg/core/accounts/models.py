@@ -1,76 +1,50 @@
 # -*- coding: utf-8 -*-
 
-import hashlib
-import base64
-
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from core.email import Email
 from erudit.models import Organisation
 
 
-class AbonnementProfile(models.Model):
-    """
-    Personal account used in erudit.org to access protected content.
+class LegacyAccountProfile(models.Model):
+    """ Defines the information associated with a legacy account that was imported from a user DB.
+
+    This model associates a user instance with informations related to its previous database:
+
+    * which database?
+    * which identifier into this database?
+    * ...
+
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
-    password = models.CharField(max_length=50, verbose_name=_("Mot de passe"), blank=True)
+    """ The user associated with the considered legacy profile. """
+
+    DB_ABONNEMENTS, DB_RESTRICTION, DB_MANDRAGORE, DB_DRUPAL = 1, 2, 3, 4
+    ORIGIN_CHOICES = (
+        (DB_ABONNEMENTS, _('Base de données Abonnements')),
+        (DB_RESTRICTION, _('Base de données Restrictions')),
+        (DB_MANDRAGORE, _('Base de données Mandragore')),
+        (DB_DRUPAL, _('Base de données Drupal')),
+    )
+    origin = models.PositiveSmallIntegerField(choices=ORIGIN_CHOICES, verbose_name=_('Origine'))
+    """ Defines the origin of the legacy profile (the original database). """
+
+    legacy_id = models.CharField(
+        max_length=20, verbose_name=_('Identifiant original'), blank=True, null=True)
+    """ Defines the legacy identifier associated with the account (the ID in the legacy DB). """
+
+    organisation = models.OneToOneField(
+        Organisation, verbose_name=_('Organisation'), blank=True, null=True)
+    """ The legacy profile can be associated with an organisation. """
+
+    synced_with_origin = models.BooleanField(
+        verbose_name=_('Synchronisé avec la base de donnée originale'), default=False)
+    """ Defines if the legacy account is synced with the original database. Defaults to False. """
+
+    sync_date = models.DateField(verbose_name=_('Date de synchronisation'), blank=True, null=True)
+    """ Date at which the legacy account was last synchronized with its database. """
 
     class Meta:
-        verbose_name = _("Compte personnel")
-        verbose_name_plural = _("Comptes personnels")
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.mail_account()
-        super(AbonnementProfile, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return '{} {} ({})'.format(self.user.first_name, self.user.last_name, self.id)
-
-    def mail_account(self):
-        email = Email(
-            [self.user.email, ],
-            html_template='emails/accounts/new_account.html',
-            subject=_('erudit.org : création de votre compte'),
-            extra_context={'object': self})
-        email.send()
-
-    def sha1(self, msg, salt=None):
-        "Crypt function from legacy system"
-        if salt is None:
-            salt = settings.INDIVIDUAL_SUBSCRIPTION_SALT
-        to_sha = msg.encode('utf-8') + salt.encode('utf-8')
-        hashy = hashlib.sha1(to_sha).digest()
-        return base64.b64encode(hashy + salt.encode('utf-8')).decode('utf-8')
-
-
-class MandragoreProfile(models.Model):
-    """ Store variables that are related to this user's Mandragore profile. """
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
-
-    synced_with_mandragore = models.BooleanField(
-        verbose_name=_("Synchronisé avec Mandragore"), default=False)
-    """ Determines if this particular object is synced with the Edinum database """  # noqa
-
-    mandragore_id = models.CharField(
-        max_length=7, blank=True, null=True, verbose_name=_('Identifiant Mandragore'))
-    """ The Mandragore person_id for this User """
-
-    sync_date = models.DateField(blank=True, null=True)
-    """ Date at which the model was last synchronized with Mandragore """
-
-
-class RestrictionProfile(models.Model):
-    """ Restriction account used in erudit.org to access protected content. """
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
-    organisation = models.OneToOneField(Organisation, verbose_name=_('Organisation'))
-    password = models.CharField(
-        max_length=50, verbose_name=_('Mot de passe'), blank=True, null=True)
-    restriction_id = models.PositiveIntegerField(verbose_name=_('Identifiant DB Restriction'))
-
-    class Meta:
-        verbose_name = _('Compte personnel Restriction')
-        verbose_name_plural = _('Comptes personnels Restriction')
+        verbose_name = _('Profil de compte utilisateur importé')
+        verbose_name_plural = _('Profils de comptes utilisateur importés')

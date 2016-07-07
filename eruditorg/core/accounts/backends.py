@@ -4,16 +4,14 @@ import crypt
 import logging
 import types
 
-from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.db.models import Q
 
-from .mandragore import get_user_from_mandragore
-from .mandragore import update_user_password
+from .utils.mandragore import get_user_from_mandragore
+from .utils.mandragore import update_user_password
 
 logger = logging.getLogger(__name__)
 
@@ -112,22 +110,3 @@ class MandragoreBackend(ModelBackend):
         if user_pass == mand_pw:
             user.set_password = types.MethodType(set_password_mandragore, user)
             return user
-
-
-class AbonnementIndividuelBackend(ModelBackend):
-    """ Authenticate users against IndividualAccount with sha1 custom
-    encryption from old system.
-    """
-
-    def authenticate(self, username=None, password=None):
-        Profile = apps.get_model(
-            app_label='accounts',
-            model_name='AbonnementProfile')
-        try:
-            profile = Profile.objects.get(
-                Q(user__username=username) | Q(user__email=username))
-        except Profile.DoesNotExist:
-            return
-
-        if profile.sha1(password) == profile.password:
-            return profile.user
