@@ -160,6 +160,7 @@ class TestJournalDetailView(BaseEruditTestCase):
         self.assertEqual(response.context['latest_issue'], issue_2)
 
 
+@override_settings(DEBUG=True)
 class TestJournalAuthorsListView(BaseEruditTestCase):
     def test_provides_only_authors_for_the_first_available_letter_by_default(self):
         # Setup

@@ -9,7 +9,7 @@
 
 {% block page_title %}
 {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
-{% include "public/journal/partials/issue_volume.html" %}
+{{ issue.volume_title_with_pages }}
 {% endblock page_title %}
 
 {% block meta_tags %}
@@ -34,7 +34,7 @@
   {% if issue.erudit_object.html_theme %}
   {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
   {% else %}
-  {% include "public/journal/partials/issue_volume.html" %}
+  {{ issue.volume_title_with_pages }}
   {% endif %}
 </a>
 {% endblock %}
@@ -56,7 +56,7 @@
           <div>
             <a href="{% url 'public:journal:journal_detail' journal.code %}">
               <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
-              {% include 'public/journal/partials/issue_volume.html' %} {% trans 'de la revue' %} {{ journal.name }}" />
+              {{ issue.volume_title_with_pages }} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
 
@@ -164,7 +164,7 @@
             <p class="title-tag">{{ issue.journal.name }}</p>
             <h1>
               {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
-              <span>{% include "public/journal/partials/issue_volume.html" %}</span>
+              <span>{{ issue.volume_title_with_pages }}</span>
             </h1>
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
         </header>
@@ -221,7 +221,7 @@
 
         <div class="row">
           <ul class="issue-list">
-            {% for published_issue in journal.published_issues|dictsortreversed:"date_published"|slice:":4" %}
+            {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
             {% if published_issue != issue %}
             <li class="issue-list-item--inverted col-xs-6 col-sm-3">
               <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.localidentifier %}">

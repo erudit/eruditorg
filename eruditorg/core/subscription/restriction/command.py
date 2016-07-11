@@ -218,8 +218,9 @@ class Command(BaseCommand):
         # STEP 1: checks that the RestrictionProfile instance has been created
         # --
 
-        restriction_profile = RestrictionProfile.objects.filter(
-            restriction_id=restriction_subscriber.pk).first()
+        restriction_profile = LegacyAccountProfile.objects.filter(
+            origin=LegacyAccountProfile.DB_RESTRICTION,
+            legacy_id=str(restriction_subscriber.pk)).first()
         assert restriction_profile is not None, \
             '  Unable to retrieve the "RestrictionProfile" instance with ' \
             'restriction_id: {0}'.format(restriction_subscriber.pk)
