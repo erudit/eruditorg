@@ -2,8 +2,13 @@
 
 import datetime as dt
 
-from django.utils.translation import ugettext_lazy as _
+from babel import Locale
+from babel import UnknownLocaleError
 from django import forms
+from django.conf import settings
+from django.utils.translation import get_language
+from django.utils.translation import to_locale
+from django.utils.translation import ugettext_lazy as _
 
 from erudit.models import Discipline
 from erudit.models import Journal
@@ -177,8 +182,20 @@ class ResultsFilterForm(forms.Form):
                 aggregations['year'])
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
                 aggregations['article_type'])
-            self.fields['filter_languages'].choices = self._get_aggregation_choices(
-                aggregations['language'])
+
+            # Prepares the languages fields
+            clocale = to_locale(get_language() or settings.LANGUAGE_CODE)
+            language_choices = []
+            for v, c in aggregations['language'].items():
+                try:
+                    loc = Locale.parse(v)
+                except UnknownLocaleError:
+                    language_name = v
+                else:
+                    language_name = loc.get_display_name(clocale).capitalize()
+                language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
+
+            self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[0])
             self.fields['filter_collections'].choices = self._get_aggregation_choices(
                 aggregations['collection'])
             self.fields['filter_authors'].choices = self._get_aggregation_choices(

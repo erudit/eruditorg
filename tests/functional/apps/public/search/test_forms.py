@@ -85,8 +85,8 @@ class TestResultsFilterForm(BaseEruditTestCase):
         self.assertEqual(
             form.fields['filter_languages'].choices,
             [
-                ('en', 'en (9)'),
-                ('fr', 'fr (248)'),
+                ('en', 'Anglais (9)'),
+                ('fr', 'Français (248)'),
             ])
 
     def test_can_initialize_collections_choices_from_aggregation_results(self):

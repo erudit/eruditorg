@@ -49,3 +49,4 @@ Markdown==2.6.6
 django-widget-tweaks==1.4.1
 Sickle==0.5
 influxdb==2.12.0
+Babel==2.3.4
