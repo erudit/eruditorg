@@ -222,12 +222,14 @@
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
             </li>
+			{% if article_access_granted %}
             <li>
               <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </button>
             </li>
+			{% endif %}
             <li>
               <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
                 <span class="erudicon erudicon-tools-cite"></span>
@@ -258,6 +260,17 @@
 
 			<div class="full-article col-md-7 col-md-offset-1">
 
+				{% if not article_access_granted %}
+					<div class="alert alert-warning">
+						<p><strong>{% trans "Abonnement requis!" %}</strong></p>
+						<p>
+							{% blocktrans trimmed %}
+							L’accès à cet article est réservé aux abonnés. Toutes les archives des revues diffusées sur Érudit sont en accès libre (barrière mobile de 2 ou 3 ans).
+							{% endblocktrans %}
+						</p>
+					</div>
+				{% endif %}
+
 				<!-- abstract -->
 				<xsl:if test="//resume">
 				<section id="resume" class="article-section grresume" role="complementary">
@@ -266,15 +279,22 @@
 				</section>
 				</xsl:if>
 
-				{% if article.erudit_object.processing == 'complet' %}
-				<!-- body -->
-				<section id="corps" class="article-section corps" role="main">
-          <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
-					<xsl:apply-templates select="//corps"/>
-				</section>
-				{% elif article.localidentifier %}
-				<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.localidentifier %}" width="500" height="700" />
+				{% if article_access_granted %}
+					{% if article.erudit_object.processing == 'complet' %}
+					<!-- body -->
+					<section id="corps" class="article-section corps" role="main">
+	          <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
+						<xsl:apply-templates select="//corps"/>
+					</section>
+					{% elif article.localidentifier %}
+					<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.localidentifier %}" width="500" height="700" />
+					{% endif %}
+				{% elif not article.erudit_object.abstracts %}
+					<p>
+						{{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
+					</p>
 				{% endif %}
+
 
 				<!-- appendices -->
 				<xsl:apply-templates select="partiesann[node()]"/>
