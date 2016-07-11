@@ -3,8 +3,45 @@
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
-
 from erudit.test import BaseEruditTestCase
+
+from base.test.testcases import EruditClientTestCase
+
+
+class TestUserPersonalDataUpdateView(EruditClientTestCase):
+    def test_can_update_the_personal_data_of_a_user(self):
+        # Setup
+        self.client.login(username=self.user.username, password='notreallysecret')
+        post_data = {
+            'first_name': 'Foo',
+            'last_name': 'Bar',
+        }
+        url = reverse('public:auth:personal_data')
+        # Run
+        response = self.client.post(url, post_data, follow=False)
+        # Check
+        assert response.status_code == 302
+        self.user.refresh_from_db()
+        assert self.user.first_name == 'Foo'
+        assert self.user.last_name == 'Bar'
+
+
+class TestUserParametersUpdateView(EruditClientTestCase):
+    def test_can_update_the_account_parameters_of_a_user(self):
+        # Setup
+        self.client.login(username=self.user.username, password='notreallysecret')
+        post_data = {
+            'username': 'foobar',
+            'email': 'xyz@example.com',
+        }
+        url = reverse('public:auth:parameters')
+        # Run
+        response = self.client.post(url, post_data, follow=False)
+        # Check
+        assert response.status_code == 302
+        self.user.refresh_from_db()
+        assert self.user.username == 'foobar'
+        assert self.user.email == 'xyz@example.com'
 
 
 class TestUserPasswordChangeView(BaseEruditTestCase):

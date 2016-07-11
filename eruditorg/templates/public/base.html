@@ -83,7 +83,7 @@
                 </li>
                 {% endif %}
                 <li>
-                  <a href="#">{% trans "Mon profil" %}</a>
+                  <a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a>
                 </li>
                 <li>
                   <a href="{% url 'public:auth:logout' %}?next=/">{% trans "Déconnexion" %}</a>
@@ -140,7 +140,7 @@
   </div>
 </div>
 <main role="main">
-{% block content %}{% endblock content %}
+{% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
 </main>
 {% endblock body %}
 
