@@ -33,15 +33,7 @@
            class="btn btn-link btn-block">
           <span class="pull-right">
             <span class="status">
-              {% if issue_submission.status == 'D' %}
-              {% trans "Brouillon" %}
-              {% elif issue_submission.status == 'S' %}
-              {% trans "Soumis" %}
-              {% elif issue_submission.status == 'V' %}
-              {% trans "Validé" %}
-              {% elif issue_submission.status == 'A' %}
-              {% trans "Archivé" %}
-              {% endif %}
+              {{ issue_submission.get_status_display }}
             </span>
           </span>
           <span class="title">

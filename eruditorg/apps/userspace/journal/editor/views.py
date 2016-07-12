@@ -47,7 +47,7 @@ class IssueSubmissionListView(
 
     def get_queryset(self):
         qs = super(IssueSubmissionListView, self).get_queryset()
-        return qs.filter(journal=self.current_journal)
+        return qs.filter(journal=self.current_journal, archived=False)
 
     def has_permission(self):
         obj = self.get_permission_object()
@@ -142,7 +142,7 @@ class IssueSubmissionUpdate(
 
         obj = self.get_object()
         if obj.status in (
-                IssueSubmission.VALID, IssueSubmission.SUBMITTED, IssueSubmission.ARCHIVED):
+                IssueSubmission.VALID, IssueSubmission.SUBMITTED):
             form.disable_form()
 
         form.fields['submissions'].widget.set_model_reference(
@@ -298,15 +298,6 @@ class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
     success_message = _('Le numéro a été refusé avec succès')
     transition_name = 'refuse'
     use_comment_form = True
-
-    def has_permission(self):
-        return self.request.user.has_perm('editor.review_issuesubmission')
-
-
-class IssueSubmissionArchiveView(IssueSubmissionTransitionView):
-    question = _('Voulez-vous archiver le numéro ?')
-    success_message = _('Le numéro a été archivé avec succès')
-    transition_name = 'archive'
 
     def has_permission(self):
         return self.request.user.has_perm('editor.review_issuesubmission')

@@ -72,7 +72,7 @@
               </div>
             </div>
           </div>
-          {% if object.pk and not object.is_submitted and not object.is_archived and not object.is_validated %}
+          {% if object.pk and not object.is_submitted and not object.archived and not object.is_validated %}
           <div class="panel">
             <div class="panel-heading" role="tab" id="issue-upload-heading">
               <h3 class="panel-title">{% trans "Fichiers" %}</h3>
@@ -106,8 +106,6 @@
                           {% trans "Soumis le" as status_prefix %}
                         {% elif track.status == "V" %}
                           {% trans "Validé le" as status_prefix %}
-                        {% elif track.status == "A" %}
-                          {% trans "Archivé le" as status_prefix %}
                         {% endif %}
                         {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
                           {{ prefix }} {{ date }}
@@ -135,7 +133,7 @@
           </div>
           {% endif %}
           <div class="form-group text-right">
-            {% if not object.is_submitted and not object.is_archived and not object.is_validated %}
+            {% if not object.is_submitted and not object.archived and not object.is_validated %}
             <button type="reset" class="btn btn-default" id="submit-id-reset">{% trans "Annuler" %}</button>
             <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
             {% endif %}

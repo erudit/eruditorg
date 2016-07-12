@@ -13,11 +13,12 @@ from core.editor.test.factories import ProductionTeamFactory
 
 
 class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
-    def test_is_able_to_remove_files_from_archived_issue_submissions_after_30_days(self):
+    def test_is_able_to_remove_files_from_approved_issue_submissions_after_30_days(self):
         # Setup
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
-        self.issue_submission.archive()
+        self.issue_submission.submit()
+        self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=30)
         self.issue_submission.save()
@@ -26,6 +27,8 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         _handle_issuesubmission_files_removal()
         # Check
         self.assertFalse(ResumableFile.objects.count())
+        self.issue_submission.refresh_from_db()
+        self.assertTrue(self.issue_submission.archived)
 
     def test_sends_an_email_to_notify_the_production_team_5_days_before_removal(self):
         # Setup
@@ -34,7 +37,8 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         self.user.groups.add(group)
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
-        self.issue_submission.archive()
+        self.issue_submission.submit()
+        self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
         self.issue_submission.save()
@@ -50,7 +54,8 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         # Setup
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
-        self.issue_submission.archive()
+        self.issue_submission.submit()
+        self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
         self.issue_submission.save()
@@ -67,7 +72,8 @@ class TestHandleIssueSubmissionFilesRemoval(BaseEditorTestCase):
         ProductionTeamFactory.create(group=group, identifier='main')
         rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=42)
         self.issue_submission.last_files_version.submissions.add(rfile)
-        self.issue_submission.archive()
+        self.issue_submission.submit()
+        self.issue_submission.approve()
         self.issue_submission._meta.get_field('date_modified').auto_now = False
         self.issue_submission.date_modified = tz.now() - dt.timedelta(days=25)
         self.issue_submission.save()
