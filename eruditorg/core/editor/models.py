@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import F
 from django.utils.translation import gettext as _
 
 from django_fsm import FSMField, transition
@@ -108,7 +109,8 @@ class IssueSubmission(models.Model):
         """
         Send issue for review
         """
-        pass
+        # Removes the incomplete files associated with the issue submission
+        self.last_files_version.submissions.exclude(filesize=F('uploadsize')).delete()
 
     @transition(field=status, source=SUBMITTED, target=VALID,
                 permission=lambda user: user.has_perm(

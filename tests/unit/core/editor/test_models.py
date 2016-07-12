@@ -1,7 +1,8 @@
 # -* coding: utf-8 -*-
 
-from base.test.testcases import EruditTestCase
+from plupload.models import ResumableFile
 
+from base.test.testcases import EruditTestCase
 from core.editor.models import IssueSubmission
 from core.editor.test.factories import IssueSubmissionFactory
 
@@ -41,6 +42,17 @@ class TestIssueSubmission(EruditTestCase):
         # Run & check
         assert not issue_1.is_validated
         assert issue_2.is_validated
+
+    def test_can_remove_incomplete_files_during_submission(self):
+        # Setup
+        issue = IssueSubmissionFactory.create(journal=self.journal)
+        rfile = ResumableFile.objects.create(path='dummy/path.png', filesize=42, uploadsize=10)
+        issue.last_files_version.submissions.add(rfile)
+        # Run
+        issue.submit()
+        # Check
+        assert issue.files_versions.count() == 1
+        assert issue.files_versions.all()[0].submissions.count() == 0
 
 
 class TestIssueSubmissionWorkflow(EruditTestCase):

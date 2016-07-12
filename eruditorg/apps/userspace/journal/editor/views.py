@@ -7,6 +7,7 @@ import os
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.db.models import F
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -262,7 +263,14 @@ class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
     question = _('Voulez-vous soumettre le numéro ?')
     permission_required = 'editor.manage_issuesubmission'
     success_message = _('Le numéro a été soumis avec succès')
+    template_name = 'userspace/journal/editor/issuesubmission_submit.html'
     transition_name = 'submit'
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueSubmissionSubmitView, self).get_context_data(**kwargs)
+        context['incomplete_files'] = self.object.last_files_version.submissions \
+            .exclude(filesize=F('uploadsize'))
+        return context
 
     def get_permission_object(self):
         # All the users who have the 'review_issuesubmission' authorization should be allowed to
