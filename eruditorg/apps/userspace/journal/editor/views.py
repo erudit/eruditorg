@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
 import logging
 import mimetypes
 import os
@@ -10,6 +11,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
+from django.utils.formats import date_format
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
@@ -22,6 +24,7 @@ from plupload.models import ResumableFile
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
+from core.editor.conf import settings as editor_settings
 from core.editor.models import IssueSubmission
 from core.metrics.metric import metric
 
@@ -239,8 +242,11 @@ class IssueSubmissionTransitionView(
         qs = super(IssueSubmissionTransitionView, self).get_queryset()
         return qs.filter(journal=self.current_journal)
 
+    def get_success_message(self):
+        return self.success_message
+
     def get_success_url(self):
-        messages.success(self.request, self.success_message)
+        messages.success(self.request, self.get_success_message())
         return reverse('userspace:journal:editor:detail',
                        args=(self.current_journal.pk, self.object.pk, ))
 
@@ -267,7 +273,21 @@ class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
 class IssueSubmissionApproveView(IssueSubmissionTransitionView):
     question = _('Voulez-vous approuver le numéro ?')
     success_message = _('Le numéro a été approuvé avec succès')
+    template_name = 'userspace/journal/editor/issuesubmission_approve.html'
     transition_name = 'approve'
+
+    def get_context_data(self, **kwargs):
+        context = super(IssueSubmissionApproveView, self).get_context_data(**kwargs)
+        context['archive_date'] = dt.datetime.now() \
+            - dt.timedelta(days=editor_settings.ARCHIVE_DAY_OFFSET)
+        return context
+
+    def get_success_message(self):
+        archive_date = dt.datetime.now() - dt.timedelta(days=editor_settings.ARCHIVE_DAY_OFFSET)
+        return _(
+            'Le numéro a été approuvé avec succès. Veuillez noter que le numéro sera archivé '
+            'le {archive_date}. Les fichiers de production seront supprimés.').format(
+                archive_date=date_format(archive_date, 'SHORT_DATE_FORMAT'))
 
     def has_permission(self):
         return self.request.user.has_perm('editor.review_issuesubmission')

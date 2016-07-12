@@ -7,6 +7,7 @@ from django.utils import timezone as tz
 
 from core.email import Email
 
+from .conf import settings as editor_settings
 from .models import IssueSubmission
 from .shortcuts import get_production_team_group
 
@@ -15,7 +16,7 @@ def _handle_issuesubmission_files_removal():
     now_dt = tz.now()
 
     # First, fetches the issue submissions whose files must be deleted.
-    deletion_limit_dt = now_dt - dt.timedelta(days=30)
+    deletion_limit_dt = now_dt - dt.timedelta(days=editor_settings.ARCHIVE_DAY_OFFSET)
     deletion_limit_dt_range = [
         deletion_limit_dt.replace(hour=0, minute=0, second=0, microsecond=0),
         deletion_limit_dt.replace(hour=23, minute=59, second=59, microsecond=999999),
