@@ -2,10 +2,13 @@
 
 from django.contrib.auth.tokens import default_token_generator
 from django.core import mail
-
 from erudit.test import BaseEruditTestCase
 
+from base.test.factories import UserFactory
+from base.test.testcases import EruditTestCase
+
 from apps.public.auth.forms import PasswordResetForm
+from apps.public.auth.forms import UserParametersForm
 
 
 class TestPasswordResetForm(BaseEruditTestCase):
@@ -44,3 +47,18 @@ class TestPasswordResetForm(BaseEruditTestCase):
             from_email=None, request=None, html_email_template_name=None)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to[0], 'foobar@example.com')
+
+
+class TestUserParametersForm(EruditTestCase):
+    def test_cannot_allow_users_to_use_the_email_associated_with_another_user(self):
+        # Setup
+        u1 = UserFactory.create(username='foo1', email='foo1@erudit.org')
+        u2 = UserFactory.create(username='foo2', email='foo2@erudit.org')
+        form_data = {
+            'username': 'foo1',
+            'email': u2.email,
+        }
+        # Run
+        form = UserParametersForm(form_data, instance=u1)
+        # Check
+        assert not form.is_valid()

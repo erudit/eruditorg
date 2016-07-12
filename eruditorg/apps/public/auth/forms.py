@@ -32,6 +32,12 @@ class UserParametersForm(forms.ModelForm):
         # Updates some fields
         self.fields['email'].required = True
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            self.add_error('email', _('Cette adresse e-mail est déjà utilisée'))
+        return email
+
 
 class PasswordResetForm(BasePasswordResetForm):
     def send_mail(
