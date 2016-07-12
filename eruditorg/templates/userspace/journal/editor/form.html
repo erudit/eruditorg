@@ -115,7 +115,11 @@
                           <p>
                             <strong>{% trans "Fichiers :" %}</strong>&nbsp;
                             {% for f in track.files_version.submissions.all %}
-                              <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                              {% if f.is_complete %}
+                                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                              {% else %}
+                                {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+                              {% endif %}
                             {% endfor %}
                           </p>
                         {% endif %}
