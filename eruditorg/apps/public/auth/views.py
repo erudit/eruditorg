@@ -2,6 +2,7 @@
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -72,4 +73,5 @@ class UserPasswordChangeView(LoginRequiredMixin, MenuItemMixin, FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, _('Votre mot de passe a été mis à jour avec succès'))
+        update_session_auth_hash(self.request, form.user)
         return super(UserPasswordChangeView, self).form_valid(form)
