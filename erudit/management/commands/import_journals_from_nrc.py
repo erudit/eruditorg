@@ -3,12 +3,17 @@
 import os.path as op
 
 from django.core.management.base import BaseCommand
+from django.conf import settings
 import lxml.etree as et
 
 from ...models import Collection
 from ...models import Journal
 
-FIXTURE_ROOT = op.join(op.dirname(__file__), 'fixtures')
+
+FIXTURE_ROOT = getattr(
+    settings, "JOURNAL_FIXTURES",
+    op.join(op.dirname(__file__), 'fixtures'),
+)
 
 
 class Command(BaseCommand):

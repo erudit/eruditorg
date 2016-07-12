@@ -9,7 +9,11 @@ import lxml.etree as et
 from ...models import Discipline
 from ...models import Journal
 
-FIXTURE_ROOT = op.join(op.dirname(__file__), 'fixtures')
+FIXTURE_ROOT = getattr(
+    settings, 'JOURNAL_FIXTURES',
+    op.join(op.dirname(__file__), 'fixtures')
+)
+
 SUPPORTED_LANGUAGES = [l[0] for l in settings.LANGUAGES]
 
 
