@@ -3,13 +3,12 @@
 import csv
 import os
 
-from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from django.db import connections
-from django.db.utils import IntegrityError
 
 from core.accounts.hashers import PBKDF2WrappedAbonnementsSHA1PasswordHasher
 from core.accounts.models import LegacyAccountProfile
+from core.accounts.shortcuts import get_or_create_legacy_user
 from erudit.models import Journal
 from erudit.models import Organisation
 
@@ -51,26 +50,22 @@ class Command(BaseCommand):
             return
 
         for old_abonne in Abonneindividus.objects.all():
-            username = old_abonne.prenom[0].lower() + \
-                old_abonne.nom.lower() if len(old_abonne.prenom) else old_abonne.nom.lower()
             try:
-                user = User.objects.create(
-                    username=username[:30],
-                    email=old_abonne.courriel,
-                    first_name=old_abonne.prenom,
-                    last_name=old_abonne.nom)
-            except IntegrityError:
-                user = User.objects.create(
+                LegacyAccountProfile.objects.get(
+                    origin=LegacyAccountProfile.DB_ABONNEMENTS,
+                    legacy_id=str(old_abonne.abonneindividusid))
+            except LegacyAccountProfile.DoesNotExist:
+                hasher = PBKDF2WrappedAbonnementsSHA1PasswordHasher()
+                user = get_or_create_legacy_user(
                     username='abonne-{}'.format(old_abonne.abonneindividusid),
                     email=old_abonne.courriel,
-                    first_name=old_abonne.prenom,
-                    last_name=old_abonne.nom)
-            hasher = PBKDF2WrappedAbonnementsSHA1PasswordHasher()
-            user.password = hasher.encode_sha1_hash(old_abonne.password, hasher.salt())
-            user.save()
-            LegacyAccountProfile.objects.create(
-                origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
-                legacy_id=str(old_abonne.abonneindividusid))
+                    hashed_password=hasher.encode_sha1_hash(old_abonne.password, hasher.salt()))
+                user.first_name = old_abonne.prenom
+                user.last_name = old_abonne.nom
+                user.save()
+                LegacyAccountProfile.objects.create(
+                    origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
+                    legacy_id=str(old_abonne.abonneindividusid))
 
     def link_abonnes_from_csv(self):
         # Create policy from filename if it does not exist

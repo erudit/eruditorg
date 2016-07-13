@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import connections
 from django.db import transaction
@@ -9,6 +8,7 @@ from django.db.models import Q
 from erudit.models import Journal
 
 from core.accounts.models import LegacyAccountProfile
+from core.accounts.shortcuts import get_or_create_legacy_user
 
 from .drupalerudit_models import Role
 from .drupalerudit_models import Users
@@ -68,8 +68,6 @@ class Command(BaseCommand):
             '    Start importing the Drupal user with ID: {0}'.format(drupal_user.uid)),
             ending='')
 
-        user_model = get_user_model()
-
         # STEP 1: creates a user instance
         # --
 
@@ -78,10 +76,9 @@ class Command(BaseCommand):
                 .filter(origin=LegacyAccountProfile.DB_DRUPAL).get(legacy_id=str(drupal_user.uid))
             user = legacy_profile.user
         except LegacyAccountProfile.DoesNotExist:
-            user = user_model.objects.create(
-                is_active=True, username=drupal_user.name, email=drupal_user.mail)
-            user.password = 'drupal$' + drupal_user.pass_field
-            user.save()
+            user = get_or_create_legacy_user(
+                username=drupal_user.name, email=drupal_user.mail,
+                hashed_password='drupal$' + drupal_user.pass_field)
             LegacyAccountProfile.objects.create(
                 user=user, legacy_id=str(drupal_user.uid), origin=LegacyAccountProfile.DB_DRUPAL)
 
