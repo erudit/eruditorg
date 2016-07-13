@@ -17,8 +17,6 @@ urlpatterns = [
         views.IssueSubmissionApproveView.as_view(), name='transition_approve'),
     url(_(r'^numero/(?P<pk>[0-9]+)/refuser/$'),
         views.IssueSubmissionRefuseView.as_view(), name='transition_refuse'),
-    url(_(r'^numero/(?P<pk>[0-9]+)/archiver/$'),
-        views.IssueSubmissionArchiveView.as_view(), name='transition_archive'),
 
     url(_(r'^numero/(?P<pk>[0-9]+)/supprimer/$'),
         views.IssueSubmissionDeleteView.as_view(), name='delete'),

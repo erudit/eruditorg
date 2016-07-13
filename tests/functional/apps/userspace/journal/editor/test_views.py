@@ -15,16 +15,12 @@ from influxdb import InfluxDBClient
 from lxml import etree
 from plupload.models import ResumableFile
 
-from erudit.test.factories import JournalFactory
-
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
-from core.editor.test.factories import IssueSubmissionFactory
 
 from apps.userspace.journal.editor.views import IssueSubmissionApproveView
-from apps.userspace.journal.editor.views import IssueSubmissionArchiveView
 from apps.userspace.journal.editor.views import IssueSubmissionCreate
 from apps.userspace.journal.editor.views import IssueSubmissionRefuseView
 
@@ -706,91 +702,6 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         assert self.issue_submission.status == IssueSubmission.DRAFT
         assert len(mail.outbox) == 1
         assert mail.outbox[0].to[0] == u.email
-
-
-class TestIssueSubmissionArchiveView(BaseEditorTestCase):
-    def tearDown(self):
-        super(TestIssueSubmissionArchiveView, self).tearDown()
-        global _test_points
-        _test_points = []
-
-    def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
-        # Setup
-        User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
-
-        self.client.login(username='dummy', password='top_secret')
-        url = reverse('userspace:journal:editor:transition_archive',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        # Run
-        response = self.client.post(url)
-
-        # Check
-        self.assertEqual(response.status_code, 403)
-
-    def test_can_archive_an_issue_submission(self):
-        # Setup
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-
-        self.client.login(username='admin', password='top_secret')
-        url = reverse('userspace:journal:editor:transition_archive',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        self.issue_submission.submit()
-        self.issue_submission.save()
-
-        # Run
-        response = self.client.post(url)
-
-        # Check
-        self.assertEqual(response.status_code, 302)
-        self.issue_submission.refresh_from_db()
-        self.assertEqual(self.issue_submission.status, IssueSubmission.ARCHIVED)
-
-    @unittest.mock.patch.object(InfluxDBClient, 'get_list_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'create_database')
-    @unittest.mock.patch.object(InfluxDBClient, 'write_points')
-    def test_can_capture_a_metric_on_status_change(
-            self, mock_write_points, mock_list_db, mock_create_db):
-        # Setup
-        mock_write_points.side_effect = fake_write_points
-
-        self.issue_submission.submit()
-        self.issue_submission.save()
-
-        url = reverse('userspace:journal:editor:transition_archive',
-                      args=(self.journal.pk, self.issue_submission.pk, ))
-
-        request = self.factory.post(url)
-        request.user = self.user
-        SessionMiddleware().process_request(request)
-        MessageMiddleware().process_request(request)
-        request.session.save()
-
-        view = IssueSubmissionArchiveView(request=request, journal_pk=self.journal.pk)
-        view.request = request
-        view.kwargs = {'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
-        view.current_journal = self.journal
-
-        # Run
-        view.post(request)
-
-        # Check
-        global _test_points
-        self.assertEqual(len(_test_points), 1)
-        self.assertEqual(
-            _test_points,
-            [{
-                'tags': {'old_status': 'S', 'new_status': 'A'},
-                'fields': {
-                    'author_id': self.user.pk,
-                    'submission_id': self.issue_submission.pk,
-                    'num': 1,
-                },
-                'measurement': 'erudit__issuesubmission__change_status',
-            }])
 
 
 class TestIssueSubmissionDeleteView(BaseEditorTestCase):

@@ -1,0 +1,41 @@
+{% extends "userspace/journal/editor/base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block page_title %}{{ question }}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
+<li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Êtes-vous certain ?" %}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="warning-message">
+        {% blocktrans trimmed with question=question %}
+          <p>{{ question }}</p>
+          <p>Veuillez prendre note des points suivant avant de valider le numéro :</p>
+          <ul>
+            <li>Avez-vous fait le backup sur Harvester?</li>
+            <li>Avez-vous ajouté le numéro au calendrier de production?</li>
+            <li>Avez-vous assigné le numéro à un ou une technicienne?</li>
+          </ul>
+        {% endblocktrans %}
+        </div>
+        <form action="" method="post">{% csrf_token %}
+          <input type="hidden" name="post" value="yes" />
+          <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />
+          <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "No" %}</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content_main %}

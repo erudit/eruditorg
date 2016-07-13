@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import F
 from django.utils.translation import gettext as _
 
 from django_fsm import FSMField, transition
@@ -15,13 +16,11 @@ class IssueSubmission(models.Model):
     DRAFT = "D"
     SUBMITTED = "S"
     VALID = "V"
-    ARCHIVED = "A"
 
     STATUS_CHOICES = (
         (DRAFT, _("Brouillon")),
         (SUBMITTED, _("Soumis")),
         (VALID, _("Validé")),
-        (ARCHIVED, _("Archivé"))
     )
 
     status = FSMField(default=DRAFT, protected=False)
@@ -69,6 +68,11 @@ class IssueSubmission(models.Model):
         blank=True, null=True
     )
 
+    archived = models.BooleanField(
+        verbose_name=_('Archivé'),
+        default=False,
+    )
+
     class Meta:
         verbose_name = _("Envoi de numéro")
         verbose_name_plural = _("Envois de numéros")
@@ -94,10 +98,6 @@ class IssueSubmission(models.Model):
         return self.status == self.SUBMITTED
 
     @property
-    def is_archived(self):
-        return self.status == self.ARCHIVED
-
-    @property
     def is_validated(self):
         return self.status == self.VALID
 
@@ -109,7 +109,9 @@ class IssueSubmission(models.Model):
         """
         Send issue for review
         """
-        pass
+        # Removes the incomplete files associated with the issue submission
+        incompletes = self.last_files_version.submissions.exclude(filesize=F('uploadsize'))
+        [rf.delete() for rf in incompletes]
 
     @transition(field=status, source=SUBMITTED, target=VALID,
                 permission=lambda user: user.has_perm(
@@ -131,16 +133,6 @@ class IssueSubmission(models.Model):
         """
         self.save_version()
 
-    @transition(field=status, source=[DRAFT, SUBMITTED, VALID], target=ARCHIVED,
-                permission=lambda user: (
-                    user.has_perm('editor.review_issuesubmission')),
-                custom=dict(verbose_name=("Archiver")))
-    def archive(self):
-        """
-        Archives the issue
-        """
-        pass
-
     def save(self, *args, **kwargs):
         created = self.pk is None
         super(IssueSubmission, self).save(*args, **kwargs)
@@ -159,6 +151,14 @@ class IssueSubmission(models.Model):
     @property
     def last_status_track(self):
         return self.status_tracks.order_by('-created').first()
+
+    def get_status_display(self):
+        status_choices_dict = dict(self.STATUS_CHOICES)
+        if self.status != self.DRAFT:
+            return status_choices_dict[self.status]
+        elif self.status == self.DRAFT and self.last_status_track is None:
+            return _('Non soumis')
+        return _('À corriger')
 
 
 class IssueSubmissionStatusTrack(models.Model):

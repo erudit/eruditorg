@@ -25,21 +25,17 @@
     <div class="row">
       <div class="col-md-12">
         <br />
-        {% if issue.status == 'D' %}
+        {% if issue.status == 'D' or issue.status == 'S' %}
         <div class="alert alert-warning">
-          {% trans "Brouillon" %}
-        </div>
-        {% elif issue.status == 'S' %}
-        <div class="alert alert-warning">
-          {% trans "Demande soumise" %}
+          {{ issue.get_status_display }}
         </div>
         {% elif issue.status == 'V' %}
         <div class="alert alert-success">
-          {% trans "Demande validée" %}
+          {{ issue.get_status_display }}
         </div>
         {% elif issue.status == 'A' %}
         <div class="alert alert-info">
-          {% trans "Demande archivée" %}
+          {{ issue.get_status_display }}
         </div>
         {% endif %}
       </div>
@@ -95,7 +91,11 @@
                   <div class="col-xs-12">
                   {% if issue.last_files_version.submissions.exists %}
                     {% for f in issue.last_files_version.submissions.all %}
-                      <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                      {% if f.is_complete %}
+                        <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                      {% else %}
+                        {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+                      {% endif %}
                     {% endfor %}
                   </p>
                   {% else %}
@@ -124,8 +124,6 @@
                           {% trans "Soumis le" as status_prefix %}
                         {% elif track.status == "V" %}
                           {% trans "Validé le" as status_prefix %}
-                        {% elif track.status == "A" %}
-                          {% trans "Archivé le" as status_prefix %}
                         {% endif %}
                         {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
                           {{ prefix }} {{ date }}
@@ -135,7 +133,11 @@
                           <p>
                             <strong>{% trans "Fichiers :" %}</strong>&nbsp;
                             {% for f in track.files_version.submissions.all %}
-                              <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                              {% if f.is_complete %}
+                                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                              {% else %}
+                                {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+                              {% endif %}
                             {% endfor %}
                           </p>
                         {% endif %}
@@ -161,8 +163,6 @@
                 href="{% url 'userspace:journal:editor:transition_approve' scope_current_journal.pk issue.pk %}"
               {% elif t.name == 'refuse' %}
                 href="{% url 'userspace:journal:editor:transition_refuse' scope_current_journal.pk issue.pk %}"
-              {% elif t.name == 'archive' %}
-                href="{% url 'userspace:journal:editor:transition_archive' scope_current_journal.pk issue.pk %}"
               {% endif %}
                 class="btn btn-primary">{{ t.custom.verbose_name }}</a>
             {% endfor %}
