@@ -110,7 +110,8 @@ class IssueSubmission(models.Model):
         Send issue for review
         """
         # Removes the incomplete files associated with the issue submission
-        self.last_files_version.submissions.exclude(filesize=F('uploadsize')).delete()
+        incompletes = self.last_files_version.submissions.exclude(filesize=F('uploadsize'))
+        [rf.delete() for rf in incompletes]
 
     @transition(field=status, source=SUBMITTED, target=VALID,
                 permission=lambda user: user.has_perm(
