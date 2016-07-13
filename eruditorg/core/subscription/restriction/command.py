@@ -3,7 +3,6 @@
 import datetime as dt
 import os.path as op
 
-from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.management.base import BaseCommand
@@ -12,6 +11,7 @@ from django.db.models import Q
 from PIL import Image
 
 from core.accounts.models import LegacyAccountProfile
+from core.accounts.shortcuts import get_or_create_legacy_user
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalAccessSubscriptionPeriod
@@ -96,8 +96,6 @@ class Command(BaseCommand):
                 restriction_subscription.id)),
             ending='')
 
-        user_model = get_user_model()
-
         # Fetches the subscriber
         try:
             restriction_subscriber = Abonne.objects.get(pk=restriction_subscription.abonneid)
@@ -124,8 +122,8 @@ class Command(BaseCommand):
                 .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
                 .get(legacy_id=str(restriction_subscriber.pk))
         except LegacyAccountProfile.DoesNotExist:
-            user = user_model.objects.create(
-                username=restriction_subscriber.courriel,
+            user = get_or_create_legacy_user(
+                username='restriction-{}'.format(restriction_subscriber.pk),
                 email=restriction_subscriber.courriel)
             organisation = Organisation.objects.create(name=restriction_subscriber.abonne[:120])
             restriction_profile = LegacyAccountProfile.objects.create(

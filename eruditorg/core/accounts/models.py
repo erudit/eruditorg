@@ -17,7 +17,7 @@ class LegacyAccountProfile(models.Model):
     * ...
 
     """
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
     """ The user associated with the considered legacy profile. """
 
     DB_ABONNEMENTS, DB_RESTRICTION, DB_MANDRAGORE, DB_DRUPAL = 1, 2, 3, 4
