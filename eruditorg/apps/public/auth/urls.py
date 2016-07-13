@@ -16,6 +16,11 @@ urlpatterns = [
     url(_(r'^deconnexion/$'), auth_views.logout,
         {'next_page': '/'}, name='logout'),
 
+    # Parameters & personal data
+    url(_(r'^donnees-personnelles/$'),
+        views.UserPersonalDataUpdateView.as_view(), name='personal_data'),
+    url(_(r'^parametres/$'), views.UserParametersUpdateView.as_view(), name='parameters'),
+
     # Password change
     url(_(r'^mot-de-passe/$'), views.UserPasswordChangeView.as_view(), name='password_change'),
 

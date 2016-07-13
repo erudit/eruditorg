@@ -1,0 +1,46 @@
+.parameters-menu-wrapper{
+  margin-bottom: 20px;
+  background: $gray-lighter;
+  border-bottom: 2px solid lighten($gray-light, 20%);
+
+  .title{
+    padding: 22px 8px;
+    background: $black;
+    font-size: 1.25em;
+    text-align: center;
+    color: $white;
+  }
+
+  ul.parameters-menu{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li{
+      margin: 0;
+      display: block;
+
+      a{
+        padding: 14px;
+        padding-left: 18px;
+        display: block;
+
+        &:hover, &:focus{
+          text-decoration: none;
+        }
+      }
+
+      &.active{
+        a{
+          padding-left: 14px;
+          background: $coral-red;
+          border-left: 4px solid $gray-light;
+
+          &:hover, &:focus{
+            color: $gray-darker;
+          }
+        }
+      }
+    }
+  }
+}

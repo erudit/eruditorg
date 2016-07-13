@@ -1,0 +1,22 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content_wrapper %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-xs-12">
+      <div class="parameters-menu-wrapper">
+        <div class="title">{% trans "Paramètres" %}</div>
+        <ul class="parameters-menu">
+          <li{% if menu_account == "personal" %} class="active"{% endif %}><a href="{% url 'public:auth:personal_data' %}">{% trans "Informations personnelles" %}</a></li>
+          <li{% if menu_account == "parameters" %} class="active"{% endif %}><a href="{% url 'public:auth:parameters' %}">{% trans "Compte" %}</a></li>
+          <li{% if menu_account == "password" %} class="active"{% endif %}><a href="{% url 'public:auth:password_change' %}">{% trans "Mot de passe" %}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-12">
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+</div>
+{% endblock content_wrapper %}
