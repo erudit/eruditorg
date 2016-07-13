@@ -24,10 +24,6 @@ class UserPersonalDataUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_queryset(self):
-        user_model = get_user_model()
-        return user_model._default_manager.all()
-
     def form_valid(self, form):
         messages.success(
             self.request, _('Vos informations personelles ont été mises à jour avec succès.'))
@@ -44,10 +40,6 @@ class UserParametersUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
-
-    def get_queryset(self):
-        user_model = get_user_model()
-        return user_model._default_manager.all()
 
     def form_valid(self, form):
         messages.success(self.request, _('Votre compte a été mis à jour avec succès.'))
