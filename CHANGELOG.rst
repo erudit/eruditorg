@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.12 - Under development
---------------------------
+0.1.12
+------
 
 * Add a way to store previous/next journals in Journal instances
 
