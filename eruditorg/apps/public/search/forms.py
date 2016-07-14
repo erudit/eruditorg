@@ -2,12 +2,7 @@
 
 import datetime as dt
 
-from babel import Locale
-from babel import UnknownLocaleError
 from django import forms
-from django.conf import settings
-from django.utils.translation import get_language
-from django.utils.translation import to_locale
 from django.utils.translation import ugettext_lazy as _
 
 from erudit.models import Discipline
@@ -171,6 +166,26 @@ class ResultsFilterForm(forms.Form):
         label=_('Types de publications'),
         help_text=_('Identifie le corpus duquel le document fait partie'), required=False)
 
+    languages_correspondence = {
+        'ar': _('Arabe'),
+        'en': _('Anglais'),
+        'es': _('Espagnol'),
+        'de': _('Allemand'),
+        'el': _('Grec moderne'),
+        'fr': _('Français'),
+        'he': _('Hébreu'),
+        'ht': _('Créole haïtien'),
+        'iro': _('Langues iroquoiennes'),
+        'it': _('Italien'),
+        'ja': _('Japonais'),
+        'ko': _('Coréen'),
+        'la': _('Latin'),
+        'pt': _('Portugais'),
+        'ro': _('Roumain'),
+        'ru': _('Russe'),
+        'zh': _('Chinois'),
+    }
+
     def __init__(self, *args, **kwargs):
         # The filters form fields choices are initialized from search results
         api_results = kwargs.pop('api_results', {})
@@ -184,15 +199,12 @@ class ResultsFilterForm(forms.Form):
                 aggregations['article_type'])
 
             # Prepares the languages fields
-            clocale = to_locale(get_language() or settings.LANGUAGE_CODE)
             language_choices = []
             for v, c in aggregations['language'].items():
                 try:
-                    loc = Locale.parse(v)
-                except UnknownLocaleError:
+                    language_name = self.languages_correspondence[v]
+                except KeyError:
                     language_name = v
-                else:
-                    language_name = loc.get_display_name(clocale).capitalize()
                 language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
 
             self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[0])
