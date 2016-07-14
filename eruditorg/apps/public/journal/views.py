@@ -289,19 +289,15 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     model = Issue
 
 
-class ArticleDetailView(
+class BaseArticleDetailView(
         FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
         ArticleViewMetricCaptureMixin, DetailView):
-    """
-    Displays an Article page.
-    """
     context_object_name = 'article'
     model = Article
-    template_name = 'public/journal/article_detail.html'
     tracking_view_type = 'html'
 
     def get_context_data(self, **kwargs):
-        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
         obj = context.get(self.context_object_name)
 
         # Get all article from associated Issue
@@ -330,7 +326,21 @@ class ArticleDetailView(
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
-        return super(ArticleDetailView, self).dispatch(*args, **kwargs)
+        return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
+
+
+class ArticleDetailView(BaseArticleDetailView):
+    """
+    Displays an Article page.
+    """
+    template_name = 'public/journal/article_detail.html'
+
+
+class ArticleSummaryView(BaseArticleDetailView):
+    """
+    Displays the summary of an Article instance.
+    """
+    template_name = 'public/journal/article_summary.html'
 
 
 class ArticleEnwCitationView(SingleArticleMixin, DetailView):
