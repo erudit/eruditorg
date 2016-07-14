@@ -243,6 +243,15 @@
             </dd>
             {% endif %}
 
+            {% if previous_journal %}
+              <dt class="mono-space">{% trans "Revue précédée de..." %}</dt>
+              <dd><a href="{% url 'public:journal:journal_detail' previous_journal.code %}">{{ previous_journal.name }}</a></dd>
+            {% endif %}
+            {% if next_journal %}
+              <dt class="mono-space">{% trans "Revue suivie de..." %}</dt>
+              <dd><a href="{% url 'public:journal:journal_detail' next_journal.code %}">{{ next_journal.name }}</a></dd>
+            {% endif %}
+
           </dl>
 
           <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
