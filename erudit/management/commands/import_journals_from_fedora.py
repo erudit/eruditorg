@@ -226,6 +226,17 @@ class Command(BaseCommand):
         journal.name = xml_name.text if xml_name is not None else None
         journal.code = xml_issue[0].get('revAbr') if xml_issue is not None else None
 
+        issues = xml_issue = publications_tree.xpath('.//numero')
+        current_journal_code_found = False
+        for issue in issues:
+            code = issue.get('revAbr')
+            if code != journal.code and not current_journal_code_found:
+                journal.next_code = code
+            elif code != journal.code and current_journal_code_found:
+                journal.previous_code = code
+            elif code == journal.code:
+                current_journal_code_found = True
+
         journal_created = journal.id is None
 
         journal.fedora_updated = fedora_journal.modified
@@ -399,8 +410,10 @@ class Command(BaseCommand):
             suffix_xml = author_xml.find('.//nompers/suffixe')
             suffix = suffix_xml.text if suffix_xml is not None else None
 
-            author, dummy = Author.objects.get_or_create(
-                firstname=firstname, lastname=lastname)
+            author = Author.objects.filter(
+                firstname=firstname, lastname=lastname).first()
+            if author is None:
+                author = Author(firstname=firstname, lastname=lastname)
             author.suffix = suffix
             author.save()
 

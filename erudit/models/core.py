@@ -308,6 +308,14 @@ class Journal(FedoraMixin, FedoraDated):
     disciplines = models.ManyToManyField(Discipline, related_name='journals')
     """ The disciplines associated with the journal. """
 
+    next_code = models.SlugField(
+        max_length=255, verbose_name=_('Code revue suivante'), blank=True, null=True)
+    """ The shortname of the journal that follows the current journal """
+
+    previous_code = models.SlugField(
+        max_length=255, verbose_name=_('Code revue précédente'), blank=True, null=True)
+    """ The shortname of the journal that precedes the current journal """
+
     objects = models.Manager()
     upcoming_objects = JournalUpcomingManager()
 
