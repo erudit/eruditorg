@@ -19,6 +19,7 @@
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{{ article.title }} – Érudit">
 
+{% if not article.issue.journal.type.code == 'C' %}
 <!-- Google Scholar -->
   <meta name="citation_title" content="{{ article.title }}" />
   {% for author in article.erudit_object.authors %}
@@ -56,6 +57,7 @@
   {% for keywords in article.erudit_object.keywords %}
     <meta name="citation_keywords" lang="{{ keywords.lang }}" content="{% for k in keywords.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
   {% endfor %}
+{% endif %}
 {% endblock meta_tags %}
 
 {% block body_class %}public static-header{% endblock %}
