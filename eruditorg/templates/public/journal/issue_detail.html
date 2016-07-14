@@ -164,8 +164,15 @@
 
         <header class="page-header-main">
             <p class="title-tag">{{ issue.journal.name }}</p>
+
             <h1>
-              {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
+              {% for k, theme in issue.erudit_object.themes.items %}
+              {% if theme.html_name and theme.html_subname %}
+                <span>{{ theme.html_name|safe }}: {{ theme.html_subname|safe }}</span>
+              {% elif theme.html_name  %}
+                <span>{{ theme.html_name|safe }}</span>
+              {% endif %}
+              {% endfor %}
               <span>{{ issue.volume_title_with_pages }}</span>
             </h1>
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
