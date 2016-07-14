@@ -17,7 +17,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def render_article(context, article):
+def render_article(context, article, only_summary=False):
     """ Renders the given article instance as HTML. """
     # Tries to fetch the HTML content of the article from the cache
     cache_key = 'article-html-content-{article_id}-{lang}'.format(
@@ -25,6 +25,7 @@ def render_article(context, article):
     html_content = cache.get(cache_key, None) if journal_settings.ARTICLE_HTML_CONTENT_USE_CACHE \
         else None
 
+    context['only_summary'] = only_summary
     if 'article' not in context:
         context['article'] = article
 

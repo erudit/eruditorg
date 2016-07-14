@@ -41,6 +41,13 @@ urlpatterns = [
         views.ArticleDetailView.as_view(), name='article_detail'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<pk>\d+)/resume/$'),
+        views.ArticleSummaryView.as_view(), name='article_summary'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<localid>[\w-]+)/resume/$'),
+        views.ArticleSummaryView.as_view(), name='article_summary'),
+
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
           'article/(?P<articlepk>\d+)/media/(?P<localidentifier>[.\w-]+)$'),
         views.ArticleMediaView.as_view(), name='article_media'),
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'

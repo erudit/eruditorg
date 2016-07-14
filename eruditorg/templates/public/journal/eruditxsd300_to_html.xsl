@@ -75,14 +75,24 @@
               <xsl:apply-templates select="liminaire/grauteur/auteur" mode="author"/>
             </ul>
           </xsl:if>
+
+		  {% if only_summary %}
+		  <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte integral" %} <span class="ion ion-arrow-right-c"></span></a>
+		  {% endif %}
+
 				</div>
 
 				<!-- TODO: cover image -->
 				<div class="issue-cover col-sm-3">
 				</div>
 
+				{% if not only_summary %}
 				{% if next_article %}<a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
 				{% if previous_article %}<a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
+				{% else %}
+				{% if next_article %}<a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
+				{% if previous_article %}<a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
+				{% endif %}
 
 			</hgroup>
 
@@ -150,6 +160,7 @@
                 <a href="#resume">{% trans "Résumé" %}</a>
               </li>
             </xsl:if>
+			{% if article_access_granted and not only_summary %}
             <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
               <li class="article-toc--body">
                 <ul class="unstyled">
@@ -157,6 +168,7 @@
                 </ul>
               </li>
             </xsl:if>
+			{% endif %}
             <xsl:for-each select="partiesann[1]">
               <xsl:if test="grannexe">
                 <li>
@@ -260,7 +272,7 @@
 
 			<div class="full-article col-md-7 col-md-offset-1">
 
-				{% if not article_access_granted %}
+				{% if not article_access_granted and not only_summary %}
 					<div class="alert alert-warning">
 						<p><strong>{% trans "Abonnement requis!" %}</strong></p>
 						<p>
@@ -279,7 +291,7 @@
 				</section>
 				</xsl:if>
 
-				{% if article_access_granted %}
+				{% if article_access_granted and not only_summary %}
 					{% if article.erudit_object.processing == 'complet' %}
 					<!-- body -->
 					<section id="corps" class="article-section corps" role="main">
