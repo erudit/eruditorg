@@ -222,7 +222,7 @@
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
             </li>
-			{% if article_access_granted %}
+			{% if article_access_granted and article.fedora_object.pdf.exists %}
             <li>
               <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>

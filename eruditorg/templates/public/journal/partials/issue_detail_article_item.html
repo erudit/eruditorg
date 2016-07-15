@@ -5,7 +5,6 @@
   <p class="issue_detail--article-item--author">{{ article.authors.all|join:", " }}</p>
   <div class="mono-space">
     <a href="{% url 'public:journal:article_detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
-    <a href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
     <a href="#" class="btn btn-primary-outlined" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Sauvegarder" %}</a>
     <a href="#" class="btn btn-primary-outlined" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Supprimer" %}</a>
     {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}

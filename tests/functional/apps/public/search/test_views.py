@@ -7,6 +7,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
+from django.test.utils import override_settings
 from django.utils.encoding import smart_text
 from django.utils.timezone import now
 import pytest
@@ -44,6 +45,7 @@ def get_mocked_erudit_object():
     return m
 
 
+@override_settings(DEBUG=True)
 class TestEruditDocumentListAPIView(BaseEruditTestCase):
     def setUp(self):
         super(TestEruditDocumentListAPIView, self).setUp()
