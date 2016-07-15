@@ -1,7 +1,6 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% load public_journal_tags %}
 
 {% block data_controller %}public:journal:issue_detail{% endblock data_controller %}
 
@@ -181,38 +180,57 @@
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
         </header>
 
-        <ol class="issue_detail--articles unstyled">
+        {% for k, section1 in articles_per_section.items %}
+        {% if section1.titles.main %}
+        <h3 class="title-tag section">
+          {{ section1.titles.main }}
+          {% for paral in section1.titles.paral.values %}/ {{ paral }}{% endfor %}
+        </h3>
+        {% endif %}
 
-          {% regroup articles|sort_by_ordseq by erudit_object.section_title as section_articles %}
-          {% for article_group in section_articles %}
-            {% for article in article_group.list %}
-              <li id="article-{{ article.id }}" class="issue_detail--article-item" data-document-id="{{ article.id }}">
-                {% if article_group.grouper %}
-                <p class="title-tag section">
-                  {{ article_group.grouper }}
-                  {% with titles=article.erudit_object.section_titles %}{% for paral in titles.paral.values %}/ {{ paral }}{% endfor %}{% endwith %}
-                </p>
-                {% endif %}
-                <h3><a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}">{{ article.erudit_object.html_title|safe }}</a></h3>
-                <p class="issue_detail--article-item--author">{{ article.authors.all|join:", " }}</p>
-                <div class="mono-space">
-                  <a href="{% url 'public:journal:article_detail' journal_code=issue.journal.code issue_localid=issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
-                  <a href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}" class="btn btn-primary-outlined">{% trans "PDF" %}</a>
-                  <a href="#" class="btn btn-primary-outlined" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Sauvegarder" %}</a>
-                  <a href="#" class="btn btn-primary-outlined" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>{% trans "Supprimer" %}</a>
-                  {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
-                  {% if first_page and last_page and first_page != last_page %}
-                  {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
-                  {% elif first_page and first_page != "0" %}
-                  {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
-                  {% endif %}
-                  {% endwith %}
-                </div>
-              </li>
-            {% endfor %}
-          {% endfor %}
-
+        <ol class="issue_detail--articles unstyled section-1">
+        {% for article in section1.objects %}
+        {% include "public/journal/partials/issue_detail_article_item.html" %}
+        {% endfor %}
         </ol>
+
+        {% if section1.section2 %}
+          {% for k, section2 in section1.section2.items %}
+          {% if section2.titles.main %}
+          <h4 class="title-tag section">
+            {{ section2.titles.main }}
+            {% for paral in section2.titles.paral.values %}/ {{ paral }}{% endfor %}
+          </h4>
+          {% endif %}
+
+          <ol class="issue_detail--articles unstyled section-2">
+          {% for article in section2.objects %}
+          {% include "public/journal/partials/issue_detail_article_item.html" %}
+          {% endfor %}
+          </ol>
+
+          {% if section2.section3 %}
+            {% for k, section3 in section2.section3.items %}
+            {% if section3.titles.main %}
+            <h5 class="title-tag section">
+              {{ section3.titles.main }}
+              {% for paral in section3.titles.paral.values %}/ {{ paral }}{% endfor %}
+            </h5>
+            {% endif %}
+
+            <ol class="issue_detail--articles unstyled section-3">
+            {% for article in section3.objects %}
+            {% include "public/journal/partials/issue_detail_article_item.html" %}
+            {% endfor %}
+            </ol>
+
+            {% endfor %}
+          {% endif %}
+
+          {% endfor %}
+        {% endif %}
+
+        {% endfor %}
 
       </section>
 
