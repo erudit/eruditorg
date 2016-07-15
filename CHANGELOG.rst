@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.13 - Under development
---------------------------
+0.1.13
+------
 
 * Add a way to detect inexistant datastream on Fedora objects when accessing file contents using the ``FedoraFileDatastreamView``
 
