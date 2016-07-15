@@ -135,12 +135,18 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         """
         try:
             assert hasattr(fedora_object, self.datastream_name)
-            return get_cached_datastream_content(fedora_object, self.datastream_name)
+            content = get_cached_datastream_content(fedora_object, self.datastream_name)
         except (AssertionError, AttributeError):
             raise ImproperlyConfigured(
                 'The `{ds}` datastream cannot be retrieved on the {fedoracls} digital object. '
                 'Please ensure that a `{ds}` FileDatastream is defined on {fedoracls}.'
                 .format(ds=self.datastream_name, fedoracls=self.fedora_object_class.__name__))
+
+        # Returns a 404 HTTP response if the datastream does not exist on the Fedora object.
+        if content is None and not getattr(fedora_object, self.datastream_name).exists:
+            raise Http404
+
+        return content
 
     def write_datastream_content(self, response, content):
         """

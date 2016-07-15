@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import unittest.mock
+
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
 from django.test import RequestFactory
@@ -140,3 +142,22 @@ class TestFedoraFileDatastreamView(BaseEruditTestCase):
         # Run & check
         response = MyView.as_view()(request, pk=self.journal.pk)
         self.assertEqual(response['Content-Type'], 'image/jpeg')
+
+    def test_raises_http_404_if_the_datastream_cannot_be_retrieved_on_the_erudit_object(self):
+        # Setup
+        class MyView(FedoraFileDatastreamView):
+            content_type = 'image/jpeg'
+            datastream_name = 'dstream'
+            fedora_object_class = JournalDigitalObject
+            model = Journal
+
+        view = MyView()
+
+        mock_fedora_obj = unittest.mock.MagicMock()
+        mock_fedora_obj.dstream = unittest.mock.MagicMock()
+        mock_fedora_obj.dstream.content = None
+        mock_fedora_obj.dstream.exists = False
+
+        # Run & check
+        with self.assertRaises(Http404):
+            view.get_datastream_content(mock_fedora_obj)
