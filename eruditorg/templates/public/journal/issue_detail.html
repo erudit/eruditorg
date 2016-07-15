@@ -164,8 +164,18 @@
 
         <header class="page-header-main">
             <p class="title-tag">{{ issue.journal.name }}</p>
+
             <h1>
-              {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
+              {% for k, theme in issue.erudit_object.themes.items %}
+              {% if theme.html_name and theme.html_subname %}
+                <span>{{ theme.html_name|safe }}: {{ theme.html_subname|safe }}</span>
+              {% else %}
+                <span>{{ theme.html_name|safe }}</span>
+              {% endif %}
+              {% for k, paral in theme.paral.items %}
+                / {% if paral.name and paral.subname %}{{ paral.name }}: {{ paral.subname }}{% else %}{{ paral.name }}{% endif %}
+              {% endfor %}
+              {% endfor %}
               <span>{{ issue.volume_title_with_pages }}</span>
             </h1>
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
@@ -178,7 +188,10 @@
             {% for article in article_group.list %}
               <li id="article-{{ article.id }}" class="issue_detail--article-item" data-document-id="{{ article.id }}">
                 {% if article_group.grouper %}
-                <p class="title-tag section">{{ article_group.grouper }}</p>
+                <p class="title-tag section">
+                  {{ article_group.grouper }}
+                  {% with titles=article.erudit_object.section_titles %}{% for paral in titles.paral.values %}/ {{ paral }}{% endfor %}{% endwith %}
+                </p>
                 {% endif %}
                 <h3><a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}">{{ article.erudit_object.html_title|safe }}</a></h3>
                 <p class="issue_detail--article-item--author">{{ article.authors.all|join:", " }}</p>
