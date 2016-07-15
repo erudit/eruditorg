@@ -83,6 +83,11 @@ urlpatterns = [
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/raw/$'),
         views.ArticleRawPdfView.as_view(), name='article_raw_pdf'),
 
+    url(_(r'^article/(?P<articleid>[.\w-]+)/firstpage\.pdf$'),
+        views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),
+    url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/firstpage\.pdf$'),  # noqa
+        views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),
+
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 
