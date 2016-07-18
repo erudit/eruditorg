@@ -180,6 +180,8 @@
             <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
         </header>
 
+        {% if articles_per_section %}
+
         {% for k, section1 in articles_per_section.items %}
         {% if section1.titles.main %}
         <h3 class="title-tag section">
@@ -231,6 +233,18 @@
         {% endif %}
 
         {% endfor %}
+
+        {% else %}
+
+          {# This is displayed only if the Fedora repository is unavailable #}
+
+          <ol class="issue_detail--articles unstyled section-1">
+          {% for article in articles %}
+          {% include "public/journal/partials/issue_detail_article_item.html" %}
+          {% endfor %}
+          </ol>
+
+        {% endif %}
 
       </section>
 
