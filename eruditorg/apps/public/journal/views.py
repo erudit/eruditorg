@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from collections import OrderedDict
+from functools import reduce
 from itertools import groupby
 from string import ascii_lowercase
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
@@ -36,6 +38,7 @@ from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
 
+from .forms import JournalListFilterForm
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 
@@ -45,8 +48,8 @@ class JournalListView(ListView):
     Displays a list of Journal instances.
     """
     context_object_name = 'journals'
+    filter_form_class = JournalListFilterForm
     model = Journal
-    template_name = 'public/journal/journal_list.html'
 
     def apply_sorting(self, objects):
         if self.sorting == 'name':
@@ -54,11 +57,13 @@ class JournalListView(ListView):
                 sorted(objects, key=lambda j: j.letter_prefix), key=lambda j: j.letter_prefix)
             first_pass_results = [{'key': g[0], 'name': g[0], 'objects': sorted(
                 list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
+            return first_pass_results
         elif self.sorting == 'disciplines':
             disciplines = Discipline.objects.all().order_by('name')
             first_pass_results = [{'key': d.code, 'name': d.name, 'objects': sorted(
                 d.journals.all(), key=lambda j: j.sortable_name)} for d in disciplines]
 
+        # Only for "disciplines" sorting
         second_pass_results = []
         for r in first_pass_results:
             grouped = groupby(
@@ -73,7 +78,11 @@ class JournalListView(ListView):
     def get(self, request, *args, **kwargs):
         sorting = self.request.GET.get('sorting', 'name')
         self.sorting = sorting if sorting in ['name', 'disciplines', ] else 'name'
-        return super(JournalListView, self).get(request, *args, **kwargs)
+        self.filter_form = self.get_filter_form()
+        self.filter_form.is_valid()
+        self.object_list = self.get_queryset()
+        context = self.get_context_data(filter_form=self.filter_form)
+        return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super(JournalListView, self).get_context_data(**kwargs)
@@ -82,9 +91,42 @@ class JournalListView(ListView):
         context['disciplines'] = Discipline.objects.all().order_by('name')
         return context
 
+    def get_filter_form(self):
+        """ Returns an instance of the filter form to be used in this view. """
+        return self.filter_form_class(**self.get_filter_form_kwargs())
+
+    def get_filter_form_kwargs(self):
+        """ Returns the keyword arguments for instantiating the search form. """
+        form_kwargs = {}
+
+        if self.request.method == 'GET':
+            form_kwargs.update({'data': self.request.GET, })
+        return form_kwargs
+
     def get_queryset(self):
         qs = super(JournalListView, self).get_queryset()
+        qs = qs.select_related('collection', 'type')
+
+        # Filter the queryset
+        if self.filter_form.is_valid():
+            if self.filter_form.cleaned_data['open_access']:
+                qs = qs.filter(open_access=True)
+            if self.filter_form.cleaned_data['types']:
+                qs = qs.filter(reduce(
+                    lambda q, jtype: q | Q(type__code=jtype),
+                    self.filter_form.cleaned_data['types'], Q()))
+            if self.filter_form.cleaned_data['collections']:
+                qs = qs.filter(reduce(
+                    lambda q, collection: q | Q(collection__code=collection),
+                    self.filter_form.cleaned_data['collections'], Q()))
+
         return qs.select_related('collection')
+
+    def get_template_names(self):
+        if self.sorting == 'name':
+            return ['public/journal/journal_list_per_names.html', ]
+        elif self.sorting == 'disciplines':
+            return ['public/journal/journal_list_per_disciplines.html', ]
 
 
 class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailView):

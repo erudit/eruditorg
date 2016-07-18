@@ -1,0 +1,81 @@
+body.journal_list_per_disciplines #breadcrumb {
+	background: $light-grey;
+}
+
+#journal_list_per_disciplines {
+
+	// sorting header with title
+	.sorting-index {
+		background: $light-grey;
+		padding-top: 0px;
+		padding-bottom: 60px;
+		font-size: 18px;
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: $margin-vertical-default;
+		}
+
+		nav.index {
+			@include content-columns(4, $grid-gutter-width/2);
+			@media (max-width: $screen-sm-max) {
+				@include content-columns(2, $grid-gutter-width/2);
+			}
+			@media (max-width: $screen-xs-max) {
+				@include content-columns(1, $grid-gutter-width/2);
+			}
+
+			h5 {
+				font-size: 18px;
+			}
+
+		}
+	}
+
+	// each sorting group
+	.sorting-group {
+		padding-top: 90px;
+
+		&.even {
+			background: $light-grey;
+		}
+
+		&.odd {
+			background: #fff;
+		}
+
+		.sorting-group--title {
+			.title {
+				padding-top: 20px;
+				padding-bottom: 20px;
+				@include grid-cell-border('top', 1px, $black);
+
+				a {
+					display: inline-block;
+					margin-left: 5px;
+					color: $dark-grey;
+					font-size: 24px;
+					outline: none;
+				}
+			}
+		}
+
+		.sorting-group--articles {
+			padding: 60px 0 0 0;
+
+			h3 {
+				letter-spacing: 0.8px;
+				@include fw-sans-bold();
+			}
+
+			&.sorting-group--articles--default .col:nth-child(4n+1),
+			&.sorting-group--articles--small .col:nth-child(6n+1) {
+				clear: both;
+			}
+
+			// &:nth-child(odd) {
+			// 	background: $light-grey;
+			// }
+		}
+	}
+}

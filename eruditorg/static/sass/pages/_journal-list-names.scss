@@ -1,8 +1,83 @@
-body.journal_list #breadcrumb {
-	background: $light-grey;
-}
+#journal_list_per_names {
 
-#journal_list {
+	#id_journal_list_body{
+		margin-top: 30px;
+
+		aside{
+			padding-right: 30px;
+
+			form{
+				hr{
+					border-top-color: $black;
+				}
+
+				.filter-title{
+					padding-bottom: 10px;
+					border-bottom: 1px solid $gray-dark;
+					font-size: 24px;
+				}
+
+				.form-group{
+					margin: 20px 0;;
+					padding: 0;
+				}
+
+				.form-action{
+					margin-top: 20px;
+				}
+			}
+		}
+
+		ul#id_journal_categories{
+			margin: 0;
+			list-style: none;
+
+			li{
+				margin: 0;
+				display: inline-block;
+
+				a{
+					padding: 6px 10px;
+					display: inline-block;
+
+					&:hover, &:focus{
+						background: $coral-red;
+						text-decoration: none;
+						color: $white;
+					}
+				}
+			}
+		}
+
+		ul#id_journal_items_header{
+			margin-bottom: 0;
+			list-style: none;
+
+			li{
+				font-size: 24px;
+			}
+		}
+
+		ul#id_journal_items{
+			margin: 0;
+			list-style: none;
+			border-top: 1px solid $gray-dark;
+
+			li{
+				padding: 25px 0;
+				border-bottom: 1px solid lighten($gray-light, 20%);
+
+				&:last-child{
+					border: none;
+				}
+
+				a.journal-name{
+					padding: 10px 0;
+					font-size: 18px;
+				}
+			}
+		}
+	}
 
 	// sorting header with title
 	.sorting-index {

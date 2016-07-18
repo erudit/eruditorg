@@ -1,0 +1,114 @@
+{% extends "public/journal/journal_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page_title %}{% trans "Revues" %}{% endblock page_title %}
+{% block body_class %}{{ block.super }} journal_list{% endblock %}
+{% block data_controller %}public:journal:journal_list{% endblock data_controller %}
+
+{% block content %}
+<div id="journal_list_per_names">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 clearfix">
+        <nav class="pull-right">
+          {% if sorting == 'name' %}
+          <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines" class="btn btn-primary-outlined">{% trans "Revues par disciplines" %}</a>
+          {% elif sorting == 'disciplines' %}
+          <a href="{% url 'public:journal:journal_list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
+          {% endif %}
+        </nav>
+        <h2 class="h3 bold">{% if sorting == 'name' %}{% trans "Revues par ordre alphabétique" %}{% elif sorting == 'disciplines' %}{% trans "Revues par disciplines" %}{% endif %}</h2>
+        <div class="row"><div class="col-md-8">{% lorem 1 p %}</div></div>
+      </div>
+    </div>
+    <div id="id_journal_list_body" class="row">
+      <aside class="col-sm-3">
+        <form action="" method="get">
+          <div class="filter-title">{% trans "Filtres" %}</div>
+          <div class="form-group">
+            <div id="div_id_{{ filter_form.open_access.html_name }}" class="checkbox">
+              {{ filter_form.open_access|add_class:'form-control' }}
+              <label for="{{ filter_form.open_access.auto_id }}">{{ filter_form.open_access.label }}</label>
+              {% for error in filter_form.open_access.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+          <hr />
+          <div id="div_id_{{ filter_form.types.html_name }}" class="form-group">
+            <label for="id_{{ filter_form.types.auto_id }}_0" class="control-label">{{ filter_form.types.label }} {% if filter_form.types.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.types.help_text }}"><i class="ion-help-circled"></i></span>{% endif %}</label>
+            <div class="controls">
+            {% for choice in filter_form.types.field.choices %}
+              <div class="checkbox">
+                <input type="checkbox" name="{{ filter_form.types.html_name }}" class="styled" id="{{ filter_form.types.auto_id }}_{{ forloop.counter }}" value="{{ choice.0 }}"{% if choice.0 in filter_form.types.value or choice.0|stringformat:"s" in filter_form.types.value or choice.0|stringformat:"s" == filter_form.types.value|stringformat:"s" %} checked="checked"{% endif %}>
+                <label for="{{ filter_form.types.auto_id }}_{{ forloop.counter }}" class="">{{ choice.1 }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          <hr />
+          <div id="div_id_{{ filter_form.collections.html_name }}" class="form-group">
+            <label for="id_{{ filter_form.collections.auto_id }}_0" class="control-label">{{ filter_form.collections.label }} {% if filter_form.collections.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.collections.help_text }}"><i class="ion-help-circled"></i></span>{% endif %}</label>
+            <div class="controls">
+            {% for choice in filter_form.collections.field.choices %}
+              <div class="checkbox">
+                <input type="checkbox" name="{{ filter_form.collections.html_name }}" class="styled" id="{{ filter_form.collections.auto_id }}_{{ forloop.counter }}" value="{{ choice.0 }}"{% if choice.0 in filter_form.collections.value or choice.0|stringformat:"s" in filter_form.collections.value or choice.0|stringformat:"s" == filter_form.collections.value|stringformat:"s" %} checked="checked"{% endif %}>
+                <label for="{{ filter_form.collections.auto_id }}_{{ forloop.counter }}" class="">{{ choice.1 }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="form-action col-centered">
+            <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
+          </div>
+        </form>
+      </aside>
+      <div class="col-sm-9">
+        <ul id="id_journal_categories">
+        {% for objects_group in sorted_objects %}
+          {% if not objects_group.key %}
+          <li><a href="#section-void">{% trans "Autres" %}</a></li>
+          {% else %}
+          <li><a href="#section-{{ objects_group.key }}">{{ objects_group.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+        <ul id="id_journal_items_header" class="row">
+          <li class="col-sm-6">{% trans "Revue" %}</li>
+          <li class="col-sm-2">{% trans "Type" %}</li>
+          <li class="col-sm-2">{% trans "Fonds" %}</li>
+          <li class="col-sm-2">{% trans "Accès" %}</li>
+        </ul>
+        <ul id="id_journal_items">
+        {% for objects_group in sorted_objects %}
+        {% for journal in objects_group.objects %}
+          <li>
+            <div class="row">
+              <div class="col-sm-6">
+                <a class="journal-name" href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
+                <div class="color-dark-grey">
+                  {% if journal.subtitle %}
+                  <p class="color-dark-grey">{{ journal.subtitle }}</p>
+                  {% endif %}
+                  {% if journal.type.code == 'S' %}
+                  <p class="bold">{% trans "Révisé par les pairs" %}</p>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-sm-2">
+                {% if journal.type.code == 'S' %}<p>{% trans "Savante" %}</p>{% elif journal.type.code == 'C' %}<p>{% trans "Culturelle" %}</p>{% endif %}
+              </div>
+              <div class="col-sm-2">
+                <p>{{ journal.collection.name }}</p>
+              </div>
+              <div class="col-sm-2">
+                {% if journal.open_access %}<p>{% trans "Libre" %}</p>{% endif %}
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
