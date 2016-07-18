@@ -66,7 +66,7 @@
 
 {% block breadcrumb %}{{ block.super }}
  / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
- / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.localidentifier %}">
+ / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
    {% if article.issue.erudit_object.html_theme %}
    {{ article.issue.erudit_object.html_theme|safe|truncatechars:50 }}
    {% else %}

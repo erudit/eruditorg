@@ -41,7 +41,8 @@ class LatestIssuesFeed(Feed):
     def item_link(self, item):
         """ Returns the link of a feed item. """
         return reverse_lazy(
-            'public:journal:issue_detail', args=[item.journal.code, item.localidentifier])
+            'public:journal:issue_detail',
+            args=[item.journal.code, item.volume_slug, item.localidentifier])
 
     def items(self):
         """ Returns the items to embed in the feed. """

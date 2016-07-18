@@ -213,6 +213,7 @@ class IssueDetailView(FedoraServiceRequiredMixin, DetailView):
         if 'pk' in self.kwargs:
             return super(IssueDetailView, self).get_object(queryset)
 
+        print(self.kwargs['localidentifier'])
         return get_object_or_404(
             Issue.objects.select_related('journal', 'journal__collection').all(),
             localidentifier=self.kwargs['localidentifier'])

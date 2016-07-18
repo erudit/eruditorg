@@ -261,8 +261,8 @@ class TestIssueDetailView(BaseEruditTestCase):
     def test_works_with_pks(self):
         # Setup
         issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        url = reverse('public:journal:issue_detail', kwargs={
-            'journal_code': self.journal.code, 'pk': issue.pk})
+        url = reverse('public:journal:issue_detail', args=[
+            self.journal.code, issue.volume_slug, issue.localidentifier])
         # Run
         response = self.client.get(url)
         # Check
@@ -272,8 +272,8 @@ class TestIssueDetailView(BaseEruditTestCase):
         # Setup
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
-        url = reverse('public:journal:issue_detail', kwargs={
-            'journal_code': self.journal.code, 'localidentifier': issue.localidentifier})
+        url = reverse('public:journal:issue_detail', args=[
+            self.journal.code, issue.volume_slug, issue.localidentifier])
         # Run
         response = self.client.get(url)
         # Check

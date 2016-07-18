@@ -42,10 +42,12 @@ class TestLatestIssuesFeed(BaseEruditTestCase):
         self.assertEqual(len(feed.items), 2)
         self.assertIn(
             reverse('public:journal:issue_detail',
-                    args=[issue1.journal.code, issue1.localidentifier]), feed.items[0]['link'])
+                    args=[issue1.journal.code, issue1.volume_slug, issue1.localidentifier]),
+            feed.items[0]['link'])
         self.assertIn(
             reverse('public:journal:issue_detail',
-                    args=[issue2.journal.code, issue2.localidentifier]), feed.items[1]['link'])
+                    args=[issue2.journal.code, issue2.volume_slug, issue2.localidentifier]),
+            feed.items[1]['link'])
 
 
 class TestLatestJournalArticlesFeed(BaseEruditTestCase):

@@ -203,7 +203,7 @@
             {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
             <span>{{ issue.volume_title }}</span>
           </div>
-          <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.localidentifier %}">
+          <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
             &#8594;&nbsp;{% trans "Aller au sommaire du numéro" %}
           </a>
           <div class="main-hr"></div>
