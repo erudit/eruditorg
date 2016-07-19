@@ -39,3 +39,6 @@ TRACKING_INFLUXDB_PORT = 8086
 TRACKING_INFLUXDB_DBNAME = 'erudit-metrics'
 TRACKING_INFLUXDB_USER = 'root'
 TRACKING_INFLUXDB_PASSWORD = 'root'
+
+FEDORA_ROOT = 'http://example.com'
+SOLR_ROOT = 'http://example.com'

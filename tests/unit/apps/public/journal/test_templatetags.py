@@ -15,7 +15,6 @@ from erudit.fedora.objects import ArticleDigitalObject
 
 from apps.public.journal.templatetags.public_journal_tags import author_articles
 from apps.public.journal.templatetags.public_journal_tags import render_article
-from apps.public.journal.templatetags.public_journal_tags import sort_by_ordseq
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -60,20 +59,3 @@ class TestAuthorArticlesFilter(BaseEruditTestCase):
 
         # Run
         self.assertEqual(list(author_articles(author, self.journal)), [article, ])
-
-
-class TestSortByOrdseqFilter(BaseEruditTestCase):
-    def test_can_return_articles_sorted_by_their_ordering_number(self):
-        # Setup
-        issue = IssueFactory.create(journal=self.journal)
-        a1 = ArticleFactory.create(issue=issue)
-        a2 = ArticleFactory.create(issue=issue)
-        a3 = ArticleFactory.create(issue=issue)
-        setattr(a1, 'erudit_object', unittest.mock.MagicMock())
-        setattr(a2, 'erudit_object', unittest.mock.MagicMock())
-        setattr(a3, 'erudit_object', unittest.mock.MagicMock())
-        a1.erudit_object.ordseq = 10
-        a2.erudit_object.ordseq = 1
-        a3.erudit_object.ordseq = 30
-        # Run & check
-        self.assertEqual(sort_by_ordseq([a1, a2, a3]), [a2, a1, a3])

@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.core.cache import cache
 from django.utils import formats
 from django.utils import translation
+from eulfedora.util import RequestFailed
+from requests.exceptions import ConnectionError
 from rest_framework import serializers
 
 from erudit import models as erudit_models
@@ -48,13 +51,14 @@ class ArticleSerializer(serializers.ModelSerializer):
     issue_title = serializers.SerializerMethodField()
     issue_number = serializers.SerializerMethodField()
     issue_published = serializers.SerializerMethodField()
+    has_pdf = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Article
         fields = [
             'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
             'issue_published', 'title', 'surtitle', 'subtitle', 'processing', 'authors', 'abstract',
-            'first_page', 'last_page',
+            'first_page', 'last_page', 'has_pdf',
         ]
 
     def get_authors(self, obj):
@@ -96,6 +100,14 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_issue_published(self, obj):
         return formats.date_format(obj.issue.date_published, 'YEAR_MONTH_FORMAT')
+
+    def get_has_pdf(self, obj):
+        try:
+            return obj.fedora_object.pdf.exists
+        except (RequestFailed, ConnectionError):  # pragma: no cover
+            if settings.DEBUG:
+                return False
+            raise
 
 
 class ThesisSerializer(serializers.ModelSerializer):
