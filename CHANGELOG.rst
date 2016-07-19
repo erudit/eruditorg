@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.14 - Under development
---------------------------
+0.1.14
+------
 
 * Add ``volume_slug`` property on the ``Issue`` model that can be used in URL patterns
 
