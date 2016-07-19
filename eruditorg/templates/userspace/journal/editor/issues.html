@@ -16,7 +16,7 @@
     {% if can_manage_issuesubmission %}
     <div class="row">
       <div class="col-md-6">
-        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Dépôt de fichiers" %}</a>
+        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Ajouter des fichiers" %}</a>
         <br /><br />
       </div>
     </div>
@@ -37,11 +37,7 @@
             </span>
           </span>
           <span class="title">
-            {{ issue_submission.year }},
-            {% if issue_submission.volume %}
-            {% trans "vol." %} {{ issue_submission.volume }},
-            {% endif %}
-            {% trans "n°" %} {{ issue_submission.number }}
+            {{ issue_submission }}
           </span>
           <span class="metadata-wrapper">
             <span class="metadata">

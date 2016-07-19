@@ -2,7 +2,7 @@
 
 <input{{ final_attrs }} style="display: none;">
 
-<div class="upload-container" data-json-params='{{ json_params|safe }}' data-filesizes='{{ files_json|safe }}'>
+<div id="drop_element" class="upload-container" data-json-params='{{ json_params|safe }}' data-filesizes='{{ files_json|safe }}'>
   <table class="upload-table">
     <thead>
       <tr>
@@ -40,16 +40,6 @@
         <td colspan="5">{% trans "Votre navigateur ne supporte pas les technologies Flash, Silverlight ou HTML5." %}</td>
       </tr>
       {% endcomment %}
-      <tr id="drop_element" class="drop">
-        <td colspan="5">
-          <div class="drop-circle">
-            <div class="drop-message">
-              <div class="drop-icon"><span class="icon-action icon-upload"></span></div>
-              <div class="drop-text">{% trans "Glissez-déposez vos fichiers de production ici." %}</div>
-            </div>
-          </div>
-        </td>
-      </tr>
     </tbody>
     <tfoot>
       <tr>

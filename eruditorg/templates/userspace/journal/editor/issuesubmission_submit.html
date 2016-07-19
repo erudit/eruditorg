@@ -15,15 +15,19 @@
   <div class="col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Êtes-vous certain ?" %}</h3>
+        <h3 class="panel-title">{% trans "Transmission finale des fichiers" %}</h3>
       </div>
       <div class="panel-body">
-      <div class="warning-message">{{ question }}</div>
+      <div class="warning-message"><p>{{ question }}</p></div>
         <form action="" method="post">{% csrf_token %}
           {% if incomplete_files %}
             <p>
-              {% trans "Les fichiers suivants n'ont pas été téléversés complètement et seront supprimés si vous soumettez votre demande :" %}&nbsp;
-              {% for f in incomplete_files %}{{ f.get_filename }}{% if not forloop.last %}, {% endif %}{% endfor %}
+              {% trans "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas envoyés à l'équipe de production:" %}&nbsp;
+              <ul>
+              {% for f in incomplete_files %}
+              <li><p>{{ f.get_filename }}</p></li>
+              {% endfor %}
+              </ul>
             </p>
           {% endif %}
           <input type="hidden" name="post" value="yes" />
