@@ -17,7 +17,7 @@ export default {
       }
 
       if(filesAddedCount) {
-        var r = confirm(gettext("Certains de vos fichiers n'ont pas étés téléversés. Êtes-vous sûr ?"));
+        var r = confirm(gettext("Certains de vos fichiers n'ont pas étés téléversés. Voulez-vous poursuivre l'enregistrement ?"));
         if (r == true) { quitConfirm = true; }
       }
 

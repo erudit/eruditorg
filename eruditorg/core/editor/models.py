@@ -19,7 +19,7 @@ class IssueSubmission(models.Model):
 
     STATUS_CHOICES = (
         (DRAFT, _("Brouillon")),
-        (SUBMITTED, _("Soumis")),
+        (SUBMITTED, _("En attente de validation")),
         (VALID, _("Validé")),
     )
 
@@ -64,7 +64,7 @@ class IssueSubmission(models.Model):
     )
 
     comment = models.TextField(
-        verbose_name=_("Commentaire"),
+        verbose_name=_("Commentaires"),
         blank=True, null=True
     )
 
@@ -78,10 +78,17 @@ class IssueSubmission(models.Model):
         verbose_name_plural = _("Envois de numéros")
 
     def __str__(self):
-        return "{} - {}, volume {}".format(
-            self.date_created,
-            self.journal,
-            self.volume
+
+        year = self.year
+        volume = ""
+        if self.volume:
+            volume = _(" vol. {},".format(self.volume))
+        number = _("n° {}".format(self.number))
+
+        return "{},{} {}".format(
+            year,
+            volume,
+            number
         )
 
     def get_absolute_url(self):
@@ -126,7 +133,7 @@ class IssueSubmission(models.Model):
     @transition(field=status, source=SUBMITTED, target=DRAFT,
                 permission=lambda user: user.has_perm(
                     'editor.review_issuesubmission'),
-                custom=dict(verbose_name=_("Marquer à corriger")))
+                custom=dict(verbose_name=_("Demander des corrections")))
     def refuse(self):
         """
         Resend the issue for modifications

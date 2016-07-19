@@ -73,7 +73,7 @@
                 <hr />
                 <div class="row">
                   <div class="col-xs-12">
-                    <p class="lead value-title">{% trans "Commentaire" %}</p>
+                    <p class="lead value-title">{% trans "Commentaires" %}</p>
                     <p class="value"><strong>{% if issue.comment %}{{ issue.comment }}{% else %}<span class="muted">{% trans "Non renseigné" %}</span>{% endif %}</strong></p>
                   </div>
                 </div>
@@ -116,10 +116,10 @@
                 <div class="row">
                   <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
                     <ul>
-                    {% for track in status_tracks %}
+                    {% for track in status_tracks reversed %}
                       <li>
                         {% if track.status == "D" %}
-                          {% trans "Marqué à corriger le" as status_prefix %}
+                          {% trans "Corrections demandées le" as status_prefix %}
                         {% elif track.status == "S" %}
                           {% trans "Soumis le" as status_prefix %}
                         {% elif track.status == "V" %}
@@ -142,7 +142,7 @@
                           </p>
                         {% endif %}
                         {% if track.comment %}
-                          <p><strong>{% trans "Commentaire :" %}</strong></p>
+                          <p><strong>{% trans "Commentaires :" %}</strong></p>
                           <small>{{ track.comment }}</small>
                         {% endif %}
                       </li>

@@ -192,7 +192,6 @@ class IssueSubmissionTransitionView(
     menu_journal = 'editor'
     model = IssueSubmission
     raise_exception = True
-    template_name = 'userspace/journal/editor/issuesubmission_transition.html'
     transition_signal = userspace_post_transition
     use_comment_form = False
 
@@ -260,9 +259,11 @@ class IssueSubmissionTransitionView(
 
 
 class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
-    question = _('Voulez-vous soumettre le numéro ?')
+    question = _("Vous êtes à l'étape d'effectuer la transmission finale des fichiers\
+    à l'équipe de production. Une fois envoyés, vous ne pourrez plus modifier les fichiers\
+    à moins que l'équipe de production ne vous demande de les corriger. Voulez-vous poursuivre?")
     permission_required = 'editor.manage_issuesubmission'
-    success_message = _('Le numéro a été soumis avec succès')
+    success_message = _('Les fichiers ont été transmis avec succès')
     template_name = 'userspace/journal/editor/issuesubmission_submit.html'
     transition_name = 'submit'
 
@@ -302,10 +303,11 @@ class IssueSubmissionApproveView(IssueSubmissionTransitionView):
 
 
 class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
-    question = _('Voulez-vous refuser le numéro ?')
-    success_message = _('Le numéro a été refusé avec succès')
+    question = None
+    success_message = _('Les corrections ont été transmises avec succès')
     transition_name = 'refuse'
     use_comment_form = True
+    template_name = 'userspace/journal/editor/issuesubmission_refuse.html'
 
     def has_permission(self):
         return self.request.user.has_perm('editor.review_issuesubmission')

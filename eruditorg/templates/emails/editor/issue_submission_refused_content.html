@@ -6,7 +6,7 @@
   <p>{% trans "Votre numéro a été refusé." %}</p>
   {% with track=issue.last_status_track %}
   {% if track.comment %}
-  <p>{% trans "Voici le commentaire laissé par le validateur à votre attention:" %}</p>
+  <p>{% trans "Voici les commentaires laissés par le validateur à votre attention:" %}</p>
   <blockquote>{{ track.comment }}</blockquote>
   {% endif %}
   {% endwith %}
