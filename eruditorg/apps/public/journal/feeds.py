@@ -90,7 +90,9 @@ class LatestJournalArticlesFeed(Feed):
         """ Returns the link of a feed item. """
         return reverse_lazy(
             'public:journal:article_detail',
-            args=[item.issue.journal.code, item.issue.localidentifier, item.localidentifier])
+            args=[
+                item.issue.journal.code, item.issue.volume_slug, item.issue.localidentifier,
+                item.localidentifier])
 
     def items(self, obj):
         articles = Article.objects.filter(issue_id=self.last_issue)

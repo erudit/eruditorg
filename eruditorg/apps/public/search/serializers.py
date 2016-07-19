@@ -51,14 +51,15 @@ class ArticleSerializer(serializers.ModelSerializer):
     issue_title = serializers.SerializerMethodField()
     issue_number = serializers.SerializerMethodField()
     issue_published = serializers.SerializerMethodField()
+    issue_volume_slug = serializers.SerializerMethodField()
     has_pdf = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Article
         fields = [
             'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
-            'issue_published', 'title', 'surtitle', 'subtitle', 'processing', 'authors', 'abstract',
-            'first_page', 'last_page', 'has_pdf',
+            'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle', 'processing',
+            'authors', 'abstract', 'first_page', 'last_page', 'has_pdf',
         ]
 
     def get_authors(self, obj):
@@ -100,6 +101,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_issue_published(self, obj):
         return formats.date_format(obj.issue.date_published, 'YEAR_MONTH_FORMAT')
+
+    def get_issue_volume_slug(self, obj):
+        return obj.issue.volume_slug
 
     def get_has_pdf(self, obj):
         try:

@@ -76,6 +76,7 @@ class TestLatestJournalArticlesFeed(BaseEruditTestCase):
             reverse('public:journal:article_detail',
                     args=[
                         article1.issue.journal.code,
+                        article1.issue.volume_slug,
                         article1.issue.localidentifier,
                         article1.localidentifier
                     ]), feed.items[0]['link'])
@@ -83,6 +84,7 @@ class TestLatestJournalArticlesFeed(BaseEruditTestCase):
             reverse('public:journal:article_detail',
                     args=[
                         article2.issue.journal.code,
+                        article2.issue.volume_slug,
                         article2.issue.localidentifier,
                         article2.localidentifier
                     ]), feed.items[1]['link'])

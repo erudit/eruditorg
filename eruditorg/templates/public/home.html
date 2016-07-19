@@ -88,7 +88,7 @@
               {% if issue.has_coverpage %}
               {{ issue.volume_slug }}
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-                <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive latest-issues--article--cover">
+                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive latest-issues--article--cover">
               </a>
               {% endif %}
             </div>

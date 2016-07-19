@@ -77,7 +77,7 @@
           </xsl:if>
 
 		  {% if only_summary %}
-		  <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte integral" %} <span class="ion ion-arrow-right-c"></span></a>
+		  <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte integral" %} <span class="ion ion-arrow-right-c"></span></a>
 		  {% endif %}
 
 				</div>
@@ -87,11 +87,11 @@
 				</div>
 
 				{% if not only_summary %}
-				{% if next_article %}<a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
-				{% if previous_article %}<a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
+				{% if next_article %}<a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
+				{% if previous_article %}<a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
 				{% else %}
-				{% if next_article %}<a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
-				{% if previous_article %}<a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
+				{% if next_article %}<a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
+				{% if previous_article %}<a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
 				{% endif %}
 
 			</hgroup>
@@ -236,7 +236,7 @@
             </li>
 			{% if article_access_granted and article.fedora_object.pdf.exists %}
             <li>
-              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.localidentifier %}">
+              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </button>
@@ -299,7 +299,7 @@
 						<xsl:apply-templates select="//corps"/>
 					</section>
 					{% elif article.localidentifier %}
-					<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.localidentifier %}" width="500" height="700" />
+					<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" width="500" height="700" />
 					{% endif %}
 				{% elif not article.erudit_object.abstracts %}
 					<p>
