@@ -1,0 +1,131 @@
+{% extends "public/journal/journal_base.html" %}
+{% load i18n staticfiles %}
+{% load public_journal_tags %}
+
+{% block data_controller %}public:journal:article_detail{% endblock data_controller %}
+
+{% block meta_tags %}
+<!-- Facebook / Open Graph -->
+<meta property="fb:app_id" content="128099979787">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ article.title }}">
+<meta property="og:site_name" content="Érudit">
+<meta property="og:locale" content="fr_CA">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@eruditorg">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:title" content="{{ article.title }} – Érudit">
+
+{% if not article.issue.journal.type.code == 'C' %}
+<!-- Google Scholar -->
+  <meta name="citation_title" content="{{ article.title }}" />
+  {% for author in article.erudit_object.authors %}
+    {% if author.firstname and author.lastname %}
+      <meta name="citation_author" content="{{ author.lastname }}, {{ author.firstname }}" />
+    {% endif %}
+    {% for aff in author.affiliations %}
+      <meta name="citation_author_institution" content="{{ aff }}" />
+    {% endfor %}
+  {% endfor %}
+  <meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
+  {% for abstract in article.erudit_object.abstracts %}
+    <meta name="citation_abstract" lang="{{ abstract.lang }}" content="{{ abstract.content }}" />
+  {% endfor %}
+  <meta name="citation_language" content="{{ article.erudit_object.lang }}" />
+  {% if article.erudit_object.first_page %}
+    <meta name="citation_firstpage" content="{{ article.erudit_object.first_page }}" />
+  {% endif %}
+  {% if article.erudit_object.last_page %}
+    <meta name="citation_lastpage" content="{{ article.erudit_object.last_page }}" />
+  {% endif %}
+  <meta name="citation_issn" content="{{ article.erudit_object.issn }}" />
+  {% if article.issue.volume %}
+    <meta name="citation_volume" content="{{ article.issue.volume }}" />
+  {% endif %}
+  {% if article.issue.number %}
+    <meta name="citation_issue" content="{{ article.issue.number }}" />
+  {% endif %}
+  <meta name="citation_publication_date" content="{{ article.erudit_object.publication_year }}" />
+  <meta name="citation_date" content="{{ article.erudit_object.publication_year }}" />
+  <meta name="citation_publisher" content="{{ article.erudit_object.publisher }}" />
+  <meta name="citation_doi" content="{{ article.erudit_object.doi }}" />
+  <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
+  <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' article.localidentifier %}" />
+  {% for keywords in article.erudit_object.keywords %}
+    <meta name="citation_keywords" lang="{{ keywords.lang }}" content="{% for k in keywords.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+  {% endfor %}
+{% endif %}
+{% endblock meta_tags %}
+
+{% block body_class %}public static-header{% endblock %}
+
+{% block header_class %}static{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}
+ / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
+ / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.localidentifier %}">
+   {% if article.issue.erudit_object.html_theme %}
+   {{ article.issue.erudit_object.html_theme|safe|truncatechars:50 }}
+   {% else %}
+   {{ article.issue.volume_title_with_pages }}
+   {% endif %}
+   </a>
+ / <a>{% blocktrans with title=article.title|truncatechars:50 %}{{ title }} - Résumé{% endblocktrans %}</a>
+{% endblock %}
+
+{% block content %}
+
+<section
+    id="article_detail"
+    class="container"
+    data-document-id="{{ article.id }}"
+    {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
+  >
+
+  {% if article.publication_allowed_by_authors %}
+    {# XSL transformation article render #}
+    {% render_article article only_summary=True %}
+  {% else %}
+    <div class="alert alert-warning">
+      {% trans "La diffusion de cet article sur Érudit n'a pas été autorisée par l'auteur." %}
+    </div>
+  {% endif %}
+
+  {# article footer with related articles #}
+  {% if related_articles %}
+  <footer class="related-articles">
+
+    <div class="row">
+      <header class="col-xs-12">
+        <h2>{% trans "Autres articles de ce numéro" %}</h2>
+      </header>
+    </div>
+
+    <div class="row">
+      {% for related_article in related_articles %}
+      <article class="related-article col-sm-6 col-md-3">
+        <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
+          <h4>{{ related_article.title }}</h4>
+          {% if related_article.authors.all|length > 0 %}
+          <footer class="meta">
+            <h5>Par {{ related_article.authors.all|join:", " }}</h5>
+          </footer>
+          {% endif %}
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+
+  </footer>
+  {% endif %}
+
+</section>
+
+<div class="hidden">
+  {% include "public/journal/partials/article_citation_modal_content.html" %}
+</div>
+
+{% endblock content %}
