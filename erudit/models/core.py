@@ -497,6 +497,14 @@ class Issue(FedoraMixin, FedoraDated):
                 title=self.volume_title, first_page=first_page)
         return self.volume_title
 
+    @cached_property
+    def volume_slug(self):
+        """ Returns a slug string containing the issue's publication year, volume and number. """
+        volume = 'v' + self.volume if self.volume else None
+        number = 'n' + self.number if self.number else None
+        elements = [str(self.year), volume, number]
+        return '-'.join([e for e in elements if e])
+
     @property
     def has_movable_limitation(self):
         """ Returns a boolean indicating if the issue has a movable limitation. """

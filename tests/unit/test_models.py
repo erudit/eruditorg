@@ -214,6 +214,25 @@ class TestIssue(BaseEruditTestCase):
         # Run & check
         self.assertFalse(issue.has_coverpage)
 
+    def test_can_return_a_slug_that_can_be_used_in_urls(self):
+        # Setup
+        issue_1 = IssueFactory.create(
+            journal=self.journal, year=2015, volume='4', number='1', localidentifier='i1')
+        issue_2 = IssueFactory.create(
+            journal=self.journal, year=2015, volume='4', number=None, localidentifier='i2')
+        issue_3 = IssueFactory.create(
+            journal=self.journal, year=2015, volume=None, number='2', localidentifier='i3')
+        issue_4 = IssueFactory.create(
+            journal=self.journal, year=2015, volume='2-3', number='39', localidentifier='i4')
+        issue_5 = IssueFactory.create(
+            journal=self.journal, year=2015, volume=None, number=None, localidentifier='i5')
+        # Run & check
+        self.assertEqual(issue_1.volume_slug, '2015-v4-n1')
+        self.assertEqual(issue_2.volume_slug, '2015-v4')
+        self.assertEqual(issue_3.volume_slug, '2015-n2')
+        self.assertEqual(issue_4.volume_slug, '2015-v2-3-n39')
+        self.assertEqual(issue_5.volume_slug, '2015')
+
 
 class TestArticle(BaseEruditTestCase):
 
