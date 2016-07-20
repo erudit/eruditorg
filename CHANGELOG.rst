@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.15 - Under development
+--------------------------
+
+* Replace ``previous_code`` / ``next_code`` Journal fields by foreign keys
+
 0.1.14
 ------
 

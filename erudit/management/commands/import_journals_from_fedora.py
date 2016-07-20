@@ -64,6 +64,7 @@ class Command(BaseCommand):
         self.test_xslt = options.get('test_xslt', None)
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
+        self.journal_precendence_relations = []
 
         # Handles a potential XSLT test function
         try:
@@ -109,6 +110,7 @@ class Command(BaseCommand):
                 return
 
             self.import_journal(self.journal_pid, collection)
+            self.import_journal_precedences(self.journal_precendence_relations)
             return
 
         # Imports each collection
@@ -139,6 +141,8 @@ class Command(BaseCommand):
         """ Imports all the journals of a specific collection. """
         self.stdout.write(self.style.MIGRATE_HEADING(
             'Start importing "{}" collection'.format(collection.code)))
+
+        self.journal_precendence_relations = []
 
         latest_update_date = self.modification_date
         if not self.full_import and latest_update_date is None:
@@ -181,7 +185,25 @@ class Command(BaseCommand):
                 issue_count += _ic
                 article_count += _ac
 
+        # STEP 3: associates Journal instances with other each other
+        # --
+
+        self.import_journal_precedences(self.journal_precendence_relations)
+
         return journal_count, journal_errored_count, issue_count, article_count
+
+    def import_journal_precedences(self, precendences_relations):
+        """ Associates previous/next Journal instances with each journal. """
+        for r in precendences_relations:
+            code, previous_code, next_code = r['journal_code'], r['previous_code'], r['next_code']
+            if previous_code is None and next_code is None:
+                continue
+            j = Journal.objects.get(code=code)
+            previous_journal = Journal.objects.get(code=previous_code) if previous_code else None
+            next_journal = Journal.objects.get(code=next_code) if next_code else None
+            j.previous_journal = previous_journal
+            j.next_journal = next_journal
+            j.save()
 
     @transaction.atomic
     def import_journal(self, journal_pid, collection):
@@ -228,14 +250,20 @@ class Command(BaseCommand):
 
         issues = xml_issue = publications_tree.xpath('.//numero')
         current_journal_code_found = False
+        precendences_relation = {
+            'journal_code': journal.code,
+            'previous_code': None,
+            'next_code': None,
+        }
         for issue in issues:
             code = issue.get('revAbr')
             if code != journal.code and not current_journal_code_found:
-                journal.next_code = code
+                precendences_relation['next_code'] = code
             elif code != journal.code and current_journal_code_found:
-                journal.previous_code = code
+                precendences_relation['previous_code'] = code
             elif code == journal.code:
                 current_journal_code_found = True
+        self.journal_precendence_relations.append(precendences_relation)
 
         journal_created = journal.id is None
 
