@@ -62,7 +62,7 @@
         </form>
       </aside>
       <div class="col-sm-9">
-        <ul id="id_journal_categories">
+        <ul id="id_journal_categories" class="index">
         {% for objects_group in sorted_objects %}
           {% if not objects_group.key %}
           <li><a href="#section-void">{% trans "Autres" %}</a></li>
@@ -81,6 +81,7 @@
         {% for objects_group in sorted_objects %}
         {% for journal in objects_group.objects %}
           <li>
+            {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
             <div class="row">
               <div class="col-sm-6">
                 <a class="journal-name" href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
