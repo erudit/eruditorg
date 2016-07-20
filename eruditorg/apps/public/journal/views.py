@@ -17,6 +17,8 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfFileWriter
 from rules.contrib.views import PermissionRequiredMixin
 
 from base.pdf import generate_pdf
@@ -289,19 +291,15 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     model = Issue
 
 
-class ArticleDetailView(
+class BaseArticleDetailView(
         FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
         ArticleViewMetricCaptureMixin, DetailView):
-    """
-    Displays an Article page.
-    """
     context_object_name = 'article'
     model = Article
-    template_name = 'public/journal/article_detail.html'
     tracking_view_type = 'html'
 
     def get_context_data(self, **kwargs):
-        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
         obj = context.get(self.context_object_name)
 
         # Get all article from associated Issue
@@ -330,7 +328,21 @@ class ArticleDetailView(
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
-        return super(ArticleDetailView, self).dispatch(*args, **kwargs)
+        return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
+
+
+class ArticleDetailView(BaseArticleDetailView):
+    """
+    Displays an Article page.
+    """
+    template_name = 'public/journal/article_detail.html'
+
+
+class ArticleSummaryView(BaseArticleDetailView):
+    """
+    Displays the summary of an Article instance.
+    """
+    template_name = 'public/journal/article_summary.html'
 
 
 class ArticleEnwCitationView(SingleArticleMixin, DetailView):
@@ -428,6 +440,43 @@ class ArticleRawPdfView(
         merger.append(content)
         merger.write(response)
         merger.close()
+
+
+class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamView):
+    """
+    Returns the PDF file associated with an article.
+    """
+    content_type = 'application/pdf'
+    datastream_name = 'pdf'
+    fedora_object_class = ArticleDigitalObject
+    raise_exception = True
+    tracking_view_type = 'pdf'
+
+    def get_article(self):
+        return get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+
+    def get_fedora_object_pid(self):
+        article = self.get_article()
+        return article.pid
+
+    def get_response_object(self, fedora_object):
+        response = super(ArticleRawPdfFirstPageView, self).get_response_object(fedora_object)
+        response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
+            self.kwargs['articleid'])
+        return response
+
+    def get_permission_object(self):
+        return self.get_article()
+
+    def has_permission(self):
+        obj = self.get_permission_object()
+        return obj.publication_allowed_by_authors
+
+    def write_datastream_content(self, response, content):
+        pdf_in = PdfFileReader(content)
+        output = PdfFileWriter()
+        output.addPage(pdf_in.getPage(0))
+        output.write(response)
 
 
 class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):

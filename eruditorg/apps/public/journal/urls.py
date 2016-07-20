@@ -41,6 +41,13 @@ urlpatterns = [
         views.ArticleDetailView.as_view(), name='article_detail'),
 
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<pk>\d+)/resume/$'),
+        views.ArticleSummaryView.as_view(), name='article_summary'),
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
+          'article/(?P<localid>[\w-]+)/resume/$'),
+        views.ArticleSummaryView.as_view(), name='article_summary'),
+
+    url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
           'article/(?P<articlepk>\d+)/media/(?P<localidentifier>[.\w-]+)$'),
         views.ArticleMediaView.as_view(), name='article_media'),
     url(_(r'^revue/(?P<journal_code>[\w-]+)/numero/(?P<issue_localid>[\w-]+)/'
@@ -75,6 +82,11 @@ urlpatterns = [
         views.ArticleRawPdfView.as_view(), name='article_raw_pdf'),
     url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/raw/$'),
         views.ArticleRawPdfView.as_view(), name='article_raw_pdf'),
+
+    url(_(r'^article/(?P<articleid>[.\w-]+)/firstpage\.pdf$'),
+        views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),
+    url(_(r'^article/(?P<journalid>[\w-]+)\.(?P<issueid>[\w-]+)\.(?P<articleid>[.\w-]+)/firstpage\.pdf$'),  # noqa
+        views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
