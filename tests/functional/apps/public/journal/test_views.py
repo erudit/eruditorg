@@ -403,15 +403,16 @@ class TestArticleRawPdfFirstPageView(BaseEruditTestCase):
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
-        url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue_id, article_id
+        url = reverse('public:journal:article_raw_pdf_firstpage', args=(
+            journal_id, issue.volume_slug, issue_id, article_id
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
 
         # Run
         response = ArticleRawPdfFirstPageView.as_view()(
-            request, journalid=journal_id, issueid=issue_id, articleid=article_id)
+            request, journal_code=journal_id, issue_slug=issue.volume_slug,
+            issue_localid=issue_id, localid=article_id)
 
         # Check
         self.assertEqual(response.status_code, 200)

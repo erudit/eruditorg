@@ -36,6 +36,7 @@ urlpatterns = [
         url(_(r'^citation\.ris$'), views.ArticleRisCitationView.as_view(), name='article_citation_ris'),  # noqa
         url(_(r'^citation\.bib$'), views.ArticleBibCitationView.as_view(), name='article_citation_bib'),  # noqa
         url(_(r'^contenu\.pdf$'), views.ArticleRawPdfView.as_view(), name='article_raw_pdf'),
+        url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
     ])),
 
     # Compatibility URLs

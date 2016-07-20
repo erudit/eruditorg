@@ -441,7 +441,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
     tracking_view_type = 'pdf'
 
     def get_article(self):
-        return get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
     def get_fedora_object_pid(self):
         article = self.get_article()
@@ -450,7 +450,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
     def get_response_object(self, fedora_object):
         response = super(ArticleRawPdfFirstPageView, self).get_response_object(fedora_object)
         response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
-            self.kwargs['articleid'])
+            self.kwargs['localid'])
         return response
 
     def get_permission_object(self):
