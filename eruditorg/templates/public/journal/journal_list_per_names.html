@@ -31,7 +31,10 @@
           <div class="form-group">
             <div id="div_id_{{ filter_form.open_access.html_name }}" class="checkbox">
               {{ filter_form.open_access|add_class:'form-control' }}
-              <label for="{{ filter_form.open_access.auto_id }}">{{ filter_form.open_access.label }}</label>
+              <label for="{{ filter_form.open_access.auto_id }}">
+                <span class="pull-right"><span class="sprite sprite-o-a"></span></span>
+                {{ filter_form.open_access.label }}&nbsp;&nbsp;
+              </label>
               {% for error in filter_form.open_access.errors %}<p class="error">{{ error }}</p>{% endfor %}
             </div>
           </div>
@@ -105,7 +108,7 @@
                 <p>{{ journal.collection.name }}</p>
               </div>
               <div class="col-sm-2">
-                {% if journal.open_access %}<p>{% trans "Libre" %}</p>{% endif %}
+                {% if journal.open_access %}<div class="sprite sprite-o-a"></div>{% endif %}
               </div>
             </div>
           </li>

@@ -8,6 +8,7 @@
   'utils/responsive-utilities',
   'utils/functions',
   'utils/font-styles',
+  'utils/sprite',
   'utils/erudicon';
 
 // 2. Vendors
@@ -80,3 +81,7 @@ $ionicons-font-path: "~ionicons/fonts";
   'pages/thesis-home',
   'pages/thesis-collection-home',
   'pages/thesis-collection-list';
+
+
+// $spritesheet-sprites is an array of all sprite image names
+@include sprites($spritesheet-sprites);

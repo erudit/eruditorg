@@ -7,6 +7,7 @@ import consolidate from 'gulp-consolidate';
 import env from 'gulp-env';
 import iconfont from 'gulp-iconfont';
 import livereload from 'gulp-livereload';
+import merge from 'merge-stream';
 import minifyCSS from 'gulp-minify-css';
 import modernizr from 'gulp-modernizr';
 import rename from 'gulp-rename';
@@ -15,6 +16,7 @@ import uglify from 'gulp-uglify';
 import gutil from 'gulp-util';
 import path from 'path';
 import named from 'vinyl-named';
+import spritesmith from 'gulp.spritesmith';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackStream from 'webpack-stream';
@@ -205,6 +207,23 @@ gulp.task('build-pdfjs-worker', function() {
 gulp.task('build-pdfjs', [
   'build-pdfjs-css', 'build-pdfjs-js', 'build-pdfjs-locale', 'build-pdfjs-images', 'build-pdfjs-worker', ]);
 
+gulp.task('build-sprite', function () {
+  let spriteData = gulp.src(img_dir + '/sprite/*.png').pipe(spritesmith({
+    imgName: '../img/sprite.png',
+    cssName: '_sprite.scss',
+    cssVarMap: function (sprite) {
+      sprite.name = 'sprite-' + sprite.name;
+    }
+  }));
+
+  let imgStream = spriteData.img
+    .pipe(gulp.dest(img_dir));
+
+  let cssStream = spriteData.css
+    .pipe(gulp.dest(sass_dir + '/utils/'));
+
+  return merge(imgStream, cssStream);
+});
 
 /*
  * Global tasks
