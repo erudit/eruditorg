@@ -9,8 +9,10 @@ from erudit.models import Journal
 
 class JournalListFilterForm(forms.Form):
     open_access = forms.BooleanField(label=_('Libre accès'), required=False)
-    types = forms.MultipleChoiceField(label=_('Par type'), required=False)
-    collections = forms.MultipleChoiceField(label=_('Par collection'), required=False)
+    types = forms.MultipleChoiceField(
+        label=_('Par type'), required=False, help_text='TODO')
+    collections = forms.MultipleChoiceField(
+        label=_('Par collection'), required=False, help_text='TODO')
 
     def __init__(self, *args, **kwargs):
         super(JournalListFilterForm, self).__init__(*args, **kwargs)

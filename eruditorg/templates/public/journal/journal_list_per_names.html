@@ -6,6 +6,7 @@
 {% block page_title %}{% trans "Revues" %}{% endblock page_title %}
 {% block body_class %}{{ block.super }} journal_list{% endblock %}
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
+{% block body_data_attributes %} data-spy="scroll" data-target="#journal_list_per_names" data-offset="180"{% endblock body_data_attributes %}
 
 {% block content %}
 <div id="journal_list_per_names">
@@ -25,7 +26,7 @@
     </div>
     <div id="id_journal_list_body" class="row">
       <aside class="col-sm-3">
-        <form action="" method="get">
+        <form id="filter_form" action="" method="get">
           <div class="filter-title">{% trans "Filtres" %}</div>
           <div class="form-group">
             <div id="div_id_{{ filter_form.open_access.html_name }}" class="checkbox">
@@ -62,23 +63,26 @@
         </form>
       </aside>
       <div class="col-sm-9">
-        <ul id="id_journal_categories" class="index">
+        <div id="items_menu">
+          <ul id="id_journal_categories" class="nav index">
+          {% for objects_group in sorted_objects %}
+            {% if not objects_group.key %}
+            <li><a href="#section-void">{% trans "Autres" %}</a></li>
+            {% else %}
+            <li><a href="#section-{{ objects_group.key }}">{{ objects_group.name }}</a></li>
+            {% endif %}
+          {% endfor %}
+          </ul>
+          <ul id="id_journal_items_header" class="row">
+            <li class="col-sm-6">{% trans "Revue" %}</li>
+            <li class="col-sm-2">{% trans "Type" %}</li>
+            <li class="col-sm-2">{% trans "Fonds" %}</li>
+            <li class="col-sm-2">{% trans "Accès" %}</li>
+          </ul>
+          <hr />
+        </div>
         {% for objects_group in sorted_objects %}
-          {% if not objects_group.key %}
-          <li><a href="#section-void">{% trans "Autres" %}</a></li>
-          {% else %}
-          <li><a href="#section-{{ objects_group.key }}">{{ objects_group.name }}</a></li>
-          {% endif %}
-        {% endfor %}
-        </ul>
-        <ul id="id_journal_items_header" class="row">
-          <li class="col-sm-6">{% trans "Revue" %}</li>
-          <li class="col-sm-2">{% trans "Type" %}</li>
-          <li class="col-sm-2">{% trans "Fonds" %}</li>
-          <li class="col-sm-2">{% trans "Accès" %}</li>
-        </ul>
-        <ul id="id_journal_items">
-        {% for objects_group in sorted_objects %}
+        <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
         {% for journal in objects_group.objects %}
           <li>
             {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
@@ -106,8 +110,8 @@
             </div>
           </li>
         {% endfor %}
-        {% endfor %}
         </ul>
+        {% endfor %}
       </div>
     </div>
   </div>

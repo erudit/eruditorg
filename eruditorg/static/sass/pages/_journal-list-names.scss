@@ -1,81 +1,131 @@
+body.journal_list{
+  position: relative;
+}
+
 #journal_list_per_names {
+  position: relative;
 
-	#id_journal_list_body{
-		margin-top: 30px;
+  #id_journal_list_body{
+    margin-top: 30px;
 
-		aside{
-			padding-right: 30px;
+    aside{
+      position: relative;
+      padding-right: 30px;
 
-			form{
-				hr{
-					border-top-color: $black;
-				}
+      form{
+        &.sticky{
+          position: fixed;
+          top: 80px;
+          width: 250px;
+        }
 
-				.filter-title{
-					padding-bottom: 10px;
-					border-bottom: 1px solid $gray-dark;
-					font-size: 24px;
-				}
+        hr{
+          border-top-color: $black;
+        }
 
-				.form-group{
-					margin: 20px 0;;
-					padding: 0;
-				}
+        .filter-title{
+          padding-bottom: 10px;
+          border-bottom: 1px solid $gray-dark;
+          font-size: 24px;
+        }
 
-				.form-action{
-					margin-top: 20px;
-				}
-			}
-		}
+        .form-group{
+          margin: 20px 0;;
+          padding: 0;
+        }
 
-		ul#id_journal_categories{
-			margin: 0;
-			list-style: none;
+        .form-action{
+          margin-top: 20px;
+        }
 
-			li{
-				margin: 0;
-				display: inline-block;
+        .hint--top{
+          i{
+            color: $coral-red;
+          }
+        }
+      }
+    }
 
-				a{
-					padding: 6px 10px;
-					display: inline-block;
+    #items_menu{
+      position: relative;
+      z-index: 3;
+      background: $white;
 
-					&:hover, &:focus{
-						background: $coral-red;
-						text-decoration: none;
-						color: $white;
-					}
-				}
-			}
-		}
+      &.sticky{
+        position: fixed;
+        padding-top : 30px;
+        top: 50px;
+        width: 850px;
+      }
 
-		ul#id_journal_items_header{
-			margin-bottom: 0;
-			list-style: none;
+      hr{
+        margin: 0;
+        border-top: 1px solid $gray-dark;
+      }
+    }
 
-			li{
-				font-size: 24px;
-			}
-		}
+    #items_menu.sticky + ul#id_journal_items{
+      padding-top: 100px;
+    }
 
-		ul#id_journal_items{
-			margin: 0;
-			list-style: none;
-			border-top: 1px solid $gray-dark;
+    ul#id_journal_categories{
+      margin: 0;
+      list-style: none;
 
-			li{
-				padding: 25px 0;
-				border-bottom: 1px solid lighten($gray-light, 20%);
+      li{
+        margin: 0;
+        display: inline-block;
 
-				&:last-child{
-					border: none;
-				}
+        &.active{
+          a{
+            background: $coral-red;
+            text-decoration: none;
+            color: $white;
+          }
+        }
 
-				a.journal-name{
-					padding: 10px 0;
-					font-size: 18px;
-				}
-			}
-		}
-	}
+        a{
+          padding: 6px 10px;
+          display: inline-block;
+
+          &:hover, &:focus{
+            background: $coral-red;
+            text-decoration: none;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    ul#id_journal_items_header{
+      margin-top: 20px;
+      margin-bottom: 0;
+      list-style: none;
+
+      li{
+        font-size: 24px;
+      }
+    }
+
+    ul.journal-items{
+      margin: 0;
+      list-style: none;
+
+      &:last-child{
+        li:last-child{
+          border: none;
+        }
+      }
+
+      li{
+        padding: 25px 0;
+        border-bottom: 1px solid lighten($gray-light, 20%);
+
+        a.journal-name{
+          padding: 10px 0;
+          font-size: 18px;
+        }
+      }
+    }
+  }
 }
