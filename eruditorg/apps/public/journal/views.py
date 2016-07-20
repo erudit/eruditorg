@@ -122,11 +122,6 @@ class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailVi
         context['issues'] = self.object.published_issues.order_by('-date_published')
         context['latest_issue'] = self.object.last_issue
 
-        context['previous_journal'] = Journal.objects.get(code=self.object.previous_code) \
-            if self.object.previous_code else None
-        context['next_journal'] = Journal.objects.get(code=self.object.next_code) \
-            if self.object.next_code else None
-
         return context
 
 
