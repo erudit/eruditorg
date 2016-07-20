@@ -5,6 +5,7 @@ import unittest.mock
 
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
+from django.test.utils import override_settings
 
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
@@ -21,6 +22,7 @@ def get_mocked_erudit_object():
     return m
 
 
+@override_settings(DEBUG=True)
 class TestLatestIssuesFeed(BaseEruditTestCase):
     def setUp(self):
         super(TestLatestIssuesFeed, self).setUp()
