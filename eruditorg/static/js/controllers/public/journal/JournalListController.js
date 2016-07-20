@@ -24,7 +24,17 @@ export default {
 
   stickyElements: function() {
     function stickyFilterForm(offset) {
-      var form = $('form#filter_form');
+      let form = $('form#filter_form');
+      let footer = $('footer#site-footer');
+      let footerOffsetY = footer.offset().top - footer.height() - 80;
+      let filterFormTopOffset = form.offset().top;
+
+      if (filterFormTopOffset > footerOffsetY) {
+        form.hide();
+      } else if (filterFormTopOffset < footerOffsetY - 100) {
+        form.show();
+      }
+
       if ($(window).scrollTop() >= offset) {
         form.addClass('sticky');
       } else {
@@ -33,7 +43,17 @@ export default {
     }
 
     function stickyItemsMenu(offset) {
-      var menu = $('#items_menu');
+      let menu = $('#items_menu');
+      let footer = $('footer#site-footer');
+      let footerOffsetY = footer.offset().top - footer.height();
+      let filterFormTopOffset = menu.offset().top;
+
+      if (filterFormTopOffset > footerOffsetY) {
+        menu.hide();
+      } else if (filterFormTopOffset < footerOffsetY - 100) {
+        menu.show();
+      }
+
       if ($(window).scrollTop() >= offset) {
         menu.addClass('sticky');
       } else {
