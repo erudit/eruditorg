@@ -1,7 +1,6 @@
 {% extends "public/search/base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
-{% load public_search_tags %}
 
 {% block page_title %}{% trans "Recherche" %}{% endblock %}
 
@@ -156,10 +155,10 @@
                 {% if search_elements and search_elements.0.operator != 'NOT' %}
                   <h3 class="h4">
                     <a href="{{ article_url }}">
-                      {{ document.real_object.title|highlight:main_qterm }}
+                      {{ document.real_object.title }}
                     </a>
                   </h3>
-                  {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle|highlight:main_qterm }}</h4>{% endif %}
+                  {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
                 {% else %}
                   <h3 class="h4">
                     <a href="{{ article_url }}">
@@ -270,7 +269,7 @@
                 {% if search_elements and search_elements.0.operator != 'NOT' %}
                   <h3 class="h4">
                     <a href="{{ document.real_object.url }}">
-                      {{ document.real_object.title|highlight:main_qterm }}
+                      {{ document.real_object.title }}
                     </a>
                   </h3>
                 {% else %}
