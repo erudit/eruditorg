@@ -86,6 +86,47 @@ class TestJournal(BaseEruditTestCase):
         self.assertEqual(journal_1.letter_prefix, 'T')
         self.assertIsNone(journal_2.letter_prefix)
 
+    def test_can_return_the_published_open_access_issues(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        self.journal.open_access = False
+        self.journal.type = JournalTypeFactory.create(code='S')
+        self.journal.save()
+        IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 3,
+            date_published=dt.date(now_dt.year - 3, 3, 20))
+        IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 1,
+            date_published=dt.date(now_dt.year - 1, 3, 20))
+        issue_3 = IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 5,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        # Run & check
+        self.assertEqual(list(self.journal.published_open_access_issues), [issue_3, ])
+
+    def test_can_return_the_published_open_access_issues_year_coverage(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        self.journal.open_access = False
+        self.journal.type = JournalTypeFactory.create(code='S')
+        self.journal.save()
+        IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 3,
+            date_published=dt.date(now_dt.year - 3, 3, 20))
+        IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 1,
+            date_published=dt.date(now_dt.year - 1, 3, 20))
+        issue_3 = IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 5,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        issue_4 = IssueFactory.create(
+            journal=self.journal, year=now_dt.year - 7,
+            date_published=dt.date(now_dt.year - 5, 3, 20))
+        # Run & check
+        self.assertEqual(
+            self.journal.published_open_access_issues_year_coverage,
+            {'from': issue_4.year, 'to': issue_3.year})
+
 
 class TestIssue(BaseEruditTestCase):
     def setUp(self):

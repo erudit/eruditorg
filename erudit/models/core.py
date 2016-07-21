@@ -341,21 +341,53 @@ class Journal(FedoraMixin, FedoraDated):
     def get_erudit_class(self):
         return EruditJournal
 
-    # issues
+    # Movable limitation
+    # --
+
+    @property
+    def movable_limitation_year_offset(self):
+        return erudit_settings.MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET \
+            if self.type and self.type.code == 'S' \
+            else erudit_settings.MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET
+
+    # Issues
+    # --
 
     @property
     def published_issues(self):
+        """ Return the published issues of this Journal. """
         return self.issues.filter(year__lte=dt.datetime.now().year)
 
     @property
+    def published_open_access_issues(self):
+        """ Return the published open access issues of this Journal. """
+        current_year = dt.datetime.now().year
+        filter_kwargs = {
+            'year__lte': current_year if self.open_access
+            else current_year - self.movable_limitation_year_offset}
+        return self.issues.filter(**filter_kwargs)
+
+    @property
     def first_issue(self):
-        """ Return the first published issue of this Journal """
+        """ Return the first published issue of this Journal. """
         return self.published_issues.order_by('date_published').first()
 
     @property
     def last_issue(self):
-        """ Return the last published Issue of this Journal """
+        """ Return the last published Issue of this Journal. """
         return self.published_issues.order_by('-date_published').first()
+
+    @cached_property
+    def published_open_access_issues_year_coverage(self):
+        """ Return the year coverage of the open access issues of this Journal. """
+        open_access_issues = self.published_open_access_issues.order_by('-year')
+        return None if not open_access_issues.exists() else {
+            'from': open_access_issues.last().year,
+            'to': open_access_issues.first().year,
+        }
+
+    # Names
+    # --
 
     @property
     def letter_prefix(self):
@@ -501,9 +533,7 @@ class Issue(FedoraMixin, FedoraDated):
         if not self.journal.open_access:
             publication_year = self.year
             current_year = dt.datetime.now().year
-            year_offset = erudit_settings.MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET \
-                if self.journal.type and self.journal.type.code == 'S' \
-                else erudit_settings.MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET
+            year_offset = self.journal.movable_limitation_year_offset
             return True if publication_year <= current_year <= publication_year + year_offset \
                 else False
         return False
