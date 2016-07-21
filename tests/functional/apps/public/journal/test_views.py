@@ -167,10 +167,11 @@ class TestJournalDetailView(BaseEruditTestCase):
         journal = JournalFactory.create(collection=collection)
         JournalInformationFactory.create(journal=journal)
         issue_1 = IssueFactory.create(
-            journal=journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now())
+            journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
-            journal=journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
+            journal=journal, year=dt.datetime.now().year + 1,
+            date_published=dt.datetime.now() + dt.timedelta(days=30))
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
@@ -184,10 +185,11 @@ class TestJournalDetailView(BaseEruditTestCase):
         journal = JournalFactory.create(collection=collection)
         JournalInformationFactory.create(journal=journal)
         IssueFactory.create(
-            journal=journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now())
+            journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
-            journal=journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
+            journal=journal, year=dt.datetime.now().year + 1,
+            date_published=dt.datetime.now() + dt.timedelta(days=30))
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
@@ -304,9 +306,10 @@ class TestArticleDetailView(BaseEruditTestCase):
 
     def test_works_with_localidentifiers(self):
         # Setup
+        self.journal.open_access = True
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=True)
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
         article = ArticleFactory.create(issue=issue)
         url = reverse('public:journal:article_detail', kwargs={
             'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
@@ -335,7 +338,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         mock_ds = ['ERUDITXSD300', ]  # noqa
 
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1000))
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=1000))
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
@@ -377,7 +381,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         # Setup
         self.journal.open_access = False
         self.journal.save()
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue = IssueFactory.create(
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
@@ -398,7 +403,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         # Setup
         self.journal.open_access = False
         self.journal.save()
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue = IssueFactory.create(
+            journal=self.journal, year=2010, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue, publication_allowed_by_authors=False)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier

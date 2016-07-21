@@ -45,9 +45,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_do_not_grant_access_by_default(self):
         # Setup
+        self.journal.open_access = False
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=False)
+            journal=self.journal, year=dt.datetime.now().year,
+            date_published=dt.datetime.now(), localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         class MyView(ArticleAccessCheckMixin):
@@ -65,9 +67,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_can_grant_access_to_an_article_if_it_is_in_open_access(self):
         # Setup
+        self.journal.open_access = True
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=True)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         class MyView(ArticleAccessCheckMixin):
@@ -86,9 +90,12 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         # Setup
         now_dt = dt.datetime.now()
 
+        self.journal.open_access = False
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.date(now_dt.year - 5, 3, 20),
-            localidentifier='test', open_access=False)
+            journal=self.journal, year=dt.datetime.now().year - 5,
+            date_published=dt.date(now_dt.year - 5, 3, 20),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         class MyView(ArticleAccessCheckMixin):
@@ -105,9 +112,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self):
         # Setup
+        self.journal.open_access = False
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=False)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         now_dt = dt.datetime.now()
@@ -132,9 +141,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(self):  # noqa
         # Setup
+        self.journal.open_access = False
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=False)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         JournalAccessSubscriptionFactory.create(user=self.user, journal=self.journal)
@@ -153,9 +164,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account(self):
         # Setup
+        self.journal.open_access = False
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=False)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         organisation = OrganisationFactory.create()
@@ -191,9 +204,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(self):  # noqa
         # Setup
+        self.journal.open_access = False
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=False)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         organisation = OrganisationFactory.create()
@@ -223,9 +238,11 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
     def test_inserts_a_flag_into_the_context(self):
         # Setup
+        self.journal.open_access = True
+        self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
-            open_access=True)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(),
+            localidentifier='test')
         article = ArticleFactory.create(issue=issue)
 
         class MyViewAncestor(object):
