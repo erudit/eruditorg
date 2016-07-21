@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.16 - Under development
---------------------------
+0.1.16
+------
 
 * Add a way to know the year coverage of journals for open access issues
 * Simplifies open access definition on ``Journal`` and ``Issue`` models
