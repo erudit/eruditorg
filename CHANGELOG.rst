@@ -4,6 +4,7 @@ Changelog
 0.1.16 - Under development
 --------------------------
 
+* Add a way to import the ISSN print / ISSN web when using the ``import_journals_from_fedora`` command
 * The ``Issue.year`` is now required
 * Remove unused ``last_oa_issue`` property
 * Fix the use issues' publication year when computing movable limitations

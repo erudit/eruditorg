@@ -356,6 +356,8 @@ class Command(BaseCommand):
         self._patch_generic_journal_title(journal, 'name', issue.erudit_object.journal_titles or {})
         self._patch_generic_journal_title(
             journal, 'subtitle', issue.erudit_object.journal_subtitles or {})
+        journal.issn_print = issue.erudit_object.issn
+        journal.issn_web = issue.erudit_object.issn_num
         journal.save()
 
         # STEP 4: imports all the articles associated with the issue
