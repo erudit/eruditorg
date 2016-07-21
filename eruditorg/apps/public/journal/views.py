@@ -14,7 +14,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.functional import cached_property
 from django.views.generic import DetailView
 from django.views.generic import ListView
-from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 from PyPDF2 import PdfFileReader
@@ -290,6 +289,9 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
     fedora_object_class = PublicationDigitalObject
     model = Issue
 
+    def get_object(self):
+        return get_object_or_404(Issue, localidentifier=self.kwargs['localidentifier'])
+
 
 class BaseArticleDetailView(
         FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
@@ -372,20 +374,6 @@ class ArticleBibCitationView(SingleArticleMixin, DetailView):
     template_name = 'public/journal/citation/article.bib'
 
 
-class ArticlePdfView(FedoraServiceRequiredMixin, TemplateView):
-    """
-    Displays a page allowing to browse the PDF file associated with an article.
-    """
-    template_name = 'public/journal/article_pdf.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticlePdfView, self).get_context_data(**kwargs)
-        context['journal_id'] = self.kwargs['journalid']
-        context['issue_id'] = self.kwargs['issueid']
-        context['article_id'] = self.kwargs['articleid']
-        return context
-
-
 class ArticleRawPdfView(
         ArticleViewMetricCaptureMixin, ArticleAccessCheckMixin, PermissionRequiredMixin,
         FedoraFileDatastreamView):
@@ -399,7 +387,7 @@ class ArticleRawPdfView(
     tracking_view_type = 'pdf'
 
     def get_article(self):
-        return get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
     def get_fedora_object_pid(self):
         article = self.get_article()
@@ -408,7 +396,7 @@ class ArticleRawPdfView(
     def get_response_object(self, fedora_object):
         response = super(ArticleRawPdfView, self).get_response_object(fedora_object)
         response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
-            self.kwargs['articleid'])
+            self.kwargs['localid'])
         return response
 
     def get_permission_object(self):
@@ -453,7 +441,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
     tracking_view_type = 'pdf'
 
     def get_article(self):
-        return get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
     def get_fedora_object_pid(self):
         article = self.get_article()
@@ -462,7 +450,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
     def get_response_object(self, fedora_object):
         response = super(ArticleRawPdfFirstPageView, self).get_response_object(fedora_object)
         response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
-            self.kwargs['articleid'])
+            self.kwargs['localid'])
         return response
 
     def get_permission_object(self):
@@ -487,9 +475,9 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
     fedora_object_class = MediaDigitalObject
 
     def get_fedora_object_pid(self):
-        article = get_object_or_404(Article, localidentifier=self.kwargs['articleid'])
+        article = get_object_or_404(Article, localidentifier=self.kwargs['localid'])
         issue_pid = article.issue.pid
-        return '{0}.{1}'.format(issue_pid, self.kwargs['localidentifier'])
+        return '{0}.{1}'.format(issue_pid, self.kwargs['media_localid'])
 
     def get_content_type(self, fedora_object):
         return fedora_object.content.mimetype

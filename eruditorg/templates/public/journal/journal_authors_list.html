@@ -35,7 +35,7 @@
                 <li>
                   {% spaceless %}
                     &laquo;
-                    <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_localid=article.issue.localidentifier pk=article.id %}">
+                    <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">
                       {{ article.title }}
                     </a>
                     &raquo;

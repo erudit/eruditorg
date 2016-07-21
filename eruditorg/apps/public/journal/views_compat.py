@@ -15,26 +15,23 @@ class IssueDetailRedirectView(RedirectView):
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
-        print(kwargs)
         issue_qs = Issue.objects.select_related('journal').filter(
             Q(journal__code=kwargs['journal_code']) |
             Q(journal__localidentifier=kwargs['journal_code']))
         if 'journal_code' in kwargs and 'localidentifier' in kwargs:
-            return reverse(self.pattern_name, kwargs={
-                'journal_code': kwargs['journal_code'],
-                'localidentifier': kwargs['localidentifier'], })
+            issue = get_object_or_404(issue_qs, localidentifier=kwargs['localidentifier'])
+            return reverse(self.pattern_name, args=[
+                kwargs['journal_code'], issue.volume_slug, kwargs['localidentifier'], ])
         elif 'journal_code' in kwargs and 'v' in kwargs and 'n' in kwargs:
             reverse_kwargs = {'number': kwargs['n']} if not kwargs['v'] \
                 else {'volume': kwargs['v'], 'number': kwargs['n']}
             issue = get_object_or_404(issue_qs, **reverse_kwargs)
-            return reverse(self.pattern_name, kwargs={
-                'journal_code': kwargs['journal_code'],
-                'localidentifier': issue.localidentifier, })
+            return reverse(self.pattern_name, args=[
+                kwargs['journal_code'], issue.volume_slug, issue.localidentifier, ])
         elif 'journal_code' in kwargs and 'v' in kwargs:
             issue = get_object_or_404(issue_qs, volume=kwargs['v'])
-            return reverse(self.pattern_name, kwargs={
-                'journal_code': kwargs['journal_code'],
-                'localidentifier': issue.localidentifier, })
+            return reverse(self.pattern_name, args=[
+                kwargs['journal_code'], issue.volume_slug, issue.localidentifier, ])
         else:  # pragma: no cover
             raise Http404
 
@@ -45,15 +42,18 @@ class ArticleDetailRedirectView(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         if 'journal_code' in kwargs and 'issue_localid' in kwargs and 'localid' in kwargs:
+            article = get_object_or_404(
+                Article.objects.select_related('issue', 'issue__journal'),
+                localidentifier=kwargs['localid'])
             return reverse(self.pattern_name, kwargs={
-                'journal_code': kwargs['journal_code'], 'issue_localid': kwargs['issue_localid'],
-                'localid': kwargs['localid'], })
+                'journal_code': kwargs['journal_code'], 'issue_slug': article.issue.volume_slug,
+                'issue_localid': kwargs['issue_localid'], 'localid': kwargs['localid'], })
         elif 'localid' in kwargs:
             article = get_object_or_404(
                 Article.objects.select_related('issue', 'issue__journal'),
                 localidentifier=kwargs['localid'])
             return reverse(self.pattern_name, kwargs={
-                'journal_code': article.issue.journal.code,
+                'journal_code': article.issue.journal.code, 'issue_slug': article.issue.volume_slug,
                 'issue_localid': article.issue.localidentifier,
                 'localid': article.localidentifier, })
         else:  # pragma: no cover

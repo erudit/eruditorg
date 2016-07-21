@@ -29,7 +29,7 @@
 
 {% block breadcrumb %}{{ block.super }}
 /
-<a href="{% url 'public:journal:issue_detail' issue.journal.code issue.localidentifier %}">
+<a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
   {% if issue.erudit_object.html_theme %}
   {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
   {% else %}
@@ -55,7 +55,7 @@
           {% if issue.has_coverpage %}
           <div>
             <a href="{% url 'public:journal:journal_detail' journal.code %}">
-              <img src="{% url 'public:journal:issue_coverpage' issue.pk %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
+              <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
               {{ issue.volume_title_with_pages }} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
@@ -271,11 +271,11 @@
             {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
             {% if published_issue != issue %}
             <li class="issue-list-item--inverted col-xs-6 col-sm-3">
-              <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.localidentifier %}">
-                {% if issue.has_coverpage %}<img src="{% url 'public:journal:issue_coverpage' published_issue.pk %}" class="img-responsive" alt="{{ published_issue.name }}" />{% endif %}
+              <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
+                {% if issue.has_coverpage %}<img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{{ published_issue.name }}" />{% endif %}
                 <header>
                   <h5>
-                    <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.localidentifier %}">
+                    <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
                       <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
                       {% if published_issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ published_issue.erudit_object.html_theme|safe }}</span>{% endif %}
                     </a>

@@ -238,31 +238,13 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
             self.assertEqual(response.context['letters_counts'][letter], 0)
 
 
-class TestArticlePdfView(BaseEruditTestCase):
-    def test_embed_the_localidentifiers_in_the_context(self):
-        # Setup
-        journal_id = 'arbo139'
-        issue_id = 'arbo1515298'
-        article_id = '1001942ar'
-        url = reverse('public:journal:article_pdf', args=(
-            journal_id, issue_id, article_id
-        ))
-        # Run
-        response = self.client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['journal_id'], journal_id)
-        self.assertEqual(response.context['issue_id'], issue_id)
-        self.assertEqual(response.context['article_id'], article_id)
-
-
 @override_settings(DEBUG=True)
 class TestIssueDetailView(BaseEruditTestCase):
     def test_works_with_pks(self):
         # Setup
         issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        url = reverse('public:journal:issue_detail', kwargs={
-            'journal_code': self.journal.code, 'pk': issue.pk})
+        url = reverse('public:journal:issue_detail', args=[
+            self.journal.code, issue.volume_slug, issue.localidentifier])
         # Run
         response = self.client.get(url)
         # Check
@@ -272,8 +254,8 @@ class TestIssueDetailView(BaseEruditTestCase):
         # Setup
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
-        url = reverse('public:journal:issue_detail', kwargs={
-            'journal_code': self.journal.code, 'localidentifier': issue.localidentifier})
+        url = reverse('public:journal:issue_detail', args=[
+            self.journal.code, issue.volume_slug, issue.localidentifier])
         # Run
         response = self.client.get(url)
         # Check
@@ -286,21 +268,6 @@ class TestArticleDetailView(BaseEruditTestCase):
         super(TestArticleDetailView, self).setUp()
         self.factory = RequestFactory()
 
-    def test_works_with_pks(self):
-        # Setup
-        issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), open_access=True)
-        article = ArticleFactory.create(issue=issue)
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': self.journal.code, 'issue_localid': issue.localidentifier,
-            'pk': article.pk})
-        request = self.factory.get(url)
-        # Run
-        response = ArticleDetailView.as_view()(
-            request, localid=article.localidentifier)
-        # Check
-        self.assertEqual(response.status_code, 200)
-
     def test_works_with_localidentifiers(self):
         # Setup
         issue = IssueFactory.create(
@@ -308,8 +275,8 @@ class TestArticleDetailView(BaseEruditTestCase):
             open_access=True)
         article = ArticleFactory.create(issue=issue)
         url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': self.journal.code, 'issue_localid': issue.localidentifier,
-            'localid': article.localidentifier})
+            'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
+            'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
         request = self.factory.get(url)
         # Run
         response = ArticleDetailView.as_view()(
@@ -340,14 +307,15 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue_id, article_id
+            journal_id, issue.volume_slug, issue_id, article_id
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
 
         # Run
         response = ArticleRawPdfView.as_view()(
-            request, journalid=journal_id, issueid=issue_id, articleid=article_id)
+            request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
+            localid=article_id)
 
         # Check
         self.assertEqual(response.status_code, 200)
@@ -360,10 +328,11 @@ class TestArticleRawPdfView(BaseEruditTestCase):
 
         # Setup
         journal_id = 'dummy139'
+        issue_slug = 'test'
         issue_id = 'dummy1515298'
         article_id = '1001942du'
         url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue_id, article_id
+            journal_id, issue_slug, issue_id, article_id
         ))
         # Run
         response = self.client.get(url)
@@ -380,7 +349,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue_id, article_id
+            journal_id, issue.volume_slug, issue_id, article_id
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
@@ -388,7 +357,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         # Run & check
         with self.assertRaises(PermissionDenied):
             ArticleRawPdfView.as_view()(
-                request, journalid=journal_id, issueid=issue_id, articleid=article_id)
+                request, journal_code=journal_id, issue_slug=issue.volume_slug,
+                issue_localid=issue_id, localid=article_id)
 
     def test_cannot_be_accessed_if_the_publication_of_the_article_is_not_allowed_by_its_authors(self):  # noqa
         # Setup
@@ -400,7 +370,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue_id, article_id
+            journal_id, issue.volume_slug, issue_id, article_id
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
@@ -408,7 +378,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         # Run & check
         with self.assertRaises(PermissionDenied):
             ArticleRawPdfView.as_view()(
-                request, journalid=journal_id, issueid=issue_id, articleid=article_id)
+                request, journal_code=journal_id, issue_slug=issue.volume_slug,
+                issue_localid=issue_id, localid=article_id)
 
 
 @override_settings(DEBUG=True)
@@ -432,15 +403,16 @@ class TestArticleRawPdfFirstPageView(BaseEruditTestCase):
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
-        url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue_id, article_id
+        url = reverse('public:journal:article_raw_pdf_firstpage', args=(
+            journal_id, issue.volume_slug, issue_id, article_id
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
 
         # Run
         response = ArticleRawPdfFirstPageView.as_view()(
-            request, journalid=journal_id, issueid=issue_id, articleid=article_id)
+            request, journal_code=journal_id, issue_slug=issue.volume_slug,
+            issue_localid=issue_id, localid=article_id)
 
         # Check
         self.assertEqual(response.status_code, 200)
@@ -472,8 +444,8 @@ class TestArticleMediaView(BaseEruditTestCase):
 
         # Run
         response = ArticleMediaView.as_view()(
-            request, journal_code=self.journal.code, issue_localid=issue_id, articleid=article_id,
-            localidentifier='test')
+            request, journal_code=self.journal.code, issue_localid=issue_id,
+            localid=article_id, media_localid='test')
 
         # Check
         self.assertEqual(response.status_code, 200)
