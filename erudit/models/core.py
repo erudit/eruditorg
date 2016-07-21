@@ -357,12 +357,6 @@ class Journal(FedoraMixin, FedoraDated):
         return self.published_issues.order_by('-date_published').first()
 
     @property
-    def last_oa_issue(self):
-        """ Return the last published Issue of this Journal that is available in open access """
-        return self.published_issues.filter(open_access=True) \
-            .order_by('-date_published').first()
-
-    @property
     def letter_prefix(self):
         """ Returns its name first letter """
         sortable_name = self.sortable_name

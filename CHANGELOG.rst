@@ -4,6 +4,7 @@ Changelog
 0.1.16 - Under development
 --------------------------
 
+* Remove unused ``last_oa_issue`` property
 * Fix the use issues' publication year when computing movable limitations
 
 0.1.15

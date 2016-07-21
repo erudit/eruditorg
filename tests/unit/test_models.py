@@ -67,22 +67,6 @@ class TestJournal(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.journal.last_issue, issue_2)
 
-    def test_can_return_its_last_issue_with_open_access(self):
-        # Setup
-        IssueFactory.create(
-            journal=self.journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=2))
-        issue_2 = IssueFactory.create(
-            journal=self.journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=1), open_access=True)
-        IssueFactory.create(
-            journal=self.journal, year=2010, date_published=dt.datetime.now(), open_access=False)
-        IssueFactory.create(
-            journal=self.journal, year=dt.datetime.now().year + 2,
-            date_published=dt.datetime.now() + dt.timedelta(days=30), open_access=True)
-        # Run & check
-        self.assertEqual(self.journal.last_oa_issue, issue_2)
-
     def test_knows_if_it_is_provided_by_fedora(self):
         # Run & check
         self.journal.localidentifier = 'dummy139'
