@@ -79,6 +79,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
     journal = factory.SubFactory(JournalFactory)
     localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
     date_published = dt.datetime.now().date()
+    year = dt.datetime.now().year
 
 
 class ArticleFactory(factory.django.DjangoModelFactory):

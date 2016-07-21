@@ -428,7 +428,7 @@ class Issue(FedoraMixin, FedoraDated):
     title = models.CharField(max_length=255, null=True, blank=True)
     """ The title of the issue """
 
-    year = models.IntegerField(choices=YEARS, null=True, blank=True, verbose_name=_('Année'))
+    year = models.IntegerField(choices=YEARS, verbose_name=_('Année'))
     """ The publication year of the issue """
 
     volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
