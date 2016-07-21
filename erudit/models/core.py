@@ -279,8 +279,9 @@ class Journal(FedoraMixin, FedoraDated):
     )
     """ Defines whether this Journal is printed in paper or not """
 
-    open_access = models.NullBooleanField(
-        default=None, verbose_name=_('Libre accès'), help_text=_("Cette revue est en accès libre?"))
+    open_access = models.BooleanField(
+        default=False, verbose_name=_('Libre accès'),
+        help_text=_("Cette revue est en accès libre?"))
     """ Defines whether the journal can be accessed by anyone """
 
     issues_per_year = models.IntegerField(
@@ -451,11 +452,6 @@ class Issue(FedoraMixin, FedoraDated):
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
 
-    open_access = models.NullBooleanField(
-        default=None, verbose_name=_('Accès libre'),
-        help_text=_("Cocher si ce numéro est en accès libre"))
-    """ Indicates whether the issue is in open access """
-
     localidentifier = models.CharField(
         max_length=50, unique=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
@@ -502,8 +498,7 @@ class Issue(FedoraMixin, FedoraDated):
     @property
     def has_movable_limitation(self):
         """ Returns a boolean indicating if the issue has a movable limitation. """
-        open_access = self.open_access or (self.open_access is None and self.journal.open_access)
-        if not open_access:
+        if not self.journal.open_access:
             publication_year = self.year
             current_year = dt.datetime.now().year
             year_offset = erudit_settings.MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET \
@@ -625,8 +620,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
     @property
     def open_access(self):
         """ Returns a boolean indicating if the article is in open access. """
-        return self.issue.open_access or (
-            self.issue.open_access is None and self.issue.journal.open_access)
+        return self.issue.journal.open_access
 
     @property
     def has_movable_limitation(self):
