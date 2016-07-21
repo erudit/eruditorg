@@ -344,7 +344,7 @@ class Journal(FedoraMixin, FedoraDated):
 
     @property
     def published_issues(self):
-        return self.issues.filter(date_published__lte=dt.datetime.now().date())
+        return self.issues.filter(year__lte=dt.datetime.now().year)
 
     @property
     def first_issue(self):
@@ -510,9 +510,11 @@ class Issue(FedoraMixin, FedoraDated):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         open_access = self.open_access or (self.open_access is None and self.journal.open_access)
         if not open_access:
-            publication_year = self.date_published.year
+            publication_year = self.year
             current_year = dt.datetime.now().year
-            year_offset = 4 if self.journal.type and self.journal.type.code == 'S' else 2
+            year_offset = erudit_settings.MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET \
+                if self.journal.type and self.journal.type.code == 'S' \
+                else erudit_settings.MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET
             return True if publication_year <= current_year <= publication_year + year_offset \
                 else False
         return False

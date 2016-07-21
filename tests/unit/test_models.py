@@ -36,46 +36,50 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_its_published_issues(self):
         # Setup
-        issue_1 = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
+        issue_1 = IssueFactory.create(journal=self.journal, year=2010)
+        issue_2 = IssueFactory.create(journal=self.journal, year=2009)
+        IssueFactory.create(journal=self.journal, year=dt.datetime.now().year + 2)
         # Run & check
         self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
 
     def test_can_return_its_first_issue(self):
         # Setup
         issue_1 = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=1))
+        IssueFactory.create(journal=self.journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
+            journal=self.journal, year=dt.datetime.now().year + 2,
+            date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(self.journal.first_issue, issue_1)
 
     def test_can_return_its_last_issue(self):
         # Setup
         IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(
+            journal=self.journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30))
+            journal=self.journal, year=dt.datetime.now().year + 2,
+            date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(self.journal.last_issue, issue_2)
 
     def test_can_return_its_last_issue_with_open_access(self):
         # Setup
         IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=2))
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=2))
         issue_2 = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1),
-            open_access=True)
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=1), open_access=True)
         IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), open_access=False)
+            journal=self.journal, year=2010, date_published=dt.datetime.now(), open_access=False)
         IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() + dt.timedelta(days=30),
-            open_access=True)
+            journal=self.journal, year=dt.datetime.now().year + 2,
+            date_published=dt.datetime.now() + dt.timedelta(days=30), open_access=True)
         # Run & check
         self.assertEqual(self.journal.last_oa_issue, issue_2)
 
@@ -136,13 +140,13 @@ class TestIssue(BaseEruditTestCase):
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 3,
             date_published=dt.date(now_dt.year - 3, 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 1,
             date_published=dt.date(now_dt.year - 1, 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 5,
             date_published=dt.date(now_dt.year - 5, 3, 20))
         # Run & check
         self.assertTrue(issue_1.has_movable_limitation)
@@ -155,13 +159,13 @@ class TestIssue(BaseEruditTestCase):
         self.journal.type = JournalTypeFactory.create(code='C')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 3,
             date_published=dt.date(now_dt.year - 3, 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 1,
             date_published=dt.date(now_dt.year - 1, 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 5,
             date_published=dt.date(now_dt.year - 5, 3, 20))
         # Run & check
         self.assertFalse(issue_1.has_movable_limitation)
@@ -174,13 +178,13 @@ class TestIssue(BaseEruditTestCase):
         self.journal.type = JournalTypeFactory.create(code='C')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, open_access=True,
+            journal=self.journal, open_access=True, year=now_dt.year - 3,
             date_published=dt.date(now_dt.year - 3, 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, open_access=True,
+            journal=self.journal, open_access=True, year=now_dt.year - 1,
             date_published=dt.date(now_dt.year - 1, 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, open_access=None,
+            journal=self.journal, open_access=None, year=now_dt.year - 5,
             date_published=dt.date(now_dt.year - 5, 3, 20))
         # Run & check
         self.assertFalse(issue_1.has_movable_limitation)
@@ -269,13 +273,13 @@ class TestArticle(BaseEruditTestCase):
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 3,
             date_published=dt.date(now_dt.year - 3, 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 1,
             date_published=dt.date(now_dt.year - 1, 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, open_access=False,
+            journal=self.journal, open_access=False, year=now_dt.year - 5,
             date_published=dt.date(now_dt.year - 5, 3, 20))
         article_1 = ArticleFactory.create(issue=issue_1)
         article_2 = ArticleFactory.create(issue=issue_2)

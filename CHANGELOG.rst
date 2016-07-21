@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.16 - Under development
+--------------------------
+
+* Fix the use issues' publication year when computing movable limitations
+
 0.1.15
 ------
 
