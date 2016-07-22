@@ -25,8 +25,6 @@
 	<xsl:variable name="titreAbrege" select="article/admin/revue/titrerevabr"/>
 	<xsl:variable name="uriStart">http://id.erudit.org/iderudit/</xsl:variable>
 	<xsl:variable name="doiStart">http://dx.doi.org/</xsl:variable>
-	<xsl:variable name="urlSavant">http://erudit.org/revue/</xsl:variable>
-	<xsl:variable name="urlCulturel">http://erudit.org/culture/</xsl:variable>
 
 	<v:variables>
 		{% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
@@ -104,8 +102,8 @@
 				<dl class="mono-space idpublic">
 					<dt>URI</dt>
 					<dd>
-						<a href="{$uriStart}{$iderudit}" class="clipboard-data">
-							<xsl:value-of select="$uriStart"/><xsl:value-of select="$iderudit"/>
+						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="clipboard-data">
+							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}
 							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
@@ -129,7 +127,7 @@
 			<div class="meta-journal col-sm-6 border-top">
         <p>
           {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-          <a href="{$urlSavant}{$titreAbrege}"><xsl:value-of select="admin/revue/titrerev"/></a>
+          <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
         </p>
         <p class="refpapier">
           <xsl:apply-templates select="admin/numero" mode="refpapier"/>
