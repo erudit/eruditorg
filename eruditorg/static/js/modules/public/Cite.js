@@ -10,7 +10,7 @@ class CiteModal {
       mainClass: 'mfp-fade',
       removalDelay: 750,
       type: 'ajax',
-      closeOnBgClick: false,
+      closeOnBgClick: true,
       closeBtnInside: true,
       items: {
         src: el.data('modal-id'),
