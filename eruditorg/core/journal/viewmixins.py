@@ -16,7 +16,7 @@ class SingleJournalMixin(object):
     """
     def get_journal(self):
         try:
-            return Journal.objects.get(
+            return Journal.objects.select_related('previous_journal', 'next_journal').get(
                 Q(code=self.kwargs['code']) | Q(localidentifier=self.kwargs['code']))
         except Journal.DoesNotExist:
             raise Http404
