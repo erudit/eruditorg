@@ -14,6 +14,7 @@ from django.test.utils import override_settings
 from PyPDF2 import PdfFileReader
 import pytest
 
+from erudit.models import JournalType
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
@@ -60,15 +61,12 @@ class TestJournalListView(object):
         assert response.status_code == 200
         assert len(response.context['sorted_objects']) == 3
         assert response.context['sorted_objects'][0]['key'] == 'A'
-        assert response.context['sorted_objects'][0]['collections'][0]['key'] == collection
-        assert response.context['sorted_objects'][0]['collections'][0]['objects'] == [
+        assert response.context['sorted_objects'][0]['objects'] == [
             journal_1, journal_2, ]
         assert response.context['sorted_objects'][1]['key'] == 'D'
-        assert response.context['sorted_objects'][1]['collections'][0]['key'] == collection
-        assert response.context['sorted_objects'][1]['collections'][0]['objects'] == [journal_3, ]
+        assert response.context['sorted_objects'][1]['objects'] == [journal_3, ]
         assert response.context['sorted_objects'][2]['key'] == 'G'
-        assert response.context['sorted_objects'][2]['collections'][0]['key'] == collection
-        assert response.context['sorted_objects'][2]['collections'][0]['objects'] == [
+        assert response.context['sorted_objects'][2]['objects'] == [
             journal_4, journal_5, journal_6, ]
 
     def test_can_sort_journals_by_disciplines(self):
@@ -106,6 +104,42 @@ class TestJournalListView(object):
         assert response.context['sorted_objects'][2]['collections'][0]['key'] == collection
         assert response.context['sorted_objects'][2]['collections'][0]['objects'] == [
             journal_4, journal_5, journal_6, ]
+
+    def test_can_filter_the_journals_by_open_access(self):
+        # Setup
+        collection = CollectionFactory.create()
+        journal_1 = JournalFactory.create(collection=collection, open_access=True)
+        JournalFactory.create(collection=collection, open_access=False)
+        url = reverse('public:journal:journal_list')
+        # Run
+        response = self.client.get(url, data={'open_access': True})
+        # Check
+        assert list(response.context['journals']) == [journal_1, ]
+
+    def test_can_filter_the_journals_by_types(self):
+        # Setup
+        collection = CollectionFactory.create()
+        jtype_1 = JournalType.objects.create(code='T1', name='T1')
+        jtype_2 = JournalType.objects.create(code='T2', name='T2')
+        JournalFactory.create(collection=collection, type=jtype_1)
+        journal_2 = JournalFactory.create(collection=collection, type=jtype_2)
+        url = reverse('public:journal:journal_list')
+        # Run
+        response = self.client.get(url, data={'types': ['T2', ]})
+        # Check
+        assert list(response.context['journals']) == [journal_2, ]
+
+    def test_can_filter_the_journals_by_collections(self):
+        # Setup
+        col_1 = CollectionFactory(code='col1')
+        col_2 = CollectionFactory(code='col2')
+        JournalFactory.create(collection=col_1)
+        journal_2 = JournalFactory.create(collection=col_2)
+        url = reverse('public:journal:journal_list')
+        # Run
+        response = self.client.get(url, data={'collections': ['col2', ]})
+        # Check
+        assert list(response.context['journals']) == [journal_2, ]
 
 
 @override_settings(DEBUG=True)

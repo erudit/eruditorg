@@ -3,11 +3,11 @@
 {% load static %}
 
 {% block page_title %}{% trans "Revues" %}{% endblock page_title %}
-{% block body_class %}{{ block.super }} journal_list{% endblock %}
+{% block body_class %}{{ block.super }} journal_list_per_disciplines{% endblock %}
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
 
 {% block content %}
-<div id="journal_list">
+<div id="journal_list_per_disciplines">
 
   <header class="sorting-index container-fluid">
     <div class="row">
@@ -63,7 +63,7 @@
         <div class="container">
           <div class="row">
             <div class="col col-md-3">
-              <h3 class="h4 color-red">{{ collection_group.key.name }}</h3>
+              <h3 class="h4 color-red">{{ collection_group.key.name }}</h3>
             </div>
             {% for journal in collection_group.objects %}
             <article class="col col-md-3 journal-thumbnail">
