@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE institutional_holdings PUBLIC "-//GOOGLE//Subscriber Journals 1.0//EN" "http://scholar.google.com/scholar/subscriber_journals.dtd">
+<subscriber_journals>
+  {% for journal in journals %}
+  {% with journal=journal coverage=journal.published_open_access_issues_year_coverage %}
+  {% if coverage %}
+  <item>
+    <title>{{ journal.name }}</title>
+    {% if journal.issn_print %}<issn>{{ journal.issn_print }}</issn>{% endif %}
+    {% if journal.issn_web %}<issn>{{ journal.issn_web }}</issn>{% endif %}
+    <coverage>
+      <from><year>{{ coverage.from }}</year></from>
+      <to><year>{{ coverage.to }}</year></to>
+    </coverage>
+  </item>
+  {% endif %}
+  {% endwith %}
+  {% endfor %}
+</subscriber_journals>

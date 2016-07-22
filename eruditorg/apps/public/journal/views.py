@@ -16,6 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.functional import cached_property
 from django.views.generic import DetailView
 from django.views.generic import ListView
+from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
 from PyPDF2 import PdfFileReader
@@ -23,6 +24,7 @@ from PyPDF2 import PdfFileWriter
 from rules.contrib.views import PermissionRequiredMixin
 
 from base.pdf import generate_pdf
+from base.viewmixins import CacheMixin
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.journal.viewmixins import ArticleAccessCheckMixin
 from core.journal.viewmixins import SingleJournalMixin
@@ -523,3 +525,20 @@ class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
 
     def get_content_type(self, fedora_object):
         return fedora_object.content.mimetype
+
+
+class GoogleScholarSubscribersView(CacheMixin, TemplateView):
+    cache_timeout = 60 * 60 * 24  # 24 hours
+    content_type = 'text/xml'
+    template_name = 'public/journal/scholar/subscribers.xml'
+
+
+class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
+    cache_timeout = 60 * 60 * 24  # 24 hours
+    content_type = 'text/xml'
+    template_name = 'public/journal/scholar/subscriber_journals.xml'
+
+    def get_context_data(self, **kwargs):
+        context = super(GoogleScholarSubscriberJournalsView, self).get_context_data(**kwargs)
+        context['journals'] = Journal.objects.filter(collection__code='erudit', type__code='S')
+        return context

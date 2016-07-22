@@ -39,6 +39,12 @@ urlpatterns = [
         url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
     ])),
 
+    # Google Scholar URLs
+    url(_(r'^scholar/'), include([
+        url(_(r'^subscribers\.xml$'), views.GoogleScholarSubscribersView.as_view(), name='scholar_subscribers'),  # noqa
+        url(_(r'^subscriber_journals\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
+    ])),
+
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
 

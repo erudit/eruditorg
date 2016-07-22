@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE institutional_holdings PUBLIC "-//GOOGLE//Subscriber Journals 1.0//EN" "http://scholar.google.com/scholar/subscriber.dtd">
+<subscribers>
+  <subscriber id="erudit">
+    <institution>Consortium Érudit</institution>
+    <country>WORLD</country>
+    <electronic_subscriptions>
+      <url>{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:scholar_subscriber_journals' %}</url>
+    </electronic_subscriptions>
+  </subscriber>
+</subscribers>

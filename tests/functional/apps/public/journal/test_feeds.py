@@ -59,11 +59,13 @@ class TestLatestJournalArticlesFeed(BaseEruditTestCase):
     def test_can_return_all_the_articles_associated_with_the_last_issue_of_a_journal(self, mock_erudit_object):  # noqa
         # Setup
         mock_erudit_object.return_value = get_mocked_erudit_object()
-        issue1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue1 = IssueFactory.create(
+            journal=self.journal, year=2010, date_published=dt.datetime.now())
         article1 = ArticleFactory.create(issue=issue1)
         article2 = ArticleFactory.create(issue=issue1)
         issue2 = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=2))
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=2))
         ArticleFactory.create(issue=issue2)
         request = self.factory.get('/')
         # Run

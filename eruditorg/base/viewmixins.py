@@ -6,11 +6,24 @@ from urllib.parse import urljoin
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
 from pysolr import SolrCoreAdmin
 import requests
 from requests.exceptions import ConnectionError
 
 logger = logging.getLogger(__name__)
+
+
+class CacheMixin(object):
+    """ Caches the result of a view for a specific number of seconds. """
+    cache_timeout = 60
+
+    def get_cache_timeout(self):
+        return self.cache_timeout
+
+    def dispatch(self, *args, **kwargs):
+        return cache_page(
+            self.get_cache_timeout())(super(CacheMixin, self).dispatch)(*args, **kwargs)
 
 
 class MenuItemMixin(object):
