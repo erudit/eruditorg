@@ -141,7 +141,7 @@
             {% if document.document_type == 'article' %}
             {# Article preview #}
             {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
-            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}">
+            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <header>
                 <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
                 {# authors #}
@@ -257,7 +257,7 @@
               </div>
             </article>
             {% elif document.document_type == 'thesis' %}
-            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}">
+            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <header>
                 <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
                 {# authors #}
