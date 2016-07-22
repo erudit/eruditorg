@@ -242,10 +242,11 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
         return context
 
 
-class JournalRawLogoView(SingleJournalMixin, FedoraFileDatastreamView):
+class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamView):
     """
     Returns the image file associated with a Journal instance.
     """
+    cache_timeout = 60 * 60 * 24 * 15  # 15 days
     content_type = 'image/jpeg'
     datastream_name = 'logo'
     fedora_object_class = JournalDigitalObject
@@ -519,10 +520,11 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
         output.write(response)
 
 
-class ArticleMediaView(SingleArticleMixin, FedoraFileDatastreamView):
+class ArticleMediaView(CacheMixin, SingleArticleMixin, FedoraFileDatastreamView):
     """
     Returns an image file embedded in the INFOIMG datastream.
     """
+    cache_timeout = 60 * 60 * 24 * 15  # 15 days
     datastream_name = 'content'
     fedora_object_class = MediaDigitalObject
 
