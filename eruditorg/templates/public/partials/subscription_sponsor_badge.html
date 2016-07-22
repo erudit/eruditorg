@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if request.subscription.sponsor or request.subscription.organisation %}
+{% with organisation=request.subscription.sponsor|default:request.subscription.organisation %}
+  <div class="subscription-sponsor text-center">
+    <br />
+    <p class="text-muted">{% trans "Votre accès est offert par" %}</p>
+    {% if organisation.badge %}
+      <img src="{{ organisation.badge.url }}" alt="" />
+    {% else %}
+      <p class="lead"><strong>{{ organisation.name }}</strong></p>
+    {% endif %}
+  </div>
+{% endwith %}
+{% endif %}

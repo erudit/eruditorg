@@ -217,6 +217,7 @@
               </li>
             </xsl:if>
           </ul>
+		  {% include "public/partials/subscription_sponsor_badge.html" %}
         </nav>
 				{% endif %}
 
