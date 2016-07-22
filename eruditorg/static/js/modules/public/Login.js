@@ -30,7 +30,6 @@ class LoginModal {
 
   init() {
     this.modal();
-    this.modalClose();
   }
 
   /*
@@ -44,7 +43,7 @@ class LoginModal {
       removalDelay: 750,
       type: 'ajax',
       closeOnBgClick: false,
-      closeBtnInside: false,
+      closeBtnInside: true,
       ajax: {
         settings: {
           // this enable Django to handle the request as PJAX template
@@ -71,17 +70,6 @@ class LoginModal {
           history.replaceState(null, null, _.previousURL);
         }
       }
-    });
-  }
-
-  /*
-  * Close elements for any modal
-  */
-  modalClose() {
-    $(document).on('click', '[data-close-modal]', function(event) {
-      event.preventDefault();
-      /* Act on the event */
-      $.magnificPopup.close();
     });
   }
 

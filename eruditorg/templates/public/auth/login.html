@@ -12,19 +12,61 @@
 {% endblock %}
 
 {% block content %}
+{% if request.is_ajax %}
+<div class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+  <h2 class="modal-header">{% trans "Connexion à votre compte" %}</h2>
+  <div class="modal-body">
+    <form action="{% url 'public:auth:login' %}" id="id-login-form" method="post">
+
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+      <div class="col-xs-12">
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-warning">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="id_username">{% trans "Nom d'utilisateur ou adresse e-mail" %}</label>
+        {{ form.username }}
+        <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="id_password">{% trans "Mot de passe" %}</label>
+        {{ form.password }}
+        <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
+      </div>
+
+      <div class="form-group row child-column-fit">
+        <aside class="col-sm-12 text-right">
+          <p class="no-margin">
+            <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+          </p>
+        </aside>
+      </div>
+
+      <input type="hidden" name="next" value="{{ next }}" />
+
+      <div class="form-group text-center">
+        <button type="reset" class="btn btn-default btn-lg" id="submit-id-submit" data-close-modal>{% trans "Annuler" %}</button>
+        <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Connexion" %}</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% else %}
+
+
 <section id="login-page">
 
   <div class="container-fluid">
 
     <div class="row">
 
-      <aside class="
-        {% if request.is_ajax %}
-          col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered
-        {% else %}
-          col-lg-4 col-sm-6 col-xs-12 col-centered
-        {% endif %}"
-      >
+      <aside class="col-lg-4 col-sm-6 col-xs-12 col-centered">
 
         <div class="panel">
 
@@ -69,9 +111,6 @@
               <input type="hidden" name="next" value="{{ next }}" />
 
               <div class="form-group text-center">
-                {% if request.is_ajax %}
-                <button type="reset" class="btn btn-default btn-lg" id="submit-id-submit" data-close-modal>{% trans "Annuler" %}</button>
-                {% endif %}
                 <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Connexion" %}</button>
               </div>
 
@@ -88,4 +127,5 @@
   </div>
 
 </section>
+{% endif %}
 {% endblock %}
