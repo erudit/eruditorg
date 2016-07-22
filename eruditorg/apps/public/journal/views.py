@@ -61,9 +61,17 @@ class JournalListView(ListView):
                 list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
             return first_pass_results
         elif self.sorting == 'disciplines':
-            disciplines = Discipline.objects.all().order_by('name')
+            objects = objects.prefetch_related('disciplines')
+            _disciplines_dict = {}
+            for o in objects:
+                for d in o.disciplines.all():
+                    if d not in _disciplines_dict:
+                        _disciplines_dict[d] = []
+                    _disciplines_dict[d].append(o)
+
             first_pass_results = [{'key': d.code, 'name': d.name, 'objects': sorted(
-                d.journals.all(), key=lambda j: j.sortable_name)} for d in disciplines]
+                _disciplines_dict[d], key=lambda j: j.sortable_name)}
+                for d in sorted(_disciplines_dict, key=lambda i: i.name)]
 
         # Only for "disciplines" sorting
         second_pass_results = []

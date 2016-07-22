@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load i18n staticfiles %}
+{% load i18n staticfiles cache %}
 
 {% block page_title %}{{ journal.name }}{% endblock page_title %}
 
@@ -260,6 +260,8 @@
 
     </div>
   </div>
+
+  {% cache LONG_TTL "public_journal_detail_issues" journal.id LANGUAGE_CODE %}
   {% if issues %}
   <section id="back-issues" class="back-issues">
     <div class="container">
@@ -280,12 +282,14 @@
           <li class="year-list--item"><h4 class="mono-space">{{ year.grouper }}</h4>
             <ul class="issue-list">
               {% for issue in year.list %}
+              {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id LANGUAGE_CODE %}
               <li class="issue-list--item">
                 <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
                   <span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                   {% if issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
                 </a>
               </li>
+              {% endcache %}
               {% endfor %}
             </ul>
           </li>
@@ -304,5 +308,6 @@
     </div>
   </section>
   {% endif %}
+  {% endcache %}
 </section>
 {% endblock content %}

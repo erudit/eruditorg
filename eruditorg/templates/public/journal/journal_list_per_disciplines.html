@@ -1,6 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n %}
 {% load static %}
+{% load cache %}
 
 {% block page_title %}{% trans "Revues" %}{% endblock page_title %}
 {% block body_class %}{{ block.super }} journal_list_per_disciplines{% endblock %}
@@ -39,6 +40,7 @@
     </div>
   </header>
 
+  {% cache FOREVER_TTL "public_journal_list_disciplines" LANGUAGE_CODE %}
   {% for objects_group in sorted_objects %}
   <a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible">{{ discipline }}</a>
   <div class="sorting-group container-fluid {% cycle "odd" "even" %}">
@@ -99,6 +101,7 @@
     {% endfor %}
   </div>
   {% endfor %}
+  {% endcache %}
 
 </div>
 {% endblock %}

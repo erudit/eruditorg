@@ -22,13 +22,14 @@ class SavedCitationList {
   save($document) {
     let _ = this;
     let documentId = $document.data(this.options.documentIdDataAttribute);
+    let documentAttrId = $document.attr('id');
     $.ajax({
       type: 'POST',
       url: Urls['public:citations:add_citation'](documentId),
     }).done(function() {
       $document.data(_.options.documentIsSavedDataAttribute, true);
-      $document.find(_.addButtonSelector).hide();
-      $document.find(_.removeButtonSelector).show();
+      $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
+      $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').show();
     });
   }
 
@@ -39,13 +40,14 @@ class SavedCitationList {
   remove($document) {
     let _ = this;
     let documentId = $document.data(this.options.documentIdDataAttribute);
+    let documentAttrId = $document.attr('id');
     $.ajax({
       type: 'POST',
       url: Urls['public:citations:remove_citation'](documentId),
     }).done(function() {
       $document.data(_.options.documentIsSavedDataAttribute, false);
-      $document.find(_.removeButtonSelector).hide();
-      $document.find(_.addButtonSelector).show();
+      $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();
+      $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').hide();
     });
   }
 
@@ -70,10 +72,17 @@ class SavedCitationList {
     });
 
     // Display or hide buttons allowing to save or remove citations.
-    $('[data-' + _.options.documentIsSavedDataAttribute + '=false] ' + this.addButtonSelector).show();
-    $('[data-' + _.options.documentIsSavedDataAttribute + '=false] ' + this.removeButtonSelector).hide();
-    $('[data-' + _.options.documentIsSavedDataAttribute + '=true] ' + this.addButtonSelector).hide();
-    $('[data-' + _.options.documentIsSavedDataAttribute + '=true] ' + this.removeButtonSelector).show();
+    $('[data-' + _.options.documentIdDataAttribute + ']').each(function(ev){
+      let documentAttrId = $(this).attr('id');
+      let documentIsSaved = $(this).data(_.options.documentIsSavedDataAttribute);
+      if (documentIsSaved == true) {
+        $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
+        $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').show();
+      } else {
+        $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();
+        $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').hide();
+      }
+    });
   }
 }
 
