@@ -141,6 +141,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'base.context_processors.cache_constants',
                 'base.context_processors.common_settings',
             ],
             'loaders': [
