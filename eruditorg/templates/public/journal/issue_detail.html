@@ -1,6 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n %}
 {% load staticfiles %}
+{% load cache %}
 
 {% block data_controller %}public:journal:issue_detail{% endblock data_controller %}
 
@@ -43,13 +44,19 @@
 {% trans "inconnu" as i18n_unknown %}
 
 <div id="issue_detail">
+  <div id="id_articles_saved_citation_list_metadata">
+    {% for article in articles %}
+    <div id="article-{{ article.id }}" data-document-id="{{ article.id }}" {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}></div>
+    {% endfor %}
+  </div>
+
 
   <div class="container">
     <div class="row">
 
       {# Journal information (on right side except mobile) #}
       <aside class="col-sm-push-9 col-sm-3">
-
+        {% cache FOREVER_TTL "public_issue_detail_journal_info" issue.journal.id LANGUAGE_CODE %}
         <div class="sidebar-block clearfix issue_detail--resume">
 
           {% if issue.has_coverpage %}
@@ -155,9 +162,11 @@
             {% endif %}
           </dl>
           <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
+          {% endcache %}
         </div>
       </aside>
 
+      {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
       {# Issue summary #}
       <section class="col-sm-9 col-sm-pull-3">
 
@@ -247,10 +256,12 @@
         {% endif %}
 
       </section>
+      {% endcache %}
 
     </div>
   </div>
 
+  {% cache FOREVER_TTL "public_issue_detail_back_issues" issue.id LANGUAGE_CODE %}
   <section class="back-issues">
 
       <div class="container">
@@ -291,6 +302,7 @@
       </div>
 
   </section>
+  {% endcache %}
 
 
 </div>

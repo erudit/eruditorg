@@ -22,3 +22,17 @@ def common_settings(request):
         })
 
     return COMMON_CONTEXT
+
+
+def cache_constants(request):
+    """ Returns some cache timeout that can be used to perform fragment caching in templates.
+
+    These timeouts can be used to do russian doll caching in templates by nesting cache calls with
+    different expirations.
+    """
+    return {
+        'SHORT_TTL': 600,       # 10 minutes
+        'MIDDLE_TTL': 1800,     # 30 minutes
+        'LONG_TTL': 3600,       # 1 hour
+        'FOREVER_TTL': 604800,  # 7 days
+    }
