@@ -1,4 +1,4 @@
-{% extends "public/journal/journal_base.html" %}
+{% extends "public/base.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load cache %}
@@ -28,15 +28,55 @@
 <meta name="twitter:title" content="{{ issue.erudit_object.html_theme|safe }} – Érudit">
 {% endblock meta_tags %}
 
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
+      "name": "{% trans 'Revues' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' issue.journal.code %}",
+      "name": "{{ issue.journal.name }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 4,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}",
+      "name": "{{ issue.volume_title_with_pages }}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
 {% block breadcrumb %}{{ block.super }}
-/
-<a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-  {% if issue.erudit_object.html_theme %}
-  {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
-  {% else %}
-  {{ issue.volume_title_with_pages }}
-  {% endif %}
-</a>
+  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+  / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ issue.journal.name }}</a>
+  / <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
+    {% if issue.erudit_object.html_theme %}
+    {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
+    {% else %}
+    {{ issue.volume_title_with_pages }}
+    {% endif %}
+  </a>
 {% endblock %}
 
 {% block content %}

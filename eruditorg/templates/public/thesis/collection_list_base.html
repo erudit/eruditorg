@@ -1,6 +1,38 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
+      "name": "{% trans 'Thèses' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' collection.pk %}",
+      "name": "{{ collection.name }}"
+    }
+  },{% block structured_data_breadcrumb_tail %}{% endblock structured_data_breadcrumb_tail %}]
+}
+</script>
+{% endblock structured_data %}
+
 {% block body_class %}{{ block.super }} thesis_collection_list{% endblock body_class %}
 {% block data_controller %}public:thesis:collection_list{% endblock data_controller %}
 

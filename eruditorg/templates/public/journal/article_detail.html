@@ -1,4 +1,4 @@
-{% extends "public/journal/journal_base.html" %}
+{% extends "public/base.html" %}
 {% load i18n staticfiles %}
 {% load public_journal_tags %}
 {% load cache %}
@@ -68,6 +68,48 @@
 {% cache FOREVER_TTL "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
+      "name": "{% trans 'Revues' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}",
+      "name": "{{ article.issue.journal.name }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 4,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}",
+      "name": "{{ article.issue.volume_title_with_pages }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 5,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
+      "name": "{{ article.title }}"
+    }
+  }]
+}
+</script>
 {% endblock structured_data %}
 
 {% block body_class %}public static-header{% endblock %}
@@ -75,15 +117,15 @@
 {% block header_class %}static{% endblock %}
 
 {% block breadcrumb %}{{ block.super }}
- / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
- / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
+  / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
+  / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
    {% if article.issue.erudit_object.html_theme %}
    {{ article.issue.erudit_object.html_theme|safe|truncatechars:50 }}
    {% else %}
    {{ article.issue.volume_title_with_pages }}
    {% endif %}
-   </a>
- / <a>{{ article.title|truncatechars:50 }}</a>
+  </a>
+  / <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article.title|truncatechars:50 }}</a>
 {% endblock %}
 
 {% block content %}
