@@ -63,6 +63,13 @@
 {% endcache %}
 {% endblock meta_tags %}
 
+{% block structured_data %}
+{{ block.super }}
+{% cache FOREVER_TTL "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
+{% include "public/journal/partials/article_structured_data.html" %}
+{% endcache %}
+{% endblock structured_data %}
+
 {% block body_class %}public static-header{% endblock %}
 
 {% block header_class %}static{% endblock %}
