@@ -5,13 +5,29 @@
 
 {% block page_title %}{% trans "Accueil" %}{% endblock page_title %}
 
-{% block data_controller %}public:home{% endblock data_controller %}
-
-{% block body_class %}{{ block.super }} home{% endblock %}
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "WebSite",
+  "name" : "Érudit",
+  "url" : "{{ request.scheme }}://{{ request.site.domain }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:search:results' %}?basic_search_term={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{% endblock structured_data %}
 
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/videojs.css' %}" />
 {% endblock extrahead %}
+
+{% block data_controller %}public:home{% endblock data_controller %}
+{% block body_class %}{{ block.super }} home{% endblock %}
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}

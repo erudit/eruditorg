@@ -4,6 +4,23 @@
 {% load rules %}
 {% load base_urls_tags %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "Érudit",
+  "url" : "{{ request.scheme }}://{{ request.site.domain }}",
+  "logo" : "{{ request.scheme }}://{{ request.site.domain }}{% static 'img/logo-erudit.png' %}",
+  "sameAs" : [
+    "https://www.facebook.com/%C3%89rudit-141469165320/",
+    "https://twitter.com/eruditorg",
+    "https://github.com/erudit/",
+    "https://www.linkedin.com/company/3628951"]
+}
+</script>
+{% endblock structured_data %}
+
 {% block stylesheets %}
 {% if not WEBPACK_DEV_SERVER_URL %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
