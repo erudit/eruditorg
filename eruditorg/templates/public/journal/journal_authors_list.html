@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load public_journal_tags %}
 
-{% block title %}{% trans "Index des auteurs" %}{% endblock title %}
+{% block title %}{% trans "Index des auteurs" %} - {{ journal.name }}{% endblock title %}
 
 {% block structured_data %}
 {{ block.super }}

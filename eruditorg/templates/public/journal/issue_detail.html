@@ -7,10 +7,7 @@
 
 {% block zone_title %}{{ journal.name }}{% endblock %}
 
-{% block page_title %}
-{% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}
-{{ issue.volume_title_with_pages }}
-{% endblock page_title %}
+{% block page_title %}{% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock page_title %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
