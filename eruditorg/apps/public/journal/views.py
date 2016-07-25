@@ -448,8 +448,9 @@ class ArticleRawPdfView(
 
     def get_response_object(self, fedora_object):
         response = super(ArticleRawPdfView, self).get_response_object(fedora_object)
-        response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
-            self.kwargs['localid'])
+        if 'embed' not in self.request.GET:
+            response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
+                self.kwargs['localid'])
         return response
 
     def get_permission_object(self):
@@ -502,8 +503,9 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
 
     def get_response_object(self, fedora_object):
         response = super(ArticleRawPdfFirstPageView, self).get_response_object(fedora_object)
-        response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
-            self.kwargs['localid'])
+        if 'embed' not in self.request.GET:
+            response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
+                self.kwargs['localid'])
         return response
 
     def get_permission_object(self):
