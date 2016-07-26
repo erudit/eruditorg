@@ -145,7 +145,7 @@
 
 		<div id="article-content" class="row border-top">
 			<xsl:if test="//corps">
-				{% if article.erudit_object.processing == 'complet' %}
+				{% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}
         <!-- article outline -->
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
           <h2>{% trans "Plan de l’article" %}</h2>
@@ -217,7 +217,6 @@
               </li>
             </xsl:if>
           </ul>
-		  {% include "public/partials/subscription_sponsor_badge.html" %}
         </nav>
 				{% endif %}
 
@@ -226,11 +225,11 @@
           <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled">
             <li>
-              <button id="tool-citation-save" data-citation-save="#article_detail">
+              <button id="tool-citation-save" data-citation-save="#article_detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="erudicon erudicon-tools-save"></span>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </button>
-              <button id="tool-citation-remove" data-citation-remove="#article_detail">
+              <button id="tool-citation-remove" data-citation-remove="#article_detail"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="erudicon erudicon-tools-save"></span>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
@@ -271,7 +270,7 @@
 				</aside>
 			</xsl:if>
 
-			<div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
+			<div class="full-article col-md-7 col-md-offset-1">
 
 				{% if not article_access_granted and not only_summary %}
 					<div class="alert alert-warning">
@@ -300,7 +299,7 @@
 						<xsl:apply-templates select="//corps"/>
 					</section>
 					{% elif article.localidentifier %}
-					<object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
+					<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" width="500" height="700" />
 					{% endif %}
 				{% elif not article.erudit_object.abstracts %}
 					<p>
