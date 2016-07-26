@@ -2,6 +2,39 @@
 {% load i18n %}
 
 {% block page_title %}{{ collection.name }}{% endblock page_title %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
+      "name": "{% trans 'Thèses' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' collection.pk %}",
+      "name": "{{ collection.name }}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
 {% block body_class %}{{ block.super }} thesis_collection_home{% endblock body_class %}
 {% block data_controller %}public:thesis:collection_home{% endblock data_controller %}
 

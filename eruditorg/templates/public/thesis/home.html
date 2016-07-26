@@ -2,11 +2,37 @@
 {% load i18n %}
 
 {% block page_title %}{% trans "Thèses" %}{% endblock page_title %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
+      "name": "{% trans 'Thèses' %}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
 {% block body_class %}{{ block.super }} thesis_home{% endblock body_class %}
 {% block data_controller %}public:thesis:thesis_home{% endblock data_controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:journal:journal_list' %}">{% trans "Thèses" %}</a>
+  {{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
 {% endblock breadcrumb %}
 
 {% block content %}

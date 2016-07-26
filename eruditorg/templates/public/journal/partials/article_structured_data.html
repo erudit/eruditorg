@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@graph": [
+    {
+      "@id": "#issue-{{ article.issue.localidentifier }}",
+      "@type": "PublicationIssue",
+      {% if article.issue.number %}"issueNumber": "{{ article.issue.number }}",{% endif %}
+      {% if article.issue.erudit_object.first_page %}"pageStart": "{{ article.issue.erudit_object.first_page }}",{% endif %}
+      {% if article.issue.erudit_object.last_page %}"pageEnd": "{{ article.issue.erudit_object.last_page }}",{% endif %}
+      "datePublished": "{{ article.issue.year }}"
+    },
+    {
+      "@id": "#volume-{{ article.issue.journal.code }}-{{ article.issue.volume }}",
+      "@type": "PublicationVolume",
+      "volumeNumber": "{{ article.issue.volume }}"
+    },
+    {
+      "@id": "#journal-{{ article.issue.journal.code }}",
+      "@type": "Periodical",
+      {% if article.issue.journal.issn_print and article.issue.journal.issn_web %}"issn": ["{{ article.issue.journal.issn_print }}", "{{ article.issue.journal.issn_web }}"],{% elif article.issue.journal.issn_print %}"issn": "{{ article.issue.journal.issn_print }}",{% elif article.issue.journal.issn_web %}"issn": "{{ article.issue.journal.issn_web }}",{% endif %}
+      "name": "{{ article.issue.journal.name }}"
+    },
+    {
+      "@id": "#article-{{ article.localidentifier }}",
+      "@type": "ScholarlyArticle",
+      "author": [{% for a in article.erudit_object.authors %}"{{ a.lastname }}, {{ a.firstname }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
+      "isPartOf": [
+        {
+          "@id": "#journal-{{ article.issue.journal.code }}"
+        },
+        {
+          "@id": "#volume-{{ article.issue.journal.code }}-{{ article.issue.volume }}"
+        },
+        {
+          "@id": "#issue-{{ article.issue.localidentifier }}"
+        }
+      ],
+      {% if article.erudit_object.first_page %}"pageStart": "{{ article.erudit_object.first_page }}",{% endif %}
+      {% if article.erudit_object.last_page %}"pageEnd": "{{ article.erudit_object.last_page }}",{% endif %}
+      "name": "{{ article.title }}",
+      "publisher": "{{ article.erudit_object.publisher }}",
+      "sameAs": "http://dx.doi.org/{{ article.erudit_object.doi }}"
+    }
+  ]
+}
+</script>

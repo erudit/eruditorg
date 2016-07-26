@@ -2,7 +2,52 @@
 {% load i18n %}
 {% load public_journal_tags %}
 
-{% block title %}{% trans "Index des auteurs" %}{% endblock title %}
+{% block title %}{% trans "Index des auteurs" %} - {{ journal.name }}{% endblock title %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
+      "name": "{% trans 'Revues' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' journal.code %}",
+      "name": "{{ article.issue.journal.name }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 4,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_authors_list' journal.code %}",
+      "name": "{% trans 'Auteurs' %}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+  / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
+  / <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Auteurs" %}</a>
+{% endblock %}
 
 {% block content %}
 <div class="container">

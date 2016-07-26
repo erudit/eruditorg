@@ -1,4 +1,4 @@
-{% extends "public/journal/journal_base.html" %}
+{% extends "public/base.html" %}
 {% load i18n staticfiles cache %}
 
 {% block page_title %}{{ journal.name }}{% endblock page_title %}
@@ -18,6 +18,43 @@
 <meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}">
 <meta name="twitter:title" content="{{ journal.name }} – Érudit">
 {% endblock meta_tags %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_list' %}",
+      "name": "{% trans 'Revues' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' journal.code %}",
+      "name": "{{ journal.name }}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
+{% block breadcrumb %}{{ block.super }}
+  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+  / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
+{% endblock %}
 
 {% block content %}
 
