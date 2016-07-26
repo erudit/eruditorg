@@ -10,7 +10,6 @@ from erudit.models import Journal
 from core.accounts.models import LegacyAccountProfile
 from core.accounts.shortcuts import get_or_create_legacy_user
 
-from .drupalerudit_models import Role
 from .drupalerudit_models import Users
 from .drupalerudit_models import UsersRoles
 
@@ -85,8 +84,8 @@ class Command(BaseCommand):
         # STEP 2: associates the user to the proper Journal instances
         # --
 
-        roles = Role.objects.all()
-        roles_dict = {r.rid: r for r in roles}  # noqa ; should we use this?
+        # roles = Role.objects.all()
+        # roles_dict = {r.rid: r for r in roles}  # noqa ; should we use this?
         journals = Journal.objects.filter(collection__code='erudit')
         for journal in journals:
             db_id = 'drupalerudit_' + journal.code
