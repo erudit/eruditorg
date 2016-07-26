@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import datetime as dt
+
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User
 from django.test import RequestFactory
@@ -10,6 +12,7 @@ from erudit.test.factories import OrganisationFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
+from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 
 class TestSubscriptionMiddleware(BaseEruditTestCase):
@@ -19,9 +22,14 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_institution(self):
         # Setup
+        now_dt = dt.datetime.now()
         organisation = OrganisationFactory.create()
         subscription = JournalAccessSubscriptionFactory(
             organisation=organisation)
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
         InstitutionIPAddressRangeFactory.create(
             subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
@@ -42,9 +50,14 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_individual_access(self):
         # Setup
+        now_dt = dt.datetime.now()
         user = User.objects.create_user(
             username='test', password='not_secret', email='test@exampe.com')
-        JournalAccessSubscriptionFactory.create(user=user, journal=self.journal)
+        subscription = JournalAccessSubscriptionFactory.create(user=user, journal=self.journal)
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
 
         request = self.factory.get('/')
         request.user = user

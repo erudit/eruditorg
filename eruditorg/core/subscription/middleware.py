@@ -18,18 +18,22 @@ class SubscriptionMiddleware(object):
         # Tries to determine if the user's IP address is contained into
         # an institutional IP address range.
         ip = get_ip(request)
-        ip_range = InstitutionIPAddressRange.objects \
-            .select_related('subscription', 'subscription__organisation') \
-            .filter(ip_start__lte=ip, ip_end__gte=ip).first()
-        if ip_range is not None:
+        ip_range_subscription_ids = InstitutionIPAddressRange.objects \
+            .select_related('subscription', 'subscription__organisation', 'subscription__sponsor') \
+            .filter(ip_start__lte=ip, ip_end__gte=ip).values_list('id', flat=True)
+        subscription = JournalAccessSubscription.valid_objects \
+            .filter(id__in=ip_range_subscription_ids).first() if ip_range_subscription_ids \
+            else False
+        if subscription:
+            request.subscription = subscription
             request.subscription_type = 'institution'
-            request.subscription = ip_range.subscription
             return
 
         # Tries to determine if the user has an individual account
-        subscription = JournalAccessSubscription.objects.filter(user=request.user).exists() \
-            if request.user.is_authenticated() else False
+        subscription = JournalAccessSubscription.valid_objects.select_related('sponsor') \
+            .filter(user=request.user).first() if request.user.is_authenticated() else False
         if subscription:
+            request.subscription = subscription
             request.subscription_type = 'individual'
             return
 
