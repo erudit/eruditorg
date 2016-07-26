@@ -268,7 +268,7 @@
 				</aside>
 			</xsl:if>
 
-			<div class="full-article col-md-7 col-md-offset-1">
+			<div class="full-article {% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
 
 				{% if not article_access_granted and not only_summary %}
 					<div class="alert alert-warning">
@@ -297,7 +297,7 @@
 						<xsl:apply-templates select="//corps"/>
 					</section>
 					{% elif article.localidentifier %}
-					<iframe src="{% url 'pdf-viewer' %}?file={% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" width="500" height="700" />
+					<object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
 					{% endif %}
 				{% elif not article.erudit_object.abstracts %}
 					<p>
