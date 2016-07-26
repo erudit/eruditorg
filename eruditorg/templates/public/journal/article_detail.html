@@ -3,6 +3,8 @@
 {% load public_journal_tags %}
 {% load cache %}
 
+{% block page_title %}{{ article.title }}{% endblock page_title %}
+
 {% block data_controller %}public:journal:article_detail{% endblock data_controller %}
 
 {% block meta_tags %}
