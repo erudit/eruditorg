@@ -7,6 +7,7 @@ from string import ascii_lowercase
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -16,6 +17,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.functional import cached_property
 from django.views.generic import DetailView
 from django.views.generic import ListView
+from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
 from PyPDF2 import PdfFileMerger
@@ -398,6 +400,18 @@ class ArticleSummaryView(BaseArticleDetailView):
     Displays the summary of an Article instance.
     """
     template_name = 'public/journal/article_summary.html'
+
+
+class IdEruditArticleRedirectView(RedirectView):
+    pattern_name = 'public:journal:article_detail'
+
+    def get_redirect_url(self, *args, **kwargs):
+        article = get_object_or_404(
+            Article.objects.select_related('issue', 'issue__journal'),
+            localidentifier=kwargs['localid'])
+        return reverse(self.pattern_name, args=[
+            article.issue.journal.code, article.issue.volume_slug, article.issue.localidentifier,
+            article.localidentifier, ])
 
 
 class ArticleEnwCitationView(SingleArticleMixin, DetailView):

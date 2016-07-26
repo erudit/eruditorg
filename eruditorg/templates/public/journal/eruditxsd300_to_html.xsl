@@ -102,8 +102,8 @@
 				<dl class="mono-space idpublic">
 					<dt>URI</dt>
 					<dd>
-						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="clipboard-data">
-							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}
+						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
+							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
 							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>

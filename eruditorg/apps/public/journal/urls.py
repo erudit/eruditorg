@@ -38,6 +38,8 @@ urlpatterns = [
         url(_(r'^contenu\.pdf$'), views.ArticleRawPdfView.as_view(), name='article_raw_pdf'),
         url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
     ])),
+    url(r'^iderudit/(?P<localid>[\w-]+)/$',
+        views.IdEruditArticleRedirectView.as_view(), name='iderudit_article_detail'),
 
     # Google Scholar URLs
     url(_(r'^scholar/'), include([
