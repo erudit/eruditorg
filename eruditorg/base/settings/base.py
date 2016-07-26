@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'core.journal',
     'core.metrics',
     'core.reporting',
+    'core.royalty_reports',
     'core.subscription',
 
     # Third-party apps
