@@ -16,8 +16,12 @@
 @import "bootstrap-mixins/text-emphasis";
 @import "bootstrap-mixins/text-overflow";
 @import "bootstrap-mixins/vendor-prefixes";
+@import "bootstrap-mixins/clearfix";
+@import "bootstrap-mixins/nav-vertical-align";
+@import "bootstrap-mixins/border-radius";
 
 // Components
+@import "bootstrap-mixins/component-animations.scss";
 @import "bootstrap-mixins/alerts";
 @import "bootstrap-mixins/buttons";
 @import "bootstrap-mixins/panels";
@@ -27,16 +31,14 @@
 @import "bootstrap-mixins/forms";
 @import "bootstrap-mixins/progress-bar";
 @import "bootstrap-mixins/table-row";
+@import "bootstrap-mixins/navbar";
 
 // Skins
 @import "bootstrap-mixins/background-variant";
-@import "bootstrap-mixins/border-radius";
 @import "bootstrap-mixins/gradients";
 
 // Layout
-@import "bootstrap-mixins/clearfix";
 @import "bootstrap-mixins/center-block";
-@import "bootstrap-mixins/nav-vertical-align";
 @import "bootstrap-mixins/grid-framework";
 @import "bootstrap-mixins/grid";
 
