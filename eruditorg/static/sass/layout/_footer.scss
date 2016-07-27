@@ -26,6 +26,7 @@ footer#site-footer {
     // .form-group
 
     input[type="email"] {
+      width: auto;
       border-width: 0;
       padding-top: $padding-base-vertical - 1;
       padding-bottom: $padding-base-vertical - 1;
@@ -62,11 +63,20 @@ footer#site-footer {
   /**
   * bottom part
   */
-  #footer-legal {
-    background-color: $gray-base;
+
+  .logo-white {
+    margin-bottom: 1em;
+  }
+
+  .footer-legal {
+    background-color: #000;
     padding-top: $margin-vertical-default;
     padding-bottom: $margin-vertical-default;
     color: #fff;
+
+    p {
+      font-size: 14px;
+    }
 
     svg {
       width: 100px;
@@ -86,9 +96,16 @@ footer#site-footer {
   */
   .social-icons {
     font-size: 24px;
+
     a {
       margin-right: 7px;
+
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+      }
+
     }
+
   }
 
 }

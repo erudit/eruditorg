@@ -54,10 +54,10 @@
                   <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
                 </li>
                 <li>
-                  <a href="#">{% trans "Livres et actes" %}</a>
+                  <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
                 </li>
                 <li>
-                  <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
+                  <a href="#">{% trans "Livres et actes" %}</a>
                 </li>
                 <li>
                   <a href="#">{% trans "Littérature grise" %}</a>
@@ -176,10 +176,10 @@
         <form action="{{ MAILCHIMP_ACTION_URL }}" method="post" id="mc-embedded-subscribe-form" class="newsletter-form" name="mc-embedded-subscribe-form" target="_blank">
           <div aria-hidden="true" class="hidden"><input type="text" name="{{ MAILCHIMP_UUID }}" tabindex="-1" value=""></div>
           <fieldset class="col-sm-8">
-            <label for="mce-EMAIL">{% trans "Abonnez-vous à notre infolettre" %}</label>
+            <label for="mce-EMAIL">{% trans "Abonnez-vous à notre infolettre&nbsp;:" %}</label>
             <div class="input-group">
               <div class="input-group-btn">
-                <input type="email" value="" name="EMAIL" required class="required email" id="mce-EMAIL" placeholder="{% trans "nom@courriel.com" %}">
+                <input type="email" value="" name="EMAIL" required id="mce-EMAIL" placeholder="{% trans "nom@courriel.com" %}" class="required email">
                 <input type="submit" value="{% blocktrans %}S'inscrire{% endblocktrans %}" name="subscribe" id="mc-embedded-subscribe" class="btn btn-dark">
               </div>
             </div>
@@ -218,8 +218,8 @@
           <div class="col-md-6">
             <ul class="unstyled footer-nav--publication-types">
               <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
+              <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
               <li class="disabled">{% trans "Livres & actes" %}</li>
-              <li class="disabled">{% trans "Thèses" %}</li>
               <li class="disabled">{% trans "Littérature grise" %}</li>
             </ul>
           </div>
@@ -238,14 +238,14 @@
     </div>
   </div>
 
-  <div id="footer-legal">
+  <div class="footer-legal">
 
     <div class="container">
 
       <div class="row">
 
         <div class="col-sm-6">
-          <img src="{% static 'svg/logo-erudit.svg' %}" alt="{% blocktrans %}Logo d'Érudit{% endblocktrans %}" class="inline-svg" />
+          <img src="{% static 'svg/logo-erudit.svg' %}" alt="{% blocktrans %}Logo d'Érudit{% endblocktrans %}" class="inline-svg logo-white" />
         </div>
 
         <div class="col-sm-6 child-column-fit">
@@ -255,12 +255,12 @@
               © {% now "Y" %} {% trans "Consortium Érudit" %}
             </p>
             <p>
-              <a href="https://apropos.erudit.org/fr/usagers/politique-dutilisation/" target="_blank">{% trans "Conditions d'utilisations" %}</a>
+              <a href="https://apropos.erudit.org/fr/usagers/politique-dutilisation/" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
             </p>
           </div>
 
           <div class="col-sm-6">
-            <p>{% trans "Suivez-nous" %}</p>
+            <p>{% trans "Suivez-nous&nbsp;:" %}</p>
             <ul class="social-icons inline">
               <li>
                 <a href="https://www.facebook.com/%C3%89rudit-141469165320/">
