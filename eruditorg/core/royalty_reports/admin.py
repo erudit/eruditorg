@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import copy
+
 from django.conf import settings
 from django.contrib import admin
 from django.db.models import Q
@@ -40,6 +42,11 @@ class RoyaltyReportAdmin(admin.ModelAdmin):
             for row in ws.rows:
                 for cell in row:
                     journal_ws[cell.coordinate] = cell.value
+                    if cell.has_style:
+                        journal_ws[cell.coordinate].alignment = cell.alignment.copy()
+                        journal_ws[cell.coordinate].font = cell.font.copy()
+            journal_ws.column_dimensions = ws.column_dimensions
+            journal_ws.row_dimensions = ws.row_dimensions
 
             workbook_file_name = 'royalty_reports/' \
                 + 'journal-{localid}-{reportid}.xlsx'.format(
