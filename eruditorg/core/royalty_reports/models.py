@@ -10,6 +10,8 @@ class RoyaltyReport(models.Model):
     start = models.DateField(verbose_name=_('Date de début'))
     end = models.DateField(verbose_name=_('Date de fin'))
     report_file = models.FileField(verbose_name=_('Fichier'), upload_to='royalty_reports/')
+    published = models.BooleanField(
+        verbose_name=_("Publié dans l'espace utilisateur"), default=False)
 
     class Meta:
         verbose_name = _('Rapport de redevances')
@@ -24,9 +26,8 @@ class JournalRoyalty(models.Model):
     royalty_report = models.ForeignKey(RoyaltyReport, verbose_name=_('Rapport de redevances'))
     journal = models.ForeignKey(Journal, verbose_name=_('Revue'))
     report_file = models.FileField(verbose_name=_('Fichier'), upload_to='royalty_reports/')
-    published = models.BooleanField(
-        verbose_name=_("Publié dans l'espace utilisateur"), default=False)
 
     class Meta:
+        unique_together = ('royalty_report', 'journal')
         verbose_name = _('Redevance de revue')
         verbose_name_plural = _('Redevances de revues')

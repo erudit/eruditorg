@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import copy
-
 from django.conf import settings
 from django.contrib import admin
 from django.db.models import Q
@@ -61,7 +59,7 @@ class RoyaltyReportAdmin(admin.ModelAdmin):
 
 
 class JournalRoyaltyAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['royalty_report', 'journal', ]
 
 
 admin.site.register(RoyaltyReport, RoyaltyReportAdmin)
