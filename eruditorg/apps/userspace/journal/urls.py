@@ -15,6 +15,8 @@ section_apps_urlpatterns = [
         include('apps.userspace.journal.editor.urls', namespace='editor')),
     url(_(r'^informations/'),
         include('apps.userspace.journal.information.urls', namespace='information')),
+    url(_(r'^rapports/'),
+        include('apps.userspace.journal.royalty_reports.urls', namespace='royalty_reports')),
     url(_(r'^abonnements/'),
         include('apps.userspace.journal.subscription.urls', namespace='subscription')),
 ]

@@ -68,6 +68,13 @@ class AuthorizationConfig(object):
     This authorization defines the ability to manage the members of an organisation.
     """
 
+    can_consult_royalty_reports = AuthorizationDef(
+        'royalty_reports:can_consult_royalty_reports',
+        _('Consultation des rapports de redevances'))
+    """
+    This authorization defines the ability to consult the royalty reports.
+    """
+
     @classmethod
     def get_choices(cls, include_staff_only=False):
         authorizations = []

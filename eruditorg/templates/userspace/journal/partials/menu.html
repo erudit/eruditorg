@@ -6,6 +6,7 @@
 {% has_perm 'editor.review_issuesubmission' request.user as can_review_issuesubmission %}
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
 {% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_account %}
+{% has_perm 'royalty_reports.consult_royalty_reports' request.user scope_current_journal as can_consult_royalty_reports %}
 
 <ul class="main-menu">
   <li class="userspace menu-item has-children has-dropdown">
@@ -47,6 +48,15 @@
            {% if menu_journal == 'subscription' %}class="active"{% endif %}>
           <span class="icon fa ion-ios-people-outline"></span>
           <span class="sidenav-label">{% trans "Abonnements" %}</span>
+        </a>
+      </li>
+      {% endif %}
+      {% if can_consult_royalty_reports %}
+      <li class="journal menu-item">
+        <a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}"
+           {% if menu_journal == 'royalty_reports' %}class="active"{% endif %}>
+          <span class="icon fa ion-ios-people-outline"></span>
+          <span class="sidenav-label">{% trans "Rapports de redevances" %}</span>
         </a>
       </li>
       {% endif %}

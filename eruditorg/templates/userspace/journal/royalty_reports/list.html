@@ -1,0 +1,34 @@
+{% extends "userspace/journal/base.html" %}
+{% load i18n staticfiles %}
+{% load rules %}
+
+{% block page_title %}{% trans "Rapport de redevances" %}{% endblock %}
+
+{% block breadcrumb_end %}
+{{ block.super }}
+<li>{% trans "Rapports de redevances" %}</li>
+{% endblock breadcrumb_end %}
+
+{% block content_main %}
+<div class="col-md-10 col-md-offset-1 col-xs-12">
+  <section class="card card-issue_submissions">
+    <div class="row card-header">
+      <div class="col-sm-6">
+        <h2>{% trans "Rapports de redevances" %}</h2>
+      </div>
+    </div>
+    <ul id="id_royalty_reports_list" class="row card-body">
+    {% for report in reports %}
+      <li class="col-xs-12">
+        <a href="{{ report.report_file.url }}"
+           class="btn btn-link btn-block">
+          <span class="title">
+            {{ report.royalty_report }}
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock content_main %}
