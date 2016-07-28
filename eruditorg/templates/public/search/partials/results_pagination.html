@@ -2,7 +2,7 @@
 {% load base_urls_tags %}
 
 <nav>
-  <ul class="search-pagination">
+  <ul class="single-pagination">
     {% if results.pagination.current_page > 1 %}
     <a href="{% get_full_path_with_overrides page=1 %}"> <i class="ion-ios-arrow-left left-bar"></i> </a>
     {% endif %}

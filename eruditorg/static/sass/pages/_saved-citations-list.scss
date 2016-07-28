@@ -1,0 +1,152 @@
+body#id_saved_citations_list{
+  #id_saved_citations_head{
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid $gray;
+  }
+
+  .documents-list-wrapper{
+    padding-right: 100px;
+
+    .actions-wrapper{
+      height: 50px;
+
+      #div_id_sort_by{
+        float: right;
+
+        label{
+          display: inline-block;
+        }
+
+        select{
+          display: inline-block;
+          width: auto !important;
+        }
+      }
+    }
+
+    .selection-action-wrapper{
+      padding: 20px;
+      background: darken($gray-lighter, 5%);
+
+      p{
+        margin: 0;
+      }
+
+      .tool-links{
+        margin-top: -2px;
+        padding: 0;
+        width: auto;
+
+        a{
+          margin-right: 1px;
+          padding: 8px 0;
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          background: $brand-primary;
+          color: $white;
+          font-size: 9px;
+          white-space: nowrap;
+          text-align: center;
+          vertical-align: middle;
+
+          &:hover, &:focus{
+            background: $black;
+          }
+        }
+      }
+    }
+
+    .documents-wrapper{
+      .documents-head{
+        padding: 15px 0;
+        border-bottom: 1px solid $black;
+
+        .document-checkbox-wrapper{
+          float: left;
+        }
+
+        .document-title{
+          padding-left: 30px;
+        }
+      }
+
+      ul.documents{
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+        list-style: none;
+
+        li{
+          margin: 0;
+          padding: 15px 0;
+          border-bottom: 1px solid darken($gray-lighter, 5%);
+
+          .document-checkbox-wrapper{
+            float: left;
+          }
+
+          .tool-links{
+            margin-top: -2px;
+            padding: 0;
+            width: auto;
+            height: 40px;
+
+            a{
+              margin-right: 1px;
+              padding: 8px 0;
+              display: inline-block;
+              width: 25px;
+              height: 25px;
+              background: $black;
+              color: $white;
+              font-size: 9px;
+              white-space: nowrap;
+              text-align: center;
+              vertical-align: middle;
+
+              &:hover, &:focus{
+                background: $brand-primary;
+              }
+
+              .erudicon-tools-pdf{
+                font-size: 6px;
+              }
+            }
+          }
+
+          .document-title{
+            padding-left: 30px;
+          }
+
+          .document-authors-publication-year{
+            padding-left: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar{
+    h3{
+      padding: 8px 0;
+      border-bottom: 2px solid $gray;
+    }
+
+    dt, dd {
+      display: block;
+      float: none;
+      width: auto;
+    }
+
+    dt {
+      font-size: small;
+      margin-top: 1.25em;
+    }
+
+    dd {
+      margin-bottom: 1.25em;
+    }
+  }
+}
