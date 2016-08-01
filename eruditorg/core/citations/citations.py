@@ -34,7 +34,7 @@ class SavedCitationList(set):
         self.request.session[self.name] = list(self)
         # If the user is authenticated the list of articles should be associated to the User
         # instance by creating or updating a SavedCitationList instance.
-        if self.request.user.is_authenticated() and len(self):
+        if self.request.user.is_authenticated():
             db_clist, _ = DBSavedCitationList.objects.get_or_create(user=self.request.user)
             db_clist.documents.clear()
             db_clist.documents.add(*EruditDocument.objects.filter(id__in=list(self)))
