@@ -52,7 +52,8 @@ class HomeView(FedoraServiceRequiredMixin, TemplateView):
             # Fetches the blog entries
             try:
                 parsed = rss_parse(feed_url)
-                assert parsed.get('status') == 200
+                status_code = parsed.get('status')
+                assert status_code == 200 or status_code == 304
             except AssertionError:
                 # The feed is not available.
                 logger.error('Apropos feeds unavailable ({})'.format(feed_url),
