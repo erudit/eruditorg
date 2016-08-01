@@ -40,9 +40,11 @@ class RoyaltyReportAdmin(admin.ModelAdmin):
             for row in ws.rows:
                 for cell in row:
                     journal_ws[cell.coordinate] = cell.value
+                    journal_ws[cell.coordinate].data_type = cell.data_type
                     if cell.has_style:
                         journal_ws[cell.coordinate].alignment = cell.alignment.copy()
                         journal_ws[cell.coordinate].font = cell.font.copy()
+                        journal_ws[cell.coordinate].number_format = cell.number_format
             journal_ws.column_dimensions = ws.column_dimensions
             journal_ws.row_dimensions = ws.row_dimensions
 
