@@ -61,6 +61,18 @@ export default {
       });
     }
 
+    /*
+     * Returns the list of documents IDs that are selected.
+     */
+    function getSelectedDocumentIds() {
+      var documentIds = new Array();
+      $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
+        let $document = $(this).parents('li');
+        documentIds.push($document.data('document-id'));
+      });
+      return documentIds;
+    }
+
     $('.documents-head input[type=checkbox]').on('change', function(ev) {
       if ($(this).is(':checked')) {
         // Check all the checkboxes associated with each document
@@ -90,11 +102,7 @@ export default {
       var r = confirm(gettext("Voulez-vous vraiment supprimer votre sélection ?"));
       if (r == false) { return; }
 
-      var documentIds = new Array();
-      $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
-        let $document = $(this).parents('li');
-        documentIds.push($document.data('document-id'));
-      });
+      var documentIds = getSelectedDocumentIds();
 
       $.ajax({
         type: 'POST',
@@ -111,7 +119,28 @@ export default {
       });
     });
 
+    $('#export_citation_enw').click(function(ev) {
+      ev.preventDefault();
+      var documentIds = getSelectedDocumentIds();
+      var export_url = Urls['public:citations:citation_enw']() + '?' + $.param({document_ids: documentIds}, true);
+      window.location.href = export_url;
+    });
+    $('#export_citation_ris').click(function(ev) {
+      ev.preventDefault();
+      var documentIds = getSelectedDocumentIds();
+      var export_url = Urls['public:citations:citation_ris']() + '?' + $.param({document_ids: documentIds}, true);
+      window.location.href = export_url;
+    });
+    $('#export_citation_bib').click(function(ev) {
+      ev.preventDefault();
+      var documentIds = getSelectedDocumentIds();
+      var export_url = Urls['public:citations:citation_bib']() + '?' + $.param({document_ids: documentIds}, true);
+      window.location.href = export_url;
+    });
+
     // Initializes the citation modals
-    new CiteModal($('a[data-cite]'));
+    $('a[data-cite]').each(function(){
+      new CiteModal($(this));
+    });
   },
 };

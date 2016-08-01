@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
+from django.views.generic import TemplateView
 from django.views.generic import View
 
 from erudit.models import Article
@@ -148,3 +149,40 @@ class SavedCitationBatchRemoveView(MetricCaptureMixin, View):
                 request.saved_citations.remove(d)
                 removed_document_ids.append(d.id)
         return JsonAckResponse(removed_document_ids=removed_document_ids)
+
+
+class BaseEruditDocumentsCitationView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        document_ids = request.GET.getlist('document_ids', [])
+        try:
+            assert document_ids
+            document_ids = list(map(int, document_ids))
+        except (AssertionError, ValueError):
+            raise Http404
+        documents = EruditDocument.objects.filter(id__in=document_ids)
+        context = self.get_context_data(documents=documents, **kwargs)
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseEruditDocumentsCitationView, self).get_context_data(**kwargs)
+        context['article_ct'] = ContentType.objects.get_for_model(Article)
+        context['thesis_ct'] = ContentType.objects.get_for_model(Thesis)
+        return context
+
+
+class EruditDocumentsEnwCitationView(BaseEruditDocumentsCitationView):
+    """ Returns the enw file of a set of Érudit documents. """
+    content_type = 'application/x-endnote-refer'
+    template_name = 'public/citations/eruditdocuments.enw'
+
+
+class EruditDocumentsRisCitationView(BaseEruditDocumentsCitationView):
+    """ Returns the ris file of a set of Érudit documents. """
+    content_type = 'application/x-research-info-systems'
+    template_name = 'public/citations/eruditdocuments.ris'
+
+
+class EruditDocumentsBibCitationView(BaseEruditDocumentsCitationView):
+    """ Returns the bib file of a set of Érudit documents. """
+    content_type = 'application/x-bibtex'
+    template_name = 'public/citations/eruditdocuments.bib'

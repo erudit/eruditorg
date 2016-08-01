@@ -46,7 +46,7 @@
             <div id="id_selection_tools" class="tool-links" style="display:none;">
               {% spaceless %}
               <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection"><span class="erudicon erudicon-tools-save"></span></a>
-              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}"><span class="erudicon erudicon-tools-cite"></span></a>
+              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
               {% endspaceless %}
             </div>
           </div>
@@ -146,6 +146,32 @@
           </ul>
         </div>
         <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
+        <div class="hidden">
+          <div id="id_cite_selection_modal" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+            <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+            <div class="modal-body">
+              <h3>{% trans "Exporter les notices sélectionnées" %}</h3>
+              <p>
+                <a href="#" id="export_citation_enw" class="btn btn-primary cite-export">
+                  <span class="show cite-export-title">.ENW</span>
+                </a>
+                EndNote, Zotero
+              </p>
+              <p>
+                <a href="#" id="export_citation_ris" class="btn btn-primary cite-export">
+                  <span class="show cite-export-title">.RIS</span>
+                </a>
+                Papers, Reference Manager, RefWorks, Zotero
+              </p>
+              <p>
+                <a href="#" id="export_citation_bib" class="btn btn-primary cite-export">
+                  <span class="show cite-export-title">.BIB</span>
+                </a>
+                BibTeX, JabRef, Mendeley, Zotero
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-md-3 sidebar">
         <div class="saved-citations-counts">
