@@ -172,7 +172,7 @@
 
   }
 
-  // mobile nav
+  // overrides for mobile nav
   &.collapse.in, &.collapsing {
     position: static;
     height: 100vh;
@@ -256,6 +256,64 @@
 
       }
 
+    }
+
+  }
+
+}
+
+// hamburger menu
+.navbar-toggle {
+  width: 60px;
+  height: 45px;
+  position: relative;
+  cursor: pointer;
+  background: #FFF;
+  @include rotate(0deg);
+
+  > .bar {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 45px;
+    background: $coral-red;
+    opacity: 1;
+    left: 0;
+    @include transform-origin(left center);
+    @include transition(.3s ease-in-out);
+
+    &:nth-child(1) {
+      @include rotate(45deg);
+      left: 0;
+      top: 3px;
+    }
+    &:nth-child(2) {
+      width: 0%;
+      opacity: 0;
+    }
+    &:nth-child(3) {
+      @include rotate(-45deg);
+      left: 0;
+      top: 35px;
+    }
+
+  }
+
+  &.collapsed > .bar {
+
+    &:nth-child(1) {
+      top: 5px;
+      @include rotate(0deg);
+    }
+    &:nth-child(2) {
+      top: 20px;
+      width: 45px;
+      opacity: 1;
+      @include rotate(0deg);
+    }
+    &:nth-child(3) {
+      top: 35px;
+      @include rotate(0deg);
     }
 
   }

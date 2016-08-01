@@ -12,7 +12,7 @@ body.fixed-header {
 * Erudit Public #page-header
 */
 #site-header {
-  padding: 10px;
+  padding: 10px 0;
   position: relative;
   border-bottom: 1px solid $mid-grey;
   @include transition(all 0.15s);
