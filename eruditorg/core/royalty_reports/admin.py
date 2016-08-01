@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.contrib import admin
+from django.utils.text import slugify
 from django.db.models import Q
 from openpyxl import load_workbook
 from openpyxl import Workbook
@@ -49,8 +50,8 @@ class RoyaltyReportAdmin(admin.ModelAdmin):
             journal_ws.row_dimensions = ws.row_dimensions
 
             workbook_file_name = 'royalty_reports/' \
-                + 'journal-{localid}-{reportid}.xlsx'.format(
-                    localid=journal.localidentifier, reportid=report.id)
+                + 'Redevances_{nameslug}_{enddate}.xlsx'.format(
+                    nameslug=slugify(journal.name)[:30], enddate=report.end)
             journal_wb.save(settings.MEDIA_ROOT + '/' + workbook_file_name)
 
             journal_royalty = JournalRoyalty()
