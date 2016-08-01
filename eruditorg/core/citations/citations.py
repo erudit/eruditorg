@@ -36,6 +36,7 @@ class SavedCitationList(set):
         # instance by creating or updating a SavedCitationList instance.
         if self.request.user.is_authenticated() and len(self):
             db_clist, _ = DBSavedCitationList.objects.get_or_create(user=self.request.user)
+            db_clist.documents.clear()
             db_clist.documents.add(*EruditDocument.objects.filter(id__in=list(self)))
 
     def add(self, document):
