@@ -32,7 +32,7 @@ class TestSavedCitationListMiddleware(BaseEruditTestCase):
         # Run
         middleware.process_request(request)
         # Check
-        self.assertEqual(list(request.saved_citations), [article.id, ])
+        self.assertEqual(list(request.saved_citations), [str(article.id), ])
 
     def test_saves_the_citation_list_in_session_when_processing_responses(self):
         # Setup
@@ -53,4 +53,4 @@ class TestSavedCitationListMiddleware(BaseEruditTestCase):
         request.saved_citations.add(article_2)
         middleware.process_response(request, None)
         # Check
-        self.assertEqual(request.session['saved-citations'], [article_2.id, ])
+        self.assertEqual(request.session['saved-citations'], [str(article_2.id), ])

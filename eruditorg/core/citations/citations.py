@@ -12,10 +12,21 @@ class SavedCitationList(set):
         super(SavedCitationList, self).__init__(*args, **kwargs)
         self.request = request
         self.name = name
-        self.update(request.session.get(self.name, []))
+
+        if hasattr(self.request, 'user') and self.request.user.is_authenticated():
+            # If the user is authenticated we want saved citations list items to be retrieved from
+            # the database and not from the session.
+            db_clist, _ = DBSavedCitationList.objects.get_or_create(user=self.request.user)
+            document_ids = db_clist.documents.values_list('id', flat=True)
+            document_ids = list(map(str, document_ids))
+        else:
+            # Otherwise the documents IDs are retrieved in the user's session.
+            document_ids = request.session.get(self.name, [])
+
+        self.update(document_ids)
 
     def __contains__(self, document):
-        document_id = document.id if isinstance(document, EruditDocument) else document
+        document_id = str(document.id) if isinstance(document, EruditDocument) else str(document)
         return super(SavedCitationList, self).__contains__(document_id)
 
     def save(self):
@@ -28,9 +39,9 @@ class SavedCitationList(set):
             db_clist.documents.add(*EruditDocument.objects.filter(id__in=list(self)))
 
     def add(self, document):
-        document_id = document.id if isinstance(document, EruditDocument) else document
+        document_id = str(document.id) if isinstance(document, EruditDocument) else str(document)
         super(SavedCitationList, self).add(document_id)
 
     def remove(self, document):
-        document_id = document.id if isinstance(document, EruditDocument) else document
+        document_id = str(document.id) if isinstance(document, EruditDocument) else str(document)
         super(SavedCitationList, self).remove(document_id)

@@ -34,7 +34,7 @@ class TestSavedCitationAddView(BaseEruditTestCase):
         response = view(request, article.id)
         # Check
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(list(request.saved_citations), [article.id, ])
+        self.assertEqual(list(request.saved_citations), [str(article.id), ])
 
 
 class TestSavedCitationRemoveView(BaseEruditTestCase):

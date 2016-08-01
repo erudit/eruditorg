@@ -63,7 +63,7 @@ class TestSavedCitationList(BaseEruditTestCase):
         # Run
         citation_list.save()
         # Check
-        self.assertEqual(request.session['saved-citations'], [article.id, ])
+        self.assertEqual(request.session['saved-citations'], [str(article.id), ])
 
     def test_can_associate_the_article_to_the_registered_users(self):
         # Setup
