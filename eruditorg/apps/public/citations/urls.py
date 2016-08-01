@@ -12,4 +12,6 @@ urlpatterns = [
         views.SavedCitationAddView.as_view(), name='add_citation'),
     url(_(r'^suppression/(?P<document_id>\d+)/$'),
         views.SavedCitationRemoveView.as_view(), name='remove_citation'),
+    url(_(r'^suppression/batch/$'),
+        views.SavedCitationBatchRemoveView.as_view(), name='remove_citation_batch'),
 ]

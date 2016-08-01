@@ -16,6 +16,34 @@ export default {
     }
 
     /*
+     * Update the count of a document of a specific type if we remove it.
+     * @param {JQuery selector} $document - The selector of the document object.
+     */
+    function updateDocumentTypeCount($document) {
+      let documentType = $document.data('document-type');
+      let $documentTypeCountBlock = $('[data-' + documentType + '-count]');
+      let documentTypeCount = parseInt($documentTypeCountBlock.data(documentType + '-count'));
+      documentTypeCount -= 1;
+      // Update the count of the related document type
+      if (documentTypeCount) {
+        let gettextContext = {count: documentTypeCount, };
+        let fmts = undefined;
+        if (documentType === 'scientific-article') {
+          fmts = ngettext('%(count)s article savant', '%(count)s articles savants', gettextContext.count);
+        } else if (documentType === 'cultural-article') {
+          fmts = ngettext('%(count)s article culturel', '%(count)s articles culturels', gettextContext.count);
+        } else if (documentType === 'thesis') {
+          fmts = ngettext('%(count)s thèse', '%(count)s thèses', gettextContext.count);
+        }
+        let s = interpolate(fmts, gettextContext, true);
+        $documentTypeCountBlock.text(s);
+        $documentTypeCountBlock.data(documentType + '-count', documentTypeCount);
+      } else {
+        $documentTypeCountBlock.remove();
+      }
+    }
+
+    /*
      * Remove a specific document from the saved citations list.
      * The function also updates the texts displaying the number of documents associated with the
      * document type of the document being removed.
@@ -23,33 +51,13 @@ export default {
      */
     function removeDocument($document) {
       let documentId = $document.data('document-id');
-      let documentType = $document.data('document-type');
       $.ajax({
         type: 'POST',
         url: Urls['public:citations:remove_citation'](documentId),
       }).done(function() {
         $document.remove();
         updateDocumentSelectionCount();
-        let $documentTypeCountBlock = $('[data-' + documentType + '-count]');
-        let documentTypeCount = parseInt($documentTypeCountBlock.data(documentType + '-count'));
-        documentTypeCount -= 1;
-        // Update the count of the related document type
-        if (documentTypeCount) {
-          let gettextContext = {count: documentTypeCount, };
-          let fmts = undefined;
-          if (documentType === 'scientific-article') {
-            fmts = ngettext('%(count)s article savant', '%(count)s articles savants', gettextContext.count);
-          } else if (documentType === 'cultural-article') {
-            fmts = ngettext('%(count)s article culturel', '%(count)s articles culturels', gettextContext.count);
-          } else if (documentType === 'thesis') {
-            fmts = ngettext('%(count)s thèse', '%(count)s thèses', gettextContext.count);
-          }
-          let s = interpolate(fmts, gettextContext, true);
-          $documentTypeCountBlock.text(s);
-          $documentTypeCountBlock.data(documentType + '-count', documentTypeCount);
-        } else {
-          $documentTypeCountBlock.remove();
-        }
+        updateDocumentTypeCount($document);
       });
     }
 
@@ -82,7 +90,25 @@ export default {
       var r = confirm(gettext("Voulez-vous vraiment supprimer votre sélection ?"));
       if (r == false) { return; }
 
-      // TODO
+      var documentIds = new Array();
+      $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
+        let $document = $(this).parents('li');
+        documentIds.push($document.data('document-id'));
+      });
+
+      $.ajax({
+        type: 'POST',
+        url: Urls['public:citations:remove_citation_batch'](),
+        data: { document_ids: documentIds },
+        traditional: true
+      }).done(function() {
+        $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
+          let $document = $(this).parents('li');
+          updateDocumentTypeCount($document);
+          $document.remove();
+          updateDocumentSelectionCount();
+        });
+      });
     });
 
     // Initializes the citation modals

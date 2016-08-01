@@ -3,6 +3,7 @@
 import collections
 
 from django.contrib.contenttypes.models import ContentType
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
@@ -110,7 +111,7 @@ class SavedCitationAddView(MetricCaptureMixin, View):
 
     def post(self, request, document_id):
         document = get_object_or_404(EruditDocument, pk=document_id)
-        self.request.saved_citations.add(document)
+        request.saved_citations.add(document)
         return JsonAckResponse(saved_document_id=document.id)
 
 
@@ -122,7 +123,28 @@ class SavedCitationRemoveView(MetricCaptureMixin, View):
     def post(self, request, document_id):
         document = get_object_or_404(EruditDocument, pk=document_id)
         try:
-            self.request.saved_citations.remove(document)
+            request.saved_citations.remove(document)
         except KeyError:
             return JsonErrorResponse(ugettext("Ce document n'est pas présent dans les notices"))
         return JsonAckResponse(removed_document_id=document.id)
+
+
+class SavedCitationBatchRemoveView(MetricCaptureMixin, View):
+    """ Remove multiple Érudit documents from a list of documents. """
+    http_method_names = ['post', ]
+    tracking_metric_name = 'erudit__citation__remove'
+
+    def post(self, request):
+        document_ids = request.POST.getlist('document_ids', [])
+        try:
+            assert document_ids
+            document_ids = list(map(int, document_ids))
+        except (AssertionError, ValueError):
+            raise Http404
+        documents = EruditDocument.objects.filter(id__in=document_ids)
+        removed_document_ids = []
+        for d in documents:
+            if d in request.saved_citations:
+                request.saved_citations.remove(d)
+                removed_document_ids.append(d.id)
+        return JsonAckResponse(removed_document_ids=removed_document_ids)
