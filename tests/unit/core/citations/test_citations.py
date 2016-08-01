@@ -28,7 +28,7 @@ class TestSavedCitationList(BaseEruditTestCase):
         citation_list = SavedCitationList(request)
         # Run
         citation_list.add(article_1)
-        citation_list.add(article_2.id)
+        citation_list.add(article_2)
         # Check
         self.assertTrue(article_1 in citation_list)
         self.assertTrue(article_2.id in citation_list)
@@ -43,10 +43,10 @@ class TestSavedCitationList(BaseEruditTestCase):
         middleware.process_request(request)
         citation_list = SavedCitationList(request)
         citation_list.add(article_1)
-        citation_list.add(article_2.id)
+        citation_list.add(article_2)
         # Run
         citation_list.remove(article_1)
-        citation_list.remove(article_2.id)
+        citation_list.remove(article_2)
         # Check
         self.assertFalse(len(citation_list))
 

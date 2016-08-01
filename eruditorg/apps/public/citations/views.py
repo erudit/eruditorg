@@ -113,6 +113,7 @@ class SavedCitationAddView(MetricCaptureMixin, View):
     def post(self, request, document_id):
         document = get_object_or_404(EruditDocument, pk=document_id)
         request.saved_citations.add(document)
+        request.saved_citations.save()
         return JsonAckResponse(saved_document_id=document.id)
 
 
@@ -125,6 +126,7 @@ class SavedCitationRemoveView(MetricCaptureMixin, View):
         document = get_object_or_404(EruditDocument, pk=document_id)
         try:
             request.saved_citations.remove(document)
+            request.saved_citations.save()
         except KeyError:
             return JsonErrorResponse(ugettext("Ce document n'est pas présent dans les notices"))
         return JsonAckResponse(removed_document_id=document.id)
@@ -148,6 +150,7 @@ class SavedCitationBatchRemoveView(MetricCaptureMixin, View):
             if d in request.saved_citations:
                 request.saved_citations.remove(d)
                 removed_document_ids.append(d.id)
+        request.saved_citations.save()
         return JsonAckResponse(removed_document_ids=removed_document_ids)
 
 

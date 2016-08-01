@@ -30,14 +30,15 @@ class SavedCitationList(set):
         return super(SavedCitationList, self).__contains__(document_id)
 
     def save(self):
-        """ Saves a list of citations into the user's session. """
-        self.request.session[self.name] = list(self)
+        """ Saves a list of citations into the user's session or in the database. """
         # If the user is authenticated the list of articles should be associated to the User
         # instance by creating or updating a SavedCitationList instance.
         if self.request.user.is_authenticated():
             db_clist, _ = DBSavedCitationList.objects.get_or_create(user=self.request.user)
             db_clist.documents.clear()
             db_clist.documents.add(*EruditDocument.objects.filter(id__in=list(self)))
+        else:
+            self.request.session[self.name] = list(self)
 
     def add(self, document):
         document_id = str(document.id) if isinstance(document, EruditDocument) else str(document)
