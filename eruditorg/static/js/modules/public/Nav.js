@@ -54,9 +54,9 @@ class Nav {
    * Search bar toggle in nav
    */
   searchBar() {
-    var searchBarTrigger = "nav#main-nav [data-trigger-search-bar]";
-    var searchBar        = "nav#main-nav .search-form";
-    var searchInput      = "nav#main-nav .search-form input.search-terms";
+    var searchBarTrigger = "#main-nav [data-trigger-search-bar]";
+    var searchBar        = "#main-nav .search-form";
+    var searchInput      = "#main-nav .search-form input.search-terms";
 
     // show or hide search bar
     var toggleSearch = function() {

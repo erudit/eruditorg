@@ -2,7 +2,7 @@
 * see _header.scss for shared styling between public and user space
 */
 
-$header-height: 116px;
+$header-height: 100px;
 
 body.fixed-header {
   padding-top: $header-height;
@@ -11,12 +11,13 @@ body.fixed-header {
 /**
 * Erudit Public #page-header
 */
-header#site-header {
-  padding: 40px ($grid-gutter-width * 2);
+#site-header {
+  padding: 10px;
   position: relative;
   border-bottom: 1px solid $mid-grey;
   @include transition(all 0.15s);
   background-color: #fff;
+  float: none;
 
   &.fixed {
     position: fixed;
@@ -27,11 +28,17 @@ header#site-header {
   }
 
   &.compact {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    #brand {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
   }
 
-  h1#brand {
+  #brand {
     font-size: inherit;
     margin: 0;
     top: -10px;

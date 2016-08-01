@@ -17,36 +17,39 @@
     "https://twitter.com/eruditorg",
     "https://github.com/erudit/",
     "https://www.linkedin.com/company/3628951"]
-}
-</script>
-{% endblock structured_data %}
+  }
+  </script>
+  {% endblock structured_data %}
 
-{% block stylesheets %}
-{% if not WEBPACK_DEV_SERVER_URL %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
-{% endif %}
-{% endblock stylesheets %}
+  {% block stylesheets %}
+  {% if not WEBPACK_DEV_SERVER_URL %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
+  {% endif %}
+  {% endblock stylesheets %}
 
-{% block body_class %}public fixed-header{% endblock %}
+  {% block body_class %}public fixed-header{% endblock %}
 
-{# public page header #}
-{% block header %}
-<header id="site-header" class="{% block header_class %}fixed{% endblock %}">
-
-  <div class="container-fluid">
-    <div class="row">
-      <h1 id="brand" class="col-md-4">
-        <a href="/">
-          <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg" alt="Érudit" />
-        </a>
-      </h1>
-
-      {% url 'public:journal:journal_list' as journal_list_url %}
-
-      <nav id="main-nav" class="col-md-8">
-        <h2 class="hidden">{% trans "Menu principal" %}</h2>
-        <ul class="unstyled menu-bar">
-          {% block mainnav %}
+  {# public page header #}
+  {% block header %}
+  <header id="site-header" class="fixed clearfix">
+    <nav>
+      <div class="container-fluid">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h1 id="brand" class="navbar-brand">
+          <a href="/">
+            <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg" alt="Érudit" />
+          </a>
+        </h1>
+        {% url 'public:journal:journal_list' as journal_list_url %}
+        <div id="main-nav" class="navbar-collapse collapse">
+          <h2 class="hidden">{% trans "Menu principal" %}</h2>
+          <ul class="unstyled menu-bar">
+            {% block mainnav %}
             <li class="dropdown {% if journal_list_url in request.path %}active{% endif %}">
               <div class="select main-section">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></div>
               <ul>
@@ -127,15 +130,14 @@
                     <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
                   </div>
                 </div>
-              </form>
-            </li>
+              </div>
+            </form>
+          </li>
           {% endblock %}
         </ul>
-      </nav>
-
+      </div>
     </div>
-  </div>
-
+  </nav>
 </header>
 
 <nav id="breadcrumb" class="container-fluid">
@@ -161,7 +163,7 @@
   </div>
 </div>
 <main role="main">
-{% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
+  {% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
 </main>
 {% endblock body %}
 
@@ -302,5 +304,5 @@
 {% endblock footer %}
 
 {% block scripts %}
-  <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/PublicApp.js' %}"></script>
+<script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/PublicApp.js' %}"></script>
 {% endblock scripts %}

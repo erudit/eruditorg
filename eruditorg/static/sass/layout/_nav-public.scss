@@ -1,21 +1,18 @@
 /**
 * Main Erudit Public site nav
 */
-nav#main-nav {
-  text-align: right;
-  position: relative;
+#main-nav {
 
-  // set height the same as logo in same parent row
-  height: $erudit-logo-height;
+  .menu-bar {
+    @include vertical-centered($position: absolute);
+    right: $navbar-padding-horizontal * 2;
 
-  ul.menu-bar {
-    @include vertical-centered();
     > li {
       display: inline-block;
       margin-left: 25px;
 
       @media (min-width: $screen-lg) {
-        margin-left: 20px;
+        margin-left: 15px;
       }
 
       &:first-child {
@@ -175,51 +172,4 @@ nav#main-nav {
 
   }
 
-}
-
-
-/**
-* Publications type nav
-*/
-
-nav.sub-nav {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: -55px;
-  background-color: #fff;
-  border-bottom: 1px solid $gray-light;
-  z-index: $zindex-navbar - 1;
-  text-align: center;
-  pointer-events: none;
-  @include opacity(0);
-  @include translate(0,10%);
-  @include transition(all 250ms);
-
-  &.visible {
-    pointer-events: all;
-    @include opacity(1);
-    @include translate(0,0);
-  }
-
-
-
-  ul.menu-bar {
-    > li {
-      display: inline-block;
-      margin: 0 25px;
-      a {
-        display: block;
-        @include fw-sans-bold;
-        padding: 15px 25px;
-        @include transition(all 250ms);
-        &:hover,
-        &.active {
-          background-color: $brand-primary;
-          color: #fff;
-          text-decoration: none;
-        }
-      }
-    }
-  }
 }

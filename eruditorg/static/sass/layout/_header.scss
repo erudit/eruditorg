@@ -8,11 +8,11 @@ $erudit-logo-height: 35px !default;
 * default rules for main site-header
 */
 
-header#site-header {
+#site-header {
 
-  h1#brand {
+  #brand {
     margin: 0;
-    height: $erudit-logo-height;
+    height: auto;
   }
 
 }

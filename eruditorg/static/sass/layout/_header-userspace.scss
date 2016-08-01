@@ -3,7 +3,7 @@ $erudit-logo-height: 35px !default;
 /**
 * Erudit Userspace #page-header
 */
-header#site-header {
+#site-header {
   padding: $erudit-logo-height/2 0;
   position: relative;
   background-color: $brand-primary;
@@ -14,7 +14,7 @@ header#site-header {
   z-index: $zindex-navbar-fixed;
 
   .container-fluid {
-    max-width: $screen-xl;    
+    max-width: $screen-xl;
   }
 
   h1#brand {
