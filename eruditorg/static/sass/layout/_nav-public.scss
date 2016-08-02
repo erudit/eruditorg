@@ -3,17 +3,13 @@
 */
 #main-nav {
 
-  .menu-bar {
+  .navbar-nav {
     @include vertical-centered($position: absolute);
-    right: $navbar-padding-horizontal * 2;
+    right: 20px;
 
     > li {
       display: inline-block;
-      margin-left: 25px;
-
-      @media (min-width: $screen-lg) {
-        margin-left: 15px;
-      }
+      margin-left: 10px;
 
       &:first-child {
         margin-left: 0;
@@ -52,10 +48,9 @@
   .main-section {
     display: block;
     font-size: 16px;
-    line-height: 14px;
+    line-height: 16px;
     position: relative;
     padding-right: 25px;
-    margin-bottom: 10px;
     color: #000;
     @include fw-sans-medium();
 
@@ -81,12 +76,13 @@
         border-bottom: 1px solid $mid-grey;
       }
       a {
+        padding: 0.5em 0.75em 0.5em 0.5em;
         &:hover, &:focus, &:active {
           background: $coral-red;
           color: #FFF;
           text-decoration: none;
-          text-indent: 0.25em;
-          @include transition(text-indent 0.2s ease-out);
+          padding-left: 0.75em;
+          @include transition(padding 0.2s ease-out);
           @include fw-sans-medium();
         }
       }
@@ -174,25 +170,23 @@
 
   // overrides for mobile nav
   &.collapse.in, &.collapsing {
-    position: static;
-    height: 100vh;
-    overflow: auto;
 
-    > .menu-bar {
-      position: relative;
-      left: 0;
+    > .navbar-nav {
+      position: static;
+      top: auto;
+      transform: none;
 
       .main-section {
-        border-bottom: 1px solid $dark-grey;
-        font-size: 20px;
-        padding-bottom: 10px;
+        border-top: 1px solid $dark-grey;
+        font-size: 18px;
+        margin-top: 5px;
       }
 
       li {
         display: block;
         margin-left: 0;
-        padding: 10px 0;
-        font-size: 20px;
+        padding: 5px 0;
+        font-size: 16px;
       }
 
     }
@@ -208,20 +202,23 @@
       background: none;
       top: 0;
 
+      form {
+        padding-top: 20px;
+      }
+
+      input {
+        border-color: #000;
+        color: #000;
+      }
+
       .input-group-btn {
         text-align: left;
       }
 
       .btn {
-        &:active, &:focus, &:hover {
-          background: #000;
-          color: #FFF;
-        }
-      }
-
-      input, .btn {
+        background: #000;
         border-color: #000;
-        color: #000;
+        color: #FFF;
       }
 
     }
@@ -243,7 +240,7 @@
         }
 
         a {
-          padding: 15px 0;
+          padding: 10px 0;
           display: inline;
 
           &:hover, &:active, &:focus {
@@ -267,6 +264,7 @@
   width: 60px;
   height: 45px;
   position: relative;
+  top: 50%;
   cursor: pointer;
   background: #FFF;
   @include rotate(0deg);
