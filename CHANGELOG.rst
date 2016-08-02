@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.18 - Under development
---------------------------
+0.1.18
+------
 
 * Improve Journal code uniqueness logic in import_journals_from_fedora command
 
