@@ -1,0 +1,8 @@
+{% for document in documents %}
+{% if document.polymorphic_ctype_id == article_ct.id %}
+{% include "public/journal/citation/article.enw" with article=document %}
+{% elif document.polymorphic_ctype_id == thesis_ct.id %}
+{% include "public/thesis/citation/thesis.enw" with thesis=document %}
+{% endif %}
+
+{% endfor %}

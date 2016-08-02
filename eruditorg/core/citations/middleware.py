@@ -8,8 +8,3 @@ class SavedCitationListMiddleware(object):
 
     def process_request(self, request):
         request.saved_citations = SavedCitationList(request)
-
-    def process_response(self, request, response):
-        if hasattr(request, 'saved_citations'):
-            request.saved_citations.save()
-        return response

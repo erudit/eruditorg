@@ -62,7 +62,8 @@
     {% endblock extrahead %}
   </head>
   <body
-      class="{% block body_class %}{% endblock %}"
+      id="{% block body_id %}id_body{% endblock body_id %}"
+      class="{% block body_class %}{% endblock body_class %}"
       data-controller="{% block data_controller %}{% endblock data_controller %}"
       data-action="{% block data_action %}{% endblock data_action %}"
       {% block body_data_attributes %}{% endblock body_data_attributes %}
