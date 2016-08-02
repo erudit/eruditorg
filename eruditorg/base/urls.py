@@ -18,11 +18,13 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.contrib.sitemaps import views as sitemap_views
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
 from django_js_reverse import views as js_reverse_views
 
+from . import sitemaps
 from . import urls_compat
 
 
@@ -30,7 +32,18 @@ js_info_dict = {
     'packages': ('base', ),
 }
 
-urlpatterns = i18n_patterns(
+sitemaps_dict = {
+    'journal': sitemaps.JournalSitemap,
+    'issue': sitemaps.IssueSitemap,
+    'article': sitemaps.ArticleSitemap,
+}
+
+urlpatterns = [
+    url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps_dict}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap, {'sitemaps': sitemaps_dict}),
+]
+
+urlpatterns += i18n_patterns(
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
     url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
 
