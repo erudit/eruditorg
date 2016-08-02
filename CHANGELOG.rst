@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.1.17 - Under development
+--------------------------
+
+* Ensure that the Journal code is unique when importing journals from Fedora
+
 0.1.16
 ------
 
