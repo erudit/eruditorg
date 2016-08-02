@@ -101,6 +101,9 @@
                 </li>
                 {% endif %}
                 <li>
+                  <a href="{% url 'public:citations:list' %}">{% trans "Ma bibliothèque" %}</a>
+                </li>
+                <li>
                   <a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a>
                 </li>
                 <li>
