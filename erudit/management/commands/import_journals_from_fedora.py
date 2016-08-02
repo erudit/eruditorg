@@ -246,14 +246,16 @@ class Command(BaseCommand):
         xml_issue = publications_tree.xpath(
             './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
         journal.name = xml_name.text if xml_name is not None else None
-        journal.code = xml_issue[0].get('revAbr') if xml_issue is not None else None
 
         # Some journals share the same code in the Fedora repository so we have to ensure that our
         # journal instances' codes are not duplicated!
-        code_ext = 1
-        while Journal.objects.filter(code=journal.code).exists():
-            journal.code += str(code_ext)
-            code_ext += 1
+        if not journal.id:
+            code_base = xml_issue[0].get('revAbr') if xml_issue is not None else None
+            code_ext = 1
+            journal.code = code_base
+            while Journal.objects.filter(code=journal.code).exists():
+                journal.code = code_base + str(code_ext)
+                code_ext += 1
 
         issues = xml_issue = publications_tree.xpath('.//numero')
         current_journal_code_found = False
