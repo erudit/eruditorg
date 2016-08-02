@@ -60,7 +60,7 @@
           <ul class="documents">
           {% for document in documents %}
             {% if document.polymorphic_ctype_id == article_ct.id %}
-            <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type == 'C' %}cultural-article{% else %}scientific-article{% endif %}">
+            <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}">
               <div class="pull-right">
                 <div class="tool-links">
                   {% spaceless %}
