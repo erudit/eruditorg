@@ -31,7 +31,7 @@
 
 {# public page header #}
 {% block header %}
-<header id="site-header" class="fixed clearfix">
+<header id="site-header" class="{% block header_class %}fixed{% endblock %} clearfix">
   <nav>
     <div class="container-fluid">
       <div class="navbar-header">
