@@ -17,7 +17,7 @@
 
       // active section, add border at bottom
       &.active {
-        > .select:after {
+        &:after {
           content: "";
           display: block;
           width: 100%;
@@ -25,13 +25,13 @@
           background-color: #000;
           position: absolute;
           left: -10px;
-          bottom: -47px;
+          bottom: -28px;
           @include transition(all 250ms);
           z-index: 1;
 
           // with parent <header> in compact mode
           .compact & {
-            bottom: -22px;
+            bottom: -5px;
           }
 
           // hide when inverted <header>
