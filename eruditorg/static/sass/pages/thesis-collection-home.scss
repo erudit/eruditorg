@@ -1,59 +1,50 @@
-body.thesis_collection_home #breadcrumb {
+.thesis_collection_home #breadcrumb {
   background: $light-grey;
 }
 
-#thesis_collection_home{
-  header.collection-head{
-    background: $light-grey;
-    padding-top: 0px;
+#thesis_collection_home {
+
+  .glory {
+    padding-top: 50px;
     padding-bottom: 60px;
-    font-size: 18px;
+    background-color: $light-grey;
 
     h2 {
-      margin-top: 0;
-      margin-bottom: 8px;
+      margin: 0;
+      color: #000;
+      font-size: 0.85em;
+      @include fw-sans-medium();
     }
 
-    .thesis-count{
-      font-size: 20px;
+    .thesis-count {
+      display: block;
+      font-size: 0.85em;
+      @include fw-sans-normal();
     }
 
-    .new-thesis{
-      margin-top: 20px;
-
-      a.recent-thesis{
-        display: block;
-
-        &:hover, &:focus{
-          text-decoration: none;
-        }
-
-        .thesis-title{
-          display: block;
-        }
-
-        .thesis-author{
-          display: block;
-          font-size: 14px;
-          font-weight: bold;
-        }
-      }
+    .recent-theses {
+      margin-top: 1.5em;
     }
+
+    .thesis-title,
+    .thesis-author {
+      font-size: 0.85em;
+    }
+
+    .thesis-author {
+      @include fw-sans-medium();
+    }
+
   }
 
   .thesis-aggregation-links-wrapper{
-    margin: 30px 0;
+    margin: 2em 0;
 
-    h3{
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 2px solid $gray;
-    }
-
-    a.aggregation-link{
+    .aggregation-link{
       margin-bottom: 4px;
       display: inline-block;
-      font-size: 18px;
+      font-size: 14px;
+      @include fw-mono();
 
       &:hover, &:focus{
         text-decoration: none;
