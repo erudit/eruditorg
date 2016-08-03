@@ -20,6 +20,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
 from django.views.i18n import javascript_catalog
 from django_js_reverse import views as js_reverse_views
@@ -39,8 +40,10 @@ sitemaps_dict = {
 }
 
 urlpatterns = [
-    url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps_dict}),
-    url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap, {'sitemaps': sitemaps_dict}),
+    url(r'^sitemap\.xml$', sitemap_views.index,
+        {'sitemaps': sitemaps_dict, 'sitemap_url_name': 'sitemaps'}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
+        {'sitemaps': sitemaps_dict}, name='sitemaps'),
 ]
 
 urlpatterns += i18n_patterns(
