@@ -20,7 +20,7 @@ class SubscriptionMiddleware(object):
         ip = get_ip(request)
         ip_range_subscription_ids = InstitutionIPAddressRange.objects \
             .select_related('subscription', 'subscription__organisation', 'subscription__sponsor') \
-            .filter(ip_start__lte=ip, ip_end__gte=ip).values_list('id', flat=True)
+            .filter(ip_start__lte=ip, ip_end__gte=ip).values_list('subscription_id', flat=True)
         subscription = JournalAccessSubscription.valid_objects \
             .filter(id__in=ip_range_subscription_ids).first() if ip_range_subscription_ids \
             else False
