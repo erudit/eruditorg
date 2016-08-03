@@ -10,7 +10,7 @@
     background-color: $light-grey;
 
     h2 {
-      margin: 0;
+      margin: 0 0 1em 0;
       color: #000;
       font-size: 0.85em;
       @include fw-sans-medium();
@@ -24,11 +24,18 @@
 
     .recent-theses {
       margin-top: 1.5em;
+
+      > .thesis {
+        margin-bottom: 2em;
+      }
+
+
     }
 
     .thesis-title,
     .thesis-author {
       font-size: 0.85em;
+      margin: 0 0 0.5em 0;
     }
 
     .thesis-author {

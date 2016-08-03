@@ -49,7 +49,7 @@
     <div class="container">
       <header class="page-header-main">
         <div class="row">
-          <div class="col-md-10 col-sm-8 col-xs-6">
+          <div class="col-md-10 col-sm-8 col-xs-12">
             <h1>
               {{ collection.name }}
               <span class="thesis-count">
@@ -61,7 +61,7 @@
               </span>
             </h1>
           </div>
-          <div class="col-md-2 col-sm-4 col-xs-5">
+          <div class="col-md-2 col-sm-4 col-xs-4">
             {% if collection.logo %}
             <span class="collection-logo">
               <img src="{{ collection.logo.url }}" alt="" class="img-responsive"/>
@@ -75,7 +75,7 @@
           <h2>{% trans "Dernières publications" %}</h2>
         </div>
         {% for thesis in recent_theses %}
-        <div class="col-md-3">
+        <div class="thesis col-md-3">
           <p class="thesis-title">
             <a href="{{ thesis.url }}" class="recent-thesis" target="_blank">{{ thesis.title }}</a>
           </p>
