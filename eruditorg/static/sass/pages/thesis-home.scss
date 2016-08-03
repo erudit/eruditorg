@@ -1,59 +1,60 @@
-#thesis_home{
-  .repositories-wrapper{
-    margin-top: 20px;
+#thesis_home {
 
-    .title{
-      padding-top: 20px;
-      padding-bottom: 20px;
-      @include grid-cell-border('top', 1px, $black);
-    }
+  .repositories {
+    list-style: none;
 
-    ul#repositories{
-      list-style: none;
+    .repository {
+      margin-bottom: 2em;
 
-      li.repository{
-        margin-bottom: 20px;
+      .collection-logo {
+        padding: 1em 0;
         display: block;
+        border-bottom: 1px solid $dark-grey;
 
-        a.collection-link{
-          display: block;
-
-          &:hover, &:focus{
-            text-decoration: none;
-          }
-
-          .collection-logo{
-            padding: 10px 0;
-            display: block;
-            border-bottom: 2px solid $gray-light;
-          }
-
-          .collection-title{
-            margin: 10px 0;
-            display: block;
-            height: 50px;
-            font-size: 18px;
-          }
+        > img {
+          height: 40px;
+          width: auto;
         }
 
-        .recent-theses{
-          margin-top: 15px;
-
-          a.thesis{
-            padding: 6px 0;
-            display: block;
-            border-bottom: 2px solid $gray-light;
-
-            &:hover, &:focus{
-              text-decoration: none;
-            }
-
-            &:last-child{
-              border: none;
-            }
-          }
-        }
       }
+
+      .collection-title {
+        margin-top: 0.5em;
+        font-size: 1.15em;
+        @include fw-sans-medium();
+      }
+
+      &:nth-child(4n+1) {
+        clear: both;
+      }
+
     }
+
+    .recent-theses {
+      margin-top: 0.5em;
+
+      h4 {
+        font-size: 1em;
+        border-bottom: 1px solid $mid-grey;
+        padding: 0.5em 0;
+        margin: 0;
+        @include fw-sans-normal-italic();
+      }
+
+      .thesis {
+        padding: 0.75em 0;
+        display: block;
+        font-size: 0.85em;
+        border-bottom: 1px solid $mid-grey;
+
+        &:last-child{
+          border: none;
+        }
+
+      }
+
+    }
+
   }
+
 }

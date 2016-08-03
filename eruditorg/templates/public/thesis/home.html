@@ -39,45 +39,57 @@
 <div id="thesis_home">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 clearfix">
-        <h2 class="h3 bold">{% trans "Thèses" %}</h2>
-        {% lorem 2 p %}
+      <div class="col-md-8">
+        <header class="page-header-main">
+          <h1>{% trans "Thèses" %}</h1>
+        </header>
+        <div class="page-intro">
+          {% lorem 1 p %}
+        </div>
       </div>
+      <aside class="col-md-offset-1 col-md-3">
+        <h2>Statistiques</h2>
+      </aside>
     </div>
 
-    <div class="repositories-wrapper">
+    <div class="main-content">
       <header class="row">
         <div class="container">
           <div class="row">
-            <div class="col-xs-12 title">
-              <h2 class="no-margin h3">{% trans "Par dépôt institutionnel" %}</h2>
+            <div class="col-xs-12">
+              <h2>{% trans "Par dépôt institutionnel" %}</h2>
             </div>
           </div>
         </div>
       </header>
-      <ul id="repositories" class="row">
+
+      <ul class="repositories row">
         {% for collection_info in collections_dict.values %}
         <li class="col-md-3 repository">
           <a href="{% url 'public:thesis:collection_home' collection_info.collection.pk %}" class="collection-link">
             {% if collection_info.collection.logo %}
             <span class="collection-logo">
-              <img src="{{ collection_info.collection.logo.url }}" alt="" />
+              <img src="{{ collection_info.collection.logo.url }}" alt="{% blocktrans with collection_info.collection.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
             </span>
             {% endif %}
-            <span class="collection-title">{{ collection_info.collection.name }}</span>
           </a>
+          <h3 class="collection-title">
+            <a href="{% url 'public:thesis:collection_home' collection_info.collection.pk %}" class="collection-link">
+              {{ collection_info.collection.name }}
+            </a>
+          </h3>
           <div class="thesis-count">
-          {% blocktrans trimmed count counter=collection_info.thesis_count %}
+            {% blocktrans trimmed count counter=collection_info.thesis_count %}
             {{ counter }} thèse
-          {% plural %}
+            {% plural %}
             {{ counter }} thèses
-          {% endblocktrans %}
+            {% endblocktrans %}
           </div>
           {% if collection_info.recent_theses %}
           <div class="recent-theses">
-            <div class="recent-theses-title"><strong>{% trans "Nouveautés" %}</strong></div>
+            <h4>{% trans "Dernières publications" %}</h4>
             {% for thesis in collection_info.recent_theses %}
-            <a href="{{ thesis.url }}" class="thesis">{{ thesis.title }}</a>
+            <a href="{{ thesis.url }}" class="thesis" target="_blank">{{ thesis.title }}</a>
             {% endfor %}
           </div>
           {% endif %}
