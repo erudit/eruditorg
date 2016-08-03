@@ -92,23 +92,23 @@
       <div class="row">
         <div class="col-md-6">
           <h2>{% trans "Par année" %}</h2>
-          <div class="row">
+          <ul class="theses-list">
           {% for year in thesis_groups.by_publication_year %}
-            <div class="col-md-6">
+            <li>
               <a href="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}" class="aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
-            </div>
+            </li>
           {% endfor %}
-          </div>
+        </ul>
         </div>
         <div class="col-md-6">
           <h2>{% trans "Par nom d'auteur" %}</h2>
-          <div class="row">
+          <ul class="theses-list">
           {% for author in thesis_groups.by_author_name %}
-            <div class="col-md-6">
+            <li>
               <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author.author_firstletter %}" class="aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
-            </div>
+            </li>
           {% endfor %}
-          </div>
+        </ul>
         </div>
       </div>
     </div>

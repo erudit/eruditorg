@@ -40,6 +40,17 @@
   .thesis-aggregation-links-wrapper{
     margin: 2em 0;
 
+    .theses-list {
+      list-style: none;
+      margin: 0;
+      @include content-columns(4, $grid-gutter-width/2);
+
+      li {
+        margin-bottom: 0;
+      }
+
+    }
+
     .aggregation-link{
       margin-bottom: 4px;
       display: inline-block;
