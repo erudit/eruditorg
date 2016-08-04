@@ -58,8 +58,8 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      {% for letter, count in letters_counts.items %}
-        {% if count > 0 %}
+      {% for letter, exist in letters_exists.items %}
+        {% if exist %}
           <a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a>
         {% else %}
           <span class="text-muted">{{ letter|upper }}</span>
@@ -69,11 +69,7 @@
     <div class="col-md-9">
       {% for author in authors %}
         <div class="well">
-          <h3>
-          {% blocktrans trimmed with lastname=author.lastname firstname=author.firstname %}
-            {{ lastname }}, {{ firstname }}
-          {% endblocktrans %}
-          </h3>
+          <h3>{{ author.full_name }}</h3>
           <div class="author-articles-wrapper">
             <ul>
               {% for article in author|author_articles:journal %}

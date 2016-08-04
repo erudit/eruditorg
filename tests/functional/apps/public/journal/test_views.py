@@ -237,16 +237,16 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
         # Run
         response_1 = self.client.get(url)
-        response_2 = self.client.get(url, {'letter': 'c'})
+        response_2 = self.client.get(url, {'letter': 'C'})
         response_3 = self.client.get(url, {'letter': 'invalid'})
 
         # Check
         self.assertEqual(response_1.status_code, 200)
         self.assertEqual(response_2.status_code, 200)
         self.assertEqual(response_3.status_code, 200)
-        self.assertEqual(response_1.context['letter'], 'b')
-        self.assertEqual(response_2.context['letter'], 'c')
-        self.assertEqual(response_3.context['letter'], 'b')
+        self.assertEqual(response_1.context['letter'], 'B')
+        self.assertEqual(response_2.context['letter'], 'C')
+        self.assertEqual(response_3.context['letter'], 'B')
 
     def test_inserts_a_dict_with_the_letters_counts_in_the_context(self):
         # Setup
@@ -267,11 +267,11 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
         # Check
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['letters_counts']), 26)
-        self.assertEqual(response.context['letters_counts']['b'], 1)
-        self.assertEqual(response.context['letters_counts']['c'], 2)
+        self.assertEqual(len(response.context['letters_exists']), 26)
+        self.assertEqual(response.context['letters_exists']['B'], 1)
+        self.assertEqual(response.context['letters_exists']['C'], 2)
         for letter in 'adefghijklmnopqrstuvwxyz':
-            self.assertEqual(response.context['letters_counts'][letter], 0)
+            self.assertEqual(response.context['letters_exists'][letter.upper()], 0)
 
 
 @override_settings(DEBUG=True)

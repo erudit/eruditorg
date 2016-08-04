@@ -7,9 +7,11 @@
     <dl class="cite-modal--style-list">
       <dt>MLA</dt>
       <dd>
-        {% for author in article.erudit_object.authors %}
+        {% for author in article.authors.all %}
           {% if author.firstname and author.lastname %}
             {{ author.lastname }}, {{ author.firstname }}.
+          {% elif author.othername %}
+            {{ author.othername }}.
           {% endif %}
         {% endfor %}
         "{{ article.title }}."
@@ -20,9 +22,11 @@
 
       <dt>APA</dt>
       <dd>
-        {% for author in article.erudit_object.authors %}
+        {% for author in article.authors.all %}
           {% if author.firstname and author.lastname %}
             {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
+          {% elif author.othername %}
+            {{ author.othername }}.
           {% endif %}
         {% endfor %}
         ({{ article.erudit_object.publication_year }}).
@@ -34,9 +38,11 @@
 
       <dt>Chicago</dt>
       <dd>
-        {% for author in article.erudit_object.authors %}
+        {% for author in article.authors.all %}
           {% if author.firstname and author.lastname %}
             {{ author.lastname }}, {{ author.firstname }}.
+          {% elif author.othername %}
+            {{ author.othername }}.
           {% endif %}
         {% endfor %}
         "{{ article.title }}."
