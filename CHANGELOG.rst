@@ -7,6 +7,7 @@ Changelog
 * Add a ``othername`` field on on the ``Person`` model
 * Add a ``letter_prefix`` property on the ``Person`` model
 * Add a ``full_name`` property on the ``Person`` model
+* Fix article authors importation
 
 0.1.18
 ------

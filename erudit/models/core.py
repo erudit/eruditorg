@@ -117,7 +117,7 @@ class Person(models.Model):
     @property
     def letter_prefix(self):
         name = self.lastname or self.othername or self.firstname
-        name = slugify(name[0]).upper() if name else None
+        name = slugify(name.strip())[0].upper() if name else None
         return name[0] if name else None
 
 
