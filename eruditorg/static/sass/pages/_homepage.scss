@@ -2,7 +2,7 @@
 * hide Breadcrumb on homepage
 */
 body.home {
-  nav#breadcrumb {
+  #breadcrumb {
     display: none;
   }
 }
@@ -166,7 +166,7 @@ body.home {
 
   .section-separator {
     border-color: #000;
-    margin-top: 50px;
+    margin-top: 2em;
   }
 
   .latest-issues {
@@ -174,36 +174,42 @@ body.home {
     margin: 0;
 
     .latest-issues--article {
-      margin-top: 20px;
-      margin-bottom: 40px;
-      padding-top: 36px;
-      height: 300px;
+      margin: 1em 0;
+      padding-top: 0.75em;
       @include grid-cell-border('top', 1px, $mid-grey);
 
       img {
         width: 100%;
         margin-bottom: 10px;
       }
+
+      .category-tag {
+        font-size: 12px;
+      }
+
       .latest-issues--article--cover {
         height: 140px;
         width: auto;
       }
+
       .latest-issues--article--journal-title {
-        font-size: 18px;
-        @include fw-sans-medium();
+        font-size: 16px;
+        @include fw-sans-medium-italic();
       }
+
       .latest-issues--article--theme,
       .latest-issues--article--volume {
-        font-size: 16px;
-        display: block;
-        line-height: 1.25;
+        font-size: 14px;
       }
+
       .latest-issues--article--theme {
         margin-bottom: 0.5em;
       }
+
       .latest-issues--article--volume {
         text-transform: capitalize;
       }
+
     }
   }
 
@@ -282,6 +288,26 @@ body.home {
       font-size: 1.5em;
       color: $coral-red;
     }
+  }
+
+}
+
+/**
+* Row alignment for different viewport sizes / responsive
+**/
+
+@media (max-width: $screen-sm-max) {
+
+  .latest-issues--article:nth-child(2n+1) {
+    clear: both;
+  }
+
+}
+
+@media (max-width: $screen-md-max) {
+
+  .latest-issues--article:nth-child(4n+1) {
+    clear: both;
   }
 
 }
