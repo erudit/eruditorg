@@ -444,13 +444,16 @@ class Command(BaseCommand):
         article.authors.clear()
         for author_xml in article.erudit_object.findall('liminaire//grauteur//auteur'):
             firstname_xml = author_xml.find('.//nompers/prenom')
-            firstname = firstname_xml.text if firstname_xml is not None else ''
+            firstname = firstname_xml.text if firstname_xml is not None else None
             lastname_xml = author_xml.find('.//nompers/nomfamille')
-            lastname = lastname_xml.text if lastname_xml is not None else ''
+            lastname = lastname_xml.text if lastname_xml is not None else None
             suffix_xml = author_xml.find('.//nompers/suffixe')
             suffix = suffix_xml.text if suffix_xml is not None else None
             organization_xml = author_xml.find('.//nomorg')
             organization = organization_xml.text if organization_xml is not None else None
+
+            if firstname is None and lastname is None and organization is None:
+                continue
 
             author_query_kwargs = {
                 'firstname': firstname, 'lastname': lastname, 'othername': organization}
