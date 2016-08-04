@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.1.19 - Under development
---------------------------
+0.1.19
+------
 
 * Add a ``othername`` field on on the ``Person`` model
 * Add a ``letter_prefix`` property on the ``Person`` model
