@@ -71,7 +71,7 @@ class OAIDated(models.Model):
 
 
 class Person(models.Model):
-    """Personne"""
+    """ Represents a single person. """
 
     lastname = models.CharField(
         max_length=50,
@@ -83,6 +83,12 @@ class Person(models.Model):
         max_length=50,
         null=True, blank=True,
         verbose_name=_("Prénom"),
+    )
+
+    othername = models.CharField(
+        max_length=150,
+        null=True, blank=True,
+        verbose_name=_("Autre nom"),
     )
 
     email = models.EmailField(
@@ -104,6 +110,12 @@ class Person(models.Model):
 
     class Meta:
         abstract = True
+
+    @property
+    def letter_prefix(self):
+        name = self.lastname or self.othername or self.firstname
+        name = slugify(name[0]).upper() if name else None
+        return name[0] if name else None
 
 
 # core

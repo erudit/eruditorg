@@ -347,3 +347,13 @@ class TestAuthor(BaseEruditTestCase):
 
         # Run
         self.assertEqual(list(author.articles_in_journal(self.journal)), [article, ])
+
+    def test_can_return_its_letter_prefix(self):
+        # Setup
+        author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
+        author_2 = AuthorFactory.create(lastname=None, firstname='Def')
+        author_3 = AuthorFactory.create(lastname=None, firstname='Def', othername='Ghi')
+        # Run & check
+        self.assertEqual(author_1.letter_prefix, 'A')
+        self.assertEqual(author_2.letter_prefix, 'D')
+        self.assertEqual(author_3.letter_prefix, 'G')
