@@ -159,16 +159,16 @@
       </div>
     </div>
 
-    <div class="row">
+    <ul class="row latest-news">
       {% for entry in latest_news %}
-      <article class="col-sm-4 news--article">
+      <li class="col-md-4 col-sm-6 news--article">
         <p class="category-tag">{{ entry.category }}</p>
         <h3 class="news--article--title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
         <p class="summary">{{ entry.summary|safe|truncatewords_html:20 }}</p>
         <time class="news--article--date text-muted" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
-      </article>
+      </li>
       {% endfor %}
-    </div>
+    </ul>
 
     <div class="row">
       <div class="col-xs-12 text-center">

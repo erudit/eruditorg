@@ -171,7 +171,6 @@ body.home {
 
   .latest-issues {
     list-style: none;
-    margin: 0;
 
     .latest-issues--article {
       margin: 1em 0;
@@ -214,18 +213,19 @@ body.home {
   }
 
   .news {
+
+    .latest-news {
+      list-style: none;
+    }
+
     .news--article {
-      margin-top: 20px;
-      padding-top: 18px;
+      margin: 1em 0;
+      padding-top: 0.75em;
       @include grid-cell-border('top', 1px, #cccccc);
 
-      &:nth-child(3n+1) {
-        clear: both;
-      }
-
       .news--article--title {
-        margin: 0 0 30px 0;
-        font-size: 28px;
+        margin: 0 0 0.75em 0;
+        font-size: 1.75em;
       }
 
       .news--article--date {
@@ -235,7 +235,6 @@ body.home {
     .news--btn {
       font-size: 16px;
       display: block;
-      margin-top: 25px;
 
       @media (min-width: $screen-sm-min) {
         display: inline-block;
@@ -296,18 +295,35 @@ body.home {
 * Row alignment for different viewport sizes / responsive
 **/
 
-@media (max-width: $screen-sm-max) {
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
-  .latest-issues--article:nth-child(2n+1) {
-    clear: both;
+  .latest-issues--article,
+  .news--article {
+
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+
   }
 
 }
 
-@media (max-width: $screen-md-max) {
+@media (min-width: $screen-md-min) {
 
-  .latest-issues--article:nth-child(4n+1) {
-    clear: both;
+  .latest-issues--article {
+
+    &:nth-child(4n+1) {
+      clear: both;
+    }
+
+  }
+
+  .news--article {
+
+    &:nth-child(3n+1) {
+      clear: both;
+    }
+
   }
 
 }
