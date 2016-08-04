@@ -1,0 +1,102 @@
+#account-settings {
+
+  h1, h2 {
+    margin: 0;
+    line-height: 1;
+    font-size: 1.25em;
+    padding-bottom: 15px;
+  }
+
+  h1 {
+    border-bottom: 1px solid $dark-grey;
+    letter-spacing: 0.04em;
+    @include fw-sans-medium();
+  }
+
+  h2 {
+    text-align: center;
+    border-bottom: 1px solid $mid-grey;
+    margin-bottom: 1em;
+  }
+
+  form {
+
+    > div {
+      margin: 1em 0 2em 0;
+    }
+
+    label {
+      @include fw-sans-medium();
+    }
+
+  }
+
+  .parameters-menu-wrapper {
+    margin-bottom: 3em;
+  }
+
+
+  .parameters-menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+
+      a {
+        display: block;
+        padding: 15px 0;
+        border-bottom: 1px solid $mid-grey;
+        @include transition(text-indent 50ms ease-in);
+
+        &::before {
+          content: "";
+        }
+
+        &:hover, &:focus, &:active {
+          text-decoration: none;
+          border-color: $coral-red;
+          background: $coral-red;
+          color: #FFF;
+          text-indent: 0.5em;
+          @include fw-sans-medium();
+
+
+          &::before {
+            content: "->";
+            color: #FFF;
+            @include fw-sans-medium();
+          }
+
+        }
+
+      }
+
+      &:last-child a {
+        border: none;
+      }
+
+      &.active a {
+
+        &::before {
+          content: "->";
+          color: $coral-red;
+          @include fw-sans-medium();
+        }
+
+        &:hover, &:focus, &:active {
+
+          &::before {
+            color: #FFF;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
