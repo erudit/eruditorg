@@ -1,7 +1,7 @@
 // form control variables
 $border-width: 1px !global;
-$border-width-inputs: 0 0 2px 0 !global;
-$input-padding: 0.25em !global;
+$border-width-inputs: 1px !global;
+$input-padding: 0.75em 0.5em !global;
 
 /* reset default styles */
 form,
@@ -62,13 +62,13 @@ fieldset {
 legend {
   letter-spacing: 1px;
   font-size: $font-size-large * 1.05;
-  color: $gray-dark;
+  color: #000;
 }
 
 /* labels */
 label.control-label {
   margin: 0.25em 0;
-  color: $gray-dark;
+  color: #000;
   font-weight: normal;
   display: block;
 }
@@ -98,21 +98,20 @@ textarea,
 input[list],
 .form-control {
   width: 100%;
-  padding: $padding-base-vertical $padding-base-horizontal;
+  padding: $input-padding;
   border-width: $border-width;
   border-style: solid;
-  border-color: $gray-light;
-  color: $gray-dark;
-  background: $gray-lighter;
+  border-color: $dark-grey;
+  color: #000;
   vertical-align: middle;
 
-  @include placeholder($gray-dark);
+  @include placeholder(#000);
 
   &:hover {
-    border-color: $brand-primary;
+    border-color: $coral-red;
   }
   &:active, &:focus {
-    border-color: $brand-primary;
+    border-color: $coral-red;
   }
 }
 
@@ -174,14 +173,14 @@ select[disabled],
 option[disabled],
 button[disabled] {
   cursor: not-allowed;
-  color: $gray-light;
-  background-color: $gray-lighter;
+  color: $dark-grey;
+  background-color: $light-grey;
 }
 
 /* required or optional input labels */
 label.required:after {
   content: ' *';
-  color: $gray-light;
+  color: $coral-red;
   font-weight: bold;
   font-size: 0.85em;
 }
@@ -189,8 +188,8 @@ label.required:after {
 /* error inputs */
 .error {
   input, .select2 {
-    border-color: $brand-warning;
-    background-color: rgba($brand-warning, 0.15);
+    border-color: $coral-red;
+    background-color: rgba($coral-red, 0.15);
   }
 }
 
@@ -308,6 +307,6 @@ input[type="checkbox"] {
 .input-group-addon {
   @include border-radius(0);
   border: 0;
-  background: $brand-primary;
+  background: $coral-red;
   color: #FFF;
 }

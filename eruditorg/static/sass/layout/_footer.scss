@@ -15,7 +15,6 @@ footer#site-footer {
   */
   .newsletter-form {
 
-    // .form-group
 
     input[type="email"] {
       width: auto;
@@ -23,6 +22,7 @@ footer#site-footer {
       padding-top: $padding-base-vertical - 1;
       padding-bottom: $padding-base-vertical - 1;
       @include fw-sans-normal-italic();
+      background-color: $light-grey;
     }
 
   }
