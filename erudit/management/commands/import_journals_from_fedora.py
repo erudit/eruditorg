@@ -441,6 +441,7 @@ class Command(BaseCommand):
         # STEP 3: creates or updates the authors of the article
         # --
 
+        article.authors.clear()
         for author_xml in article.erudit_object.findall('liminaire//grauteur//auteur'):
             firstname_xml = author_xml.find('.//nompers/prenom')
             firstname = firstname_xml.text if firstname_xml is not None else ''
@@ -448,11 +449,15 @@ class Command(BaseCommand):
             lastname = lastname_xml.text if lastname_xml is not None else ''
             suffix_xml = author_xml.find('.//nompers/suffixe')
             suffix = suffix_xml.text if suffix_xml is not None else None
+            organization_xml = author_xml.find('.//nomorg')
+            organization = organization_xml.text if organization_xml is not None else None
 
-            author = Author.objects.filter(
-                firstname=firstname, lastname=lastname).first()
+            author_query_kwargs = {
+                'firstname': firstname, 'lastname': lastname, 'othername': organization}
+
+            author = Author.objects.filter(**author_query_kwargs).first()
             if author is None:
-                author = Author(firstname=firstname, lastname=lastname)
+                author = Author(**author_query_kwargs)
             author.suffix = suffix
             author.save()
 

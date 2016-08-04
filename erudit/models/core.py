@@ -103,13 +103,16 @@ class Person(models.Model):
     )
 
     def __str__(self):
-        return "{:s} {:s}".format(
-            self.firstname,
-            self.lastname.upper(),
-        )
+        return self.full_name
 
     class Meta:
         abstract = True
+
+    @property
+    def full_name(self):
+        return '{:s} {:s}'.format(self.firstname, self.lastname.upper()) \
+            if self.firstname and self.lastname \
+            else (self.lastname or self.othername or self.firstname)
 
     @property
     def letter_prefix(self):
