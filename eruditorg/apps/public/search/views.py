@@ -5,6 +5,7 @@ import urllib.parse as urlparse
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.http import QueryDict
 from django.views.generic import View
 from django.views.generic.base import ContextMixin
 from django.views.generic.base import TemplateResponseMixin
@@ -88,7 +89,7 @@ class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
             sorted_saved_searches = []
             for search in _saved_searches:
                 new_search = search.copy()
-                qsdict = dict(urlparse.parse_qsl(new_search['querystring']))
+                qsdict = QueryDict(new_search['querystring'])
                 new_search['elements'] = get_search_elements(qsdict)
                 sorted_saved_searches.append(new_search)
 
