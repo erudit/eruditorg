@@ -1,0 +1,72 @@
+.thesis_collection_home #breadcrumb {
+  background: $light-grey;
+}
+
+#thesis_collection_home {
+
+  .glory {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    background-color: $light-grey;
+
+    h2 {
+      margin: 0 0 1em 0;
+      color: #000;
+      font-size: 0.85em;
+      @include fw-sans-medium();
+    }
+
+    .thesis-count {
+      display: block;
+      font-size: 0.85em;
+      @include fw-sans-normal();
+    }
+
+    .recent-theses {
+      margin-top: 1.5em;
+
+      > .thesis {
+        margin-bottom: 2em;
+      }
+
+
+    }
+
+    .thesis-title,
+    .thesis-author {
+      font-size: 0.85em;
+      margin: 0 0 0.5em 0;
+    }
+
+    .thesis-author {
+      @include fw-sans-medium();
+    }
+
+  }
+
+  .thesis-aggregation-links-wrapper{
+    margin: 2em 0;
+
+    .theses-list {
+      list-style: none;
+      margin: 0;
+      @include content-columns(4, $grid-gutter-width/2);
+
+      li {
+        margin-bottom: 0;
+      }
+
+    }
+
+    .aggregation-link{
+      margin-bottom: 4px;
+      display: inline-block;
+      font-size: 14px;
+      @include fw-mono();
+
+      &:hover, &:focus{
+        text-decoration: none;
+      }
+    }
+  }
+}

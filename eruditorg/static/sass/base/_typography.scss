@@ -1,5 +1,5 @@
 /**
-* Basic typography (copy of Bootstrap's type.scss)
+* Basic typography
 */
 
 
@@ -179,18 +179,6 @@ mark,
 .text-muted {
   color: $text-muted;
 }
-
-
-
-// Page header
-// -------------------------
-
-.page-header {
-  padding-bottom: (($line-height-computed / 2) - 1);
-  margin: ($line-height-computed * 2) 0 $line-height-computed;
-  border-bottom: 1px solid $page-header-border-color;
-}
-
 
 
 // Misc

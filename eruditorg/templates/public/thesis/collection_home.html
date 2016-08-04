@@ -39,72 +39,76 @@
 {% block data_controller %}public:thesis:collection_home{% endblock data_controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
-   / <a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a>
+{{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
+/ <a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div id="thesis_collection_home">
-  <header class="container-fluid collection-head">
-    <div class="row">
-      <div class="container">
+  <div class="glory">
+    <div class="container">
+      <header class="page-header-main">
         <div class="row">
-          <div class="col-xs-12 clearfix">
-            {% if collection.logo %}
-            <div class="pull-right">
-              <span class="collection-logo">
-                <img src="{{ collection.logo.url }}" alt="" />
+          <div class="col-md-10 col-sm-8 col-xs-12">
+            <h1>
+              {{ collection.name }}
+              <span class="thesis-count">
+                ({% blocktrans trimmed count counter=thesis_count %}
+                {{ counter }} thèse
+                {% plural %}
+                {{ counter }} thèses
+                {% endblocktrans %})
               </span>
-            </div>
+            </h1>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-4">
+            {% if collection.logo %}
+            <span class="collection-logo">
+              <img src="{{ collection.logo.url }}" alt="" class="img-responsive"/>
+            </span>
             {% endif %}
-            <h2 class="h3 bold">{{ collection.name }}</h2>
-            <div class="thesis-count">
-            {% blocktrans trimmed count counter=thesis_count %}
-              {{ counter }} thèse
-            {% plural %}
-              {{ counter }} thèses
-            {% endblocktrans %}
-            </div>
           </div>
         </div>
-        <div class="row new-thesis">
-          <div class="col-md-3">
-            <p><strong>{% trans "Nouveautés" %}</strong></p>
-          </div>
-          {% for thesis in recent_theses %}
-          <div class="col-md-3">
-            <a href="{{ thesis.url }}" class="recent-thesis">
-              <span class="thesis-title">{{ thesis.title }}</span>
-              <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
-            </a>
-          </div>
-          {% endfor %}
+      </header>
+      <div class="row recent-theses">
+        <div class="col-md-3">
+          <h2>{% trans "Dernières publications" %}</h2>
         </div>
+        {% for thesis in recent_theses %}
+        <div class="thesis col-md-3">
+          <p class="thesis-title">
+            <a href="{{ thesis.url }}" class="recent-thesis" target="_blank">{{ thesis.title }}</a>
+          </p>
+          <p class="thesis-author">
+            {{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}
+          </p>
+        </div>
+        {% endfor %}
       </div>
     </div>
-  </header>
-  <div class="thesis-aggregation-links-wrapper">
+  </div>
+  <div class="main-content thesis-aggregation-links-wrapper">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <h3>{% trans "Par année" %}</h3>
-          <div class="row">
+          <h2>{% trans "Par année" %}</h2>
+          <ul class="theses-list">
           {% for year in thesis_groups.by_publication_year %}
-            <div class="col-md-6">
-              <a href="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}" class="mono-space aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
-            </div>
+            <li>
+              <a href="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}" class="aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
+            </li>
           {% endfor %}
-          </div>
+        </ul>
         </div>
         <div class="col-md-6">
-          <h3>{% trans "Par nom d'auteur" %}</h3>
-          <div class="row">
+          <h2>{% trans "Par nom d'auteur" %}</h2>
+          <ul class="theses-list">
           {% for author in thesis_groups.by_author_name %}
-            <div class="col-md-6">
-              <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author.author_firstletter %}" class="mono-space aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
-            </div>
+            <li>
+              <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author.author_firstletter %}" class="aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
+            </li>
           {% endfor %}
-          </div>
+        </ul>
         </div>
       </div>
     </div>
