@@ -1,47 +1,43 @@
 {% extends "public/auth/base_profile_edit.html" %}
 {% load i18n staticfiles %}
 
-{% block page_title %}{% trans 'Modification des données personnelles' %}{% endblock %}
+{% block page_title %}{% trans 'Modification des informations personnelles' %}{% endblock %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:auth:personal_data' %}">{% trans "Modification des données personnelles" %}</a>
+  {{ block.super }} / <a href="{% url 'public:auth:personal_data' %}">{% trans "Modification des informations personnelles" %}</a>
 {% endblock %}
 
 {% block content %}
-<section>
-  <div class="row">
-    <aside class="col-xs-12">
-      <div class="panel">
-        <header class="panel-heading">
-          <h2 class="h4 panel-title text-center h1">{% trans "Modification des données personnelles" %}</h2>
-        </header>
-        <div class="panel-body">
-          <form action="{% url 'public:auth:personal_data' %}" id="id-login-form" method="post">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <div class="col-xs-12">
-              {% for error in form.non_field_errors %}
-              <p class="alert alert-warning">{{ error }}</p>
-              {% endfor %}
-            </div>
-            {% endif %}
-            <div class="form-group">
-              <label for="id_password">{{ form.first_name.label }}</label>
-              {{ form.first_name }}
-              <div class="alert alert-error-text">{{ form.first_name.errors.as_text }}</div>
-            </div>
-            <div class="form-group">
-              <label for="id_password">{{ form.last_name.label }}</label>
-              {{ form.last_name }}
-              <div class="alert alert-error-text">{{ form.last_name.errors.as_text }}</div>
-            </div>
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Valider" %}</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </aside>
+<div class="row">
+  <div class="col-xs-12">
+    <h2>{% trans "Modification des informations personnelles" %}</h2>
   </div>
-</section>
+  <div class="col-xs-12">
+    <form action="{% url 'public:auth:personal_data' %}" id="id-login-form" method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+          <p class="alert alert-warning">{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+      <div>
+        <label for="id_first_name">{{ form.first_name.label }}</label>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+          <p class="alert alert-error-text">{{ form.first_name.errors.as_text }}</p>
+        {% endif %}
+      </div>
+      <div>
+        <label for="id_last_name">{{ form.last_name.label }}</label>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+          <p class="alert alert-error-text">{{ form.last_name.errors.as_text }}</p>
+        {% endif %}
+      </div>
+      <div class="text-right">
+        <button type="submit" class="btn btn-primary btn-lg" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}
