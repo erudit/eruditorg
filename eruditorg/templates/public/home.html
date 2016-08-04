@@ -118,24 +118,23 @@
       {% cache FOREVER_TTL "public_home_latest_issues_item" issue.id LANGUAGE_CODE %}
       <li class="col-xs-12 col-sm-6 col-md-3 latest-issues--article">
           <div class="row">
-            <div class="col-xs-4 col-sm-12">
+            <div class="col-xs-3 col-sm-12">
               <p class="category-tag">{{ issue.journal.disciplines.all|join:", " }}</p>
-              {% if issue.has_coverpage %}
-              {{ issue.volume_slug }}
-              <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive latest-issues--article--cover">
-              </a>
-              {% endif %}
-            </div>
-            <div class="col-xs-8 col-sm-12">
               <h3 class="latest-issues--article--journal-title">
                 <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
                   {{ issue.journal.name }}
                 </a>
               </h3>
+            </div>
+            <div class="col-xs-9 col-sm-12">
+              {% if issue.has_coverpage %}
+              <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
+                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{{ issue.title }} - {{ issue.journal.name }}" class="img-responsive latest-issues--article--cover">
+              </a>
+              {% endif %}
               <h4>
                 <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-                  {% if issue.title %}<span class="latest-issues--article--theme">{{ issue.title|truncatechars:60 }}</span>{% endif %}
+                  {% if issue.title %}<span class="latest-issues--article--theme">{{ issue.title }}</span>{% endif %}
                   {% if issue.volume_title %}<span class="latest-issues--article--volume">{{ issue.volume_title }}</span>{% endif %}
                 </a>
               </h4>
@@ -160,16 +159,16 @@
       </div>
     </div>
 
-    <div class="row">
+    <ul class="row latest-news">
       {% for entry in latest_news %}
-      <article class="col-sm-4 news--article">
+      <li class="col-md-4 col-sm-6 news--article">
         <p class="category-tag">{{ entry.category }}</p>
         <h3 class="news--article--title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
         <p class="summary">{{ entry.summary|safe|truncatewords_html:20 }}</p>
         <time class="news--article--date text-muted" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
-      </article>
+      </li>
       {% endfor %}
-    </div>
+    </ul>
 
     <div class="row">
       <div class="col-xs-12 text-center">
@@ -186,9 +185,9 @@
     <div class="row about-erudit">
       <div class="col-xs-12">
         <div class="row">
-          <div class="col-sm-4 col-md-3"><h2 class="about-erudit--logo">erudit.<br>org</h2></div>
+          <div class="col-sm-4 col-md-3"><h2 class="about-erudit--title">erudit.<br>org</h2></div>
           <div class="col-sm-4 col-md-3">
-            <p class="about-erudit--definition">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, littérature grise." %}</p>
+            <p class="about-erudit--description">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, littérature grise." %}</p>
             <p><a href="http://apropos.erudit.org" target="_blank" class="text-muted">{% trans "En savoir plus" %}</a></p>
           </div>
           <div class="col-sm-4 col-md-6">
@@ -206,28 +205,28 @@
           </div>
         </div>
 
-        <div class="row">
-          <article class="col-xs-6 col-md-3 about-erudit--article">
+        <ul class="row about-users">
+          <li class="col-sm-6 col-md-3 about-erudit--article">
             <h3 class="about-erudit--article--title">{% trans "Bibliothécaires" %}</h3>
             <p>{% blocktrans %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktrans %}</p>
             <p><a href="https://apropos.erudit.org/fr/bibliotheques/" target="_blank" class="text-muted">{% trans "Abonnez-vous" %}</a></p>
-          </article>
-          <article class="col-xs-6 col-md-3 about-erudit--article">
+          </li>
+          <li class="col-sm-6 col-md-3 about-erudit--article">
             <h3 class="about-erudit--article--title">{% trans "Éditeurs" %}</h3>
             <p>{% blocktrans %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktrans %}</p>
             <p><a href="https://apropos.erudit.org/fr/editeurs/" target="_blank" class="text-muted">{% trans "Publiez avec nous" %}</a></p>
-          </article>
-          <article class="col-xs-6 col-md-3 about-erudit--article">
+          </li>
+          <li class="col-sm-6 col-md-3 about-erudit--article">
             <h3 class="about-erudit--article--title">{% trans "Chercheurs" %}</h3>
             <p>{% blocktrans %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktrans %}</p>
             <p><a href="https://apropos.erudit.org/fr/chercheurs/" target="_blank" class="text-muted">{% trans "Explorez nos données" %}</a></p>
-          </article>
-          <article class="col-xs-6 col-md-3 about-erudit--article">
+          </li>
+          <li class="col-sm-6 col-md-3 about-erudit--article">
             <h3 class="about-erudit--article--title">{% trans "Utilisateurs" %}</h3>
             <p>{% blocktrans %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktrans %}</p>
             <p><a href="https://apropos.erudit.org/fr/usagers/" target="_blank" class="text-muted">{% trans "Repérez des articles" %}</a></p>
-          </article>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
