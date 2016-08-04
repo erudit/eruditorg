@@ -214,7 +214,7 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
         grouped = groupby(
             sorted(qs, key=lambda a: a.letter_prefix), key=lambda a: a.letter_prefix)
         letter_qsdict = OrderedDict([
-            (g[0], sorted(list(g[1]), key=lambda a: a.full_name)) for g in grouped])
+            (g[0], sorted(list(g[1]), key=lambda a: a.lastname or a.othername)) for g in grouped])
 
         return letter_qsdict
 
