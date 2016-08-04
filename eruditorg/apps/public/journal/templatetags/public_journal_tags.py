@@ -53,4 +53,5 @@ def render_article(context, article, only_summary=False):
 @register.filter
 def author_articles(author, journal):
     """ Returns all the articles of the author in the considered journal. """
-    return author.articles_in_journal(journal)
+    return author.articles_in_journal(journal) \
+        .select_related('issue', 'issue__journal', 'issue__journal__collection')

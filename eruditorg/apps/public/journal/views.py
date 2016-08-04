@@ -196,24 +196,25 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
         self.letter = request.GET.get('letter', None)
         try:
             assert self.letter is not None
-            self.letter = str(self.letter).lower()
-            assert len(self.letter) == 1 and 'a' <= self.letter <= 'z'
+            self.letter = str(self.letter).upper()
+            assert len(self.letter) == 1 and 'A' <= self.letter <= 'Z'
         except AssertionError:
             self.letter = None
 
     def get_base_queryset(self):
         """ Returns the base queryset that will be used to retrieve the authors. """
-        return Author.objects.prefetch_related('article_set') \
+        return Author.objects \
             .filter(lastname__isnull=False, article__issue__journal_id=self.journal.id) \
             .order_by('lastname').distinct()
 
     def get_letters_queryset_dict(self):
-        """ Returns an ordered dict containing an Author queryset for each letter. """
+        """ Returns an ordered dict containing a list of authors for each letter. """
         qs = self.get_base_queryset()
 
-        letter_qsdict = OrderedDict()
-        for letter in ascii_lowercase:
-            letter_qsdict[letter] = qs.filter(lastname__istartswith=letter)
+        grouped = groupby(
+            sorted(qs, key=lambda a: a.letter_prefix), key=lambda a: a.letter_prefix)
+        letter_qsdict = OrderedDict([
+            (g[0], sorted(list(g[1]), key=lambda a: a.lastname or a.othername)) for g in grouped])
 
         return letter_qsdict
 
@@ -223,24 +224,25 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
         if self.letter is None:
             first_author = qs.first()
-            self.letter = first_author.lastname[0].lower() if first_author else 'a'
+            letter_prefix = first_author.letter_prefix if first_author else None
+            self.letter = letter_prefix if letter_prefix else 'A'
 
         return qsdict[self.letter]
 
     @cached_property
-    def letters_counts(self):
+    def letters_exists(self):
         """ Returns an ordered dict containing the number of authors for each letter. """
         qsdict = self.get_letters_queryset_dict()
-        letters_counts = OrderedDict()
+        letters_exists = OrderedDict([(l.upper(), 0) for l in ascii_lowercase])
         for letter, qs in qsdict.items():
-            letters_counts[letter] = qs.count()
-        return letters_counts
+            letters_exists[letter] = len(qs)
+        return letters_exists
 
     def get_context_data(self, **kwargs):
         context = super(JournalAuthorsListView, self).get_context_data(**kwargs)
         context['journal'] = self.journal
         context['letter'] = self.letter
-        context['letters_counts'] = self.letters_counts
+        context['letters_exists'] = self.letters_exists
         return context
 
 
@@ -360,7 +362,8 @@ class BaseArticleDetailView(
         obj = context.get(self.context_object_name)
 
         # Get all article from associated Issue
-        related_articles = Article.objects.select_related('issue', 'issue__journal') \
+        related_articles = Article.objects \
+            .select_related('issue', 'issue__journal', 'issue__journal__collection') \
             .prefetch_related('authors').filter(issue=obj.issue)
 
         # Pick the previous article and the next article
