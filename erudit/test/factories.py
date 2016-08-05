@@ -92,14 +92,6 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     type = 'article'
 
 
-class BasketFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = 'erudit.Basket'
-
-    name = factory.Sequence(lambda n: 'Basket{}'.format(n))
-
-
 class AuthorFactory(factory.django.DjangoModelFactory):
     lastname = faker.last_name()
     firstname = faker.first_name()
