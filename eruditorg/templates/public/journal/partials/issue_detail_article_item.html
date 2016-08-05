@@ -3,13 +3,13 @@
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
 <li class="issue_detail--article-item">
-  <h6><a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">{{ article.erudit_object.html_title|safe|default:article.title }}</a></h6>
+  <h6><a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">{{ article.html_title|safe|default:article.title }}</a></h6>
   <p class="issue_detail--article-item--author">{{ article.authors.all|join:", " }}</p>
   <div class="mono-space">
     <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary-outlined">{% trans "HTML" %}</a>
     <a href="#" class="btn btn-primary-outlined" data-citation-save="#article-{{ article.id }}">{% trans "Sauvegarder" %}</a>
     <a href="#" class="btn btn-primary-outlined" data-citation-remove="#article-{{ article.id }}">{% trans "Supprimer" %}</a>
-    {% with first_page=article.erudit_object.first_page last_page=article.erudit_object.last_page %}
+    {% with first_page=article.first_page last_page=article.last_page %}
     {% if first_page and last_page and first_page != last_page %}
     {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
     {% elif first_page and first_page != "0" %}
