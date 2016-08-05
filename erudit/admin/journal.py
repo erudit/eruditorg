@@ -24,6 +24,7 @@ class JournalAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Identification', {
             'fields': (
+                ('collection', ),
                 ('code', 'formerly'),
                 ('localidentifier',),
                 ('name', ),
@@ -40,13 +41,7 @@ class JournalAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 ('open_access', 'paper'),
-                'issues_per_year',
-            ),
-        }),
-        ('Contacts', {
-            'classes': ('collapse',),
-            'fields': (
-
+                ('issues_per_year', 'first_publication_year', 'last_publication_year'),
             ),
         }),
         ('Coordonnées', {

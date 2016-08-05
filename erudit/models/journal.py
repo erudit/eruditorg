@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.functional import cached_property
+from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
@@ -26,11 +27,14 @@ from ..fedora.shortcuts import get_cached_datastream_content
 from ..managers import JournalUpcomingManager
 
 from .core import Collection
+from .core import Copyright
 from .core import EruditDocument
+from .core import Publisher
 
 
 class JournalType(models.Model):
     """ The type of a Journal instance. """
+
     name = models.CharField(max_length=255, verbose_name=_('Nom'), blank=True, null=True)
 
     CODE_CULTURAL, CODE_SCIENTIFIC = 'C', 'S'
@@ -93,13 +97,12 @@ class Journal(FedoraMixin, FedoraDated):
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
     publishers = models.ManyToManyField(
-        'Publisher', related_name='journals', verbose_name=_('Éditeurs'))
+        Publisher, related_name='journals', verbose_name=_('Éditeurs'))
     """ The publishers of the journal """
 
     paper = models.NullBooleanField(
         default=None, verbose_name=_('Papier'),
-        help_text=_('Est publiée également en version papier?'),
-    )
+        help_text=_('Est publiée également en version papier?'))
     """ Defines whether this Journal is printed in paper or not """
 
     open_access = models.BooleanField(
@@ -111,14 +114,21 @@ class Journal(FedoraMixin, FedoraDated):
         null=True, blank=True, verbose_name=_('Numéros par année'))
     """ Defines the number of issues per year """
 
+    first_publication_year = models.PositiveIntegerField(
+        verbose_name=_('Première année de publication'), blank=True, null=True)
+    """ The first year when an issue of this journal has been published. """
+
+    last_publication_year = models.PositiveIntegerField(
+        verbose_name=_('Dernière année de publication'), blank=True, null=True)
+    """ The last year when an issue of this journal has been published. """
+
     url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
     """ URL of the home page of the Journal """
 
     # Status of the journal
     active = models.BooleanField(
         default=True, verbose_name=_('Actif'),
-        help_text=_("Une revue inactive n'édite plus de numéros"),
-    )
+        help_text=_("Une revue inactive n'édite plus de numéros"))
     """ Whether the Journal is active or not. An inactive journal is
     a journal that still publish issues """
 
@@ -151,7 +161,7 @@ class Journal(FedoraMixin, FedoraDated):
     def __str__(self):
         return '{:s} [{:s}]'.format(self.name, self.code)
 
-    # Fedora-related methods
+    # Fedora-related methods and properties
     # --
 
     @property
@@ -172,8 +182,31 @@ class Journal(FedoraMixin, FedoraDated):
     def get_erudit_class(self):
         return EruditJournal
 
-    # Movable limitation
+    # Journal-related methods and properties
     # --
+
+    @property
+    def letter_prefix(self):
+        """ Returns its name first letter """
+        sortable_name = self.sortable_name
+        return slugify(sortable_name[0]).upper() if sortable_name else None
+
+    @property
+    def sortable_name(self):
+        """ Returns its name without some characters in order to ease sort operations.
+
+        This value should not be used to display the name of the Journal instance!
+        """
+        replacements = ('La ', 'Le ', 'L\'', '[', ']', )
+        return slugify(
+            reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name))
+
+    @property
+    def publication_period(self):
+        """ Returns the publication period of the journal. """
+        if self.first_publication_year and self.last_publication_year:
+            return '{first} - {last}'.format(
+                first=self.first_publication_year, last=self.last_publication_year)
 
     @property
     def movable_limitation_year_offset(self):
@@ -181,7 +214,7 @@ class Journal(FedoraMixin, FedoraDated):
             if self.type and self.type.code == 'S' \
             else erudit_settings.MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET
 
-    # Issues
+    # Issues-related methods and properties
     # --
 
     @property
@@ -217,43 +250,39 @@ class Journal(FedoraMixin, FedoraDated):
             'to': open_access_issues.first().year,
         }
 
-    # Names
-    # --
-
-    @property
-    def letter_prefix(self):
-        """ Returns its name first letter """
-        sortable_name = self.sortable_name
-        return slugify(sortable_name[0]).upper() if sortable_name else None
-
-    @property
-    def sortable_name(self):
-        """ Returns its name without some characters in order to ease sort operations.
-
-        This value should not be used to display the name of the Journal instance!
-        """
-        replacements = ('La ', 'Le ', 'L\'', '[', ']', )
-        return slugify(
-            reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name))
-
 
 class Issue(FedoraMixin, FedoraDated):
-    """ An issue of a journal"""
-    journal = models.ForeignKey('Journal', related_name='issues', verbose_name=_('Revue'))
+    """ An issue of a journal. """
+
+    journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'))
     """ The :py:class`journal <erudit.models.core.Journal>` of which this ``Issue`` is part """
 
     title = models.CharField(max_length=255, null=True, blank=True)
     """ The title of the issue """
 
-    YEAR_CHOICES = tuple((n, n) for n in range(1900, dt.datetime.now().year + 6))
-    year = models.IntegerField(choices=YEAR_CHOICES, verbose_name=_('Année'))
+    html_title = models.CharField(max_length=400, null=True, blank=True)
+    """ The title of the issue in HTML """
+
+    year = models.PositiveIntegerField(verbose_name=_('Année'))
     """ The publication year of the issue """
+
+    publication_period = models.CharField(
+        max_length=255, verbose_name=_('Période de publication'), null=True, blank=True)
+    """ The publication period of the issue """
 
     volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
     """ The volume of the issue """
 
     number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Numéro'))
     """ The number of the issue """
+
+    first_page = models.CharField(
+        max_length=16, null=True, blank=True, verbose_name=_('Première page'))
+    """ The first page of the issue """
+
+    last_page = models.CharField(
+        max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
+    """ The last page of the issue """
 
     special_issue = models.BooleanField(
         default=False, verbose_name=_('Numéro spécial'),
@@ -268,6 +297,10 @@ class Issue(FedoraMixin, FedoraDated):
 
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
+
+    copyrights = models.ManyToManyField(
+        Copyright, related_name=_('issues'), verbose_name=_("Droits d'auteurs"))
+    """ The copyrights of the issue """
 
     localidentifier = models.CharField(
         max_length=50, unique=True, verbose_name=_('Identifiant Fedora'))
@@ -284,55 +317,7 @@ class Issue(FedoraMixin, FedoraDated):
                 self.journal.code, str(self.year), self.volume, self.number)
         return self.journal.code
 
-    @property
-    def volume_title(self):
-        """ Returns a title for the current issue using its volume and its number. """
-        erudit_object = self.erudit_object
-        publication_period = erudit_object.publication_period if erudit_object else self.year
-        number = self.number if self.number else _('hors série')
-        if self.volume and number:
-            return _(
-                'Volume {volume}, numéro {number}, {publication_date}'.format(
-                    volume=self.volume, number=number, publication_date=publication_period))
-        return _(
-            'Numéro {number}, {publication_date}'.format(
-                number=number, publication_date=publication_period))
-
-    @property
-    def volume_title_with_pages(self):
-        """ Returns a title for the current issue using its volume, its number and its pages. """
-        erudit_object = self.erudit_object
-        first_page = erudit_object.first_page if erudit_object else None
-        last_page = erudit_object.last_page if erudit_object else None
-
-        if first_page and last_page and (first_page != '0' and first_page != last_page):
-            return _('{title}, p. {first_page}-{last_page}').format(
-                title=self.volume_title, first_page=first_page, last_page=last_page)
-        elif first_page and first_page != '0':
-            return _('{title}, p. {first_page}').format(
-                title=self.volume_title, first_page=first_page)
-        return self.volume_title
-
-    @cached_property
-    def volume_slug(self):
-        """ Returns a slug string containing the issue's publication year, volume and number. """
-        volume = 'v' + self.volume if self.volume else None
-        number = 'n' + self.number if self.number else None
-        elements = [str(self.year), volume, number]
-        return '-'.join([e for e in elements if e])
-
-    @property
-    def has_movable_limitation(self):
-        """ Returns a boolean indicating if the issue has a movable limitation. """
-        if not self.journal.open_access:
-            publication_year = self.year
-            current_year = dt.datetime.now().year
-            year_offset = self.journal.movable_limitation_year_offset
-            return True if publication_year <= current_year <= publication_year + year_offset \
-                else False
-        return False
-
-    # Fedora-related methods
+    # Fedora-related methods and properties
     # --
 
     def get_fedora_model(self):
@@ -365,19 +350,123 @@ class Issue(FedoraMixin, FedoraDated):
 
         return not empty_coverpage
 
+    # Issue-related methods and properties
+    # --
+
+    @property
+    def number_for_display(self):
+        return self.number if self.number else _('hors série')
+
+    @property
+    def volume_title(self):
+        """ Returns a title for the current issue using its volume and its number. """
+        publication_period = self.publication_period if self.publication_period else self.year
+        number = self.number_for_display
+        if self.volume and number:
+            return _(
+                'Volume {volume}, numéro {number}, {publication_date}'.format(
+                    volume=self.volume, number=number, publication_date=publication_period))
+        return _(
+            'Numéro {number}, {publication_date}'.format(
+                number=number, publication_date=publication_period))
+
+    @property
+    def volume_title_with_pages(self):
+        """ Returns a title for the current issue using its volume, its number and its pages. """
+        first_page = self.first_page
+        last_page = self.last_page
+
+        if first_page and last_page and (first_page != '0' and first_page != last_page):
+            return _('{title}, p. {first_page}-{last_page}').format(
+                title=self.volume_title, first_page=first_page, last_page=last_page)
+        elif first_page and first_page != '0':
+            return _('{title}, p. {first_page}').format(
+                title=self.volume_title, first_page=first_page)
+        return self.volume_title
+
+    @cached_property
+    def volume_slug(self):
+        """ Returns a slug string containing the issue's publication year, volume and number. """
+        volume = 'v' + self.volume if self.volume else None
+        number = 'n' + self.number if self.number else None
+        elements = [str(self.year), volume, number]
+        return '-'.join([e for e in elements if e])
+
+    @property
+    def has_movable_limitation(self):
+        """ Returns a boolean indicating if the issue has a movable limitation. """
+        if not self.journal.open_access:
+            publication_year = self.year
+            current_year = dt.datetime.now().year
+            year_offset = self.journal.movable_limitation_year_offset
+            return True if publication_year <= current_year <= publication_year + year_offset \
+                else False
+        return False
+
+
+class IssueTheme(models.Model):
+    """ A theme that is associated with an issue. """
+
+    issue = models.ForeignKey(Issue, related_name='themes', verbose_name=_('Numéro'))
+    identifier = models.SlugField(
+        max_length=50, verbose_name=_('Identifiant du thème'), blank=True, null=True)
+    name = models.CharField(max_length=255, verbose_name=_('Nom du thème'))
+    subname = models.CharField(
+        max_length=255, verbose_name=_('Sous-thème'), blank=True, null=True)
+    html_name = models.CharField(
+        max_length=400, verbose_name=_('Nom du thème (HTML)'), blank=True, null=True)
+    html_subname = models.CharField(
+        max_length=400, verbose_name=_('Sous-thème (HTML)'), blank=True, null=True)
+    paral = models.BooleanField(default=False, verbose_name=_('Thème parallèle'))
+
+    class Meta:
+        verbose_name = _("Thème d'un numéro")
+        verbose_name_plural = _("Thèmes de numéros")
+
+    def __str__(self):
+        return self.name
+
 
 class Article(EruditDocument, FedoraMixin, FedoraDated):
+    """ An article of an issue. """
+
     issue = models.ForeignKey('Issue', related_name='articles', verbose_name=_('Numéro'))
     """ The issue of the article """
 
     authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
     """ An article can have many authors """
 
+    publisher = models.ForeignKey(Publisher, verbose_name=_('Éditeur'), blank=True, null=True)
+    """ The publisher of the article """
+
+    doi = models.CharField(max_length=50, verbose_name=_('DOI'), blank=True, null=True)
+    """ The DOI of the article """
+
+    ordseq = models.PositiveIntegerField(verbose_name=_('Ordonnancement'))
+    """ A value that can be used to sort articles """
+
+    first_page = models.CharField(
+        max_length=16, null=True, blank=True, verbose_name=_('Première page'))
+    """ The first page of the article """
+
+    last_page = models.CharField(
+        max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
+    """ The last page of the article """
+
     surtitle = models.CharField(max_length=600, null=True, blank=True)
     """ The surtitle of the article """
 
     title = models.CharField(max_length=600, null=True, blank=True)
     """ The title of the article """
+
+    html_title = models.CharField(max_length=800, null=True, blank=True)
+    """ The title of the article (HTML) """
+
+    subtitle = models.CharField(max_length=600, null=True, blank=True)
+    """ The subtitle of the article """
+
+    language = models.CharField(max_length=10, verbose_name=_('Code langue'))
+    """ The language code of the article """
 
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER = 'article', 'compterendu', 'autre'
     TYPE_CHOICES = (
@@ -403,6 +492,12 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
 
+    def __str__(self):
+        return self.title[:50]
+
+    # Fedora-related methods and properties
+    # --
+
     def get_fedora_model(self):
         return ArticleDigitalObject
 
@@ -411,6 +506,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
 
     def get_full_identifier(self):
         return '{}.{}'.format(self.issue.get_full_identifier(), self.localidentifier)
+
+    # Article-related methods and properties
+    # --
 
     @property
     def open_access(self):
@@ -421,9 +519,82 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
     def has_movable_limitation(self):
         return self.issue.has_movable_limitation
 
+    @property
+    def abstract(self):
+        """ Returns an abstract that can be used with the current language. """
+        abstracts = self.abstracts.values('text', 'language')
+        lang = get_language()
+        _abstracts = list(filter(lambda r: r['language'] == lang, abstracts))
+        _abstract_lang = _abstracts[0]['text'] if len(_abstracts) else None
+        _abstract = abstracts[0]['text'] if len(abstracts) else None
+        return _abstract_lang or _abstract
+
+    @cached_property
+    def section_title_1(self):
+        title = next(filter(lambda s: s.level == 1 and not s.paral, self._section_titles), None)
+        return title.title if title else None
+
+    @cached_property
+    def section_title_1_paral(self):
+        return [t.title for t in filter(lambda s: s.level == 1 and s.paral, self._section_titles)]
+
+    @cached_property
+    def section_title_2(self):
+        title = next(filter(lambda s: s.level == 2 and not s.paral, self._section_titles), None)
+        return title.title if title else None
+
+    @cached_property
+    def section_title_2_paral(self):
+        return [t.title for t in filter(lambda s: s.level == 2 and s.paral, self._section_titles)]
+
+    @cached_property
+    def section_title_3(self):
+        title = next(filter(lambda s: s.level == 3 and not s.paral, self._section_titles), None)
+        return title.title if title else None
+
+    @cached_property
+    def section_title_3_paral(self):
+        return [t.title for t in filter(lambda s: s.level == 3 and s.paral, self._section_titles)]
+
+    @cached_property
+    def _section_titles(self):
+        return list(self.section_titles.all())
+
+
+class ArticleAbstract(models.Model):
+    """ Represents an abstract associated with an article. """
+
+    article = models.ForeignKey(Article, related_name='abstracts', verbose_name=_('Article'))
+    text = models.TextField(verbose_name=_('Résumé'))
+    language = models.CharField(max_length=10, verbose_name=_('Code langue'))
+
+    class Meta:
+        verbose_name = _("Résumé d'article")
+        verbose_name_plural = _("Résumés d'articles")
+
+    def __str__(self):
+        return '{} / {}'.format(str(self.article), self.language)
+
+
+class ArticleSectionTitle(models.Model):
+    """ Represents a section title associated with an article. """
+
+    article = models.ForeignKey(Article, related_name='section_titles', verbose_name=_('Article'))
+    title = models.CharField(max_length=600, verbose_name=_('Titre'))
+    level = models.PositiveIntegerField(verbose_name=_('Niveau du titre section'))
+    paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
+
+    class Meta:
+        verbose_name = _("Titre de section d'article")
+        verbose_name_plural = _("Titres de sections d'articles")
+
+    def __str__(self):
+        return self.title[:50]
+
 
 class JournalInformation(models.Model):
     """ Stores the information related to a specific Journal instance. """
+
     journal = models.OneToOneField(
         Journal, verbose_name=_('Journal'), related_name='information')
 

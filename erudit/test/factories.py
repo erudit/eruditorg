@@ -90,6 +90,7 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     issue = factory.SubFactory(IssueFactory)
     localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
     type = 'article'
+    ordseq = 0
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):

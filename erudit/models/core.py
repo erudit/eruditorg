@@ -58,6 +58,9 @@ class Collection(models.Model):
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
 
+    def __str__(self):
+        return self.name
+
 
 class Discipline(models.Model):
     """ A simple discipline. """
@@ -117,3 +120,13 @@ class Publisher(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Copyright(models.Model):
+    """ A simple copyright. """
+    text = models.CharField(max_length=600, verbose_name=_('Texte du copyright'))
+    url = models.URLField(verbose_name=_('URL du copyright'), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Droit d'auteur")
+        verbose_name_plural = _("Droits d'auteurs")

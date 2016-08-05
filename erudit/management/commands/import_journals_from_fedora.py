@@ -19,9 +19,13 @@ from ...fedora.objects import PublicationDigitalObject
 from ...fedora.repository import api
 from ...fedora.repository import rest_api
 from ...models import Article
+from ...models import ArticleAbstract
+from ...models import ArticleSectionTitle
 from ...models import Author
 from ...models import Collection
+from ...models import Copyright
 from ...models import Issue
+from ...models import IssueTheme
 from ...models import Journal
 from ...models import Publisher
 
@@ -246,6 +250,8 @@ class Command(BaseCommand):
         xml_issue = publications_tree.xpath(
             './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
         journal.name = xml_name.text if xml_name is not None else None
+        journal.first_publication_year = journal.erudit_object.first_publication_year
+        journal.last_publication_year = journal.erudit_object.last_publication_year
 
         # Some journals share the same code in the Fedora repository so we have to ensure that our
         # journal instances' codes are not duplicated!
@@ -347,9 +353,13 @@ class Command(BaseCommand):
 
         # Set the proper values on the Issue instance
         issue.year = issue.erudit_object.publication_year
+        issue.publication_period = issue.erudit_object.publication_period
         issue.volume = issue.erudit_object.volume
         issue.number = issue.erudit_object.number
+        issue.first_page = issue.erudit_object.first_page
+        issue.last_page = issue.erudit_object.last_page
         issue.title = issue.erudit_object.theme
+        issue.html_title = issue.erudit_object.html_theme
         issue.thematic_issue = issue.erudit_object.theme is not None
         issue.date_published = issue.erudit_object.publication_date
         issue.date_produced = issue.erudit_object.production_date \
@@ -358,7 +368,36 @@ class Command(BaseCommand):
         issue.fedora_updated = fedora_issue.modified
         issue.save()
 
-        # STEP 3: patches the journal associated with the issue
+        issue.copyrights.clear()
+        copyrights_dicts = issue.erudit_object.droitsauteur or []
+        for copyright_dict in copyrights_dicts:
+            copyright_text = copyright_dict.get('text', None)
+            copyright_url = copyright_dict.get('url', None)
+            if copyright_text is None:
+                continue
+            copyright, _ = Copyright.objects.get_or_create(text=copyright_text, url=copyright_url)
+            issue.copyrights.add(copyright)
+
+        # STEP 3: impors all the themes associated with the considered issue
+        # --
+
+        issue.themes.all().delete()
+        for theme_id, theme_dict in issue.erudit_object.themes.items():
+            issue_theme = IssueTheme(issue=issue, identifier=theme_id, paral=False)
+            issue_theme.name = theme_dict.get('name')
+            issue_theme.subname = theme_dict.get('subname')
+            issue_theme.html_name = theme_dict.get('html_name')
+            issue_theme.html_subname = theme_dict.get('html_subname')
+            issue_theme.save()
+            for theme_paral_id, theme_paral_dict in theme_dict.get('paral').items():
+                issue_theme_paral = IssueTheme(issue=issue, identifier=theme_id, paral=True)
+                issue_theme_paral.name = theme_paral_dict.get('name')
+                issue_theme_paral.subname = theme_paral_dict.get('subname')
+                issue_theme_paral.html_name = theme_paral_dict.get('html_name')
+                issue_theme_paral.html_subname = theme_paral_dict.get('html_subname')
+                issue_theme_paral.save()
+
+        # STEP 4: patches the journal associated with the issue
         # --
 
         # Journal name
@@ -369,7 +408,7 @@ class Command(BaseCommand):
         journal.issn_web = issue.erudit_object.issn_num
         journal.save()
 
-        # STEP 4: imports all the articles associated with the issue
+        # STEP 5: imports all the articles associated with the issue
         # --
 
         article_count = 0
@@ -431,8 +470,20 @@ class Command(BaseCommand):
                 'with PID {0}'.format(article_pid))
 
         article.type = article.erudit_object.article_type
+        article.ordseq = int(article.erudit_object.ordseq)
+        article.doi = article.erudit_object.doi
+        article.first_page = article.erudit_object.first_page
+        article.last_page = article.erudit_object.last_page
         article.title = article.erudit_object.title
+        article.html_title = article.erudit_object.html_title
+        article.subtitle = article.erudit_object.subtitle
         article.surtitle = article.erudit_object.section_title
+        article.language = article.erudit_object.lang
+
+        publisher_name = article.erudit_object.publisher
+        if publisher_name:
+            publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
+            article.publisher = publisher
 
         article.fedora_updated = fedora_article.modified
         article.clean()
@@ -466,7 +517,37 @@ class Command(BaseCommand):
 
             article.authors.add(author)
 
-        # STEP 4: eventually test the XSLT transformation of the article
+        # STEP 4: imports the abstracts associated with the article
+        # --
+
+        article.abstracts.all().delete()
+        for abstract_dict in article.erudit_object.abstracts:
+            abstract = ArticleAbstract(article=article)
+            abstract.text = abstract_dict.get('content')
+            abstract.language = abstract_dict.get('lang')
+            abstract.save()
+
+        # STEP 5: imports the section titles associated with the article
+        # --
+
+        article.section_titles.all().delete()
+        for level in range(1, 4):
+            section_titles_dict = getattr(
+                article.erudit_object,
+                'section_titles' if level == 1 else 'section_titles_' + str(level))
+            if section_titles_dict is None:
+                continue
+
+            section_title = ArticleSectionTitle(article=article, level=level, paral=False)
+            section_title.title = section_titles_dict.get('main')
+            section_title.save()
+
+            for paral in section_titles_dict.get('paral').values():
+                section_title_paral = ArticleSectionTitle(article=article, level=level, paral=True)
+                section_title_paral.title = paral
+                section_title_paral.save()
+
+        # STEP 6: eventually test the XSLT transformation of the article
         # --
 
         if self.test_xslt:
