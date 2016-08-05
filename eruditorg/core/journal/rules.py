@@ -9,16 +9,7 @@ from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.predicates import HasAuthorization
 from core.subscription.rules import has_valid_subscription
 
-from .rules_helpers import get_editable_journals
-
-
-@rules.predicate
-def can_edit_journal(user, journal=None):
-    # TODO: add proper permissions checks
-    if journal is None:
-        return bool(get_editable_journals(user).count())
-    else:
-        return bool(journal.members.filter(id=user.id).count())
+from .predicates import can_edit_journal
 
 
 rules.add_perm(

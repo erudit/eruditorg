@@ -4,7 +4,7 @@ import rules
 from rules.predicates import is_staff
 from rules.predicates import is_superuser
 
-from erudit.rules import is_journal_member
+from core.journal.predicates import is_journal_member
 
 from .defaults import AuthorizationConfig as AC
 from .predicates import HasAuthorization
