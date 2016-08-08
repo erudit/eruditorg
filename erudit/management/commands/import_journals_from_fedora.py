@@ -7,6 +7,8 @@ import re
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.db.models import Q
+from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_str
 from eruditarticle.utils import remove_xml_namespaces
 from eulfedora.util import RequestFailed
@@ -27,6 +29,7 @@ from ...models import Copyright
 from ...models import Issue
 from ...models import IssueTheme
 from ...models import Journal
+from ...models import KeywordTag
 from ...models import Publisher
 
 logger = logging.getLogger(__file__)
@@ -547,7 +550,29 @@ class Command(BaseCommand):
                 section_title_paral.title = paral
                 section_title_paral.save()
 
-        # STEP 6: eventually test the XSLT transformation of the article
+        # STEP 6: imports the article's keywords
+        # --
+
+        article.keywords.clear()
+        for keywords_dict in article.erudit_object.keywords:
+            lang = keywords_dict.get('lang')
+            for kword in keywords_dict.get('keywords', []):
+                if not kword:
+                    continue
+
+                try:
+                    tag = KeywordTag.objects.filter(
+                        Q(slug=slugify(kword)[:100]) | Q(name=kword[:100])).first()
+                    assert tag is not None
+                except AssertionError:
+                    tag = KeywordTag.objects.create(
+                        name=kword, slug=slugify(kword)[:100], language=lang)
+                else:
+                    tag.language = lang
+                    tag.save()
+                article.keywords.add(tag)
+
+        # STEP 7: eventually test the XSLT transformation of the article
         # --
 
         if self.test_xslt:

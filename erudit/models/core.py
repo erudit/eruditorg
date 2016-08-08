@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 from polymorphic.models import PolymorphicModel
+from taggit.managers import TaggableManager
+from taggit.models import GenericTaggedItemBase
+from taggit.models import TagBase
 
 from ..abstract_models import Person
 from ..modelfields import SizeConstrainedImageField
@@ -75,20 +78,6 @@ class Discipline(models.Model):
         return self.name
 
 
-class EruditDocument(PolymorphicModel):
-    """ An Érudit document.
-
-    It can be an article, a thesis... This is a polymorphic model.
-    """
-    localidentifier = models.CharField(
-        max_length=50, unique=True, verbose_name=_('Identifiant unique'), db_index=True)
-    """ The unique identifier of an Érudit document. """
-
-    class Meta:
-        verbose_name = _('Document Érudit')
-        verbose_name_plural = _('Documents Érudit')
-
-
 class Author(Person):
     """ A simple author. """
     suffix = models.CharField(max_length=50, verbose_name=_('Suffixe'), blank=True, null=True)
@@ -130,3 +119,34 @@ class Copyright(models.Model):
     class Meta:
         verbose_name = _("Droit d'auteur")
         verbose_name_plural = _("Droits d'auteurs")
+
+
+class KeywordTag(TagBase):
+    """ A keyword tag that can be used to add tags to a model. """
+    language = models.CharField(max_length=10, verbose_name=_('Code langue'), blank=True, null=True)
+    """ The language code associated with the keyword """
+
+    class Meta:
+        verbose_name = _('Mot-clé')
+        verbose_name_plural = _('Mots-clés')
+
+
+class KeywordTaggedWhatever(GenericTaggedItemBase):
+    tag = models.ForeignKey(KeywordTag, related_name='%(app_label)s_%(class)s_items')
+
+
+class EruditDocument(PolymorphicModel):
+    """ An Érudit document.
+
+    It can be an article, a thesis... This is a polymorphic model.
+    """
+    localidentifier = models.CharField(
+        max_length=50, unique=True, verbose_name=_('Identifiant unique'), db_index=True)
+    """ The unique identifier of an Érudit document. """
+
+    keywords = TaggableManager(through=KeywordTaggedWhatever)
+    """ An Érudit document can be associated with multiple keywords. """
+
+    class Meta:
+        verbose_name = _('Document Érudit')
+        verbose_name_plural = _('Documents Érudit')

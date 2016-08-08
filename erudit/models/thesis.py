@@ -2,7 +2,6 @@
 
 from django.db import models
 from django.utils.translation import gettext as _
-from taggit.managers import TaggableManager
 
 from ..abstract_models import OAIDated
 
@@ -30,9 +29,6 @@ class Thesis(EruditDocument, OAIDated):
 
     description = models.TextField(verbose_name=_('Résumé'), blank=True, null=True)
     """ A thesis can have a description. """
-
-    keywords = TaggableManager()
-    """ A thesis can be associated with multiple keywords. """
 
     class Meta:
         verbose_name = _('Thèse')
