@@ -90,14 +90,7 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     issue = factory.SubFactory(IssueFactory)
     localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
     type = 'article'
-
-
-class BasketFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = 'erudit.Basket'
-
-    name = factory.Sequence(lambda n: 'Basket{}'.format(n))
+    ordseq = 0
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):

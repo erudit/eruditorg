@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.2.0 - Under development
+-------------------------
+
+* Add new fields to the Journal, Issue and Article models in order to limit interactions with Fedora
+
 0.1.19
 ------
 

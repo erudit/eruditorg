@@ -1,5 +1,8 @@
 -r requirements-main.txt
 
+# Temporary
+requests==2.10
+
 # Testing
 pytest>=2.6
 pytest-cov>=1.8

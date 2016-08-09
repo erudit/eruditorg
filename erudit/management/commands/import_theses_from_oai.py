@@ -9,11 +9,11 @@ from django.core.validators import URLValidator
 from django.db.models import Q
 from django.template.defaultfilters import slugify
 from sickle import Sickle
-from taggit.models import Tag
 
 from ...conf import settings as erudit_settings
 from ...models import Author
 from ...models import Collection
+from ...models import KeywordTag
 from ...models import Thesis
 
 
@@ -196,7 +196,8 @@ class Command(BaseCommand):
                 continue
 
             try:
-                tag = Tag.objects.filter(Q(slug=slugify(kword)[:100]) | Q(name=kword[:100])).first()
+                tag = KeywordTag.objects.filter(
+                    Q(slug=slugify(kword)[:100]) | Q(name=kword[:100])).first()
                 assert tag is not None
             except AssertionError:
                 tag = kword
