@@ -403,6 +403,10 @@ class Command(BaseCommand):
             issue_theme.subname = theme_dict.get('subname')
             issue_theme.html_name = theme_dict.get('html_name')
             issue_theme.html_subname = theme_dict.get('html_subname')
+
+            if not issue_theme.name:
+                continue
+
             issue_theme.save()
             for theme_paral_id, theme_paral_dict in theme_dict.get('paral').items():
                 issue_theme_paral = IssueTheme(issue=issue, identifier=theme_id, paral=True)
