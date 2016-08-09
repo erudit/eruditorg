@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.2.0 - Under development
--------------------------
+0.2.0
+-----
 
 * Add new fields to the Journal, Issue and Article models in order to limit interactions with Fedora
 * Fix an error that occured when importing cultural journals without codes
