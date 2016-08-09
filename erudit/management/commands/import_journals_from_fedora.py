@@ -202,12 +202,16 @@ class Command(BaseCommand):
     def import_journal_precedences(self, precendences_relations):
         """ Associates previous/next Journal instances with each journal. """
         for r in precendences_relations:
-            code, previous_code, next_code = r['journal_code'], r['previous_code'], r['next_code']
-            if previous_code is None and next_code is None:
+            localid = r['journal_localid']
+            previous_localid = r['previous_localid']
+            next_localid = r['next_localid']
+            if previous_localid is None and next_localid is None:
                 continue
-            j = Journal.objects.get(code=code)
-            previous_journal = Journal.objects.get(code=previous_code) if previous_code else None
-            next_journal = Journal.objects.get(code=next_code) if next_code else None
+            j = Journal.objects.get(localidentifier=localid)
+            previous_journal = Journal.objects.get(localidentifier=previous_localid) \
+                if previous_localid else None
+            next_journal = Journal.objects.get(localidentifier=next_localid) \
+                if next_localid else None
             j.previous_journal = previous_journal
             j.next_journal = next_journal
             j.save()
@@ -267,20 +271,21 @@ class Command(BaseCommand):
                 code_ext += 1
 
         issues = xml_issue = publications_tree.xpath('.//numero')
-        current_journal_code_found = False
+        current_journal_localid_found = False
         precendences_relation = {
-            'journal_code': journal.code,
-            'previous_code': None,
-            'next_code': None,
+            'journal_localid': journal.localidentifier,
+            'previous_localid': None,
+            'next_localid': None,
         }
         for issue in issues:
-            code = issue.get('revAbr')
-            if code != journal.code and not current_journal_code_found:
-                precendences_relation['next_code'] = code
-            elif code != journal.code and current_journal_code_found:
-                precendences_relation['previous_code'] = code
-            elif code == journal.code:
-                current_journal_code_found = True
+            issue_pid = issue.get('pid')
+            journal_localid = issue_pid.split('.')[-2]
+            if journal_localid != journal.localidentifier and not current_journal_localid_found:
+                precendences_relation['next_localid'] = journal_localid
+            elif journal_localid != journal.localidentifier and current_journal_localid_found:
+                precendences_relation['previous_localid'] = journal_localid
+            elif journal_localid == journal.localidentifier:
+                current_journal_localid_found = True
         self.journal_precendence_relations.append(precendences_relation)
 
         journal_created = journal.id is None
