@@ -24,7 +24,7 @@ from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import JournalDigitalObject, ArticleDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..fedora.shortcuts import get_cached_datastream_content
-from ..managers import JournalUpcomingManager
+from ..managers import JournalUpcomingManager, LegacyJournalManager
 
 from .core import Collection
 from .core import Copyright
@@ -151,6 +151,7 @@ class Journal(FedoraMixin, FedoraDated):
     """ The journal that precedes the current journal if any. """
 
     objects = models.Manager()
+    legacy = LegacyJournalManager()
     upcoming_objects = JournalUpcomingManager()
 
     class Meta:
