@@ -240,9 +240,26 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(JournalAuthorsListView, self).get_context_data(**kwargs)
+
+        authors = context.get(self.context_object_name)
+        articles = Article.objects.filter(issue__journal_id=self.journal.id, authors__in=authors) \
+            .select_related('issue', 'issue__journal') \
+            .prefetch_related('authors').distinct()
+
+        authors_dicts = {}
+        for article in articles:
+            for author in article.authors.all():
+                if author.id not in authors_dicts:
+                    authors_dicts[author.id] = {'author': author, 'articles': [article, ], }
+                elif article not in authors_dicts[author.id]['articles']:
+                    authors_dicts[author.id]['articles'].append(article)
+        context['authors_dicts'] = sorted(
+            list(authors_dicts.values()), key=lambda a: a['author'].full_name)
+
         context['journal'] = self.journal
         context['letter'] = self.letter
         context['letters_exists'] = self.letters_exists
+
         return context
 
 
