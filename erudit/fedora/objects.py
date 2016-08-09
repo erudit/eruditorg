@@ -20,6 +20,7 @@ class JournalDigitalObject(models.DigitalObject):
     logo = models.FileDatastream('LOGO', 'Logo', defaults={'mimetype': 'image/jpeg', })
     oaiset_info = models.XmlDatastream('OAISET_INFO', 'OAISET Info', XmlObject)
     publications = models.XmlDatastream('PUBLICATIONS', 'Publications', XmlObject)
+    rels_ext = models.XmlDatastream('RELS-EXT', 'RELS Ext', XmlObject)
 
     @property
     def xml_content(self):

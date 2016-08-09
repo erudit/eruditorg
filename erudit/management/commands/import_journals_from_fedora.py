@@ -254,12 +254,17 @@ class Command(BaseCommand):
             journal.fedora_created = fedora_journal.created
 
         oaiset_info_tree = remove_xml_namespaces(
-            et.fromstring(fedora_journal.oaiset_info.content.serialize()))
+            et.fromstring(fedora_journal.oaiset_info.content.serialize())) \
+            if fedora_journal.oaiset_info.exists else None
+        rels_ext_tree = remove_xml_namespaces(
+            et.fromstring(fedora_journal.rels_ext.content.serialize())) \
+            if fedora_journal.rels_ext.exists else None
         publications_tree = remove_xml_namespaces(
             et.fromstring(fedora_journal.publications.content.serialize()))
 
         # Set the proper values on the Journal instance
-        xml_name = oaiset_info_tree.find('.//title')
+        xml_name = oaiset_info_tree.find('.//title') if oaiset_info_tree \
+            else rels_ext_tree.find('.//setName')
         xml_issue = publications_tree.xpath(
             './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
         journal.name = xml_name.text if xml_name is not None else None
@@ -301,7 +306,7 @@ class Command(BaseCommand):
         journal.save()
 
         # Associates the publisher to the Journal instance
-        xml_publisher = oaiset_info_tree.find('.//publisher')
+        xml_publisher = oaiset_info_tree.find('.//publisher') if oaiset_info_tree else None
         publisher_name = xml_publisher.text if xml_publisher is not None else None
         if publisher_name is not None:
             publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
