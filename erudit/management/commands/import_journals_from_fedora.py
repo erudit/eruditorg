@@ -207,14 +207,20 @@ class Command(BaseCommand):
             next_localid = r['next_localid']
             if previous_localid is None and next_localid is None:
                 continue
-            j = Journal.objects.get(localidentifier=localid)
-            previous_journal = Journal.objects.get(localidentifier=previous_localid) \
-                if previous_localid else None
-            next_journal = Journal.objects.get(localidentifier=next_localid) \
-                if next_localid else None
-            j.previous_journal = previous_journal
-            j.next_journal = next_journal
-            j.save()
+            try:
+                j = Journal.objects.get(localidentifier=localid)
+                previous_journal = Journal.objects.get(localidentifier=previous_localid) \
+                    if previous_localid else None
+                next_journal = Journal.objects.get(localidentifier=next_localid) \
+                    if next_localid else None
+            except Journal.DoesNotExist:
+                self.stdout.write(self.style.ERROR(
+                    '    Unable to import the precedences for journal with '
+                    'localidentifier "{0}"'.format(localid)))
+            else:
+                j.previous_journal = previous_journal
+                j.next_journal = next_journal
+                j.save()
 
     @transaction.atomic
     def import_journal(self, journal_pid, collection):
@@ -264,6 +270,7 @@ class Command(BaseCommand):
         # journal instances' codes are not duplicated!
         if not journal.id:
             code_base = xml_issue[0].get('revAbr') if xml_issue is not None else None
+            code_base = code_base if code_base else re.sub(r'\d', '', journal_localidentifier)
             code_ext = 1
             journal.code = code_base
             while Journal.objects.filter(code=journal.code).exists():
