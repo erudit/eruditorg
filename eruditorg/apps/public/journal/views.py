@@ -141,7 +141,7 @@ class JournalListView(ListView):
             return ['public/journal/journal_list_per_disciplines.html', ]
 
 
-class JournalDetailView(FedoraServiceRequiredMixin, SingleJournalMixin, DetailView):
+class JournalDetailView(SingleJournalMixin, DetailView):
     """
     Displays a journal.
     """
@@ -274,7 +274,7 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
     model = Journal
 
 
-class IssueDetailView(FedoraServiceRequiredMixin, DetailView):
+class IssueDetailView(DetailView):
     """
     Displays an Issue instance.
     """

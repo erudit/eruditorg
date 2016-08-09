@@ -9,14 +9,13 @@ from django.utils import translation
 from django.views.generic import TemplateView
 from feedparser import parse as rss_parse
 
-from base.viewmixins import FedoraServiceRequiredMixin
 from erudit.models import Issue
 from erudit.models import Discipline
 
 logger = logging.getLogger(__name__)
 
 
-class HomeView(FedoraServiceRequiredMixin, TemplateView):
+class HomeView(TemplateView):
     """
     This is the main view of the Érudit's public site.
     """
