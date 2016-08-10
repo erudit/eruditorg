@@ -24,8 +24,7 @@ export default {
 
   sticky_elements : function () {
 
-  	var _this                 = this,
-        $sticky_header 			  = this.article.find('.article-header-sticky'),
+  	var $sticky_header 			  = this.article.find('.article-header-sticky'),
   		  $sticky_elements 		  = this.article.find('.article-table-of-contents, .toolbox'),
   		  transform 				    = getPrefix('transform');
 
@@ -38,13 +37,13 @@ export default {
       .css('padding-bottom', this.sticky_header_height)
   		.stick_in_parent()
   		.first()
-  		.on("sticky_kit:stick", function(e) {
+  		.on("sticky_kit:stick", (e) => {
   			setTimeout(function(){
-  				$sticky_elements.css(transform, 'translate(0, '+_this.sticky_header_height+'px)');
+  				$sticky_elements.css(transform, 'translate(0, ' + this.sticky_header_height+'px)');
   				$sticky_header.css(transform, 'translate(-50%, 0%)');
   			}, 0);
   		})
-  		.on("sticky_kit:unstick", function(e) {
+  		.on("sticky_kit:unstick", (e) => {
   			setTimeout(function(){
   				$sticky_elements.css(transform, 'translate(0, 0)');
   				$sticky_header.css(transform, 'translate(-50%, -100%)');
@@ -53,45 +52,37 @@ export default {
   },
 
   smooth_scroll : function () {
-
-    var _this = this;
-
-    this.article.find('.article-table-of-contents').on('click', 'a', function(e) {
+    this.article.find('.article-table-of-contents').on('click', 'a', (e) => {
       if( e ) {
         e.preventDefault();
         e.stopPropagation();
       }
 
-      var target = $(this).attr('href').replace('#', '');
+      var target = $(e.currentTarget).attr('href').replace('#', '');
       if( !target ) return false;
 
-      $('html, body').animate( { scrollTop: _this.article.find('#'+target).offset().top - _this.sticky_header_height - 30 }, 750 );
+      $('html, body').animate( { scrollTop: this.article.find('#'+target).offset().top - this.sticky_header_height - 30 }, 750 );
       return false;
     });
   },
 
   clipboard : function () {
-
-
-    function clipboard_success () {
-      $(this).addClass('success');
-      setTimeout(clipboard_response_completed.bind(this), 3000);
-    };
-    function clipboard_error () {
-      $(this).addClass('error');
-      setTimeout(clipboard_response_completed.bind(this), 3000);
-    };
-    function clipboard_response_completed() {
-      $(this).removeClass('success error');
-    };
-
-    this.article.find('.clipboard-data').on('click', function(e) {
+    this.article.find('.clipboard-data').on('click', (e) => {
       if( e ) {
         e.preventDefault();
         e.stopPropagation();
       }
 
-      clipboard.copy( $(this).attr('href') ).then( clipboard_success.bind(this), clipboard_error.bind(this) );
+      clipboard.copy( $(e.currentTarget).attr('href') ).then(
+        () => {
+          $(e.currentTarget).addClass('success');
+          setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
+        },
+        () => {
+          $(e.currentTarget).addClass('error');
+          setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
+        }
+      );
       return false;
     });
   },

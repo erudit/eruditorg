@@ -20,16 +20,15 @@ class SavedCitationList {
    * @param {JQuery selector} $document - The selector of the document object.
    */
   save($document) {
-    let _ = this;
     let documentId = $document.data(this.options.documentIdDataAttribute);
     let documentAttrId = $document.attr('id');
     $.ajax({
       type: 'POST',
       url: Urls['public:citations:add_citation'](documentId),
-    }).done(function() {
-      $document.data(_.options.documentIsSavedDataAttribute, true);
-      $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
-      $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').show();
+    }).done(() => {
+      $document.data(this.options.documentIsSavedDataAttribute, true);
+      $('[data-' + this.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
+      $('[data-' + this.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').show();
     });
   }
 
@@ -38,16 +37,15 @@ class SavedCitationList {
    * @param {JQuery selector} $document - The selector of the document object.
    */
   remove($document) {
-    let _ = this;
     let documentId = $document.data(this.options.documentIdDataAttribute);
     let documentAttrId = $document.attr('id');
     $.ajax({
       type: 'POST',
       url: Urls['public:citations:remove_citation'](documentId),
-    }).done(function() {
-      $document.data(_.options.documentIsSavedDataAttribute, false);
-      $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();
-      $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').hide();
+    }).done(() => {
+      $document.data(this.options.documentIsSavedDataAttribute, false);
+      $('[data-' + this.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();
+      $('[data-' + this.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').hide();
     });
   }
 
@@ -55,32 +53,30 @@ class SavedCitationList {
    * Initializes the citation list object.
    */
   init() {
-    let _ = this;
-
     // Associates the proper actions to execute when clicking on "save" buttons
-    $(this.addButtonSelector).on('click', function(ev) {
-      var $document = $($(this).data(_.options.documentAddDataAttribute));
-      _.save($document);
+    $(this.addButtonSelector).on('click', (ev) => {
+      var $document = $($(ev.currentTarget).data(this.options.documentAddDataAttribute));
+      this.save($document);
       ev.preventDefault();
     });
 
     // Associates the proper actions to execute when clicking on "remove" buttons
-    $(this.removeButtonSelector).on('click', function(ev) {
-      var $document = $($(this).data(_.options.documentRemoveDataAttribute));
-      _.remove($document);
+    $(this.removeButtonSelector).on('click', (ev) => {
+      var $document = $($(ev.currentTarget).data(this.options.documentRemoveDataAttribute));
+      this.remove($document);
       ev.preventDefault();
     });
 
     // Display or hide buttons allowing to save or remove citations.
-    $('[data-' + _.options.documentIdDataAttribute + ']').each(function(ev){
-      let documentAttrId = $(this).attr('id');
-      let documentIsSaved = $(this).data(_.options.documentIsSavedDataAttribute);
+    $('[data-' + this.options.documentIdDataAttribute + ']').each((index, element) => {
+      let documentAttrId = $(element).attr('id');
+      let documentIsSaved = $(element).data(this.options.documentIsSavedDataAttribute);
       if (documentIsSaved == true) {
-        $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
-        $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').show();
+        $('[data-' + this.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
+        $('[data-' + this.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').show();
       } else {
-        $('[data-' + _.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();
-        $('[data-' + _.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').hide();
+        $('[data-' + this.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();
+        $('[data-' + this.options.documentRemoveDataAttribute + '="#' + documentAttrId + '"]').hide();
       }
     });
   }

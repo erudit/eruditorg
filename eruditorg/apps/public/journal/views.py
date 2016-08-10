@@ -399,6 +399,7 @@ class BaseArticleDetailView(
         keywords = self.object.keywords.all()
         keywords_grouped = groupby(keywords, lambda k: k.language)
         context['keywords_dict'] = {k[0]: list(k[1]) for k in keywords_grouped}
+        context['in_citation_list'] = self.object.id in self.request.saved_citations
 
         # return 4 randomly
         context['related_articles'] = related_articles.order_by('?')[:4]

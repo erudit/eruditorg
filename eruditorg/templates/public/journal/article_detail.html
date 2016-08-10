@@ -141,7 +141,7 @@
     {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
   >
 
-  {% cache FOREVER_TTL "public_article_detail_content" article.id article_access_granted LANGUAGE_CODE %}
+  {% cache FOREVER_TTL "public_article_detail_content" article.id article_access_granted in_citation_list LANGUAGE_CODE %}
   {% if article.publication_allowed_by_authors %}
     {# XSL transformation article render #}
     {% render_article article %}
