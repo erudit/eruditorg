@@ -260,7 +260,7 @@
           {% endblocktrans %}
           </div>
           <div id="journal_copyright">
-          {% for copyright in issue.copyrights.all %}
+          {% for copyright in article.copyrights.all %}
             <p>{{ copyright.text|safe }}</p>
           {% endfor %}
           </div>
