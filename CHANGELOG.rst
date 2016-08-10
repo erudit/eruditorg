@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.2.3 - Under development
--------------------------
+0.2.3
+-----
 
 * Fix: increase the maximum length of the Affiliation model's name field
 
