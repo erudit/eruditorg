@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.2.1 - Under development
--------------------------
+0.2.1
+-----
 
 * Add an Affiliation model and associates it to the Person abstract model through a ManyToManyField
 * Update the ``import_journals_from_fedora`` management command to import affiliations
