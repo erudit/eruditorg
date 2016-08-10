@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.2.2 - Under development
--------------------------
+0.2.2
+-----
 
 * Add a ``copyrights`` ManyToManyField on the Article model
 * Update the ``import_journals_from_fedora`` management command to import article copyrights
