@@ -604,7 +604,20 @@ class Command(BaseCommand):
                     tag.save()
                 article.keywords.add(tag)
 
-        # STEP 7: eventually test the XSLT transformation of the article
+        # STEP 7: imports article's copyrights
+        # --
+
+        article.copyrights.clear()
+        copyrights_dicts = article.erudit_object.droitsauteur or []
+        for copyright_dict in copyrights_dicts:
+            copyright_text = copyright_dict.get('text', None)
+            copyright_url = copyright_dict.get('url', None)
+            if copyright_text is None:
+                continue
+            copyright, _ = Copyright.objects.get_or_create(text=copyright_text, url=copyright_url)
+            article.copyrights.add(copyright)
+
+        # STEP 8: eventually test the XSLT transformation of the article
         # --
 
         if self.test_xslt:

@@ -489,6 +489,10 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
         verbose_name=_("Publication autorisée par l'auteur"), default=True)
     """ Defines if the article can be published on the Érudit platform according to the authors """
 
+    copyrights = models.ManyToManyField(
+        Copyright, related_name=_('articles'), verbose_name=_("Droits d'auteurs"))
+    """ The copyrights of the article """
+
     class Meta:
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
