@@ -20,6 +20,7 @@ from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.repository import api
 from ...fedora.repository import rest_api
+from ...models import Affiliation
 from ...models import Article
 from ...models import ArticleAbstract
 from ...models import ArticleSectionTitle
@@ -526,6 +527,9 @@ class Command(BaseCommand):
             suffix = suffix_xml.text if suffix_xml is not None else None
             organization_xml = author_xml.find('.//nomorg')
             organization = organization_xml.text if organization_xml is not None else None
+            affiliations = [
+                affiliation_dom.text
+                for affiliation_dom in author_xml.findall('.//affiliation/alinea')]
 
             if firstname is None and lastname is None and organization is None:
                 continue
@@ -538,6 +542,11 @@ class Command(BaseCommand):
                 author = Author(**author_query_kwargs)
             author.suffix = suffix
             author.save()
+
+            author.affiliations.clear()
+            for aff in affiliations:
+                affiliation, _ = Affiliation.objects.get_or_create(name=aff)
+                author.affiliations.add(affiliation)
 
             article.authors.add(author)
 

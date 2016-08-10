@@ -41,6 +41,7 @@ class Person(models.Model):
     email = models.EmailField(null=True, blank=True, verbose_name=_('Courriel'))
     organisation = models.ForeignKey(
         'Organisation', null=True, blank=True, verbose_name=_('Organisation'))
+    affiliations = models.ManyToManyField('Affiliation', verbose_name=_('Affiliations'))
 
     class Meta:
         abstract = True

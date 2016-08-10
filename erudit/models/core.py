@@ -38,6 +38,19 @@ class Organisation(models.Model):
         return self.name
 
 
+class Affiliation(models.Model):
+    """ A simple affiliation. """
+    name = models.CharField(max_length=255, unique=True, verbose_name=_('Nom'))
+    """ The name of the affiliation. """
+
+    class Meta:
+        verbose_name = _('Affiliation')
+        verbose_name_plural = _('Affiliations')
+
+    def __str__(self):
+        return self.name
+
+
 class Collection(models.Model):
     """ A collection of journales or theses.
 
