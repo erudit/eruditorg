@@ -40,7 +40,7 @@ class Organisation(models.Model):
 
 class Affiliation(models.Model):
     """ A simple affiliation. """
-    name = models.CharField(max_length=255, unique=True, verbose_name=_('Nom'))
+    name = models.CharField(max_length=600, verbose_name=_('Nom'))
     """ The name of the affiliation. """
 
     class Meta:
