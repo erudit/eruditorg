@@ -8,12 +8,9 @@ from django.template import Context
 
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
-from erudit.test.factories import AuthorFactory
 from erudit.test.factories import IssueFactory
-from erudit.test.factories import JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
 
-from apps.public.journal.templatetags.public_journal_tags import author_articles
 from apps.public.journal.templatetags.public_journal_tags import render_article
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
@@ -37,25 +34,3 @@ class TestRenderArticleTemplateTag(BaseEruditTestCase):
         # Check
         self.assertTrue(ret is not None)
         self.assertTrue(ret.startswith('<div xmlns:v="variables-node" class="article-wrapper">'))
-
-
-class TestAuthorArticlesFilter(BaseEruditTestCase):
-    def test_can_return_the_articles_associated_with_an_author_for_a_given_journal(self):
-        # Setup
-        other_journal = JournalFactory.create(
-            collection=self.collection, publishers=[self.publisher])
-        other_issue = IssueFactory.create(
-            journal=other_journal, date_published=dt.datetime.now())
-        other_article = ArticleFactory.create(issue=other_issue)
-
-        issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue)
-
-        author = AuthorFactory.create()
-
-        article.authors.add(author)
-        other_article.authors.add(author)
-
-        # Run
-        self.assertEqual(list(author_articles(author, self.journal)), [article, ])

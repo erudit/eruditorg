@@ -7,7 +7,7 @@ from rules.predicates import is_superuser
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.predicates import HasAuthorization
-from erudit.rules import is_journal_member
+from core.journal.predicates import is_journal_member
 
 from .models import JournalAccessSubscription
 from .models import JournalManagementSubscription

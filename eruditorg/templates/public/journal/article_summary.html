@@ -24,40 +24,42 @@
 {% if not article.issue.journal.type.code == 'C' %}
 <!-- Google Scholar -->
   <meta name="citation_title" content="{{ article.title }}" />
-  {% for author in article.erudit_object.authors %}
+  {% for author in article.authors.all %}
     {% if author.firstname and author.lastname %}
       <meta name="citation_author" content="{{ author.lastname }}, {{ author.firstname }}" />
+    {% elif author.othername %}
+      <meta name="citation_author" content="{{ author.othername }}" />
     {% endif %}
-    {% for aff in author.affiliations %}
-      <meta name="citation_author_institution" content="{{ aff }}" />
+    {% for aff in author.affiliations.all %}
+      <meta name="citation_author_institution" content="{{ aff.name }}" />
     {% endfor %}
   {% endfor %}
   <meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
-  {% for abstract in article.erudit_object.abstracts %}
-    <meta name="citation_abstract" lang="{{ abstract.lang }}" content="{{ abstract.content }}" />
+  {% for abstract in article.abstracts.all %}
+    <meta name="citation_abstract" lang="{{ abstract.language }}" content="{{ abstract.text }}" />
   {% endfor %}
-  <meta name="citation_language" content="{{ article.erudit_object.lang }}" />
-  {% if article.erudit_object.first_page %}
-    <meta name="citation_firstpage" content="{{ article.erudit_object.first_page }}" />
+  <meta name="citation_language" content="{{ article.language }}" />
+  {% if article.first_page %}
+    <meta name="citation_firstpage" content="{{ article.first_page }}" />
   {% endif %}
-  {% if article.erudit_object.last_page %}
-    <meta name="citation_lastpage" content="{{ article.erudit_object.last_page }}" />
+  {% if article.last_page %}
+    <meta name="citation_lastpage" content="{{ article.last_page }}" />
   {% endif %}
-  <meta name="citation_issn" content="{{ article.erudit_object.issn }}" />
+  <meta name="citation_issn" content="{{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}" />
   {% if article.issue.volume %}
     <meta name="citation_volume" content="{{ article.issue.volume }}" />
   {% endif %}
   {% if article.issue.number %}
     <meta name="citation_issue" content="{{ article.issue.number }}" />
   {% endif %}
-  <meta name="citation_publication_date" content="{{ article.erudit_object.publication_year }}" />
-  <meta name="citation_date" content="{{ article.erudit_object.publication_year }}" />
-  <meta name="citation_publisher" content="{{ article.erudit_object.publisher }}" />
-  <meta name="citation_doi" content="{{ article.erudit_object.doi }}" />
+  <meta name="citation_publication_date" content="{{ article.issue.year }}" />
+  <meta name="citation_date" content="{{ article.issue.year }}" />
+  <meta name="citation_publisher" content="{{ article.publisher.name }}" />
+  {% if article.doi %}<meta name="citation_doi" content="{{ article.doi }}" />{% endif %}
   <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
   <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-  {% for keywords in article.erudit_object.keywords %}
-    <meta name="citation_keywords" lang="{{ keywords.lang }}" content="{% for k in keywords.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+  {% for lang_code, keywords in keywords_dict.items %}
+    <meta name="citation_keywords" lang="{{ lang_code }}" content="{% for k in keywords %}{{ k.name }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
   {% endfor %}
 {% endif %}
 {% endcache %}
@@ -112,8 +114,8 @@
 {% block breadcrumb %}{{ block.super }}
   / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
   / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
-   {% if article.issue.erudit_object.html_theme %}
-   {{ article.issue.erudit_object.html_theme|safe|truncatechars:50 }}
+   {% if article.issue.html_title %}
+   {{ article.issue.html_title|safe|truncatechars:50 }}
    {% else %}
    {{ article.issue.volume_title_with_pages }}
    {% endif %}

@@ -7,14 +7,14 @@
 
 {% block zone_title %}{{ journal.name }}{% endblock %}
 
-{% block page_title %}{% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock page_title %}
+{% block page_title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock page_title %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="fb:app_id" content="128099979787">
 <meta property="og:url" content="{{ request.build_absolute_uri|urlencode }}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="{{ issue.erudit_object.html_theme|safe }}">
+<meta property="og:title" content="{{ issue.html_title|safe }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="fr_CA">
 
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}">
-<meta name="twitter:title" content="{{ issue.erudit_object.html_theme|safe }} – Érudit">
+<meta name="twitter:title" content="{{ issue.html_title|safe }} – Érudit">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -68,8 +68,8 @@
   / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
   / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ issue.journal.name }}</a>
   / <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-    {% if issue.erudit_object.html_theme %}
-    {{ issue.erudit_object.html_theme|safe|truncatechars:50 }}
+    {% if issue.html_title %}
+    {{ issue.html_title|safe|truncatechars_html:50 }}
     {% else %}
     {{ issue.volume_title_with_pages }}
     {% endif %}
@@ -99,7 +99,7 @@
           {% if issue.has_coverpage %}
           <div>
             <a href="{% url 'public:journal:journal_detail' journal.code %}">
-              <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.erudit_object.html_theme %}{{ issue.erudit_object.html_theme|safe }}, {% endif %}
+              <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
               {{ issue.volume_title_with_pages }} {% trans 'de la revue' %} {{ journal.name }}" />
             </a>
           </div>
@@ -159,7 +159,7 @@
             {% endif %}
 
             <dt class="mono-space">{% trans "Période de publication" %}</dt>
-            <dd>{{ journal.erudit_object.publication_period }}</dd>
+            <dd>{{ journal.publication_period }}</dd>
 
 
             {% if journal.first_issue %}
@@ -216,15 +216,14 @@
             <p class="title-tag">{{ issue.journal.name }}</p>
 
             <h1>
-              {% for k, theme in issue.erudit_object.themes.items %}
+              {% for theme in themes %}
+              {% if forloop.first %}<span>{% else %} / {% endif %}
               {% if theme.html_name and theme.html_subname %}
-                <span>{{ theme.html_name|safe }}: {{ theme.html_subname|safe }}</span>
+                {{ theme.html_name|safe }}: {{ theme.html_subname|safe }}
               {% else %}
-                <span>{{ theme.html_name|safe }}</span>
+                {{ theme.html_name|safe }}
               {% endif %}
-              {% for k, paral in theme.paral.items %}
-                / {% if paral.name and paral.subname %}{{ paral.name }}: {{ paral.subname }}{% else %}{{ paral.name }}{% endif %}
-              {% endfor %}
+              {% if forloop.first %}</span>{% endif %}
               {% endfor %}
               <span>{{ issue.volume_title_with_pages }}</span>
             </h1>
@@ -237,7 +236,7 @@
         {% if section1.titles.main %}
         <h3 class="title-tag section">
           {{ section1.titles.main }}
-          {% for paral in section1.titles.paral.values %}/ {{ paral }}{% endfor %}
+          {% for paral in section1.titles.paral %}/ {{ paral }}{% endfor %}
         </h3>
         {% endif %}
 
@@ -252,7 +251,7 @@
           {% if section2.titles.main %}
           <h4 class="title-tag section">
             {{ section2.titles.main }}
-            {% for paral in section2.titles.paral.values %}/ {{ paral }}{% endfor %}
+            {% for paral in section2.titles.paral %}/ {{ paral }}{% endfor %}
           </h4>
           {% endif %}
 
@@ -267,7 +266,7 @@
             {% if section3.titles.main %}
             <h5 class="title-tag section">
               {{ section3.titles.main }}
-              {% for paral in section3.titles.paral.values %}/ {{ paral }}{% endfor %}
+              {% for paral in section3.titles.paral %}/ {{ paral }}{% endfor %}
             </h5>
             {% endif %}
 
@@ -330,7 +329,7 @@
                   <h5>
                     <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
                       <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-                      {% if published_issue.erudit_object.html_theme %}<br/><span class="issue-list--theme">{{ published_issue.erudit_object.html_theme|safe }}</span>{% endif %}
+                      {% if published_issue.html_title %}<br/><span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
                     </a>
                   </h5>
                 </header>

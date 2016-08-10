@@ -8,8 +8,8 @@
       "@id": "#issue-{{ article.issue.localidentifier }}",
       "@type": "PublicationIssue",
       {% if article.issue.number %}"issueNumber": "{{ article.issue.number }}",{% endif %}
-      {% if article.issue.erudit_object.first_page %}"pageStart": "{{ article.issue.erudit_object.first_page }}",{% endif %}
-      {% if article.issue.erudit_object.last_page %}"pageEnd": "{{ article.issue.erudit_object.last_page }}",{% endif %}
+      {% if article.issue.first_page %}"pageStart": "{{ article.issue.first_page }}",{% endif %}
+      {% if article.issue.last_page %}"pageEnd": "{{ article.issue.last_page }}",{% endif %}
       "datePublished": "{{ article.issue.year }}"
     },
     {
@@ -38,11 +38,11 @@
           "@id": "#issue-{{ article.issue.localidentifier }}"
         }
       ],
-      {% if article.erudit_object.first_page %}"pageStart": "{{ article.erudit_object.first_page }}",{% endif %}
-      {% if article.erudit_object.last_page %}"pageEnd": "{{ article.erudit_object.last_page }}",{% endif %}
+      {% if article.first_page %}"pageStart": "{{ article.first_page }}",{% endif %}
+      {% if article.last_page %}"pageEnd": "{{ article.last_page }}",{% endif %}
       "name": "{{ article.title }}",
-      "publisher": "{{ article.erudit_object.publisher }}",
-      "sameAs": "http://dx.doi.org/{{ article.erudit_object.doi }}"
+      {% if article.doi %}"sameAs": "http://dx.doi.org/{{ article.doi }}",{% endif %}
+      "publisher": "{{ article.publisher.name }}"
     }
   ]
 }

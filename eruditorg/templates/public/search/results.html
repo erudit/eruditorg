@@ -148,7 +148,7 @@
                 {% if document.real_object.authors %}
                 <h4 class="authors h6">
                   {% for author in document.real_object.authors %}
-                  <span class="author">{{ author.firstname }} {{ author.lastname }}</span>{% if not forloop.last %}, {% endif %}
+                  <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}, {% endif %}
                   {% endfor %}
                 </h4>
                 {% endif %}
@@ -262,9 +262,11 @@
                 <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
                 {# authors #}
                 {% if document.real_object.author %}
+                {% with author=document.real_object.author %}
                 <h4 class="authors h6">
-                  <span class="author">{{ document.real_object.author.firstname }} {{ document.real_object.author.lastname }}</span>
+                  <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>
                 </h4>
+                {% endwith %}
                 {% endif %}
                 {% if search_elements and search_elements.0.operator != 'NOT' %}
                   <h3 class="h4">

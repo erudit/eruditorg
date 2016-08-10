@@ -200,7 +200,7 @@
       <div class="left-content">
         <div class="content">
           <div class="sub-title">
-            {% if issue.erudit_object.html_theme %}<span>{{ issue.erudit_object.html_theme|safe }}</span>{% endif %}
+            {% if issue.html_title %}<span>{{ issue.html_title|safe }}</span>{% endif %}
             <span>{{ issue.volume_title }}</span>
           </div>
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
@@ -225,24 +225,26 @@
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Citer cet article" %}</div>
           <div class="cite">
-            {% for author in article.erudit_object.authors %}
+            {% for author in article.authors.all %}
               {% if author.firstname and author.lastname %}
                 {{ author.lastname }}, {{ author.firstname }}.
+              {% elif author.othername %}
+                {{ author.othername }}.
               {% endif %}
             {% endfor %}
             "{{ article.title }}."
             <em>{{ article.issue.journal.name }}</em>
             {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
-            ({{ article.erudit_object.publication_year }}): {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+            ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}.
           </div>
         </div>
       </div>
       <div class="right-content">
         <div class="content">
-        {% with abstracts=article.erudit_object.abstracts %}
-        {% if abstracts %}
+        {% with abstract=article.abstract %}
+        {% if abstract %}
           <div class="sub-title">{% trans "Résumé de l'article" %}</div>
-          <div class="abstract">{{ abstracts.0.content }}</div>
+          <div class="abstract">{{ abstract }}</div>
         {% endif %}
         {% endwith %}
         </div>
@@ -257,7 +259,11 @@
             reproduction) est assujettie à sa politique d'utilisation que vous pouvez consulter en ligne. [<a href="https://apropos.erudit.org/fr/usagers/politique-dutilisation/">https://apropos.erudit.org/fr/usagers/politique-dutilisation/</a>]
           {% endblocktrans %}
           </div>
-          <div id="journal_copyright">{{ issue.erudit_object.droitsauteur.0.text }}</div>
+          <div id="journal_copyright">
+          {% for copyright in article.copyrights.all %}
+            <p>{{ copyright.text|safe }}</p>
+          {% endfor %}
+          </div>
         </div>
       </div>
       <div id="footer_2">

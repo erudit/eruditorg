@@ -17,7 +17,7 @@
         "{{ article.title }}."
         <em>{{ article.issue.journal.name }}</em>
         {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
-        ({{ article.erudit_object.publication_year }}): {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+        ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}.
       </dd>
 
       <dt>APA</dt>
@@ -29,11 +29,11 @@
             {{ author.othername }}.
           {% endif %}
         {% endfor %}
-        ({{ article.erudit_object.publication_year }}).
+        ({{ article.issue.year }}).
         {{ article.title }}
         <em>{{ article.issue.journal.name }}</em>,
         {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %},
-        {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+        {{ article.first_page }}–{{ article.last_page }}.
       </dd>
 
       <dt>Chicago</dt>
@@ -48,7 +48,7 @@
         "{{ article.title }}."
         <em>{{ article.issue.journal.name }}</em>
         {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}no. {{ article.issue.number }}{% endif %}
-        ({{ article.erudit_object.publication_year }}): {{ article.erudit_object.first_page }}–{{ article.erudit_object.last_page }}.
+        ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}.
       </dd>
     </dl>
 

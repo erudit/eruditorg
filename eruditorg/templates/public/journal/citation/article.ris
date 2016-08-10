@@ -1,13 +1,13 @@
 TY  - JOUR
 T1  - {{ article.title }}
-{% for author in article.erudit_object.authors %}{% if author.firstname and author.lastname %}
+{% for author in article.authors.all %}{% if author.firstname and author.lastname %}
 A1  - {{ author.lastname }}, {{ author.firstname }}
 {% endif %}{% endfor %}
 {% if article.issue.volume %}VL  - {{ article.issue.volume }}{% endif %}
 {% if article.issue.number %}IS  - {{ article.issue.number }}{% endif %}
-{% if article.issue.first_page %}SP  - {{ article.issue.first_page }}{% endif %}
-{% if article.issue.last_page %}EP  - {{ article.issue.last_page }}{% endif %}
-SN  - {{ article.erudit_object.issn }}
-Y1  - {{ article.erudit_object.publication_year }}
-PB  - {{ article.erudit_object.publisher }}
+{% if article.first_page %}SP  - {{ article.first_page }}{% endif %}
+{% if article.last_page %}EP  - {{ article.last_page }}{% endif %}
+SN  - {{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}
+Y1  - {{ article.issue.year }}
+PB  - {{ article.publisher.name }}
 ER  -

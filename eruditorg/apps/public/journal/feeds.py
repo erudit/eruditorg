@@ -5,7 +5,6 @@ import datetime as dt
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
-from django.utils import translation
 from django.utils.translation import gettext as _
 
 from base.feedgenerator import EruditRssFeedGenerator
@@ -66,9 +65,9 @@ class LatestJournalArticlesFeed(Feed):
         """ Returns the feed's description as a normal Python string. """
         return self.last_issue.volume_title
 
-    def get_object(self, request, journal_code=None):
+    def get_object(self, request, code=None):
         """ Get the journal's latest issues. """
-        self.journal = Journal.objects.get(Q(code=journal_code) | Q(localidentifier=journal_code))
+        self.journal = Journal.objects.get(Q(code=code) | Q(localidentifier=code))
         self.last_issue = self.journal.last_issue
 
     def get_context_data(self, **kwargs):
@@ -76,13 +75,7 @@ class LatestJournalArticlesFeed(Feed):
         obj = context.get('obj')
 
         context['authors'] = obj.authors.all()
-
-        abstracts = obj.erudit_object.abstracts
-        lang = translation.get_language()
-        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
-        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
-        _abstract = abstracts[0]['content'] if len(abstracts) else None
-        context['abstract'] = _abstract_lang or _abstract
+        context['abstract'] = obj.abstract
 
         return context
 
@@ -95,5 +88,5 @@ class LatestJournalArticlesFeed(Feed):
                 item.localidentifier])
 
     def items(self, obj):
-        articles = Article.objects.filter(issue_id=self.last_issue)
-        return sorted(articles, key=lambda a: a.erudit_object.ordseq)
+        return Article.objects.prefetch_related('abstracts').filter(issue_id=self.last_issue) \
+            .order_by('ordseq')

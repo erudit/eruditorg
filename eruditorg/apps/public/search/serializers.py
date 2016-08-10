@@ -26,7 +26,8 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
         }[obj.__class__]
 
     def get_real_object(self, obj):
-        cache_key = 'eruditdocument-real-object-serialized-{}'.format(obj.id)
+        cache_key = 'eruditdocument-real-object-serialized-{}-{}'.format(
+            obj.id, translation.get_language())
         real_object_data = cache.get(cache_key, None)
 
         if real_object_data is None:
@@ -43,9 +44,6 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     authors = serializers.SerializerMethodField()
     abstract = serializers.SerializerMethodField()
-    first_page = serializers.SerializerMethodField()
-    last_page = serializers.SerializerMethodField()
-    subtitle = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
@@ -63,29 +61,17 @@ class ArticleSerializer(serializers.ModelSerializer):
         ]
 
     def get_authors(self, obj):
-        return obj.erudit_object.authors
+        authors = []
+        for author in obj.authors.all():
+            authors.append({
+                'firstname': author.firstname,
+                'lastname': author.lastname,
+                'othername': author.othername,
+            })
+        return authors
 
     def get_abstract(self, obj):
-        abstracts = obj.erudit_object.abstracts
-        lang = translation.get_language()
-        _abstract = list(filter(lambda r: r['lang'] == lang, abstracts))
-
-        abstract = None
-        if len(_abstract):
-            abstract = _abstract[0]['content']
-        elif len(abstracts):
-            abstract = abstracts[0]['content']
-
-        return abstract
-
-    def get_first_page(self, obj):
-        return obj.erudit_object.first_page
-
-    def get_last_page(self, obj):
-        return obj.erudit_object.last_page
-
-    def get_subtitle(self, obj):
-        return obj.erudit_object.subtitle
+        return obj.abstract
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code
@@ -97,7 +83,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.issue.title
 
     def get_issue_number(self, obj):
-        return obj.issue.erudit_object.number
+        return obj.issue.number_for_display
 
     def get_issue_published(self, obj):
         return formats.date_format(obj.issue.date_published, 'YEAR_MONTH_FORMAT')
@@ -127,4 +113,5 @@ class ThesisSerializer(serializers.ModelSerializer):
         return {
             'lastname': obj.author.lastname,
             'firstname': obj.author.firstname,
+            'othername': obj.author.othername,
         }

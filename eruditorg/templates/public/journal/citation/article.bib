@@ -1,10 +1,10 @@
 @article{{ '{' }}{{ article.localidentifier }},
   title="{{ article.title }}",
-  author="{% for author in article.erudit_object.authors %}{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% if not forloop.last %} and {% endif %}{% endif %}{% endfor %}",
+  author="{% for author in article.authors.all %}{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% if not forloop.last %} and {% endif %}{% endif %}{% endfor %}",
   journal="{{ article.issue.journal.name }}",
   {% if article.issue.volume %}volume="{{ article.issue.volume }}",{% endif %}
   {% if article.issue.number %}number="{{ article.issue.number }}",{% endif %}
-  {% if article.erudit_object.first_page and article.erudit_object.last_page %}pages="{{ article.erudit_object.first_page }}--{{ article.erudit_object.last_page }}",{% endif %}
-  year="{{ article.erudit_object.publication_year }}",
-  publisher="{{ article.erudit_object.publisher }}"
+  {% if article.first_page and article.last_page %}pages="{{ article.first_page }}--{{ article.last_page }}",{% endif %}
+  year="{{ article.issue.year }}",
+  publisher="{{ article.publisher.name }}"
 }
