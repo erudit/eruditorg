@@ -4,7 +4,10 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
 from ..models import Article
+from ..models import ArticleAbstract
+from ..models import ArticleSectionTitle
 from ..models import Issue
+from ..models import IssueTheme
 from ..models import Journal
 from ..models import JournalInformation
 
@@ -73,19 +76,50 @@ class JournalAdmin(admin.ModelAdmin):
         formset.save_m2m()
 
 
+class IssueThemeAdmin(admin.ModelAdmin):
+    list_display = ('identifier', 'name', 'subname', )
+    list_display_links = ('identifier', 'name', )
+    raw_id_fields = ('issue', )
+
+
+class IssueThemeInline(admin.TabularInline):
+    extra = 0
+    model = IssueTheme
+
+
 class IssueAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'localidentifier', )
+    inlines = (IssueThemeInline, )
     list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
+    search_fields = ('id', 'localidentifier', )
+
+
+class ArticleAbstractAdmin(admin.ModelAdmin):
+    list_display = ('id', '__str__', 'language', )
+    list_display_links = ('id', '__str__', )
+    raw_id_fields = ('article', )
+
+
+class ArticleAbstractInline(admin.TabularInline):
+    extra = 0
+    model = ArticleAbstract
+
+
+class ArticleSectionTitleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'level', )
+    list_display_links = ('id', 'title', )
+    raw_id_fields = ('article', )
+
+
+class ArticleSectionTitleInline(admin.TabularInline):
+    extra = 0
+    model = ArticleSectionTitle
 
 
 class ArticleAdmin(admin.ModelAdmin):
+    inlines = (ArticleAbstractInline, ArticleSectionTitleInline, )
+    list_display = ('localidentifier', 'title', )
+    raw_id_fields = ('issue', 'publisher', 'authors', )
     search_fields = ('id', 'title', 'localidentifier', )
-    list_display = ('issue', 'localidentifier', 'title', )
-    list_filter = ('issue', )
-
-
-class DisciplineInline(admin.TabularInline):
-    model = Journal.disciplines.through
 
 
 class JournalInformationAdmin(TranslationAdmin):
@@ -94,5 +128,8 @@ class JournalInformationAdmin(TranslationAdmin):
 
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
+admin.site.register(IssueTheme, IssueThemeAdmin)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(ArticleAbstract, ArticleAbstractAdmin)
+admin.site.register(ArticleSectionTitle, ArticleSectionTitleAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)

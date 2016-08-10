@@ -3,6 +3,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
+from ..models import Affiliation
 from ..models import Author
 from ..models import Collection
 from ..models import Discipline
@@ -26,6 +27,7 @@ class DisciplineAdmin(TranslationAdmin):
     pass
 
 
+admin.site.register(Affiliation)
 admin.site.register(Author)
 admin.site.register(Organisation)
 admin.site.register(JournalType)

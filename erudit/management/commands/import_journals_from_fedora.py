@@ -545,6 +545,8 @@ class Command(BaseCommand):
 
             author.affiliations.clear()
             for aff in affiliations:
+                if not aff:
+                    continue
                 affiliation, _ = Affiliation.objects.get_or_create(name=aff)
                 author.affiliations.add(affiliation)
 
