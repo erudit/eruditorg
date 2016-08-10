@@ -30,6 +30,9 @@
     {% elif author.othername %}
       <meta name="citation_author" content="{{ author.othername }}" />
     {% endif %}
+    {% for aff in author.affiliations.all %}
+      <meta name="citation_author_institution" content="{{ aff.name }}" />
+    {% endfor %}
   {% endfor %}
   <meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
   {% for abstract in article.abstracts.all %}
