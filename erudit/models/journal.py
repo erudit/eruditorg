@@ -19,6 +19,7 @@ from PIL import Image
 from requests.exceptions import ConnectionError
 
 from ..abstract_models import FedoraDated
+from ..abstract_models import OAIDated
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import JournalDigitalObject, ArticleDigitalObject
@@ -53,7 +54,7 @@ class JournalType(models.Model):
         return self.name
 
 
-class Journal(FedoraMixin, FedoraDated):
+class Journal(FedoraMixin, FedoraDated, OAIDated):
     """ The main Journal model.
 
     A journal is a collection of issues. It should be associated with a collection: Érudit, Persée,
@@ -122,8 +123,8 @@ class Journal(FedoraMixin, FedoraDated):
         verbose_name=_('Dernière année de publication'), blank=True, null=True)
     """ The last year when an issue of this journal has been published. """
 
-    url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
-    """ URL of the home page of the Journal """
+    external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
+    """ External URL of the home page of the Journal """
 
     # Status of the journal
     active = models.BooleanField(
@@ -252,7 +253,7 @@ class Journal(FedoraMixin, FedoraDated):
         }
 
 
-class Issue(FedoraMixin, FedoraDated):
+class Issue(FedoraMixin, FedoraDated, OAIDated):
     """ An issue of a journal. """
 
     journal = models.ForeignKey(Journal, related_name='issues', verbose_name=_('Revue'))
@@ -298,6 +299,9 @@ class Issue(FedoraMixin, FedoraDated):
 
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
+
+    external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
+    """ External URL of the issue """
 
     copyrights = models.ManyToManyField(
         Copyright, related_name=_('issues'), verbose_name=_("Droits d'auteurs"))
@@ -428,7 +432,7 @@ class IssueTheme(models.Model):
         return self.name
 
 
-class Article(EruditDocument, FedoraMixin, FedoraDated):
+class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     """ An article of an issue. """
 
     issue = models.ForeignKey('Issue', related_name='articles', verbose_name=_('Numéro'))
@@ -468,6 +472,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated):
 
     language = models.CharField(max_length=10, verbose_name=_('Code langue'))
     """ The language code of the article """
+
+    external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
+    """ External URL of the article """
 
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER = 'article', 'compterendu', 'autre'
     TYPE_CHOICES = (
