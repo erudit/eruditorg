@@ -43,7 +43,6 @@ DEFAULT_JOURNAL_PROVIDERS = {
             'collection_code': 'persee',
             'endpoint': 'http://oai.persee.fr/oai',
             'issue_metadataprefix': 'persee_mets',
-            'article_metadataprefix': 'oai_dc',
         },
     ],
 }
