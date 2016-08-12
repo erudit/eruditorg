@@ -93,7 +93,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     """ The former version of the journal """
 
     localidentifier = models.CharField(
-        max_length=50, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
+        max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ Fedora commons identifier. Used to implement the
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
@@ -308,7 +308,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     """ The copyrights of the issue """
 
     localidentifier = models.CharField(
-        max_length=50, unique=True, verbose_name=_('Identifiant Fedora'))
+        max_length=100, unique=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
 
     class Meta:

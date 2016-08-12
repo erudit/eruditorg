@@ -154,7 +154,7 @@ class EruditDocument(PolymorphicModel):
     It can be an article, a thesis... This is a polymorphic model.
     """
     localidentifier = models.CharField(
-        max_length=50, unique=True, verbose_name=_('Identifiant unique'), db_index=True)
+        max_length=100, unique=True, verbose_name=_('Identifiant unique'), db_index=True)
     """ The unique identifier of an Érudit document. """
 
     keywords = TaggableManager(through=KeywordTaggedWhatever)
