@@ -62,7 +62,7 @@ class Command(BaseCommand):
 
             for journal_xml in dom.findall('.//revue'):
                 try:
-                    journal = Journal.legacy.get_by_id(code=journal_xml.get('code'))
+                    journal = Journal.legacy_objects.get_by_id(code=journal_xml.get('code'))
                 except Journal.DoesNotExist:
                     print('Unable to find the following Journal instance: {}'.format(
                         journal_xml.get('code')))

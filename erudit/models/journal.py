@@ -16,16 +16,22 @@ from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 from eulfedora.util import RequestFailed
 from PIL import Image
+from polymorphic.manager import PolymorphicManager
 from requests.exceptions import ConnectionError
 
 from ..abstract_models import FedoraDated
 from ..abstract_models import OAIDated
 from ..conf import settings as erudit_settings
 from ..fedora.modelmixins import FedoraMixin
-from ..fedora.objects import JournalDigitalObject, ArticleDigitalObject
+from ..fedora.objects import ArticleDigitalObject
+from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..fedora.shortcuts import get_cached_datastream_content
-from ..managers import JournalUpcomingManager, LegacyJournalManager
+from ..managers import InternalArticleManager
+from ..managers import InternalIssueManager
+from ..managers import InternalJournalManager
+from ..managers import LegacyJournalManager
+from ..managers import UpcomingJournalManager
 
 from .core import Collection
 from .core import Copyright
@@ -147,8 +153,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     """ The journal that precedes the current journal if any. """
 
     objects = models.Manager()
-    legacy = LegacyJournalManager()
-    upcoming_objects = JournalUpcomingManager()
+    internal_objects = InternalJournalManager()
+    legacy_objects = LegacyJournalManager()
+    upcoming_objects = UpcomingJournalManager()
 
     class Meta:
         verbose_name = _('Revue')
@@ -305,6 +312,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     localidentifier = models.CharField(
         max_length=100, unique=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
+
+    objects = models.Manager()
+    internal_objects = InternalIssueManager()
 
     class Meta:
         verbose_name = _('Numéro')
@@ -494,6 +504,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     copyrights = models.ManyToManyField(
         Copyright, related_name=_('articles'), verbose_name=_("Droits d'auteurs"))
     """ The copyrights of the article """
+
+    objects = PolymorphicManager()
+    internal_objects = InternalArticleManager()
 
     class Meta:
         verbose_name = _('Article')
