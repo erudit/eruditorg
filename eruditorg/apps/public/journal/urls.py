@@ -41,6 +41,16 @@ urlpatterns = [
     url(r'^iderudit/(?P<localid>[\w-]+)/$',
         views.IdEruditArticleRedirectView.as_view(), name='iderudit_article_detail'),
 
+    # Redirect URLs
+    url(_(r'^redirection/'), include([
+        url(_(r'^revue/(?P<localidentifier>[\w-]+)/$'),
+            views.JournalExternalURLRedirectView.as_view(), name='journal_external_redirect'),
+        url(_(r'^numero/(?P<localidentifier>[\w-]+)/$'),
+            views.IssueExternalURLRedirectView.as_view(), name='issue_external_redirect'),
+        url(_(r'^article/(?P<localidentifier>[\w-]+)/$'),
+            views.ArticleExternalURLRedirectView.as_view(), name='article_external_redirect'),
+    ])),
+
     # Google Scholar URLs
     url(_(r'^scholar/'), include([
         url(_(r'^subscribers\.xml$'), views.GoogleScholarSubscribersView.as_view(), name='scholar_subscribers'),  # noqa
