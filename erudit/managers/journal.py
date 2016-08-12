@@ -2,10 +2,11 @@
 
 from django.db import models
 from django.db.models import Q
+from modeltranslation.manager import MultilingualManager
 from polymorphic.manager import PolymorphicManager
 
 
-class InternalJournalManager(models.Manager):
+class InternalJournalManager(MultilingualManager):
     """ Provides methods to work with journals that are not external.
 
     That is journals without external URLs. We make the assumption that instances without external
@@ -17,7 +18,7 @@ class InternalJournalManager(models.Manager):
         return super(InternalJournalManager, self).get_queryset().filter(external_url__isnull=True)
 
 
-class LegacyJournalManager(models.Manager):
+class LegacyJournalManager(MultilingualManager):
     """ Provides utility methods to work with journals in the legacy databases. """
 
     def get_by_id(self, code):
@@ -30,7 +31,7 @@ class LegacyJournalManager(models.Manager):
         return self.get(Q(code=code) | Q(localidentifier=code))
 
 
-class UpcomingJournalManager(models.Manager):
+class UpcomingJournalManager(MultilingualManager):
     """ Provides methods to work with upcoming journals. """
 
     def get_queryset(self):
