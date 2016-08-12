@@ -1,6 +1,15 @@
 Changelog
 #########
 
+0.2.4 - Under development
+-------------------------
+
+* Add OAI datestamp fields to the Journal, Issue and Article models
+* Increase localidentifiers' max length
+* Increase Person's firstname/lastname max lengths
+* Remove unused ``Journal.formely`` field (its equivalent is the ``Journal.previous_journal`` field)
+* Add managers to retrieve Journal/Issue/Article instances without external URLs 
+
 0.2.3
 -----
 
