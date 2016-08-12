@@ -28,11 +28,11 @@ class JournalAdmin(admin.ModelAdmin):
         ('Identification', {
             'fields': (
                 ('collection', ),
-                ('code', 'formerly'),
-                ('localidentifier',),
+                ('code', 'previous_journal', 'next_journal', ),
+                ('localidentifier', ),
                 ('name', ),
-                ('subtitle',),
-                ('issn_print', 'issn_web'),
+                ('subtitle', ),
+                ('issn_print', 'issn_web', ),
             ),
         }),
         (None, {

@@ -87,11 +87,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     subtitle = models.CharField(max_length=255, null=True, blank=True)
     """ The subtitle of the journal """
 
-    formerly = models.ForeignKey(
-        'Journal', null=True, blank=True, verbose_name=_('Anciennement'),
-        help_text=_("Choisir l'ancienne instance de la revue"))
-    """ The former version of the journal """
-
     localidentifier = models.CharField(
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ Fedora commons identifier. Used to implement the
