@@ -38,6 +38,7 @@ setup(
         'django-taggit>=0.20',
         'eulfedora>=1.5.0',
         'lxml>=3.6.0',
+        'nameparser>=0.5.0',
         'Pillow>=3.2.0',
         'Sickle>=0.5',
 

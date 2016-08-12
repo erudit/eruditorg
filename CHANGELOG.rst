@@ -8,7 +8,8 @@ Changelog
 * Increase localidentifiers' max length
 * Increase Person's firstname/lastname max lengths
 * Remove unused ``Journal.formely`` field (its equivalent is the ``Journal.previous_journal`` field)
-* Add managers to retrieve Journal/Issue/Article instances without external URLs 
+* Add managers to retrieve Journal/Issue/Article instances without external URLs
+* Update the ``import_journals_from_oai`` command in order to import issues and articles
 
 0.2.3
 -----
