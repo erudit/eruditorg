@@ -35,8 +35,8 @@ class OAIDated(models.Model):
 
 class Person(models.Model):
     """ Represents a single person. """
-    lastname = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Nom'))
-    firstname = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Prénom'))
+    lastname = models.CharField(max_length=150, null=True, blank=True, verbose_name=_('Nom'))
+    firstname = models.CharField(max_length=150, null=True, blank=True, verbose_name=_('Prénom'))
     othername = models.CharField(max_length=150, null=True, blank=True, verbose_name=_('Autre nom'))
     email = models.EmailField(null=True, blank=True, verbose_name=_('Courriel'))
     organisation = models.ForeignKey(
