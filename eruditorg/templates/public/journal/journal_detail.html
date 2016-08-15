@@ -280,6 +280,11 @@
             </dd>
             {% endif %}
 
+            {% if journal.website_url %}
+              <dt class="mono-space">{% trans "Site web" %}</dt>
+              <dd><a href="{{ journal.website_url }}">{{ journal.website_url }}</a></dd>
+            {% endif %}
+
             {% if journal.previous_journal %}
               <dt class="mono-space">{% trans "Revue précédée de..." %}</dt>
               <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
