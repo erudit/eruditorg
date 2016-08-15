@@ -43,6 +43,7 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     authors = serializers.SerializerMethodField()
     abstract = serializers.SerializerMethodField()
+    collection_name = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
@@ -57,6 +58,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
             'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle', 'processing',
             'authors', 'abstract', 'first_page', 'last_page', 'has_pdf', 'external_url',
+            'collection_name',
         ]
 
     def get_authors(self, obj):
@@ -71,6 +73,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_abstract(self, obj):
         return obj.abstract
+
+    def get_collection_name(self, obj):
+        return obj.issue.journal.collection.name
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code
@@ -101,11 +106,13 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 class ThesisSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField()
+    collection_name = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Thesis
         fields = [
             'title', 'url', 'publication_year', 'description', 'author', 'collection',
+            'collection_name',
         ]
 
     def get_author(self, obj):
@@ -114,3 +121,6 @@ class ThesisSerializer(serializers.ModelSerializer):
             'firstname': obj.author.firstname,
             'othername': obj.author.othername,
         }
+
+    def get_collection_name(self, obj):
+        return obj.collection.name

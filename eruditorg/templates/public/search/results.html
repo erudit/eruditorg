@@ -171,6 +171,7 @@
               </header>
               <footer class="meta">
                 {% if document.real_object.issue_title %}<h5>{{ document.real_object.issue_title }}</h5>{% endif %}
+                <h5><strong>{% trans "Article" %}, {{ document.real_object.collection_name }}</strong></h5>
                 <h5>
                 {% spaceless %}
                   {% blocktrans trimmed with number=document.real_object.issue_number|default:i18n_unknown date=document.real_object.issue_published %}
@@ -283,6 +284,9 @@
                   </h3>
                 {% endif %}
               </header>
+              <footer class="meta">
+                <h5><strong>{% trans "Thèse" %}, {{ document.real_object.collection_name }}</strong></h5>
+              </footer>
               {% if document.real_object.description %}
               <summary class="akkordion" data-akkordion-single="true">
                 <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
