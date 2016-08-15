@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.2.4 - Under development
--------------------------
+0.2.4
+-----
 
 * Add OAI datestamp fields to the Journal, Issue and Article models
 * Increase localidentifiers' max length
