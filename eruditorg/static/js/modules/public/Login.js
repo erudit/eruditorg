@@ -36,8 +36,6 @@ class LoginModal {
    * Register login modal
    */
   modal() {
-    var _ = this;
-
     $(this.modalSelector).magnificPopup({
       mainClass: 'mfp-fade',
       removalDelay: 750,
@@ -47,27 +45,27 @@ class LoginModal {
       ajax: {
         settings: {
           // this enable Django to handle the request as PJAX template
-          beforeSend: function(xhr) {
+          beforeSend: (xhr) => {
             xhr.setRequestHeader('X-PJAX', 'true');
           }
         }
       },
       callbacks: {
         // store current location
-        beforeOpen: function() {
-          _.previousURL = window.location.pathname;
+        beforeOpen: () => {
+          this.previousURL = window.location.pathname;
         },
         // on open, replaceState with current modal window XHR request url
-        open: function() {
-          history.replaceState(null, null, $(this.currItem.el).attr('href'));
+        open: () => {
+          history.replaceState(null, null, $($.magnificPopup.instance.currItem.el).attr('href'));
         },
         // when ajax content is added in DOM
-        ajaxContentAdded : function() {
+        ajaxContentAdded : () => {
           LoginFormValidation();
         },
         // replace state with previous url before modal was open
-        close: function() {
-          history.replaceState(null, null, _.previousURL);
+        close: () => {
+          history.replaceState(null, null, this.previousURL);
         }
       }
     });

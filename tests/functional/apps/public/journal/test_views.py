@@ -315,6 +315,7 @@ class TestArticleDetailView(BaseEruditTestCase):
             'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
             'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
         request = self.factory.get(url)
+        request.saved_citations = []
         # Run
         response = ArticleDetailView.as_view()(
             request, localid=article.localidentifier)

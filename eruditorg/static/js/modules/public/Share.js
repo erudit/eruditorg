@@ -15,9 +15,6 @@ class ShareModal {
   }
 
   init() {
-
-    var _ = this;
-
     this.el.magnificPopup({
       mainClass: 'mfp-fade',
       removalDelay: 750,
@@ -48,41 +45,41 @@ class ShareModal {
         type: 'inline'
       },
       callbacks: {
-        open: function() {
+        open: () => {
 
-          var $modal = $(this.content);
+          var $modal = $($.magnificPopup.instance.content);
 
-          $modal.on('click', '#share-email', function(event){
+          $modal.on('click', '#share-email', (event) => {
             event.preventDefault();
 
-            SharingUtils.email( _.url, _.title );
+            SharingUtils.email( this.url, this.title );
             return false;
           });
 
-          $modal.on('click', '#share-twitter', function(event){
+          $modal.on('click', '#share-twitter', (event) => {
             event.preventDefault();
 
-            SharingUtils.twitter( _.url, _.title );
+            SharingUtils.twitter( this.url, this.title );
             return false;
           });
 
-          $modal.on('click', '#share-facebook', function(event){
+          $modal.on('click', '#share-facebook', (event) => {
             event.preventDefault();
 
-            SharingUtils.facebook( _.url, _.title );
+            SharingUtils.facebook( this.url, this.title );
             return false;
           });
 
-          $modal.on('click', '#share-linkedin', function(event){
+          $modal.on('click', '#share-linkedin', (event) => {
             event.preventDefault();
 
-            SharingUtils.linkedin( _.url, _.title );
+            SharingUtils.linkedin( this.url, this.title );
             return false;
           });
 
         },
-        close: function() {
-          $(this.content).off('click');
+        close: () => {
+          $($.magnificPopup.instance.content).off('click');
         }
       }
     });
