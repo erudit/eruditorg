@@ -1,5 +1,6 @@
 {% load i18n %}
 
+{% if field.field.choices  %}
 <div id="div_id_{{ field.html_name }}" class="form-group akkordion" data-akkordion-single="true">
   <label for="id_{{ field.auto_id }}_0" class="control-label akkordion-title">{{ field.label }} {% if field.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ field.help_text }}"><i class="ion-help-circled"></i></span>{% endif %} <i class="icon ion-ios-arrow-down caret"></i></label>
   <div class="controls akkordion-content {% if field.value %}akkordion-active{% endif %}">
@@ -25,3 +26,4 @@
     {# end accordion wrapper #}
   {% endfor %}
 </div>
+{% endif %}
