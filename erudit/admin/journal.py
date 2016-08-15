@@ -33,6 +33,7 @@ class JournalAdmin(admin.ModelAdmin):
                 ('name', ),
                 ('subtitle', ),
                 ('issn_print', 'issn_web', ),
+                ('website_url', ),
             ),
         }),
         (None, {
@@ -45,12 +46,6 @@ class JournalAdmin(admin.ModelAdmin):
             'fields': (
                 ('open_access', 'paper'),
                 ('issues_per_year', 'first_publication_year', 'last_publication_year'),
-            ),
-        }),
-        ('Coordonnées', {
-            'classes': ('collapse',),
-            'fields': (
-                'url',
             ),
         }),
         ('Membres', {

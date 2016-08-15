@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.2.5 - Under development
+-------------------------
+
+* Add a website URL field to the Journal model
+
 0.2.4
 -----
 

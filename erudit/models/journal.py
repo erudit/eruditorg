@@ -152,6 +152,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         'Journal', verbose_name=_('Revue précédente'), blank=True, null=True, related_name='+')
     """ The journal that precedes the current journal if any. """
 
+    website_url = models.URLField(verbose_name=_('Site web'), blank=True, null=True)
+    """ The website URL of the journal if any. """
+
     objects = models.Manager()
     internal_objects = InternalJournalManager()
     legacy_objects = LegacyJournalManager()
