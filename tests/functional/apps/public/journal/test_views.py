@@ -27,6 +27,8 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
 
 from base.test.factories import UserFactory
+from core.subscription.test.factories import JournalAccessSubscriptionFactory
+from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
@@ -196,6 +198,22 @@ class TestJournalDetailView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['latest_issue'], issue_2)
+
+    def test_embeds_a_boolean_indicating_if_the_user_is_subscribed_to_the_current_journal(self):
+        # Setup
+        now_dt = dt.datetime.now()
+        subscription = JournalAccessSubscriptionFactory.create(user=self.user, journal=self.journal)
+        JournalAccessSubscriptionPeriodFactory.create(
+            subscription=subscription,
+            start=now_dt - dt.timedelta(days=10),
+            end=now_dt + dt.timedelta(days=8))
+        self.client.login(username='david', password='top_secret')
+        url = reverse('public:journal:journal_detail', kwargs={'code': self.journal.code})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['user_has_access_to_journal'])
 
 
 @override_settings(DEBUG=True)
