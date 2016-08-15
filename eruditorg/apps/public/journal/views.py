@@ -9,7 +9,6 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
@@ -28,8 +27,6 @@ from rules.contrib.views import PermissionRequiredMixin
 from base.pdf import generate_pdf
 from base.viewmixins import CacheMixin
 from base.viewmixins import FedoraServiceRequiredMixin
-from core.journal.viewmixins import ArticleAccessCheckMixin
-from core.journal.viewmixins import SingleJournalMixin
 from core.metrics.metric import metric
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
@@ -43,8 +40,10 @@ from erudit.models import Journal
 from erudit.models import Issue
 
 from .forms import JournalListFilterForm
+from .viewmixins import ArticleAccessCheckMixin
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
+from .viewmixins import SingleJournalMixin
 
 
 class JournalListView(ListView):
@@ -148,18 +147,6 @@ class JournalDetailView(SingleJournalMixin, DetailView):
     context_object_name = 'journal'
     model = Journal
     template_name = 'public/journal/journal_detail.html'
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        if self.object.url and not self.object.issues.count():
-            # Tracks the redirection
-            metric(
-                'erudit__journal__journal_redirect',
-                tags={'collection': self.object.collection.code, }, **{'code': self.object.code, })
-            return HttpResponseRedirect(self.object.url)
-
-        context = self.get_context_data(object=self.object)
-        return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super(JournalDetailView, self).get_context_data(**kwargs)
@@ -286,7 +273,7 @@ class IssueDetailView(DetailView):
         if 'pk' in self.kwargs:
             return super(IssueDetailView, self).get_object(queryset)
 
-        qs = Issue.objects.select_related('journal', 'journal__collection') \
+        qs = Issue.internal_objects.select_related('journal', 'journal__collection') \
             .prefetch_related('themes').all()
         return get_object_or_404(qs, localidentifier=self.kwargs['localidentifier'])
 
@@ -592,3 +579,43 @@ class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
         context = super(GoogleScholarSubscriberJournalsView, self).get_context_data(**kwargs)
         context['journals'] = Journal.objects.filter(collection__code='erudit', type__code='S')
         return context
+
+
+class BaseExternalURLRedirectView(RedirectView):
+    model = None
+    permanent = False
+
+    def get_collection(self, obj):
+        raise NotImplementedError
+
+    def get_redirect_url(self, *args, **kwargs):
+        obj = get_object_or_404(
+            self.model.objects.filter(external_url__isnull=False),
+            localidentifier=kwargs['localidentifier'])
+        # Tracks the redirection
+        metric(
+            'erudit__journal__{0}_redirect'.format(self.model._meta.model_name.lower()),
+            tags={'collection': self.get_collection(obj).code, },
+            **{'localidentifier': obj.localidentifier, })
+        return obj.external_url
+
+
+class JournalExternalURLRedirectView(BaseExternalURLRedirectView):
+    model = Journal
+
+    def get_collection(self, obj):
+        return obj.collection
+
+
+class IssueExternalURLRedirectView(BaseExternalURLRedirectView):
+    model = Issue
+
+    def get_collection(self, obj):
+        return obj.journal.collection
+
+
+class ArticleExternalURLRedirectView(BaseExternalURLRedirectView):
+    model = Article
+
+    def get_collection(self, obj):
+        return obj.issue.journal.collection

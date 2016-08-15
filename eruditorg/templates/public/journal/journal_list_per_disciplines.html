@@ -101,7 +101,7 @@
             <article class="col col-md-3 journal-thumbnail">
               <header class="row">
                 <h4 class="col-xs-12">
-                  <a class="" href="{% url 'public:journal:journal_detail' journal.code %}">
+                  <a class="" href="{% if journal.external_url %}{% url 'public:journal:journal_external_redirect' journal.localidentifier %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
                     {{ journal.name }}
                   </a>
                 </h4>

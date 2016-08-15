@@ -123,7 +123,7 @@
             {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
             <div class="row">
               <div class="col-sm-6">
-                <a class="journal-name" href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
+                <a class="journal-name" href="{% if journal.external_url %}{% url 'public:journal:journal_external_redirect' journal.localidentifier %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">{{ journal.name }}</a>
                 <div class="color-dark-grey">
                   {% if journal.subtitle %}
                   <p class="color-dark-grey">{{ journal.subtitle }}</p>

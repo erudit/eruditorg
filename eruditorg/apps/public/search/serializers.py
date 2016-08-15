@@ -2,7 +2,6 @@
 
 from django.conf import settings
 from django.core.cache import cache
-from django.utils import formats
 from django.utils import translation
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
@@ -57,7 +56,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = [
             'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
             'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle', 'processing',
-            'authors', 'abstract', 'first_page', 'last_page', 'has_pdf',
+            'authors', 'abstract', 'first_page', 'last_page', 'has_pdf', 'external_url',
         ]
 
     def get_authors(self, obj):
@@ -86,7 +85,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.issue.number_for_display
 
     def get_issue_published(self, obj):
-        return formats.date_format(obj.issue.date_published, 'YEAR_MONTH_FORMAT')
+        return obj.issue.publication_period or obj.issue.year
 
     def get_issue_volume_slug(self, obj):
         return obj.issue.volume_slug
