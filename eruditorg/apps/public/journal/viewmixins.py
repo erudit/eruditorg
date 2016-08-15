@@ -4,13 +4,12 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
-from ipware.ip import get_ip
 
 from erudit.models import Article
 from erudit.models import Journal
 
 from core.metrics.metric import metric
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.shortcuts import get_valid_subscription_for_journal
 
 
 class SingleJournalMixin(object):
@@ -71,23 +70,10 @@ class ArticleAccessCheckMixin(object):
         if article.open_access or not article.has_movable_limitation:
             return True
 
-        # 2- Is the current user allowed to access the article?
-        if not self.request.user.is_anonymous():
-            individual_subscription = JournalAccessSubscription.objects.filter(
-                Q(full_access=True) |
-                Q(journal=article.issue.journal) |
-                Q(journals__id=article.issue.journal_id),
-                user=self.request.user,
-            ).first()
-            if individual_subscription and individual_subscription.is_ongoing:
-                self.subscription = individual_subscription
-                return True
+        # 2- Gets the valid subscription associated with the user if any.
+        self.subscription = get_valid_subscription_for_journal(self.request, article.issue.journal)
 
-        # 3- Is the current IP address allowed to access the article as an institution?
-        ip = get_ip(self.request)
-
-        subscriptions = JournalAccessSubscription.valid_objects.get_for_ip_address(ip)
-        return any([s.provides_access_to(article) for s in subscriptions])
+        return self.subscription is not None
 
     @cached_property
     def article_access_granted(self):

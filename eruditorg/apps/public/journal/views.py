@@ -24,10 +24,6 @@ from PyPDF2 import PdfFileReader
 from PyPDF2 import PdfFileWriter
 from rules.contrib.views import PermissionRequiredMixin
 
-from base.pdf import generate_pdf
-from base.viewmixins import CacheMixin
-from base.viewmixins import FedoraServiceRequiredMixin
-from core.metrics.metric import metric
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
@@ -38,6 +34,12 @@ from erudit.models import Article
 from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
+
+from base.pdf import generate_pdf
+from base.viewmixins import CacheMixin
+from base.viewmixins import FedoraServiceRequiredMixin
+from core.metrics.metric import metric
+from core.subscription.shortcuts import get_valid_subscription_for_journal
 
 from .forms import JournalListFilterForm
 from .viewmixins import ArticleAccessCheckMixin
@@ -162,6 +164,8 @@ class JournalDetailView(SingleJournalMixin, DetailView):
         # Fetches the published issues and the latest issue associated with the current journal
         context['issues'] = self.object.published_issues.order_by('-date_published')
         context['latest_issue'] = self.object.last_issue
+        context['user_has_access_to_journal'] = self.object.open_access or (
+            get_valid_subscription_for_journal(self.request, self.object) is not None)
 
         return context
 
