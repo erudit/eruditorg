@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import copy
 import json
 import urllib.parse as urlparse
 
@@ -175,12 +176,11 @@ class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
         # The form is valid so we have to retrieve the list of results by using the API view
         # returning EruditDocument documents.
         list_view = EruditDocumentListAPIView.as_view()
-        request = self.request
+        request = copy.copy(self.request)
         request.GET = request.GET.copy()  # A QueryDict is immutable
         request.GET.setdefault('format', 'json')
         results_data = list_view(request).render().content
         results = json.loads(smart_text(results_data))
-
         # Initializes the filters form here in order to display it using choices generated from the
         # aggregations embedded in the results.
         filter_form = self.get_filter_form(api_results=results)
