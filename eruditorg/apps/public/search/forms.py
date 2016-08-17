@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+import re
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -195,6 +196,8 @@ class ResultsFilterForm(forms.Form):
         if aggregations:
             self.fields['filter_years'].choices = self._get_aggregation_choices(
                 aggregations['year'])
+            self.fields['filter_years'].choices = filter(
+                lambda y: re.match(r'^\d+$', y[0]), self.fields['filter_years'].choices)
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
                 aggregations['article_type'])
 
@@ -202,7 +205,10 @@ class ResultsFilterForm(forms.Form):
             language_choices = []
             for v, c in aggregations['language'].items():
                 try:
+                    assert re.match(r'^[a-zA-Z]+$', v)
                     language_name = self.languages_correspondence[v]
+                except AssertionError:  # pragma: no cover
+                    pass
                 except KeyError:
                     language_name = v
                 language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
