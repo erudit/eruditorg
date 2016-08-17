@@ -83,6 +83,15 @@
           {# Filter form #}
           {% if filter_form %}
           <fieldset class="search-filters">
+            <div id="div_id_{{ filter_form.filter_extra_q.html_name }}" class="form-group{% if filter_form.filter_extra_q.errors %} has-error{% endif %}">
+              <label for="id_{{ filter_form.filter_extra_q.auto_id }}_0" class="control-label akkordion-title">{{ filter_form.filter_extra_q.label }}</label>
+              <div class="controls">
+                <button id="id_extra_q_button" type="submit"><span class="ion-search"></span></button>
+                {{ filter_form.filter_extra_q|add_class:'form-control' }}
+                {% for error in filter_form.filter_extra_q.errors %}<p class="error">{{ error }}</p>{% endfor %}
+              </div>
+              <br />
+            </div>
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_years %}
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
             {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_languages %}

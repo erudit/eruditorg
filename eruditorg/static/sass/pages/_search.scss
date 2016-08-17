@@ -123,6 +123,33 @@ section#search-page {
       }
     }
   }
+
+  #div_id_filter_extra_q{
+    position: relative;
+  }
+
+  input#id_filter_extra_q{
+    padding: 8px 12px;
+    border: 1px solid darken($gray-lighter, 25%);
+  }
+  input#id_filter_extra_q::-webkit-input-placeholder { font-style: italic; color: $gray-light; }
+  input#id_filter_extra_q:-moz-placeholder { font-style: italic; color: $gray-light; }
+  input#id_filter_extra_q::-moz-placeholder {  font-style: italic; color: $gray-light; }
+  input#id_filter_extra_q:-ms-input-placeholder { font-style: italic; color: $gray-light; }
+
+  button#id_extra_q_button{
+    position: absolute;
+    padding: 10px;
+    right: 4px;
+    bottom: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: $coral-red;
+
+    &:hover, &:focus{
+      color: lighten($coral-red, 10%);
+    }
+  }
 }
 
 
