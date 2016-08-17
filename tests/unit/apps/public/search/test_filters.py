@@ -281,6 +281,21 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
             filt_2.sqs._qs, '((*:*) AND (Metadonnees:"test")) AND ((Corpus_fac:"Culturel"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
+    def test_can_filter_on_extra_terms(self, mock_get_results):
+        # Setup
+        mock_get_results.side_effect = fake_get_results
+        request = Request(self.factory.get('/', data={
+            'basic_search_term': 'test',
+            'basic_search_field': 'meta',
+            'filter_extra_q': 'foobar',
+        }))
+        filt = EruditDocumentSolrFilter()
+        # Run & check
+        filt.filter(request, EruditDocument.objects.all(), None)
+        self.assertEqual(
+            filt.sqs._qs, '((*:*) AND (Metadonnees:"test")) AND (TexteComplet:"foobar")')
+
+    @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_disciplines(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results

@@ -91,6 +91,11 @@ class EruditDocumentSolrFilter(object):
         if journals:
             filters.update({'journals': journals})
 
+        # Extra Q filter
+        extra_q = query_params.get('filter_extra_q', None)
+        if extra_q:
+            filters.update({'extra_q': extra_q})
+
         # STEP 3: register filters that are related to aggregation results
         # --
 
@@ -152,6 +157,9 @@ class EruditDocumentSolrFilter(object):
         disciplines = filters.get('disciplines', [])
         journals = filters.get('journals', [])
 
+        # Results filters
+        extra_q = filters.get('extra_q', None)
+
         # Aggregation filters
         agg_pub_years = filters.get('agg_pub_years', [])
         agg_languages = filters.get('agg_languages', [])
@@ -208,7 +216,13 @@ class EruditDocumentSolrFilter(object):
         if journals:
             sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
 
-        # STEP 3: applies the aggregation-related filters
+        # STEP 3: applies the results filters
+        # --
+
+        if extra_q:
+            sqs = sqs.filter(all=extra_q)
+
+        # STEP 4: applies the aggregation-related filters
         # --
 
         # Applies the publication year aggregation-filter

@@ -155,6 +155,8 @@ class SearchForm(forms.Form):
 
 
 class ResultsFilterForm(forms.Form):
+    filter_extra_q = forms.CharField(
+        label=_('Dans les résultats'), widget=forms.TextInput, required=False)
     filter_years = forms.MultipleChoiceField(label=_('Années'), required=False)
     filter_article_types = forms.MultipleChoiceField(label=_('Types d\'articles'), required=False)
     filter_languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
@@ -192,6 +194,8 @@ class ResultsFilterForm(forms.Form):
         api_results = kwargs.pop('api_results', {})
         aggregations = api_results.get('aggregations')
         super(ResultsFilterForm, self).__init__(*args, **kwargs)
+
+        self.fields['filter_extra_q'].widget.attrs['placeholder'] = _('Mots-clés')
 
         if aggregations:
             self.fields['filter_years'].choices = self._get_aggregation_choices(
