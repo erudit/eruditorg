@@ -25,6 +25,11 @@ export default {
       });
       ev.preventDefault();
     });
+
+    $('#id_page_size,#id_sort_by').change(function(ev) {
+      let $form = $('form#id-search');
+      window.location.href = '?' + $form.serialize();
+    });
   },
 
   toolbox() {
