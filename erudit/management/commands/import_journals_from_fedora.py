@@ -3,6 +3,7 @@
 import datetime as dt
 import logging
 import re
+import urllib.parse
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -10,6 +11,7 @@ from django.db import transaction
 from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_str
+from eruditarticle.objects import EruditArticle
 from eruditarticle.utils import remove_xml_namespaces
 from eulfedora.util import RequestFailed
 import lxml.etree as et
@@ -382,7 +384,8 @@ class Command(BaseCommand):
         issue.title = issue.erudit_object.theme
         issue.html_title = issue.erudit_object.html_theme
         issue.thematic_issue = issue.erudit_object.theme is not None
-        issue.date_published = issue.erudit_object.publication_date
+        issue.date_published = issue.erudit_object.publication_date \
+            or dt.datetime(int(issue.year), 1, 1)
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
 
@@ -442,7 +445,7 @@ class Command(BaseCommand):
         for article_node in xml_article_nodes:
             try:
                 apid = issue_pid + '.{0}'.format(article_node.get('idproprio'))
-                self._import_article(apid, issue)
+                self._import_article(apid, article_node, issue)
             except Exception as e:
                 self.stdout.write(self.style.ERROR('  [FAIL]'))
                 logger.error(
@@ -456,7 +459,7 @@ class Command(BaseCommand):
 
         return article_count
 
-    def _import_article(self, article_pid, issue):
+    def _import_article(self, article_pid, issue_article_node, issue):
         """ Imports an article using its PID. """
 
         # STEP 1: fetches the full Article fedora object
@@ -484,33 +487,64 @@ class Command(BaseCommand):
             article.issue = issue
             article.fedora_created = fedora_article.created
 
+        article.fedora_updated = fedora_article.modified
+
+        urlnode = issue_article_node.find('.//urlhtml')
+        urlnode = issue_article_node.find('.//urlpdf') if urlnode is None else urlnode
+        is_external_article = False
+        if urlnode is not None:
+            urlnode_parsed = urllib.parse.urlparse(urlnode.text)
+            is_external_article = len(urlnode_parsed.netloc) and \
+                'erudit.org' not in urlnode_parsed.netloc
+
+        if is_external_article:
+            self._import_article_from_issue_node(article, issue_article_node)
+        elif fedora_article.erudit_xsd300.exists:
+            self._import_article_from_eruditarticle_v3(article)
+
+    def _import_article_from_issue_node(self, article, issue_article_node):
+        """ Imports an article using its definition in the issue's summary. """
+        xml = et.tostring(issue_article_node)
+        erudit_object = EruditArticle(xml)
+        self._import_article_from_eruditarticle_v3(article, article_erudit_object=erudit_object)
+
+        urlhtml = issue_article_node.find('.//urlhtml')
+        urlpdf = issue_article_node.find('.//urlpdf')
+        article.external_url = urlhtml.text if urlhtml is not None else urlpdf.text
+        if urlpdf is not None:
+            article.external_pdf_url = urlpdf.text
+        article.save()
+
+    def _import_article_from_eruditarticle_v3(self, article, article_erudit_object=None):
+        """ Imports an article using the EruditArticle v3 specification. """
+        article_erudit_object = article_erudit_object or article.erudit_object
+
         # Set the proper values on the Article instance
-        processing = article.erudit_object.processing
+        processing = article_erudit_object.processing
         processing_mapping = {'minimal': 'M', 'complet': 'C', '': 'M', }
         try:
             article.processing = processing_mapping[processing]
         except KeyError:
             raise ValueError(
                 'Unable to determine the processing type of the article '
-                'with PID {0}'.format(article_pid))
+                'with PID {0}'.format(article.pid))
 
-        article.type = article.erudit_object.article_type
-        article.ordseq = int(article.erudit_object.ordseq)
-        article.doi = article.erudit_object.doi
-        article.first_page = article.erudit_object.first_page
-        article.last_page = article.erudit_object.last_page
-        article.title = article.erudit_object.title
-        article.html_title = article.erudit_object.html_title
-        article.subtitle = article.erudit_object.subtitle
-        article.surtitle = article.erudit_object.section_title
-        article.language = article.erudit_object.lang
+        article.type = article_erudit_object.article_type
+        article.ordseq = int(article_erudit_object.ordseq)
+        article.doi = article_erudit_object.doi
+        article.first_page = article_erudit_object.first_page
+        article.last_page = article_erudit_object.last_page
+        article.title = article_erudit_object.title
+        article.html_title = article_erudit_object.html_title
+        article.subtitle = article_erudit_object.subtitle
+        article.surtitle = article_erudit_object.section_title
+        article.language = article_erudit_object.lang
 
-        publisher_name = article.erudit_object.publisher
+        publisher_name = article_erudit_object.publisher
         if publisher_name:
             publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
             article.publisher = publisher
 
-        article.fedora_updated = fedora_article.modified
         article.clean()
         article.save()
 
@@ -518,7 +552,7 @@ class Command(BaseCommand):
         # --
 
         article.authors.clear()
-        for author_xml in article.erudit_object.findall('liminaire//grauteur//auteur'):
+        for author_xml in article_erudit_object.findall('liminaire//grauteur//auteur'):
             firstname_xml = author_xml.find('.//nompers/prenom')
             firstname = firstname_xml.text if firstname_xml is not None else None
             lastname_xml = author_xml.find('.//nompers/nomfamille')
@@ -556,7 +590,7 @@ class Command(BaseCommand):
         # --
 
         article.abstracts.all().delete()
-        for abstract_dict in article.erudit_object.abstracts:
+        for abstract_dict in article_erudit_object.abstracts:
             abstract = ArticleAbstract(article=article)
             abstract.text = abstract_dict.get('content')
             abstract.language = abstract_dict.get('lang')
@@ -568,7 +602,7 @@ class Command(BaseCommand):
         article.section_titles.all().delete()
         for level in range(1, 4):
             section_titles_dict = getattr(
-                article.erudit_object,
+                article_erudit_object,
                 'section_titles' if level == 1 else 'section_titles_' + str(level))
             if section_titles_dict is None:
                 continue
@@ -586,7 +620,7 @@ class Command(BaseCommand):
         # --
 
         article.keywords.clear()
-        for keywords_dict in article.erudit_object.keywords:
+        for keywords_dict in article_erudit_object.keywords:
             lang = keywords_dict.get('lang')
             for kword in keywords_dict.get('keywords', []):
                 if not kword:
@@ -608,7 +642,7 @@ class Command(BaseCommand):
         # --
 
         article.copyrights.clear()
-        copyrights_dicts = article.erudit_object.droitsauteur or []
+        copyrights_dicts = article_erudit_object.droitsauteur or []
         for copyright_dict in copyrights_dicts:
             copyright_text = copyright_dict.get('text', None)
             copyright_url = copyright_dict.get('url', None)
@@ -625,7 +659,7 @@ class Command(BaseCommand):
                 self.xslt_test_func({}, article)
             except Exception as e:
                 msg = 'The article with PID "{}" cannot be rendered using XSLT: e'.format(
-                    article_pid, e)
+                    article.pid, e)
                 self.stdout.write(self.style.ERROR('      ' + msg))
                 logger.error(msg, exc_info=True)
 
