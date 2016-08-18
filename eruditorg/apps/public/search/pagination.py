@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 
+from functools import reduce
+
 from django.core.paginator import InvalidPage
 from rest_framework.exceptions import NotFound
 from rest_framework.pagination import PageNumberPagination
@@ -59,6 +61,14 @@ class EruditDocumentPagination(PageNumberPagination):
             self.display_page_controls = True
 
         self.request = request
+
+        # This is a specific case in order to remove some sub-strings from the localidentifiers
+        # at hand. This is a bit ugly but we are limited here by the predefined Solr document IDs.
+        # For example the IDs are prefixed by "unb:" for UNB articles... But UNB localidentifiers
+        # should not be stored with "unb:" into the database.
+        drop_keywords = ['unb:', ]
+        localidentifiers = list(map(
+            lambda i: reduce(lambda s, k: s.replace(k, ''), drop_keywords, i), localidentifiers))
 
         queryset = queryset.filter(localidentifier__in=localidentifiers)
         obj_dict = {obj.localidentifier: obj for obj in queryset}
