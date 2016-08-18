@@ -58,7 +58,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
             'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle', 'processing',
             'authors', 'abstract', 'first_page', 'last_page', 'has_pdf', 'external_url',
-            'collection_name',
+            'external_pdf_url', 'collection_name',
         ]
 
     def get_authors(self, obj):
@@ -97,7 +97,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_has_pdf(self, obj):
         try:
-            return obj.fedora_object.pdf.exists
+            return obj.external_pdf_url is not None or obj.fedora_object.pdf.exists
         except (RequestFailed, ConnectionError):  # pragma: no cover
             if settings.DEBUG:
                 return False

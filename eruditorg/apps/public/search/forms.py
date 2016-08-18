@@ -212,7 +212,7 @@ class ResultsFilterForm(forms.Form):
                     assert re.match(r'^[a-zA-Z]+$', v)
                     language_name = self.languages_correspondence[v]
                 except AssertionError:  # pragma: no cover
-                    pass
+                    continue
                 except KeyError:
                     language_name = v
                 language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
