@@ -1,8 +1,8 @@
 Changelog
 #########
 
-0.2.6 - Under development
--------------------------
+0.2.6
+-----
 
 * Add an external_pdf_url field to the Article model
 * Update the ``import_journals_from_fedora`` command to be able to import UNB journals, issues and articles
