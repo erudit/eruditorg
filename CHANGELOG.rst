@@ -1,6 +1,11 @@
 Changelog
 #########
 
+0.2.6 - Under development
+-------------------------
+
+* Add an external_pdf_url field to the Article model
+
 0.2.5
 -----
 
