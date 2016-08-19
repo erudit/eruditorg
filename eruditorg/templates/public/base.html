@@ -121,17 +121,18 @@
           </li>
           <li>
             <a href="#" data-trigger-search-bar class="search"><span class="ion-ios-search-strong"></span></a>
-          </li>
-          <li class="search-form">
-            <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
-              <div class="form-group">
-                <div class="input-group-btn">
-                  <input name="basic_search_term" type="search" class="search-terms form-control" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
-                  <button type="submit" class="btn btn-primary-outlined">{% trans 'Rechercher' %}</button>
-                  <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
+            <div class="search-form">
+              <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
+                <div class="form-group">
+                  <div class="input-group-btn">
+                    <label for="basic_search_term" class="hidden">{% trans "Mots-clés" %}</label>
+                    <input name="basic_search_term" type="search" class="search-terms form-control" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
+                    <button type="submit" class="btn btn-primary-outlined">{% trans 'Rechercher' %}</button>
+                    <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </li>
           {% endblock %}
         </ul>
@@ -265,27 +266,27 @@
             <p>{% trans "Suivez-nous&nbsp;:" %}</p>
             <ul class="social-icons inline">
               <li>
-                <a href="https://www.facebook.com/%C3%89rudit-141469165320/">
+                <a href="https://www.facebook.com/%C3%89rudit-141469165320/" title="Facebook">
                   <span class="ion-social-facebook"></span>
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/eruditorg">
+                <a href="https://twitter.com/eruditorg" title="Twitter">
                   <span class="ion-social-twitter"></span>
                 </a>
               </li>
               <li>
-                <a href="https://github.com/erudit/">
+                <a href="https://github.com/erudit/" title="Github">
                   <span class="ion-social-github"></span>
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/company/3628951">
+                <a href="https://www.linkedin.com/company/3628951" title="LinkedIn">
                   <span class="ion-social-linkedin"></span>
                 </a>
               </li>
               <li>
-                <a href="rss.xml">
+                <a href="rss.xml" title="RSS">
                   <span class="ion-social-rss"></span>
                 </a>
               </li>
