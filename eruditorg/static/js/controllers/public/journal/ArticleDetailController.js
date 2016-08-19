@@ -10,7 +10,7 @@ export default {
   init: function() {
     this.article                = $('#article_detail');
     this.sticky_header_height   = 0;
-    this.toolbox                = new Toolbox( this.article.find('.toolbox') );
+    this.toolbox                = new Toolbox( this.article );
 
     // Initializes the citation list
     this.saved_citations = new SavedCitationList();

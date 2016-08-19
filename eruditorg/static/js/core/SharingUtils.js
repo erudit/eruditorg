@@ -1,5 +1,5 @@
 const SharingUtils = {
-  
+
   facebook : function ( url_to_share, title ) {
 
       var data = { t: title, u: encodeURI(url_to_share) },
@@ -17,7 +17,7 @@ const SharingUtils = {
     window.open(url, 'facebook', opts);
   },
 
-  twitter : function ( url_to_share, title ) {    
+  twitter : function ( url_to_share, title ) {
 
     var data   = { text: title, url: encodeURI(url_to_share) },
         url    = 'https://twitter.com/intent/tweet?' + $.param(data),
@@ -35,7 +35,7 @@ const SharingUtils = {
   },
 
   linkedin : function( url_to_share, title ) {
-    
+
     var data   = { mini: true, title: title, url: encodeURI(url_to_share), summary: '', source: '' },
         url    = 'https://www.linkedin.com/shareArticle?' + $.param(data),
         width  = 575,
@@ -51,9 +51,10 @@ const SharingUtils = {
       window.open(url, 'linkedin', opts);
   },
 
-  email : function( url_to_share, title ) {
-    var data = { subject: title, body: encodeURI(url_to_share) };
-    window.open('mailto:?'+$.param(data), 'mailto');
+  email : function( url_to_share, title, text) {
+    var url = 'mailto:?subject=' + encodeURIComponent(title) +
+      '&body=' + encodeURIComponent(title + '\n' + url_to_share + '\n\n' + (text || '') + '\n');
+    document.location.href = url;
   }
 
 };

@@ -45,9 +45,11 @@ class ArticleSerializer(serializers.ModelSerializer):
     abstract = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
+    journal_name = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
     issue_number = serializers.SerializerMethodField()
+    issue_volume = serializers.SerializerMethodField()
     issue_published = serializers.SerializerMethodField()
     issue_volume_slug = serializers.SerializerMethodField()
     has_pdf = serializers.SerializerMethodField()
@@ -55,10 +57,10 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = erudit_models.Article
         fields = [
-            'journal_code', 'issue_localidentifier', 'issue_title', 'issue_number',
-            'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle', 'processing',
-            'authors', 'abstract', 'first_page', 'last_page', 'has_pdf', 'external_url',
-            'external_pdf_url', 'collection_name',
+            'journal_code', 'journal_name', 'issue_localidentifier', 'issue_title', 'issue_number',
+            'issue_volume', 'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle',
+            'processing', 'authors', 'abstract', 'first_page', 'last_page', 'has_pdf',
+            'external_url', 'external_pdf_url', 'collection_name',
         ]
 
     def get_authors(self, obj):
@@ -80,6 +82,9 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_journal_code(self, obj):
         return obj.issue.journal.code
 
+    def get_journal_name(self, obj):
+        return obj.issue.journal.name
+
     def get_issue_localidentifier(self, obj):
         return obj.issue.localidentifier
 
@@ -88,6 +93,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_issue_number(self, obj):
         return obj.issue.number_for_display
+
+    def get_issue_volume(self, obj):
+        return obj.issue.volume
 
     def get_issue_published(self, obj):
         return obj.issue.publication_period or obj.issue.year
