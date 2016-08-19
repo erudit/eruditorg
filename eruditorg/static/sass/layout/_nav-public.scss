@@ -2,7 +2,6 @@
 * Main Erudit Public site nav
 */
 #main-nav {
-  position: relative;
 
   .navbar-nav {
     @include vertical-centered($position: absolute);
@@ -25,7 +24,7 @@
           height: 4px;
           background-color: #000;
           position: absolute;
-          left: -10px;
+          left: 0;
           bottom: -28px;
           @include transition(all 250ms);
           z-index: 1;
@@ -47,11 +46,12 @@
 
   // main section nav items with drop-downs
   .main-section {
+    padding-left: 8px;
+    padding-right: 8px;
     display: block;
     font-size: 16px;
     line-height: 16px;
     position: relative;
-    padding-right: 25px;
     color: #000;
     @include fw-sans-medium();
 
@@ -67,6 +67,18 @@
       margin-left: 10px;
     }
 
+  }
+
+  .dropdown{
+    .main-section{
+      padding-right: 25px;
+
+      .caret{
+        position: absolute;
+        top: 12px;
+        right: 10px;
+      }
+    }
   }
 
   .dropdown {
@@ -169,6 +181,7 @@
 
   }
 
+/*
   // overrides for mobile nav
   &.collapse.in, &.collapsing {
 
@@ -257,11 +270,12 @@
     }
 
   }
-
+*/
 }
 
 // hamburger menu
 .navbar-toggle {
+  margin-top: 20px;
   width: 60px;
   height: 45px;
   position: relative;
@@ -316,5 +330,121 @@
     }
 
   }
+}
+header.compact{
+  .navbar-toggle{
+    margin-top: 8px;
+  }
+}
 
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  #main-nav{
+    .main-section{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .search-form{
+      input.search-terms{
+        width: 60% !important;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  #main-nav{
+    &.navbar-collapse.in{
+      overflow-y: initial !important;
+    }
+
+    .navbar-nav{
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      transform: none;
+
+      li{
+        margin: 0 !important;
+        display: block;
+
+        &.active {
+          &:after {
+            display: none;
+          }
+        }
+
+        &.dropdown {
+
+          .caret {
+            display: none;
+          }
+
+          > ul {
+            padding: 0 10px;
+            display: block;
+            position: static;
+            border: none;
+            background: none;
+
+            li {
+              border: none;
+            }
+
+            a {
+              padding: 10px 0;
+              display: inline;
+
+              &:hover, &:active, &:focus {
+                background: none;
+                color: #000;
+                text-indent: 0;
+              }
+
+            }
+
+          }
+
+        }
+      }
+    }
+
+    .search {
+      display: none;
+    }
+
+    .search-form {
+      opacity: 1;
+      pointer-events: all;
+      position: static;
+      background: none;
+      top: 0;
+
+      form {
+        margin-top: 20px;
+        padding-top: 20px;
+        padding-left: 6px;
+        padding-right: 20px;
+      }
+
+      input {
+        height: 24px !important;
+        border-color: #000 !important;
+        color: #000 !important;
+      }
+
+      .input-group-btn {
+        text-align: left;
+      }
+
+      .btn {
+        background: #000 !important;
+        border-color: #000 !important;
+        color: #FFF !important;
+      }
+
+    }
+
+  }
 }
