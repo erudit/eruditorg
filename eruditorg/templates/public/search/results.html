@@ -233,10 +233,23 @@
                     </button>
                   </li>
                   <li>
-                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}">
+                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}" data-cite="#id_cite_mla_{{ document.id }}">
                       <span class="erudicon erudicon-tools-share"></span>
                       <span class="tools-label">{% trans "Partager" %}</span>
                     </button>
+                    <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
+                      {% for author in document.real_object.authors %}
+                      {% if author.firstname and author.lastname %}
+                        {{ author.lastname }}, {{ author.firstname }}.
+                      {% elif author.othername %}
+                        {{ author.othername }}.
+                      {% endif %}
+                      {% endfor %}
+                      "{{ document.real_object.title }}."
+                      <em>{{ document.real_object.journal_name }}</em>
+                      {% if document.real_object.issue_volume %}{{ document.real_object.issue_volume }}{% endif %}{% if document.real_object.issue_number %}{{ document.real_object.issue_number }}{% endif %}
+                      ({{ document.real_object.issue_published }}): {{ document.real_object.first_page }}–{{ document.real_object.last_page }}.
+                    </div>
                   </li>
                 </ul>
               </nav>
@@ -325,10 +338,21 @@
                     </button>
                   </li>
                   <li>
-                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ document.real_object.url }}">
+                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ document.real_object.url }}" data-cite="#id_cite_mla_{{ document.id }}">
                       <span class="erudicon erudicon-tools-share"></span>
                       <span class="tools-label">{% trans "Partager" %}</span>
                     </button>
+                    <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
+                      {% with author=document.real_object.author %}
+                      {% if author.firstname and author.lastname %}
+                        {{ author.lastname }}, {{ author.firstname }}.
+                      {% elif author.othername %}
+                        {{ author.othername }}.
+                      {% endif %}
+                      {% endwith %}
+                      "{{ document.real_object.title }}."
+                      {{ document.real_object.collection_name }}, {{ document.real_object.publication_year }}.
+                    </div>
                   </li>
                 </ul>
               </nav>

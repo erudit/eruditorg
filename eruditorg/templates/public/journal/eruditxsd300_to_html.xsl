@@ -247,7 +247,7 @@
 			</button>
 			</li>
 						<li>
-							<button id="tool-share">
+							<button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
 								<span class="erudicon erudicon-tools-share"></span>
 								<span class="tools-label">{% trans "Partager" %}</span>
 							</button>

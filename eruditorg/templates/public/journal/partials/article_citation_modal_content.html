@@ -6,7 +6,7 @@
     <h3>{% trans "Citer cet article" %}</h3>
     <dl class="cite-modal--style-list">
       <dt>MLA</dt>
-      <dd>
+      <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
         {% for author in article.authors.all %}
           {% if author.firstname and author.lastname %}
             {{ author.lastname }}, {{ author.firstname }}.
@@ -21,7 +21,7 @@
       </dd>
 
       <dt>APA</dt>
-      <dd>
+      <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
         {% for author in article.authors.all %}
           {% if author.firstname and author.lastname %}
             {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
@@ -37,7 +37,7 @@
       </dd>
 
       <dt>Chicago</dt>
-      <dd>
+      <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
         {% for author in article.authors.all %}
           {% if author.firstname and author.lastname %}
             {{ author.lastname }}, {{ author.firstname }}.
