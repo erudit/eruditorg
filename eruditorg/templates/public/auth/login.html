@@ -31,13 +31,13 @@
       <div class="form-group">
         <label for="id_username">{% trans "Nom d'utilisateur ou adresse e-mail" %}</label>
         {{ form.username }}
-        <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
+        {% if form.username.errors %}<div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>{% endif %}
       </div>
 
       <div class="form-group">
         <label for="id_password">{% trans "Mot de passe" %}</label>
         {{ form.password }}
-        <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
+        {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
       </div>
 
       <div class="form-group row child-column-fit">
@@ -91,13 +91,13 @@
               <div class="form-group">
                 <label for="id_username">{% trans "Nom d'utilisateur ou adresse e-mail" %}</label>
                 {{ form.username }}
-                <div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>
+                {% if form.username.errors %}<div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>{% endif %}
               </div>
 
               <div class="form-group">
                 <label for="id_password">{% trans "Mot de passe" %}</label>
                 {{ form.password }}
-                <div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>
+                {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
               </div>
 
               <div class="form-group row child-column-fit">
