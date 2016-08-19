@@ -15,7 +15,6 @@ footer#site-footer {
   */
   .newsletter-form {
 
-
     input[type="email"] {
       width: auto;
       border-width: 0;
@@ -100,4 +99,14 @@ footer#site-footer {
 
   }
 
+}
+
+@media (max-width: $screen-xs-max) {
+  footer#site-footer {
+    .newsletter-form {
+      .input-group-btn{
+        white-space: normal !important;
+      }
+    }
+  }
 }

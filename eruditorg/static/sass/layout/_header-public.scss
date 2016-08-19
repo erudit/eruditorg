@@ -126,3 +126,23 @@ body.fixed-header {
   }
 
 }
+
+
+@media (max-width: $screen-xs-max) {
+  #site-header{
+    &.inverted {
+      background-color: white;
+
+      a {
+        color: #000 !important;
+      }
+
+      svg {
+        path, circle {
+          fill: #000;
+        }
+      }
+
+    }
+  }
+}
