@@ -20,28 +20,23 @@ class ShareModal {
       removalDelay: 750,
       closeOnBgClick: true,
       closeBtnInside: true,
+      showCloseBtn: false,
       items: {
-        src: '<section class="share-modal">\
-                <div class="container-fluid">\
-                  <div class="row">\
-                    <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12 col-centered">\
-                      <div class="panel">\
-                        <header class="panel-heading">\
-                          <h2 class="h4 panel-title text-center">Partager cet article</h2>\
-                        </header>\
-                        <div class="panel-body share-modal--body">\
-                          <ul class="unstyled">\
-                            <li><button id="share-email" class="btn btn-primary btn-block"><span class="ion ion-ios-email"></span>Courriel</button></li>\
-                            <li><button id="share-twitter" class="btn btn-primary btn-block"><span class="ion ion-social-twitter"></span>Twitter</button></li>\
-                            <li><button id="share-facebook" class="btn btn-primary btn-block"><span class="ion ion-social-facebook"></span>Facebook</button></li>\
-                            <li><button id="share-linkedin" class="btn btn-primary btn-block"><span class="ion ion-social-linkedin"></span>LinkedIn</button></li>\
-                          </ul>\
-                        </div>\
-                      </div>\
-                    </div>\
+        src: '<div class="modal share-modal col-lg-3 col-md-5 col-sm-6 col-xs-12 col-centered">\
+                <div class="panel">\
+                  <header class="panel-heading">\
+                    <h2 class="h4 panel-title text-center">Partager cet article</h2>\
+                  </header>\
+                  <div class="panel-body share-modal--body">\
+                    <ul class="unstyled">\
+                      <li><button id="share-email" class="btn btn-primary btn-block"><span class="ion ion-ios-email"></span>Courriel</button></li>\
+                      <li><button id="share-twitter" class="btn btn-primary btn-block"><span class="ion ion-social-twitter"></span>Twitter</button></li>\
+                      <li><button id="share-facebook" class="btn btn-primary btn-block"><span class="ion ion-social-facebook"></span>Facebook</button></li>\
+                      <li><button id="share-linkedin" class="btn btn-primary btn-block"><span class="ion ion-social-linkedin"></span>LinkedIn</button></li>\
+                    </ul>\
                   </div>\
                 </div>\
-              </section>',
+              </div>',
         type: 'inline'
       },
       callbacks: {

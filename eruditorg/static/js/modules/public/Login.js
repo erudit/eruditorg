@@ -58,6 +58,7 @@ class LoginModal {
         // on open, replaceState with current modal window XHR request url
         open: () => {
           history.replaceState(null, null, $($.magnificPopup.instance.currItem.el).attr('href'));
+          $('body').addClass('modal-open');
         },
         // when ajax content is added in DOM
         ajaxContentAdded : () => {
@@ -66,6 +67,7 @@ class LoginModal {
         // replace state with previous url before modal was open
         close: () => {
           history.replaceState(null, null, this.previousURL);
+          $('body').removeClass('modal-open');
         }
       }
     });

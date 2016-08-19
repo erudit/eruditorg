@@ -2,6 +2,7 @@
 * Main Erudit Public site nav
 */
 #main-nav {
+  position: relative;
 
   .navbar-nav {
     @include vertical-centered($position: absolute);
