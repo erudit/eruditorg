@@ -16,6 +16,8 @@ urlpatterns = [
         'apps.public.account_actions.urls', namespace='account_actions')),
     url(_(r'^livre/'), include('apps.public.book.urls', namespace='book')),
     url(_(r'^notices/'), include('apps.public.citations.urls', namespace='citations')),
+    url(_(r'^litterature-grise/'),
+        include('apps.public.grey_literature.urls', namespace='grey_literature')),
     url(_(r'^recherche/'), include('apps.public.search.urls', namespace='search')),
     url(_(r'^these/'), include('apps.public.thesis.urls', namespace='thesis')),
 

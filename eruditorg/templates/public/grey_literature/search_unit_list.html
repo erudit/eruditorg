@@ -1,0 +1,89 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Littérature grise" %}{% endblock page_title %}
+
+{% block body_id %}id_search_unit_list{% endblock body_id %}
+
+{% block breadcrumb %}
+  {{ block.super }} / <a href="{% url 'public:grey_literature:search_unit_list' %}">{% trans "Littérature grise" %}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div id="grey_literature_home">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <header class="page-header-main">
+          <h1>{% trans "Littérature grise" %}</h1>
+        </header>
+        <div class="page-intro">
+        {% spaceless %}
+        {% blocktrans trimmed %}
+          Cette zone offre des services de dépôt, de conservation à long terme et de diffusion de documents de recherche
+          tels que des rapports et notes de recherche, des conférences, des pré-publications, des communications, des
+          données brutes ou tout autre type de document que les auteurs-chercheurs désirent déposer et diffuser. Tout centre,
+          chaire ou institut de recherche peut faire une demande de service auprès de l’équipe d’Érudit.
+          <a href="mailto:info@erudit.org">info@erudit.org</a>
+        {% endblocktrans %}
+        {% endspaceless %}
+        </div>
+      </div>
+      <aside class="col-md-offset-1 col-md-3">
+        <h2>Statistiques</h2>
+        <p>
+        {% blocktrans trimmed count counter=global_search_units_count %}
+          {{ counter }} unité de recherche
+        {% plural %}
+          {{ counter }} unités de recherche
+        {% endblocktrans %}
+        </p>
+        <p>
+        {% blocktrans trimmed count counter=global_documents_count %}
+          {{ counter }} document
+        {% plural %}
+          {{ counter }} documents
+        {% endblocktrans %}
+        </p>
+        <p>
+        {% blocktrans trimmed count counter=global_authors_count %}
+          {{ counter }} auteur
+        {% plural %}
+          {{ counter }} auteurs
+        {% endblocktrans %}
+        </p>
+      </aside>
+    </div>
+
+    <div class="main-content">
+      <header class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2>{% trans "Par unité de recherche" %}</h2>
+            </div>
+          </div>
+        </div>
+      </header>
+      <ul class="search-units row">
+      {% for search_unit in search_units %}
+        <li class="search-unit col-md-3">
+          <a href="#">
+            <span class="name"><strong>{{ search_unit.name }}</strong></span>
+            {% if search_unit.subname %}<span class="subname">{{ search_unit.subname }}</span>{% endif %}
+            <span class="documents-count">
+            {% blocktrans trimmed count counter=search_unit.documents_count %}
+              {{ counter }} document
+            {% plural %}
+              {{ counter }} documents
+            {% endblocktrans %}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

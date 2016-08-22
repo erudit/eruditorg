@@ -64,7 +64,7 @@
                 <a href="#">{% trans "Livres et actes" %}</a>
               </li>
               <li>
-                <a href="#">{% trans "Littérature grise" %}</a>
+                <a href="{% url 'public:grey_literature:search_unit_list' %}">{% trans "Littérature grise" %}</a>
               </li>
             </ul>
           </li>
@@ -223,7 +223,7 @@
               <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
               <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
               <li class="disabled">{% trans "Livres & actes" %}</li>
-              <li class="disabled">{% trans "Littérature grise" %}</li>
+              <li><a href="{% url 'public:grey_literature:search_unit_list' %}">{% trans "Littérature grise" %}</a></li>
             </ul>
           </div>
 

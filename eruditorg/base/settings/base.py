@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'erudit',
     'apps.public.book',
     'apps.public.citations',
+    'apps.public.grey_literature',
     'apps.public.journal',
     'apps.public.search',
     'apps.public.thesis',

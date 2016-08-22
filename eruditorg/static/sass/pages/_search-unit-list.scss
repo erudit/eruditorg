@@ -1,0 +1,47 @@
+body#id_search_unit_list{
+  ul.search-units{
+    list-style: none;
+
+    li{
+      margin-bottom: 30px;
+      padding-top: 0;
+      padding-bottom: 10px;
+
+      &:hover, &:focus{
+        background-color: $brand-primary;
+
+        a{
+          border-top: 2px solid $brand-primary;
+
+          .name, .subname, .documents-count{
+            color: $white;
+          }
+        }
+      }
+
+
+      a{
+        padding-top: 10px;
+        border-top: 2px solid $gray-light;
+        display: block;
+
+        &:hover, &:focus{
+          background-color: $brand-primary;
+        }
+
+        .name {
+          margin-bottom: 2px;
+          display: block;
+          font-size: 18px;
+        }
+
+        .subname{
+          margin-bottom: 10px;
+          min-height: 70px;
+          display: block;
+          color: $gray;
+        }
+      }
+    }
+  }
+}
