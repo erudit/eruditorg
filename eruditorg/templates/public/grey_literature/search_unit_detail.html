@@ -1,0 +1,85 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{{ search_unit.name }}{% endblock page_title %}
+
+{% block body_id %}id_search_unit_detail{% endblock body_id %}
+
+{% block breadcrumb %}
+  {{ block.super }}
+  / <a href="{% url 'public:grey_literature:search_unit_list' %}">{% trans "Littérature grise" %}</a>
+  / <a href="{% url 'public:grey_literature:search_unit_detail' search_unit.code %}">{{ search_unit.name }}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div id="search_unit">
+  <div class="container">
+    <header class="page-header-main">
+      <div class="row">
+        <div class="col-md-8">
+          <h1>{{ search_unit.name }}{% if search_unit.subname %}<span class="subname">{{ search_unit.subname }}</span>{% endif %}</h1>
+          {% if search_unit.description %}
+          <h2>{% trans "À propos" %}</h2>
+          {{ search_unit.description|linebreaks }}
+          {% endif %}
+          {% if search_unit.website_url %}<br /><p>{% blocktrans trimmed with website_url=search_unit.website_url %}Site Web : <a href="{{ website_url }}" target="_blank">{{ website_url }}</a>{% endblocktrans %}</p>{% endif %}
+        </div>
+        <aside class="col-md-offset-1 col-md-3">
+          {% if search_unit.logo %}
+          <p class="text-center"><img src="{{ search_unit.logo.url }}" alt="{{ search_unit.name }}" /></p><br />
+          {% endif %}
+          <h2>{% trans "Nouveautés" %}</h2>
+          <ul class="new-documents">
+          {% for document in new_documents %}
+            <li><a href="#">{{ document.title }}</a></li>
+          {% endfor %}
+          </ul>
+          <h2>{% trans "Fiche" %}</h2>
+          <p class="mono-space">{% trans "Statistiques" %}</p>
+          <p class="sheet-item">
+          {% blocktrans trimmed count counter=collections_count %}
+            {{ counter }} collection
+          {% plural %}
+            {{ counter }} collections
+          {% endblocktrans %}
+          </p>
+          <p class="sheet-item">
+          {% blocktrans trimmed count counter=documents_count %}
+            {{ counter }} document
+          {% plural %}
+            {{ counter }} documents
+          {% endblocktrans %}
+          </p>
+          <p class="sheet-item">
+          {% blocktrans trimmed count counter=authors_count %}
+            {{ counter }} auteur
+          {% plural %}
+            {{ counter }} auteurs
+          {% endblocktrans %}
+          </p>
+          <br />
+          {% if search_unit.publication_period %}
+          <p class="mono-space">{% trans "Période de publication" %}</p>
+          <p class="sheet-item">{{ search_unit.publication_period }}</p>
+          {% endif %}
+        </aside>
+      </div>
+    </header>
+  </div>
+  <div class="glory">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 collections">
+          <h2>{% trans "Collections" %}</h2>
+          {% for collection in collections %}
+            <div class="collection">
+              <a href="#">{{ collection.title }} [{{ collection.documents_count }}]</a>
+              {% if collection.description %}<p>{{ collection.description }}</p>{% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

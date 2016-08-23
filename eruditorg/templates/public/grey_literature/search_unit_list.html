@@ -30,7 +30,7 @@
         </div>
       </div>
       <aside class="col-md-offset-1 col-md-3">
-        <h2>Statistiques</h2>
+        <h2>{% trans "Statistiques" %}</h2>
         <p>
         {% blocktrans trimmed count counter=global_search_units_count %}
           {{ counter }} unité de recherche
@@ -68,7 +68,7 @@
       <ul class="search-units row">
       {% for search_unit in search_units %}
         <li class="search-unit col-md-3">
-          <a href="#">
+          <a href="{% url 'public:grey_literature:search_unit_detail' search_unit.code %}">
             <span class="name"><strong>{{ search_unit.name }}</strong></span>
             {% if search_unit.subname %}<span class="subname">{{ search_unit.subname }}</span>{% endif %}
             <span class="documents-count">

@@ -10,6 +10,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.SearchUnitListView.as_view(), name='search_unit_list'),
+    url(_(r'^(?P<code>[\w-]+)/$'), views.SearchUnitDetailView.as_view(),
+        name='search_unit_detail'),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),

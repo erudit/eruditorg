@@ -1,4 +1,11 @@
 body#id_search_unit_list{
+  aside{
+    h2{
+      padding-bottom: 4px;
+      border-bottom: 2px solid lighten($gray-light, 20%);
+    }
+  }
+
   ul.search-units{
     list-style: none;
 
