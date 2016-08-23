@@ -1,0 +1,85 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{{ collection.title }}{% endblock page_title %}
+
+{% block body_id %}id_search_unit_collection_detail{% endblock body_id %}
+{% block data_controller %}public:grey_literature:collection_detail{% endblock data_controller %}
+
+{% block breadcrumb %}
+  {{ block.super }}
+  / <a href="{% url 'public:grey_literature:search_unit_list' %}">{% trans "Littérature grise" %}</a>
+  / <a href="{% url 'public:grey_literature:search_unit_detail' collection.search_unit.code %}">{{ collection.search_unit.name }}</a>
+  / <a href="{% url 'public:grey_literature:collection_detail' collection.search_unit.code collection.localidentifier %}">{{ collection.title }}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div id="search_unit_collection">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <header class="page-header-main">
+          <h1>{{ collection.title }}</h1>
+        </header>
+        <h3>{% blocktrans trimmed with documents_count=documents|length %}Documents ({{ documents_count }}){% endblocktrans %}</h3>
+        <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
+        <ul class="documents">
+        {% for document in documents %}
+          <li class="document">
+            <div class="pull-right">
+              <a href="#" class="document-extend"><i class="ion-plus-round"></i></a>
+              <a href="#" class="document-reduce"><i class="ion-minus-round"></i></a>
+            </div>
+            <div class="author-name">{% for author in document.authors.all %}{{ author.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}</div>
+            <a href="#" class="document-link">&laquo;&nbsp;{{ document.title }}&nbsp;&raquo;</a>
+            <div class="description">
+              {% if document.abstract %}{{ document.abstract }}{% else %}{% trans "Aucune description." %}{% endif %}
+              <br /><br />
+              <div class="keywords-title"><strong>{% trans "Mots-clés :" %}</strong></div>
+              <div class="keywords">{% for kw in document.keywords.all %}{{ kw.name }}{% if not forloop.last %}, {% endif %}{% empty %}{% trans "Aucun mot-clé" %}{% endfor %}</div>
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+        <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
+      </div>
+      <aside class="col-md-offset-1 col-md-3">
+        {% if search_unit.logo %}
+        <p class="text-center"><img src="{{ search_unit.logo.url }}" alt="{{ search_unit.name }}" /></p><br />
+        {% endif %}
+        <h2>{% trans "Fiche de l'unité" %}</h2>
+        <p class="mono-space">{% trans "Unité de recherche" %}</p>
+        <p class="sheet-item">{{ search_unit.name }}{% if search_unit.subname %} &ndash; {{ search_unit.subname }}{% endif %}</p>
+        <br />
+        <p class="mono-space">{% trans "Statistiques" %}</p>
+        <p class="sheet-item">
+        {% blocktrans trimmed count counter=collections_count %}
+          {{ counter }} collection
+        {% plural %}
+          {{ counter }} collections
+        {% endblocktrans %}
+        </p>
+        <p class="sheet-item">
+        {% blocktrans trimmed count counter=documents_count %}
+          {{ counter }} document
+        {% plural %}
+          {{ counter }} documents
+        {% endblocktrans %}
+        </p>
+        <p class="sheet-item">
+        {% blocktrans trimmed count counter=authors_count %}
+          {{ counter }} auteur
+        {% plural %}
+          {{ counter }} auteurs
+        {% endblocktrans %}
+        </p>
+        <br />
+        {% if search_unit.publication_period %}
+        <p class="mono-space">{% trans "Période de publication" %}</p>
+        <p class="sheet-item">{{ search_unit.publication_period }}</p>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+</div>
+{% endblock content %}

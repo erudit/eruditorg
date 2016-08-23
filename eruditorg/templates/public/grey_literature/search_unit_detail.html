@@ -66,14 +66,15 @@
       </div>
     </header>
   </div>
+  {% if collections_count %}
   <div class="glory">
     <div class="container">
       <div class="row">
         <div class="col-md-12 collections">
-          <h2>{% trans "Collections" %}</h2>
+          <h2>{% blocktrans trimmed with collections_count=collections_count %}Collections ({{ collections_count }}){% endblocktrans %}</h2>
           {% for collection in collections %}
             <div class="collection">
-              <a href="#">{{ collection.title }} [{{ collection.documents_count }}]</a>
+              <a href="{% url 'public:grey_literature:collection_detail' search_unit.code collection.localidentifier %}">{{ collection.title }} [{{ collection.documents_count }}]</a>
               {% if collection.description %}<p>{{ collection.description }}</p>{% endif %}
             </div>
           {% endfor %}
@@ -81,5 +82,6 @@
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 {% endblock content %}

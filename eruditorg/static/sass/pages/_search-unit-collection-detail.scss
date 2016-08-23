@@ -1,0 +1,47 @@
+body#id_search_unit_collection_detail{
+  #search_unit_collection{
+    aside{
+      h2{
+        padding-bottom: 4px;
+        border-bottom: 2px solid lighten($gray-light, 20%);
+      }
+
+      p.sheet-item{
+        margin-bottom: 2px;
+      }
+    }
+
+    h3{
+      padding: 8px 0;
+      border-bottom: 2px solid $gray;
+    }
+
+    ul.documents{
+      li.document{
+        .document-extend, .document-reduce{
+          font-size: 24px;
+          color: $coral-red;
+        }
+        .document-reduce{
+          display: none;
+        }
+
+        a.document-link{
+          font-weight: bold;
+
+          &:hover, &:focus{
+            text-decoration: none;
+          }
+        }
+
+        .description{
+          margin-top: 6px;
+          padding: 10px;
+          display: none;
+          background: $gray-lighter;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
