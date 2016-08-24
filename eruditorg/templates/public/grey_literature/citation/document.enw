@@ -1,0 +1,4 @@
+%0 Generic
+%T {{ document.title }}
+%A {% with author=document.authors.all.0 %}{% if author and author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% else %}{{ author.full_name }}{% endif %}{% endwith %}
+%D {{ document.publication_year }}

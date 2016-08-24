@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 
 from erudit.models import Author
@@ -29,3 +30,13 @@ class SearchUnitStatsMixin(SearchUnitDetailMixin):
             searchunitdocument__collection__search_unit_id=search_unit.id).distinct().count()
 
         return context
+
+
+class SearchUnitDocumentDetailMixin(object):
+    context_object_name = 'document'
+
+    def get_object(self, queryset=None):
+        queryset = queryset or self.model.objects.all()
+        queryset = queryset.select_related('collection', 'collection__search_unit') \
+            .prefetch_related('attachments')
+        return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])

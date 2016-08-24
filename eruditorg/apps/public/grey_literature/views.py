@@ -10,6 +10,7 @@ from erudit.models import SearchUnit
 from erudit.models import SearchUnitCollection
 from erudit.models import SearchUnitDocument
 
+from .viewmixins import SearchUnitDocumentDetailMixin
 from .viewmixins import SearchUnitStatsMixin
 
 
@@ -76,8 +77,7 @@ class SearchUnitCollectionDetailView(SearchUnitStatsMixin, ListView):
         return self.collection.search_unit
 
 
-class SearchUnitDocumentDetailView(SearchUnitStatsMixin, DetailView):
-    context_object_name = 'document'
+class SearchUnitDocumentDetailView(SearchUnitStatsMixin, SearchUnitDocumentDetailMixin, DetailView):
     model = SearchUnitDocument
     template_name = 'public/grey_literature/document_detail.html'
 
@@ -86,11 +86,26 @@ class SearchUnitDocumentDetailView(SearchUnitStatsMixin, DetailView):
         context['search_unit'] = self.search_unit
         return context
 
-    def get_object(self, queryset=None):
-        queryset = queryset or self.model.objects.all()
-        queryset = queryset.select_related('collection', 'collection__search_unit') \
-            .prefetch_related('attachments')
-        return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])
-
     def get_search_unit(self):
         return self.object.collection.search_unit
+
+
+class SearchUnitDocumentEnwCitationView(SearchUnitDocumentDetailMixin, DetailView):
+    """ Returns the enw file of a specific document. """
+    content_type = 'application/x-endnote-refer'
+    model = SearchUnitDocument
+    template_name = 'public/grey_literature/citation/document.enw'
+
+
+class SearchUnitDocumentRisCitationView(SearchUnitDocumentDetailMixin, DetailView):
+    """ Returns the ris file of a specific document. """
+    content_type = 'application/x-research-info-systems'
+    model = SearchUnitDocument
+    template_name = 'public/grey_literature/citation/document.ris'
+
+
+class SearchUnitDocumentBibCitationView(SearchUnitDocumentDetailMixin, DetailView):
+    """ Returns the bib file of a specific document. """
+    content_type = 'application/x-bibtex'
+    model = SearchUnitDocument
+    template_name = 'public/grey_literature/citation/document.bib'

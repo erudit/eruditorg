@@ -1,0 +1,9 @@
+TY  - GEN
+T1  - {{ document.title }}
+{% for author in document.authors.all %}{% if author.firstname and author.lastname %}
+A1  - {{ author.lastname }}, {{ author.firstname }}
+{% else %}
+A1  - {{ author.full_name }}
+{% endif %}{% endfor %}
+Y1  - {{ document.publication_year }}
+ER  -

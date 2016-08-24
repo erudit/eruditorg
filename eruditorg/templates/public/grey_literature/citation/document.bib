@@ -1,0 +1,5 @@
+@misc{{ '{' }}{{ document.localidentifier }},
+  title="{{ document.title }}",
+  author="{% for author in document.authors.all %}{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% else %}{{ author.full_name }}{% endif %}{% if not forloop.last %} and {% endif %}{% endfor %}",
+  year="{{ document.publication_year }}"
+}
