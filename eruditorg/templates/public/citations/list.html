@@ -72,7 +72,7 @@
               </div>
               <div class="document-checkbox-wrapper"><input type="checkbox"></div>
               <div class="document-title"><a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}">{{ document.title }}</a></div>
-              <div class="document-authors-publication-year text-muted">{% for a in document.authors.all %}{{ a.lastname }}{% if a.firstname %}, {{ a.firstname }}{% if not forloop.last %} ; {% else %}&nbsp;{% endif %}{% endif %}{% endfor %}({{ document.issue.year }})</div>
+              <div class="document-authors-publication-year text-muted">{% for a in document.authors.all %}{{ a.full_name }}{% if not forloop.last %} ; {% else %}&nbsp;{% endif %}{% endfor %}({{ document.issue.year }})</div>
               <div class="hidden">
                 <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                   <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
@@ -100,6 +100,47 @@
                 </div>
               </div>
             </li>
+            {% elif document.polymorphic_ctype_id == search_unit_document_ct.id %}
+            <li data-document-id="{{ document.id }}" data-document-type="search-unit-document">
+              <div class="pull-right">
+                <div class="tool-links">
+                  {% spaceless %}
+                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="erudicon erudicon-tools-save"></span></a>
+                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
+                  <a href="#" title="{% trans 'Télécharger' %}"><span class="erudicon erudicon-tools-pdf"></span></a>
+                  {% endspaceless %}
+                </div>
+              </div>
+              <div class="document-checkbox-wrapper"><input type="checkbox"></div>
+              <div class="document-title"><a href="{% url 'public:grey_literature:document_detail' document.collection.search_unit.code document.collection.localidentifier document.localidentifier %}">{{ document.title }}</a></div>
+              <div class="document-authors-publication-year text-muted">{% for a in document.authors.all %}{{ a.full_name }}{% if not forloop.last %} ; {% else %}&nbsp;{% endif %}{% endfor %}({{ document.publication_year }})</div>
+              <div class="hidden">
+                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                  <div class="modal-body">
+                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                    <p>
+                      <a href="#" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.ENW</span>
+                      </a>
+                      EndNote, Zotero
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.RIS</span>
+                      </a>
+                      Papers, Reference Manager, RefWorks, Zotero
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.BIB</span>
+                      </a>
+                      BibTeX, JabRef, Mendeley, Zotero
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
             {% elif document.polymorphic_ctype_id == thesis_ct.id %}
             <li data-document-id="{{ document.id }}" data-document-type="thesis">
               <div class="pull-right">
@@ -113,7 +154,7 @@
               </div>
               <div class="document-checkbox-wrapper"><input type="checkbox"></div>
               <div class="document-title"><a href="{{ document.url }}">{{ document.title }}</a></div>
-              <div class="document-authors-publication-year text-muted">{{ document.author.lastname }}{% if document.author.firstname %}, {{ document.author.firstname }}{% endif %}&nbsp;({{ document.publication_year }})</div>
+              <div class="document-authors-publication-year text-muted">{{ document.author.full_name }}&nbsp;({{ document.publication_year }})</div>
               <div class="hidden">
                 <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                   <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
@@ -178,6 +219,7 @@
           <h3>{% trans "Mon contenu" %}</h3>
           {% if scientific_articles_count %}<p data-scientific-article-count="{{ scientific_articles_count }}">{% blocktrans count counter=scientific_articles_count %}{{ counter }} article savant{% plural %}{{ counter }} articles savants{% endblocktrans %}</p>{% endif %}
           {% if cultural_articles_count %}<p data-cultural-article-count="{{ cultural_articles_count }}">{% blocktrans count counter=cultural_articles_count %}{{ counter }} article culturel{% plural %}{{ counter }} articles culturels{% endblocktrans %}</p>{% endif %}
+          {% if search_unit_documents_count %}<p data-search-unit-document-count="{{ search_unit_documents_count }}">{% blocktrans count counter=search_unit_documents_count %}{{ counter }} document (littérature grise){% plural %}{{ counter }} documents (littérature grise){% endblocktrans %}</p>{% endif %}
           {% if theses_count %}<p data-thesis-count="{{ theses_count }}">{% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses{% endblocktrans %}</p>{% endif %}
         </div>
       </div>

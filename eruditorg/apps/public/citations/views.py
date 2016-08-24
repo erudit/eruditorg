@@ -13,6 +13,7 @@ from django.views.generic import View
 
 from erudit.models import Article
 from erudit.models import EruditDocument
+from erudit.models import SearchUnitDocument
 from erudit.models import Thesis
 
 from base.http import JsonAckResponse
@@ -43,7 +44,7 @@ class SavedCitationListView(ListView):
             for doc in objects_list:
                 if isinstance(doc, Thesis):
                     author_list.append((doc.author.lastname or doc.author.firstname, doc))
-                elif isinstance(doc, Article):
+                elif isinstance(doc, Article) or isinstance(doc, SearchUnitDocument):
                     authors = doc.authors.all()
                     authors = [None] if not authors else authors
                     author_list.extend(
@@ -68,6 +69,7 @@ class SavedCitationListView(ListView):
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
         context['article_ct'] = ContentType.objects.get_for_model(Article)
+        context['search_unit_document_ct'] = ContentType.objects.get_for_model(SearchUnitDocument)
         context['thesis_ct'] = ContentType.objects.get_for_model(Thesis)
 
         # Computes the number of scientific articles, theses, ...
@@ -75,6 +77,7 @@ class SavedCitationListView(ListView):
             .filter(issue__journal__type__code='S').count()
         context['cultural_articles_count'] = self.article_qs \
             .filter(issue__journal__type__code='C').count()
+        context['search_unit_documents_count'] = self.search_unit_document_qs.count()
         context['theses_count'] = self.thesis_qs.count()
 
         return context
@@ -85,18 +88,24 @@ class SavedCitationListView(ListView):
 
         # Stores some querysets associated with each type of document for further use.
         article_ids = qs.instance_of(Article).values_list('id', flat=True)
+        search_unit_document_ids = qs.instance_of(SearchUnitDocument).values_list('id', flat=True)
         thesis_ids = qs.instance_of(Thesis).values_list('id', flat=True)
         self.article_qs = Article.objects.filter(id__in=article_ids) \
             .select_related('issue', 'issue__journal', 'issue__journal__type') \
+            .prefetch_related('authors')
+        self.search_unit_document_qs = SearchUnitDocument.objects \
+            .filter(id__in=search_unit_document_ids) \
+            .select_related('collection', 'collection__search_unit') \
             .prefetch_related('authors')
         self.thesis_qs = Thesis.objects.filter(id__in=thesis_ids) \
             .select_related('collection', 'author')
 
         articles = list(self.article_qs)
         [setattr(a, 'publication_year', a.issue.year) for a in articles]
+        search_unit_documents = list(self.search_unit_document_qs)
         theses = list(self.thesis_qs)
 
-        objects_list = articles + theses
+        objects_list = articles + theses + search_unit_documents
         return self.apply_sorting(objects_list)
 
     def get_sort_by(self):

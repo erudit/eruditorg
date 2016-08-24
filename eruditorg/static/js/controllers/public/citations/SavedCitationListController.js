@@ -32,6 +32,8 @@ export default {
           fmts = ngettext('%(count)s article savant', '%(count)s articles savants', gettextContext.count);
         } else if (documentType === 'cultural-article') {
           fmts = ngettext('%(count)s article culturel', '%(count)s articles culturels', gettextContext.count);
+        } else if (documentType === 'search-unit-document') {
+          fmts = ngettext('%(count)s document (littérature grise)', '%(count)s documents (littérature grise)', gettextContext.count);
         } else if (documentType === 'thesis') {
           fmts = ngettext('%(count)s thèse', '%(count)s thèses', gettextContext.count);
         }
