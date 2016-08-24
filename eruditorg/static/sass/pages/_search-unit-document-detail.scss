@@ -1,0 +1,40 @@
+body#id_search_unit_document_detail{
+  #document{
+    aside{
+      h2{
+        padding-bottom: 4px;
+        border-bottom: 2px solid lighten($gray-light, 20%);
+      }
+
+      p.sheet-item{
+        margin-bottom: 2px;
+      }
+    }
+
+    h3{
+      margin-bottom: 0;
+      padding: 8px 0;
+      border-bottom: 2px solid $gray;
+    }
+
+    .document-data-wrapper{
+      .row{
+        margin: 0;
+        padding: 20px 0;
+        border-bottom: 2px solid lighten($gray-light, 20%);
+
+        &:last-child{
+          border-bottom: 2px solid $gray;
+        }
+
+        p{
+          margin: 0;
+        }
+
+        .data-title{
+          text-align: right;
+        }
+      }
+    }
+  }
+}

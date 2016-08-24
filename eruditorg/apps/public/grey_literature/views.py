@@ -34,8 +34,9 @@ class SearchUnitDetailView(SearchUnitStatsMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchUnitDetailView, self).get_context_data(**kwargs)
-        context['new_documents'] = SearchUnitDocument.objects.filter(
-            collection__search_unit_id=self.object.id).order_by('-publication_year')[:3]
+        context['new_documents'] = SearchUnitDocument.objects \
+            .select_related('collection', 'collection__search_unit') \
+            .filter(collection__search_unit_id=self.object.id).order_by('-publication_year')[:3]
         context['collections'] = SearchUnitCollection.objects.filter(search_unit_id=self.object.id)
         return context
 
@@ -73,3 +74,23 @@ class SearchUnitCollectionDetailView(SearchUnitStatsMixin, ListView):
 
     def get_search_unit(self):
         return self.collection.search_unit
+
+
+class SearchUnitDocumentDetailView(SearchUnitStatsMixin, DetailView):
+    context_object_name = 'document'
+    model = SearchUnitDocument
+    template_name = 'public/grey_literature/document_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchUnitDocumentDetailView, self).get_context_data(**kwargs)
+        context['search_unit'] = self.search_unit
+        return context
+
+    def get_object(self, queryset=None):
+        queryset = queryset or self.model.objects.all()
+        queryset = queryset.select_related('collection', 'collection__search_unit') \
+            .prefetch_related('attachments')
+        return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])
+
+    def get_search_unit(self):
+        return self.object.collection.search_unit

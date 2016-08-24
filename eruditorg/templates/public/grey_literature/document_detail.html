@@ -1,0 +1,243 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block page_title %}{{ document.title }}{% endblock page_title %}
+
+{% block body_id %}id_search_unit_document_detail{% endblock body_id %}
+{% block data_controller %}public:grey_literature:document_detail{% endblock data_controller %}
+
+{% block breadcrumb %}
+  {{ block.super }}
+  / <a href="{% url 'public:grey_literature:search_unit_list' %}">{% trans "Littérature grise" %}</a>
+  / <a href="{% url 'public:grey_literature:search_unit_detail' document.collection.search_unit.code %}">{{ document.collection.search_unit.name }}</a>
+  / <a href="{% url 'public:grey_literature:collection_detail' document.collection.search_unit.code document.collection.localidentifier %}">{{ document.collection.title }}</a>
+  / <a href="{% url 'public:grey_literature:document_detail' document.collection.search_unit.code document.collection.localidentifier document.localidentifier %}">{{ document.title|truncatechars:60 }}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div
+  id="document"
+  data-document-id="{{ document.id }}"
+  {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <header class="page-header-main">
+          <h1>{{ document.title }}</h1>
+        </header>
+        <div class="pull-right toolbox horizontal">
+          <ul class="unstyled">
+            <li>
+              <button id="tool-citation-save" data-citation-save="#document"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                <span class="erudicon erudicon-tools-save"></span>
+                <span class="tools-label">{% trans "Sauvegarder" %}</span>
+              </button>
+              <button id="tool-citation-remove" data-citation-remove="#document"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                <span class="erudicon erudicon-tools-save"></span>
+                <span class="tools-label">{% trans "Supprimer" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-download" data-href="#">
+                <span class="erudicon erudicon-tools-pdf"></span>
+                <span class="tools-label">{% trans "Télécharger" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                <span class="erudicon erudicon-tools-cite"></span>
+                <span class="tools-label">{% trans "Citer ce document" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-share" data-title="{{ document.title }}" data-cite="#id_cite_mla_{{ document.id }}">
+                <span class="erudicon erudicon-tools-share"></span>
+                <span class="tools-label">{% trans "Partager" %}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <h3>{% trans "Fiche" %}</h3>
+        <div class="document-data-wrapper">
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Collection" %}</p></div>
+            <div class="col-md-8 data-content"><p><a href="{% url 'public:grey_literature:collection_detail' document.collection.search_unit.code document.collection.localidentifier %}">{{ document.collection.title }}</a></p></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Titre" %}</p></div>
+            <div class="col-md-8 data-content"><p>{{ document.title }}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Auteurs" %}</p></div>
+            <div class="col-md-8 data-content"><p>{% for author in document.authors.all %}{{ author.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Année de publication" %}</p></div>
+            <div class="col-md-8 data-content"><p>{{ document.publication_year }}</p></div>
+          </div>
+          {% if document.abstract %}
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Résumé" %}</p></div>
+            <div class="col-md-8 data-content">{{ document.abstract|linebreaks }}</div>
+          </div>
+          {% endif %}
+          {% if document.description_url %}
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Description" %}</p></div>
+            <div class="col-md-8 data-content"><p><a href="{{ document.description_url }}" target="_blank">{{ document.description_url }}</a></p></div>
+          </div>
+          {% endif %}
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "URI" %}</p></div>
+            <div class="col-md-8 data-content"><p><a href="{% url 'public:grey_literature:document_detail' document.collection.search_unit.code document.collection.localidentifier document.localidentifier %}">{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:grey_literature:document_detail' document.collection.search_unit.code document.collection.localidentifier document.localidentifier %}</a></p></div>
+          </div>
+          {% if document.isbn %}
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">ISBN</p></div>
+            <div class="col-md-8 data-content"><p>{{ document.isbn }}</p></div>
+          </div>
+          {% endif %}
+          {% if document.isbn_num %}
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">ISBN (numérique)</p></div>
+            <div class="col-md-8 data-content"><p>{{ document.isbn_num }}</p></div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="row">
+          <div class="col-md-offset-6 col-md-6">
+            <br />
+            <p class="text-muted text-right">
+              <small>
+              {% blocktrans trimmed %}
+                Tous les documents du dépôt d’Érudit sont protégés par droit d'auteur, avec tous droits réservés.
+              {% endblocktrans %}
+              </small>
+            </p>
+          </div>
+        </div>
+        <br />
+      </div>
+      <aside class="col-md-offset-1 col-md-3">
+        {% if search_unit.logo %}
+        <p class="text-center"><img src="{{ search_unit.logo.url }}" alt="{{ search_unit.name }}" /></p><br />
+        {% endif %}
+        <h2>{% trans "Fiche de l'unité" %}</h2>
+        <p class="mono-space">{% trans "Unité de recherche" %}</p>
+        <p class="sheet-item">{{ search_unit.name }}{% if search_unit.subname %} &ndash; {{ search_unit.subname }}{% endif %}</p>
+        <br />
+        <p class="mono-space">{% trans "Statistiques" %}</p>
+        <p class="sheet-item">
+        {% blocktrans trimmed count counter=collections_count %}
+          {{ counter }} collection
+        {% plural %}
+          {{ counter }} collections
+        {% endblocktrans %}
+        </p>
+        <p class="sheet-item">
+        {% blocktrans trimmed count counter=documents_count %}
+          {{ counter }} document
+        {% plural %}
+          {{ counter }} documents
+        {% endblocktrans %}
+        </p>
+        <p class="sheet-item">
+        {% blocktrans trimmed count counter=authors_count %}
+          {{ counter }} auteur
+        {% plural %}
+          {{ counter }} auteurs
+        {% endblocktrans %}
+        </p>
+        <br />
+        {% if search_unit.publication_period %}
+        <p class="mono-space">{% trans "Période de publication" %}</p>
+        <p class="sheet-item">{{ search_unit.publication_period }}</p>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="hidden">
+  <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+    <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+    <div class="modal-body">
+      <h3>{% trans "Citer ce document" %}</h3>
+      <dl class="cite-modal--style-list">
+        <dt>MLA</dt>
+        <dd id="id_cite_mla_{{ document.id }}" class="cite-mla">
+          {% for author in document.authors.all %}
+            {% if author.firstname and author.lastname %}
+              {{ author.lastname }}, {{ author.firstname }}.
+            {% elif author.othername %}
+              {{ author.othername }}.
+            {% else %}
+              {{ author.full_name }}.
+            {% endif %}
+          {% endfor %}
+          "{{ document.title }}."
+          <em>{{ document.collection.search_unit.name }}{% if document.collection.search_unit.subname %} &ndash; {{ document.collection.search_unit.subname }}{% endif %}</em>
+          {% blocktrans trimmed with collection_title=document.collection.title %}collection "{{ collection_title }}"{% endblocktrans %}
+          ({{ document.publication_year }}).
+        </dd>
+
+        <dt>APA</dt>
+        <dd id="id_cite_apa_{{ document.id }}" class="cite-apa">
+          {% for author in document.authors.all %}
+            {% if author.firstname and author.lastname %}
+              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
+            {% elif author.othername %}
+              {{ author.othername }}.
+            {% else %}
+              {{ author.full_name }}.
+            {% endif %}
+          {% endfor %}
+          ({{ document.publication_year }}).
+          {{ document.title }}
+          <em>{{ document.collection.search_unit.name }}{% if document.collection.search_unit.subname %} &ndash; {{ document.collection.search_unit.subname }}{% endif %}</em>,
+          {% blocktrans trimmed with collection_title=document.collection.title %}collection "{{ collection_title }}"{% endblocktrans %}.
+        </dd>
+
+        <dt>Chicago</dt>
+        <dd id="id_cite_chicago_{{ document.id }}" class="cite-chicago">
+          {% for author in document.authors.all %}
+            {% if author.firstname and author.lastname %}
+              {{ author.lastname }}, {{ author.firstname }}.
+            {% elif author.othername %}
+              {{ author.othername }}.
+            {% else %}
+              {{ author.full_name }}.
+            {% endif %}
+          {% endfor %}
+          "{{ document.title }}."
+          <em>{{ document.collection.search_unit.name }}{% if document.collection.search_unit.subname %} &ndash; {{ document.collection.search_unit.subname }}{% endif %}</em>
+          {% blocktrans trimmed with collection_title=document.collection.title %}collection "{{ collection_title }}"{% endblocktrans %}
+          ({{ document.publication_year }}).
+        </dd>
+      </dl>
+
+      <hr />
+      <h3>{% trans "Exporter la notice de ce document" %}</h3>
+      <p>
+        <a href="#" class="btn btn-primary cite-export">
+          <span class="show cite-export-title">.ENW</span>
+        </a>
+        EndNote, Zotero
+      </p>
+      <p>
+        <a href="#" class="btn btn-primary cite-export">
+          <span class="show cite-export-title">.RIS</span>
+        </a>
+        Papers, Reference Manager, RefWorks, Zotero
+      </p>
+      <p>
+        <a href="#" class="btn btn-primary cite-export">
+          <span class="show cite-export-title">.BIB</span>
+        </a>
+        BibTeX, JabRef, Mendeley, Zotero
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

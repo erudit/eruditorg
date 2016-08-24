@@ -31,7 +31,7 @@
           <h2>{% trans "Nouveautés" %}</h2>
           <ul class="new-documents">
           {% for document in new_documents %}
-            <li><a href="#">{{ document.title }}</a></li>
+            <li><a href="{% url 'public:grey_literature:document_detail' document.collection.search_unit.code document.collection.localidentifier document.localidentifier %}">{{ document.title }}</a></li>
           {% endfor %}
           </ul>
           <h2>{% trans "Fiche" %}</h2>

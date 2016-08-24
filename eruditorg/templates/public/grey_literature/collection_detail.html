@@ -31,7 +31,7 @@
               <a href="#" class="document-reduce"><i class="ion-minus-round"></i></a>
             </div>
             <div class="author-name">{% for author in document.authors.all %}{{ author.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}</div>
-            <a href="#" class="document-link">&laquo;&nbsp;{{ document.title }}&nbsp;&raquo;</a>
+            <a href="{% url 'public:grey_literature:document_detail' search_unit.code collection.localidentifier document.localidentifier %}" class="document-link">&laquo;&nbsp;{{ document.title }}&nbsp;&raquo;</a>
             <div class="description">
               {% if document.abstract %}{{ document.abstract }}{% else %}{% trans "Aucune description." %}{% endif %}
               <br /><br />

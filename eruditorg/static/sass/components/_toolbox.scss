@@ -99,5 +99,27 @@
     }
   }
 
+  /**
+  * horizontal mode
+  */
+  &.horizontal{
+    margin-top: -15px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    width: auto !important;
 
+    ul{
+      li{
+        margin-left: 2px !important;
+        display: inline-block;
+        width: 50px;
+        float: left;
+
+        &:hover, &:focus{
+          width: auto !important;
+        }
+      }
+    }
+  }
 }
