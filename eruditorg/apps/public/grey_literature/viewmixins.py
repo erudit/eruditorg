@@ -37,6 +37,6 @@ class SearchUnitDocumentDetailMixin(object):
 
     def get_object(self, queryset=None):
         queryset = queryset or self.model.objects.all()
-        queryset = queryset.select_related('collection', 'collection__search_unit') \
+        queryset = queryset.select_related('collection', 'collection__search_unit', 'publisher') \
             .prefetch_related('attachments')
         return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])

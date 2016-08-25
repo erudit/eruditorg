@@ -78,6 +78,12 @@
             <div class="col-md-4 data-title"><p class="mono-space">{% trans "Année de publication" %}</p></div>
             <div class="col-md-8 data-content"><p>{{ document.publication_year }}</p></div>
           </div>
+          {% if document.publisher %}
+          <div class="row">
+            <div class="col-md-4 data-title"><p class="mono-space">{% trans "Éditeur" %}</p></div>
+            <div class="col-md-8 data-content"><p>{{ document.publisher.name }}</p></div>
+          </div>
+          {% endif %}
           {% if document.abstract %}
           <div class="row">
             <div class="col-md-4 data-title"><p class="mono-space">{% trans "Résumé" %}</p></div>
