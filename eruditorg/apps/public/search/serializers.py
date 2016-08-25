@@ -21,6 +21,7 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
     def get_document_type(self, obj):
         return {
             erudit_models.Article: 'article',
+            erudit_models.SearchUnitDocument: 'search-unit-document',
             erudit_models.Thesis: 'thesis',
         }[obj.__class__]
 
@@ -30,10 +31,11 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
         real_object_data = cache.get(cache_key, None)
 
         if real_object_data is None:
-            if isinstance(obj, erudit_models.Article):
-                real_object_data = ArticleSerializer(obj).data
-            elif isinstance(obj, erudit_models.Thesis):
-                real_object_data = ThesisSerializer(obj).data
+            real_object_data = {
+                erudit_models.Article: ArticleSerializer,
+                erudit_models.SearchUnitDocument: SearchUnitDocumentSerializer,
+                erudit_models.Thesis: ThesisSerializer,
+            }[obj.__class__](obj).data
             # Caches the content of the object for 1 hour
             cache.set(cache_key, real_object_data, 60 * 60)
 
@@ -110,6 +112,47 @@ class ArticleSerializer(serializers.ModelSerializer):
             if settings.DEBUG:
                 return False
             raise
+
+
+class SearchUnitDocumentSerializer(serializers.ModelSerializer):
+    authors = serializers.SerializerMethodField()
+    search_unit_code = serializers.SerializerMethodField()
+    search_unit_name = serializers.SerializerMethodField()
+    search_unit_subname = serializers.SerializerMethodField()
+    collection_localid = serializers.SerializerMethodField()
+    collection_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = erudit_models.SearchUnitDocument
+        fields = [
+            'title', 'publication_year', 'abstract', 'authors', 'search_unit_code',
+            'search_unit_name', 'search_unit_subname', 'collection_localid', 'collection_title',
+        ]
+
+    def get_authors(self, obj):
+        authors = []
+        for author in obj.authors.all():
+            authors.append({
+                'firstname': author.firstname,
+                'lastname': author.lastname,
+                'othername': author.othername,
+            })
+        return authors
+
+    def get_search_unit_code(self, obj):
+        return obj.collection.search_unit.code
+
+    def get_search_unit_name(self, obj):
+        return obj.collection.search_unit.name
+
+    def get_search_unit_subname(self, obj):
+        return obj.collection.search_unit.subname
+
+    def get_collection_localid(self, obj):
+        return obj.collection.localidentifier
+
+    def get_collection_title(self, obj):
+        return obj.collection.title
 
 
 class ThesisSerializer(serializers.ModelSerializer):

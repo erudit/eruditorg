@@ -280,6 +280,111 @@
                 </div>
               </div>
             </article>
+            {% elif document.document_type == 'search-unit-document' %}
+            {# Search unit document preview #}
+            {% url 'public:grey_literature:document_detail' document.real_object.search_unit_code document.real_object.collection_localid document.localidentifier as document_url %}
+            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
+              <header>
+                <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+                {# authors #}
+                {% if document.real_object.authors %}
+                <h4 class="authors h6">
+                  {% for author in document.real_object.authors %}
+                  <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                </h4>
+                {% endif %}
+                <h3 class="h4"><a href="{{ document_url }}">{{ document.real_object.title }}</a></h3>
+              </header>
+              <footer class="meta">
+                {% if document.real_object.issue_title %}<h5>{{ document.real_object.issue_title }}</h5>{% endif %}
+                <h5><strong>{% blocktrans trimmed with search_unit_name=document.real_object.search_unit_name %}Document (littérature grise), {{ search_unit_name }}{% endblocktrans %}{% if document.real_object.search_unit_subname %}, {{ document.real_object.search_unit_subname }}{% endif %}</strong></h5>
+                <h5>{% blocktrans trimmed with collection_title=document.real_object.collection_title %}Collection "{{ collection_title }}"{% endblocktrans %}</h5>
+              </footer>
+              {% if document.real_object.abstract %}
+              <summary class="akkordion" data-akkordion-single="true">
+                <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
+                <div class="summary-content akkordion-content">
+                  <p>{{ document.real_object.abstract }}</p>
+                </div>
+              </summary>
+              {% else %}
+              <br /><br />
+              {% endif %}
+              <nav class="toolbox compact">
+                <ul class="unstyled">
+                  <li>
+                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                    </button>
+                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Supprimer" %}</span>
+                    </button>
+                  </li>
+                  {% if document.real_object.has_pdf %}
+                  <li>
+                    <button id="tool-download" data-href="#">
+                      <span class="erudicon erudicon-tools-pdf"></span>
+                      <span class="tools-label">{% trans "Télécharger" %}</span>
+                    </button>
+                  </li>
+                  {% endif %}
+                  <li>
+                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-cite"></span>
+                      <span class="tools-label">{% trans "Citer cet article" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}" data-cite="#id_cite_mla_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-share"></span>
+                      <span class="tools-label">{% trans "Partager" %}</span>
+                    </button>
+                    <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
+                      {% for author in document.real_object.authors %}
+                      {% if author.firstname and author.lastname %}
+                        {{ author.lastname }}, {{ author.firstname }}.
+                      {% elif author.othername %}
+                        {{ author.othername }}.
+                      {% endif %}
+                      {% endfor %}
+                      "{{ document.real_object.title }}."
+                      <em>{{ document.real_object.search_unit_name }}{% if document.real_object.search_unit_subname %} &ndash; {{ document.real_object.search_unit_subname }}{% endif %}</em>
+                      {% blocktrans trimmed with collection_title=document.real_object.collection_title %}collection "{{ collection_title }}"{% endblocktrans %}
+                      ({{ document.real_object.publication_year }}).
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+              <div class="hidden">
+                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                  <div class="modal-body">
+                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                    <p>
+                      <a href="{% url 'public:grey_literature:document_citation_enw' document.real_object.search_unit_code document.real_object.collection_localid document.localidentifier %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.ENW</span>
+                      </a>
+                      EndNote, Zotero
+                    </p>
+                    <p>
+                      <a href="{% url 'public:grey_literature:document_citation_ris' document.real_object.search_unit_code document.real_object.collection_localid document.localidentifier %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.RIS</span>
+                      </a>
+                      Papers, Reference Manager, RefWorks, Zotero
+                    </p>
+                    <p>
+                      <a href="{% url 'public:grey_literature:document_citation_bib' document.real_object.search_unit_code document.real_object.collection_localid document.localidentifier %}" class="btn btn-primary cite-export">
+                        <span class="show cite-export-title">.BIB</span>
+                      </a>
+                      BibTeX, JabRef, Mendeley, Zotero
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
             {% elif document.document_type == 'thesis' %}
             <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <header>
