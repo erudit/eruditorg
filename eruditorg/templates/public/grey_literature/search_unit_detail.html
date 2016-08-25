@@ -1,5 +1,6 @@
 {% extends "public/base.html" %}
 {% load i18n %}
+{% load cache %}
 
 {% block page_title %}{{ search_unit.name }}{% endblock page_title %}
 
@@ -72,12 +73,16 @@
       <div class="row">
         <div class="col-md-12 collections">
           <h2>{% blocktrans trimmed with collections_count=collections_count %}Collections ({{ collections_count }}){% endblocktrans %}</h2>
+          {% cache LONG_TTL "public_search_unit_detail_collection_list" search_unit.id LANGUAGE_CODE %}
           {% for collection in collections %}
-            <div class="collection">
-              <a href="{% url 'public:grey_literature:collection_detail' search_unit.code collection.localidentifier %}">{{ collection.title }} [{{ collection.documents_count }}]</a>
-              {% if collection.description %}<p>{{ collection.description }}</p>{% endif %}
-            </div>
+          {% cache FOREVER_TTL "public_search_unit_detail_collection_list_item" search_unit.id collection.id LANGUAGE_CODE %}
+          <div class="collection">
+            <a href="{% url 'public:grey_literature:collection_detail' search_unit.code collection.localidentifier %}">{{ collection.title }} [{{ collection.documents_count }}]</a>
+            {% if collection.description %}<p>{{ collection.description }}</p>{% endif %}
+          </div>
+          {% endcache %}
           {% endfor %}
+          {% endcache %}
         </div>
       </div>
     </div>

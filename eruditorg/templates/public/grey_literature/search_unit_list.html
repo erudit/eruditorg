@@ -1,5 +1,6 @@
 {% extends "public/base.html" %}
 {% load i18n %}
+{% load cache %}
 
 {% block page_title %}{% trans "Littérature grise" %}{% endblock page_title %}
 
@@ -65,8 +66,10 @@
           </div>
         </div>
       </header>
+      {% cache LONG_TTL "public_search_unit_list" LANGUAGE_CODE %}
       <ul class="search-units row">
       {% for search_unit in search_units %}
+        {% cache FOREVER_TTL "public_search_unit_list_item" search_unit.id LANGUAGE_CODE %}
         <li class="search-unit col-md-3">
           <a href="{% url 'public:grey_literature:search_unit_detail' search_unit.code %}">
             <span class="name"><strong>{{ search_unit.name }}</strong></span>
@@ -80,8 +83,10 @@
             </span>
           </a>
         </li>
+        {% endcache %}
       {% endfor %}
       </ul>
+      {% endcache %}
     </div>
 
   </div>
