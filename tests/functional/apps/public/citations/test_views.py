@@ -19,6 +19,9 @@ from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
+from erudit.test.factories import SearchUnitCollectionFactory
+from erudit.test.factories import SearchUnitDocumentFactory
+from erudit.test.factories import SearchUnitFactory
 from erudit.test.factories import ThesisFactory
 
 from apps.public.citations.views import SavedCitationAddView
@@ -53,12 +56,32 @@ class TestSavedCitationListView(EruditClientTestCase):
         self.article_1.authors.add(author_3)
         self.article_2.authors.add(author_4)
         self.article_3.authors.add(author_3)
+        author_5 = AuthorFactory.create(lastname='Mno', firstname='Pqr')
+        author_6 = AuthorFactory.create(lastname='Pqr', firstname='Stw')
+        self.search_unit = SearchUnitFactory.create(collection=self.collection)
+        self.search_unit_collection_1 = SearchUnitCollectionFactory.create(
+            search_unit=self.search_unit)
+        self.search_unit_collection_2 = SearchUnitCollectionFactory.create(
+            search_unit=self.search_unit)
+        self.search_unit_collection_3 = SearchUnitCollectionFactory.create(
+            search_unit=self.search_unit)
+        self.document_1 = SearchUnitDocumentFactory(collection=self.search_unit_collection_1)
+        self.document_2 = SearchUnitDocumentFactory(collection=self.search_unit_collection_2)
+        self.document_3 = SearchUnitDocumentFactory(collection=self.search_unit_collection_3)
+        self.document_4 = SearchUnitDocumentFactory(
+            title='Title D', publication_year=2015, collection=self.search_unit_collection_1)
+        self.document_5 = SearchUnitDocumentFactory(
+            title='Title E', publication_year=2010, collection=self.search_unit_collection_2)
+        self.document_4.authors.add(author_5)
+        self.document_5.authors.add(author_6)
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)
         clist.documents.add(self.article_1)
         clist.documents.add(self.article_2)
         clist.documents.add(self.article_3)
+        clist.documents.add(self.document_4)
+        clist.documents.add(self.document_5)
 
     def test_embeds_the_count_of_scientific_articles_in_the_context(self):
         # Setup
@@ -90,6 +113,16 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert response.status_code == 200
         assert response.context['theses_count'] == 2
 
+    def test_embeds_the_count_of_search_unit_documents_in_the_context(self):
+        # Setup
+        self.client.login(username='foo', password='notreallysecret')
+        url = reverse('public:citations:list')
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 200
+        assert response.context['search_unit_documents_count'] == 2
+
     def test_can_sort_documents_by_ascending_title(self):
         # Setup
         self.client.login(username='foo', password='notreallysecret')
@@ -99,7 +132,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.thesis_1, self.thesis_2, self.article_1, self.article_2, self.article_3, ]
+            self.thesis_1, self.thesis_2, self.article_1, self.article_2, self.article_3,
+            self.document_4, self.document_5, ]
 
     def test_can_sort_documents_by_descending_title(self):
         # Setup
@@ -110,7 +144,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.article_3, self.article_2, self.article_1, self.thesis_2, self.thesis_1, ]
+            self.document_5, self.document_4, self.article_3, self.article_2, self.article_1,
+            self.thesis_2, self.thesis_1, ]
 
     def test_can_sort_documents_by_ascending_year(self):
         # Setup
@@ -121,7 +156,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.thesis_2, self.article_1, self.article_2, self.article_3, self.thesis_1, ]
+            self.document_5, self.thesis_2, self.article_1, self.article_2, self.article_3,
+            self.thesis_1, self.document_4, ]
 
     def test_can_sort_documents_by_descending_year(self):
         # Setup
@@ -132,7 +168,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.thesis_1, self.article_3, self.article_1, self.article_2, self.thesis_2, ]
+            self.document_4, self.thesis_1, self.article_3, self.article_1, self.article_2,
+            self.thesis_2, self.document_5, ]
 
     def test_can_sort_documents_by_ascending_author_name(self):
         # Setup
@@ -143,7 +180,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.thesis_1, self.thesis_2, self.article_1, self.article_3, self.article_2, ]
+            self.thesis_1, self.thesis_2, self.article_1, self.article_3, self.article_2,
+            self.document_4, self.document_5, ]
 
     def test_can_sort_documents_by_descending_author_name(self):
         # Setup
@@ -154,7 +192,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.article_2, self.article_1, self.article_3, self.thesis_2, self.thesis_1, ]
+            self.document_5, self.document_4, self.article_2, self.article_1, self.article_3,
+            self.thesis_2, self.thesis_1, ]
 
 
 class TestSavedCitationAddView(EruditClientTestCase):
