@@ -1,5 +1,6 @@
 {% extends "public/base.html" %}
 {% load i18n %}
+{% load cache %}
 
 {% block page_title %}{{ document.title }}{% endblock page_title %}
 
@@ -157,6 +158,35 @@
       </aside>
     </div>
   </div>
+
+  {# article footer with related documents #}
+  {% if related_documents %}
+  <footer class="related-documents">
+    <div class="container">
+      <div class="row">
+        <header class="col-xs-12">
+          <h2>{% trans "Autres documents de cette unité" %}</h2>
+        </header>
+      </div>
+
+      <div class="row">
+        {% for related_document in related_documents %}
+        {% cache FOREVER_TTL "public_search_unit_document_detail_related_document" related_document.id LANGUAGE_CODE %}
+        <article class="related-document col-sm-6 col-md-3">
+          <a href="{% url 'public:grey_literature:document_detail' related_document.collection.search_unit.code related_document.collection.localidentifier related_document.localidentifier %}">
+            <h4>{{ related_document.title }}</h4>
+            <footer class="meta">
+              <h5>{{ related_document.collection.title }}</h5>
+            </footer>
+          </a>
+        </article>
+        {% endcache %}
+        {% endfor %}
+      </div>
+    </div>
+  </footer>
+  {% endif %}
+
 </div>
 
 <div class="hidden">

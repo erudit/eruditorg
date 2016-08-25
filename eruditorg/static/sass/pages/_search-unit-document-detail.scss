@@ -36,5 +36,49 @@ body#id_search_unit_document_detail{
         }
       }
     }
+
+    .related-documents{
+      margin-bottom: 50px;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      background-color: $light-grey;
+
+      h2{
+        margin-bottom: 30px;
+        font-size: 28px;
+      }
+
+      .related-document{
+        padding: 0;
+
+        a{
+          display: block;
+          width: 100%;
+          color: $text-color;
+          padding: $margin-vertical-default/2 $grid-gutter-width/2;
+          @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $mid-grey);
+
+          h4{
+            margin-bottom: $margin-vertical-default/2;
+          }
+
+          h5{
+            color: $dark-grey;
+            font-size: 18px;
+          }
+
+          &:hover{
+            background-color: $brand-primary;
+            text-decoration: none;
+            @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $brand-primary);
+
+            &, h5{
+              color: $white;
+            }
+          }
+        }
+
+      }
+    }
   }
 }

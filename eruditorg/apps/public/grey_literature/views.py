@@ -84,6 +84,11 @@ class SearchUnitDocumentDetailView(SearchUnitStatsMixin, SearchUnitDocumentDetai
     def get_context_data(self, **kwargs):
         context = super(SearchUnitDocumentDetailView, self).get_context_data(**kwargs)
         context['search_unit'] = self.search_unit
+        context['related_documents'] = SearchUnitDocument.objects \
+            .select_related('collection', 'collection__search_unit') \
+            .filter(collection__search_unit=self.search_unit) \
+            .exclude(id=self.object.id) \
+            .order_by('?')[:4]
         return context
 
     def get_search_unit(self):
