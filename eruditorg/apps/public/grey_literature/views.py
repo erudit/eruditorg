@@ -89,6 +89,7 @@ class SearchUnitDocumentDetailView(SearchUnitStatsMixin, SearchUnitDocumentDetai
             .filter(collection__search_unit=self.search_unit) \
             .exclude(id=self.object.id) \
             .order_by('?')[:4]
+        context['attachments'] = self.object.attachments.all()
         return context
 
     def get_search_unit(self):

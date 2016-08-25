@@ -37,6 +37,20 @@ body#id_search_unit_document_detail{
       }
     }
 
+    .attachments-wrapper{
+      padding: 20px 0;
+      border-bottom: 2px solid $gray;
+
+      p{
+        margin-top: 4px;
+        margin-bottom: 0;
+
+        .file-icon{
+          color: $coral-red;
+        }
+      }
+    }
+
     .related-documents{
       margin-bottom: 50px;
       padding-top: 60px;

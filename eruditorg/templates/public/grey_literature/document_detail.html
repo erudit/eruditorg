@@ -1,6 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 {% load cache %}
+{% load base_file_tags %}
 
 {% block page_title %}{{ document.title }}{% endblock page_title %}
 
@@ -106,6 +107,14 @@
           </div>
           {% endif %}
         </div>
+        {% if attachments %}
+        <div class="attachments-wrapper">
+          <h4>{% trans "Fichier(s) constituant ce document" %}</h4>
+          {% for attachment in attachments %}
+          <p><span class="file-icon ion-document-text"></span>&nbsp;<a href="{{ attachment.file.url }}">{{ attachment.file|filename }}</a>&nbsp;({{ attachment.file|mimetype }} ; {{ attachment.file.size|filesizeformat }})</p>
+          {% endfor %}
+        </div>
+        {% endif %}
         <div class="row">
           <div class="col-md-offset-6 col-md-6">
             <br />
