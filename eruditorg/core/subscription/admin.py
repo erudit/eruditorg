@@ -15,6 +15,10 @@ class JournalAccessSubscriptionPeriodInline(admin.TabularInline):
     model = JournalAccessSubscriptionPeriod
 
 
+class InstitutionIPAddressRangeAdmin(admin.ModelAdmin):
+    search_fields = ('subscription__organisation__name',)
+
+
 class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
@@ -28,6 +32,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
         }),
     ]
 
+    search_fields = ('organisation__name',)
     inlines = [JournalAccessSubscriptionPeriodInline, ]
 
     list_display = ('pk', 'title', 'user', 'organisation', 'journal', 'collection', 'full_access', )
@@ -44,7 +49,7 @@ class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
     list_display_links = ('pk', 'title', 'journal', )
 
 
-admin.site.register(InstitutionIPAddressRange)
+admin.site.register(InstitutionIPAddressRange, InstitutionIPAddressRangeAdmin)
 admin.site.register(JournalAccessSubscription, JournalAccessSubscriptionAdmin)
 admin.site.register(JournalAccessSubscriptionPeriod)
 admin.site.register(JournalManagementPlan, JournalManagementPlanAdmin)
