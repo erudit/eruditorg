@@ -408,6 +408,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     @property
     def has_movable_limitation(self):
         """ Returns a boolean indicating if the issue has a movable limitation. """
+        # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
             publication_year = self.year
             current_year = dt.datetime.now().year

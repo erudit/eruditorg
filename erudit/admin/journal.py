@@ -20,9 +20,8 @@ class JournalAdmin(admin.ModelAdmin):
     search_fields = ('code', 'name', 'issn_print', 'issn_web', 'external_url', )
     list_display = ('__str__', 'code', 'type', 'open_access', 'external_url', 'active', )
     list_display_links = ('__str__', 'code', )
-    list_filter = ('publishers', 'type', 'paper', 'open_access', 'active', )
+    list_filter = ('collection', 'publishers', 'type', 'paper', 'open_access', 'active', )
     filter_horizontal = ('members', 'publishers', )
-    list_editable = ('type', 'active', )
 
     fieldsets = [
         ('Identification', {
@@ -86,6 +85,7 @@ class IssueAdmin(admin.ModelAdmin):
     inlines = (IssueThemeInline, )
     list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
     search_fields = ('id', 'localidentifier', )
+    list_filter = ('journal__collection', )
 
 
 class ArticleAbstractAdmin(admin.ModelAdmin):
