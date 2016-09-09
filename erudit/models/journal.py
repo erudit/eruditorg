@@ -311,7 +311,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     date_published = models.DateField(verbose_name=_('Date de publication'))
     """ The publication date of the issue """
 
-    external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
+    external_url = models.URLField(
+        null=True, blank=True,
+        verbose_name=_('URL Externe'), help_text=_("URL du site où les numéros sont hébergés"))
     """ External URL of the issue """
 
     copyrights = models.ManyToManyField(
