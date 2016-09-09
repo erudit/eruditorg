@@ -127,6 +127,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
     """ External URL of the home page of the Journal """
 
+    redirect_to_external_url = models.BooleanField(
+        default=True,
+        verbose_name=_("Rediriger vers l'URL externe"),
+        help_text=_("Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit")  # noqa
+    )
+
     # Status of the journal
     active = models.BooleanField(
         default=True, verbose_name=_('Actif'),
