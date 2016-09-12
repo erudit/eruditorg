@@ -105,9 +105,6 @@
               </li>
               {% endif %}
               <li>
-                <a href="{% url 'public:citations:list' %}">{% trans "Ma bibliothèque" %}</a>
-              </li>
-              <li>
                 <a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a>
               </li>
               <li>
@@ -118,6 +115,9 @@
           {% endif %}
           <li class="hidden-sm">
             <a href="{% url 'public:search:advanced_search' %}" class="main-section">Recherche avancée</a>
+          </li>
+          <li>
+            <a href="{% url 'public:citations:list' %}"><span class="erudicon erudicon-tools-save"></span></a>
           </li>
           <li>
             <a href="#" data-trigger-search-bar class="search"><span class="ion-ios-search-strong"></span></a>

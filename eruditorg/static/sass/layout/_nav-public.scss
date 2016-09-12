@@ -10,6 +10,7 @@
     > li {
       display: inline-block;
       margin-left: 10px;
+      float: none;
 
       &:first-child {
         margin-left: 0;
@@ -102,12 +103,18 @@
     }
   }
 
-  // Search menu item
-  .search {
-    span {
+  .erudicon-tools-save {
+    margin: 0 0.5em 0 1em;
+    &::before {
+      font-size: 25px;
+      vertical-align: middle;
+    }
+  }
+
+  .ion-ios-search-strong {
+    &::before {
       font-size: 30px;
-      position: relative;
-      bottom: -5px;
+      vertical-align: middle;
     }
   }
 
@@ -263,18 +270,18 @@ header.compact{
 }
 
 @media (max-width: $screen-xs-max) {
-  #main-nav{
-    &.navbar-collapse.in{
+  #main-nav {
+    &.navbar-collapse.in {
       overflow-y: initial !important;
     }
 
-    .navbar-nav{
+    .navbar-nav {
       position: relative !important;
       top: auto !important;
       right: auto !important;
       transform: none;
 
-      li{
+      li {
         margin: 0 !important;
         display: block;
 
