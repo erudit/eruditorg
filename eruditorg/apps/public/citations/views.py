@@ -23,12 +23,12 @@ from core.metrics.viewmixins import MetricCaptureMixin
 class SavedCitationListView(ListView):
     """ Show the list of saved citations associated with a specific user. """
     available_tris = collections.OrderedDict((
-        ('author_asc', _('Auteur (croissant)')),
-        ('author_desc', _('Auteur (décroissant)')),
+        ('author_asc', _('Auteur (A–Z)')),
+        ('author_desc', _('Auteur (Z–A)')),
         ('year_asc', _('Année (croissant)')),
         ('year_desc', _('Année (décroissant)')),
-        ('title_asc', _('Titre (croissant)')),
-        ('title_desc', _('Titre (décroissant)')),
+        ('title_asc', _('Titre (A–Z)')),
+        ('title_desc', _('Titre (Z–A)')),
     ))
     context_object_name = 'documents'
     model = EruditDocument
