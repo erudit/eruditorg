@@ -11,26 +11,180 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div id="thesis_home">
+<div id="saved_citations_home">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 clearfix">
-        <div id="id_saved_citations_head">
-          <h2 class="h3 bold">
-            {% trans "Ma bibliothèque" %}
-            <small>{% trans "Notices sauvegardées" %}</small>
-          </h2>
-          {% lorem 1 p %}
-        </div>
+      <div class="col-md-8 clearfix">
+        <header class="page-header-main">
+          <h1>
+            <span>{% trans "Ma bibliothèque" %}</span>
+          </h1>
+            {% lorem 1 p %}
+        </header>
+      </div>
+      <div class="col-md-3 col-md-offset-1 saved-citations-counts sidebar-block">
+        <h2>{% trans "Contenu" %}</h2>
+        {% if scientific_articles_count %}
+        <p data-scientific-article-count="{{ scientific_articles_count }}">
+          {% blocktrans count counter=scientific_articles_count %}{{ counter }} article savant{% plural %}{{ counter }} articles savants{% endblocktrans %}
+        </p>
+        {% elif cultural_articles_count %}
+        <p data-cultural-article-count="{{ cultural_articles_count }}">
+          {% blocktrans count counter=cultural_articles_count %}{{ counter }} article culturel{% plural %}{{ counter }} articles culturels{% endblocktrans %}
+        </p>
+        {% elif theses_count %}
+        <p data-thesis-count="{{ theses_count }}">
+          {% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses{% endblocktrans %}
+        </p>
+        {% else %}
+        <p>{% trans "0 document" %}</p>
+        {% endif %}
       </div>
     </div>
-    {% if documents %}
-    <div class="row">
-      <div class="col-md-9 documents-list-wrapper">
-        <div class="actions-wrapper">
+    <div class="main-content">
+      <section class="row">
+        <div class="col-xs-12">
+          <h2>{% trans "Notices sauvegardées" %}</h2>
+        </div>
+        {% if documents %}
+        <div class="col-md-8 documents-list-wrapper">
+          {% include "public/partials/pagination.html" %}
+          <div class="selection-action-wrapper">
+            <div id="id_selection_tools" class="toolbox pull-right" style="display:none;">
+              {% spaceless %}
+              <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection"><span class="ion-android-close"></span></a>
+              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
+              {% endspaceless %}
+            </div>
+            <p data-selection-count>{% trans "Aucun document sélectionné" %}</p>
+          </div>
+          <div class="documents-wrapper">
+            <div class="documents-head">
+              <div class="document-checkbox-wrapper"><label><span class="hidden">{% trans "Tout sélectionner" %}</span><input type="checkbox"></label></div>
+              <div class="document-title"><strong>{% trans "Titres" %}</strong></div>
+            </div>
+            <ul class="documents">
+              {% for document in documents %}
+              {% if document.polymorphic_ctype_id == article_ct.id %}
+              <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}">
+                <div class="toolbox pull-right">
+                  {% spaceless %}
+                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-android-close"></span></a>
+                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
+                  <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
+                  {% endspaceless %}
+                </div>
+                <div class="document-checkbox-wrapper"><label><span class="hidden">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
+                <h3 class="document-title">
+                  <a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" target="_blank">
+                    {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
+                  </a>
+                </h3>
+                <div class="document-authors-publication-year text-muted">{% for a in document.authors.all %}{{ a.lastname }}{% if a.firstname %}, {{ a.firstname }}{% if not forloop.last %} ; {% else %}&nbsp;{% endif %}{% endif %}{% endfor %}({{ document.issue.year }})</div>
+                <div class="hidden">
+                  <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                    <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
+                    <div class="modal-body">
+                      <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
+                      <p>
+                        <a href="{% url 'public:journal:article_citation_enw' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                          <span class="show cite-export-title">.ENW</span>
+                        </a>
+                        EndNote, Zotero
+                      </p>
+                      <p>
+                        <a href="{% url 'public:journal:article_citation_ris' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                          <span class="show cite-export-title">.RIS</span>
+                        </a>
+                        Papers, Reference Manager, RefWorks, Zotero
+                      </p>
+                      <p>
+                        <a href="{% url 'public:journal:article_citation_bib' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                          <span class="show cite-export-title">.BIB</span>
+                        </a>
+                        BibTeX, JabRef, Mendeley, Zotero
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              {% elif document.polymorphic_ctype_id == thesis_ct.id %}
+              <li data-document-id="{{ document.id }}" data-document-type="thesis">
+                <div class="toolbox pull-right">
+                  {% spaceless %}
+                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-android-close"></span></a>
+                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
+                  <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
+                  {% endspaceless %}
+                </div>
+                <div class="document-checkbox-wrapper"><label><span class="hidden">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
+                <h3 class="document-title">
+                  <a href="{{ document.url }}" target="_blank">{{ document.title }}</a>
+                </h3>
+                <div class="document-authors-publication-year text-muted">{{ document.author.lastname }}{% if document.author.firstname %}, {{ document.author.firstname }}{% endif %}&nbsp;({{ document.publication_year }})</div>
+                <div class="hidden">
+                  <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                    <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
+                    <div class="modal-body">
+                      <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
+                      <p>
+                        <a href="{% url 'public:thesis:thesis_citation_enw' document.collection.id document.id %}" class="btn btn-primary cite-export">
+                          <span class="show cite-export-title">.ENW</span>
+                        </a>
+                        EndNote, Zotero
+                      </p>
+                      <p>
+                        <a href="{% url 'public:thesis:thesis_citation_ris' document.collection.id document.id %}" class="btn btn-primary cite-export">
+                          <span class="show cite-export-title">.RIS</span>
+                        </a>
+                        Papers, Reference Manager, RefWorks, Zotero
+                      </p>
+                      <p>
+                        <a href="{% url 'public:thesis:thesis_citation_bib' document.collection.id document.id %}" class="btn btn-primary cite-export">
+                          <span class="show cite-export-title">.BIB</span>
+                        </a>
+                        BibTeX, JabRef, Mendeley, Zotero
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          {% include "public/partials/pagination.html" %}
+          <div class="hidden">
+            <div id="id_cite_selection_modal" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+              <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+              <div class="modal-body">
+                <p><strong>{% trans "Exporter les notices sélectionnées" %}</strong></p>
+                <p>
+                  <a href="#" id="export_citation_enw" class="btn btn-primary cite-export">
+                    <span class="show cite-export-title">.ENW</span>
+                  </a>
+                  EndNote, Zotero
+                </p>
+                <p>
+                  <a href="#" id="export_citation_ris" class="btn btn-primary cite-export">
+                    <span class="show cite-export-title">.RIS</span>
+                  </a>
+                  Papers, Reference Manager, RefWorks, Zotero
+                </p>
+                <p>
+                  <a href="#" id="export_citation_bib" class="btn btn-primary cite-export">
+                    <span class="show cite-export-title">.BIB</span>
+                  </a>
+                  BibTeX, JabRef, Mendeley, Zotero
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1 text-center actions-wrapper">
           <div id="div_id_sort_by" class="form-group">
-            <div class="controls">
-              <label class="control-label" for="sort_by">{% trans "Tri..." %}</label>
+            <div class="controls ">
+              <label class="control-label" for="sort_by">{% trans "Tri…" %}</label>
               &nbsp;
               <select id="sort_by" onChange="window.location.href=this.value">
                 {% for sort_option in available_tris.items %}
@@ -40,157 +194,15 @@
             </div>
           </div>
         </div>
-        <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
-        <div class="selection-action-wrapper">
-          <div class="pull-right">
-            <div id="id_selection_tools" class="tool-links" style="display:none;">
-              {% spaceless %}
-              <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection"><span class="erudicon erudicon-tools-save"></span></a>
-              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
-              {% endspaceless %}
-            </div>
-          </div>
-          <p data-selection-count>{% trans "Aucun article sélectionné" %}</p>
-        </div>
-        <div class="documents-wrapper">
-          <div class="documents-head">
-            <div class="document-checkbox-wrapper"><input type="checkbox"></div>
-            <div class="document-title"><strong>{% trans "Titres" %}</strong></div>
-          </div>
-          <ul class="documents">
-          {% for document in documents %}
-            {% if document.polymorphic_ctype_id == article_ct.id %}
-            <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}">
-              <div class="pull-right">
-                <div class="tool-links">
-                  {% spaceless %}
-                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="erudicon erudicon-tools-save"></span></a>
-                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
-                  <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}"><span class="erudicon erudicon-tools-pdf"></span></a>
-                  {% endspaceless %}
-                </div>
-              </div>
-              <div class="document-checkbox-wrapper"><input type="checkbox"></div>
-              <div class="document-title"><a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}">{{ document.title }}</a></div>
-              <div class="document-authors-publication-year text-muted">{% for a in document.authors.all %}{{ a.lastname }}{% if a.firstname %}, {{ a.firstname }}{% if not forloop.last %} ; {% else %}&nbsp;{% endif %}{% endif %}{% endfor %}({{ document.issue.year }})</div>
-              <div class="hidden">
-                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
-                  <div class="modal-body">
-                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
-                    <p>
-                      <a href="{% url 'public:journal:article_citation_enw' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.ENW</span>
-                      </a>
-                      EndNote, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:journal:article_citation_ris' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.RIS</span>
-                      </a>
-                      Papers, Reference Manager, RefWorks, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:journal:article_citation_bib' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.BIB</span>
-                      </a>
-                      BibTeX, JabRef, Mendeley, Zotero
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            {% elif document.polymorphic_ctype_id == thesis_ct.id %}
-            <li data-document-id="{{ document.id }}" data-document-type="thesis">
-              <div class="pull-right">
-                <div class="tool-links">
-                  {% spaceless %}
-                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="erudicon erudicon-tools-save"></span></a>
-                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
-                  <a href="{{ document.url }}" title="{% trans 'Télécharger' %}"><span class="erudicon erudicon-tools-pdf"></span></a>
-                  {% endspaceless %}
-                </div>
-              </div>
-              <div class="document-checkbox-wrapper"><input type="checkbox"></div>
-              <div class="document-title"><a href="{{ document.url }}">{{ document.title }}</a></div>
-              <div class="document-authors-publication-year text-muted">{{ document.author.lastname }}{% if document.author.firstname %}, {{ document.author.firstname }}{% endif %}&nbsp;({{ document.publication_year }})</div>
-              <div class="hidden">
-                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
-                  <div class="modal-body">
-                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
-                    <p>
-                      <a href="{% url 'public:thesis:thesis_citation_enw' document.collection.id document.id %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.ENW</span>
-                      </a>
-                      EndNote, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:thesis:thesis_citation_ris' document.collection.id document.id %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.RIS</span>
-                      </a>
-                      Papers, Reference Manager, RefWorks, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:thesis:thesis_citation_bib' document.collection.id document.id %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.BIB</span>
-                      </a>
-                      BibTeX, JabRef, Mendeley, Zotero
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-        </div>
-        <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
-        <div class="hidden">
-          <div id="id_cite_selection_modal" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-            <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
-            <div class="modal-body">
-              <h3>{% trans "Exporter les notices sélectionnées" %}</h3>
-              <p>
-                <a href="#" id="export_citation_enw" class="btn btn-primary cite-export">
-                  <span class="show cite-export-title">.ENW</span>
-                </a>
-                EndNote, Zotero
-              </p>
-              <p>
-                <a href="#" id="export_citation_ris" class="btn btn-primary cite-export">
-                  <span class="show cite-export-title">.RIS</span>
-                </a>
-                Papers, Reference Manager, RefWorks, Zotero
-              </p>
-              <p>
-                <a href="#" id="export_citation_bib" class="btn btn-primary cite-export">
-                  <span class="show cite-export-title">.BIB</span>
-                </a>
-                BibTeX, JabRef, Mendeley, Zotero
-              </p>
-            </div>
+        {% else %}
+        <div class="col-md-8">
+          <div class="well">
+            <p><em>{% trans "Aucune notice sauvegardée&nbsp;!" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></em></p>
           </div>
         </div>
-      </div>
-      <div class="col-md-3 sidebar">
-        <div class="saved-citations-counts">
-          <h3>{% trans "Mon contenu" %}</h3>
-          {% if scientific_articles_count %}<p data-scientific-article-count="{{ scientific_articles_count }}">{% blocktrans count counter=scientific_articles_count %}{{ counter }} article savant{% plural %}{{ counter }} articles savants{% endblocktrans %}</p>{% endif %}
-          {% if cultural_articles_count %}<p data-cultural-article-count="{{ cultural_articles_count }}">{% blocktrans count counter=cultural_articles_count %}{{ counter }} article culturel{% plural %}{{ counter }} articles culturels{% endblocktrans %}</p>{% endif %}
-          {% if theses_count %}<p data-thesis-count="{{ theses_count }}">{% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses{% endblocktrans %}</p>{% endif %}
-        </div>
-      </div>
+        {% endif %}
+      </section>
     </div>
-    {% else %}
-    <div class="row">
-      <div class="col-md-12">
-        <div class="well">
-          <p class="lead">{% trans "Vous ne disposez d'aucune notice sauvegardée !" %}</p>
-        </div>
-      </div>
-    </div>
-    {% endif %}
   </div>
 </div>
 {% endblock content %}
