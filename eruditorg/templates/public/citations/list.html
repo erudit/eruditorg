@@ -60,7 +60,7 @@
           </div>
           <div class="documents-wrapper">
             <div class="documents-head">
-              <div class="document-checkbox-wrapper"><label><span class="hidden">{% trans "Tout sélectionner" %}</span><input type="checkbox"></label></div>
+              <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Tout sélectionner" %}</span><input type="checkbox"></label></div>
               <div class="document-title"><strong>{% trans "Titres" %}</strong></div>
             </div>
             <ul class="documents">
@@ -74,7 +74,7 @@
                   <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
                   {% endspaceless %}
                 </div>
-                <div class="document-checkbox-wrapper"><label><span class="hidden">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
+                <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
                 <h3 class="document-title">
                   <a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" target="_blank">
                     {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
@@ -117,7 +117,7 @@
                   <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
                   {% endspaceless %}
                 </div>
-                <div class="document-checkbox-wrapper"><label><span class="hidden">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
+                <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
                 <h3 class="document-title">
                   <a href="{{ document.url }}" target="_blank">{{ document.title }}</a>
                 </h3>
