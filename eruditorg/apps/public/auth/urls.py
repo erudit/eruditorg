@@ -33,7 +33,7 @@ urlpatterns = [
          'post_reset_redirect': 'public:auth:password_reset_done', }, name='password_reset'),
     url(_(r'^mot-de-passe/reinitialisation/termine/$'), auth_views.password_reset_done,
         {'template_name': 'public/auth/password_reset_done.html'}, name='password_reset_done'),
-    url(_(r'^reinitialisation/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),
+    url(_(r'^reinitialisation/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),  # noqa
         auth_views.password_reset_confirm,
         {'template_name': 'public/auth/password_reset_confirm.html',
          'post_reset_redirect': 'public:auth:password_reset_complete', },
