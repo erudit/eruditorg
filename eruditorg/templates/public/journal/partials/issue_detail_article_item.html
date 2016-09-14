@@ -2,26 +2,30 @@
 {% load cache %}
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
-<li class="issue_detail--article-item">
+<li class="article-item">
   <div class="toolbox pull-right">
     {% spaceless %}
     <a href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.id }}"><span class="erudicon erudicon-tools-save"></span></a>
     <a href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.id }}" class="saved"><span class="erudicon erudicon-tools-save"></span></a>
-    <a href="" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
+    <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
     {% endspaceless %}
   </div>
   <h6 class="article-title">
     <a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}">{{ article.html_title|safe|default:article.title }}</a>
   </h6>
-  <p class="issue_detail--article-item--author">{{ article.authors.all|join:", " }}</p>
-  <div class="mono-space">
-    {% with first_page=article.first_page last_page=article.last_page %}
-    {% if first_page and last_page and first_page != last_page %}
-    {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
-    {% elif first_page and first_page != "0" %}
-    {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
-    {% endif %}
-    {% endwith %}
+  <div class="article-metadata row">
+    <p class="article-author col-sm-9">
+      {{ article.authors.all|join:", " }}
+    </p>
+    <p class="article-pagination col-sm-3">
+      {% with first_page=article.first_page last_page=article.last_page %}
+      {% if first_page and last_page and first_page != last_page %}
+      {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
+      {% elif first_page and first_page != "0" %}
+      {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
+      {% endif %}
+      {% endwith %}
+    </p>
   </div>
 </li>
 {% endcache %}
