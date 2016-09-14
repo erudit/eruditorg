@@ -68,16 +68,16 @@
     <div class="row">
 
       {# Journal about #}
-      <div id="journal-about" class="col-sm-9">
+      <div id="journal-about" class="col-sm-9 col-md-8">
         <header class="page-header-main row">
-          <div class="col-sm-9">
+          <div class="col-sm-12">
             <h1>
               <span>{{ journal.name }}</span>
               {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
             </h1>
-          </div>
-          <div class="col-sm-3 text-right">
-            <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="btn btn-primary-outlined">{% trans "Index des auteurs" %}</a>
+            <p class="text-right">
+              <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Index des auteurs" %}</a>
+            <p>
           </div>
         </header>
 
@@ -164,8 +164,8 @@
       </div>
 
 
-      {# Journal information (on right side except mobile) #}
-      <aside id="journal-meta" class="journal-meta col-sm-3">
+      {# Journal information #}
+      <aside id="journal-meta" class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
 
         {# lastest issue #}
         {% if latest_issue %}

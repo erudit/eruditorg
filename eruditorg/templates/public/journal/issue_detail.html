@@ -93,7 +93,7 @@
 
       {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
       {# Issue summary #}
-      <section class="col-sm-8">
+      <section class="col-sm-9 col-md-8">
 
         <header class="page-header-main">
             <p class="title-tag">{{ issue.journal.name }}</p>
@@ -189,7 +189,7 @@
       {% endcache %}
 
       {# Journal information #}
-      <aside class="col-sm-offset-1 col-sm-3 journal-meta">
+      <aside class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
         {% cache FOREVER_TTL "public_issue_detail_journal_info" issue.journal.id LANGUAGE_CODE %}
         <div class="sidebar-block clearfix issue_detail--resume">
           <header>
