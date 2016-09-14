@@ -91,31 +91,119 @@
   <div class="container">
     <div class="row">
 
-      {# Journal information (on right side except mobile) #}
-      <aside class="col-sm-push-9 col-sm-3">
+      {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
+      {# Issue summary #}
+      <section class="col-sm-8">
+
+        <header class="page-header-main">
+            <p class="title-tag">{{ issue.journal.name }}</p>
+
+            <h1>
+              {% for theme in themes %}
+              {% if forloop.first %}<span>{% else %} / {% endif %}
+              {% if theme.html_name and theme.html_subname %}
+                {{ theme.html_name|safe }}: {{ theme.html_subname|safe }}
+              {% else %}
+                {{ theme.html_name|safe }}
+              {% endif %}
+              {% if forloop.first %}</span>{% endif %}
+              {% endfor %}
+              <span>{{ issue.volume_title_with_pages }}</span>
+            </h1>
+            <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
+        </header>
+
+        {% if articles_per_section %}
+
+        {% for k, section1 in articles_per_section.items %}
+        {% if section1.titles.main %}
+        <h3 class="section">
+          {{ section1.titles.main }}
+          {% for paral in section1.titles.paral %}/ {{ paral }}{% endfor %}
+        </h3>
+        {% endif %}
+
+        <ol class="issue_detail--articles unstyled section-1">
+        {% for article in section1.objects %}
+        {% include "public/journal/partials/issue_detail_article_item.html" %}
+        {% endfor %}
+        </ol>
+
+        {% if section1.section2 %}
+          {% for k, section2 in section1.section2.items %}
+          {% if section2.titles.main %}
+          <h4 class="section">
+            {{ section2.titles.main }}
+            {% for paral in section2.titles.paral %}/ {{ paral }}{% endfor %}
+          </h4>
+          {% endif %}
+
+          <ol class="issue_detail--articles unstyled section-2">
+          {% for article in section2.objects %}
+          {% include "public/journal/partials/issue_detail_article_item.html" %}
+          {% endfor %}
+          </ol>
+
+          {% if section2.section3 %}
+            {% for k, section3 in section2.section3.items %}
+            {% if section3.titles.main %}
+            <h5 class="section">
+              {{ section3.titles.main }}
+              {% for paral in section3.titles.paral %}/ {{ paral }}{% endfor %}
+            </h5>
+            {% endif %}
+
+            <ol class="issue_detail--articles unstyled section-3">
+            {% for article in section3.objects %}
+            {% include "public/journal/partials/issue_detail_article_item.html" %}
+            {% endfor %}
+            </ol>
+
+            {% endfor %}
+          {% endif %}
+
+          {% endfor %}
+        {% endif %}
+
+        {% endfor %}
+
+        {% else %}
+
+          {# This is displayed only if the Fedora repository is unavailable #}
+
+          <ol class="issue_detail--articles unstyled section-1">
+          {% for article in articles %}
+          {% include "public/journal/partials/issue_detail_article_item.html" %}
+          {% endfor %}
+          </ol>
+
+        {% endif %}
+
+      </section>
+      {% endcache %}
+
+      {# Journal information #}
+      <aside class="col-sm-offset-1 col-sm-3 journal-meta">
         {% cache FOREVER_TTL "public_issue_detail_journal_info" issue.journal.id LANGUAGE_CODE %}
         <div class="sidebar-block clearfix issue_detail--resume">
+          <header>
+            <h2><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></h2>
+          </header>
 
           {% if issue.has_coverpage %}
           <div>
             <a href="{% url 'public:journal:journal_detail' journal.code %}">
               <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
-              {{ issue.volume_title_with_pages }} {% trans 'de la revue' %} {{ journal.name }}" />
+              {{ issue.volume_title_with_pages }} {{ journal.name }}" />
             </a>
           </div>
           {% endif %}
 
-          <header>
-            <div class="mono-space">{% trans "De la revue" %}</div>
-            <h2 class="h4 no-margin"><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></h2>
-          </header>
-
         </div>
 
-        {# journal meta infos #}
-        <div class="sidebar-block journal-meta">
+        <div class="sidebar-block">
 
-          <h2>{% trans "Fiche" %}</h2>
+          <h3>{% trans "Fiche" %}</h3>
 
           <dl class="journal-meta--list">
 
@@ -199,7 +287,9 @@
             {% endif %}
           </dl>
           <div class="journal-meta--list">
-            <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
+            <a href="{% url 'public:journal:journal_detail' journal.code %}">
+              <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
+            </a>
           </div>
         </div>
         {% endcache %}
@@ -207,97 +297,6 @@
           {% include "public/partials/subscription_sponsor_badge.html" %}
         </div>
       </aside>
-
-      {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
-      {# Issue summary #}
-      <section class="col-sm-9 col-sm-pull-3">
-
-        <header class="page-header-main">
-            <p class="title-tag">{{ issue.journal.name }}</p>
-
-            <h1>
-              {% for theme in themes %}
-              {% if forloop.first %}<span>{% else %} / {% endif %}
-              {% if theme.html_name and theme.html_subname %}
-                {{ theme.html_name|safe }}: {{ theme.html_subname|safe }}
-              {% else %}
-                {{ theme.html_name|safe }}
-              {% endif %}
-              {% if forloop.first %}</span>{% endif %}
-              {% endfor %}
-              <span>{{ issue.volume_title_with_pages }}</span>
-            </h1>
-            <h2>{% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})</h2>
-        </header>
-
-        {% if articles_per_section %}
-
-        {% for k, section1 in articles_per_section.items %}
-        {% if section1.titles.main %}
-        <h3 class="title-tag section">
-          {{ section1.titles.main }}
-          {% for paral in section1.titles.paral %}/ {{ paral }}{% endfor %}
-        </h3>
-        {% endif %}
-
-        <ol class="issue_detail--articles unstyled section-1">
-        {% for article in section1.objects %}
-        {% include "public/journal/partials/issue_detail_article_item.html" %}
-        {% endfor %}
-        </ol>
-
-        {% if section1.section2 %}
-          {% for k, section2 in section1.section2.items %}
-          {% if section2.titles.main %}
-          <h4 class="title-tag section">
-            {{ section2.titles.main }}
-            {% for paral in section2.titles.paral %}/ {{ paral }}{% endfor %}
-          </h4>
-          {% endif %}
-
-          <ol class="issue_detail--articles unstyled section-2">
-          {% for article in section2.objects %}
-          {% include "public/journal/partials/issue_detail_article_item.html" %}
-          {% endfor %}
-          </ol>
-
-          {% if section2.section3 %}
-            {% for k, section3 in section2.section3.items %}
-            {% if section3.titles.main %}
-            <h5 class="title-tag section">
-              {{ section3.titles.main }}
-              {% for paral in section3.titles.paral %}/ {{ paral }}{% endfor %}
-            </h5>
-            {% endif %}
-
-            <ol class="issue_detail--articles unstyled section-3">
-            {% for article in section3.objects %}
-            {% include "public/journal/partials/issue_detail_article_item.html" %}
-            {% endfor %}
-            </ol>
-
-            {% endfor %}
-          {% endif %}
-
-          {% endfor %}
-        {% endif %}
-
-        {% endfor %}
-
-        {% else %}
-
-          {# This is displayed only if the Fedora repository is unavailable #}
-
-          <ol class="issue_detail--articles unstyled section-1">
-          {% for article in articles %}
-          {% include "public/journal/partials/issue_detail_article_item.html" %}
-          {% endfor %}
-          </ol>
-
-        {% endif %}
-
-      </section>
-      {% endcache %}
 
     </div>
   </div>
