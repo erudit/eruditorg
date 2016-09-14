@@ -11,27 +11,6 @@
 
   }
 
-  h3 {
-    margin-top: 20px;
-    font-size: 1.75em;
-    text-transform: none;
-  }
-
-  h4 {
-    margin-top: 10px;
-    margin-left: 20px;
-    font-size: 1.55em;
-    @include fw-sans-medium;
-    text-transform: none;
-  }
-
-  h5 {
-    margin-top: 10px;
-    margin-left: 50px;
-    font-size: 1.15em;
-    @include fw-sans-medium;
-  }
-
   /**
   * List of articles
   */
