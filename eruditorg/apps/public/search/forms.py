@@ -49,8 +49,8 @@ FUNDS_CHOICES = (
 )
 
 PUB_TYPES_CHOICES = (
-    ('Article', _('Savantes')),
-    ('Culturel', _('Culturelles')),
+    ('Article', _('Articles savants')),
+    ('Culturel', _('Articles culturels')),
     ('Thèses', _('Thèses')),
     ('Livres', _('Livres')),
     ('Actes', _('Actes')),
@@ -240,10 +240,10 @@ class ResultsOptionsForm(forms.Form):
         label=_('Trier par...'),
         choices=[
             ('relevance', _('Pertinence')),
-            ('title_asc', _('Titre (ordre croissant)')),
-            ('title_desc', _('Titre (ordre décroissant)')),
-            ('author_asc', _('Premier auteur (ordre croissant)')),
-            ('author_desc', _('Premier auteur (ordre décroissant)')),
-            ('pubdate_asc', _('Date de publication (ordre croissant)')),
-            ('pubdate_desc', _('Date de publication (ordre décroissant)')),
+            ('title_asc', _('Titre (A–Z)')),
+            ('title_desc', _('Titre (Z–A)')),
+            ('author_asc', _('Premier auteur (A–Z)')),
+            ('author_desc', _('Premier auteur (Z–A)')),
+            ('pubdate_asc', _('Date de publication (croissant)')),
+            ('pubdate_desc', _('Date de publication (décroissant)')),
         ], required=False)

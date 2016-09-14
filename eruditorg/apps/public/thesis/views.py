@@ -78,12 +78,12 @@ class ThesisCollectionHomeView(DetailView):
 class BaseThesisListView(ListView):
     """ Base view for displaying a list of theses associated with a collection. """
     available_tris = OrderedDict((
-        ('author_asc', _('Auteur (croissant)')),
-        ('author_desc', _('Auteur (décroissant)')),
+        ('author_asc', _('Auteur (A–Z)')),
+        ('author_desc', _('Auteur (Z–A)')),
         ('date_asc', _("Date d'ajout (croissant)")),
         ('date_desc', _("Date d'ajout (décroissant)")),
-        ('title_asc', _('Titre (croissant)')),
-        ('title_desc', _('Titre (décroissant)')),
+        ('title_asc', _('Titre (A–Z)')),
+        ('title_desc', _('Titre (Z–A)')),
     ))
     collection_pk_url_kwarg = 'collection_pk'
     context_object_name = 'theses'

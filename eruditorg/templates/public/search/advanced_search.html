@@ -10,11 +10,10 @@
   <section id="advanced-search-page" class="container">
 
     <div class="row">
-      <header class="page-header-main search-header col-xs-12 border-bottom">
-        <hgroup>
-          <h2>{% trans "Recherche avancée" %} <span class="hint--top hint--no-animate" data-hint="{% trans "La recherche avancée vous permet de définir avec précision les requêtes de recherche à exécuter au sein de la base de données des documents Érudit" %}"><i class="ion-help-circled"></i></span></h2>
-        </hgroup>
-      </header>
+      <div class="page-header-main search-header col-md-8">
+        <h2>{% trans "Recherche avancée" %}</h2>
+        {% lorem 1 p %}
+      </div>
     </div>
 
     <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form" method="get">
