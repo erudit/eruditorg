@@ -260,9 +260,9 @@
 
             <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
             {% if journal.open_access %}
-            <dd>{% trans "Disponible en libre accès" %}</dd>
+            <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
             {% else %}
-            <dd>{% trans "Non-disponible en libre accès" %}</dd>
+            <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
             {% endif %}
 
             {% if journal.disciplines.all|length > 0 %}

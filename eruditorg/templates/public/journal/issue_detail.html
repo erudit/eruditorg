@@ -123,11 +123,13 @@
         </h3>
         {% endif %}
 
+        {% if section1.objects %}
         <ol class="issue_detail--articles unstyled section-1">
         {% for article in section1.objects %}
         {% include "public/journal/partials/issue_detail_article_item.html" %}
         {% endfor %}
         </ol>
+        {% endif %}
 
         {% if section1.section2 %}
           {% for k, section2 in section1.section2.items %}
@@ -138,11 +140,13 @@
           </h4>
           {% endif %}
 
+          {% if section2.objects %}
           <ol class="issue_detail--articles unstyled section-2">
           {% for article in section2.objects %}
           {% include "public/journal/partials/issue_detail_article_item.html" %}
           {% endfor %}
           </ol>
+          {% endif %}
 
           {% if section2.section3 %}
             {% for k, section3 in section2.section3.items %}
@@ -153,11 +157,13 @@
             </h5>
             {% endif %}
 
+            {% if section3.objects %}
             <ol class="issue_detail--articles unstyled section-3">
             {% for article in section3.objects %}
             {% include "public/journal/partials/issue_detail_article_item.html" %}
             {% endfor %}
             </ol>
+            {% endif %}
 
             {% endfor %}
           {% endif %}
@@ -266,9 +272,9 @@
 
             <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
             {% if journal.open_access %}
-            <dd>{% trans "Disponible en libre accès" %}</dd>
+            <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
             {% else %}
-            <dd>{% trans "Non-disponible en libre accès" %}</dd>
+            <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
             {% endif %}
 
             {% if journal.disciplines.all|length > 0 %}
