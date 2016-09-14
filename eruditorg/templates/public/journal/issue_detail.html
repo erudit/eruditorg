@@ -309,44 +309,37 @@
 
   {% cache FOREVER_TTL "public_issue_detail_back_issues" issue.id LANGUAGE_CODE %}
   <section class="back-issues">
-
-      <div class="container">
-
-        <div class="row">
-
-          <header class="back-issues--header col-xs-12">
-            <h3 class="h2 no-margin">
-              {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
-              <small>({{ journal.published_issues|length }} numéros)</small>
-            </h3>
-          </header>
-
-        </div>
-
-        <div class="row">
-          <ul class="issue-list">
-            {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
-            {% if published_issue != issue %}
-            <li class="issue-list-item--inverted col-xs-6 col-sm-3">
-              <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-                {% if issue.has_coverpage %}<img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{{ published_issue.name }}" />{% endif %}
-                <header>
-                  <h5>
-                    <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-                      <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-                      {% if published_issue.html_title %}<br/><span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
-                    </a>
-                  </h5>
-                </header>
-              </a>
-            </li>
-            {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-
-      </div>
-
+    <div class="container">
+      <header class="back-issues--header col-xs-12">
+        <h3>
+          {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
+          <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues">
+            <small>({{ journal.published_issues|length }} numéros)</small>
+          </a>
+        </h3>
+      </header>
+      <ul class="issue-list">
+        {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
+        {% if published_issue != issue %}
+        <li class="issue-list--item col-xs-6 col-sm-3">
+          {% if issue.has_coverpage %}
+          <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
+            <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{{ published_issue.name }}" />
+          </a>
+          {% endif %}
+          <div class="issue-list--title">
+            <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
+              <h5>
+                <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
+                {% if published_issue.html_title %}<br/><span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
+              </h5>
+            </a>
+          </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
   </section>
   {% endcache %}
 
