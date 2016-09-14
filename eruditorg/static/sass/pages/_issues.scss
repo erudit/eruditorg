@@ -4,7 +4,7 @@
 
 .back-issues {
   margin-top: $margin-vertical-default * 2;
-  background-color: $gray-lighter;
+  background: $light-grey;
   padding: $margin-vertical-default 0;
 
   .back-issues--header {
@@ -63,7 +63,7 @@
     }
   }
   .issue-list--theme {
-    @include fw-sans-bold;
+    @include fw-sans-medium;
     display: block;
     margin: 0.25em 0;
   }

@@ -130,4 +130,47 @@
 
   }
 
+  /**
+  * Back issues section
+  */
+
+  .back-issues {
+    background: $light-grey;
+
+    .back-issues--header {
+      font-size: 1.25em;
+    }
+
+    .issue-list--item img {
+      height: 175px;
+    }
+
+    .issue-list--title {
+      margin-top: 1em;
+
+      h5 {
+        margin: 0;
+      }
+
+      a {
+        border-top: 1px solid $dark-grey;
+        padding: 1em 0;
+        display: block;
+        @include transition(all 150ms);
+
+        &:hover, &:focus, &:active, &:active:focus {
+          background: $coral-red;
+          color: #FFF;
+          text-decoration: none;
+          @include fw-sans-medium;
+          padding: 1em 0.25em;
+          border-color: $coral-red;
+        }
+
+      }
+
+    }
+
+  }
+
 }
