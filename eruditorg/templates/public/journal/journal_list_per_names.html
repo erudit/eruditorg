@@ -45,11 +45,7 @@
     <div class="row">
       <div class="col-xs-12 clearfix">
         <nav class="pull-right">
-          {% if sorting == 'name' %}
           <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines" class="btn btn-primary-outlined">{% trans "Revues par disciplines" %}</a>
-          {% elif sorting == 'disciplines' %}
-          <a href="{% url 'public:journal:journal_list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
-          {% endif %}
         </nav>
         <h2 class="h3 bold">{% if sorting == 'name' %}{% trans "Revues par ordre alphabétique" %}{% elif sorting == 'disciplines' %}{% trans "Revues par disciplines" %}{% endif %}</h2>
         <div class="row"><div class="col-md-8">{% lorem 1 p %}</div></div>
