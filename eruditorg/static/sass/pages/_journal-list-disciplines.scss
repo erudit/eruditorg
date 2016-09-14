@@ -1,35 +1,44 @@
-body.journal_list_per_disciplines #breadcrumb {
+.journal_list_per_disciplines #breadcrumb {
 	background: $light-grey;
 }
 
 #journal_list_per_disciplines {
 
-	// sorting header with title
+	// sorting list
 	.sorting-index {
 		background: $light-grey;
-		padding-top: 0px;
-		padding-bottom: 60px;
-		font-size: 18px;
+		padding: 0 0 2em 0;
 
 		h2 {
 			margin-top: 0;
 			margin-bottom: $margin-vertical-default;
 		}
 
-		nav.index {
+		.index {
+      margin-top: 1em;
 			@include content-columns(4, $grid-gutter-width/2);
-			@media (max-width: $screen-sm-max) {
+
+      @media (max-width: $screen-sm-max) {
 				@include content-columns(2, $grid-gutter-width/2);
 			}
+
 			@media (max-width: $screen-xs-max) {
 				@include content-columns(1, $grid-gutter-width/2);
 			}
 
-			h5 {
-				font-size: 18px;
-			}
+      ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+          font-size: 16px;
+          margin-bottom: 0.75em;
+        }
+
+      }
 
 		}
+
 	}
 
 	// each sorting group
@@ -73,9 +82,6 @@ body.journal_list_per_disciplines #breadcrumb {
 				clear: both;
 			}
 
-			// &:nth-child(odd) {
-			// 	background: $light-grey;
-			// }
 		}
 	}
 }
