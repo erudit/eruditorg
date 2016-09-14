@@ -59,7 +59,10 @@ body.home {
       margin-bottom: 30px;
 
       .glory--header--title {
-        @include fw-sans-bold();
+        span:first-child {
+          display: block;
+          @include fw-sans-bold();
+        }
       }
     }
 

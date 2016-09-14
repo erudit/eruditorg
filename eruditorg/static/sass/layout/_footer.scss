@@ -57,6 +57,7 @@ footer#site-footer {
 
   .logo-white {
     margin-bottom: 1em;
+    display: block;
   }
 
   .footer-legal {
@@ -78,6 +79,15 @@ footer#site-footer {
 
     a {
       color: #fff;
+    }
+
+    .erudit-headline {
+      border-top: 1px solid #FFF;
+      padding-top: 0.25em;
+      margin-top: 1.75em;
+      display: inline-block;
+      font-size: 20px;
+      @include fw-sans-medium;
     }
 
   }
