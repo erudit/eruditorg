@@ -39,14 +39,14 @@
 
 {% block content %}
 <div id="journal_list_per_disciplines">
-
-  <header class="sorting-index container-fluid">
-    <div class="row">
+  <header class="page-header-main sorting-index container-fluid">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 clearfix">
-            <h2 class="h3 bold pull-left">{% if sorting == 'name' %}{% trans "Revues par ordre alphabétique" %}{% elif sorting == 'disciplines' %}{% trans "Revues par disciplines" %}{% endif %}</h2>
-            <nav class="pull-right">
+          <div class="col-md-8">
+            <h1>{% trans "Revues par disciplines" %}</h1>
+          </div>
+          <div class="col-md-offset-1 col-md-3">
+            <nav class="text-right nav-btn">
               <a href="{% url 'public:journal:journal_list' %}?sorting=name" class="btn btn-primary-outlined">{% trans "Revues par ordre alphabétique" %}</a>
             </nav>
           </div>
@@ -65,66 +65,63 @@
           </nav>
         </div>
       </div>
-    </div>
   </header>
 
   {% cache FOREVER_TTL "public_journal_list_disciplines" LANGUAGE_CODE %}
   {% for objects_group in sorted_objects %}
   <a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible">{{ discipline }}</a>
-  <div class="sorting-group container-fluid {% cycle "odd" "even" %}">
+  <section class="sorting-group container-fluid {% cycle "odd" "even" %}">
     <header class="row sorting-group--title">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 title">
-            <h2 class="no-margin h3">
+            <h2>
               {% if not objects_group.key %}
                 {% trans "Autres" %}
               {% else %}
                 {{ objects_group.name }}
               {% endif %}
-              <a href="#top" id="scroll-top" class="erudicon erudicon-arrow-up"></a>
+              <a href="#top" class="erudicon erudicon-arrow-up scroll-top"></a>
             </h2>
           </div>
         </div>
       </div>
     </header>
     {% for collection_group in objects_group.collections %}
-      <section class="row sorting-group--articles sorting-group--articles--default">
-        <div class="container">
-          <div class="row">
-            <div class="col col-md-3">
-              <h3 class="h4 color-red">{{ collection_group.key.name }}</h3>
+    <section class="container sorting-group--articles sorting-group--articles--default">
+      <ul class="row sorting-group--journals">
+        <li class="col-sm-6 col-md-3 collection-title">
+          <h3 {% if collection_group.key.code == "erudit" %}class="collection-erudit"{% endif %}>{{ collection_group.key.name }}</h3>
+        </li>
+        {% for journal in collection_group.objects %}
+        <li class="col-sm-6 col-md-3 journal-item">
+          <a
+          {% if journal.external_url %}
+          href="{% url 'public:journal:journal_external_redirect' journal.localidentifier %}"
+          target="_blank"
+          {% else %}
+          href="{% url 'public:journal:journal_detail' journal.code %}"
+          {% endif %}>
+            <div class="journal-title">
+              <span>{{ journal.name }}</span>
+              {% if journal.subtitle %}
+              <span><br/>{{ journal.subtitle }}</span>
+              {% endif %}
             </div>
-            {% for journal in collection_group.objects %}
-            <article class="col col-md-3 journal-thumbnail">
-              <header class="row">
-                <h4 class="col-xs-12">
-                  <a class="" href="{% if journal.external_url %}{% url 'public:journal:journal_external_redirect' journal.localidentifier %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
-                    {{ journal.name }}
-                  </a>
-                </h4>
-              </header>
-              <footer class="row">
-                <div class="col-xs-8 color-dark-grey">
-                  {% if journal.subtitle %}
-                  <p class="color-dark-grey">{{ journal.subtitle }}</p>
-                  {% endif %}
-                </div>
-                <div class="col-xs-4">
-                  {% if journal.provided_by_fedora %}
-                  <a class="" href="{% url 'public:journal:journal_detail' journal.code %}">
-                    <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
-                  </a>
-                  {% endif %}
-                </div>
-              </footer>
-            </article>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
+            {% if journal.provided_by_fedora %}
+            <div class="row">
+              <div class="col-xs-4 pull-right">
+                <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
+              </div>
+            </div>
+            {% endif %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
     {% endfor %}
-  </div>
+  </section>
   {% endfor %}
   {% endcache %}
 
