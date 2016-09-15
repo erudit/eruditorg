@@ -121,7 +121,7 @@
             <div class="col-xs-3 col-sm-12">
               <p class="category-tag">{{ issue.journal.disciplines.all|join:", " }}</p>
               <h3 class="latest-issues--article--journal-title">
-                <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
+                <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
                   {{ issue.journal.name }}
                 </a>
               </h3>
