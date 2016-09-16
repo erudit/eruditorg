@@ -81,14 +81,14 @@
               {% else %}
                 {{ objects_group.name }}
               {% endif %}
-              <a href="#top" class="erudicon erudicon-arrow-up scroll-top"></a>
+              <a href="#top" class="scroll-top">|^</a>
             </h2>
           </div>
         </div>
       </div>
     </header>
     {% for collection_group in objects_group.collections %}
-    <section class="container sorting-group--articles sorting-group--articles--default">
+    <section class="container sorting-group--collection">
       <ul class="row sorting-group--journals">
         <li class="col-sm-6 col-md-3 collection-title">
           <h3 {% if collection_group.key.code == "erudit" %}class="collection-erudit"{% endif %}>{{ collection_group.key.name }}</h3>
@@ -108,6 +108,9 @@
               <span><br/>{{ journal.subtitle }}</span>
               {% endif %}
             </div>
+            {% if journal.open_access %}
+            <div class="erudicon erudicon-open-access"></div>
+            {% endif %}
             {% if journal.provided_by_fedora %}
             <div class="row">
               <div class="col-xs-4 pull-right">
