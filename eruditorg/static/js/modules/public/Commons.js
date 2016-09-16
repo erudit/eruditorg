@@ -14,14 +14,14 @@ class Commons {
   * Scroll back to top of page from element
   */
   scrollToTop() {
-   $('#scroll-top').on('click', function(e) {
+   $('.scroll-top').on('click', function(e) {
 
      if( e ) {
        e.preventDefault();
        e.stopPropagation();
      }
 
-     $('html,body').animate( { scrollTop: 0 }, 750 );
+     $('html,body').animate( { scrollTop: 0 }, 450 );
      return false;
    });
  }
