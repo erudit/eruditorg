@@ -1,9 +1,0 @@
----
-- name: Install packages
-  apt: name={{ item }} state=latest
-  sudo: yes
-  with_items:
-    - apache2
-    - libapache2-mod-wsgi-py3
-  tags:
-    - provision

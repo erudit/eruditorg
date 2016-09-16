@@ -1,8 +1,0 @@
-[local]
-192.168.33.10
-
-[dev]
-zenon-dev.erudit.team
-
-[prod]
-zenon.erudit.team
