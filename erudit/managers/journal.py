@@ -16,7 +16,7 @@ class InternalJournalManager(MultilingualManager):
     def get_queryset(self):
         """ Returns all the internal Journal instances. """
         return super(InternalJournalManager, self).get_queryset().filter(
-            redirect_to_external_url=True
+            redirect_to_external_url=False
         )
 
 
