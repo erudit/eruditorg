@@ -1,81 +1,189 @@
-body.journal_list_per_disciplines #breadcrumb {
+.journal_list_per_disciplines #breadcrumb {
 	background: $light-grey;
 }
 
 #journal_list_per_disciplines {
 
-	// sorting header with title
+	// sorting list
 	.sorting-index {
 		background: $light-grey;
-		padding-top: 0px;
-		padding-bottom: 60px;
-		font-size: 18px;
+		padding: 0 0 2em 0;
 
 		h2 {
 			margin-top: 0;
 			margin-bottom: $margin-vertical-default;
 		}
 
-		nav.index {
+		.index {
+      margin-top: 1em;
 			@include content-columns(4, $grid-gutter-width/2);
-			@media (max-width: $screen-sm-max) {
+
+      @media (max-width: $screen-sm-max) {
 				@include content-columns(2, $grid-gutter-width/2);
 			}
+
 			@media (max-width: $screen-xs-max) {
 				@include content-columns(1, $grid-gutter-width/2);
 			}
 
-			h5 {
-				font-size: 18px;
-			}
+      ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+          font-size: 16px;
+          margin-bottom: 0.75em;
+        }
+
+      }
 
 		}
+
 	}
 
 	// each sorting group
 	.sorting-group {
-		padding-top: 90px;
+		padding-top: 2em;
 
 		&.even {
 			background: $light-grey;
 		}
 
-		&.odd {
-			background: #fff;
-		}
+    .sorting-group--collection {
+      padding: 1.5em 0 0 0;
+    }
 
-		.sorting-group--title {
-			.title {
-				padding-top: 20px;
-				padding-bottom: 20px;
-				@include grid-cell-border('top', 1px, $black);
+    .sorting-group--journals {
+      list-style: none;
+      margin: 0;
+    }
 
-				a {
-					display: inline-block;
-					margin-left: 5px;
-					color: $dark-grey;
-					font-size: 24px;
-					outline: none;
-				}
-			}
-		}
+    .sorting-group--title {
 
-		.sorting-group--articles {
-			padding: 60px 0 0 0;
+      .title {
+        padding-top: 1.75em;
+        margin-top: 1.75em;
+        @include grid-cell-border('top', 1px, $black);
 
-			h3 {
-				letter-spacing: 0.8px;
-				@include fw-sans-bold();
-			}
+        a {
+          display: inline-block;
+          color: $dark-grey;
+          font-size: 30px;
+          @include fw-sans-medium;
 
-			&.sorting-group--articles--default .col:nth-child(4n+1),
-			&.sorting-group--articles--small .col:nth-child(6n+1) {
-				clear: both;
-			}
+          &:hover, &:active, &:focus, &:active:focus {
+            text-decoration: none;
+            color: $coral-red;
+          }
 
-			// &:nth-child(odd) {
-			// 	background: $light-grey;
-			// }
-		}
+        }
+
+      }
+
+    }
+
+    .collection-title h3 {
+      color: $coral-red;
+      font-size: 1.15em;
+      letter-spacing: 0.05em;
+      @include fw-sans-bold();
+    }
+
+    .journal-item {
+      margin-bottom: 2em;
+
+      > a {
+        display: block;
+        padding: 0.75em 0.5em 1em;
+        font-size: 14px;
+        border-top: 1px solid $mid-grey;
+        @include transition(all 100ms);
+
+        img {
+          margin-top: 0.5em;
+          float: right;
+          mix-blend-mode: multiply;
+        }
+
+        .journal-title span + span {
+          color: $dark-grey;
+        }
+
+        .erudicon-open-access {
+          font-size: 1.5em;
+          color: $coral-red;
+          margin-top: 0.25em;
+        }
+
+        &:hover, &:active, &:focus, &:active:focus {
+          background: $coral-red;
+          color: #FFF;
+          text-decoration: none;
+          @include fw-sans-medium;
+          border-color: $coral-red;
+
+          img {
+            visibility: hidden;
+          }
+
+          .erudicon-open-access {
+            color: #FFF;
+          }
+
+          .journal-title span + span {
+            color: #FFF;
+          }
+
+        }
+
+      }
+
+    }
+
 	}
+
+}
+
+/**
+* Row alignment for different viewport sizes / responsive
+**/
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+  .journal-item,
+  .collection-title {
+
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-md-min) {
+
+  .journal-item,
+  .collection-title {
+
+    &:nth-child(4n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
+@media (max-width: $screen-sm-max) {
+
+  .nav-btn {
+    text-align: center;
+    margin-bottom: 1em;
+
+    .btn {
+      width: 100%;
+    }
+
+  }
+
 }
