@@ -36,7 +36,7 @@
 {% block body_data_attributes %} data-spy="scroll" data-target="#journal_list_per_names" data-offset="180"{% endblock body_data_attributes %}
 
 {% block breadcrumb %}{{ block.super }}
-  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+/ <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
 {% endblock %}
 
 {% block content %}
@@ -61,56 +61,61 @@
 
   <div class="container">
     <div id="id_journal_list_body" class="row">
-      <aside class="col-sm-3">
+      <aside class="col-sm-2 sidebar-block filters">
         <form id="filter_form" action="" method="get">
-          <div class="filter-title">{% trans "Filtres" %}</div>
+          <h2 class="filter-title">{% trans "Filtres" %}</h2>
+
           <div class="form-group">
+            <h3 class="sr-only">{% trans "Par type d'accès" %}</h3>
             <div id="div_id_{{ filter_form.open_access.html_name }}" class="checkbox">
               {{ filter_form.open_access|add_class:'form-control' }}
-              <label for="{{ filter_form.open_access.auto_id }}">
-                <span class="pull-right"><span class="sprite sprite-o-a"></span></span>
-                {{ filter_form.open_access.label }}&nbsp;&nbsp;
+              <label for="{{ filter_form.open_access.auto_id }}" class="control-label">
+                {{ filter_form.open_access.label }}&nbsp;<span class="erudicon erudicon-open-access"></span>
               </label>
               {% for error in filter_form.open_access.errors %}<p class="error">{{ error }}</p>{% endfor %}
             </div>
           </div>
-          <hr />
+
           <div id="div_id_{{ filter_form.types.html_name }}" class="form-group">
-            <label for="id_{{ filter_form.types.auto_id }}_0" class="control-label">{{ filter_form.types.label }} {% if filter_form.types.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.types.help_text }}"><i class="ion-help-circled"></i></span>{% endif %}</label>
+            <h3>{{ filter_form.types.label }} {% if filter_form.types.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.types.help_text }}"><span class="ion-help-circled"></span></span>{% endif %}</h3>
             <div class="controls">
-            {% for choice in filter_form.types.field.choices %}
+              {% for choice in filter_form.types.field.choices %}
               <div class="checkbox">
                 <input type="checkbox" name="{{ filter_form.types.html_name }}" class="styled" id="{{ filter_form.types.auto_id }}_{{ forloop.counter }}" value="{{ choice.0 }}"{% if choice.0 in filter_form.types.value or choice.0|stringformat:"s" in filter_form.types.value or choice.0|stringformat:"s" == filter_form.types.value|stringformat:"s" %} checked="checked"{% endif %}>
                 <label for="{{ filter_form.types.auto_id }}_{{ forloop.counter }}" class="">{{ choice.1 }}</label>
               </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-          <hr />
+
           <div id="div_id_{{ filter_form.collections.html_name }}" class="form-group">
-            <label for="id_{{ filter_form.collections.auto_id }}_0" class="control-label">{{ filter_form.collections.label }} {% if filter_form.collections.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.collections.help_text }}"><i class="ion-help-circled"></i></span>{% endif %}</label>
+            <h3>{{ filter_form.collections.label }} {% if filter_form.collections.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.collections.help_text }}"><span class="ion-help-circled"></span></span>{% endif %}</h3>
             <div class="controls">
-            {% for choice in filter_form.collections.field.choices %}
+              {% for choice in filter_form.collections.field.choices %}
               <div class="checkbox">
                 <input type="checkbox" name="{{ filter_form.collections.html_name }}" class="styled" id="{{ filter_form.collections.auto_id }}_{{ forloop.counter }}" value="{{ choice.0 }}"{% if choice.0 in filter_form.collections.value or choice.0|stringformat:"s" in filter_form.collections.value or choice.0|stringformat:"s" == filter_form.collections.value|stringformat:"s" %} checked="checked"{% endif %}>
                 <label for="{{ filter_form.collections.auto_id }}_{{ forloop.counter }}" class="">{{ choice.1 }}</label>
               </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-          <div class="form-action col-centered">
+
+          <div class="form-action">
             <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
           </div>
+
         </form>
       </aside>
-      <div class="col-sm-9">
+      <div class="col-sm-offset-1 col-sm-9">
         <div id="items_menu">
           <ul id="id_journal_categories" class="nav index">
-          {% for objects_group in sorted_objects %}
+            {% for objects_group in sorted_objects %}
             {% if not objects_group.key %}
             <li><a href="#section-void">{% trans "Autres" %}</a></li>
             {% else %}
             <li><a href="#section-{{ objects_group.key }}">{{ objects_group.name }}</a></li>
             {% endif %}
-          {% endfor %}
+            {% endfor %}
           </ul>
           <ul id="id_journal_items_header" class="row">
             <li class="col-sm-6">{% trans "Revue" %}</li>
@@ -122,8 +127,8 @@
         </div>
         {% for objects_group in sorted_objects %}
         <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
-        {% for journal in objects_group.objects %}
-        {% cache FOREVER_TTL "public_journal_list_names_item" journal.pk LANGUAGE_CODE %}
+          {% for journal in objects_group.objects %}
+          {% cache FOREVER_TTL "public_journal_list_names_item" journal.pk LANGUAGE_CODE %}
           <li>
             {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
             <div class="row">
@@ -146,8 +151,8 @@
               </div>
             </div>
           </li>
-        {% endcache %}
-        {% endfor %}
+          {% endcache %}
+          {% endfor %}
         </ul>
         {% endfor %}
       </div>

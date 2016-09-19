@@ -62,13 +62,11 @@ fieldset {
 legend {
   letter-spacing: 1px;
   font-size: $font-size-large * 1.05;
-  color: #000;
 }
 
 /* labels */
 label.control-label {
   margin: 0.25em 0;
-  color: #000;
   font-weight: normal;
   display: block;
 }
@@ -224,7 +222,6 @@ label.required:after {
     margin-bottom: 0;
     font-weight: normal;
     cursor: pointer;
-    font-size: $font-size-base;
   }
 }
 .radio input[type="radio"],
