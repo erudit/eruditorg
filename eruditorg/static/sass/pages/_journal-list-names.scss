@@ -1,49 +1,49 @@
-body.journal_list{
-  position: relative;
-}
-
 #journal_list_per_names {
   position: relative;
 
-  #id_journal_list_body{
+  #id_journal_list_body {
     margin-top: 30px;
 
-    aside{
+    aside {
       position: relative;
-      padding-right: 30px;
 
-      form{
-        &.sticky{
+      form {
+
+        h2 {
+          border-color: $dark-grey;
+        }
+
+        h3 {
+          padding: 0 0 0.15em 0;
+        }
+
+        .form-group {
+          margin: 0 0 2em 0;
+          padding: 0;
+        }
+
+        .form-action {
+          margin-top: 20px;
+        }
+
+        .checkbox {
+          margin: 0.75em 0;
+        }
+
+        .erudicon-open-access {
+          color: $coral-red;
+          font-size: 1.15em;
+          vertical-align: sub;
+        }
+
+        &.sticky {
           position: fixed;
           top: 80px;
           width: 250px;
         }
 
-        hr{
-          border-top-color: $black;
-        }
-
-        .filter-title{
-          padding-bottom: 10px;
-          border-bottom: 1px solid $gray-dark;
-          font-size: 24px;
-        }
-
-        .form-group{
-          margin: 20px 0;;
-          padding: 0;
-        }
-
-        .form-action{
-          margin-top: 20px;
-        }
-
-        .hint--top{
-          i{
-            color: $coral-red;
-          }
-        }
       }
+
     }
 
     #items_menu{
