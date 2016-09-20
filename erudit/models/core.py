@@ -64,8 +64,7 @@ class Collection(models.Model):
     """ The code of the collection. It should be unique. """
 
     localidentifier = models.CharField(max_length=10, blank=True, null=True)
-    """ The localidentifier of the collection. There should be a correspondence between the
-    code of the collection and the ``Fonds_fac`` field in Solr. """
+    """ The localidentifier of the collection in Fedora """
 
     logo = models.ImageField(verbose_name=_('Logo'), blank=True, null=True)
     """ The logo that can be associated with a specific collection. """

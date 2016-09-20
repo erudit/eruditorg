@@ -65,7 +65,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     A journal is a collection of issues. It should be associated with a collection: Érudit, Persée,
     etc. This model supports Fedora-based journals through the use of the ``localidentifier`` field.
-    Journals that are not provided by Fedora should use this field.
+    Journals that are not provided by Fedora should not use this field.
     """
 
     collection = models.ForeignKey(Collection)
@@ -180,14 +180,21 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def provided_by_fedora(self):
         # We assume that the journals provided by a Fedora endpoint have a localidentifier.
-        return self.localidentifier is not None
+        if self.redirect_to_external_url:
+            return False
+
+        if self.localidentifier and self.collection.localidentifier:
+            return True
+        return False
 
     def get_full_identifier(self):
-        return "{}:{}.{}".format(
-            erudit_settings.FEDORA_PIDSPACE,
-            self.collection.localidentifier,
-            self.localidentifier
-        )
+        if self.provided_by_fedora:
+            return "{}:{}.{}".format(
+                erudit_settings.FEDORA_PIDSPACE,
+                self.collection.localidentifier,
+                self.localidentifier
+            )
+        return None
 
     def get_fedora_model(self):
         return JournalDigitalObject
@@ -321,7 +328,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     """ The copyrights of the issue """
 
     localidentifier = models.CharField(
-        max_length=100, unique=True, verbose_name=_('Identifiant Fedora'))
+        max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
 
     objects = models.Manager()
@@ -348,7 +355,12 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return EruditPublication
 
     def get_full_identifier(self):
-        return '{}.{}'.format(self.journal.get_full_identifier(), self.localidentifier)
+        if self.journal.provided_by_fedora and self.localidentifier:
+            return '{}.{}'.format(
+                self.journal.get_full_identifier(),
+                self.localidentifier
+            )
+        return None
 
     @cached_property
     def has_coverpage(self):
@@ -540,7 +552,12 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         return EruditArticle
 
     def get_full_identifier(self):
-        return '{}.{}'.format(self.issue.get_full_identifier(), self.localidentifier)
+        if self.issue.journal.provided_by_fedora:
+            return '{}.{}'.format(
+                self.issue.get_full_identifier(),
+                self.localidentifier
+            )
+        return None
 
     # Article-related methods and properties
     # --
