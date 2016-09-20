@@ -46,6 +46,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
+    redirect_to_external_url = False
 
     @factory.post_generation
     def publishers(self, create, extracted, **kwargs):

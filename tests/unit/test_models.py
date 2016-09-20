@@ -16,6 +16,7 @@ from erudit.test.factories import AuthorFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalTypeFactory
+from erudit.test.factories import CollectionFactory
 
 
 class TestJournal(BaseEruditTestCase):
@@ -150,6 +151,14 @@ class TestIssue(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.issue.get_full_identifier(), 'erudit:erudit.dummy139.dummy1234')
 
+    def test_issue_has_no_full_identifier_if_a_part_is_missing(self):
+        self.journal.localidentifier = "dummy139"
+        self.journal.save()
+        self.issue.localidentifier = None
+        self.issue.save()
+
+        assert self.issue.get_full_identifier() is None
+
     def test_can_return_an_appropriate_fedora_pid(self):
         # Setup
         self.journal.localidentifier = 'dummy139'
@@ -277,6 +286,34 @@ class TestArticle(BaseEruditTestCase):
         super(TestArticle, self).setUp()
         self.issue = IssueFactory.create(journal=self.journal)
         self.article = ArticleFactory.create(issue=self.issue)
+
+    def test_only_has_fedora_object_if_collection_has_localidentifier(self):
+        c1 = CollectionFactory.create(localidentifier=None)
+        j1 = JournalFactory.create(collection=c1)
+        issue_1 = IssueFactory.create(journal=j1)
+        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1)
+        assert article_1.fedora_object is None
+
+    def test_only_has_full_identifier_if_complete(self):
+        c1 = CollectionFactory.create(localidentifier=None)
+
+        j1 = JournalFactory.create(collection=c1, localidentifier=None)
+        i1 = IssueFactory.create(journal=j1)
+        article_1 = ArticleFactory.create(issue=i1)
+
+        assert article_1.get_full_identifier() is None
+
+        i1.localidentifier = 'issue1'
+        i1.save()
+        assert article_1.get_full_identifier() is None
+
+        j1.localidentifier = 'journal1'
+        j1.save()
+        assert article_1.get_full_identifier() is None
+
+        c1.localidentifier = 'c1'
+        c1.save()
+        assert article_1.get_full_identifier() is not None
 
     def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
         # Setup

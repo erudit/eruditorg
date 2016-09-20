@@ -44,7 +44,8 @@ class FedoraMixin(object):
         """
         Returns the eulfedora's object associated with the considered Django object.
         """
-        return self.fedora_model(api, self.pid)
+        if self.get_full_identifier():
+            return self.fedora_model(api, self.pid)
 
     @cached_property
     def fedora_object(self):
