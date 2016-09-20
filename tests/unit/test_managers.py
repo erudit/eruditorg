@@ -24,7 +24,10 @@ class TestInternalJournalManager(BaseEruditTestCase):
     def test_returns_only_the_internal_journals(self):
         # Setup
         journal_1 = JournalFactory.create(
-            collection=self.collection, external_url='http://example.com')
+            collection=self.collection,
+            external_url='http://example.com',
+            redirect_to_external_url=True
+        )
         JournalFactory.create(collection=self.collection, upcoming=False)
         # Run
         journals = Journal.internal_objects.all()
