@@ -50,49 +50,195 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>{% trans "Tous les auteurs" %}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      {% for letter, exist in letters_exists.items %}
-        {% if exist %}
-          <a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a>
-        {% else %}
-          <span class="text-muted">{{ letter|upper }}</span>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="col-md-9">
-      {% cache LONG_TTL "public_journal_authors" journal.id letter LANGUAGE_CODE %}
-      {% for author_dict in authors_dicts %}
-        <div class="well">
-          <h3>{{ author_dict.author.full_name }}</h3>
-          <div class="author-articles-wrapper">
-            <ul>
-              {% for article in author_dict.articles %}
-              {% cache FOREVER_TTL "public_journal_authors_item" journal.id article.id author.id LANGUAGE_CODE %}
-                <li>
-                  {% spaceless %}
-                    &laquo;
-                    <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">
-                      {{ article.title }}
-                    </a>
-                    &raquo;
-                    &nbsp;{{ journal.name }},&nbsp;{{ article.issue.volume_title_with_pages }}
-                  {% endspaceless %}
-                </li>
-              {% endcache %}
-              {% endfor %}
-            </ul>
+<section id="journal_authors_list">
+  <div class="container">
+    <div class="row">
+      {# Journal about #}
+      <div id="journal-about" class="col-sm-9 col-md-8">
+        <header class="page-header-main row">
+          <div class="col-xs-12">
+            <h1>
+              <span>{% trans 'Index des auteurs' %}</span>
+              <span>{{ journal.name }}</span>
+            </h1>
+          </div>
+        </header>
+
+        <nav class="alpha-nav">
+          <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
+          {% for letter, exist in letters_exists.items %}
+          <ul>
+            {% if exist %}
+              <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a></li>
+            {% else %}
+              <li><span>{{ letter|upper }}</span></li>
+            {% endif %}
+          </ul>
+          {% endfor %}
+        </nav>
+
+        <div class="authors-wrapper">
+          <ul class="authors">
+            {% cache LONG_TTL "public_journal_authors" journal.id letter LANGUAGE_CODE %}
+            {% for author_dict in authors_dicts %}
+              <li class="author-group">
+                <div class="author-name">{{ author_dict.author.full_name }}</div>
+                <ul class="author-articles">
+                  {% for article in author_dict.articles %}
+                  {% cache FOREVER_TTL "public_journal_authors_item" journal.id article.id author.id LANGUAGE_CODE %}
+                    <li class="author-article">
+                      {% spaceless %}
+                      <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">
+                        &laquo;&nbsp;<span class="article-title">{{ article.title }}</span>&nbsp;&raquo;, &nbsp;{{ journal.name }},&nbsp;{{ article.issue.volume_title_with_pages }}.
+                      </a>
+                      {% endspaceless %}
+                    </li>
+                  {% endcache %}
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}
+            {% endcache %}
+          </ul>
+          <div>
+            <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
           </div>
         </div>
-      {% endfor %}
-      {% endcache %}
+
+
+      </div>
+
+      {# Journal information #}
+      <aside class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
+        {% cache FOREVER_TTL "public_issue_detail_journal_info" issue.journal.id LANGUAGE_CODE %}
+        <div class="sidebar-block clearfix issue_detail--resume">
+          <header>
+            <h2><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></h2>
+          </header>
+
+          {% if issue.has_coverpage %}
+          <div>
+            <a href="{% url 'public:journal:journal_detail' journal.code %}">
+              <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
+              {{ issue.volume_title_with_pages }} {{ journal.name }}" />
+            </a>
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="sidebar-block">
+
+          <h3>{% trans "Fiche" %}</h3>
+
+          <dl class="journal-meta--list">
+
+            {% if journal.members.all %}
+            <dt class="mono-space">{% trans "Direction" %}</dt>
+            {% for member in journal.members.all %}
+            <p>{{ member.get_full_name }}</p>
+            {% endfor %}
+            {% endif %}
+
+            {% if journal.publishers.all %}
+            <dt class="mono-space">
+              {% blocktrans count total=journal.publishers.all|length %}
+              Éditeur
+              {% plural %}
+              Éditeurs
+              {% endblocktrans %}
+            </dt>
+            {% for publisher in journal.publishers.all %}
+            <dd>{{ publisher.name }}</dd>
+            {% endfor %}
+            {% endif %}
+
+            {% if journal.issn_print or journal.issn_web %}
+            <dt class="mono-space">{% trans "ISSN" %}</dt>
+            {% if journal.issn_print %}
+            <dd><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
+            <dd><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</dd>
+            {% endif %}
+            {% endif %}
+
+            {% if journal.issues_per_year %}
+            <dt class="mono-space">{% trans "Fréquence" %}</dt>
+            <dd>
+              {% blocktrans count issues_per_year=journal.issues_per_year %}
+              {{ issues_per_year }} numéro par année
+              {% plural %}
+              {{ issues_per_year }} numéros par année
+              {% endblocktrans %}
+            </dd>
+            {% endif %}
+
+            <dt class="mono-space">{% trans "Période de publication" %}</dt>
+            <dd>{{ journal.publication_period }}</dd>
+
+
+            {% if journal.first_issue %}
+            <dt class="mono-space">{% trans "Disponible dans Érudit depuis" %}</dt>
+            <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
+            {% endif %}
+
+            <dt class="mono-space">{% trans "Type de support" %}</dt>
+            <dd>
+              {% if journal.paper %}
+              {% trans "Numérique et papier" %}
+              {% else %}
+              {% trans "Numérique" %}
+              {% endif %}
+            </dd>
+
+            <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
+            {% if journal.open_access %}
+            <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
+            {% else %}
+            <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
+            {% endif %}
+
+            {% if journal.disciplines.all|length > 0 %}
+            <dt class="mono-space">
+              {% blocktrans count journal.disciplines.all|length as disciplines_count %}
+              Discipline
+              {% plural %}
+              Disciplines
+              {% endblocktrans %}
+            </dt>
+            <dd>
+              {% for discipline in journal.disciplines.all %}
+              <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines#{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </dd>
+            {% endif %}
+
+            {% if journal.website_url %}
+              <dt class="mono-space">{% trans "Site web" %}</dt>
+              <dd><a href="{{ journal.website_url }}">{{ journal.website_url }}</a></dd>
+            {% endif %}
+
+            {% if journal.previous_journal %}
+              <dt class="mono-space">{% trans "Revue précédée de…" %}</dt>
+              <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
+            {% endif %}
+            {% if journal.next_journal %}
+              <dt class="mono-space">{% trans "Revue suivie de…" %}</dt>
+              <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.name }}</a></dd>
+            {% endif %}
+
+          </dl>
+          <div class="journal-meta--list">
+            <a href="{% url 'public:journal:journal_detail' journal.code %}">
+              <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
+            </a>
+          </div>
+        </div>
+        {% endcache %}
+        <div class="sidebar-block">
+          {% include "public/partials/subscription_sponsor_badge.html" %}
+        </div>
+      </aside>
     </div>
   </div>
-</div>
+</section>
 {% endblock content %}
