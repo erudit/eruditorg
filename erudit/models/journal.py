@@ -128,7 +128,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     """ External URL of the home page of the Journal """
 
     redirect_to_external_url = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("Rediriger vers l'URL externe"),
         help_text=_("Cocher si les numéros de cette revue ne sont pas hébergés sur la plateforme Érudit")  # noqa
     )
