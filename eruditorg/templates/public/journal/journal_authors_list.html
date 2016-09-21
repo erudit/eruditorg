@@ -66,15 +66,15 @@
 
         <nav class="alpha-nav">
           <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
-          {% for letter, exist in letters_exists.items %}
           <ul>
+            {% for letter, exist in letters_exists.items %}
             {% if exist %}
               <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a></li>
             {% else %}
               <li><span>{{ letter|upper }}</span></li>
             {% endif %}
+            {% endfor %}
           </ul>
-          {% endfor %}
         </nav>
 
         <div class="authors-wrapper">
@@ -84,12 +84,13 @@
               <li class="author-group">
                 <div class="author-name">{{ author_dict.author.full_name }}</div>
                 <ul class="author-articles">
-                  {% for article in author_dict.articles %}
+                  {% for article in author_dict.articles|dictsortreversed:'article.issue.year'  %}
                   {% cache FOREVER_TTL "public_journal_authors_item" journal.id article.id author.id LANGUAGE_CODE %}
                     <li class="author-article">
                       {% spaceless %}
+                      <span class="article-year">{{ article.issue.year }}</span> —
                       <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">
-                        &laquo;&nbsp;<span class="article-title">{{ article.title }}</span>&nbsp;&raquo;, &nbsp;{{ journal.name }},&nbsp;{{ article.issue.volume_title_with_pages }}.
+                        {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article.title }}</span>{% trans '&nbsp;&raquo;' %}
                       </a>
                       {% endspaceless %}
                     </li>
@@ -104,8 +105,6 @@
             <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
           </div>
         </div>
-
-
       </div>
 
       {# Journal information #}
