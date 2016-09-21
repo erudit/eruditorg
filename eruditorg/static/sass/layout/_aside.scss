@@ -2,14 +2,42 @@
 // This file contains styles for <aside>s / lateral bars in the public site
 // ------------------------------------------------------------------------
 
-aside {
+aside,
+.sidebar-block {
 
   h2 {
-    font-size: 20px;
+    border-bottom: 1px solid $mid-grey;
+    padding-bottom: 0.35em;
+    font-size: 1.35em;
   }
 
-  p, li, dd {
+  h3 {
+    border-bottom: 1px solid $mid-grey;
+    font-size: 1.1em;
+    padding-bottom: 0.15em;
+  }
+
+  p, li, dd, label {
     font-size: 14px;
+  }
+
+  dl {
+
+    dt, dd {
+      display: block;
+      float: none;
+      width: auto;
+    }
+
+    dt {
+      font-size: 14px;
+      margin-top: 1.25em;
+    }
+
+    dd {
+      margin-bottom: 1.25em;
+    }
+
   }
 
 }
