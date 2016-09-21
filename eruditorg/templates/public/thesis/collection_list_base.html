@@ -42,22 +42,25 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div id="collection_thesis_list">
+<div id="thesis_collection_list">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 clearfix thesis-list-head">
-        {% if collection.logo %}
-        <div class="pull-right">
-          <span class="collection-logo">
-            <img src="{{ collection.logo.url }}" alt="" />
-          </span>
+    <header class="page-header-main">
+      <div class="row">
+        <div class="col-md-10 col-sm-8 col-xs-12">
+          <h1>{% block inner_title %}{% endblock inner_title %}</h1>
         </div>
-        {% endif %}
-        <h2 class="h3 bold">{% block inner_title %}{% endblock inner_title %}</h2>
+        <div class="col-md-2 col-sm-4 col-xs-4">
+          {% if collection.logo %}
+          <span class="collection-logo">
+            <img src="{{ collection.logo.url }}" alt="" class="img-responsive"/>
+          </span>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    </header>
+
     <div class="row">
-      <div class="col-md-9 thesis-list-wrapper">
+      <div class="col-sm-9 col-md-8 thesis-list-wrapper">
         <h3>{% trans "Liste complète" %}</h3>
         <div class="actions-wrapper">
           <div id="div_id_sort_by" class="form-group">
@@ -93,17 +96,17 @@
         </ul>
         <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
       </div>
-      <div class="col-md-3 sidebar">
-        <div class="repository-metadata">
-          <h3>{% trans "Fiche de ce dépôt" %}</h3>
+      <aside class="col-sm-3 col-md-offset-1 repository-meta">
+        <div class="sidebar-block">
+          <h2>{% trans "Fiche de ce dépôt" %}</h2>
           <dl>
             <dt class="mono-space">{% trans "Nombre de thèses" %}</dt>
             <dd>{{ paginator.count }}</dd>
           </dl>
           {% block inner_list_switcher %}{% endblock inner_list_switcher %}
         </div>
-        <div class="at-a-glance">
-          <h3>{% trans "En un coup d'oeil" %}</h3>
+        <div class="sidebar-block">
+          <h2>{% trans "En un coup d'oeil" %}</h2>
           {% for thesis in random_theses %}
             <a href="{{ thesis.url }}" class="thesis-link">
               <span class="thesis-title">{{ thesis.title }}</span>
@@ -111,7 +114,7 @@
             </a>
           {% endfor %}
         </div>
-      </div>
+      </aside>
     </div>
   </div>
 </div>
