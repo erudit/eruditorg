@@ -40,8 +40,7 @@ def get_search_elements(queryparams):
 
         q1_term = params.get('basic_search_term', '*')
         q1_field = params.get('basic_search_field', 'all')
-        q1_operator = params.get('basic_search_operator', None)
-        q1_operator = 'NOT' if q1_operator is not None else None
+        q1_operator = None
         search_elements.append(elements(q1_term, q1_field, q1_operator))
 
         for i in range(search_settings.MAX_ADVANCED_PARAMETERS):

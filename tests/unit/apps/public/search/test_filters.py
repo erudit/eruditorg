@@ -57,20 +57,6 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         self.assertEqual(filt.sqs._qs, '(*:*) AND (Metadonnees:"test")')
 
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_can_filter_using_a_negation_and_a_single_term(self, mock_get_results):
-        # Setup
-        mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
-            'basic_search_term': 'test',
-            'basic_search_field': 'meta',
-            'basic_search_operator': 'on',
-        }))
-        filt = EruditDocumentSolrFilter()
-        # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
-        self.assertEqual(filt.sqs._qs, '(*:*) AND ((*:* -Metadonnees:"test"))')
-
-    @unittest.mock.patch.object(Query, 'get_results')
     def test_can_properly_handle_advanced_queries_using_the_AND_operator(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results

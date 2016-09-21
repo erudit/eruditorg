@@ -38,10 +38,9 @@ class EruditDocumentSolrFilter(object):
         # Simple search parameters
         basic_search_term = query_params.get('basic_search_term', '*')
         basic_search_field = query_params.get('basic_search_field', 'all')
-        basic_search_operator = query_params.get('basic_search_operator', None)
         filters.update({'q': {
             'term': basic_search_term, 'field': basic_search_field,
-            'operator': self.OP_NOT if basic_search_operator is not None else None}})
+            'operator': None}})
 
         # Advanced search parameters
         advanced_q = []

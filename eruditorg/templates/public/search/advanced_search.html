@@ -20,16 +20,7 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <div class="row">
-            <div class="col-md-2">
-              <div class="form-group">
-                <div id="div_id_{{ form.basic_search_operator.html_name }}" class="checkbox">
-                  {{ form.basic_search_operator|add_class:'form-control' }}
-                  <label for="{{ form.basic_search_operator.auto_id }}">{{ form.basic_search_operator.label }}</label>
-                  {% for error in form.basic_search_operator.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
                 <div class="controls">
                   {{ form.basic_search_term|add_class:'form-control' }}

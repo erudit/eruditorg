@@ -73,7 +73,6 @@ def get_years_range(
 
 
 class SearchForm(forms.Form):
-    basic_search_operator = forms.BooleanField(label=_('Exclure des résultats?'), required=False)
     basic_search_term = forms.CharField(label=_('Recherche'), widget=forms.TextInput)
     basic_search_field = forms.ChoiceField(
         label=_('Inclure les champs'), widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS,
