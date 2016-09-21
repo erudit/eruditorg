@@ -105,7 +105,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_has_pdf(self, obj):
         try:
-            return obj.external_pdf_url is not None or obj.fedora_object.pdf.exists
+            return obj.external_pdf_url is not None or (
+                obj.fedora_object and obj.fedora_object.pdf.exists)
         except (RequestFailed, ConnectionError):  # pragma: no cover
             if settings.DEBUG:
                 return False

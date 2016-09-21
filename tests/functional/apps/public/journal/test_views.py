@@ -165,7 +165,7 @@ class TestJournalDetailView(BaseEruditTestCase):
 
     def test_can_embed_the_publicated_issues_in_the_context(self):
         # Setup
-        collection = CollectionFactory.create()
+        collection = CollectionFactory.create(localidentifier='erudit')
         journal = JournalFactory.create(collection=collection)
         JournalInformationFactory.create(journal=journal)
         issue_1 = IssueFactory.create(
@@ -183,7 +183,7 @@ class TestJournalDetailView(BaseEruditTestCase):
 
     def test_can_embed_the_latest_issue_in_the_context(self):
         # Setup
-        collection = CollectionFactory.create()
+        collection = CollectionFactory.create(localidentifier='erudit')
         journal = JournalFactory.create(collection=collection)
         JournalInformationFactory.create(journal=journal)
         IssueFactory.create(
