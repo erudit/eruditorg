@@ -64,21 +64,21 @@
           </div>
         </header>
 
-        <nav class="alpha-nav">
-          <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
-          <ul>
-            {% for letter, exist in letters_exists.items %}
-            {% if exist %}
-              <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a></li>
-            {% else %}
-              <li><span>{{ letter|upper }}</span></li>
-            {% endif %}
-            {% endfor %}
-          </ul>
-        </nav>
-
         <div class="authors-wrapper">
+          <nav class="alpha-nav">
+            <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
+            <ul>
+              {% for letter, exist in letters_exists.items %}
+              {% if exist %}
+                <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a></li>
+              {% else %}
+                <li><span>{{ letter|upper }}</span></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </nav>
           <ul class="authors">
+            <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
             {% cache LONG_TTL "public_journal_authors" journal.id letter LANGUAGE_CODE %}
             {% for author_dict in authors_dicts %}
               <li class="author-group">
