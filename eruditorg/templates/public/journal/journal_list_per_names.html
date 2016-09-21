@@ -122,38 +122,38 @@
             <ul class="row list-headings">
               <li class="col-sm-6">{% trans "Revue" %}</li>
               <li class="col-sm-2">{% trans "Type" %}</li>
-              <li class="col-sm-2">{% trans "Fonds" %}</li>
-              <li class="col-sm-2">{% trans "Accès" %}</li>
+              <li class="col-sm-3">{% trans "Fonds" %}</li>
+              <li class="col-sm-1">{% trans "Accès" %}</li>
             </ul>
           </div>
         </nav>
       </div>
-      <div class="col-md-9 col-lg-offset-1 pull-right">
+      <div class="col-md-9 col-lg-offset-1 pull-right journals-list">
         {% for objects_group in sorted_objects %}
         <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
           {% for journal in objects_group.objects %}
           {% cache FOREVER_TTL "public_journal_list_names_item" journal.pk LANGUAGE_CODE %}
           <li>
             {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
-            <div class="row">
-              <div class="col-sm-6">
-                <a class="journal-name" href="{% if journal.external_url %}{% url 'public:journal:journal_external_redirect' journal.localidentifier %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">{{ journal.name }}</a>
-                <div class="color-dark-grey">
+            <a class="journal-row" href="{% if journal.external_url %}{% url 'public:journal:journal_external_redirect' journal.localidentifier %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
+              <div class="row">
+                <div class="col-sm-6">
+                  <span class="journal-title">{{ journal.name }}</span>
                   {% if journal.subtitle %}
-                  <p class="color-dark-grey">{{ journal.subtitle }}</p>
+                  <span class="journal-subtitle">{{ journal.subtitle }}</span>
                   {% endif %}
                 </div>
+                <div class="col-sm-2">
+                  {% if journal.type.code == 'S' %}<span>{% trans "Savante" %}</span>{% elif journal.type.code == 'C' %}<span>{% trans "Culturelle" %}</span>{% endif %}
+                </div>
+                <div class="col-sm-3">
+                  <span>{{ journal.collection.name }}</span>
+                </div>
+                <div class="col-sm-1">
+                  {% if journal.open_access %}<span class="erudicon erudicon-open-access"></span>{% endif %}
+                </div>
               </div>
-              <div class="col-sm-2">
-                {% if journal.type.code == 'S' %}<p>{% trans "Savante" %}</p>{% elif journal.type.code == 'C' %}<p>{% trans "Culturelle" %}</p>{% endif %}
-              </div>
-              <div class="col-sm-2">
-                <p>{{ journal.collection.name }}</p>
-              </div>
-              <div class="col-sm-2">
-                {% if journal.open_access %}<div class="sprite sprite-o-a"></div>{% endif %}
-              </div>
-            </div>
+            </a>
           </li>
           {% endcache %}
           {% endfor %}

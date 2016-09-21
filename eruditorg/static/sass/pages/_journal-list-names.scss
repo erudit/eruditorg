@@ -1,8 +1,9 @@
 #journal_list_per_names {
 
   #id_journal_list_body {
-    margin-top: 30px;
+    margin-bottom: 20em;
 
+    // filters in sidebar block
     aside {
 
       form {
@@ -38,9 +39,19 @@
 
     }
 
-    // sticky filters and navigation elements
+    // sticky elements
+    .sticky {
+      position: fixed;
+      top: 54px;
+
+      &.list-header {
+        z-index: 1;
+      }
+
+    }
+
+    // navigation elements
     .list-nav {
-      z-index: 10;
 
       .filters,
       .list-header {
@@ -85,7 +96,8 @@
 
         li {
           margin: 0;
-          padding: 0.65em 0;
+          padding-top: 0.65em;
+          padding-bottom: 0;
           @include fw-sans-medium;
         }
 
@@ -93,25 +105,113 @@
 
     }
 
-    ul.journal-items{
+    // list items
+    .journal-items {
       margin: 0;
       list-style: none;
+      font-size: 14px;
 
-      &:last-child{
-        li:last-child{
+      &:last-child {
+        li:last-child {
           border: none;
         }
       }
 
-      li{
-        padding: 25px 0;
-        border-bottom: 1px solid lighten($gray-light, 20%);
+      li {
+        margin: 0;
 
-        a.journal-name{
-          padding: 10px 0;
-          font-size: 18px;
+        .journal-row {
+          display: block;
+          padding: 1em 0.25em;
+          border-bottom: 1px solid $mid-grey;
+
+          .journal-title {
+          }
+
+          .journal-subtitle {
+            color: $dark-grey;
+
+          }
+
+          &:hover, &:active, &:focus, &:active:focus {
+            background: $coral-red;
+            border-color: $coral-red;
+            color: #FFF;
+            text-decoration: none;
+            @include fw-sans-medium;
+
+            .journal-subtitle {
+              color: #FFF;
+            }
+
+          }
+
         }
+
+        span {
+          display: block;
+        }
+
+        p {
+          margin: 0;
+        }
+
       }
+
     }
+
   }
+
+  // "responsive" for sticky elements
+  @media (min-width: $screen-sm-min) {
+
+    .sticky {
+
+      &.filters {
+        width: 742px;
+      }
+
+      &.list-header {
+        width: 742px;
+        margin-left: 0;
+      }
+
+    }
+
+  }
+
+  @media (min-width: $screen-md-min) {
+
+    .sticky {
+
+      &.filters {
+        width: 240px;
+      }
+
+      &.list-header {
+        width: 721.5px;
+        margin-left: 240px;
+      }
+
+    }
+
+  }
+
+  @media (min-width: $screen-lg-min) {
+
+    .sticky {
+
+      &.filters {
+        width: 190px;
+      }
+
+      &.list-header {
+        width: 871.5px;
+        margin-left: 101px + 190px;
+      }
+
+    }
+
+  }
+
 }
