@@ -1,0 +1,11 @@
+.scroll-top {
+  color: $dark-grey;
+  font-size: 2em;
+  @include fw-sans-medium;
+
+  &:hover, &:active, &:focus, &:active:focus {
+    color: $coral-red;
+    text-decoration: none;
+  }
+
+}

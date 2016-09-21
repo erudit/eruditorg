@@ -286,11 +286,11 @@
             {% endif %}
 
             {% if journal.previous_journal %}
-              <dt class="mono-space">{% trans "Revue précédée de..." %}</dt>
+              <dt class="mono-space">{% trans "Revue précédée de…" %}</dt>
               <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
             {% endif %}
             {% if journal.next_journal %}
-              <dt class="mono-space">{% trans "Revue suivie de..." %}</dt>
+              <dt class="mono-space">{% trans "Revue suivie de…" %}</dt>
               <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.name }}</a></dd>
             {% endif %}
 

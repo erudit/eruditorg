@@ -60,7 +60,9 @@ $ionicons-font-path: "~ionicons/fonts";
   'components/page-headers',
   'components/pagination',
   'components/accordions',
-  'components/toolbox';
+  'components/toolbox',
+  'components/alpha-nav',
+  'components/scroll-top';
 
 // 6. Page-specific styles
 @import
@@ -70,6 +72,7 @@ $ionicons-font-path: "~ionicons/fonts";
   'pages/search',
   'pages/search_advanced',
   'pages/individual_subscription',
+  'pages/journal-authors-list',
   'pages/journal-list-disciplines',
   'pages/journal-list-names',
   'pages/journals',
