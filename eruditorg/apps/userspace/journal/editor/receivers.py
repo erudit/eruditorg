@@ -21,7 +21,7 @@ def send_production_team_email(sender, issue_submission, transition_name, reques
     if production_team_group is None:
         return
 
-    emails = production_team_group.user_set.values_list('email', flat=True)
+    emails = list(production_team_group.user_set.values_list('email', flat=True))
     if not emails:
         return
 
