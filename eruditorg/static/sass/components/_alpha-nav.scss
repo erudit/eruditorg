@@ -1,0 +1,37 @@
+.alpha-nav {
+  border-bottom: 1px solid $mid-grey;
+  margin-bottom: 1em;
+
+  ul {
+    margin: 0;
+    list-style: none;
+    display: inline;
+    font-size: 14px;
+    @include fw-mono;
+
+    li {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+
+      > a {
+        padding: 0.35em;
+
+        &:hover, &:active, &:focus, &:active:focus {
+          text-decoration: none;
+          background: $coral-red;
+          color: #FFF;
+        }
+
+      }
+
+      > span {
+        padding: 0.35em;
+        color: $mid-grey;
+      }
+
+    }
+
+  }
+
+}
