@@ -105,6 +105,21 @@
 
         }
 
+        .thesis-abstract {
+
+          a {
+            white-space: nowrap;
+            @include fw-sans-medium;
+
+            &:hover, &:active, &:focus, &:active:focus {
+              text-decoration: none;
+              color: $coral-red;
+            }
+
+          }
+
+        }
+
         .keywords {
 
           span:first-child {

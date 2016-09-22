@@ -89,7 +89,7 @@
               <div class="thesis-description">
                 {% if thesis.description %}
                 <p class="thesis-abstract">
-                  {{ thesis.description }}
+                  {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}">-->&nbsp;{% trans 'Lire la suite' %}</a>
                 </p>
                 {% endif %}
                 {% if thesis.keywords.all %}
