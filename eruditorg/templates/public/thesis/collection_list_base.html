@@ -63,8 +63,8 @@
     </header>
 
     <div class="row">
-      <div class="col-sm-9 col-md-8 thesis-list-wrapper">
-        <h3>{% trans "Liste complète" %}</h3>
+      <div class="col-sm-9 col-md-8 main-content">
+        <h2>{% trans "Liste complète" %}</h2>
         <div class="actions-wrapper">
           <div id="div_id_sort_by" class="form-group">
             <div class="controls">
@@ -81,23 +81,39 @@
         <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
         <ul class="theses">
         {% for thesis in theses %}
-          <li class="thesis">
-            <div class="pull-right">
-              <a href="#" class="thesis-extend"><i class="ion-plus-round"></i></a>
-              <a href="#" class="thesis-reduce"><i class="ion-minus-round"></i></a>
+          <li class="thesis row">
+            <div class="col-xs-11">
+              <div class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</div>
+              <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.title }}</a>
+              {% if thesis.description or thesis.keywords.all %}
+              <div class="thesis-description">
+                {% if thesis.description %}
+                <p class="thesis-abstract">
+                  {{ thesis.description }}
+                </p>
+                {% endif %}
+                {% if thesis.keywords.all %}
+                <p class="keywords">
+                  <span>{% trans "Mots-clés&nbsp;:" %}</span>
+                  <span>{% for kw in thesis.keywords.all %}{{ kw.name }}{% if not forloop.last %}, {% endif %}{% empty %}{% trans "aucun mot-clé" %}{% endfor %}</span>
+                </p>
+                {% endif %}
+              </div>
+              {% endif %}
             </div>
-            <div class="author-name">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</div>
-            <a href="{{ thesis.url }}" class="thesis-link">&laquo;&nbsp;{{ thesis.title }}&nbsp;&raquo;</a>
-            <div class="description">
-              {% if thesis.description %}{{ thesis.description }}{% else %}{% trans "Aucune description." %}{% endif %}
-              <br /><br />
-              <div class="keywords-title"><strong>{% trans "Mots-clés :" %}</strong></div>
-              <div class="keywords">{% for kw in thesis.keywords.all %}{{ kw.name }}{% if not forloop.last %}, {% endif %}{% empty %}{% trans "Aucun mot-clé" %}{% endfor %}</div>
+            {% if thesis.description or thesis.keywords.all %}
+            <div class="col-xs-1 text-right">
+              <a href="#" class="thesis-extend"><span class="ion-plus"></span></a>
+              <a href="#" class="thesis-reduce"><span class="ion-minus"></span></a>
             </div>
+            {% endif %}
           </li>
         {% endfor %}
         </ul>
         <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
+        <div class="text-center">
+          <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
+        </div>
       </div>
       <aside class="col-sm-3 col-md-offset-1 repository-meta">
         <div class="sidebar-block">
@@ -109,7 +125,7 @@
           </dl>
         </div>
         <div class="sidebar-block">
-          <h2>{% trans "En un coup d'oeil" %}</h2>
+          <h3>{% trans "En un coup d'oeil" %}</h3>
           <ul class="random-theses">
             {% for thesis in random_theses %}
             <li>
