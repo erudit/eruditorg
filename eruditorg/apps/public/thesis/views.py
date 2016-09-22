@@ -127,8 +127,8 @@ class BaseThesisListView(ListView):
         return self.apply_sorting(qs)
 
     def get_sort_by(self):
-        sort_by = self.request.GET.get('sort_by', 'title_asc')
-        sort_by = sort_by if sort_by in self.available_tris else 'title_asc'
+        sort_by = self.request.GET.get('sort_by', 'author_asc')
+        sort_by = sort_by if sort_by in self.available_tris else 'author_asc'
         return sort_by
 
     @cached_property
