@@ -157,9 +157,22 @@ input[list] {
   border-width: 1px 1px 1px 1px;
 }
 
-select,
-option {
-  height: $font-size-large + 24;
+select {
+  -webkit-appearance: none;
+  outline: none;
+  @include border-radius(0);
+  border: 1px solid #000;
+  margin: 0 auto;
+  height: 40px;
+  font-size: 14px;
+  position: relative;
+  background: #fff url(../iconfont/chevron-down.svg) no-repeat 95% center;
+
+  option {
+    height: auto;
+    line-height: auto;
+  }
+
 }
 
 textarea {

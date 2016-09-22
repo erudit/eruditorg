@@ -46,10 +46,13 @@
   <div class="container">
     <header class="page-header-main">
       <div class="row">
-        <div class="col-md-10 col-sm-8 col-xs-12">
-          <h1>{% block inner_title %}{% endblock inner_title %}</h1>
+        <div class="col-sm-9 col-md-8">
+          <h1>
+            <span>{% block inner_title %}{% endblock inner_title %}</span>
+            <span>{{ collection.name }}</span>
+            </h1>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-4">
+        <div class="col-xs-4 col-sm-3 col-md-2 col-md-offset-2">
           {% if collection.logo %}
           <span class="collection-logo">
             <img src="{{ collection.logo.url }}" alt="" class="img-responsive"/>
@@ -102,17 +105,21 @@
           <dl>
             <dt>{% trans "Nombre de thèses" %}</dt>
             <dd>{{ paginator.count }}</dd>
+            {% block inner_list_switcher %}{% endblock inner_list_switcher %}
           </dl>
-          {% block inner_list_switcher %}{% endblock inner_list_switcher %}
         </div>
         <div class="sidebar-block">
           <h2>{% trans "En un coup d'oeil" %}</h2>
-          {% for thesis in random_theses %}
-            <a href="{{ thesis.url }}" class="thesis-link">
-              <span class="thesis-title">{{ thesis.title }}</span>
-              <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
-            </a>
-          {% endfor %}
+          <ul class="random-theses">
+            {% for thesis in random_theses %}
+            <li>
+              <a href="{{ thesis.url }}">
+                <span class="thesis-title">{{ thesis.title }}</span>
+                <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
       </aside>
     </div>

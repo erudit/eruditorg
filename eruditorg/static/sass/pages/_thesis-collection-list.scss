@@ -1,12 +1,55 @@
 #thesis_collection_list {
 
-  .thesis-list-wrapper{
-    padding-right: 100px;
+  .collection-logo {
+    margin: auto;
+    display: block;
+    text-align: center;
+  }
 
-    h3{
-      padding: 8px 0;
-      border-bottom: 2px solid $gray;
+  .repository-meta {
+
+    .random-theses {
+      margin: 0;
+      list-style: none;
+
+      h2 {
+        margin-bottom: 0;
+        border: 0;
+      }
+
+      li {
+
+        a {
+          display: block;
+          padding: 0.45em 0.25em 0.75em;
+          font-size: 14px;
+          @include transition(all 100ms);
+
+          &:hover, &:active, &:focus, &:active:focus {
+            background: $coral-red;
+            color: #FFF;
+            text-decoration: none;
+            @include fw-sans-medium;
+            border-color: $coral-red;
+          }
+
+        }
+
+        span {
+          display: block;
+        }
+
+        span + span {
+          @include fw-sans-medium;
+        }
+
+      }
+
     }
+
+  }
+
+  .thesis-list-wrapper{
 
     .actions-wrapper{
       height: 50px;
