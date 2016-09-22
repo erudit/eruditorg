@@ -93,14 +93,14 @@
         <dl class="journal-meta--list">
 
           {% if scope_current_journal.members.exists %}
-          <dt class="mono-space">{% trans "Direction" %}</dt>
+          <dt>{% trans "Direction" %}</dt>
           {% for member in scope_current_journal.members.all %}
           <p>{{ member.get_full_name }}</p>
           {% endfor %}
           {% endif %}
 
           {% if scope_current_journal.publishers.exists %}
-          <dt class="mono-space">
+          <dt>
             {% blocktrans count total=scope_current_journal.publishers.all|length %}
             Éditeur
             {% plural %}
@@ -113,7 +113,7 @@
           {% endif %}
 
           {% if scope_current_journal.issn_print or scope_current_journal.issn_web %}
-          <dt class="mono-space">{% trans "ISSN" %}</dt>
+          <dt>{% trans "ISSN" %}</dt>
           {% if scope_current_journal.issn_print %}
           <dd><span class="mono-space">{{ scope_current_journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
           <dd><span class="mono-space">{{ scope_current_journal.issn_web }}</span> ({% trans "numérique" %})</dd>
@@ -121,7 +121,7 @@
           {% endif %}
 
           {% if scope_current_journal.issues_per_year %}
-          <dt class="mono-space">{% trans "Fréquence" %}</dt>
+          <dt>{% trans "Fréquence" %}</dt>
           <dd>
             {% blocktrans count issues_per_year=scope_current_journal.issues_per_year %}
             {{ issues_per_year }} numéro par année
@@ -131,10 +131,10 @@
           </dd>
           {% endif %}
 
-          <dt class="mono-space">{% trans "Période de publication" %}</dt>
+          <dt>{% trans "Période de publication" %}</dt>
           <dd>{{ scope_current_journal.publication_period }}</dd>
 
-          <dt class="mono-space">{% trans "Type de support" %}</dt>
+          <dt>{% trans "Type de support" %}</dt>
           <dd>
             {% if scope_current_journal.paper %}
             {% trans "Numérique et papier" %}
@@ -143,7 +143,7 @@
             {% endif %}
           </dd>
 
-          <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
+          <dt>{% trans "Politique d'accès" %}</dt>
           {% if scope_current_journal.open_access %}
           <dd>{% trans "Disponible en libre accès" %}</dd>
           {% else %}
@@ -151,7 +151,7 @@
           {% endif %}
 
           {% if scope_current_journal.disciplines.all|length > 0 %}
-          <dt class="mono-space">
+          <dt>
             {% blocktrans count scope_current_journal.disciplines.all|length as disciplines_count %}
             Discipline
             {% plural %}

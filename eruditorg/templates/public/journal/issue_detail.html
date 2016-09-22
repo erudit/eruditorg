@@ -214,14 +214,14 @@
           <dl class="journal-meta--list">
 
             {% if journal.members.all %}
-            <dt class="mono-space">{% trans "Direction" %}</dt>
+            <dt>{% trans "Direction" %}</dt>
             {% for member in journal.members.all %}
             <p>{{ member.get_full_name }}</p>
             {% endfor %}
             {% endif %}
 
             {% if journal.publishers.all %}
-            <dt class="mono-space">
+            <dt>
               {% blocktrans count total=journal.publishers.all|length %}
               Éditeur
               {% plural %}
@@ -234,7 +234,7 @@
             {% endif %}
 
             {% if journal.issn_print or journal.issn_web %}
-            <dt class="mono-space">{% trans "ISSN" %}</dt>
+            <dt>{% trans "ISSN" %}</dt>
             {% if journal.issn_print %}
             <dd><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
             <dd><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</dd>
@@ -242,7 +242,7 @@
             {% endif %}
 
             {% if journal.issues_per_year %}
-            <dt class="mono-space">{% trans "Fréquence" %}</dt>
+            <dt>{% trans "Fréquence" %}</dt>
             <dd>
               {% blocktrans count issues_per_year=journal.issues_per_year %}
               {{ issues_per_year }} numéro par année
@@ -252,16 +252,16 @@
             </dd>
             {% endif %}
 
-            <dt class="mono-space">{% trans "Période de publication" %}</dt>
+            <dt>{% trans "Période de publication" %}</dt>
             <dd>{{ journal.publication_period }}</dd>
 
 
             {% if journal.first_issue %}
-            <dt class="mono-space">{% trans "Disponible dans Érudit depuis" %}</dt>
+            <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
             <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
             {% endif %}
 
-            <dt class="mono-space">{% trans "Type de support" %}</dt>
+            <dt>{% trans "Type de support" %}</dt>
             <dd>
               {% if journal.paper %}
               {% trans "Numérique et papier" %}
@@ -270,7 +270,7 @@
               {% endif %}
             </dd>
 
-            <dt class="mono-space">{% trans "Politique d'accès" %}</dt>
+            <dt>{% trans "Politique d'accès" %}</dt>
             {% if journal.open_access %}
             <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></dd>
             {% else %}
@@ -278,7 +278,7 @@
             {% endif %}
 
             {% if journal.disciplines.all|length > 0 %}
-            <dt class="mono-space">
+            <dt>
               {% blocktrans count journal.disciplines.all|length as disciplines_count %}
               Discipline
               {% plural %}
@@ -293,16 +293,16 @@
             {% endif %}
 
             {% if journal.website_url %}
-              <dt class="mono-space">{% trans "Site web" %}</dt>
+              <dt>{% trans "Site web" %}</dt>
               <dd><a href="{{ journal.website_url }}">{{ journal.website_url }}</a></dd>
             {% endif %}
 
             {% if journal.previous_journal %}
-              <dt class="mono-space">{% trans "Revue précédée de…" %}</dt>
+              <dt>{% trans "Revue précédée de…" %}</dt>
               <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
             {% endif %}
             {% if journal.next_journal %}
-              <dt class="mono-space">{% trans "Revue suivie de…" %}</dt>
+              <dt>{% trans "Revue suivie de…" %}</dt>
               <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.name }}</a></dd>
             {% endif %}
 
