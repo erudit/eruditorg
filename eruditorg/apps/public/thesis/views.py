@@ -80,15 +80,15 @@ class BaseThesisListView(ListView):
     available_tris = OrderedDict((
         ('author_asc', _('Auteur (A–Z)')),
         ('author_desc', _('Auteur (Z–A)')),
-        ('date_asc', _("Date d'ajout (croissant)")),
-        ('date_desc', _("Date d'ajout (décroissant)")),
+        ('date_asc', _("Date de publication (croissant)")),
+        ('date_desc', _("Date de publication (décroissant)")),
         ('title_asc', _('Titre (A–Z)')),
         ('title_desc', _('Titre (Z–A)')),
     ))
     collection_pk_url_kwarg = 'collection_pk'
     context_object_name = 'theses'
     model = Thesis
-    paginate_by = 20
+    paginate_by = 50
 
     def apply_sorting(self, qs):
         sort_by = self.get_sort_by()
