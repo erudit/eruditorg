@@ -21,7 +21,7 @@ from erudit.models import EruditDocument
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
 
-from . import filters
+from . import filters, legacy
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
@@ -115,6 +115,7 @@ class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
 
     def get(self, request, *args, **kwargs):
         # This view works only for GET requests
+        self.request = copy.copy(self.request)
         search_form = self.get_search_form()
         options_form = self.get_options_form()
         search_form_valid, options_form_valid = search_form.is_valid(), options_form.is_valid()
@@ -155,6 +156,12 @@ class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
     def get_options_form_kwargs(self):
         """ Returns the keyword arguments for instantiating the options form. """
         form_kwargs = {}
+
+        self.request.GET = legacy.add_correspondences_to_search_query(
+            self.request,
+            'filter_article_types',
+            self.filter_form_class.article_type_correspondence
+        )
 
         if self.request.method == 'GET':
             form_kwargs.update({'data': self.request.GET, })

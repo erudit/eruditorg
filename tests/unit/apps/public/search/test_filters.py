@@ -10,6 +10,7 @@ from erudit.models import EruditDocument
 from erudit.test import BaseEruditTestCase
 
 from apps.public.search.filters import EruditDocumentSolrFilter as BaseEruditDocumentSolrFilter
+from apps.public.search.legacy import add_correspondences_to_search_query
 
 
 def fake_get_results(**kwargs):
@@ -332,3 +333,22 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         _, _, agg = filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(agg, {'publication_type': {'val2': 14, 'val1': 12}})
+
+    def test_can_add_correspondences_to_aggregations(self):
+        # Setup
+        request = Request(self.factory.get('/', data={
+            'basic_search_term': '*',
+            'filter_article_type': ['Compte rendu'],
+        }))
+
+        correspondences = {
+            'Compte rendu': ['Compterendu']
+        }
+
+        request_get = add_correspondences_to_search_query(
+            request,
+            'filter_article_type',
+            correspondences
+        )
+
+        assert 'Compterendu' in request_get.get('filter_article_type')
