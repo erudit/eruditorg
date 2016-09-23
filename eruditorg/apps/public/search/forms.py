@@ -170,6 +170,7 @@ class ResultsFilterForm(forms.Form):
 
     languages_correspondence = {
         'ar': _('Arabe'),
+        'ca': _('Catalan'),
         'en': _('Anglais'),
         'es': _('Espagnol'),
         'de': _('Allemand'),
@@ -210,11 +211,11 @@ class ResultsFilterForm(forms.Form):
                 try:
                     assert re.match(r'^[a-zA-Z]+$', v)
                     language_name = self.languages_correspondence[v]
+                    language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
                 except AssertionError:  # pragma: no cover
                     continue
                 except KeyError:
-                    language_name = v
-                language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
+                    continue
 
             self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[0])
             self.fields['filter_collections'].choices = self._get_aggregation_choices(
