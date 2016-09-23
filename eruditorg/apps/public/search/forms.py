@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from erudit.models import Discipline
 from erudit.models import Journal
 
+from apps.public.search import legacy
 
 OPERATORS = (
     ('AND', _('Et')),
@@ -168,8 +169,13 @@ class ResultsFilterForm(forms.Form):
         label=_('Types de publications'),
         help_text=_('Identifie le corpus duquel le document fait partie'), required=False)
 
+    article_type_correspondence = {
+        'Compte rendu': ['Compterendu']
+    }
+
     languages_correspondence = {
         'ar': _('Arabe'),
+        'ca': _('Catalan'),
         'en': _('Anglais'),
         'es': _('Espagnol'),
         'de': _('Allemand'),
@@ -201,8 +207,16 @@ class ResultsFilterForm(forms.Form):
                 aggregations['year'])
             self.fields['filter_years'].choices = filter(
                 lambda y: re.match(r'^\d+$', y[0]), self.fields['filter_years'].choices)
+
+            legacy.group_results_by_field_correspondence(
+                aggregations,
+                'article_type',
+                self.article_type_correspondence
+            )
+
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
-                aggregations['article_type'])
+                aggregations['article_type']
+            )
 
             # Prepares the languages fields
             language_choices = []
@@ -210,11 +224,11 @@ class ResultsFilterForm(forms.Form):
                 try:
                     assert re.match(r'^[a-zA-Z]+$', v)
                     language_name = self.languages_correspondence[v]
+                    language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
                 except AssertionError:  # pragma: no cover
                     continue
                 except KeyError:
-                    language_name = v
-                language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
+                    continue
 
             self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[0])
             self.fields['filter_collections'].choices = self._get_aggregation_choices(

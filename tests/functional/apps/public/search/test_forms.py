@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import pytest
 from erudit.test import BaseEruditTestCase
 
 from apps.public.search.forms import ResultsFilterForm
@@ -27,36 +27,39 @@ class TestSearchForm(BaseEruditTestCase):
 
 
 class TestResultsFilterForm(BaseEruditTestCase):
-    aggregation_dict = {
-        'article_type': {
-            'Article': 99,
-            'Compte rendu': 1,
-            'Autre': 6,
-        },
-        'fund': {
-            'Érudit': 257
-        },
-        'publication_type': {
-            'Article': 106,
-            'Culturel': 151,
-        },
-        'year': {
-            '2011': 36,
-            '2013': 11,
-        },
-        'language': {
-            'en': 9,
-            'fr': 248
-        },
-        'author': {
-            'test1, foo': 2,
-            'test2, bar': 10,
-        },
-        'collection': {
-            'Foo': 75,
-            'Bar': 151,
+
+    @pytest.fixture(autouse=True)
+    def aggregation_dict(self):
+        self.aggregation_dict = {
+            'article_type': {
+                'Article': 99,
+                'Compte rendu': 1,
+                'Autre': 6,
+            },
+            'fund': {
+                'Érudit': 257
+            },
+            'publication_type': {
+                'Article': 106,
+                'Culturel': 151,
+            },
+            'year': {
+                '2011': 36,
+                '2013': 11,
+            },
+            'language': {
+                'en': 9,
+                'fr': 248
+            },
+            'author': {
+                'test1, foo': 2,
+                'test2, bar': 10,
+            },
+            'collection': {
+                'Foo': 75,
+                'Bar': 151,
+            }
         }
-    }
 
     def test_can_initialize_years_choices_from_aggregation_results(self):
         # Run & check
@@ -71,12 +74,28 @@ class TestResultsFilterForm(BaseEruditTestCase):
     def test_can_initialize_article_types_choices_from_aggregation_results(self):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
+
         self.assertEqual(
             form.fields['filter_article_types'].choices,
             [
                 ('Article', 'Article (99)'),
                 ('Autre', 'Autre (6)'),
                 ('Compte rendu', 'Compte rendu (1)'),
+            ])
+
+    def test_can_initialize_and_aggregate_article_types_choices_from_aggregation_results(self):
+        # Run & chec
+        import copy
+        ag_dict = copy.copy(self.aggregation_dict)
+        ag_dict['article_type']['Compterendu'] = 1
+        form = ResultsFilterForm(api_results={'aggregations': ag_dict})
+
+        self.assertEqual(
+            form.fields['filter_article_types'].choices,
+            [
+                ('Article', 'Article (99)'),
+                ('Autre', 'Autre (6)'),
+                ('Compte rendu', 'Compte rendu (2)'),
             ])
 
     def test_can_initialize_languages_choices_from_aggregation_results(self):
