@@ -55,42 +55,42 @@
             <a href="#" class="select main-section">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
             <ul>
               <li>
-                <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+                <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
               </li>
               <li>
-                <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
+                <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a>
               </li>
               <li>
-                <a href="#">{% trans "Livres et actes" %}</a>
+                <a href="#" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
               </li>
               <li>
-                <a href="#">{% trans "Littérature grise" %}</a>
+                <a href="#" title="{% trans 'Index des documents de littérature grise' %}">{% trans "Littérature grise" %}</a>
               </li>
             </ul>
           </li>
           <li class="dropdown">
-            <a href="https://apropos.erudit.org/" target="_blank" class="select main-section">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
+            <a href="https://apropos.erudit.org/" target="_blank" class="select main-section" title="{% trans 'À propos d\'Érudit' %}">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
             <ul>
               <li>
-                <a href="https://apropos.erudit.org/bibliotheques" target="_blank">{% trans "Bibliothécaires" %}</a>
+                <a href="https://apropos.erudit.org/bibliotheques" target="_blank" title="{% trans 'Information pour les bibliothécaires' %}">{% trans "Bibliothécaires" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/editeurs" target="_blank">{% trans "Éditeurs" %}</a>
+                <a href="https://apropos.erudit.org/editeurs" target="_blank" title="{% trans 'Information pour les éditeurs' %}">{% trans "Éditeurs" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/chercheurs" target="_blank">{% trans "Chercheurs" %}</a>
+                <a href="https://apropos.erudit.org/chercheurs" target="_blank" title="{% trans 'Information pour les chercheurs' %}">{% trans "Chercheurs" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/usagers" target="_blank">{% trans "Utilisateurs" %}</a>
+                <a href="https://apropos.erudit.org/usagers" target="_blank" title="{% trans 'Information pour les utilisateurs' %}">{% trans "Utilisateurs" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/collections" target="_blank">{% trans "Collections" %}</a>
+                <a href="https://apropos.erudit.org/collections" target="_blank" title="{% trans 'Information sur nos collections' %}">{% trans "Collections" %}</a>
               </li>
             </ul>
           </li>
           {% if request.user.is_anonymous %}
           <li>
-            <a href="{% url 'public:auth:login' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal">
+            <a href="{% url 'public:auth:login' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal" title="{% trans 'Se connecter à l\'espace utilisateur' %}">
               {% trans "Connexion" %}
             </a>
           </li>
@@ -101,26 +101,28 @@
               {% has_perm 'userspace.access' request.user as can_access_userspace %}
               {% if can_access_userspace %}
               <li>
-                <a href="{% url 'userspace:dashboard' %}">{% trans "Espace privé" %}</a>
+                <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à l\'espace utilisateur' %}">{% trans "Espace privé" %}</a>
               </li>
               {% endif %}
               <li>
-                <a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a>
+                <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}">{% trans "Paramètres" %}</a>
               </li>
               <li>
-                <a href="{% url 'public:auth:logout' %}?next=/">{% trans "Déconnexion" %}</a>
+                <a href="{% url 'public:auth:logout' %}?next=/" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
               </li>
             </ul>
           </li>
           {% endif %}
           <li class="hidden-sm">
-            <a href="{% url 'public:search:advanced_search' %}" class="main-section">Recherche avancée</a>
+            <a href="{% url 'public:search:advanced_search' %}" class="main-section" title="{% trans 'Effectuer une recherche avancée' %}">Recherche avancée</a>
           </li>
           <li>
-            <a href="{% url 'public:citations:list' %}"><span class="erudicon erudicon-tools-save"></span></a>
+            <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}">
+              <span class="erudicon erudicon-tools-save"></span>
+            </a>
           </li>
           <li>
-            <a href="#" data-trigger-search-bar class="search"><span class="ion-ios-search-strong"></span></a>
+            <a href="#" data-trigger-search-bar class="search" title="{% trans 'Effectuer une recherche simple' %}"><span class="ion-ios-search-strong"></span></a>
             <div class="search-form">
               <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
                 <div class="form-group">
