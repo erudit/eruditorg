@@ -91,7 +91,7 @@
       }
       a {
         padding: 0.5em 0.75em 0.5em 0.5em;
-        &:hover, &:focus, &:active {
+        &:hover, &:focus, &:active, &:active:focus {
           background: $coral-red;
           color: #FFF;
           text-decoration: none;
@@ -101,6 +101,15 @@
         }
       }
     }
+  }
+
+  .erudicon-tools-save,
+  .ion-ios-search-strong {
+
+    &:hover, &:focus, &:active, &:active:focus {
+      color: $coral-red;
+    }
+
   }
 
   .erudicon-tools-save {
