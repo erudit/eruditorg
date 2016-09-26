@@ -32,6 +32,7 @@ footer#site-footer {
 
   #footer-nav {
     background: #FFF;
+    z-index: 2;
     padding-top: $margin-vertical-default*2;
     padding-bottom: $margin-vertical-default;
     font-size: 18px;
