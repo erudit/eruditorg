@@ -42,7 +42,7 @@
 
   }
 
-  .thesis-aggregation-links-wrapper{
+  .main-content {
     margin: 2em 0;
 
     .theses-list {
@@ -52,19 +52,32 @@
 
       li {
         margin-bottom: 0;
+        line-height: 1.75;
       }
 
     }
 
-    .aggregation-link{
-      margin-bottom: 4px;
+    .aggregation-link {
       display: inline-block;
       font-size: 14px;
       @include fw-mono();
 
-      &:hover, &:focus{
+      &:hover, &:focus {
+        color: $coral-red;
         text-decoration: none;
       }
+
     }
+
   }
+
+  // responsive styles
+  @media (max-width: $screen-xs-max) {
+
+    .main-content .theses-list {
+      @include content-columns(3, $grid-gutter-width/4);
+    }
+
+  }
+
 }
