@@ -10,6 +10,7 @@
 
         h2 {
           border-color: $dark-grey;
+          margin-bottom: 0;
         }
 
         h3 {
@@ -19,6 +20,11 @@
         .form-group {
           margin: 0 0 2em 0;
           padding: 0;
+
+          &:first-child {
+            margin-top: 0.75em;
+          }
+
         }
 
         .form-action {
@@ -44,7 +50,8 @@
       position: fixed;
       top: 54px;
 
-      &.list-header {
+      &.list-header,
+      &.filters {
         z-index: 1;
       }
 
@@ -57,6 +64,7 @@
       .list-header {
         background: #FFF;
         padding-top: 15px;
+        margin-bottom: 0;
       }
 
       .alpha-nav {
@@ -99,6 +107,11 @@
           padding-top: 0.65em;
           padding-bottom: 0;
           @include fw-sans-medium;
+
+          &:first-child {
+            padding-left: 0.25em;
+          }
+
         }
 
       }
@@ -163,9 +176,34 @@
   }
 
   // "responsive" for sticky elements
+  @media (max-width: $screen-sm-max){
+
+    .sticky {
+      position: relative !important;
+      top: auto !important;
+
+      &.filters {
+        width: 100%;
+      }
+
+    }
+
+    .journal-title {
+      margin-bottom: 0.5em;
+    }
+
+    .journal-access {
+      margin-top: -15px;
+      text-align: right;
+    }
+
+  }
+
   @media (min-width: $screen-sm-min) {
 
     .sticky {
+      position: relative;
+      top: auto;
 
       &.filters {
         width: 742px;
@@ -193,6 +231,10 @@
         margin-left: 240px;
       }
 
+    }
+
+    .journals-list {
+      float: right
     }
 
   }
