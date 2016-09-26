@@ -9,23 +9,20 @@
   }
 
   h1 {
-    @include fw-sans-bold();
+    @include fw-sans-bold;
     margin-bottom: 1em;
 
+    span:first-child {
+      em {
+        @include fw-sans-bold-italic;
+      }
+    }
+
     > span + span {
-      @include fw-sans-normal();
+      @include fw-sans-normal;
       display: block;
     }
 
-  }
-
-  figure.logo {
-    img {
-      float: right;
-      @media (max-width: $screen-xs-max) {
-        float: none;
-      }
-    }
   }
 
   // add border at top or bottom of the heading
