@@ -163,6 +163,12 @@ class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
             self.filter_form_class.article_type_correspondence
         )
 
+        self.request.GET = legacy.add_correspondences_to_search_query(
+            self.request,
+            'filter_languages',
+            self.filter_form_class.language_code_correspondence
+        )
+
         if self.request.method == 'GET':
             form_kwargs.update({'data': self.request.GET, })
         return form_kwargs

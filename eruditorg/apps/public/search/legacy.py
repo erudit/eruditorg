@@ -44,7 +44,8 @@ def add_correspondences_to_search_query(request, field, correspondences):
     field_values = []
     for value in rget.getlist(field):
         field_values.append(value)
-        for correspondence in correspondences.get(value):
-            field_values.append(correspondence)
+        for correspondence in correspondences.get(value, list()):
+            if correspondence:
+                field_values.append(correspondence)
     rget.setlist(field, field_values)
     return rget

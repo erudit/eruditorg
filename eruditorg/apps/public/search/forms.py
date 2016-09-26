@@ -173,6 +173,15 @@ class ResultsFilterForm(forms.Form):
         'Compte rendu': ['Compterendu']
     }
 
+    language_code_correspondence = {
+        'de': ['ge', 'gw', ],
+        'el': ['gr', 'grc',],
+        'es': ['sp',],
+        'fr': ['un',],
+        'ru': ['uz',],
+        'en': ['zx',],
+    }
+
     language_label_correspondence = {
         'ar': _('Arabe'),
         'ca': _('Catalan'),
@@ -182,14 +191,21 @@ class ResultsFilterForm(forms.Form):
         'el': _('Grec moderne'),
         'fr': _('Français'),
         'he': _('Hébreu'),
+        'hr': _('Bosniaque'),
         'ht': _('Créole haïtien'),
+        'id': _('Indonésien'),
         'iro': _('Langues iroquoiennes'),
         'it': _('Italien'),
         'ja': _('Japonais'),
         'ko': _('Coréen'),
         'la': _('Latin'),
+        'nl': _('Néerlandais'),
+        'oc': _('Occitan'),
+        'pl': _('Polonais'),
         'pt': _('Portugais'),
+        'qu': _('Kichwa'),
         'ro': _('Roumain'),
+        'tr': _('Espéranto'),
         'ru': _('Russe'),
         'zh': _('Chinois'),
     }
@@ -214,6 +230,12 @@ class ResultsFilterForm(forms.Form):
                 self.article_type_correspondence
             )
 
+            legacy.group_results_by_field_correspondence(
+                aggregations,
+                'language',
+                self.language_code_correspondence
+            )
+
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
                 aggregations['article_type']
             )
@@ -230,7 +252,7 @@ class ResultsFilterForm(forms.Form):
                     language_name = v
                 language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
 
-            self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[0])
+            self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[1])
             self.fields['filter_collections'].choices = self._get_aggregation_choices(
                 aggregations['collection'])
             self.fields['filter_authors'].choices = self._get_aggregation_choices(
