@@ -175,11 +175,11 @@ class ResultsFilterForm(forms.Form):
 
     language_code_correspondence = {
         'de': ['ge', 'gw', ],
-        'el': ['gr', 'grc',],
-        'es': ['sp',],
-        'fr': ['un',],
-        'ru': ['uz',],
-        'en': ['zx',],
+        'el': ['gr', 'grc', ],
+        'es': ['sp', ],
+        'fr': ['un', ],
+        'ru': ['uz', ],
+        'en': ['zx', ],
     }
 
     language_label_correspondence = {
