@@ -12,7 +12,7 @@ class JournalListFilterForm(forms.Form):
     types = forms.MultipleChoiceField(
         label=_('Par type'), required=False, help_text='TODO')
     collections = forms.MultipleChoiceField(
-        label=_('Par collection'), required=False, help_text='TODO')
+        label=_('Par fonds'), required=False, help_text='TODO')
 
     def __init__(self, *args, **kwargs):
         super(JournalListFilterForm, self).__init__(*args, **kwargs)
