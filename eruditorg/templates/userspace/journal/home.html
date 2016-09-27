@@ -95,7 +95,7 @@
           {% if scope_current_journal.members.exists %}
           <dt>{% trans "Direction" %}</dt>
           {% for member in scope_current_journal.members.all %}
-          <p>{{ member.get_full_name }}</p>
+          <dd>{{ member.get_full_name }}</dd>
           {% endfor %}
           {% endif %}
 
@@ -115,8 +115,8 @@
           {% if scope_current_journal.issn_print or scope_current_journal.issn_web %}
           <dt>{% trans "ISSN" %}</dt>
           {% if scope_current_journal.issn_print %}
-          <dd><span class="mono-space">{{ scope_current_journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
-          <dd><span class="mono-space">{{ scope_current_journal.issn_web }}</span> ({% trans "numérique" %})</dd>
+          <dd>{{ scope_current_journal.issn_print }} ({% trans "imprimé" %})</dd>
+          <dd>{{ scope_current_journal.issn_web }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
 

@@ -218,7 +218,7 @@
             {% if journal.members.all %}
             <dt>{% trans "Direction" %}</dt>
             {% for member in journal.members.all %}
-            <p>{{ member.get_full_name }}</p>
+            <dd>{{ member.get_full_name }}</dd>
             {% endfor %}
             {% endif %}
 
@@ -238,8 +238,8 @@
             {% if journal.issn_print or journal.issn_web %}
             <dt>{% trans "ISSN" %}</dt>
             {% if journal.issn_print %}
-            <dd><span class="mono-space">{{ journal.issn_print }}</span> ({% trans "imprimé" %})</dd>
-            <dd><span class="mono-space">{{ journal.issn_web }}</span> ({% trans "numérique" %})</dd>
+            <dd>{{ journal.issn_print }} ({% trans "imprimé" %})</dd>
+            <dd>{{ journal.issn_web }} ({% trans "numérique" %})</dd>
             {% endif %}
             {% endif %}
 
