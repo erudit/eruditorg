@@ -239,6 +239,27 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['authors']), [author_1, ])
 
+    def test_only_provides_authors_for_the_given_letter(self):
+        # Seetup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1)
+
+        author_1 = AuthorFactory.create(lastname='btest')
+        author_2 = AuthorFactory.create(lastname='ctest1')
+
+        article_1.authors.add(author_1)
+        article_1.authors.add(author_2)
+        article_1.save()
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url, letter='b')
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        assert response.context['authors_dicts'] == [{'author': author_1, 'articles': [article_1]}]
+
+
     def test_inserts_the_current_letter_in_the_context(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
