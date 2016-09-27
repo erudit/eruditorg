@@ -10,9 +10,15 @@
   <section id="advanced-search-page" class="container">
 
     <div class="row">
-      <div class="page-header-main search-header col-md-8">
-        <h2>{% trans "Recherche avancée" %}</h2>
-        {% lorem 1 p %}
+      <div class="col-md-8">
+        <header class="page-header-main search-header">
+          <h1>{% trans "Recherche avancée" %}</h1>
+        </header>
+        <div class="page-intro">
+          {% blocktrans %}
+          <p>Affinez votre recherche dans le corpus de documents offerts sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres disponibles.</p>
+          {% endblocktrans %}
+        </div>
       </div>
     </div>
 
@@ -98,7 +104,7 @@
         <div class="col-md-6">
           <div id="div_id_{{ form.publication_types.html_name }}" class="form-group{% if form.publication_types.errors %} has-error{% endif %}">
             <div class="controls">
-              <label class="control-label" for="{{ form.publication_types.auto_id }}">{{ form.publication_types.label }}</label>
+              <label class="control-label" for="{{ form.publication_types.auto_id }}">{{ form.publication_types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel.' %}"><span class="ion-help-circled"></span></span></label>
               {{ form.publication_types|add_class:'form-control' }}
               {% for error in form.publication_types.errors %}<p class="error">{{ error }}</p>{% endfor %}
             </div>
@@ -130,7 +136,7 @@
         <div class="col-md-6">
           <div id="div_id_{{ form.funds.html_name }}" class="form-group{% if form.funds.errors %} has-error{% endif %}">
             <div class="controls">
-              <label class="control-label" for="{{ form.funds.auto_id }}">{{ form.funds.label }}</label>
+              <label class="control-label" for="{{ form.funds.auto_id }}">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></label>
               {{ form.funds|add_class:'form-control' }}
               {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
             </div>

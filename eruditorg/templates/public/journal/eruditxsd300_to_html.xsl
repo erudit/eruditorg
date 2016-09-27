@@ -268,18 +268,17 @@
 				</aside>
 			</xsl:if>
 
-			<div class="full-article {% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
+      <div class="full-article {% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
 
-				{% if not article_access_granted and not only_summary %}
-					<div class="alert alert-warning">
-						<p><strong>{% trans "Abonnement requis!" %}</strong></p>
-						<p>
-							{% blocktrans trimmed %}
-							L’accès à cet article est réservé aux abonnés. Toutes les archives des revues diffusées sur Érudit sont en accès libre (barrière mobile de 2 ou 3 ans).
-							{% endblocktrans %}
-						</p>
-					</div>
-				{% endif %}
+        {% if not article_access_granted and not only_summary %}
+        <div class="alert alert-warning">
+          <p>
+            {% blocktrans trimmed %}
+            L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
+            {% endblocktrans %}
+          </p>
+        </div>
+        {% endif %}
 
 				<!-- abstract -->
 				<xsl:if test="//resume">
