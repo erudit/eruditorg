@@ -220,7 +220,7 @@ class ResultsFilterForm(forms.Form):
 
         if aggregations:
             self.fields['filter_years'].choices = self._get_aggregation_choices(
-                aggregations['year'])
+                aggregations['year'])[::-1]
             self.fields['filter_years'].choices = filter(
                 lambda y: re.match(r'^\d+$', y[0]), self.fields['filter_years'].choices)
 

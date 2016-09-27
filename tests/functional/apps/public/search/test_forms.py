@@ -67,8 +67,8 @@ class TestResultsFilterForm(BaseEruditTestCase):
         self.assertEqual(
             form.fields['filter_years'].choices,
             [
-                ('2011', '2011 (36)'),
                 ('2013', '2013 (11)'),
+                ('2011', '2011 (36)'),
             ])
 
     def test_can_initialize_article_types_choices_from_aggregation_results(self):
