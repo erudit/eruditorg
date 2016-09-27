@@ -1,0 +1,12 @@
+/**
+* On hover help text / tooltips
+*/
+
+
+[class*="hint--"]:after {
+  width: 200px;
+  white-space: normal;
+  line-height: 1.35;
+  @include fw-sans-normal;
+  font-size: 12px;
+}
