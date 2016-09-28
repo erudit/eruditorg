@@ -16,8 +16,7 @@
 
       > a {
         padding: 0.35em;
-
-        &:hover, &:active, &:focus, &:active:focus {
+        &:hover, &:active, &:focus, &:active:focus, &.active {
           text-decoration: none;
           background: $coral-red;
           color: #FFF;

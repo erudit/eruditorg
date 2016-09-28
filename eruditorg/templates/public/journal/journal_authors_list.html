@@ -69,11 +69,11 @@
           <nav class="alpha-nav">
             <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
             <ul>
-              {% for letter, exist in letters_exists.items %}
+              {% for letter_page, exist in letters_exists.items %}
               {% if exist %}
-                <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter }}">{{ letter|upper }}</a></li>
+                <li><a {% if letter == letter_page %}class="active"{% endif %} href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter_page }}">{{ letter_page|upper }}</a></li>
               {% else %}
-                <li><span>{{ letter|upper }}</span></li>
+                <li><span>{{ letter_page|upper }}</span></li>
               {% endif %}
               {% endfor %}
             </ul>
