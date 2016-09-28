@@ -66,6 +66,10 @@
         </header>
 
         <div class="authors-wrapper main-content">
+          <nav class="type-nav">
+            <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=article">{% trans "Article" %}</a></li>
+            <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=compterendu">{% trans "Compte rendu" %}</a></li>
+          </nav>
           <nav class="alpha-nav">
             <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
             <ul>
