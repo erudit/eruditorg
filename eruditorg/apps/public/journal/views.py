@@ -242,15 +242,16 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
             for author in article.authors.all():
                 if author in authors:
                     if author.id not in authors_dicts:
-                        authors_dicts[author.id] = {'author': author, 'articles': [article, ], }
-                    elif article not in authors_dicts[author.id]['articles']:
-                        authors_dicts[author.id]['articles'].append(article)
+                        authors_dicts[author.id] = {'author': author, 'articles': []}
+                    authors_dicts[author.id]['articles'].append({
+                        'article': article,
+                        'contributors': article.authors.exclude(pk=author.pk)
+                    })
             context['authors_dicts'] = sorted(
                 list(authors_dicts.values()), key=lambda a: a['author'].full_name)
             context['journal'] = self.journal
         context['letter'] = self.letter
         context['letters_exists'] = self.letters_exists
-
         return context
 
 

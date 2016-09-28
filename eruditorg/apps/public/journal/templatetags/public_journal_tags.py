@@ -8,12 +8,35 @@ from django.template import loader
 from django.utils import translation
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_bytes
+from django.utils.translation import gettext as _
 from eruditarticle.utils import remove_xml_namespaces
 from lxml import etree as et
 
 from ..conf import settings as journal_settings
 
 register = template.Library()
+
+
+@register.filter
+def join_author_list(author_list):
+    author_list = list(author_list)
+    if not author_list:
+        return ""
+    first_author = author_list.pop(0)
+    if not author_list:
+        return _('Avec {first_author}'.format(first_author=first_author))
+
+    last_author = author_list.pop(len(author_list) - 1)
+    if not author_list:
+        return _('Avec {first_author} et {last_author}'.format(
+            first_author=first_author, last_author=last_author
+        ))
+
+    return _('Avec {first_author}, {contributors} et {last_author}').format(
+        first_author=first_author,
+        contributors=", ".join(str(author) for author in author_list),
+        last_author=last_author
+    )
 
 
 @register.simple_tag(takes_context=True)
