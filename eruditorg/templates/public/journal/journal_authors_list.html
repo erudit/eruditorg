@@ -1,6 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 {% load cache %}
+{% load public_journal_tags %}
 
 {% block title %}{% trans "Index des auteurs" %} - {{ journal.name }}{% endblock title %}
 
@@ -84,13 +85,16 @@
               <li class="author-group">
                 <div class="author-name">{{ author_dict.author.full_name }}</div>
                 <ul class="author-articles">
-                  {% for article in author_dict.articles|dictsortreversed:'article.issue.year'  %}
-                  {% cache FOREVER_TTL "public_journal_authors_item" journal.id article.id author.id LANGUAGE_CODE %}
+                  {% for article_author in author_dict.articles %}
+                  {% cache FOREVER_TTL "public_journal_authors_item" journal.id article_author.id author.id LANGUAGE_CODE %}
                     <li class="author-article">
                       {% spaceless %}
-                      <span class="article-year">{{ article.issue.year }}</span> —
-                      <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}">
-                        {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article.title }}</span>{% trans '&nbsp;&raquo;' %}
+                      <span class="article-year">{{ article_author.article.issue.year }}</span> —
+                      {% if article_author.contributors %}
+                        {{ article_author.contributors|join_author_list }},
+                      {% endif %}
+                      <a href="{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article_author.article.issue.volume_slug issue_localid=article_author.article.issue.localidentifier localid=article_author.article.localidentifier %}">
+                        {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article_author.article.article.title }}</span>{% trans '&nbsp;&raquo;' %}
                       </a>
                       {% endspaceless %}
                     </li>
