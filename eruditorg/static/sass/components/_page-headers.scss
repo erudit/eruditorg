@@ -10,7 +10,7 @@
 
   h1 {
     @include fw-sans-bold;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 
     span:first-child {
       em {
@@ -36,6 +36,15 @@
     hgroup {
       padding-bottom: $margin-vertical-default/2;
     }
+  }
+
+}
+
+.page-intro {
+  margin-bottom: 2em;
+  
+  a {
+    color: $coral-red;
   }
 
 }

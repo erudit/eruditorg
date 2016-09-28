@@ -21,7 +21,7 @@
         <a href="#" id="id_save_search" class="btn btn-primary">{% trans "Sauvegarder cette requête" %}</a>
       </div>
       <hgroup>
-        <h2>{% trans "Résultats de recherche" %} <span class="hint--top hint--no-animate" data-hint="{% trans "Help text!" %}"><i class="ion-help-circled"></i></span></h2>
+        <h2>{% trans "Résultats de recherche" %}</h2>
         {% if documents %}
         <h3>
         {% blocktrans trimmed count counter=results.pagination.count %}

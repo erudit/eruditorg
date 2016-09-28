@@ -1,0 +1,26 @@
+/**
+* On hover help text / tooltips
+*/
+
+
+[class*="hint--"]:after {
+  width: 200px;
+  white-space: normal;
+  line-height: 1.35;
+  @include fw-sans-normal;
+  font-size: 12px;
+}
+
+.ion-alert {
+  font-size: 14px;
+  vertical-align: super;
+  color: white;
+  background: #ff4242;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  vertical-align: top;
+  padding: 4px;
+  @include border-radius(11px);
+}

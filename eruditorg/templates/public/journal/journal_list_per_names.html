@@ -53,8 +53,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8">
-        {% lorem 1 p %}
+      <div class="col-md-8 page-intro">
+        {% blocktrans %}
+        <p>Découvrez la liste des revues savantes et culturelles diffusées par Érudit et ses partenaires (<a href="http://www.nrcresearchpress.com/" title="Site de NRC Research Press" target="_blank">NRC Research Press</a>, <a href="http://www.persee.fr/" title="Site de Persée" target="_blank">Persée</a>, <a href="https://digitalscholarship.lib.unb.ca/" title="Site de Centre for Digital Scholarship" target="_blank">Centre for Digital Scholarship</a>).</p>
+        <p>Les numéros courants sont disponibles en libre accès ou en accès restreint selon le modèle de diffusion de la revue. L’ensemble des archives est offert en libre accès (après la dernière année de publication pour les revues savantes et les trois dernières années de publications pour les revues culturelles). Pour plus d’informations à propos de nos collections, communiquez avec l’équipe d’Érudit à l’adresse <a href="mailto:info@erudit.org?subject=Collections d’Érudit">info@erudit.org</a>.</p>
+        {% endblocktrans %}
       </div>
     </div>
   </header>
@@ -81,7 +84,7 @@
               </div>
 
               <div id="div_id_{{ filter_form.types.html_name }}" class="form-group">
-                <h3>{{ filter_form.types.label }} {% if filter_form.types.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.types.help_text }}"><span class="ion-help-circled"></span></span>{% endif %}</h3>
+                <h3>{{ filter_form.types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel. ' %}"><span class="ion-help-circled"></span></span></h3>
                 <div class="controls">
                   {% for choice in filter_form.types.field.choices %}
                   <div class="checkbox">
@@ -93,7 +96,7 @@
               </div>
 
               <div id="div_id_{{ filter_form.collections.html_name }}" class="form-group">
-                <h3>{{ filter_form.collections.label }} {% if filter_form.collections.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ filter_form.collections.help_text }}"><span class="ion-help-circled"></span></span>{% endif %}</h3>
+                <h3>{{ filter_form.collections.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></h3>
                 <div class="controls">
                   {% for choice in filter_form.collections.field.choices %}
                   <div class="checkbox">

@@ -163,11 +163,17 @@ class ResultsFilterForm(forms.Form):
     filter_collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
     filter_authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
     filter_funds = forms.MultipleChoiceField(
-        label=_('Fonds'), help_text=_('Identifie le fond duquel le document fait partie'),
+        label=_('Fonds'),
+        help_text=_("""Les revues diffusées sur Érudit sont consultables
+                    directement sur la plateforme ; les revues des collections Persée et NRC
+                    Research Press redirigent vers la plateforme du partenaire."""),
         required=False)
     filter_publication_types = forms.MultipleChoiceField(
         label=_('Types de publications'),
-        help_text=_('Identifie le corpus duquel le document fait partie'), required=False)
+        help_text=_("""Les revues savantes publient des articles scientifiques révisés
+                    par les pairs ; les revues culturelles présentent des articles dans les
+                    domaines artistique, littéraire et socioculturel."""),
+        required=False)
 
     article_type_correspondence = {
         'Compte rendu': ['Compterendu']
