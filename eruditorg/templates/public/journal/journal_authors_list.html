@@ -86,7 +86,7 @@
                 <div class="author-name">{{ author_dict.author.full_name }}</div>
                 <ul class="author-articles">
                   {% for article_author in author_dict.articles %}
-                  {% cache FOREVER_TTL "public_journal_authors_item" journal.id article_author.id author.id LANGUAGE_CODE %}
+                  {% cache FOREVER_TTL "public_journal_authors_item" journal.id article_author.article.id author.id LANGUAGE_CODE %}
                     <li class="author-article">
                       {% spaceless %}
                       <span class="article-year">{{ article_author.article.issue.year }}</span> —
