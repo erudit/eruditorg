@@ -1,18 +1,24 @@
 /**
-* Advanced search page
+* Advanced search form
 */
 
+.advanced_search #breadcrumb {
+  background: $light-grey;
+}
 
 #advanced_search {
 
-  /**
-  * main header
-  */
-  header.search-header {
-    margin-bottom: $margin-vertical-default;
-    h3, h4 {
-      margin: $margin-vertical-default/3 0;
+  .glory {
+    background-color: $light-grey;
+    padding-bottom: 1.5em;
+
+    h2 {
+      margin: 0 0 1em 0;
+      color: #000;
+      font-size: 0.85em;
+      @include fw-sans-medium();
     }
+
   }
 
 
