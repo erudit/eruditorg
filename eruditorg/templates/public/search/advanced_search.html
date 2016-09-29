@@ -12,63 +12,57 @@
 <section id="advanced_search">
   <div class="glory">
     <div class="container">
-      <header class="page-header-main">
-        <div class="row">
-          <div class="col-md-10 col-sm-8 col-xs-12">
+      <div class="row">
+        <div class="col-sm-7 col-xs-12">
+          <header class="page-header-main">
             <h1>{% trans "Recherche avancée" %}</h1>
+          </header>
+          <div class="page-intro">
+            {% blocktrans %}
+            <p>Affinez votre recherche dans le corpus de documents offerts sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres disponibles.</p>
+            {% endblocktrans %}
           </div>
         </div>
-      </header>
-      <div class="page-intro">
-        {% blocktrans %}
-        <p>Affinez votre recherche dans le corpus de documents offerts sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres disponibles.</p>
-        {% endblocktrans %}
       </div>
     </div>
   </div>
   <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form" method="get">
     <div class="glory">
       <div class="container">
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-            <div class="row">
-              <div class="col-md-8">
-                <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
-                  <div class="controls">
-                    {{ form.basic_search_term|add_class:'form-control' }}
-                    {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                  </div>
-                  <div class="alert alert-warning advanced-search-popup-error" style="display:none;">
-                    {% trans "Vous devez saisir une expression ou des mots-clés." %}
-                  </div>
-                </div>
+        <div class="row form-row">
+          <div class="col-xs-5 col-md-6 col-md-offset-1">
+            <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
+              <div class="controls">
+                {{ form.basic_search_term|add_class:'form-control' }}
+                {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
               </div>
-              <div class="col-md-4">
-                <div id="div_id_{{ form.basic_search_field.html_name }}" class="form-group{% if form.basic_search_field.errors %} has-error{% endif %}">
-                  <div class="controls">
-                    {{ form.basic_search_field|add_class:'form-control' }}
-                    {% for error in form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                  </div>
-                </div>
+              <div class="alert alert-warning advanced-search-popup-error" style="display:none;">
+                {% trans "Vous devez saisir une expression ou des mots-clés." %}
               </div>
             </div>
-            <div id="id_advanced_q_wrapper">
-              {% include "public/search/partials/advanced_search_q.html" with qnb=1 qoperator_field=form.advanced_search_operator1 qterm_field=form.advanced_search_term1 qfield_field=form.advanced_search_field1 %}
-              {% include "public/search/partials/advanced_search_q.html" with qnb=2 qoperator_field=form.advanced_search_operator2 qterm_field=form.advanced_search_term2 qfield_field=form.advanced_search_field2 %}
-              {% include "public/search/partials/advanced_search_q.html" with qnb=3 qoperator_field=form.advanced_search_operator3 qterm_field=form.advanced_search_term3 qfield_field=form.advanced_search_field3 %}
-              {% include "public/search/partials/advanced_search_q.html" with qnb=4 qoperator_field=form.advanced_search_operator4 qterm_field=form.advanced_search_term4 qfield_field=form.advanced_search_field4 %}
-              {% include "public/search/partials/advanced_search_q.html" with qnb=5 qoperator_field=form.advanced_search_operator5 qterm_field=form.advanced_search_term5 qfield_field=form.advanced_search_field5 %}
-            </div>
-            <div class="row">
-              <div class="col-md-6 col-md-push-2">
-                <a href="#" id="id_add_q_field"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter un champ" %}</a>
+          </div>
+          <div class="col-xs-5 col-md-3">
+            <div id="div_id_{{ form.basic_search_field.html_name }}" class="form-group{% if form.basic_search_field.errors %} has-error{% endif %}">
+              <div class="controls">
+                {{ form.basic_search_field|add_class:'form-control' }}
+                {% for error in form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-4 col-md-push-8">
-                <button type="submit" class="btn btn-primary btn-block">{% trans "Rechercher" %}</button>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div id="id_advanced_q_wrapper">
+          {% include "public/search/partials/advanced_search_q.html" with qnb=1 qoperator_field=form.advanced_search_operator1 qterm_field=form.advanced_search_term1 qfield_field=form.advanced_search_field1 %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=2 qoperator_field=form.advanced_search_operator2 qterm_field=form.advanced_search_term2 qfield_field=form.advanced_search_field2 %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=3 qoperator_field=form.advanced_search_operator3 qterm_field=form.advanced_search_term3 qfield_field=form.advanced_search_field3 %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=4 qoperator_field=form.advanced_search_operator4 qterm_field=form.advanced_search_term4 qfield_field=form.advanced_search_field4 %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=5 qoperator_field=form.advanced_search_operator5 qterm_field=form.advanced_search_term5 qfield_field=form.advanced_search_field5 %}
+        </div>
+        <div class="row btn-row">
+          <div class="col-xs-6 col-md-5 col-md-offset-1">
+            <a href="#" id="id_add_q_field" class="btn btn-primary-outlined add-btn"><span class="ion-plus"></span></a>
+          </div>
+          <div class="col-xs-6 col-xs-pull-2 col-md-5 col-md-pull-1 text-right">
+            <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
           </div>
         </div>
       </div>

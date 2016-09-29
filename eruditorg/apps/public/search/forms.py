@@ -140,6 +140,7 @@ class SearchForm(forms.Form):
         for fkey in ['basic_search_term', 'advanced_search_term1', 'advanced_search_term2',
                      'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
+            self.fields[fkey].widget.attrs['autofocus'] = _('autofocus')
 
         self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in Discipline.objects.all()]
         self.fields['journals'].choices = [(j.name_fr, j.name) for j in Journal.objects.all()]
