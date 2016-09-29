@@ -16,10 +16,20 @@
 #journal_detail {
 
   .latest-issue {
+
     p {
       margin: 1em 0;
     }
+
   }
+
+  a.authors-index {
+    @include fw-sans-medium;
+  }
+
+  /**
+  * Journal main about section
+  */
 
   .journal-infos {
 
@@ -54,20 +64,133 @@
 
         }
 
-        h1 { font-size: 1.5em; }
+        ul {
+          margin-left: 20px;
+        }
 
-        h2 { font-size: 1.35em; }
-
-        h3 { font-size: 1.2em }
-
-        h4 { font-size: 1.05em }
-
-        p {
+        section, p, li {
           @include paragraph-text-style;
         }
 
       }
 
+    }
+
+  }
+
+  /**
+  * Back issues section
+  */
+
+  .back-issues {
+    margin-top: $margin-vertical-default * 2;
+    background: $light-grey;
+    padding: $margin-vertical-default 0;
+
+    .back-issues--header {
+      padding-top: $margin-vertical-default;
+      padding-bottom: $margin-vertical-default;
+      margin-top: 1em;
+    }
+
+    .scroll-issues {
+      margin-top: 1em;
+      font-size: 2em;
+      @include fw-sans-bold;
+
+      &:hover, &:focus, &:active {
+        text-decoration: none;
+        color: $coral-red;
+      }
+
+    }
+
+  }
+
+  .year-list {
+    list-style: none;
+    margin: 0;
+
+    .year-list--item {
+      margin-bottom: 0;
+      padding: 0 0.5em 2.5em 0;
+      line-height: 1.15;
+      border-right: 1px solid $mid-grey;
+      @include column-break-inside(avoid);
+
+      h4 {
+        margin-bottom: 0.25em;
+        padding-bottom: 0.25em;
+      }
+
+    }
+
+  }
+
+  .issue-list {
+    list-style: none;
+    margin: 0;
+
+    .issue-list--item {
+      margin: 0;
+
+      a {
+        font-size: smaller;
+        padding: 0.35em 0;
+        display: block;
+        @include transition(padding 0.15s ease-in);
+
+        &:hover, &:focus, &:active {
+          color: $coral-red;
+          text-decoration: none;
+        }
+
+      }
+
+    }
+
+    .issue-list--theme {
+      @include fw-sans-medium;
+      display: block;
+      margin: 0.25em 0;
+
+      em {
+        @include fw-sans-medium-italic;
+      }
+
+    }
+
+  }
+
+  // responsive styles
+  @media (max-width: $screen-xs-max) {
+
+    .year-list {
+      @include column-count(1);
+    }
+
+  }
+
+  @media (min-width: $screen-sm-min) {
+
+    .year-list {
+      @include column-count(2);
+    }
+
+  }
+
+  @media (min-width: $screen-md-min) {
+
+    .year-list {
+      @include column-count(3);
+    }
+
+  }
+
+  @media (min-width: $screen-lg-min) {
+
+    .year-list {
+      @include column-count(4);
     }
 
   }

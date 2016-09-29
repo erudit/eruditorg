@@ -140,10 +140,17 @@
 
     .back-issues--header {
       font-size: 1.25em;
+      padding-top: $margin-vertical-default;
+      padding-bottom: $margin-vertical-default;
     }
 
     .issue-list--item img {
       height: 175px;
+    }
+
+    .issue-list {
+      margin: 0;
+      list-style: none;
     }
 
     .issue-list--title {
@@ -151,11 +158,18 @@
 
       h5 {
         margin: 0;
+        line-height: 1.25;
+
+        > span {
+          display: block;
+
+        }
+
       }
 
       a {
         border-top: 1px solid $dark-grey;
-        padding: 1em 0;
+        padding: 1em 0.25em;
         display: block;
         @include transition(all 150ms);
 
@@ -164,10 +178,13 @@
           color: #FFF;
           text-decoration: none;
           @include fw-sans-medium;
-          padding: 1em 0.25em;
           border-color: $coral-red;
         }
 
+      }
+
+      .issue-list--theme {
+        @include fw-sans-medium;
       }
 
     }
