@@ -10,7 +10,6 @@
 
   .glory {
     background-color: $light-grey;
-    padding-bottom: 1.5em;
 
     h2 {
       margin: 0 0 1em 0;
@@ -26,34 +25,75 @@
   * search form
   */
 
-  form.advanced-search-form {
-    // input style
-    input[type='text'],
-    input[type='search'] {
-      height: 46px;
-      background: #fff;
-      border: 1px solid $gray-base;
-      padding: 12px;
-      font-size: 16px;
+  .advanced-search-form {
+
+    .glory {
+      padding-bottom: 2em;
+      margin-bottom: 2em;
     }
 
-    // select style
-    select {
-      -webkit-appearance: none;
-      outline: none;
-      @include border-radius(0);
-      border: 1px solid $gray-base;
-      padding: 12px;
-      height: 46px;
-      position: relative;
-      @include fw-sans-normal;
-      background: #fff url(../iconfont/chevron-down.svg) no-repeat 95% center;
-      option {
-        height: auto;
-        line-height: auto;
-        @include fw-sans-normal;
-      }
+    .form-group {
+      padding: 0;
     }
+
+    .form-row {
+      margin: 0;
+    }
+
+    .btn-row {
+      margin-top: 1em;
+    }
+
+    input[type='text'],
+    select,
+    .remove-qbox,
+    .operator {
+      margin: 15px 0;
+      padding: 0 0.5em;
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+    }
+
+    input[type='text'] {
+      background-color: #FFF;
+    }
+
+    select {
+      position: relative;
+      background: #FFF url(../iconfont/chevron-down.svg) no-repeat 98% center;
+      padding-right: 25px;
+
+      option {
+        line-height: 40px;
+        font-size: 14px;
+      }
+
+    }
+
+    .operator select {
+      background-color: transparent;
+      border-width: 0 0 1px 0;
+      text-transform: uppercase;
+      width: auto;
+      font-size: 12px;
+      @include fw-mono;
+    }
+
+    .remove-qbox {
+      line-height: 40px;
+      font-size: 20px;
+      display: block;
+
+      &:hover, &:active, &:focus {
+        color: $coral-red;
+      }
+
+    }
+
+    /**
+    * filters
+    */
 
     .select2 {
       .select2-selection {
@@ -106,21 +146,31 @@
     #div_id_publication_types ul li { width: 32%; }
     #div_id_funds ul li { width: 48%; }
 
-    a#id_add_q_field {
-      margin-top: 10px;
-      padding: 5px 0;
-      display: inline-block;
-    }
-
-    .remove-button-wrapper {
-      position: absolute;
-      top: 6px;
-      right: -40px;
-
-      i {
-        font-size: 30px;
-        color: $gray-dark;
-      }
-    }
   }
+
+
+  /**
+  * responsive styles
+  */
+  @media (max-width: $screen-xs-max) {
+
+    .remove-btn {
+      text-align: center;
+    }
+
+  }
+
+  @media (max-width: $screen-sm-max) {
+
+    .advanced-search-form .operator {
+      margin-top: 0;
+
+      select {
+        margin: 0;
+      }
+
+    }
+
+  }
+
 }

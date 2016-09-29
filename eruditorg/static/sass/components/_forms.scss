@@ -105,12 +105,28 @@ input[list],
 
   @include placeholder(#000);
 
-  &:hover {
+  &:hover, &:active, &:focus {
     border-color: $coral-red;
   }
-  &:active, &:focus {
-    border-color: $coral-red;
+
+  &::-webkit-input-placeholder {
+    color:    $dark-grey;
   }
+
+  &:-moz-placeholder {
+    color:    $dark-grey;
+    opacity:  1;
+  }
+
+  &::-moz-placeholder {
+    color:    $dark-grey;
+    opacity:  1;
+  }
+
+  &:-ms-input-placeholder {
+    color:   $dark-grey;
+  }
+
 }
 
 input[type="text"],
