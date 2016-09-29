@@ -41,4 +41,32 @@ aside,
 
   }
 
+  /**
+  * journal meta infos on sidebars
+  */
+  &.journal-meta {
+
+    p {
+      font-size: 0.85em;
+    }
+
+    .journal_logo {
+      margin: 1em auto;
+    }
+
+    .authors-index {
+      @include fw-sans-medium;
+    }
+
+    .journal-meta--list {
+      border-bottom: 1px solid $mid-grey;
+
+    }
+
+  }
+
+  .issue-coverpage {
+    outline: 1px solid $mid-grey;
+  }
+
 }
