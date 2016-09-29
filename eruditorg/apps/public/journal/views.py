@@ -252,6 +252,7 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
             context['journal'] = self.journal
         context['letter'] = self.letter
         context['letters_exists'] = self.letters_exists
+        context['latest_issue'] = self.journal.last_issue
         return context
 
 
