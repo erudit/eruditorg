@@ -136,7 +136,7 @@
             </a>
             {% endif %}
             <p>
-              <a href="#back-issues" class="btn btn-primary">
+              <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique des numéros' %}">
                 {% trans "Voir tous les numéros" %}
               </a>
             </p>

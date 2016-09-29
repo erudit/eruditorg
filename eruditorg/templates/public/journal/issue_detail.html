@@ -211,6 +211,12 @@
           </div>
           {% endif %}
 
+          <p>
+            <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique des numéros' %}">
+              {% trans "Voir tous les numéros" %}
+            </a>
+          </p>
+
         </div>
 
         <div class="sidebar-block">
