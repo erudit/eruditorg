@@ -83,6 +83,17 @@ class IssueFactory(factory.django.DjangoModelFactory):
     year = dt.datetime.now().year
 
 
+class IssueContributorFactory(factory.django.DjangoModelFactory):
+
+    issue = factory.SubFactory(IssueFactory)
+    lastname = faker.last_name()
+    firstname = faker.first_name()
+    role_name = faker.prefix()
+
+    class Meta:
+        model = 'erudit.IssueContributor'
+
+
 class ArticleFactory(factory.django.DjangoModelFactory):
 
     class Meta:
