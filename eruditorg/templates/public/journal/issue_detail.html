@@ -225,13 +225,6 @@
 
           <dl class="journal-meta--list">
 
-            {% if journal.members.all %}
-            <dt>{% trans "Direction" %}</dt>
-            {% for member in journal.members.all %}
-            <dd>{{ member.get_full_name }}</dd>
-            {% endfor %}
-            {% endif %}
-
             {% if journal.publishers.all %}
             <dt>
               {% blocktrans count total=journal.publishers.all|length %}
