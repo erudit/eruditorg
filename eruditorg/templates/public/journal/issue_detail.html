@@ -108,7 +108,7 @@
               {% endif %}
               {% if forloop.first %}</span>{% endif %}
               {% endfor %}
-              <span>{{ issue.volume_title_with_pages }}</span>
+              <span>{{ issue.volume_title_with_pages }}{% if issue.has_movable_limitation and not user_has_access_to_journal %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
             </h1>
             <h2>
               {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}

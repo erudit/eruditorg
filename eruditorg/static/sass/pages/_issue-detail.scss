@@ -5,6 +5,16 @@
   */
   .page-header-main {
 
+    h1 {
+
+      .ion-locked {
+        font-size: 0.5em;
+        color: $dark-grey;
+        vertical-align: middle;
+      }
+
+    }
+
     h2 {
       @include fw-sans-normal();
       margin-bottom: 1em;

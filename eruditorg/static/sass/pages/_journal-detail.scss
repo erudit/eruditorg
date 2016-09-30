@@ -97,9 +97,9 @@
 
     .year-list--item {
       margin-bottom: 0;
-      padding: 0 0.5em 2.5em 0;
+      padding: 0 0 2.5em 0.5em;
       line-height: 1.15;
-      border-right: 1px solid $mid-grey;
+      border-left: 1px solid $mid-grey;
       @include column-break-inside(avoid);
 
       h4 {
