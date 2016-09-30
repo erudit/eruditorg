@@ -272,11 +272,13 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     def get_directors(self):
         """ The directors of a journal are the directors of the last issue """
-        return self.last_issue.get_directors()
+        if self.last_issue:
+            return self.last_issue.get_directors()
 
     def get_editors(self):
         """ The editors of a journal are the editors of the last issue """
-        return self.last_issue.get_editors()
+        if self.last_issue:
+            return self.last_issue.get_editors()
 
 
 class Issue(FedoraMixin, FedoraDated, OAIDated):
