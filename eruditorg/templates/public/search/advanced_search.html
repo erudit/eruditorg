@@ -141,40 +141,40 @@
     </fieldset>
   </form>
 
-
   {% if saved_searches %}
-  <hr />
-  <div class="row">
-    <div class="col-md-12">
-      <h3>{% trans "Historique des recherches sauvegardées" %}</h3>
+  <section id="search-history" class="container main-content search-history">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Historique des recherches sauvegardées" %}</h2>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>N°</th>
-            <th>{% trans "Requête" %}</th>
-            <th>{% trans "Résultats" %}</th>
-            <th>{% trans "Supprimer" %}</th>
-            <th>{% trans "Relancer" %}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for search in saved_searches %}
-          <tr class="text-center saved-search" data-uuid="{{ search.uuid }}">
-            <td>{{ forloop.counter }}</td>
-            <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
-            <td>{{ search.results_count }}</td>
-            <td><a href="#" class="remove-search"><span class="ion-close"></span></a></td>
-            <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}"><span class="ion-arrow-right-c"></span></a></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col-md-12">
+        <table>
+          <thead>
+            <tr>
+              <th>n<sup>o</sup></th>
+              <th>{% trans "Requête" %}</th>
+              <th>{% trans "Résultats" %}</th>
+              <th>{% trans "Supprimer" %}</th>
+              <th>{% trans "Relancer" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for search in saved_searches %}
+            <tr class="saved-search" data-uuid="{{ search.uuid }}">
+              <td>{{ forloop.counter }}</td>
+              <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
+              <td>{{ search.results_count }}</td>
+              <td><a href="#" class="remove-search"><span class="ion-close"></span></a></td>
+              <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}">--></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  </section>
   {% endif %}
 
 </section>
