@@ -60,7 +60,7 @@
   }
 
   .issue_detail--articles {
-
+    
     &.section-2{
       margin-left: 20px;
     }
@@ -137,6 +137,14 @@
 
       }
 
+    }
+
+  }
+
+  .issue_detail--articles + .issue_detail--articles {
+
+    .article-item:first-child {
+      border-top: 1px solid $dark-grey;
     }
 
   }
