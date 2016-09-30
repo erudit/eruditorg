@@ -69,12 +69,12 @@
     </div>
     <div class="container filters">
       <div class="row">
-        <div class="col-md-12">
-          <h3>{% trans "Filtres" %}</h3>
+        <div class="col-xs-12">
+          <h2>{% trans "Filtres" %}</h2>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-xs-12 filter-disciplines">
           <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
             <div class="controls">
               <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
@@ -83,7 +83,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 filter-languages">
           <div id="div_id_{{ form.languages.html_name }}" class="form-group{% if form.languages.errors %} has-error{% endif %}">
             <div class="controls">
               <label class="control-label" for="{{ form.languages.auto_id }}">{{ form.languages.label }}</label>
@@ -92,7 +92,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 filter-journals">
           <div id="div_id_{{ form.journals.html_name }}" class="form-group{% if form.journals.errors %} has-error{% endif %}">
             <div class="controls">
               <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
@@ -101,9 +101,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
+        <div class="col-xs-12 filter-types">
           <div id="div_id_{{ form.publication_types.html_name }}" class="form-group{% if form.publication_types.errors %} has-error{% endif %}">
             <div class="controls">
               <label class="control-label" for="{{ form.publication_types.auto_id }}">{{ form.publication_types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel.' %}"><span class="ion-help-circled"></span></span></label>
@@ -112,15 +110,24 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 filter-collections">
+          <div id="div_id_{{ form.funds.html_name }}" class="form-group{% if form.funds.errors %} has-error{% endif %}">
+            <div class="controls">
+              <label class="control-label" for="{{ form.funds.auto_id }}">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></label>
+              {{ form.funds|add_class:'form-control' }}
+              {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 filter-years">
           <div id="div_id_years">
             <div class="controls">
               <label class="control-label">{% trans "Année ou intervalle d'années" %}</label>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-xs-6">
                   {{ form.pub_year_start|add_class:'form-control' }}
                 </div>
-                <div class="col-md-6">
+                <div class="col-xs-6">
                   {{ form.pub_year_end|add_class:'form-control' }}
                 </div>
               </div>
@@ -133,25 +140,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div id="div_id_{{ form.funds.html_name }}" class="form-group{% if form.funds.errors %} has-error{% endif %}">
-            <div class="controls">
-              <label class="control-label" for="{{ form.funds.auto_id }}">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></label>
-              {{ form.funds|add_class:'form-control' }}
-              {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <div class="row">
-            <div class="col-md-4 col-md-push-8">
-              <button type="submit" class="btn btn-primary btn-block">{% trans "Rechercher" %}</button>
-            </div>
-          </div>
+        <div class="col-md-10 text-right">
+          <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
         </div>
       </div>
     </div>
