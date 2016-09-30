@@ -8,6 +8,7 @@ from ..models import ArticleAbstract
 from ..models import ArticleSectionTitle
 from ..models import Issue
 from ..models import IssueTheme
+from ..models import IssueContributor
 from ..models import Journal
 from ..models import JournalInformation
 
@@ -80,8 +81,13 @@ class IssueThemeInline(admin.TabularInline):
     model = IssueTheme
 
 
+class IssueContributorInline(admin.TabularInline):
+    extra = 0
+    model = IssueContributor
+
+
 class IssueAdmin(admin.ModelAdmin):
-    inlines = (IssueThemeInline, )
+    inlines = (IssueThemeInline, IssueContributorInline)
     list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
     search_fields = ('id', 'localidentifier', )
     list_filter = ('journal__collection', )
@@ -111,9 +117,11 @@ class ArticleSectionTitleInline(admin.TabularInline):
 
 class ArticleAdmin(admin.ModelAdmin):
     inlines = (ArticleAbstractInline, ArticleSectionTitleInline, )
-    list_display = ('localidentifier', 'title', )
+    list_display = ('localidentifier', 'issue', 'title', )
     raw_id_fields = ('issue', 'publisher', 'authors', )
     search_fields = ('id', 'title', 'localidentifier', )
+
+    list_filter = ('type', 'issue__journal__collection', )
 
 
 class JournalInformationAdmin(TranslationAdmin):

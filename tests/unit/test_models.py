@@ -17,6 +17,7 @@ from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalTypeFactory
 from erudit.test.factories import CollectionFactory
+from erudit.test.factories import IssueContributorFactory
 
 
 class TestJournal(BaseEruditTestCase):
@@ -127,6 +128,35 @@ class TestJournal(BaseEruditTestCase):
         self.assertEqual(
             self.journal.published_open_access_issues_year_coverage,
             {'from': issue_4.year, 'to': issue_3.year})
+
+    def test_knows_its_directors(self):
+        now_dt = dt.datetime.now()
+        first_issue = IssueFactory.create(
+            journal=self.journal, date_published=now_dt - dt.timedelta(days=1)
+        )
+
+        first_issue_director = IssueContributorFactory(
+            issue=first_issue, is_director=True
+        )
+
+        last_issue = IssueFactory.create(journal=self.journal, date_published=now_dt)
+        last_issue_director = IssueContributorFactory(issue=last_issue, is_director=True)
+
+        assert last_issue_director in self.journal.get_directors()
+        assert first_issue_director not in self.journal.get_directors()
+
+    def test_knows_its_editors(self):
+        now_dt = dt.datetime.now()
+        first_issue = IssueFactory.create(
+            journal=self.journal, date_published=now_dt - dt.timedelta(days=1)
+        )
+        first_issue_editor = IssueContributorFactory(issue=first_issue, is_editor=True)
+
+        last_issue = IssueFactory.create(journal=self.journal, date_published=now_dt)
+        last_issue_editor = IssueContributorFactory(issue=last_issue, is_editor=True)
+
+        assert last_issue_editor in self.journal.get_editors()
+        assert first_issue_editor not in self.journal.get_editors()
 
 
 class TestIssue(BaseEruditTestCase):
@@ -278,6 +308,14 @@ class TestIssue(BaseEruditTestCase):
         self.assertEqual(issue_3.volume_slug, '2015-n2')
         self.assertEqual(issue_4.volume_slug, '2015-v2-3-n39')
         self.assertEqual(issue_5.volume_slug, '2015')
+
+    def test_knows_its_directors(self):
+        contributor = IssueContributorFactory(issue=self.issue, is_director=True)
+        assert contributor in self.issue.get_directors()
+
+    def test_knows_its_editors(self):
+        contributor = IssueContributorFactory(issue=self.issue, is_editor=True)
+        assert contributor in self.issue.get_editors()
 
 
 class TestArticle(BaseEruditTestCase):

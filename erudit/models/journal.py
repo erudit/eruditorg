@@ -270,6 +270,14 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             'to': open_access_issues.first().year,
         }
 
+    def get_directors(self):
+        """ The directors of a journal are the directors of the last issue """
+        return self.last_issue.get_directors()
+
+    def get_editors(self):
+        """ The editors of a journal are the editors of the last issue """
+        return self.last_issue.get_editors()
+
 
 class Issue(FedoraMixin, FedoraDated, OAIDated):
     """ An issue of a journal. """
@@ -362,6 +370,12 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             )
         return None
 
+    def get_directors(self):
+        return self.contributors.filter(is_director=True)
+
+    def get_editors(self):
+        return self.contributors.filter(is_editor=True)
+
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
@@ -436,6 +450,34 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             return True if publication_year <= current_year <= publication_year + year_offset \
                 else False
         return False
+
+
+class IssueContributor(models.Model):
+    """ A contributor of an issue """
+
+    issue = models.ForeignKey(Issue, related_name='contributors', verbose_name=_('Numéro'))
+
+    firstname = models.CharField(max_length=255, verbose_name=_('Prénom du contributeur'))
+    """ Firstname of the contributor """
+
+    lastname = models.CharField(max_length=255, verbose_name=_('Nom du contributeur'))
+    """ Lastname of the contributor """
+
+    role_name = models.CharField(max_length=255, verbose_name=_('Rôle du contributeur'))
+    """ Name of the role of the contributor """
+
+    is_director = models.NullBooleanField(verbose_name=_('Est un directeur'), null=True)
+    """ Determines if the person contributes as a director """
+
+    is_editor = models.NullBooleanField(verbose_name=_('Est un rédacteur'), null=True)
+    """ Determines if the person contributes as an editor """
+
+    def format_name(self):
+        return "{firstname} {lastname} ({role_name})".format(
+            firstname=self.firstname,
+            lastname=self.lastname,
+            role_name=self.role_name
+        )
 
 
 class IssueTheme(models.Model):
