@@ -92,6 +92,16 @@
       @include fw-mono;
     }
 
+    .search-field {
+
+      label {
+        position: absolute;
+        font-size: 14px;
+        top: -5px;
+      }
+
+    }
+
     .remove-qbox {
       line-height: 40px;
       font-size: 20px;
