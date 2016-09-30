@@ -26,10 +26,13 @@
       </div>
     </div>
   </div>
-  <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form" method="get">
-    <div class="glory">
+  <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form main-content" method="get">
+    <fieldset class="glory">
       <div class="container">
         <div class="row form-row">
+          <legend>
+            <h2 class="sr-only">{% trans 'Par mots-clés' %}</h2>
+          </legend>
           <div class="col-xs-5 col-md-6 col-md-offset-1">
             <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
               <div class="controls">
@@ -66,85 +69,76 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="container filters">
+    </fieldset>
+    <fieldset class="container filters">
       <div class="row">
-        <div class="col-xs-12">
+        <legend class="col-xs-12">
           <h2>{% trans "Filtres" %}</h2>
-        </div>
+        </legend>
       </div>
       <div class="row">
         <div class="col-sm-4 filter-disciplines">
           <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
-            <div class="controls">
-              <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
-              {{ form.disciplines|add_class:'form-control' }}
-              {% for error in form.disciplines.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </div>
+            <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
+            {{ form.disciplines|add_class:'form-control' }}
+            {% for error in form.disciplines.errors %}<p class="error">{{ error }}</p>{% endfor %}
           </div>
         </div>
         <div class="col-sm-4 filter-languages">
           <div id="div_id_{{ form.languages.html_name }}" class="form-group{% if form.languages.errors %} has-error{% endif %}">
-            <div class="controls">
-              <label class="control-label" for="{{ form.languages.auto_id }}">{{ form.languages.label }}</label>
-              {{ form.languages|add_class:'form-control' }}
-              {% for error in form.languages.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </div>
+            <label class="control-label" for="{{ form.languages.auto_id }}">{{ form.languages.label }}</label>
+            {{ form.languages|add_class:'form-control' }}
+            {% for error in form.languages.errors %}<p class="error">{{ error }}</p>{% endfor %}
           </div>
         </div>
         <div class="col-sm-4 filter-journals">
           <div id="div_id_{{ form.journals.html_name }}" class="form-group{% if form.journals.errors %} has-error{% endif %}">
-            <div class="controls">
-              <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
-              {{ form.journals|add_class:'form-control' }}
-              {% for error in form.journals.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </div>
+            <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
+            {{ form.journals|add_class:'form-control' }}
+            {% for error in form.journals.errors %}<p class="error">{{ error }}</p>{% endfor %}
           </div>
         </div>
-        <div class="col-xs-12 filter-types">
+        <div class="col-sm-6 filter-types">
           <div id="div_id_{{ form.publication_types.html_name }}" class="form-group{% if form.publication_types.errors %} has-error{% endif %}">
-            <div class="controls">
-              <label class="control-label" for="{{ form.publication_types.auto_id }}">{{ form.publication_types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel.' %}"><span class="ion-help-circled"></span></span></label>
-              {{ form.publication_types|add_class:'form-control' }}
-              {% for error in form.publication_types.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </div>
+            <label class="control-label" for="{{ form.publication_types.auto_id }}">{{ form.publication_types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel.' %}"><span class="ion-help-circled"></span></span></label>
+            {{ form.publication_types|add_class:'form-control' }}
+            {% for error in form.publication_types.errors %}<p class="error">{{ error }}</p>{% endfor %}
           </div>
+
         </div>
-        <div class="col-xs-12 filter-collections">
+        <div class="col-sm-6 filter-collections">
           <div id="div_id_{{ form.funds.html_name }}" class="form-group{% if form.funds.errors %} has-error{% endif %}">
-            <div class="controls">
-              <label class="control-label" for="{{ form.funds.auto_id }}">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></label>
-              {{ form.funds|add_class:'form-control' }}
-              {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </div>
+            <label class="control-label" for="{{ form.funds.auto_id }}">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></label>
+            {{ form.funds|add_class:'form-control' }}
+            {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
           </div>
         </div>
-        <div class="col-xs-12 filter-years">
+        <div class="col-sm-6 filter-years">
           <div id="div_id_years">
-            <div class="controls">
-              <label class="control-label">{% trans "Année ou intervalle d'années" %}</label>
-              <div class="row">
-                <div class="col-xs-6">
-                  {{ form.pub_year_start|add_class:'form-control' }}
-                </div>
-                <div class="col-xs-6">
-                  {{ form.pub_year_end|add_class:'form-control' }}
-                </div>
+            <label class="control-label">{% trans "Année ou intervalle d'années" %}</label>
+            <div class="row">
+              <div class="col-xs-6 year-start">
+                <label for="{{ form.pub_year_start.auto_id }}">{% trans 'De…' %}</label>
+                {{ form.pub_year_start|add_class:'form-control' }}
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  {% for error in form.pub_year_start.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                  {% for error in form.pub_year_end.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                </div>
+              <div class="col-xs-6 year-end">
+                <label for="{{ form.pub_year_end.auto_id }}">{% trans 'À…' %}</label>
+                {{ form.pub_year_end|add_class:'form-control' }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                {% for error in form.pub_year_start.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                {% for error in form.pub_year_end.errors %}<p class="error">{{ error }}</p>{% endfor %}
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-10 text-right">
+        <div class="col-sm-6 filter-btn text-right">
           <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
         </div>
       </div>
-    </div>
+    </fieldset>
   </form>
 
 
