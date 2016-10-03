@@ -7,7 +7,7 @@
 {% block data_controller %}public:search:results{% endblock data_controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a>
+{{ block.super }} / <a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a>
 {% endblock %}
 
 {% block content %}
@@ -16,29 +16,27 @@
 
   {# Title and search summary #}
   <div class="row">
-    <header class="page-header-main search-header col-xs-12 border-bottom">
+    <header class="page-header-main col-xs-12">
       <div class="pull-right">
-        <a href="#" id="id_save_search" class="btn btn-primary">{% trans "Sauvegarder cette requête" %}</a>
+        <a href="#" id="id_save_search" class="btn btn-primary-outlined">{% trans "Sauvegarder cette requête" %}</a>
       </div>
-      <hgroup>
-        <h2>{% trans "Résultats de recherche" %}</h2>
-        {% if documents %}
-        <h3>
+      <h1>{% trans "Résultats de recherche" %}</h1>
+      {% if documents %}
+      <p>
         {% blocktrans trimmed count counter=results.pagination.count %}
-          <strong>{{ counter }}</strong> résultat trouvé pour la requête :
+        <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
         {% plural %}
-          <strong>{{ counter }}</strong> résultats trouvés pour la requête :
+        <strong>{{ counter }}</strong> résultats trouvés pour la requête&nbsp;:
         {% endblocktrans %}
-        </h3>
-        {% else %}
-        <h3>{% trans "Aucun document trouvé" %}</h3>
-        {% endif %}
-        {% if search_elements %}
-        <h4 class="mono-space search-terms">
-          {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
-        </h4>
-        {% endif %}
-      </hgroup>
+      </p>
+      {% else %}
+      <p>{% trans "Aucun document trouvé" %}</p>
+      {% endif %}
+      {% if search_elements %}
+      <p class="search-query">
+        {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
+      </p>
+      {% endif %}
     </header>
   </div>
 
@@ -46,86 +44,79 @@
     {# Filter form #}
     <form action="{% url 'public:search:results' %}" id="id-search" class="search-form" method="get">
       <aside class="col-sm-3">
-          <header class='search-filters-header'><h3 class='h4'>{% trans "Filtres" %}</h3></header>
+        <h2>{% trans "Filtres" %}</h2>
+        {# Search form #}
+        <div class="hidden">
+            {{ search_form.basic_search_term }}
+            {{ search_form.basic_search_field }}
+            {{ search_form.advanced_search_operator1 }}
+            {{ search_form.advanced_search_term1 }}
+            {{ search_form.advanced_search_field1 }}
+            {{ search_form.advanced_search_operator2 }}
+            {{ search_form.advanced_search_term2 }}
+            {{ search_form.advanced_search_field2 }}
+            {{ search_form.advanced_search_operator3 }}
+            {{ search_form.advanced_search_term3 }}
+            {{ search_form.advanced_search_field3 }}
+            {{ search_form.advanced_search_operator4 }}
+            {{ search_form.advanced_search_term4 }}
+            {{ search_form.advanced_search_field4 }}
+            {{ search_form.advanced_search_operator5 }}
+            {{ search_form.advanced_search_term5 }}
+            {{ search_form.advanced_search_field5 }}
+            {{ search_form.pub_year_start }}
+            {{ search_form.pub_year_end }}
+            {{ search_form.available_since }}
+            {{ search_form.funds }}
+            {{ search_form.publication_types }}
+            {{ search_form.disciplines }}
+            {{ search_form.languages }}
+            {{ search_form.journals }}
+        </div>
 
-          {# Search form #}
-          <fieldset>
-            <div class="hidden">
-              {{ search_form.basic_search_term }}
-              {{ search_form.basic_search_field }}
-              {{ search_form.advanced_search_operator1 }}
-              {{ search_form.advanced_search_term1 }}
-              {{ search_form.advanced_search_field1 }}
-              {{ search_form.advanced_search_operator2 }}
-              {{ search_form.advanced_search_term2 }}
-              {{ search_form.advanced_search_field2 }}
-              {{ search_form.advanced_search_operator3 }}
-              {{ search_form.advanced_search_term3 }}
-              {{ search_form.advanced_search_field3 }}
-              {{ search_form.advanced_search_operator4 }}
-              {{ search_form.advanced_search_term4 }}
-              {{ search_form.advanced_search_field4 }}
-              {{ search_form.advanced_search_operator5 }}
-              {{ search_form.advanced_search_term5 }}
-              {{ search_form.advanced_search_field5 }}
-              {{ search_form.pub_year_start }}
-              {{ search_form.pub_year_end }}
-              {{ search_form.available_since }}
-              {{ search_form.funds }}
-              {{ search_form.publication_types }}
-              {{ search_form.disciplines }}
-              {{ search_form.languages }}
-              {{ search_form.journals }}
+        {# Filter form #}
+        {% if filter_form %}
+        <fieldset class="search-filters sidebar-block">
+          <div id="div_id_{{ filter_form.filter_extra_q.html_name }}" class="{% if filter_form.filter_extra_q.errors %}has-error{% endif %}">
+            <label for="id_{{ filter_form.filter_extra_q.auto_id }}_0" class="control-label akkordion-title">{{ filter_form.filter_extra_q.label }}</label>
+            <div class="controls">
+              <button id="id_extra_q_button" type="submit"><span class="ion-search"></span></button>
+              {{ filter_form.filter_extra_q|add_class:'form-control' }}
+              {% for error in filter_form.filter_extra_q.errors %}<p class="error">{{ error }}</p>{% endfor %}
             </div>
-          </fieldset>
-
-          {# Filter form #}
-          {% if filter_form %}
-          <fieldset class="search-filters">
-            <div id="div_id_{{ filter_form.filter_extra_q.html_name }}" class="form-group{% if filter_form.filter_extra_q.errors %} has-error{% endif %}">
-              <label for="id_{{ filter_form.filter_extra_q.auto_id }}_0" class="control-label akkordion-title">{{ filter_form.filter_extra_q.label }}</label>
-              <div class="controls">
-                <button id="id_extra_q_button" type="submit"><span class="ion-search"></span></button>
-                {{ filter_form.filter_extra_q|add_class:'form-control' }}
-                {% for error in filter_form.filter_extra_q.errors %}<p class="error">{{ error }}</p>{% endfor %}
-              </div>
-              <br />
-            </div>
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_years %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_languages %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_collections %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_authors %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_funds %}
-            {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_publication_types %}
-          </fieldset>
-          {% endif %}
-
-          <div class="form-action col-xs-9 col-centered">
-            <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
           </div>
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_years %}
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_languages %}
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_collections %}
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_authors %}
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_funds %}
+          {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_publication_types %}
+          <div class="form-action text-right">
+            <button type="submit" class="btn btn-primary">{% trans "Filtrer" %}</button>
+          </div>
+        </fieldset>
+        {% endif %}
 
       </aside>
 
       {# Options form #}
-      <div class="col-sm-7 col-sm-push-2 results-options">
+      <div class="col-md-8 col-md-offset-1 results-options">
         <fieldset>
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-xs-6 col-md-4 col-md-offset-2">
               <div id="div_id_{{ options_form.page_size.html_name }}" class="form-group{% if options_form.page_size.errors %} has-error{% endif %}">
                 <div class="controls">
                   <label class="control-label" for="{{ options_form.page_size.auto_id }}">{{ options_form.page_size.label }}</label>
-                  &nbsp;
                   {{ options_form.page_size|add_class:'form-control' }}
                   {% for error in options_form.page_size.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
               </div>
             </div>
-            <div class="col-sm-7">
+            <div class="col-xs-6 col-md-4">
               <div id="div_id_{{ options_form.sort_by.html_name }}" class="form-group{% if options_form.sort_by.errors %} has-error{% endif %}">
                 <div class="controls">
                   <label class="control-label" for="{{ options_form.sort_by.auto_id }}">{{ options_form.sort_by.label }}</label>
-                  &nbsp;
                   {{ options_form.sort_by|add_class:'form-control' }}
                   {% for error in options_form.sort_by.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
@@ -140,256 +131,256 @@
     {# Search results #}
     <div id="search-results" class="col-sm-7 col-sm-push-2 search-results">
       {% if documents %}
-        {% include "public/search/partials/results_pagination.html" %}
-        <ol class="unstyled results">
-          {% trans "inconnu" as i18n_unknown %}
-          {% for document in documents %}
-          <li>
+      {% include "public/search/partials/results_pagination.html" %}
+      <ol class="unstyled results">
+        {% trans "inconnu" as i18n_unknown %}
+        {% for document in documents %}
+        <li>
 
-            {% if document.document_type == 'article' %}
-            {# Article preview #}
-            {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
-            {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
-            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
-              <header>
-                <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
-                {# authors #}
-                {% if document.real_object.authors %}
-                <h4 class="authors h6">
-                  {% for author in document.real_object.authors %}
-                  <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}, {% endif %}
-                  {% endfor %}
-                </h4>
-                {% endif %}
-                {% if search_elements and search_elements.0.operator != 'NOT' %}
-                  <h3 class="h4">
-                    <a href="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}">
-                      {{ document.real_object.title }}
-                    </a>
-                  </h3>
-                  {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
-                {% else %}
-                  <h3 class="h4">
-                    <a href="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}">
-                      {{ document.real_object.title }}
-                    </a>
-                  </h3>
-                  {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
-                {% endif %}
-              </header>
-              <footer class="meta">
-                {% if document.real_object.issue_title %}<h5>{{ document.real_object.issue_title }}</h5>{% endif %}
-                <h5><strong>{% trans "Article" %}, {{ document.real_object.collection_name }}</strong></h5>
-                <h5>
+          {% if document.document_type == 'article' %}
+          {# Article preview #}
+          {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
+          {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
+          <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
+            <header>
+              <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+              {# authors #}
+              {% if document.real_object.authors %}
+              <h4 class="authors h6">
+                {% for author in document.real_object.authors %}
+                <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </h4>
+              {% endif %}
+              {% if search_elements and search_elements.0.operator != 'NOT' %}
+              <h3 class="h4">
+                <a href="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}">
+                  {{ document.real_object.title }}
+                </a>
+              </h3>
+              {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
+              {% else %}
+              <h3 class="h4">
+                <a href="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}">
+                  {{ document.real_object.title }}
+                </a>
+              </h3>
+              {% if document.real_object.subtitle %}<h4>{{ document.real_object.subtitle }}</h4>{% endif %}
+              {% endif %}
+            </header>
+            <footer class="meta">
+              {% if document.real_object.issue_title %}<h5>{{ document.real_object.issue_title }}</h5>{% endif %}
+              <h5><strong>{% trans "Article" %}, {{ document.real_object.collection_name }}</strong></h5>
+              <h5>
                 {% spaceless %}
-                  {% blocktrans trimmed with number=document.real_object.issue_number|default:i18n_unknown date=document.real_object.issue_published %}
-                    Numéro {{ number }} - {{ date }}
-                  {% endblocktrans %}
-                  {% with first_page=document.real_object.first_page last_page=document.real_object.last_page %}
-                  {% if first_page and last_page and first_page != last_page %}
-                  &nbsp;-&nbsp;{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }} à {{ last_page }}{% endblocktrans %}
-                  {% elif first_page and first_page != "0" %}
-                  &nbsp;-&nbsp;{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}
-                  {% endif %}
-                  {% endwith %}
-                {% endspaceless %}
-                </h5>
-              </footer>
-              {% if document.real_object.abstract %}
-              <summary class="akkordion" data-akkordion-single="true">
-                <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
-                <div class="summary-content akkordion-content">
-                  <p>{{ document.real_object.abstract }}</p>
-                </div>
-              </summary>
-              {% else %}
-              <br /><br />
-              {% endif %}
-              <nav class="toolbox compact">
-                <ul class="unstyled">
-                  <li>
-                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                      <span class="erudicon erudicon-tools-save"></span>
-                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
-                    </button>
-                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                      <span class="erudicon erudicon-tools-save"></span>
-                      <span class="tools-label">{% trans "Supprimer" %}</span>
-                    </button>
-                  </li>
-                  {% if document.real_object.has_pdf %}
-                  <li>
-                    <button id="tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
-                      <span class="erudicon erudicon-tools-pdf"></span>
-                      <span class="tools-label">{% trans "Télécharger" %}</span>
-                    </button>
-                  </li>
-                  {% endif %}
-                  <li>
-                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
-                      <span class="erudicon erudicon-tools-cite"></span>
-                      <span class="tools-label">{% trans "Citer cet article" %}</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}" data-cite="#id_cite_mla_{{ document.id }}">
-                      <span class="erudicon erudicon-tools-share"></span>
-                      <span class="tools-label">{% trans "Partager" %}</span>
-                    </button>
-                    <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
-                      {% for author in document.real_object.authors %}
-                      {% if author.firstname and author.lastname %}
-                        {{ author.lastname }}, {{ author.firstname }}.
-                      {% elif author.othername %}
-                        {{ author.othername }}.
-                      {% endif %}
-                      {% endfor %}
-                      "{{ document.real_object.title }}."
-                      <em>{{ document.real_object.journal_name }}</em>
-                      {% if document.real_object.issue_volume %}{{ document.real_object.issue_volume }}{% endif %}{% if document.real_object.issue_number %}{{ document.real_object.issue_number }}{% endif %}
-                      ({{ document.real_object.issue_published }}): {{ document.real_object.first_page }}–{{ document.real_object.last_page }}.
-                    </div>
-                  </li>
-                </ul>
-              </nav>
-              <div class="hidden">
-                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
-                  <div class="modal-body">
-                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
-                    <p>
-                      <a href="{% url 'public:journal:article_citation_enw' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.ENW</span>
-                      </a>
-                      EndNote, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:journal:article_citation_ris' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.RIS</span>
-                      </a>
-                      Papers, Reference Manager, RefWorks, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:journal:article_citation_bib' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.BIB</span>
-                      </a>
-                      BibTeX, JabRef, Mendeley, Zotero
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-            {% elif document.document_type == 'thesis' %}
-            <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
-              <header>
-                <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
-                {# authors #}
-                {% if document.real_object.author %}
-                {% with author=document.real_object.author %}
-                <h4 class="authors h6">
-                  <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>
-                </h4>
+                {% blocktrans trimmed with number=document.real_object.issue_number|default:i18n_unknown date=document.real_object.issue_published %}
+                Numéro {{ number }} - {{ date }}
+                {% endblocktrans %}
+                {% with first_page=document.real_object.first_page last_page=document.real_object.last_page %}
+                {% if first_page and last_page and first_page != last_page %}
+                &nbsp;-&nbsp;{% blocktrans trimmed with first_page=first_page last_page=last_page %}Pages {{ first_page }} à {{ last_page }}{% endblocktrans %}
+                {% elif first_page and first_page != "0" %}
+                &nbsp;-&nbsp;{% blocktrans trimmed with page=first_page %}Page {{ page }}{% endblocktrans %}
+                {% endif %}
                 {% endwith %}
+                {% endspaceless %}
+              </h5>
+            </footer>
+            {% if document.real_object.abstract %}
+            <summary class="akkordion" data-akkordion-single="true">
+              <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
+              <div class="summary-content akkordion-content">
+                <p>{{ document.real_object.abstract }}</p>
+              </div>
+            </summary>
+            {% else %}
+            <br /><br />
+            {% endif %}
+            <nav class="toolbox compact">
+              <ul class="unstyled">
+                <li>
+                  <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                    <span class="erudicon erudicon-tools-save"></span>
+                    <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                  </button>
+                  <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                    <span class="erudicon erudicon-tools-save"></span>
+                    <span class="tools-label">{% trans "Supprimer" %}</span>
+                  </button>
+                </li>
+                {% if document.real_object.has_pdf %}
+                <li>
+                  <button id="tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
+                    <span class="erudicon erudicon-tools-pdf"></span>
+                    <span class="tools-label">{% trans "Télécharger" %}</span>
+                  </button>
+                </li>
                 {% endif %}
-                {% if search_elements and search_elements.0.operator != 'NOT' %}
-                  <h3 class="h4">
-                    <a href="{{ document.real_object.url }}">
-                      {{ document.real_object.title }}
-                    </a>
-                  </h3>
-                {% else %}
-                  <h3 class="h4">
-                    <a href="{{ document.real_object.url }}">
-                      {{ document.real_object.title }}
-                    </a>
-                  </h3>
-                {% endif %}
-              </header>
-              <footer class="meta">
-                <h5><strong>{% trans "Thèse" %}, {{ document.real_object.collection_name }}</strong></h5>
-              </footer>
-              {% if document.real_object.description %}
-              <summary class="akkordion" data-akkordion-single="true">
-                <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
-                <div class="summary-content akkordion-content">
-                  <p>{{ document.real_object.description }}</p>
-                </div>
-              </summary>
-              {% else %}
-              <br /><br />
-              {% endif %}
-              <nav class="toolbox compact">
-                <ul class="unstyled">
-                  <li>
-                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                      <span class="erudicon erudicon-tools-save"></span>
-                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
-                    </button>
-                    <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                      <span class="erudicon erudicon-tools-save"></span>
-                      <span class="tools-label">{% trans "Supprimer" %}</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
-                      <span class="erudicon erudicon-tools-cite"></span>
-                      <span class="tools-label">{% trans "Citer cet article" %}</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ document.real_object.url }}" data-cite="#id_cite_mla_{{ document.id }}">
-                      <span class="erudicon erudicon-tools-share"></span>
-                      <span class="tools-label">{% trans "Partager" %}</span>
-                    </button>
-                    <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
-                      {% with author=document.real_object.author %}
-                      {% if author.firstname and author.lastname %}
-                        {{ author.lastname }}, {{ author.firstname }}.
-                      {% elif author.othername %}
-                        {{ author.othername }}.
-                      {% endif %}
-                      {% endwith %}
-                      "{{ document.real_object.title }}."
-                      {{ document.real_object.collection_name }}, {{ document.real_object.publication_year }}.
-                    </div>
-                  </li>
-                </ul>
-              </nav>
-              <div class="hidden">
-                <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                  <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
-                  <div class="modal-body">
-                    <h3>{% trans "Exporter la notice de cet article" %}</h3>
-                    <p>
-                      <a href="{% url 'public:thesis:thesis_citation_enw' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.ENW</span>
-                      </a>
-                      EndNote, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:thesis:thesis_citation_ris' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.RIS</span>
-                      </a>
-                      Papers, Reference Manager, RefWorks, Zotero
-                    </p>
-                    <p>
-                      <a href="{% url 'public:thesis:thesis_citation_bib' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
-                        <span class="show cite-export-title">.BIB</span>
-                      </a>
-                      BibTeX, JabRef, Mendeley, Zotero
-                    </p>
+                <li>
+                  <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                    <span class="erudicon erudicon-tools-cite"></span>
+                    <span class="tools-label">{% trans "Citer cet article" %}</span>
+                  </button>
+                </li>
+                <li>
+                  <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}" data-cite="#id_cite_mla_{{ document.id }}">
+                    <span class="erudicon erudicon-tools-share"></span>
+                    <span class="tools-label">{% trans "Partager" %}</span>
+                  </button>
+                  <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
+                    {% for author in document.real_object.authors %}
+                    {% if author.firstname and author.lastname %}
+                    {{ author.lastname }}, {{ author.firstname }}.
+                    {% elif author.othername %}
+                    {{ author.othername }}.
+                    {% endif %}
+                    {% endfor %}
+                    "{{ document.real_object.title }}."
+                    <em>{{ document.real_object.journal_name }}</em>
+                    {% if document.real_object.issue_volume %}{{ document.real_object.issue_volume }}{% endif %}{% if document.real_object.issue_number %}{{ document.real_object.issue_number }}{% endif %}
+                    ({{ document.real_object.issue_published }}): {{ document.real_object.first_page }}–{{ document.real_object.last_page }}.
                   </div>
+                </li>
+              </ul>
+            </nav>
+            <div class="hidden">
+              <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                <div class="modal-body">
+                  <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                  <p>
+                    <a href="{% url 'public:journal:article_citation_enw' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                      <span class="show cite-export-title">.ENW</span>
+                    </a>
+                    EndNote, Zotero
+                  </p>
+                  <p>
+                    <a href="{% url 'public:journal:article_citation_ris' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                      <span class="show cite-export-title">.RIS</span>
+                    </a>
+                    Papers, Reference Manager, RefWorks, Zotero
+                  </p>
+                  <p>
+                    <a href="{% url 'public:journal:article_citation_bib' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                      <span class="show cite-export-title">.BIB</span>
+                    </a>
+                    BibTeX, JabRef, Mendeley, Zotero
+                  </p>
                 </div>
               </div>
-            </article>
+            </div>
+          </article>
+          {% elif document.document_type == 'thesis' %}
+          <article id="document-{{ document.id }}" class="search-result-item" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
+            <header>
+              <h5 class="position">{{ start_at|add:forloop.counter }}.</h5>
+              {# authors #}
+              {% if document.real_object.author %}
+              {% with author=document.real_object.author %}
+              <h4 class="authors h6">
+                <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>
+              </h4>
+              {% endwith %}
+              {% endif %}
+              {% if search_elements and search_elements.0.operator != 'NOT' %}
+              <h3 class="h4">
+                <a href="{{ document.real_object.url }}">
+                  {{ document.real_object.title }}
+                </a>
+              </h3>
+              {% else %}
+              <h3 class="h4">
+                <a href="{{ document.real_object.url }}">
+                  {{ document.real_object.title }}
+                </a>
+              </h3>
+              {% endif %}
+            </header>
+            <footer class="meta">
+              <h5><strong>{% trans "Thèse" %}, {{ document.real_object.collection_name }}</strong></h5>
+            </footer>
+            {% if document.real_object.description %}
+            <summary class="akkordion" data-akkordion-single="true">
+              <h5 class="akkordion-title color-red">{% trans "Résumé" %} <i class="ion-ios-arrow-down icon"></i></h5>
+              <div class="summary-content akkordion-content">
+                <p>{{ document.real_object.description }}</p>
+              </div>
+            </summary>
+            {% else %}
+            <br /><br />
             {% endif %}
+            <nav class="toolbox compact">
+              <ul class="unstyled">
+                <li>
+                  <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                    <span class="erudicon erudicon-tools-save"></span>
+                    <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                  </button>
+                  <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                    <span class="erudicon erudicon-tools-save"></span>
+                    <span class="tools-label">{% trans "Supprimer" %}</span>
+                  </button>
+                </li>
+                <li>
+                  <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                    <span class="erudicon erudicon-tools-cite"></span>
+                    <span class="tools-label">{% trans "Citer cet article" %}</span>
+                  </button>
+                </li>
+                <li>
+                  <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{{ document.real_object.url }}" data-cite="#id_cite_mla_{{ document.id }}">
+                    <span class="erudicon erudicon-tools-share"></span>
+                    <span class="tools-label">{% trans "Partager" %}</span>
+                  </button>
+                  <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
+                    {% with author=document.real_object.author %}
+                    {% if author.firstname and author.lastname %}
+                    {{ author.lastname }}, {{ author.firstname }}.
+                    {% elif author.othername %}
+                    {{ author.othername }}.
+                    {% endif %}
+                    {% endwith %}
+                    "{{ document.real_object.title }}."
+                    {{ document.real_object.collection_name }}, {{ document.real_object.publication_year }}.
+                  </div>
+                </li>
+              </ul>
+            </nav>
+            <div class="hidden">
+              <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                <div class="modal-body">
+                  <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                  <p>
+                    <a href="{% url 'public:thesis:thesis_citation_enw' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
+                      <span class="show cite-export-title">.ENW</span>
+                    </a>
+                    EndNote, Zotero
+                  </p>
+                  <p>
+                    <a href="{% url 'public:thesis:thesis_citation_ris' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
+                      <span class="show cite-export-title">.RIS</span>
+                    </a>
+                    Papers, Reference Manager, RefWorks, Zotero
+                  </p>
+                  <p>
+                    <a href="{% url 'public:thesis:thesis_citation_bib' document.real_object.collection document.id %}" class="btn btn-primary cite-export">
+                      <span class="show cite-export-title">.BIB</span>
+                    </a>
+                    BibTeX, JabRef, Mendeley, Zotero
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+          {% endif %}
 
-          </li>
-          {% endfor %}
-        </ol>
-        {% include "public/search/partials/results_pagination.html" %}
+        </li>
+        {% endfor %}
+      </ol>
+      {% include "public/search/partials/results_pagination.html" %}
       {% else %}
-        <h3>{% trans "Aucun document trouvé." %}</h3>
+      <h3>{% trans "Aucun document trouvé." %}</h3>
       {% endif %}
     </div>
   </div>
