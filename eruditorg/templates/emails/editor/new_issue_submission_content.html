@@ -2,8 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-  {% url 'userspace:journal:editor:update' issue.journal.pk issue.pk as issue_url %}
-  <p>{% trans "Un nouveau numéro a été soumis!" %}</p>
+  {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
+  <p>Bonjour,</p>
+
+  <p>{{ issue.contact }} de la revue {{ issue.journal }} a transmis des fichiers pour la création d'une nouvelle publication.</p>
+
   <p>
     <a href="http://{{ site.domain }}{{ issue_url }}">
       {% blocktrans with url=issue_url %}Consulter numéro{% endblocktrans %}

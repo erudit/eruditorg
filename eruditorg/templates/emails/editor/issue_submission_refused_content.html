@@ -2,18 +2,25 @@
 {% load i18n %}
 
 {% block content %}
-  {% url 'userspace:journal:editor:update' issue.journal.pk issue.pk as issue_url %}
-  <p>{% trans "Votre numéro a été refusé." %}</p>
-  {% with track=issue.last_status_track %}
-  {% if track.comment %}
-  <p>{% trans "Voici les commentaires laissés par le validateur à votre attention:" %}</p>
-  <blockquote>{{ track.comment }}</blockquote>
-  {% endif %}
-  {% endwith %}
-  <p>{% trans "Veuillez cliquer sur le lien suivant pour apporter les modifications nécessaires à votre numéro." %}</p>
+  {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
+  <p>Bonjour,</p>
+
+  <p>Certains de vos fichiers doivent être corrigés ({{ issue }}). S.v.p., veuillez apporter les corrections nécessaires et transmettre vos fichiers à nouveau. L'équipe de production pourra ensuite débuter la mise en ligne du numéro.</p>
+
+  <p>{% trans "Veuillez cliquer sur le lien suivant pour consulter les modifications à apporter à vos fichiers." %}</p>
+
   <p>
     <a href="http://{{ site.domain }}{{ issue_url }}">
       {% blocktrans with url=issue_url %}Consulter le numéro{% endblocktrans %}
     </a>
+  </p>
+
+  <p>Pour plus d'information, veuillez communiquer avec:</p>
+
+  <p>
+  Hocine Chehab<br>
+  Chargé d'édition numérique<br>
+  hocine.chehab@erudit.org<br>
+  514-343-6111 poste 44607<br>
   </p>
 {% endblock content %}
