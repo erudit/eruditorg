@@ -48,10 +48,6 @@
       padding: 0;
     }
 
-    .form-row {
-      margin: 0;
-    }
-
     .btn-row {
       margin-top: 1em;
     }
@@ -61,26 +57,6 @@
     .remove-qbox,
     .operator {
       margin: 15px 0;
-      padding: 0 0.5em;
-      height: 40px;
-      line-height: 40px;
-      font-size: 14px;
-    }
-
-    input[type='text'] {
-      background-color: #FFF;
-    }
-
-    select {
-      position: relative;
-      background: #FFF url(../iconfont/chevron-down.svg) no-repeat 98% center;
-      padding-right: 25px;
-
-      option {
-        line-height: 40px;
-        font-size: 14px;
-      }
-
     }
 
     .operator select {
@@ -204,6 +180,7 @@
               .select2-search--inline {
                 margin: 8px 5px 0 0;
                 max-width: 100%;
+                height: 20px;
                 @include text-overflow;
                 @include border-radius(0);
               }
@@ -251,7 +228,7 @@
       font-size: 18px;
       @include fw-sans-bold;
 
-      &:hover {
+      &:hover, &:active, &:focus, &:active:focus {
         color: $coral-red;
         text-decoration: none;
       }

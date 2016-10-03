@@ -13,21 +13,18 @@ optgroup,
 button,
 legend,
 fieldset,
-.form-control,
-form .row {
+.form-control {
   margin-left: 0;
   margin-right: 0;
   box-sizing: border-box;
   outline: none;
-  font-size: $font-size-large;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   float: none;
-  background: none;
+  background-color: transparent;
   border: none;
-  &:hover, &:active, &:focus, &:focus:active {
-  }
+  font-size: 14px;
 }
 
 /* form & label alignement */
@@ -61,7 +58,7 @@ fieldset {
 
 legend {
   letter-spacing: 1px;
-  font-size: $font-size-large * 1.05;
+  font-size: $font-size-large;
 }
 
 /* labels */
@@ -96,14 +93,16 @@ textarea,
 input[list],
 .form-control {
   width: 100%;
-  padding: $input-padding;
   border-width: $border-width;
   border-style: solid;
   border-color: $dark-grey;
   color: #000;
   vertical-align: middle;
-
-  @include placeholder(#000);
+  padding: 0 0.5em;
+  height: 40px;
+  line-height: 40px;
+  background-color: #FFF;
+  @include placeholder($dark-grey);
 
   &:hover, &:active, &:focus {
     border-color: $coral-red;
@@ -178,13 +177,12 @@ select {
   border: 1px solid #000;
   margin: 0 auto;
   height: 40px;
-  font-size: 14px;
   position: relative;
-  background: #fff url(../iconfont/chevron-down.svg) no-repeat 95% center;
+  background: #FFF url(../iconfont/chevron-down.svg) no-repeat 98% center;
+  padding-right: 25px;
 
   option {
-    height: auto;
-    line-height: auto;
+    line-height: 40px;
   }
 
 }
