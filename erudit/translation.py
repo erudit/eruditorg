@@ -6,6 +6,7 @@ from modeltranslation.translator import translator
 from .models import Discipline
 from .models import Journal
 from .models import JournalInformation
+from .models import IssueContributor
 
 
 class JournalTranslationOptions(TranslationOptions):
@@ -27,6 +28,12 @@ class DisciplineTranslationOptions(TranslationOptions):
     )
 
 
+class IssueContributorTranslationOptions(TranslationOptions):
+    fields = (
+        'role_name',
+    )
+
 translator.register(Journal, JournalTranslationOptions)
 translator.register(JournalInformation, JournalInformationTranslationOptions)
 translator.register(Discipline, DisciplineTranslationOptions)
+translator.register(IssueContributor, IssueContributorTranslationOptions)

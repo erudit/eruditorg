@@ -462,10 +462,10 @@ class IssueContributor(models.Model):
     firstname = models.CharField(max_length=255, verbose_name=_('Prénom du contributeur'))
     """ Firstname of the contributor """
 
-    lastname = models.CharField(max_length=255, verbose_name=_('Nom du contributeur'))
+    lastname = models.CharField(max_length=255, null=True, verbose_name=_('Nom du contributeur'))
     """ Lastname of the contributor """
 
-    role_name = models.CharField(max_length=255, verbose_name=_('Rôle du contributeur'))
+    role_name = models.CharField(max_length=255, blank=True, verbose_name=_('Rôle du contributeur'))
     """ Name of the role of the contributor """
 
     is_director = models.NullBooleanField(verbose_name=_('Est un directeur'), null=True)
