@@ -75,19 +75,19 @@ a.btn {
   @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
   text-decoration: none;
   &:hover, &:active, &:focus, &:focus:active {
-    color: $btn-primary-bg !important;
+    color: $btn-primary-bg;
     background-color: $btn-primary-color;
     border-color: $btn-primary-bg;
-    background-image: none !important;
+    background-image: none;
   }
 }
 .btn-primary-outlined {
   @include button-variant($brand-primary, transparent, $brand-primary);
   &:hover, &:active, &:focus, &:focus:active {
-    color: $btn-primary-color !important;
+    color: $btn-primary-color;
     background-color: $btn-primary-bg;
     border-color: $btn-primary-bg;
-    background-image: none !important;
+    background-image: none;
   }
 }
 .btn-dark {

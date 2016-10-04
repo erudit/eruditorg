@@ -21,7 +21,7 @@ export default {
         data: {querystring: $form.serialize(), results_count : $searchResultsMetadata.data('results-count')},
       }).done(function() {
         $('#id_save_search').addClass('disabled');
-        $('#id_save_search').text(gettext("Recherche sauvegardée"));
+        $('#id_save_search').text(gettext("Résultats sauvegardés !"));
       });
       ev.preventDefault();
     });

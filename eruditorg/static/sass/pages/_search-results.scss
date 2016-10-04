@@ -16,6 +16,18 @@
         @include fw-mono;
     }
 
+    .btn-primary-outlined {
+      @include transition(all 500ms);
+
+      &.disabled {
+        color: #FFF;
+        background-color: #000;
+        border-color: #000;
+        opacity: 1;
+      }
+
+    }
+
   }
 
   .search-result-item {
