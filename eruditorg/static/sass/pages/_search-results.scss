@@ -2,7 +2,21 @@
 * Search page base
 */
 
+.search_results #breadcrumb {
+  background: $light-grey;
+}
+
 #search-results {
+
+  .glory {
+    margin-bottom: 2em;
+
+    .search-query {
+      font-size: 14px;
+        @include fw-mono;
+    }
+
+  }
 
   .search-result-item {
     position: relative;

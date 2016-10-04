@@ -1,10 +1,8 @@
 /**
 * hide Breadcrumb on homepage
 */
-body.home {
-  #breadcrumb {
-    display: none;
-  }
+.home #breadcrumb {
+  display: none;
 }
 
 /**
@@ -28,15 +26,8 @@ body.home {
   }
 
   .glory {
-    a {
-      color: $coral-red;
-    }
-  }
-
-  .glory {
     padding-top: 50px;
     padding-bottom: 60px;
-    background-color: $light-grey;
 
     .glory--header {
       margin-bottom: 30px;

@@ -5,14 +5,6 @@
 #thesis_collection_home {
 
   .glory {
-    background-color: $light-grey;
-
-    h2 {
-      margin: 0 0 1em 0;
-      color: #000;
-      font-size: 0.85em;
-      @include fw-sans-medium();
-    }
 
     .thesis-count {
       display: block;
