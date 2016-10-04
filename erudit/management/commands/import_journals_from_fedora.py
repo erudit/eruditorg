@@ -31,6 +31,7 @@ from ...models import Collection
 from ...models import Copyright
 from ...models import Issue
 from ...models import IssueTheme
+from ...models import IssueContributor
 from ...models import Journal
 from ...models import KeywordTag
 from ...models import Publisher
@@ -391,6 +392,42 @@ class Command(BaseCommand):
 
         issue.fedora_updated = fedora_issue.modified
         issue.save()
+
+        for director in issue.erudit_object.directors:
+            contributor = IssueContributor(
+                firstname=director['firstname'],
+                lastname=director['lastname'],
+                is_director=True,
+                issue=issue
+            )
+
+            fonction_fr = director.get('fonction_fr')
+            fonction_en = director.get('fonction_en')
+
+            if fonction_fr:
+                contributor.role_name_fr = fonction_fr
+            if fonction_en:
+                contributor.role_name_en = fonction_en
+
+            contributor.save()
+
+        for editor in issue.erudit_object.editors:
+            contributor = IssueContributor(
+                firstname=editor['firstname'],
+                lastname=editor['lastname'],
+                is_editor=True,
+                issue=issue
+            )
+
+            fonction_fr = editor.get('fonction_fr')
+            fonction_en = editor.get('fonction_en')
+
+            if fonction_fr:
+                contributor.role_name_fr = fonction_fr
+            if fonction_en:
+                contributor.role_name_en = fonction_en
+
+            contributor.save()
 
         issue.copyrights.clear()
         copyrights_dicts = issue.erudit_object.droitsauteur or []
