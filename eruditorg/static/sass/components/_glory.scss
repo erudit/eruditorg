@@ -5,13 +5,6 @@
 .glory {
   background: $light-grey;
 
-  h2 {
-    margin: 0 0 1em 0;
-    color: #000;
-    font-size: 0.85em;
-    @include fw-sans-medium();
-  }
-
   a {
     color: $coral-red;
   }

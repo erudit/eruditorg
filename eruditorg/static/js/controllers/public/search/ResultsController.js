@@ -33,7 +33,7 @@ export default {
   },
 
   toolbox() {
-    $('#search-results .search-result-item .toolbox').each(function(){
+    $('#search-results .result .toolbox').each(function(){
       new Toolbox($(this));
     });
   }
