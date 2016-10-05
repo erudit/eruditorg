@@ -44,10 +44,8 @@
           </div>
         </div>
         {% if documents %}
-        <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6">
-          <nav class="text-right nav-btn">
-            <a href="#" id="id_save_search" class="btn btn-primary-outlined">{% trans "Sauvegarder ces résultats" %}</a>
-          </nav>
+        <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
+          <a href="#" id="id_save_search" class="btn btn-primary-outlined">{% trans "Sauvegarder ces résultats" %}</a>
         </div>
         {% endif %}
       </div>
@@ -149,8 +147,8 @@
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
             {% for document in documents %}
-            <li class="result row" id="document-{{ document.id }}" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
-              <div class="col-xs-11">
+            <li class="row clearfix result" id="document-{{ document.id }}" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
+              <div class="pull-left result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
                 {% if document.document_type == 'article' %}
                 {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
@@ -158,6 +156,7 @@
                 {% endif %}
                 <div class="header">
                   {# authors #}
+                  {% if document.real_object.authors or document.real_object.author %}
                   <p class="authors">
                   {% if document.real_object.authors %}
                     {% for author in document.real_object.authors %}
@@ -169,6 +168,7 @@
                     {% endwith %}
                   {% endif %}
                   </p>
+                  {% endif %}
                   {# title #}
                   <h3>
                     <a href="
@@ -219,59 +219,57 @@
                 </div>
                 {% endif %}
               </div>
-              <div class="col-xs-1 pull-right">
-                <nav class="toolbox compact">
-                  <ul class="unstyled">
-                    <li>
-                      <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                        <span class="erudicon erudicon-tools-save"></span>
-                        <span class="tools-label">{% trans "Sauvegarder" %}</span>
-                      </button>
-                      <button id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                        <span class="erudicon erudicon-tools-save"></span>
-                        <span class="tools-label">{% trans "Supprimer" %}</span>
-                      </button>
-                    </li>
-                    {% if document.real_object.has_pdf %}
-                    <li>
-                      <button id="tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
-                        <span class="erudicon erudicon-tools-pdf"></span>
-                        <span class="tools-label">{% trans "Télécharger" %}</span>
-                      </button>
-                    </li>
-                    {% endif %}
-                    <li>
-                      <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
-                        <span class="erudicon erudicon-tools-cite"></span>
-                        <span class="tools-label">{% trans "Citer cet article" %}</span>
-                      </button>
-                    </li>
-                    <li>
-                      <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}" data-cite="#id_cite_mla_{{ document.id }}">
-                        <span class="erudicon erudicon-tools-share"></span>
-                        <span class="tools-label">{% trans "Partager" %}</span>
-                      </button>
-                      <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
-                        {% for author in document.real_object.authors %}
-                        {% if author.firstname and author.lastname %}
-                        {{ author.lastname }}, {{ author.firstname }}.
-                        {% elif author.othername %}
-                        {{ author.othername }}.
-                        {% endif %}
-                        {% endfor %}
-                        "{{ document.real_object.title }}."
-                        <em>{{ document.real_object.journal_name }}</em>
-                        {% if document.real_object.issue_volume %}{{ document.real_object.issue_volume }}{% endif %}{% if document.real_object.issue_number %}{{ document.real_object.issue_number }}{% endif %}
-                        ({{ document.real_object.issue_published }}): {{ document.real_object.first_page }}–{{ document.real_object.last_page }}.
-                      </div>
-                    </li>
-                  </ul>
-                </nav>
+              <div class="pull-right">
+                <ul class="toolbox compact">
+                  <li>
+                    <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Sauvegarder" %}</span>
+                    </button>
+                    <button class="saved" id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
+                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="tools-label">{% trans "Supprimer" %}</span>
+                    </button>
+                  </li>
+                  {% if document.real_object.has_pdf %}
+                  <li>
+                    <button id="tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
+                      <span class="erudicon erudicon-tools-pdf"></span>
+                      <span class="tools-label">{% trans "Télécharger" %}</span>
+                    </button>
+                  </li>
+                  {% endif %}
+                  <li>
+                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-cite"></span>
+                      <span class="tools-label">{% trans "Citer cet article" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-share" data-title="{{ document.real_object.title }}" data-share-url="{% if document.real_object.external_url %}{{ article_redirect_url }}{% else %}{{ article_url }}{% endif %}" data-cite="#id_cite_mla_{{ document.id }}">
+                      <span class="erudicon erudicon-tools-share"></span>
+                      <span class="tools-label">{% trans "Partager" %}</span>
+                    </button>
+                    <div id="id_cite_mla_{{ document.id }}" class="hidden cite-mla">
+                      {% for author in document.real_object.authors %}
+                      {% if author.firstname and author.lastname %}
+                      {{ author.lastname }}, {{ author.firstname }}.
+                      {% elif author.othername %}
+                      {{ author.othername }}.
+                      {% endif %}
+                      {% endfor %}
+                      "{{ document.real_object.title }}."
+                      <em>{{ document.real_object.journal_name }}</em>
+                      {% if document.real_object.issue_volume %}{{ document.real_object.issue_volume }}{% endif %}{% if document.real_object.issue_number %}{{ document.real_object.issue_number }}{% endif %}
+                      ({{ document.real_object.issue_published }}): {{ document.real_object.first_page }}–{{ document.real_object.last_page }}.
+                    </div>
+                  </li>
+                </ul>
                 <div class="hidden">
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
-                    <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
+                    <p class="modal-header">{% trans "Outils de citation" %}</p>
                     <div class="modal-body">
-                      <h3>{% trans "Exporter la notice de cet article" %}</h3>
+                      <p>{% trans "Exporter la notice de cet article" %}</p>
                       <p>
                         <a href="
                         {% if document.document_type == 'article' %}
@@ -315,6 +313,7 @@
           {% include "public/search/partials/results_pagination.html" %}
         </div>
       {% else %}
+      {# No results found #}
         <div class="col-xs-12 no-results">
           <h3>{% trans "Aucun document trouvé&nbsp;!" %}</h3>
           <p>

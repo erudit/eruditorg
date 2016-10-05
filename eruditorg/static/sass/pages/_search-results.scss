@@ -13,7 +13,6 @@
     margin: 3.5em 0;
     text-align: center;
 
-
     h3 {
       color: $dark-grey;
       @include fw-sans-bold-italic;
@@ -55,7 +54,8 @@
 
     .position {
       position: absolute;
-      left: -20px;
+      left: 0;
+      top: 0;
       color: $dark-grey;
       text-align: right;
       font-size: 14px;
@@ -68,12 +68,23 @@
       padding: 0 0 1em 0;
       margin: 1em 0 0 0;
 
+      .result-info {
+        padding-left: 30px;
+        width: 80%;
+      }
+
       .toolbox {
         padding-top: 0;
+        list-style: none;
 
         li button {
           background-color: #000;
           color: #FFF;
+
+          &:hover, &:focus, &:active:focus, &.saved {
+            background: $coral-red;
+          }
+
         }
 
       }
