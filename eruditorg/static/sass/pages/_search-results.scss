@@ -47,6 +47,54 @@
 
   }
 
+  // filters and sorts - form
+  .search-form {
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    .filter {
+      margin-bottom: 1.5em;
+      padding-top: 0.5em;
+      border-top: 1px solid $mid-grey;
+
+      .control-label {
+        @include fw-sans-medium;
+      }
+
+      &:first-child {
+        border: 0;
+
+        input {
+          width: 80%;
+          border-right: 0;
+        }
+
+        button {
+          padding: 10px;
+          width: 40px;
+          height: 40px;
+          background: $coral-red;
+          color: #FFF;
+          font-size: 18px;
+        }
+
+      }
+
+    }
+
+    .checkbox + .checkbox {
+      margin-top: 0;
+    }
+
+    .more-facets {
+      color: $coral-red;
+      @include fw-sans-medium;
+    }
+
+  }
+
   // list of results
   .results {
     margin: 0;

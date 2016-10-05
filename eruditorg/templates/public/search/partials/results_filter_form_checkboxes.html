@@ -2,20 +2,20 @@
 
 {% if field.field.choices %}
 {% if field.value or field.field.choices|length > 1 %}
-<div class="akkordion filter-years" data-akkordion-single="true">
-  <label for="id_{{ field.auto_id }}" class="control-label akkordion-title">{{ field.label }} {% if field.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ field.help_text }}"><span class="ion-help-circled"></span></span>{% endif %} <span class="icon ion-ios-arrow-down caret"></span></label>
+<div class="akkordion filter" data-akkordion-single="true">
+  <label for="{{ field.auto_id }}" class="control-label akkordion-title">{{ field.label }} {% if field.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ field.help_text }}"><span class="ion-help-circled"></span></span>{% endif %} <span class="icon ion-ios-arrow-down caret"></span></label>
   <div class="controls akkordion-content {% if field.value %}akkordion-active{% endif %}">
     {% for choice in field.field.choices %}
     {# wrap in accordion after 10th #}
     {% if forloop.counter == 11 %}
     {# open div #}
     <div class="akkordion" data-akkordion-single="true">
-      <p class="akkordion-title color-red pull-right">{% trans "+&nbsp;Autres…" %}</p>
+      <p class="akkordion-title pull-right more-facets">{% trans "+&nbsp;Autres…" %}</p>
       <div class="akkordion-content">
         {% endif %}
         <div class="checkbox">
-          <input type="checkbox" name="{{ field.html_name }}" class="styled" id="{{ field.auto_id }}_{{ forloop.counter }}" value="{{ choice.0 }}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %}>
-          <label for="{{ field.auto_id }}_{{ forloop.counter }}" class="">{{ choice.1 }}</label>
+          <input type="checkbox" name="{{ field.html_name }}" id="{{ field.auto_id }}_{{ forloop.counter }}" value="{{ choice.0 }}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %}>
+          <label for="{{ field.auto_id }}_{{ forloop.counter }}">{{ choice.1 }}</label>
         </div>
         {# close accordion when last with at least 11 items #}
         {% if forloop.counter >= 11 and forloop.last %}

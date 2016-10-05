@@ -92,11 +92,10 @@
             {# Filter form #}
             {% if filter_form %}
             <fieldset class="search-filters sidebar-block">
-              <div id="div_id_{{ filter_form.filter_extra_q.html_name }}" class="{% if filter_form.filter_extra_q.errors %}has-error{% endif %}">
-                <label for="id_{{ filter_form.filter_extra_q.auto_id }}_0" class="control-label akkordion-title">{{ filter_form.filter_extra_q.label }}</label>
+              <div id="div_id_{{ filter_form.filter_extra_q.html_name }}" class="filter{% if filter_form.filter_extra_q.errors %} has-error{% endif %}">
+                <label for="{{ filter_form.filter_extra_q.auto_id }}" class="control-label akkordion-title">{{ filter_form.filter_extra_q.label }}</label>
                 <div class="controls">
-                  <button id="id_extra_q_button" type="submit"><span class="ion-search"></span></button>
-                  {{ filter_form.filter_extra_q|add_class:'form-control' }}
+                  {{ filter_form.filter_extra_q|add_class:'form-control' }}<button id="id_extra_q_button" type="submit" class="btn btn-primary"><span class="ion-search"></span></button>
                   {% for error in filter_form.filter_extra_q.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
               </div>
@@ -115,34 +114,35 @@
           </aside>
 
           {# Number of results and sort options #}
-          <div class="col-md-8 col-md-offset-1 results-options">
-            <fieldset>
+          <aside class="col-md-8 col-md-offset-1">
+            <h2 class="sr-only">{% trans "Options de tris" %}</h2>
+            <fieldset class="results-options">
               <div class="row">
-                <div class="col-xs-6 col-md-4 col-md-offset-1">
-                  <div id="div_id_{{ options_form.page_size.html_name }}" class="form-group{% if options_form.page_size.errors %} has-error{% endif %}">
-                    <div class="controls">
-                      <label class="control-label" for="{{ options_form.page_size.auto_id }}">{{ options_form.page_size.label }}</label>
-                      {{ options_form.page_size|add_class:'form-control' }}
-                      {% for error in options_form.page_size.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                  <div class="col-xs-6 col-md-4 col-md-offset-4">
+                    <div id="div_id_{{ options_form.page_size.html_name }}" class="form-group{% if options_form.page_size.errors %} has-error{% endif %} sort-option">
+                      <div class="controls">
+                        <label class="control-label" for="{{ options_form.page_size.auto_id }}">{{ options_form.page_size.label }}</label>
+                        {{ options_form.page_size|add_class:'form-control' }}
+                        {% for error in options_form.page_size.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-md-4">
+                    <div id="div_id_{{ options_form.sort_by.html_name }}" class="form-group{% if options_form.sort_by.errors %} has-error{% endif %} sort-option">
+                      <div class="controls">
+                        <label class="control-label" for="{{ options_form.sort_by.auto_id }}">{{ options_form.sort_by.label }}</label>
+                        {{ options_form.sort_by|add_class:'form-control' }}
+                        {% for error in options_form.sort_by.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-6 col-md-4">
-                  <div id="div_id_{{ options_form.sort_by.html_name }}" class="form-group{% if options_form.sort_by.errors %} has-error{% endif %}">
-                    <div class="controls">
-                      <label class="control-label" for="{{ options_form.sort_by.auto_id }}">{{ options_form.sort_by.label }}</label>
-                      {{ options_form.sort_by|add_class:'form-control' }}
-                      {% for error in options_form.sort_by.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                    </div>
-                  </div>
-                </div>
-              </div>
             </fieldset>
-          </div>
+          </aside>
         </form>
         {# Search results #}
         <div id="search-results" class="col-md-8 col-md-offset-1 search-results">
-          <h2 class="sr-only">{% trans "Articles repérés" %}</h2>
+          <h2 class="sr-only">{% trans "Documents repérés" %}</h2>
           {% include "public/search/partials/results_pagination.html" %}
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
