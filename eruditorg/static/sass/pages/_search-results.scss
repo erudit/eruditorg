@@ -8,6 +8,23 @@
 
 #search-results {
 
+  .no-results {
+    padding: 1em 0;
+    margin: 3.5em 0;
+    text-align: center;
+
+
+    h3 {
+      color: $dark-grey;
+      @include fw-sans-bold-italic;
+    }
+
+    .btn {
+      margin-top: 0.5em;
+    }
+
+  }
+
   // page header
   .glory {
     margin-bottom: 2em;
@@ -38,7 +55,7 @@
 
     .position {
       position: absolute;
-      left: -30px;
+      left: -20px;
       color: $dark-grey;
       text-align: right;
       font-size: 14px;

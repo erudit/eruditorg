@@ -34,7 +34,7 @@
               {% endblocktrans %}
             </p>
             {% else %}
-            <p>{% trans "Aucun document trouvé" %}</p>
+            <p><strong>0</strong> {% trans "résultat trouvé pour la requête&nbsp;:" %}</p>
             {% endif %}
             {% if search_elements %}
             <p class="search-query">
@@ -43,11 +43,13 @@
             {% endif %}
           </div>
         </div>
+        {% if documents %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6">
           <nav class="text-right nav-btn">
             <a href="#" id="id_save_search" class="btn btn-primary-outlined">{% trans "Sauvegarder ces résultats" %}</a>
           </nav>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -56,8 +58,8 @@
   <div class="main-content">
     <div class="container">
       <div class="row">
+      {% if documents %}
         {# Filter form #}
-        {% if documents %}
         <form action="{% url 'public:search:results' %}" id="id-search" class="search-form" method="get">
           <aside class="col-md-3">
             <h2>{% trans "Filtres" %}</h2>
@@ -140,11 +142,9 @@
             </fieldset>
           </div>
         </form>
-        {% endif %}
         {# Search results #}
         <div id="search-results" class="col-md-8 col-md-offset-1 search-results">
           <h2 class="sr-only">{% trans "Articles repérés" %}</h2>
-          {% if documents %}
           {% include "public/search/partials/results_pagination.html" %}
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
@@ -313,10 +313,15 @@
             {% endfor %}
           </ol>
           {% include "public/search/partials/results_pagination.html" %}
-          {% else %}
-          <p class="no-results">{% trans "Aucun document trouvé." %}</p>
-          {% endif %}
         </div>
+      {% else %}
+        <div class="col-xs-12 no-results">
+          <h3>{% trans "Aucun document trouvé&nbsp;!" %}</h3>
+          <p>
+            <a href="{% url 'public:search:advanced_search' %}" class="btn btn-primary">{% trans "Effectuer une nouvelle recherche" %}</a>
+          </p>
+        </div>
+      {% endif %}
       </div>
     </div>
   </div>
