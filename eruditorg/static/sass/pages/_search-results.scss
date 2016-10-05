@@ -59,14 +59,65 @@
       color: $dark-grey;
       text-align: right;
       font-size: 14px;
-      @include fw-mono;
     }
 
     .result {
       position: relative;
       border-bottom: 1px solid $mid-grey;
-      padding: 0 0 1em 0;
-      margin: 1em 0 0 0;
+      padding: 0 0 2.5em 0;
+      margin: 1.75em 0 0 0;
+
+      h3 {
+        font-size: 18px;
+        @include fw-sans-medium;
+
+        a > span:first-child {
+          em {
+            @include fw-sans-medium-italic;
+          }
+        }
+
+        a > span + span {
+          @include fw-sans-normal;
+        }
+
+        a:hover, &:active, &:focus, &:active:focus {
+          color: $coral-red;
+          text-decoration: none;
+        }
+
+      }
+
+      .authors,
+      .meta p,
+      .abstract {
+        color: $dark-grey;
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+
+      .authors {
+        margin-bottom: 0.35em;
+        @include fw-sans-medium;
+      }
+
+      .abstract-title {
+        margin-top: 1em;
+        color: $coral-red;
+        font-size: 14px;
+
+        span {
+          margin-left: 0.35em;
+        }
+
+      }
+
+      .abstract {
+        margin: 0;
+        padding: 0.5em;
+        background-color: $light-grey;
+        color: #000;
+      }
 
       .result-info {
         padding-left: 30px;
@@ -74,6 +125,7 @@
       }
 
       .toolbox {
+        margin: 0;
         padding-top: 0;
         list-style: none;
 

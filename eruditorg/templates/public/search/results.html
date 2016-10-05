@@ -194,21 +194,21 @@
                 {# article metadata #}
                 <div class="meta">
                   {% if document.real_object.issue_title %}<p>{{ document.real_object.issue_title }}</p>{% endif %}
-                  <span>
+                  <p>
                     {% if document.document_type == 'article' %}
                     {% trans "Article" %},
                     {% elif document.document_type == 'thesis' %}
                     {% trans "Thèse" %},
                     {% endif %}
                     {{ document.real_object.collection_name }}
-                  </span>
+                  </p>
                 </div>
                 {# abstract #}
                 {% if document.real_object.abstract or document.real_object.description %}
                 <div class="akkordion" data-akkordion-single="true">
-                  <div class="akkordion-title">{% trans "Résumé" %} <span class="ion-ios-arrow-down"></span></div>
+                  <div class="akkordion-title abstract-title">{% trans "Résumé" %} <span class="ion-ios-arrow-down"></span></div>
                   <div class="summary-content akkordion-content">
-                    <p>
+                    <p class="abstract">
                       {% if document.document_type == 'article' %}
                       {{ document.real_object.abstract }}
                       {% elif document.document_type == 'thesis' %}
