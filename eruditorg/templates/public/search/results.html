@@ -57,8 +57,9 @@
     <div class="container">
       <div class="row">
         {# Filter form #}
+        {% if documents %}
         <form action="{% url 'public:search:results' %}" id="id-search" class="search-form" method="get">
-          <aside class="col-sm-3">
+          <aside class="col-md-3">
             <h2>{% trans "Filtres" %}</h2>
             {# Search form #}
             <div class="hidden">
@@ -113,7 +114,7 @@
             {% endif %}
           </aside>
 
-          {# Options form #}
+          {# Number of results and sort options #}
           <div class="col-md-8 col-md-offset-1 results-options">
             <fieldset>
               <div class="row">
@@ -138,11 +139,10 @@
               </div>
             </fieldset>
           </div>
-
         </form>
-
+        {% endif %}
         {# Search results #}
-        <div id="search-results" class="col-sm-7 col-sm-push-2 search-results">
+        <div id="search-results" class="col-md-8 col-md-offset-1 search-results">
           <h2 class="sr-only">{% trans "Articles repérés" %}</h2>
           {% if documents %}
           {% include "public/search/partials/results_pagination.html" %}
@@ -314,7 +314,7 @@
           </ol>
           {% include "public/search/partials/results_pagination.html" %}
           {% else %}
-          <p class="no-results text-center">{% trans "Aucun document trouvé." %}</p>
+          <p class="no-results">{% trans "Aucun document trouvé." %}</p>
           {% endif %}
         </div>
       </div>
