@@ -475,11 +475,21 @@ class IssueContributor(models.Model):
     """ Determines if the person contributes as an editor """
 
     def format_name(self):
-        return "{firstname} {lastname} ({role_name})".format(
-            firstname=self.firstname,
-            lastname=self.lastname,
-            role_name=self.role_name
-        )
+        formatted_name = self.firstname
+
+        if self.lastname:
+            formatted_name = "{formatted_name} {lastname}".format(
+                formatted_name=formatted_name,
+                lastname=self.lastname
+            )
+
+        if self.role_name:
+            formatted_name = "{formatted_name} ({role_name})".format(
+                formatted_name=formatted_name,
+                role_name=self.role_name
+            )
+
+        return formatted_name
 
 
 class IssueTheme(models.Model):
