@@ -46,6 +46,10 @@
         {% if documents %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
           <a href="#" id="id_save_search" class="btn btn-primary-outlined">{% trans "Sauvegarder ces résultats" %}</a>
+          {% url 'public:search:advanced_search' as advanced_search %}
+          {% blocktrans %}
+          <p>Voir mon <a href="{{ advanced_search }}#search-history"><strong>historique</strong></a></p>
+          {% endblocktrans %}
         </div>
         {% endif %}
       </div>

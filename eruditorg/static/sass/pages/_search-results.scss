@@ -36,11 +36,22 @@
     .btn-primary-outlined {
       @include transition(all 500ms);
 
+      + p {
+        margin-top: 0.75em;
+        display: none;
+        @include transition(all 500ms);
+      }
+
       &.disabled {
         color: #FFF;
         background-color: #000;
         border-color: #000;
         opacity: 1;
+
+        + p {
+          display: block;
+        }
+
       }
 
     }
