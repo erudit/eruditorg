@@ -318,6 +318,41 @@ class TestIssue(BaseEruditTestCase):
         assert contributor in self.issue.get_editors()
 
 
+class TestIssueContributor(BaseEruditTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.issue = IssueFactory(journal=self.journal)
+
+    def test_can_format_its_name(self):
+        contributor = IssueContributorFactory(
+            issue=self.issue,
+            firstname="Tryphon",
+            lastname=None,
+            role_name=None
+        )
+
+        assert contributor.format_name() == "Tryphon"
+
+        contributor = IssueContributorFactory(
+            issue=self.issue,
+            firstname="Tryphon",
+            lastname="Tournesol",
+            role_name=None
+        )
+
+        assert contributor.format_name() == "Tryphon Tournesol"
+
+        contributor = IssueContributorFactory(
+            issue=self.issue,
+            firstname="Tryphon",
+            lastname="Tournesol",
+            role_name="Professeur"
+        )
+
+        assert contributor.format_name() == "Tryphon Tournesol (Professeur)"
+
+
 class TestArticle(BaseEruditTestCase):
 
     def setUp(self):
