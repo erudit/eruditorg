@@ -34,6 +34,7 @@ from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfFirstPageView
 from apps.public.journal.views import ArticleRawPdfView
+from apps.public.journal.views import ArticleXmlView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -485,6 +486,44 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             ArticleRawPdfView.as_view()(
                 request, journal_code=journal_id, issue_slug=issue.volume_slug,
                 issue_localid=issue_id, localid=article_id)
+
+
+@override_settings(DEBUG=True)
+class TestArticleXmlView(BaseEruditTestCase):
+    def setUp(self):
+        super(TestArticleXmlView, self).setUp()
+        self.factory = RequestFactory()
+
+    @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
+    @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
+    def test_can_retrieve_xml_of_existing_articles(self, mock_ds, mock_pdf):
+
+        with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
+            from eulxml.xmlmap import load_xmlobject_from_string
+            mock_pdf.content = load_xmlobject_from_string('<xml></xml>')
+        mock_ds = ['ERUDITXSD300', ]  # noqa
+
+        issue = IssueFactory.create(
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now() - dt.timedelta(days=1000))
+        article = ArticleFactory.create(issue=issue)
+        journal_id = self.journal.localidentifier
+        issue_id = issue.localidentifier
+        article_id = article.localidentifier
+        url = reverse('public:journal:article_raw_xml', args=(
+            journal_id, issue.volume_slug, issue_id, article_id
+        ))
+        request = self.factory.get(url)
+        request.user = AnonymousUser()
+
+        # Run
+        response = ArticleXmlView.as_view()(
+            request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
+            localid=article_id)
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/xml')
 
 
 @override_settings(DEBUG=True)

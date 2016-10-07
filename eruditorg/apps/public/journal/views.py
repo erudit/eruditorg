@@ -459,17 +459,9 @@ class ArticleBibCitationView(SingleArticleMixin, DetailView):
     template_name = 'public/journal/citation/article.bib'
 
 
-class ArticleRawPdfView(
+class ArticleFormatDownloadView(
         ArticleViewMetricCaptureMixin, ArticleAccessCheckMixin, PermissionRequiredMixin,
         FedoraFileDatastreamView):
-    """
-    Returns the PDF file associated with an article.
-    """
-    content_type = 'application/pdf'
-    datastream_name = 'pdf'
-    fedora_object_class = ArticleDigitalObject
-    raise_exception = True
-    tracking_view_type = 'pdf'
 
     def get_article(self):
         return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
@@ -478,19 +470,34 @@ class ArticleRawPdfView(
         article = self.get_article()
         return article.pid
 
-    def get_response_object(self, fedora_object):
-        response = super(ArticleRawPdfView, self).get_response_object(fedora_object)
-        if 'embed' not in self.request.GET:
-            response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
-                self.kwargs['localid'])
-        return response
-
     def get_permission_object(self):
         return self.get_article()
 
     def has_permission(self):
         obj = self.get_permission_object()
         return obj.publication_allowed_by_authors and self.article_access_granted
+
+
+class ArticleXmlView(ArticleFormatDownloadView):
+    content_type = 'application/xml'
+    datastream_name = 'erudit_xsd300'
+    fedora_object_class = ArticleDigitalObject
+    raise_exception = True
+    tracking_view_type = 'xml'
+
+    def write_datastream_content(self, response, content):
+        response.write(content.serialize())
+
+
+class ArticleRawPdfView(ArticleFormatDownloadView):
+    """
+    Returns the PDF file associated with an article.
+    """
+    content_type = 'application/pdf'
+    datastream_name = 'pdf'
+    fedora_object_class = ArticleDigitalObject
+    raise_exception = True
+    tracking_view_type = 'pdf'
 
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF
@@ -515,6 +522,13 @@ class ArticleRawPdfView(
         merger.append(content)
         merger.write(response)
         merger.close()
+
+    def get_response_object(self, fedora_object):
+        response = super(ArticleFormatDownloadView, self).get_response_object(fedora_object)
+        if 'embed' not in self.request.GET:
+            response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
+                self.kwargs['localid'])
+        return response
 
 
 class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamView):
