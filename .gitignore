@@ -10,6 +10,7 @@ env/
 *.swp
 .tox/
 dumps/
+fixtures/
 post_office_attachments/
 src/
 .DS_Store
