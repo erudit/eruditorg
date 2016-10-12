@@ -17,7 +17,7 @@
   touch-action: manipulation;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 2px solid transparent;
+  border: 2px solid #000;
   white-space: nowrap;
   // icon
   .icon {
@@ -38,6 +38,7 @@
     color: #FFF;
     text-decoration: none;
     background-image: none;
+    background-color: #000;
   }
 
   &:active,
@@ -160,4 +161,48 @@ input[type="button"] {
   &.btn-block {
     width: 100%;
   }
+}
+
+
+// Button groups
+// --------------------------------------------------
+
+.btn-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; // match .btn alignment given font-size hack above
+  width: 100%;
+
+  > .btn {
+    position: relative;
+    float: left;
+    width: 33.333%;
+    font-size: 12px;
+    border-width: 1px;
+    border-color: $dark-grey;
+    @include fw-sans-normal;
+
+    // Bring the "active" button to the front
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
+
+    }
+
+  }
+
+}
+
+// Prevent double borders when buttons are next to each other
+.btn-group {
+
+  .btn + .btn,
+  .btn + .btn-group,
+  .btn-group + .btn,
+  .btn-group + .btn-group {
+    margin-left: -1px;
+  }
+
 }
