@@ -68,9 +68,10 @@
         <div class="authors-wrapper main-content">
           <nav class="btn-group">
             <h2 class="sr-only">{% trans 'Par type d’article' %}</h2>
-            <a href="{% url 'public:journal:journal_authors_list' journal.code %}" title="{% trans 'Voir tous les auteurs' %}" class="btn">{% trans "Tous" %}</a>
-            <a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn">{% trans "Articles" %}</a>
-            <a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn">{% trans "Comptes rendus" %}</a>
+            {% url 'public:journal:journal_authors_list' journal.code as authors_list_url %}
+            <a href="{{ authors_list_url }}" title="{% trans 'Voir tous les auteurs' %}" class="btn{% if request.get_full_path == authors_list_url %} active{% endif %}">{% trans "Tous" %}</a>
+            <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn{% if article_type == 'article' %} active{% endif %}">{% trans "Articles" %}</a>
+            <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn{% if article_type == 'compterendu' %} active{% endif %}">{% trans "Comptes rendus" %}</a>
           </nav>
           <nav class="alpha-nav">
             <h2 class="sr-only">{% trans 'Par lettre' %}</h2>

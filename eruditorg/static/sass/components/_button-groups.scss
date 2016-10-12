@@ -9,12 +9,15 @@
   width: 100%;
 
   > .btn {
+    padding-left: 0;
+    padding-right: 0;
     position: relative;
     float: left;
     width: 33.333%;
     font-size: 14px;
     border-width: 1px;
     border-color: $dark-grey;
+    color: $dark-grey;
     @include fw-sans-normal;
 
     // Bring the "active" button to the front
@@ -23,7 +26,10 @@
     &:active,
     &.active {
       z-index: 2;
-
+      border-color: #000;
+      background-color: #FFF;
+      color: $coral-red;
+      @include fw-sans-medium;
     }
 
   }
