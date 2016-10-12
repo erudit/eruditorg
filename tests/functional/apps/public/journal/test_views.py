@@ -498,9 +498,9 @@ class TestArticleXmlView(BaseEruditTestCase):
     @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     def test_can_retrieve_xml_of_existing_articles(self, mock_ds, mock_pdf):
 
-        with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
-            from eulxml.xmlmap import load_xmlobject_from_string
-            mock_pdf.content = load_xmlobject_from_string('<xml></xml>')
+        with open(os.path.join(FIXTURE_ROOT, '1023796ar.xml'), 'r') as f:
+            from eulxml.xmlmap import load_xmlobject_from_file
+            mock_pdf.content = load_xmlobject_from_file(f)
         mock_ds = ['ERUDITXSD300', ]  # noqa
 
         issue = IssueFactory.create(
