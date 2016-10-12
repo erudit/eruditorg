@@ -124,7 +124,7 @@
   / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
   / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
    {% if article.issue.html_title %}
-   {{ article.issue.html_title|safe|truncatechars:50 }}
+   {{ article.issue.html_title|striptags|safe|truncatechars:50 }}
    {% else %}
    {{ article.issue.volume_title_with_pages }}
    {% endif %}
