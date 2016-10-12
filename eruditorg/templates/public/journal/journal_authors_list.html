@@ -66,9 +66,10 @@
         </header>
 
         <div class="authors-wrapper main-content">
-          <nav class="type-nav">
-            <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=article">{% trans "Article" %}</a></li>
-            <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=compterendu">{% trans "Compte rendu" %}</a></li>
+          <nav class="btn-group">
+            <h2 class="sr-only">{% trans 'Par type d’article' %}</h2>
+            <a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn btn-secondary">{% trans "Auteurs d’articles" %}</a>
+            <a href="{% url 'public:journal:journal_authors_list' journal.code %}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn btn-secondary">{% trans "Auteurs de comptes rendus" %}</a>
           </nav>
           <nav class="alpha-nav">
             <h2 class="sr-only">{% trans 'Par lettre' %}</h2>

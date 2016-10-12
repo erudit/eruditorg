@@ -24,7 +24,7 @@
       </div>
         <form action="" method="post">{% csrf_token %}
           <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Oui" %}" class="btn btn-warning" />
+          <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
           <a href="{% url 'userspace:library:authorization:list' %}" class="btn btn-link">{% trans "Non" %}</a>
         </form>
       </div>

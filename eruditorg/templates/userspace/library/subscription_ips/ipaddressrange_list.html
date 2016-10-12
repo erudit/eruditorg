@@ -25,7 +25,7 @@
         <div class="content-wrapper">
           <span class="actions pull-right">
             <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}"
-               class="btn btn-danger">{% trans "Supprimer" %}</a>
+               class="btn">{% trans "Supprimer" %}</a>
           </span>
           <span class="title">
             {{ ip_range.subscription }}

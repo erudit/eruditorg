@@ -31,7 +31,7 @@
             </p>
           {% endif %}
           <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Yes" %}" class="btn btn-warning" />
+          <input type="submit" value="{% trans "Yes" %}" class="btn btn-primary" />
           <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "No" %}</a>
         </form>
       </div>

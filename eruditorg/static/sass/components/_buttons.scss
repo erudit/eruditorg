@@ -35,7 +35,7 @@
   &:hover,
   &:focus,
   &.focus {
-    color: $btn-default-color;
+    color: #FFF;
     text-decoration: none;
     background-image: none;
   }
@@ -54,7 +54,6 @@
     @include box-shadow(none);
   }
 
-  // [converter] extracted a& to a.btn
 }
 
 a.btn {
@@ -68,9 +67,7 @@ a.btn {
 // Alternate buttons
 // --------------------------------------------------
 
-.btn-default {
-  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
-}
+// with coral-red as bg
 .btn-primary {
   @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
   text-decoration: none;
@@ -81,7 +78,9 @@ a.btn {
     background-image: none;
   }
 }
-.btn-primary-outlined {
+
+// coral-red outline only
+.btn-secondary {
   @include button-variant($brand-primary, transparent, $brand-primary);
   &:hover, &:active, &:focus, &:focus:active {
     color: $btn-primary-color;
@@ -90,36 +89,19 @@ a.btn {
     background-image: none;
   }
 }
+
 .btn-dark {
   @include button-variant(#fff, $gray-base, transparent);
 }
-// Success appears as green
-.btn-success {
-  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
-}
-// Info appears as blue-green
-.btn-info {
-  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
-}
-// Warning appears as orange
-.btn-warning {
-  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
-}
-// Danger and error appear as red
-.btn-danger {
-  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-bg);
-}
 
 // Link buttons
-// -------------------------
+// --------------------------------------------------
 
-// Make a button look and behave like a link
 .btn-link {
   color: $link-color;
   font-weight: normal;
   @include border-radius(0);
 
-  &,
   &:active,
   &.active,
   &[disabled],
@@ -127,7 +109,6 @@ a.btn {
     background-color: transparent;
     @include box-shadow(none);
   }
-  &,
   &:hover,
   &:focus,
   &:active {
@@ -156,13 +137,6 @@ a.btn {
 .btn-lg {
   // line-height: ensure even-numbered height of button next to large input
   @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
-}
-.btn-sm {
-  // line-height: ensure proper height of button next to small input
-  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
-}
-.btn-xs {
-  @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
 }
 
 
