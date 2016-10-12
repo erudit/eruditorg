@@ -2,6 +2,7 @@
 
 from django.core.cache import caches
 
+from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
 
 
@@ -15,9 +16,9 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
     Note that this content can be cached in a file-based cache!
     """
     cache = cache or get_datastream_file_cache()
+    serializer, deserializer = get_datastream_cache_serializer(datastream_name)
     content_key = 'erudit-fedora-file-{pid}'.format(pid=fedora_object.pid)
-    content = cache.get(content_key)
-
+    content = deserializer(cache.get(content_key))
     try:
         assert content is None
         content = getattr(fedora_object, datastream_name).content
@@ -26,6 +27,10 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
         pass
     else:
         # Puts the content of the file in the file-based cache!
-        cache.set(content_key, content, erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT)
+        cache.set(
+            content_key,
+            serializer(content),
+            erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT
+        )
 
     return content
