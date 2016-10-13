@@ -33,7 +33,7 @@
         @include fw-mono;
     }
 
-    .btn-primary-outlined {
+    .btn-secondary {
       @include transition(all 500ms);
 
       + p {

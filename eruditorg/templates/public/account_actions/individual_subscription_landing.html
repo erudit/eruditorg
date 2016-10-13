@@ -49,7 +49,7 @@
               <form method="post" action="{% url 'public:account_actions:consume' key=token.key %}">
                 {% csrf_token %}
                 {% trans "S'abonner" as subscribe_text %}
-                <input type="submit" value="{{ subscribe_text }}" class="btn btn-block btn-info" />
+                <input type="submit" value="{{ subscribe_text }}" class="btn btn-block btn-primary" />
               </form>
             </div>
           </div>
@@ -58,13 +58,13 @@
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-              <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-info">{% trans "S'identifier" %}</a>
+              <a href="{% url 'public:auth:login' %}?next={% url 'public:account_actions:landing' key=token.key %}" class="btn btn-block btn-primary">{% trans "S'identifier" %}</a>
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-              <a href="{% url 'public:account_actions:register' key=token.key %}" class="btn btn-block btn-info">{% trans "Créer un compte" %}</a>
+              <a href="{% url 'public:account_actions:register' key=token.key %}" class="btn btn-block btn-primary">{% trans "Créer un compte" %}</a>
             </div>
           </div>
         {% endif %}
