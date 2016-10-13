@@ -105,8 +105,8 @@ class TestJournalListView(object):
         assert response.context['sorted_objects'][1]['collections'][0]['objects'] == [journal_3, ]
         assert response.context['sorted_objects'][2]['key'] == discipline_3.code
         assert response.context['sorted_objects'][2]['collections'][0]['key'] == collection
-        assert response.context['sorted_objects'][2]['collections'][0]['objects'] == [
-            journal_4, journal_5, journal_6, ]
+        assert set(response.context['sorted_objects'][2]['collections'][0]['objects']) == set([
+            journal_4, journal_5, journal_6, ])
 
     def test_can_filter_the_journals_by_open_access(self):
         # Setup
@@ -285,6 +285,26 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
         assert len(contributors) == 1
         assert contributors[0].pk == author_2.pk
+
+    def test_can_filter_by_article_type(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1, type='article')
+        article_2 = ArticleFactory.create(title="lorem ipsum 2", issue=issue_1, type='compterendu')  # noqa
+
+        author_1 = AuthorFactory.create(lastname='btest')
+        article_1.authors.add(author_1)
+
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url, article_type='article')
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        authors_dicts = response.context['authors_dicts']
+
+        assert len(authors_dicts) == 1
 
     def test_inserts_the_current_letter_in_the_context(self):
         # Setup

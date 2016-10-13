@@ -191,6 +191,11 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
             assert len(self.letter) == 1 and 'A' <= self.letter <= 'Z'
         except AssertionError:
             self.letter = None
+        self.article_type = request.GET.get('article_type', None)
+        try:
+            assert self.article_type in (Article.ARTICLE_DEFAULT, Article.ARTICLE_REPORT)
+        except AssertionError:
+            self.article_type = None
 
     def get_base_queryset(self):
         """ Returns the base queryset that will be used to retrieve the authors. """
@@ -211,6 +216,10 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
     def get_queryset(self):
         qs = self.get_base_queryset()
+
+        if self.article_type is not None:
+            qs = qs.filter(article__type=self.article_type)
+
         qsdict = self.get_letters_queryset_dict()
 
         if self.letter is None:
@@ -237,6 +246,9 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
             .select_related('issue', 'issue__journal') \
             .prefetch_related('authors').distinct()
 
+        if self.article_type:
+            articles = articles.filter(type=self.article_type)
+
         authors_dicts = {}
         for article in articles:
             for author in article.authors.all():
@@ -251,6 +263,7 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
                 list(authors_dicts.values()), key=lambda a: a['author'].full_name)
             context['journal'] = self.journal
         context['letter'] = self.letter
+        context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_issue
         return context
