@@ -17,7 +17,11 @@ def get_cached_datastream_content(fedora_object, datastream_name, cache=None):
     """
     cache = cache or get_datastream_file_cache()
     serializer, deserializer = get_datastream_cache_serializer(datastream_name)
-    content_key = 'erudit-fedora-file-{pid}'.format(pid=fedora_object.pid)
+    content_key = 'erudit-fedora-file-{pid}-{datastream_name}'.format(
+        pid=fedora_object.pid,
+        datastream_name=datastream_name,
+    )
+
     content = deserializer(cache.get(content_key))
     try:
         assert content is None
