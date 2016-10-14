@@ -39,6 +39,31 @@ from ...models import Publisher
 logger = logging.getLogger(__file__)
 
 
+def _create_issue_contributor_object(issue_contributor, issue, is_director=False, is_editor=False):
+
+    contributor = IssueContributor(
+        firstname=issue_contributor['firstname'],
+        lastname=issue_contributor['lastname'],
+        issue=issue
+    )
+
+    if is_director:
+        contributor.is_director = True
+    if is_editor:
+        contributor.is_editor = True
+
+    role_fr = issue_contributor.get('role_fr')
+    role_en = issue_contributor.get('role_en')
+
+    if role_fr and role_en:
+        raise ValueError('Only one of role_fr or role_en should be defined')
+    if role_fr:
+        contributor.role_name = role_fr
+    if role_en:
+        contributor.role_name = role_en
+    return contributor
+
+
 class Command(BaseCommand):
     """ Imports journal objects from a Fedora Commons repository.
 
@@ -394,39 +419,18 @@ class Command(BaseCommand):
         issue.save()
 
         for director in issue.erudit_object.directors:
-            contributor = IssueContributor(
-                firstname=director['firstname'],
-                lastname=director['lastname'],
-                is_director=True,
-                issue=issue
+            contributor = _create_issue_contributor_object(
+                director,
+                issue,
+                is_director=True
             )
-
-            fonction_fr = director.get('fonction_fr')
-            fonction_en = director.get('fonction_en')
-
-            if fonction_fr:
-                contributor.role_name_fr = fonction_fr
-            if fonction_en:
-                contributor.role_name_en = fonction_en
-
             contributor.save()
 
         for editor in issue.erudit_object.editors:
-            contributor = IssueContributor(
-                firstname=editor['firstname'],
-                lastname=editor['lastname'],
-                is_editor=True,
-                issue=issue
+            contributor = _create_issue_contributor_object(
+                director,
+                is_editor=True
             )
-
-            fonction_fr = editor.get('fonction_fr')
-            fonction_en = editor.get('fonction_en')
-
-            if fonction_fr:
-                contributor.role_name_fr = fonction_fr
-            if fonction_en:
-                contributor.role_name_en = fonction_en
-
             contributor.save()
 
         issue.copyrights.clear()
