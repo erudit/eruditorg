@@ -57,12 +57,12 @@ urlpatterns = [
         views_compat.IssueDetailRedirectView.as_view()),
 
     # Article
-    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.html?$',  # noqa
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         views_compat.ArticleDetailRedirectView.as_view()),
     url(r'^iderudit/(?P<localid>[\w-]+)$', views_compat.ArticleDetailRedirectView.as_view()),
-    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.html?$',  # noqa
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         views_compat.ArticleDetailRedirectView.as_view()),
-    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.html?$',
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         views_compat.ArticleDetailRedirectView.as_view()),
 ]
 

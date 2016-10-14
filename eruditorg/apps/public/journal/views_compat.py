@@ -41,6 +41,10 @@ class ArticleDetailRedirectView(RedirectView):
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
+
+        if kwargs['format_identifier'] == 'xml':
+            self.pattern_name = 'public:journal:article_raw_xml'
+
         if 'journal_code' in kwargs and 'issue_localid' in kwargs and 'localid' in kwargs:
             article = get_object_or_404(
                 Article.objects.select_related('issue', 'issue__journal'),
