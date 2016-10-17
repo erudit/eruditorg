@@ -52,8 +52,9 @@ def _create_issue_contributor_object(issue_contributor, issue, is_director=False
     if is_editor:
         contributor.is_editor = True
 
-    role_fr = issue_contributor.get('role_fr')
-    role_en = issue_contributor.get('role_en')
+    contributor_roles = issue_contributor.get('role')
+    role_fr = contributor_roles.get('fr')
+    role_en = contributor_roles.get('en')
 
     if role_fr and role_en:
         raise ValueError('Only one of role_fr or role_en should be defined')
@@ -61,6 +62,9 @@ def _create_issue_contributor_object(issue_contributor, issue, is_director=False
         contributor.role_name = role_fr
     if role_en:
         contributor.role_name = role_en
+    if not role_fr and not role_en:
+        if len(contributor_roles.keys()) > 0:
+            _, contributor.role_name = contributor_roles.popitem()
     return contributor
 
 
