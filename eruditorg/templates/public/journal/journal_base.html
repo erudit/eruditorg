@@ -1,0 +1,11 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block breadcrumb %}{{ block.super }}
+  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+  / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
