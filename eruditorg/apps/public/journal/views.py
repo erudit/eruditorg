@@ -261,7 +261,7 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
                     })
             context['authors_dicts'] = sorted(
                 list(authors_dicts.values()), key=lambda a: a['author'].full_name)
-            context['journal'] = self.journal
+        context['journal'] = self.journal
         context['letter'] = self.letter
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists

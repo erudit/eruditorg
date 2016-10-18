@@ -306,6 +306,19 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
         assert len(authors_dicts) == 1
 
+    def test_can_filter_by_article_type_when_no_article_of_type(self):
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1, type='article')
+        author_1 = AuthorFactory.create(lastname='atest')
+        article_1.authors.add(author_1)
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url, {"article_type":'compterendu'})
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+
     def test_inserts_the_current_letter_in_the_context(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
