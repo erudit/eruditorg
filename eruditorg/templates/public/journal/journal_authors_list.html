@@ -83,7 +83,7 @@
     </nav>
     <ul class="authors">
       <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
-      {% cache LONG_TTL "public_journal_authors" journal.id letter LANGUAGE_CODE %}
+      {% cache LONG_TTL "public_journal_authors" journal.id letter article_type LANGUAGE_CODE %}
       {% for author_dict in authors_dicts %}
         <li class="author-group">
           <div class="author-name">{{ author_dict.author.full_name }}</div>
