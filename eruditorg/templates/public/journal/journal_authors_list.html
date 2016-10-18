@@ -74,7 +74,7 @@
       <ul>
         {% for letter_page, exist in letters_exists.items %}
         {% if exist %}
-          <li><a {% if letter == letter_page %}class="active"{% endif %} href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter_page }}">{{ letter_page|upper }}</a></li>
+          <li><a {% if letter == letter_page %}class="active"{% endif %} href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter_page }}{% if article_type %}&article_type={{ article_type }}{% endif %}">{{ letter_page|upper }}</a></li>
         {% else %}
           <li><span>{{ letter_page|upper }}</span></li>
         {% endif %}
