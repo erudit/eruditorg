@@ -220,10 +220,10 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
         qsdict = self.get_letters_queryset_dict()
 
         if self.letter is None:
-            first_author = qs.first()
-            letter_prefix = first_author.letter_prefix if first_author else None
-            self.letter = letter_prefix if letter_prefix else 'A'
-
+            keys = list(qsdict.keys())
+            if len(keys) == 0:
+                return Author.objects.none()
+            self.letter = keys[0]
         return qsdict[self.letter]
 
     @cached_property
