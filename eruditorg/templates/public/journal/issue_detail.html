@@ -1,4 +1,4 @@
-{% extends "public/base.html" %}
+{% extends "public/journal/journal_base.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load cache %}
@@ -8,6 +8,8 @@
 {% block zone_title %}{{ journal.name }}{% endblock %}
 
 {% block page_title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock page_title %}
+
+{% block body_id %}issue_detail{% endblock body_id %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -65,8 +67,6 @@
 {% endblock structured_data %}
 
 {% block breadcrumb %}{{ block.super }}
-  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
-  / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ issue.journal.name }}</a>
   / <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
     {% if issue.html_title %}
     {{ issue.html_title|striptags|safe|truncatechars_html:50 }}
@@ -76,314 +76,165 @@
   </a>
 {% endblock %}
 
-{% block content %}
-
+{% block inner_main %}
 {% trans "inconnu" as i18n_unknown %}
-
-<div id="issue_detail">
-  <div id="id_articles_saved_citation_list_metadata">
-    {% for article in articles %}
-    <div id="article-{{ article.id }}" data-document-id="{{ article.id }}" {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}></div>
-    {% endfor %}
-  </div>
-
-
-  <div class="container">
-    <div class="row">
-
-      {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
-      {# Issue summary #}
-      <section class="col-sm-9 col-md-8">
-
-        <header class="page-header-main">
-            <p class="title-tag">{{ issue.journal.name }}</p>
-
-            <h1>
-              {% for theme in themes %}
-              {% if forloop.first %}<span>{% else %} / {% endif %}
-              {% if theme.html_name and theme.html_subname %}
-                {{ theme.html_name|safe }}: {{ theme.html_subname|safe }}
-              {% else %}
-                {{ theme.html_name|safe }}
-              {% endif %}
-              {% if forloop.first %}</span>{% endif %}
-              {% endfor %}
-              <span>{{ issue.volume_title_with_pages }}{% if issue.has_movable_limitation and not user_has_access_to_journal %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
-            </h1>
-            <h2>
-              {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}
-            </h2>
-        </header>
-
-        {% if articles_per_section %}
-
-        {% for k, section1 in articles_per_section.items %}
-        {% if section1.titles.main %}
-        <h3 class="section">
-          {{ section1.titles.main }}
-          {% for paral in section1.titles.paral %}/ {{ paral }}{% endfor %}
-        </h3>
-        {% endif %}
-
-        {% if section1.objects %}
-        <ol class="issue_detail--articles unstyled section-1">
-        {% for article in section1.objects %}
-        {% include "public/journal/partials/issue_detail_article_item.html" %}
-        {% endfor %}
-        </ol>
-        {% endif %}
-
-        {% if section1.section2 %}
-          {% for k, section2 in section1.section2.items %}
-          {% if section2.titles.main %}
-          <h4 class="section">
-            {{ section2.titles.main }}
-            {% for paral in section2.titles.paral %}/ {{ paral }}{% endfor %}
-          </h4>
-          {% endif %}
-
-          {% if section2.objects %}
-          <ol class="issue_detail--articles unstyled section-2">
-          {% for article in section2.objects %}
-          {% include "public/journal/partials/issue_detail_article_item.html" %}
-          {% endfor %}
-          </ol>
-          {% endif %}
-
-          {% if section2.section3 %}
-            {% for k, section3 in section2.section3.items %}
-            {% if section3.titles.main %}
-            <h5 class="section">
-              {{ section3.titles.main }}
-              {% for paral in section3.titles.paral %}/ {{ paral }}{% endfor %}
-            </h5>
-            {% endif %}
-
-            {% if section3.objects %}
-            <ol class="issue_detail--articles unstyled section-3">
-            {% for article in section3.objects %}
-            {% include "public/journal/partials/issue_detail_article_item.html" %}
-            {% endfor %}
-            </ol>
-            {% endif %}
-
-            {% endfor %}
-          {% endif %}
-
-          {% endfor %}
-        {% endif %}
-
-        {% endfor %}
-
-        {% else %}
-
-          {# This is displayed only if the Fedora repository is unavailable #}
-
-          <ol class="issue_detail--articles unstyled section-1">
-          {% for article in articles %}
-          {% include "public/journal/partials/issue_detail_article_item.html" %}
-          {% endfor %}
-          </ol>
-
-        {% endif %}
-
-        <div class="text-center">
-          <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
-        </div>
-
-      </section>
-      {% endcache %}
-
-      {# Journal information #}
-      <aside class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
-        {% cache FOREVER_TTL "public_issue_detail_journal_info" issue.journal.id LANGUAGE_CODE %}
-        <div class="sidebar-block clearfix issue_detail--resume">
-          <header>
-            <h2><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></h2>
-          </header>
-
-          {% if issue.has_coverpage %}
-          <div>
-            <a href="{% url 'public:journal:journal_detail' journal.code %}">
-              <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-coverpage" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
-              {{ issue.volume_title_with_pages }} {{ journal.name }}" />
-            </a>
-          </div>
-          {% endif %}
-
-          <p>
-            <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique des numéros' %}">
-              {% trans "Voir tous les numéros" %}
-            </a>
-          </p>
-
-        </div>
-
-        <div class="sidebar-block">
-
-          <h3>{% trans "Fiche" %}</h3>
-
-          <p>
-            <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">
-              {% trans "Index des auteurs" %}
-            </a>
-          <p>
-
-          <dl class="journal-meta--list">
-
-            {% if issue.get_directors %}
-            <dt>{% trans "Direction" %}</dt>
-            {% for issue_contributor in issue.get_directors %}
-            <dd>{{ issue_contributor.format_name }}</dd>
-            {% endfor %}
-            {% endif %}
-
-            {% if issue.get_editors %}
-            <dt>{% trans "Rédaction" %}</dt>
-            {% for issue_contributor in issue.get_editors %}
-            <dd>{{ issue_contributor.format_name }}</dd>
-            {% endfor %}
-            {% endif %}
-
-            {% if journal.publishers.all %}
-            <dt>
-              {% blocktrans count total=journal.publishers.all|length %}
-              Éditeur
-              {% plural %}
-              Éditeurs
-              {% endblocktrans %}
-            </dt>
-            {% for publisher in journal.publishers.all %}
-            <dd>{{ publisher.name }}</dd>
-            {% endfor %}
-            {% endif %}
-
-            {% if journal.issn_print or journal.issn_web %}
-            <dt>{% trans "ISSN" %}</dt>
-            {% if journal.issn_print %}
-            <dd>{{ journal.issn_print }} ({% trans "imprimé" %})</dd>
-            <dd>{{ journal.issn_web }} ({% trans "numérique" %})</dd>
-            {% endif %}
-            {% endif %}
-
-            {% if journal.issues_per_year %}
-            <dt>{% trans "Fréquence" %}</dt>
-            <dd>
-              {% blocktrans count issues_per_year=journal.issues_per_year %}
-              {{ issues_per_year }} numéro par année
-              {% plural %}
-              {{ issues_per_year }} numéros par année
-              {% endblocktrans %}
-            </dd>
-            {% endif %}
-
-            <dt>{% trans "Période de publication" %}</dt>
-            <dd>{{ journal.publication_period }}</dd>
-
-
-            {% if journal.first_issue %}
-            <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
-            <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
-            {% endif %}
-
-            <dt>{% trans "Type de support" %}</dt>
-            <dd>
-              {% if journal.paper %}
-              {% trans "Numérique et papier" %}
-              {% else %}
-              {% trans "Numérique" %}
-              {% endif %}
-            </dd>
-
-            <dt>{% trans "Politique d'accès" %}</dt>
-            {% if journal.open_access %}
-            <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
-            {% else %}
-            <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
-            {% endif %}
-
-            {% if journal.disciplines.all|length > 0 %}
-            <dt>
-              {% blocktrans count journal.disciplines.all|length as disciplines_count %}
-              Discipline
-              {% plural %}
-              Disciplines
-              {% endblocktrans %}
-            </dt>
-            <dd>
-              {% for discipline in journal.disciplines.all %}
-              <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines#{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
-              {% endfor %}
-            </dd>
-            {% endif %}
-
-            {% if journal.website_url %}
-              <dt>{% trans "Site web" %}</dt>
-              <dd><a href="{{ journal.website_url }}">{{ journal.website_url }}</a></dd>
-            {% endif %}
-
-            {% if journal.previous_journal %}
-              <dt>{% trans "Revue précédée de…" %}</dt>
-              <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
-            {% endif %}
-            {% if journal.next_journal %}
-              <dt>{% trans "Revue suivie de…" %}</dt>
-              <dd><a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">{{ journal.next_journal.name }}</a></dd>
-            {% endif %}
-
-          </dl>
-          <div class="journal-meta--list">
-            <a href="{% url 'public:journal:journal_detail' journal.code %}">
-              <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
-            </a>
-          </div>
-        </div>
-        {% endcache %}
-        <div class="sidebar-block">
-          {% include "public/partials/subscription_sponsor_badge.html" %}
-        </div>
-      </aside>
-
-    </div>
-  </div>
-
-  {% cache FOREVER_TTL "public_issue_detail_back_issues" issue.id LANGUAGE_CODE %}
-  <section class="back-issues">
-    <div class="container">
-      <header class="back-issues--header col-xs-12">
-        <h3>
-          {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
-          <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues">
-            <small>({{ journal.published_issues|length }} numéros)</small>
-          </a>
-        </h3>
-      </header>
-      <ul class="issue-list">
-        {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
-        {% if published_issue != issue %}
-        <li class="issue-list--item col-xs-6 col-sm-3">
-          {% if issue.has_coverpage %}
-          <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-            <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{{ published_issue.name }}" />
-          </a>
-          {% endif %}
-          <div class="issue-list--title">
-            <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-              <h5>
-                <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-                {% if published_issue.html_title %}<span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
-              </h5>
-            </a>
-          </div>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  </section>
-  {% endcache %}
-
-
+<div id="id_articles_saved_citation_list_metadata">
+  {% for article in articles %}
+  <div id="article-{{ article.id }}" data-document-id="{{ article.id }}" {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}></div>
+  {% endfor %}
 </div>
 
-{% endblock %}
+{% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
+{# Issue summary #}
+<section class="col-sm-9 col-md-8">
+
+  <header class="page-header-main">
+    <p class="title-tag">{{ issue.journal.name }}</p>
+    <h1>
+      {% for theme in themes %}
+        {% if forloop.first %}<span>
+        {% else %}&nbsp;/
+        {% endif %}
+        {% if theme.html_name and theme.html_subname %}
+        {{ theme.html_name|safe }}{% trans '&nbsp;' %}: {{ theme.html_subname|safe }}
+        {% else %}
+        {{ theme.html_name|safe }}
+        {% endif %}
+        {% if forloop.first %}</span>
+        {% endif %}
+      {% endfor %}
+      <span>{{ issue.volume_title_with_pages }}{% if issue.has_movable_limitation and not user_has_access_to_journal %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
+    </h1>
+    <h2>
+      {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}
+    </h2>
+  </header>
+
+  {% if articles_per_section %}
+
+  {% for k, section1 in articles_per_section.items %}
+  {% if section1.titles.main %}
+  <h3 class="section">
+    {{ section1.titles.main }}
+    {% for paral in section1.titles.paral %}/ {{ paral }}{% endfor %}
+  </h3>
+  {% endif %}
+
+  {% if section1.objects %}
+  <ol class="issue_detail--articles unstyled section-1">
+    {% for article in section1.objects %}
+    {% include "public/journal/partials/issue_detail_article_item.html" %}
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  {% if section1.section2 %}
+  {% for k, section2 in section1.section2.items %}
+  {% if section2.titles.main %}
+  <h4 class="section">
+    {{ section2.titles.main }}
+    {% for paral in section2.titles.paral %}/ {{ paral }}{% endfor %}
+  </h4>
+  {% endif %}
+
+  {% if section2.objects %}
+  <ol class="issue_detail--articles unstyled section-2">
+    {% for article in section2.objects %}
+    {% include "public/journal/partials/issue_detail_article_item.html" %}
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  {% if section2.section3 %}
+  {% for k, section3 in section2.section3.items %}
+  {% if section3.titles.main %}
+  <h5 class="section">
+    {{ section3.titles.main }}
+    {% for paral in section3.titles.paral %}/ {{ paral }}{% endfor %}
+  </h5>
+  {% endif %}
+
+  {% if section3.objects %}
+  <ol class="issue_detail--articles unstyled section-3">
+    {% for article in section3.objects %}
+    {% include "public/journal/partials/issue_detail_article_item.html" %}
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  {% endfor %}
+  {% endif %}
+
+  {% endfor %}
+  {% endif %}
+
+  {% endfor %}
+
+  {% else %}
+
+  {# This is displayed only if the Fedora repository is unavailable #}
+
+  <ol class="issue_detail--articles unstyled section-1">
+    {% for article in articles %}
+    {% include "public/journal/partials/issue_detail_article_item.html" %}
+    {% endfor %}
+  </ol>
+
+  {% endif %}
+
+  <div class="text-center">
+    <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
+  </div>
+
+</section>
+{% endcache %}
+{% endblock inner_main %}
+
+{% block aside_issue %}
+{% if issue.has_coverpage %}
+<div>
+  <a href="{% url 'public:journal:journal_detail' journal.code %}">
+    <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-coverpage" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
+    {{ issue.volume_title_with_pages }} {{ journal.name }}" />
+  </a>
+</div>
+{% endif %}
+{% endblock aside_issue %}
+
+{% block inner_footer %}
+{% cache FOREVER_TTL "public_issue_detail_back_issues" issue.id LANGUAGE_CODE %}
+<section class="back-issues">
+  <div class="container">
+    <header class="back-issues--header col-xs-12">
+      <h3>
+        {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
+        <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues">
+          <small>({{ journal.published_issues|length }} numéros)</small>
+        </a>
+      </h3>
+    </header>
+    <ul class="issue-list">
+      {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
+      {% if published_issue != issue %}
+      <li class="issue-list--item col-xs-6 col-sm-3">
+        {% if issue.has_coverpage %}
+        <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
+          <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{{ published_issue.name }}" />
+        </a>
+        {% endif %}
+        <div class="issue-list--title">
+          <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
+            <h5>
+              <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
+              {% if published_issue.html_title %}<span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
+            </h5>
+          </a>
+        </div>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endcache %}
+{% endblock inner_footer %}
