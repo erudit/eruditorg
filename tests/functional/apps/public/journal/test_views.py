@@ -319,6 +319,23 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
 
+    def test_only_letters_with_results_are_active(self):
+        """ Test that for a given selection in the authors list view, only the letters for which
+        results are present are shown """
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1, type='article')
+        author_1 = AuthorFactory.create(lastname='atest')
+        article_1.authors.add(author_1)
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url, {"article_type":'compterendu'})
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+        assert response.context['letters_exists'].get('A') == 0
+
+
     def test_inserts_the_current_letter_in_the_context(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
