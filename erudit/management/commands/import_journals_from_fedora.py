@@ -40,7 +40,6 @@ logger = logging.getLogger(__file__)
 
 
 def _create_issue_contributor_object(issue_contributor, issue, is_director=False, is_editor=False):
-
     contributor = IssueContributor(
         firstname=issue_contributor['firstname'],
         lastname=issue_contributor['lastname'],
@@ -51,20 +50,20 @@ def _create_issue_contributor_object(issue_contributor, issue, is_director=False
         contributor.is_director = True
     if is_editor:
         contributor.is_editor = True
-
     contributor_roles = issue_contributor.get('role')
-    role_fr = contributor_roles.get('fr')
-    role_en = contributor_roles.get('en')
+    if contributor_roles:
+        role_fr = contributor_roles.get('fr')
+        role_en = contributor_roles.get('en')
 
-    if role_fr and role_en:
-        raise ValueError('Only one of role_fr or role_en should be defined')
-    if role_fr:
-        contributor.role_name = role_fr
-    if role_en:
-        contributor.role_name = role_en
-    if not role_fr and not role_en:
-        if len(contributor_roles.keys()) > 0:
-            _, contributor.role_name = contributor_roles.popitem()
+        if role_fr and role_en:
+            raise ValueError('Only one of role_fr or role_en should be defined')
+        if role_fr:
+            contributor.role_name = role_fr
+        if role_en:
+            contributor.role_name = role_en
+        if not role_fr and not role_en:
+            if len(contributor_roles.keys()) > 0:
+                _, contributor.role_name = contributor_roles.popitem()
     return contributor
 
 
@@ -432,7 +431,8 @@ class Command(BaseCommand):
 
         for editor in issue.erudit_object.editors:
             contributor = _create_issue_contributor_object(
-                director,
+                editor,
+                issue,
                 is_editor=True
             )
             contributor.save()
