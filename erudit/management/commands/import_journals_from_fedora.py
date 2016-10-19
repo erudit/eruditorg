@@ -421,6 +421,8 @@ class Command(BaseCommand):
         issue.fedora_updated = fedora_issue.modified
         issue.save()
 
+        issue.contributors.all().delete()
+
         for director in issue.erudit_object.directors:
             contributor = _create_issue_contributor_object(
                 director,
