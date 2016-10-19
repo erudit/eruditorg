@@ -199,9 +199,12 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
     def get_base_queryset(self):
         """ Returns the base queryset that will be used to retrieve the authors. """
-        return Author.objects \
-            .filter(lastname__isnull=False, article__issue__journal_id=self.journal.id) \
-            .order_by('lastname').distinct()
+
+        base_query = Q(lastname__isnull=False, article__issue__journal__id=self.journal.id)
+
+        if self.article_type:
+            base_query &= Q(article__type=self.article_type)
+        return Author.objects.filter(base_query).order_by('lastname').distinct()
 
     def get_letters_queryset_dict(self):
         """ Returns an ordered dict containing a list of authors for each letter. """
@@ -211,28 +214,27 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
             sorted(qs, key=lambda a: a.letter_prefix), key=lambda a: a.letter_prefix)
         letter_qsdict = OrderedDict([
             (g[0], sorted(list(g[1]), key=lambda a: a.lastname or a.othername)) for g in grouped])
-
         return letter_qsdict
 
     def get_queryset(self):
-        qs = self.get_base_queryset()
-
-        if self.article_type is not None:
-            qs = qs.filter(article__type=self.article_type)
-
         qsdict = self.get_letters_queryset_dict()
 
-        if self.letter is None:
-            first_author = qs.first()
-            letter_prefix = first_author.letter_prefix if first_author else None
-            self.letter = letter_prefix if letter_prefix else 'A'
+        if not qsdict.get(self.letter):
+            # The user requested a letter for which there is no article
+            self.letter = None
 
+        if self.letter is None:
+            keys = list(qsdict.keys())
+            if len(keys) == 0:
+                return Author.objects.none()
+            self.letter = keys[0]
         return qsdict[self.letter]
 
     @cached_property
     def letters_exists(self):
         """ Returns an ordered dict containing the number of authors for each letter. """
         qsdict = self.get_letters_queryset_dict()
+
         letters_exists = OrderedDict([(l.upper(), 0) for l in ascii_lowercase])
         for letter, qs in qsdict.items():
             letters_exists[letter] = len(qs)
@@ -248,7 +250,6 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
         if self.article_type:
             articles = articles.filter(type=self.article_type)
-
         authors_dicts = {}
         for article in articles:
             for author in article.authors.all():
@@ -261,7 +262,7 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
                     })
             context['authors_dicts'] = sorted(
                 list(authors_dicts.values()), key=lambda a: a['author'].full_name)
-            context['journal'] = self.journal
+        context['journal'] = self.journal
         context['letter'] = self.letter
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists

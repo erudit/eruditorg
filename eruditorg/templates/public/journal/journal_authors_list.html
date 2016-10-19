@@ -74,7 +74,7 @@
       <ul>
         {% for letter_page, exist in letters_exists.items %}
         {% if exist %}
-          <li><a {% if letter == letter_page %}class="active"{% endif %} href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter_page }}">{{ letter_page|upper }}</a></li>
+          <li><a {% if letter == letter_page %}class="active"{% endif %} href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter_page }}{% if article_type %}&article_type={{ article_type }}{% endif %}">{{ letter_page|upper }}</a></li>
         {% else %}
           <li><span>{{ letter_page|upper }}</span></li>
         {% endif %}
@@ -83,7 +83,7 @@
     </nav>
     <ul class="authors">
       <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
-      {% cache LONG_TTL "public_journal_authors" journal.id letter LANGUAGE_CODE %}
+      {% cache LONG_TTL "public_journal_authors" journal.id letter article_type LANGUAGE_CODE %}
       {% for author_dict in authors_dicts %}
         <li class="author-group">
           <div class="author-name">{{ author_dict.author.full_name }}</div>
