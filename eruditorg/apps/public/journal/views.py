@@ -219,6 +219,10 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
     def get_queryset(self):
         qsdict = self.get_letters_queryset_dict()
 
+        if not qsdict.get(self.letter):
+            # The user requested a letter for which there is no article
+            self.letter = None
+
         if self.letter is None:
             keys = list(qsdict.keys())
             if len(keys) == 0:

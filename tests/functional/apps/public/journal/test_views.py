@@ -314,7 +314,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
 
         # Run
-        response = self.client.get(url, {"article_type":'compterendu'})
+        response = self.client.get(url, {"article_type": 'compterendu'})
 
         # Check
         self.assertEqual(response.status_code, 200)
@@ -329,12 +329,25 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
 
         # Run
-        response = self.client.get(url, {"article_type":'compterendu'})
+        response = self.client.get(url, {"article_type": 'compterendu'})
 
         # Check
         self.assertEqual(response.status_code, 200)
         assert response.context['letters_exists'].get('A') == 0
 
+    def test_do_not_fail_when_user_requests_a_letter_with_no_articles(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(issue=issue_1, type='article')
+        author_1 = AuthorFactory.create(lastname='btest')
+        article_1.authors.add(author_1)
+
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        response = self.client.get(url, {"article_type": 'compterendu', 'letter': 'A'})
+
+        # Check
+        self.assertEqual(response.status_code, 200)
 
     def test_inserts_the_current_letter_in_the_context(self):
         # Setup
