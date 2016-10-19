@@ -35,7 +35,7 @@ aside,
       @include fw-mono;
     }
 
-    dd {
+    dd:last-child {
       margin-bottom: 1.25em;
     }
 
