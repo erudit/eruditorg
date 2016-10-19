@@ -30,6 +30,7 @@ from core.editor.models import IssueSubmission
 from core.metrics.metric import metric
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
+from .viewmixins import IssueSubmissionContextMixin
 
 from .forms import IssueSubmissionForm
 from .forms import IssueSubmissionTransitionCommentForm
@@ -84,7 +85,8 @@ class IssueSubmissionDetailView(
 
 
 class IssueSubmissionCreate(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
+        LoginRequiredMixin, IssueSubmissionContextMixin,
+        JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionForm
@@ -104,6 +106,7 @@ class IssueSubmissionCreate(
         return context
 
     def get_success_url(self):
+        logger.info('create', extra=self.get_context_info())
         messages.success(self.request, _('La demande a été créé avec succès'))
         return reverse(
             'userspace:journal:editor:update', args=(self.current_journal.pk, self.object.pk, ))
@@ -117,7 +120,8 @@ class IssueSubmissionCreate(
 
 
 class IssueSubmissionUpdate(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
+        LoginRequiredMixin, IssueSubmissionContextMixin,
+        JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
     allow_production_team_access = True
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
@@ -171,6 +175,7 @@ class IssueSubmissionUpdate(
         return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
+        logger.debug('update', self.get_context_info())
         messages.success(self.request, _('La demande a été enregistrée avec succès'))
         return reverse(
             'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
@@ -184,7 +189,8 @@ class IssueSubmissionUpdate(
 
 
 class IssueSubmissionTransitionView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
+        LoginRequiredMixin, IssueSubmissionContextMixin,
+        JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
     allow_production_team_access = True
     context_object_name = 'issue_submission'
@@ -228,6 +234,13 @@ class IssueSubmissionTransitionView(
                 tags={'old_status': old_status, 'new_status': self.object.status},
                 author_id=self.request.user.id, submission_id=self.object.id)
 
+        logger.debug(
+            '{old_status} -> {new_status}'.format(
+                old_status=old_status,
+                new_status=self.object.status
+            ),
+            extra=self.get_context_info()
+        )
         # Send a signal in order to notify the update of the issue submission's status
         self.transition_signal.send(
             sender=self, issue_submission=self.object, transition_name=self.transition_name,
@@ -335,7 +348,8 @@ class IssueSubmissionDeleteView(
 
 
 class IssueSubmissionAttachmentView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, DetailView):
+        LoginRequiredMixin, IssueSubmissionContextMixin,
+        JournalScopePermissionRequiredMixin, DetailView):
     """
     Returns an IssueSubmission attachment.
     """
@@ -351,7 +365,7 @@ class IssueSubmissionAttachmentView(
         except FileNotFoundError:  # noqa
             # The feed is not available.
             logger.error('Resumable file not found: {}'.format(self.object.path),
-                         exc_info=True, extra={'request': self.request, })
+                         exc_info=True, extra=self.get_context_info())
             raise Http404
 
         # Try to guess the content type of the given file
