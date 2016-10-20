@@ -8,7 +8,7 @@
 
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'public:auth:login' %}">{% trans "Connexion" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
 {% if request.is_ajax %}
@@ -106,4 +106,4 @@
   </div>
 </main>
 {% endif %}
-{% endblock %}
+{% endblock content %}

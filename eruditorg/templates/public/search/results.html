@@ -10,7 +10,7 @@
 
 {% block breadcrumb %}
 {{ block.super }} / <a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
 <section id="search-results">

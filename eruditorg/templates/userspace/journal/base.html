@@ -34,12 +34,12 @@
       <li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
       {% block breadcrumb_end %}{% endblock breadcrumb_end %}
     </ul>
-    {% endblock %}
+    {% endblock breadcrumbs %}
   </div>
   <div class="messages-wrapper">
     {% include "partials/messages.html" %}
   </div>
   {% block content_main %}
-  {% endblock %}
+  {% endblock content_main %}
 </div>
-{% endblock %}
+{% endblock content %}

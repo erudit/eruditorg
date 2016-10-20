@@ -107,9 +107,9 @@
 </script>
 {% endblock structured_data %}
 
-{% block body_class %}public static-header{% endblock %}
+{% block body_class %}public static-header{% endblock body_class %}
 
-{% block header_class %}static{% endblock %}
+{% block header_class %}static{% endblock header_class %}
 
 {% block breadcrumb %}{{ block.super }}
   / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
@@ -121,7 +121,7 @@
    {% endif %}
   </a>
   / <a href="{% url 'public:journal:article_summary' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{% blocktrans with title=article.title|truncatechars:50 %}{{ title }} - Résumé{% endblocktrans %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
 

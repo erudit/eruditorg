@@ -48,7 +48,7 @@
 
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Auteurs" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block inner_main %}
 <main role="main" class="col-sm-9 col-md-8">
@@ -115,4 +115,4 @@
 </main>
 {% endblock inner_main %}
 
-{% block aside_authors_list %}{% endblock %}
+{% block aside_authors_list %}{% endblock aside_authors_list %}

@@ -28,11 +28,11 @@
 {% endif %}
 {% endblock stylesheets %}
 
-{% block body_class %}public fixed-header{% endblock %}
+{% block body_class %}public fixed-header{% endblock body_class %}
 
 {# public page header #}
 {% block header %}
-<header id="site-header" class="{% block header_class %}fixed{% endblock %} clearfix">
+<header id="site-header" class="{% block header_class %}fixed{% endblock header_class %} clearfix">
   <nav>
     <div class="container-fluid">
       <div class="navbar-header">
@@ -137,7 +137,7 @@
               </form>
             </div>
           </li>
-          {% endblock %}
+          {% endblock mainnav %}
         </ul>
       </div>
     </div>
@@ -149,13 +149,13 @@
     <div class="row">
       <div class="col-xs-12">
         <p class="no-margin">
-          <a href="/">Érudit</a> {% block breadcrumb %}{% endblock %}
+          <a href="/">Érudit</a> {% block breadcrumb %}{% endblock breadcrumb %}
         </p>
       </div>
     </div>
   </div>
 </nav>
-{% endblock %}
+{% endblock header %}
 
 {% block body %}
 <div class="container">

@@ -32,12 +32,12 @@
       <li><a href="{% url 'userspace:library:home' organisation_pk=scope_current_organisation.pk %}">{{ scope_current_organisation.name }}</a></li>
       {% block breadcrumb_end %}{% endblock breadcrumb_end %}
     </ul>
-    {% endblock %}
+    {% endblock breadcrumbs %}
   </div>
   <div class="messages-wrapper">
     {% include "partials/messages.html" %}
   </div>
   {% block content_main %}
-  {% endblock %}
+  {% endblock content_main %}
 </div>
-{% endblock %}
+{% endblock content %}
