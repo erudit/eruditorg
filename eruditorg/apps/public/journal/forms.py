@@ -4,6 +4,7 @@ from itertools import groupby
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 from erudit.models import Journal
 
 
@@ -23,8 +24,7 @@ class JournalListFilterForm(forms.Form):
             key=lambda t: t.name)
         journal_collections = sorted(
             set([c[0] for c in groupby(journals, key=lambda j: j.collection) if c[0]]),
-            key=lambda c: c.name)
-
+            key=lambda c: slugify(c.name))
         # Updates some fields
         self.fields['types'].choices = [(t.code, t.name) for t in journal_types]
         self.fields['collections'].choices = [(c.code, c.name) for c in journal_collections]
