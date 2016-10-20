@@ -52,18 +52,24 @@ class Affiliation(models.Model):
 
 
 class Collection(models.Model):
-    """ A collection of journales or theses.
+    """ A collection of journals or theses.
 
     Set of :py:class:`Journals <erudit.models.core.Journal>` for which a partner
     provides digital publishing services """
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name=_('Nom'))
     """ The name of the collection """
 
-    code = models.CharField(max_length=10, unique=True)
+    code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
     """ The code of the collection. It should be unique. """
 
-    localidentifier = models.CharField(max_length=10, blank=True, null=True)
+    localidentifier = models.CharField(
+        max_length=10,
+        verbose_name=_('Identifiant Fedora'),
+        help_text=_('Identifiant Fedora du fonds'),
+        blank=True,
+        null=True
+    )
     """ The localidentifier of the collection in Fedora """
 
     logo = models.ImageField(verbose_name=_('Logo'), blank=True, null=True)
@@ -75,9 +81,10 @@ class Collection(models.Model):
         default=False,
     )
     """ Main collections are hosted on Érudit """
+
     class Meta:
-        verbose_name = _('Collection')
-        verbose_name_plural = _('Collections')
+        verbose_name = _('Fond')
+        verbose_name_plural = _('Fonds')
 
     def __str__(self):
         return self.name

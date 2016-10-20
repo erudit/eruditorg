@@ -15,9 +15,11 @@ from ..models import Publisher
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('code', 'name', )
     fieldsets = [
-        ('Collection', {
+        ('Identification', {
             'fields': (
-                ('name', 'code', 'localidentifier', 'logo', )
+                ('name', 'is_main_collection',),
+                ('code', 'localidentifier',),
+                ('logo', ),
             )
         }),
     ]
