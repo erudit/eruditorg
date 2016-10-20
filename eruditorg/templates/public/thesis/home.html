@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Thèses" %}{% endblock page_title %}
+{% block title %}{% trans "Thèses" %}{% endblock title %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -29,6 +29,7 @@
 {% endblock structured_data %}
 
 {% block body_class %}{{ block.super }} thesis_home{% endblock body_class %}
+{% block body_id %}thesis_home{% endblock body_id %}
 {% block data_controller %}public:thesis:thesis_home{% endblock data_controller %}
 
 {% block breadcrumb %}
@@ -36,7 +37,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div id="thesis_home">
+<main role="main">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
@@ -103,5 +104,5 @@
     </div>
 
   </div>
-</div>
+</main>
 {% endblock content %}

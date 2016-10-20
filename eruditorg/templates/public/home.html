@@ -3,7 +3,7 @@
 {% load static %}
 {% load cache %}
 
-{% block page_title %}{% trans "Accueil" %}{% endblock page_title %}
+{% block title %}{% trans "Cultivez votre savoir" %}{% endblock title %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -40,15 +40,15 @@
 <link rel="stylesheet" href="{% static 'css/videojs.css' %}" />
 {% endblock extrahead %}
 
+{% block body_id %}homepage{% endblock body_id %}
 {% block data_controller %}public:home{% endblock data_controller %}
-{% block body_class %}{{ block.super }} home{% endblock %}
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
-<div id="homepage-content">
-  <h1 class="hidden">{% trans "Accueil d’Érudit" %}</h1>
-
+<main role="main">
+  <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
   {% cache LONG_TTL "public_home_head" LANGUAGE_CODE %}
+  <!-- SEARCH PUBLICATIONS -->
   <section class="glory">
     <div class="container">
       <div class="row">
@@ -69,7 +69,7 @@
                 <input name="basic_search_term" id="basic-search" type="search" class="form-control" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
                 <div class="input-group-addon">
                   <button type="submit" class="btn">
-                    <span class="hidden">{% trans "Rechercher" %}</span>
+                    <span class="sr-only">{% trans "Rechercher" %}</span>
                     <span class="ion ion-ios-search-strong"></span>
                   </button>
                 </div>
@@ -104,7 +104,6 @@
     </div>
   </section>
   {% endcache %}
-
 
   <!-- LATEST ISSUES -->
   {% cache LONG_TTL "public_home_latest_issues" LANGUAGE_CODE %}
@@ -151,7 +150,6 @@
   {% endif %}
   {% endcache %}
 
-
   <!-- NEWS -->
   {% cache SHORT_TTL "public_home_news" LANGUAGE_CODE %}
   <section class="container news">
@@ -180,7 +178,6 @@
     </div>
   </section>
   {% endcache %}
-
 
   <!-- ABOUT ERUDIT.ORG -->
   <section class="container">
@@ -232,8 +229,7 @@
       </div>
     </div>
   </section>
-
-</div>
+</main>
 {% endblock content %}
 
 {% block footerscript %}

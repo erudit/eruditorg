@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% block page_title %}{% endblock %}{% endblock title %} – Érudit</title>
+    <title>{% block title %}{% endblock title %} – Érudit</title>
     <meta name="description" content="{% blocktrans %}Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, littérature grise.{% endblocktrans %}">
 
     <!-- Android -->
@@ -43,23 +43,16 @@
     <meta name="msapplication-wide310x150logo" content="{% static 'img/favicon/mstile-310x150.png' %}" />
     <meta name="msapplication-square310x310logo" content="{% static 'img/favicon/mstile-310x310.png' %}" />
 
-    {% block meta_tags %}
-    {% endblock meta_tags %}
-
-    {% block structured_data %}
-    {% endblock structured_data %}
-
-    {% block stylesheets %}
-    {% endblock stylesheets %}
+    {% block meta_tags %}{% endblock meta_tags %}
+    {% block structured_data %}{% endblock structured_data %}
+    {% block stylesheets %}{% endblock stylesheets %}
 
     <script>
       var LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
     </script>
-
     <script src="{% static 'js/modernizr.js' %}"></script>
 
-    {% block extrahead %}
-    {% endblock extrahead %}
+    {% block extrahead %}{% endblock extrahead %}
   </head>
   <body
       id="{% block body_id %}id_body{% endblock body_id %}"
@@ -69,26 +62,20 @@
       {% block body_data_attributes %}{% endblock body_data_attributes %}
     >
 
-    {% block header %}
-    {% endblock header %}
-    {% block nav %}
-    {% endblock nav %}
+    {% block header %}{% endblock header %}
+    {% block nav %}{% endblock nav %}
 
     {% block body %}
-    {% block content %}
-    {% endblock content%}
+    {% block content %}{% endblock content %}
+    {% block aside %}{% endblock aside %}
     {% endblock body %}
 
-    {% block footer %}
-    {% endblock footer %}
+    {% block footer %}{% endblock footer %}
 
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script type="text/javascript" src="{% url 'js_reverse' %}"></script>
-    {% block scripts %}
-    {% endblock scripts %}
+    {% block scripts %}{% endblock scripts %}
 
-    {% block footerscript %}
-    {% endblock footerscript %}
-
+    {% block footerscript %}{% endblock footerscript %}
   </body>
 </html>

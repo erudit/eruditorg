@@ -16,18 +16,19 @@
     "https://www.facebook.com/%C3%89rudit-141469165320/",
     "https://twitter.com/eruditorg",
     "https://github.com/erudit/",
-    "https://www.linkedin.com/company/3628951"]
-  }
-  </script>
-  {% endblock structured_data %}
+    "https://www.linkedin.com/company/3628951"
+  ]
+}
+</script>
+{% endblock structured_data %}
 
-  {% block stylesheets %}
-  {% if not WEBPACK_DEV_SERVER_URL %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
-  {% endif %}
-  {% endblock stylesheets %}
+{% block stylesheets %}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
-  {% block body_class %}public fixed-header{% endblock %}
+{% block body_class %}public fixed-header{% endblock %}
 
 {# public page header #}
 {% block header %}
@@ -142,7 +143,6 @@
     </div>
   </nav>
 </header>
-
 <nav id="breadcrumb" class="container-fluid">
   <h2 class="hidden">{% trans "Fil d'Ariane" %}</h2>
   <div class="container">
@@ -165,9 +165,7 @@
     </div>
   </div>
 </div>
-<main role="main">
-  {% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
-</main>
+{% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
 {% endblock body %}
 
 {% block footer %}

@@ -1,11 +1,7 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n staticfiles cache %}
 
-{% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
-
-{% block page_title %}{{ journal.name }}{% endblock page_title %}
-
-{% block body_id %}journal_detail{% endblock body_id %}
+{% block title %}{{ journal.name }}{% endblock title %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -55,8 +51,11 @@
 </script>
 {% endblock structured_data %}
 
+{% block body_id %}journal_detail{% endblock body_id %}
+{% block data_controller %}public:journal:journal_detail{% endblock data_controller %}
+
 {% block inner_main %}
-<div id="journal-about" class="col-sm-9 col-md-8">
+<main role="main" class="col-sm-9 col-md-8">
   <header class="page-header-main row">
     <div class="col-sm-12">
       <h1>
@@ -65,7 +64,6 @@
       </h1>
     </div>
   </header>
-
   {% if journal_info %}
   <div class="journal-infos" role="tablist" aria-multiselectable="true">
 
@@ -145,8 +143,7 @@
 
   </div>
   {% endif %}
-
-</div>
+</main>
 {% endblock inner_main %}
 
 {% block inner_footer %}
@@ -154,13 +151,11 @@
 {% if issues %}
 <section id="back-issues" class="back-issues">
   <div class="container">
-
     <div class="row">
       <header class="back-issues--header col-xs-12">
         <h2>{% trans "Historique des numéros" %}&nbsp;({{ issues|length }})</h2>
       </header>
     </div>
-
     <div class="row">
       {% regroup issues|dictsortreversed:"year" by year as year_list %}
       <ul class="year-list col-xs-12">
@@ -182,13 +177,11 @@
         {% endfor %}
       </ul>
     </div>
-
     {% if issues|length > 50 %}
     <div class="text-center">
       <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}">|^</a>
     </div>
     {% endif %}
-
   </div>
 </section>
 {% endif %}

@@ -1,7 +1,7 @@
 {% extends "public/auth/base_profile_edit.html" %}
 {% load i18n staticfiles %}
 
-{% block page_title %}{% trans 'Modification du compte' %}{% endblock %}
+{% block title %}{% trans 'Modification du compte' %}{% endblock title %}
 
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'public:auth:parameters' %}">{% trans "Modification du compte" %}</a>

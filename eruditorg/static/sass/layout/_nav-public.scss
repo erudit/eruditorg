@@ -12,6 +12,12 @@
       margin-left: 10px;
       float: none;
 
+      a {
+        &:hover, &:active, &:focus, &:active:focus {
+          background: none;
+        }
+      }
+
       &:first-child {
         margin-left: 0;
       }

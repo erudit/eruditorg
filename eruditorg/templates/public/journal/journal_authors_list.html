@@ -5,8 +5,6 @@
 
 {% block title %}{% trans "Index des auteurs" %} - {{ journal.name }}{% endblock title %}
 
-{% block body_id %}journal_authors_list{% endblock body_id %}
-
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">
@@ -46,12 +44,14 @@
 </script>
 {% endblock structured_data %}
 
+{% block body_id %}journal_authors_list{% endblock body_id %}
+
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Auteurs" %}</a>
 {% endblock %}
 
 {% block inner_main %}
-<div class="col-sm-9 col-md-8">
+<main role="main" class="col-sm-9 col-md-8">
   <header class="page-header-main row">
     <div class="col-xs-12">
       <h1>
@@ -112,7 +112,7 @@
       <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
     </div>
   </div>
-</div>
+</main>
 {% endblock inner_main %}
 
 {% block aside_authors_list %}{% endblock %}

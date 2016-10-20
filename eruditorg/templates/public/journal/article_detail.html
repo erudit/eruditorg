@@ -3,9 +3,7 @@
 {% load public_journal_tags %}
 {% load cache %}
 
-{% block page_title %}{{ article.title }}{% endblock page_title %}
-
-{% block data_controller %}public:journal:article_detail{% endblock data_controller %}
+{% block title %}{{ article.title }}{% endblock title %}
 
 {% block meta_tags %}
 {% cache FOREVER_TTL "public_article_detail_metatags" article.id LANGUAGE_CODE %}
@@ -117,6 +115,7 @@
 {% endblock structured_data %}
 
 {% block body_class %}public static-header{% endblock %}
+{% block data_controller %}public:journal:article_detail{% endblock data_controller %}
 
 {% block header_class %}static{% endblock %}
 
@@ -133,12 +132,12 @@
 {% endblock %}
 
 {% block content %}
-
-<section
+<main
     id="article_detail"
     class="container"
     data-document-id="{{ article.id }}"
     {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
+    role="main"
   >
 
   {% cache FOREVER_TTL "public_article_detail_content" article.id article_access_granted in_citation_list LANGUAGE_CODE %}
@@ -182,7 +181,7 @@
   </footer>
   {% endif %}
 
-</section>
+</main>
 
 {% cache FOREVER_TTL "public_article_detail_citation" article.id LANGUAGE_CODE %}
 <div class="hidden">

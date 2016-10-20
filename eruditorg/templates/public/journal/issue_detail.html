@@ -3,13 +3,7 @@
 {% load staticfiles %}
 {% load cache %}
 
-{% block data_controller %}public:journal:issue_detail{% endblock data_controller %}
-
-{% block zone_title %}{{ journal.name }}{% endblock %}
-
-{% block page_title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock page_title %}
-
-{% block body_id %}issue_detail{% endblock body_id %}
+{% block title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock title %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
@@ -66,6 +60,9 @@
 </script>
 {% endblock structured_data %}
 
+{% block body_id %}issue_detail{% endblock body_id %}
+{% block data_controller %}public:journal:issue_detail{% endblock data_controller %}
+
 {% block breadcrumb %}{{ block.super }}
   / <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
     {% if issue.html_title %}
@@ -86,8 +83,7 @@
 
 {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
 {# Issue summary #}
-<section class="col-sm-9 col-md-8">
-
+<main role="main" class="col-sm-9 col-md-8">
   <header class="page-header-main">
     <p class="title-tag">{{ issue.journal.name }}</p>
     <h1>
@@ -109,7 +105,6 @@
       {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}
     </h2>
   </header>
-
   {% if articles_per_section %}
 
   {% for k, section1 in articles_per_section.items %}
@@ -181,22 +176,19 @@
   </ol>
 
   {% endif %}
-
   <div class="text-center">
     <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
   </div>
-
-</section>
+</main>
 {% endcache %}
 {% endblock inner_main %}
 
 {% block aside_issue %}
+<h2><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a></h2>
 {% if issue.has_coverpage %}
 <div>
-  <a href="{% url 'public:journal:journal_detail' journal.code %}">
-    <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-coverpage" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
+  <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-coverpage" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
     {{ issue.volume_title_with_pages }} {{ journal.name }}" />
-  </a>
 </div>
 {% endif %}
 {% endblock aside_issue %}

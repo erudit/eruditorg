@@ -1,11 +1,11 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block page_title %}
+{% block title %}
 {% blocktrans trimmed with journal=token.content_object.name  %}
   Abonnement à la revue {{ journal }}
 {% endblocktrans %}
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
 <div class="container">
