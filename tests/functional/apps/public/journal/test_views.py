@@ -108,6 +108,16 @@ class TestJournalListView(object):
         assert set(response.context['sorted_objects'][2]['collections'][0]['objects']) == set([
             journal_4, journal_5, journal_6, ])
 
+    def test_only_main_collections_are_shown_by_default(self):
+        collection = CollectionFactory.create()
+        main_collection = CollectionFactory.create(is_main_collection=True)
+        journal1 = JournalFactory.create(collection=collection)
+        journal2 = JournalFactory.create(collection=main_collection)
+        url = reverse('public:journal:journal_list')
+        response = self.client.get(url)
+
+        assert list(response.context['journals']) == [journal2]
+
     def test_can_filter_the_journals_by_open_access(self):
         # Setup
         collection = CollectionFactory.create()
