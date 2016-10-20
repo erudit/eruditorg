@@ -3,49 +3,92 @@
 */
 
 // Utilities
-@import "bootstrap-mixins/hide-text";
-@import "bootstrap-mixins/opacity";
-@import "bootstrap-mixins/image";
-@import "bootstrap-mixins/labels";
-@import "bootstrap-mixins/reset-filter";
-@import "bootstrap-mixins/resize";
-@import "bootstrap-mixins/responsive-visibility";
-@import "bootstrap-mixins/size";
-@import "bootstrap-mixins/tab-focus";
-@import "bootstrap-mixins/reset-text";
-@import "bootstrap-mixins/text-emphasis";
-@import "bootstrap-mixins/text-overflow";
-@import "bootstrap-mixins/vendor-prefixes";
-@import "bootstrap-mixins/clearfix";
-@import "bootstrap-mixins/nav-vertical-align";
-@import "bootstrap-mixins/border-radius";
+@import "../vendor/bootstrap-mixins/hide-text";
+@import "../vendor/bootstrap-mixins/opacity";
+@import "../vendor/bootstrap-mixins/image";
+@import "../vendor/bootstrap-mixins/labels";
+@import "../vendor/bootstrap-mixins/reset-filter";
+@import "../vendor/bootstrap-mixins/resize";
+@import "../vendor/bootstrap-mixins/responsive-visibility";
+@import "../vendor/bootstrap-mixins/size";
+@import "../vendor/bootstrap-mixins/tab-focus";
+@import "../vendor/bootstrap-mixins/reset-text";
+@import "../vendor/bootstrap-mixins/text-emphasis";
+@import "../vendor/bootstrap-mixins/text-overflow";
+@import "../vendor/bootstrap-mixins/vendor-prefixes";
+@import "../vendor/bootstrap-mixins/clearfix";
+@import "../vendor/bootstrap-mixins/nav-vertical-align";
+@import "../vendor/bootstrap-mixins/border-radius";
 
 // Components
-@import "bootstrap-mixins/component-animations.scss";
-@import "bootstrap-mixins/alerts";
-@import "bootstrap-mixins/buttons";
-@import "bootstrap-mixins/panels";
-@import "bootstrap-mixins/pagination";
-@import "bootstrap-mixins/list-group";
-@import "bootstrap-mixins/nav-divider";
-@import "bootstrap-mixins/forms";
-@import "bootstrap-mixins/progress-bar";
-@import "bootstrap-mixins/table-row";
-@import "bootstrap-mixins/navbar";
+@import "../vendor/bootstrap-mixins/component-animations.scss";
+@import "../vendor/bootstrap-mixins/alerts";
+@import "../vendor/bootstrap-mixins/buttons";
+@import "../vendor/bootstrap-mixins/panels";
+@import "../vendor/bootstrap-mixins/pagination";
+@import "../vendor/bootstrap-mixins/list-group";
+@import "../vendor/bootstrap-mixins/nav-divider";
+@import "../vendor/bootstrap-mixins/forms";
+@import "../vendor/bootstrap-mixins/progress-bar";
+@import "../vendor/bootstrap-mixins/table-row";
+@import "../vendor/bootstrap-mixins/navbar";
 
 // Skins
-@import "bootstrap-mixins/background-variant";
-@import "bootstrap-mixins/gradients";
+@import "../vendor/bootstrap-mixins/background-variant";
+@import "../vendor/bootstrap-mixins/gradients";
 
 // Layout
-@import "bootstrap-mixins/center-block";
-@import "bootstrap-mixins/grid-framework";
-@import "bootstrap-mixins/grid";
+@import "../vendor/bootstrap-mixins/center-block";
+@import "../vendor/bootstrap-mixins/grid-framework";
+@import "../vendor/bootstrap-mixins/grid";
 
 
 /**
 * App-specific Mixins
 */
+
+// font styles
+@mixin font-styles($fonf-family) {
+
+  @if $fonf-family == "sans" {
+    @include fw-sans;
+
+    em, i    { @include fw-sans-normal-italic; }
+
+    strong, b  { @include fw-sans-medium; }
+
+    // bold italics
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-sans-medium-italic;
+    }
+
+  }
+
+  @if $fonf-family == "serif" {
+    @include fw-serif-normal;
+
+    em, i    { @include fw-serif-normal-italic; }
+
+    strong, b  { @include fw-serif-bold; }
+
+    // bold italics
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-serif-bold-italic;
+    }
+
+  }
+
+}
 
 // Remove list styles
 @mixin list-unstyled() {

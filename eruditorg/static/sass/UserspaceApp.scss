@@ -2,7 +2,7 @@
 
 // 1. Configuration and helpers
 @import
-  'vars/userspace',
+  'utils/userspace',
   'utils/mixins',
   'utils/utils',
   'utils/responsive-utilities',
@@ -11,15 +11,15 @@
   'utils/erudicon';
 
 // 2. Vendors
-$ionicons-font-path: "~ionicons/fonts";
-@import "~ionicons/scss/ionicons";
-@import "~akkordion/dist/akkordion.css";
-@import "~select2/dist/css/select2";
+$ionicons-font-path: '~ionicons/fonts';
+@import '~ionicons/scss/ionicons',
+  '~akkordion/dist/akkordion.css',
+  '~hint.css/hint.base.css',
+  '~select2/dist/css/select2',
+  'vendor/normalize';
 
 // 3. Base stuff
 @import
-  'base/normalize',
-  'base/scaffolding',
   'base/grid',
   'base/base',
   'base/fonts',

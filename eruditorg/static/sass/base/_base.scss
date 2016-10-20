@@ -5,24 +5,90 @@
 /**
  * Set up a decent box model on the root element
  */
-html {
-  box-sizing: border-box;
+ html {
+   box-sizing: border-box;
+ }
+
+/** Reset the box-sizing
+ * Heads up! This reset may cause conflicts with some third-party widgets.
+ * For recommendations on resolving such conflicts, see
+ * http://getbootstrap.com/getting-started/#third-box-sizing
+*/
+* {
+  @include box-sizing(border-box);
+}
+*:before,
+*:after {
+  @include box-sizing(border-box);
 }
 
-/**
- * Make all elements from the DOM inherit from the parent box-sizing
- * Since `*` has a specificity of 0, it does not override the `html` value
- * making all elements inheriting from the root box-sizing value
- * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ /**
+ * Body reset
  */
-*, *::before, *::after {
-  // Actually, prefer the border-box model from bootstrap, TODO: discuss
-  // box-sizing: inherit;
-}
-
 body {
   background: $body-bg;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $body-bg;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Reset fonts for relevant elements
+ */
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+/** We reset this here because previously Normalize had no `figure` margins.
+ * This ensures we don't break anyone's use of the element.
+ */
+figure {
+  margin: 0;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &:focus {
+    @include tab-focus;
+  }
+}
+
+img {
+  vertical-align: middle;
+}
+
+hr {
+  margin-top:    $line-height-computed;
+  margin-bottom: $line-height-computed;
+  border: 0;
+  border-top: 1px solid $hr-border;
+}
+
+/**
+ * iOS "clickable elements" fix for role="button"
+ * Fixes "clickability" issue (and more generally, the firing of events such as focus as well)
+ * for traditionally non-focusable elements with role="button"
+ * see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+*/
+[role="button"] {
+  cursor: pointer;
 }

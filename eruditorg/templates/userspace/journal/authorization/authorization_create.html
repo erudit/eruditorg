@@ -13,7 +13,7 @@
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
   <h1>{% trans "Ajouter un accès" %}</h1>
-  <p class="lead">
+  <p>
     {% blocktrans trimmed with authorization_label=authorization_label %}
       Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : <strong>{{ authorization_label }}</strong>
     {% endblocktrans %}

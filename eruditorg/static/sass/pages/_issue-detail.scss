@@ -60,7 +60,7 @@
   }
 
   .issue_detail--articles {
-    
+
     &.section-2{
       margin-left: 20px;
     }
@@ -86,12 +86,7 @@
         padding-right: 65px;
         font-size: 1.15em;
         line-height: 1.25;
-        @include fw-serif-normal;
-
-        i, em {
-          @include fw-serif-normal-italic;
-        }
-
+        @include font-styles(serif);
       }
 
       .article-metadata {

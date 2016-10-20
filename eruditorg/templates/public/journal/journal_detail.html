@@ -160,7 +160,7 @@
       {% regroup issues|dictsortreversed:"year" by year as year_list %}
       <ul class="year-list col-xs-12">
         {% for year in year_list %}
-        <li class="year-list--item"><h4 class="mono-space">{{ year.grouper }}</h4>
+        <li class="year-list--item"><h4>{{ year.grouper }}</h4>
           <ul class="issue-list">
             {% for issue in year.list %}
             {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id user_has_access_to_journal LANGUAGE_CODE %}
