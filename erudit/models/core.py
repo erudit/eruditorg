@@ -69,6 +69,12 @@ class Collection(models.Model):
     logo = models.ImageField(verbose_name=_('Logo'), blank=True, null=True)
     """ The logo that can be associated with a specific collection. """
 
+    is_main_collection = models.BooleanField(
+        verbose_name=_('Fonds primaire'),
+        help_text=_('Les fonds primaires sont hébergés en partie ou en totalité par Érudit'),
+        default=False,
+    )
+    """ Main collections are hosted on Érudit """
     class Meta:
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
