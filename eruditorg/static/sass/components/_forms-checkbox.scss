@@ -51,7 +51,7 @@ $check-icon: $fa-var-check !default;
       height: 17px;
       left: 0;
       margin-left: -20px;
-      border: 1px solid $gray-base;
+      border: 1px solid #000;
       background-color: #fff;
       @include transition(border 0.15s, color 0.15s);
     }
@@ -67,7 +67,7 @@ $check-icon: $fa-var-check !default;
       padding-left: 3px;
       padding-top: 1px;
       font-size: 11px;
-      color: $input-color;
+      color: $dark-grey;
     }
   }
 
@@ -117,22 +117,10 @@ $check-icon: $fa-var-check !default;
 }
 
 @include checkbox-variant('.checkbox', $coral-red);
-@include checkbox-variant('.checkbox-primary', $coral-red);
-@include checkbox-variant('.checkbox-danger', $brand-danger);
-@include checkbox-variant('.checkbox-info', $brand-info);
-@include checkbox-variant('.checkbox-warning', $brand-warning);
-@include checkbox-variant('.checkbox-success', $brand-success);
-
-
 @include checkbox-variant-indeterminate('.checkbox', $coral-red);
-@include checkbox-variant-indeterminate('.checkbox-primary', $coral-red);
-@include checkbox-variant-indeterminate('.checkbox-danger', $brand-danger);
-@include checkbox-variant-indeterminate('.checkbox-info', $brand-info);
-@include checkbox-variant-indeterminate('.checkbox-warning', $brand-warning);
-@include checkbox-variant-indeterminate('.checkbox-success', $brand-success);
 
 //
-// Radios
+// Radio buttons
 // --------------------------------------------------
 
 @mixin radio-variant($parent, $color) {
@@ -186,7 +174,7 @@ $check-icon: $fa-var-check !default;
       top: 3px;
       margin-left: -20px;
       border-radius: 50%;
-      background-color: $input-color;
+      background-color: $dark-grey;
       @include scale(0, 0);
 
       @include transition-transform(.1s cubic-bezier(.8,-0.33,.2,1.33));
@@ -222,12 +210,6 @@ $check-icon: $fa-var-check !default;
 }
 
 @include radio-variant('.radio', $coral-red);
-@include radio-variant('.radio-primary', $coral-red);
-@include radio-variant('.radio-danger', $brand-danger);
-@include radio-variant('.radio-info', $brand-info);
-@include radio-variant('.radio-warning', $brand-warning);
-@include radio-variant('.radio-success', $brand-success);
-
 
 input[type="checkbox"],
 input[type="radio"] {

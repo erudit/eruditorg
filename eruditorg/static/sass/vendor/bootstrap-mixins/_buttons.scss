@@ -61,5 +61,5 @@
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   line-height: $line-height;
-  @include border-radius($border-radius);
+  border-radius: $border-radius;
 }

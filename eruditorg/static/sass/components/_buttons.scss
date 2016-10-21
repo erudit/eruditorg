@@ -70,29 +70,29 @@ a.btn {
 
 // with coral-red as bg
 .btn-primary {
-  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+  @include button-variant($btn-primary-color, $coral-red, $coral-red);
   text-decoration: none;
   &:hover, &:active, &:focus, &:focus:active {
-    color: $btn-primary-bg;
+    color: $coral-red;
     background-color: $btn-primary-color;
-    border-color: $btn-primary-bg;
+    border-color: $coral-red;
     background-image: none;
   }
 }
 
 // coral-red outline only
 .btn-secondary {
-  @include button-variant($brand-primary, transparent, $brand-primary);
+  @include button-variant($coral-red, transparent, $coral-red);
   &:hover, &:active, &:focus, &:focus:active {
     color: $btn-primary-color;
-    background-color: $btn-primary-bg;
-    border-color: $btn-primary-bg;
+    background-color: $coral-red;
+    border-color: $coral-red;
     background-image: none;
   }
 }
 
 .btn-dark {
-  @include button-variant(#fff, $gray-base, transparent);
+  @include button-variant(#fff, #000, transparent);
 }
 
 // Link buttons

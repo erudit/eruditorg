@@ -1,6 +1,6 @@
-/**
-* Font-weight functions
-*/
+// -----------------------------------------------------------------------------
+// Font weight mixins
+// -----------------------------------------------------------------------------
 
 @mixin fw-sans-normal() {
   font-family: $font-family-sans-serif-regular;

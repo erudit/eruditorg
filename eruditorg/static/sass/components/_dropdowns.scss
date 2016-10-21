@@ -66,7 +66,7 @@
     cursor: pointer;
     display: block;
     padding: ($grid-gutter-width / 2) ($grid-gutter-width);
-    border: 1px solid $gray-base;
+    border: 1px solid #000;
     @include fw-sans-bold();
     background-color: #fff;
     .caret {
@@ -94,11 +94,11 @@
 
     a {
       padding: ($grid-gutter-width / 2) ($grid-gutter-width);
-      border: 1px solid $gray-base;
+      border: 1px solid #000;
       border-top: none;
       display: block;
       &:hover {
-        background-color: $gray-base;
+        background-color: #000;
         color: #fff;
         text-decoration: none;
       }
@@ -107,10 +107,10 @@
 
   &:hover {
     > a {
-      background-color: $gray-base !important;
+      background-color: #000 !important;
       color: #fff !important;
       text-decoration: none;
-      border-color: $gray-base !important;
+      border-color: #000 !important;
       span {
         @include rotate(180deg);
         margin-top: -5px;
@@ -129,7 +129,7 @@
     > a.select {
       display: block;
       padding: ($grid-gutter-width / 4) ($grid-gutter-width/2);
-      border: 2px solid $gray-mid;
+      border: 2px solid $mid-grey;
       @include fw-sans-normal();
       i.caret {
         float: right;

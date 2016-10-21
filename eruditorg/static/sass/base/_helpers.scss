@@ -3,12 +3,19 @@
 // -----------------------------------------------------------------------------
 
 /**
- * Clear inner floats
+ * Floats
  */
-.clearfix::after {
-  clear: both;
-  content: '';
-  display: table;
+.clearfix {
+  @include clearfix;
+}
+.center-block {
+  @include center-block;
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
 }
 
 /**
@@ -46,11 +53,11 @@
  * Image thumbnails
  */
 .img-thumbnail {
-  padding: $thumbnail-padding;
+  padding: 1em;
   line-height: $line-height-base;
-  background-color: $thumbnail-bg;
-  border: 1px solid $thumbnail-border;
-  border-radius: $thumbnail-border-radius;
+  background-color: #FFF;
+  border: 1px solid $mid-grey;
+  border-radius: 0;
   @include transition(all .2s ease-in-out);
 
   // Keep them at most 100% wide
@@ -109,6 +116,26 @@
 }
 
 /**
+ * Toggling content
+ */
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.text-hide {
+  @include text-hide;
+}
+
+/**
+ * Hide from screen readers and browsers
+ */
+.hidden {
+  display: none !important;
+}
+
+/**
  * Unstyle a list element
  */
 ul, ol {
@@ -121,4 +148,11 @@ ul, ol {
       padding: 0;
     }
   }
+}
+
+/**
+ * Affix plugin
+ */
+.affix {
+  position: fixed;
 }

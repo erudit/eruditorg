@@ -1,6 +1,7 @@
-/**
-* Main Erudit Public site nav
-*/
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the public main navigation
+// -----------------------------------------------------------------------------
+
 #main-nav {
 
   .navbar-nav {
@@ -66,7 +67,7 @@
     &:active,
     &:focus,
     &.selected {
-      color: $brand-primary;
+      color: $coral-red;
       text-decoration: none;
     }
 
@@ -139,7 +140,7 @@
     right: 0;
     top: 50%;
     @include translate(0,-50%);
-    background: $brand-primary;
+    background: $coral-red;
     pointer-events: none;
     @include opacity(0);
     width: 100%;
