@@ -3,11 +3,11 @@ ul#id_member_list{
 
   li{
     padding: 0;
-    background: $gray-lighter;
+    background: $light-grey;
 
     &:hover, &:focus{
       text-decoration: none;
-      background: darken($gray-lighter, 2%);
+      background: darken($light-grey, 2%);
     }
 
     div.content-wrapper{

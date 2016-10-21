@@ -92,7 +92,7 @@
         li {
           margin: 0;
           padding: 15px 0;
-          border-bottom: 1px solid darken($gray-lighter, 5%);
+          border-bottom: 1px solid darken($light-grey, 5%);
 
           .document-checkbox-wrapper {
             float: left;
@@ -117,7 +117,7 @@
               vertical-align: middle;
 
               &:hover, &:focus {
-                background: $brand-primary;
+                background: $coral-red;
               }
 
               .erudicon-tools-pdf {

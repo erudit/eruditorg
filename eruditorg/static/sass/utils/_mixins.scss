@@ -1,56 +1,57 @@
-/**
-* Import Bootstrap's mixins
-*/
+// -----------------------------------------------------------------------------
+// Import Bootstrap mixins
+// -----------------------------------------------------------------------------
 
 // Utilities
-@import "../vendor/bootstrap-mixins/hide-text";
-@import "../vendor/bootstrap-mixins/opacity";
-@import "../vendor/bootstrap-mixins/image";
-@import "../vendor/bootstrap-mixins/labels";
-@import "../vendor/bootstrap-mixins/reset-filter";
-@import "../vendor/bootstrap-mixins/resize";
-@import "../vendor/bootstrap-mixins/responsive-visibility";
-@import "../vendor/bootstrap-mixins/size";
-@import "../vendor/bootstrap-mixins/tab-focus";
-@import "../vendor/bootstrap-mixins/reset-text";
-@import "../vendor/bootstrap-mixins/text-emphasis";
-@import "../vendor/bootstrap-mixins/text-overflow";
-@import "../vendor/bootstrap-mixins/vendor-prefixes";
-@import "../vendor/bootstrap-mixins/clearfix";
-@import "../vendor/bootstrap-mixins/nav-vertical-align";
-@import "../vendor/bootstrap-mixins/border-radius";
+@import
+  '../vendor/bootstrap-mixins/hide-text',
+  '../vendor/bootstrap-mixins/opacity',
+  '../vendor/bootstrap-mixins/image',
+  '../vendor/bootstrap-mixins/labels',
+  '../vendor/bootstrap-mixins/reset-filter',
+  '../vendor/bootstrap-mixins/resize',
+  '../vendor/bootstrap-mixins/responsive-visibility',
+  '../vendor/bootstrap-mixins/size',
+  '../vendor/bootstrap-mixins/tab-focus',
+  '../vendor/bootstrap-mixins/reset-text',
+  '../vendor/bootstrap-mixins/text-emphasis',
+  '../vendor/bootstrap-mixins/text-overflow',
+  '../vendor/bootstrap-mixins/vendor-prefixes',
+  '../vendor/bootstrap-mixins/clearfix',
+  '../vendor/bootstrap-mixins/nav-vertical-align',
+  '../vendor/bootstrap-mixins/border-radius';
 
 // Components
-@import "../vendor/bootstrap-mixins/component-animations.scss";
-@import "../vendor/bootstrap-mixins/alerts";
-@import "../vendor/bootstrap-mixins/buttons";
-@import "../vendor/bootstrap-mixins/panels";
-@import "../vendor/bootstrap-mixins/pagination";
-@import "../vendor/bootstrap-mixins/list-group";
-@import "../vendor/bootstrap-mixins/nav-divider";
-@import "../vendor/bootstrap-mixins/forms";
-@import "../vendor/bootstrap-mixins/progress-bar";
-@import "../vendor/bootstrap-mixins/table-row";
-@import "../vendor/bootstrap-mixins/navbar";
+@import
+  '../vendor/bootstrap-mixins/alerts',
+  '../vendor/bootstrap-mixins/buttons',
+  '../vendor/bootstrap-mixins/panels',
+  '../vendor/bootstrap-mixins/pagination',
+  '../vendor/bootstrap-mixins/nav-divider',
+  '../vendor/bootstrap-mixins/forms',
+  '../vendor/bootstrap-mixins/progress-bar',
+  '../vendor/bootstrap-mixins/table-row';
 
 // Skins
-@import "../vendor/bootstrap-mixins/background-variant";
-@import "../vendor/bootstrap-mixins/gradients";
+@import
+  '../vendor/bootstrap-mixins/background-variant',
+  '../vendor/bootstrap-mixins/gradients';
 
 // Layout
-@import "../vendor/bootstrap-mixins/center-block";
-@import "../vendor/bootstrap-mixins/grid-framework";
-@import "../vendor/bootstrap-mixins/grid";
+@import
+  '../vendor/bootstrap-mixins/center-block',
+  '../vendor/bootstrap-mixins/grid-framework',
+  '../vendor/bootstrap-mixins/grid';
 
 
-/**
-* App-specific Mixins
-*/
+// -----------------------------------------------------------------------------
+// App-specific mixins
+// -----------------------------------------------------------------------------
 
 // font styles
 @mixin font-styles($fonf-family) {
 
-  @if $fonf-family == "sans" {
+  @if $fonf-family == 'sans' {
     @include fw-sans;
 
     em, i    { @include fw-sans-normal-italic; }
@@ -69,7 +70,7 @@
 
   }
 
-  @if $fonf-family == "serif" {
+  @if $fonf-family == 'serif' {
     @include fw-serif-normal;
 
     em, i    { @include fw-serif-normal-italic; }
@@ -191,12 +192,12 @@
 /**
 * Create a top or bottom border for Bootstrap's grid cell
 */
-@mixin grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $gray-base) {
+@mixin grid-cell-border($direction: 'top', $border-width: 1px, $border-color: #000) {
   position: relative;
 
   @if $direction == 'top' {
     &:before {
-      content: "";
+      content: '';
       display: block;
       height: 1px;
       border-top: $border-width solid $border-color;
@@ -209,7 +210,7 @@
 
   @if $direction == 'bottom' {
     &:after {
-      content: "";
+      content: '';
       display: block;
       height: 1px;
       border-top: $border-width solid $border-color;

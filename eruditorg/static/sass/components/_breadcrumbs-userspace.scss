@@ -17,7 +17,7 @@
 			}
 
 			&:last-child {
-		    color: $gray-base;
+		    color: #000;
 		    @include fw-sans-bold();
 				&:after {
 					content: none;
