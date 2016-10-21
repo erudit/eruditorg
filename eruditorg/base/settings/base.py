@@ -218,8 +218,11 @@ LANGUAGES = (
 TIME_ZONE = 'EST'
 
 USE_I18N = True
-
 USE_L10N = True
+
+LOCALE_PATHS = (
+    str(ROOT_DIR / 'locale'),
+)
 
 USE_TZ = True
 

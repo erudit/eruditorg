@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[eruditorg.eruditorg]
+file_filter = locale/<lang>/LC_MESSAGES/django.po
+source_file = locale/fr/LC_MESSAGES/django.po
+source_lang = fr
+type = PO
+
