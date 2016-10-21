@@ -24,4 +24,4 @@ class TestTransCurrentUrlTag(TestCase):
         # Run
         rendered = t.render(c)
         # Check
-        self.assertEqual(rendered, '/en/revues/')
+        self.assertEqual(rendered, '/en/journals/')
