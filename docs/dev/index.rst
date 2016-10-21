@@ -15,4 +15,5 @@ Référence de développement
         emails
         backends
         frontend
+        internationalisation
         a11y
