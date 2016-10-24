@@ -18,6 +18,7 @@ from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalTypeFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueContributorFactory
+from erudit.test.factories import IssueThemeFactory
 
 
 class TestJournal(BaseEruditTestCase):
@@ -316,6 +317,18 @@ class TestIssue(BaseEruditTestCase):
     def test_knows_its_editors(self):
         contributor = IssueContributorFactory(issue=self.issue, is_editor=True)
         assert contributor in self.issue.get_editors()
+
+    def test_can_return_its_name_with_themes(self):
+        theme1 = IssueThemeFactory(issue=self.issue)
+        assert self.issue.name_with_themes == "{html_name}: {html_subname}".format(
+            html_name=theme1.html_name, html_subname=theme1.html_subname
+        )
+
+        theme2 = IssueThemeFactory(issue=self.issue)
+        assert self.issue.name_with_themes == "{html_name}: {html_subname} / {html_name2}: {html_subname2}".format(  # noqa
+            html_name=theme1.html_name, html_subname=theme1.html_subname,
+            html_name2=theme2.html_name, html_subname2=theme2.html_subname,
+        )
 
 
 class TestIssueContributor(BaseEruditTestCase):

@@ -453,6 +453,26 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 else False
         return False
 
+    @property
+    def name_with_themes(self):
+        def _format_theme(theme):
+            if theme.html_subname:
+                return "{html_name}: {html_subname}".format(
+                    html_name=theme.html_name,
+                    html_subname=theme.html_subname
+                )
+            return theme.html_name
+        themes = list(self.themes.all())
+        if len(themes) > 1:
+            first_theme = themes.pop(0)
+            return "{first_theme} / {themes}".format(
+                first_theme=_format_theme(first_theme),
+                themes=",".join(_format_theme(theme) for theme in themes)
+            )
+        if len(themes) == 1:
+            return _format_theme(themes.pop())
+        return self.title
+
 
 class IssueContributor(models.Model):
     """ A contributor of an issue """
