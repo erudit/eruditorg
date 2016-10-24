@@ -1,23 +1,29 @@
+// -----------------------------------------------------------------------------
+// Import partials for userspace app
+// Always sort partials in alphabetical order, except for base directory
+// -----------------------------------------------------------------------------
+
 @charset 'UTF-8';
 
 // 1. Configuration and helpers
 @import
-  'utils/mixins',
-  'utils/functions',
-  'utils/font-styles',
-  'utils/sprite',
   'utils/colours',
+  'utils/font-styles',
+  'utils/functions',
+  'utils/mixins',
+  'utils/sprite',
   'utils/variables';
 
 // 2. Vendors
 $ionicons-font-path: '~ionicons/fonts';
-@import '~ionicons/scss/ionicons',
+@import
   '~akkordion/dist/akkordion.css',
   '~hint.css/hint.base.css',
+  '~ionicons/scss/ionicons',
   '~select2/dist/css/select2',
   'vendor/normalize';
 
-// 3. Base stuff
+// 3. Base stuff (do not sort in alphabetical order)
 @import
   'base/grid',
   'base/base',
@@ -29,45 +35,44 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 4. Layout-related sections
 @import
-  'layout/header-userspace',
-  'layout/nav-userspace',
-  'layout/main-userspace',
-  'layout/sidenav',
   'layout/content',
-  'layout/footer';
+  'layout/footer',
+  'layout/header-userspace',
+  'layout/main-userspace',
+  'layout/nav-userspace',
+  'layout/sidenav';
 
 // 5. Components
 @import
-  'components/tables',
-  'components/modals',
-  'components/cards',
-  'components/forms',
-  'components/input-groups',
-  'components/dropdowns',
   'components/alerts',
   'components/breadcrumbs',
   'components/breadcrumbs-userspace',
-  'components/fileupload',
-  'components/lists',
-  'components/forms',
   'components/buttons',
-  'components/panels',
-  'components/tabs',
+  'components/cards',
+  'components/dropdowns',
+  'components/fileupload',
+  'components/forms',
+  'components/input-groups',
+  'components/lists',
+  'components/modals',
+  'components/navbars',
   'components/page-headers-userspace',
   'components/pagination',
-  'components/navbars';
+  'components/panels',
+  'components/tables',
+  'components/tabs';
 
 // 6. Page-specific styles
 @import
-  'pages/login',
+  'pages/homepage-userspace',
   'pages/individual-subscription',
   'pages/issuesubmission-userspace',
+  'pages/login',
   'pages/members-userspace',
   'pages/royalty-reports-userspace',
-  'pages/subscription-userspace',
   'pages/subscription-ips-userspace',
-  'pages/homepage-userspace';
+  'pages/subscription-userspace';
 
 // 7. Themes
 @import
-  'themes/default';
+  'themes/userspace';
