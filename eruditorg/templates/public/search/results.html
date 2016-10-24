@@ -200,11 +200,21 @@
                   {% if document.real_object.issue_title %}<p>{{ document.real_object.issue_title }}</p>{% endif %}
                   <p>
                     {% if document.document_type == 'article' %}
-                    {% trans "Article" %},
+                    {% with article=document.real_object %}
+                    <strong>{{ article.type }}</strong>
+                    {% if article.type == 'note' or article.type == 'Note' %}publiée{% else %}publié{% endif %}
+                    {% trans "dans la revue" %}
+                    {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
+                    <a href="{{ article.journal_url }}">{{ article.journal_name }}</a> ({{ article.collection_name }})
+                  </p>
+                  <p>
+                  {{ article.issue_publication_date }}
+                  </p>
+                    {% endwith %}
                     {% elif document.document_type == 'thesis' %}
                     {% trans "Thèse" %},
-                    {% endif %}
                     {{ document.real_object.collection_name }}
+                    {% endif %}
                   </p>
                 </div>
                 {# abstract #}
