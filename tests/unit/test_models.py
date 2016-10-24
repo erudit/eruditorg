@@ -467,3 +467,16 @@ class TestAuthor(BaseEruditTestCase):
         self.assertEqual(author_1.letter_prefix, 'A')
         self.assertEqual(author_2.letter_prefix, 'D')
         self.assertEqual(author_3.letter_prefix, 'G')
+
+    def test_can_return_its_name(self):
+        author_1 = AuthorFactory()
+
+        assert str(author_1) == "{lastname}, {firstname}".format(
+            lastname=author_1.lastname, firstname=author_1.firstname
+        )
+
+        author_1.suffix = 'PhD'
+
+        assert str(author_1) == "{suffix} {firstname} {lastname}".format(
+            suffix=author_1.suffix, firstname=author_1.firstname, lastname=author_1.lastname
+        )
