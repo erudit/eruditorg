@@ -562,10 +562,14 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     external_pdf_url = models.URLField(null=True, blank=True, verbose_name=_('URL PDF'))
     """ External URL of the PDF version of the article """
 
-    ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER = 'article', 'compterendu', 'autre'
+    ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
+        'article', 'compterendu', 'autre', 'note'
+    )
+
     TYPE_CHOICES = (
         (ARTICLE_DEFAULT, _('Article')),
-        (ARTICLE_REPORT, _('Compte-rendu')),
+        (ARTICLE_REPORT, _('Compte rendu')),
+        (ARTICLE_NOTE, _('Note')),
         (ARTICLE_OTHER, _('Autre')),
     )
     type = models.CharField(max_length=64, choices=TYPE_CHOICES, verbose_name=_('Type'))
