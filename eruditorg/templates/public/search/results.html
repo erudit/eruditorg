@@ -164,7 +164,7 @@
                   <p class="authors">
                   {% if document.real_object.authors %}
                     {% for author in document.real_object.authors %}
-                    <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}, {% endif %}
+                    <span class="author">{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}; {% endif %}
                     {% endfor %}
                   {% elif document.real_object.author %}
                     {% with author=document.real_object.author %}
