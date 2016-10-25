@@ -11,7 +11,7 @@ nav.sidenav {
   width: $sidenav-width;
   height: 100%;
   background-color: #FFF;
-  border-right: 1px solid $gray-light;
+  border-right: 1px solid $mid-grey;
   @include transition(all, 300ms, ease);
 
   ul {
@@ -30,26 +30,26 @@ nav.sidenav {
         height: 50px;
         line-height: 50px;
         font-size: 12px;
-        color: $gray-dark;
+        color: $darker-grey;
         display: table;
         width: 100%;
         @include transition(all, 300ms, ease);
         &:hover, &:active, &:focus, &:active:focus {
           text-decoration: none;
-          border-color: $gray-light;
-          background-color: $gray-light;
-          color: $gray-darker;
+          border-color: $mid-grey;
+          background-color: $mid-grey;
+          color: #222;
         }
         &.active {
-          background-color: $gray-base;
+          background-color: #000;
           color: #fff;
         }
         &.disabled {
-          color: $gray-lighter;
+          color: $light-grey;
           &:hover, &:active, &:focus, &:active:focus {
             cursor: default;
             background: none;
-            color: $gray-light;
+            color: $dark-grey;
           }
         }
       }

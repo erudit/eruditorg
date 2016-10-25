@@ -6,12 +6,12 @@
       .select2-selection{
         padding: 6px;
         height: 40px;
-        border-color: $gray-dark;
+        border-color: $darker-grey;
         border-radius: 0;
-        background: $gray-dark;
+        background: $darker-grey;
 
         .select2-selection__rendered{
-          color: $gray-lighter;
+          color: $light-grey;
         }
       }
     }

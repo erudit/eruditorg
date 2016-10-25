@@ -4,7 +4,7 @@
 {% load cache %}
 {% load widget_tweaks %}
 
-{% block page_title %}{% trans "Revues" %}{% endblock page_title %}
+{% block title %}{% trans "Revues" %}{% endblock title %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -31,16 +31,17 @@
 </script>
 {% endblock structured_data %}
 
-{% block body_class %}{{ block.super }} journal_list{% endblock %}
+{% block body_class %}{{ block.super }} journal_list{% endblock body_class %}
+{% block body_id %}journal_list_per_names{% endblock body_id %}
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
 {% block body_data_attributes %} data-spy="scroll" data-target="#journal_list_per_names" data-offset="180"{% endblock body_data_attributes %}
 
 {% block breadcrumb %}{{ block.super }}
 / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
-<div id="journal_list_per_names">
+<main role="main">
   <header class="page-header-main container">
     <div class="row">
       <div class="col-md-8">
@@ -61,7 +62,6 @@
       </div>
     </div>
   </header>
-
   <div class="container">
     <div id="id_journal_list_body" class="row">
       <div class="list-nav">
@@ -171,5 +171,5 @@
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+</main>
+{% endblock content %}

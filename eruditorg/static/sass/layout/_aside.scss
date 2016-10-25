@@ -2,8 +2,7 @@
 // This file contains styles for <aside>s / lateral bars in the public site
 // ------------------------------------------------------------------------
 
-aside,
-.sidebar-block {
+aside {
 
   h2 {
     border-bottom: 1px solid $mid-grey;
@@ -75,6 +74,10 @@ aside,
 
   .see-issues-btn {
     margin-top: 1em;
+  }
+
+  .subscription-sponsor {
+    color: $dark-grey;
   }
 
 }

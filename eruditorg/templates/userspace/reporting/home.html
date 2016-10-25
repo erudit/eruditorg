@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block page_title %}{% trans "Reporting" %}{% endblock %}
+{% block title %}{% trans "Reporting" %}{% endblock title %}
 
 {% block content %}
   <form  class="form-vertical" method="get" action="">{% csrf_token %}

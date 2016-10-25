@@ -2,7 +2,7 @@
 {% load i18n staticfiles %}
 {% load rules %}
 
-{% block page_title %}{% trans "Dépôt de fichiers" %}{% endblock %}
+{% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
@@ -58,4 +58,4 @@
     </ul>
   </section>
 </div>
-{% endblock %}
+{% endblock content_main %}

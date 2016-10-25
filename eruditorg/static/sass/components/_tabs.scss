@@ -3,7 +3,7 @@
 */
 
 .tabs-group {
-  border-bottom: 1px solid $gray-light;
+  border-bottom: 1px solid $mid-grey;
   padding-left: $grid-gutter-width/2;
 
   .tab {
@@ -14,13 +14,13 @@
       @include transition(all 250ms);
       padding: $padding-base-vertical $padding-base-horizontal;
       display: block;
-      background: $gray-lighter;
+      background: $light-grey;
       border-width: 1px 1px 0 1px;
-      border-color: $gray-light;
+      border-color: $mid-grey;
       border-style: solid;
       &:hover {
-        background-color: $brand-primary;
-        border-color: $brand-primary;
+        background-color: $coral-red;
+        border-color: $coral-red;
         color: #fff;
         text-decoration: none;
       }
@@ -29,9 +29,9 @@
 
     &.active {
       a {
-        background-color: $brand-primary;
+        background-color: $coral-red;
         color: #fff;
-        border-color: $brand-primary;
+        border-color: $coral-red;
       }
     }
 

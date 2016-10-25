@@ -1,9 +1,9 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Ma bibliothèque" %}{% endblock page_title %}
+{% block title %}{% trans "Ma bibliothèque" %}{% endblock title %}
 
-{% block body_id %}id_saved_citations_list{% endblock body_id %}
+{% block body_id %}citations_list{% endblock body_id %}
 {% block data_controller %}public:citations:list{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
@@ -11,7 +11,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div id="saved_citations_home">
+<main role="main" class="container">
   <div class="container">
     <div class="row">
       <div class="col-md-8 clearfix">
@@ -201,7 +201,7 @@
         </div>
         {% else %}
         <div class="col-md-8">
-          <div class="well">
+          <div>
             <p><em>{% trans "Aucune notice sauvegardée&nbsp;!" %} <span class="hint--top hint--no-animate" data-hint=""><span class="ion-help-circled"></span></span></em></p>
           </div>
         </div>
@@ -209,5 +209,5 @@
       </section>
     </div>
   </div>
-</div>
+</main>
 {% endblock content %}

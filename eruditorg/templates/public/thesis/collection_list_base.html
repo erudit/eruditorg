@@ -34,6 +34,7 @@
 {% endblock structured_data %}
 
 {% block body_class %}{{ block.super }} thesis_collection_list{% endblock body_class %}
+{% block body_id %}thesis_collection_list{% endblock body_id %}
 {% block data_controller %}public:thesis:collection_list{% endblock data_controller %}
 
 {% block breadcrumb %}
@@ -42,7 +43,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div id="thesis_collection_list">
+<main role="class">
   <div class="container">
     <header class="page-header-main">
       <div class="row">
@@ -140,5 +141,5 @@
       </aside>
     </div>
   </div>
-</div>
+</main>
 {% endblock content %}

@@ -4,7 +4,7 @@
 {% block breadcrumb %}{{ block.super }}
   / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
   / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
@@ -173,4 +173,4 @@
 {# Bottom content in "glory" container #}
 {% block inner_footer %}{% endblock inner_footer %}
 
-{% endblock %}
+{% endblock content %}

@@ -3,7 +3,7 @@
 {% load static %}
 {% load cache %}
 
-{% block page_title %}{% trans "Revues" %}{% endblock page_title %}
+{% block title %}{% trans "Revues" %}{% endblock title %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -30,15 +30,16 @@
 </script>
 {% endblock structured_data %}
 
-{% block body_class %}{{ block.super }} journal_list_per_disciplines{% endblock %}
+{% block body_class %}{{ block.super }} journal_list_per_disciplines{% endblock body_class %}
+{% block body_id %}journal_list_per_disciplines{% endblock body_id %}
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
   / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
-<div id="journal_list_per_disciplines">
+<main role="main">
   <header class="page-header-main sorting-index container-fluid">
       <div class="container">
         <div class="row">
@@ -66,7 +67,6 @@
         </div>
       </div>
   </header>
-
   {% cache FOREVER_TTL "public_journal_list_disciplines" LANGUAGE_CODE %}
   {% for objects_group in sorted_objects %}
   <a name="{% if not objects_group.key %}section-void{% else %}{{ objects_group.key }}{% endif %}" class="invisible">{{ discipline }}</a>
@@ -138,6 +138,5 @@
   </section>
   {% endfor %}
   {% endcache %}
-
-</div>
-{% endblock %}
+</main>
+{% endblock content %}

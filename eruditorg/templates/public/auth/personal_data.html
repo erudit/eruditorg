@@ -1,11 +1,11 @@
 {% extends "public/auth/base_profile_edit.html" %}
 {% load i18n staticfiles %}
 
-{% block page_title %}{% trans 'Modification des informations personnelles' %}{% endblock %}
+{% block title %}{% trans 'Modification des informations personnelles' %}{% endblock title %}
 
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'public:auth:personal_data' %}">{% trans "Modification des informations personnelles" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content %}
 <div class="row">
@@ -40,4 +40,4 @@
     </form>
   </div>
 </div>
-{% endblock %}
+{% endblock content %}

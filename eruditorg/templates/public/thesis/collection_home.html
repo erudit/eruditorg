@@ -1,7 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block page_title %}{{ collection.name }}{% endblock page_title %}
+{% block title %}{{ collection.name }}{% endblock title %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -36,6 +36,7 @@
 {% endblock structured_data %}
 
 {% block body_class %}{{ block.super }} thesis_collection_home{% endblock body_class %}
+{% block body_id %}thesis_collection_home{% endblock body_id %}
 {% block data_controller %}public:thesis:collection_home{% endblock data_controller %}
 
 {% block breadcrumb %}
@@ -44,7 +45,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div id="thesis_collection_home">
+<main role="main">
   <div class="glory">
     <div class="container">
       <header class="page-header-main">
@@ -113,5 +114,5 @@
       </div>
     </div>
   </div>
-</div>
+</main>
 {% endblock content %}

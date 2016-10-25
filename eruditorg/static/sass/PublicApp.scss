@@ -1,90 +1,96 @@
+// -----------------------------------------------------------------------------
+// Import partials for public app
+// Always sort partials in alphabetical order, except for base directory
+// -----------------------------------------------------------------------------
+
 @charset 'UTF-8';
 
 // 1. Configuration and helpers
 @import
-  'vars/public',
-  'utils/mixins',
-  'utils/utils',
-  'utils/responsive-utilities',
-  'utils/functions',
+  'utils/colours',
   'utils/font-styles',
+  'utils/functions',
+  'utils/mixins',
   'utils/sprite',
-  'utils/erudicon';
+  'utils/variables';
 
 // 2. Vendors
-$ionicons-font-path: "~ionicons/fonts";
-@import "~ionicons/scss/ionicons";
-@import "~akkordion/dist/akkordion.css";
-@import "~hint.css/hint.base.css";
-@import "~select2/dist/css/select2";
-@import 'vendor/magnific-popup/magnific-popup.scss'; // forked source for needed source changes
-
-// 3. Base stuff
+$ionicons-font-path: '~ionicons/fonts';
 @import
-  'base/normalize',
-  'base/scaffolding',
+  '~akkordion/dist/akkordion.css',
+  '~hint.css/hint.base.css',
+  '~ionicons/scss/ionicons',
+  '~select2/dist/css/select2',
+  'vendor/magnific-popup/magnific-popup.scss', // forked for source changes
+  'vendor/normalize';
+
+// 3. Base stuff (do not sort in alphabetical order)
+@import
   'base/grid',
   'base/base',
   'base/fonts',
   'base/icons',
   'base/typography',
-  'base/helpers';
+  'base/helpers',
+  'base/responsive-helpers';
 
 // 4. Layout-related sections
 @import
-  'layout/header',
-  'layout/header-public',
-  'layout/nav-public',
-  'layout/main-public',
-  'layout/sidenav',
+  'layout/aside',
   'layout/content',
   'layout/footer',
-  'layout/aside';
+  'layout/header',
+  'layout/header-public',
+  'layout/main-public',
+  'layout/nav-public',
+  'layout/sidenav';
 
 // 5. Components
 @import
-  'components/tables',
-  'components/modals',
-  'components/cards',
-  'components/forms',
-  'components/forms-checkbox',
-  'components/input-groups',
-  'components/dropdowns',
+  'components/accordions',
   'components/alerts',
+  'components/alpha-nav',
   'components/breadcrumbs',
   'components/breadcrumbs-public',
-  'components/fileupload',
-  'components/lists',
-  'components/panels',
+  'components/button-groups',
   'components/buttons',
+  'components/cards',
+  'components/component-animations',
+  'components/dropdowns',
+  'components/fileupload',
+  'components/forms',
+  'components/forms-checkbox',
+  'components/glory',
+  'components/input-groups',
+  'components/lists',
+  'components/modals',
+  'components/navbars',
   'components/page-headers',
   'components/pagination',
-  'components/accordions',
-  'components/toolbox',
-  'components/alpha-nav',
+  'components/panels',
   'components/scroll-top',
-  'components/tooltips',
-  'components/glory',
-  'components/button-groups';
+  'components/tables',
+  'components/toolbox',
+  'components/tooltips';
 
 // 6. Page-specific styles
 @import
-  'pages/homepage',
-  'pages/login',
   'pages/account-settings',
-  'pages/search-results',
   'pages/advanced-search',
+  'pages/article-detail',
+  'pages/homepage',
   'pages/individual-subscription',
+  'pages/issue-detail',
   'pages/journal-authors-list',
+  'pages/journal-detail',
   'pages/journal-list-disciplines',
   'pages/journal-list-names',
-  'pages/journal-detail',
-  'pages/issue-detail',
-  'pages/article-detail',
+  'pages/login',
   'pages/saved-citations-list',
-  'pages/thesis-home',
+  'pages/search-results',
   'pages/thesis-collection-home',
-  'pages/thesis-collection-list';
+  'pages/thesis-collection-list',
+  'pages/thesis-home';
 
 
 // $spritesheet-sprites is an array of all sprite image names

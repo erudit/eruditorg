@@ -1,70 +1,47 @@
-/**
-* Basic typography
-*/
+// -----------------------------------------------------------------------------
+// Basic typography
+// -----------------------------------------------------------------------------
 
-
-// Headings
-// -------------------------
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: $headings-font-family;
   font-weight: $headings-font-weight;
   line-height: $headings-line-height;
   color: $headings-color;
 
-  small,
-  .small {
+  small {
     font-weight: normal;
     line-height: 1;
     color: $headings-small-color;
   }
 
-  // add border at top or bottom of the heading
-  &.border-top {
-    padding-top: $margin-vertical-default/4;
-    border-top: 1px solid $gray-base;
-  }
-  &.border-bottom {
-    padding-bottom: $margin-vertical-default/4;
-    border-bottom: 1px solid $gray-base;
-  }
-
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3 {
+h1, h2, h3 {
   margin-top: 0;
   margin-bottom: ($line-height-computed / 2);
 
-  small,
-  .small {
+  small {
     font-size: 65%;
   }
+
 }
-h4, .h4,
-h5, .h5,
-h6, .h6 {
+
+h4, h5, h6 {
   margin-top: 0;
   margin-bottom: ($line-height-computed / 2);
 
-  small,
-  .small {
+  small {
     font-size: 75%;
   }
+
 }
 
-h1, .h1 { font-size: 2.441em; }
-h2, .h2 { font-size: 1.953em; }
-h3, .h3 { font-size: 1.563em; }
-h4, .h4 { font-size: 1.25em; }
-h5, .h5 { font-size: 1em; }
-h6, .h6 { font-size: 0.8em; }
-
-
-// Basic copy text styles
-// -------------------------
+h1 { font-size: 2.441em; }
+h2 { font-size: 1.953em; }
+h3 { font-size: 1.563em; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 0.8em; }
 
 p {
   font-size: $font-size-base;
@@ -72,124 +49,63 @@ p {
   line-height: 1.25;
 }
 
-.lead {
-  margin-bottom: $line-height-computed;
-  font-size: floor(($font-size-base * 1.15));
-  font-weight: 300;
-  line-height: 1.4;
-
-  @media (min-width: $screen-sm-min) {
-    font-size: ($font-size-base * 1.5);
-  }
-}
-
-
-// Emphasis & misc
-// -------------------------
-
-// Ex: (12px small font / 14px base font) * 100% = about 85%
-small,
-.small {
+small {
   font-size: floor((100% * $font-size-small / $font-size-base));
 }
 
 mark,
 .mark,
 .highlight, {
-  background-color: $state-warning-bg;
+  background-color: $yellow;
   padding: .2em;
 }
 
-// Alignment
 .text-left           { text-align: left; }
 .text-right          { text-align: right; }
 .text-center         { text-align: center; }
 .text-justify        { text-align: justify; }
 .text-nowrap         { white-space: nowrap; }
 
-// Transformation
-.text-lowercase      { text-transform: lowercase; }
-.text-uppercase      { text-transform: uppercase; }
-.text-capitalize     { text-transform: capitalize; }
-
-// Font-family
-
-.sans-serif          { font-family: $font-family-base !important; }
-.serif               { font-family: $font-family-serif !important; }
-.mono-space          { font-family: $font-family-monospace !important; }
-
-// font style
-@mixin font-styles($fonf-family: "sans") {
-
-  @if $fonf-family == "sans" {
-
-    // font weight normal
-    .normal           { @include fw-sans-normal(); }
-
-    // italics: em, i, .italic
-    .italic, em, i    { @include fw-sans-normal-italic(); }
-
-    // bolds: strong, b, .bold
-    .bold, strong, b  { @include fw-sans-bold(); }
-
-    // bold italics
-    .italic strong,
-    em strong,
-    strong em,
-    i strong,
-    strong i,
-    b i,
-    i b {
-      @include fw-sans-bold-italic();
-    }
-
-  }
-
-  @if $fonf-family == "serif" {
-
-    // font weight normal
-    .normal           { @include fw-serif-normal(); }
-
-    // italics: em, i, .italic
-    .italic, em, i    { @include fw-serif-normal-italic(); }
-
-    // bolds: strong, b, .bold
-    .bold, strong, b  { @include fw-serif-bold(); }
-
-    // bold italics
-    .italic strong,
-    em strong,
-    strong em,
-    i strong,
-    strong i,
-    b i,
-    i b {
-      @include fw-serif-bold-italic();
-    }
-
-  }
-
-}
-
-// appy default font style : sans serif
-@include font-styles('sans');
-
-
-// Contextual colors
-.text-muted {
-  color: $text-muted;
-}
-
-
-// Misc
-// -------------------------
-
-// Abbreviations and acronyms
 abbr[title],
 // Add data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257
 abbr[data-original-title] {
   cursor: help;
   border-bottom: 1px dotted $abbr-border-color;
+}
+
+blockquote {
+  padding: ($line-height-computed / 2) $line-height-computed;
+  margin: 0 0 $line-height-computed;
+  font-size: $blockquote-font-size;
+  border-left: 5px solid $blockquote-border-color;
+
+  p, ul, ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Note: Deprecated small and .small as of v3.1.0
+  // Context: https://github.com/twbs/bootstrap/issues/11660
+  footer,
+  small {
+    display: block;
+    font-size: 80%; // back to default font-size
+    line-height: $line-height-base;
+    color: $blockquote-small-color;
+
+    &:before {
+      content: '\2014 \00A0'; // em dash, nbsp
+    }
+
+  }
+
+}
+
+address {
+  margin-bottom: $line-height-computed;
+  font-style: normal;
+  line-height: $line-height-base;
 }
 
 .category-tag,
@@ -203,64 +119,4 @@ abbr[data-original-title] {
 
 .title-tag {
   color: $dark-grey;
-}
-
-// Blockquotes
-blockquote {
-  padding: ($line-height-computed / 2) $line-height-computed;
-  margin: 0 0 $line-height-computed;
-  font-size: $blockquote-font-size;
-  border-left: 5px solid $blockquote-border-color;
-
-  p,
-  ul,
-  ol {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  // Note: Deprecated small and .small as of v3.1.0
-  // Context: https://github.com/twbs/bootstrap/issues/11660
-  footer,
-  small,
-  .small {
-    display: block;
-    font-size: 80%; // back to default font-size
-    line-height: $line-height-base;
-    color: $blockquote-small-color;
-
-    &:before {
-      content: '\2014 \00A0'; // em dash, nbsp
-    }
-  }
-}
-
-// Opposite alignment of blockquote
-//
-// Heads up: `blockquote.pull-right` has been deprecated as of v3.1.0.
-.blockquote-reverse,
-blockquote.pull-right {
-  padding-right: 15px;
-  padding-left: 0;
-  border-right: 5px solid $blockquote-border-color;
-  border-left: 0;
-  text-align: right;
-
-  // Account for citation
-  footer,
-  small,
-  .small {
-    &:before { content: ''; }
-    &:after {
-      content: '\00A0 \2014'; // nbsp, em dash
-    }
-  }
-}
-
-// Addresses
-address {
-  margin-bottom: $line-height-computed;
-  font-style: normal;
-  line-height: $line-height-base;
 }

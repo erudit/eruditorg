@@ -103,6 +103,7 @@
       @include column-break-inside(avoid);
 
       h4 {
+        @include fw-mono;
         margin-bottom: 0.25em;
         padding-bottom: 0.25em;
       }

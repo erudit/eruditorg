@@ -2,7 +2,7 @@
 {% load i18n staticfiles %}
 {% load rules %}
 
-{% block page_title %}{% trans "Dépôt de fichiers" %}{% endblock %}
+{% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
 
 {% block breadcrumb_end %}
 {{ block.super }}
@@ -51,29 +51,29 @@
               <div class="panel-body">
                 <div class="row">
                   <div class="col-sm-4">
-                    <p class="lead value-title">{% trans "Année" %}</p>
+                    <p class="value-title">{% trans "Année" %}</p>
                     <p class="value"><strong>{{ issue.year }}</strong></p>
                   </div>
                   <div class="col-sm-4">
-                    <div class="lead value-title">{% trans "Volume" %}</div>
+                    <div class="value-title">{% trans "Volume" %}</div>
                     <div class="value"><strong>{% if issue.volume %}{{ issue.volume }}{% else %}<span class="muted">{% trans "Non renseigné" %}</span>{% endif %}</strong></div>
                   </div>
                   <div class="col-sm-4">
-                    <div class="lead value-title">{% trans "Numéro" %}</div>
+                    <div class="value-title">{% trans "Numéro" %}</div>
                     <div class="value"><strong>{{ issue.number }}</strong></div>
                   </div>
                 </div>
                 <hr />
                 <div class="row">
                   <div class="col-xs-12">
-                    <p class="lead value-title">{% trans "Personne contact" %}</p>
+                    <p class="value-title">{% trans "Personne contact" %}</p>
                     <p class="value"><strong>{{ issue.contact }}</strong></p>
                   </div>
                 </div>
                 <hr />
                 <div class="row">
                   <div class="col-xs-12">
-                    <p class="lead value-title">{% trans "Commentaires" %}</p>
+                    <p class="value-title">{% trans "Commentaires" %}</p>
                     <p class="value"><strong>{% if issue.comment %}{{ issue.comment }}{% else %}<span class="muted">{% trans "Non renseigné" %}</span>{% endif %}</strong></p>
                   </div>
                 </div>
@@ -175,4 +175,4 @@
     </div>
   </section>
 </div>
-{% endblock %}
+{% endblock content_main %}

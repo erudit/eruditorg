@@ -3,7 +3,7 @@
 
 {% block breadcrumb %}
   {{ block.super }} / <a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a>
-{% endblock %}
+{% endblock breadcrumb %}
 
 {% block content_wrapper %}
 <div id="account-settings" class="container">

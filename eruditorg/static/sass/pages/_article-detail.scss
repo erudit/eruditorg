@@ -267,7 +267,7 @@ $article-toolbar-width: 80px;
 
       &:hover, &:active, &:active:focus {
         color: $white;
-        background-color: $brand-primary;
+        background-color: $coral-red;
       }
     }
 
@@ -298,7 +298,7 @@ $article-toolbar-width: 80px;
     .border-bottom {
       max-height: 100px;
       overflow: hidden;
-      border-bottom: 1px solid $gray-base;
+      border-bottom: 1px solid #000;
       background: $body-bg;
     }
 
@@ -901,9 +901,9 @@ $article-toolbar-width: 80px;
         }
 
         &:hover {
-          background-color: $brand-primary;
+          background-color: $coral-red;
           text-decoration: none;
-          @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $brand-primary);
+          @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $coral-red);
 
           &, h5 {
             color: $white;

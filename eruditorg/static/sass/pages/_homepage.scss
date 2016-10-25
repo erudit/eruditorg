@@ -1,15 +1,12 @@
 /**
-* hide Breadcrumb on homepage
-*/
-.home #breadcrumb {
-  display: none;
-}
-
-/**
 * Home main container
 */
 
-#homepage-content {
+#homepage {
+  
+  #breadcrumb {
+    display: none;
+  }
 
   // Custom underline style for homepage links
   a {

@@ -16,22 +16,23 @@
     "https://www.facebook.com/%C3%89rudit-141469165320/",
     "https://twitter.com/eruditorg",
     "https://github.com/erudit/",
-    "https://www.linkedin.com/company/3628951"]
-  }
-  </script>
-  {% endblock structured_data %}
+    "https://www.linkedin.com/company/3628951"
+  ]
+}
+</script>
+{% endblock structured_data %}
 
-  {% block stylesheets %}
-  {% if not WEBPACK_DEV_SERVER_URL %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
-  {% endif %}
-  {% endblock stylesheets %}
+{% block stylesheets %}
+{% if not WEBPACK_DEV_SERVER_URL %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/PublicApp.css' %}" />
+{% endif %}
+{% endblock stylesheets %}
 
-  {% block body_class %}public fixed-header{% endblock %}
+{% block body_class %}public fixed-header{% endblock body_class %}
 
 {# public page header #}
 {% block header %}
-<header id="site-header" class="{% block header_class %}fixed{% endblock %} clearfix">
+<header id="site-header" class="{% block header_class %}fixed{% endblock header_class %} clearfix">
   <nav>
     <div class="container-fluid">
       <div class="navbar-header">
@@ -136,26 +137,25 @@
               </form>
             </div>
           </li>
-          {% endblock %}
+          {% endblock mainnav %}
         </ul>
       </div>
     </div>
   </nav>
 </header>
-
 <nav id="breadcrumb" class="container-fluid">
   <h2 class="hidden">{% trans "Fil d'Ariane" %}</h2>
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <p class="no-margin">
-          <a href="/">Érudit</a> {% block breadcrumb %}{% endblock %}
+          <a href="/">Érudit</a> {% block breadcrumb %}{% endblock breadcrumb %}
         </p>
       </div>
     </div>
   </div>
 </nav>
-{% endblock %}
+{% endblock header %}
 
 {% block body %}
 <div class="container">
@@ -165,9 +165,7 @@
     </div>
   </div>
 </div>
-<main role="main">
-  {% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
-</main>
+{% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
 {% endblock body %}
 
 {% block footer %}

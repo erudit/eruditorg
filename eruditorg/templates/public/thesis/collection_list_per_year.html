@@ -1,7 +1,7 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock page_title %}
+{% block title %}{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock title %}
 
 {% block structured_data_breadcrumb_tail %}
 {
