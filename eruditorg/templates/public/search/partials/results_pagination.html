@@ -3,7 +3,7 @@
 
 <nav>
   <h3 class="sr-only">{% trans 'Pagination' %}</h3>
-  <ul class="single-pagination">
+  <ul class="pagination">
     {% if results.pagination.current_page > 1 %}
     <a href="{% get_full_path_with_overrides page=1 %}"> <i class="ion-ios-arrow-left left-bar"></i> </a>
     {% endif %}

@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load base_urls_tags %}
 
-<nav class="single-pagination">
+<nav class="pagination">
   <h3 class="sr-only">{% trans "Pagination" %}</h3>
   {% if page_obj.number > 1 %}
   <a href="{% get_full_path_with_overrides page=1 %}"> <i class="ion-ios-arrow-left left-bar"></i> </a>
