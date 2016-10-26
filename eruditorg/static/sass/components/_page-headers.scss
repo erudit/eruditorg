@@ -19,7 +19,7 @@
     }
 
     > span + span {
-      @include fw-sans-normal;
+      @include fw-sans;
       display: block;
     }
 

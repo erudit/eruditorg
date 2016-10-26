@@ -20,7 +20,7 @@ footer#site-footer {
       border-width: 0;
       padding-top: $padding-base-vertical - 1;
       padding-bottom: $padding-base-vertical - 1;
-      @include fw-sans-normal-italic();
+      @include fw-sans-italic();
       background-color: $light-grey;
     }
 

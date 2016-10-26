@@ -55,7 +55,7 @@
   @if $fonf-family == 'sans' {
     @include fw-sans;
 
-    em, i    { @include fw-sans-normal-italic; }
+    em, i    { @include fw-sans-italic; }
 
     strong, b  { @include fw-sans-medium; }
 
@@ -72,9 +72,9 @@
   }
 
   @if $fonf-family == 'serif' {
-    @include fw-serif-normal;
+    @include fw-serif;
 
-    em, i    { @include fw-serif-normal-italic; }
+    em, i    { @include fw-serif-italic; }
 
     strong, b  { @include fw-serif-bold; }
 

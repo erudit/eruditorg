@@ -2,50 +2,68 @@
 // Font weight mixins
 // -----------------------------------------------------------------------------
 
-@mixin fw-sans-normal() {
-  font-family: $font-family-sans-serif-regular;
+@mixin fw-sans() {
+  font-family: $font-sans;
+  font-weight: 400;
 }
 
-@mixin fw-sans-normal-italic() {
-  font-family: $font-family-sans-serif-regular-italic;
+@mixin fw-sans-italic() {
+  font-family: $font-sans-italic;
+  font-weight: 400;
+  font-style: italic;
 }
 
 @mixin fw-sans-medium() {
-  font-family: $font-family-sans-serif-medium;
+  font-family: $font-sans-medium;
+  font-weight: 500;
 }
 
 @mixin fw-sans-medium-italic() {
-  font-family: $font-family-sans-serif-medium-italic;
+  font-family: $font-sans-medium-italic;
+  font-weight: 500;
+  font-style: italic;
 }
 
 @mixin fw-sans-bold() {
-  font-family: $font-family-sans-serif-bold;
+  font-family: $font-sans-bold;
+  font-weight: 700;
 }
 
 @mixin fw-sans-bold-italic() {
-  font-family: $font-family-sans-serif-bold-italic;
+  font-family: $font-sans-bold-italic;
+  font-weight: 700;
+  font-style: italic;
 }
 
 @mixin fw-mono() {
-  font-family: $font-family-monospace;
+  font-family: $font-mono;
+  font-weight: 400;
 }
 
 @mixin fw-mono-italic() {
-  font-family: $font-family-monospace-italic;
+  font-family: $font-mono-italic;
+  font-weight: 400;
+  font-style: italic;
 }
 
-@mixin fw-serif-normal() {
-  font-family: $font-family-serif-regular;
+@mixin fw-serif() {
+  font-family: $font-serif;
+  font-weight: 400;
 }
 
-@mixin fw-serif-normal-italic() {
-  font-family: $font-family-serif-regular-italic;
+@mixin fw-serif-italic() {
+  font-family: $font-serif-italic;
+  font-weight: 400;
+  font-style: italic;
 }
 
 @mixin fw-serif-bold() {
-  font-family: $font-family-serif-bold;
+  font-family: $font-serif-bold;
+  font-weight: 700;
 }
 
 @mixin fw-serif-bold-italic() {
-  font-family: $font-family-serif-bold-italic;
+  font-family: $font-serif-bold-italic;
+  font-weight: 700;
+  font-style: italic;
 }

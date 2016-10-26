@@ -7,7 +7,7 @@
 */
 
 @mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
-  font-family: $font-family-serif-regular;
+  font-family: $font-serif;
   font-size: $font-size;
   line-height: 1.5;
   @include font-styles($font-style-family);
@@ -42,7 +42,7 @@
           em {
             @include fw-serif-bold-italic;
             strong {
-              @include fw-serif-normal-italic;
+              @include fw-serif-italic;
             }
           }
 

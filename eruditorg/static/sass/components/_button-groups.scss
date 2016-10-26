@@ -18,7 +18,7 @@
     border-width: 1px;
     border-color: $dark-grey;
     color: $dark-grey;
-    @include fw-sans-normal;
+    @include fw-sans;
 
     // Bring the "active" button to the front
     &:hover,

@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 
-$font-family-icon: 'Ionicons' !default;
+$font-icon: 'Ionicons' !default;
 $fa-var-check: "\f122" !default;
 $check-icon: $fa-var-check !default;
 
@@ -81,7 +81,7 @@ $check-icon: $fa-var-check !default;
     }
 
     &:checked + label::after{
-      font-family: $font-family-icon;
+      font-family: $font-icon;
       content: $check-icon;
     }
 
@@ -214,7 +214,7 @@ $check-icon: $fa-var-check !default;
 input[type="checkbox"],
 input[type="radio"] {
   &.styled:checked + label:after {
-    font-family: $font-family-icon;
+    font-family: $font-icon;
     content: $check-icon;
   }
   .styled:checked + label {

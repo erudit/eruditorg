@@ -14,7 +14,7 @@ $article-toolbar-width: 80px;
 */
 
 @mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
-  font-family: $font-family-serif-regular;
+  font-family: $font-serif;
   font-size: $font-size;
   line-height: 1.5;
   @include font-styles($font-style-family);
@@ -145,11 +145,11 @@ $article-toolbar-width: 80px;
     .sstitre,
     .sstitreparal,
     .trefbiblio {
-      @include fw-sans-normal();
+      @include fw-sans();
       font-size: smaller;
 
       em {
-        @include fw-sans-normal-italic();
+        @include fw-sans-italic();
       }
 
     }
@@ -383,7 +383,7 @@ $article-toolbar-width: 80px;
     @include transition(transform 0.3s ease-out);
 
     em {
-      @include fw-sans-normal-italic
+      @include fw-sans-italic
       strong {
         @include fw-sans-bold-italic;
       }
@@ -457,7 +457,7 @@ $article-toolbar-width: 80px;
         em {
           @include fw-serif-bold-italic;
           strong {
-            @include fw-serif-normal-italic;
+            @include fw-serif-italic;
           }
         }
 
@@ -533,7 +533,7 @@ $article-toolbar-width: 80px;
 
           li:before {
             content: '– ';
-            @include fw-sans-normal;
+            @include fw-sans;
           }
 
           .alinea {
@@ -603,7 +603,7 @@ $article-toolbar-width: 80px;
       &.type3, &.type6 {
 
         .lrcible p {
-          @include fw-serif-normal-italic;
+          @include fw-serif-italic;
 
         }
 
@@ -632,7 +632,7 @@ $article-toolbar-width: 80px;
     }
 
     .italique, em {
-      @include fw-serif-normal-italic;
+      @include fw-serif-italic;
       .gras, strong {
         @include fw-serif-bold-italic;
       }
@@ -743,7 +743,7 @@ $article-toolbar-width: 80px;
   * References and footnotes
   */
   .norenvoi, .nonote {
-    @include fw-sans-normal();
+    @include fw-sans();
     font-size: 0.85em;
     vertical-align: top;
 
@@ -831,7 +831,7 @@ $article-toolbar-width: 80px;
     }
 
     .voirliste {
-      @include fw-sans-normal;
+      @include fw-sans;
       font-size: 14px;
       margin: 0.75em 0;
       text-align: right;

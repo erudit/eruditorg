@@ -130,7 +130,7 @@
       display: block;
       padding: ($grid-gutter-width / 4) ($grid-gutter-width/2);
       border: 2px solid $mid-grey;
-      @include fw-sans-normal();
+      @include fw-sans();
       i.caret {
         float: right;
         position: relative;

@@ -133,7 +133,7 @@
         [class*="year-"] label {
           margin: 0;
           font-size: 14px;
-          @include fw-sans-normal-italic;
+          @include fw-sans-italic;
         }
 
         select {

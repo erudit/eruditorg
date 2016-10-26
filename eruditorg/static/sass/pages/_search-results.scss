@@ -137,7 +137,7 @@
         }
 
         a > span + span {
-          @include fw-sans-normal;
+          @include fw-sans;
         }
 
         a:hover, &:active, &:focus, &:active:focus {

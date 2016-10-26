@@ -1,5 +1,7 @@
 // -----------------------------------------------------------------------------
-// Variables used in both public and userspace apps
+// Variables used in both public and userspace apps.
+// Only create a new variable here if the value is repeated at least twice and
+// if it is likely to be updated at least once.
 // -----------------------------------------------------------------------------
 
 //== Typography

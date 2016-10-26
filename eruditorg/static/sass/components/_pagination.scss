@@ -19,7 +19,7 @@
   .page-position {
     display: inline-block;
     font-size: 14px;
-    font-family: $font-family-monospace;
+    @include fw-mono;
   }
 
   .left-bar {
