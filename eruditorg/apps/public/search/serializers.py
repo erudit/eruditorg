@@ -118,7 +118,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.issue.localidentifier
 
     def get_issue_title(self, obj):
-        return obj.issue.title
+        return obj.issue.name_with_themes
 
     def get_issue_number(self, obj):
         return obj.issue.number_for_display

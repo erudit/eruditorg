@@ -200,7 +200,6 @@
                 </div>
                 {# article metadata #}
                 <div class="meta">
-                  {% if document.real_object.issue_title %}<p>{{ document.real_object.issue_title }}</p>{% endif %}
                   <p>
                     {% if document.document_type == 'article' %}
                     {% with article=document.real_object %}
@@ -209,6 +208,7 @@
                     {% trans "dans la revue" %}
                     {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
                     <a href="{{ article.journal_url }}">{{ article.journal_name }}</a> ({{ article.collection_name }})
+                    {% if document.real_object.issue_title %}<p><strong>{{ document.real_object.issue_title|safe }}</strong></p>{% endif %}
                   </p>
                   <p>
                   {{ article.issue_publication_date }}
