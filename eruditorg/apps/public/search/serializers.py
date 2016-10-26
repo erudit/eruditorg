@@ -47,6 +47,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     abstract = serializers.SerializerMethodField()
     type = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
+    bibliographic_reference = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     journal_name = serializers.SerializerMethodField()
     journal_type = serializers.SerializerMethodField()
@@ -66,7 +67,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier', 'issue_title', 'issue_number',
             'issue_volume', 'issue_published', 'issue_volume_slug', 'issue_publication_date', 'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
-            'external_url', 'external_pdf_url', 'collection_name',
+            'external_url', 'external_pdf_url', 'collection_name', 'bibliographic_reference',
         ]
 
     def get_authors(self, obj):
@@ -89,6 +90,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_collection_name(self, obj):
         return obj.issue.journal.collection.name
+
+    def get_bibliographic_reference(self, obj):
+        return obj.bibliographic_reference
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code

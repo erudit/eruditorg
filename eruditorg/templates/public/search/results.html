@@ -192,6 +192,9 @@
                       {% if document.real_object.subtitle %}
                       <span><br/>{{ document.real_object.subtitle }}</span>
                       {% endif %}
+                      {% if document.real_object.bibliographic_reference %}
+                      <span><br><em>{{ document.real_object.bibliographic_reference }}</em></span>
+                      {% endif %}
                     </a>
                   </h3>
                 </div>
