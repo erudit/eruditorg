@@ -567,6 +567,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     title = models.CharField(max_length=600, null=True, blank=True)
     """ The title of the article """
 
+    bibliographic_reference = models.CharField(max_length=600, null=True, blank=True)
+    """ Bibliographic reference of this article """
+
     html_title = models.CharField(max_length=800, null=True, blank=True)
     """ The title of the article (HTML) """
 

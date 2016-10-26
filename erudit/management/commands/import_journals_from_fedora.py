@@ -582,6 +582,7 @@ class Command(BaseCommand):
         article.first_page = article_erudit_object.first_page
         article.last_page = article_erudit_object.last_page
         article.title = article_erudit_object.title
+        article.bibliographic_reference = article_erudit_object.bibliographic_reference
         article.html_title = article_erudit_object.html_title
         article.subtitle = article_erudit_object.subtitle
         article.surtitle = article_erudit_object.section_title
