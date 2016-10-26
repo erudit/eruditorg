@@ -6,7 +6,7 @@
 // --------------------------------------------------
 
 .btn {
-  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, 1.15, $btn-border-radius-base);
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, 1.15, 0);
   @include user-select(none);
   @include fw-sans-medium;
   display: inline-block;
@@ -130,16 +130,6 @@ a.btn {
     }
   }
 }
-
-
-// Button Sizes
-// --------------------------------------------------
-
-.btn-lg {
-  // line-height: ensure even-numbered height of button next to large input
-  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
-}
-
 
 // Block button
 // --------------------------------------------------
