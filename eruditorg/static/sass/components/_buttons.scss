@@ -49,7 +49,7 @@
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-    cursor: $cursor-disabled;
+    cursor: not-allowed;
     @include opacity(.65);
     @include box-shadow(none);
   }

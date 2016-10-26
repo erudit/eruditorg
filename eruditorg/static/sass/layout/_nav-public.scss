@@ -170,18 +170,18 @@
         border-width: 2px;
         border-color: #fff;
         color: #fff;
-        padding: $padding-small-vertical $padding-small-horizontal;
+        padding: 0 0.5em;
         background-color: transparent;
         width: 70%;
         @include fw-sans-medium();
         @include placeholder(rgba(255, 255, 255, 0.75));
       }
 
-      .btn.btn-secondary {
+      .btn {
         border-color: #fff;
         color: #fff;
-        line-height: inherit;
-        padding: $padding-small-vertical $padding-small-horizontal;
+        line-height: 1;
+        height: 44px;
         margin-left: -2px;
       }
 
