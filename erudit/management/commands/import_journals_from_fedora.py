@@ -95,6 +95,9 @@ class Command(BaseCommand):
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
         parser.add_argument(
+            '--issue-pid', action='store', dest='issue_pid', help='Issue PID to manually import.')  # noqa
+
+        parser.add_argument(
             '--mdate', action='store', dest='mdate',
             help='Modification date to use to retrieve journals to import (iso format).')
 
@@ -104,6 +107,7 @@ class Command(BaseCommand):
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
         self.journal_precendence_relations = []
+        self.issue_pid = options.get('issue_pid', None)
 
         # Handles a potential XSLT test function
         try:
@@ -126,9 +130,29 @@ class Command(BaseCommand):
         except ValueError:
             self.stdout.write(self.style.ERROR(
                 '"{0}" is not a valid modification date!'.format(self.modification_date)))
+
             return
         except AssertionError:
             pass
+
+        if self.issue_pid:
+            self.stdout.write(self.style.MIGRATE_HEADING(
+                'Start importing issue with PID: {0}'.format(self.issue_pid)))
+
+            if not re.match(r'^\w+\:\w+\.\w+\.\w+$', self.issue_pid):
+                self.stdout.write(self.style.ERROR(
+                    '  "{0}" is not a valid journal PID!'.format(self.issue_pid)))
+                return
+
+            journal_localidentifier = self.issue_pid.split(':')[1].split('.')[1]
+            try:
+                journal = Journal.objects.get(localidentifier=journal_localidentifier)
+            except Journal.DoesNotExist:
+                self.stdout.write(self.style.ERROR(
+                    'The "{0}" journal is not available.'.format(journal_localidentifier)))
+                return
+            self._import_issue(self.issue_pid, journal)
+            return
 
         # Imports a journal PID manually
         if self.journal_pid:
