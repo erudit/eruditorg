@@ -1,15 +1,4 @@
 /**
-* sidebar block
-*/
-
-.sidebar-block {
-  margin-bottom: $margin-vertical-default;
-  > header {
-    margin-bottom: $margin-vertical-default/2;
-  }
-}
-
-/**
 * Collapse accordion
 */
 
@@ -58,8 +47,9 @@
 */
 
 .panel {
+  padding: 0;
   margin-bottom: $line-height-computed;
-  background-color: $panel-bg;
+  background-color: #FFF;
   border: 1px solid #000;
 
   // Optional heading
@@ -67,12 +57,12 @@
     padding: $padding-base-vertical * 2 $padding-base-horizontal;
     border-bottom: 1px solid transparent;
     background-color: #000;
-    color: #fff;
+    color: #FFF;
   }
 
   // Panel contents
   .panel-body {
-    padding: $panel-body-padding;
+    padding: 1em;
     @include clearfix;
   }
 
@@ -93,10 +83,9 @@
 
   // Optional footer (stays gray in every modifier class)
   .panel-footer {
-    padding: $panel-footer-padding;
-    background-color: $panel-footer-bg;
-    border-top: 1px solid $panel-inner-border;
-    @include border-bottom-radius(($panel-border-radius - 1));
+    padding: 1em;
+    background-color: #FFF;
+    border-top: 1px solid $mid-grey;
   }
 
 }

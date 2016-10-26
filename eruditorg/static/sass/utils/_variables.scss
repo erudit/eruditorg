@@ -118,54 +118,6 @@ $padding-xs-horizontal:     5px !default;
 $line-height-large:         1.122222 !default; // extra decimals for Win 8.1 Chrome
 $line-height-small:         1.5 !default;
 
-$border-radius-base:        4px !default;
-$border-radius-large:       6px !default;
-$border-radius-small:       3px !default;
-
-//** Global color for active items (e.g., navs or dropdowns).
-$component-active-color:    #fff !default;
-//** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $coral-red !default;
-
-//** Width of the `border` for generating carets that indicator dropdowns.
-$caret-width-base:          4px !default;
-//** Carets increase slightly in size for larger components.
-$caret-width-large:         5px !default;
-
-
-//== Tables
-//
-//## Customizes the `.table` component with basic values, each used across all table variations.
-
-//** Padding for `<th>`s and `<td>`s.
-$table-cell-padding:            8px !default;
-//** Padding for cells in `.table-condensed`.
-$table-condensed-cell-padding:  5px !default;
-
-//** Default background color used for all tables.
-$table-bg:                      transparent !default;
-//** Background color used for `.table-striped`.
-$table-bg-accent:               #f9f9f9 !default;
-//** Background color used for `.table-hover`.
-$table-bg-hover:                #f5f5f5 !default;
-$table-bg-active:               $table-bg-hover !default;
-
-//** Border color for table and cell borders.
-$table-border-color:            #ddd !default;
-
-
-//== Buttons
-//
-//## For each of Bootstrap's buttons, define text, background and border color.
-
-$btn-font-weight:                normal !default;
-
-$btn-primary-color:              #fff !default;
-$btn-primary-bg:                 $coral-red !default;
-$btn-primary-border:             $coral-red !default;
-
-$btn-link-disabled-color:        $mid-grey !default;
-
 
 //== Forms
 //
@@ -173,10 +125,6 @@ $btn-link-disabled-color:        $mid-grey !default;
 
 //** Default `.form-control` height
 $input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
-//** Large `.form-control` height
-$input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2) !default;
-//** Small `.form-control` height
-$input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2) !default;
 
 //** `.form-group` margin
 $form-group-margin-bottom:       15px !default;
@@ -292,71 +240,11 @@ $container-lg:                 $container-large-desktop;
 // Basics of a navbar
 $navbar-height:                    50px !default;
 $navbar-margin-bottom:             $line-height-computed !default;
-$navbar-border-radius:             $border-radius-base !default;
+$navbar-border-radius:             0 !default;
 $navbar-padding-horizontal:        floor(($grid-gutter-width / 2)) !default;
 $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2) !default;
 $navbar-collapse-max-height:       340px !default;
 
-//== Pagination
-//
-//##
-
-$pagination-color:                     $link-color !default;
-$pagination-bg:                        #fff !default;
-$pagination-border:                    #ddd !default;
-
-$pagination-hover-color:               $link-hover-color !default;
-$pagination-hover-bg:                  $light-grey !default;
-$pagination-hover-border:              #ddd !default;
-
-$pagination-active-color:              #fff !default;
-$pagination-active-bg:                 $coral-red !default;
-$pagination-active-border:             $coral-red !default;
-
-$pagination-disabled-color:            $mid-grey !default;
-$pagination-disabled-bg:               #fff !default;
-$pagination-disabled-border:           #ddd !default;
-
-
-//== Tooltips
-//
-//##
-
-//** Tooltip max width
-$tooltip-max-width:           200px !default;
-//** Tooltip text color
-$tooltip-color:               #fff !default;
-//** Tooltip background color
-$tooltip-bg:                  #000 !default;
-$tooltip-opacity:             .9 !default;
-
-//** Tooltip arrow width
-$tooltip-arrow-width:         5px !default;
-//** Tooltip arrow color
-$tooltip-arrow-color:         $tooltip-bg !default;
-
-
-//== Panels
-//
-//##
-
-$panel-bg:                    #fff !default;
-$panel-body-padding:          15px !default;
-$panel-heading-padding:       10px 15px !default;
-$panel-footer-padding:        $panel-heading-padding !default;
-$panel-border-radius:         $border-radius-base !default;
-
-//** Border color for elements within panels
-$panel-inner-border:          #ddd !default;
-$panel-footer-bg:             #f5f5f5 !default;
-
-$panel-default-text:          $darker-grey !default;
-$panel-default-border:        #ddd !default;
-$panel-default-heading-bg:    #f5f5f5 !default;
-
-$panel-primary-text:          #fff !default;
-$panel-primary-border:        $coral-red !default;
-$panel-primary-heading-bg:    $coral-red !default;
 
 //== Type
 //

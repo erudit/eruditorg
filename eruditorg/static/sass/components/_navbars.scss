@@ -198,7 +198,7 @@
   background-color: transparent;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: 1px solid transparent;
-  border-radius: $border-radius-base;
+  border-radius: 0;
 
   // We remove the `outline` here, but later compensate by attaching `:hover`
   // styles to `:focus`.
@@ -289,22 +289,6 @@
   margin-bottom: 0;
   @include border-top-radius($navbar-border-radius);
   @include border-bottom-radius(0);
-}
-
-
-// Buttons in navbars
-//
-// Vertically center a button within a navbar (when *not* in a form).
-
-.navbar-btn {
-  @include navbar-vertical-align($input-height-base);
-
-  &.btn-sm {
-    @include navbar-vertical-align($input-height-small);
-  }
-  &.btn-xs {
-    @include navbar-vertical-align(22);
-  }
 }
 
 

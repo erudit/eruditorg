@@ -11,7 +11,6 @@
   @include fw-sans-medium;
   display: inline-block;
   margin-bottom: 0; // For input.btn
-  font-weight: $btn-font-weight;
   text-align: center;
   vertical-align: middle;
   touch-action: manipulation;
@@ -70,11 +69,11 @@ a.btn {
 
 // with coral-red as bg
 .btn-primary {
-  @include button-variant($btn-primary-color, $coral-red, $coral-red);
+  @include button-variant(#FFF, $coral-red, $coral-red);
   text-decoration: none;
   &:hover, &:active, &:focus, &:focus:active {
     color: $coral-red;
-    background-color: $btn-primary-color;
+    background-color: #FFF;
     border-color: $coral-red;
     background-image: none;
   }
@@ -84,7 +83,7 @@ a.btn {
 .btn-secondary {
   @include button-variant($coral-red, transparent, $coral-red);
   &:hover, &:active, &:focus, &:focus:active {
-    color: $btn-primary-color;
+    color: #FFF;
     background-color: $coral-red;
     border-color: $coral-red;
     background-image: none;
@@ -125,7 +124,7 @@ a.btn {
   fieldset[disabled] & {
     &:hover,
     &:focus {
-      color: $btn-link-disabled-color;
+      color: $mid-grey;
       text-decoration: none;
     }
   }
