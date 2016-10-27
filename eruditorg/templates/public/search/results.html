@@ -9,7 +9,8 @@
 {% block data_controller %}public:search:results{% endblock data_controller %}
 
 {% block breadcrumb %}
-{{ block.super }} / <a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a>
+{{ block.super }}
+<li><a href="{{ request.get_full_path }}">{% trans "Résultats" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

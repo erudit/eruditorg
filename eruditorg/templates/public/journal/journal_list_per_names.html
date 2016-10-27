@@ -37,7 +37,7 @@
 {% block body_data_attributes %} data-spy="scroll" data-target="#journal_list_per_names" data-offset="180"{% endblock body_data_attributes %}
 
 {% block breadcrumb %}{{ block.super }}
-/ <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

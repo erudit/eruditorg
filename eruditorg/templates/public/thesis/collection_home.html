@@ -40,8 +40,9 @@
 {% block data_controller %}public:thesis:collection_home{% endblock data_controller %}
 
 {% block breadcrumb %}
-{{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
-/ <a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a>
+{{ block.super }}
+<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
+<li><a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

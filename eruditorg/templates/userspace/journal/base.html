@@ -28,14 +28,14 @@
 
 {% block content %}
 <div class="container-fluid">
-  <div id="breadcrumb">
+  <nav id="breadcrumb" class="breadcrumb">
     {% block breadcrumbs %}
-    <ul class="breadcrumb">
+    <ul>
       <li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
       {% block breadcrumb_end %}{% endblock breadcrumb_end %}
     </ul>
     {% endblock breadcrumbs %}
-  </div>
+  </nav>
   <div class="messages-wrapper">
     {% include "partials/messages.html" %}
   </div>

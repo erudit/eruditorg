@@ -6,7 +6,7 @@
 {% block breadcrumb_end %}
 {{ block.super }}
 <li><a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}">{% trans "Abonnements individuels" %}</a></li>
-<li>{% trans "Confirmer la suppression de l'abonnement ?" %}</li>
+<li><a href="#">{% trans "Confirmer la suppression de l'abonnement ?" %}</a></li>
 {% endblock breadcrumb_end %}
 
 {% block content_main %}

@@ -15,7 +15,7 @@
 {% endblock structured_data_breadcrumb_tail %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author_letter %}">{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}</a>
+  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author_letter %}">{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_title %}

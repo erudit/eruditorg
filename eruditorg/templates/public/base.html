@@ -143,14 +143,14 @@
     </div>
   </nav>
 </header>
-<nav id="breadcrumb" class="container-fluid">
+<nav id="breadcrumb" class="container-fluid breadcrumb">
   <h2 class="hidden">{% trans "Fil d'Ariane" %}</h2>
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <p class="no-margin">
-          <a href="/">Érudit</a> {% block breadcrumb %}{% endblock breadcrumb %}
-        </p>
+        <ul>
+          <li><a href="/">Érudit</a></li> {% block breadcrumb %}{% endblock breadcrumb %}
+        </ul>
       </div>
     </div>
   </div>

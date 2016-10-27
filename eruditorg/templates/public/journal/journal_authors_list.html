@@ -47,7 +47,7 @@
 {% block body_id %}journal_authors_list{% endblock body_id %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Auteurs" %}</a>
+  {{ block.super }} <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}">{% trans "Auteurs" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_main %}

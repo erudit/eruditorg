@@ -120,15 +120,21 @@
 {% block header_class %}static{% endblock header_class %}
 
 {% block breadcrumb %}{{ block.super }}
-  / <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
-  / <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
+<li>
+  <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
+</li>
+<li>
+  <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
    {% if article.issue.html_title %}
    {{ article.issue.html_title|striptags|safe|truncatechars:50 }}
    {% else %}
    {{ article.issue.volume_title_with_pages }}
    {% endif %}
   </a>
-  / <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article.title|truncatechars:50 }}</a>
+</li>
+<li>
+  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article.title|truncatechars:50 }}</a>
+</li>
 {% endblock breadcrumb %}
 
 {% block content %}

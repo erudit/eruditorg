@@ -20,9 +20,9 @@
 <li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
 {% if object.pk %}
 <li><a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
-<li>{% trans "Édition" %}</li>
+<li><a href="#">{% trans "Édition" %}</a></li>
 {% else %}
-<li>{% trans "Création d'une demande" %}</li>
+<li><a href="#">{% trans "Création d'une demande" %}</a></li>
 {% endif %}
 {% endblock breadcrumb_end %}
 

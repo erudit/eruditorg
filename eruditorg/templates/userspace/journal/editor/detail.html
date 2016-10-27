@@ -7,7 +7,7 @@
 {% block breadcrumb_end %}
 {{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
-<li>{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</li>
+<li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb_end %}
 
 {% block content_main %}

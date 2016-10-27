@@ -1,17 +1,43 @@
 /**
-* default breadcrumb
+* Breadcrumbs
 */
 
-#breadcrumb {
-  margin-bottom: $margin-vertical-default;
-  padding-bottom: $margin-vertical-default/4;
+.breadcrumb {
+	margin-bottom: 0;
+	padding: $margin-vertical-default 0;
 
-  p {
-    font-size: 14px;
+  ul {
+    @include list-unstyled;
+    display: block;
+    padding-bottom: $margin-vertical-default/2.5;
+    border-bottom: 1px solid $dark-grey;
   }
 
-  a {
-    color: $dark-grey;
+  li {
+    display: inline-block;
+    font-size: 14px;
+
+    a {
+      color: $dark-grey;
+    }
+
+    &:after {
+      content: ' / ';
+    }
+
+    &:last-child {
+
+      a {
+        color: #000;
+        @include fw-sans-medium;
+      }
+
+      &:after {
+        content: '';
+      }
+
+    }
+
   }
 
 }

@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block breadcrumb %}{{ block.super }}
-  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
-  / <a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a>
+<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
+<li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

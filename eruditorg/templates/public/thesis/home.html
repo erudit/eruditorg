@@ -33,7 +33,7 @@
 {% block data_controller %}public:thesis:thesis_home{% endblock data_controller %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a>
+  {{ block.super }} <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

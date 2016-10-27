@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a>
+  {{ block.super }} <li><a href="{% url 'public:auth:personal_data' %}">{% trans "Paramètres" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_wrapper %}

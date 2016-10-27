@@ -4,7 +4,7 @@
 {% block title %}{% trans 'Modification des informations personnelles' %}{% endblock title %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:auth:personal_data' %}">{% trans "Modification des informations personnelles" %}</a>
+  {{ block.super }} <li><a href="{% url 'public:auth:personal_data' %}">{% trans "Modification des informations personnelles" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

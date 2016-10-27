@@ -7,7 +7,7 @@
 {% block data_controller %}public:citations:list{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
-  / <a href="{% url 'public:citations:list' %}">{% trans "Ma bibliothèque" %}</a>
+<li><a href="{% url 'public:citations:list' %}">{% trans "Ma bibliothèque" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

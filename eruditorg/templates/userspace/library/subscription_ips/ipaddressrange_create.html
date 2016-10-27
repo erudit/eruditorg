@@ -7,7 +7,7 @@
 {% block breadcrumb_end %}
 {{ block.super }}
 <li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% trans "Plages d'adresses IP" %}</a></li>
-<li>{% trans "Creer une plage d'adresses IP" %}</li>
+<li><a href="#">{% trans "Creer une plage d'adresses IP" %}</a></li>
 {% endblock breadcrumb_end %}
 
 {% block content_main %}

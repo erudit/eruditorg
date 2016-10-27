@@ -7,7 +7,7 @@
 {% block breadcrumb_end %}
 {{ block.super }}
 <li><a href="{% url 'userspace:journal:authorization:list' %}">{% trans "Autorisations" %}</a></li>
-<li>{% trans "Ajouter un accès" %}</li>
+<li><a href="#">{% trans "Ajouter un accès" %}</a></li>
 {% endblock breadcrumb_end %}
 
 {% block content_main %}

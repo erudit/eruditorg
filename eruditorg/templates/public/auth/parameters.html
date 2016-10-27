@@ -4,7 +4,7 @@
 {% block title %}{% trans 'Modification du compte' %}{% endblock title %}
 
 {% block breadcrumb %}
-  {{ block.super }} / <a href="{% url 'public:auth:parameters' %}">{% trans "Modification du compte" %}</a>
+  {{ block.super }} <li><a href="{% url 'public:auth:parameters' %}">{% trans "Modification du compte" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}

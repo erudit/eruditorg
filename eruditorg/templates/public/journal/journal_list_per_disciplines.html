@@ -35,7 +35,7 @@
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
 
 {% block breadcrumb %}{{ block.super }}
-  / <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+<li><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% trans "Revues" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
