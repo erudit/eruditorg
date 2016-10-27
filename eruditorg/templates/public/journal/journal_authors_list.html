@@ -69,9 +69,9 @@
       <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn{% if article_type == 'article' %} active{% endif %}">{% trans "Articles" %}</a>
       <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn{% if article_type == 'compterendu' %} active{% endif %}">{% trans "Comptes rendus" %}</a>
     </nav>
-    <nav class="alpha-nav">
+    <nav>
       <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
-      <ul>
+      <ul class="alpha-nav">
         {% for letter_page, exist in letters_exists.items %}
         {% if exist %}
           <li><a {% if letter == letter_page %}class="active"{% endif %} href="{% url 'public:journal:journal_authors_list' journal.code %}?letter={{ letter_page }}{% if article_type %}&article_type={{ article_type }}{% endif %}">{{ letter_page|upper }}</a></li>

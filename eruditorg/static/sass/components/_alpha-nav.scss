@@ -1,34 +1,36 @@
+/**
+ * Tabs-style alphabetical navigation
+ */
+
 .alpha-nav {
   border-bottom: 1px solid $mid-grey;
-  margin-bottom: 1em;
+  margin: 0 0 1em 0;
+  list-style: none;
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  @include fw-mono;
 
-  ul {
+  li {
     margin: 0;
-    list-style: none;
-    display: inline;
-    font-size: 14px;
-    @include fw-mono;
+    padding: 0;
+    display: inline-block;
 
-    li {
-      margin: 0;
-      padding: 0;
-      display: inline-block;
+    > a {
+      display: block;
+      padding: 5px 0.35em;
 
-      > a {
-        padding: 0.35em;
-        &:hover, &:active, &:focus, &:active:focus, &.active {
-          text-decoration: none;
-          background: $coral-red;
-          color: #FFF;
-        }
-
+      &:hover, &:active, &:focus, &:active:focus, &.active {
+        text-decoration: none;
+        background: $coral-red;
+        color: #FFF;
       }
 
-      > span {
-        padding: 0.35em;
-        color: $mid-grey;
-      }
+    }
 
+    > span {
+      padding: 0.35em;
+      color: $mid-grey;
     }
 
   }
