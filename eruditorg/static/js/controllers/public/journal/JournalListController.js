@@ -44,7 +44,7 @@ export default {
     }
 
     $(window).scroll(function () {
-      var origOffsetY = $('#journal_list_per_names').offset().top + 110;
+      var origOffsetY = $('#journal_list_per_names').offset().top + 390;
       stickyFilterForm(origOffsetY);
       stickyItemsMenu(origOffsetY);
     });
