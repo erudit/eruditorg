@@ -10,12 +10,8 @@
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section class="card">
-    <div class="row card-header">
-      <div class="col-sm-6">
-        <h2>{% trans "Autorisations" %}</h2>
-      </div>
-    </div>
+  <section>
+    <h2>{% trans "Autorisations" %}</h2>
     {% for choice, app_authorizations in authorizations.items %}
     <div class="panel panel-default">
       <div class="panel-heading">

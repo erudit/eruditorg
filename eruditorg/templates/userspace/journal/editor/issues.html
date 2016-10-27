@@ -11,7 +11,7 @@
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section class="card card-issue_submissions">
+  <section>
     {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
     {% if can_manage_issuesubmission %}
     <div class="row">
@@ -21,12 +21,8 @@
       </div>
     </div>
     {% endif %}
-    <div class="row card-header">
-      <div class="col-sm-6">
-        <h2>{% trans "Historique" %}</h2>
-      </div>
-    </div>
-    <ul id="id_issuesubmission_list" class="row card-body">
+    <h2>{% trans "Historique" %}</h2>
+    <ul id="id_issuesubmission_list" class="row">
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
       <li class="col-xs-12">
         <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"

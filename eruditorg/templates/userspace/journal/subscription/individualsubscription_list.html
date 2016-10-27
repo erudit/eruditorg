@@ -10,8 +10,8 @@
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section class="card card-issue_submissions">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Abonnements" %}</h2>
       </div>
@@ -19,7 +19,7 @@
         <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
       </div>
     </div>
-    <ul id="id_subscription_list" class="row card-body">
+    <ul id="id_subscription_list" class="row">
       {% for subscription in subscriptions %}
       <li class="col-xs-12">
         <div class="content-wrapper">
@@ -54,15 +54,15 @@
     </div>
   </section>
   {% if subscribed_organisations %}
-  <section class="card card-subscribed_organisations">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
         <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
   {% endif %}
   {% if pending_subscriptions %}
-  <section class="card card-pending_subscriptions">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Abonnements en attente" %}</h2>
         <table class="table table-bordered">

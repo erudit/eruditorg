@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<ul id="id_issuesubmission_list" class="row card-body">
+<ul id="id_issuesubmission_list" class="row">
 {% for issue_submission in issues %}
   <li class="col-xs-12">
     <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}"

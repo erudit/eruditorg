@@ -28,123 +28,119 @@
 
 {% block content_main %}
 <div class="col-md-6 col-xs-12 col-centered">
-  <section class="card card-upload_form">
-    <div class="card-header">
-      <h2>{% trans "Déposer des fichiers de production" %}</h2>
-    </div>
+  <section>
+    <h2>{% trans "Déposer des fichiers de production" %}</h2>
     {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-    <div class="card-body">
-      <form class="row form-vertical" method="post">{% csrf_token %}
-        {% if form.errors %}
-        <div class="row">
-          <div class="col-xs-12">
-            <p class="alert alert-warning">{% trans "Veuillez remplir les champs obligatoires." %}</p>
+    <form class="row form-vertical" method="post">{% csrf_token %}
+      {% if form.errors %}
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="alert alert-warning">{% trans "Veuillez remplir les champs obligatoires." %}</p>
+        </div>
+      </div>
+      {% endif %}
+      <div class="panel-group">
+        <div class="panel">
+          <div class="panel-heading" role="tab" id="issue-metadata-heading">
+            <h3 class="panel-title">{% trans "Métadonnées" %}</h3>
+          </div>
+          <div id="issue-metadata">
+            <div class="panel-body">
+              <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
+                {{ form.year.label_tag }}
+                {{ form.year }}
+              </div>
+              <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
+                {{ form.volume.label_tag }}
+                {{ form.volume }}
+              </div>
+              <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
+                {{ form.number.label_tag }}
+                {{ form.number }}
+              </div>
+              <div class="form-group col-xs-12">
+                {{ form.contact.label_tag }}
+                {{ form.contact }}
+              </div>
+              <div class="form-group col-xs-12">
+                {{ form.comment.label_tag }}
+                {{ form.comment }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if object.pk and not object.is_submitted and not object.archived and not object.is_validated %}
+        <div class="panel">
+          <div class="panel-heading" role="tab" id="issue-upload-heading">
+            <h3 class="panel-title">{% trans "Fichiers" %}</h3>
+          </div>
+          <div id="issue-upload">
+            <div class="panel-body">
+              <div class="row">
+                <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
+                  {{ form.submissions }}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {% endif %}
-        <div class="panel-group">
-          <div class="panel">
-            <div class="panel-heading" role="tab" id="issue-metadata-heading">
-              <h3 class="panel-title">{% trans "Métadonnées" %}</h3>
-            </div>
-            <div id="issue-metadata">
-              <div class="panel-body">
-                <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
-                  {{ form.year.label_tag }}
-                  {{ form.year }}
-                </div>
-                <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
-                  {{ form.volume.label_tag }}
-                  {{ form.volume }}
-                </div>
-                <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
-                  {{ form.number.label_tag }}
-                  {{ form.number }}
-                </div>
-                <div class="form-group col-xs-12">
-                  {{ form.contact.label_tag }}
-                  {{ form.contact }}
-                </div>
-                <div class="form-group col-xs-12">
-                  {{ form.comment.label_tag }}
-                  {{ form.comment }}
+        {% if status_tracks %}
+        <div class="panel">
+          <div class="panel-heading" role="tab" id="issue-history-heading">
+            <h3 class="panel-title">{% trans "Historique" %}</h3>
+          </div>
+          <div id="issue-history">
+            <div class="panel-body">
+              <div class="row">
+                <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
+                  <ul>
+                  {% for track in status_tracks %}
+                    <li>
+                      {% if track.status == "D" %}
+                        {% trans "Marqué à corriger le" as status_prefix %}
+                      {% elif track.status == "S" %}
+                        {% trans "Soumis le" as status_prefix %}
+                      {% elif track.status == "V" %}
+                        {% trans "Validé le" as status_prefix %}
+                      {% endif %}
+                      {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
+                        {{ prefix }} {{ date }}
+                      {% endblocktrans %}
+                      {% if track.files_version and track.files_version.submissions.exists %}
+                        <br />
+                        <p>
+                          <strong>{% trans "Fichiers :" %}</strong>&nbsp;
+                          {% for f in track.files_version.submissions.all %}
+                            {% if f.is_complete %}
+                              <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                            {% else %}
+                              {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        </p>
+                      {% endif %}
+                      {% if track.comment %}
+                        <p><strong>{% trans "Commentaires :" %}</strong></p>
+                        <small>{{ track.comment }}</small>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                  </ul>
                 </div>
               </div>
             </div>
-          </div>
-          {% if object.pk and not object.is_submitted and not object.archived and not object.is_validated %}
-          <div class="panel">
-            <div class="panel-heading" role="tab" id="issue-upload-heading">
-              <h3 class="panel-title">{% trans "Fichiers" %}</h3>
-            </div>
-            <div id="issue-upload">
-              <div class="panel-body">
-                <div class="row">
-                  <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-                    {{ form.submissions }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% if status_tracks %}
-          <div class="panel">
-            <div class="panel-heading" role="tab" id="issue-history-heading">
-              <h3 class="panel-title">{% trans "Historique" %}</h3>
-            </div>
-            <div id="issue-history">
-              <div class="panel-body">
-                <div class="row">
-                  <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-                    <ul>
-                    {% for track in status_tracks %}
-                      <li>
-                        {% if track.status == "D" %}
-                          {% trans "Marqué à corriger le" as status_prefix %}
-                        {% elif track.status == "S" %}
-                          {% trans "Soumis le" as status_prefix %}
-                        {% elif track.status == "V" %}
-                          {% trans "Validé le" as status_prefix %}
-                        {% endif %}
-                        {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
-                          {{ prefix }} {{ date }}
-                        {% endblocktrans %}
-                        {% if track.files_version and track.files_version.submissions.exists %}
-                          <br />
-                          <p>
-                            <strong>{% trans "Fichiers :" %}</strong>&nbsp;
-                            {% for f in track.files_version.submissions.all %}
-                              {% if f.is_complete %}
-                                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
-                              {% else %}
-                                {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
-                              {% endif %}
-                            {% endfor %}
-                          </p>
-                        {% endif %}
-                        {% if track.comment %}
-                          <p><strong>{% trans "Commentaires :" %}</strong></p>
-                          <small>{{ track.comment }}</small>
-                        {% endif %}
-                      </li>
-                    {% endfor %}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          <div class="form-group text-right">
-            {% if not object.is_submitted and not object.archived and not object.is_validated %}
-            <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
-            <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
-            {% endif %}
           </div>
         </div>
-      </form>
-    </div>
+        {% endif %}
+        <div class="form-group text-right">
+          {% if not object.is_submitted and not object.archived and not object.is_validated %}
+          <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
+          <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+          {% endif %}
+        </div>
+      </div>
+    </form>
   </section>
 </div>
 {% endblock content_main %}

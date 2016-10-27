@@ -10,8 +10,8 @@
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section class="card card-members">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Membres" %}</h2>
       </div>
@@ -19,7 +19,7 @@
         <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">{% trans "Ajouter un membre" %}</a>
       </div>
     </div>
-    <ul id="id_member_list" class="row card-body">
+    <ul id="id_member_list" class="row">
       {% for member in members %}
       <li class="col-xs-12">
         <div class="content-wrapper">
@@ -42,8 +42,8 @@
     </div>
   </section>
   {% if pending_members %}
-  <section class="card card-pending_members">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Membres en attente d'acceptation" %}</h2>
         <table class="table table-bordered">

@@ -11,13 +11,13 @@
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section class="card card-issue_submissions">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Rapports de redevances" %}</h2>
       </div>
     </div>
-    <ul id="id_royalty_reports_list" class="row card-body">
+    <ul id="id_royalty_reports_list" class="row">
     {% for report in reports %}
       <li class="col-xs-12">
         <a href="{{ report.report_file.url }}"

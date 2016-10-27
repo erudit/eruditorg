@@ -10,8 +10,8 @@
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section class="card card-issue_submissions">
-    <div class="row card-header">
+  <section>
+    <div class="row">
       <div class="col-sm-6">
         <h2>{% trans "Plages d'adresses IP" %}</h2>
       </div>
@@ -19,7 +19,7 @@
         <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">{% trans "Créer une plage d'adresse IP" %}</a>
       </div>
     </div>
-    <ul id="id_ip_range_list" class="row card-body">
+    <ul id="id_ip_range_list" class="row">
       {% for ip_range in subscription_ip_ranges %}
       <li class="col-xs-12">
         <div class="content-wrapper">

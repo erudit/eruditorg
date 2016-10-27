@@ -12,15 +12,13 @@
 
 {% block content_main %}
 <div class="col-md-6 col-xs-12 col-centered">
-  <section class="card">
-    <div class="card-header">
-      {% if issue.is_draft %}
-      <div class="pull-right">
-        <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary btn-block">{% trans "Éditer la demande" %}</a>
-      </div>
-      {% endif %}
-      <h2>{% trans "Dépôt de fichiers de production" %}</h2>
+  <section>
+    {% if issue.is_draft %}
+    <div class="pull-right">
+      <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary btn-block">{% trans "Éditer la demande" %}</a>
     </div>
+    {% endif %}
+    <h2>{% trans "Dépôt de fichiers de production" %}</h2>
     {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
     <div class="row">
       <div class="col-md-12">
@@ -40,7 +38,6 @@
         {% endif %}
       </div>
     </div>
-    <div class="card-body">
       <div class="row">
         <div class="panel-group">
           <div class="panel">
@@ -172,7 +169,6 @@
           </div>
         </div>
       </div>
-    </div>
   </section>
 </div>
 {% endblock content_main %}
