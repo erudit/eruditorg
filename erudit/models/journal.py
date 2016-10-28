@@ -564,9 +564,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     surtitle = models.CharField(max_length=600, null=True, blank=True)
     """ The surtitle of the article """
 
-    title = models.CharField(max_length=600, null=True, blank=True)
-    """ The title of the article """
-
     bibliographic_reference = models.CharField(max_length=600, null=True, blank=True)
     """ Bibliographic reference of this article """
 
@@ -620,8 +617,14 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
 
+    @cached_property
+    def title(self):
+        return str(self.titles.filter(paral=False).first())
+
     def __str__(self):
-        return self.title[:50]
+        if self.title:
+            return self.title[:50]
+        return self.title
 
     # Fedora-related methods and properties
     # --
@@ -707,6 +710,20 @@ class ArticleAbstract(models.Model):
 
     def __str__(self):
         return '{} / {}'.format(str(self.article), self.language)
+
+
+class ArticleTitle(models.Model):
+    """ Represents the title of an article """
+
+    article = models.ForeignKey(Article, related_name='titles', verbose_name=_('Article'))
+    title = models.CharField(max_length=600, verbose_name=_('Titre'), blank=True, null=True)
+    language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
+    paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
+
+    def __str__(self):
+        if self.title:
+            return self.title[:50]
+        return str(self.title)
 
 
 class ArticleSectionTitle(models.Model):

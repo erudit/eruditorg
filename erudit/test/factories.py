@@ -10,10 +10,10 @@ faker = Factory.create()
 
 class OrganisationFactory(factory.django.DjangoModelFactory):
 
+    name = factory.Sequence(lambda n: 'organization{}'.format(n))
+
     class Meta:
         model = 'erudit.Organisation'
-
-    name = factory.Sequence(lambda n: 'organization{}'.format(n))
 
 
 class PublisherFactory(factory.django.DjangoModelFactory):
@@ -40,13 +40,14 @@ class DisciplineFactory(factory.django.DjangoModelFactory):
 
 class JournalFactory(factory.django.DjangoModelFactory):
 
-    class Meta:
-        model = 'erudit.journal'
-
+    collection = factory.SubFactory(CollectionFactory)
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
     redirect_to_external_url = False
+
+    class Meta:
+        model = 'erudit.journal'
 
     @factory.post_generation
     def publishers(self, create, extracted, **kwargs):
@@ -61,11 +62,13 @@ class JournalFactory(factory.django.DjangoModelFactory):
 
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
+
     class Meta:
         model = 'erudit.JournalType'
 
 
 class JournalInformationFactory(factory.django.DjangoModelFactory):
+
     journal = factory.SubFactory(JournalFactory)
 
     class Meta:
@@ -74,13 +77,13 @@ class JournalInformationFactory(factory.django.DjangoModelFactory):
 
 class IssueFactory(factory.django.DjangoModelFactory):
 
-    class Meta:
-        model = 'erudit.issue'
-
     journal = factory.SubFactory(JournalFactory)
     localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
     date_published = dt.datetime.now().date()
     year = dt.datetime.now().year
+
+    class Meta:
+        model = 'erudit.issue'
 
 
 class IssueContributorFactory(factory.django.DjangoModelFactory):
@@ -109,13 +112,23 @@ class IssueThemeFactory(factory.django.DjangoModelFactory):
 
 class ArticleFactory(factory.django.DjangoModelFactory):
 
-    class Meta:
-        model = 'erudit.article'
-
     issue = factory.SubFactory(IssueFactory)
     localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
     type = 'article'
     ordseq = 0
+
+    class Meta:
+        model = 'erudit.article'
+
+
+class ArticleTitleFactory(factory.django.DjangoModelFactory):
+
+    article = factory.SubFactory(ArticleFactory)
+    title = factory.Sequence(lambda n: 'Article {}'.format(n))
+    paral = False
+
+    class Meta:
+        model = 'erudit.ArticleTitle'
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):
