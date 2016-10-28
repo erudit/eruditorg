@@ -121,6 +121,16 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         model = 'erudit.article'
 
 
+class ArticleTitleFactory(factory.django.DjangoModelFactory):
+
+    article = factory.SubFactory(ArticleFactory)
+    title = factory.Sequence(lambda n: 'Article {}'.format(n))
+    paral = False
+
+    class Meta:
+        model = 'erudit.ArticleTitle'
+
+
 class AuthorFactory(factory.django.DjangoModelFactory):
     lastname = faker.last_name()
     firstname = faker.first_name()

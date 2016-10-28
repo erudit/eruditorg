@@ -24,6 +24,7 @@ from ...fedora.repository import api
 from ...fedora.repository import rest_api
 from ...models import Affiliation
 from ...models import Article
+from ...models import ArticleTitle
 from ...models import ArticleAbstract
 from ...models import ArticleSectionTitle
 from ...models import Author
@@ -605,7 +606,6 @@ class Command(BaseCommand):
         article.doi = article_erudit_object.doi
         article.first_page = article_erudit_object.first_page
         article.last_page = article_erudit_object.last_page
-        article.title = article_erudit_object.title
         article.bibliographic_reference = article_erudit_object.bibliographic_reference
         article.html_title = article_erudit_object.html_title
         article.subtitle = article_erudit_object.subtitle
@@ -619,6 +619,11 @@ class Command(BaseCommand):
 
         article.clean()
         article.save()
+
+        ArticleTitle(article=article, paral=False, title=article_erudit_object.titles['title'])
+
+        for lang, title in article_erudit_object.titles['paral'].items():
+            ArticleTitle(article=article, language=lang, title=title, paral=True).save()
 
         # STEP 3: creates or updates the authors of the article
         # --

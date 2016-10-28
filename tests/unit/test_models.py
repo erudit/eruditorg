@@ -12,6 +12,7 @@ from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
+from erudit.test.factories import ArticleTitleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
@@ -370,7 +371,7 @@ class TestArticle(BaseEruditTestCase):
         c1 = CollectionFactory.create(localidentifier=None)
         j1 = JournalFactory.create(collection=c1)
         issue_1 = IssueFactory.create(journal=j1)
-        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1)
+        article_1 = ArticleFactory.create(issue=issue_1)
         assert article_1.fedora_object is None
 
     def test_only_has_full_identifier_if_complete(self):
@@ -441,6 +442,11 @@ class TestArticle(BaseEruditTestCase):
         self.assertTrue(article_1.has_movable_limitation)
         self.assertTrue(article_2.has_movable_limitation)
         self.assertFalse(article_3.has_movable_limitation)
+
+    def test_can_return_its_title(self):
+        article = ArticleFactory()
+        article_title = ArticleTitleFactory(article=article)
+        assert article.title == article_title.title
 
 
 class TestAuthor(BaseEruditTestCase):
