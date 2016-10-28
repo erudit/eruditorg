@@ -35,12 +35,10 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 4. Layout-related sections
 @import
-  'layout/content',
-  'layout/footer',
-  'layout/header-userspace',
-  'layout/main-userspace',
-  'layout/nav-userspace',
-  'layout/sidenav';
+  'layout/userspace/content',
+  'layout/userspace/header',
+  'layout/userspace/nav',
+  'layout/userspace/sidenav';
 
 // 5. Components
 @import
@@ -54,7 +52,6 @@ $ionicons-font-path: '~ionicons/fonts';
   'components/lists',
   'components/modals',
   'components/navbars',
-  'components/page-headers-userspace',
   'components/pagination',
   'components/panels',
   'components/tables',

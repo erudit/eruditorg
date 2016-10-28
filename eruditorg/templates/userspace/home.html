@@ -3,20 +3,18 @@
 
 {% block title %}{% trans "Choix de l'espace de gestion" %}{% endblock title %}
 
+{% block body_id %}home{% endblock body_id %}
+
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6 col-md-offset-3">
       <h1>{% trans "Choix de l'espace de gestion" %}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
       {% if journals %}
-        <a href="{% url 'userspace:journal:entrypoint' %}" class="btn btn-primary">{% trans "Gestion des revues" %}</a>
+        <a href="{% url 'userspace:journal:entrypoint' %}" class="btn btn-secondary">{% trans "Gestion des revues" %}</a>
       {% endif %}
       {% if organisations %}
-        <a href="{% url 'userspace:library:entrypoint' %}" class="btn btn-primary">{% trans "Gestion des biliothèques" %}</a>
+        <a href="{% url 'userspace:library:entrypoint' %}" class="btn btn-secondary">{% trans "Gestion des bibliothèques" %}</a>
       {% endif %}
     </div>
   </div>

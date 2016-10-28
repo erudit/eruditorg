@@ -1,0 +1,19 @@
+// -----------------------------------------------------------------------------
+// Styles related to the page header (fixed at all times
+// -----------------------------------------------------------------------------
+
+#site-header.navbar  {
+  background-color: $coral-red;
+
+  .navbar-brand {
+    margin: 0;
+    height: 35px;
+
+    img {
+      width: auto;
+      height: 35px;
+    }
+
+  }
+
+}

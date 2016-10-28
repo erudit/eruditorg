@@ -1,3 +1,18 @@
+#home {
+  background-color: $light-grey;
+
+  main {
+    padding: 25vh 0;
+    text-align: center;
+
+    .btn {
+      margin: 1em 0.75em;
+    }
+
+  }
+
+}
+
 
 @mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
   font-family: $font-serif;
