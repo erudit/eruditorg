@@ -192,6 +192,11 @@
                       {% if document.real_object.subtitle %}
                       <span><br/>{{ document.real_object.subtitle }}</span>
                       {% endif %}
+                      {% if document.real_object.paral_titles %}
+                        {% for paral_title in document.real_object.paral_titles %}
+                            <span><br>{{ paral_title }}</span>
+                        {% endfor %}
+                      {% endif %}
                       {% if document.real_object.bibliographic_reference %}
                       <span><br><em>{{ document.real_object.bibliographic_reference }}</em></span>
                       {% endif %}

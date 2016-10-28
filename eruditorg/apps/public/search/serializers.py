@@ -48,6 +48,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     type = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
     bibliographic_reference = serializers.SerializerMethodField()
+    paral_titles = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     journal_name = serializers.SerializerMethodField()
     journal_type = serializers.SerializerMethodField()
@@ -64,8 +65,10 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = erudit_models.Article
         fields = [
-            'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier', 'issue_title', 'issue_number',
-            'issue_volume', 'issue_published', 'issue_volume_slug', 'issue_publication_date', 'title', 'surtitle', 'subtitle',
+            'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier',
+            'issue_title', 'issue_number', 'paral_titles',
+            'issue_volume', 'issue_published', 'issue_volume_slug', 'issue_publication_date',
+            'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
             'external_url', 'external_pdf_url', 'collection_name', 'bibliographic_reference',
         ]
@@ -84,6 +87,10 @@ class ArticleSerializer(serializers.ModelSerializer):
         if obj.type:
             return obj.get_type_display()
         return _('Article')
+
+    def get_paral_titles(self, obj):
+        paral_titles = obj.titles.filter(paral=True)
+        return list(t.title for t in paral_titles)
 
     def get_abstract(self, obj):
         return obj.abstract

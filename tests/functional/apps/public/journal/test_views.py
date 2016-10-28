@@ -253,7 +253,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
     def test_only_provides_authors_for_the_given_letter(self):
         # Seetup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1)
+        article_1 = ArticleFactory.create( issue=issue_1)
 
         author_1 = AuthorFactory.create(lastname='btest')
         author_2 = AuthorFactory.create(lastname='ctest1')
@@ -274,7 +274,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
     def test_can_provide_contributors_of_article(self):
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1)
+        article_1 = ArticleFactory.create( issue=issue_1)
 
         author_1 = AuthorFactory.create(lastname='btest')
         author_2 = AuthorFactory.create(lastname='ctest1')
@@ -299,8 +299,8 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
     def test_can_filter_by_article_type(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1, type='article')
-        article_2 = ArticleFactory.create(title="lorem ipsum 2", issue=issue_1, type='compterendu')  # noqa
+        article_1 = ArticleFactory.create( issue=issue_1, type='article')
+        article_2 = ArticleFactory.create( issue=issue_1, type='compterendu')  # noqa
 
         author_1 = AuthorFactory.create(lastname='btest')
         article_1.authors.add(author_1)
@@ -318,7 +318,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
     def test_can_filter_by_article_type_when_no_article_of_type(self):
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1, type='article')
+        article_1 = ArticleFactory.create( issue=issue_1, type='article')
         author_1 = AuthorFactory.create(lastname='atest')
         article_1.authors.add(author_1)
         url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
@@ -333,7 +333,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         """ Test that for a given selection in the authors list view, only the letters for which
         results are present are shown """
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(title="lorem ipsum", issue=issue_1, type='article')
+        article_1 = ArticleFactory.create( issue=issue_1, type='article')
         author_1 = AuthorFactory.create(lastname='atest')
         article_1.authors.add(author_1)
         url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})

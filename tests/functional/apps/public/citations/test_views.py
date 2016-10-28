@@ -15,6 +15,7 @@ from core.citations.test.factories import SavedCitationListFactory
 
 from erudit.models import JournalType
 from erudit.test.factories import ArticleFactory
+from erudit.test.factories import ArticleTitleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
@@ -47,9 +48,12 @@ class TestSavedCitationListView(EruditClientTestCase):
             collection=self.collection, type=JournalType.objects.get(code='C'))
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
-        self.article_1 = ArticleFactory.create(title='Title A', issue=self.issue_1)
-        self.article_2 = ArticleFactory.create(title='Title B', issue=self.issue_1)
-        self.article_3 = ArticleFactory.create(title='Title C', issue=self.issue_2)
+        self.article_1 = ArticleFactory.create(issue=self.issue_1)
+        self.article_2 = ArticleFactory.create(issue=self.issue_1)
+        self.article_3 = ArticleFactory.create(issue=self.issue_2)
+        ArticleTitleFactory(title='Title A', article=self.article_1)
+        ArticleTitleFactory(title='Title B', article=self.article_2)
+        ArticleTitleFactory(title='Title C', article=self.article_3)
         self.article_1.authors.add(author_3)
         self.article_2.authors.add(author_4)
         self.article_3.authors.add(author_3)
@@ -229,9 +233,9 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
             collection=self.collection, type=JournalType.objects.get(code='C'))
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
-        self.article_1 = ArticleFactory.create(title='Title A', issue=self.issue_1)
-        self.article_2 = ArticleFactory.create(title='Title B', issue=self.issue_1)
-        self.article_3 = ArticleFactory.create(title='Title C', issue=self.issue_2)
+        self.article_1 = ArticleFactory.create(issue=self.issue_1)
+        self.article_2 = ArticleFactory.create(issue=self.issue_1)
+        self.article_3 = ArticleFactory.create(issue=self.issue_2)
         self.article_1.authors.add(author_3)
         self.article_2.authors.add(author_4)
         self.article_3.authors.add(author_3)
@@ -295,9 +299,9 @@ class TestBaseEruditDocumentsCitationView(EruditClientTestCase):
             collection=self.collection, type=JournalType.objects.get(code='C'))
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
-        self.article_1 = ArticleFactory.create(title='Title A', issue=self.issue_1)
-        self.article_2 = ArticleFactory.create(title='Title B', issue=self.issue_1)
-        self.article_3 = ArticleFactory.create(title='Title C', issue=self.issue_2)
+        self.article_1 = ArticleFactory.create(issue=self.issue_1)
+        self.article_2 = ArticleFactory.create(issue=self.issue_1)
+        self.article_3 = ArticleFactory.create(issue=self.issue_2)
         self.article_1.authors.add(author_3)
         self.article_2.authors.add(author_4)
         self.article_3.authors.add(author_3)
