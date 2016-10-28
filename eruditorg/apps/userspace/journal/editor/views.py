@@ -272,9 +272,9 @@ class IssueSubmissionTransitionView(
 
 
 class IssueSubmissionSubmitView(IssueSubmissionTransitionView):
-    question = _("Vous êtes à l'étape d'effectuer la transmission finale des fichiers\
-    à l'équipe de production. Une fois envoyés, vous ne pourrez plus modifier les fichiers\
-    à moins que l'équipe de production ne vous demande de les corriger. Voulez-vous poursuivre?")
+    question = _("Vous êtes sur le point de soumettre les fichiers\
+    à l'équipe de production. Une fois envoyés, vous ne pourrez plus les modifier.\
+    Voulez-vous poursuivre?")
     permission_required = 'editor.manage_issuesubmission'
     success_message = _('Les fichiers ont été transmis avec succès')
     template_name = 'userspace/journal/editor/issuesubmission_submit.html'

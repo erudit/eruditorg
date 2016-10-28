@@ -5,15 +5,15 @@
   {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
   <p>Bonjour,</p>
 
-  <p>Certains de vos fichiers doivent être corrigés ({{ issue }}). S.v.p., veuillez apporter les corrections nécessaires et transmettre vos fichiers à nouveau. L'équipe de production pourra ensuite débuter la mise en ligne du numéro.</p>
-
-  <p>{% trans "Veuillez cliquer sur le lien suivant pour consulter les modifications à apporter à vos fichiers." %}</p>
+  <p>Voici les modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
 
   <p>
     <a href="http://{{ site.domain }}{{ issue_url }}">
-      {% blocktrans with url=issue_url %}Consulter le numéro{% endblocktrans %}
+      {% blocktrans with url=issue_url %}Modifier le dépôt du numéro{% endblocktrans %}
     </a>
   </p>
+
+  <p>Nous vous remercions pour votre précieuse collaboration.</p>
 
   <p>Pour plus d'information, veuillez communiquer avec:</p>
 

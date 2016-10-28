@@ -15,7 +15,7 @@
   <section>
     {% if issue.is_draft %}
     <div class="pull-right">
-      <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary btn-block">{% trans "Éditer la demande" %}</a>
+      <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary btn-block">{% trans "Modifier" %}</a>
     </div>
     {% endif %}
     <h2>{% trans "Dépôt de fichiers de production" %}</h2>
@@ -25,7 +25,7 @@
         <br />
         {% if issue.status == 'D' or issue.status == 'S' %}
         <div class="alert alert-warning">
-          {{ issue.get_status_display }}
+          {% if issue.status == 'D' %}{% trans "Attention" %}&nbsp;! {% trans "Numéro" %} {{ issue.get_status_display|lower }}.{% endif %}
         </div>
         {% elif issue.status == 'V' %}
         <div class="alert alert-success">
@@ -42,7 +42,7 @@
         <div class="panel-group">
           <div class="panel">
             <div class="panel-heading" role="tab" id="issue-metadata-heading">
-              <h3 class="panel-title">{% trans "Métadonnées" %}</h3>
+              <h3 class="panel-title">{% trans "Informations du numéro" %}</h3>
             </div>
             <div id="issue-metadata">
               <div class="panel-body">
@@ -63,7 +63,7 @@
                 <hr />
                 <div class="row">
                   <div class="col-xs-12">
-                    <p class="value-title">{% trans "Personne contact" %}</p>
+                    <p class="value-title">{% trans "Personne-ressource" %}</p>
                     <p class="value"><strong>{{ issue.contact }}</strong></p>
                   </div>
                 </div>
@@ -77,6 +77,7 @@
               </div>
             </div>
           </div>
+          {% if track.status == 'D' %}
           <div class="panel">
             <div class="panel-heading" role="tab" id="issue-upload-heading">
               <h3 class="panel-title">{% trans "Fichiers" %}</a>
@@ -96,13 +97,14 @@
                     {% endfor %}
                   </p>
                   {% else %}
-                    <p><strong><span class="muted">{% trans "Aucun fichier." %}</span></strong></p>
+                    <p><strong><span class="muted">{% trans "Aucun fichier" %}</span></strong></p>
                   {% endif %}
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          {% endif %}
           {% if status_tracks %}
           <div class="panel">
             <div class="panel-heading">
@@ -140,7 +142,7 @@
                         {% endif %}
                         {% if track.comment %}
                           <p><strong>{% trans "Commentaires :" %}</strong></p>
-                          <small>{{ track.comment }}</small>
+                          <small>{{ track.comment }}</small>
                         {% endif %}
                       </li>
                     {% endfor %}
