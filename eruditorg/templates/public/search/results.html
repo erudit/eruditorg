@@ -215,7 +215,7 @@
                   </p>
                     {% endwith %}
                     {% elif document.document_type == 'thesis' %}
-                    {% trans "Thèse" %},
+                    {% trans "Thèse" %} {% trans "déposée à" %}
                     {{ document.real_object.collection_name }}
                     {% endif %}
                   </p>
