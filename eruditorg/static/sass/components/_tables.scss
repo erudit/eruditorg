@@ -1,17 +1,25 @@
+/**
+ * Default table styles
+ */
+
 table {
+
   font-size: 0.85em;
   width: 100%;
   margin: 1em 0;
   counter-reset: row-number;
+
   th, td {
     padding: 1em 0.5em;
   }
+
   thead {
     th {
       white-space: nowrap;
       color: $darker-grey;
     }
   }
+
   tbody {
     tr {
       border-bottom: 1px solid $mid-grey;
@@ -20,20 +28,27 @@ table {
         border: 0;
       }
     }
+
     td {
       vertical-align: top;
+
       &.table-ordered_row:before {
         content: counter(row-number);
         color: $dark-grey;
       }
+
       &.table-date {
         white-space: nowrap;
       }
+
     }
+
     th.multicol {
       padding: 1em 0;
       font-weight: 400;
       color: #000;
     }
+
   }
+
 }

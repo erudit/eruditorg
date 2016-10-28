@@ -1,6 +1,7 @@
 /**
-* Unordered and Ordered lists
-*/
+ * Default unordered <ul> and ordered <ol> lists
+ * Default definition lists <dl>
+ */
 
 ul,
 ol {
@@ -17,15 +18,10 @@ ol {
   ol {
     margin-bottom: 0;
   }
-}
 
-// [converter] extracted as `@mixin list-unstyled` for libsass compatibility
-.list-unstyled {
-  @include list-unstyled;
-}
-
-// Inline turns list items into inline-block
-ol, ul {
+  &.unstyled {
+    @include list-unstyled;
+  }
 
   &.inline {
     @include list-unstyled;
@@ -33,6 +29,7 @@ ol, ul {
     > li {
       display: inline-block;
     }
+
   }
 
 }
@@ -51,36 +48,36 @@ dl {
 
   dt {
     float: left;
-    width: ($dl-horizontal-offset - 1);
     clear: left;
     font-weight: normal;
   }
 
-  dd {
-  }
+  /**
+   * Horizontal definition lists
+   * Defaults to being stacked without any of the below styles applied, until the
+   * grid breakpoint is reached (default of ~768px).
+   */
+  &.horizontal {
 
-}
-
-// Horizontal description lists
-//
-// Defaults to being stacked without any of the below styles applied, until the
-// grid breakpoint is reached (default of ~768px).
-
-.dl-horizontal {
-  dd {
-    @include clearfix; // Clear the floated `dt` if an empty `dd` is present
-  }
-
-  @media (min-width: $grid-float-breakpoint) {
-    dt {
-      float: left;
-      width: ($dl-horizontal-offset - 20);
-      clear: left;
-      text-align: right;
-      @include text-overflow;
-    }
     dd {
-      margin-left: $dl-horizontal-offset;
+      @include clearfix; // Clear the floated `dt` if an empty `dd` is present
     }
+
+    @media (min-width: $grid-float-breakpoint) {
+      dt {
+        float: left;
+        width: ($dl-horizontal-offset - 20);
+        clear: left;
+        text-align: right;
+        @include text-overflow;
+      }
+
+      dd {
+        margin-left: $dl-horizontal-offset;
+      }
+
+    }
+
   }
+
 }
