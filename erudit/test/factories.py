@@ -40,6 +40,7 @@ class DisciplineFactory(factory.django.DjangoModelFactory):
 
 class JournalFactory(factory.django.DjangoModelFactory):
 
+    collection = factory.SubFactory(CollectionFactory)
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))

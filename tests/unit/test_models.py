@@ -242,7 +242,7 @@ class TestIssue(BaseEruditTestCase):
     def test_knows_that_issues_with_open_access_has_no_movable_limitation(self):
         # Setup
         now_dt = dt.datetime.now()
-        j2 = JournalFactory.create(collection=self.collection, open_access=False)
+        j2 = JournalFactory.create(open_access=False)
         self.journal.open_access = True
         self.journal.type = JournalTypeFactory.create(code='C')
         self.journal.save()
@@ -294,15 +294,15 @@ class TestIssue(BaseEruditTestCase):
     def test_can_return_a_slug_that_can_be_used_in_urls(self):
         # Setup
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=2015, volume='4', number='1', localidentifier='i1')
+            year=2015, volume='4', number='1', localidentifier='i1')
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=2015, volume='4', number=None, localidentifier='i2')
+            year=2015, volume='4', number=None, localidentifier='i2')
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=2015, volume=None, number='2', localidentifier='i3')
+            year=2015, volume=None, number='2', localidentifier='i3')
         issue_4 = IssueFactory.create(
-            journal=self.journal, year=2015, volume='2-3', number='39', localidentifier='i4')
+            year=2015, volume='2-3', number='39', localidentifier='i4')
         issue_5 = IssueFactory.create(
-            journal=self.journal, year=2015, volume=None, number=None, localidentifier='i5')
+            year=2015, volume=None, number=None, localidentifier='i5')
         # Run & check
         self.assertEqual(issue_1.volume_slug, '2015-v4-n1')
         self.assertEqual(issue_2.volume_slug, '2015-v4')
@@ -333,13 +333,8 @@ class TestIssue(BaseEruditTestCase):
 
 class TestIssueContributor(BaseEruditTestCase):
 
-    def setUp(self):
-        super().setUp()
-        self.issue = IssueFactory(journal=self.journal)
-
     def test_can_format_its_name(self):
         contributor = IssueContributorFactory(
-            issue=self.issue,
             firstname="Tryphon",
             lastname=None,
             role_name=None
@@ -348,7 +343,6 @@ class TestIssueContributor(BaseEruditTestCase):
         assert contributor.format_name() == "Tryphon"
 
         contributor = IssueContributorFactory(
-            issue=self.issue,
             firstname="Tryphon",
             lastname="Tournesol",
             role_name=None
@@ -357,7 +351,6 @@ class TestIssueContributor(BaseEruditTestCase):
         assert contributor.format_name() == "Tryphon Tournesol"
 
         contributor = IssueContributorFactory(
-            issue=self.issue,
             firstname="Tryphon",
             lastname="Tournesol",
             role_name="Professeur"
@@ -403,8 +396,8 @@ class TestArticle(BaseEruditTestCase):
 
     def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
         # Setup
-        j1 = JournalFactory.create(collection=self.collection, open_access=True)
-        j2 = JournalFactory.create(collection=self.collection, open_access=False)
+        j1 = JournalFactory.create(open_access=True)
+        j2 = JournalFactory.create(open_access=False)
         issue_1 = IssueFactory.create(journal=j1)
         article_1 = ArticleFactory.create(issue=issue_1)
         issue_2 = IssueFactory.create(journal=j2)
@@ -417,7 +410,7 @@ class TestArticle(BaseEruditTestCase):
         # Setup
         self.journal.open_access = True
         self.journal.save()
-        j2 = JournalFactory.create(collection=self.collection, open_access=False)
+        j2 = JournalFactory.create(open_access=False)
         issue_1 = IssueFactory.create(journal=self.journal)
         article_1 = ArticleFactory.create(issue=issue_1)
         issue_2 = IssueFactory.create(journal=j2)
@@ -454,7 +447,7 @@ class TestAuthor(BaseEruditTestCase):
     def test_can_return_articles_written_for_a_given_journal(self):
         # Setup
         other_journal = JournalFactory.create(
-            collection=self.collection, publishers=[self.publisher])
+            publishers=[self.publisher])
         other_issue = IssueFactory.create(
             journal=other_journal, date_published=dt.datetime.now())
         other_article = ArticleFactory.create(issue=other_issue)
