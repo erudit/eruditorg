@@ -31,9 +31,15 @@ class Command(BaseCommand):
             '--mdate', action='store', dest='mdate',
             help='Modification date to use to retrieve theses to import (iso format).')
 
+        parser.add_argument(
+            '--collection', action='store', dest='collection',
+            help='Collection to import'
+        )
+
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.modification_date = options.get('mdate', None)
+        self.collection = options.get('collection', None)
 
         # Handles a potential modification date option
         try:
@@ -49,6 +55,8 @@ class Command(BaseCommand):
         # Imports the OAI-based collections
         thesis_count, thesis_errored_count = 0, 0
         for collection_config in erudit_settings.THESIS_PROVIDERS.get('oai'):
+            if self.collection and collection_config['collection_code'] != self.collection:
+                continue
             code = collection_config['collection_code']
             name = collection_config['collection_title']
             endpoint = collection_config['endpoint']
@@ -129,7 +137,6 @@ class Command(BaseCommand):
             'dc': 'http://purl.org/dc/elements/1.1/',
             'oai_dc': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
         }
-
         # Checks the data embedded into the record
         title = record.xml.find('.//dc:title', oai_ns).text
         author_name = record.xml.find('.//dc:creator', oai_ns).text

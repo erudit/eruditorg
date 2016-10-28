@@ -94,6 +94,19 @@ class IssueContributorFactory(factory.django.DjangoModelFactory):
         model = 'erudit.IssueContributor'
 
 
+class IssueThemeFactory(factory.django.DjangoModelFactory):
+
+    issue = factory.SubFactory(IssueFactory)
+
+    name = factory.Sequence(lambda n: 'Theme-{}'.format(n))
+    subname = factory.Sequence(lambda n: 'Theme-subname{}'.format(n))
+    html_name = factory.Sequence(lambda n: 'Theme-htmlname-{}'.format(n))
+    html_subname = factory.Sequence(lambda n: 'Theme-htmlsubname{}'.format(n))
+
+    class Meta:
+        model = 'erudit.IssueTheme'
+
+
 class ArticleFactory(factory.django.DjangoModelFactory):
 
     class Meta:

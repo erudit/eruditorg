@@ -453,6 +453,26 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 else False
         return False
 
+    @property
+    def name_with_themes(self):
+        def _format_theme(theme):
+            if theme.html_subname:
+                return "{html_name}: {html_subname}".format(
+                    html_name=theme.html_name,
+                    html_subname=theme.html_subname
+                )
+            return theme.html_name
+        themes = list(self.themes.all())
+        if len(themes) > 1:
+            first_theme = themes.pop(0)
+            return "{first_theme} / {themes}".format(
+                first_theme=_format_theme(first_theme),
+                themes=",".join(_format_theme(theme) for theme in themes)
+            )
+        if len(themes) == 1:
+            return _format_theme(themes.pop())
+        return self.title
+
 
 class IssueContributor(models.Model):
     """ A contributor of an issue """
@@ -547,6 +567,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     title = models.CharField(max_length=600, null=True, blank=True)
     """ The title of the article """
 
+    bibliographic_reference = models.CharField(max_length=600, null=True, blank=True)
+    """ Bibliographic reference of this article """
+
     html_title = models.CharField(max_length=800, null=True, blank=True)
     """ The title of the article (HTML) """
 
@@ -562,10 +585,14 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     external_pdf_url = models.URLField(null=True, blank=True, verbose_name=_('URL PDF'))
     """ External URL of the PDF version of the article """
 
-    ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER = 'article', 'compterendu', 'autre'
+    ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
+        'article', 'compterendu', 'autre', 'note'
+    )
+
     TYPE_CHOICES = (
         (ARTICLE_DEFAULT, _('Article')),
-        (ARTICLE_REPORT, _('Compte-rendu')),
+        (ARTICLE_REPORT, _('Compte rendu')),
+        (ARTICLE_NOTE, _('Note')),
         (ARTICLE_OTHER, _('Autre')),
     )
     type = models.CharField(max_length=64, choices=TYPE_CHOICES, verbose_name=_('Type'))
