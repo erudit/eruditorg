@@ -117,8 +117,12 @@ class ArticleSectionTitleInline(admin.TabularInline):
 
 
 class ArticleAdmin(admin.ModelAdmin):
+
+    def issue__localidentifier(self, obj):
+        return obj.issue.localidentifier
+
     inlines = (ArticleAbstractInline, ArticleSectionTitleInline, )
-    list_display = ('localidentifier', 'issue', 'title', )
+    list_display = ('localidentifier', 'issue__localidentifier', 'title', )
     raw_id_fields = ('issue', 'publisher', 'authors', )
     search_fields = ('id', 'title', 'localidentifier', )
 
