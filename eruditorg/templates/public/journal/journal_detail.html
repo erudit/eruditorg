@@ -70,12 +70,11 @@
     {% trans "Aucune information" as tab_empty_msg %}
 
     {% if journal_info.about %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-about" role="tabpanel">
-      <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-about-content">
+    <section class="journal-info-block">
+      <h2>
         {% trans "À propos" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
       </h2>
-      <section id="journal-info-about-content" class="akkordion-content akkordion-active" aria-labelledby="journal-info-about">
+      <section id="journal-info-about-content" class="akkordion-content akkordion-active">
         {{ journal_info.about|default:tab_empty_msg|safe }}
       </section>
     </section>
