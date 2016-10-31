@@ -34,7 +34,7 @@
 {% block body_class %}{{ block.super }} journal_list{% endblock body_class %}
 {% block body_id %}journal_list_per_names{% endblock body_id %}
 {% block data_controller %}public:journal:journal_list{% endblock data_controller %}
-{% block body_data_attributes %} data-spy="scroll" data-target="#journal_list_per_names" data-offset="180"{% endblock body_data_attributes %}
+{% block body_data_attributes %} data-spy="scroll" data-target="#id_journal_list_body" data-offset="180"{% endblock body_data_attributes %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
@@ -116,7 +116,7 @@
         <nav class="col-md-9 col-lg-offset-1 hidden-xs list-header">
           <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
           <div id="items_menu">
-            <ul class="nav index alpha-nav">
+            <ul class="nav alpha-nav">
               {% for objects_group in sorted_objects %}
               {% if not objects_group.key %}
               <li><a href="#section-void">{% trans "Autres" %}</a></li>
