@@ -165,7 +165,7 @@
                   <p class="authors">
                   {% if document.real_object.authors %}
                     {% for author in document.real_object.authors %}
-                    <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}, {% endif %}
+                    <span class="author">{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}; {% endif %}
                     {% endfor %}
                   {% elif document.real_object.author %}
                     {% with author=document.real_object.author %}
@@ -193,19 +193,37 @@
                       {% if document.real_object.subtitle %}
                       <span><br/>{{ document.real_object.subtitle }}</span>
                       {% endif %}
+                      {% if document.real_object.paral_titles %}
+                        {% for paral_title in document.real_object.paral_titles %}
+                            <span><br>{{ paral_title }}</span>
+                        {% endfor %}
+                      {% endif %}
+                      {% if document.real_object.bibliographic_reference %}
+                      <span><br><em>{{ document.real_object.bibliographic_reference }}</em></span>
+                      {% endif %}
                     </a>
                   </h3>
                 </div>
                 {# article metadata #}
                 <div class="meta">
-                  {% if document.real_object.issue_title %}<p>{{ document.real_object.issue_title }}</p>{% endif %}
                   <p>
                     {% if document.document_type == 'article' %}
-                    {% trans "Article" %},
+                    {% with article=document.real_object %}
+                    <strong>{{ article.type }}</strong>
+                    {% if article.type == 'note' or article.type == 'Note' %}publiée{% else %}publié{% endif %}
+                    {% trans "dans la revue" %}
+                    {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
+                    <a href="{{ article.journal_url }}">{{ article.journal_name }}</a> ({{ article.collection_name }})
+                    {% if document.real_object.issue_title %}<p><strong>{{ document.real_object.issue_title|safe }}</strong></p>{% endif %}
+                  </p>
+                  <p>
+                  {{ article.issue_publication_date }}
+                  </p>
+                    {% endwith %}
                     {% elif document.document_type == 'thesis' %}
-                    {% trans "Thèse" %},
-                    {% endif %}
+                    {% trans "Thèse" %} {% trans "déposée à" %}
                     {{ document.real_object.collection_name }}
+                    {% endif %}
                   </p>
                 </div>
                 {# abstract #}

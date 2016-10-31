@@ -2,7 +2,9 @@
 
 from django.conf import settings
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
 from django.utils import translation
+from django.utils.translation import ugettext as _
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 from rest_framework import serializers
@@ -43,24 +45,32 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     authors = serializers.SerializerMethodField()
     abstract = serializers.SerializerMethodField()
+    type = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
+    bibliographic_reference = serializers.SerializerMethodField()
+    paral_titles = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     journal_name = serializers.SerializerMethodField()
+    journal_type = serializers.SerializerMethodField()
+    journal_url = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
     issue_number = serializers.SerializerMethodField()
     issue_volume = serializers.SerializerMethodField()
     issue_published = serializers.SerializerMethodField()
     issue_volume_slug = serializers.SerializerMethodField()
+    issue_publication_date = serializers.SerializerMethodField()
     has_pdf = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Article
         fields = [
-            'journal_code', 'journal_name', 'issue_localidentifier', 'issue_title', 'issue_number',
-            'issue_volume', 'issue_published', 'issue_volume_slug', 'title', 'surtitle', 'subtitle',
-            'processing', 'authors', 'abstract', 'first_page', 'last_page', 'has_pdf',
-            'external_url', 'external_pdf_url', 'collection_name',
+            'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier',
+            'issue_title', 'issue_number', 'paral_titles',
+            'issue_volume', 'issue_published', 'issue_volume_slug', 'issue_publication_date',
+            'title', 'surtitle', 'subtitle',
+            'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
+            'external_url', 'external_pdf_url', 'collection_name', 'bibliographic_reference',
         ]
 
     def get_authors(self, obj):
@@ -73,11 +83,23 @@ class ArticleSerializer(serializers.ModelSerializer):
             })
         return authors
 
+    def get_type(self, obj):
+        if obj.type:
+            return obj.get_type_display()
+        return _('Article')
+
+    def get_paral_titles(self, obj):
+        paral_titles = obj.titles.filter(paral=True)
+        return list(t.title for t in paral_titles)
+
     def get_abstract(self, obj):
         return obj.abstract
 
     def get_collection_name(self, obj):
         return obj.issue.journal.collection.name
+
+    def get_bibliographic_reference(self, obj):
+        return obj.bibliographic_reference
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code
@@ -85,11 +107,25 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_journal_name(self, obj):
         return obj.issue.journal.name
 
+    def get_journal_type(self, obj):
+        if obj.issue.journal.type:
+            return obj.issue.journal.type.get_code_display().lower()
+        return ''
+
+    def get_issue_publication_date(self, obj):
+        return obj.issue.volume_title
+
+    def get_journal_url(self, obj):
+        journal = obj.issue.journal
+        if journal.external_url:
+            return journal.external_url
+        return reverse('public:journal:journal_detail', args=(journal.code, ))
+
     def get_issue_localidentifier(self, obj):
         return obj.issue.localidentifier
 
     def get_issue_title(self, obj):
-        return obj.issue.title
+        return obj.issue.name_with_themes
 
     def get_issue_number(self, obj):
         return obj.issue.number_for_display
