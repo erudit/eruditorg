@@ -623,8 +623,8 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     def __str__(self):
         if self.title:
-            return self.title[:50]
-        return self.title
+            return self.title
+        return _('Aucun titre')
 
     # Fedora-related methods and properties
     # --
@@ -722,9 +722,8 @@ class ArticleTitle(models.Model):
 
     def __str__(self):
         if self.title:
-            return self.title[:50]
-        return str(self.title)
-
+            return self.title
+        return _('Aucun titre')
 
 class ArticleSectionTitle(models.Model):
     """ Represents a section title associated with an article. """
