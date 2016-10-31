@@ -124,7 +124,7 @@ class ArticleAdmin(admin.ModelAdmin):
     inlines = (ArticleAbstractInline, ArticleSectionTitleInline, )
     list_display = ('localidentifier', 'issue__localidentifier', 'title', )
     raw_id_fields = ('issue', 'publisher', 'authors', )
-    search_fields = ('id', 'title', 'localidentifier', )
+    search_fields = ('id', 'localidentifier', )
 
     list_filter = ('type', 'issue__journal__collection', )
 
