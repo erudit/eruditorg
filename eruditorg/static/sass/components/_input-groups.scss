@@ -64,11 +64,11 @@
   font-size: $font-size-base;
   font-weight: normal;
   line-height: 1;
-  color: $dark-grey;
+  color: #FFF;
   text-align: center;
-  background-color: #FFF;
-  border: 1px solid $dark-grey;
-  border-radius: 0;
+  background-color: $coral-red;
+  border: 0;
+  @include border-radius(0);
 
   // Nuke default margins from checkboxes and radios to vertically center within.
   input[type="radio"],

@@ -1,5 +1,5 @@
 /**
- * Default form styles (labels, inputs, textareas, selects)
+ * Default form styles (labels, inputs, textareas, selects, legends, fieldsets)
  */
 
 
@@ -223,88 +223,6 @@ label.required:after {
   }
 }
 
-
-/**
-* Checkboxes and radios (forked from Bootstrap)
-*/
-
-.radio,
-.checkbox {
-  position: relative;
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  label {
-    min-height: $line-height-computed; // Ensure the input doesn't jump when there is no text
-    padding-left: 20px;
-    margin-bottom: 0;
-    font-weight: normal;
-    cursor: pointer;
-  }
-}
-.radio input[type="radio"],
-.radio-inline input[type="radio"],
-.checkbox input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
-  position: absolute;
-  margin-left: -20px;
-  margin-top: 4px \9;
-}
-
-.radio + .radio,
-.checkbox + .checkbox {
-  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
-}
-
-// Radios and checkboxes on same line
-.radio-inline,
-.checkbox-inline {
-  position: relative;
-  display: inline-block;
-  padding-left: 20px;
-  margin-bottom: 0;
-  vertical-align: middle;
-  font-weight: normal;
-  cursor: pointer;
-}
-.radio-inline + .radio-inline,
-.checkbox-inline + .checkbox-inline {
-  margin-top: 0;
-  margin-left: 10px; // space out consecutive inline controls
-}
-
-// Apply same disabled cursor tweak as for inputs
-// Some special care is needed because <label>s don't inherit their parent's `cursor`.
-//
-// Note: Neither radios nor checkboxes can be readonly.
-input[type="radio"],
-input[type="checkbox"] {
-  &[disabled],
-  &.disabled,
-  fieldset[disabled] & {
-    cursor: not-allowed;
-  }
-}
-// These classes are used directly on <label>s
-.radio-inline,
-.checkbox-inline {
-  &.disabled,
-  fieldset[disabled] & {
-    cursor: not-allowed;
-  }
-}
-// These classes are used on elements with <label> descendants
-.radio,
-.checkbox {
-  &.disabled,
-  fieldset[disabled] & {
-    label {
-      cursor: not-allowed;
-    }
-  }
-}
-
 /* remove extra borders and padding for mobile viewing */
 @media(max-width:768px) {
   form {
@@ -330,12 +248,4 @@ input[type="checkbox"] {
       top: 0;
     }
   }
-}
-
-/* bootstrap overrides */
-.input-group-addon {
-  @include border-radius(0);
-  border: 0;
-  background: $coral-red;
-  color: #FFF;
 }
