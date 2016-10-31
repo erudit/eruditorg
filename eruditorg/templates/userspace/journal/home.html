@@ -7,19 +7,18 @@
 {% block content_main %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 col-md-offset-2">
       {% if journal_info %}
       <div class="journal-infos" role="tablist" aria-multiselectable="true">
 
         {% trans "Aucune information" as tab_empty_msg %}
 
         {% if journal_info.about %}
-        <section class="journal-info-block akkordion" role="tab" id="journal-info-about" role="tabpanel">
-          <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-about-content">
+        <section class="journal-info-block">
+          <h2>
             {% trans "À propos" %}
-            <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
           </h2>
-          <section id="journal-info-about-content" class="akkordion-content akkordion-active" aria-labelledby="journal-info-about">
+          <section id="journal-info-about-content" class="akkordion-content akkordion-active">
             {{ journal_info.about|default:tab_empty_msg|safe }}
           </section>
         </section>
@@ -88,87 +87,8 @@
       </div>
       {% endif %}
     </div>
-    <div class="col-md-4">
-      <div class="journal-meta">
-        <dl class="journal-meta--list">
-
-          {% if scope_current_journal.members.exists %}
-          <dt>{% trans "Direction" %}</dt>
-          {% for member in scope_current_journal.members.all %}
-          <dd>{{ member.get_full_name }}</dd>
-          {% endfor %}
-          {% endif %}
-
-          {% if scope_current_journal.publishers.exists %}
-          <dt>
-            {% blocktrans count total=scope_current_journal.publishers.all|length %}
-            Éditeur
-            {% plural %}
-            Éditeurs
-            {% endblocktrans %}
-          </dt>
-          {% for publisher in scope_current_journal.publishers.all %}
-          <dd>{{ publisher.name }}</dd>
-          {% endfor %}
-          {% endif %}
-
-          {% if scope_current_journal.issn_print or scope_current_journal.issn_web %}
-          <dt>{% trans "ISSN" %}</dt>
-          {% if scope_current_journal.issn_print %}
-          <dd>{{ scope_current_journal.issn_print }} ({% trans "imprimé" %})</dd>
-          <dd>{{ scope_current_journal.issn_web }} ({% trans "numérique" %})</dd>
-          {% endif %}
-          {% endif %}
-
-          {% if scope_current_journal.issues_per_year %}
-          <dt>{% trans "Fréquence" %}</dt>
-          <dd>
-            {% blocktrans count issues_per_year=scope_current_journal.issues_per_year %}
-            {{ issues_per_year }} numéro par année
-            {% plural %}
-            {{ issues_per_year }} numéros par année
-            {% endblocktrans %}
-          </dd>
-          {% endif %}
-
-          <dt>{% trans "Période de publication" %}</dt>
-          <dd>{{ scope_current_journal.publication_period }}</dd>
-
-          <dt>{% trans "Type de support" %}</dt>
-          <dd>
-            {% if scope_current_journal.paper %}
-            {% trans "Numérique et papier" %}
-            {% else %}
-            {% trans "Numérique" %}
-            {% endif %}
-          </dd>
-
-          <dt>{% trans "Politique d'accès" %}</dt>
-          {% if scope_current_journal.open_access %}
-          <dd>{% trans "Disponible en libre accès" %}</dd>
-          {% else %}
-          <dd>{% trans "Non-disponible en libre accès" %}</dd>
-          {% endif %}
-
-          {% if scope_current_journal.disciplines.all|length > 0 %}
-          <dt>
-            {% blocktrans count scope_current_journal.disciplines.all|length as disciplines_count %}
-            Discipline
-            {% plural %}
-            Disciplines
-            {% endblocktrans %}
-          </dt>
-          <dd>
-            {% for discipline in scope_current_journal.disciplines.all %}
-            {{ discipline.name }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-          </dd>
-          {% endif %}
-
-        </dl>
-
-        <img src="{% url 'public:journal:journal_logo' scope_current_journal.code %}" alt="" class="img-responsive journal_logo" />
-      </div>
+    <div class="col-xs-12">
+      <img src="{% url 'public:journal:journal_logo' scope_current_journal.code %}" alt="" class="img-responsive img-centered" />
     </div>
   </div>
 </div>
