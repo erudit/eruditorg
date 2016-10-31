@@ -1,10 +1,10 @@
 Django==1.9.9
-git+https://github.com/erudit/erudit-core.git@0.2.19#egg=erudit-core
+git+https://github.com/erudit/erudit-core.git@0.2.21#egg=erudit-core
+git+https://github.com/erudit/liberuditarticle.git@0.1.17#egg=liberuditarticle
 git+https://github.com/erudit/django-resumable-uploads.git@master#egg=django-resumable-uploads
 git+https://github.com/erudit/django-account-actions.git@master#egg=django-account-actions
 eulxml==1.0.1
 eulfedora==1.5.0
-git+https://github.com/erudit/liberuditarticle.git@0.1.16#egg=liberuditarticle
 django-post-office==2.0.5
 jsonfield==1.0.3
 lxml==3.5.0
