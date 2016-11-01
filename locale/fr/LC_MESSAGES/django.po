@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-21 08:53-0500\n"
+"POT-Creation-Date: 2016-11-01 15:48-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,497 +18,529 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: apps/public/account_actions/forms.py:10
-msgid "Email address"
+#: eruditorg/apps/public/account_actions/forms.py:10
+#: eruditorg/templates/public/account_actions/register.html:36
+#: eruditorg/templates/public/auth/password_reset_form.html:18
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:72
+#: eruditorg/templates/userspace/library/members/member_list.html:53
+msgid "Adresse courriel"
 msgstr ""
 
-#: apps/public/account_actions/forms.py:30 apps/public/auth/forms.py:38
-msgid "Cette adresse e-mail est déjà utilisée"
+#: eruditorg/apps/public/account_actions/forms.py:30
+#: eruditorg/apps/public/auth/forms.py:38
+msgid "Cette adresse courriel est déjà utilisée"
 msgstr ""
 
-#: apps/public/account_actions/urls.py:10
+#: eruditorg/apps/public/account_actions/urls.py:10
 msgid "^(?P<key>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/account_actions/urls.py:11
+#: eruditorg/apps/public/account_actions/urls.py:11
 msgid "^(?P<key>[\\w-]+)/c/$"
 msgstr ""
 
-#: apps/public/account_actions/urls.py:12
+#: eruditorg/apps/public/account_actions/urls.py:12
 msgid "^(?P<key>[\\w-]+)/inscription/$"
 msgstr ""
 
-#: apps/public/auth/forms.py:16 templates/public/auth/login.html:32
-#: templates/public/auth/login.html:92
-msgid "Nom d'utilisateur ou adresse e-mail"
+#: eruditorg/apps/public/auth/forms.py:16
+#: eruditorg/templates/public/auth/login.html:31
+#: eruditorg/templates/public/auth/login.html:79
+msgid "Nom d'utilisateur ou adresse courriel"
 msgstr ""
 
-#: apps/public/auth/urls.py:13
+#: eruditorg/apps/public/auth/urls.py:13
 msgid "^connexion/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:16
+#: eruditorg/apps/public/auth/urls.py:16
 msgid "^deconnexion/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:20
+#: eruditorg/apps/public/auth/urls.py:20
 msgid "^donnees-personnelles/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:22
+#: eruditorg/apps/public/auth/urls.py:22
 msgid "^parametres/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:25
+#: eruditorg/apps/public/auth/urls.py:25
 msgid "^mot-de-passe/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:28
+#: eruditorg/apps/public/auth/urls.py:28
 msgid "^mot-de-passe/reinitialisation/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:34
+#: eruditorg/apps/public/auth/urls.py:34
 msgid "^mot-de-passe/reinitialisation/termine/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:36
+#: eruditorg/apps/public/auth/urls.py:36
 msgid ""
 "^reinitialisation/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-"
 "[0-9A-Za-z]{1,20})/$"
 msgstr ""
 
-#: apps/public/auth/urls.py:41
+#: eruditorg/apps/public/auth/urls.py:41
 msgid "^reinitialisation/termine/$"
 msgstr ""
 
-#: apps/public/auth/views.py:28
+#: eruditorg/apps/public/auth/views.py:28
 msgid "Vos informations personelles ont été mises à jour avec succès."
 msgstr ""
 
-#: apps/public/auth/views.py:44
+#: eruditorg/apps/public/auth/views.py:44
 msgid "Votre compte a été mis à jour avec succès."
 msgstr ""
 
-#: apps/public/auth/views.py:66
+#: eruditorg/apps/public/auth/views.py:66
 msgid "Votre mot de passe a été mis à jour avec succès"
 msgstr ""
 
-#: apps/public/citations/urls.py:11
+#: eruditorg/apps/public/citations/urls.py:11
 msgid "^ajout/(?P<document_id>\\d+)/$"
 msgstr ""
 
-#: apps/public/citations/urls.py:13
+#: eruditorg/apps/public/citations/urls.py:13
 msgid "^suppression/(?P<document_id>\\d+)/$"
 msgstr ""
 
-#: apps/public/citations/urls.py:15
+#: eruditorg/apps/public/citations/urls.py:15
 msgid "^suppression/batch/$"
 msgstr ""
 
-#: apps/public/citations/urls.py:17
+#: eruditorg/apps/public/citations/urls.py:17
 msgid "^export\\.enw$"
 msgstr ""
 
-#: apps/public/citations/urls.py:18
+#: eruditorg/apps/public/citations/urls.py:18
 msgid "^export\\.ris$"
 msgstr ""
 
-#: apps/public/citations/urls.py:19
+#: eruditorg/apps/public/citations/urls.py:19
 msgid "^export\\.bib$"
 msgstr ""
 
-#: apps/public/citations/views.py:26 apps/public/thesis/views.py:81
+#: eruditorg/apps/public/citations/views.py:26
+#: eruditorg/apps/public/thesis/views.py:81
 msgid "Auteur (A–Z)"
 msgstr ""
 
-#: apps/public/citations/views.py:27 apps/public/thesis/views.py:82
+#: eruditorg/apps/public/citations/views.py:27
+#: eruditorg/apps/public/thesis/views.py:82
 msgid "Auteur (Z–A)"
 msgstr ""
 
-#: apps/public/citations/views.py:28
+#: eruditorg/apps/public/citations/views.py:28
 msgid "Année (croissant)"
 msgstr ""
 
-#: apps/public/citations/views.py:29
+#: eruditorg/apps/public/citations/views.py:29
 msgid "Année (décroissant)"
 msgstr ""
 
-#: apps/public/citations/views.py:30 apps/public/search/forms.py:285
-#: apps/public/thesis/views.py:85
+#: eruditorg/apps/public/citations/views.py:30
+#: eruditorg/apps/public/search/forms.py:285
+#: eruditorg/apps/public/thesis/views.py:85
 msgid "Titre (A–Z)"
 msgstr ""
 
-#: apps/public/citations/views.py:31 apps/public/search/forms.py:286
-#: apps/public/thesis/views.py:86
+#: eruditorg/apps/public/citations/views.py:31
+#: eruditorg/apps/public/search/forms.py:286
+#: eruditorg/apps/public/thesis/views.py:86
 msgid "Titre (Z–A)"
 msgstr ""
 
-#: apps/public/citations/views.py:131
+#: eruditorg/apps/public/citations/views.py:131
 msgid "Ce document n'est pas présent dans les notices"
 msgstr ""
 
-#: apps/public/journal/feeds.py:21 apps/public/journal/feeds.py:57
+#: eruditorg/apps/public/journal/feeds.py:21
+#: eruditorg/apps/public/journal/feeds.py:57
 msgid "Syndication d'Érudit"
 msgstr ""
 
-#: apps/public/journal/forms.py:12
+#: eruditorg/apps/public/journal/forms.py:12
 msgid "Libre accès"
 msgstr ""
 
-#: apps/public/journal/forms.py:14
+#: eruditorg/apps/public/journal/forms.py:14
 msgid "Par type"
 msgstr ""
 
-#: apps/public/journal/forms.py:16
+#: eruditorg/apps/public/journal/forms.py:16
 msgid "Par fonds"
 msgstr ""
 
-#: apps/public/journal/templatetags/public_journal_tags.py:27
+#: eruditorg/apps/public/journal/templatetags/public_journal_tags.py:27
 #, python-brace-format
 msgid "Avec {first_author}"
 msgstr ""
 
-#: apps/public/journal/templatetags/public_journal_tags.py:31
+#: eruditorg/apps/public/journal/templatetags/public_journal_tags.py:31
 #, python-brace-format
 msgid "Avec {first_author} et {last_author}"
 msgstr ""
 
-#: apps/public/journal/templatetags/public_journal_tags.py:35
+#: eruditorg/apps/public/journal/templatetags/public_journal_tags.py:35
 #, python-brace-format
 msgid "Avec {first_author}, {contributors} et {last_author}"
 msgstr ""
 
-#: apps/public/journal/urls.py:13
+#: eruditorg/apps/public/journal/urls.py:13
 msgid "^revues/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:14
+#: eruditorg/apps/public/journal/urls.py:14
 msgid "^rss\\.xml$"
 msgstr ""
 
-#: apps/public/journal/urls.py:17
+#: eruditorg/apps/public/journal/urls.py:17
 msgid "^revues/(?P<code>[\\w-]+)/"
 msgstr ""
 
-#: apps/public/journal/urls.py:19 apps/public/journal/urls.py:27
+#: eruditorg/apps/public/journal/urls.py:19
+#: eruditorg/apps/public/journal/urls.py:27
 msgid "^logo.jpg$"
 msgstr ""
 
-#: apps/public/journal/urls.py:20
+#: eruditorg/apps/public/journal/urls.py:20
 msgid "^auteurs/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:25
+#: eruditorg/apps/public/journal/urls.py:25
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<localidentifier>[\\w-]+)/"
 msgstr ""
 
-#: apps/public/journal/urls.py:31
+#: eruditorg/apps/public/journal/urls.py:31
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
 msgstr ""
 
-#: apps/public/journal/urls.py:33
+#: eruditorg/apps/public/journal/urls.py:33
 msgid "^resume/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:34
+#: eruditorg/apps/public/journal/urls.py:34
 msgid "^media/(?P<media_localid>[.\\w-]+)$"
 msgstr ""
 
-#: apps/public/journal/urls.py:35
+#: eruditorg/apps/public/journal/urls.py:35
 msgid "^citation\\.enw$"
 msgstr ""
 
-#: apps/public/journal/urls.py:36
+#: eruditorg/apps/public/journal/urls.py:36
 msgid "^citation\\.ris$"
 msgstr ""
 
-#: apps/public/journal/urls.py:37
+#: eruditorg/apps/public/journal/urls.py:37
 msgid "^citation\\.bib$"
 msgstr ""
 
-#: apps/public/journal/urls.py:38
+#: eruditorg/apps/public/journal/urls.py:38
 msgid "^contenu\\.pdf$"
 msgstr ""
 
-#: apps/public/journal/urls.py:39
+#: eruditorg/apps/public/journal/urls.py:39
 msgid "^premierepage\\.pdf$"
 msgstr ""
 
-#: apps/public/journal/urls.py:42
+#: eruditorg/apps/public/journal/urls.py:42
 msgid ""
 "^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
 "P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+).xml"
 msgstr ""
 
-#: apps/public/journal/urls.py:49
+#: eruditorg/apps/public/journal/urls.py:49
 msgid "^redirection/"
 msgstr ""
 
-#: apps/public/journal/urls.py:50
+#: eruditorg/apps/public/journal/urls.py:50
 msgid "^revue/(?P<localidentifier>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:52
+#: eruditorg/apps/public/journal/urls.py:52
 msgid "^numero/(?P<localidentifier>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:54
+#: eruditorg/apps/public/journal/urls.py:54
 msgid "^article/(?P<localidentifier>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/journal/urls.py:59
+#: eruditorg/apps/public/journal/urls.py:59
 msgid "^scholar/"
 msgstr ""
 
-#: apps/public/journal/urls.py:60
+#: eruditorg/apps/public/journal/urls.py:60
 msgid "^subscribers\\.xml$"
 msgstr ""
 
-#: apps/public/journal/urls.py:61
+#: eruditorg/apps/public/journal/urls.py:61
 msgid "^subscriber_journals\\.xml$"
 msgstr ""
 
-#: apps/public/search/forms.py:15
+#: eruditorg/apps/public/search/forms.py:15
 msgid "Et"
 msgstr ""
 
-#: apps/public/search/forms.py:16
+#: eruditorg/apps/public/search/forms.py:16
 msgid "Ou"
 msgstr ""
 
-#: apps/public/search/forms.py:17
+#: eruditorg/apps/public/search/forms.py:17
 msgid "Sauf"
 msgstr ""
 
-#: apps/public/search/forms.py:21
+#: eruditorg/apps/public/search/forms.py:21
 msgid "Tous les champs"
 msgstr ""
 
-#: apps/public/search/forms.py:22
+#: eruditorg/apps/public/search/forms.py:22
 msgid "Tous les champs (sauf texte intégral)"
 msgstr ""
 
-#: apps/public/search/forms.py:23
+#: eruditorg/apps/public/search/forms.py:23
 msgid "Texte intégral"
 msgstr ""
 
-#: apps/public/search/forms.py:24
+#: eruditorg/apps/public/search/forms.py:24
 msgid "Titre, résumé, mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:25 core/subscription/abstract_models.py:11
-#: core/subscription/models.py:166
+#: eruditorg/apps/public/search/forms.py:25
+#: eruditorg/core/subscription/abstract_models.py:11
+#: eruditorg/core/subscription/models.py:166
 msgid "Titre"
 msgstr ""
 
-#: apps/public/search/forms.py:26 apps/userspace/reporting/forms.py:10
+#: eruditorg/apps/public/search/forms.py:26
+#: eruditorg/apps/userspace/reporting/forms.py:10
 msgid "Auteur"
 msgstr ""
 
-#: apps/public/search/forms.py:27
+#: eruditorg/apps/public/search/forms.py:27
 msgid "Affiliation de l'auteur"
 msgstr ""
 
-#: apps/public/search/forms.py:28
+#: eruditorg/apps/public/search/forms.py:28
 msgid "Titre de la revue"
 msgstr ""
 
-#: apps/public/search/forms.py:29
+#: eruditorg/apps/public/search/forms.py:29
 msgid "Bibliographie"
 msgstr ""
 
-#: apps/public/search/forms.py:30
+#: eruditorg/apps/public/search/forms.py:30
 msgid "Ouvrage recensé"
 msgstr ""
 
-#: apps/public/search/forms.py:31
-#: templates/public/journal/article_pdf_coverpage.html:217
-#: templates/public/journal/journal_base.html:89
-#: templates/userspace/journal/home.html:116
+#: eruditorg/apps/public/search/forms.py:31
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:217
+#: eruditorg/templates/public/journal/journal_base.html:89
 msgid "ISSN"
 msgstr ""
 
-#: apps/public/search/forms.py:32
+#: eruditorg/apps/public/search/forms.py:32
 msgid "ISBN"
 msgstr ""
 
-#: apps/public/search/forms.py:37
+#: eruditorg/apps/public/search/forms.py:37
 msgid "1 jour"
 msgstr ""
 
-#: apps/public/search/forms.py:38
+#: eruditorg/apps/public/search/forms.py:38
 msgid "1 semaine"
 msgstr ""
 
-#: apps/public/search/forms.py:39
+#: eruditorg/apps/public/search/forms.py:39
 msgid "2 semaines"
 msgstr ""
 
-#: apps/public/search/forms.py:40
+#: eruditorg/apps/public/search/forms.py:40
 msgid "1 mois"
 msgstr ""
 
-#: apps/public/search/forms.py:41
+#: eruditorg/apps/public/search/forms.py:41
 msgid "6 mois"
 msgstr ""
 
-#: apps/public/search/forms.py:42
+#: eruditorg/apps/public/search/forms.py:42
 msgid "1 an"
 msgstr ""
 
-#: apps/public/search/forms.py:46 apps/userspace/reporting/forms.py:26
-#: base/feedgenerator.py:16
+#: eruditorg/apps/public/search/forms.py:46
+#: eruditorg/apps/userspace/reporting/forms.py:26
+#: eruditorg/base/feedgenerator.py:16
 msgid "Érudit"
 msgstr ""
 
-#: apps/public/search/forms.py:47 apps/userspace/reporting/forms.py:28
+#: eruditorg/apps/public/search/forms.py:47
+#: eruditorg/apps/userspace/reporting/forms.py:28
 msgid "Persée"
 msgstr ""
 
-#: apps/public/search/forms.py:48
+#: eruditorg/apps/public/search/forms.py:48
 msgid "UNB Libraries"
 msgstr ""
 
-#: apps/public/search/forms.py:49
+#: eruditorg/apps/public/search/forms.py:49
 msgid "NRC Research Press"
 msgstr ""
 
-#: apps/public/search/forms.py:53
+#: eruditorg/apps/public/search/forms.py:53
 msgid "Articles savants"
 msgstr ""
 
-#: apps/public/search/forms.py:54
+#: eruditorg/apps/public/search/forms.py:54
 msgid "Articles culturels"
 msgstr ""
 
-#: apps/public/search/forms.py:55 apps/userspace/reporting/forms.py:18
-#: templates/public/base.html:61 templates/public/base.html:226
-#: templates/public/home.html:88
-#: templates/public/thesis/collection_home.html:24
-#: templates/public/thesis/collection_home.html:42
-#: templates/public/thesis/collection_list_base.html:22
-#: templates/public/thesis/collection_list_base.html:40
-#: templates/public/thesis/home.html:4 templates/public/thesis/home.html:24
-#: templates/public/thesis/home.html:35 templates/public/thesis/home.html:44
+#: eruditorg/apps/public/search/forms.py:55
+#: eruditorg/apps/userspace/reporting/forms.py:18
+#: eruditorg/templates/public/base.html:62
+#: eruditorg/templates/public/base.html:224
+#: eruditorg/templates/public/home.html:88
+#: eruditorg/templates/public/thesis/collection_home.html:24
+#: eruditorg/templates/public/thesis/collection_home.html:44
+#: eruditorg/templates/public/thesis/collection_list_base.html:22
+#: eruditorg/templates/public/thesis/collection_list_base.html:42
+#: eruditorg/templates/public/thesis/home.html:4
+#: eruditorg/templates/public/thesis/home.html:24
+#: eruditorg/templates/public/thesis/home.html:36
+#: eruditorg/templates/public/thesis/home.html:45
 msgid "Thèses"
 msgstr ""
 
-#: apps/public/search/forms.py:56 apps/userspace/reporting/forms.py:19
+#: eruditorg/apps/public/search/forms.py:56
+#: eruditorg/apps/userspace/reporting/forms.py:19
 msgid "Livres"
 msgstr ""
 
-#: apps/public/search/forms.py:57 apps/userspace/reporting/forms.py:17
+#: eruditorg/apps/public/search/forms.py:57
+#: eruditorg/apps/userspace/reporting/forms.py:17
 msgid "Actes"
 msgstr ""
 
-#: apps/public/search/forms.py:58 templates/public/base.html:67
-#: templates/public/base.html:228 templates/public/home.html:94
-msgid "Littérature grise"
+#: eruditorg/apps/public/search/forms.py:58
+#: eruditorg/templates/public/base.html:68
+#: eruditorg/templates/public/base.html:226
+#: eruditorg/templates/public/home.html:94
+msgid "Rapports de recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:77 templates/public/search/base.html:5
-#: templates/public/search/results.html:5
+#: eruditorg/apps/public/search/forms.py:77
+#: eruditorg/templates/public/search/base.html:6
+#: eruditorg/templates/public/search/results.html:5
 msgid "Recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:79
+#: eruditorg/apps/public/search/forms.py:79
 msgid "Inclure les champs"
 msgstr ""
 
-#: apps/public/search/forms.py:109
+#: eruditorg/apps/public/search/forms.py:109
 msgid "Publiés entre"
 msgstr ""
 
-#: apps/public/search/forms.py:116
+#: eruditorg/apps/public/search/forms.py:116
 msgid "Dans Érudit depuis"
 msgstr ""
 
-#: apps/public/search/forms.py:120 apps/public/search/forms.py:167
-#: templates/public/journal/journal_list_per_names.html:131
+#: eruditorg/apps/public/search/forms.py:120
+#: eruditorg/apps/public/search/forms.py:167
+#: eruditorg/templates/public/journal/journal_list_per_names.html:131
 msgid "Fonds"
 msgstr ""
 
-#: apps/public/search/forms.py:124
+#: eruditorg/apps/public/search/forms.py:124
 msgid "Types de publication"
 msgstr ""
 
-#: apps/public/search/forms.py:128 apps/public/search/forms.py:163
+#: eruditorg/apps/public/search/forms.py:128
+#: eruditorg/apps/public/search/forms.py:163
 msgid "Langues"
 msgstr ""
 
-#: apps/public/search/forms.py:129 apps/public/search/forms.py:199
+#: eruditorg/apps/public/search/forms.py:129
+#: eruditorg/apps/public/search/forms.py:199
 msgid "Français"
 msgstr ""
 
-#: apps/public/search/forms.py:129 apps/public/search/forms.py:195
+#: eruditorg/apps/public/search/forms.py:129
+#: eruditorg/apps/public/search/forms.py:195
 msgid "Anglais"
 msgstr ""
 
-#: apps/public/search/forms.py:129 apps/public/search/forms.py:196
+#: eruditorg/apps/public/search/forms.py:129
+#: eruditorg/apps/public/search/forms.py:196
 msgid "Espagnol"
 msgstr ""
 
-#: apps/public/search/forms.py:132
+#: eruditorg/apps/public/search/forms.py:132
 msgid "Disciplines"
 msgstr ""
 
-#: apps/public/search/forms.py:134 core/editor/models.py:210
-#: core/subscription/models.py:40 templates/public/base.html:58
-#: templates/public/base.html:225 templates/public/home.html:85
-#: templates/public/journal/article_detail.html:91
-#: templates/public/journal/article_summary.html:89
-#: templates/public/journal/issue_detail.html:48
-#: templates/public/journal/journal_authors_list.html:28
-#: templates/public/journal/journal_base.html:5
-#: templates/public/journal/journal_detail.html:44
-#: templates/public/journal/journal_list_per_disciplines.html:6
-#: templates/public/journal/journal_list_per_disciplines.html:26
-#: templates/public/journal/journal_list_per_disciplines.html:37
-#: templates/public/journal/journal_list_per_names.html:7
-#: templates/public/journal/journal_list_per_names.html:27
-#: templates/public/journal/journal_list_per_names.html:39
+#: eruditorg/apps/public/search/forms.py:134
+#: eruditorg/core/editor/models.py:210 eruditorg/core/subscription/models.py:40
+#: eruditorg/templates/public/base.html:59
+#: eruditorg/templates/public/base.html:223
+#: eruditorg/templates/public/home.html:85
+#: eruditorg/templates/public/journal/article_detail.html:89
+#: eruditorg/templates/public/journal/article_summary.html:89
+#: eruditorg/templates/public/journal/issue_detail.html:42
+#: eruditorg/templates/public/journal/journal_authors_list.html:26
+#: eruditorg/templates/public/journal/journal_base.html:5
+#: eruditorg/templates/public/journal/journal_detail.html:40
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:6
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:26
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:38
+#: eruditorg/templates/public/journal/journal_list_per_names.html:7
+#: eruditorg/templates/public/journal/journal_list_per_names.html:27
+#: eruditorg/templates/public/journal/journal_list_per_names.html:40
 msgid "Revues"
 msgstr ""
 
-#: apps/public/search/forms.py:142
+#: eruditorg/apps/public/search/forms.py:142
 msgid "Expression ou mot-clé"
 msgstr ""
 
-#: apps/public/search/forms.py:143
+#: eruditorg/apps/public/search/forms.py:143
 msgid "autofocus"
 msgstr ""
 
-#: apps/public/search/forms.py:155
+#: eruditorg/apps/public/search/forms.py:155
 msgid "Cette intervalle est incorrecte"
 msgstr ""
 
-#: apps/public/search/forms.py:160
+#: eruditorg/apps/public/search/forms.py:160
 msgid "Dans les résultats"
 msgstr ""
 
-#: apps/public/search/forms.py:161
+#: eruditorg/apps/public/search/forms.py:161
 msgid "Années"
 msgstr ""
 
-#: apps/public/search/forms.py:162
+#: eruditorg/apps/public/search/forms.py:162
 msgid "Types d'articles"
 msgstr ""
 
-#: apps/public/search/forms.py:164 templates/public/base.html:87
+#: eruditorg/apps/public/search/forms.py:164
+#: eruditorg/templates/public/base.html:88
 msgid "Collections"
 msgstr ""
 
-#: apps/public/search/forms.py:165
-#: templates/public/journal/journal_authors_list.html:42
-#: templates/public/journal/journal_authors_list.html:50
+#: eruditorg/apps/public/search/forms.py:165
+#: eruditorg/templates/public/journal/journal_authors_list.html:40
+#: eruditorg/templates/public/journal/journal_authors_list.html:50
 msgid "Auteurs"
 msgstr ""
 
-#: apps/public/search/forms.py:168
+#: eruditorg/apps/public/search/forms.py:168
 msgid ""
 "Les revues diffusées sur Érudit sont consultables\n"
 "                    directement sur la plateforme ; les revues des "
@@ -517,11 +549,12 @@ msgid ""
 "partenaire."
 msgstr ""
 
-#: apps/public/search/forms.py:173 templates/public/base.html:55
+#: eruditorg/apps/public/search/forms.py:173
+#: eruditorg/templates/public/base.html:56
 msgid "Types de publications"
 msgstr ""
 
-#: apps/public/search/forms.py:174
+#: eruditorg/apps/public/search/forms.py:174
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés\n"
 "                    par les pairs ; les revues culturelles présentent des "
@@ -529,311 +562,323 @@ msgid ""
 "                    domaines artistique, littéraire et socioculturel."
 msgstr ""
 
-#: apps/public/search/forms.py:193
+#: eruditorg/apps/public/search/forms.py:193
 msgid "Arabe"
 msgstr ""
 
-#: apps/public/search/forms.py:194
+#: eruditorg/apps/public/search/forms.py:194
 msgid "Catalan"
 msgstr ""
 
-#: apps/public/search/forms.py:197
+#: eruditorg/apps/public/search/forms.py:197
 msgid "Allemand"
 msgstr ""
 
-#: apps/public/search/forms.py:198
+#: eruditorg/apps/public/search/forms.py:198
 msgid "Grec moderne"
 msgstr ""
 
-#: apps/public/search/forms.py:200
+#: eruditorg/apps/public/search/forms.py:200
 msgid "Hébreu"
 msgstr ""
 
-#: apps/public/search/forms.py:201
+#: eruditorg/apps/public/search/forms.py:201
 msgid "Bosniaque"
 msgstr ""
 
-#: apps/public/search/forms.py:202
+#: eruditorg/apps/public/search/forms.py:202
 msgid "Créole haïtien"
 msgstr ""
 
-#: apps/public/search/forms.py:203
+#: eruditorg/apps/public/search/forms.py:203
 msgid "Indonésien"
 msgstr ""
 
-#: apps/public/search/forms.py:204
+#: eruditorg/apps/public/search/forms.py:204
 msgid "Langues iroquoiennes"
 msgstr ""
 
-#: apps/public/search/forms.py:205
+#: eruditorg/apps/public/search/forms.py:205
 msgid "Italien"
 msgstr ""
 
-#: apps/public/search/forms.py:206
+#: eruditorg/apps/public/search/forms.py:206
 msgid "Japonais"
 msgstr ""
 
-#: apps/public/search/forms.py:207
+#: eruditorg/apps/public/search/forms.py:207
 msgid "Coréen"
 msgstr ""
 
-#: apps/public/search/forms.py:208
+#: eruditorg/apps/public/search/forms.py:208
 msgid "Latin"
 msgstr ""
 
-#: apps/public/search/forms.py:209
+#: eruditorg/apps/public/search/forms.py:209
 msgid "Néerlandais"
 msgstr ""
 
-#: apps/public/search/forms.py:210
+#: eruditorg/apps/public/search/forms.py:210
 msgid "Occitan"
 msgstr ""
 
-#: apps/public/search/forms.py:211
+#: eruditorg/apps/public/search/forms.py:211
 msgid "Polonais"
 msgstr ""
 
-#: apps/public/search/forms.py:212
+#: eruditorg/apps/public/search/forms.py:212
 msgid "Portugais"
 msgstr ""
 
-#: apps/public/search/forms.py:213
+#: eruditorg/apps/public/search/forms.py:213
 msgid "Kichwa"
 msgstr ""
 
-#: apps/public/search/forms.py:214
+#: eruditorg/apps/public/search/forms.py:214
 msgid "Roumain"
 msgstr ""
 
-#: apps/public/search/forms.py:215
+#: eruditorg/apps/public/search/forms.py:215
 msgid "Espéranto"
 msgstr ""
 
-#: apps/public/search/forms.py:216
+#: eruditorg/apps/public/search/forms.py:216
 msgid "Russe"
 msgstr ""
 
-#: apps/public/search/forms.py:217
+#: eruditorg/apps/public/search/forms.py:217
 msgid "Chinois"
 msgstr ""
 
-#: apps/public/search/forms.py:226 templates/public/base.html:130
-#: templates/public/search/partials/advanced_search_q.html:15
+#: eruditorg/apps/public/search/forms.py:226
+#: eruditorg/templates/public/base.html:131
+#: eruditorg/templates/public/search/partials/advanced_search_q.html:15
 msgid "Mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:280
+#: eruditorg/apps/public/search/forms.py:280
 msgid "Résultats par page"
 msgstr ""
 
-#: apps/public/search/forms.py:282
+#: eruditorg/apps/public/search/forms.py:282
 msgid "Trier par..."
 msgstr ""
 
-#: apps/public/search/forms.py:284
+#: eruditorg/apps/public/search/forms.py:284
 msgid "Pertinence"
 msgstr ""
 
-#: apps/public/search/forms.py:287
+#: eruditorg/apps/public/search/forms.py:287
 msgid "Premier auteur (A–Z)"
 msgstr ""
 
-#: apps/public/search/forms.py:288
+#: eruditorg/apps/public/search/forms.py:288
 msgid "Premier auteur (Z–A)"
 msgstr ""
 
-#: apps/public/search/forms.py:289 apps/public/thesis/views.py:83
+#: eruditorg/apps/public/search/forms.py:289
+#: eruditorg/apps/public/thesis/views.py:83
 msgid "Date de publication (croissant)"
 msgstr ""
 
-#: apps/public/search/forms.py:290 apps/public/thesis/views.py:84
+#: eruditorg/apps/public/search/forms.py:290
+#: eruditorg/apps/public/thesis/views.py:84
 msgid "Date de publication (décroissant)"
 msgstr ""
 
-#: apps/public/search/urls.py:17
+#: eruditorg/apps/public/search/serializers.py:89
+#: eruditorg/apps/userspace/reporting/forms.py:15
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:194
+msgid "Article"
+msgstr ""
+
+#: eruditorg/apps/public/search/urls.py:17
 msgid "^sauvegardes/ajout/$"
 msgstr ""
 
-#: apps/public/search/urls.py:18
+#: eruditorg/apps/public/search/urls.py:18
 msgid "^sauvegardes/suppression/(?P<uuid>[\\w-]+)/$"
 msgstr ""
 
-#: apps/public/search/utils.py:21
+#: eruditorg/apps/public/search/utils.py:21
 msgid "ET"
 msgstr ""
 
-#: apps/public/search/utils.py:22
+#: eruditorg/apps/public/search/utils.py:22
 msgid "OU"
 msgstr ""
 
-#: apps/public/search/utils.py:23
+#: eruditorg/apps/public/search/utils.py:23
 msgid "NON"
 msgstr ""
 
-#: apps/public/search/utils.py:62
+#: eruditorg/apps/public/search/utils.py:62
 #, python-brace-format
 msgid " {op} (Publié entre {start} et {end})"
 msgstr ""
 
-#: apps/public/search/utils.py:67
+#: eruditorg/apps/public/search/utils.py:67
 #, python-brace-format
 msgid " {op} (Publié depuis {start})"
 msgstr ""
 
-#: apps/public/search/utils.py:71
+#: eruditorg/apps/public/search/utils.py:71
 #, python-brace-format
 msgid " {op} (Publié jusqu'à {end})"
 msgstr ""
 
-#: apps/public/search/views.py:224
+#: eruditorg/apps/public/search/views.py:224
 msgid "Querystring incorrecte"
 msgstr ""
 
-#: apps/public/search/views.py:243
+#: eruditorg/apps/public/search/views.py:243
 msgid "Cette recherche n'est pas sauvegardée"
 msgstr ""
 
-#: apps/public/thesis/urls.py:13
+#: eruditorg/apps/public/thesis/urls.py:13
 msgid "^fond/(?P<collection_pk>[\\d-]+)/$"
 msgstr ""
 
-#: apps/public/thesis/urls.py:16
+#: eruditorg/apps/public/thesis/urls.py:16
 msgid ""
 "^fond/(?P<collection_pk>[\\d-]+)/liste/annee/(?P<publication_year>[\\d-]+)/$"
 msgstr ""
 
-#: apps/public/thesis/urls.py:18
+#: eruditorg/apps/public/thesis/urls.py:18
 msgid ""
 "^fond/(?P<collection_pk>[\\d-]+)/liste/auteur/(?P<author_letter>[\\w\\'-])/$"
 msgstr ""
 
-#: apps/public/thesis/urls.py:22
+#: eruditorg/apps/public/thesis/urls.py:22
 msgid "^fond/(?P<collection_pk>[\\d-]+)/t/(?P<pk>\\d+)\\.enw$"
 msgstr ""
 
-#: apps/public/thesis/urls.py:24
+#: eruditorg/apps/public/thesis/urls.py:24
 msgid "^fond/(?P<collection_pk>[\\d-]+)/t/(?P<pk>\\d+)\\.ris$"
 msgstr ""
 
-#: apps/public/thesis/urls.py:26
+#: eruditorg/apps/public/thesis/urls.py:26
 msgid "^fond/(?P<collection_pk>[\\d-]+)/t/(?P<pk>\\d+)\\.bib$"
 msgstr ""
 
-#: apps/public/urls.py:14
+#: eruditorg/apps/public/urls.py:14
 msgid "^compte/"
 msgstr ""
 
-#: apps/public/urls.py:15
+#: eruditorg/apps/public/urls.py:15
 msgid "^compte/actions/"
 msgstr ""
 
-#: apps/public/urls.py:17
+#: eruditorg/apps/public/urls.py:17
 msgid "^livre/"
 msgstr ""
 
-#: apps/public/urls.py:18
+#: eruditorg/apps/public/urls.py:18
 msgid "^notices/"
 msgstr ""
 
-#: apps/public/urls.py:19
+#: eruditorg/apps/public/urls.py:19
 msgid "^recherche/"
 msgstr ""
 
-#: apps/public/urls.py:20
+#: eruditorg/apps/public/urls.py:20
 msgid "^these/"
 msgstr ""
 
-#: apps/userspace/generic_apps/authorization/forms.py:16
-#: core/accounts/models.py:20 core/authorization/admin.py:24
-#: core/authorization/models.py:35 core/citations/models.py:12
-#: core/subscription/models.py:30
+#: eruditorg/apps/userspace/generic_apps/authorization/forms.py:16
+#: eruditorg/core/accounts/models.py:20
+#: eruditorg/core/authorization/admin.py:24
+#: eruditorg/core/authorization/models.py:35
+#: eruditorg/core/citations/models.py:12
+#: eruditorg/core/subscription/models.py:30
 msgid "Utilisateur"
 msgstr ""
 
-#: apps/userspace/generic_apps/authorization/views.py:55
+#: eruditorg/apps/userspace/generic_apps/authorization/views.py:55
 msgid "L'accès a été créé avec succès"
 msgstr ""
 
-#: apps/userspace/generic_apps/authorization/views.py:98
+#: eruditorg/apps/userspace/generic_apps/authorization/views.py:98
 msgid "L'accès a été supprimé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/authorization/urls.py:10
-#: apps/userspace/library/authorization/urls.py:10
-#: apps/userspace/library/members/urls.py:10
-#: apps/userspace/library/subscription_ips/urls.py:10
+#: eruditorg/apps/userspace/journal/authorization/urls.py:10
+#: eruditorg/apps/userspace/library/authorization/urls.py:10
+#: eruditorg/apps/userspace/library/members/urls.py:10
+#: eruditorg/apps/userspace/library/subscription_ips/urls.py:10
 msgid "^ajout/$"
 msgstr ""
 
-#: apps/userspace/journal/authorization/urls.py:11
-#: apps/userspace/library/authorization/urls.py:11
-#: apps/userspace/library/subscription_ips/urls.py:11
+#: eruditorg/apps/userspace/journal/authorization/urls.py:11
+#: eruditorg/apps/userspace/library/authorization/urls.py:11
+#: eruditorg/apps/userspace/library/subscription_ips/urls.py:11
 msgid "^(?P<pk>[0-9]+)/supprimer/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/forms.py:74 core/royalty_reports/models.py:12
-#: core/royalty_reports/models.py:28
-#: templates/userspace/journal/editor/plupload_widget.html:9
+#: eruditorg/apps/userspace/journal/editor/forms.py:74
+#: eruditorg/core/royalty_reports/models.py:12
+#: eruditorg/core/royalty_reports/models.py:28
+#: eruditorg/templates/userspace/journal/editor/plupload_widget.html:9
 msgid "Fichier"
 msgstr ""
 
-#: apps/userspace/journal/editor/forms.py:116
+#: eruditorg/apps/userspace/journal/editor/forms.py:116
 msgid "Vous pouvez ajouter un commentaire afin d'expliquer vos raisons"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:8
+#: eruditorg/apps/userspace/journal/editor/urls.py:8
 msgid "^numero/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:9
+#: eruditorg/apps/userspace/journal/editor/urls.py:9
 msgid "^numero/ajout/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:10
+#: eruditorg/apps/userspace/journal/editor/urls.py:10
 msgid "^numero/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:11
+#: eruditorg/apps/userspace/journal/editor/urls.py:11
 msgid "^numero/(?P<pk>[0-9]+)/edition/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:14
+#: eruditorg/apps/userspace/journal/editor/urls.py:14
 msgid "^numero/(?P<pk>[0-9]+)/soumettre/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:16
+#: eruditorg/apps/userspace/journal/editor/urls.py:16
 msgid "^numero/(?P<pk>[0-9]+)/approuver/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:18
+#: eruditorg/apps/userspace/journal/editor/urls.py:18
 msgid "^numero/(?P<pk>[0-9]+)/refuser/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:21
+#: eruditorg/apps/userspace/journal/editor/urls.py:21
 msgid "^numero/(?P<pk>[0-9]+)/supprimer/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/urls.py:24
+#: eruditorg/apps/userspace/journal/editor/urls.py:24
 msgid "^numero/fichier/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:95
+#: eruditorg/apps/userspace/journal/editor/views.py:95
 msgid "Faire un dépôt de numéros"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:110
+#: eruditorg/apps/userspace/journal/editor/views.py:110
 msgid "La demande a été créé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:143
+#: eruditorg/apps/userspace/journal/editor/views.py:143
 msgid "Modifier un dépôt de numéros"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:179
+#: eruditorg/apps/userspace/journal/editor/views.py:179
 msgid "La demande a été enregistrée avec succès"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:275
+#: eruditorg/apps/userspace/journal/editor/views.py:275
 msgid ""
 "Vous êtes à l'étape d'effectuer la transmission finale des fichiers    à "
 "l'équipe de production. Une fois envoyés, vous ne pourrez plus modifier les "
@@ -841,1258 +886,1276 @@ msgid ""
 "corriger. Voulez-vous poursuivre?"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:279
+#: eruditorg/apps/userspace/journal/editor/views.py:279
 msgid "Les fichiers ont été transmis avec succès"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:296
+#: eruditorg/apps/userspace/journal/editor/views.py:296
 msgid "Voulez-vous approuver le numéro ?"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:297
+#: eruditorg/apps/userspace/journal/editor/views.py:297
 msgid "Le numéro a été approuvé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:310
+#: eruditorg/apps/userspace/journal/editor/views.py:310
 #, python-brace-format
 msgid ""
 "Le numéro a été approuvé avec succès. Veuillez noter que le numéro sera "
 "archivé le {archive_date}. Les fichiers de production seront supprimés."
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:320
+#: eruditorg/apps/userspace/journal/editor/views.py:320
 msgid "Les corrections ont été transmises avec succès"
 msgstr ""
 
-#: apps/userspace/journal/editor/views.py:342
+#: eruditorg/apps/userspace/journal/editor/views.py:342
 msgid "La soumission a été supprimée avec succès"
 msgstr ""
 
-#: apps/userspace/journal/information/urls.py:10
+#: eruditorg/apps/userspace/journal/information/urls.py:10
 msgid "^$"
 msgstr ""
 
-#: apps/userspace/journal/information/views.py:36
+#: eruditorg/apps/userspace/journal/information/views.py:36
 msgid "Éditer une revue"
 msgstr ""
 
-#: apps/userspace/journal/subscription/forms.py:29
-msgid "Une proposition d'abonnement pour cette adresse e-mail existe déjà"
+#: eruditorg/apps/userspace/journal/subscription/forms.py:29
+msgid "Une proposition d'abonnement pour cette adresse courriel existe déjà"
 msgstr ""
 
-#: apps/userspace/journal/subscription/forms.py:37
-msgid "Une abonnement utilisant cette adresse e-mail existe déjà"
+#: eruditorg/apps/userspace/journal/subscription/forms.py:37
+msgid "Une abonnement utilisant cette adresse courriel existe déjà"
 msgstr ""
 
-#: apps/userspace/journal/subscription/urls.py:10
+#: eruditorg/apps/userspace/journal/subscription/urls.py:10
 msgid "^acces/$"
 msgstr ""
 
-#: apps/userspace/journal/subscription/urls.py:12
+#: eruditorg/apps/userspace/journal/subscription/urls.py:12
 msgid "^acces/ajout/"
 msgstr ""
 
-#: apps/userspace/journal/subscription/urls.py:14
+#: eruditorg/apps/userspace/journal/subscription/urls.py:14
 msgid "^acces/supprimer/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/journal/subscription/urls.py:16
+#: eruditorg/apps/userspace/journal/subscription/urls.py:16
 msgid "^acces/annuler/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:84
+#: eruditorg/apps/userspace/journal/subscription/views.py:84
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:97
+#: eruditorg/apps/userspace/journal/subscription/views.py:97
 msgid "L'abonnement a été créé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:116
+#: eruditorg/apps/userspace/journal/subscription/views.py:116
 msgid "L'abonnement a été supprimé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:142
+#: eruditorg/apps/userspace/journal/subscription/views.py:142
 msgid "La proposition d'abonnement a été annulée avec succès"
 msgstr ""
 
-#: apps/userspace/journal/urls.py:12 apps/userspace/library/urls.py:12
+#: eruditorg/apps/userspace/journal/urls.py:12
+#: eruditorg/apps/userspace/library/urls.py:12
 msgid "^autorisations/"
 msgstr ""
 
-#: apps/userspace/journal/urls.py:14
+#: eruditorg/apps/userspace/journal/urls.py:14
 msgid "^editeur/"
 msgstr ""
 
-#: apps/userspace/journal/urls.py:16 apps/userspace/library/urls.py:15
+#: eruditorg/apps/userspace/journal/urls.py:16
+#: eruditorg/apps/userspace/library/urls.py:15
 msgid "^informations/"
 msgstr ""
 
-#: apps/userspace/journal/urls.py:18
+#: eruditorg/apps/userspace/journal/urls.py:18
 msgid "^rapports/"
 msgstr ""
 
-#: apps/userspace/journal/urls.py:20
+#: eruditorg/apps/userspace/journal/urls.py:20
 msgid "^abonnements/"
 msgstr ""
 
-#: apps/userspace/library/members/forms.py:29
-msgid "Une proposition existe déjà pour cette adresse e-mail"
+#: eruditorg/apps/userspace/library/members/forms.py:29
+msgid "Une proposition existe déjà pour cette adresse courriel"
 msgstr ""
 
-#: apps/userspace/library/members/forms.py:35
+#: eruditorg/apps/userspace/library/members/forms.py:35
 msgid ""
-"Un utilisateur avec cette adresse e-mail est déjà membre de l'organisation"
+"Un utilisateur avec cette adresse courriel est déjà membre de l'organisation"
 msgstr ""
 
-#: apps/userspace/library/members/urls.py:11
+#: eruditorg/apps/userspace/library/members/urls.py:11
 msgid "^supprimer/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/library/members/urls.py:13
+#: eruditorg/apps/userspace/library/members/urls.py:13
 msgid "^annuler/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/library/members/views.py:55
+#: eruditorg/apps/userspace/library/members/views.py:55
 msgid "Le membre a été invité avec succès"
 msgstr ""
 
-#: apps/userspace/library/members/views.py:77
+#: eruditorg/apps/userspace/library/members/views.py:77
 msgid "Le membre a été retiré de l'organisation avec succès"
 msgstr ""
 
-#: apps/userspace/library/members/views.py:102
+#: eruditorg/apps/userspace/library/members/views.py:102
 msgid "La proposition a été annulée avec succès"
 msgstr ""
 
-#: apps/userspace/library/stats/urls.py:11
+#: eruditorg/apps/userspace/library/stats/urls.py:11
 msgid "^rapport/jr1/csv/$"
 msgstr ""
 
-#: apps/userspace/library/stats/urls.py:13
+#: eruditorg/apps/userspace/library/stats/urls.py:13
 msgid "^rapport/jr1-goa/csv/$"
 msgstr ""
 
-#: apps/userspace/library/stats/urls.py:15
+#: eruditorg/apps/userspace/library/stats/urls.py:15
 msgid "^rapport/jr1/xml/$"
 msgstr ""
 
-#: apps/userspace/library/stats/urls.py:17
+#: eruditorg/apps/userspace/library/stats/urls.py:17
 msgid "^rapport/jr1-goa/xml/$"
 msgstr ""
 
-#: apps/userspace/library/subscription_information/forms.py:19
+#: eruditorg/apps/userspace/library/subscription_information/forms.py:19
 msgid ""
 "Le badge ne doit pas excéder 140x140 pixels et sera automatiquement "
 "redimensionné dans le cas contraire."
 msgstr ""
 
-#: apps/userspace/library/subscription_information/views.py:34
+#: eruditorg/apps/userspace/library/subscription_information/views.py:34
 msgid "Les informations de l'abonnement ont été mises à jour avec succès"
 msgstr ""
 
-#: apps/userspace/library/subscription_ips/views.py:52
+#: eruditorg/apps/userspace/library/subscription_ips/views.py:52
 msgid "La plage d'adresse IP a été créée avec succès"
 msgstr ""
 
-#: apps/userspace/library/subscription_ips/views.py:71
+#: eruditorg/apps/userspace/library/subscription_ips/views.py:71
 msgid "La plage d'adresse IP a été supprimée avec succès"
 msgstr ""
 
-#: apps/userspace/library/urls.py:14
+#: eruditorg/apps/userspace/library/urls.py:14
 msgid "^membres/"
 msgstr ""
 
-#: apps/userspace/library/urls.py:18
+#: eruditorg/apps/userspace/library/urls.py:18
 msgid "^plages-ip/"
 msgstr ""
 
-#: apps/userspace/library/urls.py:20
+#: eruditorg/apps/userspace/library/urls.py:20
 msgid "^statistiques/"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:11
+#: eruditorg/apps/userspace/reporting/forms.py:11
 msgid "Code revue"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:13 apps/userspace/reporting/forms.py:24
-#: core/authorization/models.py:28
-#: templates/public/journal/journal_list_per_names.html:130
+#: eruditorg/apps/userspace/reporting/forms.py:13
+#: eruditorg/apps/userspace/reporting/forms.py:24
+#: eruditorg/core/authorization/models.py:28
+#: eruditorg/templates/public/journal/journal_list_per_names.html:130
 msgid "Type"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:15
-#: templates/public/journal/article_pdf_coverpage.html:194
-#: templates/public/search/results.html:203
-msgid "Article"
-msgstr ""
-
-#: apps/userspace/reporting/forms.py:16
+#: eruditorg/apps/userspace/reporting/forms.py:16
 msgid "Culturel"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:20
+#: eruditorg/apps/userspace/reporting/forms.py:20
 msgid "Depot"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:22 apps/userspace/reporting/views.py:184
-#: core/editor/models.py:35 templates/userspace/journal/editor/detail.html:54
+#: eruditorg/apps/userspace/reporting/forms.py:22
+#: eruditorg/apps/userspace/reporting/views.py:184
+#: eruditorg/core/editor/models.py:35
+#: eruditorg/templates/userspace/journal/editor/detail.html:51
 msgid "Année"
 msgstr ""
 
-#: apps/userspace/reporting/forms.py:27
+#: eruditorg/apps/userspace/reporting/forms.py:27
 msgid "UNB"
 msgstr ""
 
-#: apps/userspace/reporting/urls.py:11
+#: eruditorg/apps/userspace/reporting/urls.py:11
 msgid "^csv/numero/$"
 msgstr ""
 
-#: apps/userspace/reporting/urls.py:12
+#: eruditorg/apps/userspace/reporting/urls.py:12
 msgid "^csv/journal/$"
 msgstr ""
 
-#: apps/userspace/reporting/views.py:184 apps/userspace/reporting/views.py:209
-#: core/editor/models.py:30 core/royalty_reports/models.py:27
-#: core/subscription/models.py:36 core/subscription/models.py:149
-#: templates/public/journal/journal_list_per_names.html:129
-#: templates/userspace/journal/editor/issues.html:44
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:30
-#: templates/userspace/journal/subscription/individualsubscription_list.html:35
+#: eruditorg/apps/userspace/reporting/views.py:184
+#: eruditorg/apps/userspace/reporting/views.py:209
+#: eruditorg/core/editor/models.py:30
+#: eruditorg/core/royalty_reports/models.py:27
+#: eruditorg/core/subscription/models.py:36
+#: eruditorg/core/subscription/models.py:149
+#: eruditorg/templates/public/journal/journal_list_per_names.html:129
+#: eruditorg/templates/userspace/journal/editor/issues.html:40
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:30
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:35
 msgid "Revue"
 msgstr ""
 
-#: apps/userspace/reporting/views.py:184 core/editor/models.py:46
-#: templates/userspace/journal/editor/detail.html:62
+#: eruditorg/apps/userspace/reporting/views.py:184
+#: eruditorg/core/editor/models.py:46
+#: eruditorg/templates/userspace/journal/editor/detail.html:59
 msgid "Numéro"
 msgstr ""
 
-#: apps/userspace/reporting/views.py:184 apps/userspace/reporting/views.py:209
+#: eruditorg/apps/userspace/reporting/views.py:184
+#: eruditorg/apps/userspace/reporting/views.py:209
 msgid "Nombre d'articles"
 msgstr ""
 
-#: apps/userspace/urls.py:13
+#: eruditorg/apps/userspace/urls.py:13
 msgid "^revue/"
 msgstr ""
 
-#: apps/userspace/urls.py:14
+#: eruditorg/apps/userspace/urls.py:14
 msgid "^bibliotheque/"
 msgstr ""
 
-#: apps/userspace/urls.py:15
+#: eruditorg/apps/userspace/urls.py:15
 msgid "^reporting/"
 msgstr ""
 
-#: base/urls.py:63
+#: eruditorg/base/urls.py:63
 msgid "^espace-utilisateur/"
 msgstr ""
 
-#: core/accounts/admin.py:20
+#: eruditorg/core/accounts/admin.py:20
 msgid "Courriel"
 msgstr ""
 
-#: core/accounts/admin.py:24 templates/public/account_actions/register.html:45
-#: templates/userspace/journal/subscription/individualsubscription_list.html:73
-#: templates/userspace/library/members/member_list.html:54
+#: eruditorg/core/accounts/admin.py:24
+#: eruditorg/templates/public/account_actions/register.html:45
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:73
+#: eruditorg/templates/userspace/library/members/member_list.html:54
 msgid "Prénom"
 msgstr ""
 
-#: core/accounts/admin.py:28 templates/public/account_actions/register.html:52
-#: templates/userspace/journal/subscription/individualsubscription_list.html:74
-#: templates/userspace/library/members/member_list.html:55
+#: eruditorg/core/accounts/admin.py:28
+#: eruditorg/templates/public/account_actions/register.html:52
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:74
+#: eruditorg/templates/userspace/library/members/member_list.html:55
 msgid "Nom"
 msgstr ""
 
-#: core/accounts/hashers.py:127
+#: eruditorg/core/accounts/hashers.py:127
 msgid "algorithm"
 msgstr ""
 
-#: core/accounts/hashers.py:128
+#: eruditorg/core/accounts/hashers.py:128
 msgid "iterations"
 msgstr ""
 
-#: core/accounts/hashers.py:129
+#: eruditorg/core/accounts/hashers.py:129
 msgid "salt"
 msgstr ""
 
-#: core/accounts/hashers.py:130
+#: eruditorg/core/accounts/hashers.py:130
 msgid "hash"
 msgstr ""
 
-#: core/accounts/models.py:25
+#: eruditorg/core/accounts/models.py:25
 msgid "Base de données Abonnements"
 msgstr ""
 
-#: core/accounts/models.py:26
+#: eruditorg/core/accounts/models.py:26
 msgid "Base de données Restrictions"
 msgstr ""
 
-#: core/accounts/models.py:27
+#: eruditorg/core/accounts/models.py:27
 msgid "Base de données Mandragore"
 msgstr ""
 
-#: core/accounts/models.py:28
+#: eruditorg/core/accounts/models.py:28
 msgid "Base de données Drupal"
 msgstr ""
 
-#: core/accounts/models.py:30
+#: eruditorg/core/accounts/models.py:30
 msgid "Origine"
 msgstr ""
 
-#: core/accounts/models.py:34
+#: eruditorg/core/accounts/models.py:34
 msgid "Identifiant original"
 msgstr ""
 
-#: core/accounts/models.py:38 core/subscription/models.py:32
+#: eruditorg/core/accounts/models.py:38
+#: eruditorg/core/subscription/models.py:32
 msgid "Organisation"
 msgstr ""
 
-#: core/accounts/models.py:42
+#: eruditorg/core/accounts/models.py:42
 msgid "Synchronisé avec la base de donnée originale"
 msgstr ""
 
-#: core/accounts/models.py:45
+#: eruditorg/core/accounts/models.py:45
 msgid "Date de synchronisation"
 msgstr ""
 
-#: core/accounts/models.py:49
+#: eruditorg/core/accounts/models.py:49
 msgid "Profil de compte utilisateur importé"
 msgstr ""
 
-#: core/accounts/models.py:50
+#: eruditorg/core/accounts/models.py:50
 msgid "Profils de comptes utilisateur importés"
 msgstr ""
 
-#: core/authorization/admin.py:25 core/authorization/models.py:48
+#: eruditorg/core/authorization/admin.py:25
+#: eruditorg/core/authorization/models.py:48
 msgid "Autorisation"
 msgstr ""
 
-#: core/authorization/admin.py:26
+#: eruditorg/core/authorization/admin.py:26
 msgid "Cible"
 msgstr ""
 
-#: core/authorization/admin.py:35
+#: eruditorg/core/authorization/admin.py:35
 msgid "Objet"
 msgstr ""
 
-#: core/authorization/defaults.py:19
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:8
-#: templates/userspace/journal/authorization/authorization_create.html:9
-#: templates/userspace/journal/authorization/authorization_user.html:4
-#: templates/userspace/journal/authorization/authorization_user.html:8
-#: templates/userspace/journal/authorization/authorization_user.html:16
-#: templates/userspace/journal/partials/menu.html:41
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:8
-#: templates/userspace/library/authorization/authorization_create.html:9
-#: templates/userspace/library/authorization/authorization_user.html:4
-#: templates/userspace/library/authorization/authorization_user.html:8
-#: templates/userspace/library/authorization/authorization_user.html:16
-#: templates/userspace/library/partials/menu.html:22
+#: eruditorg/core/authorization/defaults.py:19
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:8
+#: eruditorg/templates/userspace/journal/authorization/authorization_create.html:9
+#: eruditorg/templates/userspace/journal/authorization/authorization_user.html:4
+#: eruditorg/templates/userspace/journal/authorization/authorization_user.html:8
+#: eruditorg/templates/userspace/journal/authorization/authorization_user.html:16
+#: eruditorg/templates/userspace/journal/partials/menu.html:41
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:8
+#: eruditorg/templates/userspace/library/authorization/authorization_create.html:9
+#: eruditorg/templates/userspace/library/authorization/authorization_user.html:4
+#: eruditorg/templates/userspace/library/authorization/authorization_user.html:8
+#: eruditorg/templates/userspace/library/authorization/authorization_user.html:14
+#: eruditorg/templates/userspace/library/partials/menu.html:22
 msgid "Autorisations"
 msgstr ""
 
-#: core/authorization/defaults.py:25
+#: eruditorg/core/authorization/defaults.py:25
 msgid "Éditer les informations de revues"
 msgstr ""
 
-#: core/authorization/defaults.py:31
-#: templates/userspace/journal/editor/delete.html:9
-#: templates/userspace/journal/editor/detail.html:5
-#: templates/userspace/journal/editor/detail.html:9
-#: templates/userspace/journal/editor/form.html:6
-#: templates/userspace/journal/editor/form.html:20
-#: templates/userspace/journal/editor/issues.html:5
-#: templates/userspace/journal/editor/issues.html:9
-#: templates/userspace/journal/editor/issuesubmission_approve.html:9
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:9
-#: templates/userspace/journal/editor/issuesubmission_submit.html:9
-#: templates/userspace/journal/partials/menu.html:32
+#: eruditorg/core/authorization/defaults.py:31
+#: eruditorg/templates/userspace/journal/editor/delete.html:9
+#: eruditorg/templates/userspace/journal/editor/detail.html:5
+#: eruditorg/templates/userspace/journal/editor/detail.html:9
+#: eruditorg/templates/userspace/journal/editor/form.html:6
+#: eruditorg/templates/userspace/journal/editor/form.html:20
+#: eruditorg/templates/userspace/journal/editor/issues.html:5
+#: eruditorg/templates/userspace/journal/editor/issues.html:9
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:9
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:9
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:9
+#: eruditorg/templates/userspace/journal/partials/menu.html:32
 msgid "Dépôt de fichiers"
 msgstr ""
 
-#: core/authorization/defaults.py:37
+#: eruditorg/core/authorization/defaults.py:37
 msgid "Valider les numéros"
 msgstr ""
 
-#: core/authorization/defaults.py:43 templates/public/base.html:203
-#: templates/public/journal/journal_detail.html:113
-#: templates/userspace/journal/home.html:55
-#: templates/userspace/journal/partials/menu.html:50
-#: templates/userspace/journal/subscription/base.html:4
-#: templates/userspace/journal/subscription/individualsubscription_create.html:9
-#: templates/userspace/journal/subscription/individualsubscription_list.html:4
-#: templates/userspace/journal/subscription/individualsubscription_list.html:8
-#: templates/userspace/journal/subscription/individualsubscription_list.html:16
+#: eruditorg/core/authorization/defaults.py:43
+#: eruditorg/templates/public/base.html:201
+#: eruditorg/templates/public/journal/journal_detail.html:110
+#: eruditorg/templates/userspace/journal/home.html:54
+#: eruditorg/templates/userspace/journal/partials/menu.html:50
+#: eruditorg/templates/userspace/journal/subscription/base.html:4
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_create.html:9
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:4
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:8
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:16
 msgid "Abonnements"
 msgstr ""
 
-#: core/authorization/defaults.py:50
+#: eruditorg/core/authorization/defaults.py:50
 msgid "Gestion des adresses IP de l'abonnement"
 msgstr ""
 
-#: core/authorization/defaults.py:58
+#: eruditorg/core/authorization/defaults.py:58
 msgid "Gestion des informations d'un abonnement"
 msgstr ""
 
-#: core/authorization/defaults.py:66
+#: eruditorg/core/authorization/defaults.py:66
 msgid "Gestion des membres d'un abonnement"
 msgstr ""
 
-#: core/authorization/defaults.py:73
+#: eruditorg/core/authorization/defaults.py:73
 msgid "Consultation des rapports de redevances"
 msgstr ""
 
-#: core/authorization/models.py:19 core/editor/models.py:175
-#: core/editor/models.py:195 core/subscription/abstract_models.py:12
+#: eruditorg/core/authorization/models.py:19
+#: eruditorg/core/editor/models.py:175 eruditorg/core/editor/models.py:195
+#: eruditorg/core/subscription/abstract_models.py:12
 msgid "Date de création"
 msgstr ""
 
-#: core/authorization/models.py:25 core/editor/models.py:58
-#: core/editor/models.py:196 core/subscription/abstract_models.py:13
+#: eruditorg/core/authorization/models.py:25 eruditorg/core/editor/models.py:58
+#: eruditorg/core/editor/models.py:196
+#: eruditorg/core/subscription/abstract_models.py:13
 msgid "Date de modification"
 msgstr ""
 
-#: core/authorization/models.py:37 core/editor/models.py:207
+#: eruditorg/core/authorization/models.py:37
+#: eruditorg/core/editor/models.py:207
 msgid "Groupe"
 msgstr ""
 
-#: core/authorization/models.py:64
+#: eruditorg/core/authorization/models.py:64
 msgid "Choisissez un utilisateur OU un groupe"
 msgstr ""
 
-#: core/authorization/models.py:66 core/authorization/models.py:71
+#: eruditorg/core/authorization/models.py:66
+#: eruditorg/core/authorization/models.py:71
 msgid "Choisissez SOIT un utilisateur SOIT un groupe"
 msgstr ""
 
-#: core/authorization/models.py:69
+#: eruditorg/core/authorization/models.py:69
 msgid "Impossible de changer l'autorisation liée à un objet en particulier"
 msgstr ""
 
-#: core/citations/models.py:13
+#: eruditorg/core/citations/models.py:13
 msgid "Documents Érudit"
 msgstr ""
 
-#: core/citations/models.py:16
+#: eruditorg/core/citations/models.py:16
 msgid "Liste de notices"
 msgstr ""
 
-#: core/citations/models.py:17
+#: eruditorg/core/citations/models.py:17
 msgid "Listes de notices"
 msgstr ""
 
-#: core/editor/admin.py:31
+#: eruditorg/core/editor/admin.py:31
 msgid "Nombre de fichiers"
 msgstr ""
 
-#: core/editor/models.py:21
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:11
+#: eruditorg/core/editor/models.py:21
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:11
 msgid "Brouillon"
 msgstr ""
 
-#: core/editor/models.py:22
+#: eruditorg/core/editor/models.py:22
 msgid "En attente de validation"
 msgstr ""
 
-#: core/editor/models.py:23
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:15
+#: eruditorg/core/editor/models.py:23
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:15
 msgid "Validé"
 msgstr ""
 
-#: core/editor/models.py:40 templates/userspace/journal/editor/detail.html:58
+#: eruditorg/core/editor/models.py:40
+#: eruditorg/templates/userspace/journal/editor/detail.html:55
 msgid "Volume"
 msgstr ""
 
-#: core/editor/models.py:52
+#: eruditorg/core/editor/models.py:52
 msgid "Date de l'envoi"
 msgstr ""
 
-#: core/editor/models.py:63 templates/userspace/journal/editor/detail.html:69
+#: eruditorg/core/editor/models.py:63
+#: eruditorg/templates/userspace/journal/editor/detail.html:66
 msgid "Personne contact"
 msgstr ""
 
-#: core/editor/models.py:67 templates/userspace/journal/editor/detail.html:76
+#: eruditorg/core/editor/models.py:67
+#: eruditorg/templates/userspace/journal/editor/detail.html:73
 msgid "Commentaires"
 msgstr ""
 
-#: core/editor/models.py:72
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:17
+#: eruditorg/core/editor/models.py:72
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:17
 msgid "Archivé"
 msgstr ""
 
-#: core/editor/models.py:77 core/editor/models.py:194
+#: eruditorg/core/editor/models.py:77 eruditorg/core/editor/models.py:194
 msgid "Envoi de numéro"
 msgstr ""
 
-#: core/editor/models.py:78
+#: eruditorg/core/editor/models.py:78
 msgid "Envois de numéros"
 msgstr ""
 
-#: core/editor/models.py:85
+#: eruditorg/core/editor/models.py:85
 msgid " vol. {},"
 msgstr ""
 
-#: core/editor/models.py:86
+#: eruditorg/core/editor/models.py:86
 msgid "n° {}"
 msgstr ""
 
-#: core/editor/models.py:126
+#: eruditorg/core/editor/models.py:126
 msgid "Approuver"
 msgstr ""
 
-#: core/editor/models.py:136
+#: eruditorg/core/editor/models.py:136
 msgid "Demander des corrections"
 msgstr ""
 
-#: core/editor/models.py:167
+#: eruditorg/core/editor/models.py:167
 msgid "Non soumis"
 msgstr ""
 
-#: core/editor/models.py:168
+#: eruditorg/core/editor/models.py:168
 msgid "À corriger"
 msgstr ""
 
-#: core/editor/models.py:174
+#: eruditorg/core/editor/models.py:174
 msgid "Changements de statut"
 msgstr ""
 
-#: core/editor/models.py:176
+#: eruditorg/core/editor/models.py:176
 msgid "statut"
 msgstr ""
 
-#: core/editor/models.py:178
+#: eruditorg/core/editor/models.py:178
 msgid "Version des fichiers"
 msgstr ""
 
-#: core/editor/models.py:183 core/subscription/abstract_models.py:14
+#: eruditorg/core/editor/models.py:183
+#: eruditorg/core/subscription/abstract_models.py:14
 msgid "Commentaire"
 msgstr ""
 
-#: core/editor/models.py:187
+#: eruditorg/core/editor/models.py:187
 msgid "Changement de statut d'un envoi de numéro"
 msgstr ""
 
-#: core/editor/models.py:188
+#: eruditorg/core/editor/models.py:188
 msgid "Changements de statut d'envois de numéro"
 msgstr ""
 
-#: core/editor/models.py:201
+#: eruditorg/core/editor/models.py:201
 msgid "Version de fichiers d'un envoi de numéro"
 msgstr ""
 
-#: core/editor/models.py:202
+#: eruditorg/core/editor/models.py:202
 msgid "Versions de fichiers d'envois de numéro"
 msgstr ""
 
-#: core/editor/models.py:209
+#: eruditorg/core/editor/models.py:209
 msgid "Identifiant"
 msgstr ""
 
-#: core/editor/models.py:213
+#: eruditorg/core/editor/models.py:213
 msgid "Équipe de production"
 msgstr ""
 
-#: core/editor/models.py:214
+#: eruditorg/core/editor/models.py:214
 msgid "Équipes de production"
 msgstr ""
 
-#: core/journal/account_actions.py:31
+#: eruditorg/core/journal/account_actions.py:31
 #, python-brace-format
 msgid "Votre êtes maintenant membre de cette organisation ({org})"
 msgstr ""
 
-#: core/royalty_reports/apps.py:10 core/royalty_reports/models.py:18
-#: templates/userspace/journal/partials/menu.html:59
-#: templates/userspace/journal/royalty_reports/list.html:9
-#: templates/userspace/journal/royalty_reports/list.html:17
+#: eruditorg/core/royalty_reports/apps.py:10
+#: eruditorg/core/royalty_reports/models.py:18
+#: eruditorg/templates/userspace/journal/partials/menu.html:59
+#: eruditorg/templates/userspace/journal/royalty_reports/list.html:9
+#: eruditorg/templates/userspace/journal/royalty_reports/list.html:17
 msgid "Rapports de redevances"
 msgstr ""
 
-#: core/royalty_reports/models.py:10 core/subscription/abstract_models.py:22
+#: eruditorg/core/royalty_reports/models.py:10
+#: eruditorg/core/subscription/abstract_models.py:22
 msgid "Date de début"
 msgstr ""
 
-#: core/royalty_reports/models.py:11 core/subscription/abstract_models.py:23
+#: eruditorg/core/royalty_reports/models.py:11
+#: eruditorg/core/subscription/abstract_models.py:23
 msgid "Date de fin"
 msgstr ""
 
-#: core/royalty_reports/models.py:14
+#: eruditorg/core/royalty_reports/models.py:14
 msgid "Publié dans l'espace utilisateur"
 msgstr ""
 
-#: core/royalty_reports/models.py:17 core/royalty_reports/models.py:26
-#: templates/userspace/journal/royalty_reports/list.html:5
+#: eruditorg/core/royalty_reports/models.py:17
+#: eruditorg/core/royalty_reports/models.py:26
+#: eruditorg/templates/userspace/journal/royalty_reports/list.html:5
 msgid "Rapport de redevances"
 msgstr ""
 
-#: core/royalty_reports/models.py:32
+#: eruditorg/core/royalty_reports/models.py:32
 msgid "Redevance de revue"
 msgstr ""
 
-#: core/royalty_reports/models.py:33
+#: eruditorg/core/royalty_reports/models.py:33
 msgid "Redevances de revues"
 msgstr ""
 
-#: core/subscription/abstract_models.py:37
+#: eruditorg/core/subscription/abstract_models.py:37
 msgid ""
 "La date de début d'une période d'abonnement ne doit pas être supérieure à la "
 "date de fin."
 msgstr ""
 
-#: core/subscription/abstract_models.py:54
+#: eruditorg/core/subscription/abstract_models.py:54
 msgid ""
 "Cette période est en conflit avec une autre période pour cet abonnement."
 msgstr ""
 
-#: core/subscription/account_actions.py:34
+#: eruditorg/core/subscription/account_actions.py:34
 msgid "Votre abonnement a bien été pris en compte"
 msgstr ""
 
-#: core/subscription/admin.py:27
+#: eruditorg/core/subscription/admin.py:27
 msgid "Bénéficiaire"
 msgstr ""
 
-#: core/subscription/admin.py:30
+#: eruditorg/core/subscription/admin.py:30
 msgid "Revue(s) cibles"
 msgstr ""
 
-#: core/subscription/models.py:38
+#: eruditorg/core/subscription/models.py:38
 msgid "Collection"
 msgstr ""
 
-#: core/subscription/models.py:41
+#: eruditorg/core/subscription/models.py:41
 msgid "Accès complet"
 msgstr ""
 
-#: core/subscription/models.py:45
+#: eruditorg/core/subscription/models.py:45
 msgid "Commanditaire"
 msgstr ""
 
-#: core/subscription/models.py:52 core/subscription/models.py:109
+#: eruditorg/core/subscription/models.py:52
+#: eruditorg/core/subscription/models.py:109
 msgid "Abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:53
+#: eruditorg/core/subscription/models.py:53
 msgid "Abonnements aux revues"
 msgstr ""
 
-#: core/subscription/models.py:62
+#: eruditorg/core/subscription/models.py:62
 msgid "{} - Accès complet"
 msgstr ""
 
-#: core/subscription/models.py:63
+#: eruditorg/core/subscription/models.py:63
 msgid "{} - Accès multiples"
 msgstr ""
 
-#: core/subscription/models.py:100 core/subscription/models.py:180
+#: eruditorg/core/subscription/models.py:100
+#: eruditorg/core/subscription/models.py:180
 msgid "Abonnement"
 msgstr ""
 
-#: core/subscription/models.py:103
+#: eruditorg/core/subscription/models.py:103
 msgid "Période d'abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:104
+#: eruditorg/core/subscription/models.py:104
 msgid "Périodes d'abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:110
+#: eruditorg/core/subscription/models.py:110
 msgid "Adresse IP de début"
 msgstr ""
 
-#: core/subscription/models.py:111
+#: eruditorg/core/subscription/models.py:111
 msgid "Adresse IP de fin"
 msgstr ""
 
-#: core/subscription/models.py:114
+#: eruditorg/core/subscription/models.py:114
 msgid "Plage d'adresses IP d'institution"
 msgstr ""
 
-#: core/subscription/models.py:115
+#: eruditorg/core/subscription/models.py:115
 msgid "Plages d'adresses IP d'institution"
 msgstr ""
 
-#: core/subscription/models.py:127 core/subscription/models.py:132
+#: eruditorg/core/subscription/models.py:127
+#: eruditorg/core/subscription/models.py:132
 #, python-brace-format
 msgid "{0} n'est pas une adresse IP valide"
 msgstr ""
 
-#: core/subscription/models.py:135
+#: eruditorg/core/subscription/models.py:135
 msgid "L'adresse IP de début doit être inférieure à l'adresse IP de fin"
 msgstr ""
 
-#: core/subscription/models.py:150
+#: eruditorg/core/subscription/models.py:150
 msgid "Forfait"
 msgstr ""
 
-#: core/subscription/models.py:153
+#: eruditorg/core/subscription/models.py:153
 msgid "Abonnement de gestion de revue"
 msgstr ""
 
-#: core/subscription/models.py:154
+#: eruditorg/core/subscription/models.py:154
 msgid "Abonnements de gestion de revue"
 msgstr ""
 
-#: core/subscription/models.py:167
+#: eruditorg/core/subscription/models.py:167
 msgid "Code"
 msgstr ""
 
-#: core/subscription/models.py:168
+#: eruditorg/core/subscription/models.py:168
 msgid "Maximum de comptes"
 msgstr ""
 
-#: core/subscription/models.py:171
+#: eruditorg/core/subscription/models.py:171
 msgid "Forfait de gestion d'une revue"
 msgstr ""
 
-#: core/subscription/models.py:172
+#: eruditorg/core/subscription/models.py:172
 msgid "Forfaits de gestion de revues"
 msgstr ""
 
-#: core/subscription/models.py:183
+#: eruditorg/core/subscription/models.py:183
 msgid "Période d'abonnement de gestion de revue"
 msgstr ""
 
-#: core/subscription/models.py:184
+#: eruditorg/core/subscription/models.py:184
 msgid "Périodes d'abonnement de gestion de revue"
 msgstr ""
 
-#: templates/403.html:5
+#: eruditorg/templates/403.html:5
 msgid "Permission denied"
 msgstr ""
 
-#: templates/404.html:5
+#: eruditorg/templates/404.html:5
 msgid "Page not found"
 msgstr ""
 
-#: templates/500.html:5
+#: eruditorg/templates/500.html:5
 msgid "Unknown error"
 msgstr ""
 
-#: templates/500.html:6
+#: eruditorg/templates/500.html:6
 msgid "We're sorry, but an unknow error has occured. Please try again later."
 msgstr ""
 
-#: templates/503.html:5
+#: eruditorg/templates/503.html:5
 msgid "Service unavailable"
 msgstr ""
 
-#: templates/base.html:16
+#: eruditorg/templates/base.html:16
 msgid ""
 "Érudit offre l'accès à de nombreuses collections de documents en sciences "
-"humaines et sociales : revues, livres et actes, thèses, littérature grise."
+"humaines et sociales : revues, livres et actes, thèses, rapports de "
+"recherche."
 msgstr ""
 
-#: templates/base_email.html:19
+#: eruditorg/templates/base_email.html:19
 #, python-format
 msgid "Se rendre sur %(sitename)s"
 msgstr ""
 
-#: templates/emails/auth/password_reset_email.html:5
+#: eruditorg/templates/emails/auth/password_reset_email.html:5
 #, python-format
 msgid ""
 "Vous recevez ce courriel car vous avez demandé à réinitialiser le mot de "
 "passe de votre compte utilisateur sur <strong>%(site_name)s</strong>."
 msgstr ""
 
-#: templates/emails/auth/password_reset_email.html:6
+#: eruditorg/templates/emails/auth/password_reset_email.html:6
 msgid ""
 "Veuillez cliquer sur le lien suivant afin de définir un nouveau mot de "
 "passe :"
 msgstr ""
 
-#: templates/emails/auth/password_reset_email.html:9
+#: eruditorg/templates/emails/auth/password_reset_email.html:9
 msgid "Modifier mon mot de passe"
 msgstr ""
 
-#: templates/emails/auth/password_reset_email.html:12
+#: eruditorg/templates/emails/auth/password_reset_email.html:12
 msgid "Pour rappel, votre nom d'utilisateur est :"
 msgstr ""
 
-#: templates/emails/auth/password_reset_subject.txt:1
+#: eruditorg/templates/emails/auth/password_reset_subject.txt:1
 msgid "Réinitialisation de votre mot de passe"
 msgstr ""
 
-#: templates/emails/editor/issue_files_deletion_content.html:6
+#: eruditorg/templates/emails/editor/issue_files_deletion_content.html:6
 msgid "Les fichiers des numéros suivant seront supprimés dans cinq jours."
 msgstr ""
 
-#: templates/emails/editor/issue_submission_refused_content.html:10
+#: eruditorg/templates/emails/editor/issue_submission_refused_content.html:10
 msgid ""
 "Veuillez cliquer sur le lien suivant pour consulter les modifications à "
 "apporter à vos fichiers."
 msgstr ""
 
-#: templates/emails/editor/issue_submission_refused_content.html:14
-#: templates/emails/editor/issue_submission_validated_content.html:12
+#: eruditorg/templates/emails/editor/issue_submission_refused_content.html:14
+#: eruditorg/templates/emails/editor/issue_submission_validated_content.html:12
 msgid "Consulter le numéro"
 msgstr ""
 
-#: templates/emails/editor/new_issue_submission_content.html:12
+#: eruditorg/templates/emails/editor/new_issue_submission_content.html:12
 msgid "Consulter numéro"
 msgstr ""
 
-#: templates/emails/organisation/new_member_content.html:6
+#: eruditorg/templates/emails/organisation/new_member_content.html:6
 #, python-format
 msgid ""
 "Une proposition vous a été envoyée afin de rejoindre l'organisation <strong>"
 "%(organisation_name)s</strong>."
 msgstr ""
 
-#: templates/emails/organisation/new_member_content.html:10
-#: templates/emails/subscription/journal/new_subscription_content.html:10
+#: eruditorg/templates/emails/organisation/new_member_content.html:10
+#: eruditorg/templates/emails/subscription/journal/new_subscription_content.html:10
 msgid "Veuillez cliquer sur le lien suivant pour l'accepter"
 msgstr ""
 
-#: templates/emails/organisation/new_member_content.html:11
+#: eruditorg/templates/emails/organisation/new_member_content.html:11
 msgid "Accepter la proposition"
 msgstr ""
 
-#: templates/emails/organisation/new_member_subject.html:1
+#: eruditorg/templates/emails/organisation/new_member_subject.html:1
 #, python-format
 msgid "[Érudit] Rejoindre l'organisation %(organisation_name)s"
 msgstr ""
 
-#: templates/emails/subscription/journal/new_subscription_content.html:6
+#: eruditorg/templates/emails/subscription/journal/new_subscription_content.html:6
 #, python-format
 msgid ""
 "Une proposition d'abonnement à la revue <strong>%(journal_name)s</strong> "
 "vous a été envoyée."
 msgstr ""
 
-#: templates/emails/subscription/journal/new_subscription_content.html:11
+#: eruditorg/templates/emails/subscription/journal/new_subscription_content.html:11
 msgid "Accepter l'abonnement"
 msgstr ""
 
-#: templates/emails/subscription/journal/new_subscription_subject.html:1
+#: eruditorg/templates/emails/subscription/journal/new_subscription_subject.html:1
 #, python-format
 msgid "[Érudit] Abonnement à la revue %(journal_name)s"
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:5
-#: templates/public/account_actions/individual_subscription_landing.html:15
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:5
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:15
 #, python-format
 msgid "Abonnement à la revue %(journal)s"
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:21
-#: templates/public/account_actions/individual_subscription_landing.html:26
-#: templates/public/account_actions/individual_subscription_landing.html:31
-#: templates/public/account_actions/individual_subscription_landing.html:36
-msgid "Abonnement impossible!"
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:21
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:26
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:31
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:36
+msgid "Abonnement impossible."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:22
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:22
 msgid "Ce lien d'abonnement a expiré."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:27
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:27
 msgid "Ce lien d'abonnement a déjà été utilisé."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:32
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:32
 msgid "Ce lien d'abonnement n'est plus valide."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:37
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:37
 msgid "Vous êtes déjà abonné à cette revue avec ce compte."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:41
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:41
 #, python-format
 msgid "Voulez-vous vous abonner à la revue <strong>%(journal)s</strong> ?"
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:51
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:51
 msgid "S'abonner"
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:57
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:57
 msgid "Vous devez vous identifier pour vous abonner à cette revue."
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:61
-#: templates/public/account_actions/organisation_membership_landing.html:61
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:61
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:61
 msgid "S'identifier"
 msgstr ""
 
-#: templates/public/account_actions/individual_subscription_landing.html:67
-#: templates/public/account_actions/organisation_membership_landing.html:67
+#: eruditorg/templates/public/account_actions/individual_subscription_landing.html:67
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:67
 msgid "Créer un compte"
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:5
-#: templates/public/account_actions/organisation_membership_landing.html:15
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:5
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:15
 #, python-format
 msgid "Rejoindre l'organisation %(organisation_name)s"
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:21
-#: templates/public/account_actions/organisation_membership_landing.html:26
-#: templates/public/account_actions/organisation_membership_landing.html:31
-#: templates/public/account_actions/organisation_membership_landing.html:36
-msgid "Impossible de rejoindre l'organisation!"
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:21
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:26
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:31
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:36
+msgid "Impossible de rejoindre l'organisation."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:22
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:22
 msgid "Ce lien a expiré."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:27
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:27
 msgid "Ce lien a déjà été utilisé."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:32
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:32
 msgid "Ce lien n'est plus valide."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:37
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:37
 msgid "Vous faîtes déjà partie de cette organisation avec ce compte."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:41
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:41
 #, python-format
 msgid ""
-"Voulez-vous rejoindre l'organisation <strong>%(organisation_name)s</strong> ?"
+"Voulez-vous rejoindre l'organisation <strong>%(organisation_name)s</"
+"strong>&nbsp;?"
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:51
-msgid "Rejoindre!"
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:51
+msgid "Rejoindre"
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:57
+#: eruditorg/templates/public/account_actions/organisation_membership_landing.html:57
 msgid "Vous devez vous identifier pour rejoindre cette organisation."
 msgstr ""
 
-#: templates/public/account_actions/register.html:4
-#: templates/public/account_actions/register.html:12
-#: templates/public/account_actions/register.html:75
+#: eruditorg/templates/public/account_actions/register.html:4
+#: eruditorg/templates/public/account_actions/register.html:12
+#: eruditorg/templates/public/account_actions/register.html:75
 msgid "Inscription"
 msgstr ""
 
-#: templates/public/account_actions/register.html:29
+#: eruditorg/templates/public/account_actions/register.html:29
 msgid "Nom d'utilisateur"
 msgstr ""
 
-#: templates/public/account_actions/register.html:36
-#: templates/userspace/journal/subscription/individualsubscription_list.html:72
-#: templates/userspace/library/members/member_list.html:53
-msgid "Adresse e-mail"
-msgstr ""
-
-#: templates/public/auth/base_profile_edit.html:5
-#: templates/public/auth/base_profile_edit.html:14
-#: templates/public/base.html:108 templates/userspace/base.html:43
+#: eruditorg/templates/public/auth/base_profile_edit.html:5
+#: eruditorg/templates/public/auth/base_profile_edit.html:14
+#: eruditorg/templates/public/base.html:109
+#: eruditorg/templates/userspace/base.html:43
 msgid "Paramètres"
 msgstr ""
 
-#: templates/public/auth/base_profile_edit.html:17
+#: eruditorg/templates/public/auth/base_profile_edit.html:17
 msgid "Informations personnelles"
 msgstr ""
 
-#: templates/public/auth/base_profile_edit.html:18
+#: eruditorg/templates/public/auth/base_profile_edit.html:18
 msgid "Compte"
 msgstr ""
 
-#: templates/public/auth/base_profile_edit.html:19
-#: templates/public/auth/login.html:38 templates/public/auth/login.html:98
+#: eruditorg/templates/public/auth/base_profile_edit.html:19
+#: eruditorg/templates/public/auth/login.html:37
+#: eruditorg/templates/public/auth/login.html:85
 msgid "Mot de passe"
 msgstr ""
 
-#: templates/public/auth/login.html:4 templates/public/auth/login.html:11
-#: templates/public/auth/login.html:55 templates/public/auth/login.html:114
-#: templates/public/auth/password_reset_complete.html:7
-#: templates/public/base.html:94
+#: eruditorg/templates/public/auth/login.html:4
+#: eruditorg/templates/public/auth/login.html:10
+#: eruditorg/templates/public/auth/login.html:54
+#: eruditorg/templates/public/auth/login.html:101
+#: eruditorg/templates/public/auth/password_reset_complete.html:7
+#: eruditorg/templates/public/base.html:95
 msgid "Connexion"
 msgstr ""
 
-#: templates/public/auth/login.html:6
-#: templates/public/auth/password_change.html:6
-#: templates/public/auth/password_reset_base.html:7
-#: templates/userspace/journal/editor/base.html:4
-msgid "Espace éditeurs"
-msgstr ""
-
-#: templates/public/auth/login.html:17 templates/public/auth/login.html:74
+#: eruditorg/templates/public/auth/login.html:16
+#: eruditorg/templates/public/auth/login.html:64
 msgid "Connexion à votre compte"
 msgstr ""
 
-#: templates/public/auth/login.html:46 templates/public/auth/login.html:106
+#: eruditorg/templates/public/auth/login.html:45
+#: eruditorg/templates/public/auth/login.html:93
 msgid "Mot de passe oublié&nbsp;?"
 msgstr ""
 
-#: templates/public/auth/login.html:54
-#: templates/userspace/journal/editor/form.html:141
+#: eruditorg/templates/public/auth/login.html:53
+#: eruditorg/templates/userspace/journal/editor/form.html:138
 msgid "Annuler"
 msgstr ""
 
-#: templates/public/auth/parameters.html:4
-#: templates/public/auth/parameters.html:7
-#: templates/public/auth/parameters.html:13
+#: eruditorg/templates/public/auth/parameters.html:4
+#: eruditorg/templates/public/auth/parameters.html:7
+#: eruditorg/templates/public/auth/parameters.html:13
 msgid "Modification du compte"
 msgstr ""
 
-#: templates/public/auth/parameters.html:38
-#: templates/public/auth/password_change.html:51
-#: templates/public/auth/password_reset_confirm.html:28
-#: templates/public/auth/personal_data.html:38
-#: templates/userspace/journal/editor/form.html:142
+#: eruditorg/templates/public/auth/parameters.html:38
+#: eruditorg/templates/public/auth/password_change.html:49
+#: eruditorg/templates/public/auth/password_reset_confirm.html:28
+#: eruditorg/templates/public/auth/personal_data.html:38
+#: eruditorg/templates/userspace/journal/editor/form.html:139
 msgid "Enregistrer"
 msgstr ""
 
-#: templates/public/auth/password_change.html:4
-#: templates/public/auth/password_change.html:11
-#: templates/public/auth/password_change.html:17
+#: eruditorg/templates/public/auth/password_change.html:4
+#: eruditorg/templates/public/auth/password_change.html:9
+#: eruditorg/templates/public/auth/password_change.html:15
 msgid "Modification du mot de passe"
 msgstr ""
 
-#: templates/public/auth/password_reset_base.html:4
-#: templates/public/auth/password_reset_base.html:22
+#: eruditorg/templates/public/auth/password_reset_base.html:4
+#: eruditorg/templates/public/auth/password_reset_base.html:13
 msgid "Réinitialisation de mot de passe"
 msgstr ""
 
-#: templates/public/auth/password_reset_base.html:18
-msgid "Retour à la page de connexion"
-msgstr ""
-
-#: templates/public/auth/password_reset_base.html:19
-msgid "Logo Érudit"
-msgstr ""
-
-#: templates/public/auth/password_reset_base.html:29
+#: eruditorg/templates/public/auth/password_reset_base.html:20
 msgid "Retourner à la page d'accueil"
 msgstr ""
 
-#: templates/public/auth/password_reset_complete.html:6
+#: eruditorg/templates/public/auth/password_reset_complete.html:6
 msgid ""
 "Votre mot de passe a été modifié. Vous pouvez maintenant vous authentifier."
 msgstr ""
 
-#: templates/public/auth/password_reset_confirm.html:8
+#: eruditorg/templates/public/auth/password_reset_confirm.html:8
 msgid "Saisissez un nouveau mot de passe."
 msgstr ""
 
-#: templates/public/auth/password_reset_confirm.html:18
+#: eruditorg/templates/public/auth/password_reset_confirm.html:18
 msgid "Nouveau mot de passe"
 msgstr ""
 
-#: templates/public/auth/password_reset_confirm.html:23
+#: eruditorg/templates/public/auth/password_reset_confirm.html:23
 msgid "Confirmation du nouveau mot de passe"
 msgstr ""
 
-#: templates/public/auth/password_reset_done.html:5
+#: eruditorg/templates/public/auth/password_reset_done.html:5
 msgid ""
 "Vous recevrez les directives pour réinitialiser votre mot de passe par "
 "courriel."
 msgstr ""
 
-#: templates/public/auth/password_reset_done.html:6
+#: eruditorg/templates/public/auth/password_reset_done.html:6
 msgid ""
 "Si vous ne recevez pas de message, vérifiez que vous avez saisi l'adresse "
 "avec laquelle vous vous êtes enregistré."
 msgstr ""
 
-#: templates/public/auth/password_reset_form.html:8
+#: eruditorg/templates/public/auth/password_reset_form.html:8
 msgid ""
 "Saisissez votre adresse courriel ci-dessous et nous vous enverrons les "
 "instructions pour en créer un nouveau."
 msgstr ""
 
-#: templates/public/auth/password_reset_form.html:18
-msgid "Adresse courriel"
-msgstr ""
-
-#: templates/public/auth/password_reset_form.html:23
+#: eruditorg/templates/public/auth/password_reset_form.html:23
 msgid "Réinitialiser"
 msgstr ""
 
-#: templates/public/auth/personal_data.html:4
-#: templates/public/auth/personal_data.html:7
-#: templates/public/auth/personal_data.html:13
+#: eruditorg/templates/public/auth/personal_data.html:4
+#: eruditorg/templates/public/auth/personal_data.html:7
+#: eruditorg/templates/public/auth/personal_data.html:13
 msgid "Modification des informations personnelles"
 msgstr ""
 
-#: templates/public/base.html:51
+#: eruditorg/templates/public/base.html:52
 msgid "Menu principal"
 msgstr ""
 
-#: templates/public/base.html:58
+#: eruditorg/templates/public/base.html:59
 msgid "Index des revues"
 msgstr ""
 
-#: templates/public/base.html:61
+#: eruditorg/templates/public/base.html:62
 msgid "Index des dépôts institutionnels"
 msgstr ""
 
-#: templates/public/base.html:64
+#: eruditorg/templates/public/base.html:65
 msgid "Index des livres et actes"
 msgstr ""
 
-#: templates/public/base.html:64 templates/public/home.html:91
+#: eruditorg/templates/public/base.html:65
+#: eruditorg/templates/public/home.html:91
 msgid "Livres et actes"
 msgstr ""
 
-#: templates/public/base.html:67
-msgid "Index des documents de littérature grise"
+#: eruditorg/templates/public/base.html:68
+msgid "Index des documents de rapports de recherche"
 msgstr ""
 
-#: templates/public/base.html:72
+#: eruditorg/templates/public/base.html:73
 msgid "À propos d\\"
 msgstr ""
 
-#: templates/public/base.html:72 templates/public/base.html:202
-#: templates/public/journal/journal_detail.html:77
-#: templates/userspace/journal/home.html:19
-#: templates/userspace/journal/information/journalinformation_update.html:5
-#: templates/userspace/journal/information/journalinformation_update.html:13
-#: templates/userspace/journal/partials/menu.html:23
+#: eruditorg/templates/public/base.html:73
+#: eruditorg/templates/public/base.html:200
+#: eruditorg/templates/public/journal/journal_detail.html:75
+#: eruditorg/templates/userspace/journal/home.html:19
+#: eruditorg/templates/userspace/journal/information/journalinformation_update.html:5
+#: eruditorg/templates/userspace/journal/information/journalinformation_update.html:13
+#: eruditorg/templates/userspace/journal/partials/menu.html:23
 msgid "À propos"
 msgstr ""
 
-#: templates/public/base.html:75
+#: eruditorg/templates/public/base.html:76
 msgid "Information pour les bibliothécaires"
 msgstr ""
 
-#: templates/public/base.html:75 templates/public/home.html:212
+#: eruditorg/templates/public/base.html:76
+#: eruditorg/templates/public/home.html:213
 msgid "Bibliothécaires"
 msgstr ""
 
-#: templates/public/base.html:78
+#: eruditorg/templates/public/base.html:79
 msgid "Information pour les éditeurs"
 msgstr ""
 
-#: templates/public/base.html:78 templates/public/home.html:217
+#: eruditorg/templates/public/base.html:79
+#: eruditorg/templates/public/home.html:218
 msgid "Éditeurs"
 msgstr ""
 
-#: templates/public/base.html:81
+#: eruditorg/templates/public/base.html:82
 msgid "Information pour les chercheurs"
 msgstr ""
 
-#: templates/public/base.html:81 templates/public/home.html:222
+#: eruditorg/templates/public/base.html:82
+#: eruditorg/templates/public/home.html:223
 msgid "Chercheurs"
 msgstr ""
 
-#: templates/public/base.html:84
+#: eruditorg/templates/public/base.html:85
 msgid "Information pour les utilisateurs"
 msgstr ""
 
-#: templates/public/base.html:84 templates/public/home.html:227
+#: eruditorg/templates/public/base.html:85
+#: eruditorg/templates/public/home.html:228
 msgid "Utilisateurs"
 msgstr ""
 
-#: templates/public/base.html:87
+#: eruditorg/templates/public/base.html:88
 msgid "Information sur nos collections"
 msgstr ""
 
-#: templates/public/base.html:93
+#: eruditorg/templates/public/base.html:94
 msgid "Se connecter à l\\"
 msgstr ""
 
-#: templates/public/base.html:99
+#: eruditorg/templates/public/base.html:100
 msgid "Mon compte"
 msgstr ""
 
-#: templates/public/base.html:104
+#: eruditorg/templates/public/base.html:105
 msgid "Accéder à l\\"
 msgstr ""
 
-#: templates/public/base.html:104
-msgid "Espace privé"
+#: eruditorg/templates/public/base.html:105
+#: eruditorg/templates/userspace/journal/home.html:4
+#: eruditorg/templates/userspace/library/home.html:4
+msgid "Tableau de bord"
 msgstr ""
 
-#: templates/public/base.html:108
+#: eruditorg/templates/public/base.html:109
 msgid "Modifier mes paramètres"
 msgstr ""
 
-#: templates/public/base.html:111
+#: eruditorg/templates/public/base.html:112
 msgid "Se déconnecter"
 msgstr ""
 
-#: templates/public/base.html:111 templates/userspace/base.html:44
+#: eruditorg/templates/public/base.html:112
+#: eruditorg/templates/userspace/base.html:44
 msgid "Déconnexion"
 msgstr ""
 
-#: templates/public/base.html:117
+#: eruditorg/templates/public/base.html:118
 msgid "Effectuer une recherche avancée"
 msgstr ""
 
-#: templates/public/base.html:120
+#: eruditorg/templates/public/base.html:121
 msgid "Voir ma bibliothèque"
 msgstr ""
 
-#: templates/public/base.html:125
+#: eruditorg/templates/public/base.html:126
 msgid "Effectuer une recherche simple"
 msgstr ""
 
-#: templates/public/base.html:131
+#: eruditorg/templates/public/base.html:132
 msgid "Par auteur, titre, mots-clés..."
 msgstr ""
 
-#: templates/public/base.html:132 templates/public/home.html:72
-#: templates/public/search/advanced_search.html:69
-#: templates/public/search/advanced_search.html:139
+#: eruditorg/templates/public/base.html:133
+#: eruditorg/templates/public/home.html:72
+#: eruditorg/templates/public/search/advanced_search.html:69
+#: eruditorg/templates/public/search/advanced_search.html:139
 msgid "Rechercher"
 msgstr ""
 
-#: templates/public/base.html:147
+#: eruditorg/templates/public/base.html:147
 msgid "Fil d'Ariane"
 msgstr ""
 
-#: templates/public/base.html:184
+#: eruditorg/templates/public/base.html:182
 msgid "Abonnez-vous à notre infolettre&nbsp;:"
 msgstr ""
 
-#: templates/public/base.html:187
+#: eruditorg/templates/public/base.html:185
 msgid "nom@courriel.com"
 msgstr ""
 
-#: templates/public/base.html:188
+#: eruditorg/templates/public/base.html:186
 msgid "S'inscrire"
 msgstr ""
 
-#: templates/public/base.html:227
+#: eruditorg/templates/public/base.html:225
 msgid "Livres & actes"
 msgstr ""
 
-#: templates/public/base.html:234 templates/userspace/base.html:42
+#: eruditorg/templates/public/base.html:232
 msgid "Aide"
 msgstr ""
 
-#: templates/public/base.html:235
+#: eruditorg/templates/public/base.html:233
 msgid "Plan du site"
 msgstr ""
 
-#: templates/public/base.html:236
+#: eruditorg/templates/public/base.html:234
 msgid "Nous contacter"
 msgstr ""
 
-#: templates/public/base.html:253
+#: eruditorg/templates/public/base.html:251
 msgid "Logo d'Érudit"
 msgstr ""
 
-#: templates/public/base.html:254 templates/public/home.html:57
+#: eruditorg/templates/public/base.html:252
+#: eruditorg/templates/public/home.html:57
 msgid "Cultivez votre savoir."
 msgstr ""
 
-#: templates/public/base.html:261
+#: eruditorg/templates/public/base.html:259
 msgid "Consortium Érudit"
 msgstr ""
 
-#: templates/public/base.html:264
+#: eruditorg/templates/public/base.html:262
 msgid "Politique et licence d’utilisation"
 msgstr ""
 
-#: templates/public/base.html:269
+#: eruditorg/templates/public/base.html:267
 msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
-#: templates/public/citations/list.html:4
-#: templates/public/citations/list.html:10
-#: templates/public/citations/list.html:20
+#: eruditorg/templates/public/citations/list.html:4
+#: eruditorg/templates/public/citations/list.html:10
+#: eruditorg/templates/public/citations/list.html:20
 msgid "Ma bibliothèque"
 msgstr ""
 
-#: templates/public/citations/list.html:24
+#: eruditorg/templates/public/citations/list.html:24
 msgid ""
 "\n"
 "          <p>Cette page présente les notices des documents que vous avez "
@@ -2105,277 +2168,279 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/public/citations/list.html:31
+#: eruditorg/templates/public/citations/list.html:31
 msgid "Contenu"
 msgstr ""
 
-#: templates/public/citations/list.html:34
+#: eruditorg/templates/public/citations/list.html:34
 #, python-format
 msgid "%(counter)s article savant"
 msgid_plural "%(counter)s articles savants"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/citations/list.html:38
+#: eruditorg/templates/public/citations/list.html:38
 #, python-format
 msgid "%(counter)s article culturel"
 msgid_plural "%(counter)s articles culturels"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/citations/list.html:42
-#: templates/public/thesis/collection_home.html:56
-#: templates/public/thesis/home.html:86
+#: eruditorg/templates/public/citations/list.html:42
+#: eruditorg/templates/public/thesis/collection_home.html:58
+#: eruditorg/templates/public/thesis/home.html:87
 #, python-format
 msgid "%(counter)s thèse"
 msgid_plural "%(counter)s thèses"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/citations/list.html:45
+#: eruditorg/templates/public/citations/list.html:45
 msgid "0 document"
 msgstr ""
 
-#: templates/public/citations/list.html:52
+#: eruditorg/templates/public/citations/list.html:52
 msgid "Notices sauvegardées"
 msgstr ""
 
-#: templates/public/citations/list.html:60
+#: eruditorg/templates/public/citations/list.html:60
 msgid "Supprimer les notices sélectionnées"
 msgstr ""
 
-#: templates/public/citations/list.html:61
+#: eruditorg/templates/public/citations/list.html:61
 msgid "Citer les notices sélectionnées"
 msgstr ""
 
-#: templates/public/citations/list.html:64
+#: eruditorg/templates/public/citations/list.html:64
 msgid "Aucun document sélectionné"
 msgstr ""
 
-#: templates/public/citations/list.html:68
+#: eruditorg/templates/public/citations/list.html:68
 msgid "Tout sélectionner"
 msgstr ""
 
-#: templates/public/citations/list.html:69
+#: eruditorg/templates/public/citations/list.html:69
 msgid "Titres"
 msgstr ""
 
-#: templates/public/citations/list.html:77
-#: templates/public/citations/list.html:120
-#: templates/public/journal/partials/issue_detail_article_item.html:9
-#: templates/public/search/advanced_search.html:160
-#: templates/public/search/results.html:235
-#: templates/userspace/journal/editor/detail.html:170
-#: templates/userspace/journal/subscription/individualsubscription_list.html:28
-#: templates/userspace/journal/subscription/individualsubscription_list.html:89
-#: templates/userspace/journal/subscription/individualsubscription_list.html:90
-#: templates/userspace/library/members/member_list.html:28
-#: templates/userspace/library/members/member_list.html:70
-#: templates/userspace/library/members/member_list.html:71
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:28
+#: eruditorg/templates/public/citations/list.html:77
+#: eruditorg/templates/public/citations/list.html:120
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:9
+#: eruditorg/templates/public/search/advanced_search.html:160
+#: eruditorg/templates/public/search/results.html:254
+#: eruditorg/templates/userspace/journal/editor/detail.html:167
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:28
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:89
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:90
+#: eruditorg/templates/userspace/library/members/member_list.html:28
+#: eruditorg/templates/userspace/library/members/member_list.html:70
+#: eruditorg/templates/userspace/library/members/member_list.html:71
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:28
 msgid "Supprimer"
 msgstr ""
 
-#: templates/public/citations/list.html:78
-#: templates/public/citations/list.html:121
+#: eruditorg/templates/public/citations/list.html:78
+#: eruditorg/templates/public/citations/list.html:121
 msgid "Citer"
 msgstr ""
 
-#: templates/public/citations/list.html:79
-#: templates/public/citations/list.html:122
-#: templates/public/journal/partials/issue_detail_article_item.html:10
-#: templates/public/search/results.html:242
+#: eruditorg/templates/public/citations/list.html:79
+#: eruditorg/templates/public/citations/list.html:122
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:10
+#: eruditorg/templates/public/search/results.html:261
 msgid "Télécharger"
 msgstr ""
 
-#: templates/public/citations/list.html:82
-#: templates/public/citations/list.html:125
+#: eruditorg/templates/public/citations/list.html:82
+#: eruditorg/templates/public/citations/list.html:125
 msgid "Sélectionner"
 msgstr ""
 
-#: templates/public/citations/list.html:85
+#: eruditorg/templates/public/citations/list.html:85
 msgid "&nbsp;:"
 msgstr ""
 
-#: templates/public/citations/list.html:91
-#: templates/public/citations/list.html:132
-#: templates/public/citations/list.html:164
-#: templates/public/journal/partials/article_citation_modal_content.html:4
-#: templates/public/search/results.html:274
+#: eruditorg/templates/public/citations/list.html:91
+#: eruditorg/templates/public/citations/list.html:132
+#: eruditorg/templates/public/citations/list.html:164
+#: eruditorg/templates/public/journal/partials/article_citation_modal_content.html:4
+#: eruditorg/templates/public/search/results.html:293
 msgid "Outils de citation"
 msgstr ""
 
-#: templates/public/citations/list.html:93
-#: templates/public/citations/list.html:134
+#: eruditorg/templates/public/citations/list.html:93
+#: eruditorg/templates/public/citations/list.html:134
+#: eruditorg/templates/public/journal/partials/article_citation_modal_content.html:56
+#: eruditorg/templates/public/search/results.html:295
 msgid "Exporter la notice de ce document"
 msgstr ""
 
-#: templates/public/citations/list.html:166
+#: eruditorg/templates/public/citations/list.html:166
 msgid "Exporter les notices sélectionnées"
 msgstr ""
 
-#: templates/public/citations/list.html:192
+#: eruditorg/templates/public/citations/list.html:192
 msgid "Tri…"
 msgstr ""
 
-#: templates/public/citations/list.html:205
+#: eruditorg/templates/public/citations/list.html:205
 msgid "Aucune notice sauvegardée&nbsp;!"
 msgstr ""
 
-#: templates/public/home.html:6
-msgid "Accueil"
+#: eruditorg/templates/public/home.html:6
+msgid "Cultivez votre savoir"
 msgstr ""
 
-#: templates/public/home.html:47 templates/public/journal/issue_detail.html:80
-#: templates/public/journal/journal_base.html:10
-#: templates/public/search/results.html:152
+#: eruditorg/templates/public/home.html:47
+#: eruditorg/templates/public/journal/issue_detail.html:79
+#: eruditorg/templates/public/journal/journal_base.html:10
+#: eruditorg/templates/public/search/results.html:153
 msgid "inconnu"
 msgstr ""
 
-#: templates/public/home.html:49
+#: eruditorg/templates/public/home.html:49
 msgid "Accueil d’Érudit"
 msgstr ""
 
-#: templates/public/home.html:58
+#: eruditorg/templates/public/home.html:58
 msgid ""
 "Explorez plus de 200&nbsp;000 publications savantes et culturelles en "
 "sciences humaines et sociales."
 msgstr ""
 
-#: templates/public/home.html:69
+#: eruditorg/templates/public/home.html:69
 msgid "Par auteur, titre, mots-clés&hellip;"
 msgstr ""
 
-#: templates/public/home.html:78 templates/public/search/advanced_search.html:5
-#: templates/public/search/advanced_search.html:18
+#: eruditorg/templates/public/home.html:78
+#: eruditorg/templates/public/search/advanced_search.html:5
+#: eruditorg/templates/public/search/advanced_search.html:18
 msgid "Recherche avancée"
 msgstr ""
 
-#: templates/public/home.html:100
+#: eruditorg/templates/public/home.html:100
 msgid "disciplines"
 msgstr ""
 
-#: templates/public/home.html:101
+#: eruditorg/templates/public/home.html:101
 msgid "Voir toutes les disciplines"
 msgstr ""
 
-#: templates/public/home.html:116
+#: eruditorg/templates/public/home.html:115
 msgid "Derniers numéros"
 msgstr ""
 
-#: templates/public/home.html:135
+#: eruditorg/templates/public/home.html:134
 #, python-format
 msgid "Couverture du numéro '%(issue_title)s' de la revue '%(journal_name)s'"
 msgstr ""
 
-#: templates/public/home.html:161
+#: eruditorg/templates/public/home.html:163
 msgid "Nouvelles"
 msgstr ""
 
-#: templates/public/home.html:170
-#: templates/public/thesis/collection_list_base.html:92
+#: eruditorg/templates/public/home.html:172
+#: eruditorg/templates/public/thesis/collection_list_base.html:94
 msgid "Lire la suite"
 msgstr ""
 
-#: templates/public/home.html:178
+#: eruditorg/templates/public/home.html:180
 msgid "Toutes les nouvelles d'Érudit"
 msgstr ""
 
-#: templates/public/home.html:193
+#: eruditorg/templates/public/home.html:194
 msgid ""
 "Érudit offre l'accès à de nombreuses collections de documents en sciences "
-"humaines et sociales&nbsp;: revues, livres et actes, thèses, littérature "
-"grise."
+"humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de "
+"recherche."
 msgstr ""
 
-#: templates/public/home.html:193
+#: eruditorg/templates/public/home.html:194
 msgid "En savoir plus"
 msgstr ""
 
-#: templates/public/home.html:213
+#: eruditorg/templates/public/home.html:214
 msgid ""
 "Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers."
 msgstr ""
 
-#: templates/public/home.html:214
+#: eruditorg/templates/public/home.html:215
 msgid "Abonnez-vous"
 msgstr ""
 
-#: templates/public/home.html:218
+#: eruditorg/templates/public/home.html:219
 msgid "Diffusez votre revue en format numérique partout dans le monde."
 msgstr ""
 
-#: templates/public/home.html:219
+#: eruditorg/templates/public/home.html:220
 msgid "Publiez avec nous"
 msgstr ""
 
-#: templates/public/home.html:223
+#: eruditorg/templates/public/home.html:224
 msgid "Accédez à des services adaptés à l’exploitation de corpus."
 msgstr ""
 
-#: templates/public/home.html:224
+#: eruditorg/templates/public/home.html:225
 msgid "Explorez nos données"
 msgstr ""
 
-#: templates/public/home.html:228
+#: eruditorg/templates/public/home.html:229
 msgid "Trouvez les ressources et données pertinentes pour vos recherches."
 msgstr ""
 
-#: templates/public/home.html:229
+#: eruditorg/templates/public/home.html:230
 msgid "Repérez des articles"
 msgstr ""
 
-#: templates/public/journal/article_detail.html:150
-#: templates/public/journal/article_summary.html:141
+#: eruditorg/templates/public/journal/article_detail.html:155
+#: eruditorg/templates/public/journal/article_summary.html:147
 msgid ""
 "La diffusion de cet article sur Érudit n'a pas été autorisée par l'auteur."
 msgstr ""
 
-#: templates/public/journal/article_detail.html:161
-#: templates/public/journal/article_summary.html:152
+#: eruditorg/templates/public/journal/article_detail.html:166
+#: eruditorg/templates/public/journal/article_summary.html:158
 msgid "Autres articles de ce numéro"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:186
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:186
 #, python-format
 msgid "Document généré le %(now_dt)s"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:207
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:207
 msgid "Aller au sommaire du numéro"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:210
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:210
 msgid "Éditeur(s)"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:217
-#: templates/public/journal/journal_base.html:91
-#: templates/userspace/journal/home.html:118
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:217
+#: eruditorg/templates/public/journal/journal_base.html:91
 msgid "imprimé"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:218
-#: templates/public/journal/journal_base.html:92
-#: templates/userspace/journal/home.html:119
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:218
+#: eruditorg/templates/public/journal/journal_base.html:92
 msgid "numérique"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:223
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:223
 msgid "Découvrir la revue"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:226
-#: templates/public/journal/partials/article_citation_modal_content.html:6
-#: templates/public/search/results.html:249
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:226
+#: eruditorg/templates/public/journal/partials/article_citation_modal_content.html:6
+#: eruditorg/templates/public/search/results.html:268
 msgid "Citer cet article"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:246
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:246
 msgid "Résumé de l'article"
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:257
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:257
 msgid ""
 "\n"
 "            Ce document est protégé par la loi sur le droit d'auteur. "
@@ -2387,11 +2452,11 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:271
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:271
 msgid "Cet article est diffusé et préservé par Érudit."
 msgstr ""
 
-#: templates/public/journal/article_pdf_coverpage.html:273
+#: eruditorg/templates/public/journal/article_pdf_coverpage.html:273
 msgid ""
 "\n"
 "            Érudit est un consortium interuniversitaire sans but lucratif "
@@ -2403,129 +2468,132 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/public/journal/article_summary.html:123
+#: eruditorg/templates/public/journal/article_summary.html:128
 #, python-format
 msgid "%(title)s - Résumé"
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:99
+#: eruditorg/templates/public/journal/issue_detail.html:97
 msgid "&nbsp;"
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:106
+#: eruditorg/templates/public/journal/issue_detail.html:104
 msgid "L’accès aux numéros courants de ce numéro nécessite un abonnement."
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:109
+#: eruditorg/templates/public/journal/issue_detail.html:107
 msgid "Sommaire"
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:109
+#: eruditorg/templates/public/journal/issue_detail.html:107
 msgid "articles"
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:109
+#: eruditorg/templates/public/journal/issue_detail.html:107
 msgid ""
 "La lecture de ces articles nécessite la redirection vers le site de la revue."
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:186
-#: templates/public/journal/journal_authors_list.html:112
-#: templates/public/journal/journal_detail.html:188
-#: templates/public/journal/journal_list_per_disciplines.html:84
-#: templates/public/journal/journal_list_per_names.html:169
-#: templates/public/thesis/collection_list_base.html:115
+#: eruditorg/templates/public/journal/issue_detail.html:182
+#: eruditorg/templates/public/journal/journal_authors_list.html:112
+#: eruditorg/templates/public/journal/journal_detail.html:181
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:84
+#: eruditorg/templates/public/journal/journal_list_per_names.html:169
+#: eruditorg/templates/public/thesis/collection_list_base.html:117
 msgid "Retourner en haut"
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:197
+#: eruditorg/templates/public/journal/issue_detail.html:189
+msgid "Consulter la revue"
+msgstr ""
+
+#: eruditorg/templates/public/journal/issue_detail.html:192
 msgid "Couverture de"
 msgstr ""
 
-#: templates/public/journal/issue_detail.html:210
+#: eruditorg/templates/public/journal/issue_detail.html:204
 msgid "Anciens numéros de"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:6
-#: templates/public/journal/journal_authors_list.html:58
-#: templates/public/journal/journal_base.html:54
+#: eruditorg/templates/public/journal/journal_authors_list.html:6
+#: eruditorg/templates/public/journal/journal_authors_list.html:58
+#: eruditorg/templates/public/journal/journal_base.html:54
 msgid "Index des auteurs"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:66
+#: eruditorg/templates/public/journal/journal_authors_list.html:66
 msgid "Par type d’article"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:68
+#: eruditorg/templates/public/journal/journal_authors_list.html:68
 msgid "Voir tous les auteurs"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:68
+#: eruditorg/templates/public/journal/journal_authors_list.html:68
 msgid "Tous"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:69
+#: eruditorg/templates/public/journal/journal_authors_list.html:69
 msgid "Voir les auteurs d’articles"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:69
+#: eruditorg/templates/public/journal/journal_authors_list.html:69
 msgid "Articles"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:70
+#: eruditorg/templates/public/journal/journal_authors_list.html:70
 msgid "Voir les auteurs de comptes rendus"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:70
+#: eruditorg/templates/public/journal/journal_authors_list.html:70
 msgid "Comptes rendus"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:73
-#: templates/public/journal/journal_list_per_names.html:117
+#: eruditorg/templates/public/journal/journal_authors_list.html:73
+#: eruditorg/templates/public/journal/journal_list_per_names.html:117
 msgid "Par lettre"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:85
+#: eruditorg/templates/public/journal/journal_authors_list.html:85
 #, python-format
 msgid "Auteurs commençant par %(letter)s"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:100
+#: eruditorg/templates/public/journal/journal_authors_list.html:100
 msgid "&laquo;&nbsp;"
 msgstr ""
 
-#: templates/public/journal/journal_authors_list.html:100
+#: eruditorg/templates/public/journal/journal_authors_list.html:100
 msgid "&nbsp;&raquo;"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:22
+#: eruditorg/templates/public/journal/journal_base.html:22
 msgid "Dernier numéro"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:42
-#: templates/public/journal/journal_detail.html:160
-msgid "Historique des numéros"
+#: eruditorg/templates/public/journal/journal_base.html:42
+#: eruditorg/templates/public/journal/journal_detail.html:155
+msgid "Historique de la revue"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:43
+#: eruditorg/templates/public/journal/journal_base.html:43
 msgid "Voir tous les numéros"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:50
+#: eruditorg/templates/public/journal/journal_base.html:50
+#: eruditorg/templates/public/thesis/collection_list_base.html:122
 msgid "Fiche"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:62
-#: templates/userspace/journal/home.html:96
+#: eruditorg/templates/public/journal/journal_base.html:62
 msgid "Direction"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:69
+#: eruditorg/templates/public/journal/journal_base.html:69
 msgid "Rédaction"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:77
-#: templates/userspace/journal/home.html:104
+#: eruditorg/templates/public/journal/journal_base.html:77
 msgid ""
 "\n"
 "            Éditeur\n"
@@ -2537,13 +2605,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/journal/journal_base.html:97
-#: templates/userspace/journal/home.html:124
+#: eruditorg/templates/public/journal/journal_base.html:97
 msgid "Fréquence"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:99
-#: templates/userspace/journal/home.html:126
+#: eruditorg/templates/public/journal/journal_base.html:99
 #, python-format
 msgid ""
 "\n"
@@ -2556,58 +2622,51 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/journal/journal_base.html:107
-#: templates/userspace/journal/home.html:134
+#: eruditorg/templates/public/journal/journal_base.html:107
 msgid "Période de publication"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:112
+#: eruditorg/templates/public/journal/journal_base.html:112
 msgid "Disponible dans Érudit depuis"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:116
-#: templates/userspace/journal/home.html:137
+#: eruditorg/templates/public/journal/journal_base.html:116
 msgid "Type de support"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:119
-#: templates/userspace/journal/home.html:140
+#: eruditorg/templates/public/journal/journal_base.html:119
 msgid "Numérique et papier"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:121
-#: templates/userspace/journal/home.html:142
+#: eruditorg/templates/public/journal/journal_base.html:121
 msgid "Numérique"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:125
-#: templates/userspace/journal/home.html:146
+#: eruditorg/templates/public/journal/journal_base.html:125
 msgid "Politique d'accès"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:127
-#: templates/userspace/journal/home.html:148
+#: eruditorg/templates/public/journal/journal_base.html:127
 msgid "Disponible en libre accès"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:127
+#: eruditorg/templates/public/journal/journal_base.html:127
 msgid ""
 "Les numéros courants et les archives de cette revue sont disponibles en "
 "libre accès."
 msgstr ""
 
-#: templates/public/journal/journal_base.html:129
+#: eruditorg/templates/public/journal/journal_base.html:129
 msgid "Accès restreint"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:129
+#: eruditorg/templates/public/journal/journal_base.html:129
 msgid ""
 "L’accès aux numéros courants de cette revue nécessite un abonnement, tandis "
 "que l’ensemble de ses archives est disponible en libre accès."
 msgstr ""
 
-#: templates/public/journal/journal_base.html:134
-#: templates/userspace/journal/home.html:155
+#: eruditorg/templates/public/journal/journal_base.html:134
 msgid ""
 "\n"
 "            Discipline\n"
@@ -2619,72 +2678,76 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/journal/journal_base.html:148
+#: eruditorg/templates/public/journal/journal_base.html:148
 msgid "Site web"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:153
+#: eruditorg/templates/public/journal/journal_base.html:153
 msgid "Revue précédée de…"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:157
+#: eruditorg/templates/public/journal/journal_base.html:157
 msgid "Revue suivie de…"
 msgstr ""
 
-#: templates/public/journal/journal_detail.html:72
-#: templates/userspace/journal/home.html:14
+#: eruditorg/templates/public/journal/journal_detail.html:70
+#: eruditorg/templates/userspace/journal/home.html:14
 msgid "Aucune information"
 msgstr ""
 
-#: templates/public/journal/journal_detail.html:89
-#: templates/userspace/journal/home.html:31
+#: eruditorg/templates/public/journal/journal_detail.html:86
+#: eruditorg/templates/userspace/journal/home.html:30
 msgid "Coordonnées"
 msgstr ""
 
-#: templates/public/journal/journal_detail.html:101
-#: templates/userspace/journal/home.html:43
+#: eruditorg/templates/public/journal/journal_detail.html:98
+#: eruditorg/templates/userspace/journal/home.html:42
 msgid "Politique éditoriale"
 msgstr ""
 
-#: templates/public/journal/journal_detail.html:125
-#: templates/userspace/journal/home.html:67
+#: eruditorg/templates/public/journal/journal_detail.html:122
+#: eruditorg/templates/userspace/journal/home.html:66
 msgid "Équipe"
 msgstr ""
 
-#: templates/public/journal/journal_detail.html:137
-#: templates/userspace/journal/home.html:79
+#: eruditorg/templates/public/journal/journal_detail.html:134
+#: eruditorg/templates/userspace/journal/home.html:78
 msgid "Partenaires"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_disciplines.html:46
-#: templates/public/journal/journal_list_per_names.html:51
+#: eruditorg/templates/public/journal/journal_detail.html:155
+msgid "numéros"
+msgstr ""
+
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:47
+#: eruditorg/templates/public/journal/journal_list_per_names.html:52
 msgid "Revues par disciplines"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_disciplines.html:50
-#: templates/public/journal/journal_list_per_names.html:47
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:51
+#: eruditorg/templates/public/journal/journal_list_per_names.html:48
 msgid "Revues par ordre alphabétique"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_disciplines.html:59
-#: templates/public/journal/journal_list_per_disciplines.html:80
-#: templates/public/journal/journal_list_per_names.html:122
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:60
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:80
+#: eruditorg/templates/public/journal/journal_list_per_names.html:122
 msgid "Autres"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_disciplines.html:97
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:97
 msgid ""
 "Les revues de la collection Persée redirigent vers la plateforme du "
 "partenaire."
 msgstr ""
 
-#: templates/public/journal/journal_list_per_disciplines.html:101
+#: eruditorg/templates/public/journal/journal_list_per_disciplines.html:101
 msgid ""
 "Les revues de la collection NRC Research Press redirigent vers la plateforme "
 "du partenaire."
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:57
+#: eruditorg/templates/public/journal/journal_list_per_names.html:58
 msgid ""
 "\n"
 "        <p>Découvrez la liste des revues savantes et culturelles diffusées "
@@ -2704,88 +2767,83 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:71
-#: templates/public/search/advanced_search.html:77
-#: templates/public/search/results.html:67
+#: eruditorg/templates/public/journal/journal_list_per_names.html:71
+#: eruditorg/templates/public/search/advanced_search.html:77
+#: eruditorg/templates/public/search/results.html:68
 msgid "Filtres"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:76
+#: eruditorg/templates/public/journal/journal_list_per_names.html:76
 msgid "Par type d'accès"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:87
+#: eruditorg/templates/public/journal/journal_list_per_names.html:87
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés par les "
 "pairs&nbsp;; les revues culturelles présentent des articles dans les "
 "domaines artistique, littéraire et socioculturel. "
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:99
-#: templates/public/search/advanced_search.html:112
+#: eruditorg/templates/public/journal/journal_list_per_names.html:99
+#: eruditorg/templates/public/search/advanced_search.html:112
 msgid ""
 "Les revues diffusées sur Érudit sont consultables directement sur la "
 "plateforme&nbsp;; les revues des collections Persée et NRC Research Press "
 "redirigent vers la plateforme du partenaire."
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:111
-#: templates/public/search/results.html:114
+#: eruditorg/templates/public/journal/journal_list_per_names.html:111
+#: eruditorg/templates/public/search/results.html:115
 msgid "Filtrer"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:132
+#: eruditorg/templates/public/journal/journal_list_per_names.html:132
 msgid "Accès"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:153
+#: eruditorg/templates/public/journal/journal_list_per_names.html:153
 msgid "Savante"
 msgstr ""
 
-#: templates/public/journal/journal_list_per_names.html:153
+#: eruditorg/templates/public/journal/journal_list_per_names.html:153
 msgid "Culturelle"
 msgstr ""
 
-#: templates/public/journal/partials/article_citation_modal_content.html:56
-#: templates/public/search/results.html:276
-msgid "Exporter la notice de cet article"
-msgstr ""
-
-#: templates/public/journal/partials/issue_detail_article_item.html:8
-#: templates/public/search/results.html:231
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:8
+#: eruditorg/templates/public/search/results.html:250
 msgid "Sauvegarder"
 msgstr ""
 
-#: templates/public/journal/partials/issue_detail_article_item.html:14
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:14
 msgid "Lire l\\"
 msgstr ""
 
-#: templates/public/journal/partials/issue_detail_article_item.html:23
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:23
 #, python-format
 msgid "pp.&nbsp;%(first_page)s–%(last_page)s"
 msgstr ""
 
-#: templates/public/journal/partials/issue_detail_article_item.html:25
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:25
 #, python-format
 msgid "p.&nbsp;%(page)s"
 msgstr ""
 
-#: templates/public/partials/pagination.html:5
-#: templates/public/search/partials/results_pagination.html:5
+#: eruditorg/templates/public/partials/pagination.html:5
+#: eruditorg/templates/public/search/partials/results_pagination.html:5
 msgid "Pagination"
 msgstr ""
 
-#: templates/public/partials/pagination.html:13
-#: templates/public/search/partials/results_pagination.html:14
+#: eruditorg/templates/public/partials/pagination.html:13
+#: eruditorg/templates/public/search/partials/results_pagination.html:14
 #, python-format
 msgid "Page %(current_page)s de %(page_count)s"
 msgstr ""
 
-#: templates/public/partials/subscription_sponsor_badge.html:7
+#: eruditorg/templates/public/partials/subscription_sponsor_badge.html:7
 msgid "Votre accès est offert par"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:21
+#: eruditorg/templates/public/search/advanced_search.html:21
 msgid ""
 "\n"
 "            <p>Affinez votre recherche dans le corpus de documents offerts "
@@ -2794,72 +2852,72 @@ msgid ""
 "            "
 msgstr ""
 
-#: templates/public/search/advanced_search.html:34
+#: eruditorg/templates/public/search/advanced_search.html:34
 msgid "Par mots-clés"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:43
+#: eruditorg/templates/public/search/advanced_search.html:43
 msgid "Vous devez saisir une expression ou des mots-clés."
 msgstr ""
 
-#: templates/public/search/advanced_search.html:50
-#: templates/public/search/partials/advanced_search_q.html:24
+#: eruditorg/templates/public/search/advanced_search.html:50
+#: eruditorg/templates/public/search/partials/advanced_search_q.html:24
 msgid "Dans…"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:104
+#: eruditorg/templates/public/search/advanced_search.html:104
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés par les "
 "pairs&nbsp;; les revues culturelles présentent des articles dans les "
 "domaines artistique, littéraire et socioculturel."
 msgstr ""
 
-#: templates/public/search/advanced_search.html:119
+#: eruditorg/templates/public/search/advanced_search.html:119
 msgid "Année ou intervalle d'années"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:122
+#: eruditorg/templates/public/search/advanced_search.html:122
 msgid "De…"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:126
+#: eruditorg/templates/public/search/advanced_search.html:126
 msgid "À…"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:149
+#: eruditorg/templates/public/search/advanced_search.html:149
 msgid "Historique des recherches sauvegardées"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:158
+#: eruditorg/templates/public/search/advanced_search.html:158
 msgid "Requête"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:159
-#: templates/public/search/results.html:12
+#: eruditorg/templates/public/search/advanced_search.html:159
+#: eruditorg/templates/public/search/results.html:13
 msgid "Résultats"
 msgstr ""
 
-#: templates/public/search/advanced_search.html:161
+#: eruditorg/templates/public/search/advanced_search.html:161
 msgid "Relancer"
 msgstr ""
 
-#: templates/public/search/partials/advanced_search_q.html:7
+#: eruditorg/templates/public/search/partials/advanced_search_q.html:7
 msgid "Opérateur booléen"
 msgstr ""
 
-#: templates/public/search/partials/advanced_search_q.html:31
+#: eruditorg/templates/public/search/partials/advanced_search_q.html:31
 msgid "Supprimer ce champ"
 msgstr ""
 
-#: templates/public/search/partials/results_filter_form_checkboxes.html:13
+#: eruditorg/templates/public/search/partials/results_filter_form_checkboxes.html:13
 msgid "+&nbsp;Autres…"
 msgstr ""
 
-#: templates/public/search/results.html:25
+#: eruditorg/templates/public/search/results.html:26
 msgid "Résultats de recherche"
 msgstr ""
 
-#: templates/public/search/results.html:30
+#: eruditorg/templates/public/search/results.html:31
 #, python-format
 msgid "<strong>%(counter)s</strong> résultat trouvé pour la requête&nbsp;:"
 msgid_plural ""
@@ -2867,15 +2925,15 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/search/results.html:37
+#: eruditorg/templates/public/search/results.html:38
 msgid "résultat trouvé pour la requête&nbsp;:"
 msgstr ""
 
-#: templates/public/search/results.html:48
+#: eruditorg/templates/public/search/results.html:49
 msgid "Sauvegarder ces résultats"
 msgstr ""
 
-#: templates/public/search/results.html:50
+#: eruditorg/templates/public/search/results.html:51
 #, python-format
 msgid ""
 "\n"
@@ -2884,109 +2942,121 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/public/search/results.html:122
+#: eruditorg/templates/public/search/results.html:123
 msgid "Options de tris"
 msgstr ""
 
-#: templates/public/search/results.html:149
+#: eruditorg/templates/public/search/results.html:150
 msgid "Documents repérés"
 msgstr ""
 
-#: templates/public/search/results.html:205
+#: eruditorg/templates/public/search/results.html:214
+msgid "dans la revue"
+msgstr ""
+
+#: eruditorg/templates/public/search/results.html:215
+msgid "culturelle"
+msgstr ""
+
+#: eruditorg/templates/public/search/results.html:215
+msgid "savante"
+msgstr ""
+
+#: eruditorg/templates/public/search/results.html:224
 msgid "Thèse"
 msgstr ""
 
-#: templates/public/search/results.html:213
+#: eruditorg/templates/public/search/results.html:224
+msgid "déposée à"
+msgstr ""
+
+#: eruditorg/templates/public/search/results.html:232
 msgid "Résumé"
 msgstr ""
 
-#: templates/public/search/results.html:255
+#: eruditorg/templates/public/search/results.html:274
 msgid "Partager"
 msgstr ""
 
-#: templates/public/search/results.html:322
+#: eruditorg/templates/public/search/results.html:341
 msgid "Aucun document trouvé&nbsp;!"
 msgstr ""
 
-#: templates/public/search/results.html:324
+#: eruditorg/templates/public/search/results.html:343
 msgid "Effectuer une nouvelle recherche"
 msgstr ""
 
-#: templates/public/thesis/collection_home.html:75
-#: templates/public/thesis/home.html:94
-msgid "Dernières publications"
+#: eruditorg/templates/public/thesis/collection_home.html:77
+#: eruditorg/templates/public/thesis/home.html:95
+msgid "Dernièrement diffusées"
 msgstr ""
 
-#: templates/public/thesis/collection_home.html:94
+#: eruditorg/templates/public/thesis/collection_home.html:96
 msgid "Par année"
 msgstr ""
 
-#: templates/public/thesis/collection_home.html:104
+#: eruditorg/templates/public/thesis/collection_home.html:106
 msgid "Par nom d'auteur"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:67
+#: eruditorg/templates/public/thesis/collection_list_base.html:69
 msgid "Liste complète"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:67
+#: eruditorg/templates/public/thesis/collection_list_base.html:69
 msgid ""
 "La lecture de ces thèses nécessite la redirection vers le site du dépôt "
 "institutionnel."
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:71
-msgid "Tri..."
+#: eruditorg/templates/public/thesis/collection_list_base.html:73
+msgid "Trier par"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:87
-#: templates/public/thesis/collection_list_base.html:92
+#: eruditorg/templates/public/thesis/collection_list_base.html:89
+#: eruditorg/templates/public/thesis/collection_list_base.html:94
 msgid "Consulter cette thèse"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:97
+#: eruditorg/templates/public/thesis/collection_list_base.html:99
 msgid "Mots-clés&nbsp;:"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:98
+#: eruditorg/templates/public/thesis/collection_list_base.html:100
 msgid "aucun mot-clé"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:120
-msgid "Fiche de ce dépôt"
-msgstr ""
-
-#: templates/public/thesis/collection_list_base.html:122
+#: eruditorg/templates/public/thesis/collection_list_base.html:124
 msgid "Nombre de thèses"
 msgstr ""
 
-#: templates/public/thesis/collection_list_base.html:128
+#: eruditorg/templates/public/thesis/collection_list_base.html:130
 msgid "En un coup d'oeil"
 msgstr ""
 
-#: templates/public/thesis/collection_list_per_author_name.html:4
-#: templates/public/thesis/collection_list_per_author_name.html:12
-#: templates/public/thesis/collection_list_per_author_name.html:18
-#: templates/public/thesis/collection_list_per_author_name.html:22
+#: eruditorg/templates/public/thesis/collection_list_per_author_name.html:4
+#: eruditorg/templates/public/thesis/collection_list_per_author_name.html:12
+#: eruditorg/templates/public/thesis/collection_list_per_author_name.html:18
+#: eruditorg/templates/public/thesis/collection_list_per_author_name.html:22
 #, python-format
 msgid "Thèses par auteur commençant par %(letter)s"
 msgstr ""
 
-#: templates/public/thesis/collection_list_per_author_name.html:27
+#: eruditorg/templates/public/thesis/collection_list_per_author_name.html:27
 msgid "Parcourir d'autres auteurs"
 msgstr ""
 
-#: templates/public/thesis/collection_list_per_year.html:4
-#: templates/public/thesis/collection_list_per_year.html:22
+#: eruditorg/templates/public/thesis/collection_list_per_year.html:4
+#: eruditorg/templates/public/thesis/collection_list_per_year.html:22
 #, python-format
 msgid "Thèses publiées en %(year)s"
 msgstr ""
 
-#: templates/public/thesis/collection_list_per_year.html:27
+#: eruditorg/templates/public/thesis/collection_list_per_year.html:27
 msgid "Parcourir d'autres années"
 msgstr ""
 
-#: templates/public/thesis/home.html:48
+#: eruditorg/templates/public/thesis/home.html:49
 #, python-format
 msgid ""
 "\n"
@@ -3002,253 +3072,262 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/public/thesis/home.html:64
+#: eruditorg/templates/public/thesis/home.html:65
 msgid "Par dépôt institutionnel"
 msgstr ""
 
-#: templates/public/thesis/home.html:76
+#: eruditorg/templates/public/thesis/home.html:77
 #, python-format
 msgid "Logo %(name)s"
 msgstr ""
 
-#: templates/public/thesis/home.html:76
+#: eruditorg/templates/public/thesis/home.html:77
 #, python-format
 msgid "Voir le dépôt %(name)s"
 msgstr ""
 
-#: templates/userspace/home.html:4 templates/userspace/home.html:10
+#: eruditorg/templates/userspace/base.html:42
+msgid "Accueil erudit.org"
+msgstr ""
+
+#: eruditorg/templates/userspace/home.html:4
+#: eruditorg/templates/userspace/home.html:12
 msgid "Choix de l'espace de gestion"
 msgstr ""
 
-#: templates/userspace/home.html:16
+#: eruditorg/templates/userspace/home.html:14
 msgid "Gestion des revues"
 msgstr ""
 
-#: templates/userspace/home.html:19
-msgid "Gestion des biliothèques"
+#: eruditorg/templates/userspace/home.html:17
+msgid "Gestion des bibliothèques"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:4
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:9
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:4
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:9
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:4
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:9
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:4
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:9
 msgid "Supprimer un accès"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:17
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:17
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:17
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:17
 msgid "Confirmer la suppression de l'accès ?"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:21
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:21
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:21
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:21
 #, python-format
 msgid "Voulez-vous supprimer l'accès de <strong>%(name)s</strong> ?"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:27
-#: templates/userspace/journal/editor/delete.html:24
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:36
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:27
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:27
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:27
-#: templates/userspace/library/members/member_cancel.html:27
-#: templates/userspace/library/members/member_delete.html:27
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:27
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:27
+#: eruditorg/templates/userspace/journal/editor/delete.html:24
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:36
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:27
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:27
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:27
+#: eruditorg/templates/userspace/library/members/member_cancel.html:27
+#: eruditorg/templates/userspace/library/members/member_delete.html:27
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:27
 msgid "Oui"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:28
-#: templates/userspace/journal/editor/delete.html:25
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:37
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:28
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:28
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:28
-#: templates/userspace/library/members/member_cancel.html:28
-#: templates/userspace/library/members/member_delete.html:28
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:28
+#: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:28
+#: eruditorg/templates/userspace/journal/editor/delete.html:25
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:37
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:28
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:28
+#: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:28
+#: eruditorg/templates/userspace/library/members/member_cancel.html:28
+#: eruditorg/templates/userspace/library/members/member_delete.html:28
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:28
 msgid "Non"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_create.html:5
-#: templates/userspace/journal/authorization/authorization_create.html:10
-#: templates/userspace/journal/authorization/authorization_create.html:15
-#: templates/userspace/library/authorization/authorization_create.html:5
-#: templates/userspace/library/authorization/authorization_create.html:10
-#: templates/userspace/library/authorization/authorization_create.html:15
+#: eruditorg/templates/userspace/journal/authorization/authorization_create.html:5
+#: eruditorg/templates/userspace/journal/authorization/authorization_create.html:10
+#: eruditorg/templates/userspace/journal/authorization/authorization_create.html:15
+#: eruditorg/templates/userspace/library/authorization/authorization_create.html:5
+#: eruditorg/templates/userspace/library/authorization/authorization_create.html:10
+#: eruditorg/templates/userspace/library/authorization/authorization_create.html:15
 msgid "Ajouter un accès"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_create.html:17
-#: templates/userspace/library/authorization/authorization_create.html:17
+#: eruditorg/templates/userspace/journal/authorization/authorization_create.html:17
+#: eruditorg/templates/userspace/library/authorization/authorization_create.html:17
 #, python-format
 msgid ""
 "Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : "
 "<strong>%(authorization_label)s</strong>"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_create.html:40
-#: templates/userspace/journal/information/journalinformation_update.html:53
-#: templates/userspace/journal/subscription/individualsubscription_create.html:51
-#: templates/userspace/library/authorization/authorization_create.html:40
-#: templates/userspace/library/members/member_create.html:53
-#: templates/userspace/library/subscription_information/update.html:38
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:42
-#: templates/userspace/reporting/home.html:53
+#: eruditorg/templates/userspace/journal/authorization/authorization_create.html:40
+#: eruditorg/templates/userspace/journal/information/journalinformation_update.html:53
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_create.html:55
+#: eruditorg/templates/userspace/library/authorization/authorization_create.html:40
+#: eruditorg/templates/userspace/library/members/member_create.html:57
+#: eruditorg/templates/userspace/library/subscription_information/update.html:38
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_create.html:42
+#: eruditorg/templates/userspace/reporting/home.html:53
 msgid "Valider"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_user.html:25
-#: templates/userspace/library/authorization/authorization_user.html:25
+#: eruditorg/templates/userspace/journal/authorization/authorization_user.html:25
+#: eruditorg/templates/userspace/library/authorization/authorization_user.html:21
 msgid "Ajouter"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_user.html:30
-#: templates/userspace/journal/authorization/authorization_user.html:31
-#: templates/userspace/library/authorization/authorization_user.html:30
-#: templates/userspace/library/authorization/authorization_user.html:31
+#: eruditorg/templates/userspace/journal/authorization/authorization_user.html:30
+#: eruditorg/templates/userspace/journal/authorization/authorization_user.html:31
+#: eruditorg/templates/userspace/library/authorization/authorization_user.html:26
+#: eruditorg/templates/userspace/library/authorization/authorization_user.html:27
 msgid "supprimer"
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:5
+#: eruditorg/templates/userspace/journal/editor/base.html:4
+msgid "Espace éditeurs"
+msgstr ""
+
+#: eruditorg/templates/userspace/journal/editor/delete.html:5
 msgid "Voulez supprimer la dépôt de fichiers?"
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:10
-#: templates/userspace/journal/editor/detail.html:10
-#: templates/userspace/journal/editor/form.html:22
-#: templates/userspace/journal/editor/issuesubmission_approve.html:10
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:10
-#: templates/userspace/journal/editor/issuesubmission_submit.html:10
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:24
+#: eruditorg/templates/userspace/journal/editor/delete.html:10
+#: eruditorg/templates/userspace/journal/editor/detail.html:10
+#: eruditorg/templates/userspace/journal/editor/form.html:22
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:10
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:10
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:10
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:24
 msgid "vol."
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:10
-#: templates/userspace/journal/editor/detail.html:10
-#: templates/userspace/journal/editor/form.html:22
-#: templates/userspace/journal/editor/issuesubmission_approve.html:10
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:10
-#: templates/userspace/journal/editor/issuesubmission_submit.html:10
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:26
+#: eruditorg/templates/userspace/journal/editor/delete.html:10
+#: eruditorg/templates/userspace/journal/editor/detail.html:10
+#: eruditorg/templates/userspace/journal/editor/form.html:22
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:10
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:10
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:10
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:26
 msgid "n°"
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:18
+#: eruditorg/templates/userspace/journal/editor/delete.html:18
 msgid "Suppression de fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:21
+#: eruditorg/templates/userspace/journal/editor/delete.html:21
 #, python-format
 msgid ""
 "Vous allez supprimer l'ensemble des fichiers téléchargés dans le dossier <em>"
 "%(object)s</em>. Voulez-vous poursuivre ? "
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:19
+#: eruditorg/templates/userspace/journal/editor/detail.html:18
 msgid "Éditer la demande"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:22
+#: eruditorg/templates/userspace/journal/editor/detail.html:21
 msgid "Dépôt de fichiers de production"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:48
-#: templates/userspace/journal/editor/form.html:48
+#: eruditorg/templates/userspace/journal/editor/detail.html:45
+#: eruditorg/templates/userspace/journal/editor/form.html:45
 msgid "Métadonnées"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:59
-#: templates/userspace/journal/editor/detail.html:77
+#: eruditorg/templates/userspace/journal/editor/detail.html:56
+#: eruditorg/templates/userspace/journal/editor/detail.html:74
 msgid "Non renseigné"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:85
-#: templates/userspace/journal/editor/form.html:78
+#: eruditorg/templates/userspace/journal/editor/detail.html:82
+#: eruditorg/templates/userspace/journal/editor/form.html:75
 msgid "Fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:97
-#: templates/userspace/journal/editor/detail.html:139
-#: templates/userspace/journal/editor/form.html:121
+#: eruditorg/templates/userspace/journal/editor/detail.html:94
+#: eruditorg/templates/userspace/journal/editor/detail.html:136
+#: eruditorg/templates/userspace/journal/editor/form.html:118
 msgid "partiellement téléversé"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:102
-msgid "Aucun fichier!"
+#: eruditorg/templates/userspace/journal/editor/detail.html:99
+msgid "Aucun fichier."
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:112
-#: templates/userspace/journal/editor/form.html:94
-#: templates/userspace/journal/editor/issues.html:26
+#: eruditorg/templates/userspace/journal/editor/detail.html:109
+#: eruditorg/templates/userspace/journal/editor/form.html:91
+#: eruditorg/templates/userspace/journal/editor/issues.html:24
 msgid "Historique"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:122
+#: eruditorg/templates/userspace/journal/editor/detail.html:119
 msgid "Corrections demandées le"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:124
-#: templates/userspace/journal/editor/form.html:106
+#: eruditorg/templates/userspace/journal/editor/detail.html:121
+#: eruditorg/templates/userspace/journal/editor/form.html:103
 msgid "Soumis le"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:126
-#: templates/userspace/journal/editor/form.html:108
+#: eruditorg/templates/userspace/journal/editor/detail.html:123
+#: eruditorg/templates/userspace/journal/editor/form.html:105
 msgid "Validé le"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:128
-#: templates/userspace/journal/editor/form.html:110
+#: eruditorg/templates/userspace/journal/editor/detail.html:125
+#: eruditorg/templates/userspace/journal/editor/form.html:107
 #, python-format
 msgid "%(prefix)s %(date)s"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:134
-#: templates/userspace/journal/editor/form.html:116
+#: eruditorg/templates/userspace/journal/editor/detail.html:131
+#: eruditorg/templates/userspace/journal/editor/form.html:113
 msgid "Fichiers :"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:145
-#: templates/userspace/journal/editor/form.html:127
+#: eruditorg/templates/userspace/journal/editor/detail.html:142
+#: eruditorg/templates/userspace/journal/editor/form.html:124
 msgid "Commentaires :"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:23
+#: eruditorg/templates/userspace/journal/editor/form.html:23
 msgid "Édition"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:25
+#: eruditorg/templates/userspace/journal/editor/form.html:25
 msgid "Création d'une demande"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:33
+#: eruditorg/templates/userspace/journal/editor/form.html:32
 msgid "Déposer des fichiers de production"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:41
+#: eruditorg/templates/userspace/journal/editor/form.html:38
 msgid "Veuillez remplir les champs obligatoires."
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:104
+#: eruditorg/templates/userspace/journal/editor/form.html:101
 msgid "Marqué à corriger le"
 msgstr ""
 
-#: templates/userspace/journal/editor/issues.html:19
+#: eruditorg/templates/userspace/journal/editor/issues.html:19
 msgid "Ajouter des fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/issues.html:49
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:35
+#: eruditorg/templates/userspace/journal/editor/issues.html:45
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:35
 #, python-format
 msgid "Ajouté le %(created)s"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:18
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:18
 msgid "Êtes-vous certain ?"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:22
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:22
 #, python-format
 msgid ""
 "<p>%(question)s</p> <p>Veuillez prendre note des points suivant avant de "
@@ -3257,276 +3336,267 @@ msgid ""
 "<li>Avez-vous assigné le numéro à un ou une technicienne?</li> </ul>"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:34
-#: templates/userspace/journal/editor/issuesubmission_submit.html:34
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:34
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:34
 msgid "Yes"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:35
-#: templates/userspace/journal/editor/issuesubmission_submit.html:35
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:35
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:35
 msgid "No"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:18
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:18
 msgid "Corrections demandées"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:34
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:34
 msgid "Transmettre les corrections"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_submit.html:18
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:18
 msgid "Transmission finale des fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_submit.html:25
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:25
 msgid ""
 "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas "
 "envoyés à l'équipe de production:"
 msgstr ""
 
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:13
+#: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:13
 msgid "Soumis"
 msgstr ""
 
-#: templates/userspace/journal/editor/plupload_widget.html:10
+#: eruditorg/templates/userspace/journal/editor/plupload_widget.html:10
 msgid "Taille"
 msgstr ""
 
-#: templates/userspace/journal/editor/plupload_widget.html:11
+#: eruditorg/templates/userspace/journal/editor/plupload_widget.html:11
 msgid "Statut"
 msgstr ""
 
-#: templates/userspace/journal/editor/plupload_widget.html:48
+#: eruditorg/templates/userspace/journal/editor/plupload_widget.html:48
 msgid "Ajouter les fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/plupload_widget.html:49
+#: eruditorg/templates/userspace/journal/editor/plupload_widget.html:49
 msgid "Téléverser"
 msgstr ""
 
-#: templates/userspace/journal/home.html:4
-#: templates/userspace/library/home.html:4
-msgid "Tableau de bord"
-msgstr ""
-
-#: templates/userspace/journal/home.html:150
-msgid "Non-disponible en libre accès"
-msgstr ""
-
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:4
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:9
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:17
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:4
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:9
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:17
 msgid "Confirmer l'annulation de la proposition d'abonnement ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:8
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:8
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:8
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:8
 msgid "Abonnements individuels"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:21
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:21
 #, python-format
 msgid ""
 "Voulez-vous annuler la proposition d'abonnement envoyée à <strong>%(email)s</"
 "strong> ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_create.html:12
-#: templates/userspace/journal/subscription/individualsubscription_create.html:17
-#: templates/userspace/journal/subscription/individualsubscription_list.html:19
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_create.html:14
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_create.html:21
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:19
 msgid "Créer un abonnement"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:4
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:9
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:17
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:4
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:9
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:17
 msgid "Confirmer la suppression de l'abonnement ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:21
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:21
 #, python-format
 msgid "Voulez-vous supprimer l'abonnement de <strong>%(name)s</strong> ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:40
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:40
 #, python-format
 msgid "Créé le %(created)s"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:60
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:60
 msgid "Organisations abonnées à cette revue"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:67
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:67
 msgid "Abonnements en attente"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:75
-#: templates/userspace/library/members/member_list.html:56
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:75
+#: eruditorg/templates/userspace/library/members/member_list.html:56
 msgid "Date d'expiration"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:76
-#: templates/userspace/library/members/member_list.html:57
+#: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:76
+#: eruditorg/templates/userspace/library/members/member_list.html:57
 msgid "Actions"
 msgstr ""
 
-#: templates/userspace/library/members/member_cancel.html:4
-#: templates/userspace/library/members/member_cancel.html:9
-#: templates/userspace/library/members/member_cancel.html:17
+#: eruditorg/templates/userspace/library/members/member_cancel.html:4
+#: eruditorg/templates/userspace/library/members/member_cancel.html:9
+#: eruditorg/templates/userspace/library/members/member_cancel.html:17
 msgid "Confirmer l'annulation de la demande d'ajout de membre ?"
 msgstr ""
 
-#: templates/userspace/library/members/member_cancel.html:8
-#: templates/userspace/library/members/member_create.html:11
-#: templates/userspace/library/members/member_delete.html:8
-#: templates/userspace/library/members/member_list.html:4
-#: templates/userspace/library/members/member_list.html:8
-#: templates/userspace/library/members/member_list.html:16
-#: templates/userspace/library/partials/menu.html:49
+#: eruditorg/templates/userspace/library/members/member_cancel.html:8
+#: eruditorg/templates/userspace/library/members/member_create.html:11
+#: eruditorg/templates/userspace/library/members/member_delete.html:8
+#: eruditorg/templates/userspace/library/members/member_list.html:4
+#: eruditorg/templates/userspace/library/members/member_list.html:8
+#: eruditorg/templates/userspace/library/members/member_list.html:16
+#: eruditorg/templates/userspace/library/partials/menu.html:49
 msgid "Membres"
 msgstr ""
 
-#: templates/userspace/library/members/member_cancel.html:21
+#: eruditorg/templates/userspace/library/members/member_cancel.html:21
 #, python-format
 msgid ""
 "Voulez-vous annuler la demande d'ajout de membre envoyée à <strong>"
 "%(email)s</strong> ?"
 msgstr ""
 
-#: templates/userspace/library/members/member_create.html:5
-#: templates/userspace/library/members/member_create.html:14
-#: templates/userspace/library/members/member_create.html:19
+#: eruditorg/templates/userspace/library/members/member_create.html:5
+#: eruditorg/templates/userspace/library/members/member_create.html:16
+#: eruditorg/templates/userspace/library/members/member_create.html:23
 msgid "Inviter un membre"
 msgstr ""
 
-#: templates/userspace/library/members/member_delete.html:4
-#: templates/userspace/library/members/member_delete.html:9
-#: templates/userspace/library/members/member_delete.html:17
+#: eruditorg/templates/userspace/library/members/member_delete.html:4
+#: eruditorg/templates/userspace/library/members/member_delete.html:9
+#: eruditorg/templates/userspace/library/members/member_delete.html:17
 msgid "Confirmer la retrait du membre ?"
 msgstr ""
 
-#: templates/userspace/library/members/member_delete.html:21
+#: eruditorg/templates/userspace/library/members/member_delete.html:21
 #, python-format
 msgid "Voulez-vous supprimer <strong>%(name)s</strong> de l'organisation ?"
 msgstr ""
 
-#: templates/userspace/library/members/member_list.html:19
+#: eruditorg/templates/userspace/library/members/member_list.html:19
 msgid "Ajouter un membre"
 msgstr ""
 
-#: templates/userspace/library/members/member_list.html:48
+#: eruditorg/templates/userspace/library/members/member_list.html:48
 msgid "Membres en attente d'acceptation"
 msgstr ""
 
-#: templates/userspace/library/partials/menu.html:31
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:9
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:8
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:4
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:8
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:16
+#: eruditorg/templates/userspace/library/partials/menu.html:31
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_create.html:9
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:8
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:4
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:8
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:16
 msgid "Plages d'adresses IP"
 msgstr ""
 
-#: templates/userspace/library/partials/menu.html:40
-#: templates/userspace/library/subscription_information/update.html:5
-#: templates/userspace/library/subscription_information/update.html:9
-#: templates/userspace/library/subscription_information/update.html:14
+#: eruditorg/templates/userspace/library/partials/menu.html:40
+#: eruditorg/templates/userspace/library/subscription_information/update.html:5
+#: eruditorg/templates/userspace/library/subscription_information/update.html:9
+#: eruditorg/templates/userspace/library/subscription_information/update.html:14
 msgid "Informations de l'abonnement"
 msgstr ""
 
-#: templates/userspace/library/partials/menu.html:58
-#: templates/userspace/library/stats/landing.html:4
-#: templates/userspace/library/stats/landing.html:8
+#: eruditorg/templates/userspace/library/partials/menu.html:58
+#: eruditorg/templates/userspace/library/stats/landing.html:4
+#: eruditorg/templates/userspace/library/stats/landing.html:8
 msgid "Statistiques"
 msgstr ""
 
-#: templates/userspace/library/stats/landing.html:17
-#: templates/userspace/library/stats/landing.html:33
+#: eruditorg/templates/userspace/library/stats/landing.html:17
+#: eruditorg/templates/userspace/library/stats/landing.html:33
 msgid "Exports au format CSV"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:5
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:10
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:15
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_create.html:5
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_create.html:10
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_create.html:15
 msgid "Creer une plage d'adresses IP"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:4
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:9
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:4
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:9
 msgid "Supprimer une plage d'adresses IP"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:17
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:17
 msgid "Confirmer la suppression de la plage d'adresses IP ?"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:21
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_delete.html:21
 #, python-format
 msgid ""
 "Voulez-vous supprimer la plage d'adresses IP <strong>%(ip_start)s - "
 "%(ip_end)s</strong> ?"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:19
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:19
 msgid "Créer une plage d'adresse IP"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:35
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:35
 msgid "Début"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:39
+#: eruditorg/templates/userspace/library/subscription_ips/ipaddressrange_list.html:39
 msgid "Fin"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:5
+#: eruditorg/templates/userspace/reporting/home.html:5
 msgid "Reporting"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:60
+#: eruditorg/templates/userspace/reporting/home.html:60
 msgid "CSV / Numéro"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:63
+#: eruditorg/templates/userspace/reporting/home.html:63
 msgid "CSV / Revue"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:74
+#: eruditorg/templates/userspace/reporting/home.html:74
 #, python-format
 msgid ""
 "\n"
-"                %(counter)s article trouvé !\n"
+"                %(counter)s article trouvé.\n"
 "              "
 msgid_plural ""
 "\n"
-"                %(counter)s articles trouvés !\n"
+"                %(counter)s articles trouvés.\n"
 "              "
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/userspace/reporting/home.html:82
+#: eruditorg/templates/userspace/reporting/home.html:82
 msgid "Répartition par année:"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:86
+#: eruditorg/templates/userspace/reporting/home.html:86
 msgid "Répartition par revue:"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:90
+#: eruditorg/templates/userspace/reporting/home.html:90
 msgid "Répartition par numéro:"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:94
+#: eruditorg/templates/userspace/reporting/home.html:94
 msgid "Répartition par auteur:"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:98
+#: eruditorg/templates/userspace/reporting/home.html:98
 msgid "Répartition par type:"
 msgstr ""
 
-#: templates/userspace/reporting/home.html:103
+#: eruditorg/templates/userspace/reporting/home.html:103
 #, python-format
 msgid ""
 "\n"
