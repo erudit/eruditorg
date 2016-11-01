@@ -70,7 +70,7 @@
         <div class="actions-wrapper">
           <div id="div_id_sort_by" class="form-group">
             <div class="controls">
-              <label class="control-label" for="sort_by">{% trans "Tri..." %}</label>
+              <label class="control-label" for="sort_by">{% trans "Trier par" %}</label>
               &nbsp;
               <select id="sort_by" onChange="window.location.href=this.value">
                 {% for sort_option in available_tris.items %}
@@ -119,7 +119,7 @@
       </div>
       <aside class="col-sm-3 col-md-offset-1 repository-meta">
         <div class="sidebar-block">
-          <h2>{% trans "Fiche de ce dépôt" %}</h2>
+          <h2>{% trans "Fiche" %}</h2>
           <dl>
             <dt>{% trans "Nombre de thèses" %}</dt>
             <dd>{{ paginator.count }}</dd>

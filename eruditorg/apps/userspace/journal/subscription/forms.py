@@ -26,7 +26,7 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
         if token_already_exists:
             self.add_error(
                 'email',
-                _("Une proposition d'abonnement pour cette adresse e-mail existe déjà"))
+                _("Une proposition d'abonnement pour cette adresse courriel existe déjà"))
 
         # Then checks if a subscription already exists for a user with this email address
         subscription_already_exists = JournalAccessSubscription.objects.filter(
@@ -34,7 +34,7 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
         if subscription_already_exists:
             self.add_error(
                 'email',
-                _("Une abonnement utilisant cette adresse e-mail existe déjà"))
+                _("Une abonnement utilisant cette adresse courriel existe déjà"))
 
         return email
 

@@ -65,7 +65,7 @@
                 <a href="#" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
               </li>
               <li>
-                <a href="#" title="{% trans 'Index des documents de littérature grise' %}">{% trans "Littérature grise" %}</a>
+                <a href="#" title="{% trans 'Index des documents de rapports de recherche' %}">{% trans "Rapports de recherche" %}</a>
               </li>
             </ul>
           </li>
@@ -102,7 +102,7 @@
               {% has_perm 'userspace.access' request.user as can_access_userspace %}
               {% if can_access_userspace %}
               <li>
-                <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à l\'espace utilisateur' %}">{% trans "Espace privé" %}</a>
+                <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à l\'espace utilisateur' %}">{% trans "Tableau de bord" %}</a>
               </li>
               {% endif %}
               <li>
@@ -223,7 +223,7 @@
               <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
               <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
               <li class="disabled">{% trans "Livres & actes" %}</li>
-              <li class="disabled">{% trans "Littérature grise" %}</li>
+              <li class="disabled">{% trans "Rapports de recherche" %}</li>
             </ul>
           </div>
 
