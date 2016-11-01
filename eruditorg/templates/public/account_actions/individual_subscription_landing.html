@@ -18,22 +18,22 @@
       </h2>
       {% if token.is_expired %}
         <div class="alert alert-warning">
-          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Ce lien d'abonnement a expiré." %}
         </div>
       {% elif token.is_consumed %}
         <div class="alert alert-warning">
-          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Ce lien d'abonnement a déjà été utilisé." %}
         </div>
       {% elif not token.active %}
         <div class="alert alert-warning">
-          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Ce lien d'abonnement n'est plus valide." %}
         </div>
       {% elif subscription_exists %}
         <div class="alert alert-warning">
-          <p><strong>{% trans "Abonnement impossible!" %}</strong></p>
+          <p><strong>{% trans "Abonnement impossible." %}</strong></p>
           {% trans "Vous êtes déjà abonné à cette revue avec ce compte." %}
         </div>
       {% else %}

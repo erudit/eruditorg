@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AccountActionRegisterForm(UserCreationForm):
-    email = EmailField(label=_('Email address'), required=True)
+    email = EmailField(label=_('Adresse courriel'), required=True)
 
     class Meta:
         model = User
@@ -27,7 +27,7 @@ class AccountActionRegisterForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            self.add_error('email', _('Cette adresse e-mail est déjà utilisée'))
+            self.add_error('email', _('Cette adresse courriel est déjà utilisée'))
         return email
 
     def save(self, commit=True):

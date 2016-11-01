@@ -28,7 +28,7 @@
       {% endif %}
 
       <div class="form-group">
-        <label for="id_username">{% trans "Nom d'utilisateur ou adresse e-mail" %}</label>
+        <label for="id_username">{% trans "Nom d'utilisateur ou adresse courriel" %}</label>
         {{ form.username }}
         {% if form.username.errors %}<div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>{% endif %}
       </div>
@@ -76,7 +76,7 @@
           {% endif %}
 
           <div class="form-group">
-            <label for="id_username">{% trans "Nom d'utilisateur ou adresse e-mail" %}</label>
+            <label for="id_username">{% trans "Nom d'utilisateur ou adresse courriel" %}</label>
             {{ form.username }}
             {% if form.username.errors %}<div class="alert alert-error-text">{{ form.username.errors.as_text }}</div>{% endif %}
           </div>

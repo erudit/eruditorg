@@ -92,7 +92,7 @@
           </div>
           {% if collection_info.recent_theses %}
           <div class="recent-theses">
-            <h4>{% trans "Dernières publications" %}</h4>
+            <h4>{% trans "Dernièrement diffusées" %}</h4>
             {% for thesis in collection_info.recent_theses %}
             <a href="{{ thesis.url }}" class="thesis" target="_blank">{{ thesis.title }}</a>
             {% endfor %}

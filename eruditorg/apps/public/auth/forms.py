@@ -13,7 +13,7 @@ class AuthenticationForm(BaseAuthenticationForm):
         super(AuthenticationForm, self).__init__(*args, **kwargs)
 
         # Updates some fields
-        self.fields['username'].label = _("Nom d'utilisateur ou adresse e-mail")
+        self.fields['username'].label = _("Nom d'utilisateur ou adresse courriel")
 
 
 class UserPersonalDataForm(forms.ModelForm):
@@ -35,7 +35,7 @@ class UserParametersForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            self.add_error('email', _('Cette adresse e-mail est déjà utilisée'))
+            self.add_error('email', _('Cette adresse courriel est déjà utilisée'))
         return email
 
 
