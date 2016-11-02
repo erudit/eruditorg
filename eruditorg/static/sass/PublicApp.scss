@@ -69,22 +69,22 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 6. Page-specific styles
 @import
-  'pages/account-settings',
-  'pages/advanced-search',
-  'pages/article-detail',
-  'pages/homepage',
+  'pages/public/account-settings',
+  'pages/public/advanced-search',
+  'pages/public/article-detail',
+  'pages/public/homepage',
+  'pages/public/issue-detail',
+  'pages/public/journal-authors-list',
+  'pages/public/journal-detail',
+  'pages/public/journal-list-disciplines',
+  'pages/public/journal-list-names',
+  'pages/public/saved-citations-list',
+  'pages/public/search-results',
+  'pages/public/thesis-collection-home',
+  'pages/public/thesis-collection-list',
+  'pages/public/thesis-home',
   'pages/individual-subscription',
-  'pages/issue-detail',
-  'pages/journal-authors-list',
-  'pages/journal-detail',
-  'pages/journal-list-disciplines',
-  'pages/journal-list-names',
-  'pages/login',
-  'pages/saved-citations-list',
-  'pages/search-results',
-  'pages/thesis-collection-home',
-  'pages/thesis-collection-list',
-  'pages/thesis-home';
+  'pages/login';
 
 
 // $spritesheet-sprites is an array of all sprite image names
