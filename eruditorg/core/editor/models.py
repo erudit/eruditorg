@@ -60,7 +60,7 @@ class IssueSubmission(models.Model):
 
     contact = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_("Personne contact")
+        verbose_name=_("Personne-ressource")
     )
 
     comment = models.TextField(

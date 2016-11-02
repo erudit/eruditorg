@@ -113,5 +113,5 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
 
 class IssueSubmissionTransitionCommentForm(forms.Form):
     comment = forms.CharField(
-        label=_('Vous pouvez ajouter un commentaire afin d\'expliquer vos raisons'),
+        label=_('Commentaires'),
         required=False, widget=forms.Textarea)

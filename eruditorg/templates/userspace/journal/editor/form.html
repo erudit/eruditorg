@@ -22,7 +22,7 @@
 <li><a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
 <li><a href="#">{% trans "Édition" %}</a></li>
 {% else %}
-<li><a href="#">{% trans "Création d'une demande" %}</a></li>
+<li><a href="#">{% trans "Nouveau dépôt" %}</a></li>
 {% endif %}
 {% endblock breadcrumb_end %}
 
@@ -42,7 +42,7 @@
       <div class="panel-group">
         <div class="panel">
           <div class="panel-heading" role="tab" id="issue-metadata-heading">
-            <h3 class="panel-title">{% trans "Métadonnées" %}</h3>
+            <h3 class="panel-title">{% trans "Informations du numéro" %}</h3>
           </div>
           <div id="issue-metadata">
             <div class="panel-body">
@@ -110,7 +110,7 @@
                       {% if track.files_version and track.files_version.submissions.exists %}
                         <br />
                         <p>
-                          <strong>{% trans "Fichiers :" %}</strong>&nbsp;
+                          <strong>{% trans "Fichiers&nbsp;:" %}</strong>&nbsp;
                           {% for f in track.files_version.submissions.all %}
                             {% if f.is_complete %}
                               <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
@@ -121,8 +121,8 @@
                         </p>
                       {% endif %}
                       {% if track.comment %}
-                        <p><strong>{% trans "Commentaires :" %}</strong></p>
-                        <small>{{ track.comment }}</small>
+                        <p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
+                        <small>{{ track.comment }}</small>
                       {% endif %}
                     </li>
                   {% endfor %}
