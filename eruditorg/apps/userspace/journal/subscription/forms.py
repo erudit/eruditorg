@@ -34,7 +34,7 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
         if subscription_already_exists:
             self.add_error(
                 'email',
-                _("Une abonnement utilisant cette adresse courriel existe déjà"))
+                _("Un abonnement utilisant cette adresse courriel existe déjà"))
 
         return email
 

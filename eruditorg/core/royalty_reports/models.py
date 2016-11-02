@@ -11,7 +11,7 @@ class RoyaltyReport(models.Model):
     end = models.DateField(verbose_name=_('Date de fin'))
     report_file = models.FileField(verbose_name=_('Fichier'), upload_to='royalty_reports/')
     published = models.BooleanField(
-        verbose_name=_("Publié dans l'espace utilisateur"), default=False)
+        verbose_name=_("Publié dans le tableau de bord"), default=False)
 
     class Meta:
         verbose_name = _('Rapport de redevances')
