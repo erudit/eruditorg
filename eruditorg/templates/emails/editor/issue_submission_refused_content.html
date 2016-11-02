@@ -3,6 +3,7 @@
 
 {% block content %}
   {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
+  {% blocktrans %}
   <p>Bonjour,</p>
 
   <p>Voici les modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
@@ -15,7 +16,7 @@
 
   <p>Nous vous remercions pour votre précieuse collaboration.</p>
 
-  <p>Pour plus d'information, veuillez communiquer avec:</p>
+  <p>Pour plus d'information, veuillez communiquer avec&nbsp;:</p>
 
   <p>
   Hocine Chehab<br>
@@ -23,4 +24,5 @@
   hocine.chehab@erudit.org<br>
   514-343-6111 poste 44607<br>
   </p>
+  {% endblocktrans %}
 {% endblock content %}

@@ -3,6 +3,7 @@
 
 {% block content %}
   {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
+  {% blocktrans %}
   <p>Bonjour,</p>
 
   <p>{{ issue.contact }} de la revue {{ issue.journal }} a transmis des fichiers pour la création d'une nouvelle publication.</p>
@@ -12,4 +13,5 @@
       {% blocktrans with url=issue_url %}Consulter numéro{% endblocktrans %}
     </a>
   </p>
+  {% endblocktrans %}
 {% endblock content %}
