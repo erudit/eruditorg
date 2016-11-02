@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-01 15:48-0500\n"
+"POT-Creation-Date: 2016-11-02 12:48-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -823,7 +823,9 @@ msgid "Fichier"
 msgstr ""
 
 #: eruditorg/apps/userspace/journal/editor/forms.py:116
-msgid "Vous pouvez ajouter un commentaire afin d'expliquer vos raisons"
+#: eruditorg/core/editor/models.py:67
+#: eruditorg/templates/userspace/journal/editor/detail.html:73
+msgid "Commentaires"
 msgstr ""
 
 #: eruditorg/apps/userspace/journal/editor/urls.py:8
@@ -880,10 +882,9 @@ msgstr ""
 
 #: eruditorg/apps/userspace/journal/editor/views.py:275
 msgid ""
-"Vous êtes à l'étape d'effectuer la transmission finale des fichiers    à "
-"l'équipe de production. Une fois envoyés, vous ne pourrez plus modifier les "
-"fichiers    à moins que l'équipe de production ne vous demande de les "
-"corriger. Voulez-vous poursuivre?"
+"Vous êtes sur le point de soumettre les fichiers    à l'équipe de "
+"production. Une fois envoyés, vous ne pourrez plus les modifier.    Voulez-"
+"vous poursuivre?"
 msgstr ""
 
 #: eruditorg/apps/userspace/journal/editor/views.py:279
@@ -926,7 +927,7 @@ msgid "Une proposition d'abonnement pour cette adresse courriel existe déjà"
 msgstr ""
 
 #: eruditorg/apps/userspace/journal/subscription/forms.py:37
-msgid "Une abonnement utilisant cette adresse courriel existe déjà"
+msgid "Un abonnement utilisant cette adresse courriel existe déjà"
 msgstr ""
 
 #: eruditorg/apps/userspace/journal/subscription/urls.py:10
@@ -1111,6 +1112,7 @@ msgstr ""
 
 #: eruditorg/apps/userspace/reporting/views.py:184
 #: eruditorg/core/editor/models.py:46
+#: eruditorg/templates/userspace/journal/editor/detail.html:28
 #: eruditorg/templates/userspace/journal/editor/detail.html:59
 msgid "Numéro"
 msgstr ""
@@ -1367,12 +1369,7 @@ msgstr ""
 
 #: eruditorg/core/editor/models.py:63
 #: eruditorg/templates/userspace/journal/editor/detail.html:66
-msgid "Personne contact"
-msgstr ""
-
-#: eruditorg/core/editor/models.py:67
-#: eruditorg/templates/userspace/journal/editor/detail.html:73
-msgid "Commentaires"
+msgid "Personne-ressource"
 msgstr ""
 
 #: eruditorg/core/editor/models.py:72
@@ -1397,6 +1394,7 @@ msgid "n° {}"
 msgstr ""
 
 #: eruditorg/core/editor/models.py:126
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:33
 msgid "Approuver"
 msgstr ""
 
@@ -1481,7 +1479,7 @@ msgid "Date de fin"
 msgstr ""
 
 #: eruditorg/core/royalty_reports/models.py:14
-msgid "Publié dans l'espace utilisateur"
+msgid "Publié dans le tableau de bord"
 msgstr ""
 
 #: eruditorg/core/royalty_reports/models.py:17
@@ -1625,24 +1623,20 @@ msgstr ""
 msgid "Périodes d'abonnement de gestion de revue"
 msgstr ""
 
-#: eruditorg/templates/403.html:5
-msgid "Permission denied"
+#: eruditorg/templates/403.html:6
+msgid "Permission refusée"
 msgstr ""
 
-#: eruditorg/templates/404.html:5
-msgid "Page not found"
-msgstr ""
-
-#: eruditorg/templates/500.html:5
-msgid "Unknown error"
+#: eruditorg/templates/404.html:6
+msgid "Page non trouvée"
 msgstr ""
 
 #: eruditorg/templates/500.html:6
-msgid "We're sorry, but an unknow error has occured. Please try again later."
+msgid "Erreur inconnue"
 msgstr ""
 
-#: eruditorg/templates/503.html:5
-msgid "Service unavailable"
+#: eruditorg/templates/503.html:6
+msgid "Service non disponible"
 msgstr ""
 
 #: eruditorg/templates/base.html:16
@@ -1686,19 +1680,91 @@ msgstr ""
 msgid "Les fichiers des numéros suivant seront supprimés dans cinq jours."
 msgstr ""
 
-#: eruditorg/templates/emails/editor/issue_submission_refused_content.html:10
+#: eruditorg/templates/emails/editor/issue_files_deletion_subject.html:3
+msgid "[Érudit] Des fichiers de numéros (dépôts) vont être supprimés"
+msgstr ""
+
+#: eruditorg/templates/emails/editor/issue_submission_refused_content.html:6
+#, python-format
 msgid ""
-"Veuillez cliquer sur le lien suivant pour consulter les modifications à "
-"apporter à vos fichiers."
+"\n"
+"  <p>Bonjour,</p>\n"
+"\n"
+"  <p>Voici les modifications à apporter aux fichiers de production du numéro "
+"%(issue)s.</p>\n"
+"\n"
+"  <p>\n"
+"    <a href=\"http://%(site.domain)s%(issue_url)s\">\n"
+"      Modifier le dépôt du numéro\n"
+"    </a>\n"
+"  </p>\n"
+"\n"
+"  <p>Nous vous remercions pour votre précieuse collaboration.</p>\n"
+"\n"
+"  <p>Pour plus d'information, veuillez communiquer avec&nbsp;:</p>\n"
+"\n"
+"  <p>\n"
+"  Hocine Chehab<br>\n"
+"  Chargé d'édition numérique<br>\n"
+"  hocine.chehab@erudit.org<br>\n"
+"  514-343-6111 poste 44607<br>\n"
+"  </p>\n"
+"  "
 msgstr ""
 
-#: eruditorg/templates/emails/editor/issue_submission_refused_content.html:14
-#: eruditorg/templates/emails/editor/issue_submission_validated_content.html:12
-msgid "Consulter le numéro"
+#: eruditorg/templates/emails/editor/issue_submission_refused_subject.html:3
+msgid "[Érudit] Demande de modifications des fichiers de production"
 msgstr ""
 
-#: eruditorg/templates/emails/editor/new_issue_submission_content.html:12
-msgid "Consulter numéro"
+#: eruditorg/templates/emails/editor/issue_submission_validated_content.html:6
+#, python-format
+msgid ""
+"\n"
+"  <p>Bonjour,</p>\n"
+"\n"
+"  <p>Vos fichiers (%(issue)s) ont été approuvés par l'équipe de production. "
+"Le travail de mise en ligne débutera sous peu.</p>\n"
+"\n"
+"  <p>\n"
+"    <a href=\"http://%(site.domain)s%(issue_url)s\">\n"
+"      Consulter le numéro\n"
+"    </a>\n"
+"  </p>\n"
+"\n"
+"  <p>Pour plus d'information, veuillez communiquer avec&nbsp;:</p>\n"
+"\n"
+"  <p>\n"
+"  Hocine Chehab<br>\n"
+"  Chargé d'édition numérique<br>\n"
+"  hocine.chehab@erudit.org<br>\n"
+"  514-343-6111 poste 44607<br>\n"
+"  </p>\n"
+"  "
+msgstr ""
+
+#: eruditorg/templates/emails/editor/issue_submission_validated_subject.html:3
+msgid "[Érudit] Vos fichiers ont été approuvés"
+msgstr ""
+
+#: eruditorg/templates/emails/editor/new_issue_submission_content.html:6
+#, python-format
+msgid ""
+"\n"
+"  <p>Bonjour,</p>\n"
+"\n"
+"  <p>%(issue.contact)s de la revue %(issue.journal)s a transmis des fichiers "
+"pour la création d'une nouvelle publication.</p>\n"
+"\n"
+"  <p>\n"
+"    <a href=\"http://%(site.domain)s%(issue_url)s\">\n"
+"      Consulter le numéro\n"
+"    </a>\n"
+"  </p>\n"
+"  "
+msgstr ""
+
+#: eruditorg/templates/emails/editor/new_issue_submission_subject.html:3
+msgid "[Érudit] De nouveaux fichiers ont été transmis"
 msgstr ""
 
 #: eruditorg/templates/emails/organisation/new_member_content.html:6
@@ -1985,7 +2051,7 @@ msgid "Livres et actes"
 msgstr ""
 
 #: eruditorg/templates/public/base.html:68
-msgid "Index des documents de rapports de recherche"
+msgid "Index des rapports de recherche"
 msgstr ""
 
 #: eruditorg/templates/public/base.html:73
@@ -2043,7 +2109,7 @@ msgid "Information sur nos collections"
 msgstr ""
 
 #: eruditorg/templates/public/base.html:94
-msgid "Se connecter à l\\"
+msgid "Se connecter au tableau de bord"
 msgstr ""
 
 #: eruditorg/templates/public/base.html:100
@@ -2051,7 +2117,7 @@ msgid "Mon compte"
 msgstr ""
 
 #: eruditorg/templates/public/base.html:105
-msgid "Accéder à l\\"
+msgid "Accéder à au tableau de bord"
 msgstr ""
 
 #: eruditorg/templates/public/base.html:105
@@ -2228,7 +2294,7 @@ msgstr ""
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:9
 #: eruditorg/templates/public/search/advanced_search.html:160
 #: eruditorg/templates/public/search/results.html:254
-#: eruditorg/templates/userspace/journal/editor/detail.html:167
+#: eruditorg/templates/userspace/journal/editor/detail.html:169
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:28
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:89
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_list.html:90
@@ -3123,7 +3189,6 @@ msgstr ""
 
 #: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:27
 #: eruditorg/templates/userspace/journal/editor/delete.html:24
-#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:36
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:27
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:27
 #: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:27
@@ -3135,7 +3200,6 @@ msgstr ""
 
 #: eruditorg/templates/userspace/journal/authorization/authorization_confirm_delete.html:28
 #: eruditorg/templates/userspace/journal/editor/delete.html:25
-#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:37
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_cancel.html:28
 #: eruditorg/templates/userspace/journal/subscription/individualsubscription_delete.html:28
 #: eruditorg/templates/userspace/library/authorization/authorization_confirm_delete.html:28
@@ -3225,16 +3289,20 @@ msgid ""
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/detail.html:18
-msgid "Éditer la demande"
+msgid "Modifier"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/detail.html:21
 msgid "Dépôt de fichiers de production"
 msgstr ""
 
+#: eruditorg/templates/userspace/journal/editor/detail.html:28
+msgid "Attention"
+msgstr ""
+
 #: eruditorg/templates/userspace/journal/editor/detail.html:45
 #: eruditorg/templates/userspace/journal/editor/form.html:45
-msgid "Métadonnées"
+msgid "Informations du numéro"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/detail.html:56
@@ -3242,54 +3310,52 @@ msgstr ""
 msgid "Non renseigné"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:82
+#: eruditorg/templates/userspace/journal/editor/detail.html:83
 #: eruditorg/templates/userspace/journal/editor/form.html:75
 msgid "Fichiers"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:94
-#: eruditorg/templates/userspace/journal/editor/detail.html:136
+#: eruditorg/templates/userspace/journal/editor/detail.html:95
+#: eruditorg/templates/userspace/journal/editor/detail.html:138
 #: eruditorg/templates/userspace/journal/editor/form.html:118
 msgid "partiellement téléversé"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:99
-msgid "Aucun fichier."
+#: eruditorg/templates/userspace/journal/editor/detail.html:100
+msgid "Aucun fichier"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:109
+#: eruditorg/templates/userspace/journal/editor/detail.html:111
 #: eruditorg/templates/userspace/journal/editor/form.html:91
 #: eruditorg/templates/userspace/journal/editor/issues.html:24
 msgid "Historique"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:119
+#: eruditorg/templates/userspace/journal/editor/detail.html:121
 msgid "Corrections demandées le"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:121
+#: eruditorg/templates/userspace/journal/editor/detail.html:123
 #: eruditorg/templates/userspace/journal/editor/form.html:103
 msgid "Soumis le"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:123
+#: eruditorg/templates/userspace/journal/editor/detail.html:125
 #: eruditorg/templates/userspace/journal/editor/form.html:105
 msgid "Validé le"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:125
+#: eruditorg/templates/userspace/journal/editor/detail.html:127
 #: eruditorg/templates/userspace/journal/editor/form.html:107
 #, python-format
 msgid "%(prefix)s %(date)s"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:131
-#: eruditorg/templates/userspace/journal/editor/form.html:113
+#: eruditorg/templates/userspace/journal/editor/detail.html:133
 msgid "Fichiers :"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/detail.html:142
-#: eruditorg/templates/userspace/journal/editor/form.html:124
+#: eruditorg/templates/userspace/journal/editor/detail.html:144
 msgid "Commentaires :"
 msgstr ""
 
@@ -3298,10 +3364,11 @@ msgid "Édition"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/form.html:25
-msgid "Création d'une demande"
+msgid "Nouveau dépôt"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/form.html:32
+#: eruditorg/templates/userspace/journal/editor/issues.html:19
 msgid "Déposer des fichiers de production"
 msgstr ""
 
@@ -3313,8 +3380,12 @@ msgstr ""
 msgid "Marqué à corriger le"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/issues.html:19
-msgid "Ajouter des fichiers"
+#: eruditorg/templates/userspace/journal/editor/form.html:113
+msgid "Fichiers&nbsp;:"
+msgstr ""
+
+#: eruditorg/templates/userspace/journal/editor/form.html:124
+msgid "Commentaires&nbsp;:"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/issues.html:45
@@ -3324,34 +3395,27 @@ msgid "Ajouté le %(created)s"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:18
-msgid "Êtes-vous certain ?"
+msgid "Approbation des fichiers"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:22
-#, python-format
 msgid ""
-"<p>%(question)s</p> <p>Veuillez prendre note des points suivant avant de "
-"valider le numéro :</p> <ul> <li>Avez-vous fait le backup sur Harvester?</"
-"li> <li>Avez-vous ajouté le numéro au calendrier de production?</li> "
-"<li>Avez-vous assigné le numéro à un ou une technicienne?</li> </ul>"
+"<p>Rappel</p> <ul> <li>Faire le backup des fichiers</li> <li>Ajouter le "
+"numéro au calendrier de production</li> <li>Assigner le numéro à un ou une "
+"technicienne</li> </ul>"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:34
-#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:34
-msgid "Yes"
-msgstr ""
-
-#: eruditorg/templates/userspace/journal/editor/issuesubmission_approve.html:35
-#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:35
-msgid "No"
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:36
+msgid "Retour"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:18
-msgid "Corrections demandées"
+msgid "Demande de corrections"
 msgstr ""
 
-#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:34
-msgid "Transmettre les corrections"
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_refuse.html:35
+msgid "Envoyer"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:18
@@ -3362,6 +3426,14 @@ msgstr ""
 msgid ""
 "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas "
 "envoyés à l'équipe de production:"
+msgstr ""
+
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:34
+msgid "Yes"
+msgstr ""
+
+#: eruditorg/templates/userspace/journal/editor/issuesubmission_submit.html:35
+msgid "No"
 msgstr ""
 
 #: eruditorg/templates/userspace/journal/editor/partials/issuesubmission_list.html:13
