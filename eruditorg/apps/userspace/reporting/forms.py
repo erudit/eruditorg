@@ -17,7 +17,7 @@ class ReportingFilterForm(forms.Form):
             ('Actes', _('Actes')),
             ('Thèses', _('Thèses')),
             ('Livres', _('Livres')),
-            ('Depot', _('Depot')),
+            ('Dépôt', _('Dépôt')),
         ])
     year = forms.MultipleChoiceField(label=_('Année'), required=False,)
     collection = forms.MultipleChoiceField(
