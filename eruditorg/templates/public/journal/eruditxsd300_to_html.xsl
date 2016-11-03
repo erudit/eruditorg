@@ -1892,7 +1892,9 @@
         <xsl:attribute name="data-hint">
           <xsl:variable name="idref" select="@idref"/>
           <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200)"/>
-          <xsl:text>[…]</xsl:text>
+          <xsl:if test="string-length(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)]) &gt; 200">
+            <xsl:text>[…]</xsl:text>
+          </xsl:if>
         </xsl:attribute>
         <xsl:text>[</xsl:text>
         <xsl:value-of select="normalize-space()"/>
