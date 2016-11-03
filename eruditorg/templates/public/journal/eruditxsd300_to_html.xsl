@@ -108,6 +108,7 @@
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
+          {% if not article.issue.journal.type.code == 'C' %}
 					<dt>DOI</dt>
 					<dd>
 						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
@@ -116,6 +117,7 @@
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
+          {% endif %}
 				</dl>
 
         <xsl:apply-templates select="liminaire/notegen"/>
