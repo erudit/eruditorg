@@ -108,6 +108,7 @@
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
+          {% if not article.issue.journal.type.code == 'C' %}
 					<dt>DOI</dt>
 					<dd>
 						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
@@ -116,6 +117,7 @@
 							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
 						</a>
 					</dd>
+          {% endif %}
 				</dl>
 
         <xsl:apply-templates select="liminaire/notegen"/>
@@ -1877,11 +1879,27 @@
   </xsl:template>
   <xsl:template match="renvoi">
       <xsl:text>&#160;</xsl:text>
-      <a href="#{@idref}" id="{@id}" class="norenvoi">
-          <xsl:text>[</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>]</xsl:text>
-      </a>
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+          <xsl:text>#</xsl:text><xsl:value-of select="@idref"/>
+        </xsl:attribute>
+        <xsl:attribute name="id">
+          <xsl:value-of select="@id"/>
+        </xsl:attribute>
+        <xsl:attribute name="class">
+          <xsl:text>norenvoi hint--bottom hint--no-animate</xsl:text>
+        </xsl:attribute>
+        <xsl:attribute name="data-hint">
+          <xsl:variable name="idref" select="@idref"/>
+          <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200)"/>
+          <xsl:if test="string-length(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)]) &gt; 200">
+            <xsl:text>[…]</xsl:text>
+          </xsl:if>
+        </xsl:attribute>
+        <xsl:text>[</xsl:text>
+        <xsl:value-of select="normalize-space()"/>
+        <xsl:text>]</xsl:text>
+      </xsl:element>
   </xsl:template>
 
   <xsl:template match="notefig|notetabl">
