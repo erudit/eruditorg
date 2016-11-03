@@ -5,7 +5,7 @@
   position: relative;
   padding-top: $margin-vertical-default;
   margin-right: $grid-gutter-width / 2;
-  width: 50px;
+  width: auto;
   z-index: 10;
   will-change: transform;
   @include transition(transform 0.3s ease-out);
@@ -37,7 +37,8 @@
       .tools-label {
         display: none;
         padding: 1px 15px 0 50px;
-        @include fw-sans-medium();
+        position: relative;
+        @include fw-sans-medium;
       }
 
       .erudicon {
@@ -91,13 +92,15 @@
           font-size: 10px;
           left: 11px;
         }
+
         .erudicon-tools-pdf { font-size: 6px; left: 7px; }
         .erudicon-tools-cite { font-size: 8px; left: 10px; }
         .erudicon-tools-save { font-size: 12px; }
         .erudicon-tools-share { left: 10px; }
       }
-    }
-  }
 
+    }
+
+  }
 
 }
