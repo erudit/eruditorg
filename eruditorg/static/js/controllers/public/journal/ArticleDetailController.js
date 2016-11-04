@@ -52,7 +52,7 @@ export default {
   },
 
   smooth_scroll : function () {
-    this.article.find('.article-table-of-contents').on('click', 'a', (e) => {
+    this.article.on('click', 'a[href*="#"]', (e) => {
       if( e ) {
         e.preventDefault();
         e.stopPropagation();
@@ -76,11 +76,11 @@ export default {
       clipboard.copy( $(e.currentTarget).attr('href') ).then(
         () => {
           $(e.currentTarget).addClass('success');
-          setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
+          setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
         },
         () => {
           $(e.currentTarget).addClass('error');
-          setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
+          setTimeout(() => { $(e.currentTarget).removeClass('success error'); }, 3000);
         }
       );
       return false;

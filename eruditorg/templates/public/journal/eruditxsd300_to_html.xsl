@@ -102,20 +102,26 @@
 				<dl class="mono-space idpublic">
 					<dt>URI</dt>
 					<dd>
-						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
-							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
-							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-						</a>
+            <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
+  						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
+  							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
+  							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+  							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+  						</a>
+            </span>
 					</dd>
+          {% if not article.issue.journal.type.code == 'C' %}
 					<dt>DOI</dt>
 					<dd>
-						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
-							10.7202/<xsl:value-of select="$iderudit"/>
-							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-						</a>
+            <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
+  						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
+  							10.7202/<xsl:value-of select="$iderudit"/>
+  							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+  							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+  						</a>
+            </span>
 					</dd>
+          {% endif %}
 				</dl>
 
         <xsl:apply-templates select="liminaire/notegen"/>
@@ -1877,11 +1883,27 @@
   </xsl:template>
   <xsl:template match="renvoi">
       <xsl:text>&#160;</xsl:text>
-      <a href="#{@idref}" id="{@id}" class="norenvoi">
-          <xsl:text>[</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>]</xsl:text>
-      </a>
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+          <xsl:text>#</xsl:text><xsl:value-of select="@idref"/>
+        </xsl:attribute>
+        <xsl:attribute name="id">
+          <xsl:value-of select="@id"/>
+        </xsl:attribute>
+        <xsl:attribute name="class">
+          <xsl:text>norenvoi hint--bottom hint--no-animate</xsl:text>
+        </xsl:attribute>
+        <xsl:attribute name="data-hint">
+          <xsl:variable name="idref" select="@idref"/>
+          <xsl:value-of select="substring(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)], 1, 200)"/>
+          <xsl:if test="string-length(/article/partiesann/grnote/note[@id=$idref]/*[not(self::no)]) &gt; 200">
+            <xsl:text>[…]</xsl:text>
+          </xsl:if>
+        </xsl:attribute>
+        <xsl:text>[</xsl:text>
+        <xsl:value-of select="normalize-space()"/>
+        <xsl:text>]</xsl:text>
+      </xsl:element>
   </xsl:template>
 
   <xsl:template match="notefig|notetabl">

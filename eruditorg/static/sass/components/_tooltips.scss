@@ -23,4 +23,6 @@
   vertical-align: top;
   padding: 4px;
   @include border-radius(11px);
+  @include fw-sans;
+  font-size: 12px;
 }
