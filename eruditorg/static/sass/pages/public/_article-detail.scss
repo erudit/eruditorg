@@ -14,7 +14,6 @@ $article-toolbar-width: 80px;
 */
 
 @mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
-  font-family: $font-serif;
   font-size: $font-size;
   line-height: 1.5;
   @include font-styles($font-style-family);
@@ -26,15 +25,6 @@ $article-toolbar-width: 80px;
 */
 
 #article_detail {
-
-  // Import article body components
-  @import
-    '../components/article/abstracts',
-    '../components/article/figures',
-    '../components/article/formulae',
-    '../components/article/lists',
-    '../components/article/notes',
-    '../components/article/tables';
 
   /**
   * default for html elements
@@ -304,6 +294,7 @@ $article-toolbar-width: 80px;
     will-change: transform;
     @include translate(-50%, -100%);
     @include transition(transform 0.3s ease-out);
+    @include font-styles('sans');
 
     .border-bottom {
       max-height: 100px;
@@ -448,34 +439,22 @@ $article-toolbar-width: 80px;
   * general full article styles incl. abstract, body, appendices
   **/
   .full-article {
+    
+    // Import article body components
+    @import
+      '../../components/article/abstracts',
+      '../../components/article/figures',
+      '../../components/article/formulae',
+      '../../components/article/lists',
+      '../../components/article/notes',
+      '../../components/article/tables';
+
+    // Import article appendix components
+    @import
+      '../../components/article/bibliographies';
 
     > .article-section {
       margin-bottom: $margin-vertical-default;
-
-      // headings within the article
-      h2 {
-        border-top: 1px solid $mid-grey;
-        padding-top: 1em;
-      }
-
-      h2, h3, h4, h5, h6, .h7 {
-        @include fw-serif-bold();
-        margin-top: 1.5em;
-        margin-bottom: 0.5em;
-        color: $coral-red;
-
-        em {
-          @include fw-serif-bold-italic;
-          strong {
-            @include fw-serif-italic;
-          }
-        }
-
-        &.special {
-          text-align: center;
-        }
-
-      }
 
       &:first-child {
         margin-top: $margin-vertical-default * 0.75;
@@ -483,20 +462,40 @@ $article-toolbar-width: 80px;
 
     }
 
+    // headings within the article
+    h2 {
+      border-top: 1px solid $mid-grey;
+      padding-top: 1em;
+    }
+
+    h2, h3, h4, h5, h6, .h7 {
+      @include fw-serif-bold();
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: $coral-red;
+
+      em {
+        @include fw-serif-bold-italic;
+        strong {
+          @include fw-serif-italic;
+        }
+      }
+
+      &.special {
+        text-align: center;
+      }
+
+    }
+
   }
 
   /**
-  * article body
+  * Article body
   */
-  .corps,
-  .merci,
-  .grnote,
-  .grnotebio,
-  .grannexe,
-  .grbiblio {
+  .corps {
 
-    p, div {
-      @include paragraph-text-style();
+    p {
+      @include paragraph-text-style;
     }
 
     blockquote {
@@ -615,6 +614,20 @@ $article-toolbar-width: 80px;
   /**
   * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
+
+  .merci,
+  .grnote,
+  .grnotebio,
+  .grannexe,
+  .grbiblio {
+
+    p, li {
+      font-size: 14px;
+      line-height: 1.45;
+      @include font-styles('sans');
+    }
+
+  }
 
   .erudit-doi {
     height: 15px;
