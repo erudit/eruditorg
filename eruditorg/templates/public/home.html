@@ -64,7 +64,7 @@
         <div class="col-xs-12 col-sm-4 glory--search">
           <form action="{% url 'public:search:results' %}" id="id-search" method="get">
             <div class="form-group">
-              <label for="basic-search" class="h3">Recherche</label>
+              <label for="basic-search" class="h3">{% trans "Recherche" %}</label>
               <div class="input-group">
                 <input name="basic_search_term" id="basic-search" type="search" class="form-control" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
                 <div class="input-group-addon">
