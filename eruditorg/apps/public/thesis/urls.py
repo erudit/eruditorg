@@ -10,20 +10,20 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.ThesisHomeView.as_view(), name='home'),
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/$'),
+    url(_(r'^fonds/(?P<collection_pk>[\d-]+)/$'),
         views.ThesisCollectionHomeView.as_view(), name='collection_home'),
 
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/liste/annee/(?P<publication_year>[\d-]+)/$'),
+    url(_(r'^fonds/(?P<collection_pk>[\d-]+)/(?P<publication_year>[\d-]+)/$'),
         views.ThesisPublicationYearListView.as_view(), name='collection_list_per_year'),
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/liste/auteur/(?P<author_letter>[\w\'-])/$'),
+    url(_(r'^fonds/(?P<collection_pk>[\d-]+)/(?P<author_letter>[\w\'-])/$'),
         views.ThesisPublicationAuthorNameListView.as_view(),
         name='collection_list_per_author_name'),
 
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.enw$'),
+    url(_(r'^fonds/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.enw$'),
         views.ThesisEnwCitationView.as_view(), name='thesis_citation_enw'),
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.ris$'),
+    url(_(r'^fonds/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.ris$'),
         views.ThesisRisCitationView.as_view(), name='thesis_citation_ris'),
-    url(_(r'^fond/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.bib$'),
+    url(_(r'^fonds/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.bib$'),
         views.ThesisBibCitationView.as_view(), name='thesis_citation_bib'),
 
     # Compatibility URLs
