@@ -19,13 +19,13 @@ body.fixed-header {
   background-color: #fff;
   float: none;
   height: 100px;
+  z-index: $zindex-navbar;
 
   &.fixed {
     position: fixed;
     width: 100%;
     left: 0;
     top: 0;
-    z-index: $zindex-navbar;
   }
 
   &.compact {

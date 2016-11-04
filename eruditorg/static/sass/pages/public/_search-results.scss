@@ -123,7 +123,7 @@
     .result {
       position: relative;
       border-bottom: 1px solid $mid-grey;
-      padding: 0 0 2.5em 0;
+      padding: 0 0 2.25em 0;
       margin: 1.75em 0 0 0;
 
       h3 {
@@ -155,9 +155,22 @@
         margin-bottom: 0;
       }
 
+      .meta {
+
+        .pub-date {
+          font-size: 12px;
+          @include fw-mono;
+        }
+
+        .issue-theme {
+          margin-top: 0.75em;
+          @include fw-sans-medium;
+        }
+
+      }
+
       .authors {
-        margin-bottom: 0.35em;
-        @include fw-sans-medium;
+        margin-bottom: 0.5em;
       }
 
       .abstract-title {
@@ -180,7 +193,14 @@
 
       .result-info {
         padding-left: 30px;
-        width: 80%;
+        padding-right: 40px;
+        width: 100%;
+      }
+
+      .toolbox-wrapper {
+        position: absolute;
+        right: 0;
+        top: 0;
       }
 
       .toolbox {

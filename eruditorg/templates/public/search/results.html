@@ -152,8 +152,8 @@
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
             {% for document in documents %}
-            <li class="row clearfix result" id="document-{{ document.id }}" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
-              <div class="pull-left result-info">
+            <li class="row result" id="document-{{ document.id }}" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
+              <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
                 {% if document.document_type == 'article' %}
                 {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
@@ -189,9 +189,9 @@
                     {% if document.real_object.external_url or document.real_object.url %}
                     target="_blank"
                     {% endif %}>
-                      <span>{{ document.real_object.title }}</span>
+                      <span>{{ document.real_object.title|striptags }}</span>
                       {% if document.real_object.subtitle %}
-                      <span><br/>{{ document.real_object.subtitle }}</span>
+                      <span><br/>{{ document.real_object.subtitle|striptags }}</span>
                       {% endif %}
                       {% if document.real_object.paral_titles %}
                         {% for paral_title in document.real_object.paral_titles %}
@@ -204,27 +204,45 @@
                     </a>
                   </h3>
                 </div>
-                {# article metadata #}
-                <div class="meta">
-                  <p>
+                <div class="row meta">
+                  <p class="col-sm-8">
+                    {# metadata for articles #}
                     {% if document.document_type == 'article' %}
                     {% with article=document.real_object %}
-                    <strong>{{ article.type }}</strong>
-                    {% if article.type == 'note' or article.type == 'Note' %}publiée{% else %}publié{% endif %}
-                    {% trans "dans la revue" %}
-                    {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
-                    <a href="{{ article.journal_url }}">{{ article.journal_name }}</a> ({{ article.collection_name }})
-                    {% if document.real_object.issue_title %}<p><strong>{{ document.real_object.issue_title|safe }}</strong></p>{% endif %}
-                  </p>
-                  <p>
-                  {{ article.issue_publication_date }}
-                  </p>
+                      {% if article.type == 'autre' or article.type == 'Autre' %}
+                        {% trans 'Document' %}
+                      {% else %}
+                        <strong>{{ article.type }}</strong>
+                      {% endif %}
+                      {# document type for articles #}
+                      {% if article.type == 'note' or article.type == 'Note' %}publiée{% else %}publié{% endif %}
+                      {% trans "dans la revue" %}
+                      {# journal type and collection #}
+                      {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
+                      <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.journal_name }}</a></em> ({{ article.collection_name }})
+                      <br/>
+                      {# issue theme #}
                     {% endwith %}
+                    {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}
-                    {% trans "Thèse" %} {% trans "déposée à" %}
-                    {{ document.real_object.collection_name }}
+                      {% trans "Thèse" %} {% trans "déposée à" %}
+                      {{ document.real_object.collection_name }}
                     {% endif %}
                   </p>
+                  <p class="col-sm-4 text-right pub-date">
+                    {# publication date for all document types #}
+                    {{ document.real_object.issue_publication_date }}
+                  </p>
+                  {# issue theme or department for a thesis #}
+                  {% if document.document_type == 'article' %}
+                  {% if document.real_object.issue_title %}
+                  <p class="col-xs-12 issue-theme">
+                    <a href="{{ article.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
+                      {{ document.real_object.issue_title|safe }}
+                    </a>
+                  </p>
+                  {% endif %}
+                  {% endif %}
                 </div>
                 {# abstract #}
                 {% if document.real_object.abstract or document.real_object.description %}
@@ -242,7 +260,7 @@
                 </div>
                 {% endif %}
               </div>
-              <div class="pull-right">
+              <div class="toolbox-wrapper">
                 <ul class="toolbox compact">
                   <li>
                     <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>

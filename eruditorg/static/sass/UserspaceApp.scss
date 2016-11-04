@@ -59,14 +59,14 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 6. Page-specific styles
 @import
-  'pages/homepage-userspace',
+  'pages/userspace/homepage',
+  'pages/userspace/issuesubmission',
+  'pages/userspace/members',
+  'pages/userspace/royalty-reports',
+  'pages/userspace/subscription-ips',
+  'pages/userspace/subscription',
   'pages/individual-subscription',
-  'pages/issuesubmission-userspace',
-  'pages/login',
-  'pages/members-userspace',
-  'pages/royalty-reports-userspace',
-  'pages/subscription-ips-userspace',
-  'pages/subscription-userspace';
+  'pages/login';
 
 // 7. Themes
 @import
