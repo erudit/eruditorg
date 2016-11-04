@@ -775,6 +775,14 @@ $article-toolbar-width: 80px;
   }
 
   /**
+   * mathematical formulae
+   */
+   .equation p {
+     font-size: 14px;
+     @include font-styles(mono);
+   }
+
+  /**
   * tables & figures, and their lists
   */
   .grfigure, .grtableau {
