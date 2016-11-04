@@ -1,0 +1,50 @@
+/**
+ * Source / target tables (<listerelation>)
+ */
+
+.listerelation {
+
+  tr {
+    border: 0;
+  }
+
+  th {
+    @include fw-serif-bold;
+    text-align: left;
+  }
+
+  td, th {
+    padding: 0.25em 0.5em;
+  }
+
+  &.type2, &.type5 {
+
+    .lrsource p {
+      @include fw-serif-bold;
+
+      em {
+        @include fw-serif-bold-italic;
+      }
+
+    }
+
+  }
+
+  &.type3, &.type6 {
+
+    .lrcible p {
+      @include fw-serif-italic;
+
+    }
+
+  }
+
+  &.type4 {
+
+    .lrcible p {
+      margin-left: 1.5em;
+    }
+
+  }
+
+}

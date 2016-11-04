@@ -1,0 +1,38 @@
+/**
+ * Abstracts (<grresume>, <resume>)
+ */
+
+.grresume {
+  margin-top: $margin-vertical-default;
+  border-bottom: 1px solid #000;
+
+  > .resume {
+    margin: $margin-vertical-default*1.5 0;
+
+    h2, h3 {
+      color: #333;
+    }
+
+    p, ul,
+    .titreparal, .motscles strong {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    .titreparal, .motscles strong {
+      @include fw-sans-medium();
+    }
+
+    &:first-of-type {
+
+      h2 {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+    }
+
+  }
+
+}

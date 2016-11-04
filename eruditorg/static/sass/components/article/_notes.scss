@@ -1,0 +1,20 @@
+/**
+ * References and footnotes (<renvoi>, <note>)
+ */
+
+.norenvoi, .nonote {
+  @include fw-sans();
+  font-size: 0.85em;
+  vertical-align: top;
+
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+    color: #FFF;
+    background: $coral-red;
+  }
+
+}
+
+.nonote {
+  margin-right: 0.5em;
+}

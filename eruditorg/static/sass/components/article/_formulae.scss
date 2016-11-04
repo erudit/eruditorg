@@ -1,0 +1,31 @@
+/**
+ * Mathematical formulae (<equation>)
+ */
+
+ .equation {
+   padding-bottom: 1em;
+   margin-bottom: 1em;
+   border-bottom: 1px dotted $mid-grey;
+
+   &:first-of-type {
+     margin-top: 1.25em;
+   }
+
+   &:last-child {
+     padding-bottom: 0;
+     margin-bottom: 0;
+     border: 0;
+   }
+
+   p,
+   .no {
+    font-size: 14px;
+    @include font-styles(mono);
+  }
+
+  .no {
+    color: $dark-grey;
+    margin-right: 1em;
+  }
+
+ }
