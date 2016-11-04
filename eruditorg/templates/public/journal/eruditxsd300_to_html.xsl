@@ -102,20 +102,24 @@
 				<dl class="mono-space idpublic">
 					<dt>URI</dt>
 					<dd>
-						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
-							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
-							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-						</a>
+            <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
+  						<a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
+  							{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
+  							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+  							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+  						</a>
+            </span>
 					</dd>
           {% if not article.issue.journal.type.code == 'C' %}
 					<dt>DOI</dt>
 					<dd>
-						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
-							10.7202/<xsl:value-of select="$iderudit"/>
-							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-						</a>
+            <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
+  						<a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
+  							10.7202/<xsl:value-of select="$iderudit"/>
+  							<span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+  							<span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+  						</a>
+            </span>
 					</dd>
           {% endif %}
 				</dl>
