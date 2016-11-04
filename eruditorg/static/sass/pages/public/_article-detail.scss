@@ -439,7 +439,7 @@ $article-toolbar-width: 80px;
   * general full article styles incl. abstract, body, appendices
   **/
   .full-article {
-    
+
     // Import article body components
     @import
       '../../components/article/abstracts',
@@ -493,6 +493,16 @@ $article-toolbar-width: 80px;
   * Article body
   */
   .corps {
+
+    section:first-of-type {
+
+      h2 {
+        margin-top: 0;
+        padding: 0;
+        border: 0;
+      }
+
+    }
 
     p {
       @include paragraph-text-style;
