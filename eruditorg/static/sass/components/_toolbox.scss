@@ -5,7 +5,7 @@
   position: relative;
   padding-top: $margin-vertical-default;
   margin-right: $grid-gutter-width / 2;
-  width: auto;
+  width: 50px;
   z-index: 10;
   will-change: transform;
   @include transition(transform 0.3s ease-out);
@@ -76,6 +76,7 @@
   * compact mode
   */
   &.compact {
+    width: 30px;
 
     li {
       height: 30px;
