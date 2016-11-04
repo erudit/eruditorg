@@ -49,6 +49,13 @@ textarea {
   line-height: inherit;
 }
 
+cite,
+var,
+address,
+dfn {
+  font-style: normal;
+}
+
 
 /** We reset this here because previously Normalize had no `figure` margins.
  * This ensures we don't break anyone's use of the element.
