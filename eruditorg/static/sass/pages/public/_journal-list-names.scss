@@ -17,6 +17,10 @@
           padding: 0 0 0.15em 0;
         }
 
+        [class*="hint--"]:after {
+          width: 150px;
+        }
+
         .form-group {
           margin: 0 0 2em 0;
           padding: 0;
