@@ -1,0 +1,32 @@
+/**
+ * Bibliographies (<grbiblo>, <biblio>)
+ */
+
+ .grbiblio {
+
+   .titre {
+     color: #000;
+     margin-top: 0.5em;
+   }
+
+   .refbiblio {
+     margin-bottom: 0.5em;
+     // force breaks for long text, e.g. URLs
+     overflow-wrap: break-word;
+     word-wrap: break-word;
+     -ms-word-break: break-all;
+     word-break: break-all;
+     word-break: break-word;
+
+     a {
+       font-size: 12px;
+       @include fw-mono;
+     }
+
+     .no {
+       margin-right: 0.25em;
+     }
+
+   }
+
+ }

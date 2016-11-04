@@ -14,7 +14,6 @@ $article-toolbar-width: 80px;
 */
 
 @mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
-  font-family: $font-serif;
   font-size: $font-size;
   line-height: 1.5;
   @include font-styles($font-style-family);
@@ -295,6 +294,7 @@ $article-toolbar-width: 80px;
     will-change: transform;
     @include translate(-50%, -100%);
     @include transition(transform 0.3s ease-out);
+    @include font-styles('sans');
 
     .border-bottom {
       max-height: 100px;
@@ -440,33 +440,21 @@ $article-toolbar-width: 80px;
   **/
   .full-article {
 
+    // Import article body components
+    @import
+      '../../components/article/abstracts',
+      '../../components/article/figures',
+      '../../components/article/formulae',
+      '../../components/article/lists',
+      '../../components/article/notes',
+      '../../components/article/tables';
+
+    // Import article appendix components
+    @import
+      '../../components/article/bibliographies';
+
     > .article-section {
       margin-bottom: $margin-vertical-default;
-
-      // headings within the article
-      h2 {
-        border-top: 1px solid $mid-grey;
-        padding-top: 1em;
-      }
-
-      h2, h3, h4, h5, h6, .h7 {
-        @include fw-serif-bold();
-        margin-top: 1.5em;
-        margin-bottom: 0.5em;
-        color: $coral-red;
-
-        em {
-          @include fw-serif-bold-italic;
-          strong {
-            @include fw-serif-italic;
-          }
-        }
-
-        &.special {
-          text-align: center;
-        }
-
-      }
 
       &:first-child {
         margin-top: $margin-vertical-default * 0.75;
@@ -474,20 +462,50 @@ $article-toolbar-width: 80px;
 
     }
 
+    // headings within the article
+    h2 {
+      border-top: 1px solid $mid-grey;
+      padding-top: 1em;
+    }
+
+    h2, h3, h4, h5, h6, .h7 {
+      @include fw-serif-bold();
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: $coral-red;
+
+      em {
+        @include fw-serif-bold-italic;
+        strong {
+          @include fw-serif-italic;
+        }
+      }
+
+      &.special {
+        text-align: center;
+      }
+
+    }
+
   }
 
   /**
-  * article body
+  * Article body
   */
-  .corps,
-  .merci,
-  .grnote,
-  .grnotebio,
-  .grannexe,
-  .grbiblio {
+  .corps {
 
-    p, div {
-      @include paragraph-text-style();
+    section:first-of-type {
+
+      h2 {
+        margin-top: 0;
+        padding: 0;
+        border: 0;
+      }
+
+    }
+
+    p {
+      @include paragraph-text-style;
     }
 
     blockquote {
@@ -502,120 +520,6 @@ $article-toolbar-width: 80px;
       margin-top: $margin-vertical-default;
       &:first-of-type {
         margin-top: 0;
-      }
-
-    }
-
-    /**
-    * lists
-    */
-
-    ul {
-
-      &.nul {
-        list-style: none;
-        margin-left: 1em;
-      }
-
-      &.carre {
-        list-style: square;
-      }
-
-      &.disque {
-        list-style: disc;
-      }
-
-      &.cercle {
-        list-style: circle;
-      }
-
-      &.tiret {
-          list-style: none;
-
-          li:before {
-            content: '– ';
-            @include fw-sans;
-          }
-
-          .alinea {
-            display: inline;
-          }
-
-      }
-
-    }
-
-    ol {
-
-      &.decimal {
-        list-style: decimal;
-      }
-
-      &.lettremaj {
-        list-style: upper-alpha;
-      }
-
-      &.lettremin {
-        list-style: lower-alpha;
-      }
-
-      &.romainmaj {
-        list-style: upper-roman;
-      }
-
-      &.romainmin {
-        list-style: lower-roman;
-      }
-
-    }
-
-    /**
-    * source / target tables
-    */
-
-    .listerelation {
-
-      tr {
-        border: 0;
-      }
-
-      th {
-        @include fw-serif-bold;
-        text-align: left;
-      }
-
-      td, th {
-        padding: 0.25em 0.5em;
-      }
-
-      &.type2, &.type5 {
-
-        .lrsource p {
-          @include fw-serif-bold;
-
-          em {
-            @include fw-serif-bold-italic;
-          }
-
-        }
-
-      }
-
-      &.type3, &.type6 {
-
-        .lrcible p {
-          @include fw-serif-italic;
-
-        }
-
-      }
-
-      &.type4 {
-
-        .lrcible p {
-          margin-left: 1.5em;
-        }
-
       }
 
     }
@@ -684,43 +588,6 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * abstracts
-  */
-  .grresume {
-    margin-top: $margin-vertical-default;
-    border-bottom: 1px solid #000;
-
-    > .resume {
-      margin: $margin-vertical-default*1.5 0;
-
-      h2, h3 {
-        color: #333;
-      }
-
-      p, ul,
-      .titreparal, .motscles strong {
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      .titreparal, .motscles strong {
-        @include fw-sans-medium();
-      }
-
-      &:first-of-type {
-
-        h2 {
-          border-top: 0;
-          padding-top: 0;
-        }
-
-      }
-
-    }
-
-  }
-
-  /**
   * paragraph numbers
   */
   .corps {
@@ -741,26 +608,6 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * References and footnotes
-  */
-  .norenvoi, .nonote {
-    @include fw-sans();
-    font-size: 0.85em;
-    vertical-align: top;
-
-    &:hover, &:active, &:focus {
-      text-decoration: none;
-      color: #FFF;
-      background: $coral-red;
-    }
-
-  }
-
-  .nonote {
-    margin-right: 0.5em;
-  }
-
-  /**
   * keywords
   */
   .motscles {
@@ -775,90 +622,22 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * tables & figures, and their lists
-  */
-  .grfigure, .grtableau {
-
-    .figure, .tableau {
-
-      &:not(:last-child) .voirliste {
-        display: none;
-      }
-
-    }
-
-    .legende {
-      margin-bottom: 0.75em;
-    }
-
-  }
-
-  .figure, .tableau {
-    margin-bottom: 1.5em;
-    padding: 1em 0;
-    border-top: 1px dotted $mid-grey;
-
-    img {
-      margin: auto;
-    }
-
-    figcaption {
-
-      .no {
-        display: block;
-        font-size: 14px;
-        line-height: 1;
-        @include fw-mono();
-      }
-
-      .legende {
-
-        .titre {
-          @include fw-sans-medium;
-        }
-
-      }
-
-      .notefigtab {
-        margin-bottom: 0.75em;
-
-        .alinea {
-          display: inline;
-          padding-left: 0.25em;
-        }
-
-      }
-
-    }
-
-    .voirliste {
-      @include fw-sans;
-      font-size: 14px;
-      margin: 0.75em 0;
-      text-align: right;
-    }
-
-    .allertexte {
-      @include fw-sans-medium;
-
-    }
-
-    .voirliste, .allertexte {
-
-      a {
-        &:hover, &:active, &:focus {
-          text-decoration: none;
-        }
-      }
-
-    }
-
-
-  }
-
-  /**
   * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
+
+  .merci,
+  .grnote,
+  .grnotebio,
+  .grannexe,
+  .grbiblio {
+
+    p, li {
+      font-size: 14px;
+      line-height: 1.45;
+      @include font-styles('sans');
+    }
+
+  }
 
   .erudit-doi {
     height: 15px;

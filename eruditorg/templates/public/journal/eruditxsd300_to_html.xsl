@@ -1804,7 +1804,16 @@
                   </xsl:when>
               </xsl:choose>
           </h2>
-          <xsl:apply-templates select="*[not(self::titre)]"/>
+          <xsl:choose>
+            <xsl:when test="self::grnote | self::grbiblio">
+              <ol class="unstyled">
+                <xsl:apply-templates select="*[not(self::titre)]"/>
+              </ol>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates select="*[not(self::titre)]"/>
+            </xsl:otherwise>
+          </xsl:choose>
       </section>
   </xsl:template>
 
@@ -1866,7 +1875,7 @@
 
   <!-- footnotes -->
   <xsl:template match="note">
-      <div class="note" id="{@id}">
+      <li class="note" id="{@id}">
           <xsl:if test="no">
               <a href="#re1{@id}" class="nonote">
                   <xsl:text>[</xsl:text><xsl:apply-templates select="no"/><xsl:text>]</xsl:text>
@@ -1874,7 +1883,7 @@
           </xsl:if>
           <xsl:apply-templates select="alinea" mode="numero"/>
           <xsl:apply-templates select="*[not(self::alinea)][not(self::no)]"/>
-      </div>
+      </li>
   </xsl:template>
   <xsl:template match="alinea" mode="numero">
       <span class="alinea">
@@ -1931,14 +1940,13 @@
 
   <!-- bibliography -->
   <xsl:template match="biblio">
-      <!-- <ul class="{name()}" role="note"> -->
-          <xsl:apply-templates/>
-      <!-- </ul> -->
+    <xsl:apply-templates/>
   </xsl:template>
   <xsl:template match="divbiblio">
-      <div class="divbiblio">
-          <xsl:apply-templates/>
-      </div>
+    <li class="divbiblio">
+      <h3 class="titre"><xsl:value-of select="titre"/></h3>
+      <xsl:apply-templates select="refbiblio"/>
+    </li>
   </xsl:template>
   <xsl:template match="biblio/titre">
       <h5 class="{name()}">
@@ -1947,20 +1955,20 @@
   </xsl:template>
   <xsl:template match="refbiblio">
       <xsl:variable name="valeurNO" select="no"/>
-      <article class="refbiblio" role="note">
+      <li class="refbiblio" role="note">
           <a class="no" id="{@id}">
               <xsl:choose>
                   <xsl:when test="$valeurNO">
                       <xsl:apply-templates select="$valeurNO"/>
                       <xsl:text>.</xsl:text>
                   </xsl:when>
-                  <xsl:otherwise>&#x00A0;</xsl:otherwise>
+                  <xsl:otherwise></xsl:otherwise>
               </xsl:choose>
           </a>
           <xsl:apply-templates select="node()[name() != 'idpublic' and name() != 'no']"/>
           <xsl:text></xsl:text>
           <xsl:apply-templates select="idpublic"/>
-      </article>
+      </li>
   </xsl:template>
 
   <!--*** LISTS OF TABLES & FIGURES ***-->

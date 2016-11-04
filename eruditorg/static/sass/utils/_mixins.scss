@@ -52,6 +52,13 @@
 // font styles
 @mixin font-styles($fonf-family) {
 
+  @if $fonf-family == 'mono' {
+    @include fw-mono;
+
+    em, i    { @include fw-mono-italic; }
+
+  }
+
   @if $fonf-family == 'sans' {
     @include fw-sans;
 
