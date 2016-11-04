@@ -147,9 +147,9 @@
 
 		</header>
 
-		<div id="article-content" class="row border-top">
-			<xsl:if test="//corps">
-				{% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}
+    <div id="article-content" class="row border-top">
+      <xsl:if test="//corps">
+        {% if article.erudit_object.processing == 'complet' %}
         <!-- article outline -->
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
           <h2>{% trans "Plan de l’article" %}</h2>
@@ -164,7 +164,7 @@
                 <a href="#resume">{% trans "Résumé" %}</a>
               </li>
             </xsl:if>
-			{% if article_access_granted and not only_summary %}
+            {% if article_access_granted and not only_summary %}
             <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
               <li class="article-toc--body">
                 <ul class="unstyled">
@@ -172,7 +172,7 @@
                 </ul>
               </li>
             </xsl:if>
-			{% endif %}
+            {% endif %}
             <xsl:for-each select="partiesann[1]">
               <xsl:if test="grannexe">
                 <li>
@@ -222,7 +222,7 @@
             </xsl:if>
           </ul>
         </nav>
-				{% endif %}
+        {% endif %}
 
         <!-- toolbox -->
         <aside class="pull-right toolbox hidden-xs hidden-sm">
@@ -238,43 +238,43 @@
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
             </li>
-			{% if article_access_granted and article.fedora_object.pdf.exists %}
+            {% if article_access_granted and article.fedora_object.pdf.exists %}
             <li>
               <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </button>
             </li>
-			{% endif %}
+            {% endif %}
             <li>
               <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
                 <span class="erudicon erudicon-tools-cite"></span>
-				<span class="tools-label">{% trans "Citer cet article" %}</span>
-			</button>
-			</li>
-						<li>
-							<button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
-								<span class="erudicon erudicon-tools-share"></span>
-								<span class="tools-label">{% trans "Partager" %}</span>
-							</button>
-						</li>
-						<li>
-							<button id="tool-print">
-								<span class="erudicon erudicon-tools-print"></span>
-								<span class="tools-label">{% trans "Imprimer" %}</span>
-							</button>
-						</li>
-						<li>
-							<button id="tool-fullscreen">
-								<span class="erudicon erudicon-tools-fullscreen"></span>
-								<span class="tools-label">{% trans "Mode zen" %}</span>
-							</button>
-						</li>
-					</ul>
-				</aside>
-			</xsl:if>
+                <span class="tools-label">{% trans "Citer cet article" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
+                <span class="erudicon erudicon-tools-share"></span>
+                <span class="tools-label">{% trans "Partager" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-print">
+                <span class="erudicon erudicon-tools-print"></span>
+                <span class="tools-label">{% trans "Imprimer" %}</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-fullscreen">
+                <span class="erudicon erudicon-tools-fullscreen"></span>
+                <span class="tools-label">{% trans "Mode zen" %}</span>
+              </button>
+            </li>
+          </ul>
+        </aside>
+      </xsl:if>
 
-      <div class="full-article {% if article.issue.journal.type.code == 'S' or article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
+      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
 
         {% if not article_access_granted and not only_summary %}
         <div class="alert alert-warning">
@@ -294,21 +294,21 @@
 				</section>
 				</xsl:if>
 
-				{% if article_access_granted and not only_summary %}
-					{% if article.erudit_object.processing == 'complet' %}
-					<!-- body -->
-					<section id="corps" class="article-section corps" role="main">
-	          <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
-						<xsl:apply-templates select="//corps"/>
-					</section>
-					{% elif article.localidentifier %}
-					<object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
-					{% endif %}
-				{% elif not article.erudit_object.abstracts %}
-					<p>
-						{{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
-					</p>
-				{% endif %}
+        {% if article_access_granted and not only_summary %}
+        {% if article.erudit_object.processing == 'complet' %}
+        <!-- body -->
+        <section id="corps" class="article-section corps" role="main">
+          <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
+          <xsl:apply-templates select="//corps"/>
+        </section>
+        {% elif article.localidentifier %}
+        <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
+        {% endif %}
+        {% elif not article.erudit_object.abstracts %}
+        <p>
+          {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
+        </p>
+        {% endif %}
 
 
 				<!-- appendices -->
