@@ -258,18 +258,6 @@
                 <span class="tools-label">{% trans "Partager" %}</span>
               </button>
             </li>
-            <li>
-              <button id="tool-print">
-                <span class="erudicon erudicon-tools-print"></span>
-                <span class="tools-label">{% trans "Imprimer" %}</span>
-              </button>
-            </li>
-            <li>
-              <button id="tool-fullscreen">
-                <span class="erudicon erudicon-tools-fullscreen"></span>
-                <span class="tools-label">{% trans "Mode zen" %}</span>
-              </button>
-            </li>
           </ul>
         </aside>
       </xsl:if>
