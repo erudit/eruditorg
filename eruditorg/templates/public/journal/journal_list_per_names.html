@@ -84,7 +84,7 @@
               </div>
 
               <div id="div_id_{{ filter_form.types.html_name }}" class="form-group">
-                <h3>{{ filter_form.types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel. ' %}"><span class="ion-help-circled"></span></span></h3>
+                <h3>{{ filter_form.types.label }}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel. ' %}"><span class="ion-help-circled"></span></span></h3>
                 <div class="controls">
                   {% for choice in filter_form.types.field.choices %}
                   <div class="checkbox">
@@ -96,7 +96,7 @@
               </div>
 
               <div id="div_id_{{ filter_form.collections.html_name }}" class="form-group">
-                <h3>{{ filter_form.collections.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></h3>
+                <h3>{{ filter_form.collections.label }}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></h3>
                 <div class="controls">
                   {% for choice in filter_form.collections.field.choices %}
                   <div class="checkbox">
