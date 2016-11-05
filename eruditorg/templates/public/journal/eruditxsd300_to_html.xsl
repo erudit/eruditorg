@@ -907,24 +907,28 @@
     </li>
   </xsl:template>
 
-  <!-- blockquotes, dedications, epigraphs -->
-  <xsl:template match="bloccitation">
-    <blockquote class="{name()}">
+  <!-- blockquotes, dedications, epigraphs, verbatims -->
+  <xsl:template match="bloccitation | dedicace | epigraphe | verbatim">
+    <blockquote class="{name()} {@typeverb}">
       <xsl:apply-templates/>
     </blockquote>
   </xsl:template>
 
-  <!-- verbatims -->
-  <xsl:template match="verbatim">
-    <div class="verbatim {@typeverb}">
+  <xsl:template match="bloccitation/source | dedicace/source | epigraphe/source | verbatim/source">
+    <cite class="source">
       <xsl:apply-templates/>
-    </div>
+    </cite>
   </xsl:template>
 
   <xsl:template match="bloc">
-    <div class="bloc">
+    <p class="bloc {@alignh}">
       <xsl:apply-templates/>
-    </div>
+    </p>
+  </xsl:template>
+
+  <xsl:template match="bloc/ligne">
+    <xsl:apply-templates/>
+    <br/>
   </xsl:template>
 
   <!-- figures & tables -->
@@ -1974,11 +1978,11 @@
 
   <!--*** all-purpose typographic markup ***-->
   <xsl:template match="espacev">
-    <div class="espacev" style="height: {@dim}">&#x00A0;</div>
+    <span class="espacev {@espacetype}" style="height: {@dim}; display: block;">&#x00A0;</span>
   </xsl:template>
 
   <xsl:template match="espaceh">
-    <span class="espaceh" style="padding-left: {@dim}">&#x00A0;</span>
+    <span class="espaceh {@espacetype}" style="padding-left: {@dim};">&#x00A0;</span>
   </xsl:template>
 
   <xsl:template match="marquage">
