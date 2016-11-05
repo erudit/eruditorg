@@ -11,12 +11,7 @@
 
    .refbiblio {
      margin-bottom: 0.5em;
-     // force breaks for long text, e.g. URLs
-     overflow-wrap: break-word;
-     word-wrap: break-word;
-     -ms-word-break: break-all;
-     word-break: break-all;
-     word-break: break-word;
+     @include force-break;
 
      a {
        font-size: 12px;

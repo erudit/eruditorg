@@ -167,6 +167,15 @@
   column-count: $count;
 }
 
+// force breaks for long text, e.g. URLs
+@mixin force-break() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+}
+
 /// Event wrapper
 /// @author Harry Roberts
 /// @param {Bool} $self [false] - Whether or not to include current selector
@@ -188,18 +197,7 @@
   }
 }
 
-/// Make a context based selector a little more friendly
-/// @author Hugo Giraudel
-/// @param {String} $context
-@mixin when-inside($context) {
-  #{$context} & {
-    @content;
-  }
-}
-
-/**
-* Create a top or bottom border for Bootstrap's grid cell
-*/
+// Create a top or bottom border for Bootstrap's grid cell
 @mixin grid-cell-border($direction: 'top', $border-width: 1px, $border-color: #000) {
   position: relative;
 
@@ -228,6 +226,15 @@
       bottom: 0;
       // clear: both;
     }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
   }
 }
 
