@@ -5,10 +5,13 @@
 
 [class*="hint--"]:after {
   width: 200px;
+  background: $darker-grey;
   white-space: normal;
+  font-variant: normal;
+  text-align: left;
   line-height: 1.35;
-  @include fw-sans;
   font-size: 12px;
+  @include font-styles('sans');
 }
 
 .ion-alert {
