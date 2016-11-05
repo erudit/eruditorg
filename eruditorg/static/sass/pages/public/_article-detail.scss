@@ -443,6 +443,7 @@ $article-toolbar-width: 80px;
     // Import article body components
     @import
       '../../components/article/abstracts',
+      '../../components/article/blockquotes',
       '../../components/article/figures',
       '../../components/article/formulae',
       '../../components/article/lists',
@@ -504,7 +505,7 @@ $article-toolbar-width: 80px;
 
     }
 
-    p {
+    p, li, blockquote {
       @include paragraph-text-style;
     }
 
@@ -579,12 +580,6 @@ $article-toolbar-width: 80px;
       font-size: 1.25em;
     }
 
-  }
-
-  .source {
-    color: $dark-grey;
-    font-size: smaller;
-    text-align: right;
   }
 
   /**

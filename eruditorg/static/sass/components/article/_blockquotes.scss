@@ -1,0 +1,92 @@
+/**
+ * All quotation / blockquote types
+ * Includes <bloccitation>, <dedicace>, <epigraphe> and <verbatim>
+ */
+
+blockquote {
+
+  .source {
+    display: block;
+    color: $dark-grey;
+    font-size: smaller;
+    text-align: right;
+  }
+
+  .bloc {
+
+    &.gauche {
+      text-align: left;
+    }
+
+    &.centre {
+      text-align: center;
+    }
+
+    &.droite {
+      text-align: right;
+    }
+
+  }
+
+  &.bloccitation,
+  &.dedicace,
+  &.epigraphe,
+  &.verbatim {
+
+    p, li {
+      font-size: 14px;
+    }
+
+  }
+
+  &.dedicace,
+  &.epigraphe {
+    margin: 1.5em 0 2em 40%;
+    padding: 0;
+    border: 0;
+  }
+
+  &.dedicace {
+    text-align: right;
+    @include fw-serif-italic;
+  }
+
+  .verbatim,
+  &.verbatim {
+    border: 0;
+    padding: 0;
+    margin: 1.5em 0 1.5em 2.5em;
+
+    p,
+    .source,
+    + .source {
+      @include font-styles('sans');
+    }
+
+    // monospaced verbatims
+    &.formeef p,
+    &.poemeef p,
+    &.programme p {
+      @include font-styles('mono');
+    }
+
+    &.dialogue {}
+
+    &.forme {}
+
+    &.motpourmot {}
+
+    &.poeme {}
+
+  }
+
+  &.bloccitation {
+
+    .verbatim {
+      margin: 0;
+      padding: 0;
+    }
+
+  }
+
+}
