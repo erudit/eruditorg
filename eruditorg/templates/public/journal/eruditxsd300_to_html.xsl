@@ -83,15 +83,6 @@
         <!-- TODO: cover image -->
         <div class="issue-cover col-sm-3">
         </div>
-
-        {% if not only_summary %}
-        {% if next_article %}<a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
-        {% if previous_article %}<a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
-        {% else %}
-        {% if next_article %}<a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page"><span class="ion ion-ios-arrow-right"></span></a>{% endif %}
-        {% if previous_article %}<a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page"><span class="ion ion-ios-arrow-left"></span></a>{% endif %}
-        {% endif %}
-
       </hgroup>
 
       <!-- article metadata -->

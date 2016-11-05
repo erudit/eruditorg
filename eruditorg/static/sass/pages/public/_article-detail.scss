@@ -24,7 +24,7 @@ $article-toolbar-width: 80px;
 * Styles for article detail
 */
 
-#article_detail {
+#article_detail main {
 
   /**
   * default for html elements
@@ -242,35 +242,6 @@ $article-toolbar-width: 80px;
 
     }
 
-    .pagination-arrow {
-      position: absolute;
-      top: 50%;
-      font-size: 40px;
-      color: $dark-grey;
-      transform: translate(0, -50%);
-      @include border-radius(50%);
-      width: 50px;
-      height: 50px;
-      line-height: 58px;
-      text-align: center;
-
-      &.next-page {
-        left: 100%;
-        margin-left: $grid-gutter-width/2;
-        padding-left: 4px;
-      }
-      &.previous-page {
-        right: 100%;
-        padding-right: 4px;
-        margin-right: $grid-gutter-width/2;
-      }
-
-      &:hover, &:active, &:active:focus {
-        color: $white;
-        background-color: $coral-red;
-      }
-    }
-
     .notegen,
     .histpapier,
     .erratum {
@@ -378,7 +349,6 @@ $article-toolbar-width: 80px;
   */
 
   .article-table-of-contents {
-    padding-top: $margin-vertical-default;
     position: relative;
     will-change: transform;
     @include transition(transform 0.3s ease-out);

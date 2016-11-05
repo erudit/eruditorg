@@ -1,0 +1,37 @@
+/**
+ * Pagination arrows for previous / next articles
+ */
+
+#article_detail .pagination-arrow {
+  position: absolute;
+  font-size: 40px;
+  color: $dark-grey;
+  transform: translate(0, -50%);
+  @include border-radius(50%);
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-top: 30vh;
+
+  [data-hint] {
+    width: 100%;
+  }
+
+  &.next-page {
+    right: 5px;
+  }
+
+  &.previous-page {
+    left: 5px;
+  }
+
+  &.is_stuck {
+  }
+
+  &:hover, &:active, &:active:focus {
+    color: $white;
+    background-color: $coral-red;
+  }
+
+}
