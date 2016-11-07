@@ -3,22 +3,21 @@
  */
 
  .equation {
-   padding-bottom: 1em;
-   margin-bottom: 1em;
-   border-bottom: 1px dotted $mid-grey;
+   padding: 0.75em 0;
 
-   &:first-of-type {
-     margin-top: 1.25em;
-   }
-
-   &:last-child {
+   &:first-child {
      padding-bottom: 0;
      margin-bottom: 0;
      border: 0;
    }
 
+   + .equation {
+     border-top: 1px dotted $mid-grey;
+   }
+
    p,
    .no {
+    margin: 0;
     font-size: 14px;
     @include font-styles(mono);
   }
