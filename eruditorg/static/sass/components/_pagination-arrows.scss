@@ -26,9 +26,6 @@
     left: 5px;
   }
 
-  &.is_stuck {
-  }
-
   &:hover, &:active, &:active:focus {
     color: $white;
     background-color: $coral-red;

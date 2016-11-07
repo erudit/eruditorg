@@ -25,7 +25,7 @@ export default {
   sticky_elements : function () {
 
   	var $sticky_header 			  = this.article.find('.article-header-sticky'),
-  		  $sticky_elements 		  = this.article.find('.article-table-of-contents, .toolbox'),
+  		  $sticky_elements 		  = this.article.find('.article-table-of-contents, .toolbox, .pagination-arrow'),
   		  transform 				    = getPrefix('transform');
 
     // save sticky header height
@@ -35,7 +35,7 @@ export default {
     // sticky elements
   	$sticky_elements
       .css('padding-bottom', this.sticky_header_height)
-  		.stick_in_parent()
+  		.stick_in_parent({offset_top: 20})
   		.first()
   		.on("sticky_kit:stick", (e) => {
   			setTimeout(function(){
