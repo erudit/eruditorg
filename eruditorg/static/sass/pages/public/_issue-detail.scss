@@ -6,6 +6,7 @@
   .page-header-main {
 
     h1 {
+      font-size: 1.953em;
 
       .ion-locked {
         font-size: 0.5em;
@@ -16,8 +17,9 @@
     }
 
     h2 {
-      @include fw-sans();
-      margin-bottom: 1em;
+      margin: 1.5em 0 0.75em 0;
+      color: $dark-grey;
+      @include font-styles('sans');
     }
 
   }
