@@ -1044,15 +1044,29 @@
   <!-- equations, examples & insets/boxed text -->
   <xsl:template match="grencadre|grequation|grexemple">
     <aside class="{name()}">
-      <xsl:apply-templates select="no"/>
-      <xsl:apply-templates select="legende"/>
+      <h1><strong><xsl:apply-templates select="no"/><xsl:apply-templates select="legende/titre"/></strong></h1>
       <xsl:apply-templates select="*[not(self::no)][not(self::legende)][not(self::titreparal)]"/>
     </aside>
   </xsl:template>
-  <xsl:template match="encadre">
-    <aside class="encadre type{@type}">
-      <xsl:apply-templates/>
+
+  <xsl:template match="encadre|exemple">
+    <aside class="{name()}">
+      <xsl:if test="legende or no">
+        <h1>
+          <strong>
+            <xsl:apply-templates select="no"/><xsl:if test="legende and no"><span>. </span></xsl:if>
+            <xsl:apply-templates select="legende"/>
+          </strong>
+        </h1>
+      </xsl:if>
+      <xsl:for-each select="node()[name() != '' and name() != 'no' and name() != 'legende']">
+        <xsl:apply-templates select="."/>
+      </xsl:for-each>
     </aside>
+  </xsl:template>
+
+  <xsl:template match="encadre/legende/titre|exemple/legende/titre|encadre/no|exemple/no">
+    <xsl:apply-templates/>
   </xsl:template>
 
   <!-- notes within equations, examples and insets -->
@@ -1085,15 +1099,6 @@
         </div>
       </xsl:if>
       <xsl:for-each select="node()[name() = 'noteeq' or name() = 'source']">
-        <xsl:apply-templates select="."/>
-      </xsl:for-each>
-    </aside>
-  </xsl:template>
-  <xsl:template match="exemple">
-    <aside class="exemple">
-      <xsl:apply-templates select="no"/>
-      <xsl:apply-templates select="legende"/>
-      <xsl:for-each select="node()[name() != '' and name() != 'no' and name() != 'legende']">
         <xsl:apply-templates select="."/>
       </xsl:for-each>
     </aside>
@@ -1622,9 +1627,9 @@
   <!-- sources -->
   <xsl:template match="source">
     <xsl:if test="text() or node()">
-      <p class="source">
+      <cite class="source">
         <xsl:apply-templates/>
-      </p>
+      </cite>
     </xsl:if>
   </xsl:template>
 

@@ -356,6 +356,7 @@ $article-toolbar-width: 80px;
       '../../components/article/blockquotes',
       '../../components/article/figures',
       '../../components/article/formulae',
+      '../../components/article/insets-examples',
       '../../components/article/lists',
       '../../components/article/notes',
       '../../components/article/tables';
@@ -404,7 +405,7 @@ $article-toolbar-width: 80px;
   */
   .corps {
 
-    section:first-of-type {
+    > section:first-of-type {
 
       h2 {
         margin-top: 0;
