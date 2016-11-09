@@ -1,16 +1,9 @@
 /**
- * All quotation / blockquote types
+ * All quotation / blockquote types, sources / citations
  * Includes <bloccitation>, <dedicace>, <epigraphe> and <verbatim>
  */
 
 blockquote {
-
-  .source {
-    display: block;
-    color: $dark-grey;
-    font-size: smaller;
-    text-align: right;
-  }
 
   .bloc {
 
@@ -89,4 +82,12 @@ blockquote {
 
   }
 
+}
+
+.source {
+  display: block;
+  text-align: right;
+  color: $dark-grey;
+  font-size: smaller;
+  margin-top: 0.75em;
 }
