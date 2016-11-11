@@ -725,6 +725,7 @@ class ArticleTitle(models.Model):
             return self.title
         return _('Aucun titre')
 
+
 class ArticleSectionTitle(models.Model):
     """ Represents a section title associated with an article. """
 
