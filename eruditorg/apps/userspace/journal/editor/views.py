@@ -25,9 +25,9 @@ from plupload.models import ResumableFile
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
-from core.editor.conf import settings as editor_settings
 from core.editor.models import IssueSubmission
 from core.metrics.metric import metric
+from core.editor.utils import get_archive_date
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
 from .viewmixins import IssueSubmissionContextMixin
@@ -300,12 +300,11 @@ class IssueSubmissionApproveView(IssueSubmissionTransitionView):
 
     def get_context_data(self, **kwargs):
         context = super(IssueSubmissionApproveView, self).get_context_data(**kwargs)
-        context['archive_date'] = dt.datetime.now() \
-            - dt.timedelta(days=editor_settings.ARCHIVE_DAY_OFFSET)
+        context['archive_date'] = get_archive_date(dt.datetime.now())
         return context
 
     def get_success_message(self):
-        archive_date = dt.datetime.now() - dt.timedelta(days=editor_settings.ARCHIVE_DAY_OFFSET)
+        archive_date = get_archive_date(dt.datetime.now())
         return _(
             'Le numéro a été approuvé avec succès. Veuillez noter que le numéro sera archivé '
             'le {archive_date}. Les fichiers de production seront supprimés.').format(
