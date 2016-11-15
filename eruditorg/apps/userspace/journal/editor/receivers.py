@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 from core.editor.shortcuts import get_production_team_group
 from core.email import Email
+from django.conf import settings
 
 from .signals import userspace_post_transition
 
@@ -43,6 +44,7 @@ def send_notification_email_after_issue_submission_approval(
 
     email = Email(
         emails,
+        from_email=settings.PUBLISHER_EMAIL,
         html_template='emails/editor/issue_submission_validated_content.html',
         subject_template='emails/editor/issue_submission_validated_subject.html',
         extra_context={'issue': issue_submission, 'journal': issue_submission.journal})
@@ -59,6 +61,7 @@ def send_notification_email_after_issue_submission_refusal(
 
     email = Email(
         emails,
+        from_email=settings.PUBLISHER_EMAIL,
         html_template='emails/editor/issue_submission_refused_content.html',
         subject_template='emails/editor/issue_submission_refused_subject.html',
         extra_context={'issue': issue_submission})

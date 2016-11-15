@@ -19,13 +19,13 @@ class Email(object):
     of an email using its HTML content.
     """
     def __init__(
-            self, recipient, html_template, text_template=None, subject='', subject_template=None,
-            extra_context={}, language=None, attachments={}):
+            self, recipient, html_template, text_template=None, subject='', from_email=None,
+            subject_template=None, extra_context={}, language=None, attachments={}):
         self.recipient = recipient if not email_settings.USE_DEBUG_EMAIL \
             else email_settings.DEBUG_EMAIL_ADDRESS
         self.language = language if language else translation.get_language()
         self.attachments = attachments
-
+        self.from_email = from_email
         with switch_language(self.language):
             self.context = {
                 'site': Site.objects.get_current(),
@@ -39,11 +39,18 @@ class Email(object):
                 else html2text.html2text(self.html_message)
 
     def send(self):
-        mail.send(
-            self.recipient,
-            subject=self.subject, html_message=self.html_message, message=self.text_message,
-            language=self.language, attachments=self.attachments,
-        )
+        kwargs = {
+            'subject': self.subject,
+            'html_message': self.html_message,
+            'message': self.text_message,
+            'language': self.language,
+            'attachments': self.attachments,
+        }
+
+        if self.from_email:
+            mail.send(self.recipient, self.from_email, **kwargs)
+        else:
+            mail.send(self.recipient, **kwargs)
 
     def _render_template(self, template_name):
         return render_to_string(template_name, self.context)
