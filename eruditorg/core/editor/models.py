@@ -9,6 +9,8 @@ from django.utils.translation import gettext as _
 
 from django_fsm import FSMField, transition
 
+from .managers import IssueSubmissionManager
+
 
 class IssueSubmission(models.Model):
     """ A journal issue submission by an editor """
@@ -72,6 +74,8 @@ class IssueSubmission(models.Model):
         verbose_name=_('Archivé'),
         default=False,
     )
+
+    objects = IssueSubmissionManager()
 
     class Meta:
         verbose_name = _("Envoi de numéro")
