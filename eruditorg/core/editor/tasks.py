@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import datetime as dt
 
 from celery import shared_task
@@ -10,6 +11,8 @@ from core.email import Email
 from .conf import settings as editor_settings
 from .models import IssueSubmission
 from .shortcuts import get_production_team_group
+
+logger = logging.getLogger(__name__)
 
 
 def _handle_issuesubmission_files_removal():
@@ -25,7 +28,9 @@ def _handle_issuesubmission_files_removal():
     # Fetches the production team group
     production_team = get_production_team_group()
     if production_team is None:
-        # TODO: warn if no production team
+        logger.error(
+            """Cannot send issue submission removal notification email.
+There is NO production team """)
         return
 
     # Now fetches the issue submissions that will soon be deleted. The production team must be
