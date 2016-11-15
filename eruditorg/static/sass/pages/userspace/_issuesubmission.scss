@@ -5,6 +5,18 @@ ul#id_issuesubmission_list{
     padding: 0;
     background: $light-grey;
 
+    &.issue-submission-status-C {
+        background: #D44D5C;
+    }
+
+    &.issue-submission-status-D {
+        background: #FBD1A2;
+    }
+
+    &.issue-submission-status-V {
+        background: #7FB285;
+    }
+
     &:hover, &:focus{
       text-decoration: none;
       background: darken($light-grey, 2%);
