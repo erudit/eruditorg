@@ -18,6 +18,7 @@ class IssueSubmission(models.Model):
     DRAFT = "D"
     SUBMITTED = "S"
     VALID = "V"
+    NEEDS_CORRECTIONS = "C"
 
     STATUS_CHOICES = (
         (DRAFT, _("Brouillon")),
@@ -162,6 +163,13 @@ class IssueSubmission(models.Model):
     @property
     def last_status_track(self):
         return self.status_tracks.order_by('-created').first()
+
+    def get_status_code_display(self):
+        if self.status != self.DRAFT:
+            return self.status
+        if self.last_status_track is None:
+            return self.status
+        return self.NEEDS_CORRECTIONS
 
     def get_status_display(self):
         status_choices_dict = dict(self.STATUS_CHOICES)
