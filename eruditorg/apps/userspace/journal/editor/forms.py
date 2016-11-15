@@ -8,6 +8,14 @@ from plupload.models import ResumableFile
 from core.editor.models import IssueSubmission
 
 
+class ContactModelChoiceField(forms.ModelChoiceField):
+
+    def label_from_instance(self, obj):
+        return "{fullname}".format(
+            fullname=obj.get_full_name() or obj.username
+        )
+
+
 class IssueSubmissionForm(forms.ModelForm):
 
     required_css_class = 'required'
@@ -23,8 +31,8 @@ class IssueSubmissionForm(forms.ModelForm):
             'comment',
         ]
 
-        widgets = {
-            'contact': forms.Select(),
+        field_classes = {
+            'contact': ContactModelChoiceField,
         }
 
     def disable_form(self):
