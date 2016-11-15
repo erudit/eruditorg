@@ -45,7 +45,7 @@ def send_notification_email_after_issue_submission_approval(
         emails,
         html_template='emails/editor/issue_submission_validated_content.html',
         subject_template='emails/editor/issue_submission_validated_subject.html',
-        extra_context={'issue': issue_submission})
+        extra_context={'issue': issue_submission, 'journal': issue_submission.journal})
     email.send()
 
 
