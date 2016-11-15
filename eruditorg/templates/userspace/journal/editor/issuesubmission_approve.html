@@ -29,6 +29,18 @@
         {% endblocktrans %}
         </div>
         <form action="" method="post">{% csrf_token %}
+          {% if comment_form %}
+          <div class="row">
+            <div id="div_id_{{ comment_form.comment.html_name }}">
+              <div class="controls">
+                <label class="control-label" for="{{ comment_form.comment.auto_id }}">{{ comment_form.comment.label }}</label>
+                {{ comment_form.comment|add_class:'form-control' }}
+                {% for error in comment_form.comment.errors %}<p class="error">{{ error }}</p>{% endfor %}
+              </div>
+            </div>
+          </div>
+          <br />
+          {% endif %}
           <input type="hidden" name="post" value="yes" />
           <input type="submit" value="{% trans "Approuver" %}" class="btn btn-primary" />
           <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
