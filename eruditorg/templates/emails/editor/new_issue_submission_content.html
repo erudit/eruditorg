@@ -6,11 +6,11 @@
   {% blocktrans %}
   <p>Bonjour,</p>
 
-  <p>{{ issue.contact }} de la revue {{ issue.journal }} a transmis des fichiers pour la création d'une nouvelle publication.</p>
+  <p>{{ issue.contact.get_full_name() }} de la revue {{ issue.journal }} a transmis des fichiers de production du {{ issue }}.</p>
 
   <p>
     <a href="http://{{ site.domain }}{{ issue_url }}">
-      Consulter le numéro
+      Consulter la demande
     </a>
   </p>
   {% endblocktrans %}
