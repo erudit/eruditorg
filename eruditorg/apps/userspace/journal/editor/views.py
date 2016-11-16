@@ -297,6 +297,7 @@ class IssueSubmissionApproveView(IssueSubmissionTransitionView):
     success_message = _('Le numéro a été approuvé avec succès')
     template_name = 'userspace/journal/editor/issuesubmission_approve.html'
     transition_name = 'approve'
+    use_comment_form = True
 
     def get_context_data(self, **kwargs):
         context = super(IssueSubmissionApproveView, self).get_context_data(**kwargs)

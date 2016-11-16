@@ -7,7 +7,14 @@
   <p>Bonjour,</p>
 
   <p>Voici les modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
-
+  {% endblocktrans %}
+  {% if comment %}
+  {% blocktrans %}
+  <p>Commentaires:</p>
+  {{ comment }}
+  {% endblocktrans %}
+  {% endif %}
+  {% blocktrans %}
   <p>
     <a href="http://{{ site.domain }}{{ issue_url }}">
       Modifier le dépôt du numéro
