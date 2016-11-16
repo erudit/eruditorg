@@ -7,7 +7,14 @@
   <p>Bonjour,</p>
 
   <p>Les fichiers du numéro {{ issue }} de la revue {{ journal }} ont été approuvés par l'équipe de production. Le travail de mise en ligne débutera sous peu.</p>
-
+  {% endblocktrans %}
+  {% if comment %}
+  {% blocktrans %}
+  <p>Commentaires: </p>
+  {{ comment }}
+  {% endblocktrans %}
+  {% endif %}
+  {% blocktrans %}
   <p>
     <a href="http://{{ site.domain }}{{ issue_url }}">
       Consulter le numéro
