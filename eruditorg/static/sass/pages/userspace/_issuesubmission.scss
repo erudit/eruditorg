@@ -1,52 +1,44 @@
-ul#id_issuesubmission_list{
+/**
+* Issue submission
+*/
+
+.submission-list {
   list-style: none;
 
-  li{
-    padding: 0;
+  li {
+    padding: 1em;
     background: $light-grey;
-
-    &.issue-submission-status-C {
-        background: #D44D5C;
-    }
-
-    &.issue-submission-status-D {
-        background: #FBD1A2;
-    }
-
-    &.issue-submission-status-V {
-        background: #7FB285;
-    }
 
     &:hover, &:focus{
       text-decoration: none;
       background: darken($light-grey, 2%);
     }
 
-    a{
+    a {
       text-align: left;
 
       &:hover, &:focus{
         text-decoration: none;
       }
 
-      span.title{
+      .title {
         display: block;
       }
 
-      span.metadata-wrapper{
-        display: block;
+      .metadata {
+        margin-right: 10px;
+        padding: 4px 0;
+        display: inline-block;
+        @include font-styles('sans');
 
-        span.metadata{
-          margin-right: 10px;
-          padding: 4px 0;
-          display: inline-block;
-          font-family: $font-sans;
-
-          .metadata-title{
-            font-weight: bold;
-          }
+        .metadata-title {
+          @include fw-sans-medium;
         }
+
       }
+
     }
+
   }
+
 }

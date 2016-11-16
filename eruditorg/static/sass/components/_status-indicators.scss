@@ -1,0 +1,23 @@
+/**
+ * Status indicators (error, success, warning)
+ */
+
+[class^="status-indicator"] {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: top;
+    @include border-radius(50%);
+
+    &[class$="error"] {
+        background: $colour-error;
+    }
+
+    &[class$="success"]{
+        background: $colour-success;
+    }
+
+    &[class$="warning"] {
+        background: $colour-warning;
+    }
+}

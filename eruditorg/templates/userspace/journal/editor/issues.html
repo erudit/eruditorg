@@ -4,6 +4,8 @@
 
 {% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
 
+{% block body_id %}issue_submission{% endblock body_id %}
+
 {% block breadcrumb_end %}
 {{ block.super }}
 <li><a href="#">{% trans "Dépôt de fichiers" %}</a></li>
@@ -22,31 +24,27 @@
     </div>
     {% endif %}
     <h2>{% trans "Historique" %}</h2>
-    <ul id="id_issuesubmission_list" class="row">
+    <ul id="id_issuesubmission_list" class="row submission-list">
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-      <li class="col-xs-12 issue-submission-status-{{ issue_submission.get_status_code_display }}">
-        <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
-           class="btn btn-link btn-block">
-          <span class="pull-right">
-            <span class="status">
-              {{ issue_submission.get_status_display }}
-            </span>
+      <li class="col-xs-12">
+        <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}">
+          {% with issue_submission.get_status_code_display as status %}
+          <span class="pull-right status">
+            {{ issue_submission.get_status_display }}
+            <span class="status-indicator-{% if status == 'C' %}error{% elif status == 'D' %}warning{% elif status == 'V' %}success{% endif %}"></span>
           </span>
+          {% endwith %}
           <span class="title">
             {{ issue_submission }}
           </span>
-          <span class="metadata-wrapper">
-            <span class="metadata">
-              <span class="metadata-title">{% trans "Revue" %}</span>
-              <span class="metadata-value">{{ issue_submission.journal.name }}</span>
-            </span>
-            <span class="metadata">
-              <span class="metadata-value"><i>
-                {% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
-                  Ajouté le {{ created }}
-                {% endblocktrans %}
-              </i></span>
-            </span>
+          <span class="metadata">
+            <span class="metadata-title">{% trans "Revue" %}</span>
+            <span class="metadata-value">{{ issue_submission.journal.name }}</span>
+          </span>
+          <span class="pull-right metadata">
+            <em>{% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
+              Ajouté le {{ created }}
+              {% endblocktrans %}</em>
           </span>
         </a>
       </li>
