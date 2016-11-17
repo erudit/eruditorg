@@ -243,7 +243,7 @@
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
-                    {{ document.real_object.issue_publication_date }}
+                    {{ document.real_object.issue_publication_date|safe }}
                   </p>
                   {# issue theme or department for a thesis #}
                   {% if document.document_type == 'article' %}
