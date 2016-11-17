@@ -26,4 +26,5 @@ class ThesisAdmin(admin.ModelAdmin):
         }),
     )
 
+
 admin.site.register(Thesis, ThesisAdmin)

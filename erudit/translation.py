@@ -26,6 +26,7 @@ class DisciplineTranslationOptions(TranslationOptions):
         'name',
     )
 
+
 translator.register(Journal, JournalTranslationOptions)
 translator.register(JournalInformation, JournalInformationTranslationOptions)
 translator.register(Discipline, DisciplineTranslationOptions)
