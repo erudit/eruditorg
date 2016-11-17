@@ -53,6 +53,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     journal_name = serializers.SerializerMethodField()
     journal_type = serializers.SerializerMethodField()
     journal_url = serializers.SerializerMethodField()
+    issue_url = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
     issue_number = serializers.SerializerMethodField()
@@ -66,7 +67,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = erudit_models.Article
         fields = [
             'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier',
-            'issue_title', 'issue_number', 'paral_titles',
+            'issue_title', 'issue_url', 'issue_number', 'paral_titles',
             'issue_volume', 'issue_published', 'issue_volume_slug', 'publication_date',
             'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
@@ -124,6 +125,16 @@ class ArticleSerializer(serializers.ModelSerializer):
             return journal.external_url
         return reverse('public:journal:journal_detail', args=(journal.code, ))
 
+    def get_issue_url(self, obj):
+        issue = obj.issue
+        if issue.external_url:
+            return issue.external_url
+        return reverse('public:journal:issue_detail', args=(
+            issue.journal.code,
+            issue.volume_slug,
+            issue.localidentifier,
+        ))
+
     def get_issue_localidentifier(self, obj):
         return obj.issue.localidentifier
 
@@ -162,7 +173,7 @@ class ThesisSerializer(serializers.ModelSerializer):
     class Meta:
         model = erudit_models.Thesis
         fields = [
-            'title', 'url', 'publication_date', 'description', 'authors', 'collection', 
+            'title', 'url', 'publication_date', 'description', 'authors', 'collection',
             'collection_name', 'description', 'keywords'
         ]
 

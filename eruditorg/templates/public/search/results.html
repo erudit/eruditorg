@@ -239,13 +239,13 @@
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
-                    {{ document.real_object.publication_date|safe }}
+                    {% if document.document_type == 'article' %}<a href="{{ document.real_object.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.real_object.publication_date|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
                   </p>
                   {# issue theme or department for a thesis #}
                   {% if document.document_type == 'article' %}
                   {% if document.real_object.issue_title %}
                   <p class="col-xs-12 issue-theme">
-                    <a href="{{ article.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
+                    <a href="{{ document.real_object.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
                       {{ document.real_object.issue_title|safe }}
                     </a>
                   </p>
