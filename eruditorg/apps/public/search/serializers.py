@@ -113,7 +113,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return ''
 
     def get_issue_publication_date(self, obj):
-        return obj.issue.volume_title
+        return obj.issue.abbreviated_volume_title
 
     def get_journal_url(self, obj):
         journal = obj.issue.journal
