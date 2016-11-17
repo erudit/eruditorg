@@ -409,6 +409,25 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return self.number if self.number else _('hors série')
 
     @property
+    def abbreviated_volume_title(self):
+        """ Returns an abbreviated volume title """
+        publication_period = self.publication_period if self.publication_period else str(self.year)
+        number = self.number
+        if self.volume and number:
+            return _(
+                'Vol. {volume}, n<sup>o</sup> {number}, {publication_date}'.format(
+                    volume=self.volume, number=number, publication_date=publication_period.lower()))
+        elif self.volume and not number:
+            return _(
+                'Vol. {volume}, {publication_date}'.format(
+                    volume=self.volume, publication_date=publication_period.lower()))
+
+        return _(
+            'N<sup>o</sup> {number}, {publication_date}'.format(
+                number=number, publication_date=publication_period.lower()))
+
+
+    @property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number. """
         publication_period = self.publication_period if self.publication_period else self.year
