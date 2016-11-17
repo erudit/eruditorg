@@ -74,6 +74,9 @@ class ArticleSerializer(serializers.ModelSerializer):
         ]
 
     def get_authors(self, obj):
+        if obj.fedora_object:
+            article_object = obj.get_erudit_object()
+            return article_object.get_authors()
         authors = []
         for author in obj.authors.all():
             authors.append({
