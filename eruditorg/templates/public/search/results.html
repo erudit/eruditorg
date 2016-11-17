@@ -179,10 +179,6 @@
                       {% if forloop.revcounter > 2 %}; {% endif %}
                     {% endfor %}
                     {% endwith %}
-                  {% elif document.real_object.author %}
-                    {% with author=document.real_object.author %}
-                    <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>
-                    {% endwith %}
                   {% endif %}
                   </p>
                   {% endif %}

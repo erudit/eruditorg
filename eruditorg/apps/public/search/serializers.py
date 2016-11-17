@@ -153,22 +153,22 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ThesisSerializer(serializers.ModelSerializer):
-    author = serializers.SerializerMethodField()
+    authors = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Thesis
         fields = [
-            'title', 'url', 'publication_year', 'description', 'author', 'collection',
+            'title', 'url', 'publication_year', 'description', 'authors', 'collection',
             'collection_name',
         ]
 
-    def get_author(self, obj):
-        return {
+    def get_authors(self, obj):
+        return [{
             'lastname': obj.author.lastname,
             'firstname': obj.author.firstname,
             'othername': obj.author.othername,
-        }
+        }]
 
     def get_collection_name(self, obj):
         return obj.collection.name
