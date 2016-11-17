@@ -156,12 +156,14 @@ class ThesisSerializer(serializers.ModelSerializer):
     authors = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
     publication_date = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    keywords = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Thesis
         fields = [
-            'title', 'url', 'publication_date', 'description', 'authors', 'collection',
-            'collection_name',
+            'title', 'url', 'publication_date', 'description', 'authors', 'collection', 
+            'collection_name', 'description', 'keywords'
         ]
 
     def get_authors(self, obj):
@@ -176,3 +178,9 @@ class ThesisSerializer(serializers.ModelSerializer):
 
     def get_publication_date(self, obj):
         return obj.publication_year
+
+    def get_description(self, obj):
+        return obj.description
+
+    def get_keywords(self, obj):
+        return [keyword.name for keyword in obj.keywords.all()]

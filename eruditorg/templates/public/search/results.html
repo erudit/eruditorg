@@ -253,7 +253,7 @@
                   {% endif %}
                 </div>
                 {# abstract #}
-                {% if document.real_object.abstract or document.real_object.description %}
+                {% if document.real_object.abstract or document.real_object.description or document.real_object.keywords %}
                 <div class="akkordion" data-akkordion-single="true">
                   <div class="akkordion-title abstract-title">{% trans "Résumé" %} <span class="ion-ios-arrow-down"></span></div>
                   <div class="summary-content akkordion-content">
@@ -261,7 +261,12 @@
                       {% if document.document_type == 'article' %}
                       {{ document.real_object.abstract }}
                       {% elif document.document_type == 'thesis' %}
-                      {{ document.real_object.description }}
+                      {% if document.real_object.keywords %}
+                      <strong>{% trans "Mots-clés&nbsp;:" %}</strong>
+                      {% for keyword in document.real_object.keywords %}
+                      {{ keyword }}{% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                      {% endif %}
                       {% endif %}
                     </p>
                   </div>
