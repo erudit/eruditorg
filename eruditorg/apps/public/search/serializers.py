@@ -59,7 +59,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     issue_volume = serializers.SerializerMethodField()
     issue_published = serializers.SerializerMethodField()
     issue_volume_slug = serializers.SerializerMethodField()
-    issue_publication_date = serializers.SerializerMethodField()
+    publication_date = serializers.SerializerMethodField()
     has_pdf = serializers.SerializerMethodField()
 
     class Meta:
@@ -67,7 +67,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = [
             'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier',
             'issue_title', 'issue_number', 'paral_titles',
-            'issue_volume', 'issue_published', 'issue_volume_slug', 'issue_publication_date',
+            'issue_volume', 'issue_published', 'issue_volume_slug', 'publication_date',
             'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
             'external_url', 'external_pdf_url', 'collection_name', 'bibliographic_reference',
@@ -115,7 +115,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             return obj.issue.journal.type.get_code_display().lower()
         return ''
 
-    def get_issue_publication_date(self, obj):
+    def get_publication_date(self, obj):
         return obj.issue.abbreviated_volume_title
 
     def get_journal_url(self, obj):
@@ -155,11 +155,12 @@ class ArticleSerializer(serializers.ModelSerializer):
 class ThesisSerializer(serializers.ModelSerializer):
     authors = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
+    publication_date = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Thesis
         fields = [
-            'title', 'url', 'publication_year', 'description', 'authors', 'collection',
+            'title', 'url', 'publication_date', 'description', 'authors', 'collection',
             'collection_name',
         ]
 
@@ -172,3 +173,6 @@ class ThesisSerializer(serializers.ModelSerializer):
 
     def get_collection_name(self, obj):
         return obj.collection.name
+
+    def get_publication_date(self, obj):
+        return obj.publication_year
