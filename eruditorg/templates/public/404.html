@@ -1,0 +1,27 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Page non trouvée" %}</h1>
+<div class="ascii-error">
+  <pre>
+          xeee        .n~~%x.             xeee
+         d888R      x88X   888.          d888R
+        d8888R     X888X   8888L        d8888R
+       @ 8888R    X8888X   88888       @ 8888R
+     .P  8888R    88888X   88888X    .P  8888R
+    :F   8888R    88888X   88888X   :F   8888R
+   x"    8888R    88888X   88888f  x"    8888R
+  d8eeeee88888eer 48888X   88888  d8eeeee88888eer
+         8888R     ?888X   8888"         8888R
+         8888R      "88X   88*`          8888R
+      "*%%%%%%**~     ^"==="`         "*%%%%%%**~
+  </pre>
+</div>
+<p>
+  {% url 'public:home' as home %}
+  {% blocktrans %}
+  Cette page est introuvable&nbsp;! Veuillez vérifier l’adresse ou retourner à la <a href="{{ home }}">page d’accueil</a>.
+  {% endblocktrans %}
+</p>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Erreur inconnue" %}</h1>
+<div class="ascii-error">
+  <pre>
+    cuuu....uK        .n~~%x.         .n~~%x.
+    888888888       x88X   888.     x88X   888.
+    8*888**"       X888X   8888L   X888X   8888L
+    >  .....      X8888X   88888  X8888X   88888
+    Lz"  ^888Nu   88888X   88888X 88888X   88888X
+    F     '8888k  88888X   88888X 88888X   88888X
+    ..     88888> 88888X   88888f 88888X   88888f
+   @888L   88888  48888X   88888  48888X   88888
+  '8888F   8888F   ?888X   8888"   ?888X   8888"
+   %8F"   d888"     "88X   88*`     "88X   88*`
+    ^"===*%"`         ^"==="`         ^"==="`
+  </pre>
+</div>
+<p>
+  {% url 'public:home' as home %}
+  {% blocktrans %}
+  Il y a eu une erreur interne du serveur&nbsp;! Retourner à la <a href="{{ home }}">page d’accueil</a>. <br/>Si le problème persiste, veuillez communiquer avec nous à l'adresse&nbsp;: <a href="mailto:info@erudit.org?subject=Erreur 500 - erudit.org">info@erudit.org</a>.
+  {% endblocktrans %}
+</p>
+{% endblock content %}
