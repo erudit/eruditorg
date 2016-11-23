@@ -621,7 +621,11 @@ class Command(BaseCommand):
         article.clean()
         article.save()
 
-        ArticleTitle(article=article, paral=False, title=article_erudit_object.titles['title'])
+        # Delete all the titles of the article
+        ArticleTitle.objects.filter(article=article).delete()
+
+        # Reimport titles
+        ArticleTitle(article=article, paral=False, title=article_erudit_object.titles['title']).save()
 
         for lang, title in article_erudit_object.titles['paral'].items():
             ArticleTitle(article=article, language=lang, title=title, paral=True).save()
