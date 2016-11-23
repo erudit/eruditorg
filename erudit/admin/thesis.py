@@ -10,7 +10,7 @@ class ThesisAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'author', 'url', )
     list_display_links = ('__str__', 'author', )
 
-    search_fields = ('author__lastname',)
+    search_fields = ('author__lastname', 'title',)
 
     fieldsets = (
         (('Identification du document'), {
