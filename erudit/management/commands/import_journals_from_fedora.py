@@ -25,6 +25,7 @@ from ...fedora.repository import rest_api
 from ...models import Affiliation
 from ...models import Article
 from ...models import ArticleTitle
+from ...models import ArticleSubtitle
 from ...models import ArticleAbstract
 from ...models import ArticleSectionTitle
 from ...models import Author
@@ -625,10 +626,24 @@ class Command(BaseCommand):
         ArticleTitle.objects.filter(article=article).delete()
 
         # Reimport titles
-        ArticleTitle(article=article, paral=False, title=article_erudit_object.titles['title']).save()
+        ArticleTitle(
+            article=article, paral=False, title=article_erudit_object.titles['title']
+        ).save()
 
         for lang, title in article_erudit_object.titles['paral'].items():
             ArticleTitle(article=article, language=lang, title=title, paral=True).save()
+
+        # Delete all the subtitles of the article
+        ArticleSubtitle.objects.filter(article=article).delete()
+
+        # Reimport subtitles
+        if article_erudit_object.subtitles['title']:
+            ArticleSubtitle(
+                article=article, paral=False, title=article_erudit_object.subtitles['title']
+            ).save()
+
+            for lang, title in article_erudit_object.subtitles['paral'].items():
+                ArticleSubtitle(article=article, language=lang, title=title, paral=True).save()
 
         # STEP 3: creates or updates the authors of the article
         # --

@@ -426,7 +426,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             'N<sup>o</sup> {number}, {publication_date}'.format(
                 number=number, publication_date=publication_period.lower()))
 
-
     @property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number. """
@@ -733,13 +732,38 @@ class ArticleAbstract(models.Model):
         return '{} / {}'.format(str(self.article), self.language)
 
 
-class ArticleTitle(models.Model):
+class ArticleTitleMixin(models.Model):
     """ Represents the title of an article """
 
-    article = models.ForeignKey(Article, related_name='titles', verbose_name=_('Article'))
     title = models.CharField(max_length=600, verbose_name=_('Titre'), blank=True, null=True)
     language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
+
+    class Meta:
+        abstract = True
+
+
+class ArticleTitle(ArticleTitleMixin):
+    """ The title of an article """
+    article = models.ForeignKey(Article, related_name='titles', verbose_name=_('Article'))
+
+    class Meta:
+        verbose_name = _("Titre d'article")
+        verbose_name_plural = _("Titres d'articles")
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        return _('Aucun titre')
+
+
+class ArticleSubtitle(ArticleTitleMixin):
+    """ The subtitle of an article """
+    article = models.ForeignKey(Article, related_name='subtitles', verbose_name=_('Article'))
+
+    class Meta:
+        verbose_name = _("Sous-titre d'article")
+        verbose_name_plural = _("Sous-titres d'articles")
 
     def __str__(self):
         if self.title:
