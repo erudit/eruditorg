@@ -10,6 +10,9 @@ def common_settings(request):
         'MAILCHIMP_ACTION_URL': settings.MAILCHIMP_ACTION_URL,
     }
 
+    if hasattr(settings, 'ANALYTICS_TRACKING_CODES'):
+        COMMON_CONTEXT['ANALYTICS_TRACKING_CODES'] = settings.ANALYTICS_TRACKING_CODES
+
     try:
         # set EXTRA_CONTEXT in local settings
         COMMON_CONTEXT.update(settings.EXTRA_CONTEXT)
