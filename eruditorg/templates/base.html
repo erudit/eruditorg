@@ -43,6 +43,11 @@
     <meta name="msapplication-wide310x150logo" content="{% static 'img/favicon/mstile-310x150.png' %}" />
     <meta name="msapplication-square310x310logo" content="{% static 'img/favicon/mstile-310x310.png' %}" />
 
+    {% if ANALYTICS_TRACKING_CODES %}
+    {% for tracking_code in ANALYTICS_TRACKING_CODES %}
+    {{ tracking_code|safe }}
+    {% endfor %}
+    {% endif %}
     {% block meta_tags %}{% endblock meta_tags %}
     {% block structured_data %}{% endblock structured_data %}
     {% block stylesheets %}{% endblock stylesheets %}
