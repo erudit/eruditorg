@@ -321,7 +321,7 @@
     <xsl:text>&#x0020;</xsl:text>
     <a href="{$doiStart}{.}">
       <xsl:if test="contains( . , '10.7202')">
-        <img src="{% static 'svg/logo-erudit-small.svg' %}" title="DOI Érudit" alt="Icône pour les DOIs Érudit" class="erudit-doi"/>
+        <img src="{% static 'svg/symbole-erudit.svg' %}" title="DOI Érudit" alt="Icône pour les DOIs Érudit" class="erudit-doi"/>
       </xsl:if>
       <xsl:text>DOI:</xsl:text>
       <xsl:value-of select="."/>
