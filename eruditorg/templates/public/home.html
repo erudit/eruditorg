@@ -47,7 +47,7 @@
 {% trans "inconnu" as i18n_unknown %}
 <main role="main">
   <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
-  {% cache LONG_TTL "public_home_head" LANGUAGE_CODE %}
+  {% cache LONG_TTL "public_home" LANGUAGE_CODE %}
   <!-- SEARCH PUBLICATIONS -->
   <section class="glory">
     <div class="container">
@@ -103,10 +103,8 @@
       </div>
     </div>
   </section>
-  {% endcache %}
 
   <!-- LATEST ISSUES -->
-  {% cache LONG_TTL "public_home_latest_issues" LANGUAGE_CODE %}
   {% if latest_issues %}
   <section class="container">
     <hr class="section-separator">
@@ -117,7 +115,6 @@
     </div>
     <ul class="row latest-issues">
       {% for issue in latest_issues %}
-      {% cache FOREVER_TTL "public_home_latest_issues_item" issue.id LANGUAGE_CODE %}
       <li class="col-xs-12 col-sm-6 col-md-3 latest-issues--article">
           <div class="row">
             <div class="col-xs-4 col-sm-12">
@@ -147,15 +144,12 @@
             </div>
           </div>
       </li>
-      {% endcache %}
       {% endfor %}
     </ul>
   </section>
   {% endif %}
-  {% endcache %}
 
   <!-- NEWS -->
-  {% cache SHORT_TTL "public_home_news" LANGUAGE_CODE %}
   <section class="container news">
     <hr class="section-separator">
     <div class="row">
@@ -181,7 +175,6 @@
       </div>
     </div>
   </section>
-  {% endcache %}
 
   <!-- ABOUT ERUDIT.ORG -->
   <section class="container">
@@ -234,6 +227,7 @@
     </div>
   </section>
 </main>
+{% endcache %}
 {% endblock content %}
 
 {% block footerscript %}
