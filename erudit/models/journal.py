@@ -176,7 +176,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     # Fedora-related methods and properties
     # --
-
     @property
     def provided_by_fedora(self):
         # We assume that the journals provided by a Fedora endpoint have a localidentifier.
@@ -251,12 +250,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             else current_year - self.movable_limitation_year_offset}
         return self.issues.filter(**filter_kwargs)
 
-    @property
+    @cached_property
     def first_issue(self):
         """ Return the first published issue of this Journal. """
         return self.published_issues.order_by('date_published').first()
 
-    @property
+    @cached_property
     def last_issue(self):
         """ Return the last published Issue of this Journal. """
         return self.published_issues.order_by('-date_published').first()
@@ -279,6 +278,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         """ The editors of a journal are the editors of the last issue """
         if self.last_issue:
             return self.last_issue.get_editors()
+
+    editors = cached_property(get_editors)
+    directors = cached_property(get_directors)
 
 
 class Issue(FedoraMixin, FedoraDated, OAIDated):

@@ -420,6 +420,7 @@ class Command(BaseCommand):
         try:
             issue = Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
+            # TODO check diffusion / prediffusion
             issue = Issue()
             issue.localidentifier = issue_localidentifier
             issue.journal = journal
