@@ -99,7 +99,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
     publishers = models.ManyToManyField(
-        Publisher, related_name='journals', verbose_name=_('Éditeurs'))
+        Publisher, related_name='journals', blank=True, verbose_name=_('Éditeurs'))
     """ The publishers of the journal """
 
     paper = models.NullBooleanField(
@@ -141,7 +141,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     a journal that still publish issues """
 
     # The field defines the users who can interact this object (coupled with permissions)
-    members = models.ManyToManyField(User, related_name='journals', verbose_name=_('Membres'))
+    members = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='journals',
+        verbose_name=_('Membres')
+    )
     """ Users that are part of this journal's organization """
 
     upcoming = models.BooleanField(default=False, verbose_name=_('Prochainement disponible'))
