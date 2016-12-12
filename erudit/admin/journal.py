@@ -127,13 +127,19 @@ class ArticleSubtitleInline(admin.TabularInline):
     model = ArticleSubtitle
 
 
+class ArticleAuthorInline(admin.TabularInline):
+    extra = 0
+    model = Article.authors.through
+
+
 class ArticleAdmin(admin.ModelAdmin):
 
     def issue__localidentifier(self, obj):
         return obj.issue.localidentifier
 
     inlines = (
-        ArticleAbstractInline, ArticleSectionTitleInline, ArticleTitleInline, ArticleSubtitleInline
+        ArticleAbstractInline, ArticleSectionTitleInline, ArticleTitleInline,
+        ArticleSubtitleInline, ArticleAuthorInline
     )
     list_display = ('localidentifier', 'issue__localidentifier', 'title', )
     raw_id_fields = ('issue', 'publisher', 'authors', )
