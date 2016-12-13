@@ -43,8 +43,8 @@ class AbstractSubscriptionPeriod(models.Model):
             .filter(
                 Q(start__lte=self.start, end__gte=self.end) |  # Greater period
                 Q(start__gte=self.start, end__lte=self.end) |  # Smaller period
-                Q(start__lt=self.start, end__gte=self.start, end__lte=self.end) |  # Older period
-                Q(start__gte=self.start, start__lte=self.end, end__gt=self.end)  # Younger period
+                Q(start__lt=self.start, end__gt=self.start, end__lte=self.end) |  # Older period
+                Q(start__gte=self.start, start__lt=self.end, end__gt=self.end)  # Younger period
             ) \
             .filter(**{self.subscription_field_name: getattr(self, self.subscription_field_name)}) \
             .exclude(pk=self.pk)
