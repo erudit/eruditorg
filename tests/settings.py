@@ -15,6 +15,15 @@ class DisableMigrations(object):
 
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+    },
+    'files': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
