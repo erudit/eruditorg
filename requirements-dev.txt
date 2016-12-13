@@ -14,3 +14,4 @@ factory-boy>=2.4
 fake-factory>=0.5
 tox>=1.7
 flake8>=2.2.5
+ipdb
