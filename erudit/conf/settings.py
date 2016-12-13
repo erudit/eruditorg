@@ -4,9 +4,19 @@ from django.conf import settings
 
 
 # Movable limitation year offsets
-MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET = 4
-MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET = 2
 
+
+MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET = getattr(
+    settings,
+    'MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET',
+    2
+)
+
+MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET = getattr(
+    settings,
+    'MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET',
+    4
+)
 
 # Fedora credentials
 FEDORA_ROOT = getattr(settings, 'ERUDIT_FEDORA_ROOT', None) \

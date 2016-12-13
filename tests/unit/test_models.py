@@ -92,39 +92,42 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_the_published_open_access_issues(self):
         # Setup
+        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
+
         now_dt = dt.datetime.now()
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 3,
+            journal=self.journal, year=now_dt.year - (ml - 1),
             date_published=dt.date(now_dt.year - 3, 3, 20))
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 1,
+            journal=self.journal, year=now_dt.year - (ml - 2),
             date_published=dt.date(now_dt.year - 1, 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 5,
+            journal=self.journal, year=now_dt.year - (ml + 1),
             date_published=dt.date(now_dt.year - 5, 3, 20))
         # Run & check
         self.assertEqual(list(self.journal.published_open_access_issues), [issue_3, ])
 
     def test_can_return_the_published_open_access_issues_year_coverage(self):
         # Setup
+        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
         now_dt = dt.datetime.now()
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 3,
+            journal=self.journal, year=now_dt.year - (ml - 1),
             date_published=dt.date(now_dt.year - 3, 3, 20))
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 1,
+            journal=self.journal, year=now_dt.year - (ml - 3),
             date_published=dt.date(now_dt.year - 1, 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 5,
+            journal=self.journal, year=now_dt.year - (ml + 1),
             date_published=dt.date(now_dt.year - 5, 3, 20))
         issue_4 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 7,
+            journal=self.journal, year=now_dt.year - (ml + 2),
             date_published=dt.date(now_dt.year - 5, 3, 20))
         # Run & check
         self.assertEqual(
@@ -202,19 +205,21 @@ class TestIssue(BaseEruditTestCase):
 
     def test_knows_if_it_has_a_movable_limitation_in_case_of_scientific_journals(self):
         # Setup
+        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
+
         now_dt = dt.datetime.now()
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 3,
-            date_published=dt.date(now_dt.year - 3, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml - 1),
+            date_published=dt.date(now_dt.year - (ml - 1), 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 1,
-            date_published=dt.date(now_dt.year - 1, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml - 2),
+            date_published=dt.date(now_dt.year - (ml - 2), 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 5,
-            date_published=dt.date(now_dt.year - 5, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml + 2),
+            date_published=dt.date(now_dt.year - (ml + 2), 3, 20))
         # Run & check
         self.assertTrue(issue_1.has_movable_limitation)
         self.assertTrue(issue_2.has_movable_limitation)
@@ -222,19 +227,21 @@ class TestIssue(BaseEruditTestCase):
 
     def test_knows_if_it_has_a_movable_limitation_in_case_of_non_scientific_journals(self):
         # Setup
+        from erudit.conf.settings import MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET as ml
+
         now_dt = dt.datetime.now()
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='C')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 3,
-            date_published=dt.date(now_dt.year - 3, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml + 1),
+            date_published=dt.date(now_dt.year - (ml + 1), 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 1,
-            date_published=dt.date(now_dt.year - 1, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml - 1),
+            date_published=dt.date(now_dt.year - (ml - 1), 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 5,
-            date_published=dt.date(now_dt.year - 5, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml + 2),
+            date_published=dt.date(now_dt.year - (ml + 2), 3, 20))
         # Run & check
         self.assertFalse(issue_1.has_movable_limitation)
         self.assertTrue(issue_2.has_movable_limitation)
@@ -423,18 +430,19 @@ class TestArticle(BaseEruditTestCase):
     def test_knows_if_it_has_a_movable_limitation(self):
         # Setup
         now_dt = dt.datetime.now()
+        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 3,
-            date_published=dt.date(now_dt.year - 3, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml - 1),
+            date_published=dt.date(now_dt.year - (ml - 1), 3, 20))
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 1,
-            date_published=dt.date(now_dt.year - 1, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml - 2),
+            date_published=dt.date(now_dt.year - (ml - 2), 3, 20))
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - 5,
-            date_published=dt.date(now_dt.year - 5, 3, 20))
+            journal=self.journal, year=now_dt.year - (ml + 1),
+            date_published=dt.date(now_dt.year - (ml + 1), 3, 20))
         article_1 = ArticleFactory.create(issue=issue_1)
         article_2 = ArticleFactory.create(issue=issue_2)
         article_3 = ArticleFactory.create(issue=issue_3)
