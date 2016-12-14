@@ -4,10 +4,7 @@
  */
 
 .alert {
-  padding: 0.5em;
-  margin-bottom: $line-height-computed;
-  border: 1px solid transparent;
-  border-radius: 0;
+  padding-bottom: 0.75em;
 
   // Headings for larger alerts
   h4 {
@@ -27,22 +24,38 @@
   }
 }
 
-// Alternate styles
-//
-// Generate contextual modifier classes for colorizing the alert.
+/**
+ * Beta site alerts
+ */
 
-// .alert-success {
-//   @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
-// }
-//
-// .alert-info {
-//   @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
-// }
-//
-// .alert-warning {
-//   @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);
-// }
-//
-// .alert-danger {
-//   @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
-// }
+.search_results .alert,
+.advanced_search .alert {
+  background-color: $light-grey;
+}
+
+.search_results,
+.advanced_search,
+#article_detail {
+
+  .alert {
+
+    p {
+      padding: 0.75em 1em;
+      font-size: 14px;
+      background: $darker-grey;
+      color: #FFF;
+      line-height: 1.5;
+    }
+
+    a {
+      color: #FFF;
+      text-decoration: underline;
+    }
+
+    .ion-alert-circled {
+      color: $coral-red;
+    }
+
+  }
+
+}

@@ -138,6 +138,18 @@
 </li>
 {% endblock breadcrumb %}
 
+{% block alert %}
+<div class="alert alert-warning">
+  <div class="container">
+    <p>
+      {% blocktrans %}
+      <span class="ion-alert-circled"></span> <strong>Attention</strong>&nbsp;: le site est actuellement en bêta, l'affichage des articles (HTML, PDF) sera amélioré au cours des prochaines semaines. <strong>Veuillez ne pas citer cet article.</strong>
+      {% endblocktrans %}
+    </p>
+  </div>
+</div>
+{% endblock alert %}
+
 {% block content %}
 <main
     class="container"
