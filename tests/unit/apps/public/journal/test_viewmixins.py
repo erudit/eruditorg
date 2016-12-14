@@ -19,6 +19,9 @@ from apps.public.journal.viewmixins import SingleJournalMixin
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
+from core.subscription.middleware import SubscriptionMiddleware
+
+middleware = SubscriptionMiddleware()
 
 
 class TestSingleArticleMixin(BaseEruditTestCase):
@@ -76,6 +79,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.subscription = None
 
         view = MyView()
         view.request = request
@@ -153,6 +157,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         request.user = self.user
         view = MyView()
         view.request = request
+        middleware.process_request(request)
 
         # Run # check
         self.assertTrue(view.has_access())
@@ -174,6 +179,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = self.user
+        request.subscription = None
         view = MyView()
         view.request = request
 
@@ -213,6 +219,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters
+        middleware.process_request(request)
 
         view = MyView()
         view.request = request
@@ -244,6 +251,8 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        # FIXME call middleware
+        request.subscription = None
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters

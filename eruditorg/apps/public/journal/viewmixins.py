@@ -9,7 +9,6 @@ from erudit.models import Article
 from erudit.models import Journal
 
 from core.metrics.metric import metric
-from core.subscription.shortcuts import get_valid_subscription_for_journal
 
 
 class SingleJournalMixin(object):
@@ -63,17 +62,16 @@ class ArticleAccessCheckMixin(object):
             3- the current IP address is inside on of the IP address ranges allowed
                to access to it
         """
-        self.subscription = None
         article = self.get_article()
 
         # 1- Is the article in open access? Is the article subject to a movable limitation?
         if article.open_access or not article.has_movable_limitation:
             return True
 
-        # 2- Gets the valid subscription associated with the user if any.
-        self.subscription = get_valid_subscription_for_journal(self.request, article.issue.journal)
+        if not self.request.subscription:
+            return False
 
-        return self.subscription is not None
+        return self.request.subscription.provides_access_to(article)
 
     @cached_property
     def article_access_granted(self):
@@ -107,7 +105,7 @@ class ArticleViewMetricCaptureMixin(object):
 
     def get_metric_fields(self):
         article = self.get_article()
-        subscription = self.subscription
+        subscription = self.request.subscription
         return {
             'issue_localidentifier': article.issue.localidentifier,
             'localidentifier': article.localidentifier,

@@ -453,6 +453,7 @@ class TestArticleDetailView(BaseEruditTestCase):
             'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
             'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
         request = self.factory.get(url)
+        request.subscription = None
         request.saved_citations = []
         # Run
         response = ArticleDetailView.as_view()(
@@ -488,6 +489,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
+        request.subscription = None
 
         # Run
         response = ArticleRawPdfView.as_view()(
@@ -531,6 +533,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
+        request.subscription = None
 
         # Run & check
         with self.assertRaises(PermissionDenied):
@@ -588,6 +591,7 @@ class TestArticleXmlView(BaseEruditTestCase):
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
+        request.subscription = None
 
         # Run
         response = ArticleXmlView.as_view()(
