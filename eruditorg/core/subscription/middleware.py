@@ -2,7 +2,6 @@
 
 from ipware.ip import get_ip
 
-from .models import InstitutionIPAddressRange
 from .models import JournalAccessSubscription
 
 
@@ -26,12 +25,8 @@ class SubscriptionMiddleware(object):
         ip = self._get_user_ip_address(request)
         if request.user.is_active and request.user.is_staff:
             ip = request.META.get('HTTP_CLIENT_IP', ip)
-        ip_range_subscription_ids = InstitutionIPAddressRange.objects \
-            .select_related('subscription', 'subscription__organisation', 'subscription__sponsor') \
-            .filter(ip_start__lte=ip, ip_end__gte=ip).values_list('subscription_id', flat=True)
-        subscription = JournalAccessSubscription.valid_objects \
-            .filter(id__in=ip_range_subscription_ids).first() if ip_range_subscription_ids \
-            else False
+
+        subscription = JournalAccessSubscription.valid_objects.get_for_ip_address(ip).first()
         if subscription:
             request.subscription = subscription
             request.subscription_type = 'institution'
@@ -46,4 +41,5 @@ class SubscriptionMiddleware(object):
             return
 
         # In any other the user is is in open access.
+        request.subscription = None
         request.subscription_type = 'open_access'
