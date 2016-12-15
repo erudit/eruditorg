@@ -3,6 +3,7 @@
 import datetime as dt
 
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
 
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
@@ -84,6 +85,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
 
     def test_inserts_the_thesis_count_into_the_context(self):
         # Setup
+        cache.clear()
         author = AuthorFactory.create()
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
@@ -107,6 +109,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
 
     def test_inserts_the_thesis_counts_grouped_by_publication_years(self):
         # Setup
+        cache.clear()
         author = AuthorFactory.create()
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
@@ -146,6 +149,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
 
     def test_inserts_the_thesis_counts_grouped_by_author_name(self):
         # Setup
+        cache.clear()
         author_1 = AuthorFactory.create(lastname='Aname')
         author_2 = AuthorFactory.create(lastname='Bname')
         author_3 = AuthorFactory.create(lastname='Cname')
@@ -222,6 +226,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
 
     def test_embeds_the_other_publication_years_aggregation_results_into_the_context(self):
         # Setup
+        cache.clear()
         author = AuthorFactory.create()
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
@@ -424,6 +429,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
 
     def test_embeds_the_other_author_first_letter_aggregation_results_into_the_context(self):
         # Setup
+        cache.clear()
         author_1 = AuthorFactory.create(lastname='Aname')
         author_2 = AuthorFactory.create(lastname='Bname')
         author_3 = AuthorFactory.create(lastname='Cname')
