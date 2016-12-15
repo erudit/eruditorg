@@ -10,13 +10,13 @@ Bienvenue sur la documentation de Érudit.org.
 La documentation se divise en deux sections: une référence de développement et un manuel technique pour les administrateurs.
 
 
-Pour démarrer, voir :doc:`tech/installation`
+Pour démarrer, voir :doc:`guide/installation`
 
 .. toctree::
    :maxdepth: 2
 
-   dev/index
-   tech/index
+   ref/index
+   guide/index
 
 Index et tableaux
 =================
