@@ -2,6 +2,7 @@
 
 from django.conf.urls import include
 from django.conf.urls import url
+from django.views.decorators.cache import cache_page
 from django.utils.translation import ugettext_lazy as _
 
 from . import urls_compat
@@ -9,7 +10,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^$', cache_page(15 * 60)(views.HomeView.as_view()), name='home'),
 
     url(_(r'^compte/'), include('apps.public.auth.urls', namespace='auth')),
     url(_(r'^compte/actions/'), include(

@@ -1,6 +1,6 @@
 {% extends "public/base.html" %}
 {% load i18n %}
-
+{% load cache %}
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
@@ -55,19 +55,19 @@
           </a>
         </p>
         {% endblock aside_authors_list %}
-
+        {% cache LONG_TTL "journal_detail" LANGUAGE_CODE journal.id %}
         <dl class="journal-meta--list">
 
-          {% if journal.get_directors %}
+          {% if journal.directors %}
           <dt>{% trans "Direction" %}</dt>
-          {% for issue_contributor in journal.get_directors %}
+          {% for issue_contributor in journal.directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
 
-          {% if issue.get_editors %}
+          {% if issue.editors %}
           <dt>{% trans "Rédaction" %}</dt>
-          {% for issue_contributor in issue.get_editors %}
+          {% for issue_contributor in issue.editors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
@@ -163,7 +163,7 @@
         <div class="journal-meta--list">
           <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
         </div>
-
+        {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
       </div>
     </aside>

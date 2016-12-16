@@ -1,6 +1,8 @@
 {% load i18n %}
+{% load cache %}
 
 {% if request.subscription.sponsor or request.subscription.organisation %}
+{% cache LONG_TTL "public_journal_base_organisation" LANGUAGE_CODE request.subscription.sponsor.pk %}
 {% with organisation=request.subscription.sponsor|default:request.subscription.organisation %}
   <div class="subscription-sponsor text-center">
     <br />
@@ -12,4 +14,5 @@
     {% endif %}
   </div>
 {% endwith %}
+{% endcache %}
 {% endif %}
