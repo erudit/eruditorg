@@ -15,6 +15,6 @@ pytest-spec>=0.2
 pytest-sugar>=0.7.0
 codecov>=1.6
 factory-boy>=2.4
-fake-factory>=0.5
+Faker>=0.7.5
 tox>=1.7
 flake8>=2.2.5
