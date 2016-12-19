@@ -59,3 +59,55 @@
   }
 
 }
+
+/**
+ * Fallback alert box
+ */
+
+.breadcrumb {
+  padding-bottom: 0;
+}
+
+#homepage,
+.thesis_collection_home,
+.advanced_search,
+.search_results {
+
+  .fallback {
+    background-color: $light-grey;
+  }
+
+}
+
+#homepage .fallback {
+  border-bottom: 1px solid $dark-grey;
+}
+
+.fallback {
+
+  p {
+    padding: 1.25em 0;
+    font-size: 14px;
+    background-color: $light-grey;
+    color: #000;
+    line-height: 1.5;
+    margin: 0.5em 0 0 0;
+    text-align: center;
+  }
+
+  a {
+    color: #FFF;
+    text-decoration: none;
+    background-color: $coral-red;
+    margin-left: 0.5em;
+    padding: 0.5em 0.75em;
+    @include fw-sans-medium;
+
+    &:hover, &:focus, &:active, &:active:focus {
+      text-decoration: none;
+      background-color: $darker-grey;
+    }
+
+  }
+
+}

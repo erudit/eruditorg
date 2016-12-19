@@ -12,14 +12,18 @@ from django.views.generic import TemplateView
 from erudit.models import Collection
 from erudit.models import Thesis
 
+from apps.public.thesis.legacy import format_thesis_collection_code
 from core.thesis.shortcuts import get_thesis_collections
 from core.thesis.shortcuts import get_thesis_counts_per_author_first_letter
 from core.thesis.shortcuts import get_thesis_counts_per_publication_year
 
+from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
-class ThesisHomeView(TemplateView):
+
+class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
     """ Displays the home page of thesis repositories. """
     template_name = 'public/thesis/home.html'
+    fallback_url = "/these/"
 
     def get_context_data(self, **kwargs):
         context = super(ThesisHomeView, self).get_context_data(**kwargs)
@@ -40,12 +44,19 @@ class ThesisHomeView(TemplateView):
         return context
 
 
-class ThesisCollectionHomeView(DetailView):
+class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
     """ Displays the home page of a collection repository. """
     context_object_name = 'collection'
     model = Collection
     pk_url_kwarg = 'collection_pk'
     template_name = 'public/thesis/collection_home.html'
+
+    fallback_url_format = '/these/liste.html'
+
+    def get_fallback_querystring_dict(self):
+        querystring_dict = super().get_fallback_querystring_dict()
+        querystring_dict['src'] = format_thesis_collection_code(self.get_object().code)
+        return querystring_dict
 
     def get_context_data(self, **kwargs):
         context = super(ThesisCollectionHomeView, self).get_context_data(**kwargs)
@@ -136,10 +147,22 @@ class BaseThesisListView(ListView):
         return self.get_collection()
 
 
-class ThesisPublicationYearListView(BaseThesisListView):
+class ThesisPublicationYearListView(FallbackObjectViewMixin, BaseThesisListView):
     """ Displays theses for a specific year. """
     template_name = 'public/thesis/collection_list_per_year.html'
     year_url_kwarg = 'publication_year'
+
+    fallback_url_format = '/these/liste.html'
+
+    def get_fallback_querystring_dict(self):
+        querystring_dict = super().get_fallback_querystring_dict()
+        querystring_dict['src'] = format_thesis_collection_code(self.get_collection().code)
+        return querystring_dict
+
+    def get_fallback_url_format_kwargs(self):
+        kwargs = {}
+        kwargs['code'] = format_thesis_collection_code(self.get_collection().code)
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(ThesisPublicationYearListView, self).get_context_data(**kwargs)
@@ -154,10 +177,17 @@ class ThesisPublicationYearListView(BaseThesisListView):
         return qs.filter(publication_year=year)
 
 
-class ThesisPublicationAuthorNameListView(BaseThesisListView):
+class ThesisPublicationAuthorNameListView(FallbackObjectViewMixin, BaseThesisListView):
     """ Displays theses for a specific year. """
     template_name = 'public/thesis/collection_list_per_author_name.html'
     letter_url_kwarg = 'author_letter'
+    fallback_url_format = '/these/liste.html'
+
+    def get_fallback_querystring_dict(self):
+        querystring_dict = super().get_fallback_querystring_dict()
+        querystring_dict['src'] = format_thesis_collection_code(self.get_collection().code)
+        querystring_dict['lettre'] = self.kwargs.get(self.letter_url_kwarg).upper()
+        return querystring_dict
 
     def get_context_data(self, **kwargs):
         context = super(ThesisPublicationAuthorNameListView, self).get_context_data(**kwargs)
