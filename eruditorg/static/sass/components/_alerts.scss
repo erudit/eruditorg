@@ -63,12 +63,7 @@
 /**
  * Fallback alert box
  */
-
-.breadcrumb {
-  padding-bottom: 0;
-}
-
-#homepage,
+.journal_list_per_disciplines,
 .thesis_collection_home,
 .advanced_search,
 .search_results {
@@ -79,12 +74,8 @@
 
 }
 
-#homepage .fallback {
-  border-bottom: 1px solid $dark-grey;
-}
-
 .fallback {
-  margin-bottom: 0.5em;
+  padding-bottom: 1em;
 
   p {
     padding: 1.25em 0;
