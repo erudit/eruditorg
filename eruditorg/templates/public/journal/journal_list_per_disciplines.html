@@ -108,7 +108,7 @@
         <li class="col-sm-6 col-md-3 journal-item">
           <a
           {% if journal.external_url %}
-          href="{% url 'public:journal:journal_external_redirect' journal.localidentifier %}"
+          href="{% url 'public:journal:journal_external_redirect' journal.code %}"
           target="_blank"
           {% else %}
           href="{% url 'public:journal:journal_detail' journal.code %}"
