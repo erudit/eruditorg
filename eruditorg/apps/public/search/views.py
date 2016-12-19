@@ -20,6 +20,7 @@ from erudit.models import EruditDocument
 
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
+from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin
 
 from . import filters, legacy
 from .forms import ResultsFilterForm
@@ -67,11 +68,12 @@ class EruditDocumentListAPIView(ListAPIView):
             docs_count, localidentifiers, queryset, self.request, view=self)
 
 
-class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
+class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
     form_class = SearchForm
     http_method_names = ['get', ]
     template_name = 'public/search/advanced_search.html'
+    fallback_url = '/recherche/'
 
     def get(self, request, *args, **kwargs):
         form = self.get_form()
@@ -105,13 +107,14 @@ class AdvancedSearchView(TemplateResponseMixin, FormMixin, View):
         return kwargs
 
 
-class SearchResultsView(TemplateResponseMixin, ContextMixin, View):
+class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, ContextMixin, View):
     """ Display the results associated with a search for Érudit documents. """
     filter_form_class = ResultsFilterForm
     http_method_names = ['get', ]
     options_form_class = ResultsOptionsForm
     search_form_class = SearchForm
     template_name = 'public/search/results.html'
+    fallback_url = '/recherche/'
 
     def get(self, request, *args, **kwargs):
         # This view works only for GET requests

@@ -155,7 +155,21 @@
     </div>
   </div>
 </nav>
+
+{% block classic_website_fallback %}
+<div class="fallback">
+  <div class="container">
+    <p>
+    {% blocktrans %}
+    Vous êtes sur la nouvelle plateforme d’Érudit! <a href="{{ fallback_url }}" target="_blank">Retour à l’ancien site</a>
+    {% endblocktrans %}
+  </p>
+</div>
+</div>
+{% endblock classic_website_fallback %}
+
 {% block alert %}{% endblock alert %}
+
 {% endblock header %}
 
 {% block body %}
@@ -166,6 +180,7 @@
     </div>
   </div>
 </div>
+
 {% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
 {% endblock body %}
 

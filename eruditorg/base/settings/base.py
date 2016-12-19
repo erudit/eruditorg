@@ -254,11 +254,18 @@ MEDIA_URL = '/media/'
 
 INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
 
+# External systems
+# -----------------------------------------------------------------------------
+
+# Classic website
+FALLBACK_BASE_URL = 'http://www.erudit.org'
+
 # Fedora settings
 FEDORA_ROOT = 'http://10.1.1.33:8080/fedora'
 FEDORA_USER = 'fcAdmin'
 FEDORA_PASSWORD = 'fcAdmin'
 
+# Solr settings
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
 SOLR_ADMIN = 'http://10.1.1.33:8080/solr/admin/cores/'
 

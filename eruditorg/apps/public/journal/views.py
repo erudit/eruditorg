@@ -40,6 +40,7 @@ from base.viewmixins import CacheMixin
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.metrics.metric import metric
 from core.subscription.shortcuts import get_valid_subscription_for_journal
+from apps.public.viewmixins import FallbackObjectViewMixin
 
 from .forms import JournalListFilterForm
 from .viewmixins import ArticleAccessCheckMixin
@@ -142,13 +143,32 @@ class JournalListView(ListView):
             return ['public/journal/journal_list_per_disciplines.html', ]
 
 
-class JournalDetailView(SingleJournalMixin, DetailView):
+class JournalDetailView(FallbackObjectViewMixin, SingleJournalMixin, DetailView):
     """
     Displays a journal.
     """
     context_object_name = 'journal'
     model = Journal
     template_name = 'public/journal/journal_detail.html'
+
+    def get_fallback_url_format(self):
+        journal = self.object
+        if journal.type and journal.type.code == 'S' or journal.code == 'liaison':
+            return "http://{code}.erudit.org"
+
+    def get_fallback_url_format_kwargs(self):
+        journal = self.object
+        if journal.type and journal.type.code == 'S':
+            code = None
+            if journal.next_journal:
+                next_journal = journal.next_journal
+                while next_journal:
+                    last_journal = next_journal
+                    next_journal = next_journal.next_journal
+                code = last_journal.code
+            else:
+                code = journal.code
+            return {'code': code}
 
     def get_context_data(self, **kwargs):
         context = super(JournalDetailView, self).get_context_data(**kwargs)
@@ -281,13 +301,35 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
     model = Journal
 
 
-class IssueDetailView(DetailView):
+class IssueDetailView(FallbackObjectViewMixin, DetailView):
     """
     Displays an Issue instance.
     """
     context_object_name = 'issue'
     model = Issue
     template_name = 'public/journal/issue_detail.html'
+
+    def get_fallback_url_format(self):
+        obj = self.get_object()
+        if obj.journal.type and obj.journal.type.code == 'S':
+            return "/revue/{code}/{year}/v{volume}/n{number}/index.html"
+        else:
+            return "/culture/{journal_li}/{issue_li}/index.html"
+
+    def get_fallback_url_format_kwargs(self):
+        issue = self.get_object()
+        if issue.journal.type and issue.journal.type.code == 'S':
+            return {
+                'code': issue.journal.code,
+                'year': issue.year,
+                'volume': issue.volume,
+                'number': issue.number,
+            }
+        else:
+            return {
+                'journal_li': issue.journal.localidentifier,
+                'issue_li': issue.localidentifier,
+            }
 
     def get_object(self, queryset=None):
         if 'pk' in self.kwargs:
@@ -420,11 +462,36 @@ class BaseArticleDetailView(
         return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
 
 
-class ArticleDetailView(BaseArticleDetailView):
+class ArticleDetailView(FallbackObjectViewMixin, BaseArticleDetailView):
     """
     Displays an Article page.
     """
+    fallback_url_format = "/revue/{code}/{year}/v{volume}/n{number}/{article_pid}.html"
     template_name = 'public/journal/article_detail.html'
+
+    def get_fallback_url_format(self):
+        obj = self.get_object()
+        if obj.issue.journal.type and obj.issue.journal.type.code == 'S':
+            return "/revue/{code}/{year}/v{volume}/n{number}/{article_li}.html"
+        else:
+            return "/culture/{journal_li}/{issue_li}/{article_li}.html"
+
+    def get_fallback_url_format_kwargs(self):
+        obj = self.get_object()
+        if obj.issue.journal.type and obj.issue.journal.type.code == 'S':
+            return {
+                'code': obj.issue.journal.code,
+                'year': obj.issue.year,
+                'volume': obj.issue.volume,
+                'number': obj.issue.number,
+                'article_li': obj.localidentifier,
+            }
+        else:
+            return {
+                'journal_li': obj.issue.journal.localidentifier,
+                'issue_li': obj.issue.localidentifier,
+                'article_li': obj.localidentifier
+            }
 
 
 class ArticleSummaryView(BaseArticleDetailView):
