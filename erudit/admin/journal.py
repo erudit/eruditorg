@@ -30,7 +30,6 @@ class JournalAdmin(admin.ModelAdmin):
                 ('collection', 'type',),
                 ('code', 'localidentifier',),
                 ('name', 'subtitle',),
-                ('bibliographic_reference',),
                 ('previous_journal', 'next_journal', ),
                 ('issn_print', 'issn_web', ),
                 ('website_url', ),
