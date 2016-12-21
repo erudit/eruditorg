@@ -686,7 +686,7 @@ class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(GoogleScholarSubscriberJournalsView, self).get_context_data(**kwargs)
-        context['journals'] = Journal.objects.filter(collection__code='erudit', type__code='S')
+        context['journals'] = Journal.objects.filter(collection__code='erudit')
         return context
 
 
