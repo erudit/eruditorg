@@ -63,6 +63,8 @@ class JournalFactory(factory.django.DjangoModelFactory):
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
 
+    name = factory.Sequence(lambda n: "JournalType-{}".format(n))
+
     class Meta:
         model = 'erudit.JournalType'
 

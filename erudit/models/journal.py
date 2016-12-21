@@ -42,7 +42,7 @@ from .core import Publisher
 class JournalType(models.Model):
     """ The type of a Journal instance. """
 
-    name = models.CharField(max_length=255, verbose_name=_('Nom'), blank=True, null=True)
+    name = models.CharField(max_length=255, verbose_name=_('Nom'))
 
     CODE_CULTURAL, CODE_SCIENTIFIC = 'C', 'S'
     CODE_CHOICES = (
