@@ -250,17 +250,17 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             else current_year - self.movable_limitation_year_offset}
         return self.issues.filter(**filter_kwargs)
 
-    @cached_property
+    @property
     def first_issue(self):
         """ Return the first published issue of this Journal. """
         return self.published_issues.order_by('date_published').first()
 
-    @cached_property
+    @property
     def last_issue(self):
         """ Return the last published Issue of this Journal. """
         return self.published_issues.order_by('-date_published').first()
 
-    @cached_property
+    @property
     def published_open_access_issues_year_coverage(self):
         """ Return the year coverage of the open access issues of this Journal. """
         open_access_issues = self.published_open_access_issues.order_by('-year')
@@ -619,7 +619,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
 
-    @cached_property
+    @property
     def title(self):
         return str(self.titles.filter(paral=False).first())
 
@@ -667,34 +667,34 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         _abstract = abstracts[0]['text'] if len(abstracts) else None
         return _abstract_lang or _abstract
 
-    @cached_property
+    @property
     def section_title_1(self):
         title = next(filter(lambda s: s.level == 1 and not s.paral, self._section_titles), None)
         return title.title if title else None
 
-    @cached_property
+    @property
     def section_title_1_paral(self):
         return [t.title for t in filter(lambda s: s.level == 1 and s.paral, self._section_titles)]
 
-    @cached_property
+    @property
     def section_title_2(self):
         title = next(filter(lambda s: s.level == 2 and not s.paral, self._section_titles), None)
         return title.title if title else None
 
-    @cached_property
+    @property
     def section_title_2_paral(self):
         return [t.title for t in filter(lambda s: s.level == 2 and s.paral, self._section_titles)]
 
-    @cached_property
+    @property
     def section_title_3(self):
         title = next(filter(lambda s: s.level == 3 and not s.paral, self._section_titles), None)
         return title.title if title else None
 
-    @cached_property
+    @property
     def section_title_3_paral(self):
         return [t.title for t in filter(lambda s: s.level == 3 and s.paral, self._section_titles)]
 
-    @cached_property
+    @property
     def _section_titles(self):
         return list(self.section_titles.all())
 
