@@ -247,6 +247,14 @@ class TestIssue(BaseEruditTestCase):
         self.assertTrue(issue_2.has_movable_limitation)
         self.assertFalse(issue_3.has_movable_limitation)
 
+    def test_issues_with_a_next_year_published_date_have_movable_limitation(self):
+        now_dt = dt.datetime.now()
+        issue = IssueFactory.create(
+            journal=self.journal,
+            year=now_dt.year + 1, date_published=dt.date(now_dt.year + 1, 1, 1)
+        )
+        assert issue.has_movable_limitation is True
+
     def test_knows_that_issues_with_open_access_has_no_movable_limitation(self):
         # Setup
         now_dt = dt.datetime.now()

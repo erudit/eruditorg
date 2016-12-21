@@ -451,7 +451,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             publication_year = self.year
             current_year = dt.datetime.now().year
             year_offset = self.journal.movable_limitation_year_offset
-            return True if publication_year <= current_year <= publication_year + year_offset \
+            return True if current_year <= publication_year + year_offset \
                 else False
         return False
 
