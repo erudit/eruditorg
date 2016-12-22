@@ -144,7 +144,7 @@
           {% for journal in objects_group.objects %}
           <li>
             {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
-            <a class="journal-row" href="{% if journal.external_url %}{% url 'public:journal:journal_external_redirect' journal.localidentifier %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
+            <a class="journal-row" href="{% if journal.redirect_to_external_url %}{% url 'public:journal:journal_external_redirect' journal.code %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
               <div class="row">
                 <div class="col-sm-6 journal-title">
                   <span class="journal-name">{{ journal.name }}</span>

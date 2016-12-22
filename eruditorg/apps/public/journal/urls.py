@@ -47,7 +47,7 @@ urlpatterns = [
 
     # Redirect URLs
     url(_(r'^redirection/'), include([
-        url(_(r'^revue/(?P<localidentifier>[\w-]+)/$'),
+        url(_(r'^revue/(?P<code>[\w-]+)/$'),
             views.JournalExternalURLRedirectView.as_view(), name='journal_external_redirect'),
         url(_(r'^numero/(?P<localidentifier>[\w-]+)/$'),
             views.IssueExternalURLRedirectView.as_view(), name='issue_external_redirect'),

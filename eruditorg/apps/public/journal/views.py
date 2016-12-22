@@ -700,7 +700,7 @@ class BaseExternalURLRedirectView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         obj = get_object_or_404(
             self.model.objects.filter(external_url__isnull=False),
-            localidentifier=kwargs['localidentifier'])
+            code=kwargs['code'])
         # Tracks the redirection
         metric(
             'erudit__journal__{0}_redirect'.format(self.model._meta.model_name.lower()),
