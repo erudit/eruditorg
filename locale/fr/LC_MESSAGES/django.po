@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 10:47-0500\n"
+"POT-Creation-Date: 2016-12-22 15:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,11 +121,11 @@ msgstr ""
 msgid "^export\\.bib$"
 msgstr ""
 
-#: apps/public/citations/views.py:26 apps/public/thesis/views.py:81
+#: apps/public/citations/views.py:26 apps/public/thesis/views.py:92
 msgid "Auteur (A–Z)"
 msgstr ""
 
-#: apps/public/citations/views.py:27 apps/public/thesis/views.py:82
+#: apps/public/citations/views.py:27 apps/public/thesis/views.py:93
 msgid "Auteur (Z–A)"
 msgstr ""
 
@@ -138,12 +138,12 @@ msgid "Année (décroissant)"
 msgstr ""
 
 #: apps/public/citations/views.py:30 apps/public/search/forms.py:285
-#: apps/public/thesis/views.py:85
+#: apps/public/thesis/views.py:96
 msgid "Titre (A–Z)"
 msgstr ""
 
 #: apps/public/citations/views.py:31 apps/public/search/forms.py:286
-#: apps/public/thesis/views.py:86
+#: apps/public/thesis/views.py:97
 msgid "Titre (Z–A)"
 msgstr ""
 
@@ -253,7 +253,7 @@ msgid "^redirection/"
 msgstr ""
 
 #: apps/public/journal/urls.py:50
-msgid "^revue/(?P<localidentifier>[\\w-]+)/$"
+msgid "^revue/(?P<code>[\\w-]+)/$"
 msgstr ""
 
 #: apps/public/journal/urls.py:52
@@ -389,7 +389,7 @@ msgid "Articles culturels"
 msgstr ""
 
 #: apps/public/search/forms.py:55 apps/userspace/reporting/forms.py:18
-#: templates/public/base.html:62 templates/public/base.html:225
+#: templates/public/base.html:62 templates/public/base.html:242
 #: templates/public/home.html:88
 #: templates/public/thesis/collection_home.html:24
 #: templates/public/thesis/collection_home.html:44
@@ -409,7 +409,7 @@ msgid "Actes"
 msgstr ""
 
 #: apps/public/search/forms.py:58 templates/public/base.html:68
-#: templates/public/base.html:227 templates/public/home.html:94
+#: templates/public/base.html:244 templates/public/home.html:94
 msgid "Rapports de recherche"
 msgstr ""
 
@@ -461,7 +461,7 @@ msgstr ""
 
 #: apps/public/search/forms.py:134 core/editor/models.py:222
 #: core/subscription/models.py:40 templates/public/base.html:59
-#: templates/public/base.html:224 templates/public/home.html:85
+#: templates/public/base.html:241 templates/public/home.html:85
 #: templates/public/journal/article_detail.html:89
 #: templates/public/journal/article_summary.html:89
 #: templates/public/journal/issue_detail.html:42
@@ -645,11 +645,11 @@ msgstr ""
 msgid "Premier auteur (Z–A)"
 msgstr ""
 
-#: apps/public/search/forms.py:289 apps/public/thesis/views.py:83
+#: apps/public/search/forms.py:289 apps/public/thesis/views.py:94
 msgid "Date de publication (croissant)"
 msgstr ""
 
-#: apps/public/search/forms.py:290 apps/public/thesis/views.py:84
+#: apps/public/search/forms.py:290 apps/public/thesis/views.py:95
 msgid "Date de publication (décroissant)"
 msgstr ""
 
@@ -693,11 +693,11 @@ msgstr ""
 msgid " {op} (Publié jusqu'à {end})"
 msgstr ""
 
-#: apps/public/search/views.py:224
+#: apps/public/search/views.py:227
 msgid "Querystring incorrecte"
 msgstr ""
 
-#: apps/public/search/views.py:243
+#: apps/public/search/views.py:246
 msgid "Cette recherche n'est pas sauvegardée"
 msgstr ""
 
@@ -1215,7 +1215,7 @@ msgstr ""
 msgid "Valider les numéros"
 msgstr ""
 
-#: core/authorization/defaults.py:43 templates/public/base.html:202
+#: core/authorization/defaults.py:43 templates/public/base.html:219
 #: templates/public/journal/journal_detail.html:110
 #: templates/userspace/journal/home.html:54
 #: templates/userspace/journal/partials/menu.html:50
@@ -2013,7 +2013,7 @@ msgstr ""
 msgid "À propos d'Érudit"
 msgstr ""
 
-#: templates/public/base.html:73 templates/public/base.html:201
+#: templates/public/base.html:73 templates/public/base.html:218
 #: templates/public/journal/journal_detail.html:75
 #: templates/userspace/journal/home.html:19
 #: templates/userspace/journal/information/journalinformation_update.html:5
@@ -2119,51 +2119,60 @@ msgstr ""
 msgid "Fil d'Ariane"
 msgstr ""
 
-#: templates/public/base.html:183
+#: templates/public/base.html:164
+#, python-format
+msgid ""
+"\n"
+"    Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="
+"\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
+"    "
+msgstr ""
+
+#: templates/public/base.html:200
 msgid "Abonnez-vous à notre infolettre&nbsp;:"
 msgstr ""
 
-#: templates/public/base.html:186
+#: templates/public/base.html:203
 msgid "nom@courriel.com"
 msgstr ""
 
-#: templates/public/base.html:187
+#: templates/public/base.html:204
 msgid "S'inscrire"
 msgstr ""
 
-#: templates/public/base.html:226
+#: templates/public/base.html:243
 msgid "Livres & actes"
 msgstr ""
 
-#: templates/public/base.html:233
+#: templates/public/base.html:250
 msgid "Aide"
 msgstr ""
 
-#: templates/public/base.html:234
+#: templates/public/base.html:251
 msgid "Plan du site"
 msgstr ""
 
-#: templates/public/base.html:235
+#: templates/public/base.html:252
 msgid "Nous contacter"
 msgstr ""
 
-#: templates/public/base.html:252
+#: templates/public/base.html:269
 msgid "Logo d'Érudit"
 msgstr ""
 
-#: templates/public/base.html:253 templates/public/home.html:57
+#: templates/public/base.html:270 templates/public/home.html:57
 msgid "Cultivez votre savoir."
 msgstr ""
 
-#: templates/public/base.html:260
+#: templates/public/base.html:277
 msgid "Consortium Érudit"
 msgstr ""
 
-#: templates/public/base.html:263
+#: templates/public/base.html:280
 msgid "Politique et licence d’utilisation"
 msgstr ""
 
-#: templates/public/base.html:268
+#: templates/public/base.html:285
 msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
@@ -2404,6 +2413,7 @@ msgid "Repérez des articles"
 msgstr ""
 
 #: templates/public/journal/article_detail.html:145
+#, python-format
 msgid ""
 "\n"
 "      <span class=\"ion-alert-circled\"></span> <strong>Attention</"
@@ -2411,7 +2421,7 @@ msgid ""
 "L’affichage des articles (HTML, PDF) sera amélioré au cours des prochaines "
 "semaines. <br/><strong>Veuillez ne pas citer cet article</strong>, car "
 "l’adresse URL de cette page est temporaire. Pour citer un article, veuillez "
-"vous référer à <a href=\"http://www.erudit.org/\" target=\"_blank\">erudit."
+"vous référer à <a href=\"%(fallback_url)s\" target=\"_blank\">www.erudit."
 "org</a>.\n"
 "      "
 msgstr ""
@@ -2937,9 +2947,7 @@ msgid ""
 "strong>&nbsp;: le site est actuellement en bêta. Nous travaillons à "
 "améliorer le moteur de recherche de la nouvelle plateforme. Il se peut donc "
 "que les résultats de votre recherche s’affichent mal ou ne soient pas "
-"optimaux. <br/><br/>Le cas échéant, nous vous invitons à effectuer votre "
-"recherche depuis <a href=\"http://www.erudit.org/recherche/\" target=\"_blank"
-"\">l’ancienne plateforme Érudit</a>.\n"
+"optimaux.\n"
 "      "
 msgstr ""
 
