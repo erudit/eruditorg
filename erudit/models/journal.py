@@ -441,7 +441,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         volume = 'v' + self.volume if self.volume else None
         number = 'n' + self.number if self.number else None
         elements = [str(self.year), volume, number]
-        return '-'.join([e for e in elements if e])
+        return '-'.join([e for e in elements if e]).replace(" ", "-")
 
     @property
     def has_movable_limitation(self):

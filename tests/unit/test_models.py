@@ -319,12 +319,15 @@ class TestIssue(BaseEruditTestCase):
             year=2015, volume='2-3', number='39', localidentifier='i4')
         issue_5 = IssueFactory.create(
             year=2015, volume=None, number=None, localidentifier='i5')
+        issue_6 = IssueFactory.create(
+            year=2015, volume='2 bis', number='39', localidentifier='i6')
         # Run & check
         self.assertEqual(issue_1.volume_slug, '2015-v4-n1')
         self.assertEqual(issue_2.volume_slug, '2015-v4')
         self.assertEqual(issue_3.volume_slug, '2015-n2')
         self.assertEqual(issue_4.volume_slug, '2015-v2-3-n39')
         self.assertEqual(issue_5.volume_slug, '2015')
+        self.assertEqual(issue_6.volume_slug, '2015-v2-bis-n39')
 
     def test_knows_its_directors(self):
         contributor = IssueContributorFactory(issue=self.issue, is_director=True)
