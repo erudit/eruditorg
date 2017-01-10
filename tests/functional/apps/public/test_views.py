@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
-
+import os
+import pickle
 import datetime as dt
 
+import unittest
 from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
+import feedparser
 
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test import BaseEruditTestCase
 
+FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 @override_settings(DEBUG=True)
 class TestHomeView(BaseEruditTestCase):
@@ -24,8 +28,12 @@ class TestHomeView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['latest_issues']), [issue_2, issue_1, ])
 
-    def test_embeds_the_latest_news_into_the_context(self):
+    @unittest.mock.patch.object(feedparser, 'parse')
+    def test_embeds_the_latest_news_into_the_context(self, mock_content):
         # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'news_rss_feed.pickle'), 'rb') as rss:
+            mock_content.return_value = pickle.load(rss)
+
         url = reverse('public:home')
         # Run
         response = self.client.get(url)
