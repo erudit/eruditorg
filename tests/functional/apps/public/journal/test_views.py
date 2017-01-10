@@ -671,3 +671,46 @@ class TestArticleMediaView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'image/png')
+
+
+class TestExternalURLRedirectViews(BaseEruditTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.client = Client()
+
+    def test_can_redirect_to_article_external_url(self):
+        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article = ArticleFactory.create(issue=issue, external_url='http://www.erudit.org')
+        response = self.client.get(
+            reverse(
+                'public:journal:article_external_redirect',
+                kwargs={'localidentifier': article.localidentifier}
+            )
+        )
+        assert response.status_code == 302
+
+    def test_can_redirect_to_issue_external_url(self):
+        issue = IssueFactory.create(
+            journal=self.journal,
+            date_published=dt.datetime.now(),
+            external_url="http://www.erudit.org"
+        )
+
+        response = self.client.get(
+            reverse(
+                'public:journal:issue_external_redirect',
+                kwargs={'localidentifier': issue.localidentifier}
+            )
+        )
+        assert response.status_code == 302
+
+    def test_can_redirect_to_journal_external_url(self):
+        journal = JournalFactory(code='journal1', external_url='http://www.erudit.org')
+        response = self.client.get(
+            reverse(
+                'public:journal:journal_external_redirect',
+                kwargs={'code': journal.code}
+            )
+        )
+        assert response.status_code == 302

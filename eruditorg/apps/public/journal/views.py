@@ -691,16 +691,32 @@ class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
 
 
 class BaseExternalURLRedirectView(RedirectView):
+    """ The base view to redirect for content that is hosted externally """
+
     model = None
+    """ Model type for the considered redirection """
+
     permanent = False
+    """ Whether the redirection is permanent or not """
+
+    object_identifier_field = None
+    """ The model field on which the lookup is performed """
 
     def get_collection(self, obj):
         raise NotImplementedError
 
     def get_redirect_url(self, *args, **kwargs):
+        """ Return the redirect url for the object """
+
+        filter_arguments = {
+            self.object_identifier_field: kwargs[self.object_identifier_field],
+        }
+
         obj = get_object_or_404(
             self.model.objects.filter(external_url__isnull=False),
-            code=kwargs['code'])
+            **filter_arguments
+        )
+
         # Tracks the redirection
         metric(
             'erudit__journal__{0}_redirect'.format(self.model._meta.model_name.lower()),
@@ -711,6 +727,7 @@ class BaseExternalURLRedirectView(RedirectView):
 
 class JournalExternalURLRedirectView(BaseExternalURLRedirectView):
     model = Journal
+    object_identifier_field = 'code'
 
     def get_collection(self, obj):
         return obj.collection
@@ -718,6 +735,7 @@ class JournalExternalURLRedirectView(BaseExternalURLRedirectView):
 
 class IssueExternalURLRedirectView(BaseExternalURLRedirectView):
     model = Issue
+    object_identifier_field = 'localidentifier'
 
     def get_collection(self, obj):
         return obj.journal.collection
@@ -725,6 +743,7 @@ class IssueExternalURLRedirectView(BaseExternalURLRedirectView):
 
 class ArticleExternalURLRedirectView(BaseExternalURLRedirectView):
     model = Article
+    object_identifier_field = 'localidentifier'
 
     def get_collection(self, obj):
         return obj.issue.journal.collection
