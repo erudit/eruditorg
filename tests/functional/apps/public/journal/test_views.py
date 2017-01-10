@@ -174,6 +174,15 @@ class TestJournalDetailView(BaseEruditTestCase):
         self.assertEqual(response_1.context['journal_info'], journal_info)
         self.assertTrue('journal_info' not in response_2.context)
 
+    @unittest.mock.patch("erudit.models.journal.Issue.has_coverpage", return_value=True)
+    @unittest.mock.patch("erudit.models.journal.Issue.fedora_object")
+    def test_can_display_when_issues_have_a_space_in_their_number(self, mock_cache, mock_issue):
+        issue = IssueFactory(number='2 bis')
+        url_1 = reverse('public:journal:journal_detail', kwargs={'code': issue.journal.code})
+        # Run
+        response_1 = self.client.get(url_1)
+        self.assertEqual(response_1.status_code, 200)
+
     def test_can_embed_the_publicated_issues_in_the_context(self):
         # Setup
         collection = CollectionFactory.create(localidentifier='erudit')
