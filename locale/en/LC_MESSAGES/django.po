@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 10:47-0500\n"
+"POT-Creation-Date: 2017-01-10 11:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jeffrey Freedman <jffryfrdmn@gmail.com>, 2016\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -123,11 +123,11 @@ msgstr "^export\\.ris$"
 msgid "^export\\.bib$"
 msgstr "^export\\.bib$"
 
-#: apps/public/citations/views.py:26 apps/public/thesis/views.py:81
+#: apps/public/citations/views.py:26 apps/public/thesis/views.py:92
 msgid "Auteur (A–Z)"
 msgstr "Author (A–Z)"
 
-#: apps/public/citations/views.py:27 apps/public/thesis/views.py:82
+#: apps/public/citations/views.py:27 apps/public/thesis/views.py:93
 msgid "Auteur (Z–A)"
 msgstr "Author (Z–A)"
 
@@ -140,12 +140,12 @@ msgid "Année (décroissant)"
 msgstr "Year (descending)"
 
 #: apps/public/citations/views.py:30 apps/public/search/forms.py:285
-#: apps/public/thesis/views.py:85
+#: apps/public/thesis/views.py:96
 msgid "Titre (A–Z)"
 msgstr "Title (A–Z)"
 
 #: apps/public/citations/views.py:31 apps/public/search/forms.py:286
-#: apps/public/thesis/views.py:86
+#: apps/public/thesis/views.py:97
 msgid "Titre (Z–A)"
 msgstr "Title (Z–A)"
 
@@ -255,8 +255,8 @@ msgid "^redirection/"
 msgstr "^redirect/"
 
 #: apps/public/journal/urls.py:50
-msgid "^revue/(?P<localidentifier>[\\w-]+)/$"
-msgstr "^journal/(?P<localidentifier>[\\w-]+)/$"
+msgid "^revue/(?P<code>[\\w-]+)/$"
+msgstr ""
 
 #: apps/public/journal/urls.py:52
 msgid "^numero/(?P<localidentifier>[\\w-]+)/$"
@@ -391,7 +391,7 @@ msgid "Articles culturels"
 msgstr "Cultural articles"
 
 #: apps/public/search/forms.py:55 apps/userspace/reporting/forms.py:18
-#: templates/public/base.html:62 templates/public/base.html:225
+#: templates/public/base.html:62 templates/public/base.html:242
 #: templates/public/home.html:88
 #: templates/public/thesis/collection_home.html:24
 #: templates/public/thesis/collection_home.html:44
@@ -411,7 +411,7 @@ msgid "Actes"
 msgstr "Proceedings"
 
 #: apps/public/search/forms.py:58 templates/public/base.html:68
-#: templates/public/base.html:227 templates/public/home.html:94
+#: templates/public/base.html:244 templates/public/home.html:94
 msgid "Rapports de recherche"
 msgstr "Research reports"
 
@@ -463,7 +463,7 @@ msgstr "Disciplines"
 
 #: apps/public/search/forms.py:134 core/editor/models.py:222
 #: core/subscription/models.py:40 templates/public/base.html:59
-#: templates/public/base.html:224 templates/public/home.html:85
+#: templates/public/base.html:241 templates/public/home.html:85
 #: templates/public/journal/article_detail.html:89
 #: templates/public/journal/article_summary.html:89
 #: templates/public/journal/issue_detail.html:42
@@ -650,11 +650,11 @@ msgstr "First Author (A–Z)"
 msgid "Premier auteur (Z–A)"
 msgstr "First Author (Z–A)"
 
-#: apps/public/search/forms.py:289 apps/public/thesis/views.py:83
+#: apps/public/search/forms.py:289 apps/public/thesis/views.py:94
 msgid "Date de publication (croissant)"
 msgstr "Date of publication (ascending)"
 
-#: apps/public/search/forms.py:290 apps/public/thesis/views.py:84
+#: apps/public/search/forms.py:290 apps/public/thesis/views.py:95
 msgid "Date de publication (décroissant)"
 msgstr "Date of publication (descending)"
 
@@ -698,11 +698,11 @@ msgstr " {op} (Published since{start})"
 msgid " {op} (Publié jusqu'à {end})"
 msgstr " {op} (Published until {end})"
 
-#: apps/public/search/views.py:224
+#: apps/public/search/views.py:227
 msgid "Querystring incorrecte"
 msgstr "Incorrect query string."
 
-#: apps/public/search/views.py:243
+#: apps/public/search/views.py:246
 msgid "Cette recherche n'est pas sauvegardée"
 msgstr "The search has not been saved."
 
@@ -1228,7 +1228,7 @@ msgstr "Submit Files"
 msgid "Valider les numéros"
 msgstr "Validate Issues"
 
-#: core/authorization/defaults.py:43 templates/public/base.html:202
+#: core/authorization/defaults.py:43 templates/public/base.html:219
 #: templates/public/journal/journal_detail.html:110
 #: templates/userspace/journal/home.html:54
 #: templates/userspace/journal/partials/menu.html:50
@@ -2035,7 +2035,7 @@ msgstr "Research Report Index"
 msgid "À propos d'Érudit"
 msgstr "About Érudit"
 
-#: templates/public/base.html:73 templates/public/base.html:201
+#: templates/public/base.html:73 templates/public/base.html:218
 #: templates/public/journal/journal_detail.html:75
 #: templates/userspace/journal/home.html:19
 #: templates/userspace/journal/information/journalinformation_update.html:5
@@ -2141,51 +2141,61 @@ msgstr "Search"
 msgid "Fil d'Ariane"
 msgstr "Breadcrumb"
 
-#: templates/public/base.html:183
+#: templates/public/base.html:164
+#, python-format
+msgid ""
+"\n"
+"    Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href=\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
+"    "
+msgstr ""
+"\n"
+"You are on Érudit's new platform. Enjoy your visit! <a href=\"%(fallback_url)s\" target=\"_blank\">Back to the classic view</a>"
+
+#: templates/public/base.html:200
 msgid "Abonnez-vous à notre infolettre&nbsp;:"
 msgstr "Subscribe to our newsletter"
 
-#: templates/public/base.html:186
+#: templates/public/base.html:203
 msgid "nom@courriel.com"
 msgstr "name@email.com"
 
-#: templates/public/base.html:187
+#: templates/public/base.html:204
 msgid "S'inscrire"
 msgstr "Sign Up"
 
-#: templates/public/base.html:226
+#: templates/public/base.html:243
 msgid "Livres & actes"
 msgstr "Books and Proceedings"
 
-#: templates/public/base.html:233
+#: templates/public/base.html:250
 msgid "Aide"
 msgstr "Help"
 
-#: templates/public/base.html:234
+#: templates/public/base.html:251
 msgid "Plan du site"
 msgstr "Site Map"
 
-#: templates/public/base.html:235
+#: templates/public/base.html:252
 msgid "Nous contacter"
 msgstr "Contact Us"
 
-#: templates/public/base.html:252
+#: templates/public/base.html:269
 msgid "Logo d'Érudit"
 msgstr "Érudit Logo"
 
-#: templates/public/base.html:253 templates/public/home.html:57
+#: templates/public/base.html:270 templates/public/home.html:57
 msgid "Cultivez votre savoir."
 msgstr "Cultivate your knowledge."
 
-#: templates/public/base.html:260
+#: templates/public/base.html:277
 msgid "Consortium Érudit"
 msgstr "Érudit Consortium"
 
-#: templates/public/base.html:263
+#: templates/public/base.html:280
 msgid "Politique et licence d’utilisation"
 msgstr "Terms and Conditions"
 
-#: templates/public/base.html:268
+#: templates/public/base.html:285
 msgid "Suivez-nous&nbsp;:"
 msgstr "Follow Us"
 
@@ -2429,13 +2439,14 @@ msgid "Repérez des articles"
 msgstr "Find articles"
 
 #: templates/public/journal/article_detail.html:145
+#, python-format
 msgid ""
 "\n"
-"      <span class=\"ion-alert-circled\"></span> <strong>Attention</strong>&nbsp;: le site que vous visitez est actuellement en version bêta. L’affichage des articles (HTML, PDF) sera amélioré au cours des prochaines semaines. <br/><strong>Veuillez ne pas citer cet article</strong>, car l’adresse URL de cette page est temporaire. Pour citer un article, veuillez vous référer à <a href=\"http://www.erudit.org/\" target=\"_blank\">erudit.org</a>.\n"
+"      <span class=\"ion-alert-circled\"></span> <strong>Attention</strong>&nbsp;: le site que vous visitez est actuellement en version bêta. L’affichage des articles (HTML, PDF) sera amélioré au cours des prochaines semaines. <br/><strong>Veuillez ne pas citer cet article</strong>, car l’adresse URL de cette page est temporaire. Pour citer un article, veuillez vous référer à <a href=\"%(fallback_url)s\" target=\"_blank\">www.erudit.org</a>.\n"
 "      "
 msgstr ""
 "\n"
-"<span class=\"ion-alert-circled\"></span> <strong>Warning!</strong> This website is currently in beta. We are working on improving the reading experience of our HTML and PDF articles over the coming weeks. <br/><strong>Do not cite or link to this page</strong> – this URL address is temporary. To cite an article, please use <a href=\"http://www.erudit.org/\" target=\"_blank\">erudit.org</a> or the DOI provided on this page."
+"<span class=\"ion-alert-circled\"></span> <strong>Warning!</strong> This website is currently in beta. We are working on improving the reading experience of our articles (HTML, PDF) over the coming weeks. <br/><strong>Do not cite or link to this page</strong> – this URL address is temporary. To cite an article, please use <a href=\"%(fallback_url)s\" target=\"_blank\">www.erudit.org</a>."
 
 #: templates/public/journal/article_detail.html:198
 #: templates/public/journal/article_summary.html:147
@@ -2979,11 +2990,11 @@ msgstr "Search again"
 #: templates/public/search/base.html:13
 msgid ""
 "\n"
-"      <span class=\"ion-alert-circled\"></span> <strong>Attention</strong>&nbsp;: le site est actuellement en bêta. Nous travaillons à améliorer le moteur de recherche de la nouvelle plateforme. Il se peut donc que les résultats de votre recherche s’affichent mal ou ne soient pas optimaux. <br/><br/>Le cas échéant, nous vous invitons à effectuer votre recherche depuis <a href=\"http://www.erudit.org/recherche/\" target=\"_blank\">l’ancienne plateforme Érudit</a>.\n"
+"      <span class=\"ion-alert-circled\"></span> <strong>Attention</strong>&nbsp;: le site est actuellement en bêta. Nous travaillons à améliorer le moteur de recherche de la nouvelle plateforme. Il se peut donc que les résultats de votre recherche s’affichent mal ou ne soient pas optimaux.\n"
 "      "
 msgstr ""
 "\n"
-"<span class=\"ion-alert-circled\"></span> <strong>Warning!</strong> This website is currently in beta. We are working on optimizing the search engine for our new platform. Your search results may not be displayed correctly or may output suboptimal results. <br/><br/> In the meantime, you may still use the <a href=\"http://www.erudit.org/recherche/?lang=en\" target=\"_blank\">old search engine</a>."
+"<span class=\"ion-alert-circled\"></span> <strong>Warning!</strong> This website is currently in beta. We are working on optimizing the search engine for our new platform. Your search results may not be displayed correctly or may output suboptimal results."
 
 #: templates/public/search/partials/advanced_search_q.html:7
 msgid "Opérateur booléen"
