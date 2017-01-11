@@ -494,10 +494,15 @@ class TestAuthor(BaseEruditTestCase):
         author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
         author_2 = AuthorFactory.create(lastname=None, firstname='Def')
         author_3 = AuthorFactory.create(lastname=None, firstname='Def', othername='Ghi')
+        author_4 = AuthorFactory.create(lastname=':', firstname='Def')
+        author_5 = AuthorFactory.create(lastname=':', firstname=None)
+
         # Run & check
-        self.assertEqual(author_1.letter_prefix, 'A')
-        self.assertEqual(author_2.letter_prefix, 'D')
-        self.assertEqual(author_3.letter_prefix, 'G')
+        assert author_1.letter_prefix == 'A'
+        assert author_2.letter_prefix == 'D'
+        assert author_3.letter_prefix == 'G'
+        assert author_4.letter_prefix == 'D'
+        assert author_5.letter_prefix is None
 
     def test_can_return_its_name(self):
         author_1 = AuthorFactory()
