@@ -1,0 +1,4 @@
+Sitemap: http://{{ request.META.HTTP_HOST }}{{ site }}{% url "sitemap" %}
+
+User-agent: *
+Disallow: /
