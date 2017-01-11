@@ -641,11 +641,11 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def title(self):
-        return str(self.titles.filter(paral=False).first())
+        return self.titles.filter(paral=False).first()
 
     @cached_property
     def subtitle(self):
-        return str(self.subtitles.filter(paral=False).first())
+        return self.subtitles.filter(paral=False).first()
 
     def __str__(self):
         if self.title:
