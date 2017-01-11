@@ -504,6 +504,15 @@ class TestAuthor(BaseEruditTestCase):
         assert author_4.letter_prefix == 'D'
         assert author_5.letter_prefix is None
 
+    def test_can_return_abbreviated_volume_title(self):
+        issue1 = IssueFactory(volume=1, number=2, publication_period='may')
+        issue2 = IssueFactory(volume=1, number=None, publication_period='may')
+        issue3 = IssueFactory(number=2, publication_period='may')
+
+        assert issue1.abbreviated_volume_title == 'Vol. 1, n<sup>o</sup> 2, may'
+        assert issue2.abbreviated_volume_title == 'Vol. 1, may'
+        assert issue3.abbreviated_volume_title == 'N<sup>o</sup> 2, may'
+
     def test_can_return_its_name(self):
         author_1 = AuthorFactory()
 

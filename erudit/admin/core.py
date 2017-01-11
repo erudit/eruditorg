@@ -29,9 +29,13 @@ class DisciplineAdmin(TranslationAdmin):
     pass
 
 
+class OrganisationAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+
+
 admin.site.register(Affiliation)
 admin.site.register(Author)
-admin.site.register(Organisation)
+admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(JournalType)
 admin.site.register(Publisher)
 admin.site.register(Collection, CollectionAdmin)

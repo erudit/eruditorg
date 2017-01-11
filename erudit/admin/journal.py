@@ -11,6 +11,8 @@ from ..models import IssueTheme
 from ..models import IssueContributor
 from ..models import Journal
 from ..models import JournalInformation
+from ..models import ArticleTitle
+from ..models import ArticleSubtitle
 
 
 class JournalDisciplineInline(admin.TabularInline):
@@ -115,15 +117,33 @@ class ArticleSectionTitleInline(admin.TabularInline):
     model = ArticleSectionTitle
 
 
+class ArticleTitleInline(admin.TabularInline):
+    extra = 0
+    model = ArticleTitle
+
+
+class ArticleSubtitleInline(admin.TabularInline):
+    extra = 0
+    model = ArticleSubtitle
+
+
+class ArticleAuthorInline(admin.TabularInline):
+    extra = 0
+    model = Article.authors.through
+
+
 class ArticleAdmin(admin.ModelAdmin):
 
     def issue__localidentifier(self, obj):
         return obj.issue.localidentifier
 
-    inlines = (ArticleAbstractInline, ArticleSectionTitleInline, )
+    inlines = (
+        ArticleAbstractInline, ArticleSectionTitleInline, ArticleTitleInline,
+        ArticleSubtitleInline, ArticleAuthorInline
+    )
     list_display = ('localidentifier', 'issue__localidentifier', 'title', )
     raw_id_fields = ('issue', 'publisher', 'authors', )
-    search_fields = ('id', 'localidentifier', )
+    search_fields = ('id', 'localidentifier', 'titles__title', )
 
     list_filter = ('type', 'issue__journal__collection', )
 

@@ -99,7 +99,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     :py:class:`FedoraMixin <erudit.fedora.modelmixins.FedoraMixin>` model mixin. """
 
     publishers = models.ManyToManyField(
-        Publisher, related_name='journals', verbose_name=_('Éditeurs'))
+        Publisher, related_name='journals', blank=True, verbose_name=_('Éditeurs'))
     """ The publishers of the journal """
 
     paper = models.NullBooleanField(
@@ -141,7 +141,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     a journal that still publish issues """
 
     # The field defines the users who can interact this object (coupled with permissions)
-    members = models.ManyToManyField(User, related_name='journals', verbose_name=_('Membres'))
+    members = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='journals',
+        verbose_name=_('Membres')
+    )
     """ Users that are part of this journal's organization """
 
     upcoming = models.BooleanField(default=False, verbose_name=_('Prochainement disponible'))
@@ -409,6 +414,24 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return self.number if self.number else _('hors série')
 
     @property
+    def abbreviated_volume_title(self):
+        """ Returns an abbreviated volume title """
+        publication_period = self.publication_period if self.publication_period else str(self.year)
+        number = self.number
+        if self.volume and number:
+            return _(
+                'Vol. {volume}, n<sup>o</sup> {number}, {publication_date}'.format(
+                    volume=self.volume, number=number, publication_date=publication_period.lower()))
+        elif self.volume and not number:
+            return _(
+                'Vol. {volume}, {publication_date}'.format(
+                    volume=self.volume, publication_date=publication_period.lower()))
+
+        return _(
+            'N<sup>o</sup> {number}, {publication_date}'.format(
+                number=number, publication_date=publication_period.lower()))
+
+    @property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number. """
         publication_period = self.publication_period if self.publication_period else self.year
@@ -572,9 +595,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     html_title = models.CharField(max_length=800, null=True, blank=True)
     """ The title of the article (HTML) """
 
-    subtitle = models.CharField(max_length=600, null=True, blank=True)
-    """ The subtitle of the article """
-
     language = models.CharField(max_length=10, verbose_name=_('Code langue'))
     """ The language code of the article """
 
@@ -622,6 +642,10 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     @property
     def title(self):
         return str(self.titles.filter(paral=False).first())
+
+    @cached_property
+    def subtitle(self):
+        return str(self.subtitles.filter(paral=False).first())
 
     def __str__(self):
         if self.title:
@@ -714,13 +738,38 @@ class ArticleAbstract(models.Model):
         return '{} / {}'.format(str(self.article), self.language)
 
 
-class ArticleTitle(models.Model):
+class ArticleTitleMixin(models.Model):
     """ Represents the title of an article """
 
-    article = models.ForeignKey(Article, related_name='titles', verbose_name=_('Article'))
     title = models.CharField(max_length=600, verbose_name=_('Titre'), blank=True, null=True)
     language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
+
+    class Meta:
+        abstract = True
+
+
+class ArticleTitle(ArticleTitleMixin):
+    """ The title of an article """
+    article = models.ForeignKey(Article, related_name='titles', verbose_name=_('Article'))
+
+    class Meta:
+        verbose_name = _("Titre d'article")
+        verbose_name_plural = _("Titres d'articles")
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        return _('Aucun titre')
+
+
+class ArticleSubtitle(ArticleTitleMixin):
+    """ The subtitle of an article """
+    article = models.ForeignKey(Article, related_name='subtitles', verbose_name=_('Article'))
+
+    class Meta:
+        verbose_name = _("Sous-titre d'article")
+        verbose_name_plural = _("Sous-titres d'articles")
 
     def __str__(self):
         if self.title:
