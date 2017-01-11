@@ -32,7 +32,7 @@ setup(
     long_description=read_relative_file('README.rst'),
     zip_safe=False,
     install_requires=[
-        'django>=1.8,<1.10',
+        'django>=1.8',
         'django-modeltranslation>=0.11',
         'django-polymorphic>=0.9',
         'django-taggit>=0.20',
