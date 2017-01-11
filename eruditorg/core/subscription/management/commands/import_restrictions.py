@@ -182,7 +182,7 @@ class Command(BaseCommand):
             InstitutionIPAddressRange.objects.get_or_create(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))
 
     def _check_restriction_subscription(self, restriction_subscription):
         # Fetches the subscriber

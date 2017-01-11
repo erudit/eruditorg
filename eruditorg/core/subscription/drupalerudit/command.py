@@ -100,4 +100,4 @@ class Command(BaseCommand):
                 # Add the user to the members of the considered Journal
                 journal.members.add(user)
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))
