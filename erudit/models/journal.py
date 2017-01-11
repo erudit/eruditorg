@@ -747,6 +747,11 @@ class ArticleTitleMixin(models.Model):
     language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
 
+    def __str__(self):
+        if self.title:
+            return self.title
+        return _('Aucun titre')
+
     class Meta:
         abstract = True
 
@@ -759,11 +764,6 @@ class ArticleTitle(ArticleTitleMixin):
         verbose_name = _("Titre d'article")
         verbose_name_plural = _("Titres d'articles")
 
-    def __str__(self):
-        if self.title:
-            return self.title
-        return _('Aucun titre')
-
 
 class ArticleSubtitle(ArticleTitleMixin):
     """ The subtitle of an article """
@@ -773,10 +773,6 @@ class ArticleSubtitle(ArticleTitleMixin):
         verbose_name = _("Sous-titre d'article")
         verbose_name_plural = _("Sous-titres d'articles")
 
-    def __str__(self):
-        if self.title:
-            return self.title
-        return _('Aucun titre')
 
 
 class ArticleSectionTitle(models.Model):
