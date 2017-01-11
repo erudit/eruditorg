@@ -747,6 +747,16 @@ class ArticleTitleMixin(models.Model):
     language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
 
+    def __lt__(self, other):
+        if isinstance(other, ArticleTitleMixin):
+            return self.title < other.title
+        elif isinstance(other, str):
+            return self.title < other
+        raise NotImplemented
+
+    def __gt__(self, other):
+        return not self < other
+
     def __str__(self):
         if self.title:
             return self.title
@@ -772,7 +782,6 @@ class ArticleSubtitle(ArticleTitleMixin):
     class Meta:
         verbose_name = _("Sous-titre d'article")
         verbose_name_plural = _("Sous-titres d'articles")
-
 
 
 class ArticleSectionTitle(models.Model):
