@@ -238,6 +238,21 @@ class TestJournalDetailView(BaseEruditTestCase):
 
 @override_settings(DEBUG=True)
 class TestJournalAuthorsListView(BaseEruditTestCase):
+
+    def test_supports_authors_with_only_special_characters_in_their_name(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(issue=issue_1)
+        author_1 = AuthorFactory.create(lastname=':')
+        article_1.authors.add(author_1)
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url)
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+
     def test_provides_only_authors_for_the_first_available_letter_by_default(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
