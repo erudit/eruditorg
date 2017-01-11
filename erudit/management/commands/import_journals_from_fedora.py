@@ -529,7 +529,7 @@ class Command(BaseCommand):
             else:
                 article_count += 1
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))
 
         return article_count
 
@@ -789,7 +789,7 @@ class Command(BaseCommand):
 
             remaining_pids = len(_journal_pids) and session_token is not None
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))
         if not len(journal_pids):
             self.stdout.write(self.style.WARNING('  No journal PIDs found'))
         else:

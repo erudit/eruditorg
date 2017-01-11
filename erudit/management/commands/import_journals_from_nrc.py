@@ -57,4 +57,4 @@ class Command(BaseCommand):
 
         journal.save()
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))

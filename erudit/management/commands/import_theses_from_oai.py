@@ -210,4 +210,4 @@ class Command(BaseCommand):
                 tag = kword
             thesis.keywords.add(tag)
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))

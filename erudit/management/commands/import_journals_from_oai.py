@@ -260,7 +260,7 @@ class Command(BaseCommand):
             else:
                 article_count += 1
 
-        self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+        self.stdout.write(self.style.SUCCESS('  [OK]'))
 
         return article_count
 
