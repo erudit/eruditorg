@@ -261,6 +261,13 @@
             {% blocktrans trimmed %}
             L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
             {% endblocktrans %}
+            {% if not article.erudit_object.abstracts and article.erudit_object.pdf %}
+            {% trans "Seule la première page du PDF sera affichée." %}
+            {% elif article.erudit_object.abstracts %}
+            {% trans "Seul le résumé sera affiché." %}
+            {% else %}
+            {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
+            {% endif %}
           </p>
         </div>
         {% endif %}
@@ -274,19 +281,21 @@
         </xsl:if>
 
         {% if article_access_granted and not only_summary %}
-        {% if article.erudit_object.processing == 'complet' %}
-        <!-- body -->
-        <section id="corps" class="article-section corps" role="main">
-          <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
-          <xsl:apply-templates select="//corps"/>
-        </section>
-        {% elif article.localidentifier %}
-        <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
-        {% endif %}
-        {% elif not article.erudit_object.abstracts %}
+          {% if article.erudit_object.processing == 'complet' %}
+          <!-- body -->
+          <section id="corps" class="article-section corps" role="main">
+            <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
+            <xsl:apply-templates select="//corps"/>
+          </section>
+          {% elif article.localidentifier %}
+          <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
+          {% endif %}
+        {% elif not article.erudit_object.abstracts and article.erudit_object.pdf%}
         <p>
-          {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
+          <object data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
         </p>
+        {% else %}
+          {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
         {% endif %}
 
 
@@ -757,7 +766,6 @@
       </xsl:choose>
     </xsl:if>
   </xsl:template>
-
   <!--*** BODY ***-->
   <xsl:template match="corps">
     <xsl:apply-templates/>
