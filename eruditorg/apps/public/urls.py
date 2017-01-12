@@ -10,7 +10,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', cache_page(15 * 60)(views.HomeView.as_view()), name='home'),
+    url(r'^$', views.HomeView.as_view(), name='home'),
 
     url(_(r'^compte/'), include('apps.public.auth.urls', namespace='auth')),
     url(_(r'^compte/actions/'), include(
