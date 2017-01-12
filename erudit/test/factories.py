@@ -83,6 +83,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
     localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
     date_published = dt.datetime.now().date()
     year = dt.datetime.now().year
+    is_published = True
 
     class Meta:
         model = 'erudit.issue'

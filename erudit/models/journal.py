@@ -244,7 +244,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def published_issues(self):
         """ Return the published issues of this Journal. """
-        return self.issues.filter(year__lte=dt.datetime.now().year)
+        return self.issues.filter(is_published=True)
 
     @property
     def published_open_access_issues(self):
@@ -339,6 +339,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         null=True, blank=True,
         verbose_name=_('URL Externe'), help_text=_("URL du site où les numéros sont hébergés"))
     """ External URL of the issue """
+
+    is_published = models.BooleanField(default=False, verbose_name=_('Est publié'))
+    """ Defines if an issue is published """
 
     copyrights = models.ManyToManyField(
         Copyright, related_name=_('issues'), verbose_name=_("Droits d'auteurs"))

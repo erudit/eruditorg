@@ -42,7 +42,12 @@ class TestJournal(BaseEruditTestCase):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, year=2010)
         issue_2 = IssueFactory.create(journal=self.journal, year=2009)
-        IssueFactory.create(journal=self.journal, year=dt.datetime.now().year + 2)
+
+        # Create an unpublished issue
+        IssueFactory.create(
+            journal=self.journal, is_published=False,
+            year=dt.datetime.now().year + 2
+        )
         # Run & check
         self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
 
@@ -66,7 +71,7 @@ class TestJournal(BaseEruditTestCase):
         issue_2 = IssueFactory.create(
             journal=self.journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
-            journal=self.journal, year=dt.datetime.now().year + 2,
+            journal=self.journal, year=dt.datetime.now().year + 2, is_published=False,
             date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(self.journal.last_issue, issue_2)
