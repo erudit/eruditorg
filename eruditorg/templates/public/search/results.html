@@ -164,12 +164,20 @@
                   {% if document.real_object.authors or document.real_object.author %}
                   <p class="authors">
                   {% if document.real_object.authors %}
-                    {% for author in document.real_object.authors %}
-                    <span class="author">{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>{% if not forloop.last %}; {% endif %}
+                    {% with document.real_object.authors as authors %}
+                    {% for author in authors %}
+                      {% if forloop.revcounter == 1 and authors|length > 1 %}
+                        {% trans "et" %}
+                      {% endif %}
+                      <span class="author">
+                      {% if author.firstname and author.lastname %}
+                        {{ author.lastname }}, {{ author.firstname }}
+                      {% elif author.othername %}
+                        {{ author.othername }}
+                      {% endif %}
+                      </span>
+                      {% if forloop.revcounter > 2 %}; {% endif %}
                     {% endfor %}
-                  {% elif document.real_object.author %}
-                    {% with author=document.real_object.author %}
-                    <span class="author">{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}</span>
                     {% endwith %}
                   {% endif %}
                   </p>
@@ -195,11 +203,16 @@
                       {% endif %}
                       {% if document.real_object.paral_titles %}
                         {% for paral_title in document.real_object.paral_titles %}
-                            <span><br>{{ paral_title }}</span>
+                            <br><span>{{ paral_title }}</span>
+                        {% endfor %}
+                      {% endif %}
+                      {% if document.real_object.paral_subtitles %}
+                        {% for paral_title in document.real_object.paral_subtitles %}
+                            <br><span>{{ paral_title }}</span>
                         {% endfor %}
                       {% endif %}
                       {% if document.real_object.bibliographic_reference %}
-                      <span><br><em>{{ document.real_object.bibliographic_reference }}</em></span>
+                      <br><span>{{ document.real_object.bibliographic_reference }}</span>
                       {% endif %}
                     </a>
                   </h3>
@@ -231,13 +244,13 @@
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
-                    {{ document.real_object.issue_publication_date }}
+                    {% if document.document_type == 'article' %}<a href="{{ document.real_object.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.real_object.publication_date|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
                   </p>
                   {# issue theme or department for a thesis #}
                   {% if document.document_type == 'article' %}
                   {% if document.real_object.issue_title %}
                   <p class="col-xs-12 issue-theme">
-                    <a href="{{ article.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
+                    <a href="{{ document.real_object.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
                       {{ document.real_object.issue_title|safe }}
                     </a>
                   </p>
@@ -245,7 +258,7 @@
                   {% endif %}
                 </div>
                 {# abstract #}
-                {% if document.real_object.abstract or document.real_object.description %}
+                {% if document.real_object.abstract or document.real_object.description or document.real_object.keywords %}
                 <div class="akkordion" data-akkordion-single="true">
                   <div class="akkordion-title abstract-title">{% trans "Résumé" %} <span class="ion-ios-arrow-down"></span></div>
                   <div class="summary-content akkordion-content">
@@ -253,7 +266,12 @@
                       {% if document.document_type == 'article' %}
                       {{ document.real_object.abstract }}
                       {% elif document.document_type == 'thesis' %}
-                      {{ document.real_object.description }}
+                      {% if document.real_object.keywords %}
+                      <strong>{% trans "Mots-clés&nbsp;:" %}</strong>
+                      {% for keyword in document.real_object.keywords %}
+                      {{ keyword }}{% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                      {% endif %}
                       {% endif %}
                     </p>
                   </div>

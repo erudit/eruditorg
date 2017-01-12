@@ -64,7 +64,7 @@ class Command(BaseCommand):
                         restriction_subscription.id)),
                     ending='')
                 self._check_restriction_subscription(restriction_subscription)
-                self.stdout.write(self.style.MIGRATE_SUCCESS('  [OK]'))
+                self.stdout.write(self.style.SUCCESS('  [OK]'))
             except AssertionError as e:
                 self.stdout.write(self.style.ERROR('  {0}'.format(e.args[0])))
 

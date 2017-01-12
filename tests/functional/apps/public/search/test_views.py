@@ -41,7 +41,7 @@ def get_mocked_erudit_object():
     m.first_page = 10
     m.last_page = 12
     m.abstracts = [{'lang': 'fr', 'content': 'This is a test'}]
-    m.authors = [{'firstname': 'Test', 'lastname': 'Foobar'}]
+    m.get_authors = lambda: [{'firstname': 'Test', 'lastname': 'Foobar'}]
     return m
 
 
@@ -70,7 +70,6 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
 
         # Run
         results_data = list_view(request).render().content
-
         # Check
         results = json.loads(smart_text(results_data))
         self.assertEqual(results['pagination']['count'], 50)

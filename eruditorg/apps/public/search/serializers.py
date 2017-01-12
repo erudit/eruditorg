@@ -49,31 +49,36 @@ class ArticleSerializer(serializers.ModelSerializer):
     collection_name = serializers.SerializerMethodField()
     bibliographic_reference = serializers.SerializerMethodField()
     paral_titles = serializers.SerializerMethodField()
+    paral_subtitles = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
     journal_name = serializers.SerializerMethodField()
     journal_type = serializers.SerializerMethodField()
     journal_url = serializers.SerializerMethodField()
+    issue_url = serializers.SerializerMethodField()
     issue_localidentifier = serializers.SerializerMethodField()
     issue_title = serializers.SerializerMethodField()
     issue_number = serializers.SerializerMethodField()
     issue_volume = serializers.SerializerMethodField()
     issue_published = serializers.SerializerMethodField()
     issue_volume_slug = serializers.SerializerMethodField()
-    issue_publication_date = serializers.SerializerMethodField()
+    publication_date = serializers.SerializerMethodField()
     has_pdf = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Article
         fields = [
             'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier',
-            'issue_title', 'issue_number', 'paral_titles',
-            'issue_volume', 'issue_published', 'issue_volume_slug', 'issue_publication_date',
+            'issue_title', 'issue_url', 'issue_number', 'paral_titles', 'paral_subtitles',
+            'issue_volume', 'issue_published', 'issue_volume_slug', 'publication_date',
             'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
             'external_url', 'external_pdf_url', 'collection_name', 'bibliographic_reference',
         ]
 
     def get_authors(self, obj):
+        if obj.fedora_object:
+            article_object = obj.get_erudit_object()
+            return article_object.get_authors()
         authors = []
         for author in obj.authors.all():
             authors.append({
@@ -91,6 +96,10 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_paral_titles(self, obj):
         paral_titles = obj.titles.filter(paral=True)
         return list(t.title for t in paral_titles)
+
+    def get_paral_subtitles(self, obj):
+        paral_subtitles = obj.subtitles.filter(paral=True)
+        return list(t.title for t in paral_subtitles)
 
     def get_abstract(self, obj):
         return obj.abstract
@@ -112,14 +121,24 @@ class ArticleSerializer(serializers.ModelSerializer):
             return obj.issue.journal.type.get_code_display().lower()
         return ''
 
-    def get_issue_publication_date(self, obj):
-        return obj.issue.volume_title
+    def get_publication_date(self, obj):
+        return obj.issue.abbreviated_volume_title
 
     def get_journal_url(self, obj):
         journal = obj.issue.journal
         if journal.external_url:
             return journal.external_url
         return reverse('public:journal:journal_detail', args=(journal.code, ))
+
+    def get_issue_url(self, obj):
+        issue = obj.issue
+        if issue.external_url:
+            return issue.external_url
+        return reverse('public:journal:issue_detail', args=(
+            issue.journal.code,
+            issue.volume_slug,
+            issue.localidentifier,
+        ))
 
     def get_issue_localidentifier(self, obj):
         return obj.issue.localidentifier
@@ -150,22 +169,34 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ThesisSerializer(serializers.ModelSerializer):
-    author = serializers.SerializerMethodField()
+    authors = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
+    publication_date = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    keywords = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Thesis
         fields = [
-            'title', 'url', 'publication_year', 'description', 'author', 'collection',
-            'collection_name',
+            'title', 'url', 'publication_date', 'description', 'authors', 'collection',
+            'collection_name', 'description', 'keywords'
         ]
 
-    def get_author(self, obj):
-        return {
+    def get_authors(self, obj):
+        return [{
             'lastname': obj.author.lastname,
             'firstname': obj.author.firstname,
             'othername': obj.author.othername,
-        }
+        }]
 
     def get_collection_name(self, obj):
         return obj.collection.name
+
+    def get_publication_date(self, obj):
+        return obj.publication_year
+
+    def get_description(self, obj):
+        return obj.description
+
+    def get_keywords(self, obj):
+        return [keyword.name for keyword in obj.keywords.all()]
