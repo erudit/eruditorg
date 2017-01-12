@@ -261,7 +261,7 @@
             {% blocktrans trimmed %}
             L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
             {% endblocktrans %}
-            {% if not article.erudit_object.abstracts and article.erudit_object.pdf %}
+            {% if not article.erudit_object.abstracts and article.fedora_object.pdf.exists %}
             {% trans "Seule la première page du PDF sera affichée." %}
             {% elif article.erudit_object.abstracts %}
             {% trans "Seul le résumé sera affiché." %}
@@ -290,7 +290,7 @@
           {% elif article.localidentifier %}
           <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
           {% endif %}
-        {% elif not article.erudit_object.abstracts and article.erudit_object.pdf%}
+        {% elif not article.erudit_object.abstracts and article.fedora_object.pdf.exists%}
         <p>
           <object data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
         </p>
