@@ -24,8 +24,10 @@ sitemaps_dict = {
 }
 
 urlpatterns = [
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
+        content_type="text/plain"), name='robots-txt'),
     url(r'^sitemap\.xml$', sitemap_views.index,
-        {'sitemaps': sitemaps_dict, 'sitemap_url_name': 'sitemaps'}),
+        {'sitemaps': sitemaps_dict, 'sitemap_url_name': 'sitemaps'}, name="sitemap"),
     url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
 ]
