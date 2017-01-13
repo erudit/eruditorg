@@ -30,6 +30,9 @@
 {% elif author.othername %}
 <meta name="citation_author" content="{{ author.othername }}" />
 {% endif %}
+{% if author.email %}
+<meta name="citation_author_email" content="{{ author.email }}" />
+{% endif %}
 {% for aff in author.affiliations %}
 <meta name="citation_author_institution" content="{{ aff }}" />
 {% endfor %}
