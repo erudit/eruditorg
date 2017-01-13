@@ -36,21 +36,21 @@
 {% endfor %}
 <meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
 {% for abstract in article.abstracts.all %}
-  <meta name="citation_abstract" lang="{{ abstract.language }}" content="{{ abstract.text }}" />
+<meta name="citation_abstract" lang="{{ abstract.language }}" content="{{ abstract.text }}" />
 {% endfor %}
 <meta name="citation_language" content="{{ article.language }}" />
 {% if article.first_page %}
-  <meta name="citation_firstpage" content="{{ article.first_page }}" />
+<meta name="citation_firstpage" content="{{ article.first_page }}" />
 {% endif %}
 {% if article.last_page %}
-  <meta name="citation_lastpage" content="{{ article.last_page }}" />
+<meta name="citation_lastpage" content="{{ article.last_page }}" />
 {% endif %}
 <meta name="citation_issn" content="{{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}" />
 {% if article.issue.volume %}
-  <meta name="citation_volume" content="{{ article.issue.volume }}" />
+<meta name="citation_volume" content="{{ article.issue.volume }}" />
 {% endif %}
 {% if article.issue.number %}
-  <meta name="citation_issue" content="{{ article.issue.number }}" />
+<meta name="citation_issue" content="{{ article.issue.number }}" />
 {% endif %}
 {% if not article.issue.has_movable_limitation %}
 <meta name="citation_fulltext_world_readable" content="" />
