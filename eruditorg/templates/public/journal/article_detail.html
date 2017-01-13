@@ -37,7 +37,7 @@
 <meta name="citation_author_institution" content="{{ aff }}" />
 {% endfor %}
 {% endfor %}
-<meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
+<meta name="citation_journal_title" content="{{ article.issue.journal.name }}{% if article.issue.journal.subtitle %}&nbsp;: {{ article.issue.journal.subtitle }}{% endif %}" />
 {% for abstract in article.abstracts.all %}
 <meta name="citation_abstract" lang="{{ abstract.language }}" content="{{ abstract.text }}" />
 {% endfor %}
