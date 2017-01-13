@@ -22,7 +22,7 @@
 <meta name="twitter:title" content="{{ article.title }} – Érudit">
 
 <!-- Google Scholar -->
-<meta name="citation_title" content="{{ article.title }}" />
+<meta name="citation_title" content="{% for title in article.titles.all %}{{ title }}{% if not forloop.last %} / {% endif %}{% endfor %}" />
 <meta name="citation_abstract_html_url" content="http://id.erudit.org/iderudit/{{ article.localidentifier }}" />
 {% for author in article.erudit_object.authors %}
 {% if author.firstname and author.lastname %}
