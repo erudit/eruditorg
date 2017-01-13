@@ -71,8 +71,8 @@
 <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% endif %}
 <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-{% for lang_code, keywords in keywords_dict.items %}
-  <meta name="citation_keywords" lang="{{ lang_code }}" content="{% for k in keywords %}{{ k.name }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+{% for keywords_lang in article.erudit_object.keywords %}
+  <meta name="citation_keywords" lang="{{ keywords_lang.lang }}" content="{% for k in keywords_lang.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endfor %}
 {% endcache %}
 {% endblock meta_tags %}
