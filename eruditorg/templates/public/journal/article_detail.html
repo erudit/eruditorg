@@ -62,7 +62,9 @@
 <meta name="citation_date" content="{{ article.issue.year }}" />
 <meta name="citation_publisher" content="{{ article.publisher.name }}" />
 {% if article.doi %}<meta name="citation_doi" content="{{ article.doi }}" />{% endif %}
+{% if article.erudit_object.processing == 'complet' %}
 <meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
+{% endif %}
 <meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
 {% for lang_code, keywords in keywords_dict.items %}
   <meta name="citation_keywords" lang="{{ lang_code }}" content="{% for k in keywords %}{{ k.name }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
