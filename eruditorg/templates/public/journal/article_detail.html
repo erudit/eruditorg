@@ -48,7 +48,12 @@
 {% if article.last_page %}
 <meta name="citation_lastpage" content="{{ article.last_page }}" />
 {% endif %}
-<meta name="citation_issn" content="{{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}" />
+{% if article.issue.journal.issn_print %}
+<meta name="citation_issn" content="{{ article.issue.journal.issn_print }}" />
+{% endif %}
+{% if article.issue.journal.issn_web %}
+<meta name="citation_issn" content="{{ article.issue.journal.issn_web }}" />
+{% endif %}
 {% if article.issue.volume %}
 <meta name="citation_volume" content="{{ article.issue.volume }}" />
 {% endif %}
