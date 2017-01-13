@@ -2,7 +2,6 @@
 
 from django.conf.urls import include
 from django.conf.urls import url
-from django.views.decorators.cache import cache_page
 from django.utils.translation import ugettext_lazy as _
 
 from . import urls_compat
