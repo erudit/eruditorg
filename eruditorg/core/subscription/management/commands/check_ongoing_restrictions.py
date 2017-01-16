@@ -26,14 +26,21 @@ class ImportException(Exception):
 class Command(BaseCommand):
     help = 'Check ongoing restrictions'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--year', action='store', dest='year', default=dt.datetime.now().year,
+            help='Ending year of the restrictions period to check.'
+        )
+
     def handle(self, *args, **options):
-        current_year = dt.datetime.now().year
+        year = int(options.get('year'))
         restriction_subscriptions = Revueabonne.objects.filter(
-            anneeabonnement__in=[current_year - 1, current_year, ])
+            anneeabonnement__in=[year - 1, year, ])
 
         self.stdout.write(self.style.MIGRATE_HEADING(
-            'Start checking {0} ongoing "restriction" subscriptions!'.format(
-                restriction_subscriptions.count()
+            'Start checking {0} ongoing "restriction" subscriptions for year {1}!'.format(
+                restriction_subscriptions.count(),
+                year
             )))
 
         for restriction_subscription in restriction_subscriptions:
@@ -84,7 +91,6 @@ class Command(BaseCommand):
         # STEP 3: checks the JournalAccessSubscription instance related to the considered
         # restriction.
         # --
-
         subscription = JournalAccessSubscription.objects.filter(
             organisation=restriction_profile.organisation).first()
         assert subscription is not None, \
