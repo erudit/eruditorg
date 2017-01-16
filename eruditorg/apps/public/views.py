@@ -25,7 +25,8 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         # Includes the latest issues
-        context['latest_issues'] = Issue.objects.filter(date_published__isnull=False) \
+        context['latest_issues'] = Issue.objects.filter(
+            date_published__isnull=False, is_published=True) \
             .select_related('journal').order_by('-date_published')[:8]
 
         # Includes the 'apropos' news ; note that this is a temporary behavior as

@@ -193,6 +193,7 @@ class TestJournalDetailView(BaseEruditTestCase):
         issue_2 = IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
             journal=journal, year=dt.datetime.now().year + 1,
+            is_published=False,
             date_published=dt.datetime.now() + dt.timedelta(days=30))
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
@@ -209,7 +210,8 @@ class TestJournalDetailView(BaseEruditTestCase):
         IssueFactory.create(
             journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1))
         issue_2 = IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
-        IssueFactory.create(
+        issue_3 = IssueFactory.create(
+            is_published=False,
             journal=journal, year=dt.datetime.now().year + 1,
             date_published=dt.datetime.now() + dt.timedelta(days=30))
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
