@@ -10,6 +10,7 @@ from django.utils.safestring import mark_safe
 from django.utils.encoding import force_bytes
 from django.utils.translation import gettext as _
 from eruditarticle.utils import remove_xml_namespaces
+from PyPDF2 import PdfFileReader
 from lxml import etree as et
 
 from ..conf import settings as journal_settings
@@ -51,6 +52,15 @@ def render_article(context, article, only_summary=False):
     context['only_summary'] = only_summary
     if 'article' not in context:
         context['article'] = article
+
+    if article.fedora_object.pdf.exists:
+        pdf = PdfFileReader(article.fedora_object.pdf.content)
+        context['pdf_exists'] = True
+        context['pdf_num_pages'] = pdf.getNumPages()
+        context['can_display_first_pdf_page'] = (
+            context['pdf_exists'] and
+            context['pdf_num_pages'] > 1
+        )
 
     if html_content is None:
         # Prepares the XML of the article
