@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import datetime as dt
 
 from django.core.management.base import BaseCommand
@@ -17,6 +18,8 @@ from core.subscription.restriction.restriction_models import (
     Revue,
     Revueabonne,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class ImportException(Exception):
@@ -37,7 +40,7 @@ class Command(BaseCommand):
         restriction_subscriptions = Revueabonne.objects.filter(
             anneeabonnement__in=[year - 1, year, ])
 
-        self.stdout.write(self.style.MIGRATE_HEADING(
+        logger.info(self.style.MIGRATE_HEADING(
             'Start checking {0} ongoing "restriction" subscriptions for year {1}!'.format(
                 restriction_subscriptions.count(),
                 year
@@ -45,14 +48,14 @@ class Command(BaseCommand):
 
         for restriction_subscription in restriction_subscriptions:
             try:
-                self.stdout.write(self.style.MIGRATE_LABEL(
+                logger.info(self.style.MIGRATE_LABEL(
                     '    Start checking the subscription with ID: {0}'.format(
                         restriction_subscription.id)),
-                    ending='')
+                )
                 self._check_restriction_subscription(restriction_subscription)
-                self.stdout.write(self.style.SUCCESS('  [OK]'))
+                logger.info(self.style.SUCCESS('  [OK]'))
             except AssertionError as e:
-                self.stdout.write(self.style.ERROR('  {0}'.format(e.args[0])))
+                logger.error(self.style.ERROR('  {0}'.format(e.args[0])))
 
     def _check_restriction_subscription(self, restriction_subscription):
         # Fetches the subscriber
