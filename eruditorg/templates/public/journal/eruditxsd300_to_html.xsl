@@ -290,6 +290,7 @@
           {% elif article.localidentifier %}
           <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
           {% endif %}
+        {% elif article.erudit_object.abstracts %}
         {% elif not article.erudit_object.abstracts and can_display_first_pdf_page %}
         <p>
           <object data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
