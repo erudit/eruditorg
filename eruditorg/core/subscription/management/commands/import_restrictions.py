@@ -125,7 +125,7 @@ class Command(BaseCommand):
 
         try:
             journal_code = restriction_journal.titrerevabr.lower()
-            journal = Journal.objects.get(Q(localidentifier=journal_code) | Q(code=journal_code))
+            journal = Journal.legacy_objects.get_by_id(journal_code)
         except Journal.DoesNotExist:
             self.stdout.write(self.style.ERROR(
                 '  Unable to retrieve the "Journal" instance with code: {0}'.format(
