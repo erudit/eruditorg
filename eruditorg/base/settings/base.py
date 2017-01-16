@@ -311,6 +311,14 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 1,
             'backupCount': 5,
             'formatter': 'userspace.journal.editor',
+        },
+        'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/tmp/errors.log',
+            'maxBytes': 1024 * 1024 * 1,
+            'backupCount': 5,
+            'formatter': 'verbose'
         }
 
     },
@@ -333,6 +341,11 @@ LOGGING = {
         'apps.userspace.journal.editor.views': {
             'level': 'DEBUG',
             'handlers': ['userspace.journal.editor.console', ],
+            'propagate': False,
+        },
+        'core.subscription.management.commands.check_ongoing_restrictions': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'error_file', ],
             'propagate': False,
         }
     },
