@@ -92,7 +92,7 @@ class IssueAdmin(admin.ModelAdmin):
     inlines = (IssueThemeInline, IssueContributorInline)
     list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
     search_fields = ('id', 'localidentifier', )
-    list_filter = ('journal__collection', )
+    list_filter = ('is_published', 'journal__collection', )
 
 
 class ArticleAbstractAdmin(admin.ModelAdmin):
