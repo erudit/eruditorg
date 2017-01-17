@@ -284,6 +284,14 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         if self.last_issue:
             return self.last_issue.get_editors()
 
+    def is_scientific(self):
+        """ Helper method that returns True if this journal is a scientific journal """
+        return self.type.code == JournalType.CODE_SCIENTIFIC
+
+    def is_cultural(self):
+        """ Helper method that returns True if this journal is a scientific journal """
+        return self.type.code == JournalType.CODE_CULTURAL
+
     editors = cached_property(get_editors)
     directors = cached_property(get_directors)
 
