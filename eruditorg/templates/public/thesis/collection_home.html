@@ -1,7 +1,11 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block title %}{{ collection.name }}{% endblock title %}
+{% block title %}{% blocktrans %}Thèses de {{ collection.name }}{% endblocktrans %}{% endblock title %}
+
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection.name }}.{% endblocktrans %}">
+{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}

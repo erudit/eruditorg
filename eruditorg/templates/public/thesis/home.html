@@ -3,6 +3,10 @@
 
 {% block title %}{% trans "Thèses" %}{% endblock title %}
 
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes.{% endblocktrans %}">
+{% endblock meta_description %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">

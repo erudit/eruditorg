@@ -3,6 +3,12 @@
 {% load public_journal_tags %}
 {% load cache %}
 
+{% block title %}{{ article.title }} {% trans '(notice)' %} – {{ article.issue.journal.name }}{% if article.issue.journal.subtitle %} : {{ article.issue.journal.subtitle }}{% endif %}{% endblock title %}
+
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Notice. Un article {{ article.journal_type }} de la revue {{ article.issue.journal.name }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
+{% endblock meta_description %}
+
 {% block data_controller %}public:journal:article_detail{% endblock data_controller %}
 
 {% block meta_tags %}

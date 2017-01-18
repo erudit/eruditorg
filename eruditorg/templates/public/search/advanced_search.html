@@ -4,6 +4,10 @@
 
 {% block title %}{% trans "Recherche avancée" %}{% endblock title %}
 
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Effectuez une recherche avancée dans le corpus Érudit à l'aide d'opérateurs booléens et de filtres.{% endblocktrans %}">
+{% endblock meta_description %}
+
 {% block body_class %}{{ block.super }} advanced_search{% endblock body_class %}
 
 {% block data_controller %}public:search:advanced-search{% endblock data_controller %}

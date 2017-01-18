@@ -3,7 +3,11 @@
 {% load public_journal_tags %}
 {% load cache %}
 
-{% block title %}{{ article.title }}{% endblock title %}
+{% block title %}{{ article.title }} – {{ article.issue.journal.name }}{% if article.issue.journal.subtitle %} : {{ article.issue.journal.subtitle }}{% endif %}{% endblock title %}
+
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Un article {{ article.journal_type }} de la revue {{ article.issue.journal.name }}, diffusée par plateforme Érudit. {% endblocktrans %}">
+{% endblock meta_description %}
 
 {% block meta_tags %}
 {% cache FOREVER_TTL "public_article_detail_metatags" article.id LANGUAGE_CODE %}

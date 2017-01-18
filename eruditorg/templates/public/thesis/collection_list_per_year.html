@@ -3,6 +3,10 @@
 
 {% block title %}{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock title %}
 
+{% block meta_description %}
+<meta name="description" content="{% blocktrans with year=publication_year %}Consultez les thèses et mémoires de {{ collection.name }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
+{% endblock meta_description %}
+
 {% block structured_data_breadcrumb_tail %}
 {
   "@type": "ListItem",
