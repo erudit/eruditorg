@@ -50,14 +50,28 @@ class Query(object):
     filters_mapping = {}
     extra_params = {}
 
-    def __init__(self, search, qs='*:*'):
+    def __init__(self, search, q='*:*', fq="*:*"):
         """ Search request to Solr.
 
         :arg search: `solrq.Search` instance to use
         :arg qs: a default Solr query string to use
         """
         self.search = search
-        self._qs = qs
+        self._q = q
+        self._fq = fq
+
+    def _prepare_querystring(self, base_qs, *args, **kwargs):
+        # Inserts Q params if applicable
+        qarg_qs = None
+        for qarg in args:
+            subqs = self._get_q_querystring(qarg)
+            qarg_qs = ' AND '.join([qarg_qs, subqs]) if qarg_qs else subqs
+        base_qs = '({0}) AND ({1})'.format(base_qs, qarg_qs) if qarg_qs else base_qs
+
+        # Inserts kwargs params
+        kwargs_qs = self._get_querystring_from_dict(kwargs)
+        base_qs = '({0}) AND ({1})'.format(base_qs, kwargs_qs) if kwargs_qs else base_qs
+        return base_qs
 
     def filter(self, *args, **kwargs):
         """ Prepares the querystring used to perform a query.
@@ -65,20 +79,17 @@ class Query(object):
         This method returns a new instance of Query that allows
         to add another filters to the initial querystring.
         """
-        qs = self._qs
+        qs = self._prepare_querystring(self._q, *args, **kwargs)
+        return self.__class__(self.search, q=qs, fq=self._fq)
 
-        # Inserts Q params if applicable
-        qarg_qs = None
-        for qarg in args:
-            subqs = self._get_q_querystring(qarg)
-            qarg_qs = ' AND '.join([qarg_qs, subqs]) if qarg_qs else subqs
-        qs = '({0}) AND ({1})'.format(qs, qarg_qs) if qarg_qs else qs
+    def filter_query(self, *args, **kwargs):
+        """" Prepare the querystring used to perform a filter query
 
-        # Inserts kwargs params
-        kwargs_qs = self._get_querystring_from_dict(kwargs)
-        qs = '({0}) AND ({1})'.format(qs, kwargs_qs) if kwargs_qs else qs
-
-        return self.__class__(self.search, qs)
+        This method returns a new instance of Query that allows
+        to add another filter to the initial querystring.
+        """
+        fq = self._prepare_querystring(self._fq, *args, **kwargs)
+        return self.__class__(self.search, q=self._q, fq=fq)
 
     def _get_q_querystring(self, q):
         subqs_list = []
@@ -101,7 +112,6 @@ class Query(object):
 
         if not len(subqs_list):
             return self._get_querystring_from_dict(q.params)
-
         return ' {} '.format(q.operator).join(subqs_list)
 
     def _get_querystring_from_dict(self, params_dict, base_qs=None):
@@ -119,6 +129,7 @@ class Query(object):
         """ Triggers the search and returns the results. """
         params = self.search.extra_params.copy()
         params.update(kwargs)
-        return self.search.client.search(self._qs, **params)
+        params['fq'] = self._fq
+        return self.search.client.search(self._q, **params)
 
     results = property(get_results)
