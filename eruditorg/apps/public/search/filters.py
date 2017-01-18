@@ -193,7 +193,9 @@ class EruditDocumentSolrFilter(object):
         if pub_year_start or pub_year_end:
             ystart = pub_year_start if pub_year_start is not None else '*'
             yend = pub_year_end if pub_year_end is not None else '*'
-            sqs = sqs.filter(AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend))
+            sqs = sqs.filter_query(
+                AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend)
+            )
 
         # Applies the languages filter
         if languages:
@@ -219,7 +221,7 @@ class EruditDocumentSolrFilter(object):
         # --
 
         if extra_q:
-            sqs = sqs.filter(all=extra_q)
+            sqs = sqs.filter_query(all=extra_q)
 
         # STEP 4: applies the aggregation-related filters
         # --
@@ -313,4 +315,4 @@ class EruditDocumentSolrFilter(object):
         query = Q()
         for v in values:
             query |= Q(**{field: '"{}"'.format(v)})
-        return sqs.filter(query)
+        return sqs.filter_query(query)
