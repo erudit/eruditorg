@@ -229,7 +229,7 @@
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
             </li>
-            {% if article_access_granted and article.fedora_object.pdf.exists %}
+            {% if article_access_granted and pdf_exists %}
             <li>
               <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
                 <span class="erudicon erudicon-tools-pdf"></span>
@@ -261,11 +261,11 @@
             {% blocktrans trimmed %}
             L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
             {% endblocktrans %}
-            {% if not article.erudit_object.abstracts and article.fedora_object.pdf.exists %}
+            {% if not article.erudit_object.abstracts and can_display_first_pdf_page %}
             {% trans "Seule la première page du PDF sera affichée." %}
             {% elif article.erudit_object.abstracts %}
             {% trans "Seul le résumé sera affiché." %}
-            {% else %}
+            {% elif article.is_scientific %}
             {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
             {% endif %}
           </p>
@@ -290,11 +290,12 @@
           {% elif article.localidentifier %}
           <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
           {% endif %}
-        {% elif not article.erudit_object.abstracts and article.fedora_object.pdf.exists%}
+        {% elif article.erudit_object.abstracts %}
+        {% elif not article.erudit_object.abstracts and can_display_first_pdf_page %}
         <p>
           <object data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
         </p>
-        {% else %}
+        {% elif article.is_scientific %}
           {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
         {% endif %}
 

@@ -34,3 +34,25 @@ class TestRenderArticleTemplateTag(BaseEruditTestCase):
         # Check
         self.assertTrue(ret is not None)
         self.assertTrue(ret.startswith('<div xmlns:v="variables-node" class="article-wrapper">'))
+
+    @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
+    @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
+    @unittest.mock.patch.object(ArticleDigitalObject, '_get_datastreams')
+    def test_can_transform_article_xml_to_html_when_pdf_exists(self, mock_ds, mock_xsd300, mock_pdf):
+        # Setup
+        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
+            xml = fp.read()
+        fp = open(FIXTURE_ROOT + '/article.pdf', mode='rb')
+        mock_ds.return_value = ['ERUDITXSD300', ]  # noqa
+        mock_xsd300.content = unittest.mock.MagicMock()
+        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
+        mock_pdf.exists = True
+        mock_pdf.content = fp
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue)
+        # Run
+        ret = render_article(Context({}), article)
+        # Check
+        fp.close()
+        self.assertTrue(ret is not None)
