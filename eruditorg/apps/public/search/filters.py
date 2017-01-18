@@ -279,10 +279,9 @@ class EruditDocumentSolrFilter(object):
 
         # Then apply the filters in order to get lazy query containing all the filters.
         solr_query = self.apply_solr_filters(filters)
-
         # TODO: this should be updated when we are sure that the set of Érudit documents provided by
         # the database is the same as the one provided by the Solr search index.
-        solr_query = solr_query.filter(
+        solr_query = solr_query.filter_query(
             Q(Corpus_fac='Article') | Q(Corpus_fac='Culturel') | Q(Corpus_fac='Thèses'))
 
         # Prepares the values used to paginate the results using Solr.
