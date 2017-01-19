@@ -54,6 +54,9 @@
       <hgroup class="col-xs-12 child-column-fit">
 
         <div class="col-sm-9">
+          {% if only_summary %}
+          <p class="title-summary">{% trans 'Notice' %}</p>
+          {% endif %}
           <xsl:if test="liminaire/grtitre/surtitre">
             <p class="title-tag">
               <xsl:apply-templates select="liminaire/grtitre/surtitre" mode="title"/>
@@ -66,9 +69,6 @@
             <xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
-            {% if only_summary %}
-            <span>{% trans 'Notice' %}</span>
-            {% endif %}
           </h1>
 
           <xsl:if test="liminaire/grauteur">
@@ -77,14 +77,13 @@
             </ul>
           </xsl:if>
 
-          {% if only_summary %}
-          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
-          {% endif %}
-
         </div>
 
         <!-- TODO: cover image -->
         <div class="issue-cover col-sm-3">
+          {% if only_summary %}
+          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
+          {% endif %}
         </div>
       </hgroup>
 
@@ -168,6 +167,7 @@
             </xsl:if>
             {% endif %}
             <xsl:for-each select="partiesann[1]">
+              {% if article_access_granted and not only_summary %}
               <xsl:if test="grannexe">
                 <li>
                   <a href="#grannexe">
@@ -189,13 +189,6 @@
                   </a>
                 </li>
               </xsl:if>
-              <xsl:if test="grbiblio">
-                <li>
-                  <a href="#grbiblio">
-                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
-                  </a>
-                </li>
-              </xsl:if>
               <xsl:if test="grnote">
                 <li>
                   <a href="#grnote">
@@ -203,7 +196,16 @@
                   </a>
                 </li>
               </xsl:if>
+              {% endif %}
+              <xsl:if test="grbiblio">
+                <li>
+                  <a href="#grbiblio">
+                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
             </xsl:for-each>
+            {% if not only_summary %}
             <xsl:if test="//figure">
               <li>
                 <a href="#figures">{% trans "Liste des figures" %}</a>
@@ -214,6 +216,7 @@
                 <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
               </li>
             </xsl:if>
+            {% endif %}
           </ul>
         </nav>
         {% endif %}
@@ -307,6 +310,7 @@
         <xsl:apply-templates select="partiesann[node()]"/>
 
         <!-- lists of tables & figures -->
+        {% if not only_summary %}
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
@@ -320,6 +324,7 @@
             <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
           </section>
         </xsl:if>
+        {% endif %}
 
       </div>
     </div>
@@ -1766,15 +1771,14 @@
 
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
-    <!-- <section id="partiesann"> -->
     <xsl:apply-templates/>
-    <!-- </section> -->
   </xsl:template>
 
   <xsl:template match="grannexe | merci | grnotebio | grnote | grbiblio">
     <section id="{name()}" class="article-section {name()}" role="complementary">
       <h2>
         <xsl:choose>
+          {% if not only_summary %}
           <xsl:when test="self::grannexe">
             <xsl:apply-templates select="self::grannexe" mode="toc-heading"/>
           </xsl:when>
@@ -1787,13 +1791,20 @@
           <xsl:when test="self::grnote">
             <xsl:apply-templates select="self::grnote" mode="toc-heading"/>
           </xsl:when>
+          {% endif %}
           <xsl:when test="self::grbiblio">
             <xsl:apply-templates select="self::grbiblio" mode="toc-heading"/>
           </xsl:when>
         </xsl:choose>
       </h2>
       <xsl:choose>
-        <xsl:when test="self::grnote | self::grbiblio">
+        <xsl:when test="self::grbiblio">
+          <ol class="unstyled">
+            <xsl:apply-templates select="*[not(self::titre)]"/>
+          </ol>
+        </xsl:when>
+        {% if not only_summary %}
+        <xsl:when test="self::grnote">
           <ol class="unstyled">
             <xsl:apply-templates select="*[not(self::titre)]"/>
           </ol>
@@ -1801,6 +1812,7 @@
         <xsl:otherwise>
           <xsl:apply-templates select="*[not(self::titre)]"/>
         </xsl:otherwise>
+        {% endif %}
       </xsl:choose>
     </section>
   </xsl:template>

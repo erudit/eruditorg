@@ -3,11 +3,10 @@
  */
 
 .grresume {
-  margin-top: $margin-vertical-default;
+  padding-bottom: $padding-vertical-default;
   border-bottom: 1px solid #000;
 
   > .resume {
-    margin: $margin-vertical-default*1.5 0;
 
     h2, h3 {
       color: #333;
@@ -29,10 +28,15 @@
       h2 {
         border-top: 0;
         padding-top: 0;
+        margin-top: 0;
       }
 
     }
 
+  }
+
+  &:last-of-type {
+    border: none;
   }
 
 }

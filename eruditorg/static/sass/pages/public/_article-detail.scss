@@ -61,6 +61,7 @@ $article-toolbar-width: 80px;
     }
 
     .btn.btn-primary{
+      float: right;
       color: $white;
 
       &:hover, &:focus, &:active {
@@ -115,6 +116,12 @@ $article-toolbar-width: 80px;
 
     .title-tag {
       margin-top: 0;
+    }
+
+    .title-summary {
+      color: $coral-red;
+      text-transform: uppercase;
+      @include fw-sans-medium;
     }
 
     .surtitre,
@@ -438,12 +445,6 @@ $article-toolbar-width: 80px;
 
     }
 
-    // headings within the article
-    h2 {
-      border-top: 1px solid $mid-grey;
-      padding-top: 1em;
-    }
-
     h2, h3, h4, h5, h6, .h7 {
       @include fw-serif-bold();
       margin-top: 1.5em;
@@ -478,6 +479,12 @@ $article-toolbar-width: 80px;
         border: 0;
       }
 
+    }
+
+    // headings within the article body
+    h2 {
+      border-top: 1px solid $mid-grey;
+      padding-top: 1em;
     }
 
     p, li, blockquote {
