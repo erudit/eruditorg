@@ -34,6 +34,7 @@ from erudit.models import Article
 from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
+from erudit.models import JournalType
 
 from base.pdf import generate_pdf
 from base.viewmixins import CacheMixin
@@ -689,6 +690,12 @@ class GoogleScholarSubscriberJournalsView(CacheMixin, TemplateView):
         context['journals'] = Journal.objects.filter(
             collection__code__in=('erudit', 'unb')
         )
+
+        sci_journal_type = JournalType.objects.get(code=JournalType.CODE_SCIENTIFIC)
+        cul_journal_type = JournalType.objects.get(code=JournalType.CODE_CULTURAL)
+        context["scientific_embargo_in_days"] = sci_journal_type.embargo_duration(unit='days')
+        context["cultural_embargo_in_days"] = cul_journal_type.embargo_duration(unit='days')
+
         return context
 
 
