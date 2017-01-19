@@ -254,6 +254,8 @@ class TestIssue(BaseEruditTestCase):
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
+        self.journal.type = JournalTypeFactory.create(code='C')
+        self.journal.save()
         issue = IssueFactory.create(
             journal=self.journal,
             year=now_dt.year + 1, date_published=dt.date(now_dt.year + 1, 1, 1)
@@ -530,3 +532,7 @@ class TestAuthor(BaseEruditTestCase):
         assert str(author_1) == "{suffix} {firstname} {lastname}".format(
             suffix=author_1.suffix, firstname=author_1.firstname, lastname=author_1.lastname
         )
+
+    def test_journaltype_can_return_embargo_duration_in_days(self):
+        journal_type = JournalTypeFactory(code='S')
+        assert journal_type.embargo_duration(unit="days") == 730

@@ -51,6 +51,16 @@ class JournalType(models.Model):
     )
     code = models.SlugField(verbose_name=_('Code'), max_length=2, choices=CODE_CHOICES, unique=True)
 
+    def embargo_duration(self, unit='years'):
+        embargo_duration_in_years = erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS \
+            if self.code == 'S' \
+            else erudit_settings.CULTURAL_JOURNAL_EMBARGO_IN_YEARS
+
+        if unit == 'years':
+            return embargo_duration_in_years
+        if unit == 'days':
+            return embargo_duration_in_years * 365
+
     class Meta:
         verbose_name = _('Type de revue')
         verbose_name_plural = _('Types de revue')
@@ -234,9 +244,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def embargo_in_years(self):
-        return erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS \
-            if self.type and self.type.code == 'S' \
-            else erudit_settings.CULTURAL_JOURNAL_EMBARGO_IN_YEARS
+        return self.type.embargo_duration() if self.type else None
 
     # Issues-related methods and properties
     # --
