@@ -97,7 +97,7 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_the_published_open_access_issues(self):
         # Setup
-        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
 
         now_dt = dt.datetime.now()
         self.journal.open_access = False
@@ -117,7 +117,7 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_the_published_open_access_issues_year_coverage(self):
         # Setup
-        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
         now_dt = dt.datetime.now()
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
@@ -208,9 +208,9 @@ class TestIssue(BaseEruditTestCase):
         # Run & check
         self.assertEqual(self.issue.pid, 'erudit:erudit.dummy139.dummy1234')
 
-    def test_knows_if_it_has_a_movable_limitation_in_case_of_scientific_journals(self):
+    def test_knows_if_it_is_embargoed_in_case_of_scientific_journals(self):
         # Setup
-        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
 
         now_dt = dt.datetime.now()
         self.journal.open_access = False
@@ -226,13 +226,13 @@ class TestIssue(BaseEruditTestCase):
             journal=self.journal, year=now_dt.year - (ml + 2),
             date_published=dt.date(now_dt.year - (ml + 2), 3, 20))
         # Run & check
-        self.assertTrue(issue_1.has_movable_limitation)
-        self.assertTrue(issue_2.has_movable_limitation)
-        self.assertFalse(issue_3.has_movable_limitation)
+        self.assertTrue(issue_1.embargoed)
+        self.assertTrue(issue_2.embargoed)
+        self.assertFalse(issue_3.embargoed)
 
-    def test_knows_if_it_has_a_movable_limitation_in_case_of_non_scientific_journals(self):
+    def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
         # Setup
-        from erudit.conf.settings import MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET as ml
+        from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_YEARS as ml
 
         now_dt = dt.datetime.now()
         self.journal.open_access = False
@@ -248,19 +248,19 @@ class TestIssue(BaseEruditTestCase):
             journal=self.journal, year=now_dt.year - (ml + 2),
             date_published=dt.date(now_dt.year - (ml + 2), 3, 20))
         # Run & check
-        self.assertFalse(issue_1.has_movable_limitation)
-        self.assertTrue(issue_2.has_movable_limitation)
-        self.assertFalse(issue_3.has_movable_limitation)
+        self.assertFalse(issue_1.embargoed)
+        self.assertTrue(issue_2.embargoed)
+        self.assertFalse(issue_3.embargoed)
 
-    def test_issues_with_a_next_year_published_date_have_movable_limitation(self):
+    def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
         issue = IssueFactory.create(
             journal=self.journal,
             year=now_dt.year + 1, date_published=dt.date(now_dt.year + 1, 1, 1)
         )
-        assert issue.has_movable_limitation is True
+        assert issue.embargoed is True
 
-    def test_knows_that_issues_with_open_access_has_no_movable_limitation(self):
+    def test_knows_that_issues_with_open_access_are_not_embargoed(self):
         # Setup
         now_dt = dt.datetime.now()
         j2 = JournalFactory.create(open_access=False)
@@ -277,9 +277,9 @@ class TestIssue(BaseEruditTestCase):
             journal=j2, year=now_dt.year - 5,
             date_published=dt.date(now_dt.year - 5, 3, 20))
         # Run & check
-        self.assertFalse(issue_1.has_movable_limitation)
-        self.assertFalse(issue_2.has_movable_limitation)
-        self.assertFalse(issue_3.has_movable_limitation)
+        self.assertFalse(issue_1.embargoed)
+        self.assertFalse(issue_2.embargoed)
+        self.assertFalse(issue_3.embargoed)
 
     def test_knows_if_it_has_a_coverpage(self):
         # Setup
@@ -443,10 +443,10 @@ class TestArticle(BaseEruditTestCase):
         self.assertTrue(article_1.open_access)
         self.assertFalse(article_2.open_access)
 
-    def test_knows_if_it_has_a_movable_limitation(self):
+    def test_knows_if_it_is_embargoed(self):
         # Setup
         now_dt = dt.datetime.now()
-        from erudit.conf.settings import MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET as ml
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
@@ -463,9 +463,9 @@ class TestArticle(BaseEruditTestCase):
         article_2 = ArticleFactory.create(issue=issue_2)
         article_3 = ArticleFactory.create(issue=issue_3)
         # Run & check
-        self.assertTrue(article_1.has_movable_limitation)
-        self.assertTrue(article_2.has_movable_limitation)
-        self.assertFalse(article_3.has_movable_limitation)
+        self.assertTrue(article_1.embargoed)
+        self.assertTrue(article_2.embargoed)
+        self.assertFalse(article_3.embargoed)
 
     def test_can_return_its_title(self):
         article = ArticleFactory()

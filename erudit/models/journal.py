@@ -233,10 +233,10 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
                 first=self.first_publication_year, last=self.last_publication_year)
 
     @property
-    def movable_limitation_year_offset(self):
-        return erudit_settings.MOVABLE_LIMITATION_SCIENTIFIC_YEAR_OFFSET \
+    def embargo_in_years(self):
+        return erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS \
             if self.type and self.type.code == 'S' \
-            else erudit_settings.MOVABLE_LIMITATION_CULTURAL_YEAR_OFFSET
+            else erudit_settings.CULTURAL_JOURNAL_EMBARGO_IN_YEARS
 
     # Issues-related methods and properties
     # --
@@ -252,7 +252,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         current_year = dt.datetime.now().year
         filter_kwargs = {
             'year__lte': current_year if self.open_access
-            else current_year - self.movable_limitation_year_offset}
+            else current_year - self.embargo_in_years}
         return self.issues.filter(**filter_kwargs)
 
     @property
@@ -478,13 +478,13 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return '-'.join([e for e in elements if e]).replace(" ", "-")
 
     @property
-    def has_movable_limitation(self):
+    def embargoed(self):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
             publication_year = self.year
             current_year = dt.datetime.now().year
-            year_offset = self.journal.movable_limitation_year_offset
+            year_offset = self.journal.embargo_in_years
             return True if current_year <= publication_year + year_offset \
                 else False
         return False
@@ -691,8 +691,8 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         return self.issue.journal.open_access
 
     @property
-    def has_movable_limitation(self):
-        return self.issue.has_movable_limitation
+    def embargoed(self):
+        return self.issue.embargoed
 
     @property
     def abstract(self):
