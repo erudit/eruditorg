@@ -57,7 +57,7 @@
 {% if article.issue.number %}
   <meta name="citation_issue" content="{{ article.issue.number }}" />
 {% endif %}
-{% if not article.issue.has_movable_limitation %}
+{% if not article.issue.embargoed %}
 <meta name="citation_fulltext_world_readable" content="" />
 {% endif %}
 <meta name="citation_publication_date" content="{{ article.issue.year }}" />

@@ -65,7 +65,7 @@ class ArticleAccessCheckMixin(object):
         article = self.get_article()
 
         # 1- Is the article in open access? Is the article subject to a movable limitation?
-        if article.open_access or not article.has_movable_limitation:
+        if article.open_access or not article.embargoed:
             return True
 
         if not self.request.subscription:
@@ -116,7 +116,7 @@ class ArticleViewMetricCaptureMixin(object):
         article = self.get_article()
         return {
             'journal_localidentifier': article.issue.journal.localidentifier,
-            'open_access': article.open_access or not article.has_movable_limitation,
+            'open_access': article.open_access or not article.embargoed,
             'view_type': self.get_tracking_view_type(),
         }
 

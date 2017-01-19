@@ -169,7 +169,7 @@
             {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id user_has_access_to_journal LANGUAGE_CODE %}
             <li class="issue-list--item">
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-                {% if issue.has_movable_limitation and not user_has_access_to_journal %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
+                {% if issue.embargoed and not user_has_access_to_journal %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                 {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
               </a>
             </li>
