@@ -104,6 +104,16 @@
         text-align: right;
       }
 
+      .article-links {
+        font-size: 12px;
+        color: $dark-grey;
+
+        a {
+          color: $coral-red;
+        }
+
+      }
+
       .toolbox {
         margin: 0 0 0 15px;
         padding: 0;

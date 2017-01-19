@@ -26,6 +26,9 @@
       {% endif %}
       {% endwith %}
     </p>
+    <p class="article-links col-xs-12">
+      {% if issue.journal.collection.code == 'erudit' %}[<a href="">{% trans "Notice" %}</a>] {% endif %}[<a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article{% endblocktrans %}">{% trans "Texte intégral" %}</a>]
+    </p>
   </div>
 </li>
 {% endcache %}
