@@ -244,7 +244,8 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def embargo_in_years(self):
-        return self.type.embargo_duration() if self.type else None
+        return self.type.embargo_duration() if self.type else \
+            erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_YEARS
 
     # Issues-related methods and properties
     # --

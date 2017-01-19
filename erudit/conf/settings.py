@@ -18,6 +18,12 @@ CULTURAL_JOURNAL_EMBARGO_IN_YEARS = getattr(
     4
 )
 
+DEFAULT_JOURNAL_EMBARGO_IN_YEARS = getattr(
+    settings,
+    'DEFAULT_JOURNAL_EMBARGO_IN_YEARS',
+    2
+)
+
 # Fedora credentials
 FEDORA_ROOT = getattr(settings, 'ERUDIT_FEDORA_ROOT', None) \
     or getattr(settings, 'FEDORA_ROOT', None) \
