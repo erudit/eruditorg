@@ -3,6 +3,10 @@
 
 {% block title %}{% trans "Thèses" %}{% endblock title %}
 
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Consultez les dépôts de thèses et mémoires de plusieurs universités canadiennes.{% endblocktrans %}">
+{% endblock meta_description %}
+
 {% block structured_data %}
 {{ block.super }}
 <script type="application/ld+json">
@@ -52,9 +56,6 @@
           {% endblocktrans %}
         </div>
       </div>
-      <aside class="col-md-offset-1 col-md-3">
-        <h2>Statistiques</h2>
-      </aside>
     </div>
 
     <div class="main-content">

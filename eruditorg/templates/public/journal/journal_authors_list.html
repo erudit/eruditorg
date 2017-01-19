@@ -3,7 +3,11 @@
 {% load cache %}
 {% load public_journal_tags %}
 
-{% block title %}{% trans "Index des auteurs" %} - {{ journal.name }}{% endblock title %}
+{% block title %}{% trans "Index des auteurs" %} – {{ journal.name }}{% endblock title %}
+
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal.name }}.{% endblocktrans %}">
+{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -30,7 +34,7 @@
     "position": 3,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' journal.code %}",
-      "name": "{{ article.issue.journal.name }}"
+      "name": "{{ journal.name }}"
     }
   },{
     "@type": "ListItem",

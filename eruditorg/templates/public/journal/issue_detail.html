@@ -3,7 +3,11 @@
 {% load staticfiles %}
 {% load cache %}
 
-{% block title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title_with_pages }} - {{ issue.journal.name }}{% endblock title %}
+{% block title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name }}{% endblock title %}
+
+{% block meta_description %}
+<meta name="description" content="{% blocktrans %}Consultez le sommaire de ce numéro de la revue {{ issue.journal.name }} sur la plateforme Érudit.{% endblocktrans %}">
+{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
