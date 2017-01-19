@@ -10,7 +10,17 @@
     {% if journal.issn_web %}<issn>{{ journal.issn_web }}</issn>{% endif %}
     <coverage>
       <from><year>{{ coverage.from }}</year></from>
-      <to><year>{{ coverage.to }}</year></to>
+      <embargo>
+        {% if journal.type %}
+        <days_not_available>
+            {% if journal.is_scientific %}
+                {{ scientific_embargo_in_days }}
+            {% elif journal.is_cultural %}
+                {{ cultural_embargo_in_days }}
+            {% endif %}
+        </days_not_available>
+        {% endif %}
+      </embargo>
     </coverage>
   </item>
   {% endif %}

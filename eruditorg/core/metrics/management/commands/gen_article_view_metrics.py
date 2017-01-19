@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 'erudit__journal__article_view', time=dtime,
                 tags={
                     'journal_localidentifier': article.issue.journal.localidentifier,
-                    'open_access': article.open_access or not article.has_movable_limitation,
+                    'open_access': article.open_access or not article.embargoed,
                     'view_type': random.choice(['html', 'pdf', ]),
                 },
                 **{
