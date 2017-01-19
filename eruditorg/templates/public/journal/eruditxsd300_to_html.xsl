@@ -66,6 +66,9 @@
             <xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
+            {% if only_summary %}
+            <span>{% trans 'Notice' %}</span>
+            {% endif %}
           </h1>
 
           <xsl:if test="liminaire/grauteur">
@@ -75,7 +78,7 @@
           </xsl:if>
 
           {% if only_summary %}
-          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte integral" %} <span class="ion ion-arrow-right-c"></span></a>
+          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
 
         </div>

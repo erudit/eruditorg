@@ -62,6 +62,11 @@ $article-toolbar-width: 80px;
 
     .btn.btn-primary{
       color: $white;
+
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+      }
+
     }
 
     h2 {
