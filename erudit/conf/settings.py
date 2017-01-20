@@ -9,19 +9,19 @@ from django.conf import settings
 SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS = getattr(
     settings,
     'SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS',
-    2
+    1
 )
 
 CULTURAL_JOURNAL_EMBARGO_IN_YEARS = getattr(
     settings,
     'CULTURAL_JOURNAL_EMBARGO_IN_YEARS',
-    4
+    1
 )
 
 DEFAULT_JOURNAL_EMBARGO_IN_YEARS = getattr(
     settings,
     'DEFAULT_JOURNAL_EMBARGO_IN_YEARS',
-    2
+    1
 )
 
 # Fedora credentials
