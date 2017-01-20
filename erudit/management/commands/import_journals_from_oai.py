@@ -14,6 +14,7 @@ from sickle.oaiexceptions import BadResumptionToken
 
 from ...conf import settings as erudit_settings
 from ...models import Article
+from ...models import ArticleTitle
 from ...models import Author
 from ...models import Collection
 from ...models import Issue
@@ -289,7 +290,6 @@ class Command(BaseCommand):
             './/dc:identifier[not(@scheme)]', namespaces=oai_ns)
         doi_xml = article_record.xml.find('.//dc:identifier[@cheme="DOI"]', oai_ns)
 
-        article.title = title_xml.text if title_xml is not None else None
         article.first_page = first_page_xml.text if first_page_xml is not None else None
         article.last_page = last_page_xml.text if last_page_xml is not None else None
         article.ordseq = ordseq
@@ -299,6 +299,10 @@ class Command(BaseCommand):
 
         article.save()
 
+        ArticleTitle.objects.filter(article=article).delete()
+        ArticleTitle(
+            article=article, paral=False, title=title_xml.text if title_xml is not None else None
+        ).save()
         # STEP 2: imports the authors associated with the article
         # --
 
