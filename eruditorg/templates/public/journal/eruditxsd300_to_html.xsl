@@ -337,7 +337,7 @@
   <!-- identifiers -->
   <xsl:template match="idpublic[@scheme = 'doi']">
     <xsl:text>&#x0020;</xsl:text>
-    <a href="{$doiStart}{.}">
+    <a href="{$doiStart}{.}" class="refbiblio-link {name()}" target="_blank">
       <xsl:if test="contains( . , '10.7202')">
         <img src="{% static 'svg/symbole-erudit.svg' %}" title="DOI Érudit" alt="Icône pour les DOIs Érudit" class="erudit-doi"/>
       </xsl:if>
@@ -347,7 +347,7 @@
   </xsl:template>
 
   <xsl:template match="idpublic[@scheme='uri']">
-    <a href="{$uriStart}{.}">
+    <a href="{$uriStart}{.}" class="refbiblio-link {name()}" target="_blank">
       <xsl:text>URI:</xsl:text>
       <xsl:value-of select="."/>
     </a>
@@ -1955,19 +1955,31 @@
   </xsl:template>
   <xsl:template match="refbiblio">
     <xsl:variable name="valeurNO" select="no"/>
-    <li class="refbiblio" role="note">
-      <a class="no" id="{@id}">
-        <xsl:choose>
-          <xsl:when test="$valeurNO">
-            <xsl:apply-templates select="$valeurNO"/>
-            <xsl:text>.</xsl:text>
-          </xsl:when>
-          <xsl:otherwise></xsl:otherwise>
-        </xsl:choose>
-      </a>
+    <li class="refbiblio"  id="{@id}" role="note">
+      <xsl:choose>
+        <xsl:when test="$valeurNO">
+          <xsl:apply-templates select="$valeurNO"/>
+          <xsl:text>. </xsl:text>
+        </xsl:when>
+        <xsl:otherwise></xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="node()[name() != 'idpublic' and name() != 'no']"/>
-      <xsl:text></xsl:text>
-      <xsl:apply-templates select="idpublic"/>
+      <div class="refbiblio-links">
+        <xsl:element name="a">
+          <xsl:attribute name="href">
+            <xsl:text>http://scholar.google.com/scholar?q=</xsl:text>
+            <xsl:apply-templates select="node()[name() != 'idpublic' and name() != 'no']"/>
+          </xsl:attribute>
+          <xsl:attribute name="class">
+            <xsl:text>refbiblio-link scholar-link</xsl:text>
+          </xsl:attribute>
+          <xsl:attribute name="target">
+            <xsl:text>_blank</xsl:text>
+          </xsl:attribute>
+          <xsl:text>Google Scholar</xsl:text>
+        </xsl:element>
+        <xsl:apply-templates select="idpublic"/>
+      </div>
     </li>
   </xsl:template>
 

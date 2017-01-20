@@ -15,13 +15,35 @@
 
      a {
        font-size: 12px;
-       @include fw-mono;
+       
+       &:hover, &:focus, &:active {
+         color: $coral-red;
+         text-decoration: none;
+       }
+
      }
 
      .no {
        margin-right: 0.25em;
      }
 
+   }
+
+   .idpublic {
+     @include fw-mono;
+   }
+
+   .refbiblio-links {
+     margin-bottom: 1em;
+   }
+
+   .refbiblio-link {
+     margin-right: 1em;
+     color: #000;
+   }
+
+   .scholar-link {
+     background-image: linear-gradient(to top, #fff, #FFF 1px, $coral-red 1px, $coral-red 1px, #FFF 2px);
    }
 
  }
