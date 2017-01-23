@@ -45,7 +45,7 @@ class Search(object):
         return Query(self).filter(*args, **kwargs)
 
     def get_results(self, **kwargs):
-        """ Returns te results of the search. """
+        """ Returns the results of the search. """
         return self.filter().get_results(**kwargs)
 
     results = property(get_results)

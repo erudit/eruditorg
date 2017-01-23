@@ -86,23 +86,23 @@ class TestQuery(SolrqTestCase):
     def test_can_have_a_default_querystring(self):
         # Run & check
         query = Query(self.search)
-        self.assertEqual(query._qs, '*:*')
+        self.assertEqual(query._q, '*:*')
 
     def test_can_generate_correct_querystrings_using_q_objects(self):
         # Setup
         query = Query(self.search)
         # Run & check
         self.assertEqual(
-            query.filter(Q(foo='bar'))._qs,
+            query.filter(Q(foo='bar'))._q,
             '(*:*) AND (foo:bar)')
         self.assertEqual(
-            query.filter(Q(foo='bar') | Q(foo='test'))._qs,
+            query.filter(Q(foo='bar') | Q(foo='test'))._q,
             '(*:*) AND ((foo:bar) OR (foo:test))')
         self.assertEqual(
-            query.filter(Q(foo='bar') & Q(foo='test'))._qs,
+            query.filter(Q(foo='bar') & Q(foo='test'))._q,
             '(*:*) AND ((foo:bar) AND (foo:test))')
         self.assertEqual(
-            query.filter((Q(foo='bar') | Q(foo='test')) & Q(xyz='xyz'))._qs,
+            query.filter((Q(foo='bar') | Q(foo='test')) & Q(xyz='xyz'))._q,
             '(*:*) AND (((foo:bar) OR (foo:test)) AND (xyz:xyz))')
 
     def test_can_generate_correct_querystrings_using_simple_parameters(self):
@@ -110,7 +110,7 @@ class TestQuery(SolrqTestCase):
         query = Query(self.search)
         # Run & check
         self.assertTrue(
-            query.filter(foo='bar', xyz='test')._qs in
+            query.filter(foo='bar', xyz='test')._q in
             ['(*:*) AND (foo:bar AND xyz:test)', '(*:*) AND (xyz:test AND foo:bar)'])
 
     def test_can_generate_correct_querystrings_using_q_objects_and_simple_parameters(self):
@@ -118,7 +118,7 @@ class TestQuery(SolrqTestCase):
         query = Query(self.search)
         # Run & check
         self.assertEqual(
-            query.filter(Q(foo='bar') | Q(foo='test'), xyz='xyz')._qs,
+            query.filter(Q(foo='bar') | Q(foo='test'), xyz='xyz')._q,
             '((*:*) AND ((foo:bar) OR (foo:test))) AND (xyz:xyz)')
 
     def test_can_generate_correct_querystrings_using_q_objects_and_negations(self):
@@ -126,7 +126,7 @@ class TestQuery(SolrqTestCase):
         query = Query(self.search)
         # Run & check
         self.assertEqual(
-            query.filter(Q(foo='bar') | ~Q(foo='test'), xyz='xyz')._qs,
+            query.filter(Q(foo='bar') | ~Q(foo='test'), xyz='xyz')._q,
             '((*:*) AND ((foo:bar) OR ((*:* -foo:test)))) AND (xyz:xyz)')
 
     def test_can_use_filters_mapping(self):
@@ -141,5 +141,5 @@ class TestQuery(SolrqTestCase):
 
         # Run & check
         self.assertEqual(
-            query.filter(author='test')._qs,
+            query.filter(author='test')._q,
             '(*:*) AND ((Auteur_tri:*test* OR Auteur_fac:*test*))')
