@@ -492,7 +492,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
             publication_year = self.year
-            current_year = dt.datetime.now().year
             year_offset = self.journal.embargo_in_years
             return True if self.journal.last_publication_year < publication_year + year_offset \
                 else False
