@@ -261,7 +261,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         current_year = dt.datetime.now().year
         filter_kwargs = {
             'year__lte': current_year if self.open_access
-            else current_year - self.embargo_in_years}
+            else self.last_publication_year - self.embargo_in_years}
         return self.issues.filter(**filter_kwargs)
 
     @property
@@ -494,7 +494,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             publication_year = self.year
             current_year = dt.datetime.now().year
             year_offset = self.journal.embargo_in_years
-            return True if current_year <= publication_year + year_offset \
+            return True if self.journal.last_publication_year < publication_year + year_offset \
                 else False
         return False
 
