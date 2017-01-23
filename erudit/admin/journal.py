@@ -97,13 +97,13 @@ class IssueAdmin(admin.ModelAdmin):
     actions = ['make_published', 'make_unpublished', ]
 
     def make_published(self, request, queryset):
-        rows_updated = queryset.update(is_published=True)
-        self.message_user(request, _('%s numéro marqué comme diffusé.') % rows_updated)
+        """Mark a set of issues as published"""
+        queryset.update(is_published=True)
     make_published.short_description = _("Marquer les numéros sélectionnés comme diffusés")
 
     def make_unpublished(self, request, queryset):
-        rows_updated = queryset.update(is_published=False)
-        self.message_user(request, _('%s numéro marqué comme pré-diffusé.') % rows_updated)
+        """Mark a set of issues as pre-published"""
+        queryset.update(is_published=False)
     make_unpublished.short_description = _("Marquer les numéros sélectionnés comme pré-diffusés")
 
 
