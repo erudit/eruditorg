@@ -6,6 +6,7 @@ from itertools import groupby
 from string import ascii_lowercase
 
 from django.conf import settings
+from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -564,6 +565,9 @@ class ArticleFormatDownloadView(
     def has_permission(self):
         obj = self.get_permission_object()
         return obj.publication_allowed_by_authors and self.article_access_granted
+
+    def handle_no_permission(self):
+        return redirect('public:journal:article_detail', **self.kwargs)
 
 
 class ArticleXmlView(ArticleFormatDownloadView):

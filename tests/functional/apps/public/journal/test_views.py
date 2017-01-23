@@ -8,6 +8,7 @@ import unittest.mock
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.http.response import HttpResponseRedirect
 from django.test import Client
 from django.test import RequestFactory
 from django.test.utils import override_settings
@@ -562,10 +563,14 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         request.subscription = None
 
         # Run & check
-        with self.assertRaises(PermissionDenied):
-            ArticleRawPdfView.as_view()(
-                request, journal_code=journal_id, issue_slug=issue.volume_slug,
-                issue_localid=issue_id, localid=article_id)
+        response = ArticleRawPdfView.as_view()(
+            request, journal_code=journal_id, issue_slug=issue.volume_slug,
+            issue_localid=issue_id, localid=article_id)
+
+        assert isinstance(response, HttpResponseRedirect)
+        assert response.url == reverse('public:journal:article_detail', args=(
+            journal_id, issue.volume_slug, issue_id, article_id
+        ))
 
     def test_cannot_be_accessed_if_the_publication_of_the_article_is_not_allowed_by_its_authors(self):  # noqa
         # Setup
@@ -584,10 +589,14 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         request.user = AnonymousUser()
 
         # Run & check
-        with self.assertRaises(PermissionDenied):
-            ArticleRawPdfView.as_view()(
-                request, journal_code=journal_id, issue_slug=issue.volume_slug,
-                issue_localid=issue_id, localid=article_id)
+        response = ArticleRawPdfView.as_view()(
+            request, journal_code=journal_id, issue_slug=issue.volume_slug,
+            issue_localid=issue_id, localid=article_id)
+
+        assert isinstance(response, HttpResponseRedirect)
+        assert response.url == reverse('public:journal:article_detail', args=(
+            journal_id, issue.volume_slug, issue_id, article_id
+        ))
 
 
 @override_settings(DEBUG=True)
