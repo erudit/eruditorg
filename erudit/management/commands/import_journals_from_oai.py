@@ -14,6 +14,7 @@ from sickle.oaiexceptions import BadResumptionToken
 
 from ...conf import settings as erudit_settings
 from ...models import Article
+from ...models import ArticleTitle
 from ...models import Author
 from ...models import Collection
 from ...models import Issue
@@ -36,9 +37,19 @@ class Command(BaseCommand):
             '--mdate', action='store', dest='mdate',
             help='Modification date to use to retrieve journals to import (iso format).')
 
+        parser.add_argument(
+            '--collection-code', action='append', dest='collection_code',
+            help='')
+
+        parser.add_argument(
+            '--journal-code', action='append', dest='journal_code',
+            help='')
+
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.modification_date = options.get('mdate', None)
+        self.collection_codes = options.get('collection_code', None)
+        self.journal_codes = options.get('journal_code', None)
 
         # Handles a potential modification date option
         try:
@@ -55,8 +66,16 @@ class Command(BaseCommand):
         journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
         for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('oai'):
             code = collection_config['collection_code']
+            if self.collection_codes and code not in self.collection_codes:
+                self.stdout.write(self.style.MIGRATE_HEADING(
+                    'Collection code is specified and {0} is not in the list: skipping'.format(
+                        code
+                    )
+                ))
+                continue
             name = collection_config['collection_title']
             endpoint = collection_config['endpoint']
+
             try:
                 collection = Collection.objects.get(code=code)
             except Collection.DoesNotExist:
@@ -92,8 +111,17 @@ class Command(BaseCommand):
 
         journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
         for journal_set in journal_sets:
+
             try:
                 assert journal_set.setSpec.startswith('serie')
+                _, _, journal_code = journal_set.setSpec.split(':')
+                if self.journal_codes and journal_code not in self.journal_codes:
+                    self.stdout.write(self.style.MIGRATE_HEADING(
+                        'Journal code is specified and {0} is not in the list: skipping'.format(
+                            journal_code
+                        )
+                    ))
+                    continue
                 _ic, _ac = self.import_journal(journal_set, collection, oai_config, sickle)
             except AssertionError:
                 pass
@@ -289,7 +317,6 @@ class Command(BaseCommand):
             './/dc:identifier[not(@scheme)]', namespaces=oai_ns)
         doi_xml = article_record.xml.find('.//dc:identifier[@cheme="DOI"]', oai_ns)
 
-        article.title = title_xml.text if title_xml is not None else None
         article.first_page = first_page_xml.text if first_page_xml is not None else None
         article.last_page = last_page_xml.text if last_page_xml is not None else None
         article.ordseq = ordseq
@@ -299,6 +326,10 @@ class Command(BaseCommand):
 
         article.save()
 
+        ArticleTitle.objects.filter(article=article).delete()
+        ArticleTitle(
+            article=article, paral=False, title=title_xml.text if title_xml is not None else None
+        ).save()
         # STEP 2: imports the authors associated with the article
         # --
 
