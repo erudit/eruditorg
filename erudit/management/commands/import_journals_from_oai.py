@@ -41,10 +41,15 @@ class Command(BaseCommand):
             '--collection-code', action='append', dest='collection_code',
             help='')
 
+        parser.add_argument(
+            '--journal-code', action='append', dest='journal_code',
+            help='')
+
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.modification_date = options.get('mdate', None)
         self.collection_codes = options.get('collection_code', None)
+        self.journal_codes = options.get('journal_code', None)
 
         # Handles a potential modification date option
         try:
@@ -81,6 +86,7 @@ class Command(BaseCommand):
             journal_errored_count += _jec
             issue_count += _ic
             article_count += _ac
+
         self.stdout.write(self.style.MIGRATE_HEADING(
             '\nJournals imported: {journal_count} / Journals errored: {journal_errored_count} / '
             'issues imported: {issue_count} / articles imported: {article_count}'.format(
@@ -105,8 +111,17 @@ class Command(BaseCommand):
 
         journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
         for journal_set in journal_sets:
+
             try:
                 assert journal_set.setSpec.startswith('serie')
+                _, _, journal_code = journal_set.setSpec.split(':')
+                if self.journal_codes and journal_code not in self.journal_codes:
+                    self.stdout.write(self.style.MIGRATE_HEADING(
+                        'Journal code is specified and {0} is not in the list: skipping'.format(
+                            journal_code
+                        )
+                    ))
+                    continue
                 _ic, _ac = self.import_journal(journal_set, collection, oai_config, sickle)
             except AssertionError:
                 pass
