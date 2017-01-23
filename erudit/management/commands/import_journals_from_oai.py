@@ -37,9 +37,14 @@ class Command(BaseCommand):
             '--mdate', action='store', dest='mdate',
             help='Modification date to use to retrieve journals to import (iso format).')
 
+        parser.add_argument(
+            '--collection-code', action='append', dest='collection_code',
+            help='')
+
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.modification_date = options.get('mdate', None)
+        self.collection_codes = options.get('collection_code', None)
 
         # Handles a potential modification date option
         try:
@@ -56,8 +61,16 @@ class Command(BaseCommand):
         journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
         for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('oai'):
             code = collection_config['collection_code']
+            if self.collection_codes and code not in self.collection_codes:
+                self.stdout.write(self.style.MIGRATE_HEADING(
+                    'Collection code is specified and {0} is not in the list: skipping'.format(
+                        code
+                    )
+                ))
+                continue
             name = collection_config['collection_title']
             endpoint = collection_config['endpoint']
+
             try:
                 collection = Collection.objects.get(code=code)
             except Collection.DoesNotExist:
@@ -68,7 +81,6 @@ class Command(BaseCommand):
             journal_errored_count += _jec
             issue_count += _ic
             article_count += _ac
-
         self.stdout.write(self.style.MIGRATE_HEADING(
             '\nJournals imported: {journal_count} / Journals errored: {journal_errored_count} / '
             'issues imported: {issue_count} / articles imported: {article_count}'.format(
