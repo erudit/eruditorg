@@ -1,11 +1,9 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans with letter=author_letter %}Auteurs commençant par {{ letter }}{% endblocktrans %} &ndash; Thèses de {{ collection.name }}{% endblock title %}
+{% block title %}{% blocktrans with letter=author_letter collection=collection.name %}Auteurs commençant par {{ letter }}{% endblocktrans %} – Thèses de {{ collection }}{% endblock title %}
 
-{% block meta_description %}
-<meta name="description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ collection.name }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
-{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ collection }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block structured_data_breadcrumb_tail %}
 {

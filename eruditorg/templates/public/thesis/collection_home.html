@@ -1,11 +1,9 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans %}Thèses de {{ collection.name }}{% endblocktrans %}{% endblock title %}
+{% block title %}{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}{% endblock title %}
 
-{% block meta_description %}
-<meta name="description" content="{% blocktrans %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection.name }}.{% endblocktrans %}">
-{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}

@@ -13,9 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock title %} – Érudit</title>
-    {% block meta_description %}
-    <meta name="description" content="{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}">
-    {% endblock meta_description %}
+    <meta name="description" content="{% block meta_description %}{% blocktrans %}Découvrez nos collections de documents en sciences humaines et sociales : revues, livres et actes, thèses, rapports de recherche.{% endblocktrans %}{% endblock meta_description %}">
 
     <!-- Android -->
     <meta name="theme-color" content="#222" />

@@ -1,11 +1,9 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n staticfiles cache %}
 
-{% block title %}{{ journal.name }}{% if article.issue.journal.subtitle %} : {{ article.issue.journal.subtitle }}{% endif %}{% endblock title %}
+{% block title %}{{ journal.name|safe }}{% if article.issue.journal.subtitle %} : {{ article.issue.journal.subtitle }}{% endif %}{% endblock title %}
 
-{% block meta_description %}
-<meta name="description" content="{% blocktrans %}{{ journal_info.about|striptags|truncatechars:150 }}{% endblocktrans %}">
-{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->

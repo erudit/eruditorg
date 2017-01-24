@@ -1,11 +1,9 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}&nbsp;&ndash;&nbsp;{{ collection.name }}{% endblock title %}
+{% block title %}{% blocktrans with year=publication_year collection=collection.name %}Thèses publiées en {{ year }}{% endblocktrans %} – {{ collection }}{% endblock title %}
 
-{% block meta_description %}
-<meta name="description" content="{% blocktrans with year=publication_year %}Consultez les thèses et mémoires de {{ collection.name }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
-{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with year=publication_year collection=collection.name %}Consultez les thèses et mémoires de {{ collection }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block structured_data_breadcrumb_tail %}
 {
