@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 import datetime as dt
 import logging
 import mimetypes
-import os
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -358,7 +356,7 @@ class IssueSubmissionAttachmentView(
     raise_exception = True
 
     def render_to_response(self, context, **response_kwargs):
-        filename = os.path.basename(self.object.path)
+        filename = self.object.get_filename(sanitize=True)
 
         try:
             fsock = open(self.object.path, 'rb')
