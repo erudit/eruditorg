@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('erudit', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('plupload', '0004_auto_20151218_1612'),
+        ('resumable_uploads', '0004_auto_20151218_1612'),
     ]
 
     operations = [
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(verbose_name='Date de création', auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True, verbose_name='Date de modification')),
                 ('issue_submission', models.ForeignKey(verbose_name='Envoi de numéro', to='editor.IssueSubmission', related_name='files_versions')),
-                ('submissions', models.ManyToManyField(to='plupload.ResumableFile')),
+                ('submissions', models.ManyToManyField(to='resumable_uploads.ResumableFile')),
             ],
             options={
                 'verbose_name': "Version de fichiers d'un envoi de numéro",

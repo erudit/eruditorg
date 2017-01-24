@@ -19,7 +19,7 @@ from django.views.generic import ListView
 from django.views.generic import UpdateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
-from plupload.models import ResumableFile
+from resumable_uploads.models import ResumableFile
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin

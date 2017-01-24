@@ -13,7 +13,7 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from influxdb import InfluxDBClient
 from lxml import etree
-from plupload.models import ResumableFile
+from resumable_uploads.models import ResumableFile
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory

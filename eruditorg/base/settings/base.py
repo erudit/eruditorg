@@ -86,7 +86,7 @@ INSTALLED_APPS = (
 
     # Third-party apps
     'account_actions',
-    'plupload',
+    'resumable_uploads',
     'django_filters',
     'rules',
     'ckeditor',

@@ -5,7 +5,7 @@ import datetime as dt
 from django.contrib.auth.models import Group
 from django.core import mail
 from django.utils import timezone as tz
-from plupload.models import ResumableFile
+from resumable_uploads.models import ResumableFile
 
 from core.editor.tasks import _handle_issuesubmission_files_removal
 from core.editor.test import BaseEditorTestCase
