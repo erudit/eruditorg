@@ -206,7 +206,7 @@ class IssueSubmissionFilesVersion(models.Model):
         IssueSubmission, related_name='files_versions', verbose_name=_('Envoi de numéro'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
-    submissions = models.ManyToManyField('plupload.ResumableFile')
+    submissions = models.ManyToManyField('resumable_uploads.ResumableFile')
 
     class Meta:
         ordering = ['created', ]

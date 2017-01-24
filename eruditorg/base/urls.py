@@ -39,7 +39,7 @@ urlpatterns += i18n_patterns(
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
-    url(r'^upload/', include('plupload.urls', namespace='plupload')),
+    url(r'^upload/', include('resumable_uploads.urls', namespace='resumable_uploads')),
 
     # The PDF viewer exposes a PDF.js template
     url(r'^pdf-viewer\.html$',

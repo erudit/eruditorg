@@ -13,7 +13,7 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from influxdb import InfluxDBClient
 from lxml import etree
-from plupload.models import ResumableFile
+from resumable_uploads.models import ResumableFile
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
@@ -379,6 +379,26 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'image/png')
         self.assertEqual(response['Content-Disposition'], 'attachment; filename=pixel.png')
+
+    def test_can_upload_file_with_spaces_and_commas(self):
+        # Setup
+        with open(os.path.join(FIXTURE_ROOT, 'pixel, .png'), mode='rb') as f:
+            rfile = ResumableFile.objects.create(
+                path=os.path.join(FIXTURE_ROOT, 'pixel, .png'),
+                filesize=f.tell(), uploadsize=f.tell())
+
+        User.objects.create_superuser(
+            username='admin', email='admin@xyz.com', password='top_secret')
+        self.client.login(username='admin', password='top_secret')
+        self.issue_submission.last_files_version.submissions.add(rfile)
+        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
+            'journal_pk': self.journal.pk, 'pk': rfile.pk})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'image/png')
+        self.assertEqual(response['Content-Disposition'], 'attachment; filename=pixel__.png')
 
     def test_is_able_to_handle_unknown_file_content_types(self):
         # Setup

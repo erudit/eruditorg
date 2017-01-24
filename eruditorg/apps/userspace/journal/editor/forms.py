@@ -2,8 +2,8 @@
 
 from django import forms
 from django.utils.translation import gettext as _
-from plupload.forms import PlUploadFormField
-from plupload.models import ResumableFile
+from resumable_uploads.forms import PlUploadFormField
+from resumable_uploads.models import ResumableFile
 
 from core.editor.models import IssueSubmission
 
@@ -96,7 +96,7 @@ class IssueSubmissionUploadForm(IssueSubmissionForm):
             .values_list('id', flat=True)
         self.fields['submissions'].initial = ','.join(map(str, initial_files))
         self.fields['submissions'].widget.template_name = \
-            'userspace/journal/editor/plupload_widget.html'
+            'userspace/journal/editor/resumable_uploads_widget.html'
 
     def save(self, commit=True):
         submissions = self.cleaned_data.pop('submissions', '')

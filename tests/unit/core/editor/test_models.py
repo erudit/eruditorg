@@ -1,6 +1,6 @@
 # -* coding: utf-8 -*-
 
-from plupload.models import ResumableFile
+from resumable_uploads.models import ResumableFile
 
 from base.test.testcases import EruditTestCase
 from core.editor.models import IssueSubmission
