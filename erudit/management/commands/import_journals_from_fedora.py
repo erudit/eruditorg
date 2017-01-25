@@ -619,7 +619,7 @@ class Command(BaseCommand):
         article.html_title = article_erudit_object.html_title
         article.subtitle = article_erudit_object.subtitle
         article.surtitle = article_erudit_object.section_title
-        article.language = article_erudit_object.lang
+        article.language = article_erudit_object.language
 
         publisher_name = article_erudit_object.publisher
         if publisher_name:
