@@ -1,89 +1,7 @@
-{% extends "public/base.html" %}
+{% extends "public/journal/article_base.html" %}
 {% load i18n staticfiles %}
 {% load public_journal_tags %}
 {% load cache %}
-
-{% block title %}{{ article.title }} – {{ article.issue.journal.name }}{% if article.issue.journal.subtitle %} : {{ article.issue.journal.subtitle }}{% endif %}{% endblock title %}
-
-{% block meta_description %}
-<meta name="description" content="{% blocktrans %}Un article {{ article.journal_type }} de la revue {{ article.issue.journal.name }}, diffusée par plateforme Érudit. {% endblocktrans %}">
-{% endblock meta_description %}
-
-{% block meta_tags %}
-{% cache FOREVER_TTL "public_article_detail_metatags" article.id LANGUAGE_CODE %}
-<!-- Facebook / Open Graph -->
-<meta property="fb:app_id" content="128099979787">
-<meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{{ article.title }}">
-<meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="fr_CA">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@eruditorg">
-<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{{ article.title }} – Érudit">
-
-<!-- Google Scholar -->
-<meta name="citation_title" content="{% for title in article.titles.all %}{{ title }}{% if not forloop.last %} / {% endif %}{% endfor %}" />
-<meta name="citation_journal_abbrev" content="{{ article.issue.journal.code }}">
-<meta name="citation_online_date" content="{{ article.issue.date_published|date:'Y/m/d' }}">
-<meta name="citation_abstract_html_url" content="http://id.erudit.org/iderudit/{{ article.localidentifier }}" />
-{% for author in article.erudit_object.authors %}
-{% if author.firstname and author.lastname %}
-<meta name="citation_author" content="{{ author.lastname }}, {{ author.firstname }}" />
-{% elif author.othername %}
-<meta name="citation_author" content="{{ author.othername }}" />
-{% endif %}
-{% if author.email %}
-<meta name="citation_author_email" content="{{ author.email }}" />
-{% endif %}
-{% for aff in author.affiliations %}
-<meta name="citation_author_institution" content="{{ aff }}" />
-{% endfor %}
-{% endfor %}
-<meta name="citation_journal_title" content="{{ article.issue.journal.name }}{% if article.issue.journal.subtitle %}&nbsp;: {{ article.issue.journal.subtitle }}{% endif %}" />
-{% for abstract in article.abstracts.all %}
-<meta name="citation_abstract" lang="{{ abstract.language }}" content="{{ abstract.text }}" />
-{% endfor %}
-<meta name="citation_language" content="{{ article.language }}" />
-{% if article.first_page %}
-<meta name="citation_firstpage" content="{{ article.first_page }}" />
-{% endif %}
-{% if article.last_page %}
-<meta name="citation_lastpage" content="{{ article.last_page }}" />
-{% endif %}
-{% if article.issue.journal.issn_print %}
-<meta name="citation_issn" content="{{ article.issue.journal.issn_print }}" />
-{% endif %}
-{% if article.issue.journal.issn_web %}
-<meta name="citation_issn" content="{{ article.issue.journal.issn_web }}" />
-{% endif %}
-{% if article.issue.volume %}
-<meta name="citation_volume" content="{{ article.issue.volume }}" />
-{% endif %}
-{% if article.issue.number %}
-<meta name="citation_issue" content="{{ article.issue.number }}" />
-{% endif %}
-{% if not article.issue.embargoed %}
-<meta name="citation_fulltext_world_readable" content="" />
-{% endif %}
-<meta name="citation_publication_date" content="{{ article.issue.year }}" />
-<meta name="citation_date" content="{{ article.issue.year }}" />
-<meta name="citation_publisher" content="{{ article.publisher.name }}" />
-{% if article.doi %}<meta name="citation_doi" content="{{ article.doi }}" />{% endif %}
-{% if article.erudit_object.processing == 'complet' %}
-<meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-{% endif %}
-{% if article.fedora_object.pdf.exists %}
-<meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-{% endif %}
-{% for keywords_lang in article.erudit_object.keywords %}
-  <meta name="citation_keywords" lang="{{ keywords_lang.lang }}" content="{% for k in keywords_lang.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
-{% endfor %}
-{% endcache %}
-{% endblock meta_tags %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -133,30 +51,6 @@
 }
 </script>
 {% endblock structured_data %}
-
-{% block body_class %}public static-header{% endblock body_class %}
-{% block body_id %}article_detail{% endblock body_id %}
-{% block data_controller %}public:journal:article_detail{% endblock data_controller %}
-
-{% block header_class %}static{% endblock header_class %}
-
-{% block breadcrumb %}{{ block.super }}
-<li>
-  <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
-</li>
-<li>
-  <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
-   {% if article.issue.html_title %}
-   {{ article.issue.html_title|striptags|safe|truncatechars:50 }}
-   {% else %}
-   {{ article.issue.volume_title_with_pages }}
-   {% endif %}
-  </a>
-</li>
-<li>
-  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article.title|truncatechars:50 }}</a>
-</li>
-{% endblock breadcrumb %}
 
 {% block alert %}
 <div class="alert alert-warning">

@@ -1,79 +1,11 @@
-{% extends "public/base.html" %}
+{% extends "public/journal/article_base.html" %}
 {% load i18n staticfiles %}
 {% load public_journal_tags %}
 {% load cache %}
 
-{% block title %}{{ article.title }} {% trans '(notice)' %} – {{ article.issue.journal.name }}{% if article.issue.journal.subtitle %} : {{ article.issue.journal.subtitle }}{% endif %}{% endblock title %}
-
-{% block meta_description %}
-<meta name="description" content="{% blocktrans %}Notice. Un article {{ article.journal_type }} de la revue {{ article.issue.journal.name }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
-{% endblock meta_description %}
-
-{% block data_controller %}public:journal:article_detail{% endblock data_controller %}
-
-{% block meta_tags %}
-{% cache FOREVER_TTL "public_article_summary_metatags" article.id LANGUAGE_CODE %}
-<!-- Facebook / Open Graph -->
-<meta property="fb:app_id" content="128099979787">
-<meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{{ article.title }}">
-<meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="fr_CA">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@eruditorg">
-<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{{ article.title }} – Érudit">
-
-<!-- Google Scholar -->
-<meta name="citation_title" content="{{ article.title }}" />
-{% for author in article.authors.all %}
-  {% if author.firstname and author.lastname %}
-    <meta name="citation_author" content="{{ author.lastname }}, {{ author.firstname }}" />
-  {% elif author.othername %}
-    <meta name="citation_author" content="{{ author.othername }}" />
-  {% endif %}
-  {% for aff in author.affiliations.all %}
-    <meta name="citation_author_institution" content="{{ aff.name }}" />
-  {% endfor %}
-{% endfor %}
-<meta name="citation_journal_title" content="{{ article.issue.journal.name }}" />
-{% for abstract in article.abstracts.all %}
-  <meta name="citation_abstract" lang="{{ abstract.language }}" content="{{ abstract.text }}" />
-{% endfor %}
-<meta name="citation_language" content="{{ article.language }}" />
-{% if article.first_page %}
-  <meta name="citation_firstpage" content="{{ article.first_page }}" />
-{% endif %}
-{% if article.last_page %}
-  <meta name="citation_lastpage" content="{{ article.last_page }}" />
-{% endif %}
-<meta name="citation_issn" content="{{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}" />
-{% if article.issue.volume %}
-  <meta name="citation_volume" content="{{ article.issue.volume }}" />
-{% endif %}
-{% if article.issue.number %}
-  <meta name="citation_issue" content="{{ article.issue.number }}" />
-{% endif %}
-{% if not article.issue.embargoed %}
-<meta name="citation_fulltext_world_readable" content="" />
-{% endif %}
-<meta name="citation_publication_date" content="{{ article.issue.year }}" />
-<meta name="citation_date" content="{{ article.issue.year }}" />
-<meta name="citation_publisher" content="{{ article.publisher.name }}" />
-{% if article.doi %}<meta name="citation_doi" content="{{ article.doi }}" />{% endif %}
-<meta name="citation_html_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-<meta name="citation_pdf_url" content="{{ request.is_secure|yesno:"https,http" }}://{{ request.site.domain }}{% url 'public:journal:article_raw_pdf' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" />
-{% for lang_code, keywords in keywords_dict.items %}
-  <meta name="citation_keywords" lang="{{ lang_code }}" content="{% for k in keywords %}{{ k.name }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
-{% endfor %}
-{% endcache %}
-{% endblock meta_tags %}
+{% block meta_description %}{% trans 'Notice. ' %}{{ block.super }}{% endblock meta_description %}
 
 {% block structured_data %}
-{{ block.super }}
 {% cache FOREVER_TTL "public_article_summary_structured_data" article.id LANGUAGE_CODE %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
@@ -104,36 +36,34 @@
     }
   },{
     "@type": "ListItem",
+    "position": 4,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}",
+      "name": "{{ article.issue.volume_title_with_pages }}"
+    }
+  },{
+    "@type": "ListItem",
     "position": 5,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_summary' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
       "name": "{{ article.title }}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 6,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_summary' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
+      "name": "{% trans 'Notice bibliographique' %}"
     }
   }]
 }
 </script>
 {% endblock structured_data %}
 
-{% block body_class %}public static-header{% endblock body_class %}
-{% block body_id %}article_detail{% endblock body_id %}
-
-{% block header_class %}static{% endblock header_class %}
-
-{% block breadcrumb %}{{ block.super }}
+{% block breadcrumb %}
+{{ block.super }}
 <li>
-  <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
-</li>
-<li>
-  <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}">
-   {% if article.issue.html_title %}
-   {{ article.issue.html_title|safe|truncatechars:50 }}
-   {% else %}
-   {{ article.issue.volume_title_with_pages }}
-   {% endif %}
-  </a>
-</li>
-<li>
-  <a href="{% url 'public:journal:article_summary' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{% blocktrans with title=article.title|truncatechars:50 %}{{ title }} - Résumé{% endblocktrans %}</a>
+  <a href="{% url 'public:journal:article_summary' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{% trans 'Notice bibliographique' %}</a>
 </li>
 {% endblock breadcrumb %}
 
