@@ -571,7 +571,6 @@ class ArticleFormatDownloadView(
         return redirect('public:journal:article_detail', **self.kwargs)
 
 
-
 class ArticleXmlView(ArticleFormatDownloadView):
     content_type = 'application/xml'
     datastream_name = 'erudit_xsd300'

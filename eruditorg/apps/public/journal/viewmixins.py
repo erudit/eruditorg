@@ -95,11 +95,7 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
-        article_languages = article.language.split()
-        # The principal title does not have a language attribute.
-        context['citation_title_metadata'] =  article.titles.filter(
-            Q(paral=False) | Q(language__in=article_languages)
-        ).values_list('title', flat=True)
+        context['citation_title_metadata'] = article.get_erudit_object().get_formatted_title()
         return context
 
 
