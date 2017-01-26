@@ -1,14 +1,8 @@
+import mock
 from erudit.admin import IssueAdmin
 from erudit.models import Issue
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import IssueFactory
-
-
-class MockRequest(object):
-    pass
-
-
-request = MockRequest()
 
 
 class TestIssueAdmin(BaseEruditTestCase):
@@ -24,7 +18,7 @@ class TestIssueAdmin(BaseEruditTestCase):
         issue_3 = IssueFactory.create(journal=self.journal, is_published=False)
         queryset = Issue.objects.filter(id__in=(issue_1.id, issue_2.id, ))
         # Run
-        self.admin.make_published(self.admin, request, queryset)
+        self.admin.make_published(self.admin, mock.MagicMock(), queryset)
         issue_1 = Issue.objects.get(id=issue_1.id)
         issue_2 = Issue.objects.get(id=issue_2.id)
         issue_3 = Issue.objects.get(id=issue_3.id)
@@ -39,7 +33,7 @@ class TestIssueAdmin(BaseEruditTestCase):
         issue_3 = IssueFactory.create(journal=self.journal, is_published=True)
         queryset = Issue.objects.filter(id__in=(issue_1.id, issue_2.id, ))
         # Run
-        self.admin.make_unpublished(self.admin, request, queryset)
+        self.admin.make_unpublished(self.admin, mock.MagicMock(), queryset)
         issue_1 = Issue.objects.get(id=issue_1.id)
         issue_2 = Issue.objects.get(id=issue_2.id)
         issue_3 = Issue.objects.get(id=issue_3.id)
