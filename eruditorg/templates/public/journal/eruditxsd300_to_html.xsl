@@ -70,17 +70,25 @@
             <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
           </h1>
-
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur">
               <xsl:apply-templates select="liminaire/grauteur/auteur" mode="author"/>
             </ul>
           </xsl:if>
-
         </div>
 
-        <!-- TODO: cover image -->
-        <div class="issue-cover col-sm-3">
+        <!-- issue cover image or journal logo -->
+        <div class="issue-image col-sm-3">
+          {% if article.issue.has_coverpage %}
+          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal }}{% endblocktrans %}">
+            <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|safe }}, {% endif %}
+              {{ article.issue.volume_title_with_pages }}, {{ article.issue.journal.name }}" />
+            </a>
+          {% else %}
+          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal }}{% endblocktrans %}">
+            <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive journal-logo" alt="{% trans 'Logo de' %} {{ article.issue.journal.name }}" />
+          </a>
+          {% endif %}
           {% if only_summary %}
           <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
@@ -103,7 +111,7 @@
               </a>
             </span>
           </dd>
-          {% if not article.issue.journal.type.code == 'C' %}
+          {% if article.issue.journal.type.code == 'S' %}
           <dt>DOI</dt>
           <dd>
             <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">

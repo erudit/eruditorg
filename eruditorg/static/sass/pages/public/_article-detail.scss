@@ -174,10 +174,18 @@ $article-toolbar-width: 80px;
       margin: 0.35em 0;
     }
 
-    .issue-cover {
+    .issue-image {
+
       img {
+        margin-bottom: 1em;
         float: right;
       }
+
+      .issue-cover {
+        max-height: 150px;
+        outline: 1px solid $mid-grey;
+      }
+
     }
 
     .meta-article {
@@ -249,6 +257,7 @@ $article-toolbar-width: 80px;
 
       .pagination {
         margin: 0;
+        padding: 0;
         display: inline;
       }
 
