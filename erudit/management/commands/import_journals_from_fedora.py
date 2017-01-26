@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import itertools
 import datetime as dt
 import logging
 import re
@@ -615,11 +615,10 @@ class Command(BaseCommand):
         article.doi = article_erudit_object.doi
         article.first_page = article_erudit_object.first_page
         article.last_page = article_erudit_object.last_page
-        article.bibliographic_reference = article_erudit_object.bibliographic_reference
         article.html_title = article_erudit_object.html_title
         article.subtitle = article_erudit_object.subtitle
         article.surtitle = article_erudit_object.section_title
-        article.language = article_erudit_object.lang
+        article.language = article_erudit_object.language
 
         publisher_name = article_erudit_object.publisher
         if publisher_name:
@@ -629,28 +628,35 @@ class Command(BaseCommand):
         article.clean()
         article.save()
 
+        titles = article_erudit_object.get_titles()
+
         # Delete all the titles of the article
         ArticleTitle.objects.filter(article=article).delete()
+        ArticleSubtitle.objects.filter(article=article).delete()
 
         # Reimport titles
         ArticleTitle(
-            article=article, paral=False, title=article_erudit_object.titles['title']
+            article=article, paral=False, title=titles['main'].title,
         ).save()
 
-        for lang, title in article_erudit_object.titles['paral'].items():
-            ArticleTitle(article=article, language=lang, title=title, paral=True).save()
+        if titles['main'].subtitle:
+            ArticleSubtitle(article=article, paral=False, title=titles['main'].subtitle)
 
-        # Delete all the subtitles of the article
-        ArticleSubtitle.objects.filter(article=article).delete()
-
-        # Reimport subtitles
-        if article_erudit_object.subtitles['title']:
-            ArticleSubtitle(
-                article=article, paral=False, title=article_erudit_object.subtitles['title']
+        for paral_title in itertools.chain(titles['paral'], titles['equivalent']):
+            ArticleTitle(
+                article=article,
+                language=paral_title.lang,
+                title=paral_title.title,
+                paral=True
             ).save()
 
-            for lang, title in article_erudit_object.subtitles['paral'].items():
-                ArticleSubtitle(article=article, language=lang, title=title, paral=True).save()
+            if paral_title.subtitle:
+                ArticleSubtitle(
+                    article=article,
+                    language=paral_title.lang,
+                    title=paral_title.subtitle,
+                    paral=True
+                ).save()
 
         # STEP 3: creates or updates the authors of the article
         # --
