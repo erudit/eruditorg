@@ -37,7 +37,8 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
             elif isinstance(obj, erudit_models.Thesis):
                 real_object_data = ThesisSerializer(obj).data
             # Caches the content of the object for 1 hour
-            cache.set(cache_key, real_object_data, 60 * 60)
+            if real_object_data is not None:
+                cache.set(cache_key, real_object_data, 60 * 60)
 
         return real_object_data
 
@@ -47,7 +48,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     abstract = serializers.SerializerMethodField()
     type = serializers.SerializerMethodField()
     collection_name = serializers.SerializerMethodField()
-    bibliographic_reference = serializers.SerializerMethodField()
+    reviewed_works = serializers.SerializerMethodField()
     paral_titles = serializers.SerializerMethodField()
     paral_subtitles = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
@@ -72,7 +73,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'issue_volume', 'issue_published', 'issue_volume_slug', 'publication_date',
             'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
-            'external_url', 'external_pdf_url', 'collection_name', 'bibliographic_reference',
+            'external_url', 'external_pdf_url', 'collection_name', 'reviewed_works',
         ]
 
     def get_authors(self, obj):
@@ -107,8 +108,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_collection_name(self, obj):
         return obj.issue.journal.collection.name
 
-    def get_bibliographic_reference(self, obj):
-        return obj.bibliographic_reference
+    def get_reviewed_works(self, obj):
+        return obj.get_erudit_object().get_reviewed_works()
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code

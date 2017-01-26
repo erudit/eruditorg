@@ -26,6 +26,7 @@ from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
+from erudit.fedora.modelmixins import FedoraMixin
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -469,7 +470,8 @@ class TestArticleDetailView(BaseEruditTestCase):
         super(TestArticleDetailView, self).setUp()
         self.factory = RequestFactory()
 
-    def test_works_with_localidentifiers(self):
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_works_with_localidentifiers(self, mock_fedora_mixin):
         # Setup
         self.journal.open_access = True
         self.journal.save()
