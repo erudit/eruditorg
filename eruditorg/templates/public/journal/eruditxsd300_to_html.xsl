@@ -230,15 +230,15 @@
         {% endif %}
 
         <!-- toolbox -->
-        <aside class="pull-right toolbox hidden-xs hidden-sm">
+        <aside class="pull-right hidden-xs hidden-sm">
           <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
-          <ul class="unstyled">
+          <ul class="unstyled toolbox">
             <li>
-              <button id="tool-citation-save" data-citation-save="#article_detail"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <button id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="erudicon erudicon-tools-save"></span>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </button>
-              <button id="tool-citation-remove" data-citation-remove="#article_detail"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <button class="saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="erudicon erudicon-tools-save"></span>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
