@@ -211,8 +211,10 @@
                             <br><span>{{ paral_title }}</span>
                         {% endfor %}
                       {% endif %}
-                      {% if document.real_object.bibliographic_reference %}
-                      <br><span>{{ document.real_object.bibliographic_reference }}</span>
+                      {% if document.real_object.reviewed_works %}
+                      {% for reference in document.real_object.reviewed_works %}
+                      <br><span>{{ reference }}</span>
+                      {% endfor %}
                       {% endif %}
                     </a>
                   </h3>

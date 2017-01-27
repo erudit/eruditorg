@@ -42,6 +42,7 @@ def get_mocked_erudit_object():
     m.last_page = 12
     m.abstracts = [{'lang': 'fr', 'content': 'This is a test'}]
     m.get_authors = lambda: [{'firstname': 'Test', 'lastname': 'Foobar'}]
+    m.get_reviewed_works = lambda: []
     return m
 
 
@@ -57,7 +58,6 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         # Setup
         mock_get_results.side_effect = fake_get_results
         mock_erudit_object.return_value = get_mocked_erudit_object()
-
         issue = IssueFactory.create(journal=self.journal, date_published=now())
         localidentifiers = []
         for i in range(0, 50):

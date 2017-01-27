@@ -48,6 +48,7 @@ from .forms import JournalListFilterForm
 from .viewmixins import ArticleAccessCheckMixin
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
+from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 
 
@@ -424,7 +425,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 
 class BaseArticleDetailView(
-        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleMixin,
+        FedoraServiceRequiredMixin, ArticleAccessCheckMixin, SingleArticleWithScholarMetadataMixin,
         ArticleViewMetricCaptureMixin, DetailView):
     context_object_name = 'article'
     model = Article

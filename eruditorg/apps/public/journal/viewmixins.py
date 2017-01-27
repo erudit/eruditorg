@@ -89,6 +89,16 @@ class SingleArticleMixin(object):
         return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])
 
 
+class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
+    """ Add Google Scholar Metadata to the context """
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        article = self.get_object()
+        context['citation_title_metadata'] = article.get_erudit_object().get_formatted_title()
+        return context
+
+
 class ArticleViewMetricCaptureMixin(object):
     tracking_article_view_granted_metric_name = 'erudit__journal__article_view'
     tracking_view_type = 'html'
