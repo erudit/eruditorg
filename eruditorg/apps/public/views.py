@@ -4,6 +4,7 @@ import datetime as dt
 import logging
 import time
 
+from django.shortcuts import render
 from django.core.cache import cache
 from django.utils import translation
 from django.views.generic import TemplateView
@@ -13,6 +14,14 @@ from erudit.models import Issue
 from erudit.models import Discipline
 
 logger = logging.getLogger(__name__)
+
+
+def internal_error_view(request):
+    return render(request, 'public/500.html')
+
+
+def not_found_view(request):
+    return render(request, 'public/404.html')
 
 
 class HomeView(TemplateView):
