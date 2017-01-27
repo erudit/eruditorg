@@ -19,7 +19,7 @@ class EruditDocumentSolrFilter(object):
     operators = [OP_AND, OP_OR, OP_NOT, ]
 
     aggregation_correspondence = {
-        'AnneePublication': 'year',
+        'Annee': 'year',
         'TypeArticle_fac': 'article_type',
         'Langue': 'language',
         'TitreCollection_fac': 'collection',
@@ -194,7 +194,7 @@ class EruditDocumentSolrFilter(object):
             ystart = pub_year_start if pub_year_start is not None else '*'
             yend = pub_year_end if pub_year_end is not None else '*'
             sqs = sqs.filter_query(
-                AnneePublication='[{start} TO {end}]'.format(start=ystart, end=yend)
+                Annee='[{start} TO {end}]'.format(start=ystart, end=yend)
             )
 
         # Applies the languages filter
@@ -228,7 +228,7 @@ class EruditDocumentSolrFilter(object):
 
         # Applies the publication year aggregation-filter
         if agg_pub_years:
-            sqs = self._filter_solr_multiple(sqs, 'AnneePublication', agg_pub_years)
+            sqs = self._filter_solr_multiple(sqs, 'Annee', agg_pub_years)
 
         # Applies the languages aggregation-filter
         if agg_languages:
@@ -297,7 +297,6 @@ class EruditDocumentSolrFilter(object):
         # Trigger the execution of the query in order to get a list of results from the Solr index.
         results = solr_query.get_results(
             sort=self.get_solr_sorting(request), rows=page_size, start=start)
-
         # Determines the localidentifiers of the documents in order to filter the queryset and the
         # total number of documents.
         localidentifiers = [r['ID'] for r in results.docs]

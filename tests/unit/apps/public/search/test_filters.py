@@ -125,7 +125,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         )
         self.assertEqual(
             filt.sqs._fq,
-            '(*:*) AND (((AnneePublication:"2015")) OR (AnneePublication:"2016"))'
+            '(*:*) AND (((Annee:"2015")) OR (Annee:"2016"))'
         )
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -146,7 +146,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
             filt.sqs._q, '(*:*) AND (Metadonnees:"test")')
 
         self.assertEqual(
-            filt.sqs._fq, '(*:*) AND (AnneePublication:[2012 TO 2016])'
+            filt.sqs._fq, '(*:*) AND (Annee:[2012 TO 2016])'
         )
 
     @unittest.mock.patch.object(Query, 'get_results')
