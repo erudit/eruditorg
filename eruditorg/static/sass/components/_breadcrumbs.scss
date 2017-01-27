@@ -3,8 +3,7 @@
  */
 
 .breadcrumb {
-	margin-bottom: 1.25em;
-	padding: $margin-vertical-default 0 0 0;
+	padding: 1.25em 0;
 
   ul {
     @include list-unstyled;
