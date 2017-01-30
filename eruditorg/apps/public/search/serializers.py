@@ -77,8 +77,8 @@ class ArticleSerializer(serializers.ModelSerializer):
         ]
 
     def get_authors(self, obj):
-        if obj.fedora_object:
-            article_object = obj.get_erudit_object()
+        if obj.get_fedora_object():
+            article_object = obj.erudit_object
             return article_object.get_authors()
         authors = []
         for author in obj.authors.all():
@@ -109,7 +109,8 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.issue.journal.collection.name
 
     def get_reviewed_works(self, obj):
-        return obj.get_erudit_object().get_reviewed_works()
+        if obj.get_fedora_object():
+            return obj.erudit_object.get_reviewed_works()
 
     def get_journal_code(self, obj):
         return obj.issue.journal.code

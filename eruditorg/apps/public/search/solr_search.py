@@ -31,7 +31,7 @@ class Search(BaseSearch):
         'fl': 'ID',
         'facet': 'true',
         'facet.field': [
-            'AnneePublication',
+            'Annee',
             'TypeArticle_fac',
             'Langue',
             'TitreCollection_fac',

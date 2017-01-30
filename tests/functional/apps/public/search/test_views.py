@@ -74,6 +74,28 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         results = json.loads(smart_text(results_data))
         self.assertEqual(results['pagination']['count'], 50)
 
+    @unittest.mock.patch.object(FedoraMixin, 'get_fedora_object')
+    @unittest.mock.patch.object(Query, 'get_results')
+    def test_can_return_erudit_documents_not_in_fedora(self, mock_get_results, mock_fedora_object):
+        # Setup
+        mock_get_results.side_effect = fake_get_results
+        mock_fedora_object.return_value = None
+        issue = IssueFactory.create(journal=self.journal, date_published=now())
+        localidentifiers = []
+        for i in range(0, 1):
+            lid = 'lid-{0}'.format(i)
+            localidentifiers.append(lid)
+            ArticleFactory.create(issue=issue, localidentifier=lid)
+
+        request = self.factory.get('/', data={'format': 'json'})
+        list_view = EruditDocumentListAPIView.as_view()
+
+        # Run
+        results_data = list_view(request).render().content
+        # Check
+        results = json.loads(smart_text(results_data))
+        self.assertEqual(results['pagination']['count'], 50)
+
 
 @pytest.mark.django_db
 class TestAdvancedSearchView(object):
