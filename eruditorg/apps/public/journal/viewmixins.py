@@ -96,6 +96,8 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
         context['citation_title_metadata'] = article.get_erudit_object().get_formatted_title()
+        context['citation_journal_title_metadata'] = article.get_erudit_object()\
+            .get_formatted_journal_title()
         return context
 
 
