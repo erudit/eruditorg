@@ -148,6 +148,7 @@ class ThesisFactory(factory.django.DjangoModelFactory):
     title = factory.Sequence(lambda n: 'Thèse {}'.format(n))
     url = faker.url()
     publication_year = faker.year()
+    localidentifier = factory.Sequence(lambda n: 'thesis-{}'.format(n))
 
     class Meta:
         model = 'erudit.Thesis'
