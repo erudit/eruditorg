@@ -48,15 +48,20 @@
 <main role="main">
   <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
   {% cache LONG_TTL "public_home" LANGUAGE_CODE %}
+  <section class="banner">
+    <div class="container">
+      <h2 class="banner-header">{% trans "Cultivez <br/>votre savoir." %}</h2>
+    </div>
+  </section>
+
   <!-- SEARCH PUBLICATIONS -->
   <section class="glory">
     <div class="container">
       <div class="row">
         <header class="col-xs-12 col-md-10 col-lg-8 glory--header">
-          <h2 class="glory--header--title">
-            <span>{% trans "Cultivez votre savoir." %}</span>
-            <span>{% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}</span>
-          </h2>
+          <h3 class="glory--header--title">
+            {% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}
+          </h3>
         </header>
       </div>
       <div class="row">

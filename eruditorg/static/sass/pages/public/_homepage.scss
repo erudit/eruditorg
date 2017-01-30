@@ -25,6 +25,50 @@
 
   }
 
+  #main-nav .main-section {
+
+    &:hover, &:focus, &:active {
+      color: #000;
+    }
+
+  }
+
+  #site-header {
+    background: none;
+    border: none;
+
+    &.compact {
+      background: #FFF;
+      border-bottom: 1px solid $mid-grey;
+    }
+
+  }
+
+  .banner {
+    background: url('../img/banner.png') no-repeat center bottom;
+    background-size: cover;
+    height: 375px;
+    max-height: 50vh;
+    width: 100%;
+    margin-top: -100px;
+
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+      background-position: -200px 100px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      background-position: center 150px;
+    }
+
+    .banner-header {
+      text-align: left;
+      margin-top: 125px;
+      font-size: 4vh;
+      color: $coral-red;
+    }
+
+  }
+
   .glory {
     padding-top: 50px;
     padding-bottom: 60px;
