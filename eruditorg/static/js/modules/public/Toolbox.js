@@ -10,7 +10,7 @@ class Toolbox {
 
   init() {
 
-  	this.el.on('click', '#tool-download', this.download);
+    this.el.on('click', '#tool-download', this.download);
 
     // Initializes modals
     this.citation = new CiteModal( this.el.find('#tool-cite') );
@@ -18,10 +18,10 @@ class Toolbox {
   }
 
   download(event) {
-  	event.preventDefault();
+    event.preventDefault();
 
-  	window.open( $(this).data('href') );
-  	return false;
+    window.open( $(this).data('href') );
+    return false;
   }
 
 }

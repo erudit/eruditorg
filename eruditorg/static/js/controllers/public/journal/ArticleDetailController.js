@@ -24,31 +24,31 @@ export default {
 
   sticky_elements : function () {
 
-  	var $sticky_header 			  = this.article.find('.article-header-sticky'),
-  		  $sticky_elements 		  = this.article.find('.article-table-of-contents, .toolbox, .pagination-arrow'),
-  		  transform 				    = getPrefix('transform');
+    var $sticky_header         = this.article.find('.article-header-sticky'),
+        $sticky_elements       = this.article.find('.article-table-of-contents, .toolbox, .pagination-arrow'),
+        transform             = getPrefix('transform');
 
     // save sticky header height
     this.sticky_header_height = $sticky_header.outerHeight() - 20;
 
 
     // sticky elements
-  	$sticky_elements
+    $sticky_elements
       .css('padding-bottom', this.sticky_header_height)
-  		.stick_in_parent({offset_top: 20})
-  		.first()
-  		.on("sticky_kit:stick", (e) => {
-  			setTimeout(function(){
-  				$sticky_elements.css(transform, 'translate(0, ' + this.sticky_header_height+'px)');
-  				$sticky_header.css(transform, 'translate(-50%, 0%)');
-  			}, 0);
-  		})
-  		.on("sticky_kit:unstick", (e) => {
-  			setTimeout(function(){
-  				$sticky_elements.css(transform, 'translate(0, 0)');
-  				$sticky_header.css(transform, 'translate(-50%, -100%)');
-  			}, 0);
-  		});
+      .stick_in_parent({offset_top: 20})
+      .first()
+      .on("sticky_kit:stick", (e) => {
+        setTimeout(function(){
+          $sticky_elements.css(transform, 'translate(0, ' + this.sticky_header_height+'px)');
+          $sticky_header.css(transform, 'translate(-50%, 0%)');
+        }, 0);
+      })
+      .on("sticky_kit:unstick", (e) => {
+        setTimeout(function(){
+          $sticky_elements.css(transform, 'translate(0, 0)');
+          $sticky_header.css(transform, 'translate(-50%, -100%)');
+        }, 0);
+      });
   },
 
   smooth_scroll : function () {
