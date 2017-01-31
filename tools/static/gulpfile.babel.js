@@ -152,7 +152,7 @@ gulp.task('build-videojs-js', function() {
     .pipe(PROD_ENV ? uglify() : gutil.noop())
     .pipe(gulp.dest(build_dir + '/js'));
 });
-gulp.task('build-pdfjs-js-map', function() {
+gulp.task('build-videojs-js-map', function() {
   return gulp.src(bower_dir + '/video.js/dist/video.min.js.map')
     .pipe(gulp.dest(build_dir + '/js'));
 });
@@ -168,7 +168,7 @@ gulp.task('build-videojs-fonts', function() {
     .pipe(gulp.dest(build_dir + '/css/font'));
 });
 
-gulp.task('build-videojs', ['build-videojs-js', 'build-pdfjs-js-map', 'build-videojs-css', 'build-videojs-fonts' ]);
+gulp.task('build-videojs', ['build-videojs-js', 'build-videojs-js-map', 'build-videojs-css', 'build-videojs-fonts' ]);
 
 gulp.task('build-pdfjs-css', function() {
   return gulp.src([
