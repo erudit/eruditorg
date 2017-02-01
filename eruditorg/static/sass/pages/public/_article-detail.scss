@@ -87,10 +87,12 @@ $article-toolbar-width: 80px;
       .grauteur {
         list-style: none;
         margin: 0;
+        font-size: 12px;
       }
 
       .auteur {
-        margin-bottom: $margin-vertical-default/2.75;
+        display: inline-block;
+        margin-bottom: 0;
 
         p {
           margin: 0;
@@ -100,6 +102,23 @@ $article-toolbar-width: 80px;
         .nompers,
         .nomorg {
           color: #000;
+        }
+
+      }
+
+      .affiliations {
+
+        p {
+          font-size: 12px;
+        }
+
+        .affiliations-label {
+          color: $coral-red;
+        }
+
+        .icon {
+          margin-left: 0.25em;
+          float: none;
         }
 
       }

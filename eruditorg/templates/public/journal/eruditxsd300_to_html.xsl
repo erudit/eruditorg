@@ -72,8 +72,16 @@
           </h1>
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur">
-              <xsl:apply-templates select="liminaire/grauteur/auteur" mode="author"/>
+              <xsl:apply-templates select="liminaire/grauteur/auteur[not(contribution[@typecontrib != 'aut'])]" mode="author"/>
             </ul>
+          </xsl:if>
+          <xsl:if test="liminaire/grauteur/auteur/contribution or liminaire/grauteur/auteur/affiliation or liminaire/grauteur/auteur/courriel or liminaire/grauteur/auteur/siteweb">
+            <div class="affiliations akkordion" data-akkordion-single="true">
+              <p class="affiliations-label akkordion-title">{% trans '…plus d’informations' %} <span class="icon ion-ios-arrow-down"></span></p>
+              <ul class="akkordion-content unstyled">
+                <xsl:apply-templates select="liminaire/grauteur/auteur" mode="affiliations"/>
+              </ul>
+            </div>
           </xsl:if>
         </div>
 
@@ -397,38 +405,11 @@
   </xsl:template>
 
   <!-- author(s) - person or organisation -->
-  <xsl:template match="auteur" mode="author">
-    <xsl:param name="version"/>
-    <xsl:variable name="traducteur">
-      <xsl:if test="contribution/@typecontrib = 'trl'   or  contains(contribution ,  'Trad' )  "> traducteur</xsl:if>
-    </xsl:variable>
-    <li>
-
-      <xsl:attribute name="class">
-        <xsl:text>auteur</xsl:text>
-        <xsl:value-of select="$traducteur"/>
-      </xsl:attribute>
-
-      <xsl:if test="contribution/node()">
-        <xsl:choose>
-          <xsl:when test="contribution[1] = preceding-sibling::auteur[1]/contribution[1]">
-            <!-- Ne pas répéter la contribution égale à la précédente. -->
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:for-each select="contribution">
-              <p class="contribution">
-                <xsl:call-template name="syntaxe_texte_affichage">
-                  <xsl:with-param name="texte" select="."/>
-                </xsl:call-template>
-              </p>
-            </xsl:for-each>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:if>
-
+  <xsl:template match="auteur[not(contribution[@typecontrib = 'trl'])]" mode="author">
+    <li class="{name()}">
       <xsl:choose>
         <xsl:when test="nompers">
-          <p class="nompers">
+          <span class="nompers">
             <xsl:call-template name="element_nompers_affichage">
               <xsl:with-param name="nompers" select="nompers[1]"/>
             </xsl:call-template>
@@ -438,10 +419,10 @@
                 <xsl:with-param name="nompers" select="nompers[2]"/>
               </xsl:call-template>
             </xsl:if>
-          </p>
+          </span>
         </xsl:when>
         <xsl:when test="nomorg/child::node()">
-          <p class="nomorg">
+          <span class="nomorg">
             <xsl:call-template name="syntaxe_texte_affichage">
               <xsl:with-param name="texte" select="nomorg"/>
             </xsl:call-template>
@@ -454,35 +435,55 @@
                 <xsl:if test="position() != last()"><xsl:text>, </xsl:text></xsl:if>
               </xsl:for-each>)
             </xsl:if>
-          </p>
+          </span>
         </xsl:when>
       </xsl:choose>
-
-      <xsl:for-each select="affiliation/alinea">
-        <p class="affiliation">
-          <xsl:call-template name="syntaxe_texte_affichage">
-            <xsl:with-param name="texte" select="."/>
-          </xsl:call-template>
-        </p>
-      </xsl:for-each>
-
-      <xsl:for-each select="courriel">
-        <p class="courriel">
-          <xsl:call-template name="syntaxe_texte_affichage">
-            <xsl:with-param name="texte" select="."/>
-          </xsl:call-template>
-        </p>
-      </xsl:for-each>
-
-      <xsl:for-each select="siteweb">
-        <p class="courriel">
-          <xsl:call-template name="syntaxe_texte_affichage">
-            <xsl:with-param name="texte" select="."/>
-          </xsl:call-template>
-        </p>
-      </xsl:for-each>
-
+      <xsl:choose>
+        <xsl:when test="position() = last()-1">
+          <xsl:text> {% trans 'et' %} </xsl:text>
+        </xsl:when>
+        <xsl:when test="position() != last()">
+          <xsl:text>, </xsl:text>
+        </xsl:when>
+      </xsl:choose>
     </li>
+  </xsl:template>
+
+  <!-- author affiliations -->
+  <xsl:template match="auteur" mode="affiliations">
+    <xsl:if test="contribution | affiliation | courriel | siteweb">
+      <xsl:for-each select=".">
+        <li class="auteur-affiliation">
+          <p>
+            <xsl:apply-templates select="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations"/>
+          </p>
+        </li>
+      </xsl:for-each>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="nompers | nomorg | contribution | affiliation/alinea | courriel | siteweb" mode="affiliations">
+    <xsl:for-each select=".">
+      <xsl:choose>
+        <xsl:when test="self::nompers">
+          <strong>
+            <xsl:call-template name="element_nompers_affichage">
+              <xsl:with-param name="nompers" select="self::nompers[1]"/>
+            </xsl:call-template>
+            <xsl:if test="self::nompers[2][@typenompers = 'pseudonyme']">
+              <xsl:text>, </xsl:text>
+              <xsl:call-template name="element_nompers_affichage">
+                <xsl:with-param name="nompers" select="self::nompers[2]"/>
+              </xsl:call-template>
+            </xsl:if>
+          </strong>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+    <xsl:if test="position() != last()"><br/></xsl:if>
   </xsl:template>
 
   <!-- admin notes: errata, article history, editor's notes... -->
