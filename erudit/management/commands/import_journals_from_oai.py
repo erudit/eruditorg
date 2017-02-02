@@ -164,7 +164,6 @@ class Command(BaseCommand):
             journal = Journal()
             journal.code = journal_code
         journal.collection = collection
-        journal.localidentifier = journal_set.setSpec.split(':')[-1]
         journal.name = journal_set.title if hasattr(journal_set, 'title') else journal_set.setName
 
         # Determines the URL of the journal
