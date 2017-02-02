@@ -254,6 +254,22 @@
       list-style: none;
     }
 
+    .news--campaign {
+      margin-bottom: 2em;
+      padding-top: 1.5em;
+      @include grid-cell-border('top', 1px, #cccccc);
+
+      .news--campaign--title {
+        font-size: 2.5em;
+      }
+
+      .news--campaign--desc {
+        font-size: 20px;
+        line-height: 1.35;
+      }
+
+    }
+
     .news--article {
       margin: 1em 0;
       padding-top: 0.75em;

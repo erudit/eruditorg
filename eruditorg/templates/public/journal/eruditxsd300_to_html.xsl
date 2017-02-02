@@ -234,6 +234,15 @@
             </xsl:if>
             {% endif %}
           </ul>
+          <!-- promotional campaign -->
+          <aside class="campaign">
+            <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
+            <a href="http://jamaistrop.erudit.org" target="_blank" class="campaign-sidebar">
+              <span>{% trans 'On n’est jamais trop érudit.' %}</span>
+              <img src="{% static 'img/campaign-sidebar1.png' %}" class="img-responsive"/>
+              <span>{% trans 'Découvrez notre campagne' %}</span>
+            </a>
+          </aside>
         </nav>
         {% endif %}
 

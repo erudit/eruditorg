@@ -87,6 +87,9 @@ $ionicons-font-path: '~ionicons/fonts';
   'pages/individual-subscription',
   'pages/login';
 
+// 7. Themes
+@import
+  'themes/campaign';
 
 // $spritesheet-sprites is an array of all sprite image names
 @include sprites($spritesheet-sprites);

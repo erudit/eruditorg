@@ -163,7 +163,19 @@
         <h2>{% trans "Nouvelles" %}</h2>
       </div>
     </div>
-
+    <div class="row news--campaign">
+      <div class="col-xs-12 col-md-8">
+        <a href="http://jamaistrop.erudit.org" target="_blank">
+          <img src="{% static 'img/campaign1.png' %}" class="img-responsive"/>
+        </a>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <p class="category-tag">{% trans 'Actualités' %}</p>
+        <h3 class="news--campaign--title"><a href="http://jamaistrop.erudit.org" target="_blank">{% trans 'On n’est jamais trop érudit.' %}</a></h3>
+        <p class="news--campaign--desc">{% blocktrans %}Découvrez le processus de création derrière la campagne de lancement de la nouvelle plateforme.{% endblocktrans %}</p>
+        <a href="http://jamaistrop.erudit.org" target="_blank">{% trans 'En savoir plus' %}</a></p>
+      </div>
+    </div>
     <ul class="row latest-news">
       {% for entry in latest_news %}
       <li class="col-md-4 col-sm-6 news--article">

@@ -1,0 +1,51 @@
+/**
+ * All styles relating to the promotional campaign 2016-2017
+ */
+
+// palette
+$dodger-blue: #3681F7;
+$picton-blue: #4C9EEF;
+$salmon:      #FF7C69;
+$hit-pink:    #FFAE8C;
+$peach:       #FFE7B0;
+
+
+ .campaign-sidebar {
+   display: block;
+   padding-top: 35px;
+   background-color: $picton-blue;
+   margin: 3em 0 4em 0;
+
+   span {
+     display: block;
+     text-align: center;
+     color: #FFF;
+     font-size: 18px;
+     @include fw-sans-medium;
+
+     &:nth-of-type(2) {
+       margin-top: -40px;
+       padding-bottom: 15px;
+     }
+
+   }
+
+   img {
+     @include translate3d(0px, 0px, 0px);
+     @include transition(transform 300ms linear);
+   }
+
+   &:hover, &:focus, &:active {
+     text-decoration: none;
+
+     img {
+       @include translate3d(0px, -50px, 0px);
+     }
+
+   }
+
+ }
+
+ .campaign-link {
+   color: $salmon;
+ }
