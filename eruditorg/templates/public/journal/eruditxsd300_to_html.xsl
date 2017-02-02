@@ -284,7 +284,7 @@
             L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
             {% endblocktrans %}
             {% if not article.erudit_object.abstracts and can_display_first_pdf_page %}
-            {% trans "Seule la première page du PDF sera affichée." %}
+            {% trans "Seule la première page du PDF est disponible." %}
             {% elif article.erudit_object.abstracts %}
             {% trans "Seul le résumé sera affiché." %}
             {% elif article.is_scientific %}
@@ -310,12 +310,16 @@
             <xsl:apply-templates select="//corps"/>
           </section>
           {% elif article.localidentifier %}
-          <object data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
+          {% with raw_pdf_url=url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}
+          <object id="pdf-viewer" data="{{ raw_pdf_url }}?embed" type="application/pdf" width="100%" height="700px"></object>
+          <a id="pdf-download" href="{{ raw_pdf_url }}">Télécharger le pdf</a>
+          {% endwith %}
           {% endif %}
         {% elif article.erudit_object.abstracts %}
         {% elif not article.erudit_object.abstracts and can_display_first_pdf_page %}
         <p>
-          <object data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
+          <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
+          <a id="pdf-download">Télécharger le pdf</a>
         </p>
         {% elif article.is_scientific %}
           {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}

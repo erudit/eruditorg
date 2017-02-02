@@ -20,6 +20,7 @@ export default {
     this.smooth_scroll();
     this.clipboard();
     this.scrollspy();
+    this.display_pdf_based_on_mimetype();
   },
 
   sticky_elements : function () {
@@ -107,6 +108,20 @@ export default {
       nav: '.article-table-of-contents--body ol li a',
       className: 'is-insubview'
     });
+  },
+
+  display_pdf_based_on_mimetype : function () {
+    var can_display_pdf = false;
+    var mimes = navigator.mimeTypes;
+    for (var i = 0, i_len = mimes.length; i < i_len; i++){
+      if (mimes[i].type === 'application/pdf')
+          can_display_pdf = true;
+    }
+    if (!can_display_pdf) {
+        $('#pdf-viewer').hide();
+    } else {
+        $('#pdf-download').hide();
+    }
   }
 
 };
