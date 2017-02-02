@@ -45,6 +45,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
     redirect_to_external_url = False
+    last_publication_year = dt.datetime.now().year
 
     class Meta:
         model = 'erudit.journal'

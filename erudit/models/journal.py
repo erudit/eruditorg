@@ -493,8 +493,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
             publication_year = self.year
             year_offset = self.journal.embargo_in_years
-            return True if self.journal.last_publication_year < publication_year + year_offset \
-                else False
+            return self.journal.last_publication_year < publication_year + year_offset
         return False
 
     @property
