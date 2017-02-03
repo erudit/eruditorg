@@ -59,7 +59,7 @@ class HomeView(TemplateView):
                 logger.error('Apropos feeds unavailable ({})'.format(feed_url),
                              exc_info=True, extra={'request': self.request, })
                 return []
-            entries = parsed.get('entries', [])[:6]
+            entries = parsed.get('entries', [])[:3]
 
             # Converts the 'published' time struct to a datetime object
             for item in entries:
