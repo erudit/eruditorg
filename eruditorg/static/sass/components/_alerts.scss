@@ -25,42 +25,6 @@
 }
 
 /**
- * Beta site alerts
- */
-
-.search_results .alert,
-.advanced_search .alert {
-  background-color: $light-grey;
-}
-
-.search_results,
-.advanced_search,
-#article_detail {
-
-  .alert {
-
-    p {
-      padding: 0.75em 1em;
-      font-size: 14px;
-      background: $darker-grey;
-      color: #FFF;
-      line-height: 1.5;
-    }
-
-    a {
-      color: #FFF;
-      text-decoration: underline;
-    }
-
-    .ion-alert-circled {
-      color: $coral-red;
-    }
-
-  }
-
-}
-
-/**
  * Fallback alert box
  */
 .journal_list_per_disciplines,

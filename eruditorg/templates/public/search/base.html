@@ -5,15 +5,3 @@
 {{ block.super }}
 <li><a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche" %}</a></li>
 {% endblock breadcrumb %}
-
-{% block alert %}
-<div class="alert alert-warning">
-  <div class="container">
-    <p>
-      {% blocktrans %}
-      <span class="ion-alert-circled"></span> <strong>Attention</strong>&nbsp;: le site est actuellement en bêta. Nous travaillons à améliorer le moteur de recherche de la nouvelle plateforme. Il se peut donc que les résultats de votre recherche s’affichent mal ou ne soient pas optimaux.
-      {% endblocktrans %}
-    </p>
-  </div>
-</div>
-{% endblock alert %}

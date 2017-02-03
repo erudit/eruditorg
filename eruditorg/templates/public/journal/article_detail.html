@@ -52,18 +52,6 @@
 </script>
 {% endblock structured_data %}
 
-{% block alert %}
-<div class="alert alert-warning">
-  <div class="container">
-    <p>
-      {% blocktrans %}
-      <span class="ion-alert-circled"></span> <strong>Attention</strong>&nbsp;: le site que vous visitez est actuellement en version bêta. L’affichage des articles (HTML, PDF) sera amélioré au cours des prochaines semaines. <br/><strong>Veuillez ne pas citer cet article</strong>, car l’adresse URL de cette page est temporaire. Pour citer un article, veuillez vous référer à <a href="{{ fallback_url }}" target="_blank">www.erudit.org</a>.
-      {% endblocktrans %}
-    </p>
-  </div>
-</div>
-{% endblock alert %}
-
 {% block content %}
 <main
     class="container"
