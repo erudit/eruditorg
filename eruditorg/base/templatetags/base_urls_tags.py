@@ -19,6 +19,9 @@ def trans_current_url(context, langcode):
 
     # Reverses the current URL in the considered language
     resolver_match = request.resolver_match
+
+    if not resolver_match or not resolver_match.url_name or not resolver_match.namespace:
+        return None
     args = resolver_match.args
     kwargs = resolver_match.kwargs.copy()
     with switch_language(langcode):
