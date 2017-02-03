@@ -44,6 +44,23 @@ def update_user_password(username, the_hash):
         ))
 
 
+def get_journal_shortname_from_seriesid(seriesid):
+    QUERY = """
+    SELECT sp.shortname from seriesproduction sp, series s, title t where sp.seriesid=s.id and t.seriesid = s.id and t.id="{}"  # noqa
+    """
+    edinum = settings.EXTERNAL_DATABASES['edinum']
+
+    with pymysql_connection(
+        host=edinum['HOST'],
+        username=edinum['USER'],
+        password=edinum['PASSWORD'],
+        database=edinum['NAME']
+    ) as cur:
+        cur.execute(QUERY.format(seriesid))
+        users = cur.fetchall()
+        return users[0]
+
+
 def get_user_from_mandragore(username):
     MANDRAGORE_USER_QUERY = """
     SELECT NomUtilisateur, MotDePasse FROM CompteUtilisateur WHERE NomUtilisateur="{}"
@@ -107,7 +124,7 @@ personname pn WHERE pn.ID in (%s);"""
 
 
 def fetch_series_from_edinum(series_ids_to_fetch):
-    EDINUM_SERIE_QUERY = """SELECT s.ID, t.id from Series s, title t WHERE
+    EDINUM_SERIE_QUERY = """SELECT s.ID, t.id from series s, title t WHERE
 s.ID = t.SeriesID AND
 s.ID IN (%s);"""  # noqa
 
