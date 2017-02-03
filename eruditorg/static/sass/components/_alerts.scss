@@ -4,7 +4,6 @@
  */
 
 .alert {
-  padding-bottom: 0.75em;
 
   p {
     background-color: $light-grey;
@@ -32,43 +31,32 @@
 /**
  * Fallback alert box
  */
-.journal_list_per_disciplines,
-.thesis_collection_home,
-.advanced_search,
-.search_results {
-
-  .fallback {
-    background-color: $light-grey;
-  }
-
-}
-
 .fallback {
-  padding-bottom: 1em;
 
   p {
-    padding: 1.25em 0;
+    padding: 1em 0;
     font-size: 14px;
-    background-color: $light-grey;
+    background-color: $yellow;
     color: #000;
-    line-height: 1.5;
+    line-height: 1;
     margin: 0;
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
   }
 
   a {
-    color: #FFF;
-    text-decoration: none;
-    background-color: $coral-red;
+    color: #000;
+    text-decoration: underline;
     margin-left: 0.5em;
-    padding: 0.5em 0.75em;
-    @include fw-sans-medium;
+  }
 
-    &:hover, &:focus, &:active, &:active:focus {
-      text-decoration: none;
-      background-color: $darker-grey;
-    }
-
+  .close {
+    margin-right: 0.5em;
+    font-size: 1.5em;
+    vertical-align: baseline;
   }
 
 }
