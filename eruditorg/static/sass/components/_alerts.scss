@@ -6,11 +6,16 @@
 .alert {
   padding-bottom: 0.75em;
 
-  // Headings for larger alerts
-  h4 {
-    margin-top: 0;
-    // Specified for the h4 to prevent conflicts of changing $headings-color
-    color: inherit;
+  p {
+    background-color: $light-grey;
+    padding: 0.5em 0.75em;
+    margin-top: 1em;
+
+    a {
+      color: #000;
+      text-decoration: underline;
+    }
+
   }
 
   // Improve alignment and spacing of inner content
