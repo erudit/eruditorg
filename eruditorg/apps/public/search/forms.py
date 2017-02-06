@@ -55,7 +55,7 @@ PUB_TYPES_CHOICES = (
     ('Thèses', _('Thèses')),
     ('Livres', _('Livres')),
     ('Actes', _('Actes')),
-    ('Depot', _('Rapports de recherche')),
+    ('Dépot', _('Rapports de recherche')),
 )
 
 
