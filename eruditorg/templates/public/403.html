@@ -1,27 +1,39 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
+{% block title %}{% trans "403. Permission refusée" %}{% endblock title %}
+
+{% block meta_tags %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block body_class %}{{ block.super }} error-403{% endblock body_class %}
+
 {% block content %}
-<h1>{% trans "Permission refusée" %}</h1>
-<div class="ascii-error">
-  <pre>
-          xeee        .n~~%x.       .x~~"*Weu.
-         d888R      x88X   888.    d8Nu.  9888c
-        d8888R     X888X   8888L   88888  98888
-       @ 8888R    X8888X   88888   "***"  9888%
-     .P  8888R    88888X   88888X       ..@8*"
-    :F   8888R    88888X   88888X    ````"8Weu
-   x"    8888R    88888X   88888f   ..    ?8888L
-  d8eeeee88888eer 48888X   88888  :@88N   '8888N
-         8888R     ?888X   8888"  *8888~  '8888F
-         8888R      "88X   88*`   '*8"`   9888%
-      "*%%%%%%**~     ^"==="`       `~===*%"`
-  </pre>
-</div>
-<p>
-  {% url 'public:home' as home %}
-  {% blocktrans %}
-  L’accès à cette page vous est refusé. Veuillez vérifier l’adresse ou retourner à la <a href="{{ home }}">page d’accueil</a>. <br/> Pour plus d'informations, communiquez avec nous à l'adresse&nbsp;: <a href="mailto:info@erudit.org?subject=Erreur 403 - erudit.org">info@erudit.org</a>.
-  {% endblocktrans %}
-</p>
+<main role="main" class="glory">
+  <div class="container">
+    <header class="page-header-main">
+      <h1>{% trans "Permission refusée" %}</h1>
+    </header>
+    <div class="ascii-error">
+      <pre>
+        xeee        .n~~%x.       .x~~"*Weu.
+       d888R      x88X   888.    d8Nu.  9888c
+      d8888R     X888X   8888L   88888  98888
+     @ 8888R    X8888X   88888   "***"  9888%
+   .P  8888R    88888X   88888X       ..@8*"
+  :F   8888R    88888X   88888X    ````"8Weu
+ x"    8888R    88888X   88888f   ..    ?8888L
+d8eeeee88888eer 48888X   88888  :@88N   '8888N
+       8888R     ?888X   8888"  *8888~  '8888F
+       8888R      "88X   88*`   '*8"`   9888%
+    "*%%%%%%**~     ^"==="`       `~===*%"`
+      </pre>
+    </div>
+    <p>
+      {% url 'public:home' as home %}
+      {% blocktrans %}
+      L’accès à cette page vous est refusé. Veuillez vérifier l’adresse ou retourner à la <a href="{{ home }}">page d’accueil</a>. <br/> Pour plus d'informations, communiquez avec nous à l'adresse&nbsp;: <a href="mailto:info@erudit.org?subject=Erreur 403 - erudit.org">info@erudit.org</a>.
+      {% endblocktrans %}
+    </p>
+  </div>
+</main>
 {% endblock content %}

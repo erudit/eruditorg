@@ -102,6 +102,10 @@ blockquote {
 
 }
 
+pre {
+  @include fw-mono;
+}
+
 address {
   margin-bottom: $line-height-computed;
   font-style: normal;

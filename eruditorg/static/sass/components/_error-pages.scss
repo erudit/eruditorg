@@ -1,0 +1,30 @@
+/**
+ * Error pages (404, 403, 500, 503)
+ */
+
+[class*=" error-"] {
+
+  p {
+    text-align: center;
+    margin: 2em 0;
+  }
+
+  .ascii-error {
+    margin: 0 auto;
+    width: 455px;
+
+    @media (max-width: 477px) {
+      width: auto;
+
+      pre {
+        font-size: 3vw;
+      }
+    }
+
+  }
+
+  #breadcrumb {
+    background: $light-grey;
+  }
+
+}
