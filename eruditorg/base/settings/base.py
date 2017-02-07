@@ -231,7 +231,6 @@ SITE_ID = 1
 AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
     'core.accounts.backends.EmailBackend',
-    'core.accounts.backends.MandragoreBackend',
 ]
 
 PASSWORD_HASHERS = [

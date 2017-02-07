@@ -49,5 +49,5 @@ TRACKING_INFLUXDB_DBNAME = 'erudit-metrics'
 TRACKING_INFLUXDB_USER = 'root'
 TRACKING_INFLUXDB_PASSWORD = 'root'
 
-FEDORA_ROOT = 'http://example.com'
-SOLR_ROOT = 'http://example.com'
+FEDORA_ROOT = 'http://erudit.org'
+SOLR_ROOT = 'http://erudit.org'
