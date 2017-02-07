@@ -247,7 +247,9 @@
               <li class="disabled">{% trans "Aide" %}</li>
               <li class="disabled">{% trans "Plan du site" %}</li>
               <li><a href="mailto:info@erudit.org?subject=Érudit">{% trans "Nous contacter" %}</a></li>
-              <li class="campaign-link">{% trans 'Jamais trop érudit' %}</li>
+              <li>
+                <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
+              </li>
             </ul>
           </div>
 
