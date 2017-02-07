@@ -407,6 +407,10 @@ $article-toolbar-width: 80px;
       }
     }
 
+    > ul {
+      margin-bottom: 3em;
+    }
+
     li {
       border-bottom: 1px solid $mid-grey;
 
@@ -629,6 +633,14 @@ $article-toolbar-width: 80px;
   /**
   * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
+
+  .partiesann {
+
+    > section:first-of-type h2 {
+      margin-top: 0;
+    }
+
+  }
 
   .merci,
   .grnote,

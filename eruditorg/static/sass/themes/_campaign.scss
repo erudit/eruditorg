@@ -33,12 +33,12 @@ $peach:       #FFE7B0;
   background-position: top;
   background-repeat: no-repeat;
   overflow-y: hidden;
-  height: 420px;
-  margin: 3em 0 4em 0;
+  height: 370px;
+  margin-bottom: 4em;
   @include transition(background-position 300ms linear);
 
   &:hover, &:focus, &:active {
-    background-position: 0px -80px;
+    background-position: center -80px;
   }
 
   img {
@@ -80,12 +80,6 @@ $peach:       #FFE7B0;
     }
   }
 
-
-}
-
-// Footer link
-.campaign-link {
-  color: $salmon;
 }
 
 @media print {
@@ -97,6 +91,16 @@ $peach:       #FFE7B0;
       display: inline;
     }
 
+  }
+
+}
+
+// Footer link
+.campaign-link {
+  color: $salmon;
+
+  &:hover, &:active, &:focus {
+    color: $salmon;
   }
 
 }

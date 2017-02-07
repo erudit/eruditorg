@@ -257,10 +257,8 @@
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
             <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
-              <div class="campaign-sidebar-wrapper">
-                <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                  <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
-                </div>
+              <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
+                <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
               </div>
             </a>
           </aside>
@@ -305,7 +303,7 @@
         </aside>
       </xsl:if>
 
-      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %}col-md-11{% endif %}">
+      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11{% endif %}">
         <!-- abstract -->
         <xsl:if test="//resume">
           <section id="resume" class="article-section grresume" role="complementary">
@@ -337,7 +335,23 @@
 
 
         <!-- appendices -->
-        <xsl:apply-templates select="partiesann[node()]"/>
+        <div class="row">
+          <hr/>
+          {% if article.erudit_object.processing == 'minimal' %}
+          <!-- promotional campaign -->
+          <div class="col-md-3">
+            <aside class="campaign">
+              <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
+              <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
+                <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
+                  <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
+                </div>
+              </a>
+            </aside>
+          </div>
+          {% endif %}
+          <xsl:apply-templates select="partiesann[node()]"/>
+        </div>
 
         <!-- lists of tables & figures -->
         {% if not only_summary %}
@@ -1794,7 +1808,9 @@
 
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
-    <xsl:apply-templates/>
+    <section class="{name()}{% if article.erudit_object.processing == 'minimal' %} col-md-8{% else %} col-xs-12{% endif %}">
+      <xsl:apply-templates/>
+    </section>
   </xsl:template>
 
   <xsl:template match="grannexe | merci | grnotebio | grnote | grbiblio">
