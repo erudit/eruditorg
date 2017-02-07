@@ -26,7 +26,7 @@ export default {
   sticky_elements : function () {
 
     var $sticky_header         = this.article.find('.article-header-sticky'),
-        $sticky_elements       = this.article.find('.article-table-of-contents, .toolbox, .pagination-arrow'),
+        $sticky_elements       = this.article.find('.article-table-of-contents, .toolbox-wrapper, .pagination-arrow'),
         transform             = getPrefix('transform');
 
     // save sticky header height

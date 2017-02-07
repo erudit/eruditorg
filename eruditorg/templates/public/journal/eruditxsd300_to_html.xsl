@@ -266,7 +266,7 @@
         {% endif %}
 
         <!-- toolbox -->
-        <aside class="pull-right hidden-xs hidden-sm">
+        <aside class="pull-right hidden-xs hidden-sm toolbox-wrapper">
           <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled toolbox">
             <li>
