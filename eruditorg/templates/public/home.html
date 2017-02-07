@@ -165,7 +165,7 @@
     </div>
     <div class="row news--campaign">
       <div class="col-xs-12 col-md-8">
-        <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank">
+        <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">
           <div id="campaign-banner" class="campaign-banner">
             <img id="campaign-banner" src="{% static 'img/campaign/banner1.png' %}" class="img-responsive"/>
           </div>
@@ -173,9 +173,9 @@
       </div>
       <div class="col-xs-12 col-md-4">
         <p class="category-tag">{% trans 'Actualités' %}</p>
-        <h3 class="news--campaign--title"><a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank">{% trans 'On n’est jamais trop érudit.' %}</a></h3>
+        <h3 class="news--campaign--title"><a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans 'On n’est jamais trop érudit.' %}</a></h3>
         <p class="news--campaign--desc">{% blocktrans %}Découvrez la campagne de lancement de la nouvelle plateforme.{% endblocktrans %}</p>
-        <p><a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank">-> jamaistrop.erudit.org</a></p>
+        <p><a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">-> jamaistrop.erudit.org</a></p>
       </div>
     </div>
     <ul class="row latest-news">

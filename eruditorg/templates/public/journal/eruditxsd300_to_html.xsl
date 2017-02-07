@@ -256,7 +256,7 @@
           <!-- promotional campaign -->
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
-            <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
+            <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
                 <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
               </div>
@@ -342,7 +342,7 @@
           <div class="col-md-3">
             <aside class="campaign">
               <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
-              <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
+              <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
                 <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
                   <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
                 </div>

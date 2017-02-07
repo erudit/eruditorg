@@ -62,10 +62,10 @@
                 <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a>
               </li>
               <li>
-                <a href="#" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
+                <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
               </li>
               <li>
-                <a href="#" title="{% trans 'Index des rapports de recherche' %}">{% trans "Rapports de recherche" %}</a>
+                <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a>
               </li>
             </ul>
           </li>
@@ -237,18 +237,18 @@
             <ul class="unstyled footer-nav--publication-types">
               <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
               <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
-              <li class="disabled">{% trans "Livres & actes" %}</li>
-              <li class="disabled">{% trans "Rapports de recherche" %}</li>
+              <li><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans "Livres & actes" %}</a></li>
+              <li><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
             </ul>
           </div>
 
           <div class="col-md-6">
             <ul class="unstyled footer-nav--help">
-              <li class="disabled">{% trans "Aide" %}</li>
+              <li><a href="https://retro.erudit.org/aide/aide/aide.html" target="_blank">{% trans "Aide" %}</a></li>
               <li class="disabled">{% trans "Plan du site" %}</li>
-              <li><a href="mailto:info@erudit.org?subject=Érudit">{% trans "Nous contacter" %}</a></li>
+              <li><a href="mailto:info@erudit.org?subject=erudit.org">{% trans "Nous contacter" %}</a></li>
               <li>
-                <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
+                <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
               </li>
             </ul>
           </div>
