@@ -256,10 +256,12 @@
           <!-- promotional campaign -->
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
-            <a href="http://jamaistrop.erudit.org" target="_blank" class="campaign-sidebar">
-              <span>{% trans 'On n’est jamais trop érudit.' %}</span>
-              <img src="{% static 'img/campaign-sidebar1.png' %}" class="img-responsive"/>
-              <span>{% trans 'Découvrez notre campagne' %}</span>
+            <a href="{% if LANGUAGE_CODE == 'fr' %}http://jamaistrop.erudit.org{% else %}http://jamaistrop.erudit.org/?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
+              <div class="campaign-sidebar-wrapper">
+                <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
+                  <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
+                </div>
+              </div>
             </a>
           </aside>
         </nav>
