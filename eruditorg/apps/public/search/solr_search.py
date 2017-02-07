@@ -28,7 +28,6 @@ class Search(BaseSearch):
 
     extra_params = {
         'rows': 10,
-        'fl': 'ID',
         'facet': 'true',
         'facet.field': [
             'Annee',

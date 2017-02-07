@@ -295,7 +295,7 @@ class EruditDocumentSolrFilter(object):
             sort=self.get_solr_sorting(request), rows=page_size, start=start)
         # Determines the localidentifiers of the documents in order to filter the queryset and the
         # total number of documents.
-        localidentifiers = [r['ID'] for r in results.docs]
+        localidentifiers = [r for r in results.docs]
         documents_count = results.hits
 
         # Prepares the dictionnary containing aggregation results.

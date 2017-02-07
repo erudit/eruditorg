@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+import itertools
 from functools import reduce
 
 from django.core.paginator import InvalidPage
@@ -8,12 +9,15 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from .conf import settings as search_settings
+from .models import get_type_for_corpus
 
 
 class EruditDocumentPagination(PageNumberPagination):
     page_size = search_settings.DEFAULT_PAGE_SIZE
     page_size_query_param = 'page_size'
     max_page_size = 50
+
+    in_database_corpus = ('Article', 'Culturel', 'Thèses')
 
     def get_paginated_response(self, data):
         return Response({
@@ -33,13 +37,24 @@ class EruditDocumentPagination(PageNumberPagination):
             'results': data,
         })
 
-    def paginate(self, docs_count, localidentifiers, queryset, request, view=None):
+    def _group_by_external_document(self, documents):
+        """ Helper method to group documents by internal or external
+
+        :returns: a tuple of iterators (internal_documents, external_documents)
+        """
+        def test_func(obj):
+            return obj['Corpus_fac'] in self.in_database_corpus
+        internal_documents = filter(test_func, documents)
+        external_documents = itertools.filterfalse(test_func, documents)
+        return internal_documents, external_documents
+
+    def paginate(self, docs_count, documents, queryset, request, view=None):
         """
         This is the default implementation of the PageNumberPagination.paginate_queryset method ;
         the only exception: the pagination is performed on a dummy list of the same length as the
         number of results returned by the search engine in use. But the EruditDocument instances
-        corresponding to the localidentifiers associated with the current page are returned. Note
-        that these localidentifiers have already been paginated by the search engine.
+        corresponding to the documents associated with the current page are returned. Note
+        that these documents have already been paginated by the search engine.
         """
         page_size = self.get_page_size(request)
         if not page_size:  # pragma: no cover
@@ -62,15 +77,31 @@ class EruditDocumentPagination(PageNumberPagination):
 
         self.request = request
 
+        internal_documents, external_documents = self._group_by_external_document(documents)
+        external_documents_dict = {d['ID']: d for d in external_documents}
         # This is a specific case in order to remove some sub-strings from the localidentifiers
         # at hand. This is a bit ugly but we are limited here by the predefined Solr document IDs.
         # For example the IDs are prefixed by "unb:" for UNB articles... But UNB localidentifiers
         # should not be stored with "unb:" into the database.
         drop_keywords = ['unb:', ]
-        localidentifiers = list(map(
-            lambda i: reduce(lambda s, k: s.replace(k, ''), drop_keywords, i), localidentifiers))
+        localidentifiers = list(
+            map(
+                lambda i: reduce(
+                    lambda s, k: s['ID'].replace(k, ''), drop_keywords, i
+                ),
+                internal_documents
+            )
+        )
 
         queryset = queryset.filter(localidentifier__in=localidentifiers)
         obj_dict = {obj.localidentifier: obj for obj in queryset}
-        obj_list = [obj_dict[lid] for lid in localidentifiers if lid in obj_dict]
+        obj_list = [
+            obj_dict[d['ID']]
+            if d['ID'] in obj_dict
+            else get_type_for_corpus(d['Corpus_fac'])(
+                localidentifier=d['ID'],
+                data=external_documents_dict[d['ID']]
+            )
+            for d in documents
+        ]
         return obj_list

@@ -21,9 +21,9 @@ class TestEruditDocumentPagination(BaseEruditTestCase):
         issue = IssueFactory.create(journal=self.journal)
         localidentifiers = []
         for i in range(0, 10):
-            lid = 'lid-{0}'.format(i)
+            lid = {'Corpus_fac': 'Article', 'ID':'lid-{0}'.format(i)}
             localidentifiers.append(lid)
-            ArticleFactory.create(issue=issue, localidentifier=lid)
+            ArticleFactory.create(issue=issue, localidentifier=lid['ID'])
         request = Request(self.factory.get('/', data={'page': 1}))
         paginator = EruditDocumentPagination()
         # Run
@@ -31,7 +31,7 @@ class TestEruditDocumentPagination(BaseEruditTestCase):
         # Check
         self.assertEqual(
             object_list,
-            list(Article.objects.filter(localidentifier__in=localidentifiers[:10])
+            list(Article.objects.filter(localidentifier__in=[l['ID'] for l in localidentifiers[:10]])
                  .order_by('localidentifier')))
 
     def test_can_provide_valid_pagination_data(self):
@@ -39,9 +39,9 @@ class TestEruditDocumentPagination(BaseEruditTestCase):
         issue = IssueFactory.create(journal=self.journal)
         localidentifiers = []
         for i in range(0, 50):
-            lid = 'lid-{0}'.format(i)
+            lid = {'Corpus_fac': 'Article', 'ID':'lid-{0}'.format(i)}
             localidentifiers.append(lid)
-            ArticleFactory.create(issue=issue, localidentifier=lid)
+            ArticleFactory.create(issue=issue, localidentifier=lid['ID'])
         request = Request(self.factory.get('/', data={'page': 2}))
         paginator = EruditDocumentPagination()
         # Run
