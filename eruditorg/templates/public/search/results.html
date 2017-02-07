@@ -172,6 +172,9 @@
                         {% trans "et" %}
                       {% endif %}
                       <span class="author">
+                      {% if document.document_type == 'report' %}
+                        {{ author }}
+                      {% endif %}
                       {% if author.firstname and author.lastname %}
                         {{ author.lastname }}, {{ author.firstname }}
                       {% elif author.othername %}
@@ -193,7 +196,7 @@
                       {% else %}
                       {{ article_url }}
                       {% endif %}
-                    {% elif document.document_type == 'thesis' %}
+                    {% elif document.document_type == 'thesis' or document.document_type == 'report'%}
                       {{ document.real_object.url }}
                     {% endif %}"
                     {% if document.real_object.external_url or document.real_object.url %}
@@ -239,6 +242,11 @@
                       <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.journal_name }}</a></em> ({{ article.collection_name }})
                       <br/>
                       {# issue theme #}
+                    {% endwith %}
+                    {# metadata for report #}
+                    {% elif document.document_type == 'report' %}
+                    {% with document.real_object as o %}
+                      {% if o.collection %}{{ o.collection }}{% endif %}
                     {% endwith %}
                     {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}

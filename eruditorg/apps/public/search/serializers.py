@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from apps.public.search.models import ResearchReport
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -24,9 +25,12 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
         return {
             erudit_models.Article: 'article',
             erudit_models.Thesis: 'thesis',
+            ResearchReport: 'report'
         }[obj.__class__]
 
     def get_real_object(self, obj):
+        if isinstance(obj, ResearchReport):
+            return ResearchReportSerializer(obj).data
         cache_key = 'eruditdocument-real-object-serialized-{}-{}'.format(
             obj.id, translation.get_language())
         real_object_data = cache.get(cache_key, None)
@@ -41,6 +45,44 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
                 cache.set(cache_key, real_object_data, 60 * 60)
 
         return real_object_data
+
+
+class ResearchReportSerializer(serializers.Serializer):
+
+    authors = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
+    title = serializers.SerializerMethodField()
+    publication_date = serializers.SerializerMethodField()
+    collection = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ResearchReport
+        fields = [
+            'authors',
+            'url',
+            'title',
+            'publication_date',
+            'collection',
+        ]
+
+    def get_collection(self, obj):
+        if 'TitreCollection_fac' in obj.data:
+            return obj.data.get('TitreCollection_fac')[0]
+
+    def get_authors(self, obj):
+        return obj.data['AuteurNP_fac']
+
+    def get_url(self, obj):
+        return obj.data['URLDocument'][0]
+
+    def get_title(self, obj):
+        if 'Titre_fr' in obj.data:
+            return obj.data['Titre_fr']
+        if 'Titre_en' in obj.data:
+            return obj.data['Titre_en']
+
+    def get_publication_date(self, obj):
+        return obj.data['Annee'][0]
 
 
 class ArticleSerializer(serializers.ModelSerializer):
