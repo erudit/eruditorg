@@ -25,5 +25,6 @@ class Book(BaseExternalDocument):
 def get_type_for_corpus(corpus):
     return {
         'Dépot': ResearchReport,
-        'Livres': Book
+        'Livres': Book,
+        'Actes': Book
     }[corpus]
