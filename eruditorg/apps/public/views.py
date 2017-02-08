@@ -7,12 +7,22 @@ import time
 from django.core.cache import cache
 from django.utils import translation
 from django.views.generic import TemplateView
+from django.template import loader
+from django.http.response import HttpResponseNotFound, HttpResponseServerError
 from feedparser import parse as rss_parse
 
 from erudit.models import Issue
 from erudit.models import Discipline
 
 logger = logging.getLogger(__name__)
+
+
+def internal_error_view(request):
+    return HttpResponseServerError(loader.render_to_string('public/500.html', None, request))
+
+
+def not_found_view(request):
+    return HttpResponseNotFound(loader.render_to_string('public/404.html', None, request))
 
 
 class HomeView(TemplateView):
