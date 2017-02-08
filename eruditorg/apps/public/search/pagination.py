@@ -95,13 +95,17 @@ class EruditDocumentPagination(PageNumberPagination):
 
         queryset = queryset.filter(localidentifier__in=localidentifiers)
         obj_dict = {obj.localidentifier: obj for obj in queryset}
-        obj_list = [
-            obj_dict[d['ID']]
-            if d['ID'] in obj_dict
-            else get_type_for_corpus(d['Corpus_fac'])(
-                localidentifier=d['ID'],
-                data=external_documents_dict[d['ID']]
-            )
-            for d in documents
-        ]
+
+        obj_list = []
+        for d in documents:
+            obj = None
+            if d['ID'] in obj_dict:
+                obj = obj_dict[d['ID']]
+            elif not d['Corpus_fac'] in self.in_database_corpus:
+                obj = get_type_for_corpus(d['Corpus_fac'])(
+                    localidentifier=d['ID'],
+                    data=external_documents_dict[d['ID']]
+                )
+            if obj:
+                obj_list.append(obj)
         return obj_list
