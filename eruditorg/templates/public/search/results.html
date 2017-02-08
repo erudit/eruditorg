@@ -172,6 +172,9 @@
                         {% trans "et" %}
                       {% endif %}
                       <span class="author">
+                      {% if document.document_type == 'report' or document.document_type == 'book' %}
+                        {{ author }}
+                      {% endif %}
                       {% if author.firstname and author.lastname %}
                         {{ author.lastname }}, {{ author.firstname }}
                       {% elif author.othername %}
@@ -193,7 +196,7 @@
                       {% else %}
                       {{ article_url }}
                       {% endif %}
-                    {% elif document.document_type == 'thesis' %}
+                    {% else %}
                       {{ document.real_object.url }}
                     {% endif %}"
                     {% if document.real_object.external_url or document.real_object.url %}
@@ -240,11 +243,24 @@
                       <br/>
                       {# issue theme #}
                     {% endwith %}
+                    {# metadata for report #}
+                    {% elif document.document_type == 'report' %}
+                    {% with document.real_object as o %}
+                      {% if o.collection %}{{ o.collection }}{% endif %}
+                    {% endwith %}
                     {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}
                       {% trans "Thèse" %} {% trans "déposée à" %}
                       {{ document.real_object.collection_name }}
+                    {% elif document.document_type == 'book' %}
+                      {% with document.real_object as o %}
+                      {% if document.real_object.pages %}
+                        <span>{% if o.collection %}{{ o.collection }}, {% endif %}{% if o.volume %}{% trans "Volume" %} {{ o.volume }}, {% endif %}{% if o.year %}{{ o.year }}, {%endif %}{{ o.pages }}</span>
+                      {% endif %}
+                      {% endwith %}
                     {% endif %}
+                    {# metadata for books #}
+
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}

@@ -2,6 +2,7 @@
 
 import json
 import unittest.mock
+from faker import Faker
 
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -25,10 +26,31 @@ from apps.public.search.views import EruditDocumentListAPIView
 from apps.public.search.views import SavedSearchAddView
 from apps.public.search.views import SavedSearchRemoveView
 
+faker = Faker()
+
 
 def fake_get_results(**kwargs):
     results = unittest.mock.Mock()
-    results.docs = [{'ID': a.localidentifier} for a in Article.objects.all()]
+    results.docs = [
+        {'ID': a.localidentifier, 'Corpus_fac': 'Article'} for a in Article.objects.all()
+    ]
+    results.facets = {'facet_fields': {'Corpus_fac': ['val1', 12, 'val2', 14, ], }}
+    results.hits = 50
+    return results
+
+
+def fake_get_results_external(**kwargs):
+    results = unittest.mock.Mock()
+    results.docs = [
+        {
+            'ID': 'depot-{}'.format(id),
+            'AuteurNP_fac': [faker.name() for i in range(3)],
+            'URLDocument': [faker.uri()],
+            'Annee': [faker.year()],
+            'Corpus_fac': 'Dépot',
+        }
+        for id in range(50)
+    ]
     results.facets = {'facet_fields': {'Corpus_fac': ['val1', 12, 'val2', 14, ], }}
     results.hits = 50
     return results
@@ -87,6 +109,19 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid)
 
+        request = self.factory.get('/', data={'format': 'json'})
+        list_view = EruditDocumentListAPIView.as_view()
+
+        # Run
+        results_data = list_view(request).render().content
+        # Check
+        results = json.loads(smart_text(results_data))
+        self.assertEqual(results['pagination']['count'], 50)
+
+    @unittest.mock.patch.object(Query, 'get_results')
+    def test_can_return_erudit_documents_not_in_database(self, mock_get_results):
+        # Setup
+        mock_get_results.side_effect = fake_get_results_external
         request = self.factory.get('/', data={'format': 'json'})
         list_view = EruditDocumentListAPIView.as_view()
 
