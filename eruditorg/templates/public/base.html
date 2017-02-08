@@ -50,7 +50,7 @@
       {% url 'public:journal:journal_list' as journal_list_url %}
       <div id="main-nav" class="navbar-collapse collapse">
         <h2 class="hidden">{% trans "Menu principal" %}</h2>
-        <ul class="nav navbar-nav navbar-right unstyled">
+        <ul class="row nav navbar-nav navbar-right">
           {% block mainnav %}
           <li class="dropdown {% if journal_list_url in request.path %}active{% endif %}">
             <a href="#" class="select main-section">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>

@@ -7,6 +7,7 @@
   .navbar-nav {
     @include vertical-centered($position: absolute);
     right: 20px;
+    list-style: none;
 
     > li {
       display: inline-block;
@@ -292,6 +293,7 @@ header.compact{
     }
 
     .navbar-nav {
+      background: #FFF;
       position: relative !important;
       top: auto !important;
       right: auto !important;
@@ -354,7 +356,6 @@ header.compact{
       top: 0;
 
       form {
-        margin-top: 20px;
         padding-top: 20px;
         padding-left: 6px;
         padding-right: 20px;
