@@ -7,19 +7,19 @@ export default {
 
   smoothScroll: function() {
     $('#journal_list_per_names .alpha-nav').on('click', 'a', function(e) {
-  		e.preventDefault();
-  		e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
       var target = $(this).attr('href').replace('#', '');
-  		$('html, body').animate( { scrollTop: $('a[name="'+target+'"]').offset().top - 137 }, 750);
-  		return false;
-  	});
-  	$('#journal_list_per_disciplines .alpha-nav').on('click', 'a', function(e) {
-  		e.preventDefault();
-  		e.stopPropagation();
+      $('html, body').animate( { scrollTop: $('a[name="'+target+'"]').offset().top - 137 }, 750);
+      return false;
+    });
+    $('#journal_list_per_disciplines .alpha-nav').on('click', 'a', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       var target = $(this).attr('href').replace('#', '');
-  		$('html, body').animate( { scrollTop: $('a[name="'+target+'"]').offset().top }, 750 );
-  		return false;
-  	});
+      $('html, body').animate( { scrollTop: $('a[name="'+target+'"]').offset().top }, 750 );
+      return false;
+    });
   },
 
   stickyElements: function() {
