@@ -5,7 +5,7 @@
 
 {% block title %}{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with journal_type=issue.journal.type|lower journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal_type }} {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
