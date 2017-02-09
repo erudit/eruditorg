@@ -52,8 +52,8 @@
         <h2 class="hidden">{% trans "Menu principal" %}</h2>
         <ul class="row nav navbar-nav navbar-right">
           {% block mainnav %}
-          <li class="dropdown {% if journal_list_url in request.path %}active{% endif %}">
-            <a href="#" class="select main-section">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
+          <li class="nav-publications dropdown">
+            <a href="#" class="select main-section hidden-xs">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
             <ul>
               <li>
                 <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
@@ -69,9 +69,34 @@
               </li>
             </ul>
           </li>
-          <li class="dropdown">
+          {% if request.user.is_anonymous %}
+          <li class="nav-login">
+            <a href="{% url 'public:auth:login' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
+              {% trans "Connexion" %}
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-account dropdown">
+            <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></a>
+            <ul class="hidden-xs">
+              {% has_perm 'userspace.access' request.user as can_access_userspace %}
+              {% if can_access_userspace %}
+              <li>
+                <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord" %}</a>
+              </li>
+              {% endif %}
+              <li>
+                <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}">{% trans "Paramètres" %}</a>
+              </li>
+              <li>
+                <a href="{% url 'public:auth:logout' %}?next=/" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
+              </li>
+            </ul>
+          </li>
+          {% endif %}
+          <li class="nav-about dropdown">
             <a href="https://apropos.erudit.org/" target="_blank" class="select main-section" title="{% blocktrans %}À propos d'Érudit{% endblocktrans %}">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
-            <ul>
+            <ul class="hidden-xs">
               <li>
                 <a href="https://apropos.erudit.org/bibliotheques" target="_blank" title="{% trans 'Information pour les bibliothécaires' %}">{% trans "Bibliothécaires" %}</a>
               </li>
@@ -89,40 +114,16 @@
               </li>
             </ul>
           </li>
-          {% if request.user.is_anonymous %}
-          <li>
-            <a href="{% url 'public:auth:login' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
-              {% trans "Connexion" %}
-            </a>
-          </li>
-          {% else %}
-          <li class="dropdown">
-            <a href="#" class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></a>
-            <ul>
-              {% has_perm 'userspace.access' request.user as can_access_userspace %}
-              {% if can_access_userspace %}
-              <li>
-                <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord" %}</a>
-              </li>
-              {% endif %}
-              <li>
-                <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}">{% trans "Paramètres" %}</a>
-              </li>
-              <li>
-                <a href="{% url 'public:auth:logout' %}?next=/" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
-              </li>
-            </ul>
-          </li>
-          {% endif %}
-          <li class="hidden-sm">
+          <li class="nav-advanced-search">
             <a href="{% url 'public:search:advanced_search' %}" class="main-section" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
           </li>
-          <li>
-            <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}">
-              <span class="erudicon erudicon-tools-save"></span>
+          <li class="nav-my-library">
+            <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
+              <span class="erudicon erudicon-tools-save hidden-xs"></span>
+              <span class="hidden-sm hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
             </a>
           </li>
-          <li>
+          <li class="nav-search">
             <a href="#" data-trigger-search-bar class="search" title="{% trans 'Effectuer une recherche simple' %}"><span class="ion-ios-search-strong"></span></a>
             <div class="search-form">
               <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
@@ -130,7 +131,10 @@
                   <div class="input-group-btn">
                     <label for="basic_search_term" class="hidden">{% trans "Mots-clés" %}</label>
                     <input name="basic_search_term" type="search" class="search-terms form-control" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
-                    <button type="submit" class="btn btn-secondary">{% trans 'Rechercher' %}</button>
+                    <button type="submit" class="btn btn-secondary">
+                      <span class="hidden-xs">{% trans 'Rechercher' %}</span>
+                      <span class="ion-ios-search-strong hidden-sm hidden-md hidden-lg"></span>
+                      </button>
                     <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
                   </div>
                 </div>

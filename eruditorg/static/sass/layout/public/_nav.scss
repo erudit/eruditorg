@@ -58,8 +58,8 @@
     padding-left: 8px;
     padding-right: 8px;
     display: block;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 18px;
     position: relative;
     color: #000;
     @include fw-sans-medium();
@@ -79,15 +79,13 @@
   }
 
   .dropdown{
-    .main-section{
-      padding-right: 25px;
 
-      .caret{
-        position: absolute;
-        top: 12px;
-        right: 10px;
-      }
+    .caret{
+      position: absolute;
+      top: 12px;
+      right: 10px;
     }
+
   }
 
   .dropdown {
@@ -167,7 +165,6 @@
 
       input[type="search"] {
         margin: 0;
-        width: auto;
         border-width: 2px;
         border-color: #fff;
         color: #fff;
@@ -206,22 +203,44 @@
   }
 }
 
-// hamburger menu
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  #main-nav {
+    .search-form form {
+      input[type="search"] {
+        width: 30%;
+      }
+    }
+  }
+}
+
+// Hamburger menu icon
 .navbar-toggle {
-  margin-top: 20px;
-  width: 60px;
-  height: 45px;
+  width: 28px;
+  height: 50px;
   position: relative;
-  top: 50%;
   cursor: pointer;
-  background: #FFF;
+  float: right;
+  margin-right: $navbar-padding-horizontal;
+  background-color: transparent;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  border-radius: 0;
   @include rotate(0deg);
+
+  &:focus {
+    outline: 0;
+  }
+
+  @media (min-width: $grid-float-breakpoint) {
+    display: none;
+  }
 
   > .bar {
     display: block;
     position: absolute;
-    height: 3px;
-    width: 45px;
+    height: 2px;
+    width: 28px;
     background: #000;
     opacity: 1;
     left: 0;
@@ -229,18 +248,18 @@
     @include transition(.3s ease-in-out);
 
     &:nth-child(1) {
+      left: 10px;
+      top: 15px;
       @include rotate(45deg);
-      left: 0;
-      top: 3px;
     }
     &:nth-child(2) {
       width: 0%;
       opacity: 0;
     }
     &:nth-child(3) {
-      @include rotate(-45deg);
-      left: 0;
+      left: 10px;
       top: 35px;
+      @include rotate(-45deg);
     }
 
   }
@@ -248,75 +267,51 @@
   &.collapsed > .bar {
 
     &:nth-child(1) {
-      top: 5px;
+      left: 0;
+      top: 15px;
       @include rotate(0deg);
     }
     &:nth-child(2) {
-      top: 20px;
-      width: 45px;
+      top: 25px;
+      width: 28px;
       opacity: 1;
       @include rotate(0deg);
     }
     &:nth-child(3) {
+      left: 0;
       top: 35px;
       @include rotate(0deg);
     }
 
   }
 }
-header.compact{
-  .navbar-toggle{
-    margin-top: 8px;
-  }
-}
 
-
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  #main-nav{
-    .main-section{
-      padding-left: 5px;
-      padding-right: 5px;
-    }
-
-    .search-form{
-      input.search-terms{
-        width: 60% !important;
-      }
-    }
-  }
-}
-
+// Hamburger menu / menu on mobile content
 @media (max-width: $screen-xs-max) {
   #main-nav {
-    &.navbar-collapse.in {
-      overflow-y: initial !important;
+
+    .caret {
+      display: none;
     }
 
     .navbar-nav {
-      background: #FFF;
-      position: relative !important;
-      top: auto !important;
-      right: auto !important;
+      background: $coral-red;
+      position: relative;
+      top: auto;
+      right: auto;
       transform: none;
 
-      li {
-        margin: 0 !important;
+      > li {
+        margin: 0;
         display: block;
 
-        &.active {
-          &:after {
-            display: none;
-          }
+        &:nth-last-child(2) a {
+          border: none;
         }
 
         &.dropdown {
 
-          .caret {
-            display: none;
-          }
-
           > ul {
-            padding: 0 10px;
             display: block;
             position: static;
             border: none;
@@ -326,55 +321,91 @@ header.compact{
               border: none;
             }
 
-            a {
-              padding: 10px 0;
-              display: inline;
-
-              &:hover, &:active, &:focus {
-                background: none;
-                color: #000;
-                text-indent: 0;
-              }
-
-            }
-
           }
 
         }
+
       }
+
     }
 
-    .search {
-      display: none;
+    .main-section {
+      @include fw-sans;
+    }
+
+    .nav-publications li,
+    .nav-about,
+    .nav-account,
+    .nav-advanced-search,
+    .nav-my-library,
+    .nav-search,
+    .nav-language {
+
+      > a {
+        color: #FFF;
+        font-size: 18px;
+        text-align: right;
+        margin: 0;
+        padding: 15px 10px;
+        line-height: 20px;
+        border-bottom: 1px solid #FFF;
+
+        &:hover, &:active, &:focus {
+          color: #FFF;
+          @include fw-sans-bold;
+        }
+
+      }
+
+    }
+
+    .nav-search {
+      padding: 10px 0 30px 0;
+
+      .search, form .close {
+        display: none;
+      }
+
     }
 
     .search-form {
       opacity: 1;
       pointer-events: all;
-      position: static;
+      position: relative;
       background: none;
-      top: 0;
+      display: inline;
 
       form {
-        padding-top: 20px;
-        padding-left: 6px;
-        padding-right: 20px;
-      }
 
-      input {
-        height: 24px !important;
-        border-color: #000 !important;
-        color: #000 !important;
-      }
+        .form-group {
+          padding-right: 0;
+        }
 
-      .input-group-btn {
-        text-align: left;
-      }
+        input {
+          height: 40px;
+          border-color: #FFF;
+          color: #FFF;
+          width: 80%;
+        }
 
-      .btn {
-        background: #000 !important;
-        border-color: #000 !important;
-        color: #FFF !important;
+        .btn {
+          background: transparent;
+          border-color: #FFF;
+          color: #FFF;
+          width: 20%;
+          padding: 0;
+
+          &:hover, &:active, &:focus {
+            background: #FFF;
+
+            .ion-ios-search-strong {
+              color: $coral-red;
+            }
+
+          }
+
+        }
+
       }
 
     }

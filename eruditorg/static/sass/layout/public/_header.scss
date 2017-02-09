@@ -2,7 +2,7 @@
 // Styles related to the page header (fixed except for article page)
 // -----------------------------------------------------------------------------
 
-$header-height: 100px;
+$header-height: 50px;
 
 body.fixed-header {
   padding-top: $header-height;
@@ -12,13 +12,12 @@ body.fixed-header {
 * Erudit Public #page-header
 */
 #site-header {
-  padding: 10px 0;
   position: relative;
   border-bottom: 1px solid $mid-grey;
   @include transition(all 0.15s);
   background-color: #fff;
   float: none;
-  height: 100px;
+  height: $header-height;
   z-index: $zindex-navbar;
 
   &.fixed {
@@ -43,11 +42,10 @@ body.fixed-header {
   #brand {
     font-size: inherit;
     margin: 0;
-    top: -10px;
+    display: inline-block;
     img,
     svg {
-      height: 45px;
-      padding-top: 10px;
+      height: 35px;
       overflow: visible;
       path, rect {
         @include transition(fill 250ms);
