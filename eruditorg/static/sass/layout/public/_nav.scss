@@ -258,7 +258,7 @@
         margin: 0;
         display: block;
 
-        &:nth-last-child(2) a {
+        &:nth-last-child(3) a {
           border: none;
         }
 
@@ -294,12 +294,12 @@
     .nav-my-library,
     .nav-search,
     .nav-language {
+      text-align: right;
 
       > a,
       .main-section {
         color: #FFF;
         font-size: 18px;
-        text-align: right;
         margin: 0;
         padding: 15px 10px;
         line-height: 20px;
@@ -307,6 +307,7 @@
 
         &:hover, &:active, &:focus {
           color: #FFF;
+          text-decoration: none;
           @include fw-sans-bold;
         }
 
@@ -314,8 +315,19 @@
 
     }
 
+    .nav-language a {
+      display: inline-block;
+      padding-bottom: 20px;
+      border: none;
+
+      &.active {
+        @include fw-sans-bold;
+      }
+
+    }
+
     .nav-search {
-      padding: 10px 0 30px 0;
+      padding: 10px 0;
 
       .search, form .close {
         display: none;
@@ -334,6 +346,7 @@
 
         .form-group {
           padding-right: 0;
+          margin: 0;
         }
 
         .input-group-btn {
@@ -370,4 +383,5 @@
     }
 
   }
+
 }

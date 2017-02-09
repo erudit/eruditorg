@@ -36,7 +36,7 @@
   <nav>
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-nav">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -120,7 +120,7 @@
           <li class="nav-my-library">
             <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
               <span class="erudicon erudicon-tools-save hidden-xs hidden-sm"></span>
-              <span class="hidden-sm hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
+              <span class="hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
             </a>
           </li>
           <li class="nav-search">
@@ -140,6 +140,11 @@
                 </div>
               </form>
             </div>
+          </li>
+          <li class="nav-language hidden-md hidden-lg">
+            {% for lang in LANGUAGES %}
+            <a href="{% trans_current_url lang.0 %}"{% if lang.0 == LANGUAGE_CODE %} class="active"{% endif %}>{{ lang.1 }}</a>
+            {% endfor %}
           </li>
           {% endblock mainnav %}
         </ul>
