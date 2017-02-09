@@ -31,12 +31,6 @@ body.fixed-header {
     padding-top: 0;
     padding-bottom: 0;
     height: auto;
-
-    #brand {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
   }
 
   #brand {
@@ -51,10 +45,6 @@ body.fixed-header {
         @include transition(fill 250ms);
       }
     }
-  }
-
-  .caret {
-    margin-left: 10px;
   }
 
   &.inverted {
@@ -125,24 +115,4 @@ body.fixed-header {
     }
   }
 
-}
-
-
-@media (max-width: $screen-xs-max) {
-  #site-header{
-    &.inverted {
-      background-color: white;
-
-      a {
-        color: #000 !important;
-      }
-
-      svg {
-        path, rect {
-          fill: #000;
-        }
-      }
-
-    }
-  }
 }

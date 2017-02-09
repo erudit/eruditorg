@@ -53,7 +53,7 @@
         <ul class="row nav navbar-nav navbar-right">
           {% block mainnav %}
           <li class="nav-publications dropdown">
-            <a href="#" class="select main-section hidden-xs">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
+            <a href="#" class="select main-section hidden-xs hidden-sm">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
             <ul>
               <li>
                 <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
@@ -78,7 +78,7 @@
           {% else %}
           <li class="nav-account dropdown">
             <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></a>
-            <ul class="hidden-xs">
+            <ul class="hidden-xs hidden-sm">
               {% has_perm 'userspace.access' request.user as can_access_userspace %}
               {% if can_access_userspace %}
               <li>
@@ -96,7 +96,7 @@
           {% endif %}
           <li class="nav-about dropdown">
             <a href="https://apropos.erudit.org/" target="_blank" class="select main-section" title="{% blocktrans %}À propos d'Érudit{% endblocktrans %}">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
-            <ul class="hidden-xs">
+            <ul class="hidden-xs hidden-sm">
               <li>
                 <a href="https://apropos.erudit.org/bibliotheques" target="_blank" title="{% trans 'Information pour les bibliothécaires' %}">{% trans "Bibliothécaires" %}</a>
               </li>
@@ -119,7 +119,7 @@
           </li>
           <li class="nav-my-library">
             <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
-              <span class="erudicon erudicon-tools-save hidden-xs"></span>
+              <span class="erudicon erudicon-tools-save hidden-xs hidden-sm"></span>
               <span class="hidden-sm hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
             </a>
           </li>
@@ -129,14 +129,14 @@
               <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
                 <div class="form-group">
                   <div class="input-group-btn">
-                    <label for="basic_search_term" class="hidden">{% trans "Mots-clés" %}</label>
+                    <label for="basic_search_term" class="sr-only">{% trans "Mots-clés" %}</label>
                     <input name="basic_search_term" type="search" class="search-terms form-control" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
                     <button type="submit" class="btn btn-secondary">
-                      <span class="hidden-xs">{% trans 'Rechercher' %}</span>
-                      <span class="ion-ios-search-strong hidden-sm hidden-md hidden-lg"></span>
+                      <span class="hidden-xs hidden-sm">{% trans 'Rechercher' %}</span>
+                      <span class="ion-ios-search-strong hidden-md hidden-lg"></span>
                       </button>
-                    <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
                   </div>
+                  <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
                 </div>
               </form>
             </div>
@@ -163,12 +163,12 @@
 {% block classic_website_fallback %}
 {% if fallback_url %}
 <div class="alert alert-dismissible fallback">
-  <p>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    {% blocktrans %}
-    Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="{{ fallback_url }}" target="_blank">Retour à l’ancien site</a>
-    {% endblocktrans %}
-  </p>
+    <p>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {% blocktrans %}
+      Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="{{ fallback_url }}" target="_blank">Retour à l’ancien site</a>
+      {% endblocktrans %}
+    </p>
 </div>
 {% endif %}
 {% endblock classic_website_fallback %}

@@ -1,5 +1,5 @@
 const siteHeader   = "header#site-header";
-const minTopScroll = 200;
+const minTopScroll = 100;
 
 class Nav {
 

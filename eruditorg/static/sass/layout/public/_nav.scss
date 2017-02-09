@@ -4,15 +4,17 @@
 
 #main-nav {
 
+  .caret{
+    margin-left: 5px;
+  }
+
   .navbar-nav {
-    @include vertical-centered($position: absolute);
     right: 20px;
     list-style: none;
 
     > li {
       display: inline-block;
-      margin-left: 10px;
-      float: none;
+      margin: 8px 0 0 10px;
 
       a {
         &:hover, &:active, &:focus, &:active:focus {
@@ -24,31 +26,6 @@
         margin-left: 0;
       }
 
-      // active section, add border at bottom
-      &.active {
-        &:after {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 4px;
-          background-color: #000;
-          position: absolute;
-          left: 0;
-          bottom: -28px;
-          @include transition(all 250ms);
-          z-index: 1;
-
-          // with parent <header> in compact mode
-          .compact & {
-            bottom: -5px;
-          }
-
-          // hide when inverted <header>
-          .inverted & {
-            display: none;
-          }
-        }
-      }
     }
 
   }
@@ -58,7 +35,7 @@
     padding-left: 8px;
     padding-right: 8px;
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 18px;
     position: relative;
     color: #000;
@@ -70,20 +47,6 @@
     &.selected {
       color: $coral-red;
       text-decoration: none;
-    }
-
-    .caret {
-      margin-left: 10px;
-    }
-
-  }
-
-  .dropdown{
-
-    .caret{
-      position: absolute;
-      top: 12px;
-      right: 10px;
     }
 
   }
@@ -119,14 +82,14 @@
   }
 
   .erudicon-tools-save {
-    margin: 0 0.5em 0 1em;
     &::before {
       font-size: 25px;
       vertical-align: middle;
     }
   }
 
-  .ion-ios-search-strong {
+  .ion-ios-search-strong,
+  .ion-android-close {
     &::before {
       font-size: 30px;
       vertical-align: middle;
@@ -142,9 +105,7 @@
     background: $coral-red;
     pointer-events: none;
     @include opacity(0);
-    width: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
+    width: 80vw;
 
     &.visible {
       pointer-events: all;
@@ -155,7 +116,7 @@
       margin: 0;
 
       .form-group {
-        padding: 0 35px 0 0;
+        margin: 0 40px 0 0;
         position: relative;
       }
 
@@ -190,28 +151,19 @@
         top: 0;
         right: -30px;
         color: #fff;
-        font-size: 30px;
+        line-height: 45px;
         z-index: 1;
+        margin-right: 5px;
       }
 
       .input-group-btn {
-        text-align: center;
+        text-align: right;
       }
 
     }
 
   }
-}
 
-
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  #main-nav {
-    .search-form form {
-      input[type="search"] {
-        width: 30%;
-      }
-    }
-  }
 }
 
 // Hamburger menu icon
@@ -228,12 +180,12 @@
   border-radius: 0;
   @include rotate(0deg);
 
-  &:focus {
-    outline: 0;
-  }
-
   @media (min-width: $grid-float-breakpoint) {
     display: none;
+  }
+
+  &:focus {
+    outline: 0;
   }
 
   > .bar {
@@ -287,7 +239,7 @@
 }
 
 // Hamburger menu / menu on mobile content
-@media (max-width: $screen-xs-max) {
+@media (max-width: $screen-sm-max) {
   #main-nav {
 
     .caret {
@@ -300,6 +252,7 @@
       top: auto;
       right: auto;
       transform: none;
+      margin-bottom: 0;
 
       > li {
         margin: 0;
@@ -335,13 +288,15 @@
 
     .nav-publications li,
     .nav-about,
+    .nav-login,
     .nav-account,
     .nav-advanced-search,
     .nav-my-library,
     .nav-search,
     .nav-language {
 
-      > a {
+      > a,
+      .main-section {
         color: #FFF;
         font-size: 18px;
         text-align: right;
@@ -381,7 +336,11 @@
           padding-right: 0;
         }
 
-        input {
+        .input-group-btn {
+          text-align: center;
+        }
+
+        .form-control {
           height: 40px;
           border-color: #FFF;
           color: #FFF;
