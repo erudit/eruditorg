@@ -2,6 +2,7 @@
 
 import copy
 import datetime as dt
+import dateutil.relativedelta as dr
 from functools import reduce
 
 from django.conf import settings
@@ -51,15 +52,15 @@ class JournalType(models.Model):
     )
     code = models.SlugField(verbose_name=_('Code'), max_length=2, choices=CODE_CHOICES, unique=True)
 
-    def embargo_duration(self, unit='years'):
-        embargo_duration_in_years = erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS \
+    def embargo_duration(self, unit='months'):
+        embargo_duration_in_months = erudit_settings.SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS \
             if self.code == 'S' \
-            else erudit_settings.CULTURAL_JOURNAL_EMBARGO_IN_YEARS
+            else erudit_settings.CULTURAL_JOURNAL_EMBARGO_IN_MONTHS
 
-        if unit == 'years':
-            return embargo_duration_in_years
+        if unit == 'months':
+            return embargo_duration_in_months
         if unit == 'days':
-            return embargo_duration_in_years * 365
+            return embargo_duration_in_months * 30
 
     class Meta:
         verbose_name = _('Type de revue')
@@ -243,9 +244,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
                 first=self.first_publication_year, last=self.last_publication_year)
 
     @property
-    def embargo_in_years(self):
+    def embargo_in_months(self):
         return self.type.embargo_duration() if self.type else \
-            erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_YEARS
+            erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
 
     # Issues-related methods and properties
     # --
@@ -258,10 +259,15 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def published_open_access_issues(self):
         """ Return the published open access issues of this Journal. """
-        current_year = dt.datetime.now().year
+        current_date = dt.datetime.now()
+        date_restriction_start = dt.date(
+            self.last_issue.date_published.year,
+            self.last_issue.date_published.month,
+            1
+        ) - dr.relativedelta(months=self.embargo_in_months)
         filter_kwargs = {
-            'year__lte': current_year if self.open_access
-            else self.last_publication_year - self.embargo_in_years}
+            'date_published__lt': current_date if self.open_access
+            else date_restriction_start}
         return self.issues.filter(**filter_kwargs)
 
     @property
@@ -277,10 +283,10 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def published_open_access_issues_year_coverage(self):
         """ Return the year coverage of the open access issues of this Journal. """
-        open_access_issues = self.published_open_access_issues.order_by('-year')
+        open_access_issues = self.published_open_access_issues.order_by('-date_published')
         return None if not open_access_issues.exists() else {
-            'from': open_access_issues.last().year,
-            'to': open_access_issues.first().year,
+            'from': '{}-{}'.format(open_access_issues.last().date_published.month, open_access_issues.last().date_published.year),
+            'to': '{}-{}'.format(open_access_issues.first().date_published.month, open_access_issues.first().date_published.year),
         }
 
     def get_directors(self):
@@ -491,9 +497,12 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            publication_year = self.year
-            year_offset = self.journal.embargo_in_years
-            return self.journal.last_publication_year < publication_year + year_offset
+            date_restriction_start = dt.date(
+                self.journal.last_issue.date_published.year,
+                self.journal.last_issue.date_published.month,
+                1
+            ) - dr.relativedelta(months=self.journal.embargo_in_months)
+            return self.date_published >= date_restriction_start
         return False
 
     @property
