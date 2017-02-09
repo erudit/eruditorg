@@ -3,7 +3,7 @@
 {% load public_journal_tags %}
 {% load cache %}
 
-{% block meta_description %}{% trans 'Notice. ' %}{{ block.super }}{% endblock meta_description %}
+{% block meta_description %}{% trans 'Notice.' %} {{ block.super }}{% endblock meta_description %}
 
 {% block structured_data %}
 {% cache FOREVER_TTL "public_article_summary_structured_data" article.id LANGUAGE_CODE %}

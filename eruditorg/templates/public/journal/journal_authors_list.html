@@ -5,7 +5,7 @@
 
 {% block title %}{% trans "Index des auteurs" %} – {{ journal.name|safe }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with type=journal.type|lower journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ type }} {{ journal }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block structured_data %}
 {{ block.super }}

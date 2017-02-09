@@ -5,7 +5,7 @@
 
 {% block title %}{{ article.title|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with journal_type=article.issue.journal.type|lower journal=article.issue.journal.name|safe article=article.title %}{{ article }}. Un article de la revue {{ journal_type }} {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with journal=article.issue.journal.name|safe article=article.title %}{{ article }}. Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 {% cache FOREVER_TTL "public_article_detail_metatags" article.id LANGUAGE_CODE %}
