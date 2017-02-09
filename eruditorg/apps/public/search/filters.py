@@ -194,28 +194,29 @@ class EruditDocumentSolrFilter(object):
             ystart = pub_year_start if pub_year_start is not None else '*'
             yend = pub_year_end if pub_year_end is not None else '*'
             sqs = sqs.filter_query(
-                Annee='[{start} TO {end}]'.format(start=ystart, end=yend)
+                Annee='[{start} TO {end}]'.format(start=ystart, end=yend),
+                safe=True
             )
 
         # Applies the languages filter
         if languages:
-            sqs = self._filter_solr_multiple(sqs, 'Langue', languages)
+            sqs = self._filter_solr_multiple(sqs, 'Langue', languages, safe=True)
 
         # Applies the funds filter
         if funds:
-            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', funds)
+            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', funds, safe=True)
 
         # Applies the publication types filter
         if publication_types:
-            sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', publication_types)
+            sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', publication_types, safe=True)
 
         # Applies the disciplines filter
         if disciplines:
-            sqs = self._filter_solr_multiple(sqs, 'Discipline_fac', disciplines)
+            sqs = self._filter_solr_multiple(sqs, 'Discipline_fac', disciplines, safe=True)
 
         # Applies the journals filter
         if journals:
-            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals)
+            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', journals, safe=True)
 
         # STEP 3: applies the results filters
         # --
@@ -228,31 +229,31 @@ class EruditDocumentSolrFilter(object):
 
         # Applies the publication year aggregation-filter
         if agg_pub_years:
-            sqs = self._filter_solr_multiple(sqs, 'Annee', agg_pub_years)
+            sqs = self._filter_solr_multiple(sqs, 'Annee', agg_pub_years, safe=True)
 
         # Applies the languages aggregation-filter
         if agg_languages:
-            sqs = self._filter_solr_multiple(sqs, 'Langue', agg_languages)
+            sqs = self._filter_solr_multiple(sqs, 'Langue', agg_languages, safe=True)
 
         # Applies the types of documents aggregation-filter
         if agg_document_types:
-            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', agg_document_types)
+            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', agg_document_types, safe=True)
 
         # Applies the journals aggregation-filter
         if agg_journals:
-            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', agg_journals)
+            sqs = self._filter_solr_multiple(sqs, 'TitreCollection_fac', agg_journals, safe=True)
 
         # Applies the authors aggregation-filter
         if agg_authors:
-            sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', agg_authors)
+            sqs = self._filter_solr_multiple(sqs, 'Auteur_tri', agg_authors, safe=True)
 
         # Applies the funds aggregation-filter
         if agg_funds:
-            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', agg_funds)
+            sqs = self._filter_solr_multiple(sqs, 'Fonds_fac', agg_funds, safe=True)
 
         # Applies the publication types aggregation-filter
         if agg_publication_types:
-            sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', agg_publication_types)
+            sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', agg_publication_types, safe=True)
 
         return sqs
 
@@ -306,8 +307,8 @@ class EruditDocumentSolrFilter(object):
 
         return documents_count, localidentifiers, aggregations_dict
 
-    def _filter_solr_multiple(self, sqs, field, values):
+    def _filter_solr_multiple(self, sqs, field, values, safe=False):
         query = Q()
         for v in values:
             query |= Q(**{field: '"{}"'.format(v)})
-        return sqs.filter_query(query)
+        return sqs.filter_query(query, safe=safe)
