@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+import dateutil.relativedelta as dr
 import io
 import unittest.mock
 
@@ -97,49 +98,80 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_the_published_open_access_issues(self):
         # Setup
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
-
-        now_dt = dt.datetime.now()
-        self.journal.last_publication_year = now_dt.year
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+        now_dt = dt.date.today()
+        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
+        date_issue_2 = now_dt - dr.relativedelta(months=ml)
+        date_issue_3 = dt.date(
+            now_dt.year,
+            now_dt.month,
+            1
+        ) - dr.relativedelta(months=ml)
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
+        issue_1 = IssueFactory.create(
+            journal=self.journal, year=date_issue_1.year,
+            date_published=date_issue_1)
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year,
-            date_published=dt.date(now_dt.year, 3, 20))
-        issue_2 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - ml,
-            date_published=dt.date(now_dt.year - 1, 3, 20))
-        issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml + 1),
-            date_published=dt.date(now_dt.year - 2, 3, 20))
+            journal=self.journal, year=date_issue_2.year,
+            date_published=date_issue_2)
+        IssueFactory.create(
+            journal=self.journal, year=date_issue_3.year,
+            date_published=date_issue_3)
+        issue_4 = IssueFactory.create(
+            journal=self.journal, year=date_issue_4.year,
+            date_published=date_issue_4)
+        issue_5 = IssueFactory.create(
+            journal=self.journal, year=date_issue_5.year,
+            date_published=date_issue_5)
+        #self.journal.last_issue = issue_1
+        self.journal.save()
         # Run & check
-        self.assertEqual(list(self.journal.published_open_access_issues), [issue_3, issue_2, ])
+        self.assertEqual(list(self.journal.published_open_access_issues), [issue_4, issue_5])
 
     def test_can_return_the_published_open_access_issues_year_coverage(self):
         # Setup
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         now_dt = dt.datetime.now()
         self.journal.last_publication_year = now_dt.year
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
+        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
+        date_issue_2 = now_dt - dr.relativedelta(months=ml)
+        date_issue_3 = dt.date(
+            now_dt.year,
+            now_dt.month,
+            1
+        ) - dr.relativedelta(months=ml)
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
+        issue_1 = IssueFactory.create(
+            journal=self.journal, year=date_issue_1.year,
+            date_published=date_issue_1)
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml - 1),
-            date_published=dt.date(now_dt.year, 3, 20))
-        issue_2 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml),
-            date_published=dt.date(now_dt.year - 1, 3, 20))
+            journal=self.journal, year=date_issue_2.year,
+            date_published=date_issue_2)
         IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml + 1),
-            date_published=dt.date(now_dt.year - 2, 3, 20))
+            journal=self.journal, year=date_issue_3.year,
+            date_published=date_issue_3)
         issue_4 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml + 2),
-            date_published=dt.date(now_dt.year - 3, 3, 20))
+            journal=self.journal, year=date_issue_4.year,
+            date_published=date_issue_4)
+        issue_5 = IssueFactory.create(
+            journal=self.journal, year=date_issue_5.year,
+            date_published=date_issue_5)
         # Run & check
         self.assertEqual(
             self.journal.published_open_access_issues_year_coverage,
-            {'from': issue_4.year, 'to': issue_2.year})
+            {
+                'from': '{}-{}'.format(issue_5.date_published.month,issue_5.date_published.year),
+                'to': '{}-{}'.format(issue_4.date_published.month,issue_4.date_published.year),
+            }
+        )
 
     def test_knows_its_directors(self):
         now_dt = dt.datetime.now()
@@ -212,49 +244,83 @@ class TestIssue(BaseEruditTestCase):
 
     def test_knows_if_it_is_embargoed_in_case_of_scientific_journals(self):
         # Setup
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
 
-        now_dt = dt.datetime.now()
+        now_dt = dt.date.today()
         self.journal.last_publication_year = now_dt.year
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
+        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
+        date_issue_2 = now_dt - dr.relativedelta(months=ml)
+        date_issue_3 = dt.date(
+            now_dt.year,
+            now_dt.month,
+            1
+        ) - dr.relativedelta(months=ml)
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=self.journal.last_publication_year - (ml - 1),
-            date_published=dt.date(self.journal.last_publication_year - (ml - 1), 3, 20))
+            journal=self.journal, year=date_issue_1.year,
+            date_published=date_issue_1)
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=self.journal.last_publication_year - ml,
-            date_published=dt.date(self.journal.last_publication_year - ml, 3, 20))
+            journal=self.journal, year=date_issue_2.year,
+            date_published=date_issue_2)
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=self.journal.last_publication_year - (ml + 2),
-            date_published=dt.date(now_dt.year - (ml + 2), 3, 20))
+            journal=self.journal, year=date_issue_3.year,
+            date_published=date_issue_3)
+        issue_4 = IssueFactory.create(
+            journal=self.journal, year=date_issue_4.year,
+            date_published=date_issue_4)
+        issue_5 = IssueFactory.create(
+            journal=self.journal, year=date_issue_5.year,
+            date_published=date_issue_5)
         # Run & check
         self.assertTrue(issue_1.embargoed)
-        self.assertFalse(issue_2.embargoed)
-        self.assertFalse(issue_3.embargoed)
+        self.assertTrue(issue_2.embargoed)
+        self.assertTrue(issue_3.embargoed)
+        self.assertFalse(issue_5.embargoed)
+        self.assertFalse(issue_5.embargoed)
 
     def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
         # Setup
-        from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_YEARS as ml
+        from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_MONTHS as ml
 
-        now_dt = dt.datetime.now()
+        now_dt = dt.date.today()
         self.journal.last_publication_year = now_dt.year
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='C')
         self.journal.save()
+        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
+        date_issue_2 = now_dt - dr.relativedelta(months=ml)
+        date_issue_3 = dt.date(
+            now_dt.year,
+            now_dt.month,
+            1
+        ) - dr.relativedelta(months=ml)
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=self.journal.last_publication_year - ml,
-            date_published=dt.date(self.journal.last_publication_year - ml, 3, 20))
+            journal=self.journal, year=date_issue_1.year,
+            date_published=date_issue_1)
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=self.journal.last_publication_year - (ml - 1),
-            date_published=dt.date(self.journal.last_publication_year - (ml - 1), 3, 20))
+            journal=self.journal, year=date_issue_2.year,
+            date_published=date_issue_2)
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=self.journal.last_publication_year - (ml + 2),
-            date_published=dt.date(self.journal.last_publication_year - (ml + 2), 3, 20))
+            journal=self.journal, year=date_issue_3.year,
+            date_published=date_issue_3)
+        issue_4 = IssueFactory.create(
+            journal=self.journal, year=date_issue_4.year,
+            date_published=date_issue_4)
+        issue_5 = IssueFactory.create(
+            journal=self.journal, year=date_issue_5.year,
+            date_published=date_issue_5)
         # Run & check
-        self.assertFalse(issue_1.embargoed)
+        self.assertTrue(issue_1.embargoed)
         self.assertTrue(issue_2.embargoed)
-        self.assertFalse(issue_3.embargoed)
+        self.assertTrue(issue_3.embargoed)
+        self.assertFalse(issue_5.embargoed)
+        self.assertFalse(issue_5.embargoed)
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
@@ -453,28 +519,47 @@ class TestArticle(BaseEruditTestCase):
 
     def test_knows_if_it_is_embargoed(self):
         # Setup
-        now_dt = dt.datetime.now()
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_YEARS as ml
+        now_dt = dt.date.today()
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         self.journal.open_access = False
         self.journal.last_publication_year = now_dt.year
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
+        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
+        date_issue_2 = now_dt - dr.relativedelta(months=ml)
+        date_issue_3 = dt.date(
+            now_dt.year,
+            now_dt.month,
+            1
+        ) - dr.relativedelta(months=ml)
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
         issue_1 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - ml,
-            date_published=dt.date(now_dt.year - ml, 3, 20))
+            journal=self.journal, year=date_issue_1.year,
+            date_published=date_issue_1)
         issue_2 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml - 1),
-            date_published=dt.date(now_dt.year - (ml - 1), 3, 20))
+            journal=self.journal, year=date_issue_2.year,
+            date_published=date_issue_2)
         issue_3 = IssueFactory.create(
-            journal=self.journal, year=now_dt.year - (ml + 2),
-            date_published=dt.date(now_dt.year - (ml + 2), 3, 20))
+            journal=self.journal, year=date_issue_3.year,
+            date_published=date_issue_3)
+        issue_4 = IssueFactory.create(
+            journal=self.journal, year=date_issue_4.year,
+            date_published=date_issue_4)
+        issue_5 = IssueFactory.create(
+            journal=self.journal, year=date_issue_5.year,
+            date_published=date_issue_5)
         article_1 = ArticleFactory.create(issue=issue_1)
         article_2 = ArticleFactory.create(issue=issue_2)
         article_3 = ArticleFactory.create(issue=issue_3)
+        article_4 = ArticleFactory.create(issue=issue_4)
+        article_5 = ArticleFactory.create(issue=issue_5)
         # Run & check
-        self.assertFalse(article_1.embargoed)
+        self.assertTrue(article_1.embargoed)
         self.assertTrue(article_2.embargoed)
-        self.assertFalse(article_3.embargoed)
+        self.assertTrue(article_3.embargoed)
+        self.assertFalse(article_4.embargoed)
+        self.assertFalse(article_5.embargoed)
 
     def test_can_return_its_title(self):
         article = ArticleFactory()
@@ -542,4 +627,4 @@ class TestAuthor(BaseEruditTestCase):
 
     def test_journaltype_can_return_embargo_duration_in_days(self):
         journal_type = JournalTypeFactory(code='S')
-        assert journal_type.embargo_duration(unit="days") == 365
+        assert journal_type.embargo_duration(unit="days") == 360
