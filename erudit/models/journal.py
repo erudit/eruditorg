@@ -268,7 +268,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         filter_kwargs = {
             'date_published__lt': current_date if self.open_access
             else date_restriction_start}
-        return self.issues.filter(**filter_kwargs)
+        return self.published_issues.filter(**filter_kwargs)
 
     @property
     def first_issue(self):
