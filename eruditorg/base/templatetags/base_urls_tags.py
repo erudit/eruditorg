@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from urllib.parse import parse_qsl
-from urllib.parse import urlencode
-from urllib.parse import urlparse
-
 from django import template
 from django.core.urlresolvers import reverse
 
@@ -36,9 +32,6 @@ def trans_current_url(context, langcode):
 def get_full_path_with_overrides(context, **kwargs):
     """ Returns the current full path and inserts keyword arguments into the final path. """
     request = context.get('request')
-    fpath = request.get_full_path()
-    fpath_parsed = urlparse(fpath)
-    qsdict = dict(parse_qsl(fpath_parsed.query))
-    qsdict.update(kwargs)
-    qs = urlencode(qsdict)
-    return fpath_parsed.path + '?' + qs
+    request_get = request.GET.copy()
+    request_get.update(kwargs)
+    return request.path + '?' + request_get.urlencode()
