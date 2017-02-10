@@ -38,7 +38,7 @@ from ...models import Journal
 from ...models import KeywordTag
 from ...models import Publisher
 
-logger = logging.getLogger(__file__)
+logger = logging.getLogger(__name__)
 
 
 def _create_issue_contributor_object(issue_contributor, issue, is_director=False, is_editor=False):
@@ -115,6 +115,8 @@ class Command(BaseCommand):
         self.modification_date = options.get('mdate', None)
         self.journal_precendence_relations = []
         self.issue_pid = options.get('issue_pid', None)
+        logger.info("=" * 10 + "Import started" + "=" * 10)
+        logger.info("options: {}".format(options))
 
         # Handles a potential XSLT test function
         try:
@@ -288,6 +290,7 @@ class Command(BaseCommand):
     @transaction.atomic
     def import_journal(self, journal_pid, collection):
         """ Imports a journal using its PID. """
+        logger.info("Importing journal: {}".format(journal_pid))
         self.stdout.write(self.style.MIGRATE_LABEL(
             '    Start importing journal with PID: {0}'.format(journal_pid)))
 
@@ -454,7 +457,7 @@ class Command(BaseCommand):
 
         issue.fedora_updated = fedora_issue.modified
         issue.save()
-
+        logger.info("Issue imported: {}".format(issue.localidentifier))
         issue.contributors.all().delete()
 
         for director in issue.erudit_object.directors:
