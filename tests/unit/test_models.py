@@ -108,27 +108,30 @@ class TestJournal(BaseEruditTestCase):
             1
         ) - dr.relativedelta(months=ml)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
+        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
         IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
-            date_published=date_issue_1)
+            is_published=True, date_published=date_issue_1)
         IssueFactory.create(
             journal=self.journal, year=date_issue_2.year,
-            date_published=date_issue_2)
+            is_published=True, date_published=date_issue_2)
         IssueFactory.create(
             journal=self.journal, year=date_issue_3.year,
-            date_published=date_issue_3)
+            is_published=True, date_published=date_issue_3)
         issue_4 = IssueFactory.create(
-            journal=self.journal, year=date_issue_4.year,
-            date_published=date_issue_4)
+            journal=self.journal, number=2, year=date_issue_4.year,
+            is_published=True, date_published=date_issue_4)
         issue_5 = IssueFactory.create(
+            journal=self.journal, number=1, year=date_issue_5.year,
+            is_published=True, date_published=date_issue_5)
+        IssueFactory.create(
             journal=self.journal, year=date_issue_5.year,
-            date_published=date_issue_5)
+            is_published=False, date_published=date_issue_5)
         # Run & check
-        self.assertEqual(list(self.journal.published_open_access_issues), [issue_4, issue_5])
+        self.assertEqual(list(self.journal.published_open_access_issues), [issue_5, issue_4, ])
 
     def test_can_return_the_published_open_access_issues_year_coverage(self):
         # Setup
@@ -146,7 +149,7 @@ class TestJournal(BaseEruditTestCase):
             1
         ) - dr.relativedelta(months=ml)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
+        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
@@ -257,7 +260,7 @@ class TestIssue(BaseEruditTestCase):
             1
         ) - dr.relativedelta(months=ml)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
+        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         issue_1 = IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
@@ -297,7 +300,7 @@ class TestIssue(BaseEruditTestCase):
             1
         ) - dr.relativedelta(months=ml)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
+        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         issue_1 = IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
@@ -531,7 +534,7 @@ class TestArticle(BaseEruditTestCase):
             1
         ) - dr.relativedelta(months=ml)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
+        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         issue_1 = IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
@@ -625,4 +628,5 @@ class TestAuthor(BaseEruditTestCase):
 
     def test_journaltype_can_return_embargo_duration_in_days(self):
         journal_type = JournalTypeFactory(code='S')
-        assert journal_type.embargo_duration(unit="days") == 360
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+        assert journal_type.embargo_duration(unit="days") == ml * 30
