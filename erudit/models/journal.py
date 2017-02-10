@@ -285,8 +285,14 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         """ Return the year coverage of the open access issues of this Journal. """
         open_access_issues = self.published_open_access_issues.order_by('-date_published')
         return None if not open_access_issues.exists() else {
-            'from': '{}-{}'.format(open_access_issues.last().date_published.month, open_access_issues.last().date_published.year),
-            'to': '{}-{}'.format(open_access_issues.first().date_published.month, open_access_issues.first().date_published.year),
+            'from': '{}-{}'.format(
+                open_access_issues.last().date_published.month,
+                open_access_issues.last().date_published.year
+            ),
+            'to': '{}-{}'.format(
+                open_access_issues.first().date_published.month,
+                open_access_issues.first().date_published.year
+            ),
         }
 
     def get_directors(self):

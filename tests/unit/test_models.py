@@ -107,12 +107,12 @@ class TestJournal(BaseEruditTestCase):
             now_dt.month,
             1
         ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
         self.journal.save()
-        issue_1 = IssueFactory.create(
+        IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
         IssueFactory.create(
@@ -127,8 +127,6 @@ class TestJournal(BaseEruditTestCase):
         issue_5 = IssueFactory.create(
             journal=self.journal, year=date_issue_5.year,
             date_published=date_issue_5)
-        #self.journal.last_issue = issue_1
-        self.journal.save()
         # Run & check
         self.assertEqual(list(self.journal.published_open_access_issues), [issue_4, issue_5])
 
@@ -147,9 +145,9 @@ class TestJournal(BaseEruditTestCase):
             now_dt.month,
             1
         ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
-        issue_1 = IssueFactory.create(
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
+        IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
         IssueFactory.create(
@@ -168,8 +166,8 @@ class TestJournal(BaseEruditTestCase):
         self.assertEqual(
             self.journal.published_open_access_issues_year_coverage,
             {
-                'from': '{}-{}'.format(issue_5.date_published.month,issue_5.date_published.year),
-                'to': '{}-{}'.format(issue_4.date_published.month,issue_4.date_published.year),
+                'from': '{}-{}'.format(issue_5.date_published.month, issue_5.date_published.year),
+                'to': '{}-{}'.format(issue_4.date_published.month, issue_4.date_published.year),
             }
         )
 
@@ -258,8 +256,8 @@ class TestIssue(BaseEruditTestCase):
             now_dt.month,
             1
         ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
         issue_1 = IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
@@ -279,7 +277,7 @@ class TestIssue(BaseEruditTestCase):
         self.assertTrue(issue_1.embargoed)
         self.assertTrue(issue_2.embargoed)
         self.assertTrue(issue_3.embargoed)
-        self.assertFalse(issue_5.embargoed)
+        self.assertFalse(issue_4.embargoed)
         self.assertFalse(issue_5.embargoed)
 
     def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
@@ -298,8 +296,8 @@ class TestIssue(BaseEruditTestCase):
             now_dt.month,
             1
         ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
         issue_1 = IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
@@ -319,7 +317,7 @@ class TestIssue(BaseEruditTestCase):
         self.assertTrue(issue_1.embargoed)
         self.assertTrue(issue_2.embargoed)
         self.assertTrue(issue_3.embargoed)
-        self.assertFalse(issue_5.embargoed)
+        self.assertFalse(issue_4.embargoed)
         self.assertFalse(issue_5.embargoed)
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
@@ -532,8 +530,8 @@ class TestArticle(BaseEruditTestCase):
             now_dt.month,
             1
         ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml+5))
-        date_issue_5 = now_dt - dr.relativedelta(months=(ml*2))
+        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
+        date_issue_5 = now_dt - dr.relativedelta(months=(ml * 2))
         issue_1 = IssueFactory.create(
             journal=self.journal, year=date_issue_1.year,
             date_published=date_issue_1)
