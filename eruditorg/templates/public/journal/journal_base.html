@@ -48,11 +48,12 @@
       {# journal meta infos #}
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
+        <p>
+          -><a href="//{{ journal.code }}.erudit.org/user/login{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="publisher-login">{% trans 'Accès éditeur' %}</a>
+        </p>
         {% block aside_authors_list %}
         <p>
-          <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">
-            {% trans "Index des auteurs" %}
-          </a>
+          -><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
         </p>
         {% endblock aside_authors_list %}
         {% cache LONG_TTL "journal_detail" LANGUAGE_CODE journal.id %}

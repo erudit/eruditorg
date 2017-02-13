@@ -39,8 +39,11 @@
         {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
       </div>
 
-      <div class="form-group row child-column-fit">
-        <aside class="col-sm-12 text-right">
+      <div class="form-group row">
+        <p class="col-xs-6">
+          <small>-><a href="http://www.erudit.org/client/login.jsp{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans 'Zone client' %}</a></small>
+        </p>
+        <aside class="col-xs-6 text-right">
           <p class="no-margin">
             <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
           </p>

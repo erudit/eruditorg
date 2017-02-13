@@ -63,7 +63,8 @@ aside {
       margin: 1em auto;
     }
 
-    .authors-index {
+    .authors-index,
+    .publisher-login {
       @include fw-sans-medium;
     }
 
