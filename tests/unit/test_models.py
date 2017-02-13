@@ -52,6 +52,26 @@ class TestJournal(BaseEruditTestCase):
         # Run & check
         self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
 
+    def test_can_return_when_date_paywall_begins(self):
+        # Setup
+        self.journal.open_access = False
+        self.journal.type = JournalTypeFactory.create(code='S')
+        self.journal.save()
+        date_issue_1 = dt.date(2017, 3, 8)
+        date_issue_2 = date_issue_1 - dr.relativedelta(months=5)
+        date_issue_3 = date_issue_1 + dr.relativedelta(months=5)
+        IssueFactory.create(
+            journal=self.journal, year=date_issue_1.year,
+            is_published=True, date_published=date_issue_1)
+        IssueFactory.create(
+            journal=self.journal, year=date_issue_2.year,
+            is_published=True, date_published=date_issue_2)
+        IssueFactory.create(
+            journal=self.journal, year=date_issue_3.year,
+            is_published=False, date_published=date_issue_3)
+        # Run & check
+        self.assertEqual(self.journal.date_paywall_begins, dt.date(2017, 2, 1))
+
     def test_can_return_its_first_issue(self):
         # Setup
         issue_1 = IssueFactory.create(

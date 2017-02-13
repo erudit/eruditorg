@@ -248,6 +248,19 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.type.embargo_duration() if self.type else \
             erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
 
+    @property
+    def date_paywall_begins(self):
+        """Return the paywall begining date if apply """
+        if self.open_access or self.published_issues.count() == 0:
+            return None
+        else:
+            date_paywall_effect = dt.date(
+                self.last_issue.date_published.year,
+                self.last_issue.date_published.month,
+                1
+            ) - dr.relativedelta(months=self.embargo_in_months)
+            return date_paywall_effect
+
     # Issues-related methods and properties
     # --
 
@@ -260,14 +273,10 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def published_open_access_issues(self):
         """ Return the published open access issues of this Journal. """
         current_date = dt.datetime.now()
-        date_restriction_start = dt.date(
-            self.last_issue.date_published.year,
-            self.last_issue.date_published.month,
-            1
-        ) - dr.relativedelta(months=self.embargo_in_months)
-        filter_kwargs = {
-            'date_published__lt': current_date if self.open_access
-            else date_restriction_start}
+        if self.date_paywall_begins:
+            filter_kwargs = {'date_published__lt': self.date_paywall_begins}
+        else:
+            filter_kwargs = {'date_published__lte': current_date}
         return self.published_issues.filter(**filter_kwargs)
 
     @property
@@ -503,12 +512,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            date_restriction_start = dt.date(
-                self.journal.last_issue.date_published.year,
-                self.journal.last_issue.date_published.month,
-                1
-            ) - dr.relativedelta(months=self.journal.embargo_in_months)
-            return self.date_published >= date_restriction_start
+            return self.date_published >= self.journal.date_paywall_begins if self.is_published \
+                else True
         return False
 
     @property
