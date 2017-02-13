@@ -15,6 +15,17 @@
 
 #journal_detail {
 
+  .journal-history {
+    font-size: smaller;
+    color: $dark-grey;
+    margin: 0.5em 0;
+
+    span + span {
+      @include fw-sans-medium;
+    }
+
+  }
+
   .journal-infos {
 
     .journal-info-block {

@@ -21,6 +21,11 @@
     > span + span {
       @include fw-sans;
       display: block;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+
     }
 
   }

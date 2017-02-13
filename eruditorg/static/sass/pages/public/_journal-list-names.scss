@@ -147,9 +147,6 @@
           padding: 1em 0.25em;
           border-bottom: 1px solid $mid-grey;
 
-          .journal-title {
-          }
-
           .journal-subtitle {
             color: $dark-grey;
 
@@ -163,10 +160,17 @@
             text-decoration: none;
             @include fw-sans-medium;
 
-            .journal-subtitle {
+            .journal-subtitle,
+            .journal-history {
               color: #FFF;
             }
 
+          }
+
+          .journal-history {
+            margin-top: 0.75em;
+            color: $dark-grey;
+            font-size: smaller;
           }
 
         }
