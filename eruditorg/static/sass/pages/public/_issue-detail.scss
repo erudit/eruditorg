@@ -99,17 +99,29 @@
         font-size: 14px;
       }
 
-      .article-pagination {
+      .article-pagination,
+      .article-record {
         font-size: 12px;
         text-align: right;
       }
 
-      .article-links {
+      .article-links,
+      .article-record {
         font-size: 12px;
         color: $dark-grey;
 
         a {
           color: $coral-red;
+
+          &:hover, &:focus {
+            text-decoration: none;
+          }
+
+        }
+
+        .akkordion .icon {
+          float: none;
+          margin-left: 0.25em;
         }
 
       }
@@ -120,14 +132,13 @@
         width: auto;
 
         a {
-          margin-right: 1px;
-          padding: 8px 0;
           display: inline-block;
-          width: 25px;
-          height: 25px;
+          margin-right: 1px;
+          line-height: 30px;
+          width: 30px;
+          height: 30px;
           background: $black;
           color: $white;
-          font-size: 9px;
           white-space: nowrap;
           text-align: center;
           vertical-align: middle;
@@ -136,8 +147,15 @@
             background: $coral-red;
           }
 
+          .erudicon-tools-save {
+            font-size: 13px;
+            display: block;
+            padding-top: 3px;
+          }
+
+          .erudicon-tools-html,
           .erudicon-tools-pdf {
-            font-size: 6px;
+            font-size: 7px;
           }
 
         }
