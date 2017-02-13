@@ -15,7 +15,7 @@
   </h6>
   <div class="article-metadata row">
     <p class="article-author col-sm-9">
-      {{ article.authors.all|join:", " }}
+      {% for author in article.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}{% endfor %}
     </p>
     <p class="article-pagination col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}
