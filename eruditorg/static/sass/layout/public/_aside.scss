@@ -44,6 +44,12 @@ aside {
     padding: 0;
   }
 
+  .sidebar-block {
+    &:not(:first-of-type) {
+      margin-top: 2.5em;
+    }
+  }
+
   /**
   * journal meta infos on sidebars
   */
