@@ -2,25 +2,23 @@
 <!DOCTYPE institutional_holdings PUBLIC "-//GOOGLE//Subscriber Journals 1.0//EN" "http://scholar.google.com/scholar/subscriber_journals.dtd">
 <subscriber_journals>
   {% for journal in journals %}
-  {% with journal=journal coverage=journal.published_open_access_issues_year_coverage %}
+  {% with journal=journal coverage=journal.published_open_access_issues_period_coverage %}
   {% if coverage %}
   <item>
     <title>{{ journal.name }}</title>
     {% if journal.issn_print %}<issn>{{ journal.issn_print }}</issn>{% endif %}
     {% if journal.issn_web %}<issn>{{ journal.issn_web }}</issn>{% endif %}
     <coverage>
-      <from><year>{{ coverage.from }}</year></from>
+      <from><year>{{ journal.published_open_access_issues.first.year }}</year></from>
+      {% if journal.open_access == False %}
       <embargo>
-        {% if journal.type %}
+        {% if journal.date_paywall_begins %}
         <days_not_available>
-            {% if journal.is_scientific %}
-                {{ scientific_embargo_in_days }}
-            {% elif journal.is_cultural %}
-                {{ cultural_embargo_in_days }}
-            {% endif %}
+            {{ journal.days_not_available_from_today }}
         </days_not_available>
         {% endif %}
       </embargo>
+      {% endif %}
     </coverage>
   </item>
   {% endif %}
