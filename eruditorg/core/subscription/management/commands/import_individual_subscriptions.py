@@ -1,39 +1,72 @@
+import logging
+from datetime import datetime
+
 from django.core.management.base import BaseCommand
+from django.db import connections
+
+from erudit.models import Journal
 
 from core.accounts.hashers import PBKDF2WrappedAbonnementsSHA1PasswordHasher
 from core.accounts.models import LegacyAccountProfile
+from core.subscription.models import JournalAccessSubscription
 from core.accounts.shortcuts import get_or_create_legacy_user
 
 from core.subscription.legacy.legacy_models import Abonneindividus
 
+logger = logging.getLogger(__name__)
+
 
 class Command(BaseCommand):
-    args = '<action:total_abonnes|list_abonnes|import_abonnes>'
-    help = 'Import data from legacy system'
 
     def handle(self, *args, **options):
         """
         Command dispatcher
         """
-        self.stdout.write(self.style.MIGRATE_HEADING("Importing legacy accounts"))
-        for old_abonne in Abonneindividus.objects.all():
+        user_creation_count = 0
+        subscription_count = 0
+        logger.info("Individual subscriptions import started on {}".format(datetime.now()))
+        for abonne in Abonneindividus.objects.all():
             try:
-                account = LegacyAccountProfile.objects.get(
+                profile = LegacyAccountProfile.objects.get(
                     origin=LegacyAccountProfile.DB_ABONNEMENTS,
-                    legacy_id=str(old_abonne.abonneindividusid))
-                self.stdout.write("Account {} already exists".format(old_abonne.abonneindividusid))
+                    legacy_id=str(abonne.abonneindividusid))
+                logger.info("Account {} exists. Updating subscriptions.".format(abonne.courriel))
+                user = profile.user
             except LegacyAccountProfile.DoesNotExist:
-                self.stdout.write("Importing user {}".format(old_abonne.abonneindividusid))
                 hasher = PBKDF2WrappedAbonnementsSHA1PasswordHasher()
                 user = get_or_create_legacy_user(
-                    username='abonne-{}'.format(old_abonne.abonneindividusid),
-                    email=old_abonne.courriel,
-                    hashed_password=hasher.encode_sha1_hash(old_abonne.password, hasher.salt()))
-                user.first_name = old_abonne.prenom
-                user.last_name = old_abonne.nom
+                    username='abonne-{}'.format(abonne.abonneindividusid),
+                    email=abonne.courriel,
+                    hashed_password=hasher.encode_sha1_hash(abonne.password, hasher.salt()))
+                user.first_name = abonne.prenom
+                user.last_name = abonne.nom
                 user.save()
-                LegacyAccountProfile.objects.create(
+                user_creation_count += 1
+                profile = LegacyAccountProfile.objects.create(
                     origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
-                    legacy_id=str(old_abonne.abonneindividusid))
-                self.stdout.write(self.style.SUCCESS('  [OK]'))
+                    legacy_id=str(abonne.abonneindividusid))
+                logger.info("User created: {username} {email}".format(user.username, user.email))
 
+            sql = "SELECT revueID FROM revueindividus \
+    WHERE abonneIndividusID = {}".format(profile.legacy_id)
+            cursor = connections['abonnement'].cursor()
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            journal_ids = [jid[0] for jid in rows]
+            access, _ = JournalAccessSubscription.objects.get_or_create(
+                user=profile.user
+            )
+
+            journals = Journal.objects.filter(
+                id__in=journal_ids
+            ).exclude(id__in=access.journals.all())
+
+            logger.info("Importing {} subscriptions for {}".format(journals.count(), user.username))
+            subscription_count += journals.count()
+            for j in journals:
+                access.journals.add(j)
+            access.save()
+        logging.info("Finished. {} users created, {} subscriptions added.".format(
+            user_creation_count,
+            subscription_count)
+        )
