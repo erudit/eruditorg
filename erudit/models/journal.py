@@ -261,6 +261,11 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             ) - dr.relativedelta(months=self.embargo_in_months)
             return date_paywall_effect
 
+    @property
+    def days_not_available_from_today(self):
+        return (dt.date.today() - self.date_paywall_begins).days if self.date_paywall_begins \
+            else None
+
     # Issues-related methods and properties
     # --
 
