@@ -119,12 +119,12 @@
           </li>
           <li class="nav-my-library">
             <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
-              <span class="erudicon erudicon-tools-save hidden-xs hidden-sm"></span>
+              <span class="ion-bookmark toolbox-save hidden-xs hidden-sm"></span>
               <span class="hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
             </a>
           </li>
           <li class="nav-search">
-            <a href="#" data-trigger-search-bar class="search" title="{% trans 'Effectuer une recherche simple' %}"><span class="ion-ios-search-strong"></span></a>
+            <a href="#" data-trigger-search-bar class="search main-section" title="{% trans 'Effectuer une recherche simple' %}"><span class="ion-ios-search-strong"></span></a>
             <div class="search-form">
               <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
                 <div class="form-group">

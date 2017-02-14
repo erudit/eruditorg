@@ -1,25 +1,5 @@
 #citations_list {
 
-  .page-intro {
-
-    .erudicon {
-      color: white;
-      background: #ff4242;
-      display: inline-block;
-      width: 22px;
-      height: 22px;
-      text-align: center;
-      vertical-align: top;
-      padding: 3px;
-    }
-
-    .erudicon-tools-cite {
-      font-size: 10px;
-      padding-top: 5px;
-    }
-
-  }
-
   .sidebar-block {
 
     h2 {
@@ -120,10 +100,8 @@
                 background: $coral-red;
               }
 
-              .erudicon-tools-pdf {
-                font-size: 6px;
-              }
             }
+
           }
 
           .document-title,

@@ -302,28 +302,28 @@
                 <ul class="toolbox compact">
                   <li>
                     <button id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="ion-bookmark toolbox-save"></span>
                       <span class="tools-label">{% trans "Sauvegarder" %}</span>
                     </button>
                     <button class="saved" id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
-                      <span class="erudicon erudicon-tools-save"></span>
+                      <span class="ion-bookmark toolbox-save"></span>
                       <span class="tools-label">{% trans "Supprimer" %}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
+                      <span class="ion-quote toolbox-cite"></span>
+                      <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </button>
                   </li>
                   {% if document.real_object.has_pdf %}
                   <li>
                     <button id="tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
-                      <span class="erudicon erudicon-tools-pdf"></span>
+                      <span class="toolbox-pdf">PDF</span>
                       <span class="tools-label">{% trans "Télécharger" %}</span>
                     </button>
                   </li>
                   {% endif %}
-                  <li>
-                    <button id="tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
-                      <span class="erudicon erudicon-tools-cite"></span>
-                      <span class="tools-label">{% trans "Citer cet article" %}</span>
-                    </button>
-                  </li>
                 </ul>
                 <div class="hidden">
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">

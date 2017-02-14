@@ -3,14 +3,28 @@
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
 <li class="article-item">
-  <div class="toolbox pull-right">
+  <ul class="toolbox compact pull-right">
     {% spaceless %}
-    <a href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.id }}"><span class="erudicon erudicon-tools-save"></span></a>
-    <a href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.id }}" class="saved"><span class="erudicon erudicon-tools-save"></span></a>
-    <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
-    <a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}"><span class="erudicon erudicon-tools-html"></span></a>
+    <li>
+      <button href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.id }}">
+        <span class="ion-bookmark toolbox-save"></span>
+      </button>
+      <button href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.id }}" class="saved">
+        <span class="ion-bookmark toolbox-save"></span>
+      </button>
+    </li>
+    <li>
+      <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" title="{% trans 'Télécharger' %}" target="_blank">
+        <button><span class="toolbox-pdf">PDF</span></button>
+      </a>
+    </li>
+    <li>
+      <a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+        <button><span class="toolbox-html">HTML</span></button>
+      </a>
+    </li>
     {% endspaceless %}
-  </div>
+  </ul>
   <h6 class="article-title">
     <a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article{% endblocktrans %}">{{ article.html_title|safe|default:article.title }}</a>
   </h6>

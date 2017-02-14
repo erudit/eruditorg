@@ -25,8 +25,8 @@
         </header>
         <div class="page-intro">
           {% blocktrans %}
-          <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span class="erudicon erudicon-tools-save"></span>.</p>
-          <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<span class="erudicon erudicon-tools-cite"></span>.</p>
+          <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span class="ion-bookmark toolbox-save"></span>.</p>
+          <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<span class="ion-quote toolbox-cite"></span>.</p>
           {% endblocktrans %}
         </div>
       </div>
@@ -60,8 +60,8 @@
           <div class="selection-action-wrapper">
             <div id="id_selection_tools" class="toolbox pull-right" style="display:none;">
               {% spaceless %}
-              <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection"><span class="ion-android-close"></span></a>
-              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
+              <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection"><span class="ion-close"></span></a>
+              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite><span class="ion-quote toolbox-cite"></span></a>
               {% endspaceless %}
             </div>
             <p data-selection-count>{% trans "Aucun document sélectionné" %}</p>
@@ -77,9 +77,9 @@
               <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}">
                 <div class="toolbox pull-right">
                   {% spaceless %}
-                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-android-close"></span></a>
-                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
-                  <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
+                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-close"></span></a>
+                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="ion-quote toolbox-cite"></span></a>
+                  <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="toolbox-pdf">PDF</span></a>
                   {% endspaceless %}
                 </div>
                 <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
@@ -120,9 +120,9 @@
               <li data-document-id="{{ document.id }}" data-document-type="thesis">
                 <div class="toolbox pull-right">
                   {% spaceless %}
-                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-android-close"></span></a>
-                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="erudicon erudicon-tools-cite"></span></a>
-                  <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank"><span class="erudicon erudicon-tools-pdf"></span></a>
+                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-close"></span></a>
+                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="ion-quote toolbox-cite"></span></a>
+                  <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank"><span class="toolbox-pdf">PDF</span></a>
                   {% endspaceless %}
                 </div>
                 <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>

@@ -33,26 +33,32 @@
       white-space: nowrap;
       float: right;
 
-      .tools-label {
-        display: none;
-        padding: 1px 15px 0 50px;
-        position: relative;
-        @include fw-sans-medium;
-      }
-
-      .erudicon {
+      [class*=toolbox-] {
         position: absolute;
-        font-size: 14px;
-        left: 18px;
+        left: 21px;
         top: 50%;
+        font-size: 20px;
         @include translate(0,-35%);
       }
 
-      .erudicon-tools-pdf { font-size: 8px; left: 15px; }
-      .erudicon-tools-cite { font-size: 10px; left: 20px; }
-      .erudicon-tools-save { font-size: 18px; }
-      .erudicon-tools-share { left: 17px; }
-      .erudicon-tools-fullscreen { left: 19px; }
+      .toolbox-share,
+      .toolbox-cite {
+        left: 18px;
+      }
+
+      .toolbox-pdf,
+      .toolbox-html {
+        left: 13px;
+        font-size: 14px;
+        @include fw-sans-bold;
+      }
+
+      .tools-label {
+        display: none;
+        padding: 1px 15px 0 55px;
+        position: relative;
+        @include fw-sans-medium;
+      }
 
       &:hover, &:active, &:active:focus {
         background-color: #000;
@@ -70,6 +76,12 @@
 
   }
 
+  a {
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+    }
+  }
+
   /**
   * compact mode
   */
@@ -82,20 +94,37 @@
       button {
         min-width: 30px;
         font-size: 0.65em;
+        color: #FFF;
+        background-color: #000;
+
+        &:hover, &:focus, &:active:focus, &.saved {
+          background: $coral-red;
+        }
 
         .tools-label {
-          padding-left: 40px;
+          padding: 0 10px 0 30px;
         }
 
-        .erudicon {
-          font-size: 10px;
-          left: 11px;
-        }
+      }
 
-        .erudicon-tools-pdf { font-size: 6px; left: 7px; }
-        .erudicon-tools-cite { font-size: 8px; left: 10px; }
-        .erudicon-tools-save { font-size: 12px; }
-        .erudicon-tools-share { left: 10px; }
+      .toolbox-save {
+        font-size: 18px;
+        left: 12px;
+      }
+
+      .toolbox-cite {
+        font-size: 14px;
+        left: 10px;
+      }
+
+      .toolbox-pdf {
+        left: 7px;
+        font-size: 9px;
+      }
+
+      .toolbox-html {
+        left: 3px;
+        font-size: 9px;
       }
 
     }
