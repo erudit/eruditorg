@@ -290,18 +290,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.published_issues.order_by('-date_published').first()
 
     @property
-    def published_open_access_issues_year_coverage(self):
+    def published_open_access_issues_period_coverage(self):
         """ Return the year coverage of the open access issues of this Journal. """
         open_access_issues = self.published_open_access_issues.order_by('-date_published')
         return None if not open_access_issues.exists() else {
-            'from': '{}-{}'.format(
-                open_access_issues.last().date_published.month,
-                open_access_issues.last().date_published.year
-            ),
-            'to': '{}-{}'.format(
-                open_access_issues.first().date_published.month,
-                open_access_issues.first().date_published.year
-            ),
+            'from': open_access_issues.last().date_published,
+            'to': open_access_issues.first().date_published
         }
 
     def get_directors(self):

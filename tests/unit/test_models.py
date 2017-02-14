@@ -153,10 +153,10 @@ class TestJournal(BaseEruditTestCase):
         # Run & check
         self.assertEqual(list(self.journal.published_open_access_issues), [issue_5, issue_4, ])
 
-    def test_can_return_the_published_open_access_issues_year_coverage(self):
+    def test_can_return_the_published_open_access_issues_period_coverage(self):
         # Setup
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        now_dt = dt.datetime.now()
+        now_dt = dt.date.today()
         self.journal.last_publication_year = now_dt.year
         self.journal.open_access = False
         self.journal.type = JournalTypeFactory.create(code='S')
@@ -187,10 +187,10 @@ class TestJournal(BaseEruditTestCase):
             date_published=date_issue_5)
         # Run & check
         self.assertEqual(
-            self.journal.published_open_access_issues_year_coverage,
+            self.journal.published_open_access_issues_period_coverage,
             {
-                'from': '{}-{}'.format(issue_5.date_published.month, issue_5.date_published.year),
-                'to': '{}-{}'.format(issue_4.date_published.month, issue_4.date_published.year),
+                'from': issue_5.date_published,
+                'to': issue_4.date_published
             }
         )
 
