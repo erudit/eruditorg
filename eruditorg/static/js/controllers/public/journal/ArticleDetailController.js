@@ -4,6 +4,7 @@ import '!!script!scrollspy/build/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
 import SavedCitationList from '../../../modules/public/SavedCitationList';
 import Toolbox from '../../../modules/public/Toolbox';
+import '!!script!magnific-popup/dist/jquery.magnific-popup.min';
 
 export default {
 
@@ -21,6 +22,7 @@ export default {
     this.clipboard();
     this.scrollspy();
     this.display_pdf_based_on_mimetype();
+    this.lightbox();
   },
 
   sticky_elements : function () {
@@ -122,6 +124,24 @@ export default {
     } else {
         $('#pdf-download').hide();
     }
+  },
+
+  lightbox : function () {
+    $('.lightbox').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      closeBtnInside: false,
+      fixedContentPos: true,
+      mainClass: 'mfp-no-margins mfp-with-zoom',
+      image: {
+        verticalFit: true
+      },
+      zoom: {
+        enabled: true,
+        duration: 300
+      }
+    });
   }
+
 
 };

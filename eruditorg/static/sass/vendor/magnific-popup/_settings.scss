@@ -16,11 +16,11 @@ $mfp-z-index-base:                    1040 !default;                       // Ba
 // controls
 $mfp-include-arrows:                  true !default;                       // Include styles for nav arrows
 $mfp-controls-opacity:                0.65 !default;                       // Opacity of controls
-$mfp-controls-color:                  #FFF !default;                       // Color of controls
+$mfp-controls-color:                  #000 !default;                       // Color of controls
 $mfp-controls-border-color:           #3F3F3F !default; 	                 // Border color of controls
 $mfp-inner-close-icon-color:          #333 !default;                       // Color of close button when inside
-$mfp-controls-text-color:             #CCC !default;                       // Color of preloader and "1 of X" indicator
-$mfp-controls-text-color-hover:       #FFF !default;                       // Hover color of preloader and "1 of X" indicator
+$mfp-controls-text-color:             #000 !default;                       // Color of preloader and "1 of X" indicator
+$mfp-controls-text-color-hover:       #000 !default;                       // Hover color of preloader and "1 of X" indicator
 
 // Iframe-type options
 $mfp-include-iframe-type:             true !default;                       // Enable Iframe-type popups
@@ -37,8 +37,8 @@ $mfp-image-padding-bottom:            40px !default;                       // Im
 $mfp-include-mobile-layout-for-image: true !default;                       // Removes paddings from top and bottom
 
 // Image caption options
-$mfp-caption-title-color:             #F3F3F3 !default;                    // Caption title color
-$mfp-caption-subtitle-color:          #BDBDBD !default;                    // Caption subtitle color
+$mfp-caption-title-color:             #000 !default;                    // Caption title color
+$mfp-caption-subtitle-color:          #707070 !default;                    // Caption subtitle color
 
 // A11y
 $mfp-use-visuallyhidden:              false !default;                      // Hide content from browsers, but make it available for screen readers

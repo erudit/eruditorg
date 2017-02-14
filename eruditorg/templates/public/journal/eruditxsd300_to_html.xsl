@@ -1000,8 +1000,8 @@
         <xsl:apply-templates select="../notefig|../notetabl"/>
         <xsl:apply-templates select="../source"/>
       </figcaption>
-      <a href="{{ request.get_full_path }}media/{$imgPlGr}" target="_blank">
-        <img src="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}" class="img-responsive"/>
+      <a href="{{ request.get_full_path }}media/{$imgPlGr}" class="lightbox"  title="{normalize-space(../legende)}">
+        <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende)}" class="img-responsive"/>
       </a>
       <p class="voirliste">
         <a href="#li{../@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
@@ -2035,8 +2035,8 @@
           <xsl:apply-templates select="../no"/>
           <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
         </figcaption>
-        <a href="{{ request.get_full_path }}media/{$imgPlGr}" target="_blank">
-          <img src="{{ request.get_full_path }}media/{$imgSrc}" title="{normalize-space(../legende)}" alt="{normalize-space(../legende)}"/>
+        <a href="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende)}" class="lightbox">
+          <img src="{{ request.get_full_path }}media/{$imgSrc}" alt="{normalize-space(../legende)}"/>
         </a>
       </figure>
     </xsl:for-each>
