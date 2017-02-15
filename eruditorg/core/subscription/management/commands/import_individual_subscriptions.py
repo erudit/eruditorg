@@ -34,7 +34,7 @@ class Command(BaseCommand):
                 user = profile.user
             except LegacyAccountProfile.DoesNotExist:
                 hasher = PBKDF2WrappedAbonnementsSHA1PasswordHasher()
-                user = get_or_create_legacy_user(
+                user, created = get_or_create_legacy_user(
                     username='abonne-{}'.format(abonne.abonneindividusid),
                     email=abonne.courriel,
                     hashed_password=hasher.encode_sha1_hash(abonne.password, hasher.salt()))
