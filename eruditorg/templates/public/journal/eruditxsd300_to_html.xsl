@@ -1809,6 +1809,7 @@
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
     <section class="{name()}{% if article.erudit_object.processing == 'minimal' %} col-md-8{% else %} col-xs-12{% endif %}">
+      <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
       <xsl:apply-templates/>
     </section>
   </xsl:template>
