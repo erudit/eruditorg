@@ -6,9 +6,7 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import connections
 
-from core.accounts.hashers import PBKDF2WrappedAbonnementsSHA1PasswordHasher
 from core.accounts.models import LegacyAccountProfile
-from core.accounts.shortcuts import get_or_create_legacy_user
 from erudit.models import Journal
 from erudit.models import Organisation
 

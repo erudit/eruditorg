@@ -45,7 +45,7 @@ class Command(BaseCommand):
                 profile = LegacyAccountProfile.objects.create(
                     origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
                     legacy_id=str(abonne.abonneindividusid))
-                logger.info("User created: {username} {email}".format(user.username, user.email))
+                logger.info("User created: {} {}".format(user.username, user.email))
 
             sql = "SELECT revueID FROM revueindividus \
     WHERE abonneIndividusID = {}".format(profile.legacy_id)
@@ -61,12 +61,17 @@ class Command(BaseCommand):
                 id__in=journal_ids
             ).exclude(id__in=access.journals.all())
 
-            logger.info("Importing {} subscriptions for {}".format(journals.count(), user.username))
+            if journals.count():
+                logger.info("Importing {} subscriptions for {}".format(
+                    journals.count(), user.username
+                ))
+            else:
+                logger.debug("No new subscriptions to import for {}".format(user.username))
             subscription_count += journals.count()
             for j in journals:
                 access.journals.add(j)
             access.save()
-        logging.info("Finished. {} users created, {} subscriptions added.".format(
+        logger.info("Finished. {} users created, {} subscriptions added.".format(
             user_creation_count,
             subscription_count)
         )
