@@ -649,4 +649,5 @@ class TestAuthor(BaseEruditTestCase):
     def test_journaltype_can_return_embargo_duration_in_days(self):
         journal_type = JournalTypeFactory(code='S')
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        assert journal_type.embargo_duration(unit="days") == ml * 30
+        duration = dt.date.today() - (dt.date.today() - dr.relativedelta(months=ml))
+        assert journal_type.embargo_duration(unit="days") == duration.days

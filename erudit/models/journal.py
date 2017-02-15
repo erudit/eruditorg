@@ -60,7 +60,10 @@ class JournalType(models.Model):
         if unit == 'months':
             return embargo_duration_in_months
         if unit == 'days':
-            return embargo_duration_in_months * 30
+            duration = dt.date.today() - (
+                dt.date.today() - dr.relativedelta(months=embargo_duration_in_months)
+            )
+            return duration.days
 
     class Meta:
         verbose_name = _('Type de revue')
@@ -296,7 +299,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def published_open_access_issues_period_coverage(self):
-        """ Return the year coverage of the open access issues of this Journal. """
+        """ Return the date coverage of the open access issues of this Journal. """
         open_access_issues = self.published_open_access_issues.order_by('-date_published')
         return None if not open_access_issues.exists() else {
             'from': open_access_issues.last().date_published,
