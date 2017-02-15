@@ -3,7 +3,7 @@
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
 <li class="article-item">
-  <ul class="toolbox compact pull-right">
+  <ul class="toolbox compact toolbox-horizontal pull-right">
     {% spaceless %}
     <li>
       <button href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.id }}">

@@ -1,6 +1,10 @@
 /**
  * Article / bibliographic record toolbox
  */
+.toolbox-wrapper {
+  z-index: 10;
+}
+
 .toolbox {
   position: relative;
   margin-right: $grid-gutter-width / 2;
@@ -107,6 +111,11 @@
 
       }
 
+      .toolbox-remove {
+        font-size: 14px;
+        left: 10px;
+      }
+
       .toolbox-save {
         font-size: 18px;
         left: 12px;
@@ -127,6 +136,20 @@
         font-size: 9px;
       }
 
+    }
+
+  }
+
+  &.toolbox-horizontal {
+    margin: 0 0 0 15px;
+    padding: 0;
+    width: auto;
+
+    li {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      outline: 1px solid #FFF;
     }
 
   }

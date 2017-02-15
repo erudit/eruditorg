@@ -58,12 +58,20 @@
         <div class="col-md-8 documents-list-wrapper">
           {% include "public/partials/pagination.html" %}
           <div class="selection-action-wrapper">
-            <div id="id_selection_tools" class="toolbox pull-right" style="display:none;">
+            <ul id="id_selection_tools" class="toolbox compact toolbox-horizontal pull-right" style="display:none;">
               {% spaceless %}
-              <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection"><span class="ion-close"></span></a>
-              <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite><span class="ion-quote toolbox-cite"></span></a>
+              <li>
+                <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection">
+                  <button><span class="ion-close toolbox-remove"></span></button>
+                </a>
+              </li>
+              <li>
+                <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite>
+                  <button><span class="ion-quote toolbox-cite"></span></button>
+                </a>
+              </li>
               {% endspaceless %}
-            </div>
+            </ul>
             <p data-selection-count>{% trans "Aucun document sélectionné" %}</p>
           </div>
           <div class="documents-wrapper">
@@ -74,14 +82,31 @@
             <ul class="documents">
               {% for document in documents %}
               {% if document.polymorphic_ctype_id == article_ct.id %}
-              <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}">
-                <div class="toolbox pull-right">
+              <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="document">
+                <ul class="toolbox compact toolbox-horizontal pull-right">
                   {% spaceless %}
-                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-close"></span></a>
-                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="ion-quote toolbox-cite"></span></a>
-                  <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank"><span class="toolbox-pdf">PDF</span></a>
+                  <li>
+                    <a href="#" title="{% trans 'Supprimer' %}" data-remove>
+                      <button><span class="ion-close toolbox-remove"></span></button>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
+                      <button><span class="ion-quote toolbox-cite"></span></button>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank">
+                      <button><span class="toolbox-pdf">PDF</span></button>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                      <button><span class="toolbox-html">HTML</span></button>
+                    </a>
+                  </li>
                   {% endspaceless %}
-                </div>
+                </ul>
                 <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
                 <h3 class="document-title">
                   <a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" target="_blank">
@@ -117,14 +142,26 @@
                 </div>
               </li>
               {% elif document.polymorphic_ctype_id == thesis_ct.id %}
-              <li data-document-id="{{ document.id }}" data-document-type="thesis">
-                <div class="toolbox pull-right">
+              <li data-document-id="{{ document.id }}" data-document-type="thesis" class="document">
+                <ul class="toolbox compact toolbox-horizontal pull-right">
                   {% spaceless %}
-                  <a href="#" title="{% trans 'Supprimer' %}" data-remove><span class="ion-close"></span></a>
-                  <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite><span class="ion-quote toolbox-cite"></span></a>
-                  <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank"><span class="toolbox-pdf">PDF</span></a>
+                  <li>
+                    <a href="#" title="{% trans 'Supprimer' %}" data-remove>
+                      <button><span class="ion-close toolbox-remove"></span></button>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
+                      <button><span class="ion-quote toolbox-cite"></span></button>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank">
+                      <button><span class="toolbox-pdf">PDF</span></button>
+                    </a>
+                  </li>
                   {% endspaceless %}
-                </div>
+                </ul>
                 <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
                 <h3 class="document-title">
                   <a href="{{ document.url }}" target="_blank">{{ document.title }}</a>
