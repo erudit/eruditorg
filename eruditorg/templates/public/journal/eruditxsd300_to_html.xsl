@@ -271,31 +271,31 @@
           <ul class="unstyled toolbox">
             <li>
               <button id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
-                <span class="erudicon erudicon-tools-save"></span>
+                <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </button>
               <button class="saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
-                <span class="erudicon erudicon-tools-save"></span>
+                <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </button>
             </li>
             {% if article_access_granted and pdf_exists %}
             <li>
               <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
-                <span class="erudicon erudicon-tools-pdf"></span>
+                <span class="toolbox-pdf">PDF</span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </button>
             </li>
             {% endif %}
             <li>
               <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
-                <span class="erudicon erudicon-tools-cite"></span>
+                <span class="ion-quote toolbox-cite"></span>
                 <span class="tools-label">{% trans "Citer cet article" %}</span>
               </button>
             </li>
             <li>
               <button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
-                <span class="erudicon erudicon-tools-share"></span>
+                <span class="ion-android-share toolbox-share"></span>
                 <span class="tools-label">{% trans "Partager" %}</span>
               </button>
             </li>

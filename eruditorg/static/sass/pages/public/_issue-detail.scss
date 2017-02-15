@@ -126,42 +126,6 @@
 
       }
 
-      .toolbox {
-        margin: 0 0 0 15px;
-        padding: 0;
-        width: auto;
-
-        a {
-          display: inline-block;
-          margin-right: 1px;
-          line-height: 30px;
-          width: 30px;
-          height: 30px;
-          background: $black;
-          color: $white;
-          white-space: nowrap;
-          text-align: center;
-          vertical-align: middle;
-
-          &:hover, &:focus, &.saved {
-            background: $coral-red;
-          }
-
-          .erudicon-tools-save {
-            font-size: 13px;
-            display: block;
-            padding-top: 3px;
-          }
-
-          .erudicon-tools-html,
-          .erudicon-tools-pdf {
-            font-size: 7px;
-          }
-
-        }
-
-      }
-
     }
 
   }

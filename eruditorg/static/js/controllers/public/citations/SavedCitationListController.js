@@ -67,7 +67,7 @@ export default {
     function getSelectedDocumentIds() {
       var documentIds = new Array();
       $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
-        let $document = $(this).parents('li');
+        let $document = $(this).parents('li.document');
         documentIds.push($document.data('document-id'));
       });
       return documentIds;
@@ -92,7 +92,7 @@ export default {
 
     $('a[data-remove]').click(function(ev) {
       ev.preventDefault();
-      let $document = $(this).parents('li');
+      let $document = $(this).parents('li.document');
       removeDocument($document);
     });
 
@@ -111,7 +111,7 @@ export default {
         traditional: true
       }).done(function() {
         $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
-          let $document = $(this).parents('li');
+          let $document = $(this).parents('li.document');
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();

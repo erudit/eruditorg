@@ -8,6 +8,7 @@
 // 1. Configuration and helpers
 @import
   'utils/colours',
+  'utils/erudicon',
   'utils/font-styles',
   'utils/functions',
   'utils/mixins',
@@ -29,7 +30,6 @@ $ionicons-font-path: '~ionicons/fonts';
   'base/grid',
   'base/base',
   'base/fonts',
-  'base/icons',
   'base/typography',
   'base/helpers',
   'base/responsive-helpers';

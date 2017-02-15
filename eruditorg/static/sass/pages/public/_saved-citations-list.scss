@@ -1,25 +1,5 @@
 #citations_list {
 
-  .page-intro {
-
-    .erudicon {
-      color: white;
-      background: #ff4242;
-      display: inline-block;
-      width: 22px;
-      height: 22px;
-      text-align: center;
-      vertical-align: top;
-      padding: 3px;
-    }
-
-    .erudicon-tools-cite {
-      font-size: 10px;
-      padding-top: 5px;
-    }
-
-  }
-
   .sidebar-block {
 
     h2 {
@@ -34,36 +14,13 @@
 
     .selection-action-wrapper {
       padding: 20px;
+      height: 70px;
       background: $light-grey;
 
       p {
         margin: 0;
       }
 
-      .toolbox {
-        margin: -2px 25px 0 0;
-        padding: 0;
-        width: auto;
-        position: static;
-
-        a {
-          margin-right: 1px;
-          padding: 8px 0;
-          display: inline-block;
-          width: 25px;
-          height: 25px;
-          background: $coral-red;
-          color: $white;
-          font-size: 9px;
-          white-space: nowrap;
-          text-align: center;
-          vertical-align: middle;
-
-          &:hover, &:focus{
-            background: $black;
-          }
-        }
-      }
     }
 
     .documents-wrapper {
@@ -89,41 +46,13 @@
         padding: 0;
         list-style: none;
 
-        li {
+        > li {
           margin: 0;
           padding: 15px 0;
           border-bottom: 1px solid darken($light-grey, 5%);
 
           .document-checkbox-wrapper {
             float: left;
-          }
-
-          .toolbox {
-            margin: -2px 0 0 10px;
-            padding: 0 20px 0 0;
-            width: auto;
-
-            a {
-              margin-right: 1px;
-              padding: 8px 0;
-              display: inline-block;
-              width: 25px;
-              height: 25px;
-              background: $black;
-              color: $white;
-              font-size: 9px;
-              white-space: nowrap;
-              text-align: center;
-              vertical-align: middle;
-
-              &:hover, &:focus {
-                background: $coral-red;
-              }
-
-              .erudicon-tools-pdf {
-                font-size: 6px;
-              }
-            }
           }
 
           .document-title,

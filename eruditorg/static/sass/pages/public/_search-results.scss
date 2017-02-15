@@ -207,17 +207,6 @@
         margin: 0;
         padding-top: 0;
         list-style: none;
-
-        li button {
-          background-color: #000;
-          color: #FFF;
-
-          &:hover, &:focus, &:active:focus, &.saved {
-            background: $coral-red;
-          }
-
-        }
-
       }
 
     }

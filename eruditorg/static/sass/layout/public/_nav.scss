@@ -72,28 +72,15 @@
     }
   }
 
-  .erudicon-tools-save,
-  .ion-ios-search-strong {
-
-    &:hover, &:focus, &:active, &:active:focus {
-      color: $coral-red;
-    }
-
-  }
-
-  .erudicon-tools-save {
-    &::before {
-      font-size: 25px;
-      vertical-align: middle;
-    }
-  }
-
   .ion-ios-search-strong,
-  .ion-android-close {
+  .ion-android-close,
+  .toolbox-save {
+
     &::before {
       font-size: 30px;
       vertical-align: middle;
     }
+
   }
 
   // search form

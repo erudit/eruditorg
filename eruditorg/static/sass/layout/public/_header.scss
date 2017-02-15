@@ -17,7 +17,6 @@ body.fixed-header {
   @include transition(all 0.15s);
   background-color: #fff;
   float: none;
-  height: $header-height;
   z-index: $zindex-navbar;
 
   &.fixed {
