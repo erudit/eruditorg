@@ -49,11 +49,11 @@
   <xsl:template match="article">
 
     <!-- main header -->
-    <header class="row page-header-main article-header" id="article-header">
+    <header class="page-header-main article-header" id="article-header">
 
-      <hgroup class="col-xs-12 child-column-fit">
+      <div class="row article-title-group">
 
-        <div class="col-sm-9">
+        <div class="col-md-9">
           {% if only_summary %}
           <p class="title-summary">{% trans 'Notice' %}</p>
           {% endif %}
@@ -105,7 +105,7 @@
         </div>
 
         <!-- issue cover image or journal logo -->
-        <div class="issue-image col-sm-3">
+        <div class="issue-image col-md-3">
           {% if article.issue.has_coverpage %}
           <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal }}{% endblocktrans %}">
             <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|safe }}, {% endif %}
@@ -117,65 +117,66 @@
           </a>
           {% endif %}
           {% if only_summary %}
-          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
+          <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
         </div>
-      </hgroup>
-
-      <!-- article metadata -->
-      <div class="meta-article col-sm-6 border-top">
-
-        <xsl:apply-templates select="liminaire/erratum"/>
-
-        <dl class="mono-space idpublic">
-          <dt>URI</dt>
-          <dd>
-            <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
-              <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
-                {{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
-                <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-                <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-              </a>
-            </span>
-          </dd>
-          {% if article.issue.journal.type.code == 'S' %}
-          <dt>DOI</dt>
-          <dd>
-            <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
-              <a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
-                10.7202/<xsl:value-of select="$iderudit"/>
-                <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-                <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-              </a>
-            </span>
-          </dd>
-          {% endif %}
-        </dl>
-
-        <xsl:apply-templates select="liminaire/notegen"/>
-        <xsl:apply-templates select="admin/histpapier"/>
-
       </div>
 
-      <!-- journal metadata -->
-      <div class="meta-journal col-sm-6 border-top">
-        <p>
-          {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-          <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
-        </p>
-        <p class="refpapier">
-          <xsl:apply-templates select="admin/numero" mode="refpapier"/>
-          <xsl:if test="admin/infoarticle/pagination">
-            <xsl:apply-templates select="admin/infoarticle/pagination"/>
-          </xsl:if>
-          <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
-        </p>
-        <xsl:apply-templates select="admin/droitsauteur"/>
-      </div>
+      <div class="row article-metadata-group">
+        <!-- article metadata -->
+        <div class="col-sm-6">
+          <div class="meta-article">
+            <xsl:apply-templates select="liminaire/erratum"/>
+            <dl class="mono-space idpublic">
+              <dt>URI</dt>
+              <dd>
+                <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
+                  <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
+                    {{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
+                    <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+                    <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+                  </a>
+                </span>
+              </dd>
+              {% if article.issue.journal.type.code == 'S' %}
+              <dt>DOI</dt>
+              <dd>
+                <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
+                  <a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
+                    10.7202/<xsl:value-of select="$iderudit"/>
+                    <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+                    <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+                  </a>
+                </span>
+              </dd>
+              {% endif %}
+            </dl>
+            <xsl:apply-templates select="liminaire/notegen"/>
+            <xsl:apply-templates select="admin/histpapier"/>
+          </div>
+        </div>
 
+        <!-- journal metadata -->
+        <div class="col-sm-6">
+          <div class="meta-journal">
+            <p>
+              {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
+              <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
+            </p>
+            <p class="refpapier">
+              <xsl:apply-templates select="admin/numero" mode="refpapier"/>
+              <xsl:if test="admin/infoarticle/pagination">
+                <xsl:apply-templates select="admin/infoarticle/pagination"/>
+              </xsl:if>
+              <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
+            </p>
+            <xsl:apply-templates select="admin/droitsauteur"/>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <div id="article-content" class="row border-top">
+    <div id="article-content" class="row article-content">
       <xsl:if test="//corps">
         {% if article.erudit_object.processing == 'complet' %}
         <!-- article outline -->
@@ -336,7 +337,6 @@
 
         <!-- appendices -->
         <div class="row">
-          <hr/>
           {% if article.erudit_object.processing == 'minimal' %}
           <!-- promotional campaign -->
           <div class="col-md-3">
