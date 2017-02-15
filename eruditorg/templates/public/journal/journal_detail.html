@@ -63,6 +63,11 @@
       <h1>
         <span>{{ journal.name }}</span>
         {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
+        {% if journal.open_access %}
+        <span class="hint--bottom-left hint--no-animate pull-right" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
+          <span class="erudicon erudicon-open-access"></span>
+        </span>
+        {% endif %}
       </h1>
       {% if journal.previous_journal or journal.next_journal %}
       <p class="journal-history">

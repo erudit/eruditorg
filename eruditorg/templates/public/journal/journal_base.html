@@ -125,7 +125,7 @@
 
           <dt>{% trans "Politique d'accès" %}</dt>
           {% if journal.open_access %}
-          <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
+          <dd>{% trans "Disponible en libre accès" %} <span class="erudicon erudicon-open-access"></span> <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
           {% else %}
           <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
           {% endif %}

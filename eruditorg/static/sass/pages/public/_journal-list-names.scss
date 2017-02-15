@@ -44,12 +44,6 @@
           margin: 0.25em 0 0.5em 0;
         }
 
-        .erudicon-open-access {
-          color: $coral-red;
-          font-size: 1.15em;
-          vertical-align: sub;
-        }
-
       }
 
     }
@@ -161,7 +155,8 @@
             @include fw-sans-medium;
 
             .journal-subtitle,
-            .journal-history {
+            .journal-history,
+            .erudicon {
               color: #FFF;
             }
 
@@ -187,6 +182,12 @@
 
     }
 
+  }
+
+  .erudicon-open-access {
+    color: $coral-red;
+    font-size: 1.15em;
+    vertical-align: sub;
   }
 
   // "responsive" for sticky elements

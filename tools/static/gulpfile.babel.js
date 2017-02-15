@@ -138,7 +138,9 @@ gulp.task('build-iconfont', function(){
           fontName: 'erudicon',
           fontPath: '/static/fonts/erudicon/',
           className: 'erudicon'
-        }));
+        }))
+        .pipe(rename('_erudicon.scss'))
+        .pipe(gulp.dest(sass_dir + '/utils/'));
     })
     .pipe(gulp.dest(font_dir + '/erudicon/'));
 });
