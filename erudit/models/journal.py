@@ -249,21 +249,21 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
 
     @property
-    def date_paywall_begins(self):
-        """Return the paywall begining date if apply """
+    def date_embargo_begins(self):
+        """Return the embargo begining date if apply """
         if self.open_access or self.published_issues.count() == 0:
             return None
         else:
-            date_paywall_effect = dt.date(
+            date_embargo_begins = dt.date(
                 self.last_issue.date_published.year,
                 self.last_issue.date_published.month,
                 1
             ) - dr.relativedelta(months=self.embargo_in_months)
-            return date_paywall_effect
+            return date_embargo_begins
 
     @property
     def days_not_available_from_today(self):
-        return (dt.date.today() - self.date_paywall_begins).days if self.date_paywall_begins \
+        return (dt.date.today() - self.date_embargo_begins).days if self.date_embargo_begins \
             else None
 
     # Issues-related methods and properties
@@ -278,8 +278,8 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def published_open_access_issues(self):
         """ Return the published open access issues of this Journal. """
         current_date = dt.datetime.now()
-        if self.date_paywall_begins:
-            filter_kwargs = {'date_published__lt': self.date_paywall_begins}
+        if self.date_embargo_begins:
+            filter_kwargs = {'date_published__lt': self.date_embargo_begins}
         else:
             filter_kwargs = {'date_published__lte': current_date}
         return self.published_issues.filter(**filter_kwargs)
@@ -511,7 +511,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            return self.date_published >= self.journal.date_paywall_begins if self.is_published \
+            return self.date_published >= self.journal.date_embargo_begins if self.is_published \
                 else True
         return False
 
