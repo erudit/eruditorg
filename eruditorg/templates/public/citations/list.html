@@ -58,7 +58,7 @@
         <div class="col-md-8 documents-list-wrapper">
           {% include "public/partials/pagination.html" %}
           <div class="selection-action-wrapper">
-            <ul id="id_selection_tools" class="toolbox compact toolbox-horizontal pull-right" style="display:none;">
+            <ul id="id_selection_tools" class="toolbox toolbox-compact toolbox-horizontal pull-right" style="display:none;">
               {% spaceless %}
               <li>
                 <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection">
@@ -83,7 +83,7 @@
               {% for document in documents %}
               {% if document.polymorphic_ctype_id == article_ct.id %}
               <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="document">
-                <ul class="toolbox compact toolbox-horizontal pull-right">
+                <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
                     <a href="#" title="{% trans 'Supprimer' %}" data-remove>
@@ -143,7 +143,7 @@
               </li>
               {% elif document.polymorphic_ctype_id == thesis_ct.id %}
               <li data-document-id="{{ document.id }}" data-document-type="thesis" class="document">
-                <ul class="toolbox compact toolbox-horizontal pull-right">
+                <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
                     <a href="#" title="{% trans 'Supprimer' %}" data-remove>
