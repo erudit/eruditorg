@@ -20,11 +20,11 @@ class LegacyAccountProfile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
     """ The user associated with the considered legacy profile. """
 
-    DB_ABONNEMENTS, DB_RESTRICTION, DB_MANDRAGORE, DB_DRUPAL = 1, 2, 3, 4
+    # Mandragore used to be 3
+    DB_ABONNEMENTS, DB_RESTRICTION, DB_DRUPAL = 1, 2, 4
     ORIGIN_CHOICES = (
         (DB_ABONNEMENTS, _('Base de données Abonnements')),
         (DB_RESTRICTION, _('Base de données Restrictions')),
-        (DB_MANDRAGORE, _('Base de données Mandragore')),
         (DB_DRUPAL, _('Base de données Drupal')),
     )
     origin = models.PositiveSmallIntegerField(choices=ORIGIN_CHOICES, verbose_name=_('Origine'))
