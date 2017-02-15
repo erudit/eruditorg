@@ -121,7 +121,8 @@
         left: 12px;
       }
 
-      .toolbox-cite {
+      .toolbox-cite,
+      .toolbox-share {
         font-size: 14px;
         left: 10px;
       }
@@ -152,6 +153,16 @@
       outline: 1px solid #FFF;
     }
 
+  }
+
+}
+
+.toolbox-mobile {
+  text-align: right;
+  padding-right: 11px;
+
+  &.is_stuck {
+    margin-top: -20px;
   }
 
 }

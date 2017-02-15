@@ -266,7 +266,38 @@
         </nav>
         {% endif %}
 
-        <!-- toolbox -->
+        <!-- mobile / tablet toolbox -->
+        <aside class="hidden-md hidden-lg toolbox-wrapper toolbox-mobile">
+          <ul class="toolbox toolbox-compact toolbox-horizontal">
+            {% spaceless %}
+            <li>
+              <button id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+                <span class="ion-bookmark toolbox-save"></span>
+              </button>
+              <button class="saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+                <span class="ion-bookmark toolbox-save"></span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
+                <span class="toolbox-pdf">PDF</span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
+                <span class="ion-quote toolbox-cite"></span>
+              </button>
+            </li>
+            <li>
+              <button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
+                <span class="ion-android-share toolbox-share"></span>
+              </button>
+            </li>
+            {% endspaceless %}
+          </ul>
+        </aside>
+
+        <!-- desktop toolbox -->
         <aside class="pull-right hidden-xs hidden-sm toolbox-wrapper">
           <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled toolbox">
