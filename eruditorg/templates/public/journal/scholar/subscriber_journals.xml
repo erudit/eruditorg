@@ -12,7 +12,7 @@
       <from><year>{{ journal.published_open_access_issues.first.year }}</year></from>
       {% if journal.open_access == False %}
       <embargo>
-        {% if journal.date_paywall_begins %}
+        {% if journal.date_embargo_begins %}
         <days_not_available>
             {{ journal.days_not_available_from_today }}
         </days_not_available>
