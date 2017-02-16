@@ -514,7 +514,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            return self.date_published >= self.journal.date_embargo_begins if self.is_published \
+            return dt.date(
+                self.date_published.year, self.date_published.month, self.date_published.day
+            ) >= self.journal.date_embargo_begins if self.is_published \
                 else True
         return False
 
