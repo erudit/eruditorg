@@ -131,10 +131,13 @@ class Command(BaseCommand):
                     created, user.pk, username, restriction_subscriber.courriel
                 ))
 
-            organisation = Organisation.objects.create(name=restriction_subscriber.abonne[:120])
-            logger.debug("Organisation created=True, pk={}, name={}".format(
-                organisation.pk, organisation.name
-            ))
+            organisation, created = Organisation.objects.get_or_create(
+                name=restriction_subscriber.abonne[:120]
+            )
+            if created:
+                logger.debug("Organisation created=True, pk={}, name={}".format(
+                    organisation.pk, organisation.name
+                ))
             restriction_profile = LegacyAccountProfile.objects.create(
                 origin=LegacyAccountProfile.DB_RESTRICTION,
                 legacy_id=str(restriction_subscriber.pk),
