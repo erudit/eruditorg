@@ -75,7 +75,7 @@ class Command(BaseCommand):
                 .filter(origin=LegacyAccountProfile.DB_DRUPAL).get(legacy_id=str(drupal_user.uid))
             user = legacy_profile.user
         except LegacyAccountProfile.DoesNotExist:
-            user = get_or_create_legacy_user(
+            user, _ = get_or_create_legacy_user(
                 username=drupal_user.name, email=drupal_user.mail,
                 hashed_password='drupal$' + drupal_user.pass_field)
             LegacyAccountProfile.objects.create(

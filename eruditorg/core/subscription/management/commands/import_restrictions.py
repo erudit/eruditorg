@@ -102,7 +102,7 @@ class Command(BaseCommand):
                 .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
                 .get(legacy_id=str(restriction_subscriber.pk))
         except LegacyAccountProfile.DoesNotExist:
-            user = get_or_create_legacy_user(
+            user, _ = get_or_create_legacy_user(
                 username='restriction-{}'.format(restriction_subscriber.pk),
                 email=restriction_subscriber.courriel)
             organisation = Organisation.objects.create(name=restriction_subscriber.abonne[:120])
