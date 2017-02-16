@@ -62,14 +62,14 @@
   >
   {% if not only_summary %}
   {% if previous_article %}
-  <a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page">
+  <a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="hidden-xs hidden-sm pagination-arrow previous-page">
     <span class="hint--bottom-right hint--no-animate" data-hint="{{ previous_article.title }}">
       <span class="ion ion-ios-arrow-left"></span>
     </span>
   </a>
   {% endif %}
   {% if next_article %}
-  <a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page">
+  <a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="hidden-xs hidden-sm pagination-arrow next-page">
     <span class="hint--bottom-left hint--no-animate" data-hint="{{ next_article.title }}">
       <span class="ion ion-ios-arrow-right"></span>
     </span>
@@ -77,14 +77,14 @@
   {% endif %}
   {% else %}
   {% if previous_article %}
-  <a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="pagination-arrow previous-page">
+  <a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}" class="hidden-xs hidden-sm pagination-arrow previous-page">
     <span class="hint--bottom-right hint--no-animate" data-hint="{{ previous_article.title }}">
       <span class="ion ion-ios-arrow-left"></span>
     </span>
   </a>
   {% endif %}
   {% if next_article %}
-  <a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="pagination-arrow next-page">
+  <a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}" class="hidden-xs hidden-sm pagination-arrow next-page">
     <span class="hint--bottom-left hint--no-animate" data-hint="{{ next_article.title }}">
       <span class="ion ion-ios-arrow-right"></span>
     </span>
@@ -102,38 +102,9 @@
     </div>
   {% endif %}
   {% endcache %}
-
-  {# article footer with related articles #}
-  {% if related_articles %}
-  <footer class="related-articles">
-
-    <div class="row">
-      <header class="col-xs-12">
-        <h2>{% trans "Autres articles de ce numéro" %}</h2>
-      </header>
-    </div>
-
-    <div class="row">
-      {% for related_article in related_articles %}
-      {% cache FOREVER_TTL "public_article_detail_related_article" related_article.id LANGUAGE_CODE %}
-      <article class="related-article col-sm-6 col-md-3">
-        <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
-          <h4>{{ related_article.title }}</h4>
-          {% if related_article.authors.all|length > 0 %}
-          <footer class="meta">
-            <h5>{% trans 'Par' %} {{ related_article.authors.all|join:", " }}</h5>
-          </footer>
-          {% endif %}
-        </a>
-      </article>
-      {% endcache %}
-      {% endfor %}
-    </div>
-
-  </footer>
-  {% endif %}
-
 </main>
+
+{{ block.super }}
 
 {% cache FOREVER_TTL "public_article_detail_citation" article.id LANGUAGE_CODE %}
 <div class="hidden">

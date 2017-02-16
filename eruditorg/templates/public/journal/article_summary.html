@@ -68,7 +68,6 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-
 <main
     class="container"
     data-document-id="{{ article.id }}"
@@ -85,43 +84,13 @@
     </div>
   {% endif %}
   {% endcache %}
-
-  {# article footer with related articles #}
-  {% if related_articles %}
-  <footer class="related-articles">
-
-    <div class="row">
-      <header class="col-xs-12">
-        <h2>{% trans "Autres articles de ce numéro" %}</h2>
-      </header>
-    </div>
-
-    <div class="row">
-      {% for related_article in related_articles %}
-      {% cache FOREVER_TTL "public_article_summary_related_article" related_article.id LANGUAGE_CODE %}
-      <article class="related-article col-sm-6 col-md-3">
-        <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=related_article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
-          <h4>{{ related_article.title }}</h4>
-          {% if related_article.authors.all|length > 0 %}
-          <footer class="meta">
-            <h5>Par {{ related_article.authors.all|join:", " }}</h5>
-          </footer>
-          {% endif %}
-        </a>
-      </article>
-      {% endcache %}
-      {% endfor %}
-    </div>
-
-  </footer>
-  {% endif %}
-
 </main>
+
+{{ block.super }}
 
 {% cache FOREVER_TTL "public_article_summary_citation" article.id LANGUAGE_CODE %}
 <div class="hidden">
   {% include "public/journal/partials/article_citation_modal_content.html" %}
 </div>
 {% endcache %}
-
 {% endblock content %}

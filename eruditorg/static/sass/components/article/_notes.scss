@@ -13,6 +13,14 @@
     background: $coral-red;
   }
 
+  @media (max-width: $screen-sm-max) {
+    &[class*="hint--"] {
+      &:after, &:before {
+        display: none;
+      }
+    }
+  }
+
 }
 
 .nonote {

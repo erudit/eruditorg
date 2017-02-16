@@ -8,19 +8,13 @@
   p {
     background-color: $yellow;
     padding: 0.5em 0.75em;
-    margin-top: 1em;
+    margin: 1em 0;
 
     a {
       color: #000;
       text-decoration: underline;
     }
 
-  }
-
-  // Improve alignment and spacing of inner content
-  > p,
-  > ul {
-    margin-bottom: 0;
   }
 
   > p + p {

@@ -32,17 +32,7 @@ $article-toolbar-width: 80px;
 
   a {
     color: $coral-red;
-  }
-
-
-  /**
-  * Utils class
-  */
-
-  // add a vertical line before each hgroup
-  .border-top {
-    @include grid-cell-border();
-    padding: 1em 11px;
+    word-wrap: break-word;
   }
 
   /**
@@ -50,6 +40,8 @@ $article-toolbar-width: 80px;
   */
   .article-header {
     position: relative;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #000;
 
     h1 {
       margin-bottom: 0.25em;
@@ -60,12 +52,16 @@ $article-toolbar-width: 80px;
       }
     }
 
-    .btn.btn-primary{
+    .btn.btn-full-text{
       float: right;
       color: $white;
 
       &:hover, &:focus, &:active {
         color: $coral-red;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        float: none;
       }
 
     }
@@ -80,9 +76,8 @@ $article-toolbar-width: 80px;
       line-height: 1.5;
     }
 
-    hgroup {
-      padding-top: $margin-vertical-default/1.5;
-      padding-bottom: $margin-vertical-default/1.5;
+    .article-title-group {
+      padding: 0 0 1em 0;
 
       .grauteur {
         list-style: none;
@@ -125,10 +120,6 @@ $article-toolbar-width: 80px;
 
       .traducteur {
         @extend em;
-      }
-
-      &.child-column-fit {
-        padding-top: 0;
       }
 
     }
@@ -205,6 +196,11 @@ $article-toolbar-width: 80px;
         outline: 1px solid $mid-grey;
       }
 
+    }
+    .meta-article,
+    .meta-journal {
+      border-top: 1px solid $dark-grey;
+      padding: 1em 0;
     }
 
     .meta-article {
@@ -290,96 +286,6 @@ $article-toolbar-width: 80px;
 
     .histpapier {
       font-style: italic;
-    }
-
-  }
-
-  /**
-  * main article sticky header
-  */
-  header.article-header-sticky {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    z-index: 10;
-    will-change: transform;
-    @include translate(-50%, -100%);
-    @include transition(transform 0.3s ease-out);
-    @include font-styles('sans');
-
-    .border-bottom {
-      max-height: 100px;
-      overflow: hidden;
-      border-bottom: 1px solid #000;
-      background: $body-bg;
-    }
-
-    h1#brand {
-
-      a {
-        display: block;
-        width: 100%;
-        padding: 30% 25% 0 25%;
-
-        img {
-          width: 100%;
-        }
-      }
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 26px;
-      line-height: 1.2em;
-      max-height: 64px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      @include fw-sans-bold();
-    }
-
-    dl {
-      margin-top: $margin-vertical-default/2;
-      margin-bottom: $margin-vertical-default/2;
-    }
-
-    hgroup {
-      padding-top: $margin-vertical-default/3;
-      padding-bottom: $margin-vertical-default/3;
-
-      h3 {
-        margin-bottom: 0;
-      }
-
-      h4 {
-        margin-bottom: 5px;
-      }
-
-      .affiliation {
-        margin-top: $margin-vertical-default/6;
-        margin-bottom: 0;
-      }
-
-      p {
-        margin: 0;
-      }
-
-    }
-
-    .meta-journal {
-      .meta-journal--title {
-        display: block;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        color: $black;
-      }
-      .meta-journal--title,
-      .meta-journal--theme,
-      .volumaison {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        max-height: 20px;
-      }
     }
 
   }
@@ -614,6 +520,11 @@ $article-toolbar-width: 80px;
     position: absolute;
     left: -25px;
     margin-top: 5px;
+
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+
   }
 
   /**
@@ -638,6 +549,8 @@ $article-toolbar-width: 80px;
 
     > section:first-of-type h2 {
       margin-top: 0;
+      padding-top: 0.25em;
+      border-top: 1px solid #000;
     }
 
   }
@@ -660,56 +573,6 @@ $article-toolbar-width: 80px;
     height: 15px;
     vertical-align: baseline;
     margin-right: 5px;
-  }
-
-  /**
-  * Related articles
-  */
-
-  .related-articles {
-    padding-top: $margin-vertical-default;
-    padding-bottom: $margin-vertical-default;
-    margin-bottom: $margin-vertical-default;
-    @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: #000);
-
-    > header {
-      h2 {
-        margin-bottom: $margin-vertical-default*2;
-      }
-    }
-
-    .related-article {
-      padding: 0;
-
-      a {
-        display: block;
-        width: 100%;
-        color: $text-color;
-        padding: $margin-vertical-default/2 $grid-gutter-width/2;
-        @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $mid-grey);
-
-        h4 {
-          margin-bottom: $margin-vertical-default/2;
-        }
-
-        h5 {
-          color: $dark-grey;
-          font-size: 18px;
-        }
-
-        &:hover {
-          background-color: $coral-red;
-          text-decoration: none;
-          @include grid-cell-border($direction: 'top', $border-width: 1px, $border-color: $coral-red);
-
-          &, h5 {
-            color: $white;
-          }
-        }
-      }
-
-    }
-
   }
 
 }
