@@ -34,6 +34,7 @@
     }
 
     .btn-secondary {
+      margin-bottom: 1.5em;
       @include transition(all 500ms);
 
       + p {
@@ -158,6 +159,7 @@
       .meta {
 
         .pub-date {
+          margin-top: 1em;
           font-size: 12px;
           @include fw-mono;
         }

@@ -55,8 +55,25 @@
           <h2>{% trans "Notices sauvegardées" %}</h2>
         </div>
         {% if documents %}
-        <div class="col-md-8 documents-list-wrapper">
-          {% include "public/partials/pagination.html" %}
+        <div class="row">
+          <div class="col-md-8">
+            {% include "public/partials/pagination.html" %}
+          </div>
+        </div>
+        <div class="col-md-push-8 col-md-3 col-md-offset-1 text-center actions-wrapper">
+          <div id="div_id_sort_by" class="form-group">
+            <div class="controls ">
+              <label class="control-label" for="sort_by">{% trans "Tri…" %}</label>
+              &nbsp;
+              <select id="sort_by" onChange="window.location.href=this.value">
+                {% for sort_option in available_tris.items %}
+                <option value="?sort_by={{ sort_option.0}}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-pull-4 col-md-8 documents-list-wrapper">
           <div class="selection-action-wrapper">
             <ul id="id_selection_tools" class="toolbox toolbox-compact toolbox-horizontal pull-right" style="display:none;">
               {% spaceless %}
@@ -223,19 +240,6 @@
                   BibTeX, JabRef, Mendeley, Zotero
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-md-offset-1 text-center actions-wrapper">
-          <div id="div_id_sort_by" class="form-group">
-            <div class="controls ">
-              <label class="control-label" for="sort_by">{% trans "Tri…" %}</label>
-              &nbsp;
-              <select id="sort_by" onChange="window.location.href=this.value">
-                {% for sort_option in available_tris.items %}
-                <option value="?sort_by={{ sort_option.0}}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
-                {% endfor %}
-              </select>
             </div>
           </div>
         </div>

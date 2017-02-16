@@ -69,7 +69,7 @@
 
       <ul class="repositories row">
         {% for collection_info in collections_dict.values %}
-        <li class="col-md-3 repository">
+        <li class="col-sm-6 col-md-4 col-lg-3 repository">
           <a href="{% url 'public:thesis:collection_home' collection_info.collection.pk %}" class="collection-link">
             {% if collection_info.collection.logo %}
             <span class="collection-logo">
