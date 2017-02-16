@@ -56,7 +56,10 @@
   -webkit-overflow-scrolling: touch;
 
   &.in {
-    overflow-y: auto;
+    height: 533px;
+    max-height: 533px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   @media (min-width: $grid-float-breakpoint) {
