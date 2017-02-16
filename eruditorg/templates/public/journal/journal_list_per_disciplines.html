@@ -92,7 +92,7 @@
     {% for collection_group in objects_group.collections %}
     <section class="container sorting-group--collection">
       <ul class="row sorting-group--journals">
-        <li class="col-sm-6 col-md-3 collection-title">
+        <li class="col-xs-6 col-md-3 collection-title">
           <h3 {% if collection_group.key.code == "erudit" %}class="collection-erudit"{% endif %}>
             {{ collection_group.key.name }}
             {% if collection_group.key.code == "persee" %}
@@ -107,7 +107,7 @@
           </h3>
         </li>
         {% for journal in collection_group.objects %}
-        <li class="col-sm-6 col-md-3 journal-item">
+        <li class="col-xs-6 col-md-3 journal-item">
           <a
           {% if journal.external_url %}
           href="{% url 'public:journal:journal_external_redirect' journal.code %}"

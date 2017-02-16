@@ -111,14 +111,14 @@
               </div>
 
               <div class="form-action">
-                <button type="submit" class="btn btn-primary btn-block">{% trans "Filtrer" %}</button>
+                <button type="submit" class="btn btn-primary">{% trans "Filtrer" %}</button>
               </div>
             </div>
           </form>
           {% endcache %}
           {% include "public/partials/subscription_sponsor_badge.html" %}
         </aside>
-        <nav class="col-md-9 col-lg-offset-1 hidden-xs list-header">
+        <nav class="col-md-9 col-lg-offset-1 list-header">
           <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
           <div id="items_menu">
             <ul class="nav alpha-nav">
@@ -130,7 +130,7 @@
               {% endif %}
               {% endfor %}
             </ul>
-            <ul class="row list-headings">
+            <ul class="row list-headings hidden-xs">
               <li class="col-sm-6">{% trans "Revue" %}</li>
               <li class="col-sm-2">{% trans "Type" %}</li>
               <li class="col-sm-3">{% trans "Fonds" %}</li>

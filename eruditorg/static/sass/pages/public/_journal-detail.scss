@@ -197,7 +197,8 @@
 
   }
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-sm-min),
+  (orientation: landscape) and (max-width: $screen-xs-max) {
 
     .year-list {
       @include column-count(2);
