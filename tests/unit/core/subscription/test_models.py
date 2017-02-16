@@ -11,12 +11,15 @@ from erudit.test.factories import OrganisationFactory
 
 from base.test import DBRequiredTestCase
 from base.test import EruditTestCase
+from core.subscription.models import JournalAccessSubscription
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 from core.subscription.test.factories import JournalManagementSubscriptionPeriodFactory
+from core.subscription.test.factories import InstitutionRefererFactory
+from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
 
 
 class TestJournalAccessSubscription(EruditTestCase):
@@ -50,6 +53,34 @@ class TestJournalAccessSubscription(EruditTestCase):
         assert list(subscription_3.get_journals()) == [self.journal, ]
         assert list(subscription_4.get_journals()) == [self.journal, ]
 
+
+class TestInstitutionReferer(DBRequiredTestCase):
+
+    def test_can_find_an_institution_referer_by_netloc(self):
+
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
+        institution_referer = InstitutionRefererFactory(
+            subscription=valid_period.subscription,
+            referer="https://www.erudit.org/"
+        )
+        assert JournalAccessSubscription.valid_objects.get_for_referer("https://www.erudit.org/") == institution_referer.subscription  # noqa
+        assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/") == institution_referer.subscription  # noqa
+
+
+        institution_referer = InstitutionRefererFactory(
+            subscription=valid_period.subscription,
+            referer="https://www.topsecurity.org/bulletproofauthenticationmechanism"
+        )
+        assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/bulletproofauthenticationmechanism") == institution_referer.subscription  # noqa
+        assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/")
+        assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123") == institution_referer.subscription  # noqa
+
+        institution_referer = InstitutionRefererFactory(
+            subscription=valid_period.subscription,
+            referer="http://externalservice.com:2049/login?url="
+        )
+        assert JournalAccessSubscription.valid_objects.get_for_referer("http://externalservice.com:2049/login?url='allo'") == institution_referer.subscription  # noqa
+        assert JournalAccessSubscription.valid_objects.get_for_referer("https://externalservice.com:2049/login?url='allo'") == institution_referer.subscription  # noqa
 
 class TestInstitutionIPAddressRange(DBRequiredTestCase):
     @pytest.fixture(autouse=True)

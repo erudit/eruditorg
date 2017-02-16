@@ -106,7 +106,7 @@ class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
 
 class InstitutionReferer(models.Model):
     subscription = models.ForeignKey(
-        JournalAccessSubscription, verbose_name=_("Abonnement aux revues"),
+        JournalAccessSubscription, verbose_name=_("Abonnement aux revues"), related_name='referers'
     )
     referer = models.URLField(verbose_name=_("URL référent"))
 

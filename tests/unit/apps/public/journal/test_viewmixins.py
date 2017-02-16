@@ -79,6 +79,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         request.subscription = None
 
         view = MyView()
@@ -102,6 +103,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         view = MyView()
         view.request = request
 
@@ -130,6 +132,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         view = MyView()
         view.request = request
 
@@ -159,6 +162,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = self.user
+        request.session = dict()
         view = MyView()
         view.request = request
         middleware.process_request(request)
@@ -183,6 +187,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = self.user
+        request.session = dict()
         request.subscription = None
         view = MyView()
         view.request = request
@@ -220,6 +225,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters
@@ -255,6 +261,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         # FIXME call middleware
         request.subscription = None
         parameters = request.META.copy()
