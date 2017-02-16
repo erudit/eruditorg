@@ -243,7 +243,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.MD5PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher',
-    'core.accounts.hashers.PBKDF2WrappedAbonnementsSHA1PasswordHasher',
     'core.accounts.hashers.DrupalPasswordHasher',
 ]
 

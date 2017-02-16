@@ -6,9 +6,7 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import connections
 
-from core.accounts.hashers import PBKDF2WrappedAbonnementsSHA1PasswordHasher
 from core.accounts.models import LegacyAccountProfile
-from core.accounts.shortcuts import get_or_create_legacy_user
 from erudit.models import Journal
 from erudit.models import Organisation
 
@@ -41,31 +39,6 @@ class Command(BaseCommand):
 
     def total_abonnes(self):
         self.stdout.write(str(Abonneindividus.objects.count()))
-
-    def import_abonnes(self):
-        if LegacyAccountProfile.objects \
-                .filter(origin=LegacyAccountProfile.DB_ABONNEMENTS).count() > 0:
-            self.stdout.write("Some accounts are already present on destination \
-                table. Importation canceled.")
-            return
-
-        for old_abonne in Abonneindividus.objects.all():
-            try:
-                LegacyAccountProfile.objects.get(
-                    origin=LegacyAccountProfile.DB_ABONNEMENTS,
-                    legacy_id=str(old_abonne.abonneindividusid))
-            except LegacyAccountProfile.DoesNotExist:
-                hasher = PBKDF2WrappedAbonnementsSHA1PasswordHasher()
-                user = get_or_create_legacy_user(
-                    username='abonne-{}'.format(old_abonne.abonneindividusid),
-                    email=old_abonne.courriel,
-                    hashed_password=hasher.encode_sha1_hash(old_abonne.password, hasher.salt()))
-                user.first_name = old_abonne.prenom
-                user.last_name = old_abonne.nom
-                user.save()
-                LegacyAccountProfile.objects.create(
-                    origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
-                    legacy_id=str(old_abonne.abonneindividusid))
 
     def link_abonnes_from_csv(self):
         # Create policy from filename if it does not exist
