@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
 import datetime as dt
 import os.path as op
 
@@ -27,9 +29,19 @@ from core.subscription.restriction.restriction_models import (
     Revueabonne,
 )
 
+logger = logging.getLogger(__name__)
+
 
 class ImportException(Exception):
     pass
+
+
+created_objects = {
+    'subscription': 0,
+    'user': 0,
+    'period': 0,
+    'iprange': 0,
+}
 
 
 class Command(BaseCommand):
@@ -58,40 +70,46 @@ class Command(BaseCommand):
                 abonneid=self.organisation_id
             )
 
-        self.stdout.write(self.style.MIGRATE_HEADING(
-            'Start importing "restriction" subscriptions ({0} subscriptions to import!)'.format(
+        logger.info("{} {} {}".format(
+            "=" * 15, "Start institution subscription import", "=" * 15
+        ))
+
+        logger.info(
+            "Processing {0} subscriptions in database".format(
                 restriction_subscriptions.count()
-            )))
+            )
+        )
 
         for restriction_subscription in restriction_subscriptions:
             try:
                 self._import_restriction_subscription(restriction_subscription)
             except ImportException:
                 pass
+        logger.info("Import ended")
+        logger.info("Created objects: {}".format(created_objects.items()))
 
     @transaction.atomic
     def _import_restriction_subscription(self, restriction_subscription):
-        self.stdout.write(self.style.MIGRATE_LABEL(
-            '    Start importing the subscription with ID: {0}'.format(
-                restriction_subscription.id)),
-            ending='')
-
+        logger.info(
+            'Process subscription with ID: {0}'.format(
+                restriction_subscription.id)
+        )
         # Fetches the subscriber
         try:
             restriction_subscriber = Abonne.objects.get(pk=restriction_subscription.abonneid)
         except Abonne.DoesNotExist:
-            self.stdout.write(self.style.ERROR(
-                '  Unable to retrieve the "Abonne" instance with ID: {0}'.format(
-                    restriction_subscription.abonneid)))
+            logger.error(
+                'Unable to retrieve the "Abonne" instance with ID: {0}'.format(
+                    restriction_subscription.abonneid))
             raise ImportException
 
         # Fetch the related journal
         try:
             restriction_journal = Revue.objects.get(revueid=restriction_subscription.revueid)
         except Revue.DoesNotExist:
-            self.stdout.write(self.style.ERROR(
-                '  Unable to retrieve the "Revue" instance with ID: {0}'.format(
-                    restriction_subscription.revueid)))
+            logger.error(
+                'Unable to retrieve the "Revue" instance with ID: {0}'.format(
+                    restriction_subscription.revueid))
             raise ImportException
 
         # STEP 1: gets or creates the RestrictionProfile instance
@@ -102,10 +120,21 @@ class Command(BaseCommand):
                 .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
                 .get(legacy_id=str(restriction_subscriber.pk))
         except LegacyAccountProfile.DoesNotExist:
-            user, _ = get_or_create_legacy_user(
-                username='restriction-{}'.format(restriction_subscriber.pk),
-                email=restriction_subscriber.courriel)
+            username = 'restriction-{}'.format(restriction_subscriber.pk)
+            user, created = get_or_create_legacy_user(
+                username=username,
+                email=restriction_subscriber.courriel
+            )
+            if created:
+                created_objects['user'] += 1
+                logger.debug("User created={}, pk={}, username={}, email={}".format(
+                    created, user.pk, username, restriction_subscriber.courriel
+                ))
+
             organisation = Organisation.objects.create(name=restriction_subscriber.abonne[:120])
+            logger.debug("Organisation created=True, pk={}, name={}".format(
+                organisation.pk, organisation.name
+            ))
             restriction_profile = LegacyAccountProfile.objects.create(
                 origin=LegacyAccountProfile.DB_RESTRICTION,
                 legacy_id=str(restriction_subscriber.pk),
@@ -127,31 +156,47 @@ class Command(BaseCommand):
             journal_code = restriction_journal.titrerevabr.lower()
             journal = Journal.legacy_objects.get_by_id(journal_code)
         except Journal.DoesNotExist:
-            self.stdout.write(self.style.ERROR(
-                '  Unable to retrieve the "Journal" instance with code: {0}'.format(
-                    restriction_journal.titrerevabr)))
+            logger.error(
+                'Unable to retrieve the "Journal" instance with code: {0}'.format(
+                    restriction_journal.titrerevabr))
             raise ImportException
 
-        subscription, _ = JournalAccessSubscription.objects.get_or_create(
+        subscription, created = JournalAccessSubscription.objects.get_or_create(
             organisation=restriction_profile.organisation)
-        subscription.journals.add(journal)
+        if created:
+            created_objects['subscription'] += 1
+            logger.debug("subscription created={}, pk={}".format(created, subscription.pk))
+        if not subscription.journals.filter(pk=journal.pk):
+            subscription.journals.add(journal)
+            logger.debug("subscription pk={} add journal pk={}".format(subscription.pk, journal.pk))
 
         # STEP 3: creates the subscription period
         # --
 
-        subscription_period, _ = JournalAccessSubscriptionPeriod.objects.get_or_create(
+        start_date = dt.date(restriction_subscription.anneeabonnement, 2, 1)
+        end_date = dt.date(restriction_subscription.anneeabonnement + 1, 2, 1)
+        subscription_period, created = JournalAccessSubscriptionPeriod.objects.get_or_create(
             subscription=subscription,
-            start=dt.date(restriction_subscription.anneeabonnement, 2, 1),
-            end=dt.date(restriction_subscription.anneeabonnement + 1, 2, 1))
+            start=start_date,
+            end=end_date
+        )
+
+        if created:
+            created_objects['period'] += 1
+            logger.debug(
+                "period created={}, pk={}, subscription_pk={}, start={}, end={}".format(
+                    created, subscription_period.pk, subscription.pk, start_date, end_date
+                )
+            )
 
         try:
             subscription_period.clean()
         except ValidationError as ve:
             # We are saving multiple periods for multiple journals under the same subscription
             # instance so period validation errors can happen.
-            self.stdout.write(self.style.ERROR(
-                ' Cannot save the subscription period : {0}'.format(
-                    ve)))
+            logger.error(
+                'Cannot save the subscription period : {0}'.format(
+                    ve))
             raise
         else:
             subscription_period.save()
@@ -163,25 +208,37 @@ class Command(BaseCommand):
             abonneid=str(restriction_subscriber.pk))
         for ip in restriction_subscriber_ips_set1:
             ip_start, ip_end = self._get_ip_range_from_ip(ip.ip)
-            InstitutionIPAddressRange.objects.get_or_create(
+            ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
-
+            if created:
+                created_objects['iprange'] += 1
+                logger.debug("Ipabonne created={}, pk={}, ip_start={}, ip_end={}".format(
+                    created, ip_range.pk, ip_start, ip_end
+                ))
         restriction_subscriber_ips_set2 = Adressesip.objects.filter(
             abonneid=restriction_subscriber.pk)
         for ip in restriction_subscriber_ips_set2:
             ip_start, ip_end = self._get_ip_range_from_ip(ip.ip)
-            InstitutionIPAddressRange.objects.get_or_create(
+            ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+            if created:
+                created_objects['iprange'] += 1
+                logger.debug("Ipabonne created={}, pk={}, ip_start={}, ip_end={}".format(
+                    created, ip_range.pk, ip_start, ip_end
+                ))
 
         restriction_subscriber_ips_ranges = Ipabonneinterval.objects.filter(
             abonneid=restriction_subscriber.pk)
         for ip_range in restriction_subscriber_ips_ranges:
             ip_start = self._get_ip(ip_range.debutinterval, repl='0')
             ip_end = self._get_ip(ip_range.fininterval, repl='255')
-            InstitutionIPAddressRange.objects.get_or_create(
+            ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
-
-        self.stdout.write(self.style.SUCCESS('  [OK]'))
+            if created:
+                created_objects['iprange'] += 1
+                logger.debug("Ipabonneinterval created={}, pk={}, ip_start={}, ip_end={}".format(
+                    created, ip_range.pk, ip_start, ip_end
+                ))
 
     def _get_ip_range_from_ip(self, ip):
         if '*' not in ip:
