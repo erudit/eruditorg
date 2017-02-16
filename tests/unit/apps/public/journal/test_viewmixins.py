@@ -118,6 +118,10 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             journal=self.journal, year=dt.datetime.now().year - 5,
             date_published=dt.date(now_dt.year - 5, 3, 20),
             localidentifier='test')
+        IssueFactory.create(
+            journal=self.journal, year=dt.datetime.now().year - 5,
+            date_published=now_dt,
+            localidentifier='test2')
         article = ArticleFactory.create(issue=issue)
 
         class MyView(ArticleAccessCheckMixin):

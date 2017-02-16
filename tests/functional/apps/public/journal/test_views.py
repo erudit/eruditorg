@@ -509,6 +509,9 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         issue = IssueFactory.create(
             journal=self.journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1000))
+        IssueFactory.create(
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
@@ -619,6 +622,9 @@ class TestArticleXmlView(BaseEruditTestCase):
         issue = IssueFactory.create(
             journal=self.journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1000))
+        IssueFactory.create(
+            journal=self.journal, year=2010,
+            date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
