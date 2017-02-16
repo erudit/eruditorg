@@ -26,11 +26,41 @@
 
   }
 
+  /**
+  * Mobile latest issue section
+  */
+  .latest-issue-xs {
+    margin-bottom: 1em;
+    padding-top: 1em;
+    border-top: 1px solid $mid-grey;
+
+    h2 {
+      font-size: 1.75em;
+    }
+
+    p {
+      width: 70%;
+      font-size: 14px;
+      display: inline-block;
+    }
+
+    .issue-cover {
+      width: 20%;
+      margin-right: 1em;
+      float: left;
+    }
+
+  }
+
+  /**
+  * About section
+  */
   .journal-infos {
+    margin-bottom: 2.5em;
 
     .journal-info-block {
       border-top: 1px solid $mid-grey;
-      padding-top: 25px;
+      padding-top: 1em;
       padding-bottom: $margin-vertical-default;
 
       .akkordion-title {
@@ -76,7 +106,6 @@
   /**
   * Back issues section
   */
-
   .back-issues {
     margin-top: $margin-vertical-default * 2;
     background: $light-grey;
@@ -168,7 +197,8 @@
 
   }
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-sm-min),
+  (orientation: landscape) and (max-width: $screen-xs-max) {
 
     .year-list {
       @include column-count(2);

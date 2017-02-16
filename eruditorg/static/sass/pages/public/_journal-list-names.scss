@@ -190,7 +190,16 @@
     vertical-align: sub;
   }
 
-  // "responsive" for sticky elements
+  // responsive for sticky elements
+
+  @media (max-width: $screen-xs-max) {
+
+    .journal-title {
+      @include fw-sans-medium;
+    }
+
+  }
+
   @media (max-width: $screen-sm-max){
 
     .sticky {

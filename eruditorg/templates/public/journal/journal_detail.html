@@ -91,17 +91,21 @@
       {% endif %}
     </div>
   </header>
+
+  <section class="clearfix hidden-sm hidden-md hidden-lg latest-issue-xs">
+    {% block aside_issue %}{{ block.super }}{% endblock %}
+  </section>
+
   {% if journal_info %}
   <div class="journal-infos" role="tablist" aria-multiselectable="true">
-
     {% trans "Aucune information" as tab_empty_msg %}
-
     {% if journal_info.about %}
-    <section class="journal-info-block">
-      <h2>
+    <section class="journal-info-block akkordion" role="tab" id="journal-info-about" role="tabpanel">
+      <h2 class="akkordion-title" role="button" aria-expanded="true" aria-controls="journal-info-about-content">
         {% trans "À propos" %}
+        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
       </h2>
-      <section id="journal-info-about-content" class="akkordion-content akkordion-active">
+      <section id="journal-info-about-content" class="akkordion-content akkordion-active" aria-labelledby="journal-info-about">
         {{ journal_info.about|default:tab_empty_msg|safe }}
       </section>
     </section>
@@ -166,7 +170,6 @@
       </section>
     </section>
     {% endif %}
-
   </div>
   {% endif %}
 </main>

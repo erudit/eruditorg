@@ -66,7 +66,7 @@
       </div>
       <div class="row">
         <!-- BASIC SEARCH -->
-        <div class="col-xs-12 col-sm-4 glory--search">
+        <div class="col-xs-12 col-sm-6 col-md-4 glory--search">
           <form action="{% url 'public:search:results' %}" id="id-search" method="get">
             <div class="form-group">
               <label for="basic-search" class="h3">{% trans "Recherche" %}</label>
@@ -84,7 +84,7 @@
           </form>
         </div>
         <!-- PUBLICATION TYPES -->
-        <div class="col-xs-12 col-sm-4 glory--publication-types">
+        <div class="col-xs-12 col-sm-6 col-md-4 glory--publication-types">
           <ol>
             <li class="glory--publication-types--item">
               <h3><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></h3>
@@ -101,7 +101,7 @@
           </ol>
         </div>
         <!-- DISCIPLINES -->
-        <div class="col-xs-12 col-sm-4 glory--disciplines">
+        <div class="col-xs-12 col-md-4 glory--disciplines">
           <h3>{{ disciplines|length }} {% trans "disciplines" %}</h3>
           <p>{{ disciplines|slice:":10"|join:", "|lower }}&hellip;<br /><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% trans "Voir toutes les disciplines" %}</a></p>
         </div>
@@ -133,7 +133,7 @@
             <div class="col-xs-8 col-sm-12">
               {% if issue.has_coverpage %}
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive latest-issues--article--cover issue-coverpage">
+                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive latest-issues--article--cover issue-cover">
               </a>
               {% else %}
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">

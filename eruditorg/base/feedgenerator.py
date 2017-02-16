@@ -12,7 +12,7 @@ class EruditRssFeedGenerator(Rss201rev2Feed):
         super(EruditRssFeedGenerator, self).add_root_elements(handler)
         handler.addQuickElement(
             'image', '', {
-                'url': static('erudit-header.jpg'),
+                'url': static('img/logo-erudit.png'),
                 'title': _('Érudit'),
                 'link': 'http://{domain}/'.format(domain=Site.objects.get_current().domain),
             })

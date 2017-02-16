@@ -33,7 +33,7 @@
         </p>
         {% if latest_issue.has_coverpage %}
         <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
-          <img src="{% url 'public:journal:issue_coverpage' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="img-responsive latest-issue--cover issue-coverpage" alt="{{ latest_issue.title }}" />
+          <img src="{% url 'public:journal:issue_coverpage' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="img-responsive latest-issue--cover issue-cover" alt="{{ latest_issue.title }}" />
         </a>
         {% endif %}
         {% endif %}

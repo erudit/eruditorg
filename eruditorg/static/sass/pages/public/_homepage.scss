@@ -64,6 +64,10 @@
       background-position: center 150px;
     }
 
+    @media screen and (orientation: landscape) {
+      background-position: center 55px;
+    }
+
     .banner-header {
       text-align: left;
       margin-top: 125px;
@@ -74,8 +78,7 @@
   }
 
   .glory {
-    padding-top: 50px;
-    padding-bottom: 60px;
+    padding: 50px 0;
 
     .glory--header {
       margin-bottom: 30px;
@@ -92,7 +95,8 @@
     .glory--publication-types,
     .glory--disciplines {
       @include grid-cell-border('top', 1px, $mid-grey);
-      padding-top: 25px;
+      padding-top: 20px;
+      padding-bottom: 20px;
       margin-bottom: 25px;
       @media (min-width: $screen-sm-min) {
         margin-bottom: 0;
@@ -220,9 +224,7 @@
       }
 
       .latest-issues--article--cover {
-        height: 140px;
         width: auto;
-        border: 1px solid $mid-grey;
       }
 
       .latest-issues--article--logo {

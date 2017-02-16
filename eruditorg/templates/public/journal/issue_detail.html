@@ -103,10 +103,10 @@
         {% if forloop.first %}</span>
         {% endif %}
       {% endfor %}
-      <span>{{ issue.volume_title }}{% if issue.embargoed and not user_has_access_to_journal %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
+      <span>{{ issue.volume_title }}{% if issue.embargoed and not user_has_access_to_journal %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
     </h1>
     <h2>
-      {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}
+      {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}
     </h2>
   </header>
   {% if articles_per_section %}
@@ -192,7 +192,7 @@
 <p>{{ issue.volume_title_with_pages }}</p>
 {% if issue.has_coverpage %}
 <div>
-  <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-coverpage" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
+  <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
     {{ issue.volume_title_with_pages }} {{ journal.name }}" />
 </div>
 {% endif %}
