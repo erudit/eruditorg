@@ -104,6 +104,13 @@ class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
         verbose_name_plural = _("Périodes d'abonnement aux revues")
 
 
+class InstitutionReferer(models.Model):
+    subscription = models.ForeignKey(
+        JournalAccessSubscription, verbose_name=_("Abonnement aux revues"),
+    )
+    referer = models.URLField(verbose_name=_("URL référent"))
+
+
 class InstitutionIPAddressRange(models.Model):
     subscription = models.ForeignKey(
         JournalAccessSubscription, verbose_name=_('Abonnement aux revues'))
