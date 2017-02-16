@@ -14,6 +14,7 @@ from erudit.models import Journal
 from erudit.models import Organisation
 
 from core.accounts.models import LegacyAccountProfile
+from core.subscription.models import InstitutionReferer
 from core.accounts.shortcuts import get_or_create_legacy_user
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
@@ -203,6 +204,20 @@ class Command(BaseCommand):
             raise
         else:
             subscription_period.save()
+
+        # STEP 5: create the subscription referer
+        # --
+
+        if restriction_subscriber.referer:
+            referer, created = InstitutionReferer.objects.get_or_create(
+                subscription=subscription,
+                referer=restriction_subscriber.referer
+            )
+
+            if created:
+                logger.debug("Referer created=True, subscription_pk={}, referer={}".format(
+                    subscription.pk, restriction_subscriber.referer
+                ))
 
         # STEP 4: creates the IP whitelist associated with the subscription
         # --
