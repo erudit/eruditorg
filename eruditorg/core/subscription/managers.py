@@ -15,6 +15,9 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 
     def get_for_referer(self, referer):
         """ Return all the subscriptions for the given referer """
+        if not referer:
+            return
+
         parsed_user_referer = urlparse(referer)
 
         subscriptions = self.filter(
