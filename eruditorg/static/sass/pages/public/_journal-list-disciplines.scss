@@ -16,10 +16,10 @@
 
 		.index {
       margin-top: 1em;
-			@include content-columns(4, $grid-gutter-width/2);
+			@include column-count(4);
 
       @media (max-width: $screen-sm-max) {
-				@include content-columns(2, $grid-gutter-width/2);
+				@include column-count(2);
 			}
 
       ul {

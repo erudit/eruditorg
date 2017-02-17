@@ -161,6 +161,7 @@
 
 // Column-count vendor prefixes
 @mixin column-count($count) {
+  min-height: 100%;
   -webkit-column-count: $count;
   -moz-column-count: $count;
   -o-column-count: $count;
