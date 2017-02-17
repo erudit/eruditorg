@@ -98,6 +98,13 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
         assert request.subscription_type == 'institution-referer'
 
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        request.session = dict()
+        request.META['HTTP_REFERER'] = None
+        middleware.process_request(request)
+        assert request.subscription_type == 'open_access'
+
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
         # Setup
         request = self.factory.get('/')
