@@ -6,21 +6,21 @@
   <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
     {% spaceless %}
     <li>
-      <button href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.id }}">
+      <a class="tool-btn" href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.id }}">
         <span class="ion-bookmark toolbox-save"></span>
-      </button>
-      <button href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.id }}" class="saved">
+      </a>
+      <a class="tool-btn saved" href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.id }}">
         <span class="ion-bookmark toolbox-save"></span>
-      </button>
-    </li>
-    <li>
-      <a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" title="{% trans 'Télécharger' %}" target="_blank">
-        <button><span class="toolbox-pdf">PDF</span></button>
       </a>
     </li>
     <li>
-      <a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
-        <button><span class="toolbox-html">HTML</span></button>
+      <a class="tool-btn" href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" title="{% trans 'Télécharger' %}" target="_blank">
+        <span class="toolbox-pdf">PDF</span>
+      </a>
+    </li>
+    <li>
+      <a class="tool-btn" href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+        <span class="toolbox-html">HTML</span>
       </a>
     </li>
     {% endspaceless %}

@@ -3,7 +3,7 @@
 {% if field.field.choices %}
 {% if field.value or field.field.choices|length > 1 %}
 <div class="akkordion filter" data-akkordion-single="true">
-  <label for="{{ field.auto_id }}" class="control-label akkordion-title">{{ field.label }} {% if field.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ field.help_text }}"><span class="ion-help-circled"></span></span>{% endif %} <span class="icon ion-ios-arrow-down caret"></span></label>
+  <span class="filter-label akkordion-title">{{ field.label }} {% if field.help_text %}<span class="hint--top hint--no-animate" data-hint="{{ field.help_text }}"><span class="ion-help-circled"></span></span>{% endif %} <span class="icon ion-ios-arrow-down caret"></span></span>
   <div class="controls akkordion-content {% if field.value %}akkordion-active{% endif %}">
     {% for choice in field.field.choices %}
     {# wrap in accordion after 10th #}

@@ -78,13 +78,13 @@
             <ul id="id_selection_tools" class="toolbox toolbox-compact toolbox-horizontal pull-right" style="display:none;">
               {% spaceless %}
               <li>
-                <a href="#" title="{% trans 'Supprimer les notices sélectionnées' %}" class="remove-selection">
-                  <button><span class="ion-close toolbox-remove"></span></button>
+                <a class="tool-btn remove-selection" href="#" title="{% trans 'Supprimer les notices sélectionnées' %}">
+                  <span class="ion-close toolbox-remove"></span>
                 </a>
               </li>
               <li>
-                <a href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite>
-                  <button><span class="ion-quote toolbox-cite"></span></button>
+                <a class="tool-btn" href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite>
+                  <span class="ion-quote toolbox-cite"></span>
                 </a>
               </li>
               {% endspaceless %}
@@ -103,23 +103,23 @@
                 <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
-                    <a href="#" title="{% trans 'Supprimer' %}" data-remove>
-                      <button><span class="ion-close toolbox-remove"></span></button>
+                    <a class="tool-btn" href="#" title="{% trans 'Supprimer' %}" data-remove>
+                      <span class="ion-close toolbox-remove"></span>
                     </a>
                   </li>
                   <li>
-                    <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
-                      <button><span class="ion-quote toolbox-cite"></span></button>
+                    <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
+                      <span class="ion-quote toolbox-cite"></span>
                     </a>
                   </li>
                   <li>
-                    <a href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank">
-                      <button><span class="toolbox-pdf">PDF</span></button>
+                    <a class="tool-btn" href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank">
+                      <span class="toolbox-pdf">PDF</span>
                     </a>
                   </li>
                   <li>
-                    <a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
-                      <button><span class="toolbox-html">HTML</span></button>
+                    <a class="tool-btn" href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                      <span class="toolbox-html">HTML</span>
                     </a>
                   </li>
                   {% endspaceless %}
@@ -163,18 +163,18 @@
                 <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
-                    <a href="#" title="{% trans 'Supprimer' %}" data-remove>
-                      <button><span class="ion-close toolbox-remove"></span></button>
+                    <a class="tool-btn" href="#" title="{% trans 'Supprimer' %}" data-remove>
+                      <span class="ion-close toolbox-remove"></span>
                     </a>
                   </li>
                   <li>
-                    <a href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
-                      <button><span class="ion-quote toolbox-cite"></span></button>
+                    <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
+                      <span class="ion-quote toolbox-cite"></span>
                     </a>
                   </li>
                   <li>
-                    <a href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank">
-                      <button><span class="toolbox-pdf">PDF</span></button>
+                    <a class="tool-btn" href="{{ document.url }}" title="{% trans 'Télécharger' %}" target="_blank">
+                      <span class="toolbox-pdf">PDF</span>
                     </a>
                   </li>
                   {% endspaceless %}

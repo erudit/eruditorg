@@ -3,12 +3,12 @@
 
 <nav>
   <h3 class="sr-only">{% trans 'Pagination' %}</h3>
-  <ul class="pagination">
+  <div class="pagination">
     {% if results.pagination.current_page > 1 %}
-    <a href="{% get_full_path_with_overrides page=1 %}"> <i class="ion-ios-arrow-left left-bar"></i> </a>
+    <a href="{% get_full_path_with_overrides page=1 %}"> <span class="ion-ios-arrow-left left-bar"></span> </a>
     {% endif %}
     {% if results.pagination.previous_page %}
-    <a href="{% get_full_path_with_overrides page=results.pagination.previous_page %}"> <i class="ion-ios-arrow-left"></i> </a>
+    <a href="{% get_full_path_with_overrides page=results.pagination.previous_page %}"> <span class="ion-ios-arrow-left"></span> </a>
     {% endif %}
     <span class="page-position">
     {% blocktrans trimmed with current_page=results.pagination.current_page page_count=results.pagination.num_pages %}
@@ -16,10 +16,10 @@
     {% endblocktrans %}
     </span>
     {% if results.pagination.next_page %}
-    <a href="{% get_full_path_with_overrides page=results.pagination.next_page %}"> <i class="ion-ios-arrow-right"></i> </a>
+    <a href="{% get_full_path_with_overrides page=results.pagination.next_page %}"> <span class="ion-ios-arrow-right"></span> </a>
     {% endif %}
     {% if results.pagination.current_page < results.pagination.num_pages %}
-    <a href="{% get_full_path_with_overrides page=results.pagination.num_pages %}"> <i class="ion-ios-arrow-right right-bar"></i> </a>
+    <a href="{% get_full_path_with_overrides page=results.pagination.num_pages %}"> <span class="ion-ios-arrow-right right-bar"></span> </a>
     {% endif %}
-  </ul>
+  </div>
 </nav>

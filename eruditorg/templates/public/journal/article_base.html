@@ -162,13 +162,7 @@
 {# article footer with related articles #}
 {% if related_articles %}
 <footer class="container related-articles">
-
-  <div class="row">
-    <header class="col-xs-12">
-      <h2>{% trans "Autres articles de ce numéro" %}</h2>
-    </header>
-  </div>
-
+  <h2>{% trans "Autres articles de ce numéro" %}</h2>
   <ul class="row">
     {% for related_article in related_articles %}
     {% cache FOREVER_TTL "public_article_detail_related_article" related_article.id LANGUAGE_CODE %}

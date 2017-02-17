@@ -259,7 +259,7 @@
             <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
             <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
+                <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive" alt="{% trans 'Illustration de la campagne « On n’est jamais trop érudit. »' %}"/>
               </div>
             </a>
           </aside>
@@ -271,27 +271,27 @@
           <ul class="toolbox toolbox-compact toolbox-horizontal">
             {% spaceless %}
             <li>
-              <button id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
-              </button>
-              <button class="saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              </a>
+              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
-              </button>
+              </a>
             </li>
             <li>
-              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
+              <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
                 <span class="toolbox-pdf">PDF</span>
-              </button>
+              </a>
             </li>
             <li>
-              <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
+              <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
                 <span class="ion-quote toolbox-cite"></span>
-              </button>
+              </a>
             </li>
             <li>
-              <button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
                 <span class="ion-android-share toolbox-share"></span>
-              </button>
+              </a>
             </li>
             {% endspaceless %}
           </ul>
@@ -302,34 +302,34 @@
           <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled toolbox">
             <li>
-              <button id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
-              </button>
-              <button class="saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              </a>
+              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
-              </button>
+              </a>
             </li>
             {% if article_access_granted and pdf_exists %}
             <li>
-              <button id="tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
+              <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
                 <span class="toolbox-pdf">PDF</span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
-              </button>
+              </a>
             </li>
             {% endif %}
             <li>
-              <button id="tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
+              <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
                 <span class="ion-quote toolbox-cite"></span>
                 <span class="tools-label">{% trans "Citer cet article" %}</span>
-              </button>
+              </a>
             </li>
             <li>
-              <button id="tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
                 <span class="ion-android-share toolbox-share"></span>
                 <span class="tools-label">{% trans "Partager" %}</span>
-              </button>
+              </a>
             </li>
           </ul>
         </aside>
@@ -2026,7 +2026,7 @@
   </xsl:template>
   <xsl:template match="refbiblio">
     <xsl:variable name="valeurNO" select="no"/>
-    <li class="refbiblio"  id="{@id}" role="note">
+    <li class="refbiblio"  id="{@id}">
       <xsl:choose>
         <xsl:when test="$valeurNO">
           <xsl:apply-templates select="$valeurNO"/>
