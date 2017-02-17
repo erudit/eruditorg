@@ -2,11 +2,11 @@
 * Search page base
 */
 
-.search_results #breadcrumb {
-  background: $light-grey;
-}
+#search_results {
 
-#search-results {
+  #breadcrumb {
+    background: $light-grey;
+  }
 
   .no-results {
     padding: 1em 0;
@@ -71,7 +71,9 @@
       padding-top: 0.5em;
       border-top: 1px solid $mid-grey;
 
-      .control-label {
+      .filter-label {
+        margin: 0.25em 0;
+        display: block;
         @include fw-sans-medium;
       }
 
