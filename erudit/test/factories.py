@@ -90,6 +90,12 @@ class IssueFactory(factory.django.DjangoModelFactory):
         model = 'erudit.issue'
 
 
+class EmbargoedIssueFactory(IssueFactory):
+
+    date_published = dt.datetime.now().date()
+    year = date_published.year
+
+
 class IssueContributorFactory(factory.django.DjangoModelFactory):
 
     issue = factory.SubFactory(IssueFactory)
@@ -123,6 +129,11 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'erudit.article'
+
+
+class EmbargoedArticleFactory(ArticleFactory):
+
+    issue = factory.SubFactory(EmbargoedIssueFactory)
 
 
 class ArticleTitleFactory(factory.django.DjangoModelFactory):
