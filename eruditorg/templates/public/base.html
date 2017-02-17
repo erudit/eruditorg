@@ -286,7 +286,7 @@
               © {% now "Y" %} {% trans "Consortium Érudit" %}
             </p>
             <p>
-              <a href="https://apropos.erudit.org/fr/usagers/politique-dutilisation/" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
+              <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
             </p>
           </div>
 

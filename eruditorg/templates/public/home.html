@@ -87,16 +87,16 @@
         <div class="col-xs-12 col-sm-6 col-md-4 glory--publication-types">
           <ol>
             <li class="glory--publication-types--item">
-              <h3><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></h3>
+              <h3><a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a></h3>
             </li>
             <li class="glory--publication-types--item disabled">
-              <h3><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></h3>
+              <h3><a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a></h3>
             </li>
             <li class="glory--publication-types--item disabled">
-              <h3><a href="#">{% trans "Livres et actes" %}</a></h3>
+              <h3><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a></h3>
             </li>
             <li class="glory--publication-types--item disabled">
-              <h3><a href="#">{% trans "Rapports de recherche" %}</a></h3>
+              <h3><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a></h3>
             </li>
           </ol>
         </div>
