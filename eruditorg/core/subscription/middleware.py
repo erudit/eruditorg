@@ -14,6 +14,15 @@ class SubscriptionMiddleware(object):
     'individual' or 'open_access'.
     """
 
+    def _get_user_referer_for_subscription(self, request):
+        """ Return the referer of the user, with regards to subscription validation
+
+        If the user has a referer set in her session, return this referer. Otherwise
+        return the value of 'HTTP_REFERER'
+        """
+        referer = request.session.get('HTTP_REFERER')
+        return referer if referer else request.META.get('HTTP_REFERER')
+
     def _get_user_ip_address(self, request):
         if request.user.is_active and request.user.is_staff and 'HTTP_CLIENT_IP' in request.META:
             return request.META.get('HTTP_CLIENT_IP', None)
@@ -30,6 +39,15 @@ class SubscriptionMiddleware(object):
         if subscription:
             request.subscription = subscription
             request.subscription_type = 'institution'
+            return
+
+        # Tries to determine if the subscriber is refered by a subscribed organisation
+        referer = self._get_user_referer_for_subscription(request)
+        subscription = JournalAccessSubscription.valid_objects.get_for_referer(referer)
+        if subscription:
+            request.subscription = subscription
+            request.subscription_type = 'institution-referer'
+            request.session['HTTP_REFERER'] = referer
             return
 
         # Tries to determine if the user has an individual account

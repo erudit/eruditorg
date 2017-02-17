@@ -22,6 +22,7 @@ from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
 from erudit.test.factories import IssueFactory
+from erudit.test.factories import EmbargoedArticleFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
@@ -31,6 +32,8 @@ from erudit.fedora.modelmixins import FedoraMixin
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
+from core.subscription.test.factories import InstitutionRefererFactory
+from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
 
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView

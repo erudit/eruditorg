@@ -10,10 +10,13 @@ from erudit.test.factories import OrganisationFactory
 
 
 from base.test.factories import UserFactory
+from erudit.test.factories import EmbargoedArticleFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
+from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
+from core.subscription.test.factories import InstitutionRefererFactory
 
 
 class TestSubscriptionMiddleware(BaseEruditTestCase):
@@ -37,6 +40,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters
@@ -62,6 +66,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
         request = self.factory.get('/')
         request.user = user
+        request.session = dict()
         middleware = SubscriptionMiddleware()
 
         # Run
@@ -70,10 +75,57 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         # Check
         self.assertTrue(request.subscription_type == 'individual')
 
+    def test_associates_the_subscription_type_to_the_request_in_case_of_referer_header(self):
+        # Setup
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        request.session = dict()
+        request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
+
+        middleware = SubscriptionMiddleware()
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
+        subscription = valid_period.subscription
+        InstitutionRefererFactory(
+            subscription=subscription,
+            referer="http://www.umontreal.ca"
+        )
+
+        article = EmbargoedArticleFactory()
+        subscription.journals.add(article.issue.journal)
+        subscription.save()
+
+        middleware.process_request(request)
+
+        assert request.subscription_type == 'institution-referer'
+
+    def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
+        # Setup
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        request.session = {'HTTP_REFERER':'http://www.umontreal.ca'}
+        request.META['HTTP_REFERER'] = 'http://www.erudit.org'
+
+        middleware = SubscriptionMiddleware()
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
+        subscription = valid_period.subscription
+        InstitutionRefererFactory(
+            subscription=subscription,
+            referer="http://www.umontreal.ca"
+        )
+
+        article = EmbargoedArticleFactory()
+        subscription.journals.add(article.issue.journal)
+        subscription.save()
+
+        middleware.process_request(request)
+
+        assert request.subscription_type == 'institution-referer'
+
     def test_associates_the_subscription_type_to_the_request_in_case_of_open_access(self):
         # Setup
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         middleware = SubscriptionMiddleware()
 
         # Run
@@ -85,6 +137,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
     def test_staff_users_can_fake_ip(self):
         request = self.factory.get('/')
         request.user = UserFactory(is_staff=True)
+        request.session = dict()
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
         request.META['HTTP_CLIENT_IP'] = '1.2.3.4'
         middleware = SubscriptionMiddleware()
@@ -93,6 +146,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
     def test_non_staff_users_cannot_fake_ip(self):
         request = self.factory.get('/')
         request.user = UserFactory(is_staff=False)
+        request.session = dict()
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
         request.META['HTTP_CLIENT_IP'] = '1.2.3.4'
         middleware = SubscriptionMiddleware()
@@ -101,6 +155,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
     def test_anonymous_users_cannot_fake_ip(self):
         request = self.factory.get('/')
         request.user = AnonymousUser()
+        request.session = dict()
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
         request.META['HTTP_CLIENT_IP'] = '1.2.3.4'
         middleware = SubscriptionMiddleware()

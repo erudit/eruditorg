@@ -14,6 +14,7 @@ from ..models import JournalAccessSubscriptionPeriod
 from ..models import JournalManagementPlan
 from ..models import JournalManagementSubscription
 from ..models import JournalManagementSubscriptionPeriod
+from ..models import InstitutionReferer
 
 
 class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
@@ -35,6 +36,14 @@ class ValidJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPerio
 
     start = dt.datetime.now() - dt.timedelta(days=10)
     end = dt.datetime.now() + dt.timedelta(days=10)
+
+
+class InstitutionRefererFactory(factory.DjangoModelFactory):
+
+    subscription = factory.SubFactory(ValidJournalAccessSubscriptionPeriodFactory)
+
+    class Meta:
+        model = InstitutionReferer
 
 
 class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):

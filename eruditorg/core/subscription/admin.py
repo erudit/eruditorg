@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from .models import InstitutionIPAddressRange
+from .models import InstitutionReferer
 from .models import JournalAccessSubscription
 from .models import JournalAccessSubscriptionPeriod
 from .models import JournalManagementPlan
@@ -13,6 +14,10 @@ from .models import JournalManagementSubscriptionPeriod
 
 class JournalAccessSubscriptionPeriodInline(admin.TabularInline):
     model = JournalAccessSubscriptionPeriod
+
+
+class InstitutionRefererInline(admin.TabularInline):
+    model = InstitutionReferer
 
 
 class InstitutionIPAddressRangeAdmin(admin.ModelAdmin):
@@ -33,7 +38,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     ]
 
     search_fields = ('organisation__name',)
-    inlines = [JournalAccessSubscriptionPeriodInline, ]
+    inlines = [JournalAccessSubscriptionPeriodInline, InstitutionRefererInline]
 
     list_display = ('pk', 'title', 'user', 'organisation', 'journal', 'collection', 'full_access', )
     list_display_links = ('pk', 'title', 'user', 'organisation', )
