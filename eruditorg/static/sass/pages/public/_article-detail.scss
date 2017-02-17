@@ -27,15 +27,6 @@ $article-toolbar-width: 80px;
 #article_detail main {
 
   /**
-  * default for html elements
-  */
-
-  a {
-    color: $coral-red;
-    word-wrap: break-word;
-  }
-
-  /**
   * main article header
   */
   .article-header {
@@ -50,6 +41,10 @@ $article-toolbar-width: 80px;
       > span + span {
         margin-top: 0.35em;
       }
+    }
+
+    a {
+      color: $coral-red;
     }
 
     .btn.btn-full-text{
@@ -395,6 +390,11 @@ $article-toolbar-width: 80px;
         text-align: center;
       }
 
+    }
+
+    a {
+      color: $coral-red;
+      word-wrap: break-word;
     }
 
   }
