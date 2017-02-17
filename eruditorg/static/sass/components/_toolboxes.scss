@@ -24,7 +24,7 @@
     padding: 0;
     display: block;
 
-    button {
+    .tool-btn {
       position: relative;
       display: block;
       margin: 0;
@@ -36,6 +36,7 @@
       font-size: 0.8em;
       white-space: nowrap;
       float: right;
+      cursor: pointer;
 
       [class*=toolbox-] {
         position: absolute;
@@ -59,7 +60,8 @@
 
       .tools-label {
         display: none;
-        padding: 1px 15px 0 55px;
+        padding: 0 15px 0 55px;
+        line-height: 50px;
         position: relative;
         @include fw-sans-medium;
       }
@@ -95,7 +97,7 @@
     li {
       height: 30px;
 
-      button {
+      .tool-btn {
         min-width: 30px;
         font-size: 0.65em;
         color: #FFF;
@@ -107,6 +109,7 @@
 
         .tools-label {
           padding: 0 10px 0 30px;
+          line-height: 30px;
         }
 
       }
