@@ -28,20 +28,19 @@ urlpatterns = [
     ])),
 
     # Article URLs
-    url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)/'), include([  # noqa
+    url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)'), include([  # noqa
         url(r'^$', views.ArticleDetailView.as_view(), name='article_detail'),
         url(_(r'^resume/$'), views.ArticleSummaryView.as_view(), name='article_summary'),
         url(_(r'^media/(?P<media_localid>[.\w-]+)$'), views.ArticleMediaView.as_view(), name='article_media'),  # noqa
         url(_(r'^citation\.enw$'), views.ArticleEnwCitationView.as_view(), name='article_citation_enw'),  # noqa
         url(_(r'^citation\.ris$'), views.ArticleRisCitationView.as_view(), name='article_citation_ris'),  # noqa
         url(_(r'^citation\.bib$'), views.ArticleBibCitationView.as_view(), name='article_citation_bib'),  # noqa
-        url(_(r'^contenu\.pdf$'), views.ArticleRawPdfView.as_view(), name='article_raw_pdf'),
         url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
+        url(_(r'.xml'),  # noqa
+            views.ArticleXmlView.as_view(), name="article_raw_xml"),
+        url(_(r'.pdf'),  # noqa
+            views.ArticleRawPdfView.as_view(), name="article_raw_pdf"),
     ])),
-
-    url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+).xml'),  # noqa
-        views.ArticleXmlView.as_view(), name="article_raw_xml"),
-
     url(r'^iderudit/(?P<localid>[\w-]+)/$',
         views.IdEruditArticleRedirectView.as_view(), name='iderudit_article_detail'),
 
