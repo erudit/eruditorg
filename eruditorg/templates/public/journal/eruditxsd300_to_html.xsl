@@ -131,8 +131,8 @@
               <dt>URI</dt>
               <dd>
                 <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
-                  <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}" class="clipboard-data">
-                    {{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:iderudit_article_detail' localid=article.localidentifier %}
+                  <a href="http://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
+                    http://id.erudit.org/iderudit/{{ article.localidentifier }}
                     <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                     <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                   </a>
