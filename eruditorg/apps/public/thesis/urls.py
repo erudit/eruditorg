@@ -16,34 +16,34 @@ urlpatterns = [
         name='home'
     ),
     url(
-        _(r'^fonds/(?P<collection_pk>[\d-]+)/$'),
+        _(r'^(?P<collection_code>[\w-]+)/$'),
         cache_page(60 * 15)(views.ThesisCollectionHomeView.as_view()),
         name='collection_home'
     ),
 
     url(
-        _(r'^fonds/(?P<collection_pk>[\d-]+)/(?P<publication_year>[\d-]+)/$'),
+        _(r'^(?P<collection_code>[\w-]+)/(?P<publication_year>[\d-]+)/$'),
         cache_page(60 * 15)(views.ThesisPublicationYearListView.as_view()),
         name='collection_list_per_year'
     ),
     url(
-        _(r'^fonds/(?P<collection_pk>[\d-]+)/(?P<author_letter>[\w\'-])/$'),
+        _(r'^(?P<collection_code>[\w-]+)/(?P<author_letter>[\w\'-])/$'),
         cache_page(60 * 15)(views.ThesisPublicationAuthorNameListView.as_view()),
         name='collection_list_per_author_name'
     ),
 
     url(
-        _(r'^fonds/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.enw$'),
+        _(r'^(?P<collection_code>[\w-]+)/t/(?P<pk>\d+)\.enw$'),
         cache_page(60 * 15)(views.ThesisEnwCitationView.as_view()),
         name='thesis_citation_enw'
     ),
     url(
-        _(r'^fonds/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.ris$'),
+        _(r'^(?P<collection_code>[\w-]+)/t/(?P<pk>\d+)\.ris$'),
         cache_page(60 * 15)(views.ThesisRisCitationView.as_view()),
         name='thesis_citation_ris'
     ),
     url(
-        _(r'^fonds/(?P<collection_pk>[\d-]+)/t/(?P<pk>\d+)\.bib$'),
+        _(r'^(?P<collection_code>[\w-]+)/t/(?P<pk>\d+)\.bib$'),
         cache_page(60 * 15)(views.ThesisBibCitationView.as_view()),
         name='thesis_citation_bib'
     ),

@@ -70,7 +70,7 @@
       <ul class="repositories row">
         {% for collection_info in collections_dict.values %}
         <li class="col-sm-6 col-md-4 col-lg-3 repository">
-          <a href="{% url 'public:thesis:collection_home' collection_info.collection.pk %}" class="collection-link">
+          <a href="{% url 'public:thesis:collection_home' collection_info.collection.code %}" class="collection-link">
             {% if collection_info.collection.logo %}
             <span class="collection-logo">
               <img src="{{ collection_info.collection.logo.url }}" alt="{% blocktrans with collection_info.collection.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
@@ -78,7 +78,7 @@
             {% endif %}
           </a>
           <h3 class="collection-title">
-            <a href="{% url 'public:thesis:collection_home' collection_info.collection.pk %}" class="collection-link">
+            <a href="{% url 'public:thesis:collection_home' collection_info.collection.code %}" class="collection-link">
               {{ collection_info.collection.name }}
             </a>
           </h3>

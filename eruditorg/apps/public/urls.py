@@ -17,7 +17,7 @@ urlpatterns = [
     url(_(r'^livre/'), include('apps.public.book.urls', namespace='book')),
     url(_(r'^notices/'), include('apps.public.citations.urls', namespace='citations')),
     url(_(r'^recherche/'), include('apps.public.search.urls', namespace='search')),
-    url(_(r'^these/'), include('apps.public.thesis.urls', namespace='thesis')),
+    url(_(r'^theses/'), include('apps.public.thesis.urls', namespace='thesis')),
 
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),

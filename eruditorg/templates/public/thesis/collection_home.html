@@ -29,7 +29,7 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' collection.pk %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' collection.code %}",
       "name": "{{ collection.name }}"
     }
   }]
@@ -44,7 +44,7 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
-<li><a href="{% url 'public:thesis:collection_home' collection.pk %}">{{ collection.name }}</a></li>
+<li><a href="{% url 'public:thesis:collection_home' collection.code %}">{{ collection.name }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -99,7 +99,7 @@
           <ul class="theses-list">
           {% for year in thesis_groups.by_publication_year %}
             <li>
-              <a href="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}" class="aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
+              <a href="{% url 'public:thesis:collection_list_per_year' collection.code year.publication_year %}" class="aggregation-link">{{ year.publication_year }} [{{ year.total}}]</a>
             </li>
           {% endfor %}
         </ul>
@@ -109,7 +109,7 @@
           <ul class="theses-list">
           {% for author in thesis_groups.by_author_name %}
             <li>
-              <a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author.author_firstletter %}" class="aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
+              <a href="{% url 'public:thesis:collection_list_per_author_name' collection.code author.author_firstletter %}" class="aggregation-link">{{ author.author_firstletter }} [{{ author.total}}]</a>
             </li>
           {% endfor %}
         </ul>

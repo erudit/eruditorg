@@ -48,7 +48,8 @@ class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
     """ Displays the home page of a collection repository. """
     context_object_name = 'collection'
     model = Collection
-    pk_url_kwarg = 'collection_pk'
+    slug_url_kwarg = 'collection_code'
+    slug_field = 'code'
     template_name = 'public/thesis/collection_home.html'
 
     fallback_url_format = '/these/liste.html'
@@ -96,7 +97,7 @@ class BaseThesisListView(ListView):
         ('title_asc', _('Titre (A–Z)')),
         ('title_desc', _('Titre (Z–A)')),
     ))
-    collection_pk_url_kwarg = 'collection_pk'
+    collection_code_url_kwarg = 'collection_code'
     context_object_name = 'theses'
     model = Thesis
     paginate_by = 50
@@ -118,7 +119,7 @@ class BaseThesisListView(ListView):
         return qs
 
     def get_collection(self):
-        return get_object_or_404(Collection, pk=self.kwargs.get(self.collection_pk_url_kwarg))
+        return get_object_or_404(Collection, code=self.kwargs.get(self.collection_code_url_kwarg))
 
     def get_context_data(self, **kwargs):
         context = super(BaseThesisListView, self).get_context_data(**kwargs)

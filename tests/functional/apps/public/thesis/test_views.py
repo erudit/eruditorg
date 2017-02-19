@@ -76,7 +76,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
         thesis_4 = ThesisFactory.create(
             localidentifier='thesis-4', collection=collection, author=author,
             publication_year=2014)
-        url = reverse('public:thesis:collection_home', args=(collection.id, ))
+        url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
         response = self.client.get(url)
         # Check
@@ -100,7 +100,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
         thesis_4 = ThesisFactory.create(  # noqa
             localidentifier='thesis-4', collection=collection, author=author,
             publication_year=2014)
-        url = reverse('public:thesis:collection_home', args=(collection.id, ))
+        url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
         response = self.client.get(url)
         # Check
@@ -133,7 +133,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
         thesis_7 = ThesisFactory.create(  # noqa
             localidentifier='thesis-7', collection=collection, author=author,
             publication_year=2014)
-        url = reverse('public:thesis:collection_home', args=(collection.id, ))
+        url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
         response = self.client.get(url)
         # Check
@@ -176,7 +176,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
         thesis_7 = ThesisFactory.create(  # noqa
             localidentifier='thesis-7', collection=collection, author=author_4,
             publication_year=2014)
-        url = reverse('public:thesis:collection_home', args=(collection.id, ))
+        url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
         response = self.client.get(url)
         # Check
@@ -217,7 +217,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_7 = ThesisFactory.create(  # noqa
             localidentifier='thesis-7', collection=collection, author=author,
             publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url)
         # Check
@@ -250,7 +250,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_7 = ThesisFactory.create(  # noqa
             localidentifier='thesis-7', collection=collection, author=author,
             publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url)
         # Check
@@ -279,7 +279,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author_3,
             publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'author_asc'})
         # Check
@@ -301,7 +301,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author_3,
             publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'author_desc'})
         # Check
@@ -322,7 +322,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'date_asc'})
         # Check
@@ -343,7 +343,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'date_desc'})
         # Check
@@ -363,7 +363,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'title_asc'})
         # Check
@@ -383,7 +383,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.id, 2012))
+        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'title_desc'})
         # Check
@@ -420,7 +420,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_7 = ThesisFactory.create(  # noqa
             localidentifier='thesis-7', collection=collection, author=author_4,
             publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url)
         # Check
@@ -456,7 +456,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_7 = ThesisFactory.create(  # noqa
             localidentifier='thesis-7', collection=collection, author=author_4,
             publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url)
         # Check
@@ -485,7 +485,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author_3,
             publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'author_asc'})
         # Check
@@ -507,7 +507,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author_3,
             publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'author_desc'})
         # Check
@@ -528,7 +528,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'date_asc'})
         # Check
@@ -549,7 +549,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'date_desc'})
         # Check
@@ -569,7 +569,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'title_asc'})
         # Check
@@ -589,7 +589,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
             publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.id, 'B'))
+        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'title_desc'})
         # Check
