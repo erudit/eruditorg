@@ -1,14 +1,29 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property
 
 from erudit.models import Article
 from erudit.models import Journal
 
 from core.metrics.metric import metric
+
+
+class RedirectExceptionsToFallbackWebsiteMixin(object):
+    """ Mixin that redirects all exceptions to the fallback website """
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except Http404:
+            return HttpResponseRedirect(
+                settings.FALLBACK_BASE_URL + self.request.path.strip('/').strip(
+                    self.request.LANGUAGE_CODE
+                )
+            )
 
 
 class SingleJournalMixin(object):
