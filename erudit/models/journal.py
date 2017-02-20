@@ -8,6 +8,7 @@ from functools import reduce
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Q
 from django.utils.functional import cached_property
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
@@ -280,12 +281,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def published_open_access_issues(self):
         """ Return the published open access issues of this Journal. """
-        current_date = dt.datetime.now()
         if self.date_embargo_begins:
-            filter_kwargs = {'date_published__lt': self.date_embargo_begins}
+            return self.published_issues.filter(
+                Q(date_published__lt=self.date_embargo_begins) | Q(force_free_access=True)
+            )
         else:
-            filter_kwargs = {'date_published__lte': current_date}
-        return self.published_issues.filter(**filter_kwargs)
+            return self.published_issues
 
     @property
     def first_issue(self):
@@ -390,6 +391,11 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     localidentifier = models.CharField(
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))
     """ The ``Fedora`` identifier of an issue """
+
+    force_free_access = models.BooleanField(
+        default=False, verbose_name=_('Contraindre en libre accès')
+    )
+    """ Defines if the issue has to be in open access despite everything """
 
     objects = models.Manager()
     internal_objects = InternalIssueManager()
@@ -514,10 +520,11 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """ Returns a boolean indicating if the issue has a movable limitation. """
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            return dt.date(
-                self.date_published.year, self.date_published.month, self.date_published.day
-            ) >= self.journal.date_embargo_begins if self.is_published \
-                else True
+            if self.force_free_access is False:
+                return dt.date(
+                    self.date_published.year, self.date_published.month, self.date_published.day
+                ) >= self.journal.date_embargo_begins if self.is_published \
+                    else True
         return False
 
     @property

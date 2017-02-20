@@ -147,11 +147,16 @@ class TestJournal(BaseEruditTestCase):
         issue_5 = IssueFactory.create(
             journal=self.journal, number=1, year=date_issue_5.year,
             is_published=True, date_published=date_issue_5)
+        issue_6 = IssueFactory.create(
+            journal=self.journal, number=7, year=date_issue_1.year - 10,
+            is_published=True, date_published=date_issue_1, force_free_access=True)
         IssueFactory.create(
             journal=self.journal, year=date_issue_5.year,
             is_published=False, date_published=date_issue_5)
         # Run & check
-        self.assertEqual(list(self.journal.published_open_access_issues), [issue_5, issue_4, ])
+        self.assertEqual(
+            list(self.journal.published_open_access_issues), [issue_6, issue_5, issue_4, ]
+        )
 
     def test_can_return_the_published_open_access_issues_period_coverage(self):
         # Setup
@@ -296,12 +301,20 @@ class TestIssue(BaseEruditTestCase):
         issue_5 = IssueFactory.create(
             journal=self.journal, year=date_issue_5.year,
             date_published=date_issue_5)
+        issue_6 = IssueFactory.create(
+            journal=self.journal, year=date_issue_1.year - 10,
+            date_published=date_issue_1)
+        issue_7 = IssueFactory.create(
+            journal=self.journal, year=date_issue_1.year - 10,
+            date_published=date_issue_1, force_free_access=True)
         # Run & check
         self.assertTrue(issue_1.embargoed)
         self.assertTrue(issue_2.embargoed)
         self.assertTrue(issue_3.embargoed)
         self.assertFalse(issue_4.embargoed)
         self.assertFalse(issue_5.embargoed)
+        self.assertTrue(issue_6.embargoed)
+        self.assertFalse(issue_7.embargoed)
 
     def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
         # Setup
@@ -336,12 +349,20 @@ class TestIssue(BaseEruditTestCase):
         issue_5 = IssueFactory.create(
             journal=self.journal, year=date_issue_5.year,
             date_published=date_issue_5)
+        issue_6 = IssueFactory.create(
+            journal=self.journal, year=date_issue_1.year - 10,
+            date_published=date_issue_1)
+        issue_7 = IssueFactory.create(
+            journal=self.journal, year=date_issue_5.year - 10,
+            date_published=date_issue_5, force_free_access=True)
         # Run & check
         self.assertTrue(issue_1.embargoed)
         self.assertTrue(issue_2.embargoed)
         self.assertTrue(issue_3.embargoed)
         self.assertFalse(issue_4.embargoed)
         self.assertFalse(issue_5.embargoed)
+        self.assertTrue(issue_6.embargoed)
+        self.assertFalse(issue_7.embargoed)
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
