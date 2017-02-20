@@ -35,7 +35,7 @@
     <p class="article-pagination col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}
       {% if first_page and last_page and first_page != last_page %}
-      {% blocktrans trimmed with first_page=first_page last_page=last_page %}pp.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
+      {% blocktrans trimmed with first_page=first_page last_page=last_page %}p.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
       {% elif first_page and first_page != "0" %}
       {% blocktrans trimmed with page=first_page %}p.&nbsp;{{ page }}{% endblocktrans %}
       {% endif %}
