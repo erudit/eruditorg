@@ -20,10 +20,12 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
 
         parsed_user_referer = urlparse(referer)
 
+        if parsed_user_referer.netloc == '':
+            return
+
         subscriptions = self.filter(
             referers__referer__contains=parsed_user_referer.netloc,
         )
-
         for subscription in subscriptions:
             for institution_referer in subscription.referers.filter(
                 referer__contains=parsed_user_referer.netloc

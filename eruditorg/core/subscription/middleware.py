@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import logging
 from ipware.ip import get_ip
 
 from .models import JournalAccessSubscription
+logger = logging.getLogger(__name__)
 
 
 class SubscriptionMiddleware(object):
@@ -61,3 +63,23 @@ class SubscriptionMiddleware(object):
         # In any other the user is is in open access.
         request.subscription = None
         request.subscription_type = 'open_access'
+
+    def process_response(self, request, response):
+
+        if hasattr(request, 'subscription_type')\
+                and request.subscription_type == 'institution-referer':
+            logger.info('{url} {method} {path} {protocol} - {client_port} - {client_ip} "{user_agent}" "{referer_url}" {code} {size} {referer_access}'.format( # noqa
+                url=request.get_raw_uri(),
+                method=request.META.get('REQUEST_METHOD'),
+                path=request.path,
+                protocol=request.META.get('SERVER_PROTOCOL'),
+                client_port="",
+                client_ip=request.META.get('REMOTE_ADDR'),
+                user_agent=request.META.get('HTTP_USER_AGENT'),
+                referer_url=request.META.get('HTTP_REFERER'),
+                code=response.status_code,
+                size="",
+                referer_access=request.subscription.referers.first().referer
+            ))
+
+        return response

@@ -351,6 +351,11 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
+        },
+        'core.subscription.middleware': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
         }
     },
 }

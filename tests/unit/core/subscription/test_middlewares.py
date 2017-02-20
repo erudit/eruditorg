@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-
+import unittest
 import datetime as dt
 
 from django.contrib.auth.models import AnonymousUser
 from django.test import RequestFactory
+from django.http import HttpResponse
 
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import OrganisationFactory
-
 
 from base.test.factories import UserFactory
 from erudit.test.factories import EmbargoedArticleFactory
@@ -104,6 +104,39 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         request.META['HTTP_REFERER'] = None
         middleware.process_request(request)
         assert request.subscription_type == 'open_access'
+
+    @unittest.mock.patch('core.subscription.middleware.logger')
+    def test_subscription_middleware_log_requests_in_case_of_referer(self, mock_log):
+        request = self.factory.get('/revues/shortname/issue/article.html')
+        request.user = AnonymousUser()
+        request.session = dict()
+        request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
+
+        middleware = SubscriptionMiddleware()
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
+        subscription = valid_period.subscription
+        InstitutionRefererFactory(
+            subscription=subscription,
+            referer="http://www.umontreal.ca"
+        )
+
+        article = EmbargoedArticleFactory()
+        subscription.journals.add(article.issue.journal)
+        subscription.save()
+
+        middleware.process_request(request)
+        assert mock_log.info.call_count == 0
+        middleware.process_response(request, HttpResponse())
+        assert mock_log.info.call_count == 1
+
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        request.session = dict()
+        request.META['HTTP_REFERER'] = 'http://www.no-referer.ca'
+
+        middleware.process_request(request)
+        middleware.process_response(request, HttpResponse())
+        assert mock_log.info.call_count == 1
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
         # Setup
