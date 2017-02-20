@@ -4,7 +4,7 @@ from django.conf.urls import url
 from django.views.generic import RedirectView
 
 from .views import DummyView
-from .views_compat import RedirectToRetro
+from .views_compat import RedirectToFallback
 
 
 urlpatterns = [
@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^rss.xml$', DummyView.as_view()),
 
     # Redirect not supported URLs to retro.erudit.org
-    url(r'^.*$', RedirectToRetro.as_view(), ),
+    url(r'^.*$', RedirectToFallback.as_view(), ),
 ]
