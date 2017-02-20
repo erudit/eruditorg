@@ -93,7 +93,7 @@ class IssueAdmin(admin.ModelAdmin):
     inlines = (IssueThemeInline, IssueContributorInline)
     list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
     search_fields = ('id', 'localidentifier', )
-    list_filter = ('is_published', 'journal__collection', )
+    list_filter = ('is_published', 'journal__collection', 'journal__name', )
     actions = [
         'make_published', 'make_unpublished',
         'force_free_access_to_true', 'force_free_access_to_false',
