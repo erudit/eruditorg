@@ -98,19 +98,19 @@
             <a href="https://apropos.erudit.org/" target="_blank" class="select main-section" title="{% blocktrans %}À propos d'Érudit{% endblocktrans %}">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
             <ul class="hidden-xs hidden-sm">
               <li>
-                <a href="https://apropos.erudit.org/bibliotheques" target="_blank" title="{% trans 'Information pour les bibliothécaires' %}">{% trans "Bibliothécaires" %}</a>
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/bibliotheques{% else %}https://apropos.erudit.org/en/libraries/{% endif %}" target="_blank" title="{% trans 'Information pour les bibliothécaires' %}">{% trans "Bibliothécaires" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/editeurs" target="_blank" title="{% trans 'Information pour les éditeurs' %}">{% trans "Éditeurs" %}</a>
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/editeurs{% else %}https://apropos.erudit.org/en/publishers/{% endif %}" target="_blank" title="{% trans 'Information pour les éditeurs' %}">{% trans "Éditeurs" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/chercheurs" target="_blank" title="{% trans 'Information pour les chercheurs' %}">{% trans "Chercheurs" %}</a>
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/chercheurs{% else %}https://apropos.erudit.org/en/researchers/{% endif %}" target="_blank" title="{% trans 'Information pour les chercheurs' %}">{% trans "Chercheurs" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/usagers" target="_blank" title="{% trans 'Information pour les utilisateurs' %}">{% trans "Utilisateurs" %}</a>
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/usagers{% else %}https://apropos.erudit.org/en/users/{% endif %}" target="_blank" title="{% trans 'Information pour les utilisateurs' %}">{% trans "Utilisateurs" %}</a>
               </li>
               <li>
-                <a href="https://apropos.erudit.org/collections" target="_blank" title="{% trans 'Information sur nos collections' %}">{% trans "Collections" %}</a>
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/collections{% else %}https://apropos.erudit.org/en/collections-en/{% endif %}" target="_blank" title="{% trans 'Information sur nos collections' %}">{% trans "Collections" %}</a>
               </li>
             </ul>
           </li>
@@ -224,7 +224,7 @@
 
           <div class="col-md-6">
             <ul class="unstyled footer-nav--about">
-              <li><a href="https://apropos.erudit.org/" target="_blank">{% trans "À propos" %}</a></li>
+              <li><a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en/{% endif %}" target="_blank">{% trans "À propos" %}</a></li>
               <li class="disabled">{% trans "Abonnements" %}</li>
             </ul>
           </div>

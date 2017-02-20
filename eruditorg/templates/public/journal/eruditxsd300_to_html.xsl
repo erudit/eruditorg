@@ -602,7 +602,7 @@
         <xsl:text>, </xsl:text>
         <xsl:choose>
           <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
-          <xsl:otherwise>pp.&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
+          <xsl:otherwise>{% trans 'p.' %}&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
         </xsl:choose>
       </xsl:if>
     </span>

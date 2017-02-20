@@ -203,7 +203,7 @@
       <h3>
         {% trans "Anciens numéros de" %} <em>{{ journal.name }}</em><br/>
         <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues">
-          <small>({{ journal.published_issues|length }} numéros)</small>
+          <small>({{ journal.published_issues|length }} {% trans 'numéros' %})</small>
         </a>
       </h3>
     </header>
