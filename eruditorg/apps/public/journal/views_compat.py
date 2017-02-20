@@ -8,9 +8,22 @@ from django.views.generic import RedirectView
 
 from erudit.models import Article
 from erudit.models import Issue
+from erudit.models import Journal
+from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 
 
-class IssueDetailRedirectView(RedirectView):
+class JournalDetailCheckRedirectView(RedirectExceptionsToFallbackWebsiteMixin, RedirectView):
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+
+        if 'code' in kwargs:
+            get_object_or_404(Journal, code=kwargs['code'])
+            return reverse(self.pattern_name, codde=kwargs['code'])
+        raise Http404
+
+
+class IssueDetailRedirectView(RedirectExceptionsToFallbackWebsiteMixin, RedirectView):
     pattern_name = 'public:journal:issue_detail'
     permanent = True
 
@@ -36,13 +49,13 @@ class IssueDetailRedirectView(RedirectView):
             raise Http404
 
 
-class ArticleDetailRedirectView(RedirectView):
+class ArticleDetailRedirectView(RedirectExceptionsToFallbackWebsiteMixin, RedirectView):
     pattern_name = 'public:journal:article_detail'
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
 
-        if kwargs['format_identifier'] == 'xml':
+        if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'xml':
             self.pattern_name = 'public:journal:article_raw_xml'
 
         if 'journal_code' in kwargs and 'issue_localid' in kwargs and 'localid' in kwargs:

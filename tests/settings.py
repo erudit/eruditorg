@@ -13,6 +13,7 @@ class DisableMigrations(object):
         return 'notmigrations'
 
 
+
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 CACHES = {
@@ -37,6 +38,8 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.remove('raven.contrib.django.raven_compat')
+
+FALLBACK_BASE_URL = 'https://retro.erudit.org/'
 
 MIGRATION_MODULES = DisableMigrations()
 

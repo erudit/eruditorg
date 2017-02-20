@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
 from django.test import RequestFactory
+from django.conf import settings
 from django.test.utils import override_settings
 from PyPDF2 import PdfFileReader
 import pytest
@@ -537,7 +538,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
 
     def test_cannot_retrieve_the_pdf_of_inexistant_articles(self):
         # Note: as there is no Erudit fedora repository used during the
-        # tess, any tentative of retrieving the PDF of an article should
+        # test, any tentative of retrieving the PDF of an article should
         # fail.
 
         # Setup
@@ -550,8 +551,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
         # Run
         response = self.client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 404)
+        # Check that we are redirected
+        self.assertEqual(response.status_code, 302)
 
     def test_cannot_be_accessed_if_the_article_is_not_in_open_access(self):
         # Setup
@@ -606,6 +607,74 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             journal_id, issue.volume_slug, issue_id, article_id
         ))
 
+
+class TestArticleRedirections(BaseEruditTestCase):
+
+    def test_nonexistent_journals_redirects_to_fallback_website(self):
+        fallback_url = settings.FALLBACK_BASE_URL
+        patterns_to_test = [
+            'legacy_journal_detail', 'legacy_journal_detail_index',
+            'legacy_journal_authors', 'legacy_journal_detail_culture',
+            'legacy_journal_detail_culture_index', 'legacy_journal_authors_culture'
+        ]
+
+        for pattern in patterns_to_test:
+            url = reverse('public:journal:{}'.format(pattern), kwargs={'code': 'nonexistent'})
+
+            response = self.client.get(url, follow=True)
+            redirect_url = response.redirect_chain[0][0]
+            assert fallback_url in redirect_url
+
+    def test_nonexistent_issue_redirects_to_fallback_website(self):
+        fallback_url = settings.FALLBACK_BASE_URL
+
+        kwargs = {
+            'journal_code': 'nonexistent',
+            'year': "1974",
+            'v': "7",
+            'n':"1",
+        }
+
+        urls_to_test = [
+            reverse('public:journal:legacy_issue_detail', kwargs=kwargs),
+            reverse('public:journal:legacy_issue_detail_index', kwargs=kwargs),
+        ]
+
+        kwargs.pop('n')
+        urls_to_test.extend([
+            reverse('public:journal:legacy_issue_detail_no_number', kwargs=kwargs),
+            reverse('public:journal:legacy_issue_detail_index_no_number', kwargs=kwargs),
+        ])
+
+        kwargs['localidentifier'] = 'nonexistent'
+        urls_to_test.extend([
+            reverse('public:journal:legacy_issue_detail_culture_year_volume', kwargs=kwargs),
+            reverse('public:journal:legacy_issue_detail_culture_year_volume_index', kwargs=kwargs),
+        ])
+        kwargs.pop('v')
+        kwargs.pop('year')
+        urls_to_test.extend([
+            reverse('public:journal:legacy_issue_detail_culture', kwargs=kwargs),
+            reverse('public:journal:legacy_issue_detail_culture_index', kwargs=kwargs),
+        ])
+
+        for url in urls_to_test:
+            response = self.client.get(url)
+            assert response.status_code == 302
+            assert fallback_url in response.url
+
+    def test_nonexistent_article_redirects_to_fallback_website(self):
+        kwargs={'journal_code': 'nonexistent', 'year':2004, 'v':1, 'issue_localid': 'nonexistent', 'localid': 'nonexistent', 'format_identifier': 'html'}
+        urls_to_test = [
+            reverse('public:journal:legacy_article_detail', kwargs=kwargs),
+            reverse('public:journal:legacy_article_id', kwargs={'localid': 'nonexistent'}),
+            reverse('public:journal:legacy_article_detail_culture', kwargs=kwargs),
+            reverse('public:journal:legacy_article_detail_culture_localidentifier', kwargs={'journal_code': 'nonexistent', 'issue_localid': 'nonexistent', 'localid':'nonexistent', 'format_identifier':'html'})
+        ]
+
+        for url in urls_to_test:
+            response = self.client.get(url)
+            assert response.status_code == 302
 
 @override_settings(DEBUG=True)
 class TestArticleXmlView(BaseEruditTestCase):
