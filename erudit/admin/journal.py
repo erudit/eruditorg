@@ -94,7 +94,10 @@ class IssueAdmin(admin.ModelAdmin):
     list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
     search_fields = ('id', 'localidentifier', )
     list_filter = ('is_published', 'journal__collection', )
-    actions = ['make_published', 'make_unpublished', ]
+    actions = [
+        'make_published', 'make_unpublished',
+        'force_free_access_to_true', 'force_free_access_to_false',
+    ]
 
     def make_published(self, request, queryset):
         """Mark a set of issues as published"""
@@ -105,6 +108,20 @@ class IssueAdmin(admin.ModelAdmin):
         """Mark a set of issues as pre-published"""
         queryset.update(is_published=False)
     make_unpublished.short_description = _("Marquer les numéros sélectionnés comme pré-diffusés")
+
+    def force_free_access_to_true(self, request, queryset):
+        """Mark a set of issues as open access"""
+        queryset.update(force_free_access=True)
+    force_free_access_to_true.short_description = _(
+        "Contraindre les numéros sélectionnés en libre d'accès"
+    )
+
+    def force_free_access_to_false(self, request, queryset):
+        """Mark a set of issues as not open access"""
+        queryset.update(force_free_access=False)
+    force_free_access_to_false.short_description = _(
+        "Ne pas contraindre ces numéros au libre accès"
+    )
 
 
 class ArticleAbstractAdmin(admin.ModelAdmin):
