@@ -10,14 +10,14 @@
   "@type": "ListItem",
   "position": 4,
   "item": {
-    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_author_name' collection.pk author_letter %}",
+    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}",
     "name": "{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}"
   }
 }
 {% endblock structured_data_breadcrumb_tail %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' collection.pk author_letter %}">{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}">{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_title %}
@@ -31,7 +31,7 @@
 <dd>
   <select id="switch_letter" onChange="window.location.href=this.value">
     {% for letter in other_author_letters %}
-    <option value="{% url 'public:thesis:collection_list_per_author_name' collection.pk letter.author_firstletter %}?sort_by={{ sort_by }}"{% if letter.author_firstletter == author_letter %} selected disabled{% endif %}>{{ letter.author_firstletter }} ({{ letter.total }})</option>
+    <option value="{% url 'public:thesis:collection_list_per_author_name' collection.code letter.author_firstletter %}?sort_by={{ sort_by }}"{% if letter.author_firstletter == author_letter %} selected disabled{% endif %}>{{ letter.author_firstletter }} ({{ letter.total }})</option>
     {% endfor %}
   </select>
 </dd>

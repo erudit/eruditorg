@@ -10,14 +10,14 @@
   "@type": "ListItem",
   "position": 4,
   "item": {
-    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_year' collection.pk publication_year %}",
+    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_year' collection.code publication_year %}",
     "name": "{{ publication_year }}"
   }
 }
 {% endblock structured_data_breadcrumb_tail %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_year' collection.pk publication_year %}">{{ publication_year }}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_year' collection.code publication_year %}">{{ publication_year }}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_title %}
@@ -31,7 +31,7 @@
 <dd>
   <select id="switch_year" onChange="window.location.href=this.value">
     {% for year in other_publication_years %}
-    <option value="{% url 'public:thesis:collection_list_per_year' collection.pk year.publication_year %}?sort_by={{ sort_by }}"{% if year.publication_year == publication_year %} selected disabled{% endif %}>{{ year.publication_year }} ({{ year.total }})</option>
+    <option value="{% url 'public:thesis:collection_list_per_year' collection.code year.publication_year %}?sort_by={{ sort_by }}"{% if year.publication_year == publication_year %} selected disabled{% endif %}>{{ year.publication_year }} ({{ year.total }})</option>
     {% endfor %}
   </select>
 </dd>
