@@ -19,7 +19,7 @@ class JournalDetailCheckRedirectView(RedirectExceptionsToFallbackWebsiteMixin, R
 
         if 'code' in kwargs:
             get_object_or_404(Journal, code=kwargs['code'])
-            return reverse(self.pattern_name, code=kwargs['code'])
+            return reverse(self.pattern_name, args=[kwargs['code']])
         raise Http404
 
 
