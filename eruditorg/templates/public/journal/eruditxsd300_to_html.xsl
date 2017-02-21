@@ -107,13 +107,13 @@
         <!-- issue cover image or journal logo -->
         <div class="issue-image col-md-3">
           {% if article.issue.has_coverpage %}
-          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal }}{% endblocktrans %}">
-            <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|safe }}, {% endif %}
-              {{ article.issue.volume_title_with_pages }}, {{ article.issue.journal.name }}" />
+          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
+            <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}
+              {{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
             </a>
           {% else %}
-          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal }}{% endblocktrans %}">
-            <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive journal-logo" alt="{% trans 'Logo de' %} {{ article.issue.journal.name }}" />
+          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
+            <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive journal-logo" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
           </a>
           {% endif %}
           {% if only_summary %}
@@ -289,7 +289,7 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-title="{{ article.title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
                 <span class="ion-android-share toolbox-share"></span>
               </a>
             </li>
@@ -326,7 +326,7 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-title="{{ article.title }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-title="{{ article.title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
                 <span class="ion-android-share toolbox-share"></span>
                 <span class="tools-label">{% trans "Partager" %}</span>
               </a>
