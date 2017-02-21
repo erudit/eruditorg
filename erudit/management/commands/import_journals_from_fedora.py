@@ -309,6 +309,18 @@ class Command(BaseCommand):
         # STEP 2: creates or updates the journal object
         # --
 
+        oaiset_info_tree = remove_xml_namespaces(
+            et.fromstring(fedora_journal.oaiset_info.content.serialize())) \
+            if fedora_journal.oaiset_info.exists else None
+        rels_ext_tree = remove_xml_namespaces(
+            et.fromstring(fedora_journal.rels_ext.content.serialize())) \
+            if fedora_journal.rels_ext.exists else None
+        publications_tree = remove_xml_namespaces(
+            et.fromstring(fedora_journal.publications.content.serialize()))
+        # Set the proper values on the Journal instance
+        xml_name = oaiset_info_tree.find('.//title') if oaiset_info_tree \
+            else rels_ext_tree.find('.//setName')
+
         # Fetches the Journal instance... or creates a new one
         journal_localidentifier = journal_pid.split('.')[-1]
         try:
@@ -318,22 +330,10 @@ class Command(BaseCommand):
             journal.localidentifier = journal_localidentifier
             journal.collection = collection
             journal.fedora_created = fedora_journal.created
+            journal.name = xml_name.text if xml_name is not None else None
 
-        oaiset_info_tree = remove_xml_namespaces(
-            et.fromstring(fedora_journal.oaiset_info.content.serialize())) \
-            if fedora_journal.oaiset_info.exists else None
-        rels_ext_tree = remove_xml_namespaces(
-            et.fromstring(fedora_journal.rels_ext.content.serialize())) \
-            if fedora_journal.rels_ext.exists else None
-        publications_tree = remove_xml_namespaces(
-            et.fromstring(fedora_journal.publications.content.serialize()))
-
-        # Set the proper values on the Journal instance
-        xml_name = oaiset_info_tree.find('.//title') if oaiset_info_tree \
-            else rels_ext_tree.find('.//setName')
         xml_issue = publications_tree.xpath(
             './/numero[starts-with(@pid, "{0}")]'.format(journal_pid))
-        journal.name = xml_name.text if xml_name is not None else None
         journal.first_publication_year = journal.erudit_object.first_publication_year
         journal.last_publication_year = journal.erudit_object.last_publication_year
 
