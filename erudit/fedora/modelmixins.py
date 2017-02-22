@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
 from django.conf import settings
 from django.core.cache import cache
 from django.utils.functional import cached_property
@@ -8,6 +10,8 @@ from requests.exceptions import ConnectionError
 
 from ..conf import settings as erudit_settings
 from .repository import api
+
+logger = logging.getLogger(__name__)
 
 
 class FedoraMixin(object):
@@ -71,7 +75,8 @@ class FedoraMixin(object):
         try:
             assert fedora_xml_content is None
             fedora_xml_content = self.fedora_object.xml_content
-        except (RequestFailed, ConnectionError):  # pragma: no cover
+        except (RequestFailed, ConnectionError) as e:  # pragma: no cover
+            logger.warn("Exception: {}, pid: {}".format(e, self.pid))
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
                 # really often because the dataset provided by the Fedora repository
