@@ -137,7 +137,7 @@
               </a>
               {% else %}
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive latest-issues--article--logo"/>
+                <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive latest-issues--article--logo" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
               </a>
               {% endif %}
               <h4>
@@ -167,7 +167,7 @@
       <div class="col-xs-12 col-md-8">
         <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">
           <div id="campaign-banner" class="campaign-banner">
-            <img id="campaign-banner" src="{% static 'img/campaign/banner1.png' %}" class="img-responsive"/>
+            <img src="{% static 'img/campaign/banner1.png' %}" class="img-responsive" alt="{% trans 'Illustration de la campagne de lancement On n’est jamais trop érudit.' %}"/>
           </div>
         </a>
       </div>

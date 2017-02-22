@@ -268,6 +268,7 @@
 
         <!-- mobile / tablet toolbox -->
         <aside class="hidden-md hidden-lg toolbox-wrapper toolbox-mobile">
+          <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
           <ul class="toolbox toolbox-compact toolbox-horizontal">
             {% spaceless %}
             <li>
@@ -299,7 +300,7 @@
 
         <!-- desktop toolbox -->
         <aside class="pull-right hidden-xs hidden-sm toolbox-wrapper">
-          <h2 class="hidden">{% trans "Boîte à outils" %}</h2>
+          <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled toolbox">
             <li>
               <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
@@ -375,7 +376,7 @@
               <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
               <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
                 <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                  <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive"/>
+                  <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive" alt="{% trans 'Illustration de la campagne de lancement On n’est jamais trop érudit.' %}"/>
                 </div>
               </a>
             </aside>
