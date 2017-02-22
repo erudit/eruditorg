@@ -318,6 +318,14 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 1,
             'backupCount': 5,
             'formatter': 'verbose'
+        },
+        'fedora_file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/tmp/fedora.log',
+            'maxBytes': 1024 * 1024 * 1,
+            'backupCount': 5,
+            'formatter': 'verbose'
         }
 
     },
@@ -355,6 +363,11 @@ LOGGING = {
         'core.subscription.middleware': {
             'level': 'DEBUG',
             'handlers': ['console'],
+            'propagate': False,
+        },
+        'erudit.fedora': {
+            'level': 'INFO',
+            'handlers': ['fedora_file', ],
             'propagate': False,
         }
     },
