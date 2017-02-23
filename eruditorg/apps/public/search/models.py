@@ -26,5 +26,6 @@ def get_type_for_corpus(corpus):
     return {
         'Dépot': ResearchReport,
         'Livres': Book,
-        'Actes': Book
+        'Actes': Book,
+        'Rapport': ResearchReport,
     }[corpus]

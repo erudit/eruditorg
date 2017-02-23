@@ -74,7 +74,7 @@ class ResearchReportSerializer(serializers.Serializer):
             return obj.data.get('TitreCollection_fac')[0]
 
     def get_authors(self, obj):
-        return obj.data['AuteurNP_fac']
+        return obj.data.get('AuteurNP_fac')
 
     def get_url(self, obj):
         return obj.data['URLDocument'][0]
@@ -86,7 +86,10 @@ class ResearchReportSerializer(serializers.Serializer):
             return obj.data['Titre_en']
 
     def get_publication_date(self, obj):
-        return obj.data['Annee'][0]
+        if 'AnneePublication' in obj.data:
+            return obj.data.get('AnneePublication')
+        if 'Annee' in obj.data:
+            return obj.data['Annee'][0]
 
 
 class BookSerializer(serializers.Serializer):
