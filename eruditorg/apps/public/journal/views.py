@@ -614,9 +614,9 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
             base_url=self.request.build_absolute_uri('/'))
 
         # Merges the cover page and the full article
-        merger = PdfFileMerger()
-        merger.append(coverpage)
-        merger.append(content)
+        merger = PdfFileMerger(strict=False)
+        merger.append(coverpage, import_bookmarks=False)
+        merger.append(content, import_bookmarks=False)
         merger.write(response)
         merger.close()
 
