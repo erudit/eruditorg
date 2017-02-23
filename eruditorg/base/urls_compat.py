@@ -6,11 +6,15 @@ from django.views.generic import RedirectView
 from .views import DummyView
 from .views_compat import RedirectToFallback
 
-
 urlpatterns = [
     url(r'^index.html?$',
         RedirectView.as_view(url='/', permanent=True)),
-
+    url(r'^revue/?$', RedirectView.as_view(
+        pattern_name='public:journal:journal_list',
+        permanent=True)),
+    url(r'^culture/?$', RedirectView.as_view(
+        pattern_name='public:journal:journal_list',
+        permanent=True)),
     url(r'^abonnement/login\.jsp$',
         RedirectView.as_view(pattern_name='login', permanent=True)),
     url(r'^abonnement/oublierPassword\.jsp$',
