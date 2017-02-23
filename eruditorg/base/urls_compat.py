@@ -12,6 +12,9 @@ urlpatterns = [
     url(r'^revue/?$', RedirectView.as_view(
         pattern_name='public:journal:journal_list',
         permanent=True)),
+    url(r'^culture/?$', RedirectView.as_view(
+        pattern_name='public:journal:journal_list',
+        permanent=True)),
     url(r'^abonnement/login\.jsp$',
         RedirectView.as_view(pattern_name='login', permanent=True)),
     url(r'^abonnement/oublierPassword\.jsp$',
