@@ -13,7 +13,6 @@ class DisableMigrations(object):
         return 'notmigrations'
 
 
-
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 CACHES = {
@@ -27,8 +26,8 @@ CACHES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'eruditorgtest'
     }
 }
 
