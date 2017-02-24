@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from modeltranslation.manager import MultilingualManager
 from polymorphic.manager import PolymorphicManager
 
@@ -31,6 +32,15 @@ class LegacyJournalManager(MultilingualManager):
         For cultural journals, the identifier is the fedora localidentifier
         """
         return self.get(Q(code=code) | Q(localidentifier=code))
+
+    def get_by_id_or_404(self, code):
+        """ Return the journal or 404 by id
+
+        The legacy system use a different id for scientific and cultural journals
+        For scientific journals, the identifier is the code (shortname)
+        For cultural journals, the identifier is the fedora localidentifier
+        """
+        return get_object_or_404(self, Q(code=code) | Q(localidentifier=code))
 
 
 class UpcomingJournalManager(MultilingualManager):
