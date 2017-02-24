@@ -42,3 +42,13 @@ class TestJournalAccessSubscriptionValidManager(object):
         )
 
         assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]
+
+        subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
+
+        InstitutionIPAddressRangeFactory.create(
+            subscription=subscription_period.subscription,
+            ip_start='192.168.1.1',
+            ip_end='192.168.255.255',
+        )
+
+        assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.70.1')) == [subscription_period.subscription]
