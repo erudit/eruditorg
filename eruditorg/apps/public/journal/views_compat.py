@@ -18,9 +18,8 @@ class JournalDetailCheckRedirectView(RedirectExceptionsToFallbackWebsiteMixin, R
     def get_redirect_url(self, *args, **kwargs):
 
         if 'code' in kwargs:
-            journal = get_object_or_404(
-                Journal,
-                Q(code=kwargs['code']) | Q(localidentifier=kwargs['code'])
+            journal = Journal.legacy_objects.get_by_id_or_404(
+                kwargs['code']
             )
             return reverse(
                 'public:journal:issue_detail', args=[
