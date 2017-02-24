@@ -480,7 +480,7 @@ class TestArticleDetailView(BaseEruditTestCase):
         self.journal.open_access = True
         self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test_article')
         article = ArticleFactory.create(issue=issue)
         url = reverse('public:journal:article_detail', kwargs={
             'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
