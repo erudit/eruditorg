@@ -123,7 +123,7 @@
       <li class="col-xs-12 col-sm-6 col-md-3 latest-issues--article">
           <div class="row">
             <div class="col-xs-4 col-sm-12">
-              <p class="category-tag">{{ issue.journal.disciplines.all|join:", " }}</p>
+              <p class="category-tag">{{ issue.journal.disciplines.all|join:", " }} <span class="journal-type">({{ issue.journal.type }})</span></p>
               <h3 class="latest-issues--article--journal-title">
                 <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
                   {{ issue.journal.name }}
