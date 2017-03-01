@@ -2,6 +2,8 @@
 
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
+from django.urls import reverse
+from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
 from ..models import Article
@@ -91,7 +93,9 @@ class IssueContributorInline(admin.TabularInline):
 
 class IssueAdmin(admin.ModelAdmin):
     inlines = (IssueThemeInline, IssueContributorInline)
-    list_display = ('journal', 'year', 'volume', 'number', 'title', 'localidentifier', )
+    list_display = (
+        'journal', 'year', 'volume', 'number', 'title', 'localidentifier',
+        'view_issue_on_site', )
     search_fields = ('id', 'localidentifier', )
     list_filter = ('is_published', 'journal__collection', 'journal__name', )
     actions = [
@@ -122,6 +126,19 @@ class IssueAdmin(admin.ModelAdmin):
     force_free_access_to_false.short_description = _(
         "Ne pas contraindre ces numéros au libre accès"
     )
+
+    def view_issue_on_site(self, obj):
+        """ Display the link leading to the issue on website """
+        url = reverse(
+            "public:journal:issue_detail",
+            kwargs={
+                'journal_code': obj.journal.code,
+                'issue_slug': obj.volume_slug, 'localidentifier': obj.localidentifier, }
+        )
+        return format_html(
+            '<a href={}>{}</a>', url, _("Voir sur le site")
+        )
+    view_issue_on_site.short_description = _("Voir le numéro sur le site")
 
 
 class ArticleAbstractAdmin(admin.ModelAdmin):
