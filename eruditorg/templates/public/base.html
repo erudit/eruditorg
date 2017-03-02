@@ -94,25 +94,8 @@
             </ul>
           </li>
           {% endif %}
-          <li class="nav-about dropdown">
-            <a href="https://apropos.erudit.org/" target="_blank" class="select main-section" title="{% blocktrans %}À propos d'Érudit{% endblocktrans %}">{% trans "À propos" %}<span class="ion-ios-arrow-down caret"></span></a>
-            <ul class="hidden-xs hidden-sm">
-              <li>
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/bibliotheques{% else %}https://apropos.erudit.org/en/libraries/{% endif %}" target="_blank" title="{% trans 'Information pour les bibliothécaires' %}">{% trans "Bibliothécaires" %}</a>
-              </li>
-              <li>
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/editeurs{% else %}https://apropos.erudit.org/en/publishers/{% endif %}" target="_blank" title="{% trans 'Information pour les éditeurs' %}">{% trans "Éditeurs" %}</a>
-              </li>
-              <li>
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/chercheurs{% else %}https://apropos.erudit.org/en/researchers/{% endif %}" target="_blank" title="{% trans 'Information pour les chercheurs' %}">{% trans "Chercheurs" %}</a>
-              </li>
-              <li>
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/usagers{% else %}https://apropos.erudit.org/en/users/{% endif %}" target="_blank" title="{% trans 'Information pour les utilisateurs' %}">{% trans "Utilisateurs" %}</a>
-              </li>
-              <li>
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/collections{% else %}https://apropos.erudit.org/en/collections-en/{% endif %}" target="_blank" title="{% trans 'Information sur nos collections' %}">{% trans "Collections" %}</a>
-              </li>
-            </ul>
+          <li class="nav-about">
+            <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="main-section" title="{% blocktrans %}À propos d'Érudit{% endblocktrans %}">{% trans "À propos" %}</a>
           </li>
           <li class="nav-advanced-search">
             <a href="{% url 'public:search:advanced_search' %}" class="main-section" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
@@ -258,7 +241,7 @@
             <ul class="unstyled footer-nav--help">
               <li><a href="https://retro.erudit.org/aide/aide/aide.html" target="_blank">{% trans "Aide" %}</a></li>
               <li class="disabled">{% trans "Plan du site" %}</li>
-              <li><a href="mailto:info@erudit.org?subject=erudit.org">{% trans "Nous contacter" %}</a></li>
+              <li><a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/erudit/contact/{% else %}https://apropos.erudit.org/en/erudit-en/contact/{% endif %}" target="_blank">{% trans "Nous contacter" %}</a></li>
               <li>
                 <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
               </li>
