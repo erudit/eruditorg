@@ -100,6 +100,17 @@
           <li class="nav-advanced-search">
             <a href="{% url 'public:search:advanced_search' %}" class="main-section" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
           </li>
+          <li class="nav-language dropdown">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            <a href="#" class="select main-section hidden-xs hidden-sm">{{ LANGUAGE_CODE }}<span class="ion-ios-arrow-down caret"></span></a>
+            <ul>
+              {% for language in LANGUAGES %}
+              {% get_language_info for language.0 as lang %}
+              <li><a href="{% trans_current_url language.0 %}" {% if language.0 != LANGUAGE_CODE %}class="disabled"{% else %}class="active"{% endif %}>{{ lang.name_local|title }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
           <li class="nav-my-library">
             <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
               <span class="ion-bookmark toolbox-save hidden-xs hidden-sm"></span>
@@ -123,11 +134,6 @@
                 </div>
               </form>
             </div>
-          </li>
-          <li class="nav-language hidden-md hidden-lg">
-            {% for lang in LANGUAGES %}
-            <a href="{% trans_current_url lang.0 %}"{% if lang.0 == LANGUAGE_CODE %} class="active"{% endif %}>{{ lang.1 }}</a>
-            {% endfor %}
           </li>
           {% endblock mainnav %}
         </ul>
