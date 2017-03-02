@@ -16,7 +16,7 @@
     <aside id="journal-meta" class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
 
       {# latest and back issues #}
-      <div class="latest-issue sidebar-block clearfix">
+      <div class="sidebar-block clearfix latest-issue">
       {% block aside_issue %}
         {% if latest_issue %}
         <h2>{% trans "Dernier numéro" %}</h2>
@@ -43,6 +43,21 @@
             {% trans "Voir tous les numéros" %}
           </a>
         </p>
+      </div>
+
+      <div class="sidebar-block search-journal">
+        <h2>{% trans "Rechercher dans la revue" %}</h2>
+        <div class="search-box">
+          <form action="{% url 'public:search:results' %}" method="get">
+            <div class="input-group">
+              <input type="search" class="form-control" name="basic_search_term" placeholder="Recherchez par mot-clé…" autofocus>
+              <input type="hidden" name="journals" value="{{ journal.name }}">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-secondary"><span class="ion-search"></span></button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
 
       {# journal meta infos #}
