@@ -61,7 +61,7 @@
                 {% if not objects_group.key %}
                   <li><a href="#section-void">{% trans "Autres" %}</a></li>
                 {% else %}
-                  <li><a href="#{{ objects_group.key }}">{{ objects_group.name }}</a></li>
+                  <li><a href="#{{ objects_group.key }}">{{ objects_group.name }} ({{ objects_group|length }})</a></li>
                 {% endif %}
               {% endfor %}
             <ul>

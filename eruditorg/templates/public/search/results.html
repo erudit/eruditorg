@@ -235,7 +235,7 @@
                         <strong>{{ article.type }}</strong>
                       {% endif %}
                       {# document type for articles #}
-                      {% if article.type == 'note' or article.type == 'Note' %}publiée{% else %}publié{% endif %}
+                      {% if article.type == 'note' or article.type == 'Note' %}{% trans 'publiée' %}{% else %}{% trans 'publié' %}{% endif %}
                       {% trans "dans la revue" %}
                       {# journal type and collection #}
                       {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
