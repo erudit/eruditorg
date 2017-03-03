@@ -16,10 +16,10 @@
     <aside id="journal-meta" class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
 
       {# latest and back issues #}
-      <div class="latest-issue sidebar-block clearfix">
+      <div class="sidebar-block clearfix latest-issue">
       {% block aside_issue %}
         {% if latest_issue %}
-        <h2>{% trans "Dernier numéro" %}</h2>
+        <h2>{% trans "Dernier numéro" %} (<a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>)</h2>
         <p>
           <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
             <span class="issue-list--volume">{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
@@ -37,12 +37,28 @@
         </a>
         {% endif %}
         {% endif %}
+        <p></p>
         {% endblock aside_issue %}
         <p>
           <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
             {% trans "Voir tous les numéros" %}
           </a>
         </p>
+      </div>
+
+      <div class="sidebar-block search-journal">
+        <h2>{% trans "Rechercher dans la revue" %}</h2>
+        <div class="search-box">
+          <form action="{% url 'public:search:results' %}" method="get">
+            <div class="input-group">
+              <input type="search" class="form-control" name="basic_search_term" placeholder="Recherchez par mot-clé…" autofocus>
+              <input type="hidden" name="journals" value="{{ journal.name }}">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-secondary"><span class="ion-search"></span></button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
 
       {# journal meta infos #}

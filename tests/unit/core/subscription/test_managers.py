@@ -31,6 +31,23 @@ class TestJournalAccessSubscriptionValidManager(object):
         # Run & check
         assert list(JournalAccessSubscription.valid_objects.all()) == [subscription_1, ]
 
+    def test_can_return_subscriptions_for_an_ip_covered_by_multiple_ranges(self):
+        subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
+
+        InstitutionIPAddressRangeFactory.create(
+            subscription=subscription_period.subscription,
+            ip_start='192.168.1.1',
+            ip_end='192.168.1.2',
+        )
+
+        InstitutionIPAddressRangeFactory.create(
+            subscription=subscription_period.subscription,
+            ip_start='192.168.1.1',
+            ip_end='192.168.1.2',
+        )
+
+        assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]
+
     def test_can_return_subscriptions_for_an_ip(self):
 
         subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()

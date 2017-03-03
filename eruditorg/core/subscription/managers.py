@@ -16,6 +16,7 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
         """ Return all the subscriptions for the given ip address """
         from .models import InstitutionIPAddressRange
         database_engine = settings.DATABASES[self.db]['ENGINE']
+
         if 'mysql' in database_engine:
             ip_range = InstitutionIPAddressRange.objects.extra(
                 where={
@@ -26,14 +27,14 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
                 }
             )
 
-            return self.filter(institutionipaddressrange=ip_range)
+            return self.filter(institutionipaddressrange__in=ip_range).distinct()
 
         if 'psycopg2' not in database_engine:
             logger.warn("Doing string comparison on IP addresses. The results may not be accurate.")
 
         return self.filter(
             institutionipaddressrange__ip_start__lte=ip_address,
-            institutionipaddressrange__ip_end__gte=ip_address)
+            institutionipaddressrange__ip_end__gte=ip_address).distinct()
 
     def get_for_referer(self, referer):
         """ Return all the subscriptions for the given referer """

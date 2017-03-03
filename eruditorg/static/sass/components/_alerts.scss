@@ -25,6 +25,14 @@
 /**
  * Fallback alert box
  */
+#advanced_search,
+#search_results {
+  .alert {
+    background: $light-grey;
+    padding-bottom: 1em;
+  }
+}
+
 .fallback {
 
   p {

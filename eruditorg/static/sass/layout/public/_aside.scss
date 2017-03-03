@@ -79,6 +79,29 @@ aside {
     margin-top: 1em;
   }
 
+  .search-journal {
+
+    input[type="search"] {
+      height: 50px;
+      line-height: 50px;
+      box-sizing: border-box;
+      @include border-radius(0);
+      @include placeholder($dark-grey);
+    }
+
+    .input-group-addon {
+      padding: 0;
+      border: none;
+      @include border-radius(0);
+    }
+
+    .btn {
+      width: 50px;
+      height: 50px;
+    }
+
+  }
+
   .subscription-sponsor {
     color: $dark-grey;
   }

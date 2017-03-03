@@ -5,3 +5,15 @@
 {{ block.super }}
 <li><a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche" %}</a></li>
 {% endblock breadcrumb %}
+
+{% block classic_website_fallback %}
+<div class="alert alert-warning">
+  <div class="container">
+    <p>
+      {% blocktrans %}
+      <span class="ion-alert-circled"></span> <strong>Attention</strong>&nbsp;: nous travaillons à améliorer le moteur de recherche de la nouvelle plateforme. Il se peut donc que les résultats de votre recherche s’affichent mal ou ne soient pas optimaux. <a href="{{ fallback_url }}" target="_blank">Rechercher dans l’ancien site</a>
+      {% endblocktrans %}
+    </p>
+  </div>
+</div>
+{% endblock classic_website_fallback %}
