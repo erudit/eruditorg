@@ -188,14 +188,21 @@
 {% endblock inner_main %}
 
 {% block aside_issue %}
-<h2><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a></h2>
-<p>{{ issue.volume_title_with_pages }}</p>
-{% if issue.has_coverpage %}
-<div>
-  <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
-    {{ issue.volume_title_with_pages }} {{ journal.name }}" />
+<div class="sidebar-block clearfix latest-issue">
+  <h2><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a></h2>
+  <p>{{ issue.volume_title_with_pages }}</p>
+  {% if issue.has_coverpage %}
+  <div>
+    <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
+      {{ issue.volume_title_with_pages }} {{ journal.name }}" />
+  </div>
+  {% endif %}
+  <p>
+    <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
+      {% trans "Voir tous les numéros" %}
+    </a>
+  </p>
 </div>
-{% endif %}
 {% endblock aside_issue %}
 
 {% block inner_footer %}

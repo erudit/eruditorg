@@ -63,11 +63,6 @@ aside {
       margin: 1em auto;
     }
 
-    .authors-index,
-    .publisher-login {
-      @include fw-sans-medium;
-    }
-
     .journal-meta--list {
       border-bottom: 1px solid $mid-grey;
 

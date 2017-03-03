@@ -16,19 +16,17 @@
     <aside id="journal-meta" class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
 
       {# latest and back issues #}
-      <div class="sidebar-block clearfix latest-issue">
       {% block aside_issue %}
+      <div class="sidebar-block clearfix latest-issue">
         {% if latest_issue %}
         <h2>{% trans "Dernier numéro" %} (<a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>)</h2>
         <p>
           <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
-            <span class="issue-list--volume">{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
             {% if latest_issue.html_title %}
+            <span class="issue-list--theme">{{ latest_issue.html_title|safe }}</span>
             <br/>
-            <em>
-              <span class="issue-list--theme">{{ latest_issue.html_title|safe }}</span>
-            </em>
             {% endif %}
+            <span class="issue-list--volume">{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
           </a>
         </p>
         {% if latest_issue.has_coverpage %}
@@ -37,14 +35,13 @@
         </a>
         {% endif %}
         {% endif %}
-        <p></p>
-        {% endblock aside_issue %}
         <p>
           <a href="{% url 'public:journal:journal_detail' journal.code %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
             {% trans "Voir tous les numéros" %}
           </a>
         </p>
       </div>
+      {% endblock aside_issue %}
 
       <div class="sidebar-block search-journal">
         <h2>{% trans "Rechercher dans la revue" %}</h2>
@@ -65,13 +62,16 @@
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
         <p>
-          -><a href="//{{ journal.code }}.erudit.org/user/login{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="publisher-login">{% trans 'Accès éditeur' %}</a>
+          -> <a href="//{{ journal.code }}.erudit.org/user/login{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="publisher-login">{% trans 'Accès éditeur' %}</a>
         </p>
         {% block aside_authors_list %}
         <p>
-          -><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
+          -> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
         </p>
         {% endblock aside_authors_list %}
+        <p>
+          -> <a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>
+        </p>
         {% cache LONG_TTL "journal_detail" LANGUAGE_CODE journal.id %}
         <dl class="journal-meta--list">
 
