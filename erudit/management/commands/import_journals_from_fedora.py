@@ -186,7 +186,8 @@ class Command(BaseCommand):
             return
 
         # Imports each collection
-        journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
+        journal_count, journal_errored_count = 0, 0
+        issue_count, issue_errored_count, article_count = 0, 0, 0
         for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('fedora'):
             collection_code = collection_config.get('collection_code')
             try:
@@ -196,17 +197,20 @@ class Command(BaseCommand):
                     code=collection_code, name=collection_config.get('collection_title'),
                     localidentifier=collection_config.get('localidentifier'))
             else:
-                _jc, _jec, _ic, _ac = self.import_collection(collection)
+                _jc, _jec, _ic, _iec, _ac = self.import_collection(collection)
                 journal_count += _jc
                 journal_errored_count += _jec
                 issue_count += _ic
+                issue_errored_count += _iec
                 article_count += _ac
 
         self.stdout.write(self.style.MIGRATE_HEADING(
             '\nJournals imported: {journal_count} / Journals errored: {journal_errored_count} / '
-            'issues imported: {issue_count} / articles imported: {article_count}'.format(
+            'issues imported: {issue_count} / issues errored: {issue_errored_count} / '
+            'articles imported: {article_count}'.format(
                 journal_count=journal_count, journal_errored_count=journal_errored_count,
-                issue_count=issue_count, article_count=article_count,
+                issue_count=issue_count, issue_errored_count=issue_errored_count,
+                article_count=article_count,
             )))
 
     def import_collection(self, collection):
@@ -223,6 +227,13 @@ class Command(BaseCommand):
             latest_update_date = latest_journal_update.fedora_updated.date() \
                 if latest_journal_update else None
 
+        latest_issue_update_date = self.modification_date
+        if not self.full_import and latest_issue_update_date is None:
+            # Tries to fetch the date of the Issue instance with the more recent update date.
+            latest_issue_update = Issue.objects.order_by('-fedora_updated').first()
+            latest_issue_update_date = latest_issue_update.fedora_updated.date() \
+                if latest_issue_update else None
+
         # STEP 1: fetches the PIDs of the journals that will be imported
         # --
 
@@ -232,37 +243,77 @@ class Command(BaseCommand):
             if not self.full_import:
                 self.stdout.write(self.style.WARNING(
                     '  No journals found... proceed to full import!'.format(collection.code)))
-            journal_pids = self._get_journal_pids_to_import(base_fedora_query)
+            journal_pids = self._get_pids_to_import(base_fedora_query)
         else:
             self.stdout.write(
-                '  Importing objects modified since {}.'.format(latest_update_date.isoformat()))
+                '  Importing Journals modified since {}.'.format(latest_update_date.isoformat()))
             # Fetches the PIDs of all the journals that have been update since the latest
             # modification date.
-            journal_pids = self._get_journal_pids_to_import(
+            journal_pids = self._get_pids_to_import(
                 base_fedora_query + ' mdate>{}'.format(latest_update_date.isoformat()))
 
         # STEP 2: import each journal using its PID
         # --
 
-        journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
+        journal_count, journal_errored_count = 0, 0
         for jpid in journal_pids:
             try:
-                _ic, _ac = self.import_journal(jpid, collection)
+                self.import_journal(jpid, collection, False)
             except Exception as e:
                 journal_errored_count += 1
                 self.stdout.write(self.style.ERROR(
                     '    Unable to import the journal with PID "{0}": {1}'.format(jpid, e)))
             else:
                 journal_count += 1
-                issue_count += _ic
-                article_count += _ac
 
         # STEP 3: associates Journal instances with other each other
         # --
 
         self.import_journal_precedences(self.journal_precendence_relations)
 
-        return journal_count, journal_errored_count, issue_count, article_count
+        # STEP 4: fetches the PIDs of the issues that will be imported
+        # --
+        issue_fedora_query = "pid~erudit:{collectionid}.*.* label='Publication Erudit'".format(
+            collectionid=collection.localidentifier)
+        if self.full_import or latest_update_date is None:
+            if not self.full_import:
+                self.stdout.write(self.style.WARNING(
+                    '  No issues found... proceed to full import!'.format(collection.code)))
+            issue_pids = self._get_pids_to_import(issue_fedora_query)
+        else:
+            self.stdout.write(
+                '  Importing Issues modified since {}.'.format(latest_update_date.isoformat()))
+            # Fetches the PIDs of all the issues that have been update since the latest
+            # modification date.
+            issue_pids = self._get_pids_to_import(
+                issue_fedora_query + ' mdate>{}'.format(latest_issue_update_date.isoformat()))
+
+        # STEP 5: import each issue using its PID
+        # --
+
+        issue_count, issue_errored_count, article_count = 0, 0, 0
+
+        for ipid in issue_pids:
+            try:
+                journal_localidentifier = ipid.split(':')[1].split('.')[1]
+                journal = Journal.objects.get(localidentifier=journal_localidentifier)
+            except Journal.DoesNotExist:
+                issue_errored_count += 1
+                self.stdout.write(self.style.ERROR(
+                    '      Failure importing issue {0}. The "{0}" journal is not available.'.format(
+                        ipid, journal_localidentifier)))
+            else:
+                try:
+                    _ac = self._import_issue(ipid, journal)
+                except Exception as e:
+                    issue_errored_count += 1
+                    self.stdout.write(self.style.ERROR(
+                        '    Unable to import the issue with PID "{0}": {1}'.format(ipid, e)))
+                else:
+                    issue_count += 1
+                    article_count += _ac
+
+        return journal_count, journal_errored_count, issue_count, issue_errored_count, article_count
 
     def import_journal_precedences(self, precendences_relations):
         """ Associates previous/next Journal instances with each journal. """
@@ -288,7 +339,7 @@ class Command(BaseCommand):
                 j.save()
 
     @transaction.atomic
-    def import_journal(self, journal_pid, collection):
+    def import_journal(self, journal_pid, collection, import_issues=True):
         """ Imports a journal using its PID. """
         logger.info("Importing journal: {}".format(journal_pid))
         self.stdout.write(self.style.MIGRATE_LABEL(
@@ -389,6 +440,8 @@ class Command(BaseCommand):
 
         # STEP 3: imports all the issues associated with the journal
         # --
+        if import_issues is False:
+            return 0, 0
 
         issue_count, article_count = 0, 0
 
@@ -798,12 +851,12 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR('      ' + msg))
                 logger.error(msg, exc_info=True)
 
-    def _get_journal_pids_to_import(self, query):
+    def _get_pids_to_import(self, query):
         """ Returns the PIDS corresponding to a given Fedora query. """
-        self.stdout.write('  Determining journal PIDs to import...', ending='')
+        self.stdout.write('  Determining PIDs to import...', ending='')
 
         ns_type = {'type': 'http://www.fedora.info/definitions/1/0/types/'}
-        journal_pids = []
+        pids = []
         session_token = None
         remaining_pids = True
 
@@ -813,27 +866,27 @@ class Command(BaseCommand):
             session_token = session_token.text if session_token is not None else None
             try:
                 response = rest_api.findObjects(query, chunksize=1000, session_token=session_token)
-                # Tries to fetch the PIDs of the journals by parsing the response
+                # Tries to fetch the PIDs by parsing the response
                 tree = et.fromstring(response.content)
                 pid_nodes = tree.findall('.//type:pid', ns_type)
                 session_token = tree.find('./type:listSession//type:token', ns_type)
-                _journal_pids = [n.text for n in pid_nodes]
+                _pids = [n.text for n in pid_nodes]
             except RequestFailed as e:
                 self.stdout.write(self.style.ERROR('  [FAIL]'))
-                logger.error('Unable to fetches the journal PIDs: {0}'.format(e), exc_info=True)
+                logger.error('Unable to fetches the PIDs: {0}'.format(e), exc_info=True)
                 return
             else:
-                journal_pids.extend(_journal_pids)
+                pids.extend(_pids)
 
-            remaining_pids = len(_journal_pids) and session_token is not None
+            remaining_pids = len(_pids) and session_token is not None
 
         self.stdout.write(self.style.SUCCESS('  [OK]'))
-        if not len(journal_pids):
-            self.stdout.write(self.style.WARNING('  No journal PIDs found'))
+        if not len(pids):
+            self.stdout.write(self.style.WARNING('  No PIDs found'))
         else:
-            self.stdout.write('  {0} PIDs found!'.format(len(journal_pids)))
+            self.stdout.write('  {0} PIDs found!'.format(len(pids)))
 
-        return journal_pids
+        return pids
 
     def _patch_generic_journal_title(self, journal, field_name, titles):
         assigned_langs = []
