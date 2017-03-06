@@ -60,15 +60,17 @@
 <main role="main" class="col-sm-9 col-md-8">
   <header class="page-header-main row">
     <div class="col-sm-12">
-      <h1>
-        <span>{{ journal.name }}</span>
-        {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
-        {% if journal.open_access %}
-        <span class="hint--bottom-left hint--no-animate pull-right" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
-          <span class="erudicon erudicon-open-access"></span>
-        </span>
-        {% endif %}
-      </h1>
+      <div class="row">
+        <h1 class="col-xs-10 col-sm-11">
+          <span>{{ journal.name }}</span>
+          {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
+        </h1>
+      {% if journal.open_access %}
+      <span class="hint--bottom-left hint--no-animate text-right col-xs-2 col-sm-1" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
+        <span class="erudicon erudicon-open-access"></span>
+      </span>
+      {% endif %}
+      </div>
       {% if journal.previous_journal or journal.next_journal %}
       <p class="journal-history">
       {% if journal.previous_journal %}
@@ -92,8 +94,35 @@
     </div>
   </header>
 
-  <section class="clearfix hidden-sm hidden-md hidden-lg latest-issue-xs">
-    {% block aside_issue %}{{ block.super }}{% endblock %}
+  <section class="clearfix latest-issue">
+    <div class="row">
+      {% if latest_issue %}
+      <div class="col-sm-8">
+        <h2>{% trans "Dernier numéro" %}</h2>
+        {% if latest_issue.has_coverpage %}
+        <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="latest-issue-cover">
+          <img src="{% url 'public:journal:issue_coverpage' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="img-responsive issue-cover" alt="{{ latest_issue.title }}" />
+        </a>
+        {% endif %}
+        <p class="latest-issue-title">
+          <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
+            {% if latest_issue.html_title %}
+            <em>{{ latest_issue.html_title|safe }}</em>
+            <br/>
+            {% endif %}
+            <span>{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
+          </a>
+        </p>
+        {% endif %}
+      </div>
+      <div class="col-sm-4">
+        <p class="pull-right">
+          <a href="#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
+            {% trans "Voir tous les numéros" %}
+          </a>
+        </p>
+      </div>
+    </div>
   </section>
 
   {% if journal_info %}
@@ -174,6 +203,8 @@
   {% endif %}
 </main>
 {% endblock inner_main %}
+
+{% block aside_issue %}{% endblock aside_issue %}
 
 {% block inner_footer %}
 {% cache LONG_TTL "public_journal_detail_issues" journal.id user_has_access_to_journal LANGUAGE_CODE %}
