@@ -482,13 +482,10 @@ class Command(BaseCommand):
         try:
             issue = Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
-            # TODO check diffusion / prediffusion
             issue = Issue()
             issue.localidentifier = issue_localidentifier
             issue.journal = journal
             issue.fedora_created = fedora_issue.created
-            if self.make_published:
-                issue.is_published = True
 
         summary_tree = remove_xml_namespaces(
             et.fromstring(fedora_issue.summary.content.serialize()))
@@ -507,6 +504,9 @@ class Command(BaseCommand):
             or dt.datetime(int(issue.year), 1, 1)
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
+
+        # Is the Issue published ?
+        issue.is_published = self._is_issue_published(issue_pid, journal)
 
         issue.fedora_updated = fedora_issue.modified
         issue.save()
@@ -907,3 +907,22 @@ class Command(BaseCommand):
             setattr(journal, '{0}_{1}'.format(field_name, main_lang), titles.get('main'))
         except KeyError:  # pragma no cover
             pass
+
+    def _is_issue_published(self, issue_pid, journal):
+        """ Returns true if an issue is published """
+        try:
+            fedora_journal = JournalDigitalObject(api, journal.pid)
+            assert fedora_journal.exists
+        except AssertionError:
+            msg = 'The journal with PID "{}" seems to be inexistant'.format(journal.pid)
+            logger.error(msg, exc_info=True)
+            self.stdout.write('    ' + self.style.ERROR(msg))
+            return False
+        else:
+            publications_tree = remove_xml_namespaces(
+                et.fromstring(fedora_journal.publications.content.serialize()))
+            xml_issue_nodes = publications_tree.findall('.//numero')
+            for issue_node in xml_issue_nodes:
+                if issue_node.get('pid') == issue_pid:
+                    return True
+        return False
