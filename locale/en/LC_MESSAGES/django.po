@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jeffrey Freedman <jffryfrdmn@gmail.com>, 2016\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
-"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/public/account_actions/forms.py:10
@@ -77,11 +77,11 @@ msgstr "^password/reset/done/$"
 
 #: apps/public/auth/urls.py:36
 msgid ""
-"^reinitialisation/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-"
-"[0-9A-Za-z]{1,20})/$"
+"^reinitialisation/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-"
+"Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
-"^reset/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]"
-"{1,20})/$"
+"^reset/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-"
+"Za-z]{1,20})/$"
 
 #: apps/public/auth/urls.py:41
 msgid "^reinitialisation/termine/$"
@@ -206,19 +206,15 @@ msgstr "^authors/$"
 
 #: apps/public/journal/urls.py:25
 msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
-"P<localidentifier>[\\w-]+)/"
+"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)/"
 msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
-"P<localidentifier>[\\w-]+)/"
+"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<localidentifier>[\\w-]+)/"
 
 #: apps/public/journal/urls.py:31
 msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
-"P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
+"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
 msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
-"P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
+"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)/"
 
 #: apps/public/journal/urls.py:33
 msgid "^resume/$"
@@ -246,11 +242,9 @@ msgstr "^firstpage\\.pdf$"
 
 #: apps/public/journal/urls.py:40
 msgid ""
-"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
-"P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
+"^revues/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
 msgstr ""
-"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?"
-"P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
+"^journals/(?P<journal_code>[\\w-]+)/(?P<issue_slug>[\\w-]*)-(?P<issue_localid>[\\w-]+)/(?P<localid>[\\w-]+)"
 
 #: apps/public/journal/urls.py:41
 msgid ".xml"
@@ -521,10 +515,8 @@ msgstr "Authors"
 #: apps/public/search/forms.py:167
 msgid ""
 "Les revues diffusées sur Érudit sont consultables\n"
-"                    directement sur la plateforme ; les revues des "
-"collections Persée et NRC\n"
-"                    Research Press redirigent vers la plateforme du "
-"partenaire."
+"                    directement sur la plateforme ; les revues des collections Persée et NRC\n"
+"                    Research Press redirigent vers la plateforme du partenaire."
 msgstr ""
 "Journals disseminated on Érudit can be consulted\n"
 "directly on our platform; journals from the Persée and NRC\n"
@@ -537,8 +529,7 @@ msgstr "Publication Types"
 #: apps/public/search/forms.py:173
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés\n"
-"                    par les pairs ; les revues culturelles présentent des "
-"articles dans les\n"
+"                    par les pairs ; les revues culturelles présentent des articles dans les\n"
 "                    domaines artistique, littéraire et socioculturel."
 msgstr ""
 "Scholarly journals present peer-reviewed scientific articles;\n"
@@ -776,11 +767,11 @@ msgstr "User"
 
 #: apps/userspace/generic_apps/authorization/views.py:55
 msgid "L'accès a été créé avec succès"
-msgstr "Access created successfully."
+msgstr "Access created successfully"
 
 #: apps/userspace/generic_apps/authorization/views.py:98
 msgid "L'accès a été supprimé avec succès"
-msgstr "Access removed successfully."
+msgstr "Access removed successfully"
 
 #: apps/userspace/journal/authorization/urls.py:10
 #: apps/userspace/library/authorization/urls.py:10
@@ -930,7 +921,8 @@ msgstr "^access/cancel/(?P<pk>[0-9]+)/$"
 
 #: apps/userspace/journal/subscription/views.py:84
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
-msgstr "You have reached the maximum number of subscriptions for this journal."
+msgstr ""
+"You have reached the maximum number of subscriptions for this journal."
 
 #: apps/userspace/journal/subscription/views.py:97
 msgid "L'abonnement a été créé avec succès"
@@ -1230,7 +1222,7 @@ msgstr "Edit Journal Information"
 #: templates/userspace/journal/editor/issuesubmission_submit.html:9
 #: templates/userspace/journal/partials/menu.html:32
 msgid "Dépôt de fichiers"
-msgstr "Submit Files"
+msgstr "Production file submission"
 
 #: core/authorization/defaults.py:37
 msgid "Valider les numéros"
@@ -1267,12 +1259,12 @@ msgstr "Consult Royalty Reports "
 #: core/authorization/models.py:19 core/editor/models.py:187
 #: core/editor/models.py:207 core/subscription/abstract_models.py:12
 msgid "Date de création"
-msgstr "Date of Creation"
+msgstr "Date of creation"
 
 #: core/authorization/models.py:25 core/editor/models.py:61
 #: core/editor/models.py:208 core/subscription/abstract_models.py:13
 msgid "Date de modification"
-msgstr "Date of Change"
+msgstr "Date of change"
 
 #: core/authorization/models.py:37 core/editor/models.py:219
 msgid "Groupe"
@@ -1292,7 +1284,7 @@ msgstr "Cannot change permission linked to a specific object."
 
 #: core/citations/models.py:13
 msgid "Documents Érudit"
-msgstr "Érudit Documents"
+msgstr "Érudit documents"
 
 #: core/citations/models.py:16
 msgid "Liste de notices"
@@ -1313,7 +1305,7 @@ msgstr "Draft"
 
 #: core/editor/models.py:25
 msgid "En attente de validation"
-msgstr "Awaiting validation."
+msgstr "Awaiting validation"
 
 #: core/editor/models.py:26
 #: templates/userspace/journal/editor/partials/issuesubmission_list.html:15
@@ -1369,15 +1361,15 @@ msgstr "Unsubmitted"
 
 #: core/editor/models.py:180
 msgid "À corriger"
-msgstr "To be corrected."
+msgstr "To be corrected"
 
 #: core/editor/models.py:186
 msgid "Changements de statut"
-msgstr "Change Status"
+msgstr "Status change"
 
 #: core/editor/models.py:188
 msgid "statut"
-msgstr "Status"
+msgstr "status"
 
 #: core/editor/models.py:190
 msgid "Version des fichiers"
@@ -1454,8 +1446,8 @@ msgstr "Journal Royalties"
 
 #: core/subscription/abstract_models.py:37
 msgid ""
-"La date de début d'une période d'abonnement ne doit pas être supérieure à la "
-"date de fin."
+"La date de début d'une période d'abonnement ne doit pas être supérieure à la"
+" date de fin."
 msgstr "Start date of subscription period must not be greater than end date."
 
 #: core/subscription/abstract_models.py:54
@@ -1605,8 +1597,8 @@ msgstr ""
 
 #: templates/emails/auth/password_reset_email.html:6
 msgid ""
-"Veuillez cliquer sur le lien suivant afin de définir un nouveau mot de "
-"passe :"
+"Veuillez cliquer sur le lien suivant afin de définir un nouveau mot de passe"
+" :"
 msgstr "Please click on the following link to set a new password:"
 
 #: templates/emails/auth/password_reset_email.html:9
@@ -1635,8 +1627,7 @@ msgid ""
 "\n"
 "  <p>Bonjour,</p>\n"
 "\n"
-"  <p>Voici les modifications à apporter aux fichiers de production du numéro "
-"%(issue)s.</p>\n"
+"  <p>Voici les modifications à apporter aux fichiers de production du numéro %(issue)s.</p>\n"
 "  "
 msgstr ""
 
@@ -1685,9 +1676,7 @@ msgid ""
 "\n"
 "  <p>Bonjour,</p>\n"
 "\n"
-"  <p>Les fichiers du numéro %(issue)s de la revue %(journal)s ont été "
-"approuvés par l'équipe de production. Le travail de mise en ligne débutera "
-"sous peu.</p>\n"
+"  <p>Les fichiers du numéro %(issue)s de la revue %(journal)s ont été approuvés par l'équipe de production. Le travail de mise en ligne débutera sous peu.</p>\n"
 "  "
 msgstr ""
 
@@ -1734,8 +1723,7 @@ msgid ""
 "\n"
 "  <p>Bonjour,</p>\n"
 "\n"
-"  <p>%(issue.contact.get_full_name())s de la revue %(issue.journal)s a "
-"transmis des fichiers de production du %(issue)s.</p>\n"
+"  <p>%(issue.contact.get_full_name())s de la revue %(issue.journal)s a transmis des fichiers de production du %(issue)s.</p>\n"
 "\n"
 "  <p>\n"
 "    <a href=\"http://%(site.domain)s%(issue_url)s\">\n"
@@ -1752,11 +1740,11 @@ msgstr "[Érudit] New files sent"
 #: templates/emails/organisation/new_member_content.html:6
 #, python-format
 msgid ""
-"Une proposition vous a été envoyée afin de rejoindre l'organisation <strong>"
-"%(organisation_name)s</strong>."
+"Une proposition vous a été envoyée afin de rejoindre l'organisation "
+"<strong>%(organisation_name)s</strong>."
 msgstr ""
-"An offer has been sent to you to join the organization <strong>"
-"%(organisation_name)s</strong>."
+"An offer has been sent to you to join the organization "
+"<strong>%(organisation_name)s</strong>."
 
 #: templates/emails/organisation/new_member_content.html:10
 #: templates/emails/subscription/journal/new_subscription_content.html:10
@@ -1802,17 +1790,11 @@ msgstr "Permission denied"
 #, python-format
 msgid ""
 "\n"
-"      L’accès à cette page vous est refusé. Veuillez vérifier l’adresse ou "
-"retourner à la <a href=\"%(home)s\">page d’accueil</a>. <br/> Pour plus "
-"d'informations, communiquez avec nous à l'adresse&nbsp;: <a href=\"mailto:"
-"info@erudit.org?subject=Erreur 403 - erudit.org\">info@erudit.org</a>.\n"
+"      L’accès à cette page vous est refusé. Veuillez vérifier l’adresse ou retourner à la <a href=\"%(home)s\">page d’accueil</a>. <br/> Pour plus d'informations, communiquez avec nous à l'adresse&nbsp;: <a href=\"mailto:info@erudit.org?subject=Erreur 403 - erudit.org\">info@erudit.org</a>.\n"
 "      "
 msgstr ""
 "\n"
-"Access to this page is forbidden. Please check the address or return to the "
-"<a href=\"%(home)s\">homepage</a>. <br/> For more information, contact us at "
-"<a href=\"mailto:info@erudit.org?subject=403 error - erudit.org"
-"\">info@erudit.org</a>."
+"Access to this page is forbidden. Please check the address or return to the <a href=\"%(home)s\">homepage</a>. <br/> For more information, contact us at <a href=\"mailto:info@erudit.org?subject=403 error - erudit.org\">info@erudit.org</a>."
 
 #: templates/public/404.html:4
 msgid "404. Page non trouvée"
@@ -1826,13 +1808,11 @@ msgstr "Page not found"
 #, python-format
 msgid ""
 "\n"
-"      Cette page est introuvable&nbsp;! Veuillez vérifier l’adresse ou "
-"retourner à la <a href=\"%(home)s\">page d’accueil</a>.\n"
+"      Cette page est introuvable&nbsp;! Veuillez vérifier l’adresse ou retourner à la <a href=\"%(home)s\">page d’accueil</a>.\n"
 "      "
 msgstr ""
 "\n"
-"This page can not be found! Please check the address or return to the <a "
-"href=\"%(home)s\">homepage</a>."
+"This page can not be found! Please check the address or return to the <a href=\"%(home)s\">homepage</a>."
 
 #: templates/public/500.html:4
 msgid "500. Erreur inconnue"
@@ -1846,17 +1826,11 @@ msgstr "Unknown error"
 #, python-format
 msgid ""
 "\n"
-"      Il y a eu une erreur interne du serveur&nbsp;! Retourner à la <a href="
-"\"%(home)s\">page d’accueil</a>. <br/>Si le problème persiste, veuillez "
-"communiquer avec nous à l'adresse&nbsp;: <a href=\"mailto:info@erudit.org?"
-"subject=Erreur 500 - erudit.org\">info@erudit.org</a>.\n"
+"      Il y a eu une erreur interne du serveur&nbsp;! Retourner à la <a href=\"%(home)s\">page d’accueil</a>. <br/>Si le problème persiste, veuillez communiquer avec nous à l'adresse&nbsp;: <a href=\"mailto:info@erudit.org?subject=Erreur 500 - erudit.org\">info@erudit.org</a>.\n"
 "      "
 msgstr ""
 "\n"
-"There was an internal server error! Return to the <a href=\"%(home)s"
-"\">homepage</a>. <br/>If the problem persists, please contact us at <a href="
-"\"mailto:info@erudit.org?subject=500 error - erudit.org\">info@erudit.org</"
-"a>."
+"There was an internal server error! Return to the <a href=\"%(home)s\">homepage</a>. <br/>If the problem persists, please contact us at <a href=\"mailto:info@erudit.org?subject=500 error - erudit.org\">info@erudit.org</a>."
 
 #: templates/public/503.html:4
 msgid "503. Service non disponible"
@@ -1870,17 +1844,11 @@ msgstr "Service unavailable"
 #, python-format
 msgid ""
 "\n"
-"      Le service est temporairement indisponible ou en maintenance&nbsp;! "
-"Retournez à la <a href=\"%(home)s\">page d’accueil</a>. <br/>Si le problème "
-"persiste, veuillez communiquer avec nous à l'adresse&nbsp;: <a href=\"mailto:"
-"info@erudit.org?subject=Erreur 503 - erudit.org\">info@erudit.org</a>.\n"
+"      Le service est temporairement indisponible ou en maintenance&nbsp;! Retournez à la <a href=\"%(home)s\">page d’accueil</a>. <br/>Si le problème persiste, veuillez communiquer avec nous à l'adresse&nbsp;: <a href=\"mailto:info@erudit.org?subject=Erreur 503 - erudit.org\">info@erudit.org</a>.\n"
 "      "
 msgstr ""
 "\n"
-"The server is temporarily unavailable or down for maintenance! Return to the "
-"<a href=\"%(home)s\">homepage</a>. <br/>If the problem persists, please "
-"contact us at <a href=\"mailto:info@erudit.org?subject=503 error - erudit.org"
-"\">info@erudit.org</a>."
+"The server is temporarily unavailable or down for maintenance! Return to the <a href=\"%(home)s\">homepage</a>. <br/>If the problem persists, please contact us at <a href=\"mailto:info@erudit.org?subject=503 error - erudit.org\">info@erudit.org</a>."
 
 #: templates/public/account_actions/individual_subscription_landing.html:5
 #: templates/public/account_actions/individual_subscription_landing.html:15
@@ -1966,8 +1934,8 @@ msgstr "You have already joined this organization with this account."
 #: templates/public/account_actions/organisation_membership_landing.html:41
 #, python-format
 msgid ""
-"Voulez-vous rejoindre l'organisation <strong>%(organisation_name)s</"
-"strong>&nbsp;?"
+"Voulez-vous rejoindre l'organisation "
+"<strong>%(organisation_name)s</strong>&nbsp;?"
 msgstr "Would you like to join <strong>%(organisation_name)s</strong>?"
 
 #: templates/public/account_actions/organisation_membership_landing.html:51
@@ -2091,8 +2059,8 @@ msgid ""
 "Saisissez votre adresse courriel ci-dessous et nous vous enverrons les "
 "instructions pour en créer un nouveau."
 msgstr ""
-"Enter your email address below and we will send you instructions to create a "
-"new password."
+"Enter your email address below and we will send you instructions to create a"
+" new password."
 
 #: templates/public/auth/password_reset_form.html:23
 msgid "Réinitialiser"
@@ -2248,13 +2216,11 @@ msgstr "Breadcrumb"
 #, python-format
 msgid ""
 "\n"
-"      Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="
-"\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
+"      Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href=\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
 "      "
 msgstr ""
 "\n"
-"You are on Érudit's new platform. Enjoy! <a href=\"%(fallback_url)s\" target="
-"\"_blank\">Switch to classic view</a>"
+"You are on Érudit's new platform. Enjoy! <a href=\"%(fallback_url)s\" target=\"_blank\">Switch to classic view</a>"
 
 #: templates/public/base.html:206
 msgid "Abonnez-vous à notre infolettre&nbsp;:"
@@ -2320,21 +2286,13 @@ msgstr ""
 #: templates/public/citations/list.html:27
 msgid ""
 "\n"
-"          <p>Cette page présente les notices des documents que vous avez "
-"sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span "
-"class=\"ion-bookmark toolbox-save\"></span>.</p>\n"
-"          <p>Il est possible d’exporter la liste des notices sauvegardées "
-"dans différents formats de citation (EndNote, Zotero, Papers, Reference "
-"Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;"
-"<span class=\"ion-quote toolbox-cite\"></span>.</p>\n"
+"          <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span class=\"ion-bookmark toolbox-save\"></span>.</p>\n"
+"          <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<span class=\"ion-quote toolbox-cite\"></span>.</p>\n"
 "          "
 msgstr ""
 "\n"
-"This page lists the records of documents you have saved using the <span "
-"class=\"ion-bookmark toolbox-save\"></span> icon.</p>\n"
-"<p>You may export the list of saved records in various citation formats "
-"(EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef, and "
-"Mendeley) using the <span class=\"ion-quote toolbox-cite\"></span> icon."
+"This page lists the records of documents you have saved using the <span class=\"ion-bookmark toolbox-save\"></span> icon.</p>\n"
+"<p>You may export the list of saved records in various citation formats (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef, and Mendeley) using the <span class=\"ion-quote toolbox-cite\"></span> icon."
 
 #: templates/public/citations/list.html:34
 msgid "Contenu"
@@ -2487,7 +2445,7 @@ msgid ""
 "Explorez plus de 200&nbsp;000 publications savantes et culturelles en "
 "sciences humaines et sociales."
 msgstr ""
-"Explore more than 200,000 scholarly and cultural journals in the social "
+"Explore more than 200,000 scholarly and cultural publications in the social "
 "sciences and humanities."
 
 #: templates/public/home.html:74
@@ -2609,7 +2567,8 @@ msgstr "and"
 msgid ""
 "La diffusion de cet article sur Érudit n'a pas été autorisée par l'auteur."
 msgstr ""
-"Dissemination of this article on Érudit has not been permitted by the author."
+"Dissemination of this article on Érudit has not been permitted by the "
+"author."
 
 #: templates/public/journal/article_pdf_coverpage.html:186
 #, python-format
@@ -2651,19 +2610,12 @@ msgstr "Article abstract"
 #: templates/public/journal/article_pdf_coverpage.html:257
 msgid ""
 "\n"
-"            Ce document est protégé par la loi sur le droit d'auteur. "
-"L'utilisation des services d'Érudit (y compris la\n"
-"            reproduction) est assujettie à sa politique d'utilisation que "
-"vous pouvez consulter en ligne. [<a href=\"https://apropos.erudit.org/fr/"
-"usagers/politique-dutilisation/\">https://apropos.erudit.org/fr/usagers/"
-"politique-dutilisation/</a>]\n"
+"            Ce document est protégé par la loi sur le droit d'auteur. L'utilisation des services d'Érudit (y compris la\n"
+"            reproduction) est assujettie à sa politique d'utilisation que vous pouvez consulter en ligne. [<a href=\"https://apropos.erudit.org/fr/usagers/politique-dutilisation/\">https://apropos.erudit.org/fr/usagers/politique-dutilisation/</a>]\n"
 "          "
 msgstr ""
 "\n"
-"This document is protected by copyright law. Use of the services of Érudit "
-"(including reproduction) is subject to its terms and conditions, which can "
-"be viewed online. [<a href=\"https://apropos.erudit.org/en/users/policy-on-"
-"use/\">https://apropos.erudit.org/en/users/policy-on-use/</a>]"
+"This document is protected by copyright law. Use of the services of Érudit (including reproduction) is subject to its terms and conditions, which can be viewed online. [<a href=\"https://apropos.erudit.org/en/users/policy-on-use/\">https://apropos.erudit.org/en/users/policy-on-use/</a>]"
 
 #: templates/public/journal/article_pdf_coverpage.html:271
 msgid "Cet article est diffusé et préservé par Érudit."
@@ -2672,18 +2624,13 @@ msgstr "This article is disseminated and preserved by Érudit."
 #: templates/public/journal/article_pdf_coverpage.html:273
 msgid ""
 "\n"
-"            Érudit est un consortium interuniversitaire sans but lucratif "
-"composé de l’Université de\n"
-"            Montréal, l’Université Laval et l’Université du Québec à "
-"Montréal. Il a pour mission la\n"
-"            promotion et la valorisation de la recherche. <a href=\"http://"
-"www.erudit.org\">www.erudit.org</a>\n"
+"            Érudit est un consortium interuniversitaire sans but lucratif composé de l’Université de\n"
+"            Montréal, l’Université Laval et l’Université du Québec à Montréal. Il a pour mission la\n"
+"            promotion et la valorisation de la recherche. <a href=\"http://www.erudit.org\">www.erudit.org</a>\n"
 "          "
 msgstr ""
 "\n"
-"Érudit is a non-profit inter-university consortium of the Université de "
-"Montréal, Université Laval, and the Université du Québec à Montréal. Its "
-"mission is to promote and disseminate research. <a\n"
+"Érudit is a non-profit inter-university consortium of the Université de Montréal, Université Laval, and the Université du Québec à Montréal. Its mission is to promote and disseminate research. <a\n"
 "<href=\"http://www.erudit.org\">www.erudit.org</a>"
 
 #: templates/public/journal/article_summary.html:6
@@ -2698,8 +2645,8 @@ msgstr "Bibliographic record"
 #: templates/public/journal/issue_detail.html:8
 #, python-format
 msgid ""
-"Consultez le sommaire de ce numéro de la revue %(journal)s sur la plateforme "
-"Érudit."
+"Consultez le sommaire de ce numéro de la revue %(journal)s sur la plateforme"
+" Érudit."
 msgstr "Read this issue of the journal %(journal)s on Érudit."
 
 #: templates/public/journal/issue_detail.html:8
@@ -2724,7 +2671,8 @@ msgstr "articles"
 
 #: templates/public/journal/issue_detail.html:109
 msgid ""
-"La lecture de ces articles nécessite la redirection vers le site de la revue."
+"La lecture de ces articles nécessite la redirection vers le site de la "
+"revue."
 msgstr "To read this article you will be redirected to the journal's website."
 
 #: templates/public/journal/issue_detail.html:184
@@ -2926,8 +2874,8 @@ msgid ""
 "L’accès aux numéros courants de cette revue nécessite un abonnement, tandis "
 "que l’ensemble de ses archives est disponible en libre accès."
 msgstr ""
-"Access to current issues of this journal requires a subscription, but all of "
-"its archived issues are available in open access. "
+"Access to current issues of this journal requires a subscription, but all of"
+" its archived issues are available in open access. "
 
 #: templates/public/journal/journal_base.html:135
 msgid ""
@@ -3030,12 +2978,13 @@ msgid ""
 "Les revues de la collection Persée redirigent vers la plateforme du "
 "partenaire."
 msgstr ""
-"Journals from the Persée collection are redirected to the partner's platform."
+"Journals from the Persée collection are redirected to the partner's "
+"platform."
 
 #: templates/public/journal/journal_list_per_disciplines.html:103
 msgid ""
-"Les revues de la collection NRC Research Press redirigent vers la plateforme "
-"du partenaire."
+"Les revues de la collection NRC Research Press redirigent vers la plateforme"
+" du partenaire."
 msgstr ""
 "Journals from the NRC Research Press collection are redirected to the "
 "partner's platform."
@@ -3051,37 +3000,13 @@ msgstr ""
 #: templates/public/journal/journal_list_per_names.html:60
 msgid ""
 "\n"
-"        <p>Découvrez la liste des revues savantes et culturelles diffusées "
-"par Érudit et ses partenaires (<a href=\"http://www.nrcresearchpress.com/\" "
-"title=\"Site de NRC Research Press\" target=\"_blank\">NRC Research Press</"
-"a>, <a href=\"http://www.persee.fr/\" title=\"Site de Persée\" target="
-"\"_blank\">Persée</a>, <a href=\"https://digitalscholarship.lib.unb.ca/\" "
-"title=\"Site de Centre for Digital Scholarship\" target=\"_blank\">Centre "
-"for Digital Scholarship</a>).</p>\n"
-"        <p>Les numéros courants sont disponibles en libre accès ou en accès "
-"restreint selon le modèle de diffusion de la revue. L’ensemble des archives "
-"est offert en libre accès (après la dernière année de publication pour les "
-"revues savantes et les trois dernières années de publications pour les "
-"revues culturelles). Pour plus d’informations à propos de nos collections, "
-"communiquez avec l’équipe d’Érudit à l’adresse <a href=\"mailto:info@erudit."
-"org?subject=Collections d’Érudit\">info@erudit.org</a>.</p>\n"
+"        <p>Découvrez la liste des revues savantes et culturelles diffusées par Érudit et ses partenaires (<a href=\"http://www.nrcresearchpress.com/\" title=\"Site de NRC Research Press\" target=\"_blank\">NRC Research Press</a>, <a href=\"http://www.persee.fr/\" title=\"Site de Persée\" target=\"_blank\">Persée</a>, <a href=\"https://digitalscholarship.lib.unb.ca/\" title=\"Site de Centre for Digital Scholarship\" target=\"_blank\">Centre for Digital Scholarship</a>).</p>\n"
+"        <p>Les numéros courants sont disponibles en libre accès ou en accès restreint selon le modèle de diffusion de la revue. L’ensemble des archives est offert en libre accès (après la dernière année de publication pour les revues savantes et les trois dernières années de publications pour les revues culturelles). Pour plus d’informations à propos de nos collections, communiquez avec l’équipe d’Érudit à l’adresse <a href=\"mailto:info@erudit.org?subject=Collections d’Érudit\">info@erudit.org</a>.</p>\n"
 "        "
 msgstr ""
 "\n"
-"        <p>Discover the list of scholarly and cultural journals disseminated "
-"by Érudit and its partners (<a href=\"http://www.nrcresearchpress.com/\" "
-"title=\"NRC Research Press' website\" target=\"_blank\">NRC Research Press</"
-"a>, <a href=\"http://www.persee.fr/\" title=\"Persée's website\" target="
-"\"_blank\">Persée</a>, <a href=\"https://digitalscholarship.lib.unb.ca/\" "
-"title=\"Centre for Digital Scholarship Site\" target=\"_blank\">Centre for "
-"Digital Scholarship</a>).</p>\n"
-"        <p>Current issues are available in open access or restricted access "
-"depending on the journal's dissemination model. The entire archive is "
-"available in open access (following the last year of publication for "
-"scholarly journals and the last three years of publication for cultural "
-"journals). For more information about our collections, contact the Érudit "
-"team at <a href=\"mailto:info@erudit.org?subject=Érudit's collections"
-"\">info@erudit.org</a>.</p>\n"
+"        <p>Discover the list of scholarly and cultural journals disseminated by Érudit and its partners (<a href=\"http://www.nrcresearchpress.com/\" title=\"NRC Research Press' website\" target=\"_blank\">NRC Research Press</a>, <a href=\"http://www.persee.fr/\" title=\"Persée's website\" target=\"_blank\">Persée</a>, <a href=\"https://digitalscholarship.lib.unb.ca/\" title=\"Centre for Digital Scholarship Site\" target=\"_blank\">Centre for Digital Scholarship</a>).</p>\n"
+"        <p>Current issues are available in open access or restricted access depending on the journal's dissemination model. The entire archive is available in open access (following the last year of publication for scholarly journals and the last three years of publication for cultural journals). For more information about our collections, contact the Érudit team at <a href=\"mailto:info@erudit.org?subject=Érudit's collections\">info@erudit.org</a>.</p>\n"
 "        "
 
 #: templates/public/journal/journal_list_per_names.html:74
@@ -3196,14 +3121,11 @@ msgstr "Search in Érudit's corpus using boolean operators and filters. "
 #: templates/public/search/advanced_search.html:23
 msgid ""
 "\n"
-"            <p>Affinez votre recherche dans le corpus de documents offerts "
-"sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres "
-"disponibles.</p>\n"
+"            <p>Affinez votre recherche dans le corpus de documents offerts sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres disponibles.</p>\n"
 "            "
 msgstr ""
 "\n"
-"<p>Refine your search in the corpus of documents provided on Érudit by "
-"indicating various keywords and selecting available filters.</p>\n"
+"<p>Refine your search in the corpus of documents provided on Érudit by indicating various keywords and selecting available filters.</p>\n"
 "            "
 
 #: templates/public/search/advanced_search.html:36
@@ -3295,13 +3217,11 @@ msgstr "Save Results"
 #, python-format
 msgid ""
 "\n"
-"          <p>Voir mon <a href=\"%(advanced_search)s#search-history"
-"\"><strong>historique</strong></a></p>\n"
+"          <p>Voir mon <a href=\"%(advanced_search)s#search-history\"><strong>historique</strong></a></p>\n"
 "          "
 msgstr ""
 "\n"
-"<p>View my <a href=\"%(advanced_search)s#search-history\"><strong>search "
-"history</strong></a></p>\n"
+"<p>View my <a href=\"%(advanced_search)s#search-history\"><strong>search history</strong></a></p>\n"
 "\n"
 "          "
 
@@ -3366,8 +3286,8 @@ msgstr "%(collection)s's theses"
 #: templates/public/thesis/collection_home.html:6
 #, python-format
 msgid ""
-"Accédez aux thèses et mémoires du dépôt institutionnel de %(collection)s sur "
-"la plateforme Érudit."
+"Accédez aux thèses et mémoires du dépôt institutionnel de %(collection)s sur"
+" la plateforme Érudit."
 msgstr "Access %(collection)s's theses and dissertations on Érudit."
 
 #: templates/public/thesis/collection_home.html:79
@@ -3417,8 +3337,8 @@ msgstr "At a glance"
 #: templates/public/thesis/collection_list_per_author_name.html:6
 #, python-format
 msgid ""
-"Consultez les thèses et mémoires de %(collection)s par auteur commençant par "
-"%(letter)s sur la plateforme Érudit."
+"Consultez les thèses et mémoires de %(collection)s par auteur commençant par"
+" %(letter)s sur la plateforme Érudit."
 msgstr ""
 "Find %(collection)s's theses and dissertations on Érudit. Authors by name: "
 "%(letter)s. "
@@ -3463,27 +3383,14 @@ msgstr "Look up Canadian universities' theses and dissertations on Érudit."
 #, python-format
 msgid ""
 "\n"
-"          <p>Érudit offre un accès centralisé aux dépôts de thèses et "
-"mémoires de plusieurs universités canadiennes. La recherche peut être "
-"effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de "
-"ceux-ci à partir de l’<a href=\"%(advanced_search)s\">outil de recherche "
-"avancée</a>&nbsp;; la consultation du document nécessite cependant une "
-"redirection vers la plateforme de l’institution d’attache.</p>\n"
-"          <p>Érudit n’est pas responsable des documents diffusés dans cette "
-"zone. En cas de besoin, veuillez communiquer directement avec la personne en "
-"charge du dépôt.</p>\n"
+"          <p>Érudit offre un accès centralisé aux dépôts de thèses et mémoires de plusieurs universités canadiennes. La recherche peut être effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de ceux-ci à partir de l’<a href=\"%(advanced_search)s\">outil de recherche avancée</a>&nbsp;; la consultation du document nécessite cependant une redirection vers la plateforme de l’institution d’attache.</p>\n"
+"          <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt.</p>\n"
 "          "
 msgstr ""
 "\n"
-"<p>Érudit provides centralized access to the thesis and dissertation "
-"repositories of several Canadian universities. Searches can be done on "
-"Érudit within each repository or for all repositories using the <a href="
-"\"%(advanced_search)s\">advanced search tool</a>; however, to consult the "
-"document, you will be redirected to that institution's platform.</ p>\n"
+"<p>Érudit provides centralized access to the thesis and dissertation repositories of several Canadian universities. Searches can be done on Érudit within each repository or for all repositories using the <a href=\"%(advanced_search)s\">advanced search tool</a>; however, to consult the document, you will be redirected to that institution's platform.</ p>\n"
 "\n"
-"<p>Érudit is not responsible for documents available in this zone. If "
-"necessary, please communicate directly with the person in charge of the "
-"repository.</p>"
+"<p>Érudit is not responsible for documents available in this zone. If necessary, please communicate directly with the person in charge of the repository.</p>"
 
 #: templates/public/thesis/home.html:64
 msgid "Par dépôt institutionnel"
@@ -3568,10 +3475,10 @@ msgstr "Add access"
 #: templates/userspace/library/authorization/authorization_create.html:17
 #, python-format
 msgid ""
-"Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : "
-"<strong>%(authorization_label)s</strong>"
+"Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante :"
+" <strong>%(authorization_label)s</strong>"
 msgstr ""
-"Please select the user to whom you wish to add the following permission: "
+"Please select the user for whom you wish to add the following permission: "
 "<strong>%(authorization_label)s</strong>"
 
 #: templates/userspace/journal/authorization/authorization_create.html:40
@@ -3595,7 +3502,7 @@ msgstr "Add"
 #: templates/userspace/library/authorization/authorization_user.html:26
 #: templates/userspace/library/authorization/authorization_user.html:27
 msgid "supprimer"
-msgstr "Delete"
+msgstr "delete"
 
 #: templates/userspace/journal/editor/base.html:4
 msgid "Espace éditeurs"
@@ -3632,11 +3539,11 @@ msgstr "Delete files"
 #: templates/userspace/journal/editor/delete.html:21
 #, python-format
 msgid ""
-"Vous allez supprimer l'ensemble des fichiers téléchargés dans le dossier <em>"
-"%(object)s</em>. Voulez-vous poursuivre ? "
+"Vous allez supprimer l'ensemble des fichiers téléchargés dans le dossier "
+"<em>%(object)s</em>. Voulez-vous poursuivre ? "
 msgstr ""
-"You are about to delete all the files downloaded to the folder: <em>"
-"%(object)s</em>. Do you wish to continue?"
+"You are about to delete all the files downloaded to the folder: "
+"<em>%(object)s</em>. Do you wish to continue?"
 
 #: templates/userspace/journal/editor/detail.html:18
 msgid "Modifier"
@@ -3780,8 +3687,8 @@ msgstr "Final file submission"
 
 #: templates/userspace/journal/editor/issuesubmission_submit.html:25
 msgid ""
-"Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas "
-"envoyés à l'équipe de production:"
+"Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas"
+" envoyés à l'équipe de production:"
 msgstr ""
 "The following files have not been uploaded completely and will not be sent "
 "to the production team."
@@ -3828,11 +3735,11 @@ msgstr "Individual subscriptions"
 #: templates/userspace/journal/subscription/individualsubscription_cancel.html:21
 #, python-format
 msgid ""
-"Voulez-vous annuler la proposition d'abonnement envoyée à <strong>%(email)s</"
-"strong> ?"
+"Voulez-vous annuler la proposition d'abonnement envoyée à "
+"<strong>%(email)s</strong> ?"
 msgstr ""
-"Do you wish to cancel the subscription offer sent to <strong>%(email)s</"
-"strong>?"
+"Do you wish to cancel the subscription offer sent to "
+"<strong>%(email)s</strong>?"
 
 #: templates/userspace/journal/subscription/individualsubscription_create.html:14
 #: templates/userspace/journal/subscription/individualsubscription_create.html:21
@@ -3893,11 +3800,11 @@ msgstr "Members"
 #: templates/userspace/library/members/member_cancel.html:21
 #, python-format
 msgid ""
-"Voulez-vous annuler la demande d'ajout de membre envoyée à <strong>"
-"%(email)s</strong> ?"
+"Voulez-vous annuler la demande d'ajout de membre envoyée à "
+"<strong>%(email)s</strong> ?"
 msgstr ""
-"Do you wish to cancel the request to add a member with the address <strong>"
-"%(email)s</strong>?"
+"Do you wish to cancel the request to add a member with the address "
+"<strong>%(email)s</strong>?"
 
 #: templates/userspace/library/members/member_create.html:5
 #: templates/userspace/library/members/member_create.html:16
@@ -3914,7 +3821,8 @@ msgstr "Confirm deletion of the member?"
 #: templates/userspace/library/members/member_delete.html:21
 #, python-format
 msgid "Voulez-vous supprimer <strong>%(name)s</strong> de l'organisation ?"
-msgstr "Do you wish to remove <strong>%(name)s</strong> from the organization?"
+msgstr ""
+"Do you wish to remove <strong>%(name)s</strong> from the organization?"
 
 #: templates/userspace/library/members/member_list.html:19
 msgid "Ajouter un membre"
