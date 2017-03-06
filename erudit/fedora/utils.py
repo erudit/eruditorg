@@ -1,6 +1,7 @@
 import logging
 import lxml.etree as et
 
+from erudit.models import Issue
 from eulfedora.util import RequestFailed
 from .repository import rest_api
 from .repository import api
@@ -65,3 +66,23 @@ def is_issue_published_in_fedora(issue_pid, journal=None, journal_pid=None):
             if issue_node.get('pid') == issue_pid:
                 return True
     return False
+
+
+def get_unimported_issues_pids(include_unpublished_issues=False):
+    issue_fedora_query = "pid~erudit:erudit.*.* label='Publication Erudit'"
+    issue_pids = get_pids(issue_fedora_query)
+
+    missing_issues = []
+    for issue_pid in issue_pids:
+        pid_parts = issue_pid.split('.')
+        issue_localidentifier = pid_parts[-1]
+
+        journal_pid = ".".join(pid_parts[:len(pid_parts) - 1])
+        try:
+            Issue.objects.get(localidentifier=issue_localidentifier)
+        except Issue.DoesNotExist:
+            is_published = is_issue_published_in_fedora(issue_pid, journal_pid=journal_pid)
+            if is_published or (not is_issue_published_in_fedora and include_unpublished_issues):  # noqa
+                missing_issues.append(issue_pid)
+                logger.info({'pid': issue_pid, 'published_in_fedora': is_published})
+    return missing_issues
