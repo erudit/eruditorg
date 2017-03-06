@@ -74,7 +74,7 @@
               &nbsp;
               <select id="sort_by" onChange="window.location.href=this.value">
                 {% for sort_option in available_tris.items %}
-                <option value="?sort_by={{ sort_option.0}}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
+                <option value="?sort_by={{ sort_option.0 }}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -86,7 +86,7 @@
           <li class="thesis row">
             <div class="col-xs-11">
               <div class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</div>
-              <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.title }}</a>
+              <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
               {% if thesis.description or thesis.keywords.all %}
               <div class="thesis-description">
                 {% if thesis.description %}
@@ -124,7 +124,7 @@
           </dl>
         </div>
         <div class="sidebar-block">
-          <h3>{% trans "En un coup d'oeil" %}</h3>
+          <h3>{% trans "En un coup d’œil" %}</h3>
           <ul class="random-theses">
             {% for thesis in random_theses %}
             <li>
