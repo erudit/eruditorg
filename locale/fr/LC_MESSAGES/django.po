@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-06 09:50-0500\n"
+"POT-Creation-Date: 2017-03-06 13:47-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1268,7 +1268,7 @@ msgstr ""
 
 #: eruditorg/core/authorization/defaults.py:43
 #: eruditorg/templates/public/base.html:217
-#: eruditorg/templates/public/journal/journal_detail.html:141
+#: eruditorg/templates/public/journal/journal_detail.html:170
 #: eruditorg/templates/userspace/journal/home.html:54
 #: eruditorg/templates/userspace/journal/partials/menu.html:50
 #: eruditorg/templates/userspace/journal/subscription/base.html:4
@@ -2186,7 +2186,7 @@ msgstr ""
 
 #: eruditorg/templates/public/base.html:98
 #: eruditorg/templates/public/base.html:216
-#: eruditorg/templates/public/journal/journal_detail.html:105
+#: eruditorg/templates/public/journal/journal_detail.html:134
 #: eruditorg/templates/userspace/journal/home.html:19
 #: eruditorg/templates/userspace/journal/information/journalinformation_update.html:5
 #: eruditorg/templates/userspace/journal/information/journalinformation_update.html:13
@@ -2245,7 +2245,7 @@ msgid ""
 msgstr ""
 
 #: eruditorg/templates/public/base.html:187
-#: eruditorg/templates/public/journal/journal_detail.html:211
+#: eruditorg/templates/public/journal/journal_detail.html:242
 #: eruditorg/templates/public/journal/journal_list_per_disciplines.html:86
 msgid "Retourner en haut"
 msgstr ""
@@ -2420,8 +2420,8 @@ msgid "Sélectionner"
 msgstr ""
 
 #: eruditorg/templates/public/citations/list.html:130
-#: eruditorg/templates/public/journal/journal_detail.html:78
-#: eruditorg/templates/public/journal/journal_detail.html:86
+#: eruditorg/templates/public/journal/journal_detail.html:80
+#: eruditorg/templates/public/journal/journal_detail.html:88
 #: eruditorg/templates/public/journal/journal_list_per_names.html:159
 #: eruditorg/templates/public/journal/journal_list_per_names.html:162
 msgid "&nbsp;:"
@@ -2727,27 +2727,40 @@ msgid ""
 "La lecture de ces articles nécessite la redirection vers le site de la revue."
 msgstr ""
 
-#: eruditorg/templates/public/journal/issue_detail.html:191
+#: eruditorg/templates/public/journal/issue_detail.html:192
 #: eruditorg/templates/public/search/results.html:242
 msgid "Consulter la revue"
 msgstr ""
 
-#: eruditorg/templates/public/journal/issue_detail.html:195
+#: eruditorg/templates/public/journal/issue_detail.html:196
 msgid "Couverture de"
 msgstr ""
 
-#: eruditorg/templates/public/journal/issue_detail.html:207
+#: eruditorg/templates/public/journal/issue_detail.html:201
+#: eruditorg/templates/public/journal/journal_base.html:39
+#: eruditorg/templates/public/journal/journal_detail.html:120
+#: eruditorg/templates/public/journal/journal_detail.html:216
+msgid "Historique de la revue"
+msgstr ""
+
+#: eruditorg/templates/public/journal/issue_detail.html:202
+#: eruditorg/templates/public/journal/journal_base.html:40
+#: eruditorg/templates/public/journal/journal_detail.html:121
+msgid "Voir tous les numéros"
+msgstr ""
+
+#: eruditorg/templates/public/journal/issue_detail.html:214
 msgid "Anciens numéros de"
 msgstr ""
 
-#: eruditorg/templates/public/journal/issue_detail.html:209
-#: eruditorg/templates/public/journal/journal_detail.html:185
+#: eruditorg/templates/public/journal/issue_detail.html:216
+#: eruditorg/templates/public/journal/journal_detail.html:216
 msgid "numéros"
 msgstr ""
 
 #: eruditorg/templates/public/journal/journal_authors_list.html:6
 #: eruditorg/templates/public/journal/journal_authors_list.html:60
-#: eruditorg/templates/public/journal/journal_base.html:72
+#: eruditorg/templates/public/journal/journal_base.html:69
 msgid "Index des auteurs"
 msgstr ""
 
@@ -2806,32 +2819,25 @@ msgid "&nbsp;&raquo;"
 msgstr ""
 
 #: eruditorg/templates/public/journal/journal_base.html:22
+#: eruditorg/templates/public/journal/journal_detail.html:101
 msgid "Dernier numéro"
 msgstr ""
 
 #: eruditorg/templates/public/journal/journal_base.html:22
+#: eruditorg/templates/public/journal/journal_base.html:73
 msgid "Fil RSS"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_base.html:43
-#: eruditorg/templates/public/journal/journal_detail.html:185
-msgid "Historique de la revue"
-msgstr ""
-
-#: eruditorg/templates/public/journal/journal_base.html:44
-msgid "Voir tous les numéros"
-msgstr ""
-
-#: eruditorg/templates/public/journal/journal_base.html:50
+#: eruditorg/templates/public/journal/journal_base.html:47
 msgid "Rechercher dans la revue"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_base.html:66
+#: eruditorg/templates/public/journal/journal_base.html:63
 #: eruditorg/templates/public/thesis/collection_list_base.html:119
 msgid "Fiche"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_base.html:68
+#: eruditorg/templates/public/journal/journal_base.html:65
 msgid "Accès éditeur"
 msgstr ""
 
@@ -2901,7 +2907,7 @@ msgid "Disponible en libre accès"
 msgstr ""
 
 #: eruditorg/templates/public/journal/journal_base.html:144
-#: eruditorg/templates/public/journal/journal_detail.html:67
+#: eruditorg/templates/public/journal/journal_detail.html:69
 msgid ""
 "Les numéros courants et les archives de cette revue sont disponibles en "
 "libre accès."
@@ -2946,35 +2952,35 @@ msgstr ""
 msgid "%(journal_about)s"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:75
+#: eruditorg/templates/public/journal/journal_detail.html:77
 msgid "Revue précédée de"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:83
+#: eruditorg/templates/public/journal/journal_detail.html:85
 msgid "Revue suivie de"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:101
+#: eruditorg/templates/public/journal/journal_detail.html:130
 #: eruditorg/templates/userspace/journal/home.html:14
 msgid "Aucune information"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:117
+#: eruditorg/templates/public/journal/journal_detail.html:146
 #: eruditorg/templates/userspace/journal/home.html:30
 msgid "Coordonnées"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:129
+#: eruditorg/templates/public/journal/journal_detail.html:158
 #: eruditorg/templates/userspace/journal/home.html:42
 msgid "Politique éditoriale"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:153
+#: eruditorg/templates/public/journal/journal_detail.html:182
 #: eruditorg/templates/userspace/journal/home.html:66
 msgid "Équipe"
 msgstr ""
 
-#: eruditorg/templates/public/journal/journal_detail.html:165
+#: eruditorg/templates/public/journal/journal_detail.html:194
 #: eruditorg/templates/userspace/journal/home.html:78
 msgid "Partenaires"
 msgstr ""
