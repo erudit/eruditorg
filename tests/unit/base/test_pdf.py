@@ -2,15 +2,26 @@
 
 import io
 import os.path as op
+import pytest
 
 from django.http import HttpResponse
 from django.test.utils import override_settings
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.testcases import BaseEruditTestCase
+from erudit.fedora.modelmixins import FedoraMixin
 
 from base.pdf import generate_pdf
 
+
+def get_mocked_erudit_object():
+    m = unittest.mock.MagicMock()
+    m.get_formatted_title.return_value = "mocked title"
+    return m
+
+@pytest.fixture(autouse=True)
+def monkeypatch_get_erudit_article(monkeypatch):
+    monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
 
 @override_settings(DEBUG=True)
 class TestGeneratePdfTool(BaseEruditTestCase):
