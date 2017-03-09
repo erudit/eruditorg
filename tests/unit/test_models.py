@@ -13,7 +13,6 @@ from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
-from erudit.test.factories import ArticleTitleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
@@ -602,11 +601,6 @@ class TestArticle(BaseEruditTestCase):
         self.assertTrue(article_3.embargoed)
         self.assertFalse(article_4.embargoed)
         self.assertFalse(article_5.embargoed)
-
-    def test_can_return_its_title(self):
-        article = ArticleFactory()
-        article_title = ArticleTitleFactory(article=article)
-        assert article.title == article_title.title
 
 
 class TestAuthor(BaseEruditTestCase):

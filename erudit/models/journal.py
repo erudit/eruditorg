@@ -687,8 +687,11 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def title(self):
-        title = self.titles.filter(paral=False).first()
-        return str(title) if title else None
+        return self.erudit_object.get_formatted_title()
+
+    @property
+    def html_title(self):
+        return self.erudit_object.get_formatted_html_title()
 
     @cached_property
     def subtitle(self):
