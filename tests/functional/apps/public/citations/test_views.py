@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import json
+import mock
 
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
+from django.test.utils import override_settings
 from django.utils.encoding import force_text
 import pytest
 
@@ -21,12 +23,14 @@ from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import ThesisFactory
+from erudit.fedora.modelmixins import FedoraMixin
 
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
 
 
 class TestSavedCitationListView(EruditClientTestCase):
+
     @pytest.fixture(autouse=True)
     def setup(self):
         author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
@@ -51,9 +55,6 @@ class TestSavedCitationListView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        ArticleTitleFactory(title='Title A', article=self.article_1)
-        ArticleTitleFactory(title='Title B', article=self.article_2)
-        ArticleTitleFactory(title='Title C', article=self.article_3)
         self.article_1.authors.add(author_3)
         self.article_2.authors.add(author_4)
         self.article_3.authors.add(author_3)
@@ -64,8 +65,17 @@ class TestSavedCitationListView(EruditClientTestCase):
         clist.documents.add(self.article_2)
         clist.documents.add(self.article_3)
 
-    def test_embeds_the_count_of_scientific_articles_in_the_context(self):
+    def get_mocked_erudit_object(self):
+        m = mock.MagicMock()
+        m.get_formatted_title.return_value = "mocked title"
+        return m
+
+    @override_settings(DEBUG=True)
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_embeds_the_count_of_scientific_articles_in_the_context(self, mock_erudit_object):
+
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -74,8 +84,11 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert response.status_code == 200
         assert response.context['scientific_articles_count'] == 2
 
-    def test_embeds_the_count_of_cultural_articles_in_the_context(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_embeds_the_count_of_cultural_articles_in_the_context(self, mock_erudit_object):
+
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -84,8 +97,10 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert response.status_code == 200
         assert response.context['cultural_articles_count'] == 1
 
-    def test_embeds_the_count_of_theses_in_the_context(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_embeds_the_count_of_theses_in_the_context(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -94,8 +109,10 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert response.status_code == 200
         assert response.context['theses_count'] == 2
 
-    def test_can_sort_documents_by_ascending_title(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_sort_documents_by_ascending_title(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -105,8 +122,10 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert list(response.context['documents']) == [
             self.thesis_1, self.thesis_2, self.article_1, self.article_2, self.article_3, ]
 
-    def test_can_sort_documents_by_descending_title(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_sort_documents_by_descending_title(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -114,10 +133,12 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Check
         assert response.status_code == 200
         assert list(response.context['documents']) == [
-            self.article_3, self.article_2, self.article_1, self.thesis_2, self.thesis_1, ]
+            self.article_1, self.article_2, self.article_3, self.thesis_2, self.thesis_1, ]
 
-    def test_can_sort_documents_by_ascending_year(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_sort_documents_by_ascending_year(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -127,8 +148,10 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert list(response.context['documents']) == [
             self.thesis_2, self.article_1, self.article_2, self.article_3, self.thesis_1, ]
 
-    def test_can_sort_documents_by_descending_year(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_sort_documents_by_descending_year(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -138,8 +161,10 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert list(response.context['documents']) == [
             self.thesis_1, self.article_3, self.article_1, self.article_2, self.thesis_2, ]
 
-    def test_can_sort_documents_by_ascending_author_name(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_sort_documents_by_ascending_author_name(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run
@@ -149,8 +174,10 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert list(response.context['documents']) == [
             self.thesis_1, self.thesis_2, self.article_1, self.article_3, self.article_2, ]
 
-    def test_can_sort_documents_by_descending_author_name(self):
+    @mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_sort_documents_by_descending_author_name(self, mock_erudit_object):
         # Setup
+        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
         # Run

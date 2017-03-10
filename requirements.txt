@@ -1,6 +1,6 @@
 Django==1.10.4
-git+https://github.com/erudit/erudit-core.git@0.4.6#egg=erudit-core
-git+https://github.com/erudit/liberuditarticle.git@0.1.21-dev#egg=liberuditarticle
+git+https://github.com/erudit/erudit-core.git@0.4.7#egg=erudit-core
+git+https://github.com/erudit/liberuditarticle.git@0.1.21#egg=liberuditarticle
 git+https://github.com/erudit/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 git+https://github.com/erudit/django-account-actions.git@master#egg=django-account-actions
 git+https://github.com/erudit/eulxml@1.0.1-with-yacc-optimize#egg=eulxml

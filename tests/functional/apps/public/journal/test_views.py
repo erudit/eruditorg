@@ -44,9 +44,15 @@ from apps.public.journal.views import ArticleXmlView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
+def get_mocked_erudit_object():
+    m = unittest.mock.MagicMock()
+    m.get_formatted_title.return_value = "mocked title"
+    return m
+
 
 @pytest.mark.django_db
 class TestJournalListView(object):
+
     @pytest.fixture(autouse=True)
     def setup(self):
         self.client = Client()
@@ -247,6 +253,10 @@ class TestJournalDetailView(BaseEruditTestCase):
 @override_settings(DEBUG=True)
 class TestJournalAuthorsListView(BaseEruditTestCase):
 
+    @pytest.fixture(autouse=True)
+    def monkeypatch_get_erudit_article(self, monkeypatch):
+        monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
+
     def test_supports_authors_with_only_special_characters_in_their_name(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
@@ -348,7 +358,8 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
         assert len(authors_dicts) == 1
 
-    def test_can_filter_by_article_type_when_no_article_of_type(self):
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_can_filter_by_article_type_when_no_article_of_type(self, mock_erudit_object):
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
         article_1 = ArticleFactory.create( issue=issue_1, type='article')
         author_1 = AuthorFactory.create(lastname='atest')
@@ -497,6 +508,10 @@ class TestArticleDetailView(BaseEruditTestCase):
 
 @override_settings(DEBUG=True)
 class TestArticleRawPdfView(BaseEruditTestCase):
+    @pytest.fixture(autouse=True)
+    def monkeypatch_get_erudit_article(self, monkeypatch):
+        monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
+
     def setUp(self):
         super(TestArticleRawPdfView, self).setUp()
         self.factory = RequestFactory()

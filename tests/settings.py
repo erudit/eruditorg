@@ -4,6 +4,7 @@ import os
 
 from base.settings.base import *  # noqa
 
+DEBUG = True
 
 class DisableMigrations(object):
     def __contains__(self, item):

@@ -65,6 +65,7 @@ def get_mocked_erudit_object():
     m.abstracts = [{'lang': 'fr', 'content': 'This is a test'}]
     m.get_authors = lambda: [{'firstname': 'Test', 'lastname': 'Foobar'}]
     m.get_reviewed_works = lambda: []
+    m.get_formatted_title.return_value = "mocked title"
     return m
 
 
