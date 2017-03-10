@@ -218,7 +218,7 @@
                       {% endif %}
                       {% if document.real_object.reviewed_works %}
                       {% for reference in document.real_object.reviewed_works %}
-                      <br><span>{{ reference }}</span>
+                      <br><span>{{ reference|safe }}</span>
                       {% endfor %}
                       {% endif %}
                     </a>
