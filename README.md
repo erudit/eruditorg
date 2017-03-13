@@ -119,6 +119,11 @@ The developer VM provides two services: Fedora Commons and Solr.
 
 *TBD*
 
+# External dependencies
+
+* `qpdf` for PDF generation.
+
+
 # Documentation
 
 The project's documentation is built with [Sphinx](http://www.sphinx-doc.org/)

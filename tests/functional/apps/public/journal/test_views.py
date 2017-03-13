@@ -4,6 +4,7 @@ import datetime as dt
 import io
 import os
 import unittest.mock
+import subprocess
 
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
@@ -518,7 +519,8 @@ class TestArticleRawPdfView(BaseEruditTestCase):
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_ds, mock_pdf):
+    @unittest.mock.patch.object(subprocess, 'check_call')
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf):
         # Setup
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
@@ -731,47 +733,6 @@ class TestArticleXmlView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/xml')
-
-
-@override_settings(DEBUG=True)
-class TestArticleRawPdfFirstPageView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestArticleRawPdfFirstPageView, self).setUp()
-        self.factory = RequestFactory()
-
-    @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
-    @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
-    def test_can_retrieve_the_first_page_of_the_pdf_of_existing_articles(self, mock_ds, mock_pdf):
-        # Setup
-        with open(os.path.join(FIXTURE_ROOT, 'dummy-multipages.pdf'), 'rb') as f:
-            mock_pdf.content = io.BytesIO()
-            mock_pdf.content.write(f.read())
-        mock_ds = ['ERUDITXSD300', ]  # noqa
-
-        issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=1000))
-        article = ArticleFactory.create(issue=issue)
-        journal_id = self.journal.localidentifier
-        issue_id = issue.localidentifier
-        article_id = article.localidentifier
-        url = reverse('public:journal:article_raw_pdf_firstpage', args=(
-            journal_id, issue.volume_slug, issue_id, article_id
-        ))
-        request = self.factory.get(url)
-        request.user = AnonymousUser()
-
-        # Run
-        response = ArticleRawPdfFirstPageView.as_view()(
-            request, journal_code=journal_id, issue_slug=issue.volume_slug,
-            issue_localid=issue_id, localid=article_id)
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'application/pdf')
-        raw_pdf = io.BytesIO()
-        raw_pdf.write(response.content)
-        pdf = PdfFileReader(raw_pdf)
-        self.assertEqual(pdf.numPages, 1)
 
 
 class TestArticleMediaView(BaseEruditTestCase):
