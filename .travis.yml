@@ -1,5 +1,6 @@
 language: python
-sudo: false
+before_install:
+  - sudo apt-get install -y qpdf
 python:
   - "3.5"
 install:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from collections import OrderedDict
 from functools import reduce
 from itertools import groupby
@@ -20,9 +19,6 @@ from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from eruditarticle.objects import EruditArticle
-from PyPDF2 import PdfFileMerger
-from PyPDF2 import PdfFileReader
-from PyPDF2 import PdfFileWriter
 from rules.contrib.views import PermissionRequiredMixin
 
 from erudit.fedora.objects import ArticleDigitalObject
@@ -36,7 +32,7 @@ from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
 
-from base.pdf import generate_pdf
+from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.metrics.metric import metric
@@ -613,12 +609,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
             context=RequestContext(self.request).update(coverpage_context),
             base_url=self.request.build_absolute_uri('/'))
 
-        # Merges the cover page and the full article
-        merger = PdfFileMerger(strict=False)
-        merger.append(coverpage, import_bookmarks=False)
-        merger.append(content, import_bookmarks=False)
-        merger.write(response)
-        merger.close()
+        response.content = add_coverpage_to_pdf(coverpage, content)
 
     def get_response_object(self, fedora_object):
         response = super(ArticleFormatDownloadView, self).get_response_object(fedora_object)
@@ -660,10 +651,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
         return obj.publication_allowed_by_authors
 
     def write_datastream_content(self, response, content):
-        pdf_in = PdfFileReader(content)
-        output = PdfFileWriter()
-        output.addPage(pdf_in.getPage(0))
-        output.write(response)
+        response.content = get_pdf_first_page(content)
 
 
 class ArticleMediaView(CacheMixin, SingleArticleMixin, FedoraFileDatastreamView):
