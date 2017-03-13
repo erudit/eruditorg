@@ -3,13 +3,13 @@
 
 {% block content %}
   {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
-  {% blocktrans %}
+  {% blocktrans with fullname=issue.contact.get_full_name journal=issue.journal domain=site.domain %}
   <p>Bonjour,</p>
 
-  <p>{{ issue.contact.get_full_name() }} de la revue {{ issue.journal }} a transmis des fichiers de production du {{ issue }}.</p>
+  <p>{{ fullname}} de la revue {{ journal }} a transmis des fichiers de production du {{ issue }}.</p>
 
   <p>
-    <a href="http://{{ site.domain }}{{ issue_url }}">
+    <a href="https://{{ domain }}{{ issue_url }}">
       Consulter la demande
     </a>
   </p>

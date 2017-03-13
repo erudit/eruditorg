@@ -6,6 +6,7 @@
   {% blocktrans %}
   <p>Bonjour,</p>
 
+
   <p>Voici les modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
   {% endblocktrans %}
   {% if comment %}
@@ -14,9 +15,9 @@
   {{ comment }}
   {% endblocktrans %}
   {% endif %}
-  {% blocktrans %}
+  {% blocktrans with domain=site.domain %}
   <p>
-    <a href="http://{{ site.domain }}{{ issue_url }}">
+    <a href="https://{{ domain }}{{ issue_url }}">
       Modifier le dépôt du numéro
     </a>
   </p>
