@@ -2,33 +2,50 @@
  * Pagination arrows for previous / next articles
  */
 
-#article_detail .pagination-arrow {
-  position: absolute;
-  font-size: 40px;
-  color: $dark-grey;
-  transform: translate(0, -50%);
-  @include border-radius(50%);
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  margin-top: 30vh;
+#article_detail .pagination-arrows {
+  z-index: 3;
+  position: fixed;
 
-  [data-hint] {
-    width: 100%;
-  }
 
-  &.next-page {
-    right: 5px;
-  }
+  .pagination-arrow {
+    z-index: 5;
+    position: absolute;
+    font-size: 40px;
+    transform: translate(0, -50%);
+    @include border-radius(50%);
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    top: 25vh;
 
-  &.previous-page {
-    left: 5px;
-  }
+    [data-hint] {
+      width: 100%;
+    }
 
-  &:hover, &:active, &:active:focus {
-    color: $white;
-    background-color: $coral-red;
+    &.next-page {
+      padding-left: 5px;
+
+      @media (min-width: $screen-md-min) {
+        right: -982px;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        right: -1187px;
+      }
+
+    }
+
+    &.previous-page {
+      padding-right: 5px;
+      left: -45px;
+    }
+
+    &:hover, &:active, &:active:focus {
+      color: $white;
+      background-color: #000;
+    }
+
   }
 
 }
