@@ -4,6 +4,13 @@
 {% load rules %}
 {% load base_urls_tags %}
 
+{% block hreflang %}
+  {% for language in LANGUAGES %}
+    {% get_language_info for language.0 as lang %}
+    <link rel="alternate" href="https://{{ request.META.HTTP_HOST }}{% trans_current_url language.0 %}" hreflang="{{ lang.code }}" />
+  {% endfor %}
+{% endblock hreflang %}
+
 {% block structured_data %}
 <script type="application/ld+json">
 {
