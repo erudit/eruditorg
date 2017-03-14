@@ -3,6 +3,16 @@
 {% load public_journal_tags %}
 {% load cache %}
 
+{% block link_rel_tags %}
+  {% if previous_article %}
+    <link rel="prev" href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}">
+  {% endif %}
+  {% if next_article %}
+    <link rel="next" href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}">
+  {% endif %}
+  {{ block.super }}
+{% endblock link_rel_tags %}
+
 {% block structured_data %}
 {{ block.super }}
 {% cache FOREVER_TTL "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
