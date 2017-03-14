@@ -65,6 +65,9 @@ class ArticleDetailRedirectView(RedirectExceptionsToFallbackWebsiteMixin, Redire
         if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'xml':
             self.pattern_name = 'public:journal:article_raw_xml'
 
+        if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'pdf':
+            self.pattern_name = 'public:journal:article_raw_pdf'
+
         if 'journal_code' in kwargs and 'issue_localid' in kwargs and 'localid' in kwargs:
             article = get_object_or_404(
                 Article.objects.select_related('issue', 'issue__journal'),
