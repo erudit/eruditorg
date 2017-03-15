@@ -127,7 +127,7 @@
             {% if journal.provided_by_fedora %}
             <div class="row">
               <div class="col-xs-4 pull-right">
-                <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{{ journal.name }}" class="img-responsive" />
+                <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive" />
               </div>
             </div>
             {% endif %}
