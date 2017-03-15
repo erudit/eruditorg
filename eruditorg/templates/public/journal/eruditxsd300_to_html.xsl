@@ -618,7 +618,7 @@
   <!-- themes -->
   <xsl:template match="admin/numero/grtheme/theme" mode="refpapier">
     <span class="{name()}">
-      <xsl:apply-templates select="."/>
+      <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}"><xsl:apply-templates select="."/></a>
     </span>
   </xsl:template>
 
