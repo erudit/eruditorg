@@ -56,12 +56,12 @@
         </div>
         <div class="row">
           <nav class="col-xs-12 index">
-            <ul>
+            <ul class="discipline-nav">
               {% for objects_group in sorted_objects %}
                 {% if not objects_group.key %}
                   <li><a href="#section-void">{% trans "Autres" %}</a></li>
                 {% else %}
-                  <li><a href="#{{ objects_group.key }}">{{ objects_group.name }} ({{ objects_group|length }})</a></li>
+                  <li><a href="#{{ objects_group.key }}">{{ objects_group.name }}</a></li>
                 {% endif %}
               {% endfor %}
             <ul>

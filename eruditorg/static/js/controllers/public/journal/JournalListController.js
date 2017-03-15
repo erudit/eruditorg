@@ -13,7 +13,7 @@ export default {
       $('html, body').animate( { scrollTop: $('a[name="'+target+'"]').offset().top - 137 }, 750);
       return false;
     });
-    $('#journal_list_per_disciplines .alpha-nav').on('click', 'a', function(e) {
+    $('#journal_list_per_disciplines .discipline-nav').on('click', 'a', function(e) {
       e.preventDefault();
       e.stopPropagation();
       var target = $(this).attr('href').replace('#', '');
