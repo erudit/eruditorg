@@ -627,7 +627,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
 
 class TestArticleRedirections(BaseEruditTestCase):
 
-    def test_nonexistent_journals_redirects_to_fallback_website(self):
+    def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self):
         fallback_url = settings.FALLBACK_BASE_URL
         patterns_to_test = [
             'legacy_journal_detail', 'legacy_journal_detail_index',
@@ -636,10 +636,10 @@ class TestArticleRedirections(BaseEruditTestCase):
         ]
 
         for pattern in patterns_to_test:
-            url = reverse('public:journal:{}'.format(pattern), kwargs={'code': 'nonexistent'})
+            url = reverse('journal_compat:{}'.format(pattern), kwargs={'code': 'nonexistent'})
 
-            response = self.client.get(url, follow=True)
-            redirect_url = response.redirect_chain[0][0]
+            response = self.client.get(url)
+            redirect_url = response.url
             assert fallback_url in redirect_url
 
     def test_nonexistent_issue_redirects_to_fallback_website(self):
@@ -653,26 +653,26 @@ class TestArticleRedirections(BaseEruditTestCase):
         }
 
         urls_to_test = [
-            reverse('public:journal:legacy_issue_detail', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_index', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_index', kwargs=kwargs),
         ]
 
         kwargs.pop('n')
         urls_to_test.extend([
-            reverse('public:journal:legacy_issue_detail_no_number', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_index_no_number', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_no_number', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_index_no_number', kwargs=kwargs),
         ])
 
         kwargs['localidentifier'] = 'nonexistent'
         urls_to_test.extend([
-            reverse('public:journal:legacy_issue_detail_culture_year_volume', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_culture_year_volume_index', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture_year_volume', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture_year_volume_index', kwargs=kwargs),
         ])
         kwargs.pop('v')
         kwargs.pop('year')
         urls_to_test.extend([
-            reverse('public:journal:legacy_issue_detail_culture', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_culture_index', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture_index', kwargs=kwargs),
         ])
 
         for url in urls_to_test:
@@ -681,12 +681,12 @@ class TestArticleRedirections(BaseEruditTestCase):
             assert fallback_url in response.url
 
     def test_nonexistent_article_redirects_to_fallback_website(self):
-        kwargs={'journal_code': 'nonexistent', 'year':2004, 'v':1, 'issue_localid': 'nonexistent', 'localid': 'nonexistent', 'format_identifier': 'html'}
+        kwargs={'journal_code': 'nonexistent', 'year':2004, 'v':1, 'issue_number': 'nonexistent', 'localid': 'nonexistent', 'format_identifier': 'html', 'lang':'fr'}
         urls_to_test = [
-            reverse('public:journal:legacy_article_detail', kwargs=kwargs),
-            reverse('public:journal:legacy_article_id', kwargs={'localid': 'nonexistent'}),
-            reverse('public:journal:legacy_article_detail_culture', kwargs=kwargs),
-            reverse('public:journal:legacy_article_detail_culture_localidentifier', kwargs={'journal_code': 'nonexistent', 'issue_localid': 'nonexistent', 'localid':'nonexistent', 'format_identifier':'html'})
+            reverse('journal_compat:legacy_article_detail', kwargs=kwargs),
+            reverse('journal_compat:legacy_article_id', kwargs={'localid': 'nonexistent'}),
+            reverse('journal_compat:legacy_article_detail_culture', kwargs=kwargs),
+            reverse('journal_compat:legacy_article_detail_culture_localidentifier', kwargs={'journal_code': 'nonexistent', 'issue_localid': 'nonexistent', 'localid':'nonexistent', 'format_identifier':'html'})
         ]
 
         for url in urls_to_test:

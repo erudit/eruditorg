@@ -20,9 +20,7 @@ class RedirectExceptionsToFallbackWebsiteMixin(object):
             return super().dispatch(request, *args, **kwargs)
         except Http404:
             return HttpResponseRedirect(
-                settings.FALLBACK_BASE_URL + self.request.path.strip('/').strip(
-                    self.request.LANGUAGE_CODE
-                )
+                settings.FALLBACK_BASE_URL + self.request.path.strip('/')
             )
 
 

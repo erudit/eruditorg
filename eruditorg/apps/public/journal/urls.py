@@ -63,5 +63,4 @@ urlpatterns = [
     ])),
 
     # Compatibility URLs
-    url('^', include(urls_compat.urlpatterns)),
 ]
