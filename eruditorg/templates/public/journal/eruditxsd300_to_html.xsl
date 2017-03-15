@@ -1113,9 +1113,7 @@
   </xsl:template>
   <xsl:template match="objetmedia/image">
     <xsl:variable name="nomImg" select="@*[local-name()='href']"/>
-    <span class="lien_img">
-      <img src="{{ request.get_full_path }}media/{$nomImg}" class="objetmedia_img"/>
-    </span>
+    <img src="{{ request.get_full_path }}media/{$nomImg}" alt="{% trans 'Image de l’équation' %}" id="{@id}"/>
   </xsl:template>
   <xsl:template match="objetmedia/texte">
     <div class="objetTexte">

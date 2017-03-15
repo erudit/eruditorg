@@ -179,7 +179,7 @@
         </dl>
 
         <div class="journal-meta--list">
-          <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="" class="img-responsive journal_logo" />
+          <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
         </div>
         {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
