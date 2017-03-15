@@ -6,11 +6,22 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property
+from django.utils.translation import activate
 
 from erudit.models import Article
 from erudit.models import Journal
 
 from core.metrics.metric import metric
+
+
+class ActivateLegacyLanguageViewMixin(object):
+    """ """
+
+    def activate_legacy_language(self, *args, **kwargs):
+        if 'lang' in kwargs and kwargs['lang'] == 'en' or self.request.GET.get('lang') == 'en':
+            activate('en')
+        else:
+            activate('fr')
 
 
 class RedirectExceptionsToFallbackWebsiteMixin(object):

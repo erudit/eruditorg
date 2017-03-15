@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
@@ -9,13 +8,17 @@ from django.views.generic import RedirectView
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
-from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
+from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin, ActivateLegacyLanguageViewMixin
 
 
-class JournalDetailCheckRedirectView(RedirectExceptionsToFallbackWebsiteMixin, RedirectView):
+class JournalDetailCheckRedirectView(
+    RedirectExceptionsToFallbackWebsiteMixin, RedirectView,
+    ActivateLegacyLanguageViewMixin
+):
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
+        self.activate_legacy_language(*args, **kwargs)
 
         if 'code' in kwargs:
             journal = Journal.legacy_objects.get_by_id_or_404(
@@ -30,11 +33,14 @@ class JournalDetailCheckRedirectView(RedirectExceptionsToFallbackWebsiteMixin, R
         raise Http404
 
 
-class IssueDetailRedirectView(RedirectExceptionsToFallbackWebsiteMixin, RedirectView):
+class IssueDetailRedirectView(
+    RedirectExceptionsToFallbackWebsiteMixin, RedirectView, ActivateLegacyLanguageViewMixin
+):
     pattern_name = 'public:journal:issue_detail'
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
+        self.activate_legacy_language(*args, **kwargs)
         issue_qs = Issue.objects.select_related('journal').filter(
             Q(journal__code=kwargs['journal_code']) |
             Q(journal__localidentifier=kwargs['journal_code']))
@@ -56,12 +62,15 @@ class IssueDetailRedirectView(RedirectExceptionsToFallbackWebsiteMixin, Redirect
             raise Http404
 
 
-class ArticleDetailRedirectView(RedirectExceptionsToFallbackWebsiteMixin, RedirectView):
+class ArticleDetailRedirectView(
+    ActivateLegacyLanguageViewMixin, RedirectExceptionsToFallbackWebsiteMixin,
+    RedirectView
+):
     pattern_name = 'public:journal:article_detail'
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
-
+        self.activate_legacy_language(*args, **kwargs)
         if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'xml':
             self.pattern_name = 'public:journal:article_raw_xml'
 
