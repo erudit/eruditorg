@@ -404,6 +404,8 @@ $article-toolbar-width: 80px;
   * Article body
   */
   .corps {
+    border-top: 1px solid #000;
+    padding-top: 1em;
 
     > section:first-of-type {
 

@@ -4,7 +4,6 @@
 
 .grresume {
   padding-bottom: $padding-vertical-default;
-  border-bottom: 1px solid #000;
 
   > .resume {
     @include column-break-inside(avoid);
