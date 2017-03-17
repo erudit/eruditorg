@@ -241,7 +241,7 @@
                 </li>
               </xsl:if>
             </xsl:for-each>
-            {% if not only_summary %}
+            {% if article_access_granted and not only_summary %}
             <xsl:if test="//figure">
               <li>
                 <a href="#figures">{% trans "Liste des figures" %}</a>
@@ -391,7 +391,7 @@
         </div>
 
         <!-- lists of tables & figures -->
-        {% if not only_summary %}
+        {% if article_access_granted and not only_summary %}
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
@@ -1850,7 +1850,13 @@
   <xsl:template match="partiesann">
     <section class="{name()}{% if article.erudit_object.processing == 'minimal' %} col-md-8{% else %} col-xs-12{% endif %}">
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
-      <xsl:apply-templates/>
+      {% if article_access_granted and not only_summary  %}
+      <xsl:apply-templates select="grannexe"/>
+      <xsl:apply-templates select="grnote"/>
+      {% endif %}
+      <xsl:apply-templates select="grnotebio"/>
+      <xsl:apply-templates select="grbiblio"/>
+      <xsl:apply-templates select="merci"/>
     </section>
   </xsl:template>
 
@@ -1858,7 +1864,6 @@
     <section id="{name()}" class="article-section {name()}" role="complementary">
       <h2>
         <xsl:choose>
-          {% if not only_summary %}
           <xsl:when test="self::grannexe">
             <xsl:apply-templates select="self::grannexe" mode="toc-heading"/>
           </xsl:when>
@@ -1871,7 +1876,6 @@
           <xsl:when test="self::grnote">
             <xsl:apply-templates select="self::grnote" mode="toc-heading"/>
           </xsl:when>
-          {% endif %}
           <xsl:when test="self::grbiblio">
             <xsl:apply-templates select="self::grbiblio" mode="toc-heading"/>
           </xsl:when>
@@ -1883,7 +1887,6 @@
             <xsl:apply-templates select="*[not(self::titre)]"/>
           </ol>
         </xsl:when>
-        {% if not only_summary %}
         <xsl:when test="self::grnote">
           <ol class="unstyled">
             <xsl:apply-templates select="*[not(self::titre)]"/>
@@ -1892,7 +1895,6 @@
         <xsl:otherwise>
           <xsl:apply-templates select="*[not(self::titre)]"/>
         </xsl:otherwise>
-        {% endif %}
       </xsl:choose>
     </section>
   </xsl:template>
