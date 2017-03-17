@@ -1940,14 +1940,17 @@
   <!-- biographical notes -->
   <xsl:template match="notebio">
     <div class="notebio">
-      <xsl:apply-templates/>
+      <xsl:apply-templates select="nompers"/>
+      <xsl:apply-templates select="*[not(self::nompers)]"/>
     </div>
   </xsl:template>
 
   <xsl:template match="notebio/nompers">
-    <h2 class="nompers">
-      <xsl:apply-templates/>
-    </h2>
+    <h3>
+      <xsl:call-template name="element_nompers_affichage">
+        <xsl:with-param name="nompers" select="../nompers"></xsl:with-param>
+      </xsl:call-template>
+    </h3>
   </xsl:template>
 
   <!-- footnotes -->
