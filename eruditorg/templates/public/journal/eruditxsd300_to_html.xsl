@@ -272,6 +272,11 @@
           <ul class="toolbox toolbox-compact toolbox-horizontal">
             {% spaceless %}
             <li>
+              <a class="scroll-top tool-btn tool-top" href="#top">
+                <span class="ion-android-arrow-up toolbox-top"></span>
+              </a>
+            </li>
+            <li>
               <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
               </a>
