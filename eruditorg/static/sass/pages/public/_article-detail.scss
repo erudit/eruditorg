@@ -187,6 +187,13 @@ $article-toolbar-width: 80px;
       }
 
     }
+
+    .notegen {
+      margin-top: 1em;
+      padding-top: 1em;
+      border-top: 1px solid $mid-grey;
+    }
+
     .meta-article,
     .meta-journal {
       border-top: 1px solid $dark-grey;
@@ -403,18 +410,18 @@ $article-toolbar-width: 80px;
   /**
   * Article body
   */
-  .corps {
+  .grresume + .corps {
     border-top: 1px solid #000;
     padding-top: 1em;
+  }
 
+  .corps {
     > section:first-of-type {
-
       h2 {
         margin-top: 0;
         padding: 0;
         border: 0;
       }
-
     }
 
     // headings within the article body

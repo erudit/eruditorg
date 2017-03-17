@@ -83,6 +83,7 @@
               </ul>
             </div>
           </xsl:if>
+          <xsl:apply-templates select="liminaire/notegen"/>
           {% if not article_access_granted and not only_summary %}
           <div class="alert alert-warning">
             <p>
@@ -151,7 +152,6 @@
               </dd>
               {% endif %}
             </dl>
-            <xsl:apply-templates select="liminaire/notegen"/>
             <xsl:apply-templates select="admin/histpapier"/>
           </div>
         </div>
