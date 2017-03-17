@@ -339,8 +339,13 @@
       <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11{% endif %}">
         <!-- abstract -->
         <xsl:if test="//resume">
-          <section id="resume" class="article-section grresume" role="complementary">
-            <h2 class="hidden">{% trans "Résumé" %}</h2>
+          <section id="resume" role="complementary">
+            <xsl:attribute name="class">
+              article-section grresume
+              {% if article.erudit_object.processing == 'minimal' %}
+              <xsl:if test="count(//resume) > 1">double-col</xsl:if>
+              {% endif %}
+            </xsl:attribute>
             <xsl:apply-templates select="//resume"/>
           </section>
         </xsl:if>

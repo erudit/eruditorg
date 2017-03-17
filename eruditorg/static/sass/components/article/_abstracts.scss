@@ -7,6 +7,7 @@
   border-bottom: 1px solid #000;
 
   > .resume {
+    @include column-break-inside(avoid);
 
     h2, h3 {
       color: #333;
@@ -37,6 +38,14 @@
 
   &:last-of-type {
     border: none;
+  }
+
+  &.double-col {
+
+    @media (min-width: $screen-sm-min) {
+        @include column-count(2);
+    }
+
   }
 
 }
