@@ -76,15 +76,7 @@ class ArticleDetailRedirectView(
 
         if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'pdf':
             self.pattern_name = 'public:journal:article_raw_pdf'
-
-        if 'journal_code' in kwargs and 'issue_localid' in kwargs and 'localid' in kwargs:
-            article = get_object_or_404(
-                Article.objects.select_related('issue', 'issue__journal'),
-                localidentifier=kwargs['localid'])
-            return reverse(self.pattern_name, kwargs={
-                'journal_code': kwargs['journal_code'], 'issue_slug': article.issue.volume_slug,
-                'issue_localid': kwargs['issue_localid'], 'localid': kwargs['localid'], })
-        elif 'localid' in kwargs:
+        if 'localid' in kwargs:
             article = get_object_or_404(
                 Article.objects.select_related('issue', 'issue__journal'),
                 localidentifier=kwargs['localid'])
