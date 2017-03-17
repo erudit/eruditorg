@@ -78,7 +78,7 @@ urlpatterns = [
         name="legacy_issue_detail_culture_index"),
 
     # Article
-    url(r'^(?:(?P<lang>[\w-]+)/)?revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
+    url(r'^(?:(?P<lang>[\w-]+)/)?revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail",
     ),
@@ -86,7 +86,7 @@ urlpatterns = [
         views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_id",
     ),
-    url(r'^(?:(?P<lang>[\w-]+)/)?culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
+    url(r'^(?:(?P<lang>[\w-]+)/)?culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/n(?P<issue_number>[\w-]+)/(?P<localid>[\w-]+)\.(?P<format_identifier>[\w-]+)?$',  # noqa
         views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail_culture"
     ),
