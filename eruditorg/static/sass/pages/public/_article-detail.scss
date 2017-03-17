@@ -450,61 +450,61 @@ $article-toolbar-width: 80px;
 
     }
 
-  }
+    /**
+    * Typemarq
+    */
 
-  /**
-  * Typemarq
-  */
+    .majuscule {
+      text-transform: uppercase;
+    }
 
-  .majuscule {
-    text-transform: uppercase;
-  }
+    .petitecap {
+      font-variant: small-caps;
+    }
 
-  .petitecap {
-    font-variant: small-caps;
-  }
+    .italique, em {
+      @include fw-serif-italic;
+      .gras, strong {
+        @include fw-serif-bold-italic;
+      }
+    }
 
-  .italique, em {
-    @include fw-serif-italic;
     .gras, strong {
-      @include fw-serif-bold-italic;
+      @include fw-serif-bold;
+      .italique, em {
+        @include fw-serif-bold-italic;
+      }
     }
-  }
 
-  .gras, strong {
-    @include fw-serif-bold;
-    .italique, em {
-      @include fw-serif-bold-italic;
+    .souligne {
+      text-decoration: underline;
     }
-  }
 
-  .souligne {
-    text-decoration: underline;
-  }
-
-  .espacefixe {
-    font-size: 14px;
-    @include fw-mono;
-    .italique, em {
-      @include fw-mono-italic;
+    .espacefixe {
+      font-size: 14px;
+      @include fw-mono;
+      .italique, em {
+        @include fw-mono-italic;
+      }
     }
-  }
 
-  .barre {
-    text-decoration: line-through;
-  }
+    .barre {
+      text-decoration: line-through;
+    }
 
-  .surligne {
-    border-style: solid none none none;
-    border-with: 1px;
-  }
+    .surligne {
+      border-style: solid none none none;
+      border-with: 1px;
+    }
 
-  .filet {
-    border: 1px solid $dark-grey;
-  }
+    .filet {
+      border: 1px solid $dark-grey;
+    }
 
-  .tailleg {
-    font-size: 1.25em;
+    .tailleg {
+      font-size: 1.25em;
+    }
+
   }
 
   /**
