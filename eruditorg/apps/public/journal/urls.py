@@ -5,7 +5,6 @@ from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
 from . import feeds
-from . import urls_compat
 from . import views
 
 
@@ -63,5 +62,4 @@ urlpatterns = [
     ])),
 
     # Compatibility URLs
-    url('^', include(urls_compat.urlpatterns)),
 ]

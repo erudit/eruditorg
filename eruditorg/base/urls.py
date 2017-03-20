@@ -11,7 +11,7 @@ from django_js_reverse import views as js_reverse_views
 
 from . import sitemaps
 from . import urls_compat
-
+from apps.public.journal import urls_compat as journal_urls_compat
 
 js_info_dict = {
     'packages': ('base', ),
@@ -30,6 +30,7 @@ urlpatterns = [
         {'sitemaps': sitemaps_dict, 'sitemap_url_name': 'sitemaps'}, name="sitemap"),
     url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
+    url('^', include(journal_urls_compat.urlpatterns, namespace="journal_compat")),
 ]
 
 urlpatterns += i18n_patterns(

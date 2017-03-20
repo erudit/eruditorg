@@ -625,9 +625,100 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
 
 
-class TestArticleRedirections(BaseEruditTestCase):
+class TestLegacyUrlsRedirection(BaseEruditTestCase):
 
-    def test_nonexistent_journals_redirects_to_fallback_website(self):
+    def test_can_redirect_article_from_legacy_urls(self):
+        from django.utils.translation import deactivate_all
+
+        article = ArticleFactory()
+        url = '/revue/{journal_code}/{issue_year}/v/n{issue_number}/{article_localidentifier}.html'.format(  # noqa
+            journal_code=article.issue.journal.code,
+            issue_year=article.issue.year,
+            issue_number=article.issue.number,
+            article_localidentifier=article.localidentifier
+        )
+
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier
+        ))
+        assert "/fr/" in resp.url
+        assert resp.status_code == 301
+
+        deactivate_all()
+        resp = self.client.get(url + "?lang=en")
+
+        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier
+        ))
+        assert "/en/" in resp.url
+        assert resp.status_code == 301
+
+        url = '/en/revue/{journal_code}/{issue_year}/v/n{issue_number}/{article_localidentifier}.html'.format(  # noqa
+            journal_code=article.issue.journal.code,
+            issue_year=article.issue.year,
+            issue_number=article.issue.number,
+            article_localidentifier=article.localidentifier
+        )
+        deactivate_all()
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier
+        ))
+
+        assert "/en/" in resp.url
+        assert resp.status_code == 301
+
+    def test_can_redirect_issues_from_legacy_urls(self):
+        article = ArticleFactory()
+        article.issue.volume = "1"
+        article.issue.number = "1"
+        article.issue.save()
+        url = "/revue/{journal_code}/{year}/v{volume}/n{number}/".format(
+            journal_code=article.issue.journal.code,
+            year=article.issue.year,
+            volume=article.issue.volume,
+            number=article.issue.number
+        )
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            localidentifier=article.issue.localidentifier
+        ))
+        assert resp.status_code == 301
+
+    def test_can_redirect_journals_from_legacy_urls(self):
+        article = ArticleFactory()
+        article.issue.volume = "1"
+        article.issue.number = "1"
+        article.issue.save()
+        url = "/revue/{code}/".format(
+            code=article.issue.journal.code,
+        )
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:journal_detail', kwargs=dict(
+            code=article.issue.journal.code,
+        ))
+        assert resp.status_code == 301
+
+
+class TestArticleFallbackRedirections(BaseEruditTestCase):
+
+    def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self):
         fallback_url = settings.FALLBACK_BASE_URL
         patterns_to_test = [
             'legacy_journal_detail', 'legacy_journal_detail_index',
@@ -636,10 +727,10 @@ class TestArticleRedirections(BaseEruditTestCase):
         ]
 
         for pattern in patterns_to_test:
-            url = reverse('public:journal:{}'.format(pattern), kwargs={'code': 'nonexistent'})
+            url = reverse('journal_compat:{}'.format(pattern), kwargs={'code': 'nonexistent'})
 
-            response = self.client.get(url, follow=True)
-            redirect_url = response.redirect_chain[0][0]
+            response = self.client.get(url)
+            redirect_url = response.url
             assert fallback_url in redirect_url
 
     def test_nonexistent_issue_redirects_to_fallback_website(self):
@@ -653,26 +744,26 @@ class TestArticleRedirections(BaseEruditTestCase):
         }
 
         urls_to_test = [
-            reverse('public:journal:legacy_issue_detail', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_index', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_index', kwargs=kwargs),
         ]
 
         kwargs.pop('n')
         urls_to_test.extend([
-            reverse('public:journal:legacy_issue_detail_no_number', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_index_no_number', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_no_number', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_index_no_number', kwargs=kwargs),
         ])
 
         kwargs['localidentifier'] = 'nonexistent'
         urls_to_test.extend([
-            reverse('public:journal:legacy_issue_detail_culture_year_volume', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_culture_year_volume_index', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture_year_volume', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture_year_volume_index', kwargs=kwargs),
         ])
         kwargs.pop('v')
         kwargs.pop('year')
         urls_to_test.extend([
-            reverse('public:journal:legacy_issue_detail_culture', kwargs=kwargs),
-            reverse('public:journal:legacy_issue_detail_culture_index', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture', kwargs=kwargs),
+            reverse('journal_compat:legacy_issue_detail_culture_index', kwargs=kwargs),
         ])
 
         for url in urls_to_test:
@@ -681,12 +772,12 @@ class TestArticleRedirections(BaseEruditTestCase):
             assert fallback_url in response.url
 
     def test_nonexistent_article_redirects_to_fallback_website(self):
-        kwargs={'journal_code': 'nonexistent', 'year':2004, 'v':1, 'issue_localid': 'nonexistent', 'localid': 'nonexistent', 'format_identifier': 'html'}
+        kwargs={'journal_code': 'nonexistent', 'year':2004, 'v':1, 'issue_number': 'nonexistent', 'localid': 'nonexistent', 'format_identifier': 'html', 'lang':'fr'}
         urls_to_test = [
-            reverse('public:journal:legacy_article_detail', kwargs=kwargs),
-            reverse('public:journal:legacy_article_id', kwargs={'localid': 'nonexistent'}),
-            reverse('public:journal:legacy_article_detail_culture', kwargs=kwargs),
-            reverse('public:journal:legacy_article_detail_culture_localidentifier', kwargs={'journal_code': 'nonexistent', 'issue_localid': 'nonexistent', 'localid':'nonexistent', 'format_identifier':'html'})
+            reverse('journal_compat:legacy_article_detail', kwargs=kwargs),
+            reverse('journal_compat:legacy_article_id', kwargs={'localid': 'nonexistent'}),
+            reverse('journal_compat:legacy_article_detail_culture', kwargs=kwargs),
+            reverse('journal_compat:legacy_article_detail_culture_localidentifier', kwargs={'journal_code': 'nonexistent', 'issue_localid': 'nonexistent', 'localid':'nonexistent', 'format_identifier':'html'})
         ]
 
         for url in urls_to_test:
