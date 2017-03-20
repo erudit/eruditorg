@@ -625,7 +625,98 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
 
 
-class TestArticleRedirections(BaseEruditTestCase):
+class TestLegacyUrlsRedirection(BaseEruditTestCase):
+
+    def test_can_redirect_article_from_legacy_urls(self):
+        from django.utils.translation import deactivate_all
+
+        article = ArticleFactory()
+        url = '/revue/{journal_code}/{issue_year}/v/n{issue_number}/{article_localidentifier}.html'.format(  # noqa
+            journal_code=article.issue.journal.code,
+            issue_year=article.issue.year,
+            issue_number=article.issue.number,
+            article_localidentifier=article.localidentifier
+        )
+
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier
+        ))
+        assert "/fr/" in resp.url
+        assert resp.status_code == 301
+
+        deactivate_all()
+        resp = self.client.get(url + "?lang=en")
+
+        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier
+        ))
+        assert "/en/" in resp.url
+        assert resp.status_code == 301
+
+        url = '/en/revue/{journal_code}/{issue_year}/v/n{issue_number}/{article_localidentifier}.html'.format(  # noqa
+            journal_code=article.issue.journal.code,
+            issue_year=article.issue.year,
+            issue_number=article.issue.number,
+            article_localidentifier=article.localidentifier
+        )
+        deactivate_all()
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            issue_localid=article.issue.localidentifier,
+            localid=article.localidentifier
+        ))
+
+        assert "/en/" in resp.url
+        assert resp.status_code == 301
+
+    def test_can_redirect_issues_from_legacy_urls(self):
+        article = ArticleFactory()
+        article.issue.volume = "1"
+        article.issue.number = "1"
+        article.issue.save()
+        url = "/revue/{journal_code}/{year}/v{volume}/n{number}/".format(
+            journal_code=article.issue.journal.code,
+            year=article.issue.year,
+            volume=article.issue.volume,
+            number=article.issue.number
+        )
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
+            journal_code=article.issue.journal.code,
+            issue_slug=article.issue.volume_slug,
+            localidentifier=article.issue.localidentifier
+        ))
+        assert resp.status_code == 301
+
+    def test_can_redirect_journals_from_legacy_urls(self):
+        article = ArticleFactory()
+        article.issue.volume = "1"
+        article.issue.number = "1"
+        article.issue.save()
+        url = "/revue/{code}/".format(
+            code=article.issue.journal.code,
+        )
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:journal_detail', kwargs=dict(
+            code=article.issue.journal.code,
+        ))
+        assert resp.status_code == 301
+
+
+class TestArticleFallbackRedirections(BaseEruditTestCase):
 
     def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self):
         fallback_url = settings.FALLBACK_BASE_URL
