@@ -122,6 +122,8 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
         context['citation_title_metadata'] = article.title
         context['citation_journal_title_metadata'] = article.get_erudit_object()\
             .get_formatted_journal_title()
+        context['citation_references'] = article.get_erudit_object()\
+            .get_references(strip_markup=True)
         return context
 
 
