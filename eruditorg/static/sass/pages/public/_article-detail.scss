@@ -189,9 +189,12 @@ $article-toolbar-width: 80px;
     }
 
     .notegen {
-      margin-top: 1em;
-      padding-top: 1em;
-      border-top: 1px solid $mid-grey;
+      margin-top: 1.5em;
+
+      h2 {
+        margin: 0 0 1em 0;
+      }
+
     }
 
     .meta-article,
@@ -282,6 +285,7 @@ $article-toolbar-width: 80px;
     }
 
     .histpapier {
+      margin-top: 1em;
       font-style: italic;
     }
 
