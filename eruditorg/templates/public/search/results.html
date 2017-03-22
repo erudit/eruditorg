@@ -191,7 +191,9 @@
                   <h3>
                     <a href="
                     {% if document.document_type == 'article' %}
-                      {% if document.real_object.external_url %}
+                      {% if document.real_object.processing == 'M' %}
+                      {% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}
+                      {% elif document.real_object.external_url %}
                       {{ article_redirect_url }}
                       {% else %}
                       {{ article_url }}
@@ -252,6 +254,7 @@
                     {% elif document.document_type == 'thesis' %}
                       {% trans "Thèse" %} {% trans "déposée à" %}
                       {{ document.real_object.collection_name }}
+                    {# metadata for books #}
                     {% elif document.document_type == 'book' %}
                       {% with document.real_object as o %}
                       {% if document.real_object.pages %}
@@ -259,7 +262,6 @@
                       {% endif %}
                       {% endwith %}
                     {% endif %}
-                    {# metadata for books #}
 
                   </p>
                   <p class="col-sm-4 text-right pub-date">
@@ -321,6 +323,14 @@
                     <a class="tool-btn tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
                       <span class="toolbox-pdf">PDF</span>
                       <span class="tools-label">{% trans "Télécharger" %}</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if document.real_object.processing == 'C' %}
+                  <li>
+                    <a class="tool-btn" href="{{ article_url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                      <span class="toolbox-html">HTML</span>
+                      <span class="tools-label">{% trans "Lire en texte intégral" %}</span>
                     </a>
                   </li>
                   {% endif %}
