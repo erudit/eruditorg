@@ -144,6 +144,9 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li>
+  <a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a>
+</li>
+<li>
   <a href="{% url 'public:journal:journal_detail' article.issue.journal.code %}">{{ article.issue.journal.name }}</a>
 </li>
 <li>
