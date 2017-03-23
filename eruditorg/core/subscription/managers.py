@@ -54,7 +54,10 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
                 referer__contains=parsed_user_referer.netloc
             ):
                 parsed_institution_referer = urlparse(institution_referer.referer)
-                if parsed_institution_referer.path in parsed_user_referer.path:
+                if (
+                    parsed_institution_referer.netloc == parsed_user_referer.netloc and
+                    parsed_institution_referer.path in parsed_user_referer.path
+                ):
                     return subscription
 
 

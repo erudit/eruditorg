@@ -67,6 +67,9 @@ class TestInstitutionReferer(DBRequiredTestCase):
         assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/") == institution_referer.subscription  # noqa
 
 
+    def test_can_find_an_institution_referer_by_netloc_and_path(self):
+
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
         institution_referer = InstitutionRefererFactory(
             subscription=valid_period.subscription,
             referer="https://www.topsecurity.org/bulletproofauthenticationmechanism"
@@ -75,12 +78,23 @@ class TestInstitutionReferer(DBRequiredTestCase):
         assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/")
         assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123") == institution_referer.subscription  # noqa
 
+    def test_can_find_an_institution_referer_with_netloc_port_path_and_querystring(self):
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
         institution_referer = InstitutionRefererFactory(
             subscription=valid_period.subscription,
             referer="http://externalservice.com:2049/login?url="
         )
         assert JournalAccessSubscription.valid_objects.get_for_referer("http://externalservice.com:2049/login?url='allo'") == institution_referer.subscription  # noqa
         assert JournalAccessSubscription.valid_objects.get_for_referer("https://externalservice.com:2049/login?url='allo'") == institution_referer.subscription  # noqa
+
+    def test_can_only_find_institution_referer_when_path_fully_match(self):
+        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
+        institution_referer = InstitutionRefererFactory(
+            subscription=valid_period.subscription,
+            referer="http://www.erudit.org.proxy.com/"
+        )
+
+        assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/")  # noqa
 
 class TestInstitutionIPAddressRange(DBRequiredTestCase):
     @pytest.fixture(autouse=True)
