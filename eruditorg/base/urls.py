@@ -11,6 +11,7 @@ from django_js_reverse import views as js_reverse_views
 
 from . import sitemaps
 from . import urls_compat
+from .views_compat import RedirectToFallback
 from apps.public.journal import urls_compat as journal_urls_compat
 
 js_info_dict = {
@@ -31,6 +32,8 @@ urlpatterns = [
     url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
     url('^', include(journal_urls_compat.urlpatterns, namespace="journal_compat")),
+    # Compatibility URLs
+    url('^', include(urls_compat.urlpatterns)),
 ]
 
 urlpatterns += i18n_patterns(
@@ -51,8 +54,11 @@ urlpatterns += i18n_patterns(
     url(r'^webservices/', include('apps.webservices.urls', namespace='webservices')),
     url(r'^', include('apps.public.urls', namespace='public')),
 
-    # Compatibility URLs
-    url('^', include(urls_compat.urlpatterns)),
+)
+
+urlpatterns.append(
+    # Redirect not supported URLs to retro.erudit.org
+    url(r'^.*$', RedirectToFallback.as_view(), ),
 )
 
 # In DEBUG mode, serve media files through Django.
