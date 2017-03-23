@@ -13,6 +13,7 @@ from . import sitemaps
 from . import urls_compat
 from .views_compat import RedirectToFallback
 from apps.public.journal import urls_compat as journal_urls_compat
+from apps.public.search import urls_compat as search_urls_compat
 
 js_info_dict = {
     'packages': ('base', ),
@@ -34,6 +35,7 @@ urlpatterns = [
     url('^', include(journal_urls_compat.urlpatterns, namespace="journal_compat")),
     # Compatibility URLs
     url('^', include(urls_compat.urlpatterns)),
+    url('^', include(search_urls_compat.urlpatterns, namespace="search_compat")),
 ]
 
 urlpatterns += i18n_patterns(

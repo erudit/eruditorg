@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,7 +16,4 @@ urlpatterns = [
     url(_(r'^sauvegardes/ajout/$'), views.SavedSearchAddView.as_view(), name='add_search'),
     url(_(r'^sauvegardes/suppression/(?P<uuid>[\w-]+)/$'),
         views.SavedSearchRemoveView.as_view(), name='remove_search'),
-
-    # Compatibility URLs
-    url('^', include(urls_compat.urlpatterns)),
 ]

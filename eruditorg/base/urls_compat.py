@@ -5,7 +5,6 @@ from django.conf.urls import include
 from django.views.generic import RedirectView
 
 from .views import DummyView, RedirectRetroUrls
-from .views_compat import RedirectToFallback
 
 urlpatterns = [
     url(r'^(?:(?P<lang>[\w-]+)/)?', include([
