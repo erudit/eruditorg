@@ -6,6 +6,7 @@
   <!--=========== VARIABLES & PARAMETERS ===========-->
   <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
   <xsl:variable name="iderudit" select="article/@idproprio"/>
+  <xsl:variable name="doi" select="article/admin/infoarticle/idpublic[@scheme = 'doi']"/>
   <xsl:variable name="typeudoc">
     <xsl:choose>
       <xsl:when test="article/@typeart='article'">
@@ -139,18 +140,19 @@
                   </a>
                 </span>
               </dd>
-              {% if article.issue.journal.type.code == 'S' %}
-              <dt>DOI</dt>
-              <dd>
-                <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
-                  <a href="{$doiStart}10.7202/{$iderudit}" class="clipboard-data">
-                    10.7202/<xsl:value-of select="$iderudit"/>
-                    <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-                    <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-                  </a>
-                </span>
-              </dd>
-              {% endif %}
+
+              <xsl:if test="$doi">
+                <dt>DOI</dt>
+                <dd>
+                  <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
+                    <a href="{$doiStart}{$doi}" class="clipboard-data">
+                      <xsl:value-of select="$doi"/>
+                      <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+                      <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+                    </a>
+                  </span>
+                </dd>
+              </xsl:if>
             </dl>
             <xsl:apply-templates select="admin/histpapier"/>
           </div>
