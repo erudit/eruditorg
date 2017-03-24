@@ -257,7 +257,7 @@ INDIVIDUAL_SUBSCRIPTION_SALT = 'sample salt'
 # -----------------------------------------------------------------------------
 
 # Classic website
-FALLBACK_BASE_URL = 'http://www.erudit.org'
+FALLBACK_BASE_URL = 'http://retro.erudit.org/'
 
 # Fedora settings
 FEDORA_ROOT = 'http://10.1.1.33:8080/fedora'
