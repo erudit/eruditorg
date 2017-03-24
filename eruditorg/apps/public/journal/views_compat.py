@@ -8,7 +8,8 @@ from django.views.generic import RedirectView
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
-from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin, ActivateLegacyLanguageViewMixin
+from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
+from base.viewmixins import ActivateLegacyLanguageViewMixin
 
 
 class JournalDetailCheckRedirectView(

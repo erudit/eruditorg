@@ -7,6 +7,7 @@ from urllib.parse import urljoin
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
+from django.utils.translation import activate
 from pysolr import SolrCoreAdmin
 import requests
 from requests.exceptions import ConnectionError
@@ -69,6 +70,16 @@ class FedoraServiceRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         self.fedora_service_available = self.check_fedora_status(request)
         return super(FedoraServiceRequiredMixin, self).dispatch(request, *args, **kwargs)
+
+
+class ActivateLegacyLanguageViewMixin(object):
+    """ """
+
+    def activate_legacy_language(self, *args, **kwargs):
+        if 'lang' in kwargs and kwargs['lang'] == 'en' or self.request.GET.get('lang') == 'en':
+            activate('en')
+        else:
+            activate('fr')
 
 
 class SolrServiceRequiredMixin(object):

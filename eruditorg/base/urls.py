@@ -11,7 +11,7 @@ from django_js_reverse import views as js_reverse_views
 
 from . import sitemaps
 from . import urls_compat
-from apps.public.journal import urls_compat as journal_urls_compat
+from .views_compat import RedirectToFallback
 
 js_info_dict = {
     'packages': ('base', ),
@@ -30,7 +30,8 @@ urlpatterns = [
         {'sitemaps': sitemaps_dict, 'sitemap_url_name': 'sitemaps'}, name="sitemap"),
     url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_dict}, name='sitemaps'),
-    url('^', include(journal_urls_compat.urlpatterns, namespace="journal_compat")),
+    # Compatibility URLs
+    url('^', include(urls_compat.urlpatterns)),
 ]
 
 urlpatterns += i18n_patterns(
@@ -50,9 +51,7 @@ urlpatterns += i18n_patterns(
     url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
     url(r'^webservices/', include('apps.webservices.urls', namespace='webservices')),
     url(r'^', include('apps.public.urls', namespace='public')),
-
-    # Compatibility URLs
-    url('^', include(urls_compat.urlpatterns)),
+    url(r'^.*$', RedirectToFallback.as_view(), ),
 )
 
 # In DEBUG mode, serve media files through Django.

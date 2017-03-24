@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import cache_page
 
-from . import urls_compat
 from . import views
 
 
@@ -48,6 +46,4 @@ urlpatterns = [
         name='thesis_citation_bib'
     ),
 
-    # Compatibility URLs
-    url('^', include(urls_compat.urlpatterns)),
 ]

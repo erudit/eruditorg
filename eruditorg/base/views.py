@@ -3,7 +3,10 @@
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.views.generic import View
+from django.core.urlresolvers import reverse
+from django.views.generic import View, RedirectView
+
+from .viewmixins import ActivateLegacyLanguageViewMixin
 
 
 class DummyView(View):
@@ -14,3 +17,10 @@ class DummyView(View):
         if settings.DEBUG:
             return HttpResponse(request.path, content_type='text/plain')
         return redirect('/')
+
+
+class RedirectRetroUrls(RedirectView, ActivateLegacyLanguageViewMixin):
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.activate_legacy_language(*args, **kwargs)
+        return reverse(self.pattern_name)
