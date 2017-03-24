@@ -63,19 +63,19 @@ If you do not want this, and would rather use a password, please follow the [mar
 Run the migrations:
 
 ```
-$ python erudit/manage.py migrate
+$ python eruditorg/manage.py migrate
 ```
 
 Create a superuser:
 
 ```
-$ python erudit/manage.py createsuperuser
+$ python eruditorg/manage.py createsuperuser
 ```
 
 You can now run the development server
 
 ```
-$ python erudit/manage.py runserver
+$ python eruditorg/manage.py runserver
 ```
 
 ## Retrieving documents and setting up the search engine
