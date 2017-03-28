@@ -2,6 +2,7 @@
 
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
+from erudit.test.factories import IssueFactory
 
 
 class TestCanRedirectToRetro(BaseEruditTestCase):
@@ -27,3 +28,16 @@ class TestCanRedirectToRetro(BaseEruditTestCase):
 
         for url in legacy_urls:
             assert self.client.get(url).status_code == 301
+
+    def test_can_handle_legacy_journal_year_number_pattern(self):
+
+        issue_1 = IssueFactory(number=1, volume=None, year=2000)
+        issue_2 = IssueFactory(journal=issue_1.journal, number=1, volume=None, year=2001)
+
+        legacy_url = "/revue/{journal_code}/{issue_year}/v/n{number}/index.html".format(
+            journal_code=issue_1.journal.code,
+            issue_year=issue_1.year,
+            number=issue_1.number
+        )
+
+        assert self.client.get(legacy_url).status_code == 301

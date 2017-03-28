@@ -52,6 +52,8 @@ class IssueDetailRedirectView(
         elif 'journal_code' in kwargs and 'v' in kwargs and 'n' in kwargs:
             reverse_kwargs = {'number': kwargs['n']} if not kwargs['v'] \
                 else {'volume': kwargs['v'], 'number': kwargs['n']}
+            if 'year' in kwargs:
+                reverse_kwargs['year'] = kwargs['year']
             issue = get_object_or_404(issue_qs, **reverse_kwargs)
             return reverse(self.pattern_name, args=[
                 kwargs['journal_code'], issue.volume_slug, issue.localidentifier, ])
