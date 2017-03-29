@@ -5,11 +5,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import BaseCommand
 from django.db.models import Q
+from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
 
 from erudit.models import Journal
 from core.accounts.utils import generate_unique_username
 from core.authorization.defaults import AuthorizationConfig
 from core.authorization.models import Authorization
+from apps.public.auth.forms import PasswordResetForm
 
 logger = logging.getLogger(__name__)
 authorization_codename = AuthorizationConfig.can_manage_issuesubmission.codename
@@ -30,6 +32,34 @@ class Command(BaseCommand):
             '--report', action='store_true', dest='report',
         )
 
+        parser.add_argument(
+            '--send-emails', action='store_true', dest='emails',
+        )
+
+    def _auth_get_users(self, email):
+        """ return the active users. do not check if password is usable
+        or not. """
+        active_users = get_user_model()._default_manager.filter(
+            email__iexact=email, is_active=True
+        )
+        return active_users
+
+    def send_emails(self):
+        pass_q = Q(password__startswith=UNUSABLE_PASSWORD_PREFIX)
+        auth_q = Q(
+            authorization__authorization_codename="editor:can_manage_issuesubmission"
+        )
+        recipients = User.objects.filter(pass_q & auth_q).distinct()
+        PasswordResetForm.get_users = self._auth_get_users
+        for recipient in recipients:
+            form = PasswordResetForm({'email': recipient.email})
+            if form.is_valid():
+                form.save(
+                    email_template_name='emails/auth/password_reset_email.html',
+                    subject_template_name='emails/auth/password_reset_subject.txt'
+                )
+                logger.info("Email sent to {}".format(recipient))
+
     def produce_report(self):
         """ Produce the editor report """
 
@@ -43,10 +73,14 @@ class Command(BaseCommand):
                     username=authorization.user.username,
                     email=authorization.user.email,
                     shortname=authorization.content_object.code,
-                    will_receive_email=True if authorization.user.password.startswith('!') else False
+                    will_receive_email=True if authorization.user.password.startswith('!') else False  # noqa
                 ))
 
     def handle(self, *args, **options):
+
+        if options.get('emails', False):
+            self.send_emails()
+            return
 
         if options.get('report', False):
             self.produce_report()
