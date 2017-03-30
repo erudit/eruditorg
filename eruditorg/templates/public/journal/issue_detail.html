@@ -92,16 +92,19 @@
     <p class="title-tag">{{ issue.journal.name }}</p>
     <h1>
       {% for theme in themes %}
-        {% if forloop.first %}<span>
-        {% else %}&nbsp;/
-        {% endif %}
+        <span>
         {% if theme.html_name and theme.html_subname %}
         {{ theme.html_name|safe }}{% trans '&nbsp;' %}: {{ theme.html_subname|safe }}
         {% else %}
         {{ theme.html_name|safe }}
         {% endif %}
-        {% if forloop.first %}</span>
+        {% if theme.redacteurchef %}
+            {% trans "Sous la direction de " %}
+            {% for redacteurchef in theme.redacteurchef %}
+                {{ redacteurchef.firstname }} {{ redacteurchef.lastname }}
+            {% endfor %}
         {% endif %}
+        </span>
       {% endfor %}
       <span>{{ issue.volume_title }}{% if issue.embargoed and not user_has_access_to_issue %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
     </h1>
