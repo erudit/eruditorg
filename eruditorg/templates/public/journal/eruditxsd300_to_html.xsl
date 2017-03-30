@@ -84,26 +84,30 @@
               </ul>
             </div>
           </xsl:if>
-          <xsl:apply-templates select="liminaire/notegen"/>
-          {% if not article_access_granted and not only_summary %}
-          <div class="alert alert-warning">
-            <p>
-              {% blocktrans trimmed %}
-              L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
-              {% endblocktrans %}
-              <br/>
-              <strong>
-                {% if not article.erudit_object.abstracts and can_display_first_pdf_page %}
-                {% trans "Seule la première page du PDF sera affichée." %}
-                {% elif article.erudit_object.abstracts %}
-                {% trans "Seul le résumé sera affiché." %}
-                {% elif article.is_scientific %}
-                {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
-                {% endif %}
-              </strong>
-            </p>
+          <div class="row">
+            <div class="col-sm-8">
+              <xsl:apply-templates select="liminaire/notegen"/>
+              {% if not article_access_granted and not only_summary %}
+              <div class="alert alert-warning">
+                <p>
+                  {% blocktrans trimmed %}
+                  L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
+                  {% endblocktrans %}
+                  <br/>
+                  <strong>
+                    {% if not article.erudit_object.abstracts and can_display_first_pdf_page %}
+                    {% trans "Seule la première page du PDF sera affichée." %}
+                    {% elif article.erudit_object.abstracts %}
+                    {% trans "Seul le résumé sera affiché." %}
+                    {% elif article.is_scientific %}
+                    {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
+                    {% endif %}
+                  </strong>
+                </p>
+              </div>
+              {% endif %}
+            </div>
           </div>
-          {% endif %}
         </div>
 
         <!-- issue cover image or journal logo -->

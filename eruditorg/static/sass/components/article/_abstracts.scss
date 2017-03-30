@@ -6,10 +6,12 @@
   padding-bottom: $padding-vertical-default;
 
   > .resume {
+    padding-bottom: 2em;
     @include column-break-inside(avoid);
 
     h2, h3 {
       color: #333;
+      margin-top: 0;
     }
 
     p, ul,
@@ -28,7 +30,6 @@
       h2 {
         border-top: 0;
         padding-top: 0;
-        margin-top: 0;
       }
 
     }
