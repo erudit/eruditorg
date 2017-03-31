@@ -2,10 +2,12 @@ language: python
 before_install:
   - sudo apt-get install -y qpdf
 python:
-  - "3.5"
+  - "3.4"
 install:
   - pip install tox codecov
 script:
   - tox
+cache: pip
+
 after_success:
   - codecov
