@@ -81,7 +81,7 @@
 <meta name="citation_keywords" lang="{{ keywords_lang.lang }}" content="{% for k in keywords_lang.keywords %}{{ k }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 {% endfor %}
 {% for reference in citation_references %}
-<meta name="citation_reference" content="citation_title={{ reference.title }}; {% if reference.doi %}citation_doi={{ reference.doi }};{% endif %}" />
+<meta name="citation_reference" content="{{ reference.title}}" />
 {% endfor %}
 {% endcache %}
 {% endblock meta_tags %}
