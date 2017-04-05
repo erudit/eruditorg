@@ -458,7 +458,8 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
 @override_settings(DEBUG=True)
 class TestIssueDetailView(BaseEruditTestCase):
-    def test_works_with_pks(self):
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_works_with_pks(self, mock_fedora_mixin):
         # Setup
         issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
         url = reverse('public:journal:issue_detail', args=[
@@ -468,7 +469,8 @@ class TestIssueDetailView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
 
-    def test_works_with_localidentifiers(self):
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+    def test_works_with_localidentifiers(self, mock_fedora_mixin):
         # Setup
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
