@@ -113,65 +113,7 @@
     </h2>
   </header>
   {% if articles_per_section %}
-
-  {% for k, section1 in articles_per_section.items %}
-  {% if section1.titles.main %}
-  <h3 class="section">
-    {{ section1.titles.main }}
-    {% for paral in section1.titles.paral %}/ {{ paral }}{% endfor %}
-  </h3>
-  {% endif %}
-
-  {% if section1.objects %}
-  <ol class="issue_detail--articles unstyled section-1">
-    {% for article in section1.objects %}
-    {% include "public/journal/partials/issue_detail_article_item.html" %}
-    {% endfor %}
-  </ol>
-  {% endif %}
-
-  {% if section1.section2 %}
-  {% for k, section2 in section1.section2.items %}
-  {% if section2.titles.main %}
-  <h4 class="section">
-    {{ section2.titles.main }}
-    {% for paral in section2.titles.paral %}/ {{ paral }}{% endfor %}
-  </h4>
-  {% endif %}
-
-  {% if section2.objects %}
-  <ol class="issue_detail--articles unstyled section-2">
-    {% for article in section2.objects %}
-    {% include "public/journal/partials/issue_detail_article_item.html" %}
-    {% endfor %}
-  </ol>
-  {% endif %}
-
-  {% if section2.section3 %}
-  {% for k, section3 in section2.section3.items %}
-  {% if section3.titles.main %}
-  <h5 class="section">
-    {{ section3.titles.main }}
-    {% for paral in section3.titles.paral %}/ {{ paral }}{% endfor %}
-  </h5>
-  {% endif %}
-
-  {% if section3.objects %}
-  <ol class="issue_detail--articles unstyled section-3">
-    {% for article in section3.objects %}
-    {% include "public/journal/partials/issue_detail_article_item.html" %}
-    {% endfor %}
-  </ol>
-  {% endif %}
-
-  {% endfor %}
-  {% endif %}
-
-  {% endfor %}
-  {% endif %}
-
-  {% endfor %}
-
+  {% include "public/journal/partials/issue_detail_section.html" %}
   {% else %}
 
   {# This is displayed only if the Fedora repository is unavailable #}
