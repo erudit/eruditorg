@@ -191,9 +191,7 @@
                   <h3>
                     <a href="
                     {% if document.document_type == 'article' %}
-                      {% if document.real_object.processing == 'M' %}
-                      {% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}
-                      {% elif document.real_object.external_url %}
+                      {% if document.real_object.external_url %}
                       {{ article_redirect_url }}
                       {% else %}
                       {{ article_url }}
