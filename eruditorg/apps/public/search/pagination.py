@@ -77,22 +77,22 @@ class EruditDocumentPagination(PageNumberPagination):
 
         self.request = request
 
-        internal_documents, external_documents = self._group_by_external_document(documents)
-        external_documents_dict = {d['ID']: d for d in external_documents}
         # This is a specific case in order to remove some sub-strings from the localidentifiers
         # at hand. This is a bit ugly but we are limited here by the predefined Solr document IDs.
         # For example the IDs are prefixed by "unb:" for UNB articles... But UNB localidentifiers
         # should not be stored with "unb:" into the database.
         drop_keywords = ['unb:', ]
-        localidentifiers = list(
-            map(
-                lambda i: reduce(
-                    lambda s, k: s['ID'].replace(k, ''), drop_keywords, i
-                ),
-                internal_documents
-            )
-        )
+        for document in documents:
+            document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
 
+        # Split by internal and external documents
+        # internal documents are documents that we fully support on the platform
+        # external documents are documents that need to be displayed on an external website (retro)
+        internal_documents, external_documents = self._group_by_external_document(documents)
+        external_documents_dict = {d['ID']: d for d in external_documents}
+
+        # Retrieve the documents from the database
+        localidentifiers = [d['ID'] for d in documents]
         queryset = queryset.filter(localidentifier__in=localidentifiers)
         obj_dict = {obj.localidentifier: obj for obj in queryset}
 
