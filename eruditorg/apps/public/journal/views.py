@@ -351,6 +351,8 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
 
         context['journal'] = self.object.journal
         context['themes'] = self.object.themes.order_by('identifier').all()
+        context['user_has_access_to_issue'] = self.object.journal.open_access or (
+            get_valid_subscription_for_journal(self.request, self.object.journal) is not None)
 
         articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \
