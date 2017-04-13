@@ -650,6 +650,12 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     external_pdf_url = models.URLField(null=True, blank=True, verbose_name=_('URL PDF'))
     """ External URL of the PDF version of the article """
 
+    has_copyright_restriction = models.BooleanField(
+        default=False,
+        verbose_name=_("Diffusion restreinte par le titulaire du droit d'auteur"),
+        help_text=_("Cocher si le titulaire du droit d'auteur n'autorise pas la diffusion de cet article sur la plateforme."),  # noqa
+    )
+
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
         'article', 'compterendu', 'autre', 'note'
     )
