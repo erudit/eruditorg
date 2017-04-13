@@ -60,7 +60,10 @@ class InternalIssueManager(models.Manager):
 
     def get_queryset(self):
         """ Returns all the internal Issue instances. """
-        return super(InternalIssueManager, self).get_queryset().filter(external_url__isnull=True)
+        has_no_external_url = Q(external_url__isnull=True) | Q(external_url='')
+        return super(InternalIssueManager, self).get_queryset().filter(
+            has_no_external_url
+        )
 
 
 class InternalArticleManager(PolymorphicManager):
@@ -72,4 +75,7 @@ class InternalArticleManager(PolymorphicManager):
 
     def get_queryset(self):
         """ Returns all the internal Article instances. """
-        return super(InternalArticleManager, self).get_queryset().filter(external_url__isnull=True)
+        has_no_external_url = Q(external_url__isnull=True) | Q(external_url='')
+        return super(InternalArticleManager, self).get_queryset().filter(
+            has_no_external_url
+        )
