@@ -170,7 +170,7 @@ class EruditDocument(PolymorphicModel):
         max_length=100, unique=True, verbose_name=_('Identifiant unique'), db_index=True)
     """ The unique identifier of an Érudit document. """
 
-    keywords = TaggableManager(through=KeywordTaggedWhatever)
+    keywords = TaggableManager(blank=True, through=KeywordTaggedWhatever)
     """ An Érudit document can be associated with multiple keywords. """
 
     class Meta:
