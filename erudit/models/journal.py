@@ -644,10 +644,17 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     language = models.CharField(max_length=10, verbose_name=_('Code langue'))
     """ The language code of the article """
 
-    external_url = models.URLField(null=True, blank=True, verbose_name=_('URL'))
+    external_url = models.URLField(
+        null=True, blank=True, verbose_name=_('URL'),
+        help_text=_("Renseigner si l'article est hébergé à l'extérieur de la plateforme Érudit"),
+    )
     """ External URL of the article """
 
-    external_pdf_url = models.URLField(null=True, blank=True, verbose_name=_('URL PDF'))
+    external_pdf_url = models.URLField(
+        null=True, blank=True, verbose_name=_('URL PDF'),
+        help_text=_("Renseigner si le PDF de l'article est hébergé à l'extérieur de la plateforme Érudit")  # noqa
+
+    )
     """ External URL of the PDF version of the article """
 
     has_copyright_restriction = models.BooleanField(

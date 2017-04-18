@@ -183,16 +183,56 @@ class ArticleAdmin(admin.ModelAdmin):
     def issue__localidentifier(self, obj):
         return obj.issue.localidentifier
 
-    inlines = (
-        ArticleAbstractInline, ArticleSectionTitleInline, ArticleTitleInline,
-        ArticleSubtitleInline, ArticleAuthorInline
+    readonly_fields = (
+        'issue', 'publisher', 'type', 'article_title', 'doi', 'localidentifier', 'article_journal',
+        'fedora_created', 'fedora_updated',
     )
+
+    # inlines = (
+    #    ArticleAbstractInline, ArticleSectionTitleInline, ArticleTitleInline,
+    #    ArticleSubtitleInline, ArticleAuthorInline
+    # )
     list_display = ('localidentifier', 'issue__localidentifier', 'title', )
     raw_id_fields = ('issue', 'publisher', 'authors', )
     search_fields = ('id', 'localidentifier', 'titles__title', )
-
     list_filter = ('type', 'issue__journal__collection', )
 
+    def article_title(self, obj):
+        return obj.title
+
+    def article_journal(self, obj):
+        return obj.issue.journal
+
+    article_journal.short_description = 'Revue'
+    article_title.short_description = "Titre de l'article"
+
+    fieldsets = [
+        ('Identification', {
+            'fields': (
+                ('localidentifier', 'type'),
+                ('article_title',),
+                ('article_journal', 'issue',),
+                ('publisher',),
+            ),
+        }),
+        ("Synchronisation", {
+            'fields': (
+               ('fedora_created', 'fedora_updated', )
+            )
+        }),
+        ("Localisation de l'article", {
+            'fields': (
+                'external_url', 'external_pdf_url',
+            )
+        }),
+
+        ("Restrictions d'accès", {
+            'fields': (
+                'has_copyright_restriction',
+                'publication_allowed_by_authors',
+            )
+        }),
+    ]
 
 class JournalInformationAdmin(TranslationAdmin):
     pass
