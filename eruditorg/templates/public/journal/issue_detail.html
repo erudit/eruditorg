@@ -103,7 +103,7 @@
         {% if forloop.first %}</span>
         {% endif %}
       {% endfor %}
-      <span>{{ issue.volume_title }}{% if issue.embargoed and not user_has_access_to_journal %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
+      <span>{{ issue.volume_title }}{% if issue.embargoed and not user_has_access_to_issue %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
     </h1>
     {% if issue.journal.type.code == 'C' %}
     <p><a href="http://retro.erudit.org/feuilletage/index.html?{{ issue.journal.localidentifier }}.{{ issue.localidentifier }}@132&height=800&width=618&h_eightL=1800&w_idthL=1390&p=oui" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
