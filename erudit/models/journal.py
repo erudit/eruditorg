@@ -715,6 +715,13 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         title = self.subtitles.filter(paral=False).first()
         return str(title) if title else None
 
+    @cached_property
+    def dissemination_allowed(self):
+        """ Return ``True`` if the dissemination of this article is allowed """
+        if self.has_copyright_restriction or not self.publication_allowed_by_authors:
+            return False
+        return True
+
     def __str__(self):
         if self.title:
             return self.title
