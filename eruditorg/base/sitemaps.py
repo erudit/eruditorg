@@ -50,7 +50,7 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
 
     def items(self):
         return Article.internal_objects.select_related('issue', 'issue__journal') \
-            .filter(publication_allowed_by_authors=True)
+            .filter(publication_allowed=True)
 
     def lastmod(self, obj):
         return obj.fedora_updated

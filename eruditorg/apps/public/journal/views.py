@@ -18,7 +18,6 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
-from eruditarticle.objects import EruditArticle
 from rules.contrib.views import PermissionRequiredMixin
 
 from erudit.fedora.objects import ArticleDigitalObject
@@ -558,7 +557,7 @@ class ArticleFormatDownloadView(
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return obj.publication_allowed_by_authors and self.article_access_granted
+        return obj.publication_allowed and self.article_access_granted
 
     def handle_no_permission(self):
         return redirect('public:journal:article_detail', **self.kwargs)
@@ -588,7 +587,6 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF
         article = self.get_article()
-        xml_content = self.fedora_object.xml_content
 
         erudit_object = article.get_erudit_object()
         coverpage_context = {
@@ -643,7 +641,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return obj.publication_allowed_by_authors
+        return obj.publication_allowed
 
     def write_datastream_content(self, response, content):
         response.content = get_pdf_first_page(content)

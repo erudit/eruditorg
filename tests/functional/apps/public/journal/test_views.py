@@ -48,6 +48,7 @@ FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 def get_mocked_erudit_object():
     m = unittest.mock.MagicMock()
     m.get_formatted_title.return_value = "mocked title"
+    m.get_formatted_authors.return_value = ['author 1', 'author 2']
     return m
 
 
@@ -519,16 +520,16 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         super(TestArticleRawPdfView, self).setUp()
         self.factory = RequestFactory()
 
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object', return_value=get_mocked_erudit_object())
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     @unittest.mock.patch.object(subprocess, 'check_call')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf):
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf, mock_erudit_object):
         # Setup
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
         mock_ds = ['ERUDITXSD300', ]  # noqa
-
         issue = IssueFactory.create(
             journal=self.journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1000))
@@ -606,7 +607,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         self.journal.save()
         issue = IssueFactory.create(
             journal=self.journal, year=2010, date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue, publication_allowed_by_authors=False)
+        article = ArticleFactory.create(issue=issue, publication_allowed=False)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
