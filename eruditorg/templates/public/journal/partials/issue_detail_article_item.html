@@ -2,7 +2,7 @@
 {% load cache %}
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
-<li class="article-item">
+<li class="article-item{% if not article.publication_allowed %} article-restricted{% endif %}">
   <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
     {% spaceless %}
     <li>
@@ -13,14 +13,14 @@
         <span class="ion-bookmark toolbox-save"></span>
       </a>
     </li>
-    {% if article.fedora_object.pdf.exists %}
+    {% if article.fedora_object.pdf.exists and article.publication_allowed %}
     <li>
       <a class="tool-btn" href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}" title="{% trans 'Télécharger' %}" target="_blank">
         <span class="toolbox-pdf">PDF</span>
       </a>
     </li>
     {% endif %}
-    {% if article.erudit_object.processing == 'complet' %}
+    {% if article.erudit_object.processing == 'complet' and article.publication_allowed %}
     <li>
       <a class="tool-btn" href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
         <span class="toolbox-html">HTML</span>
@@ -30,7 +30,15 @@
     {% endspaceless %}
   </ul>
   <h6 class="article-title">
-    <a href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article{% endblocktrans %}">{{ article.html_title|safe|default:article.title }}</a>
+    {% if not article.publication_allowed %}
+    <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}"><span class="ion-help-circled"></span></span>
+    {% endif %}
+    {% spaceless %}
+    <a href="
+    {% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article{% endblocktrans %}">
+    {{ article.html_title|safe|default:article.title }}
+    </a>
+    {% endspaceless %}
   </h6>
   <div class="article-metadata row">
     <p class="article-author col-sm-9">
