@@ -677,9 +677,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     processing = models.CharField(max_length=1, choices=PROCESSING_CHOICES)
     """ Type of processing of the article """
 
-    publication_allowed_by_authors = models.BooleanField(
-        verbose_name=_("Publication autorisée par l'auteur"), default=True)
-    """ Defines if the article can be published on the Érudit platform according to the authors """
+    publication_allowed = models.BooleanField(
+        verbose_name=_("Publication autorisée par le titulaire du droit d'auteur"), default=True)
+    """ Defines if the article can be published on the Érudit platform accrding to the copyright holders """  # noqa
 
     copyrights = models.ManyToManyField(
         Copyright, related_name=_('articles'), verbose_name=_("Droits d'auteurs"))
