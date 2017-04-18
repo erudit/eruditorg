@@ -657,12 +657,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     )
     """ External URL of the PDF version of the article """
 
-    has_copyright_restriction = models.BooleanField(
-        default=False,
-        verbose_name=_("Diffusion restreinte par le titulaire du droit d'auteur"),
-        help_text=_("Cocher si le titulaire du droit d'auteur n'autorise pas la diffusion de cet article sur la plateforme."),  # noqa
-    )
-
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
         'article', 'compterendu', 'autre', 'note'
     )
@@ -714,13 +708,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     def subtitle(self):
         title = self.subtitles.filter(paral=False).first()
         return str(title) if title else None
-
-    @cached_property
-    def dissemination_allowed(self):
-        """ Return ``True`` if the dissemination of this article is allowed """
-        if self.has_copyright_restriction or not self.publication_allowed_by_authors:
-            return False
-        return True
 
     def __str__(self):
         if self.title:

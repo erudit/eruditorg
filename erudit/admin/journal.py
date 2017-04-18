@@ -217,7 +217,7 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ("Synchronisation", {
             'fields': (
-               ('fedora_created', 'fedora_updated', )
+                ('fedora_created', 'fedora_updated', )
             )
         }),
         ("Localisation de l'article", {
@@ -228,11 +228,11 @@ class ArticleAdmin(admin.ModelAdmin):
 
         ("Restrictions d'accès", {
             'fields': (
-                'has_copyright_restriction',
                 'publication_allowed_by_authors',
             )
         }),
     ]
+
 
 class JournalInformationAdmin(TranslationAdmin):
     pass
