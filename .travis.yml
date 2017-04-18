@@ -7,7 +7,6 @@ install:
   - pip install tox codecov
 script:
   - tox
-cache: pip
 
 after_success:
   - codecov
