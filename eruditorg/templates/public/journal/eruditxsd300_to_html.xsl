@@ -364,6 +364,7 @@
               <xsl:if test="count(//resume) > 1">double-col</xsl:if>
               {% endif %}
             </xsl:attribute>
+            <h2 class="sr-only">{% trans 'Résumés' %}</h2>
             <xsl:apply-templates select="//resume"/>
           </section>
         </xsl:if>
@@ -372,7 +373,7 @@
           {% if article.erudit_object.processing == 'complet' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
-            <h2 class="hidden">{% trans "Corps de l’article" %}</h2>
+            <h2 class="sr-only">{% trans "Corps de l’article" %}</h2>
             <xsl:apply-templates select="//corps"/>
           </section>
           {% elif article.localidentifier %}
@@ -656,7 +657,7 @@
   <xsl:template match="//resume">
     <section id="{name()}-{@lang}" class="{name()}">
       <xsl:if test="@lang='fr'">
-        <h2>
+        <h3>
           <xsl:choose>
             <xsl:when test="titre">
               <xsl:value-of select="titre"/>
@@ -665,7 +666,7 @@
               Résumé
             </xsl:otherwise>
           </xsl:choose>
-        </h2>
+        </h3>
         <p>
           <xsl:apply-templates select="*[not(self::titre)]"/>
         </p>
