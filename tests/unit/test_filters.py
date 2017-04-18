@@ -1,6 +1,10 @@
 from erudit.templatetags.model_formatters import person_list
 
 
+def test_can_format_an_empty_list():
+    assert person_list([]) == ''
+
+
 def test_can_format_single_author():
     assert person_list(['Paul']) == "Paul"
 
