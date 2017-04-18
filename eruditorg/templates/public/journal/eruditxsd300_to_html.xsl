@@ -106,6 +106,13 @@
                 </p>
               </div>
               {% endif %}
+              {% if not article.publication_allowed %}
+              <div class="alert alert-warning">
+                <p>
+                  {% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}
+                </p>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -361,7 +368,7 @@
           </section>
         </xsl:if>
 
-        {% if article_access_granted and not only_summary %}
+        {% if article_access_granted and not only_summary and article.publication_allowed %}
           {% if article.erudit_object.processing == 'complet' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
