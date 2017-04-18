@@ -609,12 +609,14 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         article = self.get_article()
         xml_content = self.fedora_object.xml_content
 
+        erudit_object = article.get_erudit_object()
         coverpage_context = {
             'article': article,
             'issue': article.issue,
             'journal': article.issue.journal,
             'fedora_article': self.fedora_object,
-            'erudit_article': EruditArticle(xml_content) if xml_content else None,
+            'erudit_article': erudit_object,
+            'authors': erudit_object.get_formatted_authors()
         }
         coverpage = generate_pdf(
             'public/journal/article_pdf_coverpage.html',
