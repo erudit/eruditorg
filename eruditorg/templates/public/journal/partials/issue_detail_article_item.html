@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load cache %}
+{% load model_formatters %}
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
 <li class="article-item{% if not article.publication_allowed %} article-restricted{% endif %}">
@@ -42,7 +43,11 @@
   </h6>
   <div class="article-metadata row">
     <p class="article-author col-sm-9">
+      {% if article.erudit_object %}
+        {{ article.erudit_object.get_formatted_authors | person_list }}
+      {% else %}
       {% for author in article.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}{% endfor %}
+      {% endif %}
     </p>
     <p class="article-pagination col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}
