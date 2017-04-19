@@ -674,7 +674,7 @@
         </xsl:if>
       </xsl:if>
       <xsl:if test="@lang='en'">
-        <h2>
+        <h3>
           <xsl:choose>
             <xsl:when test="titre">
               <xsl:value-of select="titre"/>
@@ -683,7 +683,7 @@
               Abstract
             </xsl:otherwise>
           </xsl:choose>
-        </h2>
+        </h3>
         <xsl:apply-templates select="//grtitre/titreparal[@lang='en']" mode="abstract"/>
         <p>
           <xsl:apply-templates select="*[not(self::titre)]"/>
@@ -705,7 +705,7 @@
         </xsl:if>
       </xsl:if>
       <xsl:if test="@lang='es'">
-        <h2>
+        <h3>
           <xsl:choose>
             <xsl:when test="titre">
               <xsl:value-of select="titre"/>
@@ -714,7 +714,7 @@
               Resumen
             </xsl:otherwise>
           </xsl:choose>
-        </h2>
+        </h3>
         <xsl:apply-templates select="//grtitre/titreparal[@lang='es']" mode="abstract"/>
         <p>
           <xsl:apply-templates select="*[not(self::titre)]"/>
