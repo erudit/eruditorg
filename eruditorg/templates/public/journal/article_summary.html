@@ -75,14 +75,8 @@
   >
 
   {% cache FOREVER_TTL "public_article_summary_content" article.id in_citation_list LANGUAGE_CODE %}
-  {% if article.publication_allowed_by_authors %}
-    {# XSL transformation article render #}
-    {% render_article article only_summary=True %}
-  {% else %}
-    <div class="alert alert-warning">
-      {% trans "La diffusion de cet article sur Érudit n'a pas été autorisée par l'auteur." %}
-    </div>
-  {% endif %}
+  {# XSL transformation article render #}
+  {% render_article article only_summary=True %}
   {% endcache %}
 </main>
 
