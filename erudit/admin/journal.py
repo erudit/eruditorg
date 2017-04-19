@@ -217,7 +217,7 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ("Synchronisation", {
             'fields': (
-               ('fedora_created', 'fedora_updated', )
+                ('fedora_created', 'fedora_updated', )
             )
         }),
         ("Localisation de l'article", {
@@ -232,6 +232,7 @@ class ArticleAdmin(admin.ModelAdmin):
             )
         }),
     ]
+
 
 class JournalInformationAdmin(TranslationAdmin):
     pass
