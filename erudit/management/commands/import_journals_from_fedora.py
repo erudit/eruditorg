@@ -584,7 +584,7 @@ class Command(BaseCommand):
         if is_external_article:
             self._import_article_from_issue_node(article, issue_article_node)
         elif fedora_article.erudit_xsd300.exists:
-            self._import_article_from_eruditarticle_v3(article)
+            self._import_article_from_eruditarticle_v3(article, issue_article_node)
 
     def _import_article_from_issue_node(self, article, issue_article_node):
         """ Imports an article using its definition in the issue's summary. """
@@ -599,7 +599,16 @@ class Command(BaseCommand):
             article.external_pdf_url = urlpdf.text
         article.save()
 
-    def _import_article_from_eruditarticle_v3(self, article, article_erudit_object=None):
+    def _get_is_publication_allowed(self, issue_article_node):
+        """ Return True if the publication of this article is allowed """
+        accessible = issue_article_node.find('accessible')
+        if accessible is not None and accessible.text == 'non':
+            return False
+        return True
+
+    def _import_article_from_eruditarticle_v3(
+        self, article, issue_article_node, article_erudit_object=None
+    ):
         """ Imports an article using the EruditArticle v3 specification. """
         article_erudit_object = article_erudit_object or article.erudit_object
 
@@ -621,6 +630,7 @@ class Command(BaseCommand):
         article.subtitle = article_erudit_object.subtitle
         article.surtitle = article_erudit_object.section_title
         article.language = article_erudit_object.language
+        article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
 
         publisher_name = article_erudit_object.publisher
         if publisher_name:
