@@ -369,7 +369,7 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
         context['articles'] = articles
         return context
 
-    def generate_sections_tree(self, articles, title=None, title_paral=None, level=1):
+    def generate_sections_tree(self, articles, title=None, title_paral=None, level=0):
         sections_tree = {
             'groups': [],
             'level': level,
@@ -379,8 +379,17 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
             },
             'type': 'subsection'
         }
+
+        if level == 3:
+            sections_tree['groups'].append({
+                'type': 'objects',
+                'objects': articles,
+                'level': level
+            })
+            return sections_tree
+
         for title, articles in groupby(
-            articles, lambda a: getattr(a, 'section_title_' + str(level))
+            articles, lambda a: getattr(a, 'section_title_' + str(level + 1))
         ):
             articles = list(articles)
             if title is None:
@@ -390,7 +399,8 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
                     'level': level,
                 })
             else:
-                title_paral = getattr(articles[0], 'section_title_' + str(level) + '_paral')
+                title_paral = getattr(articles[0], 'section_title_' + str(level + 1) + '_paral')
+
                 sections_tree['groups'].append(
                     self.generate_sections_tree(
                         articles, level=level + 1,
