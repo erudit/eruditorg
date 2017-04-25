@@ -413,6 +413,22 @@ MAILCHIMP_ACTION_URL = ""
 
 JS_REVERSE_INCLUDE_ONLY_NAMESPACES = ['public:citations', 'public:search', ]
 
+# Django-ckeditor settings
+# -----------------------------------
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format', 'Bold', 'Italic', 'Underline'],
+            ['Image', 'NumberedList', 'BulletedList', '-', 'JustifyLeft',
+             'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat']
+        ]
+    }
+}
+
 
 try:
     from .settings_env import *  # noqa
