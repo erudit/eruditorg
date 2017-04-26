@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 from erudit.models import Article
 from erudit.models import Issue
@@ -8,16 +9,17 @@ from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 
-
-class TestJournalUpcomingManager(BaseEruditTestCase):
+@pytest.mark.django_db
+class TestJournalUpcomingManager(object):
     def test_returns_only_the_upcoming_journals(self):
         # Setup
-        journal_1 = JournalFactory.create(collection=self.collection, upcoming=True)
-        JournalFactory.create(collection=self.collection, upcoming=False)
+        journal_1 = JournalFactory()
+        journal_2 = JournalFactory()
+        IssueFactory(journal=journal_2)
         # Run
         journals = Journal.upcoming_objects.all()
         # Check
-        self.assertEqual(list(journals), [journal_1, ])
+        assert list(journals) == [journal_1, ]
 
 
 class TestInternalJournalManager(BaseEruditTestCase):

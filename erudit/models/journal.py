@@ -164,9 +164,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     )
     """ Users that are part of this journal's organization """
 
-    upcoming = models.BooleanField(default=False, verbose_name=_('Prochainement disponible'))
-    """ Defines whether the journal will be available soon or not. """
-
     disciplines = models.ManyToManyField('Discipline', related_name='journals')
     """ The disciplines associated with the journal. """
 

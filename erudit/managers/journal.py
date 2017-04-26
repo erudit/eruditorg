@@ -44,11 +44,18 @@ class LegacyJournalManager(MultilingualManager):
 
 
 class UpcomingJournalManager(MultilingualManager):
-    """ Provides methods to work with upcoming journals. """
+    """ Provides methods to work with upcoming journals.
+
+    An upcoming journal is an internal journal with no published issues
+    """
 
     def get_queryset(self):
-        """ Returns all the upcoming Journal instances. """
-        return super(UpcomingJournalManager, self).get_queryset().filter(upcoming=True)
+        is_internal = Q(redirect_to_external_url=False)
+        no_published_issues = Q(issues=None)
+
+        return super().get_queryset().filter(
+            is_internal & no_published_issues
+        )
 
 
 class InternalIssueManager(models.Manager):
