@@ -9,13 +9,13 @@ from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 
+
 @pytest.mark.django_db
 class TestJournalUpcomingManager(object):
     def test_returns_only_the_upcoming_journals(self):
         # Setup
         journal_1 = JournalFactory()
-        journal_2 = JournalFactory()
-        IssueFactory(journal=journal_2)
+        JournalFactory.create_with_issue()
         # Run
         journals = Journal.upcoming_objects.all()
         # Check
@@ -30,7 +30,7 @@ class TestInternalJournalManager(BaseEruditTestCase):
             external_url='http://example.com',
             redirect_to_external_url=True
         )
-        JournalFactory.create(collection=self.collection, upcoming=False)
+        JournalFactory.create(collection=self.collection)
         # Run
         journals = Journal.internal_objects.all()
         # Check

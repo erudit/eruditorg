@@ -40,6 +40,12 @@ class DisciplineFactory(factory.django.DjangoModelFactory):
 
 class JournalFactory(factory.django.DjangoModelFactory):
 
+    @classmethod
+    def create_with_issue(cls, *args, **kwargs):
+        instance = cls(*args, **kwargs)
+        IssueFactory(journal=instance)
+        return instance
+
     collection = factory.SubFactory(CollectionFactory)
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
