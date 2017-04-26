@@ -118,7 +118,10 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
         return form_kwargs
 
     def get_queryset(self):
-        qs = super(JournalListView, self).get_queryset()
+        qs = Journal.objects.exclude(
+            pk__in=Journal.upcoming_objects.all().values_list('pk', flat=True)
+        )
+
         qs = qs.select_related('collection', 'type')
 
         # Filter the queryset
