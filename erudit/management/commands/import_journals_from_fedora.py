@@ -603,7 +603,11 @@ class Command(BaseCommand):
         """ Imports an article using its definition in the issue's summary. """
         xml = et.tostring(issue_article_node)
         erudit_object = EruditArticle(xml)
-        self._import_article_from_eruditarticle_v3(article, article_erudit_object=erudit_object)
+        self._import_article_from_eruditarticle_v3(
+            article,
+            issue_article_node,
+            article_erudit_object=erudit_object
+        )
 
         urlhtml = issue_article_node.find('.//urlhtml')
         urlpdf = issue_article_node.find('.//urlpdf')
