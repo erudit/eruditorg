@@ -19,8 +19,10 @@ from ...models import Author
 from ...models import Collection
 from ...models import Issue
 from ...models import Journal
+from ...models import JournalType
 
 logger = logging.getLogger(__file__)
+scientific_journal_type = JournalType.objects.get(code=JournalType.CODE_SCIENTIFIC)
 
 
 class Command(BaseCommand):
@@ -163,6 +165,8 @@ class Command(BaseCommand):
         except Journal.DoesNotExist:
             journal = Journal()
             journal.code = journal_code
+            journal.redirect_to_external_url = True
+            journal.type = scientific_journal_type
         journal.collection = collection
         journal.name = journal_set.title if hasattr(journal_set, 'title') else journal_set.setName
 
