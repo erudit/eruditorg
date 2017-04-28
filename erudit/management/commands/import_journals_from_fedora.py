@@ -553,10 +553,23 @@ class Command(BaseCommand):
             fedora_article = ArticleDigitalObject(api, article_pid)
             assert fedora_article.exists
         except AssertionError:
-            logger.error(
-                'The article with PID "{}" seems to be inexistant'.format(article_pid),
-                exc_info=True)
-            raise
+            # FIXME handle this more elegantly
+            #
+            # A hack has been used to implement continuous publication for ageo.
+            # The consequence of this hack is that issue summaries reference articles that do not
+            # exist in Fedora. To bypass this, we silently ignore non-existent articles for ageo.
+            #
+            # ref https://redmine.erudit.team/issues/2296
+            if "ageo1499289" in article_pid:
+                logger.warn(
+                    'The ageo1499289 article with PID "{}" has been SKIPPED'.format(article_pid)
+                )
+                return
+            else:
+                logger.error(
+                    'The article with PID "{}" seems to be inexistant'.format(article_pid),
+                    exc_info=True)
+                raise
 
         # STEP 2: creates or updates the article object
         # --
