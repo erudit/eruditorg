@@ -62,15 +62,31 @@ class TestJournalListView(object):
         self.user.set_password('notsecret')
         self.user.save()
 
+    def test_upcoming_journals_are_hidden_from_list(self):
+
+        # Create 6 journals
+        journals = JournalFactory.create_batch(6)
+
+        # Create an issue for the first 5 journals
+        for journal in journals[:5]:
+            IssueFactory(journal=journal)
+
+        url = reverse('public:journal:journal_list')
+        # Run
+        response = self.client.get(url)
+        displayed_journals = set(response.context['journals'])
+        assert displayed_journals == set(journals[:5])
+        assert journals[5] not in displayed_journals
+
     def test_can_sort_journals_by_name(self):
         # Setup
         collection = CollectionFactory.create()
-        journal_1 = JournalFactory.create(collection=collection, name='ABC journal')
-        journal_2 = JournalFactory.create(collection=collection, name='ACD journal')
-        journal_3 = JournalFactory.create(collection=collection, name='DEF journal')
-        journal_4 = JournalFactory.create(collection=collection, name='GHI journal')
-        journal_5 = JournalFactory.create(collection=collection, name='GIJ journal')
-        journal_6 = JournalFactory.create(collection=collection, name='GJK journal')
+        journal_1 = JournalFactory.create_with_issue(collection=collection, name='ABC journal')
+        journal_2 = JournalFactory.create_with_issue(collection=collection, name='ACD journal')
+        journal_3 = JournalFactory.create_with_issue(collection=collection, name='DEF journal')
+        journal_4 = JournalFactory.create_with_issue(collection=collection, name='GHI journal')
+        journal_5 = JournalFactory.create_with_issue(collection=collection, name='GIJ journal')
+        journal_6 = JournalFactory.create_with_issue(collection=collection, name='GJK journal')
         url = reverse('public:journal:journal_list')
         # Run
         response = self.client.get(url)
@@ -92,17 +108,17 @@ class TestJournalListView(object):
         discipline_1 = DisciplineFactory.create(code='abc-discipline', name='ABC')
         discipline_2 = DisciplineFactory.create(code='def-discipline', name='DEF')
         discipline_3 = DisciplineFactory.create(code='ghi-discipline', name='GHI')
-        journal_1 = JournalFactory.create(collection=collection)
+        journal_1 = JournalFactory.create_with_issue(collection=collection)
         journal_1.disciplines.add(discipline_1)
-        journal_2 = JournalFactory.create(collection=collection)
+        journal_2 = JournalFactory.create_with_issue(collection=collection)
         journal_2.disciplines.add(discipline_1)
-        journal_3 = JournalFactory.create(collection=collection)
+        journal_3 = JournalFactory.create_with_issue(collection=collection)
         journal_3.disciplines.add(discipline_2)
-        journal_4 = JournalFactory.create(collection=collection)
+        journal_4 = JournalFactory.create_with_issue(collection=collection)
         journal_4.disciplines.add(discipline_3)
-        journal_5 = JournalFactory.create(collection=collection)
+        journal_5 = JournalFactory.create_with_issue(collection=collection)
         journal_5.disciplines.add(discipline_3)
-        journal_6 = JournalFactory.create(collection=collection)
+        journal_6 = JournalFactory.create_with_issue(collection=collection)
         journal_6.disciplines.add(discipline_3)
         url = reverse('public:journal:journal_list')
         # Run
@@ -125,8 +141,8 @@ class TestJournalListView(object):
     def test_only_main_collections_are_shown_by_default(self):
         collection = CollectionFactory.create()
         main_collection = CollectionFactory.create(is_main_collection=True)
-        journal1 = JournalFactory.create(collection=collection)
-        journal2 = JournalFactory.create(collection=main_collection)
+        journal1 = JournalFactory.create_with_issue(collection=collection)
+        journal2 = JournalFactory.create_with_issue(collection=main_collection)
         url = reverse('public:journal:journal_list')
         response = self.client.get(url)
 
@@ -135,7 +151,7 @@ class TestJournalListView(object):
     def test_can_filter_the_journals_by_open_access(self):
         # Setup
         collection = CollectionFactory.create()
-        journal_1 = JournalFactory.create(collection=collection, open_access=True)
+        journal_1 = JournalFactory.create_with_issue(collection=collection, open_access=True)
         JournalFactory.create(collection=collection, open_access=False)
         url = reverse('public:journal:journal_list')
         # Run
@@ -149,7 +165,7 @@ class TestJournalListView(object):
         jtype_1 = JournalType.objects.create(code='T1', name='T1')
         jtype_2 = JournalType.objects.create(code='T2', name='T2')
         JournalFactory.create(collection=collection, type=jtype_1)
-        journal_2 = JournalFactory.create(collection=collection, type=jtype_2)
+        journal_2 = JournalFactory.create_with_issue(collection=collection, type=jtype_2)
         url = reverse('public:journal:journal_list')
         # Run
         response = self.client.get(url, data={'types': ['T2', ]})
@@ -160,8 +176,8 @@ class TestJournalListView(object):
         # Setup
         col_1 = CollectionFactory(code='col1')
         col_2 = CollectionFactory(code='col2')
-        JournalFactory.create(collection=col_1)
-        journal_2 = JournalFactory.create(collection=col_2)
+        JournalFactory.create_with_issue(collection=col_1)
+        journal_2 = JournalFactory.create_with_issue(collection=col_2)
         url = reverse('public:journal:journal_list')
         # Run
         response = self.client.get(url, data={'collections': ['col2', ]})

@@ -54,7 +54,7 @@ class TestHomeView(BaseEruditTestCase):
 
     def test_embeds_the_latest_journals_into_the_context(self):
         # Setup
-        JournalFactory.create(collection=self.collection, upcoming=False)
+        JournalFactory.create(collection=self.collection)
         url = reverse('public:home')
         # Run
         response = self.client.get(url)
