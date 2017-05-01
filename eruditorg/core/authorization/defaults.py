@@ -22,7 +22,7 @@ class AuthorizationConfig(object):
     """
 
     can_edit_journal_information = AuthorizationDef(
-        'editor:can_edit_journal_information', _('Éditer les informations de revues'))
+        'editor:can_edit_journal_information', _("Éditer l'à-propos"))
     """
     This authorization defines the ability to update journal information.
     """
