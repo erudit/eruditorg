@@ -14,7 +14,10 @@ from core.authorization.models import Authorization
 from apps.public.auth.forms import PasswordResetForm
 
 logger = logging.getLogger(__name__)
-authorization_codename = AuthorizationConfig.can_manage_issuesubmission.codename
+authorization_codenames = [
+    AuthorizationConfig.can_manage_issuesubmission.codename,
+    AuthorizationConfig.can_edit_journal_information.codename
+]
 User = get_user_model()
 
 
@@ -111,27 +114,27 @@ class Command(BaseCommand):
                     user.save()
 
                 journal.members.add(user)
-
-                auth, created = Authorization.objects.get_or_create(
-                    user=user,
-                    authorization_codename=authorization_codename,
-                    object_id=journal.pk,
-                    content_type=journal_content_type
-                )
-
-                if created:
-                    logger.info(
-                        "Authorization: {}, {}, {}, CREATED".format(
-                            user,
-                            journal,
-                            authorization_codename
-                        )
+                for authorization_codename in authorization_codenames:
+                    auth, created = Authorization.objects.get_or_create(
+                        user=user,
+                        authorization_codename=authorization_codename,
+                        object_id=journal.pk,
+                        content_type=journal_content_type
                     )
-                else:
-                    logger.info(
-                        "Authorization: {}, {}, {}, UPDATED".format(
-                            user,
-                            journal,
-                            authorization_codename
+
+                    if created:
+                        logger.info(
+                            "Authorization: {}, {}, {}, CREATED".format(
+                                user,
+                                journal,
+                                authorization_codename
+                            )
                         )
-                    )
+                    else:
+                        logger.info(
+                            "Authorization: {}, {}, {}, UPDATED".format(
+                                user,
+                                journal,
+                                authorization_codename
+                            )
+                        )
