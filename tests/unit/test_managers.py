@@ -12,14 +12,28 @@ from erudit.test.factories import JournalFactory
 
 @pytest.mark.django_db
 class TestJournalUpcomingManager(object):
-    def test_returns_only_the_upcoming_journals(self):
+    def test_journals_with_no_issues_are_upcoming(self):
         # Setup
         journal_1 = JournalFactory()
+        # Run
+        journals = Journal.upcoming_objects.all()
+        # Check
+        assert list(journals) == [journal_1]
+
+    def test_journals_with_published_issues_are_not_upcoming(self):
+        # Setup
         JournalFactory.create_with_issue()
         # Run
         journals = Journal.upcoming_objects.all()
         # Check
-        assert list(journals) == [journal_1, ]
+        assert list(journals) == []
+
+    def test_journals_with_unpublished_issues_are_upcoming(self):
+        # Setup
+        journal_1 = JournalFactory.create_with_issue()
+        IssueFactory(journal=journal_1, is_published=False)
+        # Test
+        assert list(Journal.upcoming_objects.all()) == [journal_1]
 
 
 class TestInternalJournalManager(BaseEruditTestCase):

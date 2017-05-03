@@ -51,7 +51,7 @@ class UpcomingJournalManager(MultilingualManager):
 
     def get_queryset(self):
         is_internal = Q(redirect_to_external_url=False)
-        no_published_issues = Q(issues=None)
+        no_published_issues = Q(issues=None) | ~Q(issues__is_published=True)
 
         return super().get_queryset().filter(
             is_internal & no_published_issues
