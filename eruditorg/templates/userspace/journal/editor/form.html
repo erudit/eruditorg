@@ -32,19 +32,20 @@
     <h2 class="text-center">{% trans "Déposer des fichiers de production" %}</h2>
       <div class="col-md-3">
         <div class="panel">
-          <div class="panel-heading">Instructions</div>
+          <div class="panel-heading">{% trans "Instructions" %}</div>
           <div class="panel-body">
-          Afin de d’optimiser le temps de production de vos numéros et ainsi réduire les coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:<br>
+          {% trans "Afin d’optimiser le temps de production de vos numéros et ainsi réduire les coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:" %}<br>
           <ul>
-            <li>PDF avec les polices incorporées (liens vers les documents d'aide)</li>
-            <li>PDF séparés article par article</li>
-            <li>Fichier de mise en page article par article</li>
-            <li>Nomenclature des articles selon leur ordre d’apparition dans le sommaire du numéro</li>
-            <li>Nomenclature des images et tableaux (numéro de l’article et selon l’ordre où ils apparaissent dans l'article)</li>
+            <li>{% trans "PDF avec les polices incorporées" %}</li>
+            <li>{% trans "PDF séparés article par article" %}</li>
+            <li>{% trans "Nomenclature des articles selon leur ordre d’apparition dans le sommaire du numéro (article1, article2&hellip;)" %}</li>
+            <li>{% trans "Nomenclature des images et tableaux (numéro de l’article et selon l’ordre où ils apparaissent dans l'article. Par ex&nbsp;: image01-01.jpg)" %}</li>
+            <li>{% trans "Supprimer toutes les marques de coupes dans les fichiers PDF." %}</li>
           </ul>
-            Notez également que vous devez effectuez les balisages suivants si vous souhaitez qu’ils s’affichent correctement sur la plateforme&nbsp;:
+            {% trans "Notez également que vous devez effectuer les balisages suivants lors de la mise en page de vos articles si vous souhaitez qu’ils s’affichent correctement sur la plateforme&nbsp;:" %}
             <ul>
-          <li>Baliser les liens et les courriels</li>
+          <li>{% trans "Baliser les liens et les courriels (les affiliations, le corps du texte et les références bibliographiques)" %}</li>
+          <li>{% trans "Lier les appels de notes aux notes de bas de page" %}</li>
           </ul>
           </div>
         </div>
