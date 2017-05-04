@@ -50,12 +50,16 @@ class UpcomingJournalManager(MultilingualManager):
     """
 
     def get_queryset(self):
-        is_internal = Q(redirect_to_external_url=False)
-        no_published_issues = Q(issues=None) | ~Q(issues__is_published=True)
+        is_external = Q(redirect_to_external_url=True)
+        no_issues = Q(issues=None)
+        has_unpublished_issues = Q(issues__is_published=False)
+        has_published_issues = Q(issues__is_published=True)
 
         return super().get_queryset().filter(
-            is_internal & no_published_issues
-        )
+            no_issues | has_unpublished_issues
+        ).exclude(
+            has_published_issues | is_external
+        ).distinct()
 
 
 class InternalIssueManager(models.Manager):
