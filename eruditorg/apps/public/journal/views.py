@@ -354,7 +354,7 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
         context['journal'] = self.object.journal
         context['user_has_access_to_issue'] = self.object.journal.open_access or (
             get_valid_subscription_for_journal(self.request, self.object.journal) is not None)
-        context['themes'] = self.object.erudit_object.get_themes().values()
+        context['themes'] = self.object.erudit_object.get_formatted_themes()
         articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \
             .prefetch_related('authors', 'section_titles') \

@@ -14,6 +14,30 @@
         vertical-align: middle;
       }
 
+      .issue-themes {
+        margin-bottom: 0.15em;
+      }
+
+      .theme-title {
+        @include fw-sans-bold;
+        margin-bottom: 0.15em;
+
+        + .theme-title {
+          color: $dark-grey;
+        }
+
+      }
+
+      .theme-guest-editor {
+        @include font-styles('sans');
+        font-size: small;
+        margin: 0.15em 0 1.75em 0;
+      }
+
+      .issue-number {
+        margin-bottom: 0.25em;
+      }
+
     }
 
     h2 {
