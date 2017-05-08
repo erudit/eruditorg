@@ -97,16 +97,22 @@
     .table-palette {
 
       th {
-
+        text-align: right;
+        
         &:first-of-type {
-          width: 20%;
+          width: 10%;
         }
 
         &:nth-of-type(2),
-        &:nth-of-type(3) {
-          width: 35%;
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+          width: 30%;
         }
 
+      }
+
+      td {
+        text-align: right;
       }
 
       [class^="palette-swatch"] {
@@ -123,6 +129,10 @@
 
       .palette-swatch-blue {
         background: $midnight-blue;
+      }
+
+      .palette-swatch-grey {
+        background: $light-grey;
       }
 
     }
