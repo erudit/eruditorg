@@ -1,0 +1,252 @@
+/**
+* Brand assets page
+*/
+
+#brand-assets {
+
+  #breadcrumb {
+    background: $light-grey;
+  }
+
+  h2 {
+    border: 0;
+    padding: 0;
+    margin: 0 0 0.5em 0;
+  }
+
+  h3 {
+    margin-top: 2em;
+    font-size: 1em;
+    font-size: 18px;
+    @include fw-sans-bold;
+  }
+
+  p {
+    font-size: 18px;
+  }
+
+  ol {
+    margin-left: 2.5em;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin-bottom: 3em;
+
+    tr, th, td {
+      border: none;
+      padding-left: 0;
+    }
+
+    th {
+      @include fw-sans;
+      text-align: left;
+      color: #000;
+    }
+
+    td {
+      font-size: 2em;
+    }
+
+  }
+
+  .nav-btn {
+    margin-bottom: 1em;
+  }
+
+  .main-block {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid $mid-grey;
+  }
+
+  // Colour palette
+  .block-palette {
+
+    #palette {
+      width: 100%;
+      height: 300px;
+
+      div {
+        height: 100%;
+      }
+
+      .palette-red {
+        background: $coral-red;
+        width: 70%;
+        display: inline-block;
+      }
+
+      .palette-secondary {
+        width: 30%;
+        float: right;
+      }
+
+      .palette-grey {
+        background: $light-grey;
+        height: 40%;
+      }
+
+      .palette-blue {
+        background: $midnight-blue;
+        height: 60%;
+      }
+
+    }
+
+    .table-palette {
+
+      th {
+        text-align: right;
+        
+        &:first-of-type {
+          width: 10%;
+        }
+
+        &:nth-of-type(2),
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+          width: 30%;
+        }
+
+      }
+
+      td {
+        text-align: right;
+      }
+
+      [class^="palette-swatch"] {
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+      }
+
+      .palette-swatch-red {
+        background: $coral-red;
+      }
+
+      .palette-swatch-blue {
+        background: $midnight-blue;
+      }
+
+      .palette-swatch-grey {
+        background: $light-grey;
+      }
+
+    }
+
+    .palette-illustration {
+      width: 125px;
+      margin: 0 1em 1em 0;
+    }
+
+  }
+
+  // Érudit's logo
+  .block-logo {
+
+    [class*="logo-"] {
+      width: 150px;
+      padding: 15px;
+    }
+
+    .logo-clearspace {
+      width: 300px;
+      padding: 0;
+      margin: 0 0.75em 1em 0;
+    }
+
+    .logo-white-bg-red {
+      background: $coral-red;
+
+      g {
+        fill: #fff;
+      }
+
+    }
+
+    .logo-white-bg-blue {
+      background: $midnight-blue;
+
+      g {
+        fill: #fff;
+      }
+
+    }
+
+    .logo-red-bg-white {
+      background: #fff;
+      outline: 1px solid $mid-grey;
+
+      g {
+        fill: $coral-red;
+      }
+
+    }
+
+    .logo-black-bg-white {
+      background: #fff;
+      outline: 1px solid $mid-grey;
+
+      g {
+        fill: #000;
+      }
+
+    }
+
+    [class*="symbol-"] {
+      width: 70px;
+      padding: 20px;
+    }
+
+    .symbol-red-bg-white {
+      background: #fff;
+
+      g {
+        fill: $coral-red;
+      }
+
+    }
+
+    .symbol-white-bg-red {
+      background: $coral-red;
+
+      g {
+        fill: #fff;
+      }
+
+    }
+
+    .symbol-black-bg-white {
+      background: #fff;
+
+      g {
+        fill: #000;
+      }
+
+    }
+
+  }
+
+  // Font and typography
+  .block-font {
+
+    .table-font {
+
+      td {
+        padding: 0.015em 0;
+        font-size: 3.25em;
+
+        &:nth-child(2) {
+          @include fw-sans-bold;
+        }
+
+      }
+
+    }
+
+  }
+
+}
