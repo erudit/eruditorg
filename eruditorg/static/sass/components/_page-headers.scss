@@ -9,21 +9,21 @@
   }
 
   h1 {
-    @include fw-sans-bold;
     margin-bottom: 0.5em;
 
-    span:first-child {
-      em {
-        @include fw-sans-bold-italic;
-      }
+    em {
+      @include fw-sans-bold-italic;
     }
 
-    > span + span {
-      @include fw-sans;
+    > span {
       display: block;
 
-      &:first-letter {
-        text-transform: uppercase;
+      + span {
+        @include fw-sans;
+      }
+
+      &:last-of-type {
+        @include fw-sans-bold;
       }
 
     }
