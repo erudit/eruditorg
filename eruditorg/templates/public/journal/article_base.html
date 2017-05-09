@@ -3,7 +3,7 @@
 {% load public_journal_tags %}
 {% load cache %}
 
-{% block title %}{{ article.title|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
+{% block title %}{{ article|format_article_title|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with journal=article.issue.journal.name|safe article=article.title %}{{ article }}. Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
@@ -158,7 +158,7 @@
   </a>
 </li>
 <li>
-  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article.title|truncatechars:50 }}</a>
+  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article|format_article_title|truncatechars:50 }}</a>
 </li>
 {% endblock breadcrumb %}
 
@@ -172,7 +172,7 @@
     {% cache FOREVER_TTL "public_article_detail_related_article" related_article.id LANGUAGE_CODE %}
     <li class="related-article col-sm-6 col-md-3">
       <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
-        <p class="related-article-title">{{ related_article.html_title|safe }}</p>
+        <p class="related-article-title">{{ related_article|format_article_html_title }}</p>
         {% if related_article.authors.all|length > 0 %}
         <p class="related-article-authors">{% trans 'Par' %}
           {% for author in related_article.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}{% endfor %}
