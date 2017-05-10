@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import unittest
 import io
 import os.path as op
 import pytest
@@ -14,7 +14,7 @@ from erudit.fedora.modelmixins import FedoraMixin
 from base.pdf import generate_pdf
 
 
-def get_mocked_erudit_object():
+def get_mocked_erudit_object(self):
     m = unittest.mock.MagicMock()
     m.get_formatted_title.return_value = "mocked title"
     return m
