@@ -1,5 +1,6 @@
+{% load public_journal_tags %}
 %0 Journal Article
-%T {{ article.title }}
+%T {{ article|format_article_title }}
 %A {% with author=article.authors.all.0 %}{% if author and author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% endif %}{% endwith %}
 %J {{ article.issue.journal.name }}
 %V {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}

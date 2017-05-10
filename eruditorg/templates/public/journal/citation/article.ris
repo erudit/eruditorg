@@ -1,5 +1,6 @@
+{% load public_journal_tags %}
 TY  - JOUR
-T1  - {{ article.title }}
+T1  - {{ article|format_article_title }}
 {% for author in article.authors.all %}{% if author.firstname and author.lastname %}
 A1  - {{ author.lastname }}, {{ author.firstname }}
 {% endif %}{% endfor %}

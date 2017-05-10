@@ -1,5 +1,6 @@
+{% load public_journal_tags %}
 @article{{ '{' }}{{ article.localidentifier }},
-  title="{{ article.title }}",
+  title="{{ article|format_article_title }}",
   author="{% for author in article.authors.all %}{% if author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% if not forloop.last %} and {% endif %}{% endif %}{% endfor %}",
   journal="{{ article.issue.journal.name }}",
   {% if article.issue.volume %}volume="{{ article.issue.volume }}",{% endif %}
