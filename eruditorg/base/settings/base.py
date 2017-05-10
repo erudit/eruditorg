@@ -162,7 +162,7 @@ TEMPLATES = [
 
 
 LOGIN_URL = 'public:auth:login'
-
+LOGIN_REDIRECT_URL = 'public:home'
 # Database configuration
 
 DATABASES = {
