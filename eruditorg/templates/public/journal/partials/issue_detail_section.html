@@ -1,17 +1,17 @@
-  {% for group in articles_per_section.groups %}
-    {% if group.type == 'objects' %}
-      <ol class="issue_detail--articles unstyled section-{{ group.level }}">
-        {% for article in group.objects %}
-        {% include "public/journal/partials/issue_detail_article_item.html" %}
-        {% endfor %}
-      </ol>
-    {% else %}
-        <h{{ group.level|add:"1" }} class="section">
-        {{ group.titles.main }}
-        {% for paral in group.titles.paral %}/ {{ paral }}{% endfor %}
-        </h{{ group.level|add:"1" }}>
-        {% with articles_per_section=group %}
-          {% include "public/journal/partials/issue_detail_section.html" %}
-        {% endwith %}
-    {% endif %}
-  {% endfor %}
+{% for group in articles_per_section.groups %}
+  {% if group.type == 'objects' %}
+    <ol class="issue_detail--articles unstyled section-{{ group.level }}">
+      {% for article in group.objects %}
+      {% include "public/journal/partials/issue_detail_article_item.html" %}
+      {% endfor %}
+    </ol>
+  {% else %}
+      <h{{ group.level|add:"1" }} class="section">
+      {{ group.titles.main }}
+      {% for paral in group.titles.paral %}/ {{ paral }}{% endfor %}
+      </h{{ group.level|add:"1" }}>
+      {% with articles_per_section=group %}
+        {% include "public/journal/partials/issue_detail_section.html" %}
+      {% endwith %}
+  {% endif %}
+{% endfor %}
