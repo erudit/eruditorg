@@ -402,7 +402,6 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
                 })
             else:
                 title_paral = getattr(articles[0], 'section_title_' + str(level + 1) + '_paral')
-
                 sections_tree['groups'].append(
                     self.generate_sections_tree(
                         articles, level=level + 1,
