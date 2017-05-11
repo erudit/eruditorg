@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationForm
 from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from core.email import Email
 
@@ -53,3 +54,14 @@ class PasswordResetForm(BasePasswordResetForm):
             subject_template=subject_template_name,
             extra_context=context)
         email.send()
+
+    def get_users(self, email):
+        """Given an email, return matching user(s) who should receive a reset.
+
+        This allows subclasses to more easily customize the default policies
+        that prevent inactive users and users with unusable passwords from
+        resetting their password.
+        """
+        active_users = get_user_model()._default_manager.filter(
+            email__iexact=email, is_active=True)
+        return (u for u in active_users)
