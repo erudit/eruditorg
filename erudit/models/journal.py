@@ -752,30 +752,57 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_1(self):
-        title = next(filter(lambda s: s.level == 1 and not s.paral, self._section_titles), None)
-        return title.title if title else None
+        if self.get_full_identifier():
+            section_titles = self.erudit_object.get_section_titles(level=1)
+            return section_titles['main'] if section_titles else None
+        else:
+            title = next(filter(lambda s: s.level == 1 and not s.paral, self._section_titles), None)
+            return title.title if title else None
 
     @property
     def section_title_1_paral(self):
-        return [t.title for t in filter(lambda s: s.level == 1 and s.paral, self._section_titles)]
+        if self.get_full_identifier():
+            section_titles = self.erudit_object.get_section_titles(level=1)
+            return section_titles['paral'].values() if section_titles else None
+        else:
+            title = next(filter(lambda s: s.level == 1 and s.paral, self._section_titles), None)
+            return title.title if title else []
 
     @property
     def section_title_2(self):
-        title = next(filter(lambda s: s.level == 2 and not s.paral, self._section_titles), None)
-        return title.title if title else None
+        if self.get_full_identifier():
+            section_titles = self.erudit_object.get_section_titles(level=2)
+            return section_titles['main'] if section_titles else None
+        else:
+            title = next(filter(lambda s: s.level == 2 and not s.paral, self._section_titles), None)
+            return title.title if title else None
 
     @property
     def section_title_2_paral(self):
-        return [t.title for t in filter(lambda s: s.level == 2 and s.paral, self._section_titles)]
+        if self.get_full_identifier():
+            section_titles = self.erudit_object.get_section_titles(level=2)
+            return section_titles['paral'].values() if section_titles else None
+        else:
+            title = next(filter(lambda s: s.level == 2 and s.paral, self._section_titles), None)
+            return title.title if title else []
 
     @property
     def section_title_3(self):
-        title = next(filter(lambda s: s.level == 3 and not s.paral, self._section_titles), None)
-        return title.title if title else None
+        if self.get_full_identifier():
+            section_titles = self.erudit_object.get_section_titles(level=3)
+            return section_titles['main'] if section_titles else None
+        else:
+            title = next(filter(lambda s: s.level == 3 and not s.paral, self._section_titles), None)
+            return title.title if title else None
 
     @property
     def section_title_3_paral(self):
-        return [t.title for t in filter(lambda s: s.level == 3 and s.paral, self._section_titles)]
+        if self.get_full_identifier():
+            section_titles = self.erudit_object.get_section_titles(level=3)
+            return section_titles['paral'].values()
+        else:
+            title = next(filter(lambda s: s.level == 3 and  s.paral, self._section_titles), None)
+            return title.title if title else []
 
     @property
     def _section_titles(self):
