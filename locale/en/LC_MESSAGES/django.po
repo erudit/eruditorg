@@ -2293,7 +2293,7 @@ msgstr "Sign Up"
 #: eruditorg/templates/public/brand_assets.html:38
 #: eruditorg/templates/public/brand_assets.html:47
 msgid "Logo et identité"
-msgstr ""
+msgstr "Logo and brand assets"
 
 #: eruditorg/templates/public/base.html:249
 msgid "Livres & actes"
@@ -2339,6 +2339,8 @@ msgstr "Follow Us"
 msgid ""
 "Consultez le guide de style d’Érudit : logo, palette de couleurs, identité."
 msgstr ""
+"Find out more about Érudit's brand guidelines: logo, colour scheme and "
+"graphics.  "
 
 #: eruditorg/templates/public/brand_assets.html:53
 msgid ""
@@ -2346,6 +2348,8 @@ msgid ""
 "            Retrouvez sur cette page tous les éléments visuels d’Érudit ainsi que les façons de les utiliser en accord avec notre image de marque.\n"
 "            "
 msgstr ""
+"\n"
+"This page provides Érudit's brand assets and guidelines on how to use them in accordance to our organisation's image, for both print and digital media. "
 
 #: eruditorg/templates/public/brand_assets.html:58
 msgid "http://www.erudit.org/public/documents/Erudit_guidedestyle.pdf"
@@ -2353,33 +2357,33 @@ msgstr ""
 
 #: eruditorg/templates/public/brand_assets.html:58
 msgid "Télécharger en PDF"
-msgstr ""
+msgstr "Download as a PDF"
 
 #: eruditorg/templates/public/brand_assets.html:59
 msgid "Télécharger les logos"
-msgstr ""
+msgstr "Download the logos"
 
 #: eruditorg/templates/public/brand_assets.html:69
 msgid "Couleurs et illustrations"
-msgstr ""
+msgstr "Colours and graphics"
 
 #: eruditorg/templates/public/brand_assets.html:72
 msgid ""
 "La charte graphique d’Érudit repose sur l’utilisation de 3 couleurs: le "
 "rouge, le bleu et le gris."
-msgstr ""
+msgstr "Érudit's palette is composed of 3 colours: red, blue and grey. "
 
 #: eruditorg/templates/public/brand_assets.html:84
 msgid "Rouge"
-msgstr ""
+msgstr "Red"
 
 #: eruditorg/templates/public/brand_assets.html:85
 msgid "Bleu"
-msgstr ""
+msgstr "Blue"
 
 #: eruditorg/templates/public/brand_assets.html:86
 msgid "Gris"
-msgstr ""
+msgstr "Grey"
 
 #: eruditorg/templates/public/brand_assets.html:109
 msgid ""
@@ -2392,13 +2396,20 @@ msgid ""
 "        </ol>\n"
 "        "
 msgstr ""
+"\n"
+"<p>These colours are used in our graphics and must respect the following principles:</p>\n"
+"<ol>\n"
+"<li>White space must take up approximately ½ to ⅓ of the space.</li>\n"
+"<li>Red must be the prominent colour, not blue or grey.</li>\n"
+"<li>Combine any imagery or photographs with a solid flat tint of red.</li>\n"
+"</ol>"
 
 #: eruditorg/templates/public/brand_assets.html:118
 #: eruditorg/templates/public/brand_assets.html:119
 #: eruditorg/templates/public/brand_assets.html:120
 #: eruditorg/templates/public/brand_assets.html:121
 msgid "Composition abstraite Érudit"
-msgstr ""
+msgstr "An abstract Érudit illustration"
 
 #: eruditorg/templates/public/brand_assets.html:125
 msgid ""
@@ -2406,38 +2417,42 @@ msgid ""
 "          Les illustrations sont disponibles sur demande.\n"
 "          "
 msgstr ""
+"\n"
+"These graphics are available on request."
 
 #: eruditorg/templates/public/brand_assets.html:135
 msgid "Logo d’Érudit"
-msgstr ""
+msgstr "Érudit's logo"
 
 #: eruditorg/templates/public/brand_assets.html:139
 msgid ""
 "Un espace de sécurité doit toujours être préservé autour du logo. La taille "
 "de cet espace est équivalente à la taille de l’accent du logo."
 msgstr ""
+"Please keep a clearspace around the logo. The minimum clearspace must be "
+"equivalent to the height of the acute accent in the logo. "
 
 #: eruditorg/templates/public/brand_assets.html:141
 #: eruditorg/templates/public/brand_assets.html:142
 msgid "Espace de sécurité du logo d’Érudit"
-msgstr ""
+msgstr "Clearspace around Érudit's logo"
 
 #: eruditorg/templates/public/brand_assets.html:145
 msgid "Version standard"
-msgstr ""
+msgstr "Standard logo"
 
 #: eruditorg/templates/public/brand_assets.html:147
 msgid ""
 "L’utilisation du logo rouge et au complet est celle qui est privilégiée."
-msgstr ""
+msgstr "We favour the use of the red, full-size logotype."
 
 #: eruditorg/templates/public/brand_assets.html:149
 msgid "Logo d’Érudit standard"
-msgstr ""
+msgstr "Érudit's standard logo "
 
 #: eruditorg/templates/public/brand_assets.html:152
 msgid "Déclinaisons de couleurs"
-msgstr ""
+msgstr "Colour variations"
 
 #: eruditorg/templates/public/brand_assets.html:154
 msgid ""
@@ -2445,48 +2460,53 @@ msgid ""
 "rouge, blanc et noir. Afin de conserver son uniformité, le logo ne doit pas "
 "comprendre d’autres combinaisons de couleurs."
 msgstr ""
+"The Érudit logo can be used in red, white or black, but never in any other "
+"colours. In order to maintain its consistency, the logo may not be displayed"
+" with other colour combinations. "
 
 #: eruditorg/templates/public/brand_assets.html:156
 msgid "Logo d’Érudit blanc sur fond rouge"
-msgstr ""
+msgstr "Érudit's logo in white on red background"
 
 #: eruditorg/templates/public/brand_assets.html:157
 msgid "Logo d’Érudit blanc sur fond bleu"
-msgstr ""
+msgstr "Érudit's logo in white on blue background"
 
 #: eruditorg/templates/public/brand_assets.html:159
 msgid "Logo d’Érudit rouge sur fond blanc"
-msgstr ""
+msgstr "Érudit's logo in red on white background"
 
 #: eruditorg/templates/public/brand_assets.html:160
 msgid "Logo d’Érudit noir sur fond blanc"
-msgstr ""
+msgstr "Érudit's logo in black on white background"
 
 #: eruditorg/templates/public/brand_assets.html:163
 msgid "Versions abrégées (symbole)"
-msgstr ""
+msgstr "Condensed version (icon)"
 
 #: eruditorg/templates/public/brand_assets.html:165
 msgid ""
 "Le logo peut être utilisé en version abrégée lorsque le logo standard ne "
 "peut être affiché."
 msgstr ""
+"The condensed version may be used when the standard, full-sized logo can not"
+" be displayed. "
 
 #: eruditorg/templates/public/brand_assets.html:167
 msgid "Symbole d’Érudit rouge sur fond blanc"
-msgstr ""
+msgstr "Érudit's symbol in red on a white background"
 
 #: eruditorg/templates/public/brand_assets.html:168
 msgid "Symbole d’Érudit blanc sur fond rouge"
-msgstr ""
+msgstr "Érudit's symbol in white on a red background"
 
 #: eruditorg/templates/public/brand_assets.html:169
 msgid "Symbole d’Érudit noir sur fond blanc"
-msgstr ""
+msgstr "Érudit's symbol in black on a white background"
 
 #: eruditorg/templates/public/brand_assets.html:177
 msgid "Police"
-msgstr ""
+msgstr "Typeface"
 
 #: eruditorg/templates/public/brand_assets.html:181
 msgid ""
@@ -2494,6 +2514,8 @@ msgid ""
 "          Érudit utilise la police de caractère Maax pour ses communications imprimées et numériques, en deux graisses&nbsp;: «&nbsp;regular&nbsp;» et «&nbsp;bold&nbsp;».\n"
 "          "
 msgstr ""
+"\n"
+"Érudit's typeface for print and digital communications is Maax, in bold and regular weights. "
 
 #: eruditorg/templates/public/brand_assets.html:220
 msgid ""
@@ -2501,10 +2523,12 @@ msgid ""
 "          Lorsque l’utilisation de cette police n’est pas possible, utiliser une police linéale («&nbsp;sans sérif&nbsp;»)&nbsp;: Arial, Helvetica.\n"
 "          "
 msgstr ""
+"\n"
+"Where the use of this typeface is not possible, please use one of the following sans-serif typefaces: Arial, Helvetica. "
 
 #: eruditorg/templates/public/brand_assets.html:230
 msgid "Crédits et coordonnées"
-msgstr ""
+msgstr "Acknowledgement and contact"
 
 #: eruditorg/templates/public/brand_assets.html:233
 msgid ""
@@ -2517,6 +2541,12 @@ msgid ""
 "\n"
 "        "
 msgstr ""
+"\n"
+"<p>Érudit's brand and this style guide were created by <a href=\"http://wedge.work/\" target=\"_blank\">Wedge</a>, a Montreal-based design studio.</p>\n"
+"\n"
+"<p>The Maax typeface was developed by <a href=\"http://www.205.tf/\" target=\"_blank\">205TF</a>.</p>\n"
+"\n"
+"<p>For further information, please contact Érudit's communications officer, Gwendal Henry: <a href=\"mailto:gwendal.henry@erudit.org?subject=Identité d’Érudit\">gwendal.henry@erudit.org</a>.</p>"
 
 #: eruditorg/templates/public/citations/list.html:6
 msgid ""
@@ -2922,7 +2952,7 @@ msgstr "Access to current issues of this journal requires a subscription."
 
 #: eruditorg/templates/public/journal/issue_detail.html:104
 msgid "Sous la direction de"
-msgstr ""
+msgstr "Guest-edited by"
 
 #: eruditorg/templates/public/journal/issue_detail.html:110
 msgid "Feuilleter ce numéro"
@@ -2975,15 +3005,15 @@ msgstr "issues"
 
 #: eruditorg/templates/public/journal/issue_detail.html:169
 msgid "Couverture représentant "
-msgstr ""
+msgstr "Cover for"
 
 #: eruditorg/templates/public/journal/issue_detail.html:169
 msgid "la thématique "
-msgstr ""
+msgstr "the thematic issue"
 
 #: eruditorg/templates/public/journal/issue_detail.html:169
 msgid "le "
-msgstr ""
+msgstr " "
 
 #: eruditorg/templates/public/journal/journal_authors_list.html:6
 #: eruditorg/templates/public/journal/journal_authors_list.html:60
@@ -3199,7 +3229,7 @@ msgstr "Title followed by…"
 #: eruditorg/templates/public/thesis/collection_home.html:71
 #: eruditorg/templates/public/thesis/collection_list_base.html:60
 msgid "Logo pour"
-msgstr ""
+msgstr "Logo for"
 
 #: eruditorg/templates/public/journal/journal_detail.html:6
 #, python-format
@@ -3365,7 +3395,7 @@ msgstr "Save"
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:35
 msgid ""
 "Le contenu de ce document est inaccessible en raison du droit d’auteur."
-msgstr ""
+msgstr "This document's content is inaccessible due to copyright reasons. "
 
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:39
 msgid "Lire l'article"
@@ -3587,7 +3617,7 @@ msgstr "Keywords:"
 
 #: eruditorg/templates/public/search/results.html:331
 msgid "Lire en texte intégral"
-msgstr ""
+msgstr "Read the full text"
 
 #: eruditorg/templates/public/search/results.html:386
 msgid "Aucun document trouvé&nbsp;!"
@@ -3651,7 +3681,7 @@ msgstr "Number of theses"
 
 #: eruditorg/templates/public/thesis/collection_list_base.html:127
 msgid "En un coup d’œil"
-msgstr ""
+msgstr "At a glance"
 
 #: eruditorg/templates/public/thesis/collection_list_per_author_name.html:6
 #, python-format
@@ -3706,6 +3736,10 @@ msgid ""
 "          <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt à l’université correspondante.</p>\n"
 "          "
 msgstr ""
+"\n"
+"<p>Érudit provides centralized access to the thesis and dissertation repositories of several Canadian universities. Searches can be done on Érudit within each repository or for all repositories using the <a href=\"%(advanced_search)s\">advanced search tool</a>; however, to consult the document, you will be redirected to that institution's platform.</ p>\n"
+"\n"
+"<p>Érudit is not responsible for documents available in this section. If necessary, please communicate directly with the person in charge of the repository.</p>"
 
 #: eruditorg/templates/public/thesis/home.html:64
 msgid "Par dépôt institutionnel"
