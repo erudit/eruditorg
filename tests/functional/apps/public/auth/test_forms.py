@@ -20,14 +20,14 @@ class TestPasswordResetForm(BaseEruditTestCase):
         form = PasswordResetForm({})
         self.assertEqual(list(form.get_users('foobar@example.com')), [self.user, ])
 
-    def test_cannot_choose_users_without_usable_passwords(self):
+    def test_can_choose_users_without_usable_passwords(self):
         # Setup
         self.user.set_unusable_password()
         self.user.email = 'foobar@example.com'
         self.user.save()
         # Run & check
         form = PasswordResetForm({})
-        self.assertFalse(len(list(form.get_users('foobar@example.com'))))
+        self.assertTrue(len(list(form.get_users('foobar@example.com'))))
 
     def test_can_properly_send_the_reset_email(self):
         # Setup
