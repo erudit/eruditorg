@@ -1,4 +1,4 @@
-{% load i18n %}{% load staticfiles %}<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n %}{% load staticfiles %}{%load public_journal_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
   <xsl:strip-space elements="*"/>
@@ -308,7 +308,7 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-title="{{ article.title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-title="{{ article|format_article_title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
                 <span class="ion-android-share toolbox-share"></span>
               </a>
             </li>
@@ -345,7 +345,7 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-title="{{ article.title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-title="{{ article|format_article_title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
                 <span class="ion-android-share toolbox-share"></span>
                 <span class="tools-label">{% trans "Partager" %}</span>
               </a>
