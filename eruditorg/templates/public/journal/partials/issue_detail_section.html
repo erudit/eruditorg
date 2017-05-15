@@ -8,7 +8,7 @@
   {% else %}
       <h{{ group.level|add:"1" }} class="section">
       {{ group.titles.main|safe }}
-      {% for paral in group.titles.paral %}/ {{ paral|safe }}{% endfor %}
+      {% for paral in group.titles.paral %}&nbsp;/ {{ paral|safe }}{% endfor %}
       </h{{ group.level|add:"1" }}>
       {% with articles_per_section=group %}
         {% include "public/journal/partials/issue_detail_section.html" %}
