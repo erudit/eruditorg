@@ -7,7 +7,7 @@
     </ol>
   {% else %}
       <h{{ group.level|add:"1" }} class="section">
-      {{ group.titles.main }}
+      {{ group.titles.main|safe }}
       {% for paral in group.titles.paral %}/ {{ paral|safe }}{% endfor %}
       </h{{ group.level|add:"1" }}>
       {% with articles_per_section=group %}
