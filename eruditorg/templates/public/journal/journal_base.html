@@ -107,6 +107,8 @@
           <dt>{% trans "ISSN" %}</dt>
           {% if journal.issn_print %}
           <dd>{{ journal.issn_print }} ({% trans "imprimé" %})</dd>
+          {% endif %}
+          {% if journal.issn_web %}
           <dd>{{ journal.issn_web }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
