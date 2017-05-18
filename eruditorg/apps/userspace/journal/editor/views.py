@@ -2,6 +2,7 @@
 import datetime as dt
 import logging
 import mimetypes
+import unicodedata
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -357,7 +358,8 @@ class IssueSubmissionAttachmentView(
 
     def render_to_response(self, context, **response_kwargs):
         filename = self.object.get_filename(sanitize=True)
-
+        normalized_filename = unicodedata.normalize('NFKD', filename)
+        filename = normalized_filename.encode('ascii', 'ignore').decode('ascii')
         try:
             fsock = open(self.object.path, 'rb')
         except FileNotFoundError:  # noqa
