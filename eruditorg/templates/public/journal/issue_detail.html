@@ -10,18 +10,21 @@
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
-<meta property="fb:app_id" content="128099979787">
-<meta property="og:url" content="{{ request.build_absolute_uri|urlencode }}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{{ issue.html_title|safe }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="fr_CA">
+<meta property="og:locale" content="{{ language_code }}">
+<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% if issue.has_coverpage %}{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
+<meta property="og:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
-<meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}">
-<meta name="twitter:title" content="{{ issue.html_title|safe }} – Érudit">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:title" content="{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }} – Érudit">
+<meta name="twitter:image:alt" content="{% if issue.has_coverpage %}{% trans 'Couverture pour ce numéro de la revue' %}{% else %}{% trans 'Logo pour' %}{% endif %} {{ journal.name|safe }}">
+<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% if issue.has_coverpage %}{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
+<meta name="twitter:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
 {% endblock meta_tags %}
 
 {% block structured_data %}
