@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
+from django.views.generic import RedirectView
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.utils.translation import ugettext_lazy as _
@@ -24,6 +25,7 @@ sitemaps_dict = {
 }
 
 urlpatterns = [
+    url(r'^index\.html$', RedirectView.as_view(pattern_name="public:home")),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
         content_type="text/plain"), name='robots-txt'),
     url(r'^sitemap\.xml$', sitemap_views.index,
