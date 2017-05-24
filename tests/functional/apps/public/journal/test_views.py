@@ -275,6 +275,26 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
     def monkeypatch_get_erudit_article(self, monkeypatch):
         monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
 
+    def test_supports_authors_with_empty_firstnames_and_empty_lastnames(self):
+        # Setup
+        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_1 = ArticleFactory.create(issue=issue_1)
+        author_1 = AuthorFactory.create(firstname='', lastname='')
+        article_1.authors.add(author_1)
+
+        issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        article_2 = ArticleFactory.create(issue=issue_2)
+        author_2 = AuthorFactory.create(firstname='Ada', lastname='Lovelace')
+        article_2.authors.add(author_2)
+
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+
+        # Run
+        response = self.client.get(url)
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+
     def test_supports_authors_with_only_special_characters_in_their_name(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
