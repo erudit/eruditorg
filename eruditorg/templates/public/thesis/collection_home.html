@@ -12,7 +12,9 @@
 <meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}">
+{% if collection.logo %}
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
+{% endif %}
 <meta property="og:description" content="{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
@@ -20,7 +22,9 @@
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{% trans 'Thèses' %} – Érudit">
+{% if collection.logo %}
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
+{% endif %}
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ collection.name }}">
 <meta name="twitter:description" content="{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}
