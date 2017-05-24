@@ -21,7 +21,7 @@ from ...models import Issue
 from ...models import Journal
 from ...models import JournalType
 
-logger = logging.getLogger(__file__)
+logger = logging.getLogger(__name__)
 scientific_journal_type = JournalType.objects.get(code=JournalType.CODE_SCIENTIFIC)
 
 
@@ -115,7 +115,8 @@ class Command(BaseCommand):
         for journal_set in journal_sets:
 
             try:
-                assert journal_set.setSpec.startswith('serie')
+                assert journal_set.setSpec.startswith('serie')\
+                    and not journal_set.setSpec.startswith('series')
                 _, _, journal_code = journal_set.setSpec.split(':')
                 if self.journal_codes and journal_code not in self.journal_codes:
                     self.stdout.write(self.style.MIGRATE_HEADING(
@@ -157,7 +158,6 @@ class Command(BaseCommand):
 
         # STEP 1: Creates or updates the journal object
         # --
-
         journal_code = '{collection_code}{spec}'.format(
             collection_code=collection.code, spec=journal_set.setSpec.split(':')[-1])
         try:
