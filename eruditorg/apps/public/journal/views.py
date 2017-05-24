@@ -237,8 +237,8 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
     def get_letters_queryset_dict(self):
         """ Returns an ordered dict containing a list of authors for each letter. """
-        qs = self.get_base_queryset()
-
+        # FIXME avoid authors with empty firstname or lastname in the first place
+        qs = self.get_base_queryset().exclude(firstname='', lastname='')
         grouped = groupby(
             sorted(qs, key=lambda a: a.letter_prefix), key=lambda a: a.letter_prefix)
         letter_qsdict = OrderedDict([
