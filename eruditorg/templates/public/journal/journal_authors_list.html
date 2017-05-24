@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="{% trans 'Index des auteurs' %} – {{ journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="{{ language_code }}">
+<meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
 <meta property="og:description" content="{% blocktrans with journal=journal.name|safe %}Explorez la liste des auteurs par ordre alphabétique et par type de publication de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %}">
 
