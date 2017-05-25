@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle|safe }}{% endif %}">
 <meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="{{ language_code }}">
+<meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% url 'public:journal:journal_logo' journal.code %}">
 <meta property="og:description" content="{% blocktrans with journal_about=journal_info.about|safe|striptags|truncatechars:175 %}{{ journal_about }}{% endblocktrans %}">
 

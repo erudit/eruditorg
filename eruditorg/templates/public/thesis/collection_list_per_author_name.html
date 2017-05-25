@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
-<meta property="og:locale" content="{{ language_code }}">
+<meta property="og:locale" content="{{ language_code }}_CA">
 {% if collection.logo %}
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
 {% endif %}
