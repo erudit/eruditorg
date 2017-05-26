@@ -308,7 +308,10 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-title="{{ article|format_article_title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-cite="#id_cite_mla_{{ article.id }}">
+                <xsl:attribute name="data-title">
+                  {{ article|format_article_title|escape }}
+                </xsl:attribute>
                 <span class="ion-android-share toolbox-share"></span>
               </a>
             </li>
@@ -345,7 +348,10 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-title="{{ article|format_article_title|escape }}" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-cite="#id_cite_mla_{{ article.id }}">
+                <xsl:attribute name="data-title">
+                  {{ article|format_article_title|escape }}
+                </xsl:attribute>
                 <span class="ion-android-share toolbox-share"></span>
                 <span class="tools-label">{% trans "Partager" %}</span>
               </a>
