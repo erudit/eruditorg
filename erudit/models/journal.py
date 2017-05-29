@@ -801,7 +801,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
             section_titles = self.erudit_object.get_section_titles(level=3)
             return section_titles['paral'].values()
         else:
-            title = next(filter(lambda s: s.level == 3 and  s.paral, self._section_titles), None)
+            title = next(filter(lambda s: s.level == 3 and s.paral, self._section_titles), None)
             return title.title if title else []
 
     @property
