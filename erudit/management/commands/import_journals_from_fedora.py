@@ -645,7 +645,10 @@ class Command(BaseCommand):
         article.first_page = article_erudit_object.first_page
         article.last_page = article_erudit_object.last_page
         article.subtitle = article_erudit_object.subtitle
-        article.surtitle = article_erudit_object.section_title
+
+        surtitle = article_erudit_object.get_section_titles(level=1)
+        if surtitle:
+            article.surtitle = surtitle['main']
         article.language = article_erudit_object.language
         article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
 
@@ -740,9 +743,7 @@ class Command(BaseCommand):
 
         article.section_titles.all().delete()
         for level in range(1, 4):
-            section_titles_dict = getattr(
-                article_erudit_object,
-                'section_titles' if level == 1 else 'section_titles_' + str(level))
+            section_titles_dict = article_erudit_object.get_section_titles(level=level)
             if section_titles_dict is None:
                 continue
 
