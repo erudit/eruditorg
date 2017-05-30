@@ -98,13 +98,11 @@ class ArticleDigitalObject(models.DigitalObject):
         infoimg_tree = et.fromstring(self.infoimg.content.serialize())
         infoimg_dict = OrderedDict()
         for im_tree in infoimg_tree.findall('im'):
-            src_node = im_tree.find('src//nomImg')
             plgr_node = im_tree.find('imPlGr//nomImg')
-            if src_node is None or plgr_node is None:
+            if plgr_node is None:
                 continue
             infoimg_dict.update({
                 im_tree.get('id'): {
-                    'src': src_node.text,
                     'plgr': plgr_node.text,
                 },
             })
