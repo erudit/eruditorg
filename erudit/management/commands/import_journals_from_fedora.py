@@ -20,6 +20,7 @@ from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
+from ...fedora.utils import is_issue_published_in_fedora
 from ...fedora.repository import api
 from ...models import Affiliation
 from ...models import Article
@@ -509,7 +510,7 @@ class Command(BaseCommand):
             or issue.erudit_object.publication_date
 
         # Is the Issue published ?
-        issue.is_published = self._is_issue_published(issue_pid, journal)
+        issue.is_published = is_issue_published_in_fedora(issue_pid, journal=journal)
 
         issue.fedora_updated = fedora_issue.modified
         issue.save()
@@ -873,22 +874,3 @@ class Command(BaseCommand):
             setattr(journal, '{0}_{1}'.format(field_name, main_lang), titles.get('main'))
         except KeyError:  # pragma no cover
             pass
-
-    def _is_issue_published(self, issue_pid, journal):
-        """ Returns true if an issue is published """
-        try:
-            fedora_journal = JournalDigitalObject(api, journal.pid)
-            assert fedora_journal.exists
-        except AssertionError:
-            msg = 'The journal with PID "{}" seems to be inexistant'.format(journal.pid)
-            logger.error(msg, exc_info=True)
-            self.stdout.write('    ' + self.style.ERROR(msg))
-            return False
-        else:
-            publications_tree = remove_xml_namespaces(
-                et.fromstring(fedora_journal.publications.content.serialize()))
-            xml_issue_nodes = publications_tree.findall('.//numero')
-            for issue_node in xml_issue_nodes:
-                if issue_node.get('pid') == issue_pid:
-                    return True
-        return False
