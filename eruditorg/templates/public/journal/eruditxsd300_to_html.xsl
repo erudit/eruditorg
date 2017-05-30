@@ -1118,23 +1118,36 @@
     </aside>
   </xsl:template>
 
+  <!-- grobjet & objet -->
+  <xsl:template match="grobjet">
+    <div class="media media-group">
+      <xsl:apply-templates/>
+    </div>
+  </xsl:template>
+  <xsl:template match="objet">
+    <div class="media">
+      <p><xsl:apply-templates select="no"/></p>
+      <xsl:apply-templates select="legende/titre"/>
+      <xsl:apply-templates select="legende/sstitre"/>
+      <xsl:apply-templates select="objetmedia/audio | objetmedia/video"/>
+      <xsl:apply-templates select="legende/node()[not(self::titre)][not(self::sstitre)]"/>
+    </div>
+  </xsl:template>
+
   <!-- media objects -->
   <xsl:template match="objetmedia/audio">
     <xsl:variable name="nomAud" select="@*[local-name()='href']"/>
-    <audio id="{@id}" preload="metadata" controls="controls">
+    <audio class="media-object" id="{@id}" preload="metadata" controls="controls">
       <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}" />
       <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à jour.' %}</em></p>
     </audio>
   </xsl:template>
+
   <xsl:template match="objetmedia/image">
     <xsl:variable name="nomImg" select="@*[local-name()='href']"/>
     <img src="{{ request.get_full_path }}media/{$nomImg}" alt="{% trans 'Image de l’équation' %}" id="{@id}"/>
   </xsl:template>
-  <xsl:template match="objetmedia/texte">
-    <div class="objetTexte">
-      <xsl:apply-templates/>
-    </div>
-  </xsl:template>
+
   <xsl:template match="objetmedia/video">
     <xsl:variable name="videohref" select="@*[local-name()='href']"/>
     <xsl:variable name="nomVid" select="substring-before($videohref, '.')"/>
@@ -1143,16 +1156,6 @@
         <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4" />
         <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
       </video>
-    </div>
-  </xsl:template>
-
-  <!-- grobjet & objet -->
-  <xsl:template match="grobjet">
-    <xsl:apply-templates/>
-  </xsl:template>
-  <xsl:template match="objet">
-    <div class="objet">
-      <xsl:apply-templates/>
     </div>
   </xsl:template>
 
