@@ -1121,8 +1121,9 @@
   <!-- media objects -->
   <xsl:template match="objetmedia/audio">
     <xsl:variable name="nomAud" select="@*[local-name()='href']"/>
-    <audio id="{@id}" class="img-responsive" preload="metadata" controls="controls">
-      <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}"/>
+    <audio id="{@id}" preload="metadata" controls="controls">
+      <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomAud}" type="{@typemime}" />
+      <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à jour.' %}</em></p>
     </audio>
   </xsl:template>
   <xsl:template match="objetmedia/image">
@@ -1137,8 +1138,9 @@
   <xsl:template match="objetmedia/video">
     <xsl:variable name="videohref" select="@*[local-name()='href']"/>
     <xsl:variable name="nomVid" select="substring-before($videohref, '.')"/>
-    <video id="{@id}" class="img-responsive" preload="metadata" controls="controls">
-      <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4"/>
+    <video id="{@id}" preload="metadata" controls="controls">
+      <source src="http://erudit.org/media/{$titreAbrege}/{$iderudit}/{$nomVid}.mp4" type="video/mp4" />
+      <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
     </video>
   </xsl:template>
 
