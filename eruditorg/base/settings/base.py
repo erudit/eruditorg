@@ -369,6 +369,10 @@ LOGGING = {
             'level': 'INFO',
             'handlers': ['fedora_file', ],
             'propagate': False,
+        },
+        'erudit': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
         }
     },
 }
