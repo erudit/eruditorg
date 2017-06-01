@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/erudit/eruditorg.svg?branch=master)](https://secure.travis-ci.org/erudit/eruditorg?branch=master)
+[![build status](https://gitlab.erudit.org/erudit/portail/eruditorg/badges/master/build.svg)](https://gitlab.erudit.org/erudit/portail/eruditorg/commits/master)
 [![Coverage](https://codecov.io/github/erudit/eruditorg/coverage.svg?branch=master)](https://codecov.io/github/erudit/eruditorg?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/eruditorg/badge/?version=latest)](http://eruditorg.readthedocs.org/fr/latest/?badge=latest)
 
