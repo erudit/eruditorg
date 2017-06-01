@@ -1,9 +1,9 @@
 Django==1.10.4
-git+https://github.com/erudit/liberuditarticle.git@0.2.2#egg=liberuditarticle
-git+https://github.com/erudit/erudit-core.git@0.4.18#egg=erudit-core
-git+https://github.com/erudit/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
-git+https://github.com/erudit/django-account-actions.git@master#egg=django-account-actions
-git+https://github.com/erudit/eulxml@1.0.1-with-yacc-optimize#egg=eulxml
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.2#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.18#egg=erudit-core
+git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
+git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
+git+https://gitlab.erudit.org/erudit/portail/eulxml@1.0.1-with-yacc-optimize#egg=eulxml
 eulfedora==1.5.0
 django-post-office==2.0.8
 jsonfield==1.0.3
@@ -47,7 +47,7 @@ django-js-reverse==0.7.1
 djangorestframework==3.3.3
 Markdown==2.6.6
 django-widget-tweaks==1.4.1
-git+https://github.com/erudit/sickle.git@user-configurable-encoding
+git+https://gitlab.erudit.org/erudit/portail/sickle.git@user-configurable-encoding
 influxdb==2.12.0
 Babel==2.3.4
 html5lib==0.9999999
