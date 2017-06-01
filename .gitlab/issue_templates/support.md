@@ -1,6 +1,9 @@
 # Description sommaire du problème
 
+[Description détaillée de la demande (bogue, fonctionnalité), navigateurs et/ou système d'exploitation, le cas échéant]
 
-# Exemple sur retro.erudit.org
+# Exemple
+
+[Liens vers retro et/ou www, captures d'écran]
 
 /label ~Support 
