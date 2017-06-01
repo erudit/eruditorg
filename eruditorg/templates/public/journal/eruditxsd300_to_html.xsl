@@ -29,7 +29,6 @@
 
   <v:variables>
     {% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
-    <v:variable n="src-{{ imid }}" value="{{ infoimg.src }}" />
     <v:variable n="plgr-{{ imid }}" value="{{ infoimg.plgr }}" />
     {% endfor %}
   </v:variables>
@@ -1037,8 +1036,6 @@
   </xsl:template>
 
   <xsl:template match="figure/objetmedia|tableau/objetmedia">
-    <xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
-    <xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
     <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
     <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
     <figure class="{name(..)}" id="{../@id}">
@@ -2082,8 +2079,6 @@
 
   <!--*** LISTS OF TABLES & FIGURES ***-->
   <xsl:template match="tableau/objetmedia | figure/objetmedia" mode="liste">
-    <xsl:variable name="imgSrcId" select="concat('src-', image/@id)"/>
-    <xsl:variable name="imgSrc" select="$vars[@n = $imgSrcId]/@value" />
     <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
     <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
     <xsl:for-each select=".">
@@ -2094,7 +2089,7 @@
           <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
         </figcaption>
         <a href="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende)}" class="lightbox">
-          <img src="{{ request.get_full_path }}media/{$imgSrc}" alt="{normalize-space(../legende)}"/>
+          <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende)}" class="img-responsive"/>
         </a>
       </figure>
     </xsl:for-each>
