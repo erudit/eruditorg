@@ -1870,39 +1870,33 @@
       <xsl:apply-templates select="grannexe"/>
       <xsl:apply-templates select="grnote"/>
       {% endif %}
+      <xsl:apply-templates select="merci"/>
       <xsl:apply-templates select="grnotebio"/>
       <xsl:apply-templates select="grbiblio"/>
-      <xsl:apply-templates select="merci"/>
     </section>
   </xsl:template>
 
   <xsl:template match="grannexe | merci | grnotebio | grnote | grbiblio">
     <section id="{name()}" class="article-section {name()}" role="complementary">
-      <h2>
-        <xsl:choose>
-          <xsl:when test="self::grannexe">
-            <xsl:apply-templates select="self::grannexe" mode="toc-heading"/>
-          </xsl:when>
-          <xsl:when test="self::merci">
-            <xsl:apply-templates select="self::merci" mode="toc-heading"/>
-          </xsl:when>
-          <xsl:when test="self::grnotebio">
-            <xsl:apply-templates select="self::grnotebio" mode="toc-heading"/>
-          </xsl:when>
-          <xsl:when test="self::grnote">
-            <xsl:apply-templates select="self::grnote" mode="toc-heading"/>
-          </xsl:when>
-          <xsl:when test="self::grbiblio">
-            <xsl:apply-templates select="self::grbiblio" mode="toc-heading"/>
-          </xsl:when>
-        </xsl:choose>
-      </h2>
+      <xsl:if test="self::grannexe | self::merci | self::grnotebio | self::grnote">
+        <h2>
+          <xsl:choose>
+            <xsl:when test="self::grannexe">
+              <xsl:apply-templates select="self::grannexe" mode="toc-heading"/>
+            </xsl:when>
+            <xsl:when test="self::merci">
+              <xsl:apply-templates select="self::merci" mode="toc-heading"/>
+            </xsl:when>
+            <xsl:when test="self::grnotebio">
+              <xsl:apply-templates select="self::grnotebio" mode="toc-heading"/>
+            </xsl:when>
+            <xsl:when test="self::grnote">
+              <xsl:apply-templates select="self::grnote" mode="toc-heading"/>
+            </xsl:when>
+          </xsl:choose>
+        </h2>
+      </xsl:if>
       <xsl:choose>
-        <xsl:when test="self::grbiblio">
-          <ol class="unstyled">
-            <xsl:apply-templates select="*[not(self::titre)]"/>
-          </ol>
-        </xsl:when>
         <xsl:when test="self::grnote">
           <ol class="unstyled">
             <xsl:apply-templates select="*[not(self::titre)]"/>
@@ -2041,29 +2035,43 @@
 
   <!-- bibliography -->
   <xsl:template match="biblio">
-    <xsl:apply-templates/>
-  </xsl:template>
-  <xsl:template match="divbiblio">
-    <li class="divbiblio">
-      <h3 class="titre"><xsl:value-of select="titre"/></h3>
-      <xsl:apply-templates select="refbiblio"/>
-    </li>
-  </xsl:template>
-  <xsl:template match="biblio/titre">
-    <h5 class="{name()}">
-      <xsl:apply-templates/>
-    </h5>
-  </xsl:template>
-  <xsl:template match="refbiblio">
-    <xsl:variable name="valeurNO" select="no"/>
-    <li class="refbiblio"  id="{@id}">
+    <h2>
       <xsl:choose>
-        <xsl:when test="$valeurNO">
-          <xsl:apply-templates select="$valeurNO"/>
-          <xsl:text>. </xsl:text>
+        <xsl:when test="self::titre">
+          <xsl:value-of select="titre"/>
         </xsl:when>
-        <xsl:otherwise></xsl:otherwise>
+        <xsl:otherwise>
+          {% trans 'Bibliographie' %}
+        </xsl:otherwise>
       </xsl:choose>
+    </h2>
+    <div class="biblio">
+      <ol class="unstyled {name()}">
+        <xsl:for-each select="node()[name() != '' and name() != 'titre']">
+          <xsl:apply-templates select="."/>
+        </xsl:for-each>
+      </ol>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="divbiblio | subdivbiblio | sssubdivbiblio">
+    <xsl:choose>
+      <xsl:when test="self::divbiblio">
+        <h3 class="titre"><xsl:value-of select="titre"/></h3>
+      </xsl:when>
+      <xsl:when test="self::subdivbiblio">
+        <h4 class="titre"><xsl:value-of select="titre"/></h4>
+      </xsl:when>
+      <xsl:when test="self::sssubdivbiblio">
+        <h5 class="titre"><xsl:value-of select="titre"/></h5>
+      </xsl:when>
+    </xsl:choose>
+    <xsl:apply-templates select="*[not(self::titre)]"/>
+  </xsl:template>
+
+  <xsl:template match="refbiblio">
+    <li class="{name()}"  id="{@id}">
+      <xsl:apply-templates select="no"/>
       <xsl:apply-templates select="node()[name() != 'idpublic' and name() != 'no']"/>
       <div class="refbiblio-links">
         <xsl:element name="a">
@@ -2082,6 +2090,10 @@
         <xsl:apply-templates select="idpublic"/>
       </div>
     </li>
+  </xsl:template>
+
+  <xsl:template match="refbiblio/no">
+    <span class="{name()}"><xsl:apply-templates/>.&#160;</span>
   </xsl:template>
 
   <!--*** LISTS OF TABLES & FIGURES ***-->
