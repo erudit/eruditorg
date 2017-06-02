@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-25 10:58-0500\n"
+"POT-Creation-Date: 2017-06-02 13:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jeffrey Freedman <jffryfrdmn@gmail.com>, 2016\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -343,7 +343,6 @@ msgid "Titre de la revue"
 msgstr "Journal title"
 
 #: eruditorg/apps/public/search/forms.py:29
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:853
 msgid "Bibliographie"
 msgstr "Bibliography"
 
@@ -1157,7 +1156,7 @@ msgstr "^library/"
 msgid "^reporting/"
 msgstr "^reporting/"
 
-#: eruditorg/base/urls.py:51
+#: eruditorg/base/urls.py:53
 msgid "^espace-utilisateur/"
 msgstr "^user-zone/"
 
@@ -1479,6 +1478,18 @@ msgstr "Production Teams"
 #, python-brace-format
 msgid "Votre êtes maintenant membre de cette organisation ({org})"
 msgstr "You are now a member of this organization ({org})."
+
+#: eruditorg/core/models.py:10
+msgid "Avertissement"
+msgstr "Warning"
+
+#: eruditorg/core/models.py:11
+msgid "Aucune"
+msgstr ""
+
+#: eruditorg/core/models.py:18
+msgid "Message d'alerte"
+msgstr "Alert message"
 
 #: eruditorg/core/royalty_reports/apps.py:10
 #: eruditorg/core/royalty_reports/models.py:18
@@ -2291,11 +2302,11 @@ msgstr "Search"
 #: eruditorg/templates/public/base.html:154
 msgid ""
 "\n"
-"      Veuillez prendre note que l’accès à notre site sera interrompu le mercredi 6 juin de 8h à 20h, dû à une opération de maintenance sur nos serveurs.\n"
+"      Veuillez prendre note que l’accès à notre site sera interrompu le mardi 6 juin de 8h à 20h, dû à une opération de maintenance sur nos serveurs.\n"
 "      "
 msgstr ""
 "\n"
-"Please take note that access to our website will be interrupted on Wednesday, June 6 from 8 am to 8 pm, due to server maintenance."
+"Please take note that access to our website will be interrupted on Tuesday, June 6 from 8 am to 8 pm, due to server maintenance."
 
 #: eruditorg/templates/public/base.html:160
 msgid "Fil d'Ariane"
@@ -2671,7 +2682,6 @@ msgstr "Titles"
 
 #: eruditorg/templates/public/citations/list.html:106
 #: eruditorg/templates/public/citations/list.html:166
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:330
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:14
 #: eruditorg/templates/public/search/advanced_search.html:163
 #: eruditorg/templates/public/search/results.html:313
@@ -2693,7 +2703,6 @@ msgstr "Cite"
 
 #: eruditorg/templates/public/citations/list.html:116
 #: eruditorg/templates/public/citations/list.html:176
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:337
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:20
 #: eruditorg/templates/public/search/results.html:326
 msgid "Télécharger"
@@ -2803,7 +2812,6 @@ msgid "Actualités"
 msgstr "News"
 
 #: eruditorg/templates/public/home.html:176
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:272
 msgid "On n’est jamais trop érudit."
 msgstr "You can never know too much."
 
@@ -2920,7 +2928,6 @@ msgid "Par"
 msgstr "By"
 
 #: eruditorg/templates/public/journal/article_base.html:184
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:514
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:50
 #: eruditorg/templates/public/search/results.html:175
 msgid "et"
@@ -2954,7 +2961,6 @@ msgid "Découvrir la revue"
 msgstr "Explore this journal"
 
 #: eruditorg/templates/public/journal/article_pdf_coverpage.html:228
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:344
 #: eruditorg/templates/public/journal/partials/article_citation_modal_content.html:6
 #: eruditorg/templates/public/search/results.html:319
 msgid "Citer cet article"
@@ -2998,227 +3004,6 @@ msgstr "Record."
 #: eruditorg/templates/public/journal/article_summary.html:66
 msgid "Notice bibliographique"
 msgstr "Bibliographic record"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:59
-#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:65
-msgid "Notice"
-msgstr "Record"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:81
-msgid "…plus d’informations"
-msgstr "…more information"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:93
-msgid ""
-"L’accès aux articles des numéros courants de cette revue est réservé aux "
-"abonnés. Toutes les archives des revues sont disponibles en libre accès. "
-"Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a "
-"href=\"mailto:client@erudit.org?subject=Accès aux articles "
-"d’Érudit\">client@erudit.org</a>."
-msgstr ""
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:99
-msgid "Seule la première page du PDF sera affichée."
-msgstr "The PDF's first page will be displayed."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:101
-msgid "Seul le résumé sera affiché."
-msgstr "The abstract will be displayed."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:103
-msgid "Seuls les 600 premiers mots du texte seront affichés."
-msgstr "The first 600 words of this article will be displayed."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:112
-#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:36
-msgid ""
-"Le contenu de ce document est inaccessible en raison du droit d’auteur."
-msgstr "This document's content is inaccessible due to copyright reasons. "
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:123
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:128
-#, python-format
-msgid "Consulter ce numéro de la revue %(journal|escape)s"
-msgstr "Consult this issue of %(journal|escape)s"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:124
-#: eruditorg/templates/public/journal/issue_detail.html:142
-msgid "Couverture de"
-msgstr "Cover of"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:129
-msgid "Logo de"
-msgstr "Logo for"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:133
-msgid "Lire le texte intégral"
-msgstr "Read the full text"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:146
-msgid "Cliquez pour copier l'URI de cet article."
-msgstr "Click to copy the URI to your clipboard."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:149
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:161
-msgid "adresse copiée"
-msgstr "Copied"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:150
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:162
-msgid "une erreur s'est produite"
-msgstr "An error has occurred "
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:158
-msgid "Cliquez pour copier le DOI de cet article."
-msgstr "Click to copy the DOI to your clipboard."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:176
-msgid "<xsl:apply-templates select=\"../article/@typeart\"/> de la revue"
-msgstr "<xsl:apply-templates select=\"../article/@typeart\"/> of the journal"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:197
-msgid "Plan de l’article"
-msgstr "Article outline"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:201
-msgid "Retour au début"
-msgstr "Back to top"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:206
-#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:72
-#: eruditorg/templates/public/search/results.html:286
-msgid "Résumé"
-msgstr "Abstract"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:260
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:403
-msgid "Liste des figures"
-msgstr "List of figures"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:265
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:410
-msgid "Liste des tableaux"
-msgstr "List of tables"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:275
-msgid "Illustration de la campagne « On n’est jamais trop érudit. »"
-msgstr "Illustration for the campaign You can never know too much."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:284
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:321
-msgid "Boîte à outils"
-msgstr "Toolbox"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:326
-#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:11
-#: eruditorg/templates/public/search/results.html:309
-msgid "Sauvegarder"
-msgstr "Save"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:350
-msgid "Partager"
-msgstr "Share"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:367
-msgid "Résumés"
-msgstr "Abstracts"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:376
-msgid "Corps de l’article"
-msgstr "Article body"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:446
-msgid "Un article"
-msgstr "An article"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:447
-msgid "Un compte rendu"
-msgstr "A review"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:448
-msgid "Une note"
-msgstr "A note"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:449
-msgid "Un document"
-msgstr "A document"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:586
-msgid ">Volume&#160;"
-msgstr ">Volume&#160;"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:594
-msgid "Numéro&#160;"
-msgstr "Issue&#160;"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:617
-msgid "p."
-msgstr "p."
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:793
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:806
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:868
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:881
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:894
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:907
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:920
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:934
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:2135
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:2148
-msgid "special"
-msgstr "special"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:821
-msgid "Annexe"
-msgstr "Appendix"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:822
-msgid "Annexes"
-msgstr "Appendices"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:830
-msgid "Note biographique"
-msgstr "Biographical note"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:831
-msgid "Notes biographiques"
-msgstr "Biographical notes"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:839
-msgid "Note"
-msgstr "Footnote"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:840
-msgid "Notes"
-msgstr "Footnotes"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:848
-msgid "Remerciements"
-msgstr "Acknowledgements"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:854
-msgid "Bibliographies"
-msgstr "Bibliographies"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:1050
-msgid ""
-"-> Voir la liste des <xsl:if test=\"parent::figure\">figures</xsl:if><xsl:if"
-" test=\"parent::tableau\">tableaux</xsl:if>"
-msgstr ""
-"-> See the list of <xsl:if test=\"parent::figure\">figures</xsl:if><xsl:if "
-"test=\"parent::tableau\">tables</xsl:if>"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:1127
-msgid "Image de l’équation"
-msgstr "Image for this formula"
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:1858
-msgid "Parties annexes"
-msgstr ""
-
-#: eruditorg/templates/public/journal/eruditxsd300_to_html.xsl:2177
-msgid "alias"
-msgstr "alias"
 
 #: eruditorg/templates/public/journal/issue_detail.html:9
 #: eruditorg/templates/public/journal/issue_detail.html:18
@@ -3269,6 +3054,10 @@ msgstr "To read this article you will be redirected to the journal's website."
 #: eruditorg/templates/public/search/results.html:245
 msgid "Consulter la revue"
 msgstr "Consult this journal"
+
+#: eruditorg/templates/public/journal/issue_detail.html:142
+msgid "Couverture de"
+msgstr "Cover of"
 
 #: eruditorg/templates/public/journal/issue_detail.html:147
 #: eruditorg/templates/public/journal/journal_base.html:40
@@ -3681,6 +3470,16 @@ msgstr "Scholarly"
 msgid "Culturelle"
 msgstr "Cultural"
 
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:11
+#: eruditorg/templates/public/search/results.html:309
+msgid "Sauvegarder"
+msgstr "Save"
+
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:36
+msgid ""
+"Le contenu de ce document est inaccessible en raison du droit d’auteur."
+msgstr "This document's content is inaccessible due to copyright reasons. "
+
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:40
 msgid "Lire l'article"
 msgstr "Read this article"
@@ -3698,6 +3497,15 @@ msgstr "p.&nbsp;%(page)s"
 #: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:64
 msgid "Voir la notice"
 msgstr "See this article's record"
+
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:65
+msgid "Notice"
+msgstr "Record"
+
+#: eruditorg/templates/public/journal/partials/issue_detail_article_item.html:72
+#: eruditorg/templates/public/search/results.html:286
+msgid "Résumé"
+msgstr "Abstract"
 
 #: eruditorg/templates/public/partials/pagination.html:5
 #: eruditorg/templates/public/search/partials/results_pagination.html:5
