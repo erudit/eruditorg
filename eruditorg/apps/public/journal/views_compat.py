@@ -55,7 +55,12 @@ class IssueDetailRedirectView(
                 additional_filter &= Q(volume=kwargs['v'])
             if 'year' in kwargs:
                 additional_filter &= Q(year=kwargs['year'])
-            issue = get_object_or_404(issue_qs, additional_filter)
+            if kwargs['v']:
+                issue = get_object_or_404(issue_qs, additional_filter)
+            else:
+                issue = issue_qs.filter(additional_filter).last()
+            if not issue:
+                raise Http404
             return reverse(self.pattern_name, args=[
                 kwargs['journal_code'], issue.volume_slug, issue.localidentifier, ])
         elif 'journal_code' in kwargs and 'v' in kwargs and 'year' in kwargs:

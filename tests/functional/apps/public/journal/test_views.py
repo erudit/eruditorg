@@ -696,6 +696,24 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             localidentifier=article2.issue.localidentifier,
         ))
 
+    def test_can_redirect_issue_detail_with_empty_volume(self):
+        from django.utils.translation import deactivate_all
+        issue = IssueFactory(number="1", volume="1", year="2017")
+        issue2 = IssueFactory(journal=issue.journal, volume="2", number="1", year="2017")
+        url = "/revue/{journal_code}/{year}/v/n{number}/".format(
+            journal_code=issue.journal.code,
+            number=issue.number,
+            year=issue.year,
+        )
+
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
+            journal_code=issue2.journal.code,
+            issue_slug=issue2.volume_slug,
+            localidentifier=issue2.localidentifier,
+        ))
+
     def test_can_redirect_article_from_legacy_urls(self):
         from django.utils.translation import deactivate_all
 
