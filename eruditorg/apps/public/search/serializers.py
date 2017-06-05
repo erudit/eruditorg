@@ -196,7 +196,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         ]
 
     def get_authors(self, obj):
-        if obj.get_fedora_object():
+        if obj.fedora_object and obj.fedora_object.exists:
             article_object = obj.erudit_object
             return article_object.get_authors()
         authors = []
@@ -228,7 +228,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.issue.journal.collection.name
 
     def get_reviewed_works(self, obj):
-        if obj.get_fedora_object():
+        if obj.fedora_object and obj.fedora_object.exists:
             return obj.erudit_object.get_reviewed_works()
 
     def get_journal_code(self, obj):
