@@ -618,7 +618,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
     def get_response_object(self, fedora_object):
         response = super(ArticleFormatDownloadView, self).get_response_object(fedora_object)
         if 'embed' not in self.request.GET:
-            response['Content-Disposition'] = 'attachment; filename={}.pdf'.format(
+            response['Content-Disposition'] = 'inline; filename={}.pdf'.format(
                 self.kwargs['localid'])
         return response
 
