@@ -666,6 +666,54 @@ class TestArticleRawPdfView(BaseEruditTestCase):
 
 class TestLegacyUrlsRedirection(BaseEruditTestCase):
 
+    def test_can_redirect_issue_support_only_volume_and_year(self):
+        journal = JournalFactory(code='test')
+        issue = IssueFactory(journal=journal, volume="1", number="1", year="2017")
+        issue_2 = IssueFactory(journal=issue.journal, volume="1", number="2", year="2017")
+        article = ArticleFactory()
+        article.issue.volume = "1"
+        article.issue.number = "1"
+        article.issue.year = "2017"
+        article.issue.save()
+
+        article2 = ArticleFactory()
+        article2.issue.journal = article.issue.journal
+        article2.issue.volume = "1"
+        article2.issue.number = "2"
+        article2.issue.year = "2017"
+        article2.issue.save()
+        url = "/revue/{journal_code}/{year}/v{volume}/n/".format(
+            journal_code=article.issue.journal.code,
+            year=article.issue.year,
+            volume=article.issue.volume,
+        )
+
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
+            journal_code=article2.issue.journal.code,
+            issue_slug=article2.issue.volume_slug,
+            localidentifier=article2.issue.localidentifier,
+        ))
+
+    def test_can_redirect_issue_detail_with_empty_volume(self):
+        from django.utils.translation import deactivate_all
+        issue = IssueFactory(number="1", volume="1", year="2017")
+        issue2 = IssueFactory(journal=issue.journal, volume="2", number="1", year="2017")
+        url = "/revue/{journal_code}/{year}/v/n{number}/".format(
+            journal_code=issue.journal.code,
+            number=issue.number,
+            year=issue.year,
+        )
+
+        resp = self.client.get(url)
+
+        assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
+            journal_code=issue2.journal.code,
+            issue_slug=issue2.volume_slug,
+            localidentifier=issue2.localidentifier,
+        ))
+
     def test_can_redirect_article_from_legacy_urls(self):
         from django.utils.translation import deactivate_all
 
