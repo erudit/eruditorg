@@ -1,7 +1,9 @@
-{% load public_journal_tags %}
+{% load public_journal_tags i18n %}
 %0 Journal Article
 %T {{ article|format_article_title }}
-%A {% with author=article.authors.all.0 %}{% if author and author.firstname and author.lastname %}{{ author.lastname }}, {{ author.firstname }}{% endif %}{% endwith %}
+{% spaceless %}{% for author in article.erudit_object.authors %}
+{% if author.firstname and author.lastname %}%A {{ author.lastname }}, {{ author.firstname }}{% elif author.othername %}%A {{ author.othername }}{% endif %}
+{% endfor %}{% endspaceless %}
 %J {{ article.issue.journal.name }}
 %V {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}
 %N {% if article.issue.number %}{{ article.issue.number }}{% endif %}
