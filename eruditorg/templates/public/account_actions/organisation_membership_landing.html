@@ -17,22 +17,22 @@
         {% endblocktrans %}
       </h2>
       {% if token.is_expired %}
-        <div class="alert alert-warning">
+        <div class="alert">
           <p><strong>{% trans "Impossible de rejoindre l'organisation." %}</strong></p>
           {% trans "Ce lien a expiré." %}
         </div>
       {% elif token.is_consumed %}
-        <div class="alert alert-warning">
+        <div class="alert">
           <p><strong>{% trans "Impossible de rejoindre l'organisation." %}</strong></p>
           {% trans "Ce lien a déjà été utilisé." %}
         </div>
       {% elif not token.active %}
-        <div class="alert alert-warning">
+        <div class="alert">
           <p><strong>{% trans "Impossible de rejoindre l'organisation." %}</strong></p>
           {% trans "Ce lien n'est plus valide." %}
         </div>
       {% elif subscription_exists %}
-        <div class="alert alert-warning">
+        <div class="alert">
           <p><strong>{% trans "Impossible de rejoindre l'organisation." %}</strong></p>
           {% trans "Vous faîtes déjà partie de cette organisation avec ce compte." %}
         </div>

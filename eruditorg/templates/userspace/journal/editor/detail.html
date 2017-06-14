@@ -24,7 +24,7 @@
       <div class="col-md-12">
         <br />
         {% if issue.status == 'D' or issue.status == 'S' %}
-        <div class="alert alert-warning">
+        <div class="alert">
           {% if issue.status == 'D' %}{% trans "Attention" %}&nbsp;! {% trans "Numéro" %} {{ issue.get_status_display|lower }}.{% endif %}
         </div>
         {% elif issue.status == 'V' %}

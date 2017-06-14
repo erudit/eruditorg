@@ -42,7 +42,7 @@
                 {{ form.basic_search_term|add_class:'form-control' }}
                 {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
               </div>
-              <div class="alert alert-warning advanced-search-popup-error" style="display:none;">
+              <div class="alert advanced-search-popup-error" style="display:none;">
                 {% trans "Vous devez saisir une expression ou des mots-clés." %}
               </div>
             </div>

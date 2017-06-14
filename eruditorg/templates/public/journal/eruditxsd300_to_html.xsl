@@ -87,7 +87,7 @@
             <div class="col-sm-8">
               <xsl:apply-templates select="liminaire/notegen"/>
               {% if not article_access_granted and not only_summary %}
-              <div class="alert alert-warning">
+              <div class="alert">
                 <p>
                   {% blocktrans trimmed %}
                   L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
@@ -106,7 +106,7 @@
               </div>
               {% endif %}
               {% if not article.publication_allowed %}
-              <div class="alert alert-warning">
+              <div class="alert">
                 <p>
                   {% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}
                 </p>
@@ -383,7 +383,7 @@
           </section>
           {% elif article.localidentifier %}
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}?embed" type="application/pdf" width="100%" height="700px"></object>
-          <div id="pdf-download" class="text-center alert alert-warning">
+          <div id="pdf-download" class="text-center alert">
             <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}" class="btn btn-secondary">{% trans 'Télécharger' %}</a></p>
           </div>
           {% endif %}
