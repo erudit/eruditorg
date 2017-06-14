@@ -383,13 +383,14 @@
           </section>
           {% elif article.localidentifier %}
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}?embed" type="application/pdf" width="100%" height="700px"></object>
-          <a id="pdf-download" href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}">Télécharger le pdf</a>
+          <div id="pdf-download" class="text-center alert alert-warning">
+            <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}" class="btn btn-secondary">{% trans 'Télécharger' %}</a></p>
+          </div>
           {% endif %}
         {% elif article.erudit_object.abstracts %}
         {% elif not article.erudit_object.abstracts and can_display_first_pdf_page %}
         <p>
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
-          <a id="pdf-download">Télécharger le pdf</a>
         </p>
         {% elif article.is_scientific %}
           {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}

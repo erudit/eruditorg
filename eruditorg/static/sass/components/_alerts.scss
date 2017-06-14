@@ -7,7 +7,7 @@
 
   p {
     background-color: $yellow;
-    padding: 0.5em 0.75em;
+    padding: 2.5em 0.75em;
     margin: 1em 0;
 
     a {
@@ -20,6 +20,14 @@
   > p + p {
     margin-top: 5px;
   }
+}
+
+.alert-warning {
+
+  p {
+    background: $light-grey;
+  }
+
 }
 
 /**
