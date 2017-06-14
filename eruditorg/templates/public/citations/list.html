@@ -135,6 +135,56 @@
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
                     <div class="modal-body">
+                      <dl class="cite-modal--style-list">
+                        <dt>MLA</dt>
+                        <dd id="id_cite_mla_{{ document.id }}" class="cite-mla">
+                          {% for author in document.erudit_object.authors %}
+                            {% if author.firstname and author.lastname %}
+                              {{ author.lastname }}, {{ author.firstname }}.
+                            {% elif author.othername %}
+                              {{ author.othername }}.
+                            {% endif %}
+                          {% endfor %}
+                          "{{ document.title }}."
+                          <em>{{ document.issue.journal.name }}</em>
+                          {% if document.issue.volume %}{{ document.issue.volume }}{% endif %}{% if document.issue.number %}{{ document.issue.number }}{% endif %}
+                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. DOI:{{ document.doi }}
+                        </dd>
+
+                        <dt>APA</dt>
+                        <dd id="id_cite_apa_{{ document.id }}" class="cite-apa">
+                          {% for author in document.erudit_object.authors %}
+                            {% if author.firstname and author.lastname %}
+                              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
+                            {% elif author.othername %}
+                              {{ author.othername }}.
+                            {% endif %}
+                          {% endfor %}
+                          ({{ document.issue.year }}).
+                          {{ document.title }}
+                          <em>{{ document.issue.journal.name }}</em>,
+                          {% if document.issue.volume %}<em>{{ document.issue.volume }}</em>{% endif %}{% if document.issue.number %}({{ document.issue.number }}){% endif %},
+                          {{ document.first_page }}–{{ document.last_page }}. DOI:{{ document.doi }}
+                        </dd>
+
+                        <dt>Chicago</dt>
+                        <dd id="id_cite_chicago_{{ document.id }}" class="cite-chicago">
+                          {% for author in document.erudit_object.authors %}
+                            {% if author.firstname and author.lastname %}
+                              {{ author.lastname }}, {{ author.firstname }}.
+                            {% elif author.othername %}
+                              {{ author.othername }}.
+                            {% endif %}
+                          {% endfor %}
+                          "{{ document.title }}."
+                          <em>{{ document.issue.journal.name }}</em>
+                          {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}no. {{ document.issue.number }}{% endif %}
+                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. DOI:{{ document.doi }}
+                        </dd>
+                      </dl>
+
+                      <hr />
+
                       <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
                       <p>
                         <a href="{% url 'public:journal:article_citation_enw' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
