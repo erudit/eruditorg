@@ -190,10 +190,11 @@
 
     <div id="article-content" class="row article-content">
       <xsl:if test="//corps">
-        {% if article.erudit_object.processing == 'complet' %}
         <!-- article outline -->
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
+          {% if article.erudit_object.processing == 'complet' %}
           <h2>{% trans "Plan de l’article" %}</h2>
+          {% endif %}
           <ul class="unstyled">
             <li>
               <a href="#article-header">
@@ -275,8 +276,8 @@
               </div>
             </a>
           </aside>
+          {% include "public/partials/subscription_sponsor_badge.html" %}
         </nav>
-        {% endif %}
 
         <!-- mobile / tablet toolbox -->
         <aside class="hidden-md hidden-lg toolbox-wrapper toolbox-mobile">
@@ -359,15 +360,12 @@
         </aside>
       </xsl:if>
 
-      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11{% endif %}">
+      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-8{% endif %}">
         <!-- abstract -->
         <xsl:if test="//resume">
           <section id="resume" role="complementary">
             <xsl:attribute name="class">
               article-section grresume
-              {% if article.erudit_object.processing == 'minimal' %}
-              <xsl:if test="count(//resume) > 1">double-col</xsl:if>
-              {% endif %}
             </xsl:attribute>
             <h2 class="sr-only">{% trans 'Résumés' %}</h2>
             <xsl:apply-templates select="//resume"/>
@@ -1865,7 +1863,7 @@
 
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
-    <section class="{name()}{% if article.erudit_object.processing == 'minimal' %} col-md-8{% else %} col-xs-12{% endif %}">
+    <section class="{name()} col-xs-12">
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
       {% if article_access_granted and not only_summary  %}
       <xsl:apply-templates select="grannexe"/>
