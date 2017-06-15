@@ -363,7 +363,7 @@
         </aside>
       </xsl:if>
 
-      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-8{% endif %}">
+      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
         <!-- abstract -->
         <xsl:if test="//resume">
           <section id="resume" role="complementary">
