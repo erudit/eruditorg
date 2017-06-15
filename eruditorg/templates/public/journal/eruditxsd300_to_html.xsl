@@ -192,81 +192,84 @@
       <xsl:if test="//corps">
         <!-- article outline -->
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
-          {% if article.erudit_object.processing == 'complet' %}
           <h2>{% trans "Plan de l’article" %}</h2>
-          {% endif %}
           <ul class="unstyled">
-            <li>
-              <a href="#article-header">
-                <em>{% trans "Retour au début" %}</em>
-              </a>
-            </li>
-            <xsl:if test="//resume">
               <li>
-                <a href="#resume">{% trans "Résumé" %}</a>
+                <a href="#article-header">
+                  <em>{% trans "Retour au début" %}</em>
+                </a>
               </li>
-            </xsl:if>
-            {% if article_access_granted and not only_summary %}
-            <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
-              <li class="article-toc--body">
-                <ul class="unstyled">
-                  <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-heading"/>
-                </ul>
-              </li>
-            </xsl:if>
-            {% endif %}
-            <xsl:for-each select="partiesann[1]">
+              <xsl:if test="//resume">
+                <li>
+                  <a href="#resume">{% trans "Résumé" %}</a>
+                </li>
+              </xsl:if>
               {% if article_access_granted and not only_summary %}
-              <xsl:if test="grannexe">
-                <li>
-                  <a href="#grannexe">
-                    <xsl:apply-templates select="grannexe" mode="toc-heading"/>
-                  </a>
-                </li>
-              </xsl:if>
-              <xsl:if test="merci">
-                <li>
-                  <a href="#merci">
-                    <xsl:apply-templates select="merci" mode="toc-heading"/>
-                  </a>
-                </li>
-              </xsl:if>
-              <xsl:if test="grnotebio">
-                <li>
-                  <a href="#grnotebio">
-                    <xsl:apply-templates select="grnotebio" mode="toc-heading"/>
-                  </a>
-                </li>
-              </xsl:if>
-              <xsl:if test="grnote">
-                <li>
-                  <a href="#grnote">
-                    <xsl:apply-templates select="grnote" mode="toc-heading"/>
-                  </a>
+              <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
+                <li class="article-toc--body">
+                  <ul class="unstyled">
+                    <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-heading"/>
+                  </ul>
                 </li>
               </xsl:if>
               {% endif %}
-              <xsl:if test="grbiblio">
+              {% if article.erudit_object.processing == 'minimal' and article.localidentifier %}
+              <li>
+                <a href="#pdf-viewer">{% trans 'Texte intégral (PDF)' %}</a>
+              </li>
+              {% endif %}
+              <xsl:for-each select="partiesann[1]">
+                {% if article_access_granted and not only_summary %}
+                <xsl:if test="grannexe">
+                  <li>
+                    <a href="#grannexe">
+                      <xsl:apply-templates select="grannexe" mode="toc-heading"/>
+                    </a>
+                  </li>
+                </xsl:if>
+                <xsl:if test="merci">
+                  <li>
+                    <a href="#merci">
+                      <xsl:apply-templates select="merci" mode="toc-heading"/>
+                    </a>
+                  </li>
+                </xsl:if>
+                <xsl:if test="grnotebio">
+                  <li>
+                    <a href="#grnotebio">
+                      <xsl:apply-templates select="grnotebio" mode="toc-heading"/>
+                    </a>
+                  </li>
+                </xsl:if>
+                <xsl:if test="grnote">
+                  <li>
+                    <a href="#grnote">
+                      <xsl:apply-templates select="grnote" mode="toc-heading"/>
+                    </a>
+                  </li>
+                </xsl:if>
+                {% endif %}
+                <xsl:if test="grbiblio">
+                  <li>
+                    <a href="#grbiblio">
+                      <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
+                    </a>
+                  </li>
+                </xsl:if>
+              </xsl:for-each>
+              {% if article_access_granted and not only_summary %}
+              <xsl:if test="//figure">
                 <li>
-                  <a href="#grbiblio">
-                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
-                  </a>
+                  <a href="#figures">{% trans "Liste des figures" %}</a>
                 </li>
               </xsl:if>
-            </xsl:for-each>
-            {% if article_access_granted and not only_summary %}
-            <xsl:if test="//figure">
-              <li>
-                <a href="#figures">{% trans "Liste des figures" %}</a>
-              </li>
-            </xsl:if>
-            <xsl:if test="//tableau">
-              <li>
-                <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
-              </li>
-            </xsl:if>
-            {% endif %}
-          </ul>
+              <xsl:if test="//tableau">
+                <li>
+                  <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
+                </li>
+              </xsl:if>
+              {% endif %}
+            </ul>
           <!-- promotional campaign -->
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
