@@ -110,6 +110,11 @@
         letter-spacing: 0.02em;
       }
 
+      .sub-title span{
+        display: block;
+        margin-bottom: 0.15em;
+      }
+
       .publisher, .cite{
         font-size: 10px;
         line-height: 1.25;
@@ -210,7 +215,9 @@
         <div class="content">
           <div class="sub-title">
             {% if issue.html_title %}<p>{{ issue.html_title|safe }}</p>{% endif %}
-            <p>{{ issue.volume_title }}</p>
+            <span>{{ issue.volume_title }}</span>
+            <span>{% trans 'URI&nbsp;:' %} <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}">id.erudit.org/iderudit/{{ article.localidentifier }}</a></span>
+            {% if article.doi %}<span>{% trans 'DOI&nbsp;:' %} <a href="http://dx.doi.org/{{ article.doi }}">{{ article.doi }}</a></span>{% endif %}
           </div>
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
             →&nbsp;{% trans "Aller au sommaire du numéro" %}
@@ -238,7 +245,7 @@
             "{{ article.title }}."
             <em>{{ article.issue.journal.name }}</em>
             {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
-            ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}.
+            ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
           </div>
         </div>
       </div>
