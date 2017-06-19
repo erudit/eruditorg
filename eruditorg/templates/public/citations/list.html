@@ -148,7 +148,7 @@
                           "{{ document.title }}."
                           <em>{{ document.issue.journal.name }}</em>
                           {% if document.issue.volume %}{{ document.issue.volume }}{% endif %}{% if document.issue.number %}{{ document.issue.number }}{% endif %}
-                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. DOI:{{ document.doi }}
+                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}{% trans 'DOI&nbsp;:' %}:{{ document.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
@@ -164,7 +164,7 @@
                           {{ document.title }}
                           <em>{{ document.issue.journal.name }}</em>,
                           {% if document.issue.volume %}<em>{{ document.issue.volume }}</em>{% endif %}{% if document.issue.number %}({{ document.issue.number }}){% endif %},
-                          {{ document.first_page }}–{{ document.last_page }}. DOI:{{ document.doi }}
+                          {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}{% trans 'DOI&nbsp;:' %}:{{ document.doi }}{% endif %}
                         </dd>
 
                         <dt>Chicago</dt>
@@ -179,7 +179,7 @@
                           "{{ document.title }}."
                           <em>{{ document.issue.journal.name }}</em>
                           {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}no. {{ document.issue.number }}{% endif %}
-                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. DOI:{{ document.doi }}
+                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}{% trans 'DOI&nbsp;:' %}:{{ document.doi }}{% endif %}
                         </dd>
                       </dl>
 
