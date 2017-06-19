@@ -37,7 +37,7 @@
       }
 
       body{
-        font-family: 'Maax-Regular';
+        font-family: 'Maax-Regular', Helvetica, Arial, sans-serif;
       }
 
       a{
@@ -56,19 +56,19 @@
         margin: 20px 0;
         width: 100%;
         height: 1px;
-        border-top: 2px solid gray;
+        border-top: 1px solid gray;
       }
 
       #header_content{
         margin-bottom: 15px;
         padding-bottom: 15px;
-        border-bottom: 2px solid #000;
+        border-bottom: 1px solid #000;
         font-size: 12px;
         color: #707070;
       }
 
       #journal_data{
-        height: 100px;
+        height: 75px;
       }
 
       #journal_data_title{
@@ -99,20 +99,29 @@
         padding-left: 25px;
       }
 
+      .main-title{
+        line-height: 1.25;
+      }
+
       .sub-title{
         margin-bottom: 15px;
         font-size: 12px;
+        line-height: 1.25;
+        letter-spacing: 0.02em;
       }
 
-      .publisher{
+      .sub-title span{
+        display: block;
+        margin-bottom: 0.15em;
+      }
+
+      .publisher, .cite{
         font-size: 10px;
+        line-height: 1.25;
+        letter-spacing: 0.015em;
       }
 
       table.issn-table{
-        font-size: 10px;
-      }
-
-      .cite{
         font-size: 10px;
       }
 
@@ -121,7 +130,7 @@
       }
 
       #copyright{
-        height: 60px;
+        height: 50px;
       }
 
       #legal_notice{
@@ -143,17 +152,20 @@
         font-size: 12px;
         bottom: 0;
         width: 100%;
+        line-height: 1.25;
+        letter-spacing: 0.015em;
       }
 
       #footer_1{
         padding-top: 15px;
-        border-top: 2px solid gray;
+        border-top: 1px solid gray;
+        vertical-align: top;
       }
 
       #footer_2{
         margin-top: 15px;
         padding-top: 15px;
-        border-top: 2px solid #000;
+        border-top: 1px solid #000;
       }
 
       #footer_content_erudit_logo img{
@@ -202,11 +214,13 @@
       <div class="left-content">
         <div class="content">
           <div class="sub-title">
-            {% if issue.html_title %}<span>{{ issue.html_title|safe }}</span>{% endif %}
+            {% if issue.html_title %}<p>{{ issue.html_title|safe }}</p>{% endif %}
             <span>{{ issue.volume_title }}</span>
+            <span>{% trans 'URI&nbsp;:' %} <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}">id.erudit.org/iderudit/{{ article.localidentifier }}</a></span>
+            {% if article.doi %}<span>{% trans 'DOI&nbsp;:' %} <a href="http://dx.doi.org/{{ article.doi }}">{{ article.doi }}</a></span>{% endif %}
           </div>
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-            &#8594;&nbsp;{% trans "Aller au sommaire du numéro" %}
+            →&nbsp;{% trans "Aller au sommaire du numéro" %}
           </a>
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Éditeur(s)" %}</div>
@@ -222,7 +236,7 @@
           {% endif %}
           <br />
           <a href="{% url 'public:journal:journal_detail' journal.code %}">
-            &#8594;&nbsp;{% trans "Découvrir la revue" %}
+            →&nbsp;{% trans "Découvrir la revue" %}
           </a>
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Citer cet article" %}</div>
@@ -231,7 +245,7 @@
             "{{ article.title }}."
             <em>{{ article.issue.journal.name }}</em>
             {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
-            ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}.
+            ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
           </div>
         </div>
       </div>
