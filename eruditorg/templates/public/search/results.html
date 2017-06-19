@@ -301,6 +301,8 @@
                 </div>
                 {% endif %}
               </div>
+
+              {# Toolbox #}
               <div class="toolbox-wrapper">
                 <ul class="toolbox toolbox-compact">
                   <li>
@@ -336,10 +338,66 @@
                   </li>
                   {% endif %}
                 </ul>
+
+                {# Modal window #}
                 <div class="hidden">
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <p class="modal-header">{% trans "Outils de citation" %}</p>
                     <div class="modal-body">
+
+                      {% if document.document_type == 'article' %}
+                      {% with article=document.real_object %}
+                      <dl class="cite-modal--style-list">
+                        <dt>MLA</dt>
+                        <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
+                          {% for author in article.authors %}
+                            {% if author.firstname and author.lastname %}
+                              {{ author.lastname }}, {{ author.firstname }}.
+                            {% elif author.othername %}
+                              {{ author.othername }}.
+                            {% endif %}
+                          {% endfor %}
+                          "{{ article.title }}."
+                          <em>{{ article.journal_name }}</em>
+                          {% if article.issue_volume %}{{ article.issue_volume }}{% endif %} {% if article.issue_number %}{{ article.issue_number }}{% endif %}
+                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. DOI:{{ article.doi }}
+                        </dd>
+
+                        <dt>APA</dt>
+                        <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
+                          {% for author in article.authors %}
+                            {% if author.firstname and author.lastname %}
+                              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
+                            {% elif author.othername %}
+                              {{ author.othername }}.
+                            {% endif %}
+                          {% endfor %}
+                          ({{ article.issue_published }}).
+                          {{ article.title }}
+                          <em>{{ article.issue.journal_name }}</em>,
+                          {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
+                          {{ article.first_page }}–{{ article.last_page }}. DOI:{{ article.doi }}
+                        </dd>
+
+                        <dt>Chicago</dt>
+                        <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
+                          {% for author in article.authors %}
+                            {% if author.firstname and author.lastname %}
+                              {{ author.lastname }}, {{ author.firstname }}.
+                            {% elif author.othername %}
+                              {{ author.othername }}.
+                            {% endif %}
+                          {% endfor %}
+                          "{{ article.title }}."
+                          <em>{{ article.journal_name }}</em>
+                          {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}no. {{ article.issue_number }}{% endif %}
+                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. DOI:{{ article.doi }}
+                        </dd>
+                      </dl>
+                      <hr/>
+                      {% endwith %}
+                      {% endif  %}
+
                       <p>{% trans "Exporter la notice de ce document" %}</p>
                       <p>
                         <a href="
