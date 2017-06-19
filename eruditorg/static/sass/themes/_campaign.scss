@@ -34,7 +34,7 @@ $peach:       #FFE7B0;
   background-repeat: no-repeat;
   overflow-y: hidden;
   height: 370px;
-  margin-bottom: 4em;
+  margin-bottom: 1em;
   @include transition(background-position 300ms linear);
 
   &:hover, &:focus, &:active {
