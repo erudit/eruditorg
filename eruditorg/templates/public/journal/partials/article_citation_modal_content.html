@@ -7,16 +7,34 @@
     <dl class="cite-modal--style-list">
       <dt>MLA</dt>
       <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
-        {% for author in article.erudit_object.authors %}
-          {% if author.firstname and author.lastname %}
-            {{ author.lastname }}, {{ author.firstname }}.
-          {% elif author.othername %}
-            {{ author.othername }}.
-          {% endif %}
-        {% endfor %}
+        {% if article.erudit_object.authors|length == 2 %}
+          {% for author in article.erudit_object.authors %}
+            {% if author.firstname and author.lastname %}
+              {% if forloop.first %}
+              {{ author.lastname }}, {{ author.firstname }} {% trans 'et' %}
+              {% else %}
+              {{ author.firstname }} {{ author.lastname }}.
+              {% endif %}
+            {% elif author.othername %}
+              {{ author.othername }} {% if forloop.first %}{% trans 'et' %}{% endif %}
+            {% endif %}
+          {% endfor %}
+        {% elif article.erudit_object.authors|length > 1 %}
+          {% with article.erudit_object.authors|first as author %}
+          {{ author.lastname }}, {{ author.firstname }}, et al.
+          {% endwith %}
+        {% else %}
+          {% for author in article.erudit_object.authors %}
+            {% if author.firstname and author.lastname %}
+              {{ author.lastname }}, {{ author.firstname }}.
+            {% elif author.othername %}
+              {{ author.othername }}.
+            {% endif %}
+          {% endfor %}
+        {% endif %}
         "{{ article.title }}."
         <em>{{ article.issue.journal.name }}</em>
-        {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
+        {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.volume and article.issue.number %}.{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
         ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
       </dd>
 
@@ -24,13 +42,13 @@
       <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
         {% for author in article.erudit_object.authors %}
           {% if author.firstname and author.lastname %}
-            {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
-          {% elif author.othername %}
+            {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
+          {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
             {{ author.othername }}.
           {% endif %}
         {% endfor %}
         ({{ article.issue.year }}).
-        {{ article.title }}
+        {{ article.title }}.
         <em>{{ article.issue.journal.name }}</em>,
         {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %},
         {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
@@ -40,9 +58,15 @@
       <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
         {% for author in article.erudit_object.authors %}
           {% if author.firstname and author.lastname %}
-            {{ author.lastname }}, {{ author.firstname }}.
+            {% if article.erudit_object.authors|length == 1 %}
+              {{ author.lastname }}, {{ author.firstname }}.
+            {% elif forloop.counter == 1 %}
+              {{ author.lastname }}, {{ author.firstname }},
+            {% else %}
+              {{ author.firstname }} {{ author.lastname }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
+            {% endif %}
           {% elif author.othername %}
-            {{ author.othername }}.
+            {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
           {% endif %}
         {% endfor %}
         "{{ article.title }}."
