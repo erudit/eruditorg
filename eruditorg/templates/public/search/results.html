@@ -357,7 +357,7 @@
                               {{ author.othername }}.
                             {% endif %}
                           {% endfor %}
-                          "{{ article.title }}."
+                          "{{ article.title|safe }}."
                           <em>{{ article.journal_name }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}{% endif %} {% if article.issue_number %}{{ article.issue_number }}{% endif %}
                           ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
@@ -373,7 +373,7 @@
                             {% endif %}
                           {% endfor %}
                           ({{ article.issue_published }}).
-                          {{ article.title }}
+                          {{ article.title|safe }}
                           <em>{{ article.issue.journal_name }}</em>,
                           {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
                           {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
@@ -388,7 +388,7 @@
                               {{ author.othername }}.
                             {% endif %}
                           {% endfor %}
-                          "{{ article.title }}."
+                          "{{ article.title|safe }}."
                           <em>{{ article.journal_name }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}no. {{ article.issue_number }}{% endif %}
                           ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
