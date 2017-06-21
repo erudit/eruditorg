@@ -115,17 +115,13 @@
         margin-bottom: 0.15em;
       }
 
-      .publisher, .cite{
+      .publisher, .cite, .abstract, #legal_notice, #footer_content_explanation{
         font-size: 10px;
         line-height: 1.25;
         letter-spacing: 0.015em;
       }
 
       table.issn-table{
-        font-size: 10px;
-      }
-
-      .abstract{
         font-size: 10px;
       }
 
@@ -136,7 +132,6 @@
       #legal_notice{
         width: 400px;
         float: right;
-        font-size: 10px;
       }
 
       #legal_notice a{
@@ -213,14 +208,16 @@
     <div class="main-content">
       <div class="left-content">
         <div class="content">
-          <div class="sub-title">
-            {% if issue.html_title %}<p>{{ issue.html_title|safe }}</p>{% endif %}
+          <p class="sub-title">
+            {% if issue.html_title %}<span>{{ issue.html_title|safe }}</span>{% endif %}
             <span>{{ issue.volume_title }}</span>
+          </p>
+          <p class="sub-title">
             <span>{% trans 'URI&nbsp;:' %} <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}">id.erudit.org/iderudit/{{ article.localidentifier }}</a></span>
             {% if article.doi %}<span>{% trans 'DOI&nbsp;:' %} <a href="http://dx.doi.org/{{ article.doi }}">{{ article.doi }}</a></span>{% endif %}
-          </div>
+          </p>
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-            →&nbsp;{% trans "Aller au sommaire du numéro" %}
+            {% trans "Aller au sommaire du numéro" %}
           </a>
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Éditeur(s)" %}</div>
@@ -236,7 +233,7 @@
           {% endif %}
           <br />
           <a href="{% url 'public:journal:journal_detail' journal.code %}">
-            →&nbsp;{% trans "Découvrir la revue" %}
+            {% trans "Découvrir la revue" %}
           </a>
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Citer cet article" %}</div>

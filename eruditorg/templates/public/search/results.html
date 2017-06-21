@@ -350,48 +350,72 @@
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
-                          {% for author in article.authors %}
-                            {% if author.firstname and author.lastname %}
-                              {{ author.lastname }}, {{ author.firstname }}.
-                            {% elif author.othername %}
-                              {{ author.othername }}.
-                            {% endif %}
-                          {% endfor %}
-                          "{{ article.title }}."
+                          {% if article.authors|length == 2 %}
+                            {% for author in article.authors %}
+                              {% if author.firstname and author.lastname %}
+                                {% if forloop.first %}
+                                {{ author.lastname }}, {{ author.firstname }} {% trans 'et' %}
+                                {% else %}
+                                {{ author.firstname }} {{ author.lastname }}.
+                                {% endif %}
+                              {% elif author.othername %}
+                                {{ author.othername }} {% if forloop.first %}{% trans 'et' %}{% endif %}
+                              {% endif %}
+                            {% endfor %}
+                          {% elif article.authors|length > 1 %}
+                            {% with article.authors|first as author %}
+                            {{ author.lastname }}, {{ author.firstname }}, et al.
+                            {% endwith %}
+                          {% else %}
+                            {% for author in article.authors %}
+                              {% if author.firstname and author.lastname %}
+                                {{ author.lastname }}, {{ author.firstname }}.
+                              {% elif author.othername %}
+                                {{ author.othername }}.
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
+                          "{{ article.title|safe }}."
                           <em>{{ article.journal_name }}</em>
-                          {% if article.issue_volume %}{{ article.issue_volume }}{% endif %} {% if article.issue_number %}{{ article.issue_number }}{% endif %}
-                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. DOI:{{ article.doi }}
+                          {% if article.issue_volume %}{{ article.issue_volume }}{% endif %}{% if article.issue_volume and article.issue_number %}.{% endif %}{% if article.issue_number %}{{ article.issue_number }}{% endif %}
+                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
                         <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
                           {% for author in article.authors %}
                             {% if author.firstname and author.lastname %}
-                              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.
-                            {% elif author.othername %}
+                              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
+                            {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
                               {{ author.othername }}.
                             {% endif %}
                           {% endfor %}
                           ({{ article.issue_published }}).
-                          {{ article.title }}
+                          {{ article.title|safe }}
                           <em>{{ article.issue.journal_name }}</em>,
                           {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
-                          {{ article.first_page }}–{{ article.last_page }}. DOI:{{ article.doi }}
+                          {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
                         </dd>
 
                         <dt>Chicago</dt>
                         <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
                           {% for author in article.authors %}
                             {% if author.firstname and author.lastname %}
-                              {{ author.lastname }}, {{ author.firstname }}.
+                              {% if article.authors|length == 1 %}
+                                {{ author.lastname }}, {{ author.firstname }}.
+                              {% elif forloop.counter == 1 %}
+                                {{ author.lastname }}, {{ author.firstname }},
+                              {% else %}
+                                {{ author.firstname }} {{ author.lastname }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
+                              {% endif %}
                             {% elif author.othername %}
-                              {{ author.othername }}.
+                              {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
                             {% endif %}
                           {% endfor %}
-                          "{{ article.title }}."
+                          "{{ article.title|safe }}."
                           <em>{{ article.journal_name }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}no. {{ article.issue_number }}{% endif %}
-                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. DOI:{{ article.doi }}
+                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
                         </dd>
                       </dl>
                       <hr/>

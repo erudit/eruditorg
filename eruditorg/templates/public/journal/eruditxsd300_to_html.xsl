@@ -384,7 +384,7 @@
           </section>
           {% elif article.localidentifier %}
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}?embed" type="application/pdf" width="100%" height="700px"></object>
-          <div id="pdf-download" class="text-center alert">
+          <div id="pdf-download" class="text-center alert-warning">
             <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}" class="btn btn-secondary">{% trans 'Télécharger' %}</a></p>
           </div>
           {% endif %}
