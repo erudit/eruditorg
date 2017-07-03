@@ -5,6 +5,5 @@ exclude_lines =
     def __repr__
     raise NotImplementedError
 omit =
-    *command*
     *compat*
     *migrations*
