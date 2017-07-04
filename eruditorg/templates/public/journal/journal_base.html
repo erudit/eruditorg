@@ -76,40 +76,40 @@
         {% cache LONG_TTL "journal_detail" LANGUAGE_CODE journal.id %}
         <dl class="journal-meta--list">
 
-          {% if journal.directors %}
+          {% if meta_info_issue.get_directors %}
           <dt>{% trans "Direction" %}</dt>
-          {% for issue_contributor in journal.directors %}
+          {% for issue_contributor in meta_info_issue.get_directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
 
-          {% if issue.editors %}
+          {% if meta_info_issue.get_editors %}
           <dt>{% trans "Rédaction" %}</dt>
-          {% for issue_contributor in issue.editors %}
+          {% for issue_contributor in meta_info_issue.get_editors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
 
-          {% if journal.publishers.all %}
+          {% if meta_info_issue.erudit_object.publishers %}
           <dt>
-            {% blocktrans count total=journal.publishers.all|length %}
+            {% blocktrans count total=meta_info_issue.erudit_object.publishers|length %}
             Éditeur
             {% plural %}
             Éditeurs
             {% endblocktrans %}
           </dt>
-          {% for publisher in journal.publishers.all %}
-          <dd>{{ publisher.name }}</dd>
+          {% for publisher in meta_info_issue.erudit_object.publishers %}
+          <dd>{{ publisher }}</dd>
           {% endfor %}
           {% endif %}
 
-          {% if journal.issn_print or journal.issn_web %}
+          {% if meta_info_issue.erudit_object.issn or meta_info_issue.erudit_object.issn_num %}
           <dt>{% trans "ISSN" %}</dt>
-          {% if journal.issn_print %}
-          <dd>{{ journal.issn_print }} ({% trans "imprimé" %})</dd>
+          {% if meta_info_issue.erudit_object.issn %}
+          <dd>{{ meta_info_issue.erudit_object.issn }} ({% trans "imprimé" %})</dd>
           {% endif %}
-          {% if journal.issn_web %}
-          <dd>{{ journal.issn_web }} ({% trans "numérique" %})</dd>
+          {% if meta_info_issue.erudit_object.issn_num %}
+          <dd>{{ meta_info_issue.erudit_object.issn_num }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
 
