@@ -205,18 +205,18 @@
                     {% if document.real_object.external_url or document.real_object.url %}
                     target="_blank"
                     {% endif %}>
-                      <span>{{ document.real_object.title|striptags }}</span>
+                      <span>{{ document.real_object.title|safe }}</span>
                       {% if document.real_object.subtitle %}
-                      <span><br/>{{ document.real_object.subtitle|striptags }}</span>
+                      <span><br/>{{ document.real_object.subtitle|safe }}</span>
                       {% endif %}
                       {% if document.real_object.paral_titles %}
                         {% for paral_title in document.real_object.paral_titles %}
-                            <br><span>{{ paral_title }}</span>
+                            <br><span>{{ paral_title|safe }}</span>
                         {% endfor %}
                       {% endif %}
                       {% if document.real_object.paral_subtitles %}
                         {% for paral_title in document.real_object.paral_subtitles %}
-                            <br><span>{{ paral_title }}</span>
+                            <br><span>{{ paral_title|safe }}</span>
                         {% endfor %}
                       {% endif %}
                       {% if document.real_object.reviewed_works %}
