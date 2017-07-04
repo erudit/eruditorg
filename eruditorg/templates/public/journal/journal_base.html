@@ -49,7 +49,7 @@
         <div class="search-box">
           <form action="{% url 'public:search:results' %}" method="get">
             <div class="input-group">
-              <input type="search" class="form-control" name="basic_search_term" placeholder="Recherchez par mot-clé…" autofocus>
+              <input type="search" class="form-control" name="basic_search_term" placeholder="Recherchez par mot-clé…">
               <input type="hidden" name="journals" value="{{ journal.name }}">
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-secondary"><span class="ion-search"></span></button>
