@@ -615,9 +615,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
     """ An article can have many authors """
 
-    publisher = models.ForeignKey(Publisher, verbose_name=_('Éditeur'), blank=True, null=True)
-    """ The publisher of the article """
-
     doi = models.CharField(max_length=50, verbose_name=_('DOI'), blank=True, null=True)
     """ The DOI of the article """
 

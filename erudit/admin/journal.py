@@ -184,7 +184,7 @@ class ArticleAdmin(admin.ModelAdmin):
         return obj.issue.localidentifier
 
     readonly_fields = (
-        'issue', 'publisher', 'type', 'article_title', 'doi', 'localidentifier', 'article_journal',
+        'issue', 'type', 'article_title', 'doi', 'localidentifier', 'article_journal',
         'fedora_created', 'fedora_updated',
     )
 
@@ -193,7 +193,7 @@ class ArticleAdmin(admin.ModelAdmin):
     #    ArticleSubtitleInline, ArticleAuthorInline
     # )
     list_display = ('localidentifier', 'issue__localidentifier', 'title', )
-    raw_id_fields = ('issue', 'publisher', 'authors', )
+    raw_id_fields = ('issue', 'authors', )
     search_fields = ('id', 'localidentifier', 'titles__title', )
     list_filter = ('type', 'issue__journal__collection', )
 
@@ -212,7 +212,6 @@ class ArticleAdmin(admin.ModelAdmin):
                 ('localidentifier', 'type'),
                 ('article_title',),
                 ('article_journal', 'issue',),
-                ('publisher',),
             ),
         }),
         ("Synchronisation", {

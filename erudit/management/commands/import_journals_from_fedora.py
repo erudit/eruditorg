@@ -652,11 +652,6 @@ class Command(BaseCommand):
         article.language = article_erudit_object.language
         article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
 
-        publisher_name = article_erudit_object.publisher
-        if publisher_name:
-            publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
-            article.publisher = publisher
-
         article.clean()
         article.save()
 
