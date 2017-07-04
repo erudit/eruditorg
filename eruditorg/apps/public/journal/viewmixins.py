@@ -97,7 +97,6 @@ class SingleArticleMixin(object):
     def get_object(self, queryset=None):
         queryset = Article.internal_objects.all() if queryset is None else queryset
         queryset = queryset \
-            .select_related('publisher') \
             .prefetch_related('abstracts', 'authors', 'authors__affiliations')
         return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])
 
