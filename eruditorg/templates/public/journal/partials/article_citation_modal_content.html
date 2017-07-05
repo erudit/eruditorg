@@ -34,7 +34,7 @@
         {% endif %}
         {% trans '«&nbsp;' %}{{ article.title }}.{% trans '&nbsp;»' %}
         <em>{{ article.issue.journal.name }}</em>,
-        {% if article.issue.volume %}{% trans 'vol.' %}&nbsp;{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}{% trans 'n<sup>o</sup>' %}&nbsp;{{ article.issue.number }}, {% endif %}{% if article.issue.period %}{{ article.issue.period }}&nbsp;{% endif %}{{ article.issue.year }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        {{ article.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
       <dt>APA</dt>

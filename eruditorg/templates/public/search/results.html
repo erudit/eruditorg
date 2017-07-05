@@ -377,7 +377,7 @@
                           {% endif %}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
                           <em>{{ article.journal_name }}</em>,
-                          {% if article.issue_volume %}{% trans 'vol.' %}&nbsp;{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %}&nbsp;{{ article.issue_number }}, {% endif %}{{ article.issue_published }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+                          {{ article.publication_date|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
