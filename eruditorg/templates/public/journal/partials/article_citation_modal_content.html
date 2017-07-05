@@ -32,10 +32,9 @@
             {% endif %}
           {% endfor %}
         {% endif %}
-        "{{ article.title }}."
-        <em>{{ article.issue.journal.name }}</em>
-        {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.volume and article.issue.number %}.{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
-        ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
+        {% trans '«&nbsp;' %}{{ article.title }}.{% trans '&nbsp;»' %}
+        <em>{{ article.issue.journal.name }}</em>,
+        {% if article.issue.volume %}{% trans 'vol.' %}&nbsp;{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}{% trans 'n<sup>o</sup>' %}&nbsp;{{ article.issue.number }}, {% endif %}{% if article.issue.period %}{{ article.issue.period }}&nbsp;{% endif %}{{ article.issue.year }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
       <dt>APA</dt>
@@ -51,7 +50,7 @@
         {{ article.title }}.
         <em>{{ article.issue.journal.name }}</em>,
         {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %},
-        {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
+        {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
       <dt>Chicago</dt>
@@ -72,7 +71,7 @@
         "{{ article.title }}."
         <em>{{ article.issue.journal.name }}</em>
         {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}no. {{ article.issue.number }}{% endif %}
-        ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
+        ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
     </dl>
 
