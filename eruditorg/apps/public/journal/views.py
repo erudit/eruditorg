@@ -193,6 +193,7 @@ class JournalDetailView(
         # Fetches the published issues and the latest issue associated with the current journal
         context['issues'] = self.object.published_issues.order_by('-date_published')
         context['latest_issue'] = self.object.last_issue
+        context['meta_info_issue'] = self.object.last_issue
         context['user_has_access_to_journal'] = self.object.open_access or (
             get_valid_subscription_for_journal(self.request, self.object) is not None)
 
@@ -354,6 +355,8 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
         context['journal'] = self.object.journal
         context['user_has_access_to_issue'] = self.object.journal.open_access or (
             get_valid_subscription_for_journal(self.request, self.object.journal) is not None)
+
+        context['meta_info_issue'] = self.object
         context['themes'] = self.object.erudit_object.get_formatted_themes()
         articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \
