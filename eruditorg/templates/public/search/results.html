@@ -411,10 +411,10 @@
                               {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
                             {% endif %}
                           {% endfor %}
-                          "{{ article.title|safe }}."
+                          {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
                           <em>{{ article.journal_name }}</em>
-                          {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}no. {{ article.issue_number }}{% endif %}
-                          ({{ article.issue_published }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+                          {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
+                          ({{ article.issue_published }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>
                       </dl>
                       <hr/>

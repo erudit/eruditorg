@@ -198,10 +198,10 @@
                               {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
                             {% endif %}
                           {% endfor %}
-                          "{{ document.title }}."
+                          {% trans '«&nbsp;' %}{{ document.title }}{% trans '&nbsp;»' %}.
                           <em>{{ document.issue.journal.name }}</em>
-                          {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}no. {{ document.issue.number }}{% endif %}
-                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
+                          {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}{% trans 'n<sup>o</sup>' %} {{ document.issue.number }}{% endif %}
+                          ({{ document.issue.year }}){% trans '&nbsp;:' %} {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                         </dd>
                       </dl>
 

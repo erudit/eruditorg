@@ -68,10 +68,10 @@
             {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
           {% endif %}
         {% endfor %}
-        "{{ article.title }}."
+        {% trans '«&nbsp;' %}{{ article.title }}{% trans '&nbsp;»' %}. 
         <em>{{ article.issue.journal.name }}</em>
-        {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}no. {{ article.issue.number }}{% endif %}
-        ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}{% trans 'n<sup>o</sup>' %} {{ article.issue.number }}{% endif %}
+        ({{ article.issue.year }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
     </dl>
 
