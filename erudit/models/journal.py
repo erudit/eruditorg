@@ -629,6 +629,8 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
     """ The last page of the article """
 
+    formatted_title = models.CharField(max_length=1000, null=True, blank=True)
+
     surtitle = models.CharField(max_length=600, null=True, blank=True)
     """ The surtitle of the article """
 
@@ -688,8 +690,12 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def title(self):
+        if self.formatted_title:
+            return self.formatted_title
+
         if self.get_full_identifier() and self.erudit_object:
             return self.erudit_object.get_formatted_title()
+        # TODO: remove ArticleTitle when all formated_title are imported
         else:
             title = self.titles.filter(paral=False).first()
             return str(title.title) if title else None

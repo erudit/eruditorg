@@ -651,7 +651,7 @@ class Command(BaseCommand):
             article.surtitle = surtitle['main']
         article.language = article_erudit_object.language
         article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
-
+        article.formatted_title = article_erudit_object.get_formatted_title()
         article.clean()
         article.save()
 

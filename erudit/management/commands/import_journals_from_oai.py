@@ -329,6 +329,8 @@ class Command(BaseCommand):
 
         article.save()
 
+        article.formatted_title = title_xml.text
+
         ArticleTitle.objects.filter(article=article).delete()
         ArticleTitle(
             article=article, paral=False, title=title_xml.text if title_xml is not None else None
