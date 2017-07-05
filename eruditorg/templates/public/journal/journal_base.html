@@ -1,6 +1,7 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 {% load cache %}
+{% load model_formatters %}
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
@@ -83,10 +84,10 @@
           {% endfor %}
           {% endif %}
 
-          {% if meta_info_issue.get_editors %}
+          {% if meta_info_issue.erudit_object.get_editors %}
           <dt>{% trans "Rédaction" %}</dt>
-          {% for issue_contributor in meta_info_issue.get_editors %}
-          <dd>{{ issue_contributor.format_name }}</dd>
+          {% for issue_contributor in meta_info_issue.erudit_object.get_editors %}
+          <dd>{{ issue_contributor | format_editor }}</dd>
           {% endfor %}
           {% endif %}
 
