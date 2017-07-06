@@ -3,6 +3,9 @@
 
 {% block title %}{% trans "Tableau de bord" %}{% endblock title %}
 
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'public:journal:journal_list' %}">{% trans "Tableau de bord" %}</a></li>
+{% endblock breadcrumb %}
 
 {% block content_main %}
 <div class="container-fluid">
