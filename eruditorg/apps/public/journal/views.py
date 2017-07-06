@@ -272,7 +272,6 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(JournalAuthorsListView, self).get_context_data(**kwargs)
-
         authors = context.get(self.context_object_name)
         articles = Article.objects.filter(issue__journal_id=self.journal.id, authors__in=authors) \
             .select_related('issue', 'issue__journal') \
@@ -297,6 +296,7 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
         context['article_type'] = self.article_type
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_issue
+        context['meta_info_issue'] = context['latest_issue']
         return context
 
 
