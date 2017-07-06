@@ -3,8 +3,6 @@
 
 {% block title %}{% trans "Choix de l'espace de gestion" %}{% endblock title %}
 
-{% block body_id %}home{% endblock body_id %}
-
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:dashboard' %}">{% trans "Tableau de bord" %}</a></li>
 {% endblock breadcrumb %}
