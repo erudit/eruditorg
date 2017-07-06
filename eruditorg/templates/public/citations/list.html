@@ -163,10 +163,8 @@
                               {% endif %}
                             {% endfor %}
                           {% endif %}
-                          "{{ document.title }}."
-                          <em>{{ document.issue.journal.name }}</em>
-                          {% if document.issue.volume %}{{ document.issue.volume }}{% endif %}{% if document.issue_volume and document.issue_number %}.{% endif %}{% if document.issue.number %}{{ document.issue.number }}{% endif %}
-                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}{% trans 'DOI&nbsp;:' %}:{{ document.doi }}{% endif %}
+                          {% trans '«&nbsp;' %}{{ document.title }}.{% trans '&nbsp;»' %}
+                          <em>{{ document.issue.journal.name }}</em>, {{ document.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
@@ -182,7 +180,7 @@
                           {{ document.title }}
                           <em>{{ document.issue.journal.name }}</em>,
                           {% if document.issue.volume %}<em>{{ document.issue.volume }}</em>{% endif %}{% if document.issue.number %}({{ document.issue.number }}){% endif %},
-                          {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}{% trans 'DOI&nbsp;:' %}:{{ document.doi }}{% endif %}
+                          {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                         </dd>
 
                         <dt>Chicago</dt>
@@ -200,10 +198,10 @@
                               {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
                             {% endif %}
                           {% endfor %}
-                          "{{ document.title }}."
+                          {% trans '«&nbsp;' %}{{ document.title }}{% trans '&nbsp;»' %}.
                           <em>{{ document.issue.journal.name }}</em>
-                          {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}no. {{ document.issue.number }}{% endif %}
-                          ({{ document.issue.year }}): {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}{% trans 'DOI&nbsp;:' %}:{{ document.doi }}{% endif %}
+                          {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}{% trans 'n<sup>o</sup>' %} {{ document.issue.number }}{% endif %}
+                          ({{ document.issue.year }}){% trans '&nbsp;:' %} {{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                         </dd>
                       </dl>
 
