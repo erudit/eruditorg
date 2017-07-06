@@ -2,6 +2,7 @@
 
 import os
 import unittest.mock
+import pytest
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
