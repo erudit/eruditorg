@@ -127,6 +127,10 @@ journal_url_patterns = [
 # -----------------------------------------------------------------------------
 
 urlpatterns = [
+    url(r'^rss.xml$', RedirectRetroUrls.as_view(
+        pattern_name="public:journal:latest_issues_rss",
+        permanent=True
+    )),
     url(r'^(?:(?P<lang>[\w-]{2})/)?', include([
         url(r'^index.html?$', RedirectRetroUrls.as_view(pattern_name='home', permanent=True)),
         url(r'^revue/?$', RedirectRetroUrls.as_view(
@@ -142,10 +146,6 @@ urlpatterns = [
         url(r'^abonnement/modifierPassword\.jsp$',
             RedirectRetroUrls.as_view(pattern_name='password_change', permanent=True)),
 
-        url(r'^rss.xml$', RedirectRetroUrls.as_view(
-            pattern_name="public:journal:latest_issues_rss",
-            permanent=True
-        )),
         url(r'^recherche/', include(search_url_patterns, namespace="legacy_search")),
         url(r'^these/', include(thesis_url_patterns, namespace="legacy_thesis")),
         url(r'^', include(journal_url_patterns, namespace="legacy_journal")),
