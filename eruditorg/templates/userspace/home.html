@@ -5,6 +5,10 @@
 
 {% block body_id %}home{% endblock body_id %}
 
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:dashboard' %}">{% trans "Tableau de bord" %}</a></li>
+{% endblock breadcrumb %}
+
 {% block content %}
 <div class="container">
   <div class="row">

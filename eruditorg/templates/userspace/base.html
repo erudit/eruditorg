@@ -30,6 +30,7 @@
         <h2 class="hidden">{% trans "Menu principal" %}</h2>
         <ul class="row nav navbar-nav navbar-right">
           {% block mainnav %}
+          {% block inner_nav %}{% endblock inner_nav %}
           <li class="nav-publications dropdown">
             <a href="#" class="select main-section hidden-xs hidden-sm">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
             <ul>
