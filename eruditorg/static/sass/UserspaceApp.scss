@@ -34,10 +34,11 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 4. Layout-related sections
 @import
-  'layout/userspace/content',
-  'layout/userspace/header',
-  'layout/userspace/nav',
-  'layout/userspace/sidenav';
+  'layout/public/aside',
+  'layout/public/footer',
+  'layout/public/header',
+  'layout/public/main',
+  'layout/public/nav';
 
 // 5. Components
 @import
