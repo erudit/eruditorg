@@ -74,7 +74,7 @@
         <p>
           -> <a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>
         </p>
-        {% cache LONG_TTL "journal_detail" LANGUAGE_CODE journal.id %}
+        {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
         <dl class="journal-meta--list">
 
           {% if meta_info_issue.get_directors %}
