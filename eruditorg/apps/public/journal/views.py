@@ -119,7 +119,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 
     def get_queryset(self):
         qs = Journal.objects.exclude(
-            pk__in=Journal.upcoming_objects.all().values_list('pk', flat=True)
+            pk__in=Journal.upcoming_objects.exclude(is_new=True).values_list('pk', flat=True)
         )
 
         qs = qs.select_related('collection', 'type')
@@ -128,6 +128,8 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
         if self.filter_form.is_valid():
             if self.filter_form.cleaned_data['open_access']:
                 qs = qs.filter(open_access=True)
+            if self.filter_form.cleaned_data['is_new']:
+                qs = qs.filter(is_new=True)
             if self.filter_form.cleaned_data['types']:
                 qs = qs.filter(reduce(
                     lambda q, jtype: q | Q(type__code=jtype),

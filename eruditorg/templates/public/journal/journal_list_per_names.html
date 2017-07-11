@@ -68,7 +68,7 @@
     <div id="id_journal_list_body" class="row">
       <div class="list-nav">
         <aside class="col-md-3 col-lg-2 sidebar-block filters">
-          {% cache LONG_TTL "public_journal_list_form" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.open_access.value %}
+          {% cache LONG_TTL "public_journal_list_form" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.open_access.value filter_form.is_new.value %}
           <form id="filter_form" action="" method="get" class="akkordion" role="tab" role="tabpanel">
             <h2 class="akkordion-title filter-title" role="button" aria-expanded="false" aria-controls="filter-form-content">
               {% trans "Filtres" %}
@@ -83,6 +83,13 @@
                     {{ filter_form.open_access.label }}&nbsp;<span class="erudicon erudicon-open-access"></span>
                   </label>
                   {% for error in filter_form.open_access.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+                <div id="div_id_{{ filter_form.is_new.html_name }}" class="checkbox">
+                  {{ filter_form.is_new|add_class:'form-control' }}
+                  <label for="{{ filter_form.is_new.auto_id }}" class="control-label">
+                    {{ filter_form.is_new.label }}&nbsp;<span class="erudicon erudicon-open-access"></span>
+                  </label>
+                  {% for error in filter_form.is_new.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
               </div>
 
@@ -139,7 +146,7 @@
           </div>
         </nav>
       </div>
-      {% cache LONG_TTL "public_journal_list_list" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.open_access.value %}
+      {% cache LONG_TTL "public_journal_list_list" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.open_access.value filter_form.is_new.value %}
       <div class="col-md-9 col-lg-offset-1 journals-list">
         {% for objects_group in sorted_objects %}
         <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
@@ -149,7 +156,7 @@
             <a class="journal-row" href="{% if journal.redirect_to_external_url %}{% url 'public:journal:journal_external_redirect' journal.code %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
               <div class="row">
                 <div class="col-sm-6 journal-title">
-                  <span class="journal-name">{{ journal.name }}</span>
+                  <span class="journal-name">{% if journal.is_new %}<marquee>NOUVEAU</marquee>{% endif %}{{ journal.name }}</span>
                   {% if journal.subtitle %}
                   <span class="journal-subtitle">{{ journal.subtitle }}</span>
                   {% endif %}
