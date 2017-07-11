@@ -12,6 +12,7 @@ from django.http.response import HttpResponseNotFound, HttpResponseServerError
 from feedparser import parse as rss_parse
 
 from erudit.models import Issue
+from erudit.models import Journal
 from erudit.models import Discipline
 
 logger = logging.getLogger(__name__)
@@ -35,6 +36,7 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         # Includes the latest issues
+        context['new_journals'] = Journal.objects.filter(is_new=True)
         context['latest_issues'] = Issue.objects.filter(
             date_published__isnull=False, is_published=True) \
             .select_related('journal').order_by('-date_published')[:8]

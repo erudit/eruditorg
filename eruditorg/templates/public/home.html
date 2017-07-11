@@ -62,6 +62,9 @@
           <h3 class="glory--header--title">
             {% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}
           </h3>
+          {% for journal in new_journals %}
+          {{ journal }}
+          {% endfor %}
         </header>
       </div>
       <div class="row">
