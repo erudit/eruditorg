@@ -164,6 +164,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     )
     """ Users that are part of this journal's organization """
 
+    is_new = models.BooleanField(
+        default=False,
+        verbose_name=_("Est une nouveauté"),
+        help_text=_("Cocher si cette revue est nouvelle sur la plateforme d'Érudit.")
+    )
+
     disciplines = models.ManyToManyField('Discipline', related_name='journals')
     """ The disciplines associated with the journal. """
 
