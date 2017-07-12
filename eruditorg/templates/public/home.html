@@ -62,9 +62,6 @@
           <h3 class="glory--header--title">
             {% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}
           </h3>
-          {% for journal in new_journals %}
-          {{ journal }}
-          {% endfor %}
         </header>
       </div>
       <div class="row">
@@ -85,6 +82,14 @@
             </div>
             <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
           </form>
+          <div class="glory--new-journals">
+            <h4>{% trans 'Nouvelles revues' %}</h4>
+            <ul class="unstyled">
+              {% for journal in new_journals %}
+              <li><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter' %} {{ journal.name }}">{{ journal.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
         <!-- PUBLICATION TYPES -->
         <div class="col-xs-12 col-sm-6 col-md-4 glory--publication-types">

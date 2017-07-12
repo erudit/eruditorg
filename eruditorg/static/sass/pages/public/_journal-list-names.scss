@@ -141,6 +141,15 @@
           padding: 1em 0.25em;
           border-bottom: 1px solid $mid-grey;
 
+          .journal-name {
+
+            .new-journal-tag {
+              color: $coral-red;
+              display: inline;
+            }
+
+          }
+
           .journal-subtitle {
             color: $dark-grey;
 
@@ -176,6 +185,10 @@
 
         p {
           margin: 0;
+        }
+
+        &.new-journal {
+          background-color: $light-grey;
         }
 
       }

@@ -84,10 +84,11 @@
                   </label>
                   {% for error in filter_form.open_access.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
+
                 <div id="div_id_{{ filter_form.is_new.html_name }}" class="checkbox">
                   {{ filter_form.is_new|add_class:'form-control' }}
                   <label for="{{ filter_form.is_new.auto_id }}" class="control-label">
-                    {{ filter_form.is_new.label }}&nbsp;<span class="erudicon erudicon-open-access"></span>
+                    {{ filter_form.is_new.label }}
                   </label>
                   {% for error in filter_form.is_new.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
@@ -151,12 +152,12 @@
         {% for objects_group in sorted_objects %}
         <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
           {% for journal in objects_group.objects %}
-          <li>
+          <li class="{% if journal.is_new %}new-journal{% endif %}">
             {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
             <a class="journal-row" href="{% if journal.redirect_to_external_url %}{% url 'public:journal:journal_external_redirect' journal.code %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
               <div class="row">
                 <div class="col-sm-6 journal-title">
-                  <span class="journal-name">{% if journal.is_new %}<marquee>NOUVEAU</marquee>{% endif %}{{ journal.name }}</span>
+                  <span class="journal-name">{{ journal.name }}{% if journal.is_new %} <span class="new-journal-tag">{% trans '(nouveauté)' %}</span>{% endif %}</span>
                   {% if journal.subtitle %}
                   <span class="journal-subtitle">{{ journal.subtitle }}</span>
                   {% endif %}
