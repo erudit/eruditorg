@@ -4,11 +4,10 @@
 
 {% block title %}{{ question }}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
 <li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
-{% endblock breadcrumb_end %}
+{% endblock breadcrumb %}
 
 {% block content_main %}
 <div class="row">

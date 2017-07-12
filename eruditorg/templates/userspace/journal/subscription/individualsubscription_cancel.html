@@ -3,11 +3,10 @@
 
 {% block title %}{% trans "Confirmer l'annulation de la proposition d'abonnement ?" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
+{% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}">{% trans "Abonnements individuels" %}</a></li>
 <li><a href="#">{% trans "Confirmer l'annulation de la proposition d'abonnement ?" %}</a></li>
-{% endblock breadcrumb_end %}
+{% endblock breadcrumb %}
 
 {% block content_main %}
 <div class="row">

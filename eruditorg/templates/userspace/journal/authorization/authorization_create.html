@@ -4,11 +4,9 @@
 
 {% block title %}{% trans "Ajouter un accès" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="{% url 'userspace:journal:authorization:list' %}">{% trans "Autorisations" %}</a></li>
+{% block breadcrumb %}{{ block.super }}
 <li><a href="#">{% trans "Ajouter un accès" %}</a></li>
-{% endblock breadcrumb_end %}
+{% endblock breadcrumb %}
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">

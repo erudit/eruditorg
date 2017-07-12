@@ -3,10 +3,9 @@
 
 {% block title %}{% trans "Abonnements" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "Abonnements" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
+{% endblock breadcrumb %}
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">

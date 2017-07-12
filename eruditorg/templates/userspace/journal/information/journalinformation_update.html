@@ -8,10 +8,9 @@
   {{ form.media.css }}
 {% endblock extrahead %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "À propos" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}">{% trans "À propos" %}</a></li>
+{% endblock breadcrumb %}
 
 {% block content_main %}
   <div class="container-fluid">

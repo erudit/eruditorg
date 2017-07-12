@@ -20,6 +20,10 @@
 {% endif %}
 {% endblock inner_nav %}
 
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
+{% endblock breadcrumb %}
+
 {% block nav %}
 <nav class="sidenav">
 {% include "userspace/journal/partials/menu.html" %}
@@ -28,14 +32,6 @@
 
 {% block content %}
 <div class="container-fluid">
-  <nav id="breadcrumb" class="breadcrumb">
-    {% block breadcrumbs %}
-    <ul>
-      <li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
-      {% block breadcrumb_end %}{% endblock breadcrumb_end %}
-    </ul>
-    {% endblock breadcrumbs %}
-  </nav>
   <div class="messages-wrapper">
     {% include "partials/messages.html" %}
   </div>

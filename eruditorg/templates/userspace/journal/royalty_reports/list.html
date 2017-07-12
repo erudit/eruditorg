@@ -4,10 +4,9 @@
 
 {% block title %}{% trans "Rapport de redevances" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "Rapports de redevances" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}">{% trans "Rapports de redevances" %}</a></li>
+{% endblock breadcrumb %}
 
 {% block content_main %}
 <div class="col-md-10 col-md-offset-1 col-xs-12">
