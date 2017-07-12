@@ -10,8 +10,8 @@
 
 <ul class="main-menu">
   <li class="userspace menu-item has-children has-dropdown">
-    <a href="{% url 'userspace:dashboard' %}">
-      <span class="icon fa ion-ios-home-outline"></span>
+    <a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">
+      <span class="ion-ios-home-outline"></span>
       <span class="sidenav-label">{{ scope_current_journal.name }}</span>
     </a>
     <ul class="sub-menu dropdown">
@@ -19,7 +19,7 @@
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'information' %}class="active"{% endif %}>
-          <span class="icon fa ion-ios-book-outline"></span>
+          <span class="ion-ios-book-outline"></span>
           <span class="sidenav-label">{% trans "À propos" %}</span>
         </a>
       </li>
@@ -28,26 +28,8 @@
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:editor:issues' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'editor' %}class="active"{% endif %}>
-          <span class="icon fa ion-ios-copy-outline"></span>
+          <span class="ion-ios-copy-outline"></span>
           <span class="sidenav-label">{% trans "Dépôt de fichiers" %}</span>
-        </a>
-      </li>
-      {% endif %}
-      {% if can_manage_authorizations %}
-      <li class="journal menu-item">
-        <a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}"
-           {% if menu_journal == 'authorization' %}class="active"{% endif %}>
-          <span class="icon fa ion-ios-locked-outline"></span>
-          <span class="sidenav-label">{% trans "Autorisations" %}</span>
-        </a>
-      </li>
-      {% endif %}
-      {% if can_manage_account %}
-      <li class="journal menu-item">
-        <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}"
-           {% if menu_journal == 'subscription' %}class="active"{% endif %}>
-          <span class="icon fa ion-ios-people-outline"></span>
-          <span class="sidenav-label">{% trans "Abonnements" %}</span>
         </a>
       </li>
       {% endif %}
@@ -55,11 +37,48 @@
       <li class="journal menu-item">
         <a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}"
            {% if menu_journal == 'royalty_reports' %}class="active"{% endif %}>
-          <span class="icon fa ion-ios-people-outline"></span>
+          <span class="ion-social-usd-outline"></span>
           <span class="sidenav-label">{% trans "Rapports de redevances" %}</span>
         </a>
       </li>
       {% endif %}
+      {% if can_manage_account %}
+      <li class="journal menu-item">
+        <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}"
+           {% if menu_journal == 'subscription' %}class="active"{% endif %}>
+          <span class="ion-ios-people-outline"></span>
+          <span class="sidenav-label">{% trans "Abonnements" %}</span>
+        </a>
+      </li>
+      {% endif %}
+      <li class="journal menu-item">
+        <a href="https://secur.erudit.org/statusage/awstats.pl?config=www.erudit.org_revue_{{ scope_current_journal.code }}&amp;lang=fr" target="_blank">
+          <span class="ion-ios-analytics-outline"></span>
+          <span class="sidenav-label">{% trans "Statistiques de consultation" %}</span>
+        </a>
+      </li>
+      <li class="journal menu-item">
+        <a href="https://www.erudit.org/ojs/index.php/{{ scope_current_journal.code }}/login" target="_blank">
+          <span class="ion-ios-compose-outline"></span>
+          <span class="sidenav-label">{% trans "Gestion de manuscrits" %}</span>
+        </a>
+      </li>
+      {% if can_manage_authorizations %}
+      <li class="journal menu-item">
+        <a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}"
+           {% if menu_journal == 'authorization' %}class="active"{% endif %}>
+          <span class="ion-ios-locked-outline"></span>
+          <span class="sidenav-label">{% trans "Autorisations" %}</span>
+        </a>
+      </li>
+      {% endif %}
+      <li class="journal menu-item">
+        <a href="{% url 'public:auth:personal_data' %}"
+           {% if menu_journal == 'authorization' %}class="active"{% endif %}>
+          <span class="ion-ios-cog-outline"></span>
+          <span class="sidenav-label">{% trans "Mon compte" %}</span>
+        </a>
+      </li>
     </ul>
   </li>
 </ul>
