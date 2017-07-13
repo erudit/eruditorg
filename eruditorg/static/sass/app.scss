@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// Import partials for userspace app
+// Import partials
 // Always sort partials in alphabetical order, except for base directory
 // -----------------------------------------------------------------------------
 
@@ -8,6 +8,7 @@
 // 1. Configuration and helpers
 @import
   'utils/colours',
+  'utils/erudicon',
   'utils/font-styles',
   'utils/functions',
   'utils/mixins',
@@ -21,6 +22,7 @@ $ionicons-font-path: '~ionicons/fonts';
   '~hint.css/hint.base.css',
   '~ionicons/scss/ionicons',
   '~select2/dist/css/select2',
+  'vendor/magnific-popup/magnific-popup.scss',
   'vendor/normalize';
 
 // 3. Base stuff (do not sort in alphabetical order)
@@ -43,25 +45,55 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 5. Components
 @import
+  'components/accordions',
   'components/alerts',
+  'components/alpha-nav',
   'components/breadcrumbs',
+  'components/button-groups',
   'components/buttons',
   'components/checkboxes',
+  'components/component-animations',
   'components/dropdowns',
+  'components/error-pages',
   'components/forms',
+  'components/glory',
   'components/input-groups',
+  'components/issue-covers',
   'components/lists',
+  'components/media',
   'components/modals',
   'components/navbars',
+  'components/page-headers',
   'components/pagination',
+  'components/pagination-arrows',
   'components/panels',
+  'components/related-articles',
+  'components/responsive-embed',
+  'components/scroll-top',
+  'components/subscription-sponsor',
   'components/tables',
   'components/tabs',
+  'components/toolboxes',
+  'components/tooltips',
   'components/status-indicators';
 
 // 6. Page-specific styles
 @import
-  'pages/userspace/homepage',
+  'pages/public/account-settings',
+  'pages/public/advanced-search',
+  'pages/public/article-detail',
+  'pages/public/brand-assets',
+  'pages/public/homepage',
+  'pages/public/issue-detail',
+  'pages/public/journal-authors-list',
+  'pages/public/journal-detail',
+  'pages/public/journal-list-disciplines',
+  'pages/public/journal-list-names',
+  'pages/public/saved-citations-list',
+  'pages/public/search-results',
+  'pages/public/thesis-collection-home',
+  'pages/public/thesis-collection-list',
+  'pages/public/thesis-home',
   'pages/userspace/issuesubmission',
   'pages/userspace/members',
   'pages/userspace/royalty-reports',
@@ -72,4 +104,7 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 7. Themes
 @import
-  'themes/userspace';
+  'themes/campaign';
+
+// $spritesheet-sprites is an array of all sprite image names
+@include sprites($spritesheet-sprites);
