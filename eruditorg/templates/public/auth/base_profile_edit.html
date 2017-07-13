@@ -9,16 +9,16 @@
 <div id="account-settings" class="container">
   <div class="row">
     <div class="col-md-3 col-xs-12">
-      <div class="parameters-menu-wrapper">
+      <nav class="sidenav">
         <header>
           <h1 class="title">{% trans "Paramètres" %}</h1>
         </header>
-        <ul class="parameters-menu">
-          <li class="{% if menu_account == "personal" %}active{% endif %}"><a href="{% url 'public:auth:personal_data' %}">{% trans "Informations personnelles" %}</a></li>
-          <li class="{% if menu_account == "parameters" %}active{% endif %}"><a href="{% url 'public:auth:parameters' %}">{% trans "Compte" %}</a></li>
-          <li class="{% if menu_account == "password" %}active{% endif %}"><a href="{% url 'public:auth:password_change' %}">{% trans "Mot de passe" %}</a></li>
+        <ul>
+          <li class="sidenav-item{% if menu_account == "personal" %} active{% endif %}"><a href="{% url 'public:auth:personal_data' %}">{% trans "Informations personnelles" %}</a></li>
+          <li class="sidenav-item{% if menu_account == "parameters" %} active{% endif %}"><a href="{% url 'public:auth:parameters' %}">{% trans "Compte" %}</a></li>
+          <li class="sidenav-item{% if menu_account == "password" %} active{% endif %}"><a href="{% url 'public:auth:password_change' %}">{% trans "Mot de passe" %}</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="col-md-offset-1 col-md-8 col-xs-12">
       {% block content %}{% endblock content %}
