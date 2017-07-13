@@ -8,33 +8,25 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Autorisations" %}</h2>
-      </div>
-    </div>
-    {% for choice, app_authorizations in authorizations.items %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans app_authorizations.label %}</h3>
-      </div>
-      <div class="panel-body">
-        <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}"> {% trans "Ajouter" %} </a>
-        <br /> <br />
-        <ul>
-        {% for auth in app_authorizations.authorizations %}
-        <li>{{ auth.user.get_full_name|default:auth.user.username }}{% if auth.user.email %} ({{ auth.user.email }}){% endif %}
-          <a class="btn" alt="{% trans 'supprimer' %}" href="{% url 'userspace:journal:authorization:delete' auth.pk %}">
-            <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span>
-          </a>
-        </li>
-        {% endfor %}
-        </ul>
-      </div>
-    </div>
-    {% endfor %}
-  </section>
+<h2>{% trans "Autorisations" %}</h2>
+{% for choice, app_authorizations in authorizations.items %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans app_authorizations.label %}</h3>
+  </div>
+  <div class="panel-body">
+    <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}"> {% trans "Ajouter" %} </a>
+    <br /> <br />
+    <ul>
+      {% for auth in app_authorizations.authorizations %}
+      <li>{{ auth.user.get_full_name|default:auth.user.username }}{% if auth.user.email %} ({{ auth.user.email }}){% endif %}
+        <a class="btn" alt="{% trans 'supprimer' %}" href="{% url 'userspace:journal:authorization:delete' auth.pk %}">
+          <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
+{% endfor %}
 {% endblock content_main %}

@@ -9,91 +9,83 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      {% if journal_info %}
-      <div class="journal-infos" role="tablist" aria-multiselectable="true">
+{% if journal_info %}
+<div class="journal-infos" role="tablist" aria-multiselectable="true">
 
-        {% trans "Aucune information" as tab_empty_msg %}
+  {% trans "Aucune information" as tab_empty_msg %}
 
-        {% if journal_info.about %}
-        <section class="journal-info-block">
-          <h2>
-            {% trans "À propos" %}
-          </h2>
-          <section id="journal-info-about-content" class="akkordion-content akkordion-active">
-            {{ journal_info.about|default:tab_empty_msg|safe }}
-          </section>
-        </section>
-        {% endif %}
+  {% if journal_info.about %}
+  <section class="journal-info-block">
+    <h2>
+      {% trans "À propos" %}
+    </h2>
+    <section id="journal-info-about-content" class="akkordion-content akkordion-active">
+      {{ journal_info.about|default:tab_empty_msg|safe }}
+    </section>
+  </section>
+  {% endif %}
 
-        {% if journal_info.contact %}
-        <section class="journal-info-block akkordion" role="tab" id="journal-info-contact" role="tabpanel">
-          <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-contact-content">
-            {% trans "Coordonnées" %}
-            <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-          </h2>
-          <section id="journal-info-contact-content" class="akkordion-content" aria-labelledby="journal-info-contact">
-            {{ journal_info.contact|default:tab_empty_msg|safe }}
-          </section>
-        </section>
-        {% endif %}
+  {% if journal_info.contact %}
+  <section class="journal-info-block akkordion" role="tab" id="journal-info-contact" role="tabpanel">
+    <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-contact-content">
+      {% trans "Coordonnées" %}
+      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+    </h2>
+    <section id="journal-info-contact-content" class="akkordion-content" aria-labelledby="journal-info-contact">
+      {{ journal_info.contact|default:tab_empty_msg|safe }}
+    </section>
+  </section>
+  {% endif %}
 
-        {% if journal_info.editorial_policy %}
-        <section class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
-          <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
-            {% trans "Politique éditoriale" %}
-            <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-          </h2>
-          <section id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
-            {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
-          </section>
-        </section>
-        {% endif %}
+  {% if journal_info.editorial_policy %}
+  <section class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
+    <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
+      {% trans "Politique éditoriale" %}
+      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+    </h2>
+    <section id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
+      {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
+    </section>
+  </section>
+  {% endif %}
 
-        {% if journal_info.subscriptions %}
-        <section class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
-          <h2 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
-            {% trans "Abonnements" %}
-            <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-          </h2>
-          <section id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
-            {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
-          </section>
-        </section>
-        {% endif %}
+  {% if journal_info.subscriptions %}
+  <section class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
+    <h2 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
+      {% trans "Abonnements" %}
+      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+    </h2>
+    <section id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
+      {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
+    </section>
+  </section>
+  {% endif %}
 
-        {% if journal_info.team %}
-        <section class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
-          <h2 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
-            {% trans "Équipe" %}
-            <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-          </h2>
-          <section id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
-            {{ journal_info.team|default:tab_empty_msg|safe }}
-          </section>
-        </section>
-        {% endif %}
+  {% if journal_info.team %}
+  <section class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
+    <h2 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
+      {% trans "Équipe" %}
+      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+    </h2>
+    <section id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
+      {{ journal_info.team|default:tab_empty_msg|safe }}
+    </section>
+  </section>
+  {% endif %}
 
-        {% if journal_info.partners %}
-        <section class="journal-info-block akkordion" role="tab" id="journal-info-partners" role="tabpanel">
-          <h2 class="akkordion-title" href="#journal-info-partners-content" aria-expanded="false" aria-controls="journal-info-partners-content">
-            {% trans "Partenaires" %}
-            <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-          </h2>
-          <section id="journal-info-partners-content" class="akkordion-content" aria-labelledby="journal-info-partners">
-            {{ journal_info.partners|default:tab_empty_msg|safe }}
-          </section>
-        </section>
-        {% endif %}
+  {% if journal_info.partners %}
+  <section class="journal-info-block akkordion" role="tab" id="journal-info-partners" role="tabpanel">
+    <h2 class="akkordion-title" href="#journal-info-partners-content" aria-expanded="false" aria-controls="journal-info-partners-content">
+      {% trans "Partenaires" %}
+      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+    </h2>
+    <section id="journal-info-partners-content" class="akkordion-content" aria-labelledby="journal-info-partners">
+      {{ journal_info.partners|default:tab_empty_msg|safe }}
+    </section>
+  </section>
+  {% endif %}
 
-      </div>
-      {% endif %}
-    </div>
-    <div class="col-xs-12">
-      <img src="{% url 'public:journal:journal_logo' scope_current_journal.code %}" alt="" class="img-responsive img-centered" />
-    </div>
-  </div>
 </div>
+{% endif %}
+<img src="{% url 'public:journal:journal_logo' scope_current_journal.code %}" alt="" class="img-responsive img-centered" />
 {% endblock content_main %}

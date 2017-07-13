@@ -1,4 +1,4 @@
-{% extends "userspace/journal/editor/base.html" %}
+{% extends "userspace/journal/base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
 
@@ -10,31 +10,27 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Transmission finale des fichiers" %}</h3>
-      </div>
-      <div class="panel-body">
-      <div class="warning-message"><p>{{ question }}</p></div>
-        <form action="" method="post">{% csrf_token %}
-          {% if incomplete_files %}
-            <p>
-              {% trans "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas envoyés à l'équipe de production:" %}&nbsp;
-              <ul>
-              {% for f in incomplete_files %}
-              <li><p>{{ f.get_filename }}</p></li>
-              {% endfor %}
-              </ul>
-            </p>
-          {% endif %}
-          <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Yes" %}" class="btn btn-primary" />
-          <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "No" %}</a>
-        </form>
-      </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans "Transmission finale des fichiers" %}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="warning-message"><p>{{ question }}</p></div>
+    <form action="" method="post">{% csrf_token %}
+      {% if incomplete_files %}
+      <p>
+        {% trans "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas envoyés à l'équipe de production:" %}&nbsp;
+        <ul>
+          {% for f in incomplete_files %}
+          <li><p>{{ f.get_filename }}</p></li>
+          {% endfor %}
+        </ul>
+      </p>
+      {% endif %}
+      <input type="hidden" name="post" value="yes" />
+      <input type="submit" value="{% trans "Yes" %}" class="btn btn-primary" />
+      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "No" %}</a>
+    </form>
   </div>
 </div>
 {% endblock content_main %}

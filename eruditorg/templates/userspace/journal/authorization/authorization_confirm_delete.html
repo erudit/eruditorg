@@ -8,25 +8,22 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Confirmer la suppression de l'accès ?" %}</h3>
-      </div>
-      <div class="panel-body">
-      <div class="warning-message">
-        {% blocktrans trimmed with name=object.user.get_full_name|default:object.user.username %}
-          Voulez-vous supprimer l'accès de <strong>{{ name }}</strong> ?
-        {% endblocktrans %}
-      </div>
-        <form action="" method="post">{% csrf_token %}
-          <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-          <a href="{% url 'userspace:journal:authorization:list' %}" class="btn btn-link">{% trans "Non" %}</a>
-        </form>
-      </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans "Confirmer la suppression de l'accès ?" %}</h3>
+  </div>
+  <div class="panel-body">
+  <div class="warning-message">
+    {% blocktrans trimmed with name=object.user.get_full_name|default:object.user.username %}
+      Voulez-vous supprimer l'accès de <strong>{{ name }}</strong> ?
+    {% endblocktrans %}
+  </div>
+    <form action="" method="post">{% csrf_token %}
+      <input type="hidden" name="post" value="yes" />
+      <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
+      <a href="{% url 'userspace:journal:authorization:list' %}" class="btn btn-link">{% trans "Non" %}</a>
+    </form>
   </div>
 </div>
+
 {% endblock content_main %}

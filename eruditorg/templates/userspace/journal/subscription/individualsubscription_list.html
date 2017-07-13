@@ -8,95 +8,86 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Abonnements" %}</h2>
-      </div>
-      <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
-      </div>
+<section>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>{% trans "Abonnements" %}</h2>
     </div>
-    <ul id="id_subscription_list" class="row">
-      {% for subscription in subscriptions %}
-      <li class="col-xs-12">
-        <div class="content-wrapper">
-          <span class="actions pull-right">
-            <a href="{% url 'userspace:journal:subscription:delete' journal_pk=scope_current_journal.pk pk=subscription.pk %}"
-               class="btn">{% trans "Supprimer" %}</a>
-          </span>
-          <span class="title">
-            {{ subscription.user.get_full_name|default:subscription.user.username }}
-          </span>
-          <span class="metadata-wrapper">
-            <span class="metadata">
-              <span class="metadata-title">{% trans "Revue" %}</span>
-              <span class="metadata-value">{{ subscription.journal.name }}</span>
-            </span>
-            <span class="metadata">
-              <span class="metadata-value"><i>
-                {% blocktrans trimmed with created=subscription.created|date:"SHORT_DATE_FORMAT" %}
-                  Créé le {{ created }}
-                {% endblocktrans %}
-              </i></span>
-            </span>
-          </span>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-    <div class="row">
-      <div class="col-xs-12">
-        {% include "userspace/partials/pagination.html" %}
-      </div>
+    <div class="col-sm-6 text-right">
+      <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
     </div>
-  </section>
-  {% if subscribed_organisations %}
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
-        <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  </div>
+  <ul id="id_subscription_list" class="row">
+    {% for subscription in subscriptions %}
+    <li class="col-xs-12">
+      <div class="content-wrapper">
+        <span class="actions pull-right">
+          <a href="{% url 'userspace:journal:subscription:delete' journal_pk=scope_current_journal.pk pk=subscription.pk %}"
+          class="btn">{% trans "Supprimer" %}</a>
+        </span>
+        <span class="title">
+          {{ subscription.user.get_full_name|default:subscription.user.username }}
+        </span>
+        <span class="metadata-wrapper">
+          <span class="metadata">
+            <span class="metadata-title">{% trans "Revue" %}</span>
+            <span class="metadata-value">{{ subscription.journal.name }}</span>
+          </span>
+          <span class="metadata">
+            <span class="metadata-value"><i>
+              {% blocktrans trimmed with created=subscription.created|date:"SHORT_DATE_FORMAT" %}
+              Créé le {{ created }}
+              {% endblocktrans %}
+            </i></span>
+          </span>
+        </span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="row">
+    <div class="col-xs-12">
+      {% include "userspace/partials/pagination.html" %}
+    </div>
+  </div>
+</section>
+{% if subscribed_organisations %}
+<section>
+  <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
+  <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
   {% endif %}
   {% if pending_subscriptions %}
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Abonnements en attente" %}</h2>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>{% trans "Adresse courriel" %}</th>
-              <th>{% trans "Prénom" %}</th>
-              <th>{% trans "Nom" %}</th>
-              <th>{% trans "Date d'expiration" %}</th>
-              <th>{% trans "Actions" %}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for psubscription in pending_subscriptions %}
-            <tr class="text-center">
-              <td>{{ forloop.counter }}</td>
-              <td>{{ psubscription.email }}</td>
-              <td>{{ psubscription.first_name }}</td>
-              <td>{{ psubscription.last_name }}</td>
-              <td>{{ psubscription.expiration_date }}</td>
-              <td>
-                <span class="actions pull-right">
-                  <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" class="btn" title="{% trans 'Supprimer' %}">
-                    {% trans "Supprimer" %}
-                  </a>
-                <span class="actions pull-right">
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-  {% endif %}
-</div>
+  <h2>{% trans "Abonnements en attente" %}</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>{% trans "Adresse courriel" %}</th>
+        <th>{% trans "Prénom" %}</th>
+        <th>{% trans "Nom" %}</th>
+        <th>{% trans "Date d'expiration" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for psubscription in pending_subscriptions %}
+      <tr class="text-center">
+        <td>{{ forloop.counter }}</td>
+        <td>{{ psubscription.email }}</td>
+        <td>{{ psubscription.first_name }}</td>
+        <td>{{ psubscription.last_name }}</td>
+        <td>{{ psubscription.expiration_date }}</td>
+        <td>
+          <span class="actions pull-right">
+            <a href="{% url 'userspace:journal:subscription:cancel' psubscription.pk %}" class="btn" title="{% trans 'Supprimer' %}">
+              {% trans "Supprimer" %}
+            </a>
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
 {% endblock content_main %}

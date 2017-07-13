@@ -9,25 +9,17 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Rapports de redevances" %}</h2>
-      </div>
-    </div>
-    <ul id="id_royalty_reports_list" class="row">
-    {% for report in reports %}
-      <li class="col-xs-12">
-        <a href="{{ report.report_file.url }}"
-           class="btn btn-link btn-block">
-          <span class="title">
-            {{ report.royalty_report }}
-          </span>
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
-  </section>
-</div>
+<h2>{% trans "Rapports de redevances" %}</h2>
+<ul id="id_royalty_reports_list" class="row">
+{% for report in reports %}
+  <li class="col-xs-12">
+    <a href="{{ report.report_file.url }}"
+       class="btn btn-link btn-block">
+      <span class="title">
+        {{ report.royalty_report }}
+      </span>
+    </a>
+  </li>
+{% endfor %}
+</ul>
 {% endblock content_main %}

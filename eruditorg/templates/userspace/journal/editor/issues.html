@@ -1,4 +1,4 @@
-{% extends "userspace/journal/editor/base.html" %}
+{% extends "userspace/journal/base.html" %}
 {% load i18n staticfiles %}
 {% load rules %}
 
@@ -11,44 +11,42 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section>
-    {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-    {% if can_manage_issuesubmission %}
-    <div class="row">
-      <div class="col-md-6">
-        <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Déposer des fichiers de production" %}</a>
-        <br /><br />
-      </div>
-    </div>
-    {% endif %}
-    <h2>{% trans "Historique" %}</h2>
-    <ul id="id_issuesubmission_list" class="row submission-list">
-    {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-      <li class="col-xs-12">
-        <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}">
-          {% with issue_submission.get_status_code_display as status %}
-          <span class="pull-right status">
-            {{ issue_submission.get_status_display }}
-            <span class="status-indicator-{% if status == 'C' %}error{% elif status == 'D' %}warning{% elif status == 'V' %}success{% endif %}"></span>
-          </span>
-          {% endwith %}
-          <span class="title">
-            {{ issue_submission }}
-          </span>
-          <span class="metadata">
-            <span class="metadata-title">{% trans "Revue" %}</span>
-            <span class="metadata-value">{{ issue_submission.journal.name }}</span>
-          </span>
-          <span class="pull-right metadata">
-            <em>{% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
-              Ajouté le {{ created }}
-              {% endblocktrans %}</em>
-          </span>
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
-  </section>
+{% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+{% if can_manage_issuesubmission %}
+<div class="row">
+  <div class="col-md-6">
+    <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Déposer des fichiers de production" %}</a>
+    <br /><br />
+  </div>
 </div>
+{% endif %}
+<h2>{% trans "Historique" %}</h2>
+<ul id="id_issuesubmission_list" class="row submission-list">
+  {% for issue_submission in object_list|dictsortreversed:"date_created" %}
+  <li class="col-xs-12">
+    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}">
+      {% with issue_submission.get_status_code_display as status %}
+      <span class="pull-right status">
+        {{ issue_submission.get_status_display }}
+        <span class="status-indicator-{% if status == 'C' %}error{% elif status == 'D' %}warning{% elif status == 'V' %}success{% endif %}"></span>
+      </span>
+      {% endwith %}
+      <span class="title">
+        {{ issue_submission }}
+      </span>
+      <span class="metadata">
+        <span class="metadata-title">{% trans "Revue" %}</span>
+        <span class="metadata-value">{{ issue_submission.journal.name }}</span>
+      </span>
+      <span class="pull-right metadata">
+        <em>
+          {% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
+          Ajouté le {{ created }}
+          {% endblocktrans %}
+        </em>
+      </span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock content_main %}

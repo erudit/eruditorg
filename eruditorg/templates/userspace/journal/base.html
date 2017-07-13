@@ -24,18 +24,17 @@
 <li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
 {% endblock breadcrumb %}
 
-{% block nav %}
-<nav class="sidenav">
-{% include "userspace/journal/partials/menu.html" %}
-</nav>
-{% endblock nav %}
-
 {% block content %}
-<div class="container-fluid">
+<div class="container">
   <div class="messages-wrapper">
     {% include "partials/messages.html" %}
   </div>
+  <nav class="col-sm-3 sidenav">
+  {% include "userspace/journal/partials/menu.html" %}
+  </nav>
+  <div class="col-sm-9">
   {% block content_main %}
   {% endblock content_main %}
+  </div>
 </div>
 {% endblock content %}
