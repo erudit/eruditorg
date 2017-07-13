@@ -92,7 +92,11 @@
     </script>
     {% endblock structured_data %}
 
-    {% block stylesheets %}{% endblock stylesheets %}
+    {% block stylesheets %}
+    {% if not WEBPACK_DEV_SERVER_URL %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}" />
+    {% endif %}
+    {% endblock stylesheets %}
 
     <script>
       var LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
@@ -103,7 +107,7 @@
   </head>
   <body
       id="{% block body_id %}id_body{% endblock body_id %}"
-      class="{% block body_class %}{% endblock body_class %}"
+      class="{% block body_class %}fixed-header{% endblock body_class %}"
       data-controller="{% block data_controller %}{% endblock data_controller %}"
       data-action="{% block data_action %}{% endblock data_action %}"
       {% block body_data_attributes %}{% endblock body_data_attributes %}
@@ -409,7 +413,9 @@
 
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script type="text/javascript" src="{% url 'js_reverse' %}"></script>
-    {% block scripts %}{% endblock scripts %}
+    {% block scripts %}
+    <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/app.js' %}"></script>
+    {% endblock scripts %}
 
     {% block footerscript %}{% endblock footerscript %}
   </body>
