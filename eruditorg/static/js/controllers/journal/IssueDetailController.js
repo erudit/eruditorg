@@ -1,4 +1,4 @@
-import SavedCitationList from '../../../modules/public/SavedCitationList';
+import SavedCitationList from '../../modules/SavedCitationList';
 
 
 export default {

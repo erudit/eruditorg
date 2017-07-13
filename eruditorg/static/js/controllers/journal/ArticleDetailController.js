@@ -2,8 +2,8 @@ import '!!script!sticky-kit/jquery.sticky-kit.min';
 import '!!script!clipboard.js/clipboard.min';
 import '!!script!scrollspy/build/scrollspy';
 import getPrefix from 'get-prefix/dist/get-prefix';
-import SavedCitationList from '../../../modules/public/SavedCitationList';
-import Toolbox from '../../../modules/public/Toolbox';
+import SavedCitationList from '../../modules/SavedCitationList';
+import Toolbox from '../../modules/Toolbox';
 import '!!script!magnific-popup/dist/jquery.magnific-popup.min';
 
 export default {

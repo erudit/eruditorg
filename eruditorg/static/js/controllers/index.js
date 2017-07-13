@@ -8,7 +8,7 @@ import JournalDetailController from './journal/JournalDetailController';
 import JournalListController from './journal/JournalListController';
 import CollectionListController from './thesis/CollectionListController';
 import SavedCitationListController from './citations/SavedCitationListController';
-
+import FormController from './editor/FormController';
 
 const controllers = {
   'public:home': HomeController,
@@ -21,6 +21,7 @@ const controllers = {
   'public:journal:journal_list': JournalListController,
   'public:thesis:collection_list': CollectionListController,
   'public:citations:list': SavedCitationListController,
+  'userspace:editor:form': FormController,
 };
 
 export default controllers;

@@ -89,8 +89,7 @@ var webpackConfig = {
 /* Task to build our JS and CSS applications. */
 gulp.task('build-webpack-assets', function () {
   return gulp.src([
-        js_dir + '/PublicApp.js', js_dir + '/UserspaceApp.js',
-        sass_dir + '/app.scss',
+        js_dir + '/app.js', sass_dir + '/app.scss',
       ])
     .pipe(named())
     .pipe(webpackStream(webpackConfig))
@@ -249,13 +248,8 @@ gulp.task('webpack-dev-server', function(callback) {
   devWebpackConfig.debug = true;
   devWebpackConfig.devServer = { hot: true };
   devWebpackConfig.entry = {
-    PublicApp: [
-      js_dir + '/PublicApp.js', sass_dir + '/app.scss',
-      'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
-    ],
-    UserspaceApp: [
-      js_dir + '/UserspaceApp.js', sass_dir + '/app.scss',
+    app: [
+      js_dir + '/app.js', sass_dir + '/app.scss',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
     ],
