@@ -26,12 +26,15 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<h2 class="text-center">{% trans "Déposer des fichiers de production" %}</h2>
-<div class="col-md-3">
-  <div class="panel">
-    <div class="panel-heading">{% trans "Instructions" %}</div>
-    <div class="panel-body">
-      {% trans "Afin d’optimiser le temps de production de vos numéros et ainsi réduire les coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:" %}<br>
+<header class="page-header-main">
+  <div class="row">
+    <div class="col-md-10">
+      <h1>{% trans "Déposer des fichiers de production" %}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 page-intro">
+      <p>{% trans "Afin d’optimiser le temps de production de vos numéros et ainsi réduire les coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:" %}</p>
       <ul>
         <li>{% trans "PDF avec les polices incorporées" %}</li>
         <li>{% trans "PDF séparés article par article" %}</li>
@@ -39,125 +42,124 @@
         <li>{% trans "Nomenclature des images et tableaux (numéro de l’article et selon l’ordre où ils apparaissent dans l'article. Par ex&nbsp;: image01-01.jpg)" %}</li>
         <li>{% trans "Supprimer toutes les marques de coupes dans les fichiers PDF." %}</li>
       </ul>
-      {% trans "Notez également que vous devez effectuer les balisages suivants lors de la mise en page de vos articles si vous souhaitez qu’ils s’affichent correctement sur la plateforme&nbsp;:" %}
+      <p>{% trans "Notez également que vous devez effectuer les balisages suivants lors de la mise en page de vos articles si vous souhaitez qu’ils s’affichent correctement sur la plateforme&nbsp;:" %}</p>
       <ul>
         <li>{% trans "Baliser les liens et les courriels (les affiliations, le corps du texte et les références bibliographiques)" %}</li>
         <li>{% trans "Lier les appels de notes aux notes de bas de page" %}</li>
       </ul>
     </div>
   </div>
-</div>
-<div class="col-md-9">
-  {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-  <form class="row form-vertical" method="post">{% csrf_token %}
-    {% if form.errors %}
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="alert">{% trans "Veuillez remplir les champs obligatoires." %}</p>
+</header>
+
+{% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+<form class="row form-vertical" method="post">{% csrf_token %}
+  {% if form.errors %}
+  <div class="row">
+    <div class="col-xs-12">
+      <p class="alert">{% trans "Veuillez remplir les champs obligatoires." %}</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="panel-group">
+    <div class="panel">
+      <div class="panel-heading" role="tab" id="issue-metadata-heading">
+        <h3 class="panel-title">{% trans "Informations du numéro" %}</h3>
+      </div>
+      <div id="issue-metadata">
+        <div class="panel-body">
+          <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
+            {{ form.year.label_tag }}
+            {{ form.year }}
+          </div>
+          <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
+            {{ form.volume.label_tag }}
+            {{ form.volume }}
+          </div>
+          <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
+            {{ form.number.label_tag }}
+            {{ form.number }}
+          </div>
+          <div class="form-group col-xs-12">
+            {{ form.contact.label_tag }}
+            {{ form.contact }}
+          </div>
+          <div class="form-group col-xs-12">
+            {{ form.comment.label_tag }}
+            {{ form.comment }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if object.pk and not object.is_submitted and not object.archived and not object.is_validated %}
+    <div class="panel">
+      <div class="panel-heading" role="tab" id="issue-upload-heading">
+        <h3 class="panel-title">{% trans "Fichiers" %}</h3>
+      </div>
+      <div id="issue-upload">
+        <div class="panel-body">
+          <div class="row">
+            <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
+              {{ form.submissions }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     {% endif %}
-    <div class="panel-group">
-      <div class="panel">
-        <div class="panel-heading" role="tab" id="issue-metadata-heading">
-          <h3 class="panel-title">{% trans "Informations du numéro" %}</h3>
-        </div>
-        <div id="issue-metadata">
-          <div class="panel-body">
-            <div class="form-group col-sm-4 {% if form.year.errors %}error{% endif %}">
-              {{ form.year.label_tag }}
-              {{ form.year }}
-            </div>
-            <div class="form-group col-sm-4 {% if form.volume.errors %}error{% endif %}">
-              {{ form.volume.label_tag }}
-              {{ form.volume }}
-            </div>
-            <div class="form-group col-sm-4 {% if form.number.errors %}error{% endif %}">
-              {{ form.number.label_tag }}
-              {{ form.number }}
-            </div>
-            <div class="form-group col-xs-12">
-              {{ form.contact.label_tag }}
-              {{ form.contact }}
-            </div>
-            <div class="form-group col-xs-12">
-              {{ form.comment.label_tag }}
-              {{ form.comment }}
+    {% if status_tracks %}
+    <div class="panel">
+      <div class="panel-heading" role="tab" id="issue-history-heading">
+        <h3 class="panel-title">{% trans "Historique" %}</h3>
+      </div>
+      <div id="issue-history">
+        <div class="panel-body">
+          <div class="row">
+            <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
+              <ul>
+                {% for track in status_tracks %}
+                <li>
+                  {% if track.status == "D" %}
+                  {% trans "Marqué à corriger le" as status_prefix %}
+                  {% elif track.status == "S" %}
+                  {% trans "Soumis le" as status_prefix %}
+                  {% elif track.status == "V" %}
+                  {% trans "Validé le" as status_prefix %}
+                  {% endif %}
+                  {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
+                  {{ prefix }} {{ date }}
+                  {% endblocktrans %}
+                  {% if track.files_version and track.files_version.submissions.exists %}
+                  <br />
+                  <p>
+                    <strong>{% trans "Fichiers&nbsp;:" %}</strong>&nbsp;
+                    {% for f in track.files_version.submissions.all %}
+                    {% if f.is_complete %}
+                    <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+                    {% else %}
+                    {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                  </p>
+                  {% endif %}
+                  {% if track.comment %}
+                  <p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
+                  <small>{{ track.comment }}</small>
+                  {% endif %}
+                </li>
+                {% endfor %}
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-      {% if object.pk and not object.is_submitted and not object.archived and not object.is_validated %}
-      <div class="panel">
-        <div class="panel-heading" role="tab" id="issue-upload-heading">
-          <h3 class="panel-title">{% trans "Fichiers" %}</h3>
-        </div>
-        <div id="issue-upload">
-          <div class="panel-body">
-            <div class="row">
-              <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-                {{ form.submissions }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if status_tracks %}
-      <div class="panel">
-        <div class="panel-heading" role="tab" id="issue-history-heading">
-          <h3 class="panel-title">{% trans "Historique" %}</h3>
-        </div>
-        <div id="issue-history">
-          <div class="panel-body">
-            <div class="row">
-              <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-                <ul>
-                  {% for track in status_tracks %}
-                  <li>
-                    {% if track.status == "D" %}
-                    {% trans "Marqué à corriger le" as status_prefix %}
-                    {% elif track.status == "S" %}
-                    {% trans "Soumis le" as status_prefix %}
-                    {% elif track.status == "V" %}
-                    {% trans "Validé le" as status_prefix %}
-                    {% endif %}
-                    {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
-                    {{ prefix }} {{ date }}
-                    {% endblocktrans %}
-                    {% if track.files_version and track.files_version.submissions.exists %}
-                    <br />
-                    <p>
-                      <strong>{% trans "Fichiers&nbsp;:" %}</strong>&nbsp;
-                      {% for f in track.files_version.submissions.all %}
-                      {% if f.is_complete %}
-                      <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
-                      {% else %}
-                      {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
-                      {% endif %}
-                      {% endfor %}
-                    </p>
-                    {% endif %}
-                    {% if track.comment %}
-                    <p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
-                    <small>{{ track.comment }}</small>
-                    {% endif %}
-                  </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      <div class="form-group text-right">
-        {% if not object.is_submitted and not object.archived and not object.is_validated %}
-        <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
-        <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
-        {% endif %}
       </div>
     </div>
-  </form>
-</div>
+    {% endif %}
+    <div class="form-group text-right">
+      {% if not object.is_submitted and not object.archived and not object.is_validated %}
+      <button type="reset" class="btn" id="submit-id-reset">{% trans "Annuler" %}</button>
+      <button type="submit" class="btn btn-primary" id="submit-id-submit">{% trans "Enregistrer" %}</button>
+      {% endif %}
+    </div>
+  </div>
+</form>
 {% endblock content_main %}

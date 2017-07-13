@@ -12,19 +12,21 @@
 
 {% block content_main %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-{% if can_manage_issuesubmission %}
-<div class="row">
-  <div class="col-md-6">
-    <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Déposer des fichiers de production" %}</a>
-    <br /><br />
+<header class="page-header-main">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{% trans "Dépôt de fichiers" %}</h1>
+    </div>
+    <div class="col-md-4 text-right">
+      <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "Déposer" %}</a>
+    </div>
   </div>
-</div>
-{% endif %}
-<h2>{% trans "Historique" %}</h2>
+</header>
+
 <ul id="id_issuesubmission_list" class="row submission-list">
   {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-  <li class="col-xs-12">
-    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}">
+  <li>
+    <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}">
       {% with issue_submission.get_status_code_display as status %}
       <span class="pull-right status">
         {{ issue_submission.get_status_display }}
