@@ -36,11 +36,11 @@ $ionicons-font-path: '~ionicons/fonts';
 
 // 4. Layout-related sections
 @import
-  'layout/public/aside',
-  'layout/public/footer',
-  'layout/public/header',
-  'layout/public/main',
-  'layout/public/nav';
+  'layout/aside',
+  'layout/footer',
+  'layout/header',
+  'layout/main',
+  'layout/nav';
 
 // 5. Components
 @import
