@@ -27,7 +27,7 @@
   <li class="sidenav-item{% if menu_journal == 'editor' %} active{% endif %}">
     <a href="{% url 'userspace:journal:editor:issues' journal_pk=scope_current_journal.pk %}">
       <span class="ion-ios-cloud-upload-outline sidenav-icon"></span>
-      <span class="sidenav-label">{% trans "Dépôt de fichiers" %}</span>
+      <span class="sidenav-label">{% trans "Dépôt" %}</span>
     </a>
   </li>
   {% endif %}
@@ -35,7 +35,7 @@
   <li class="sidenav-item{% if menu_journal == 'royalty_reports' %} active{% endif %}">
     <a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}">
       <span class="ion-social-usd-outline sidenav-icon"></span>
-      <span class="sidenav-label">{% trans "Rapports de redevances" %}</span>
+      <span class="sidenav-label">{% trans "Redevances" %}</span>
     </a>
   </li>
   {% endif %}
@@ -59,7 +59,7 @@
     <a href="https://www.erudit.org/ojs/index.php/{{ scope_current_journal.code }}/login" target="_blank">
       <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous serez redirigé vers un site externe en cliquant sur cette option.' %}">
         <span class="ion-ios-compose-outline sidenav-icon"></span>
-        <span class="sidenav-label">{% trans "Gestion de manuscrits" %}</span>
+        <span class="sidenav-label">{% trans "Manuscrits" %}</span>
       </span>
     </a>
   </li>
