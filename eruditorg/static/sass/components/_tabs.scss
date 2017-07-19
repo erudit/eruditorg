@@ -4,7 +4,6 @@
 
 .tabs-group {
   border-bottom: 1px solid $mid-grey;
-  padding-left: $grid-gutter-width/2;
 
   .tab {
     display: inline-block;
@@ -15,9 +14,6 @@
       padding: $padding-base-vertical $padding-base-horizontal;
       display: block;
       background: $light-grey;
-      border-width: 1px 1px 0 1px;
-      border-color: $mid-grey;
-      border-style: solid;
       &:hover {
         background-color: $coral-red;
         border-color: $coral-red;

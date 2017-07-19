@@ -1,0 +1,150 @@
+/**
+* CKEditor (WYSIWYG editor) style overrides
+*/
+
+// Textarea elements
+.django-ckeditor-widget {
+  width: 100%;
+
+  .cke {
+    width: 100% !important;
+  }
+
+  .cke_top {
+    border: 0;
+  }
+
+  a.cke_button_disabled:hover,
+  a.cke_button_disabled:focus,
+  a.cke_button_disabled:active,
+  a.cke_combo_button,
+  .cke_bottom,
+  .cke_button
+  .cke_button:hover,
+  .cke_button:focus,
+  .cke_button:active,
+  .cke_chrome,
+  .cke_combo_off,
+  .cke_toolgroup,
+  .cke_top {
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+
+  a.cke_path_item:hover,
+  a.cke_path_item:focus,
+  a.cke_path_item:active,
+  .cke_button_off:hover,
+  .cke_button_off:focus,
+  .cke_button_off:active,
+  .cke_button_on,
+  .cke_button_on:hover,
+  .cke_button_on:focus,
+  .cke_button_on:active,
+  .cke_combo_off a.cke_combo_button:hover,
+  .cke_combo_off a.cke_combo_button:focus,
+  .cke_combo_off a.cke_combo_button:active,
+  .cke_combo_on a.cke_combo_button,
+  .cke_combo_on a.cke_combo_button:hover,
+  .cke_combo_on a.cke_combo_button:focus,
+  .cke_combo_on a.cke_combo_button:active {
+    background-color: $mid-grey;
+    background-image: none;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+}
+
+// Dialog elements
+.cke_dialog {
+
+  .cke_dialog_body {
+    background-color: $light-grey;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .cke_dialog_title {
+    background-color: $mid-grey;
+    background-image: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  a.cke_dialog_tab {
+    background-color: $mid-grey;
+    background-image: none;
+    border-radius: 0;
+  }
+
+  a.cke_dialog_tab_selected {
+    background-color: #fff;
+  }
+
+  a.cke_dialog_tab:hover,
+  a.cke_dialog_tab:focus {
+    background-color: $light-grey;
+    background-image: none;
+  }
+
+  input.cke_dialog_ui_input_text,
+  input.cke_dialog_ui_input_password,
+  textarea.cke_dialog_ui_input_textarea,
+  select.cke_dialog_ui_input_select {
+    border-radius: 0;
+    box-shadow: none;
+    margin: 5px 0 10px 0;
+  }
+
+  a.cke_dialog_ui_button {
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    border: 1px solid $coral-red;
+    box-shadow: none;
+    color: $coral-red;
+    text-shadow: none;
+
+    span {
+      text-shadow: none;
+    }
+
+    &:hover {
+      background: transparent;
+      background-color: $coral-red;
+      border-color: $coral-red;
+      color: #fff;
+    }
+
+  }
+
+  a.cke_dialog_ui_button_ok {
+    background-color: $coral-red;
+    background-image: none;
+    box-shadow: none;
+    color: #fff;
+
+    &:hover {
+      background: none;
+      background-color: transparent;
+      border-color: $coral-red;
+      color: $coral-red;
+    }
+
+  }
+
+  .cke_dialog_footer {
+    background-color: #fff;
+    background-image: none;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+  }
+
+}
