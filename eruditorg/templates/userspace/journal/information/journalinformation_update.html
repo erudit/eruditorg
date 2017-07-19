@@ -29,14 +29,66 @@
   <p class="alert">{{ error }}</p>
   {% endfor %}
   {% endif %}
-  {% for field in form %}
-  <div id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
-    <div class="controls">
-      <h2><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></h2>
-      {{ field|add_class:'form-control' }}
-      {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+  <h2>{% trans "Coordonnées générales" %}</h2>
+  <fieldset>
+    <div class="row">
+      <p class="col-sm-9">
+        {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
+      </p>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-sm-8 col-md-6 form-group">
+        <label class="control-label" for="">{% trans "Prénom et nom OU nom de l’organisation" %}</label>
+        <input id="" type="text" autocomplete="name"/>
+      </div>
+      <div class="col-sm-8 col-md-6 form-group">
+        <label class="control-label" for="">{% trans "Adresse courriel" %}</label>
+        <input id="" type="email" autocomplete="email"/>
+      </div>
+      <div class="col-sm-8 col-md-6 form-group">
+        <label class="control-label" for="">{% trans "Numéro de téléphone" %}</label>
+        <input id="" type="tel" autocomplete="tel"/>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>{% trans "Liens" %}</legend>
+    <div class="row">
+      <div class="col-sm-8 col-md-6 form-group">
+        <label class="control-label" for="">{% trans "Facebook" %}&nbsp;&nbsp;<span class="ion-social-facebook"></span></label>
+        <input id="" type="url" autocomplete="url"/>
+        <div class="checkbox">
+          <input type="checkbox" name="" class="styled" id="" value="">
+          <label for="">{% trans "Afficher votre fil d’activités Facebook&nbsp;?" %}</label>
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-6 form-group">
+        <label class="control-label" for="">{% trans "Twitter" %}&nbsp;&nbsp;<span class="ion-social-twitter"></span></label>
+        <input id="" type="url" autocomplete="url"/>
+        <div class="checkbox">
+          <input type="checkbox" name="" class="styled" id="" value="">
+          <label for="">{% trans "Afficher votre fil d’activités Twitter&nbsp;?" %}</label>
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-6 form-group">
+        <label class="control-label" for="">{% trans "Site Web officiel" %}&nbsp;&nbsp;<span class="ion-ios-world-outline"></span></label>
+        <input id="" type="url" autocomplete="url"/>
+      </div>
+    </div>
+  </fieldset>
+
+  <hr>
+
+  {% for field in form %}
+  <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
+    <h2><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></h2>
+    <div class="row">
+      <p class="col-md-9">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas justo quam, tempor vitae pretium in, efficitur at urna. Vivamus vestibulum ullamcorper pretium. Integer elit velit, semper sit amet aliquam vitae, luctus non ligula. Nulla facilisi.</p>
+    </div>
+    {{ field|add_class:'form-control' }}
+    {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+  </fieldset>
   {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
   <div class="text-right">
