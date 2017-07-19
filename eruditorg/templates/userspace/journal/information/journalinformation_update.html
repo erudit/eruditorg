@@ -13,36 +13,34 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
+<h1>{% trans "À propos de la revue&nbsp;:" %} {{ scope_current_journal.name }}</h1>
 <ul class="tabs-group">
   {% for langcode, langname in LANGUAGES %}
-  <li role="presentation" class="tab {% if langcode == selected_language %}active{% endif %}">
+  <li class="tab {% if langcode == selected_language %}active{% endif %}">
     <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ langcode }}">{{ langname }}</a>
   </li>
   {% endfor %}
 </ul>
-<form  class="form-vertical"
+<form  class="col-xs-12 form-vertical"
        method="post"
        action="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ selected_language }}">{% csrf_token %}
   {% if form.non_field_errors %}
-  <div class="col-xs-12">
-    {% for error in form.non_field_errors %}
-    <p class="alert">{{ error }}</p>
-    {% endfor %}
-  </div>
+  {% for error in form.non_field_errors %}
+  <p class="alert">{{ error }}</p>
+  {% endfor %}
   {% endif %}
   {% for field in form %}
-  <div id="div_id_{{ field.html_name }}" class="form-group{% if field.errors %} has-error{% endif %}">
+  <div id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
     <div class="controls">
-      <label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+      <h2><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></h2>
       {{ field|add_class:'form-control' }}
       {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
     </div>
   </div>
+  {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
-  <div class="form-group">
-    <div class="controls">
-      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
-    </div>
+  <div class="text-right">
+    <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Sauvegarder' %}</button>
   </div>
 </form>
 {% endblock content_main %}

@@ -26,14 +26,14 @@
     <meta name="theme-color" content="#222" />
 
     <!-- Apple touch icon -->
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{% static 'img/favicon/apple-touch-icon-57x57.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'img/favicon/apple-touch-icon-114x114.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'img/favicon/apple-touch-icon-72x72.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'img/favicon/apple-touch-icon-144x144.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{% static 'img/favicon/apple-touch-icon-60x60.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{% static 'img/favicon/apple-touch-icon-120x120.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{% static 'img/favicon/apple-touch-icon-76x76.png' %}" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{% static 'img/favicon/apple-touch-icon-152x152.png' %}" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'img/favicon/apple-touch-icon-57x57.png' %}" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'img/favicon/apple-touch-icon-114x114.png' %}" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'img/favicon/apple-touch-icon-72x72.png' %}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'img/favicon/apple-touch-icon-144x144.png' %}" />
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'img/favicon/apple-touch-icon-60x60.png' %}" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favicon/apple-touch-icon-120x120.png' %}" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/favicon/apple-touch-icon-76x76.png' %}" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicon/apple-touch-icon-152x152.png' %}" />
 
     <!-- favicon -->
     <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon-196x196.png' %}" sizes="196x196" />
@@ -252,20 +252,13 @@
     {% endblock header %}
 
     {% block body %}
-    <div class="container">
-      <div class="row">
-        <div class="messages-wrapper">
-          {% include "partials/messages.html" %}
-        </div>
-      </div>
-    </div>
     {% block nav %}{% endblock nav %}
 
     {% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
     {% endblock body %}
 
     {% block footer %}
-    <footer id="site-footer" role="contentinfo">
+    <footer id="site-footer">
       <div class="text-center">
         <a href="#top" title="{% trans 'Retourner en haut' %}" class="scroll-top">|^</a>
       </div>
