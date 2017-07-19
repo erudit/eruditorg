@@ -46,7 +46,7 @@ fieldset,
 form {
   .form-group {
     margin-bottom: 0.75em;
-    padding: 0 1em;
+    padding: 0 11px;
     &:last-child {
       margin-bottom: 0.25em;
     }
@@ -55,6 +55,7 @@ form {
 
 /* fieldsets and legends */
 fieldset {
+  padding: 0;
   margin-bottom: 3em;
   background-color: #FFF;
   &:last-child {
@@ -232,9 +233,6 @@ label.required:after {
       border-left: 0;
       border-right: 0;
       border-bottom: 0;
-    }
-    .form-group {
-      padding: 0.25em;
     }
   }
 }

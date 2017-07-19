@@ -3,7 +3,9 @@
  */
 
 .tabs-group {
+  display: block;
   border-bottom: 1px solid $mid-grey;
+  margin-bottom: $grid-gutter-width;
 
   .tab {
     display: inline-block;
