@@ -12,7 +12,7 @@
 
 {% block content %}
 {% if request.is_ajax %}
-<div class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+<div class="modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
   <h2 class="modal-header">{% trans "Connexion à votre compte" %}</h2>
   <div class="modal-body">
     <form action="{% url 'public:auth:login' %}" id="id-login-form" method="post">
