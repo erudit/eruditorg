@@ -1,39 +1,48 @@
 {% extends "userspace/journal/base.html" %}
-{% load i18n %}
-{% load widget_tweaks %}
+{% load i18n widget_tweaks%}
+
+{% block body_id %}authorizations{% endblock body_id %}
 
 {% block title %}{% trans "Ajouter un accès" %}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% trans "Autorisations" %}</a></li>
 <li><a href="#">{% trans "Ajouter un accès" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<h1>{% trans "Ajouter un accès" %}</h1>
-<p>
-  {% blocktrans trimmed with authorization_label=authorization_label %}
-  Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : <strong>{{ authorization_label }}</strong>
-  {% endblocktrans %}
-</p>
-<form  class="form-vertical" method="post" action="">{% csrf_token %}
-  {% if form.non_field_errors %}
-  <div class="col-xs-12">
+<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+
+  <h1>{% trans "Ajouter un accès" %}</h1>
+
+  <p>
+    {% blocktrans trimmed with authorization_label=authorization_label %}
+    Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation suivante&nbsp;: <strong>{{ authorization_label }}</strong>
+    {% endblocktrans %}
+  </p>
+
+  <form method="post" action="">{% csrf_token %}
+
+    {% if form.non_field_errors %}
     {% for error in form.non_field_errors %}
     <p class="alert">{{ error }}</p>
     {% endfor %}
-  </div>
-  {% endif %}
-  <div id="div_id_{{ form.user.html_name }}" class="form-group{% if form.user.errors %} has-error{% endif %}">
-    <div class="controls">
-      <label class="control-label" for="{{ form.user.auto_id }}">{{ form.user.label }}</label>
-      {{ form.user|add_class:'form-control' }}
-      {% for error in form.user.errors %}<p class="error">{{ error }}</p>{% endfor %}
+    {% endif %}
+
+    <div class="row">
+      <div id="div_id_{{ form.user.html_name }}" class="form-group{% if form.user.errors %} has-error{% endif %}">
+        <label class="control-label" for="{{ form.user.auto_id }}">{{ form.user.label }}</label>
+        <div class="input-group">
+          {{ form.user|add_class:'form-control' }}
+          <div class="input-group-addon">
+            <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Valider' %}</button>
+          </div>
+        </div>
+        {% for error in form.user.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="controls">
-      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
-    </div>
-  </div>
-</form>
+    
+  </form>
+
+</div>
 {% endblock content_main %}

@@ -4,6 +4,14 @@
 
 #authorizations {
 
+  .form-control {
+    height: 46px;
+  }
+
+  .input-group-addon {
+    padding: 0;
+  }
+
   .authorizations-header {
     color: $dark-grey;
     margin-bottom: 0;
@@ -68,6 +76,5 @@
     }
 
   }
-
 
 }
