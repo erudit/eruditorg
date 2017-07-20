@@ -1,6 +1,8 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n %}
 
+{% block body_id %}authorizations{% endblock body_id %}
+
 {% block title %}{% trans "Autorisations" %}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
@@ -8,25 +10,60 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
-<h2>{% trans "Autorisations" %}</h2>
-{% for choice, app_authorizations in authorizations.items %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{% trans app_authorizations.label %}</h3>
-  </div>
-  <div class="panel-body">
-    <a class="btn btn-primary" href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}"> {% trans "Ajouter" %} </a>
-    <br /> <br />
-    <ul>
-      {% for auth in app_authorizations.authorizations %}
-      <li>{{ auth.user.get_full_name|default:auth.user.username }}{% if auth.user.email %} ({{ auth.user.email }}){% endif %}
-        <a class="btn" alt="{% trans 'supprimer' %}" href="{% url 'userspace:journal:authorization:delete' auth.pk %}">
-          <span class="glyphicon glyphicon-remove">{% trans 'supprimer' %}</span>
+<h1>{% trans "Autorisations" %}</h1>
+
+<ul class="authorizations-header">
+  <li class="row">
+    <span class="col-xs-5 col-xs-offset-2">{% trans "Usager" %}</span>
+    <span class="col-xs-2">{% trans "Date <br/>d’ajout" %}</span>
+    <span class="col-xs-2">{% trans "Dernière connexion" %}</span>
+  </li>
+</ul>
+
+<ul class="authorizations-list">
+  {% for choice, app_authorizations in authorizations.items %}
+  <li class="authorizations-item">
+    {# Section title #}
+    <div class="authorization-label">
+      <h2 class="row">
+        <span class="col-xs-2">{% trans app_authorizations.label %}</span>
+      </h2>
+    </div>
+
+    {% for auth in app_authorizations.authorizations %}
+    {# User info #}
+    <div class="authorization-user">
+      <ul class="row">
+        <li class="col-xs-5 col-xs-offset-2">
+          {{ auth.user.get_full_name|default:auth.user.username }}
+          {% if auth.user.email %}<br/><a href="mailto:{{ auth.user.email }}">{{ auth.user.email }}</a>{% endif %}
+        </li>
+        <li class="col-xs-2">{{ auth.user.date_joined|date:"SHORT_DATE_FORMAT" }}</li>
+        <li class="col-xs-2">{{ auth.user.last_login|date:"SHORT_DATE_FORMAT" }}</li>
+        <li class="col-xs-1 authorization-delete">
+          <a href="{% url 'userspace:journal:authorization:delete' auth.pk %}" title="{% trans 'Supprimer cet usager' %}">
+            <span class="ion-ios-close"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    {% empty %}
+    <div class="authorization-user">
+      {% trans "Aucun usager n’a été autorisé à modifier cette section." %}
+      <a href='{% url "userspace:journal:authorization:create" scope_current_journal.pk %}?codename={{ choice }}'>{% trans "Ajouter un accès." %}</a>
+    </div>
+    {% endfor %}
+
+    {# Create user button #}
+    <div class="row authorization-create">
+      <span class="col-xs-12">
+        <a href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}">
+          <span class="ion-ios-plus"></span>
         </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-{% endfor %}
+      </span>
+    </div>
+
+  </li>
+  {% endfor %}
+</ul>
 {% endblock content_main %}

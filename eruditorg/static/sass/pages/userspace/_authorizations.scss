@@ -1,0 +1,73 @@
+/**
+* Authorizations
+*/
+
+#authorizations {
+
+  .authorizations-header {
+    color: $dark-grey;
+    margin-bottom: 0;
+
+    li {
+      list-style: none;
+      margin-bottom: 0;
+    }
+
+  }
+
+  .authorizations-list {
+
+    li {
+      list-style: none;
+      margin-bottom: 0;
+    }
+
+    .authorization-label,
+    .authorization-user,
+    .authorization-create {
+      padding: 15px 5px;
+    }
+
+    .authorization-label {
+      background-color: $light-grey;
+      border-top: 1px solid $dark-grey;
+      @include fw-sans-medium;
+
+      h2 {
+        font-size: 1em;
+        margin-bottom: 0;
+      }
+
+    }
+
+    .authorization-user {
+      border-bottom: 1px solid $mid-grey;
+    }
+
+    .authorization-create a {
+      color: $coral-red;
+    }
+
+    .authorization-create,
+    .authorization-delete {
+
+      a {
+
+        > span {
+          font-size: 26px;
+          vertical-align: middle;
+        }
+
+        &:hover, &:focus, &:active {
+          color: $coral-red;
+          text-decoration: none;
+        }
+
+      }
+
+    }
+
+  }
+
+
+}
