@@ -42,6 +42,23 @@
 
     }
 
+    .submissions-content {
+      padding: 20px 0;
+    }
+
+  }
+
+}
+
+.submission-detail-metadata {
+
+  dt {
+    margin: 0;
+    @include fw-sans-medium;
+  }
+
+  dt, dd {
+    margin-bottom: 0.75em;
   }
 
 }

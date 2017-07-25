@@ -3,7 +3,14 @@
 {% load staticfiles %}
 {% load rules %}
 
-{% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
+{% block title %}
+{% if object.pk %}
+{% trans "Modifer" %} {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }} –
+{% else %}
+{% trans "Soumission" %} –
+{% endif %}
+{% trans "Dépôt de fichiers" %}
+{% endblock title %}
 
 {% block data_controller %}userspace:editor:form{% endblock data_controller %}
 
@@ -27,28 +34,20 @@
 
 {% block content_main %}
 <header class="page-header-main">
-  <div class="row">
-    <div class="col-md-10">
-      <h1>{% trans "Déposer des fichiers de production" %}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 page-intro">
-      <p>{% trans "Afin d’optimiser le temps de production de vos numéros et ainsi réduire les coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:" %}</p>
-      <ul>
-        <li>{% trans "PDF avec les polices incorporées" %}</li>
-        <li>{% trans "PDF séparés article par article" %}</li>
-        <li>{% trans "Nomenclature des articles selon leur ordre d’apparition dans le sommaire du numéro (article1, article2&hellip;)" %}</li>
-        <li>{% trans "Nomenclature des images et tableaux (numéro de l’article et selon l’ordre où ils apparaissent dans l'article. Par ex&nbsp;: image01-01.jpg)" %}</li>
-        <li>{% trans "Supprimer toutes les marques de coupes dans les fichiers PDF." %}</li>
-      </ul>
-      <p>{% trans "Notez également que vous devez effectuer les balisages suivants lors de la mise en page de vos articles si vous souhaitez qu’ils s’affichent correctement sur la plateforme&nbsp;:" %}</p>
-      <ul>
-        <li>{% trans "Baliser les liens et les courriels (les affiliations, le corps du texte et les références bibliographiques)" %}</li>
-        <li>{% trans "Lier les appels de notes aux notes de bas de page" %}</li>
-      </ul>
-    </div>
-  </div>
+  <h1>{% trans "Déposer des fichiers de production" %}</h1>
+  <p>{% trans "Afin d’optimiser le temps de production de vos numéros et ainsi réduire les coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:" %}</p>
+  <ul>
+    <li>{% trans "PDF avec les polices incorporées" %}</li>
+    <li>{% trans "PDF séparés article par article" %}</li>
+    <li>{% trans "Nomenclature des articles selon leur ordre d’apparition dans le sommaire du numéro (article1, article2&hellip;)" %}</li>
+    <li>{% trans "Nomenclature des images et tableaux (numéro de l’article et selon l’ordre où ils apparaissent dans l'article. Par ex&nbsp;: image01-01.jpg)" %}</li>
+    <li>{% trans "Supprimer toutes les marques de coupes dans les fichiers PDF." %}</li>
+  </ul>
+  <p>{% trans "Notez également que vous devez effectuer les balisages suivants lors de la mise en page de vos articles si vous souhaitez qu’ils s’affichent correctement sur la plateforme&nbsp;:" %}</p>
+  <ul>
+    <li>{% trans "Baliser les liens et les courriels (les affiliations, le corps du texte et les références bibliographiques)" %}</li>
+    <li>{% trans "Lier les appels de notes aux notes de bas de page" %}</li>
+  </ul>
 </header>
 
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}

@@ -2,170 +2,155 @@
 {% load i18n staticfiles %}
 {% load rules %}
 
-{% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
+{% block title %}{{ issue }} – {% trans "Dépôt de fichiers" %}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
-<li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
+<li><a href="#">{{ issue }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
-{% if issue.is_draft %}
-<div class="pull-right">
-  <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-primary btn-block">{% trans "Modifier" %}</a>
+{% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
+<header class="page-header-main">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{ issue }}</h1>
+    </div>
+    {% if issue.is_draft %}
+    <div class="col-md-4 text-right">
+      <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-secondary">{% trans "Modifier" %}</a>
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+{# Issue submission metadata #}
+<h2>{% trans "Informations du numéro" %}</h2>
+<dl class="row submission-detail-metadata">
+  <dt class="col-sm-3">{% trans "Statut" %}</dt>
+  <dd class="col-sm-9">
+    <span class="status-indicator-{% if issue.status == 'D' or issue.status == 'C' %}error{% elif issue.status == 'S' %}warning{% elif issue.status == 'V' %}success{% endif %}"></span>
+    {% if issue.status == 'D' %}
+      {% trans "Numéro" %} {{ issue.get_status_display|lower }}
+    {% elif issue.status == 'C' %}
+      {% trans "À corriger" %}
+    {% else %}
+      {{ issue.get_status_display }}
+    {% endif %}
+  </dd>
+  <dt class="col-sm-3">{% trans "Année" %}</dt>
+  <dd class="col-sm-9">{{ issue.year }}</dd>
+  {% if issue.volume %}
+  <dt class="col-sm-3">{% trans "Volume" %}</dt>
+  <dd class="col-sm-9">{{ issue.volume }}</dd>
+  {% endif %}
+  <dt class="col-sm-3">{% trans "Numéro" %}</dt>
+  <dd class="col-sm-9">{{ issue.number }}</dd>
+  <dt class="col-sm-3">{% trans "Personne-ressource" %}</dt>
+  <dd class="col-sm-9">{{ issue.contact }}</dd>
+  <dt class="col-sm-3">{% trans "Commentaires" %}</dt>
+  <dd class="col-sm-9">{% if issue.comment %}{{ issue.comment }}{% else %}{% trans '[Non renseigné]' %}{% endif %}</dd>
+</dl>
+
+<hr>
+
+{# Uploaded files list #}
+<h2>{% trans "Fichiers" %}</h2>
+{% if track.status == 'D' %}
+  <ul>
+  {% if issue.last_files_version.submissions.exists %}
+    {% for f in issue.last_files_version.submissions.all %}
+      <li>
+        {% if f.is_complete %}
+        <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+        {% else %}
+        {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% else %}
+<p>{% trans "[Aucun fichier soumis]" %}</p>
+{% endif %}
+
+<hr>
+
+{# Issue submission history #}
+{% if status_tracks %}
+<h2>{% trans "Historique" %}</h2>
+<div class="submissions">
+  <ul class="submissions-header">
+    <li class="row">
+      <span class="col-sm-2">{% trans "Date" %}</span>
+      <span class="col-sm-5">{% trans "Statut" %}</span>
+      <span class="col-sm-5">{% trans "Commentaires" %}</span>
+    </li>
+  </ul>
+  <ul class="submissions-list">
+    {% for track in status_tracks reversed %}
+    <li class="row submissions-item">
+      <div class="clearfix submissions-content">
+        <div class="col-sm-2">
+          {% blocktrans trimmed with date=track.created|date:"SHORT_DATE_FORMAT" time=track.created|date:"H:i" %}
+          {{ date }}<br> {{ time }}
+          {% endblocktrans %}
+        </div>
+        <div class="col-sm-5">
+          <p>
+            {% if track.status == "D" %}
+              {% trans "Corrections demandées" as status_prefix %}
+            {% elif track.status == "S" %}
+              {% trans "Soumis" as status_prefix %}
+            {% elif track.status == "V" %}
+              {% trans "Validé" as status_prefix %}
+            {% endif %}
+            {% with prefix=status_prefix %}
+            {{ prefix }}
+            {% endwith %}
+          </p>
+
+          {% if track.files_version and track.files_version.submissions.exists %}
+          <p>
+            {% trans "Fichiers&nbsp;:" %}
+            {% for f in track.files_version.submissions.all %}
+              {% if f.is_complete %}
+                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
+              {% else %}
+                {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
+              {% endif %}
+            {% endfor %}
+          </p>
+          {% endif %}
+        </div>
+
+        <div class="col-sm-5">
+          {% if track.comment %}
+          <p>{{ track.comment }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 {% endif %}
-<h2>{% trans "Dépôt de fichiers de production" %}</h2>
-{% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-<div class="row">
-  <div class="col-md-12">
-    <br />
-    {% if issue.status == 'D' or issue.status == 'S' %}
-    <div class="alert">
-      {% if issue.status == 'D' %}{% trans "Attention" %}&nbsp;! {% trans "Numéro" %} {{ issue.get_status_display|lower }}.{% endif %}
-    </div>
-    {% elif issue.status == 'V' %}
-    <div class="alert alert-success">
-      {{ issue.get_status_display }}
-    </div>
-    {% elif issue.status == 'A' %}
-    <div class="alert alert-info">
-      {{ issue.get_status_display }}
-    </div>
-    {% endif %}
-  </div>
-</div>
-<div class="row">
-  <div class="panel-group">
-    <div class="panel">
-      <div class="panel-heading" role="tab" id="issue-metadata-heading">
-        <h3 class="panel-title">{% trans "Informations du numéro" %}</h3>
-      </div>
-      <div id="issue-metadata">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-sm-4">
-              <p class="value-title">{% trans "Année" %}</p>
-              <p class="value"><strong>{{ issue.year }}</strong></p>
-            </div>
-            <div class="col-sm-4">
-              <div class="value-title">{% trans "Volume" %}</div>
-              <div class="value"><strong>{% if issue.volume %}{{ issue.volume }}{% else %}<span class="muted">{% trans "Non renseigné" %}</span>{% endif %}</strong></div>
-            </div>
-            <div class="col-sm-4">
-              <div class="value-title">{% trans "Numéro" %}</div>
-              <div class="value"><strong>{{ issue.number }}</strong></div>
-            </div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-xs-12">
-              <p class="value-title">{% trans "Personne-ressource" %}</p>
-              <p class="value"><strong>{{ issue.contact }}</strong></p>
-            </div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-xs-12">
-              <p class="value-title">{% trans "Commentaires" %}</p>
-              <p class="value"><strong>{% if issue.comment %}{{ issue.comment }}{% else %}<span class="muted">{% trans "Non renseigné" %}</span>{% endif %}</strong></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% if track.status == 'D' %}
-    <div class="panel">
-      <div class="panel-heading" role="tab" id="issue-upload-heading">
-        <h3 class="panel-title">{% trans "Fichiers" %}</a>
-        </h3>
-      </div>
-      <div id="issue-upload">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-12">
-              {% if issue.last_files_version.submissions.exists %}
-              {% for f in issue.last_files_version.submissions.all %}
-              {% if f.is_complete %}
-              <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
-              {% else %}
-              {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
-              {% endif %}
-              {% endfor %}
-            </p>
-            {% else %}
-            <p><strong><span class="muted">{% trans "Aucun fichier" %}</span></strong></p>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+{# Submit / delete buttons #}
+<div class="form-group text-right">
+  {% if can_manage_issuesubmission and issue.is_draft %}
+  <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk issue.pk %}" class="btn">{% trans "Supprimer" %}</a>
   {% endif %}
-  {% if status_tracks %}
-  <div class="panel">
-    <div class="panel-heading">
-      <h3 class="panel-title">{% trans "Historique" %}</h3>
-    </div>
-    <div id="issue-history">
-      <div class="panel-body">
-        <div class="row">
-          <div class="form-group col-xs-12 {% if form.submissions.errors %}error{% endif %}">
-            <ul>
-              {% for track in status_tracks reversed %}
-              <li>
-                {% if track.status == "D" %}
-                {% trans "Corrections demandées le" as status_prefix %}
-                {% elif track.status == "S" %}
-                {% trans "Soumis le" as status_prefix %}
-                {% elif track.status == "V" %}
-                {% trans "Validé le" as status_prefix %}
-                {% endif %}
-                {% blocktrans trimmed with prefix=status_prefix date=track.created|date:"SHORT_DATETIME_FORMAT" %}
-                {{ prefix }} {{ date }}
-                {% endblocktrans %}
-                {% if track.files_version and track.files_version.submissions.exists %}
-                <br />
-                <p>
-                  <strong>{% trans "Fichiers :" %}</strong>&nbsp;
-                  {% for f in track.files_version.submissions.all %}
-                  {% if f.is_complete %}
-                  <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>{% if not forloop.last %}, {% endif %}
-                  {% else %}
-                  {{ f.get_filename }} ({% trans "partiellement téléversé" %}){% if not forloop.last %}, {% endif %}
-                  {% endif %}
-                  {% endfor %}
-                </p>
-                {% endif %}
-                {% if track.comment %}
-                <p><strong>{% trans "Commentaires :" %}</strong></p>
-                <small>{{ track.comment }}</small>
-                {% endif %}
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% for t in transitions %}
+  <a
+  {% if t.name == 'submit' %}
+  href="{% url 'userspace:journal:editor:transition_submit' scope_current_journal.pk issue.pk %}"
+  {% elif t.name == 'approve' %}
+  href="{% url 'userspace:journal:editor:transition_approve' scope_current_journal.pk issue.pk %}"
+  {% elif t.name == 'refuse' %}
+  href="{% url 'userspace:journal:editor:transition_refuse' scope_current_journal.pk issue.pk %}"
   {% endif %}
-  <div class="form-group text-right">
-    {% for t in transitions %}
-    <a
-    {% if t.name == 'submit' %}
-    href="{% url 'userspace:journal:editor:transition_submit' scope_current_journal.pk issue.pk %}"
-    {% elif t.name == 'approve' %}
-    href="{% url 'userspace:journal:editor:transition_approve' scope_current_journal.pk issue.pk %}"
-    {% elif t.name == 'refuse' %}
-    href="{% url 'userspace:journal:editor:transition_refuse' scope_current_journal.pk issue.pk %}"
-    {% endif %}
-    class="btn btn-primary">{{ t.custom.verbose_name }}</a>
-    {% endfor %}
-    {% if can_manage_issuesubmission and issue.is_draft %}
-    <a href="{% url 'userspace:journal:editor:delete' scope_current_journal.pk issue.pk %}" class="btn btn-primary">{% trans "Supprimer" %}</a>
-    {% endif %}
-  </div>
-</div>
+  class="btn btn-primary">{{ t.custom.verbose_name }}</a>
+  {% endfor %}
 </div>
 {% endblock content_main %}

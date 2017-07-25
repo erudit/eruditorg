@@ -25,8 +25,8 @@
 
 <hr>
 
+{# List of past submissions #}
 <h2>{% trans 'Historique' %}</h2>
-
 <div class="submissions">
   <ul class="submissions-header">
     <li class="row">
@@ -39,7 +39,7 @@
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
     {% with issue_submission.get_status_code_display as status %}
     <li class="row submissions-item">
-      <a href="{% if status == 'D' or status == 'C' %}{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}{% else %}{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}{% endif %}"
+      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
          class="clearfix">
         <span class="col-sm-4">{{ issue_submission }}</span>
         <span class="col-sm-4">{{ issue_submission.date_created|date:"SHORT_DATE_FORMAT" }}</span>
