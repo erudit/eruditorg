@@ -18,37 +18,39 @@
       <h1>{% trans "Dépôt de fichiers" %}</h1>
     </div>
     <div class="col-md-4 text-right">
-      <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-secondary">{% trans "Déposer" %}</a>
+      <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Déposer" %}</a>
     </div>
   </div>
 </header>
 
-<ul id="id_issuesubmission_list" class="row submission-list">
-  {% for issue_submission in object_list|dictsortreversed:"date_created" %}
-  <li>
-    <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}">
-      {% with issue_submission.get_status_code_display as status %}
-      <span class="pull-right status">
-        {{ issue_submission.get_status_display }}
-        <span class="status-indicator-{% if status == 'C' %}error{% elif status == 'D' %}warning{% elif status == 'V' %}success{% endif %}"></span>
-      </span>
-      {% endwith %}
-      <span class="title">
-        {{ issue_submission }}
-      </span>
-      <span class="metadata">
-        <span class="metadata-title">{% trans "Revue" %}</span>
-        <span class="metadata-value">{{ issue_submission.journal.name }}</span>
-      </span>
-      <span class="pull-right metadata">
-        <em>
-          {% blocktrans trimmed with created=issue_submission.date_created|date:"SHORT_DATE_FORMAT" %}
-          Ajouté le {{ created }}
-          {% endblocktrans %}
-        </em>
-      </span>
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+<hr>
+
+<h2>{% trans 'Historique' %}</h2>
+
+<div class="submissions">
+  <ul class="submissions-header">
+    <li class="row">
+      <span class="col-sm-4">{% trans "Numéro" %}</span>
+      <span class="col-sm-4">{% trans "Date d’ajout" %}</span>
+      <span class="col-sm-4">{% trans "Statut" %}</span>
+    </li>
+  </ul>
+  <ul class="submissions-list">
+    {% for issue_submission in object_list|dictsortreversed:"date_created" %}
+    {% with issue_submission.get_status_code_display as status %}
+    <li class="row submissions-item">
+      <a href="{% if status == 'D' or status == 'C' %}{% url 'userspace:journal:editor:update' scope_current_journal.pk issue_submission.pk %}{% else %}{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}{% endif %}"
+         class="clearfix">
+        <span class="col-sm-4">{{ issue_submission }}</span>
+        <span class="col-sm-4">{{ issue_submission.date_created|date:"SHORT_DATE_FORMAT" }}</span>
+        <span class="col-sm-4">
+          <span class="status-indicator-{% if status == 'D' or status == 'C' %}error{% elif status == 'S' %}warning{% elif status == 'V' %}success{% endif %}"></span>
+          {{ issue_submission.get_status_display }}
+        </span>
+      </a>
+    </li>
+    {% endwith %}
+    {% endfor %}
+  </ul>
+</div>
 {% endblock content_main %}
