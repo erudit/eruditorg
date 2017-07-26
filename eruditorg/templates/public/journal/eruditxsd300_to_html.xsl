@@ -272,10 +272,10 @@
             </ul>
           <!-- promotional campaign -->
           <aside class="campaign">
-            <h2 class="sr-only">{% trans 'On n’est jamais trop érudit.' %}</h2>
-            <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-sidebar">
+            <h2 class="sr-only">{% trans 'Salons. Un éclairage sur la société par les revues savantes.' %}</h2>
+            <a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% static 'img/campaign/sidebar1.png' %}" class="img-responsive" alt="{% trans 'Illustration de la campagne « On n’est jamais trop érudit. »' %}"/>
+                <img src="{% static 'img/salons_fr.png' %}" class="img-responsive"/>
               </div>
             </a>
           </aside>

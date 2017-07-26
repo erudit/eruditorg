@@ -36,48 +36,20 @@ $peach:       #FFE7B0;
   height: 370px;
   margin-bottom: 1em;
   @include transition(background-position 300ms linear);
+  outline: 1px solid $mid-grey;
+  background-image: url('../img/salons-fr.png');
+
+  &.en {
+    background-image: url('../img/salons-en.png');
+  }
 
   &:hover, &:focus, &:active {
+    outline: 1px solid $dark-grey;
     background-position: center -80px;
   }
 
   img {
     display: none;
-  }
-
-  &.image1 {
-    background-image: url('../img/campaign/sidebar1.png');
-    &.en {
-      background-image: url('../img/campaign/sidebar1-en.png');
-    }
-  }
-
-  &.image2 {
-    background-image: url('../img/campaign/sidebar2.png');
-    &.en {
-      background-image: url('../img/campaign/sidebar2-en.png');
-    }
-  }
-
-  &.image3 {
-    background-image: url('../img/campaign/sidebar3.png');
-    &.en {
-      background-image: url('../img/campaign/sidebar3-en.png');
-    }
-  }
-
-  &.image4 {
-    background-image: url('../img/campaign/sidebar4.png');
-    &.en {
-      background-image: url('../img/campaign/sidebar4-en.png');
-    }
-  }
-
-  &.image5 {
-    background-image: url('../img/campaign/sidebar5.png');
-    &.en {
-      background-image: url('../img/campaign/sidebar5-en.png');
-    }
   }
 
 }

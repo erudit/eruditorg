@@ -257,6 +257,9 @@
               <li class="disabled">{% trans "Plan du site" %}</li>
               <li><a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/erudit/contact/{% else %}https://apropos.erudit.org/en/erudit-en/contact/{% endif %}" target="_blank">{% trans "Nous contacter" %}</a></li>
               <li>
+                <a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank">{% trans 'Salons' %}</a>
+              </li>
+              <li>
                 <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
               </li>
             </ul>
