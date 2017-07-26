@@ -106,7 +106,7 @@ class IssueSubmissionCreate(
 
     def get_success_url(self):
         logger.info('create', extra=self.get_context_info())
-        messages.success(self.request, _('La demande a été créé avec succès'))
+        messages.success(self.request, _('La demande a été créée avec succès'))
         return reverse(
             'userspace:journal:editor:update', args=(self.current_journal.pk, self.object.pk, ))
 
