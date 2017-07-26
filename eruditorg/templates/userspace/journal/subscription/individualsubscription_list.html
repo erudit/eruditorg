@@ -8,15 +8,19 @@
 {% endblock breadcrumb %}
 
 {% block content_main %}
+<h1>{% trans "Abonnements" %}</h1>
+
+<ul class="tabs-group">
+  <li class="tab active">
+    <a href="">{% trans "Institutionnels" %}</a>
+  </li>
+  <li class="tab">
+    <a href="">{% trans "Individuels" %}</a>
+  </li>
+</ul>
+
+<a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
 <section>
-  <div class="row">
-    <div class="col-sm-6">
-      <h2>{% trans "Abonnements" %}</h2>
-    </div>
-    <div class="col-sm-6 text-right">
-      <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
-    </div>
-  </div>
   <ul id="id_subscription_list" class="row">
     {% for subscription in subscriptions %}
     <li class="col-xs-12">
@@ -51,6 +55,7 @@
     </div>
   </div>
 </section>
+
 {% if subscribed_organisations %}
 <section>
   <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
