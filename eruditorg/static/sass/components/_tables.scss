@@ -3,8 +3,6 @@
  */
 
 table {
-
-  font-size: 0.85em;
   width: 100%;
   margin: 1em 0;
   counter-reset: row-number;
@@ -16,7 +14,9 @@ table {
   thead {
     th {
       white-space: nowrap;
-      color: $darker-grey;
+      color: $dark-grey;
+      @include fw-sans;
+      text-align: left;
     }
   }
 

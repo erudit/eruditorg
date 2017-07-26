@@ -181,12 +181,12 @@ select {
   -webkit-appearance: none;
   outline: none;
   @include border-radius(0);
-  border: 1px solid #000;
+  border: 1px solid $dark-grey;
   margin: 0 auto;
   height: 40px;
   position: relative;
-  background: #FFF url(../iconfont/chevron-down.svg) no-repeat 98% center;
-  padding-right: 25px;
+  background: #FFF url(../iconfont/chevron-down.svg) no-repeat 95% center;
+  background-size: 0.65em;
 
   option {
     line-height: 40px;
@@ -240,11 +240,24 @@ label.required:after {
 /* select2 overrides */
 .select2 {
   width: 100% !important;
+
   &.select2-container .select2-selection--single {
     @extend select;
+
     .select2-selection__arrow {
       height: 100%;
       top: 0;
+
+      b {
+        display: none;
+      }
+
     }
+
+    .select2-selection__rendered {
+      line-height: inherit;
+    }
+
   }
+
 }

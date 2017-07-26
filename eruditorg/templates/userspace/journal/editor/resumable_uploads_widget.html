@@ -6,29 +6,29 @@
   <table class="upload-table">
     <thead>
       <tr>
-        <th class="heading-name">{% trans "Fichier" %}</th>
-        <th class="heading-size">{% trans "Taille" %}</th>
-        <th class="heading-status">{% trans "Statut" %}</th>
-        <th class="heading-delete"></th>
+        <th>{% trans "Fichier" %}</th>
+        <th>{% trans "Taille" %}</th>
+        <th>{% trans "Statut" %}</th>
+        <th></th>
       </tr>
     </thead>
     <tbody id="filelist">
       {% for file in files %}
       <tr data-resumable-file-id="{{ file.id }}" data-resumable-file-name="{{ file.filename }}">
-        <td class="file-name">
+        <td>
           {% if file.is_complete %}
             <a href="{% url 'userspace:journal:editor:attachment_detail' pk=file.id %}">{{ file.filename }}</a>
           {% else %}
             {{ file.filename }}
           {% endif %}
         </td>
-        <td class="file-size">
+        <td>
           {{ file.filesize }}
         </td>
-        <td class="file-status">
-          <span class="progress-bar" role="progressbar" aria-valuenow="{{ file.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.percent }}%;">{{ file.percent }}%</span>
+        <td>
+          <progress value="{{ file.percent }}" max="100">{{ file.percent }} %</progress>
         </td>
-        <td class="file-delete"><a href="#" class="delete-file ion-close"></a></td>
+        <td><a href="#" class="ion-close"></a></td>
       </tr>
       {% endfor %}
       {% comment %}
