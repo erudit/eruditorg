@@ -65,13 +65,12 @@ figure {
 }
 
 a {
-  color: $link-color;
+  color: #000;
   text-decoration: none;
 
   &:hover,
   &:focus {
-    color: $link-hover-color;
-    text-decoration: $link-hover-decoration;
+    color: $dark-grey;
   }
 
   &:focus {
