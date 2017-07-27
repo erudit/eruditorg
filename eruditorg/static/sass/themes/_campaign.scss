@@ -13,17 +13,13 @@ $peach:       #FFE7B0;
 .campaign-banner {
   display: block;
   background-position: center;
+  background-size: cover;
+  background-image: url('http://salons.erudit.org/app/uploads/2017/06/couverture2.jpg');
   height: 400px;
 
   img {
     display: none;
   }
-
-  &.image1 { background-image: url('../img/campaign/banner1.png'); }
-  &.image2 { background-image: url('../img/campaign/banner2.png'); }
-  &.image3 { background-image: url('../img/campaign/banner3.png'); }
-  &.image4 { background-image: url('../img/campaign/banner4.png'); }
-  &.image5 { background-image: url('../img/campaign/banner5.png'); }
 
 }
 

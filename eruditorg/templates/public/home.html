@@ -180,12 +180,23 @@
         </a>
       </div>
       <div class="col-xs-12 col-md-4">
-        <p class="category-tag">{% trans 'Actualités' %}</p>
-        <h3 class="news--campaign--title"><a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans 'On n’est jamais trop érudit.' %}</a></h3>
-        <p class="news--campaign--desc">{% blocktrans %}Découvrez la campagne de lancement de la nouvelle plateforme.{% endblocktrans %}</p>
-        <p><a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">-> jamaistrop.erudit.org</a></p>
+        <p class="category-tag">{% trans 'Salons' %}</p>
+        <h3 class="news--campaign--title"><a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank">{% trans '150 ans d’autocélébrations' %}</a></h3>
+        <p class="news--campaign--desc">{% blocktrans %}En 150 ans d’existence, la Confédération aura eu quelques occasions de se célébrer. Pour ses 30, 50, 60, 100 et maintenant 150 ans, le Canada a fait la fête. Mais à quoi ont, d’une époque à l’autre, ressemblé ces grands anniversaires&nbsp;? {% endblocktrans %}</p>
+        <p><a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">-> salons.erudit.org</a></p>
       </div>
     </div>
+
+    {% for article in salons_articles %}
+    article
+    <li class="col-md-4 col-sm-6 news--article">
+      <p class="category-tag">{{ article.category }}</p>
+      <h3 class="news--article--title"><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
+      <p class="summary">{{ article.summary|safe|truncatewords_html:20 }}&nbsp;<a href="{{ article.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
+      <time class="news--article--date text-muted" datetime="2001-05-15">{{ article.dt_published|date:"DATE_FORMAT" }}</time>
+    </li>
+    {% endfor %}
+
     <ul class="row latest-news">
       {% for entry in latest_news %}
       <li class="col-md-4 col-sm-6 news--article">
