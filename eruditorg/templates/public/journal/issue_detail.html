@@ -99,12 +99,12 @@
       {% for theme in themes %}
       {% for name in theme.names %}
       <span class="theme-title">
-        {{ name }}
+        {{ name|safe }}
       </span>
       {% endfor %}
       {% if theme.editors %}
       <span class="theme-guest-editor">
-        {% trans 'Sous la direction de' %} {{ theme.editors|person_list }}
+        {% trans 'Sous la direction de' %} {{ theme.editors|person_list|safe }}
       </span>
       {% endif %}
       {% endfor %}
