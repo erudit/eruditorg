@@ -275,7 +275,7 @@
             <h2 class="sr-only">{% trans 'Salons. Un éclairage sur la société par les revues savantes.' %}</h2>
             <a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% static 'img/salons_fr.png' %}" class="img-responsive"/>
+                <img src="{% static 'img/salons-fr.png' %}" class="img-responsive"/>
               </div>
             </a>
           </aside>
