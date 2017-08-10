@@ -202,7 +202,7 @@
     <br />
     <h1 class="main-title">{% trans "Article" as i18n_article_title %}{{ article|format_article_title }}</h1>
     <div class="authors">
-        {{ authors | person_list }}
+        {{ authors | person_list | safe }}
     </div>
     <div class="main-hr"></div>
     <div class="main-content">
@@ -238,7 +238,7 @@
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Citer cet article" %}</div>
           <div class="cite">
-            {{ authors | person_list }}
+            {{ authors | person_list | safe }}
             "{{ article.title }}."
             <em>{{ article.issue.journal.name }}</em>
             {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
