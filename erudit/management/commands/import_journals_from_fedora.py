@@ -21,6 +21,7 @@ from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
 from ...fedora.utils import is_issue_published_in_fedora
+from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
 from ...models import Affiliation
 from ...models import Article
@@ -104,6 +105,9 @@ class Command(BaseCommand):
             '--issue-pid', action='store', dest='issue_pid', help='Issue PID to manually import.')  # noqa
 
         parser.add_argument(
+            '--import-missing', action='store_true', dest='import_missing', help='Import missing issues.'  # noqa
+        )
+        parser.add_argument(
             '--mdate', action='store', dest='mdate',
             help='Modification date to use to retrieve journals to import (iso format).')
 
@@ -115,6 +119,7 @@ class Command(BaseCommand):
         self.modification_date = options.get('mdate', None)
         self.journal_precendence_relations = []
         self.issue_pid = options.get('issue_pid', None)
+        self.import_missing = options.get('import_missing', None)
         logger.info("=" * 10 + "Import started" + "=" * 10)
         logger.info("options: {}".format(options))
 
@@ -144,26 +149,38 @@ class Command(BaseCommand):
         except AssertionError:
             pass
 
-        if self.issue_pid:
-            self.stdout.write(self.style.MIGRATE_HEADING(
-                'Start importing issue with PID: {0}'.format(self.issue_pid)))
+        if self.issue_pid or self.import_missing:
+            if self.issue_pid:
+                self.stdout.write(self.style.MIGRATE_HEADING(
+                    'Start importing issue with PID: {0}'.format(self.issue_pid)))
+                if not re.match(r'^\w+\:\w+\.\w+\.\w+$', self.issue_pid):
+                    self.stdout.write(self.style.ERROR(
+                        '  "{0}" is not a valid journal PID!'.format(self.issue_pid)))
+            else:
+                self.stdout.write(self.style.MIGRATE_HEADING(
+                    'Start importing missing issues.'
+                ))
 
-            if not re.match(r'^\w+\:\w+\.\w+\.\w+$', self.issue_pid):
-                self.stdout.write(self.style.ERROR(
-                    '  "{0}" is not a valid journal PID!'.format(self.issue_pid)))
-                return
-
-            journal_localidentifier = self.issue_pid.split(':')[1].split('.')[1]
-            try:
-                journal = Journal.objects.get(localidentifier=journal_localidentifier)
-            except Journal.DoesNotExist:
-                self.stdout.write(self.style.ERROR(
-                    'The "{0}" journal is not available.'.format(journal_localidentifier)))
-                return
-            self._import_issue(self.issue_pid, journal)
+            if self.issue_pid:
+                unimported_issues_pids = [self.issue_pid]
+            else:
+                unimported_issues_pids = get_unimported_issues_pids()
+                self.stdout.write("{} issues to import.".format(len(unimported_issues_pids)))
+            for issue_pid in unimported_issues_pids:
+                journal_localidentifier = issue_pid.split(':')[1].split('.')[1]
+                try:
+                    journal = Journal.objects.get(localidentifier=journal_localidentifier)
+                except Journal.DoesNotExist:
+                    self.stdout.write(self.style.ERROR(
+                        'The "{0}" journal is not available.'.format(journal_localidentifier)))
+                    return
+                try:
+                    self._import_issue(issue_pid, journal)
+                except:
+                    self.stdout.write(self.style.ERROR("Cannot import issue with pid {}".format(issue_pid)))
             return
 
-        # Imports a journal PID manually
+            # Imports a journal PID manually
         if self.journal_pid:
             self.stdout.write(self.style.MIGRATE_HEADING(
                 'Start importing journal with PID: {0}'.format(self.journal_pid)))
