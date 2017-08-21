@@ -4,15 +4,13 @@ from influxdb import InfluxDBClient
 
 from .conf import settings as metrics_settings
 
-
+global _metrics_client
 _metrics_client = None
 
 
 def get_client(reset=False):
     """ Returns the InfluxDBClient instance to use to store tracking metrics. """
     if _metrics_client is None or reset:
-        global _metrics_client
-
         client = InfluxDBClient(
             host=metrics_settings.INFLUXDB_HOST, port=metrics_settings.INFLUXDB_PORT,
             username=metrics_settings.INFLUXDB_USER, password=metrics_settings.INFLUXDB_PASSWORD,
