@@ -13,15 +13,14 @@ from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_str
 from eruditarticle.objects import EruditArticle
 from eruditarticle.utils import remove_xml_namespaces
-from eulfedora.util import RequestFailed
 import lxml.etree as et
 
 from ...conf import settings as erudit_settings
 from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
+from ...fedora.utils import get_pids
 from ...fedora.repository import api
-from ...fedora.repository import rest_api
 from ...models import Affiliation
 from ...models import Article
 from ...models import ArticleTitle
@@ -243,13 +242,13 @@ class Command(BaseCommand):
             if not self.full_import:
                 self.stdout.write(self.style.WARNING(
                     '  No journals found... proceed to full import!'.format(collection.code)))
-            journal_pids = self._get_pids_to_import(base_fedora_query)
+            journal_pids = get_pids(base_fedora_query)
         else:
             self.stdout.write(
                 '  Importing Journals modified since {}.'.format(latest_update_date.isoformat()))
             # Fetches the PIDs of all the journals that have been update since the latest
             # modification date.
-            journal_pids = self._get_pids_to_import(
+            journal_pids = get_pids(
                 base_fedora_query + ' mdate>{}'.format(latest_update_date.isoformat()))
 
         # STEP 2: import each journal using its PID
@@ -279,13 +278,13 @@ class Command(BaseCommand):
             if not self.full_import:
                 self.stdout.write(self.style.WARNING(
                     '  No issues found... proceed to full import!'.format(collection.code)))
-            issue_pids = self._get_pids_to_import(issue_fedora_query)
+            issue_pids = get_pids(issue_fedora_query)
         else:
             self.stdout.write(
                 '  Importing Issues modified since {}.'.format(latest_update_date.isoformat()))
             # Fetches the PIDs of all the issues that have been update since the latest
             # modification date.
-            issue_pids = self._get_pids_to_import(
+            issue_pids = get_pids(
                 issue_fedora_query + ' mdate>{}'.format(latest_issue_update_date.isoformat()))
 
         # STEP 5: import each issue using its PID
@@ -450,7 +449,7 @@ class Command(BaseCommand):
             collectionid=journal.collection.localidentifier,
             journalid=journal.localidentifier
         )
-        issue_pids = self._get_pids_to_import(issue_fedora_query)
+        issue_pids = get_pids(issue_fedora_query)
         for ipid in issue_pids:
             if ipid.startswith(journal_pid):
                 # Imports the issue only if its PID is prefixed with the PID of the journal object.
@@ -854,43 +853,6 @@ class Command(BaseCommand):
                     article.pid, e)
                 self.stdout.write(self.style.ERROR('      ' + msg))
                 logger.error(msg, exc_info=True)
-
-    def _get_pids_to_import(self, query):
-        """ Returns the PIDS corresponding to a given Fedora query. """
-        self.stdout.write('  Determining PIDs to import...', ending='')
-
-        ns_type = {'type': 'http://www.fedora.info/definitions/1/0/types/'}
-        pids = []
-        session_token = None
-        remaining_pids = True
-
-        while remaining_pids:
-            # The session token is used by the Fedora Commons repository to paginate a list of
-            # results. We have to use it in order to construct the list of PIDs to import!
-            session_token = session_token.text if session_token is not None else None
-            try:
-                response = rest_api.findObjects(query, chunksize=1000, session_token=session_token)
-                # Tries to fetch the PIDs by parsing the response
-                tree = et.fromstring(response.content)
-                pid_nodes = tree.findall('.//type:pid', ns_type)
-                session_token = tree.find('./type:listSession//type:token', ns_type)
-                _pids = [n.text for n in pid_nodes]
-            except RequestFailed as e:
-                self.stdout.write(self.style.ERROR('  [FAIL]'))
-                logger.error('Unable to fetches the PIDs: {0}'.format(e), exc_info=True)
-                return
-            else:
-                pids.extend(_pids)
-
-            remaining_pids = len(_pids) and session_token is not None
-
-        self.stdout.write(self.style.SUCCESS('  [OK]'))
-        if not len(pids):
-            self.stdout.write(self.style.WARNING('  No PIDs found'))
-        else:
-            self.stdout.write('  {0} PIDs found!'.format(len(pids)))
-
-        return pids
 
     def _patch_generic_journal_title(self, journal, field_name, titles):
         assigned_langs = []
