@@ -12,7 +12,7 @@ client = pysolr.Solr(settings.SOLR_ROOT, timeout=10)
 
 class Search(BaseSearch):
     filters_mapping = {
-        'all': 'TexteComplet:"{all}"',
+        'all': 'TexteComplet:"{all}"~100',
         'meta': 'Metadonnees:"{meta}"',
         'full_text': 'TexteIntegral:"{full_text}"',
         'title_abstract_keywords': 'TitreResumeMots:"{title_abstract_keywords}"',

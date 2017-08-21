@@ -3,7 +3,7 @@ git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.6#egg=libe
 git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.25#egg=erudit-core
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
-git+https://gitlab.erudit.org/erudit/portail/eulxml.git@1.0.1-with-yacc-optimize#egg=eulxml
+git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
 eulfedora==1.5.0
 django-post-office==2.0.8
 jsonfield==1.0.3
