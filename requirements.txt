@@ -53,3 +53,4 @@ Babel==2.3.4
 html5lib==0.9999999
 openpyxl==2.3.5
 requests==2.10
+requests[socks]
