@@ -1,6 +1,7 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load waffle_tags %}
 
 {% block title %}{% trans "À propos" %}{% endblock title %}
 
@@ -29,6 +30,8 @@
   <p class="alert">{{ error }}</p>
   {% endfor %}
   {% endif %}
+
+  {% flag "NEW_USERSPACE" %}
   <h2>{% trans "Coordonnées générales" %}</h2>
   <fieldset>
     <div class="row">
@@ -77,9 +80,8 @@
       </div>
     </div>
   </fieldset>
-
   <hr>
-
+  {% endflag %}
   {% for field in form %}
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
     <h2><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></h2>

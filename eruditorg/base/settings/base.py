@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
+    'waffle',
     'account_actions',
     'resumable_uploads',
     'django_filters',
@@ -124,6 +125,7 @@ MIDDLEWARE_CLASSES = (
     'base.middleware.LanguageCookieMiddleware',
     'core.subscription.middleware.SubscriptionMiddleware',
     'core.citations.middleware.SavedCitationListMiddleware',
+    'waffle.middleware.WaffleMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
