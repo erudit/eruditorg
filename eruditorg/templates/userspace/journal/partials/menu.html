@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load rules %}
+{% load i18n rules widget_tweaks waffle_tags %}
 
 {% has_perm 'journal.edit_journal_information' request.user scope_current_journal as can_manage_information %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
@@ -31,6 +30,7 @@
     </a>
   </li>
   {% endif %}
+  {% flag "NEW_USERSPACE" %}
   {% if can_consult_royalty_reports %}
   <li class="sidenav-item{% if menu_journal == 'royalty_reports' %} active{% endif %}">
     <a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}">
@@ -47,6 +47,7 @@
     </a>
   </li>
   {% endif %}
+  {% endflag %}
   <li class="sidenav-item">
     <a href="https://secur.erudit.org/statusage/awstats.pl?config=www.erudit.org_revue_{{ scope_current_journal.code }}&amp;lang=fr" target="_blank">
       <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous serez redirigé vers un site externe en cliquant sur cette option.' %}">
