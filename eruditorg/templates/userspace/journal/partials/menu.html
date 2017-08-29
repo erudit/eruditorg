@@ -49,20 +49,20 @@
   {% endif %}
   {% endflag %}
   <li class="sidenav-item">
-    <a href="https://secur.erudit.org/statusage/awstats.pl?config=www.erudit.org_revue_{{ scope_current_journal.code }}&amp;lang=fr" target="_blank">
-      <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous serez redirigé vers un site externe en cliquant sur cette option.' %}">
+    <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous serez redirigé vers un site externe en cliquant sur cette option.' %}">
+      <a href="https://secur.erudit.org/statusage/awstats.pl?config=www.erudit.org_revue_{{ scope_current_journal.code }}&amp;lang=fr" target="_blank">
         <span class="ion-ios-analytics-outline sidenav-icon"></span>
         <span class="sidenav-label">{% trans "Consultations" %}</span>
-      </span>
-    </a>
+      </a>
+    </span>
   </li>
   <li class="sidenav-item">
-    <a href="https://www.erudit.org/ojs/index.php/{{ scope_current_journal.code }}/login" target="_blank">
-      <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous serez redirigé vers un site externe en cliquant sur cette option.' %}">
+    <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous serez redirigé vers un site externe en cliquant sur cette option.' %}">
+      <a href="https://www.erudit.org/ojs/index.php/{{ scope_current_journal.code }}/login" target="_blank">
         <span class="ion-ios-compose-outline sidenav-icon"></span>
         <span class="sidenav-label">{% trans "Manuscrits" %}</span>
-      </span>
-    </a>
+      </a>
+    </span>
   </li>
   {% if can_manage_authorizations %}
   <li class="sidenav-item{% if menu_journal == 'authorization' %} active{% endif %}">
