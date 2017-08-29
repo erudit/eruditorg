@@ -10,6 +10,7 @@ _metrics_client = None
 
 def get_client(reset=False):
     """ Returns the InfluxDBClient instance to use to store tracking metrics. """
+    global _metrics_client
     if _metrics_client is None or reset:
         client = InfluxDBClient(
             host=metrics_settings.INFLUXDB_HOST, port=metrics_settings.INFLUXDB_PORT,
