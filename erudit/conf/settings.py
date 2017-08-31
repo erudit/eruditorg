@@ -3,7 +3,7 @@
 from django.conf import settings
 
 
-# Movable limitation year offsets
+# Embargo year offsets
 
 
 SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS = getattr(

@@ -521,7 +521,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def embargoed(self):
-        """ Returns a boolean indicating if the issue has a movable limitation. """
+        """ Returns a boolean indicating if the issue is embargoed. """
+
         # FIXME avoid hardcoding the collection code
         if not self.journal.open_access and self.journal.collection.code == 'erudit':
             if self.force_free_access is False:
