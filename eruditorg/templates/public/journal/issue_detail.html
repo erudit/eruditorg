@@ -95,7 +95,7 @@
   <header class="page-header-main">
     <p class="title-tag">{{ issue.journal.name }}</p>
     <h1>
-      <span class="issue-number">{{ issue.volume_title }}{% if issue.embargoed and not user_has_access_to_issue %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
+      <span class="issue-number">{{ issue.volume_title }}{% if issue.embargoed and not content_access_granted %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de ce numéro nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
       {% for theme in themes %}
       {% for name in theme.names %}
       <span class="theme-title">

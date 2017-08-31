@@ -149,7 +149,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 
 class JournalDetailView(
         RedirectExceptionsToFallbackWebsiteMixin, FallbackObjectViewMixin,
-        SingleJournalMixin, DetailView):
+        SingleJournalMixin, ContentAccessCheckMixin, DetailView):
     """
     Displays a journal.
     """
@@ -195,9 +195,6 @@ class JournalDetailView(
         context['issues'] = self.object.published_issues.order_by('-date_published')
         context['latest_issue'] = self.object.last_issue
         context['meta_info_issue'] = self.object.last_issue
-        context['content_access_granted'] = self.object.open_access or (
-            self.request.subscriptions.provides_access_to(journal=self.object)
-        )
 
         return context
 
@@ -313,7 +310,7 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
     model = Journal
 
 
-class IssueDetailView(FallbackObjectViewMixin, DetailView):
+class IssueDetailView(FallbackObjectViewMixin, ContentAccessCheckMixin, DetailView):
     """
     Displays an Issue instance.
     """
@@ -355,8 +352,6 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
         context = super(IssueDetailView, self).get_context_data(**kwargs)
 
         context['journal'] = self.object.journal
-        context['user_has_access_to_issue'] = self.object.journal.open_access\
-            or self.request.subscriptions.provides_access_to(issue=self.object)
 
         context['meta_info_issue'] = self.object
         context['themes'] = self.object.erudit_object.get_themes(formatted=True, html=True)
