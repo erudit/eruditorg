@@ -284,6 +284,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def published_open_access_issues(self):
         """ Return the published open access issues of this Journal. """
+        # XXX should be non-embargoed
         if self.date_embargo_begins:
             return self.published_issues.filter(
                 Q(date_published__lt=self.date_embargo_begins) | Q(force_free_access=True)

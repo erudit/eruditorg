@@ -28,6 +28,7 @@ class CollectionFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'erudit.Collection'
+        django_get_or_create = ('code',)
 
 
 class DisciplineFactory(factory.django.DjangoModelFactory):
@@ -102,6 +103,12 @@ class EmbargoedIssueFactory(IssueFactory):
     year = date_published.year
 
 
+class NonEmbargoedIssueFactory(IssueFactory):
+
+    date_published = dt.datetime.now().date()
+    year = date_published.year - 5
+
+
 class IssueContributorFactory(factory.django.DjangoModelFactory):
 
     issue = factory.SubFactory(IssueFactory)
@@ -139,7 +146,21 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 
 class EmbargoedArticleFactory(ArticleFactory):
 
-    issue = factory.SubFactory(EmbargoedIssueFactory)
+    issue = factory.SubFactory(
+        EmbargoedIssueFactory,
+        journal=factory.SubFactory(
+            JournalFactory,
+            collection=factory.SubFactory(
+                CollectionFactory,
+                code='erudit',
+            )
+        )
+    )
+
+
+class NonEmbargoedArticleFactory(ArticleFactory):
+
+    issue = factory.SubFactory(NonEmbargoedIssueFactory)
 
 
 class ArticleTitleFactory(factory.django.DjangoModelFactory):
