@@ -56,9 +56,9 @@ class SubscriptionMiddleware(object):
             request.subscriptions.add_subscription(subscription)
 
     def process_response(self, request, response):
-
-        if request.subscriptions.active_subscription and self.active_subscription.referers.exists():
-            referer = self.active_subscription.referers.first()
+        active_subscription = request.subscriptions.active_subscription
+        if active_subscription and active_subscription.referers.exists():
+            referer = active_subscription.referers.first()
             logger.info('{url} {method} {path} {protocol} - {client_port} - {client_ip} "{user_agent}" "{referer_url}" {code} {size} {referer_access}'.format( # noqa
                 url=request.get_raw_uri(),
                 method=request.META.get('REQUEST_METHOD'),

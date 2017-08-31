@@ -32,7 +32,9 @@ class UserSubscriptions(object):
         self._subscriptions.append(subscription)
 
     def set_active_subscription_for(self, article=None, issue=None, journal=None):
-        pass
+        for subscription in self._subscriptions:
+            if subscription.provides_access_to(article=article, issue=issue, journal=journal):
+                self.active_subscription = subscription
 
     def provides_access_to(self, article=None, issue=None, journal=None):
         if not any((article, issue, journal,)):

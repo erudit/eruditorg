@@ -150,6 +150,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         subscription.save()
 
         middleware.process_request(request)
+        request.subscriptions.set_active_subscription_for(article=article)
         assert mock_log.info.call_count == 0
         middleware.process_response(request, HttpResponse())
         assert mock_log.info.call_count == 1

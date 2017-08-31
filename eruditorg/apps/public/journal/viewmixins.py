@@ -59,6 +59,26 @@ class ContentAccessCheckMixin(object):
         """
         return self.object if hasattr(self, 'object') else self.get_object()
 
+    def _get_subscriptions_kwargs_for_content(self):
+        content = self.get_content()
+        kwargs = {}
+        if isinstance(content, Article):
+            # 1- Is the article in open access? Is the article subject to a movable limitation?
+            kwargs['article'] = content
+        elif isinstance(content, Issue):
+            kwargs['issue'] = content
+        elif isinstance(content, Journal):
+            kwargs['journal'] = content
+        return kwargs
+
+    def dispatch(self, *args, **kwargs):
+        response = super().dispatch(*args, **kwargs)
+        if hasattr(self, "request") and hasattr(self.request, "subscriptions"):
+            self.request.subscriptions.set_active_subscription_for(
+                **self._get_subscriptions_kwargs_for_content()
+            )
+        return response
+
     def get_context_data(self, **kwargs):
         """ Inserts a flag indicating if the content can be accessed in the context. """
         context = super(ContentAccessCheckMixin, self).get_context_data(**kwargs)
@@ -78,17 +98,11 @@ class ContentAccessCheckMixin(object):
                to access to it
         """
         content = self.get_content()
-        kwargs = {}
         if isinstance(content, Article):
-            # 1- Is the article in open access? Is the article subject to a movable limitation?
             if content.open_access or not content.embargoed:
                 return True
-            kwargs['article'] = content
-        elif isinstance(content, Issue):
-            kwargs['issue'] = content
-        elif isinstance(content, Journal):
-            kwargs['journal'] = content
 
+        kwargs = self._get_subscriptions_kwargs_for_content()
         return self.request.subscriptions.provides_access_to(**kwargs)
 
 
