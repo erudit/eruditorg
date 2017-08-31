@@ -64,7 +64,8 @@ class ArticleAccessCheckMixin(object):
         context['article_access_granted'] = self.article_access_granted
         return context
 
-    def has_access(self):
+    @cached_property
+    def article_access_granted(self):
         """ Returns a boolean indicating if the article can be accessed.
 
         The following verifications are performed in order to determine if an article
@@ -82,10 +83,6 @@ class ArticleAccessCheckMixin(object):
             return True
 
         return self.request.subscriptions.provides_access_to(article=article)
-
-    @cached_property
-    def article_access_granted(self):
-        return self.has_access()
 
 
 class SingleArticleMixin(object):

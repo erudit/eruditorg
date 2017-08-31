@@ -79,7 +79,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.has_access())
+        self.assertFalse(view.article_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_in_open_access(self):
         # Setup
@@ -97,7 +97,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.has_access())
+        self.assertTrue(view.article_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_not_embargoed(self):
         # Setup
@@ -114,7 +114,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.has_access())
+        self.assertTrue(view.article_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self):
         # Setup
@@ -138,7 +138,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         middleware.process_request(request)
 
         # Run # check
-        self.assertTrue(view.has_access())
+        self.assertTrue(view.article_access_granted)
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(self):  # noqa
         # Setup
@@ -159,7 +159,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.has_access())
+        self.assertFalse(view.article_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account(self):
         # Setup
@@ -188,7 +188,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.has_access())
+        self.assertTrue(view.article_access_granted)
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(self):  # noqa
         # Setup
@@ -216,7 +216,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.has_access())
+        self.assertFalse(view.article_access_granted)
 
     def test_inserts_a_flag_into_the_context(self):
         # Setup
@@ -235,5 +235,5 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         request.subscriptions = UserSubscriptions()
         view.request = request
         # Run # check
-        self.assertTrue(view.has_access())
+        self.assertTrue(view.article_access_granted)
         self.assertTrue(view.get_context_data()['article_access_granted'])
