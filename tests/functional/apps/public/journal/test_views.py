@@ -266,7 +266,7 @@ class TestJournalDetailView(BaseEruditTestCase):
         response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.context['user_has_access_to_journal'])
+        self.assertTrue(response.context['content_access_granted'])
 
 
 @override_settings(DEBUG=True)

@@ -13,7 +13,7 @@ from erudit.test.factories import IssueFactory
 from erudit.test.factories import OrganisationFactory
 from erudit.models import Article
 
-from apps.public.journal.viewmixins import ArticleAccessCheckMixin
+from apps.public.journal.viewmixins import ContentAccessCheckMixin
 from apps.public.journal.viewmixins import SingleArticleMixin
 from apps.public.journal.viewmixins import SingleJournalMixin
 from core.subscription.models import UserSubscriptions
@@ -57,17 +57,17 @@ class TestSingleJournalMixin(BaseEruditTestCase):
             mixin.get_object()
 
 
-class TestArticleAccessCheckMixin(BaseEruditTestCase):
+class TestContentAccessCheckMixin(BaseEruditTestCase):
     def setUp(self):
-        super(TestArticleAccessCheckMixin, self).setUp()
+        super(TestContentAccessCheckMixin, self).setUp()
         self.factory = RequestFactory()
 
     def test_do_not_grant_access_by_default(self):
         # Setup
         article = EmbargoedArticleFactory()
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -79,14 +79,14 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.article_access_granted)
+        self.assertFalse(view.content_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_in_open_access(self):
         # Setup
         article = OpenAccessArticleFactory()
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -97,14 +97,14 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.article_access_granted)
+        self.assertTrue(view.content_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_not_embargoed(self):
         # Setup
         article = NonEmbargoedArticleFactory.create()
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -114,7 +114,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.article_access_granted)
+        self.assertTrue(view.content_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self):
         # Setup
@@ -126,8 +126,8 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             post__valid=True
         )
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -138,7 +138,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         middleware.process_request(request)
 
         # Run # check
-        self.assertTrue(view.article_access_granted)
+        self.assertTrue(view.content_access_granted)
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(self):  # noqa
         # Setup
@@ -147,8 +147,8 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
 
         JournalAccessSubscriptionFactory.create(user=self.user, journal=article.issue.journal)
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -159,7 +159,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.article_access_granted)
+        self.assertFalse(view.content_access_granted)
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account(self):
         # Setup
@@ -172,8 +172,8 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             post__ip_end='192.168.1.4'
         )
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -188,7 +188,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertTrue(view.article_access_granted)
+        self.assertTrue(view.content_access_granted)
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(self):  # noqa
         # Setup
@@ -200,8 +200,8 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             post__ip_end='192.168.1.4'
         )
 
-        class MyView(ArticleAccessCheckMixin):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin):
+            def get_content(self):
                 return article
 
         request = self.factory.get('/')
@@ -216,7 +216,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         view.request = request
 
         # Run # check
-        self.assertFalse(view.article_access_granted)
+        self.assertFalse(view.content_access_granted)
 
     def test_inserts_a_flag_into_the_context(self):
         # Setup
@@ -226,8 +226,8 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
             def get_context_data(self, **kwargs):
                 return {}
 
-        class MyView(ArticleAccessCheckMixin, MyViewAncestor):
-            def get_article(self):
+        class MyView(ContentAccessCheckMixin, MyViewAncestor):
+            def get_content(self):
                 return article
 
         view = MyView()
@@ -235,5 +235,5 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         request.subscriptions = UserSubscriptions()
         view.request = request
         # Run # check
-        self.assertTrue(view.article_access_granted)
-        self.assertTrue(view.get_context_data()['article_access_granted'])
+        self.assertTrue(view.content_access_granted)
+        self.assertTrue(view.get_context_data()['content_access_granted'])

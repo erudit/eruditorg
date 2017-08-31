@@ -104,7 +104,7 @@
     {% endif %}
   </div>
 
-  {% cache FOREVER_TTL "public_article_detail_content" article.id article_access_granted in_citation_list LANGUAGE_CODE %}
+  {% cache FOREVER_TTL "public_article_detail_content" article.id content_access_granted in_citation_list LANGUAGE_CODE %}
   {# XSL transformation article render #}
   {% render_article article %}
   {% endcache %}

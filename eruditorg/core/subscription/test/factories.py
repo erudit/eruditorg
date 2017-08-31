@@ -38,7 +38,7 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
                     referer=referer
                 )
         ip_start = kwargs.get('ip_start', None)
-        ip_end= kwargs.get('ip_start', None)
+        ip_end = kwargs.get('ip_start', None)
         if ip_start and ip_end:
             InstitutionIPAddressRangeFactory(
                 ip_start=ip_start,

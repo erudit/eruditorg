@@ -55,7 +55,6 @@ class SubscriptionMiddleware(object):
         if subscription:
             request.subscriptions.add_subscription(subscription)
 
-
     def process_response(self, request, response):
 
         if request.subscriptions.active_subscription and self.active_subscription.referers.exists():

@@ -8,6 +8,7 @@ from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property
 
 from erudit.models import Article
+from erudit.models import Issue
 from erudit.models import Journal
 
 from core.metrics.metric import metric
@@ -45,30 +46,30 @@ class SingleJournalMixin(object):
         return self.get_journal()
 
 
-class ArticleAccessCheckMixin(object):
-    """ Defines a way to check whether the current user can browse a given Érudit article. """
+class ContentAccessCheckMixin(object):
+    """ Defines a way to check whether the current user can browse a given Érudit content. """
 
-    def get_article(self):
-        """ Returns the considered article.
+    def get_content(self):
+        """ Returns the considered content.
 
-        By default the method will try to fetch the article using the ``object`` attribute. If this
+        By default the method will try to fetch the content using the ``object`` attribute. If this
         attribute is not available the
         :meth:`get_object<django:django.views.generic.detail.SingleObjectMixin.get_object>` method
-        will be used. But subclasses can override this to control the way the article is retrieved.
+        will be used. But subclasses can override this to control the way the content is retrieved.
         """
         return self.object if hasattr(self, 'object') else self.get_object()
 
     def get_context_data(self, **kwargs):
-        """ Inserts a flag indicating if the article can be accessed in the context. """
-        context = super(ArticleAccessCheckMixin, self).get_context_data(**kwargs)
-        context['article_access_granted'] = self.article_access_granted
+        """ Inserts a flag indicating if the content can be accessed in the context. """
+        context = super(ContentAccessCheckMixin, self).get_context_data(**kwargs)
+        context['content_access_granted'] = self.content_access_granted
         return context
 
     @cached_property
-    def article_access_granted(self):
-        """ Returns a boolean indicating if the article can be accessed.
+    def content_access_granted(self):
+        """ Returns a boolean indicating if the content can be accessed.
 
-        The following verifications are performed in order to determine if an article
+        The following verifications are performed in order to determine if a given content
         can be browsed:
 
             1- it is in open access
@@ -76,13 +77,19 @@ class ArticleAccessCheckMixin(object):
             3- the current IP address is inside on of the IP address ranges allowed
                to access to it
         """
-        article = self.get_article()
+        content = self.get_content()
+        kwargs = {}
+        if isinstance(content, Article):
+            # 1- Is the article in open access? Is the article subject to a movable limitation?
+            if content.open_access or not content.embargoed:
+                return True
+            kwargs['article'] = content
+        elif isinstance(content, Issue):
+            kwargs['issue'] = content
+        elif isinstance(content, Journal):
+            kwargs['journal'] = content
 
-        # 1- Is the article in open access? Is the article subject to a movable limitation?
-        if article.open_access or not article.embargoed:
-            return True
-
-        return self.request.subscriptions.provides_access_to(article=article)
+        return self.request.subscriptions.provides_access_to(**kwargs)
 
 
 class SingleArticleMixin(object):
@@ -116,7 +123,7 @@ class ArticleViewMetricCaptureMixin(object):
     def dispatch(self, request, *args, **kwargs):
         self.request = request
         response = super(ArticleViewMetricCaptureMixin, self).dispatch(request, *args, **kwargs)
-        if response.status_code == 200 and self.article_access_granted:
+        if response.status_code == 200 and self.content_access_granted:
             # We register this metric only if the article can be viewed
             metric(
                 self.tracking_article_view_granted_metric_name,
@@ -124,7 +131,7 @@ class ArticleViewMetricCaptureMixin(object):
         return response
 
     def get_metric_fields(self):
-        article = self.get_article()
+        article = self.get_content()
         subscription = self.request.subscriptions.active_subscription
         return {
             'issue_localidentifier': article.issue.localidentifier,
@@ -133,7 +140,7 @@ class ArticleViewMetricCaptureMixin(object):
         }
 
     def get_metric_tags(self):
-        article = self.get_article()
+        article = self.get_content()
         return {
             'journal_localidentifier': article.issue.journal.localidentifier,
             'open_access': article.open_access or not article.embargoed,

@@ -211,7 +211,7 @@
 {% block aside_issue %}{% endblock aside_issue %}
 
 {% block inner_footer %}
-{% cache LONG_TTL "public_journal_detail_issues" journal.id user_has_access_to_journal LANGUAGE_CODE %}
+{% cache LONG_TTL "public_journal_detail_issues" journal.id content_access_granted LANGUAGE_CODE %}
 {% if issues %}
 <section id="back-issues" class="back-issues">
   <div class="container">
@@ -227,10 +227,10 @@
         <li class="year-list--item"><h4>{{ year.grouper }}</h4>
           <ul class="issue-list">
             {% for issue in year.list %}
-            {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id user_has_access_to_journal LANGUAGE_CODE %}
+            {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
             <li class="issue-list--item">
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
-                {% if issue.embargoed and not user_has_access_to_journal %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
+                {% if issue.embargoed and not content_access_granted %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                 {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
               </a>
             </li>

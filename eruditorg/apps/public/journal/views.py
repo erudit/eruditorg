@@ -38,7 +38,7 @@ from core.metrics.metric import metric
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
 from .forms import JournalListFilterForm
-from .viewmixins import ArticleAccessCheckMixin
+from .viewmixins import ContentAccessCheckMixin
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
 from .viewmixins import SingleArticleWithScholarMetadataMixin
@@ -195,7 +195,7 @@ class JournalDetailView(
         context['issues'] = self.object.published_issues.order_by('-date_published')
         context['latest_issue'] = self.object.last_issue
         context['meta_info_issue'] = self.object.last_issue
-        context['user_has_access_to_journal'] = self.object.open_access or (
+        context['content_access_granted'] = self.object.open_access or (
             self.request.subscriptions.provides_access_to(journal=self.object)
         )
 
@@ -432,7 +432,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin, FedoraServiceRequiredMixin,
-        ArticleAccessCheckMixin, SingleArticleWithScholarMetadataMixin,
+        ContentAccessCheckMixin, SingleArticleWithScholarMetadataMixin,
         ArticleViewMetricCaptureMixin, DetailView):
     context_object_name = 'article'
     model = Article
@@ -558,22 +558,22 @@ class ArticleBibCitationView(SingleArticleMixin, DetailView):
 
 class ArticleFormatDownloadView(
         RedirectExceptionsToFallbackWebsiteMixin, ArticleViewMetricCaptureMixin,
-        ArticleAccessCheckMixin, PermissionRequiredMixin,
+        ContentAccessCheckMixin, PermissionRequiredMixin,
         FedoraFileDatastreamView):
 
-    def get_article(self):
+    def get_content(self):
         return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
     def get_fedora_object_pid(self):
-        article = self.get_article()
+        article = self.get_content()
         return article.pid
 
     def get_permission_object(self):
-        return self.get_article()
+        return self.get_content()
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return obj.publication_allowed and self.article_access_granted
+        return obj.publication_allowed and self.content_access_granted
 
     def handle_no_permission(self):
         return redirect('public:journal:article_detail', **self.kwargs)
@@ -602,7 +602,7 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
 
     def write_datastream_content(self, response, content):
         # We are going to put a generated coverpage at the beginning of our PDF
-        article = self.get_article()
+        article = self.get_content()
 
         erudit_object = article.get_erudit_object()
         coverpage_context = {
@@ -638,11 +638,11 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
     raise_exception = True
     tracking_view_type = 'pdf'
 
-    def get_article(self):
+    def get_content(self):
         return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
 
     def get_fedora_object_pid(self):
-        article = self.get_article()
+        article = self.get_content()
         return article.pid
 
     def get_response_object(self, fedora_object):
@@ -653,7 +653,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
         return response
 
     def get_permission_object(self):
-        return self.get_article()
+        return self.get_content()
 
     def has_permission(self):
         obj = self.get_permission_object()
