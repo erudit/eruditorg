@@ -35,7 +35,6 @@ from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
 from base.viewmixins import FedoraServiceRequiredMixin
 from core.metrics.metric import metric
-from core.subscription.shortcuts import get_valid_subscription_for_journal
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
 from .forms import JournalListFilterForm
@@ -197,7 +196,8 @@ class JournalDetailView(
         context['latest_issue'] = self.object.last_issue
         context['meta_info_issue'] = self.object.last_issue
         context['user_has_access_to_journal'] = self.object.open_access or (
-            get_valid_subscription_for_journal(self.request, self.object) is not None)
+            self.request.subscriptions.provides_access_to(journal=self.object)
+        )
 
         return context
 
@@ -355,8 +355,8 @@ class IssueDetailView(FallbackObjectViewMixin, DetailView):
         context = super(IssueDetailView, self).get_context_data(**kwargs)
 
         context['journal'] = self.object.journal
-        context['user_has_access_to_issue'] = self.object.journal.open_access or (
-            get_valid_subscription_for_journal(self.request, self.object.journal) is not None)
+        context['user_has_access_to_issue'] = self.object.journal.open_access\
+            or self.request.subscriptions.provides_access_to(issue=self.object)
 
         context['meta_info_issue'] = self.object
         context['themes'] = self.object.erudit_object.get_themes(formatted=True, html=True)

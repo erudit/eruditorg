@@ -16,6 +16,7 @@ from erudit.models import Article
 from apps.public.journal.viewmixins import ArticleAccessCheckMixin
 from apps.public.journal.viewmixins import SingleArticleMixin
 from apps.public.journal.viewmixins import SingleJournalMixin
+from core.subscription.models import UserSubscriptions
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
@@ -80,7 +81,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         request = self.factory.get('/')
         request.user = AnonymousUser()
         request.session = dict()
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
 
         view = MyView()
         view.request = request
@@ -188,7 +189,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         request = self.factory.get('/')
         request.user = self.user
         request.session = dict()
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
         view = MyView()
         view.request = request
 
@@ -262,8 +263,7 @@ class TestArticleAccessCheckMixin(BaseEruditTestCase):
         request = self.factory.get('/')
         request.user = AnonymousUser()
         request.session = dict()
-        # FIXME call middleware
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters

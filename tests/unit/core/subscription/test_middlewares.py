@@ -12,6 +12,7 @@ from erudit.test.factories import OrganisationFactory
 from base.test.factories import UserFactory
 from erudit.test.factories import EmbargoedArticleFactory
 from core.subscription.middleware import SubscriptionMiddleware
+from core.subscription.models import UserSubscriptions
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
@@ -24,7 +25,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         super(TestSubscriptionMiddleware, self).setUp()
         self.factory = RequestFactory()
 
-    def test_associates_the_subscription_type_to_the_request_in_case_of_institution(self):
+    def test_associates_institution_subscription_to_request(self):
         # Setup
         now_dt = dt.datetime.now()
         organisation = OrganisationFactory.create()
@@ -51,8 +52,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         middleware.process_request(request)
 
         # Check
-        self.assertEqual(request.subscription_type, 'institution')
-        self.assertEqual(request.subscription, subscription)
+        assert subscription in request.subscriptions._subscriptions
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_individual_access(self):
         # Setup
@@ -73,7 +73,32 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         middleware.process_request(request)
 
         # Check
-        self.assertTrue(request.subscription_type == 'individual')
+        assert request.subscriptions._subscriptions == [subscription]
+
+    def test_a_user_can_have_two_individual_subscriptions(self):
+        user = UserFactory()
+        ip_subscription = JournalAccessSubscriptionFactory(
+            user=user, post__valid=True,
+            post__ip_start='1.1.1.1', post__ip_end='1.1.1.1'
+        )
+
+        referer_subscription = JournalAccessSubscriptionFactory(
+            user=user, post__valid=True,
+            post__referers=['http://www.umontreal.ca']
+        )
+
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        request.session = dict()
+        request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
+        request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+
+        assert set(request.subscriptions._subscriptions) == set((
+            ip_subscription, referer_subscription,
+        ))
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_header(self):
         # Setup
@@ -96,14 +121,14 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
         middleware.process_request(request)
 
-        assert request.subscription_type == 'institution-referer'
+        assert request.subscriptions._subscriptions == [subscription]
 
         request = self.factory.get('/')
         request.user = AnonymousUser()
         request.session = dict()
         request.META['HTTP_REFERER'] = None
         middleware.process_request(request)
-        assert request.subscription_type == 'open_access'
+        assert request.subscriptions._subscriptions == []
 
     @unittest.mock.patch('core.subscription.middleware.logger')
     def test_subscription_middleware_log_requests_in_case_of_referer(self, mock_log):
@@ -159,7 +184,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
         middleware.process_request(request)
 
-        assert request.subscription_type == 'institution-referer'
+        assert request.subscriptions._subscriptions == [subscription]
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_open_access(self):
         # Setup
@@ -172,7 +197,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         middleware.process_request(request)
 
         # Check
-        self.assertTrue(request.subscription_type == 'open_access')
+        assert request.subscriptions._subscriptions == []
 
     def test_staff_users_can_fake_ip(self):
         request = self.factory.get('/')

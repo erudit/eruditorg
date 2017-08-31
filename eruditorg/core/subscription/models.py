@@ -19,6 +19,30 @@ from .abstract_models import AbstractSubscriptionPeriod
 from .managers import JournalAccessSubscriptionValidManager
 
 
+class UserSubscriptions(object):
+    """ Helper model that aggregates the subscriptions of a user """
+
+    def __init__(self):
+        self._subscriptions = []
+        self.active_subscription = None
+
+        """ The active subscriptions for this session. """
+
+    def add_subscription(self, subscription):
+        self._subscriptions.append(subscription)
+
+    def set_active_subscription_for(self, article=None, issue=None, journal=None):
+        pass
+
+    def provides_access_to(self, article=None, issue=None, journal=None):
+        if not any((article, issue, journal,)):
+            raise ValueError("One of article, issue, journal must be specified.")
+        for subscription in self._subscriptions:
+            if subscription.provides_access_to(article=article, issue=issue, journal=journal):
+                return True
+        return False
+
+
 class JournalAccessSubscription(AbstractSubscription):
     """ Defines a subscription allowing a user or an organisation to access journals.
 
@@ -69,15 +93,24 @@ class JournalAccessSubscription(AbstractSubscription):
         return JournalAccessSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
-    def provides_access_to(self, article):
-        """ Returns if the subscription has access to the given article """
+    def provides_access_to(self, article=None, issue=None, journal=None):
+        """ Returns if the subscription has access to the given article, issue
+         or journal"""
+        if not any((article, issue, journal,)):
+            raise ValueError("One of article, issue, journal must be specified.")
+
+        if article:
+            journal = article.issue.journal
+        elif issue:
+            journal = issue.journal
+
         if self.full_access:
             return True
 
-        if self.journal == article.issue.journal:
+        if self.journal == journal:
             return True
 
-        if article.issue.journal in self.journals.all():
+        if journal in self.journals.all():
             return True
         return False
 

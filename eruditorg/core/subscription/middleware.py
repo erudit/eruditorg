@@ -4,6 +4,8 @@ import logging
 from ipware.ip import get_ip
 
 from .models import JournalAccessSubscription
+from core.subscription.models import UserSubscriptions
+
 logger = logging.getLogger(__name__)
 
 
@@ -11,9 +13,7 @@ class SubscriptionMiddleware(object):
     """ This middleware attaches subscription information to the request object.
 
     This middleware attaches informations related to the subscription
-    of the current user to the request object. It attaches a ``subscription_type``
-    attribute to the request. This attribute can have three values: 'institution',
-    'individual' or 'open_access'.
+    of the current user to the request object.
     """
 
     def _get_user_referer_for_subscription(self, request):
@@ -37,37 +37,29 @@ class SubscriptionMiddleware(object):
         if request.user.is_active and request.user.is_staff:
             ip = request.META.get('HTTP_CLIENT_IP', ip)
 
+        request.subscriptions = UserSubscriptions()
         subscription = JournalAccessSubscription.valid_objects.get_for_ip_address(ip).first()
         if subscription:
-            request.subscription = subscription
-            request.subscription_type = 'institution'
-            return
+            request.subscriptions.add_subscription(subscription)
 
         # Tries to determine if the subscriber is refered by a subscribed organisation
         referer = self._get_user_referer_for_subscription(request)
         subscription = JournalAccessSubscription.valid_objects.get_for_referer(referer)
         if subscription:
-            request.subscription = subscription
-            request.subscription_type = 'institution-referer'
+            request.subscriptions.add_subscription(subscription)
             request.session['HTTP_REFERER'] = referer
-            return
 
         # Tries to determine if the user has an individual account
         subscription = JournalAccessSubscription.valid_objects.select_related('sponsor') \
             .filter(user=request.user).first() if request.user.is_authenticated() else False
         if subscription:
-            request.subscription = subscription
-            request.subscription_type = 'individual'
-            return
+            request.subscriptions.add_subscription(subscription)
 
-        # In any other the user is is in open access.
-        request.subscription = None
-        request.subscription_type = 'open_access'
 
     def process_response(self, request, response):
 
-        if hasattr(request, 'subscription_type')\
-                and request.subscription_type == 'institution-referer':
+        if request.subscriptions.active_subscription and self.active_subscription.referers.exists():
+            referer = self.active_subscription.referers.first()
             logger.info('{url} {method} {path} {protocol} - {client_port} - {client_ip} "{user_agent}" "{referer_url}" {code} {size} {referer_access}'.format( # noqa
                 url=request.get_raw_uri(),
                 method=request.META.get('REQUEST_METHOD'),
@@ -79,7 +71,7 @@ class SubscriptionMiddleware(object):
                 referer_url=request.META.get('HTTP_REFERER'),
                 code=response.status_code,
                 size="",
-                referer_access=request.subscription.referers.first().referer
+                referer_access=referer
             ))
 
         return response

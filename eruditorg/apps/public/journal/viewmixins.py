@@ -81,10 +81,7 @@ class ArticleAccessCheckMixin(object):
         if article.open_access or not article.embargoed:
             return True
 
-        if not self.request.subscription:
-            return False
-
-        return self.request.subscription.provides_access_to(article)
+        return self.request.subscriptions.provides_access_to(article=article)
 
     @cached_property
     def article_access_granted(self):
@@ -131,7 +128,7 @@ class ArticleViewMetricCaptureMixin(object):
 
     def get_metric_fields(self):
         article = self.get_article()
-        subscription = self.request.subscription
+        subscription = self.request.subscriptions.active_subscription
         return {
             'issue_localidentifier': article.issue.localidentifier,
             'localidentifier': article.localidentifier,

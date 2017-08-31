@@ -36,6 +36,7 @@ from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.test.factories import InstitutionRefererFactory
 from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
+from core.subscription.models import UserSubscriptions
 
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
@@ -537,7 +538,7 @@ class TestArticleDetailView(BaseEruditTestCase):
             'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
             'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
         request = self.factory.get(url)
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
         request.saved_citations = []
         # Run
         response = ArticleDetailView.as_view()(
@@ -581,7 +582,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
 
         # Run
         response = ArticleRawPdfView.as_view()(
@@ -623,9 +624,10 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         url = reverse('public:journal:article_raw_pdf', args=(
             journal_id, issue.volume_slug, issue_id, article_id
         ))
+
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
 
         # Run & check
         response = ArticleRawPdfView.as_view()(
@@ -901,7 +903,7 @@ class TestArticleXmlView(BaseEruditTestCase):
         ))
         request = self.factory.get(url)
         request.user = AnonymousUser()
-        request.subscription = None
+        request.subscriptions = UserSubscriptions()
 
         # Run
         response = ArticleXmlView.as_view()(
