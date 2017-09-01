@@ -33,6 +33,7 @@ class SubscriptionMiddleware(object):
     def process_request(self, request):
         # Tries to determine if the user's IP address is contained into
         # an institutional IP address range.
+
         ip = self._get_user_ip_address(request)
         if request.user.is_active and request.user.is_staff:
             ip = request.META.get('HTTP_CLIENT_IP', ip)

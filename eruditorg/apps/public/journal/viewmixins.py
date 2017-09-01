@@ -97,6 +97,7 @@ class ContentAccessCheckMixin(object):
             3- the current IP address is inside on of the IP address ranges allowed
                to access to it
         """
+
         content = self.get_content()
         if isinstance(content, Article):
             if content.open_access or not content.embargoed:
