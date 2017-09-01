@@ -144,6 +144,16 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         model = 'erudit.article'
 
 
+class OpenAccessArticleFactory(ArticleFactory):
+    issue = factory.SubFactory(
+        IssueFactory,
+        journal=factory.SubFactory(
+            JournalFactory,
+            open_access=True
+        )
+    )
+
+
 class EmbargoedArticleFactory(ArticleFactory):
 
     issue = factory.SubFactory(
