@@ -115,10 +115,6 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
             referer="http://www.umontreal.ca"
         )
 
-        article = EmbargoedArticleFactory()
-        subscription.journals.add(article.issue.journal)
-        subscription.save()
-
         middleware.process_request(request)
 
         assert request.subscriptions._subscriptions == [subscription]
