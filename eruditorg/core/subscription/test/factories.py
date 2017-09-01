@@ -29,6 +29,7 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
 
     @factory.post_generation
     def post(obj, create, extracted, **kwargs):
+
         if kwargs.get('valid', False):
             ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
         if kwargs.get('referers', None):
@@ -38,7 +39,7 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
                     referer=referer
                 )
         ip_start = kwargs.get('ip_start', None)
-        ip_end = kwargs.get('ip_start', None)
+        ip_end = kwargs.get('ip_end', None)
         if ip_start and ip_end:
             InstitutionIPAddressRangeFactory(
                 ip_start=ip_start,
