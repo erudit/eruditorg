@@ -203,8 +203,73 @@ class TestContentAccessCheckMixin(object):
         # Run # check
         assert not view.content_access_granted
 
-    def test_first_subscription_is_activated_when_both_are_valid(self):
-        pass
+    def test_second_subscription_is_activated_when_first_doesnt_give_access_to_article(self, authenticated_request, single_article_view):
+        """ Test that the adequate subscription is activated """
+
+        # Create an embargoed article
+        article = EmbargoedArticleFactory()
+
+        # Create an institutional subscription that gives access to this article
+        JournalAccessSubscriptionFactory(
+            journal=article.issue.journal,
+            post__valid=True,
+            post__ip_start="0.0.0.1",
+            post__ip_end="0.0.0.3",
+        )
+
+        # Create another embargoed article
+        other_article = EmbargoedArticleFactory()
+
+        # Create an individual subscription that gives access to this article
+        individual_subscription = JournalAccessSubscriptionFactory(
+            journal=other_article.issue.journal,
+            user=authenticated_request.user,
+            post__valid=True
+        )
+
+        parameters = authenticated_request.META.copy()
+        parameters['HTTP_X_FORWARDED_FOR'] = '0.0.0.2'
+        authenticated_request.META = parameters
+        middleware.process_request(authenticated_request)
+
+        view = single_article_view()
+        view.object = other_article
+        view.request = authenticated_request
+        view.dispatch()
+        assert view.content_access_granted
+        assert authenticated_request.subscriptions.active_subscription == individual_subscription
+        assert authenticated_request.subscriptions._subscriptions.index(individual_subscription) == 1
+
+    def test_first_subscription_is_activated_when_both_are_valid(self, authenticated_request, single_article_view):
+        # Create an embargoed article
+        article = EmbargoedArticleFactory()
+
+        # Create an institutional subscription that gives access to this article
+        ip_subscription = JournalAccessSubscriptionFactory(
+            journal=article.issue.journal,
+            post__valid=True,
+            post__ip_start="0.0.0.1",
+            post__ip_end="0.0.0.3",
+        )
+
+        # Create an individual subscription that gives access to this article
+        individual_subscription = JournalAccessSubscriptionFactory(
+            journal=article.issue.journal,
+            user=authenticated_request.user,
+            post__valid=True
+        )
+        parameters = authenticated_request.META.copy()
+        parameters['HTTP_X_FORWARDED_FOR'] = '0.0.0.2'
+        authenticated_request.META = parameters
+        middleware.process_request(authenticated_request)
+
+        view = single_article_view()
+        view.object = article
+        view.request = authenticated_request
+        view.dispatch()
+        assert view.content_access_granted
+        assert authenticated_request.subscriptions.active_subscription == ip_subscription
+        assert authenticated_request.subscriptions._subscriptions.index(ip_subscription) == 0
 
     def test_inserts_a_flag_into_the_context(self, anonymous_request, single_article_view):
         # Setup

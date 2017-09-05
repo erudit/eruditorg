@@ -35,6 +35,7 @@ class UserSubscriptions(object):
         for subscription in self._subscriptions:
             if subscription.provides_access_to(article=article, issue=issue, journal=journal):
                 self.active_subscription = subscription
+                return
 
     def provides_access_to(self, article=None, issue=None, journal=None):
         if not any((article, issue, journal,)):
