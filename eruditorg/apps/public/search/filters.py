@@ -271,9 +271,9 @@ class EruditDocumentSolrFilter(object):
         elif sort == 'author_desc':
             return 'Auteur_tri desc'
         elif sort == 'pubdate_asc':
-            return 'DateAjoutErudit asc'
+            return 'Annee_tri asc'
         elif sort == 'pubdate_desc':
-            return 'DateAjoutErudit desc'
+            return 'Annee_tri desc'
 
     def filter(self, request, queryset, view):
         """ Filters the queryset by using the results provided by the Solr index. """

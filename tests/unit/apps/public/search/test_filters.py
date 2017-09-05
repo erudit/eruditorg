@@ -355,11 +355,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
 
         request = Request(self.factory.get('/', data={'sort_by': 'pubdate_asc'}))
         self.assertEqual(
-            EruditDocumentSolrFilter().get_solr_sorting(request), 'DateAjoutErudit asc')
+            EruditDocumentSolrFilter().get_solr_sorting(request), 'Annee_tri asc')
 
         request = Request(self.factory.get('/', data={'sort_by': 'pubdate_desc'}))
         self.assertEqual(
-            EruditDocumentSolrFilter().get_solr_sorting(request), 'DateAjoutErudit desc')
+            EruditDocumentSolrFilter().get_solr_sorting(request), 'Annee_tri desc')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_properly_return_aggregation_results(self, mock_get_results):
