@@ -58,6 +58,34 @@ PUB_TYPES_CHOICES = (
     ('Dépot', _('Rapports de recherche')),
 )
 
+language_label_correspondence = {
+    'ar': _('Arabe'),
+    'ca': _('Catalan'),
+    'en': _('Anglais'),
+    'es': _('Espagnol'),
+    'de': _('Allemand'),
+    'el': _('Grec moderne'),
+    'fr': _('Français'),
+    'he': _('Hébreu'),
+    'hr': _('Bosniaque'),
+    'ht': _('Créole haïtien'),
+    'id': _('Indonésien'),
+    'iro': _('Langues iroquoiennes'),
+    'it': _('Italien'),
+    'ja': _('Japonais'),
+    'ko': _('Coréen'),
+    'la': _('Latin'),
+    'nl': _('Néerlandais'),
+    'oc': _('Occitan'),
+    'pl': _('Polonais'),
+    'pt': _('Portugais'),
+    'qu': _('Kichwa'),
+    'ro': _('Roumain'),
+    'tr': _('Espéranto'),
+    'ru': _('Russe'),
+    'zh': _('Chinois'),
+}
+
 
 def get_years_range(
         year_start=1900, year_end=(dt.date.today().year + 1), reverse=False, add_empty_choice=False,
@@ -71,6 +99,24 @@ def get_years_range(
         years_range.insert(0, ('', empty_string))
 
     return years_range
+
+
+def build_language_choices(filter_languages=None):
+    """ :returns: the language choices for the Search forms"""
+    language_choices = []
+    if not filter_languages:
+        return ((k, v,) for k, v in language_label_correspondence.items())
+
+    for v, c in filter_languages:
+        try:
+            assert re.match(r'^[a-zA-Z]+$', v)
+            language_name = language_label_correspondence[v]
+        except AssertionError:  # pragma: no cover
+            continue
+        except KeyError:
+            language_name = v
+        language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
+    return language_choices
 
 
 class SearchForm(forms.Form):
@@ -126,7 +172,7 @@ class SearchForm(forms.Form):
 
     languages = forms.MultipleChoiceField(
         label=_('Langues'),
-        choices=[('fr', _('Français')), ('en', _('Anglais')), ('es', _('Espagnol'))],
+        choices=build_language_choices(),
         required=False)
 
     disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
@@ -188,34 +234,6 @@ class ResultsFilterForm(forms.Form):
         'en': ['zx', ],
     }
 
-    language_label_correspondence = {
-        'ar': _('Arabe'),
-        'ca': _('Catalan'),
-        'en': _('Anglais'),
-        'es': _('Espagnol'),
-        'de': _('Allemand'),
-        'el': _('Grec moderne'),
-        'fr': _('Français'),
-        'he': _('Hébreu'),
-        'hr': _('Bosniaque'),
-        'ht': _('Créole haïtien'),
-        'id': _('Indonésien'),
-        'iro': _('Langues iroquoiennes'),
-        'it': _('Italien'),
-        'ja': _('Japonais'),
-        'ko': _('Coréen'),
-        'la': _('Latin'),
-        'nl': _('Néerlandais'),
-        'oc': _('Occitan'),
-        'pl': _('Polonais'),
-        'pt': _('Portugais'),
-        'qu': _('Kichwa'),
-        'ro': _('Roumain'),
-        'tr': _('Espéranto'),
-        'ru': _('Russe'),
-        'zh': _('Chinois'),
-    }
-
     def __init__(self, *args, **kwargs):
         # The filters form fields choices are initialized from search results
         api_results = kwargs.pop('api_results', {})
@@ -247,16 +265,9 @@ class ResultsFilterForm(forms.Form):
             )
 
             # Prepares the languages fields
-            language_choices = []
-            for v, c in aggregations['language'].items():
-                try:
-                    assert re.match(r'^[a-zA-Z]+$', v)
-                    language_name = self.language_label_correspondence[v]
-                except AssertionError:  # pragma: no cover
-                    continue
-                except KeyError:
-                    language_name = v
-                language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
+            language_choices = build_language_choices(
+                filter_languages=aggregations['language'].items()
+            )
 
             self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[1])
             self.fields['filter_collections'].choices = self._get_aggregation_choices(
