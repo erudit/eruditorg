@@ -231,7 +231,7 @@ class ResultsFilterForm(forms.Form):
         'es': ['sp', ],
         'fr': ['un', ],
         'ru': ['uz', ],
-        'en': ['zx', 've' ],
+        'en': ['zx', 've'],
         'pt': ['po', ],
     }
 
