@@ -54,6 +54,18 @@ class TestJournalAccessSubscription(EruditTestCase):
         assert list(subscription_4.get_journals()) == [self.journal, ]
 
 
+@pytest.mark.django_db
+class TestUserSubscriptions(object):
+
+    def test_the_first_subscription_is_the_active_subscription(self):
+        from core.subscription.models import UserSubscriptions
+
+        subs = UserSubscriptions()
+        subscription = JournalAccessSubscriptionFactory()
+        subs.add_subscription(subscription)
+        assert subs.active_subscription == subscription
+
+
 class TestInstitutionReferer(DBRequiredTestCase):
 
     def test_can_find_an_institution_referer_by_netloc(self):

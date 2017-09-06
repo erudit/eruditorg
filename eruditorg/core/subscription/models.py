@@ -29,15 +29,35 @@ class UserSubscriptions(object):
         """ The active subscriptions for this session. """
 
     def add_subscription(self, subscription):
+        """ Adds a subscription to the users subscriptions
+
+        The order in which the subscriptions are added is the order in which
+        the subscription will be verified.
+
+        The first subscription to be added will be the active subscription.
+        """
+        if not self.active_subscription:
+            self.active_subscription = subscription
         self._subscriptions.append(subscription)
 
     def set_active_subscription_for(self, article=None, issue=None, journal=None):
+        """ Sets the active subscription for a given content
+
+        Finds the first subscription that provides access to the specified content
+        and sets it as the "active" subscription.
+        """
         for subscription in self._subscriptions:
             if subscription.provides_access_to(article=article, issue=issue, journal=journal):
                 self.active_subscription = subscription
                 return
 
     def provides_access_to(self, article=None, issue=None, journal=None):
+        """ Determines if this set of subscriptions provides access to a given content
+
+        Subscriptions are tested in the order in which they were added.
+
+        :returns: True if it provides access content
+        """
         if not any((article, issue, journal,)):
             raise ValueError("One of article, issue, journal must be specified.")
         for subscription in self._subscriptions:
