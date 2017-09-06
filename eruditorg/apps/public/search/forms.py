@@ -103,20 +103,20 @@ def get_years_range(
 
 def build_language_choices(filter_languages=None):
     """ :returns: the language choices for the Search forms"""
-    language_choices = []
     if not filter_languages:
-        return ((k, v,) for k, v in language_label_correspondence.items())
-
-    for v, c in filter_languages:
-        try:
-            assert re.match(r'^[a-zA-Z]+$', v)
-            language_name = language_label_correspondence[v]
-        except AssertionError:  # pragma: no cover
-            continue
-        except KeyError:
-            language_name = v
-        language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
-    return language_choices
+        language_choices = [(k, v,) for k, v in language_label_correspondence.items()]
+    else:
+        language_choices = []
+        for v, c in filter_languages:
+            try:
+                assert re.match(r'^[a-zA-Z]+$', v)
+                language_name = language_label_correspondence[v]
+            except AssertionError:  # pragma: no cover
+                continue
+            except KeyError:
+                language_name = v
+            language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
+    return sorted(language_choices, key=lambda x: x[1])
 
 
 class SearchForm(forms.Form):
@@ -231,7 +231,8 @@ class ResultsFilterForm(forms.Form):
         'es': ['sp', ],
         'fr': ['un', ],
         'ru': ['uz', ],
-        'en': ['zx', ],
+        'en': ['zx', 've' ],
+        'pt': ['po', ],
     }
 
     def __init__(self, *args, **kwargs):
