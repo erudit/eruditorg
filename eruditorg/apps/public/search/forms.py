@@ -231,7 +231,8 @@ class ResultsFilterForm(forms.Form):
         'es': ['sp', ],
         'fr': ['un', ],
         'ru': ['uz', ],
-        'en': ['zx', ],
+        'en': ['zx', 've' ],
+        'pt': ['po', ],
     }
 
     def __init__(self, *args, **kwargs):
