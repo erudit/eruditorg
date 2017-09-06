@@ -5,6 +5,7 @@ import logging
 from django.conf import settings
 from django.core.cache import cache
 from django.utils.functional import cached_property
+
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
@@ -81,6 +82,9 @@ class FedoraMixin(object):
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
                 # really often because the dataset provided by the Fedora repository
                 # is not complete.
+                return
+            elif hasattr('issue') and self.issue.journal.collection.code == 'unb':
+                # The UNB collection *has* articles that are missing from Fedora
                 return
             raise
         except AssertionError:
