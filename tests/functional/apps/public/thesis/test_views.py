@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+from pytz import timezone
 
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
@@ -11,6 +12,7 @@ from erudit.test.factories import ThesisFactory
 
 from base.test.testcases import EruditClientTestCase
 
+montreal = timezone("America/Montreal")
 
 class TestThesisHomeView(EruditClientTestCase):
     def test_inserts_collection_information_into_the_context(self):
@@ -310,18 +312,18 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
 
     def test_can_sort_theses_by_ascending_date(self):
         # Setup
-        dt_now = dt.datetime.now()
+        dt_now = dt.datetime.now(tz=montreal)
         author = AuthorFactory.create()
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
             localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
         thesis_2 = ThesisFactory.create(  # noqa
             localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'date_asc'})
@@ -331,18 +333,18 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
 
     def test_can_sort_theses_by_descending_date(self):
         # Setup
-        dt_now = dt.datetime.now()
+        dt_now = dt.datetime.now(tz=montreal)
         author = AuthorFactory.create()
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
             localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
         thesis_2 = ThesisFactory.create(  # noqa
             localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
         response = self.client.get(url, {'sort_by': 'date_desc'})
@@ -516,18 +518,18 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
 
     def test_can_sort_theses_by_ascending_date(self):
         # Setup
-        dt_now = dt.datetime.now()
+        dt_now = dt.datetime.now(tz=montreal)
         author = AuthorFactory.create(lastname='Bname')
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
             localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
         thesis_2 = ThesisFactory.create(  # noqa
             localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'date_asc'})
@@ -537,18 +539,18 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
 
     def test_can_sort_theses_by_descending_date(self):
         # Setup
-        dt_now = dt.datetime.now()
+        dt_now = dt.datetime.now(tz=montreal)
         author = AuthorFactory.create(lastname='Bname')
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
             localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
         thesis_2 = ThesisFactory.create(  # noqa
             localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
         thesis_3 = ThesisFactory.create(  # noqa
             localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)).date())
+            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
         response = self.client.get(url, {'sort_by': 'date_desc'})
