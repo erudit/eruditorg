@@ -86,7 +86,7 @@
           <div class="row">
             <div class="col-sm-8">
               <xsl:apply-templates select="liminaire/notegen"/>
-              {% if not article_access_granted and not only_summary %}
+              {% if not content_access_granted and not only_summary %}
               <div class="alert">
                 <p>
                   {% blocktrans trimmed %}
@@ -204,7 +204,7 @@
                   <a href="#resume">{% trans "Résumé" %}</a>
                 </li>
               </xsl:if>
-              {% if article_access_granted and not only_summary %}
+              {% if content_access_granted and not only_summary %}
               <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
                 <li class="article-toc--body">
                   <ul class="unstyled">
@@ -219,7 +219,7 @@
               </li>
               {% endif %}
               <xsl:for-each select="partiesann[1]">
-                {% if article_access_granted and not only_summary %}
+                {% if content_access_granted and not only_summary %}
                 <xsl:if test="grannexe">
                   <li>
                     <a href="#grannexe">
@@ -257,7 +257,7 @@
                   </li>
                 </xsl:if>
               </xsl:for-each>
-              {% if article_access_granted and not only_summary %}
+              {% if content_access_granted and not only_summary %}
               <xsl:if test="//figure">
                 <li>
                   <a href="#figures">{% trans "Liste des figures" %}</a>
@@ -336,7 +336,7 @@
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </a>
             </li>
-            {% if article_access_granted and pdf_exists %}
+            {% if content_access_granted and pdf_exists %}
             <li>
               <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
                 <span class="toolbox-pdf">PDF</span>
@@ -375,7 +375,7 @@
           </section>
         </xsl:if>
 
-        {% if article_access_granted and not only_summary and article.publication_allowed %}
+        {% if content_access_granted and not only_summary and article.publication_allowed %}
           {% if article.erudit_object.processing == 'complet' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
@@ -404,7 +404,7 @@
         </div>
 
         <!-- lists of tables & figures -->
-        {% if article_access_granted and not only_summary %}
+        {% if content_access_granted and not only_summary %}
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
@@ -1868,7 +1868,7 @@
   <xsl:template match="partiesann">
     <section class="{name()} col-xs-12">
       <h2 class="sr-only">{% trans 'Parties annexes' %}</h2>
-      {% if article_access_granted and not only_summary  %}
+      {% if content_access_granted and not only_summary  %}
       <xsl:apply-templates select="grannexe"/>
       <xsl:apply-templates select="grnote"/>
       {% endif %}
