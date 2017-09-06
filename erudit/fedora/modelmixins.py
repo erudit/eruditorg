@@ -83,7 +83,7 @@ class FedoraMixin(object):
                 # really often because the dataset provided by the Fedora repository
                 # is not complete.
                 return
-            elif hasattr('issue') and self.issue.journal.collection.code == 'unb':
+            elif hasattr(self, 'issue') and self.issue.journal.collection.code == 'unb':
                 # The UNB collection *has* articles that are missing from Fedora
                 return
             raise
