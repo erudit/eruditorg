@@ -710,7 +710,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def html_title(self):
-        return self.erudit_object.get_formatted_html_title()
+        if self.is_in_fedora:
+            return self.erudit_object.get_formatted_html_title()
+        return self.title
 
     @cached_property
     def subtitle(self):
@@ -763,7 +765,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_1(self):
-        if self.get_full_identifier():
+        if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=1)
             return section_titles['main'] if section_titles else None
         else:
@@ -772,7 +774,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_1_paral(self):
-        if self.get_full_identifier():
+        if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=1)
             return section_titles['paral'].values() if section_titles else None
         else:
@@ -781,7 +783,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_2(self):
-        if self.get_full_identifier():
+        if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=2)
             return section_titles['main'] if section_titles else None
         else:
@@ -790,7 +792,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_2_paral(self):
-        if self.get_full_identifier():
+        if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=2)
             return section_titles['paral'].values() if section_titles else None
         else:
@@ -799,7 +801,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_3(self):
-        if self.get_full_identifier():
+        if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=3)
             return section_titles['main'] if section_titles else None
         else:
@@ -808,7 +810,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_3_paral(self):
-        if self.get_full_identifier():
+        if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=3)
             return section_titles['paral'].values()
         else:

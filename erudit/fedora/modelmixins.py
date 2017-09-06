@@ -98,5 +98,13 @@ class FedoraMixin(object):
         return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
 
     @cached_property
+    def is_in_fedora(self):
+        """ Checks if an objet is present in fedora
+
+        The presence of a full_identifier is not sufficient to determine if the object
+        is present in fedora. Some articles have Fedora ids but are _not_ in Fedora."""
+        return self.get_full_identifier() and self.erudit_object
+
+    @cached_property
     def erudit_object(self):
         return self.get_erudit_object()
