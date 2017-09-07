@@ -114,7 +114,7 @@ class IssueSubmission(models.Model):
         return self.status == self.VALID
 
     @transition(field=status, source=DRAFT, target=SUBMITTED,
-                permission=lambda user: user.has_perm(
+                permission=lambda instance, user: user.has_perm(
                     'editor.manage_issuesubmission'),
                 custom=dict(verbose_name=("Soumettre")))
     def submit(self):
@@ -126,7 +126,7 @@ class IssueSubmission(models.Model):
         [rf.delete() for rf in incompletes]
 
     @transition(field=status, source=SUBMITTED, target=VALID,
-                permission=lambda user: user.has_perm(
+                permission=lambda instance, user: user.has_perm(
                     'editor.review_issuesubmission'),
                 custom=dict(verbose_name=_("Approuver")))
     def approve(self):
@@ -136,7 +136,7 @@ class IssueSubmission(models.Model):
         pass
 
     @transition(field=status, source=SUBMITTED, target=DRAFT,
-                permission=lambda user: user.has_perm(
+                permission=lambda instance, user: user.has_perm(
                     'editor.review_issuesubmission'),
                 custom=dict(verbose_name=_("Demander des corrections")))
     def refuse(self):
