@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import OrganisationFactory
 
-from base.test.factories import UserFactory
+from base.test.factories import UserFactory, get_anonymous_request, get_authenticated_request
 from erudit.test.factories import EmbargoedArticleFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from core.subscription.models import UserSubscriptions
@@ -39,9 +39,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
             subscription=subscription,
             ip_start='192.168.1.2', ip_end='192.168.1.4')
 
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = dict()
+        request = get_anonymous_request()
         parameters = request.META.copy()
         parameters['HTTP_X_FORWARDED_FOR'] = '192.168.1.3'
         request.META = parameters
@@ -56,17 +54,14 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_individual_access(self):
         # Setup
-        now_dt = dt.datetime.now()
-        user = UserFactory()
-        subscription = JournalAccessSubscriptionFactory.create(user=user, journal=self.journal)
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+        request = get_authenticated_request()
 
-        request = self.factory.get('/')
-        request.user = user
-        request.session = dict()
+        subscription = JournalAccessSubscriptionFactory.create(
+            user=request.user,
+            journal=self.journal,
+            post__valid=True
+        )
+
         middleware = SubscriptionMiddleware()
 
         # Run
@@ -75,55 +70,61 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         # Check
         assert request.subscriptions._subscriptions == [subscription]
 
-    def test_a_user_can_have_two_individual_subscriptions(self):
-        user = UserFactory()
+    def test_a_user_can_have_two_subscriptions(self):
+
         ip_subscription = JournalAccessSubscriptionFactory(
-            user=user, post__valid=True,
+            post__valid=True,
             post__ip_start='1.1.1.1', post__ip_end='1.1.1.1'
         )
 
         referer_subscription = JournalAccessSubscriptionFactory(
-            user=user, post__valid=True,
+            post__valid=True,
             post__referers=['http://www.umontreal.ca']
         )
 
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = dict()
+        request = get_anonymous_request()
         request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
 
         middleware = SubscriptionMiddleware()
         middleware.process_request(request)
 
-        assert set(request.subscriptions._subscriptions) == set((
+        assert set(request.subscriptions._subscriptions) == {
             ip_subscription, referer_subscription,
-        ))
+        }
+
+    def test_a_user_can_have_two_individual_subscriptions(self):
+        request = get_authenticated_request()
+
+        subscriptions = JournalAccessSubscriptionFactory.create_batch(
+            2,
+            post__valid=True,
+            user=request.user
+        )
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+
+        assert set(request.subscriptions._subscriptions) == set(subscriptions)
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_header(self):
         # Setup
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = dict()
+        request = get_anonymous_request()
         request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
 
-        middleware = SubscriptionMiddleware()
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        subscription = valid_period.subscription
-        InstitutionRefererFactory(
-            subscription=subscription,
-            referer="http://www.umontreal.ca"
+        subscription = JournalAccessSubscriptionFactory(
+            post__valid=True,
+            post__referers=['http://www.umontreal.ca']
         )
 
+        middleware = SubscriptionMiddleware()
         middleware.process_request(request)
 
         assert request.subscriptions._subscriptions == [subscription]
 
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = dict()
-        request.META['HTTP_REFERER'] = None
+        request = get_anonymous_request()
         middleware.process_request(request)
+
         assert request.subscriptions._subscriptions == []
 
     @unittest.mock.patch('core.subscription.middleware.logger')
@@ -133,27 +134,23 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         request.session = dict()
         request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
 
-        middleware = SubscriptionMiddleware()
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        subscription = valid_period.subscription
-        InstitutionRefererFactory(
-            subscription=subscription,
-            referer="http://www.umontreal.ca"
+        article = EmbargoedArticleFactory()
+
+        JournalAccessSubscriptionFactory(
+            journal=article.issue.journal,
+            post__valid=True,
+            post__referers=['http://www.umontreal.ca']
         )
 
-        article = EmbargoedArticleFactory()
-        subscription.journals.add(article.issue.journal)
-        subscription.save()
-
+        middleware = SubscriptionMiddleware()
         middleware.process_request(request)
+
         request.subscriptions.set_active_subscription_for(article=article)
         assert mock_log.info.call_count == 0
         middleware.process_response(request, HttpResponse())
         assert mock_log.info.call_count == 1
 
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = dict()
+        request = get_anonymous_request()
         request.META['HTTP_REFERER'] = 'http://www.no-referer.ca'
 
         middleware.process_request(request)
@@ -162,32 +159,27 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
         # Setup
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = {'HTTP_REFERER':'http://www.umontreal.ca'}
+        request = get_anonymous_request()
+        request.session = {'HTTP_REFERER': 'http://www.umontreal.ca'}
         request.META['HTTP_REFERER'] = 'http://www.erudit.org'
 
-        middleware = SubscriptionMiddleware()
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        subscription = valid_period.subscription
-        InstitutionRefererFactory(
-            subscription=subscription,
-            referer="http://www.umontreal.ca"
+        article = EmbargoedArticleFactory()
+
+        subscription = JournalAccessSubscriptionFactory(
+            journal=article.issue.journal,
+            post__valid=True,
+            post__referers=['http://www.umontreal.ca']
         )
 
-        article = EmbargoedArticleFactory()
-        subscription.journals.add(article.issue.journal)
-        subscription.save()
-
+        middleware = SubscriptionMiddleware()
         middleware.process_request(request)
 
         assert request.subscriptions._subscriptions == [subscription]
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_open_access(self):
         # Setup
-        request = self.factory.get('/')
-        request.user = AnonymousUser()
-        request.session = dict()
+        request = get_anonymous_request()
+
         middleware = SubscriptionMiddleware()
 
         # Run

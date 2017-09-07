@@ -51,10 +51,11 @@ class SubscriptionMiddleware(object):
             request.session['HTTP_REFERER'] = referer
 
         # Tries to determine if the user has an individual account
-        subscription = JournalAccessSubscription.valid_objects.select_related('sponsor') \
-            .filter(user=request.user).first() if request.user.is_authenticated() else False
-        if subscription:
-            request.subscriptions.add_subscription(subscription)
+        if request.user.is_authenticated():
+            for subscription in JournalAccessSubscription.valid_objects.select_related(
+                'sponsor'
+            ).filter(user=request.user):
+                request.subscriptions.add_subscription(subscription)
 
     def process_response(self, request, response):
         active_subscription = request.subscriptions.active_subscription

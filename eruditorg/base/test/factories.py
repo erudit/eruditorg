@@ -2,8 +2,13 @@
 
 from django.conf import settings
 from django.contrib.auth.models import Group
+from django.test import RequestFactory
+from django.contrib.auth.models import AnonymousUser
+
 import factory
 from faker import Factory as FakerFactory
+
+from core.subscription.models import UserSubscriptions
 
 faker = FakerFactory.create()
 
@@ -21,3 +26,19 @@ class GroupFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = Group
+
+
+def get_authenticated_request():
+    request = RequestFactory().get('/')
+    request.user = UserFactory()
+    request.subscriptions = UserSubscriptions()
+    request.session = dict()
+    return request
+
+
+def get_anonymous_request():
+    request = RequestFactory().get('/')
+    request.user = AnonymousUser()
+    request.subscriptions = UserSubscriptions()
+    request.session = dict()
+    return request
