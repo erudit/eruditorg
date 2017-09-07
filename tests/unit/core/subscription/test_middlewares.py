@@ -75,10 +75,10 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         # Check
         assert request.subscriptions._subscriptions == [subscription]
 
-    def test_a_user_can_have_two_individual_subscriptions(self):
+    def test_a_user_can_have_two_subscriptions(self):
         user = UserFactory()
         ip_subscription = JournalAccessSubscriptionFactory(
-            user=user, post__valid=True,
+            post__valid=True,
             post__ip_start='1.1.1.1', post__ip_end='1.1.1.1'
         )
 
@@ -96,9 +96,27 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         middleware = SubscriptionMiddleware()
         middleware.process_request(request)
 
-        assert set(request.subscriptions._subscriptions) == set((
+        assert set(request.subscriptions._subscriptions) == {
             ip_subscription, referer_subscription,
-        ))
+        }
+
+    def test_a_user_can_have_two_individual_subscriptions(self):
+        user = UserFactory()
+
+        subscriptions = JournalAccessSubscriptionFactory.create_batch(
+            2,
+            post__valid=True,
+            user=user
+        )
+
+        request = self.factory.get('/')
+        request.user = user
+        request.session = dict()
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+
+        assert set(request.subscriptions._subscriptions) == set(subscriptions)
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_header(self):
         # Setup
