@@ -3,6 +3,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
+from erudit.models import Journal
 from .models import InstitutionIPAddressRange
 from .models import InstitutionReferer
 from .models import JournalAccessSubscription
@@ -24,6 +25,43 @@ class InstitutionIPAddressRangeAdmin(admin.ModelAdmin):
     search_fields = ('subscription__organisation__name',)
 
 
+class SubscriptionTypeListFilter(admin.SimpleListFilter):
+    title = _("Type d'abonnement")
+    parameter_name = "subscription_type"
+
+    def lookups(self, request, model_admin):
+        return (
+            ('individual', _('Abonnements individuels')),
+            ('institution', _('Abonnements institutionnels'))
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'individual':
+            return queryset.exclude(user=None)
+
+        if self.value() == 'institution':
+            return queryset.exclude(organisation=None)
+
+
+class SubscriptionJournalListFilter(admin.SimpleListFilter):
+    title = _("Abonné à la revue")
+    parameter_name = "subscription_journal"
+
+    def lookups(self, request, model_admin):
+
+        journal_ids_list = JournalAccessSubscription.objects.exclude(journals=None).values_list(
+            'journals').distinct()
+
+        journal_ids = [v[0] for v in journal_ids_list]
+
+        return (
+            (j.code, j.name) for j in Journal.objects.filter(id__in=journal_ids)
+        )
+
+    def queryset(self, request, queryset):
+        return queryset.filter(journals__code=self.value())
+
+
 class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
@@ -42,6 +80,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
 
     list_display = ('pk', 'title', 'user', 'organisation', 'journal', 'collection', 'full_access', )
     list_display_links = ('pk', 'title', 'user', 'organisation', )
+    list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter)
 
 
 class JournalManagementPlanAdmin(admin.ModelAdmin):
