@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import pytest
+
+from datetime import datetime
 
 import datetime as dt
 import ipaddress
@@ -6,12 +9,15 @@ import ipaddress
 from django.core.exceptions import ValidationError
 import pytest
 
+from account_actions.test.factories import AccountActionTokenFactory
+
 from erudit.models import Journal
-from erudit.test.factories import OrganisationFactory
+from erudit.test.factories import OrganisationFactory, JournalFactory
 
 from base.test import DBRequiredTestCase
 from base.test import EruditTestCase
 from core.subscription.models import JournalAccessSubscription
+from django.contrib.contenttypes.models import ContentType
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
@@ -215,15 +221,19 @@ class TestJournalAccessSubscriptionPeriod(DBRequiredTestCase):
             period.clean()
 
 
-class TestJournalManagementSubscription(EruditTestCase):
+@pytest.mark.django_db
+class TestJournalManagementSubscription(object):
     def test_knows_if_it_is_ongoing_or_not(self):
         # Setup
+        journal = JournalFactory()
         now_dt = dt.datetime.now()
         plan = JournalManagementPlanFactory.create(max_accounts=10)
+
         subscription_1 = JournalManagementSubscriptionFactory.create(
-            journal=self.journal, plan=plan)
+            journal=journal, plan=plan)
         subscription_2 = JournalManagementSubscriptionFactory.create(
-            journal=self.journal, plan=plan)
+            journal=journal, plan=plan)
+
         JournalManagementSubscriptionPeriodFactory.create(
             subscription=subscription_1,
             start=now_dt - dt.timedelta(days=10),
@@ -235,3 +245,36 @@ class TestJournalManagementSubscription(EruditTestCase):
         # Run & check
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
+
+    def test_can_count_subscriptions_to_know_if_its_full(self):
+        plan = JournalManagementPlanFactory.create(max_accounts=5)
+        subscription = JournalManagementSubscriptionFactory.create(plan=plan)
+
+        JournalAccessSubscriptionFactory.create_batch(4, journal_management_subscription=subscription)
+        assert not subscription.is_full
+        JournalAccessSubscriptionFactory.create(journal_management_subscription=subscription)
+        assert subscription.is_full
+
+    def test_can_count_pending_subscriptions_to_know_if_its_full(self):
+        journal = JournalFactory()
+
+        plan = JournalManagementPlanFactory.create(max_accounts=5)
+        subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
+
+        AccountActionTokenFactory.create_batch(4, content_type=ContentType.objects.get_for_model(Journal), object_id=journal.id)
+
+        assert not subscription.is_full
+        AccountActionTokenFactory.create_batch(4, content_type=ContentType.objects.get_for_model(Journal), object_id=journal.id)
+        assert subscription.is_full
+
+    def test_can_count_subscriptions_and_pending_subscriptions_to_know_if_its_full(self):
+        journal = JournalFactory()
+
+        plan = JournalManagementPlanFactory.create(max_accounts=5)
+        subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
+
+        AccountActionTokenFactory.create_batch(4, content_type=ContentType.objects.get_for_model(Journal), object_id=journal.id)
+
+        assert not subscription.is_full
+        JournalAccessSubscriptionFactory.create_batch(4, journal_management_subscription=subscription)
+        assert subscription.is_full

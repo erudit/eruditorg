@@ -10,6 +10,8 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
+from account_actions.models import AccountActionToken
+
 from erudit.models import Collection
 from erudit.models import Journal
 from erudit.models import Organisation
@@ -82,7 +84,8 @@ class JournalAccessSubscription(AbstractSubscription):
     """ Organisation associated to the subscription """
 
     journal_management_subscription = models.ForeignKey(
-        "JournalManagementSubscription", verbose_name=_('Forfait'), blank=True, null=True
+        "JournalManagementSubscription", verbose_name=_('Forfait'), blank=True, null=True,
+        related_name="subscriptions",
     )
     """ JournalManagementSubscription towards which the subscription will count """
 
@@ -230,6 +233,15 @@ class JournalManagementSubscription(AbstractSubscription):
         nowd = dt.datetime.now().date()
         return JournalManagementSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
+
+    def get_pending_subscriptions(self):
+        return AccountActionToken.pending_objects.get_for_object(self.journal)
+
+    @property
+    def is_full(self):
+        """ :returns: True if this JournalManagementSubscription is full """
+        return self.subscriptions.count() + \
+            self.get_pending_subscriptions().count() >= self.plan.max_accounts
 
 
 class JournalManagementPlan(models.Model):
