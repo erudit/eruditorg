@@ -72,6 +72,7 @@
     }
   }
 
+  // icons
   .ion-ios-search-strong,
   .ion-android-close,
   .toolbox-save {
@@ -163,6 +164,18 @@
       cursor: default;
       background: $light-grey;
       color: $dark-grey;
+    }
+
+  }
+
+  // select2 select menu
+  .select2-selection--single {
+    border: 0;
+    font-size: 16px;
+    @include fw-sans-medium;
+
+    .select2-selection__rendered {
+      color: #000;
     }
 
   }
