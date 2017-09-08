@@ -16,7 +16,7 @@ def get_or_create_legacy_user(username, email, hashed_password=None):
         user = user_model.objects.get(email=email)
         # If the user exists this means that we are importing a user from multiple databases.
         # So we will deactivate his password in order to force him recreate it.
-        user.set_unusable_password()
+
         user.save()
         return user, False
     except user_model.DoesNotExist:
