@@ -14,15 +14,17 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
         fields = ['email', 'first_name', 'last_name', ]
 
     def __init__(self, *args, **kwargs):
-        self.journal = kwargs.pop('journal')
+        self.management_subscription = kwargs.pop('management_subscription')
         super(JournalAccessSubscriptionCreateForm, self).__init__(*args, **kwargs)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
 
         # First checks if a pending subscription token already exists with this email address
-        token_already_exists = AccountActionToken.pending_objects.get_for_object(self.journal) \
-            .filter(action=IndividualSubscriptionAction.name, email=email).exists()
+        token_already_exists = AccountActionToken.pending_objects.get_for_object(
+            self.management_subscription
+        ).filter(
+            action=IndividualSubscriptionAction.name, email=email).exists()
         if token_already_exists:
             self.add_error(
                 'email',
@@ -30,7 +32,8 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
 
         # Then checks if a subscription already exists for a user with this email address
         subscription_already_exists = JournalAccessSubscription.objects.filter(
-            journal=self.journal, user__email=email).exists()
+            journal_management_subscription=self.management_subscription, user__email=email
+        ).exists()
         if subscription_already_exists:
             self.add_error(
                 'email',
@@ -41,7 +44,7 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(JournalAccessSubscriptionCreateForm, self).save(commit=False)
         instance.action = IndividualSubscriptionAction.name
-        instance.content_object = self.journal
+        instance.content_object = self.management_subscription
 
         if commit:
             instance.save()

@@ -77,6 +77,8 @@ class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):
 
 
 class JournalManagementPlanFactory(factory.django.DjangoModelFactory):
+    max_accounts = 5
+
     class Meta:
         model = JournalManagementPlan
 

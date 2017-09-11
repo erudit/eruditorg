@@ -47,7 +47,16 @@ class IndividualJournalAccessSubscriptionListView(
 
     def get_queryset(self):
         qs = super(IndividualJournalAccessSubscriptionListView, self).get_queryset()
-        return qs.filter(user__isnull=False, journal=self.current_journal)
+        journal_management_subscription = JournalManagementSubscription.objects.filter(
+            journal=self.current_journal
+        ).first()
+
+        return qs.filter(
+            user__isnull=False,
+            journal_management_subscription=journal_management_subscription
+        ).order_by(
+            'user__last_name'
+        )
 
 
 class IndividualJournalAccessSubscriptionCreateView(
@@ -62,35 +71,31 @@ class IndividualJournalAccessSubscriptionCreateView(
         try:
             management_subscription = JournalManagementSubscription.objects.get(
                 journal=self.current_journal)
+            if management_subscription.is_full:
+                messages.warning(
+                    self.request,
+                    _("Vous avez épuisé la limite du nombre d'abonnements pour cette revue."))
+                return HttpResponseRedirect(
+                    reverse('userspace:journal:subscription:list', args=(self.current_journal.pk,)))
+
+            return super(IndividualJournalAccessSubscriptionCreateView, self) \
+                .get(request, *args, **kwargs)
         except JournalManagementSubscription.DoesNotExist:  # pragna: no cover
-            plan_consumed = False
             logger.error(
                 'Unable to find the management subscription of the following journal: {}'.format(
                     self.current_journal.name),
                 exc_info=True, extra={'request': self.request, })
-        else:
-            subscriptions = JournalAccessSubscription.objects.filter(
-                user__isnull=False, journal=self.current_journal)
-            pending = AccountActionToken.pending_objects \
-                .get_for_object(self.current_journal)
-            consumed = AccountActionToken.consumed_objects \
-                .get_for_object(self.current_journal)
-            total_subscriptions = subscriptions.count() + pending.count() + consumed.count()
-            plan_consumed = total_subscriptions >= management_subscription.plan.max_accounts
-
-        if plan_consumed:
             messages.warning(
                 self.request,
-                _("Vous avez épuisé la limite du nombre d'abonnements pour cette revue."))
+                _("Vous ne pouvez pas gérer les abonnements de votre revue"))
             return HttpResponseRedirect(
-                reverse('userspace:journal:subscription:list', args=(self.current_journal.pk, )))
-
-        return super(IndividualJournalAccessSubscriptionCreateView, self) \
-            .get(request, *args, **kwargs)
+                reverse('userspace:journal:subscription:list', args=(self.current_journal.pk,)))
 
     def get_form_kwargs(self):
+        management_subscription = JournalManagementSubscription.objects.get(
+            journal=self.current_journal)
         kwargs = super(IndividualJournalAccessSubscriptionCreateView, self).get_form_kwargs()
-        kwargs.update({'journal': self.current_journal})
+        kwargs.update({'management_subscription': management_subscription})
         return kwargs
 
     def get_success_url(self):

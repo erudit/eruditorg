@@ -13,6 +13,7 @@ from erudit.test.factories import JournalFactory
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.subscription.models import JournalAccessSubscription
+from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
@@ -40,11 +41,11 @@ class TestIndividualJournalAccessSubscriptionListView(BaseEruditTestCase):
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
 
         plan = JournalManagementPlanFactory.create(max_accounts=10)
-        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
+        management_subscription = JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
 
         other_journal = JournalFactory.create(collection=self.collection)
         subscription_1 = JournalAccessSubscriptionFactory.create(
-            user=self.user, journal=self.journal)
+            user=self.user, journal=self.journal, journal_management_subscription=management_subscription)
         JournalAccessSubscriptionFactory.create(
             user=self.user, journal=other_journal)
 
@@ -75,12 +76,13 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
 
     def test_can_create_an_account_action_for_the_subscription(self):
         # Setup
+
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
             user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
 
         plan = JournalManagementPlanFactory.create(max_accounts=10)
-        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
+        subscription = JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
 
         post_data = {
             'email': faker.email(),
@@ -100,19 +102,24 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         tokens = AccountActionToken.objects.all()
         self.assertEqual(tokens.count(), 1)
         stoken = tokens.first()
-        self.assertEqual(stoken.content_object, self.journal)
+        self.assertEqual(stoken.content_object, subscription)
         self.assertEqual(stoken.email, post_data['email'])
         self.assertEqual(stoken.first_name, post_data['first_name'])
         self.assertEqual(stoken.last_name, post_data['last_name'])
 
     def test_cannot_allow_the_creation_of_subscription_if_the_plan_limit_has_been_reached(self):
         # Setup
-        plan = JournalManagementPlanFactory.create(code='test', max_accounts=3)
-        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
-        JournalAccessSubscriptionFactory.create(user=self.user, journal=self.journal)
-        token_1 = AccountActionTokenFactory.create(content_object=self.journal)
-        token_2 = AccountActionTokenFactory.create(content_object=self.journal)  # noqa
+
+        subscription = JournalManagementSubscriptionFactory.create(journal=self.journal, plan__max_accounts=3)
+
+        JournalAccessSubscriptionFactory.create(user=self.user, journal_management_subscription=subscription)
+        token_1 = AccountActionTokenFactory.create(content_object=subscription)
+        token_2 = AccountActionTokenFactory.create(content_object=subscription)  # noqa
+
+
+        IndividualSubscriptionAction().execute(token_1)
         token_1.consume(self.user)
+
 
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,

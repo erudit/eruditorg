@@ -19,8 +19,13 @@ class IndividualSubscriptionAction(AccountActionBase):
         return token.can_be_consumed and not self._subscription_exists(token, user)
 
     def execute(self, token):
-        JournalAccessSubscription.objects.create(
-            user=token.user, journal=token.content_object)
+        subscription = JournalAccessSubscription.objects.create(
+            user=token.user,
+            journal_management_subscription=token.content_object,
+        )
+
+        subscription.journals.add(token.content_object.journal)
+        subscription.save()
 
     def get_extra_context(self, token, user):
         return {
@@ -45,7 +50,7 @@ class IndividualSubscriptionAction(AccountActionBase):
         if user.is_authenticated():
             # Computes a boolean indicating if a subscription already exists for the current user.
             return JournalAccessSubscription.objects.filter(
-                user_id=user.id, journal_id=token.object_id).exists()
+                user_id=user.id, journal_management_subscription=token.object_id).exists()
         else:
             return False
 

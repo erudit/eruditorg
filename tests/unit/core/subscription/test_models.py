@@ -261,10 +261,10 @@ class TestJournalManagementSubscription(object):
         plan = JournalManagementPlanFactory.create(max_accounts=5)
         subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
 
-        AccountActionTokenFactory.create_batch(4, content_type=ContentType.objects.get_for_model(Journal), object_id=journal.id)
+        AccountActionTokenFactory.create_batch(4, content_object=subscription)
 
         assert not subscription.is_full
-        AccountActionTokenFactory.create_batch(4, content_type=ContentType.objects.get_for_model(Journal), object_id=journal.id)
+        AccountActionTokenFactory.create_batch(4, content_object=subscription)
         assert subscription.is_full
 
     def test_can_count_subscriptions_and_pending_subscriptions_to_know_if_its_full(self):
@@ -273,7 +273,7 @@ class TestJournalManagementSubscription(object):
         plan = JournalManagementPlanFactory.create(max_accounts=5)
         subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
 
-        AccountActionTokenFactory.create_batch(4, content_type=ContentType.objects.get_for_model(Journal), object_id=journal.id)
+        AccountActionTokenFactory.create_batch(4, content_object=subscription)
 
         assert not subscription.is_full
         JournalAccessSubscriptionFactory.create_batch(4, journal_management_subscription=subscription)

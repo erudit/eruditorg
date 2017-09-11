@@ -235,7 +235,7 @@ class JournalManagementSubscription(AbstractSubscription):
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
     def get_pending_subscriptions(self):
-        return AccountActionToken.pending_objects.get_for_object(self.journal)
+        return AccountActionToken.pending_objects.get_for_object(self)
 
     @property
     def is_full(self):
