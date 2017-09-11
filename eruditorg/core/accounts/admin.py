@@ -8,12 +8,18 @@ from .models import LegacyAccountProfile
 
 class LegacyAccountProfileAdmin(admin.ModelAdmin):
     search_fields = ('id', 'user__first_name', 'user__last_name', 'user__email', )
-    list_filter = ('user__is_active', )
+    list_filter = ('user__is_active', 'origin', )
     list_display = (
         '_email',
         '_first_name',
         '_last_name',
+        '_origin'
     )
+
+    def _origin(self, obj):
+        for origin in LegacyAccountProfile.ORIGIN_CHOICES:
+            if origin[0] == obj.origin:
+                return origin[1]
 
     def _email(self, obj):
         return obj.user.email
