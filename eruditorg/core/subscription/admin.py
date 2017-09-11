@@ -59,7 +59,9 @@ class SubscriptionJournalListFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        return queryset.filter(journals__code=self.value())
+        if self.value():
+            return queryset.filter(journals__code=self.value())
+        return queryset
 
 
 class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
@@ -75,10 +77,18 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
         }),
     ]
 
-    search_fields = ('organisation__name',)
-    inlines = [JournalAccessSubscriptionPeriodInline, InstitutionRefererInline]
+    def get_journal_management_subscription(self, obj):
+        if obj.journal_management_subscription:
+            return obj.journal_management_subscription.journal
+        return ""
 
-    list_display = ('pk', 'title', 'user', 'organisation', 'journal', 'collection', 'full_access', )
+    search_fields = ('organisation__name', 'user__email')
+    inlines = [JournalAccessSubscriptionPeriodInline, InstitutionRefererInline]
+    filter_horizontal = ('journals',)
+    list_display = (
+        'pk', 'title', 'user', 'organisation', 'get_journal_management_subscription',
+        'collection', 'full_access',
+    )
     list_display_links = ('pk', 'title', 'user', 'organisation', )
     list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter)
 
