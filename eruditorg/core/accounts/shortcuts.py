@@ -27,5 +27,4 @@ def get_or_create_legacy_user(username, email, hashed_password=None):
         except user_model.DoesNotExist:
             user = user_model.objects.create(username=username, email=email)
             user.password = hashed_password
-            user.save()
             return user, True
