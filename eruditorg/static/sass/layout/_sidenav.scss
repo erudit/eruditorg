@@ -29,7 +29,6 @@
           background: $coral-red;
           color: #FFF;
           text-indent: 5px;
-          @include fw-sans-medium();
         }
 
       }
@@ -54,7 +53,6 @@
         border-color: #000;
         background: #000;
         color: #FFF;
-        @include fw-sans-medium();
 
         &:hover, &:focus, &:active {
 

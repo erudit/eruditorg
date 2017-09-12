@@ -68,7 +68,6 @@
     display: block;
     padding: ($grid-gutter-width / 2) ($grid-gutter-width);
     border: 1px solid #000;
-    @include fw-sans-bold();
     background-color: #fff;
     .caret {
       float: right;
@@ -88,9 +87,6 @@
     li {
       margin: 0 !important;
       display: block !important;
-      &.selected {
-        @include fw-sans-bold();
-      }
     }
 
     a {

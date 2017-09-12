@@ -4,7 +4,7 @@
 
 
 footer#site-footer {
-  margin-top: $margin-vertical-default;
+  margin-top: 100px;
   position: relative;
   z-index: 2;
 
@@ -20,8 +20,7 @@ footer#site-footer {
     input[type="email"] {
       width: auto;
       border-width: 0;
-      padding-top: $padding-base-vertical - 1;
-      padding-bottom: $padding-base-vertical - 1;
+      height: 52px;
       @include fw-sans-italic();
       background-color: $light-grey;
     }
@@ -45,11 +44,6 @@ footer#site-footer {
       &.disabled {
         color: $mid-grey;
       }
-    }
-
-    .footer-nav--about,
-    .footer-nav--help {
-      @include fw-sans-medium();
     }
 
   }
@@ -90,7 +84,6 @@ footer#site-footer {
       margin-top: 1.75em;
       display: inline-block;
       font-size: 20px;
-      @include fw-sans-medium;
     }
 
   }

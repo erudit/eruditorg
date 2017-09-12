@@ -9,7 +9,6 @@
 .btn {
   @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, 1.15, 0);
   @include user-select(none);
-  @include fw-sans-medium;
   display: inline-block;
   margin-bottom: 0; // For input.btn
   text-align: center;
@@ -17,8 +16,10 @@
   touch-action: manipulation;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 2px solid #000;
+  border: 0;
   white-space: nowrap;
+  padding: 15px 25px;
+  border: 1px solid transparent;
   // icon
   .icon {
     font-size: 20px;

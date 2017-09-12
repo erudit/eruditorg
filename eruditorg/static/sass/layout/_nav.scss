@@ -39,7 +39,6 @@
     line-height: 18px;
     position: relative;
     color: #000;
-    @include fw-sans-medium();
 
     &:hover,
     &:active,
@@ -66,7 +65,6 @@
           text-decoration: none;
           padding-left: 0.75em;
           @include transition(padding 0.2s ease-out);
-          @include fw-sans-medium();
         }
       }
     }
@@ -114,12 +112,13 @@
 
       input[type="search"] {
         margin: 0;
-        border-width: 2px;
+        border-width: 1px;
         border-color: #fff;
         color: #fff;
         padding: 0 0.5em;
         background-color: transparent;
         width: 70%;
+        height: 42px;
         @include fw-sans-medium();
         @include placeholder(rgba(255, 255, 255, 0.75));
       }
@@ -129,7 +128,7 @@
         color: #fff;
         line-height: 1;
         height: 44px;
-        margin-left: -2px;
+        margin-left: -1px;
       }
 
       .close {
@@ -172,7 +171,6 @@
   .select2-selection--single {
     border: 0;
     font-size: 16px;
-    @include fw-sans-medium;
 
     .select2-selection__rendered {
       color: #000;
