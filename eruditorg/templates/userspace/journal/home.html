@@ -1,91 +1,80 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n staticfiles %}
 
-{% block title %}{% trans "Tableau de bord" %}{% endblock title %}
+{% block title %}{% trans "Tableau de bord" %} &ndash; {{ scope_current_journal.name }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:dashboard' %}">{% trans "Tableau de bord" %}</a></li>
-<li><a href="{% url 'userspace:dashboard' %}">{{ scope_current_journal.name }}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Tableau de bord" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Bienvenue dans la nouvelle version du Tableau de bord de votre revue sur Érudit&nbsp;!</p>
+
+<p>Anciennement appelé <em>Espace éditeur</em>, vous retrouverez dans le Tableau de bord tous les services et informations qui concernent la production et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des institutions abonnées, statistiques, rapports de redevances, etc.</p>
+
+<p>Certains services n'ont pas encore été intégrés dans ce nouvel espace, et vous serez donc redirigé vers les anciennes versions des pages.</p>
+
+<p>Vous pouvez consulter les guides d’utilisation du <a href="http://www.erudit.org/public/documents/guide_espaceediteur.pdf" target="_blank">Tableau de bord</a> et du <a href="http://www.erudit.org/public/documents/guide_depot.pdf" target="_blank">Dépôt de fichiers</a>, ou encore communiquer avec nous à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau de bord des éditeurs">edition@erudit.org</a> pour toute question.</p>
+
+<p><br>Bien cordialement, <br><br>L'équipe d'Érudit.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
 {% block content_main %}
-{% if journal_info %}
-<div class="journal-infos" role="tablist" aria-multiselectable="true">
+<h2><small>{% trans "Communiquer avec des membres de l’équipe Érudit" %}</small></h2>
+<ul class="unstyled row">
+  <li class="col-md-4">
+    <p>
+      <small>
+        {% blocktrans %}
+        Édition et production numérique&nbsp;:<br>
+        Hocine Chehab, <br>Chargé d’édition numérique<br>
+        <a href="mailto:hocine.chehab@erudit.org?subject=Tableau de bord des éditeurs">hocine.chehab@erudit.org</a><br>
+        <a href="tel:1-514-343-6111,44607">+1 514-343-6111 poste 44607</a>
+        {% endblocktrans %}
+      </small>
+    </p>
+  </li>
 
-  {% trans "Aucune information" as tab_empty_msg %}
+  <li class="col-md-4">
+    <p>
+      <small>
+        {% blocktrans %}
+        Abonnements, redevances et partenariats&nbsp;:<br>
+        Émilie Chouinard, <br>Chargée des partenariats<br>
+        <a href="mailto:emilie.chouinard@erudit.org?subject=Tableau de bord des éditeurs">emilie.chouinard@erudit.org</a><br>
+        <a href="tel:1-514-343-6111,16563">+1 514-343-6111 poste 16563</a>
+        {% endblocktrans %}
+      </small>
+    </p>
+  </li>
 
-  {% if journal_info.about %}
-  <section class="journal-info-block">
-    <h2>
-      {% trans "À propos" %}
-    </h2>
-    <section id="journal-info-about-content" class="akkordion-content akkordion-active">
-      {{ journal_info.about|default:tab_empty_msg|safe }}
-    </section>
-  </section>
-  {% endif %}
+  <li class="col-md-4">
+    <p>
+      <small>
+        {% blocktrans %}
+        Communications et promotion de votre revue numérique&nbsp;:<br>
+        Gwendal Henry, <br>Chargé de communication<br>
+        <a href="mailto:gwendal.henry@erudit.org?subject=Tableau de bord des éditeurs">gwendal.henry@erudit.org</a><br>
+        <a href="tel:1-514-343-6111,2723">+1 514-343-6111 poste 2723</a>
+        {% endblocktrans %}
+      </small>
+    </p>
+  </li>
 
-  {% if journal_info.contact %}
-  <section class="journal-info-block akkordion" role="tab" id="journal-info-contact" role="tabpanel">
-    <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-contact-content">
-      {% trans "Coordonnées" %}
-      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-    </h2>
-    <section id="journal-info-contact-content" class="akkordion-content" aria-labelledby="journal-info-contact">
-      {{ journal_info.contact|default:tab_empty_msg|safe }}
-    </section>
-  </section>
-  {% endif %}
-
-  {% if journal_info.editorial_policy %}
-  <section class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
-    <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
-      {% trans "Politique éditoriale" %}
-      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-    </h2>
-    <section id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
-      {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
-    </section>
-  </section>
-  {% endif %}
-
-  {% if journal_info.subscriptions %}
-  <section class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
-    <h2 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
-      {% trans "Abonnements" %}
-      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-    </h2>
-    <section id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
-      {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
-    </section>
-  </section>
-  {% endif %}
-
-  {% if journal_info.team %}
-  <section class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
-    <h2 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
-      {% trans "Équipe" %}
-      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-    </h2>
-    <section id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
-      {{ journal_info.team|default:tab_empty_msg|safe }}
-    </section>
-  </section>
-  {% endif %}
-
-  {% if journal_info.partners %}
-  <section class="journal-info-block akkordion" role="tab" id="journal-info-partners" role="tabpanel">
-    <h2 class="akkordion-title" href="#journal-info-partners-content" aria-expanded="false" aria-controls="journal-info-partners-content">
-      {% trans "Partenaires" %}
-      <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-    </h2>
-    <section id="journal-info-partners-content" class="akkordion-content" aria-labelledby="journal-info-partners">
-      {{ journal_info.partners|default:tab_empty_msg|safe }}
-    </section>
-  </section>
-  {% endif %}
-
-</div>
-{% endif %}
-<img src="{% url 'public:journal:journal_logo' scope_current_journal.code %}" alt="" class="img-responsive img-centered" />
+  <li>
+    <p>
+      <small>
+        {% blocktrans %}
+        Pour toutes autres questions, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau de bord des éditeurs">info@erudit.org</a>.
+        {% endblocktrans %}
+      </small>
+    </p>
+  </li>
+</ul>
 {% endblock content_main %}
