@@ -10,23 +10,27 @@
 <li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Dépôt de fichiers" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Cet espace vous permet d’envoyer vos fichiers de production et de vérifier leur statut&nbsp;: <em>non soumis</em>, <em>en attente de validation</em>, <em>à corriger</em> ou <em>validé et publié</em>.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
 {% block content_main %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-<header class="page-header-main">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>{% trans "Dépôt de fichiers" %}</h1>
-    </div>
-    <div class="col-md-4 text-right">
-      <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Déposer" %}</a>
-    </div>
-  </div>
-</header>
-
-<hr>
-
 {# List of past submissions #}
-<h2>{% trans 'Historique' %}</h2>
+<div class="row">
+  <div class="col-md-8">
+    <h2>{% trans 'Historique' %}</h2>
+  </div>
+  <div class="col-md-4 text-right">
+    <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Déposer" %}</a>
+  </div>
+</div>
 <div class="submissions">
   <ul class="submissions-header">
     <li class="row">
