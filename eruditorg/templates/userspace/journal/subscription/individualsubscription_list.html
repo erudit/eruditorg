@@ -1,5 +1,5 @@
 {% extends "userspace/journal/base.html" %}
-{% load i18n %}
+{% load i18n waffle_tags %}
 
 {% block title %}{% trans "Abonnements" %}{% endblock title %}
 
@@ -7,9 +7,20 @@
 <li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
 {% endblock breadcrumb %}
 
-{% block content_main %}
-<h1>{% trans "Abonnements" %}</h1>
+{% block section_title %}
+{% trans "Abonnements" %}
+{% endblock %}
 
+{% block section_intro %}
+<p>
+{% blocktrans %}
+Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant et mot de passe sur le site <em>rétro</em> Érudit pour accéder à la liste des institutions abonnées de votre revue.
+{% endblocktrans %}
+</p>
+{% endblock section_intro %}
+
+{% block content_main %}
+{% flag "NEW_USERSPACE" %}
 <ul class="tabs-group">
   <li class="tab active">
     <a href="">{% trans "Institutionnels" %}</a>
@@ -95,4 +106,10 @@
   </table>
 </section>
 {% endif %}
+{% else %}
+<br><br>
+<div>
+  <a href="http://{{ scope_current_journal.code }}.erudit.org/fr/rapabonnements" class="btn btn-primary" target="_blank">-->&nbsp;{% trans "Accéder" %}</a>
+</div>
+{% endflag %}
 {% endblock content_main %}

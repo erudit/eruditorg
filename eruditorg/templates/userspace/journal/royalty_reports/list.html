@@ -1,6 +1,6 @@
 {% extends "userspace/journal/base.html" %}
-{% load i18n staticfiles %}
-{% load rules %}
+{% load i18n rules staticfiles waffle_tags %}
+{% load  %}
 
 {% block title %}{% trans "Rapport de redevances" %}{% endblock title %}
 
@@ -8,8 +8,21 @@
 <li><a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}">{% trans "Rapports de redevances" %}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Rapports de redevances" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+  {% blocktrans %}
+  Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant et mot de passe sur le site <em>rétro</em> Érudit pour accéder aux rapports de redevances de votre revue.
+  {% endblocktrans %}
+</p>
+{% endblock section_intro %}
+
 {% block content_main %}
-<h2>{% trans "Rapports de redevances" %}</h2>
+{% flag "NEW_USERSPACE" %}
+
 <ul id="id_royalty_reports_list" class="row">
 {% for report in reports %}
   <li class="col-xs-12">
@@ -22,4 +35,10 @@
   </li>
 {% endfor %}
 </ul>
+{% else %}
+<br><br>
+<div>
+  <a href="http://{{ scope_current_journal.code }}.erudit.org/fr/rapabonnements" class="btn btn-primary" target="_blank">-->&nbsp;{% trans "Accéder" %}</a>
+</div>
+{% endflag %}
 {% endblock content_main %}
