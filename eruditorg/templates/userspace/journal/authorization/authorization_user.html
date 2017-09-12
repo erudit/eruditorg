@@ -9,9 +9,19 @@
 <li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% trans "Autorisations" %}</a></li>
 {% endblock breadcrumb %}
 
-{% block content_main %}
-<h1>{% trans "Autorisations" %}</h1>
+{% block section_title %}
+{% trans "Autorisations" %}
+{% endblock %}
 
+{% block section_intro %}
+{% blocktrans %}
+<p>Vous pouvez gérer ici les membres de votre équipe qui peuvent modifier la page À propos et déposer des fichiers de production.</p>
+
+<p>Pour donner accès à un nouveau membre de votre équipe dans les autorisations, vous devez envoyer son nom et son adresse courriel à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau de bord éditeur - Ajout d’un nouveau membre">edition@erudit.org</a>. Une fois cette étape accomplie, vous pourrez donner les autorisations à cette personne.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
+{% block content_main %}
 <ul class="authorizations-header">
   <li class="row">
     <span class="col-xs-5 col-xs-offset-2">{% trans "Usager" %}</span>
@@ -26,7 +36,7 @@
     {# Section title #}
     <div class="authorization-label">
       <h2 class="row">
-        <span class="col-xs-2">{% trans app_authorizations.label %}</span>
+        <span class="col-xs-6">{% trans app_authorizations.label %}</span>
       </h2>
     </div>
 
