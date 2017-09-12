@@ -1,0 +1,43 @@
+/**
+* Dashboard- (userspace-) specific styles
+*/
+
+.dashboard {
+  
+  p {
+
+    a {
+      color: #000;
+      display: inline-block;
+
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        color: #000;
+        border-bottom: 1px solid #000;
+        margin-top: -3px;
+      }
+
+    }
+
+  }
+
+  small {
+
+    a {
+      color: $coral-red;
+
+      &:after {
+        border: none;
+      }
+
+      &[href^="tel:"] {
+        color: #000;
+      }
+
+    }
+
+  }
+
+}
