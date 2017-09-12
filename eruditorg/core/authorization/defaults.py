@@ -22,13 +22,13 @@ class AuthorizationConfig(object):
     """
 
     can_edit_journal_information = AuthorizationDef(
-        'editor:can_edit_journal_information', _("Éditer l'à-propos"))
+        'editor:can_edit_journal_information', _("Modifier la page À propos"))
     """
     This authorization defines the ability to update journal information.
     """
 
     can_manage_issuesubmission = AuthorizationDef(
-        'editor:can_manage_issuesubmission', _('Dépôt de fichiers'))
+        'editor:can_manage_issuesubmission', _('Déposer des fichiers de production'))
     """
     This authorization defines the ability to handle issue submissions.
     """
@@ -40,14 +40,14 @@ class AuthorizationConfig(object):
     """
 
     can_manage_individual_subscription = AuthorizationDef(
-        'subscriptions:can_manage_individual_subscription', _('Abonnements'))
+        'subscriptions:can_manage_individual_subscription', _('Gérer les abonnements '))
     """
     This authorization defines the ability to handle the individual subscriptions to journals.
     """
 
     can_manage_organisation_subscription_ips = AuthorizationDef(
         'subscriptions:can_manage_organisation_subscription_ips',
-        _("Gestion des adresses IP de l'abonnement"))
+        _("Gérer les adresses IP de l’abonnement"))
     """
     This authorization defines the ability to handle the IPs of an organisation subscriptions to
     journals.
@@ -55,7 +55,7 @@ class AuthorizationConfig(object):
 
     can_manage_organisation_subscription_information = AuthorizationDef(
         'subscriptions:can_manage_organisation_subscription_information',
-        _("Gestion des informations d'un abonnement"))
+        _("Gérer les informations d’un abonnement"))
     """
     This authorization defines the ability to manage the information of an organisation
     subscription.
@@ -63,14 +63,14 @@ class AuthorizationConfig(object):
 
     can_manage_organisation_members = AuthorizationDef(
         'subscriptions:can_manage_organisation_members',
-        _("Gestion des membres d'un abonnement"))
+        _("Gérer les membres d’un abonnement"))
     """
     This authorization defines the ability to manage the members of an organisation.
     """
 
     can_consult_royalty_reports = AuthorizationDef(
         'royalty_reports:can_consult_royalty_reports',
-        _('Consultation des rapports de redevances'))
+        _('Consulter les rapports de redevances'))
     """
     This authorization defines the ability to consult the royalty reports.
     """
