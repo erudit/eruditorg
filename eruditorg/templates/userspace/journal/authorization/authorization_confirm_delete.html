@@ -8,21 +8,23 @@
 <li><a href="#">{% trans "Supprimer un accès" %}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Supprimer un accès" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+  {% blocktrans trimmed with name=object.user.get_full_name|default:object.user.username %}
+  Voulez-vous supprimer l’accès de <strong>{{ name }}</strong>&nbsp;?
+  {% endblocktrans %}
+</p>
+{% endblock section_intro %}
+
 {% block content_main %}
-<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-
-  <h1>{% trans "Supprimer un accès" %}</h1>
-
-  <p>
-    {% blocktrans trimmed with name=object.user.get_full_name|default:object.user.username %}
-    Voulez-vous supprimer l’accès de <strong>{{ name }}</strong>&nbsp;?
-    {% endblocktrans %}
-  </p>
-
+<div class="col-sm-8 col-md-6">
   <form action="" method="post">{% csrf_token %}
     <button type="submit" name="post" class="btn btn-primary">{% trans "Oui" %}</button>
-    <a href="{% url 'userspace:journal:authorization:list' %}" class="btn btn-secondary">{% trans "Non" %}</a>
+    <a href="{% url 'userspace:journal:authorization:list' %}" class="btn">{% trans "Non" %}</a>
   </form>
-
 </div>
 {% endblock content_main %}

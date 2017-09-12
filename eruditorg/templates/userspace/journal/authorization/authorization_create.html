@@ -10,16 +10,20 @@
 <li><a href="#">{% trans "Ajouter un accès" %}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Ajouter un accès" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+  {% blocktrans trimmed with authorization_label=authorization_label %}
+  Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation suivante&nbsp;: <strong>{{ authorization_label }}</strong>
+  {% endblocktrans %}
+</p>
+{% endblock section_intro %}
+
 {% block content_main %}
-<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-
-  <h1>{% trans "Ajouter un accès" %}</h1>
-
-  <p>
-    {% blocktrans trimmed with authorization_label=authorization_label %}
-    Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation suivante&nbsp;: <strong>{{ authorization_label }}</strong>
-    {% endblocktrans %}
-  </p>
+<div class="col-sm-8 col-md-6">
 
   <form method="post" action="">{% csrf_token %}
 
@@ -41,7 +45,7 @@
         {% for error in form.user.errors %}<p class="error">{{ error }}</p>{% endfor %}
       </div>
     </div>
-    
+
   </form>
 
 </div>
