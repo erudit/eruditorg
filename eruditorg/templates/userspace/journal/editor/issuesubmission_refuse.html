@@ -9,29 +9,32 @@
 <li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Demande de corrections" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+  {{ question }}
+</p>
+{% endblock section_intro %}
+
 {% block content_main %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{% trans "Demande de corrections" %}</h3>
-  </div>
-  <div class="panel-body">
-    <form action="" method="post">{% csrf_token %}
-      {% if comment_form %}
-      <div class="row">
-        <div id="div_id_{{ comment_form.comment.html_name }}">
-          <div class="controls">
-            <label class="control-label" for="{{ comment_form.comment.auto_id }}">{{ comment_form.comment.label }}</label>
-            {{ comment_form.comment|add_class:'form-control' }}
-            {% for error in comment_form.comment.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
-        </div>
+<form action="" method="post">{% csrf_token %}
+  {% if comment_form %}
+  <div class="row">
+    <div id="div_id_{{ comment_form.comment.html_name }}">
+      <div class="controls">
+        <label class="control-label" for="{{ comment_form.comment.auto_id }}">{{ comment_form.comment.label }}</label>
+        {{ comment_form.comment|add_class:'form-control' }}
+        {% for error in comment_form.comment.errors %}<p class="error">{{ error }}</p>{% endfor %}
       </div>
-      <br />
-      {% endif %}
-      <input type="hidden" name="post" value="yes" />
-      <input type="submit" value="{% trans "Envoyer" %}" class="btn btn-primary" />
-      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
-    </form>
+    </div>
   </div>
-</div>
+  <br />
+  {% endif %}
+  <input type="hidden" name="post" value="yes" />
+  <input type="submit" value="{% trans "Envoyer" %}" class="btn btn-primary" />
+  <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
+</form>
 {% endblock content_main %}

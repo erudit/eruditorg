@@ -9,23 +9,25 @@
 <li><a href="#">{{ issue }}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{{ issue }}
+{% endblock %}
+
 {% block content_main %}
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
-<header class="page-header-main">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>{{ issue }}</h1>
-    </div>
-    {% if issue.is_draft %}
-    <div class="col-md-4 text-right">
-      <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-secondary">{% trans "Modifier" %}</a>
-    </div>
-    {% endif %}
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>{% trans "Informations du numéro" %}</h2>
   </div>
-</header>
+  {% if issue.is_draft %}
+  <div class="col-md-4 text-right">
+    <a href="{% url 'userspace:journal:editor:update' scope_current_journal.pk issue.pk %}" class="btn btn-secondary">{% trans "Modifier" %}</a>
+  </div>
+  {% endif %}
+</div>
 
 {# Issue submission metadata #}
-<h2>{% trans "Informations du numéro" %}</h2>
 <dl class="row submission-detail-metadata">
   <dt class="col-sm-3">{% trans "Statut" %}</dt>
   <dd class="col-sm-9">

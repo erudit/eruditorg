@@ -9,39 +9,39 @@
 <li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Approbation des fichiers" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans trimmed with question=question %}
+<h2>Rappel</h2>
+<ul>
+  <li>Faire le backup des fichiers</li>
+  <li>Ajouter le numéro au calendrier de production</li>
+  <li>Assigner le numéro à un ou une technicienne</li>
+</ul>
+{% endblocktrans %}
+{% endblock section_intro %}
+
 {% block content_main %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{% trans "Approbation des fichiers" %}</h3>
-  </div>
-  <div class="panel-body">
-    <div class="warning-message">
-      {% blocktrans trimmed with question=question %}
-      <p>Rappel</p>
-      <ul>
-        <li>Faire le backup des fichiers</li>
-        <li>Ajouter le numéro au calendrier de production</li>
-        <li>Assigner le numéro à un ou une technicienne</li>
-      </ul>
-      {% endblocktrans %}
-    </div>
-    <form action="" method="post">{% csrf_token %}
-      {% if comment_form %}
-      <div class="row">
-        <div id="div_id_{{ comment_form.comment.html_name }}">
-          <div class="controls">
-            <label class="control-label" for="{{ comment_form.comment.auto_id }}">{{ comment_form.comment.label }}</label>
-            {{ comment_form.comment|add_class:'form-control' }}
-            {% for error in comment_form.comment.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
+<div class="col-sm-8 col-md-6">
+  <form action="" method="post">{% csrf_token %}
+    {% if comment_form %}
+    <div class="row">
+      <div id="div_id_{{ comment_form.comment.html_name }}">
+        <div class="controls">
+          <label class="control-label" for="{{ comment_form.comment.auto_id }}">{{ comment_form.comment.label }}</label>
+          {{ comment_form.comment|add_class:'form-control' }}
+          {% for error in comment_form.comment.errors %}<p class="error">{{ error }}</p>{% endfor %}
         </div>
       </div>
-      <br />
-      {% endif %}
-      <input type="hidden" name="post" value="yes" />
-      <input type="submit" value="{% trans "Approuver" %}" class="btn btn-primary" />
-      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
-    </form>
-  </div>
+    </div>
+    <br />
+    {% endif %}
+    <input type="hidden" name="post" value="yes" />
+    <input type="submit" value="{% trans "Approuver" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "Retour" %}</a>
+  </form>
 </div>
 {% endblock content_main %}

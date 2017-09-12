@@ -32,40 +32,35 @@
 {% endif %}
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% if object.pk %}
+  {% trans 'Modifier le numéro&nbsp;:' %}<br>
+  {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n<sup>o</sup>" %} {{ object.number }}
+{% else %}
+  {% trans "Déposer des fichiers de production" %}
+{% endif %}
+{% endblock %}
+
+{% block section_intro %}
+<p>{% trans "Afin de réduire les délais de production de vos numéros et ainsi réduire les coûts qui y sont reliés, ne pas oublier de&nbsp;:" %}</p>
+<ol>
+  <li>{% trans "Incorporer les polices des fichiers PDF;" %}</li>
+  <li>{% trans "Séparer les fichiers PDF article par article;" %}</li>
+  <li>{% trans "Nommer les articles selon leur ordre d’apparition dans le numéro (<em>article1</em>, <em>article2</em>&hellip;);" %}</li>
+  <li>{% trans "Nommer les figures et tableaux selon le numéro de l’article et leur ordre d’apparition dans l'article (<em>image01-01.jpg</em>);" %}</li>
+  <li>{% trans "Supprimer les marques de coupes dans les fichiers PDF;" %}</li>
+  <li>{% trans "Compresser tous les fichiers dans un dossier ZIP avant de le déposer." %}</li>
+</ol>
+<br>
+<p>{% trans "Pour que vos articles s’affichent correctement sur la plateforme, veuillez effectuer les balisages suivants lors de la mise en page&nbsp;:" %}</p>
+<ul>
+  <li>{% trans "Baliser les liens et les courriels dans les affiliations, le corps du texte et les références bibliographiques;" %}</li>
+  <li>{% trans "Lier les appels de notes aux notes de bas de page." %}</li>
+</ul>
+{% endblock section_intro %}
+
+
 {% block content_main %}
-<header class="page-header-main">
-  <h1>
-    {% if object.pk %}
-      {% trans 'Modifier le numéro&nbsp;:' %}<br>
-      {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n<sup>o</sup>" %} {{ object.number }}
-    {% else %}
-      {% trans "Déposer des fichiers de production" %}
-    {% endif %}
-  </h1>
-  <div class="row page-intro">
-    <div class="col-md-6">
-      <p>{% trans "Afin de réduire les délais de production de vos numéros et ainsi réduire les coûts qui y sont reliés, ne pas oublier de&nbsp;:" %}</p>
-      <ol>
-        <li>{% trans "Incorporer les polices des fichiers PDF;" %}</li>
-        <li>{% trans "Séparer les fichiers PDF article par article;" %}</li>
-        <li>{% trans "Nommer les articles selon leur ordre d’apparition dans le numéro (<em>article1</em>, <em>article2</em>&hellip;);" %}</li>
-        <li>{% trans "Nommer les figures et tableaux selon le numéro de l’article et leur ordre d’apparition dans l'article (<em>image01-01.jpg</em>);" %}</li>
-        <li>{% trans "Supprimer les marques de coupes dans les fichiers PDF;" %}</li>
-        <li>{% trans "Compresser tous les fichiers dans un dossier ZIP avant de le déposer." %}</li>
-      </ol>
-    </div>
-    <div class="col-md-6">
-      <p>{% trans "Pour que vos articles s’affichent correctement sur la plateforme, veuillez effectuer les balisages suivants lors de la mise en page&nbsp;:" %}</p>
-      <ul>
-        <li>{% trans "Baliser les liens et les courriels dans les affiliations, le corps du texte et les références bibliographiques;" %}</li>
-        <li>{% trans "Lier les appels de notes aux notes de bas de page." %}</li>
-      </ul>
-    </div>
-  </div>
-</header>
-
-<hr>
-
 {% has_perm 'editor.manage_issuesubmission' request.user scope_current_journal as can_manage_issuesubmission %}
 <form class="row form-vertical" method="post">{% csrf_token %}
   {% if form.errors %}

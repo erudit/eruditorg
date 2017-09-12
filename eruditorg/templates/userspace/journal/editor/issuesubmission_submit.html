@@ -2,35 +2,39 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{{ question }}{% endblock title %}
+{% block title %}{% trans "Transmission finale des fichiers" %}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>
-<li><a href="#">{{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
+<li><a href="#">{% trans 'Soumettre' %} {{ object.year }}, {% if object.volume %}{% trans "vol." %} {{ object.volume }},{% endif %} {% trans "n°" %} {{ object.number }}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "Transmission finale des fichiers" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+  {{ question }}
+</p>
+{% endblock section_intro %}
+
 {% block content_main %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{% trans "Transmission finale des fichiers" %}</h3>
-  </div>
-  <div class="panel-body">
-    <div class="warning-message"><p>{{ question }}</p></div>
-    <form action="" method="post">{% csrf_token %}
-      {% if incomplete_files %}
-      <p>
-        {% trans "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas envoyés à l'équipe de production:" %}&nbsp;
-        <ul>
-          {% for f in incomplete_files %}
-          <li><p>{{ f.get_filename }}</p></li>
-          {% endfor %}
-        </ul>
-      </p>
-      {% endif %}
-      <input type="hidden" name="post" value="yes" />
-      <input type="submit" value="{% trans "Yes" %}" class="btn btn-primary" />
-      <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn btn-link">{% trans "No" %}</a>
-    </form>
-  </div>
+<div class="col-sm-8 col-md-6">
+  <form action="" method="post">{% csrf_token %}
+    {% if incomplete_files %}
+    <p>
+      {% trans "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas envoyés à l'équipe de production:" %}&nbsp;
+      <ul>
+        {% for f in incomplete_files %}
+        <li><p>{{ f.get_filename }}</p></li>
+        {% endfor %}
+      </ul>
+    </p>
+    {% endif %}
+    <input type="hidden" name="post" value="yes" />
+    <input type="submit" value="{% trans "Yes" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk object.pk %}" class="btn">{% trans "No" %}</a>
+  </form>
 </div>
 {% endblock content_main %}
