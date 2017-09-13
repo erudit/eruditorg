@@ -906,10 +906,10 @@ class JournalInformation(models.Model):
     # Information fields
     about = models.TextField(verbose_name=_('Revue'), blank=True, null=True)
     editorial_policy = models.TextField(
-        verbose_name=_('Politique éditoriale'), blank=True, null=True)
+        verbose_name=_('Politiques de la revue'), blank=True, null=True)
     subscriptions = models.TextField(verbose_name=_('Abonnements'), blank=True, null=True)
     team = models.TextField(verbose_name=_('Équipe'), blank=True, null=True)
-    contact = models.TextField(verbose_name=_('Contact'), blank=True, null=True)
+    contact = models.TextField(verbose_name=_('Coordonnées'), blank=True, null=True)
     partners = models.TextField(verbose_name=_('Partenaires'), blank=True, null=True)
 
     class Meta:
