@@ -157,6 +157,28 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         middleware.process_response(request, HttpResponse())
         assert mock_log.info.call_count == 1
 
+    @unittest.mock.patch('core.subscription.middleware.logger')
+    def test_do_not_log_requests_in_case_of_ip_address_and_referer(self, mock_log):
+        article = EmbargoedArticleFactory()
+
+        # Create a subscription that has both an ip address range and a referer
+        ip_subscription = JournalAccessSubscriptionFactory(
+            journal=article.issue.journal,
+            post__valid=True,
+            post__ip_start='1.1.1.1', post__ip_end='1.1.1.1',
+            post__referers=['http://umontreal.ca']
+        )
+
+        request = get_anonymous_request()
+        request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+        assert mock_log.info.call_count == 0
+        request.subscriptions.set_active_subscription_for(article=article)
+        middleware.process_response(request, HttpResponse())
+        assert mock_log.info.call_count == 0
+
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_in_session(self):
         # Setup
         request = get_anonymous_request()
