@@ -109,27 +109,35 @@
               {% trans "Validé" as status_prefix %}
             {% endif %}
             {% with prefix=status_prefix %}
-            {{ prefix }}
+            <em>{{ prefix }}</em>.
             {% endwith %}
+            {% if track.files_version and track.files_version.submissions.exists %}
+            {% trans "Fichiers&nbsp;:" %}
+            {% endif %}
           </p>
 
           {% if track.files_version and track.files_version.submissions.exists %}
-          <p>
-            {% trans "Fichiers&nbsp;:" %}
-            {% for f in track.files_version.submissions.all %}
-              {% if f.is_complete %}
-                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">{{ f.get_filename }}</a>
-              {% else %}
+          <ul>
+          {% for f in track.files_version.submissions.all %}
+            {% if f.is_complete %}
+              <li class="submission-file">
+                <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">
+                  {{ f.get_filename }}&nbsp;&nbsp;<span class="ion-ios-download-outline"></span>
+                </a>
+              </li>
+            {% else %}
+              <li class="submission-file">
                 {{ f.get_filename }} ({% trans "partiellement téléversé" %})
-              {% endif %}
-            {% endfor %}
-          </p>
+              </li>
+            {% endif %}
+          {% endfor %}
+          </ul>
           {% endif %}
         </div>
 
         <div class="col-sm-5">
           {% if track.comment %}
-          <p>{{ track.comment }}</p>
+          <p><em>{{ track.comment }}</em></p>
           {% endif %}
         </div>
       </div>

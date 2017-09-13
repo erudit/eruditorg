@@ -44,7 +44,7 @@
     {% with issue_submission.get_status_code_display as status %}
     <li class="row submissions-item">
       <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
-         class="clearfix">
+         class="clearfix submission-detail-link">
         <span class="col-sm-4">{{ issue_submission }}</span>
         <span class="col-sm-4">{{ issue_submission.date_created|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-4">
