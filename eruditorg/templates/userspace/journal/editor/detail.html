@@ -58,7 +58,8 @@
 
 {# Uploaded files list #}
 <h2>{% trans "Fichiers" %}</h2>
-{% if track.status == 'D' %}
+
+{% if issue.status == 'D' %}
   <ul>
   {% if issue.last_files_version.submissions.exists %}
     {% for f in issue.last_files_version.submissions.all %}
