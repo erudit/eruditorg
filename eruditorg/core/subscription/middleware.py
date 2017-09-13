@@ -72,7 +72,7 @@ class SubscriptionMiddleware(object):
                 referer_url=request.META.get('HTTP_REFERER'),
                 code=response.status_code,
                 size="",
-                referer_access=referer
+                referer_access=referer.referer
             ))
 
         return response
