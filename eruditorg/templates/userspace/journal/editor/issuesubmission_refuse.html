@@ -14,9 +14,11 @@
 {% endblock %}
 
 {% block section_intro %}
+{% if question %}
 <p>
   {{ question }}
 </p>
+{% endif %}
 {% endblock section_intro %}
 
 {% block content_main %}
