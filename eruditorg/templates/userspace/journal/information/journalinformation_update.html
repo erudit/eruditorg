@@ -1,7 +1,5 @@
 {% extends "userspace/journal/base.html" %}
-{% load i18n %}
-{% load widget_tweaks %}
-{% load waffle_tags %}
+{% load i18n widget_tweaks waffle_tags %}
 
 {% block title %}{% trans "À propos" %}{% endblock title %}
 
@@ -13,8 +11,18 @@
 <li><a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}">{% trans "À propos" %}</a></li>
 {% endblock breadcrumb %}
 
+{% block section_title %}
+{% trans "À propos de la revue" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>La page <em>À propos</em> est la vitrine de votre revue sur Érudit&nbsp;: c’est ici que vous pourrez présenter votre publication, sa ligne éditoriale, son équipe, bref, tous les éléments que vous considérez importants. Il est ainsi recommandé de rédiger du contenu pour chacune des sections, tant en français qu’en anglais.</p>
+<p>Cette page sera consultée par des lecteurs qui souhaiteront mieux connaître votre revue, mais aussi par de potentiels auteurs, des agrégateurs et des bibliothécaires.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
 {% block content_main %}
-<h1>{% trans "À propos de la revue&nbsp;:" %} {{ scope_current_journal.name }}</h1>
 <ul class="tabs-group">
   {% for langcode, langname in LANGUAGES %}
   <li class="tab {% if langcode == selected_language %}active{% endif %}">
@@ -22,7 +30,7 @@
   </li>
   {% endfor %}
 </ul>
-<form  class="col-xs-12 form-vertical"
+<form  class="form-vertical"
        method="post"
        action="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ selected_language }}">{% csrf_token %}
   {% if form.non_field_errors %}
@@ -82,12 +90,15 @@
   </fieldset>
   <hr>
   {% endflag %}
+
   {% for field in form %}
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
     <h2><label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label></h2>
+    {% if field.help_text %}
     <div class="row">
-      <p class="col-md-9">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas justo quam, tempor vitae pretium in, efficitur at urna. Vivamus vestibulum ullamcorper pretium. Integer elit velit, semper sit amet aliquam vitae, luctus non ligula. Nulla facilisi.</p>
+      <p class="col-md-10">{{ field.help_text }}</p>
     </div>
+    {% endif %}
     {{ field|add_class:'form-control' }}
     {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
   </fieldset>

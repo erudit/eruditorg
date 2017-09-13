@@ -33,7 +33,7 @@ class JournalInformationUpdateView(
     template_name = 'userspace/journal/information/journalinformation_update.html'
 
     def get_title(self):
-        return _("Éditer une revue")
+        return _("À propos")
 
     @property
     def selected_language(self):

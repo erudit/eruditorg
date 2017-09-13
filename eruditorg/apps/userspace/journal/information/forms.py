@@ -3,6 +3,7 @@
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.forms.models import fields_for_model
+from django.utils.translation import gettext as _
 
 from erudit.models import JournalInformation
 
@@ -32,12 +33,47 @@ class JournalInformationForm(forms.ModelForm):
 
         # Inserts the translatable fields into the form fields.
         self.fields.update(
-            fields_for_model(self.Meta.model, fields=self.i18n_field_names,
-                             labels=i18n_fields_label, widgets=i18n_field_widgets))
+            fields_for_model(
+                self.Meta.model,
+                fields=self.i18n_field_names,
+                labels=i18n_fields_label,
+                widgets=i18n_field_widgets,
+                help_texts=self.i18n_field_help_texts,
+            )
+        )
 
     @property
     def i18n_field_names(self):
         return [self.get_i18n_field_name(fname) for fname in self.i18n_field_bases]
+
+    @property
+    def i18n_field_help_texts(self):
+        return {
+            self.get_i18n_field_name('about'): _("Décrivez les objectifs, \
+            les champs d'étude et l’historique de votre revue. Vous pouvez \
+            également y présenter l’éditeur (société savante, département, \
+            groupe de recherche) et votre calendrier de publication. "),
+            self.get_i18n_field_name('editorial_policy'): _("Présentez la \
+            politique éditoriale, le processus de révision par les pairs, \
+            la politique de droits d’auteur, incluant votre licence de \
+            diffusion; dans le cas d’une revue en libre accès diffusée sous \
+            une licence Creative Commons, vous pouvez insérer un lien vers le \
+            site de la licence. Vous pouvez également y présenter le contrat \
+            auteur-revue s’il y a lieu, la politique anti-plagiat, ainsi que \
+            les instructions aux auteurs pour la soumission d’articles à la \
+            revue."),
+            self.get_i18n_field_name('team'): _("Décrivez le comité éditorial, \
+            le conseil d’administration, le comité scientifique \
+            international (incluant l’affiliation institutionnelle de chacun \
+            de ses membres)."),
+            self.get_i18n_field_name('subscriptions'): _("Décrivez les \
+            modalités d’abonnements numérique et papier de votre revue \
+            (coordonnées de la personne-ressource). "),
+            self.get_i18n_field_name('partners'): _("Présentez les partenaires \
+            de votre revue (Organismes subventionnaires, départements ou \
+            associations) qui soutiennent votre revue. Vous pouvez insérer le \
+            logo de ces partenaires et/ou un lien vers leur site."),
+        }
 
     def get_i18n_field_name(self, fname):
         return fname + '_' + self.language_code
