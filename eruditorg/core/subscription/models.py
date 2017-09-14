@@ -242,11 +242,11 @@ class JournalManagementPlan(models.Model):
     """ Defines the limits of the possibilities provided by a journal management subscription. """
     title = models.CharField(max_length=255, verbose_name=_('Titre'), blank=True, null=True)
     code = models.SlugField(max_length=100, unique=True, verbose_name=_('Code'))
-    max_accounts = models.PositiveSmallIntegerField(verbose_name=_('Maximum de comptes'))
+    max_accounts = models.PositiveSmallIntegerField(verbose_name=_('Nombre de comptes'))
 
     class Meta:
-        verbose_name = _("Forfait de gestion d'une revue")
-        verbose_name_plural = _("Forfaits de gestion de revues")
+        verbose_name = _("Forfait d'abonnements individuels")
+        verbose_name_plural = _("Forfaits d'abonnements individuels")
 
     def __str__(self):
         return self.code if not self.title else self.title
