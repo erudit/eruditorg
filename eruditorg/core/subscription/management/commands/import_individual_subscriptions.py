@@ -51,7 +51,7 @@ class Command(BaseCommand):
                 organisation, _ = Organisation.objects.get_or_create(name=organisation)
                 access, created = JournalAccessSubscription.objects.get_or_create(
                     user=user,
-                    organisation=organisation
+                    sponsor=organisation
                 )
                 logger.info("Created for organisation: {}".format(organisation))
                 return access, created
