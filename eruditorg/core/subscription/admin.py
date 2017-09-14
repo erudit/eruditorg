@@ -82,14 +82,19 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
             return obj.journal_management_subscription.journal
         return ""
 
+    def get_user(self, obj):
+        if obj.user:
+            return "{} ({})".format(obj.user.username, obj.user.email)
+        return ""
+
     search_fields = ('organisation__name', 'user__email')
     inlines = [JournalAccessSubscriptionPeriodInline, InstitutionRefererInline]
     filter_horizontal = ('journals',)
     list_display = (
-        'pk', 'title', 'user', 'organisation', 'get_journal_management_subscription',
+        'pk', 'title', 'get_user', 'organisation', 'get_journal_management_subscription',
         'collection', 'full_access',
     )
-    list_display_links = ('pk', 'title', 'user', 'organisation', )
+    list_display_links = ('pk', 'title', 'get_user', 'organisation', )
     list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter)
 
 
