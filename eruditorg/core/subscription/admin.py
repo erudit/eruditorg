@@ -73,7 +73,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
             'fields': ('user', 'organisation', ),
         }),
         (_('Revue(s) cibles'), {
-            'fields': ('journal', 'journals', 'collection', 'full_access', ),
+            'fields': ('journals', 'collection', 'full_access', ),
         }),
     ]
 
