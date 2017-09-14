@@ -17,7 +17,7 @@
         display: block;
         padding: 20px 10px;
         border-bottom: 1px solid $mid-grey;
-        @include transition(text-indent 50ms ease-in);
+        @include transition(padding-left 50ms ease-in);
 
         &::before {
           content: "";
@@ -28,7 +28,20 @@
           border-color: $coral-red;
           background: $coral-red;
           color: #FFF;
-          text-indent: 5px;
+          padding-left: 15px;
+        }
+
+        &.disabled {
+          color: $dark-grey;
+          cursor: default;
+
+          &:hover, &:focus, &:active {
+            border-color: $mid-grey;
+            background: none;
+            color: $dark-grey;
+            padding-left: 10px;
+          }
+
         }
 
       }
@@ -44,7 +57,7 @@
 
       .sidenav-label {
         font-size: 16px;
-        display: inline-block;
+        display: inline;
         margin: 0;
         letter-spacing: normal;
       }
