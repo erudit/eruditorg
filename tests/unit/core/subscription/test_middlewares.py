@@ -150,6 +150,9 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         middleware.process_response(request, HttpResponse())
         assert mock_log.info.call_count == 1
 
+        log_args = mock_log.info.call_args[0][0]
+        assert len(log_args) - (len(request.META['HTTP_REFERER']) + log_args.rindex(request.META['HTTP_REFERER'])) == 0
+
         request = get_anonymous_request()
         request.META['HTTP_REFERER'] = 'http://www.no-referer.ca'
 
