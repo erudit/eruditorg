@@ -1,6 +1,8 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n staticfiles %}
 
+{% block body_id %}dashboard-home{% endblock body_id %}
+
 {% block title %}{% trans "Tableau de bord" %} &ndash; {{ scope_current_journal.name }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
@@ -15,18 +17,18 @@
 {% blocktrans %}
 <p>Bienvenue dans la nouvelle version du Tableau de bord de votre revue sur Érudit&nbsp;!</p>
 
-<p>Anciennement appelé <em>Espace éditeur</em>, vous retrouverez dans le Tableau de bord tous les services et informations qui concernent la production et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des institutions abonnées, statistiques, rapports de redevances, etc.</p>
+<p>Anciennement appelé <em>Espace éditeur</em>, le Tableau de bord vous donne accès à tous les services et informations qui concernent la production et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des institutions abonnées, statistiques, rapports de redevances, etc.</p>
 
-<p>Certains services n'ont pas encore été intégrés dans ce nouvel espace, et vous serez donc redirigé vers les anciennes versions des pages.</p>
+<p>Certains services n’ont pas encore été intégrés dans ce nouvel espace, et vous serez donc redirigé vers les anciennes versions des pages.</p>
 
 <p>Vous pouvez consulter les guides d’utilisation de <a href="http://www.erudit.org/public/documents/guide-editeur-a_propos.pdf" target="_blank">l’À propos</a> et <a href="http://www.erudit.org/public/documents/guide-editeur-depot.pdf" target="_blank">du Dépôt de fichiers</a>, ou encore communiquer avec nous à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau de bord des éditeurs">edition@erudit.org</a> pour toute question.</p>
 
-<p><br>Bien cordialement, <br><br>L'équipe d'Érudit.</p>
+<p><br>Bien cordialement, <br><br>L’équipe d’Érudit.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
 {% block content_main %}
-<h2><small>{% trans "Communiquer avec des membres de l’équipe Érudit" %}</small></h2>
+<h2><small>{% trans "Communiquer avec des membres de l’équipe d’Érudit" %}</small></h2>
 <ul class="unstyled row">
   <li class="col-md-4">
     <p>
