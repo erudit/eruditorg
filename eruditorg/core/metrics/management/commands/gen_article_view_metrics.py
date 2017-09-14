@@ -55,7 +55,6 @@ class Command(BaseCommand):
         for i in range(number):
             article = random.choice(articles)
             subscription = JournalAccessSubscription.objects.filter(
-                Q(full_access=True) |
                 Q(journal=article.issue.journal) |
                 Q(journals__id=article.issue.journal_id),
                 organisation__isnull=False).order_by('?').first()

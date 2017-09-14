@@ -73,7 +73,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
             'fields': ('user', 'organisation', ),
         }),
         (_('Revue(s) cibles'), {
-            'fields': ('journals', 'collection', 'full_access', ),
+            'fields': ('journals', 'collection', ),
         }),
     ]
 
@@ -92,7 +92,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     filter_horizontal = ('journals',)
     list_display = (
         'pk', 'title', 'get_user', 'organisation', 'get_journal_management_subscription',
-        'collection', 'full_access',
+        'collection',
     )
     list_display_links = ('pk', 'title', 'get_user', 'organisation', )
     list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter)

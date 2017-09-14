@@ -96,7 +96,6 @@ class JournalAccessSubscription(AbstractSubscription):
         Collection, verbose_name=_('Collection'), blank=True, null=True, related_name='+')
     journals = models.ManyToManyField(
         Journal, verbose_name=_('Revues'), related_name='+', blank=True)
-    full_access = models.BooleanField(default=False, verbose_name=_('Accès complet'))
 
     # The subscription can be sponsored by a specific organisation
     sponsor = models.ForeignKey(
@@ -116,8 +115,6 @@ class JournalAccessSubscription(AbstractSubscription):
             return '{} - {}'.format(dest, self.journal)
         elif self.collection_id:
             return '{} - {}'.format(dest, self.collection)
-        elif self.full_access:
-            return _('{} - Accès complet').format(dest)
         return _('{} - Accès multiples').format(dest)
 
     @cached_property
@@ -130,6 +127,8 @@ class JournalAccessSubscription(AbstractSubscription):
     def provides_access_to(self, article=None, issue=None, journal=None):
         """ Returns if the subscription has access to the given article, issue
          or journal"""
+        # FIXME check the journals of the collection
+
         if not any((article, issue, journal,)):
             raise ValueError("One of article, issue, journal must be specified.")
 
@@ -137,9 +136,6 @@ class JournalAccessSubscription(AbstractSubscription):
             journal = article.issue.journal
         elif issue:
             journal = issue.journal
-
-        if self.full_access:
-            return True
 
         if self.journal == journal:
             return True
@@ -150,8 +146,6 @@ class JournalAccessSubscription(AbstractSubscription):
 
     def get_journals(self):
         """ Returns the Journal instances targetted by the subscription. """
-        if self.full_access:
-            return Journal.objects.all()
 
         journal_ids = []
         if self.journal_id:

@@ -48,13 +48,11 @@ class TestJournalAccessSubscription(EruditTestCase):
 
     def test_knows_its_underlying_journals(self):
         # Setup
-        subscription_1 = JournalAccessSubscriptionFactory.create(full_access=True)
         subscription_2 = JournalAccessSubscriptionFactory.create(journal=self.journal)
         subscription_3 = JournalAccessSubscriptionFactory.create(collection=self.collection)
         subscription_4 = JournalAccessSubscriptionFactory.create()
         subscription_4.journals.add(self.journal)
         # Run & check
-        assert list(subscription_1.get_journals()) == list(Journal.objects.all())
         assert list(subscription_2.get_journals()) == [self.journal, ]
         assert list(subscription_3.get_journals()) == [self.journal, ]
         assert list(subscription_4.get_journals()) == [self.journal, ]
