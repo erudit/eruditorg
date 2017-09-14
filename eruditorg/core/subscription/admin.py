@@ -67,7 +67,7 @@ class SubscriptionJournalListFilter(admin.SimpleListFilter):
 class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
-            'fields': ('title', 'comment', 'sponsor', ),
+            'fields': ('sponsor', ),
         }),
         (_('Bénéficiaire'), {
             'fields': ('user', 'organisation', ),
@@ -91,21 +91,21 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     inlines = [JournalAccessSubscriptionPeriodInline, InstitutionRefererInline]
     filter_horizontal = ('journals',)
     list_display = (
-        'pk', 'title', 'get_user', 'organisation', 'get_journal_management_subscription',
+        'pk', 'get_user', 'organisation', 'get_journal_management_subscription',
         'collection',
     )
-    list_display_links = ('pk', 'title', 'get_user', 'organisation', )
+    list_display_links = ('pk', 'get_user', 'organisation', )
     list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter)
 
 
 class JournalManagementPlanAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'code', 'title', )
+    list_display = ('pk', 'code', )
     list_display_links = ('pk', 'code', )
 
 
 class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'journal', 'plan', )
-    list_display_links = ('pk', 'title', 'journal', )
+    list_display = ('pk', 'journal', 'plan', )
+    list_display_links = ('pk', 'journal', )
 
 
 admin.site.register(InstitutionIPAddressRange, InstitutionIPAddressRangeAdmin)

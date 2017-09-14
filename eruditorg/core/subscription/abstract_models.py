@@ -8,10 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 
 class AbstractSubscription(models.Model):
     """ An abstract model that can be used to define a Subscription-like model. """
-    title = models.CharField(max_length=120, verbose_name=_('Titre'), blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date de création'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('Date de modification'))
-    comment = models.TextField(verbose_name=_('Commentaire'), blank=True, null=True)
 
     class Meta:
         abstract = True

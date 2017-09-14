@@ -76,11 +76,11 @@ class JournalAccessSubscription(AbstractSubscription):
     """
     # The subscription can be associated either with a user or an organisation.
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'), blank=True, null=True)
+        settings.AUTH_USER_MODEL, verbose_name=_('Abonné individuel'), blank=True, null=True)
     """ User associated to the subscription"""
 
     organisation = models.ForeignKey(
-        Organisation, verbose_name=_('Organisation'), blank=True, null=True)
+        Organisation, verbose_name=_('Abonné institutionnel'), blank=True, null=True)
     """ Organisation associated to the subscription """
 
     journal_management_subscription = models.ForeignKey(
