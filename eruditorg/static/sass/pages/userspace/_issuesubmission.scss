@@ -25,9 +25,12 @@
       border-bottom: 1px solid $mid-grey;
     }
 
-    .submission-detail-link {
+    .submission-detail-row {
       display: block;
       padding: 20px 0;
+    }
+
+    a.submission-detail-row {
 
       &:hover, &:focus, &:active {
         text-decoration: none;
