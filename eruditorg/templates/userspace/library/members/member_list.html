@@ -3,82 +3,102 @@
 
 {% block title %}{% trans "Membres" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "Membres" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">{% trans "Membres" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Membres" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Membres" %}</h2>
-      </div>
-      <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">{% trans "Ajouter un membre" %}</a>
-      </div>
-    </div>
-    <ul id="id_member_list" class="row">
-      {% for member in members %}
-      <li class="col-xs-12">
-        <div class="content-wrapper">
-          <span class="actions pull-right">
-            <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}"
-               class="btn">{% trans "Supprimer" %}</a>
-          </span>
-          <span class="title">
-            {{ member.get_full_name|default:member.username }}
-          </span>
-          <br />
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-    <div class="row">
-      <div class="col-xs-12">
-        {% include "userspace/partials/pagination.html" %}
-      </div>
-    </div>
-  </section>
-  {% if pending_members %}
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Membres en attente d'acceptation" %}</h2>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>{% trans "Adresse courriel" %}</th>
-              <th>{% trans "Prénom" %}</th>
-              <th>{% trans "Nom" %}</th>
-              <th>{% trans "Date d'expiration" %}</th>
-              <th>{% trans "Actions" %}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for pmember in pending_members %}
-            <tr class="text-center">
-              <td>{{ forloop.counter }}</td>
-              <td>{{ pmember.email }}</td>
-              <td>{{ pmember.first_name }}</td>
-              <td>{{ pmember.last_name }}</td>
-              <td>{{ pmember.expiration_date }}</td>
-              <td>
-                <span class="actions pull-right">
-                  <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" class="btn" title="{% trans 'Supprimer' %}">
-                    {% trans "Supprimer" %}
-                  </a>
-                <span class="actions pull-right">
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-  {% endif %}
+<div class="row">
+  <div class="col-md-8">
+    <h2>{% trans "Membres de l’organisation actifs" %}</h2>
+  </div>
+  <div class="col-md-4 text-right">
+    <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
+  </div>
 </div>
+
+<div class="submissions">
+  <ul class="submissions-header">
+    <li class="row">
+      <span class="col-sm-1">{% trans "n<sup>o</sup>" %}</span>
+      <span class="col-sm-3">{% trans "Usager" %}</span>
+      <span class="col-sm-3">{% trans "Courriel" %}</span>
+      <span class="col-sm-3">{% trans "Dernière <br>connexion" %}</span>
+      <span class="col-sm-2">{% trans "Supprimer" %}</span>
+    </li>
+  </ul>
+  <ul class="submissions-list">
+    {% for member in members %}
+    <li class="submissions-item">
+      <div class="row submission-detail-row">
+        <span class="col-sm-1">{{ forloop.counter }}</span>
+        <span class="col-sm-3">{{ member.get_full_name|default:member.username }}</span>
+        <span class="col-sm-3"><a href="mailto:{{ member.email }}">{{ member.email }}</a></span>
+        <span class="col-sm-3">{{ member.last_login|date:"SHORT_DATE_FORMAT" }}</span>
+        <span class="col-sm-2">
+          <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}" title="{% trans 'Supprimer ce membre' %}">
+            <span class="ion-ios-close"></span>
+          </a>
+        </span>
+      </div>
+    </li>
+    {% empty %}
+    <li class="submissions-item">
+      <div class="row submission-detail-row">
+        {% trans "Aucun usager n’a été ajouté aux membres de votre organisation." %}
+        <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}">{% trans "Ajouter un membre." %}</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% if pending_members %}
+<br><br><br>
+<h2>{% trans "En attente d’acceptation" %}</h2>
+
+<div class="submissions">
+  <ul class="submissions-header">
+    <li class="row">
+      <span class="col-sm-1">{% trans "n<sup>o</sup>" %}</span>
+      <span class="col-sm-5">{% trans "Courriel" %}</span>
+      <span class="col-sm-4">{% trans "Date <br>d’expiration" %}</span>
+      <span class="col-sm-2">{% trans "Supprimer" %}</span>
+    </li>
+  </ul>
+  <ul class="submissions-list">
+    {% for pmember in pending_members %}
+    <li class="submissions-item">
+      <div class="row submission-detail-row">
+        <span class="col-sm-1">{{ forloop.counter }}</span>
+        <span class="col-sm-5">
+          <a href="mailto:{{ pmember.email }}">{{ pmember.email }}
+        </span>
+        <span class="col-sm-4">{{ pmember.expiration_date|date:"SHORT_DATE_FORMAT" }}</span>
+        <span class="col-sm-2">
+          <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" title="{% trans 'Supprimer ce membre' %}">
+            <span class="ion-ios-close"></span>
+          </a>
+        </span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endif %}
+
+{% include "userspace/partials/pagination.html" %}
 {% endblock content_main %}

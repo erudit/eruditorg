@@ -2,44 +2,51 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Informations de l'abonnement" %}{% endblock title %}
+{% block title %}{% trans "Logo institutionnel" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "Informations de l'abonnement" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:subscription_information:update' organisation_pk=scope_current_organisation.pk %}">{% trans "Logo institutionnel" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Logo institutionnel" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <h1>{% trans "Informations de l'abonnement" %}</h1>
-  <div class="row">
-    <div class="col-md-12">
-      <form  class="form-vertical" enctype="multipart/form-data" method="post" action="">{% csrf_token %}
-        {% if form.non_field_errors %}
-        <div class="col-xs-12">
-          {% for error in form.non_field_errors %}
-          <p class="alert">{{ error }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
-        <div id="div_id_{{ form.badge.html_name }}" class="form-group{% if form.badge.errors %} has-error{% endif %}">
-          <div class="controls">
-            <label class="control-label" for="{{ form.badge.auto_id }}">{{ form.badge.label }}</label>
-            {% if scope_current_organisation.badge %}
-            <p><img src="{{ scope_current_organisation.badge.url }}" alt="{{ organisation.name }}" /><br /></p>
-            {% endif %}
-            {{ form.badge }}
-            <p class="help-block">{{ form.badge.help_text }}</p>
-            {% for error in form.badge.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="controls">
-            <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
-          </div>
-        </div>
-      </form>
+<h2>{% trans "Mise à jour de votre badge" %}</h2>
+
+<form  class="form-vertical" enctype="multipart/form-data" method="post" action="">{% csrf_token %}
+  {% if form.non_field_errors %}
+  <div class="col-xs-12">
+    {% for error in form.non_field_errors %}
+    <p class="alert">{{ error }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div id="div_id_{{ form.badge.html_name }}" class="form-group{% if form.badge.errors %} has-error{% endif %}">
+    <div class="controls">
+      <label class="control-label" for="{{ form.badge.auto_id }}">{{ form.badge.label }}</label>
+      {% if scope_current_organisation.badge %}
+      <p><img src="{{ scope_current_organisation.badge.url }}" alt="{{ organisation.name }}" /><br /></p>
+      {% endif %}
+      {{ form.badge }}
+      <p class="help-block">{{ form.badge.help_text }}</p>
+      {% for error in form.badge.errors %}<p class="error">{{ error }}</p>{% endfor %}
     </div>
   </div>
-</div>
+  <div class="form-group">
+    <div class="controls">
+      <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
+    </div>
+  </div>
+</form>
+
 {% endblock content_main %}

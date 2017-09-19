@@ -1,54 +1,59 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Plages d'adresses IP" %}{% endblock title %}
+{% block title %}{% trans "Adresses IP" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "Plages d'adresses IP" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}">{% trans "Adresses IP" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Adresses IP" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <section>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>{% trans "Plages d'adresses IP" %}</h2>
-      </div>
-      <div class="col-sm-6 text-right">
-        <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">{% trans "Créer une plage d'adresse IP" %}</a>
-      </div>
-    </div>
-    <ul id="id_ip_range_list" class="row">
-      {% for ip_range in subscription_ip_ranges %}
-      <li class="col-xs-12">
-        <div class="content-wrapper">
-          <span class="actions pull-right">
-            <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}"
-               class="btn">{% trans "Supprimer" %}</a>
-          </span>
-          <span class="title">
-            {{ ip_range.subscription }}
-          </span>
-          <span class="metadata-wrapper">
-            <span class="metadata">
-              <span class="metadata-title">{% trans "Début" %}</span>
-              <span class="metadata-value">{{ ip_range.ip_start }}</span>
-            </span>
-            <span class="metadata">
-              <span class="metadata-title">{% trans "Fin" %}</span>
-              <span class="metadata-value">{{ ip_range.ip_end }}</span>
-            </span>
-          </span>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-    <div class="row">
-      <div class="col-xs-12">
-        {% include "userspace/partials/pagination.html" %}
-      </div>
-    </div>
-  </section>
+<div class="row">
+  <div class="col-md-8">
+    <h2>{% trans "Plages d'adresses actives" %}</h2>
+  </div>
+  <div class="col-md-4 text-right">
+    <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
+  </div>
 </div>
+
+<div class="submissions">
+  <ul class="submissions-header">
+    <li class="row">
+      <span class="col-sm-3">{% trans "Titre" %}</span>
+      <span class="col-sm-3">{% trans "Début" %}</span>
+      <span class="col-sm-3">{% trans "Fin" %}</span>
+      <span class="col-sm-3">{% trans "Supprimer" %}</span>
+    </li>
+  </ul>
+  <ul class="submissions-list">
+    {% for ip_range in subscription_ip_ranges %}
+    <li class="submissions-item">
+      <div class="row submission-detail-row">
+        <span class="col-sm-3">{{ ip_range.subscription }}</span>
+        <span class="col-sm-3">{{ ip_range.ip_start }}</span>
+        <span class="col-sm-3">{{ ip_range.ip_end }}</span>
+        <span class="col-sm-3">
+          <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
+            <span class="ion-ios-close"></span>
+          </a>
+        </span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% include "userspace/partials/pagination.html" %}
 {% endblock content_main %}
