@@ -20,25 +20,26 @@
 {% endblock section_intro %}
 
 {% block content_main %}
-<h2>Journal Report 1 (R4)</h2>
+<h2>{% trans "Rapports Counter en format CSV" %}</h2>
+<h3>{% trans "Journal Report 1 (R4)" %}</h3>
 <p>Number of Successful Full-Text Articles by Month and Journal</p>
-<h3>{% trans "Exports au format CSV" %}</h3>
 <div class="row">
   {% for y in years %}
     <div class="col-md-3">
-      <a href="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-primary">{{ y }}</a>
+      <a href="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-secondary">{{ y }}</a>
       <br />
     </div>
   {% endfor %}
 </div>
-<br />
-<h2>Journal Report 1 GOA (R4)</h2>
+
+<br><br>
+
+<h3>{% trans "Journal Report 1 Gold Open Access (R4)" %}</h3>
 <p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
-<h3>{% trans "Exports au format CSV" %}</h3>
 <div class="row">
   {% for y in years %}
     <div class="col-md-3">
-      <a href="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-primary">{{ y }}</a>
+      <a href="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-secondary">{{ y }}</a>
       <br />
     </div>
   {% endfor %}
