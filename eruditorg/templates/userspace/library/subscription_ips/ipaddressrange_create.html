@@ -40,6 +40,7 @@
     <div class="form-group">
       <div class="controls">
         <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
+        <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% trans "Annuler" %}</a>
       </div>
     </div>
   </form>

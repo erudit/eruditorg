@@ -41,6 +41,7 @@
     <div class="form-group">
       <div class="controls">
         <input id="submit-id-submit" class="btn btn-primary" name="submit" value="{% trans 'Valider' %}" type="submit"></input>
+        <a href="{% url 'userspace:library:authorization:list' %}" class="btn">{% trans "Annuler" %}</a>
       </div>
     </div>
   </form>
