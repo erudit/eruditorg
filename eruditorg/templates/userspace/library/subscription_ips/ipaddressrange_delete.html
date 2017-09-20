@@ -1,34 +1,31 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Supprimer une plage d'adresses IP" %}{% endblock title %}
+{% block title %}{% trans "Supprimer une plage d’adresses IP" %}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
+{% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% trans "Plages d'adresses IP" %}</a></li>
-<li><a href="#">{% trans "Supprimer une plage d'adresses IP" %}</a></li>
-{% endblock breadcrumb_end %}
+<li><a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}">{% trans "Supprimer" %} {{ ip_range.ip_start }} &ndash; {{ ip_range.ip_end }}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Supprimer une plage d’adresses IP" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+  {% blocktrans trimmed with ip_start=ip_range.ip_start ip_end=ip_range.ip_end subscription=ip_range.subscription %}
+  Vous allez supprimer la page d’adresses IP suivante&nbsp;: <br><br><strong>{{ subscription }} <br>{{ ip_start }} &ndash; {{ ip_end }}</strong>. <br><br>Voulez-vous poursuivre&nbsp;?
+  {% endblocktrans %}
+</p>
+{% endblock section_intro %}
 
 {% block content_main %}
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Confirmer la suppression de la plage d'adresses IP ?" %}</h3>
-      </div>
-      <div class="panel-body">
-      <div class="warning-message">
-        {% blocktrans trimmed with ip_start=ip_range.ip_start ip_end=ip_range.ip_end %}
-          Voulez-vous supprimer la plage d'adresses IP <strong>{{ ip_start }} - {{ ip_end }}</strong> ?
-        {% endblocktrans %}
-      </div>
-        <form action="" method="post">{% csrf_token %}
-          <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-          <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn btn-link">{% trans "Non" %}</a>
-        </form>
-      </div>
-    </div>
-  </div>
+<div class="col-sm-8 col-md-6">
+  <form action="" method="post">{% csrf_token %}
+    <input type="hidden" name="post" value="yes" />
+    <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}" class="btn">{% trans "Non" %}</a>
+  </form>
 </div>
 {% endblock content_main %}
