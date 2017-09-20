@@ -28,7 +28,7 @@ class OrganisationMembershipAction(AccountActionBase):
         return reverse('public:home')
 
     def get_consumption_success_message(self, token):
-        return _('Votre êtes maintenant membre de cette organisation ({org})').format(
+            return _('Vous êtes maintenant membre de cette organisation ({org})').format(
             org=token.content_object.name)
 
     def send_notification_email(self, token):
