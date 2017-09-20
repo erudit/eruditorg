@@ -22,7 +22,7 @@
 {% block content_main %}
 <div class="row">
   <div class="col-md-8">
-    <h2>{% trans "Plages d'adresses actives" %}</h2>
+    <h2>{% trans "Plages d’adresses actives" %}</h2>
   </div>
   <div class="col-md-4 text-right">
     <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
