@@ -1,9 +1,7 @@
-{% extends "base.html" %}
+{% extends "userspace/base.html" %}
 {% load rules userspace_library_tags %}
 
-{% block title %}{{ block.super }} – {{ scope_current_journal.name }}{% endblock title %}
-
-{% block body_class %}{{ block.super }} dashboard{% endblock body_class %}
+{% block userspace_title %}{{ scope_current_organisation.name }}{% endblock %}
 
 {% block inner_nav %}
 {% if scope_user_organisations|length > 1 %}
@@ -25,31 +23,4 @@
 <li><a href="{% url 'userspace:library:home' organisation_pk=scope_current_organisation.pk %}">{{ scope_current_organisation.name }}</a></li>
 {% endblock breadcrumb %}
 
-{% block content %}
-<div class="container">
-  <nav class="col-sm-3 sidenav">
-  {% include "userspace/library/partials/menu.html" %}
-  </nav>
-  <main class="col-sm-8 col-md-offset-1">
-    <div class="alert">
-      {% include "partials/messages.html" %}
-    </div>
-
-    {# Section page header #}
-    <header>
-      <h1>{% block section_title %}{% endblock %}</h1>
-      <div class="row">
-        <div class="col-md-7 section-intro">
-          {% block section_intro %}{% endblock %}
-        </div>
-      </div>
-    </header>
-
-    <hr>
-
-    {# Section content #}
-    {% block content_main %}{% endblock %}
-
-  </main>
-</div>
-{% endblock content %}
+{% block userspace_sidenav %}{% include "userspace/library/partials/menu.html" %}{% endblock %}
