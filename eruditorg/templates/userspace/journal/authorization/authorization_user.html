@@ -58,10 +58,10 @@
       </ul>
     </div>
     {% empty %}
-    <div class="authorization-user">
+    <p class="authorization-user">
       {% trans "Aucun usager n’a été autorisé à modifier cette section." %}
       <a href='{% url "userspace:journal:authorization:create" scope_current_journal.pk %}?codename={{ choice }}'>{% trans "Ajouter un accès." %}</a>
-    </div>
+    </p>
     {% endfor %}
 
     {# Create user button #}

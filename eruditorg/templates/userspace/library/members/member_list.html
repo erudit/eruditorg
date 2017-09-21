@@ -29,8 +29,8 @@
   </div>
 </div>
 
-<div class="submissions">
-  <ul class="submissions-header">
+<div class="table">
+  <ul class="table-header">
     <li class="row">
       <span class="col-sm-1">{% trans "n<sup>o</sup>" %}</span>
       <span class="col-sm-3">{% trans "Usager" %}</span>
@@ -39,27 +39,27 @@
       <span class="col-sm-2">{% trans "Supprimer" %}</span>
     </li>
   </ul>
-  <ul class="submissions-list">
+  <ul class="table-body">
     {% for member in members %}
-    <li class="submissions-item">
-      <div class="row submission-detail-row">
+    <li class="table-row-wrapper">
+      <div class="row table-row">
         <span class="col-sm-1">{{ forloop.counter }}</span>
         <span class="col-sm-3">{{ member.get_full_name|default:member.username }}</span>
         <span class="col-sm-3"><a href="mailto:{{ member.email }}">{{ member.email }}</a></span>
         <span class="col-sm-3">{{ member.last_login|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
           <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}" title="{% trans 'Supprimer ce membre' %}">
-            <span class="ion-ios-close"></span>
+            <span class="ion-ios-close table-row-delete"></span>
           </a>
         </span>
       </div>
     </li>
     {% empty %}
-    <li class="submissions-item">
-      <div class="row submission-detail-row">
+    <li class="table-row-wrapper">
+      <p class="row table-row">
         {% trans "Aucun usager n’a été ajouté aux membres de votre organisation." %}
         <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}">{% trans "Ajouter un membre." %}</a>
-      </div>
+      </p>
     </li>
     {% endfor %}
   </ul>
@@ -69,8 +69,8 @@
 <br><br><br>
 <h2>{% trans "En attente d’acceptation" %}</h2>
 
-<div class="submissions">
-  <ul class="submissions-header">
+<div class="table">
+  <ul class="table-header">
     <li class="row">
       <span class="col-sm-1">{% trans "n<sup>o</sup>" %}</span>
       <span class="col-sm-5">{% trans "Courriel" %}</span>
@@ -78,10 +78,10 @@
       <span class="col-sm-2">{% trans "Supprimer" %}</span>
     </li>
   </ul>
-  <ul class="submissions-list">
+  <ul class="table-body">
     {% for pmember in pending_members %}
-    <li class="submissions-item">
-      <div class="row submission-detail-row">
+    <li class="table-row-wrapper">
+      <div class="row table-row">
         <span class="col-sm-1">{{ forloop.counter }}</span>
         <span class="col-sm-5">
           <a href="mailto:{{ pmember.email }}">{{ pmember.email }}
@@ -89,7 +89,7 @@
         <span class="col-sm-4">{{ pmember.expiration_date|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
           <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" title="{% trans 'Supprimer ce membre' %}">
-            <span class="ion-ios-close"></span>
+            <span class="ion-ios-close table-row-delete"></span>
           </a>
         </span>
       </div>

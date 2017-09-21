@@ -29,8 +29,8 @@
   </div>
 </div>
 
-<div class="submissions">
-  <ul class="submissions-header">
+<div class="table">
+  <ul class="table-header">
     <li class="row">
       <span class="col-sm-3">{% trans "Titre" %}</span>
       <span class="col-sm-3">{% trans "Début" %}</span>
@@ -38,16 +38,16 @@
       <span class="col-sm-3">{% trans "Supprimer" %}</span>
     </li>
   </ul>
-  <ul class="submissions-list">
+  <ul class="table-body">
     {% for ip_range in subscription_ip_ranges %}
-    <li class="submissions-item">
-      <div class="row submission-detail-row">
+    <li class="table-row-wrapper">
+      <div class="row table-row">
         <span class="col-sm-3">{{ ip_range.subscription }}</span>
         <span class="col-sm-3">{{ ip_range.ip_start }}</span>
         <span class="col-sm-3">{{ ip_range.ip_end }}</span>
         <span class="col-sm-3">
           <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
-            <span class="ion-ios-close"></span>
+            <span class="ion-ios-close table-row-delete"></span>
           </a>
         </span>
       </div>
