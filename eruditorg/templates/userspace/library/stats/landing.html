@@ -24,24 +24,27 @@
 <h3>{% trans "Journal Report 1 (R4)" %}</h3>
 <p>Number of Successful Full-Text Articles by Month and Journal</p>
 <div class="row">
-  {% for y in years %}
-    <div class="col-md-3">
-      <a href="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-secondary">{{ y }}</a>
-      <br />
-    </div>
-  {% endfor %}
+  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+    <label for="select-jr1">{% trans "Par année" %}</label>
+    <select id="select-jr1" name="select-jr1" onChange="window.location.href=this.value">
+      {% for y in years %}
+      <option value="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}">{{ y }}</option>
+      {% endfor %}
+    </select>
+  </div>
 </div>
-
 <br><br>
 
 <h3>{% trans "Journal Report 1 Gold Open Access (R4)" %}</h3>
 <p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
 <div class="row">
-  {% for y in years %}
-    <div class="col-md-3">
-      <a href="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-secondary">{{ y }}</a>
-      <br />
-    </div>
-  {% endfor %}
+  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+    <label for="select-goa-jr1">{% trans "Par année" %}</label>
+    <select id="select-goa-jr1" name="select-goa-jr1" onChange="window.location.href=this.value">
+      {% for y in years %}
+      <option value="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}">{{ y }}</option>
+      {% endfor %}
+    </select>
+  </div>
 </div>
 {% endblock content_main %}
