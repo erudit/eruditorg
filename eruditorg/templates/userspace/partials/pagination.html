@@ -2,9 +2,13 @@
 
 {% if is_paginated %}
     <ul class="pagination {{ pagination_size|default:"" }}">
-        <li class="prev {% if not page_obj.has_previous %}disabled{% endif %}">
-            <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">&laquo;</a>
+        {% if page_obj.has_previous %}
+        <li class="prev">
+            <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+              <span class="ion-ios-arrow-left"></span>
+            </a>
         </li>
+        {% endif %}
         {% for number in paginator.page_range %}
             {% if forloop.first %}
                 <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
@@ -26,8 +30,12 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
-            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" >&raquo;</a>
+        {% if page_obj.has_next %}
+        <li class="next">
+            <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+              <span class="ion-ios-arrow-right"></span>
+            </a>
         </li>
+        {% endif %}
     </ul>
 {% endif %}

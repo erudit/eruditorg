@@ -28,7 +28,7 @@
     <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
   </div>
 </div>
-
+{% include "userspace/partials/pagination.html" %}
 <div class="table">
   <ul class="table-header">
     <li class="row">
