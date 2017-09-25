@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Ajouter un accès" %}{% endblock title %}
+{% block title %}{% trans "Ajouter un accès" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:library:authorization:list' %}">{% trans "Autorisations" %}</a></li>

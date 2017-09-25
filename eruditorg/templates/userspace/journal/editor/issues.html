@@ -2,7 +2,7 @@
 {% load i18n staticfiles %}
 {% load rules %}
 
-{% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
+{% block title %}{% trans "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block body_id %}issue_submission{% endblock body_id %}
 

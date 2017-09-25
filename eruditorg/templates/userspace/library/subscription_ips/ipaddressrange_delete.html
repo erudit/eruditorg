@@ -1,7 +1,7 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Supprimer une plage d’adresses IP" %}{% endblock title %}
+{% block title %}{% trans "Supprimer une plage d’adresses IP" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:library:subscription_ips:list' %}">{% trans "Plages d'adresses IP" %}</a></li>

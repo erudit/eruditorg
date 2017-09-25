@@ -2,7 +2,7 @@
 {% load i18n staticfiles %}
 {% load rules %}
 
-{% block title %}{{ issue }} – {% trans "Dépôt de fichiers" %}{% endblock title %}
+{% block title %}{{ issue }} – {% trans "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>

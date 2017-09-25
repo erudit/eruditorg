@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Transmission finale des fichiers" %}{% endblock title %}
+{% block title %}{% trans "Transmission finale des fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>

@@ -10,6 +10,7 @@
 {% trans "Soumission" %} –
 {% endif %}
 {% trans "Dépôt de fichiers" %}
+{{ block.super }}
 {% endblock title %}
 
 {% block data_controller %}userspace:editor:form{% endblock data_controller %}
