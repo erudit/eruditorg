@@ -8,13 +8,16 @@ from django.db import connections
 from erudit.models import Journal
 
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription, JournalManagementSubscription
+from core.subscription.models import JournalAccessSubscription, JournalManagementSubscription, JournalAccessSubscriptionPeriod
 from django.contrib.auth.models import User
 from erudit.models import Organisation
 
 from core.subscription.legacy.legacy_models import Abonneindividus
 
 logger = logging.getLogger(__name__)
+
+import_date = datetime.now()
+end_date = datetime(month=12, day=31, year=2017)
 
 
 class Command(BaseCommand):
@@ -53,7 +56,14 @@ class Command(BaseCommand):
                     user=user,
                     sponsor=organisation
                 )
+                access.journalaccesssubscriptionperiod_set.all().delete()
+                JournalAccessSubscriptionPeriod.objects.get_or_create(
+                    subscription=access,
+                    start=import_date,
+                    end=end_date
+                )
                 logger.info("Created for organisation: {}".format(organisation))
+
                 return access, created
         return None, False
 
@@ -62,6 +72,13 @@ class Command(BaseCommand):
         access, created = JournalAccessSubscription.objects.get_or_create(
             user=user,
             journal_management_subscription=journal_sub
+        )
+        access.journalaccesssubscriptionperiod_set.all().delete()
+
+        JournalAccessSubscriptionPeriod.objects.get_or_create(
+            subscription=access,
+            start=import_date,
+            end=end_date
         )
         return access, created
 
