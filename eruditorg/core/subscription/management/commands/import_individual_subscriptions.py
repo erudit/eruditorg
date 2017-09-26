@@ -1,4 +1,5 @@
-import logging
+import structlog
+
 import itertools
 from datetime import datetime
 
@@ -8,13 +9,15 @@ from django.db import connections
 from erudit.models import Journal
 
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription, JournalManagementSubscription, JournalAccessSubscriptionPeriod
+from core.subscription.models import (
+    JournalAccessSubscription, JournalManagementSubscription, JournalAccessSubscriptionPeriod
+)
 from django.contrib.auth.models import User
 from erudit.models import Organisation
 
 from core.subscription.legacy.legacy_models import Abonneindividus
 
-logger = logging.getLogger(__name__)
+logger = structlog.get_logger(__name__)
 
 import_date = datetime.now()
 end_date = datetime(month=12, day=31, year=2017)
@@ -37,10 +40,12 @@ class Command(BaseCommand):
             raise
 
     def _user_is_subscribed_to_journal(self, user, journal):
-        return JournalAccessSubscription.objects.filter(
+
+        is_subscribed = JournalAccessSubscription.objects.filter(
             user=user,
             journals=journal
         ).exists()
+        return is_subscribed
 
     def _email_in_organisation_list(self, email):
         return email in set(itertools.chain.from_iterable(self.organisations.values()))
@@ -62,7 +67,6 @@ class Command(BaseCommand):
                     start=import_date,
                     end=end_date
                 )
-                logger.info("Created for organisation: {}".format(organisation))
 
                 return access, created
         return None, False
@@ -100,8 +104,11 @@ class Command(BaseCommand):
 
         user_creation_count = 0
         subscription_count = 0
-        logger.info("Individual subscriptions import started on {}".format(datetime.now()))
+        logger = structlog.get_logger(__name__)
+        logger.info("import.started")
+
         for abonne in Abonneindividus.objects.all():
+            logger = structlog.get_logger(__name__)
             try:
                 profile = LegacyAccountProfile.objects.get(
                     origin=LegacyAccountProfile.DB_ABONNEMENTS,
@@ -110,20 +117,18 @@ class Command(BaseCommand):
             except LegacyAccountProfile.DoesNotExist:
                 try:
                     user = User.objects.get(
-                        username='abonne-{}'.format(
-                            abonne.abonneindividusid
-                        ),
+                        username=abonne.courriel,
                         email=abonne.courriel
                     )
                 except User.DoesNotExist:
                     user = User(
-                        username='abonne-{}'.format(abonne.abonneindividusid),
+                        username=abonne.courriel,
                         email=abonne.courriel,
                     )
 
                     user.first_name = abonne.prenom
                     user.last_name = abonne.nom
-
+            logger = logger.bind(email=user.email)
             sql = "SELECT revueID FROM revueindividus \
  WHERE abonneIndividusID = {}".format(abonne.abonneindividusid)
 
@@ -134,53 +139,67 @@ class Command(BaseCommand):
 
             for revueid in journal_ids:
                 try:
+                    logger.unbind('sponsor', 'reason')
+                except KeyError:
+                    pass
+
+                logger = logger.bind(abonnement_revue_id=revueid)
+                try:
                     journal = self._get_journal_for_revueid(revueid)
+                    logger = logger.bind(journal=journal.code)
+
                     if self._user_is_subscribed_to_journal(user, journal):
-                        logger.debug(
-                            "Subscription exists: user={}, journal={}".format(user, journal)
+                        logger.info(
+                            "import.subscription", imported=False, reason="subscription.exists"
                         )
                         continue
 
-                    email_in_org_list = self._email_in_organisation_list(user.email)
-                    can_create_subscription = self._can_create_journal_subscription(journal)
-
                     # Only save the user if we are going to create a subscription
-                    if not user.pk and (email_in_org_list or can_create_subscription):
+                    email_in_org_list = self._email_in_organisation_list(user.email)
+                    journal_has_plan = self._can_create_journal_subscription(journal)
+                    can_create_subscription = email_in_org_list or journal_has_plan
+
+                    if not user.pk and can_create_subscription:
                         user.save()
                         user_creation_count += 1
                         profile = LegacyAccountProfile.objects.create(
                             origin=LegacyAccountProfile.DB_ABONNEMENTS, user=user,
                             legacy_id=str(abonne.abonneindividusid))
-                        logger.info("User created: {} {}".format(user.username, user.email))
-                    elif (not email_in_org_list and not can_create_subscription):
+                        logger.info("user.created", email=user.email)
+                    elif not can_create_subscription:
+                        logger.info("import.subscription", imported=False, reason="no.plan")
                         continue
-                    else:
-                        logger.debug("Account {} exists. Updating subscriptions.".format(user.pk))
 
+                    # We try to create an organisation subscription
                     access, created = self._get_or_create_organisation_subscription(
                         profile.user, journal
                     )
                     if created:
                         subscription_count += 1
-                    elif not access or not access.pk:
+                        logger = logger.bind(sponsor=access.sponsor.name)
+                    elif access is None:
+                        # If we can't create it, we create a journal subscription
                         access, created = self._get_or_create_journal_management_subscription(
                             profile.user, journal
                         )
                         if created:
                             subscription_count += 1
+                            journal_sub = JournalManagementSubscription.objects.get(journal=journal)
+                            logger = logger.bind(plan=journal_sub.pk)
+
                     access.journals.add(journal)
                     access.save()
-                    logger.info("Importing subscription: user={}, journal={}".format(
-                        profile.user, journal
-                    ))
+                    logger.info("import.subscription", imported=True)
 
                 except Journal.DoesNotExist:
+                    logger.info("import.subscription", imported=False, reason="does.not.exist")
                     continue
 
                 except JournalManagementSubscription.DoesNotExist:
-                    logger.debug("No plan for Journal {}".format(journal))
+                    continue
 
-        logger.info("Finished. {} users created, {} subscriptions added.".format(
-            user_creation_count,
-            subscription_count)
+        logger.info(
+            "import.finished",
+            users_created=user_creation_count,
+            subscriptions_created=subscription_count
         )
