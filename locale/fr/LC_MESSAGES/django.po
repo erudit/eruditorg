@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 09:40-0500\n"
+"POT-Creation-Date: 2017-09-27 12:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,8 @@ msgstr ""
 #: apps/public/account_actions/forms.py:10
 #: templates/public/account_actions/register.html:36
 #: templates/public/auth/password_reset_form.html:18
-#: templates/userspace/journal/subscription/individualsubscription_list.html:72
-#: templates/userspace/library/members/member_list.html:53
+#: templates/userspace/journal/information/journalinformation_update.html:56
+#: templates/userspace/journal/subscription/individualsubscription_list.html:81
 msgid "Adresse courriel"
 msgstr ""
 
@@ -137,12 +137,12 @@ msgstr ""
 msgid "Année (décroissant)"
 msgstr ""
 
-#: apps/public/citations/views.py:30 apps/public/search/forms.py:284
+#: apps/public/citations/views.py:30 apps/public/search/forms.py:296
 #: apps/public/thesis/views.py:97
 msgid "Titre (A–Z)"
 msgstr ""
 
-#: apps/public/citations/views.py:31 apps/public/search/forms.py:285
+#: apps/public/citations/views.py:31 apps/public/search/forms.py:297
 #: apps/public/thesis/views.py:98
 msgid "Titre (Z–A)"
 msgstr ""
@@ -317,8 +317,8 @@ msgstr ""
 msgid "Titre, résumé, mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:25 core/subscription/abstract_models.py:11
-#: core/subscription/models.py:173
+#: apps/public/search/forms.py:25 core/subscription/models.py:243
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:35
 msgid "Titre"
 msgstr ""
 
@@ -402,7 +402,7 @@ msgid "Articles culturels"
 msgstr ""
 
 #: apps/public/search/forms.py:55 apps/userspace/reporting/forms.py:18
-#: templates/public/base.html:69 templates/public/base.html:248
+#: templates/base.html:145 templates/base.html:317
 #: templates/public/home.html:101
 #: templates/public/thesis/collection_home.html:24
 #: templates/public/thesis/collection_home.html:50
@@ -425,60 +425,148 @@ msgstr ""
 msgid "Actes"
 msgstr ""
 
-#: apps/public/search/forms.py:58 templates/public/base.html:75
-#: templates/public/base.html:250 templates/public/home.html:107
+#: apps/public/search/forms.py:58 templates/base.html:151
+#: templates/base.html:319 templates/public/home.html:107
 msgid "Rapports de recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:77 templates/public/home.html:72
+#: apps/public/search/forms.py:62
+msgid "Arabe"
+msgstr ""
+
+#: apps/public/search/forms.py:63
+msgid "Catalan"
+msgstr ""
+
+#: apps/public/search/forms.py:64
+msgid "Anglais"
+msgstr ""
+
+#: apps/public/search/forms.py:65
+msgid "Espagnol"
+msgstr ""
+
+#: apps/public/search/forms.py:66
+msgid "Allemand"
+msgstr ""
+
+#: apps/public/search/forms.py:67
+msgid "Grec moderne"
+msgstr ""
+
+#: apps/public/search/forms.py:68
+msgid "Français"
+msgstr ""
+
+#: apps/public/search/forms.py:69
+msgid "Hébreu"
+msgstr ""
+
+#: apps/public/search/forms.py:70
+msgid "Bosniaque"
+msgstr ""
+
+#: apps/public/search/forms.py:71
+msgid "Créole haïtien"
+msgstr ""
+
+#: apps/public/search/forms.py:72
+msgid "Indonésien"
+msgstr ""
+
+#: apps/public/search/forms.py:73
+msgid "Langues iroquoiennes"
+msgstr ""
+
+#: apps/public/search/forms.py:74
+msgid "Italien"
+msgstr ""
+
+#: apps/public/search/forms.py:75
+msgid "Japonais"
+msgstr ""
+
+#: apps/public/search/forms.py:76
+msgid "Coréen"
+msgstr ""
+
+#: apps/public/search/forms.py:77
+msgid "Latin"
+msgstr ""
+
+#: apps/public/search/forms.py:78
+msgid "Néerlandais"
+msgstr ""
+
+#: apps/public/search/forms.py:79
+msgid "Occitan"
+msgstr ""
+
+#: apps/public/search/forms.py:80
+msgid "Polonais"
+msgstr ""
+
+#: apps/public/search/forms.py:81
+msgid "Portugais"
+msgstr ""
+
+#: apps/public/search/forms.py:82
+msgid "Kichwa"
+msgstr ""
+
+#: apps/public/search/forms.py:83
+msgid "Roumain"
+msgstr ""
+
+#: apps/public/search/forms.py:84
+msgid "Espéranto"
+msgstr ""
+
+#: apps/public/search/forms.py:85
+msgid "Russe"
+msgstr ""
+
+#: apps/public/search/forms.py:86
+msgid "Chinois"
+msgstr ""
+
+#: apps/public/search/forms.py:123 templates/public/home.html:72
 #: templates/public/search/base.html:6
 msgid "Recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:79
+#: apps/public/search/forms.py:125
 msgid "Inclure les champs"
 msgstr ""
 
-#: apps/public/search/forms.py:109
+#: apps/public/search/forms.py:155
 msgid "Publiés entre"
 msgstr ""
 
-#: apps/public/search/forms.py:116
+#: apps/public/search/forms.py:162
 msgid "Dans Érudit depuis"
 msgstr ""
 
-#: apps/public/search/forms.py:120 apps/public/search/forms.py:166
+#: apps/public/search/forms.py:166 apps/public/search/forms.py:212
 #: templates/public/journal/journal_list_per_names.html:144
 msgid "Fonds"
 msgstr ""
 
-#: apps/public/search/forms.py:124
+#: apps/public/search/forms.py:170
 msgid "Types de publication"
 msgstr ""
 
-#: apps/public/search/forms.py:128 apps/public/search/forms.py:162
+#: apps/public/search/forms.py:174 apps/public/search/forms.py:208
 msgid "Langues"
 msgstr ""
 
-#: apps/public/search/forms.py:129 apps/public/search/forms.py:198
-msgid "Français"
-msgstr ""
-
-#: apps/public/search/forms.py:129 apps/public/search/forms.py:194
-msgid "Anglais"
-msgstr ""
-
-#: apps/public/search/forms.py:129 apps/public/search/forms.py:195
-msgid "Espagnol"
-msgstr ""
-
-#: apps/public/search/forms.py:132
+#: apps/public/search/forms.py:178
 msgid "Disciplines"
 msgstr ""
 
-#: apps/public/search/forms.py:134 core/editor/models.py:222
-#: core/subscription/models.py:40 templates/public/base.html:66
-#: templates/public/base.html:247 templates/public/home.html:98
+#: apps/public/search/forms.py:180 core/editor/models.py:222
+#: core/subscription/models.py:98 templates/base.html:142
+#: templates/base.html:316 templates/public/home.html:98
 #: templates/public/journal/article_base.html:115
 #: templates/public/journal/article_base.html:152
 #: templates/public/journal/article_detail.html:37
@@ -494,37 +582,38 @@ msgstr ""
 msgid "Revues"
 msgstr ""
 
-#: apps/public/search/forms.py:142
+#: apps/public/search/forms.py:188
 msgid "Expression ou mot-clé"
 msgstr ""
 
-#: apps/public/search/forms.py:154
+#: apps/public/search/forms.py:200
 msgid "Cette intervalle est incorrecte"
 msgstr ""
 
-#: apps/public/search/forms.py:159
+#: apps/public/search/forms.py:205
 msgid "Dans les résultats"
 msgstr ""
 
-#: apps/public/search/forms.py:160
+#: apps/public/search/forms.py:206
 msgid "Années"
 msgstr ""
 
-#: apps/public/search/forms.py:161
+#: apps/public/search/forms.py:207
 msgid "Types d'articles"
 msgstr ""
 
-#: apps/public/search/forms.py:163
+#: apps/public/search/forms.py:209
+#: templates/userspace/library/partials/menu.html:39
 msgid "Collections"
 msgstr ""
 
-#: apps/public/search/forms.py:164
+#: apps/public/search/forms.py:210
 #: templates/public/journal/journal_authors_list.html:62
 #: templates/public/journal/journal_authors_list.html:72
 msgid "Auteurs"
 msgstr ""
 
-#: apps/public/search/forms.py:167
+#: apps/public/search/forms.py:213
 msgid ""
 "Les revues diffusées sur Érudit sont consultables\n"
 "                    directement sur la plateforme ; les revues des "
@@ -533,11 +622,11 @@ msgid ""
 "partenaire."
 msgstr ""
 
-#: apps/public/search/forms.py:172 templates/public/base.html:63
+#: apps/public/search/forms.py:218 templates/base.html:139
 msgid "Types de publications"
 msgstr ""
 
-#: apps/public/search/forms.py:173
+#: apps/public/search/forms.py:219
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés\n"
 "                    par les pairs ; les revues culturelles présentent des "
@@ -545,124 +634,36 @@ msgid ""
 "                    domaines artistique, littéraire et socioculturel."
 msgstr ""
 
-#: apps/public/search/forms.py:192
-msgid "Arabe"
-msgstr ""
-
-#: apps/public/search/forms.py:193
-msgid "Catalan"
-msgstr ""
-
-#: apps/public/search/forms.py:196
-msgid "Allemand"
-msgstr ""
-
-#: apps/public/search/forms.py:197
-msgid "Grec moderne"
-msgstr ""
-
-#: apps/public/search/forms.py:199
-msgid "Hébreu"
-msgstr ""
-
-#: apps/public/search/forms.py:200
-msgid "Bosniaque"
-msgstr ""
-
-#: apps/public/search/forms.py:201
-msgid "Créole haïtien"
-msgstr ""
-
-#: apps/public/search/forms.py:202
-msgid "Indonésien"
-msgstr ""
-
-#: apps/public/search/forms.py:203
-msgid "Langues iroquoiennes"
-msgstr ""
-
-#: apps/public/search/forms.py:204
-msgid "Italien"
-msgstr ""
-
-#: apps/public/search/forms.py:205
-msgid "Japonais"
-msgstr ""
-
-#: apps/public/search/forms.py:206
-msgid "Coréen"
-msgstr ""
-
-#: apps/public/search/forms.py:207
-msgid "Latin"
-msgstr ""
-
-#: apps/public/search/forms.py:208
-msgid "Néerlandais"
-msgstr ""
-
-#: apps/public/search/forms.py:209
-msgid "Occitan"
-msgstr ""
-
-#: apps/public/search/forms.py:210
-msgid "Polonais"
-msgstr ""
-
-#: apps/public/search/forms.py:211
-msgid "Portugais"
-msgstr ""
-
-#: apps/public/search/forms.py:212
-msgid "Kichwa"
-msgstr ""
-
-#: apps/public/search/forms.py:213
-msgid "Roumain"
-msgstr ""
-
-#: apps/public/search/forms.py:214
-msgid "Espéranto"
-msgstr ""
-
-#: apps/public/search/forms.py:215
-msgid "Russe"
-msgstr ""
-
-#: apps/public/search/forms.py:216
-msgid "Chinois"
-msgstr ""
-
-#: apps/public/search/forms.py:225 templates/public/base.html:133
+#: apps/public/search/forms.py:244 templates/base.html:209
 #: templates/public/search/partials/advanced_search_q.html:15
 msgid "Mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:279
+#: apps/public/search/forms.py:291
 msgid "Résultats par page"
 msgstr ""
 
-#: apps/public/search/forms.py:281
+#: apps/public/search/forms.py:293
 msgid "Trier par..."
 msgstr ""
 
-#: apps/public/search/forms.py:283
+#: apps/public/search/forms.py:295
 msgid "Pertinence"
 msgstr ""
 
-#: apps/public/search/forms.py:286
+#: apps/public/search/forms.py:298
 msgid "Premier auteur (A–Z)"
 msgstr ""
 
-#: apps/public/search/forms.py:287
+#: apps/public/search/forms.py:299
 msgid "Premier auteur (Z–A)"
 msgstr ""
 
-#: apps/public/search/forms.py:288 apps/public/thesis/views.py:95
+#: apps/public/search/forms.py:300 apps/public/thesis/views.py:95
 msgid "Date de publication (croissant)"
 msgstr ""
 
-#: apps/public/search/forms.py:289 apps/public/thesis/views.py:96
+#: apps/public/search/forms.py:301 apps/public/thesis/views.py:96
 msgid "Date de publication (décroissant)"
 msgstr ""
 
@@ -766,16 +767,16 @@ msgstr ""
 #: apps/userspace/generic_apps/authorization/forms.py:16
 #: core/accounts/models.py:20 core/authorization/admin.py:24
 #: core/authorization/models.py:35 core/citations/models.py:12
-#: core/subscription/models.py:30
+#: core/subscription/admin.py:90
 msgid "Utilisateur"
 msgstr ""
 
 #: apps/userspace/generic_apps/authorization/views.py:55
-msgid "L'accès a été créé avec succès"
+msgid "L’accès a été créé avec succès."
 msgstr ""
 
 #: apps/userspace/generic_apps/authorization/views.py:98
-msgid "L'accès a été supprimé avec succès"
+msgid "L’accès a été supprimé avec succès."
 msgstr ""
 
 #: apps/userspace/journal/authorization/urls.py:10
@@ -798,7 +799,9 @@ msgid "Fichier"
 msgstr ""
 
 #: apps/userspace/journal/editor/forms.py:124 core/editor/models.py:70
-#: templates/userspace/journal/editor/detail.html:73
+#: templates/userspace/journal/editor/detail.html:53
+#: templates/userspace/journal/editor/detail.html:90
+#: templates/userspace/journal/editor/form.html:112
 msgid "Commentaires"
 msgstr ""
 
@@ -843,7 +846,7 @@ msgid "Faire un dépôt de numéros"
 msgstr ""
 
 #: apps/userspace/journal/editor/views.py:109
-msgid "La demande a été créé avec succès"
+msgid "La demande a été créée avec succès"
 msgstr ""
 
 #: apps/userspace/journal/editor/views.py:142
@@ -888,19 +891,64 @@ msgstr ""
 msgid "La soumission a été supprimée avec succès"
 msgstr ""
 
+#: apps/userspace/journal/information/forms.py:52
+msgid ""
+"Décrivez les objectifs,             les champs d'étude et l’historique de "
+"votre revue. Vous pouvez             également y présenter l’éditeur "
+"(société savante, département,             groupe de recherche) et votre "
+"calendrier de publication. "
+msgstr ""
+
+#: apps/userspace/journal/information/forms.py:56
+msgid ""
+"Présentez la             politique éditoriale, le processus de révision par "
+"les pairs,             la politique de droits d’auteur, incluant votre "
+"licence de             diffusion; dans le cas d’une revue en libre accès "
+"diffusée sous             une licence Creative Commons, vous pouvez insérer "
+"un lien vers le             site de la licence. Vous pouvez également y "
+"présenter le contrat             auteur-revue s’il y a lieu, la politique "
+"anti-plagiat, ainsi que             les instructions aux auteurs pour la "
+"soumission d’articles à la             revue."
+msgstr ""
+
+#: apps/userspace/journal/information/forms.py:65
+msgid ""
+"Décrivez le comité éditorial,             le conseil d’administration, le "
+"comité scientifique             international (incluant l’affiliation "
+"institutionnelle de chacun             de ses membres)."
+msgstr ""
+
+#: apps/userspace/journal/information/forms.py:69
+msgid ""
+"Décrivez les             modalités d’abonnements numérique et papier de "
+"votre revue             (coordonnées de la personne-ressource). "
+msgstr ""
+
+#: apps/userspace/journal/information/forms.py:72
+msgid ""
+"Présentez les partenaires             de votre revue (Organismes "
+"subventionnaires, départements ou             associations) qui soutiennent "
+"votre revue. Vous pouvez insérer le             logo de ces partenaires et/"
+"ou un lien vers leur site."
+msgstr ""
+
 #: apps/userspace/journal/information/urls.py:10
 msgid "^$"
 msgstr ""
 
-#: apps/userspace/journal/information/views.py:36
-msgid "Éditer une revue"
+#: apps/userspace/journal/information/views.py:36 templates/base.html:181
+#: templates/base.html:292 templates/public/journal/journal_detail.html:138
+#: templates/userspace/journal/information/journalinformation_update.html:4
+#: templates/userspace/journal/information/journalinformation_update.html:11
+#: templates/userspace/journal/partials/menu.html:21
+msgid "À propos"
 msgstr ""
 
-#: apps/userspace/journal/subscription/forms.py:29
+#: apps/userspace/journal/subscription/forms.py:31
 msgid "Une proposition d'abonnement pour cette adresse courriel existe déjà"
 msgstr ""
 
-#: apps/userspace/journal/subscription/forms.py:37
+#: apps/userspace/journal/subscription/forms.py:40
 msgid "Un abonnement utilisant cette adresse courriel existe déjà"
 msgstr ""
 
@@ -920,19 +968,23 @@ msgstr ""
 msgid "^acces/annuler/(?P<pk>[0-9]+)/$"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:84
+#: apps/userspace/journal/subscription/views.py:77
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:97
+#: apps/userspace/journal/subscription/views.py:90
+msgid "Vous ne pouvez pas gérer les abonnements de votre revue"
+msgstr ""
+
+#: apps/userspace/journal/subscription/views.py:102
 msgid "L'abonnement a été créé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:116
+#: apps/userspace/journal/subscription/views.py:121
 msgid "L'abonnement a été supprimé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:142
+#: apps/userspace/journal/subscription/views.py:147
 msgid "La proposition d'abonnement a été annulée avec succès"
 msgstr ""
 
@@ -974,15 +1026,15 @@ msgid "^annuler/(?P<pk>[0-9]+)/$"
 msgstr ""
 
 #: apps/userspace/library/members/views.py:55
-msgid "Le membre a été invité avec succès"
+msgid "Le membre a été invité avec succès."
 msgstr ""
 
 #: apps/userspace/library/members/views.py:77
-msgid "Le membre a été retiré de l'organisation avec succès"
+msgid "Le membre a été retiré de l’organisation avec succès."
 msgstr ""
 
 #: apps/userspace/library/members/views.py:102
-msgid "La proposition a été annulée avec succès"
+msgid "La proposition a été annulée avec succès."
 msgstr ""
 
 #: apps/userspace/library/stats/urls.py:11
@@ -1008,15 +1060,15 @@ msgid ""
 msgstr ""
 
 #: apps/userspace/library/subscription_information/views.py:34
-msgid "Les informations de l'abonnement ont été mises à jour avec succès"
+msgid "Le logo institutionnel a été mis à jour avec succès."
 msgstr ""
 
 #: apps/userspace/library/subscription_ips/views.py:52
-msgid "La plage d'adresse IP a été créée avec succès"
+msgid "La plage d’adresses IP a été créée avec succès."
 msgstr ""
 
 #: apps/userspace/library/subscription_ips/views.py:71
-msgid "La plage d'adresse IP a été supprimée avec succès"
+msgid "La plage d’adresses IP a été supprimée avec succès."
 msgstr ""
 
 #: apps/userspace/library/urls.py:14
@@ -1046,11 +1098,12 @@ msgid "Culturel"
 msgstr ""
 
 #: apps/userspace/reporting/forms.py:20
+#: templates/userspace/journal/partials/menu.html:29
 msgid "Dépôt"
 msgstr ""
 
 #: apps/userspace/reporting/forms.py:22 apps/userspace/reporting/views.py:184
-#: core/editor/models.py:38 templates/userspace/journal/editor/detail.html:51
+#: core/editor/models.py:38 templates/userspace/journal/editor/detail.html:43
 msgid "Année"
 msgstr ""
 
@@ -1068,17 +1121,16 @@ msgstr ""
 
 #: apps/userspace/reporting/views.py:184 apps/userspace/reporting/views.py:209
 #: core/editor/models.py:33 core/royalty_reports/models.py:27
-#: core/subscription/models.py:36 core/subscription/models.py:156
+#: core/subscription/models.py:94 core/subscription/models.py:217
 #: templates/public/journal/journal_list_per_names.html:142
-#: templates/userspace/journal/editor/issues.html:41
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:30
-#: templates/userspace/journal/subscription/individualsubscription_list.html:35
+#: templates/userspace/journal/subscription/individualsubscription_list.html:48
 msgid "Revue"
 msgstr ""
 
 #: apps/userspace/reporting/views.py:184 core/editor/models.py:49
-#: templates/userspace/journal/editor/detail.html:28
-#: templates/userspace/journal/editor/detail.html:59
+#: templates/userspace/journal/editor/detail.html:36
+#: templates/userspace/journal/editor/detail.html:49
+#: templates/userspace/journal/editor/issues.html:37
 msgid "Numéro"
 msgstr ""
 
@@ -1102,35 +1154,35 @@ msgstr ""
 msgid "^espace-utilisateur/"
 msgstr ""
 
-#: core/accounts/admin.py:20
+#: core/accounts/admin.py:26
+#: templates/userspace/library/members/member_list.html:37
+#: templates/userspace/library/members/member_list.html:76
 msgid "Courriel"
 msgstr ""
 
-#: core/accounts/admin.py:24 templates/public/account_actions/register.html:45
-#: templates/userspace/journal/subscription/individualsubscription_list.html:73
-#: templates/userspace/library/members/member_list.html:54
+#: core/accounts/admin.py:30 templates/public/account_actions/register.html:45
+#: templates/userspace/journal/subscription/individualsubscription_list.html:82
 msgid "Prénom"
 msgstr ""
 
-#: core/accounts/admin.py:28 templates/public/account_actions/register.html:52
-#: templates/userspace/journal/subscription/individualsubscription_list.html:74
-#: templates/userspace/library/members/member_list.html:55
+#: core/accounts/admin.py:34 templates/public/account_actions/register.html:52
+#: templates/userspace/journal/subscription/individualsubscription_list.html:83
 msgid "Nom"
 msgstr ""
 
-#: core/accounts/hashers.py:127
+#: core/accounts/hashers.py:95
 msgid "algorithm"
 msgstr ""
 
-#: core/accounts/hashers.py:128
+#: core/accounts/hashers.py:96
 msgid "iterations"
 msgstr ""
 
-#: core/accounts/hashers.py:129
+#: core/accounts/hashers.py:97
 msgid "salt"
 msgstr ""
 
-#: core/accounts/hashers.py:130
+#: core/accounts/hashers.py:98
 msgid "hash"
 msgstr ""
 
@@ -1154,7 +1206,7 @@ msgstr ""
 msgid "Identifiant original"
 msgstr ""
 
-#: core/accounts/models.py:38 core/subscription/models.py:32
+#: core/accounts/models.py:38
 msgid "Organisation"
 msgstr ""
 
@@ -1187,79 +1239,61 @@ msgid "Objet"
 msgstr ""
 
 #: core/authorization/defaults.py:19
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:8
+#: templates/userspace/journal/authorization/authorization_confirm_delete.html:7
 #: templates/userspace/journal/authorization/authorization_create.html:9
-#: templates/userspace/journal/authorization/authorization_user.html:4
-#: templates/userspace/journal/authorization/authorization_user.html:8
-#: templates/userspace/journal/authorization/authorization_user.html:16
-#: templates/userspace/journal/partials/menu.html:41
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:8
-#: templates/userspace/library/authorization/authorization_create.html:9
-#: templates/userspace/library/authorization/authorization_user.html:4
-#: templates/userspace/library/authorization/authorization_user.html:8
-#: templates/userspace/library/authorization/authorization_user.html:14
-#: templates/userspace/library/partials/menu.html:22
+#: templates/userspace/journal/authorization/authorization_user.html:6
+#: templates/userspace/journal/authorization/authorization_user.html:9
+#: templates/userspace/journal/authorization/authorization_user.html:13
+#: templates/userspace/journal/partials/menu.html:71
+#: templates/userspace/library/authorization/authorization_confirm_delete.html:7
+#: templates/userspace/library/authorization/authorization_create.html:8
+#: templates/userspace/library/authorization/authorization_user.html:6
+#: templates/userspace/library/authorization/authorization_user.html:9
+#: templates/userspace/library/authorization/authorization_user.html:13
+#: templates/userspace/library/partials/menu.html:63
 msgid "Autorisations"
 msgstr ""
 
 #: core/authorization/defaults.py:25
-msgid "Éditer l'à-propos"
+msgid "Modifier la page À propos"
 msgstr ""
 
 #: core/authorization/defaults.py:31
-#: templates/userspace/journal/editor/delete.html:9
-#: templates/userspace/journal/editor/detail.html:5
-#: templates/userspace/journal/editor/detail.html:9
-#: templates/userspace/journal/editor/form.html:6
-#: templates/userspace/journal/editor/form.html:20
-#: templates/userspace/journal/editor/issues.html:5
-#: templates/userspace/journal/editor/issues.html:11
-#: templates/userspace/journal/editor/issuesubmission_approve.html:9
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:9
-#: templates/userspace/journal/editor/issuesubmission_submit.html:9
-#: templates/userspace/journal/partials/menu.html:32
-msgid "Dépôt de fichiers"
+#: templates/userspace/journal/editor/form.html:41
+msgid "Déposer des fichiers de production"
 msgstr ""
 
 #: core/authorization/defaults.py:37
 msgid "Valider les numéros"
 msgstr ""
 
-#: core/authorization/defaults.py:43 templates/public/base.html:225
-#: templates/public/journal/journal_detail.html:174
-#: templates/userspace/journal/home.html:54
-#: templates/userspace/journal/partials/menu.html:50
-#: templates/userspace/journal/subscription/base.html:4
-#: templates/userspace/journal/subscription/individualsubscription_create.html:9
-#: templates/userspace/journal/subscription/individualsubscription_list.html:4
-#: templates/userspace/journal/subscription/individualsubscription_list.html:8
-#: templates/userspace/journal/subscription/individualsubscription_list.html:16
-msgid "Abonnements"
+#: core/authorization/defaults.py:43
+msgid "Gérer les abonnements "
 msgstr ""
 
 #: core/authorization/defaults.py:50
-msgid "Gestion des adresses IP de l'abonnement"
+msgid "Gérer les adresses IP de l’abonnement"
 msgstr ""
 
 #: core/authorization/defaults.py:58
-msgid "Gestion des informations d'un abonnement"
+msgid "Gérer les informations d’un abonnement"
 msgstr ""
 
 #: core/authorization/defaults.py:66
-msgid "Gestion des membres d'un abonnement"
+msgid "Gérer les membres d’un abonnement"
 msgstr ""
 
 #: core/authorization/defaults.py:73
-msgid "Consultation des rapports de redevances"
+msgid "Consulter les rapports de redevances"
 msgstr ""
 
 #: core/authorization/models.py:19 core/editor/models.py:187
-#: core/editor/models.py:207 core/subscription/abstract_models.py:12
+#: core/editor/models.py:207 core/subscription/abstract_models.py:11
 msgid "Date de création"
 msgstr ""
 
 #: core/authorization/models.py:25 core/editor/models.py:61
-#: core/editor/models.py:208 core/subscription/abstract_models.py:13
+#: core/editor/models.py:208 core/subscription/abstract_models.py:12
 msgid "Date de modification"
 msgstr ""
 
@@ -1296,7 +1330,6 @@ msgid "Nombre de fichiers"
 msgstr ""
 
 #: core/editor/models.py:24
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:11
 msgid "Brouillon"
 msgstr ""
 
@@ -1304,13 +1337,13 @@ msgstr ""
 msgid "En attente de validation"
 msgstr ""
 
-#: core/editor/models.py:26
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:15
+#: core/editor/models.py:26 templates/userspace/journal/editor/detail.html:109
+#: templates/userspace/journal/editor/form.html:131
 msgid "Validé"
 msgstr ""
 
 #: core/editor/models.py:43 templates/public/search/results.html:262
-#: templates/userspace/journal/editor/detail.html:55
+#: templates/userspace/journal/editor/detail.html:46
 msgid "Volume"
 msgstr ""
 
@@ -1318,12 +1351,11 @@ msgstr ""
 msgid "Date de l'envoi"
 msgstr ""
 
-#: core/editor/models.py:66 templates/userspace/journal/editor/detail.html:66
+#: core/editor/models.py:66 templates/userspace/journal/editor/detail.html:51
 msgid "Personne-ressource"
 msgstr ""
 
 #: core/editor/models.py:75
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:17
 msgid "Archivé"
 msgstr ""
 
@@ -1344,7 +1376,7 @@ msgid "n° {}"
 msgstr ""
 
 #: core/editor/models.py:131
-#: templates/userspace/journal/editor/issuesubmission_approve.html:45
+#: templates/userspace/journal/editor/issuesubmission_approve.html:43
 msgid "Approuver"
 msgstr ""
 
@@ -1356,7 +1388,7 @@ msgstr ""
 msgid "Non soumis"
 msgstr ""
 
-#: core/editor/models.py:180
+#: core/editor/models.py:180 templates/userspace/journal/editor/detail.html:38
 msgid "À corriger"
 msgstr ""
 
@@ -1372,7 +1404,7 @@ msgstr ""
 msgid "Version des fichiers"
 msgstr ""
 
-#: core/editor/models.py:195 core/subscription/abstract_models.py:14
+#: core/editor/models.py:195
 msgid "Commentaire"
 msgstr ""
 
@@ -1406,21 +1438,20 @@ msgstr ""
 
 #: core/journal/account_actions.py:31
 #, python-brace-format
-msgid "Votre êtes maintenant membre de cette organisation ({org})"
+msgid "Vous êtes maintenant membre de cette organisation ({org})"
 msgstr ""
 
 #: core/royalty_reports/apps.py:10 core/royalty_reports/models.py:18
-#: templates/userspace/journal/partials/menu.html:59
-#: templates/userspace/journal/royalty_reports/list.html:9
-#: templates/userspace/journal/royalty_reports/list.html:17
+#: templates/userspace/journal/royalty_reports/list.html:8
+#: templates/userspace/journal/royalty_reports/list.html:12
 msgid "Rapports de redevances"
 msgstr ""
 
-#: core/royalty_reports/models.py:10 core/subscription/abstract_models.py:22
+#: core/royalty_reports/models.py:10 core/subscription/abstract_models.py:20
 msgid "Date de début"
 msgstr ""
 
-#: core/royalty_reports/models.py:11 core/subscription/abstract_models.py:23
+#: core/royalty_reports/models.py:11 core/subscription/abstract_models.py:21
 msgid "Date de fin"
 msgstr ""
 
@@ -1441,147 +1472,366 @@ msgstr ""
 msgid "Redevances de revues"
 msgstr ""
 
-#: core/subscription/abstract_models.py:37
+#: core/subscription/abstract_models.py:35
 msgid ""
 "La date de début d'une période d'abonnement ne doit pas être supérieure à la "
 "date de fin."
 msgstr ""
 
-#: core/subscription/abstract_models.py:54
+#: core/subscription/abstract_models.py:52
 msgid ""
 "Cette période est en conflit avec une autre période pour cet abonnement."
 msgstr ""
 
-#: core/subscription/account_actions.py:34
+#: core/subscription/account_actions.py:39
 msgid "Votre abonnement a bien été pris en compte"
 msgstr ""
 
-#: core/subscription/admin.py:32
-msgid "Bénéficiaire"
+#: core/subscription/admin.py:29
+msgid "Type d'abonnement"
+msgstr ""
+
+#: core/subscription/admin.py:34
+#: templates/userspace/journal/subscription/individualsubscription_cancel.html:7
+#: templates/userspace/journal/subscription/individualsubscription_create.html:8
+#: templates/userspace/journal/subscription/individualsubscription_delete.html:7
+msgid "Abonnements individuels"
 msgstr ""
 
 #: core/subscription/admin.py:35
+msgid "Abonnements institutionnels"
+msgstr ""
+
+#: core/subscription/admin.py:47
+msgid "Abonné à la revue"
+msgstr ""
+
+#: core/subscription/admin.py:72
+msgid "Bénéficiaire"
+msgstr ""
+
+#: core/subscription/admin.py:75
 msgid "Revue(s) cibles"
 msgstr ""
 
-#: core/subscription/models.py:38
+#: core/subscription/admin.py:84
+msgid "Forfait d'abonnement individuel"
+msgstr ""
+
+#: core/subscription/models.py:79
+msgid "Abonné individuel"
+msgstr ""
+
+#: core/subscription/models.py:83
+msgid "Abonné institutionnel"
+msgstr ""
+
+#: core/subscription/models.py:87 core/subscription/models.py:218
+msgid "Forfait"
+msgstr ""
+
+#: core/subscription/models.py:96
 msgid "Collection"
 msgstr ""
 
-#: core/subscription/models.py:41
-msgid "Accès complet"
-msgstr ""
-
-#: core/subscription/models.py:45
+#: core/subscription/models.py:102
 msgid "Commanditaire"
 msgstr ""
 
-#: core/subscription/models.py:52 core/subscription/models.py:109
-#: core/subscription/models.py:116
+#: core/subscription/models.py:109 core/subscription/models.py:170
+#: core/subscription/models.py:177
 msgid "Abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:53
+#: core/subscription/models.py:110
 msgid "Abonnements aux revues"
 msgstr ""
 
-#: core/subscription/models.py:62
-msgid "{} - Accès complet"
-msgstr ""
-
-#: core/subscription/models.py:63
+#: core/subscription/models.py:118
 msgid "{} - Accès multiples"
 msgstr ""
 
-#: core/subscription/models.py:100 core/subscription/models.py:187
+#: core/subscription/models.py:161 core/subscription/models.py:257
 msgid "Abonnement"
 msgstr ""
 
-#: core/subscription/models.py:103
+#: core/subscription/models.py:164
 msgid "Période d'abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:104
+#: core/subscription/models.py:165
 msgid "Périodes d'abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:111
+#: core/subscription/models.py:172
 msgid "URL référent"
 msgstr ""
 
-#: core/subscription/models.py:117
+#: core/subscription/models.py:178
 msgid "Adresse IP de début"
 msgstr ""
 
-#: core/subscription/models.py:118
+#: core/subscription/models.py:179
 msgid "Adresse IP de fin"
 msgstr ""
 
-#: core/subscription/models.py:121
+#: core/subscription/models.py:182
 msgid "Plage d'adresses IP d'institution"
 msgstr ""
 
-#: core/subscription/models.py:122
+#: core/subscription/models.py:183
 msgid "Plages d'adresses IP d'institution"
 msgstr ""
 
-#: core/subscription/models.py:134 core/subscription/models.py:139
+#: core/subscription/models.py:195 core/subscription/models.py:200
 #, python-brace-format
 msgid "{0} n'est pas une adresse IP valide"
 msgstr ""
 
-#: core/subscription/models.py:142
+#: core/subscription/models.py:203
 msgid "L'adresse IP de début doit être inférieure à l'adresse IP de fin"
 msgstr ""
 
-#: core/subscription/models.py:157
-msgid "Forfait"
-msgstr ""
-
-#: core/subscription/models.py:160
+#: core/subscription/models.py:221
 msgid "Abonnement de gestion de revue"
 msgstr ""
 
-#: core/subscription/models.py:161
+#: core/subscription/models.py:222
 msgid "Abonnements de gestion de revue"
 msgstr ""
 
-#: core/subscription/models.py:174
+#: core/subscription/models.py:244
 msgid "Code"
 msgstr ""
 
-#: core/subscription/models.py:175
-msgid "Maximum de comptes"
+#: core/subscription/models.py:245
+msgid "Nombre de comptes"
 msgstr ""
 
-#: core/subscription/models.py:178
-msgid "Forfait de gestion d'une revue"
+#: core/subscription/models.py:248
+msgid "Forfait d'abonnements individuels"
 msgstr ""
 
-#: core/subscription/models.py:179
-msgid "Forfaits de gestion de revues"
+#: core/subscription/models.py:249
+msgid "Forfaits d'abonnements individuels"
 msgstr ""
 
-#: core/subscription/models.py:190
+#: core/subscription/models.py:260
 msgid "Période d'abonnement de gestion de revue"
 msgstr ""
 
-#: core/subscription/models.py:191
+#: core/subscription/models.py:261
 msgid "Périodes d'abonnement de gestion de revue"
 msgstr ""
 
-#: templates/base.html:17 templates/base.html:60 templates/base.html:69
+#: templates/base.html:16 templates/base.html:65 templates/base.html:74
 msgid ""
 "Découvrez nos collections de documents en sciences humaines et sociales : "
 "revues, livres et actes, thèses, rapports de recherche."
 msgstr ""
 
-#: templates/base.html:65 templates/public/home.html:6
+#: templates/base.html:70 templates/public/home.html:6
 msgid "Cultivez votre savoir"
 msgstr ""
 
-#: templates/base.html:68 templates/public/thesis/home.html:25
+#: templates/base.html:73 templates/public/thesis/home.html:25
 msgid "Illustration « Cultivez votre savoir »"
+msgstr ""
+
+#: templates/base.html:134
+msgid "Menu principal"
+msgstr ""
+
+#: templates/base.html:142 templates/public/home.html:98
+msgid "Index des revues"
+msgstr ""
+
+#: templates/base.html:145 templates/public/home.html:101
+msgid "Index des dépôts institutionnels"
+msgstr ""
+
+#: templates/base.html:148 templates/public/home.html:104
+msgid "Index des livres et actes"
+msgstr ""
+
+#: templates/base.html:148 templates/public/home.html:104
+msgid "Livres et actes"
+msgstr ""
+
+#: templates/base.html:151 templates/public/home.html:107
+msgid "Index des rapports de recherche"
+msgstr ""
+
+#: templates/base.html:157
+msgid "Se connecter au tableau de bord"
+msgstr ""
+
+#: templates/base.html:158 templates/public/auth/login.html:4
+#: templates/public/auth/login.html:10 templates/public/auth/login.html:56
+#: templates/public/auth/login.html:103
+#: templates/public/auth/password_reset_complete.html:7
+msgid "Connexion"
+msgstr ""
+
+#: templates/base.html:163 templates/base.html:168
+msgid "Accéder à au tableau de bord"
+msgstr ""
+
+#: templates/base.html:163
+msgid "Mon compte"
+msgstr ""
+
+#: templates/base.html:168 templates/userspace/home.html:7
+#: templates/userspace/journal/home.html:6
+#: templates/userspace/journal/home.html:9
+#: templates/userspace/journal/home.html:13
+#: templates/userspace/library/home.html:6
+#: templates/userspace/library/home.html:9
+#: templates/userspace/library/home.html:13
+msgid "Tableau de bord"
+msgstr ""
+
+#: templates/base.html:172
+msgid "Modifier mes paramètres"
+msgstr ""
+
+#: templates/base.html:172 templates/public/auth/base_profile_edit.html:5
+#: templates/public/auth/base_profile_edit.html:14
+msgid "Paramètres"
+msgstr ""
+
+#: templates/base.html:175
+msgid "Se déconnecter"
+msgstr ""
+
+#: templates/base.html:175
+msgid "Déconnexion"
+msgstr ""
+
+#: templates/base.html:181
+msgid "À propos d'Érudit"
+msgstr ""
+
+#: templates/base.html:184
+msgid "Effectuer une recherche avancée"
+msgstr ""
+
+#: templates/base.html:184 templates/public/home.html:83
+#: templates/public/search/advanced_search.html:5
+#: templates/public/search/advanced_search.html:21
+msgid "Recherche avancée"
+msgstr ""
+
+#: templates/base.html:198
+msgid "Voir ma bibliothèque"
+msgstr ""
+
+#: templates/base.html:200 templates/public/citations/list.html:4
+#: templates/public/citations/list.html:13
+#: templates/public/citations/list.html:23
+msgid "Ma bibliothèque"
+msgstr ""
+
+#: templates/base.html:204
+msgid "Effectuer une recherche simple"
+msgstr ""
+
+#: templates/base.html:210
+msgid "Par auteur, titre, mots-clés..."
+msgstr ""
+
+#: templates/base.html:212 templates/public/home.html:77
+#: templates/public/search/advanced_search.html:72
+#: templates/public/search/advanced_search.html:142
+msgid "Rechercher"
+msgstr ""
+
+#: templates/base.html:228
+msgid "Fil d'Ariane"
+msgstr ""
+
+#: templates/base.html:245
+#, python-format
+msgid ""
+"\n"
+"        Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="
+"\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
+"        "
+msgstr ""
+
+#: templates/base.html:263 templates/public/journal/journal_detail.html:246
+#: templates/public/journal/journal_list_per_disciplines.html:86
+msgid "Retourner en haut"
+msgstr ""
+
+#: templates/base.html:274
+msgid "Abonnez-vous à notre infolettre&nbsp;:"
+msgstr ""
+
+#: templates/base.html:277
+msgid "nom@courriel.com"
+msgstr ""
+
+#: templates/base.html:278
+msgid "S'inscrire"
+msgstr ""
+
+#: templates/base.html:293 templates/public/brand_assets.html:5
+#: templates/public/brand_assets.html:27 templates/public/brand_assets.html:38
+#: templates/public/brand_assets.html:47
+msgid "Logo et identité"
+msgstr ""
+
+#: templates/base.html:294 templates/public/journal/journal_detail.html:174
+#: templates/userspace/journal/partials/menu.html:45
+#: templates/userspace/journal/subscription/individualsubscription_list.html:4
+#: templates/userspace/journal/subscription/individualsubscription_list.html:7
+#: templates/userspace/journal/subscription/individualsubscription_list.html:11
+msgid "Abonnements"
+msgstr ""
+
+#: templates/base.html:318
+msgid "Livres & actes"
+msgstr ""
+
+#: templates/base.html:325
+msgid "Aide"
+msgstr ""
+
+#: templates/base.html:326
+msgid "Plan du site"
+msgstr ""
+
+#: templates/base.html:327
+msgid "Nous contacter"
+msgstr ""
+
+#: templates/base.html:329 templates/public/home.html:181
+msgid "Salons"
+msgstr ""
+
+#: templates/base.html:332
+msgid "Jamais trop érudit"
+msgstr ""
+
+#: templates/base.html:350
+msgid "Logo d'Érudit"
+msgstr ""
+
+#: templates/base.html:351
+msgid "Cultivez votre savoir."
+msgstr ""
+
+#: templates/base.html:358
+msgid "Consortium Érudit"
+msgstr ""
+
+#: templates/base.html:361
+msgid "Politique et licence d’utilisation"
+msgstr ""
+
+#: templates/base.html:366
+msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
 #: templates/base_email.html:19
@@ -1891,57 +2141,60 @@ msgid "Vous devez vous identifier pour vous abonner à cette revue."
 msgstr ""
 
 #: templates/public/account_actions/individual_subscription_landing.html:61
-#: templates/public/account_actions/organisation_membership_landing.html:61
 msgid "S'identifier"
 msgstr ""
 
 #: templates/public/account_actions/individual_subscription_landing.html:67
-#: templates/public/account_actions/organisation_membership_landing.html:67
+#: templates/public/account_actions/organisation_membership_landing.html:57
 msgid "Créer un compte"
 msgstr ""
 
 #: templates/public/account_actions/organisation_membership_landing.html:5
-#: templates/public/account_actions/organisation_membership_landing.html:15
+#: templates/public/account_actions/organisation_membership_landing.html:14
 #, python-format
-msgid "Rejoindre l'organisation %(organisation_name)s"
+msgid "%(organisation_name)s"
+msgstr ""
+
+#: templates/public/account_actions/organisation_membership_landing.html:20
+#: templates/public/account_actions/organisation_membership_landing.html:25
+#: templates/public/account_actions/organisation_membership_landing.html:30
+#: templates/public/account_actions/organisation_membership_landing.html:35
+msgid "Impossible de rejoindre l’organisation."
 msgstr ""
 
 #: templates/public/account_actions/organisation_membership_landing.html:21
-#: templates/public/account_actions/organisation_membership_landing.html:26
-#: templates/public/account_actions/organisation_membership_landing.html:31
-#: templates/public/account_actions/organisation_membership_landing.html:36
-msgid "Impossible de rejoindre l'organisation."
-msgstr ""
-
-#: templates/public/account_actions/organisation_membership_landing.html:22
 msgid "Ce lien a expiré."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:27
+#: templates/public/account_actions/organisation_membership_landing.html:26
 msgid "Ce lien a déjà été utilisé."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:32
+#: templates/public/account_actions/organisation_membership_landing.html:31
 msgid "Ce lien n'est plus valide."
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:37
+#: templates/public/account_actions/organisation_membership_landing.html:36
 msgid "Vous faîtes déjà partie de cette organisation avec ce compte."
 msgstr ""
 
 #: templates/public/account_actions/organisation_membership_landing.html:41
 #, python-format
 msgid ""
-"Voulez-vous rejoindre l'organisation <strong>%(organisation_name)s</"
+"Voulez-vous rejoindre l’organisation <strong>%(organisation_name)s</"
 "strong>&nbsp;?"
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:51
+#: templates/public/account_actions/organisation_membership_landing.html:49
 msgid "Rejoindre"
 msgstr ""
 
-#: templates/public/account_actions/organisation_membership_landing.html:57
+#: templates/public/account_actions/organisation_membership_landing.html:53
 msgid "Vous devez vous identifier pour rejoindre cette organisation."
+msgstr ""
+
+#: templates/public/account_actions/organisation_membership_landing.html:55
+msgid "S’identifier"
 msgstr ""
 
 #: templates/public/account_actions/register.html:4
@@ -1952,12 +2205,6 @@ msgstr ""
 
 #: templates/public/account_actions/register.html:29
 msgid "Nom d'utilisateur"
-msgstr ""
-
-#: templates/public/auth/base_profile_edit.html:5
-#: templates/public/auth/base_profile_edit.html:14
-#: templates/public/base.html:96 templates/userspace/base.html:43
-msgid "Paramètres"
 msgstr ""
 
 #: templates/public/auth/base_profile_edit.html:17
@@ -1971,13 +2218,6 @@ msgstr ""
 #: templates/public/auth/base_profile_edit.html:19
 #: templates/public/auth/login.html:37 templates/public/auth/login.html:87
 msgid "Mot de passe"
-msgstr ""
-
-#: templates/public/auth/login.html:4 templates/public/auth/login.html:10
-#: templates/public/auth/login.html:56 templates/public/auth/login.html:103
-#: templates/public/auth/password_reset_complete.html:7
-#: templates/public/base.html:82
-msgid "Connexion"
 msgstr ""
 
 #: templates/public/auth/login.html:16 templates/public/auth/login.html:66
@@ -2002,7 +2242,7 @@ msgstr ""
 #: templates/public/auth/password_change.html:49
 #: templates/public/auth/password_reset_confirm.html:30
 #: templates/public/auth/personal_data.html:38
-#: templates/userspace/journal/editor/form.html:160
+#: templates/userspace/journal/editor/form.html:168
 msgid "Enregistrer"
 msgstr ""
 
@@ -2074,187 +2314,6 @@ msgstr ""
 #: templates/public/auth/personal_data.html:7
 #: templates/public/auth/personal_data.html:13
 msgid "Modification des informations personnelles"
-msgstr ""
-
-#: templates/public/base.html:59
-msgid "Menu principal"
-msgstr ""
-
-#: templates/public/base.html:66 templates/public/home.html:98
-msgid "Index des revues"
-msgstr ""
-
-#: templates/public/base.html:69 templates/public/home.html:101
-msgid "Index des dépôts institutionnels"
-msgstr ""
-
-#: templates/public/base.html:72 templates/public/home.html:104
-msgid "Index des livres et actes"
-msgstr ""
-
-#: templates/public/base.html:72 templates/public/home.html:104
-msgid "Livres et actes"
-msgstr ""
-
-#: templates/public/base.html:75 templates/public/home.html:107
-msgid "Index des rapports de recherche"
-msgstr ""
-
-#: templates/public/base.html:81
-msgid "Se connecter au tableau de bord"
-msgstr ""
-
-#: templates/public/base.html:87 templates/public/base.html:92
-msgid "Accéder à au tableau de bord"
-msgstr ""
-
-#: templates/public/base.html:87
-msgid "Mon compte"
-msgstr ""
-
-#: templates/public/base.html:92 templates/userspace/journal/home.html:4
-#: templates/userspace/library/home.html:4
-msgid "Tableau de bord"
-msgstr ""
-
-#: templates/public/base.html:96
-msgid "Modifier mes paramètres"
-msgstr ""
-
-#: templates/public/base.html:99
-msgid "Se déconnecter"
-msgstr ""
-
-#: templates/public/base.html:99 templates/userspace/base.html:44
-msgid "Déconnexion"
-msgstr ""
-
-#: templates/public/base.html:105
-msgid "À propos d'Érudit"
-msgstr ""
-
-#: templates/public/base.html:105 templates/public/base.html:223
-#: templates/public/journal/journal_detail.html:138
-#: templates/userspace/journal/home.html:19
-#: templates/userspace/journal/information/journalinformation_update.html:5
-#: templates/userspace/journal/information/journalinformation_update.html:13
-#: templates/userspace/journal/partials/menu.html:23
-msgid "À propos"
-msgstr ""
-
-#: templates/public/base.html:108
-msgid "Effectuer une recherche avancée"
-msgstr ""
-
-#: templates/public/base.html:108 templates/public/home.html:83
-#: templates/public/search/advanced_search.html:5
-#: templates/public/search/advanced_search.html:21
-msgid "Recherche avancée"
-msgstr ""
-
-#: templates/public/base.html:122
-msgid "Voir ma bibliothèque"
-msgstr ""
-
-#: templates/public/base.html:124 templates/public/citations/list.html:4
-#: templates/public/citations/list.html:13
-#: templates/public/citations/list.html:23
-msgid "Ma bibliothèque"
-msgstr ""
-
-#: templates/public/base.html:128
-msgid "Effectuer une recherche simple"
-msgstr ""
-
-#: templates/public/base.html:134
-msgid "Par auteur, titre, mots-clés..."
-msgstr ""
-
-#: templates/public/base.html:136 templates/public/home.html:77
-#: templates/public/search/advanced_search.html:72
-#: templates/public/search/advanced_search.html:142
-msgid "Rechercher"
-msgstr ""
-
-#: templates/public/base.html:152
-msgid "Fil d'Ariane"
-msgstr ""
-
-#: templates/public/base.html:169
-#, python-format
-msgid ""
-"\n"
-"      Vous êtes sur la nouvelle plateforme d’Érudit. Bonne visite! <a href="
-"\"%(fallback_url)s\" target=\"_blank\">Retour à l’ancien site</a>\n"
-"      "
-msgstr ""
-
-#: templates/public/base.html:194
-#: templates/public/journal/journal_detail.html:246
-#: templates/public/journal/journal_list_per_disciplines.html:86
-msgid "Retourner en haut"
-msgstr ""
-
-#: templates/public/base.html:205
-msgid "Abonnez-vous à notre infolettre&nbsp;:"
-msgstr ""
-
-#: templates/public/base.html:208
-msgid "nom@courriel.com"
-msgstr ""
-
-#: templates/public/base.html:209
-msgid "S'inscrire"
-msgstr ""
-
-#: templates/public/base.html:224 templates/public/brand_assets.html:5
-#: templates/public/brand_assets.html:27 templates/public/brand_assets.html:38
-#: templates/public/brand_assets.html:47
-msgid "Logo et identité"
-msgstr ""
-
-#: templates/public/base.html:249
-msgid "Livres & actes"
-msgstr ""
-
-#: templates/public/base.html:256
-msgid "Aide"
-msgstr ""
-
-#: templates/public/base.html:257
-msgid "Plan du site"
-msgstr ""
-
-#: templates/public/base.html:258
-msgid "Nous contacter"
-msgstr ""
-
-#: templates/public/base.html:260 templates/public/home.html:181
-msgid "Salons"
-msgstr ""
-
-#: templates/public/base.html:263
-msgid "Jamais trop érudit"
-msgstr ""
-
-#: templates/public/base.html:281
-msgid "Logo d'Érudit"
-msgstr ""
-
-#: templates/public/base.html:282
-msgid "Cultivez votre savoir."
-msgstr ""
-
-#: templates/public/base.html:289
-msgid "Consortium Érudit"
-msgstr ""
-
-#: templates/public/base.html:292
-msgid "Politique et licence d’utilisation"
-msgstr ""
-
-#: templates/public/base.html:297
-msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
 #: templates/public/brand_assets.html:7
@@ -2538,14 +2597,14 @@ msgstr ""
 #: templates/public/journal/partials/issue_detail_article_item.html:14
 #: templates/public/search/advanced_search.html:163
 #: templates/public/search/results.html:315
-#: templates/userspace/journal/editor/detail.html:169
-#: templates/userspace/journal/subscription/individualsubscription_list.html:28
-#: templates/userspace/journal/subscription/individualsubscription_list.html:89
-#: templates/userspace/journal/subscription/individualsubscription_list.html:90
-#: templates/userspace/library/members/member_list.html:28
-#: templates/userspace/library/members/member_list.html:70
-#: templates/userspace/library/members/member_list.html:71
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:28
+#: templates/userspace/journal/editor/delete.html:9
+#: templates/userspace/journal/editor/detail.html:153
+#: templates/userspace/journal/subscription/individualsubscription_list.html:41
+#: templates/userspace/journal/subscription/individualsubscription_list.html:98
+#: templates/userspace/journal/subscription/individualsubscription_list.html:99
+#: templates/userspace/library/members/member_list.html:39
+#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:8
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:38
 msgid "Supprimer"
 msgstr ""
 
@@ -2636,6 +2695,10 @@ msgstr ""
 #: templates/public/citations/list.html:203
 #: templates/public/journal/partials/article_citation_modal_content.html:73
 #: templates/public/search/results.html:416
+#: templates/userspace/journal/editor/form.html:29
+#: templates/userspace/journal/editor/form.html:39
+#: templates/userspace/library/members/member_list.html:35
+#: templates/userspace/library/members/member_list.html:75
 msgid "n<sup>o</sup>"
 msgstr ""
 
@@ -2713,15 +2776,17 @@ msgid "Nouvelles"
 msgstr ""
 
 #: templates/public/home.html:182
-msgid "Patrimoines archéologiques et urbains&nbsp;: des legs à bâtir"
+msgid "École, éducation, enseignement"
 msgstr ""
 
 #: templates/public/home.html:183
 msgid ""
-"En 2017, la Confédération et la ville de Montréal auront fêté leurs 150 et "
-"375 ans. Deux anniversaires et autant d’occasions de s’intéresser à leur "
-"jeune patrimoine. De quoi se compose-t-il&nbsp;? Quels efforts sont faits "
-"pour le préserver&nbsp;?"
+"Il est peu de lieux aussi communs, peu d’espaces qui fassent autant société "
+"qu’une cour d’école ou une salle de classe. L’intégration des nouveaux "
+"arrivants dans les curriculums canadiens est donc, pour le pays, à la fois "
+"une nécessité et un défi. Comment le Canada va-t-il répondre aux défis "
+"particuliers que pose la scolarisation des nombreux enfants réfugiés, "
+"récemment accueillis&nbsp;?"
 msgstr ""
 
 #: templates/public/home.html:193 templates/public/home.html:203
@@ -3213,27 +3278,22 @@ msgid "Revue suivie de"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:134
-#: templates/userspace/journal/home.html:14
 msgid "Aucune information"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:150
-#: templates/userspace/journal/home.html:30
 msgid "Coordonnées"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:162
-#: templates/userspace/journal/home.html:42
 msgid "Politique éditoriale"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:186
-#: templates/userspace/journal/home.html:66
 msgid "Équipe"
 msgstr ""
 
 #: templates/public/journal/journal_detail.html:198
-#: templates/userspace/journal/home.html:78
 msgid "Partenaires"
 msgstr ""
 
@@ -3355,6 +3415,7 @@ msgstr ""
 
 #: templates/public/journal/partials/issue_detail_article_item.html:11
 #: templates/public/search/results.html:311
+#: templates/userspace/journal/information/journalinformation_update.html:108
 msgid "Sauvegarder"
 msgstr ""
 
@@ -3610,6 +3671,8 @@ msgid "Dernièrement diffusées"
 msgstr ""
 
 #: templates/public/thesis/collection_home.html:122
+#: templates/userspace/library/stats/landing.html:28
+#: templates/userspace/library/stats/landing.html:42
 msgid "Par année"
 msgstr ""
 
@@ -3724,44 +3787,37 @@ msgstr ""
 msgid "Voir le dépôt %(name)s"
 msgstr ""
 
-#: templates/userspace/base.html:42
-msgid "Accueil erudit.org"
-msgstr ""
-
-#: templates/userspace/home.html:4 templates/userspace/home.html:12
+#: templates/userspace/home.html:4 templates/userspace/home.html:14
 msgid "Choix de l'espace de gestion"
 msgstr ""
 
-#: templates/userspace/home.html:14
+#: templates/userspace/home.html:16
 msgid "Gestion des revues"
 msgstr ""
 
-#: templates/userspace/home.html:17
+#: templates/userspace/home.html:19
 msgid "Gestion des bibliothèques"
 msgstr ""
 
 #: templates/userspace/journal/authorization/authorization_confirm_delete.html:4
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:9
+#: templates/userspace/journal/authorization/authorization_confirm_delete.html:8
+#: templates/userspace/journal/authorization/authorization_confirm_delete.html:12
 #: templates/userspace/library/authorization/authorization_confirm_delete.html:4
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:9
+#: templates/userspace/library/authorization/authorization_confirm_delete.html:8
+#: templates/userspace/library/authorization/authorization_confirm_delete.html:12
 msgid "Supprimer un accès"
 msgstr ""
 
 #: templates/userspace/journal/authorization/authorization_confirm_delete.html:17
 #: templates/userspace/library/authorization/authorization_confirm_delete.html:17
-msgid "Confirmer la suppression de l'accès ?"
-msgstr ""
-
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:21
-#: templates/userspace/library/authorization/authorization_confirm_delete.html:21
 #, python-format
-msgid "Voulez-vous supprimer l'accès de <strong>%(name)s</strong> ?"
+msgid "Voulez-vous supprimer l’accès de <strong>%(name)s</strong>&nbsp;?"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:27
-#: templates/userspace/journal/editor/delete.html:24
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:27
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:27
+#: templates/userspace/journal/authorization/authorization_confirm_delete.html:26
+#: templates/userspace/journal/editor/delete.html:26
+#: templates/userspace/journal/subscription/individualsubscription_cancel.html:24
+#: templates/userspace/journal/subscription/individualsubscription_delete.html:24
 #: templates/userspace/library/authorization/authorization_confirm_delete.html:27
 #: templates/userspace/library/members/member_cancel.html:27
 #: templates/userspace/library/members/member_delete.html:27
@@ -3769,10 +3825,10 @@ msgstr ""
 msgid "Oui"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_confirm_delete.html:28
-#: templates/userspace/journal/editor/delete.html:25
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:28
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:28
+#: templates/userspace/journal/authorization/authorization_confirm_delete.html:27
+#: templates/userspace/journal/editor/delete.html:27
+#: templates/userspace/journal/subscription/individualsubscription_cancel.html:25
+#: templates/userspace/journal/subscription/individualsubscription_delete.html:25
 #: templates/userspace/library/authorization/authorization_confirm_delete.html:28
 #: templates/userspace/library/members/member_cancel.html:28
 #: templates/userspace/library/members/member_delete.html:28
@@ -3780,298 +3836,334 @@ msgstr ""
 msgid "Non"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_create.html:5
+#: templates/userspace/journal/authorization/authorization_create.html:6
 #: templates/userspace/journal/authorization/authorization_create.html:10
-#: templates/userspace/journal/authorization/authorization_create.html:15
+#: templates/userspace/journal/authorization/authorization_create.html:14
 #: templates/userspace/library/authorization/authorization_create.html:5
-#: templates/userspace/library/authorization/authorization_create.html:10
-#: templates/userspace/library/authorization/authorization_create.html:15
+#: templates/userspace/library/authorization/authorization_create.html:9
+#: templates/userspace/library/authorization/authorization_create.html:13
 msgid "Ajouter un accès"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_create.html:17
-#: templates/userspace/library/authorization/authorization_create.html:17
+#: templates/userspace/journal/authorization/authorization_create.html:19
 #, python-format
 msgid ""
-"Veuillez sélectionner l'utilisateur auquel ajouter l'autorisation suivante : "
-"<strong>%(authorization_label)s</strong>"
+"Veuillez sélectionner l’utilisateur auquel ajouter l’autorisation "
+"suivante&nbsp;: <strong>%(authorization_label)s</strong>"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_create.html:40
-#: templates/userspace/journal/information/journalinformation_update.html:53
-#: templates/userspace/journal/subscription/individualsubscription_create.html:55
-#: templates/userspace/library/authorization/authorization_create.html:40
-#: templates/userspace/library/members/member_create.html:57
-#: templates/userspace/library/subscription_information/update.html:38
+#: templates/userspace/journal/authorization/authorization_create.html:42
+#: templates/userspace/journal/subscription/individualsubscription_create.html:45
+#: templates/userspace/library/authorization/authorization_create.html:43
+#: templates/userspace/library/members/member_create.html:49
+#: templates/userspace/library/subscription_information/update.html:47
 #: templates/userspace/library/subscription_ips/ipaddressrange_create.html:42
 #: templates/userspace/reporting/home.html:53
 msgid "Valider"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_user.html:25
-#: templates/userspace/library/authorization/authorization_user.html:21
-msgid "Ajouter"
+#: templates/userspace/journal/authorization/authorization_user.html:17
+msgid ""
+"\n"
+"<p>Cette section permet la gestion des autorisations pour modifier la page "
+"<em>À propos</em> et déposer des fichiers de production.</p>\n"
+"\n"
+"<p>Le nom et courriel des personnes autorisées à effectuer ces tâches "
+"doivent être transmis à l’adresse <a href=\"mailto:edition@erudit.org?"
+"subject=Tableau de bord éditeur - Ajout d’un nouveau membre\">edition@erudit."
+"org</a>. La possibilité de donner une ou ces deux autorisations sera ensuite "
+"activée.</p>\n"
 msgstr ""
 
-#: templates/userspace/journal/authorization/authorization_user.html:30
-#: templates/userspace/journal/authorization/authorization_user.html:31
-#: templates/userspace/library/authorization/authorization_user.html:26
+#: templates/userspace/journal/authorization/authorization_user.html:27
 #: templates/userspace/library/authorization/authorization_user.html:27
-msgid "supprimer"
+#: templates/userspace/library/members/member_list.html:36
+msgid "Usager"
 msgstr ""
 
-#: templates/userspace/journal/editor/base.html:4
-msgid "Espace éditeurs"
+#: templates/userspace/journal/authorization/authorization_user.html:28
+msgid "Date <br>d’ajout"
+msgstr ""
+
+#: templates/userspace/journal/authorization/authorization_user.html:29
+#: templates/userspace/library/members/member_list.html:38
+msgid "Dernière <br>connexion"
+msgstr ""
+
+#: templates/userspace/journal/authorization/authorization_user.html:54
+#: templates/userspace/library/authorization/authorization_user.html:54
+msgid "Supprimer cet usager"
+msgstr ""
+
+#: templates/userspace/journal/authorization/authorization_user.html:62
+#: templates/userspace/library/authorization/authorization_user.html:62
+msgid "Aucun usager n’a été autorisé à modifier cette section."
+msgstr ""
+
+#: templates/userspace/journal/authorization/authorization_user.html:63
+#: templates/userspace/library/authorization/authorization_user.html:63
+msgid "Ajouter un accès."
 msgstr ""
 
 #: templates/userspace/journal/editor/delete.html:5
-msgid "Voulez supprimer la dépôt de fichiers?"
+#: templates/userspace/journal/editor/delete.html:13
+msgid "Supprimer un dépôt"
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:10
-#: templates/userspace/journal/editor/detail.html:10
-#: templates/userspace/journal/editor/form.html:22
-#: templates/userspace/journal/editor/issuesubmission_approve.html:10
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:10
-#: templates/userspace/journal/editor/issuesubmission_submit.html:10
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:24
+#: templates/userspace/journal/editor/delete.html:8
+#: templates/userspace/journal/editor/detail.html:5
+#: templates/userspace/journal/editor/detail.html:8
+#: templates/userspace/journal/editor/form.html:12
+#: templates/userspace/journal/editor/form.html:27
+#: templates/userspace/journal/editor/issues.html:5
+#: templates/userspace/journal/editor/issues.html:10
+#: templates/userspace/journal/editor/issues.html:14
+#: templates/userspace/journal/editor/issuesubmission_approve.html:8
+#: templates/userspace/journal/editor/issuesubmission_refuse.html:8
+#: templates/userspace/journal/editor/issuesubmission_submit.html:8
+msgid "Dépôt de fichiers"
+msgstr ""
+
+#: templates/userspace/journal/editor/delete.html:9
+#: templates/userspace/journal/editor/form.html:8
+#: templates/userspace/journal/editor/form.html:29
+#: templates/userspace/journal/editor/form.html:39
+#: templates/userspace/journal/editor/issuesubmission_approve.html:9
+#: templates/userspace/journal/editor/issuesubmission_refuse.html:9
+#: templates/userspace/journal/editor/issuesubmission_submit.html:9
 msgid "vol."
 msgstr ""
 
-#: templates/userspace/journal/editor/delete.html:10
-#: templates/userspace/journal/editor/detail.html:10
-#: templates/userspace/journal/editor/form.html:22
-#: templates/userspace/journal/editor/issuesubmission_approve.html:10
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:10
-#: templates/userspace/journal/editor/issuesubmission_submit.html:10
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:26
+#: templates/userspace/journal/editor/delete.html:9
+#: templates/userspace/journal/editor/form.html:8
+#: templates/userspace/journal/editor/issuesubmission_approve.html:9
+#: templates/userspace/journal/editor/issuesubmission_refuse.html:9
+#: templates/userspace/journal/editor/issuesubmission_submit.html:9
 msgid "n°"
 msgstr ""
 
 #: templates/userspace/journal/editor/delete.html:18
-msgid "Suppression de fichiers"
-msgstr ""
-
-#: templates/userspace/journal/editor/delete.html:21
 #, python-format
 msgid ""
-"Vous allez supprimer l'ensemble des fichiers téléchargés dans le dossier <em>"
-"%(object)s</em>. Voulez-vous poursuivre ? "
-msgstr ""
-
-#: templates/userspace/journal/editor/detail.html:18
-msgid "Modifier"
+"Vous allez supprimer l’ensemble des fichiers téléchargés dans le dossier <em>"
+"%(object)s</em>. Voulez-vous poursuivre&nbsp;? "
 msgstr ""
 
 #: templates/userspace/journal/editor/detail.html:21
-msgid "Dépôt de fichiers de production"
-msgstr ""
-
-#: templates/userspace/journal/editor/detail.html:28
-msgid "Attention"
-msgstr ""
-
-#: templates/userspace/journal/editor/detail.html:45
-#: templates/userspace/journal/editor/form.html:66
+#: templates/userspace/journal/editor/form.html:74
 msgid "Informations du numéro"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:56
-#: templates/userspace/journal/editor/detail.html:74
-msgid "Non renseigné"
+#: templates/userspace/journal/editor/detail.html:25
+msgid "Modifier"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:83
-#: templates/userspace/journal/editor/form.html:96
+#: templates/userspace/journal/editor/detail.html:32
+#: templates/userspace/journal/editor/detail.html:89
+#: templates/userspace/journal/editor/form.html:111
+#: templates/userspace/journal/editor/issues.html:39
+#: templates/userspace/journal/editor/resumable_uploads_widget.html:11
+msgid "Statut"
+msgstr ""
+
+#: templates/userspace/journal/editor/detail.html:54
+msgid "[Non renseigné]"
+msgstr ""
+
+#: templates/userspace/journal/editor/detail.html:60
+#: templates/userspace/journal/editor/form.html:99
 msgid "Fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:95
-#: templates/userspace/journal/editor/detail.html:138
-#: templates/userspace/journal/editor/form.html:139
+#: templates/userspace/journal/editor/detail.html:70
+#: templates/userspace/journal/editor/detail.html:130
+#: templates/userspace/journal/editor/form.html:146
 msgid "partiellement téléversé"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:100
-msgid "Aucun fichier"
+#: templates/userspace/journal/editor/detail.html:77
+msgid "[Aucun fichier soumis]"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:111
-#: templates/userspace/journal/editor/form.html:112
-#: templates/userspace/journal/editor/issues.html:26
+#: templates/userspace/journal/editor/detail.html:84
+#: templates/userspace/journal/editor/form.html:106
+#: templates/userspace/journal/editor/issues.html:28
 msgid "Historique"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:121
-msgid "Corrections demandées le"
+#: templates/userspace/journal/editor/detail.html:88
+#: templates/userspace/journal/editor/form.html:110
+msgid "Date"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:123
-#: templates/userspace/journal/editor/form.html:124
-msgid "Soumis le"
-msgstr ""
-
-#: templates/userspace/journal/editor/detail.html:125
-#: templates/userspace/journal/editor/form.html:126
-msgid "Validé le"
-msgstr ""
-
-#: templates/userspace/journal/editor/detail.html:127
-#: templates/userspace/journal/editor/form.html:128
+#: templates/userspace/journal/editor/detail.html:98
+#: templates/userspace/journal/editor/form.html:120
 #, python-format
-msgid "%(prefix)s %(date)s"
+msgid "%(date)s<br> %(time)s"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:133
-msgid "Fichiers :"
+#: templates/userspace/journal/editor/detail.html:105
+#: templates/userspace/journal/editor/form.html:127
+msgid "Corrections demandées"
 msgstr ""
 
-#: templates/userspace/journal/editor/detail.html:144
-msgid "Commentaires :"
+#: templates/userspace/journal/editor/detail.html:107
+#: templates/userspace/journal/editor/form.html:129
+msgid "Soumis"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:23
-msgid "Édition"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:25
-msgid "Nouveau dépôt"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:32
-#: templates/userspace/journal/editor/issues.html:21
-msgid "Déposer des fichiers de production"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:35
-msgid "Instructions"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:37
-msgid ""
-"Afin d’optimiser le temps de production de vos numéros et ainsi réduire les "
-"coûts qui y sont reliés, merci de respecter les règles suivantes&nbsp;:"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:39
-msgid "PDF avec les polices incorporées"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:40
-msgid "PDF séparés article par article"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:41
-msgid ""
-"Nomenclature des articles selon leur ordre d’apparition dans le sommaire du "
-"numéro (article1, article2&hellip;)"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:42
-msgid ""
-"Nomenclature des images et tableaux (numéro de l’article et selon l’ordre où "
-"ils apparaissent dans l'article. Par ex&nbsp;: image01-01.jpg)"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:43
-msgid "Supprimer toutes les marques de coupes dans les fichiers PDF."
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:45
-msgid ""
-"Notez également que vous devez effectuer les balisages suivants lors de la "
-"mise en page de vos articles si vous souhaitez qu’ils s’affichent "
-"correctement sur la plateforme&nbsp;:"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:47
-msgid ""
-"Baliser les liens et les courriels (les affiliations, le corps du texte et "
-"les références bibliographiques)"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:48
-msgid "Lier les appels de notes aux notes de bas de page"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:59
-msgid "Veuillez remplir les champs obligatoires."
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:122
-msgid "Marqué à corriger le"
-msgstr ""
-
-#: templates/userspace/journal/editor/form.html:134
+#: templates/userspace/journal/editor/detail.html:115
+#: templates/userspace/journal/editor/form.html:140
 msgid "Fichiers&nbsp;:"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:145
-msgid "Commentaires&nbsp;:"
+#: templates/userspace/journal/editor/form.html:8
+msgid "Modifer"
 msgstr ""
 
-#: templates/userspace/journal/editor/form.html:159
+#: templates/userspace/journal/editor/form.html:10
+msgid "Soumission"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:30
+msgid "Modification"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:32
+msgid "Nouveau dépôt"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:38
+msgid "Modifier le numéro&nbsp;:"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:46
+msgid ""
+"Afin de réduire les délais de production de vos numéros et ainsi réduire les "
+"coûts qui y sont reliés, ne pas oublier de&nbsp;:"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:48
+msgid "Incorporer les polices des fichiers PDF;"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:49
+msgid "Séparer les fichiers PDF article par article;"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:50
+msgid ""
+"Nommer les articles selon leur ordre d’apparition dans le numéro "
+"(<em>article1</em>, <em>article2</em>&hellip;);"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:51
+msgid ""
+"Nommer les figures et tableaux selon le numéro de l’article et leur ordre "
+"d’apparition dans l'article (<em>image01-01.jpg</em>);"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:52
+msgid "Supprimer les marques de coupes dans les fichiers PDF;"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:53
+msgid "Compresser tous les fichiers dans un dossier ZIP avant de le déposer."
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:56
+msgid ""
+"Pour que vos articles s’affichent correctement sur la plateforme, veuillez "
+"effectuer les balisages suivants lors de la mise en page&nbsp;:"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:58
+msgid ""
+"Baliser les liens et les courriels dans les affiliations, le corps du texte "
+"et les références bibliographiques;"
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:59
+msgid "Lier les appels de notes aux notes de bas de page."
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:70
+msgid "Veuillez remplir les champs obligatoires."
+msgstr ""
+
+#: templates/userspace/journal/editor/form.html:167
+#: templates/userspace/library/authorization/authorization_create.html:44
+#: templates/userspace/library/members/member_list.html:78
+#: templates/userspace/library/subscription_information/update.html:48
+#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:43
 msgid "Annuler"
 msgstr ""
 
-#: templates/userspace/journal/editor/issues.html:45
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:35
-#, python-format
-msgid "Ajouté le %(created)s"
+#: templates/userspace/journal/editor/issues.html:18
+msgid ""
+"\n"
+"<p>Cet espace vous permet d’envoyer vos fichiers de production et de "
+"vérifier leur statut&nbsp;: <em>non soumis</em>, <em>en attente de "
+"validation</em>, <em>à corriger</em> ou <em>validé et publié</em>.</p>\n"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:18
+#: templates/userspace/journal/editor/issues.html:31
+msgid "Déposer"
+msgstr ""
+
+#: templates/userspace/journal/editor/issues.html:38
+msgid "Date d’ajout"
+msgstr ""
+
+#: templates/userspace/journal/editor/issuesubmission_approve.html:13
 msgid "Approbation des fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:22
+#: templates/userspace/journal/editor/issuesubmission_approve.html:17
 msgid ""
-"<p>Rappel</p> <ul> <li>Faire le backup des fichiers</li> <li>Ajouter le "
+"<h2>Rappel</h2> <ul> <li>Faire le backup des fichiers</li> <li>Ajouter le "
 "numéro au calendrier de production</li> <li>Assigner le numéro à un ou une "
 "technicienne</li> </ul>"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_approve.html:46
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:36
+#: templates/userspace/journal/editor/issuesubmission_approve.html:44
+#: templates/userspace/journal/editor/issuesubmission_refuse.html:40
 msgid "Retour"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:18
+#: templates/userspace/journal/editor/issuesubmission_refuse.html:13
 msgid "Demande de corrections"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_refuse.html:35
+#: templates/userspace/journal/editor/issuesubmission_refuse.html:39
 msgid "Envoyer"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_submit.html:18
+#: templates/userspace/journal/editor/issuesubmission_submit.html:5
+#: templates/userspace/journal/editor/issuesubmission_submit.html:13
 msgid "Transmission finale des fichiers"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_submit.html:25
+#: templates/userspace/journal/editor/issuesubmission_submit.html:9
+msgid "Soumettre"
+msgstr ""
+
+#: templates/userspace/journal/editor/issuesubmission_submit.html:27
 msgid ""
 "Les fichiers suivants n'ont pas été téléversés complètement et ne seront pas "
 "envoyés à l'équipe de production:"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_submit.html:34
+#: templates/userspace/journal/editor/issuesubmission_submit.html:36
 msgid "Yes"
 msgstr ""
 
-#: templates/userspace/journal/editor/issuesubmission_submit.html:35
+#: templates/userspace/journal/editor/issuesubmission_submit.html:37
 msgid "No"
-msgstr ""
-
-#: templates/userspace/journal/editor/partials/issuesubmission_list.html:13
-msgid "Soumis"
 msgstr ""
 
 #: templates/userspace/journal/editor/resumable_uploads_widget.html:10
 msgid "Taille"
-msgstr ""
-
-#: templates/userspace/journal/editor/resumable_uploads_widget.html:11
-msgid "Statut"
 msgstr ""
 
 #: templates/userspace/journal/editor/resumable_uploads_widget.html:45
@@ -4082,171 +4174,462 @@ msgstr ""
 msgid "Téléverser"
 msgstr ""
 
+#: templates/userspace/journal/home.html:17
+msgid ""
+"\n"
+"<p>Bienvenue dans la nouvelle version du Tableau de bord de votre revue sur "
+"Érudit&nbsp;!</p>\n"
+"\n"
+"<p>Anciennement appelé <em>Espace éditeur</em>, le Tableau de bord vous "
+"donne accès à tous les services et informations qui concernent la production "
+"et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des "
+"institutions abonnées, statistiques, rapports de redevances, etc.</p>\n"
+"\n"
+"<p>Certains services n’ont pas encore été intégrés dans ce nouvel espace, et "
+"vous serez donc redirigé vers les anciennes versions des pages.</p>\n"
+"\n"
+"<p>Vous pouvez consulter les guides d’utilisation de <a href=\"http://www."
+"erudit.org/public/documents/guide-editeur-a_propos.pdf\" target=\"_blank"
+"\">l’À propos</a> et <a href=\"http://www.erudit.org/public/documents/guide-"
+"editeur-depot.pdf\" target=\"_blank\">du Dépôt de fichiers</a>, ou encore "
+"communiquer avec nous à l’adresse <a href=\"mailto:edition@erudit.org?"
+"subject=Tableau de bord des éditeurs\">edition@erudit.org</a> pour toute "
+"question.</p>\n"
+"\n"
+"<p><br>Bien cordialement, <br><br>L’équipe d’Érudit.</p>\n"
+msgstr ""
+
+#: templates/userspace/journal/home.html:31
+#: templates/userspace/library/home.html:29
+msgid "Communiquer avec des membres de l’équipe d’Érudit"
+msgstr ""
+
+#: templates/userspace/journal/home.html:36
+msgid ""
+"\n"
+"        Édition et production numérique&nbsp;:<br>\n"
+"        Hocine Chehab, <br>Chargé d’édition numérique<br>\n"
+"        <a href=\"mailto:hocine.chehab@erudit.org?subject=Tableau de bord "
+"des éditeurs\">hocine.chehab@erudit.org</a><br>\n"
+"        <a href=\"tel:1-514-343-6111,44607\">+1 514-343-6111 poste 44607</"
+"a>\n"
+"        "
+msgstr ""
+
+#: templates/userspace/journal/home.html:49
+#: templates/userspace/library/home.html:35
+msgid ""
+"\n"
+"        Abonnements, redevances et partenariats&nbsp;:<br>\n"
+"        Émilie Chouinard, <br>Chargée des partenariats<br>\n"
+"        <a href=\"mailto:emilie.chouinard@erudit.org?subject=Tableau de bord "
+"des éditeurs\">emilie.chouinard@erudit.org</a><br>\n"
+"        <a href=\"tel:1-514-343-6111,16563\">+1 514-343-6111 poste 16563</"
+"a>\n"
+"        "
+msgstr ""
+
+#: templates/userspace/journal/home.html:62
+msgid ""
+"\n"
+"        Communications et promotion de votre revue numérique&nbsp;:<br>\n"
+"        Gwendal Henry, <br>Chargé de communication<br>\n"
+"        <a href=\"mailto:gwendal.henry@erudit.org?subject=Tableau de bord "
+"des éditeurs\">gwendal.henry@erudit.org</a><br>\n"
+"        <a href=\"tel:1-514-343-6111,2723\">+1 514-343-6111 poste 2723</a>\n"
+"        "
+msgstr ""
+
+#: templates/userspace/journal/home.html:75
+#: templates/userspace/library/home.html:61
+msgid ""
+"\n"
+"        Pour toutes autres questions, communiquez à l’adresse générale à <a "
+"href=\"mailto:info@erudit.org?subject=Tableau de bord des éditeurs"
+"\">info@erudit.org</a>.\n"
+"        "
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:15
+msgid "À propos de la revue"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:19
+msgid ""
+"\n"
+"<p>La page <em>À propos</em> est la vitrine de votre revue sur Érudit&nbsp;: "
+"c’est ici que vous pourrez présenter votre publication, sa ligne éditoriale, "
+"son équipe, bref, tous les éléments que vous considérez importants. Il est "
+"ainsi recommandé de rédiger du contenu pour chacune des sections, tant en "
+"français qu’en anglais.</p>\n"
+"<p>Cette page sera consultée par des lecteurs qui souhaiteront mieux "
+"connaître votre revue, mais aussi par de potentiels auteurs, des agrégateurs "
+"et des bibliothécaires.</p>\n"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:43
+msgid "Coordonnées générales"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:47
+msgid ""
+"Les coordonnées de la revue seront affichées sur le site pour orienter les "
+"usagers concernant certaines demandes, notamment les abonnements individuels."
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:52
+msgid "Prénom et nom OU nom de l’organisation"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:60
+msgid "Numéro de téléphone"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:67
+msgid "Liens"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:70
+msgid "Facebook"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:74
+msgid "Afficher votre fil d’activités Facebook&nbsp;?"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:78
+msgid "Twitter"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:82
+msgid "Afficher votre fil d’activités Twitter&nbsp;?"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:86
+msgid "Site Web officiel"
+msgstr ""
+
+#: templates/userspace/journal/partials/menu.html:37
+msgid "Redevances"
+msgstr ""
+
+#: templates/userspace/journal/partials/menu.html:50
+msgid ""
+"Vous devez vous connecter à un site externe pour accéder à vos rapports "
+"statistiques. L’identifiant et le mot de passe correspondent à ceux de votre "
+"ancien Espace éditeur sur Érudit."
+msgstr ""
+
+#: templates/userspace/journal/partials/menu.html:53
+#: templates/userspace/library/partials/menu.html:22
+#: templates/userspace/library/stats/landing.html:4
+#: templates/userspace/library/stats/landing.html:7
+#: templates/userspace/library/stats/landing.html:11
+msgid "Consultations"
+msgstr ""
+
+#: templates/userspace/journal/partials/menu.html:59
+msgid ""
+"Vous devez vous connecter à un site externe pour accéder à OJS. "
+"L’identifiant et le mot de passe de ce service sont différents de celui de "
+"votre Espace éditeur. Si vous ne les connaissez pas, vous pouvez communiquer "
+"avec Érudit à l’adresse edition@erudit.org."
+msgstr ""
+
+#: templates/userspace/journal/partials/menu.html:62
+msgid "Manuscrits"
+msgstr ""
+
+#: templates/userspace/journal/royalty_reports/list.html:17
+msgid ""
+"\n"
+"  Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant "
+"et mot de passe sur le site <em>rétro</em> Érudit pour accéder aux rapports "
+"de redevances de votre revue.\n"
+"  "
+msgstr ""
+
+#: templates/userspace/journal/royalty_reports/list.html:41
+#: templates/userspace/journal/subscription/individualsubscription_list.html:112
+msgid "Accéder"
+msgstr ""
+
 #: templates/userspace/journal/subscription/individualsubscription_cancel.html:4
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:9
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:17
+#: templates/userspace/journal/subscription/individualsubscription_cancel.html:8
+#: templates/userspace/journal/subscription/individualsubscription_cancel.html:14
 msgid "Confirmer l'annulation de la proposition d'abonnement ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:8
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:8
-msgid "Abonnements individuels"
-msgstr ""
-
-#: templates/userspace/journal/subscription/individualsubscription_cancel.html:21
+#: templates/userspace/journal/subscription/individualsubscription_cancel.html:18
 #, python-format
 msgid ""
 "Voulez-vous annuler la proposition d'abonnement envoyée à <strong>%(email)s</"
 "strong> ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_create.html:14
-#: templates/userspace/journal/subscription/individualsubscription_create.html:21
-#: templates/userspace/journal/subscription/individualsubscription_list.html:19
+#: templates/userspace/journal/subscription/individualsubscription_create.html:5
+#: templates/userspace/journal/subscription/individualsubscription_create.html:9
+#: templates/userspace/journal/subscription/individualsubscription_create.html:13
+#: templates/userspace/journal/subscription/individualsubscription_list.html:33
 msgid "Créer un abonnement"
 msgstr ""
 
 #: templates/userspace/journal/subscription/individualsubscription_delete.html:4
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:9
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:17
+#: templates/userspace/journal/subscription/individualsubscription_delete.html:8
+#: templates/userspace/journal/subscription/individualsubscription_delete.html:14
 msgid "Confirmer la suppression de l'abonnement ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_delete.html:21
+#: templates/userspace/journal/subscription/individualsubscription_delete.html:18
 #, python-format
 msgid "Voulez-vous supprimer l'abonnement de <strong>%(name)s</strong> ?"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:40
+#: templates/userspace/journal/subscription/individualsubscription_list.html:16
+msgid ""
+"\n"
+"Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant "
+"et mot de passe sur le site <em>rétro</em> Érudit pour accéder à la liste "
+"des institutions abonnées à votre revue.\n"
+msgstr ""
+
+#: templates/userspace/journal/subscription/individualsubscription_list.html:26
+msgid "Institutionnels"
+msgstr ""
+
+#: templates/userspace/journal/subscription/individualsubscription_list.html:29
+msgid "Individuels"
+msgstr ""
+
+#: templates/userspace/journal/subscription/individualsubscription_list.html:53
 #, python-format
 msgid "Créé le %(created)s"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:60
+#: templates/userspace/journal/subscription/individualsubscription_list.html:72
 msgid "Organisations abonnées à cette revue"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:67
+#: templates/userspace/journal/subscription/individualsubscription_list.html:76
 msgid "Abonnements en attente"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:75
-#: templates/userspace/library/members/member_list.html:56
+#: templates/userspace/journal/subscription/individualsubscription_list.html:84
 msgid "Date d'expiration"
 msgstr ""
 
-#: templates/userspace/journal/subscription/individualsubscription_list.html:76
-#: templates/userspace/library/members/member_list.html:57
+#: templates/userspace/journal/subscription/individualsubscription_list.html:85
 msgid "Actions"
 msgstr ""
 
-#: templates/userspace/library/members/member_cancel.html:4
-#: templates/userspace/library/members/member_cancel.html:9
-#: templates/userspace/library/members/member_cancel.html:17
-msgid "Confirmer l'annulation de la demande d'ajout de membre ?"
+#: templates/userspace/library/authorization/authorization_create.html:18
+#, python-format
+msgid ""
+"Veuillez sélectionner l’utilisateur auquel ajouter l'autorisation "
+"suivante&nbsp;: <strong>%(authorization_label)s</strong>"
 msgstr ""
 
+#: templates/userspace/library/authorization/authorization_user.html:17
+#: templates/userspace/library/members/member_list.html:15
+#: templates/userspace/library/stats/landing.html:15
+#: templates/userspace/library/subscription_information/update.html:16
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:15
+msgid ""
+"\n"
+"<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum "
+"vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, "
+"efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis "
+"parturient montes, nascetur ridiculus mus.</p>\n"
+"\n"
+"<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum "
+"pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis "
+"consectetur ut a nibh.</p>\n"
+msgstr ""
+
+#: templates/userspace/library/authorization/authorization_user.html:28
+msgid "Date <br/>d’ajout"
+msgstr ""
+
+#: templates/userspace/library/authorization/authorization_user.html:29
+msgid "Dernière connexion"
+msgstr ""
+
+#: templates/userspace/library/home.html:17
+msgid ""
+"\n"
+"<p>Bienvenue dans la nouvelle version du Tableau de bord de votre "
+"bibliothèque sur Érudit&nbsp;!</p>\n"
+"\n"
+"<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum "
+"vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, "
+"efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis "
+"parturient montes, nascetur ridiculus mus.</p>\n"
+"\n"
+"<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum "
+"pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis "
+"consectetur ut a nibh.</p>\n"
+"\n"
+"<p><br>Bien cordialement, <br><br>L'équipe d'Érudit.</p>\n"
+msgstr ""
+
+#: templates/userspace/library/home.html:48
+msgid ""
+"\n"
+"        Communications et promotion des revues numériques&nbsp;:<br>\n"
+"        Gwendal Henry, <br>Chargé de communication<br>\n"
+"        <a href=\"mailto:gwendal.henry@erudit.org?subject=Tableau de bord "
+"des éditeurs\">gwendal.henry@erudit.org</a><br>\n"
+"        <a href=\"tel:1-514-343-6111,2723\">+1 514-343-6111 poste 2723</a>\n"
+"        "
+msgstr ""
+
+#: templates/userspace/library/members/member_cancel.html:4
 #: templates/userspace/library/members/member_cancel.html:8
-#: templates/userspace/library/members/member_create.html:11
-#: templates/userspace/library/members/member_delete.html:8
+#: templates/userspace/library/members/member_cancel.html:12
+msgid "Annuler une demande"
+msgstr ""
+
+#: templates/userspace/library/members/member_cancel.html:7
+#: templates/userspace/library/members/member_create.html:8
+#: templates/userspace/library/members/member_delete.html:7
 #: templates/userspace/library/members/member_list.html:4
-#: templates/userspace/library/members/member_list.html:8
-#: templates/userspace/library/members/member_list.html:16
-#: templates/userspace/library/partials/menu.html:49
+#: templates/userspace/library/members/member_list.html:7
+#: templates/userspace/library/members/member_list.html:11
+#: templates/userspace/library/partials/menu.html:72
 msgid "Membres"
 msgstr ""
 
-#: templates/userspace/library/members/member_cancel.html:21
+#: templates/userspace/library/members/member_cancel.html:17
 #, python-format
 msgid ""
-"Voulez-vous annuler la demande d'ajout de membre envoyée à <strong>"
-"%(email)s</strong> ?"
+"Voulez-vous annuler la demande d’ajout de membre envoyée à <strong>"
+"%(email)s</strong>&nbsp;?"
 msgstr ""
 
 #: templates/userspace/library/members/member_create.html:5
-#: templates/userspace/library/members/member_create.html:16
-#: templates/userspace/library/members/member_create.html:23
+#: templates/userspace/library/members/member_create.html:9
+#: templates/userspace/library/members/member_create.html:13
 msgid "Inviter un membre"
 msgstr ""
 
 #: templates/userspace/library/members/member_delete.html:4
-#: templates/userspace/library/members/member_delete.html:9
+#: templates/userspace/library/members/member_delete.html:8
+#: templates/userspace/library/members/member_delete.html:12
+msgid "Supprimer un membre"
+msgstr ""
+
 #: templates/userspace/library/members/member_delete.html:17
-msgid "Confirmer la retrait du membre ?"
-msgstr ""
-
-#: templates/userspace/library/members/member_delete.html:21
 #, python-format
-msgid "Voulez-vous supprimer <strong>%(name)s</strong> de l'organisation ?"
+msgid ""
+"Voulez-vous supprimer <strong>%(name)s</strong> de l’organisation&nbsp;?"
 msgstr ""
 
-#: templates/userspace/library/members/member_list.html:19
-msgid "Ajouter un membre"
+#: templates/userspace/library/members/member_list.html:25
+msgid "Membres de l’organisation actifs"
 msgstr ""
 
-#: templates/userspace/library/members/member_list.html:48
-msgid "Membres en attente d'acceptation"
+#: templates/userspace/library/members/member_list.html:28
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:28
+msgid "Ajouter"
+msgstr ""
+
+#: templates/userspace/library/members/member_list.html:51
+#: templates/userspace/library/members/member_list.html:91
+msgid "Supprimer ce membre"
+msgstr ""
+
+#: templates/userspace/library/members/member_list.html:60
+msgid "Aucun usager n’a été ajouté aux membres de votre organisation."
+msgstr ""
+
+#: templates/userspace/library/members/member_list.html:61
+msgid "Ajouter un membre."
+msgstr ""
+
+#: templates/userspace/library/members/member_list.html:70
+msgid "En attente d’acceptation"
+msgstr ""
+
+#: templates/userspace/library/members/member_list.html:77
+msgid "Date <br>d’expiration"
 msgstr ""
 
 #: templates/userspace/library/partials/menu.html:31
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:9
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:8
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:4
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:8
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:16
-msgid "Plages d'adresses IP"
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:7
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:11
+msgid "Adresses IP"
 msgstr ""
 
-#: templates/userspace/library/partials/menu.html:40
+#: templates/userspace/library/partials/menu.html:47
 #: templates/userspace/library/subscription_information/update.html:5
-#: templates/userspace/library/subscription_information/update.html:9
-#: templates/userspace/library/subscription_information/update.html:14
-msgid "Informations de l'abonnement"
+#: templates/userspace/library/subscription_information/update.html:8
+#: templates/userspace/library/subscription_information/update.html:12
+msgid "Logo institutionnel"
 msgstr ""
 
-#: templates/userspace/library/partials/menu.html:58
-#: templates/userspace/library/stats/landing.html:4
-#: templates/userspace/library/stats/landing.html:8
-msgid "Statistiques"
+#: templates/userspace/library/partials/menu.html:55
+msgid "Paramètres de connexion"
 msgstr ""
 
-#: templates/userspace/library/stats/landing.html:17
-#: templates/userspace/library/stats/landing.html:33
-msgid "Exports au format CSV"
+#: templates/userspace/library/partials/menu.html:80
+msgid "Diagnostic"
+msgstr ""
+
+#: templates/userspace/library/stats/landing.html:23
+msgid "Rapports Counter en format CSV"
+msgstr ""
+
+#: templates/userspace/library/stats/landing.html:24
+msgid "Journal Report 1 (R4)"
+msgstr ""
+
+#: templates/userspace/library/stats/landing.html:38
+msgid "Journal Report 1 Gold Open Access (R4)"
+msgstr ""
+
+#: templates/userspace/library/subscription_information/update.html:24
+msgid "Mise à jour de votre badge"
 msgstr ""
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_create.html:5
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:10
-#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:15
-msgid "Creer une plage d'adresses IP"
+#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:9
+#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:13
+msgid "Créer une plage d’adresses IP"
+msgstr ""
+
+#: templates/userspace/library/subscription_ips/ipaddressrange_create.html:8
+#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:7
+msgid "Plages d'adresses IP"
 msgstr ""
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:4
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:9
-msgid "Supprimer une plage d'adresses IP"
+#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:12
+msgid "Supprimer une plage d’adresses IP"
 msgstr ""
 
 #: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:17
-msgid "Confirmer la suppression de la plage d'adresses IP ?"
-msgstr ""
-
-#: templates/userspace/library/subscription_ips/ipaddressrange_delete.html:21
 #, python-format
 msgid ""
-"Voulez-vous supprimer la plage d'adresses IP <strong>%(ip_start)s - "
-"%(ip_end)s</strong> ?"
+"Vous allez supprimer la page d’adresses IP suivante&nbsp;: <br><br><strong>"
+"%(subscription)s <br>%(ip_start)s &ndash; %(ip_end)s</strong>. "
+"<br><br>Voulez-vous poursuivre&nbsp;?"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:19
-msgid "Créer une plage d'adresse IP"
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:25
+msgid "Plages d’adresses actives"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:35
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:36
 msgid "Début"
 msgstr ""
 
-#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:39
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:37
 msgid "Fin"
+msgstr ""
+
+#: templates/userspace/library/subscription_ips/ipaddressrange_list.html:49
+msgid "Supprimer cette plage d’adresses IP"
 msgstr ""
 
 #: templates/userspace/reporting/home.html:5
