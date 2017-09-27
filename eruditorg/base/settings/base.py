@@ -378,6 +378,10 @@ LOGGING = {
     },
 }
 
+from structlog import configure
+from structlog.stdlib import LoggerFactory
+configure(logger_factory=LoggerFactory())
+
 # Raven settings
 RAVEN_CONFIG = {
     'dsn': None,
