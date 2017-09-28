@@ -28,9 +28,12 @@ class GroupFactory(factory.DjangoModelFactory):
         model = Group
 
 
-def get_authenticated_request():
+def get_authenticated_request(user=None):
     request = RequestFactory().get('/')
-    request.user = UserFactory()
+    if user:
+        request.user = user
+    else:
+        request.user = UserFactory()
     request.subscriptions = UserSubscriptions()
     request.session = dict()
     return request
