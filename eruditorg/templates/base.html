@@ -154,7 +154,7 @@
               </li>
               {% if request.user.is_anonymous %}
               <li class="nav-login">
-                <a href="{% url 'userspace:dashboard' %}" class="main-section" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
+                <a href="{% url 'public:auth:landing' %}" class="main-section" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
                   {% trans "Connexion" %}
                 </a>
               </li>

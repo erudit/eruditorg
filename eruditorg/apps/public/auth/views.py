@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 from django.views.generic import FormView
-
+from django.views.generic.base import RedirectView
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
@@ -46,6 +46,23 @@ class UserParametersUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('public:auth:parameters')
+
+
+class UserLoginLandingRedirectView(LoginRequiredMixin, RedirectView):
+    """ Redirects the user on successful login
+
+    Any user that has access to a dashboard will be redirected to his dashboard.
+    Users that do not have access to the dashboard will be redirected to the value
+    of ``request.META['HTTP_REFERER']``. If ``request.META['HTTP_REFERER']`` is unset,
+    user will be redirected to the home page.
+    """
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.has_perm('userspace.access'):
+            return reverse('userspace:dashboard')
+        next = self.request.META.get('HTTP_REFERER')
+        if next:
+            return next
+        return reverse('public:home')
 
 
 class UserPasswordChangeView(LoginRequiredMixin, MenuItemMixin, FormView):
