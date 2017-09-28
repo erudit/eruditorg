@@ -254,7 +254,17 @@
     {% block body %}
     {% block nav %}{% endblock nav %}
 
-    {% block content_wrapper %}{% block content %}{% endblock content %}{% endblock content_wrapper %}
+    {% block content_wrapper %}
+      {% block messages %}
+        <div class="container">
+          <div class="alert">
+            {% include "partials/messages.html" %}
+          </div>
+        </div>
+      {% endblock %}
+      {% block content %}
+      {% endblock content %}
+    {% endblock content_wrapper %}
     {% endblock body %}
 
     {% block footer %}
