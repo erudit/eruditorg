@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -57,6 +56,7 @@ class UserLoginLandingRedirectView(LoginRequiredMixin, RedirectView):
     user will be redirected to the home page.
     """
     def get_redirect_url(self, *args, **kwargs):
+        messages.success(self.request, _('Votre connexion a été effectuée avec succès.'))
         if self.request.user.has_perm('userspace.access'):
             return reverse('userspace:dashboard')
         next = self.request.META.get('HTTP_REFERER')

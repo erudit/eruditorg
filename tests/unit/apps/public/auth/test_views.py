@@ -1,4 +1,5 @@
 import pytest
+import mock
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 from base.test.factories import UserFactory
@@ -10,7 +11,8 @@ from apps.public.auth.views import UserLoginLandingRedirectView
 
 
 @pytest.fixture()
-def test_view():
+def test_view(monkeypatch):
+    monkeypatch.setattr('apps.public.auth.views.messages', mock.Mock())
     return UserLoginLandingRedirectView()
 
 
