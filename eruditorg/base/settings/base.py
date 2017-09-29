@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 from pathlib import Path
-
+from structlog import configure
+from structlog.stdlib import LoggerFactory
 from celery.schedules import crontab
 
 DEBUG = True
@@ -378,8 +379,6 @@ LOGGING = {
     },
 }
 
-from structlog import configure
-from structlog.stdlib import LoggerFactory
 configure(logger_factory=LoggerFactory())
 
 # Raven settings

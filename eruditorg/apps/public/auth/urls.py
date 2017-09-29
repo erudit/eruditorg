@@ -15,7 +15,7 @@ urlpatterns = [
          'authentication_form': forms.AuthenticationForm, }, name='login'),
     url(_(r'^deconnexion/$'), auth_views.logout,
         {'next_page': '/'}, name='logout'),
-
+    url(_(r'^bienvenue/$'), views.UserLoginLandingRedirectView.as_view(), name="landing"),
     # Parameters & personal data
     url(_(r'^donnees-personnelles/$'),
         views.UserPersonalDataUpdateView.as_view(), name='personal_data'),
