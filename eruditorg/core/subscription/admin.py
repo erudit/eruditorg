@@ -113,7 +113,20 @@ class JournalManagementPlanAdmin(admin.ModelAdmin):
 
 
 class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'journal', 'plan', )
+
+    def get_max_accounts(self, obj):
+        return obj.plan.max_accounts
+
+    get_max_accounts.short_description = _('Nombre maximum de comptes')
+
+    def get_accounts(self, obj):
+        return JournalAccessSubscription.objects.filter(
+            journal_management_subscription=obj
+        ).count()
+
+    get_accounts.short_description = _("Nombre d'abonnements")
+
+    list_display = ('pk', 'journal', 'plan', 'get_max_accounts', 'get_accounts', 'is_full')
     list_display_links = ('pk', 'journal', )
 
 
