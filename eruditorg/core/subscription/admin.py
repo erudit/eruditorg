@@ -67,7 +67,7 @@ class SubscriptionJournalListFilter(admin.SimpleListFilter):
 class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
-            'fields': ('sponsor', ),
+            'fields': ('sponsor', 'journal_management_subscription'),
         }),
         (_('Bénéficiaire'), {
             'fields': ('user', 'organisation', ),

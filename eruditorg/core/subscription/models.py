@@ -220,6 +220,7 @@ class JournalManagementSubscription(AbstractSubscription):
     class Meta:
         verbose_name = _("Abonnement aux forfaits d'abonnements individuels")
         verbose_name_plural = _("Abonnements aux forfaits d'abonnements individuels")
+        ordering = ['journal__name']
 
     @cached_property
     def is_ongoing(self):
@@ -238,6 +239,9 @@ class JournalManagementSubscription(AbstractSubscription):
             return False
         return self.subscriptions.count() + \
             self.get_pending_subscriptions().count() >= self.plan.max_accounts
+
+    def __str__(self):
+        return "{} / {}".format(self.journal, self.plan)
 
 
 class JournalManagementPlan(models.Model):
