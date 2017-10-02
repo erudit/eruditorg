@@ -112,6 +112,10 @@ class JournalManagementPlanAdmin(admin.ModelAdmin):
     ]
 
 
+class JournalManagementSubscriptionPeriodInline(admin.TabularInline):
+    model = JournalManagementSubscriptionPeriod
+
+
 class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
 
     def get_max_accounts(self, obj):
@@ -129,10 +133,10 @@ class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
     list_display = ('pk', 'journal', 'plan', 'get_max_accounts', 'get_accounts', 'is_full')
     list_display_links = ('pk', 'journal', )
 
+    inlines = [JournalManagementSubscriptionPeriodInline,]
 
 admin.site.register(InstitutionIPAddressRange, InstitutionIPAddressRangeAdmin)
 admin.site.register(JournalAccessSubscription, JournalAccessSubscriptionAdmin)
 admin.site.register(JournalAccessSubscriptionPeriod)
 admin.site.register(JournalManagementPlan, JournalManagementPlanAdmin)
 admin.site.register(JournalManagementSubscription, JournalManagementSubscriptionAdmin)
-admin.site.register(JournalManagementSubscriptionPeriod)
