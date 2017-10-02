@@ -137,6 +137,5 @@ class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
 
 admin.site.register(InstitutionIPAddressRange, InstitutionIPAddressRangeAdmin)
 admin.site.register(JournalAccessSubscription, JournalAccessSubscriptionAdmin)
-admin.site.register(JournalAccessSubscriptionPeriod)
 admin.site.register(JournalManagementPlan, JournalManagementPlanAdmin)
 admin.site.register(JournalManagementSubscription, JournalManagementSubscriptionAdmin)
