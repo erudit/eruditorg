@@ -234,6 +234,8 @@ class JournalManagementSubscription(AbstractSubscription):
     @property
     def is_full(self):
         """ :returns: True if this JournalManagementSubscription is full """
+        if self.plan.is_unlimited:
+            return False
         return self.subscriptions.count() + \
             self.get_pending_subscriptions().count() >= self.plan.max_accounts
 
@@ -242,7 +244,15 @@ class JournalManagementPlan(models.Model):
     """ Defines the limits of the possibilities provided by a journal management subscription. """
     title = models.CharField(max_length=255, verbose_name=_('Titre'), blank=True, null=True)
     code = models.SlugField(max_length=100, unique=True, verbose_name=_('Code'))
-    max_accounts = models.PositiveSmallIntegerField(verbose_name=_('Nombre de comptes'))
+    max_accounts = models.PositiveSmallIntegerField(
+        verbose_name=_('Nombre de comptes'),
+        help_text=_("Nombre maximal de comptes que ce forfait permet d'abonner")
+    )
+    is_unlimited = models.BooleanField(
+        default=False,
+        verbose_name=_('Illimité'),
+        help_text=_("Cocher si ce forfait d'abonnements individuels permet d'abonner un nombre illimité d'individus")  # noqa
+    )
 
     class Meta:
         verbose_name = _("Forfait d'abonnements individuels")
