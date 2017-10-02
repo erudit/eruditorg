@@ -244,6 +244,12 @@ class TestJournalManagementSubscription(object):
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
 
+    def test_unlimited_plans_are_never_full(self):
+        plan = JournalManagementPlanFactory(is_unlimited=True)
+        subscription = JournalManagementSubscriptionFactory.create(plan=plan)
+        JournalAccessSubscriptionFactory.create_batch(50, journal_management_subscription=subscription)
+        assert not subscription.is_full
+
     def test_can_count_subscriptions_to_know_if_its_full(self):
         plan = JournalManagementPlanFactory.create(max_accounts=5)
         subscription = JournalManagementSubscriptionFactory.create(plan=plan)

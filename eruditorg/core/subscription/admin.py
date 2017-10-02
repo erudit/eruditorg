@@ -100,8 +100,16 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
 
 
 class JournalManagementPlanAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'code', )
-    list_display_links = ('pk', 'code', )
+    list_display = ('pk', 'title', 'max_accounts', 'is_unlimited')
+
+    fieldsets = [
+        ('Identification', {
+            'fields': (('code', 'title'),),
+        }),
+        (_('Nombre de comptes'), {
+            'fields': (('max_accounts', 'is_unlimited',),),
+        }),
+    ]
 
 
 class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
