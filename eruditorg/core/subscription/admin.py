@@ -133,7 +133,8 @@ class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
     list_display = ('pk', 'journal', 'plan', 'get_max_accounts', 'get_accounts', 'is_full')
     list_display_links = ('pk', 'journal', )
 
-    inlines = [JournalManagementSubscriptionPeriodInline,]
+    inlines = [JournalManagementSubscriptionPeriodInline, ]
+
 
 admin.site.register(InstitutionIPAddressRange, InstitutionIPAddressRangeAdmin)
 admin.site.register(JournalAccessSubscription, JournalAccessSubscriptionAdmin)

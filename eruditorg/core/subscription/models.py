@@ -218,8 +218,8 @@ class JournalManagementSubscription(AbstractSubscription):
     plan = models.ForeignKey('JournalManagementPlan', verbose_name=_('Forfait'))
 
     class Meta:
-        verbose_name = _('Abonnement de gestion de revue')
-        verbose_name_plural = _('Abonnements de gestion de revue')
+        verbose_name = _("Abonnement aux forfaits d'abonnements individuels")
+        verbose_name_plural = _("Abonnements aux forfaits d'abonnements individuels")
 
     @cached_property
     def is_ongoing(self):
@@ -267,5 +267,5 @@ class JournalManagementSubscriptionPeriod(AbstractSubscriptionPeriod):
     subscription = models.ForeignKey(JournalManagementSubscription, verbose_name=_('Abonnement'))
 
     class Meta:
-        verbose_name = _("Période d'abonnement de gestion de revue")
-        verbose_name_plural = _("Périodes d'abonnement de gestion de revue")
+        verbose_name = _("Période d'abonnement de aux forfaits d'abonnements individuels")
+        verbose_name_plural = _("Périodes d'abonnement aux forfaits d'abonnements individuels")
