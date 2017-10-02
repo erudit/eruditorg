@@ -31,7 +31,7 @@ class SubscriptionInformationUpdateView(
 
     def get_success_url(self):
         messages.success(
-            self.request, _("Les informations de l'abonnement ont été mises à jour avec succès"))
+            self.request, _("Le logo institutionnel a été mis à jour avec succès."))
         return reverse(
             'userspace:library:subscription_information:update',
             args=(self.current_organisation.pk, ))

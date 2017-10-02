@@ -1,7 +1,7 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n waffle_tags %}
 
-{% block title %}{% trans "Abonnements" %}{% endblock title %}
+{% block title %}{% trans "Abonnements" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
@@ -14,7 +14,7 @@
 {% block section_intro %}
 <p>
 {% blocktrans %}
-Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant et mot de passe sur le site <em>rétro</em> Érudit pour accéder à la liste des institutions abonnées de votre revue.
+Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant et mot de passe sur le site <em>rétro</em> Érudit pour accéder à la liste des institutions abonnées à votre revue.
 {% endblocktrans %}
 </p>
 {% endblock section_intro %}

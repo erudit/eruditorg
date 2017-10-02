@@ -2,64 +2,6 @@
 * Issue submission
 */
 
-.submissions-header {
-  color: $dark-grey;
-  margin-bottom: 0;
-  list-style: none;
-
-  li {
-    margin-bottom: 0;
-    border-bottom: 1px solid $dark-grey;
-    padding: 20px 0;
-  }
-
-}
-
-.submissions-list {
-  list-style: none;
-
-  .submissions-item {
-    margin-bottom: 0;
-
-    &:not(:last-of-type) {
-      border-bottom: 1px solid $mid-grey;
-    }
-
-    .submission-detail-link {
-      display: block;
-      padding: 20px 0;
-
-      &:hover, &:focus, &:active {
-        text-decoration: none;
-        color: #fff;
-        background-color: $coral-red;
-
-        [class^="status-indicator"] {
-          background-color: #fff;
-        }
-
-      }
-
-    }
-
-    .submissions-content {
-      padding: 20px 0;
-    }
-
-    .submission-file {
-      margin-bottom: 0;
-
-      a {
-        display: inline;
-        padding: 0;
-      }
-
-    }
-
-  }
-
-}
-
 .submission-detail-metadata {
 
   dt {

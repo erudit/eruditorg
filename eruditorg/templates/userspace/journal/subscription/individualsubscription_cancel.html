@@ -1,7 +1,7 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Confirmer l'annulation de la proposition d'abonnement ?" %}{% endblock title %}
+{% block title %}{% trans "Confirmer l'annulation de la proposition d'abonnement ?" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}">{% trans "Abonnements individuels" %}</a></li>

@@ -1,46 +1,50 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Statistiques" %}{% endblock title %}
+{% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="#">{% trans "Statistiques" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Consultations" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
 
 {% block content_main %}
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Journal Report 1 (R4)</h2>
-      <p>Number of Successful Full-Text Articles by Month and Journal</p>
-      <h3>{% trans "Exports au format CSV" %}</h3>
-      <div class="row">
-        {% for y in years %}
-          <div class="col-md-3">
-            <a href="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-primary">{{ y }}</a>
-            <br />
-          </div>
-        {% endfor %}
-      </div>
-      <br />
-    </div>
+<h2>{% trans "Rapports Counter en format CSV" %}</h2>
+<h3>{% trans "Journal Report 1 (R4)" %}</h3>
+<p>Number of Successful Full-Text Articles by Month and Journal</p>
+<div class="row">
+  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+    <label for="select-jr1">{% trans "Par année" %}</label>
+    <select id="select-jr1" name="select-jr1" onChange="window.location.href=this.value">
+      {% for y in years %}
+      <option value="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}">{{ y }}</option>
+      {% endfor %}
+    </select>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Journal Report 1 GOA (R4)</h2>
-      <p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
-      <h3>{% trans "Exports au format CSV" %}</h3>
-      <div class="row">
-        {% for y in years %}
-          <div class="col-md-3">
-            <a href="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}" class="btn btn-block btn-primary">{{ y }}</a>
-            <br />
-          </div>
-        {% endfor %}
-      </div>
-      <br />
-    </div>
+</div>
+<br><br>
+
+<h3>{% trans "Journal Report 1 Gold Open Access (R4)" %}</h3>
+<p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
+<div class="row">
+  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+    <label for="select-goa-jr1">{% trans "Par année" %}</label>
+    <select id="select-goa-jr1" name="select-goa-jr1" onChange="window.location.href=this.value">
+      {% for y in years %}
+      <option value="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}">{{ y }}</option>
+      {% endfor %}
+    </select>
   </div>
 </div>
 {% endblock content_main %}

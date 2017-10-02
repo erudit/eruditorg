@@ -49,7 +49,7 @@ class InstitutionIPAddressRangeCreateView(
             organisation=self.current_organisation).first()
 
     def get_success_url(self):
-        messages.success(self.request, _("La plage d'adresse IP a été créée avec succès"))
+        messages.success(self.request, _("La plage d’adresses IP a été créée avec succès."))
         return reverse(
             'userspace:library:subscription_ips:list', args=(self.current_organisation.pk, ))
 
@@ -68,6 +68,6 @@ class InstitutionIPAddressRangeDeleteView(
         return qs.filter(subscription__organisation=self.current_organisation)
 
     def get_success_url(self):
-        messages.success(self.request, _("La plage d'adresse IP a été supprimée avec succès"))
+        messages.success(self.request, _("La plage d’adresses IP a été supprimée avec succès."))
         return reverse(
             'userspace:library:subscription_ips:list', args=(self.current_organisation.id, ))

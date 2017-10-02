@@ -2,7 +2,7 @@
 {% load i18n rules staticfiles waffle_tags %}
 {% load  %}
 
-{% block title %}{% trans "Rapport de redevances" %}{% endblock title %}
+{% block title %}{% trans "Rapport de redevances" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}">{% trans "Rapports de redevances" %}</a></li>

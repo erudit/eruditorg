@@ -52,7 +52,7 @@ class AuthorizationCreateView(LoginRequiredMixin, RelatedAuthorizationsMixin, Cr
 
     def form_valid(self, form):
         response = super(AuthorizationCreateView, self).form_valid(form)
-        messages.success(self.request, _("L'accès a été créé avec succès"))
+        messages.success(self.request, _("L’accès a été créé avec succès."))
         return response
 
     def get_authorization_definition(self):
@@ -95,7 +95,7 @@ class AuthorizationDeleteView(LoginRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         response = super(AuthorizationDeleteView, self).delete(request, *args, **kwargs)
-        messages.success(self.request, _("L'accès a été supprimé avec succès"))
+        messages.success(self.request, _("L’accès a été supprimé avec succès."))
         return response
 
     def get_queryset(self):

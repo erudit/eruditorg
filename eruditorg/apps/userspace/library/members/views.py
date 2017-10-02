@@ -52,7 +52,7 @@ class OrganisationMemberCreateView(
         return kwargs
 
     def get_success_url(self):
-        messages.success(self.request, _("Le membre a été invité avec succès"))
+        messages.success(self.request, _("Le membre a été invité avec succès."))
         return reverse('userspace:library:members:list', args=(self.current_organisation.pk, ))
 
 
@@ -74,7 +74,7 @@ class OrganisationMemberDeleteView(
         return self.current_organisation.members.all()
 
     def get_success_url(self):
-        messages.success(self.request, _("Le membre a été retiré de l'organisation avec succès"))
+        messages.success(self.request, _("Le membre a été retiré de l’organisation avec succès."))
         return reverse('userspace:library:members:list', args=(self.current_organisation.pk, ))
 
 
@@ -99,5 +99,5 @@ class OrganisationMemberCancelView(
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        messages.success(self.request, _("La proposition a été annulée avec succès"))
+        messages.success(self.request, _("La proposition a été annulée avec succès."))
         return reverse('userspace:library:members:list', args=(self.current_organisation.pk, ))

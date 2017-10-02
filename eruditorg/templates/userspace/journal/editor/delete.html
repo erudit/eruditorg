@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Supprimer un dépôt" %}{% endblock title %}
+{% block title %}{% trans "Supprimer un dépôt" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' %}">{% trans "Dépôt de fichiers" %}</a></li>

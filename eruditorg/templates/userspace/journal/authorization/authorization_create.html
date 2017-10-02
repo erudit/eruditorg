@@ -3,7 +3,7 @@
 
 {% block body_id %}authorizations{% endblock body_id %}
 
-{% block title %}{% trans "Ajouter un accès" %}{% endblock title %}
+{% block title %}{% trans "Ajouter un accès" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">{% trans "Autorisations" %}</a></li>

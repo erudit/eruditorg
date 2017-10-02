@@ -2,7 +2,7 @@
 {% load i18n staticfiles %}
 {% load rules %}
 
-{% block title %}{% trans "Dépôt de fichiers" %}{% endblock title %}
+{% block title %}{% trans "Dépôt de fichiers" %} {{ block.super }}{% endblock title %}
 
 {% block body_id %}issue_submission{% endblock body_id %}
 
@@ -31,20 +31,20 @@
     <a href="{% url 'userspace:journal:editor:add' scope_current_journal.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Déposer" %}</a>
   </div>
 </div>
-<div class="submissions">
-  <ul class="submissions-header">
+<div class="table">
+  <ul class="table-header">
     <li class="row">
       <span class="col-sm-4">{% trans "Numéro" %}</span>
       <span class="col-sm-4">{% trans "Date d’ajout" %}</span>
       <span class="col-sm-4">{% trans "Statut" %}</span>
     </li>
   </ul>
-  <ul class="submissions-list">
+  <ul class="table-body">
     {% for issue_submission in object_list|dictsortreversed:"date_created" %}
     {% with issue_submission.get_status_code_display as status %}
-    <li class="row submissions-item">
+    <li class="row table-row-wrapper">
       <a href="{% url 'userspace:journal:editor:detail' scope_current_journal.pk issue_submission.pk %}"
-         class="clearfix submission-detail-link">
+         class="clearfix table-row">
         <span class="col-sm-4">{{ issue_submission }}</span>
         <span class="col-sm-4">{{ issue_submission.date_created|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-4">

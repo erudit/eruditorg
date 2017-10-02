@@ -5,6 +5,16 @@
 .pagination {
   text-align: center;
   padding: $margin-vertical-default 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+
+    &.active a {
+      border-bottom: 1px solid $coral-red;
+    }
+
+  }
 
   a {
     font-size: 18px;

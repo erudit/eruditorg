@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{{ question }}{% endblock title %}
+{% block title %}{{ question }} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:editor:issues' scope_current_journal.pk %}">{% trans "Dépôt de fichiers" %}</a></li>

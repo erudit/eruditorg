@@ -1,9 +1,7 @@
-{% extends "base.html" %}
-{% load i18n rules userspace_journal_tags %}
+{% extends "userspace/base.html" %}
+{% load rules userspace_journal_tags %}
 
-{% block title %}{{ block.super }} – {{ scope_current_journal.name }}{% endblock title %}
-
-{% block body_class %}{{ block.super }} dashboard{% endblock body_class %}
+{% block userspace_title %}{{ scope_current_journal.name }}{% endblock %}
 
 {% block inner_nav %}
 {% if scope_user_journals|length > 1 %}
@@ -25,31 +23,4 @@
 <li><a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">{{ scope_current_journal.name }}</a></li>
 {% endblock breadcrumb %}
 
-{% block content %}
-<div class="container">
-  <nav class="col-sm-3 sidenav">
-  {% include "userspace/journal/partials/menu.html" %}
-  </nav>
-  <main class="col-sm-8 col-md-offset-1">
-    <div class="alert">
-      {% include "partials/messages.html" %}
-    </div>
-
-    {# Section page header #}
-    <header>
-      <h1>{% block section_title %}{% endblock %}</h1>
-      <div class="row">
-        <div class="col-md-7 section-intro">
-          {% block section_intro %}{% endblock %}
-        </div>
-      </div>
-    </header>
-
-    <hr>
-
-    {# Section content #}
-    {% block content_main %}{% endblock %}
-
-  </main>
-</div>
-{% endblock content %}
+{% block userspace_sidenav %}{% include "userspace/journal/partials/menu.html" %}{% endblock %}

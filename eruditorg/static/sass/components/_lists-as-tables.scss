@@ -1,0 +1,60 @@
+/**
+ * Lists displayed as tables
+ * Often with clickable rows
+ */
+
+.table {
+
+  ul.table-header {
+    color: $dark-grey;
+    margin-bottom: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 0;
+      border-bottom: 1px solid $dark-grey;
+      padding: 20px 0;
+    }
+
+  }
+
+  ul.table-body {
+    list-style: none;
+
+    li.table-row-wrapper {
+      margin-bottom: 0;
+
+      &:not(:last-of-type) {
+        border-bottom: 1px solid $mid-grey;
+      }
+
+      .table-row {
+        display: block;
+        padding: 20px 0;
+      }
+
+      a.table-row {
+
+        &:hover, &:focus, &:active {
+          text-decoration: none;
+          color: #fff;
+          background-color: $coral-red;
+
+          [class^="status-indicator"] {
+            background-color: #fff;
+          }
+
+        }
+
+      }
+
+      .table-row-delete {
+        font-size: 26px;
+        vertical-align: middle;
+      }
+
+    }
+
+  }
+
+}

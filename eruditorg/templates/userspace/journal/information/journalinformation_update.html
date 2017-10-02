@@ -1,7 +1,7 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n widget_tweaks waffle_tags %}
 
-{% block title %}{% trans "À propos" %}{% endblock title %}
+{% block title %}{% trans "À propos" %} {{ block.super }}{% endblock title %}
 
 {% block extrahead %}
   {{ form.media.css }}

@@ -261,3 +261,8 @@ label.required:after {
   }
 
 }
+
+.select2-container--open .select2-dropdown--below {
+  border-top: 1px solid #aaa;
+  margin-top: -1px;
+}

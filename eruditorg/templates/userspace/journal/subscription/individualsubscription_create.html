@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
+{% block title %}{% trans "Créer un abonnement" %} {{ block.super }}{% endblock title %}
+
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}">{% trans "Abonnements individuels" %}</a></li>
 <li><a href="#">{% trans "Créer un abonnement" %}</a></li>

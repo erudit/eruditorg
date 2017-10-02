@@ -1,34 +1,31 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Confirmer la retrait du membre ?" %}{% endblock title %}
+{% block title %}{% trans "Supprimer un membre" %} {{ block.super }}{% endblock title %}
 
-{% block breadcrumb_end %}
-{{ block.super }}
-<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk%}">{% trans "Membres" %}</a></li>
-<li><a href="#">{% trans "Confirmer la retrait du membre ?" %}</a></li>
-{% endblock breadcrumb_end %}
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">{% trans "Membres" %}</a></li>
+<li><a href="#">{% trans "Supprimer un membre" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Supprimer un membre" %}
+{% endblock %}
+
+{% block section_intro %}
+<p>
+{% blocktrans trimmed with name=member.get_full_name|default:member.username %}
+  Voulez-vous supprimer <strong>{{ name }}</strong> de l’organisation&nbsp;?
+{% endblocktrans %}
+</p>
+{% endblock section_intro %}
 
 {% block content_main %}
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Confirmer la retrait du membre ?" %}</h3>
-      </div>
-      <div class="panel-body">
-      <div class="warning-message">
-        {% blocktrans trimmed with name=member.get_full_name|default:member.username %}
-          Voulez-vous supprimer <strong>{{ name }}</strong> de l'organisation ?
-        {% endblocktrans %}
-      </div>
-        <form action="" method="post">{% csrf_token %}
-          <input type="hidden" name="post" value="yes" />
-          <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
-          <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk%}" class="btn btn-link">{% trans "Non" %}</a>
-        </form>
-      </div>
-    </div>
-  </div>
+<div class="col-sm-8 col-md-6">
+  <form action="" method="post">{% csrf_token %}
+    <input type="hidden" name="post" value="yes" />
+    <input type="submit" value="{% trans "Oui" %}" class="btn btn-primary" />
+    <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk%}" class="btn">{% trans "Non" %}</a>
+  </form>
 </div>
 {% endblock content_main %}
