@@ -59,7 +59,8 @@ class UserLoginLandingRedirectView(LoginRequiredMixin, RedirectView):
         messages.success(self.request, _('Votre connexion a été effectuée avec succès.'))
         if self.request.user.has_perm('userspace.access'):
             return reverse('userspace:dashboard')
-        next = self.request.META.get('HTTP_REFERER')
+
+        next = self.request.GET.get('next')
         if next:
             return next
         return reverse('public:home')
