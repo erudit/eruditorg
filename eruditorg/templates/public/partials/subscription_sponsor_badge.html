@@ -4,7 +4,7 @@
 {% if request.subscriptions.active_subscription.sponsor or request.subscriptions.active_subscription.organisation %}
 {% cache LONG_TTL "public_journal_base_organisation" LANGUAGE_CODE request.subscriptions.active_subscription.sponsor.pk request.subscriptions.active_subscription.organisation.pk %}
 {% with organisation=request.subscriptions.active_subscription.sponsor|default:request.subscriptions.active_subscription.organisation %}
-  <div class="subscription-sponsor">
+  <div class="text-center subscription-sponsor">
     <p>{% trans "Votre accès est offert par" %}</p>
     {% if organisation.badge %}
       <img src="{{ organisation.badge.url }}" alt="" />
