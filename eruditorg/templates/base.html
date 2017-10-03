@@ -172,7 +172,7 @@
                     <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}">{% trans "Paramètres" %}</a>
                   </li>
                   <li>
-                    <a href="{% url 'public:auth:logout' %}?next=/" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
+                    <a href="{% url 'public:auth:logout' %}?next={{ request.get_full_path|urlencode }}" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
                   </li>
                 </ul>
               </li>
