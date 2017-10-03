@@ -182,6 +182,9 @@
               </xsl:if>
               <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
             </p>
+            {% if content_access_granted %}
+            <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
+            {% endif %}
             <xsl:apply-templates select="admin/droitsauteur"/>
           </div>
         </div>
