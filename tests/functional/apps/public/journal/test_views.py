@@ -268,6 +268,18 @@ class TestJournalDetailView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['content_access_granted'])
 
+    def test_embeds_the_subscription_type(self):
+        subscription = JournalAccessSubscriptionFactory.create(
+            organisation=None, user=self.user, journal=self.journal, post__valid=True
+        )
+        self.client.login(username='david', password='top_secret')
+        url = reverse('public:journal:journal_detail', kwargs={'code': self.journal.code})
+        # Run
+        response = self.client.get(url)
+        # Check
+        self.assertEqual(response.status_code, 200)
+        assert response.context['subscription_type'] == 'individual'
+
 
 @override_settings(DEBUG=True)
 class TestJournalAuthorsListView(BaseEruditTestCase):
