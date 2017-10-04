@@ -2,6 +2,7 @@ import pytest
 import mock
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
+from django.test import RequestFactory
 from base.test.factories import UserFactory
 from base.test.factories import get_authenticated_request
 from erudit.test.factories import JournalFactory
@@ -25,11 +26,10 @@ class TestUserLoginLandingRedirectView(object):
         test_view.request = request
         assert test_view.get_redirect_url() == reverse('userspace:dashboard')
 
-    def test_login_redirects_individual_subscriber_to_referer_if_referer(self, test_view):
+    def test_login_redirects_individual_subscriber_to_next_if_next_is_specified(self, test_view):
         normal_user = UserFactory()
-        request = get_authenticated_request(user=normal_user)
-        request.META['HTTP_REFERER'] = '/fr/revues/'
-
+        request = RequestFactory().get('/', data={"next": "/fr/revues/"})
+        request.user = normal_user
         test_view.request = request
         assert test_view.get_redirect_url() == '/fr/revues/'
 
@@ -40,7 +40,6 @@ class TestUserLoginLandingRedirectView(object):
         assert test_view.get_redirect_url() == reverse('public:home')
 
     def test_login_redirects_journal_member_to_dashboard(self, test_view):
-
         normal_user = UserFactory()
         request = get_authenticated_request(user=normal_user)
         journal = JournalFactory()
