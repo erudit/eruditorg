@@ -46,6 +46,14 @@ class TestJournalAccessSubscription(EruditTestCase):
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
 
+    def test_knows_it_is_an_individual_subscription(self):
+        subscription = JournalAccessSubscriptionFactory(user=UserFactory(), organisation=None)
+        assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INDIVIDUAL
+
+    def test_knows_it_is_an_institutional_subscription(self):
+        subscription = JournalAccessSubscriptionFactory(organisation=OrganisationFactory(), user=None)
+        assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INSTITUTIONAL
+
     def test_knows_its_underlying_journals(self):
         # Setup
         subscription_2 = JournalAccessSubscriptionFactory.create(journal=self.journal)

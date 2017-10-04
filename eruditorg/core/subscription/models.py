@@ -4,6 +4,7 @@ import datetime as dt
 import ipaddress
 from functools import reduce
 
+import structlog
 from django.conf import settings
 from django.db import models
 from django.utils.functional import cached_property
@@ -19,6 +20,8 @@ from erudit.models import Organisation
 from .abstract_models import AbstractSubscription
 from .abstract_models import AbstractSubscriptionPeriod
 from .managers import JournalAccessSubscriptionValidManager
+
+logger = structlog.get_logger(__name__)
 
 
 class UserSubscriptions(object):
@@ -74,6 +77,11 @@ class JournalAccessSubscription(AbstractSubscription):
     The subscription can associate many Journal instances to the user or the organisation.
     A subscription for collection of journals or a "full access" subscription can also be specified.
     """
+
+    TYPE_INSTITUTIONAL = "institutional"
+    TYPE_INDIVIDUAL = "individual"
+    TYPE_UNKNOWN = "unknown"
+
     # The subscription can be associated either with a user or an organisation.
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_('Abonné individuel'), blank=True, null=True)
@@ -124,6 +132,20 @@ class JournalAccessSubscription(AbstractSubscription):
         return JournalAccessSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
 
+    def get_subscription_type(self):
+        if self.organisation is not None:
+            return JournalAccessSubscription.TYPE_INSTITUTIONAL
+        if self.user is not None:
+            return JournalAccessSubscription.TYPE_INDIVIDUAL
+
+        logger.warn(
+            'unknown.subscription',
+            pk=self.pk,
+            message="no user and no organisation specified"
+        )
+
+        return JournalAccessSubscription.TYPE_UNKNOWN
+
     def provides_access_to(self, article=None, issue=None, journal=None):
         """ Returns if the subscription has access to the given article, issue
          or journal"""
@@ -145,7 +167,7 @@ class JournalAccessSubscription(AbstractSubscription):
         return False
 
     def get_journals(self):
-        """ Returns the Journal instances targetted by the subscription. """
+        """ Returns the Journal instances targeted by the subscription. """
 
         journal_ids = []
         if self.journal_id:
