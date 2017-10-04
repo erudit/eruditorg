@@ -189,7 +189,7 @@
               </xsl:if>
               <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
             </p>
-            {% if content_access_granted %}
+            {% if content_access_granted and subscription_type == 'individual' %}
             <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
             {% endif %}
             <xsl:apply-templates select="admin/droitsauteur"/>
@@ -289,7 +289,7 @@
               </div>
             </a>
           </aside>
-          {% if content_access_granted %}
+          {% if content_access_granted and subscription_type == 'individual' %}
           <div class="text-center">
             <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
           </div>
