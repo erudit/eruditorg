@@ -102,11 +102,11 @@
                     {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
                     {% endif %}
                   </strong>
-                  {% flag "INDIVIDUAL_SUBSCRIPTIONS" %}
                   <br/><br/>
+                  {% flag "INDIVIDUAL_SUBSCRIPTIONS" %}
                   {% url 'public:auth:landing' as login_url %}
                   {% blocktrans %}
-                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" id="login-modal" title="Se connecter">en vous connectant</a>.
+                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" id="article-login-modal" title="Se connecter">en vous connectant</a>.
                   {% endblocktrans %}
                   {% endflag %}
                 </p>
