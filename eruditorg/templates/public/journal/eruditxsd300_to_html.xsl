@@ -1,4 +1,4 @@
-{% load i18n %}{% load staticfiles %}{%load public_journal_tags %}<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n %}{% load public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
   <xsl:strip-space elements="*"/>
@@ -89,8 +89,8 @@
               {% if not content_access_granted and not only_summary %}
               <div class="alert">
                 <p>
-                  {% blocktrans trimmed %}
-                  L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Accès aux articles d’Érudit">client@erudit.org</a>.
+                  {% blocktrans trimmed with journal=article.issue.journal.name %}
+                  L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue {{ journal }} – Accès aux articles">client@erudit.org</a>.
                   {% endblocktrans %}
                   <br/>
                   <strong>
@@ -102,6 +102,13 @@
                     {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
                     {% endif %}
                   </strong>
+                  <br/><br/>
+                  {% flag "INDIVIDUAL_SUBSCRIPTIONS" %}
+                  {% url 'public:auth:landing' as login_url %}
+                  {% blocktrans %}
+                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" id="article-login-modal" title="Se connecter">en vous connectant</a>.
+                  {% endblocktrans %}
+                  {% endflag %}
                 </p>
               </div>
               {% endif %}
@@ -182,6 +189,9 @@
               </xsl:if>
               <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
             </p>
+            {% if content_access_granted and subscription_type == 'individual' %}
+            <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
+            {% endif %}
             <xsl:apply-templates select="admin/droitsauteur"/>
           </div>
         </div>
@@ -279,6 +289,11 @@
               </div>
             </a>
           </aside>
+          {% if content_access_granted and subscription_type == 'individual' %}
+          <div class="text-center">
+            <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
+          </div>
+          {% endif %}
           {% include "public/partials/subscription_sponsor_badge.html" %}
         </nav>
 

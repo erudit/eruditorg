@@ -32,6 +32,7 @@
         @include font-styles('sans');
         font-size: small;
         margin: 0.15em 0 1.75em 0;
+        letter-spacing: normal;
       }
 
       .issue-number {
@@ -112,6 +113,7 @@
         padding-right: 65px;
         font-size: 1.15em;
         line-height: 1.25;
+        letter-spacing: normal;
         @include font-styles(serif);
       }
 

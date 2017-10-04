@@ -47,6 +47,11 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
                 subscription=obj
             )
 
+        journals = kwargs.get('journals', list())
+        for journal in journals:
+            obj.journals.add(journal)
+        obj.save()
+
 
 class JournalAccessSubscriptionPeriodFactory(factory.DjangoModelFactory):
     subscription = factory.SubFactory(JournalAccessSubscriptionFactory)

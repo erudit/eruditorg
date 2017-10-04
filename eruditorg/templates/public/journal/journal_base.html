@@ -181,8 +181,11 @@
 
         </dl>
 
-        <div class="journal-meta--list">
+        <div class="text-center journal-meta--list">
           <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
+          {% if content_access_granted and subscription_type == 'individual' %}
+          <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
+          {% endif %}
         </div>
         {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}

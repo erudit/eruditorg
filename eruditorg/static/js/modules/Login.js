@@ -22,7 +22,7 @@ class LoginModal {
 
   constructor() {
     this.previousURL = null;
-    this.modalSelector = "#login-modal";
+    this.modalSelector = "#login-modal, #article-login-modal";
 
     // auto init
     this.init();

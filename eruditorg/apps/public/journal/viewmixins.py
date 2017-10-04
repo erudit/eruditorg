@@ -83,6 +83,10 @@ class ContentAccessCheckMixin(object):
         """ Inserts a flag indicating if the content can be accessed in the context. """
         context = super(ContentAccessCheckMixin, self).get_context_data(**kwargs)
         context['content_access_granted'] = self.content_access_granted
+
+        active_subscription = self.request.subscriptions.active_subscription
+        if active_subscription:
+            context['subscription_type'] = active_subscription.get_subscription_type()
         return context
 
     @cached_property

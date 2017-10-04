@@ -16,6 +16,8 @@ from erudit.test.factories import OrganisationFactory, JournalFactory
 
 from base.test import DBRequiredTestCase
 from base.test import EruditTestCase
+from base.test.factories import UserFactory
+
 from core.subscription.models import JournalAccessSubscription
 from django.contrib.contenttypes.models import ContentType
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
@@ -28,7 +30,8 @@ from core.subscription.test.factories import InstitutionRefererFactory
 from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
 
 
-class TestJournalAccessSubscription(EruditTestCase):
+@pytest.mark.django_db
+class TestJournalAccessSubscription(object):
     def test_knows_if_it_is_ongoing_or_not(self):
         # Setup
         now_dt = dt.datetime.now()
@@ -46,16 +49,25 @@ class TestJournalAccessSubscription(EruditTestCase):
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
 
+    def test_knows_it_is_an_individual_subscription(self):
+        subscription = JournalAccessSubscriptionFactory(user=UserFactory(), organisation=None)
+        assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INDIVIDUAL
+
+    def test_knows_it_is_an_institutional_subscription(self):
+        subscription = JournalAccessSubscriptionFactory(organisation=OrganisationFactory(), user=None)
+        assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INSTITUTIONAL
+
     def test_knows_its_underlying_journals(self):
         # Setup
-        subscription_2 = JournalAccessSubscriptionFactory.create(journal=self.journal)
-        subscription_3 = JournalAccessSubscriptionFactory.create(collection=self.collection)
+        journal = JournalFactory()
+        subscription_2 = JournalAccessSubscriptionFactory.create(journal=journal)
+        subscription_3 = JournalAccessSubscriptionFactory.create(collection=journal.collection)
         subscription_4 = JournalAccessSubscriptionFactory.create()
-        subscription_4.journals.add(self.journal)
+        subscription_4.journals.add(journal)
         # Run & check
-        assert list(subscription_2.get_journals()) == [self.journal, ]
-        assert list(subscription_3.get_journals()) == [self.journal, ]
-        assert list(subscription_4.get_journals()) == [self.journal, ]
+        assert list(subscription_2.get_journals()) == [journal, ]
+        assert list(subscription_3.get_journals()) == [journal, ]
+        assert list(subscription_4.get_journals()) == [journal, ]
 
 
 @pytest.mark.django_db
@@ -111,6 +123,7 @@ class TestInstitutionReferer(DBRequiredTestCase):
         )
 
         assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/")  # noqa
+
 
 class TestInstitutionIPAddressRange(DBRequiredTestCase):
     @pytest.fixture(autouse=True)

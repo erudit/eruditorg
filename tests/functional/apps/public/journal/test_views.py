@@ -17,7 +17,7 @@ from django.test.utils import override_settings
 from PyPDF2 import PdfFileReader
 import pytest
 
-from erudit.models import JournalType
+from erudit.models import JournalType, Issue
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
@@ -186,87 +186,100 @@ class TestJournalListView(object):
         assert list(response.context['journals']) == [journal_2, ]
 
 
-@override_settings(DEBUG=True)
-class TestJournalDetailView(BaseEruditTestCase):
+@pytest.mark.django_db
+class TestJournalListView(object):
+
+    @pytest.fixture(autouse=True)
+    def setup(self, settings):
+        settings.DEBUG = True
+        self.client = Client()
+        self.user = UserFactory.create(username='foobar')
+        self.user.set_password('notsecret')
+        self.user.save()
+
     def test_can_embed_the_journal_information_in_the_context_if_available(self):
         # Setup
-        collection = CollectionFactory.create()
-        journal_1 = JournalFactory.create(collection=collection)
-        journal_2 = JournalFactory.create(collection=collection)
-        journal_info = JournalInformationFactory.create(journal=journal_1)
-        url_1 = reverse('public:journal:journal_detail', kwargs={'code': journal_1.code})
+        journal_info = JournalInformationFactory()
+        url_1 = reverse('public:journal:journal_detail', kwargs={'code': journal_info.journal.code})
+        journal_2 = JournalFactory()
         url_2 = reverse('public:journal:journal_detail', kwargs={'code': journal_2.code})
+
         # Run
         response_1 = self.client.get(url_1)
         response_2 = self.client.get(url_2)
-        # Check
-        self.assertEqual(response_1.status_code, 200)
-        self.assertEqual(response_2.status_code, 200)
-        self.assertEqual(response_1.context['journal_info'], journal_info)
-        self.assertTrue('journal_info' not in response_2.context)
 
-    @unittest.mock.patch("erudit.models.journal.Issue.has_coverpage", return_value=True)
-    @unittest.mock.patch("erudit.models.journal.Issue.erudit_object")
-    def test_can_display_when_issues_have_a_space_in_their_number(self, mock_cache, mock_issue):
+        # Check
+        assert response_1.status_code == response_2.status_code == 200
+
+        assert response_1.context['journal_info'] == journal_info
+        assert 'journal_info' not in response_2.context
+
+    def test_can_display_when_issues_have_a_space_in_their_number(self, monkeypatch):
+        monkeypatch.setattr(Issue, 'has_coverpage', unittest.mock.Mock(return_value=True))
+        monkeypatch.setattr(Issue, 'erudit_object', unittest.mock.MagicMock())
         issue = IssueFactory(number='2 bis')
         url_1 = reverse('public:journal:journal_detail', kwargs={'code': issue.journal.code})
         # Run
         response_1 = self.client.get(url_1)
-        self.assertEqual(response_1.status_code, 200)
+        assert response_1.status_code == 200
 
-    def test_can_embed_the_publicated_issues_in_the_context(self):
+    def test_can_embed_the_published_issues_in_the_context(self):
         # Setup
-        collection = CollectionFactory.create(localidentifier='erudit')
-        journal = JournalFactory.create(collection=collection)
-        JournalInformationFactory.create(journal=journal)
-        issue_1 = IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
-        IssueFactory.create(
-            journal=journal, year=dt.datetime.now().year + 1,
-            is_published=False,
-            date_published=dt.datetime.now() + dt.timedelta(days=30))
+
+        journal = JournalFactory(collection=CollectionFactory(localidentifier='erudit'))
+
+        issue = IssueFactory(journal=journal)
+        IssueFactory(journal=journal, is_published=False)
+
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
         # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(list(response.context['issues']), [issue_2, issue_1])
+        assert response.status_code == 200
+        assert list(response.context['issues']) == [issue]
 
     def test_can_embed_the_latest_issue_in_the_context(self):
         # Setup
         collection = CollectionFactory.create(localidentifier='erudit')
         journal = JournalFactory.create(collection=collection)
-        JournalInformationFactory.create(journal=journal)
+
         IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now() - dt.timedelta(days=1))
-        issue_2 = IssueFactory.create(journal=journal, year=2010, date_published=dt.datetime.now())
-        issue_3 = IssueFactory.create(
-            is_published=False,
-            journal=journal, year=dt.datetime.now().year + 1,
-            date_published=dt.datetime.now() + dt.timedelta(days=30))
+            journal=journal, date_published=dt.datetime.now())
+        issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now() + dt.timedelta(days=1))
+
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
         # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['latest_issue'], issue_2)
+        assert response.status_code == 200
+        assert response.context['latest_issue'] == issue_2
 
     def test_embeds_a_boolean_indicating_if_the_user_is_subscribed_to_the_current_journal(self):
         # Setup
-        now_dt = dt.datetime.now()
-        subscription = JournalAccessSubscriptionFactory.create(user=self.user, journal=self.journal)
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
-        self.client.login(username='david', password='top_secret')
-        url = reverse('public:journal:journal_detail', kwargs={'code': self.journal.code})
+
+        journal = JournalFactory()
+        subscription = JournalAccessSubscriptionFactory(user=self.user, post__journals=[journal], post__valid=True)
+
+        self.client.login(username='foobar', password='notsecret')
+        url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
         response = self.client.get(url)
         # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.context['content_access_granted'])
+        assert response.status_code == 200
+        assert response.context['content_access_granted']
+
+    def test_embeds_the_subscription_type(self, settings):
+        journal = JournalFactory()
+        subscription = JournalAccessSubscriptionFactory(
+            organisation=None, user=self.user, post__journals=[journal], post__valid=True
+        )
+        self.client.login(username='foobar', password='notsecret')
+        url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
+        # Run
+        response = self.client.get(url)
+        # Check
+        assert response.status_code == 200
+        assert response.context['subscription_type'] == 'individual'
 
 
 @override_settings(DEBUG=True)
