@@ -30,6 +30,7 @@ from core.subscription.restriction.restriction_models import (
     Revueabonne,
 )
 
+
 class ImportException(Exception):
     pass
 
@@ -116,7 +117,12 @@ class Command(BaseCommand):
             )
             if created:
                 created_objects['user'] += 1
-                logger.info("user.created", pk=user.pk, username=username, email=restriction_subscriber.courriel)
+                logger.info(
+                    "user.created",
+                    pk=user.pk,
+                    username=username,
+                    email=restriction_subscriber.courriel
+                )
 
             organisation, created = Organisation.objects.get_or_create(
                 name=restriction_subscriber.abonne[:120]
@@ -137,6 +143,21 @@ class Command(BaseCommand):
                 organisation.badge.save(restriction_subscriber.icone, image_file, save=True)
                 organisation.save()
                 f.close()
+        try:
+            restriction_profile.organisation.legacyorganisationprofile
+        except:
+            organisation_profile = LegacyOrganisationProfile.objects.create(
+                organisation=restriction_profile.organisation
+            )
+
+            organisation_profile.sushi_requester_id = restriction_subscriber.requesterid
+            organisation_profile.account_id = restriction_subscriber.pk
+            organisation_profile.save()
+            logger.info(
+                "organisationprofile.created",
+                account_id=restriction_subscriber.pk,
+                sushi_requester_id=restriction_subscriber.requesterid
+            )
 
         # STEP 2: gets or creates a JournalAccessSubscription instance
         # --
@@ -171,7 +192,12 @@ class Command(BaseCommand):
 
         if created:
             created_objects['period'] += 1
-            logger.info('subscriptionperiod.created', pk=subscription_period.pk,start=start_date, end=end_date)
+            logger.info(
+                'subscriptionperiod.created',
+                pk=subscription_period.pk,
+                start=start_date,
+                end=end_date
+            )
 
         try:
             subscription_period.clean()
