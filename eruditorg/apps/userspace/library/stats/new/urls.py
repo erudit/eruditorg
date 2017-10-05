@@ -3,11 +3,11 @@
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
-from . import views
-
+from apps.userspace.library.stats.new import views
+from apps.userspace.library.stats.common.views import StatsLandingView
 
 urlpatterns = [
-    url(r'^$', views.StatsLandingView.as_view(), name='landing'),
+    url(r'^$', StatsLandingView.as_view(), name='landing'),
     url(_(r'^rapport/jr1/csv/$'),
         views.CounterJournalReport1CsvView.as_view(), name='jr1-csv-report'),
     url(_(r'^rapport/jr1-goa/csv/$'),
