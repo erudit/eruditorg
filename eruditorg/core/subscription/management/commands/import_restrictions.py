@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import structlog
 
 import datetime as dt
 import os.path as op
@@ -11,7 +11,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from erudit.models import Journal
-from erudit.models import Organisation
+from erudit.models import Organisation, LegacyOrganisationProfile
 
 from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import InstitutionReferer
@@ -29,9 +29,6 @@ from core.subscription.restriction.restriction_models import (
     Revue,
     Revueabonne,
 )
-
-logger = logging.getLogger(__name__)
-
 
 class ImportException(Exception):
     pass
@@ -63,7 +60,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.organisation_id = options.get('organisation_id', None)
         self.year = options.get('year')
-
+        logger = structlog.get_logger(__name__)
         restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement__gte=self.year)
 
         if self.organisation_id:
@@ -71,14 +68,10 @@ class Command(BaseCommand):
                 abonneid=self.organisation_id
             )
 
-        logger.info("{} {} {}".format(
-            "=" * 15, "Start institution subscription import", "=" * 15
-        ))
-
         logger.info(
-            "Processing {0} subscriptions in database".format(
-                restriction_subscriptions.count()
-            )
+            "import.started",
+            import_type="restrictions",
+            to_process=restriction_subscriptions.count()
         )
 
         for restriction_subscription in restriction_subscriptions:
@@ -86,31 +79,26 @@ class Command(BaseCommand):
                 self._import_restriction_subscription(restriction_subscription)
             except ImportException:
                 pass
-        logger.info("Import ended")
-        logger.info("Created objects: {}".format(created_objects.items()))
+        logger.info("import.finished", **created_objects)
 
     @transaction.atomic
     def _import_restriction_subscription(self, restriction_subscription):
-        logger.info(
-            'Process subscription with ID: {0}'.format(
-                restriction_subscription.id)
+        logger = structlog.get_logger(__name__)
+        logger = logger.bind(
+            subscription_id=restriction_subscription.id
         )
         # Fetches the subscriber
         try:
             restriction_subscriber = Abonne.objects.get(pk=restriction_subscription.abonneid)
         except Abonne.DoesNotExist:
-            logger.error(
-                'Unable to retrieve the "Abonne" instance with ID: {0}'.format(
-                    restriction_subscription.abonneid))
+            logger.error('Abonne.DoesNotExist', abonne_id=restriction_subscription.abonneid)
             raise ImportException
 
         # Fetch the related journal
         try:
             restriction_journal = Revue.objects.get(revueid=restriction_subscription.revueid)
         except Revue.DoesNotExist:
-            logger.error(
-                'Unable to retrieve the "Revue" instance with ID: {0}'.format(
-                    restriction_subscription.revueid))
+            logger.error('Revue.DoesNotExist', revue_id=restriction_subscription.revueid)
             raise ImportException
 
         # STEP 1: gets or creates the RestrictionProfile instance
@@ -128,17 +116,14 @@ class Command(BaseCommand):
             )
             if created:
                 created_objects['user'] += 1
-                logger.debug("User created={}, pk={}, username={}, email={}".format(
-                    created, user.pk, username, restriction_subscriber.courriel
-                ))
+                logger.info("user.created", pk=user.pk, username=username, email=restriction_subscriber.courriel)
 
             organisation, created = Organisation.objects.get_or_create(
                 name=restriction_subscriber.abonne[:120]
             )
             if created:
-                logger.debug("Organisation created=True, pk={}, name={}".format(
-                    organisation.pk, organisation.name
-                ))
+                logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
+
             restriction_profile = LegacyAccountProfile.objects.create(
                 origin=LegacyAccountProfile.DB_RESTRICTION,
                 legacy_id=str(restriction_subscriber.pk),
@@ -160,19 +145,18 @@ class Command(BaseCommand):
             journal_code = restriction_journal.titrerevabr.lower()
             journal = Journal.legacy_objects.get_by_id(journal_code)
         except Journal.DoesNotExist:
-            logger.error(
-                'Unable to retrieve the "Journal" instance with code: {0}'.format(
-                    restriction_journal.titrerevabr))
+            logger.error("Journal.DoesNotExist", titrerevabr=restriction_journal.titrerevabr)
             raise ImportException
 
         subscription, created = JournalAccessSubscription.objects.get_or_create(
             organisation=restriction_profile.organisation)
+        logger = logger.bind(subscription_pk=subscription.pk)
         if created:
             created_objects['subscription'] += 1
-            logger.debug("subscription created={}, pk={}".format(created, subscription.pk))
+            logger.info("subscription.created")
         if not subscription.journals.filter(pk=journal.pk):
             subscription.journals.add(journal)
-            logger.debug("subscription pk={} add journal pk={}".format(subscription.pk, journal.pk))
+            logger.info("subscription.add_journal", journal_pk=journal.pk)
 
         # STEP 3: creates the subscription period
         # --
@@ -187,20 +171,14 @@ class Command(BaseCommand):
 
         if created:
             created_objects['period'] += 1
-            logger.debug(
-                "period created={}, pk={}, subscription_pk={}, start={}, end={}".format(
-                    created, subscription_period.pk, subscription.pk, start_date, end_date
-                )
-            )
+            logger.info('subscriptionperiod.created', pk=subscription_period.pk,start=start_date, end=end_date)
 
         try:
             subscription_period.clean()
         except ValidationError as ve:
             # We are saving multiple periods for multiple journals under the same subscription
             # instance so period validation errors can happen.
-            logger.error(
-                'Cannot save the subscription period : {0}'.format(
-                    ve))
+            logger.error('subscriptionperiod.validtionerror')
             raise
         else:
             subscription_period.save()
@@ -215,9 +193,7 @@ class Command(BaseCommand):
             )
 
             if created:
-                logger.debug("Referer created=True, subscription_pk={}, referer={}".format(
-                    subscription.pk, restriction_subscriber.referer
-                ))
+                logger.info("referer.created", referer=restriction_subscriber.referer)
 
         # STEP 4: creates the IP whitelist associated with the subscription
         # --
@@ -230,9 +206,8 @@ class Command(BaseCommand):
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
             if created:
                 created_objects['iprange'] += 1
-                logger.debug("Ipabonne created={}, pk={}, ip_start={}, ip_end={}".format(
-                    created, ip_range.pk, ip_start, ip_end
-                ))
+                logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
+
         restriction_subscriber_ips_set2 = Adressesip.objects.filter(
             abonneid=restriction_subscriber.pk)
         for ip in restriction_subscriber_ips_set2:
@@ -241,9 +216,7 @@ class Command(BaseCommand):
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
             if created:
                 created_objects['iprange'] += 1
-                logger.debug("Ipabonne created={}, pk={}, ip_start={}, ip_end={}".format(
-                    created, ip_range.pk, ip_start, ip_end
-                ))
+                logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
 
         restriction_subscriber_ips_ranges = Ipabonneinterval.objects.filter(
             abonneid=restriction_subscriber.pk)
@@ -254,9 +227,7 @@ class Command(BaseCommand):
                 subscription=subscription, ip_start=ip_start, ip_end=ip_end)
             if created:
                 created_objects['iprange'] += 1
-                logger.debug("Ipabonneinterval created={}, pk={}, ip_start={}, ip_end={}".format(
-                    created, ip_range.pk, ip_start, ip_end
-                ))
+                logger.info("ipabonneinterval.created", ip_start=ip_start, ip_end=ip_end)
 
     def _get_ip_range_from_ip(self, ip):
         if '*' not in ip:
