@@ -1,12 +1,32 @@
 {% extends "base_email.html" %}
 {% load i18n %}
 
+{% block subject %}
+{% trans "Abonnement à une revue" %}
+{% endblock subject %}
+
 {% block content %}
-  <p>
-  {% blocktrans trimmed with journal_name=token.content_object.name %}
-    Une proposition d'abonnement à la revue <strong>{{ journal_name }}</strong> vous a été envoyée.
-  {% endblocktrans %}
-  </p>
-  <p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
-  <p><a href="http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}">{% trans "Accepter l'abonnement" %}</a></p>
+<p>{% trans "Bonjour," %}</p>
+
+<p>
+{% blocktrans trimmed with journal_name=token.content_object.name %}
+  Une proposition d’abonnement à la revue <strong>{{ journal_name }}</strong> vous a été envoyée.
+{% endblocktrans %}
+</p>
+<p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
 {% endblock content %}
+
+{% block cta_url %}
+http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}
+{% endblock cta_url %}
+
+{% block cta_text %}
+{% trans "Accepter l’abonnement" %}
+{% endblock cta_text %}
+
+{% block signature %}
+&ndash; {% trans 'L’Équipe Érudit' %}<br>
+{% blocktrans %}
+<a href="mailto:info@erudit.org?subject=Abonnement individuel à une revue">info@erudit.org</a>
+{% endblocktrans %}
+{% endblock signature %}
