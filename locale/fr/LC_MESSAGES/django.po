@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-27 12:09-0500\n"
+"POT-Creation-Date: 2017-10-10 12:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,10 @@ msgstr ""
 msgid "^deconnexion/$"
 msgstr ""
 
+#: apps/public/auth/urls.py:18
+msgid "^bienvenue/$"
+msgstr ""
+
 #: apps/public/auth/urls.py:20
 msgid "^donnees-personnelles/$"
 msgstr ""
@@ -85,15 +89,19 @@ msgstr ""
 msgid "^reinitialisation/termine/$"
 msgstr ""
 
-#: apps/public/auth/views.py:28
+#: apps/public/auth/views.py:27
 msgid "Vos informations personelles ont été mises à jour avec succès."
 msgstr ""
 
-#: apps/public/auth/views.py:44
+#: apps/public/auth/views.py:43
 msgid "Votre compte a été mis à jour avec succès."
 msgstr ""
 
-#: apps/public/auth/views.py:66
+#: apps/public/auth/views.py:59
+msgid "Votre connexion a été effectuée avec succès."
+msgstr ""
+
+#: apps/public/auth/views.py:84
 msgid "Votre mot de passe a été mis à jour avec succès"
 msgstr ""
 
@@ -317,7 +325,7 @@ msgstr ""
 msgid "Titre, résumé, mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:25 core/subscription/models.py:243
+#: apps/public/search/forms.py:25 core/subscription/models.py:271
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:35
 msgid "Titre"
 msgstr ""
@@ -402,7 +410,7 @@ msgid "Articles culturels"
 msgstr ""
 
 #: apps/public/search/forms.py:55 apps/userspace/reporting/forms.py:18
-#: templates/base.html:145 templates/base.html:317
+#: templates/base.html:145 templates/base.html:327
 #: templates/public/home.html:101
 #: templates/public/thesis/collection_home.html:24
 #: templates/public/thesis/collection_home.html:50
@@ -426,7 +434,7 @@ msgid "Actes"
 msgstr ""
 
 #: apps/public/search/forms.py:58 templates/base.html:151
-#: templates/base.html:319 templates/public/home.html:107
+#: templates/base.html:329 templates/public/home.html:107
 msgid "Rapports de recherche"
 msgstr ""
 
@@ -565,8 +573,8 @@ msgid "Disciplines"
 msgstr ""
 
 #: apps/public/search/forms.py:180 core/editor/models.py:222
-#: core/subscription/models.py:98 templates/base.html:142
-#: templates/base.html:316 templates/public/home.html:98
+#: core/subscription/models.py:106 templates/base.html:142
+#: templates/base.html:326 templates/public/home.html:98
 #: templates/public/journal/article_base.html:115
 #: templates/public/journal/article_base.html:152
 #: templates/public/journal/article_detail.html:37
@@ -937,7 +945,7 @@ msgid "^$"
 msgstr ""
 
 #: apps/userspace/journal/information/views.py:36 templates/base.html:181
-#: templates/base.html:292 templates/public/journal/journal_detail.html:138
+#: templates/base.html:302 templates/public/journal/journal_detail.html:138
 #: templates/userspace/journal/information/journalinformation_update.html:4
 #: templates/userspace/journal/information/journalinformation_update.html:11
 #: templates/userspace/journal/partials/menu.html:21
@@ -1121,7 +1129,7 @@ msgstr ""
 
 #: apps/userspace/reporting/views.py:184 apps/userspace/reporting/views.py:209
 #: core/editor/models.py:33 core/royalty_reports/models.py:27
-#: core/subscription/models.py:94 core/subscription/models.py:217
+#: core/subscription/models.py:102 core/subscription/models.py:239
 #: templates/public/journal/journal_list_per_names.html:142
 #: templates/userspace/journal/subscription/individualsubscription_list.html:48
 msgid "Revue"
@@ -1518,110 +1526,132 @@ msgstr ""
 msgid "Forfait d'abonnement individuel"
 msgstr ""
 
-#: core/subscription/models.py:79
+#: core/subscription/admin.py:109 core/subscription/models.py:274
+msgid "Nombre de comptes"
+msgstr ""
+
+#: core/subscription/admin.py:124
+msgid "Nombre maximum de comptes"
+msgstr ""
+
+#: core/subscription/admin.py:131
+msgid "Nombre d'abonnements"
+msgstr ""
+
+#: core/subscription/models.py:87
 msgid "Abonné individuel"
 msgstr ""
 
-#: core/subscription/models.py:83
+#: core/subscription/models.py:91
 msgid "Abonné institutionnel"
 msgstr ""
 
-#: core/subscription/models.py:87 core/subscription/models.py:218
+#: core/subscription/models.py:95 core/subscription/models.py:240
 msgid "Forfait"
 msgstr ""
 
-#: core/subscription/models.py:96
+#: core/subscription/models.py:104
 msgid "Collection"
 msgstr ""
 
-#: core/subscription/models.py:102
+#: core/subscription/models.py:110
 msgid "Commanditaire"
 msgstr ""
 
-#: core/subscription/models.py:109 core/subscription/models.py:170
-#: core/subscription/models.py:177
+#: core/subscription/models.py:117 core/subscription/models.py:192
+#: core/subscription/models.py:199
 msgid "Abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:110
+#: core/subscription/models.py:118
 msgid "Abonnements aux revues"
 msgstr ""
 
-#: core/subscription/models.py:118
+#: core/subscription/models.py:126
 msgid "{} - Accès multiples"
 msgstr ""
 
-#: core/subscription/models.py:161 core/subscription/models.py:257
+#: core/subscription/models.py:183 core/subscription/models.py:293
 msgid "Abonnement"
 msgstr ""
 
-#: core/subscription/models.py:164
+#: core/subscription/models.py:186
 msgid "Période d'abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:165
+#: core/subscription/models.py:187
 msgid "Périodes d'abonnement aux revues"
 msgstr ""
 
-#: core/subscription/models.py:172
+#: core/subscription/models.py:194
 msgid "URL référent"
 msgstr ""
 
-#: core/subscription/models.py:178
+#: core/subscription/models.py:200
 msgid "Adresse IP de début"
 msgstr ""
 
-#: core/subscription/models.py:179
+#: core/subscription/models.py:201
 msgid "Adresse IP de fin"
 msgstr ""
 
-#: core/subscription/models.py:182
+#: core/subscription/models.py:204
 msgid "Plage d'adresses IP d'institution"
 msgstr ""
 
-#: core/subscription/models.py:183
+#: core/subscription/models.py:205
 msgid "Plages d'adresses IP d'institution"
 msgstr ""
 
-#: core/subscription/models.py:195 core/subscription/models.py:200
+#: core/subscription/models.py:217 core/subscription/models.py:222
 #, python-brace-format
 msgid "{0} n'est pas une adresse IP valide"
 msgstr ""
 
-#: core/subscription/models.py:203
+#: core/subscription/models.py:225
 msgid "L'adresse IP de début doit être inférieure à l'adresse IP de fin"
 msgstr ""
 
-#: core/subscription/models.py:221
-msgid "Abonnement de gestion de revue"
-msgstr ""
-
-#: core/subscription/models.py:222
-msgid "Abonnements de gestion de revue"
+#: core/subscription/models.py:243
+msgid "Abonnement aux forfaits d'abonnements individuels"
 msgstr ""
 
 #: core/subscription/models.py:244
+msgid "Abonnements aux forfaits d'abonnements individuels"
+msgstr ""
+
+#: core/subscription/models.py:272
 msgid "Code"
 msgstr ""
 
-#: core/subscription/models.py:245
-msgid "Nombre de comptes"
+#: core/subscription/models.py:275
+msgid "Nombre maximal de comptes que ce forfait permet d'abonner"
 msgstr ""
 
-#: core/subscription/models.py:248
+#: core/subscription/models.py:279
+msgid "Illimité"
+msgstr ""
+
+#: core/subscription/models.py:280
+msgid ""
+"Cocher si ce forfait d'abonnements individuels permet d'abonner un nombre "
+"illimité d'individus"
+msgstr ""
+
+#: core/subscription/models.py:284
 msgid "Forfait d'abonnements individuels"
 msgstr ""
 
-#: core/subscription/models.py:249
+#: core/subscription/models.py:285
 msgid "Forfaits d'abonnements individuels"
 msgstr ""
 
-#: core/subscription/models.py:260
-msgid "Période d'abonnement de gestion de revue"
+#: core/subscription/models.py:296
+msgid "Période d'abonnement de aux forfaits d'abonnements individuels"
 msgstr ""
 
-#: core/subscription/models.py:261
-msgid "Périodes d'abonnement de gestion de revue"
+#: core/subscription/models.py:297
+msgid "Périodes d'abonnement aux forfaits d'abonnements individuels"
 msgstr ""
 
 #: templates/base.html:16 templates/base.html:65 templates/base.html:74
@@ -1759,30 +1789,30 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/base.html:263 templates/public/journal/journal_detail.html:246
+#: templates/base.html:273 templates/public/journal/journal_detail.html:246
 #: templates/public/journal/journal_list_per_disciplines.html:86
 msgid "Retourner en haut"
 msgstr ""
 
-#: templates/base.html:274
+#: templates/base.html:284
 msgid "Abonnez-vous à notre infolettre&nbsp;:"
 msgstr ""
 
-#: templates/base.html:277
+#: templates/base.html:287
 msgid "nom@courriel.com"
 msgstr ""
 
-#: templates/base.html:278
+#: templates/base.html:288
 msgid "S'inscrire"
 msgstr ""
 
-#: templates/base.html:293 templates/public/brand_assets.html:5
+#: templates/base.html:303 templates/public/brand_assets.html:5
 #: templates/public/brand_assets.html:27 templates/public/brand_assets.html:38
 #: templates/public/brand_assets.html:47
 msgid "Logo et identité"
 msgstr ""
 
-#: templates/base.html:294 templates/public/journal/journal_detail.html:174
+#: templates/base.html:304 templates/public/journal/journal_detail.html:174
 #: templates/userspace/journal/partials/menu.html:45
 #: templates/userspace/journal/subscription/individualsubscription_list.html:4
 #: templates/userspace/journal/subscription/individualsubscription_list.html:7
@@ -1790,216 +1820,297 @@ msgstr ""
 msgid "Abonnements"
 msgstr ""
 
-#: templates/base.html:318
+#: templates/base.html:328
 msgid "Livres & actes"
 msgstr ""
 
-#: templates/base.html:325
+#: templates/base.html:335
 msgid "Aide"
 msgstr ""
 
-#: templates/base.html:326
+#: templates/base.html:336
 msgid "Plan du site"
 msgstr ""
 
-#: templates/base.html:327
+#: templates/base.html:337
 msgid "Nous contacter"
 msgstr ""
 
-#: templates/base.html:329 templates/public/home.html:181
+#: templates/base.html:339 templates/public/home.html:181
 msgid "Salons"
 msgstr ""
 
-#: templates/base.html:332
+#: templates/base.html:342
 msgid "Jamais trop érudit"
 msgstr ""
 
-#: templates/base.html:350
+#: templates/base.html:360
 msgid "Logo d'Érudit"
 msgstr ""
 
-#: templates/base.html:351
+#: templates/base.html:361
 msgid "Cultivez votre savoir."
 msgstr ""
 
-#: templates/base.html:358
+#: templates/base.html:368
 msgid "Consortium Érudit"
 msgstr ""
 
-#: templates/base.html:361
+#: templates/base.html:371
 msgid "Politique et licence d’utilisation"
 msgstr ""
 
-#: templates/base.html:366
+#: templates/base.html:376
 msgid "Suivez-nous&nbsp;:"
 msgstr ""
 
-#: templates/base_email.html:19
+#: templates/base_email.html:898
+msgid "Se rendre sur le site d’Érudit"
+msgstr ""
+
+#: templates/base_email.html:898 templates/public/brand_assets.html:135
+msgid "Logo d’Érudit"
+msgstr ""
+
+#: templates/base_email.html:1236
 #, python-format
-msgid "Se rendre sur %(sitename)s"
+msgid "%(sitename)s"
+msgstr ""
+
+#: templates/base_email.html:1278
+msgid "https://jamaistrop.erudit.org/"
+msgstr ""
+
+#: templates/base_email.html:1278
+msgid "Consulter la campagne « On n’est jamais trop érudit »"
+msgstr ""
+
+#: templates/emails/accounts/new_account.html:5
+msgid "Création d’un nouveau compte utilisateur"
+msgstr ""
+
+#: templates/emails/accounts/new_account.html:9
+#, python-format
+msgid ""
+"\n"
+"<p>Bonjour %(object.firstname)s %(object.lastname)s,</p>\n"
+"\n"
+"<p>Votre compte pour accéder à erudit.org a été créé.</p>\n"
+"\n"
+"<p>Pour vous connecter, utilisez votre adresse courriel et le mot de passe "
+"que vous recevrez sous peu.</p>\n"
+msgstr ""
+
+#: templates/emails/accounts/new_account.html:23
+msgid "Consulter erudit.org"
+msgstr ""
+
+#: templates/emails/accounts/new_account.html:27
+#: templates/emails/auth/password_reset_email.html:25
+#: templates/emails/editor/issue_files_deletion_content.html:30
+#: templates/emails/organisation/new_member_content.html:26
+#: templates/emails/subscription/journal/new_subscription_content.html:28
+msgid "L’Équipe Érudit"
+msgstr ""
+
+#: templates/emails/accounts/new_account.html:28
+msgid ""
+"\n"
+"<a href=\"mailto:info@erudit.org?subject=Nouveau compte utilisateur"
+"\">info@erudit.org</a>\n"
 msgstr ""
 
 #: templates/emails/auth/password_reset_email.html:5
-#, python-format
-msgid ""
-"Vous recevez ce courriel car vous avez demandé à réinitialiser le mot de "
-"passe de votre compte utilisateur sur <strong>%(site_name)s</strong>."
-msgstr ""
-
-#: templates/emails/auth/password_reset_email.html:6
-msgid ""
-"Veuillez cliquer sur le lien suivant afin de définir un nouveau mot de "
-"passe :"
+#: templates/emails/auth/password_reset_subject.txt:1
+msgid "Réinitialisation d’un mot de passe"
 msgstr ""
 
 #: templates/emails/auth/password_reset_email.html:9
+#: templates/emails/editor/issue_files_deletion_content.html:9
+#: templates/emails/editor/issue_submission_refused_content.html:9
+#: templates/emails/editor/issue_submission_validated_content.html:9
+#: templates/emails/editor/new_issue_submission_content.html:9
+#: templates/emails/subscription/journal/new_subscription_content.html:9
+msgid "Bonjour,"
+msgstr ""
+
+#: templates/emails/auth/password_reset_email.html:11
+#, python-format
+msgid ""
+"Vous avez demandé de réinitialiser le mot de passe de votre compte sur "
+"<strong>%(site_name)s</strong>."
+msgstr ""
+
+#: templates/emails/auth/password_reset_email.html:13
+msgid ""
+"Veuillez cliquer sur le bouton suivant afin d’en choisir un nouveau&nbsp;: "
+msgstr ""
+
+#: templates/emails/auth/password_reset_email.html:21
 msgid "Modifier mon mot de passe"
 msgstr ""
 
-#: templates/emails/auth/password_reset_email.html:12
-msgid "Pour rappel, votre nom d'utilisateur est :"
+#: templates/emails/auth/password_reset_email.html:26
+msgid ""
+"\n"
+"<a href=\"mailto:info@erudit.org?subject=Réinitialisation d’un mot de passe"
+"\">info@erudit.org</a>\n"
 msgstr ""
 
-#: templates/emails/auth/password_reset_subject.txt:1
-msgid "Réinitialisation de votre mot de passe"
+#: templates/emails/editor/issue_files_deletion_content.html:5
+msgid "Suppression de fichiers déposés"
 msgstr ""
 
-#: templates/emails/editor/issue_files_deletion_content.html:6
-msgid "Les fichiers des numéros suivant seront supprimés dans cinq jours."
+#: templates/emails/editor/issue_files_deletion_content.html:12
+msgid ""
+"Les fichiers de production des numéros suivants seront supprimés de votre "
+"compte dans cinq jours&nbsp;:"
+msgstr ""
+
+#: templates/emails/editor/issue_files_deletion_content.html:18
+msgid "Assurez-vous d’en avoir une copie."
+msgstr ""
+
+#: templates/emails/editor/issue_files_deletion_content.html:26
+msgid "Accéder au tableau de bord"
+msgstr ""
+
+#: templates/emails/editor/issue_files_deletion_content.html:31
+msgid ""
+"\n"
+"<a href=\"mailto:info@erudit.org?subject=Suppression de fichiers déposés"
+"\">info@erudit.org</a>\n"
 msgstr ""
 
 #: templates/emails/editor/issue_files_deletion_subject.html:3
-msgid "[Érudit] Des fichiers de numéros (dépôts) vont être supprimés"
+msgid "[Érudit] Suppression de fichiers déposés"
 msgstr ""
 
-#: templates/emails/editor/issue_submission_refused_content.html:6
+#: templates/emails/editor/issue_submission_refused_content.html:5
+msgid "Demande de modification de fichiers"
+msgstr ""
+
+#: templates/emails/editor/issue_submission_refused_content.html:12
 #, python-format
 msgid ""
 "\n"
-"  <p>Bonjour,</p>\n"
-"\n"
-"\n"
-"  <p>Voici les modifications à apporter aux fichiers de production du numéro "
-"%(issue)s.</p>\n"
-"  "
+"<p>Vous avez des modifications à apporter aux fichiers de production du "
+"numéro %(issue)s.</p>\n"
 msgstr ""
 
-#: templates/emails/editor/issue_submission_refused_content.html:13
+#: templates/emails/editor/issue_submission_refused_content.html:16
 #, python-format
 msgid ""
 "\n"
-"  <p>Commentaires:</p>\n"
-"  %(comment)s\n"
-"  "
+"<p>Commentaires:</p>\n"
+"%(comment)s\n"
 msgstr ""
 
-#: templates/emails/editor/issue_submission_refused_content.html:18
-#, python-format
+#: templates/emails/editor/issue_submission_refused_content.html:21
+msgid "Nous vous remercions de votre précieuse collaboration."
+msgstr ""
+
+#: templates/emails/editor/issue_submission_refused_content.html:29
+msgid "Modifier mon dépôt"
+msgstr ""
+
+#: templates/emails/editor/issue_submission_refused_content.html:33
 msgid ""
 "\n"
-"  <p>\n"
-"    <a href=\"https://%(domain)s%(issue_url)s\">\n"
-"      Modifier le dépôt du numéro\n"
-"    </a>\n"
-"  </p>\n"
-"\n"
-"  <p>Nous vous remercions pour votre précieuse collaboration.</p>\n"
-"\n"
-"  <p>Pour plus d'information, veuillez communiquer avec&nbsp;:</p>\n"
-"\n"
-"  <p>\n"
-"  Hocine Chehab<br>\n"
-"  Chargé d'édition numérique<br>\n"
-"  hocine.chehab@erudit.org<br>\n"
-"  514-343-6111 poste 44607<br>\n"
-"  </p>\n"
-"  "
+"Hocine Chehab<br>\n"
+"Chargé d’édition numérique<br>\n"
+"<a href=\"mailto:edition@erudit.org?subject=Modification de fichiers"
+"\">edition@erudit.org</a><br>\n"
+"<a href=\"tel:+15143436111p44607\">+1 514-343-6111 poste 44607</a>\n"
 msgstr ""
 
 #: templates/emails/editor/issue_submission_refused_subject.html:3
-msgid "[Érudit] Demande de modifications des fichiers de production"
+msgid "[Érudit] Demande de modification de fichiers"
 msgstr ""
 
-#: templates/emails/editor/issue_submission_validated_content.html:6
-#, python-format
-msgid ""
-"\n"
-"  <p>Bonjour,</p>\n"
-"\n"
-"  <p>Les fichiers du numéro %(issue)s de la revue %(journal)s ont été "
-"approuvés par l'équipe de production. Le travail de mise en ligne débutera "
-"sous peu.</p>\n"
-"  "
+#: templates/emails/editor/issue_submission_validated_content.html:5
+msgid "Approbation des fichiers déposés"
 msgstr ""
 
 #: templates/emails/editor/issue_submission_validated_content.html:12
 #, python-format
 msgid ""
 "\n"
-"  <p>Commentaires: </p>\n"
-"  %(comment)s\n"
-"  "
+"<p>Les fichiers du numéro %(issue)s de la revue %(journal)s ont été "
+"approuvés par l’équipe de production. Le travail de mise en ligne débutera "
+"sous peu.</p>\n"
 msgstr ""
 
-#: templates/emails/editor/issue_submission_validated_content.html:17
+#: templates/emails/editor/issue_submission_validated_content.html:16
 #, python-format
 msgid ""
 "\n"
-"  <p>\n"
-"    <a href=\"https://%(domain)s%(issue_url)s\">\n"
-"      Consulter le numéro\n"
-"    </a>\n"
-"  </p>\n"
+"<p>Commentaires: </p>\n"
+"%(comment)s\n"
+msgstr ""
+
+#: templates/emails/editor/issue_submission_validated_content.html:28
+#: templates/emails/editor/new_issue_submission_content.html:22
+#: templates/public/search/results.html:270
+msgid "Consulter le numéro"
+msgstr ""
+
+#: templates/emails/editor/issue_submission_validated_content.html:32
+msgid ""
 "\n"
-"  <p>Pour plus d'information, veuillez communiquer avec&nbsp;:</p>\n"
-"\n"
-"  <p>\n"
-"  Hocine Chehab<br>\n"
-"  Chargé d'édition numérique<br>\n"
-"  hocine.chehab@erudit.org<br>\n"
-"  514-343-6111 poste 44607<br>\n"
-"  </p>\n"
-"  "
+"Hocine Chehab<br>\n"
+"Chargé d’édition numérique<br>\n"
+"<a href=\"mailto:edition@erudit.org?subject=Approbation de fichiers"
+"\">edition@erudit.org</a><br>\n"
+"<a href=\"tel:+15143436111p44607\">+1 514-343-6111 poste 44607</a>\n"
 msgstr ""
 
 #: templates/emails/editor/issue_submission_validated_subject.html:3
 msgid "[Érudit] Vos fichiers ont été approuvés"
 msgstr ""
 
-#: templates/emails/editor/new_issue_submission_content.html:6
+#: templates/emails/editor/new_issue_submission_content.html:5
+msgid "Confirmation d’un nouveau dépôt de fichiers"
+msgstr ""
+
+#: templates/emails/editor/new_issue_submission_content.html:12
 #, python-format
 msgid ""
 "\n"
-"  <p>Bonjour,</p>\n"
+"<p>%(fullname)s de la revue %(journal)s a transmis des fichiers de "
+"production du numéro %(issue)s.</p>\n"
+msgstr ""
+
+#: templates/emails/editor/new_issue_submission_content.html:26
+msgid ""
 "\n"
-"  <p>%(fullname)s de la revue %(journal)s a transmis des fichiers de "
-"production du %(issue)s.</p>\n"
-"\n"
-"  <p>\n"
-"    <a href=\"https://%(domain)s%(issue_url)s\">\n"
-"      Consulter la demande\n"
-"    </a>\n"
-"  </p>\n"
-"  "
+"Hocine Chehab<br>\n"
+"Chargé d’édition numérique<br>\n"
+"<a href=\"mailto:edition@erudit.org?subject=Nouveau dépôt de fichiers"
+"\">edition@erudit.org</a><br>\n"
+"<a href=\"tel:+15143436111p44607\">+1 514-343-6111 poste 44607</a>\n"
 msgstr ""
 
 #: templates/emails/editor/new_issue_submission_subject.html:3
 msgid "[Érudit] De nouveaux fichiers ont été transmis"
 msgstr ""
 
-#: templates/emails/organisation/new_member_content.html:6
-#, python-format
-msgid ""
-"Une proposition vous a été envoyée afin de rejoindre l'organisation <strong>"
-"%(organisation_name)s</strong>."
+#: templates/emails/organisation/new_member_content.html:5
+msgid "Rejoindre une organisation"
 msgstr ""
 
 #: templates/emails/organisation/new_member_content.html:10
-#: templates/emails/subscription/journal/new_subscription_content.html:10
-msgid "Veuillez cliquer sur le lien suivant pour l'accepter"
+#, python-format
+msgid ""
+"Une proposition vous a été envoyée afin de rejoindre l’organisation <strong>"
+"%(organisation_name)s</strong>."
 msgstr ""
 
-#: templates/emails/organisation/new_member_content.html:11
+#: templates/emails/organisation/new_member_content.html:14
+msgid "Veuillez cliquer sur le lien suivant pour l’accepter"
+msgstr ""
+
+#: templates/emails/organisation/new_member_content.html:22
 msgid "Accepter la proposition"
 msgstr ""
 
@@ -2008,15 +2119,30 @@ msgstr ""
 msgid "[Érudit] Rejoindre l'organisation %(organisation_name)s"
 msgstr ""
 
-#: templates/emails/subscription/journal/new_subscription_content.html:6
+#: templates/emails/subscription/journal/new_subscription_content.html:5
+msgid "Abonnement à une revue"
+msgstr ""
+
+#: templates/emails/subscription/journal/new_subscription_content.html:12
 #, python-format
 msgid ""
-"Une proposition d'abonnement à la revue <strong>%(journal_name)s</strong> "
+"Une proposition d’abonnement à la revue <strong>%(journal_name)s</strong> "
 "vous a été envoyée."
 msgstr ""
 
-#: templates/emails/subscription/journal/new_subscription_content.html:11
-msgid "Accepter l'abonnement"
+#: templates/emails/subscription/journal/new_subscription_content.html:16
+msgid "Veuillez cliquer sur le lien suivant pour l'accepter"
+msgstr ""
+
+#: templates/emails/subscription/journal/new_subscription_content.html:24
+msgid "Accepter l’abonnement"
+msgstr ""
+
+#: templates/emails/subscription/journal/new_subscription_content.html:29
+msgid ""
+"\n"
+"<a href=\"mailto:info@erudit.org?subject=Abonnement individuel à une revue"
+"\">info@erudit.org</a>\n"
 msgstr ""
 
 #: templates/emails/subscription/journal/new_subscription_subject.html:1
@@ -2391,10 +2517,6 @@ msgid ""
 "\n"
 "          Les illustrations sont disponibles sur demande.\n"
 "          "
-msgstr ""
-
-#: templates/public/brand_assets.html:135
-msgid "Logo d’Érudit"
 msgstr ""
 
 #: templates/public/brand_assets.html:139
@@ -3256,6 +3378,10 @@ msgstr ""
 msgid "Revue suivie de…"
 msgstr ""
 
+#: templates/public/journal/journal_base.html:187
+msgid "Vous êtes abonné à cette revue."
+msgstr ""
+
 #: templates/public/journal/journal_detail.html:4
 #: templates/public/journal/journal_detail.html:12
 #: templates/public/journal/journal_detail.html:22
@@ -3621,10 +3747,6 @@ msgstr ""
 
 #: templates/public/search/results.html:256
 msgid "déposée à"
-msgstr ""
-
-#: templates/public/search/results.html:270
-msgid "Consulter le numéro"
 msgstr ""
 
 #: templates/public/search/results.html:276
