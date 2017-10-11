@@ -25,7 +25,7 @@ http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}
 {% endblock cta_text %}
 
 {% block signature %}
-&ndash; {% trans 'L’Équipe Érudit' %}<br>
+{% trans 'L’Équipe Érudit' %}<br>
 {% blocktrans %}
 <a href="mailto:info@erudit.org?subject=Abonnement individuel à une revue">info@erudit.org</a>
 {% endblocktrans %}
