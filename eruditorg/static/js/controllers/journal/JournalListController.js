@@ -17,7 +17,7 @@ export default {
       e.preventDefault();
       e.stopPropagation();
       var target = $(this).attr('href').replace('#', '');
-      $('html, body').animate( { scrollTop: $('a[name="'+target+'"]').offset().top }, 750 );
+      $('html, body').animate( { scrollTop: $('a[id="'+target+'"]').offset().top - 100 }, 750);
       return false;
     });
   },
@@ -43,11 +43,18 @@ export default {
       }
     }
 
-    $(window).scroll(function () {
-      var origOffsetY = $('#journal_list_per_names').offset().top + 390;
-      stickyFilterForm(origOffsetY);
-      stickyItemsMenu(origOffsetY);
-    });
+    var listPerNames = $('#journal_list_per_names');
+
+    if (listPerNames.length) {
+
+      $(window).scroll(function () {
+        var origOffsetY = $('#journal_list_per_names').offset().top + 390;
+        stickyFilterForm(origOffsetY);
+        stickyItemsMenu(origOffsetY);
+      });
+
+    }
+
   },
 
 };
