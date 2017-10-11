@@ -13,10 +13,8 @@
 <p>Les fichiers du numéro {{ issue }} de la revue {{ journal }} ont été approuvés par l’équipe de production. Le travail de mise en ligne débutera sous peu.</p>
 {% endblocktrans %}
 {% if comment %}
-{% blocktrans %}
-<p>Commentaires: </p>
-{{ comment }}
-{% endblocktrans %}
+<p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
+<p>{{ comment }}</p>
 {% endif %}
 {% endblock content %}
 

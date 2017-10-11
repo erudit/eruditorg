@@ -13,10 +13,8 @@
 <p>Vous avez des modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
 {% endblocktrans %}
 {% if comment %}
-{% blocktrans %}
-<p>Commentaires:</p>
-{{ comment }}
-{% endblocktrans %}
+<p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
+<p>{{ comment }}</p>
 {% endif %}
 <p>{% trans "Nous vous remercions de votre précieuse collaboration." %}</p>
 {% endblock content %}
