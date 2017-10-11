@@ -7,15 +7,14 @@
 
 {% block content %}
 <p>{% trans "Bonjour," %}</p>
-
-{% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
 {% blocktrans with fullname=issue.contact.get_full_name journal=issue.journal %}
 <p>{{ fullname }} de la revue {{ journal }} a transmis des fichiers de production du numéro {{ issue }}.</p>
 {% endblocktrans %}
 {% endblock content %}
 
 {% block cta_url %}
-{{ protocol }}://{{ site.domain }}{{ issue_url }}
+{% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
+http://{{ site.domain }}{{ issue_url }}
 {% endblock cta_url %}
 
 {% block cta_text %}

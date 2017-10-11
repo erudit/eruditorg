@@ -7,20 +7,19 @@
 
 {% block content %}
 <p>{% trans "Bonjour," %}</p>
-
-{% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
 {% blocktrans %}
 <p>Vous avez des modifications à apporter aux fichiers de production du numéro {{ issue }}.</p>
 {% endblocktrans %}
 {% if comment %}
 <p><strong>{% trans "Commentaires&nbsp;:" %}</strong></p>
-<p>{{ comment }}</p>
+<p><em>{{ comment }}</em></p>
 {% endif %}
 <p>{% trans "Nous vous remercions de votre précieuse collaboration." %}</p>
 {% endblock content %}
 
 {% block cta_url %}
-{{ protocol }}://{{ site.domain }}{{ issue_url }}
+{% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
+http://{{ site.domain }}{{ issue_url }}
 {% endblock cta_url %}
 
 {% block cta_text %}
