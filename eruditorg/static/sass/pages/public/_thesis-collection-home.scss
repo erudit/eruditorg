@@ -1,8 +1,9 @@
-.thesis_collection_home #breadcrumb {
-  background: $light-grey;
-}
-
 #thesis_collection_home {
+
+  .container-alert,
+  #breadcrumb {
+    background: $light-grey;
+  }
 
   .glory {
 

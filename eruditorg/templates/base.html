@@ -256,11 +256,13 @@
 
     {% block content_wrapper %}
       {% block messages %}
+      <div class="container-alert">
         <div class="container">
           <div class="alert">
             {% include "partials/messages.html" %}
           </div>
         </div>
+      </div>
       {% endblock %}
       {% block content %}
       {% endblock content %}

@@ -2,11 +2,12 @@
 * Advanced search form
 */
 
-.advanced_search #breadcrumb {
-  background: $light-grey;
-}
-
 #advanced_search {
+
+  .container-alert,
+  #breadcrumb {
+    background: $light-grey;
+  }
 
 
   /**
