@@ -3,40 +3,107 @@ import datetime as dt
 import requests
 
 from django.http import HttpResponse
-from django.views.generic import View
+from django.views.generic import TemplateView
+from .settings import ERUDIT_COUNTER_BACKEND_URL
 
 from base.viewmixins import LoginRequiredMixin
-from core.counter.counter import JournalReport1
-from core.counter.counter import JournalReport1GOA
-from core.counter.xml import get_xml_journal_counter_report
+from base.viewmixins import MenuItemMixin
 
 from apps.userspace.library.viewmixins import OrganisationScopePermissionRequiredMixin
 
+from .forms import CounterJR1Form
+from .forms import CounterJR1GOAForm
 
-class ExternalCounterReportView(LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, View):
-    http_method_names = ['get', ]
+
+class StatsLandingView(
+        LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
+
+    menu_library = 'stats'
     permission_required = 'subscription.access_library_stats'
-    report_base_url = "http://php.prod.erudit.org/counterphp/"
+    template_name = 'userspace/library/stats/legacy/landing.html'
+    report_base_url = ERUDIT_COUNTER_BACKEND_URL
+    counter_jr1_form = CounterJR1Form
+    counter_jr1goa_form = CounterJR1GOAForm
 
-    def get_report_period(self, request):
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        if context['requested_report'] == 'counter-jr1':
+            form = context['counter_jr1_form']
+        elif context['requested_report'] == 'counter-jr1-goa':
+            form = context['counter_jr1goa_form']
+        else:
+            form = None
+        if form and form.is_valid():
+            # Get the report
+            report = self.get_report(form.cleaned_data)
+            return report
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(StatsLandingView, self).get_context_data(**kwargs)
+
+        context['requested_report'] = self.get_requested_report()
+        if context['requested_report'] == 'counter-jr1':
+            context['counter_jr1_form'] = self.counter_jr1_form(data=self.request.GET)
+            context['counter_jr1goa_form'] = self.counter_jr1goa_form()
+        elif context['requested_report'] == 'counter-jr1-goa':
+            context['counter_jr1_form'] = self.counter_jr1_form()
+            context['counter_jr1goa_form'] = self.counter_jr1goa_form(data=self.request.GET)
+        else:
+            context['counter_jr1_form'] = self.counter_jr1_form()
+            context['counter_jr1goa_form'] = self.counter_jr1goa_form()
+        return context
+
+    def get_requested_report(self):
+        report_type = None
+        if self.request.GET.get("{}-report_type".format(self.counter_jr1_form.prefix)):
+            report_type = 'counter-jr1'
+        elif self.request.GET.get("{}-report_type".format(self.counter_jr1goa_form.prefix)):
+            report_type = 'counter-jr1-goa'
+        return report_type
+
+    def get_report(self, form_data):
+        dstart, dend = self.get_report_period(form_data)
+        report_arguments = form_data
+        report_arguments['id'] = self.current_organisation.legacyorganisationprofile.account_id
+        report_arguments['beginPeriod'] = dstart
+        report_arguments['endPeriod'] = dend
+
+        if form_data.get('report_type') == 'counter-jr1-goa':
+            report_arguments['isGoldOpenAccess'] = True
+
+        format = report_arguments['format']
+        report = requests.get(self._get_report_url(format), params=report_arguments)
+        filename = "{id}-{beginPeriod}-{endPeriod}".format(**report_arguments)
+        response = HttpResponse(
+            report, content_type="application/{format}".format(**report_arguments)
+        )
+        response['Content-Disposition'] = 'attachment; filename="{filename}.{format}"'.format(
+            filename=filename, format=format
+        )
+        return response
+
+    def get_report_period(self, form_data):
         """ Returns a tuple (start date, end date) containing the period of the report. """
-        params = request.GET.copy()
         now_dt = dt.datetime.now()
-
-        start = params.get('start', None)
-        end = params.get('end', None)
-        year = params.get('year', None)
+        year = form_data .get('year', None)
+        month_start = form_data .get('month_start', None)
+        month_end = form_data .get('month_end', None)
+        year_start = form_data .get('year_start', None)
+        year_end = form_data .get('year_end', None)
 
         # First handles the case where a precise period has been specified
         try:
-            dstart = dt.datetime.strptime(start, '%Y-%m-%d').date()
-            dend = dt.datetime.strptime(end, '%Y-%m-%d').date()
+            dstart_str = "{year}-{month}-01".format(year=year_start, month=month_start)
+            dstart = dt.datetime.strptime(dstart_str, '%Y-%m-%d').date()
+            dend_str = "{year}-{month}-01".format(year=year_end, month=month_end)
+            dend = dt.datetime.strptime(dend_str, '%Y-%m-%d').date()
         except (ValueError, TypeError):
             dstart, dend = None, None
         else:
             return dstart, dend
 
-        # Then handles the case where a year has been specified
+        # Then handles
         try:
             year = int(year)
             assert year <= now_dt.year
@@ -48,51 +115,13 @@ class ExternalCounterReportView(LoginRequiredMixin, OrganisationScopePermissionR
         # We cannot determine the period to consider so we use the current year
         return dt.date(now_dt.year, 1, 1), dt.date(now_dt.year, 12, 31)
 
-    def get(self, request, organisation_pk):
-        # Get the report parameters
-        dstart, dend = self.get_report_period(request)
-        # Get the report
-        report = self.get_report(dstart, dend)
-        return report
-
-
-class CounterJournalReportCsvView(ExternalCounterReportView):
-
-    def get_report_arguments(self):
-        return {}
-
-    def get_report(self, dstart, dend):
-        account_id = self.current_organisation.legacyorganisationprofile.account_id
-        base_report_arguments = {'beginPeriod': dstart, 'endPeriod': dend, 'id': account_id}
-        base_report_arguments.update(self.get_report_arguments())
-        report = requests.get(self.report_base_url, params=base_report_arguments)
-        filename = "{}-{}-{}".format(account_id, dstart, dend)
-        response = HttpResponse(report, content_type="application/csv")
-        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
-        return response
-
-
-class CounterJournalReport1CsvView(CounterJournalReportCsvView):
-    pass
-
-
-class CounterJournalReport1GOACsvView(CounterJournalReportCsvView):
-
-    def get_report_arguments(self):
-        return {'isGoldOpenAccess': 'true'}
-
-
-class CounterJournalReportXmlView(ExternalCounterReportView):
-    def render_report(self, report):
-        """ Renders the Counter report as a XML file. """
-        return HttpResponse(
-            get_xml_journal_counter_report(report, self.current_organisation.name),
-            content_type='text/xml')
-
-
-class CounterJournalReport1XmlView(CounterJournalReportXmlView):
-    report_class = JournalReport1
-
-
-class CounterJournalReport1GOAXmlView(CounterJournalReportXmlView):
-    report_class = JournalReport1GOA
+    def _get_report_url(self, format):
+        if format == 'xml':
+            return "{}/counterXML.php".format(
+                self.report_base_url
+            )
+        if format == 'html':
+            return "{}/counterHTML.php".format(
+                self.report_base_url
+            )
+        return self.report_base_url

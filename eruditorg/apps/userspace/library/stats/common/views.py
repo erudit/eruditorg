@@ -1,6 +1,7 @@
 import datetime as dt
 
 from django.views.generic import TemplateView
+from django.utils.translation import gettext as _
 
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
@@ -18,4 +19,12 @@ class StatsLandingView(
         context = super(StatsLandingView, self).get_context_data(**kwargs)
         current_year = dt.datetime.now().year
         context['years'] = range(current_year, current_year - 20, -1)
+        months = []
+        for month in range(1, 13):
+            month_date = dt.date(current_year, month, 1)
+
+            months.append(
+                (month, _(month_date.strftime("%B")))
+            )
+        context['months'] = months
         return context

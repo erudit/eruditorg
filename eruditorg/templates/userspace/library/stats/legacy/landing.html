@@ -1,0 +1,79 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
+
+{% block breadcrumb %}{{ block.super }}
+<li xmlns="http://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Consultations" %}
+{% endblock %}
+
+{% block data_controller %}userspace:library:stats:legacy:landing{% endblock data_controller %}
+
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
+{% block content_main %}
+<h2>{% trans "Rapports Counter en format CSV" %}</h2>
+<h3>{% trans "Journal Report 1 (R4)" %}</h3>
+<p>Number of Successful Full-Text Articles by Month and Journal</p>
+<div class="row">
+  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+
+      <span>counter jr1 form</span>
+      {% for error in counter_jr1_form.errors.values %}
+        {{ error }}
+      {% endfor %}
+      <form method="get">
+        {{ counter_jr1_form.report_type }}
+        <label for="{{ counter_jr1_form.year.auto_id }}">{% trans "Par année" %}</label>
+        {{ counter_jr1_form.year }}
+        <label for="{{ counter_jr1_form.month_start.auto_id }}">{% trans "Mois" %}</label>
+        {{ counter_jr1_form.month_start }}
+        <label for="{{ counter_jr1_form.year_start.auto_id }}">{% trans "Année" %}</label>
+        {{ counter_jr1_form.year_start }}
+        <label for="{{ counter_jr1_form.month_end.auto_id }}">{% trans "Mois" %}</label>
+        {{ counter_jr1_form.month_end }}
+        <label for="{{ counter_jr1_form.year_end.auto_id }}">{% trans "Année" %}</label>
+        {{ counter_jr1_form.year_end }}
+        <label for="{{ counter_jr1_form.format.auto_id }}">{% trans "Format des données" %}</label>
+        {{ counter_jr1_form.format }}
+        <input name="submit" class="btn btn-primary" type="submit">
+      </form>
+
+  </div>
+</div>
+<br><br>
+
+<h3>{% trans "Journal Report 1 Gold Open Access (R4)" %}</h3>
+<p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
+<div class="row">
+  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+      <form method="get">
+        {{ counter_jr1goa_form.report_type }}
+        <label for="{{ counter_jr1goa_form.year.auto_id }}">{% trans "Par année" %}</label>
+        {{ counter_jr1goa_form.year }}
+        <label for="{{ counter_jr1goa_form.month_start.auto_id }}">{% trans "Mois" %}</label>
+        {{ counter_jr1goa_form.month_start }}
+        <label for="{{ counter_jr1goa_form.year_start.auto_id }}">{% trans "Année" %}</label>
+        {{ counter_jr1goa_form.year_start }}
+        <label for="{{ counter_jr1goa_form.month_end.auto_id }}">{% trans "Mois" %}</label>
+        {{ counter_jr1goa_form.month_end }}
+        <label for="{{ counter_jr1goa_form.year_end.auto_id }}">{% trans "Année" %}</label>
+        {{ counter_jr1goa_form.year_end }}
+        <label for="{{ counter_jr1goa_form.format.auto_id }}">{% trans "Format des données" %}</label>
+        {{ counter_jr1goa_form.format }}
+        <input name="submit" class="btn btn-primary" type="submit">
+      </form>
+  </div>
+</div>
+{% endblock content_main %}

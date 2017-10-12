@@ -4,7 +4,7 @@
 {% block title %}{% trans "Consultations" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+<li xmlns="http://www.w3.org/1999/html"><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
@@ -25,12 +25,46 @@
 <p>Number of Successful Full-Text Articles by Month and Journal</p>
 <div class="row">
   <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
-    <label for="select-jr1">{% trans "Par année" %}</label>
-    <select id="select-jr1" name="select-jr1" onChange="window.location.href=this.value">
-      {% for y in years %}
-      <option value="{% url 'userspace:library:stats:jr1-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}">{{ y }}</option>
-      {% endfor %}
-    </select>
+
+      <form method="get" action="{% url 'userspace:library:stats:jr1-report' organisation_pk=scope_current_organisation.pk %}">
+        <label for="select-jr1-year">{% trans "Par année" %}</label>
+        <select id="select-jr1-year" name="year">
+          {% for y in years %}
+          <option value="{{ y }}">{{ y }}</option>
+          {% endfor %}
+        </select>
+        <label for="select-jr1-month-start">{% trans "Mois" %}</label>
+        <select id="select-jr1-month-start" name="month-start">
+          {% for month in months %}
+          <option value="{{ month.0 }}">{{ month.1 }}</option>
+          {% endfor %}
+        </select>
+        <label for="select-jr1-year-start">{% trans "Année" %}</label>
+        <select id="select-jr1-year-start" name="year-start">
+          {% for y in years %}
+          <option value="{{ y }}">{{ y }}</option>
+          {% endfor %}
+        </select>
+        <label for="select-jr1-month-end">{% trans "Mois" %}</label>
+        <select id="select-jr1-month-end" name="month-end">
+          {% for month in months %}
+          <option value="{{ month.0 }}">{{ month.1 }}</option>
+          {% endfor %}
+        </select>
+        <label for="select-jr1-year-end">{% trans "Année" %}</label>
+        <select id="select-jr1-year-end" name="year-end">
+          {% for y in years %}
+          <option value="{{ y }}">{{ y }}</option>
+          {% endfor %}
+        </select>
+        <label for="select-jr1-format">{% trans "Format des données" %}</label>
+        <select id="select-jr1-format" name="format">
+          <option value="csv">csv</option>
+          <option value="xml">xml</option>
+        </select>
+      <input name="submit" class="btn btn-primary" type="submit">
+      </form>
+
   </div>
 </div>
 <br><br>
@@ -39,12 +73,19 @@
 <p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
 <div class="row">
   <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
-    <label for="select-goa-jr1">{% trans "Par année" %}</label>
-    <select id="select-goa-jr1" name="select-goa-jr1" onChange="window.location.href=this.value">
-      {% for y in years %}
-      <option value="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}?year={{ y }}">{{ y }}</option>
-      {% endfor %}
-    </select>
+    <form method="get" action="{% url 'userspace:library:stats:jr1-goa-csv-report' organisation_pk=scope_current_organisation.pk %}">
+      <label for="select-goa-jr1">{% trans "Par année" %}</label>
+      <select id="select-goa-jr1" name="select-goa-jr1">
+        {% for y in years %}
+        <option value="{{ y }}">{{ y }}</option>
+        {% endfor %}
+      </select>
+      <select id="select-goa-jr1-format" name="format">
+        <option value="csv">csv</option>
+        <option value="xml">xml</option>
+      </select>
+      <input name="submit" class="btn btn-primary" type="submit">
+    </form>
   </div>
 </div>
 {% endblock content_main %}
