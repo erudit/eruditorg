@@ -1,12 +1,27 @@
 {% extends "base_email.html" %}
 {% load i18n %}
 
+{% block subject %}
+{% trans "Rejoindre une organisation" %}
+{% endblock subject %}
+
 {% block content %}
   <p>
   {% blocktrans trimmed with organisation_name=token.content_object.name %}
-    Une proposition vous a été envoyée afin de rejoindre l'organisation <strong>{{ organisation_name }}</strong>.
+    Une proposition vous a été envoyée afin de rejoindre l’organisation <strong>{{ organisation_name }}</strong>.
   {% endblocktrans %}
   </p>
-  <p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
-  <p><a href="http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}">{% trans "Accepter la proposition" %}</a></p>
+  <p>{% trans "Veuillez cliquer sur le lien suivant pour l’accepter" %}</p>
 {% endblock content %}
+
+{% block cta_url %}
+http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}
+{% endblock cta_url %}
+
+{% block cta_text %}
+{% trans "Accepter la proposition" %}
+{% endblock cta_text %}
+
+{% block signature %}
+{% trans 'L’Équipe Érudit' %}
+{% endblock signature %}

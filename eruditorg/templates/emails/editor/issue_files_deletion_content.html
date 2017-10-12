@@ -1,12 +1,32 @@
 {% extends "base_email.html" %}
 {% load i18n %}
 
+{% block subject %}
+{% trans "Suppression de fichiers déposés" %}
+{% endblock subject %}
+
 {% block content %}
-  {% url 'userspace:journal:editor:update' issue.journal.pk issue.pk as issue_url %}
-  <p>{% trans "Les fichiers des numéros suivant seront supprimés dans cinq jours." %}</p>
-  <ul>
-  {% for issue in issue_submissions %}
-    <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}">{{ issue }}</a></li>
-  {% endfor %}
-  </ul>
+<p>{% trans "Bonjour," %}</p>
+<p>{% trans "Les fichiers de production des numéros suivants seront supprimés de votre compte dans cinq jours&nbsp;:" %}</p>
+<ul>
+{% for issue in issue_submissions %}
+  <li><a href="http://{{ site.domain }}{% url 'userspace:journal:editor:update' journal_pk=issue.journal.pk pk=issue.pk %}">{{ issue }}</a></li>
+{% endfor %}
+</ul>
+<p>{% trans "Assurez-vous d’en avoir une copie." %}</p>
 {% endblock content %}
+
+{% block cta_url %}
+{% url 'userspace:dashboard' %}
+{% endblock cta_url %}
+
+{% block cta_text %}
+{% trans "Accéder au tableau de bord" %}
+{% endblock cta_text %}
+
+{% block signature %}
+{% trans 'L’Équipe Érudit' %}<br>
+{% blocktrans %}
+<a href="mailto:info@erudit.org?subject=Suppression de fichiers déposés">info@erudit.org</a>
+{% endblocktrans %}
+{% endblock signature %}
