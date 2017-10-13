@@ -41,7 +41,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<main role="main">
+<main>
   <header class="page-header-main sorting-index container-fluid">
       <div class="container">
         <div class="row">
@@ -64,14 +64,14 @@
                   <li><a href="#{{ objects_group.key }}">{{ objects_group.name }}</a></li>
                 {% endif %}
               {% endfor %}
-            <ul>
+            </ul>
           </nav>
         </div>
       </div>
   </header>
   {% cache FOREVER_TTL "public_journal_list_disciplines" LANGUAGE_CODE %}
   {% for objects_group in sorted_objects %}
-  <a name="{% if not objects_group.key %}section-void{% else %}{{ objects_group.key }}{% endif %}" class="invisible">{{ discipline }}</a>
+  <a id="{% if not objects_group.key %}section-void{% else %}{{ objects_group.key }}{% endif %}" class="invisible"></a>
   <section class="sorting-group container-fluid {% cycle "odd" "even" %}">
     <header class="row sorting-group--title">
       <div class="container">

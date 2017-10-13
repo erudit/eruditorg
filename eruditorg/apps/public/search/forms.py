@@ -152,11 +152,11 @@ class SearchForm(forms.Form):
         label=None, widget=forms.Select, choices=ADVANCED_SEARCH_FIELDS, required=False)
 
     pub_year_start = forms.ChoiceField(
-        label=_('Publiés entre'), widget=forms.Select,
-        choices=get_years_range(add_empty_choice=True), required=False)
+        label=_('De…'), widget=forms.Select,
+        choices=get_years_range, required=False)
     pub_year_end = forms.ChoiceField(
-        label=None, widget=forms.Select,
-        choices=get_years_range(reverse=True, add_empty_choice=True), required=False)
+        label=_('À…'), widget=forms.Select,
+        choices=get_years_range(reverse=True), required=False)
 
     available_since = forms.ChoiceField(
         label=_('Dans Érudit depuis'), widget=forms.Select, choices=AVAILABILITY_CHOICES,

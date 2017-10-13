@@ -2,11 +2,12 @@
 * Advanced search form
 */
 
-.advanced_search #breadcrumb {
-  background: $light-grey;
-}
-
 #advanced_search {
+
+  .container-alert,
+  #breadcrumb {
+    background: $light-grey;
+  }
 
 
   /**
@@ -91,6 +92,7 @@
           font-size: 16px;
           padding: 0.5em 0;
           border-top: 1px solid $mid-grey;
+          width: 100%;
         }
 
         &.filter-types,

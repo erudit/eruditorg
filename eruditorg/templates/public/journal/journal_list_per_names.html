@@ -43,7 +43,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<main role="main">
+<main>
   <header class="page-header-main container">
     <div class="row">
       <div class="col-md-8">
@@ -59,7 +59,7 @@
       <div class="col-md-8 page-intro">
         {% blocktrans %}
         <p>Découvrez la liste des revues savantes et culturelles diffusées par Érudit et ses partenaires (<a href="http://www.nrcresearchpress.com/" title="Site de NRC Research Press" target="_blank">NRC Research Press</a>, <a href="http://www.persee.fr/" title="Site de Persée" target="_blank">Persée</a>, <a href="https://digitalscholarship.lib.unb.ca/" title="Site de Centre for Digital Scholarship" target="_blank">Centre for Digital Scholarship</a>).</p>
-        <p>Les numéros courants sont disponibles en libre accès ou en accès restreint selon le modèle de diffusion de la revue. L’ensemble des archives est offert en libre accès (après la dernière année de publication pour les revues savantes et les trois dernières années de publications pour les revues culturelles). Pour plus d’informations à propos de nos collections, communiquez avec l’équipe d’Érudit à l’adresse <a href="mailto:info@erudit.org?subject=Collections d’Érudit">info@erudit.org</a>.</p>
+        <p>Les numéros courants sont disponibles en libre accès ou en accès restreint selon le modèle de diffusion de la revue. L’ensemble des archives est offert en libre accès (après la dernière année de publication pour les revues savantes et les trois dernières années de publications pour les revues culturelles). Pour plus d’informations à propos de nos collections, communiquez avec l’équipe d’Érudit à l’adresse <a href="mailto:info@erudit.org?subject=Collections%20d’Érudit">info@erudit.org</a>.</p>
         {% endblocktrans %}
       </div>
     </div>
@@ -69,8 +69,8 @@
       <div class="list-nav">
         <aside class="col-md-3 col-lg-2 sidebar-block filters">
           {% cache LONG_TTL "public_journal_list_form" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.open_access.value filter_form.is_new.value %}
-          <form id="filter_form" action="" method="get" class="akkordion" role="tab" role="tabpanel">
-            <h2 class="akkordion-title filter-title" role="button" aria-expanded="false" aria-controls="filter-form-content">
+          <form id="filter_form" action="#" method="get" class="akkordion">
+            <h2 class="akkordion-title filter-title" aria-expanded="false" aria-controls="filter-form-content">
               {% trans "Filtres" %}
               <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
             </h2>
@@ -152,8 +152,7 @@
         {% for objects_group in sorted_objects %}
         <ul id="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="journal-items">
           {% for journal in objects_group.objects %}
-          <li class="{% if journal.is_new %}new-journal{% endif %}">
-            {% if forloop.first %}<a name="{% if not objects_group.key %}section-void{% else %}section-{{ objects_group.key }}{% endif %}" class="invisible"></a>{% endif %}
+          <li{% if journal.is_new %} class="new-journal"{% endif %}>
             <a class="journal-row" href="{% if journal.redirect_to_external_url %}{% url 'public:journal:journal_external_redirect' journal.code %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
               <div class="row">
                 <div class="col-sm-6 journal-title">

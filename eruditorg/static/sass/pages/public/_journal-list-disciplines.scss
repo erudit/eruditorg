@@ -1,8 +1,9 @@
-.journal_list_per_disciplines #breadcrumb {
-	background: $light-grey;
-}
-
 #journal_list_per_disciplines {
+
+  .container-alert,
+  #breadcrumb {
+    background: $light-grey;
+  }
 
 	// sorting list
 	.sorting-index {
