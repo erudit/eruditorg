@@ -890,7 +890,7 @@
   </xsl:template>
   <!--*** BODY ***-->
   <xsl:template match="corps">
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="*[not(self::texte)]"/>
   </xsl:template>
 
   <xsl:template match="section1">
