@@ -8,9 +8,9 @@ class ShareModal {
   constructor(el) {
 
     this.el    = el;
-    this.title = el.data('title') || document.title;
+    this.title = el.data('title').replace(/\s+/g, ' ') || document.title;
     this.url   = el.data('share-url') || window.location.href;
-    this.citation_text = $(el.data('cite')).text();
+    this.citation_text = $(el.data('cite')).text().replace(/\s+/g, ' ');
 
     this.init();
   }
@@ -55,7 +55,7 @@ class ShareModal {
           $modal.on('click', '#share-twitter', (event) => {
             event.preventDefault();
 
-            SharingUtils.twitter( this.url, this.title );
+            SharingUtils.twitter( this.url );
             return false;
           });
 

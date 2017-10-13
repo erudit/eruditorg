@@ -52,8 +52,8 @@ const SharingUtils = {
   },
 
   email : function( url_to_share, title, text) {
-    var url = 'mailto:?subject=' + encodeURIComponent(title) +
-      '&body=' + encodeURIComponent(title + '\n' + url_to_share + '\n\n' + (text || '') + '\n');
+    var url = 'mailto:?subject=Érudit%20–%20' + encodeURIComponent(title.replace(/^\s+|\s+$/g,'')) +
+      '&body=' + encodeURIComponent((text.replace(/^\s+|\s+$/g,'') || '') + '\n\n' + url_to_share);
     document.location.href = url;
   }
 
