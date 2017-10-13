@@ -267,7 +267,7 @@ $article-toolbar-width: 80px;
 
       .theme {
         display: block;
-        @include fw-sans-bold();
+        @include fw-sans-bold;
       }
 
       .pagination {
@@ -284,9 +284,9 @@ $article-toolbar-width: 80px;
       font-size: small;
     }
 
-    .histpapier {
+    .histpapier,
+    .erratum {
       margin-top: 1em;
-      font-style: italic;
     }
 
   }

@@ -66,8 +66,8 @@
     <div class="col-sm-12">
       <div class="row">
         <h1 class="col-xs-10 col-sm-11">
-          <span>{{ journal.name }}</span>
-          {% if journal.subtitle %}<span>{{ journal.subtitle }}</span>{% endif %}
+          <span class="journal-title">{{ journal.name }}</span>
+          {% if journal.subtitle %}<span class="journal-subtitle">{{ journal.subtitle }}</span>{% endif %}
         </h1>
       {% if journal.open_access %}
       <span class="hint--bottom-left hint--no-animate text-right col-xs-2 col-sm-1" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">

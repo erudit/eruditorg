@@ -145,7 +145,6 @@
         <!-- article metadata -->
         <div class="col-sm-6">
           <div class="meta-article">
-            <xsl:apply-templates select="liminaire/erratum"/>
             <dl class="mono-space idpublic">
               <dt>URI</dt>
               <dd>
@@ -171,6 +170,7 @@
                 </dd>
               </xsl:if>
             </dl>
+            <xsl:apply-templates select="liminaire/erratum"/>
             <xsl:apply-templates select="admin/histpapier"/>
           </div>
         </div>
@@ -579,8 +579,8 @@
     <xsl:if test="position() != last()"><br/></xsl:if>
   </xsl:template>
 
-  <!-- admin notes: errata, article history, editor's notes... -->
-  <xsl:template match="article/liminaire/notegen | article/liminaire/erratum | admin/histpapier">
+  <!-- admin notes: article history, editor's notes... -->
+  <xsl:template match="article/liminaire/notegen | admin/histpapier">
     <div class="{name()}">
       <xsl:if test="titre">
         <h2>
@@ -589,6 +589,17 @@
       </xsl:if>
       <xsl:apply-templates select="*[not(self::titre)]"/>
     </div>
+  </xsl:template>
+
+  <!-- admin notes: errata -->
+  <xsl:template match="article/liminaire/erratum">
+    <xsl:for-each select=".">
+      <p class="{name()}">
+        {% blocktrans %}
+        --> Voir l’<a href="{@href}"><strong>erratum</strong></a> concernant cet article
+        {% endblocktrans %}
+      </p>
+    </xsl:for-each>
   </xsl:template>
 
   <!-- issue volume / number -->
