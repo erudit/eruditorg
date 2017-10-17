@@ -50,7 +50,7 @@
   {% endif %}
 
   <li class="sidenav-item{% if menu_library == 'collections' %} active{% endif %}">
-    <a href="#" class="disabled">
+    <a href="{% url 'userspace:library:connection:landing' %}">
       <span class="ion-ios-cog-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Paramètres de connexion" %}</span>
     </a>

@@ -1,0 +1,39 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Paramètres de connexion" %} {{ block.super }}{% endblock title %}
+
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Consultations" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
+{% block content_main %}
+<h2>SUSHI</h2>
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<div class="well">
+  {% trans "Sushi requestor ID" %} {{ sushi_requestor_id }}<br>
+  {% trans "Id référence Client" %} {{ id_client }}<br>
+  {% trans "URL" %} {{ sushi_url }}
+</div>
+
+<h2>{% trans "Z39.50 / SRU / SRW" %}</h2>
+<div class="well">
+  {% trans "Serveur" %} {{ z3950_host }}<br>
+  {% trans "Port" %} {{ z3950_port }}<br>
+  {% trans "Base de données" %} {{ z3950_database }}
+</div>
+
+{% endblock content_main %}
