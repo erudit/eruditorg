@@ -23,57 +23,161 @@
 {% endblock section_intro %}
 
 {% block content_main %}
-<h2>{% trans "Rapports Counter en format CSV" %}</h2>
-<h3>{% trans "Journal Report 1 (R4)" %}</h3>
-<p>Number of Successful Full-Text Articles by Month and Journal</p>
+<h2>{% trans "COUNTER" %} <br> {% trans "Journal Report 1 (R4)" %}</h2>
 <div class="row">
-  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
+  <div class="col-md-7">
+    <p>Number of Successful Full-Text Articles by Month and Journal</p>
+  </div>
+</div>
+{% for error in counter_jr1_form.errors.values %}
+{{ error }}
+{% endfor %}
+<form method="get">
+  {{ counter_jr1_form.report_type }}
 
-      <span>counter jr1 form</span>
-      {% for error in counter_jr1_form.errors.values %}
-        {{ error }}
-      {% endfor %}
-      <form method="get">
-        {{ counter_jr1_form.report_type }}
+  <fieldset>
+    <legend>
+      <h3>{% trans "Période" %}</h3>
+    </legend>
+
+    <div class="row form-group">
+      <div class="col-xs-6 col-md-4">
         <label for="{{ counter_jr1_form.year.auto_id }}">{% trans "Par année" %}</label>
         {{ counter_jr1_form.year }}
-        <label for="{{ counter_jr1_form.month_start.auto_id }}">{% trans "Mois" %}</label>
-        {{ counter_jr1_form.month_start }}
-        <label for="{{ counter_jr1_form.year_start.auto_id }}">{% trans "Année" %}</label>
-        {{ counter_jr1_form.year_start }}
-        <label for="{{ counter_jr1_form.month_end.auto_id }}">{% trans "Mois" %}</label>
-        {{ counter_jr1_form.month_end }}
-        <label for="{{ counter_jr1_form.year_end.auto_id }}">{% trans "Année" %}</label>
-        {{ counter_jr1_form.year_end }}
+      </div>
+    </div>
+
+    <div class="separator"><strong>{% trans "ou" %}</strong></div>
+
+    <div class="row form-group">
+      <div class="col-sm-3 col-md-4">
+        <h4>{% trans "Début" %}</h4>
+      </div>
+      <div class="col-sm-9 col-md-8">
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1_form.month_start.auto_id }}">{% trans "Mois" %}</label>
+            {{ counter_jr1_form.month_start }}
+          </div>
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1_form.year_start.auto_id }}">{% trans "Année" %}</label>
+            {{ counter_jr1_form.year_start }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-sm-3 col-md-4">
+        <h4>{% trans "Fin" %}</h4>
+      </div>
+      <div class="col-sm-9 col-md-8">
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1_form.month_end.auto_id }}">{% trans "Mois" %}</label>
+            {{ counter_jr1_form.month_end }}
+          </div>
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1_form.year_end.auto_id }}">{% trans "Année" %}</label>
+            {{ counter_jr1_form.year_end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      <h3>{% trans "Format" %}</h3>
+    </legend>
+    <div class="row form-group">
+      <div class="col-xs-6 col-md-4">
         <label for="{{ counter_jr1_form.format.auto_id }}">{% trans "Format des données" %}</label>
         {{ counter_jr1_form.format }}
-        <input name="submit" class="btn btn-primary" type="submit">
-      </form>
+      </div>
+    </div>
+  </fieldset>
 
+  <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Télécharger' %}</button>
+</form>
+
+<h2>{% trans "COUNTER" %} <br> {% trans "Journal Report 1 (R4) GOA" %}</h2>
+<div class="row">
+  <div class="col-md-7">
+    <p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
   </div>
 </div>
-<br><br>
 
-<h3>{% trans "Journal Report 1 Gold Open Access (R4)" %}</h3>
-<p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
-<div class="row">
-  <div class="col-xs-8 col-sm-6 col-md-4 col-lg-2">
-      <form method="get">
-        {{ counter_jr1goa_form.report_type }}
+{% for error in counter_jr1goa_form.errors.values %}
+{{ error }}
+{% endfor %}
+<form method="get">
+  {{ counter_jr1goa_form.report_type }}
+
+  <fieldset>
+    <legend>
+      <h3>{% trans "Période" %}</h3>
+    </legend>
+
+    <div class="row form-group">
+      <div class="col-xs-6 col-md-4">
         <label for="{{ counter_jr1goa_form.year.auto_id }}">{% trans "Par année" %}</label>
         {{ counter_jr1goa_form.year }}
-        <label for="{{ counter_jr1goa_form.month_start.auto_id }}">{% trans "Mois" %}</label>
-        {{ counter_jr1goa_form.month_start }}
-        <label for="{{ counter_jr1goa_form.year_start.auto_id }}">{% trans "Année" %}</label>
-        {{ counter_jr1goa_form.year_start }}
-        <label for="{{ counter_jr1goa_form.month_end.auto_id }}">{% trans "Mois" %}</label>
-        {{ counter_jr1goa_form.month_end }}
-        <label for="{{ counter_jr1goa_form.year_end.auto_id }}">{% trans "Année" %}</label>
-        {{ counter_jr1goa_form.year_end }}
+      </div>
+    </div>
+
+    <div class="separator"><strong>{% trans "ou" %}</strong></div>
+
+    <div class="row form-group">
+      <div class="col-sm-3 col-md-4">
+        <h4>{% trans "Début" %}</h4>
+      </div>
+      <div class="col-sm-9 col-md-8">
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1goa_form.month_start.auto_id }}">{% trans "Mois" %}</label>
+            {{ counter_jr1goa_form.month_start }}
+          </div>
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1goa_form.year_start.auto_id }}">{% trans "Année" %}</label>
+            {{ counter_jr1goa_form.year_start }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-sm-3 col-md-4">
+        <h4>{% trans "Fin" %}</h4>
+      </div>
+      <div class="col-sm-9 col-md-8">
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1goa_form.month_end.auto_id }}">{% trans "Mois" %}</label>
+            {{ counter_jr1goa_form.month_end }}
+          </div>
+          <div class="col-xs-6">
+            <label for="{{ counter_jr1goa_form.year_end.auto_id }}">{% trans "Année" %}</label>
+            {{ counter_jr1goa_form.year_end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      <h3>{% trans "Format" %}</h3>
+    </legend>
+    <div class="row form-group">
+      <div class="col-xs-6 col-md-4">
         <label for="{{ counter_jr1goa_form.format.auto_id }}">{% trans "Format des données" %}</label>
         {{ counter_jr1goa_form.format }}
-        <input name="submit" class="btn btn-primary" type="submit">
-      </form>
-  </div>
-</div>
+      </div>
+    </div>
+  </fieldset>
+
+  <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Télécharger' %}</button>
+</form>
+
 {% endblock content_main %}
