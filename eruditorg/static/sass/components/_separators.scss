@@ -1,0 +1,20 @@
+/**
+ * Separators containing some text (not <hr>)
+ */
+
+ .separator {
+   display: table;
+   white-space: nowrap;
+   width: 100%;
+   color: $coral-red;
+
+   &:before, &:after {
+     border-top: 1px solid $mid-grey;
+     content: '';
+     display: table-cell;
+     position: relative;
+     top: 0.65em;
+     width: 50%;
+   }
+
+ }
