@@ -64,11 +64,12 @@ class StatsLandingView(
 
     def get_report(self, form_data):
         dstart, dend = self.get_report_period(form_data)
-        report_arguments = form_data
+        # report_arguments = form_data
+        report_arguments = {}
+        report_arguments['format'] = form_data['format']
         report_arguments['id'] = self.current_organisation.legacyorganisationprofile.account_id
-        report_arguments['beginPeriod'] = dstart
-        report_arguments['endPeriod'] = dend
-
+        report_arguments['beginPeriod'] = dstart.strftime("%Y-%m-%d")
+        report_arguments['endPeriod'] = dend.strftime("%Y-%m-%d")
         if form_data.get('report_type') == 'counter-jr1-goa':
             report_arguments['isGoldOpenAccess'] = True
 
