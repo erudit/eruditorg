@@ -27,4 +27,14 @@ user_agent {{ user_agent }}<br>
 identifiant {{ identifier }}<br>
 institution {{ institution }}<br>
 
+{% if journals %}
+<ul>
+{% for journal in journals %}
+  <li>{{ journal }}</li>
+{% endfor %}
+</ul>
+{% else %}
+  {% trans "Aucun abonnement" %}
+{% endif %}
+
 {% endblock content_main %}

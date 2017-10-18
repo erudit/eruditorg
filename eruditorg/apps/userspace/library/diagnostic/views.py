@@ -5,6 +5,8 @@ from django.views.generic import TemplateView
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
+from core.subscription.models import JournalAccessSubscription
+
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 
@@ -16,6 +18,15 @@ class DiagnosticLandingView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        try:
+            subscription = JournalAccessSubscription.valid_objects.get(
+                organisation=self.current_organisation
+            )
+            context['journals'] = subscription.journals.all()
+        except JournalAccessSubscription.DoesNotExist:
+            context['journals'] = tuple()
+
         context['date'] = datetime.now().strftime("%Y-%m-%d")
         context['client_ip'] = self.request.META.get('REMOTE_ADDR')
         context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
