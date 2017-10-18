@@ -1,0 +1,25 @@
+from datetime import datetime
+
+from django.views.generic import TemplateView
+
+from base.viewmixins import LoginRequiredMixin
+from base.viewmixins import MenuItemMixin
+
+from ..viewmixins import OrganisationScopePermissionRequiredMixin
+
+
+class DiagnosticLandingView(
+        LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
+    menu_library = 'stats'
+    permission_required = 'subscription.access_library_diagnostic'
+    template_name = 'userspace/library/diagnostic/landing.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['date'] = datetime.now().strftime("%Y-%m-%d")
+        context['client_ip'] = self.request.META.get('REMOTE_ADDR')
+        context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
+        context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
+        context['identifier'] = self.current_organisation.legacyaccountprofile.legacy_id
+        context['institution'] = self.current_organisation.name
+        return context

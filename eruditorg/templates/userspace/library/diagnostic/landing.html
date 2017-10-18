@@ -1,0 +1,30 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Paramètres de connexion" %} {{ block.super }}{% endblock title %}
+
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Consultations" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
+{% block content_main %}
+date {{ date }}<br>
+client_ip {{ client_ip }}<br>
+redirection_ip {{ redirection_ip }}<br>
+user_agent {{ user_agent }}<br>
+identifiant {{ identifier }}<br>
+institution {{ institution }}<br>
+
+{% endblock content_main %}
