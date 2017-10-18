@@ -86,4 +86,27 @@ dl {
 
   }
 
+  /**
+   * "Index card"-style definition lists
+   */
+
+  &.index-card {
+    font-size: 18px;
+    @include fw-mono;
+
+    dt {
+      text-align: right;
+    }
+
+    dt, dd {
+      margin: 20px 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+    }
+
+  }
+
 }

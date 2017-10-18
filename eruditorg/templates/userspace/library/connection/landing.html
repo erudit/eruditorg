@@ -1,14 +1,17 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
+{% block body_id %}connection{% endblock body_id %}
+{% block data_controller %}userspace:library:connection:landing{% endblock data_controller %}
+
 {% block title %}{% trans "Paramètres de connexion" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Paramètres de connexion" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Consultations" %}
+{% trans "Paramètres de connexion" %}
 {% endblock %}
 
 {% block section_intro %}
@@ -20,20 +23,103 @@
 {% endblock section_intro %}
 
 {% block content_main %}
-<h2>SUSHI</h2>
-<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<section>
+  <h2>{% trans "SUSHI" %}</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
+    </div>
+  </div>
 
-<div class="well">
-  {% trans "Sushi requestor ID" %} {{ sushi_requestor_id }}<br>
-  {% trans "Id référence Client" %} {{ id_client }}<br>
-  {% trans "URL" %} {{ sushi_url }}
-</div>
+  <div class="glory">
+    <dl class="row index-card">
+      <dt class="col-sm-6">{% trans "Sushi Requestor ID" %}</dt>
+      <dd class="col-sm-6">
+        <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span data-clipboard-text="{{ sushi_requestor_id }}" class="clipboard-data">
+            <span class="ion-ios-copy-outline clipboard-icon"></span>
+            {{ sushi_requestor_id }}
+            <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+            <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+          </span>
+        </span>
+      </dd>
 
-<h2>{% trans "Z39.50 / SRU / SRW" %}</h2>
-<div class="well">
-  {% trans "Serveur" %} {{ z3950_host }}<br>
-  {% trans "Port" %} {{ z3950_port }}<br>
-  {% trans "Base de données" %} {{ z3950_database }}
-</div>
+      <dt class="col-sm-6">{% trans "ID référence client" %}</dt>
+      <dd class="col-sm-6">
+        <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span data-clipboard-text="{{ id_client }}" class="clipboard-data">
+            <span class="ion-ios-copy-outline clipboard-icon"></span>
+            {{ id_client }}
+            <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+            <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+          </span>
+        </span>
+      </dd>
 
+      <dt class="col-sm-6">{% trans "URL" %}</dt>
+      <dd class="col-sm-6">
+        <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span data-clipboard-text="{{ sushi_url }}" class="clipboard-data">
+            <span class="ion-ios-copy-outline clipboard-icon"></span>
+            {{ sushi_url }}
+            <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+            <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+          </span>
+        </span>
+      </dd>
+    </dl>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <h2>{% trans "Z39.50&nbsp;/ SRU/SRW" %}</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
+    </div>
+  </div>
+
+  <div class="glory">
+    <dl class="row index-card">
+      <dt class="col-sm-6">{% trans "Serveur" %}</dt>
+      <dd class="col-sm-6">
+        <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span data-clipboard-text="{{ z3950_host }}" class="clipboard-data">
+            <span class="ion-ios-copy-outline clipboard-icon"></span>
+            {{ z3950_host }}
+            <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+            <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+          </span>
+        </span>
+      </dd>
+
+      <dt class="col-sm-6">{% trans "Port" %}</dt>
+      <dd class="col-sm-6">
+        <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span data-clipboard-text="{{ z3950_port }}" class="clipboard-data">
+            <span class="ion-ios-copy-outline clipboard-icon"></span>
+            {{ z3950_port }}
+            <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+            <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+          </span>
+        </span>
+      </dd>
+
+      <dt class="col-sm-6">{% trans "Base de données" %} </dt>
+      <dd class="col-sm-6">
+        <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier cette information.{% endblocktrans %}">
+          <span data-clipboard-text="{{ z3950_database }}" class="clipboard-data">
+            <span class="ion-ios-copy-outline clipboard-icon"></span>
+            {{ z3950_database }}
+            <span class="clipboard-msg clipboard-success">{% trans "copié" %}</span>
+            <span class="clipboard-msg clipboard-error">{% trans "une erreur s’est produite" %}</span>
+          </span>
+        </span>
+      </dd>
+    </dl>
+  </div>
+</section>
 {% endblock content_main %}
