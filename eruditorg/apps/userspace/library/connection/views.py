@@ -10,7 +10,7 @@ from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 class ConnectionLandingView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
-    menu_library = 'stats'
+    menu_library = 'connection'
     permission_required = 'subscription.access_library_stats'
     template_name = 'userspace/library/connection/landing.html'
 
