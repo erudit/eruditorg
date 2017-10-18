@@ -3,25 +3,6 @@
 */
 
 .dashboard {
-  
-  p {
-
-    a {
-      color: #000;
-      display: inline-block;
-
-      &:after {
-        content: '';
-        display: block;
-        width: 100%;
-        color: #000;
-        border-bottom: 1px solid #000;
-        margin-top: -3px;
-      }
-
-    }
-
-  }
 
   small {
 
@@ -34,6 +15,57 @@
 
       &[href^="tel:"] {
         color: #000;
+      }
+
+    }
+
+  }
+
+  .section-main,
+  .section-intro {
+
+    h2 {
+      margin-bottom: 30px;
+
+      + p {
+        margin-bottom: 40px;
+      }
+
+    }
+
+    form {
+      margin: 30px 0;
+    }
+
+    p {
+
+      a {
+        color: #000;
+        display: inline-block;
+
+        &:after {
+          content: '';
+          display: block;
+          width: 100%;
+          color: #000;
+          border-bottom: 1px solid #000;
+          margin-top: -3px;
+        }
+
+      }
+
+    }
+
+  }
+
+  .section-aside {
+
+    p {
+      font-size: 14px;
+      color: $dark-grey;
+
+      a {
+        color: $coral-red;
       }
 
     }
