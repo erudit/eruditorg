@@ -44,13 +44,13 @@ fieldset,
 
 /* general form style */
 form {
+
   .form-group {
-    margin-bottom: 0.75em;
-    padding: 0 11px;
-    &:last-child {
-      margin-bottom: 0.25em;
-    }
+    margin-top: 20px;
+    margin-bottom: 20px;
+
   }
+
 }
 
 /* fieldsets and legends */

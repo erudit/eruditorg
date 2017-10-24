@@ -1,6 +1,6 @@
 Django==1.10.4
 git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.6#egg=liberuditarticle
-git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.29#egg=erudit-core
+git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@1511-add-organisation-profile#egg=erudit-core
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml

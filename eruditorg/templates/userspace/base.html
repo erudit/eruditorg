@@ -20,14 +20,18 @@
         <div class="col-md-7 section-intro">
           {% block section_intro %}{% endblock %}
         </div>
+        <div class="col-md-4 section-aside">
+          {% block section_aside %}{% endblock %}
+        </div>
       </div>
     </header>
 
     <hr>
 
     {# Section content #}
-    {% block content_main %}{% endblock %}
-
+    <div class="section-main">
+      {% block content_main %}{% endblock %}
+    </div>
   </main>
 </div>
 {% endblock content %}

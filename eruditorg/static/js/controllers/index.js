@@ -9,6 +9,7 @@ import JournalListController from './journal/JournalListController';
 import CollectionListController from './thesis/CollectionListController';
 import SavedCitationListController from './citations/SavedCitationListController';
 import FormController from './editor/FormController';
+import LandingController from './library/stats/legacy/LandingController'
 
 const controllers = {
   'public:home': HomeController,
@@ -22,6 +23,7 @@ const controllers = {
   'public:thesis:collection_list': CollectionListController,
   'public:citations:list': SavedCitationListController,
   'userspace:editor:form': FormController,
+  'userspace:library:stats:legacy:landing': LandingController,
 };
 
 export default controllers;

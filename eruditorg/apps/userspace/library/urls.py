@@ -4,7 +4,15 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
+import waffle
+
 from . import views
+
+
+def get_stats_url():
+    if waffle.switch_is_active("new_stats"):
+        return url(_(r'^statistiques/'), include('apps.userspace.library.stats.new.urls', namespace='stats'))  # noqa
+    return url(_(r'^statistiques/'), include('apps.userspace.library.stats.legacy.urls', namespace='stats'))  # noqa
 
 
 section_apps_urlpatterns = [
@@ -17,7 +25,7 @@ section_apps_urlpatterns = [
                 namespace='subscription_information')),
     url(_(r'^plages-ip/'),
         include('apps.userspace.library.subscription_ips.urls', namespace='subscription_ips')),
-    url(_(r'^statistiques/'), include('apps.userspace.library.stats.urls', namespace='stats')),
+    get_stats_url(),
 ]
 
 urlpatterns = [

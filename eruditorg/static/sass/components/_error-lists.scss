@@ -1,0 +1,16 @@
+/**
+ * Error lists in forms
+ */
+
+.errorlist {
+  list-style: none;
+  margin: 0;
+
+  li {
+    background: $light-grey;
+    padding: 0.75em 0.75em;
+    margin: 1em 0;
+    color: $coral-red;
+  }
+
+}

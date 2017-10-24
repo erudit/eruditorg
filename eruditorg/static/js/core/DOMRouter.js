@@ -22,7 +22,6 @@ class DOMRouter {
       var body = document.body,
       controller = body.getAttribute('data-controller'),
       action = body.getAttribute('data-action');
-
       if (controller) {
         this.execAction(controller, 'init');
         this.execAction(controller, action);
