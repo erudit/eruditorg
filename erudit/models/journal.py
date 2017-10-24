@@ -300,7 +300,16 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def last_issue(self):
         """ Return the last published Issue of this Journal. """
-        return self.published_issues.order_by('-date_published').first()
+        if self.erudit_object:
+            try:
+                issue_pid = self.erudit_object.get_last_published_issue_pid()
+                issue_localidentifier = issue_pid.split(".")[::-1][0]
+                issue = self.published_issues.get(localidentifier=issue_localidentifier)
+                return issue
+            except Issue.DoesNotExist:
+                return self.published_issues.order_by('-date_published').first()
+        else:
+            return self.published_issues.order_by('-date_published').first()
 
     @property
     def published_open_access_issues_period_coverage(self):

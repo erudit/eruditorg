@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import datetime as dt
 
 import factory
@@ -64,9 +63,16 @@ class JournalFactory(factory.django.DjangoModelFactory):
             return
 
         if extracted:
-            # A list of groups were passed in, use them
-            for group in extracted:
-                self.publishers.add(group)
+            # A list of publishers were passed in, use them
+            for publisher in extracted:
+                self.publishers.add(publisher)
+
+    @factory.post_generation
+    def use_fedora(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted is False:
+            self.erudit_object = None
 
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
