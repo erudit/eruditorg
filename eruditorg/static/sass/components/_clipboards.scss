@@ -6,6 +6,7 @@
   color: $coral-red;
   cursor: pointer;
   position: relative;
+  word-break: break-all;
 
   @keyframes clipboardResponse {
     0% {
