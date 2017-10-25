@@ -38,6 +38,25 @@ class Organisation(models.Model):
         return self.name
 
 
+class LegacyOrganisationProfile(models.Model):
+    """ Profile of the organisation in the legacy ``restriction`` database. """
+
+    organisation = models.OneToOneField('erudit.Organisation')
+    account_id = models.CharField(max_length=10, verbose_name=_('Identifiant'))
+    sushi_requester_id = models.CharField(
+        max_length=10,
+        verbose_name=_('Identifiant SUSHI'),
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = _("Compatibilité avec la base de données restriction")
+
+    def __str__(self):
+        return "{} / {}".format(self.organisation.name, self.account_id)
+
+
 class Affiliation(models.Model):
     """ A simple affiliation. """
     name = models.CharField(max_length=600, verbose_name=_('Nom'))
