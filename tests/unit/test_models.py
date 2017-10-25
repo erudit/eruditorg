@@ -413,9 +413,11 @@ class TestIssue(BaseEruditTestCase):
             issue_1 = IssueFactory.create(journal=journal)
             issue_2 = IssueFactory.create(journal=journal)
             issue_1.fedora_object = unittest.mock.MagicMock()
+            issue_1.fedora_object.pid = "pid"
             issue_1.fedora_object.coverpage = unittest.mock.MagicMock()
             issue_1.fedora_object.coverpage.content = io.BytesIO(f.read())
             issue_2.fedora_object = unittest.mock.MagicMock()
+            issue_2.fedora_object.pid = "pid2"
             issue_2.fedora_object.coverpage = unittest.mock.MagicMock()
             issue_2.fedora_object.coverpage.content = ''
 
@@ -430,6 +432,7 @@ class TestIssue(BaseEruditTestCase):
         with open(settings.MEDIA_ROOT + '/coverpage_empty.png', 'rb') as f:
             issue = IssueFactory.create(journal=self.journal)
             issue.fedora_object = unittest.mock.MagicMock()
+            issue.fedora_object.pid = "issue"
             issue.fedora_object.coverpage = unittest.mock.MagicMock()
             issue.fedora_object.coverpage.content = io.BytesIO(f.read())
 

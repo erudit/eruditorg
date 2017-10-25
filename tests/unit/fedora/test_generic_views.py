@@ -154,6 +154,7 @@ class TestFedoraFileDatastreamView(BaseEruditTestCase):
         view = MyView()
 
         mock_fedora_obj = unittest.mock.MagicMock()
+        mock_fedora_obj.pid = "mock"
         mock_fedora_obj.dstream = unittest.mock.MagicMock()
         mock_fedora_obj.dstream.content = None
         mock_fedora_obj.dstream.exists = False
