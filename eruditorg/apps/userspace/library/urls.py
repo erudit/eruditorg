@@ -26,6 +26,10 @@ section_apps_urlpatterns = [
     url(_(r'^plages-ip/'),
         include('apps.userspace.library.subscription_ips.urls', namespace='subscription_ips')),
     get_stats_url(),
+    url(
+        _(r'^connexion/'), include(
+            'apps.userspace.library.connection.urls', namespace='connection')
+    ),
 ]
 
 urlpatterns = [

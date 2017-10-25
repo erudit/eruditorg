@@ -1,0 +1,66 @@
+/**
+ * Clipboards
+ */
+
+.clipboard-data {
+  color: $coral-red;
+  cursor: pointer;
+  position: relative;
+  word-break: break-all;
+
+  @keyframes clipboardResponse {
+    0% {
+      opacity: 0;
+    }
+
+    15% {
+      opacity: 1;
+    }
+
+    85% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .clipboard-icon {
+    color: $coral-red;
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.15em;
+  }
+
+  .clipboard-msg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(255,255,255,0.85);
+    color: $dark-grey;
+    opacity: 0;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+  }
+
+  &.success {
+    .clipboard-success {
+      animation-name: clipboardResponse;
+    }
+  }
+
+  &.error {
+    .clipboard-error {
+      animation-name: clipboardResponse;
+    }
+  }
+
+  &:hover, &:active, &:focus, &:focus:active {
+    text-decoration: none;
+  }
+
+}

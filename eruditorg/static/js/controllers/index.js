@@ -10,6 +10,7 @@ import CollectionListController from './thesis/CollectionListController';
 import SavedCitationListController from './citations/SavedCitationListController';
 import FormController from './editor/FormController';
 import LandingController from './library/stats/legacy/LandingController'
+import ConnectionLandingController from './library/connection/ConnectionLandingController'
 
 const controllers = {
   'public:home': HomeController,
@@ -24,6 +25,7 @@ const controllers = {
   'public:citations:list': SavedCitationListController,
   'userspace:editor:form': FormController,
   'userspace:library:stats:legacy:landing': LandingController,
+  'userspace:library:connection:landing': ConnectionLandingController,
 };
 
 export default controllers;

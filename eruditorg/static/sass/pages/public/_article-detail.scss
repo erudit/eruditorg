@@ -203,61 +203,6 @@ $article-toolbar-width: 80px;
       padding: 1em 0;
     }
 
-    .meta-article {
-      .clipboard-data {
-        position: relative;
-
-        @keyframes clipboardResponse {
-          0% {
-            opacity: 0;
-          }
-
-          15% {
-            opacity: 1;
-          }
-
-          85% {
-            opacity: 1;
-          }
-
-          100% {
-            opacity: 0;
-          }
-        }
-
-        .clipboard-msg {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          text-align: center;
-          background-color: rgba(255,255,255,0.85);
-          color: $black;
-          opacity: 0;
-          animation-duration: 3s;
-          animation-fill-mode: both;
-        }
-
-        &.success {
-          .clipboard-success {
-            animation-name: clipboardResponse;
-          }
-        }
-
-        &.error {
-          .clipboard-error {
-            animation-name: clipboardResponse;
-          }
-        }
-
-        &:hover, &:active, &:focus, &:focus:active {
-          text-decoration: none;
-        }
-
-      }
-    }
-
     .meta-journal {
 
       .meta-journal--title {
