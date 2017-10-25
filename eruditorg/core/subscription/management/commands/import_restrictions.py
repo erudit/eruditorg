@@ -145,7 +145,7 @@ class Command(BaseCommand):
                 f.close()
         try:
             restriction_profile.organisation.legacyorganisationprofile
-        except:
+        except AttributeError:
             organisation_profile = LegacyOrganisationProfile.objects.create(
                 organisation=restriction_profile.organisation
             )

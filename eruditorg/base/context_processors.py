@@ -16,7 +16,7 @@ def common_settings(request):
     try:
         # set EXTRA_CONTEXT in local settings
         COMMON_CONTEXT.update(settings.EXTRA_CONTEXT)
-    except:
+    except AttributeError:
         pass
 
     if settings.DEBUG:
