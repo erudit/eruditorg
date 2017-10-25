@@ -52,11 +52,11 @@ class TestSizeConstrainedImageField(object):
         for test in tests:
             try:
                 test.resized_image.delete()
-            except:
+            except:  # noqa
                 pass
             try:
                 test.validated_image.delete()
-            except:
+            except:  # noqa
                 pass
 
     def test_can_resize_images_before_saving_them(self):
