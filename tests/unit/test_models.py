@@ -661,6 +661,28 @@ class TestAuthor(BaseEruditTestCase):
         assert issue2.abbreviated_volume_title == 'Vol. 1, may'
         assert issue3.abbreviated_volume_title == 'N<sup>o</sup> 2, may'
 
+    def test_can_return_its_volume_title_when_number_in_database(self):
+        issue = IssueFactory(volume=1, number=2, publication_period="2001")
+        assert issue.volume_title == "Volume 1, numéro 2, 2001"
+
+    def test_can_return_its_volume_title_when_hors_serie(self):
+        issue = IssueFactory(volume=1, number=None, publication_period='2002')
+        issue.erudit_object = unittest.mock.Mock()
+        issue.erudit_object.get_publication_type.return_value = 'hs'
+        assert issue.volume_title == "Volume 1, numéro hors-série, 2002"
+
+    def test_can_return_its_volume_title_when_index(self):
+        issue = IssueFactory(volume=1, number=None, publication_period='2002')
+        issue.erudit_object = unittest.mock.Mock()
+        issue.erudit_object.get_publication_type.return_value = 'index'
+        assert issue.volume_title == "Volume 1, index, 2002"
+
+    def test_can_return_its_volume_title_when_supplement(self):
+        issue = IssueFactory(volume=1, number=None, publication_period='2002')
+        issue.erudit_object = unittest.mock.Mock()
+        issue.erudit_object.get_publication_type.return_value = 'supp'
+        assert issue.volume_title == "Volume 1, numéro suppl., 2002"
+
     def test_can_return_its_name(self):
         author_1 = AuthorFactory()
 
