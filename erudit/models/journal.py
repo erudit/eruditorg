@@ -473,7 +473,17 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def number_for_display(self):
-        return self.number if self.number else _('hors série')
+        if self.number:
+            return self.number
+        if self.is_in_fedora:
+            publication_type = self.erudit_object.get_publication_type()
+            if publication_type == 'hs':
+                return _('hors-série')
+            if publication_type == 'index':
+                return _('index')
+            if publication_type == 'supp':
+                return _('suppl.')
+        return None
 
     @property
     def abbreviated_volume_title(self):
@@ -498,10 +508,20 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         """ Returns a title for the current issue using its volume and its number. """
         publication_period = self.publication_period if self.publication_period else self.year
         number = self.number_for_display
-        if self.volume and number:
+        if self.volume and number and number != 'index':
             return _(
                 'Volume {volume}, numéro {number}, {publication_date}'.format(
                     volume=self.volume, number=number, publication_date=publication_period))
+        elif self.volume and number and number == 'index':
+            return _(
+                'Volume {volume}, index, {publication_date}'.format(
+                    volume=self.volume, number=number, publication_date=publication_period))
+        elif self.volume and not number:
+            return _(
+                'Volume {volume}, {publication_date}'.format(
+                    volume=self.volume, publication_date=publication_period
+                )
+            )
         return _(
             'Numéro {number}, {publication_date}'.format(
                 number=number, publication_date=publication_period))

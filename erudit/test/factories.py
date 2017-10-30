@@ -24,6 +24,7 @@ class PublisherFactory(factory.django.DjangoModelFactory):
 class CollectionFactory(factory.django.DjangoModelFactory):
     code = factory.Sequence(lambda n: 'col-{}'.format(n))
     name = factory.Sequence(lambda n: 'Col{}'.format(n))
+    localidentifier = factory.Sequence(lambda n: 'col-{}'.format(n))
 
     class Meta:
         model = 'erudit.Collection'
