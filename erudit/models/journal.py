@@ -300,7 +300,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def last_issue(self):
         """ Return the last published Issue of this Journal. """
-        if self.erudit_object:
+        if self.is_in_fedora:
             try:
                 issue_pid = self.erudit_object.get_last_published_issue_pid()
                 issue_localidentifier = issue_pid.split(".")[::-1][0]
