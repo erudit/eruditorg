@@ -116,7 +116,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -127,6 +126,8 @@ MIDDLEWARE_CLASSES = (
     'core.subscription.middleware.SubscriptionMiddleware',
     'core.citations.middleware.SavedCitationListMiddleware',
     'waffle.middleware.WaffleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'base.middleware.RedirectToFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
