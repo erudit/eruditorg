@@ -73,7 +73,8 @@ class JournalFactory(factory.django.DjangoModelFactory):
         if not create:
             return
         if extracted is False:
-            self.erudit_object = None
+            self.collection.localidentifier = None
+            self.collection.save()
 
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
@@ -102,6 +103,14 @@ class IssueFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'erudit.issue'
+
+    @factory.post_generation
+    def use_fedora(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted is False:
+            self.journal.collection.localidentifier = None
+            self.journal.collection.save()
 
 
 class EmbargoedIssueFactory(IssueFactory):
@@ -149,6 +158,14 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'erudit.article'
+
+    @factory.post_generation
+    def use_fedora(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted is False:
+            self.issue.journal.collection.localidentifier = None
+            self.issue.journal.collection.save()
 
 
 class OpenAccessArticleFactory(ArticleFactory):
