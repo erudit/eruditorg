@@ -46,7 +46,7 @@ from apps.public.journal.views import ArticleXmlView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
-def get_mocked_erudit_object():
+def get_mocked_erudit_object(self):
     m = unittest.mock.MagicMock()
     m.get_formatted_title.return_value = "mocked title"
     m.get_formatted_authors.return_value = ['author 1', 'author 2']
@@ -199,9 +199,9 @@ class TestJournalListView(object):
 
     def test_can_embed_the_journal_information_in_the_context_if_available(self):
         # Setup
-        journal_info = JournalInformationFactory()
+        journal_info = JournalInformationFactory(journal=JournalFactory(use_fedora=False))
         url_1 = reverse('public:journal:journal_detail', kwargs={'code': journal_info.journal.code})
-        journal_2 = JournalFactory()
+        journal_2 = JournalFactory(use_fedora=False)
         url_2 = reverse('public:journal:journal_detail', kwargs={'code': journal_2.code})
 
         # Run
@@ -291,12 +291,12 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
     def test_supports_authors_with_empty_firstnames_and_empty_lastnames(self):
         # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
         author_1 = AuthorFactory.create(firstname='', lastname='')
         article_1.authors.add(author_1)
 
-        issue_2 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue_2 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
         article_2 = ArticleFactory.create(issue=issue_2)
         author_2 = AuthorFactory.create(firstname='Ada', lastname='Lovelace')
         article_2.authors.add(author_2)
@@ -311,7 +311,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
     def test_supports_authors_with_only_special_characters_in_their_name(self):
         # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue_1 = IssueFactory.create(journal=JournalFactory(use_fedora=False), date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
         author_1 = AuthorFactory.create(lastname=':')
         article_1.authors.add(author_1)
@@ -427,7 +427,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
     def test_only_letters_with_results_are_active(self):
         """ Test that for a given selection in the authors list view, only the letters for which
         results are present are shown """
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue_1 = IssueFactory.create(journal=JournalFactory(use_fedora=False), date_published=dt.datetime.now(), use_fedora=False)
         article_1 = ArticleFactory.create( issue=issue_1, type='article')
         author_1 = AuthorFactory.create(lastname='atest')
         article_1.authors.add(author_1)
@@ -570,11 +570,10 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         super(TestArticleRawPdfView, self).setUp()
         self.factory = RequestFactory()
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object', return_value=get_mocked_erudit_object())
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     @unittest.mock.patch.object(subprocess, 'check_call')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf, mock_erudit_object):
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf):
         # Setup
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
@@ -629,7 +628,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         self.journal.open_access = False
         self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now())
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(), use_fedora=False)
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
@@ -803,7 +802,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         assert resp.status_code == 301
 
     def test_can_redirect_journals_from_legacy_urls(self):
-        article = ArticleFactory()
+        article = ArticleFactory(use_fedora=False)
         article.issue.volume = "1"
         article.issue.number = "1"
         article.issue.save()

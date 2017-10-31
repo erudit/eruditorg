@@ -17,6 +17,7 @@ from core.solrq.query import Query
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
 from erudit.fedora.modelmixins import FedoraMixin
 from erudit.models import Article
 
@@ -103,7 +104,7 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         # Setup
         mock_get_results.side_effect = fake_get_results
         mock_fedora_object.return_value = None
-        issue = IssueFactory.create(journal=self.journal, date_published=now())
+        issue = IssueFactory.create(journal=JournalFactory(use_fedora=False), date_published=now())
         localidentifiers = []
         for i in range(0, 1):
             lid = 'lid-{0}'.format(i)

@@ -9,7 +9,7 @@ class TestIssueDetailSummary(object):
 
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()
-        article_1, article_2, article_3 = ArticleFactory.create_batch(3)
+        article_1, article_2, article_3 = ArticleFactory.create_batch(3, use_fedora=False)
         ArticleSectionTitleFactory(
             article=article_3,
             title="section 1",
@@ -33,7 +33,7 @@ class TestIssueDetailSummary(object):
 
     def test_can_generate_section_tree_with_three_levels(self):
         view = IssueDetailView()
-        article = ArticleFactory()
+        article = ArticleFactory(use_fedora=False)
 
         ArticleSectionTitleFactory(
             article=article,
@@ -80,7 +80,7 @@ class TestIssueDetailSummary(object):
 
     def test_can_generate_section_tree_with_non_contiguous_articles(self):
         view = IssueDetailView()
-        articles = ArticleFactory.create_batch(3)
+        articles = ArticleFactory.create_batch(3, use_fedora=False)
 
         for article in articles:
             ArticleSectionTitleFactory(
