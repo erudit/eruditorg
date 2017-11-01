@@ -1,8 +1,7 @@
 {% load i18n %}{% load public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
-  <xsl:strip-space elements="*"/>
-
+  
   <!--=========== VARIABLES & PARAMETERS ===========-->
   <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
   <xsl:variable name="iderudit" select="article/@idproprio"/>
@@ -484,7 +483,7 @@
   <!-- article title(s) -->
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
-      <xsl:apply-templates/>
+      <xsl:apply-templates select="."/>
     </span>
   </xsl:template>
 
