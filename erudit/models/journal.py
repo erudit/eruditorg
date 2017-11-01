@@ -505,7 +505,10 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def volume_title(self):
-        """ Returns a title for the current issue using its volume and its number. """
+        """ Returns a title for the current issue using its volume and its number.
+
+         XXX move to liberuditarticle
+         """
         publication_period = self.publication_period if self.publication_period else self.year
         number = self.number_for_display
         if self.volume and number and number != 'index':
@@ -516,6 +519,12 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             return _(
                 'Volume {volume}, index, {publication_date}'.format(
                     volume=self.volume, number=number, publication_date=publication_period))
+        elif not self.volume and number and number == 'index':
+            return _(
+                'Index, {publication_date}'.format(
+                    publication_date=publication_period
+                )
+            )
         elif self.volume and not number:
             return _(
                 'Volume {volume}, {publication_date}'.format(
