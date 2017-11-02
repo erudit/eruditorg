@@ -34,8 +34,23 @@ class LanguageCookieMiddleware(MiddlewareMixin):  # pragma: no cover
 
 class RedirectToFallbackMiddleware(MiddlewareMixin):
 
+    DO_NOT_REDIRECT_NAMESPACES = set((
+        'userspace',
+        'citations',
+    ))
+
+    def should_redirect(self, request):
+        """ A request should be redirected if the resolver does not
+        matched a namespace listed in DO_NOT_REDIRECT_NAMESPACES """
+        if not request.resolver_match:
+            return True
+
+        namespaces = set(request.resolver_match.namespaces)
+        return len(namespaces & self.DO_NOT_REDIRECT_NAMESPACES) == 0
+
     def process_response(self, request, response):
-        if response.status_code == 404:
+
+        if response.status_code == 404 and self.should_redirect(request):
             if request.path[0:4] == '/fr/' or request.path[0:4] == '/en/':
                 retro_path = "{}{}".format(settings.FALLBACK_BASE_URL, request.path[3:])
             else:
