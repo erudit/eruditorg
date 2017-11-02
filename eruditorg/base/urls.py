@@ -70,6 +70,12 @@ if settings.DEBUG:
 
         url(r'^%s/(?P<path>.*)$' % media_url, serve, {'document_root': settings.MEDIA_ROOT}),
     ]
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+
 
 handler404 = 'apps.public.views.not_found_view'
 handler500 = 'apps.public.views.internal_error_view'
