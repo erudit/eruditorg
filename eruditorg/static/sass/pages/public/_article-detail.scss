@@ -149,29 +149,23 @@ $article-toolbar-width: 80px;
 
     .titre:first-child,
     .trefbiblio:only-child,
+    .trefbiblio:first-child,
+    .trefbiblio:first-child + .trefbiblio,
     .titreparal {
-      @include fw-sans-bold();
-
-      em {
-        @include fw-sans-bold-italic();
-      }
-
+      color: #000;
     }
 
     .sstitre,
     .sstitreparal,
-    .trefbiblio {
-      @include fw-sans();
-      font-size: smaller;
-
-      em {
-        @include fw-sans-italic();
-      }
-
-    }
-
-    .titreparal {
+    .titre,
+    .titre + .titreparal,
+    .titreparal + .titreparal,
+    .trefbiblio  {
       color: $dark-grey;
+
+      + .trefbiblio {
+        color: $dark-grey;
+      }
 
     }
 
@@ -302,6 +296,39 @@ $article-toolbar-width: 80px;
   }
 
   /**
+  * Typemarq
+  */
+
+  .majuscule {
+    text-transform: uppercase;
+  }
+
+  .petitecap {
+    font-variant: small-caps;
+  }
+
+  .souligne {
+    text-decoration: underline;
+  }
+
+  .barre {
+    text-decoration: line-through;
+  }
+
+  .surligne {
+    border-style: solid none none none;
+    border-width: 1px;
+  }
+
+  .filet {
+    border: 1px solid $dark-grey;
+  }
+
+  .tailleg {
+    font-size: 1.25em;
+  }
+
+  /**
   * general full article styles incl. abstract, body, appendices
   **/
   .full-article {
@@ -352,39 +379,6 @@ $article-toolbar-width: 80px;
     a {
       color: $coral-red;
       word-wrap: break-word;
-    }
-
-    /**
-    * Typemarq
-    */
-
-    .majuscule {
-      text-transform: uppercase;
-    }
-
-    .petitecap {
-      font-variant: small-caps;
-    }
-
-    .souligne {
-      text-decoration: underline;
-    }
-
-    .barre {
-      text-decoration: line-through;
-    }
-
-    .surligne {
-      border-style: solid none none none;
-      border-with: 1px;
-    }
-
-    .filet {
-      border: 1px solid $dark-grey;
-    }
-
-    .tailleg {
-      font-size: 1.25em;
     }
 
   }

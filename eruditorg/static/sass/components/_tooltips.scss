@@ -15,6 +15,10 @@
   @include force-break;
 }
 
+[data-hint] {
+  letter-spacing: normal;
+}
+
 .ion-alert {
   font-size: 14px;
   vertical-align: super;
