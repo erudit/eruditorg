@@ -76,6 +76,5 @@ if settings.DEBUG:
     ] + urlpatterns
 
 
-
 handler404 = 'apps.public.views.not_found_view'
 handler500 = 'apps.public.views.internal_error_view'
