@@ -31,6 +31,6 @@ class DiagnosticLandingView(
         context['client_ip'] = self.request.META.get('REMOTE_ADDR')
         context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
         context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
-        context['identifier'] = self.current_organisation.legacyaccountprofile.legacy_id
+        context['identifier'] = self.current_organisation.legacyorganisationprofile.account_id
         context['institution'] = self.current_organisation.name
         return context
