@@ -5,11 +5,12 @@ import datetime as dt
 from django.utils.translation import get_language
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.http import HttpResponsePermanentRedirect
+from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
 
 
 # Originally comes from: https://github.com/divio/django-cms/blob/develop/cms/middleware/language.py
-class LanguageCookieMiddleware(object):  # pragma: no cover
+class LanguageCookieMiddleware(MiddlewareMixin):  # pragma: no cover
     """
     This middleware fixes the behaviour of django to determine the language every time from new.
     When you visit / on a page, this middleware saves the current language in a cookie with every
@@ -31,7 +32,7 @@ class LanguageCookieMiddleware(object):  # pragma: no cover
         return response
 
 
-class RedirectToFallbackMiddleware(object):
+class RedirectToFallbackMiddleware(MiddlewareMixin):
 
     def process_response(self, request, response):
         if response.status_code == 404:
