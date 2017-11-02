@@ -12,7 +12,7 @@ from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 class DiagnosticLandingView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
-    menu_library = 'stats'
+    menu_library = 'diagnosis'
     permission_required = 'subscription.access_library_diagnostic'
     template_name = 'userspace/library/diagnostic/landing.html'
 
@@ -27,7 +27,7 @@ class DiagnosticLandingView(
         except JournalAccessSubscription.DoesNotExist:
             context['journals'] = tuple()
 
-        context['date'] = datetime.now().strftime("%Y-%m-%d")
+        context['date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         context['client_ip'] = self.request.META.get('REMOTE_ADDR')
         context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
         context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
