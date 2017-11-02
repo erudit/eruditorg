@@ -1,40 +1,74 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Paramètres de connexion" %} {{ block.super }}{% endblock title %}
+{% block body_id %}diagnosis{% endblock body_id %}
+{% block data_controller %}userspace:library:diagnosis:landing{% endblock data_controller %}
+
+{% block title %}{% trans "Diagnostic" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Consultations" %}</a></li>
+<li><a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Diagnostic" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Consultations" %}
+{% trans "Diagnostic" %}
 {% endblock %}
 
 {% block section_intro %}
 {% blocktrans %}
 <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
 {% block content_main %}
-date {{ date }}<br>
-client_ip {{ client_ip }}<br>
-redirection_ip {{ redirection_ip }}<br>
-user_agent {{ user_agent }}<br>
-identifiant {{ identifier }}<br>
-institution {{ institution }}<br>
+<section>
+  <h2>{% trans "Votre connexion" %}</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+    </div>
+  </div>
 
-{% if journals %}
-<ul>
-{% for journal in journals %}
-  <li>{{ journal }}</li>
-{% endfor %}
-</ul>
-{% else %}
-  {% trans "Aucun abonnement" %}
-{% endif %}
+  <div class="glory">
+    <dl class="row index-card">
+      <dt class="col-sm-6">{% trans "Date&nbsp;:" %} </dt>
+      <dd class="col-sm-6">{{ date }}<br></dd>
 
+      <dt class="col-sm-6">{% trans "Adresse IP du client&nbsp;:" %} </dt>
+      <dd class="col-sm-6">{{ client_ip }}<br></dd>
+
+      <dt class="col-sm-6">{% trans "Adresse IP de redirection&nbsp;:" %} </dt>
+      <dd class="col-sm-6">{{ redirection_ip }}<br></dd>
+
+      <dt class="col-sm-6">{% trans "Navigateur&nbsp;:" %} </dt>
+      <dd class="col-sm-6">{{ user_agent }}<br></dd>
+
+      <dt class="col-sm-6">{% trans "Institution et identifiant&nbsp;:" %} </dt>
+      <dd class="col-sm-6">{{ institution }} [{{ identifier }}]</dd>
+    </dl>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <h2>{% trans "Vos abonnements" %} ({{ journals|length }} {% trans "revues" %})</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+    </div>
+  </div>
+
+  <div class="glory">
+    {% if journals %}
+    <ol class="index-card">
+    {% for journal in journals %}
+      <li>{{ journal }}</li>
+    {% endfor %}
+    </ol>
+    {% else %}
+      {% trans "Aucun abonnement" %}
+    {% endif %}
+  </div>
+</section>
 {% endblock content_main %}
