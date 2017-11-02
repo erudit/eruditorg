@@ -5,11 +5,12 @@ from ipware.ip import get_ip
 
 from .models import JournalAccessSubscription
 from core.subscription.models import UserSubscriptions
+from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
 
 
-class SubscriptionMiddleware(object):
+class SubscriptionMiddleware(MiddlewareMixin):
     """ This middleware attaches subscription information to the request object.
 
     This middleware attaches informations related to the subscription

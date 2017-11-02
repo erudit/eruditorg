@@ -12,7 +12,6 @@ from django_js_reverse import views as js_reverse_views
 
 from . import sitemaps
 from . import urls_compat
-from .views_compat import RedirectToFallback
 
 js_info_dict = {
     'packages': ('base', ),
@@ -53,7 +52,6 @@ urlpatterns += i18n_patterns(
     url(_(r'^espace-utilisateur/'), include('apps.userspace.urls', namespace='userspace')),
     url(r'^webservices/', include('apps.webservices.urls', namespace='webservices')),
     url(r'^', include('apps.public.urls', namespace='public')),
-    url(r'^.*$', RedirectToFallback.as_view(), ),
 )
 
 # In DEBUG mode, serve media files through Django.
@@ -72,6 +70,11 @@ if settings.DEBUG:
 
         url(r'^%s/(?P<path>.*)$' % media_url, serve, {'document_root': settings.MEDIA_ROOT}),
     ]
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
 
 handler404 = 'apps.public.views.not_found_view'
 handler500 = 'apps.public.views.internal_error_view'
