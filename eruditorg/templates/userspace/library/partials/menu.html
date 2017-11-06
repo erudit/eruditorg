@@ -74,8 +74,8 @@
   </li>
   {% endif %}
 
-  <li class="sidenav-item{% if menu_library == 'collections' %} active{% endif %}">
-    <a href="#" class="disabled">
+  <li class="sidenav-item{% if menu_library == 'diagnosis' %} active{% endif %}">
+    <a href="{% url 'userspace:library:diagnostic:landing' %}">
       <span class="ion-ios-medkit-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Diagnostic" %}</span>
     </a>
