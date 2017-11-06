@@ -201,6 +201,11 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     # --
     @property
     def provided_by_fedora(self):
+        """ Tells if an object is in Fedora
+
+        .. deprecated:: 0.4.39
+           use :meth:`~.is_in_fedora` instead
+        """
         # We assume that the journals provided by a Fedora endpoint have a localidentifier.
         if self.redirect_to_external_url:
             return False
@@ -294,7 +299,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def first_issue(self):
-        """ Return the first published issue of this Journal. """
+        """ Return the first published issue of this Journal.
+        """
+        # TODO return from Fedora
         return self.published_issues.order_by('date_published').first()
 
     @property
@@ -313,7 +320,11 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def published_open_access_issues_period_coverage(self):
-        """ Return the date coverage of the open access issues of this Journal. """
+        """ Return the date coverage of the open access issues of this Journal.
+
+        .. deprecated:: 0.4.39
+           This method is unused.
+        """
         open_access_issues = self.published_open_access_issues.order_by('-date_published')
         return None if not open_access_issues.exists() else {
             'from': open_access_issues.last().date_published,
