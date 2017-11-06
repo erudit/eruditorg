@@ -485,9 +485,18 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 return _('suppl.')
         return None
 
-    @property
+    @cached_property
     def abbreviated_volume_title(self):
-        """ Returns an abbreviated volume title """
+        """ For more information please refer to :meth:`~.volume_title`
+
+        :returns: the abbreviated volume numbering information
+        """
+        if self.is_in_fedora:
+            return self.erudit_object.get_volume_numbering(
+                abbreviated=True,
+                formatted=True
+            )
+
         publication_period = self.publication_period if self.publication_period else str(self.year)
         number = self.number
         if self.volume and number:
@@ -503,28 +512,27 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             'N<sup>o</sup> {number}, {publication_date}'.format(
                 number=number, publication_date=publication_period.lower()))
 
-    @property
+    @cached_property
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number.
 
-         XXX move to liberuditarticle
-         """
+        If the object is present in Fedora commons, do not perform any formatting
+        and let ``liberuditarticle`` format the volume_title. Otherwise, use the
+        information at hand and format the volume numbering information of the issue.
+        """
+
+        # XXX should remove all formatting information from this method. If we cannot
+        # access Fedora, we should return already formatted information from the database
+
+        if self.is_in_fedora:
+            return self.erudit_object.get_volume_numbering(formatted=True)
         publication_period = self.publication_period if self.publication_period else self.year
+
         number = self.number_for_display
-        if self.volume and number and number != 'index':
+        if self.volume and number:
             return _(
                 'Volume {volume}, numéro {number}, {publication_date}'.format(
                     volume=self.volume, number=number, publication_date=publication_period))
-        elif self.volume and number and number == 'index':
-            return _(
-                'Volume {volume}, index, {publication_date}'.format(
-                    volume=self.volume, number=number, publication_date=publication_period))
-        elif not self.volume and number and number == 'index':
-            return _(
-                'Index, {publication_date}'.format(
-                    publication_date=publication_period
-                )
-            )
         elif self.volume and not number:
             return _(
                 'Volume {volume}, {publication_date}'.format(
