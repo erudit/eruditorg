@@ -46,7 +46,7 @@ setup(
         'liberuditarticle',
     ],
     dependency_links=[
-        'git+https://github.com/erudit/liberuditarticle.git#egg=liberuditarticle-0.1.20',
+        'git+https://github.com/erudit/liberuditarticle.git#egg=liberuditarticle-0.2.8',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
