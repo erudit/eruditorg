@@ -179,21 +179,11 @@
       </div>
       <div class="col-xs-12 col-md-4">
         <p class="category-tag">{% trans 'Salons' %}</p>
-        <h3 class="news--campaign--title"><a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank">{% trans 'École, éducation, enseignement' %}</a></h3>
-        <p class="news--campaign--desc">{% blocktrans %}Il est peu de lieux aussi communs, peu d’espaces qui fassent autant société qu’une cour d’école ou une salle de classe. L’intégration des nouveaux arrivants dans les curriculums canadiens est donc, pour le pays, à la fois une nécessité et un défi. Comment le Canada va-t-il répondre aux défis particuliers que pose la scolarisation des nombreux enfants réfugiés, récemment accueillis&nbsp;?{% endblocktrans %}</p>
+        <h3 class="news--campaign--title"><a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank">{% trans 'Enjeux de la diffusion savante' %}</a></h3>
+        <p class="news--campaign--desc">{% blocktrans %}Consacré aux enjeux contemporains de la diffusion des connaissances, ce Salon restera ouvert pour s’agrandir au fil des contributions et des événements. À travers des entrevues avec des directeurs de revues, des billets de chercheurs ou d’acteurs de l’édition scientifique,  nous ferons le point sur les grands changements que l’ère numérique a produits sur l’édition savante.{% endblocktrans %}</p>
         <p><a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">-> salons.erudit.org</a></p>
       </div>
     </div>
-
-    {% for article in salons_articles %}
-    article
-    <li class="col-md-4 col-sm-6 news--article">
-      <p class="category-tag">{{ article.category }}</p>
-      <h3 class="news--article--title"><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
-      <p class="summary">{{ article.summary|safe|truncatewords_html:20 }}&nbsp;<a href="{{ article.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
-      <time class="news--article--date text-muted" datetime="2001-05-15">{{ article.dt_published|date:"DATE_FORMAT" }}</time>
-    </li>
-    {% endfor %}
 
     <ul class="row latest-news">
       {% for entry in latest_news %}
