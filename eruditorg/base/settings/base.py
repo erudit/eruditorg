@@ -86,6 +86,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
+    'eruditarticle',
     'waffle',
     'account_actions',
     'resumable_uploads',
