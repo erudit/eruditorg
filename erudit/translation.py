@@ -5,12 +5,19 @@ from modeltranslation.translator import translator
 
 from .models import Discipline
 from .models import Journal
+from .models import Issue
 from .models import JournalInformation
 
 
 class JournalTranslationOptions(TranslationOptions):
     fields = (
         'name', 'subtitle',
+    )
+
+
+class IssueTranslationOptions(TranslationOptions):
+    fields = (
+        'formatted_volume_title',
     )
 
 
@@ -29,4 +36,5 @@ class DisciplineTranslationOptions(TranslationOptions):
 
 translator.register(Journal, JournalTranslationOptions)
 translator.register(JournalInformation, JournalInformationTranslationOptions)
+translator.register(Issue, IssueTranslationOptions)
 translator.register(Discipline, DisciplineTranslationOptions)

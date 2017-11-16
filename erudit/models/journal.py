@@ -375,6 +375,14 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     volume = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Volume'))
     """ The volume of the issue """
 
+    formatted_volume_title = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        verbose_name=("Informations de volumaison")
+    )
+    """ Formatted volume title of the Issue """
+
     number = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Numéro'))
     """ The number of the issue """
 
@@ -534,6 +542,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
         # XXX should remove all formatting information from this method. If we cannot
         # access Fedora, we should return already formatted information from the database
+        if self.formatted_volume_title:
+            return self.formatted_volume_title
 
         if self.is_in_fedora:
             return self.erudit_object.get_volume_numbering(formatted=True)
