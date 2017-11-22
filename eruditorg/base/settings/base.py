@@ -281,6 +281,10 @@ LOGGING = {
         'handlers': ['sentry'],
     },
     'formatters': {
+        'structured': {
+            'format': '%(message)s'
+        },
+
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s '
                       '%(process)d %(thread)d %(message)s'
@@ -300,7 +304,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
-
+        'console_structured': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'structured'
+        },
         'userspace.journal.editor.console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -377,6 +385,11 @@ LOGGING = {
         'erudit': {
             'level': 'DEBUG',
             'handlers': ['console', ],
+        },
+        'erudit.management.commands.import_journals_from_fedora': {
+            'level': 'DEBUG',
+            'handlers': ['console_structured'],
+            'propagate': False,
         }
     },
 }
