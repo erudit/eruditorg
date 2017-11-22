@@ -469,19 +469,6 @@ class Command(BaseCommand):
         journal.fedora_updated = fedora_journal.modified
         journal.save()
 
-        # Associates the publisher to the Journal instance
-        xml_publisher = oaiset_info_tree.find('.//publisher') if oaiset_info_tree else None
-        publisher_name = xml_publisher.text if xml_publisher is not None else None
-        if publisher_name is not None:
-            publisher, _ = Publisher.objects.get_or_create(name=publisher_name)
-            journal.publishers.add(publisher)
-        else:
-            logger.error(
-                "journal.import.error",
-                msg='Journal created or updated without publisher',
-                journal_pid=journal.pid
-            )
-
         if journal_created:
             logger.info(
                 "journal.created",
