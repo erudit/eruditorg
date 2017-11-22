@@ -479,6 +479,7 @@ class Command(BaseCommand):
 
         return issue_count, article_count
 
+    @transaction.atomic
     def _import_issue(self, issue_pid, journal):
         """ Imports an issue using its PID. """
         self.stdout.write('      Importing issue with PID "{0}"...'.format(issue_pid), ending='')
