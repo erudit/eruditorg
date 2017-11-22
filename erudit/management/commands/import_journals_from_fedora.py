@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import itertools
 import datetime as dt
-import logging
+import structlog
 import re
 import urllib.parse
 
@@ -39,7 +39,7 @@ from ...models import Journal
 from ...models import KeywordTag
 from ...models import Publisher
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def _create_issue_contributor_object(issue_contributor, issue, is_director=False, is_editor=False):
@@ -120,8 +120,7 @@ class Command(BaseCommand):
         self.journal_precendence_relations = []
         self.issue_pid = options.get('issue_pid', None)
         self.import_missing = options.get('import_missing', None)
-        logger.info("=" * 10 + "Import started" + "=" * 10)
-        logger.info("options: {}".format(options))
+        logger.info("import.started", **options)
 
         # Handles a potential XSLT test function
         try:
@@ -131,8 +130,11 @@ class Command(BaseCommand):
             xslt_test_func = getattr(__import__(module, {}, {}, [xslt_test_func]), xslt_test_func)
             self.xslt_test_func = xslt_test_func
         except ImportError:
-            self.stdout.write(self.style.ERROR(
-                '"{0}" could not be imported!'.format(self.test_xslt)))
+            logger.error(
+                "invalid_argument",
+                xslt_test_func=self.test_xslt,
+                msg="Cannot import XSLT test function"
+            )
             return
         except AssertionError:
             pass
@@ -142,60 +144,76 @@ class Command(BaseCommand):
             assert self.modification_date is not None
             self.modification_date = dt.datetime.strptime(self.modification_date, '%Y-%m-%d').date()
         except ValueError:
-            self.stdout.write(self.style.ERROR(
-                '"{0}" is not a valid modification date!'.format(self.modification_date)))
-
+            logger.error(
+                "invalid_argument",
+                modification_date=self.modification_date
+            )
             return
         except AssertionError:
             pass
 
         if self.issue_pid or self.import_missing:
             if self.issue_pid:
-                self.stdout.write(self.style.MIGRATE_HEADING(
-                    'Start importing issue with PID: {0}'.format(self.issue_pid)))
-                if not re.match(r'^\w+\:\w+\.\w+\.\w+$', self.issue_pid):
-                    self.stdout.write(self.style.ERROR(
-                        '  "{0}" is not a valid journal PID!'.format(self.issue_pid)))
-            else:
-                self.stdout.write(self.style.MIGRATE_HEADING(
-                    'Start importing missing issues.'
-                ))
-
-            if self.issue_pid:
+                logger.info(
+                    "import.started",
+                    issue_pid=self.issue_pid,
+                )
                 unimported_issues_pids = [self.issue_pid]
+                if not re.match(r'^\w+\:\w+\.\w+\.\w+$', self.issue_pid):
+                    logger.error(
+                        "invalid_argument",
+                        issue_pid=self.issue_pid,
+                        msg="Not a valid issue pid"
+                    )
             else:
                 unimported_issues_pids = get_unimported_issues_pids()
-                self.stdout.write("{} issues to import.".format(len(unimported_issues_pids)))
+                logger.info(
+                    "import.started",
+                    issues_count=len(unimported_issues_pids),
+                    msg="importing missing issues"
+                )
             for issue_pid in unimported_issues_pids:
                 journal_localidentifier = issue_pid.split(':')[1].split('.')[1]
                 try:
                     journal = Journal.objects.get(localidentifier=journal_localidentifier)
                 except Journal.DoesNotExist:
-                    self.stdout.write(self.style.ERROR(
-                        'The "{0}" journal is not available.'.format(journal_localidentifier)))
+                    logger.error(
+                        "journal.import.error",
+                        journal_pid=journal_localidentifier
+                    )
                     return
                 try:
                     self._import_issue(issue_pid, journal)
-                except:
-                    self.stdout.write(self.style.ERROR("Cannot import issue with pid {}".format(issue_pid)))
+                except Exception as e:
+                    logger.error(
+                        'issue.import.error',
+                        issue_pid=issue_pid
+                    )
             return
 
             # Imports a journal PID manually
         if self.journal_pid:
-            self.stdout.write(self.style.MIGRATE_HEADING(
-                'Start importing journal with PID: {0}'.format(self.journal_pid)))
+            logger.info(
+                'journal.import.start',
+                journal_pid=self.journal_pid
+            )
 
             if not re.match(r'^\w+\:\w+\.\w+$', self.journal_pid):
-                self.stdout.write(self.style.ERROR(
-                    '  "{0}" is not a valid journal PID!'.format(self.journal_pid)))
+                logger.error(
+                    "invalid_argument",
+                    journal_pid=self.journal_pid
+                )
                 return
 
             collection_localidentifier = self.journal_pid.split(':')[1].split('.')[0]
             try:
                 collection = Collection.objects.get(localidentifier=collection_localidentifier)
             except Collection.DoesNotExist:
-                self.stdout.write(self.style.ERROR(
-                    'The "{0}" collection is not available.'.format(collection_localidentifier)))
+                logger.error(
+                    "invalid_argument",
+                    msg="Collection does not exist",
+                    collection_pid=collection_localidentifier
+                )
                 return
 
             self.import_journal(self.journal_pid, collection)
@@ -221,19 +239,17 @@ class Command(BaseCommand):
                 issue_errored_count += _iec
                 article_count += _ac
 
-        self.stdout.write(self.style.MIGRATE_HEADING(
-            '\nJournals imported: {journal_count} / Journals errored: {journal_errored_count} / '
-            'issues imported: {issue_count} / issues errored: {issue_errored_count} / '
-            'articles imported: {article_count}'.format(
-                journal_count=journal_count, journal_errored_count=journal_errored_count,
-                issue_count=issue_count, issue_errored_count=issue_errored_count,
-                article_count=article_count,
-            )))
+        logger.info(
+            "import.finished",
+            journal_count=journal_count,
+            journal_errored=journal_errored_count,
+            issue_count=issue_count,
+            issue_errored_count=issue_errored_count,
+            article_count=article_count
+        )
 
     def import_collection(self, collection):
         """ Imports all the journals of a specific collection. """
-        self.stdout.write(self.style.MIGRATE_HEADING(
-            'Start importing "{}" collection'.format(collection.code)))
 
         self.journal_precendence_relations = []
 
@@ -257,17 +273,22 @@ class Command(BaseCommand):
         base_fedora_query = "pid~erudit:{collectionid}.* label='Series Erudit'".format(
             collectionid=collection.localidentifier)
         if self.full_import or latest_update_date is None:
-            if not self.full_import:
-                self.stdout.write(self.style.WARNING(
-                    '  No journals found... proceed to full import!'.format(collection.code)))
+            modification_date = None
+            full_import = True
             journal_pids = get_pids(base_fedora_query)
         else:
-            self.stdout.write(
-                '  Importing Journals modified since {}.'.format(latest_update_date.isoformat()))
+            modification_date = latest_update_date.isoformat()
+            full_import = False
             # Fetches the PIDs of all the journals that have been update since the latest
             # modification date.
             journal_pids = get_pids(
                 base_fedora_query + ' mdate>{}'.format(latest_update_date.isoformat()))
+        logger.info(
+            "import.started",
+            collection_code=collection.code,
+            full_import=full_import,
+            modification_date=modification_date
+        )
 
         # STEP 2: import each journal using its PID
         # --
@@ -278,8 +299,10 @@ class Command(BaseCommand):
                 self.import_journal(jpid, collection, False)
             except Exception as e:
                 journal_errored_count += 1
-                self.stdout.write(self.style.ERROR(
-                    '    Unable to import the journal with PID "{0}": {1}'.format(jpid, e)))
+                logger.error(
+                    "journal.import.error",
+                    journal_pid=jpid
+                )
             else:
                 journal_count += 1
 
@@ -293,17 +316,21 @@ class Command(BaseCommand):
         issue_fedora_query = "pid~erudit:{collectionid}.*.* label='Publication Erudit'".format(
             collectionid=collection.localidentifier)
         if self.full_import or latest_update_date is None:
-            if not self.full_import:
-                self.stdout.write(self.style.WARNING(
-                    '  No issues found... proceed to full import!'.format(collection.code)))
+            full_import = True
+            start_date = None
             issue_pids = get_pids(issue_fedora_query)
         else:
-            self.stdout.write(
-                '  Importing Issues modified since {}.'.format(latest_update_date.isoformat()))
+            full_import = False
+            start_date = latest_update_date.isoformat()
             # Fetches the PIDs of all the issues that have been update since the latest
             # modification date.
             issue_pids = get_pids(
                 issue_fedora_query + ' mdate>{}'.format(latest_issue_update_date.isoformat()))
+        logger.info(
+            "issue.import.start",
+            full_import=full_import,
+            start_date=start_date
+        )
 
         # STEP 5: import each issue using its PID
         # --
@@ -316,16 +343,21 @@ class Command(BaseCommand):
                 journal = Journal.objects.get(localidentifier=journal_localidentifier)
             except Journal.DoesNotExist:
                 issue_errored_count += 1
-                self.stdout.write(self.style.ERROR(
-                    '      Failure importing issue {0}. The "{0}" journal is not available.'.format(
-                        ipid, journal_localidentifier)))
+                logger.error(
+                    "issue.import.error",
+                    msg="Journal does not exist",
+                    issue_pid=ipid,
+                    journal_pid=journal_localidentifier
+                )
             else:
                 try:
                     _ac = self._import_issue(ipid, journal)
                 except Exception as e:
                     issue_errored_count += 1
-                    self.stdout.write(self.style.ERROR(
-                        '    Unable to import the issue with PID "{0}": {1}'.format(ipid, e)))
+                    logger.error(
+                        "issue.import.error",
+                        issue_pid=ipid
+                    )
                 else:
                     issue_count += 1
                     article_count += _ac
@@ -347,9 +379,11 @@ class Command(BaseCommand):
                 next_journal = Journal.objects.get(localidentifier=next_localid) \
                     if next_localid else None
             except Journal.DoesNotExist:
-                self.stdout.write(self.style.ERROR(
-                    '    Unable to import the precedences for journal with '
-                    'localidentifier "{0}"'.format(localid)))
+                logger.error(
+                    "journal.import.error",
+                    journal_pid=localid,
+                    msg="Unable to import precedences for journal"
+                )
             else:
                 j.previous_journal = previous_journal
                 j.next_journal = next_journal
@@ -358,10 +392,7 @@ class Command(BaseCommand):
     @transaction.atomic
     def import_journal(self, journal_pid, collection, import_issues=True):
         """ Imports a journal using its PID. """
-        logger.info("Importing journal: {}".format(journal_pid))
-        self.stdout.write(self.style.MIGRATE_LABEL(
-            '    Start importing journal with PID: {0}'.format(journal_pid)))
-
+        logger.info("journal.import.start", journal=journal_pid)
         # STEP 1: fetches the full Journal fedora object
         # --
 
@@ -370,8 +401,7 @@ class Command(BaseCommand):
             assert fedora_journal.exists
         except AssertionError:
             msg = 'The journal with PID "{}" seems to be inexistant'.format(journal_pid)
-            logger.error(msg, exc_info=True)
-            self.stdout.write('    ' + self.style.ERROR(msg))
+            logger.error("journal.import.error", msg=msg)
             return  # We return here in order to try to import the other journals of the collection
 
         # STEP 2: creates or updates the journal object
@@ -447,13 +477,21 @@ class Command(BaseCommand):
             journal.publishers.add(publisher)
         else:
             logger.error(
-                'The journal with PID "{}" has been created or updated '
-                'without publisher'.format(journal_pid), exc_info=True)
+                "journal.import.error",
+                msg='Journal created or updated without publisher',
+                journal_pid=journal.pid
+            )
 
         if journal_created:
-            self.stdout.write('      Journal instance created: "{}"'.format(journal.name))
+            logger.info(
+                "journal.created",
+                journal_name=journal.name
+            )
         else:
-            self.stdout.write('      Journal instance updated: "{}"'.format(journal.name))
+            logger.debug(
+                "journal.updated",
+                journal_name=journal.name
+            )
 
         # STEP 3: imports all the issues associated with the journal
         # --
@@ -482,7 +520,10 @@ class Command(BaseCommand):
     @transaction.atomic
     def _import_issue(self, issue_pid, journal):
         """ Imports an issue using its PID. """
-        self.stdout.write('      Importing issue with PID "{0}"...'.format(issue_pid), ending='')
+        logger.info(
+            "issue.import.start",
+            issue_pid=issue_pid
+        )
 
         # STEP 1: fetches the full Issue fedora object
         # --
@@ -491,9 +532,11 @@ class Command(BaseCommand):
             fedora_issue = PublicationDigitalObject(api, issue_pid)
             assert fedora_issue.exists
         except AssertionError:
-            self.stdout.write(self.style.ERROR('  [FAIL]'))
             logger.error(
-                'The issue with PID "{}" seems to be inexistant'.format(issue_pid), exc_info=True)
+                'issue.import.error',
+                issue_pid=issue_pid,
+                msg='Issue pid nonexistent'
+            )
             raise
 
         # STEP 2: creates or updates the issue object
@@ -532,7 +575,10 @@ class Command(BaseCommand):
 
         issue.fedora_updated = fedora_issue.modified
         issue.save()
-        logger.info("Issue imported: {}".format(issue.localidentifier))
+        logger.info(
+            "issue.imported",
+            issue_pid=issue.pid
+        )
         issue.contributors.all().delete()
 
         for director in issue.erudit_object.directors:
@@ -607,15 +653,13 @@ class Command(BaseCommand):
                 apid = issue_pid + '.{0}'.format(article_node.get('idproprio'))
                 self._import_article(apid, article_node, issue)
             except Exception as e:
-                self.stdout.write(self.style.ERROR('  [FAIL]'))
                 logger.error(
-                    'The issue\'s article with PID "{0}" cannot be imported: {1}'.format(apid, e),
-                    exc_info=True)
+                    'article.import.error',
+                    article_pid=apid,
+                )
                 raise
             else:
                 article_count += 1
-
-        self.stdout.write(self.style.SUCCESS('  [OK]'))
 
         return article_count
 
@@ -638,13 +682,16 @@ class Command(BaseCommand):
             # ref https://redmine.erudit.team/issues/2296
             if "ageo1499289" in article_pid:
                 logger.warn(
-                    'The ageo1499289 article with PID "{}" has been SKIPPED'.format(article_pid)
+                    'article.import.skip',
+                    article_pid='ageo1499289'
                 )
                 return
             else:
                 logger.error(
-                    'The article with PID "{}" seems to be inexistant'.format(article_pid),
-                    exc_info=True)
+                    'article.import.error',
+                    article_pid=article_pid,
+                    msg='Article does not exist'
+                )
                 raise
 
         # STEP 2: creates or updates the article object
@@ -869,10 +916,11 @@ class Command(BaseCommand):
             try:
                 self.xslt_test_func({}, article)
             except Exception as e:
-                msg = 'The article with PID "{}" cannot be rendered using XSLT: e'.format(
-                    article.pid, e)
-                self.stdout.write(self.style.ERROR('      ' + msg))
-                logger.error(msg, exc_info=True)
+                logger.error(
+                    'article.xslt.error',
+                    article_pid=article.pid,
+                    msg='Cannot perform XSLT transformation'
+                )
 
     def _patch_generic_journal_title(self, journal, field_name, titles):
         assigned_langs = []

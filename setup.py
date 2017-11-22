@@ -41,7 +41,7 @@ setup(
         'nameparser>=0.5.0',
         'Pillow>=3.2.0',
         'Sickle>=0.5',
-
+        'structlog>=17.2.0',
         # Érudit modules
         'liberuditarticle',
     ],
