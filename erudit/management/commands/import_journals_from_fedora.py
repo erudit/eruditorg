@@ -588,8 +588,9 @@ class Command(BaseCommand):
 
         # Journal name
         self._patch_generic_journal_title(journal, 'name', issue.erudit_object.journal_titles or {})
-        self._patch_generic_journal_title(
-            journal, 'subtitle', issue.erudit_object.journal_subtitles or {})
+        if not journal.subtitle:
+            self._patch_generic_journal_title(
+                journal, 'subtitle', issue.erudit_object.journal_subtitles or {})
         journal.issn_print = issue.erudit_object.issn
         journal.issn_web = issue.erudit_object.issn_num
         journal.save()
