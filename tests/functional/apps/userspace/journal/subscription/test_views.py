@@ -7,6 +7,8 @@ from django.core import mail
 from django.core.urlresolvers import reverse
 from faker import Factory
 
+from base.test.factories import UserFactory
+
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import JournalFactory
 
@@ -22,11 +24,31 @@ faker = Factory.create()
 
 
 class TestIndividualJournalAccessSubscriptionListView(BaseEruditTestCase):
-    def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
-        # Setup
-        self.client.login(username='david', password='top_secret')
+
+    def test_can_be_accessed_by_a_member(self):
+        user = UserFactory(password="test")
+        journal = JournalFactory()
+        journal.members.add(user)
+        journal.save()
+
+        self.client.login(username=user.username, password="test")
+
         url = reverse('userspace:journal:subscription:list', kwargs={
-            'journal_pk': self.journal.pk, })
+            'journal_pk': journal.pk, })
+        # Run
+        response = self.client.get(url)
+
+        # Check
+        self.assertEqual(response.status_code, 200)
+
+    def test_cannot_be_accessed_by_a_non_member(self):
+        # Setup
+        user = UserFactory(password="test")
+        journal = JournalFactory()
+
+        self.client.login(username=user.username, password='test')
+        url = reverse('userspace:journal:subscription:list', kwargs={
+            'journal_pk': journal.pk, })
 
         # Run
         response = self.client.get(url)

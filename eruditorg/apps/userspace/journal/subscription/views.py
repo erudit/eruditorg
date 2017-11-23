@@ -20,7 +20,7 @@ from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
 from core.subscription.shortcuts import get_journal_organisation_subscribers
 
-from ..viewmixins import JournalScopePermissionRequiredMixin
+from ..viewmixins import JournalScopePermissionRequiredMixin, JournalScopeMixin
 
 from .forms import JournalAccessSubscriptionCreateForm
 
@@ -28,12 +28,11 @@ logger = logging.getLogger(__name__)
 
 
 class IndividualJournalAccessSubscriptionListView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, ListView):
     context_object_name = 'subscriptions'
     menu_journal = 'subscription'
     model = JournalAccessSubscription
     paginate_by = 10
-    permission_required = 'subscription.manage_individual_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
 
     def get_context_data(self, **kwargs):
