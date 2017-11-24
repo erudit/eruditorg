@@ -238,11 +238,18 @@
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Citer cet article" %}</div>
           <div class="cite">
-            {{ authors | person_list | safe }}
-            "{{ article.title }}."
-            <em>{{ article.issue.journal.name }}</em>
-            {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}{% if article.issue.number %}{{ article.issue.number }}{% endif %}
-            ({{ article.issue.year }}): {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}{% trans 'DOI&nbsp;:' %} {{ article.doi }}{% endif %}
+            {% for author in article.erudit_object.authors %}
+              {% if author.firstname and author.lastname %}
+                {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
+              {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
+                {{ author.othername }}.
+              {% endif %}
+            {% endfor %}
+            ({{ article.issue.year }}).
+            {{ article.title }}.
+            <em>{{ article.issue.journal.name }}</em>,
+            {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %}{% if article.first_page %},
+            {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
           </div>
         </div>
       </div>
