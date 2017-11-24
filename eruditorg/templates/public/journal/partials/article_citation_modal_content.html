@@ -34,7 +34,7 @@
         {% endif %}
         {% trans '«&nbsp;' %}{{ article.title }}.{% trans '&nbsp;»' %}
         <em>{{ article.issue.journal.name }}</em>,
-        {{ article.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        {{ article.issue.volume_title|lower }}{% if article.first_page %}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
       <dt>APA</dt>
@@ -49,8 +49,8 @@
         ({{ article.issue.year }}).
         {{ article.title }}.
         <em>{{ article.issue.journal.name }}</em>,
-        {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %},
-        {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %}{% if article.first_page %},
+        {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
       <dt>Chicago</dt>
@@ -68,10 +68,10 @@
             {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
           {% endif %}
         {% endfor %}
-        {% trans '«&nbsp;' %}{{ article.title }}{% trans '&nbsp;»' %}. 
+        {% trans '«&nbsp;' %}{{ article.title }}{% trans '&nbsp;»' %}.
         <em>{{ article.issue.journal.name }}</em>
         {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}{% trans 'n<sup>o</sup>' %} {{ article.issue.number }}{% endif %}
-        ({{ article.issue.year }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        ({{ article.issue.year }}){% if article.first_page %}{% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
     </dl>
 
