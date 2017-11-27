@@ -46,8 +46,10 @@ from apps.public.journal.views import ArticleXmlView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
+
 def get_mocked_erudit_object(self):
     m = unittest.mock.MagicMock()
+    m.get_last_published_issue_pid.return_value = "mock-1234"
     m.get_formatted_title.return_value = "mocked title"
     m.get_formatted_authors.return_value = ['author 1', 'author 2']
     return m
@@ -410,8 +412,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
         assert len(authors_dicts) == 1
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_filter_by_article_type_when_no_article_of_type(self, mock_erudit_object):
+    def test_can_filter_by_article_type_when_no_article_of_type(self):
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
         article_1 = ArticleFactory.create( issue=issue_1, type='article')
         author_1 = AuthorFactory.create(lastname='atest')
@@ -509,8 +510,10 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
 @override_settings(DEBUG=True)
 class TestIssueDetailView(BaseEruditTestCase):
+
     @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
     def test_works_with_pks(self, mock_fedora_mixin):
+        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
         # Setup
         issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
         url = reverse('public:journal:issue_detail', args=[
@@ -523,6 +526,7 @@ class TestIssueDetailView(BaseEruditTestCase):
     @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
     def test_works_with_localidentifiers(self, mock_fedora_mixin):
         # Setup
+        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
         url = reverse('public:journal:issue_detail', args=[
@@ -542,6 +546,7 @@ class TestArticleDetailView(BaseEruditTestCase):
     @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
     def test_works_with_localidentifiers(self, mock_fedora_mixin):
         # Setup
+        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
         self.journal.open_access = True
         self.journal.save()
         issue = IssueFactory.create(

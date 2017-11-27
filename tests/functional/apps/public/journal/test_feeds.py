@@ -19,6 +19,7 @@ from apps.public.journal.feeds import LatestJournalArticlesFeed
 def get_mocked_erudit_object():
     m = unittest.mock.MagicMock()
     m.ordseq = 1
+    m.get_last_published_issue_pid.return_value = "mock-1234"
     return m
 
 
