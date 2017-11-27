@@ -30,25 +30,21 @@
     </a>
   </li>
   {% endif %}
-  {% if can_consult_royalty_reports %}
   <li class="sidenav-item{% if menu_journal == 'royalty_reports' %} active{% endif %}">
     <a href="{% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %}">
       <span class="ion-social-usd-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Redevances" %}</span>
     </a>
   </li>
-  {% endif %}
-  {% if can_manage_account %}
   <li class="sidenav-item{% if menu_journal == 'subscription' %} active{% endif %}">
     <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}">
       <span class="ion-ios-people-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Abonnements" %}</span>
     </a>
   </li>
-  {% endif %}
   <li class="sidenav-item">
     <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous devez vous connecter à un site externe pour accéder à vos rapports statistiques. L’identifiant et le mot de passe correspondent à ceux de votre ancien Espace éditeur sur Érudit.' %}">
-      <a href="https://secur.erudit.org/statusage/awstats.pl?config=www.erudit.org_revue_{{ scope_current_journal.code }}&amp;lang=fr" target="_blank">
+      <a href="https://secur.erudit.org/statusage/index.php" target="_blank">
         <span class="ion-ios-analytics-outline sidenav-icon"></span>
         <span class="sidenav-label">{% trans "Consultations" %}</span>
       </a>

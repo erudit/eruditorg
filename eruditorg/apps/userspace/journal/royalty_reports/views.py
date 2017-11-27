@@ -6,15 +6,14 @@ from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.royalty_reports.models import JournalRoyalty
 
-from ..viewmixins import JournalScopePermissionRequiredMixin
+from ..viewmixins import JournalScopeMixin
 
 
 class JournalRoyaltyListView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, ListView):
     context_object_name = 'reports'
     menu_journal = 'royalty_reports'
     model = JournalRoyalty
-    permission_required = 'royalty_reports.consult_royalty_reports'
     template_name = 'userspace/journal/royalty_reports/list.html'
 
     def get_queryset(self):
