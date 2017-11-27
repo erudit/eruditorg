@@ -160,7 +160,7 @@
           </dt>
           <dd>
             {% for discipline in journal.disciplines.all %}
-            <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines#{{ discipline.code }}">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
+            <a href="{% url 'public:journal:journal_list' %}?sorting=disciplines#{{ discipline.code }}" target="_blank">{{ discipline.name }}</a>{% if not forloop.last %}, {% endif %}
             {% endfor %}
           </dd>
           {% endif %}
