@@ -43,6 +43,13 @@ footer#site-footer {
 
       &.disabled {
         color: $mid-grey;
+
+        a {
+          pointer-events: none;
+          cursor: default;
+          color: $mid-grey;
+        }
+
       }
     }
 
