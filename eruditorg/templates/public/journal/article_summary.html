@@ -3,6 +3,8 @@
 {% load public_journal_tags %}
 {% load cache %}
 
+{% block title %}{% trans 'Notice.' %} {{ block.super }}{% endblock title %}
+
 {% block meta_description %}{% trans 'Notice.' %} {{ block.super }}{% endblock meta_description %}
 
 {% block meta_tags %}
