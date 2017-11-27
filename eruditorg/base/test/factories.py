@@ -20,6 +20,15 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = settings.AUTH_USER_MODEL
 
+    @factory.post_generation
+    def password(self, create, extracted, **kwargs):
+
+        if extracted:
+            self.set_password(extracted)
+        else:
+            self.set_password("default")
+        self.save()
+
 
 class GroupFactory(factory.DjangoModelFactory):
     name = factory.Sequence(lambda n: '{}-{}'.format(str(n), faker.job()))
