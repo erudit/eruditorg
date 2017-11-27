@@ -34,6 +34,11 @@ section_apps_urlpatterns = [
         _(r'^diagnostic/'), include(
             'apps.userspace.library.diagnostic.urls', namespace='diagnostic')
     ),
+    url(
+        _(r'^collection/'), include(
+            'apps.userspace.library.collection.urls', namespace='collection')
+    ),
+
 ]
 
 urlpatterns = [

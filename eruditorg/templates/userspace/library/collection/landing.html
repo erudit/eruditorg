@@ -1,0 +1,45 @@
+{% extends "userspace/library/base.html" %}
+{% load i18n %}
+
+{% block body_id %}connection{% endblock body_id %}
+{% block data_controller %}userspace:library:connection:landing{% endblock data_controller %}
+
+{% block title %}{% trans "Collections" %} {{ block.super }}{% endblock title %}
+
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Collections" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Collections" %}
+{% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
+
+{% block content_main %}
+<section>
+  <h2>{% trans "Notices MARC" %}</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <h2>{% trans "Liste des titres dynamiques" %}</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
+    </div>
+  </div>
+</section>
+{% endblock content_main %}
