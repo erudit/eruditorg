@@ -1,4 +1,4 @@
-{% load base_urls_tags i18n rules static staticfiles %}
+{% load base_urls_tags i18n rules static staticfiles waffle_tags %}
 
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -144,14 +144,19 @@
                   <li>
                     <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a>
                   </li>
+                  {% switch "maintenance" %}
+                  {% else %}
                   <li>
                     <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
                   </li>
                   <li>
                     <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a>
                   </li>
+                  {% endswitch %}
                 </ul>
               </li>
+              {% switch "maintenance" %}
+              {% else %}
               {% if request.user.is_anonymous %}
               <li class="nav-login">
                 <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
@@ -180,6 +185,7 @@
               <li class="nav-about">
                 <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="main-section" title="{% blocktrans %}À propos d'Érudit{% endblocktrans %}">{% trans "À propos" %}</a>
               </li>
+              {% endswitch %}
               <li class="nav-advanced-search">
                 <a href="{% url 'public:search:advanced_search' %}" class="main-section" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
               </li>
@@ -194,12 +200,15 @@
                   {% endfor %}
                 </ul>
               </li>
+              {% switch "maintenance" %}
+              {% else %}
               <li class="nav-my-library">
                 <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
                   <span class="ion-bookmark toolbox-save hidden-xs hidden-sm"></span>
                   <span class="hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
                 </a>
               </li>
+              {% endswitch %}
               <li class="nav-search">
                 <a href="#" data-trigger-search-bar class="search main-section" title="{% trans 'Effectuer une recherche simple' %}"><span class="ion-ios-search-strong"></span></a>
                 <div class="search-form">
@@ -237,6 +246,16 @@
       </div>
     </nav>
 
+    {% switch "maintenance" %}
+    <div class="alert alert-dismissible maintenance">
+      <p>
+        {% blocktrans %}
+        Nous procédons actuellement à des opérations de maintenance. Les services nécessitant un compte usager pourraient ne pas fonctionner comme prévu. Le contenu publié depuis les 24 dernières heures pourrait ne pas être accessible.
+        {% endblocktrans %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </p>
+    </div>
+    {% else %}
     {% block classic_website_fallback %}
     {% if fallback_url %}
     <div class="alert alert-dismissible fallback">
@@ -249,6 +268,7 @@
     </div>
     {% endif %}
     {% endblock classic_website_fallback %}
+    {% endswitch %}
     {% endblock header %}
 
     {% block body %}
@@ -301,7 +321,7 @@
 
               <div class="col-md-6">
                 <ul class="unstyled footer-nav--about">
-                  <li><a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en/{% endif %}" target="_blank">{% trans "À propos" %}</a></li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en/{% endif %}" target="_blank">{% trans "À propos" %}</a></li>
                   <li><a href="{% url 'public:brand_assets' %}">{% trans "Logo et identité" %}</a></li>
                   <li class="disabled">{% trans "Abonnements" %}</li>
                 </ul>
@@ -327,20 +347,20 @@
                 <ul class="unstyled footer-nav--publication-types">
                   <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
                   <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
-                  <li><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans "Livres & actes" %}</a></li>
-                  <li><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans "Livres & actes" %}</a></li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
                 </ul>
               </div>
 
               <div class="col-md-6">
                 <ul class="unstyled footer-nav--help">
-                  <li><a href="https://retro.erudit.org/aide/aide/aide.html" target="_blank">{% trans "Aide" %}</a></li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://retro.erudit.org/aide/aide/aide.html" target="_blank">{% trans "Aide" %}</a></li>
                   <li class="disabled">{% trans "Plan du site" %}</li>
-                  <li><a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/erudit/contact/{% else %}https://apropos.erudit.org/en/erudit-en/contact/{% endif %}" target="_blank">{% trans "Nous contacter" %}</a></li>
-                  <li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/erudit/contact/{% else %}https://apropos.erudit.org/en/erudit-en/contact/{% endif %}" target="_blank">{% trans "Nous contacter" %}</a></li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
                     <a href="http://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank">{% trans 'Salons' %}</a>
                   </li>
-                  <li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
                     <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
                   </li>
                 </ul>
@@ -369,9 +389,12 @@
                 <p>
                   © {% now "Y" %} {% trans "Consortium Érudit" %}
                 </p>
+                {% switch "maintenance" %}
+                {% else %}
                 <p>
                   <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
                 </p>
+                {% endswitch %}
               </div>
 
               <div class="col-sm-6">

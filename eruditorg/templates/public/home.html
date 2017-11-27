@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load static %}
-{% load cache %}
+{% load cache i18n static waffle_tags %}
 
 {% block title %}{% trans "Cultivez votre savoir" %}{% endblock title %}
 
@@ -97,13 +95,13 @@
             <li class="glory--publication-types--item">
               <h3><a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a></h3>
             </li>
-            <li class="glory--publication-types--item disabled">
+            <li class="glory--publication-types--item">
               <h3><a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a></h3>
             </li>
-            <li class="glory--publication-types--item disabled">
+            <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
               <h3><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a></h3>
             </li>
-            <li class="glory--publication-types--item disabled">
+            <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
               <h3><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a></h3>
             </li>
           </ol>
@@ -162,6 +160,8 @@
   </section>
   {% endif %}
 
+  {% switch "maintenance" %}
+  {% else %}
   <!-- NEWS -->
   {% if latest_news %}
   <section class="container news">
@@ -203,6 +203,8 @@
     </div>
   </section>
   {% endif %}
+  {% endswitch %}
+
   <!-- ABOUT ERUDIT.ORG -->
   <section class="container">
     <hr class="section-separator">
