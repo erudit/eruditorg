@@ -31,9 +31,11 @@
     </div>
   </div>
   <div class="row">
-    <a class="btn btn-primary" href="http://retro.erudit.org/documentation/zoneClient/Erudit_pes_Fran%C3%A7ais_190.mrc">MARC 21 (FR)</a>
-    <a class="btn btn-primary" href="http://retro.erudit.org/documentation/zoneClient/Erudit_pes_English_190.mrc">MARC 21 (EN)</a>
-    <a class="btn btn-primary" href="http://retro.erudit.org/documentation/zoneClient/unimarc.xml">UNIMARC</a>
+    <div class="col-md-12">
+      <a class="btn btn-primary" href="https://retro.erudit.org/documentation/zoneClient/Erudit_pes_Fran%C3%A7ais_190.mrc">MARC 21 (FR)</a>
+      <a class="btn btn-primary" href="https://retro.erudit.org/documentation/zoneClient/Erudit_pes_English_190.mrc">MARC 21 (EN)</a>
+      <a class="btn btn-primary" href="https://retro.erudit.org/documentation/zoneClient/unimarc.xml">UNIMARC</a>
+    </div>
   </div>
 </section>
 
@@ -46,5 +48,17 @@
       <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-7">
+      <a class="btn btn-primary" href="https://retro.erudit.org/client/FormHandler?type=service&serviceName=oclc&dataFormat=txt">TXT</a>
+      <a class="btn btn-primary" href="https://retro.erudit.org/client/FormHandler?type=service&serviceName=oclc&dataFormat=csv">CSV</a>
+    </div>
+  </div>
+  <form method="post"c
+  >
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Télécharger"></button>
+  </form>
 </section>
 {% endblock content_main %}
