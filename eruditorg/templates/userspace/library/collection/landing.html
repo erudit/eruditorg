@@ -56,10 +56,10 @@
   <h3>{% trans "Format OCLC" %}</h3>
   <div class="row">
     <p class="col-md-2">
-      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' %}/?format=txt">TXT</a>
+      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' format='txt' %}">TXT</a>
     </p>
     <p class="col-md-2">
-      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' %}/?format=csv">CSV</a>
+      <a class="btn btn-secondary" href="{% url 'userspace:library:collection:oclc' format='csv' %}">CSV</a>
     </p>
   </div>
 

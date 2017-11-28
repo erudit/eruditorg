@@ -6,5 +6,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.CollectionView.as_view(), name='landing'),
-    url(r'oclc', views.CollectionOclcView.as_view(), name='oclc')
+    url(r'oclc/(?P<format>\w+)', views.CollectionOclcView.as_view(), name='oclc')
 ]

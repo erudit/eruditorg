@@ -69,7 +69,7 @@ class CollectionOclcView(
     permission_required = 'subscription.can_consult_organisation_information'
 
     def get(self, request, *args, **kwargs):
-        file_format = request.GET.get('format') or 'txt'
+        file_format = kwargs.get('format') or 'txt'
         params = {'type': 'service', 'serviceName': 'oclc', 'dataFormat': file_format}
         report_url = ERUDIT_OCLC_BACKEND_URL
 
