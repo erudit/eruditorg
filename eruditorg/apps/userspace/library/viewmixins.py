@@ -88,6 +88,7 @@ class OrganisationScopePermissionRequiredMixin(OrganisationScopeMixin, Permissio
     raise_exception = True
 
     def get_context_data(self, **kwargs):
+
         context = super(OrganisationScopePermissionRequiredMixin, self).get_context_data(**kwargs)
         context['library_permission_required'] = self.permission_required
         return context
