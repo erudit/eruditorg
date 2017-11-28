@@ -43,7 +43,7 @@
 
     p {
 
-      a {
+      a:not(.btn) {
         color: #000;
         display: inline-block;
 
