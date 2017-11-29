@@ -20,6 +20,41 @@
   > p + p {
     margin-top: 5px;
   }
+
+  &.fallback {
+
+    p {
+      padding: 1em;
+      font-size: 14px;
+      background-color: $mid-grey;
+      color: #000;
+      line-height: 1;
+      margin: 0;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      z-index: 100;
+      width: 100%;
+    }
+
+    a {
+      color: #000;
+      text-decoration: underline;
+      margin-left: 0.5em;
+    }
+
+    .close {
+      margin-right: 0.5em;
+      font-size: 1.5em;
+      vertical-align: baseline;
+    }
+
+  }
+
+  &.maintenance {
+    @extend .fallback;
+  }
+
 }
 
 .alert-warning {
@@ -40,34 +75,4 @@
     background: $light-grey;
     padding-bottom: 1em;
   }
-}
-
-.fallback {
-
-  p {
-    padding: 1em;
-    font-size: 14px;
-    background-color: $mid-grey;
-    color: #000;
-    line-height: 1;
-    margin: 0;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    z-index: 100;
-    width: 100%;
-  }
-
-  a {
-    color: #000;
-    text-decoration: underline;
-    margin-left: 0.5em;
-  }
-
-  .close {
-    margin-right: 0.5em;
-    font-size: 1.5em;
-    vertical-align: baseline;
-  }
-
 }

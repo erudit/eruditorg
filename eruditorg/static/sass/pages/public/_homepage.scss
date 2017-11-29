@@ -82,13 +82,6 @@
 
     .glory--header {
       margin-bottom: 30px;
-
-      .glory--header--title {
-        span:first-child {
-          display: block;
-          @include fw-sans-bold();
-        }
-      }
     }
 
     .glory--search,
@@ -172,8 +165,11 @@
           &:last-child {
             margin-bottom: 0;
           }
-          &.disabled {
-            color: $mid-grey;
+          &.disabled a {
+            color: $dark-grey;
+            pointer-events: none;
+            cursor: default;
+
           }
           &:before {
             content: counter(a, decimal-leading-zero) '. ';

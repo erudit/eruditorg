@@ -1,7 +1,7 @@
-{% load i18n %}{% load public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n public_journal_tags staticfiles waffle_tags %}<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:v="variables-node" version="2.0">
   <xsl:output method="html" indent="yes" encoding="UTF-8"/>
-  
+
   <!--=========== VARIABLES & PARAMETERS ===========-->
   <!-- possible values for cover - 'no', 'coverpage.jpg', 'no-image' -->
   <xsl:variable name="iderudit" select="article/@idproprio"/>
@@ -203,82 +203,84 @@
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
           <h2>{% trans "Plan de l’article" %}</h2>
           <ul class="unstyled">
+            <li>
+              <a href="#article-header">
+                <em>{% trans "Retour au début" %}</em>
+              </a>
+            </li>
+            <xsl:if test="//resume">
               <li>
-                <a href="#article-header">
-                  <em>{% trans "Retour au début" %}</em>
-                </a>
+                <a href="#resume">{% trans "Résumé" %}</a>
               </li>
-              <xsl:if test="//resume">
+            </xsl:if>
+            {% if content_access_granted and not only_summary %}
+            <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
+              <li class="article-toc--body">
+                <ul class="unstyled">
+                  <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-heading"/>
+                </ul>
+              </li>
+            </xsl:if>
+            {% endif %}
+            {% if article.erudit_object.processing == 'minimal' and article.localidentifier %}
+            <li>
+              <a href="#pdf-viewer">{% trans 'Texte intégral (PDF)' %}</a>
+            </li>
+            {% endif %}
+            <xsl:for-each select="partiesann[1]">
+              {% if content_access_granted and not only_summary %}
+              <xsl:if test="grannexe">
                 <li>
-                  <a href="#resume">{% trans "Résumé" %}</a>
+                  <a href="#grannexe">
+                    <xsl:apply-templates select="grannexe" mode="toc-heading"/>
+                  </a>
                 </li>
               </xsl:if>
-              {% if content_access_granted and not only_summary %}
-              <xsl:if test="//section1/titre[not(@traitementparticulier='oui')]">
-                <li class="article-toc--body">
-                  <ul class="unstyled">
-                    <xsl:apply-templates select="corps/section1/titre[not(@traitementparticulier='oui')]" mode="toc-heading"/>
-                  </ul>
+              <xsl:if test="merci">
+                <li>
+                  <a href="#merci">
+                    <xsl:apply-templates select="merci" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+              <xsl:if test="grnotebio">
+                <li>
+                  <a href="#grnotebio">
+                    <xsl:apply-templates select="grnotebio" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+              <xsl:if test="grnote">
+                <li>
+                  <a href="#grnote">
+                    <xsl:apply-templates select="grnote" mode="toc-heading"/>
+                  </a>
                 </li>
               </xsl:if>
               {% endif %}
-              {% if article.erudit_object.processing == 'minimal' and article.localidentifier %}
+              <xsl:if test="grbiblio">
+                <li>
+                  <a href="#grbiblio">
+                    <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
+                  </a>
+                </li>
+              </xsl:if>
+            </xsl:for-each>
+            {% if content_access_granted and not only_summary %}
+            <xsl:if test="//figure">
               <li>
-                <a href="#pdf-viewer">{% trans 'Texte intégral (PDF)' %}</a>
+                <a href="#figures">{% trans "Liste des figures" %}</a>
               </li>
-              {% endif %}
-              <xsl:for-each select="partiesann[1]">
-                {% if content_access_granted and not only_summary %}
-                <xsl:if test="grannexe">
-                  <li>
-                    <a href="#grannexe">
-                      <xsl:apply-templates select="grannexe" mode="toc-heading"/>
-                    </a>
-                  </li>
-                </xsl:if>
-                <xsl:if test="merci">
-                  <li>
-                    <a href="#merci">
-                      <xsl:apply-templates select="merci" mode="toc-heading"/>
-                    </a>
-                  </li>
-                </xsl:if>
-                <xsl:if test="grnotebio">
-                  <li>
-                    <a href="#grnotebio">
-                      <xsl:apply-templates select="grnotebio" mode="toc-heading"/>
-                    </a>
-                  </li>
-                </xsl:if>
-                <xsl:if test="grnote">
-                  <li>
-                    <a href="#grnote">
-                      <xsl:apply-templates select="grnote" mode="toc-heading"/>
-                    </a>
-                  </li>
-                </xsl:if>
-                {% endif %}
-                <xsl:if test="grbiblio">
-                  <li>
-                    <a href="#grbiblio">
-                      <xsl:apply-templates select="grbiblio" mode="toc-heading"/>
-                    </a>
-                  </li>
-                </xsl:if>
-              </xsl:for-each>
-              {% if content_access_granted and not only_summary %}
-              <xsl:if test="//figure">
-                <li>
-                  <a href="#figures">{% trans "Liste des figures" %}</a>
-                </li>
-              </xsl:if>
-              <xsl:if test="//tableau">
-                <li>
-                  <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
-                </li>
-              </xsl:if>
-              {% endif %}
-            </ul>
+            </xsl:if>
+            <xsl:if test="//tableau">
+              <li>
+                <a href="#tableaux">{% trans "Liste des tableaux" %}</a>
+              </li>
+            </xsl:if>
+            {% endif %}
+          </ul>
+          {% switch "maintenance" %}
+          {% else %}
           <!-- promotional campaign -->
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'Salons. Un éclairage sur la société par les revues savantes.' %}</h2>
@@ -288,6 +290,7 @@
               </div>
             </a>
           </aside>
+          {% endswitch %}
           {% if content_access_granted and subscription_type == 'individual' %}
           <div class="text-center">
             <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
@@ -340,6 +343,8 @@
         <aside class="pull-right hidden-xs hidden-sm toolbox-wrapper">
           <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
           <ul class="unstyled toolbox">
+            {% switch "maintenance" %}
+            {% else %}
             <li>
               <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
@@ -350,6 +355,7 @@
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </a>
             </li>
+            {% endswitch %}
             {% if content_access_granted and pdf_exists %}
             <li>
               <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
