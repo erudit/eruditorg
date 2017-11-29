@@ -24,7 +24,7 @@ LIBRARY_AUTHORIZATIONS = [
 class AuthorizationUserView(
         OrganisationScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationUserView):
     menu_library = 'authorization'
-    permission_required = 'authorization.manage_authorizations'
+    permission_required = 'staff_access'
     template_name = 'userspace/library/authorization/authorization_user.html'
 
     related_authorizations = LIBRARY_AUTHORIZATIONS
@@ -36,7 +36,7 @@ class AuthorizationUserView(
 class AuthorizationCreateView(
         OrganisationScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationCreateView):
     menu_library = 'authorization'
-    permission_required = 'authorization.manage_authorizations'
+    permission_required = 'staff_access'
     template_name = 'userspace/library/authorization/authorization_create.html'
 
     related_authorizations = LIBRARY_AUTHORIZATIONS
@@ -53,7 +53,7 @@ class AuthorizationDeleteView(
         OrganisationScopePermissionRequiredMixin, MenuItemMixin, BaseAuthorizationDeleteView):
     force_scope_switch_to_pattern_name = 'userspace:library:authorization:list'
     menu_library = 'authorization'
-    permission_required = 'authorization.manage_authorizations'
+    permission_required = 'staff_access'
     template_name = 'userspace/library/authorization/authorization_confirm_delete.html'
 
     def get_permission_object(self):
