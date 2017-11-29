@@ -1,5 +1,7 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
+{% load rules %}
+
 
 {% block title %}{% trans "Adresses IP" %} {{ block.super }}{% endblock title %}
 
@@ -20,12 +22,15 @@
 {% endblock section_intro %}
 
 {% block content_main %}
+{% has_perm 'has_staff_access' request.user as has_staff_access %}
 <div class="row">
   <div class="col-md-8">
     <h2>{% trans "Plages d’adresses actives" %}</h2>
   </div>
   <div class="col-md-4 text-right">
+    {% if has_staff_access %}
     <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
+    {% endif %}
   </div>
 </div>
 {% include "userspace/partials/pagination.html" %}
@@ -46,9 +51,11 @@
         <span class="col-sm-3">{{ ip_range.ip_start }}</span>
         <span class="col-sm-3">{{ ip_range.ip_end }}</span>
         <span class="col-sm-3">
+          {% if has_staff_access %}
           <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
             <span class="ion-ios-close table-row-delete"></span>
           </a>
+          {% endif %}
         </span>
       </div>
     </li>
