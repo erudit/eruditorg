@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core import mail
 from django.core.urlresolvers import reverse
 from faker import Factory
+from base.test.factories import UserFactory
 
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import OrganisationFactory
@@ -24,6 +25,7 @@ faker = Factory.create()
 class TestOrganisationMemberListView(BaseEruditTestCase):
     def setUp(self):
         super(TestOrganisationMemberListView, self).setUp()
+        self.user = UserFactory(is_staff=True)
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
@@ -55,7 +57,7 @@ class TestOrganisationMemberListView(BaseEruditTestCase):
             object_id=self.organisation.id, user=self.user,
             authorization_codename=AC.can_manage_organisation_members.codename)
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=self.user.username, password='default')
         url = reverse('userspace:library:members:list', kwargs={
             'organisation_pk': self.organisation.pk, })
 
@@ -70,6 +72,7 @@ class TestOrganisationMemberListView(BaseEruditTestCase):
 class TestOrganisationMemberCreateView(BaseEruditTestCase):
     def setUp(self):
         super(TestOrganisationMemberCreateView, self).setUp()
+
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
@@ -81,7 +84,8 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
         # Setup
-        self.client.login(username='david', password='top_secret')
+        user = UserFactory()
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:members:create', kwargs={
             'organisation_pk': self.organisation.pk})
 
@@ -93,10 +97,7 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
 
     def test_can_create_an_account_action_for_the_member(self):
         # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_members.codename)
+        user = UserFactory(is_staff=True)
 
         post_data = {
             'email': faker.email(),
@@ -104,7 +105,7 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
             'last_name': faker.last_name(),
         }
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:members:create', kwargs={
             'organisation_pk': self.organisation.pk})
 
@@ -123,10 +124,7 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
 
     def test_triggers_the_sending_of_a_notification_email(self):
         # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_members.codename)
+        user = UserFactory(is_staff=True)
 
         post_data = {
             'email': faker.email(),
@@ -134,7 +132,7 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
             'last_name': faker.last_name(),
         }
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:members:create', kwargs={
             'organisation_pk': self.organisation.pk})
 
@@ -159,7 +157,7 @@ class TestOrganisationMemberDeleteView(BaseEruditTestCase):
             start=now_dt - dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
 
-    def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
+    def test_cannot_be_accessed_by_a_user_who_is_not_staff(self):
         # Setup
         user = User.objects.create_user(
             username='foo', email='foo.bar@example.org', password='test_password')
@@ -177,18 +175,15 @@ class TestOrganisationMemberDeleteView(BaseEruditTestCase):
 
     def test_can_properly_remove_a_member(self):
         # Setup
-        user = User.objects.create_user(
-            username='foo', email='foo.bar@example.org', password='test_password')
-        self.organisation.members.add(user)
+        user = UserFactory(is_staff=True)
 
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_members.codename)
+        member = UserFactory()
+        self.organisation.members.add(member)
+        self.organisation.save()
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:members:delete', kwargs={
-            'organisation_pk': self.organisation.pk, 'pk': user.pk, })
+            'organisation_pk': self.organisation.pk, 'pk': member.pk, })
 
         # Run
         response = self.client.post(url, follow=False)
@@ -202,7 +197,6 @@ class TestOrganisationMemberCancelView(BaseEruditTestCase):
     def setUp(self):
         super(TestOrganisationMemberCancelView, self).setUp()
         self.organisation = OrganisationFactory.create()
-        self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
         now_dt = dt.datetime.now()
         JournalAccessSubscriptionPeriodFactory.create(
@@ -210,7 +204,7 @@ class TestOrganisationMemberCancelView(BaseEruditTestCase):
             start=now_dt - dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
 
-    def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
+    def test_cannot_be_accessed_by_a_user_who_is_not_staff(self):
         # Setup
         token = AccountActionTokenFactory.create(content_object=self.organisation)
 
@@ -226,14 +220,11 @@ class TestOrganisationMemberCancelView(BaseEruditTestCase):
 
     def test_can_cancel_an_action_token(self):
         # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_members.codename)
+        user = UserFactory(is_staff=True)
 
         token = AccountActionTokenFactory.create(content_object=self.organisation)
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:members:cancel', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': token.pk, })
 

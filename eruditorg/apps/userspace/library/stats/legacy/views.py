@@ -19,7 +19,7 @@ class StatsLandingView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
 
     menu_library = 'stats'
-    permission_required = 'subscription.access_library_stats'
+    permission_required = 'library.has_access_to_dashboard'
     template_name = 'userspace/library/stats/legacy/landing.html'
     report_base_url = ERUDIT_COUNTER_BACKEND_URL
     counter_jr1_form = CounterJR1Form

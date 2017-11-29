@@ -25,7 +25,7 @@ class OrganisationMemberListView(
     context_object_name = 'members'
     menu_library = 'members'
     paginate_by = 10
-    permission_required = 'staff_access'
+    permission_required = 'userspace.staff_access'
     template_name = 'userspace/library/members/member_list.html'
 
     def get_context_data(self, **kwargs):
@@ -43,7 +43,7 @@ class OrganisationMemberCreateView(
     form_class = OrganisationMembershipTokenCreateForm
     menu_library = 'members'
     model = AccountActionToken
-    permission_required = 'staff_access'
+    permission_required = 'userspace.staff_access'
     template_name = 'userspace/library/members/member_create.html'
 
     def get_form_kwargs(self):
@@ -61,7 +61,7 @@ class OrganisationMemberDeleteView(
     context_object_name = 'member'
     force_scope_switch_to_pattern_name = 'userspace:library:members:list'
     menu_library = 'members'
-    permission_required = 'staff_access'
+    permission_required = 'userspace.staff_access'
     template_name = 'userspace/library/members/member_delete.html'
 
     def delete(self, request, *args, **kwargs):
@@ -84,7 +84,7 @@ class OrganisationMemberCancelView(
     force_scope_switch_to_pattern_name = 'userspace:library:members:list'
     menu_library = 'members'
     model = AccountActionToken
-    permission_required = 'staff_access'
+    permission_required = 'userspace.staff_access'
     template_name = 'userspace/library/members/member_cancel.html'
 
     def get_queryset(self):

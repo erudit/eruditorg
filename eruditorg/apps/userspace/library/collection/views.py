@@ -32,7 +32,7 @@ class CollectionView(
         OrganisationScopePermissionRequiredMixin,
         MenuItemMixin, BaseAuthorizationUserView, FormView):
     menu_library = 'collection'
-    permission_required = 'subscription.can_consult_organisation_information'
+    permission_required = 'library.has_access_to_dashboard'
     template_name = 'userspace/library/collection/landing.html'
     form_class = KBARTForm
 
@@ -66,7 +66,7 @@ class CollectionView(
 
 class CollectionOclcView(
         OrganisationScopePermissionRequiredMixin, BaseAuthorizationUserView):
-    permission_required = 'subscription.can_consult_organisation_information'
+    permission_required = 'library.has_access_to_dashboard'
 
     def get(self, request, *args, **kwargs):
         file_format = kwargs.get('format') or 'txt'

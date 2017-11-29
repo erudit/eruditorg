@@ -23,7 +23,7 @@ class InstitutionIPAddressRangeListView(
     menu_library = 'subscription_ips'
     model = InstitutionIPAddressRange
     paginate_by = 10
-    permission_required = 'subscription.manage_organisation_subscription_ips'
+    permission_required = 'library.has_access_to_dashboard'
     template_name = 'userspace/library/subscription_ips/ipaddressrange_list.html'
 
     def get_queryset(self):
@@ -36,7 +36,7 @@ class InstitutionIPAddressRangeCreateView(
     form_class = InstitutionIPAddressRangeForm
     menu_library = 'subscription_ips'
     model = InstitutionIPAddressRange
-    permission_required = 'staff_access'
+    permission_required = 'userspace.staff_access'
     template_name = 'userspace/library/subscription_ips/ipaddressrange_create.html'
 
     def get_form_kwargs(self):
@@ -60,7 +60,7 @@ class InstitutionIPAddressRangeDeleteView(
     force_scope_switch_to_pattern_name = 'userspace:library:subscription_ips:list'
     menu_library = 'subscription_ips'
     model = InstitutionIPAddressRange
-    permission_required = 'staff_access'
+    permission_required = 'userspace.staff_access'
     template_name = 'userspace/library/subscription_ips/ipaddressrange_delete.html'
 
     def get_queryset(self):

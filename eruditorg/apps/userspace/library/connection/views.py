@@ -11,7 +11,7 @@ from ..viewmixins import OrganisationScopePermissionRequiredMixin
 class ConnectionLandingView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
     menu_library = 'connection'
-    permission_required = 'subscription.access_library_stats'
+    permission_required = 'library.has_access_to_dashboard'
     template_name = 'userspace/library/connection/landing.html'
 
     def get_context_data(self, **kwargs):
