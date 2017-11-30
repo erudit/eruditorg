@@ -31,9 +31,9 @@ class KBARTForm(forms.Form):
     )
 
     typeRevue = forms.ChoiceField(
-        label=_("Type"), widget=forms.Select(), choices=TYPE_CHOICES, required=False
+        label=_("Type de revues"), widget=forms.Select(), choices=TYPE_CHOICES, required=False
     )
 
     access = forms.ChoiceField(
-        label=_("Accès"), widget=forms.Select(), choices=ACCESS_CHOICES, required=False
+        label=_("Mode d’accès"), widget=forms.Select(), choices=ACCESS_CHOICES, required=False
     )
