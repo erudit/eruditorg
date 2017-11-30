@@ -9,3 +9,4 @@ Manuel technique
         site-public/index
         site-public/tester-les-restrictions
         espace-utilisateur/index
+        espace-utilisateur/bibliotheque/index

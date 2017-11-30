@@ -4,8 +4,10 @@
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_organisation as can_manage_authorizations %}
 {% has_perm 'subscription.manage_organisation_subscription_ips' request.user scope_current_organisation as can_manage_organisation_subscription_ips %}
 {% has_perm 'subscription.manage_organisation_subscription_information' request.user scope_current_organisation as can_manage_organisation_subscription_information %}
-{% has_perm 'journal.manage_organisation_members' request.user scope_current_organisation as can_manage_organisation_members %}
-{% has_perm 'userspace.access_library_stats' request.user scope_current_organisation as can_access_library_stats %}
+
+{% has_perm 'library.has_access_to_dashboard' request.user scope_current_organisation as can_access_library_dashboard %}
+{% has_perm 'has_staff_access' request.user as has_staff_access %}
+
 
 <ul>
   <li class="sidenav-item">
@@ -15,7 +17,7 @@
     </a>
   </li>
 
-  {% if can_access_library_stats %}
+  {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'stats' %} active{% endif %}">
     <a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">
       <span class="ion-ios-analytics-outline sidenav-icon"></span>
@@ -24,7 +26,7 @@
   </li>
   {% endif %}
 
-  {% if can_manage_organisation_subscription_ips %}
+  {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'subscription_ips' %} active{% endif %}">
     <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}">
       <span class="ion-ios-location-outline sidenav-icon"></span>
@@ -40,7 +42,7 @@
     </a>
   </li>
 
-  {% if can_manage_organisation_subscription_information %}
+  {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'subscription_information' %} active{% endif %}">
     <a href="{% url 'userspace:library:subscription_information:update' organisation_pk=scope_current_organisation.pk %}">
       <span class="ion-ios-cloud-upload-outline sidenav-icon"></span>
@@ -56,7 +58,7 @@
     </a>
   </li>
 
-  {% if can_manage_authorizations %}
+  {% if has_staff_access %}
   <li class="sidenav-item{% if menu_library == 'authorization' %} active{% endif %}">
     <a href="{% url 'userspace:library:authorization:list' organisation_pk=scope_current_organisation.pk %}">
       <span class="ion-ios-locked-outline sidenav-icon"></span>
@@ -65,7 +67,7 @@
   </li>
   {% endif %}
 
-  {% if can_manage_organisation_members %}
+  {% if has_staff_access %}
   <li class="sidenav-item{% if menu_library == 'members' %} active{% endif %}">
     <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">
       <span class="ion-ios-people-outline sidenav-icon"></span>

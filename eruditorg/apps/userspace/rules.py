@@ -26,3 +26,10 @@ rules.add_perm(
         )
     ),
 )
+
+rules.add_perm(
+    'userspace.staff_access',
+    is_authenticated & (
+        is_superuser | is_staff
+    ),
+)

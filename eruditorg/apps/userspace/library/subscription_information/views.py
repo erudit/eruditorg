@@ -17,7 +17,7 @@ class SubscriptionInformationUpdateView(
         LoginRequiredMixin, OrganisationScopePermissionRequiredMixin, MenuItemMixin, FormView):
     form_class = SubscriptionInformationForm
     menu_library = 'subscription_information'
-    permission_required = 'subscription.manage_organisation_subscription_information'
+    permission_required = 'library.has_access_to_dashboard'
     template_name = 'userspace/library/subscription_information/update.html'
 
     def get_form_kwargs(self):

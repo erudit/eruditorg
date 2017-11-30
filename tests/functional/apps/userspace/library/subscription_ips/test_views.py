@@ -5,6 +5,7 @@ import datetime as dt
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
+from base.test.factories import UserFactory
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import OrganisationFactory
 
@@ -20,6 +21,8 @@ class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
     def setUp(self):
         super(TestInstitutionIPAddressRangeListView, self).setUp()
         self.organisation = OrganisationFactory.create()
+        self.user.is_staff = True
+        self.user.save()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
         now_dt = dt.datetime.now()
@@ -28,10 +31,10 @@ class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
             start=now_dt - dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
 
-    def test_cannot_be_accessed_by_a_user_who_cannot_manage_subscriptions_ips(self):
+    def test_cannot_be_accessed_by_a_user_who_is_not_in_the_organisation(self):
         # Setup
-        self.organisation.members.clear()
-        self.client.login(username='david', password='top_secret')
+        user = UserFactory()
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:subscription_ips:list', kwargs={
             'organisation_pk': self.organisation.pk, })
 
@@ -93,12 +96,9 @@ class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
 
     def test_can_create_an_ip_range(self):
         # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_subscription_ips.codename)
+        user = UserFactory(is_staff=True)
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:subscription_ips:create', kwargs={
             'organisation_pk': self.organisation.pk, })
 
@@ -147,12 +147,9 @@ class TestInstitutionIPAddressRangeDeleteView(BaseEruditTestCase):
 
     def test_can_properly_delete_an_ip_range(self):
         # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
-            authorization_codename=AC.can_manage_organisation_subscription_ips.codename)
+        user = UserFactory(is_staff=True)
 
-        self.client.login(username='david', password='top_secret')
+        self.client.login(username=user.username, password='default')
         url = reverse('userspace:library:subscription_ips:delete', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': self.ip_range.pk, })
 

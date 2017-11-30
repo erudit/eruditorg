@@ -9,7 +9,7 @@ from .predicates import is_organisation_member
 
 
 rules.add_perm(
-    'subscription.can_consult_organisation_information',
+    'library.has_access_to_dashboard',
     is_authenticated & (
         is_superuser | is_staff | is_organisation_member
     ),
