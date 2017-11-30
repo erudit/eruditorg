@@ -18,5 +18,10 @@ Les restrictions sont importées avec la commande suivante:
 
   python manage.py import_restrictions
 
+Accès au tableau de bord
+------------------------
 
+Un utilisateur a accès au tableau de bord bibliothèques si:
 
+1. Il est membre de l':py:class:`Organisation` (la bibliothèque).
+2. L'organisation a un abonnement actif.
