@@ -27,36 +27,36 @@
   <div class="col-md-8">
     <h2>{% trans "Plages d’adresses actives" %}</h2>
   </div>
+  {% if has_staff_access %}
   <div class="col-md-4 text-right">
-    {% if has_staff_access %}
     <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
-    {% endif %}
   </div>
+  {% endif %}
 </div>
 {% include "userspace/partials/pagination.html" %}
 <div class="table">
   <ul class="table-header">
     <li class="row">
-      <span class="col-sm-3">{% trans "Titre" %}</span>
+      <span class="{% if has_staff_access %}col-sm-3{% else %}col-sm-6{% endif %}">{% trans "Titre" %}</span>
       <span class="col-sm-3">{% trans "Début" %}</span>
       <span class="col-sm-3">{% trans "Fin" %}</span>
-      <span class="col-sm-3">{% trans "Supprimer" %}</span>
+      {% if has_staff_access %}<span class="col-sm-3">{% trans "Supprimer" %}</span>{% endif %}
     </li>
   </ul>
   <ul class="table-body">
     {% for ip_range in subscription_ip_ranges %}
     <li class="table-row-wrapper">
       <div class="row table-row">
-        <span class="col-sm-3">{{ ip_range.subscription }}</span>
+        <span class="{% if has_staff_access %}col-sm-3{% else %}col-sm-6{% endif %}">{{ ip_range.subscription }}</span>
         <span class="col-sm-3">{{ ip_range.ip_start }}</span>
         <span class="col-sm-3">{{ ip_range.ip_end }}</span>
+        {% if has_staff_access %}
         <span class="col-sm-3">
-          {% if has_staff_access %}
           <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
             <span class="ion-ios-close table-row-delete"></span>
           </a>
-          {% endif %}
         </span>
+        {% endif %}
       </div>
     </li>
     {% endfor %}
