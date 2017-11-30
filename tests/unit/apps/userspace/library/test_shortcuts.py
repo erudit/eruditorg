@@ -11,7 +11,27 @@ from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
-from apps.userspace.library.shortcuts import get_managed_organisations
+from apps.userspace.library.shortcuts import get_managed_organisations, get_last_valid_subscription
+
+
+@pytest.mark.django_db
+class TestGetLastValidSubscriptionShortcut(object):
+
+    def test_can_return_the_last_valid_subscription(self):
+        organisation = OrganisationFactory()
+        subscription = JournalAccessSubscriptionFactory(organisation=organisation, post__valid=True)
+        assert get_last_valid_subscription(organisation) == subscription
+
+    def test_can_return_the_last_invalid_subscription(self):
+        organisation = OrganisationFactory()
+        subscription = JournalAccessSubscriptionFactory(organisation=organisation)
+        assert get_last_valid_subscription(organisation) == subscription
+
+    def test_can_return_the_last_valid_subscription_even_if_an_invalid_one_is_more_recent(self):
+        organisation = OrganisationFactory()
+        valid_subscription = JournalAccessSubscriptionFactory(organisation=organisation, post__valid=True)
+        invalid_subscription = JournalAccessSubscriptionFactory(organisation=organisation)
+        assert get_last_valid_subscription(organisation) == valid_subscription
 
 
 class TestGetManagedOrganisationsShortcut(BaseEruditTestCase):

@@ -1,8 +1,37 @@
 # -*- coding: utf-8 -*-
 
 
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod
 from erudit.models import Organisation
+
+
+def get_last_year_of_subscription(organisation):
+    if not organisation:
+        raise ValueError("Organisation is required")
+    period = JournalAccessSubscriptionPeriod.objects.filter(
+        subscription__organisation=organisation
+    ).order_by("-end").first()
+
+    if not period:
+        return None
+
+    return int(period.end.strftime("%Y"))
+
+
+def get_last_valid_subscription(organisation):
+    """ :returns: the last valid subscription of the organisation """
+    subscription = JournalAccessSubscription.valid_objects.filter(
+        organisation=organisation,
+    ).order_by('-journalaccesssubscriptionperiod__end').first()
+
+    if subscription:
+        return subscription
+
+    subscription = JournalAccessSubscription.objects.filter(
+        organisation=organisation,
+    ).order_by('-journalaccesssubscriptionperiod__end').first()
+
+    return subscription
 
 
 def get_managed_organisations(user):
