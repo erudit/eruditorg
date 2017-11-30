@@ -56,3 +56,5 @@ requests==2.18.4
 requests[socks]
 django-waffle==0.12.0
 structlog==17.2.0
+django-redis==4.7.0
+redis==2.10.5
