@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import pytest
 import datetime as dt
 
 from django.contrib.auth.models import AnonymousUser
@@ -34,13 +34,14 @@ class TestGetLastValidSubscriptionShortcut(object):
         assert get_last_valid_subscription(organisation) == valid_subscription
 
 
-class TestGetManagedOrganisationsShortcut(BaseEruditTestCase):
+@pytest.mark.django_db
+class TestGetManagedOrganisationsShortcut(object):
     def test_cannot_return_managed_organisations_for_anonymous_users(self):
         # Setup
         OrganisationFactory.create()
         user = AnonymousUser()
         # Run & check
-        self.assertIsNone(get_managed_organisations(user))
+        assert get_managed_organisations(user) is None
 
     def test_return_all_organisations_for_superusers_and_staff_users(self):
         # Setup
@@ -49,8 +50,8 @@ class TestGetManagedOrganisationsShortcut(BaseEruditTestCase):
         user_1 = UserFactory.create(is_superuser=True)
         user_2 = UserFactory.create(is_staff=True)
         # Run & check
-        self.assertEqual(list(get_managed_organisations(user_1)), [org_1, org_2, ])
-        self.assertEqual(list(get_managed_organisations(user_2)), [org_1, org_2, ])
+        assert list(get_managed_organisations(user_1)) == [org_1, org_2, ]
+        assert list(get_managed_organisations(user_2)) == [org_1, org_2, ]
 
     def test_can_return_only_organisations_that_are_associated_with_a_subscription(self):
         # Setup
@@ -61,7 +62,7 @@ class TestGetManagedOrganisationsShortcut(BaseEruditTestCase):
         org_2.members.add(user)
         JournalAccessSubscriptionFactory.create(organisation=org_1)
         # Run & check
-        self.assertEqual(list(get_managed_organisations(user)), [org_1, ])
+        assert list(get_managed_organisations(user)) == [org_1, ]
 
     def test_can_return_only_organisations_that_have_the_considered_users_in_their_members(self):
         # Setup
@@ -87,4 +88,4 @@ class TestGetManagedOrganisationsShortcut(BaseEruditTestCase):
             start=now_dt - dt.timedelta(days=10),
             end=now_dt + dt.timedelta(days=8))
         # Run & check
-        self.assertEqual(list(get_managed_organisations(user)), [org_1, ])
+        assert list(get_managed_organisations(user)) == [org_1, ]
