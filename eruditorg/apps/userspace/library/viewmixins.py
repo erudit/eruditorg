@@ -8,6 +8,7 @@ from django.utils.functional import cached_property
 from rules.contrib.views import PermissionRequiredMixin
 
 from erudit.models import Organisation
+from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod
 
 from .shortcuts import get_managed_organisations
 
@@ -30,9 +31,21 @@ class OrganisationScopeMixin(object):
     def get_context_data(self, **kwargs):
         context = super(OrganisationScopeMixin, self).get_context_data(**kwargs)
         context['scope_current_organisation'] = self.current_organisation
+        context['last_year_of_subscription'] = self.get_last_year_of_subscription()
         context['scope_user_organisations'] = self.user_organisations
         context['force_scope_switch_to_pattern_name'] = self.force_scope_switch_to_pattern_name
         return context
+
+    def get_last_year_of_subscription(self):
+
+        period = JournalAccessSubscriptionPeriod.objects.filter(
+            subscription__organisation=self.current_organisation
+        ).order_by("-end").first()
+
+        if not period:
+            return None
+
+        return int(period.end.strftime("%Y"))
 
     def get_user_organisations(self):
         """ Returns the organisations that can be accessed by the current user. """
