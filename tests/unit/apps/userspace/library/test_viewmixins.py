@@ -103,6 +103,26 @@ class TestOrganisationScopeMixin(BaseEruditTestCase):
             reverse('userspace:library:authorization:list',
                     kwargs={'organisation_pk': self.organisation.pk}))
 
+    def tests_adds_subscription_status_to_the_context(self):
+        url = reverse('userspace:library:home', kwargs = {'organisation_pk': self.organisation.pk})
+        request = self.get_request(url)
+        my_view = MyView.as_view()
+
+        # Run
+        response = my_view(request, organisation_pk=self.organisation.pk)
+        assert response.status_code == 200
+        assert response.context_data['has_active_subscription'] is True
+
+        organisation = OrganisationFactory()
+        organisation.members.add(self.user)
+        organisation.save()
+        JournalAccessSubscriptionFactory(organisation=organisation)
+
+        # Run
+        response = my_view(request, organisation_pk=organisation.pk)
+        assert response.status_code == 200
+        assert response.context_data['has_active_subscription'] is False
+
     def test_returns_a_403_error_if_no_organisation_can_be_associated_with_the_current_user(self):
         # Setup
         class MyView(OrganisationScopeMixin, TemplateView):

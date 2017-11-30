@@ -31,6 +31,9 @@ class OrganisationScopeMixin(object):
     def get_context_data(self, **kwargs):
         context = super(OrganisationScopeMixin, self).get_context_data(**kwargs)
         context['scope_current_organisation'] = self.current_organisation
+        context['has_active_subscription'] = JournalAccessSubscription.valid_objects.filter(
+            organisation=self.current_organisation
+        ).exists()
         context['last_year_of_subscription'] = self.get_last_year_of_subscription()
         context['scope_user_organisations'] = self.user_organisations
         context['force_scope_switch_to_pattern_name'] = self.force_scope_switch_to_pattern_name
@@ -77,6 +80,7 @@ class OrganisationScopeMixin(object):
                 organisation = user_organisations_qs.first()
 
         # Returns a 403 error if the user is not a member of the organisation
+
         if organisation is None or not self.user_organisations.filter(id=organisation.id).exists():
             raise PermissionDenied
 
