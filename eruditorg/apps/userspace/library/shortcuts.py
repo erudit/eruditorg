@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
 
 from core.subscription.models import JournalAccessSubscription
 from erudit.models import Organisation
@@ -20,10 +19,5 @@ def get_managed_organisations(user):
         organisations = user.organisations.all()
 
     # Keeps only organisation whose subscription is valid for the current date.
-    nowd = dt.datetime.now().date()
-    valid_subscriptions = JournalAccessSubscription.objects.filter(
-        organisation__in=organisations, journalaccesssubscriptionperiod__start__lte=nowd,
-        journalaccesssubscriptionperiod__end__gte=nowd)
-    subscribed_organisation_ids = valid_subscriptions.values_list('organisation_id', flat=True)
 
-    return organisations.filter(id__in=subscribed_organisation_ids)
+    return organisations.exclude(journalaccesssubscription=None)

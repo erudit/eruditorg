@@ -32,27 +32,14 @@ class TestGetManagedOrganisationsShortcut(BaseEruditTestCase):
         self.assertEqual(list(get_managed_organisations(user_1)), [org_1, org_2, ])
         self.assertEqual(list(get_managed_organisations(user_2)), [org_1, org_2, ])
 
-    def test_can_return_only_organisations_that_are_associated_with_a_valid_subscription(self):
+    def test_can_return_only_organisations_that_are_associated_with_a_subscription(self):
         # Setup
         org_1 = OrganisationFactory.create()
         org_2 = OrganisationFactory.create()
-        org_3 = OrganisationFactory.create()
         user = UserFactory.create()
         org_1.members.add(user)
         org_2.members.add(user)
-        org_3.members.add(user)
-        subscription_1 = JournalAccessSubscriptionFactory.create(organisation=org_1)
-        subscription_2 = JournalAccessSubscriptionFactory.create(organisation=org_2)
-        JournalAccessSubscriptionFactory.create(organisation=org_3)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_1,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_2,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt - dt.timedelta(days=8))
+        JournalAccessSubscriptionFactory.create(organisation=org_1)
         # Run & check
         self.assertEqual(list(get_managed_organisations(user)), [org_1, ])
 
