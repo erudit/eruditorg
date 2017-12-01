@@ -28,6 +28,7 @@
 {% endblock %}
 
 {% block content_main %}
+{% if last_valid_subscription %}
 <div>
 
   <ul class="nav-tabs" role="tablist">
@@ -200,5 +201,12 @@
   </div>
 
 </div>
+{% else %}
+<section>
+  <div class="glory">
+    {% blocktrans %}Vous n'avez jamais été abonné à la plateforme érudit{% endblocktrans %}
+  </div>
+</section>
+{% endif %}
 
 {% endblock content_main %}
