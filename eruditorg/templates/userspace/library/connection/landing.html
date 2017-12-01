@@ -16,9 +16,7 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+<p>Vous trouverez dans cette section les paramètres de connexion nécessaires à la configuration de vos outils pour l’utilisation des protocoles SUSHI et Z39.50&nbsp;/ SRU/SRW en lien avec les ressources d’Érudit.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
@@ -27,7 +25,7 @@
   <h2>{% trans "SUSHI" %}</h2>
   <div class="row">
     <div class="col-md-7">
-      <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
+      <p>{% trans "Le protocole SUSHI vous permet d’automatiser la collecte de vos statistiques de consultation COUNTER. Utilisez les paramètres de connexion ci-dessous pour récupérer les statistiques de consultation de votre établissement sur la plateforme Érudit." %}</p>
     </div>
   </div>
 
@@ -78,7 +76,7 @@
   <h2>{% trans "Z39.50&nbsp;/ SRU/SRW" %}</h2>
   <div class="row">
     <div class="col-md-7">
-      <p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus.</p>
+      <p>{% trans "Utilisez les paramètres de connexion ci-dessous pour interroger notre moteur de recherche via le protocole Z39.50. Nous supportons actuellement les requêtes dans les 7 champs suivants&nbsp;: titre, sujet, auteur, éditeur, année de publication, ISBN, ISSN (ISSN papier seulement)." %}</p>
     </div>
   </div>
 

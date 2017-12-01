@@ -14,11 +14,17 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<p>Cette section affiche le logo associé à votre bibliothèque le cas échéant, qui apparaît sous la mention <em>«&nbsp;Votre accès est offert par&nbsp;»</em> chaque fois qu’un de vos usagers se connecte à notre plateforme via votre réseau informatique.</p>
 
-<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+<p>Pour mettre à jour ce logo, téléversez un nouveau fichier ci-dessous. </p>
 {% endblocktrans %}
 {% endblock section_intro %}
+
+{% block section_aside %}
+{% blocktrans %}
+<p>Le badge ne doit pas excéder <strong>140x140 pixels</strong> et sera automatiquement redimensionné dans le cas contraire. Les formats acceptés sont <strong>PNG, JPG ou GIF</strong>.</p>
+{% endblocktrans %}
+{% endblock %}
 
 {% block content_main %}
 <h2>{% trans "Mise à jour de votre badge" %}</h2>
@@ -38,7 +44,6 @@
       <p><img src="{{ scope_current_organisation.badge.url }}" alt="{{ organisation.name }}" /><br /></p>
       {% endif %}
       {{ form.badge }}
-      <p class="help-block">{{ form.badge.help_text }}</p>
       {% for error in form.badge.errors %}<p class="error">{{ error }}</p>{% endfor %}
     </div>
   </div>

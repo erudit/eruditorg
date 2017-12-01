@@ -15,11 +15,15 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-<p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+<p>Vous trouverez ci-dessous les plages d’adresses IP actuellement enregistrées pour votre établissement et qui permettent à vos usagers d’accéder aux revues souscrites.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
+
+{% block section_aside %}
+{% blocktrans with organisation=scope_current_organisation.name %}
+<p>Pour nous faire part de changements dans ces adresses IP, merci de communiquer avec nous à <a href="mailto:client@erudit.org?subject=Changement%20d’adresses%20IP%20–%20{{ organisation }}">client@erudit.org</a>.</p>
+{% endblocktrans %}
+{% endblock %}
 
 {% block content_main %}
 {% has_perm 'has_staff_access' request.user as has_staff_access %}

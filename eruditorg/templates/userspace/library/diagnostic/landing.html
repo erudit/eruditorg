@@ -15,8 +15,8 @@
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
-<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+{% blocktrans with organisation=scope_current_organisation.name %}
+<p>Cette section met à votre disposition des outils qui vous seront utiles si vous rencontrez des difficultés d’accès. Merci de partager avec nous les informations recueillies par courriel à l’adresse <a href="mailto:client@erudit.org?subject=Diagnostic%20–%20{{ organisation }}">client@erudit.org</a> afin de nous aider à résoudre la situation.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
@@ -25,7 +25,12 @@
   <h2>{% trans "Votre connexion" %}</h2>
   <div class="row">
     <div class="col-md-7">
-      <p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+      {% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk as ip_address_url %}
+      {% blocktrans with organisation=scope_current_organisation.name %}
+      <p>Les informations ci-dessous permettront de confirmer que l’adresse IP que vous utilisez lorsque vous rencontrez des difficultés d’accès est bien enregistrée dans votre profil.</p>
+
+      <p>Vous pouvez également consulter la section <em><a href="{{ ip_address_url }}">Adresses IP</a></em> pour voir la liste complète des adresses enregistrées pour votre établissement. Si ces informations sont incorrectes ou incomplètes, merci de communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Diagnostic%20–%20Adresses%20IP%20–%20{{ organisation }}">client@erudit.org</a>.</p>
+      {% endblocktrans %}
     </div>
   </div>
 
@@ -55,7 +60,11 @@
   <h2>{% trans "Vos abonnements" %} ({{ journals|length }} {% trans "revues" %})</h2>
   <div class="row">
     <div class="col-md-7">
-      <p>Proin ornare pretium sem, ac vulputate orci convallis eget. Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+      {% blocktrans with organisation=scope_current_organisation.name %}
+      <p>Vous trouverez ci-dessous la liste des titres pour lesquels votre établissement détient un accès actif pour l’année en cours.</p>
+
+      <p>Si les informations affichées diffèrent de celles dont vous disposez, merci de communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Diagnostic%20–%20Informations%20d’abonnements%20–%20{{ organisation }}">client@erudit.org</a>.</p>
+      {% endblocktrans %}
     </div>
   </div>
 

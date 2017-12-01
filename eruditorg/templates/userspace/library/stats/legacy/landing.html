@@ -16,14 +16,15 @@
 
 {% block section_intro %}
 {% blocktrans %}
-<p>Vestibulum pharetra velit eu mattis sodales. Sed tellus nulla, interdum vitae urna ac, maximus dignissim tellus. Quisque sed dolor scelerisque, efficitur risus nec, porta diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-<p><a href="#">Test link</a>. Proin ornare pretium sem, <em>ac vulputate orci convallis eget.</em> Vestibulum pretium turpis eget vehicula mollis. Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+<p>Cette section vous donne accès aux statistiques de consultation de votre établissement pour les différentes revues souscrites. Les rapports disponibles respectent la norme COUNTER (R4), et nous mettons à votre disposition les rapports JR1 et JR1 GOA, aux formats CSV, XML ou HTML, par année d’abonnement ou pour la période de votre choix.</p>
 {% endblocktrans %}
 {% endblock section_intro %}
 
 {% block section_aside %}
-<p><a href="#">Test link</a>. Proin ornare pretium sem, ac vulputate orci convallis eget. <em>Vestibulum pretium turpis eget vehicula mollis.</em> Maecenas et nunc at libero mattis consectetur ut a nibh.</p>
+{% blocktrans %}
+<p>Notez que les revues du fonds <strong>Centre for Digital Scholarship</strong> ne sont pas incluses dans ces rapports, car elles ne sont pas hébergées sur nos serveurs&nbsp;; il nous est impossible de compiler ces statistiques de consultation.</p>
+<p>Consultez <a href="https://www.erudit.org/fr/revues/?collections=unb" target="_blank" title="Voir la liste des revues Centre for Digital Scholarship">la liste des titres concernés ici</a>.</p>
+{% endblocktrans %}
 {% endblock %}
 
 {% block content_main %}
@@ -39,7 +40,7 @@
       <h2>{% trans "COUNTER" %} <br> {% trans "Journal Report 1 (R4)" %}</h2>
       <div class="row">
         <div class="col-md-7">
-          <p>Number of Successful Full-Text Articles by Month and Journal</p>
+          <p>{% trans "Nombre de requêtes réussies d’articles en texte intégral par mois et par revue" %}</p>
         </div>
       </div>
       {% for error in counter_jr1_form.errors.values %}
@@ -117,10 +118,10 @@
     </section>
 
     <section role="tabpanel" class="tab-pane" id="jr1-goa">
-      <h2>{% trans "COUNTER" %} <br> {% trans "Journal Report 1 (R4) GOA" %}</h2>
+      <h2>{% trans "COUNTER" %} <br> {% trans "Journal Report 1 GOA (R4)" %}</h2>
       <div class="row">
         <div class="col-md-7">
-          <p>Number of Successful Gold Open Access Full-text Article Requests by Month and Journal</p>
+          <p>{% trans "Nombre de requêtes réussies d’articles en libre accès en texte intégral par mois et par revue" %}</p>
         </div>
       </div>
 
