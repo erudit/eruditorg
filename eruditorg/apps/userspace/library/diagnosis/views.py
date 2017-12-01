@@ -28,7 +28,7 @@ class DiagnosisLandingView(
             context['journals'] = tuple()
 
         context['date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        context['client_ip'] = self.request.META.get('REMOTE_ADDR')
+        context['client_ip'] = self.request.META.get('HTTP_CLIENT_IP')
         context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
         context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
         context['identifier'] = self.current_organisation.legacyorganisationprofile.account_id
