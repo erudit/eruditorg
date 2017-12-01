@@ -38,6 +38,12 @@ class OrganisationScopeMixin(object):
         context['has_active_subscription'] = JournalAccessSubscription.valid_objects.filter(
             organisation=self.current_organisation
         ).exists()
+        try:
+            context['has_legacy_profile'] = True if \
+                self.current_organisation.legacyorganisationprofile else False
+        except:  # noqa
+            context['has_legacy_profile'] = False
+
         context['last_valid_subscription'] = get_last_valid_subscription(self.current_organisation)
         context['last_year_of_subscription'] = get_last_year_of_subscription(
             self.current_organisation

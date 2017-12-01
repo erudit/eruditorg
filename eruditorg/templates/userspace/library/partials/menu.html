@@ -51,12 +51,14 @@
   </li>
   {% endif %}
 
+  {% if can_access_library_dashboard and has_legacy_profile %}
   <li class="sidenav-item{% if menu_library == 'connection' %} active{% endif %}">
     <a href="{% url 'userspace:library:connection:landing' %}">
       <span class="ion-ios-cog-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Paramètres de connexion" %}</span>
     </a>
   </li>
+  {% endif %}
 
   {% if has_staff_access %}
   <li class="sidenav-item{% if menu_library == 'authorization' %} active{% endif %}">
@@ -76,11 +78,13 @@
   </li>
   {% endif %}
 
+  {% if can_access_library_dashboard and has_legacy_profile %}
   <li class="sidenav-item{% if menu_library == 'diagnosis' %} active{% endif %}">
     <a href="{% url 'userspace:library:diagnosis:landing' %}">
       <span class="ion-ios-medkit-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Diagnostic" %}</span>
     </a>
   </li>
+  {% endif %}
 
 </ul>
