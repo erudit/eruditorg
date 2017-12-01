@@ -31,8 +31,8 @@ section_apps_urlpatterns = [
             'apps.userspace.library.connection.urls', namespace='connection')
     ),
     url(
-        _(r'^diagnostic/'), include(
-            'apps.userspace.library.diagnostic.urls', namespace='diagnostic')
+        _(r'^diagnosis/'), include(
+            'apps.userspace.library.diagnosis.urls', namespace='diagnosis')
     ),
     url(
         _(r'^collection/'), include(

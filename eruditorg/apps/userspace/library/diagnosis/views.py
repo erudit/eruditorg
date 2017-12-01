@@ -10,7 +10,7 @@ from core.subscription.models import JournalAccessSubscription
 from ..viewmixins import OrganisationScopePermissionRequiredMixin
 
 
-class DiagnosticLandingView(
+class DiagnosisLandingView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
     menu_library = 'diagnosis'
     permission_required = 'library.has_access_to_dashboard'
