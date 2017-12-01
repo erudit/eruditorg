@@ -45,13 +45,21 @@ class StatsLandingView(
         context['requested_report'] = self.get_requested_report()
         if context['requested_report'] == 'counter-jr1':
             context['counter_jr1_form'] = self.counter_jr1_form(data=self.request.GET)
-            context['counter_jr1goa_form'] = self.counter_jr1goa_form()
+            context['counter_jr1goa_form'] = self.counter_jr1goa_form(
+                organisation=self.current_organisation
+            )
         elif context['requested_report'] == 'counter-jr1-goa':
-            context['counter_jr1_form'] = self.counter_jr1_form()
+            context['counter_jr1_form'] = self.counter_jr1_form(
+                organisation=self.current_organisation
+            )
             context['counter_jr1goa_form'] = self.counter_jr1goa_form(data=self.request.GET)
         else:
-            context['counter_jr1_form'] = self.counter_jr1_form()
-            context['counter_jr1goa_form'] = self.counter_jr1goa_form()
+            context['counter_jr1_form'] = self.counter_jr1_form(
+                organisation=self.current_organisation
+            )
+            context['counter_jr1goa_form'] = self.counter_jr1goa_form(
+                organisation=self.current_organisation
+            )
         return context
 
     def get_requested_report(self):
