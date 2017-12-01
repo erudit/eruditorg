@@ -183,8 +183,8 @@ class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
     subscription = models.ForeignKey(JournalAccessSubscription, verbose_name=_('Abonnement'))
 
     class Meta:
-        verbose_name = _("Période d'abonnement aux revues")
-        verbose_name_plural = _("Périodes d'abonnement aux revues")
+        verbose_name = _("Période d’abonnement aux revues")
+        verbose_name_plural = _("Périodes d’abonnement aux revues")
 
 
 class InstitutionReferer(models.Model):
@@ -201,8 +201,8 @@ class InstitutionIPAddressRange(models.Model):
     ip_end = models.GenericIPAddressField(verbose_name=_('Adresse IP de fin'))
 
     class Meta:
-        verbose_name = _('Plage d\'adresses IP d\'institution')
-        verbose_name_plural = _('Plages d\'adresses IP d\'institution')
+        verbose_name = _('Plage d’adresses IP d’institution')
+        verbose_name_plural = _('Plages d’adresses IP d’institution')
 
     def __str__(self):
         return '{institution} / {start} - {end}'.format(
@@ -214,15 +214,15 @@ class InstitutionIPAddressRange(models.Model):
             start = ipaddress.ip_address(self.ip_start)
         except ValueError:
             raise ValidationError(_(
-                '{0} n\'est pas une adresse IP valide').format(self.ip_start))
+                '{0} n’est pas une adresse IP valide').format(self.ip_start))
         try:
             end = ipaddress.ip_address(self.ip_end)
         except ValueError:
             raise ValidationError(_(
-                '{0} n\'est pas une adresse IP valide').format(self.ip_end))
+                '{0} n’est pas une adresse IP valide').format(self.ip_end))
         if start > end:
             raise ValidationError(_(
-                'L\'adresse IP de début doit être inférieure à l\'adresse IP de fin'))
+                'L’adresse IP de début doit être inférieure à l’adresse IP de fin'))
 
     @property
     def ip_addresses(self):
@@ -272,17 +272,17 @@ class JournalManagementPlan(models.Model):
     code = models.SlugField(max_length=100, unique=True, verbose_name=_('Code'))
     max_accounts = models.PositiveSmallIntegerField(
         verbose_name=_('Nombre de comptes'),
-        help_text=_("Nombre maximal de comptes que ce forfait permet d'abonner")
+        help_text=_("Nombre maximal de comptes que ce forfait permet d’abonner")
     )
     is_unlimited = models.BooleanField(
         default=False,
         verbose_name=_('Illimité'),
-        help_text=_("Cocher si ce forfait d'abonnements individuels permet d'abonner un nombre illimité d'individus")  # noqa
+        help_text=_("Cocher si ce forfait d’abonnements individuels permet d’abonner un nombre illimité d’individus")  # noqa
     )
 
     class Meta:
-        verbose_name = _("Forfait d'abonnements individuels")
-        verbose_name_plural = _("Forfaits d'abonnements individuels")
+        verbose_name = _("Forfait d’abonnements individuels")
+        verbose_name_plural = _("Forfaits d’abonnements individuels")
 
     def __str__(self):
         return self.code if not self.title else self.title
@@ -293,5 +293,5 @@ class JournalManagementSubscriptionPeriod(AbstractSubscriptionPeriod):
     subscription = models.ForeignKey(JournalManagementSubscription, verbose_name=_('Abonnement'))
 
     class Meta:
-        verbose_name = _("Période d'abonnement de aux forfaits d'abonnements individuels")
-        verbose_name_plural = _("Périodes d'abonnement aux forfaits d'abonnements individuels")
+        verbose_name = _("Période d’abonnement aux forfaits d’abonnements individuels")
+        verbose_name_plural = _("Périodes d’abonnement aux forfaits d’abonnements individuels")
