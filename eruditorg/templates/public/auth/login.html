@@ -39,15 +39,10 @@
         {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
       </div>
 
-      <div class="form-group row">
-        <p class="col-xs-6">
-          <small>-><a href="http://www.erudit.org/client/login.jsp{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans 'Zone client' %}</a></small>
+      <div class="form-group">
+        <p class="text-right">
+          <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
         </p>
-        <aside class="col-xs-6 text-right">
-          <p class="no-margin">
-            <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
-          </p>
-        </aside>
       </div>
 
       <input type="hidden" name="next" value="{{ next }}" />
@@ -89,12 +84,10 @@
             {% if form.password.errors %}<div class="alert alert-error-text">{{ form.password.errors.as_text }}</div>{% endif %}
           </div>
 
-          <div class="form-group row child-column-fit">
-            <aside class="col-sm-12 text-right">
-              <p class="no-margin">
-                <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
-              </p>
-            </aside>
+          <div class="form-group">
+            <p class="text-right">
+              <small><a href="{% url 'public:auth:password_reset' %}">{% trans "Mot de passe oublié&nbsp;?" %}</a></small>
+            </p>
           </div>
 
           <input type="hidden" name="next" value="{{ next }}" />
