@@ -57,7 +57,7 @@
 <hr>
 
 <section>
-  <h2>{% trans "Vos abonnements" %} ({{ journals|length }} {% trans "revues" %})</h2>
+  <h2>{% trans "Vos abonnements" %} ({{ journals|length }} {% trans "revue" %}{{ journals|pluralize:",s" }})</h2>
   <div class="row">
     <div class="col-md-7">
       {% blocktrans with organisation=scope_current_organisation.name %}
@@ -76,7 +76,7 @@
     {% endfor %}
     </ol>
     {% else %}
-      {% trans "Aucun abonnement" %}
+      {% trans "Aucun abonnement en cours." %}
     {% endif %}
   </div>
 </section>

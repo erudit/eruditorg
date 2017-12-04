@@ -88,3 +88,7 @@
   {% endif %}
 
 </ul>
+
+{% if not has_active_subscription %}
+<div class="text-center alert"><p><em>{% trans "Aucun abonnement en cours." %}</em></p></div>
+{% endif %}
