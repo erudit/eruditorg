@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from ipware.ip import get_ip
 from django.views.generic import TemplateView
 
 from base.viewmixins import LoginRequiredMixin
@@ -29,7 +30,7 @@ class DiagnosisLandingView(
             context['journals'] = tuple()
 
         context['date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        context['client_ip'] = self.request.META.get('HTTP_CLIENT_IP')
+        context['client_ip'] = get_ip(self.request)
         context['redirection_ip'] = self.request.META.get('REMOTE_ADDR')
         context['user_agent'] = self.request.META.get('HTTP_USER_AGENT')
         try:
