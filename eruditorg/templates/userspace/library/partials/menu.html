@@ -51,7 +51,7 @@
   </li>
   {% endif %}
 
-  {% if can_access_library_dashboard and has_legacy_profile %}
+  {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'connection' %} active{% endif %}">
     <a href="{% url 'userspace:library:connection:landing' %}">
       <span class="ion-ios-cog-outline sidenav-icon"></span>
