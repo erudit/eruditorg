@@ -78,7 +78,7 @@
   </li>
   {% endif %}
 
-  {% if can_access_library_dashboard and has_legacy_profile %}
+  {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'diagnosis' %} active{% endif %}">
     <a href="{% url 'userspace:library:diagnosis:landing' %}">
       <span class="ion-ios-medkit-outline sidenav-icon"></span>

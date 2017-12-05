@@ -49,7 +49,7 @@
       <dd class="col-sm-6">{{ user_agent }}<br></dd>
 
       <dt class="col-sm-6">{% trans "Institution et identifiant&nbsp;:" %} </dt>
-      <dd class="col-sm-6">{{ institution }} [{{ identifier }}]</dd>
+      <dd class="col-sm-6">{{ institution }} [{% if identifier %}{{ identifier }}{% else %}<em>{% trans "Aucun identifiant" %}</em>{% endif %}]</dd>
     </dl>
   </div>
 </section>
