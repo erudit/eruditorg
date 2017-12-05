@@ -14,7 +14,7 @@ class DiagnosisLandingView(
         LoginRequiredMixin, MenuItemMixin, OrganisationScopePermissionRequiredMixin, TemplateView):
     menu_library = 'diagnosis'
     permission_required = 'library.has_access_to_dashboard'
-    template_name = 'userspace/library/diagnostic/landing.html'
+    template_name = 'userspace/library/diagnosis/landing.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
