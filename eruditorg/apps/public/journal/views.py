@@ -354,6 +354,13 @@ class IssueDetailView(FallbackObjectViewMixin, ContentAccessCheckMixin, DetailVi
         context['journal'] = self.object.journal
 
         context['meta_info_issue'] = self.object
+        guest_editors = self.object.erudit_object.get_redacteurchef(
+            typerc="invite",
+            formatted=True,
+            idrefs=[]
+        )
+
+        context["guest_editors"] = None if len(guest_editors) == 0 else guest_editors
         context['themes'] = self.object.erudit_object.get_themes(formatted=True, html=True)
         articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \

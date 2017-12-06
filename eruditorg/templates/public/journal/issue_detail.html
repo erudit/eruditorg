@@ -105,6 +105,9 @@
       </span>
       {% endif %}
       {% endfor %}
+      {% if guest_editors %}
+      <span class="theme-guest-editor">{% trans 'Sous la direction de' %} {{ guest_editors|person_list|safe }}</span>
+      {% endif %}
     </h1>
     {% if issue.journal.type.code == 'C' %}
     <p><a href="http://retro.erudit.org/feuilletage/index.html?{{ issue.journal.localidentifier }}.{{ issue.localidentifier }}@132&height=800&width=618&h_eightL=1800&w_idthL=1390&p=oui" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
