@@ -360,6 +360,7 @@ class IssueDetailView(FallbackObjectViewMixin, ContentAccessCheckMixin, DetailVi
             idrefs=[]
         )
 
+        context["notegens"] = self.object.erudit_object.get_notegens_edito(html=True)
         context["guest_editors"] = None if len(guest_editors) == 0 else guest_editors
         context['themes'] = self.object.erudit_object.get_themes(formatted=True, html=True)
         articles = Article.objects \

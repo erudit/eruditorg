@@ -52,6 +52,12 @@
       @include font-styles('sans');
     }
 
+    .notegen {
+      font-size: smaller;
+      color: $mid-grey;
+      text-align: right;
+    }
+
   }
 
   /**
