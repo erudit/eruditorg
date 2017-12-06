@@ -53,9 +53,13 @@
     }
 
     .notegen {
-      font-size: smaller;
-      color: $mid-grey;
-      text-align: right;
+
+      p, ol, ul, blockquote {
+        font-size: 12px;
+        color: $dark-grey;
+        text-align: right;
+      }
+
     }
 
   }

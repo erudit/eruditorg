@@ -110,13 +110,13 @@
       {% endif %}
     </h1>
     {% if issue.journal.type.code == 'C' %}
-    <p><a href="http://retro.erudit.org/feuilletage/index.html?{{ issue.journal.localidentifier }}.{{ issue.localidentifier }}@132&height=800&width=618&h_eightL=1800&w_idthL=1390&p=oui" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
+    <p><a href="http://retro.erudit.org/feuilletage/index.html?{{ issue.journal.localidentifier }}.{{ issue.localidentifier }}@132&height=800&width=618&heightL=1800&widthL=1390&p=oui" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
     {% endif %}
     {% if notegens %}
     <div class="row">
-    {% for notegen in notegens %}
-      <div class="col-md-4 col-md-offset-8 notegen">{{ notegen.content|safe }}</div>
-    {% endfor %}
+      {% for notegen in notegens %}
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-6 notegen">{{ notegen.content|safe }}</div>
+      {% endfor %}
     </div>
     {% endif %}
     <h2>
