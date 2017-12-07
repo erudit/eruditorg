@@ -75,6 +75,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+{% csrf_token %}
 <main
     class="container"
     data-document-id="{{ article.id }}"

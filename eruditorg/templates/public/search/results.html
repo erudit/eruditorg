@@ -156,6 +156,7 @@
           {% include "public/search/partials/results_pagination.html" %}
           <ol class="results">
             {% trans "inconnu" as i18n_unknown %}
+            {% csrf_token %}
             {% for document in documents %}
             <li class="row result" id="document-{{ document.id }}" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
