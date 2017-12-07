@@ -8,7 +8,8 @@ class ShareModal {
   constructor(el) {
 
     this.el    = el;
-    this.title = el.data('title').replace(/\s+/g, ' ') || document.title;
+    this.title = el.data('title') || document.title;
+    this.title = this.title.replace(/\s+/g, ' ');
     this.url   = el.data('share-url') || window.location.href;
     this.citation_text = $(el.data('cite')).text().replace(/\s+/g, ' ');
 
