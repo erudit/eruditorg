@@ -307,10 +307,12 @@
               <div class="toolbox-wrapper">
                 <ul class="toolbox toolbox-compact">
                   <li>
+                    {% if document.document_type == 'article' or document.document_type == 'thesis' %}
                     <a class="tool-btn" id="tool-citation-save-{{ document.id }}" data-citation-save="#document-{{ document.id }}"{% if document.id in request.saved_citations %} style="display:none;"{% endif %}>
                       <span class="ion-bookmark toolbox-save"></span>
                       <span class="tools-label">{% trans "Sauvegarder" %}</span>
                     </a>
+                    {% endif %}
                     <a class="tool-btn saved" id="tool-citation-remove-{{ document.id }}" data-citation-remove="#document-{{ document.id }}"{% if not document.id in request.saved_citations %} style="display:none;"{% endif %}>
                       <span class="ion-bookmark toolbox-save"></span>
                       <span class="tools-label">{% trans "Supprimer" %}</span>
