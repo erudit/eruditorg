@@ -534,10 +534,13 @@ class Command(BaseCommand):
         try:
             issue = Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
+            # TODO check diffusion / prediffusion
             issue = Issue()
             issue.localidentifier = issue_localidentifier
             issue.journal = journal
             issue.fedora_created = fedora_issue.created
+            if self.make_published:
+                issue.is_published = True
 
         summary_tree = remove_xml_namespaces(
             et.fromstring(fedora_issue.summary.content.serialize()))
@@ -556,10 +559,6 @@ class Command(BaseCommand):
             or dt.datetime(int(issue.year), 1, 1)
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
-
-        # Is the Issue published ?
-        issue.is_published = is_issue_published_in_fedora(issue_pid, journal=journal)
-
         issue.fedora_updated = fedora_issue.modified
         issue.save()
         logger.info(
