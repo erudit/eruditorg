@@ -135,6 +135,7 @@
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
                     <div class="modal-body">
+                      {% if document.is_in_fedora %}
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ document.id }}" class="cite-mla">
@@ -206,7 +207,7 @@
                       </dl>
 
                       <hr />
-
+                      {% endif %}
                       <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
                       <p>
                         <a href="{% url 'public:journal:article_citation_enw' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
