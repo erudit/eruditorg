@@ -79,6 +79,7 @@
 {% endblock breadcrumb %}
 
 {% block inner_main %}
+{% csrf_token %}
 {% trans "inconnu" as i18n_unknown %}
 <div id="id_articles_saved_citation_list_metadata">
   {% for article in articles %}

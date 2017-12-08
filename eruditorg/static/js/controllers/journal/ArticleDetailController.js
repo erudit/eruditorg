@@ -96,20 +96,27 @@ export default {
         toc_body        = this.article.find('.article-table-of-contents .article-table-of-contents--body'),
         toc_body_anchor = toc_body.find('a');
 
-    var spy = new ScrollSpy( spy_target, {
-      nav: 'nav.article-table-of-contents ul li a',
-      className: 'is-inview',
-      callback: function(elements) {
+    if (toc_body.length > 0) {
+      var spy = new ScrollSpy( spy_target, {
+        nav: 'nav.article-table-of-contents ul li a',
+        className: 'is-inview',
+        callback: function(elements) {
 
-        if( toc_body_anchor.hasClass('is-inview') ) toc_body.addClass('is-inview')
-        else toc_body.removeClass('is-inview');
-      }
-    });
+          if( toc_body_anchor.hasClass('is-inview') ) toc_body.addClass('is-inview')
+          else toc_body.removeClass('is-inview');
+        }
+      });
+    }
 
-    var subspy = new ScrollSpy( spy_target, {
-      nav: '.article-table-of-contents--body ol li a',
-      className: 'is-insubview'
-    });
+    if (toc_body.length > 0) {
+      // Abstracts do not have a body
+      console.log('length');
+      var subspy = new ScrollSpy( spy_target, {
+        nav: '.article-table-of-contents--body ol li a',
+        className: 'is-insubview'
+      });
+    }
+
   },
 
   display_pdf_based_on_mimetype : function () {

@@ -63,6 +63,7 @@
 {% endblock structured_data %}
 
 {% block content %}
+{% csrf_token %}
 <main
     class="container"
     id="article-{{ article.id }}"
