@@ -296,39 +296,6 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * Typemarq
-  */
-
-  .majuscule {
-    text-transform: uppercase;
-  }
-
-  .petitecap {
-    font-variant: small-caps;
-  }
-
-  .souligne {
-    text-decoration: underline;
-  }
-
-  .barre {
-    text-decoration: line-through;
-  }
-
-  .surligne {
-    border-style: solid none none none;
-    border-width: 1px;
-  }
-
-  .filet {
-    border: 1px solid $dark-grey;
-  }
-
-  .tailleg {
-    font-size: 1.25em;
-  }
-
-  /**
   * general full article styles incl. abstract, body, appendices
   **/
   .full-article {
