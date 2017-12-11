@@ -115,10 +115,17 @@ class Query(object):
             subqs_list.append(subqs)
 
         if not len(subqs_list):
-            return self._get_querystring_from_dict(q.params)
+            return self._get_querystring_from_dict(q.params, safe=safe)
         return ' {} '.format(q.operator).join(subqs_list)
 
     def _get_querystring_from_dict(self, params_dict, safe=False, base_qs=None):
+        """ Build a querystring from the input parameters
+
+        :param params_dict: the parameters
+        :param safe: True if the params are safe and do not need to be escaped
+        :param base_qs: the base querystring
+        :return: the new querystring
+        """
         qs = base_qs
         # Inserts kwargs params
         for k, v in params_dict.items():

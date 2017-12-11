@@ -184,7 +184,7 @@ class EruditDocumentSolrFilter(object):
                 query |= Q(**{field: term})
             elif operator == self.OP_NOT:
                 query &= ~Q(**{field: term})
-        sqs = search.filter(query)
+        sqs = search.filter(query, safe=True)
 
         # STEP 2: applies the other search filters
         # --
@@ -222,7 +222,7 @@ class EruditDocumentSolrFilter(object):
         # --
 
         if extra_q:
-            sqs = sqs.filter_query(all=extra_q)
+            sqs = sqs.filter_query(all=extra_q, safe=True)
 
         # STEP 4: applies the aggregation-related filters
         # --
