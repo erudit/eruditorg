@@ -70,7 +70,7 @@
 <li>
   <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}">
     {% if issue.html_title %}
-    {{ issue.html_title|striptags|safe|truncatechars_html:50 }}
+    {{ issue.html_title|striptags|safe|truncatewords_html:10 }}
     {% else %}
     {{ issue.volume_title_with_pages }}
     {% endif %}
