@@ -47,18 +47,16 @@
               {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
             </p>
             {% endif %}
+            <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
           </div>
-        </div>
-        <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
-          <a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la recherche" %}</a>
         </div>
         {% if documents %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
-          <a href="#" id="id_save_search" class="btn btn-secondary">{% trans "Sauvegarder ces résultats" %}</a>
-          {% url 'public:search:advanced_search' as advanced_search %}
-          {% blocktrans %}
-          <p>Voir mon <a href="{{ advanced_search }}#search-history"><strong>historique</strong></a></p>
-          {% endblocktrans %}
+            <a href="#" id="id_save_search" class="btn btn-secondary">{% trans "Sauvegarder ces résultats" %}</a>
+            {% url 'public:search:advanced_search' as advanced_search %}
+            {% blocktrans %}
+            <p>Voir mon <a href="{{ advanced_search }}#search-history"><strong>historique</strong></a></p>
+            {% endblocktrans %}
         </div>
         {% endif %}
       </div>
