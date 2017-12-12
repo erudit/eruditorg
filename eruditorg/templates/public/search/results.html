@@ -285,20 +285,25 @@
                 {# abstract #}
                 {% if document.real_object.abstract or document.real_object.description or document.real_object.keywords %}
                 <div class="akkordion" data-akkordion-single="true">
-                  <div class="akkordion-title abstract-title">{% trans "Résumé" %} <span class="ion-ios-arrow-down"></span></div>
-                  <div class="summary-content akkordion-content">
-                    <p class="abstract">
-                      {% if document.document_type == 'article' %}
+                  <div class="akkordion-title abstract-title">
+                    {% trans "Plus d’information" %}
+                    <span class="ion-ios-arrow-down"></span>
+                  </div>
+                  <div class="summary-content akkordion-content abstract">
+                    {% if document.real_object.abstract or document.real_object.description %}
+                    <p>
                       {{ document.real_object.abstract }}
-                      {% elif document.document_type == 'thesis' %}
-                      {% if document.real_object.keywords %}
+                      {{ document.real_object.description|truncatewords_html:125 }}
+                    </p>
+                    {% endif %}
+                    {% if document.real_object.keywords %}
+                    <p>
                       <strong>{% trans "Mots-clés&nbsp;:" %}</strong>
                       {% for keyword in document.real_object.keywords %}
                       {{ keyword }}{% if not forloop.last %}, {% endif %}
                       {% endfor %}
-                      {% endif %}
-                      {% endif %}
                     </p>
+                    {% endif %}
                   </div>
                 </div>
                 {% endif %}

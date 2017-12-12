@@ -152,8 +152,7 @@
       }
 
       .authors,
-      .meta p,
-      .abstract {
+      .meta p {
         color: $dark-grey;
         font-size: 14px;
         margin-bottom: 0;
@@ -189,11 +188,12 @@
 
       }
 
-      .abstract {
+      .abstract p {
         margin: 0;
         padding: 0.5em;
         background-color: $light-grey;
         color: #000;
+        font-size: 14px;
       }
 
       .result-info {
