@@ -54,7 +54,7 @@ class Query(object):
     # thanks to https://github.com/swistakm/solrq
     ESCAPE_RE = re.compile(r'(?<!\\)(?P<char>[ &|+\\\-!(){}[\]*^"~?:])')
 
-    def __init__(self, search, q='*:*', fq="*:*"):
+    def __init__(self, search, q=None, fq=None):
         """ Search request to Solr.
 
         :arg search: `solrq.Search` instance to use
@@ -70,11 +70,21 @@ class Query(object):
         for qarg in args:
             subqs = self._get_q_querystring(qarg, safe=safe)
             qarg_qs = ' AND '.join([qarg_qs, subqs]) if qarg_qs else subqs
-        base_qs = '({0}) AND ({1})'.format(base_qs, qarg_qs) if qarg_qs else base_qs
+        if base_qs:
+            base_qs = '({0}) AND ({1})'.format(base_qs, qarg_qs) if qarg_qs else base_qs
+        else:
+            base_qs = '({0})'.format(qarg_qs) if qarg_qs else base_qs
 
         # Inserts kwargs params
         kwargs_qs = self._get_querystring_from_dict(kwargs, safe=safe)
-        base_qs = '({0}) AND ({1})'.format(base_qs, kwargs_qs) if kwargs_qs else base_qs
+        if base_qs and kwargs_qs:
+            base_qs = '({0}) AND ({1})'.format(base_qs, kwargs_qs) if kwargs_qs else base_qs
+        elif not base_qs and kwargs_qs:
+            base_qs = kwargs_qs
+        elif not kwargs_qs and base_qs:
+            pass
+        else:
+            base_qs = "*:*"
         return base_qs
 
     def filter(self, *args, safe=False, **kwargs):
@@ -142,7 +152,8 @@ class Query(object):
         """ Triggers the search and returns the results. """
         params = self.search.extra_params.copy()
         params.update(kwargs)
-        params['fq'] = self._fq
+        if self._fq:
+            params['fq'] = self._fq
         return self.search.client.search(self._q, **params)
 
     results = property(get_results)

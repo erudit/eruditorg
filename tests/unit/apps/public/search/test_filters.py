@@ -42,7 +42,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
-        self.assertEqual(filt.sqs._q, '(*:*) AND (TexteComplet:test)')
+        self.assertEqual(filt.sqs._q, '(TexteComplet:test)')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_using_a_single_term_on_a_specific_field(self, mock_get_results):
@@ -55,7 +55,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
-        self.assertEqual(filt.sqs._q, '(*:*) AND (Metadonnees:test)')
+        self.assertEqual(filt.sqs._q, '(Metadonnees:test)')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_properly_handle_advanced_queries_using_the_AND_operator(self, mock_get_results):
@@ -72,7 +72,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._q, '(*:*) AND ((Metadonnees:test) AND (TexteComplet:intro))')
+            filt.sqs._q, '((Metadonnees:test) AND (TexteComplet:intro))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_properly_handle_advanced_queries_using_the_OR_operator(self, mock_get_results):
@@ -88,7 +88,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
-        self.assertEqual(filt.sqs._q, '(*:*) AND ((Metadonnees:test) OR (TexteComplet:intro))')
+        self.assertEqual(filt.sqs._q, '((Metadonnees:test) OR (TexteComplet:intro))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_properly_handle_advanced_queries_using_the_negation_operator(self, mock_get_results):  # noqa
@@ -105,7 +105,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._q, '(*:*) AND ((Metadonnees:test) AND ((*:* -TexteComplet:intro)))')
+            filt.sqs._q, '((Metadonnees:test) AND ((*:* -TexteComplet:intro)))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_publication_years(self, mock_get_results):
@@ -121,11 +121,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
             filt.sqs._q,
-            '(*:*) AND (Metadonnees:test)'
+            '(Metadonnees:test)'
         )
         self.assertEqual(
             filt.sqs._fq,
-            '(*:*) AND (((Annee:"2015")) OR (Annee:"2016"))'
+            '(((Annee:"2015")) OR (Annee:"2016"))'
         )
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -143,10 +143,10 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt.filter(request, EruditDocument.objects.all(), None)
 
         self.assertEqual(
-            filt.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt.sqs._q, '(Metadonnees:test)')
 
         self.assertEqual(
-            filt.sqs._fq, '(*:*) AND (Annee:[2012 TO 2016])'
+            filt.sqs._fq, 'Annee:[2012 TO 2016]'
         )
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -162,9 +162,9 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt.sqs._fq, '(*:*) AND ((TypeArticle_fac:"Article"))')
+            filt.sqs._fq, '((TypeArticle_fac:"Article"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_languages(self, mock_get_results):
@@ -185,10 +185,10 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt_1.filter(request_1, EruditDocument.objects.all(), None)
         filt_2.filter(request_2, EruditDocument.objects.all(), None)
-        self.assertEqual(filt_1.sqs._q, '(*:*) AND (Metadonnees:test)')
-        self.assertEqual(filt_1.sqs._fq, '(*:*) AND ((Langue:"fr"))')
-        self.assertEqual(filt_2.sqs._q, '(*:*) AND (Metadonnees:test)')
-        self.assertEqual(filt_2.sqs._fq, '(*:*) AND ((Langue:"fr"))')
+        self.assertEqual(filt_1.sqs._q, '(Metadonnees:test)')
+        self.assertEqual(filt_1.sqs._fq, '((Langue:"fr"))')
+        self.assertEqual(filt_2.sqs._q, '(Metadonnees:test)')
+        self.assertEqual(filt_2.sqs._fq, '((Langue:"fr"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_collections(self, mock_get_results):
@@ -211,19 +211,19 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_2.filter(request_2, EruditDocument.objects.all(), None)
         self.assertEqual(
             filt_1.sqs._q,
-            '(*:*) AND (Metadonnees:test)')
+            '(Metadonnees:test)')
 
         self.assertEqual(
             filt_1.sqs._fq,
-            '(*:*) AND ((TitreCollection_fac:"Arborescences"))')
+            '((TitreCollection_fac:"Arborescences"))')
 
         self.assertEqual(
             filt_2.sqs._q,
-            '(*:*) AND (Metadonnees:test)')
+            '(Metadonnees:test)')
 
         self.assertEqual(
             filt_2.sqs._fq,
-            '(*:*) AND ((TitreCollection_fac:"Arborescences"))')
+            '((TitreCollection_fac:"Arborescences"))')
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_authors(self, mock_get_results):
         # Setup
@@ -238,12 +238,12 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
             filt.sqs._q,
-            '(*:*) AND (Metadonnees:test)'
+            '(Metadonnees:test)'
         )
 
         self.assertEqual(
             filt.sqs._fq,
-            '(*:*) AND ((Auteur_tri:"firstname, lastname"))'
+            '((Auteur_tri:"firstname, lastname"))'
         )
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -266,14 +266,14 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_1.filter(request_1, EruditDocument.objects.all(), None)
         filt_2.filter(request_2, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt_1.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt_1.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt_2.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt_2.sqs._q, '(Metadonnees:test)')
 
         self.assertEqual(
-            filt_1.sqs._fq, '(*:*) AND ((Fonds_fac:"Érudit"))')
+            filt_1.sqs._fq, '((Fonds_fac:"Érudit"))')
         self.assertEqual(
-            filt_2.sqs._fq, '(*:*) AND ((Fonds_fac:"Érudit"))')
+            filt_2.sqs._fq, '((Fonds_fac:"Érudit"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_publication_types(self, mock_get_results):
@@ -295,13 +295,13 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_1.filter(request_1, EruditDocument.objects.all(), None)
         filt_2.filter(request_2, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt_1.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt_1.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt_2.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt_2.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt_1.sqs._fq, '(*:*) AND ((Corpus_fac:"Culturel"))')
+            filt_1.sqs._fq, '((Corpus_fac:"Culturel"))')
         self.assertEqual(
-            filt_2.sqs._fq, '(*:*) AND ((Corpus_fac:"Culturel"))')
+            filt_2.sqs._fq, '((Corpus_fac:"Culturel"))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_extra_terms(self, mock_get_results):
@@ -316,9 +316,9 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt.sqs._fq, '(*:*) AND (TexteComplet:foobar)')
+            filt.sqs._fq, 'TexteComplet:foobar')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_disciplines(self, mock_get_results):
@@ -333,9 +333,9 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._q, '(*:*) AND (Metadonnees:test)')
+            filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt.sqs._fq, '(*:*) AND ((Discipline_fac:"Littérature"))')
+            filt.sqs._fq, '((Discipline_fac:"Littérature"))')
 
     def test_can_properly_determine_the_order_of_the_results(self):
         # Run & check
