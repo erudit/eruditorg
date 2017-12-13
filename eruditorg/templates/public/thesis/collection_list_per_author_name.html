@@ -1,5 +1,5 @@
 {% extends "public/thesis/collection_list_base.html" %}
-{% load i18n %}
+{% load humanize i18n %}
 
 {% block title %}{% blocktrans with letter=author_letter collection=collection.name %}Auteurs commençant par {{ letter }}{% endblocktrans %} – Thèses et mémoires de {{ collection }}{% endblock title %}
 
@@ -55,7 +55,7 @@
 <dd>
   <select id="switch_letter" onChange="window.location.href=this.value">
     {% for letter in other_author_letters %}
-    <option value="{% url 'public:thesis:collection_list_per_author_name' collection.code letter.author_firstletter %}?sort_by={{ sort_by }}"{% if letter.author_firstletter == author_letter %} selected disabled{% endif %}>{{ letter.author_firstletter }} ({{ letter.total }})</option>
+    <option value="{% url 'public:thesis:collection_list_per_author_name' collection.code letter.author_firstletter %}?sort_by={{ sort_by }}"{% if letter.author_firstletter == author_letter %} selected disabled{% endif %}>{{ letter.author_firstletter }} ({{ letter.total|intcomma }})</option>
     {% endfor %}
   </select>
 </dd>

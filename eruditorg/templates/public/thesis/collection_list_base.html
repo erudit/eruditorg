@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load humanize i18n %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -119,7 +119,7 @@
           <h2>{% trans "Fiche" %}</h2>
           <dl>
             <dt>{% trans "Nombre de documents" %}</dt>
-            <dd>{{ paginator.count }}</dd>
+            <dd>{{ paginator.count|intcomma }}</dd>
             {% block inner_list_switcher %}{% endblock inner_list_switcher %}
           </dl>
         </div>

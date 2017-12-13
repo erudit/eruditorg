@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load staticfiles %}
+{% load humanize i18n staticfiles %}
 
 {% block title %}{% trans "Thèses et mémoires" %}{% endblock title %}
 
@@ -104,11 +103,7 @@
             </a>
           </h3>
           <div class="thesis-count">
-            {% blocktrans trimmed count counter=collection_info.thesis_count %}
-            {{ counter }} document
-            {% plural %}
-            {{ counter }} documents
-            {% endblocktrans %}
+            {{ collection_info.thesis_count|intcomma }} {% trans "documents" %}
           </div>
           {% if collection_info.recent_theses %}
           <div class="recent-theses">
