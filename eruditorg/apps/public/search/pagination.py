@@ -9,7 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from .conf import settings as search_settings
-from .models import get_type_for_corpus
+from .models import get_type_for_corpus, GenericSolrDocument
 
 
 class EruditDocumentPagination(PageNumberPagination):
@@ -101,6 +101,7 @@ class EruditDocumentPagination(PageNumberPagination):
             obj = None
             if d['ID'] in obj_dict:
                 obj = obj_dict[d['ID']]
+
             elif not d['Corpus_fac'] in self.in_database_corpus:
                 obj = get_type_for_corpus(d['Corpus_fac'])(
                     localidentifier=d['ID'],
@@ -108,4 +109,12 @@ class EruditDocumentPagination(PageNumberPagination):
                 )
             if obj:
                 obj_list.append(obj)
+            else:
+                obj_list.append(
+                    GenericSolrDocument(
+                        localidentifier=d['ID'],
+                        data=d
+                    )
+                )
+
         return obj_list

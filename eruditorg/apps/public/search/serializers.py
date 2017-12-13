@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from apps.public.search.models import ResearchReport, Book
+from apps.public.search.models import ResearchReport, Book, GenericSolrDocument
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -27,6 +27,7 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
             erudit_models.Thesis: 'thesis',
             ResearchReport: 'report',
             Book: 'book',
+            GenericSolrDocument: 'generic',
         }[obj.__class__]
 
     def get_real_object(self, obj):
@@ -34,6 +35,8 @@ class EruditDocumentSerializer(serializers.ModelSerializer):
             return ResearchReportSerializer(obj).data
         if isinstance(obj, Book):
             return BookSerializer(obj).data
+        if isinstance(obj, GenericSolrDocument):
+            return GenericSolrDocumentSerializer(obj).data
 
         cache_key = 'eruditdocument-real-object-serialized-{}-{}'.format(
             obj.id, translation.get_language())
@@ -152,11 +155,6 @@ class BookSerializer(serializers.Serializer):
                 )
             return title
         return obj.data.get('Titre_en')
-
-        if 'Titre_fr' in obj.data:
-            return obj.data['Titre_fr']
-        if 'Titre_en' in obj.data:
-            return obj.data['Titre_en']
 
     def get_publication_date(self, obj):
         return obj.data.get('AnneePublication')
@@ -321,3 +319,65 @@ class ThesisSerializer(serializers.ModelSerializer):
 
     def get_keywords(self, obj):
         return [keyword.name for keyword in obj.keywords.all()]
+
+
+class GenericSolrDocumentSerializer(serializers.Serializer):
+
+    numero = serializers.SerializerMethodField()
+    authors = serializers.SerializerMethodField()
+    pages = serializers.SerializerMethodField()
+    title = serializers.SerializerMethodField()
+    volume = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
+    journal_name = serializers.SerializerMethodField()
+    collection_name = serializers.SerializerMethodField()
+    issn = serializers.SerializerMethodField()
+    publication_date = serializers.SerializerMethodField()
+
+    def get_publication_date(self, obj):
+        return obj.data.get('AnneePublication')
+
+    def get_issn(self, obj):
+        return obj.data.get('ISSN')
+
+    def get_collection_name(self, obj):
+        return obj.data.get('Fonds_fac')
+
+    def get_authors(self, obj):
+        return obj.data.get('AuteurNP_fac')
+
+    def get_volume(self, obj):
+        return obj.data.get('Volume')
+
+    def get_journal_name(self, obj):
+        return obj.data.get('TitreCollection_fac')[0]
+
+    def get_url(self, obj):
+        return obj.data['URLDocument'][0]
+
+    def get_numero(self, obj):
+        return obj.data.get('Numero')
+
+    def get_pages(self, obj):
+        if not {'PremierePage', 'DernierePage'}.issubset(set(obj.data.keys())):
+            return None
+        return _('Pages {firstpage}-{lastpage}'.format(
+            firstpage=obj.data['PremierePage'],
+            lastpage=obj.data['DernierePage']
+        ))
+
+    def get_title(self, obj):
+        if 'Titre_fr' in obj.data:
+            return obj.data['Titre_fr']
+        if 'Titre_en' in obj.data:
+            return obj.data['Titre_en']
+
+    class Meta:
+        model = GenericSolrDocument
+        fields = [
+            'Numero', 'PremierePage', 'TypePublication_fac', 'MIMEType', 'RevueID',
+            'Volume', 'NumeroID', 'TitreCollection_fac', 'Langue', 'DernierePage',
+            'URLDocument', 'Corpus_fac', 'TypeArticle_fac', 'Fonds_fac', 'RevueAbr',
+            'ISSN', 'AnneePublication', 'ID', 'AuteurNP_fac', 'Annee', 'Auteur_tri',
+            'Auteur_fac', 'TitreRefBiblio_aff', 'DateAjoutErudit', 'DateAjoutIndex'
+        ]

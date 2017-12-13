@@ -14,6 +14,10 @@ class BaseExternalDocument(object):
         self.data = data
 
 
+class GenericSolrDocument(BaseExternalDocument):
+    pass
+
+
 class ResearchReport(BaseExternalDocument):
     pass
 
@@ -23,9 +27,13 @@ class Book(BaseExternalDocument):
 
 
 def get_type_for_corpus(corpus):
-    return {
-        'Dépot': ResearchReport,
-        'Livres': Book,
-        'Actes': Book,
-        'Rapport': ResearchReport,
-    }[corpus]
+    try:
+        _type = {
+            'Dépot': ResearchReport,
+            'Livres': Book,
+            'Actes': Book,
+            'Rapport': ResearchReport,
+        }[corpus]
+        return _type
+    except KeyError:
+        return GenericSolrDocument

@@ -177,7 +177,7 @@
                         {% trans "et" %}
                       {% endif %}
                       <span class="author">
-                      {% if document.document_type == 'report' or document.document_type == 'book' %}
+                      {% if document.document_type == 'report' or document.document_type == 'book' or document.document_type == 'generic' %}
                         {{ author }}
                       {% endif %}
                       {% if author.firstname and author.lastname %}
@@ -232,6 +232,12 @@
                 <div class="row meta">
                   <p class="col-sm-8">
                     {# metadata for articles #}
+                    {% if document.document_type == 'generic' %}
+                    {% with document_object=document.real_object %}
+                      <em><a href="{{ document_object.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ document_object.journal_name }}</a></em> ({{ document_object.collection_name }})
+                      <br/>
+                    {% endwith %}
+                    {% endif %}
                     {% if document.document_type == 'article' %}
                     {% with article=document.real_object %}
                       {% if article.type == 'autre' or article.type == 'Autre' %}
