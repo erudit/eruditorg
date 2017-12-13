@@ -19,9 +19,7 @@
     }
 
     .thesis-count {
-      display: block;
-      font-size: 0.85em;
-      @include fw-sans();
+      color: $dark-grey;
     }
 
     .recent-theses {
