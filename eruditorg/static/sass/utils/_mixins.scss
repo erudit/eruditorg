@@ -78,6 +78,25 @@
 
   }
 
+  @if $fonf-family == 'sans-medium' {
+    @include fw-sans-medium;
+
+    em, i    { @include fw-sans-medium-italic; }
+
+    strong, b  { @include fw-sans-bold; }
+
+    // bold italics
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-sans-bold-italic;
+    }
+
+  }
+
   @if $fonf-family == 'serif' {
     @include fw-serif;
 

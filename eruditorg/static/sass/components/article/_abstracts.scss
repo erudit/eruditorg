@@ -22,7 +22,7 @@
     }
 
     .titreparal, .motscles strong {
-      @include fw-sans-medium();
+      @include font-styles('sans-medium');
     }
 
     &:first-of-type {

@@ -118,7 +118,7 @@ blockquote {
 }
 
 pre {
-  @include fw-mono;
+  @include font-styles('mono');
 }
 
 address {
@@ -142,7 +142,7 @@ address {
   color: $coral-red;
   font-size: small;
   margin: 0.5em 0 0.75em 0;
-  @include fw-sans-medium;
+  @include font-styles('sans-medium');
   text-transform: uppercase;
 }
 
