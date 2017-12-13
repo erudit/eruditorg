@@ -64,7 +64,10 @@
     <div class="row">
       <div class="col-md-8">
         <header class="page-header-main">
-          <h1>{% trans "Thèses et mémoires" %}</h1>
+          <h1>
+            {% trans "Thèses et mémoires" %}
+            <span class="thesis-count">{{ total_count|intcomma }} {% trans "documents" %}</span>
+          </h1>
         </header>
         <div class="page-intro">
           {% url 'public:search:advanced_search' as advanced_search %}
