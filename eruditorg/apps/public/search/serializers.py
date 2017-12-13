@@ -58,12 +58,12 @@ class ArticleSerializer(serializers.ModelSerializer):
     authors = serializers.SerializerMethodField()
     abstract = serializers.SerializerMethodField()
     type = serializers.SerializerMethodField()
-    collection_name = serializers.SerializerMethodField()
+    collection = serializers.SerializerMethodField()
     reviewed_works = serializers.SerializerMethodField()
     paral_titles = serializers.SerializerMethodField()
     paral_subtitles = serializers.SerializerMethodField()
     journal_code = serializers.SerializerMethodField()
-    journal_name = serializers.SerializerMethodField()
+    series = serializers.SerializerMethodField()
     journal_type = serializers.SerializerMethodField()
     journal_url = serializers.SerializerMethodField()
     issue_url = serializers.SerializerMethodField()
@@ -79,12 +79,12 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = erudit_models.Article
         fields = [
-            'journal_code', 'journal_name', 'journal_type', 'journal_url', 'issue_localidentifier',
+            'journal_code', 'series', 'journal_type', 'journal_url', 'issue_localidentifier',
             'issue_title', 'issue_url', 'issue_number', 'paral_titles', 'paral_subtitles',
             'issue_volume', 'issue_published', 'issue_volume_slug', 'publication_date',
             'title', 'surtitle', 'subtitle',
             'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
-            'external_url', 'external_pdf_url', 'collection_name', 'reviewed_works',
+            'external_url', 'external_pdf_url', 'collection', 'reviewed_works',
         ]
 
     def get_authors(self, obj):
@@ -116,7 +116,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_abstract(self, obj):
         return obj.abstract
 
-    def get_collection_name(self, obj):
+    def get_collection(self, obj):
         return obj.issue.journal.collection.name
 
     def get_reviewed_works(self, obj):
@@ -126,7 +126,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_journal_code(self, obj):
         return obj.issue.journal.code
 
-    def get_journal_name(self, obj):
+    def get_series(self, obj):
         return obj.issue.journal.name
 
     def get_journal_type(self, obj):
@@ -223,11 +223,11 @@ class GenericSolrDocumentSerializer(serializers.Serializer):
     title = serializers.SerializerMethodField()
     volume = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
-    journal_name = serializers.SerializerMethodField()
-    collection_name = serializers.SerializerMethodField()
+    collection = serializers.SerializerMethodField()
     issn = serializers.SerializerMethodField()
     publication_date = serializers.SerializerMethodField()
     year = serializers.SerializerMethodField()
+    series = serializers.SerializerMethodField()
 
     def get_year(self, obj):
         if 'Annee' in obj.data:
@@ -239,7 +239,7 @@ class GenericSolrDocumentSerializer(serializers.Serializer):
     def get_issn(self, obj):
         return obj.data.get('ISSN')
 
-    def get_collection_name(self, obj):
+    def get_collection(self, obj):
         return obj.data.get('Fonds_fac')
 
     def get_authors(self, obj):
@@ -248,7 +248,7 @@ class GenericSolrDocumentSerializer(serializers.Serializer):
     def get_volume(self, obj):
         return obj.data.get('Volume')
 
-    def get_journal_name(self, obj):
+    def get_series(self, obj):
         collection_title = obj.data.get('TitreCollection_fac')
         if collection_title:
             return collection_title[0]
