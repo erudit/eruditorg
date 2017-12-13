@@ -132,17 +132,8 @@
 
       h3 {
         font-size: 18px;
-        @include fw-sans-medium;
-
-        a > span:first-child {
-          em {
-            @include fw-sans-medium-italic;
-          }
-        }
-
-        a > span + span {
-          @include fw-sans;
-        }
+        line-height: 1.25;
+        @include font-styles(serif);
 
         a:hover, &:active, &:focus, &:active:focus {
           color: $coral-red;
@@ -168,7 +159,6 @@
 
         .issue-theme {
           margin-top: 0.75em;
-          @include fw-sans-medium;
         }
 
       }
