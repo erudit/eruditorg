@@ -126,6 +126,7 @@ class BaseThesisListView(ListView):
         context['collection'] = self.collection
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
+        context['thesis_count'] = Thesis.objects.filter(collection=self.collection).count()
 
         # Inserts randomly selected theses into the context ("At a glance" section).
         context['random_theses'] = self.get_queryset().order_by('?')[:3]

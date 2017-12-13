@@ -119,7 +119,7 @@
           <h2>{% trans "Fiche" %}</h2>
           <dl>
             <dt>{% trans "Nombre de documents" %}</dt>
-            <dd>{{ paginator.count|intcomma }}</dd>
+            <dd>{{ thesis_count|intcomma }}</dd>
             {% block inner_list_switcher %}{% endblock inner_list_switcher %}
           </dl>
         </div>
