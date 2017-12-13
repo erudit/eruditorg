@@ -96,7 +96,7 @@
               <h3><a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a></h3>
             </li>
             <li class="glory--publication-types--item">
-              <h3><a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a></h3>
+              <h3><a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a></h3>
             </li>
             <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
               <h3><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a></h3>

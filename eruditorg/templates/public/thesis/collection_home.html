@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}{% endblock title %}
+{% block title %}{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
@@ -9,7 +9,7 @@
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if collection.logo %}
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{% trans 'Thèses' %} – Érudit">
+<meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
 {% if collection.logo %}
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
 {% endif %}
@@ -47,7 +47,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
-      "name": "{% trans 'Thèses' %}"
+      "name": "{% trans 'Thèses et mémoires' %}"
     }
   },{
     "@type": "ListItem",
@@ -67,7 +67,7 @@
 
 {% block breadcrumb %}
 {{ block.super }}
-<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
+<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
 <li><a href="{% url 'public:thesis:collection_home' collection.code %}">{{ collection.name }}</a></li>
 {% endblock breadcrumb %}
 
@@ -82,9 +82,9 @@
               {{ collection.name }}
               <span class="thesis-count">
                 ({% blocktrans trimmed count counter=thesis_count %}
-                {{ counter }} thèse
+                {{ counter }} document
                 {% plural %}
-                {{ counter }} thèses
+                {{ counter }} documents
                 {% endblocktrans %})
               </span>
             </h1>

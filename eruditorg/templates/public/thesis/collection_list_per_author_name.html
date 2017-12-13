@@ -1,7 +1,7 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans with letter=author_letter collection=collection.name %}Auteurs commençant par {{ letter }}{% endblocktrans %} – Thèses de {{ collection }}{% endblock title %}
+{% block title %}{% blocktrans with letter=author_letter collection=collection.name %}Auteurs commençant par {{ letter }}{% endblocktrans %} – Thèses et mémoires de {{ collection }}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ collection }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
@@ -9,7 +9,7 @@
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if collection.logo %}
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{% trans 'Thèses' %} – Érudit">
+<meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
 {% if collection.logo %}
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
 {% endif %}
@@ -35,17 +35,17 @@
   "position": 4,
   "item": {
     "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}",
-    "name": "{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}"
+    "name": "{% blocktrans with letter=author_letter %}Thèses et mémoires par auteur commençant par {{ letter }}{% endblocktrans %}"
   }
 }
 {% endblock structured_data_breadcrumb_tail %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}">{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}">{% blocktrans with letter=author_letter %}Thèses et mémoires par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_title %}
-{% blocktrans with letter=author_letter %}Thèses par auteur commençant par {{ letter }}{% endblocktrans %}
+{% blocktrans with letter=author_letter %}Thèses et mémoires par auteur commençant par {{ letter }}{% endblocktrans %}
 {% endblock inner_title %}
 
 {% block inner_list_switcher %}

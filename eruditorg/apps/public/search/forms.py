@@ -53,7 +53,7 @@ FUNDS_CHOICES = (
 PUB_TYPES_CHOICES = (
     ('Article', _('Articles savants')),
     ('Culturel', _('Articles culturels')),
-    ('Thèses', _('Thèses')),
+    ('Thèses', _('Thèses et mémoires')),
     ('Livres', _('Livres')),
     ('Actes', _('Actes')),
     ('Dépot', _('Rapports de recherche')),

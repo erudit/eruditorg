@@ -142,7 +142,7 @@
                     <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
                   </li>
                   <li>
-                    <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses" %}</a>
+                    <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a>
                   </li>
                   {% switch "maintenance" %}
                   {% else %}
@@ -346,7 +346,7 @@
               <div class="col-md-6">
                 <ul class="unstyled footer-nav--publication-types">
                   <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
-                  <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
+                  <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans "Livres & actes" %}</a></li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
                 </ul>
