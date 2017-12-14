@@ -6,13 +6,6 @@
 * Page-specific mixins
 */
 
-@mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
-  font-family: $font-serif;
-  font-size: $font-size;
-  line-height: 1.5;
-  @include font-styles($font-style-family);
-}
-
 #journal_detail {
 
   header {
@@ -35,11 +28,6 @@
     font-size: smaller;
     color: $dark-grey;
     margin: 0.5em 0;
-
-    span + span {
-      @include fw-sans-medium;
-    }
-
   }
 
   /**
@@ -91,17 +79,9 @@
       .akkordion-content {
 
         h1, h2, h3, h4, h5, h6 {
-          @include fw-serif-bold;
+          @include font-styles('serif-bold');
           margin-top: 0.75em;
           color: $coral-red;
-
-          em {
-            @include fw-serif-bold-italic;
-            strong {
-              @include fw-serif-italic;
-            }
-          }
-
         }
 
         ul {
@@ -109,7 +89,9 @@
         }
 
         section, p, li {
-          @include paragraph-text-style;
+          font-size: 16px;
+          line-height: 1.5;
+          @include font-styles('serif');
         }
 
       }
@@ -135,7 +117,6 @@
     .scroll-issues {
       margin-top: 1em;
       font-size: 2em;
-      @include fw-sans-bold;
 
       &:hover, &:focus, &:active {
         text-decoration: none;
@@ -190,14 +171,8 @@
     }
 
     .issue-list--theme {
-      @include fw-sans-medium;
       display: block;
       margin: 0.25em 0;
-
-      em {
-        @include fw-sans-medium-italic;
-      }
-
     }
 
   }

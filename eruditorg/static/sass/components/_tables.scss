@@ -11,11 +11,10 @@ table {
     padding: 1em 0.5em;
   }
 
-  thead {
+  thead, tbody {
     th {
       white-space: nowrap;
       color: $dark-grey;
-      @include fw-sans;
       text-align: left;
     }
   }

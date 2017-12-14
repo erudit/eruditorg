@@ -83,7 +83,6 @@
             padding: 0.5em;
             display: inline-block;
             font-size: 14px;
-            @include fw-mono;
           }
 
           &:hover, &:focus, &:active, &:active:focus, &.active {
@@ -107,9 +106,9 @@
 
         li {
           margin: 0;
-          padding-top: 0.65em;
-          padding-bottom: 0;
-          @include fw-sans-medium;
+          font-size: 14px;
+          padding-top: 0.75em;
+          padding-bottom: 0.25em;
 
           &:first-child {
             padding-left: 0.25em;
@@ -161,7 +160,6 @@
             color: #FFF;
             letter-spacing: 0.1px;
             text-decoration: none;
-            @include fw-sans-medium;
 
             .journal-subtitle,
             .journal-history,
@@ -207,8 +205,8 @@
 
   @media (max-width: $screen-xs-max) {
 
-    .journal-title {
-      @include fw-sans-medium;
+    .journal-type, .journal-collection, .journal-access {
+      color: $dark-grey;
     }
 
   }

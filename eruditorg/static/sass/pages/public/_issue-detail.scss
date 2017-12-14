@@ -19,7 +19,6 @@
       }
 
       .theme-guest-editor {
-        @include font-styles('sans');
         font-size: small;
         margin: 0.15em 0 1.75em 0;
         letter-spacing: normal;
@@ -49,7 +48,6 @@
     h2 {
       margin: 2.5em 0 0.75em 0;
       color: $dark-grey;
-      @include font-styles('sans');
     }
 
     .notegen {
@@ -98,7 +96,6 @@
     padding: 20px 0;
     margin: 0;
     font-size: 18px;
-    @include font-styles('sans-medium');
   }
 
   .issue_detail--articles {
@@ -234,23 +231,17 @@
       }
 
       a {
-        border-top: 1px solid $dark-grey;
+        border-top: 1px solid $mid-grey;
         padding: 1em 0.25em;
         display: block;
-        @include transition(all 150ms);
 
         &:hover, &:focus, &:active, &:active:focus {
           background: $coral-red;
           color: #FFF;
           text-decoration: none;
-          @include fw-sans-medium;
           border-color: $coral-red;
         }
 
-      }
-
-      .issue-list--theme {
-        @include fw-sans-medium;
       }
 
     }

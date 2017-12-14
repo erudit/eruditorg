@@ -9,7 +9,7 @@
   display: block;
   font-size: 14px;
   width: 100%;
-  @include fw-mono;
+  @include font-styles('mono');
 
   li {
     margin: 0;

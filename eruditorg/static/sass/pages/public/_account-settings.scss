@@ -10,7 +10,6 @@
   h1 {
     border-bottom: 1px solid $dark-grey;
     letter-spacing: 0.04em;
-    @include fw-sans-medium();
   }
 
   h2 {
@@ -23,10 +22,6 @@
 
     > div {
       margin: 1em 0 2em 0;
-    }
-
-    label {
-      @include fw-sans-medium();
     }
 
   }

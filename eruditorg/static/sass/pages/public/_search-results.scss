@@ -14,11 +14,6 @@
     margin: 3.5em 0;
     text-align: center;
 
-    h3 {
-      color: $dark-grey;
-      @include fw-sans-bold-italic;
-    }
-
     .btn {
       margin-top: 0.5em;
     }
@@ -75,7 +70,6 @@
       .filter-label {
         margin: 0.25em 0;
         display: block;
-        @include fw-sans-medium;
       }
 
       &:first-child {
@@ -105,7 +99,6 @@
 
     .more-facets {
       color: $coral-red;
-      @include fw-sans-medium;
     }
 
   }
@@ -154,7 +147,6 @@
         .pub-date {
           margin-top: 1em;
           font-size: 12px;
-          @include fw-mono;
         }
 
         .issue-theme {

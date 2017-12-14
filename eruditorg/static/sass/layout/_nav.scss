@@ -118,16 +118,16 @@
         padding: 0 0.5em;
         background-color: transparent;
         width: 70%;
-        height: 42px;
-        @include fw-sans-medium();
+        height: 40px;
+        @include fw-sans-medium;
         @include placeholder(rgba(255, 255, 255, 0.75));
       }
 
       .btn {
         border-color: #fff;
         color: #fff;
-        line-height: 1;
-        height: 44px;
+        line-height: 0.85;
+        height: 42px;
         margin-left: -1px;
       }
 
@@ -292,10 +292,6 @@
 
     }
 
-    .main-section {
-      @include fw-sans;
-    }
-
     .nav-publications li,
     .nav-about,
     .nav-login,
@@ -339,9 +335,7 @@
             border: none;
 
             &.active {
-              color: #FFF;
-              background: none;
-              @include fw-sans-bold;
+              display: none;
             }
 
           }

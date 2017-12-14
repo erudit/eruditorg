@@ -9,7 +9,7 @@
   }
 
   th {
-    @include fw-serif-bold;
+    @include font-styles('serif-bold');
     text-align: left;
   }
 
@@ -20,21 +20,16 @@
   &.type2, &.type5 {
 
     .lrsource p {
-      @include fw-serif-bold;
-
-      em {
-        @include fw-serif-bold-italic;
-      }
-
+      @include font-styles('serif-bold');
     }
 
   }
 
   &.type3, &.type6 {
+    @include font-styles('serif');
 
     .lrcible p {
       @include fw-serif-italic;
-
     }
 
   }

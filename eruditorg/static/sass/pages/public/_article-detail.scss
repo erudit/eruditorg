@@ -8,18 +8,6 @@
 
 $article-toolbar-width: 80px;
 
-
-/**
-* Page-specific mixins
-*/
-
-@mixin paragraph-text-style($font-size: 16px, $font-style-family: 'serif') {
-  font-size: $font-size;
-  line-height: 1.5;
-  @include font-styles($font-style-family);
-}
-
-
 /**
 * Styles for article detail
 */
@@ -123,12 +111,6 @@ $article-toolbar-width: 80px;
       margin-top: 0;
     }
 
-    .title-summary {
-      color: $coral-red;
-      text-transform: uppercase;
-      @include fw-sans-medium;
-    }
-
     .surtitre,
     .surtitreparal {
       color: $dark-grey;
@@ -206,7 +188,6 @@ $article-toolbar-width: 80px;
 
       .theme {
         display: block;
-        @include fw-sans-bold;
       }
 
       .pagination {
@@ -238,20 +219,6 @@ $article-toolbar-width: 80px;
     position: relative;
     will-change: transform;
     @include transition(transform 0.3s ease-out);
-
-    em {
-      @include fw-sans-italic
-      strong {
-        @include fw-sans-bold-italic;
-      }
-    }
-
-    strong {
-      @include fw-sans-bold;
-      .em {
-        @include fw-sans-bold-italic;
-      }
-    }
 
     > ul {
       margin-bottom: 3em;
@@ -325,17 +292,10 @@ $article-toolbar-width: 80px;
     }
 
     h2, h3, h4, h5, h6, .h7 {
-      @include fw-serif-bold();
+      @include font-styles('serif-bold');
       margin-top: 1.5em;
       margin-bottom: 0.5em;
       color: $coral-red;
-
-      em {
-        @include fw-serif-bold-italic;
-        strong {
-          @include fw-serif-italic;
-        }
-      }
 
       &.special {
         text-align: center;
@@ -374,7 +334,9 @@ $article-toolbar-width: 80px;
     }
 
     p, li, blockquote {
-      @include paragraph-text-style;
+      font-size: 16px;
+      line-height: 1.5;
+      @include font-styles('serif');
     }
 
     blockquote {
@@ -393,26 +355,9 @@ $article-toolbar-width: 80px;
 
     }
 
-    .italique, em {
-      @include fw-serif-italic;
-      .gras, strong {
-        @include fw-serif-bold-italic;
-      }
-    }
-
-    .gras, strong {
-      @include fw-serif-bold;
-      .italique, em {
-        @include fw-serif-bold-italic;
-      }
-    }
-
     .espacefixe {
       font-size: 14px;
-      @include fw-mono;
-      .italique, em {
-        @include fw-mono-italic;
-      }
+      @include font-styles('mono');
     }
 
   }
@@ -479,7 +424,6 @@ $article-toolbar-width: 80px;
     p, li {
       font-size: 14px;
       line-height: 1.45;
-      @include font-styles('sans');
     }
 
   }

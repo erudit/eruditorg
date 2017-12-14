@@ -14,15 +14,9 @@
       margin-top: 0;
     }
 
-    p, ul,
-    .titreparal, .motscles strong {
+    p, li, blockquote {
       font-size: 14px;
       line-height: 1.5;
-      color: #000;
-    }
-
-    .titreparal, .motscles strong {
-      @include font-styles('sans-medium');
     }
 
     &:first-of-type {
