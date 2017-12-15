@@ -5,7 +5,7 @@
   <div class="modal-body">
     <h3>{% trans "Citer cet article" %}</h3>
     <dl class="cite-modal--style-list">
-      <dt>MLA</dt>
+      <dt><strong>MLA</strong></dt>
       <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
         {% if article.erudit_object.authors|length == 2 %}
           {% for author in article.erudit_object.authors %}
@@ -37,7 +37,7 @@
         {{ article.issue.volume_title|lower }}{% if article.first_page %}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
-      <dt>APA</dt>
+      <dt><strong>APA</strong></dt>
       <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
         {% for author in article.erudit_object.authors %}
           {% if author.firstname and author.lastname %}
@@ -53,7 +53,7 @@
         {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
       </dd>
 
-      <dt>Chicago</dt>
+      <dt><strong>Chicago</strong></dt>
       <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
         {% for author in article.erudit_object.authors %}
           {% if author.firstname and author.lastname %}

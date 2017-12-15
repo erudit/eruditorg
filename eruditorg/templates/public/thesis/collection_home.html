@@ -104,7 +104,7 @@
             <a href="{{ thesis.url }}" class="recent-thesis" target="_blank">{{ thesis.title }}</a>
           </p>
           <p class="thesis-author">
-            {{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}
+            <strong>{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</strong>
           </p>
         </div>
         {% endfor %}

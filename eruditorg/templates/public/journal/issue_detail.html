@@ -121,8 +121,9 @@
     </div>
     {% endif %}
     <h2>
-      {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %}){% if issue.journal.collection.code == 'unb' %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'La lecture de ces articles nécessite la redirection vers le site de la revue.' %}"><span class="ion-alert"></span></span>{% endif %}
+      {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})
     </h2>
+    {% if issue.journal.collection.code == 'unb' %}<p><em>{% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</em></p>{% endif %}
   </header>
   {% if articles_per_section %}
   {% include "public/journal/partials/issue_detail_section.html" %}
@@ -184,7 +185,7 @@
           <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
             <h5>
               <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-              {% if published_issue.html_title %}<span class="issue-list--theme">{{ published_issue.html_title|safe }}</span>{% endif %}
+              {% if published_issue.html_title %}<span class="issue-list--theme"><strong>{{ published_issue.html_title|safe }}</strong></span>{% endif %}
             </h5>
           </a>
         </div>

@@ -53,9 +53,6 @@
       <div class="row article-title-group">
 
         <div class="col-md-9">
-          {% if only_summary %}
-          <p class="title-summary">{% trans 'Notice' %}</p>
-          {% endif %}
           <xsl:if test="liminaire/grtitre/surtitre">
             <p class="title-tag">
               <xsl:apply-templates select="liminaire/grtitre/surtitre" mode="title"/>
@@ -68,6 +65,7 @@
             <xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/sstitreparal" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/trefbiblio" mode="title"/>
+            {% if only_summary %}<span><em>[{% trans 'Notice' %}]</em></span>{% endif %}
           </h1>
           <xsl:if test="liminaire/grauteur">
             <ul class="grauteur">
@@ -667,7 +665,9 @@
   <!-- themes -->
   <xsl:template match="admin/numero/grtheme/theme" mode="refpapier">
     <span class="{name()}">
-      <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}"><xsl:apply-templates select="."/></a>
+      <strong>
+        <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}"><xsl:apply-templates select="."/></a>
+      </strong>
     </span>
   </xsl:template>
 
@@ -697,7 +697,7 @@
         </p>
         <xsl:if test="//grmotcle[@lang='fr']/motcle">
           <div class="motscles">
-            <strong>Mots clés : </strong>
+            <p><strong>Mots-clés </strong></p>
             <ul class="inline">
               <xsl:for-each select="//grmotcle[@lang='fr']/motcle">
                 <li class="keyword">
@@ -728,7 +728,7 @@
         </p>
         <xsl:if test="//grmotcle[@lang='en']/motcle">
           <div class="motscles">
-            <strong>Keywords : </strong>
+            <p><strong>Keywords </strong></p>
             <ul class="inline">
               <xsl:for-each select="//grmotcle[@lang='en']/motcle">
                 <li class="keyword">
@@ -759,7 +759,7 @@
         </p>
         <xsl:if test="//grmotcle[@lang='es']/motcle">
           <div class="motscles">
-            <strong>Palabras clave : </strong>
+            <p><strong>Palabras clave </strong></p>
             <ul class="inline">
               <xsl:for-each select="//grmotcle[@lang='es']/motcle">
                 <li class="keyword">
@@ -777,9 +777,9 @@
   </xsl:template>
 
   <xsl:template match="titreparal" mode="abstract">
-    <h3 class="{name()}">
-      <xsl:apply-templates/>
-    </h3>
+    <p class="{name()}">
+      <strong><xsl:apply-templates/></strong>
+    </p>
   </xsl:template>
 
   <xsl:template match="resume/alinea">

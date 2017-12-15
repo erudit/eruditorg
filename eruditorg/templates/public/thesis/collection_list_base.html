@@ -86,18 +86,18 @@
         {% for thesis in theses %}
           <li class="thesis row">
             <div class="col-xs-11">
-              <div class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</div>
+              <div class="thesis-author"><strong>{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</strong></div>
               <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
               {% if thesis.description or thesis.keywords.all %}
               <div class="thesis-description">
                 {% if thesis.description %}
                 <p class="thesis-abstract">
-                  {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}">-->&nbsp;{% trans 'Lire la suite' %}</a>
+                  {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}"><strong>-->&nbsp;{% trans 'Lire la suite' %}</strong></a>
                 </p>
                 {% endif %}
                 {% if thesis.keywords.all %}
                 <p class="keywords">
-                  <span>{% trans "Mots-clés&nbsp;:" %}</span>
+                  <span><strong>{% trans "Mots-clés&nbsp;:" %}</strong></span>
                   <span>{% for kw in thesis.keywords.all %}{{ kw.name }}{% if not forloop.last %}, {% endif %}{% empty %}{% trans "aucun mot-clé" %}{% endfor %}</span>
                 </p>
                 {% endif %}
@@ -131,7 +131,7 @@
             <li>
               <a href="{{ thesis.url }}">
                 <span class="thesis-title">{{ thesis.title }}</span>
-                <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
+                <span class="thesis-author"><strong>{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</strong></span>
               </a>
             </li>
             {% endfor %}

@@ -108,7 +108,7 @@
       {% cache LONG_TTL "public_journal_authors" journal.id letter article_type LANGUAGE_CODE %}
       {% for author_dict in authors_dicts %}
         <li class="author-group">
-          <div class="author-name">{{ author_dict.author.full_name }}</div>
+          <h3 class="author-name">{{ author_dict.author.full_name }}</h3>
           <ul class="author-articles">
             {% for article_author in author_dict.articles %}
             {% cache FOREVER_TTL "public_journal_authors_item" journal.id article_author.article.id author.id LANGUAGE_CODE %}

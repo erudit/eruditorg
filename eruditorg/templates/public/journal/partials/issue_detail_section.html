@@ -7,8 +7,10 @@
     </ol>
   {% else %}
       <h{{ group.level|add:"1" }} class="section">
-      {{ group.titles.main|safe }}
-      {% for paral in group.titles.paral %}&nbsp;/ {{ paral|safe }}{% endfor %}
+        <strong>
+          {{ group.titles.main|safe }}
+          {% for paral in group.titles.paral %}&nbsp;/ {{ paral|safe }}{% endfor %}
+        </strong>
       </h{{ group.level|add:"1" }}>
       {% with articles_per_section=group %}
         {% include "public/journal/partials/issue_detail_section.html" %}
