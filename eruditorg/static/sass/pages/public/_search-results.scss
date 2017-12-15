@@ -123,12 +123,13 @@
       padding: 0 0 2.25em 0;
       margin: 1.75em 0 0 0;
 
-      h3 {
+      h3 a {
         font-size: 18px;
         line-height: 1.25;
+        letter-spacing: 0.013em;
         @include font-styles(serif);
 
-        a:hover, &:active, &:focus, &:active:focus {
+        &:hover, &:active, &:focus, &:active:focus {
           color: $coral-red;
           text-decoration: none;
         }

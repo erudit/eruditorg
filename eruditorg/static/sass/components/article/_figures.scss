@@ -65,14 +65,6 @@
 
   .voirliste, .allertexte {
     padding: 0 0.5em;
-
-    a {
-      &:hover, &:active, &:focus {
-        text-decoration: none;
-      }
-    }
-
   }
-
 
 }

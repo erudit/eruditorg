@@ -10,18 +10,8 @@
    }
 
    .refbiblio {
-     margin-bottom: 0.5em;
+     margin-bottom: 1.75em;
      @include force-break;
-
-     a {
-       font-size: 12px;
-       
-       &:hover, &:focus, &:active {
-         color: $coral-red;
-         text-decoration: none;
-       }
-
-     }
 
      .no {
        margin-right: 0.25em;
@@ -34,7 +24,8 @@
    }
 
    .refbiblio-links {
-     margin-bottom: 1em;
+     margin: 0.5em 0;
+     font-size: 12px;
    }
 
    .refbiblio-link {
@@ -43,7 +34,7 @@
    }
 
    .scholar-link {
-     background-image: linear-gradient(to top, #fff, #FFF 1px, $coral-red 1px, $coral-red 1px, #FFF 2px);
+     border-bottom: 1px solid $coral-red;
    }
 
  }

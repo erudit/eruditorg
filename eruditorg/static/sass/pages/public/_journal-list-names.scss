@@ -70,35 +70,6 @@
         margin-bottom: 0;
       }
 
-      .alpha-nav {
-        margin: 0;
-        list-style: none;
-        border-bottom: 1px solid $mid-grey;
-
-        li {
-          display: inline-block;
-          margin: 0;
-
-          a {
-            padding: 0.5em;
-            display: inline-block;
-            font-size: 14px;
-          }
-
-          &:hover, &:focus, &:active, &:active:focus, &.active {
-
-            a {
-              background: $coral-red;
-              text-decoration: none;
-              color: #FFF;
-            }
-
-          }
-
-        }
-
-      }
-
       .list-headings {
         margin: 0;
         list-style: none;
