@@ -30,6 +30,7 @@ INSTALLED_APPS += (
     'template_timings_panel',
     'djcelery',
     'kombu.transport.django',
+    'eulfedora',
 )
 
 TEMPLATES[0]['OPTIONS']['loaders'] = [
@@ -50,6 +51,7 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.cache.CachePanel',
     'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
+    'eulfedora.debug_panel.FedoraPanel',
 )
 
 # Copy these lines into your ``settings_env`` module and uncomment them
