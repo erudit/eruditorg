@@ -11,6 +11,7 @@ from requests.exceptions import ConnectionError
 from rest_framework import serializers
 
 from erudit import models as erudit_models
+from erudit.templatetags.model_formatters import person_list
 
 
 class EruditDocumentSerializer(serializers.ModelSerializer):
@@ -88,17 +89,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         ]
 
     def get_authors(self, obj):
-        if obj.fedora_object and obj.fedora_object.exists:
-            article_object = obj.erudit_object
-            return article_object.get_authors()
-        authors = []
-        for author in obj.authors.all():
-            authors.append({
-                'firstname': author.firstname,
-                'lastname': author.lastname,
-                'othername': author.othername,
-            })
-        return authors
+        return obj.get_formatted_authors()
 
     def get_type(self, obj):
         if obj.type:
@@ -243,7 +234,8 @@ class GenericSolrDocumentSerializer(serializers.Serializer):
         return obj.data.get('Fonds_fac')
 
     def get_authors(self, obj):
-        return obj.data.get('AuteurNP_fac')
+
+        return person_list(obj.data.get('AuteurNP_fac'))
 
     def get_volume(self, obj):
         return obj.data.get('Volume')
