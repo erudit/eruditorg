@@ -187,7 +187,8 @@ class Command(BaseCommand):
                 except Exception as e:
                     logger.error(
                         'issue.import.error',
-                        issue_pid=issue_pid
+                        issue_pid=issue_pid,
+                        error=e,
                     )
             return
 
