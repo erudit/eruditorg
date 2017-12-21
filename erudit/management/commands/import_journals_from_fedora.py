@@ -327,11 +327,6 @@ class Command(BaseCommand):
             # modification date.
             issue_pids = get_pids(
                 issue_fedora_query + ' mdate>{}'.format(latest_issue_update_date.isoformat()))
-        logger.info(
-            "issue.import.start",
-            full_import=full_import,
-            start_date=start_date
-        )
 
         # STEP 5: import each issue using its PID
         # --
@@ -562,10 +557,6 @@ class Command(BaseCommand):
             or issue.erudit_object.publication_date
         issue.fedora_updated = fedora_issue.modified
         issue.save()
-        logger.info(
-            "issue.imported",
-            issue_pid=issue.pid
-        )
         issue.contributors.all().delete()
 
         for director in issue.erudit_object.directors:
@@ -647,6 +638,11 @@ class Command(BaseCommand):
                 raise
             else:
                 article_count += 1
+
+        logger.info(
+            "issue.imported",
+            issue_pid=issue.pid
+        )
 
         return article_count
 
