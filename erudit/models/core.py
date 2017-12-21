@@ -135,7 +135,7 @@ class Author(Person):
             # XXX why is suffix first?
             return _('{suffix} {firstname} {lastname}').format(
                 suffix=self.suffix, firstname=self.firstname, lastname=self.lastname)
-        return "{lastname}, {firstname}".format(lastname=self.lastname, firstname=self.firstname)
+        return "{firstname} {lastname}".format(lastname=self.lastname, firstname=self.firstname)
 
     def articles_in_journal(self, journal):
         """ Returns the articles written by the author for a given journal. """

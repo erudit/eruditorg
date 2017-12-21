@@ -668,7 +668,7 @@ class TestAuthor(BaseEruditTestCase):
     def test_can_return_its_name(self):
         author_1 = AuthorFactory()
 
-        assert str(author_1) == "{lastname}, {firstname}".format(
+        assert str(author_1) == "{firstname} {lastname}".format(
             lastname=author_1.lastname, firstname=author_1.firstname
         )
 
