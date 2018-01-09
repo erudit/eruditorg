@@ -2,6 +2,7 @@
 
 from django.conf.urls import include
 from django.conf.urls import url
+from django.db.utils import ProgrammingError
 from django.utils.translation import ugettext_lazy as _
 
 import waffle
@@ -10,7 +11,12 @@ from . import views
 
 
 def get_stats_url():
-    if waffle.switch_is_active("new_stats"):
+    try:
+        new_stats_active = waffle.switch_is_active("new_stats")
+    except ProgrammingError:
+        # we're performing an initial migration
+        new_stats_active = False
+    if new_stats_active:
         return url(_(r'^statistiques/'), include('apps.userspace.library.stats.new.urls', namespace='stats'))  # noqa
     return url(_(r'^statistiques/'), include('apps.userspace.library.stats.legacy.urls', namespace='stats'))  # noqa
 
