@@ -29,7 +29,7 @@ $ sudo apt-get install -y python3.4-venv python3-dev mariadb-server libxml2-dev 
 Create the virtualenv:
 
 ```
-$ pyvenv-3.4 env
+$ python3 -m venv env
 ```
 
 Activate the virtualenv:
@@ -119,10 +119,28 @@ The developer VM provides two services: Fedora Commons and Solr.
 
 *TBD*
 
-# External dependencies
+# Managing dependencies
+
+## External dependencies
+
+Outside of `pip`-installed dependencies these programs are also needed:
 
 * `qpdf` for PDF generation.
 
+## Updating pip requirements
+
+The `requirements.txt` file is generated with [pip-tools][pip-tools] from `requirements.in`. The
+reason for this is that we want to describe main dependencies manually (in `requirements.in`) but
+we want to manage transitive dependencies and pinning automatically.
+
+To update `requirements.txt`, ensure you have `pip-tools` installed and run:
+
+```
+$ pip-compile -U
+```
+
+You should then have a `requirements.txt` with up-to-date dependency pinnings. You can run `pip
+install -r requirements.txt` to update your venv.
 
 # Documentation
 
