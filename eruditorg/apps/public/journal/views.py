@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 from collections import OrderedDict
 from functools import reduce
 from itertools import groupby
 from string import ascii_lowercase
+import io
 
 from django.conf import settings
 from django.shortcuts import redirect
@@ -10,15 +10,20 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.template import RequestContext
+from django.template import RequestContext, loader
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.utils.encoding import force_bytes
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
+
 from rules.contrib.views import PermissionRequiredMixin
+from PyPDF2 import PdfFileReader
+from lxml import etree as et
 
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import JournalDigitalObject
@@ -30,6 +35,7 @@ from erudit.models import Article
 from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
+from eruditarticle.utils import remove_xml_namespaces
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
@@ -480,6 +486,39 @@ class BaseArticleDetailView(
     def dispatch(self, *args, **kwargs):
         return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
 
+    def _render_xml_contents(self, only_summary):
+        """ Renders the given article instance as HTML. """
+
+        article = self.get_object()
+        context = self.get_context_data()
+        context['only_summary'] = only_summary
+        if 'article' not in context:
+            context['article'] = article
+
+        if article.fedora_object.pdf.exists:
+            pdf = PdfFileReader(article.fedora_object.pdf.content)
+            context['pdf_exists'] = True
+            context['pdf_num_pages'] = pdf.getNumPages()
+            context['can_display_first_pdf_page'] = (
+                context['pdf_exists'] and
+                context['pdf_num_pages'] > 1
+            )
+
+        # Prepares the XML of the article
+        article_xml = remove_xml_namespaces(et.fromstring(article.fedora_object.xml_content))
+
+        # Renders the templates corresponding to the XSL stylesheet that
+        # will allow us to convert ERUDITXSD300 articles to HTML
+        xsl_template = loader.get_template('public/journal/eruditxsd300_to_html.xsl')
+        xsl = xsl_template.render(context.flatten() if hasattr(context, 'flatten') else context)
+
+        # Performs the XSLT transformation
+        lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
+        html_transform = et.XSLT(lxsl)
+        html_content = html_transform(article_xml)
+
+        return mark_safe(html_content)
+
 
 class ArticleDetailView(FallbackObjectViewMixin, BaseArticleDetailView):
     """
@@ -512,12 +551,18 @@ class ArticleDetailView(FallbackObjectViewMixin, BaseArticleDetailView):
                 'article_li': obj.localidentifier
             }
 
+    def render_xml_contents(self):
+        return self._render_xml_contents(only_summary=False)
+
 
 class ArticleSummaryView(BaseArticleDetailView):
     """
     Displays the summary of an Article instance.
     """
     template_name = 'public/journal/article_summary.html'
+
+    def render_xml_contents(self):
+        return self._render_xml_contents(only_summary=True)
 
 
 class IdEruditArticleRedirectView(RedirectView):
