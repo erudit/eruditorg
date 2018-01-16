@@ -714,7 +714,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     html_title = models.CharField(max_length=800, null=True, blank=True)
     """ The title of the article (HTML) """
 
-    language = models.CharField(max_length=10, verbose_name=_('Code langue'))
+    language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     """ The language code of the article """
 
     external_url = models.URLField(
