@@ -10,7 +10,7 @@ from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalAccessSubscriptionPeriod
 
-from core.subscription.restriction.restriction_models import (
+from core.subscription.restriction.models import (
     Abonne,
     Adressesip,
     Ipabonne,

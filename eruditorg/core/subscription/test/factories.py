@@ -2,6 +2,7 @@
 import datetime as dt
 
 import factory
+import factory.fuzzy
 
 from base.test.factories import UserFactory
 
@@ -15,6 +16,8 @@ from ..models import JournalManagementPlan
 from ..models import JournalManagementSubscription
 from ..models import JournalManagementSubscriptionPeriod
 from ..models import InstitutionReferer
+
+from ..restriction.models import Abonne, Revue, Revueabonne
 
 
 class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
@@ -101,3 +104,27 @@ class JournalManagementSubscriptionPeriodFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = JournalManagementSubscriptionPeriod
+
+
+class AbonneFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = Abonne
+
+    courriel = factory.fuzzy.FuzzyText()
+    abonne = factory.fuzzy.FuzzyText()
+
+
+class RevueFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = Revue
+
+    titrerevabr = factory.fuzzy.FuzzyText()
+    revueid = factory.Sequence(lambda n: str(n))
+
+
+class RevueabonneFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = Revueabonne

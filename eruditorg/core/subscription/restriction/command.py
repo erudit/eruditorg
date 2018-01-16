@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 from PIL import Image
 
 from .conf import settings as restriction_settings
-from .restriction_models import Abonne
+from .models import Abonne
 
 
 class ImportException(Exception):

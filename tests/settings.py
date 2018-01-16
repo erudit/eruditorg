@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 
 from base.settings.base import *  # noqa
@@ -12,8 +10,6 @@ class DisableMigrations(object):
 
     def __getitem__(self, item):
         return 'notmigrations'
-
-
 
 TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,8 +26,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ':memory:'
-    }
+    },
 }
+
+DATABASE_ROUTERS = [
+    'core.subscription.restriction.router.RestrictionRouter',
+]
+
+RESTRICTION_MODELS_ARE_MANAGED = True
 
 MANAGED_COLLECTIONS = ('erudit',)
 
@@ -41,6 +43,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.remove('raven.contrib.django.raven_compat')
+INSTALLED_APPS.append('core.subscription.restriction')
 
 FALLBACK_BASE_URL = 'https://retro.erudit.org/'
 
