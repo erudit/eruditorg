@@ -1,6 +1,7 @@
 {% extends "public/search/base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load cache %}
 
 {% block title %}{% trans "Résultats de recherche" %}{% endblock title %}
 
@@ -162,6 +163,8 @@
             <li class="row result" id="document-{{ document.id }}" data-document-id="{{ document.id }}" {% if document.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}>
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
+                {# We use both 'id' and 'localidentifier' because some documents have no localidentifier, some have no id, but all have either #}
+                {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.real_object.id document.localidentifier LANGUAGE_CODE %}
                 {% if document.document_type == 'article' %}
                 {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
                 {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
@@ -296,6 +299,8 @@
                 </div>
                 {% endif %}
               </div>
+
+              {% endcache %}
 
               {# Toolbox #}
               <div class="toolbox-wrapper">
