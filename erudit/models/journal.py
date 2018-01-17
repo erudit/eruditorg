@@ -780,7 +780,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         if self.formatted_title:
             return self.formatted_title
 
-        if self.get_full_identifier() and self.erudit_object:
+        if self.is_in_fedora:
             return self.erudit_object.get_formatted_title()
         # TODO: remove ArticleTitle when all formated_title are imported
         else:
