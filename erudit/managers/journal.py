@@ -3,11 +3,10 @@
 from django.db import models
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from modeltranslation.manager import MultilingualManager
 from polymorphic.manager import PolymorphicManager
 
 
-class InternalJournalManager(MultilingualManager):
+class InternalJournalManager(models.Manager):
     """ Provides methods to work with journals that are not external.
 
     That is journals without external URLs. We make the assumption that instances without external
@@ -21,7 +20,7 @@ class InternalJournalManager(MultilingualManager):
         )
 
 
-class LegacyJournalManager(MultilingualManager):
+class LegacyJournalManager(models.Manager):
     """ Provides utility methods to work with journals in the legacy databases. """
 
     def get_by_id(self, code):
@@ -43,7 +42,7 @@ class LegacyJournalManager(MultilingualManager):
         return get_object_or_404(self, Q(code=code) | Q(localidentifier=code))
 
 
-class UpcomingJournalManager(MultilingualManager):
+class UpcomingJournalManager(models.Manager):
     """ Provides methods to work with upcoming journals.
 
     An upcoming journal is an internal journal with no published issues

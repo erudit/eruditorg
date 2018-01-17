@@ -111,11 +111,8 @@ class TestJournal(BaseEruditTestCase):
         # Setup
         journal_1 = JournalFactory.create(
             name='Test', collection=self.collection, publishers=[self.publisher])
-        journal_2 = JournalFactory.create(
-            name=None, collection=self.collection, publishers=[self.publisher])
         # Run & check
         self.assertEqual(journal_1.letter_prefix, 'T')
-        self.assertIsNone(journal_2.letter_prefix)
 
     def test_can_return_the_published_open_access_issues(self):
         # Setup
