@@ -20,7 +20,6 @@ from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
-from ...fedora.utils import is_issue_published_in_fedora
 from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
 from ...models import Affiliation
@@ -37,7 +36,6 @@ from ...models import IssueTheme
 from ...models import IssueContributor
 from ...models import Journal
 from ...models import KeywordTag
-from ...models import Publisher
 
 logger = structlog.getLogger(__name__)
 
@@ -317,12 +315,8 @@ class Command(BaseCommand):
         issue_fedora_query = "pid~erudit:{collectionid}.*.* label='Publication Erudit'".format(
             collectionid=collection.localidentifier)
         if self.full_import or latest_update_date is None:
-            full_import = True
-            start_date = None
             issue_pids = get_pids(issue_fedora_query)
         else:
-            full_import = False
-            start_date = latest_update_date.isoformat()
             # Fetches the PIDs of all the issues that have been update since the latest
             # modification date.
             issue_pids = get_pids(
