@@ -14,7 +14,7 @@ faker = FakerFactory.create()
 
 
 class UserFactory(factory.django.DjangoModelFactory):
-    username = factory.LazyAttribute(lambda t: faker.user_name())
+    username = factory.Sequence(lambda n: 'test{}'.format(n))
     email = factory.Sequence(lambda n: 'test{0}@example.com'.format(n))
 
     class Meta:
