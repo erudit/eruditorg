@@ -257,10 +257,11 @@ class GenericSolrDocumentSerializer(serializers.Serializer):
         ))
 
     def get_title(self, obj):
-        if 'Titre_fr' in obj.data:
-            return obj.data['Titre_fr']
-        if 'Titre_en' in obj.data:
-            return obj.data['Titre_en']
+        TITLE_ATTRS = ['Titre_fr', 'Titre_en', 'TitreRefBiblio_aff']
+        for attrname in TITLE_ATTRS:
+            if attrname in obj.data:
+                return obj.data[attrname]
+        return _("(Sans titre)")
 
     class Meta:
         model = GenericSolrDocument
