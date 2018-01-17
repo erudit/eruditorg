@@ -187,11 +187,7 @@ class ThesisSerializer(serializers.ModelSerializer):
         ]
 
     def get_authors(self, obj):
-        return [{
-            'lastname': obj.author.lastname,
-            'firstname': obj.author.firstname,
-            'othername': obj.author.othername,
-        }]
+        return str(obj.author)
 
     def get_collection_name(self, obj):
         return obj.collection.name
