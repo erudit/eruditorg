@@ -5,6 +5,7 @@ from modeltranslation.admin import TranslationAdmin
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
+from django import forms
 
 from ..models import Article
 from ..models import ArticleAbstract
@@ -22,7 +23,22 @@ class JournalDisciplineInline(admin.TabularInline):
     model = Journal.disciplines.through
 
 
+class JournalForm(forms.ModelForm):
+    fields = 'all'
+    model = Journal
+
+    def clean(self):
+        # In Django < 2.0, CharField stores empty values as empty strings, causing
+        # a unicity constraint error when multiple objects have an empty value for
+        # the same field. When we upgrade to Django 2.0, it will not be necessary
+        # to convert empty strings to None values.
+        if self.cleaned_data['localidentifier'] == "":
+            self.cleaned_data['localidentifier'] = None
+        return self.cleaned_data
+
+
 class JournalAdmin(admin.ModelAdmin):
+    form = JournalForm
     search_fields = ('code', 'name', 'issn_print', 'issn_web', 'external_url', )
     list_display = ('__str__', 'code', 'type', 'open_access', 'external_url', 'active', )
     list_display_links = ('__str__', 'code', )
