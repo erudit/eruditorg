@@ -40,7 +40,7 @@ setup(
         'lxml>=3.6.0',
         'nameparser>=0.5.0',
         'Pillow>=3.2.0',
-        'Sickle>=0.5',
+        'Sickle>=0.6',
         'structlog>=17.2.0',
         # Érudit modules
         'liberuditarticle',
