@@ -101,7 +101,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.MIGRATE_HEADING(
             'Start importing "{}" collection'.format(collection.code)))
 
-        sickle = Sickle(endpoint)
+        sickle = Sickle(endpoint, encoding='utf-8')
 
         # STEP 1: initializes an iterator of "sets" using the "ListSets" method
         # --

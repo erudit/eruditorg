@@ -90,7 +90,7 @@ class Command(BaseCommand):
             latest_update_date = latest_thesis_updated.oai_datestamp.date() \
                 if latest_thesis_updated else None
 
-        sickle = Sickle(endpoint)
+        sickle = Sickle(endpoint, encoding='utf-8')
 
         # STEP 1: initializes an iterator of records using the "GetRecords" method
         # --
