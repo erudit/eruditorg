@@ -5,7 +5,6 @@ import structlog
 import re
 import urllib.parse
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.db.models import Q
@@ -606,12 +605,8 @@ class Command(BaseCommand):
         # --
 
         # Journal name
-        self._patch_generic_journal_title(journal, 'name', issue.erudit_object.journal_titles or {})
-        if not journal.subtitle:
-            self._patch_generic_journal_title(
-                journal, 'subtitle', issue.erudit_object.journal_subtitles or {})
-        journal.issn_print = issue.erudit_object.issn
-        journal.issn_web = issue.erudit_object.issn_num
+        if journal.name is None:
+            journal.name = issue.erudit_object.get_journal_title(formatted=True)
         journal.save()
 
         # STEP 5: imports all the articles associated with the issue
@@ -898,23 +893,3 @@ class Command(BaseCommand):
                     article_pid=article.pid,
                     msg='Cannot perform XSLT transformation'
                 )
-
-    def _patch_generic_journal_title(self, journal, field_name, titles):
-        assigned_langs = []
-        for lang, name in titles.get('paral', {}).items():
-            try:
-                title_attr = '{0}_{1}'.format(field_name, lang)
-                assert hasattr(journal, title_attr)
-                setattr(journal, title_attr, name)
-            except AssertionError:  # pragma no cover
-                # Unsupported language?
-                pass
-            else:
-                assigned_langs.append(lang)
-        unassigned_langs = list(
-            set([l[0] for l in settings.LANGUAGES]).intersection(assigned_langs))
-        try:
-            main_lang = 'fr' if 'fr' not in assigned_langs else unassigned_langs[0]
-            setattr(journal, '{0}_{1}'.format(field_name, main_lang), titles.get('main'))
-        except KeyError:  # pragma no cover
-            pass
