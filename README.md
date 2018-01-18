@@ -136,7 +136,7 @@ we want to manage transitive dependencies and pinning automatically.
 To update `requirements.txt`, ensure you have `pip-tools` installed and run:
 
 ```
-$ pip-compile -U
+$ ./tools/update-requirements.sh
 ```
 
 You should then have a `requirements.txt` with up-to-date dependency pinnings. You can run `pip
@@ -178,3 +178,5 @@ Please refer to CONTRIBUTING.md for contribution guidelines.
 # Additional information
 
 If you have further questions or if you wish to discuss the project, please join us on **#erudit** on [Freenode](http://www.freenode.org/).
+
+[pip-tools]: https://github.com/jazzband/pip-tools

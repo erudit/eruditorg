@@ -4,12 +4,12 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
--e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
--e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
--e git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.36#egg=erudit-core
--e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
--e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.13#egg=liberuditarticle
--e git+https://gitlab.erudit.org/erudit/portail/sickle.git@user-configurable-encoding#egg=sickle
+git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
+git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
+git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.36#egg=erudit-core
+git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.13#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/sickle.git@user-configurable-encoding#egg=sickle
 amqp==1.4.9               # via kombu
 anyjson==0.3.3            # via kombu
 babel==2.3.4
