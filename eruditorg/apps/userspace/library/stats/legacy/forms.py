@@ -21,7 +21,10 @@ class CounterReport(forms.Form):
         super().__init__(*args, **kwargs)
 
         end_year = get_last_year_of_subscription(organisation)
-        end_year = end_year if end_year <= current_year else current_year
+        if end_year is None:
+            end_year = current_year
+        else:
+            end_year = end_year if end_year <= current_year else current_year
 
         year_choices = [('', '')] + [
             (y, y) for y in range(end_year, end_year - (end_year - 2008), -1)
