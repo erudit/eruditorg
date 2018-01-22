@@ -205,6 +205,9 @@ class JournalDetailView(
         last_issue = IssueAnnotator.annotate(self.object.last_issue, self)
         context['latest_issue'] = last_issue
         if last_issue is not None and last_issue.is_in_fedora:
+            titles = last_issue.erudit_object.get_journal_title()
+            context['main_title'] = titles['main']
+            context['paral_titles'] = titles['paral']
             context['meta_info_issue'] = last_issue
 
         return context
