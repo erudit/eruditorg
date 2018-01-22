@@ -87,6 +87,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 
     def apply_sorting(self, objects):
         if self.sorting == 'name':
+            objects = objects.select_related('previous_journal').select_related('next_journal')
             grouped = groupby(
                 sorted(objects, key=lambda j: j.letter_prefix), key=lambda j: j.letter_prefix)
             first_pass_results = [{'key': g[0], 'name': g[0], 'objects': sorted(
