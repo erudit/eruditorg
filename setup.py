@@ -32,9 +32,8 @@ setup(
     long_description=read_relative_file('README.rst'),
     zip_safe=False,
     install_requires=[
-        'django>=1.8',
-        'django-modeltranslation>=0.11',
-        'django-polymorphic>=0.9',
+        'django>=1.10,<2.0',
+        'django-polymorphic>=0.9,<2.0',
         'django-taggit>=0.20',
         'eulfedora>=1.5.0',
         'lxml>=3.6.0',
@@ -44,9 +43,13 @@ setup(
         'structlog>=17.2.0',
         # Érudit modules
         'liberuditarticle',
+        # temporarily fetching from git until 0.13 is released. Otherwise,
+        # test_published_issues_uses_fedora_order fails.
+        'django-modeltranslation==0.13',
     ],
     dependency_links=[
         'git+https://github.com/erudit/liberuditarticle.git#egg=liberuditarticle-0.2.8',
+        'git+https://github.com/deschler/django-modeltranslation.git@00fc7f1804aaa1b1e37af48e67871080851e14b0#egg=django-modeltranslation-0.13', # noqa
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

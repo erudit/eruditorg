@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import copy
 import datetime as dt
 import dateutil.relativedelta as dr
@@ -8,7 +6,7 @@ from functools import reduce
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Case, When
 from django.utils.functional import cached_property
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
@@ -29,6 +27,7 @@ from ..fedora.objects import ArticleDigitalObject
 from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..fedora.shortcuts import get_cached_datastream_content
+from ..fedora.utils import localidentifier_from_pid
 from ..managers import InternalArticleManager
 from ..managers import InternalIssueManager
 from ..managers import InternalJournalManager
@@ -286,7 +285,19 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def published_issues(self):
         """ Return the published issues of this Journal. """
-        return self.issues.filter(is_published=True)
+        qs = self.issues.filter(is_published=True)
+        if self.is_in_fedora:
+            # Properly ordering issues is not our job. It's the responsibility of the creator of
+            # the fedora object. Subtle things can affect ordering and we need to dumbly use this
+            # order.
+            pids = self.erudit_object.get_published_issues_pids()
+            localidentifiers = [localidentifier_from_pid(pid) for pid in pids]
+            qs = qs.filter(localidentifier__in=localidentifiers)
+            # https://stackoverflow.com/a/37648265
+            preserved = Case(
+                *[When(localidentifier=lid, then=i) for i, lid in enumerate(localidentifiers)])
+            qs = qs.order_by(preserved)
+        return qs
 
     @property
     def published_open_access_issues(self):
@@ -310,13 +321,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def last_issue(self):
         """ Return the last published Issue of this Journal. """
         if self.is_in_fedora:
-            try:
-                issue_pid = self.erudit_object.get_last_published_issue_pid()
-                issue_localidentifier = issue_pid.split(".")[::-1][0]
-                issue = self.published_issues.get(localidentifier=issue_localidentifier)
-                return issue
-            except Issue.DoesNotExist:
-                return self.published_issues.order_by('-date_published').first()
+            return self.published_issues.first()
         else:
             return self.published_issues.order_by('-date_published').first()
 
