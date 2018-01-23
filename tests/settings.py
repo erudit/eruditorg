@@ -20,6 +20,9 @@ CACHES = {
     'files': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
+    'fedora': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
 }
 
 # Not an actual setting, but can be used in some tests with @override_settings
