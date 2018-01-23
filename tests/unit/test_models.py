@@ -40,13 +40,14 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_its_published_issues(self):
         # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, year=2010)
-        issue_2 = IssueFactory.create(journal=self.journal, year=2009)
+        issue_1 = IssueFactory.create(journal=self.journal, year=2010, use_fedora=False)
+        issue_2 = IssueFactory.create(journal=self.journal, year=2009, use_fedora=False)
 
         # Create an unpublished issue
         IssueFactory.create(
             journal=self.journal, is_published=False,
-            year=dt.datetime.now().year + 2
+            year=dt.datetime.now().year + 2,
+            use_fedora=False,
         )
         # Run & check
         self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
@@ -76,11 +77,15 @@ class TestJournal(BaseEruditTestCase):
         # Setup
         issue_1 = IssueFactory.create(
             journal=self.journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=1))
-        IssueFactory.create(journal=self.journal, year=2010, date_published=dt.datetime.now())
+            date_published=dt.datetime.now() - dt.timedelta(days=1),
+            use_fedora=False)
+        IssueFactory.create(
+            journal=self.journal, year=2010, date_published=dt.datetime.now(),
+            use_fedora=False)
         IssueFactory.create(
             journal=self.journal, year=dt.datetime.now().year + 2,
-            date_published=dt.datetime.now() + dt.timedelta(days=30))
+            date_published=dt.datetime.now() + dt.timedelta(days=30),
+            use_fedora=False)
         # Run & check
         self.assertEqual(self.journal.first_issue, issue_1)
 
@@ -229,6 +234,21 @@ class TestJournal(BaseEruditTestCase):
 
         assert last_issue_editor in journal.get_editors()
         assert first_issue_editor not in journal.get_editors()
+
+    def test_published_issues_uses_fedora_order(self):
+        # The `published_issues` queryset returns a list that uses order fetched from fedora.
+        journal = JournalFactory.create()
+        issue1 = IssueFactory.create(journal=journal)
+        issue2 = IssueFactory.create(journal=journal)
+        issue3 = IssueFactory.create(journal=journal)
+        ordered_issues = [issue3, issue1, issue2]
+        ordered_pids = [i.get_full_identifier() for i in ordered_issues]
+        print(ordered_pids)
+        journal.erudit_object = unittest.mock.MagicMock()
+        journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
+            return_value=ordered_pids)
+
+        assert list(journal.published_issues.all()) == ordered_issues
 
 
 class TestIssue(BaseEruditTestCase):
