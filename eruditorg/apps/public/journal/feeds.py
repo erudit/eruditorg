@@ -5,6 +5,7 @@ import datetime as dt
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
+from django.http import Http404
 from django.utils.translation import gettext as _
 
 from base.feedgenerator import EruditRssFeedGenerator
@@ -69,6 +70,8 @@ class LatestJournalArticlesFeed(Feed):
         """ Get the journal's latest issues. """
         self.journal = Journal.objects.get(Q(code=code) | Q(localidentifier=code))
         self.last_issue = self.journal.last_issue
+        if self.last_issue is None:
+            raise Http404()
 
     def get_context_data(self, **kwargs):
         context = super(LatestJournalArticlesFeed, self).get_context_data(**kwargs)
