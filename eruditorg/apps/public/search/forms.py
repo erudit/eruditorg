@@ -44,8 +44,8 @@ AVAILABILITY_CHOICES = (
 
 FUNDS_CHOICES = (
     ('Érudit', _('Érudit')),
-    ('Persée', _('Persée')),
     ('UNB', _('UNB Libraries')),
+    ('Persée', _('Persée')),
     ('NRC', _('NRC Research Press')),
 )
 
@@ -101,22 +101,23 @@ def get_years_range(
     return years_range
 
 
-def build_language_choices(filter_languages=None):
+def build_language_filter_choices(filter_languages=None):
     """ :returns: the language choices for the Search forms"""
-    if not filter_languages:
-        language_choices = [(k, v,) for k, v in language_label_correspondence.items()]
-    else:
-        language_choices = []
-        for v, c in filter_languages:
-            try:
-                assert re.match(r'^[a-zA-Z]+$', v)
-                language_name = language_label_correspondence[v]
-            except AssertionError:  # pragma: no cover
-                continue
-            except KeyError:
-                language_name = v
-            language_choices.append((v, '{v} ({count})'.format(v=language_name, count=c)))
-    return sorted(language_choices, key=lambda x: x[1])
+    language_choices = []
+    filter_languages = sorted(filter_languages, key=lambda x: x[1], reverse=True)
+    for v, c in filter_languages:
+        try:
+            assert re.match(r'^[a-zA-Z]+$', v)
+            language_name = language_label_correspondence[v]
+        except AssertionError:  # pragma: no cover
+            continue
+        except KeyError:
+            language_name = v
+        language_choices.append((v, "{language_name} ({c})".format(
+            language_name=language_name,
+            c=c
+        )))
+    return language_choices
 
 
 class SearchForm(forms.Form):
@@ -172,7 +173,7 @@ class SearchForm(forms.Form):
 
     languages = forms.MultipleChoiceField(
         label=_('Langues'),
-        choices=build_language_choices(),
+        choices=[(k, v,) for k, v in language_label_correspondence.items()],
         required=False)
 
     disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
@@ -245,7 +246,7 @@ class ResultsFilterForm(forms.Form):
 
         if aggregations:
             self.fields['filter_years'].choices = self._get_aggregation_choices(
-                aggregations['year'])[::-1]
+                aggregations['year'], sort_key=lambda x: x[0], sort_reverse=True)
             self.fields['filter_years'].choices = filter(
                 lambda y: re.match(r'^\d+$', y[0]), self.fields['filter_years'].choices)
 
@@ -262,28 +263,45 @@ class ResultsFilterForm(forms.Form):
             )
 
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
-                aggregations['article_type']
+                aggregations['article_type'],
+                sort_key=lambda x: x[1],
+                sort_reverse=True
             )
 
             # Prepares the languages fields
-            language_choices = build_language_choices(
+            language_choices = build_language_filter_choices(
                 filter_languages=aggregations['language'].items()
             )
 
-            self.fields['filter_languages'].choices = sorted(language_choices, key=lambda x: x[1])
-            self.fields['filter_collections'].choices = self._get_aggregation_choices(
-                aggregations['collection'])
-            self.fields['filter_authors'].choices = self._get_aggregation_choices(
-                aggregations['author'])
-            self.fields['filter_funds'].choices = self._get_aggregation_choices(
-                aggregations['fund'])
-            self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
-                aggregations['publication_type'])
+            self.fields['filter_languages'].choices = language_choices
 
-    def _get_aggregation_choices(self, aggregation_dict):
-        return sorted([
-            (v, '{v} ({count})'.format(v=v, count=c)) for v, c in aggregation_dict.items()],
-            key=lambda x: x[0])
+            self.fields['filter_collections'].choices = self._get_aggregation_choices(
+                aggregations['collection'],
+                sort_key=lambda x: x[1],
+                sort_reverse=True
+            )
+            self.fields['filter_authors'].choices = self._get_aggregation_choices(
+                aggregations['author'],
+                sort_key=lambda x: x[1],
+                sort_reverse=True
+            )
+
+            funds_code = [funds[0] for funds in FUNDS_CHOICES]
+            self.fields['filter_funds'].choices = self._get_aggregation_choices(
+                aggregations['fund'],
+                sort_key=lambda x: funds_code.index(x[0])
+            )
+
+            self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
+                aggregations['publication_type'],
+                sort_key=lambda x: x[1], sort_reverse=True
+            )
+
+    def _get_aggregation_choices(self, aggregation_dict, sort_key=None, sort_reverse=False):
+        items = aggregation_dict.items()
+        if sort_key:
+            items = sorted(items, key=sort_key, reverse=sort_reverse)
+        return [(v, '{v} ({count})'.format(v=v, count=c)) for v, c in items]
 
 
 class ResultsOptionsForm(forms.Form):
