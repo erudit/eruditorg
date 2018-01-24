@@ -584,14 +584,15 @@ class TestArticleRawPdfView(BaseEruditTestCase):
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
         mock_ds = ['ERUDITXSD300', ]  # noqa
+        journal = JournalFactory()
         issue = IssueFactory.create(
-            journal=self.journal, year=2010,
+            journal=journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1000))
         IssueFactory.create(
-            journal=self.journal, year=2010,
+            journal=journal, year=2010,
             date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
-        journal_id = self.journal.localidentifier
+        journal_id = journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = reverse('public:journal:article_raw_pdf', args=(
