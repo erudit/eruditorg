@@ -10,6 +10,7 @@ from django.test.utils import override_settings
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
 from erudit.fedora.modelmixins import FedoraMixin
 
 from apps.public.journal.feeds import LatestIssuesFeed
@@ -60,18 +61,19 @@ class TestLatestJournalArticlesFeed(BaseEruditTestCase):
     def test_can_return_all_the_articles_associated_with_the_last_issue_of_a_journal(self, mock_erudit_object):  # noqa
         # Setup
         mock_erudit_object.return_value = get_mocked_erudit_object()
+        journal = JournalFactory(use_fedora=False)
         issue1 = IssueFactory.create(
-            journal=self.journal, year=2010, date_published=dt.datetime.now())
+            journal=journal, year=2010, date_published=dt.datetime.now())
         article1 = ArticleFactory.create(issue=issue1)
         article2 = ArticleFactory.create(issue=issue1)
         issue2 = IssueFactory.create(
-            journal=self.journal, year=2010,
+            journal=journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=2))
         ArticleFactory.create(issue=issue2)
         request = self.factory.get('/')
         # Run
         f = LatestJournalArticlesFeed()
-        f.get_object(request, self.journal.code)
+        f.get_object(request, journal.code)
         feed = f.get_feed(None, request)
         # Check
         self.assertEqual(len(feed.items), 2)
