@@ -64,6 +64,7 @@ class TestResultsFilterForm(BaseEruditTestCase):
     def test_can_initialize_years_choices_from_aggregation_results(self):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
+
         self.assertEqual(
             form.fields['filter_years'].choices,
             [
@@ -89,7 +90,6 @@ class TestResultsFilterForm(BaseEruditTestCase):
         ag_dict = copy.copy(self.aggregation_dict)
         ag_dict['article_type']['Compterendu'] = 1
         form = ResultsFilterForm(api_results={'aggregations': ag_dict})
-
         self.assertEqual(
             form.fields['filter_article_types'].choices,
             [
@@ -101,11 +101,12 @@ class TestResultsFilterForm(BaseEruditTestCase):
     def test_can_initialize_languages_choices_from_aggregation_results(self):
         # Run & check
         form = ResultsFilterForm(api_results={'aggregations': self.aggregation_dict})
+
         self.assertEqual(
             form.fields['filter_languages'].choices,
             [
-                ('en', 'Anglais (9)'),
                 ('fr', 'Français (248)'),
+                ('en', 'Anglais (9)'),
             ])
 
     def test_can_initialize_collections_choices_from_aggregation_results(self):
@@ -124,8 +125,8 @@ class TestResultsFilterForm(BaseEruditTestCase):
         self.assertEqual(
             form.fields['filter_authors'].choices,
             [
-                ('test1, foo', 'test1, foo (2)'),
                 ('test2, bar', 'test2, bar (10)'),
+                ('test1, foo', 'test1, foo (2)'),
             ])
 
     def test_can_initialize_funds_choices_from_aggregation_results(self):
@@ -143,6 +144,6 @@ class TestResultsFilterForm(BaseEruditTestCase):
         self.assertEqual(
             form.fields['filter_publication_types'].choices,
             [
-                ('Article', 'Article (106)'),
                 ('Culturel', 'Culturel (151)'),
+                ('Article', 'Article (106)'),
             ])
