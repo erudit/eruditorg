@@ -19,7 +19,12 @@ MONTH_CHOICES = [('', '')] + [
 class CounterReport(forms.Form):
     def __init__(self, organisation=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         end_year = get_last_year_of_subscription(organisation)
+        if end_year is None:
+            end_year = current_year
+        else:
+            end_year = end_year if end_year <= current_year else current_year
 
         year_choices = [('', '')] + [
             (y, y) for y in range(end_year, end_year - (end_year - 2008), -1)
@@ -29,36 +34,12 @@ class CounterReport(forms.Form):
             (y, y) for y in range(end_year, end_year - (end_year - 2010), -1)
         ]
 
-        self.fields['year'].widget = forms.Select(choices=year_choices)
-        self.fields['year_start'].widget = forms.Select(choices=year_period_choices)
-        self.fields['year_end'].widget = forms.Select(choices=year_period_choices)
-        self.fields['month_start'].widget = forms.Select(choices=MONTH_CHOICES)
-        self.fields['month_end'].widget = forms.Select(choices=MONTH_CHOICES)
-        self.fields['format'].widget = forms.Select(choices=FORMAT_CHOICES)
-
-    year = forms.ChoiceField(
-        label=_("Année"), widget=forms.Select(), required=False
-    )
-
-    month_start = forms.ChoiceField(
-        label=_("Mois"), widget=forms.Select(choices=MONTH_CHOICES), required=False
-    )
-
-    year_start = forms.ChoiceField(
-        label=_("Année"), widget=forms.Select(), required=False
-    )
-
-    month_end = forms.ChoiceField(
-        label=_("Mois"), widget=forms.Select(choices=MONTH_CHOICES), required=False
-    )
-
-    year_end = forms.ChoiceField(
-        label=_("Année"), widget=forms.Select(), required=False
-    )
-
-    format = forms.ChoiceField(
-        label=_("Format"), widget=forms.Select(choices=FORMAT_CHOICES), required=True
-    )
+        self.fields['year'] = forms.ChoiceField(choices=year_choices, required=False)
+        self.fields['year_start'] = forms.ChoiceField(choices=year_period_choices, required=False)
+        self.fields['year_end'] = forms.ChoiceField(choices=year_period_choices, required=False)
+        self.fields['month_start'] = forms.ChoiceField(choices=MONTH_CHOICES, required=False)
+        self.fields['month_end'] = forms.ChoiceField(choices=MONTH_CHOICES, required=False)
+        self.fields['format'] = forms.ChoiceField(choices=FORMAT_CHOICES, required=False)
 
     def clean(self):
         cleaned_data = super().clean()
