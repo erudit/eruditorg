@@ -1,8 +1,19 @@
+import datetime as dt
+import os
 import pytest
+import unittest.mock
 
+from django.template import Context
+
+from erudit.test import BaseEruditTestCase
+from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
+from erudit.fedora.objects import ArticleDigitalObject
+from erudit.models import Issue
 from erudit.test.factories import ArticleFactory, ArticleSectionTitleFactory
-from apps.public.journal.views import IssueDetailView
+from apps.public.journal.views import IssueDetailView, ArticleDetailView
 
+FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 @pytest.mark.django_db
 class TestIssueDetailSummary(object):
@@ -120,3 +131,70 @@ class TestIssueDetailSummary(object):
                 }
             ]
         }
+
+@unittest.mock.patch.object(
+    Issue,
+    'erudit_object',
+)
+@unittest.mock.patch.object(
+    ArticleDigitalObject,
+    'erudit_xsd300',
+    content=unittest.mock.MagicMock()
+)
+@unittest.mock.patch.object(
+    ArticleDigitalObject,
+    '_get_datastreams',
+    return_value=['ERUDITXSD300', ]
+)
+@unittest.mock.patch.object(
+    Issue,
+    'has_coverpage',
+    return_value=True
+)
+class TestRenderArticleTemplateTag(BaseEruditTestCase):
+
+    def test_can_transform_article_xml_to_html(
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo
+        ):
+        # Setup
+        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
+            xml = fp.read()
+        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue)
+        view = ArticleDetailView()
+        view.get_context_data = unittest.mock.MagicMock(return_value=Context({}))
+        view.get_object = unittest.mock.MagicMock(return_value=article)
+
+        # Run
+        ret = view.render_xml_contents()
+
+        # Check
+        self.assertTrue(ret is not None)
+        self.assertTrue(ret.startswith('<div xmlns:v="variables-node" class="article-wrapper">'))
+
+    @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
+    def test_can_transform_article_xml_to_html_when_pdf_exists(
+            self, mock_pdf, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo
+        ):
+        # Setup
+        with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
+            xml = fp.read()
+        fp = open(FIXTURE_ROOT + '/article.pdf', mode='rb')
+        mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
+        mock_pdf.exists = True
+        mock_pdf.content = fp
+        issue = IssueFactory.create(
+            journal=JournalFactory(), date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue)
+        view = ArticleDetailView()
+        view.get_context_data = unittest.mock.MagicMock(return_value=Context({}))
+        view.get_object = unittest.mock.MagicMock(return_value=article)
+
+        # Run
+        ret = view.render_xml_contents()
+
+        # Check
+        fp.close()
+        self.assertTrue(ret is not None)

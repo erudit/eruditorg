@@ -85,7 +85,7 @@
 
   {% cache FOREVER_TTL "public_article_summary_content" article.id in_citation_list LANGUAGE_CODE %}
   {# XSL transformation article render #}
-  {% render_article article only_summary=True %}
+  {{ view.render_xml_contents }}
   {% endcache %}
 </main>
 

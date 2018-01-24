@@ -19,7 +19,6 @@ celery==3.1.25
 certifi==2018.1.18        # via requests
 cffi==1.11.4              # via cairocffi, weasyprint
 chardet==3.0.4            # via requests
-contextlib2==0.5.5        # via raven
 cssselect2==0.2.1         # via cairosvg, weasyprint
 cssselect==1.0.3          # via lxml
 defusedxml==0.5.0         # via cairosvg
@@ -71,7 +70,7 @@ pysolr==3.4.0
 python-dateutil==2.6.1    # via eulfedora, influxdb
 python-utils==2.2.0       # via progressbar2
 pytz==2017.3              # via babel, celery, influxdb
-raven==5.10.2
+raven==6.5.0
 rdflib==4.2.2             # via eulfedora
 redis==2.10.6
 requests-toolbelt==0.8.0  # via eulfedora
@@ -80,6 +79,7 @@ rules==1.1.1
 sickle==0.6.2
 simplejson==3.13.2
 six==1.11.0               # via eulfedora, html5lib, influxdb, isodate, python-dateutil, python-utils, structlog
+sqlparse==0.2.4
 structlog==17.2.0
 tinycss2==0.6.1           # via cairosvg, cssselect2, weasyprint
 urllib3==1.22             # via requests
