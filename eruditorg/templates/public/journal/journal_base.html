@@ -71,12 +71,15 @@
           -> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
         </p>
         {% endblock aside_authors_list %}
+        {% if meta_info_issue %}
         <p>
           -> <a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>
         </p>
+        {% endif %}
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
         <dl class="journal-meta--list">
 
+          {% if meta_info_issue %}
           {% if meta_info_issue.get_directors %}
           <dt>{% trans "Direction" %}</dt>
           {% for issue_contributor in meta_info_issue.get_directors %}
@@ -113,6 +116,7 @@
           <dd>{{ meta_info_issue.erudit_object.issn_num }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
+          {% endif %} {# if meta_info_issue #}
 
           {% if journal.issues_per_year %}
           <dt>{% trans "Fréquence" %}</dt>
