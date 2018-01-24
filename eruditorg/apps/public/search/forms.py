@@ -47,6 +47,7 @@ FUNDS_CHOICES = (
     ('UNB', _('UNB Libraries')),
     ('Persée', _('Persée')),
     ('NRC', _('NRC Research Press')),
+    ('FRQ', _('Fonds de Recherche du Québec')),
 )
 
 PUB_TYPES_CHOICES = (
