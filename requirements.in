@@ -4,7 +4,6 @@ Django>=1.10.4,<1.11
 -e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 -e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 -e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
--e git+https://gitlab.erudit.org/erudit/portail/sickle.git@user-configurable-encoding#egg=sickle
 
 # pip-compile can't detect transitive dependencies from git dependecies. We have to list them
 # ourselves
