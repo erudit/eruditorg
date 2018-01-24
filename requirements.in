@@ -1,9 +1,10 @@
 Django>=1.10.4,<1.11
 -e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.14#egg=liberuditarticle
--e git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.37#egg=erudit-core
+-e git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.38#egg=erudit-core
 -e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 -e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 -e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
+-e git+https://github.com/deschler/django-modeltranslation.git@00fc7f1804aaa1b1e37af48e67871080851e14b0#egg=django-modeltranslation-0.13
 
 # pip-compile can't detect transitive dependencies from git dependecies. We have to list them
 # ourselves
@@ -26,7 +27,6 @@ django-filter>=0.11.0,<0.12
 rules>=1.1.1,<1.2
 PyPDF2>=1.25.1,<1.26
 WeasyPrint>=0.26
-django-modeltranslation>=0.12
 django-ckeditor>=5.0.3,<5.1
 django-polymorphic>=1.0.2,<1.1
 django-taggit>=0.20.1,<0.21

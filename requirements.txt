@@ -5,8 +5,9 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
+git+https://github.com/deschler/django-modeltranslation.git@00fc7f1804aaa1b1e37af48e67871080851e14b0#egg=django-modeltranslation-0.13
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
-git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.37#egg=erudit-core
+git+https://gitlab.erudit.org/erudit/portail/erudit-core.git@0.4.38#egg=erudit-core
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
 git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.14#egg=liberuditarticle
 amqp==1.4.9               # via kombu
@@ -29,12 +30,11 @@ django-filter==0.11.0
 django-fsm==2.3.0
 django-ipware==2.0.1
 django-js-reverse==0.7.3
-django-modeltranslation==0.12.1
 django-polymorphic==1.0.2
 django-post-office==2.0.8
 django-redis==4.7.0
 django-taggit==0.20.2
-django-waffle==0.12.0
+django-waffle==0.13.0
 django-widget-tweaks==1.4.1
 django==1.10.8
 djangorestframework==3.3.3
