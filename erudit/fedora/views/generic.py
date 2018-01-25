@@ -37,6 +37,8 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
         self.request = request
         self.kwargs = kwargs.copy()
         self.fedora_object = self.get_fedora_object()
+        if self.fedora_object is None:
+            raise Http404()
         return self.write_to_response(self.fedora_object)
 
     def get_fedora_object(self):
@@ -51,6 +53,8 @@ class FedoraFileDatastreamView(SingleObjectMixin, View):
             raise ImproperlyConfigured(
                 '{cls} is missing a Fedora object. Define {cls}.fedora_object_class '
                 'or override {cls}.get_fedora_object().'.format(cls=self.__class__.__name__))
+        if self._fedora_object_pid is None:
+            return None
         return self.fedora_object_class(api, self._fedora_object_pid)
 
     def get_fedora_object_pid(self):
