@@ -162,3 +162,16 @@ class TestFedoraFileDatastreamView(BaseEruditTestCase):
         # Run & check
         with self.assertRaises(Http404):
             view.get_datastream_content(mock_fedora_obj)
+
+    def test_get_fedora_object_handles_none_pid(self):
+        # When the PID is None, we get a None fedora object.
+        class MyView(FedoraFileDatastreamView):
+            content_type = 'image/jpeg'
+            datastream_name = 'dstream'
+            fedora_object_class = JournalDigitalObject
+            model = Journal
+
+        view = MyView()
+        view.get_fedora_object_pid = unittest.mock.MagicMock(return_value=None)
+
+        self.assertIsNone(view.get_fedora_object())
