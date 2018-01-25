@@ -195,7 +195,10 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         request = copy.copy(self.request)
         request.GET = request.GET.copy()  # A QueryDict is immutable
         request.GET.setdefault('format', 'json')
-        results_data = list_view(request).render().content
+        results = list_view(request)
+        if results.status_code != 200:
+            return HttpResponseRedirect(reverse('public:search:advanced_search'))
+        results_data = results.render().content
         results = json.loads(smart_text(results_data))
         # Initializes the filters form here in order to display it using choices generated from the
         # aggregations embedded in the results.

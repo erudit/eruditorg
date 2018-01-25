@@ -290,7 +290,7 @@ class ResultsFilterForm(forms.Form):
             funds_code = [funds[0] for funds in FUNDS_CHOICES]
             self.fields['filter_funds'].choices = self._get_aggregation_choices(
                 aggregations['fund'],
-                sort_key=lambda x: funds_code.index(x[0])
+                sort_key=lambda x: funds_code.index(x[0]) if x[0] in funds_code else -1
             )
 
             self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
