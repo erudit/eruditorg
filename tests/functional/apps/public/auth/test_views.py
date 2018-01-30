@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
@@ -6,6 +7,9 @@ from django.test import RequestFactory
 from erudit.test import BaseEruditTestCase
 
 from base.test.testcases import EruditClientTestCase
+from base.test.factories import UserFactory
+from core.accounts.test.factories import LegacyAccountProfileFactory
+from core.accounts.models import LegacyAccountProfile
 
 
 class TestUserPersonalDataUpdateView(EruditClientTestCase):
@@ -42,6 +46,28 @@ class TestUserParametersUpdateView(EruditClientTestCase):
         self.user.refresh_from_db()
         assert self.user.username == 'foobar'
         assert self.user.email == 'xyz@example.com'
+
+    @pytest.mark.parametrize("profile_origin, expected", [
+        (LegacyAccountProfile.DB_ABONNEMENTS, 302),
+        (LegacyAccountProfile.DB_RESTRICTION, 403),
+    ])
+    def test_users_with_legacy_restriction_profile_cannot_change_username(self, profile_origin, expected):  # noqa
+        user = UserFactory(password="password")
+
+        profile = LegacyAccountProfileFactory(user=user)
+        profile.origin = profile_origin
+        profile.save()
+
+        self.client.login(username=user.username, password='password')
+        post_data = {
+            'username': 'foobar',
+            'email': 'xyz@example.com',
+        }
+        url = reverse('public:auth:parameters')
+        # Run
+        response = self.client.post(url, post_data, follow=False)
+        # Check
+        assert response.status_code == expected
 
 
 class TestUserPasswordChangeView(BaseEruditTestCase):
