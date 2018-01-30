@@ -28,13 +28,22 @@ from apps.public.search.views import SavedSearchRemoveView
 
 faker = Faker()
 
-
 def fake_get_results(**kwargs):
     results = unittest.mock.Mock()
     results.docs = [
         {'ID': a.localidentifier, 'Corpus_fac': 'Article'} for a in Article.objects.all()
     ]
-    results.facets = {'facet_fields': {'Corpus_fac': ['val1', 12, 'val2', 14, ], }}
+    results.facets = {
+        'facet_fields': {
+            'Annee': ['1995', 12, '1996', 12, ],
+            'TypeArticle_fac': ['Article', 12, 'Culturel', 12],
+            'Langue': ['fr', 12, 'en', 12],
+            'TitreCollection_fac': ['Article', 12, 'Livre', 12],
+            'Auteur_tri': ['author 1', 12, 'author 2', 12],
+            'Fonds_fac': ['Erudit', 12, 'Erudit 2', 12],
+            'Corpus_fac': ['val1', 12, 'val2', 14, ],
+        }
+    }
     results.hits = 50
     return results
 
@@ -67,7 +76,6 @@ def get_mocked_erudit_object():
     m.get_reviewed_works = lambda: []
     m.get_formatted_title.return_value = "mocked title"
     return m
-
 
 @override_settings(DEBUG=True)
 class TestEruditDocumentListAPIView(BaseEruditTestCase):
@@ -169,6 +177,19 @@ class TestSearchResultsView(BaseEruditTestCase):
         self.assertTrue(len(response.redirect_chain))
         last_url, status_code = response.redirect_chain[-1]
         self.assertTrue(reverse('public:search:advanced_search') in last_url)
+
+    @unittest.mock.patch.object(Query, 'get_results')
+    def test_redirects_to_the_advanced_search_form_if_the_search_api_does_not_return_a_200(self, mock_get_results):  # noqa
+        url = reverse('public:search:results')
+        # Run
+        mock_get_results.side_effect = fake_get_results
+        response = self.client.get(url, follow=True, data={'basic_search_term': 'poulet', 'page': '6'})
+
+        assert len(response.redirect_chain) == 1
+        last_url, status_code = response.redirect_chain[-1]
+        assert reverse('public:search:advanced_search') in last_url
+
+
 
 
 @pytest.mark.django_db
