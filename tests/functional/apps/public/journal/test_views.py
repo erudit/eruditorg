@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 import io
 import os
@@ -8,14 +6,12 @@ import subprocess
 import itertools
 
 from django.contrib.auth.models import AnonymousUser
-from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
 from django.test import RequestFactory
 from django.conf import settings
 from django.test.utils import override_settings
-from PyPDF2 import PdfFileReader
 import pytest
 
 from erudit.models import JournalType, Issue
@@ -25,7 +21,6 @@ from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
 from erudit.test.factories import IssueFactory
-from erudit.test.factories import EmbargoedArticleFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
@@ -34,14 +29,10 @@ from erudit.fedora.modelmixins import FedoraMixin
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
-from core.subscription.test.factories import InstitutionRefererFactory
-from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
 from core.subscription.models import UserSubscriptions
 
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
-from apps.public.journal.views import ArticleRawPdfFirstPageView
 from apps.public.journal.views import ArticleRawPdfView
 from apps.public.journal.views import ArticleXmlView
 
@@ -192,7 +183,7 @@ class TestJournalListView(object):
 
 
 @pytest.mark.django_db
-class TestJournalListView(object):
+class TestJournalDetailView:
 
     @pytest.fixture(autouse=True)
     def setup(self, settings):
@@ -243,14 +234,17 @@ class TestJournalListView(object):
         assert response.status_code == 200
         assert list(response.context['issues']) == [issue]
 
-    def test_can_embed_the_latest_issue_in_the_context(self):
+    @pytest.mark.parametrize('external_url', ['https://example.com', None])
+    def test_can_embed_the_latest_issue_in_the_context(self, external_url):
         # Setup
         collection = CollectionFactory.create(localidentifier='erudit')
         journal = JournalFactory.create(collection=collection)
 
         IssueFactory.create(
             journal=journal, date_published=dt.datetime.now())
-        issue_2 = IssueFactory.create(journal=journal, date_published=dt.datetime.now() + dt.timedelta(days=1))
+        issue_2 = IssueFactory.create(
+            journal=journal, date_published=dt.datetime.now() + dt.timedelta(days=1),
+            external_url=external_url)
 
         url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
         # Run
@@ -258,6 +252,10 @@ class TestJournalListView(object):
         # Check
         assert response.status_code == 200
         assert response.context['latest_issue'] == issue_2
+        link_attrs = response.context['latest_issue'].helper.detail_link_attrs()
+        if external_url:
+            assert external_url in link_attrs
+        assert ('_blank' in link_attrs) == (external_url is not None)
 
     def test_embeds_a_boolean_indicating_if_the_user_is_subscribed_to_the_current_journal(self):
         # Setup

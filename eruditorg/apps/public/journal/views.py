@@ -44,6 +44,7 @@ from core.metrics.metric import metric
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
 from .forms import JournalListFilterForm
+from .templatehelpers import IssueHelper
 from .viewmixins import ContentAccessCheckMixin
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
@@ -198,9 +199,11 @@ class JournalDetailView(
             context['journal_info'] = journal_info
 
         # Fetches the published issues and the latest issue associated with the current journal
-        context['issues'] = self.object.published_issues
-        context['latest_issue'] = self.object.last_issue
-        context['meta_info_issue'] = self.object.last_issue
+        issues = [IssueHelper.helperize(issue) for issue in self.object.published_issues.all()]
+        context['issues'] = issues
+        last_issue = IssueHelper.helperize(self.object.last_issue)
+        context['latest_issue'] = last_issue
+        context['meta_info_issue'] = last_issue
 
         return context
 
