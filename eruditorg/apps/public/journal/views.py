@@ -203,7 +203,8 @@ class JournalDetailView(
         context['issues'] = issues
         last_issue = IssueHelper.helperize(self.object.last_issue)
         context['latest_issue'] = last_issue
-        context['meta_info_issue'] = last_issue
+        if last_issue is not None and last_issue.is_in_fedora:
+            context['meta_info_issue'] = last_issue
 
         return context
 
