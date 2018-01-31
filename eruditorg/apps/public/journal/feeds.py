@@ -46,8 +46,10 @@ class LatestIssuesFeed(Feed):
 
     def items(self):
         """ Returns the items to embed in the feed. """
-        return Issue.objects.filter(date_published__gte=self.get_start_date()) \
-            .order_by('-date_published')
+        return Issue.objects.filter(
+            date_published__gte=self.get_start_date(),
+            is_published=True
+        ).order_by('-date_published')
 
 
 class LatestJournalArticlesFeed(Feed):

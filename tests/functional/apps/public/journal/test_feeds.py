@@ -37,6 +37,9 @@ class TestLatestIssuesFeed(BaseEruditTestCase):
             journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=20))
         IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now() - dt.timedelta(days=110))
+        # Don't show unpublished issues
+        IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), is_published=False)
         request = self.factory.get('/')
         # Run
         feed = LatestIssuesFeed().get_feed(None, request)
