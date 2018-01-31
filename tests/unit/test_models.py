@@ -437,10 +437,13 @@ class TestIssue(BaseEruditTestCase):
             issue_2.fedora_object.pid = "pid2"
             issue_2.fedora_object.coverpage = unittest.mock.MagicMock()
             issue_2.fedora_object.coverpage.content = ''
+        # We don't crash trying to check the fedora object. We return False
+        issue_3 = IssueFactory.create(journal=journal, use_fedora=False)
 
         # Run & check
         self.assertTrue(issue_1.has_coverpage)
         self.assertFalse(issue_2.has_coverpage)
+        self.assertFalse(issue_3.has_coverpage)
 
     def test_knows_that_an_issue_with_an_empty_coverpage_has_no_coverpage(self):
         # Setup

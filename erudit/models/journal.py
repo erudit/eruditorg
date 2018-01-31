@@ -476,6 +476,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
+        if self.fedora_object is None:
+            return False
         try:
             content = get_cached_datastream_content(self.fedora_object, 'coverpage')
         except (RequestFailed, ConnectionError):  # pragma: no cover
