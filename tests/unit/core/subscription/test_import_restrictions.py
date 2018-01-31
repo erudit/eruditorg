@@ -5,7 +5,9 @@ from erudit.test.factories import JournalFactory
 from core.accounts.models import LegacyAccountProfile
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.restriction.models import Revueabonne
-from core.subscription.test.factories import AbonneFactory, RevueFactory, RevueabonneFactory
+from core.subscription.restriction.test.factories import (
+    AbonneFactory, RevueFactory, RevueabonneFactory
+)
 from core.subscription.management.commands import import_restrictions
 
 

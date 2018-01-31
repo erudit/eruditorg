@@ -180,7 +180,6 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
         .filter(organisation=restriction_profile.organisation)\
         .delete()
 
-    print(subscription_qs.all())
     for subscription in subscription_qs.all():
         import_restriction_subscription(
             subscription, restriction_subscriber, restriction_profile)
