@@ -7,9 +7,13 @@
 #
 # Also note: You'll have to insert the output of 'django-admin sqlcustom [app_label]'
 # into your database.
-from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
+
+# The MANAGED const is set to True when testing so that we have a DB schema to put or test models
+# in it.
+MANAGED = getattr(settings, 'RESTRICTION_MODELS_ARE_MANAGED', False)
 
 
 class Abonne(models.Model):
@@ -24,7 +28,7 @@ class Abonne(models.Model):
     privilegeid = models.IntegerField(db_column='privilegeId', blank=True, null=True)  # Field name made lowercase.  # noqa
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'abonne'
         app_label = 'restriction'
 
@@ -35,7 +39,7 @@ class Adressesip(models.Model):
     ip = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'adressesip'
         app_label = 'restriction'
 
@@ -45,7 +49,7 @@ class Ipabonne(models.Model):
     abonneid = models.CharField(max_length=45)
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'ipabonne'
         app_label = 'restriction'
 
@@ -56,7 +60,7 @@ class Ipabonneinterval(models.Model):
     abonneid = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'ipabonneinterval'
         app_label = 'restriction'
 
@@ -65,7 +69,7 @@ class Privilege(models.Model):
     libelle = models.CharField(max_length=10)
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'privilege'
         app_label = 'restriction'
 
@@ -76,7 +80,7 @@ class Ressource(models.Model):
     path = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'ressource'
         app_label = 'restriction'
 
@@ -86,7 +90,7 @@ class Ressourceprivilege(models.Model):
     ressourceid = models.IntegerField(db_column='ressourceId')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'ressourceprivilege'
         unique_together = (('privilegeid', 'ressourceid'),)
         app_label = 'restriction'
@@ -98,7 +102,7 @@ class Revue(models.Model):
     revue = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'revue'
         app_label = 'restriction'
 
@@ -109,6 +113,6 @@ class Revueabonne(models.Model):
     anneeabonnement = models.IntegerField(db_column='anneeAbonnement')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = MANAGED
         db_table = 'revueabonne'
         app_label = 'restriction'

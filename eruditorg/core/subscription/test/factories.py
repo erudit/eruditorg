@@ -2,6 +2,7 @@
 import datetime as dt
 
 import factory
+import factory.fuzzy
 
 from base.test.factories import UserFactory
 
