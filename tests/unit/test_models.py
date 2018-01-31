@@ -22,6 +22,12 @@ from erudit.test.factories import IssueContributorFactory
 from erudit.test.factories import IssueThemeFactory
 
 
+def reldate(inc_days):
+    """ Return today + inc_days. """
+    now_dt = dt.date.today()
+    return now_dt + dt.timedelta(days=inc_days)
+
+
 class TestJournal(BaseEruditTestCase):
     def test_can_return_the_associated_eulfedora_model(self):
         # Run & check
@@ -222,14 +228,13 @@ class TestJournal(BaseEruditTestCase):
         assert first_issue_director not in journal.get_directors()
 
     def test_knows_its_editors(self):
-        now_dt = dt.datetime.now()
         journal = JournalFactory(use_fedora=False)
         first_issue = IssueFactory.create(
-            journal=journal, date_published=now_dt - dt.timedelta(days=1)
+            journal=journal, date_published=reldate(-1)
         )
         first_issue_editor = IssueContributorFactory(issue=first_issue, is_editor=True)
 
-        last_issue = IssueFactory.create(journal=journal, date_published=now_dt)
+        last_issue = IssueFactory.create(journal=journal, date_published=reldate(0))
         last_issue_editor = IssueContributorFactory(issue=last_issue, is_editor=True)
 
         assert last_issue_editor in journal.get_editors()
@@ -243,12 +248,29 @@ class TestJournal(BaseEruditTestCase):
         issue3 = IssueFactory.create(journal=journal)
         ordered_issues = [issue3, issue1, issue2]
         ordered_pids = [i.get_full_identifier() for i in ordered_issues]
-        print(ordered_pids)
         journal.erudit_object = unittest.mock.MagicMock()
         journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
             return_value=ordered_pids)
 
         assert list(journal.published_issues.all()) == ordered_issues
+
+    def test_published_issues_can_mix_fedora_and_non_fedora(self):
+        # A journal with incomplete fedora PIDs are "mixed" journals who left Erudit. We keep
+        # old issues in Fedora but redirect new issues wherever they are.
+        # It's thus possible to have some issues that aren't part of the PID list. In these cases,
+        # we put these issues *before* those in the PID list, in -date_published order.
+        journal = JournalFactory.create()
+        i1 = IssueFactory.create(journal=journal, date_published=reldate(1))
+        i2 = IssueFactory.create(journal=journal, date_published=reldate(2))
+        i3 = IssueFactory.create(journal=journal, date_published=reldate(3))
+        i4 = IssueFactory.create(journal=journal, date_published=reldate(4))
+        ordered_fedora_issues = [i1, i2]
+        ordered_pids = [i.get_full_identifier() for i in ordered_fedora_issues]
+        journal.erudit_object = unittest.mock.MagicMock()
+        journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
+            return_value=ordered_pids)
+
+        assert list(journal.published_issues.all()) == [i4, i3, i1, i2]
 
 
 class TestIssue(BaseEruditTestCase):
@@ -437,10 +459,13 @@ class TestIssue(BaseEruditTestCase):
             issue_2.fedora_object.pid = "pid2"
             issue_2.fedora_object.coverpage = unittest.mock.MagicMock()
             issue_2.fedora_object.coverpage.content = ''
+        # We don't crash trying to check the fedora object. We return False
+        issue_3 = IssueFactory.create(journal=journal, use_fedora=False)
 
         # Run & check
         self.assertTrue(issue_1.has_coverpage)
         self.assertFalse(issue_2.has_coverpage)
+        self.assertFalse(issue_3.has_coverpage)
 
     def test_knows_that_an_issue_with_an_empty_coverpage_has_no_coverpage(self):
         # Setup

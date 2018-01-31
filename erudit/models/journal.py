@@ -292,11 +292,15 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             # order.
             pids = self.erudit_object.get_published_issues_pids()
             localidentifiers = [localidentifier_from_pid(pid) for pid in pids]
-            qs = qs.filter(localidentifier__in=localidentifiers)
             # https://stackoverflow.com/a/37648265
-            preserved = Case(
-                *[When(localidentifier=lid, then=i) for i, lid in enumerate(localidentifiers)])
-            qs = qs.order_by(preserved)
+            whens = [When(localidentifier=lid, then=i) for i, lid in enumerate(localidentifiers)]
+            # Those When() below are for situations where there's fedora issues mixed with
+            # non-fedora issues. We want non-fedora issues to come first because it's likely
+            # a special case for RECMA (see eruditorg#1651). It's not supposed to happen
+            # otherwise
+            whens.append(When(localidentifier__isnull=True, then=-1))
+            whens.append(When(localidentifier='', then=-1))
+            qs = qs.order_by(Case(*whens), '-date_published')
         return qs
 
     @property
@@ -476,6 +480,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
+        if self.fedora_object is None:
+            return False
         try:
             content = get_cached_datastream_content(self.fedora_object, 'coverpage')
         except (RequestFailed, ConnectionError):  # pragma: no cover
