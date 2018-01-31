@@ -1,0 +1,3 @@
+[submodule "erudit-core"]
+	path = erudit-core
+	url = git@gitlab.erudit.org:erudit/portail/erudit-core.git
