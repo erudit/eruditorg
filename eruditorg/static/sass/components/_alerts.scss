@@ -5,6 +5,12 @@
 
 .alert {
 
+  &.alert-success {
+    p {
+      background-color: $white;
+    }
+  }
+
   p {
     background-color: $yellow;
     padding: 0.75em 0.75em;
