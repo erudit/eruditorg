@@ -4,7 +4,7 @@
 requests==2.10
 
 # Testing
-pytest>=2.6
+pytest>=3.3,<3.4
 pytest-cov>=1.8
 pytest-django>=2.8
 pytest-spec>=0.2
