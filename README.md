@@ -18,6 +18,14 @@ This readme only contains installation instructions for more information please 
   $ git clone https://github.com/erudit/eruditorg.git
   ```
 
+## Initialise the submodule
+
+  ```
+  $ git submodule init erudit-core
+  $ git submodule update erudit-core
+  ```
+
+
 ## Install the system dependencies:
 
 ```
