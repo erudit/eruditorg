@@ -41,15 +41,12 @@ setup(
         'Pillow>=3.2.0',
         'Sickle>=0.6',
         'structlog>=17.2.0',
+        'django-modeltranslation>=0.12.2',
         # Érudit modules
         'liberuditarticle',
-        # temporarily fetching from git until 0.13 is released. Otherwise,
-        # test_published_issues_uses_fedora_order fails.
-        'django-modeltranslation==0.13',
     ],
     dependency_links=[
         'git+https://github.com/erudit/liberuditarticle.git#egg=liberuditarticle-0.2.8',
-        'git+https://github.com/deschler/django-modeltranslation.git@00fc7f1804aaa1b1e37af48e67871080851e14b0#egg=django-modeltranslation-0.13', # noqa
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
