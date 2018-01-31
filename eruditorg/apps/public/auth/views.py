@@ -7,14 +7,26 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 from django.views.generic import FormView
 from django.views.generic.base import RedirectView
+from django.http.response import HttpResponseForbidden
 from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 
 from .forms import UserParametersForm
 from .forms import UserPersonalDataForm
+from .shortcuts import can_modify_account
 
 
-class UserPersonalDataUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
+class CanModifyAccountMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['can_modify_account'] = can_modify_account(self.request.user)
+        return context
+
+
+class UserPersonalDataUpdateView(
+    CanModifyAccountMixin, LoginRequiredMixin, MenuItemMixin, UpdateView
+):
     form_class = UserPersonalDataForm
     menu_account = 'personal'
     template_name = 'public/auth/personal_data.html'
@@ -31,10 +43,18 @@ class UserPersonalDataUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
         return reverse('public:auth:personal_data')
 
 
-class UserParametersUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
+class UserParametersUpdateView(
+    CanModifyAccountMixin, LoginRequiredMixin, MenuItemMixin, UpdateView
+):
     form_class = UserParametersForm
     menu_account = 'parameters'
     template_name = 'public/auth/parameters.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        user = self.request.user
+        if not can_modify_account(user):
+            return HttpResponseForbidden()
+        return super().dispatch(request, *args, **kwargs)
 
     def get_object(self):
         return self.request.user
@@ -47,7 +67,7 @@ class UserParametersUpdateView(LoginRequiredMixin, MenuItemMixin, UpdateView):
         return reverse('public:auth:parameters')
 
 
-class UserLoginLandingRedirectView(LoginRequiredMixin, RedirectView):
+class UserLoginLandingRedirectView(LoginRequiredMixin, RedirectView, CanModifyAccountMixin):
     """ Redirects the user on successful login
 
     Any user that has access to a dashboard will be redirected to his dashboard.
@@ -66,7 +86,7 @@ class UserLoginLandingRedirectView(LoginRequiredMixin, RedirectView):
         return reverse('public:home')
 
 
-class UserPasswordChangeView(LoginRequiredMixin, MenuItemMixin, FormView):
+class UserPasswordChangeView(CanModifyAccountMixin, LoginRequiredMixin, MenuItemMixin, FormView):
     form_class = PasswordChangeForm
     menu_account = 'password'
     template_name = 'public/auth/password_change.html'
