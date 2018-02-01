@@ -37,7 +37,7 @@ class HomeView(TemplateView):
 
         # Includes the latest issues
         context['new_journals'] = Journal.objects.filter(is_new=True)
-        context['latest_issues'] = Issue.objects.filter(
+        context['latest_issues'] = Issue.internal_objects.filter(
             date_published__isnull=False, is_published=True) \
             .select_related('journal').order_by('-date_published')[:8]
 
