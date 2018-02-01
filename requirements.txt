@@ -57,7 +57,6 @@ pdfrw==0.4                # via weasyprint
 pillow==5.0.0
 ply==3.10
 progressbar2==3.34.3      # via eulfedora
-py==1.5.2
 pycparser==2.18           # via cffi
 pycrypto==2.6.1           # via eulfedora
 pymysql==0.7.11
@@ -71,7 +70,7 @@ python-utils==2.2.0       # via progressbar2
 pytz==2017.3              # via babel, celery, influxdb
 raven==6.5.0
 rdflib==4.2.2             # via eulfedora
-redis==2.10.6
+redis==2.10.6             # via django-redis
 requests-toolbelt==0.8.0  # via eulfedora
 requests[socks]==2.18.4
 rules==1.1.1
@@ -82,5 +81,5 @@ sqlparse==0.2.4
 structlog==18.1.0
 tinycss2==0.6.1           # via cairosvg, cssselect2, weasyprint
 urllib3==1.22             # via requests
-weasyprint==0.42
+weasyprint==0.42.1
 webencodings==0.5.1       # via html5lib, tinycss2
