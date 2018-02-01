@@ -48,6 +48,9 @@ def get_mocked_erudit_object(self):
     m.get_formatted_authors.return_value = ['author 1', 'author 2']
     return m
 
+def journal_detail_url(journal):
+    return reverse('public:journal:journal_detail', kwargs={'code': journal.code})
+
 def issue_detail_url(issue):
     return reverse('public:journal:issue_detail', args=[
         issue.journal.code, issue.volume_slug, issue.localidentifier])
@@ -214,9 +217,9 @@ class TestJournalDetailView:
     def test_can_embed_the_journal_information_in_the_context_if_available(self):
         # Setup
         journal_info = JournalInformationFactory(journal=JournalFactory(use_fedora=False))
-        url_1 = reverse('public:journal:journal_detail', kwargs={'code': journal_info.journal.code})
+        url_1 = journal_detail_url(journal_info.journal)
         journal_2 = JournalFactory(use_fedora=False)
-        url_2 = reverse('public:journal:journal_detail', kwargs={'code': journal_2.code})
+        url_2 = journal_detail_url(journal_2)
 
         # Run
         response_1 = self.client.get(url_1)
@@ -232,7 +235,7 @@ class TestJournalDetailView:
         monkeypatch.setattr(Issue, 'has_coverpage', unittest.mock.Mock(return_value=True))
         monkeypatch.setattr(Issue, 'erudit_object', unittest.mock.MagicMock())
         issue = IssueFactory(number='2 bis')
-        url_1 = reverse('public:journal:journal_detail', kwargs={'code': issue.journal.code})
+        url_1 = journal_detail_url(issue.journal)
         # Run
         response_1 = self.client.get(url_1)
         assert response_1.status_code == 200
@@ -245,35 +248,38 @@ class TestJournalDetailView:
         issue = IssueFactory(journal=journal)
         IssueFactory(journal=journal, is_published=False)
 
-        url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
+        url = journal_detail_url(journal)
         # Run
         response = self.client.get(url)
         # Check
         assert response.status_code == 200
         assert list(response.context['issues']) == [issue]
 
-    @pytest.mark.parametrize('external_url', ['https://example.com', None])
-    def test_can_embed_the_latest_issue_in_the_context(self, external_url):
-        # Setup
-        collection = CollectionFactory.create(localidentifier='erudit')
-        journal = JournalFactory.create(collection=collection)
+    def test_can_embed_the_latest_issue_in_the_context(self):
+        issue1 = IssueFactory.create()
+        issue2 = IssueFactory.create_published_after(issue1)
 
-        IssueFactory.create(
-            journal=journal, date_published=dt.datetime.now())
-        issue_2 = IssueFactory.create(
-            journal=journal, date_published=dt.datetime.now() + dt.timedelta(days=1),
-            external_url=external_url)
-
-        url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
-        # Run
+        url = journal_detail_url(issue1.journal)
         response = self.client.get(url)
-        # Check
+
         assert response.status_code == 200
-        assert response.context['latest_issue'] == issue_2
+        assert response.context['latest_issue'] == issue2
+
+    def test_can_embed_the_latest_issue_external_url_in_the_context(self):
+        # If the latest issue has an external URL, it's link properly reflects that (proper href,
+        # blank target.
+        external_url = 'https://example.com'
+        issue1 = IssueFactory.create()
+        issue2 = IssueFactory.create_published_after(issue1, external_url=external_url)
+
+        url = journal_detail_url(issue1.journal)
+        response = self.client.get(url)
+
+        assert response.status_code == 200
+        assert response.context['latest_issue'] == issue2
         link_attrs = response.context['latest_issue'].helper.detail_link_attrs()
-        if external_url:
-            assert external_url in link_attrs
-        assert ('_blank' in link_attrs) == (external_url is not None)
+        assert external_url in link_attrs
+        assert '_blank' in link_attrs
 
     def test_embeds_a_boolean_indicating_if_the_user_is_subscribed_to_the_current_journal(self):
         # Setup
@@ -282,7 +288,7 @@ class TestJournalDetailView:
         subscription = JournalAccessSubscriptionFactory(user=self.user, post__journals=[journal], post__valid=True)
 
         self.client.login(username='foobar', password='notsecret')
-        url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
+        url = journal_detail_url(journal)
         # Run
         response = self.client.get(url)
         # Check
@@ -295,7 +301,7 @@ class TestJournalDetailView:
             organisation=None, user=self.user, post__journals=[journal], post__valid=True
         )
         self.client.login(username='foobar', password='notsecret')
-        url = reverse('public:journal:journal_detail', kwargs={'code': journal.code})
+        url = journal_detail_url(journal)
         # Run
         response = self.client.get(url)
         # Check
@@ -864,9 +870,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         )
         resp = self.client.get(url)
 
-        assert resp.url == reverse('public:journal:journal_detail', kwargs=dict(
-            code=article.issue.journal.code,
-        ))
+        assert resp.url == journal_detail_url(article.issue.journal)
         assert resp.status_code == 301
 
 
