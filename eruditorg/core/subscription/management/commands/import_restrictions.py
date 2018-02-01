@@ -176,9 +176,16 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
     # failsafe to ensure that we don't mistakenly delete subscriptions that aren't institutional
     assert restriction_profile.organisation is not None
 
-    JournalAccessSubscription.objects\
-        .filter(organisation=restriction_profile.organisation)\
-        .delete()
+    try:
+        subscription = JournalAccessSubscription.objects\
+            .filter(organisation=restriction_profile.organisation)\
+            .get()
+        subscription.journals.clear()
+        subscription.journalaccesssubscriptionperiod_set.all().delete()
+        subscription.referers.all().delete()
+        subscription.institutionipaddressrange_set.all().delete()
+    except JournalAccessSubscription.DoesNotExist:
+        pass
 
     for subscription in subscription_qs.all():
         import_restriction_subscription(
@@ -199,7 +206,7 @@ def import_restriction_subscription(
         restriction_journal = Revue.objects.get(revueid=restriction_subscription.revueid)
     except Revue.DoesNotExist:
         logger.error('Revue.DoesNotExist', revue_id=restriction_subscription.revueid)
-        raise ImportException
+        return
 
     # gets or creates a JournalAccessSubscription instance
     # --
@@ -209,7 +216,7 @@ def import_restriction_subscription(
         journal = Journal.legacy_objects.get_by_id(journal_code)
     except Journal.DoesNotExist:
         logger.error("Journal.DoesNotExist", titrerevabr=restriction_journal.titrerevabr)
-        raise ImportException
+        return
 
     subscription, created = JournalAccessSubscription.objects.get_or_create(
         organisation=restriction_profile.organisation)
