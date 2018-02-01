@@ -2,8 +2,10 @@
 
 from django.db import models
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
+from django.http.response import Http404
 from polymorphic.manager import PolymorphicManager
+
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class InternalJournalManager(models.Manager):
@@ -30,6 +32,16 @@ class LegacyJournalManager(models.Manager):
         For scientific journals, the identifier is the code (shortname)
         For cultural journals, the identifier is the fedora localidentifier
         """
+
+        # Codes aka shortnames are not unique in the legacy database. However, the code
+        # is only used to identify scientific journals: for cultural journals, the localidentifier
+        # is used instead. Our import script adds "1" to the code if a Journal with the same code
+        # but a different localidentifier exists. We mixed up 'cd' and 'cd1' during the first import
+        # and before we fully fix this situation, we need this hack.
+        # ref: https://gitlab.erudit.org/erudit/portail/eruditorg/issues/1441
+        if code == 'cd':
+            code = 'cd1'
+
         return self.get(Q(code=code) | Q(localidentifier=code))
 
     def get_by_id_or_404(self, code):
@@ -39,7 +51,10 @@ class LegacyJournalManager(models.Manager):
         For scientific journals, the identifier is the code (shortname)
         For cultural journals, the identifier is the fedora localidentifier
         """
-        return get_object_or_404(self, Q(code=code) | Q(localidentifier=code))
+        try:
+            return self.get_by_id(code)
+        except ObjectDoesNotExist:
+            raise Http404
 
 
 class UpcomingJournalManager(models.Manager):
