@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
 from django.utils.decorators import method_decorator
@@ -51,6 +52,23 @@ from .viewmixins import SingleArticleMixin
 from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
+
+
+class BaseRedirectableDetailView(DetailView):
+    """ Redirects to get_object().external_url if set.
+
+    Common to Journal, Issue and Article detail views.
+    """
+
+    def get(self, request, *args, **kwargs):
+        try:
+            return super().get(request, *args, **kwargs)
+        except Http404:
+            self.object = self.get_object(allow_external=True)
+            if self.object.external_url:
+                return redirect(self.object.external_url)
+            else:
+                raise
 
 
 class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
@@ -320,7 +338,8 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
     model = Journal
 
 
-class IssueDetailView(FallbackObjectViewMixin, ContentAccessCheckMixin, DetailView):
+class IssueDetailView(
+        FallbackObjectViewMixin, ContentAccessCheckMixin, BaseRedirectableDetailView):
     """
     Displays an Issue instance.
     """
@@ -350,12 +369,12 @@ class IssueDetailView(FallbackObjectViewMixin, ContentAccessCheckMixin, DetailVi
                 'issue_li': issue.localidentifier,
             }
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None, allow_external=False):
         if 'pk' in self.kwargs:
             return super(IssueDetailView, self).get_object(queryset)
 
-        qs = Issue.internal_objects.select_related('journal', 'journal__collection') \
-            .prefetch_related('themes').all()
+        qs = Issue.objects if allow_external else Issue.internal_objects
+        qs = qs.select_related('journal', 'journal__collection').prefetch_related('themes')
         return get_object_or_404(qs, localidentifier=self.kwargs['localidentifier'])
 
     def get_context_data(self, **kwargs):
@@ -446,10 +465,15 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin, FedoraServiceRequiredMixin,
         ContentAccessCheckMixin, SingleArticleWithScholarMetadataMixin,
-        ArticleViewMetricCaptureMixin, DetailView):
+        ArticleViewMetricCaptureMixin, BaseRedirectableDetailView):
     context_object_name = 'article'
     model = Article
     tracking_view_type = 'html'
+
+    def get_object(self, queryset=None, allow_external=False):
+        if allow_external:
+            queryset = Article.objects
+        return super().get_object(queryset=queryset)
 
     def get_context_data(self, **kwargs):
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
@@ -625,10 +649,14 @@ class ArticleFormatDownloadView(
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return obj.publication_allowed and self.content_access_granted
+        return (not obj.external_url) and obj.publication_allowed and self.content_access_granted
 
     def handle_no_permission(self):
-        return redirect('public:journal:article_detail', **self.kwargs)
+        obj = self.get_permission_object()
+        if obj.external_url:
+            return redirect(obj.external_url)
+        else:
+            return redirect('public:journal:article_detail', **self.kwargs)
 
 
 class ArticleXmlView(ArticleFormatDownloadView):

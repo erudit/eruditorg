@@ -48,6 +48,24 @@ def get_mocked_erudit_object(self):
     m.get_formatted_authors.return_value = ['author 1', 'author 2']
     return m
 
+def issue_detail_url(issue):
+    return reverse('public:journal:issue_detail', args=[
+        issue.journal.code, issue.volume_slug, issue.localidentifier])
+
+def article_detail_url(article):
+    issue = article.issue
+    return reverse('public:journal:article_detail', kwargs={
+        'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
+        'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
+
+def article_raw_pdf_url(article):
+    issue = article.issue
+    journal_id = issue.journal.localidentifier
+    issue_id = issue.localidentifier
+    article_id = article.localidentifier
+    return reverse('public:journal:article_raw_pdf', args=(
+        journal_id, issue.volume_slug, issue_id, article_id
+    ))
 
 @pytest.mark.django_db
 class TestJournalListView(object):
@@ -517,8 +535,7 @@ class TestIssueDetailView(BaseEruditTestCase):
         mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
         # Setup
         issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        url = reverse('public:journal:issue_detail', args=[
-            self.journal.code, issue.volume_slug, issue.localidentifier])
+        url = issue_detail_url(issue)
         # Run
         response = self.client.get(url)
         # Check
@@ -530,12 +547,23 @@ class TestIssueDetailView(BaseEruditTestCase):
         mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
-        url = reverse('public:journal:issue_detail', args=[
-            self.journal.code, issue.volume_slug, issue.localidentifier])
+        url = issue_detail_url(issue)
         # Run
         response = self.client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
+
+    def test_fedora_issue_with_external_url_redirects(self):
+        # When we have an issue with a fedora localidentifier *and* external_url set, we redirect
+        # to that external url when we hit the detail view.
+        # ref #1651
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            external_url='http://example.com')
+        url = issue_detail_url(issue)
+        response = self.client.get(url)
+        assert response.status_code == 302
+        assert response.url == 'http://example.com'
 
 
 @override_settings(DEBUG=True)
@@ -553,9 +581,7 @@ class TestArticleDetailView(BaseEruditTestCase):
         issue = IssueFactory.create(
             journal=self.journal, date_published=dt.datetime.now(), localidentifier='test_article')
         article = ArticleFactory.create(issue=issue)
-        url = reverse('public:journal:article_detail', kwargs={
-            'journal_code': self.journal.code, 'issue_slug': issue.volume_slug,
-            'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
+        url = article_detail_url(article)
         request = self.factory.get(url)
         request.subscriptions = UserSubscriptions()
         request.saved_citations = []
@@ -564,6 +590,19 @@ class TestArticleDetailView(BaseEruditTestCase):
             request, localid=article.localidentifier)
         # Check
         self.assertEqual(response.status_code, 200)
+
+    def test_fedora_issue_with_external_url_redirects(self):
+        # When we have an article with a fedora localidentifier *and* external_url set, we redirect
+        # to that external url when we hit the detail view.
+        # ref #1651
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue, localidentifier='articleid',
+            external_url='http://example.com')
+        url = article_detail_url(article)
+        response = self.client.get(url)
+        assert response.status_code == 302
+        assert response.url == 'http://example.com'
 
 
 @override_settings(DEBUG=True)
@@ -596,9 +635,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         journal_id = journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
-        url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue.volume_slug, issue_id, article_id
-        ))
+        url = article_raw_pdf_url(article)
         request = self.factory.get(url)
         request.user = AnonymousUser()
         request.subscriptions = UserSubscriptions()
@@ -640,9 +677,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
-        url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue.volume_slug, issue_id, article_id
-        ))
+        url = article_raw_pdf_url(article)
 
         request = self.factory.get(url)
         request.user = AnonymousUser()
@@ -668,9 +703,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
-        url = reverse('public:journal:article_raw_pdf', args=(
-            journal_id, issue.volume_slug, issue_id, article_id
-        ))
+        url = article_raw_pdf_url(article)
         request = self.factory.get(url)
         request.user = AnonymousUser()
 
@@ -683,6 +716,19 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         assert response.url == reverse('public:journal:article_detail', args=(
             journal_id, issue.volume_slug, issue_id, article_id
         ))
+
+    def test_fedora_issue_with_external_url_redirects(self):
+        # When we have an article with a fedora localidentifier *and* external_url set, we redirect
+        # to that external url when we hit the raw PDF view.
+        # ref #1651
+        issue = IssueFactory.create(
+            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(issue=issue, localidentifier='articleid',
+            external_url='http://example.com')
+        url = article_raw_pdf_url(article)
+        response = self.client.get(url)
+        assert response.status_code == 302
+        assert response.url == 'http://example.com'
 
 
 class TestLegacyUrlsRedirection(BaseEruditTestCase):
