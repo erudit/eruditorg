@@ -71,4 +71,5 @@ def test_import_deletions():
     import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
 
     # Run & check
-    assert JournalAccessSubscription.objects.count() == 0
+    assert JournalAccessSubscription.objects.count() == 1
+    assert JournalAccessSubscription.objects.first().journals.count() == 0
