@@ -42,9 +42,9 @@ class IssueDetailRedirectView(
 
     def get_redirect_url(self, *args, **kwargs):
         self.activate_legacy_language(*args, **kwargs)
-        issue_qs = Issue.objects.select_related('journal').filter(
-            Q(journal__code=kwargs['journal_code']) |
-            Q(journal__localidentifier=kwargs['journal_code']))
+
+        journal = Journal.legacy_objects.get_by_id_or_404(kwargs['journal_code'])
+        issue_qs = Issue.objects.select_related('journal').filter(journal=journal)
         if 'journal_code' in kwargs and 'localidentifier' in kwargs:
             issue = get_object_or_404(issue_qs, localidentifier=kwargs['localidentifier'])
             return reverse(self.pattern_name, args=[
