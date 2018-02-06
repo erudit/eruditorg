@@ -54,10 +54,14 @@ from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 
 
-class BaseRedirectableDetailView(DetailView):
+class BaseRedirectToExternalSourceDetailView(DetailView):
     """ Redirects to get_object().external_url if set.
 
     Common to Journal, Issue and Article detail views.
+
+    Subclasses of this view must override get_object() and add an `allow_external` flag. When
+    this flag is set, the query is made on all objects instead of limiting itself to internal
+    objects (which, by definition, are objects without external_url!) like it does by default.
     """
 
     def get(self, request, *args, **kwargs):
@@ -339,7 +343,7 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
 
 
 class IssueDetailView(
-        FallbackObjectViewMixin, ContentAccessCheckMixin, BaseRedirectableDetailView):
+        FallbackObjectViewMixin, ContentAccessCheckMixin, BaseRedirectToExternalSourceDetailView):
     """
     Displays an Issue instance.
     """
@@ -465,7 +469,7 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin, FedoraServiceRequiredMixin,
         ContentAccessCheckMixin, SingleArticleWithScholarMetadataMixin,
-        ArticleViewMetricCaptureMixin, BaseRedirectableDetailView):
+        ArticleViewMetricCaptureMixin, BaseRedirectToExternalSourceDetailView):
     context_object_name = 'article'
     model = Article
     tracking_view_type = 'html'
