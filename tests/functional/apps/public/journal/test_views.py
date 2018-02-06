@@ -597,7 +597,7 @@ class TestArticleDetailView(BaseEruditTestCase):
         # Check
         self.assertEqual(response.status_code, 200)
 
-    def test_fedora_issue_with_external_url_redirects(self):
+    def test_fedora_article_with_external_url_redirects(self):
         # When we have an article with a fedora localidentifier *and* external_url set, we redirect
         # to that external url when we hit the detail view.
         # ref #1651
