@@ -75,7 +75,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     issue_published = serializers.SerializerMethodField()
     issue_volume_slug = serializers.SerializerMethodField()
     publication_date = serializers.SerializerMethodField()
-    has_pdf = serializers.SerializerMethodField()
+    pdf_url = serializers.SerializerMethodField()
 
     class Meta:
         model = erudit_models.Article
@@ -84,7 +84,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'issue_title', 'issue_url', 'issue_number', 'paral_titles', 'paral_subtitles',
             'issue_volume', 'issue_published', 'issue_volume_slug', 'publication_date',
             'title', 'surtitle', 'subtitle',
-            'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'has_pdf',
+            'processing', 'authors', 'abstract', 'type', 'first_page', 'last_page', 'pdf_url',
             'external_url', 'external_pdf_url', 'collection', 'reviewed_works',
         ]
 
@@ -162,10 +162,22 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_issue_volume_slug(self, obj):
         return obj.issue.volume_slug
 
-    def get_has_pdf(self, obj):
+    def get_pdf_url(self, obj):
+        if obj.external_pdf_url:
+            # If we have a external_pdf_url, then it's always the proper one to return.
+            return obj.external_pdf_url
+        if obj.issue.external_url:
+            # special case. if our issue has an external_url, regardless of whether we have a
+            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
+            return None
         try:
-            return obj.external_pdf_url is not None or (
-                obj.fedora_object and obj.fedora_object.pdf.exists)
+            if obj.fedora_object:
+                return reverse('public:journal:article_raw_pdf', kwargs={
+                    'journal_code': obj.issue.journal.code,
+                    'issue_slug': obj.issue.volume_slug,
+                    'issue_localid': obj.issue.localidentifier,
+                    'localid': obj.localidentifier,
+                })
         except (RequestFailed, ConnectionError):  # pragma: no cover
             if settings.DEBUG:
                 return False

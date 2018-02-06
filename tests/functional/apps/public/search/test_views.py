@@ -4,6 +4,7 @@ import json
 import unittest.mock
 from faker import Faker
 
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
@@ -72,9 +73,17 @@ def get_mocked_erudit_object():
     m.first_page = 10
     m.last_page = 12
     m.abstracts = [{'lang': 'fr', 'content': 'This is a test'}]
-    m.get_authors = lambda: [{'firstname': 'Test', 'lastname': 'Foobar'}]
+
+    def get_authors(formatted=False):
+        if formatted:
+            return "Foo, Bar"
+        else:
+            return [{'firstname': 'Test', 'lastname': 'Foobar'}]
+
+    m.get_authors = get_authors
     m.get_reviewed_works = lambda: []
     m.get_formatted_title.return_value = "mocked title"
+    m.get_volume_numbering.return_value = ''
     return m
 
 @override_settings(DEBUG=True)
@@ -139,6 +148,30 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         # Check
         results = json.loads(smart_text(results_data))
         self.assertEqual(results['pagination']['count'], 50)
+
+    # This NO_CACHES override is needed because otherwise the cache.set() call tries to picke our
+    # mock erudit object and crashes.
+    @override_settings(CACHES=settings.NO_CACHES)
+    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+    @unittest.mock.patch.object(Query, 'get_results')
+    def test_fedora_issue_with_external_url_yield_no_pdf_link(
+            self, mock_get_results, mock_erudit_object):
+        # When an fedora issue has an external_url (for example, RECMA. see #1651), we don't want
+        # any of its articles to yield a PDF link.
+        mock_get_results.side_effect = fake_get_results
+        mock_erudit_object.return_value = get_mocked_erudit_object()
+        issue = IssueFactory.create(
+            journal=self.journal, external_url='http://www.example.com')
+        ArticleFactory.create(issue=issue, localidentifier='foo')
+
+        request = self.factory.get('/', data={'format': 'json'})
+        list_view = EruditDocumentListAPIView.as_view()
+
+        results_data = list_view(request).render().content
+        results = json.loads(smart_text(results_data))
+
+        obj = results['results'][0]['real_object']
+        assert obj['pdf_url'] is None
 
 
 @pytest.mark.django_db

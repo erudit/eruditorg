@@ -323,14 +323,16 @@
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
                   </li>
-                  {% if document.real_object.has_pdf %}
+                  {% with pdf_url=document.real_object.pdf_url %}
+                  {% if pdf_url %}
                   <li>
-                    <a class="tool-btn tool-download" data-href="{% if document.real_object.external_pdf_url %}{{ document.real_object.external_pdf_url }}{% else %}{% url 'public:journal:article_raw_pdf' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}{% endif %}">
+                    <a class="tool-btn tool-download" data-href="{{ pdf_url }}">
                       <span class="toolbox-pdf">PDF</span>
                       <span class="tools-label">{% trans "Télécharger" %}</span>
                     </a>
                   </li>
                   {% endif %}
+                  {% endwith %}
                   {% if document.real_object.processing == 'C' %}
                   <li>
                     <a class="tool-btn" href="{{ article_url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">

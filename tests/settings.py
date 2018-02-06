@@ -22,6 +22,16 @@ CACHES = {
     },
 }
 
+# Not an actual setting, but can be used in some tests with @override_settings
+NO_CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache'
+    },
+    'files': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    },
+}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
