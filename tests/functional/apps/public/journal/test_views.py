@@ -5,6 +5,7 @@ import io
 import os
 import unittest.mock
 import subprocess
+import itertools
 
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
@@ -43,6 +44,8 @@ from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfFirstPageView
 from apps.public.journal.views import ArticleRawPdfView
 from apps.public.journal.views import ArticleXmlView
+
+from base.test.testcases import EruditClientTestCase
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -823,73 +826,93 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         assert resp.status_code == 301
 
 
-class TestArticleFallbackRedirections(BaseEruditTestCase):
+class TestArticleFallbackRedirection(EruditClientTestCase):
 
-    def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self):
-        fallback_url = settings.FALLBACK_BASE_URL
-        patterns_to_test = [
-            'legacy_journal_detail', 'legacy_journal_detail_index',
-            'legacy_journal_authors', 'legacy_journal_detail_culture',
-            'legacy_journal_detail_culture_index', 'legacy_journal_authors_culture'
-        ]
+    FALLBACK_URL = settings.FALLBACK_BASE_URL
 
-        for pattern in patterns_to_test:
-            url = reverse('legacy_journal:{}'.format(pattern), kwargs={'code': 'nonexistent'})
+    @pytest.fixture(params=itertools.product([
+        {'code': 'nonexistent'}], ['legacy_journal:legacy_journal_detail', 'legacy_journal:legacy_journal_detail_index',
+        'legacy_journal:legacy_journal_authors', 'legacy_journal:legacy_journal_detail_culture',
+        'legacy_journal:legacy_journal_detail_culture_index', 'legacy_journal:legacy_journal_authors_culture'
+    ]))
+    def journal_url(self, request):
+        kwargs = request.param[0]
+        url = request.param[1]
+        return reverse(url, kwargs=kwargs)
 
-            response = self.client.get(url)
-            redirect_url = response.url
-            assert fallback_url in redirect_url
+    @pytest.fixture(params=itertools.chain(
+            itertools.product(
+                [{
+                    'journal_code': 'nonexistent',
+                    'year': "1974",
+                    'v': "7",
+                    'n': "1",
+                }],
+                ["legacy_journal:legacy_issue_detail", "legacy_journal:legacy_issue_detail_index"]
+            ),
+            itertools.product([{
+                'journal_code': 'nonexistent',
+                'year': "1974",
+                'v': "7",
+                }], ["legacy_journal:legacy_issue_detail_no_number",
+                     "legacy_journal:legacy_issue_detail_index_no_number"],
+            ),
+            itertools.product([{
+                'journal_code': 'nonexistent',
+                'year': "1974",
+                'v': "7",
+                }], ["legacy_journal:legacy_issue_detail_no_number",
+                     "legacy_journal:legacy_issue_detail_index_no_number"],
+            ),
+            itertools.product([{
+                'journal_code': 'nonexistent',
+                'localidentifier': 'nonexistent'
+            }], ["legacy_journal:legacy_issue_detail_culture",
+                 "legacy_journal:legacy_issue_detail_culture_index"],
+            )
+    ))
+    def issue_url(self, request):
+        kwargs = request.param[0]
+        url = request.param[1]
+        return reverse(url, kwargs=kwargs)
 
-    def test_nonexistent_issue_redirects_to_fallback_website(self):
-        fallback_url = settings.FALLBACK_BASE_URL
+    @pytest.fixture(params=itertools.chain(
+            itertools.product([{
+                'journal_code': 'nonexistent', 'year': 2004, 'v': 1, 'issue_number': 'nonexistent',
+                'localid': 'nonexistent', 'format_identifier': 'html', 'lang': 'fr'
+                }], ["legacy_journal:legacy_article_detail",
+                     "legacy_journal:legacy_article_detail_culture"],
+            ),
+            [
+                ({'localid': 'nonexistent'}, 'legacy_journal:legacy_article_id'),
+                ({'journal_code': 'nonexistent',
+                  'issue_localid': 'nonexistent', 'localid': 'nonexistent',
+                  'format_identifier': 'html'},
+                 'legacy_journal:legacy_article_detail_culture_localidentifier')
+            ]
+        ),
+    )
+    def article_url(self, request):
+        kwargs = request.param[0]
+        url = request.param[1]
+        return reverse(url, kwargs=kwargs)
 
-        kwargs = {
-            'journal_code': 'nonexistent',
-            'year': "1974",
-            'v': "7",
-            'n':"1",
-        }
+    def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self, journal_url):
+        response = self.client.get(journal_url)
+        redirect_url = response.url
+        assert self.FALLBACK_URL in redirect_url
 
-        urls_to_test = [
-            reverse('legacy_journal:legacy_issue_detail', kwargs=kwargs),
-            reverse('legacy_journal:legacy_issue_detail_index', kwargs=kwargs),
-        ]
 
-        kwargs.pop('n')
-        urls_to_test.extend([
-            reverse('legacy_journal:legacy_issue_detail_no_number', kwargs=kwargs),
-            reverse('legacy_journal:legacy_issue_detail_index_no_number', kwargs=kwargs),
-        ])
+    def test_legacy_url_for_nonexistent_issues_redirect_to_fallback_website(self, issue_url):
+        response = self.client.get(issue_url)
+        redirect_url = response.url
+        assert self.FALLBACK_URL in redirect_url
 
-        kwargs['localidentifier'] = 'nonexistent'
-        urls_to_test.extend([
-            reverse('legacy_journal:legacy_issue_detail_culture_year_volume', kwargs=kwargs),
-            reverse('legacy_journal:legacy_issue_detail_culture_year_volume_index', kwargs=kwargs),
-        ])
-        kwargs.pop('v')
-        kwargs.pop('year')
-        urls_to_test.extend([
-            reverse('legacy_journal:legacy_issue_detail_culture', kwargs=kwargs),
-            reverse('legacy_journal:legacy_issue_detail_culture_index', kwargs=kwargs),
-        ])
+    def test_legacy_url_for_nonexistent_article_redirect_to_fallback_website(self, article_url):
+        response = self.client.get(article_url)
+        redirect_url = response.url
+        assert self.FALLBACK_URL in redirect_url
 
-        for url in urls_to_test:
-            response = self.client.get(url)
-            assert response.status_code == 302
-            assert fallback_url in response.url
-
-    def test_nonexistent_article_redirects_to_fallback_website(self):
-        kwargs={'journal_code': 'nonexistent', 'year':2004, 'v':1, 'issue_number': 'nonexistent', 'localid': 'nonexistent', 'format_identifier': 'html', 'lang':'fr'}
-        urls_to_test = [
-            reverse('legacy_journal:legacy_article_detail', kwargs=kwargs),
-            reverse('legacy_journal:legacy_article_id', kwargs={'localid': 'nonexistent'}),
-            reverse('legacy_journal:legacy_article_detail_culture', kwargs=kwargs),
-            reverse('legacy_journal:legacy_article_detail_culture_localidentifier', kwargs={'journal_code': 'nonexistent', 'issue_localid': 'nonexistent', 'localid':'nonexistent', 'format_identifier':'html'})
-        ]
-
-        for url in urls_to_test:
-            response = self.client.get(url)
-            assert response.status_code == 302
 
 @override_settings(DEBUG=True)
 class TestArticleXmlView(BaseEruditTestCase):
