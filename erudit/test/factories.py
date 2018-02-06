@@ -95,6 +95,14 @@ class JournalInformationFactory(factory.django.DjangoModelFactory):
 
 class IssueFactory(factory.django.DjangoModelFactory):
 
+    @classmethod
+    def create_published_after(cls, other_issue, *args, **kwargs):
+        """ Creates an issue with a publish date one day after `other_issue`, in the same journal.
+        """
+        kwargs['journal'] = other_issue.journal
+        kwargs['date_published'] = other_issue.date_published + dt.timedelta(days=1)
+        return cls(*args, **kwargs)
+
     journal = factory.SubFactory(JournalFactory)
     localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
     date_published = dt.datetime.now().date()
