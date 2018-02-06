@@ -32,3 +32,8 @@ class IssueAnnotator:
         if self.issue.external_url:
             result += ' target="_blank"'
         return mark_safe(result)
+
+    def is_locked(self):
+        if self.issue.external_url:
+            return False  # external issues are never locked
+        return self.issue.embargoed and not self.view.content_access_granted

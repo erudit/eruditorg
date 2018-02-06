@@ -281,6 +281,18 @@ class TestJournalDetailView:
         assert external_url in link_attrs
         assert '_blank' in link_attrs
 
+    def test_external_issues_are_never_locked(self):
+        # when an issue has an external url, we never show a little lock icon next to it.
+        external_url = 'https://example.com'
+        collection = CollectionFactory.create(code='erudit')
+        journal = JournalFactory(open_access=False, collection=collection) # embargoed
+        issue1 = IssueFactory.create(journal=journal, external_url=external_url)
+
+        url = journal_detail_url(issue1.journal)
+        response = self.client.get(url)
+
+        assert not response.context['latest_issue'].extra.is_locked()
+
     def test_embeds_a_boolean_indicating_if_the_user_is_subscribed_to_the_current_journal(self):
         # Setup
 
