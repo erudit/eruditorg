@@ -104,12 +104,12 @@
       <div class="col-sm-8">
         <h2>{% trans "Dernier numéro" %}</h2>
         {% if latest_issue.has_coverpage %}
-        <a {{ latest_issue.helper.detail_link_attrs }} class="latest-issue-cover">
+        <a {{ latest_issue.extra.detail_link_attrs }} class="latest-issue-cover">
           <img src="{% url 'public:journal:issue_coverpage' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="img-responsive issue-cover" alt="{{ latest_issue.title }}" />
         </a>
         {% endif %}
         <p class="latest-issue-title">
-          <a {{ latest_issue.helper.detail_link_attrs }}>
+          <a {{ latest_issue.extra.detail_link_attrs }}>
             {% if latest_issue.html_title %}
             <em>{{ latest_issue.html_title|safe }}</em>
             <br/>
@@ -229,7 +229,7 @@
             {% for issue in year.list %}
             {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
             <li class="issue-list--item">
-              <a {{ issue.helper.detail_link_attrs }}>
+              <a {{ issue.extra.detail_link_attrs }}>
                 {% if issue.embargoed and not content_access_granted %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                 {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
               </a>

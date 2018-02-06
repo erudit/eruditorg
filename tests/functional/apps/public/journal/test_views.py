@@ -277,7 +277,7 @@ class TestJournalDetailView:
 
         assert response.status_code == 200
         assert response.context['latest_issue'] == issue2
-        link_attrs = response.context['latest_issue'].helper.detail_link_attrs()
+        link_attrs = response.context['latest_issue'].extra.detail_link_attrs()
         assert external_url in link_attrs
         assert '_blank' in link_attrs
 

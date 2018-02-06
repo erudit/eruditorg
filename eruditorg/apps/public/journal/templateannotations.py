@@ -1,21 +1,22 @@
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-# Injects a `helper` attribute to target models to supply functions
+# Injects a `extra` attribute to target models to supply functions
 # for use in templates. Cleaner than templatetags and much cleaner
 # than putting this in models.
 
 
-class IssueHelper:
+class IssueAnnotator:
     @classmethod
-    def helperize(cls, issue):
+    def annotate(cls, issue, view):
         if issue is None:
             return None
-        issue.helper = cls(issue)
+        issue.extra = cls(issue, view)
         return issue
 
-    def __init__(self, issue):
+    def __init__(self, issue, view):
         self.issue = issue
+        self.view = view
 
     def detail_url(self):
         issue = self.issue
