@@ -31,7 +31,7 @@ class IssueSitemap(sitemaps.Sitemap):  # pragma: no cover
     priority = 0.5
 
     def items(self):
-        return Issue.internal_objects.select_related('journal').all()
+        return Issue.internal_objects.select_related('journal').filter(is_published=True)
 
     def lastmod(self, obj):
         return obj.fedora_updated
@@ -50,7 +50,8 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
 
     def items(self):
         return Article.internal_objects.select_related('issue', 'issue__journal') \
-            .filter(publication_allowed=True)
+            .filter(publication_allowed=True) \
+            .filter(issue__is_published=True)
 
     def lastmod(self, obj):
         return obj.fedora_updated
