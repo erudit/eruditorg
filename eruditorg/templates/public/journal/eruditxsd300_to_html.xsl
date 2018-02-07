@@ -648,7 +648,7 @@
 
   <xsl:template match="pagination">
     <span class="{name()}">
-      <xsl:if test="ppage | dpage != '0'">
+      <xsl:if test="ppage[normalize-space()] | dpage[normalize-space()]">
         <xsl:text>, </xsl:text>
         <xsl:choose>
           <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
