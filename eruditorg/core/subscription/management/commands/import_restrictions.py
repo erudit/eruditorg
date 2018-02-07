@@ -126,6 +126,8 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
         organisation, created = Organisation.objects.get_or_create(
             name=restriction_subscriber.abonne[:120]
         )
+        organisation.members.add(user)
+        organisation.save()
         if created:
             logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
 
