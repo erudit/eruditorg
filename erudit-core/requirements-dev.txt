@@ -1,0 +1,6 @@
+-r requirements-main.txt
+-r requirements-tests.txt
+
+tox>=1.7
+flake8>=2.2.5
+ipdb
