@@ -39,6 +39,7 @@ class OrganisationAdmin(admin.ModelAdmin):
 
     inlines = (LegacyOrganisationProfileInline, )
 
+    filter_horizontal = ('members',)
 
 admin.site.register(Affiliation)
 admin.site.register(Author)
