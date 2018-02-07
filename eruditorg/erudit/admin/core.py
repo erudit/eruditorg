@@ -41,6 +41,7 @@ class OrganisationAdmin(admin.ModelAdmin):
 
     filter_horizontal = ('members',)
 
+
 admin.site.register(Affiliation)
 admin.site.register(Author)
 admin.site.register(Organisation, OrganisationAdmin)
