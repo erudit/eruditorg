@@ -126,21 +126,19 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
         try:
             profile = LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
             profile.organisation.name = restriction_subscriber.abonne
-            profile.organisation.save()
 
         except LegacyOrganisationProfile.DoesNotExist:
 
             organisation, created = Organisation.objects.get_or_create(
                 name=restriction_subscriber.abonne
             )
-            organisation.members.add(user)
-            organisation_profile = LegacyOrganisationProfile.objects.create(
+            profile = LegacyOrganisationProfile.objects.create(
                 organisation=organisation
             )
 
-            organisation_profile.sushi_requester_id = restriction_subscriber.requesterid
-            organisation_profile.account_id = restriction_subscriber.pk
-            organisation_profile.save()
+            profile.sushi_requester_id = restriction_subscriber.requesterid
+            profile.account_id = restriction_subscriber.pk
+            profile.save()
             logger.info(
                 "organisationprofile.created",
                 account_id=restriction_subscriber.pk,
@@ -149,11 +147,15 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
 
             if created:
                 logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
+        finally:
+            profile.organisation.members.add(user)
+            profile.organisation.save()
 
         # Sometime, we get subscriber rows with duplicate names! It seems that most of the
         # time, it refers to the same entity, so it's not a big deal, but we want to make sure
         # we're not going to cause an integrity error before creating the profile.
         organisation = Organisation.legacy_objects.get_by_id(restriction_subscriber.pk)
+
         try:
             restriction_profile = LegacyAccountProfile.objects \
                 .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \

@@ -70,7 +70,9 @@ def test_assign_user_to_existing_organisation():
     subscription_qs = Revueabonne.objects
     import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
 
+    # test that no new organisation has been created
     assert Organisation.objects.count() == 1
+    assert Organisation.objects.first().members.count() == 1
 
 @pytest.mark.django_db
 def test_import_can_rename_organisation():

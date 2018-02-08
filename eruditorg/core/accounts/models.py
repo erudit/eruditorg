@@ -48,3 +48,8 @@ class LegacyAccountProfile(models.Model):
     class Meta:
         verbose_name = _('Profil de compte utilisateur importé')
         verbose_name_plural = _('Profils de comptes utilisateur importés')
+
+    def __str__(self):
+        return "legacy_id={}, email={}, origin={}".format(
+            self.legacy_id, self.user.email, self.origin
+        )
