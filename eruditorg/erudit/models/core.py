@@ -9,6 +9,7 @@ from taggit.models import GenericTaggedItemBase
 from taggit.models import TagBase
 
 from ..abstract_models import Person
+from ..managers.core import LegacyOrganisationManager
 from ..modelfields import SizeConstrainedImageField
 
 
@@ -28,6 +29,9 @@ class Organisation(models.Model):
         height=140)
 
     members = models.ManyToManyField(User, related_name='organisations', verbose_name=_('Membres'))
+
+    objects = models.Manager()
+    legacy_objects = LegacyOrganisationManager()
 
     class Meta:
         verbose_name = _('Organisation')
