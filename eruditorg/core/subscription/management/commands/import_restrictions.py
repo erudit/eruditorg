@@ -123,17 +123,34 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
                 email=restriction_subscriber.courriel
             )
 
-        organisation, created = Organisation.objects.get_or_create(
-            name=restriction_subscriber.abonne[:120]
-        )
-        organisation.members.add(user)
-        organisation.save()
-        if created:
-            logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
+        try:
+            LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
+        except LegacyOrganisationProfile.DoesNotExist:
+
+            organisation, created = Organisation.objects.get_or_create(
+                name=restriction_subscriber.abonne[:120]
+            )
+            organisation.members.add(user)
+            organisation_profile = LegacyOrganisationProfile.objects.create(
+                organisation=organisation
+            )
+
+            organisation_profile.sushi_requester_id = restriction_subscriber.requesterid
+            organisation_profile.account_id = restriction_subscriber.pk
+            organisation_profile.save()
+            logger.info(
+                "organisationprofile.created",
+                account_id=restriction_subscriber.pk,
+                sushi_requester_id=restriction_subscriber.requesterid
+            )
+
+            if created:
+                logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
 
         # Sometime, we get subscriber rows with duplicate names! It seems that most of the
         # time, it refers to the same entity, so it's not a big deal, but we want to make sure
         # we're not going to cause an integrity error before creating the profile.
+        organisation = Organisation.legacy_objects.get_by_id(restriction_subscriber.pk)
         try:
             restriction_profile = LegacyAccountProfile.objects \
                 .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
@@ -152,21 +169,6 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
             organisation.badge.save(restriction_subscriber.icone, image_file, save=True)
             organisation.save()
             f.close()
-    try:
-        restriction_profile.organisation.legacyorganisationprofile
-    except AttributeError:
-        organisation_profile = LegacyOrganisationProfile.objects.create(
-            organisation=restriction_profile.organisation
-        )
-
-        organisation_profile.sushi_requester_id = restriction_subscriber.requesterid
-        organisation_profile.account_id = restriction_subscriber.pk
-        organisation_profile.save()
-        logger.info(
-            "organisationprofile.created",
-            account_id=restriction_subscriber.pk,
-            sushi_requester_id=restriction_subscriber.requesterid
-        )
 
     # Delete all subscriptions for this subscriber!
     #

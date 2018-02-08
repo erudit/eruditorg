@@ -234,6 +234,14 @@ class AuthorFactory(factory.django.DjangoModelFactory):
         model = 'erudit.Author'
 
 
+class LegacyOrganisationProfileFactory(factory.django.DjangoModelFactory):
+    organisation = factory.SubFactory(OrganisationFactory)
+    account_id = factory.sequence(lambda n: n)
+
+    class Meta:
+        model = 'erudit.LegacyOrganisationProfile'
+
+
 class ThesisFactory(factory.django.DjangoModelFactory):
     collection = factory.SubFactory(CollectionFactory)
     author = factory.SubFactory(AuthorFactory)

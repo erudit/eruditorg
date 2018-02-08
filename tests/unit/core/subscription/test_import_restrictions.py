@@ -1,9 +1,9 @@
 import pytest
 
-from erudit.test.factories import JournalFactory
+from erudit.test.factories import JournalFactory, LegacyOrganisationProfileFactory
 
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.models import JournalAccessSubscription, Organisation
 from core.subscription.restriction.models import Revueabonne
 from core.subscription.restriction.test.factories import (
     AbonneFactory, RevueFactory, RevueabonneFactory
@@ -54,9 +54,30 @@ def test_import_journal():
     assert sub.organisation.name == abonne1.abonne
 
 @pytest.mark.django_db
+def test_assign_user_to_existing_organisation():
+    """ If an organisation has the LegacyOrganisationId of the restriction user to import,
+    add the created user to this organisation"""
+    profile = LegacyOrganisationProfileFactory()
+    journal1 = JournalFactory.create()
+    abonne1 = AbonneFactory.create()
+    abonne1.abonneid = profile.account_id
+    revue1 = RevueFactory.create(titrerevabr=journal1.code)
+    sub1 = RevueabonneFactory.create(
+        abonneid=abonne1.abonneid,
+        revueid=revue1.revueid,
+        anneeabonnement=2018)
+
+    subscription_qs = Revueabonne.objects
+    import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
+
+    assert Organisation.objects.count() == 1
+
+
+@pytest.mark.django_db
 def test_import_deletions():
     # Verify that subscription deletions are properly imported, that is, that deletions propagate.
     # Setup
+    legacy_organisation_profile = LegacyOrganisationProfileFactory()
     journal1 = JournalFactory.create()
     abonne1 = AbonneFactory.create()
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
