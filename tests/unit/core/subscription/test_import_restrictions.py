@@ -72,6 +72,28 @@ def test_assign_user_to_existing_organisation():
 
     assert Organisation.objects.count() == 1
 
+@pytest.mark.django_db
+def test_import_can_rename_organisation():
+    profile = LegacyOrganisationProfileFactory()
+    profile.organisation.name = "old name"
+    profile.organisation.save()
+    journal1 = JournalFactory.create()
+    abonne1 = AbonneFactory.create()
+    abonne1.abonne = "new name"
+    abonne1.abonneid = profile.account_id
+
+    revue1 = RevueFactory.create(titrerevabr=journal1.code)
+    sub1 = RevueabonneFactory.create(
+        abonneid=abonne1.abonneid,
+        revueid=revue1.revueid,
+        anneeabonnement=2018)
+
+    subscription_qs = Revueabonne.objects
+    import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
+
+    assert Organisation.objects.count() == 1
+    organisation = Organisation.objects.first()
+    assert organisation.name == "new name"
 
 @pytest.mark.django_db
 def test_import_deletions():
