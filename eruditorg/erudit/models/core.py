@@ -15,7 +15,7 @@ from ..modelfields import SizeConstrainedImageField
 
 class Organisation(models.Model):
     """ A single organisation. """
-    name = models.CharField(max_length=120, verbose_name=_('Nom'))
+    name = models.CharField(max_length=300, verbose_name=_('Nom'))
 
     street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Adresse'))
     postal_code = models.CharField(

@@ -125,13 +125,13 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
 
         try:
             profile = LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
-            profile.organisation.name = restriction_subscriber.abonne[:120]
+            profile.organisation.name = restriction_subscriber.abonne
             profile.organisation.save()
 
         except LegacyOrganisationProfile.DoesNotExist:
 
             organisation, created = Organisation.objects.get_or_create(
-                name=restriction_subscriber.abonne[:120]
+                name=restriction_subscriber.abonne
             )
             organisation.members.add(user)
             organisation_profile = LegacyOrganisationProfile.objects.create(
