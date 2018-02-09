@@ -153,21 +153,12 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
         finally:
             profile.organisation.members.add(user)
             profile.organisation.save()
+            organisation = profile.organisation
 
-        # Sometime, we get subscriber rows with duplicate names! It seems that most of the
-        # time, it refers to the same entity, so it's not a big deal, but we want to make sure
-        # we're not going to cause an integrity error before creating the profile.
-        organisation = Organisation.legacy_objects.get_by_id(restriction_subscriber.pk)
-
-        try:
-            restriction_profile = LegacyAccountProfile.objects \
-                .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
-                .get(organisation=organisation)
-        except LegacyAccountProfile.DoesNotExist:
-            restriction_profile = LegacyAccountProfile.objects.create(
-                origin=LegacyAccountProfile.DB_RESTRICTION,
-                legacy_id=str(restriction_subscriber.pk),
-                user=user, organisation=organisation)
+        restriction_profile = LegacyAccountProfile.objects.create(
+            origin=LegacyAccountProfile.DB_RESTRICTION,
+            legacy_id=str(restriction_subscriber.pk),
+            user=user, organisation=organisation)
 
         if restriction_subscriber.icone:
             f = open(
