@@ -1,15 +1,18 @@
 import pytest
 
-from erudit.test.factories import JournalFactory, LegacyOrganisationProfileFactory
 
+from erudit.models.core import Organisation
+from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription, Organisation
+from core.subscription.models import JournalAccessSubscription
 from core.subscription.restriction.models import Revueabonne
 from core.subscription.restriction.test.factories import (
     AbonneFactory, RevueFactory, RevueabonneFactory
 )
 from core.subscription.management.commands import import_restrictions
 
+from core.accounts.test.factories import LegacyAccountProfileFactory
+from erudit.test.factories import JournalFactory, LegacyOrganisationProfileFactory
 
 @pytest.mark.django_db
 def test_import_subscriber():
@@ -96,6 +99,28 @@ def test_import_can_rename_organisation():
     assert Organisation.objects.count() == 1
     organisation = Organisation.objects.first()
     assert organisation.name == "new name"
+
+@pytest.mark.django_db
+def test_user_email_is_updated_when_updated_at_the_source():
+    profile = LegacyAccountProfileFactory()
+    abonne = AbonneFactory()
+    profile.organisation = OrganisationFactory()
+    profile.legacy_id = abonne.abonneid
+    abonne.courriel = "test@courriel.com"
+    profile.save()
+
+    journal = JournalFactory()
+    revue1 = RevueFactory.create(titrerevabr=journal.code)
+    RevueabonneFactory.create(
+        abonneid=abonne.abonneid,
+        revueid=revue1.revueid,
+        anneeabonnement=2018)
+
+    subscription_qs = Revueabonne.objects
+    import_restrictions.import_restriction_subscriber(abonne, subscription_qs)
+
+    profile = LegacyAccountProfile.objects.first()
+    assert profile.user.email == abonne.courriel
 
 @pytest.mark.django_db
 def test_import_deletions():

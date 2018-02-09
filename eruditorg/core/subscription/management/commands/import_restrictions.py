@@ -108,6 +108,9 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
         restriction_profile = LegacyAccountProfile.objects \
             .filter(origin=LegacyAccountProfile.DB_RESTRICTION) \
             .get(legacy_id=str(restriction_subscriber.pk))
+        user = restriction_profile.user
+        user.email = restriction_subscriber.courriel
+        user.save()
     except LegacyAccountProfile.DoesNotExist:
         username = 'restriction-{}'.format(restriction_subscriber.pk)
         user, created = get_or_create_legacy_user(
