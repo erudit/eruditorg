@@ -177,7 +177,8 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
     # be imported: subscription will stay here forever.
 
     # failsafe to ensure that we don't mistakenly delete subscriptions that aren't institutional
-    assert restriction_profile.organisation is not None
+    if restriction_profile.organisation is None:
+        raise ValidationError("Organisation is required")
 
     try:
         subscription = JournalAccessSubscription.objects\
@@ -256,7 +257,7 @@ def import_restriction_subscription(
     except ValidationError as ve:
         # We are saving multiple periods for multiple journals under the same subscription
         # instance so period validation errors can happen.
-        logger.error('subscriptionperiod.validtionerror')
+        logger.error('subscriptionperiod.validationerror')
         raise
     else:
         subscription_period.save()
