@@ -481,6 +481,7 @@ class BaseArticleDetailView(
         return super().get_object(queryset=queryset)
 
     def get_context_data(self, **kwargs):
+
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
         obj = context.get(self.context_object_name)
 
@@ -543,7 +544,7 @@ class BaseArticleDetailView(
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
         xsl_template = loader.get_template('public/journal/eruditxsd300_to_html.xsl')
-        xsl = xsl_template.render(context.flatten() if hasattr(context, 'flatten') else context)
+        xsl = xsl_template.render(context=context, request=self.request)
 
         # Performs the XSLT transformation
         lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
