@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from django.views.generic import RedirectView, TemplateView, View
 from erudit.models import Journal
 
-from base.viewmixins import LoginRequiredMixin
+from base.viewmixins import LoginRequiredMixin, MenuItemMixin
 from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 
@@ -84,3 +84,23 @@ class JournalReportsDownload(LoginRequiredMixin, JournalScopeMixin, View):
         with open(path, 'rb') as fp:
             response.write(fp.read())
         return response
+
+
+class RoyaltiesListView(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, TemplateView):
+    menu_journal = 'royalty_reports'
+    template_name = 'userspace/journal/royalties_list.html'
+    REPORT_SUBPATH = 'Abonnements/Rapports'
+
+    def get_royalties_reports(self):
+        root_path = journal_reports_path(self.current_journal.code)
+        result = []
+        try:
+            toppath = os.path.join(root_path, self.REPORT_SUBPATH)
+            for root, dirs, files in os.walk(toppath):
+                for fn in files:
+                    label = root[len(toppath) + 1:].replace('/', ' - ')
+                    result.append((label, root, fn))
+            result.sort(reverse=True)
+        except FileNotFoundError:
+            pass
+        return result

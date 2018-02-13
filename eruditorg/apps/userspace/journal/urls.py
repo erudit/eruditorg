@@ -20,6 +20,11 @@ section_apps_urlpatterns = [
         views.JournalReportsDownload.as_view(),
         name='reports_download'
     ),
+    url(
+        _(r'^redevances/$'),
+        views.RoyaltiesListView.as_view(),
+        name='royalty_reports'
+    ),
 ]
 
 urlpatterns = [

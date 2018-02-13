@@ -31,7 +31,7 @@
   </li>
   {% endif %}
   <li class="sidenav-item{% if menu_journal == 'royalty_reports' %} active{% endif %}">
-    <a href="{# {% url 'userspace:journal:royalty_reports:list' journal_pk=scope_current_journal.pk %} #}">
+    <a href="{% url 'userspace:journal:royalty_reports' journal_pk=scope_current_journal.pk %}">
       <span class="ion-social-usd-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Redevances" %}</span>
     </a>

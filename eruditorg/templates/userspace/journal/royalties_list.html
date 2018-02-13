@@ -1,0 +1,22 @@
+{% extends "userspace/journal/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans "Rapport de redevances" %} {{ block.super }}{% endblock title %}
+
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:royalty_reports' journal_pk=scope_current_journal.pk %}">{% trans "Rapports de redevances" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Rapports de redevances" %}
+{% endblock %}
+
+{% block content_main %}
+    <ul>
+        {% for label, subdir, fn in view.get_royalties_reports %}
+            <li><a href="{% url 'userspace:journal:reports_download' %}?subpath={{ subdir }}/{{ fn }}">
+                <b>{{ label }}</b> - {{ fn }}
+            </a></li>
+        {% endfor %}
+    </ul>
+{% endblock content_main %}
