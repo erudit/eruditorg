@@ -15,6 +15,11 @@ section_apps_urlpatterns = [
         include('apps.userspace.journal.information.urls', namespace='information')),
     url(_(r'^abonnements/'),
         include('apps.userspace.journal.subscription.urls', namespace='subscription')),
+    url(
+        _(r'^rapports/telecharger/$'),
+        views.JournalReportsDownload.as_view(),
+        name='reports_download'
+    ),
 ]
 
 urlpatterns = [

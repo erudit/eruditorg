@@ -25,6 +25,9 @@ STATIC_ROOT = str(ROOT_DIR / 'static')
 MEDIA_ROOT = str(ROOT_DIR / 'media')
 UPLOAD_ROOT = str(ROOT_DIR / 'media' / 'uploads')
 
+# destination path for https://gitlab.erudit.org/erudit/rapports/rapports_editeurs
+SUBSCRIPTION_EXPORTS_ROOT = str(ROOT_DIR / 'rapports_editeurs')
+
 # URL of the admin page
 ADMIN_URL = 'admin/'
 
@@ -269,6 +272,11 @@ FEDORA_PASSWORD = 'fcAdmin'
 # Solr settings
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
 SOLR_ADMIN = 'http://10.1.1.33:8080/solr/admin/cores/'
+
+# Victor settings
+VICTOR_SOAP_URL = None
+VICTOR_SOAP_USERNAME = None
+VICTOR_SOAP_PASSWORD = None
 
 # Logging settings
 LOGGING = {

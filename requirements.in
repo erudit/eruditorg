@@ -59,3 +59,4 @@ openpyxl>=2.3.5,<2.4
 requests[socks]>=2.18.4,<2.19
 django-waffle>=0.12.0
 django-redis>=4.7.0,<4.8
+suds-py3>=1.3.3

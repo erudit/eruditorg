@@ -11,15 +11,14 @@
 {% trans "Abonnements" %}
 {% endblock %}
 
-{% block section_intro %}
-<p>
-{% blocktrans %}
-Vous devez vous connecter à l’Espace éditeur avec votre ancien identifiant et mot de passe sur le site <em>rétro</em> Érudit pour accéder à la liste des institutions abonnées à votre revue.
-{% endblocktrans %}
-</p>
-{% endblock section_intro %}
-
 {% block content_main %}
+<h2>{% trans "Institutions abonnées par année" %}</h2>
+<ul>
+  {% for year, link in view.get_subscriptions_archive_years %}
+    <li><a href="{{ link }}">{{ year }}</li>
+  {% endfor %}
+</ul>
+
 {% flag "NEW_USERSPACE" %}
 <ul class="tabs-group">
   <li class="tab active">
