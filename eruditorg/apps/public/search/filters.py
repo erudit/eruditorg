@@ -18,6 +18,12 @@ class EruditDocumentSolrFilter(object):
     OP_NOT = 'NOT'
     operators = [OP_AND, OP_OR, OP_NOT, ]
 
+    operators_correspondence = {
+        ' AND ': [' ET ', ],
+        ' OR ': [' OU '],
+        ' NOT ': [' NON '],
+    }
+
     aggregation_correspondence = {
         'Annee': 'year',
         'TypeArticle_fac': 'article_type',
@@ -28,6 +34,15 @@ class EruditDocumentSolrFilter(object):
         'Corpus_fac': 'publication_type',
     }
 
+    def translate_boolean_operators(self, search_term):
+        if not search_term:
+            return search_term
+
+        for operator, correspondences in self.operators_correspondence.items():
+            for correspondence in correspondences:
+                search_term = search_term.replace(correspondence, operator)
+        return search_term
+
     def build_solr_filters(self, query_params={}):
         """ Return the filters to use to query the Solr index. """
         filters = {}
@@ -36,7 +51,9 @@ class EruditDocumentSolrFilter(object):
         # --
 
         # Simple search parameters
-        basic_search_term = query_params.get('basic_search_term', '*')
+        basic_search_term = self.translate_boolean_operators(
+            query_params.get('basic_search_term', '*')
+        )
         basic_search_field = query_params.get('basic_search_field', 'all')
         filters.update({'q': {
             'term': basic_search_term, 'field': basic_search_field,
@@ -45,7 +62,9 @@ class EruditDocumentSolrFilter(object):
         # Advanced search parameters
         advanced_q = []
         for i in range(search_settings.MAX_ADVANCED_PARAMETERS):
-            search_term = query_params.get('advanced_search_term{}'.format(i + 1), None)
+            search_term = self.translate_boolean_operators(
+                query_params.get('advanced_search_term{}'.format(i + 1), None)
+            )
             search_field = query_params.get('advanced_search_field{}'.format(i + 1), 'all')
             search_operator = query_params.get('advanced_search_operator{}'.format(i + 1), None)
 

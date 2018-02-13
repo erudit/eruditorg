@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import pytest
 import unittest.mock
 
 from django.test import RequestFactory
@@ -392,3 +392,19 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         )
 
         assert 'Compterendu' in request_get.get('filter_article_type')
+
+
+@pytest.mark.parametrize("operator, correspondence", [
+    ("AND", "ET"),
+    ("OR", "OU"),
+    ("NOT", "NON")
+])
+def test_can_translate_boolean_operators(operator, correspondence):
+    # Setup
+    request = Request(RequestFactory().get('/', data={
+        'basic_search_term': 'test {operator} test2'.format(operator=correspondence),
+    }))
+    filt = EruditDocumentSolrFilter()
+    filters = filt.build_solr_filters(request.query_params.copy())
+
+    assert filters['q']['term'] == 'test {operator} test2'.format(operator=operator)
