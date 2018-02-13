@@ -7,7 +7,7 @@
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.14#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.15#egg=liberuditarticle
 amqp==1.4.9               # via kombu
 anyjson==0.3.3            # via kombu
 babel==2.3.4
@@ -56,7 +56,7 @@ openpyxl==2.3.5
 pdfrw==0.4                # via weasyprint
 pillow==5.0.0
 ply==3.10
-progressbar2==3.34.3      # via eulfedora
+progressbar2==3.35.1      # via eulfedora
 pycparser==2.18           # via cffi
 pycrypto==2.6.1           # via eulfedora
 pymysql==0.7.11
@@ -66,8 +66,8 @@ pyphen==0.9.4             # via weasyprint
 pysocks==1.6.8            # via requests
 pysolr==3.4.0
 python-dateutil==2.6.1    # via eulfedora, influxdb
-python-utils==2.2.0       # via progressbar2
-pytz==2017.3              # via babel, celery, influxdb
+python-utils==2.3.0       # via progressbar2
+pytz==2018.3              # via babel, celery, influxdb
 raven==6.5.0
 rdflib==4.2.2             # via eulfedora
 redis==2.10.6             # via django-redis
@@ -76,10 +76,10 @@ requests[socks]==2.18.4
 rules==1.1.1
 sickle==0.6.2
 simplejson==3.13.2
-six==1.11.0               # via eulfedora, html5lib, influxdb, isodate, python-dateutil, python-utils, structlog
+six==1.11.0               # via eulfedora, html5lib, influxdb, isodate, progressbar2, python-dateutil, python-utils, structlog
 sqlparse==0.2.4
 structlog==18.1.0
 tinycss2==0.6.1           # via cairosvg, cssselect2, weasyprint
 urllib3==1.22             # via requests
-weasyprint==0.42.1
+weasyprint==0.42.2
 webencodings==0.5.1       # via html5lib, tinycss2

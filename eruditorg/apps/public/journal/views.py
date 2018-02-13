@@ -46,6 +46,7 @@ from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectV
 
 from .forms import JournalListFilterForm
 from .templateannotations import IssueAnnotator
+from .templateannotations import ArticleAnnotator
 from .viewmixins import ContentAccessCheckMixin
 from .viewmixins import ArticleViewMetricCaptureMixin
 from .viewmixins import SingleArticleMixin
@@ -409,6 +410,7 @@ class IssueDetailView(
             for art in self.object.get_erudit_object().findall('article')
         ]
         articles = sorted(articles, key=lambda a: article_li.index(a.localidentifier))
+        ArticleAnnotator.annotate_articles(articles)
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
         return context
