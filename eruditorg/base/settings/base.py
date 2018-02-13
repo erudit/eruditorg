@@ -51,7 +51,6 @@ INSTALLED_APPS = (
     'apps.userspace.journal.authorization',
     'apps.userspace.journal.editor',
     'apps.userspace.journal.information',
-    'apps.userspace.journal.royalty_reports',
     'apps.userspace.journal.subscription',
     'apps.userspace.library',
     'apps.userspace.library.authorization',
@@ -66,7 +65,6 @@ INSTALLED_APPS = (
     'core.journal',
     'core.metrics',
     'core.reporting',
-    'core.royalty_reports',
     'core.subscription',
 
     # Third-party apps
