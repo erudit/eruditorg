@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import datetime as dt
 
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
-from erudit.test import BaseEruditTestCase
-from erudit.test.factories import OrganisationFactory
+from base.test.factories import UserFactory
+from erudit.test.factories import OrganisationFactory, JournalFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
@@ -16,88 +16,83 @@ from core.subscription.test.factories import JournalManagementPlanFactory
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 
 
-class TestManageIndividualSubscriptionRule(BaseEruditTestCase):
-    def test_knows_that_a_superuser_can_manage_individual_subscriptions(self):
-        # Setup
-        user = User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        # Run & check
-        self.assertTrue(user.has_perm('subscription.manage_individual_subscription', self.journal))
+@pytest.fixture()
+def superuser():
+    user = UserFactory()
+    user.is_superuser = True
+    user.save()
+    return user
 
-    def test_knows_that_a_staff_member_can_manage_individual_subscriptions(self):
-        # Setup
-        user = User.objects.create_user(
-            username='staff', email='admin@xyz.com', password='top_secret')
-        user.is_staff = True
-        user.save()
+
+@pytest.fixture()
+def staff_user():
+    user = UserFactory()
+    user.is_staff=True
+    user.save()
+    return user
+
+
+@pytest.mark.django_db
+class TestManageIndividualSubscriptionRule(object):
+    def test_knows_that_a_superuser_can_manage_individual_subscriptions(self, superuser):
+        assert superuser.has_perm('subscription.manage_individual_subscription', JournalFactory())
+
+    def test_knows_that_a_staff_member_can_manage_individual_subscriptions(self, staff_user):
         # Run & check
-        self.assertTrue(user.has_perm('subscription.manage_individual_subscription', self.journal))
+        assert staff_user.has_perm('subscription.manage_individual_subscription', JournalFactory())
 
     def test_knows_if_a_simple_user_can_manage_individual_subscriptions(self):
         # Setup
+        journal = JournalFactory()
+        user = UserFactory()
+        journal.members.add(user)
         AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
-            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+            content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
+            user=user, authorization_codename=AC.can_manage_individual_subscription.codename)
         plan = JournalManagementPlanFactory.create(max_accounts=10)
-        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
+
+        JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
         # Run & check
-        self.assertTrue(
-            self.user.has_perm('subscription.manage_individual_subscription', self.journal))
+
+        assert user.has_perm('subscription.manage_individual_subscription', journal)
 
     def test_knows_if_a_simple_user_cannot_manage_individual_subscriptions(self):
         # Setup
-        user = User.objects.create_user(
-            username='test', email='test@xyz.com', password='top_secret')
-        # Run & check
-        self.assertFalse(user.has_perm('subscription.manage_individual_subscription', self.journal))
+        user = UserFactory()
+        # Run & checkBaseEruditTestCase
+        assert not user.has_perm('subscription.manage_individual_subscription', JournalFactory())
 
 
-class TestManageOrganisationSubscriptionIpsRule(BaseEruditTestCase):
-    def setUp(self):
-        super(TestManageOrganisationSubscriptionIpsRule, self).setUp()
-        self.organisation = OrganisationFactory.create()
+@pytest.mark.django_db
+class TestManageOrganisationSubscriptionIpsRule(object):
 
-    def test_knows_that_a_superuser_can_manage_organisation_subscription_ips(self):
+    def test_knows_that_a_superuser_can_manage_organisation_subscription_ips(self, superuser):
+        assert superuser.has_perm('subscription.manage_organisation_subscription_ips', OrganisationFactory())
+
+    def test_knows_that_a_staff_member_can_manage_organisation_subscription_ips(self, staff_user):
         # Setup
-        user = User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        # Run & check
-        self.assertTrue(
-            user.has_perm('subscription.manage_organisation_subscription_ips', self.organisation))
-
-    def test_knows_that_a_staff_member_can_manage_organisation_subscription_ips(self):
-        # Setup
-        user = User.objects.create_user(
-            username='staff', email='admin@xyz.com', password='top_secret')
-        user.is_staff = True
-        user.save()
-        # Run & check
-        self.assertTrue(
-            user.has_perm('subscription.manage_organisation_subscription_ips', self.organisation))
+        assert staff_user.has_perm('subscription.manage_organisation_subscription_ips', OrganisationFactory())
 
     def test_knows_if_a_simple_user_can_manage_organisation_subscription_ips(self):
         # Setup
+        organisation = OrganisationFactory()
+        user = UserFactory()
         AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.organisation),
-            object_id=self.organisation.id, user=self.user,
+            content_type=ContentType.objects.get_for_model(organisation),
+            object_id=organisation.id, user=user,
             authorization_codename=AC.can_manage_organisation_subscription_ips.codename)
-        self.organisation.members.add(self.user)
+        organisation.members.add(user)
         subscription = JournalAccessSubscriptionFactory.create(
-            journal=self.journal, organisation=self.organisation)
+            organisation=organisation)
         now_dt = dt.datetime.now()
         JournalAccessSubscriptionPeriodFactory.create(
             subscription=subscription,
             start=now_dt - dt.timedelta(days=8),
             end=now_dt + dt.timedelta(days=11))
         # Run & check
-        self.assertTrue(
-            self.user.has_perm(
-                'subscription.manage_organisation_subscription_ips', self.organisation))
+        assert user.has_perm('subscription.manage_organisation_subscription_ips', organisation)
 
     def test_knows_if_a_simple_user_cannot_manage_organisation_subscription_ips(self):
         # Setup
-        user = User.objects.create_user(
-            username='test', email='test@xyz.com', password='top_secret')
-        # Run & check
-        self.assertFalse(
-            user.has_perm('subscription.manage_organisation_subscription_ips', self.organisation))
+        user = UserFactory()
+        assert not user.has_perm('subscription.manage_organisation_subscription_ips', OrganisationFactory())
