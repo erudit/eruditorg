@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 import dateutil.relativedelta as dr
 import io
@@ -12,14 +10,16 @@ from eruditarticle.objects import EruditPublication
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
 from erudit.test import BaseEruditTestCase
-from erudit.test.factories import ArticleFactory
-from erudit.test.factories import AuthorFactory
-from erudit.test.factories import IssueFactory
-from erudit.test.factories import JournalFactory
-from erudit.test.factories import JournalTypeFactory
-from erudit.test.factories import CollectionFactory
-from erudit.test.factories import IssueContributorFactory
-from erudit.test.factories import IssueThemeFactory
+from erudit.test.factories import (
+    ArticleFactory,
+    AuthorFactory,
+    IssueFactory,
+    JournalFactory,
+    JournalTypeFactory,
+    CollectionFactory,
+    IssueContributorFactory,
+    IssueThemeFactory,
+)
 
 
 def reldate(inc_days):
@@ -62,7 +62,6 @@ class TestJournal(BaseEruditTestCase):
         # Setup
         journal = JournalFactory(use_fedora=False)
         journal.open_access = False
-        journal.type = JournalTypeFactory.create(code='S')
         journal.save()
         date_issue_1 = dt.date(2017, 3, 8)
         date_issue_2 = date_issue_1 - dr.relativedelta(months=5)
@@ -140,7 +139,6 @@ class TestJournal(BaseEruditTestCase):
         date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         journal = JournalFactory(use_fedora=False)
         journal.open_access = False
-        journal.type = JournalTypeFactory.create(code='S')
         journal.save()
         IssueFactory.create(
             journal=journal, year=date_issue_1.year,
@@ -175,7 +173,6 @@ class TestJournal(BaseEruditTestCase):
         journal = JournalFactory(use_fedora=False)
         journal.last_publication_year = now_dt.year
         journal.open_access = False
-        journal.type = JournalTypeFactory.create(code='S')
         journal.save()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
@@ -319,7 +316,6 @@ class TestIssue(BaseEruditTestCase):
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
-        journal.type = JournalTypeFactory.create(code='S')
         journal.save()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
@@ -363,11 +359,11 @@ class TestIssue(BaseEruditTestCase):
     def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
         # Setup
         from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(use_fedora=False, collection=self.collection)
+        journal = JournalFactory(
+            type_code='C', use_fedora=False, collection=self.collection)
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
-        journal.type = JournalTypeFactory.create(code='C')
         journal.save()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
@@ -410,9 +406,9 @@ class TestIssue(BaseEruditTestCase):
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
-        journal = JournalFactory(use_fedora=False, collection=self.collection)
+        journal = JournalFactory(
+            type_code='C', use_fedora=False, collection=self.collection)
         journal.last_publication_year = now_dt.year + 1
-        journal.type = JournalTypeFactory.create(code='C')
         journal.save()
         issue = IssueFactory.create(
             journal=journal,
@@ -424,10 +420,9 @@ class TestIssue(BaseEruditTestCase):
         # Setup
         now_dt = dt.datetime.now()
         journal = JournalFactory(use_fedora=False)
-        j2 = JournalFactory.create(open_access=False, use_fedora=False)
+        j2 = JournalFactory.create(type_code='C', open_access=False, use_fedora=False)
         journal.last_publication_year = now_dt.year
         journal.open_access = True
-        journal.type = JournalTypeFactory.create(code='C')
         journal.save()
         issue_1 = IssueFactory.create(
             journal=journal, year=now_dt.year - 1,
@@ -619,7 +614,6 @@ class TestArticle(BaseEruditTestCase):
         journal = JournalFactory(use_fedora=False, collection=self.collection)
         journal.open_access = False
         journal.last_publication_year = now_dt.year
-        journal.type = JournalTypeFactory.create(code='S')
         journal.save()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
@@ -717,7 +711,7 @@ class TestAuthor(BaseEruditTestCase):
         )
 
     def test_journaltype_can_return_embargo_duration_in_days(self):
-        journal_type = JournalTypeFactory(code='S')
+        journal_type = JournalTypeFactory.create(code='S')
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         duration = dt.date.today() - (dt.date.today() - dr.relativedelta(months=ml))
         assert journal_type.embargo_duration(unit="days") == duration.days

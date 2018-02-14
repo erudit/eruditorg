@@ -15,9 +15,7 @@ from core.citations.middleware import SavedCitationListMiddleware
 from core.citations.models import SavedCitationList
 from core.citations.test.factories import SavedCitationListFactory
 
-from erudit.models import JournalType
 from erudit.test.factories import ArticleFactory
-from erudit.test.factories import ArticleTitleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
@@ -35,8 +33,6 @@ class TestSavedCitationListView(EruditClientTestCase):
     def setup(self):
         author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
         author_2 = AuthorFactory.create(lastname='Def', firstname='ghi')
-        JournalType.objects.create(code='S')
-        JournalType.objects.create(code='C')
         self.collection_1 = CollectionFactory.create()
         self.thesis_1 = ThesisFactory.create(
             localidentifier='t1', collection=self.collection_1, author=author_1, title='Thesis A',
@@ -47,9 +43,9 @@ class TestSavedCitationListView(EruditClientTestCase):
         author_3 = AuthorFactory.create(lastname='Ghi', firstname='Jkl')
         author_4 = AuthorFactory.create(lastname='Jkl', firstname='mno')
         self.journal_1 = JournalFactory.create(
-            collection=self.collection, type=JournalType.objects.get(code='S'))
+            collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
-            collection=self.collection, type=JournalType.objects.get(code='C'))
+            collection=self.collection, type_code='C')
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
@@ -243,8 +239,6 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
     def setup(self):
         author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
         author_2 = AuthorFactory.create(lastname='Def', firstname='ghi')
-        JournalType.objects.create(code='S')
-        JournalType.objects.create(code='C')
         self.collection_1 = CollectionFactory.create()
         self.thesis_1 = ThesisFactory.create(
             localidentifier='t1', collection=self.collection_1, author=author_1, title='Thesis A',
@@ -255,9 +249,9 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
         author_3 = AuthorFactory.create(lastname='Ghi', firstname='Jkl')
         author_4 = AuthorFactory.create(lastname='Jkl', firstname='mno')
         self.journal_1 = JournalFactory.create(
-            collection=self.collection, type=JournalType.objects.get(code='S'))
+            collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
-            collection=self.collection, type=JournalType.objects.get(code='C'))
+            collection=self.collection, type_code='C')
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
@@ -309,8 +303,6 @@ class TestBaseEruditDocumentsCitationView(EruditClientTestCase):
     def setup(self):
         author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
         author_2 = AuthorFactory.create(lastname='Def', firstname='ghi')
-        JournalType.objects.create(code='S')
-        JournalType.objects.create(code='C')
         self.collection_1 = CollectionFactory.create()
         self.thesis_1 = ThesisFactory.create(
             localidentifier='t1', collection=self.collection_1, author=author_1, title='Thesis A',
@@ -321,9 +313,9 @@ class TestBaseEruditDocumentsCitationView(EruditClientTestCase):
         author_3 = AuthorFactory.create(lastname='Ghi', firstname='Jkl')
         author_4 = AuthorFactory.create(lastname='Jkl', firstname='mno')
         self.journal_1 = JournalFactory.create(
-            collection=self.collection, type=JournalType.objects.get(code='S'))
+            collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
-            collection=self.collection, type=JournalType.objects.get(code='C'))
+            collection=self.collection, type_code='C')
         self.issue_1 = IssueFactory.create(journal=self.journal_1, year=2012)
         self.issue_2 = IssueFactory.create(journal=self.journal_2, year=2013)
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
