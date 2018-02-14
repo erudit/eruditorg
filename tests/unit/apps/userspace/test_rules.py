@@ -5,7 +5,8 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 
 from base.test.factories import UserFactory
-from erudit.test.factories import JournalFactory
+from erudit.test.factories import JournalFactory, OrganisationFactory
+
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 
@@ -91,4 +92,11 @@ class TestUserspaceAccessRule(object):
             user=user,
             authorization_codename=AC.can_edit_journal_information.codename)
         # Run & check
+        assert user.has_perm('userspace.access')
+
+    def test_an_organisation_member_can_access_the_userspace(self):
+        user = UserFactory()
+        organisation = OrganisationFactory()
+        organisation.members.add(user)
+
         assert user.has_perm('userspace.access')
