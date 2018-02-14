@@ -181,11 +181,7 @@ class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixi
             'Nom du contact', 'Courriel'])
 
         subscribers = Victor.get_configured_instance().get_subscriber_contact_informations(
-            self.current_journal.code)
-        if not subscribers:
-            # Some journals are referred in victor by codes, and some others by fedora id...
-            subscribers = Victor.get_configured_instance().get_subscriber_contact_informations(
-                self.current_journal.localidentifier)
+            self.current_journal.legacy_code)
 
         ATTRS = [
             'Id', 'InstitutionName', 'Address', 'City', 'Province', 'Country', 'PostalCode',
