@@ -41,8 +41,8 @@ logger = structlog.getLogger(__name__)
 
 def _create_issue_contributor_object(issue_contributor, issue, is_director=False, is_editor=False):
     contributor = IssueContributor(
-        firstname=issue_contributor['firstname'],
-        lastname=issue_contributor['lastname'],
+        firstname=issue_contributor.firstname,
+        lastname=issue_contributor.lastname,
         issue=issue
     )
 
@@ -50,7 +50,7 @@ def _create_issue_contributor_object(issue_contributor, issue, is_director=False
         contributor.is_director = True
     if is_editor:
         contributor.is_editor = True
-    contributor_roles = issue_contributor.get('role')
+    contributor_roles = issue_contributor.role
     if contributor_roles:
         role_fr = contributor_roles.get('fr')
         role_en = contributor_roles.get('en')

@@ -1,18 +1,32 @@
+import mock
 from erudit.test.factories import IssueFactory
 import pytest
 
-from erudit.test import BaseEruditTestCase
+from eruditarticle.objects.person import Person
+
 from erudit.management.commands.import_journals_from_fedora import _create_issue_contributor_object
 
 
-class TestCommand(BaseEruditTestCase):
+@pytest.mark.django_db
+class TestCommand(object):
+
+    def test_can_create_issue_contributor_from_ea_output(self, eruditpublication):
+
+        # Test that this does not crash
+        for director in eruditpublication.directors:
+            _create_issue_contributor_object(
+                director, IssueFactory()
+            )
+
     def test_can_raise_valueerror_when_both_roles_are_specified(self):
-        issue = IssueFactory(journal=self.journal)
-        issue_contributor = {
-            'role': {'fr': 'directeur', 'en': 'director'},
-            'firstname': 'A',
-            'lastname': 'B',
-        }
+        issue = IssueFactory()
+
+        issue_contributor = mock.MagicMock(
+            Person,
+            role={'fr': 'directeur', 'en': 'director'},
+            firstname='A',
+            lastname='B',
+        )
 
         with pytest.raises(ValueError):
             _create_issue_contributor_object(
@@ -21,13 +35,14 @@ class TestCommand(BaseEruditTestCase):
             )
 
     def test_can_find_other_language_only_when_french_and_english_are_absent(self):
-        issue = IssueFactory(journal=self.journal)
+        issue = IssueFactory()
 
-        issue_contributor = {
-            'role': {'fr': 'directeur', 'es': 'director'},
-            'firstname': 'A',
-            'lastname': 'B',
-        }
+        issue_contributor = mock.MagicMock(
+            Person,
+            role={'fr': 'directeur', 'es': 'director'},
+            firstname='A',
+            lastname='B',
+        )
 
         contributor = _create_issue_contributor_object(
             issue_contributor,
@@ -37,11 +52,12 @@ class TestCommand(BaseEruditTestCase):
 
         assert contributor.role_name == 'directeur'
 
-        issue_contributor = {
-            'role': {'es': 'director'},
-            'firstname': 'A',
-            'lastname': 'B',
-        }
+        issue_contributor = mock.MagicMock(
+            Person,
+            role={'es': 'director'},
+            firstname='A',
+            lastname='B',
+        )
 
         contributor = _create_issue_contributor_object(
             issue_contributor,
@@ -52,12 +68,14 @@ class TestCommand(BaseEruditTestCase):
         assert contributor.role_name == 'director'
 
     def test_can_create_director(self):
-        issue = IssueFactory(journal=self.journal)
-        issue_contributor = {
-            'role': {'fr': 'directeur'},
-            'firstname': 'A',
-            'lastname': 'B',
-        }
+        issue = IssueFactory()
+        issue_contributor = mock.MagicMock(
+            Person,
+            role={'fr': 'directeur'},
+            firstname='A',
+            lastname='B',
+        )
+
         contributor = _create_issue_contributor_object(
             issue_contributor,
             issue,
@@ -68,12 +86,14 @@ class TestCommand(BaseEruditTestCase):
         assert not contributor.is_editor
 
     def test_can_create_editor(self):
-        issue = IssueFactory(journal=self.journal)
-        issue_contributor = {
-            'role': {'fr': 'directeur'},
-            'firstname': 'A',
-            'lastname': 'B',
-        }
+        issue = IssueFactory()
+        issue_contributor = mock.MagicMock(
+            Person,
+            role={'fr': 'directeur'},
+            firstname='A',
+            lastname='B',
+        )
+
         contributor = _create_issue_contributor_object(
             issue_contributor,
             issue,
