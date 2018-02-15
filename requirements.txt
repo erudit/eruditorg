@@ -7,7 +7,7 @@
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.14#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.15#egg=liberuditarticle
 amqp==1.4.9               # via kombu
 anyjson==0.3.3            # via kombu
 babel==2.3.4
@@ -55,7 +55,7 @@ nameparser==0.5.6
 openpyxl==2.3.5
 pdfrw==0.4                # via weasyprint
 pillow==5.0.0
-ply==3.10
+ply==3.11
 progressbar2==3.35.2      # via eulfedora
 pycparser==2.18           # via cffi
 pycrypto==2.6.1           # via eulfedora
