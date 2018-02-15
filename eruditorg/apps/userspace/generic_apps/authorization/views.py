@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+from collections import OrderedDict
 
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
@@ -26,12 +26,12 @@ class AuthorizationUserView(LoginRequiredMixin, RelatedAuthorizationsMixin, List
         return qs.filter(content_type=ct, object_id=target_instance.pk)
 
     def get_authorizations_per_app(self):
-        data = {}
+        data = OrderedDict()
 
-        for choice in self.get_related_authorization_choices():
-            data[choice[0]] = {
-                'authorizations': self.object_list.filter(authorization_codename=choice[0]),
-                'label': choice[1],
+        for key, label in self.get_related_authorization_choices():
+            data[key] = {
+                'authorizations': self.object_list.filter(authorization_codename=key),
+                'label': label,
             }
 
         return data

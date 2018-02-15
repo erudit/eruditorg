@@ -69,7 +69,7 @@ class AuthorizationConfig(object):
     """
 
     can_consult_royalty_reports = AuthorizationDef(
-        'royalty_reports:can_consult_royalty_reports',
+        'subscriptions:can_consult_royalty_reports',
         _('Consulter les rapports de redevances'))
     """
     This authorization defines the ability to consult the royalty reports.

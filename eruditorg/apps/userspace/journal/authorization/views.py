@@ -20,6 +20,7 @@ JOURNAL_AUTHORIZATIONS = [
     AC.can_manage_authorizations,
     AC.can_manage_issuesubmission,
     AC.can_manage_individual_subscription,
+    AC.can_consult_royalty_reports,
 ]
 
 

@@ -55,3 +55,10 @@ rules.add_perm(
         )
     ),
 )
+
+rules.add_perm(
+    'subscription.consult_royalty_reports',
+    is_authenticated & (
+        is_superuser | is_staff | HasAuthorization(AC.can_consult_royalty_reports)
+    ),
+)
