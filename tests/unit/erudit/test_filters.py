@@ -1,4 +1,12 @@
-from erudit.templatetags.model_formatters import person_list
+import pytest
+
+from erudit.templatetags.model_formatters import person_list, format_editor
+
+
+def test_can_format_the_output_of_liberuditarticle(eruditarticle):
+    # should not crash
+    for author in eruditarticle.get_authors():
+        format_editor(author)
 
 
 def test_can_format_an_empty_list():
