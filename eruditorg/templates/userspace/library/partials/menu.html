@@ -38,7 +38,7 @@
   <li class="sidenav-item{% if menu_library == 'collections' %} active{% endif %}">
     <a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">
       <span class="ion-ios-box-outline sidenav-icon"></span>
-      <span class="sidenav-label">{% trans "Collections" %}</span>
+      <span class="sidenav-label">{% trans "Collections" context "dashboard" %}</span>
     </a>
   </li>
 
