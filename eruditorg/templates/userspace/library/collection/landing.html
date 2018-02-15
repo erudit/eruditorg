@@ -5,11 +5,11 @@
 {% block title %}{% trans "Collections" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Collections" %}</a></li>
+<li><a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">{% trans "Collections" context "dashboard" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Collections" %}
+{% trans "Collections" context "dashboard" %}
 {% endblock %}
 
 {% block section_intro %}

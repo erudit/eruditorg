@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-09 15:01-0500\n"
+"POT-Creation-Date: 2018-02-15 11:18-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Gwendal Henry <gwendal.henry@erudit.org>, 2018\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -632,7 +632,6 @@ msgstr "Article types"
 #: templates/userspace/library/collection/landing.html:5
 #: templates/userspace/library/collection/landing.html:8
 #: templates/userspace/library/collection/landing.html:12
-#: templates/userspace/library/partials/menu.html:41
 msgid "Collections"
 msgstr "Series"
 
@@ -2308,7 +2307,7 @@ msgstr ""
 
 #: erudit/models/journal.py:920 erudit/models/thesis.py:30
 #: templates/public/journal/eruditxsd300_to_html.xsl:213
-#: templates/public/journal/partials/issue_detail_article_item.html:72
+#: templates/public/journal/partials/issue_detail_article_item.html:68
 msgid "Résumé"
 msgstr "Abstract"
 
@@ -2410,7 +2409,6 @@ msgstr "Thesis"
 #: templates/public/journal/partials/article_citation_modal_content.html:19
 #: templates/public/journal/partials/article_citation_modal_content.html:65
 #: templates/public/journal/partials/article_citation_modal_content.html:68
-#: templates/public/journal/partials/issue_detail_article_item.html:50
 #: templates/public/search/results.html:361
 #: templates/public/search/results.html:366
 #: templates/public/search/results.html:412
@@ -3896,7 +3894,7 @@ msgid "Notice bibliographique"
 msgstr "Bibliographic record"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:57
-#: templates/public/journal/partials/issue_detail_article_item.html:65
+#: templates/public/journal/partials/issue_detail_article_item.html:61
 msgid "Notice"
 msgstr "Record"
 
@@ -4593,17 +4591,17 @@ msgstr "Cultural"
 msgid "Lire l'article"
 msgstr "Read this article"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:56
+#: templates/public/journal/partials/issue_detail_article_item.html:52
 #, python-format
 msgid "p.&nbsp;%(first_page)s–%(last_page)s"
 msgstr "pp.&nbsp;%(first_page)s–%(last_page)s"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:58
+#: templates/public/journal/partials/issue_detail_article_item.html:54
 #, python-format
 msgid "p.&nbsp;%(page)s"
 msgstr "p.&nbsp;%(page)s"
 
-#: templates/public/journal/partials/issue_detail_article_item.html:64
+#: templates/public/journal/partials/issue_detail_article_item.html:60
 msgid "Voir la notice"
 msgstr "See this article's record"
 
@@ -5983,6 +5981,11 @@ msgstr "End <br>date"
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:13
 msgid "Adresses IP"
 msgstr "IP addresses"
+
+#: templates/userspace/library/partials/menu.html:41
+msgctxt "dashboard"
+msgid "Collections"
+msgstr "Collections"
 
 #: templates/userspace/library/partials/menu.html:49
 #: templates/userspace/library/subscription_information/update.html:5

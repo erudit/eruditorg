@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-15 10:37-0500\n"
+"POT-Creation-Date: 2018-02-15 11:18-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -629,7 +629,6 @@ msgstr ""
 #: templates/userspace/library/collection/landing.html:5
 #: templates/userspace/library/collection/landing.html:8
 #: templates/userspace/library/collection/landing.html:12
-#: templates/userspace/library/partials/menu.html:41
 msgid "Collections"
 msgstr ""
 
@@ -5814,6 +5813,11 @@ msgstr ""
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:9
 #: templates/userspace/library/subscription_ips/ipaddressrange_list.html:13
 msgid "Adresses IP"
+msgstr ""
+
+#: templates/userspace/library/partials/menu.html:41
+msgctxt "dashboard"
+msgid "Collections"
 msgstr ""
 
 #: templates/userspace/library/partials/menu.html:49
