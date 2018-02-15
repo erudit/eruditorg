@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="erudit:erudit.mi115" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="Series Erudit"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE=""/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2011-06-08T05:59:24.512Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2015-06-05T18:07:20.756Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2011-06-08T05:59:24.512Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID/>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T05:59:24.512Z</audit:date>
+<audit:justification>Erudit Series</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>LOGO</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T05:59:24.631Z</audit:date>
+<audit:justification>Add LOGO</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC3">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>LOGO</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T05:59:24.811Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC4">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T06:04:12.582Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC5">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T06:04:12.935Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC6">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T17:25:26.562Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC7">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-08T17:25:26.930Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC8">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-22T12:06:39.279Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC9">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-22T12:06:39.818Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC10">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-22T14:59:27.706Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC11">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-06-22T14:59:28.338Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC12">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-27T11:50:03.314Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC13">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-27T11:50:04.189Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC14">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-27T11:52:03.325Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC15">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-27T11:52:04.106Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC16">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-08-03T19:04:41.627Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC17">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-08-03T19:04:42.592Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC18">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-08-03T19:05:44.113Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC19">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-08-03T19:05:45.003Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC20">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-08-18T20:58:37.231Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC21">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-08-18T20:58:38.264Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC22">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T13:59:07.356Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC23">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T13:59:08.729Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC24">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T13:59:27.125Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC25">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T13:59:28.218Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC26">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:01:39.050Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC27">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:01:39.969Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC28">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:02:16.212Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC29">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:02:17.153Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC30">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:04:23.558Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC31">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:04:24.462Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC32">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:04:44.417Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC33">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:04:45.283Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC34">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:07:23.139Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC35">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:07:24.090Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC36">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:07:39.645Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC37">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:07:40.803Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC38">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:09:04.469Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC39">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:09:05.380Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC40">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:09:28.062Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC41">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:09:28.933Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC42">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:13:23.962Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC43">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:13:24.833Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC44">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:14:20.978Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC45">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:14:21.894Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC46">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:19:31.960Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC47">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:19:32.809Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC48">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:19:46.324Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC49">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-29T14:19:47.216Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC50">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fcAdmin</audit:responsibility>
+<audit:date>2011-11-15T19:34:43.039Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC51">
+<audit:process type="Fedora API-M"/>
+<audit:action>purgeDatastream</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fcAdmin</audit:responsibility>
+<audit:date>2011-11-15T19:34:43.280Z</audit:date>
+<audit:justification> . . . Purged datastream (ID=THEMES), versions ranging from the beginning of time to the end of time.  This resulted in the permanent removal of 1 datastream version(s) (2011-09-29T10:19:46.324Z) and all associated audit records.</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC52">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fcAdmin</audit:responsibility>
+<audit:date>2011-11-15T19:34:43.381Z</audit:date>
+<audit:justification>Add THEMES</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC53">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-02-02T21:26:23.787Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC54">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-02-02T21:26:29.580Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC55">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-02-21T16:50:34.993Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC56">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-02-21T16:50:35.652Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC57">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-02-21T16:50:57.226Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC58">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-02-21T16:50:57.681Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC59">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>OAISET_INFO</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-03-02T16:20:19.317Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC60">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-05-02T15:37:53.424Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC61">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-05-02T15:37:54.330Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC62">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-08-07T12:49:10.245Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC63">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-08-07T12:49:10.841Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC64">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-08-07T13:09:21.860Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC65">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-08-07T13:09:22.383Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC66">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-08-22T15:40:53.975Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC67">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-08-22T15:40:54.686Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC68">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T15:59:23.319Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC69">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T15:59:23.869Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC70">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:00:37.455Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC71">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:00:38.005Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC72">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:08:48.741Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC73">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:08:49.399Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC74">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:10:01.487Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC75">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:10:02.132Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC76">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:16:20.453Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC77">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:16:21.007Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC78">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:17:40.744Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC79">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-09-26T16:17:41.278Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC80">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-10-04T15:18:15.519Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC81">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-10-04T15:18:16.481Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC82">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-12-21T17:48:26.432Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC83">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2012-12-21T17:48:27.056Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC84">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-02-01T17:10:24.557Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC85">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-02-01T17:10:26.249Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC86">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-06-11T13:05:59.118Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC87">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-06-11T13:06:03.165Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC88">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-07-09T14:13:14.820Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC89">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-07-09T14:13:17.465Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC90">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-09-23T14:46:23.450Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC91">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-09-23T14:46:26.304Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC92">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-12-16T19:45:12.374Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC93">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2013-12-16T19:45:15.000Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC94">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-02-14T19:02:51.684Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC95">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-02-14T19:02:54.415Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC96">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-04-10T19:59:36.872Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC97">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-04-10T19:59:39.544Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC98">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-05-23T16:02:12.664Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC99">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-05-23T16:02:18.799Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC100">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-05-23T18:48:19.524Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC101">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-05-23T18:48:20.570Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC102">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-05-23T18:50:44.310Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC103">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-05-23T18:50:45.067Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC104">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-08-22T11:52:41.347Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC105">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-08-22T11:52:48.241Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC106">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-10-03T13:42:04.323Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC107">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-10-03T13:42:05.442Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC108">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-10-03T13:42:42.150Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC109">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2014-10-03T13:42:42.624Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC110">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-01-15T19:47:32.381Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC111">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-01-15T19:47:34.019Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC112">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-02-20T19:01:26.095Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC113">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-02-20T19:01:26.944Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC114">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>PUBLICATIONS</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-06-05T18:07:19.926Z</audit:date>
+<audit:justification/>
+</audit:record>
+<audit:record ID="AUDREC115">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>THEMES</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-06-05T18:07:20.756Z</audit:date>
+<audit:justification/>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="PUBLICATIONS_HIDDEN" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="PUBLICATIONS_HIDDEN1" LABEL="PUBLICATIONS_HIDDEN" CREATED="2011-06-08T05:59:26.216Z" MIMETYPE="text/xml" SIZE="43">
+<foxml:xmlContent>
+<publicationsHidden/>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="SERIES" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="SERIES1" LABEL="SERIES" CREATED="2011-06-08T05:59:26.216Z" MIMETYPE="text/xml" SIZE="71">
+<foxml:xmlContent>
+<series collection="erudit:erudit" id="erudit:erudit.mi115"/>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC1.0" LABEL="Dublin Core Record for this object" CREATED="2011-06-08T05:59:24.512Z" MIMETYPE="text/xml" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" SIZE="385">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>Series Erudit</dc:title>
+  <dc:identifier>erudit:erudit.mi115</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="LOGO" STATE="A" CONTROL_GROUP="M" VERSIONABLE="false">
+<foxml:datastreamVersion ID="LOGO.1" LABEL="LOGO" CREATED="2011-06-08T05:59:24.811Z" MIMETYPE="image/jpeg" SIZE="37930">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="erudit:erudit.mi115+LOGO+LOGO.1"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="RELS-EXT.3" LABEL="Relationships" CREATED="2011-06-08T06:04:13.028Z" MIMETYPE="application/rdf+xml" FORMAT_URI="info:fedora/fedora-system:FedoraRELSExt-1.0" SIZE="664">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="info:fedora/erudit:erudit.mi115">
+	<hasModel xmlns="info:fedora/fedora-system:def/model#" rdf:resource="info:fedora/erudit-model:seriesCModel"/>
+	<isSeriesOfCollection xmlns="info:fedora/fedora-system:def/relations-external#erudit-model:" rdf:resource="info:fedora/erudit:erudit"/>
+	<setName xmlns="http://www.openarchives.org/OAI/2.0/">Management international / International Management / Gestiòn Internacional</setName>
+	<setSpec xmlns="http://www.openarchives.org/OAI/2.0/">erudit.revue.mi</setSpec>
+</rdf:Description>
+
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="OAISET_INFO" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="OAISET_INFO.0" LABEL="Description de la revue en DC" CREATED="2012-03-02T16:20:19.317Z" MIMETYPE="text/xml" SIZE="2327">
+<foxml:xmlContent>
+<setDescriptions>
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Management international / International Management / Gestiòn Internacional</dc:title>
+      <dc:identifier>http://www.erudit.org/revue/mi/</dc:identifier>
+      <dc:publisher>HEC Montréal and Université Paris Dauphine</dc:publisher>
+      <dc:description xml:lang="fr">La revue Management international / International Management / Gestiòn Internacional est une 
+    publication universitaire indépendante. MI publie en français, en anglais ou en espagnol des articles originaux portant 
+    sur les différents aspects du management à l'échelle internationale et elle est destinée aux universitaires et gestionnaires 
+    souhaitant se maintenir à la fine pointe de la connaissance. MI veut contribuer au progrès de la connaissance et de la pratique 
+    du management à l'échelle internationale en général en publiant des travaux empiriques et des analyses théoriques. À cette fin, 
+    MI compte encourager les débats susceptibles de faire avancer la compréhension des nombreuses facettes du management en général.
+  </dc:description>
+      <dc:description xml:lang="en">Management international / International Management / Gestiòn Internacional is an independent 
+    academic publication. IM publishes original articles in French, English, or Spanish that look at different aspects of management 
+    on an international scale. It is intended for academics and managers who wish to keep up with the very latest knowledge. 
+    IM hopes to contribute to the progress of knowledge and practice in international management by publishing empirical works and 
+    theoretical analyses. To this end, IM aims to encourage debates likely to advance the understanding of numerous facets 
+    of management in general.
+</dc:description>
+      <dc:subject xml:lang="fr">Sciences de la gestion</dc:subject>
+      <dc:subject xml:lang="en">Management</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</setDescriptions>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="PUBLICATIONS" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="PUBLICATIONS.55" LABEL="PUBLICATIONS" CREATED="2015-06-05T18:07:19.926Z" MIMETYPE="text/xml" SIZE="5740">
+<foxml:xmlContent>
+<numeros>
+  <originator app="Tournesol 0.4.2" date="2015-06-05" username="robichac"/>
+  <revue>
+    <gratuites>
+      <gratuite pid="erudit:erudit.mi115" revue="mi" valeur="false"/>
+    </gratuites>
+    <notes/>
+  </revue>
+  <liste>
+    <decennie dannee="2015" pannee="2011">
+      <annee valeur="2015">
+        <numero annee="2015" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi01857" revAbr="mi" type="reg" url="mi/2015/v19/n2" volume="19"/>
+      </annee>
+      <annee valeur="2014">
+        <numero annee="2014" autrenumero="" nonumero="1" periode="Automne" pid="erudit:erudit.mi115.mi01686" revAbr="mi" type="reg" url="mi/2014/v19/n1" volume="19"/>
+        <numero annee="2014" autrenumero="" nonumero="" periode="" pid="erudit:erudit.mi115.mi01641" revAbr="mi" type="hs" url="mi/2014/v18/nmi01641" volume="18"/>
+        <numero annee="2014" autrenumero="" nonumero="4" periode="Été" pid="erudit:erudit.mi115.mi01482" revAbr="mi" type="reg" url="mi/2014/v18/n4" volume="18"/>
+        <numero annee="2014" autrenumero="" nonumero="3" periode="Printemps" pid="erudit:erudit.mi115.mi01410" revAbr="mi" type="reg" url="mi/2014/v18/n3" volume="18"/>
+        <numero annee="2014" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi01314" revAbr="mi" type="reg" url="mi/2014/v18/n2" volume="18"/>
+      </annee>
+      <annee valeur="2013">
+        <numero annee="2013" autrenumero="" nonumero="1" periode="Automne" pid="erudit:erudit.mi115.mi01139" revAbr="mi" type="reg" url="mi/2013/v18/n1" volume="18"/>
+        <numero annee="2013" autrenumero="" nonumero="4" periode="Été" pid="erudit:erudit.mi115.mi01016" revAbr="mi" type="reg" url="mi/2013/v17/n4" volume="17"/>
+        <numero annee="2013" autrenumero="" nonumero="3" periode="Printemps" pid="erudit:erudit.mi115.mi0805" revAbr="mi" type="reg" url="mi/2013/v17/n3" volume="17"/>
+        <numero annee="2013" autrenumero="" nonumero="" periode="" pid="erudit:erudit.mi115.mi0591" revAbr="mi" type="hs" url="mi/2013/v17/nmi0591" volume="17"/>
+        <numero annee="2013" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi0560" revAbr="mi" type="reg" url="mi/2013/v17/n2" volume="17"/>
+      </annee>
+      <annee valeur="2012">
+        <numero annee="2012" autrenumero="" nonumero="1" periode="Automne" pid="erudit:erudit.mi115.mi0403" revAbr="mi" type="reg" url="mi/2012/v17/n1" volume="17"/>
+        <numero annee="2012" autrenumero="" nonumero="4" periode="Été" pid="erudit:erudit.mi115.mi0366" revAbr="mi" type="reg" url="mi/2012/v16/n4" volume="16"/>
+        <numero annee="2012" autrenumero="" nonumero="" periode="" pid="erudit:erudit.mi115.mi0284" revAbr="mi" type="hs" url="mi/2012/v16/nmi0284" volume="16"/>
+        <numero annee="2012" autrenumero="" nonumero="3" periode="Printemps" pid="erudit:erudit.mi115.mi0157" revAbr="mi" type="reg" url="mi/2012/v16/n3" volume="16"/>
+        <numero annee="2012" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi061" revAbr="mi" type="reg" url="mi/2012/v16/n2" volume="16"/>
+      </annee>
+      <annee valeur="2011">
+        <numero annee="2011" autrenumero="" nonumero="1" periode="Automne" pid="erudit:erudit.mi115.mi1826189" revAbr="mi" type="reg" url="mi/2011/v16/n1" volume="16"/>
+        <numero annee="2011" autrenumero="" nonumero="4" periode="Été" pid="erudit:erudit.mi115.mi1821443" revAbr="mi" type="reg" url="mi/2011/v15/n4" volume="15"/>
+        <numero annee="2011" autrenumero="" nonumero="3" periode="Printemps" pid="erudit:erudit.mi115.mi1813695" revAbr="mi" type="reg" url="mi/2011/v15/n3" volume="15"/>
+        <numero annee="2011" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi1521301" revAbr="mi" type="reg" url="mi/2011/v15/n2" volume="15"/>
+      </annee>
+    </decennie>
+    <decennie dannee="2010" pannee="2009">
+      <annee valeur="2010">        
+<numero annee="2010" autrenumero="" nonumero="1" periode="Automne" pid="erudit:erudit.mi115.mi3997" revAbr="mi" type="reg" url="mi/2010/v15/n1" volume="15"/>
+        <numero annee="2010" autrenumero="" nonumero="4" periode="Été" pid="erudit:erudit.mi115.mi3934" revAbr="mi" type="reg" url="mi/2010/v14/n4" volume="14"/>
+        <numero annee="2010" autrenumero="" nonumero="3" periode="Printemps" pid="erudit:erudit.mi115.mi3900" revAbr="mi" type="reg" url="mi/2010/v14/n3" volume="14"/>
+        <numero annee="2010" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi3694" revAbr="mi" type="reg" url="mi/2010/v14/n2" volume="14"/>
+      </annee>
+      <annee valeur="2009">
+        <numero annee="2009" autrenumero="" nonumero="1" periode="Automne" pid="erudit:erudit.mi115.mi3589" revAbr="mi" type="reg" url="mi/2009/v14/n1" volume="14"/>
+        <numero annee="2009" autrenumero="" nonumero="" periode="" pid="erudit:erudit.mi115.mi3096" revAbr="mi" type="hs" url="mi/2009/v13/nmi3096" volume="13"/>
+        <numero annee="2009" autrenumero="" nonumero="4" periode="Été" pid="erudit:erudit.mi115.mi3562" revAbr="mi" type="reg" url="mi/2009/v13/n4" volume="13"/>
+        <numero annee="2009" autrenumero="" nonumero="3" periode="Printemps" pid="erudit:erudit.mi115.mi3333" revAbr="mi" type="reg" url="mi/2009/v13/n3" volume="13"/>
+        <numero annee="2009" autrenumero="" nonumero="2" periode="Hiver" pid="erudit:erudit.mi115.mi2897" revAbr="mi" type="reg" url="mi/2009/v13/n2" volume="13"/>
+      </annee>
+    </decennie>
+  </liste>
+</numeros>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="THEMES" STATE="A" CONTROL_GROUP="M" VERSIONABLE="false">
+<foxml:datastreamVersion ID="THEMES.31" LABEL="THEMES" CREATED="2015-06-05T18:07:20.756Z" MIMETYPE="text/xml" SIZE="5945">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="erudit:erudit.mi115+THEMES+THEMES.31"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>

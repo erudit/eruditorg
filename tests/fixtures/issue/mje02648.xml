@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="p0962873" date="2016-09-16" app="Tournesol 0.4.2"/>
+<copyright>
+	<year>2016</year>
+<contribution>
+<artificialperson>
+	<name>Faculty of Education, McGill University</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="en">Copyright Holder</label>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="es">Todos los derechos reservados</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2016">
+			<periodcode>hiver</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/mje/2016/v51/n1</url>
+  <nbarticle>13</nbarticle>
+  <revue id="mje106" lang="en fr">
+    <titrerev>McGill Journal of Education</titrerev>
+    <titrerevparal lang="fr">Revue des sciences de l'éducation de McGill</titrerevparal>
+    <titrerevabr>mje</titrerevabr>
+    <idissnnum>1916-0666</idissnnum>
+    <directeur sexe="feminin">
+      <fonction lang="en">Managing Editor / Directrice de la rédaction</fonction>
+      <nompers>
+        <prenom>Sylvie</prenom>
+        <nomfamille>Wald</nomfamille>
+      </nompers>
+      <key>managingeditor/directricedelaredaction</key>
+    </directeur>
+    <redacteurchef sexe="feminin" typerc="regulier">
+      <fonction lang="en">Editor-in-Chief / Rédactrice-en-chef</fonction>
+      <nompers>
+        <prenom>Teresa</prenom>
+        <nomfamille>Strong-Wilson</nomfamille>
+      </nompers>
+      <key>editorinchief/redactriceenchef</key>
+    </redacteurchef>
+    <redacteurchef sexe="feminin" typerc="regulier">
+      <fonction lang="en">Associate Editor / Rédactrice associée</fonction>
+      <nompers>
+        <prenom>Anila</prenom>
+        <nomfamille>Asghar</nomfamille>
+      </nompers>
+      <key>associateeditor/redactriceassociee</key>
+    </redacteurchef>
+    <redacteurchef sexe="masculin" typerc="regulier">
+      <fonction lang="en">Associate Editor / Rédacteur adjoint</fonction>
+      <nompers>
+        <prenom>Marc-André</prenom>
+        <nomfamille>Ethier</nomfamille>
+      </nompers>
+      <key>associateeditor/redacteuradjoint</key>
+    </redacteurchef>
+    <redacteurchef sexe="masculin" typerc="regulier">
+      <fonction lang="fr">Associate Editor / Rédacteur associé</fonction>
+      <nompers>
+        <prenom>David</prenom>
+        <nomfamille>LefranÃ§ois</nomfamille>
+      </nompers>
+      <key>associateeditor/redacteurassocie</key>
+    </redacteurchef>
+    <redacteurchef sexe="feminin" typerc="regulier">
+      <fonction lang="en">Assistant Editor / Rédactrice adjointe</fonction>
+      <nompers>
+        <prenom>Mindy</prenom>
+        <nomfamille>Carter</nomfamille>
+      </nompers>
+      <key>assistanteditor/redactriceadjointe</key>
+    </redacteurchef>
+    <redacteurchef sexe="feminin" typerc="regulier">
+      <fonction lang="en">Assistant Editor / Rédactrice adjointe</fonction>
+      <nompers>
+        <prenom>Lisa</prenom>
+        <nomfamille>Starr</nomfamille>
+      </nompers>
+      <key>assistanteditor/redactriceadjointe</key>
+    </redacteurchef>
+  </revue>
+  <numero id="mje02648">
+    <volume>51</volume>
+    <nonumero>1</nonumero>
+    <pub>
+      <periode>Winter</periode>
+      <annee>2016</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2016-09-09</date>
+    </pubnum>
+  </numero>
+  <editeur>
+    <nomorg>Faculty of Education, McGill University</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>All Rights Reserved Â© <nomorg>Faculty of Education, McGill University</nomorg>, 2016</droitsauteur>
+</infosommaire>
+<article doi="10.7202/1037354ar" idproprio="1037354ar" lang="fr en"
+  ordseq="1" qualtraitement="minimal" typeart="autre">
+  <urlpdf taille="134" unite="ko">/revue/mje/2016/v51/n1/1037354ar.pdf</urlpdf>
+  <pagination>
+    <ppage>465</ppage>
+    <dpage>474</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Editorial: âGetting It Right: Take 2â</titre>
+                  <titreparal lang="fr">ÃditorialÂ : Â«Â Bien faire les chosesÂ : prise 2Â Â»</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Teresa</prenom>
+    <nomfamille>Strong-Wilson</nomfamille>
+   </nompers>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Marc-André</prenom>
+    <nomfamille>Ãthier</nomfamille>
+   </nompers>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Anila</prenom>
+    <nomfamille>Asghar</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1037355ar" idproprio="1037355ar" lang="fr"
+  ordseq="2" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="198" unite="ko">/revue/mje/2016/v51/n1/1037355ar.pdf</urlpdf>
+  <pagination>
+    <ppage>475</ppage>
+    <dpage>493</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+                  <titre>Contrer lâintimidation scolaireÂ : portrait des plans dâaction pancanadiens</titre>
+                  <titreparal lang="en">Countering Bullying in Schools: An Overview of Canadian Action Plans</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Ginette</prenom>
+    <nomfamille>Roberge</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Laurentienne</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:gx_roberge@laurentian.ca" xlink:type="simple">gx_roberge@laurentian.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Huguette</prenom>
+    <nomfamille>Beaudoin</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Laurentienne</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:hbeaudoin@laurentian.ca" xlink:type="simple">hbeaudoin@laurentian.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Depuis plusieurs années, des propos alarmistes sont véhiculés dans lâopinion publique et dans les médias Ã  propos de la détérioration du climat scolaire, en particulier au niveau de la sécurité dans les écoles. Cet article vise Ã  décrire les divers plans dâaction et politiques officielles de prévention de lâintimidation Ã  lâécole, et ce, dans les provinces et territoires du Canada, par une analyse de contenu. Les éléments constitutifs de lâintimidation les plus communément admis par les chercheurs dans ce domaine ont été repérés. Ces facteurs ont ensuite été mis en parallÃ¨le avec les politiques et plans dâaction provinciaux et territoriaux en matiÃ¨re dâintimidation au Canada. Les résultats dévoilent les forces et les limites des plans dâaction canadiens pour lâensemble du pays.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Over the last several years, alarmist discourse from the public and the media has been commonly heard in reference to the deterioration of the school climate, particularly in regards to safety in schools. This paper strives to describe the different bullying prevention and intervention action plans and policies across Canadaâs provinces and territories through a content analysis of these documents. Common best practices in terms of bullying prevention and intervention were identified. These practices were then compared with the official bullying prevention and intervention policies in Canada. The results present the strengths and limitations of the action plans for the whole of Canada.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037356ar" idproprio="1037356ar" lang="fr"
+  ordseq="3" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="239" unite="ko">/revue/mje/2016/v51/n1/1037356ar.pdf</urlpdf>
+  <pagination>
+    <ppage>495</ppage>
+    <dpage>515</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+        <titre>De lâécole au cyberespace, le phénomÃ¨ne de lâintimidation en ligne chez les jeunesÂ :
+        état de la recherche et de lâintervention</titre>
+      
+        <titreparal lang="en">From School to Cyberspace: The State of Research and Intervention in
+        Online Peer Bullying</titreparal>
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Yasmine</prenom>
+        
+        
+    <nomfamille>Chehab</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Montréal</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:yasmine.chehab@gmail.com" xlink:type="simple">yasmine.chehab@gmail.com</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Caroline</prenom>
+        
+        
+    <nomfamille>Levasseur</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Montréal</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:caroline.levasseur.1@umontreal.ca" xlink:type="simple">caroline.levasseur.1@umontreal.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>FranÃ§ois</prenom>
+        
+        
+    <nomfamille>Bowen</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Montréal</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:francois.bowen@umontreal.ca" xlink:type="simple">francois.bowen@umontreal.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr">
+      <alinea>GrÃ¢ce aux réseaux sociaux virtuels, les jeunes ont fait du cyberespace un milieu
+        dâinteraction privilégié. Loin du regard des adultes, les jeunes peuvent sâexprimer
+        librement. Ils sont toutefois plus vulnérables aux conséquences des dynamiques de
+        cyberintimidation. Cet article offre une description du phénomÃ¨ne dans ses formes et son
+        ampleur et expose différents profils dâélÃ¨ves impliqués dans ces dynamiques agressives en
+        ligne. En plus de dresser un portrait de mesures dâintervention impliquant lâécole, la
+        famille et la communauté, plusieurs aspects de la cyberintimidation sont discutés, dont sa
+        dimension légale et sa relation avec les conduites dâintimidation face Ã  face.</alinea>
+    
+ </resume>
+ <resume typeresume="resume" lang="en">
+      <alinea>Since the advent of online social networks, youth have made cyberspace their home
+        and favoured interactive environment. Away from the adultâs gaze, they have a greater
+        opportunity for free speech but are also more vulnerable to cyberbullying and its
+        consequences. This article describes the nature and scale of this social issue and presents
+        different profiles of students involved in online harassment. It also discusses school-based
+        interventions with the collaboration of the family and community, the legal aspect of
+        cyberbullying prevention, and its relation with traditional face-to-face
+        intimidation.</alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037357ar" idproprio="1037357ar" lang="fr"
+  ordseq="4" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="579" unite="ko">/revue/mje/2016/v51/n1/1037357ar.pdf</urlpdf>
+  <pagination>
+    <ppage>517</ppage>
+    <dpage>532</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+                  <titre>Des outils multimédias en ligne pour apprendre des concepts enmathématiques</titre>
+                  <titreparal lang="en">Online Multimedia Tools for Learning Concepts in Mathematics</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Nicole</prenom>
+    <nomfamille>Racette</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec (TÃLUQ)</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:racette.nicole@teluq.ca" xlink:type="simple">racette.nicole@teluq.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Louise</prenom>
+    <nomfamille>Sauvé</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université du Québec (TÃLUQ)</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:Louisesauve25@gmail.com" xlink:type="simple">Louisesauve25@gmail.com</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Stéphanie</prenom>
+    <nomfamille>Bégin</nomfamille>
+   </nompers>
+  <affiliation><alinea>Cégep Limoilou</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:Stephanie.begin@cegeplimoilou.ca" xlink:type="simple">Stephanie.begin@cegeplimoilou.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>SAMI-Persévérance est un dispositif dâaide en ligne qui offre, entre autres, des outils dâaide en mathématiques au niveau postsecondaire. Les étudiants peuvent accéder aux outils dâaide par les moyens suivantsÂ : par mots-clés, par carte conceptuelle ou par lâoutil de dépistage des difficultés en mathématiques. Les données recueillies dans le dispositif révÃ¨lent que 4Â 773Â choix dâoutils dâaide ont été faits (par lâoutil de dépistage dans 72Â % des cas), 2Â 873Â énoncés de difficultés ont été cochés, et deux questionnaires sur la dyscalculie ont présenté un résultat positif. Ces données laissent supposer que les étudiants ont apprécié ces outils qui leur ont permis de connaÃ®tre leurs faiblesses et de mieux comprendre les notions de base en mathématiques.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>SAMI-Persévérance is an online device that offers help in postsecondary mathematics. Students can access help through the following tools: a keyword search, a concept map, or the math difficulties screening tool. Data collected from the device revealed that 4,773 tool selections were made (72% of the cases were proposed by the screening tool), 2,873 statements of difficulties were checked, and 2 dyscalculia questionnaires showed a positive result. These data suggest that students enjoyed these tools, which allowed them to identify their weaknesses and to understand basic concepts in mathematics.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037358ar" idproprio="1037358ar" lang="en"
+  ordseq="5" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="380" unite="ko">/revue/mje/2016/v51/n1/1037358ar.pdf</urlpdf>
+  <pagination>
+    <ppage>533</ppage>
+    <dpage>561</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+        <titre>Factors Impacting University Instructorsâ and Studentsâ Perceptions of Course
+        Effectiveness and Technology Integration in the Age of Web 2.0</titre>
+      
+        <titreparal lang="fr">Facteurs influant la perception de lâefficacité du cours et de
+        lâintégration de la technologie Ã  lâÃ¨re du Web 2.0 parmis les instructeurs universitaires et
+        leurs étudiants</titreparal>
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Vivek</prenom>
+        
+        
+    <nomfamille>Venkatesh</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Concordia University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:vivek.venkatesh@concordia.ca" xlink:type="simple">vivek.venkatesh@concordia.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Jihan</prenom>
+        
+        
+    <nomfamille>Rabah</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Concordia University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:jihan.rabah@education.concordia.ca" xlink:type="simple">jihan.rabah@education.concordia.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>Magda</prenom>
+        
+        
+    <nomfamille>Fusaro</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec Ã  Montréal</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:fusaro.magda@uqam.ca" xlink:type="simple">fusaro.magda@uqam.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+        
+    <prenom>Annie</prenom>
+        
+        
+    <nomfamille>Couture</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec Ã  Montréal</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="mailto:couture.annie.3@courrier.uqam.ca" xlink:type="simple">couture.annie.3@courrier.uqam.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au5">
+   <nompers>
+        
+    <prenom>Wynnpaul</prenom>
+        
+        
+    <nomfamille>Varela</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Concordia University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls5" xlink:href="mailto:wynnpaul.varela@education.concordia.ca" xlink:type="simple">wynnpaul.varela@education.concordia.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au6">
+   <nompers>
+        
+    <prenom>Kristopher</prenom>
+        
+        
+    <nomfamille>Alexander</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Concordia University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls6" xlink:href="mailto:kristopher.alexander@education.concordia.ca" xlink:type="simple">kristopher.alexander@education.concordia.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr">
+      <alinea>Afin dâassurer lâintégration des technologies de lâinformation et de la
+        communication (TIC) dans les universités, il est essentiel de comprendre comment les
+        étudiants et leurs enseignants perÃ§oivent leurs compétences et lâutilisation des TIC. Des
+        données ont été recueillies dâétudiants et dâenseignants dans 12 universités québécoises par
+        des questionnaires fondés sur les théories psychopédagogiques dans le contexte de
+        lâintégration des technologies éducatives. Les résultats montrent que pour les enseignants,
+        lâefficacité de lâutilisation des TIC et des stratégies interactives de lâenseignement
+        prédisent plus fortement une perception positive de lâexpérience dâapprentissage en classe.
+        Cependant pour les étudiants, les cours magistraux qui sont stimulants sont lâélément le
+        plus important de leur appréciation dâapprentissage. Les possibilités de recherche future
+        sont discutées Ã  la lumiÃ¨re des résultats de cette étude.</alinea>
+    
+ </resume>
+ <resume typeresume="resume" lang="en">
+      <alinea>We are witnessing the integration of increasingly sophisticated information and
+        communication technologies (ICTs) in higher education settings. Understanding learnersâ and
+        instructorsâ perceptions of their proficiency and use of ICTs is critical to the success of
+        their integration in universities. Using a theoretical framework grounded in technology
+        integration and educational psychology, survey data were collected from students and
+        instructors spanning 12 Quebec universities. Results show that, for instructors, the
+        efficacy of ICT use, and constructivist, interactive forms of teaching most strongly predict
+        a positive perception of the classroom learning experience. Meanwhile, for students,
+        stimulating lectures are the chief predictors of their learning appreciation. Directions for
+        future research are discussed in light of the results of this study.</alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037359ar" idproprio="1037359ar" lang="fr"
+  ordseq="6" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="177" unite="ko">/revue/mje/2016/v51/n1/1037359ar.pdf</urlpdf>
+  <pagination>
+    <ppage>563</ppage>
+    <dpage>574</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+                  <titre>Réflexion sur lâancrage ontologique des méthodes quantitatives en sciences sociales</titre>
+                  <titreparal lang="en">Reflection on the Ontologic Foundation of Quantitative Methods in the Social Sciences</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jimmy</prenom>
+    <nomfamille>Bourque</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Moncton</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:Jimmy.Bourque@umoncton.ca" xlink:type="simple">Jimmy.Bourque@umoncton.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Avec cet article, nous désirons 1) expliciter les principes du réalisme ontique et 2) proposer une définition de la réalité justifiable dans ce cadre. Le réalisme ontique suppose lâexistence dâune réalité hors de la conscience, mais ne se commet pas quant Ã  la possibilité de la saisir. Par Â«Â réalitéÂ Â», nous désignons lâexistence de discontinuités. En sciences sociales, ces discontinuités sont le plus souvent dynamiques et contingentes. Comme assise aux méthodes quantitatives en sciences sociales, la conception du réel peut donc se limiter Ã  postuler une structure informationnelle indépendante de la conscience. Ã la lumiÃ¨re de la stabilité de certains résultats scientifiques et de la faillibilité du savoir, le réalisme ontique nous parait tenable.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>With this paper, we endeavour to 1) explain the principles of onticrealism, and 2) propose a definition of reality that is justifiable inthis framework. Ontic realism supposes the existence of amind-independent reality, but does not commit to the possibility ofknowing it. By âreality,â we mean the existence ofdiscontinuities. In social sciences, these discontinuities are usuallydynamic and contingent. As a basis for quantitative methods in socialsciences, our conception of reality can thus be limited to theassumption of a mind-independent informational structure. Given thestability of several scientific results and the fallibility ofknowledge, ontic realism seems tenable.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037360ar" idproprio="1037360ar" lang="en"
+  ordseq="7" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="196" unite="ko">/revue/mje/2016/v51/n1/1037360ar.pdf</urlpdf>
+  <pagination>
+    <ppage>575</ppage>
+    <dpage>595</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+        <titre>A Study of Classroom Inquiry and Reflection Among Preservice Teachers        Candidates</titre>
+      
+        <titreparal lang="fr">Ãtude dâune approche dâexpérimentation et de réflexions en classe auprÃ¨s        de candidats Ã  la profession enseignante</titreparal>
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Cheryll</prenom>
+        
+        
+    <nomfamille>Duquette</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>University of Ottawa</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:cduquett@uottawa.ca" xlink:type="simple">cduquett@uottawa.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Leah</prenom>
+        
+        
+    <nomfamille>Dabrowski</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Childrenâs Universe Daycare Centres</alinea>
+        
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+      <alinea>The purpose of this study was to explore the experiences of four preservice        teachers who used classroom inquiry and reflection to solve problems when implementing        differentiated instruction in elementary classrooms during a practicum. Data from classroom        observations, individual reflections, and discussions with a teacher educator were analyzed        inductively. The findings show that the preservice teachers were able to describe their        situations and reflect individually and collaboratively to analyze and resolve problems        related to instruction, discipline, and student learning. The results extend our        understanding of how teacher educators, mentors, or instructional coaches may provide        preservice teachers with individualized support that can facilitate inquiry and reflection        during their practica.</alinea>
+    
+ </resume>
+ <resume typeresume="resume" lang="fr">
+      <alinea>Lâobjectif de ce projet de recherche était dâétudier lâexpérience vécue par quatre        futurs enseignants en contexte de stage. Ceux-ci ont utilisé une approche basée sur        lâexpérimentation et la réflexion pour résoudre des problématiques rencontrées lors de la        mise en oeuvre de pratiques de différenciation. Pour ce faire, les auteurs ont effectué une        analyse inductive des données recueillies lors dâobservations en classe et suite Ã  des        réflexions individuelles et des discussions réalisées avec un formateur de maÃ®tres. Les        résultats démontrent que les futurs enseignants sont en mesure de décrire leur situation et        de réfléchir, individuellement ou en mode collaboratif, pour analyser et trouver des        solutions aux problÃ¨mes liés Ã  lâenseignement, la discipline et lâapprentissage des élÃ¨ves.        Ces résultats approfondissent notre compréhension de la maniÃ¨re dont les formateurs, les        mentors et les conseillers pédagogiques peuvent prodiguer un soutien individualisé aux        futurs enseignants, facilitant lâexpérimentation et la réflexion en cours de        stage.</alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037361ar" idproprio="1037361ar" lang="en"
+  ordseq="8" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="210" unite="ko">/revue/mje/2016/v51/n1/1037361ar.pdf</urlpdf>
+  <pagination>
+    <ppage>597</ppage>
+    <dpage>614</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+        <titre>âThis course is like paying to volunteerâ or is it? Effects of a Mandatory        Service-Learning Course on Teacher Candidates</titre>
+      
+        <titreparal lang="fr">Â«Â Ce cours dâapparente Ã  payer pour faire du bénévolatÂ Â» ou est-ce le        casÂ ? Conséquences dâun stage dâapprentissage communautaire obligatoire sur les candidats Ã         lâenseignement</titreparal>
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Laura</prenom>
+        
+        
+    <nomfamille>Sokal</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>University of Winnipeg</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:lj.sokal@uwinnipeg.ca" xlink:type="simple">lj.sokal@uwinnipeg.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Vern</prenom>
+        
+        
+    <nomfamille>Barrett</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>University of Winnipeg</alinea>
+        
+  </affiliation>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>Allan</prenom>
+        
+        
+    <nomfamille>Appel</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>University of Winnipeg</alinea>
+        
+  </affiliation>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+        
+    <prenom>Anneke</prenom>
+        
+        
+    <nomfamille>Funk</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>University of Winnipeg</alinea>
+        
+  </affiliation>
+  </auteur>
+  <auteur id="au5">
+   <nompers>
+        
+    <prenom>Mykaila</prenom>
+        
+        
+    <nomfamille>Radawetz</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>University of Winnipeg</alinea>
+        
+  </affiliation>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+      <alinea>One hundred teacher candidates enrolled in a mandatory course on service learning        were surveyed pre- and post-course to determine their civic attitudes and willingness to        take the service learning course. Quantitative analysis indicated significant growth in        civic attitudes in all students, and this growth was not differentially affected by the        studentsâ willingness to take the course. Qualitative data were analyzed to determine the        underpinnings for studentsâ perceptions, and recommendations about the wisdom of making such        courses mandatory in teacher preparation programs are provided.</alinea>
+    
+ </resume>
+ <resume typeresume="resume" lang="fr">
+      <alinea>Cent futurs enseignants inscrits dans un cours obligatoire portant sur        lâapprentissage en milieu communautaire ont été interviewés avant et aprÃ¨s leur cours afin        de déterminer leurs attitudes civiques et leur volonté de sâinscrire Ã  un stage        dâapprentissage par le service communautaire. Les analyses quantitatives indiquent une        augmentation significative de la conscience citoyenne chez tous les étudiants. Cette hausse        nâétait pas explicitement influencée par la volonté de lâétudiant de suivre le cours. Les        données qualitatives ont été analysées pour déterminer les fondements des perceptions        étudiantes. Finalement, les auteurs ont formulé des recommandations en ce qui a trait Ã  la        pertinence de rendre obligatoire de tels cours au sein de la formation initiale des        enseignants.</alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037362ar" idproprio="1037362ar" lang="en"
+  ordseq="9" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="335" unite="ko">/revue/mje/2016/v51/n1/1037362ar.pdf</urlpdf>
+  <pagination>
+    <ppage>615</ppage>
+    <dpage>634</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+        <titre>The Relationship Between Bureaucratic School Structures and Teacher        Self-Efficacy</titre>
+      
+        <titreparal lang="fr">Relations entre les structures administratives dâune école et le        sentiment dâefficacité de lâenseignement</titreparal>
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Ali</prenom>
+        <autreprenom>ÃaÄatay</autreprenom>
+        
+    <nomfamille>KilinÃ§</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Karabuk University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:cagataykilinc@karabuk.edu.tr" xlink:type="simple">cagataykilinc@karabuk.edu.tr</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Serkan</prenom>
+        
+        
+    <nomfamille>KoÅar</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Gazi University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:skosar@gazi.edu.tr" xlink:type="simple">skosar@gazi.edu.tr</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>Emre</prenom>
+        
+        
+    <nomfamille>Er</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Gazi University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:emreer@gazi.edu.tr" xlink:type="simple">emreer@gazi.edu.tr</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+        
+    <prenom>Zeki</prenom>
+        
+        
+    <nomfamille>ÃÄdem</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Ahi Evran University</alinea>
+        
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls4" xlink:href="mailto:zekiogdem15@hotmail.com" xlink:type="simple">zekiogdem15@hotmail.com</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+      <alinea>The purpose of this study was to examine the relationship between bureaucratic        school structures and teachersâ self-efficacy. Participants included 252 teachers from 15        primary schools in Ankara, Turkey. Mean, standard deviation, correlation, and regression        analyses were conducted. Results indicated that bureaucratic school structures and teacher        self-efficacy were positively and significantly correlated and a bureaucratic school        structure was a significant indicator of teacher self-efficacy. The results of the study are        discussed with a focus on improving teacher self-efficacy.</alinea>
+    
+ </resume>
+ <resume typeresume="resume" lang="fr">
+      <alinea>Le but de ce projet de recherche était dâexaminer les relations existant entre les        structures administratives dâun établissement scolaire et le sentiment dâefficacité des        enseignants. 252 enseignants oeuvrant au sein de 15 écoles primaires situées Ã  Ankara (en        Turquie) ont participé Ã  cette étude. Pour les fins de cette enquÃªte, les auteurs ont        effectué des analyses de la moyenne et de lâécart-type. Ils ont aussi analysé la corrélation        et la régression entre les deux facteurs étudiés. Les résultats ont démontré que les        structures administratives en place dans une institution scolaire et le sentiment        dâefficacité dâun enseignant sont positivement corrélés et que la structure bureaucratique        prévalant dans une école est un indicateur significatif du sentiment dâefficacité dâun        enseignant. Cet article présente les résultats de cette étude en mettant lâemphase sur        lâamélioration du sentiment dâefficacité de lâenseignant.</alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037363ar" idproprio="1037363ar" lang="fr"
+  ordseq="10" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="280" unite="ko">/revue/mje/2016/v51/n1/1037363ar.pdf</urlpdf>
+  <pagination>
+    <ppage>635</ppage>
+    <dpage>656</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Articles</surtitre>
+  <surtitreparal lang="fr">Les articles</surtitreparal>
+                  <titre>Complexité et défis associés aux rÃ´les de conseiller pédagogique</titre>
+                  <titreparal lang="en">Complexities and Challenges Associated with the Role of Pedagogical Advisor</titreparal>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Claire</prenom>
+    <nomfamille>Duchesne</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université dâOttawa</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:claire.duchesne@uottawa.ca" xlink:type="simple">claire.duchesne@uottawa.ca</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Les conseillers pédagogiques des conseils et commissions scolaires accomplissent leur mission Ã  travers une diversité de rÃ´les professionnels. Ã partir dâune recension dâécrits et des témoignages de 11 conseillers pédagogiques oeuvrant dans un conseil scolaire francophone de lâOntario, huit rÃ´les ont été mis en lumiÃ¨re. Par ailleurs, les défis rencontrés par les participants dans lâexercice de chacun de ces rÃ´les ont été explicités lors dâentretiens de recherche. Les enjeux particuliers associés notamment aux rÃ´les dâagent de changement, de praticien réflexif et de gestionnaire feront lâobjet de la discussion.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Pedagogical advisors working at the school board level accomplish their mission by taking on a diversity of professional roles. A literature review and testimonials from 11 pedagogical advisors working for a francophone school board in Ontario highlight eight professional roles. The challenges faced by the participants while exercising each of these roles were further elaborated in research interviews. Specific issues associated to the roles of change agent, reflexive practitioner, and manager are further discussed.</alinea>
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037364ar" idproprio="1037364ar" lang="en"
+  ordseq="11" qualtraitement="minimal" typeart="note">
+  <urlpdf taille="188" unite="ko">/revue/mje/2016/v51/n1/1037364ar.pdf</urlpdf>
+  <pagination>
+    <ppage>657</ppage>
+    <dpage>666</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Notes from the Field</surtitre>
+  <surtitreparal lang="fr">Notes du terrain</surtitreparal>
+        <titre>Mexicoâs <marquage typemarq="italique">Telesecundaria</marquage> Program and Equitable Access to Resources</titre>
+      
+        <titreparal lang="fr">Le programme <marquage typemarq="italique">Telesecundaria</marquage> au Mexique et lâaccÃ¨s équitable aux ressources</titreparal>
+     </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Dana</prenom>
+        
+        
+    <nomfamille>Craig</nomfamille>
+        
+   </nompers>
+  <affiliation><alinea>York University</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls1" xlink:href="mailto:dcraig@yorku.ca" xlink:type="simple">dcraig@yorku.ca</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Jose</prenom>
+        
+        
+    <nomfamille>Etcheverry</nomfamille>
+        
+   </nompers>
+  <affiliation><alinea>York University</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:rejose@123mail.org" xlink:type="simple">rejose@123mail.org</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>Stefan</prenom>
+        
+        
+    <nomfamille>Ferris</nomfamille>
+        
+   </nompers>
+  <affiliation><alinea>York University</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:stefan.ferris@gmail.com" xlink:type="simple">stefan.ferris@gmail.com</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="en">
+      <alinea>This Note provides an analysis of Mexicoâs <marquage typemarq="italique">Telesecundaria</marquage> program within        the context of Mexicoâs new education reform framework offering a succinct background of the        project, as well as key policy lessons that can be useful for other jurisdictions interested        in the development of distance education programs. This Note uses a literature and data        analysis review approach, as well as qualitative analysis of interview data collected        recently in Mexico by the authors. The Note positions pedagogical approaches to distance        education within the context of developments in communication, internet access and renewable        energy technologies, as well as within the challenges of the digital divide as means of        powering digital access to information and education to remote, rural and marginalized        communities.</alinea>
+    
+ </resume>
+ <resume typeresume="resume" lang="fr">
+      <alinea>Dans cette note du terrain, les auteurs effectuent une analyse du programme        mexicain <marquage typemarq="italique">Telesecundaria</marquage> dans le contexte du nouveau cadre de la réforme en        éducation au Mexique. Ils présentent un bref aperÃ§u du projet, ainsi que les leÃ§ons-clés qui        pourraient sâavérer utiles en termes de politiques dans dâautres juridictions intéressées        par le développement de programmes de formation Ã  distance. Cette note est basée sur une        approche de revue de la littérature et dâanalyse des données. Elle sâappuie également sur        lâanalyse qualitative de données recueillies lors dâentrevues réalisées par les auteurs au        Mexique. Cette note situe les approches pédagogiques en éducation Ã  distance dans le        contexte de développement des communications, dâaccÃ¨s Ã  Internet et de technologies des        énergies renouvelables. Elle les positionne aussi en fonction des défis engendrés par la        fracture numérique comme moyen dâaméliorer lâaccÃ¨s numérique Ã  lâinformation et lâéducation        des communautés éloignées, rurales et marginalisées.</alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article doi="10.7202/1037365ar" idproprio="1037365ar" lang="fr"
+  ordseq="12" qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="94" unite="ko">/revue/mje/2016/v51/n1/1037365ar.pdf</urlpdf>
+  <pagination>
+    <ppage>667</ppage>
+    <dpage>669</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Book Reviews</surtitre>
+  <surtitreparal lang="fr">Critiques de livres</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="majuscule">Louise Lafortune, Sylvie Fréchette, NoÃ«lle Sorin, Pierre-André Doudin et Ottavia Albanese</marquage> (dir.). <marquage typemarq="italique">Approches affectives, métacognitives et cognitives de la compréhension</marquage>. Québec, QCÂ : Presses de lâUniversité du Québec, Collections Education. (2010). 207 pp. 14,99 Ã  27,00 $ (selon le format). (ISBN 978-2-7605-2551-1).</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Fadila</prenom>
+    <nomfamille>Boutouchent</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université de Regina</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1037366ar" idproprio="1037366ar" lang="en"
+  ordseq="13" qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="92" unite="ko">/revue/mje/2016/v51/n1/1037366ar.pdf</urlpdf>
+  <pagination>
+    <ppage>671</ppage>
+    <dpage>673</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Book Reviews</surtitre>
+  <surtitreparal lang="fr">Critiques de livres</surtitreparal>
+                
+                    <trefbiblio>
+<marquage typemarq="majuscule">Gary DeCoker &amp; Christopher Bjork</marquage> (Eds.). <marquage typemarq="italique">Japanese Education in an Era of Globalization: Culture, Politics and Equity.</marquage> New York, NY: Teachers College Press. (2013). 224Â pp. $49.95 (paperback). (ISBN 978-0-8077-5423-8).</trefbiblio>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Katherine</prenom><autreprenom>A.</autreprenom>
+    <nomfamille>MacCormac</nomfamille>
+   </nompers>
+  <affiliation><alinea>University of Western Ontario</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+</sommaire>

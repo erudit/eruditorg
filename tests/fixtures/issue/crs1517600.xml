@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="robichma" date="2012-02-21" application="Tournesol"/>
+<copyright>
+	<year>2003</year>
+<contribution>
+<artificialperson>
+	<name>Liber</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="en">Copyright Holder</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="es">Reservados todos los derechos</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>hs</publicationtypecode>
+	<years>
+		<year value="2003">
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/crs/2003/v/ncrs1517600</url>
+  <nbarticle>12</nbarticle>
+  <revue id="crs123" lang="fr">
+    <titrerev>Cahiers de recherche sociologique</titrerev>
+    <titrerevabr>crs</titrerevabr>
+    <idissn>0831-1048</idissn>
+    <idissnnum>1923-5771</idissnnum>
+    <directeur sexe="masculin">
+      <nompers>
+        <prenom>Yves</prenom>
+        <nomfamille>Boisvert</nomfamille>
+      </nompers>
+      <key>directeur</key>
+    </directeur>
+    <redacteurchef idrefs="th1" sexe="feminin" typerc="invite">
+      <nompers>
+        <prenom>Isabelle</prenom>
+        <nomfamille>Lasvergnas</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+  </revue>
+  <numero id="crs1517600">
+    <pub>
+      <annee>2003</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2011-04-29</date>
+    </pubnum>
+    <grtheme id="th1">
+      <theme>Le vivant et la rationalité instrumentale</theme>
+    </grtheme>
+    <idisbn>2-89578-037-4</idisbn>
+  </numero>
+  <editeur>
+    <nomorg>Liber</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Liber</nomorg>, 2003</droitsauteur>
+</infosommaire>
+<article idproprio="1002326ar" idref="th1" lang="fr" ordseq="1"
+  qualtraitement="minimal" typeart="autre">
+  <urlpdf taille="912" unite="ko">/revue/crs/2003/v/ncrs1517600/1002326ar.pdf</urlpdf>
+  <pagination>
+    <ppage>7</ppage>
+    <dpage>13</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Introduction</surtitre>
+                  <titre>Les transformations du vivant : malaise dans le corps et dans la pensée</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Isabelle</prenom>
+    <nomfamille>Lasvergnas</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002327ar" idref="th1" lang="fr" ordseq="2"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2,4" unite="mo">/revue/crs/2003/v/ncrs1517600/1002327ar.pdf</urlpdf>
+  <pagination>
+    <ppage>17</ppage>
+    <dpage>34</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Première partie</surtitre>
+    <surtitre2>
+Des termes possibles du débat éthique</surtitre2>
+                  <titre>Éthique et technique. Réflexions sur une insuffisance originelle de la pensée moderne</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Thierry</prenom>
+    <nomfamille>Hentsch</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002328ar" idref="th1" lang="fr" ordseq="3"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,7" unite="mo">/revue/crs/2003/v/ncrs1517600/1002328ar.pdf</urlpdf>
+  <pagination>
+    <ppage>35</ppage>
+    <dpage>46</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Première partie</surtitre>
+    <surtitre2>
+Des termes possibles du débat éthique</surtitre2>
+                  <titre>La vie entre éthique et technoscience : l’<marquage typemarq="italique">ab-sens </marquage>bioéthique</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Sébastien</prenom>
+    <nomfamille>Mussi</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002329ar" idref="th1" lang="fr" ordseq="4"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,7" unite="mo">/revue/crs/2003/v/ncrs1517600/1002329ar.pdf</urlpdf>
+  <pagination>
+    <ppage>47</ppage>
+    <dpage>59</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Première partie</surtitre>
+    <surtitre2>
+Des termes possibles du débat éthique</surtitre2>
+                  <titre>Conversation inachevée autour de « sujets graves » et des préoccupations du monde</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Francine</prenom>
+    <nomfamille>Tardif</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002330ar" idref="th1" lang="fr" ordseq="5"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,9" unite="mo">/revue/crs/2003/v/ncrs1517600/1002330ar.pdf</urlpdf>
+  <pagination>
+    <ppage>63</ppage>
+    <dpage>76</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Deuxième partie</surtitre>
+    <surtitre2>
+Nouveaux lieux de tension du corps humain</surtitre2>
+                  <titre>Les corps poreux de la bioéthique</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Florence</prenom>
+    <nomfamille>Vinit</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002331ar" idref="th1" lang="fr" ordseq="6"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="3" unite="mo">/revue/crs/2003/v/ncrs1517600/1002331ar.pdf</urlpdf>
+  <pagination>
+    <ppage>77</ppage>
+    <dpage>97</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Deuxième partie</surtitre>
+    <surtitre2>
+Nouveaux lieux de tension du corps humain</surtitre2>
+                  <titre>L’intervention en « santé mentale » : entre la discipline et le primat du corps</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Marcelo</prenom>
+    <nomfamille>Otero</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002332ar" idref="th1" lang="fr" ordseq="7"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2,6" unite="mo">/revue/crs/2003/v/ncrs1517600/1002332ar.pdf</urlpdf>
+  <pagination>
+    <ppage>99</ppage>
+    <dpage>117</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Deuxième partie</surtitre>
+    <surtitre2>
+Nouveaux lieux de tension du corps humain</surtitre2>
+                  <titre>La « porcinification » de la personne humaine. L’effacement médical de la frontière des espèces : le cas des xénogreffes</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Christian</prenom>
+    <nomfamille>Saint-Germain</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002333ar" idref="th1" lang="fr" ordseq="8"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2,8" unite="mo">/revue/crs/2003/v/ncrs1517600/1002333ar.pdf</urlpdf>
+  <pagination>
+    <ppage>119</ppage>
+    <dpage>138</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Deuxième partie</surtitre>
+    <surtitre2>
+Nouveaux lieux de tension du corps humain</surtitre2>
+                  <titre>De l’intégrisme génétique</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>David</prenom>
+    <nomfamille>Le Breton</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002334ar" idref="th1" lang="fr" ordseq="9"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2,5" unite="mo">/revue/crs/2003/v/ncrs1517600/1002334ar.pdf</urlpdf>
+  <pagination>
+    <ppage>141</ppage>
+    <dpage>157</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Troisième partie</surtitre>
+    <surtitre2>
+Entre risque anthropologique et impasses psychiques</surtitre2>
+                  <titre>Clonage ou la traversée du miroir</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Louise</prenom>
+    <nomfamille>Vandelac</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002335ar" idref="th1" lang="fr" ordseq="10"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2,1" unite="mo">/revue/crs/2003/v/ncrs1517600/1002335ar.pdf</urlpdf>
+  <pagination>
+    <ppage>159</ppage>
+    <dpage>173</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Troisième partie</surtitre>
+    <surtitre2>
+Entre risque anthropologique et impasses psychiques</surtitre2>
+                  <titre>L’<marquage typemarq="italique">autre-corps </marquage>du clonage, entre le Je et le Il</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Isabelle</prenom>
+    <nomfamille>Lasvergnas</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="1002336ar" idref="th1" lang="fr" ordseq="11"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2,8" unite="mo">/revue/crs/2003/v/ncrs1517600/1002336ar.pdf</urlpdf>
+  <pagination>
+    <ppage>175</ppage>
+    <dpage>195</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Troisième partie</surtitre>
+    <surtitre2>
+Entre risque anthropologique et impasses psychiques</surtitre2>
+                  <titre>Réflexion sur la notion de « risque anthropologique »</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Monette</prenom>
+    <nomfamille>Vacquin</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="1002337ar" lang="fr" ordseq="12"
+  qualtraitement="minimal" typeart="autre">
+  <urlpdf taille="319" unite="ko">/revue/crs/2003/v/ncrs1517600/1002337ar.pdf</urlpdf>
+  <pagination>
+    <ppage>197</ppage>
+    <dpage>199</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Notices</titre>
+                
+         </grtitre>
+</liminaire>
+</article>
+</sommaire>

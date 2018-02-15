@@ -1,0 +1,671 @@
+
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+          <copyright>
+            <year>2000</year>
+            <contribution>
+              <artificialperson>
+                <name>24 images</name>
+              </artificialperson>
+              <contributiontype>
+                <code>droit</code>
+                <label lang="fr">Titulaire du droit d&apos;auteur</label>
+                <label lang="en">Copyright Holder</label>
+                <label lang="es">Titular del derecho de autor</label>
+              </contributiontype>
+              <ordering>0</ordering>
+            </contribution>
+            <copyrightdeclaration>
+              <code>tdr</code>
+              <label lang="fr">Tous droits réservés</label>
+              <label lang="en">All Rights Reserved</label>
+              <label lang="es">Reservados todos los derechos</label>
+            </copyrightdeclaration>
+          </copyright>
+          <publicationnumberingkeys>
+            <publicationtypecode>reg</publicationtypecode>
+            <years>
+              <year value="2000">
+                <periodcode>ete</periodcode>
+              </year>
+            </years>
+          </publicationnumberingkeys>
+          <infosommaire>
+            <url>/culture/erudit/erudit/images1058019/images1102374/24089ac/</url>
+            <nbarticle>27</nbarticle>
+            <icone>/logosodep/erudit</icone>
+            <revue id="images1058019" lang="fr">
+              <titrerev>24 images</titrerev>
+              <titrerevabr>images</titrerevabr>
+              <idissn>0707-9389</idissn>
+              <idissnnum>1923-5097</idissnnum>
+              <directeur sexe="masculin">
+                <nompers>
+                  <prenom>Claude</prenom>
+                  <nomfamille>Racine</nomfamille>
+                </nompers>
+                <key>directeur</key>
+              </directeur>
+              <redacteurchef sexe="feminin" typerc="regulier">
+                <fonction lang="fr">Rédactrice en chef</fonction>
+                <nompers>
+                  <prenom>Marie-Claude</prenom>
+                  <nomfamille>Loiselle</nomfamille>
+                </nompers>
+                <key>redactriceenchef</key>
+              </redacteurchef>
+            </revue>
+            <numero id="images1102374">
+              <nonumero>102</nonumero>
+              <pub>
+                <periode>Été</periode>
+                <annee>2000</annee>
+              </pub>
+              <pubnum>
+                <date typedate="publication">2010-04-01</date>
+              </pubnum>
+              <grtheme id="th1">
+                <theme>Robert Morin</theme>
+              </grtheme>
+            </numero>
+            <editeur>
+              <nomorg>24/30 I/S</nomorg>
+              <key>editeur</key>
+            </editeur>
+            <droitsauteur>Tous droits réservés © <nomorg>24 images</nomorg>, 2000</droitsauteur>
+          </infosommaire>
+          <article horstheme="oui" idproprio="24089ac" lang="fr" ordseq="1" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="309" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24089ac.pdf</urlpdf>
+            <pagination>
+              <ppage>3</ppage>
+              <dpage>3</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Éditorial</surtitre>
+                <titre>La DV</titre>
+                <sstitre>À nous la liberté</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24090ac" idref="th1" lang="fr" ordseq="2" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="220" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24090ac.pdf</urlpdf>
+            <pagination>
+              <ppage>6</ppage>        
+      <dpage>6</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Vérité et mensonges d’un documentateur</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24091ac" idref="th1" lang="fr" ordseq="3" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="1,5" unite="mo">/culture/erudit/erudit/images1058019/images1102374/24091ac.pdf</urlpdf>
+            <pagination>
+              <ppage>6</ppage>
+              <dpage>12</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Entretien</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24092ac" idref="th1" lang="fr" ordseq="4" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="736" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24092ac.pdf</urlpdf>
+            <pagination>
+              <ppage>13</ppage>
+              <dpage>15</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Le Petit Robert du grand Morin</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Yves</prenom>
+                    <nomfamille>Rousseau</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24093ac" idref="th1" lang="fr" ordseq="5" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="394" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24093ac.pdf</urlpdf>
+            <pagination>
+              <ppage>16</ppage>
+              <dpage>17</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Lettre ouverte à Robert Morin</titre>
+                <sstitre>En guise d’éloge du camping sauvage</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Jean</prenom>
+                    <autreprenom>Pierre</autreprenom>
+                    <nomfamille>Lefebvre</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24094ac" idref="th1" lang="fr" ordseq="6" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="258" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24094ac.pdf</urlpdf>
+            <pagination>
+              <ppage>18</ppage>
+              <dpage>18</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Robert Morin</titre>
+                <sstitre>Comme une question incontournable</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gilles</prenom>          
+          <nomfamille>Marsolais</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24095ac" idref="th1" lang="fr" ordseq="7" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="612" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24095ac.pdf</urlpdf>
+            <pagination>
+              <ppage>19</ppage>
+              <dpage>21</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Profession</titre>
+                <sstitre>Médiateur du réel</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Philippe</prenom>
+                    <nomfamille>Gajan</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24096ac" idref="th1" lang="fr" ordseq="8" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="1,1" unite="mo">/culture/erudit/erudit/images1058019/images1102374/24096ac.pdf</urlpdf>
+            <pagination>
+              <ppage>22</ppage>
+              <dpage>26</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Morin par Morin</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24097ac" idref="th1" lang="fr" ordseq="9" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="707" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24097ac.pdf</urlpdf>
+            <pagination>
+              <ppage>27</ppage>
+              <dpage>29</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Autoportraits obscènes</titre>
+                <sstitre>L’indécence chez Robert Morin</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marco</prenom>
+                    <nomfamille>de Blois</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24098ac" idref="th1" lang="fr" ordseq="10" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="442" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24098ac.pdf</urlpdf>
+            <pagination>
+              <ppage>30</ppage>
+              <dpage>31</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>« Amener les idées où elles doivent aller… »</titre>
+                <sstitre>Entretien avec Lorraine Dufour</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="24099ac" idref="th1" lang="fr" ordseq="11" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="501" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24099ac.pdf</urlpdf>
+            <pagination>
+              <ppage>32</ppage>
+              <dpage>33</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier</surtitre>
+                <titre>Le chantier créatif</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24100ac" lang="fr" ordseq="12" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="816" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24100ac.pdf</urlpdf>
+            <pagination>
+              <ppage>38</ppage>
+              <dpage>42</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>
+                  <marquage typemarq="italique">Le chapeau</marquage>
+                </surtitre>
+                <titre>La mise à nu</titre>
+                <sstitre>Entretien avec Michèle Cournoyer</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gérard</prenom>
+                    <nomfamille>Grugeau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24101ac" lang="fr" ordseq="13" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="247" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24101ac.pdf</urlpdf>
+            <pagination>
+              <ppage>41</ppage>
+              <dpage>41</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>
+                  <marquage typemarq="italique">Le chapeau</marquage>
+                </surtitre>
+                <titre>Les images cannibales</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Le chapeau</marquage> de Michèle Cournoyer</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gérard</prenom>
+                    <nomfamille>Grugeau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24102ac" lang="fr" ordseq="14" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="158" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24102ac.pdf</urlpdf>
+            <pagination>
+              <ppage>43</ppage>
+              <dpage>43</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>
+                  <marquage typemarq="italique">Le chapeau</marquage>
+                </surtitre>
+                <titre>Une séquence</titre>
+                <sstitre>
+                  <marquage typemarq="italique">Le chapeau</marquage>
+                </sstitre>
+              </grtitre>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24103ac" lang="fr" ordseq="15" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="259" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24103ac.pdf</urlpdf>
+            <pagination>
+              <ppage>50</ppage>
+              <dpage>50</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>La spirale du regard</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Le temps et le lieu</marquage> de Bernard Émond</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Pierre</prenom>
+                    <nomfamille>Barrette</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24112ac" lang="fr" ordseq="16" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="234" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24112ac.pdf</urlpdf>
+            <pagination>
+              <ppage>51</ppage>
+              <dpage>51</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>Charmes et démons de l’adolescence</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Rosie </marquage>de Patrice Toye</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Pierre</prenom>
+                    <nomfamille>Barrette</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24113ac" lang="fr" ordseq="17" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="457" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24113ac.pdf</urlpdf>
+            <pagination>
+              <ppage>52</ppage>
+              <dpage>53</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>La voie du détrounement</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Ghost Dog: The Way of the Samurai</marquage> de Jim Jarmusch</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24114ac" lang="fr" ordseq="18" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="242" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24114ac.pdf</urlpdf>
+            <pagination>
+              <ppage>54</ppage>
+              <dpage>54</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>Riches et célèbres</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Small Time Crooks</marquage> de Woody Alien</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gérard</prenom>
+                    <nomfamille>Grugeau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24115ac" lang="fr" ordseq="19" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="230" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24115ac.pdf</urlpdf>
+            <pagination>
+              <ppage>55</ppage>
+              <dpage>55</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>Le film d’un seul homme</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Mission: Impossible 2</marquage> de John Woo</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marcel</prenom>
+                    <nomfamille>Jean</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24104ac" lang="fr" ordseq="20" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="446" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24104ac.pdf</urlpdf>
+            <pagination>
+              <ppage>4</ppage>
+              <dpage>5</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Cinéma en poche</surtitre2>
+                <titre>Vidéo du cinéma indépandant</titre>
+                <sstitre>Les fantômes de la liberté</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Réal</prenom>
+                    <nomfamille>La Rochelle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24105ac" lang="fr" ordseq="21" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="731" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24105ac.pdf</urlpdf>
+            <pagination>
+              <ppage>34</ppage>
+              <dpage>36</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Abbas Kiarostami</titre>
+                <sstitre>Figure du désir et de la loi</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gérard</prenom>
+                    <nomfamille>Grugeau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24106ac" lang="fr" ordseq="22" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="252" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24106ac.pdf</urlpdf>
+            <pagination>
+              <ppage>37</ppage>
+              <dpage>37</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Le documentaire. Une espèce en voie de mutation?</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gilles</prenom>
+                    <nomfamille>Marsolais</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24107ac" lang="fr" ordseq="23" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="516" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24107ac.pdf</urlpdf>
+            <pagination>
+              <ppage>44</ppage>
+              <dpage>45</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Documentaire, art du métissage</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24108ac" lang="fr" ordseq="24" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="677" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24108ac.pdf</urlpdf>
+            <pagination>
+              <ppage>46</ppage>
+              <dpage>48</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Penser un futur meilleur</titre>
+                <sstitre>L’état du court métrage au Québec</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Philippe</prenom>
+                    <nomfamille>Gajan</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24109ac" lang="fr" ordseq="25" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="480" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24109ac.pdf</urlpdf>
+            <pagination>
+              <ppage>61</ppage>
+              <dpage>62</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>La télé</surtitre2>
+                <titre>L’été du CRTC</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Yves</prenom>
+                    <nomfamille>Rousseau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24110ac" lang="fr" ordseq="26" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="524" unite="ko">/culture/erudit/erudit/images1058019/images1102374/24110ac.pdf</urlpdf>
+            <pagination>
+              <ppage>63</ppage>
+              <dpage>64</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>Cin-écrits</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Lecteur</contribution>
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="24111ac" lang="fr" ordseq="27" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="1,1" unite="mo">/culture/erudit/erudit/images1058019/images1102374/24111ac.pdf</urlpdf>
+            <pagination>
+              <ppage>56</ppage>
+              <dpage>60</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Vue panoramique</titre>
+              </grtitre>
+            </liminaire>
+          </article>
+        </sommaire>
