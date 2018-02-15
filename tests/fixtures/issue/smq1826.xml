@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="robichac" date="2011-09-26" application="Tournesol"/>
+
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="1996">
+			<periodcode>print</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/smq/1996/v21/n1/032367ar/</url>
+  <nbarticle>26</nbarticle>
+  <revue id="SMQ52" lang="fr">
+    <titrerev>Santé mentale au Québec</titrerev>
+    <titrerevabr>SMQ</titrerevabr>
+    <idissn>0383-6320</idissn>
+    <idissnnum>1708-3923</idissnnum>
+    <directeur sexe="masculin">
+      <nompers>
+        <prenom>Yves</prenom>
+        <nomfamille>Lecomte</nomfamille>
+      </nompers>
+      <key>directeur</key>
+    </directeur>
+    <redacteurchef sexe="masculin" typerc="regulier">
+      <nompers>
+        <prenom>Alain</prenom>
+        <nomfamille>Lesage</nomfamille>
+      </nompers>
+      <key>redacteurchef</key>
+    </redacteurchef>
+    <redacteurchef idrefs="th1 th2" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>Alain</prenom>
+        <nomfamille>Lesage</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+    <redacteurchef idrefs="th2" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>Louis</prenom>
+        <nomfamille>Côté</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+    <redacteurchef idrefs="th2" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>Yves</prenom>
+        <nomfamille>Lecomte</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+  </revue>
+  <numero id="SMQ1826">
+    <volume>21</volume>
+    <nonumero>1</nonumero>
+    <pub>
+      <periode>printemps</periode>
+      <annee>1996</annee>
+    </pub>
+    <pubnum>
+      <date>2007-09-11</date>
+    </pubnum>
+    <grtheme id="th1">
+      <theme>Virage ambulatoire</theme>
+    </grtheme>
+    <grtheme id="th2">
+      <theme>Les états de stress post-traumatique</theme>
+    </grtheme>
+  </numero>
+  <editeur id="ed38">
+    <nomorg>Revue Santé mentale au Québec</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Santé mentale au Québec</nomorg>,
+      1996</droitsauteur>
+</infosommaire>
+<article horstheme="oui" idproprio="032367ar" lang="fr"
+  qualtraitement="minimal" typeart="autre" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="35" unite="ko">/revue/smq/1996/v21/n1/032367ar.pdf</urlpdf>
+  <pagination>
+    <ppage>6</ppage>
+    <dpage>6</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+        <titre>Mot de bienvenue</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom> </prenom>
+        
+    <nomfamille> </nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="032369ar" lang="fr"
+  qualtraitement="minimal" typeart="autre" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="172" unite="ko">/revue/smq/1996/v21/n1/032369ar.pdf</urlpdf>
+  <pagination>
+    <ppage>7</ppage>
+    <dpage>9</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+        <titre>Préambule</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Yves</prenom>
+        
+    <nomfamille>Lecomte</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032370ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="autre" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="79" unite="ko">/revue/smq/1996/v21/n1/032370ar.pdf</urlpdf>
+  <pagination>
+    <ppage>13</ppage>
+    <dpage>14</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Éditorial</surtitre>
+        <titre>Le virage ambulatoire</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Alain</prenom>
+        
+    <nomfamille>Lesage</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032371ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="630" unite="ko">/revue/smq/1996/v21/n1/032371ar.pdf</urlpdf>
+  <pagination>
+    <ppage>15</ppage>
+    <dpage>25</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Le « virage ambulatoire » en santé mentale : un détour qui évite l’alternative?</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Jean</prenom>
+        
+    <nomfamille>Gagné</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032372ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="267" unite="ko">/revue/smq/1996/v21/n1/032372ar.pdf</urlpdf>
+  <pagination>
+    <ppage>27</ppage>
+    <dpage>31</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Un virage ambulatoire, mais pour qui?</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Gaston</prenom>
+        <autreprenom>P.</autreprenom>
+        
+    <nomfamille>Harnois</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032373ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="226" unite="ko">/revue/smq/1996/v21/n1/032373ar.pdf</urlpdf>
+  <pagination>
+    <ppage>33</ppage>
+    <dpage>36</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Perspectives familiales sur les changements anticipés dans les soins de santé
+        mentale</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Kay</prenom>
+        
+    <nomfamille>Simpson</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032374ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="550" unite="ko">/revue/smq/1996/v21/n1/032374ar.pdf</urlpdf>
+  <pagination>
+    <ppage>37</ppage>
+    <dpage>45</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Virage ambulatoire en santé mentale et patients souffrant de troubles sévères et
+        persistants</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Dominique</prenom>
+        
+    <nomfamille>Bédard</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032375ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="290" unite="ko">/revue/smq/1996/v21/n1/032375ar.pdf</urlpdf>
+  <pagination>
+    <ppage>47</ppage>
+    <dpage>52</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Le devenir de l’enfant gravement malade</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Lise</prenom>
+        
+    <nomfamille>Brochu</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032376ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="417" unite="ko">/revue/smq/1996/v21/n1/032376ar.pdf</urlpdf>
+  <pagination>
+    <ppage>53</ppage>
+    <dpage>59</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Virage ambulatoire en psychiatrie au Québec : plus de trente ans d’histoire</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Claude</prenom>
+        
+    <nomfamille>Vanier</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032377ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="340" unite="ko">/revue/smq/1996/v21/n1/032377ar.pdf</urlpdf>
+  <pagination>
+    <ppage>61</ppage>
+    <dpage>66</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Santé mentale et virage ambulatoire dans les Basses-Laurentides</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Claude</prenom>
+        
+    <nomfamille>Larivière</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032378ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="663" unite="ko">/revue/smq/1996/v21/n1/032378ar.pdf</urlpdf>
+  <pagination>
+    <ppage>67</ppage>
+    <dpage>77</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Les défis du virage ambulatoire dans les services de santé mentale à Montréal</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Paul</prenom>
+        
+    <nomfamille>Beaudry</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032379ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="886" unite="ko">/revue/smq/1996/v21/n1/032379ar.pdf</urlpdf>
+  <pagination>
+    <ppage>79</ppage>
+    <dpage>95</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Perspectives épidémiologiques sur le virage ambulatoire des services
+        psychiatriques</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Alain</prenom>
+        
+    <nomfamille>Lesage</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032380ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="690" unite="ko">/revue/smq/1996/v21/n1/032380ar.pdf</urlpdf>
+  <pagination>
+    <ppage>97</ppage>
+    <dpage>109</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Virage ambulatoire à Québec : l’équilibre en tête</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Margot</prenom>
+        
+    <nomfamille>Tremblay</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032381ar" idref="th1" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="679" unite="ko">/revue/smq/1996/v21/n1/032381ar.pdf</urlpdf>
+  <pagination>
+    <ppage>111</ppage>
+    <dpage>122</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Virage ambulatoire</surtitre>
+        <titre>Le virage ambulatoire en psychiatrie : une perspective globale</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Yvon-Jacques</prenom>
+        
+    <nomfamille>Lavallée</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032382ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="autre" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="258" unite="ko">/revue/smq/1996/v21/n1/032382ar.pdf</urlpdf>
+  <pagination>
+    <ppage>123</ppage>
+    <dpage>127</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Éditorial</surtitre>
+        <titre>Un champ clinique et théorique en développement</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Louis</prenom>
+        
+    <nomfamille>Côté</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="032383ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="880" unite="ko">/revue/smq/1996/v21/n1/032383ar.pdf</urlpdf>
+  <pagination>
+    <ppage>129</ppage>
+    <dpage>144</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Modèles comportementaux et cognitifs du trouble de stress post-traumatique</titre>
+        <titreparal lang="en">Behavior and cognitive models of Posttraumatic Stress
+        Disorder</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Pascale</prenom>
+        
+    <nomfamille>Brillon</nomfamille>
+        
+   </nompers>
+  </auteur>
+      
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>André</prenom>
+        
+    <nomfamille>Marchand</nomfamille>
+        
+   </nompers>
+  </auteur>
+      
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>Randolph</prenom>
+        
+    <nomfamille>Stephenson</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>La nécessité de développer des traitements efficaces pour les nombreuses victimes de
+        violence et de catastrophes rend incontournable la compréhension des mécanismes de
+        développement, de maintien et de résorption du trouble de stress post-traumatique (TSPT).
+        L'article présente les modèles cognitifs-comportementaux du TSPT les plus influents et en
+        effectue une brève analyse critique. Les modèles écologiques sélectionnés sont ceux de
+        Mowrer (1960), de Foa et al. (1989), de Jones et Barlow (1990), de Chemtob et al. (1988) et
+        de Janoff-Bulman (1985). Ces modèles sont comparés entre eux et des pistes de réflexion sont
+        formulées. </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea> The necessity of developping efficient treatment for the numerous victims of violence
+        and catastrophes render essential the understanding of the mechanisms of development,
+        maintainance and resorption of the Posttraumatice Stress Disorder (PTSD). Consequently, this
+        article presents the most influential behavior and cognitive models followed by a brief
+        critical analysis. The etiological models chosen are those of Mowrer (1960), Foa and al.
+        (1989), Jones and Barlow (1990), Chemtob and al. (1988) and Janoff-Bulman (1985). Finally
+        these models are compared and discussed. </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article idproprio="032384ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="1002" unite="ko">/revue/smq/1996/v21/n1/032384ar.pdf</urlpdf>
+  <pagination>
+    <ppage>145</ppage>
+    <dpage>162</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Expositions récurrentes aux événements traumatiques: inoculation ou vulnérabilité
+        croissante?</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Alain</prenom>
+        
+    <nomfamille>Brunet</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>Deux grandes hypothèses opposées ont été formulées quant à l'impact d'un événement
+        traumatique sur l'adversité future: l'inoculation et la vulnérabilité croissante. Un examen
+        des travaux supportant ces hypothèses indique qu'elles ne sont pas aussi antagonistes
+        qu'elles en ont l'air. Il apparaît possible de les intégrer en une théorie unique dans la
+        mesure où les circonstances favorisant l'une ou l'autre </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea> Recurrent exposition to traumatic events: Gradual inoculation or vulnerability? Two
+        opposed hypotheses have been proposed regarding the impact of a traumatic event in regards
+        to future adversity: gradual inoculation or vulnerability. A thorough examination of
+        research supporting these hypotheses indicate they are not as antagonistic as they appear.
+        It seems possible to integrate the two into a singular theory in so far as circumstances
+        favoring one and the other become better known. A few research strategies are proposed.
+      </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article idproprio="032385ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="813" unite="ko">/revue/smq/1996/v21/n1/032385ar.pdf</urlpdf>
+  <pagination>
+    <ppage>163</ppage>
+    <dpage>176</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Traumatisme, mémoire et fantasme : la réalité psychique</titre>
+        <titreparal lang="en">Trauma, memory and fantasy: the psychic reality</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Dominique</prenom>
+        
+    <nomfamille>Scarfone</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>Face au débat qui fait rage, surtout aux États-Unis, à propos de rétablissement, par
+        la voie de psychothérapie ou de la psychanalyse, de la réalité des événements traumatiques,
+        l'auteur insiste sur un usage rigoureux des termes du débat. La théorie freudienne, axée ici
+        autour du concept de réalité psychique, ne saurait se porter à l'appui inconditionnel de
+        Tune ou l'autre des parties en présence (« recovered memories » et « false memories »). Il
+        s'agit au contraire de poser l'originalité du concept de réalité psychique, qui se distingue
+        à la fois de la réalité événementielle et de la pure imagination. L'auteur souligne
+        l'approche spécifiquement psychanalytique de l'accès à la mémoire, et s'en sert pour
+        critiquer tant les notions de « souvenirs retrouvés » que de « faux souvenirs », tout en
+        réaffirmant ce qui serait une éthique fondamentale de la psychanalyse et de toute
+        psychothérapie qui prétend s'en inspirer. </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea> With the raging debate particularly in the United States regarding the establishment
+        through the path of psychotherapy or psychoanalysis of the reality of traumatic events, the
+        author insists on a rigourous use of the terms of the debate. The Freudian theory,
+        surrounding the concept of psychic reality could not bear only on the unconditional support
+        of either parts: recovered memories/false memories. On the contrary, emphasis must be put on
+        the originality of the concept of psychic reality, which distinguishes itself from both
+        eventful reality and pure imagination. The author underlines the specifically
+        psychoanalytical approach of access to memory, and uses it to criticize notions of recovered
+        memory as well as false memories, while reaffirming what would be a fundamental ethic of
+        psychoanalysis and any other psychotherapy claiming to be inspired by it. </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article idproprio="032386ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="679" unite="ko">/revue/smq/1996/v21/n1/032386ar.pdf</urlpdf>
+  <pagination>
+    <ppage>177</ppage>
+    <dpage>187</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Traumatisme et trouble de la personnalité limite</titre>
+        <titreparal lang="en">Trauma and borderline personality disorder</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Joel</prenom>
+        
+    <nomfamille>Paris</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>Le présent article passe en revue Timportant corpus de preuves empiriques amassées au
+        sujet du rapport qu'il est possible d'établir entre certaines expériences traumatiques
+        subies durant l'enfance et l'installation des troubles de la personnalité dite limite ou
+        « borderline » chez l'adulte. Les connaissances accumulées à ce jour nous indiquent qu'un
+        traumatisme subi durant l'enfance est l'un des nombreux facteurs de risque à l'égard des
+        personnalités limites, mais qu'il ne saurait en être le principal facteur étiologique.
+      </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea>This article reviews a large body of empirical evidence concerning the relationship
+        between traumatic experiences in childhood and the development of borderline personality
+        disorder (BPD) in adulthood. Our present state of knowledge indicates that childhood trauma
+        is one of several risks for BPD, but is by no means the main etiological factor accounting
+        for the development of this disorder. </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article idproprio="032387ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="1,1" unite="mo">/revue/smq/1996/v21/n1/032387ar.pdf</urlpdf>
+  <pagination>
+    <ppage>189</ppage>
+    <dpage>208</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Prévalence du trouble de stress post-traumatique chez des chauffeurs d’autobus</titre>
+        <titreparal lang="en">Prevalence of the Posttraumatic Stress Disorder among bus
+        drivers</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Richard</prenom>
+        
+    <nomfamille>Boyer</nomfamille>
+        
+   </nompers>
+  </auteur>
+      
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Alain</prenom>
+        
+    <nomfamille>Brunet</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>Plusieurs rapports indiquent que les employés du transport en commun constituent un
+        groupe de travailleurs risquant de vivre des événements traumatiques. Cependant, il n'y a
+        que peu de données scientifiques sur l'impact de tels événements dans cette population. Lors
+        d'une enquête épidémiologique menée auprès des chauffeurs d'autobus de la STCUM, un peu plus
+        du tiers des chauffeurs rapportent un événement traumatique au travail. De ces événements,
+        les menaces graves et les agressions constituent la majorité. Les événements traumatiques
+        sont plus fréquents au travail que dans la vie privée. La prévalence à vie du TSPT est de
+        10,7% pour les événements subis au travail et de 21,3 % pour ceux de la vie privée. Neuf
+        chauffeurs sur 100 exposés à un événement au travail souffraient d'un TSPT dans le mois
+        précédant l'enquête. Lorsque nous considérons les événements survenus dans la vie privée,
+        près de 15% de ces exposés étaient victimes d'un TSPT. Lorsque les deux milieux d'exposition
+        sont réunis, 12% présentaient un TSPT dans le mois précédant la recherche. </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea>Many recent reports indicate that public transport employees constitute a group of
+        workers at high risk of going through a traumatic event. Yet, very few scientific data on
+        the impact of these events on this population are available. The authors present results of
+        an epidemiological study conducted among Montreal bus drivers. A little more than a third of
+        bus drivers have reported a traumatic event at work. Among the whole of traumatic events
+        occuring during the course of their work, serious threats and assault constitute the
+        majority of these events. Traumatic events are more frequent at work than in their private
+        lives. The prevalence of PTSD for those exposed to a traumatic event at work is of 10,7% and
+        of 21,3% for those bus drivers exposed to traumatic events in their private lives. Nine out
+        of 100 drivers exposed to a traumatic event at work suffered a PTSD in the month preceding
+        the study. When the authors consider the events occuring in the private lives, alomost 15%
+        of those exposed were victims of PTSD. When the two levels of expositions are reunited, 12%
+        of those exposed presented a PTSD in the month preceding the research. </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article idproprio="032388ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="1" unite="mo">/revue/smq/1996/v21/n1/032388ar.pdf</urlpdf>
+  <pagination>
+    <ppage>209</ppage>
+    <dpage>227</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Les facteurs de vulnérabilité et les enjeux psychodynamiques dans les réactions
+        post-traumatiques</titre>
+        <titreparal lang="en">Factors of vulnerability and the psychodynamic stakes in posttraumatic
+        reactions</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Louis</prenom>
+        
+    <nomfamille>Côté</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>Certaines personnes réagissent au traumatisme collectif ou individuel par des
+        manifestations cliniques, qui deviennent parfois un syndrome clinique. Comment expliquer ces
+        réactions différentielles? En s'inspirant des études cliniques dégagées dans la revue de
+        littérature, et divisées selon les aspects fragilisants de la triade de vulnérabilité (les
+        facteurs trans-traumatiques, pré-traumatiques et post-traumatiques), l'auteur apporte des
+        explications de nature psychanalytique à ces réactions </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea>Some people react to collective or individual trauma with clinical manifestations
+        which often become a clinical syndrome. How can these different reactions be explained?
+        Inspired by clinical research in the literature review, and divided according to the
+        fragilizing aspects of the triad of vulnerability (trans-traumatic, pre-traumatic and
+        posttraumatic), the author brings a psychoanalytical explanation to these different
+        reactions. </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article idproprio="032389ar" idref="th2" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="937" unite="ko">/revue/smq/1996/v21/n1/032389ar.pdf</urlpdf>
+  <pagination>
+    <ppage>229</ppage>
+    <dpage>245</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Dossier : Les états de stress post-traumatique</surtitre>
+        <titre>Conséquences psychologiques des massacres de 1994 au Rwanda</titre>
+        <titreparal lang="en">Psychological consequences of the 1994 Rwandan massacres</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Guy</prenom>
+        
+    <nomfamille>Sydor</nomfamille>
+        
+   </nompers>
+  </auteur>
+      
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Pierre</prenom>
+        
+    <nomfamille>Philippot</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>Un programme de recherches portant sur la prévalence des réactions de stress
+        posttraumatique est décrit. Ce programme est spécifiquement centré sur les conséquences
+        psychologiques des événements d'avril 1994 au Rwanda et du génocide qui a suivi. Il comporte
+        trois études psycho-épidémiologiques : une sur les enfants rwandais non accompagnés; une
+        autre sur un petit groupe de coopérants belges; et une dernière sur un échantillon important
+        de civils et de militaires belges ayant vécu les événements rwandais. L'impact psychologique
+        des événements rwandais est décrit en terme de prévalence des symptômes de stress
+        post-traumatique. </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea>A research program on the prevalence of reactions of posttraumatic stress is described
+        in this article. The program is specifically centered on the psychological consequences of
+        the April 1994 events in Rwanda and die genocide that followed. It includes three
+        psycho-epidemiologic studies: 1) a study of non-accompanied Rwandan children; 2) a study of
+        a small group of belgian coopérants; and 3) a study of an important sample of belgian
+        civilians and militaries having been through the rwandan events. The psychological impact of
+        the rwandan events is described in terms of prevalence of symptoms of posttraumatic stress.
+      </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="032390ar" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="1,2" unite="mo">/revue/smq/1996/v21/n1/032390ar.pdf</urlpdf>
+  <pagination>
+    <ppage>249</ppage>
+    <dpage>269</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Mosaïques</surtitre>
+        <titre>Abus sexuels et négligence : mêmes causes, mêmes effets, même traitement?</titre>
+        <titreparal lang="en">Sexual abuse and negligence: Same causes, same effects, same
+        treatment?</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Johanne</prenom>
+        
+    <nomfamille>Charbonneau</nomfamille>
+        
+   </nompers>
+  </auteur>
+      
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Jacqueline</prenom>
+        
+    <nomfamille>Oxman-Martinez</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea> Les problématiques de Tabus sexuel et de la négligence sont rarement mises en
+        parallèle par les chercheurs ou les praticiens. À l'aide d'une revue de la documentation
+        ainsi que d'une analyse préliminaire de données recueillies lors de deux enquêtes, l'article
+        propose une comparaison de ces deux situations. En bref, il apparaît que l'abus sexuel et la
+        négligence ne différent pas fondamentalement lorsqu'il s'agit d'établir l'état de santé des
+        victimes au moment de l'évaluation et de l'orientation et de choisir un type d'intervention
+        psychosociale. Les recherches s'attardent cependant à des facteurs de risque très différents
+        lors de l'analyse de l'environnement familial et des caractéristiques des acteurs impliqués.
+      </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea> The issues surrounding sexual abuse and negligence are rarely examined in parallel by
+        researchers and social workers. Based on a review of relevant literature and on a
+        preliminary analysis of data collected during two surveys, the authors present in this
+        article a comparison of these two subjects. In short, sexual abuse and negligence do not
+        seem to differ fundamentally when it is a matter of establishing the state of health of
+        victims once under the care of authorities and of choosing a type of psychosocial
+        intervention. However, the researchers do look closely at very different risk factors when
+        analyzing the family environment and the characteristics of the actors involved. </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="032391ar" lang="fr"
+  qualtraitement="minimal" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="1,1" unite="mo">/revue/smq/1996/v21/n1/032391ar.pdf</urlpdf>
+  <pagination>
+    <ppage>271</ppage>
+    <dpage>290</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Mosaïques</surtitre>
+        <titre>Acculturation, identité et bien-être : l’ajustement de réfugiées somaliennes</titre>
+        <titreparal lang="en">Acculturation, identity and welfare: Adjustment of Somalian
+        refugees</titreparal>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Marta</prenom>
+        
+    <nomfamille>Young</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume lang="fr">
+        <titre>RÉSUMÉ</titre>
+      <alinea>L'étude cerne les liens entre Vacculturation et l'ajustement psychologique de 94
+        femmes réfugiées de Somalie. Le mode d'acculturation préféré au niveau du groupe est
+        l'intégration. Les Somaliennes qui ont vécu le plus longtemps au Canada s'identifient plus
+        comme Canadiennes et perçoivent plus de discrimination contre elles et contre les Somaliens
+        en général. De plus, l'endossement du mode d'acculturation par intégration implique un refus
+        des autres modes comme l'assimilation, le rejet et la marginalisation. D'importants liens
+        sont aussi établis entre l'âge, le désir de faire partite de la société canadienne et la
+        santé mentale. En particulier, les jeunes femmes se distinguent du groupe car elles ont
+        tendance à avoir un plus haut degré de dépression. Aussi, les réfugiées qui ont émigré pour
+        des raisons politiques désirent retourner en Somalie et sont moins satisfaites de leur vie
+        au Canada. </alinea>
+    
+ </resume>
+    
+ <resume lang="en">
+        <titre>ABSTRACT</titre>
+      <alinea> This study examines the links between acculturation and psychological adjustment of
+        94 Somalian refugee women. On a group level, the preferred mode of acculturation is
+        integration. Somalian women who have lived the longest in Canada identify more as Canadians
+        and perceive more discrimination against themselves and against Somalians in general.
+        Moreover, the endorsement of the mode of acculturation by integration implies a refusal of
+        other modes such as assimilation, rejection and marginalization. Important links are also
+        established between age, the desire to take part in Canadian society and mental health.
+        Young women especially distinguish themselves from the group as they have a tendency to have
+        a higher level of depression. Moreover, those refugees who have emigrated for political
+        reasons wish to return to their homeland and are less satisfied with their life in Canada.
+      </alinea>
+    
+ </resume>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="032392ar" lang="fr"
+  qualtraitement="minimal" typeart="autre" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="188" unite="ko">/revue/smq/1996/v21/n1/032392ar.pdf</urlpdf>
+  <pagination>
+    <ppage>291</ppage>
+    <dpage>294</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Événements régionaux</surtitre>
+        <titre>Région des Laurentides : Les habitudes de consommation de psychotropes chez les
+        personnes âgées</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Diane</prenom>
+        
+    <nomfamille>Larose</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="032393ar" lang="fr"
+  qualtraitement="minimal" typeart="autre" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <urlpdf taille="106" unite="ko">/revue/smq/1996/v21/n1/032393ar.pdf</urlpdf>
+  <pagination>
+    <ppage>294</ppage>
+    <dpage>296</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Événements régionaux</surtitre>
+        <titre>Région de la Montérégie : Alerte à la bureaucratie! (Libre opinion)</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Rolland</prenom>
+        
+    <nomfamille>Gaudette</nomfamille>
+        
+   </nompers>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+</sommaire>

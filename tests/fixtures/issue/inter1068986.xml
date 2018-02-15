@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="p0714630" date="2012-04-10" application="Tournesol"/>
+<copyright>
+	<year>2012</year>
+<contribution>
+<artificialperson>
+	<name>Les Éditions Intervention</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="en">Copyright Holder</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="es">Reservados todos los derechos</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>supp</publicationtypecode>
+	<years>
+		<year value="2012">
+			<periodcode>hiver</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/culture/inter1068986/inter02</url>
+  <nbarticle>1</nbarticle>
+  <revue id="inter1068986" lang="fr">
+    <titrerev>Inter</titrerev>
+    <sstitrerev>Art actuel</sstitrerev>
+    <titrerevabr>inter</titrerevabr>
+    <idissn>0825-8708</idissn>
+    <idissnnum>1923-2764</idissnnum>
+  </revue>
+  <numero id="inter02">
+    <nonumero>110</nonumero>
+    <pub>
+      <periode>Hiver</periode>
+      <annee>2012</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2012-01-30</date>
+    </pubnum>
+  </numero>
+  <editeur>
+    <nomorg>Les Éditions Intervention</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Les Éditions Intervention</nomorg>, 2012</droitsauteur>
+</infosommaire>
+<article idproprio="65848ac" lang="fr" ordseq="1"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="533" unite="ko">/culture/inter1068986/inter02/65848ac.pdf</urlpdf>
+  <pagination>
+    <ppage>1</ppage>
+    <dpage>24</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>La disparition des abeilles et des glaciers</titre>
+                <sstitre>Appel pour un moratoire poétique et réflexion sur la minorité créatrice, la saturation des images et la plasticité de l’écriture</sstitre>
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Michaël</prenom>
+    <nomfamille>La Chance </nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+</sommaire>

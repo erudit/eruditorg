@@ -1,0 +1,387 @@
+
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+          <copyright>
+            <year>1993</year>
+            <contribution>
+              <artificialperson>
+                <name>Collectif Liberté</name>
+              </artificialperson>
+              <contributiontype>
+                <code>droit</code>
+                <label lang="fr">Titulaire du droit d&apos;auteur</label>
+                <label lang="en">Copyright Holder</label>
+                <label lang="es">Titular del derecho de autor</label>
+              </contributiontype>
+              <ordering>0</ordering>
+            </contribution>
+            <contributiondeclaration>
+              <code>tdr</code>
+              <label lang="fr">Tous droits réservés</label>
+              <label lang="en">All Rights Reserved</label>
+              <label lang="es">Reservados todos los derechos</label>
+            </contributiondeclaration>
+          </copyright>
+          <publicationnumberingkeys>
+            <publicationtypecode>reg</publicationtypecode>
+            <years>
+              <year value="1993">
+                <periodcode>avril</periodcode>
+              </year>
+            </years>
+          </publicationnumberingkeys>
+          <infosommaire>
+            <url>/culture/erudit/erudit/liberte1026896/liberte1035607/31489ac/</url>
+            <nbarticle>15</nbarticle>
+            <icone>/logosodep/erudit</icone>
+            <revue id="liberte1026896" lang="fr">
+              <titrerev>Liberté</titrerev>
+              <titrerevabr>liberte</titrerevabr>
+              <idissn>0024-2020</idissn>
+              <idissnnum>1923-0915</idissnnum>
+              <directeur sexe="feminin">
+                <fonction lang="fr">Directrice</fonction>
+                <nompers>
+                  <prenom>Marie-Andrée</prenom>
+                  <nomfamille>Lamontagne</nomfamille>
+                </nompers>
+                <key>directrice</key>
+              </directeur>
+              <redacteurchef sexe="masculin" typerc="regulier">
+                <nompers>
+                  <prenom>Pierre</prenom>
+                  <nomfamille>Turgeon</nomfamille>
+                </nompers>
+                <key>redacteurchef</key>
+              </redacteurchef>
+            </revue>
+            <numero id="liberte1035607">
+              <volume>35</volume>
+              <nonumero>2</nonumero>
+              <anonumero>206</anonumero>
+              <pub>
+                <periode>Avril</periode>
+                <annee>1993</annee>
+              </pub>
+              <pubnum>
+                <date typedate="publication">2010-02-11</date>
+              </pubnum>
+            </numero>
+            <editeur>
+              <nomorg>Collectif Liberté</nomorg>
+              <key>editeur</key>
+            </editeur>
+            <droitsauteur>Tous droits réservés © <nomorg>Collectif Liberté</nomorg>, 1993</droitsauteur>
+          </infosommaire>
+          <article idproprio="31489ac" lang="fr" ordseq="1" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="6" unite="mo">/culture/erudit/erudit/liberte1026896/liberte1035607/31489ac.pdf</urlpdf>
+            <pagination>
+              <ppage>3</ppage>
+              <dpage>37</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>La fatigue culturelle de Jacques Godbout</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Serge</prenom>
+                    <nomfamille>Cantin</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31490ac" lang="fr" ordseq="2" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="997" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31490ac.pdf</urlpdf>
+            <pagination>
+              <ppage>38</ppage>
+              <dpage>43</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Variations sur la poésie</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Fernand</prenom>
+                    <nomfamille>Ouellette</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31491ac" lang="fr" ordseq="3" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="1,9" unite="mo">/culture/erudit/erudit/liberte1026896/liberte1035607/31491ac.pdf</urlpdf>
+            <pagination>
+              <ppage>44</ppage>
+              <dpage>57</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Pour ne recueillir que la présence (journal d&apos;un peintre, extraits 1983-1987)</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Robert</prenom>
+                    <nomfamille>Nadon</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31492ac" lang="fr" ordseq="4" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="1,8" unite="mo">/culture/erudit/erudit/liberte1026896/liberte1035607/31492ac.pdf</urlpdf>
+            <pagination>
+              <ppage>58</ppage>
+              <dpage>68</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Neige de juillet</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Sylvain</prenom>
+                    <nomfamille>Trudel</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31493ac" lang="fr" ordseq="5" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="353" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31493ac.pdf</urlpdf>
+            <pagination>
+              <ppage>69</ppage>
+              <dpage>74</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Les astéroïdes (poèmes en prose)</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Michel</prenom>
+                    <nomfamille>Lemaire</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31494ac" lang="fr" ordseq="6" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="225" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31494ac.pdf</urlpdf>
+            <pagination>
+              <ppage>75</ppage>
+              <dpage>78</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Poèmes</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Mary</prenom>
+                    <autreprenom>Victoria</autreprenom>
+                    <nomfamille>Wilson</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31495ac" lang="fr" ordseq="7" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="295" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31495ac.pdf</urlpdf>
+            <pagination>
+              <ppage>79</ppage>
+              <dpage>80</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Genèse</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Paul</prenom>
+                    <nomfamille>Desroches</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31496ac" lang="fr" ordseq="8" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="744" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31496ac.pdf</urlpdf>
+            <pagination>
+              <ppage>82</ppage>
+              <dpage>86</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>Jacob Isaac Segal (1886-1954)</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>René</prenom>
+                    <nomfamille>Lapierre</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31497ac" lang="fr" ordseq="9" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="1,2" unite="mo">/culture/erudit/erudit/liberte1026896/liberte1035607/31497ac.pdf</urlpdf>
+            <pagination>
+              <ppage>87</ppage>
+              <dpage>95</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>L’art sans gloire </titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Pierre</prenom>
+                    <nomfamille>Vadeboncoeur</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31498ac" lang="fr" ordseq="10" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="801" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31498ac.pdf</urlpdf>
+            <pagination>
+              <ppage>96</ppage>
+              <dpage>100</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>Deux vampires et un fantôme</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>François</prenom>
+                    <nomfamille>Bilodeau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31499ac" lang="fr" ordseq="11" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="629" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31499ac.pdf</urlpdf>
+            <pagination>
+              <ppage>101</ppage>
+              <dpage>104</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>Anagramme et chaos</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Jean-Pierre</prenom>
+                    <nomfamille>Issenhuth</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31500ac" lang="fr" ordseq="12" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="762" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31500ac.pdf</urlpdf>
+            <pagination>
+              <ppage>105</ppage>
+              <dpage>109</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>J’accuse…! (petite histoire des mouches) </titre>          
+    </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Goulet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31501ac" lang="fr" ordseq="13" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="1" unite="mo">/culture/erudit/erudit/liberte1026896/liberte1035607/31501ac.pdf</urlpdf>
+            <pagination>
+              <ppage>112</ppage>
+              <dpage>117</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Lectures</surtitre>
+                <titre>Les provocations littéraires d’Alain Roger</titre>
+                <trefbiblio>Alain Roger, <marquage typemarq="italique">Rémission</marquage>, Paris, Grasset, 1990, 221 pages.</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gaëtan</prenom>
+                    <nomfamille>Brulotte</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31502ac" lang="fr" ordseq="14" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="1,1" unite="mo">/culture/erudit/erudit/liberte1026896/liberte1035607/31502ac.pdf</urlpdf>
+            <pagination>
+              <ppage>118</ppage>
+              <dpage>125</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Lectures</surtitre>
+                <titre>La poésie par surcroît</titre>
+                <trefbiblio>Anne Hébert, <marquage typemarq="italique">Le jour n’a d’égal que la nuit</marquage>, poèmes, Montréal, Boréal/Seuil, 1992, 76 pages. </trefbiblio>
+                <trefbiblio>Anne Hébert, <marquage typemarq="italique">Oeuvre poétique. 1950-1990</marquage>, Montréal, Boréal, « Boréal compact, 40 », 1993, 166 pages.</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Anne-Marie</prenom>
+                    <nomfamille>Fortier</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="31503ac" lang="fr" ordseq="15" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="148" unite="ko">/culture/erudit/erudit/liberte1026896/liberte1035607/31503ac.pdf</urlpdf>
+            <pagination>
+              <ppage>126</ppage>
+              <dpage>126</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Lectures</surtitre>
+                <titre>Pour non-liseurs</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Jean-Pierre</prenom>
+                    <nomfamille>Issenhuth</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+        </sommaire>

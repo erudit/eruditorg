@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="fernanne" date="2012-11-02" app="Tournesol 0.4.1"/>
+
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2012">
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/ritpu/2012/v9/n3</url>
+  <nbarticle>6</nbarticle>
+  <revue id="ritpu112" lang="fr en">
+    <titrerev>Revue internationale des technologies en pédagogie universitaire</titrerev>
+    <titrerevparal lang="en">International Journal of Technologies in Higher Education</titrerevparal>
+    <titrerevabr>ritpu</titrerevabr>
+    <idissnnum>1708-7570</idissnnum>
+    <redacteurchef sexe="masculin" typerc="regulier">
+      <nompers>
+        <prenom>Thierry</prenom>
+        <nomfamille>Karsenti</nomfamille>
+      </nompers>
+      <key>redacteurchef</key>
+    </redacteurchef>
+  </revue>
+  <numero id="ritpu0326">
+    <volume>9</volume>
+    <nonumero>3</nonumero>
+    <pub>
+      <annee>2012</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2012-10-25</date>
+    </pubnum>
+  </numero>
+  <editeur>
+    <nomorg>CRÉPUQ</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>CRÉPUQ</nomorg>,</droitsauteur>
+  <droitsauteur>
+    <liensimple id="ls1" xlink:actuate="onRequest" xlink:href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr_CA" xlink:show="replace" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <objetmedia flot="ligne">
+        <image typeimage="forme" xlink:actuate="onLoad" xlink:href="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" xlink:show="embed" xlink:type="simple"/>
+      </objetmedia>
+    </liensimple>
+  </droitsauteur>
+</infosommaire>
+<article doi="10.7202/1012886ar" idproprio="1012886ar" lang="fr" ordseq="1" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="255" unite="ko">/revue/ritpu/2012/v9/n3/1012886ar.pdf</urlpdf>
+  <pagination>
+    <ppage>6</ppage>
+    <dpage>9</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Aider et être aidé : l’importance de la notion d’aide dans les dispositifs d’apprentissage en ligne</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Minna</prenom>
+    <nomfamille>Puustinen</nomfamille>
+   </nompers>
+  <affiliation><alinea>MoDyCo – INS HEA, CNRS, Université Paris Ouest, Nanterre La Défense, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:minna.puustinen@inshea.fr" xlink:type="simple">minna.puustinen@inshea.fr</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article est une introduction au numéro spécial sur la notion d’aide dans les dispositifs d’apprentissage en ligne. Il met l’accent sur le rôle essentiel que joue la notion d’aide dans ces dispositifs, mais aussi sur le fait qu’à l’heure actuelle, relativement peu de chercheurs travaillent sur cette thématique. Il propose également quelques réflexions soulevées par les articles publiés dans ce numéro spécial (par exemple, sur les concepts clés, sur des questions méthodologiques et sur des perspectives de réflexion).</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This paper is an introduction to the special issue on the notion of help in online learning environments. It emphasizes the essential role played by the notion of help in these environments but also the fact that relatively few researchers work on this topic. It further provides some reflections on the articles published in the special issue (e.g., on the key notions, on methodological questions, and on perspectives for further reflection).</alinea>
+ </resume><grmotcle lang="fr"><motcle>Aide</motcle><motcle>dispositif d’apprentissage en ligne</motcle><motcle>technologies numériques</motcle></grmotcle><grmotcle lang="en"><motcle>Help</motcle><motcle>online learning environment</motcle><motcle>ICT</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1012887ar" idproprio="1012887ar" lang="fr" ordseq="2" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="559" unite="ko">/revue/ritpu/2012/v9/n3/1012887ar.pdf</urlpdf>
+  <pagination>
+    <ppage>10</ppage>
+    <dpage>24</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Tâches à distance et remédiation en anglais langue étrangère : Réflexion sur des entrées à considérer pour la conception  d’outils pédagogiques ajustés aux besoins des apprenants</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Cédric</prenom>
+    <nomfamille>Brudermann</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Pierre et Marie Curie, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:cedricbrudermann@gmail.com" xlink:type="simple">cedricbrudermann@gmail.com</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Cet article propose de revenir sur la conception et l’utilisation d’un outil de médiation à distance – l’« assistant pédagogique en ligne » – dans un dispositif de formation destiné à des apprenants non spécialistes des langues étrangères (LANSAD) de l’Université Pierre et Marie Curie. Une expérience avec collecte et quantification de données a été mise en place pour évaluer le potentiel de ces outils de guidage à distance sur le processus d’appropriation de l’anglais langue étrangère (L2) auprès de trois groupes d’apprenants (B1/B2) de cette université.</alinea><alinea>Nous reviendrons tout d’abord dans ce qui suit sur une expérience visant à recueillir des données destinées à être ultérieurement utilisées pour développer un outil de (re)médiation en ligne. Nous poursuivrons par une présentation des modalités d’enseignement-apprentissage de l’anglais L2 qui ont été développées à la suite de l’analyse de ces données. Nous finirons par donner les premiers résultats que nous avons pu obtenir concernant l’impact des modalités de suivi à distance qui ont été conçues sur le processus d’appropriation de l’anglais langue étrangère.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>This article deals with the implementation of an online mediation tool in a pedagogical device intended for English for Special Purposes students in a French university (UPMC). As it is now, it comprises a customized website designed to serve as a guide through the development of the students’ work.</alinea><alinea>This paper will first come back on an experiment aiming at collecting data to define a pedagogical approach supposed to take L2 learners’ needs into consideration. This overview will then be useful in a pedagogical engineering approach to design an online mediation tool. Eventually, the first results concerning the potential of this online mediation model on the second language acquisition process will be given.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Dispositif hybride</motcle><motcle>tutorat</motcle><motcle>TIC</motcle><motcle>tâche</motcle><motcle>recherche-action</motcle><motcle>LANSAD</motcle></grmotcle><grmotcle lang="en"><motcle>Blended learning</motcle><motcle>online tutoring</motcle><motcle>ICT</motcle><motcle>task</motcle><motcle>action research</motcle><motcle>ESP students</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1012888ar" idproprio="1012888ar" lang="fr" ordseq="3" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,3" unite="mo">/revue/ritpu/2012/v9/n3/1012888ar.pdf</urlpdf>
+  <pagination>
+    <ppage>25</ppage>
+    <dpage>42</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>L’aide à l’apprentissage du vocabulaire à distance : effets des outils de la CMO</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Christine</prenom>
+    <nomfamille>Rodrigues</nomfamille>
+   </nompers>
+  <affiliation><alinea>Laboratoire de Recherche sur le Langage, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:christine.rodrigues@univ-bpclermont.fr" xlink:type="simple">christine.rodrigues@univ-bpclermont.fr</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>Notre étude concerne les effets du forum de discussion et du clavardage sur les problèmes de vocabulaire en Français Langue Étrangère et l’aide des tuteurs. Les données qualitatives ont été recueillies à l’aide de sessions de clavardage enregistrées, de messages de forum et par questionnaire, à partir d’un dispositif impliquant 21 tuteurs francophones accompagnant à distance 13 apprenants dans leur réalisation d’une macro-tâche écrite. Les résultats révèlent principalement des erreurs de forme écrite et d’utilisation de l’anglais, et montrent que les tuteurs, bien qu’intervenant rarement sur ces problèmes, proposent des aides variées qui, pour certaines, s’avèrent efficaces.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Our study focuses on the effects of forum and chat tools on vocabulary learning in French as a foreign language and on tutors’ help. Qualitative data were collected from chat sessions and messages on the forum as well as a questionnaire, in a learning environment with 21 French tutors providing support from a distance to 13 learners in their written macro-task. The results show that most frequent problems concerned written form and the use of English, and that tutors rarely reacted to them. When they did, they provided varied support that has resolved some difficulties.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Apprentissage du vocabulaire</motcle><motcle>macro-tâche</motcle><motcle>production écrite</motcle><motcle>communication médiatisée par ordinateur</motcle></grmotcle><grmotcle lang="en"><motcle>Vocabulary learning</motcle><motcle>macro-task</motcle><motcle>written production</motcle><motcle>computer mediated communication</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1012889ar" idproprio="1012889ar" lang="fr" ordseq="4" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="823" unite="ko">/revue/ritpu/2012/v9/n3/1012889ar.pdf</urlpdf>
+  <pagination>
+    <ppage>43</ppage>
+    <dpage>54</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Des aides pour une consigne ouverte : assistants cognitifs dans Pairform@nce </titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Catherine</prenom>
+    <nomfamille>Loisy</nomfamille>
+   </nompers>
+  <affiliation><alinea>École Normale Supérieure de Lyon, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:catherine.loisy@ens-lyon.Fr" xlink:type="simple">catherine.loisy@ens-lyon.Fr</liensimple>
+  </courriel>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Chrysta</prenom>
+    <nomfamille>Péllissier</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Paul Valéry, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls3" xlink:href="mailto:chrysta.pelissier@univ-mont2.fr" xlink:type="simple">chrysta.pelissier@univ-mont2.fr</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>La conception et/ou l’utilisation de scénarios pédagogiques dans les dispositifs de formation à distance sont des tâches complexes. L’élaboration de ces tâches s’effectue, pour les concepteurs et les utilisateurs, à partir d’une « consigne ouverte ». Cette consigne peut être accompagnée d’artefacts cognitifs destinés à faciliter la compréhension de la consigne et l’appropriation des ressources. Dans Pairform@nce, un programme national français qui vise à développer les compétences TIC des enseignants, plusieurs artefacts cognitifs accompagnent la consigne. Leur but est de faciliter la compréhension et l’appropriation des scénarios, nommés « parcours de formation ». Cet article présente une étude (<marquage typemarq="italique">a priori</marquage> et <marquage typemarq="italique">a posteriori</marquage>) sur le rôle joué par ces artefacts dans le processus de compréhension de la tâche et dans l’appropriation des parcours. </alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>Conceiving and/or using of scenarios, in online training design, are complex tasks. For designers and users, these tasks are performed from an “open instruction”. Cognitive artefacts can be included into instructions, in order to improve instruction comprehension and resource appropriation. Within Pairform@nce, a French national project that aims to develop ICT competency for in-service teachers, several cognitive artefacts are joined with the instruction. They seek to facilitate comprehension and appropriation of scenarios, named “training paths”. The current paper presents a (<marquage typemarq="italique">a priori</marquage> and <marquage typemarq="italique">a posteriori</marquage>) study on the role that artefacts play in task comprehension and in path appropriation. </alinea>
+ </resume><grmotcle lang="fr"><motcle>Aide</motcle><motcle>consigne</motcle><motcle>Pairform@nce</motcle><motcle>compréhension</motcle><motcle>artefacts cognitifs</motcle></grmotcle><grmotcle lang="en"><motcle>Aid</motcle><motcle>instruction</motcle><motcle>Pairform@nce</motcle><motcle>comprehension</motcle><motcle>cognitive artefacts</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1012890ar" idproprio="1012890ar" lang="fr" ordseq="5" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="934" unite="ko">/revue/ritpu/2012/v9/n3/1012890ar.pdf</urlpdf>
+  <pagination>
+    <ppage>55</ppage>
+    <dpage>70</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Système d’aide adaptatif à base de traces </titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Karim</prenom>
+    <nomfamille>Sehaba</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Lumière Lyon 2, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:karim.sehaba@gmail.com" xlink:type="simple">karim.sehaba@gmail.com</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>L’objectif de notre travail est de développer un système d’aide adaptatif à base de traces d’interaction. Il s’agit de considérer les traces laissées par les utilisateurs comme sources de connaissances que le système peut exploiter pour générer des aides adaptées à leur utilisateur cible. Dans ce cadre, nous avons proposé des modèles permettant de représenter les traces, le profil utilisateur et les connaissances d’adaptation. Nous avons également proposé une méthode d’extraction de connaissances d’adaptation à partir d’une base de traces représentant les activités de plusieurs utilisateurs. Le domaine d’application de notre travail concerne l’aide à l’utilisation d’une plateforme d’apprentissage en ligne dans le cadre de la formation VCIel (Visualisation et conception infographiques en ligne).</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>The objective of this work is to develop an adaptive help system based on interaction traces. It consists in considering the traces left by the users as knowledge sources that the system can use in order to generate adapted help to the target user. In this context, we have proposed models for representing trace, user profile and adaptation knowledge. We have also proposed a method of knowledge extraction from a trace-based management system (TBMS) representing the activity traces of several users. The application domain of this work is the help in using an e-learning platform in the context of the VCIel training.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Aide basée sur le partage d’expériences</motcle><motcle>personnalisation des aides</motcle><motcle>trace d’interaction</motcle><motcle>système adaptatif</motcle><motcle>apprentissage en ligne</motcle></grmotcle><grmotcle lang="en"><motcle>Help based on sharing experiences</motcle><motcle>help personalization</motcle><motcle>interaction traces</motcle><motcle>adaptive system</motcle><motcle>e-learning</motcle></grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1012891ar" idproprio="1012891ar" lang="fr" ordseq="6" qualtraitement="minimal" typeart="article">
+  <urlpdf taille="393" unite="ko">/revue/ritpu/2012/v9/n3/1012891ar.pdf</urlpdf>
+  <pagination>
+    <ppage>71</ppage>
+    <dpage>83</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Synthèse de la journée d’étude sur la notion d’aide, le 1<exposant>er</exposant> juillet 2011, à Montpellier. « Notion d’aide dans un dispositif de formation en ligne : approches théoriques et méthodologiques »</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Chrysta </prenom>
+    <nomfamille>Pélissier</nomfamille>
+   </nompers>
+  <affiliation><alinea>Université Paul-Valéry, FRANCE</alinea>
+  </affiliation>
+  <courriel>
+ <liensimple xmlns:xlink="http://www.w3.org/1999/xlink" id="ls2" xlink:href="mailto:chrysta.pelisser@univ-montp2.fr" xlink:type="simple">chrysta.pelisser@univ-montp2.fr</liensimple>
+  </courriel>
+  </auteur>
+ </grauteur>
+ <resume typeresume="resume" lang="fr"><alinea>La rencontre du 1<exposant>er</exposant> juillet 2011 a permis à huit enseignants-chercheurs appartenant à trois disciplines différentes – les sciences du langage, la psychologie/sciences cognitives et l’informatique – d’échanger sur leurs recherches scientifiques en cours, menées sur la notion d’« aide » dans des dispositifs de formation à distance dans le supérieur.</alinea><alinea>Le bilan de cette journée laisse apparaitre des problématiques de recherche communes, des méthodologies scientifiques convergentes et des types d’aides spécifiques, mais aussi un positionnement scientifique commun.</alinea>
+ </resume>
+ <resume typeresume="resume" lang="en"><alinea>The meeting of July 1, 2011 has enabled eight faculty members belonging to three different disciplines – the language sciences, psychology/cognitive sciences and computer science – to discuss their ongoing studies, conducted on the concept of “assistance” in training facilities in higher education.</alinea><alinea>The results of this day reveal common research issues, convergent scientific methodologies and specific types of assistance, but also a common scientific position.</alinea>
+ </resume><grmotcle lang="fr"><motcle>Aide</motcle><motcle>apprentissage</motcle><motcle>rencontre</motcle><motcle>formation</motcle><motcle>caractérisation</motcle></grmotcle><grmotcle lang="en"><motcle>Assistance</motcle><motcle>learning</motcle><motcle>meetings</motcle><motcle>training</motcle><motcle>characterization</motcle></grmotcle>
+</liminaire>
+</article>
+</sommaire>

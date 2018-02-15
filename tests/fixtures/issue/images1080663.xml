@@ -1,0 +1,850 @@
+
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+          <copyright>
+            <year>1992</year>
+            <contribution>
+              <artificialperson>
+                <name>24 images inc.</name>
+              </artificialperson>
+              <contributiontype>
+                <code>droit</code>
+                <label lang="fr">Titulaire du droit d&apos;auteur</label>
+                <label lang="en">Copyright Holder</label>
+                <label lang="es">Titular del derecho de autor</label>
+              </contributiontype>
+              <ordering>1</ordering>
+            </contribution>
+            <copyrightdeclaration>
+              <code>tdr</code>
+              <label lang="fr">Tous droits réservés</label>
+              <label lang="en">All Rights Reserved</label>
+              <label lang="es">Reservados todos los derechos</label>
+            </copyrightdeclaration>
+          </copyright>
+          <publicationnumberingkeys>
+            <publicationtypecode>reg</publicationtypecode>
+            <years>
+              <year value="1992">
+                <periodcode>hiver</periodcode>
+              </year>
+            </years>
+          </publicationnumberingkeys>
+          <infosommaire>
+            <url>/culture/erudit/erudit/images1058019/images1080663/23339ac/</url>
+            <nbarticle>34</nbarticle>
+            <icone>/logosodep/erudit</icone>
+            <revue id="images1058019" lang="fr">
+              <titrerev>24 images</titrerev>
+              <titrerevabr>images</titrerevabr>
+              <idissn>0707-9389</idissn>
+              <idissnnum>1923-5097</idissnnum>
+              <directeur sexe="masculin">
+                <nompers>
+                  <prenom>Claude</prenom>
+                  <nomfamille>Racine</nomfamille>
+                </nompers>
+                <key>directeur</key>
+              </directeur>
+              <directeur sexe="masculin">
+                <fonction lang="fr">Éditeur</fonction>
+                <nompers>
+                  <prenom>Claude</prenom>
+                  <nomfamille>Racine</nomfamille>
+                </nompers>
+                <key>editeur</key>
+              </directeur>
+              <redacteurchef sexe="feminin" typerc="regulier">
+                <fonction lang="fr">Rédactrice adjointe</fonction>
+                <nompers>
+                  <prenom>Isabelle</prenom>
+                  <nomfamille>Richer</nomfamille>
+                </nompers>
+                <key>redactriceadjointe</key>
+              </redacteurchef>
+            </revue>
+            <numero id="images1080663">
+              <nonumero>59</nonumero>
+              <pub>
+                <periode>Hiver</periode>
+                <annee>1992</annee>
+              </pub>
+              <pubnum>
+                <date typedate="publication">2010-03-22</date>
+              </pubnum>
+              <grtheme id="th1">
+                <theme>David Cronenberg</theme>
+              </grtheme>
+              <grtheme id="th2">
+                <theme>La production au Québec</theme>
+                <sstheme>Cinq cinéastes sur le divan</sstheme>
+              </grtheme>
+            </numero>
+            <editeur>
+              <nomorg>24/30 I/S</nomorg>
+              <key>editeur</key>
+            </editeur>
+            <droitsauteur>Tous droits réservés © <nomorg>24 images inc.</nomorg>, 1992</droitsauteur>
+          </infosommaire>
+          <article idproprio="23339ac" idref="th2" lang="fr" ordseq="1" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="211" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23339ac.pdf</urlpdf>
+            <pagination>
+              <ppage>3</ppage>
+              <dpage>3</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>La production au Québec</surtitre>
+                <surtitre2>Éditorial</surtitre2>
+                <titre>Grandeur et décadence d’un petit commerce de cinéma</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">       
+           <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <nompers>
+                    <prenom>Claude</prenom>
+                    <nomfamille>Racine</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23306ac" idref="th2" lang="fr" ordseq="2" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="399" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23306ac.pdf</urlpdf>
+            <pagination>
+              <ppage>4</ppage>
+              <dpage>5</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>La production au Québec</surtitre>
+                <surtitre2>Entretiens</surtitre2>
+                <titre>Gilles Carle</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Claude</prenom>
+                    <nomfamille>Racine</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23307ac" idref="th2" lang="fr" ordseq="3" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="381" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23307ac.pdf</urlpdf>
+            <pagination>
+              <ppage>6</ppage>
+              <dpage>7</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>La production au Québec</surtitre>
+                <surtitre2>Entretiens</surtitre2>
+                <titre>Hubert-Yves Rose</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Claude</prenom>
+                    <nomfamille>Racine</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23308ac" idref="th2" lang="fr" ordseq="4" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="418" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23308ac.pdf</urlpdf>
+            <pagination>
+              <ppage>8</ppage>
+              <dpage>9</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>La production au Québec</surtitre>
+                <surtitre2>Entretiens</surtitre2>
+                <titre>Paul Tana</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Claude</prenom>
+                    <nomfamille>Racine</nomfamille>
+                  </nompers>        
+        </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23309ac" idref="th2" lang="fr" ordseq="5" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="383" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23309ac.pdf</urlpdf>
+            <pagination>
+              <ppage>10</ppage>
+              <dpage>11</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>La production au Québec</surtitre>
+                <surtitre2>Entretiens</surtitre2>
+                <titre>Jeanne Crépeau</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Claude</prenom>
+                    <nomfamille>Racine</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23310ac" idref="th2" lang="fr" ordseq="6" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="382" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23310ac.pdf</urlpdf>
+            <pagination>
+              <ppage>12</ppage>
+              <dpage>13</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>La production au Québec</surtitre>
+                <surtitre2>Entretiens</surtitre2>
+                <titre>Jacques Leduc</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+                <auteur id="au2">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Claude</prenom>
+                    <nomfamille>Racine</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23311ac" idref="th1" lang="fr" ordseq="7" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="371" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23311ac.pdf</urlpdf>
+            <pagination>
+              <ppage>16</ppage>
+              <dpage>17</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier David Cronenberg</surtitre>
+                <titre>Dossier David Cronenberg</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23312ac" idref="th1" lang="fr" ordseq="8" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="458" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23312ac.pdf</urlpdf>
+            <pagination>
+              <ppage>18</ppage>
+              <dpage>19</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier David Cronenberg</surtitre>
+                <titre>« Exterminer toute pensée rationnelle »</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Naked Lunch</marquage> de David Cronenberg</trefbiblio>       
+       </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23313ac" idref="th1" lang="fr" ordseq="9" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="1,2" unite="mo">/culture/erudit/erudit/images1058019/images1080663/23313ac.pdf</urlpdf>
+            <pagination>
+              <ppage>20</ppage>
+              <dpage>25</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier David Cronenberg</surtitre>
+                <titre>Entretien avec David Cronenberg</titre>
+                <sstitre>« Je peux très bien vivre sans tuer ma femme… »</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article idproprio="23314ac" idref="th1" lang="fr" ordseq="10" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="1" unite="mo">/culture/erudit/erudit/images1058019/images1080663/23314ac.pdf</urlpdf>
+            <pagination>
+              <ppage>26</ppage>
+              <dpage>31</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Dossier David Cronenberg</surtitre>
+                <titre>Enquête à Interzone</titre>
+                <sstitre>… sur quelques pistes à suivre dans l’univers de David Cronenberg</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Georges</prenom>
+                    <nomfamille>Privet</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23315ac" lang="fr" ordseq="11" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="974" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23315ac.pdf</urlpdf>
+            <pagination>
+              <ppage>38</ppage>
+              <dpage>42</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Suite au Festival du nouveau cinéma et de la vidéo de Montréal</surtitre>
+                <titre>Cent fragments de solitude</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gérard</prenom>
+                    <nomfamille>Grugeau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23316ac" lang="fr" ordseq="12" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="633" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23316ac.pdf</urlpdf>
+            <pagination>
+              <ppage>43</ppage>
+              <dpage>45</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Suite au Festival du nouveau cinéma et de la vidéo de Montréal</surtitre>
+                <titre>La route, l’errance : la fin du mythe?</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gilles</prenom>
+                    <nomfamille>Marsolais</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23317ac" lang="fr" ordseq="13" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="420" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23317ac.pdf</urlpdf>
+            <pagination>
+              <ppage>46</ppage>
+              <dpage>47</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Suite au Festival du nouveau cinéma et de la vidéo de Montréal</surtitre>
+                <titre>Jean-Luc Godard</titre>
+                <sstitre>Poète en temps de détresse</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23318ac" lang="fr" ordseq="14" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="993" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23318ac.pdf</urlpdf>
+            <pagination>
+              <ppage>48</ppage>
+              <dpage>51</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Suite au Festival du nouveau cinéma et de la vidéo de Montréal</surtitre>
+                <titre>Critiques</titre>
+              </grtitre>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23319ac" lang="fr" ordseq="15" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="256" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23319ac.pdf</urlpdf>
+            <pagination>
+              <ppage>52</ppage>
+              <dpage>52</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Suite au Festival du nouveau cinéma et de la vidéo de Montréal</surtitre>
+                <titre>Mouvement et tourments</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Paris s’éveille</marquage> d’Olivier Asselin</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23320ac" lang="fr" ordseq="16" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="810" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23320ac.pdf</urlpdf>
+            <pagination>
+              <ppage>53</ppage>
+              <dpage>56</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Suite au Festival du nouveau cinéma et de la vidéo de Montréal</surtitre>
+                <titre>Entretien avec Olivier Assayas</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <contribution>Propos recueillis par</contribution>
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23321ac" lang="fr" ordseq="17" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="450" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23321ac.pdf</urlpdf>
+            <pagination>
+              <ppage>64</ppage>
+              <dpage>65</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>Fragment de vie</titre>
+                <trefbiblio>    
+              <marquage typemarq="italique">Van Gogh</marquage> de Maurice Pialat</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marie-Claude</prenom>
+                    <nomfamille>Loiselle</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23322ac" lang="fr" ordseq="18" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="268" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23322ac.pdf</urlpdf>
+            <pagination>
+              <ppage>66</ppage>
+              <dpage>66</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>Sous le signe du paradoxe</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">The Pianist</marquage> de Claude Gagnon</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gilles</prenom>
+                    <nomfamille>Marsolais</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23323ac" lang="fr" ordseq="19" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="237" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23323ac.pdf</urlpdf>
+            <pagination>
+              <ppage>67</ppage>
+              <dpage>67</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>L’auteur et le studio</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Cape Fear</marquage> de Martin Scorsese</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Jean-Claude</prenom>
+                    <nomfamille>Marineau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23324ac" lang="fr" ordseq="20" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="462" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23324ac.pdf</urlpdf>
+            <pagination>
+              <ppage>68</ppage>
+              <dpage>69</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>Images d’une ville plurielle</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">Montréal vu par…</marquage> Patricia Rozema, Jacques Leduc, Michel Brault, Atom Egoyan, Léa Pool, Denys Arcand</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Yves</prenom>
+                    <nomfamille>Rousseau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23325ac" lang="fr" ordseq="21" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="400" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23325ac.pdf</urlpdf>
+            <pagination>
+              <ppage>70</ppage>
+              <dpage>71</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>L’Idaho des rêves</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">My Own Private Idaho</marquage> de Gus van Sant</trefbiblio>     
+         </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23326ac" lang="fr" ordseq="22" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="220" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23326ac.pdf</urlpdf>
+            <pagination>
+              <ppage>72</ppage>
+              <dpage>72</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>La communauté bombardée</titre>
+                <trefbiblio>
+                  <marquage typemarq="italique">The People under the Stairs</marquage> de Wes Craven</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Marco</prenom>
+                    <nomfamille>de Blois</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23327ac" lang="fr" ordseq="23" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="222" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23327ac.pdf</urlpdf>
+            <pagination>
+              <ppage>73</ppage>
+              <dpage>73</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Points de vue</surtitre>
+                <titre>L’hommelette</titre>
+                <trefbiblio>Moyen métrage. <marquage typemarq="italique">Les sauf-conduits</marquage> de Manon Briand</trefbiblio>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23328ac" lang="fr" ordseq="24" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="469" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23328ac.pdf</urlpdf>
+            <pagination>
+              <ppage>14</ppage>
+              <dpage>15</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <titre>Nouvelles vagues</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Yves</prenom>
+                    <nomfamille>Lafontaine</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23329ac" lang="fr" ordseq="25" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="491" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23329ac.pdf</urlpdf>
+            <pagination>
+              <ppage>32</ppage>
+              <dpage>33</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Lettre de Bruxelles</titre>
+                <sstitre>Quel cinéma européen?</sstitre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Thierry</prenom>
+                    <nomfamille>Horguelin</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23330ac" lang="fr" ordseq="26" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="481" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23330ac.pdf</urlpdf>
+            <pagination>
+              <ppage>34</ppage>
+              <dpage>35</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Marginal, minimal, normal</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23331ac" lang="fr" ordseq="27" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="254" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23331ac.pdf</urlpdf>
+            <pagination>
+              <ppage>35</ppage>
+              <dpage>35</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>
+                  <marquage typemarq="italique">Caught Looking</marquage> : un film que vous ne verrez peut-être jamais</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Jean-Claude</prenom>
+                    <nomfamille>Marineau</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23332ac" lang="fr" ordseq="28" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="228" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23332ac.pdf</urlpdf>
+            <pagination>
+              <ppage>36</ppage>
+              <dpage>36</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Contrechamp</surtitre2>
+                <titre>Montréal vu par… Yvan Adam</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Pierre</prenom>
+                    <nomfamille>Demers</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23333ac" lang="fr" ordseq="29" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="291" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23333ac.pdf</urlpdf>
+            <pagination>
+              <ppage>57</ppage>
+              <dpage>57</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>La vidéo</surtitre2>
+                <titre>Ennui en note</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Mario</prenom>
+                    <nomfamille>Côté</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23334ac" lang="fr" ordseq="30" qualtraitement="minimal" typeart="article">
+            <urlpdf taille="607" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23334ac.pdf</urlpdf>
+            <pagination>
+              <ppage>60</ppage>
+              <dpage>62</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Chroniques</surtitre>
+                <surtitre2>Festival en Abitibi-Témiscamingue</surtitre2>
+                <titre>Entre accueil et écueil</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>André</prenom>
+                    <nomfamille>Roy</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23335ac" lang="fr" ordseq="31" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="469" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23335ac.pdf</urlpdf>
+            <pagination>
+              <ppage>58</ppage>
+              <dpage>59</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <surtitre>Rétroprojection</surtitre>
+                <titre>
+                  <marquage typemarq="italique">On est au coton</marquage> de Denys Arcand</titre>
+              </grtitre>
+              <grauteur>
+                <auteur id="au1">
+                  <nompers>
+                    <prenom>Gilles</prenom>
+                    <nomfamille>Marsolais</nomfamille>
+                  </nompers>
+                </auteur>
+              </grauteur>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23336ac" lang="fr" ordseq="32" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="1,6" unite="mo">/culture/erudit/erudit/images1058019/images1080663/23336ac.pdf</urlpdf>
+            <pagination>
+              <ppage>74</ppage>
+              <dpage>80</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Vue panoramique (critique de 15 films)</titre>
+              </grtitre>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23337ac" lang="fr" ordseq="33" qualtraitement="minimal" typeart="compterendu">
+            <urlpdf taille="875" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23337ac.pdf</urlpdf>
+            <pagination>
+              <ppage>81</ppage>
+              <dpage>83</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Cin-écrits</titre>
+              </grtitre>
+            </liminaire>
+          </article>
+          <article horstheme="oui" idproprio="23338ac" lang="fr" ordseq="34" qualtraitement="minimal" typeart="autre">
+            <urlpdf taille="250" unite="ko">/culture/erudit/erudit/images1058019/images1080663/23338ac.pdf</urlpdf>
+            <pagination>
+              <ppage>84</ppage>
+              <dpage>84</dpage>
+            </pagination>
+            <liminaire>
+              <grtitre>
+                <titre>Les dix meilleurs films de 1991</titre>
+              </grtitre>
+            </liminaire>
+          </article>
+        </sommaire>

@@ -1,0 +1,851 @@
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:func="ca.umontreal.ca.cenr.quinoa">
+   <originator app="Quinoa" date="2016-01-26" username="ExcelStory"/>
+   <copyright>
+      <year>2016</year>
+      <contribution>
+         <artificialperson>
+            <name>Les éditions esse</name>
+         </artificialperson>
+         <contributiontype>
+            <code>droit</code>
+            <label lang="fr">Titulaire du droit d’auteur</label>
+            <label lang="en">Copyright Holder</label>
+            <label lang="es">Titular del derecho de autor</label>
+         </contributiontype>
+         <ordering>0</ordering>
+      </contribution>
+      <copyrightdeclaration>
+         <code>tdr</code>
+         <label lang="fr">Tous droits réservés</label>
+         <label lang="en">All Rights Reserved</label>
+         <label lang="es">Reservados todos los derechos</label>
+      </copyrightdeclaration>
+   </copyright>
+   <publicationnumberingkeys>
+      <publicationtypecode>reg</publicationtypecode>
+      <years>
+         <year value="2016">
+            <periodcode>hiver</periodcode>
+         </year>
+      </years>
+   </publicationnumberingkeys>
+   <infosommaire>
+      <url>/culture/esse045/esse02315</url>
+      <nbarticle>29</nbarticle>
+      <revue id="esse045" lang="fr en">
+         <titrerev>esse arts + opinions</titrerev>
+         <titrerevabr>esse</titrerevabr>
+         <grdescripteur lang="fr">
+            <descripteur typedesc="discipline">Arts visuels</descripteur>
+            <descripteur typedesc="discipline">Arts</descripteur>
+         </grdescripteur>
+         <idissn>0831-859X</idissn>
+         <idissnnum>1929-3577</idissnnum>
+         <directeur>
+            <nompers>
+               <prenom>Sylvette</prenom>
+               <nomfamille>Babin</nomfamille>
+            </nompers>
+         </directeur>
+         <redacteurchef typerc="regulier">
+            <nompers>
+               <prenom>Sylvette</prenom>
+               <nomfamille>Babin</nomfamille>
+            </nompers>
+         </redacteurchef>
+      </revue>
+      <numero id="esse02315" lang="fr">
+         <nonumero>86</nonumero>
+         <pub>
+            <periode>Hiver</periode>
+            <annee>2016</annee>
+         </pub>
+         <pubnum>
+            <date typedate="pubpapier">2016-01-15</date>
+         </pubnum>
+         <grtheme id="th1">
+            <theme>Géopolitique</theme>
+            <themeparal lang="en">Geopolitics</themeparal>
+         </grtheme>
+         <idisbnnum13>978-2-924345-09-2</idisbnnum13>
+      </numero>
+      <editeur>
+         <nomorg>Les éditions esse</nomorg>
+         <key>editeur</key>
+      </editeur>
+      <droitsauteur>Tous droits réservés © <nompers>
+            <prenom>Sylvette</prenom>
+            <nomfamille>Babin</nomfamille>
+         </nompers>, 2016</droitsauteur>
+   </infosommaire>
+   <article qualtraitement="minimal"
+            idproprio="80055ac"
+            typeart="autre"
+            lang="fr en"
+            ordseq="001">
+      <urlpdf taille="436.3" unite="ko">/culture/esse045/esse02315/80055ac.pdf</urlpdf>
+      <pagination>
+         <ppage>4</ppage>
+         <dpage>5</dpage>
+      </pagination>
+      <nbpage>2</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Édito</surtitre>
+            <titre>Art + géopolitique</titre>
+            <titreparal lang="en">Geopolitics + Art</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Sylvette</prenom>
+                  <nomfamille>Babin</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80056ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="002">
+      <urlpdf taille="1.4" unite="Mo">/culture/esse045/esse02315/80056ac.pdf</urlpdf>
+      <pagination>
+         <ppage>6</ppage>
+         <dpage>13</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>Architecture de réseau vs géométrie de la séparation</titre>
+            <titreparal lang="en">Architecture of Network vs. Geometry of Separation</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Lina</prenom>
+                  <nomfamille>Malfona</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80057ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="003">
+      <urlpdf taille="1.7" unite="Mo">/culture/esse045/esse02315/80057ac.pdf</urlpdf>
+      <pagination>
+         <ppage>14</ppage>
+         <dpage>21</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>After Cognitive Mapping</titre>
+            <titreparal lang="fr">Après la cartographie cognitive</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Michael</prenom>
+                  <nomfamille>Eddy</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80058ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="004">
+      <urlpdf taille="1.5" unite="Mo">/culture/esse045/esse02315/80058ac.pdf</urlpdf>
+      <pagination>
+         <ppage>22</ppage>
+         <dpage>29</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>The Surveillance Economy: Toward a Geopolitics of Personalization</titre>
+            <titreparal lang="fr">L’économie de la surveillance : vers une géopolitique de la personnalisation</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Emily</prenom>
+                  <nomfamille>Rosamond</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80059ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="005">
+      <urlpdf taille="1.7" unite="Mo">/culture/esse045/esse02315/80059ac.pdf</urlpdf>
+      <pagination>
+         <ppage>30</ppage>
+         <dpage>37</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>Offshore Havens and Supra-Jurisdictional Space</titre>
+            <titreparal lang="fr">Paradis fiscaux et espace extraterritorial</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Robin</prenom>
+                  <nomfamille>Lynch</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80060ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="006">
+      <urlpdf taille="1.1" unite="Mo">/culture/esse045/esse02315/80060ac.pdf</urlpdf>
+      <pagination>
+         <ppage>38</ppage>
+         <dpage>45</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>Survivre par-delà la ligne verte</titre>
+            <titreparal lang="en">Surviving Beyond The Green Line</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Mirna</prenom>
+                  <nomfamille>Boyadjian</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80061ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="007">
+      <urlpdf taille="1.6" unite="Mo">/culture/esse045/esse02315/80061ac.pdf</urlpdf>
+      <pagination>
+         <ppage>46</ppage>
+         <dpage>53</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>(Im)possible Bouquets</titre>
+            <titreparal lang="fr">Des bouquets (im)possibles</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Noa</prenom>
+                  <nomfamille>Bronstein</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80062ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="008">
+      <urlpdf taille="1.4" unite="Mo">/culture/esse045/esse02315/80062ac.pdf</urlpdf>
+      <pagination>
+         <ppage>54</ppage>
+         <dpage>61</dpage>
+      </pagination>
+      <nbpage>8</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>Jimmie Durham : le décentrement du monde</titre>
+            <titreparal lang="en">Jimmie Durham: Decentring the World</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Jean-Philippe</prenom>
+                  <nomfamille>Uzel</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80063ac"
+            typeart="article"
+            lang="fr en"
+            ordseq="009">
+      <urlpdf taille="1.1" unite="Mo">/culture/esse045/esse02315/80063ac.pdf</urlpdf>
+      <pagination>
+         <ppage>62</ppage>
+         <dpage>67</dpage>
+      </pagination>
+      <nbpage>6</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Dossier. Géopolitique / Feature. Geopolitics</surtitre>
+            <titre>Reading Contrapuntally: Geronimo Inutiq’s ARCTICNOISE</titre>
+            <titreparal lang="fr">Une lecture en contrepoint : ARCTICNOISE, de Geronimo Inutiq</titreparal>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Sydney</prenom>
+                  <nomfamille>Hart</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80064ac"
+            typeart="autre"
+            lang="fr en"
+            ordseq="010">
+      <urlpdf taille="632.4" unite="ko">/culture/esse045/esse02315/80064ac.pdf</urlpdf>
+      <pagination>
+         <ppage>68</ppage>
+         <dpage>73</dpage>
+      </pagination>
+      <nbpage>6</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Portfolio</surtitre>
+            <titre>Thomas Kneubühler</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Dominique</prenom>
+                  <nomfamille>Allard</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80065ac"
+            typeart="autre"
+            lang="fr en"
+            ordseq="011">
+      <urlpdf taille="230.1" unite="ko">/culture/esse045/esse02315/80065ac.pdf</urlpdf>
+      <pagination>
+         <ppage>74</ppage>
+         <dpage>77</dpage>
+      </pagination>
+      <nbpage>4</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Portfolio</surtitre>
+            <titre>Bouchra Khalili</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Dominique</prenom>
+                  <nomfamille>Allard</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80066ac"
+            typeart="autre"
+            lang="fr en"
+            ordseq="012">
+      <urlpdf taille="551.3" unite="ko">/culture/esse045/esse02315/80066ac.pdf</urlpdf>
+      <pagination>
+         <ppage>78</ppage>
+         <dpage>83</dpage>
+      </pagination>
+      <nbpage>6</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Portfolio</surtitre>
+            <titre>Trevor Paglen</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Dominique</prenom>
+                  <nomfamille>Allard</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80067ac"
+            typeart="article"
+            lang="fr"
+            ordseq="013">
+      <urlpdf taille="487.4" unite="ko">/culture/esse045/esse02315/80067ac.pdf</urlpdf>
+      <pagination>
+         <ppage>84</ppage>
+         <dpage>87</dpage>
+      </pagination>
+      <nbpage>4</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Articles</surtitre>
+            <titre>Architectes du quotidien. Sandra Calvo à la Biennale de La Havane</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Édith-Anne</prenom>
+                  <nomfamille>Pageot</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80068ac"
+            typeart="article"
+            lang="fr"
+            ordseq="014">
+      <urlpdf taille="463.2" unite="ko">/culture/esse045/esse02315/80068ac.pdf</urlpdf>
+      <pagination>
+         <ppage>88</ppage>
+         <dpage>90</dpage>
+      </pagination>
+      <nbpage>3</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Articles</surtitre>
+            <titre>Samuel Roy-Bois : La pyramide</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Marie-Ève</prenom>
+                  <nomfamille>Tanguay</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80069ac"
+            typeart="article"
+            lang="fr"
+            ordseq="015">
+      <urlpdf taille="391.9" unite="ko">/culture/esse045/esse02315/80069ac.pdf</urlpdf>
+      <pagination>
+         <ppage>91</ppage>
+         <dpage>93</dpage>
+      </pagination>
+      <nbpage>3</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Articles</surtitre>
+            <titre>Take me… Drop me</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Nathalie</prenom>
+                  <nomfamille>Desmet</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80070ac"
+            typeart="article"
+            lang="en"
+            ordseq="016">
+      <urlpdf taille="337.7" unite="ko">/culture/esse045/esse02315/80070ac.pdf</urlpdf>
+      <pagination>
+         <ppage>94</ppage>
+         <dpage>97</dpage>
+      </pagination>
+      <nbpage>4</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Articles</surtitre>
+            <titre>Deconstructing Nuclear Visions</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Jill</prenom>
+                  <nomfamille>Glessing</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80071ac"
+            typeart="autre"
+            lang="fr"
+            ordseq="017">
+      <urlpdf taille="82.5" unite="ko">/culture/esse045/esse02315/80071ac.pdf</urlpdf>
+      <pagination>
+         <ppage>98</ppage>
+         <dpage>99</dpage>
+      </pagination>
+      <nbpage>2</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Schizes</surtitre>
+            <titre>Borderline</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Michel F.</prenom>
+                  <nomfamille>Côté</nomfamille>
+               </nompers>
+            </auteur>
+            <auteur>
+               <nompers>
+                  <prenom>Catherine</prenom>
+                  <nomfamille>Lavoie-Marcus</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80072ac"
+            typeart="compterendu"
+            lang="en"
+            ordseq="018">
+      <urlpdf taille="351.2" unite="ko">/culture/esse045/esse02315/80072ac.pdf</urlpdf>
+      <pagination>
+         <ppage>100</ppage>
+         <dpage>101</dpage>
+      </pagination>
+      <nbpage>2</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Tonia Di Risio, Parts and Labour, Toronto, Red Head Gallery</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Zoë</prenom>
+                  <nomfamille>Chan</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80073ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="019">
+      <urlpdf taille="203.5" unite="ko">/culture/esse045/esse02315/80073ac.pdf</urlpdf>
+      <pagination>
+         <ppage>102</ppage>
+         <dpage>103</dpage>
+      </pagination>
+      <nbpage>2</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Chantal duPont, Montréal, Dazibao</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Tamar</prenom>
+                  <nomfamille>Tembeck</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80074ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="020">
+      <urlpdf taille="124.5" unite="ko">/culture/esse045/esse02315/80074ac.pdf</urlpdf>
+      <pagination>
+         <ppage>104</ppage>
+         <dpage>104</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Milutin Gubash, Ordinary folk, Montréal, Galerie Trois Points</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Sylvain</prenom>
+                  <nomfamille>Campeau</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80075ac"
+            typeart="compterendu"
+            lang="en"
+            ordseq="021">
+      <urlpdf taille="145" unite="ko">/culture/esse045/esse02315/80075ac.pdf</urlpdf>
+      <pagination>
+         <ppage>105</ppage>
+         <dpage>105</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Hajra Waheed, Asylum in the Sea, Montréal, Darling Foundry</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Béatrice</prenom>
+                  <nomfamille>Cloutier-Trépanier</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80076ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="022">
+      <urlpdf taille="218.7" unite="ko">/culture/esse045/esse02315/80076ac.pdf</urlpdf>
+      <pagination>
+         <ppage>106</ppage>
+         <dpage>107</dpage>
+      </pagination>
+      <nbpage>2</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Michel de Broin, La dissipation sur le virage, Paris, Galerie Eva Meyer</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Laetitia</prenom>
+                  <nomfamille>Chauvin</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80077ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="023">
+      <urlpdf taille="124.2" unite="ko">/culture/esse045/esse02315/80077ac.pdf</urlpdf>
+      <pagination>
+         <ppage>108</ppage>
+         <dpage>108</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Maria Hupfield, Stay Golden, Montréal, Galerie Hugues Charbonneau</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Claire</prenom>
+                  <nomfamille>Astier</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80078ac"
+            typeart="compterendu"
+            lang="en"
+            ordseq="024">
+      <urlpdf taille="149.5" unite="ko">/culture/esse045/esse02315/80078ac.pdf</urlpdf>
+      <pagination>
+         <ppage>109</ppage>
+         <dpage>109</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Antonia Hirsch, Negative Space, Toronto, Gallery TPW</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Alex</prenom>
+                  <nomfamille>Bowron</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80079ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="025">
+      <urlpdf taille="371.6" unite="ko">/culture/esse045/esse02315/80079ac.pdf</urlpdf>
+      <pagination>
+         <ppage>110</ppage>
+         <dpage>111</dpage>
+      </pagination>
+      <nbpage>2</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Paul Poet, My Talk with Florence, Marseille, FIDMarseille 2015</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Vanessa</prenom>
+                  <nomfamille>Morisset</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80080ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="026">
+      <urlpdf taille="144.6" unite="ko">/culture/esse045/esse02315/80080ac.pdf</urlpdf>
+      <pagination>
+         <ppage>112</ppage>
+         <dpage>112</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Grouped’ArtGravelArtGroup, This Duet That We’ve Already Done (so many times), Montréal, Agora de la danse</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Sylvain</prenom>
+                  <nomfamille>Verstricht</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80081ac"
+            typeart="compterendu"
+            lang="en"
+            ordseq="027">
+      <urlpdf taille="159.5" unite="ko">/culture/esse045/esse02315/80081ac.pdf</urlpdf>
+      <pagination>
+         <ppage>113</ppage>
+         <dpage>113</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Lara Kramer, Tame, Toronto, Weesageechak Begins to Dance 28</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Fabien</prenom>
+                  <nomfamille>Maltais-Bayda</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80082ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="028">
+      <urlpdf taille="105.2" unite="ko">/culture/esse045/esse02315/80082ac.pdf</urlpdf>
+      <pagination>
+         <ppage>114</ppage>
+         <dpage>114</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Alfred Jarry Archipelago : La Valse des pantins - Acte II, Noisiel, Ferme du Buisson</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Vanessa</prenom>
+                  <nomfamille>Morisset</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+   <article qualtraitement="minimal"
+            idproprio="80083ac"
+            typeart="compterendu"
+            lang="fr"
+            ordseq="029">
+      <urlpdf taille="450.6" unite="ko">/culture/esse045/esse02315/80083ac.pdf</urlpdf>
+      <pagination>
+         <ppage>115</ppage>
+         <dpage>115</dpage>
+      </pagination>
+      <nbpage>1</nbpage>
+      <liminaire>
+         <grtitre>
+            <surtitre>Comptes rendus / Reviews</surtitre>
+            <titre>Anne Cauquelin, Les Machines dans la tête, Paris, PUF</titre>
+         </grtitre>
+         <grauteur>
+            <auteur>
+               <nompers>
+                  <prenom>Nathalie</prenom>
+                  <nomfamille>Desmet</nomfamille>
+               </nompers>
+            </auteur>
+         </grauteur>
+      </liminaire>
+   </article>
+</sommaire>

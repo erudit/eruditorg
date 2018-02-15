@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="p0962873" date="2016-02-11" app="Tournesol 0.4.2"/>
+<copyright>
+	<year>2016</year>
+<contribution>
+<artificialperson>
+	<name>Les Éditions Intervention</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="en">Copyright Holder</label>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="es">Todos los derechos reservados</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2016">
+			<periodcode>hiver</periodcode>
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/culture/inter1068986/inter02349</url>
+  <nbarticle>30</nbarticle>
+  <revue id="inter1068986" lang="fr">
+    <titrerev>Inter</titrerev>
+    <sstitrerev>Art actuel</sstitrerev>
+    <titrerevabr>inter</titrerevabr>
+    <idissn>0825-8708</idissn>
+    <idissnnum>1923-2764</idissnnum>
+    <directeur sexe="masculin">
+      <fonction lang="fr">Directeur</fonction>
+      <nompers>
+        <prenom>Richard</prenom>
+        <nomfamille>Martel</nomfamille>
+      </nompers>
+      <key>directeur</key>
+    </directeur>
+    <redacteurchef idrefs="th1" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>Jonathan</prenom>
+        <nomfamille>Lamy</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+  </revue>
+  <numero id="inter02349">
+    <nonumero>122</nonumero>
+    <pub>
+      <periode>Hiver</periode>
+      <annee>2016</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2016-02-08</date>
+    </pubnum>
+    <grtheme id="th1">
+      <theme>Affirmation autochtone</theme>
+    </grtheme>
+    <idisbn13>978-2-924298-19-0</idisbn13>
+    <idisbnnum13>978-2-924298-20-6</idisbnnum13>
+  </numero>
+  <editeur>
+    <nomorg>Les Éditions Intervention</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Les Éditions Intervention</nomorg>, 2016</droitsauteur>
+</infosommaire>
+<article idproprio="80411ac" idref="th1" lang="fr" ordseq="1"
+  qualtraitement="minimal" typeart="autre">
+  <urlpdf taille="1,2" unite="mo">/culture/inter1068986/inter02349/80411ac.pdf</urlpdf>
+  <pagination>
+    <ppage>2</ppage>
+    <dpage>3</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Avant-propos</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom> Jonathan</prenom>
+    <nomfamille>Lamy</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80412ac" idref="th1" lang="fr" ordseq="2"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="3,4" unite="mo">/culture/inter1068986/inter02349/80412ac.pdf</urlpdf>
+  <pagination>
+    <ppage>4</ppage>
+    <dpage>19</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>L’onderha</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Guy</prenom>
+    <nomfamille>Sioui Durand</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80413ac" idref="th1" lang="fr" ordseq="3"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="436" unite="ko">/culture/inter1068986/inter02349/80413ac.pdf</urlpdf>
+  <pagination>
+    <ppage>20</ppage>
+    <dpage>20</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Le mot qui fait, wow, un mot qui fait, woh</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Hélène</prenom>
+    <nomfamille>Matte</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80414ac" idref="th1" lang="fr" ordseq="4"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="540" unite="ko">/culture/inter1068986/inter02349/80414ac.pdf</urlpdf>
+  <pagination>
+    <ppage>21</ppage>
+    <dpage>21</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Choc</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Natasha</prenom>
+    <nomfamille>Kanapé Fontaine</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80415ac" idref="th1" lang="fr" ordseq="5"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,5" unite="mo">/culture/inter1068986/inter02349/80415ac.pdf</urlpdf>
+  <pagination>
+    <ppage>22</ppage>
+    <dpage>25</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>De l’autoroute des larmes à la Terre de Feu. Performances et installations à l’attaque du féminicide et de la violence sexuelle</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Mélissa</prenom>
+    <nomfamille>Simard</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80416ac" idref="th1" lang="fr" ordseq="6"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,3" unite="mo">/culture/inter1068986/inter02349/80416ac.pdf</urlpdf>
+  <pagination>
+    <ppage>26</ppage>
+    <dpage>29</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Caché sous nos yeux. L’art contemporain autochtone sur la scène internationale</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jean-Philippe</prenom>
+    <nomfamille>Uzel</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80417ac" idref="th1" lang="fr" ordseq="7"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="843" unite="ko">/culture/inter1068986/inter02349/80417ac.pdf</urlpdf>
+  <pagination>
+    <ppage>30</ppage>
+    <dpage>33</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>D’Indigena à Sakahàn. Éléments de réflexion pour une affirmation autochtone dans l’art contemporain</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Marie-Charlotte</prenom>
+    <nomfamille>Franco</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80418ac" idref="th1" lang="fr" ordseq="8"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="977" unite="ko">/culture/inter1068986/inter02349/80418ac.pdf</urlpdf>
+  <pagination>
+    <ppage>34</ppage>
+    <dpage>37</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Zacharie Vincent et ses héritiers</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Louise</prenom>
+    <nomfamille>Vigneault</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80419ac" idref="th1" lang="fr" ordseq="9"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,2" unite="mo">/culture/inter1068986/inter02349/80419ac.pdf</urlpdf>
+  <pagination>
+    <ppage>38</ppage>
+    <dpage>42</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Filmer l’autochtone. De l’ethnographie à l’autonomisation</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Pierre</prenom>
+    <nomfamille>Bastien</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80420ac" idref="th1" lang="fr" ordseq="10"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="751" unite="ko">/culture/inter1068986/inter02349/80420ac.pdf</urlpdf>
+  <pagination>
+    <ppage>43</ppage>
+    <dpage>45</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>La photographie comme affirmation. Aperçu d’un mouvement d’autoreprésentation</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Sophie</prenom>
+    <nomfamille>Guignard</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80421ac" idref="th1" lang="fr" ordseq="11"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,4" unite="mo">/culture/inter1068986/inter02349/80421ac.pdf</urlpdf>
+  <pagination>
+    <ppage>46</ppage>
+    <dpage>49</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Michel Depatie. La traversée/Ashu-takusseu</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Chloë</prenom>
+    <nomfamille>Charce</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80422ac" idref="th1" lang="fr" ordseq="12"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="787" unite="ko">/culture/inter1068986/inter02349/80422ac.pdf</urlpdf>
+  <pagination>
+    <ppage>50</ppage>
+    <dpage>53</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Se raconter, c’est aussi s’affirmer !</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Claudia</prenom>
+    <nomfamille>Néron</nomfamille>
+   </nompers>
+  <affiliation><alinea>La Boîte Rouge vif</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au2">
+   <nompers>
+    <prenom>Olivier</prenom>
+    <nomfamille>Bergeron-Martel</nomfamille>
+   </nompers>
+  <affiliation><alinea>La Boîte Rouge vif</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au3">
+   <nompers>
+    <prenom>Vincent</prenom>
+    <nomfamille>Napish</nomfamille>
+   </nompers>
+  <affiliation><alinea>Communauté d’Ekuanitshit</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au4">
+   <nompers>
+    <prenom>Sylvie</prenom>
+    <nomfamille>Basile</nomfamille>
+   </nompers>
+  <affiliation><alinea>Communauté d’Ekuanitshit</alinea>
+  </affiliation>
+  </auteur>
+  <auteur id="au5">
+   <nompers>
+    <prenom>Rita</prenom>
+    <nomfamille>Mestokosho </nomfamille>
+   </nompers>
+  <affiliation><alinea>Communauté d’Ekuanitshit</alinea>
+  </affiliation>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80423ac" idref="th1" lang="fr" ordseq="13"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1,3" unite="mo">/culture/inter1068986/inter02349/80423ac.pdf</urlpdf>
+  <pagination>
+    <ppage>54</ppage>
+    <dpage>56</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>L’effervescence en art à Mashteuiatsh. Entrevue avec Sonia Robertson</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jonathan</prenom>
+    <nomfamille>Lamy</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80424ac" idref="th1" lang="fr" ordseq="14"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="612" unite="ko">/culture/inter1068986/inter02349/80424ac.pdf</urlpdf>
+  <pagination>
+    <ppage>57</ppage>
+    <dpage>57</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Affirmation littéraire à l’international. Retours sur Les nuits amérindiennes en Haïti</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jonathan</prenom>
+    <nomfamille>Lamy</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80425ac" idref="th1" lang="fr" ordseq="15"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="623" unite="ko">/culture/inter1068986/inter02349/80425ac.pdf</urlpdf>
+  <pagination>
+    <ppage>58</ppage>
+    <dpage>58</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Se tenir droit</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Naomi</prenom>
+    <nomfamille>Fontaine</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80426ac" idref="th1" lang="fr" ordseq="16"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="454" unite="ko">/culture/inter1068986/inter02349/80426ac.pdf</urlpdf>
+  <pagination>
+    <ppage>59</ppage>
+    <dpage>59</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Cri</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Natasha</prenom>
+    <nomfamille>Kanapé Fontaine</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80427ac" idref="th1" lang="fr" ordseq="17"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="454" unite="ko">/culture/inter1068986/inter02349/80427ac.pdf</urlpdf>
+  <pagination>
+    <ppage>59</ppage>
+    <dpage>59</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Poème</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Rita</prenom>
+    <nomfamille>Mestokosho</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80428ac" idref="th1" lang="fr" ordseq="18"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="439" unite="ko">/culture/inter1068986/inter02349/80428ac.pdf</urlpdf>
+  <pagination>
+    <ppage>60</ppage>
+    <dpage>60</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Le courage des mots</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Virginia</prenom>
+    <nomfamille>Pésémapéo Bordeleau</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80429ac" idref="th1" lang="fr" ordseq="19"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="439" unite="ko">/culture/inter1068986/inter02349/80429ac.pdf</urlpdf>
+  <pagination>
+    <ppage>60</ppage>
+    <dpage>60</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Une nuit</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Marie-Andrée</prenom>
+    <nomfamille>Gill</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80430ac" idref="th1" lang="fr" ordseq="20"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="1011" unite="ko">/culture/inter1068986/inter02349/80430ac.pdf</urlpdf>
+  <pagination>
+    <ppage>61</ppage>
+    <dpage>61</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Oka/Kanehsatake 25 ans plus tard</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Jonathan</prenom>
+    <nomfamille>Lamy</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80431ac" idref="th1" lang="fr" ordseq="21"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="750" unite="ko">/culture/inter1068986/inter02349/80431ac.pdf</urlpdf>
+  <pagination>
+    <ppage>62</ppage>
+    <dpage>63</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Oka</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Véronique</prenom>
+    <nomfamille>Hébert</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article idproprio="80432ac" idref="th1" lang="fr" ordseq="22"
+  qualtraitement="minimal" typeart="article">
+  <urlpdf taille="2" unite="mo">/culture/inter1068986/inter02349/80432ac.pdf</urlpdf>
+  <pagination>
+    <ppage>64</ppage>
+    <dpage>72</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Résistance, reconstruction et autodétermination culturelle des indiens d’Amériques</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Yves</prenom>
+    <nomfamille>Sioui Durand</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80433ac" lang="fr" ordseq="23"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="263" unite="ko">/culture/inter1068986/inter02349/80433ac.pdf</urlpdf>
+  <pagination>
+    <ppage>73</ppage>
+    <dpage>73</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre><marquage typemarq="italique">Les attracteurs</marquage> ou quelques paradoxes de l’art public [André Du Bois]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Nathalie</prenom>
+    <nomfamille>Côté</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80434ac" lang="fr" ordseq="24"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="711" unite="ko">/culture/inter1068986/inter02349/80434ac.pdf</urlpdf>
+  <pagination>
+    <ppage>74</ppage>
+    <dpage>75</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre>Le vécu de l’art [Lorraine Beaulieu]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Anne</prenom>
+    <nomfamille>Pilorget</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80435ac" lang="fr" ordseq="25"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="1,9" unite="mo">/culture/inter1068986/inter02349/80435ac.pdf</urlpdf>
+  <pagination>
+    <ppage>76</ppage>
+    <dpage>77</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre>En vitrine et au travers [Julie Bernier]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Frédérique</prenom>
+    <nomfamille>Hamelin</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80436ac" lang="fr" ordseq="26"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="883" unite="ko">/culture/inter1068986/inter02349/80436ac.pdf</urlpdf>
+  <pagination>
+    <ppage>78</ppage>
+    <dpage>79</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre>L’éphémère au présent [Guillaume D. Cyr]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Anne</prenom>
+    <nomfamille>Pilorget</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80437ac" lang="fr" ordseq="27"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="720" unite="ko">/culture/inter1068986/inter02349/80437ac.pdf</urlpdf>
+  <pagination>
+    <ppage>80</ppage>
+    <dpage>81</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre>Faut-il brûler le Lieu ? [Steven Girard]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Nathalie</prenom>
+    <nomfamille>Côté</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80438ac" lang="fr" ordseq="28"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="410" unite="ko">/culture/inter1068986/inter02349/80438ac.pdf</urlpdf>
+  <pagination>
+    <ppage>82</ppage>
+    <dpage>83</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre>Les travaux de Jeff Huckleberry [Art Nomade]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Michaël</prenom>
+    <nomfamille>La Chance</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80439ac" lang="fr" ordseq="29"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="801" unite="ko">/culture/inter1068986/inter02349/80439ac.pdf</urlpdf>
+  <pagination>
+    <ppage>84</ppage>
+    <dpage>85</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+  <surtitre>Topos</surtitre>
+                  <titre>Chaos II [Journée de réflexion du RAIQ]</titre>
+                
+         </grtitre>
+ <grauteur>
+  <auteur id="au1">
+   <nompers>
+    <prenom>Nathalie</prenom>
+    <nomfamille>Côté</nomfamille>
+   </nompers>
+  </auteur>
+ </grauteur>
+</liminaire>
+</article>
+<article horstheme="oui" idproprio="80440ac" lang="fr" ordseq="30"
+  qualtraitement="minimal" typeart="compterendu">
+  <urlpdf taille="192" unite="ko">/culture/inter1068986/inter02349/80440ac.pdf</urlpdf>
+  <pagination>
+    <ppage>86</ppage>
+    <dpage>87</dpage>
+  </pagination>
+<liminaire>
+ <grtitre>
+                  <titre>Reçu au Lieu</titre>
+                
+         </grtitre>
+</liminaire>
+</article>
+</sommaire>

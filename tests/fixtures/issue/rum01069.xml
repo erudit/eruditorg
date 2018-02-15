@@ -1,0 +1,1688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sommaire xmlns:xlink="http://www.w3.org/1999/xlink">
+<originator username="robichma" date="2014-04-23" app="Tournesol 0.4.2"/>
+<copyright>
+	<year>2014</year>
+<contribution>
+<artificialperson>
+	<name>Revue de l’Université de Moncton</name>
+</artificialperson>
+<contributiontype>
+	<code>droit</code>
+	<label lang="fr">Titulaire du droit d'auteur</label>
+	<label lang="en">Copyright Holder</label>
+	<label lang="es">Titular del derecho de autor</label>
+</contributiontype>
+	<ordering>0</ordering>
+</contribution>
+<copyrightdeclaration>
+	<code>tdr</code>
+	<label lang="fr">Tous droits réservés</label>
+	<label lang="en">All Rights Reserved</label>
+	<label lang="es">Reservados todos los derechos</label>
+</copyrightdeclaration>
+</copyright>
+<publicationnumberingkeys>
+	<publicationtypecode>reg</publicationtypecode>
+	<years>
+		<year value="2011">
+		</year>
+	</years>
+</publicationnumberingkeys><infosommaire>
+  <url>/revue/rum/2011/v42/n1-2</url>
+  <nbarticle>15</nbarticle>
+  <revue id="rum73" lang="fr">
+    <titrerev>Revue de l’Université de Moncton</titrerev>
+    <titrerevabr>rum</titrerevabr>
+    <idissnnum>1712-2139</idissnnum>
+    <directeur sexe="masculin">
+      <fonction lang="fr">Directeur</fonction>
+      <nompers>
+        <prenom>Serge</prenom>
+        <nomfamille>Jolicoeur</nomfamille>
+      </nompers>
+      <key>directeur</key>
+    </directeur>
+    <redacteurchef idrefs="th1" sexe="masculin" typerc="invite">
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+      <key>redacteurchefinvite</key>
+    </redacteurchef>
+  </revue>
+  <numero id="rum01069">
+    <volume>42</volume>
+    <nonumero>1</nonumero>
+    <nonumero>2</nonumero>
+    <pub>
+      <annee>2011</annee>
+    </pub>
+    <pubnum>
+      <date typedate="publication">2014-01-15</date>
+    </pubnum>
+    <grtheme id="th1">
+      <theme>L’énigme du social dans le roman africain</theme>
+    </grtheme>
+    <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+      <alinea>
+        <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+      <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+      <auteur>
+        <nompers>
+          <prenom>Justin</prenom>
+          <autreprenom>K.</autreprenom>
+          <nomfamille>Bisanswa</nomfamille>
+        </nompers>
+      </auteur>
+    </notegen>
+  </numero>
+  <editeur>
+    <nomorg>Revue de l’Université de Moncton</nomorg>
+    <key>editeur</key>
+  </editeur>
+  <droitsauteur>Tous droits réservés © <nomorg>Revue de l’Université de Moncton</nomorg>,
+      2014</droitsauteur>
+</infosommaire>
+<article doi="10.7202/1021294ar" idproprio="1021294ar" idref="th1"
+  lang="fr" ordseq="1" qualtraitement="complet" typeart="autre">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021294ar.html</urlhtml>
+  <urlpdf taille="318" unite="ko">/revue/rum/2011/v42/n1-2/1021294ar.pdf</urlpdf>
+  <pagination>
+    <ppage>1</ppage>
+    <dpage>17</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+        <titre>Avant-propos<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        
+    <nomfamille>Bisanswa</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université Laval</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+<article doi="10.7202/1021295ar" idproprio="1021295ar" idref="th1"
+  lang="fr" ordseq="2" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021295ar.html</urlhtml>
+  <urlpdf taille="414" unite="ko">/revue/rum/2011/v42/n1-2/1021295ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021295ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>19</ppage>
+    <dpage>49</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Petites sociologies de la déviance et des « gradins sociaux » chez Alain
+        Mabanckou<renvoi id="re1no1" idref="no1" typeref="note">1</renvoi></titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        
+    <nomfamille>Bisanswa<renvoi id="re1no2" idref="no2" typeref="note">2</renvoi></nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Titulaire de la Chaire de recherche du Canada en littératures africaines et
+          Francophonie, Université Laval</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Cet article se propose d’analyser les modalités par lesquelles les personnages d’Alain
+        Mabanckou peuvent être les médiateurs d’une interprétation. Loin des mythes et des
+        stéréotypes de lecture, il esquisse la pratique romanesque de Mabanckou pensée comme énoncé
+        et simple représentation, mais comme moyen d’analyser les rapports sociaux. À l’intersection
+        d’une rhétorique et d’une sociologie, il interroge ces petites sociologies de terrain à même
+        les textes, tout près de ceux-ci et dans le dialogue des uns avec les autres, mettant
+        l’accent plus sur les textes que sur leur contexte d’émergence. On s’attachera à l’analyse
+        sociale des groupes et de la déviance ainsi que des enjeux des rapports entre ces groupes
+        sociaux. On soulignera comment les romans entrevoient l’analyse de cette représentation
+        dualiste des groupes sociaux, alors que la critique, concentrée sur une large part de
+        l’exégèse de Mabanckou, s’intéresse généralement aux images négatives concernant le Noir qui
+        encombrent ses romans.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>This article proposes to analyze the ways in which Alain Mabanckou’s characters are
+        mediators of an interpretation. Far from reader myths and stereotypes, the study surveys
+        Mabanckou’s practice of the novel, seen as a simple representation, but as a means of
+        analyzing social relations. At the intersection between rhetoric and sociology, it examines
+        the text as a site of sociological analysis, placing emphasis more on the texts than on
+        their contexts. The article will focus on the social analysis of groups and on deviance, as
+        well as the consequences of relations between social groups. The article will highlight how
+        the novels participate in analyzing this dualist representation of social groups, while
+        literary criticism concentrating on a large part of Mabanckou’s work is generally interested
+        in the weight of negative images of Black people in his novels.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>sociologie</motcle>
+      <motcle>rhétorique</motcle>
+      <motcle>univers romanesque de Mabanckou</motcle>
+      <motcle>distinction sociale</motcle>
+      <motcle>imagerie sociale</motcle>
+      <motcle>dialectique des rapports</motcle>
+      <motcle>imaginaire de la déviance</motcle>
+      <motcle>classes et classements</motcle>
+      <motcle>projet vériste</motcle>
+      <motcle>déterminisme</motcle>
+      <motcle>roman policier</motcle>
+      <motcle>ironie</motcle>
+      <motcle>humour</motcle>
+      <motcle>désinvolture</motcle>
+      <motcle>métonymie</motcle>
+      <motcle>réalisme africain</motcle>
+      <motcle>lutte pour la domination</motcle>
+      <motcle>fonction médiatrice</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>sociology</motcle>
+      <motcle>rhetoric</motcle>
+      <motcle>Mabanckou’s literary universe</motcle>
+      <motcle>social distinction</motcle>
+      <motcle>social imagery</motcle>
+      <motcle>dialectic of relations</motcle>
+      <motcle>imaginary of defiance</motcle>
+      <motcle>class and classing</motcle>
+      <motcle>determinism</motcle>
+      <motcle>crime novel</motcle>
+      <motcle>irony</motcle>
+      <motcle>humour</motcle>
+      <motcle>metonymy</motcle>
+      <motcle>African realism</motcle>
+      <motcle>struggle for domination</motcle>
+      <motcle>mediation</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021296ar" idproprio="1021296ar" idref="th1"
+  lang="fr" ordseq="3" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021296ar.html</urlhtml>
+  <urlpdf taille="300" unite="ko">/revue/rum/2011/v42/n1-2/1021296ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021296ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>51</ppage>
+    <dpage>64</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>La construction du lien social dans les romans d’Alain Mabanckou</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Anthony</prenom>
+        
+    <nomfamille>Mangeon</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Strasbourg</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Forte de neuf fictions, l’oeuvre romanesque d’Alain Mabanckou présente à ce jour une
+        grande cohérence. D’un roman à l’autre, le corps social semble se structurer suivant une
+        logique relationnelle du <marquage typemarq="italique">redoublement systématique</marquage>
+        – lequel va du désir mimétique, installé au coeur des formes d’imitation et d’identification
+        sociales, aux duplications et interférences entre monde humain et monde animal, voire entre
+        « réalité » et « monde de l’invisible ». En explorant cette oeuvre romanesque qui fait du
+        recoupement et du redoublement les forces majeures de sa cohérence, cet article met en
+        relief la part qu’elle confère au mythe dans la construction du social, et par là même,
+        donne à mieux comprendre la place déterminante qu’y joue la littérature dès qu’il s’agit,
+        non plus simplement d’en interpréter, mais d’en recréer le sens.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>Out of its nine novels, Alain Mabanckou has conceived a very cohesive literary work so
+        far. From one novel to the other, the social body seems indeed to be structured by the same
+        relational logic of systematic doubling. Such a logic runs from the mimetic desire at work
+        within different forms of social identification and imitation, to various interferences and
+        duplications between human beings and animals, or between the living world and the invisible
+        world. Exploring these different ways of structuring fiction through duplication, this paper
+        underscores the major part endorsed by mythical elements within African society, and it
+        underlines the role of literature not only in interpreting but also in recreating their
+        meaning.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>roman</motcle>
+      <motcle>imitation</motcle>
+      <motcle>double</motcle>
+      <motcle>mythe</motcle>
+      <motcle>intertexte</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>novel</motcle>
+      <motcle>imitation</motcle>
+      <motcle>double</motcle>
+      <motcle>mythe</motcle>
+      <motcle>intertextuality</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021297ar" idproprio="1021297ar" idref="th1"
+  lang="fr" ordseq="4" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021297ar.html</urlhtml>
+  <urlpdf taille="385" unite="ko">/revue/rum/2011/v42/n1-2/1021297ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021297ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>65</ppage>
+    <dpage>85</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Le roman comme miroir critique du droit<renvoi id="re1no1" idref="no1" typeref="note"
+        >1</renvoi></titre>
+      <sstitre>Une lecture de <marquage typemarq="italique">Ces fruits si doux de l’arbre à
+        pain</marquage> de Tchicaya U Tam’si</sstitre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Kasereka</prenom>
+        
+    <nomfamille>Kavwahirehi</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université d’Ottawa</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Cet article analyse la représentation du droit et de l’homme de droit dans <marquage
+        typemarq="italique">Les fruits si doux de l’arbre à pain</marquage> de Tchicaya U’Tamsi,
+        roman dans lequel le personnage principal est un juge. Le premier objectif est de
+        problématiser les rapports d’homologie ou d’opposition entre la fiction littéraire et le
+        droit en tant que ce dernier se présente comme un discours à prétention scientifique. Le
+        deuxième objectif est de montrer, par le biais de l’analyse de la trajectoire de Raymond
+        Poaty, le héros de Tchicaya, que le droit et l’homme de droit peuvent trouver en la fiction
+        littéraire un miroir ou un espace de réflexivité qui leur permet d’échapper aux tautologies
+        intradisciplinaires.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>This essay analyzes the representation of Law and the Lawyer in <marquage
+        typemarq="italique">Les Fruits si doux de l’arbre à pain</marquage>, a novel in which the
+        main character is a judge. The first objective is to examine the relationship of homology or
+        opposition between literary fiction and the Law as the later stands as a scientific
+        discourse. The second objective is to show, through the analysis of the trajectory of
+        Raymond Poaty, the main character of the novel, how the literary fiction can be a mirror or
+        a space of reflexivity which can help the Law and the Lawyer to escape intradisciplinary
+        tautologies.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>roman</motcle>
+      <motcle>droit</motcle>
+      <motcle>imaginaire social</motcle>
+      <motcle>réflexivité</motcle>
+      <motcle>miroir</motcle>
+      <motcle>tradition</motcle>
+      <motcle>modernité</motcle>
+      <motcle>Tchicaya U’Tamsi</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>fiction</motcle>
+      <motcle>Law</motcle>
+      <motcle>social imaginary</motcle>
+      <motcle>reflexivity</motcle>
+      <motcle>mirror</motcle>
+      <motcle>tradition</motcle>
+      <motcle>modernity</motcle>
+      <motcle>Tchicaya U’Tamsi</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021298ar" idproprio="1021298ar" idref="th1"
+  lang="fr" ordseq="5" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021298ar.html</urlhtml>
+  <urlpdf taille="335" unite="ko">/revue/rum/2011/v42/n1-2/1021298ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021298ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>87</ppage>
+    <dpage>99</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Dynamiques et enjeux interculturels du texte littéraire africain : l’exemple de
+        <marquage typemarq="italique">Peuls </marquage>de Tierno Monémembo</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Bacary</prenom>
+        
+    <nomfamille>Sarr</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université Cheikh Anta Diop de Dakar</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Cette étude s’articule autour de la question des enjeux interculturels du texte
+        littéraire africain .Elle interroge l’espace du texte dans ses multiples interférences, ces
+        influences socio-culturelles et le travail de réflexion et de création qu’y mènent le
+        critique et l’écrivain. C’est cette dynamique de croisement et de métissage au coeur du
+        texte littéraire africain qui font de lui le lieu d’une constante évolution des formes et
+        des codes; et lui confèrent un statut et une structure fondamentalement modernes, lisibles
+        dans le roman<marquage typemarq="italique"> Peuls</marquage> de Tierno Monénembo, support de
+        notre réflexion.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>This paper is concerned with the kernel issue of the intercultural challenges that run
+        under tide through the literary African text. It questions the space of the text, its socio
+        cultural influences and the reflexion and creative work done by both the writer and the
+        critic about it. It is indeed, that cross influence dynamics and that mixture happening in
+        the core of the text turning it into a place where forms and codes everlastingly evolve and
+        confer to the text a structure and a status, definitely modern , readable in Tierno
+        Monenembo’s novel <marquage typemarq="italique">Peuls</marquage>, that has inspired the
+        present study.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>littérature</motcle>
+      <motcle>histoire</motcle>
+      <motcle>identité</motcle>
+      <motcle>oralité</motcle>
+      <motcle>modernité</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>literature</motcle>
+      <motcle>history</motcle>
+      <motcle>identity</motcle>
+      <motcle>orality</motcle>
+      <motcle>complexity</motcle>
+      <motcle>modernity</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021299ar" idproprio="1021299ar" idref="th1"
+  lang="fr" ordseq="6" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021299ar.html</urlhtml>
+  <urlpdf taille="354" unite="ko">/revue/rum/2011/v42/n1-2/1021299ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021299ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>101</ppage>
+    <dpage>114</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>La plasticité du roman africain contemporain : l’exemple de Kossi Éfoui</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Sonia</prenom>
+        
+    <nomfamille>Le Moigne-Euzenot</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Lycée d’enseignement général St Joseph, Lorient</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>L’oeuvre romanesque de Kossi Éfoui est marquée par l’urgence d’Être. Kossi Éfoui donne
+        le plus souvent un appareil photo à l’un de ses personnages. Photos de presse, photos
+        d’artiste ou photos d’identité fixent des images que le narrateur regarde. Elles deviennent
+        objet du récit. Deux langages différents se côtoient, ils sont le véhicule d’une nouvelle
+        réalité à représenter et à se représenter. Puisque pour Kossi Éfoui un mot n’est jamais
+        épuisé dans ce qu’il a à dire, l’esthétique romanesque de cet écrivain semble, d’un livre à
+        l’autre user de la plasticité de ce genre littéraire pour s’en servir comme d’un
+        « révélateur » de l’acte de lire confronté aux mutations techniques de notre monde, pour
+        s’en servir -aussi - comme "révélateur" de l’homme d’aujourd’hui. La lecture est un acte à
+        éprouver.</alinea>
+      <alinea>Ce dramaturge écrit des romans pour, dit-il, pouvoir prendre son temps. De fait, la
+        forme romanesque est féconde.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>The romantic work of Kossi Éfoui is marked by the urgency to Be. Kossi Éfoui mostly
+        gives one of his characters a camera. Press, artist's or ID photos fix images the narrator
+        looks at. They become object of the narrative. Two different languages mix, they are the
+        vehicle of a new reality to be represented and to represent. Because for Kossi Éfoui a word
+        is never exhausted in what it has to say, the romantic aesthetics of this writer seems, from
+        a book to the other, to use the plasticity of this literary genre to use it as a
+        "revelation" of the act of reading confronted with the technical transformations of our
+        world, to use it as well, as the "revelation" of the man of today. The reading is an act to
+        be felt.</alinea>
+      <alinea>This playwright says he writes novels to be able to take his time. Actually, the
+        romantic shape is fertile.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>roman</motcle>
+      <motcle>Togo</motcle>
+      <motcle>photographie</motcle>
+      <motcle>lecture</motcle>
+      <motcle>identité</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>novel</motcle>
+      <motcle>Togo</motcle>
+      <motcle>film photography</motcle>
+      <motcle>reading</motcle>
+      <motcle>identity</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021300ar" idproprio="1021300ar" idref="th1"
+  lang="fr" ordseq="7" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021300ar.html</urlhtml>
+  <urlpdf taille="305" unite="ko">/revue/rum/2011/v42/n1-2/1021300ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021300ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>115</ppage>
+    <dpage>128</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Le peuple dans le roman policier francophone : Discours et Interdiscours</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Sylvère</prenom>
+        
+    <nomfamille>Mbondobari</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université Omar Bongo (Libreville)</alinea>
+        
+  </affiliation>
+  <affiliation>
+        <alinea>Université de la Sarre (Saarbrücken)</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Le présent article propose une lecture du roman policier francophone à partir de la
+        notion des contre-littératures de Bernard Mouralis et celle de la variation générique. Alors
+        que la première approche accorde une attention particulière aux cultures populaires « la
+        différence du dehors vs la différence du dedans », notamment dans leurs relations avec les
+        cultures dominantes, la seconde insiste sur la <marquage typemarq="italique"
+        >générécité</marquage>. Ces deux approches convergent vers une seule et unique conception de
+        la littérature : celle du refus des déterminismes et des hiérarchies de tous ordres. L’étude
+        montre que tout est dans le détail. Le statut du texte est dans le détail.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>This article propose to study of the Francophone detective novel from Bernard
+        Mouralis' concept of <marquage typemarq="italique">counter-literature </marquage>and from
+        the concept of gender variation. Two approaches are at stake. While the first approach
+        dwells mostly on popular cultures, the antagonism of the outer versus that of the inner,
+        more specifically in their relationship with the prevailing culture, the second one
+        emphasizes the notion of gender. Both approaches are geared toward only one perception of
+        literature that is the rejection of established laws and any form of authority. From this
+        study, we gather that everything lies in the detail and the status of the text lies as well
+        in detail.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>roman policier</motcle>
+      <motcle>francophonie</motcle>
+      <motcle>contre-littératures</motcle>
+      <motcle>généricité</motcle>
+      <motcle>interdiscursivité</motcle>
+      <motcle>postcolonialisme</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>detective novel</motcle>
+      <motcle>francophone culture</motcle>
+      <motcle>counter-literatures</motcle>
+      <motcle>interdiscursivity</motcle>
+      <motcle>postcolonialism</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021301ar" idproprio="1021301ar" idref="th1"
+  lang="fr" ordseq="8" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021301ar.html</urlhtml>
+  <urlpdf taille="338" unite="ko">/revue/rum/2011/v42/n1-2/1021301ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021301ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>129</ppage>
+    <dpage>152</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Le pessimisme dans <marquage typemarq="italique">Les Soleils des
+        Indépendances</marquage> d’Ahmadou Kourouma</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Mawuloe</prenom>
+        <autreprenom>Koffi</autreprenom>
+        
+    <nomfamille>Kodah</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Central University College, Accra</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Cet article examine le thème du pessimisme comme une perspective dominante dans
+        <marquage typemarq="italique">Les Soleils des Indépendances</marquage> d’Ahmadou Kourouma.
+        Il retrace le pessimisme à travers le jeu des personnages et les indices spatio-temporels
+        tels que Kourouma les déploie dans ce texte. À cet égard, l’article y examine certains des
+        personnages clés dans le cadre spatio-temporel dans lequel ils évoluent. L’examen de ces
+        phénomènes révèle la réalité de l’idée de l’Afro-pessimisme. L’indépendance de l’Afrique
+        telle que perçue à travers ces trois phénomènes littéraires que sont les personnages, la
+        spatialité et la temporalité, est un échec total sur tous les fronts, un concept vide de
+        substance. Par conséquent, l’étude conclut que la mort tragique de Fama, le protagoniste du
+        texte, dans sa tentative de reconstruction de sa dignité et humanité perdues sous « les
+        soleils des indépendances » est une évidente manifestation et concrétisation du pessimisme
+        dans ce texte romanesque d’Ahmadou Kourouma<marquage typemarq="italique"
+        >.</marquage></alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>This paper examines the theme of pessimism as a dominant view in Ahmadou Kourouma’s
+        novel,<marquage typemarq="italique"> Les Soleils des Indépendances</marquage> (<marquage
+        typemarq="italique">The Suns of Independence</marquage>). The paper traces the theme of
+        pessimism through characterization, setting and time indicators as deployed by Kourouma in
+        the text. In this regard, the paper examines some key characters, the various environments
+        or locations where they are found and the various moments, periods and time at which they
+        evolve. The examination of these phenomena points to the reality of the idea of
+        Afro-pessimism. The Independence of Africa as perceived through the three literary phenomena
+        is a complete failure, an empty concept without substance.</alinea>
+      <alinea>The study concludes that the tragic death of Fama, the protagonist of the novel, in
+        his attempt to reconstruct his lost dignity and humanity under the ‘suns of independence’ is
+        the clear manifestation and concretization of pessimism in the novel <marquage
+        typemarq="italique">Les Soleils des Indépendances.</marquage></alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>pessimisme</motcle>
+      <motcle>afro-pessimisme</motcle>
+      <motcle>caractérisation</motcle>
+      <motcle>spatialité</motcle>
+      <motcle>temporalité</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>pessimism</motcle>
+      <motcle>Afro-pessimism</motcle>
+      <motcle>characterization</motcle>
+      <motcle>spatiality</motcle>
+      <motcle>temporality</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021302ar" idproprio="1021302ar" idref="th1"
+  lang="fr" ordseq="9" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021302ar.html</urlhtml>
+  <urlpdf taille="383" unite="ko">/revue/rum/2011/v42/n1-2/1021302ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021302ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>153</ppage>
+    <dpage>174</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Jeu littéraire et transformation du sujet <marquage typemarq="italique"
+        >diasporal :</marquage> La postmodernité de Léonora Miano</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Buata</prenom>
+        <autreprenom>B.</autreprenom>
+        
+    <nomfamille>Malela</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Centre Universitaire de formation et de recherche de Mayotte</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Notre propos porte sur le jeu littéraire, entendu comme le réseau littéraire dans
+        lequel évoluent des agents comme Kossi Efoui, Calixthe Beyala, Sami Tchak, Fatou Diome,
+        Abdourahman Waberi, Alain Mabanckou, Léonora Miano et bien d’autres encore. Plus
+        précisément, il s’agit d’en appréhender l’incidence sur le sujet diasporal qui tente de se
+        (ré)inventer une postmodernité, et ce, à partir de l’exemple paradigmatique de Léonora
+        Miano. L’objectif principal vise à articuler sa production littéraire <marquage
+        typemarq="italique">Tels des astres éteints</marquage> (2008) et <marquage
+        typemarq="italique">Blues pour Élise</marquage> (2010) avec le débat portant sur la
+        modernité et la postmodernité dans l’espace public en France. D’où l’interrogation
+        suivante : par quelle modalité se constitue-t-elle une singularité littéraire dans la
+        continuité de l’existant?</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>Our purpose is to study the game literary, understood as the literary network where
+        change agents such as Kossi Efoui, Calixthe Beyala, Sami Tchak, Fatou Diome, Abdourahman
+        Waberi, Alain Mabanckou, Leonora Miano and many others. More specifically, we want
+        understand the impact on diasporal subject what attempts of to (re) invent a Postmodernity,
+        and, from the paradigmatic example of Leonora Miano. The main objective is to articulate her
+        literary production as <marquage typemarq="italique">Tels des astres éteints</marquage>
+        (2008) et <marquage typemarq="italique">Blues pour Élise</marquage> (2010) with the debate
+        on modernity and Postmodernity in the public space in France. The following question: by
+        what mode is it a literary singularity in the continuity of the existing?</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>littérature africaine</motcle>
+      <motcle>études francophones</motcle>
+      <motcle>postmodernité</motcle>
+      <motcle>études postcoloniales</motcle>
+      <motcle>sociologie de la littérature</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>African literature</motcle>
+      <motcle>francophone studies</motcle>
+      <motcle>postmodernity</motcle>
+      <motcle>postcolonial studies</motcle>
+      <motcle>sociology of literature</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021303ar" idproprio="1021303ar" idref="th1"
+  lang="fr" ordseq="10" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021303ar.html</urlhtml>
+  <urlpdf taille="457" unite="ko">/revue/rum/2011/v42/n1-2/1021303ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021303ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>175</ppage>
+    <dpage>193</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles</surtitre>
+        <titre>Métatextualité, mise en abyme et anamorphose dans <marquage typemarq="italique">Le bel
+        immonde </marquage>de V.Y. Mudimbe</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Olga</prenom>
+        
+    <nomfamille>Hél-Bongo</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université Laval</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea><marquage typemarq="italique">Le Bel immonde</marquage> de V. Y. Mudimbe a souvent été
+        considéré comme un roman à part, le seul à posséder une intrigue, à afficher clairement ses
+        intentions subversives dans le thème de la marginalité. L’héroïne du roman est une
+        prostituée, amoureuse ou non, on ne le sait pas vraiment, d’un ministre influent du pays. La
+        modernité du roman apparaît, selon nous, dans ses procédés de réflexivité (métatextualité et
+        mise en abyme) comme dans ses techniques de décentrement (métalepse, anamorphose). Le
+        présent article vise à montrer que le texte mudimbien s’accompagne d’un métatexte qui se
+        veut mise en abyme, hypotypose, métalepse ou anamorphose. L’immonde, qui fait appel à la
+        notion religieuse de l’impur et à celle, esthétique, du beau, se cache dans la plus stricte
+        banalité du discours, du menu fait ou geste quotidien, voire du silence. À travers une
+        dialectique du même et de l’autre, le roman subvertit les clichés de la norme
+        sociale.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>Among V.Y. Mudimbe’s novels, <marquage typemarq="italique">Le bel immonde</marquage>
+        has often been considered as the only one to possess a plot and to clearly display its
+        subversive intentions within the theme of the marginal. The novel’s protagonist is a
+        prostitute, in love or not, we do not know for sure, with an influential minister in the
+        country. In my opinion, the modernity of the novel appears in its reflexive practices
+        (metatextuality and mise en abyme) and in various figures of displacement such as metalepse
+        or anamorphosis. In the present paper, I propose to illustrate that Mudimbe’s text is often
+        accompanied by a metatext, represented as a mise en abyme, a hypotyposis, a metalepse, an
+        anamorphosis. The french word « immonde », referring to the religious notion of the impure
+        and to the aesthetics of beauty, is encompassed within the most ordinary utterance, gesture,
+        fact or even silence. A dialectical relationship between self and other subverts clichés on
+        social life in Mudimbe’s novel.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>Mudimbe</motcle>
+      <motcle>roman</motcle>
+      <motcle>société</motcle>
+      <motcle>métatextualité</motcle>
+      <motcle>mise en abyme</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>Mudimbe</motcle>
+      <motcle>novel</motcle>
+      <motcle>society</motcle>
+      <motcle>metatextuality</motcle>
+      <motcle>mise en abyme</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021304ar" idproprio="1021304ar" idref="th1"
+  lang="fr" ordseq="11" qualtraitement="complet" typeart="note">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021304ar.html</urlhtml>
+  <urlpdf taille="352" unite="ko">/revue/rum/2011/v42/n1-2/1021304ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021304ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>195</ppage>
+    <dpage>219</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Note de réflexion</surtitre>
+        <titre>Maux et mots de la guerre dans la littérature congolaise contemporaine
+        (1999-2010)</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Nyunda</prenom>
+        <autreprenom>ya</autreprenom>
+        
+    <nomfamille>Rubango</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Creighton University, Omaha</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Le déclin de Mobutu et l’avènement de Kabila (1997) ont été relayés par une série de
+        nouvelles rébellions croisées (RCD, MLC, CNDP, M23, etc.). Ces phénomènes effervescents ont
+        marqué, surtout à l’Est, une ère d’apocalypse peinte dans maints genres de la littérature
+        congolaise contemporaine - du triptyque classique prose-poésie-théâtre aux genres
+        « mineurs » (bande dessinée, caricature et musique populaire). Cet article examine comment
+        de 1999 à 2010 ce drame régional et national est vécu sur le double plan de la conscience
+        collective nationale et nationaliste et de la création artistique. L’étude essentiellement
+        littéraire enrichie par une approche d’analyse du discours et des considérations historiques
+        s’appuie sur un corpus de 22 volumes dus à 16 auteurs représentatifs congolais. Il s’avère
+        qu’à l’expression d’angoisses et diverses violences subies du fait des guerres interminables
+        s’ajoute le procès des régimes mobutiste et kabiliste. Cette littérature « apagogique »,
+        critique ou hagiographique épouse à la fois diverses formes; elle décrit les affres de la
+        guerre, des souffrances, des misères et s’affirme comme un discours de résistance interne et
+        externe, de patriotisme, d’humanisme, de paix, d’espérance et de joie de vivre
+        relative.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>The decline of Mobutu and the advent of Kabila (1997) were subsequently followed by a
+        series of intersecting rebellions (RCD, MLC, CNDP, M23, etc.). These effervescent phenomena
+        were marked, especially in Eastern Congo, by an apocalyptic era depicted in several genres
+        of contemporary Congolese literature - from the classic triptych prose-poetry-drama to
+        « minor » genres (comics, caricature and popular music). This essay examines how, from 1999
+        to 2010, this regional and national drama was experienced on both the national and
+        nationalist collective conscience and artistic creation levels. Enriched by discourse
+        analysis and historical considerations, it focuses on a corpus of 22 volumes penned by 16
+        representative Congolese writers. In addition to the anxieties and diverse violence
+        resulting from the endless wars conveyed and depicted in these texts, these works also put
+        the regimes of Mobutu and Kabila on trial. This « apagogic », critical or hagiographic
+        literature simultaneously embraces diverse forms; it depicts the evil of war, sufferance and
+        miseries and stands as a discourse of internal and external resistance, patriotism,
+        humanism, peace, hope and the relative joy of life.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>Congo</motcle>
+      <motcle>Rwanda</motcle>
+      <motcle>guerres</motcle>
+      <motcle>souffrances</motcle>
+      <motcle>patriotisme</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>Congo</motcle>
+      <motcle>Rwanda</motcle>
+      <motcle>wars</motcle>
+      <motcle>sufferance</motcle>
+      <motcle>patriotism</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021305ar" horstheme="oui" idproprio="1021305ar"
+  lang="fr" ordseq="12" qualtraitement="complet" typeart="note">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021305ar.html</urlhtml>
+  <urlpdf taille="486" unite="ko">/revue/rum/2011/v42/n1-2/1021305ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021305ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>221</ppage>
+    <dpage>241</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles hors thème</surtitre>
+        <titre>Processus, acteurs et performances dans les conventions locales et la gestion des
+        ressources naturelles en zones soudano-sahéliennes d’Afrique sub-saharienne</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Natali</prenom>
+        
+    <nomfamille>Kossoumna Liba’a</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>ENS/Université de Maroua</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>La pression sur les ressources naturelles d’Afrique sub-saharienne a fait émerger des
+        actions portées par des projets qui sont appuyés par de nouveaux acteurs locaux. L’objectif
+        de cette note de réflexion est d’évaluer les performances, le processus et les acteurs de
+        ces expériences à partir des données bibliographiques et des enquêtes et entretiens auprès
+        des acteurs concernés. Les résultats montrent que ce processus participatif a vu l’émergence
+        de règles communes d’accès et de partage équitable, de préservation et de gestion durable,
+        de contrôle et de protection des ressources naturelles. Cette réussite est favorisée par
+        l’implication des autorités administratives et traditionnelles, mais aussi grâce à
+        l’implication des acteurs concernés à la définition des règles. En somme, malgré leur succès
+        à la fois sur le plan écologique, économique, sociologique et institutionnel, ces
+        expériences ont besoin d’un cadre juridique et administratif pour entériner et valider ces
+        démarches qui viennent se greffer ou supplanter les instances officielles
+        existantes.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>Pressure on natural resources in Sub-Saharan Africa has given room for projects
+        supported by new local actors. The present paper aims at assessing the performances,
+        processes and actors of these experiences, using bibliographical data, investigations and
+        communication with the actors involved. The results showed that this participative process
+        has led to common rules of access and equitable sharing, of preservation of sustainable
+        management of control and protection of natural resources. This success is accounted for by
+        the implication of administrative and traditional authorities, but also by the implication
+        of actors involved in fixing the basic rules. We conclude that, in spite of their successes,
+        be it from the ecological, economical, sociological and institutional standpoints, these
+        experiences need to be jurisdictionally and administratively framed in order to support
+        these initiatives and assure that they fall in line with existing official
+        policies.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>conventions locales</motcle>
+      <motcle>gestion</motcle>
+      <motcle>ressources naturelles</motcle>
+      <motcle>zone soudano-sahélienne</motcle>
+      <motcle>Afrique subsaharienne</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>common rules</motcle>
+      <motcle>management</motcle>
+      <motcle>natural resources</motcle>
+      <motcle>Soudano-Sahelian zone</motcle>
+      <motcle>Sub-Saharan Africa</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021306ar" horstheme="oui" idproprio="1021306ar"
+  lang="fr" ordseq="13" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021306ar.html</urlhtml>
+  <urlpdf taille="511" unite="ko">/revue/rum/2011/v42/n1-2/1021306ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021306ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>243</ppage>
+    <dpage>276</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles hors thème</surtitre>
+        <titre>Récits de pratiques en services de garde éducatifs à la petite enfance au Québec : une
+        expérience de réflexion sur la confiance</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Marc</prenom>
+        
+    <nomfamille>Jean</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec à Chicoutimi</alinea>
+        
+  </affiliation>
+  </auteur>
+      
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Jacqueline</prenom>
+        
+    <nomfamille>Dionne-Proulx</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Téluq-Université du Québec à Montréal</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Face à un environnement social de plus en plus complexe, l’organisation du travail
+        dans les services de garde éducatifs à l’enfance au Québec s’est, elle aussi, complexifiée
+        au cours des dernières années. Cet environnement professionnel oblige les acteurs à
+        coopérer, à se fixer des règles de fonctionnement ou à tout le moins à faire des arbitrages
+        acceptables. La confiance permet de rendre cet univers psychologiquement acceptable et
+        assure que les partenaires puissent coopérer au plein épanouissement des enfants à l’aide de
+        l’amélioration des pratiques éducatives, pour le bénéfice des enfants, des parents et de la
+        société dans son ensemble. Cet article raconte, à travers les récits de pratiques
+        d’intervenantes de service de garde éducatifs à la petite enfance, la manière dont celles-ci
+        pratiquent la confiance. Les résultats analysés à la lumière d’un modèle de confiance
+        interpersonnelle confirment la pertinence des catégories de ce modèle.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>Mirroring changes in the surrounding social environment, the organization of the
+        workplace within Quebec public daycare centres (CPE – Centres de la petite enfance) has
+        become increasingly complex over the last few years. The subsequent changes require all
+        involved persons to cooperate, establish clear rules of conduct and develop agreements
+        acceptable to all those working within the CPE system. Interpersonal trust allows for the
+        establishment of a psychologically acceptable milieu. Furthermore, the co-operation of all
+        participants fulfills the needs of children within the daycares through improved educative
+        practices that in turn benefits parents and society at large. Using written accounts from
+        workers within the Quebec CPE daycare system, this paper highlights ways that trust is
+        established and maintained within this setting. Analysis of the data using an interpersonal
+        trust model confirms the relevance of categories for this model.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>confiance</motcle>
+      <motcle>services de garde éducatifs à l’enfance</motcle>
+      <motcle>confiance interpersonnelle</motcle>
+      <motcle>climat de confiance</motcle>
+      <motcle>analyse réflexive</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>trust</motcle>
+      <motcle>public daycare</motcle>
+      <motcle>CPE</motcle>
+      <motcle>interpersonal trust</motcle>
+      <motcle>workplace environment</motcle>
+      <motcle>reflective analysis</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021307ar" horstheme="oui" idproprio="1021307ar"
+  lang="fr" ordseq="14" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021307ar.html</urlhtml>
+  <urlpdf taille="480" unite="ko">/revue/rum/2011/v42/n1-2/1021307ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021307ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>277</ppage>
+    <dpage>303</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles hors thème</surtitre>
+        <titre>Perceptions des élèves du primaire à l’égard des devoirs et des leçons</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Nadia</prenom>
+        
+    <nomfamille>Rousseau</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec à Trois-Rivières</alinea>
+        
+  </affiliation>
+  </auteur>
+      
+  <auteur id="au2">
+   <nompers>
+        
+    <prenom>Rollande</prenom>
+        
+    <nomfamille>Deslandes</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec à Trois-Rivières</alinea>
+        
+  </affiliation>
+  </auteur>
+      
+  <auteur id="au3">
+   <nompers>
+        
+    <prenom>Véronique</prenom>
+        
+    <nomfamille>Hardy</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec à Trois-Rivières</alinea>
+        
+  </affiliation>
+  </auteur>
+      
+  <auteur id="au4">
+   <nompers>
+        
+    <prenom>Hélène</prenom>
+        
+    <nomfamille>Fournier</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec à Trois-Rivières</alinea>
+        
+  </affiliation>
+  </auteur>
+      
+  <auteur id="au5">
+   <nompers>
+        
+    <prenom>Léna</prenom>
+        
+    <nomfamille>Bergeron</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université du Québec à Trois-Rivières</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+    
+ <resume typeresume="resume" lang="fr">
+      <alinea>Compte tenu que les devoirs et leçons se trouvent confinés entre les pratiques
+        traditionnelles qu’ils incarnent et les diverses remises en question qu’ils engendrent, il
+        est apparu nécessaire de se pencher sur la perception des élèves à l’égard de cette
+        pratique. Dans cet esprit, 43 élèves des 1<exposant>er</exposant> et 2<exposant>e</exposant>
+        cycles du primaire répartis dans cinq écoles de la Mauricie ont été invités à participer à
+        des entrevues de petits groupes (en deux temps). Les résultats montrent que les aspects
+        positifs perçus sont associés à un meilleur apprentissage et de meilleures chances de
+        réussite scolaire, tandis que les aspects négatifs sont attribués, entre autres, aux
+        horaires familiaux chargés et à la fatigue accumulée au cours de la journée. Il serait
+        pertinent, dans des études ultérieures, de s’attarder plus spécifiquement aux élèves ayant
+        des difficultés et d’effectuer une réflexion collective sur les devoirs et leçons au sein
+        d’une même école.</alinea>
+    
+ </resume>
+    
+ <resume typeresume="resume" lang="en">
+      <alinea>Considering the changes regarding homework over time, in depth knowledge on students’
+        perceptions on homework is essential to understand their usefulness and benefits. This could
+        also help minimize their negative effects. Concerned about the evolution of these
+        perceptions over time, sixty-three students in elementary cycles 1 and 2 from five Mauricie
+        schools were invited to participate in two focus groups. The results show that some positive
+        aspects perceived by students include better understanding of curricular content and
+        academic achievement. On the other hand, negative aspects were attributed to crowded family
+        schedules and fatigue accumulated during the day. It would be important that future studies
+        focus specifically on students with special needs. Moreover, further thought should be given
+        to the role of homework within the same school setting.</alinea>
+    
+ </resume>
+    <grmotcle lang="fr">
+      <motcle>élèves</motcle>
+      <motcle>devoirs</motcle>
+      <motcle>perceptions réussite scolaire</motcle>
+    </grmotcle>
+    <grmotcle lang="en">
+      <motcle>students</motcle>
+      <motcle>homework</motcle>
+      <motcle>perceptions</motcle>
+      <motcle>academic achievement</motcle>
+    </grmotcle>
+</liminaire>
+</article>
+<article doi="10.7202/1021308ar" horstheme="oui" idproprio="1021308ar"
+  lang="fr" ordseq="15" qualtraitement="complet" typeart="article">
+  <urlhtml>/revue/rum/2011/v42/n1-2/1021308ar.html</urlhtml>
+  <urlpdf taille="544" unite="ko">/revue/rum/2011/v42/n1-2/1021308ar.pdf</urlpdf>
+  <urlplan>/revue/rum/2011/v42/n1-2/1021308ar.html?vue=plan</urlplan>
+  <pagination>
+    <ppage>305</ppage>
+    <dpage>354</dpage>
+  </pagination>
+  <notegen lang="fr" porteenoteg="numero" typenoteg="edito">
+    <alinea>
+      <marquage typemarq="gras">POUR NABIHA</marquage> : Nabiha Jerad, Professeur de
+          socio-linguistique à la Faculté des Lettres de l’Université de Tunis se trouvait dans son
+          île natale, Kerkennah, pour célébrer le Ramadan avec sa famille. Sortie pour prendre l’air
+          avant le dîner, elle fut renversée par une voiture. Le chauffeur - ou plutôt le chauffard
+          - ne s’arrêta pas et s’enfuit. C’était le 11 août 2012. Elle tomba dans un coma dont elle
+          ne se sortira jamais, malgré les soins intensifs et le dévouement du personnel médical,
+          d’abord à Bruxelles, ensuite à Tunis où elle rendit l’âme le 19 octobre 2012. </alinea>
+    <alinea>Pour ceux et
+          celles qui l’ont connue, Nabiha avait le coeur sur la main, l’esprit ouvert à “tous les
+          souffles du monde” pour reprendre Aimé Césaire. Elle était d’un grand dévouement envers
+          ses étudiants, très attachée à son pays la Tunisie et fortement engagée dans ce qui fut
+          appelée la Révolution de Jasmin. Son article non achevé, qui devait paraître dans ce
+          volume, se serait ajouté à ses nombreuses autres publications dans le domaine de la
+          socio-linguistique. Cette petite note rappellera la mémoire de celle qui fut non seulement
+          une collègue, mais aussi une amie. Université Laval 3 Juillet 2013</alinea>
+    <auteur>
+      <nompers>
+        <prenom>Justin</prenom>
+        <autreprenom>K.</autreprenom>
+        <nomfamille>Bisanswa</nomfamille>
+      </nompers>
+    </auteur>
+  </notegen>
+<liminaire>
+ <grtitre>
+      
+  <surtitre>Articles hors thème</surtitre>
+        <titre>Analyse relative à la décision de la Cour d’appel fédérale dans l’affaire <marquage
+        typemarq="italique">Air canada c. Thibodeau</marquage>, 2012 FCA 246</titre>
+     </grtitre>
+    
+ <grauteur>
+      
+  <auteur id="au1">
+   <nompers>
+        
+    <prenom>Karine</prenom>
+        
+    <nomfamille>McLaren</nomfamille>
+        
+   </nompers>
+  <affiliation>
+        <alinea>Université de Moncton</alinea>
+        
+  </affiliation>
+  </auteur>
+    
+ </grauteur>
+</liminaire>
+</article>
+</sommaire>
