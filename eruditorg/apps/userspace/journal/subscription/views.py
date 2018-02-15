@@ -172,12 +172,16 @@ class IndividualJournalAccessSubscriptionCancelView(
 class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixin, View):
     def get(self, request, *args, **kwargs):
         thisyear = dt.date.today().year
-        response = HttpResponse(content_type='text/csv')
+        # It's important to use the latin-1 encoding or else Excel balks at us when comes the time
+        # to open the file.
+        response = HttpResponse(content_type='text/csv', charset='latin-1')
         response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(thisyear)
-        csvwriter = csv.writer(response)
+        csvwriter = csv.writer(response, delimiter=';')
 
+        # Don't remove spaces around the ID header! otherwise, MS Excel will think that it's a
+        # SYLK file. https://www.alunr.com/excel-csv-import-returns-an-sylk-file-format-error/
         csvwriter.writerow([
-            'ID', 'Nom', 'Adresse', 'Ville', 'Province / État', 'Pays', 'Code postal',
+            ' ID ', 'Nom', 'Adresse', 'Ville', 'Province / État', 'Pays', 'Code postal',
             'Nom du contact', 'Courriel'])
 
         subscribers = Victor.get_configured_instance().get_subscriber_contact_informations(
@@ -188,5 +192,7 @@ class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixi
             'FullName', 'Email']
         for subscriber in subscribers:
             row = [getattr(subscriber, attrname, '') for attrname in ATTRS]
+            # Some characters given to us by Victor aren't in the latin-1 scope.
+            row = [str(val).replace('’', '\'') for val in row]
             csvwriter.writerow(row)
         return response
