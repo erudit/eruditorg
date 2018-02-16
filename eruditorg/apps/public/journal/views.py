@@ -702,7 +702,10 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         coverpage = generate_pdf(
             'public/journal/article_pdf_coverpage.html',
             context=RequestContext(self.request).update(coverpage_context),
-            base_url=self.request.build_absolute_uri('/'))
+            base_url="https://{host}/".format(
+                host=self.request._get_raw_host()
+            )
+        )
 
         response.content = add_coverpage_to_pdf(coverpage, content)
 
