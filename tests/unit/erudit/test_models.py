@@ -259,19 +259,33 @@ class TestJournal(BaseEruditTestCase):
         # old issues in Fedora but redirect new issues wherever they are.
         # It's thus possible to have some issues that aren't part of the PID list. In these cases,
         # we put these issues *before* those in the PID list, in -date_published order.
-        journal = JournalFactory.create()
-        i1 = IssueFactory.create(journal=journal, date_published=reldate(1))
-        i2 = IssueFactory.create(journal=journal, date_published=reldate(2))
-        i3 = IssueFactory.create(journal=journal, date_published=reldate(3))
-        i4 = IssueFactory.create(journal=journal, date_published=reldate(4))
+        i1 = IssueFactory.create()
+        i2 = IssueFactory.create_published_after(i1)
+        # non-fedora
+        i3 = IssueFactory.create_published_after(i2, localidentifier=None)
+        i4 = IssueFactory.create_published_after(i3, localidentifier=None)
         ordered_fedora_issues = [i1, i2]
         ordered_pids = [i.get_full_identifier() for i in ordered_fedora_issues]
-        journal.erudit_object = unittest.mock.MagicMock()
-        journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
+        i1.journal.erudit_object = unittest.mock.MagicMock()
+        i1.journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
             return_value=ordered_pids)
 
-        assert list(journal.published_issues.all()) == [i4, i3, i1, i2]
+        assert list(i1.journal.published_issues.all()) == [i4, i3, i1, i2]
 
+    def test_published_issues_missing_pid(self):
+        # When a PID is missing from the PID list *but* that the issue is a fedora one, put that
+        # issue at the *end* of the list. We do that because cases of missing issues are most
+        # likely old issues and we don't want them to end up being considered as the journal's
+        # latest issue. See #1664
+        i1 = IssueFactory.create()
+        i2 = IssueFactory.create_published_after(i1)
+        ordered_fedora_issues = [i2]
+        ordered_pids = [i.get_full_identifier() for i in ordered_fedora_issues]
+        i1.journal.erudit_object = unittest.mock.MagicMock()
+        i1.journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
+            return_value=ordered_pids)
+
+        assert list(i1.journal.published_issues.all()) == [i2, i1]
 
 class TestIssue(BaseEruditTestCase):
     def setUp(self):
