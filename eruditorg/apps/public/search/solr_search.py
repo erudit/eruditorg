@@ -7,7 +7,7 @@ from core.solrq import Search as BaseSearch
 
 
 # This is the object that will be used to query the Solr index.
-client = pysolr.Solr(settings.SOLR_ROOT, timeout=10)
+client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 
 class Search(BaseSearch):
