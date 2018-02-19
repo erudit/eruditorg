@@ -397,7 +397,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
 @pytest.mark.parametrize("operator, correspondence", [
     ("AND", "ET"),
     ("OR", "OU"),
-    ("NOT", "NON")
+    ("NOT", "SAUF")
 ])
 def test_can_translate_boolean_operators(operator, correspondence):
     # Setup

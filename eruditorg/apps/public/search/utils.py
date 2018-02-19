@@ -20,7 +20,7 @@ def get_search_elements(queryparams):
         operator_correspondence = {
             'AND': _('ET'),
             'OR': _('OU'),
-            'NOT': _('NON'),
+            'NOT': _('SAUF'),
         }
 
         search_elements = []
