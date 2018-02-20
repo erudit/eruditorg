@@ -300,7 +300,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             # otherwise
             whens.append(When(localidentifier__isnull=True, then=-1))
             whens.append(When(localidentifier='', then=-1))
-            qs = qs.order_by(Case(*whens), '-date_published')
+            qs = qs.order_by(Case(*whens, default=9999), '-date_published')
         return qs
 
     @property
