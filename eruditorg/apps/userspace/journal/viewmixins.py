@@ -12,7 +12,7 @@ from core.journal.rules_helpers import get_editable_journals
 from erudit.models import Journal
 
 
-class JournalScopeMixin(object):
+class JournalScopeMixin:
     """
     The JournalScopeMixin provides a way to associate a view with a specific Journal instance. The
     Journal instance must have the current user in its members. If not a PermissionDenied error will
@@ -78,9 +78,12 @@ class JournalScopeMixin(object):
             args = resolver_match.args
             kwargs = resolver_match.kwargs.copy()
             kwargs.update({'journal_pk': journal.pk})
-            return HttpResponseRedirect(
-                reverse(':'.join([resolver_match.namespace, resolver_match.url_name]),
-                        args=args, kwargs=kwargs))
+            url = reverse(
+                ':'.join([resolver_match.namespace, resolver_match.url_name]),
+                args=args, kwargs=kwargs)
+            if self.request.GET:
+                url = '{}?{}'.format(url, self.request.GET.urlencode())
+            return HttpResponseRedirect(url)
 
         self.init_current_journal(journal)
 

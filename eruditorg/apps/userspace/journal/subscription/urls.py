@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,4 +13,6 @@ urlpatterns = [
         views.IndividualJournalAccessSubscriptionDeleteView.as_view(), name='delete'),
     url(_(r'^acces/annuler/(?P<pk>[0-9]+)/$'),
         views.IndividualJournalAccessSubscriptionCancelView.as_view(), name='cancel'),
+    url(_(r'^export/organisations/$'),
+        views.JournalOrganisationSubscriptionExport.as_view(), name='org_export'),
 ]

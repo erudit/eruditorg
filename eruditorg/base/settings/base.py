@@ -25,6 +25,9 @@ STATIC_ROOT = str(ROOT_DIR / 'static')
 MEDIA_ROOT = str(ROOT_DIR / 'media')
 UPLOAD_ROOT = str(ROOT_DIR / 'media' / 'uploads')
 
+# destination path for https://gitlab.erudit.org/erudit/rapports/rapports_editeurs
+SUBSCRIPTION_EXPORTS_ROOT = str(ROOT_DIR / 'rapports_editeurs')
+
 # URL of the admin page
 ADMIN_URL = 'admin/'
 
@@ -51,7 +54,6 @@ INSTALLED_APPS = (
     'apps.userspace.journal.authorization',
     'apps.userspace.journal.editor',
     'apps.userspace.journal.information',
-    'apps.userspace.journal.royalty_reports',
     'apps.userspace.journal.subscription',
     'apps.userspace.library',
     'apps.userspace.library.authorization',
@@ -66,7 +68,6 @@ INSTALLED_APPS = (
     'core.journal',
     'core.metrics',
     'core.reporting',
-    'core.royalty_reports',
     'core.subscription',
 
     # Third-party apps
@@ -272,6 +273,11 @@ FEDORA_PASSWORD = 'fcAdmin'
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
 SOLR_ADMIN = 'http://10.1.1.33:8080/solr/admin/cores/'
 SOLR_TIMEOUT = 10
+
+# Victor settings
+VICTOR_SOAP_URL = None
+VICTOR_SOAP_USERNAME = None
+VICTOR_SOAP_PASSWORD = None
 
 # Logging settings
 LOGGING = {

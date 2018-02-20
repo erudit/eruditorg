@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
-
+import csv
+import datetime as dt
 import logging
+import os
+import urllib.parse
 
 from account_actions.models import AccountActionToken
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView
-from django.views.generic import DeleteView
-from django.views.generic import ListView
+from django.views.generic import CreateView, DeleteView, ListView, View
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
@@ -19,8 +19,10 @@ from base.viewmixins import MenuItemMixin
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
 from core.subscription.shortcuts import get_journal_organisation_subscribers
+from core.victor import Victor
 
 from ..viewmixins import JournalScopePermissionRequiredMixin, JournalScopeMixin
+from ..views import journal_reports_path
 
 from .forms import JournalAccessSubscriptionCreateForm
 
@@ -34,6 +36,7 @@ class IndividualJournalAccessSubscriptionListView(
     model = JournalAccessSubscription
     paginate_by = 10
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
+    ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
 
     def get_context_data(self, **kwargs):
         context = super(IndividualJournalAccessSubscriptionListView, self) \
@@ -43,6 +46,24 @@ class IndividualJournalAccessSubscriptionListView(
         context['subscribed_organisations'] = get_journal_organisation_subscribers(
             self.current_journal)
         return context
+
+    def get_subscriptions_archive_years(self):
+        thisyear = dt.date.today().year
+        root_path = journal_reports_path(self.current_journal.code)
+        result = [(str(thisyear), reverse('userspace:journal:subscription:org_export'))]
+        try:
+            path = os.path.join(root_path, self.ARCHIVE_SUBPATH)
+            fns = sorted(os.listdir(path), reverse=True)
+            for fn in fns:
+                year = os.path.splitext(fn)[0]
+                subpath = urllib.parse.quote(os.path.join(self.ARCHIVE_SUBPATH, fn))
+                url = reverse('userspace:journal:reports_download')
+                url += '?subpath={}'.format(subpath)
+                result.append((year, url))
+        except FileNotFoundError:
+            # No archive, just list current year
+            pass
+        return result
 
     def get_queryset(self):
         qs = super(IndividualJournalAccessSubscriptionListView, self).get_queryset()
@@ -146,3 +167,32 @@ class IndividualJournalAccessSubscriptionCancelView(
         messages.success(self.request, _("La proposition d'abonnement a été annulée avec succès"))
         return reverse(
             'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
+
+
+class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixin, View):
+    def get(self, request, *args, **kwargs):
+        thisyear = dt.date.today().year
+        # It's important to use the latin-1 encoding or else Excel balks at us when comes the time
+        # to open the file.
+        response = HttpResponse(content_type='text/csv', charset='latin-1')
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(thisyear)
+        csvwriter = csv.writer(response, delimiter=';')
+
+        # Don't remove spaces around the ID header! otherwise, MS Excel will think that it's a
+        # SYLK file. https://www.alunr.com/excel-csv-import-returns-an-sylk-file-format-error/
+        csvwriter.writerow([
+            ' ID ', 'Nom', 'Adresse', 'Ville', 'Province / État', 'Pays', 'Code postal',
+            'Nom du contact', 'Courriel'])
+
+        subscribers = Victor.get_configured_instance().get_subscriber_contact_informations(
+            self.current_journal.legacy_code)
+
+        ATTRS = [
+            'Id', 'InstitutionName', 'Address', 'City', 'Province', 'Country', 'PostalCode',
+            'FullName', 'Email']
+        for subscriber in subscribers:
+            row = [getattr(subscriber, attrname, '') for attrname in ATTRS]
+            # Some characters given to us by Victor aren't in the latin-1 scope.
+            row = [str(val).replace('’', '\'') for val in row]
+            csvwriter.writerow(row)
+        return response

@@ -279,6 +279,15 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return (dt.date.today() - self.date_embargo_begins).days if self.date_embargo_begins \
             else None
 
+    @property
+    def legacy_code(self):
+        """ Returns the code used to identify the journal in our "legacy" systems.
+        """
+        if self.is_scientific():
+            return self.code
+        elif self.is_cultural():
+            return self.localidentifier
+
     # Issues-related methods and properties
     # --
 

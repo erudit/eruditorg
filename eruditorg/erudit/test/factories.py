@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 import datetime as dt
 
 import factory
 from faker import Factory
+
+from ..models import JournalType
 
 faker = Factory.create()
 
@@ -48,6 +49,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
         return instance
 
     collection = factory.SubFactory(CollectionFactory)
+    type = factory.LazyAttribute(lambda o: JournalTypeFactory(code=o.type_code))
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
     localidentifier = factory.Sequence(lambda n: 'journal{}'.format(n))
@@ -56,6 +58,9 @@ class JournalFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'erudit.journal'
+
+    class Params:
+        type_code = JournalType.CODE_SCIENTIFIC
 
     @factory.post_generation
     def publishers(self, create, extracted, **kwargs):
@@ -69,6 +74,15 @@ class JournalFactory(factory.django.DjangoModelFactory):
                 self.publishers.add(publisher)
 
     @factory.post_generation
+    def members(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for member in extracted:
+                self.members.add(member)
+
+    @factory.post_generation
     def use_fedora(self, create, extracted, **kwargs):
         if not create:
             return
@@ -79,10 +93,12 @@ class JournalFactory(factory.django.DjangoModelFactory):
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
 
-    name = factory.Sequence(lambda n: "JournalType-{}".format(n))
+    name = factory.LazyAttribute(lambda o: "JournalType-{}".format(o.code))
+    code = JournalType.CODE_SCIENTIFIC
 
     class Meta:
         model = 'erudit.JournalType'
+        django_get_or_create = ('code', )
 
 
 class JournalInformationFactory(factory.django.DjangoModelFactory):
