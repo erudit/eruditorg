@@ -17,4 +17,9 @@ urlpatterns = [
         views.JournalOrganisationSubscriptionList.as_view(), name='org_list'),
     url(_(r'^institutionnel/exports/$'),
         views.JournalOrganisationSubscriptionExport.as_view(), name='org_export'),
+    url(
+        _(r'^institutionnel/exports/telecharger/$'),
+        views.JournalOrganisationSubscriptionExportDownload.as_view(),
+        name='org_export_download'
+    ),
 ]

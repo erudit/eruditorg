@@ -14,15 +14,14 @@ from django.views.generic import CreateView, DeleteView, ListView, View, Templat
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
-from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
 from core.subscription.shortcuts import get_journal_organisation_subscribers
 from core.victor import Victor
 
-from ..viewmixins import JournalScopePermissionRequiredMixin, JournalScopeMixin
-from ..views import journal_reports_path
+from ..viewmixins import JournalScopePermissionRequiredMixin
+from ..views import journal_reports_path, BaseReportsDownload
 
 from .forms import JournalAccessSubscriptionCreateForm
 
@@ -30,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 
 class IndividualJournalAccessSubscriptionListView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     context_object_name = 'subscriptions'
     menu_journal = 'subscription'
     model = JournalAccessSubscription
@@ -62,7 +61,7 @@ class IndividualJournalAccessSubscriptionListView(
 
 
 class IndividualJournalAccessSubscriptionCreateView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
     form_class = JournalAccessSubscriptionCreateForm
     menu_journal = 'subscription'
     model = AccountActionToken  # We create an AccountActionToken instance in this view.
@@ -107,7 +106,7 @@ class IndividualJournalAccessSubscriptionCreateView(
 
 
 class IndividualJournalAccessSubscriptionDeleteView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     context_object_name = 'subscription'
     force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
     menu_journal = 'subscription'
@@ -126,8 +125,8 @@ class IndividualJournalAccessSubscriptionDeleteView(
 
 
 class IndividualJournalAccessSubscriptionCancelView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
-        SingleObjectTemplateResponseMixin, BaseDetailView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, SingleObjectTemplateResponseMixin,
+        BaseDetailView):
     force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
     menu_journal = 'subscription'
     model = AccountActionToken
@@ -152,9 +151,10 @@ class IndividualJournalAccessSubscriptionCancelView(
 
 
 class JournalOrganisationSubscriptionList(
-        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, TemplateView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, TemplateView):
     menu_journal = 'subscription'
     template_name = 'userspace/journal/subscription/organisationsubscription_list.html'
+    permission_required = 'subscription.manage_individual_subscription'
     ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
 
     def get_context_data(self, **kwargs):
@@ -173,7 +173,7 @@ class JournalOrganisationSubscriptionList(
             for fn in fns:
                 year = os.path.splitext(fn)[0]
                 subpath = urllib.parse.quote(os.path.join(self.ARCHIVE_SUBPATH, fn))
-                url = reverse('userspace:journal:reports_download')
+                url = reverse('userspace:journal:subscription:org_export_download')
                 url += '?subpath={}'.format(subpath)
                 result.append((year, url))
         except FileNotFoundError:
@@ -182,7 +182,11 @@ class JournalOrganisationSubscriptionList(
         return result
 
 
-class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixin, View):
+class JournalOrganisationSubscriptionExport(
+        JournalScopePermissionRequiredMixin, View):
+
+    permission_required = 'subscription.manage_individual_subscription'
+
     def get(self, request, *args, **kwargs):
         thisyear = dt.date.today().year
         # It's important to use the latin-1 encoding or else Excel balks at us when comes the time
@@ -209,3 +213,8 @@ class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixi
             row = [str(val).replace('’', '\'') for val in row]
             csvwriter.writerow(row)
         return response
+
+
+class JournalOrganisationSubscriptionExportDownload(BaseReportsDownload):
+    permission_required = 'subscription.manage_individual_subscription'
+    AUTHORIZED_SUBPATH = 'Abonnements/Abonnes'

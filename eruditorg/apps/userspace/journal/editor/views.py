@@ -22,7 +22,6 @@ from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from resumable_uploads.models import ResumableFile
 
-from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.editor.models import IssueSubmission
 from core.metrics.metric import metric
@@ -40,7 +39,7 @@ logger = logging.getLogger(__name__)
 
 
 class IssueSubmissionListView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     allow_production_team_access = True
     menu_journal = 'editor'
     model = IssueSubmission
@@ -57,7 +56,7 @@ class IssueSubmissionListView(
 
 
 class IssueSubmissionDetailView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DetailView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, DetailView):
     allow_production_team_access = True
     context_object_name = 'issue'
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
@@ -84,8 +83,8 @@ class IssueSubmissionDetailView(
 
 
 class IssueSubmissionCreate(
-        LoginRequiredMixin, IssueSubmissionContextMixin,
-        JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
+        IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
+        CreateView):
     menu_journal = 'editor'
     model = IssueSubmission
     form_class = IssueSubmissionForm
@@ -119,8 +118,8 @@ class IssueSubmissionCreate(
 
 
 class IssueSubmissionUpdate(
-        LoginRequiredMixin, IssueSubmissionContextMixin,
-        JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
+        IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
+        UpdateView):
     allow_production_team_access = True
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
@@ -188,8 +187,7 @@ class IssueSubmissionUpdate(
 
 
 class IssueSubmissionTransitionView(
-        LoginRequiredMixin, IssueSubmissionContextMixin,
-        JournalScopePermissionRequiredMixin, MenuItemMixin,
+        IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
     allow_production_team_access = True
     context_object_name = 'issue_submission'
@@ -326,7 +324,7 @@ class IssueSubmissionRefuseView(IssueSubmissionTransitionView):
 
 
 class IssueSubmissionDeleteView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
@@ -347,8 +345,7 @@ class IssueSubmissionDeleteView(
 
 
 class IssueSubmissionAttachmentView(
-        LoginRequiredMixin, IssueSubmissionContextMixin,
-        JournalScopePermissionRequiredMixin, DetailView):
+        IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, DetailView):
     """
     Returns an IssueSubmission attachment.
     """

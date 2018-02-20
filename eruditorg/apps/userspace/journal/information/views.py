@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 
-from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from erudit.models import JournalInformation
 
@@ -16,7 +13,7 @@ from .forms import JournalInformationForm
 
 
 class JournalInformationUpdateView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
+        JournalScopePermissionRequiredMixin, MenuItemMixin, UpdateView):
     """
     Displays a form to update journal information. JournalInformation instances
     can hold information in many languages. The language used to save the values
