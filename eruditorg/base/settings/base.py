@@ -91,7 +91,6 @@ INSTALLED_APPS = (
     'waffle',
     'account_actions',
     'resumable_uploads',
-    'django_filters',
     'rules',
     'ckeditor',
     'raven.contrib.django.raven_compat',
@@ -422,13 +421,6 @@ CELERYBEAT_SCHEDULE = {
         'task': 'core.editor.tasks.handle_issuesubmission_files_removal',
         'schedule': crontab(minute=0, hour=0),  # Executed daily at midnight
     },
-}
-
-# DRF settings
-# -----------------------------------
-
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend', ),
 }
 
 # MailChimp settings
