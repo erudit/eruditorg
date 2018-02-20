@@ -98,6 +98,7 @@
     </div>
   </header>
 
+  {% if journal.published_issues.exists %}
   <section class="clearfix latest-issue" id="latest-issue">
     <div class="row">
       {% if latest_issue %}
@@ -128,6 +129,7 @@
       </div>
     </div>
   </section>
+  {% endif %}
 
   {% if journal_info %}
   <div class="journal-infos" role="tablist" aria-multiselectable="true">
