@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, DeleteView, ListView, View
+from django.views.generic import CreateView, DeleteView, ListView, View, TemplateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
@@ -37,7 +37,6 @@ class IndividualJournalAccessSubscriptionListView(
     paginate_by = 10
     permission_required = 'subscription.manage_institutional_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
-    ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
 
     def get_context_data(self, **kwargs):
         context = super(IndividualJournalAccessSubscriptionListView, self) \
@@ -47,24 +46,6 @@ class IndividualJournalAccessSubscriptionListView(
         context['subscribed_organisations'] = get_journal_organisation_subscribers(
             self.current_journal)
         return context
-
-    def get_subscriptions_archive_years(self):
-        thisyear = dt.date.today().year
-        root_path = journal_reports_path(self.current_journal.code)
-        result = [(str(thisyear), reverse('userspace:journal:subscription:org_export'))]
-        try:
-            path = os.path.join(root_path, self.ARCHIVE_SUBPATH)
-            fns = sorted(os.listdir(path), reverse=True)
-            for fn in fns:
-                year = os.path.splitext(fn)[0]
-                subpath = urllib.parse.quote(os.path.join(self.ARCHIVE_SUBPATH, fn))
-                url = reverse('userspace:journal:reports_download')
-                url += '?subpath={}'.format(subpath)
-                result.append((year, url))
-        except FileNotFoundError:
-            # No archive, just list current year
-            pass
-        return result
 
     def get_queryset(self):
         qs = super(IndividualJournalAccessSubscriptionListView, self).get_queryset()
@@ -168,6 +149,37 @@ class IndividualJournalAccessSubscriptionCancelView(
         messages.success(self.request, _("La proposition d'abonnement a été annulée avec succès"))
         return reverse(
             'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
+
+
+class JournalOrganisationSubscriptionList(
+        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, TemplateView):
+    menu_journal = 'subscription'
+    template_name = 'userspace/journal/subscription/organisationsubscription_list.html'
+    ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subscribed_organisations'] = get_journal_organisation_subscribers(
+            self.current_journal)
+        return context
+
+    def get_subscriptions_archive_years(self):
+        thisyear = dt.date.today().year
+        root_path = journal_reports_path(self.current_journal.code)
+        result = [(str(thisyear), reverse('userspace:journal:subscription:org_export'))]
+        try:
+            path = os.path.join(root_path, self.ARCHIVE_SUBPATH)
+            fns = sorted(os.listdir(path), reverse=True)
+            for fn in fns:
+                year = os.path.splitext(fn)[0]
+                subpath = urllib.parse.quote(os.path.join(self.ARCHIVE_SUBPATH, fn))
+                url = reverse('userspace:journal:reports_download')
+                url += '?subpath={}'.format(subpath)
+                result.append((year, url))
+        except FileNotFoundError:
+            # No archive, just list current year
+            pass
+        return result
 
 
 class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixin, View):

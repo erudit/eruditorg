@@ -1,0 +1,41 @@
+{% extends "userspace/journal/base.html" %}
+{% load i18n waffle_tags %}
+
+{% block title %}{% trans "Abonnements" %} {{ block.super }}{% endblock title %}
+
+{% block breadcrumb %}{{ block.super }}
+<li><a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block section_title %}
+{% trans "Abonnements" %}
+{% endblock %}
+
+{% block content_main %}
+<ul class="tabs-group">
+  <li class="tab">
+    <a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Individuels" %}</a>
+  </li>
+  <li class="tab active">
+    <a href="">{% trans "Institutionnels" %}</a>
+  </li>
+</ul>
+
+<section>
+<h2>{% trans "Institutions abonnées par année" %}</h2>
+<ul>
+  {% for year, link in view.get_subscriptions_archive_years %}
+    <li><a href="{{ link }}">{{ year }}</li>
+  {% endfor %}
+</ul>
+</section>
+
+{% flag "NEW_USERSPACE" %}
+{% if subscribed_organisations %}
+<section>
+  <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
+  <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+</section>
+{% endif %}
+{% endflag %}
+{% endblock content_main %}

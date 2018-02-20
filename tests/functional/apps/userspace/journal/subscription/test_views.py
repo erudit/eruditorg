@@ -116,7 +116,7 @@ def test_list_archive_years(monkeypatch, tmpdir):
         content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
         user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
 
-    archive_subpath = views.IndividualJournalAccessSubscriptionListView.ARCHIVE_SUBPATH
+    archive_subpath = views.JournalOrganisationSubscriptionList.ARCHIVE_SUBPATH
     subdir = tmpdir.join(str(journal.code), archive_subpath).ensure(dir=True)
 
     ARCHIVE_YEARS = ['2012', '1830', '2016']
@@ -126,7 +126,7 @@ def test_list_archive_years(monkeypatch, tmpdir):
     client = Client()
     client.login(username=user.username, password='default')
 
-    url = reverse('userspace:journal:subscription:list')
+    url = reverse('userspace:journal:subscription:org_list')
     response = client.get(url, follow=True)
     view = response.context['view']
 

@@ -12,23 +12,16 @@
 {% endblock %}
 
 {% block content_main %}
-<h2>{% trans "Institutions abonnées par année" %}</h2>
-<ul>
-  {% for year, link in view.get_subscriptions_archive_years %}
-    <li><a href="{{ link }}">{{ year }}</li>
-  {% endfor %}
+<ul class="tabs-group">
+  <li class="tab active">
+    <a href="">{% trans "Individuels" %}</a>
+  </li>
+  <li class="tab">
+    <a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Institutionnels" %}</a>
+  </li>
 </ul>
 
 {% flag "NEW_USERSPACE" %}
-<ul class="tabs-group">
-  <li class="tab active">
-    <a href="">{% trans "Institutionnels" %}</a>
-  </li>
-  <li class="tab">
-    <a href="">{% trans "Individuels" %}</a>
-  </li>
-</ul>
-
 <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
 <section>
   <ul id="id_subscription_list" class="row">
@@ -66,11 +59,7 @@
   </div>
 </section>
 
-{% if subscribed_organisations %}
 <section>
-  <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
-  <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-  {% endif %}
   {% if pending_subscriptions %}
   <h2>{% trans "Abonnements en attente" %}</h2>
   <table class="table table-bordered">
