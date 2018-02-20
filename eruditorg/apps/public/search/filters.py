@@ -21,7 +21,7 @@ class EruditDocumentSolrFilter(object):
     operators_correspondence = {
         ' AND ': [' ET ', ],
         ' OR ': [' OU '],
-        ' NOT ': [' NON '],
+        ' NOT ': [' SAUF '],
     }
 
     aggregation_correspondence = {
