@@ -109,6 +109,10 @@ journal_url_patterns = [
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail",
     ),
+    url(r'^revue/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<volume_number>\w+)/n/(?P<localid>[\w-]+)\.html$',  # noqa
+        journal_views_compat.ArticleDetailRedirectView.as_view(),
+        name="legacy_article_detail_volume"
+    ),
     url(r'^iderudit/(?P<localid>[\w-]+)$',
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_id",

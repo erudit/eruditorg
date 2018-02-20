@@ -61,10 +61,4 @@ urlpatterns = [
         url(_(r'^subscriber_journals\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
     ])),
 
-    # Compatibility URLs
-    # Ref https://gitlab.erudit.org/erudit/support/issues/190
-    url(
-        _(r'^revue/[\w-]+/\d+/v\d+/n/(?P<localid>[\w-]+)\.html$'),
-        views.IdEruditArticleRedirectView.as_view(),
-    )
 ]
