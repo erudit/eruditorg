@@ -107,6 +107,40 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
         assert set(request.subscriptions._subscriptions) == set(subscriptions)
 
+    def test_referer_cookie_has_precedence_over_referer_header(self):
+        request = get_anonymous_request()
+        request.META['HTTP_REFERER'] = 'http://other-referer.ca'
+
+        middleware = SubscriptionMiddleware()
+        referer = middleware._get_user_referer_for_subscription(request)
+        assert referer == 'http://other-referer.ca'
+
+        request.COOKIES['HTTP_REFERER'] = 'http://www.umontreal.ca'
+        referer = middleware._get_user_referer_for_subscription(request)
+        assert referer == 'http://www.umontreal.ca'
+
+
+    def test_associates_the_subscription_type_to_the_request_in_case_of_referer_cookie(self):
+        # Setup
+        request = get_anonymous_request()
+        request.COOKIES['HTTP_REFERER'] = 'http://www.umontreal.ca'
+
+        subscription = JournalAccessSubscriptionFactory(
+            post__valid=True,
+            post__referers=['http://www.umontreal.ca']
+        )
+
+        middleware = SubscriptionMiddleware()
+        middleware.process_request(request)
+
+        assert request.subscriptions._subscriptions == [subscription]
+
+        request = get_anonymous_request()
+        middleware.process_request(request)
+
+        assert request.subscriptions._subscriptions == []
+
+
     def test_associates_the_subscription_type_to_the_request_in_case_of_referer_header(self):
         # Setup
         request = get_anonymous_request()
