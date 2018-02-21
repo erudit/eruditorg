@@ -23,7 +23,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
         If the user has a referer set in her session, return this referer. Otherwise
         return the value of 'HTTP_REFERER'
         """
-        referer = request.session.get('HTTP_REFERER')
+        referer = request.COOKIES.get('HTTP_REFERER') or request.session.get('HTTP_REFERER')
         return referer if referer else request.META.get('HTTP_REFERER')
 
     def _get_user_ip_address(self, request):
