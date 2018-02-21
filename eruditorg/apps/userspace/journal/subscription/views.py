@@ -115,8 +115,8 @@ class IndividualJournalAccessSubscriptionDeleteView(
     template_name = 'userspace/journal/subscription/individualsubscription_delete.html'
 
     def get_queryset(self):
-        qs = super(IndividualJournalAccessSubscriptionDeleteView, self).get_queryset()
-        return qs.filter(journal=self.current_journal)
+        qs = super().get_queryset()
+        return qs.filter(journal_management_subscription__journal=self.current_journal)
 
     def get_success_url(self):
         messages.success(self.request, _("L'abonnement a été supprimé avec succès"))

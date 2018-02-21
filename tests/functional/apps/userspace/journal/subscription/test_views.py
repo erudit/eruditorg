@@ -218,42 +218,38 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         self.assertEqual(mail.outbox[0].to[0], post_data['email'])
 
 
-class TestIndividualJournalAccessSubscriptionDeleteView(BaseEruditTestCase):
+class TestIndividualJournalAccessSubscriptionDeleteView:
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
-        # Setup
+        user = UserFactory.create()
+        journal = JournalFactory.create(members=[user])
         subscription = JournalAccessSubscriptionFactory.create(
-            user=self.user, journal=self.journal)
+            user=user, journal=journal)
 
-        self.client.login(username='david', password='top_secret')
+        client = Client()
+        client.login(username=user.username, password='default')
         url = reverse('userspace:journal:subscription:delete', kwargs={
-            'journal_pk': self.journal.pk, 'pk': subscription.pk, })
+            'journal_pk': journal.pk, 'pk': subscription.pk, })
 
-        # Run
-        response = self.client.get(url)
-
-        # Check
-        self.assertEqual(response.status_code, 403)
+        response = client.get(url)
+        assert response.status_code == 403
 
     def test_can_properly_delete_a_subscription(self):
-        Authorization.authorize_user(
-            self.user, self.journal, AC.can_manage_individual_subscription)
+        user = UserFactory.create()
+        journal = JournalFactory.create(members=[user])
+        Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
 
-        plan = JournalManagementPlanFactory.create(max_accounts=10)
-        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
-
+        journalsub = JournalManagementSubscriptionFactory.create(journal=journal)
         subscription = JournalAccessSubscriptionFactory.create(
-            user=self.user, journal=self.journal)
+            user=user, journal_management_subscription=journalsub)
 
-        self.client.login(username='david', password='top_secret')
+        client = Client()
+        client.login(username=user.username, password='default')
         url = reverse('userspace:journal:subscription:delete', kwargs={
-            'journal_pk': self.journal.pk, 'pk': subscription.pk, })
+            'journal_pk': journal.pk, 'pk': subscription.pk, })
 
-        # Run
-        response = self.client.post(url, follow=False)
-
-        # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertFalse(JournalAccessSubscription.objects.exists())
+        response = client.post(url, follow=False)
+        assert response.status_code == 302
+        assert not JournalAccessSubscription.objects.exists()
 
 
 class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
