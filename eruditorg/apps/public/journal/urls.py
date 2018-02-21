@@ -61,5 +61,4 @@ urlpatterns = [
         url(_(r'^subscriber_journals\.xml$'), views.GoogleScholarSubscriberJournalsView.as_view(), name='scholar_subscriber_journals'),  # noqa
     ])),
 
-    # Compatibility URLs
 ]

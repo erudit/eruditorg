@@ -803,6 +803,20 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         from django.utils.translation import deactivate_all
 
         article = ArticleFactory()
+        article.issue.volume = "1"
+        article.issue.save()
+
+        url = '/revue/{journal_code}/{issue_year}/v{issue_volume}/n/{article_localidentifier}.html'.format(  # noqa
+            journal_code=article.issue.journal.code,
+            issue_year=article.issue.year,
+            issue_volume=article.issue.volume,
+            article_localidentifier=article.localidentifier
+        )
+
+        resp = self.client.get(url)
+        assert resp.status_code == 301
+
+
         url = '/revue/{journal_code}/{issue_year}/v/n{issue_number}/{article_localidentifier}.html'.format(  # noqa
             journal_code=article.issue.journal.code,
             issue_year=article.issue.year,
