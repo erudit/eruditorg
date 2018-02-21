@@ -51,6 +51,10 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
         journals = kwargs.get('journals', list())
         for journal in journals:
             obj.journals.add(journal)
+
+        if not obj.journal_management_subscription and obj.journal:
+            obj.journal_management_subscription = \
+                JournalManagementSubscription.objects.filter(journal=obj.journal).first()
         obj.save()
 
 

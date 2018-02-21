@@ -1,28 +1,11 @@
-{% extends "userspace/journal/base.html" %}
+{% extends "userspace/journal/subscription/base.html" %}
 {% load i18n waffle_tags %}
 
-{% block title %}{% trans "Abonnements" %} {{ block.super }}{% endblock title %}
-
-{% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
-{% endblock breadcrumb %}
-
-{% block section_title %}
-{% trans "Abonnements" %}
-{% endblock %}
-
 {% block content_main %}
-<ul class="tabs-group">
-  <li class="tab active">
-    <a href="">{% trans "Individuels" %}</a>
-  </li>
-  <li class="tab">
-    <a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Institutionnels" %}</a>
-  </li>
-</ul>
-
+{{ block.super }}
 {% flag "NEW_USERSPACE" %}
 <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
+<a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Désabonner en lot" %}</a>
 <section>
   <ul id="id_subscription_list" class="row">
     {% for subscription in subscriptions %}
