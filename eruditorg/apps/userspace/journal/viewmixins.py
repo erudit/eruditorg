@@ -14,6 +14,7 @@ from erudit.models import Journal
 
 from django.conf import settings
 
+
 class JournalScopeMixin:
     """
     The JournalScopeMixin provides a way to associate a view with a specific Journal instance. The

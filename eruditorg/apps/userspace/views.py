@@ -4,10 +4,8 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
-from erudit.models import Journal
 
 from base.viewmixins import LoginRequiredMixin
-from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 from core.journal.rules_helpers import get_editable_organisations
 
@@ -16,9 +14,7 @@ class UserspaceHomeView(LoginRequiredMixin, TemplateView):
     template_name = 'userspace/home.html'
 
     def get(self, request):
-        journal_qs = Journal.objects.filter(collection__code='erudit') \
-            if is_production_team_member(self.request.user) \
-            else get_editable_journals(self.request.user)
+        journal_qs = get_editable_journals(self.request.user)
         organisation_qs = get_editable_organisations(self.request.user)
         journal_exists = journal_qs.exists()
         organisation_exists = organisation_qs.exists()
