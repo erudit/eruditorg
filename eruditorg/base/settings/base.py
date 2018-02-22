@@ -197,6 +197,8 @@ POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',
 }
 
+MANAGED_COLLECTIONS = tuple()
+
 EMAIL_BACKEND = 'post_office.EmailBackend'
 EMAIL_HOST = "mail"
 EMAIL_PORT = '25'
@@ -209,6 +211,8 @@ COMMUNICATION_EMAIL = 'media@erudit.org'
 SUBSCRIPTION_EMAIL = 'client@erudit.org'
 
 WSGI_APPLICATION = 'eruditorg.wsgi.application'
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

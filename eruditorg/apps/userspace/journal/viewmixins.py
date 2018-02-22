@@ -12,6 +12,7 @@ from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 from erudit.models import Journal
 
+from django.conf import settings
 
 class JournalScopeMixin:
     """
@@ -41,7 +42,7 @@ class JournalScopeMixin:
         if self.allow_production_team_access and is_production_team_member(self.request.user):
             # Allows the production team members to access this page for all the Journal instances
             # if applicable.
-            return Journal.objects.filter(collection__code='erudit')
+            return Journal.objects.filter(collection__code__in=settings.MANAGED_COLLECTIONS)
         return get_editable_journals(self.request.user)
 
     def init_current_journal(self, journal):
