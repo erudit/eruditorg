@@ -5,6 +5,7 @@
 {% has_perm 'editor.review_issuesubmission' request.user as can_review_issuesubmission %}
 {% has_perm 'authorization.manage_authorizations' request.user scope_current_journal as can_manage_authorizations %}
 {% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_account %}
+{% has_perm 'subscription.manage_institutional_subscription' request.user scope_current_journal as can_manage_institutional_subscription %}
 {% has_perm 'subscription.consult_royalty_reports' request.user scope_current_journal as can_consult_royalty_reports %}
 
 <ul>
@@ -37,6 +38,8 @@
       <span class="sidenav-label">{% trans "Redevances" %}</span>
     </a>
   </li>
+  {% endif %}
+  {% if can_manage_institutional_subscription %}
   <li class="sidenav-item{% if menu_journal == 'subscription' %} active{% endif %}">
     <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}">
       <span class="ion-ios-people-outline sidenav-icon"></span>

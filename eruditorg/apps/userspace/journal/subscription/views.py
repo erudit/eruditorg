@@ -30,11 +30,12 @@ logger = logging.getLogger(__name__)
 
 
 class IndividualJournalAccessSubscriptionListView(
-        LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, ListView):
+        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
     context_object_name = 'subscriptions'
     menu_journal = 'subscription'
     model = JournalAccessSubscription
     paginate_by = 10
+    permission_required = 'subscription.can_manage_institutional_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
     ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
 

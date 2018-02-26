@@ -17,10 +17,11 @@ from ..viewmixins import JournalScopePermissionRequiredMixin
 
 JOURNAL_AUTHORIZATIONS = [
     AC.can_edit_journal_information,
-    AC.can_manage_authorizations,
     AC.can_manage_issuesubmission,
+    AC.can_manage_institutional_subscription,
     AC.can_manage_individual_subscription,
     AC.can_consult_royalty_reports,
+    AC.can_manage_authorizations,
 ]
 
 
