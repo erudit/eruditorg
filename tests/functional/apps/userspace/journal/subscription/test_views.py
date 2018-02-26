@@ -29,7 +29,7 @@ faker = Factory.create()
 
 pytestmark = pytest.mark.django_db
 
-def test_list_can_be_accessed_by_a_member():
+def test_list_cannot_be_accessed_by_a_member_without_permission():
     user = UserFactory(password="test")
     journal = JournalFactory()
     journal.members.add(user)
@@ -42,7 +42,28 @@ def test_list_can_be_accessed_by_a_member():
         'journal_pk': journal.pk, })
     response = client.get(url)
 
+    assert response.status_code == 403
+
+
+def test_list_can_be_accessed_by_a_member_with_permission():
+    user = UserFactory(password="test")
+    journal = JournalFactory()
+    journal.members.add(user)
+    journal.save()
+
+    AuthorizationFactory.create(
+        content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
+        user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
+
+    client = Client()
+    client.login(username=user.username, password="test")
+
+    url = reverse('userspace:journal:subscription:list', kwargs={
+        'journal_pk': journal.pk, })
+    response = client.get(url)
+
     assert response.status_code == 200
+
 
 def test_list_cannot_be_accessed_by_a_non_member():
     user = UserFactory(password="test")
@@ -62,7 +83,7 @@ def test_list_provides_only_subscriptions_associated_with_the_current_journal():
     journal = JournalFactory.create(members=[user])
     AuthorizationFactory.create(
         content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-        user=user, authorization_codename=AC.can_manage_individual_subscription.codename)
+        user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
 
     plan = JournalManagementPlanFactory.create(max_accounts=10)
     management_subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
@@ -89,6 +110,11 @@ def test_list_archive_years(monkeypatch, tmpdir):
 
     user = UserFactory.create()
     journal = JournalFactory.create(members=[user])
+    journal.members.add(user)
+
+    AuthorizationFactory.create(
+        content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
+        user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
 
     archive_subpath = views.IndividualJournalAccessSubscriptionListView.ARCHIVE_SUBPATH
     subdir = tmpdir.join(str(journal.code), archive_subpath).ensure(dir=True)

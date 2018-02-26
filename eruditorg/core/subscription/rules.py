@@ -35,6 +35,13 @@ rules.add_perm(
     ),
 )
 
+rules.add_perm(
+    'subscription.can_manage_institutional_subscription',
+    is_authenticated & (
+        is_superuser | is_staff | HasAuthorization(AC.can_manage_institutional_subscription)
+    ),
+)
+
 
 rules.add_perm(
     'subscription.manage_organisation_subscription_ips',

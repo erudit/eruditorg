@@ -40,9 +40,17 @@ class AuthorizationConfig(object):
     """
 
     can_manage_individual_subscription = AuthorizationDef(
-        'subscriptions:can_manage_individual_subscription', _('Gérer les abonnements '))
+        'subscriptions:can_manage_individual_subscription', _('Gérer les abonnements individuels'))
     """
     This authorization defines the ability to handle the individual subscriptions to journals.
+    """
+
+    can_manage_institutional_subscription = AuthorizationDef(
+        'subscriptions:can_manage_institutional_subscription',
+        _('Gérer les abonnements institutionnels')
+    )
+    """
+    This authorization defines the ability to manage the institutional subscriptions to journals.
     """
 
     can_manage_organisation_subscription_ips = AuthorizationDef(
