@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-22 16:38-0500\n"
+"POT-Creation-Date: 2018-02-27 11:18-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,6 +347,8 @@ msgid "Titre de la revue"
 msgstr ""
 
 #: apps/public/search/forms.py:29
+#: templates/public/journal/eruditxsd300_to_html.xsl:891
+#: templates/public/journal/eruditxsd300_to_html.xsl:2077
 msgid "Bibliographie"
 msgstr ""
 
@@ -969,7 +971,7 @@ msgstr ""
 #: templates/base.html:324 templates/public/journal/journal_detail.html:140
 #: templates/userspace/journal/information/journalinformation_update.html:4
 #: templates/userspace/journal/information/journalinformation_update.html:11
-#: templates/userspace/journal/partials/menu.html:21
+#: templates/userspace/journal/partials/menu.html:22
 msgid "À propos"
 msgstr ""
 
@@ -1001,23 +1003,23 @@ msgstr ""
 msgid "^export/organisations/$"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:97
+#: apps/userspace/journal/subscription/views.py:98
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:110
+#: apps/userspace/journal/subscription/views.py:111
 msgid "Vous ne pouvez pas gérer les abonnements de votre revue"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:122
+#: apps/userspace/journal/subscription/views.py:123
 msgid "L'abonnement a été créé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:141
+#: apps/userspace/journal/subscription/views.py:142
 msgid "L'abonnement a été supprimé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:167
+#: apps/userspace/journal/subscription/views.py:168
 msgid "La proposition d'abonnement a été annulée avec succès"
 msgstr ""
 
@@ -1190,7 +1192,7 @@ msgid "Culturel"
 msgstr ""
 
 #: apps/userspace/reporting/forms.py:20
-#: templates/userspace/journal/partials/menu.html:29
+#: templates/userspace/journal/partials/menu.html:30
 msgid "Dépôt"
 msgstr ""
 
@@ -1353,7 +1355,7 @@ msgstr ""
 #: templates/userspace/journal/authorization/authorization_user.html:6
 #: templates/userspace/journal/authorization/authorization_user.html:9
 #: templates/userspace/journal/authorization/authorization_user.html:13
-#: templates/userspace/journal/partials/menu.html:69
+#: templates/userspace/journal/partials/menu.html:72
 #: templates/userspace/library/authorization/authorization_confirm_delete.html:7
 #: templates/userspace/library/authorization/authorization_create.html:8
 #: templates/userspace/library/authorization/authorization_user.html:6
@@ -1377,22 +1379,26 @@ msgid "Valider les numéros"
 msgstr ""
 
 #: core/authorization/defaults.py:43
-msgid "Gérer les abonnements "
+msgid "Gérer les abonnements individuels"
 msgstr ""
 
 #: core/authorization/defaults.py:50
-msgid "Gérer les adresses IP de l’abonnement"
+msgid "Gérer les abonnements institutionnels"
 msgstr ""
 
 #: core/authorization/defaults.py:58
-msgid "Gérer les informations d’un abonnement"
+msgid "Gérer les adresses IP de l’abonnement"
 msgstr ""
 
 #: core/authorization/defaults.py:66
+msgid "Gérer les informations d’un abonnement"
+msgstr ""
+
+#: core/authorization/defaults.py:74
 msgid "Gérer les membres d’un abonnement"
 msgstr ""
 
-#: core/authorization/defaults.py:73
+#: core/authorization/defaults.py:81
 msgid "Consulter les rapports de redevances"
 msgstr ""
 
@@ -2219,6 +2225,7 @@ msgid "Compte rendu"
 msgstr ""
 
 #: erudit/models/journal.py:761
+#: templates/public/journal/eruditxsd300_to_html.xsl:877
 msgid "Note"
 msgstr ""
 
@@ -2252,6 +2259,7 @@ msgid "Aucun titre"
 msgstr ""
 
 #: erudit/models/journal.py:929 erudit/models/thesis.py:30
+#: templates/public/journal/eruditxsd300_to_html.xsl:213
 #: templates/public/journal/partials/issue_detail_article_item.html:72
 msgid "Résumé"
 msgstr ""
@@ -2306,7 +2314,7 @@ msgstr ""
 
 #: erudit/models/journal.py:1010 templates/base.html:326
 #: templates/public/journal/journal_detail.html:176
-#: templates/userspace/journal/partials/menu.html:43
+#: templates/userspace/journal/partials/menu.html:46
 #: templates/userspace/journal/subscription/individualsubscription_list.html:4
 #: templates/userspace/journal/subscription/individualsubscription_list.html:7
 #: templates/userspace/journal/subscription/individualsubscription_list.html:11
@@ -2349,6 +2357,7 @@ msgstr ""
 #: templates/public/citations/list.html:196
 #: templates/public/citations/list.html:199
 #: templates/public/journal/article_base.html:184
+#: templates/public/journal/eruditxsd300_to_html.xsl:541
 #: templates/public/journal/partials/article_citation_modal_content.html:14
 #: templates/public/journal/partials/article_citation_modal_content.html:19
 #: templates/public/journal/partials/article_citation_modal_content.html:65
@@ -3410,6 +3419,7 @@ msgstr ""
 
 #: templates/public/citations/list.html:106
 #: templates/public/citations/list.html:239
+#: templates/public/journal/eruditxsd300_to_html.xsl:355
 #: templates/public/journal/partials/issue_detail_article_item.html:13
 #: templates/public/search/advanced_search.html:165
 #: templates/public/search/results.html:316
@@ -3431,6 +3441,8 @@ msgstr ""
 
 #: templates/public/citations/list.html:116
 #: templates/public/citations/list.html:249
+#: templates/public/journal/eruditxsd300_to_html.xsl:363
+#: templates/public/journal/eruditxsd300_to_html.xsl:408
 #: templates/public/journal/partials/issue_detail_article_item.html:20
 #: templates/public/search/results.html:331
 #: templates/userspace/library/stats/legacy/landing.html:116
@@ -3487,6 +3499,7 @@ msgid "&nbsp;»"
 msgstr ""
 
 #: templates/public/citations/list.html:168
+#: templates/public/journal/eruditxsd300_to_html.xsl:655
 #: templates/public/journal/partials/article_citation_modal_content.html:37
 #: templates/public/search/results.html:384
 msgid "p."
@@ -3723,6 +3736,7 @@ msgid "Découvrir la revue"
 msgstr ""
 
 #: templates/public/journal/article_pdf_coverpage.html:238
+#: templates/public/journal/eruditxsd300_to_html.xsl:370
 #: templates/public/journal/partials/article_citation_modal_content.html:6
 #: templates/public/search/results.html:323
 msgid "Citer cet article"
@@ -3768,6 +3782,256 @@ msgstr ""
 #: templates/public/journal/article_summary.html:63
 #: templates/public/journal/article_summary.html:73
 msgid "Notice bibliographique"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:57
+#: templates/public/journal/partials/issue_detail_article_item.html:65
+msgid "Notice"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:79
+msgid "…plus d’informations"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:91
+#, python-format
+msgid ""
+"L’accès aux articles des numéros courants de cette revue est réservé aux "
+"abonnés. Toutes les archives des revues sont disponibles en libre accès. "
+"Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="
+"\"mailto:client@erudit.org?subject=Revue %(journal)s – Accès aux articles"
+"\">client@erudit.org</a>."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:97
+msgid "Seule la première page du PDF sera affichée."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:99
+msgid "Seul le résumé sera affiché."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:101
+msgid "Seuls les 600 premiers mots du texte seront affichés."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:107
+#, python-format
+msgid ""
+"\n"
+"                  Si vous détenez un abonnement individuel à cette revue, "
+"veuillez vous identifier <a href=\"%(login_url)s\" id=\"article-login-modal"
+"\" title=\"Se connecter\">en vous connectant</a>.\n"
+"                  "
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:117
+#: templates/public/journal/partials/issue_detail_article_item.html:36
+msgid "Le contenu de ce document est inaccessible en raison du droit d’auteur."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:128
+#: templates/public/journal/eruditxsd300_to_html.xsl:133
+#, python-format
+msgid "Consulter ce numéro de la revue %(journal|escape)s"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:129
+#: templates/public/journal/issue_detail.html:150
+msgid "Couverture de"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:134
+msgid "Logo de"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:138
+msgid "Lire le texte intégral"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:150
+msgid "Cliquez pour copier l'URI de cet article."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:153
+#: templates/public/journal/eruditxsd300_to_html.xsl:165
+msgid "adresse copiée"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:154
+#: templates/public/journal/eruditxsd300_to_html.xsl:166
+msgid "une erreur s'est produite"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:162
+msgid "Cliquez pour copier le DOI de cet article."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:181
+msgid "<xsl:apply-templates select=\"../article/@typeart\"/> de la revue"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:192
+#: templates/public/journal/eruditxsd300_to_html.xsl:296
+#: templates/public/journal/journal_base.html:191
+msgid "Vous êtes abonné à cette revue."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:204
+msgid "Plan de l’article"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:208
+msgid "Retour au début"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:227
+msgid "Texte intégral (PDF)"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:272
+#: templates/public/journal/eruditxsd300_to_html.xsl:430
+msgid "Liste des figures"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:277
+#: templates/public/journal/eruditxsd300_to_html.xsl:437
+msgid "Liste des tableaux"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:286
+msgid "Salons. Un éclairage sur la société par les revues savantes."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:304
+#: templates/public/journal/eruditxsd300_to_html.xsl:344
+msgid "Boîte à outils"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:351
+#: templates/public/journal/partials/issue_detail_article_item.html:10
+#: templates/public/search/results.html:312
+#: templates/userspace/journal/information/journalinformation_update.html:108
+msgid "Sauvegarder"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:379
+msgid "Partager"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:393
+msgid "Résumés"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:402
+msgid "Corps de l’article"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:408
+msgid "Veuillez télécharger l’article en PDF pour le lire."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:473
+msgid "Un article"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:474
+msgid "Un compte rendu"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:475
+msgid "Une note"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:476
+msgid "Un document"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:603
+msgid ""
+"\n"
+"        --> Voir l’<a href=\"{@href}\"><strong>erratum</strong></a> "
+"concernant cet article\n"
+"        "
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:624
+msgid ">Volume&#160;"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:632
+msgid "Numéro&#160;"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:831
+#: templates/public/journal/eruditxsd300_to_html.xsl:844
+#: templates/public/journal/eruditxsd300_to_html.xsl:906
+#: templates/public/journal/eruditxsd300_to_html.xsl:919
+#: templates/public/journal/eruditxsd300_to_html.xsl:932
+#: templates/public/journal/eruditxsd300_to_html.xsl:945
+#: templates/public/journal/eruditxsd300_to_html.xsl:958
+#: templates/public/journal/eruditxsd300_to_html.xsl:972
+#: templates/public/journal/eruditxsd300_to_html.xsl:2188
+#: templates/public/journal/eruditxsd300_to_html.xsl:2201
+msgid "special"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:859
+msgid "Annexe"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:860
+msgid "Annexes"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:868
+msgid "Note biographique"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:869
+msgid "Notes biographiques"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:878
+msgid "Notes"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:886
+msgid "Remerciements"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:892
+msgid "Bibliographies"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:1086
+msgid ""
+"-> Voir la liste des <xsl:if test=\"parent::figure\">figures</xsl:if><xsl:if "
+"test=\"parent::tableau\">tableaux</xsl:if>"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:1175
+msgid ""
+"Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
+"jour."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:1181
+msgid "Image de l’équation"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:1190
+msgid ""
+"Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
+"jour."
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:1901
+msgid "Parties annexes"
+msgstr ""
+
+#: templates/public/journal/eruditxsd300_to_html.xsl:2230
+msgid "alias"
 msgstr ""
 
 #: templates/public/journal/issue_detail.html:6
@@ -3820,10 +4084,6 @@ msgstr ""
 #: templates/public/journal/issue_detail.html:124
 msgid ""
 "La lecture de ces articles nécessite la redirection vers le site de la revue."
-msgstr ""
-
-#: templates/public/journal/issue_detail.html:150
-msgid "Couverture de"
 msgstr ""
 
 #: templates/public/journal/issue_detail.html:155
@@ -4041,10 +4301,6 @@ msgstr ""
 msgid "Revue suivie de…"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:191
-msgid "Vous êtes abonné à cette revue."
-msgstr ""
-
 #: templates/public/journal/journal_detail.html:4
 #: templates/public/journal/journal_detail.html:12
 #: templates/public/journal/journal_detail.html:22
@@ -4191,16 +4447,6 @@ msgstr ""
 msgid "Culturelle"
 msgstr ""
 
-#: templates/public/journal/partials/issue_detail_article_item.html:10
-#: templates/public/search/results.html:312
-#: templates/userspace/journal/information/journalinformation_update.html:108
-msgid "Sauvegarder"
-msgstr ""
-
-#: templates/public/journal/partials/issue_detail_article_item.html:36
-msgid "Le contenu de ce document est inaccessible en raison du droit d’auteur."
-msgstr ""
-
 #: templates/public/journal/partials/issue_detail_article_item.html:40
 msgid "Lire l'article"
 msgstr ""
@@ -4217,10 +4463,6 @@ msgstr ""
 
 #: templates/public/journal/partials/issue_detail_article_item.html:64
 msgid "Voir la notice"
-msgstr ""
-
-#: templates/public/journal/partials/issue_detail_article_item.html:65
-msgid "Notice"
 msgstr ""
 
 #: templates/public/partials/pagination.html:5
@@ -5073,18 +5315,18 @@ msgstr ""
 msgid "Site Web officiel"
 msgstr ""
 
-#: templates/userspace/journal/partials/menu.html:37
+#: templates/userspace/journal/partials/menu.html:38
 msgid "Redevances"
 msgstr ""
 
-#: templates/userspace/journal/partials/menu.html:48
+#: templates/userspace/journal/partials/menu.html:51
 msgid ""
 "Vous devez vous connecter à un site externe pour accéder à vos rapports "
 "statistiques. L’identifiant et le mot de passe correspondent à ceux de votre "
 "ancien Espace éditeur sur Érudit."
 msgstr ""
 
-#: templates/userspace/journal/partials/menu.html:51
+#: templates/userspace/journal/partials/menu.html:54
 #: templates/userspace/library/partials/menu.html:24
 #: templates/userspace/library/stats/landing.html:4
 #: templates/userspace/library/stats/landing.html:7
@@ -5095,7 +5337,7 @@ msgstr ""
 msgid "Consultations"
 msgstr ""
 
-#: templates/userspace/journal/partials/menu.html:57
+#: templates/userspace/journal/partials/menu.html:60
 msgid ""
 "Vous devez vous connecter à un site externe pour accéder à OJS. "
 "L’identifiant et le mot de passe de ce service sont différents de celui de "
@@ -5103,7 +5345,7 @@ msgid ""
 "avec Érudit à l’adresse edition@erudit.org."
 msgstr ""
 
-#: templates/userspace/journal/partials/menu.html:60
+#: templates/userspace/journal/partials/menu.html:63
 msgid "Manuscrits"
 msgstr ""
 
