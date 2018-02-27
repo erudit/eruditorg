@@ -41,7 +41,6 @@ class IndividualJournalAccessSubscriptionListView(JournalSubscriptionMixin, List
     context_object_name = 'subscriptions'
     model = JournalAccessSubscription
     paginate_by = 10
-    permission_required = 'subscription.manage_institutional_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
 
     def get_context_data(self, **kwargs):
@@ -213,6 +212,7 @@ class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, Templat
 
 
 class JournalOrganisationSubscriptionList(JournalSubscriptionMixin, TemplateView):
+    permission_required = 'subscription.manage_institutional_subscription'
     template_name = 'userspace/journal/subscription/organisationsubscription_list.html'
     ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
     is_org_view = True
@@ -243,6 +243,7 @@ class JournalOrganisationSubscriptionList(JournalSubscriptionMixin, TemplateView
 
 
 class JournalOrganisationSubscriptionExport(JournalSubscriptionMixin, View):
+    permission_required = 'subscription.manage_institutional_subscription'
     is_org_view = True
 
     def get(self, request, *args, **kwargs):
@@ -274,5 +275,5 @@ class JournalOrganisationSubscriptionExport(JournalSubscriptionMixin, View):
 
 
 class JournalOrganisationSubscriptionExportDownload(BaseReportsDownload):
-    permission_required = 'subscription.manage_individual_subscription'
+    permission_required = 'subscription.manage_institutional_subscription'
     AUTHORIZED_SUBPATH = 'Abonnements/Abonnes'

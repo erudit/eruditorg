@@ -1,5 +1,5 @@
 {% extends "userspace/journal/base.html" %}
-{% load i18n %}
+{% load i18n rules %}
 
 {% block title %}{% trans "Abonnements" %} {{ block.super }}{% endblock title %}
 
@@ -13,11 +13,18 @@
 
 {% block content_main %}
 <ul class="tabs-group">
-  <li class="tab {% if not view.is_org_view %}active{% endif %}">
-    <a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Individuels" %}</a>
-  </li>
+  {% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_individual_subscription %}
+  {% has_perm 'subscription.manage_institutional_subscription' request.user scope_current_journal as can_manage_institutional_subscription %}
+
+  {% if can_manage_institutional_subscription %}
   <li class="tab {% if view.is_org_view %}active{% endif %}">
     <a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Institutionnels" %}</a>
   </li>
+  {% endif %}
+  {% if can_manage_individual_subscription %}
+  <li class="tab {% if not view.is_org_view %}active{% endif %}">
+    <a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Individuels" %}</a>
+  </li>
+  {% endif %}
 </ul>
 {% endblock content_main %}

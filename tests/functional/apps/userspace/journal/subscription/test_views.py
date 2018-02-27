@@ -59,7 +59,7 @@ def test_list_can_be_accessed_by_a_member_with_permission():
     journal = JournalFactory.create(members=[user])
     JournalManagementSubscriptionFactory.create(journal=journal)
 
-    Authorization.authorize_user(user, journal, AC.can_manage_institutional_subscription)
+    Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
 
     client = Client()
     client.login(username=user.username, password="default")
@@ -87,10 +87,11 @@ def test_list_cannot_be_accessed_by_a_non_member():
 def test_list_provides_only_subscriptions_associated_with_the_current_journal():
     user = UserFactory.create()
     journal = JournalFactory.create(members=[user])
-    Authorization.authorize_user(user, journal, AC.can_manage_institutional_subscription)
+    Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
 
-    plan = JournalManagementPlanFactory.create(max_accounts=10)
-    management_subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
+    plan = JournalManagementPlanFactory.create()
+    management_subscription = JournalManagementSubscriptionFactory.create(
+        journal=journal, plan=plan)
 
     other_journal = JournalFactory.create(collection=journal.collection)
     subscription_1 = JournalAccessSubscriptionFactory.create(

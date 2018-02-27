@@ -39,9 +39,15 @@
     </a>
   </li>
   {% endif %}
-  {% if can_manage_institutional_subscription %}
+  {% if can_manage_institutional_subscription or can_manage_individual_subscription %}
   <li class="sidenav-item{% if menu_journal == 'subscription' %} active{% endif %}">
-    <a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}">
+    <a
+    {% if can_manage_institutional_subscription %}
+      href="{% url 'userspace:journal:subscription:org_list' journal_pk=scope_current_journal.pk %}"
+    {% else %}
+      href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}"
+    {% endif %}
+    >
       <span class="ion-ios-people-outline sidenav-icon"></span>
       <span class="sidenav-label">{% trans "Abonnements" %}</span>
     </a>
