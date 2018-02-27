@@ -29,7 +29,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
     def _get_user_ip_address(self, request):
         if request.user.is_active and request.user.is_staff and 'HTTP_CLIENT_IP' in request.META:
             return request.META.get('HTTP_CLIENT_IP', None)
-        return get_ip(request)
+        return get_ip(request, right_most_proxy=True)
 
     def process_request(self, request):
         # Tries to determine if the user's IP address is contained into
