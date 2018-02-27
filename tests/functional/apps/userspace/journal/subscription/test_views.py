@@ -62,7 +62,7 @@ def test_list_can_be_accessed_by_a_member_with_permission():
     Authorization.authorize_user(user, journal, AC.can_manage_institutional_subscription)
 
     client = Client()
-    client.login(username=user.username, password="test")
+    client.login(username=user.username, password="default")
 
     url = reverse('userspace:journal:subscription:list', kwargs={
         'journal_pk': journal.pk, })
@@ -72,11 +72,11 @@ def test_list_can_be_accessed_by_a_member_with_permission():
 
 
 def test_list_cannot_be_accessed_by_a_non_member():
-    user = UserFactory(password="test")
+    user = UserFactory()
     journal = JournalFactory()
 
     client = Client()
-    client.login(username=user.username, password='test')
+    client.login(username=user.username, password='default')
     url = reverse('userspace:journal:subscription:list', kwargs={
         'journal_pk': journal.pk, })
 
