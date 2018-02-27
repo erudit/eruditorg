@@ -35,7 +35,7 @@ class IndividualJournalAccessSubscriptionListView(
     menu_journal = 'subscription'
     model = JournalAccessSubscription
     paginate_by = 10
-    permission_required = 'subscription.can_manage_institutional_subscription'
+    permission_required = 'subscription.manage_institutional_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
     ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
 
