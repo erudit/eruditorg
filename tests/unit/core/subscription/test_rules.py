@@ -33,7 +33,7 @@ def staff_user():
 
 
 @pytest.mark.django_db
-class TestManageIndividualSubscriptionRule(object):
+class TestManageIndividualSubscriptionRule:
     def test_knows_that_a_superuser_can_manage_individual_subscriptions(self, superuser):
         assert superuser.has_perm('subscription.manage_individual_subscription', JournalFactory())
 
@@ -64,7 +64,7 @@ class TestManageIndividualSubscriptionRule(object):
 
 
 @pytest.mark.django_db
-class TestManageOrganisationSubscriptionIpsRule(object):
+class TestManageOrganisationSubscriptionIpsRule:
 
     def test_knows_that_a_superuser_can_manage_organisation_subscription_ips(self, superuser):
         assert superuser.has_perm('subscription.manage_organisation_subscription_ips', OrganisationFactory())

@@ -22,7 +22,7 @@ middleware = SubscriptionMiddleware()
 
 @pytest.fixture()
 def single_article_view():
-    class MyViewAncestor(object):
+    class MyViewAncestor:
         def get_context_data(self, **kwargs):
             return {}
 
@@ -70,7 +70,7 @@ class TestSingleJournalMixin(BaseEruditTestCase):
 
 
 @pytest.mark.django_db
-class TestContentAccessCheckMixin(object):
+class TestContentAccessCheckMixin:
 
     def setUp(self):
         super(TestContentAccessCheckMixin, self).setUp()

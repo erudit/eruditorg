@@ -80,7 +80,7 @@ class TestFedoraFileDatastreamView(BaseEruditTestCase):
 
     def test_raises_if_the_datastream_does_not_have_content(self):
         # Setup
-        class Dummy(object):
+        class Dummy:
             logo = 'dummy'
             pid = 'pid'
 

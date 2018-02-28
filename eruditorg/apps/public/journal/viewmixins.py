@@ -14,7 +14,7 @@ from erudit.models import Journal
 from core.metrics.metric import metric
 
 
-class RedirectExceptionsToFallbackWebsiteMixin(object):
+class RedirectExceptionsToFallbackWebsiteMixin:
     """ Mixin that redirects all exceptions to the fallback website """
     def dispatch(self, request, *args, **kwargs):
         try:
@@ -25,7 +25,7 @@ class RedirectExceptionsToFallbackWebsiteMixin(object):
             )
 
 
-class SingleJournalMixin(object):
+class SingleJournalMixin:
     """ Simply allows retrieving a Journal instance using its code or localidentifier. """
 
     def get_journal_queryset(self):
@@ -46,7 +46,7 @@ class SingleJournalMixin(object):
         return self.get_journal()
 
 
-class ContentAccessCheckMixin(object):
+class ContentAccessCheckMixin:
     """ Defines a way to check whether the current user can browse a given Érudit content. """
 
     def get_content(self):
@@ -111,7 +111,7 @@ class ContentAccessCheckMixin(object):
         return self.request.subscriptions.provides_access_to(**kwargs)
 
 
-class SingleArticleMixin(object):
+class SingleArticleMixin:
     """ Simply allows retrieving an Article instance. """
 
     def get_object(self, queryset=None):
@@ -135,7 +135,7 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
         return context
 
 
-class ArticleViewMetricCaptureMixin(object):
+class ArticleViewMetricCaptureMixin:
     tracking_article_view_granted_metric_name = 'erudit__journal__article_view'
     tracking_view_type = 'html'
 

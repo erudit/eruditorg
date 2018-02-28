@@ -7,7 +7,7 @@ to provide filtering capabilities on a Solr index.
 """
 
 
-class Q(object):
+class Q:
     AND = 'AND'
     OR = 'OR'
     default = AND
@@ -44,7 +44,7 @@ class Q(object):
         return obj
 
 
-class Query(object):
+class Query:
     """
     A Query object used to apply filters to a given Solr search.
     """

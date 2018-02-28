@@ -14,7 +14,7 @@ from core.subscription.test.factories import JournalAccessSubscriptionPeriodFact
 
 
 @pytest.mark.django_db
-class TestGetJournalOrganisationSubscribers(object):
+class TestGetJournalOrganisationSubscribers:
     def test_can_return_the_organisations_that_have_subscribed_to_a_journal(self):
         # Setup
         now_dt = dt.datetime.now()

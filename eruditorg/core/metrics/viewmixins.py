@@ -3,7 +3,7 @@
 from .metric import metric
 
 
-class MetricCaptureMixin(object):
+class MetricCaptureMixin:
     """ This mixin create an InfluxDB point when the view is executed. """
     tracking_metric_name = None
 

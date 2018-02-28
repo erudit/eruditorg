@@ -17,7 +17,7 @@ from .shortcuts import (
 )
 
 
-class OrganisationScopeMixin(object):
+class OrganisationScopeMixin:
     """
     The OrganisationScopeMixin provides a way to associate a view with a specific Organisation
     instance. The Organisation instance must have the current user in its members. If not a

@@ -12,7 +12,7 @@ from .factories import UserFactory
 
 
 @pytest.mark.django_db
-class DBRequiredTestCase(object):
+class DBRequiredTestCase:
     pass
 
 

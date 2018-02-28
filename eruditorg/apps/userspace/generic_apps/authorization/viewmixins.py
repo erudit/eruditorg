@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class RelatedAuthorizationsMixin(object):
+class RelatedAuthorizationsMixin:
     # This attribute should be overridden on any subclass
     related_authorizations = []
 

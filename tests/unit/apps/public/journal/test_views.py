@@ -16,7 +16,7 @@ from apps.public.journal.views import IssueDetailView, ArticleDetailView
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 @pytest.mark.django_db
-class TestIssueDetailSummary(object):
+class TestIssueDetailSummary:
 
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()

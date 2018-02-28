@@ -13,7 +13,7 @@ from core.thesis.shortcuts import get_thesis_counts_per_publication_year
 
 
 @pytest.mark.django_db
-class TestGetThesisCollectionsShortcut(object):
+class TestGetThesisCollectionsShortcut:
     def test_returns_only_collections_associated_with_theses(self):
         # Setup
         author = AuthorFactory.create()
@@ -27,7 +27,7 @@ class TestGetThesisCollectionsShortcut(object):
 
 
 @pytest.mark.django_db
-class TestGetThesisCountsPerPublicationYearShortcut(object):
+class TestGetThesisCountsPerPublicationYearShortcut:
     def test_can_determine_the_thesis_counts_per_publication_year(self):
         # Setup
         author = AuthorFactory.create()
@@ -63,7 +63,7 @@ class TestGetThesisCountsPerPublicationYearShortcut(object):
 
 
 @pytest.mark.django_db
-class TestGetThesisCountsPerAuthorFirstLetterShortcut(object):
+class TestGetThesisCountsPerAuthorFirstLetterShortcut:
     def test_can_determine_the_thesis_counts_per_author_firstletter(self):
         # Setup
         author_1 = AuthorFactory.create(lastname='Aname')

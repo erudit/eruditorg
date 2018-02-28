@@ -24,7 +24,7 @@ from .managers import JournalAccessSubscriptionValidManager
 logger = structlog.get_logger(__name__)
 
 
-class UserSubscriptions(object):
+class UserSubscriptions:
     """ Helper model that aggregates the subscriptions of a user """
 
     def __init__(self):

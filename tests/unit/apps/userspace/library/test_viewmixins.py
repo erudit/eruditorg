@@ -25,7 +25,7 @@ class MyView(OrganisationScopeMixin, TemplateView):
 
 
 @pytest.mark.django_db
-class TestOrganisationScopeMixin(object):
+class TestOrganisationScopeMixin:
 
     @pytest.fixture(autouse=True)
     def setup(self):

@@ -5,14 +5,14 @@ import inspect
 from django.utils.translation import ugettext_lazy as _
 
 
-class AuthorizationDef(object):
+class AuthorizationDef:
     def __init__(self, codename, label, staff_only=False):
         self.codename = codename
         self.label = label
         self.staff_only = staff_only
 
 
-class AuthorizationConfig(object):
+class AuthorizationConfig:
     """ Defines the authorizations that can be given to users in the Érudit application. """
 
     can_manage_authorizations = AuthorizationDef(

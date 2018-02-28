@@ -71,7 +71,7 @@ def article_raw_pdf_url(article):
     ))
 
 @pytest.mark.django_db
-class TestJournalListView(object):
+class TestJournalListView:
 
     @pytest.fixture(autouse=True)
     def setup(self):

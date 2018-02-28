@@ -28,7 +28,7 @@ def staff_user():
 
 
 @pytest.mark.django_db
-class TestUserspaceAccessRule(object):
+class TestUserspaceAccessRule:
     def test_knows_that_an_anonymous_user_cannot_access_the_userspace(self):
         # Run & check
         assert not AnonymousUser().has_perm('userspace.access')

@@ -31,7 +31,7 @@ from core.subscription.test.factories import ValidJournalAccessSubscriptionPerio
 
 
 @pytest.mark.django_db
-class TestJournalAccessSubscription(object):
+class TestJournalAccessSubscription:
     def test_knows_if_it_is_ongoing_or_not(self):
         # Setup
         now_dt = dt.datetime.now()
@@ -71,7 +71,7 @@ class TestJournalAccessSubscription(object):
 
 
 @pytest.mark.django_db
-class TestUserSubscriptions(object):
+class TestUserSubscriptions:
 
     def test_the_first_subscription_is_the_active_subscription(self):
         from core.subscription.models import UserSubscriptions
@@ -233,7 +233,7 @@ class TestJournalAccessSubscriptionPeriod(DBRequiredTestCase):
 
 
 @pytest.mark.django_db
-class TestJournalManagementSubscription(object):
+class TestJournalManagementSubscription:
     def test_knows_if_it_is_ongoing_or_not(self):
         # Setup
         journal = JournalFactory()

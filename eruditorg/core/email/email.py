@@ -12,7 +12,7 @@ from base.context_managers import switch_language
 from .conf import settings as email_settings
 
 
-class Email(object):
+class Email:
     """ A simple wrapper around the post_office.mail.send function.
 
     This allow to perform additional operations such as generating the text content

@@ -6,7 +6,7 @@ from . import solr_search
 from .conf import settings as search_settings
 
 
-class EruditDocumentSolrFilter(object):
+class EruditDocumentSolrFilter:
     """ Filter that returns a list of EruditDocument instance based on Solr search results.
 
     This "filter" class can process many individual filters that should be translated to Solr

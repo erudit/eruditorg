@@ -11,7 +11,7 @@ from erudit.test.factories import JournalFactory
 
 
 @pytest.mark.django_db
-class TestJournalUpcomingManager(object):
+class TestJournalUpcomingManager:
     def test_journals_with_no_issues_are_upcoming(self):
         # Setup
         journal_1 = JournalFactory()
