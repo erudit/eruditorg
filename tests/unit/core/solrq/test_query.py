@@ -66,7 +66,7 @@ class TestQ(SolrqTestCase):
     def test_cannot_be_combined_with_an_object_that_is_not_a_q_object(self):
         # Run & check
         with self.assertRaises(TypeError):
-            q = Q(foo='bar') | 'dummy'  # noqa
+            Q(foo='bar') | 'dummy'  # noqa
 
     def test_can_handle_negations(self):
         # Run & check
@@ -123,12 +123,12 @@ class TestQuery(SolrqTestCase):
             '(((foo:bar) OR (foo:test))) AND (xyz:xyz)')
 
     def test_can_generate_correct_querystrings_using_q_objects_and_negations(self):
-        # Setup
+        # We used to negate with "*:* -(term)" but that didn't yield the kind of results we wanted.
+        # Using a simple NOT does the right thing. See erudit/support#209
         query = Query(self.search)
-        # Run & check
         self.assertEqual(
             query.filter(Q(foo='bar') | ~Q(foo='test'), xyz='xyz')._q,
-            '(((foo:bar) OR ((*:* -foo:test)))) AND (xyz:xyz)')
+            '(((foo:bar) OR ((NOT foo:test)))) AND (xyz:xyz)')
 
     def test_can_use_filters_mapping(self):
         # Setup
