@@ -16,7 +16,7 @@ from .forms import UserPersonalDataForm
 from .shortcuts import can_modify_account
 
 
-class CanModifyAccountMixin(object):
+class CanModifyAccountMixin:
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

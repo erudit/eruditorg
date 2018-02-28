@@ -15,7 +15,7 @@ from .repository import api
 logger = logging.getLogger(__name__)
 
 
-class FedoraMixin(object):
+class FedoraMixin:
     """
     The FedoraMixin defines a common way to associate Django models and its
     instances to eulfedora's models and Erudit's objects'

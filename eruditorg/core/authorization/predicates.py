@@ -9,7 +9,7 @@ from .defaults import AuthorizationDef
 from .models import Authorization
 
 
-class AuthorizationChecker(object):
+class AuthorizationChecker:
     def __init__(self, authorization_codenames, foreign_key=None):
         self.authorization_codenames = authorization_codenames
         self.foreign_key = foreign_key
@@ -38,7 +38,7 @@ class AuthorizationChecker(object):
         return authorization_qs.exists()
 
 
-class HasAuthorization(object):
+class HasAuthorization:
     """
     Class generator which return a predicate function parametrized by an
     authorization codename.
@@ -50,7 +50,7 @@ class HasAuthorization(object):
         return Predicate(AuthorizationChecker([authorization_codename, ], foreign_key))
 
 
-class HasAnyAuthorization(object):
+class HasAnyAuthorization:
     """
     Class generator which return a predicate function parametrized by a list of authorization
     codenames. The predicate is verified if the user or the group has at least one of these

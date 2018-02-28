@@ -175,7 +175,7 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
 
 
 @pytest.mark.django_db
-class TestAdvancedSearchView(object):
+class TestAdvancedSearchView:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.factory = RequestFactory()
@@ -226,7 +226,7 @@ class TestSearchResultsView(BaseEruditTestCase):
 
 
 @pytest.mark.django_db
-class TestSavedSearchAddView(object):
+class TestSavedSearchAddView:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.factory = RequestFactory()
@@ -299,7 +299,7 @@ class TestSavedSearchAddView(object):
 
 
 @pytest.mark.django_db
-class TestSavedSearchRemoveView(object):
+class TestSavedSearchRemoveView:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.factory = RequestFactory()

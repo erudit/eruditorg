@@ -3,7 +3,7 @@ from django.test import RequestFactory
 from unittest import mock
 
 
-class TestRedirectToFallbackMiddleware(object):
+class TestRedirectToFallbackMiddleware:
 
     def test_can_redirect_urls_that_does_not_resolve(self):
         middleware = RedirectToFallbackMiddleware()

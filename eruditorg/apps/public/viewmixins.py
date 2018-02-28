@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils.translation import get_language
 
 
-class FallbackBaseViewMixin(object):
+class FallbackBaseViewMixin:
     """ Mixin for views that offer a fallback to erudit's classic website """
 
     def get_fallback_url(self):

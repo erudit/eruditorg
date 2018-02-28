@@ -17,7 +17,7 @@ faker = Factory.create()
 
 
 @pytest.mark.django_db
-class TestJournalAccessSubscriptionCreateForm(object):
+class TestJournalAccessSubscriptionCreateForm:
     def test_can_validate_a_basic_subscription(self):
         subscription = JournalManagementSubscriptionFactory()
 

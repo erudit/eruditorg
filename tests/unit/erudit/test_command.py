@@ -8,7 +8,7 @@ from erudit.management.commands.import_journals_from_fedora import _create_issue
 
 
 @pytest.mark.django_db
-class TestCommand(object):
+class TestCommand:
 
     def test_can_create_issue_contributor_from_ea_output(self, eruditpublication):
 

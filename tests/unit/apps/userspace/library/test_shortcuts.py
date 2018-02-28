@@ -15,7 +15,7 @@ from apps.userspace.library.shortcuts import get_managed_organisations, get_last
 
 
 @pytest.mark.django_db
-class TestGetLastValidSubscriptionShortcut(object):
+class TestGetLastValidSubscriptionShortcut:
 
     def test_can_return_the_last_valid_subscription(self):
         organisation = OrganisationFactory()
@@ -35,7 +35,7 @@ class TestGetLastValidSubscriptionShortcut(object):
 
 
 @pytest.mark.django_db
-class TestGetManagedOrganisationsShortcut(object):
+class TestGetManagedOrganisationsShortcut:
     def test_cannot_return_managed_organisations_for_anonymous_users(self):
         # Setup
         OrganisationFactory.create()

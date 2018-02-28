@@ -18,7 +18,7 @@ def test_view(monkeypatch):
 
 
 @pytest.mark.django_db
-class TestUserLoginLandingRedirectView(object):
+class TestUserLoginLandingRedirectView:
 
     def test_login_redirects_superuser_to_dashboard(self, test_view):
         superuser = UserFactory(is_superuser=True)

@@ -9,7 +9,7 @@ from core.metrics.client import get_client
 from erudit.models import Journal
 
 
-class CounterReport(object):
+class CounterReport:
     """ Performs the necessary computations to describe a Counter report.
 
     It uses an InfluxDB server to perform aggregations on a set of time-series data.

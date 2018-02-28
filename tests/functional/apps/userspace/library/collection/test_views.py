@@ -21,7 +21,7 @@ from core.subscription.test.factories import JournalAccessSubscriptionPeriodFact
 
 
 @pytest.mark.django_db
-class TestCollectionViews(object):
+class TestCollectionViews:
     @pytest.yield_fixture(autouse=True)
     def setup(self):
         self.client = Client()

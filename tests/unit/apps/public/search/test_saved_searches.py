@@ -8,7 +8,7 @@ from apps.public.search.saved_searches import SavedSearchList
 
 
 @pytest.mark.django_db
-class TestSavedSearchList(object):
+class TestSavedSearchList:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.factory = RequestFactory()

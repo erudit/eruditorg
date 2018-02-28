@@ -7,7 +7,7 @@ from core.subscription.test.factories import JournalAccessSubscriptionFactory, J
 
 
 @pytest.mark.django_db
-class TestLibraryDashboardCounterForm(object):
+class TestLibraryDashboardCounterForm:
 
     def test_can_create_counter_forms_when_no_subscription(self):
         organisation = OrganisationFactory()

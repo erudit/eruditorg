@@ -1,4 +1,4 @@
-class BaseExternalDocument(object):
+class BaseExternalDocument:
     """ Define documents that are to be returned by the API but are not
     stored in the Django database
 

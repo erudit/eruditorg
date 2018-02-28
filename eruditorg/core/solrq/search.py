@@ -10,7 +10,7 @@ This is based on the use of pysolr.
 from .query import Query
 
 
-class Search(object):
+class Search:
     """ Defines a convenient way to perform searches on a Solr index. """
     # This attribute can be used to map specific fiter names to more
     # complex expressions. It must be of the form:

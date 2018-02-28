@@ -1,4 +1,4 @@
-class IssueSubmissionContextMixin(object):
+class IssueSubmissionContextMixin:
 
     def get_context_info(self):
         return {

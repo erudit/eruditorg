@@ -14,7 +14,7 @@ from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 
 
 @pytest.mark.django_db
-class TestJournalAccessSubscriptionValidManager(object):
+class TestJournalAccessSubscriptionValidManager:
     def test_can_return_only_the_valid_subscriptions(self):
         # Setup
         now_dt = dt.datetime.now()

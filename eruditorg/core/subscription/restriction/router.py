@@ -5,7 +5,7 @@ from django.conf import settings
 MANAGED = getattr(settings, 'RESTRICTION_MODELS_ARE_MANAGED', False)
 
 
-class RestrictionRouter(object):
+class RestrictionRouter:
     def db_for_read(self, model, **hints):
         if MANAGED:
             return 'default'
