@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import json
-import mock
 
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
-from django.test.utils import override_settings
 from django.utils.encoding import force_text
 import pytest
 
@@ -15,16 +11,28 @@ from core.citations.middleware import SavedCitationListMiddleware
 from core.citations.models import SavedCitationList
 from core.citations.test.factories import SavedCitationListFactory
 
+from erudit.models import Article
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import ThesisFactory
-from erudit.fedora.modelmixins import FedoraMixin
+from erudit.test.utils import get_erudit_article
 
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
+
+
+@pytest.fixture(autouse=True)
+def patch_get_erudit_article(monkeypatch):
+    article = get_erudit_article('009255ar.xml')
+    # We might end up needing an erudit_object during the test and when that
+    # happens, we don't want to be fetching stuff from Fedora, we want to
+    # return a fake object. For now, we'll just load one of our fixtures. In
+    # the vast majority of tests, specific values in the erudit object doesn't
+    # matter.
+    monkeypatch.setattr(Article, 'erudit_object', article)
 
 
 class TestSavedCitationListView(EruditClientTestCase):
@@ -61,127 +69,40 @@ class TestSavedCitationListView(EruditClientTestCase):
         clist.documents.add(self.article_2)
         clist.documents.add(self.article_3)
 
-    def get_mocked_erudit_object(self):
-        m = mock.MagicMock()
-        m.get_formatted_title.return_value = "mocked title"
-        return m
-
-    @override_settings(DEBUG=True)
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_embeds_the_count_of_scientific_articles_in_the_context(self, mock_erudit_object):
-
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
+    def test_embeds_the_count_of_article_types_in_the_context(self):
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
-        # Run
         response = self.client.get(url)
-        # Check
         assert response.status_code == 200
         assert response.context['scientific_articles_count'] == 2
-
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_embeds_the_count_of_cultural_articles_in_the_context(self, mock_erudit_object):
-
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url)
-        # Check
-        assert response.status_code == 200
         assert response.context['cultural_articles_count'] == 1
-
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_embeds_the_count_of_theses_in_the_context(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url)
-        # Check
-        assert response.status_code == 200
         assert response.context['theses_count'] == 2
 
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_sort_documents_by_ascending_title(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url, data={'sort_by': 'title_asc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['documents']) == [
-            self.thesis_1, self.thesis_2, self.article_1, self.article_2, self.article_3, ]
+    @pytest.mark.parametrize('criteria,expected_order', [
+        ('title_asc', ['a1', 'a2', 'a3', 't1', 't2']),
+        ('title_desc', ['t2', 't1', 'a1', 'a2', 'a3']),
+        ('year_asc', ['t2', 'a1', 'a2', 'a3', 't1']),
+        ('year_desc', ['t1', 'a3', 'a1', 'a2', 't2']),
+        ('author_asc', ['t1', 't2', 'a1', 'a3', 'a2']),
+        ('author_desc', ['a2', 'a1', 'a3', 't2', 't1']),
+    ])
+    def test_can_sort_documents_by_criteria(self, criteria, expected_order):
+        MAP = {
+            self.article_1: 'a1',
+            self.article_2: 'a2',
+            self.article_3: 'a3',
+            self.thesis_1: 't1',
+            self.thesis_2: 't2',
+        }
 
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_sort_documents_by_descending_title(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
         self.client.login(username='foo', password='notreallysecret')
         url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url, data={'sort_by': 'title_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['documents']) == [
-            self.article_1, self.article_2, self.article_3, self.thesis_2, self.thesis_1, ]
+        response = self.client.get(url, data={'sort_by': criteria})
+        documents = list(response.context['documents'])
+        ordered_ids = [MAP[doc] for doc in documents]
 
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_sort_documents_by_ascending_year(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url, data={'sort_by': 'year_asc'})
-        # Check
         assert response.status_code == 200
-        assert list(response.context['documents']) == [
-            self.thesis_2, self.article_1, self.article_2, self.article_3, self.thesis_1, ]
-
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_sort_documents_by_descending_year(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url, data={'sort_by': 'year_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['documents']) == [
-            self.thesis_1, self.article_3, self.article_1, self.article_2, self.thesis_2, ]
-
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_sort_documents_by_ascending_author_name(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url, data={'sort_by': 'author_asc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['documents']) == [
-            self.thesis_1, self.thesis_2, self.article_1, self.article_3, self.article_2, ]
-
-    @mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_can_sort_documents_by_descending_author_name(self, mock_erudit_object):
-        # Setup
-        mock_erudit_object.return_value = self.get_mocked_erudit_object()
-        self.client.login(username='foo', password='notreallysecret')
-        url = reverse('public:citations:list')
-        # Run
-        response = self.client.get(url, data={'sort_by': 'author_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['documents']) == [
-            self.article_2, self.article_1, self.article_3, self.thesis_2, self.thesis_1, ]
+        assert ordered_ids == expected_order
 
 
 class TestSavedCitationAddView(EruditClientTestCase):

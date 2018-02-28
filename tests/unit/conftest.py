@@ -1,9 +1,9 @@
 import os
 import pytest
 
-from eruditarticle.objects.article import EruditArticle
-from eruditarticle.objects.publication import EruditPublication
-from eruditarticle.objects.journal import EruditJournal
+from erudit.test.utils import (
+    get_erudit_article, get_erudit_publication, get_erudit_journal
+)
 
 
 @pytest.fixture(
@@ -11,8 +11,7 @@ from eruditarticle.objects.journal import EruditJournal
     params=os.listdir('./tests/fixtures/article/')
 )
 def eruditarticle(request):
-    with open('./tests/fixtures/article/{}'.format(request.param), 'rb') as xml:
-        return EruditArticle(xml.read())
+    return get_erudit_article(request.param)
 
 
 @pytest.fixture(
@@ -20,8 +19,7 @@ def eruditarticle(request):
     params=os.listdir('./tests/fixtures/issue/')
 )
 def eruditpublication(request):
-    with open('./tests/fixtures/issue/{}'.format(request.param), 'rb') as xml:
-        return EruditPublication(xml.read())
+    return get_erudit_publication(request.param)
 
 
 @pytest.fixture(
@@ -29,5 +27,4 @@ def eruditpublication(request):
     params=os.listdir('./tests/fixtures/journal/')
 )
 def eruditjournal(request):
-    with open('./tests/fixtures/journal/{}'.format(request.param), 'rb') as xml:
-        return EruditJournal(xml.read())
+    return get_erudit_journal(request.param)
