@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 
 from django.db import models
 from django.conf import settings
+from django.db.models import Q
 
 logger = logging.getLogger(__name__)
 
@@ -66,9 +67,22 @@ class JournalAccessSubscriptionValidManager(models.Manager):
     def get_queryset(self):
         """ Returns all the valid JournalAccessSubscription instances. """
         nowd = dt.datetime.now().date()
-        return JournalAccessSubscriptionQueryset(self.model, using=self._db).filter(
+        # institutional and individual saubscriptions don't have the same validity criterias.
+        # institutional subscription need a valid JournalAccessSubscriptionPeriod, but
+        # not individual (org=None) ones. On the individual side, it's a valid
+        # JournalManagementSubscriptionPeriod that we need.
+        # That's because in the case of individual subscriptions, we let the journal manage
+        # validity themselves.
+        institutional = Q(
+            organisation__isnull=False,
             journalaccesssubscriptionperiod__start__lte=nowd,
             journalaccesssubscriptionperiod__end__gte=nowd)
+        individual = Q(
+            organisation__isnull=True,
+            journal_management_subscription__period__start__lte=nowd,
+            journal_management_subscription__period__end__gte=nowd)
+        qs = JournalAccessSubscriptionQueryset(self.model, using=self._db)
+        return qs.filter(institutional | individual)
 
     def get_for_ip_address(self, ip_address):
         """ Return all the subscriptions for the given ip address """

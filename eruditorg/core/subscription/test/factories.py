@@ -25,12 +25,8 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
     class Meta:
         model = JournalAccessSubscription
 
-    class Params:
-        valid = False
-
     @factory.post_generation
     def post(obj, create, extracted, **kwargs):
-
         if kwargs.get('valid', False):
             ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
         if kwargs.get('referers', None):
@@ -47,15 +43,37 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
                 ip_end=ip_end,
                 subscription=obj
             )
+        journals = kwargs.get('journals')
+        if journals:
+            obj.journal = journals[0]
+            obj.journal_management_subscription = JournalManagementSubscription.objects \
+                .filter(journal=journals[0]).first()
+            for journal in journals:
+                obj.journals.add(journal)
+            obj.save()
 
-        journals = kwargs.get('journals', list())
-        for journal in journals:
-            obj.journals.add(journal)
+    @factory.post_generation
+    def type(obj, create, extracted, **kwargs):
+        if extracted == 'individual':
+            obj.organisation = None
+            obj.save()
 
-        if not obj.journal_management_subscription and obj.journal:
-            obj.journal_management_subscription = \
-                JournalManagementSubscription.objects.filter(journal=obj.journal).first()
-        obj.save()
+    @factory.post_generation
+    def journal(obj, create, extracted, **kwargs):
+        if extracted is not None:
+            obj.journal = extracted
+            obj.journal_management_subscription = JournalManagementSubscription.objects \
+                .filter(journal=extracted).first()
+
+    @factory.post_generation
+    def valid(obj, create, extracted, **kwargs):
+        if extracted:
+            ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
+
+    @factory.post_generation
+    def expired(obj, create, extracted, **kwargs):
+        if extracted:
+            ExpiredJournalAccessSubscriptionPeriodFactory(subscription=obj)
 
 
 class JournalAccessSubscriptionPeriodFactory(factory.DjangoModelFactory):
@@ -69,6 +87,12 @@ class ValidJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPerio
 
     start = dt.datetime.now() - dt.timedelta(days=10)
     end = dt.datetime.now() + dt.timedelta(days=10)
+
+
+class ExpiredJournalAccessSubscriptionPeriodFactory(JournalAccessSubscriptionPeriodFactory):
+
+    start = dt.datetime.now() - dt.timedelta(days=10)
+    end = dt.datetime.now() - dt.timedelta(days=5)
 
 
 class InstitutionRefererFactory(factory.DjangoModelFactory):
@@ -87,6 +111,7 @@ class InstitutionIPAddressRangeFactory(factory.django.DjangoModelFactory):
 
 
 class JournalManagementPlanFactory(factory.django.DjangoModelFactory):
+    code = factory.Sequence(lambda n: 'plan{}'.format(n))
     max_accounts = 5
 
     class Meta:
@@ -99,6 +124,22 @@ class JournalManagementSubscriptionFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = JournalManagementSubscription
+
+    @factory.post_generation
+    def valid(obj, create, extracted, **kwargs):
+        if extracted:
+            JournalManagementSubscriptionPeriodFactory(
+                subscription=obj,
+                start=dt.datetime.now() - dt.timedelta(days=10),
+                end=dt.datetime.now() + dt.timedelta(days=10))
+
+    @factory.post_generation
+    def expired(obj, create, extracted, **kwargs):
+        if extracted:
+            JournalManagementSubscriptionPeriodFactory(
+                subscription=obj,
+                start=dt.datetime.now() - dt.timedelta(days=10),
+                end=dt.datetime.now() - dt.timedelta(days=5))
 
 
 class JournalManagementSubscriptionPeriodFactory(factory.DjangoModelFactory):
