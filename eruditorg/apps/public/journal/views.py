@@ -36,7 +36,6 @@ from erudit.models import Article
 from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
-from eruditarticle.utils import remove_xml_namespaces
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
@@ -520,6 +519,20 @@ class BaseArticleDetailView(
     def dispatch(self, *args, **kwargs):
         return super(BaseArticleDetailView, self).dispatch(*args, **kwargs)
 
+    def _prepare_dom(self, article):
+        # Before sending it through the XSL, there are a couple of manipulations that we might need
+        # to make on the DOM.
+        eruditarticle = article.erudit_object
+        if eruditarticle.is_of_type_roc:
+            # If the first "corps/texte" element of the article is of type "roc" that means that
+            # its content is minimally processed and that we can't really rely of the bibliography
+            # In this case, we *don't* want to show it. Rather than adding a rule for this in the
+            # XSL script, which could end up being complicated and hard to maintain, we simply
+            # remove the bibliography element on-the-fly, right here. ref support#198
+            grbiblio = eruditarticle.find('grbiblio')
+            grbiblio.getparent().remove(grbiblio)
+        return eruditarticle._dom
+
     def _render_xml_contents(self, only_summary):
         """ Renders the given article instance as HTML. """
 
@@ -538,8 +551,7 @@ class BaseArticleDetailView(
                 context['pdf_num_pages'] > 1
             )
 
-        # Prepares the XML of the article
-        article_xml = remove_xml_namespaces(et.fromstring(article.fedora_object.xml_content))
+        article_dom = self._prepare_dom(article)
 
         # Renders the templates corresponding to the XSL stylesheet that
         # will allow us to convert ERUDITXSD300 articles to HTML
@@ -549,7 +561,7 @@ class BaseArticleDetailView(
         # Performs the XSLT transformation
         lxsl = et.parse(io.BytesIO(force_bytes(xsl)))
         html_transform = et.XSLT(lxsl)
-        html_content = html_transform(article_xml)
+        html_content = html_transform(article_dom)
 
         return mark_safe(html_content)
 
