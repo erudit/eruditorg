@@ -105,7 +105,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         # Run & check
         filt.filter(request, EruditDocument.objects.all(), None)
         self.assertEqual(
-            filt.sqs._q, '((Metadonnees:test) AND ((*:* -TexteComplet:intro)))')
+            filt.sqs._q, '((Metadonnees:test) AND ((NOT TexteComplet:intro)))')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_publication_years(self, mock_get_results):

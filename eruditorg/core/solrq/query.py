@@ -116,7 +116,7 @@ class Query:
 
             # Handles the case when the query is negated
             if q.negated:
-                subqs = '*:* -{}'.format(subqs)
+                subqs = 'NOT {}'.format(subqs)
 
             if subqs is None:
                 continue
