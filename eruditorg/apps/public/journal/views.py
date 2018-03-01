@@ -523,6 +523,7 @@ class BaseArticleDetailView(
         # Before sending it through the XSL, there are a couple of manipulations that we might need
         # to make on the DOM.
         eruditarticle = article.erudit_object
+
         if eruditarticle.is_of_type_roc:
             # If the first "corps/texte" element of the article is of type "roc" that means that
             # its content is minimally processed and that we can't really rely of the bibliography
@@ -530,7 +531,8 @@ class BaseArticleDetailView(
             # XSL script, which could end up being complicated and hard to maintain, we simply
             # remove the bibliography element on-the-fly, right here. ref support#198
             grbiblio = eruditarticle.find('grbiblio')
-            grbiblio.getparent().remove(grbiblio)
+            if grbiblio:
+                grbiblio.getparent().remove(grbiblio)
         return eruditarticle._dom
 
     def _render_xml_contents(self, only_summary):
