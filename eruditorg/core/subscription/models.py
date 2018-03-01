@@ -255,12 +255,18 @@ class JournalManagementSubscription(AbstractSubscription):
         return AccountActionToken.pending_objects.get_for_object(self)
 
     @property
+    def slots_left(self):
+        if self.plan.is_unlimited:
+            return 10**5
+        count = self.subscriptions.count()
+        pending = self.get_pending_subscriptions().count()
+        slots = self.plan.max_accounts
+        return max(0, slots - count - pending)
+
+    @property
     def is_full(self):
         """ :returns: True if this JournalManagementSubscription is full """
-        if self.plan.is_unlimited:
-            return False
-        return self.subscriptions.count() + \
-            self.get_pending_subscriptions().count() >= self.plan.max_accounts
+        return self.slots_left <= 0
 
     def __str__(self):
         return "{} / {}".format(self.journal, self.plan)

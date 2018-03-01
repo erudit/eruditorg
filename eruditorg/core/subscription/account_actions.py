@@ -33,7 +33,9 @@ class IndividualSubscriptionAction(AccountActionBase):
         }
 
     def get_consumption_redirect_url(self, token):
-        return reverse('public:journal:journal_detail', kwargs={'code': token.content_object.code})
+        return reverse(
+            'public:journal:journal_detail',
+            kwargs={'code': token.content_object.journal.code})
 
     def get_consumption_success_message(self, token):
         return _('Votre abonnement a bien été pris en compte')
