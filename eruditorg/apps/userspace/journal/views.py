@@ -13,7 +13,7 @@ from base.viewmixins import LoginRequiredMixin, MenuItemMixin
 from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 
-from .viewmixins import JournalScopeMixin
+from .viewmixins import JournalScopeMixin, JournalScopePermissionRequiredMixin
 
 
 class HomeView(LoginRequiredMixin, JournalScopeMixin, TemplateView):
@@ -65,7 +65,9 @@ def journal_reports_path(journal_code):
     return os.path.join(settings.SUBSCRIPTION_EXPORTS_ROOT, journal_code)
 
 
-class JournalReportsDownload(LoginRequiredMixin, JournalScopeMixin, View):
+class BaseReportsDownload(JournalScopePermissionRequiredMixin, View):
+    AUTHORIZED_SUBPATH = ''
+
     def get(self, request, *args, **kwargs):
         subpath = request.GET.get('subpath')
         if not subpath:
@@ -78,7 +80,7 @@ class JournalReportsDownload(LoginRequiredMixin, JournalScopeMixin, View):
         root_path = journal_reports_path(self.current_journal.code)
         path = os.path.normpath(os.path.join(root_path, subpath))
         # Twart attempts to access upper filesystem files. Error out so it shows in sentry.
-        assert path.startswith(root_path)
+        assert path.startswith(os.path.join(root_path, self.AUTHORIZED_SUBPATH))
         if not os.path.exists(path):
             raise Http404()
         with open(path, 'rb') as fp:
@@ -86,9 +88,16 @@ class JournalReportsDownload(LoginRequiredMixin, JournalScopeMixin, View):
         return response
 
 
-class RoyaltiesListView(LoginRequiredMixin, JournalScopeMixin, MenuItemMixin, TemplateView):
+class RoyaltyReportsDownload(BaseReportsDownload):
+    permission_required = 'subscription.consult_royalty_reports'
+    AUTHORIZED_SUBPATH = 'Abonnements/Rapports'
+
+
+class RoyaltiesListView(
+        JournalScopePermissionRequiredMixin, MenuItemMixin, TemplateView):
     menu_journal = 'royalty_reports'
     template_name = 'userspace/journal/royalties_list.html'
+    permission_required = 'subscription.consult_royalty_reports'
     REPORT_SUBPATH = 'Abonnements/Rapports'
 
     def get_royalties_reports(self):

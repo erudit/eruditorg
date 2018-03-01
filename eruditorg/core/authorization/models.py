@@ -47,6 +47,16 @@ class Authorization(models.Model):
     class Meta:
         verbose_name = _('Autorisation')
 
+    @classmethod
+    def authorize_user(cls, user, to_obj, authorization):
+        if not isinstance(authorization, str):
+            authorization = authorization.codename
+        return cls.objects.create(
+            content_type=ContentType.objects.get_for_model(to_obj),
+            object_id=to_obj.id,
+            user=user,
+            authorization_codename=authorization)
+
     def __str__(self):
         if self.user:
             who = self.user

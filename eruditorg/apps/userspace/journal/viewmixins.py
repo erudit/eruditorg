@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from rules.contrib.views import PermissionRequiredMixin
 
+from base.viewmixins import LoginRequiredMixin
 from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 from erudit.models import Journal
@@ -92,7 +93,8 @@ class JournalScopeMixin:
         return self.get_user_journals()
 
 
-class JournalScopePermissionRequiredMixin(JournalScopeMixin, PermissionRequiredMixin):
+class JournalScopePermissionRequiredMixin(
+        LoginRequiredMixin, JournalScopeMixin, PermissionRequiredMixin):
     raise_exception = True
 
     def get_context_data(self, **kwargs):

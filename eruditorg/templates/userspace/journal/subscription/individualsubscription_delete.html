@@ -1,14 +1,14 @@
-{% extends "userspace/journal/base.html" %}
+{% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Confirmer la suppression de l'abonnement ?" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk%}">{% trans "Abonnements individuels" %}</a></li>
 <li><a href="#">{% trans "Confirmer la suppression de l'abonnement ?" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
+{{ block.super }}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">{% trans "Confirmer la suppression de l'abonnement ?" %}</h3>

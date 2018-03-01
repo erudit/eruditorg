@@ -1,35 +1,11 @@
-{% extends "userspace/journal/base.html" %}
+{% extends "userspace/journal/subscription/base.html" %}
 {% load i18n waffle_tags %}
 
-{% block title %}{% trans "Abonnements" %} {{ block.super }}{% endblock title %}
-
-{% block breadcrumb %}{{ block.super }}
-<li><a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
-{% endblock breadcrumb %}
-
-{% block section_title %}
-{% trans "Abonnements" %}
-{% endblock %}
-
 {% block content_main %}
-<h2>{% trans "Institutions abonnées par année" %}</h2>
-<ul>
-  {% for year, link in view.get_subscriptions_archive_years %}
-    <li><a href="{{ link }}">{{ year }}</li>
-  {% endfor %}
-</ul>
-
+{{ block.super }}
 {% flag "NEW_USERSPACE" %}
-<ul class="tabs-group">
-  <li class="tab active">
-    <a href="">{% trans "Institutionnels" %}</a>
-  </li>
-  <li class="tab">
-    <a href="">{% trans "Individuels" %}</a>
-  </li>
-</ul>
-
 <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
+<a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Désabonner en lot" %}</a>
 <section>
   <ul id="id_subscription_list" class="row">
     {% for subscription in subscriptions %}
@@ -66,11 +42,7 @@
   </div>
 </section>
 
-{% if subscribed_organisations %}
 <section>
-  <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
-  <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-  {% endif %}
   {% if pending_subscriptions %}
   <h2>{% trans "Abonnements en attente" %}</h2>
   <table class="table table-bordered">

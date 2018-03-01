@@ -1,5 +1,6 @@
 import csv
 import datetime as dt
+import io
 import logging
 import os
 import urllib.parse
@@ -7,67 +8,50 @@ import urllib.parse
 from account_actions.models import AccountActionToken
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
+from django.core.validators import EmailValidator
 from django.http import HttpResponseRedirect, HttpResponse
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, DeleteView, ListView, View
+from django.utils.translation import ugettext as _, ngettext
+from django.views.generic import CreateView, DeleteView, ListView, View, TemplateView
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
-from base.viewmixins import LoginRequiredMixin
 from base.viewmixins import MenuItemMixin
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
 from core.subscription.shortcuts import get_journal_organisation_subscribers
 from core.victor import Victor
 
-from ..viewmixins import JournalScopePermissionRequiredMixin, JournalScopeMixin
-from ..views import journal_reports_path
+from ..viewmixins import JournalScopePermissionRequiredMixin
+from ..views import journal_reports_path, BaseReportsDownload
 
 from .forms import JournalAccessSubscriptionCreateForm
 
 logger = logging.getLogger(__name__)
 
 
-class IndividualJournalAccessSubscriptionListView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
-    context_object_name = 'subscriptions'
+class JournalSubscriptionMixin(JournalScopePermissionRequiredMixin, MenuItemMixin):
     menu_journal = 'subscription'
+    permission_required = 'subscription.manage_individual_subscription'
+    is_org_view = False
+
+
+class IndividualJournalAccessSubscriptionListView(JournalSubscriptionMixin, ListView):
+    context_object_name = 'subscriptions'
     model = JournalAccessSubscription
     paginate_by = 10
-    permission_required = 'subscription.manage_institutional_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_list.html'
-    ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
 
     def get_context_data(self, **kwargs):
         context = super(IndividualJournalAccessSubscriptionListView, self) \
             .get_context_data(**kwargs)
         context['pending_subscriptions'] = AccountActionToken.pending_objects \
             .get_for_object(self.current_journal)
-        context['subscribed_organisations'] = get_journal_organisation_subscribers(
-            self.current_journal)
         return context
 
-    def get_subscriptions_archive_years(self):
-        thisyear = dt.date.today().year
-        root_path = journal_reports_path(self.current_journal.code)
-        result = [(str(thisyear), reverse('userspace:journal:subscription:org_export'))]
-        try:
-            path = os.path.join(root_path, self.ARCHIVE_SUBPATH)
-            fns = sorted(os.listdir(path), reverse=True)
-            for fn in fns:
-                year = os.path.splitext(fn)[0]
-                subpath = urllib.parse.quote(os.path.join(self.ARCHIVE_SUBPATH, fn))
-                url = reverse('userspace:journal:reports_download')
-                url += '?subpath={}'.format(subpath)
-                result.append((year, url))
-        except FileNotFoundError:
-            # No archive, just list current year
-            pass
-        return result
-
     def get_queryset(self):
-        qs = super(IndividualJournalAccessSubscriptionListView, self).get_queryset()
+        qs = super().get_queryset()
         journal_management_subscription = JournalManagementSubscription.objects.filter(
             journal=self.current_journal
         ).first()
@@ -80,12 +64,9 @@ class IndividualJournalAccessSubscriptionListView(
         )
 
 
-class IndividualJournalAccessSubscriptionCreateView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, CreateView):
+class IndividualJournalAccessSubscriptionCreateView(JournalSubscriptionMixin, CreateView):
     form_class = JournalAccessSubscriptionCreateForm
-    menu_journal = 'subscription'
     model = AccountActionToken  # We create an AccountActionToken instance in this view.
-    permission_required = 'subscription.manage_individual_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_create.html'
 
     def get(self, request, *args, **kwargs):
@@ -125,18 +106,15 @@ class IndividualJournalAccessSubscriptionCreateView(
             'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
 
 
-class IndividualJournalAccessSubscriptionDeleteView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin, DeleteView):
+class IndividualJournalAccessSubscriptionDeleteView(JournalSubscriptionMixin, DeleteView):
     context_object_name = 'subscription'
     force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
-    menu_journal = 'subscription'
     model = JournalAccessSubscription
-    permission_required = 'subscription.manage_individual_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_delete.html'
 
     def get_queryset(self):
-        qs = super(IndividualJournalAccessSubscriptionDeleteView, self).get_queryset()
-        return qs.filter(journal=self.current_journal)
+        qs = super().get_queryset()
+        return qs.filter(journal_management_subscription__journal=self.current_journal)
 
     def get_success_url(self):
         messages.success(self.request, _("L'abonnement a été supprimé avec succès"))
@@ -145,12 +123,9 @@ class IndividualJournalAccessSubscriptionDeleteView(
 
 
 class IndividualJournalAccessSubscriptionCancelView(
-        LoginRequiredMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
-        SingleObjectTemplateResponseMixin, BaseDetailView):
+        JournalSubscriptionMixin, SingleObjectTemplateResponseMixin, BaseDetailView):
     force_scope_switch_to_pattern_name = 'userspace:journal:subscription:list'
-    menu_journal = 'subscription'
     model = AccountActionToken
-    permission_required = 'subscription.manage_individual_subscription'
     template_name = 'userspace/journal/subscription/individualsubscription_cancel.html'
 
     def get_queryset(self):
@@ -170,7 +145,107 @@ class IndividualJournalAccessSubscriptionCancelView(
             'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
 
 
-class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixin, View):
+class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, TemplateView):
+    template_name = 'userspace/journal/subscription/individualsubscription_batch_delete.html'
+
+    def get_queryset(self):
+        return JournalAccessSubscription.objects.filter(
+            journal_management_subscription__journal=self.current_journal,
+        )
+
+    def parse_csv(self, csv_bytes):
+        fp = io.StringIO(csv_bytes.decode('utf-8').strip())
+        csvreader = csv.reader(fp)
+        validator = EmailValidator()
+        errors = []
+        ignored = []
+        todelete = []
+        qs = self.get_queryset()
+        for index, (email, ) in enumerate(csvreader):
+            try:
+                validator(email)
+            except ValidationError:
+                if index == 0:
+                    # probably header, skip silently
+                    pass
+                else:
+                    errors.append((index + 1, email))
+            else:
+                try:
+                    subscription = qs.filter(user__email=email).get()
+                    todelete.append(subscription)
+                except JournalAccessSubscription.DoesNotExist:
+                    ignored.append(email)
+        if errors:
+            # When there are errors, we don't show any todelete/ignored
+            todelete = []
+            ignored = []
+        return todelete, ignored, errors
+
+    def post(self, request, *args, **kwargs):
+        todelete = request.POST.getlist('todelete[]')
+        if todelete:
+            qs = self.get_queryset().filter(pk__in=todelete)
+            deleted_count = qs.count()
+            qs.delete()
+            msg = ngettext(
+                "{} abonnement a été supprimé avec succès.",
+                "{} abonnements ont été supprimé avec succès.",
+                deleted_count
+            ).format(deleted_count)
+            messages.success(request, msg)
+            url = reverse(
+                'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
+            return HttpResponseRedirect(url)
+        else:
+            contents = request.FILES['csvfile'].read()
+            try:
+                todelete, ignored, errors = self.parse_csv(contents)
+                kwargs.update({
+                    'errors': errors,
+                    'ignored': ignored,
+                    'todelete': todelete,
+                })
+            except ValueError:
+                messages.error(request, _("Le CSV fourni n'est pas du bon format."))
+        return self.get(request, *args, **kwargs)
+
+
+class JournalOrganisationSubscriptionList(JournalSubscriptionMixin, TemplateView):
+    permission_required = 'subscription.manage_institutional_subscription'
+    template_name = 'userspace/journal/subscription/organisationsubscription_list.html'
+    ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
+    is_org_view = True
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subscribed_organisations'] = get_journal_organisation_subscribers(
+            self.current_journal)
+        return context
+
+    def get_subscriptions_archive_years(self):
+        thisyear = dt.date.today().year
+        root_path = journal_reports_path(self.current_journal.code)
+        result = [(str(thisyear), reverse('userspace:journal:subscription:org_export'))]
+        try:
+            path = os.path.join(root_path, self.ARCHIVE_SUBPATH)
+            fns = sorted(os.listdir(path), reverse=True)
+            for fn in fns:
+                year = os.path.splitext(fn)[0]
+                subpath = urllib.parse.quote(os.path.join(self.ARCHIVE_SUBPATH, fn))
+                url = reverse('userspace:journal:subscription:org_export_download')
+                url += '?subpath={}'.format(subpath)
+                result.append((year, url))
+        except FileNotFoundError:
+            # No archive, just list current year
+            pass
+        return result
+
+
+class JournalOrganisationSubscriptionExport(JournalSubscriptionMixin, View):
+    permission_required = 'subscription.manage_institutional_subscription'
+    is_org_view = True
+
     def get(self, request, *args, **kwargs):
         thisyear = dt.date.today().year
         # It's important to use the latin-1 encoding or else Excel balks at us when comes the time
@@ -197,3 +272,8 @@ class JournalOrganisationSubscriptionExport(LoginRequiredMixin, JournalScopeMixi
             row = [str(val).replace('’', '\'') for val in row]
             csvwriter.writerow(row)
         return response
+
+
+class JournalOrganisationSubscriptionExportDownload(BaseReportsDownload):
+    permission_required = 'subscription.manage_institutional_subscription'
+    AUTHORIZED_SUBPATH = 'Abonnements/Abonnes'

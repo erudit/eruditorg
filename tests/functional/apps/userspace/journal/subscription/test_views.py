@@ -1,8 +1,9 @@
 import datetime as dt
+import io
+
 import pytest
 from account_actions.models import AccountActionToken
 from account_actions.test.factories import AccountActionTokenFactory
-from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.core import mail
 from django.core.urlresolvers import reverse
@@ -15,7 +16,7 @@ from erudit.test import BaseEruditTestCase
 from erudit.test.factories import JournalFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
-from core.authorization.test.factories import AuthorizationFactory
+from core.authorization.models import Authorization
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -29,14 +30,22 @@ faker = Factory.create()
 
 pytestmark = pytest.mark.django_db
 
-def test_list_cannot_be_accessed_by_a_member_without_permission():
-    user = UserFactory(password="test")
-    journal = JournalFactory()
-    journal.members.add(user)
-    journal.save()
+def journal_that_can_subscribe():
+    # Return a (Journal, User) that has a proper subscription plan and proper authorisations.
+    # This pair is ready to use in subscription views.
+    user = UserFactory.create()
+    journal = JournalFactory.create(members=[user])
+    JournalManagementSubscriptionFactory.create(journal=journal)
+    Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
+    Authorization.authorize_user(user, journal, AC.can_manage_institutional_subscription)
+    return journal, user
 
+def test_list_cannot_be_accessed_by_a_member_without_permission():
+    user = UserFactory.create()
+    journal = JournalFactory.create(members=[user])
+    JournalManagementSubscriptionFactory.create(journal=journal)
     client = Client()
-    client.login(username=user.username, password="test")
+    client.login(username=user.username, password="default")
 
     url = reverse('userspace:journal:subscription:list', kwargs={
         'journal_pk': journal.pk, })
@@ -46,17 +55,14 @@ def test_list_cannot_be_accessed_by_a_member_without_permission():
 
 
 def test_list_can_be_accessed_by_a_member_with_permission():
-    user = UserFactory(password="test")
-    journal = JournalFactory()
-    journal.members.add(user)
-    journal.save()
+    user = UserFactory.create()
+    journal = JournalFactory.create(members=[user])
+    JournalManagementSubscriptionFactory.create(journal=journal)
 
-    AuthorizationFactory.create(
-        content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-        user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
+    Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
 
     client = Client()
-    client.login(username=user.username, password="test")
+    client.login(username=user.username, password="default")
 
     url = reverse('userspace:journal:subscription:list', kwargs={
         'journal_pk': journal.pk, })
@@ -66,11 +72,11 @@ def test_list_can_be_accessed_by_a_member_with_permission():
 
 
 def test_list_cannot_be_accessed_by_a_non_member():
-    user = UserFactory(password="test")
+    user = UserFactory()
     journal = JournalFactory()
 
     client = Client()
-    client.login(username=user.username, password='test')
+    client.login(username=user.username, password='default')
     url = reverse('userspace:journal:subscription:list', kwargs={
         'journal_pk': journal.pk, })
 
@@ -81,12 +87,11 @@ def test_list_cannot_be_accessed_by_a_non_member():
 def test_list_provides_only_subscriptions_associated_with_the_current_journal():
     user = UserFactory.create()
     journal = JournalFactory.create(members=[user])
-    AuthorizationFactory.create(
-        content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-        user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
+    Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
 
-    plan = JournalManagementPlanFactory.create(max_accounts=10)
-    management_subscription = JournalManagementSubscriptionFactory.create(journal=journal, plan=plan)
+    plan = JournalManagementPlanFactory.create()
+    management_subscription = JournalManagementSubscriptionFactory.create(
+        journal=journal, plan=plan)
 
     other_journal = JournalFactory.create(collection=journal.collection)
     subscription_1 = JournalAccessSubscriptionFactory.create(
@@ -108,15 +113,9 @@ def test_list_archive_years(monkeypatch, tmpdir):
     # The subscription list view lists available years for subscription exports.
     monkeypatch.setattr(settings, 'SUBSCRIPTION_EXPORTS_ROOT', str(tmpdir))
 
-    user = UserFactory.create()
-    journal = JournalFactory.create(members=[user])
-    journal.members.add(user)
+    journal, user = journal_that_can_subscribe()
 
-    AuthorizationFactory.create(
-        content_type=ContentType.objects.get_for_model(journal), object_id=journal.id,
-        user=user, authorization_codename=AC.can_manage_institutional_subscription.codename)
-
-    archive_subpath = views.IndividualJournalAccessSubscriptionListView.ARCHIVE_SUBPATH
+    archive_subpath = views.JournalOrganisationSubscriptionList.ARCHIVE_SUBPATH
     subdir = tmpdir.join(str(journal.code), archive_subpath).ensure(dir=True)
 
     ARCHIVE_YEARS = ['2012', '1830', '2016']
@@ -126,13 +125,13 @@ def test_list_archive_years(monkeypatch, tmpdir):
     client = Client()
     client.login(username=user.username, password='default')
 
-    url = reverse('userspace:journal:subscription:list')
+    url = reverse('userspace:journal:subscription:org_list')
     response = client.get(url, follow=True)
     view = response.context['view']
 
     EXPECTED = [(str(dt.date.today().year), reverse('userspace:journal:subscription:org_export'))]
     for year in sorted(ARCHIVE_YEARS, reverse=True):
-        url = reverse('userspace:journal:reports_download')
+        url = reverse('userspace:journal:subscription:org_export_download')
         url += '?subpath={}/{}.csv'.format(archive_subpath, year)
         EXPECTED.append((year, url))
     assert view.get_subscriptions_archive_years() == EXPECTED
@@ -152,11 +151,8 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_can_create_an_account_action_for_the_subscription(self):
-        # Setup
-
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
-            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+        Authorization.authorize_user(
+            self.user, self.journal, AC.can_manage_individual_subscription)
 
         plan = JournalManagementPlanFactory.create(max_accounts=10)
         subscription = JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
@@ -171,10 +167,8 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         url = reverse('userspace:journal:subscription:create', kwargs={
             'journal_pk': self.journal.pk})
 
-        # Run
         response = self.client.post(url, post_data, follow=False)
 
-        # Check
         self.assertEqual(response.status_code, 302)
         tokens = AccountActionToken.objects.all()
         self.assertEqual(tokens.count(), 1)
@@ -185,38 +179,31 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         self.assertEqual(stoken.last_name, post_data['last_name'])
 
     def test_cannot_allow_the_creation_of_subscription_if_the_plan_limit_has_been_reached(self):
-        # Setup
-
         subscription = JournalManagementSubscriptionFactory.create(journal=self.journal, plan__max_accounts=3)
 
         JournalAccessSubscriptionFactory.create(user=self.user, journal_management_subscription=subscription)
         token_1 = AccountActionTokenFactory.create(content_object=subscription)
-        token_2 = AccountActionTokenFactory.create(content_object=subscription)  # noqa
+        AccountActionTokenFactory.create(content_object=subscription)  # noqa
 
 
         IndividualSubscriptionAction().execute(token_1)
         token_1.consume(self.user)
 
 
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
-            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+        Authorization.authorize_user(
+            self.user, self.journal, AC.can_manage_individual_subscription)
 
         self.client.login(username='david', password='top_secret')
         url = reverse('userspace:journal:subscription:create', kwargs={
             'journal_pk': self.journal.pk})
 
-        # Run
         response = self.client.get(url)
 
-        # Check
         self.assertEqual(response.status_code, 302)
 
     def test_triggers_the_sending_of_a_notification_email(self):
-        # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
-            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+        Authorization.authorize_user(
+            self.user, self.journal, AC.can_manage_individual_subscription)
 
         plan = JournalManagementPlanFactory.create(max_accounts=10)
         JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
@@ -240,44 +227,38 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         self.assertEqual(mail.outbox[0].to[0], post_data['email'])
 
 
-class TestIndividualJournalAccessSubscriptionDeleteView(BaseEruditTestCase):
+class TestIndividualJournalAccessSubscriptionDeleteView:
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_individual_subscriptions(self):
-        # Setup
+        user = UserFactory.create()
+        journal = JournalFactory.create(members=[user])
         subscription = JournalAccessSubscriptionFactory.create(
-            user=self.user, journal=self.journal)
+            user=user, journal=journal)
 
-        self.client.login(username='david', password='top_secret')
+        client = Client()
+        client.login(username=user.username, password='default')
         url = reverse('userspace:journal:subscription:delete', kwargs={
-            'journal_pk': self.journal.pk, 'pk': subscription.pk, })
+            'journal_pk': journal.pk, 'pk': subscription.pk, })
 
-        # Run
-        response = self.client.get(url)
-
-        # Check
-        self.assertEqual(response.status_code, 403)
+        response = client.get(url)
+        assert response.status_code == 403
 
     def test_can_properly_delete_a_subscription(self):
-        # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
-            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+        user = UserFactory.create()
+        journal = JournalFactory.create(members=[user])
+        Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
 
-        plan = JournalManagementPlanFactory.create(max_accounts=10)
-        JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
-
+        journalsub = JournalManagementSubscriptionFactory.create(journal=journal)
         subscription = JournalAccessSubscriptionFactory.create(
-            user=self.user, journal=self.journal)
+            user=user, journal_management_subscription=journalsub)
 
-        self.client.login(username='david', password='top_secret')
+        client = Client()
+        client.login(username=user.username, password='default')
         url = reverse('userspace:journal:subscription:delete', kwargs={
-            'journal_pk': self.journal.pk, 'pk': subscription.pk, })
+            'journal_pk': journal.pk, 'pk': subscription.pk, })
 
-        # Run
-        response = self.client.post(url, follow=False)
-
-        # Check
-        self.assertEqual(response.status_code, 302)
-        self.assertFalse(JournalAccessSubscription.objects.exists())
+        response = client.post(url, follow=False)
+        assert response.status_code == 302
+        assert not JournalAccessSubscription.objects.exists()
 
 
 class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
@@ -296,10 +277,8 @@ class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_can_cancel_an_action_token(self):
-        # Setup
-        AuthorizationFactory.create(
-            content_type=ContentType.objects.get_for_model(self.journal), object_id=self.journal.id,
-            user=self.user, authorization_codename=AC.can_manage_individual_subscription.codename)
+        Authorization.authorize_user(
+            self.user, self.journal, AC.can_manage_individual_subscription)
 
         plan = JournalManagementPlanFactory.create(max_accounts=10)
         JournalManagementSubscriptionFactory.create(journal=self.journal, plan=plan)
@@ -310,14 +289,67 @@ class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
         url = reverse('userspace:journal:subscription:cancel', kwargs={
             'journal_pk': self.journal.pk, 'pk': token.pk, })
 
-        # Run
         response = self.client.post(url, follow=False)
 
-        # Check
         self.assertEqual(response.status_code, 302)
         token.refresh_from_db()
         self.assertFalse(token.active)
 
+
+def hit_batch_delete_with_csv_and_test(
+        user, journal, csvlines, expected_todelete, expected_ignored, expected_errors):
+    fp = io.BytesIO('\n'.join(csvlines).encode())
+    client = Client()
+    client.login(username=user.username, password='default')
+    url = reverse('userspace:journal:subscription:batch_delete', args=[journal.pk])
+    response = client.post(url, {'csvfile': fp}, follow=True)
+
+    assert response.status_code == 200
+    assert response.context['todelete'] == expected_todelete
+    assert response.context['ignored'] == expected_ignored
+    assert response.context['errors'] == expected_errors
+
+def test_batch_delete_csv_validation_ignored():
+    journal, user = journal_that_can_subscribe()
+    lines = ['foo@example.com']
+    hit_batch_delete_with_csv_and_test(
+        user, journal, lines, [], lines, [])
+
+def test_batch_delete_csv_validation_todelete():
+    journal, user = journal_that_can_subscribe()
+    foouser = UserFactory.create(email='foo@example.com')
+    sub = JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    lines = ['foo@example.com']
+    hit_batch_delete_with_csv_and_test(
+        user, journal, lines, [sub], [], [])
+
+def test_batch_delete_csv_validation_todelete_and_ignored():
+    journal, user = journal_that_can_subscribe()
+    foouser = UserFactory.create(email='foo@example.com')
+    sub = JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    lines = ['foo@example.com', 'other@example.com']
+    hit_batch_delete_with_csv_and_test(
+        user, journal, lines, [sub], ['other@example.com'], [])
+
+def test_batch_delete_csv_validation_errors():
+    journal, user = journal_that_can_subscribe()
+    foouser = UserFactory.create(email='foo@example.com')
+    JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    lines = ['foo@example.com', 'other@example.com', 'notanemail']
+    hit_batch_delete_with_csv_and_test(
+        user, journal, lines, [], [], [(3, 'notanemail')])
+
+def test_batch_delete_proceed():
+    journal, user = journal_that_can_subscribe()
+    foouser = UserFactory.create(email='foo@example.com')
+    sub = JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    client = Client()
+    client.login(username=user.username, password='default')
+    url = reverse('userspace:journal:subscription:batch_delete', args=[journal.pk])
+    response = client.post(url, {'todelete[]': [sub.pk]}, follow=True)
+
+    assert response.status_code == 200
+    assert not JournalAccessSubscription.objects.exists()
 
 def test_subscription_live_report_contents(monkeypatch):
     # Asking for current year returns live results from Victor
@@ -333,8 +365,7 @@ def test_subscription_live_report_contents(monkeypatch):
             assert product_name == journal.code
             return [Result]
 
-    user = UserFactory.create()
-    journal = JournalFactory.create(members=[user])
+    journal, user = journal_that_can_subscribe()
 
     monkeypatch.setattr(Victor, 'get_configured_instance', lambda: MockedVictor())
 
