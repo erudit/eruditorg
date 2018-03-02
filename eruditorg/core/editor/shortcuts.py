@@ -2,6 +2,8 @@
 
 import logging
 
+from erudit.models import Journal
+
 from .conf import settings as editor_settings
 from .models import ProductionTeam
 
@@ -22,6 +24,20 @@ def get_production_team_group(journal=None):
             editor_settings.MAIN_PRODUCTION_TEAM_IDENTIFIER), exc_info=True)
         production_team_group = None
     return production_team_group
+
+
+def get_production_team_journals(user):
+    """ Get the journals of the production teams of the users """
+
+    teams = ProductionTeam.objects.filter(
+        id__in=user.groups.filter(productionteam__isnull=False).values_list(
+            'productionteam', flat=True
+        )
+    )
+
+    return Journal.objects.filter(
+        productionteam__in=teams
+    )
 
 
 def is_production_team_member(user):
