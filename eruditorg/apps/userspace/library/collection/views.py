@@ -28,6 +28,13 @@ ERUDIT_KBART_BACKEND_URL = getattr(
 )
 
 
+ERUDIT_KBART_2014_BACKEND_URL = getattr(
+    settings,
+    "ERUDIT_KBART_2014_BACKEND_URL",
+    "http://kbart-backend.local"
+)
+
+
 class CollectionView(
         OrganisationScopePermissionRequiredMixin,
         MenuItemMixin, BaseAuthorizationUserView, FormView):
@@ -41,7 +48,11 @@ class CollectionView(
 
     def form_valid(self, form):
 
-        report_url = ERUDIT_KBART_BACKEND_URL
+        if form.cleaned_data['version'] == '2009':
+            report_url = ERUDIT_KBART_BACKEND_URL
+        else:
+            report_url = ERUDIT_KBART_2014_BACKEND_URL
+
         report = requests.get(report_url, params=form.cleaned_data)
         filename = "Erudit_Global_{type}_{date}_{collection}_{access}".format(
             type=form.cleaned_data['typeRevue']

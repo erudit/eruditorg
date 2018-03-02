@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import datetime as dt
+from unittest import mock
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -9,7 +11,6 @@ from django.core.files.images import get_image_dimensions
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.test.client import Client
-import pytest
 
 from erudit.test.factories import OrganisationFactory
 
@@ -61,3 +62,16 @@ class TestCollectionViews:
 
         # Check
         assert response.status_code == 200
+
+    @pytest.mark.parametrize('kbart_version', ['2009', '2014'])
+    @mock.patch('apps.userspace.library.collection.views.requests')
+    def test_can_access_kbart_forms_with_default_params(self, mock_requests, kbart_version):
+        self.client.login(username=self.user.username, password='default')
+        url = reverse('userspace:library:collection:landing', kwargs={
+            'organisation_pk': self.organisation.pk, })
+
+        post_data = {'id_collection': 'all', 'id_typerevue': 'all', 'version': kbart_version, 'access': 'all'}
+        response = self.client.post(url, post_data)
+
+        assert response.status_code == 200
+
