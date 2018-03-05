@@ -531,7 +531,7 @@ class BaseArticleDetailView(
             # XSL script, which could end up being complicated and hard to maintain, we simply
             # remove the bibliography element on-the-fly, right here. ref support#198
             grbiblio = eruditarticle.find('grbiblio')
-            if grbiblio:
+            if grbiblio is not None:
                 grbiblio.getparent().remove(grbiblio)
         return eruditarticle._dom
 

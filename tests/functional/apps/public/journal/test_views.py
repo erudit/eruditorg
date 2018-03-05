@@ -31,8 +31,8 @@ from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.models import UserSubscriptions
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
+from core.metrics.conf import settings as metrics_settings
 
-from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
 from apps.public.journal.views import ArticleXmlView
@@ -47,6 +47,13 @@ def get_mocked_erudit_object(self):
     m.get_last_published_issue_pid.return_value = "mock-1234"
     m.get_formatted_title.return_value = "mocked title"
     m.get_formatted_authors.return_value = ['author 1', 'author 2']
+    return m
+
+def get_mocked_fedora_publication():
+    m = unittest.mock.MagicMock()
+    m.pid = 'foo'
+    m.coverpage.content = None
+    m.pdf.exists = False
     return m
 
 def journal_detail_url(journal):
@@ -569,41 +576,35 @@ class TestIssueDetailView(BaseEruditTestCase):
         assert response.url == 'http://example.com'
 
 
-@override_settings(DEBUG=True)
-class TestArticleDetailView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestArticleDetailView, self).setUp()
-        self.factory = RequestFactory()
-
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_works_with_localidentifiers(self, mock_fedora_mixin):
-        # Setup
-        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
-        self.journal.open_access = True
-        self.journal.save()
+@pytest.mark.django_db
+class TestArticleDetailView:
+    @override_settings(CACHES=settings.NO_CACHES)
+    def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
+        # The goal of this test is to verify that out erudit article mechanism doesn't crash for
+        # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
+        # argument here is a parametrization argument which causes this test to run for each
+        # fixture we have.
+        monkeypatch.setattr(metrics_settings, 'ACTIVATED', False)
+        monkeypatch.setattr(FedoraMixin, 'get_erudit_object', lambda self: eruditarticle)
+        monkeypatch.setattr(FedoraMixin, 'get_fedora_object', lambda self: get_mocked_fedora_publication())
+        journal = JournalFactory.create(open_access=True)
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test_article')
-        article = ArticleFactory.create(issue=issue)
+            journal=journal, date_published=dt.datetime.now(), localidentifier='test_issue')
+        article = ArticleFactory.create(issue=issue, localidentifier='test_article')
         url = article_detail_url(article)
-        request = self.factory.get(url)
-        request.subscriptions = UserSubscriptions()
-        request.saved_citations = []
-        # Run
-        response = ArticleDetailView.as_view()(
-            request, localid=article.localidentifier)
-        # Check
-        self.assertEqual(response.status_code, 200)
+        response = Client().get(url)
+        assert response.status_code == 200
 
     def test_fedora_article_with_external_url_redirects(self):
         # When we have an article with a fedora localidentifier *and* external_url set, we redirect
         # to that external url when we hit the detail view.
         # ref #1651
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            date_published=dt.datetime.now(), localidentifier='test')
         article = ArticleFactory.create(issue=issue, localidentifier='articleid',
             external_url='http://example.com')
         url = article_detail_url(article)
-        response = self.client.get(url)
+        response = Client().get(url)
         assert response.status_code == 302
         assert response.url == 'http://example.com'
 
