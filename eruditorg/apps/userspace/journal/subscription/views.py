@@ -18,6 +18,7 @@ from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 from base.viewmixins import MenuItemMixin
+from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
 from core.subscription.shortcuts import get_journal_organisation_subscribers
@@ -145,6 +146,83 @@ class IndividualJournalAccessSubscriptionCancelView(
             'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
 
 
+class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, TemplateView):
+    template_name = 'userspace/journal/subscription/individualsubscription_batch_subscribe.html'
+
+    def parse_csv(self, csv_bytes):
+        fp = io.StringIO(csv_bytes.decode('utf-8').strip())
+        csvreader = csv.reader(fp, delimiter=';')
+        validator = EmailValidator()
+        management_subscription = JournalManagementSubscription.objects.get(
+            journal=self.current_journal)
+        errors = []
+        ignored = []
+        toadd = []
+        for index, row in enumerate(csvreader):
+            try:
+                (email, first_name, last_name) = row
+                validator(email)
+                assert ';' not in first_name
+                assert ';' not in last_name
+            except (ValidationError, AssertionError, ValueError):
+                errors.append((index + 1, ';'.join(row)))
+            else:
+                if management_subscription.email_exists_or_is_pending(email):
+                    ignored.append(email)
+                else:
+                    toadd.append((email, first_name, last_name))
+        if errors:
+            # When there are errors, we don't show any toadd/ignored
+            toadd = []
+            ignored = []
+        return toadd, ignored, errors
+
+    def post(self, request, *args, **kwargs):
+        management_subscription = JournalManagementSubscription.objects.get(
+            journal=self.current_journal)
+        slots_left = management_subscription.slots_left
+        toadd = request.POST.getlist('toadd[]')
+        if toadd:
+            toadd = toadd[:slots_left]
+            for line in toadd:
+                email, first_name, last_name = line.split(';')
+                AccountActionToken.objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    action=IndividualSubscriptionAction.name,
+                    content_object=management_subscription,
+                )
+            msg = ngettext(
+                "{} invitation d'abonnement a été envoyée avec succès.",
+                "{} invitations d'abonnement ont été envoyées avec succès.",
+                len(toadd)
+            ).format(len(toadd))
+            messages.success(request, msg)
+            url = reverse(
+                'userspace:journal:subscription:list', args=(self.current_journal.pk, ))
+            return HttpResponseRedirect(url)
+        else:
+            contents = request.FILES['csvfile'].read()
+            try:
+                toadd, ignored, errors = self.parse_csv(contents)
+                if slots_left >= len(toadd):
+                    kwargs.update({
+                        'errors': errors,
+                        'ignored': ignored,
+                        'toadd': toadd,
+                    })
+                else:
+                    msg = _(
+                        "Vous tentez d'abonner {} personnes alors qu'il reste {} places à votre "
+                        "forfait."
+                    ).format(len(toadd), slots_left)
+                    messages.error(request, msg)
+            except ValueError:
+                messages.error(request, _("Le CSV fourni n'est pas du bon format."))
+        return self.get(request, *args, **kwargs)
+
+
 class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, TemplateView):
     template_name = 'userspace/journal/subscription/individualsubscription_batch_delete.html'
 
@@ -165,11 +243,7 @@ class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, Templat
             try:
                 validator(email)
             except ValidationError:
-                if index == 0:
-                    # probably header, skip silently
-                    pass
-                else:
-                    errors.append((index + 1, email))
+                errors.append((index + 1, email))
             else:
                 try:
                     subscription = qs.filter(user__email=email).get()

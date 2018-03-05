@@ -5,6 +5,7 @@
 {{ block.super }}
 {% flag "NEW_USERSPACE" %}
 <a href="{% url 'userspace:journal:subscription:create' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Créer un abonnement" %}</a>
+<a href="{% url 'userspace:journal:subscription:batch_subscribe' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Abonner en lot" %}</a>
 <a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Désabonner en lot" %}</a>
 <section>
   <ul id="id_subscription_list" class="row">

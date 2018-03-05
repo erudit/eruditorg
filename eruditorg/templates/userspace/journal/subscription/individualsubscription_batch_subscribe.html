@@ -1,10 +1,10 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Suppression en lot" %} {{ block.super }}{% endblock title %}
+{% block title %}{% trans "Abonnement en lot" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
-<li><a href="#">{% trans "Suppression en lot" %}</a></li>
+<li><a href="#">{% trans "Abonnement en lot" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block content_main %}
@@ -22,41 +22,46 @@
 </ul>
 </div>
 {% endif %}
-{% if todelete %}
-    <p>{% blocktrans trimmed count count=todelete|length %}
-        Vous allez supprimer {{ count }} abonnement de cette revue.
+{% if toadd %}
+    <p>{% blocktrans trimmed count count=toadd|length %}
+        Vous allez abonner {{ count }} personne de cette revue.
     {% plural %}
-        Vous allez supprimer {{ count }} abonnements de cette revue.
+        Vous allez abonner {{ count }} personnes de cette revue.
     {% endblocktrans %}</p>
     {% if ignored %}
     <p>{% blocktrans trimmed count count=ignored|length %}
-        {{ count }} courriel a été ignoré parce qu'il n'était pas abonné.
+        {{ count }} courriel a été ignoré parce qu'il était déjà abonné.
     {% plural %}
-        {{ count }} courriels ont été ignorés parce qu'ils n'étaient pas abonnés.
+        {{ count }} courriels ont été ignorés parce qu'ils étaient déjà abonnés.
     {% endblocktrans %}</p>
     {% endif %}
     <p>{% trans "Continuer?" %}</p>
 
     <form method="POST">
         {% csrf_token %}
-        {% for subscription in todelete %}
-        <input type="hidden" name="todelete" value="{{ subscription.pk }}">
+        {% for email, first_name, last_name in toadd %}
+        <input type="hidden" name="toadd" value="{{ email }};{{ first_name }};{{ last_name }}">
         {% endfor %}
-        <input class="btn btn-primary" type="submit" value="{% trans "Supprimer" %}">
+        <input class="btn btn-primary" type="submit" value="{% trans "Abonner" %}">
     </form>
 {% else %}
     {% if ignored %}
     <div class="alert alert-warning">
     <p>{% blocktrans trimmed with count=ignored|length %}
-        Aucun des {{ count }} courriels soumis n'était abonné. Il n'y a rien à supprimer.
+        Tous les {{ count }} courriels soumis étaient abonnés. Il n'y a rien à abonner.
     {% endblocktrans %}</p>
     </div>
     {% endif %}
+    <p>{% trans "Veuillez téléverser un fichier CSV qui contient ces champs (séparées par des \";\" et dans l'ordre):" %}</p>
+    <ol>
+        <li>{% trans "Courriel" %}</li>
+        <li>{% trans "Prénom" %}</li>
+        <li>{% trans "Nom" %}</li>
+    </ol>
+
     <p>{% blocktrans trimmed %}
-        Veuillez téléverser un fichier CSV qui contient une adresse courriel
-        par ligne. Ce fichier peut aussi avoir une ligne d'entête. Chaque
-        courriel contenu dans ce fichier sera, après confirmation, désabonné
-        de la revue.
+        Ce fichier peut aussi avoir une ligne d'entête. Chaque courriel
+        de ce fichier recevra une invitation d'abonnement à la revue.
     {% endblocktrans %}</p>
     <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -65,4 +70,5 @@
     </form>
 {% endif %}
 {% endblock content_main %}
+
 

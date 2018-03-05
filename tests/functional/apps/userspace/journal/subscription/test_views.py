@@ -17,7 +17,7 @@ from erudit.test.factories import JournalFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.models import JournalAccessSubscription, JournalManagementSubscription
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalManagementPlanFactory
@@ -30,6 +30,8 @@ faker = Factory.create()
 
 pytestmark = pytest.mark.django_db
 
+# Helpers
+
 def journal_that_can_subscribe():
     # Return a (Journal, User) that has a proper subscription plan and proper authorisations.
     # This pair is ready to use in subscription views.
@@ -39,6 +41,9 @@ def journal_that_can_subscribe():
     Authorization.authorize_user(user, journal, AC.can_manage_individual_subscription)
     Authorization.authorize_user(user, journal, AC.can_manage_institutional_subscription)
     return journal, user
+
+
+# Tests
 
 def test_list_cannot_be_accessed_by_a_member_without_permission():
     user = UserFactory.create()
@@ -295,6 +300,87 @@ class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
         token.refresh_from_db()
         self.assertFalse(token.active)
 
+# Batch subscribe
+
+def hit_batch_subscribe_with_csv_and_test(
+        user, journal, csvlines, expected_toadd, expected_ignored, expected_errors):
+    fp = io.BytesIO('\n'.join(csvlines).encode())
+    client = Client()
+    client.login(username=user.username, password='default')
+    url = reverse('userspace:journal:subscription:batch_subscribe', args=[journal.pk])
+    response = client.post(url, {'csvfile': fp}, follow=True)
+
+    assert response.status_code == 200
+    assert response.context['toadd'] == expected_toadd
+    assert response.context['ignored'] == expected_ignored
+    assert response.context['errors'] == expected_errors
+
+def test_batch_subscribe_csv_validation_ignored():
+    # We ignore emails that are already subscribed
+    journal, user = journal_that_can_subscribe()
+    foouser = UserFactory.create(email='foo@example.com')
+    JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    lines = ['foo@example.com;Foo;Bar']
+    hit_batch_subscribe_with_csv_and_test(
+        user, journal, lines, [], ['foo@example.com'], [])
+
+
+def test_batch_subscribe_csv_validation_toadd():
+    journal, user = journal_that_can_subscribe()
+    lines = ['foo@example.com;Foo;Bar']
+    hit_batch_subscribe_with_csv_and_test(
+        user, journal, lines, [('foo@example.com', 'Foo', 'Bar')], [], [])
+
+
+def test_batch_subscribe_csv_validation_toadd_and_ignored():
+    journal, user = journal_that_can_subscribe()
+    foouser = UserFactory.create(email='foo@example.com')
+    JournalAccessSubscriptionFactory.create(user=foouser, journal=journal)
+    lines = ['foo@example.com;Foo;Bar', 'other@example.com;Other;Name']
+    hit_batch_subscribe_with_csv_and_test(
+        user, journal, lines, [('other@example.com', 'Other', 'Name')],
+        ['foo@example.com'], [])
+
+def test_batch_subscribe_csv_validation_errors():
+    journal, user = journal_that_can_subscribe()
+    lines = [
+        'foo@example.com;Foo;Bar',
+        'other@example.com;notenoughcolumns',
+        'notanemail;foo;bar']
+    hit_batch_subscribe_with_csv_and_test(
+        user, journal, lines, [], [], [(2, lines[1]), (3, lines[2])])
+
+def test_batch_subscribe_over_limit():
+    # When submitting a CSV that has too many lines (go over the plan's limit), we do nothing and
+    # display a message.
+    journal, user = journal_that_can_subscribe()
+    plan = JournalManagementSubscription.objects.get(journal=journal).plan
+    plan.max_accounts = 1
+    plan.save()
+    csvlines = [
+        'foo@example.com;Foo;Bar',
+        'other@example.com;Other;Name']
+    fp = io.BytesIO('\n'.join(csvlines).encode())
+    client = Client()
+    client.login(username=user.username, password='default')
+    url = reverse('userspace:journal:subscription:batch_subscribe', args=[journal.pk])
+    response = client.post(url, {'csvfile': fp}, follow=True)
+    assert len(response.context['messages']) == 1
+
+def test_batch_subscribe_proceed():
+    journal, user = journal_that_can_subscribe()
+    lines = [
+        'foo@example.com;Foo;Bar',
+        'other@example.com;Other;Name']
+    client = Client()
+    client.login(username=user.username, password='default')
+    url = reverse('userspace:journal:subscription:batch_subscribe', args=[journal.pk])
+    response = client.post(url, {'toadd[]': lines}, follow=True)
+
+    assert response.status_code == 200
+    assert AccountActionToken.objects.count() == len(lines)
+
+# Batch delete
 
 def hit_batch_delete_with_csv_and_test(
         user, journal, csvlines, expected_todelete, expected_ignored, expected_errors):
@@ -310,6 +396,7 @@ def hit_batch_delete_with_csv_and_test(
     assert response.context['errors'] == expected_errors
 
 def test_batch_delete_csv_validation_ignored():
+    # We ignore emails that aren't subscribed
     journal, user = journal_that_can_subscribe()
     lines = ['foo@example.com']
     hit_batch_delete_with_csv_and_test(
