@@ -290,7 +290,9 @@ class JournalManagementPlan(models.Model):
 
 class JournalManagementSubscriptionPeriod(AbstractSubscriptionPeriod):
     """ Defines a period in which the member of a journal is allowed to manage subscriptions. """
-    subscription = models.ForeignKey(JournalManagementSubscription, verbose_name=_('Abonnement'))
+    subscription = models.ForeignKey(
+        JournalManagementSubscription, related_name='period', verbose_name=_('Abonnement')
+    )
 
     class Meta:
         verbose_name = _("Période d’abonnement aux forfaits d’abonnements individuels")

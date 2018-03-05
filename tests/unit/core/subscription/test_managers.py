@@ -1,61 +1,62 @@
-# -*- coding: utf-8 -*-
-
-import datetime as dt
-
 import pytest
 
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.test.factories import (
     JournalAccessSubscriptionFactory,
+    JournalManagementSubscriptionFactory,
     ValidJournalAccessSubscriptionPeriodFactory
 )
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 
+pytestmark = pytest.mark.django_db
 
-@pytest.mark.django_db
-class TestJournalAccessSubscriptionValidManager:
-    def test_can_return_only_the_valid_subscriptions(self):
-        # Setup
-        now_dt = dt.datetime.now()
-        subscription_1 = JournalAccessSubscriptionFactory.create()
-        subscription_2 = JournalAccessSubscriptionFactory.create()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_1,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=subscription_2,
-            start=now_dt + dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
-        # Run & check
-        assert list(JournalAccessSubscription.valid_objects.all()) == [subscription_1, ]
+def test_valid_objects_filters_valid_subscriptions():
+    subscribed_journal = JournalManagementSubscriptionFactory(valid=True).journal
+    unsubscribed_journal = JournalManagementSubscriptionFactory(expired=True).journal
+    valid_accesses = {
+        # institutional subscription need a valid period
+        JournalAccessSubscriptionFactory.create(type='institutional', valid=True),
+        # individual subscription needs a journal with an active management plan, but it doesn't
+        # need an active period on the subscription itself
+        JournalAccessSubscriptionFactory.create(
+            type='individual', post__journals=[subscribed_journal]),
+        JournalAccessSubscriptionFactory.create(
+            type='individual', post__journals=[subscribed_journal], expired=True),
+    }
 
-    def test_can_return_subscriptions_for_an_ip_covered_by_multiple_ranges(self):
-        subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
+    # institutional subscription without a valid period aren't valid
+    JournalAccessSubscriptionFactory.create(type='institutional')
+    JournalAccessSubscriptionFactory.create(type='institutional', expired=True)
+    # individual subscription on a journal that has an expired plan aren't valid
+    JournalAccessSubscriptionFactory.create(
+        type='individual', post__journals=[unsubscribed_journal])
+    assert set(JournalAccessSubscription.valid_objects.all()) == valid_accesses
 
-        InstitutionIPAddressRangeFactory.create(
-            subscription=subscription_period.subscription,
-            ip_start='192.168.1.1',
-            ip_end='192.168.1.2',
-        )
 
-        InstitutionIPAddressRangeFactory.create(
-            subscription=subscription_period.subscription,
-            ip_start='192.168.1.1',
-            ip_end='192.168.1.2',
-        )
+def test_can_return_subscriptions_for_an_ip_covered_by_multiple_ranges():
+    subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
 
-        assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]
+    InstitutionIPAddressRangeFactory.create(
+        subscription=subscription_period.subscription,
+        ip_start='192.168.1.1',
+        ip_end='192.168.1.2',
+    )
 
-    def test_can_return_subscriptions_for_an_ip(self):
+    InstitutionIPAddressRangeFactory.create(
+        subscription=subscription_period.subscription,
+        ip_start='192.168.1.1',
+        ip_end='192.168.1.2',
+    )
 
-        subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
+    assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]
 
-        InstitutionIPAddressRangeFactory.create(
-            subscription=subscription_period.subscription,
-            ip_start='192.168.1.1',
-            ip_end='192.168.1.2',
-        )
+def test_can_return_subscriptions_for_an_ip():
+    subscription_period = ValidJournalAccessSubscriptionPeriodFactory.create()
 
-        assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]
+    InstitutionIPAddressRangeFactory.create(
+        subscription=subscription_period.subscription,
+        ip_start='192.168.1.1',
+        ip_end='192.168.1.2',
+    )
+
+    assert list(JournalAccessSubscription.valid_objects.get_for_ip_address('192.168.1.1')) == [subscription_period.subscription]

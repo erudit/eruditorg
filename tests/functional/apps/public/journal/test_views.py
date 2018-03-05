@@ -30,6 +30,7 @@ from erudit.fedora.modelmixins import FedoraMixin
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.models import UserSubscriptions
+from core.subscription.test.factories import JournalManagementSubscriptionFactory
 
 from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
@@ -293,31 +294,15 @@ class TestJournalDetailView:
 
         assert not response.context['latest_issue'].extra.is_locked()
 
-    def test_embeds_a_boolean_indicating_if_the_user_is_subscribed_to_the_current_journal(self):
-        # Setup
-
-        journal = JournalFactory()
-        subscription = JournalAccessSubscriptionFactory(user=self.user, post__journals=[journal], post__valid=True)
-
+    def test_embeds_subscription_info_to_context(self):
+        journal = JournalManagementSubscriptionFactory(valid=True).journal
+        JournalAccessSubscriptionFactory(
+            type='individual', user=self.user, post__journals=[journal])
         self.client.login(username='foobar', password='notsecret')
         url = journal_detail_url(journal)
-        # Run
         response = self.client.get(url)
-        # Check
         assert response.status_code == 200
         assert response.context['content_access_granted']
-
-    def test_embeds_the_subscription_type(self, settings):
-        journal = JournalFactory()
-        subscription = JournalAccessSubscriptionFactory(
-            organisation=None, user=self.user, post__journals=[journal], post__valid=True
-        )
-        self.client.login(username='foobar', password='notsecret')
-        url = journal_detail_url(journal)
-        # Run
-        response = self.client.get(url)
-        # Check
-        assert response.status_code == 200
         assert response.context['subscription_type'] == 'individual'
 
 
