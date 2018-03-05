@@ -16,6 +16,12 @@ TYPE_CHOICES = (
     ('cultural', _('Culturelles')),
 )
 
+VERSION_CHOICES = (
+    ('2009', '2009'),
+    ('2014', '2014')
+)
+
+
 ACCESS_CHOICES = (
     ('all', _('Tout')),
     ('openaccess', _('Libre accès')),
@@ -36,4 +42,8 @@ class KBARTForm(forms.Form):
 
     access = forms.ChoiceField(
         label=_("Mode d’accès"), widget=forms.Select(), choices=ACCESS_CHOICES, required=False
+    )
+
+    version = forms.ChoiceField(
+        label=_('Version'), widget=forms.Select(), choices=VERSION_CHOICES
     )
