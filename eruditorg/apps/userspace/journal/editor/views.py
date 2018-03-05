@@ -40,7 +40,6 @@ logger = logging.getLogger(__name__)
 
 class IssueSubmissionListView(
         JournalScopePermissionRequiredMixin, MenuItemMixin, ListView):
-    allow_production_team_access = True
     menu_journal = 'editor'
     model = IssueSubmission
     template_name = 'userspace/journal/editor/issues.html'
@@ -57,7 +56,6 @@ class IssueSubmissionListView(
 
 class IssueSubmissionDetailView(
         JournalScopePermissionRequiredMixin, MenuItemMixin, DetailView):
-    allow_production_team_access = True
     context_object_name = 'issue'
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
@@ -120,7 +118,6 @@ class IssueSubmissionCreate(
 class IssueSubmissionUpdate(
         IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         UpdateView):
-    allow_production_team_access = True
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
     model = IssueSubmission
@@ -189,7 +186,6 @@ class IssueSubmissionUpdate(
 class IssueSubmissionTransitionView(
         IssueSubmissionContextMixin, JournalScopePermissionRequiredMixin, MenuItemMixin,
         SingleObjectTemplateResponseMixin, BaseDetailView):
-    allow_production_team_access = True
     context_object_name = 'issue_submission'
     force_scope_switch_to_pattern_name = 'userspace:journal:editor:issues'
     menu_journal = 'editor'
@@ -349,7 +345,6 @@ class IssueSubmissionAttachmentView(
     """
     Returns an IssueSubmission attachment.
     """
-    allow_production_team_access = True
     model = ResumableFile
     raise_exception = True
 

@@ -107,16 +107,20 @@ class TestJournalScopeMixin(object):
         settings.MANAGED_COLLECTIONS = (col1.code, col2.code)
 
         class MyView(JournalScopeMixin, TemplateView):
-            allow_production_team_access = True
             template_name = 'dummy.html'
 
         user = UserFactory.create()
         group = GroupFactory.create(name='Production team')
-        ProductionTeamFactory.create(group=group, identifier='main')
+        production_team = ProductionTeamFactory.create(group=group, identifier='main')
+
         user.groups.add(group)
 
         journal1 = JournalFactory.create(collection=col1)
         journal2 = JournalFactory.create(collection=col2)
+
+        production_team.journals.add(journal1)
+        production_team.journals.add(journal2)
+        production_team.save()
 
         url = reverse(
             'userspace:journal:information:update', kwargs={'journal_pk': journal1.pk})
