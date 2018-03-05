@@ -21,13 +21,4 @@
   {% endfor %}
 </ul>
 </section>
-
-{% flag "NEW_USERSPACE" %}
-{% if subscribed_organisations %}
-<section>
-  <h2>{% trans "Organisations abonnées à cette revue" %}</h2>
-  <p>{% for org in subscribed_organisations %}{{ org.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-</section>
-{% endif %}
-{% endflag %}
 {% endblock content_main %}

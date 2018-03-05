@@ -8,6 +8,11 @@
 <a href="{% url 'userspace:journal:subscription:batch_subscribe' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Abonner en lot" %}</a>
 <a href="{% url 'userspace:journal:subscription:batch_delete' scope_current_journal.pk %}" class="btn btn-primary">{% trans "Désabonner en lot" %}</a>
 <section>
+  <p>{% blocktrans count view.get_queryset.count as count %}
+  {{ count }} abonné
+  {% plural %}
+  {{ count }} abonnés
+  {% endblocktrans %}</p>
   <ul id="id_subscription_list" class="row">
     {% for subscription in subscriptions %}
     <li class="col-xs-12">
