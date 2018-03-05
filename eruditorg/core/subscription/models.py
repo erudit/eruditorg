@@ -254,6 +254,18 @@ class JournalManagementSubscription(AbstractSubscription):
     def get_pending_subscriptions(self):
         return AccountActionToken.pending_objects.get_for_object(self)
 
+    def email_exists_or_is_pending(self, email):
+        from .account_actions import IndividualSubscriptionAction
+        exists = JournalAccessSubscription.objects.filter(
+            journal_management_subscription=self,
+            user__email=email,
+        ).exists()
+        pending = AccountActionToken \
+            .pending_objects.get_for_object(self) \
+            .filter(action=IndividualSubscriptionAction.name, email=email) \
+            .exists()
+        return exists or pending
+
     @property
     def slots_left(self):
         if self.plan.is_unlimited:

@@ -37,10 +37,10 @@
     {% endif %}
     <p>{% trans "Continuer?" %}</p>
 
-    <form action="." method="POST">
+    <form method="POST">
         {% csrf_token %}
         {% for email, first_name, last_name in toadd %}
-        <input type="hidden" name="toadd[]" value="{{ email }};{{ first_name }};{{ last_name }}">
+        <input type="hidden" name="toadd" value="{{ email }};{{ first_name }};{{ last_name }}">
         {% endfor %}
         <input class="btn btn-primary" type="submit" value="{% trans "Abonner" %}">
     </form>

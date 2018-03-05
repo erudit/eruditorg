@@ -37,10 +37,10 @@
     {% endif %}
     <p>{% trans "Continuer?" %}</p>
 
-    <form action="." method="POST">
+    <form method="POST">
         {% csrf_token %}
         {% for subscription in todelete %}
-        <input type="hidden" name="todelete[]" value="{{ subscription.pk }}">
+        <input type="hidden" name="todelete" value="{{ subscription.pk }}">
         {% endfor %}
         <input class="btn btn-primary" type="submit" value="{% trans "Supprimer" %}">
     </form>

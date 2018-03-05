@@ -149,23 +149,12 @@ class IndividualJournalAccessSubscriptionCancelView(
 class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, TemplateView):
     template_name = 'userspace/journal/subscription/individualsubscription_batch_subscribe.html'
 
-    def _email_exists_or_is_pending(self, email):
-        management_subscription = JournalManagementSubscription.objects.get(
-            journal=self.current_journal)
-        exists = JournalAccessSubscription.objects.filter(
-            journal_management_subscription=management_subscription,
-            user__email=email,
-        ).exists()
-        pending = AccountActionToken \
-            .pending_objects.get_for_object(management_subscription) \
-            .filter(action=IndividualSubscriptionAction.name, email=email) \
-            .exists()
-        return exists or pending
-
     def parse_csv(self, csv_bytes):
         fp = io.StringIO(csv_bytes.decode('utf-8').strip())
         csvreader = csv.reader(fp, delimiter=';')
         validator = EmailValidator()
+        management_subscription = JournalManagementSubscription.objects.get(
+            journal=self.current_journal)
         errors = []
         ignored = []
         toadd = []
@@ -176,13 +165,9 @@ class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, Temp
                 assert ';' not in first_name
                 assert ';' not in last_name
             except (ValidationError, AssertionError, ValueError):
-                if index == 0:
-                    # probably header, skip silently
-                    pass
-                else:
-                    errors.append((index + 1, ';'.join(row)))
+                errors.append((index + 1, ';'.join(row)))
             else:
-                if self._email_exists_or_is_pending(email):
+                if management_subscription.email_exists_or_is_pending(email):
                     ignored.append(email)
                 else:
                     toadd.append((email, first_name, last_name))
@@ -258,11 +243,7 @@ class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, Templat
             try:
                 validator(email)
             except ValidationError:
-                if index == 0:
-                    # probably header, skip silently
-                    pass
-                else:
-                    errors.append((index + 1, email))
+                errors.append((index + 1, email))
             else:
                 try:
                     subscription = qs.filter(user__email=email).get()
