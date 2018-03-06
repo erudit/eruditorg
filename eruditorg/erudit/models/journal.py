@@ -3,6 +3,8 @@ import datetime as dt
 import dateutil.relativedelta as dr
 from functools import reduce
 
+from lxml import etree as et
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -433,8 +435,31 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         verbose_name=_('URL Externe'), help_text=_("URL du site où les numéros sont hébergés"))
     """ External URL of the issue """
 
-    is_published = models.BooleanField(default=False, verbose_name=_('Est publié'))
+    is_published = models.BooleanField(default=False, verbose_name=_('Est publié sur www'))
     """ Defines if an issue is published """
+
+    def is_published_in_fedora(self):
+        """ Query Fedora to get the publication status of this ``Issue``
+
+        A ``Issue`` object is considered to be published if it's in the ``publications``
+        datastream of its ``Journal``.
+
+        .. warning:: This method is costly as it performs two lookups in Fedora to return its
+          results
+
+        :return: ``True`` if the ``Issue`` is published in Fedora
+        """
+        if not self.is_in_fedora:
+            return False
+
+        fedora_journal = self.journal.fedora_object
+        publications_tree = et.fromstring(fedora_journal.publications.content.serialize())
+        xml_issue_nodes = publications_tree.findall('.//numero')
+
+        for issue_node in xml_issue_nodes:
+            if self.localidentifier in issue_node.get('pid'):
+                return True
+        return False
 
     copyrights = models.ManyToManyField(
         Copyright, related_name=_('issues'), verbose_name=_("Droits d'auteurs"))
