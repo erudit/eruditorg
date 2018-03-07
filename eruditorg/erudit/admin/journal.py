@@ -14,6 +14,7 @@ from ..models import IssueTheme
 from ..models import IssueContributor
 from ..models import Journal
 from ..models import JournalInformation
+from ..models import JournalType
 from ..models import ArticleTitle
 from ..models import ArticleSubtitle
 
@@ -314,6 +315,10 @@ class JournalInformationAdmin(TranslationAdmin):
     pass
 
 
+class JournalTypeAdmin(TranslationAdmin):
+    pass
+
+
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
 admin.site.register(IssueTheme, IssueThemeAdmin)
@@ -321,3 +326,5 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleAbstract, ArticleAbstractAdmin)
 admin.site.register(ArticleSectionTitle, ArticleSectionTitleAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
+admin.site.unregister(JournalType)
+admin.site.register(JournalType, JournalTypeAdmin)
