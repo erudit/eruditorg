@@ -16,6 +16,20 @@ from ..models import JournalManagementPlan
 from ..models import JournalManagementSubscription
 from ..models import JournalManagementSubscriptionPeriod
 from ..models import InstitutionReferer
+from ..models import AccessBasket
+
+
+class AccessBasketFactory(factory.DjangoModelFactory):
+    name = "some name"
+
+    class Meta:
+        model = AccessBasket
+
+    @factory.post_generation
+    def journals(obj, created, extracted, **kwargs):
+        if extracted:
+            for journal in extracted:
+                obj.journals.add(journal)
 
 
 class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):

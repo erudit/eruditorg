@@ -1,25 +1,17 @@
-# -*- coding: utf-8 -*-
 import pytest
-
-from datetime import datetime
 
 import datetime as dt
 import ipaddress
 
 from django.core.exceptions import ValidationError
-import pytest
 
 from account_actions.test.factories import AccountActionTokenFactory
 
-from erudit.models import Journal
 from erudit.test.factories import OrganisationFactory, JournalFactory
 
-from base.test import DBRequiredTestCase
-from base.test import EruditTestCase
 from base.test.factories import UserFactory
 
 from core.subscription.models import JournalAccessSubscription
-from django.contrib.contenttypes.models import ContentType
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
@@ -28,6 +20,7 @@ from core.subscription.test.factories import JournalManagementSubscriptionFactor
 from core.subscription.test.factories import JournalManagementSubscriptionPeriodFactory
 from core.subscription.test.factories import InstitutionRefererFactory
 from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
+from core.subscription.test.factories import AccessBasketFactory
 
 
 @pytest.mark.django_db
@@ -58,16 +51,20 @@ class TestJournalAccessSubscription:
         assert subscription.get_subscription_type() == JournalAccessSubscription.TYPE_INSTITUTIONAL
 
     def test_knows_its_underlying_journals(self):
-        # Setup
         journal = JournalFactory()
         subscription_2 = JournalAccessSubscriptionFactory.create(journal=journal)
-        subscription_3 = JournalAccessSubscriptionFactory.create(collection=journal.collection)
-        subscription_4 = JournalAccessSubscriptionFactory.create()
-        subscription_4.journals.add(journal)
-        # Run & check
+        subscription_3 = JournalAccessSubscriptionFactory.create()
+        subscription_3.journals.add(journal)
         assert list(subscription_2.get_journals()) == [journal, ]
         assert list(subscription_3.get_journals()) == [journal, ]
-        assert list(subscription_4.get_journals()) == [journal, ]
+
+    def test_basket_provides_access(self):
+        j1, j2, j3 = JournalFactory.create_batch(3)
+        basket = AccessBasketFactory.create(journals=[j1, j2])
+        sub = JournalAccessSubscriptionFactory.create(basket=basket)
+        assert sub.provides_access_to(journal=j1)
+        assert sub.provides_access_to(journal=j2)
+        assert not sub.provides_access_to(journal=j3)
 
 
 @pytest.mark.django_db
@@ -82,7 +79,8 @@ class TestUserSubscriptions:
         assert subs.active_subscription == subscription
 
 
-class TestInstitutionReferer(DBRequiredTestCase):
+@pytest.mark.django_db
+class TestInstitutionReferer:
 
     def test_can_find_an_institution_referer_by_netloc(self):
 
@@ -117,7 +115,7 @@ class TestInstitutionReferer(DBRequiredTestCase):
 
     def test_can_only_find_institution_referer_when_path_fully_match(self):
         valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        institution_referer = InstitutionRefererFactory(
+        InstitutionRefererFactory.create(
             subscription=valid_period.subscription,
             referer="http://www.erudit.org.proxy.com/"
         )
@@ -125,7 +123,8 @@ class TestInstitutionReferer(DBRequiredTestCase):
         assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/")  # noqa
 
 
-class TestInstitutionIPAddressRange(DBRequiredTestCase):
+@pytest.mark.django_db
+class TestInstitutionIPAddressRange:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.organisation = OrganisationFactory.create()
@@ -154,7 +153,8 @@ class TestInstitutionIPAddressRange(DBRequiredTestCase):
         ]
 
 
-class TestJournalAccessSubscriptionPeriod(DBRequiredTestCase):
+@pytest.mark.django_db
+class TestJournalAccessSubscriptionPeriod:
     def test_cannot_clean_an_incoherent_period(self):
         # Setup
         now_dt = dt.datetime.now()

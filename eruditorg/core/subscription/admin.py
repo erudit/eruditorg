@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
+from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from erudit.models import Journal
@@ -11,6 +10,7 @@ from .models import JournalAccessSubscriptionPeriod
 from .models import JournalManagementPlan
 from .models import JournalManagementSubscription
 from .models import JournalManagementSubscriptionPeriod
+from .models import AccessBasket
 
 
 class JournalAccessSubscriptionPeriodInline(admin.TabularInline):
@@ -73,7 +73,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
             'fields': ('user', 'organisation', ),
         }),
         (_('Revue(s) cibles'), {
-            'fields': ('journals', 'collection', ),
+            'fields': ('journals', 'basket', ),
         }),
     ]
 
@@ -136,7 +136,20 @@ class JournalManagementSubscriptionAdmin(admin.ModelAdmin):
     inlines = [JournalManagementSubscriptionPeriodInline, ]
 
 
+class AccessBasketForm(forms.ModelForm):
+    class Meta:
+        widgets = {
+            'name': forms.TextInput(),
+        }
+
+
+class AccessBasketAdmin(admin.ModelAdmin):
+    form = AccessBasketForm
+    filter_horizontal = ('journals',)
+
+
 admin.site.register(InstitutionIPAddressRange, InstitutionIPAddressRangeAdmin)
 admin.site.register(JournalAccessSubscription, JournalAccessSubscriptionAdmin)
 admin.site.register(JournalManagementPlan, JournalManagementPlanAdmin)
 admin.site.register(JournalManagementSubscription, JournalManagementSubscriptionAdmin)
+admin.site.register(AccessBasket, AccessBasketAdmin)
