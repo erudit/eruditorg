@@ -21,7 +21,6 @@ from base.viewmixins import MenuItemMixin
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.models import JournalAccessSubscription
 from core.subscription.models import JournalManagementSubscription
-from core.subscription.shortcuts import get_journal_organisation_subscribers
 from core.victor import Victor
 
 from ..viewmixins import JournalScopePermissionRequiredMixin
@@ -290,12 +289,6 @@ class JournalOrganisationSubscriptionList(JournalSubscriptionMixin, TemplateView
     template_name = 'userspace/journal/subscription/organisationsubscription_list.html'
     ARCHIVE_SUBPATH = 'Abonnements/Abonnes'
     is_org_view = True
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['subscribed_organisations'] = get_journal_organisation_subscribers(
-            self.current_journal)
-        return context
 
     def get_subscriptions_archive_years(self):
         thisyear = dt.date.today().year
