@@ -613,11 +613,14 @@ class Command(BaseCommand):
         # --
 
         article_count = 0
+        localidentifiers = []
 
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
-                apid = issue_pid + '.{0}'.format(article_node.get('idproprio'))
+                localidentifier = article_node.get('idproprio')
+                localidentifiers.append(localidentifier)
+                apid = '.'.join([issue_pid, localidentifier])
                 self._import_article(apid, article_node, issue)
             except Exception as e:
                 logger.error(
@@ -632,6 +635,23 @@ class Command(BaseCommand):
             "issue.imported",
             issue_pid=issue.pid
         )
+
+        # STEP 6: Clean local articles that aren't referenced in our fedora issue
+        # --
+        # WARNING: This is done **only** with unpublished issues. We never want to delete published
+        # articles from the DB, we would lose all FKs pointing to it such as bookmarks. We want to
+        # delete unreferenced articles from unpublished issues because sometimes, before
+        # publication, we mess up and create bad articles. We don't want them to stick in the DB
+        # forever.
+
+        if not issue.is_published:
+            unreferenced_articles = issue.articles.exclude(localidentifier__in=localidentifiers)
+            for article in unreferenced_articles.all():
+                article.delete()
+                logger.warn(
+                    'article.delete',
+                    article_pid=article.get_full_identifier(),
+                )
 
         return article_count
 

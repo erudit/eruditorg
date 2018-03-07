@@ -14,7 +14,7 @@ from django.conf import settings
 from django.test.utils import override_settings
 import pytest
 
-from erudit.models import JournalType, Issue
+from erudit.models import JournalType, Issue, Article
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
@@ -25,14 +25,13 @@ from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
-from erudit.fedora.modelmixins import FedoraMixin
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.models import UserSubscriptions
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
+from core.metrics.conf import settings as metrics_settings
 
-from apps.public.journal.views import ArticleDetailView
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
 from apps.public.journal.views import ArticleXmlView
@@ -42,12 +41,7 @@ from base.test.testcases import EruditClientTestCase
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
-def get_mocked_erudit_object(self):
-    m = unittest.mock.MagicMock()
-    m.get_last_published_issue_pid.return_value = "mock-1234"
-    m.get_formatted_title.return_value = "mocked title"
-    m.get_formatted_authors.return_value = ['author 1', 'author 2']
-    return m
+pytestmark = [pytest.mark.usefixtures('patch_erudit_article'), pytest.mark.django_db]
 
 def journal_detail_url(journal):
     return reverse('public:journal:journal_detail', kwargs={'code': journal.code})
@@ -308,11 +302,6 @@ class TestJournalDetailView:
 
 @override_settings(DEBUG=True)
 class TestJournalAuthorsListView(BaseEruditTestCase):
-
-    @pytest.fixture(autouse=True)
-    def monkeypatch_get_erudit_article(self, monkeypatch):
-        monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
-
     def test_supports_authors_with_empty_firstnames_and_empty_lastnames(self):
         # Setup
         issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
@@ -530,90 +519,84 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
             self.assertEqual(response.context['letters_exists'][letter.upper()], 0)
 
 
-@override_settings(DEBUG=True)
-class TestIssueDetailView(BaseEruditTestCase):
-
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_works_with_pks(self, mock_fedora_mixin):
-        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
-        # Setup
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+@pytest.mark.usefixtures('patch_erudit_publication')
+@pytest.mark.usefixtures('patch_erudit_journal')
+class TestIssueDetailView:
+    def test_works_with_pks(self):
+        issue = IssueFactory.create(date_published=dt.datetime.now())
         url = issue_detail_url(issue)
-        # Run
-        response = self.client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
+        response = Client().get(url)
+        assert response.status_code == 200
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_works_with_localidentifiers(self, mock_fedora_mixin):
-        # Setup
-        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
+    def test_works_with_localidentifiers(self):
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            date_published=dt.datetime.now(), localidentifier='test')
         url = issue_detail_url(issue)
-        # Run
-        response = self.client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
+        response = Client().get(url)
+        assert response.status_code == 200
 
     def test_fedora_issue_with_external_url_redirects(self):
         # When we have an issue with a fedora localidentifier *and* external_url set, we redirect
         # to that external url when we hit the detail view.
         # ref #1651
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test',
+            date_published=dt.datetime.now(), localidentifier='test',
             external_url='http://example.com')
         url = issue_detail_url(issue)
-        response = self.client.get(url)
+        response = Client().get(url)
         assert response.status_code == 302
         assert response.url == 'http://example.com'
 
+    def test_can_render_issue_summary_when_db_contains_articles_not_in_summary(self):
+        # Articles in the issue view are ordered according to the list specified in the erudit
+        # object. If an article isn't referenced in the erudit object list, then it will not be
+        # shown. We rely on the fact that the default patched issue points to liberte1035607
+        # ref support#216
+        issue = IssueFactory.create()
+        a1 = ArticleFactory.create(issue=issue, localidentifier='31492ac')
+        a2 = ArticleFactory.create(issue=issue, localidentifier='31491ac')
+        ArticleFactory.create(issue=issue, localidentifier='not-there')
+        url = issue_detail_url(issue)
+        response = Client().get(url)
+        articles = response.context['articles']
+        assert articles == [a2, a1]
 
-@override_settings(DEBUG=True)
-class TestArticleDetailView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestArticleDetailView, self).setUp()
-        self.factory = RequestFactory()
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
-    def test_works_with_localidentifiers(self, mock_fedora_mixin):
-        # Setup
-        mock_fedora_mixin.return_value = get_mocked_erudit_object(None)
-        self.journal.open_access = True
-        self.journal.save()
+@pytest.mark.django_db
+class TestArticleDetailView:
+    @override_settings(CACHES=settings.NO_CACHES)
+    @pytest.mark.usefixtures('patch_erudit_publication')
+    def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
+        # The goal of this test is to verify that out erudit article mechanism doesn't crash for
+        # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
+        # argument here is a parametrization argument which causes this test to run for each
+        # fixture we have.
+        monkeypatch.setattr(metrics_settings, 'ACTIVATED', False)
+        monkeypatch.setattr(Article, 'get_erudit_object', lambda self: eruditarticle)
+        journal = JournalFactory.create(open_access=True)
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test_article')
-        article = ArticleFactory.create(issue=issue)
+            journal=journal, date_published=dt.datetime.now(), localidentifier='test_issue')
+        article = ArticleFactory.create(issue=issue, localidentifier='test_article')
         url = article_detail_url(article)
-        request = self.factory.get(url)
-        request.subscriptions = UserSubscriptions()
-        request.saved_citations = []
-        # Run
-        response = ArticleDetailView.as_view()(
-            request, localid=article.localidentifier)
-        # Check
-        self.assertEqual(response.status_code, 200)
+        response = Client().get(url)
+        assert response.status_code == 200
 
     def test_fedora_article_with_external_url_redirects(self):
         # When we have an article with a fedora localidentifier *and* external_url set, we redirect
         # to that external url when we hit the detail view.
         # ref #1651
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            date_published=dt.datetime.now(), localidentifier='test')
         article = ArticleFactory.create(issue=issue, localidentifier='articleid',
             external_url='http://example.com')
         url = article_detail_url(article)
-        response = self.client.get(url)
+        response = Client().get(url)
         assert response.status_code == 302
         assert response.url == 'http://example.com'
 
 
 @override_settings(DEBUG=True)
 class TestArticleRawPdfView(BaseEruditTestCase):
-    @pytest.fixture(autouse=True)
-    def monkeypatch_get_erudit_article(self, monkeypatch):
-        monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
-
     def setUp(self):
         super(TestArticleRawPdfView, self).setUp()
         self.factory = RequestFactory()

@@ -11,29 +11,17 @@ from core.citations.middleware import SavedCitationListMiddleware
 from core.citations.models import SavedCitationList
 from core.citations.test.factories import SavedCitationListFactory
 
-from erudit.models import Article
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import ThesisFactory
-from erudit.test.utils import get_erudit_article
 
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
 
-
-@pytest.fixture(autouse=True)
-def patch_get_erudit_article(monkeypatch):
-    article = get_erudit_article('009255ar.xml')
-    # We might end up needing an erudit_object during the test and when that
-    # happens, we don't want to be fetching stuff from Fedora, we want to
-    # return a fake object. For now, we'll just load one of our fixtures. In
-    # the vast majority of tests, specific values in the erudit object doesn't
-    # matter.
-    monkeypatch.setattr(Article, 'erudit_object', article)
-
+pytestmark = pytest.mark.usefixtures('patch_erudit_article')
 
 class TestSavedCitationListView(EruditClientTestCase):
 

@@ -396,17 +396,17 @@ class IssueDetailView(
         context["notegens"] = self.object.erudit_object.get_notegens_edito(html=True)
         context["guest_editors"] = None if len(guest_editors) == 0 else guest_editors
         context['themes'] = self.object.erudit_object.get_themes(formatted=True, html=True)
-        articles = Article.objects \
-            .select_related('issue', 'issue__journal', 'issue__journal__collection') \
-            .prefetch_related('authors', 'section_titles') \
-            .filter(issue=self.object) \
-
         # order articles by their position in the issue summary. ordseq cannot be used for
         # this as it is sometimes erroneous.
         article_li = [
             art.get('idproprio')
             for art in self.object.get_erudit_object().findall('article')
         ]
+        articles = Article.objects \
+            .select_related('issue', 'issue__journal', 'issue__journal__collection') \
+            .prefetch_related('authors', 'section_titles') \
+            .filter(issue=self.object, localidentifier__in=article_li)
+
         articles = sorted(articles, key=lambda a: article_li.index(a.localidentifier))
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
@@ -531,7 +531,7 @@ class BaseArticleDetailView(
             # XSL script, which could end up being complicated and hard to maintain, we simply
             # remove the bibliography element on-the-fly, right here. ref support#198
             grbiblio = eruditarticle.find('grbiblio')
-            if grbiblio:
+            if grbiblio is not None:
                 grbiblio.getparent().remove(grbiblio)
         return eruditarticle._dom
 
