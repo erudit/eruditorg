@@ -8,7 +8,6 @@ from django.utils.functional import cached_property
 from rules.contrib.views import PermissionRequiredMixin
 
 from base.viewmixins import LoginRequiredMixin
-from core.editor.shortcuts import is_production_team_member
 from core.journal.rules_helpers import get_editable_journals
 from erudit.models import Journal
 
@@ -19,7 +18,6 @@ class JournalScopeMixin:
     Journal instance must have the current user in its members. If not a PermissionDenied error will
     be returned.
     """
-    allow_production_team_access = False
     force_scope_switch_to_pattern_name = None
     scope_session_key = 'userspace:journal-management:current-journal-id'
 
@@ -38,10 +36,6 @@ class JournalScopeMixin:
 
     def get_user_journals(self):
         """ Returns the journals that can be accessed by the current user. """
-        if self.allow_production_team_access and is_production_team_member(self.request.user):
-            # Allows the production team members to access this page for all the Journal instances
-            # if applicable.
-            return Journal.objects.filter(collection__code='erudit')
         return get_editable_journals(self.request.user)
 
     def init_current_journal(self, journal):

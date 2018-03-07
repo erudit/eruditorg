@@ -197,6 +197,8 @@ POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',
 }
 
+MANAGED_COLLECTIONS = tuple()
+
 EMAIL_BACKEND = 'post_office.EmailBackend'
 EMAIL_HOST = "mail"
 EMAIL_PORT = '25'
