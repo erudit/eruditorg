@@ -295,14 +295,23 @@ class ResultsFilterForm(forms.Form):
 
             self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
                 aggregations['publication_type'],
-                sort_key=lambda x: x[1], sort_reverse=True
+                sort_key=lambda x: x[1], sort_reverse=True,
+                display_names=dict(PUB_TYPES_CHOICES)
             )
 
-    def _get_aggregation_choices(self, aggregation_dict, sort_key=None, sort_reverse=False):
+    def _get_aggregation_choices(
+            self, aggregation_dict, sort_key=None, sort_reverse=False, display_names=None):
         items = aggregation_dict.items()
         if sort_key:
             items = sorted(items, key=sort_key, reverse=sort_reverse)
-        return [(v, '{v} ({count})'.format(v=v, count=c)) for v, c in items]
+
+        def get_display(v):
+            if display_names:
+                return display_names.get(v, v)
+            else:
+                return v
+
+        return [(v, '{v} ({count})'.format(v=get_display(v), count=c)) for v, c in items]
 
 
 class ResultsOptionsForm(forms.Form):
