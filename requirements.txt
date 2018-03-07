@@ -58,7 +58,6 @@ ply==3.11
 progressbar2==3.35.2      # via eulfedora
 pycparser==2.18           # via cffi
 pycrypto==2.6.1           # via eulfedora
-pymysql==0.7.11
 pyparsing==2.2.0          # via rdflib
 pypdf2==1.25.1
 pyphen==0.9.4             # via weasyprint
