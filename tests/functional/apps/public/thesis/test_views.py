@@ -1,22 +1,21 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 from pytz import timezone
 
+import pytest
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
+from django.test import Client
 
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import ThesisFactory
 
-from base.test.testcases import EruditClientTestCase
-
 montreal = timezone("America/Montreal")
 
-class TestThesisHomeView(EruditClientTestCase):
+pytestmark = pytest.mark.django_db
+
+class TestThesisHomeView:
     def test_inserts_collection_information_into_the_context(self):
-        # Setup
         author = AuthorFactory.create()
         collection_1 = CollectionFactory.create()
         collection_2 = CollectionFactory.create()
@@ -45,9 +44,7 @@ class TestThesisHomeView(EruditClientTestCase):
             localidentifier='thesis-8', collection=collection_2, author=author,
             publication_year=2014)
         url = reverse('public:thesis:home')
-        # Run
-        response = self.client.get(url)
-        # Check
+        response = Client().get(url)
         assert response.status_code == 200
         assert 'collections_dict' in response.context
         assert len(response.context['collections_dict']) == 2
@@ -61,9 +58,8 @@ class TestThesisHomeView(EruditClientTestCase):
             [thesis_8, thesis_7, thesis_6, ]
 
 
-class TestThesisCollectionHomeView(EruditClientTestCase):
+class TestThesisCollectionHomeView:
     def test_inserts_the_recent_theses_into_the_context(self):
-        # Setup
         author = AuthorFactory.create()
         collection = CollectionFactory.create()
         thesis_1 = ThesisFactory.create(  # noqa
@@ -79,9 +75,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
             localidentifier='thesis-4', collection=collection, author=author,
             publication_year=2014)
         url = reverse('public:thesis:collection_home', args=(collection.code, ))
-        # Run
-        response = self.client.get(url)
-        # Check
+        response = Client().get(url)
         assert response.status_code == 200
         assert response.context['recent_theses'] == [thesis_4, thesis_3, thesis_2, ]
 
@@ -104,7 +98,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert response.context['thesis_count'] == 4
@@ -137,7 +131,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert response.context['thesis_groups']['by_publication_year'][0] == \
@@ -180,7 +174,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_home', args=(collection.code, ))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert response.context['thesis_groups']['by_author_name'][0] == \
@@ -193,7 +187,7 @@ class TestThesisCollectionHomeView(EruditClientTestCase):
             {'author_firstletter': 'D', 'total': 2}
 
 
-class TestThesisPublicationYearListView(EruditClientTestCase):
+class TestThesisPublicationYearListView:
     def test_returns_only_theses_for_a_given_publication_year(self):
         # Setup
         author = AuthorFactory.create()
@@ -221,7 +215,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_2, thesis_5, thesis_6, ]
@@ -254,7 +248,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert response.context['other_publication_years'][0] == \
@@ -283,7 +277,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2012)
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url, {'sort_by': 'author_asc'})
+        response = Client().get(url, {'sort_by': 'author_asc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
@@ -305,7 +299,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2012)
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url, {'sort_by': 'author_desc'})
+        response = Client().get(url, {'sort_by': 'author_desc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
@@ -326,7 +320,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url, {'sort_by': 'date_asc'})
+        response = Client().get(url, {'sort_by': 'date_asc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
@@ -347,7 +341,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url, {'sort_by': 'date_desc'})
+        response = Client().get(url, {'sort_by': 'date_desc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
@@ -367,7 +361,7 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2012, title='Ctitle')
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url, {'sort_by': 'title_asc'})
+        response = Client().get(url, {'sort_by': 'title_asc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
@@ -387,13 +381,13 @@ class TestThesisPublicationYearListView(EruditClientTestCase):
             publication_year=2012, title='Ctitle')
         url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
         # Run
-        response = self.client.get(url, {'sort_by': 'title_desc'})
+        response = Client().get(url, {'sort_by': 'title_desc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
 
 
-class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
+class TestThesisPublicationAuthorNameListView:
     def test_returns_only_theses_for_a_given_author_first_letter(self):
         # Setup
         author_1 = AuthorFactory.create(lastname='Aname')
@@ -424,7 +418,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_2, thesis_5, thesis_6, ]
@@ -460,7 +454,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2014)
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url)
+        response = Client().get(url)
         # Check
         assert response.status_code == 200
         assert response.context['other_author_letters'][0] == \
@@ -489,7 +483,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2012)
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url, {'sort_by': 'author_asc'})
+        response = Client().get(url, {'sort_by': 'author_asc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
@@ -511,7 +505,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2012)
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url, {'sort_by': 'author_desc'})
+        response = Client().get(url, {'sort_by': 'author_desc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
@@ -532,7 +526,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url, {'sort_by': 'date_asc'})
+        response = Client().get(url, {'sort_by': 'date_asc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
@@ -553,7 +547,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url, {'sort_by': 'date_desc'})
+        response = Client().get(url, {'sort_by': 'date_desc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
@@ -573,7 +567,7 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2012, title='Ctitle')
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url, {'sort_by': 'title_asc'})
+        response = Client().get(url, {'sort_by': 'title_asc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
@@ -593,7 +587,43 @@ class TestThesisPublicationAuthorNameListView(EruditClientTestCase):
             publication_year=2012, title='Ctitle')
         url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
         # Run
-        response = self.client.get(url, {'sort_by': 'title_desc'})
+        response = Client().get(url, {'sort_by': 'title_desc'})
         # Check
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
+
+class TestCitationExports:
+    ALL_EXPORT_VIEWS = [
+        'public:thesis:thesis_citation_enw',
+        'public:thesis:thesis_citation_ris',
+        'public:thesis:thesis_citation_bib',
+    ]
+
+    @pytest.mark.parametrize('view_name', ALL_EXPORT_VIEWS)
+    def test_no_html_escape_in_title_and_author(self, view_name):
+        # ref support#183
+        title = "ceci contient une apostroph'"
+        firstname = "Jo' est mon prénom"
+        lastname = "Blo' est ma condition"
+        author = AuthorFactory.create(lastname=lastname, firstname=firstname)
+        thesis = ThesisFactory.create(title=title, author=author)
+        url = reverse(view_name, args=[thesis.collection.code, thesis.pk])
+        response = Client().get(url)
+        content = response.content.decode('utf-8')
+        # values hasn't been mangled in the rendering process.
+        assert title in content
+        assert firstname in content
+        assert lastname in content
+
+    def test_no_html_escape_in_collection(self):
+        # same as test_no_html_escape_in_title_and_author but only bib has collection name
+        cname = "Col'ection"
+        collection = CollectionFactory.create(name=cname)
+        thesis = ThesisFactory.create(collection=collection)
+        url = reverse(
+            'public:thesis:thesis_citation_bib',
+            args=[thesis.collection.code, thesis.pk])
+        response = Client().get(url)
+        content = response.content.decode('utf-8')
+        # values hasn't been mangled in the rendering process.
+        assert cname in content
