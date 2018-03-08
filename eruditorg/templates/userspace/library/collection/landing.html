@@ -1,6 +1,6 @@
 {% extends "userspace/library/base.html" %}
 {% load i18n %}
-
+{% load waffle_tags %}
 
 {% block title %}{% trans "Collections" %} {{ block.super }}{% endblock title %}
 
@@ -92,6 +92,7 @@
         <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
       </form>
     </section>
+    {% flag "KBART2014" %}
     <section role="tabpanel" class="tab-pane" id="2014">
       <form method="post">
         {% csrf_token %}
@@ -115,6 +116,7 @@
         <input type="submit" value="Télécharger" class="btn btn-secondary"></button>
       </form>
     </section>
+    {% endflag %}
   </div>
 </section>
 {% endblock content_main %}
