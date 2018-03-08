@@ -6,6 +6,7 @@ from django.http.response import Http404
 from polymorphic.manager import PolymorphicManager
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 
 
 class InternalJournalManager(models.Manager):
@@ -19,6 +20,15 @@ class InternalJournalManager(models.Manager):
         """ Returns all the internal Journal instances. """
         return super(InternalJournalManager, self).get_queryset().filter(
             redirect_to_external_url=False
+        )
+
+
+class ManagedJournalManager(models.Manager):
+    """ Returns journals that are in the managed collections """
+
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            collection__code__in=settings.MANAGED_COLLECTIONS
         )
 
 
