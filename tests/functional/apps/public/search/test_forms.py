@@ -144,6 +144,6 @@ class TestResultsFilterForm(BaseEruditTestCase):
         self.assertEqual(
             form.fields['filter_publication_types'].choices,
             [
-                ('Culturel', 'Culturel (151)'),
-                ('Article', 'Article (106)'),
+                ('Culturel', 'Articles culturels (151)'),
+                ('Article', 'Articles savants (106)'),
             ])
