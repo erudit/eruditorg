@@ -142,6 +142,10 @@ class AccessBasketForm(forms.ModelForm):
             'name': forms.TextInput(),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['journals'].queryset = Journal.managed_objects.all()
+
 
 class AccessBasketAdmin(admin.ModelAdmin):
     form = AccessBasketForm
