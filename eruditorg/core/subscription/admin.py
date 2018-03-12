@@ -64,7 +64,17 @@ class SubscriptionJournalListFilter(admin.SimpleListFilter):
         return queryset
 
 
+class JournalAccessSubscriptionForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['journals'].queryset = Journal.managed_objects.all()
+
+
 class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
+
+    form = JournalAccessSubscriptionForm
+
     fieldsets = [
         (None, {
             'fields': ('sponsor', 'journal_management_subscription'),
