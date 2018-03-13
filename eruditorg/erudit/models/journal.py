@@ -35,6 +35,7 @@ from ..managers import InternalIssueManager
 from ..managers import InternalJournalManager
 from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
+from ..managers import ManagedJournalManager
 
 from .core import Collection
 from .core import Copyright
@@ -191,6 +192,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     internal_objects = InternalJournalManager()
     legacy_objects = LegacyJournalManager()
     upcoming_objects = UpcomingJournalManager()
+    managed_objects = ManagedJournalManager()
 
     class Meta:
         verbose_name = _('Revue')

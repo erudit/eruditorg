@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from django.conf import settings
 from django.db.models import Q
 
 from erudit.models import Journal
@@ -12,7 +11,7 @@ def get_editable_journals(user):
     """ Given a specific user, returns all the Journal instances he can edit. """
 
     if user.is_superuser or user.is_staff:
-        return Journal.objects.filter(collection__code__in=settings.MANAGED_COLLECTIONS)
+        return Journal.managed_objects.all()
 
     if is_production_team_member(user):
         production_team_journals = get_production_team_journals(user)

@@ -13,7 +13,6 @@ from django.core.exceptions import ValidationError
 
 from account_actions.models import AccountActionToken
 
-from erudit.models import Collection
 from erudit.models import Journal
 from erudit.models import Organisation
 
@@ -71,11 +70,32 @@ class UserSubscriptions:
         return False
 
 
+class AccessBasket(models.Model):
+    """ A group of journal that we can subscribe someone all at once.
+
+    Sometimes we have sub subscribe many individual users to the same group of journal as part of
+    initiatives external to the journal itself (a group subscription plan). This is what this model
+    represents.
+
+    Subscribing to an AccessBasket does **not** count towards a journal's plan limit.
+    """
+
+    name = models.TextField(verbose_name=_("Nom"))
+    journals = models.ManyToManyField(
+        Journal, verbose_name=_('Revues'), related_name='+')
+
+    class Meta:
+        verbose_name = _("Panier de revues")
+        verbose_name_plural = _("Paniers de revues")
+
+    def __str__(self):
+        return self.name
+
+
 class JournalAccessSubscription(AbstractSubscription):
     """ Defines a subscription allowing a user or an organisation to access journals.
 
     The subscription can associate many Journal instances to the user or the organisation.
-    A subscription for collection of journals or a "full access" subscription can also be specified.
     """
 
     TYPE_INSTITUTIONAL = "institutional"
@@ -100,10 +120,10 @@ class JournalAccessSubscription(AbstractSubscription):
     # Which Journal instances can be accessed using this subscription?
     journal = models.ForeignKey(
         Journal, verbose_name=_('Revue'), blank=True, null=True, related_name='+')
-    collection = models.ForeignKey(
-        Collection, verbose_name=_('Collection'), blank=True, null=True, related_name='+')
     journals = models.ManyToManyField(
         Journal, verbose_name=_('Revues'), related_name='+', blank=True)
+    basket = models.ForeignKey(
+        AccessBasket, verbose_name=_("Panier"), blank=True, null=True, related_name='accesses')
 
     # The subscription can be sponsored by a specific organisation
     sponsor = models.ForeignKey(
@@ -121,8 +141,6 @@ class JournalAccessSubscription(AbstractSubscription):
         dest = self.user if self.user else self.organisation
         if self.journal_id:
             return '{} - {}'.format(dest, self.journal)
-        elif self.collection_id:
-            return '{} - {}'.format(dest, self.collection)
         return _('{} - Accès multiples').format(dest)
 
     @cached_property
@@ -149,7 +167,6 @@ class JournalAccessSubscription(AbstractSubscription):
     def provides_access_to(self, article=None, issue=None, journal=None):
         """ Returns if the subscription has access to the given article, issue
          or journal"""
-        # FIXME check the journals of the collection
 
         if not any((article, issue, journal,)):
             raise ValueError("One of article, issue, journal must be specified.")
@@ -164,6 +181,10 @@ class JournalAccessSubscription(AbstractSubscription):
 
         if journal in self.journals.all():
             return True
+
+        if self.basket and journal in self.basket.journals.all():
+            return True
+
         return False
 
     def get_journals(self):
@@ -172,8 +193,6 @@ class JournalAccessSubscription(AbstractSubscription):
         journal_ids = []
         if self.journal_id:
             journal_ids.append(self.journal_id)
-        if self.collection:
-            journal_ids.extend(list(Journal.objects.values_list('id', flat=True)))
         journal_ids.extend(list(self.journals.all().values_list('id', flat=True)))
         return Journal.objects.filter(id__in=journal_ids)
 
