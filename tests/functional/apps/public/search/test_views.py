@@ -18,7 +18,6 @@ from core.solrq.query import Query
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
-from erudit.fedora.modelmixins import FedoraMixin
 from erudit.models import Article
 
 from apps.public.search.saved_searches import SavedSearchList
@@ -66,38 +65,16 @@ def fake_get_results_external(**kwargs):
     return results
 
 
-def get_mocked_erudit_object():
-    m = unittest.mock.MagicMock()
-    m.number = 2
-    m.subtitle = 'Foo bar'
-    m.first_page = 10
-    m.last_page = 12
-    m.abstracts = [{'lang': 'fr', 'content': 'This is a test'}]
-
-    def get_authors(formatted=False):
-        if formatted:
-            return "Foo, Bar"
-        else:
-            return [{'firstname': 'Test', 'lastname': 'Foobar'}]
-
-    m.get_authors = get_authors
-    m.get_reviewed_works = lambda: []
-    m.get_formatted_title.return_value = "mocked title"
-    m.get_volume_numbering.return_value = ''
-    return m
-
 @override_settings(DEBUG=True)
 class TestEruditDocumentListAPIView(BaseEruditTestCase):
     def setUp(self):
         super(TestEruditDocumentListAPIView, self).setUp()
         self.factory = RequestFactory()
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_can_return_erudit_documents(self, mock_get_results, mock_erudit_object):
+    def test_can_return_erudit_documents(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        mock_erudit_object.return_value = get_mocked_erudit_object()
         issue = IssueFactory.create(journal=self.journal, date_published=now(), use_fedora=False)
         localidentifiers = []
         for i in range(0, 50):
@@ -114,12 +91,10 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         results = json.loads(smart_text(results_data))
         self.assertEqual(results['pagination']['count'], 50)
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_fedora_object')
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_can_return_erudit_documents_not_in_fedora(self, mock_get_results, mock_fedora_object):
+    def test_can_return_erudit_documents_not_in_fedora(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        mock_fedora_object.return_value = None
         issue = IssueFactory.create(journal=self.journal, date_published=now(), use_fedora=False)
         localidentifiers = []
         for i in range(0, 1):
@@ -152,14 +127,11 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
     # This NO_CACHES override is needed because otherwise the cache.set() call tries to picke our
     # mock erudit object and crashes.
     @override_settings(CACHES=settings.NO_CACHES)
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_fedora_issue_with_external_url_yield_no_pdf_link(
-            self, mock_get_results, mock_erudit_object):
+    def test_fedora_issue_with_external_url_yield_no_pdf_link(self, mock_get_results):
         # When an fedora issue has an external_url (for example, RECMA. see #1651), we don't want
         # any of its articles to yield a PDF link.
         mock_get_results.side_effect = fake_get_results
-        mock_erudit_object.return_value = get_mocked_erudit_object()
         issue = IssueFactory.create(
             journal=self.journal, external_url='http://www.example.com')
         ArticleFactory.create(issue=issue, localidentifier='foo')

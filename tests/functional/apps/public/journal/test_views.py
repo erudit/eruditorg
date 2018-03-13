@@ -41,7 +41,7 @@ from base.test.testcases import EruditClientTestCase
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
-pytestmark = [pytest.mark.usefixtures('patch_erudit_article'), pytest.mark.django_db]
+pytestmark = pytest.mark.django_db
 
 def journal_detail_url(journal):
     return reverse('public:journal:journal_detail', kwargs={'code': journal.code})
@@ -519,8 +519,6 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
             self.assertEqual(response.context['letters_exists'][letter.upper()], 0)
 
 
-@pytest.mark.usefixtures('patch_erudit_publication')
-@pytest.mark.usefixtures('patch_erudit_journal')
 class TestIssueDetailView:
     def test_works_with_pks(self):
         issue = IssueFactory.create(date_published=dt.datetime.now())
@@ -565,7 +563,6 @@ class TestIssueDetailView:
 @pytest.mark.django_db
 class TestArticleDetailView:
     @override_settings(CACHES=settings.NO_CACHES)
-    @pytest.mark.usefixtures('patch_erudit_publication')
     def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
         # The goal of this test is to verify that out erudit article mechanism doesn't crash for
         # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
@@ -602,14 +599,12 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         self.factory = RequestFactory()
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
-    @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     @unittest.mock.patch.object(subprocess, 'check_call')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf):
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_pdf):
         # Setup
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
-        mock_ds = ['ERUDITXSD300', ]  # noqa
         journal = JournalFactory()
         issue = IssueFactory.create(
             journal=journal, year=2010,

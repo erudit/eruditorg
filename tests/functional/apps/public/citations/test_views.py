@@ -21,8 +21,6 @@ from erudit.test.factories import ThesisFactory
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
 
-pytestmark = pytest.mark.usefixtures('patch_erudit_article')
-
 class TestSavedCitationListView(EruditClientTestCase):
 
     @pytest.fixture(autouse=True)
