@@ -45,8 +45,4 @@ def get_managed_organisations(user):
     if user.is_superuser or user.is_staff:
         return Organisation.objects.all()
     else:
-        organisations = user.organisations.all()
-
-    # Keeps only organisation whose subscription is valid for the current date.
-
-    return organisations.exclude(journalaccesssubscription=None)
+        return user.organisations.all()

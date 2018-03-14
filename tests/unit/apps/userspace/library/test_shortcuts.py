@@ -53,17 +53,6 @@ class TestGetManagedOrganisationsShortcut:
         assert list(get_managed_organisations(user_1)) == [org_1, org_2, ]
         assert list(get_managed_organisations(user_2)) == [org_1, org_2, ]
 
-    def test_can_return_only_organisations_that_are_associated_with_a_subscription(self):
-        # Setup
-        org_1 = OrganisationFactory.create()
-        org_2 = OrganisationFactory.create()
-        user = UserFactory.create()
-        org_1.members.add(user)
-        org_2.members.add(user)
-        JournalAccessSubscriptionFactory.create(organisation=org_1)
-        # Run & check
-        assert list(get_managed_organisations(user)) == [org_1, ]
-
     def test_can_return_only_organisations_that_have_the_considered_users_in_their_members(self):
         # Setup
         org_1 = OrganisationFactory.create()
