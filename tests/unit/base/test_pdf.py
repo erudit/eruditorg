@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
+import pytest
 import io
 import os.path as op
 import pytest
@@ -11,7 +12,7 @@ from erudit.test.factories import IssueFactory
 from erudit.test.testcases import BaseEruditTestCase
 from erudit.fedora.modelmixins import FedoraMixin
 
-from base.pdf import generate_pdf
+from base.pdf import generate_pdf, local_url_fetcher
 
 
 def get_mocked_erudit_object(self):
@@ -22,6 +23,16 @@ def get_mocked_erudit_object(self):
 @pytest.fixture(autouse=True)
 def monkeypatch_get_erudit_article(monkeypatch):
     monkeypatch.setattr(FedoraMixin, "get_erudit_object", get_mocked_erudit_object)
+
+
+class TestPdfLocalUrlFetcher:
+    def test_can_raise_an_exception_when_path_is_not_a_subpath_of_static_root(self):
+        with pytest.raises(ValueError):
+            local_url_fetcher("local:/../../erudit.png")
+
+    def test_can_open_a_local_file(self):
+        with pytest.raises(FileNotFoundError):
+            local_url_fetcher("local:/erudit.png")
 
 @override_settings(DEBUG=True)
 class TestGeneratePdfTool(BaseEruditTestCase):
@@ -69,3 +80,5 @@ class TestGeneratePdfTool(BaseEruditTestCase):
         generate_pdf('pdf.html', file_object=response_1)
         generate_pdf('pdf.html', file_object=response_2, context={'title': 'test'})
         self.assertTrue(response_2.tell() > response_1.tell())
+
+
