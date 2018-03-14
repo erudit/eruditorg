@@ -8,7 +8,7 @@ def set_journaltypes(apps, schema_editor):
     JournalType = apps.get_model('erudit', 'JournalType')
     NAMES = [
         ('C', 'Culturelle', 'Cultural'),
-        ('S', 'Savante', 'Scientific'),
+        ('S', 'Savante', 'Scholarly'),
     ]
     for code, name_fr, name_en in NAMES:
         jt, _ = JournalType.objects.get_or_create(code=code)
