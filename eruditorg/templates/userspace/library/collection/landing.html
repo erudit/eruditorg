@@ -65,8 +65,10 @@
 
   <h3>{% trans "Format KBART" %}</h3>
   <ul class="nav-tabs" role="tablist">
+    {% flag "KBART2014" %}
     <li role="presentation" class="active"><a href="#2009" aria-controls="2009" role="tab" data-toggle="tab">{% trans "2009" %}</a></li>
     <li role="presentation"><a href="#2014" aria-controls="2014" role="tab" data-toggle="tab">{% trans "2014" %}</a></li>
+    {% endflag %}
   </ul>
   <div class="tab-content">
     <section role="tabpanel" class="tab-pane active" id="2009">
