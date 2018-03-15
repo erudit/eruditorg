@@ -31,7 +31,7 @@ aside {
     dt {
       font-size: 14px;
       margin-top: 1.25em;
-      @include fw-mono;
+      @include font-styles('mono');
     }
 
     dd:last-child {

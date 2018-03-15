@@ -1,15 +1,15 @@
 {% extends "public/thesis/collection_list_base.html" %}
-{% load i18n %}
+{% load humanize i18n %}
 
-{% block title %}{% blocktrans with year=publication_year collection=collection.name %}Thèses publiées en {{ year }}{% endblocktrans %} – {{ collection }}{% endblock title %}
+{% block title %}{% blocktrans with year=publication_year collection=collection.name %}Thèses et mémoires publiés en {{ year }}{% endblocktrans %} – {{ collection }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with year=publication_year collection=collection.name %}Consultez les thèses et mémoires de {{ collection }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with year=publication_year collection=collection.name %}Consultez les thèses et mémoires de {{ collection }} publiés en {{ year }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses de {{ collection }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 {% if collection.logo %}
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{% trans 'Thèses' %} – Érudit">
+<meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
 {% if collection.logo %}
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
 {% endif %}
@@ -45,7 +45,7 @@
 {% endblock breadcrumb %}
 
 {% block inner_title %}
-{% blocktrans with year=publication_year %}Thèses publiées en {{ year }}{% endblocktrans %}
+{% blocktrans with year=publication_year %}Thèses et mémoires publiés en {{ year }}{% endblocktrans %}
 {% endblock inner_title %}
 
 {% block inner_list_switcher %}
@@ -55,7 +55,7 @@
 <dd>
   <select id="switch_year" onChange="window.location.href=this.value">
     {% for year in other_publication_years %}
-    <option value="{% url 'public:thesis:collection_list_per_year' collection.code year.publication_year %}?sort_by={{ sort_by }}"{% if year.publication_year == publication_year %} selected disabled{% endif %}>{{ year.publication_year }} ({{ year.total }})</option>
+    <option value="{% url 'public:thesis:collection_list_per_year' collection.code year.publication_year %}?sort_by={{ sort_by }}"{% if year.publication_year == publication_year %} selected disabled{% endif %}>{{ year.publication_year }} ({{ year.total|intcomma }})</option>
     {% endfor %}
   </select>
 </dd>

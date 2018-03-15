@@ -18,7 +18,6 @@
     border-width: 1px;
     border-color: $dark-grey;
     color: $dark-grey;
-    @include fw-sans;
 
     // Bring the "active" button to the front
     &:hover,
@@ -29,7 +28,6 @@
       border-color: #000;
       background-color: #FFF;
       color: $coral-red;
-      @include fw-sans-medium;
     }
 
   }

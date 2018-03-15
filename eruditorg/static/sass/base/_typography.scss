@@ -57,11 +57,10 @@ h6 { font-size: 0.8em; }
 
 }
 
-p, ul, ol {
+p, ul, ol, blockquote {
   font-size: $font-size-base;
   margin: 0 0 ($line-height-computed / 2);
   line-height: 1.35;
-  @include font-styles('sans');
 }
 
 small {
@@ -118,7 +117,7 @@ blockquote {
 }
 
 pre {
-  @include fw-mono;
+  @include font-styles('mono');
 }
 
 address {
@@ -142,7 +141,8 @@ address {
   color: $coral-red;
   font-size: small;
   margin: 0.5em 0 0.75em 0;
-  @include fw-sans-medium;
+  letter-spacing: 0.035em;
+  @include font-styles('sans-medium');
   text-transform: uppercase;
 }
 

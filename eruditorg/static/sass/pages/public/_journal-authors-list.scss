@@ -23,11 +23,16 @@
   .author-group {
     margin-bottom: 1.75em;
     font-size: 14px;
+
+    &:not(:first-of-type) {
+      border-top: 1px solid $mid-grey;
+    }
+
   }
 
   .author-name {
-    margin-bottom: 0.15em;
-    @include fw-sans-medium;
+    margin: 1.5em 0 0.75em 0;
+    font-size: 16px;
   }
 
 }

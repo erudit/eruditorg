@@ -172,7 +172,7 @@
               <td>{{ forloop.counter }}</td>
               <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
               <td>{{ search.results_count }}</td>
-              <td><a href="#" class="remove-search"><span class="ion-close"></span></a></td>
+              <td><a href="#" class="remove-search">x</td>
               <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}">--></a></td>
             </tr>
             {% endfor %}

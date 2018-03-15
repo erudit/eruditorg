@@ -42,7 +42,7 @@
         </p>
         {% elif theses_count %}
         <p data-thesis-count="{{ theses_count }}">
-          {% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses{% endblocktrans %}
+          {% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses et mémoires{% endblocktrans %}
         </p>
         {% else %}
         <p>{% trans "0 document" %}</p>

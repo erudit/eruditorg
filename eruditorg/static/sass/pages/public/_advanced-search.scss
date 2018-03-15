@@ -135,7 +135,6 @@
         [class*="year-"] label {
           margin: 0;
           font-size: 14px;
-          @include fw-sans-italic;
         }
 
         select {
@@ -217,7 +216,6 @@
 
     a {
       font-size: 18px;
-      @include fw-sans-bold;
 
       &:hover, &:active, &:focus, &:active:focus {
         color: $coral-red;
@@ -238,7 +236,6 @@
       font-weight: normal;
       text-align: left;
       color: $dark-grey;
-      @include fw-sans-medium;
 
       &:nth-child(4),
       &:nth-child(5) {

@@ -11,7 +11,6 @@
       margin: 0 0 2em 0;
       color: #000;
       font-size: 0.85em;
-      @include fw-sans-medium();
     }
 
     a {
@@ -19,9 +18,7 @@
     }
 
     .thesis-count {
-      display: block;
-      font-size: 0.85em;
-      @include fw-sans();
+      color: $dark-grey;
     }
 
     .recent-theses {
@@ -38,10 +35,6 @@
     .thesis-author {
       font-size: 0.85em;
       margin: 0 0 0.5em 0;
-    }
-
-    .thesis-author {
-      @include fw-sans-medium();
     }
 
   }
@@ -64,7 +57,7 @@
     .aggregation-link {
       display: inline-block;
       font-size: 14px;
-      @include fw-mono();
+      @include fw-mono;
 
       &:hover, &:focus {
         color: $coral-red;

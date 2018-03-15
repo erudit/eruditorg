@@ -50,16 +50,16 @@
 // -----------------------------------------------------------------------------
 
 // font styles
-@mixin font-styles($fonf-family) {
+@mixin font-styles($font-family) {
 
-  @if $fonf-family == 'mono' {
+  @if $font-family == 'mono' {
     @include fw-mono;
 
     em, i    { @include fw-mono-italic; }
 
   }
 
-  @if $fonf-family == 'sans' {
+  @if $font-family == 'sans' {
     @include fw-sans;
 
     em, i    { @include fw-sans-italic; }
@@ -78,7 +78,26 @@
 
   }
 
-  @if $fonf-family == 'serif' {
+  @if $font-family == 'sans-medium' {
+    @include fw-sans-medium;
+
+    em, i    { @include fw-sans-medium-italic; }
+
+    strong, b  { @include fw-sans-bold; }
+
+    // bold italics
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-sans-bold-italic;
+    }
+
+  }
+
+  @if $font-family == 'serif' {
     @include fw-serif;
 
     em, i    { @include fw-serif-italic; }
@@ -93,6 +112,25 @@
     b i,
     i b {
       @include fw-serif-bold-italic;
+    }
+
+  }
+
+  @if $font-family == 'serif-bold' {
+    @include fw-serif-bold;
+
+    em, i    { @include fw-serif-bold-italic; }
+
+    strong, b  { @include fw-serif; }
+
+    // bold italics
+    em strong,
+    strong em,
+    i strong,
+    strong i,
+    b i,
+    i b {
+      @include fw-serif-italic;
     }
 
   }

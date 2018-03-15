@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load humanize i18n %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -19,7 +19,7 @@
     "position": 2,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:home' %}",
-      "name": "{% trans 'Thèses' %}"
+      "name": "{% trans 'Thèses et mémoires' %}"
     }
   },{
     "@type": "ListItem",
@@ -39,7 +39,7 @@
 
 {% block breadcrumb %}
 {{ block.super }}
-<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses" %}</a></li>
+<li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
 <li><a href="{% url 'public:thesis:collection_home' collection.code %}">{{ collection.name }}</a></li>
 {% endblock breadcrumb %}
 
@@ -66,7 +66,8 @@
 
     <div class="row">
       <div class="col-sm-9 col-md-8 main-content">
-        <h2>{% trans "Liste complète" %}&nbsp;<span class="hint--top hint--no-animate" data-hint="{% trans 'La lecture de ces thèses nécessite la redirection vers le site du dépôt institutionnel.' %}"><span class="ion-alert"></span></span></h2>
+        <h2>{% trans "Liste complète" %}</h2>
+        <p>{% trans 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
         <div class="actions-wrapper">
           <div id="div_id_sort_by" class="form-group">
             <div class="controls">
@@ -85,18 +86,18 @@
         {% for thesis in theses %}
           <li class="thesis row">
             <div class="col-xs-11">
-              <div class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</div>
+              <div class="thesis-author"><strong>{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</strong></div>
               <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
               {% if thesis.description or thesis.keywords.all %}
               <div class="thesis-description">
                 {% if thesis.description %}
                 <p class="thesis-abstract">
-                  {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}">-->&nbsp;{% trans 'Lire la suite' %}</a>
+                  {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}"><strong>-->&nbsp;{% trans 'Lire la suite' %}</strong></a>
                 </p>
                 {% endif %}
                 {% if thesis.keywords.all %}
                 <p class="keywords">
-                  <span>{% trans "Mots-clés&nbsp;:" %}</span>
+                  <span><strong>{% trans "Mots-clés&nbsp;:" %}</strong></span>
                   <span>{% for kw in thesis.keywords.all %}{{ kw.name }}{% if not forloop.last %}, {% endif %}{% empty %}{% trans "aucun mot-clé" %}{% endfor %}</span>
                 </p>
                 {% endif %}
@@ -118,8 +119,8 @@
         <div class="sidebar-block">
           <h2>{% trans "Fiche" %}</h2>
           <dl>
-            <dt>{% trans "Nombre de thèses" %}</dt>
-            <dd>{{ paginator.count }}</dd>
+            <dt>{% trans "Nombre de documents" %}</dt>
+            <dd>{{ thesis_count|intcomma }}</dd>
             {% block inner_list_switcher %}{% endblock inner_list_switcher %}
           </dl>
         </div>
@@ -130,7 +131,7 @@
             <li>
               <a href="{{ thesis.url }}">
                 <span class="thesis-title">{{ thesis.title }}</span>
-                <span class="thesis-author">{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</span>
+                <span class="thesis-author"><strong>{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</strong></span>
               </a>
             </li>
             {% endfor %}

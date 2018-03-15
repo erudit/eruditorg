@@ -61,13 +61,12 @@
       .title {
         padding-top: 1.75em;
         margin-top: 1.75em;
-        @include grid-cell-border('top', 1px, $black);
+        border-top: 1px solid #000;
 
         a {
           display: inline-block;
           color: $dark-grey;
           font-size: 30px;
-          @include fw-sans-medium;
 
           &:hover, &:active, &:focus, &:active:focus {
             text-decoration: none;
@@ -84,7 +83,6 @@
       color: $coral-red;
       font-size: 1.15em;
       letter-spacing: 0.05em;
-      @include fw-sans-bold();
     }
 
     .journal-item {
@@ -117,7 +115,6 @@
           background: $coral-red;
           color: #FFF;
           text-decoration: none;
-          @include fw-sans-medium;
           border-color: $coral-red;
 
           img {

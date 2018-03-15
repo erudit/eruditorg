@@ -79,19 +79,19 @@
       <p class="journal-history">
       {% if journal.previous_journal %}
         <span>{% trans "Revue précédée de" %}</span>
-        <span>
+        <strong>
           <a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">
             {{ journal.previous_journal.name }}{% if journal.previous_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.previous_journal.subtitle }}{% endif %}
           </a>
-        </span>
+        </strong>
       {% endif %}
       {% if journal.next_journal %}
         <span>{% trans "Revue suivie de" %}</span>
-        <span>
+        <strong>
           <a href="{% url 'public:journal:journal_detail' journal.next_journal.code %}">
             {{ journal.next_journal.name }}{% if journal.next_journal.subtitle %}{% trans '&nbsp;:' %} {{ journal.next_journal.subtitle }}{% endif %}
           </a>
-        </span>
+        </strong>
       {% endif %}
       </p>
       {% endif %}
@@ -112,7 +112,7 @@
         <p class="latest-issue-title">
           <a {{ latest_issue.extra.detail_link_attrs }}>
             {% if latest_issue.html_title %}
-            <em>{{ latest_issue.html_title|safe }}</em>
+            <span>{{ latest_issue.html_title|safe }}</span>
             <br/>
             {% endif %}
             <span>{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>

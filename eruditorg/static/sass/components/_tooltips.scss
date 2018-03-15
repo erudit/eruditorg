@@ -18,19 +18,3 @@
 [data-hint] {
   letter-spacing: normal;
 }
-
-.ion-alert {
-  font-size: 14px;
-  vertical-align: super;
-  color: #FFF;
-  background-color: $darker-grey;
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  text-align: center;
-  vertical-align: top;
-  padding: 4px;
-  @include border-radius(11px);
-  @include fw-sans;
-  font-size: 12px;
-}

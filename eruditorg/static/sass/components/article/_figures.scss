@@ -33,13 +33,13 @@
       display: block;
       font-size: 14px;
       line-height: 1;
-      @include fw-mono();
+      @include fw-mono;
     }
 
     .legende {
 
       .titre {
-        @include fw-sans-medium;
+        @include font-styles('sans-medium');
       }
 
     }
@@ -63,20 +63,8 @@
     text-align: right;
   }
 
-  .allertexte {
-    @include fw-sans-medium;
-
-  }
-
   .voirliste, .allertexte {
-
-    a {
-      &:hover, &:active, &:focus {
-        text-decoration: none;
-      }
-    }
-
+    padding: 0 0.5em;
   }
-
 
 }

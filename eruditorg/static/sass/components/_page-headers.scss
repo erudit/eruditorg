@@ -4,35 +4,13 @@
 
 .page-header-main {
 
-  hgroup {
-    padding-bottom: $margin-vertical-default;
-  }
-
   h1 {
     margin-bottom: 0.5em;
 
     > span {
       display: block;
-
-      + span {
-        @include fw-sans;
-      }
-
     }
 
-  }
-
-  // add border at top or bottom of the heading
-  &.border-top {
-    @include grid-cell-border($direction: 'top');
-  }
-
-  &.border-bottom {
-    @include grid-cell-border($direction: 'bottom');
-    margin-bottom: $margin-vertical-default/2;
-    hgroup {
-      padding-bottom: $margin-vertical-default/2;
-    }
   }
 
 }

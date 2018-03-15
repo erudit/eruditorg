@@ -28,6 +28,9 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ThesisHomeView, self).get_context_data(**kwargs)
 
+        # Total number of theses for all collections
+        context['total_count'] = Thesis.objects.count()
+
         # Fetches the collections associated with theses.
         collections = get_thesis_collections().order_by('name')
         collections_dict = OrderedDict()
@@ -126,6 +129,9 @@ class BaseThesisListView(ListView):
         context['collection'] = self.collection
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
+
+        # Inserts the total number of theses for a given collection
+        context['thesis_count'] = Thesis.objects.filter(collection=self.collection).count()
 
         # Inserts randomly selected theses into the context ("At a glance" section).
         context['random_theses'] = self.get_queryset().order_by('?')[:3]

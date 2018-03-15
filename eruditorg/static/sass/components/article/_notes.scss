@@ -3,7 +3,7 @@
  */
 
 .norenvoi, .nonote {
-  @include fw-sans();
+  @include fw-sans;
   font-size: 0.85em;
   vertical-align: top;
 

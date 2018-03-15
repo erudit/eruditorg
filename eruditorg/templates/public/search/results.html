@@ -111,13 +111,13 @@
                   {% for error in filter_form.filter_extra_q.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
               </div>
-              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_years %}
-              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
-              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_languages %}
               {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_collections %}
+              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_years %}
               {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_authors %}
-              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_funds %}
+              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_languages %}
               {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_publication_types %}
+              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_article_types %}
+              {% include "public/search/partials/results_filter_form_checkboxes.html" with field=filter_form.filter_funds %}
               <div class="form-action text-right">
                 <button type="submit" class="btn btn-primary">{% trans "Filtrer" %}</button>
               </div>

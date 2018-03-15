@@ -21,7 +21,6 @@ footer#site-footer {
       width: auto;
       border-width: 0;
       height: 52px;
-      @include fw-sans-italic();
       background-color: $light-grey;
     }
 

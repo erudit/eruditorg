@@ -26,7 +26,6 @@ ul {
 
       li:before {
         content: '– ';
-        @include fw-sans;
       }
 
       .alinea {

@@ -34,7 +34,6 @@
             background: $coral-red;
             color: #FFF;
             text-decoration: none;
-            @include fw-sans-medium;
             border-color: $coral-red;
           }
 
@@ -42,10 +41,6 @@
 
         span {
           display: block;
-        }
-
-        span + span {
-          @include fw-sans-medium;
         }
 
       }
@@ -92,10 +87,6 @@
           display: none;
         }
 
-        .thesis-author {
-          @include fw-sans-medium;
-        }
-
         .thesis-description {
           padding: 0.85em;
           margin: 0.75em 0;
@@ -120,21 +111,12 @@
 
           a {
             white-space: nowrap;
-            @include fw-sans-medium;
 
             &:hover, &:active, &:focus, &:active:focus {
               text-decoration: none;
               color: $coral-red;
             }
 
-          }
-
-        }
-
-        .keywords {
-
-          span:first-child {
-            @include fw-sans-medium;
           }
 
         }
