@@ -78,7 +78,7 @@ class TestContentAccessCheckMixin:
 
     def test_do_not_grant_access_by_default(self, single_article_view):
         # Setup
-        article = EmbargoedArticleFactory(use_fedora=False)
+        article = EmbargoedArticleFactory()
 
         view = single_article_view()
         view.object = article
@@ -110,7 +110,7 @@ class TestContentAccessCheckMixin:
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription(self, single_article_view):
         # Setup
-        article = EmbargoedArticleFactory(use_fedora=False)
+        article = EmbargoedArticleFactory()
         authenticated_request = get_authenticated_request()
 
         JournalAccessSubscriptionFactory.create(
@@ -131,7 +131,7 @@ class TestContentAccessCheckMixin:
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_individual_subscription_that_is_not_ongoing(self, single_article_view):  # noqa
         # Setup
 
-        article = EmbargoedArticleFactory.create(use_fedora=False)
+        article = EmbargoedArticleFactory.create()
         authenticated_request = get_authenticated_request()
 
         JournalAccessSubscriptionFactory.create(user=authenticated_request.user, journal=article.issue.journal)
@@ -145,7 +145,7 @@ class TestContentAccessCheckMixin:
 
     def test_can_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account(self, single_article_view):
         # Setup
-        article = EmbargoedArticleFactory.create(use_fedora=False)
+        article = EmbargoedArticleFactory.create()
         anonymous_request = get_anonymous_request()
 
         JournalAccessSubscriptionFactory(
@@ -169,7 +169,7 @@ class TestContentAccessCheckMixin:
 
     def test_cannot_grant_access_to_an_article_if_it_is_associated_to_an_institutional_account_that_is_not_not_ongoing(self, single_article_view):  # noqa
         # Setup
-        article = EmbargoedArticleFactory.create(use_fedora=False)
+        article = EmbargoedArticleFactory.create()
         anonymous_request = get_anonymous_request()
 
         JournalAccessSubscriptionFactory.create(
@@ -193,7 +193,7 @@ class TestContentAccessCheckMixin:
         """ Test that the adequate subscription is activated """
 
         # Create an embargoed article
-        article = EmbargoedArticleFactory(use_fedora=False)
+        article = EmbargoedArticleFactory()
         authenticated_request = get_authenticated_request()
 
         # Create an institutional subscription that gives access to this article
@@ -205,7 +205,7 @@ class TestContentAccessCheckMixin:
         )
 
         # Create another embargoed article
-        other_article = EmbargoedArticleFactory(use_fedora=False)
+        other_article = EmbargoedArticleFactory()
 
         # Create an individual subscription that gives access to this article
         individual_subscription = JournalAccessSubscriptionFactory(
@@ -229,7 +229,7 @@ class TestContentAccessCheckMixin:
 
     def test_first_subscription_is_activated_when_both_are_valid(self, single_article_view):
         # Create an embargoed article
-        article = EmbargoedArticleFactory(use_fedora=False)
+        article = EmbargoedArticleFactory()
         authenticated_request = get_authenticated_request()
 
         # Create an institutional subscription that gives access to this article
@@ -241,7 +241,7 @@ class TestContentAccessCheckMixin:
         )
 
         # Create an individual subscription that gives access to this article
-        individual_subscription = JournalAccessSubscriptionFactory(
+        JournalAccessSubscriptionFactory(
             journal=article.issue.journal,
             user=authenticated_request.user,
             post__valid=True

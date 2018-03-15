@@ -490,6 +490,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 self.journal.code, str(self.year), self.volume, self.number)
         return self.journal.code
 
+    def __repr__(self):
+        return "<Issue {} {}>".format(self.journal.code, self.pk)
+
     # Fedora-related methods and properties
     # --
 

@@ -41,7 +41,7 @@ from base.test.testcases import EruditClientTestCase
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
-pytestmark = [pytest.mark.usefixtures('patch_erudit_article'), pytest.mark.django_db]
+pytestmark = pytest.mark.django_db
 
 def journal_detail_url(journal):
     return reverse('public:journal:journal_detail', kwargs={'code': journal.code})
@@ -154,7 +154,7 @@ class TestJournalListView:
     def test_only_main_collections_are_shown_by_default(self):
         collection = CollectionFactory.create()
         main_collection = CollectionFactory.create(is_main_collection=True)
-        journal1 = JournalFactory.create_with_issue(collection=collection)
+        JournalFactory.create_with_issue(collection=collection)
         journal2 = JournalFactory.create_with_issue(collection=main_collection)
         url = reverse('public:journal:journal_list')
         response = self.client.get(url)
@@ -211,9 +211,9 @@ class TestJournalDetailView:
 
     def test_can_embed_the_journal_information_in_the_context_if_available(self):
         # Setup
-        journal_info = JournalInformationFactory(journal=JournalFactory(use_fedora=False))
+        journal_info = JournalInformationFactory(journal=JournalFactory())
         url_1 = journal_detail_url(journal_info.journal)
-        journal_2 = JournalFactory(use_fedora=False)
+        journal_2 = JournalFactory()
         url_2 = journal_detail_url(journal_2)
 
         # Run
@@ -324,7 +324,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
 
     def test_supports_authors_with_only_special_characters_in_their_name(self):
         # Setup
-        issue_1 = IssueFactory.create(journal=JournalFactory(use_fedora=False), date_published=dt.datetime.now())
+        issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
         author_1 = AuthorFactory.create(lastname=':')
         article_1.authors.add(author_1)
@@ -406,8 +406,8 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
     def test_can_filter_by_article_type(self):
         # Setup
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create( issue=issue_1, type='article')
-        article_2 = ArticleFactory.create( issue=issue_1, type='compterendu')  # noqa
+        article_1 = ArticleFactory.create(issue=issue_1, type='article')
+        ArticleFactory.create(issue=issue_1, type='compterendu')  # noqa
 
         author_1 = AuthorFactory.create(lastname='btest')
         article_1.authors.add(author_1)
@@ -439,7 +439,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
     def test_only_letters_with_results_are_active(self):
         """ Test that for a given selection in the authors list view, only the letters for which
         results are present are shown """
-        issue_1 = IssueFactory.create(journal=JournalFactory(use_fedora=False), date_published=dt.datetime.now(), use_fedora=False)
+        issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
         article_1 = ArticleFactory.create( issue=issue_1, type='article')
         author_1 = AuthorFactory.create(lastname='atest')
         article_1.authors.add(author_1)
@@ -519,8 +519,6 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
             self.assertEqual(response.context['letters_exists'][letter.upper()], 0)
 
 
-@pytest.mark.usefixtures('patch_erudit_publication')
-@pytest.mark.usefixtures('patch_erudit_journal')
 class TestIssueDetailView:
     def test_works_with_pks(self):
         issue = IssueFactory.create(date_published=dt.datetime.now())
@@ -565,7 +563,6 @@ class TestIssueDetailView:
 @pytest.mark.django_db
 class TestArticleDetailView:
     @override_settings(CACHES=settings.NO_CACHES)
-    @pytest.mark.usefixtures('patch_erudit_publication')
     def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
         # The goal of this test is to verify that out erudit article mechanism doesn't crash for
         # all kinds of articles. We have many articles in our fixtures and the `eruditarticle`
@@ -602,14 +599,12 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         self.factory = RequestFactory()
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
-    @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     @unittest.mock.patch.object(subprocess, 'check_call')
-    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_ds, mock_pdf):
+    def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_pdf):
         # Setup
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
-        mock_ds = ['ERUDITXSD300', ]  # noqa
         journal = JournalFactory()
         issue = IssueFactory.create(
             journal=journal, year=2010,
@@ -658,7 +653,7 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         self.journal.open_access = False
         self.journal.save()
         issue = IssueFactory.create(
-            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now(), use_fedora=False)
+            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
         journal_id = self.journal.localidentifier
         issue_id = issue.localidentifier
@@ -855,7 +850,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         assert resp.status_code == 301
 
     def test_can_redirect_journals_from_legacy_urls(self):
-        article = ArticleFactory(use_fedora=False)
+        article = ArticleFactory()
         article.issue.volume = "1"
         article.issue.number = "1"
         article.issue.save()
@@ -956,12 +951,7 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         assert self.FALLBACK_URL in redirect_url
 
 
-@override_settings(DEBUG=True)
 class TestArticleXmlView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestArticleXmlView, self).setUp()
-        self.factory = RequestFactory()
-
     @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
     @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     def test_can_retrieve_xml_of_existing_articles(self, mock_ds, mock_pdf):
@@ -984,7 +974,7 @@ class TestArticleXmlView(BaseEruditTestCase):
         url = reverse('public:journal:article_raw_xml', args=(
             journal_id, issue.volume_slug, issue_id, article_id
         ))
-        request = self.factory.get(url)
+        request = RequestFactory().get(url)
         request.user = AnonymousUser()
         request.subscriptions = UserSubscriptions()
 

@@ -46,21 +46,20 @@ class TestJournal(BaseEruditTestCase):
 
     def test_can_return_its_published_issues(self):
         # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, year=2010, use_fedora=False)
-        issue_2 = IssueFactory.create(journal=self.journal, year=2009, use_fedora=False)
+        issue_1 = IssueFactory.create(journal=self.journal, year=2010)
+        issue_2 = IssueFactory.create(journal=self.journal, year=2009)
 
         # Create an unpublished issue
         IssueFactory.create(
             journal=self.journal, is_published=False,
             year=dt.datetime.now().year + 2,
-            use_fedora=False,
         )
         # Run & check
         self.assertEqual(set(self.journal.published_issues), {issue_1, issue_2})
 
     def test_can_return_when_date_embargo_begins(self):
         # Setup
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         journal.open_access = False
         journal.save()
         date_issue_1 = dt.date(2017, 3, 8)
@@ -82,21 +81,18 @@ class TestJournal(BaseEruditTestCase):
         # Setup
         issue_1 = IssueFactory.create(
             journal=self.journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=1),
-            use_fedora=False)
+            date_published=dt.datetime.now() - dt.timedelta(days=1))
         IssueFactory.create(
-            journal=self.journal, year=2010, date_published=dt.datetime.now(),
-            use_fedora=False)
+            journal=self.journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
             journal=self.journal, year=dt.datetime.now().year + 2,
-            date_published=dt.datetime.now() + dt.timedelta(days=30),
-            use_fedora=False)
+            date_published=dt.datetime.now() + dt.timedelta(days=30))
         # Run & check
         self.assertEqual(self.journal.first_issue, issue_1)
 
     def test_can_return_its_last_issue(self):
         # Setup
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         IssueFactory.create(
             journal=journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1))
@@ -125,7 +121,6 @@ class TestJournal(BaseEruditTestCase):
         self.assertEqual(journal_1.letter_prefix, 'T')
 
     def test_can_return_the_published_open_access_issues(self):
-        # Setup
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         now_dt = dt.date.today()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
@@ -137,16 +132,16 @@ class TestJournal(BaseEruditTestCase):
         ) - dr.relativedelta(months=ml)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
         date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         journal.open_access = False
         journal.save()
-        IssueFactory.create(
+        issue_1 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_1.year,
             is_published=True, date_published=date_issue_1)
-        IssueFactory.create(
+        issue_2 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_2.year,
             is_published=True, date_published=date_issue_2)
-        IssueFactory.create(
+        issue_3 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_3.year,
             is_published=True, date_published=date_issue_3)
         issue_4 = IssueFactory.create(
@@ -158,19 +153,16 @@ class TestJournal(BaseEruditTestCase):
         issue_6 = IssueFactory.create(
             journal=journal, number=7, year=date_issue_1.year - 10,
             is_published=True, date_published=date_issue_1, force_free_access=True)
-        IssueFactory.create(
+        issue_7 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_5.year,
             is_published=False, date_published=date_issue_5)
-        # Run & check
-        self.assertEqual(
-            list(journal.published_open_access_issues), [issue_6, issue_5, issue_4, ]
-        )
+        assert set(journal.published_open_access_issues) == {issue_6, issue_5, issue_4, }
 
     def test_can_return_the_published_open_access_issues_period_coverage(self):
         # Setup
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         now_dt = dt.date.today()
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
         journal.save()
@@ -209,7 +201,7 @@ class TestJournal(BaseEruditTestCase):
 
     def test_knows_its_directors(self):
         now_dt = dt.datetime.now()
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         first_issue = IssueFactory.create(
             journal=self.journal, date_published=now_dt - dt.timedelta(days=1)
         )
@@ -225,7 +217,7 @@ class TestJournal(BaseEruditTestCase):
         assert first_issue_director not in journal.get_directors()
 
     def test_knows_its_editors(self):
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         first_issue = IssueFactory.create(
             journal=journal, date_published=reldate(-1)
         )
@@ -284,6 +276,7 @@ class TestJournal(BaseEruditTestCase):
 
         assert list(i1.journal.published_issues.all()) == [i2, i1]
 
+
 class TestIssue(BaseEruditTestCase):
     def setUp(self):
         super(TestIssue, self).setUp()
@@ -326,7 +319,7 @@ class TestIssue(BaseEruditTestCase):
     def test_knows_if_it_is_embargoed_in_case_of_scientific_journals(self):
         # Setup
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(use_fedora=False, collection=self.collection)
+        journal = JournalFactory(collection=self.collection)
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
@@ -374,7 +367,7 @@ class TestIssue(BaseEruditTestCase):
         # Setup
         from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_MONTHS as ml
         journal = JournalFactory(
-            type_code='C', use_fedora=False, collection=self.collection)
+            type_code='C', collection=self.collection)
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
@@ -421,7 +414,7 @@ class TestIssue(BaseEruditTestCase):
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
         journal = JournalFactory(
-            type_code='C', use_fedora=False, collection=self.collection)
+            type_code='C', collection=self.collection)
         journal.last_publication_year = now_dt.year + 1
         journal.save()
         issue = IssueFactory.create(
@@ -433,8 +426,8 @@ class TestIssue(BaseEruditTestCase):
     def test_knows_that_issues_with_open_access_are_not_embargoed(self):
         # Setup
         now_dt = dt.datetime.now()
-        journal = JournalFactory(use_fedora=False)
-        j2 = JournalFactory.create(type_code='C', open_access=False, use_fedora=False)
+        journal = JournalFactory()
+        j2 = JournalFactory.create(type_code='C', open_access=False)
         journal.last_publication_year = now_dt.year
         journal.open_access = True
         journal.save()
@@ -454,7 +447,7 @@ class TestIssue(BaseEruditTestCase):
 
     def test_knows_if_it_has_a_coverpage(self):
         # Setup
-        journal = JournalFactory(use_fedora=False)
+        journal = JournalFactory()
         journal.open_access = True
         journal.save()
         with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
@@ -469,7 +462,7 @@ class TestIssue(BaseEruditTestCase):
             issue_2.fedora_object.coverpage = unittest.mock.MagicMock()
             issue_2.fedora_object.coverpage.content = ''
         # We don't crash trying to check the fedora object. We return False
-        issue_3 = IssueFactory.create(journal=journal, use_fedora=False)
+        issue_3 = IssueFactory.create(journal=journal)
 
         # Run & check
         self.assertTrue(issue_1.has_coverpage)
@@ -625,7 +618,7 @@ class TestArticle(BaseEruditTestCase):
         # Setup
         now_dt = dt.date.today()
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(use_fedora=False, collection=self.collection)
+        journal = JournalFactory(collection=self.collection)
         journal.open_access = False
         journal.last_publication_year = now_dt.year
         journal.save()
@@ -703,9 +696,9 @@ class TestAuthor(BaseEruditTestCase):
         assert author_5.letter_prefix is None
 
     def test_can_return_abbreviated_volume_title_when_not_in_fedora(self):
-        issue1 = IssueFactory(volume=1, number=2, publication_period='may', use_fedora=False)
-        issue2 = IssueFactory(volume=1, number=None, publication_period='may', use_fedora=False)
-        issue3 = IssueFactory(number=2, publication_period='may', use_fedora=False)
+        issue1 = IssueFactory(volume=1, number=2, publication_period='may', localidentifier=None)
+        issue2 = IssueFactory(volume=1, number=None, publication_period='may', localidentifier=None)
+        issue3 = IssueFactory(number=2, publication_period='may', localidentifier=None)
 
         assert issue1.abbreviated_volume_title == 'Vol. 1, n<sup>o</sup> 2, may'
         assert issue2.abbreviated_volume_title == 'Vol. 1, may'

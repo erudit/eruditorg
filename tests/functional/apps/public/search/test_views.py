@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import json
 import unittest.mock
 from faker import Faker
@@ -18,7 +16,6 @@ from core.solrq.query import Query
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
-from erudit.fedora.modelmixins import FedoraMixin
 from erudit.models import Article
 
 from apps.public.search.saved_searches import SavedSearchList
@@ -26,6 +23,9 @@ from apps.public.search.views import AdvancedSearchView
 from apps.public.search.views import EruditDocumentListAPIView
 from apps.public.search.views import SavedSearchAddView
 from apps.public.search.views import SavedSearchRemoveView
+
+
+pytestmark = pytest.mark.django_db
 
 faker = Faker()
 
@@ -66,105 +66,72 @@ def fake_get_results_external(**kwargs):
     return results
 
 
-def get_mocked_erudit_object():
-    m = unittest.mock.MagicMock()
-    m.number = 2
-    m.subtitle = 'Foo bar'
-    m.first_page = 10
-    m.last_page = 12
-    m.abstracts = [{'lang': 'fr', 'content': 'This is a test'}]
-
-    def get_authors(formatted=False):
-        if formatted:
-            return "Foo, Bar"
-        else:
-            return [{'firstname': 'Test', 'lastname': 'Foobar'}]
-
-    m.get_authors = get_authors
-    m.get_reviewed_works = lambda: []
-    m.get_formatted_title.return_value = "mocked title"
-    m.get_volume_numbering.return_value = ''
-    return m
-
-@override_settings(DEBUG=True)
-class TestEruditDocumentListAPIView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestEruditDocumentListAPIView, self).setUp()
-        self.factory = RequestFactory()
-
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
+class TestEruditDocumentListAPIView:
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_can_return_erudit_documents(self, mock_get_results, mock_erudit_object):
+    def test_can_return_erudit_documents(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        mock_erudit_object.return_value = get_mocked_erudit_object()
-        issue = IssueFactory.create(journal=self.journal, date_published=now(), use_fedora=False)
+        issue = IssueFactory.create(date_published=now())
         localidentifiers = []
         for i in range(0, 50):
             lid = 'lid-{0}'.format(i)
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid)
 
-        request = self.factory.get('/', data={'format': 'json'})
+        request = RequestFactory().get('/', data={'format': 'json'})
         list_view = EruditDocumentListAPIView.as_view()
 
         # Run
         results_data = list_view(request).render().content
         # Check
         results = json.loads(smart_text(results_data))
-        self.assertEqual(results['pagination']['count'], 50)
+        assert results['pagination']['count'] == 50
 
-    @unittest.mock.patch.object(FedoraMixin, 'get_fedora_object')
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_can_return_erudit_documents_not_in_fedora(self, mock_get_results, mock_fedora_object):
+    def test_can_return_erudit_documents_not_in_fedora(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        mock_fedora_object.return_value = None
-        issue = IssueFactory.create(journal=self.journal, date_published=now(), use_fedora=False)
+        issue = IssueFactory.create(date_published=now())
         localidentifiers = []
         for i in range(0, 1):
             lid = 'lid-{0}'.format(i)
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid)
 
-        request = self.factory.get('/', data={'format': 'json'})
+        request = RequestFactory().get('/', data={'format': 'json'})
         list_view = EruditDocumentListAPIView.as_view()
 
         # Run
         results_data = list_view(request).render().content
         # Check
         results = json.loads(smart_text(results_data))
-        self.assertEqual(results['pagination']['count'], 50)
+        assert results['pagination']['count'] == 50
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_return_erudit_documents_not_in_database(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results_external
-        request = self.factory.get('/', data={'format': 'json'})
+        request = RequestFactory().get('/', data={'format': 'json'})
         list_view = EruditDocumentListAPIView.as_view()
 
         # Run
         results_data = list_view(request).render().content
         # Check
         results = json.loads(smart_text(results_data))
-        self.assertEqual(results['pagination']['count'], 50)
+        assert results['pagination']['count'] == 50
 
     # This NO_CACHES override is needed because otherwise the cache.set() call tries to picke our
     # mock erudit object and crashes.
     @override_settings(CACHES=settings.NO_CACHES)
-    @unittest.mock.patch.object(FedoraMixin, 'get_erudit_object')
     @unittest.mock.patch.object(Query, 'get_results')
-    def test_fedora_issue_with_external_url_yield_no_pdf_link(
-            self, mock_get_results, mock_erudit_object):
+    def test_fedora_issue_with_external_url_yield_no_pdf_link(self, mock_get_results):
         # When an fedora issue has an external_url (for example, RECMA. see #1651), we don't want
         # any of its articles to yield a PDF link.
         mock_get_results.side_effect = fake_get_results
-        mock_erudit_object.return_value = get_mocked_erudit_object()
-        issue = IssueFactory.create(
-            journal=self.journal, external_url='http://www.example.com')
+        issue = IssueFactory.create(external_url='http://www.example.com')
         ArticleFactory.create(issue=issue, localidentifier='foo')
 
-        request = self.factory.get('/', data={'format': 'json'})
+        request = RequestFactory().get('/', data={'format': 'json'})
         list_view = EruditDocumentListAPIView.as_view()
 
         results_data = list_view(request).render().content
@@ -174,16 +141,11 @@ class TestEruditDocumentListAPIView(BaseEruditTestCase):
         assert obj['pdf_url'] is None
 
 
-@pytest.mark.django_db
 class TestAdvancedSearchView:
-    @pytest.fixture(autouse=True)
-    def setup(self):
-        self.factory = RequestFactory()
-
     def test_can_insert_the_saved_searches_into_the_context(self):
         # Setup
         url = reverse('public:search:advanced_search')
-        request = self.factory.get(url)
+        request = RequestFactory().get(url)
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = AdvancedSearchView.as_view()
@@ -225,15 +187,10 @@ class TestSearchResultsView(BaseEruditTestCase):
 
 
 
-@pytest.mark.django_db
 class TestSavedSearchAddView:
-    @pytest.fixture(autouse=True)
-    def setup(self):
-        self.factory = RequestFactory()
-
     def test_can_add_a_search_to_the_list_of_saved_searches(self):
         # Setup
-        request = self.factory.post('/', {'querystring': 'foo=bar&xyz=test', 'results_count': 100})
+        request = RequestFactory().post('/', {'querystring': 'foo=bar&xyz=test', 'results_count': 100})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchAddView.as_view()
@@ -250,7 +207,7 @@ class TestSavedSearchAddView:
 
     def test_cannot_add_a_search_if_the_querystring_is_not_provided(self):
         # Setup
-        request = self.factory.post('/', {'results_count': 100})
+        request = RequestFactory().post('/', {'results_count': 100})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchAddView.as_view()
@@ -262,7 +219,7 @@ class TestSavedSearchAddView:
 
     def test_cannot_add_a_search_if_the_results_count_is_not_provided(self):
         # Setup
-        request = self.factory.post('/', {'querystring': 'foo=bar&xyz=test'})
+        request = RequestFactory().post('/', {'querystring': 'foo=bar&xyz=test'})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchAddView.as_view()
@@ -274,7 +231,7 @@ class TestSavedSearchAddView:
 
     def test_cannot_add_a_search_if_the_querystring_is_not_a_valid_querystring(self):
         # Setup
-        request = self.factory.post('/', {'querystring': 'bad', 'results_count': 100})
+        request = RequestFactory().post('/', {'querystring': 'bad', 'results_count': 100})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchAddView.as_view()
@@ -286,7 +243,7 @@ class TestSavedSearchAddView:
 
     def test_cannot_add_a_search_if_the_results_count_is_not_an_integer(self):
         # Setup
-        request = self.factory.post(
+        request = RequestFactory().post(
             '/', {'querystring': 'foo=bar&xyz=test', 'results_count': 'bad'})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
@@ -298,15 +255,10 @@ class TestSavedSearchAddView:
         assert not len(searches)
 
 
-@pytest.mark.django_db
 class TestSavedSearchRemoveView:
-    @pytest.fixture(autouse=True)
-    def setup(self):
-        self.factory = RequestFactory()
-
     def test_can_remove_a_search_from_the_list_of_saved_searches(self):
         # Setup
-        request = self.factory.post('/')
+        request = RequestFactory().post('/')
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchRemoveView.as_view()
@@ -323,7 +275,7 @@ class TestSavedSearchRemoveView:
 
     def test_can_remove_a_search_from_the_list_of_saved_searches_if_the_uuid_is_not_in_it(self):
         # Setup
-        request = self.factory.post('/')
+        request = RequestFactory().post('/')
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchRemoveView.as_view()
