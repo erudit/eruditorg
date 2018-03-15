@@ -27,6 +27,25 @@ FAKE_FEDORA_PROFILE = """<?xml version="1.0" encoding="UTF-8"?>
 </objectProfile>
 """
 
+FAKE_JOURNAL_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
+<objectDatastreams
+    xmlns="http://www.fedora.info/definitions/1/0/access/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/
+    http://www.fedora-commons.org/definitions/1/0/listDatastreams.xsd"
+    pid="{pid}"
+    baseURL="http://fakeurl/">
+<datastream dsid="SERIES" label="SERIES" mimeType="text/xml" />
+<datastream dsid="DC" label="Dublin Core Record for this object" mimeType="text/xml" />
+<datastream dsid="LOGO" label="LOGO" mimeType="image/jpeg" />
+<datastream dsid="PUBLICATIONS_HIDDEN" label="PUBLICATIONS_HIDDEN" mimeType="text/xml" />
+<datastream dsid="RELS-EXT" label="Relationships" mimeType="application/rdf+xml" />
+<datastream dsid="OAISET_INFO" label="Description de la revue en DC" mimeType="text/xml" />
+<datastream dsid="PUBLICATIONS" label="PUBLICATIONS" mimeType="text/xml" />
+<datastream dsid="THEMES" label="THEMES" mimeType="text/xml" />
+</objectDatastreams>
+"""
+
 FAKE_ISSUE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <objectDatastreams
     xmlns="http://www.fedora.info/definitions/1/0/access/"
@@ -95,6 +114,12 @@ class FakeAPI(ApiFacade):
                     result = FAKE_ISSUE_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/SUMMARY/content':
                     with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
+                        result = xml.read()
+            elif len(pidelems) == 2:  # journal
+                if not subselection:  # we want a datastream list
+                    result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
+                elif subselection == '/PUBLICATIONS/content':
+                    with open('./tests/fixtures/journal/mi115.xml', 'rb') as xml:
                         result = xml.read()
         if result is not None:
             return FakeResponse(result, url)

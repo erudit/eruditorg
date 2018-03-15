@@ -83,7 +83,7 @@ class TestJournal(BaseEruditTestCase):
             journal=self.journal, year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1))
         IssueFactory.create(
-            journal=self.journal, year=2010, date_published=dt.datetime.now() )
+            journal=self.journal, year=2010, date_published=dt.datetime.now())
         IssueFactory.create(
             journal=self.journal, year=dt.datetime.now().year + 2,
             date_published=dt.datetime.now() + dt.timedelta(days=30))
@@ -121,7 +121,6 @@ class TestJournal(BaseEruditTestCase):
         self.assertEqual(journal_1.letter_prefix, 'T')
 
     def test_can_return_the_published_open_access_issues(self):
-        # Setup
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
         now_dt = dt.date.today()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
@@ -136,13 +135,13 @@ class TestJournal(BaseEruditTestCase):
         journal = JournalFactory()
         journal.open_access = False
         journal.save()
-        IssueFactory.create(
+        issue_1 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_1.year,
             is_published=True, date_published=date_issue_1)
-        IssueFactory.create(
+        issue_2 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_2.year,
             is_published=True, date_published=date_issue_2)
-        IssueFactory.create(
+        issue_3 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_3.year,
             is_published=True, date_published=date_issue_3)
         issue_4 = IssueFactory.create(
@@ -154,13 +153,10 @@ class TestJournal(BaseEruditTestCase):
         issue_6 = IssueFactory.create(
             journal=journal, number=7, year=date_issue_1.year - 10,
             is_published=True, date_published=date_issue_1, force_free_access=True)
-        IssueFactory.create(
+        issue_7 = IssueFactory.create(  # noqa: F841
             journal=journal, year=date_issue_5.year,
             is_published=False, date_published=date_issue_5)
-        # Run & check
-        self.assertEqual(
-            list(journal.published_open_access_issues), [issue_6, issue_5, issue_4, ]
-        )
+        assert set(journal.published_open_access_issues) == {issue_6, issue_5, issue_4, }
 
     def test_can_return_the_published_open_access_issues_period_coverage(self):
         # Setup
@@ -279,6 +275,7 @@ class TestJournal(BaseEruditTestCase):
             return_value=ordered_pids)
 
         assert list(i1.journal.published_issues.all()) == [i2, i1]
+
 
 class TestIssue(BaseEruditTestCase):
     def setUp(self):
