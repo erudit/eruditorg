@@ -168,6 +168,15 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'erudit.article'
 
+    @factory.post_generation
+    def title(obj, create, extracted, **kwargs):
+        # This will be a challenge to properly implement with fedora stubs, but for now let's just
+        # hack the thing and do whatever is simpler to ensure that article.title will return the
+        # value we specify
+        if extracted:
+            obj.formatted_title = extracted
+            obj.save()
+
 
 class OpenAccessArticleFactory(ArticleFactory):
     issue = factory.SubFactory(
