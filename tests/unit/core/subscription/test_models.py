@@ -82,44 +82,44 @@ class TestUserSubscriptions:
 @pytest.mark.django_db
 class TestInstitutionReferer:
 
-    def test_can_find_an_institution_referer_by_netloc(self):
-
+    def _subscribe_referer(self, referer=None):
         valid_period = ValidJournalAccessSubscriptionPeriodFactory()
         institution_referer = InstitutionRefererFactory(
             subscription=valid_period.subscription,
-            referer="https://www.erudit.org/"
+            referer=referer
         )
-        assert JournalAccessSubscription.valid_objects.get_for_referer("https://www.erudit.org/") == institution_referer.subscription  # noqa
-        assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/") == institution_referer.subscription  # noqa
+        return institution_referer
 
+    @pytest.mark.parametrize('subscription_referer', ('https://erudit.org', ))
+    @pytest.mark.parametrize('user_referer', ('https://www.erudit.org', 'http://www.erudit.org', 'http://www.erudit.org/some/path'))
+    def test_can_find_an_institution_referer_by_netloc(self, user_referer, subscription_referer):
+        institution_referer = self._subscribe_referer(referer=subscription_referer)
+        assert JournalAccessSubscription.valid_objects.get_for_referer(user_referer) == institution_referer.subscription  # noqa
 
-    def test_can_find_an_institution_referer_by_netloc_and_path(self):
+    @pytest.mark.parametrize('referer,should_find', [
+        ("http://www.topsecurity.org/bulletproofauthenticationmechanism", True),
+        ("http://www.topsecurity.org/", False),
+        ("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123", True)
 
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        institution_referer = InstitutionRefererFactory(
-            subscription=valid_period.subscription,
-            referer="https://www.topsecurity.org/bulletproofauthenticationmechanism"
+    ])
+    def test_can_find_an_institution_referer_by_netloc_and_path(self, referer, should_find):
+        institution_referer = self._subscribe_referer(referer=referer)
+        assert (
+            JournalAccessSubscription.valid_objects.get_for_referer(referer) == institution_referer.subscription  # noqa
+            or not should_find
         )
-        assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/bulletproofauthenticationmechanism") == institution_referer.subscription  # noqa
-        assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/")
-        assert JournalAccessSubscription.valid_objects.get_for_referer("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123") == institution_referer.subscription  # noqa
 
-    def test_can_find_an_institution_referer_with_netloc_port_path_and_querystring(self):
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        institution_referer = InstitutionRefererFactory(
-            subscription=valid_period.subscription,
-            referer="http://externalservice.com:2049/login?url="
+    @pytest.mark.parametrize('referer', (
+        "http://externalservice.com:2049/login?url='allo'",
+        "https://externalservice.com:2049/login?url='allo'"
         )
-        assert JournalAccessSubscription.valid_objects.get_for_referer("http://externalservice.com:2049/login?url='allo'") == institution_referer.subscription  # noqa
-        assert JournalAccessSubscription.valid_objects.get_for_referer("https://externalservice.com:2049/login?url='allo'") == institution_referer.subscription  # noqa
+    )
+    def test_can_find_an_institution_referer_with_netloc_port_path_and_querystring(self, referer):
+        institution_referer = self._subscribe_referer(referer=referer)
+        assert JournalAccessSubscription.valid_objects.get_for_referer(referer) == institution_referer.subscription  # noqa
 
     def test_can_only_find_institution_referer_when_path_fully_match(self):
-        valid_period = ValidJournalAccessSubscriptionPeriodFactory()
-        InstitutionRefererFactory.create(
-            subscription=valid_period.subscription,
-            referer="http://www.erudit.org.proxy.com/"
-        )
-
+        institution_referer = self._subscribe_referer(referer="http://www.erudit.org.proxy.com/")
         assert not JournalAccessSubscription.valid_objects.get_for_referer("http://www.erudit.org/")  # noqa
 
 
