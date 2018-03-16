@@ -58,7 +58,7 @@ class EruditDocumentPagination:
         if self.page_size_query_param:
             try:
                 return _positive_int(
-                    request.query_params[self.page_size_query_param],
+                    request.GET[self.page_size_query_param],
                     strict=True,
                     cutoff=self.max_page_size
                 )
@@ -95,7 +95,7 @@ class EruditDocumentPagination:
             return None
 
         paginator = Paginator(range(docs_count), page_size)
-        page_number = request.query_params.get(self.page_query_param, 1)
+        page_number = request.GET.get(self.page_query_param, 1)
         if page_number in self.last_page_strings:  # pragma: no cover
             page_number = paginator.num_pages
 

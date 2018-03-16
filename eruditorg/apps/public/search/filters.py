@@ -278,7 +278,7 @@ class EruditDocumentSolrFilter:
 
     def get_solr_sorting(self, request):
         """ Get the Solr sorting string. """
-        sort = request.query_params.get('sort_by', 'relevance')
+        sort = request.GET.get('sort_by', 'relevance')
         if sort == 'relevance':
             return 'score desc'
         elif sort == 'title_asc':
@@ -294,17 +294,16 @@ class EruditDocumentSolrFilter:
         elif sort == 'pubdate_desc':
             return 'Annee_tri desc'
 
-    def filter(self, request, queryset, view):
-        """ Filters the queryset by using the results provided by the Solr index. """
+    def filter(self, request):
         # Firt we have to retrieve all the considered Solr filters.
-        filters = self.build_solr_filters(request.query_params.copy())
+        filters = self.build_solr_filters(request.GET.copy())
 
         # Then apply the filters in order to get lazy query containing all the filters.
         solr_query = self.apply_solr_filters(filters)
 
         # Prepares the values used to paginate the results using Solr.
-        page_size = request.query_params.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
-        page = request.query_params.get('page', 1)
+        page_size = request.GET.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
+        page = request.GET.get('page', 1)
         try:
             start = (int(page) - 1) * int(page_size)
         except ValueError:  # pragma: no cover

@@ -241,6 +241,10 @@ class ResultsFilterForm(forms.Form):
         # The filters form fields choices are initialized from search results
         api_results = kwargs.pop('api_results', {})
         aggregations = api_results.get('aggregations')
+        EXPECTED_AGGREGATIONS = {
+            'year', 'article_type', 'collection', 'author', 'fund', 'publication_type', 'language'}
+        for expected in EXPECTED_AGGREGATIONS:
+            aggregations.setdefault(expected, {})
         super(ResultsFilterForm, self).__init__(*args, **kwargs)
 
         self.fields['filter_extra_q'].widget.attrs['placeholder'] = _('Mots-clés')

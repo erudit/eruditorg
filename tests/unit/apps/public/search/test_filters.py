@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pytest
 import unittest.mock
 
@@ -6,7 +5,6 @@ from django.test import RequestFactory
 from rest_framework.request import Request
 
 from core.solrq.query import Query
-from erudit.models import EruditDocument
 from erudit.test import BaseEruditTestCase
 
 from apps.public.search.filters import EruditDocumentSolrFilter as BaseEruditDocumentSolrFilter
@@ -41,7 +39,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(filt.sqs._q, '(TexteComplet:test)')
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -54,7 +52,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(filt.sqs._q, '(Metadonnees:test)')
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -70,7 +68,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q, '((Metadonnees:test) AND (TexteComplet:intro))')
 
@@ -87,7 +85,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(filt.sqs._q, '((Metadonnees:test) OR (TexteComplet:intro))')
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -103,7 +101,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q, '((Metadonnees:test) AND ((NOT TexteComplet:intro)))')
 
@@ -118,7 +116,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q,
             '(Metadonnees:test)'
@@ -140,7 +138,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
 
         self.assertEqual(
             filt.sqs._q, '(Metadonnees:test)')
@@ -160,7 +158,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
@@ -183,8 +181,8 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt_1.filter(request_1, EruditDocument.objects.all(), None)
-        filt_2.filter(request_2, EruditDocument.objects.all(), None)
+        filt_1.filter(request_1)
+        filt_2.filter(request_2)
         self.assertEqual(filt_1.sqs._q, '(Metadonnees:test)')
         self.assertEqual(filt_1.sqs._fq, '((Langue:"fr"))')
         self.assertEqual(filt_2.sqs._q, '(Metadonnees:test)')
@@ -207,8 +205,8 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt_1.filter(request_1, EruditDocument.objects.all(), None)
-        filt_2.filter(request_2, EruditDocument.objects.all(), None)
+        filt_1.filter(request_1)
+        filt_2.filter(request_2)
         self.assertEqual(
             filt_1.sqs._q,
             '(Metadonnees:test)')
@@ -224,6 +222,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         self.assertEqual(
             filt_2.sqs._fq,
             '((TitreCollection_fac:"Arborescences"))')
+
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_authors(self, mock_get_results):
         # Setup
@@ -235,7 +234,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q,
             '(Metadonnees:test)'
@@ -263,8 +262,8 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt_1.filter(request_1, EruditDocument.objects.all(), None)
-        filt_2.filter(request_2, EruditDocument.objects.all(), None)
+        filt_1.filter(request_1)
+        filt_2.filter(request_2)
         self.assertEqual(
             filt_1.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
@@ -292,8 +291,8 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
-        filt_1.filter(request_1, EruditDocument.objects.all(), None)
-        filt_2.filter(request_2, EruditDocument.objects.all(), None)
+        filt_1.filter(request_1)
+        filt_2.filter(request_2)
         self.assertEqual(
             filt_1.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
@@ -314,7 +313,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
@@ -331,7 +330,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        filt.filter(request, EruditDocument.objects.all(), None)
+        filt.filter(request)
         self.assertEqual(
             filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
@@ -371,7 +370,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         }))
         filt = EruditDocumentSolrFilter()
         # Run & check
-        _, _, agg = filt.filter(request, EruditDocument.objects.all(), None)
+        _, _, agg = filt.filter(request)
         self.assertEqual(agg, {'publication_type': {'val2': 14, 'val1': 12}})
 
     def test_can_add_correspondences_to_aggregations(self):

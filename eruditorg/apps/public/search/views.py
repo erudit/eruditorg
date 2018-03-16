@@ -1,20 +1,14 @@
 import copy
-import json
 import urllib.parse as urlparse
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, QueryDict, Http404
+from django.http import HttpResponseRedirect, QueryDict
 from django.views.generic import View
 from django.views.generic.base import ContextMixin
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
-from django.utils.encoding import smart_text
 from django.utils.translation import ugettext
-from rest_framework.generics import ListAPIView
-from rest_framework.response import Response
-
-from erudit.models import EruditDocument
 
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
@@ -27,7 +21,7 @@ from .forms import SearchForm
 from .models import Thesis, Article
 from .pagination import EruditDocumentPagination
 from .saved_searches import SavedSearchList
-from .serializers import GenericSolrDocumentSerializer
+from .serializers import serialize_solr_result
 from .utils import get_search_elements
 
 
@@ -48,33 +42,6 @@ def instantiate_real_object(serialized):
             serialized['document_type'] = 'generic'
     if 'real_object' not in serialized:
         serialized['real_object'] = serialized
-
-
-class EruditDocumentListAPIView(ListAPIView):
-    authentication_classes = []
-    queryset = EruditDocument.objects.all()
-    search_engine_filter_backend = filters.EruditDocumentSolrFilter
-    serializer_class = GenericSolrDocumentSerializer
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-
-        # Applies the search engine filter backend in order to get a list of filtered
-        # EruditDocument localidentifiers, a dictionnary contening the result of aggregations
-        # that should be embedded in the final response object and a number of hits.
-        docs_count, documents, aggregations_dict = self.search_engine_filter_backend() \
-            .filter(self.request, queryset, self)
-
-        # Paginates the results
-        paginator = EruditDocumentPagination()
-        if not paginator.paginate(docs_count, documents, self.request):
-            raise Http404()
-        serializer = self.get_serializer(documents, many=True)
-        return Response({
-            'pagination': paginator.get_paginated_info(),
-            'results': serializer.data,
-            'aggregations': aggregations_dict,
-        })
 
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
@@ -198,17 +165,22 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         return context
 
     def forms_valid(self, search_form, options_form):
-        # The form is valid so we have to retrieve the list of results by using the API view
-        # returning EruditDocument documents.
-        list_view = EruditDocumentListAPIView.as_view()
-        request = copy.copy(self.request)
-        request.GET = request.GET.copy()  # A QueryDict is immutable
-        request.GET.setdefault('format', 'json')
-        results = list_view(request)
-        if results.status_code != 200:
+        # Applies the search engine filter backend in order to get a list of filtered
+        # EruditDocument localidentifiers, a dictionnary contening the result of aggregations
+        # that should be embedded in the final response object and a number of hits.
+        docs_count, documents, aggregations_dict = filters.EruditDocumentSolrFilter() \
+            .filter(self.request)
+
+        # Paginates the results
+        paginator = EruditDocumentPagination()
+        if not paginator.paginate(docs_count, documents, self.request):
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
-        results_data = results.render().content
-        results = json.loads(smart_text(results_data))
+        serialized_documents = list(map(serialize_solr_result, documents))
+        results = {
+            'pagination': paginator.get_paginated_info(),
+            'results': serialized_documents,
+            'aggregations': aggregations_dict,
+        }
         for serialized in results['results']:
             instantiate_real_object(serialized)
         # Initializes the filters form here in order to display it using choices generated from the

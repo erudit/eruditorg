@@ -1,4 +1,3 @@
-import json
 import unittest.mock
 from faker import Faker
 
@@ -8,8 +7,8 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.test.utils import override_settings
-from django.utils.encoding import smart_text
 from django.utils.timezone import now
+from django.test.client import Client
 import pytest
 
 from core.solrq.query import Query
@@ -20,7 +19,6 @@ from erudit.models import Article
 
 from apps.public.search.saved_searches import SavedSearchList
 from apps.public.search.views import AdvancedSearchView
-from apps.public.search.views import EruditDocumentListAPIView
 from apps.public.search.views import SavedSearchAddView
 from apps.public.search.views import SavedSearchRemoveView
 from apps.public.search.views import instantiate_real_object
@@ -68,10 +66,9 @@ def fake_get_results_external(**kwargs):
     return results
 
 
-class TestEruditDocumentListAPIView:
+class TestEruditSearchResultsView:
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_return_erudit_documents(self, mock_get_results):
-        # Setup
         mock_get_results.side_effect = fake_get_results
         issue = IssueFactory.create(date_published=now())
         localidentifiers = []
@@ -80,13 +77,9 @@ class TestEruditDocumentListAPIView:
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid)
 
-        request = RequestFactory().get('/', data={'format': 'json'})
-        list_view = EruditDocumentListAPIView.as_view()
-
-        # Run
-        results_data = list_view(request).render().content
-        # Check
-        results = json.loads(smart_text(results_data))
+        url = reverse('public:search:results')
+        response = Client().get(url, data={'basic_search_term': 'foo'})
+        results = response.context['results']
         assert results['pagination']['count'] == 50
 
     @unittest.mock.patch.object(Query, 'get_results')
@@ -100,26 +93,17 @@ class TestEruditDocumentListAPIView:
             localidentifiers.append(lid)
             ArticleFactory.create(issue=issue, localidentifier=lid)
 
-        request = RequestFactory().get('/', data={'format': 'json'})
-        list_view = EruditDocumentListAPIView.as_view()
-
-        # Run
-        results_data = list_view(request).render().content
-        # Check
-        results = json.loads(smart_text(results_data))
+        url = reverse('public:search:results')
+        response = Client().get(url, data={'basic_search_term': 'foo'})
+        results = response.context['results']
         assert results['pagination']['count'] == 50
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_return_erudit_documents_not_in_database(self, mock_get_results):
-        # Setup
         mock_get_results.side_effect = fake_get_results_external
-        request = RequestFactory().get('/', data={'format': 'json'})
-        list_view = EruditDocumentListAPIView.as_view()
-
-        # Run
-        results_data = list_view(request).render().content
-        # Check
-        results = json.loads(smart_text(results_data))
+        url = reverse('public:search:results')
+        response = Client().get(url, data={'basic_search_term': 'foo'})
+        results = response.context['results']
         assert results['pagination']['count'] == 50
 
     # This NO_CACHES override is needed because otherwise the cache.set() call tries to picke our
@@ -133,11 +117,9 @@ class TestEruditDocumentListAPIView:
         issue = IssueFactory.create(external_url='http://www.example.com')
         ArticleFactory.create(issue=issue, localidentifier='foo')
 
-        request = RequestFactory().get('/', data={'format': 'json'})
-        list_view = EruditDocumentListAPIView.as_view()
-
-        results_data = list_view(request).render().content
-        results = json.loads(smart_text(results_data))
+        url = reverse('public:search:results')
+        response = Client().get(url, data={'basic_search_term': 'foo'})
+        results = response.context['results']
 
         obj = results['results'][0]
         instantiate_real_object(obj)
@@ -186,8 +168,6 @@ class TestSearchResultsView(BaseEruditTestCase):
         assert len(response.redirect_chain) == 1
         last_url, status_code = response.redirect_chain[-1]
         assert reverse('public:search:advanced_search') in last_url
-
-
 
 
 class TestSavedSearchAddView:
