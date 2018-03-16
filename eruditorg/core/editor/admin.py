@@ -33,6 +33,7 @@ class IssueSubmissionFilesVersionAdmin(admin.ModelAdmin):
 
 class ProductionTeamAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'group', )
+    filter_horizontal = ('journals', )
 
 
 admin.site.register(IssueSubmission, IssueSubmissionAdmin)
