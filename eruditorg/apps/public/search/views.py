@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import copy
 import json
 import urllib.parse as urlparse
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import QueryDict
@@ -26,10 +25,30 @@ from . import filters, legacy
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
+from .models import Thesis, Article
 from .pagination import EruditDocumentPagination
 from .saved_searches import SavedSearchList
-from .serializers import EruditDocumentSerializer
+from .serializers import GenericSolrDocumentSerializer
 from .utils import get_search_elements
+
+
+def instantiate_real_object(serialized):
+    doctype = serialized['document_type']
+    localidentifier = serialized['localidentifier']
+    if doctype == 'thesis':
+        try:
+            serialized['real_object'] = Thesis(localidentifier)
+            serialized['id'] = serialized['real_object'].obj.id
+        except ObjectDoesNotExist:
+            serialized['document_type'] = 'generic'
+    elif doctype == 'article':
+        try:
+            serialized['real_object'] = Article(localidentifier)
+            serialized['id'] = serialized['real_object'].obj.id
+        except ObjectDoesNotExist:
+            serialized['document_type'] = 'generic'
+    if 'real_object' not in serialized:
+        serialized['real_object'] = serialized
 
 
 class EruditDocumentListAPIView(ListAPIView):
@@ -37,7 +56,7 @@ class EruditDocumentListAPIView(ListAPIView):
     pagination_class = EruditDocumentPagination
     queryset = EruditDocument.objects.all()
     search_engine_filter_backend = filters.EruditDocumentSolrFilter
-    serializer_class = EruditDocumentSerializer
+    serializer_class = GenericSolrDocumentSerializer
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -49,7 +68,7 @@ class EruditDocumentListAPIView(ListAPIView):
             .filter(self.request, queryset, self)
 
         # Paginates the results
-        page = self.paginate(docs_count, documents, queryset)
+        page = self.paginate(docs_count, documents)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             response = self.get_paginated_response(serializer.data)
@@ -63,9 +82,9 @@ class EruditDocumentListAPIView(ListAPIView):
 
         return response
 
-    def paginate(self, docs_count, documents, queryset):
+    def paginate(self, docs_count, documents):
         return self.paginator.paginate(
-            docs_count, documents, queryset, self.request, view=self)
+            docs_count, documents, self.request, view=self)
 
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
@@ -200,6 +219,8 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
         results_data = results.render().content
         results = json.loads(smart_text(results_data))
+        for serialized in results['results']:
+            instantiate_real_object(serialized)
         # Initializes the filters form here in order to display it using choices generated from the
         # aggregations embedded in the results.
         filter_form = self.get_filter_form(api_results=results)

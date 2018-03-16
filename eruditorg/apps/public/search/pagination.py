@@ -9,7 +9,6 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from .conf import settings as search_settings
-from .models import get_type_for_corpus, GenericSolrDocument
 
 
 class EruditDocumentPagination(PageNumberPagination):
@@ -48,7 +47,7 @@ class EruditDocumentPagination(PageNumberPagination):
         external_documents = itertools.filterfalse(test_func, documents)
         return internal_documents, external_documents
 
-    def paginate(self, docs_count, documents, queryset, request, view=None):
+    def paginate(self, docs_count, documents, request, view=None):
         """
         This is the default implementation of the PageNumberPagination.paginate_queryset method ;
         the only exception: the pagination is performed on a dummy list of the same length as the
@@ -85,36 +84,4 @@ class EruditDocumentPagination(PageNumberPagination):
         for document in documents:
             document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
 
-        # Split by internal and external documents
-        # internal documents are documents that we fully support on the platform
-        # external documents are documents that need to be displayed on an external website (retro)
-        internal_documents, external_documents = self._group_by_external_document(documents)
-        external_documents_dict = {d['ID']: d for d in external_documents}
-
-        # Retrieve the documents from the database
-        localidentifiers = [d['ID'] for d in documents]
-        queryset = queryset.filter(localidentifier__in=localidentifiers)
-        obj_dict = {obj.localidentifier: obj for obj in queryset}
-
-        obj_list = []
-        for d in documents:
-            obj = None
-            if d['ID'] in obj_dict:
-                obj = obj_dict[d['ID']]
-
-            elif not d['Corpus_fac'] in self.in_database_corpus:
-                obj = get_type_for_corpus(d['Corpus_fac'])(
-                    localidentifier=d['ID'],
-                    data=external_documents_dict[d['ID']]
-                )
-            if obj:
-                obj_list.append(obj)
-            else:
-                obj_list.append(
-                    GenericSolrDocument(
-                        localidentifier=d['ID'],
-                        data=d
-                    )
-                )
-
-        return obj_list
+        return documents

@@ -1,13 +1,15 @@
 import pytest
 
-from eruditorg.apps.public.search.models import GenericSolrDocument
 from eruditorg.apps.public.search.serializers import GenericSolrDocumentSerializer
 
+
 def _get_GenericSolrDocument():
-    return GenericSolrDocument('abc123', {
+    return {
+        'ID': 'abc123',
         'URLDocument': ['http://example.com'],
         'Titre_fr': 'titre',
-    })
+        'Corpus_fac': 'whatever',
+    }
 
 
 def test_GenericSolrDocumentSerializer():
@@ -23,15 +25,16 @@ def test_GenericSolrDocumentSerializer():
 def test_GenericSolrDocumentSerializer_title_attrs(titleattr):
     # Test that we support alternative title attrs
     doc = _get_GenericSolrDocument()
-    del doc.data['Titre_fr']
-    doc.data[titleattr] = 'autretitre'
+    del doc['Titre_fr']
+    doc[titleattr] = 'autretitre'
     ser = GenericSolrDocumentSerializer(doc).data
     assert ser['title'] == 'autretitre'
+
 
 def test_GenericSolrDocumentSerializer_unknown_title_attr():
     # When we have a document with no known title attr, we have a "Sans titre" fallback title
     # (instead of "None")
     doc = _get_GenericSolrDocument()
-    del doc.data['Titre_fr']
+    del doc['Titre_fr']
     ser = GenericSolrDocumentSerializer(doc).data
     assert isinstance(ser['title'], str)
