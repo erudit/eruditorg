@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.db.models import Q
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponseRedirect
@@ -131,6 +132,26 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
         context['citation_references'] = article.get_erudit_object()\
             .get_references(strip_markup=True)
         return context
+
+
+class PrepublicationTokenRequiredMixin:
+
+    def dispatch(self, request, *args, **kwargs):
+
+        object = self.get_object()
+        if isinstance(object, Article):
+            issue = object.issue
+        elif isinstance(object, Issue):
+            issue = object
+        else:
+            raise ValueError("This mixin should only be used with Article and Issue objects")
+
+        if not issue.is_published and object.prepublication_ticket != request.GET.get('ticket'):
+            return HttpResponseRedirect(
+                reverse('public:journal:journal_detail', args=(issue.journal.code, ))
+            )
+
+        return super().get(request, *args, **kwargs)
 
 
 class ArticleViewMetricCaptureMixin:

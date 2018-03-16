@@ -2,6 +2,7 @@ import copy
 import datetime as dt
 import dateutil.relativedelta as dr
 from functools import reduce
+from hashlib import md5
 
 from lxml import etree as et
 
@@ -543,6 +544,10 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
         return not empty_coverpage
 
+    @property
+    def prepublication_ticket(self):
+        return md5(self.localidentifier.encode('utf-8')).hexdigest()
+
     # Issue-related methods and properties
     # --
 
@@ -832,6 +837,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
             return self.localidentifier
         else:
             raise ValueError("Can't search this type of article in Solr")
+
+    def prepublication_ticket(self):
+        return self.issue.prepublication_ticket
 
     def __str__(self):
         if self.title:

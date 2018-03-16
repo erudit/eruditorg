@@ -4,6 +4,7 @@ import os
 import unittest.mock
 import subprocess
 import itertools
+from hashlib import md5
 
 from django.contrib.auth.models import AnonymousUser
 from django.core.urlresolvers import reverse
@@ -545,6 +546,23 @@ class TestIssueDetailView:
         url = issue_detail_url(issue)
         response = Client().get(url)
         assert response.status_code == 200
+
+    @pytest.mark.parametrize("is_published,has_ticket,expected_code", [
+        (True, False, 200),
+        (True, True, 200),
+        (False, False, 302),
+        (False, True, 200),
+    ])
+    def test_can_accept_prepublication_ticket(self, is_published, has_ticket, expected_code):
+        localidentifier = "espace03368"
+        issue = IssueFactory(localidentifier=localidentifier, is_published=is_published)
+        url = issue_detail_url(issue)
+        data = None
+        if has_ticket:
+            ticket = md5(localidentifier.encode()).hexdigest()
+            data = {'ticket': ticket}
+        response = Client().get(url, data=data)
+        assert response.status_code == expected_code
 
     def test_works_with_localidentifiers(self):
         issue = IssueFactory.create(

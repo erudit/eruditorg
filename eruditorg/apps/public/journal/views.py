@@ -51,6 +51,7 @@ from .viewmixins import SingleArticleMixin
 from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
+from .viewmixins import PrepublicationTokenRequiredMixin
 
 
 class BaseRedirectToExternalSourceDetailView(DetailView):
@@ -326,7 +327,8 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
 
 
 class IssueDetailView(
-        FallbackObjectViewMixin, ContentAccessCheckMixin, BaseRedirectToExternalSourceDetailView):
+        FallbackObjectViewMixin,
+        ContentAccessCheckMixin, BaseRedirectToExternalSourceDetailView, PrepublicationTokenRequiredMixin):
     """
     Displays an Issue instance.
     """
