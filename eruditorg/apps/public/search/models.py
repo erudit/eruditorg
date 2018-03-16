@@ -5,6 +5,45 @@ from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
 from erudit import models as erudit_models
+from erudit.templatetags.model_formatters import person_list
+
+
+class Generic:
+    def __init__(self, solr_data):
+        self.localidentifier = solr_data['ID']
+        self.corpus = solr_data['Corpus_fac']
+        self.document_type = {
+            'Dépot': 'report',
+            'Livres': 'book',
+            'Actes': 'book',
+            'Rapport': 'report',
+        }.get(self.corpus, 'generic')
+        self.year = solr_data['Annee'][0] if 'Annee' in solr_data else None
+        self.publication_date = solr_data.get('AnneePublication')
+        self.issn = solr_data.get('ISSN')
+        self.collection = solr_data.get('Fonds_fac')
+        self.authors = person_list(solr_data.get('AuteurNP_fac'))
+        self.volume = solr_data.get('Volume')
+        collection_title = solr_data.get('TitreCollection_fac')
+        if collection_title:
+            self.series = collection_title[0]
+        else:
+            self.series = None
+        self.url = solr_data['URLDocument'][0] if 'URLDocument' in solr_data else None
+        self.numero = solr_data.get('Numero')
+        if not {'PremierePage', 'DernierePage'}.issubset(set(solr_data.keys())):
+            self.pages = None
+        else:
+            self.pages = _('Pages {firstpage}-{lastpage}'.format(
+                firstpage=solr_data['PremierePage'],
+                lastpage=solr_data['DernierePage']
+            ))
+        TITLE_ATTRS = ['Titre_fr', 'Titre_en', 'TitreRefBiblio_aff']
+        self.title = _("(Sans titre)")
+        for attrname in TITLE_ATTRS:
+            if attrname in solr_data:
+                self.title = solr_data[attrname]
+                break
 
 
 # These models below are temporary shims that we implement with the same API as the old serializers
@@ -14,6 +53,8 @@ from erudit import models as erudit_models
 
 
 class Article:
+    document_type = 'article'
+
     def __init__(self, localidentifier):
         self.localidentifier = localidentifier
         self.obj = erudit_models.Article.objects.get(localidentifier=localidentifier)
@@ -142,6 +183,8 @@ class Article:
 
 
 class Thesis:
+    document_type = 'thesis'
+
     def __init__(self, localidentifier):
         self.localidentifier = localidentifier
         self.obj = erudit_models.Thesis.objects.get(localidentifier=localidentifier)

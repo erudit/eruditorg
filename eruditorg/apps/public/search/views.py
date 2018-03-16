@@ -19,30 +19,37 @@ from . import filters, legacy
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
-from .models import Thesis, Article
+from .models import Thesis, Article, Generic
 from .pagination import get_pagination_info
 from .saved_searches import SavedSearchList
-from .serializers import serialize_solr_result
 from .utils import get_search_elements
 
 
-def instantiate_real_object(serialized):
-    doctype = serialized['document_type']
-    localidentifier = serialized['localidentifier']
+def instantiate_real_object(solr_data):
+    corpus = solr_data['Corpus_fac']
+    doctype = {
+        'Article': 'article',
+        'Culturel': 'article',
+        'Thèses': 'thesis',
+    }.get(corpus, 'generic')
+    localidentifier = solr_data['ID']
     if doctype == 'thesis':
         try:
-            serialized['real_object'] = Thesis(localidentifier)
-            serialized['id'] = serialized['real_object'].obj.id
+            solr_data['real_object'] = Thesis(localidentifier)
+            solr_data['id'] = solr_data['real_object'].obj.id
         except ObjectDoesNotExist:
-            serialized['document_type'] = 'generic'
+            pass
     elif doctype == 'article':
         try:
-            serialized['real_object'] = Article(localidentifier)
-            serialized['id'] = serialized['real_object'].obj.id
+            solr_data['real_object'] = Article(localidentifier)
+            solr_data['id'] = solr_data['real_object'].obj.id
         except ObjectDoesNotExist:
-            serialized['document_type'] = 'generic'
-    if 'real_object' not in serialized:
-        serialized['real_object'] = serialized
+            pass
+
+    if 'real_object' not in solr_data:
+        solr_data['real_object'] = Generic(solr_data)
+    solr_data['localidentifier'] = localidentifier
+    solr_data['document_type'] = solr_data['real_object'].document_type
 
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
@@ -184,10 +191,9 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
 
         pagination_info = get_pagination_info(stats, self.request)
-        serialized_documents = list(map(serialize_solr_result, documents))
         results = {
             'pagination': pagination_info,
-            'results': serialized_documents,
+            'results': documents,
             'aggregations': aggregations_dict,
         }
         for serialized in results['results']:
