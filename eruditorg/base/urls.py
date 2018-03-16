@@ -39,8 +39,6 @@ urlpatterns += i18n_patterns(
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
     url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
 
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
     url(r'^' + settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^upload/', include('resumable_uploads.urls', namespace='resumable_uploads')),
 

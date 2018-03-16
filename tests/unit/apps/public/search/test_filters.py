@@ -2,7 +2,6 @@ import pytest
 import unittest.mock
 
 from django.test import RequestFactory
-from rest_framework.request import Request
 
 from core.solrq.query import Query
 from erudit.test import BaseEruditTestCase
@@ -34,9 +33,9 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_using_a_single_term(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -46,10 +45,10 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_using_a_single_term_on_a_specific_field(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -59,13 +58,13 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_properly_handle_advanced_queries_using_the_AND_operator(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'advanced_search_term1': 'intro',
             'advanced_search_field1': 'all',
             'advanced_search_operator1': 'AND',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -76,13 +75,13 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_properly_handle_advanced_queries_using_the_OR_operator(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'advanced_search_term1': 'intro',
             'advanced_search_field1': 'all',
             'advanced_search_operator1': 'OR',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -92,13 +91,13 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_properly_handle_advanced_queries_using_the_negation_operator(self, mock_get_results):  # noqa
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'advanced_search_term1': 'intro',
             'advanced_search_field1': 'all',
             'advanced_search_operator1': 'NOT',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -109,11 +108,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_publication_years(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_years': [2015, 2016],
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -130,12 +129,12 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_a_publication_year_range(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'pub_year_start': 2012,
             'pub_year_end': 2016,
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -151,11 +150,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_document_types(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_article_types': ['Article', ],
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -168,16 +167,16 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_languages(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request_1 = Request(self.factory.get('/', data={
+        request_1 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'languages': ['fr', ],
-        }))
-        request_2 = Request(self.factory.get('/', data={
+        })
+        request_2 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_languages': ['fr', ],
-        }))
+        })
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
@@ -192,16 +191,16 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_collections(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request_1 = Request(self.factory.get('/', data={
+        request_1 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'journals': ['Arborescences', ],
-        }))
-        request_2 = Request(self.factory.get('/', data={
+        })
+        request_2 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_collections': ['Arborescences', ],
-        }))
+        })
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
@@ -227,11 +226,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_authors(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_authors': ['firstname, lastname', ],
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -249,16 +248,16 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_funds(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request_1 = Request(self.factory.get('/', data={
+        request_1 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'funds': ['Érudit', ],
-        }))
-        request_2 = Request(self.factory.get('/', data={
+        })
+        request_2 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_funds': ['Érudit', ],
-        }))
+        })
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
@@ -278,16 +277,16 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_publication_types(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request_1 = Request(self.factory.get('/', data={
+        request_1 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'publication_types': ['Culturel', ],
-        }))
-        request_2 = Request(self.factory.get('/', data={
+        })
+        request_2 = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_publication_types': ['Culturel', ],
-        }))
+        })
         filt_1 = EruditDocumentSolrFilter()
         filt_2 = EruditDocumentSolrFilter()
         # Run & check
@@ -306,11 +305,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_extra_terms(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'filter_extra_q': 'foobar',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -323,11 +322,11 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_filter_on_disciplines(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
             'basic_search_field': 'meta',
             'disciplines': ['Littérature', ],
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         filt.filter(request)
@@ -338,26 +337,26 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
 
     def test_can_properly_determine_the_order_of_the_results(self):
         # Run & check
-        request = Request(self.factory.get('/', data={'sort_by': 'relevance'}))
+        request = self.factory.get('/', data={'sort_by': 'relevance'})
         self.assertEqual(EruditDocumentSolrFilter().get_solr_sorting(request), 'score desc')
 
-        request = Request(self.factory.get('/', data={'sort_by': 'title_asc'}))
+        request = self.factory.get('/', data={'sort_by': 'title_asc'})
         self.assertEqual(EruditDocumentSolrFilter().get_solr_sorting(request), 'Titre_tri asc')
 
-        request = Request(self.factory.get('/', data={'sort_by': 'title_desc'}))
+        request = self.factory.get('/', data={'sort_by': 'title_desc'})
         self.assertEqual(EruditDocumentSolrFilter().get_solr_sorting(request), 'Titre_tri desc')
 
-        request = Request(self.factory.get('/', data={'sort_by': 'author_asc'}))
+        request = self.factory.get('/', data={'sort_by': 'author_asc'})
         self.assertEqual(EruditDocumentSolrFilter().get_solr_sorting(request), 'Auteur_tri asc')
 
-        request = Request(self.factory.get('/', data={'sort_by': 'author_desc'}))
+        request = self.factory.get('/', data={'sort_by': 'author_desc'})
         self.assertEqual(EruditDocumentSolrFilter().get_solr_sorting(request), 'Auteur_tri desc')
 
-        request = Request(self.factory.get('/', data={'sort_by': 'pubdate_asc'}))
+        request = self.factory.get('/', data={'sort_by': 'pubdate_asc'})
         self.assertEqual(
             EruditDocumentSolrFilter().get_solr_sorting(request), 'Annee_tri asc')
 
-        request = Request(self.factory.get('/', data={'sort_by': 'pubdate_desc'}))
+        request = self.factory.get('/', data={'sort_by': 'pubdate_desc'})
         self.assertEqual(
             EruditDocumentSolrFilter().get_solr_sorting(request), 'Annee_tri desc')
 
@@ -365,9 +364,9 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
     def test_can_properly_return_aggregation_results(self, mock_get_results):
         # Setup
         mock_get_results.side_effect = fake_get_results
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': 'test',
-        }))
+        })
         filt = EruditDocumentSolrFilter()
         # Run & check
         _, _, agg = filt.filter(request)
@@ -375,10 +374,10 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
 
     def test_can_add_correspondences_to_aggregations(self):
         # Setup
-        request = Request(self.factory.get('/', data={
+        request = self.factory.get('/', data={
             'basic_search_term': '*',
             'filter_article_type': ['Compte rendu'],
-        }))
+        })
 
         correspondences = {
             'Compte rendu': ['Compterendu']
@@ -400,10 +399,10 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
 ])
 def test_can_translate_boolean_operators(operator, correspondence):
     # Setup
-    request = Request(RequestFactory().get('/', data={
+    request = RequestFactory().get('/', data={
         'basic_search_term': 'test {operator} test2'.format(operator=correspondence),
-    }))
+    })
     filt = EruditDocumentSolrFilter()
-    filters = filt.build_solr_filters(request.query_params.copy())
+    filters = filt.build_solr_filters(request.GET.copy())
 
     assert filters['q']['term'] == 'test {operator} test2'.format(operator=operator)

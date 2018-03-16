@@ -99,7 +99,6 @@ INSTALLED_APPS = (
     'easy_pjax',
     'django_js_reverse',
     'widget_tweaks',
-    'rest_framework',
 )
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

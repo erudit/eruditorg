@@ -1,6 +1,7 @@
 import os
 import pytest
 
+from base.viewmixins import FedoraServiceRequiredMixin, SolrServiceRequiredMixin
 from eruditarticle.objects.article import EruditArticle
 from eruditarticle.objects.publication import EruditPublication
 from eruditarticle.objects.journal import EruditJournal
@@ -15,6 +16,16 @@ def mock_fedora_api(monkeypatch):
     monkeypatch.setattr(erudit.fedora.repository.repo, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.repository, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.modelmixins, 'api', mocked_api)
+    FedoraServiceRequiredMixin._pytest_check_fedora_status_result = True
+    monkeypatch.setattr(
+        FedoraServiceRequiredMixin,
+        'check_fedora_status',
+        lambda self, request: self._pytest_check_fedora_status_result)
+    FedoraServiceRequiredMixin._pytest_check_solr_status_result = True
+    monkeypatch.setattr(
+        SolrServiceRequiredMixin,
+        'check_solr_status',
+        lambda self, request: self._pytest_check_solr_status_result)
 
 
 @pytest.fixture(

@@ -35,7 +35,6 @@ django-taggit==0.22.2
 django-waffle==0.14.0
 django-widget-tweaks==1.4.1
 django==1.10.8
-djangorestframework==3.3.3
 et-xmlfile==1.0.1         # via openpyxl
 eulfedora==1.7.2
 feedparser==5.2.1
