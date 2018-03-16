@@ -2,7 +2,6 @@ import copy
 import urllib.parse as urlparse
 from functools import reduce
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, QueryDict
 from django.views.generic import View
@@ -19,37 +18,10 @@ from . import filters, legacy
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
-from .models import Thesis, Article, Generic
+from .models import get_model_instance
 from .pagination import get_pagination_info
 from .saved_searches import SavedSearchList
 from .utils import get_search_elements
-
-
-def instantiate_real_object(solr_data):
-    corpus = solr_data['Corpus_fac']
-    doctype = {
-        'Article': 'article',
-        'Culturel': 'article',
-        'Thèses': 'thesis',
-    }.get(corpus, 'generic')
-    localidentifier = solr_data['ID']
-    if doctype == 'thesis':
-        try:
-            solr_data['real_object'] = Thesis(localidentifier)
-            solr_data['id'] = solr_data['real_object'].obj.id
-        except ObjectDoesNotExist:
-            pass
-    elif doctype == 'article':
-        try:
-            solr_data['real_object'] = Article(localidentifier)
-            solr_data['id'] = solr_data['real_object'].obj.id
-        except ObjectDoesNotExist:
-            pass
-
-    if 'real_object' not in solr_data:
-        solr_data['real_object'] = Generic(solr_data)
-    solr_data['localidentifier'] = localidentifier
-    solr_data['document_type'] = solr_data['real_object'].document_type
 
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
@@ -191,13 +163,13 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
 
         pagination_info = get_pagination_info(stats, self.request)
+        documents = list(map(get_model_instance, documents))
         results = {
             'pagination': pagination_info,
             'results': documents,
             'aggregations': aggregations_dict,
         }
-        for serialized in results['results']:
-            instantiate_real_object(serialized)
+
         # Initializes the filters form here in order to display it using choices generated from the
         # aggregations embedded in the results.
         filter_form = self.get_filter_form(api_results=results)

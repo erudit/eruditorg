@@ -21,7 +21,6 @@ from apps.public.search.saved_searches import SavedSearchList
 from apps.public.search.views import AdvancedSearchView
 from apps.public.search.views import SavedSearchAddView
 from apps.public.search.views import SavedSearchRemoveView
-from apps.public.search.views import instantiate_real_object
 
 
 pytestmark = pytest.mark.django_db
@@ -122,8 +121,7 @@ class TestEruditSearchResultsView:
         results = response.context['results']
 
         obj = results['results'][0]
-        instantiate_real_object(obj)
-        assert obj['real_object'].pdf_url is None
+        assert obj.pdf_url is None
 
 
 class TestAdvancedSearchView:

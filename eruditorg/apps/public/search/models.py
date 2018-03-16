@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from eulfedora.util import RequestFailed
@@ -58,6 +59,7 @@ class Article:
     def __init__(self, localidentifier):
         self.localidentifier = localidentifier
         self.obj = erudit_models.Article.objects.get(localidentifier=localidentifier)
+        self.id = self.obj.id
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
@@ -188,6 +190,7 @@ class Thesis:
     def __init__(self, localidentifier):
         self.localidentifier = localidentifier
         self.obj = erudit_models.Thesis.objects.get(localidentifier=localidentifier)
+        self.id = self.obj.id
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
@@ -215,3 +218,25 @@ class Thesis:
     @property
     def keywords(self):
         return [keyword.name for keyword in self.obj.keywords.all()]
+
+
+def get_model_instance(solr_data):
+    corpus = solr_data['Corpus_fac']
+    doctype = {
+        'Article': 'article',
+        'Culturel': 'article',
+        'Thèses': 'thesis',
+    }.get(corpus, 'generic')
+    localidentifier = solr_data['ID']
+    if doctype == 'thesis':
+        try:
+            return Thesis(localidentifier)
+        except ObjectDoesNotExist:
+            pass
+    elif doctype == 'article':
+        try:
+            return Article(localidentifier)
+        except ObjectDoesNotExist:
+            pass
+
+    return Generic(solr_data)

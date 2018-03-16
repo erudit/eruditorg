@@ -164,49 +164,49 @@
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
                 {# We use both 'id' and 'localidentifier' because some documents have no localidentifier, some have no id, but all have either #}
-                {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.real_object.id document.localidentifier LANGUAGE_CODE %}
+                {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.id document.localidentifier LANGUAGE_CODE %}
                 {% if document.document_type == 'article' %}
-                {% url 'public:journal:article_detail' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier as article_url %}
+                {% url 'public:journal:article_detail' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier as article_url %}
                 {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
                 {% endif %}
                 <div class="header">
                   {# authors #}
-                  {% if document.real_object.authors or document.real_object.author %}
+                  {% if document.authors or document.author %}
                   <p class="authors">
-                    {{ document.real_object.authors }}
+                    {{ document.authors }}
                   </p>
                   {% endif %}
                   {# title #}
                   <h3>
                     <a href="
                     {% if document.document_type == 'article' %}
-                      {% if document.real_object.external_url %}
+                      {% if document.external_url %}
                       {{ article_redirect_url }}
                       {% else %}
                       {{ article_url }}
                       {% endif %}
                     {% else %}
-                      {{ document.real_object.url }}
+                      {{ document.url }}
                     {% endif %}"
-                    {% if document.real_object.external_url or document.real_object.url %}
+                    {% if document.external_url or document.url %}
                     target="_blank"
                     {% endif %}>
-                      <span>{{ document.real_object.title|safe }}</span>
-                      {% if document.real_object.subtitle %}
-                      <span><br/>{{ document.real_object.subtitle|safe }}</span>
+                      <span>{{ document.title|safe }}</span>
+                      {% if document.subtitle %}
+                      <span><br/>{{ document.subtitle|safe }}</span>
                       {% endif %}
-                      {% if document.real_object.paral_titles %}
-                        {% for paral_title in document.real_object.paral_titles %}
+                      {% if document.paral_titles %}
+                        {% for paral_title in document.paral_titles %}
                             <br><span>{{ paral_title|safe }}</span>
                         {% endfor %}
                       {% endif %}
-                      {% if document.real_object.paral_subtitles %}
-                        {% for paral_title in document.real_object.paral_subtitles %}
+                      {% if document.paral_subtitles %}
+                        {% for paral_title in document.paral_subtitles %}
                             <br><span>{{ paral_title|safe }}</span>
                         {% endfor %}
                       {% endif %}
-                      {% if document.real_object.reviewed_works %}
-                      {% for reference in document.real_object.reviewed_works %}
+                      {% if document.reviewed_works %}
+                      {% for reference in document.reviewed_works %}
                       <br><span>{{ reference|safe }}</span>
                       {% endfor %}
                       {% endif %}
@@ -217,14 +217,12 @@
                   <p class="col-sm-8">
                     {# metadata for articles #}
                     {% if document.document_type == 'generic' %}
-                    {% with document_object=document.real_object %}
-                      <em><a href="{{ document_object.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ document_object.series }}</a></em> ({{ document_object.collection }})
+                      <em><a href="{{ document.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ document.series }}</a></em> ({{ document.collection }})
                       <br/>
-                    {% endwith %}
                     {% endif %}
 
                     {% if document.document_type == 'article' %}
-                    {% with article=document.real_object %}
+                    {% with article=document %}
                       {% if article.type == 'autre' or article.type == 'Autre' %}
                         {% trans 'Document' %}
                       {% else %}
@@ -241,56 +239,52 @@
                     {% endwith %}
                     {# metadata for report #}
                     {% elif document.document_type == 'report' %}
-                    {% with document.real_object as o %}
-                      {% if o.series %}{{ o.series }}{% endif %}
-                    {% endwith %}
+                    {% if document.series %}{{ document.series }}{% endif %}
                     {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}
                       {% trans "Thèse" %} {% trans "déposée à" %}
-                      {{ document.real_object.collection_name }}
+                      {{ document.collection_name }}
                     {# metadata for books #}
                     {% elif document.document_type == 'book' %}
-                      {% with document.real_object as o %}
-                      {% if document.real_object.pages %}
-                        <span>{% if o.series %}{{ o.series }}, {% endif %}{% if o.volume %}{% trans "Volume" %} {{ o.volume }}, {% endif %}{% if o.year %}{{ o.year }}, {%endif %}{{ o.pages }}</span>
+                      {% if document.pages %}
+                        <span>{% if document.series %}{{ document.series }}, {% endif %}{% if document.volume %}{% trans "Volume" %} {{ document.volume }}, {% endif %}{% if document.year %}{{ document.year }}, {% endif %}{{ document.pages }}</span>
                       {% endif %}
-                      {% endwith %}
                     {% endif %}
 
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
-                    {% if document.document_type == 'article' %}<a href="{{ document.real_object.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.real_object.publication_date|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
+                    {% if document.document_type == 'article' %}<a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.publication_date|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
                   </p>
                   {# issue theme or department for a thesis #}
                   {% if document.document_type == 'article' %}
-                  {% if document.real_object.issue_title %}
+                  {% if document.issue_title %}
                   <p class="col-xs-12 issue-theme">
-                    <a href="{{ document.real_object.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
-                      {{ document.real_object.issue_title|safe }}
+                    <a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro thématique' %}">
+                      {{ document.issue_title|safe }}
                     </a>
                   </p>
                   {% endif %}
                   {% endif %}
                 </div>
                 {# abstract #}
-                {% if document.real_object.abstract or document.real_object.description or document.real_object.keywords %}
+                {% if document.abstract or document.description or document.keywords %}
                 <div class="akkordion" data-akkordion-single="true">
                   <div class="akkordion-title abstract-title">
                     {% trans "Plus d’information" %}
                     <span class="ion-ios-arrow-down"></span>
                   </div>
                   <div class="summary-content akkordion-content abstract">
-                    {% if document.real_object.abstract or document.real_object.description %}
+                    {% if document.abstract or document.description %}
                     <p>
-                      {{ document.real_object.abstract }}
-                      {{ document.real_object.description|truncatewords_html:125 }}
+                      {{ document.abstract }}
+                      {{ document.description|truncatewords_html:125 }}
                     </p>
                     {% endif %}
-                    {% if document.real_object.keywords %}
+                    {% if document.keywords %}
                     <p>
                       <strong>{% trans "Mots-clés&nbsp;:" %}</strong>
-                      {% for keyword in document.real_object.keywords %}
+                      {% for keyword in document.keywords %}
                       {{ keyword }}{% if not forloop.last %}, {% endif %}
                       {% endfor %}
                     </p>
@@ -323,7 +317,7 @@
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
                   </li>
-                  {% with pdf_url=document.real_object.pdf_url %}
+                  {% with pdf_url=document.pdf_url %}
                   {% if pdf_url %}
                   <li>
                     <a class="tool-btn tool-download" data-href="{{ pdf_url }}">
@@ -333,7 +327,7 @@
                   </li>
                   {% endif %}
                   {% endwith %}
-                  {% if document.real_object.processing == 'C' %}
+                  {% if document.processing == 'C' %}
                   <li>
                     <a class="tool-btn" href="{{ article_url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
                       <span class="toolbox-html">HTML</span>
@@ -350,7 +344,7 @@
                     <div class="modal-body">
 
                       {% if document.document_type == 'article' %}
-                      {% with article=document.real_object %}
+                      {% with article=document %}
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
@@ -429,9 +423,9 @@
                       <p>
                         <a href="
                         {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_enw' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}
+                        {% url 'public:journal:article_citation_enw' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
                         {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_enw' document.real_object.collection document.id %}
+                        {% url 'public:thesis:thesis_citation_enw' document.collection document.id %}
                         {% endif %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.ENW</span>
                         </a>
@@ -440,9 +434,9 @@
                       <p>
                         <a href="
                         {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_ris' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}
+                        {% url 'public:journal:article_citation_ris' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
                         {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_ris' document.real_object.collection document.id %}
+                        {% url 'public:thesis:thesis_citation_ris' document.collection document.id %}
                         {% endif %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.RIS</span>
                         </a>
@@ -451,9 +445,9 @@
                       <p>
                         <a href="
                         {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_bib' journal_code=document.real_object.journal_code issue_slug=document.real_object.issue_volume_slug issue_localid=document.real_object.issue_localidentifier localid=document.localidentifier %}
+                        {% url 'public:journal:article_citation_bib' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
                         {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_bib' document.real_object.collection document.id %}
+                        {% url 'public:thesis:thesis_citation_bib' document.collection document.id %}
                         {% endif %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.BIB</span>
                         </a>
