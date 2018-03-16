@@ -1,9 +1,34 @@
-# -*- coding: utf-8 -*-
-
 from core.solrq.query import Q
 
 from . import solr_search
 from .conf import settings as search_settings
+from .utils import positive_int
+
+
+class ResultsStats:
+    def __init__(self, count, page, page_size):
+        self.count = count
+        self.page = page
+        self.page_size = page_size
+
+    @property
+    def page_count(self):
+        page_count = self.count // self.page_size
+        if self.count > page_count * self.page_size:
+            page_count += 1
+        return page_count
+
+    def next_page(self):
+        if self.page >= self.page_count:
+            return None
+        else:
+            return self.page + 1
+
+    def prev_page(self):
+        if self.page == 1:
+            return None
+        else:
+            return self.page - 1
 
 
 class EruditDocumentSolrFilter:
@@ -305,9 +330,13 @@ class EruditDocumentSolrFilter:
         page_size = request.GET.get('page_size', search_settings.DEFAULT_PAGE_SIZE)
         page = request.GET.get('page', 1)
         try:
-            start = (int(page) - 1) * int(page_size)
+            page_size = positive_int(page_size, cutoff=50)
+            page = positive_int(page)
         except ValueError:  # pragma: no cover
-            start = 0
+            page = 1
+            page_size = search_settings.DEFAULT_PAGE_SIZE
+
+        start = (page - 1) * page_size
 
         # Trigger the execution of the query in order to get a list of results from the Solr index.
         results = solr_query.get_results(
@@ -315,7 +344,7 @@ class EruditDocumentSolrFilter:
         # Determines the localidentifiers of the documents in order to filter the queryset and the
         # total number of documents.
         localidentifiers = [r for r in results.docs]
-        documents_count = results.hits
+        stats = ResultsStats(results.hits, page, page_size)
 
         # Prepares the dictionnary containing aggregation results.
         aggregations_dict = {}
@@ -323,7 +352,7 @@ class EruditDocumentSolrFilter:
             fdict = {flist[i]: flist[i + 1] for i in range(0, len(flist), 2)}
             aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
 
-        return documents_count, localidentifiers, aggregations_dict
+        return stats, localidentifiers, aggregations_dict
 
     def _filter_solr_multiple(self, sqs, field, values, safe=False):
         query = Q()

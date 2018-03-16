@@ -1,5 +1,6 @@
 import copy
 import urllib.parse as urlparse
+from functools import reduce
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -19,7 +20,7 @@ from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .models import Thesis, Article
-from .pagination import EruditDocumentPagination
+from .pagination import get_pagination_info
 from .saved_searches import SavedSearchList
 from .serializers import serialize_solr_result
 from .utils import get_search_elements
@@ -168,16 +169,24 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         # Applies the search engine filter backend in order to get a list of filtered
         # EruditDocument localidentifiers, a dictionnary contening the result of aggregations
         # that should be embedded in the final response object and a number of hits.
-        docs_count, documents, aggregations_dict = filters.EruditDocumentSolrFilter() \
+        stats, documents, aggregations_dict = filters.EruditDocumentSolrFilter() \
             .filter(self.request)
 
-        # Paginates the results
-        paginator = EruditDocumentPagination()
-        if not paginator.paginate(docs_count, documents, self.request):
+        if not documents:
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
+
+        # This is a specific case in order to remove some sub-strings from the localidentifiers
+        # at hand. This is a bit ugly but we are limited here by the predefined Solr document IDs.
+        # For example the IDs are prefixed by "unb:" for UNB articles... But UNB localidentifiers
+        # should not be stored with "unb:" into the database.
+        drop_keywords = ['unb:', ]
+        for document in documents:
+            document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
+
+        pagination_info = get_pagination_info(stats, self.request)
         serialized_documents = list(map(serialize_solr_result, documents))
         results = {
-            'pagination': paginator.get_paginated_info(),
+            'pagination': pagination_info,
             'results': serialized_documents,
             'aggregations': aggregations_dict,
         }

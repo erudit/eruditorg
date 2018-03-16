@@ -1,25 +1,24 @@
 {% load i18n %}
-{% load base_urls_tags %}
 
 <nav>
   <h3 class="sr-only">{% trans 'Pagination' %}</h3>
   <div class="pagination">
-    {% if results.pagination.current_page > 1 %}
-    <a href="{% get_full_path_with_overrides page=1 %}"> <span class="ion-ios-arrow-left left-bar"></span> </a>
+    {% if results.pagination.links.first %}
+    <a href="{{ results.pagination.links.first }}"> <span class="ion-ios-arrow-left left-bar"></span> </a>
     {% endif %}
-    {% if results.pagination.previous_page %}
-    <a href="{% get_full_path_with_overrides page=results.pagination.previous_page %}"> <span class="ion-ios-arrow-left"></span> </a>
+    {% if results.pagination.links.previous %}
+    <a href="{{ results.pagination.links.previous }}"> <span class="ion-ios-arrow-left"></span> </a>
     {% endif %}
     <span class="page-position">
     {% blocktrans trimmed with current_page=results.pagination.current_page page_count=results.pagination.num_pages %}
       Page {{ current_page }} de {{ page_count }}
     {% endblocktrans %}
     </span>
-    {% if results.pagination.next_page %}
-    <a href="{% get_full_path_with_overrides page=results.pagination.next_page %}"> <span class="ion-ios-arrow-right"></span> </a>
+    {% if results.pagination.links.next %}
+    <a href="{{ results.pagination.links.next }}"> <span class="ion-ios-arrow-right"></span> </a>
     {% endif %}
-    {% if results.pagination.current_page < results.pagination.num_pages %}
-    <a href="{% get_full_path_with_overrides page=results.pagination.num_pages %}"> <span class="ion-ios-arrow-right right-bar"></span> </a>
+    {% if results.pagination.links.last %}
+    <a href="{{ results.pagination.links.last }}"> <span class="ion-ios-arrow-right right-bar"></span> </a>
     {% endif %}
   </div>
 </nav>

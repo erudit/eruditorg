@@ -1,10 +1,42 @@
-# -*- coding: utf-8 -*-
-
 from django.utils.translation import ugettext_lazy as _
+from django.utils.six.moves.urllib import parse as urlparse
 
 from .conf import settings as search_settings
 from .forms import ADVANCED_SEARCH_FIELDS
 from .forms import SearchForm
+
+
+def replace_query_param(url, key, val):
+    """
+    Given a URL and a key/val pair, set or replace an item in the query
+    parameters of the URL, and return the new URL.
+    """
+    (scheme, netloc, path, query, fragment) = urlparse.urlsplit(url)
+    query_dict = urlparse.parse_qs(query)
+    query_dict[key] = [val]
+    query = urlparse.urlencode(sorted(list(query_dict.items())), doseq=True)
+    return urlparse.urlunsplit((scheme, netloc, path, query, fragment))
+
+
+def remove_query_param(url, key):
+    """
+    Given a URL and a key/val pair, remove an item in the query
+    parameters of the URL, and return the new URL.
+    """
+    (scheme, netloc, path, query, fragment) = urlparse.urlsplit(url)
+    query_dict = urlparse.parse_qs(query)
+    query_dict.pop(key, None)
+    query = urlparse.urlencode(sorted(list(query_dict.items())), doseq=True)
+    return urlparse.urlunsplit((scheme, netloc, path, query, fragment))
+
+
+def positive_int(integer_string, strict=False, cutoff=None):
+    ret = int(integer_string)
+    if ret < 0 or (ret == 0 and strict):
+        raise ValueError()
+    if cutoff:
+        ret = min(ret, cutoff)
+    return ret
 
 
 def get_search_elements(queryparams):
