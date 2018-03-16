@@ -4,8 +4,7 @@ import urllib.parse as urlparse
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.http import QueryDict
+from django.http import HttpResponseRedirect, QueryDict, Http404
 from django.views.generic import View
 from django.views.generic.base import ContextMixin
 from django.views.generic.base import TemplateResponseMixin
@@ -53,7 +52,6 @@ def instantiate_real_object(serialized):
 
 class EruditDocumentListAPIView(ListAPIView):
     authentication_classes = []
-    pagination_class = EruditDocumentPagination
     queryset = EruditDocument.objects.all()
     search_engine_filter_backend = filters.EruditDocumentSolrFilter
     serializer_class = GenericSolrDocumentSerializer
@@ -68,23 +66,15 @@ class EruditDocumentListAPIView(ListAPIView):
             .filter(self.request, queryset, self)
 
         # Paginates the results
-        page = self.paginate(docs_count, documents)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            response = self.get_paginated_response(serializer.data)
-        else:  # pragma: no cover
-            # This can happen if we pass page_size = 0
-            serializer = self.get_serializer(queryset, many=True)
-            response = Response(serializer.data)
-
-        # Add aggregation data to the returned content
-        response.data.update({'aggregations': aggregations_dict})
-
-        return response
-
-    def paginate(self, docs_count, documents):
-        return self.paginator.paginate(
-            docs_count, documents, self.request, view=self)
+        paginator = EruditDocumentPagination()
+        if not paginator.paginate(docs_count, documents, self.request):
+            raise Http404()
+        serializer = self.get_serializer(documents, many=True)
+        return Response({
+            'pagination': paginator.get_paginated_info(),
+            'results': serializer.data,
+            'aggregations': aggregations_dict,
+        })
 
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
