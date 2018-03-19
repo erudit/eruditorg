@@ -54,7 +54,7 @@ from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from .viewmixins import PrepublicationTokenRequiredMixin
 
 
-class BaseRedirectToExternalSourceDetailView(DetailView):
+class RedirectToExternalSourceMixin:
     """ Redirects to get_object().external_url if set.
 
     Common to Journal, Issue and Article detail views.
@@ -64,9 +64,9 @@ class BaseRedirectToExternalSourceDetailView(DetailView):
     objects (which, by definition, are objects without external_url!) like it does by default.
     """
 
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         try:
-            return super().get(request, *args, **kwargs)
+            return super().dispatch(request, *args, **kwargs)
         except Http404:
             self.object = self.get_object(allow_external=True)
             if self.object.external_url:
@@ -328,7 +328,10 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
 
 class IssueDetailView(
         FallbackObjectViewMixin,
-        ContentAccessCheckMixin, BaseRedirectToExternalSourceDetailView, PrepublicationTokenRequiredMixin):
+        ContentAccessCheckMixin,
+        PrepublicationTokenRequiredMixin,
+        RedirectToExternalSourceMixin,
+        DetailView):
     """
     Displays an Issue instance.
     """
@@ -487,9 +490,14 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 
 class BaseArticleDetailView(
-        RedirectExceptionsToFallbackWebsiteMixin, FedoraServiceRequiredMixin,
-        ContentAccessCheckMixin, SingleArticleWithScholarMetadataMixin,
-        ArticleViewMetricCaptureMixin, BaseRedirectToExternalSourceDetailView):
+        RedirectExceptionsToFallbackWebsiteMixin,
+        FedoraServiceRequiredMixin,
+        RedirectToExternalSourceMixin,
+        FallbackObjectViewMixin,
+        ContentAccessCheckMixin,
+        SingleArticleWithScholarMetadataMixin,
+        ArticleViewMetricCaptureMixin,
+        DetailView):
     context_object_name = 'article'
     model = Article
     tracking_view_type = 'html'
@@ -588,7 +596,7 @@ class BaseArticleDetailView(
         return mark_safe(html_content)
 
 
-class ArticleDetailView(FallbackObjectViewMixin, BaseArticleDetailView):
+class ArticleDetailView(BaseArticleDetailView):
     """
     Displays an Article page.
     """

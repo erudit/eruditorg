@@ -136,7 +136,7 @@ class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):
 
 class PrepublicationTokenRequiredMixin:
 
-    def dispatch(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
 
         object = self.get_object()
         if isinstance(object, Article):
