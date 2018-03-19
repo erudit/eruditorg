@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import re
 
 import datetime as dt
 from urllib.parse import urlparse
@@ -49,15 +50,20 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
         if parsed_user_referer.netloc == '':
             return
 
+        user_netloc = re.sub('www.', '', parsed_user_referer.netloc)
+
         referers_pk = self.filter(
-            referers__referer__contains=parsed_user_referer.netloc,
+            referers__referer__contains=user_netloc,
         ).values_list('referers', flat=True)
 
         for institution_referer in InstitutionReferer.objects.filter(pk__in=referers_pk):
             parsed_institution_referer = urlparse(institution_referer.referer)
+
+            institution_netloc = re.sub('www.', '', parsed_institution_referer.netloc)
+
             if (
                 # Compare full netloc
-                parsed_institution_referer.netloc == parsed_user_referer.netloc and
+                institution_netloc == user_netloc and
                 parsed_institution_referer.path in parsed_user_referer.path
             ):
                 return institution_referer.subscription
