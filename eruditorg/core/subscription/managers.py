@@ -50,7 +50,7 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
         if parsed_user_referer.netloc == '':
             return
 
-        user_netloc = re.sub('www.', '', parsed_user_referer.netloc)
+        user_netloc = re.sub('^www.', '', parsed_user_referer.netloc)
 
         referers_pk = self.filter(
             referers__referer__contains=user_netloc,
@@ -59,7 +59,7 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
         for institution_referer in InstitutionReferer.objects.filter(pk__in=referers_pk):
             parsed_institution_referer = urlparse(institution_referer.referer)
 
-            institution_netloc = re.sub('www.', '', parsed_institution_referer.netloc)
+            institution_netloc = re.sub('^www.', '', parsed_institution_referer.netloc)
 
             if (
                 # Compare full netloc

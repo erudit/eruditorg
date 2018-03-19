@@ -99,6 +99,7 @@ class TestInstitutionReferer:
     @pytest.mark.parametrize('referer,should_find', [
         ("http://www.topsecurity.org/bulletproofauthenticationmechanism", True),
         ("http://www.topsecurity.org/", False),
+        ('http://proxy.www.topsecurity.org', True),
         ("http://www.topsecurity.org/bulletproofauthenticationmechanism/journal123", True)
 
     ])
