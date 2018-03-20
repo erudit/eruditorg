@@ -15,8 +15,6 @@ from ..models import IssueContributor
 from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
-from ..models import ArticleTitle
-from ..models import ArticleSubtitle
 
 
 class JournalDisciplineInline(admin.TabularInline):
@@ -186,16 +184,6 @@ class ArticleSectionTitleInline(admin.TabularInline):
     model = ArticleSectionTitle
 
 
-class ArticleTitleInline(admin.TabularInline):
-    extra = 0
-    model = ArticleTitle
-
-
-class ArticleSubtitleInline(admin.TabularInline):
-    extra = 0
-    model = ArticleSubtitle
-
-
 class ArticleExternalStatusFilter(admin.SimpleListFilter):
     title = "Lien Externe"
     parameter_name = 'external_status'
@@ -237,7 +225,7 @@ class ArticleAdmin(admin.ModelAdmin):
         'external_status',
     )
     raw_id_fields = ('issue', )
-    search_fields = ('id', 'localidentifier', 'titles__title', )
+    search_fields = ('id', 'localidentifier', )
     list_filter = (
         'type',
         ArticleExternalStatusFilter,

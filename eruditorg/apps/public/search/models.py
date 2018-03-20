@@ -13,41 +13,77 @@ class Generic:
     def __init__(self, solr_data):
         self.localidentifier = solr_data['ID']
         self.corpus = solr_data['Corpus_fac']
-        self.document_type = {
+        self.solr_data = solr_data
+
+    def can_cite(self):
+        return False
+
+    @property
+    def document_type(self):
+        return {
             'Dépot': 'report',
             'Livres': 'book',
             'Actes': 'book',
             'Rapport': 'report',
         }.get(self.corpus, 'generic')
-        self.year = solr_data['Annee'][0] if 'Annee' in solr_data else None
-        self.publication_date = solr_data.get('AnneePublication')
-        self.issn = solr_data.get('ISSN')
-        self.collection = solr_data.get('Fonds_fac')
-        self.authors = person_list(solr_data.get('AuteurNP_fac'))
-        self.volume = solr_data.get('Volume')
-        collection_title = solr_data.get('TitreCollection_fac')
-        if collection_title:
-            self.series = collection_title[0]
-        else:
-            self.series = None
-        self.url = solr_data['URLDocument'][0] if 'URLDocument' in solr_data else None
-        self.numero = solr_data.get('Numero')
-        if not {'PremierePage', 'DernierePage'}.issubset(set(solr_data.keys())):
-            self.pages = None
-        else:
-            self.pages = _('Pages {firstpage}-{lastpage}'.format(
-                firstpage=solr_data['PremierePage'],
-                lastpage=solr_data['DernierePage']
-            ))
-        TITLE_ATTRS = ['Titre_fr', 'Titre_en', 'TitreRefBiblio_aff']
-        self.title = _("(Sans titre)")
-        for attrname in TITLE_ATTRS:
-            if attrname in solr_data:
-                self.title = solr_data[attrname]
-                break
 
-    def can_cite(self):
-        return False
+    @property
+    def year(self):
+        return self.solr_data['Annee'][0] if 'Annee' in self.solr_data else None
+
+    @property
+    def publication_date(self):
+        return self.solr_data.get('AnneePublication')
+
+    @property
+    def issn(self):
+        return self.solr_data.get('ISSN')
+
+    @property
+    def collection(self):
+        return self.solr_data.get('Fonds_fac')
+
+    @property
+    def authors(self):
+        return person_list(self.solr_data.get('AuteurNP_fac'))
+
+    @property
+    def volume(self):
+        return self.solr_data.get('Volume')
+
+    @property
+    def series(self):
+        collection_title = self.solr_data.get('TitreCollection_fac')
+        if collection_title:
+            return collection_title[0]
+        else:
+            return None
+
+    @property
+    def url(self):
+        return self.solr_data['URLDocument'][0] if 'URLDocument' in self.solr_data else None
+
+    @property
+    def numero(self):
+        return self.solr_data.get('Numero')
+
+    @property
+    def pages(self):
+        if not {'PremierePage', 'DernierePage'}.issubset(set(self.solr_data.keys())):
+            return None
+        else:
+            return _('Pages {firstpage}-{lastpage}'.format(
+                firstpage=self.solr_data['PremierePage'],
+                lastpage=self.solr_data['DernierePage']
+            ))
+
+    @property
+    def title(self):
+        TITLE_ATTRS = ['Titre_fr', 'Titre_en', 'TitreRefBiblio_aff']
+        for attrname in TITLE_ATTRS:
+            if attrname in self.solr_data:
+                return self.solr_data[attrname]
+        return _("(Sans titre)")
 
 
 # These models below are temporary shims that we implement with the same API as the old serializers
@@ -56,14 +92,11 @@ class Generic:
 # django rest framework.
 
 
-class Article:
-    document_type = 'article'
-
+class Article(Generic):
     def __init__(self, solr_data):
-        self.localidentifier = solr_data['ID']
+        super().__init__(solr_data)
         self.obj = erudit_models.Article.objects.get(localidentifier=self.localidentifier)
         self.id = self.obj.id
-        self.solr_data = solr_data
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
@@ -73,11 +106,15 @@ class Article:
         return self.obj.is_in_fedora
 
     @property
+    def document_type(self):
+        return 'article'
+
+    @property
     def authors(self):
         if self.obj.is_in_fedora:
             return self.obj.get_formatted_authors()
         else:
-            return person_list(self.solr_data.get('AuteurNP_fac'))
+            return super().authors
 
     @property
     def authors_mla(self):
@@ -99,6 +136,13 @@ class Article:
         if self.obj.type:
             return self.obj.get_type_display()
         return _('Article')
+
+    @property
+    def title(self):
+        if self.obj.is_in_fedora:
+            return self.obj.title
+        else:
+            return super().title
 
     @property
     def paral_titles(self):
@@ -210,11 +254,9 @@ class Article:
         return [keyword.name for keyword in self.obj.keywords.all()]
 
 
-class Thesis:
-    document_type = 'thesis'
-
+class Thesis(Generic):
     def __init__(self, solr_data):
-        self.localidentifier = solr_data['ID']
+        super().__init__(solr_data)
         self.obj = erudit_models.Thesis.objects.get(localidentifier=self.localidentifier)
         self.id = self.obj.id
 
@@ -223,6 +265,10 @@ class Thesis:
 
     def can_cite(self):
         return True
+
+    @property
+    def document_type(self):
+        return 'thesis'
 
     @property
     def authors(self):

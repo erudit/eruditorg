@@ -755,14 +755,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
     """ The last page of the article """
 
-    formatted_title = models.CharField(max_length=1000, null=True, blank=True)
-
-    surtitle = models.CharField(max_length=600, null=True, blank=True)
-    """ The surtitle of the article """
-
-    html_title = models.CharField(max_length=800, null=True, blank=True)
-    """ The title of the article (HTML) """
-
     language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     """ The language code of the article """
 
@@ -819,21 +811,11 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def title(self):
-        if self.formatted_title:
-            return self.formatted_title
-
-        if self.is_in_fedora:
-            return self.erudit_object.get_formatted_title()
-        # TODO: remove ArticleTitle when all formated_title are imported
-        else:
-            title = self.titles.filter(paral=False).first()
-            return str(title.title) if title else None
+        return self.erudit_object.get_formatted_title()
 
     @property
     def html_title(self):
-        if self.is_in_fedora:
-            return self.erudit_object.get_formatted_html_title()
-        return self.title
+        return self.erudit_object.get_formatted_html_title()
 
     @cached_property
     def subtitle(self):
