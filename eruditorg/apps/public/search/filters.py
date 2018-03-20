@@ -30,6 +30,12 @@ class ResultsStats:
         else:
             return self.page - 1
 
+    def is_within_bounds(self):
+        if self.page == 1:
+            # page 1 is *always* within bounds, even when page_count == 0
+            return True
+        return 1 <= self.page <= self.page_count
+
 
 class EruditDocumentSolrFilter:
     """ Filter that returns a list of EruditDocument instance based on Solr search results.

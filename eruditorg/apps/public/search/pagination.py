@@ -2,9 +2,6 @@ from .utils import remove_query_param, replace_query_param
 
 
 def get_pagination_info(stats, request):
-    if not stats.count:
-        return None
-
     baseurl = request.build_absolute_uri()
 
     nextpage = stats.next_page()

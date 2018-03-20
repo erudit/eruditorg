@@ -65,6 +65,14 @@ def fake_get_results_external(**kwargs):
     return results
 
 
+def fake_get_results_empty(**kwargs):
+    results = unittest.mock.Mock()
+    results.docs = []
+    results.facets = {}
+    results.hits = 0
+    return results
+
+
 class TestEruditSearchResultsView:
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_return_erudit_documents(self, mock_get_results):
@@ -166,6 +174,15 @@ class TestSearchResultsView(BaseEruditTestCase):
         assert len(response.redirect_chain) == 1
         last_url, status_code = response.redirect_chain[-1]
         assert reverse('public:search:advanced_search') in last_url
+
+    @unittest.mock.patch.object(Query, 'get_results')
+    def test_empty_results_dont_redirect(self, mock_get_results):
+        # A query yielding empty results don't redirect us. It shows the results page.
+        url = reverse('public:search:results')
+        mock_get_results.side_effect = fake_get_results_empty
+        response = self.client.get(url, data={'basic_search_term': 'poulet'})
+
+        assert response.status_code == 200
 
 
 class TestSavedSearchAddView:

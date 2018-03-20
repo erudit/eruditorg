@@ -151,7 +151,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         stats, documents, aggregations_dict = filters.EruditDocumentSolrFilter() \
             .filter(self.request)
 
-        if not documents:
+        if not stats.is_within_bounds():
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
 
         # This is a specific case in order to remove some sub-strings from the localidentifiers
