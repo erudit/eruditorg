@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 
 from django.contrib.syndication.views import Feed
@@ -79,7 +77,7 @@ class LatestJournalArticlesFeed(Feed):
         context = super(LatestJournalArticlesFeed, self).get_context_data(**kwargs)
         obj = context.get('obj')
 
-        context['authors'] = obj.authors.all()
+        context['authors'] = obj.get_formatted_authors()
         context['abstract'] = obj.abstract
 
         return context

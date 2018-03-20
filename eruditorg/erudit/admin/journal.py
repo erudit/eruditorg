@@ -196,11 +196,6 @@ class ArticleSubtitleInline(admin.TabularInline):
     model = ArticleSubtitle
 
 
-class ArticleAuthorInline(admin.TabularInline):
-    extra = 0
-    model = Article.authors.through
-
-
 class ArticleExternalStatusFilter(admin.SimpleListFilter):
     title = "Lien Externe"
     parameter_name = 'external_status'
@@ -234,10 +229,6 @@ class ArticleAdmin(admin.ModelAdmin):
         'fedora_created', 'fedora_updated',
     )
 
-    # inlines = (
-    #    ArticleAbstractInline, ArticleSectionTitleInline, ArticleTitleInline,
-    #    ArticleSubtitleInline, ArticleAuthorInline
-    # )
     list_display = (
         'localidentifier',
         'issue__localidentifier',
@@ -245,7 +236,7 @@ class ArticleAdmin(admin.ModelAdmin):
         'title',
         'external_status',
     )
-    raw_id_fields = ('issue', 'authors', )
+    raw_id_fields = ('issue', )
     search_fields = ('id', 'localidentifier', 'titles__title', )
     list_filter = (
         'type',

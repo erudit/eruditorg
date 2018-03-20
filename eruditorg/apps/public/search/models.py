@@ -46,6 +46,9 @@ class Generic:
                 self.title = solr_data[attrname]
                 break
 
+    def can_cite(self):
+        return False
+
 
 # These models below are temporary shims that we implement with the same API as the old serializers
 # but we instantiate them on the "other side" of the REST API. We do this to ease the transition.
@@ -56,17 +59,40 @@ class Generic:
 class Article:
     document_type = 'article'
 
-    def __init__(self, localidentifier):
-        self.localidentifier = localidentifier
-        self.obj = erudit_models.Article.objects.get(localidentifier=localidentifier)
+    def __init__(self, solr_data):
+        self.localidentifier = solr_data['ID']
+        self.obj = erudit_models.Article.objects.get(localidentifier=self.localidentifier)
         self.id = self.obj.id
+        self.solr_data = solr_data
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
 
+    def can_cite(self):
+        # We cannot cite articles we don't have in fedora. ref #1491
+        return self.obj.is_in_fedora
+
     @property
     def authors(self):
-        return self.obj.get_formatted_authors()
+        if self.obj.is_in_fedora:
+            return self.obj.get_formatted_authors()
+        else:
+            return person_list(self.solr_data.get('AuteurNP_fac'))
+
+    @property
+    def authors_mla(self):
+        # TODO: call with style arg after liberuditarticle update
+        return self.authors
+
+    @property
+    def authors_apa(self):
+        # TODO: call with style arg after liberuditarticle update
+        return self.authors
+
+    @property
+    def authors_chicago(self):
+        # TODO: call with style arg after liberuditarticle update
+        return self.authors
 
     @property
     def type(self):
@@ -187,13 +213,16 @@ class Article:
 class Thesis:
     document_type = 'thesis'
 
-    def __init__(self, localidentifier):
-        self.localidentifier = localidentifier
-        self.obj = erudit_models.Thesis.objects.get(localidentifier=localidentifier)
+    def __init__(self, solr_data):
+        self.localidentifier = solr_data['ID']
+        self.obj = erudit_models.Thesis.objects.get(localidentifier=self.localidentifier)
         self.id = self.obj.id
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
+
+    def can_cite(self):
+        return True
 
     @property
     def authors(self):
@@ -227,15 +256,14 @@ def get_model_instance(solr_data):
         'Culturel': 'article',
         'Thèses': 'thesis',
     }.get(corpus, 'generic')
-    localidentifier = solr_data['ID']
     if doctype == 'thesis':
         try:
-            return Thesis(localidentifier)
+            return Thesis(solr_data)
         except ObjectDoesNotExist:
             pass
     elif doctype == 'article':
         try:
-            return Article(localidentifier)
+            return Article(solr_data)
         except ObjectDoesNotExist:
             pass
 

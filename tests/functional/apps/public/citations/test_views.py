@@ -10,6 +10,7 @@ from base.test.testcases import EruditClientTestCase
 from core.citations.middleware import SavedCitationListMiddleware
 from core.citations.models import SavedCitationList
 from core.citations.test.factories import SavedCitationListFactory
+from erudit.fedora import repository
 
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
@@ -20,6 +21,7 @@ from erudit.test.factories import ThesisFactory
 
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
+
 
 class TestSavedCitationListView(EruditClientTestCase):
 
@@ -34,8 +36,6 @@ class TestSavedCitationListView(EruditClientTestCase):
         self.thesis_2 = ThesisFactory.create(
             localidentifier='t2', collection=self.collection_1, author=author_2, title='Thesis B',
             publication_year=2011)
-        author_3 = AuthorFactory.create(lastname='Ghi', firstname='Jkl')
-        author_4 = AuthorFactory.create(lastname='Jkl', firstname='mno')
         self.journal_1 = JournalFactory.create(
             collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
@@ -45,9 +45,12 @@ class TestSavedCitationListView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        self.article_1.authors.add(author_3)
-        self.article_2.authors.add(author_4)
-        self.article_3.authors.add(author_3)
+        with repository.api.tweak_article(self.article_1.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.tweak_article(self.article_2.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Jlk', firstname='mno')
+        with repository.api.tweak_article(self.article_3.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Ghi', firstname='Jlk')
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)
@@ -153,8 +156,6 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
         self.thesis_2 = ThesisFactory.create(
             localidentifier='t2', collection=self.collection_1, author=author_2, title='Thesis B',
             publication_year=2011)
-        author_3 = AuthorFactory.create(lastname='Ghi', firstname='Jkl')
-        author_4 = AuthorFactory.create(lastname='Jkl', firstname='mno')
         self.journal_1 = JournalFactory.create(
             collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
@@ -164,9 +165,12 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        self.article_1.authors.add(author_3)
-        self.article_2.authors.add(author_4)
-        self.article_3.authors.add(author_3)
+        with repository.api.tweak_article(self.article_1.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.tweak_article(self.article_2.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Jlk', firstname='mno')
+        with repository.api.tweak_article(self.article_3.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Ghi', firstname='Jlk')
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)
@@ -217,8 +221,6 @@ class TestBaseEruditDocumentsCitationView(EruditClientTestCase):
         self.thesis_2 = ThesisFactory.create(
             localidentifier='t2', collection=self.collection_1, author=author_2, title='Thesis B',
             publication_year=2011)
-        author_3 = AuthorFactory.create(lastname='Ghi', firstname='Jkl')
-        author_4 = AuthorFactory.create(lastname='Jkl', firstname='mno')
         self.journal_1 = JournalFactory.create(
             collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
@@ -228,9 +230,12 @@ class TestBaseEruditDocumentsCitationView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        self.article_1.authors.add(author_3)
-        self.article_2.authors.add(author_4)
-        self.article_3.authors.add(author_3)
+        with repository.api.tweak_article(self.article_1.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.tweak_article(self.article_2.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Jlk', firstname='mno')
+        with repository.api.tweak_article(self.article_3.get_full_identifier()) as tweaker:
+            tweaker.set_author(lastname='Ghi', firstname='Jlk')
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)

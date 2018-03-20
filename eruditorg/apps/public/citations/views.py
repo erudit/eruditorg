@@ -44,7 +44,7 @@ class SavedCitationListView(ListView):
                 if isinstance(doc, Thesis):
                     author_list.append((doc.author.lastname or doc.author.firstname, doc))
                 elif isinstance(doc, Article):
-                    authors = doc.authors.all()
+                    authors = doc.erudit_object.get_authors(formatted=False)
                     authors = [None] if not authors else authors
                     author_list.extend(
                         (((a.lastname or a.firstname) if a else '', doc) for a in authors))
@@ -87,8 +87,7 @@ class SavedCitationListView(ListView):
         article_ids = qs.instance_of(Article).values_list('id', flat=True)
         thesis_ids = qs.instance_of(Thesis).values_list('id', flat=True)
         self.article_qs = Article.objects.filter(id__in=article_ids) \
-            .select_related('issue', 'issue__journal', 'issue__journal__type') \
-            .prefetch_related('authors')
+            .select_related('issue', 'issue__journal', 'issue__journal__type')
         self.thesis_qs = Thesis.objects.filter(id__in=thesis_ids) \
             .select_related('collection', 'author')
 

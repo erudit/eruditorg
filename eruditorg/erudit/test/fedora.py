@@ -1,6 +1,9 @@
 import re
+from contextlib import contextmanager
 
 from eulfedora.api import ApiFacade
+
+from .domtweak import EruditArticleTweaker
 
 # NOTE: This fake API is far from complete but is enough to make tests pass
 #       as they are now. We'll have to improve this as we expand testing areas.
@@ -87,9 +90,29 @@ class FakeAPI(ApiFacade):
 
     def __init__(self):
         super().__init__(self.BASE_URL, 'username', 'password')
+        self._article_content_map = {}
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
         raise AssertionError()  # we should never get there in a testing environment
+
+    def get_article_xml(self, pid):
+        if pid in self._article_content_map:
+            return self._article_content_map[pid]
+        with open('./tests/fixtures/article/009255ar.xml', 'rb') as xml:
+            return xml.read()
+
+    def set_article_xml(self, pid, xml):
+        if isinstance(xml, str):
+            xml = xml.encode('utf-8')
+        self._article_content_map[pid] = xml
+
+    @contextmanager
+    def tweak_article(self, pid):
+        xml = self.get_article_xml(pid)
+        tweaker = EruditArticleTweaker(xml)
+        yield tweaker
+        newxml = tweaker.tostring()
+        self.set_article_xml(pid, newxml)
 
     def get(self, url, **kwargs):
         result = None
@@ -107,8 +130,7 @@ class FakeAPI(ApiFacade):
                 if not subselection:  # we want a datastream list
                     result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/ERUDITXSD300/content':
-                    with open('./tests/fixtures/article/009255ar.xml', 'rb') as xml:
-                        result = xml.read()
+                    result = self.get_article_xml(pid)
             elif len(pidelems) == 3:  # issue
                 if not subselection:  # we want a datastream list
                     result = FAKE_ISSUE_DATASTREAM_LIST.format(pid=pid).encode()

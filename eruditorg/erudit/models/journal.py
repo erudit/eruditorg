@@ -42,8 +42,6 @@ from .core import Copyright
 from .core import EruditDocument
 from .core import Publisher
 
-from .utils import person_list
-
 
 class JournalType(models.Model):
     """ The type of a Journal instance. """
@@ -817,14 +815,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name_plural = _('Articles')
 
     def get_formatted_authors(self):
-        authors = None
-        if self.is_in_fedora:
-            authors = self.erudit_object.get_authors(formatted=True)
-        else:
-            authors = person_list(
-                [str(a) for a in self.authors.all()]
-            )
-        return authors
+        return self.erudit_object.get_authors(formatted=True)
 
     @property
     def title(self):
