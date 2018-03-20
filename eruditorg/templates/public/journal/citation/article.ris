@@ -1,8 +1,8 @@
 {% load public_journal_tags %}
 TY  - JOUR
-T1  - {{ article|format_article_title }}
+T1  - {{ article|format_article_title|safe }}
 {% spaceless %}{% for author in article.erudit_object.authors %}
-{% if author.firstname and author.lastname %}A1  - {{ author.lastname }}, {{ author.firstname }}{% elif author.othername %}A1  - {{ author.othername }}{% endif %}
+{% if author.firstname and author.lastname %}A1  - {{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}A1  - {{ author.othername|safe }}{% endif %}
 {% endfor %}{% endspaceless %}
 JO  - {{ article.issue.journal.name }}
 {% if article.issue.volume %}VL  - {{ article.issue.volume }}{% endif %}

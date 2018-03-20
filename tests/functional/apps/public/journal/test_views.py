@@ -1058,3 +1058,19 @@ class TestExternalURLRedirectViews(BaseEruditTestCase):
             )
         )
         assert response.status_code == 302
+
+
+@pytest.mark.parametrize('export_type', ['bib', 'enw', 'ris'])
+def test_article_citation_doesnt_html_escape(export_type):
+    # citations exports don't HTML-escape values (they're not HTML documents).
+    # TODO: test authors name. Templates directly refer to `erudit_object` and we we don't have
+    # a proper mechanism in the upcoming fake fedora API to fake values on the fly yet.
+    title = "rock & rollin'"
+    article = ArticleFactory.create(title=title)
+    issue = article.issue
+    url = reverse('public:journal:article_citation_{}'.format(export_type), kwargs={
+        'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
+        'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
+    response = Client().get(url)
+    content = response.content.decode()
+    assert title in content
