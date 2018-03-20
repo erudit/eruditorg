@@ -375,7 +375,7 @@ def test_batch_subscribe_proceed():
     client = Client()
     client.login(username=user.username, password='default')
     url = reverse('userspace:journal:subscription:batch_subscribe', args=[journal.pk])
-    response = client.post(url, {'toadd[]': lines}, follow=True)
+    response = client.post(url, {'toadd': lines}, follow=True)
 
     assert response.status_code == 200
     assert AccountActionToken.objects.count() == len(lines)
@@ -433,7 +433,7 @@ def test_batch_delete_proceed():
     client = Client()
     client.login(username=user.username, password='default')
     url = reverse('userspace:journal:subscription:batch_delete', args=[journal.pk])
-    response = client.post(url, {'todelete[]': [sub.pk]}, follow=True)
+    response = client.post(url, {'todelete': [sub.pk]}, follow=True)
 
     assert response.status_code == 200
     assert not JournalAccessSubscription.objects.exists()
