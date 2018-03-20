@@ -146,7 +146,7 @@ class PrepublicationTokenRequiredMixin:
         else:
             raise ValueError("This mixin should only be used with Article and Issue objects")
 
-        if not issue.is_published and object.prepublication_ticket != request.GET.get('ticket'):
+        if not issue.is_published and issue.prepublication_ticket != request.GET.get('ticket'):
             return HttpResponseRedirect(
                 reverse('public:journal:journal_detail', args=(issue.journal.code, ))
             )

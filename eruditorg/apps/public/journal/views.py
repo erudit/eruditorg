@@ -497,6 +497,7 @@ class BaseArticleDetailView(
         ContentAccessCheckMixin,
         SingleArticleWithScholarMetadataMixin,
         ArticleViewMetricCaptureMixin,
+        PrepublicationTokenRequiredMixin,
         DetailView):
     context_object_name = 'article'
     model = Article

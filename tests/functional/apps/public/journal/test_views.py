@@ -616,6 +616,24 @@ class TestArticleDetailView:
         response = Client().get(url)
         assert response.status_code == 200
 
+    @pytest.mark.parametrize("is_published,has_ticket,expected_code", [
+        (True, False, 200),
+        (True, True, 200),
+        (False, False, 302),
+        (False, True, 200),
+    ])
+    def test_can_accept_prepublication_ticket(self, is_published, has_ticket, expected_code):
+        localidentifier = "espace03368"
+        issue = IssueFactory(localidentifier=localidentifier, is_published=is_published)
+        article = ArticleFactory(issue=issue)
+        url = article_detail_url(article)
+        data = None
+        if has_ticket:
+            ticket = md5(localidentifier.encode()).hexdigest()
+            data = {'ticket': ticket}
+        response = Client().get(url, data=data)
+        assert response.status_code == expected_code
+
     def test_fedora_article_with_external_url_redirects(self):
         # When we have an article with a fedora localidentifier *and* external_url set, we redirect
         # to that external url when we hit the detail view.
