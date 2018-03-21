@@ -37,8 +37,8 @@ class ResultsStats:
         return 1 <= self.page <= self.page_count
 
 
-class EruditDocumentSolrFilter:
-    """ Filter that returns a list of EruditDocument instance based on Solr search results.
+class SolrFilter:
+    """ Return filtered Solr documents
 
     This "filter" class can process many individual filters that should be translated to Solr
     parameters in order to query a Solr index of Érudit documents. This filter should only be used

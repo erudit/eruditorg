@@ -6,7 +6,7 @@ from django.test import RequestFactory
 from core.solrq.query import Query
 from erudit.test import BaseEruditTestCase
 
-from apps.public.search.filters import EruditDocumentSolrFilter as BaseEruditDocumentSolrFilter
+from apps.public.search.filters import SolrFilter as BaseSolrFilter
 from apps.public.search.legacy import add_correspondences_to_search_query
 
 
@@ -17,7 +17,7 @@ def fake_get_results(**kwargs):
     return results
 
 
-class EruditDocumentSolrFilter(BaseEruditDocumentSolrFilter):
+class EruditDocumentSolrFilter(BaseSolrFilter):
     def apply_solr_filters(self, filters):
         sqs = super(EruditDocumentSolrFilter, self).apply_solr_filters(filters)
         self.sqs = sqs

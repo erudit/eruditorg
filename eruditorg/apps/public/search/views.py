@@ -148,7 +148,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         # Applies the search engine filter backend in order to get a list of filtered
         # EruditDocument localidentifiers, a dictionnary contening the result of aggregations
         # that should be embedded in the final response object and a number of hits.
-        stats, documents, aggregations_dict = filters.EruditDocumentSolrFilter() \
+        stats, documents, aggregations_dict = filters.SolrFilter() \
             .filter(self.request)
 
         if not stats.is_within_bounds():
