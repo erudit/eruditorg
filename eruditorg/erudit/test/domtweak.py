@@ -51,5 +51,9 @@ class EruditArticleTweaker:
             elem.text = title.title
             grtitre.append(elem)
 
+    def set_title(self, title):
+        titre = self.root.find('.//grtitre/titre')
+        titre.text = title
+
     def tostring(self):
         return etree.tostring(self.root)

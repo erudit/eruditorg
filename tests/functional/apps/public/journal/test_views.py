@@ -25,6 +25,7 @@ from erudit.test.factories import JournalFactory
 from erudit.test.factories import JournalInformationFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora.objects import MediaDigitalObject
+from erudit.fedora import repository
 
 from base.test.factories import UserFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
@@ -43,18 +44,22 @@ FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 pytestmark = pytest.mark.django_db
 
+
 def journal_detail_url(journal):
     return reverse('public:journal:journal_detail', kwargs={'code': journal.code})
+
 
 def issue_detail_url(issue):
     return reverse('public:journal:issue_detail', args=[
         issue.journal.code, issue.volume_slug, issue.localidentifier])
+
 
 def article_detail_url(article):
     issue = article.issue
     return reverse('public:journal:article_detail', kwargs={
         'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
         'issue_localid': issue.localidentifier, 'localid': article.localidentifier})
+
 
 def article_raw_pdf_url(article):
     issue = article.issue
@@ -64,6 +69,7 @@ def article_raw_pdf_url(article):
     return reverse('public:journal:article_raw_pdf', args=(
         journal_id, issue.volume_slug, issue_id, article_id
     ))
+
 
 @pytest.mark.django_db
 class TestJournalListView:
@@ -1066,7 +1072,9 @@ def test_article_citation_doesnt_html_escape(export_type):
     # TODO: test authors name. Templates directly refer to `erudit_object` and we we don't have
     # a proper mechanism in the upcoming fake fedora API to fake values on the fly yet.
     title = "rock & rollin'"
-    article = ArticleFactory.create(title=title)
+    article = ArticleFactory.create()
+    with repository.api.tweak_article(article.get_full_identifier()) as tweaker:
+        tweaker.set_title(title)
     issue = article.issue
     url = reverse('public:journal:article_citation_{}'.format(export_type), kwargs={
         'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
