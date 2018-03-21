@@ -378,34 +378,19 @@
 
                       <p>{% trans "Exporter la notice de ce document" %}</p>
                       <p>
-                        <a href="
-                        {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_enw' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
-                        {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_enw' document.collection document.id %}
-                        {% endif %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_enw_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.ENW</span>
                         </a>
                         EndNote, Zotero
                       </p>
                       <p>
-                        <a href="
-                        {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_ris' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
-                        {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_ris' document.collection document.id %}
-                        {% endif %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_ris_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.RIS</span>
                         </a>
                         Papers, Reference Manager, RefWorks, Zotero
                       </p>
                       <p>
-                        <a href="
-                        {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_bib' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
-                        {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_bib' document.collection document.id %}
-                        {% endif %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_bib_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.BIB</span>
                         </a>
                         BibTeX, JabRef, Mendeley, Zotero

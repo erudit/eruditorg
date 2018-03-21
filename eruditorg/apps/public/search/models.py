@@ -105,6 +105,23 @@ class Article(Generic):
         # We cannot cite articles we don't have in fedora. ref #1491
         return self.obj.is_in_fedora
 
+    def cite_url(self, type):
+        return reverse('public:journal:article_citation_{}'.format(type), kwargs={
+            'journal_code': self.obj.issue.journal.code,
+            'issue_slug': self.obj.issue.volume_slug,
+            'issue_localid': self.obj.issue.localidentifier,
+            'localid': self.localidentifier,
+        })
+
+    def cite_enw_url(self):
+        return self.cite_url('enw')
+
+    def cite_bib_url(self):
+        return self.cite_url('bib')
+
+    def cite_ris_url(self):
+        return self.cite_url('ris')
+
     @property
     def document_type(self):
         return 'article'
@@ -173,10 +190,6 @@ class Article(Generic):
             return self.obj.erudit_object.get_reviewed_works()
 
     @property
-    def journal_code(self):
-        return self.obj.issue.journal.code
-
-    @property
     def series(self):
         return self.obj.issue.journal.name
 
@@ -209,10 +222,6 @@ class Article(Generic):
         ))
 
     @property
-    def issue_localidentifier(self):
-        return self.obj.issue.localidentifier
-
-    @property
     def issue_title(self):
         return self.obj.issue.name_with_themes
 
@@ -227,10 +236,6 @@ class Article(Generic):
     @property
     def issue_published(self):
         return self.obj.issue.publication_period or self.obj.issue.year
-
-    @property
-    def issue_volume_slug(self):
-        return self.obj.issue.volume_slug
 
     @property
     def pdf_url(self):
@@ -270,6 +275,21 @@ class Thesis(Generic):
 
     def can_cite(self):
         return True
+
+    def cite_url(self, type):
+        return reverse('public:thesis:thesis_citation_{}'.format(type), args=[
+            self.collection,
+            self.id,
+        ])
+
+    def cite_enw_url(self):
+        return self.cite_url('enw')
+
+    def cite_bib_url(self):
+        return self.cite_url('bib')
+
+    def cite_ris_url(self):
+        return self.cite_url('ris')
 
     @property
     def document_type(self):
