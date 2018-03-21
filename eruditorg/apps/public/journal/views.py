@@ -404,7 +404,6 @@ class IssueDetailView(
         ]
         articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \
-            .prefetch_related('authors', 'section_titles') \
             .filter(issue=self.object, localidentifier__in=article_li)
 
         articles = sorted(articles, key=lambda a: article_li.index(a.localidentifier))
@@ -443,6 +442,9 @@ class IssueDetailView(
                 })
             else:
                 title_paral = getattr(articles[0], 'section_title_' + str(level + 1) + '_paral')
+                # liberuditarticle returns an `odict_value()` wrapper around the list. We just want
+                # to make sure that this wrapper doesn't cause problems down the line. Force list.
+                title_paral = list(title_paral)
                 sections_tree['groups'].append(
                     self.generate_sections_tree(
                         articles, level=level + 1,

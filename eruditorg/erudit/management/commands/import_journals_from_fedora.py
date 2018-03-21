@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-import itertools
 import datetime as dt
 import structlog
 import re
@@ -23,10 +21,7 @@ from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
 from ...models import Affiliation
 from ...models import Article
-from ...models import ArticleTitle
-from ...models import ArticleSubtitle
 from ...models import ArticleAbstract
-from ...models import ArticleSectionTitle
 from ...models import Author
 from ...models import Collection
 from ...models import Copyright
@@ -770,37 +765,7 @@ class Command(BaseCommand):
         article.clean()
         article.save()
 
-        titles = article_erudit_object.get_titles()
-
-        # Delete all the titles of the article
-        ArticleTitle.objects.filter(article=article).delete()
-        ArticleSubtitle.objects.filter(article=article).delete()
-
-        # Reimport titles
-        ArticleTitle(
-            article=article, paral=False, title=titles['main'].title,
-        ).save()
-
-        if titles['main'].subtitle:
-            ArticleSubtitle(article=article, paral=False, title=titles['main'].subtitle)
-
-        for paral_title in itertools.chain(titles['paral'], titles['equivalent']):
-            ArticleTitle(
-                article=article,
-                language=paral_title.lang,
-                title=paral_title.title,
-                paral=True
-            ).save()
-
-            if paral_title.subtitle:
-                ArticleSubtitle(
-                    article=article,
-                    language=paral_title.lang,
-                    title=paral_title.subtitle,
-                    paral=True
-                ).save()
-
-        # STEP 3: creates or updates the authors of the article
+        # STEP 1: creates or updates the authors of the article
         # --
 
         article.authors.clear()
@@ -838,7 +803,7 @@ class Command(BaseCommand):
 
             article.authors.add(author)
 
-        # STEP 4: imports the abstracts associated with the article
+        # STEP 2: imports the abstracts associated with the article
         # --
 
         article.abstracts.all().delete()
@@ -848,25 +813,7 @@ class Command(BaseCommand):
             abstract.language = abstract_dict.get('lang')
             abstract.save()
 
-        # STEP 5: imports the section titles associated with the article
-        # --
-
-        article.section_titles.all().delete()
-        for level in range(1, 4):
-            section_titles_dict = article_erudit_object.get_section_titles(level=level)
-            if section_titles_dict is None:
-                continue
-
-            section_title = ArticleSectionTitle(article=article, level=level, paral=False)
-            section_title.title = section_titles_dict.get('main')
-            section_title.save()
-
-            for paral in section_titles_dict.get('paral').values():
-                section_title_paral = ArticleSectionTitle(article=article, level=level, paral=True)
-                section_title_paral.title = paral
-                section_title_paral.save()
-
-        # STEP 6: imports the article's keywords
+        # STEP 3: imports the article's keywords
         # --
 
         article.keywords.clear()
@@ -888,7 +835,7 @@ class Command(BaseCommand):
                     tag.save()
                 article.keywords.add(tag)
 
-        # STEP 7: imports article's copyrights
+        # STEP 4: imports article's copyrights
         # --
 
         article.copyrights.clear()
@@ -901,7 +848,7 @@ class Command(BaseCommand):
             copyright, _ = Copyright.objects.get_or_create(text=copyright_text, url=copyright_url)
             article.copyrights.add(copyright)
 
-        # STEP 8: eventually test the XSLT transformation of the article
+        # STEP 5: eventually test the XSLT transformation of the article
         # --
 
         if self.test_xslt:

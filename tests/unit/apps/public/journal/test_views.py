@@ -6,31 +6,24 @@ import unittest.mock
 from django.template import Context
 
 from erudit.test import BaseEruditTestCase
-from erudit.test.factories import IssueFactory, JournalFactory, CollectionFactory
+from erudit.test.factories import IssueFactory, JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
+from erudit.fedora import repository
 from erudit.models import Issue
-from erudit.test.factories import ArticleFactory, ArticleSectionTitleFactory
+from erudit.test.factories import ArticleFactory
+from erudit.test.domtweak import SectionTitle
 from apps.public.journal.views import IssueDetailView, ArticleDetailView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
+
 @pytest.mark.django_db
 class TestIssueDetailSummary:
-    @pytest.fixture(autouse=True)
-    def setUp(self):
-        # for these tests to work, our articles need to be in a non-fedora collection
-        collection = CollectionFactory.create(localidentifier=None)
-        journal = JournalFactory.create(collection=collection)
-        self.issue = IssueFactory.create(journal=journal)
-
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()
-        article_1, article_2, article_3 = ArticleFactory.create_batch(3, issue=self.issue)
-        ArticleSectionTitleFactory(
-            article=article_3,
-            title="section 1",
-            level=1,
-        )
+        article_1, article_2, article_3 = ArticleFactory.create_batch(3)
+        with repository.api.tweak_article(article_3.get_full_identifier()) as tweaker:
+            tweaker.set_section_titles([SectionTitle(1, False, "section 1")])
         sections_tree = view.generate_sections_tree([article_1, article_2, article_3])
         assert sections_tree == {
             'titles': {'paral': None, 'main': None},
@@ -49,25 +42,14 @@ class TestIssueDetailSummary:
 
     def test_can_generate_section_tree_with_three_levels(self):
         view = IssueDetailView()
-        article = ArticleFactory(issue=self.issue)
+        article = ArticleFactory()
 
-        ArticleSectionTitleFactory(
-            article=article,
-            title="section 1",
-            level=1,
-        )
-
-        ArticleSectionTitleFactory(
-            article=article,
-            title="section 2",
-            level=2,
-        )
-
-        ArticleSectionTitleFactory(
-            article=article,
-            title="section 3",
-            level=3
-        )
+        with repository.api.tweak_article(article.get_full_identifier()) as tweaker:
+            tweaker.set_section_titles([
+                SectionTitle(1, False, "section 1"),
+                SectionTitle(2, False, "section 2"),
+                SectionTitle(3, False, "section 3"),
+            ])
 
         sections_tree = view.generate_sections_tree([article])
         assert sections_tree == {
@@ -96,20 +78,17 @@ class TestIssueDetailSummary:
 
     def test_can_generate_section_tree_with_non_contiguous_articles(self):
         view = IssueDetailView()
-        articles = ArticleFactory.create_batch(3, issue=self.issue)
+        articles = ArticleFactory.create_batch(3)
 
-        for article in articles:
-            ArticleSectionTitleFactory(
-                article=article,
-                title="section 1",
-                level=1,
-            )
-
-        ArticleSectionTitleFactory(
-            article=articles[1],
-            title="section 1.1",
-            level=2,
-        )
+        with repository.api.tweak_article(articles[0].get_full_identifier()) as tweaker:
+            tweaker.set_section_titles([SectionTitle(1, False, "section 1")])
+        with repository.api.tweak_article(articles[1].get_full_identifier()) as tweaker:
+            tweaker.set_section_titles([
+                SectionTitle(1, False, "section 1"),
+                SectionTitle(2, False, "section 1.1"),
+            ])
+        with repository.api.tweak_article(articles[2].get_full_identifier()) as tweaker:
+            tweaker.set_section_titles([SectionTitle(1, False, "section 1")])
 
         sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
@@ -137,6 +116,7 @@ class TestIssueDetailSummary:
             ]
         }
 
+
 @unittest.mock.patch.object(
     Issue,
     'erudit_object',
@@ -159,8 +139,7 @@ class TestIssueDetailSummary:
 class TestRenderArticleTemplateTag(BaseEruditTestCase):
 
     def test_can_transform_article_xml_to_html(
-            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo
-        ):
+            self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
         # Setup
         with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
             xml = fp.read()
@@ -182,8 +161,7 @@ class TestRenderArticleTemplateTag(BaseEruditTestCase):
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     def test_can_transform_article_xml_to_html_when_pdf_exists(
-            self, mock_pdf, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo
-        ):
+            self, mock_pdf, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
         # Setup
         with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
             xml = fp.read()

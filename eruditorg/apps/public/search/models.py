@@ -146,13 +146,15 @@ class Article(Generic):
 
     @property
     def paral_titles(self):
-        paral_titles = self.obj.titles.filter(paral=True)
-        return list(t.title for t in paral_titles)
-
-    @property
-    def paral_subtitles(self):
-        paral_subtitles = self.obj.subtitles.filter(paral=True)
-        return list(t.title for t in paral_subtitles)
+        if self.obj.is_in_fedora:
+            titles = self.obj.erudit_object.get_titles()
+            # NOTE: 'equivalent' is supposed to be for parallel titles that aren't in an officially
+            # supported language, but the old "django import" method also imported equivalent
+            # titles, so to stay in line with the old behavior, we keep 'equivalent' in. But we
+            # might want to change that.
+            return titles['paral'] + titles['equivalent']
+        else:
+            return []
 
     @property
     def abstract(self):

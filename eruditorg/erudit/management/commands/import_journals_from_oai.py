@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 import logging
 
@@ -8,14 +6,10 @@ from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 from django.core.validators import URLValidator
 from django.db import transaction
-from nameparser import HumanName
 from sickle import Sickle
 from sickle.oaiexceptions import BadResumptionToken
 
 from ...conf import settings as erudit_settings
-from ...models import Article
-from ...models import ArticleTitle
-from ...models import Author
 from ...models import Collection
 from ...models import Issue
 from ...models import Journal
@@ -65,7 +59,7 @@ class Command(BaseCommand):
             pass
 
         # Imports the OAI-based collections
-        journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
+        journal_count, journal_errored_count, issue_count = 0, 0, 0
         for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('oai'):
             code = collection_config['collection_code']
             if self.collection_codes and code not in self.collection_codes:
@@ -82,18 +76,17 @@ class Command(BaseCommand):
                 collection = Collection.objects.get(code=code)
             except Collection.DoesNotExist:
                 collection = Collection.objects.create(code=code, name=name)
-            _jc, _jec, _ic, _ac = \
+            _jc, _jec, _ic = \
                 self.import_collection(collection, endpoint, collection_config)
             journal_count += _jc
             journal_errored_count += _jec
             issue_count += _ic
-            article_count += _ac
 
         self.stdout.write(self.style.MIGRATE_HEADING(
             '\nJournals imported: {journal_count} / Journals errored: {journal_errored_count} / '
-            'issues imported: {issue_count} / articles imported: {article_count}'.format(
+            'issues imported: {issue_count}'.format(
                 journal_count=journal_count, journal_errored_count=journal_errored_count,
-                issue_count=issue_count, article_count=article_count,
+                issue_count=issue_count
             )))
 
     def import_collection(self, collection, endpoint, oai_config):
@@ -111,7 +104,7 @@ class Command(BaseCommand):
         # STEP 2: imports each journal
         # --
 
-        journal_count, journal_errored_count, issue_count, article_count = 0, 0, 0, 0
+        journal_count, journal_errored_count, issue_count = 0, 0, 0
         for journal_set in journal_sets:
 
             try:
@@ -125,7 +118,7 @@ class Command(BaseCommand):
                         )
                     ))
                     continue
-                _ic, _ac = self.import_journal(journal_set, collection, oai_config, sickle)
+                _ic = self.import_journal(journal_set, collection, oai_config, sickle)
             except AssertionError:
                 pass
             except BadResumptionToken as e:
@@ -142,9 +135,8 @@ class Command(BaseCommand):
             else:
                 journal_count += 1
                 issue_count += _ic
-                article_count += _ac
 
-        return journal_count, journal_errored_count, issue_count, article_count
+        return journal_count, journal_errored_count, issue_count
 
     def import_journal(self, journal_set, collection, oai_config, sickle):
         """ Imports a specific journal using its journal set return by an OAI-PMH provider. """
@@ -207,12 +199,12 @@ class Command(BaseCommand):
 
         issue_records = sickle.ListRecords(**oai_request_params)
 
-        issue_count, article_count = 0, 0
+        issue_count = 0
         for issue_record in issue_records:
             with transaction.atomic():
                 try:
                     if issue_metadataprefix == 'persee_mets':
-                        _ac = self._import_issue_from_persee_mets(
+                        self._import_issue_from_persee_mets(
                             issue_record, journal, oai_config, sickle)
                     else:
                         raise NotImplementedError
@@ -223,9 +215,8 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.ERROR('    ' + msg))
                 else:
                     issue_count += 1
-                    article_count += _ac
 
-        return issue_count, article_count
+        return issue_count
 
     def _import_issue_from_persee_mets(self, issue_record, journal, oai_config, sickle):
         self.stdout.write(
@@ -266,93 +257,4 @@ class Command(BaseCommand):
 
         issue.save()
 
-        # STEP 2: imports the articles associated with the issue
-        # --
-
-        article_xmls = issue_record.xml.findall('.//mets:fileGrp[@USE="article"]/mets:file', oai_ns)
-
-        article_count = 0
-
-        for article_xml in article_xmls:
-            identifier = article_xml.get('GROUPID')
-            ordseq = article_xml.get('SEQ')
-            article_record = sickle.GetRecord(
-                **{'identifier': 'oai:persee:article/' + identifier.lower(),
-                   'metadataPrefix': 'oai_dc'})
-            try:
-                self._import_article_from_persee_mets(article_record, issue, ordseq)
-            except Exception as e:
-                self.stdout.write(self.style.ERROR('  [FAIL]'))
-                logger.error(
-                    'The issue\'s article with ID "{0}" cannot be imported: {1}'.format(
-                        identifier, e),
-                    exc_info=True)
-                raise
-            else:
-                article_count += 1
-
         self.stdout.write(self.style.SUCCESS('  [OK]'))
-
-        return article_count
-
-    def _import_article_from_persee_mets(self, article_record, issue, ordseq):
-        oai_ns = {
-            'dc': 'http://purl.org/dc/elements/1.1/',
-            'dcterms': 'http://purl.org/dc/terms/',
-            'oai_dc': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
-        }
-
-        # STEP 1: creates or updates the article object
-        # --
-
-        article_localidentifier = 'art-' + article_record.header.identifier.split('/')[-1]
-        try:
-            article = Article.objects.get(localidentifier=article_localidentifier)
-        except Article.DoesNotExist:
-            article = Article()
-            article.localidentifier = article_localidentifier
-            article.issue = issue
-
-        title_xml = article_record.xml.find('.//dc:title', oai_ns)
-        first_page_xml = article_record.xml.find('.//dcterms:bibliographicCitation.spage', oai_ns)
-        last_page_xml = article_record.xml.find('.//dcterms:bibliographicCitation.epage', oai_ns)
-        external_url_xmls = article_record.xml.xpath(
-            './/dc:identifier[not(@scheme)]', namespaces=oai_ns)
-        doi_xml = article_record.xml.find('.//dc:identifier[@cheme="DOI"]', oai_ns)
-
-        article.first_page = first_page_xml.text if first_page_xml is not None else None
-        article.last_page = last_page_xml.text if last_page_xml is not None else None
-        article.ordseq = ordseq
-        article.external_url = external_url_xmls[0].text if external_url_xmls is not None else None
-        article.doi = doi_xml.text.replace('doi:', '') if doi_xml is not None else None
-        article.oai_datestamp = dt_parse(article_record.header.datestamp)
-
-        article.save()
-
-        article.formatted_title = title_xml.text
-
-        ArticleTitle.objects.filter(article=article).delete()
-        ArticleTitle(
-            article=article, paral=False, title=title_xml.text if title_xml is not None else None
-        ).save()
-        # STEP 2: imports the authors associated with the article
-        # --
-
-        author_xmls = article_record.xml.findall('.//dc:creator', oai_ns)
-
-        article.authors.clear()
-        for author_xml in author_xmls:
-            full_name = author_xml.text
-            if not full_name:
-                continue
-            parsed_name = HumanName(full_name)
-            firstname = parsed_name.first
-            lastname = ' '.join([parsed_name.middle, parsed_name.last, ]) if parsed_name.middle \
-                else parsed_name.last
-            author = Author.objects.filter(firstname=firstname[:100], lastname=lastname[:100]) \
-                .first()
-            if author is None:
-                author = Author(firstname=firstname[:100], lastname=lastname[:100])
-                author.save()
-
-            article.authors.add(author)

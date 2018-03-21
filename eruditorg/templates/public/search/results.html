@@ -195,12 +195,10 @@
                       {% endif %}
                       {% if document.paral_titles %}
                         {% for paral_title in document.paral_titles %}
-                            <br><span>{{ paral_title|safe }}</span>
-                        {% endfor %}
-                      {% endif %}
-                      {% if document.paral_subtitles %}
-                        {% for paral_title in document.paral_subtitles %}
-                            <br><span>{{ paral_title|safe }}</span>
+                            <br><span>{{ paral_title.title|safe }}</span>
+                            {% if paral_title.subtitle %}
+                            <br><span>{{ paral_title.subtitle|safe }}</span>
+                            {% endif %}
                         {% endfor %}
                       {% endif %}
                       {% if document.reviewed_works %}

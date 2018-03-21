@@ -8,7 +8,6 @@ from django import forms
 
 from ..models import Article
 from ..models import ArticleAbstract
-from ..models import ArticleSectionTitle
 from ..models import Issue
 from ..models import IssueTheme
 from ..models import IssueContributor
@@ -173,17 +172,6 @@ class ArticleAbstractInline(admin.TabularInline):
     model = ArticleAbstract
 
 
-class ArticleSectionTitleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'level', )
-    list_display_links = ('id', 'title', )
-    raw_id_fields = ('article', )
-
-
-class ArticleSectionTitleInline(admin.TabularInline):
-    extra = 0
-    model = ArticleSectionTitle
-
-
 class ArticleExternalStatusFilter(admin.SimpleListFilter):
     title = "Lien Externe"
     parameter_name = 'external_status'
@@ -309,7 +297,6 @@ admin.site.register(Issue, IssueAdmin)
 admin.site.register(IssueTheme, IssueThemeAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleAbstract, ArticleAbstractAdmin)
-admin.site.register(ArticleSectionTitle, ArticleSectionTitleAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.unregister(JournalType)
 admin.site.register(JournalType, JournalTypeAdmin)

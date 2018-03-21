@@ -7,6 +7,7 @@ from eruditarticle.utils import remove_xml_namespaces
 
 
 Author = namedtuple('Author', 'firstname lastname othername')
+SectionTitle = namedtuple('SectionTitle', 'level paral title')
 
 
 class EruditArticleTweaker:
@@ -32,6 +33,23 @@ class EruditArticleTweaker:
 
     def set_author(self, firstname='', lastname='', othername=''):
         self.set_authors([Author(firstname, lastname, othername)])
+
+    def set_section_titles(self, titles):
+        grtitre = self.root.find('.//grtitre')
+        REPLACE_ELEMS = {
+            'surtitre', 'surtitreparal', 'surtitre2', 'surtitreparal2', 'surtitre3',
+            'surtitreparal3'}
+        for name in REPLACE_ELEMS:
+            elem = grtitre.find(name)
+            if elem is not None:
+                grtitre.remove(elem)
+        for title in titles:
+            name = 'surtitreparal' if title.paral else 'surtitre'
+            if title.level > 1:
+                name += str(title.level)
+            elem = etree.Element(name)
+            elem.text = title.title
+            grtitre.append(elem)
 
     def tostring(self):
         return etree.tostring(self.root)
