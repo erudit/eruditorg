@@ -347,9 +347,7 @@ class EruditDocumentSolrFilter:
         # Trigger the execution of the query in order to get a list of results from the Solr index.
         results = solr_query.get_results(
             sort=self.get_solr_sorting(request), rows=page_size, start=start)
-        # Determines the localidentifiers of the documents in order to filter the queryset and the
-        # total number of documents.
-        localidentifiers = [r for r in results.docs]
+
         stats = ResultsStats(results.hits, page, page_size)
 
         # Prepares the dictionnary containing aggregation results.
@@ -358,7 +356,7 @@ class EruditDocumentSolrFilter:
             fdict = {flist[i]: flist[i + 1] for i in range(0, len(flist), 2)}
             aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
 
-        return stats, localidentifiers, aggregations_dict
+        return stats, results.docs, aggregations_dict
 
     def _filter_solr_multiple(self, sqs, field, values, safe=False):
         query = Q()
