@@ -795,10 +795,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name=_("Publication autorisée par le titulaire du droit d'auteur"), default=True)
     """ Defines if the article can be published on the Érudit platform accrding to the copyright holders """  # noqa
 
-    copyrights = models.ManyToManyField(
-        Copyright, related_name=_('articles'), verbose_name=_("Droits d'auteurs"))
-    """ The copyrights of the article """
-
     objects = PolymorphicManager()
     internal_objects = InternalArticleManager()
 

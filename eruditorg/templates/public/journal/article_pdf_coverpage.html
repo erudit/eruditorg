@@ -273,7 +273,7 @@
           {% endblocktrans %}
           </div>
           <div id="journal_copyright">
-          {% for copyright in article.copyrights.all %}
+          {% for copyright in article.erudit_object.droitsauteur %}
             <p>{{ copyright.text|safe }}</p>
           {% endfor %}
           </div>
