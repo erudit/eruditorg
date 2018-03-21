@@ -239,6 +239,9 @@ class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, Templat
         todelete = []
         qs = self.get_queryset()
         for index, (email, ) in enumerate(csvreader):
+            # Spreadsheet apps exporting one column to CSV sometimes append a delimiter at the
+            # end of the line. Ignore it so we can parse the email correctly.
+            email = email.rstrip(';')
             try:
                 validator(email)
             except ValidationError:
