@@ -7,7 +7,6 @@ from django.utils.translation import gettext as _
 from django import forms
 
 from ..models import Article
-from ..models import ArticleAbstract
 from ..models import Issue
 from ..models import IssueTheme
 from ..models import IssueContributor
@@ -161,17 +160,6 @@ class IssueAdmin(admin.ModelAdmin):
     view_issue_on_site.short_description = _("Voir le numéro sur le site")
 
 
-class ArticleAbstractAdmin(admin.ModelAdmin):
-    list_display = ('id', '__str__', 'language', )
-    list_display_links = ('id', '__str__', )
-    raw_id_fields = ('article', )
-
-
-class ArticleAbstractInline(admin.TabularInline):
-    extra = 0
-    model = ArticleAbstract
-
-
 class ArticleExternalStatusFilter(admin.SimpleListFilter):
     title = "Lien Externe"
     parameter_name = 'external_status'
@@ -296,7 +284,6 @@ admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
 admin.site.register(IssueTheme, IssueThemeAdmin)
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(ArticleAbstract, ArticleAbstractAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.unregister(JournalType)
 admin.site.register(JournalType, JournalTypeAdmin)

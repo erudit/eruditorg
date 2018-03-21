@@ -854,11 +854,11 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     @property
     def abstract(self):
         """ Returns an abstract that can be used with the current language. """
-        abstracts = self.abstracts.values('text', 'language')
+        abstracts = self.erudit_object.abstracts
         lang = get_language()
-        _abstracts = list(filter(lambda r: r['language'] == lang, abstracts))
-        _abstract_lang = _abstracts[0]['text'] if len(_abstracts) else None
-        _abstract = abstracts[0]['text'] if len(abstracts) else None
+        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
+        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
+        _abstract = abstracts[0]['content'] if len(abstracts) else None
         return _abstract_lang or _abstract
 
     @property
@@ -894,21 +894,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     def section_title_3_paral(self):
         section_titles = self.erudit_object.get_section_titles(level=3)
         return section_titles['paral'].values()
-
-
-class ArticleAbstract(models.Model):
-    """ Represents an abstract associated with an article. """
-
-    article = models.ForeignKey(Article, related_name='abstracts', verbose_name=_('Article'))
-    text = models.TextField(verbose_name=_('Résumé'))
-    language = models.CharField(max_length=10, verbose_name=_('Code langue'))
-
-    class Meta:
-        verbose_name = _("Résumé d'article")
-        verbose_name_plural = _("Résumés d'articles")
-
-    def __str__(self):
-        return '{} / {}'.format(str(self.article), self.language)
 
 
 class JournalInformation(models.Model):

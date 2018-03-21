@@ -91,5 +91,4 @@ class LatestJournalArticlesFeed(Feed):
                 item.localidentifier])
 
     def items(self, obj):
-        return Article.objects.prefetch_related('abstracts').filter(issue_id=self.last_issue) \
-            .order_by('ordseq')
+        return Article.objects.filter(issue_id=self.last_issue).order_by('ordseq')

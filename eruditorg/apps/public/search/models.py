@@ -86,10 +86,10 @@ class Generic:
         return _("(Sans titre)")
 
 
-# These models below are temporary shims that we implement with the same API as the old serializers
-# but we instantiate them on the "other side" of the REST API. We do this to ease the transition.
-# otherwise, we would have to change the search result template at the same time as we strip the
-# django rest framework.
+# These models below are wrappers around their corresponding models in `erudit.models`. For thesis,
+# it's mostly noise that's present for legacy reasons, but for articles, this wrapper allows us to
+# properly fall back to solr data when we're in the presence of an out-of-fedora article while still
+# output the search result as an article transparently in the template.
 
 
 class Article(Generic):
@@ -158,7 +158,10 @@ class Article(Generic):
 
     @property
     def abstract(self):
-        return self.obj.abstract
+        if self.obj.is_in_fedora:
+            return self.obj.abstract
+        else:
+            return ''
 
     @property
     def collection(self):

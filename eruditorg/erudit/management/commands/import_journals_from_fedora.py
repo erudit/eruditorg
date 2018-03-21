@@ -21,7 +21,6 @@ from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
 from ...models import Affiliation
 from ...models import Article
-from ...models import ArticleAbstract
 from ...models import Author
 from ...models import Collection
 from ...models import Copyright
@@ -803,17 +802,7 @@ class Command(BaseCommand):
 
             article.authors.add(author)
 
-        # STEP 2: imports the abstracts associated with the article
-        # --
-
-        article.abstracts.all().delete()
-        for abstract_dict in article_erudit_object.abstracts:
-            abstract = ArticleAbstract(article=article)
-            abstract.text = abstract_dict.get('content')
-            abstract.language = abstract_dict.get('lang')
-            abstract.save()
-
-        # STEP 3: imports the article's keywords
+        # STEP 2: imports the article's keywords
         # --
 
         article.keywords.clear()
@@ -835,7 +824,7 @@ class Command(BaseCommand):
                     tag.save()
                 article.keywords.add(tag)
 
-        # STEP 4: imports article's copyrights
+        # STEP 3: imports article's copyrights
         # --
 
         article.copyrights.clear()
@@ -848,7 +837,7 @@ class Command(BaseCommand):
             copyright, _ = Copyright.objects.get_or_create(text=copyright_text, url=copyright_url)
             article.copyrights.add(copyright)
 
-        # STEP 5: eventually test the XSLT transformation of the article
+        # STEP 4: eventually test the XSLT transformation of the article
         # --
 
         if self.test_xslt:
