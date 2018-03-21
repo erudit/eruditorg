@@ -14,6 +14,7 @@ def fake_get_results(**kwargs):
     results = unittest.mock.Mock()
     results.docs = []
     results.facets = {'facet_fields': {'Corpus_fac': ['val1', 12, 'val2', 14, ], }}
+    results.hits = 0
     return results
 
 

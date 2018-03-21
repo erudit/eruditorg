@@ -19,7 +19,7 @@ from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .models import get_model_instance
-from .pagination import get_pagination_info
+from .pagination import PaginationOutOfBoundsExeception
 from .saved_searches import SavedSearchList
 from .utils import get_search_elements
 
@@ -148,10 +148,11 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         # Applies the search engine filter backend in order to get a list of filtered
         # EruditDocument localidentifiers, a dictionnary contening the result of aggregations
         # that should be embedded in the final response object and a number of hits.
-        stats, documents, aggregations_dict = filters.SolrFilter() \
-            .filter(self.request)
 
-        if not stats.is_within_bounds():
+        try:
+            pagination_info, documents, aggregations_dict = filters.SolrFilter() \
+                .filter(self.request)
+        except PaginationOutOfBoundsExeception:
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
 
         # This is a specific case in order to remove some sub-strings from the localidentifiers
@@ -162,7 +163,6 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         for document in documents:
             document['ID'] = reduce(lambda s, k: s.replace(k, ''), drop_keywords, document['ID'])
 
-        pagination_info = get_pagination_info(stats, self.request)
         documents = list(map(get_model_instance, documents))
         results = {
             'pagination': pagination_info,

@@ -3,38 +3,7 @@ from core.solrq.query import Q
 from . import solr_search
 from .conf import settings as search_settings
 from .utils import positive_int
-
-
-class ResultsStats:
-    def __init__(self, count, page, page_size):
-        self.count = count
-        self.page = page
-        self.page_size = page_size
-
-    @property
-    def page_count(self):
-        page_count = self.count // self.page_size
-        if self.count > page_count * self.page_size:
-            page_count += 1
-        return page_count
-
-    def next_page(self):
-        if self.page >= self.page_count:
-            return None
-        else:
-            return self.page + 1
-
-    def prev_page(self):
-        if self.page == 1:
-            return None
-        else:
-            return self.page - 1
-
-    def is_within_bounds(self):
-        if self.page == 1:
-            # page 1 is *always* within bounds, even when page_count == 0
-            return True
-        return 1 <= self.page <= self.page_count
+from .pagination import get_pagination_info, ResultsStats
 
 
 class SolrFilter:
@@ -350,13 +319,15 @@ class SolrFilter:
 
         stats = ResultsStats(results.hits, page, page_size)
 
+        pagination_info = get_pagination_info(stats, request)
+
         # Prepares the dictionnary containing aggregation results.
         aggregations_dict = {}
         for facet, flist in results.facets.get('facet_fields', {}).items():
             fdict = {flist[i]: flist[i + 1] for i in range(0, len(flist), 2)}
             aggregations_dict.update({self.aggregation_correspondence[facet]: fdict})
 
-        return stats, results.docs, aggregations_dict
+        return pagination_info, results.docs, aggregations_dict
 
     def _filter_solr_multiple(self, sqs, field, values, safe=False):
         query = Q()
