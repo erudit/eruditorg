@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, get_language
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
@@ -261,7 +261,13 @@ class Article(Generic):
 
     @property
     def keywords(self):
-        return [keyword.name for keyword in self.obj.keywords.all()]
+        if self.is_in_fedora:
+            lang = get_language()
+            keyword_sets = self.obj.erudit_object.get_keywords()
+            for keyword_set in keyword_sets:
+                if keyword_set['lang'] == lang:
+                    return keyword_set['keywords']
+        return []
 
 
 class Thesis(Generic):

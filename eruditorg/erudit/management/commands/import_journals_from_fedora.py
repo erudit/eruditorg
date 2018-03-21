@@ -5,8 +5,6 @@ import urllib.parse
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from django.db.models import Q
-from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_str
 from eruditarticle.objects import EruditArticle
 from eruditarticle.utils import remove_xml_namespaces
@@ -28,7 +26,6 @@ from ...models import Issue
 from ...models import IssueTheme
 from ...models import IssueContributor
 from ...models import Journal
-from ...models import KeywordTag
 
 logger = structlog.getLogger(__name__)
 
@@ -764,9 +761,6 @@ class Command(BaseCommand):
         article.clean()
         article.save()
 
-        # STEP 1: creates or updates the authors of the article
-        # --
-
         article.authors.clear()
         for author_xml in article_erudit_object.findall('liminaire//grauteur//auteur'):
             firstname_xml = author_xml.find('.//nompers/prenom')
@@ -801,31 +795,6 @@ class Command(BaseCommand):
                 author.affiliations.add(affiliation)
 
             article.authors.add(author)
-
-        # STEP 2: imports the article's keywords
-        # --
-
-        article.keywords.clear()
-        for keywords_dict in article_erudit_object.keywords:
-            lang = keywords_dict.get('lang')
-            for kword in keywords_dict.get('keywords', []):
-                if not kword:
-                    continue
-
-                try:
-                    tag = KeywordTag.objects.filter(
-                        Q(slug=slugify(kword)[:100]) | Q(name=kword[:100])).first()
-                    assert tag is not None
-                except AssertionError:
-                    tag = KeywordTag.objects.create(
-                        name=kword, slug=slugify(kword)[:100], language=lang)
-                else:
-                    tag.language = lang
-                    tag.save()
-                article.keywords.add(tag)
-
-        # STEP 3: eventually test the XSLT transformation of the article
-        # --
 
         if self.test_xslt:
             try:
