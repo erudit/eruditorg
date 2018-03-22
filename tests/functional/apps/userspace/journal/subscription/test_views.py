@@ -32,6 +32,7 @@ pytestmark = pytest.mark.django_db
 
 # Helpers
 
+
 def journal_that_can_subscribe():
     # Return a (Journal, User) that has a proper subscription plan and proper authorisations.
     # This pair is ready to use in subscription views.
@@ -89,6 +90,7 @@ def test_list_cannot_be_accessed_by_a_non_member():
 
     assert response.status_code == 403
 
+
 def test_list_provides_only_subscriptions_associated_with_the_current_journal():
     user = UserFactory.create()
     journal = JournalFactory.create(members=[user])
@@ -113,6 +115,7 @@ def test_list_provides_only_subscriptions_associated_with_the_current_journal():
 
     assert response.status_code == 200
     assert list(response.context['subscriptions']) == [subscription_1, ]
+
 
 def test_list_archive_years(monkeypatch, tmpdir):
     # The subscription list view lists available years for subscription exports.
@@ -184,16 +187,16 @@ class TestIndividualJournalAccessSubscriptionCreateView(BaseEruditTestCase):
         self.assertEqual(stoken.last_name, post_data['last_name'])
 
     def test_cannot_allow_the_creation_of_subscription_if_the_plan_limit_has_been_reached(self):
-        subscription = JournalManagementSubscriptionFactory.create(journal=self.journal, plan__max_accounts=3)
+        subscription = JournalManagementSubscriptionFactory.create(
+            journal=self.journal, plan__max_accounts=3)
 
-        JournalAccessSubscriptionFactory.create(user=self.user, journal_management_subscription=subscription)
+        JournalAccessSubscriptionFactory.create(
+            user=self.user, journal_management_subscription=subscription)
         token_1 = AccountActionTokenFactory.create(content_object=subscription)
         AccountActionTokenFactory.create(content_object=subscription)  # noqa
 
-
         IndividualSubscriptionAction().execute(token_1)
         token_1.consume(self.user)
-
 
         Authorization.authorize_user(
             self.user, self.journal, AC.can_manage_individual_subscription)
@@ -302,6 +305,7 @@ class TestIndividualJournalAccessSubscriptionCancelView(BaseEruditTestCase):
 
 # Batch subscribe
 
+
 def hit_batch_subscribe_with_csv_and_test(
         user, journal, csvlines, expected_toadd, expected_ignored, expected_errors):
     fp = io.BytesIO('\n'.join(csvlines).encode())
@@ -314,6 +318,7 @@ def hit_batch_subscribe_with_csv_and_test(
     assert response.context['toadd'] == expected_toadd
     assert response.context['ignored'] == expected_ignored
     assert response.context['errors'] == expected_errors
+
 
 def test_batch_subscribe_csv_validation_ignored():
     # We ignore emails that are already subscribed
@@ -341,6 +346,7 @@ def test_batch_subscribe_csv_validation_toadd_and_ignored():
         user, journal, lines, [('other@example.com', 'Other', 'Name')],
         ['foo@example.com'], [])
 
+
 def test_batch_subscribe_csv_validation_errors():
     journal, user = journal_that_can_subscribe()
     lines = [
@@ -349,6 +355,7 @@ def test_batch_subscribe_csv_validation_errors():
         'notanemail;foo;bar']
     hit_batch_subscribe_with_csv_and_test(
         user, journal, lines, [], [], [(2, lines[1]), (3, lines[2])])
+
 
 def test_batch_subscribe_over_limit():
     # When submitting a CSV that has too many lines (go over the plan's limit), we do nothing and
@@ -367,6 +374,7 @@ def test_batch_subscribe_over_limit():
     response = client.post(url, {'csvfile': fp}, follow=True)
     assert len(response.context['messages']) == 1
 
+
 def test_batch_subscribe_proceed():
     journal, user = journal_that_can_subscribe()
     lines = [
@@ -382,6 +390,7 @@ def test_batch_subscribe_proceed():
 
 # Batch delete
 
+
 def hit_batch_delete_with_csv_and_test(
         user, journal, csvlines, expected_todelete, expected_ignored, expected_errors):
     fp = io.BytesIO('\n'.join(csvlines).encode())
@@ -395,12 +404,14 @@ def hit_batch_delete_with_csv_and_test(
     assert response.context['ignored'] == expected_ignored
     assert response.context['errors'] == expected_errors
 
+
 def test_batch_delete_csv_validation_ignored():
     # We ignore emails that aren't subscribed
     journal, user = journal_that_can_subscribe()
     lines = ['foo@example.com']
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [], lines, [])
+
 
 def test_batch_delete_csv_validation_todelete():
     journal, user = journal_that_can_subscribe()
@@ -410,6 +421,7 @@ def test_batch_delete_csv_validation_todelete():
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [sub], [], [])
 
+
 def test_batch_delete_csv_validation_todelete_and_ignored():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
@@ -418,6 +430,7 @@ def test_batch_delete_csv_validation_todelete_and_ignored():
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [sub], ['other@example.com'], [])
 
+
 def test_batch_delete_csv_validation_errors():
     journal, user = journal_that_can_subscribe()
     foouser = UserFactory.create(email='foo@example.com')
@@ -425,6 +438,17 @@ def test_batch_delete_csv_validation_errors():
     lines = ['foo@example.com', 'other@example.com', 'notanemail']
     hit_batch_delete_with_csv_and_test(
         user, journal, lines, [], [], [(3, 'notanemail')])
+
+
+def test_batch_delete_ignore_trailing_delimiter():
+    # The input being a CSV, it's possible that it contains a trailing delimiter. If it does,
+    # ignore it and properly parse addresses.
+    # We ignore emails that aren't subscribed
+    journal, user = journal_that_can_subscribe()
+    lines = ['foo@example.com;', '"bar@example.com";']
+    hit_batch_delete_with_csv_and_test(
+        user, journal, lines, [], ['foo@example.com', 'bar@example.com'], [])
+
 
 def test_batch_delete_proceed():
     journal, user = journal_that_can_subscribe()
@@ -437,6 +461,7 @@ def test_batch_delete_proceed():
 
     assert response.status_code == 200
     assert not JournalAccessSubscription.objects.exists()
+
 
 def test_subscription_live_report_contents(monkeypatch):
     # Asking for current year returns live results from Victor
