@@ -180,7 +180,7 @@ class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, Temp
         management_subscription = JournalManagementSubscription.objects.get(
             journal=self.current_journal)
         slots_left = management_subscription.slots_left
-        toadd = request.POST.getlist('toadd[]')
+        toadd = request.POST.getlist('toadd')
         if toadd:
             toadd = toadd[:slots_left]
             for line in toadd:
@@ -256,7 +256,7 @@ class JournalIndividualSubscriptionBatchDelete(JournalSubscriptionMixin, Templat
         return todelete, ignored, errors
 
     def post(self, request, *args, **kwargs):
-        todelete = request.POST.getlist('todelete[]')
+        todelete = request.POST.getlist('todelete')
         if todelete:
             qs = self.get_queryset().filter(pk__in=todelete)
             deleted_count = qs.count()
