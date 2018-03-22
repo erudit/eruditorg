@@ -2,6 +2,8 @@ import os
 import pytest
 import pysolr
 
+from django.core.cache import cache
+
 from base.viewmixins import FedoraServiceRequiredMixin, SolrServiceRequiredMixin
 from eruditarticle.objects.article import EruditArticle
 from eruditarticle.objects.publication import EruditPublication
@@ -10,6 +12,12 @@ from erudit.test.fedora import FakeAPI
 from erudit.test.solr import FakeSolrClient
 import erudit.fedora.repository
 import erudit.fedora.modelmixins
+
+
+@pytest.fixture(autouse=True)
+def clear_cache():
+    # We don't want cache from tests to pollute each others
+    cache.clear()
 
 
 @pytest.fixture(autouse=True)

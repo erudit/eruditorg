@@ -542,6 +542,12 @@ class BaseArticleDetailView(
         # return 4 randomly
         context['related_articles'] = related_articles.order_by('?')[:4]
 
+        # don't cache anything when the issue is unpublished. That means that we're still working
+        # on it and we want to see fresh renderings every time.
+        # we also never want to cache ephemeral articles (id = None)
+        shouldcache = obj.issue.is_published and obj.id
+        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
+
         return context
 
     @method_decorator(ensure_csrf_cookie)

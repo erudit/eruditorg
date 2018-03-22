@@ -7,6 +7,7 @@ import itertools
 from hashlib import md5
 
 from django.contrib.auth.models import AnonymousUser
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
@@ -646,6 +647,21 @@ class TestArticleDetailView:
         response = Client().get(url)
         assert response.status_code == 302
         assert response.url == 'http://example.com'
+
+    def test_dont_cache_articles_of_unpublished_issues(self):
+        issue = IssueFactory.create(is_published=False)
+        article = ArticleFactory.create(issue=issue, doi='thiswillendupinhtml')
+        url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
+        response = Client().get(url)
+        assert response.status_code == 200
+        assert b'thiswillendupinhtml' in response.content
+
+        article.doi = 'thiswillreplaceoldinhtml'
+        article.save()
+        response = Client().get(url)
+        assert response.status_code == 200
+        assert b'thiswillendupinhtml' not in response.content
+        assert b'thiswillreplaceoldinhtml' in response.content
 
 
 @override_settings(DEBUG=True)

@@ -15,7 +15,7 @@
 
 {% block structured_data %}
 {{ block.super }}
-{% cache FOREVER_TTL "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
 <script type="application/ld+json">
@@ -105,7 +105,7 @@
     {% endif %}
   </div>
 
-  {% cache FOREVER_TTL "public_article_detail_content" article.id content_access_granted in_citation_list LANGUAGE_CODE %}
+  {% cache cache_timeout "public_article_detail_content" article.id content_access_granted in_citation_list LANGUAGE_CODE %}
   {# XSL transformation article render #}
   {{ view.render_xml_contents }}
   {% endcache %}
@@ -113,7 +113,7 @@
 
 {{ block.super }}
 
-{% cache FOREVER_TTL "public_article_detail_citation" article.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_article_detail_citation" article.id LANGUAGE_CODE %}
 <div class="hidden">
   {% include "public/journal/partials/article_citation_modal_content.html" %}
 </div>
