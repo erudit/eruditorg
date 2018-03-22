@@ -83,10 +83,6 @@ class Command(BaseCommand):
             help='Python path to a function to test the XSLT transformation of articles')
 
         parser.add_argument(
-            '--make-published', action='store_true', dest='make_published', default=False,
-            help='Determines if the issues should be considered published (default: false)')
-
-        parser.add_argument(
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
         parser.add_argument(
@@ -102,7 +98,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.test_xslt = options.get('test_xslt', None)
-        self.make_published = options.get('make_published', False)
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
         self.journal_precendence_relations = []
@@ -514,13 +509,10 @@ class Command(BaseCommand):
         try:
             issue = Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
-            # TODO check diffusion / prediffusion
             issue = Issue()
             issue.localidentifier = issue_localidentifier
             issue.journal = journal
             issue.fedora_created = fedora_issue.created
-            if self.make_published:
-                issue.is_published = True
 
         summary_tree = remove_xml_namespaces(
             et.fromstring(fedora_issue.summary.content.serialize()))
@@ -540,6 +532,7 @@ class Command(BaseCommand):
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
         issue.fedora_updated = fedora_issue.modified
+        issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
         issue.save()
         issue.contributors.all().delete()
 
