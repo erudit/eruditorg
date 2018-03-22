@@ -1,4 +1,4 @@
-import mock
+from unittest import mock
 from erudit.test.factories import IssueFactory
 import pytest
 
