@@ -38,10 +38,7 @@ from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 
-from .core import Collection
-from .core import Copyright
-from .core import EruditDocument
-from .core import Publisher
+from .core import Collection, Copyright, EruditDocument, Publisher, Author, Affiliation
 
 
 class JournalType(models.Model):
@@ -815,6 +812,65 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     def get_formatted_authors(self, style=None):
         return self.erudit_object.get_authors(formatted=True, style=style)
+
+    def sync_with_erudit_object(self, erudit_object=None, ephemeral=False):
+        # ephemeral: our Article instance is a short lived instance. Don't save after sync and
+        # don't bother syncing authors (they're only there for author index pages which don't index
+        # ephemeral articles).
+        if erudit_object is None:
+            erudit_object = self.erudit_object
+
+        processing = erudit_object.processing
+        processing_mapping = {
+            'minimal': self.PROCESSING_MINIMAL,
+            '': self.PROCESSING_MINIMAL,
+            'complet': self.PROCESSING_FULL,
+        }
+        try:
+            self.processing = processing_mapping[processing]
+        except KeyError:
+            raise ValueError(
+                'Unable to determine the processing type of the article '
+                'with PID {0}'.format(self.pid))
+
+        self.type = erudit_object.article_type
+        self.ordseq = int(erudit_object.ordseq)
+        self.doi = erudit_object.doi
+        self.first_page = erudit_object.first_page
+        self.last_page = erudit_object.last_page
+        self.language = erudit_object.language
+
+        if ephemeral:
+            return
+
+        self.clean()
+        self.save()
+
+        self.authors.clear()
+        for author in erudit_object.get_authors():
+            firstname = author.firstname
+            lastname = author.lastname
+            suffix = author.suffix
+            organization = author.organization
+            affiliations = author.affiliations
+
+            author_query_kwargs = {
+                'firstname': firstname, 'lastname': lastname, 'othername': organization}
+
+            author = Author.objects.filter(**author_query_kwargs).first()
+            if author is None:
+                author = Author(**author_query_kwargs)
+            author.suffix = suffix
+            author.save()
+
+            author.affiliations.clear()
+            for aff in affiliations:
+                if not aff:
+                    continue
+                affiliation, _ = Affiliation.objects.get_or_create(name=aff)
+                author.affiliations.add(affiliation)
+
+            self.authors.add(author)
 
     @property
     def title(self):
