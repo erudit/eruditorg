@@ -2,6 +2,7 @@ import re
 from contextlib import contextmanager
 
 from eulfedora.api import ApiFacade
+from eulfedora.util import RequestFailed
 
 from .domchange import EruditArticleDomChanger
 
@@ -81,8 +82,10 @@ FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 
 class FakeResponse:
     def __init__(self, content, path):
+        self.status_code = 200 if content else 404
         self.content = content
         self.url = FakeAPI.BASE_URL + path
+        self.text = ""
 
 
 class FakeAPI(ApiFacade):
@@ -97,9 +100,21 @@ class FakeAPI(ApiFacade):
 
     def get_article_xml(self, pid):
         if pid in self._article_content_map:
-            return self._article_content_map[pid]
-        with open('./tests/fixtures/article/009255ar.xml', 'rb') as xml:
-            return xml.read()
+            content = self._article_content_map[pid]
+            if content:
+                return content
+            else:
+                # default fixture
+                with open('./tests/fixtures/article/009255ar.xml', 'rb') as xml:
+                    return xml.read()
+        else:
+            return None
+
+    def register_article(self, pid):
+        # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
+        # but for when you don't really care about the contents.
+        if pid not in self._article_content_map:
+            self._article_content_map[pid] = None
 
     def set_article_xml(self, pid, xml):
         if isinstance(xml, str):
@@ -108,6 +123,8 @@ class FakeAPI(ApiFacade):
 
     @contextmanager
     def open_article(self, pid):
+        # we implicitly register a pid that we tweak
+        self.register_article(pid)
         xml = self.get_article_xml(pid)
         dom_wrapper = EruditArticleDomChanger(xml)
         yield dom_wrapper
@@ -121,18 +138,27 @@ class FakeAPI(ApiFacade):
             pid, datastream, subselection = m.groups()
             prefix, subpid = pid.split(':')
             pidelems = subpid.split('.')
-            if not datastream:
-                # we're asking for the object profile
-                result = FAKE_FEDORA_PROFILE.format(
-                    pid=pid, full_url=self.BASE_URL + url
-                ).encode()
-            elif len(pidelems) == 4:  # article
-                if not subselection:  # we want a datastream list
+            if len(pidelems) == 4:  # article
+                article_xml = self.get_article_xml(pid)
+                if not article_xml:
+                    # return empty response
+                    result = b''
+                elif not datastream:
+                    # we're asking for the object profile
+                    result = FAKE_FEDORA_PROFILE.format(
+                        pid=pid, full_url=self.BASE_URL + url
+                    ).encode()
+                elif not subselection:  # we want a datastream list
                     result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/ERUDITXSD300/content':
-                    result = self.get_article_xml(pid)
+                    result = self.get_article_xml(pid) or b''
             elif len(pidelems) == 3:  # issue
-                if not subselection:  # we want a datastream list
+                if not datastream:
+                    # we're asking for the object profile
+                    result = FAKE_FEDORA_PROFILE.format(
+                        pid=pid, full_url=self.BASE_URL + url
+                    ).encode()
+                elif not subselection:  # we want a datastream list
                     result = FAKE_ISSUE_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/SUMMARY/content':
                     with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
@@ -141,12 +167,22 @@ class FakeAPI(ApiFacade):
                     with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
                         result = xml.read()
             elif len(pidelems) == 2:  # journal
-                if not subselection:  # we want a datastream list
+                if not datastream:
+                    # we're asking for the object profile
+                    result = FAKE_FEDORA_PROFILE.format(
+                        pid=pid, full_url=self.BASE_URL + url
+                    ).encode()
+                elif not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/PUBLICATIONS/content':
                     with open('./tests/fixtures/journal/mi115.xml', 'rb') as xml:
                         result = xml.read()
         if result is not None:
-            return FakeResponse(result, url)
+            response = FakeResponse(result, url)
+            if response.status_code == 200:
+                return response
+            else:
+                response.text = pid
+                raise RequestFailed(response)
         else:
             raise ValueError("unsupported URL for fake fedora API: {}".format(url))

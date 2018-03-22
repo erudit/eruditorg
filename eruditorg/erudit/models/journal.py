@@ -813,6 +813,15 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     def get_formatted_authors(self, style=None):
         return self.erudit_object.get_authors(formatted=True, style=style)
 
+    def get_formatted_authors_mla(self):
+        return self.get_formatted_authors(style='mla')
+
+    def get_formatted_authors_apa(self):
+        return self.get_formatted_authors(style='apa')
+
+    def get_formatted_authors_chicago(self):
+        return self.get_formatted_authors(style='chicago')
+
     def sync_with_erudit_object(self, erudit_object=None, ephemeral=False):
         # ephemeral: our Article instance is a short lived instance. Don't save after sync and
         # don't bother syncing authors (they're only there for author index pages which don't index

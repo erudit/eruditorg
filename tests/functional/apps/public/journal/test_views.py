@@ -599,7 +599,6 @@ class TestIssueDetailView:
         assert articles == [a2, a1]
 
 
-@pytest.mark.django_db
 class TestArticleDetailView:
     @override_settings(CACHES=settings.NO_CACHES)
     def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
@@ -641,8 +640,8 @@ class TestArticleDetailView:
         # ref #1651
         issue = IssueFactory.create(
             date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(issue=issue, localidentifier='articleid',
-            external_url='http://example.com')
+        article = ArticleFactory.create(
+            issue=issue, localidentifier='articleid', external_url='http://example.com')
         url = article_detail_url(article)
         response = Client().get(url)
         assert response.status_code == 302
@@ -662,6 +661,20 @@ class TestArticleDetailView:
         assert response.status_code == 200
         assert b'thiswillendupinhtml' not in response.content
         assert b'thiswillreplaceoldinhtml' in response.content
+
+    def test_allow_ephemeral_articles(self):
+        # When receiving a request for an article that doesn't exist in the DB, try querying fedora
+        # for the requested PID before declaring a failure.
+        issue = IssueFactory.create()
+        article_localidentifier = 'foo'
+        repository.api.register_article(
+            '{}.{}'.format(issue.get_full_identifier(), article_localidentifier)
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
+            'issue_localid': issue.localidentifier, 'localid': article_localidentifier})
+        response = Client().get(url)
+        assert response.status_code == 200
 
 
 @override_settings(DEBUG=True)
@@ -1010,7 +1023,6 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         response = self.client.get(journal_url)
         redirect_url = response.url
         assert self.FALLBACK_URL in redirect_url
-
 
     def test_legacy_url_for_nonexistent_issues_redirect_to_fallback_website(self, issue_url):
         response = self.client.get(issue_url)

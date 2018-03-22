@@ -506,7 +506,24 @@ class BaseArticleDetailView(
     def get_object(self, queryset=None, allow_external=False):
         if allow_external:
             queryset = Article.objects
-        return super().get_object(queryset=queryset)
+
+        try:
+            return super().get_object(queryset=queryset)
+        except Http404:
+            if not allow_external:
+                if Article.objects.filter(localidentifier=self.kwargs['localid']).exists():
+                    # we don't want to return an ephemeral article if we have an existing external
+                    # object. raise the 404 so that the external redirect system kick in.
+                    raise
+            issue = get_object_or_404(Issue, localidentifier=self.kwargs['issue_localid'])
+            article = Article()
+            article.issue = issue
+            article.localidentifier = self.kwargs['localid']
+            if article.is_in_fedora:
+                article.sync_with_erudit_object(ephemeral=True)
+                return article
+            else:
+                raise
 
     def get_context_data(self, **kwargs):
 
@@ -522,7 +539,10 @@ class BaseArticleDetailView(
         # Pick the previous article and the next article
         try:
             sorted_articles = list(related_articles)
-            obj_index = sorted_articles.index(obj)
+            if obj in sorted_articles:
+                obj_index = sorted_articles.index(obj)
+            else:
+                obj_index = len(sorted_articles)
             previous_article = sorted_articles[obj_index - 1] if obj_index > 0 else None
             next_article = sorted_articles[obj_index + 1] if obj_index + 1 < len(sorted_articles) \
                 else None
@@ -534,9 +554,6 @@ class BaseArticleDetailView(
             context['previous_article'] = previous_article
             context['next_article'] = next_article
 
-        keywords = self.object.keywords.all()
-        keywords_grouped = groupby(keywords, lambda k: k.language)
-        context['keywords_dict'] = {k[0]: list(k[1]) for k in keywords_grouped}
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
         # return 4 randomly
