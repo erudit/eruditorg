@@ -193,7 +193,6 @@
     }
 
     li {
-      padding-right: 2.5em;
       margin: 1em 0;
       padding-top: 0.75em;
       @include grid-cell-border('top', 1px, $mid-grey);
@@ -224,8 +223,9 @@
     }
 
     .logo {
-      max-width: 50%;
       height: auto;
+      margin-top: 1em;
+      padding-right: 50%;
     }
 
     .issue-cover {
@@ -346,12 +346,32 @@
 * Row alignment for different viewport sizes / responsive
 **/
 
+@media (max-width: $screen-xs-max) {
+
+  .new-journals li {
+
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
   .latest-issues li,
   .news--article {
 
     &:nth-child(2n+1) {
+      clear: both;
+    }
+
+  }
+
+  .new-journals li {
+
+    &:nth-child(3n+1) {
       clear: both;
     }
 
@@ -364,6 +384,14 @@
   .latest-issues li {
 
     &:nth-child(4n+1) {
+      clear: both;
+    }
+
+  }
+
+  .new-journals li {
+
+    &:nth-child(6n+1) {
       clear: both;
     }
 
