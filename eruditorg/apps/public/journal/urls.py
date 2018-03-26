@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import feeds
 from . import views
+from . import views_compat
 
 
 urlpatterns = [
@@ -37,6 +38,7 @@ urlpatterns = [
         url(_(r'^premierepage\.pdf$'), views.ArticleRawPdfFirstPageView.as_view(), name='article_raw_pdf_firstpage'),  # noqa
     ])),
     url(_(r'^revues/(?P<journal_code>[\w-]+)/(?P<issue_slug>[\w-]*)-(?P<issue_localid>[\w-]+)/(?P<localid>[\w-]+)'), include([  # noqa
+        url(r'^.html$', views_compat.ArticleDetailRedirectView.as_view()),
         url(_(r'.xml'),  # noqa
             views.ArticleXmlView.as_view(), name="article_raw_xml"),
         url(_(r'.pdf'),  # noqa
