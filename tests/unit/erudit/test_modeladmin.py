@@ -1,4 +1,4 @@
-import mock
+from unittest import mock
 from erudit.admin import IssueAdmin
 from erudit.models import Issue
 from erudit.test import BaseEruditTestCase
