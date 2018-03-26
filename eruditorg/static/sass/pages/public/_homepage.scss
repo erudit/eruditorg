@@ -25,14 +25,6 @@
 
   }
 
-  .main-section {
-
-    &:hover, &:focus, &:active {
-      color: #000;
-    }
-
-  }
-
   #site-header {
     background: none;
     border: none;
@@ -77,16 +69,16 @@
 
   }
 
-  .glory {
+  .explore {
     padding: 50px 0;
 
-    .glory--header {
+    header {
       margin-bottom: 30px;
     }
 
-    .glory--search,
-    .glory--publication-types,
-    .glory--disciplines {
+    .subsection-search,
+    .subsection-publicationtypes,
+    .subsection-disciplines {
       @include grid-cell-border('top', 1px, $mid-grey);
       padding-top: 20px;
       padding-bottom: 20px;
@@ -101,7 +93,7 @@
       }
     }
 
-    .glory--search {
+    .subsection-search {
       margin-top: 0;
       .form-group {
         padding-left: 0;
@@ -138,7 +130,7 @@
         color: #FFF;
       }
     }
-    .glory--publication-types {
+    .subsection-publicationtypes {
       ol {
         counter-reset: a 0;
         list-style: none;
@@ -172,7 +164,7 @@
         }
       }
     }
-    .glory--disciplines {
+    .subsection-disciplines {
       margin-bottom: 0;
       p {
         font-size: 18px;
@@ -194,64 +186,59 @@
     margin-top: 2em;
   }
 
-  .latest-issues {
-    list-style: none;
+  .new-journals, .latest-issues {
 
-    .latest-issues--article {
+    ul {
+      list-style: none;
+    }
+
+    li {
+      padding-right: 2.5em;
       margin: 1em 0;
       padding-top: 0.75em;
       @include grid-cell-border('top', 1px, $mid-grey);
-
-      h4 {
-
-        span + span {
-          color: $dark-grey;
-        }
-
-      }
 
       img {
         width: 100%;
         margin-bottom: 10px;
       }
 
-      .category-tag {
-        font-size: 10px;
+    }
 
-        .journal-type {
-          color: $dark-grey;
-        }
+    h3 {
+      font-size: 16px;
+    }
 
-      }
+    h4 {
 
-      .latest-issues--article--cover {
-        width: auto;
-      }
-
-      .latest-issues--article--logo {
-        max-width: 50%;
-        height: auto;
-      }
-
-      .latest-issues--article--journal-title {
-        font-size: 16px;
-      }
-
-      .latest-issues--article--theme,
-      .latest-issues--article--volume {
-        font-size: 14px;
-        display: block;
-      }
-
-      .latest-issues--article--theme {
-        margin-bottom: 0.5em;
-      }
-
-      .latest-issues--article--volume {
-        text-transform: capitalize;
+      span + span {
+        color: $dark-grey;
       }
 
     }
+
+    p {
+      font-size: 12px;
+      margin-bottom: 0.5em;
+      color: $dark-grey;
+    }
+
+    .logo {
+      max-width: 50%;
+      height: auto;
+    }
+
+    .issue-cover {
+      width: auto;
+    }
+
+    .issue-theme,
+    .issue-volume {
+      font-size: 14px;
+      display: block;
+      line-height: 1.25;
+    }
+
   }
 
   .news {
@@ -361,7 +348,7 @@
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
-  .latest-issues--article,
+  .latest-issues li,
   .news--article {
 
     &:nth-child(2n+1) {
@@ -374,7 +361,7 @@
 
 @media (min-width: $screen-md-min) {
 
-  .latest-issues--article {
+  .latest-issues li {
 
     &:nth-child(4n+1) {
       clear: both;
