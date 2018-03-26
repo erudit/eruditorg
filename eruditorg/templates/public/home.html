@@ -53,18 +53,18 @@
   </section>
 
   <!-- SEARCH PUBLICATIONS -->
-  <section class="glory">
+  <section class="glory explore">
     <div class="container">
       <div class="row">
-        <header class="col-xs-12 col-md-10 col-lg-8 glory--header">
-          <h3 class="glory--header--title">
+        <header class="col-xs-12 col-md-10 col-lg-8">
+          <h3>
             {% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}
           </h3>
         </header>
       </div>
       <div class="row">
         <!-- BASIC SEARCH -->
-        <div class="col-xs-12 col-sm-6 col-md-4 glory--search">
+        <section class="col-xs-12 col-sm-6 col-md-4 subsection-search">
           <form action="{% url 'public:search:results' %}" id="id-search" method="get">
             <div class="form-group">
               <label for="basic-search" class="h3">{% trans "Recherche" %}</label>
@@ -80,17 +80,9 @@
             </div>
             <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
           </form>
-          <div class="glory--new-journals">
-            <h4>{% trans 'Nouvelles revues' %}</h4>
-            <ul class="unstyled">
-              {% for journal in new_journals %}
-              <li><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter' %} {{ journal.name }}">{{ journal.name }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
+        </section>
         <!-- PUBLICATION TYPES -->
-        <div class="col-xs-12 col-sm-6 col-md-4 glory--publication-types">
+        <section class="col-xs-12 col-sm-6 col-md-4 subsection-publicationtypes">
           <ol>
             <li class="glory--publication-types--item">
               <h3><a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a></h3>
@@ -105,32 +97,59 @@
               <h3><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a></h3>
             </li>
           </ol>
-        </div>
+        </section>
         <!-- DISCIPLINES -->
-        <div class="col-xs-12 col-md-4 glory--disciplines">
+        <section class="col-xs-12 col-md-4 subsection-disciplines">
           <h3>{{ disciplines|length }} {% trans "disciplines" %}</h3>
           <p>{{ disciplines|slice:":10"|join:", "|lower }}&hellip;<br /><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% trans "Voir toutes les disciplines" %}</a></p>
-        </div>
+        </section>
       </div>
     </div>
   </section>
 
+  <!-- NEW JOURNALS -->
+  {% if new_journals %}
+  <section class="container new-journals">
+    <hr class="section-separator">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>{% trans 'Nouvelles revues' %}</h2>
+      </div>
+    </div>
+    <ul class="row">
+      {% for journal in new_journals %}
+      <li class="col-xs-6 col-sm-4 col-md-2">
+        <p>{{ journal.disciplines.all|join:", " }} ({{ journal.type|lower }})</p>
+        <h3>
+          <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter' %} {{ journal.name }}">
+            {{ journal.name }}
+          </a>
+        </h3>
+        <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.name }}">
+          <img src="{% url 'public:journal:journal_logo' journal.code %}" class="img-responsive logo" alt="{% blocktrans with journal_name=journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
   <!-- LATEST ISSUES -->
   {% if latest_issues %}
-  <section class="container">
+  <section class="container latest-issues">
     <hr class="section-separator">
     <div class="row">
       <div class="col-xs-12">
         <h2>{% trans "Derniers numéros" %}</h2>
       </div>
     </div>
-    <ul class="row latest-issues">
+    <ul class="row">
       {% for issue in latest_issues %}
-      <li class="col-xs-12 col-sm-6 col-md-3 latest-issues--article">
+      <li class="col-xs-12 col-sm-6 col-md-3">
           <div class="row">
             <div class="col-xs-4 col-sm-12">
-              <p class="category-tag"><span class="journal-type">{{ issue.journal.type }}</span> <br>{{ issue.journal.disciplines.all|join:", " }}</p>
-              <h3 class="latest-issues--article--journal-title">
+              <p>{{ issue.journal.disciplines.all|join:", " }} ({{ issue.journal.type|lower }})</p>
+              <h3>
                 <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
                   {{ issue.journal.name }}
                 </a>
@@ -139,17 +158,17 @@
             <div class="col-xs-8 col-sm-12">
               {% if issue.has_coverpage %}
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive latest-issues--article--cover issue-cover">
+                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive issue-cover">
               </a>
               {% else %}
               <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive latest-issues--article--logo" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
+                <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive logo" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
               </a>
               {% endif %}
               <h4>
                 <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                  {% if issue.title %}<span class="latest-issues--article--theme">{{ issue.title }}</span>{% endif %}
-                  {% if issue.volume_title %}<span class="latest-issues--article--volume">{{ issue.volume_title }}</span>{% endif %}
+                  {% if issue.title %}<span class="issue-theme">{{ issue.title }}</span>{% endif %}
+                  {% if issue.volume_title %}<span class="issue-volume">{{ issue.volume_title }}</span>{% endif %}
                 </a>
               </h4>
             </div>
