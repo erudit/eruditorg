@@ -182,11 +182,11 @@
                 </ul>
               </li>
               {% endif %}
-              <li class="about dropdown">
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="main-section" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <span class="ion-ios-arrow-down caret"></span></a>
+              <li class="nav-about dropdown">
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="select main-section" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <span class="ion-ios-arrow-down caret"></span></a>
                 <ul class="hidden-xs hidden-sm">
                   <li>
-                    <a href="https://apropos.erudit.org/" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
+                    <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
                   </li>
                   <li>
                     <a href="https://www.coalition-publi.ca/{% if LANGUAGE_CODE == 'fr' %}le-projet{% endif %}" target="_blank" title="{% trans 'À propos de la Coalition Publi.ca' %}">{% trans "Coalition Publi.ca" %}</a>
@@ -195,10 +195,16 @@
                     <a href="https://co-shs.ca/" target="_blank" title="{% trans 'À propos du projet CO.SHS' %}">{% trans "CO.SHS" %}</a>
                   </li>
                   <li>
+                    <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans 'Jamais trop érudit' %}</a>
+                  </li>
+                  <li>
                     <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% trans 'À propos de nos partenariats' %}">{% trans "Partenariat" %}</a>
                   </li>
                   <li>
-                    <a href="https://salons.erudit.org/" target="_blank" title="{% trans 'Consulter Salons' %}">{% trans "Salons" %}</a>
+                    <a href="https://www.erudit.org/rapport/2017/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter le rapport annuel' %}">{% trans "Rapport annuel" %}</a>
+                  </li>
+                  <li>
+                    <a href="https://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter Salons' %}">{% trans "Salons" %}</a>
                   </li>
                 </ul>
               </li>
@@ -375,19 +381,22 @@
               <div class="col-md-6">
                 <ul class="unstyled footer-nav--help">
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://apropos.erudit.org/" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
+                    <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
                   </li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
                     <a href="https://www.coalition-publi.ca/{% if LANGUAGE_CODE == 'fr' %}le-projet{% endif %}" target="_blank" title="{% trans 'À propos de la Coalition Publi.ca' %}">{% trans "Coalition Publi.ca" %}</a>
                   </li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://co-shs.ca/" target="_blank" title="{% trans 'À propos du projet CO.SHS' %}">{% trans "CO.SHS" %}</a>
+                    <a href="https://co-shs.ca/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos du projet CO.SHS' %}">{% trans "CO.SHS" %}</a>
                   </li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
                     <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% trans 'À propos de nos partenariats' %}">{% trans "Partenariat" %}</a>
                   </li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
-                    <a href="https://salons.erudit.org/" target="_blank" title="{% trans 'Consulter Salons' %}">{% trans "Salons" %}</a>
+                    <a href="https://www.erudit.org/rapport/2017/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter le rapport annuel' %}">{% trans "Rapport annuel" %}</a>
+                  </li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
+                    <a href="https://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter Salons' %}">{% trans "Salons" %}</a>
                   </li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}>
                     <a href="http://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="campaign-link">{% trans 'Jamais trop érudit' %}</a>
