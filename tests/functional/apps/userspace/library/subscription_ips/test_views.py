@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
-
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
@@ -24,12 +22,7 @@ class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
         self.user.is_staff = True
         self.user.save()
         self.organisation.members.add(self.user)
-        self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+        self.subscription = JournalAccessSubscriptionFactory.create(valid=True, organisation=self.organisation)
 
     def test_cannot_be_accessed_by_a_user_who_is_not_in_the_organisation(self):
         # Setup
@@ -74,12 +67,7 @@ class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
         super(TestInstitutionIPAddressRangeCreateView, self).setUp()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
-        self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+        self.subscription = JournalAccessSubscriptionFactory.create(valid=True, organisation=self.organisation)
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_subscriptions_ips(self):
         # Setup
@@ -123,12 +111,8 @@ class TestInstitutionIPAddressRangeDeleteView(BaseEruditTestCase):
         super(TestInstitutionIPAddressRangeDeleteView, self).setUp()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
-        self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
-        now_dt = dt.datetime.now()
-        JournalAccessSubscriptionPeriodFactory.create(
-            subscription=self.subscription,
-            start=now_dt - dt.timedelta(days=10),
-            end=now_dt + dt.timedelta(days=8))
+        self.subscription = JournalAccessSubscriptionFactory.create(valid=True, organisation=self.organisation)
+
         self.ip_range = InstitutionIPAddressRangeFactory.create(
             subscription=self.subscription, ip_start='10.0.0.0', ip_end='11.0.0.0')
 
