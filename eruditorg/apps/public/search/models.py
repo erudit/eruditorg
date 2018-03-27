@@ -135,18 +135,15 @@ class Article(Generic):
 
     @property
     def authors_mla(self):
-        # TODO: call with style arg after liberuditarticle update
-        return self.authors
+        return self.obj.get_formatted_authors(style='mla')
 
     @property
     def authors_apa(self):
-        # TODO: call with style arg after liberuditarticle update
-        return self.authors
+        return self.obj.get_formatted_authors(style='apa')
 
     @property
     def authors_chicago(self):
-        # TODO: call with style arg after liberuditarticle update
-        return self.authors
+        return self.obj.get_formatted_authors(style='chicago')
 
     @property
     def type(self):

@@ -802,8 +802,8 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
 
-    def get_formatted_authors(self):
-        return self.erudit_object.get_authors(formatted=True)
+    def get_formatted_authors(self, style=None):
+        return self.erudit_object.get_authors(formatted=True, style=style)
 
     @property
     def title(self):
