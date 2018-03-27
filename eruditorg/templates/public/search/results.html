@@ -166,7 +166,7 @@
                 {# We use both 'id' and 'localidentifier' because some documents have no localidentifier, some have no id, but all have either #}
                 {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.id document.localidentifier LANGUAGE_CODE %}
                 {% if document.document_type == 'article' %}
-                {% url 'public:journal:article_detail' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier as article_url %}
+                {% url 'public:journal:article_detail' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier as article_url %}
                 {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
                 {% endif %}
                 <div class="header">
