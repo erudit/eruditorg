@@ -108,18 +108,18 @@
       {% cache LONG_TTL "public_journal_authors" journal.id letter article_type LANGUAGE_CODE %}
       {% for author_dict in authors_dicts %}
         <li class="author-group">
-          <h3 class="author-name">{{ author_dict.author.full_name }}</h3>
+          <h3 class="author-name">{{ author_dict.name }}</h3>
           <ul class="author-articles">
-            {% for article_author in author_dict.articles %}
-            {% cache FOREVER_TTL "public_journal_authors_item" journal.id article_author.article.id author.id LANGUAGE_CODE %}
+            {% for article in author_dict.articles %}
+            {% cache FOREVER_TTL "public_journal_authors_item" journal.id article.id author.id LANGUAGE_CODE %}
               <li class="author-article">
                 {% spaceless %}
-                <span class="article-year">{{ article_author.article.issue.year }}</span> —
-                {% if article_author.contributors %}
-                  {{ article_author.contributors|join_author_list }},
+                <span class="article-year">{{ article.year }}</span> —
+                {% if article.contributors %}
+                  {{ article.contributors|join_author_list }},
                 {% endif %}
-                <a href="{% if article_author.article.external_url %}{{ article_author.article.external_url }}{% else %}{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article_author.article.issue.volume_slug issue_localid=article_author.article.issue.localidentifier localid=article_author.article.localidentifier %}{% endif %}">
-                  {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article_author.article.title }}</span>{% trans '&nbsp;&raquo;' %}
+                <a href="{{ article.url }}">
+                  {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article.title }}</span>{% trans '&nbsp;&raquo;' %}
                 </a>
                 {% endspaceless %}
               </li>

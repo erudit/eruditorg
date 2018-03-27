@@ -384,7 +384,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         self.assertEqual(response.status_code, 200)
         authors_dicts = response.context['authors_dicts']
         assert len(authors_dicts) == 1
-        assert authors_dicts[0]['author'] == author_1
+        assert authors_dicts[0]['name'] == author_1.full_name
 
     def test_can_provide_contributors_of_article(self):
         issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
@@ -408,7 +408,7 @@ class TestJournalAuthorsListView(BaseEruditTestCase):
         contributors = authors_dicts[0]['articles'][0]['contributors']
 
         assert len(contributors) == 1
-        assert contributors[0].pk == author_2.pk
+        assert contributors[0] == str(author_2)
 
     def test_dont_show_unpublished_articles(self):
         issue1 = IssueFactory.create(is_published=False)

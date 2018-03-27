@@ -299,13 +299,28 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
             for author in article.authors.all():
                 if author in authors:
                     if author.id not in authors_dicts:
-                        authors_dicts[author.id] = {'author': author, 'articles': []}
-                    authors_dicts[author.id]['articles'].append({
-                        'article': article,
-                        'contributors': article.authors.exclude(pk=author.pk)
-                    })
-            context['authors_dicts'] = sorted(
-                list(authors_dicts.values()), key=lambda a: a['author'].full_name)
+                        authors_dicts[author.id] = {'name': author.full_name, 'articles': []}
+                    if article.external_url:
+                        article_url = article.external_url
+                    else:
+                        article_url = reverse(
+                            'public:journal:article_detail', kwargs={
+                                'journal_code': self.journal.code,
+                                'issue_slug': article.issue.volume_slug,
+                                'issue_localid': article.issue.localidentifier,
+                                'localid': article.localidentifier})
+
+                    article_dict = {
+                        'id': article.localidentifier,
+                        'year': article.issue.year,
+                        'url': article_url,
+                        'title': article.title,
+                        'contributors': [
+                            str(a) for a in article.authors.exclude(pk=author.pk).all()],
+                    }
+                    authors_dicts[author.id]['articles'].append(article_dict)
+        context['authors_dicts'] = sorted(
+            list(authors_dicts.values()), key=lambda a: a['name'])
         context['journal'] = self.journal
         context['letter'] = self.letter
         context['article_type'] = self.article_type
