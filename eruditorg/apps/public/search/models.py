@@ -14,7 +14,7 @@ from . import solr_search
 class Generic:
     def __init__(self, solr_data):
         self.localidentifier = solr_data['ID']
-        self.corpus = solr_data['Corpus_fac']
+        self.corpus = solr_data.get('Corpus_fac')
         self.solr_data = solr_data
 
     @staticmethod
@@ -59,8 +59,12 @@ class Generic:
         return self.solr_data.get('Fonds_fac')
 
     @property
+    def authors_list(self):
+        return self.solr_data.get('AuteurNP_fac', [])
+
+    @property
     def authors(self):
-        return person_list(self.solr_data.get('AuteurNP_fac'))
+        return person_list(self.authors_list)
 
     @property
     def volume(self):

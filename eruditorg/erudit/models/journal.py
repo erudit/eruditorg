@@ -290,6 +290,13 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         elif self.is_cultural():
             return self.localidentifier
 
+    @property
+    def solr_code(self):
+        result = self.legacy_code
+        if result == 'cd1':  # exception: Cahier de droit's ID in solr is "cd", not "cd1"
+            result = 'cd'
+        return result
+
     # Issues-related methods and properties
     # --
 

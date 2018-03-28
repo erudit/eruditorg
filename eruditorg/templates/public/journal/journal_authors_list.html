@@ -1,6 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n %}
-{% load cache %}
 {% load public_journal_tags %}
 
 {% block title %}{% trans "Index des auteurs" %} – {{ journal.name|safe }}{% endblock title %}
@@ -105,13 +104,11 @@
     </nav>
     <ul class="authors">
       <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
-      {% cache LONG_TTL "public_journal_authors" journal.id letter article_type LANGUAGE_CODE %}
-      {% for author_dict in authors_dicts %}
+      {% for author, articles in authors_dicts.items %}
         <li class="author-group">
-          <h3 class="author-name">{{ author_dict.name }}</h3>
+          <h3 class="author-name">{{ author }}</h3>
           <ul class="author-articles">
-            {% for article in author_dict.articles %}
-            {% cache FOREVER_TTL "public_journal_authors_item" journal.id article.id author.id LANGUAGE_CODE %}
+            {% for article in articles %}
               <li class="author-article">
                 {% spaceless %}
                 <span class="article-year">{{ article.year }}</span> —
@@ -123,12 +120,10 @@
                 </a>
                 {% endspaceless %}
               </li>
-            {% endcache %}
             {% endfor %}
           </ul>
         </li>
       {% endfor %}
-      {% endcache %}
     </ul>
   </div>
 </main>

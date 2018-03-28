@@ -1,3 +1,3 @@
-# -*- coding: utf-8 -*-
+import os.path as op
 
-from .testcases import *  # noqa
+FIXTURE_ROOT = op.join(op.dirname(__file__), 'fixtures')
