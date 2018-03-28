@@ -261,7 +261,10 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
     def get_base_queryset(self):
         """ Returns the base queryset that will be used to retrieve the authors. """
 
-        base_query = Q(lastname__isnull=False, article__issue__journal__id=self.journal.id)
+        base_query = Q(
+            lastname__isnull=False,
+            article__issue__journal__id=self.journal.id,
+            article__issue__is_published=True)
 
         if self.article_type:
             base_query &= Q(article__type=self.article_type)
@@ -304,7 +307,10 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(JournalAuthorsListView, self).get_context_data(**kwargs)
         authors = context.get(self.context_object_name)
-        articles = Article.objects.filter(issue__journal_id=self.journal.id, authors__in=authors) \
+        articles = Article.objects.filter(
+            issue__journal_id=self.journal.id,
+            issue__is_published=True,
+            authors__in=authors) \
             .select_related('issue', 'issue__journal') \
             .prefetch_related('authors').distinct()
 
