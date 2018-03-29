@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, get_language
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
@@ -13,60 +13,137 @@ class Generic:
     def __init__(self, solr_data):
         self.localidentifier = solr_data['ID']
         self.corpus = solr_data['Corpus_fac']
-        self.document_type = {
+        self.solr_data = solr_data
+
+    def can_cite(self):
+        return False
+
+    @property
+    def document_type(self):
+        return {
             'Dépot': 'report',
             'Livres': 'book',
             'Actes': 'book',
             'Rapport': 'report',
         }.get(self.corpus, 'generic')
-        self.year = solr_data['Annee'][0] if 'Annee' in solr_data else None
-        self.publication_date = solr_data.get('AnneePublication')
-        self.issn = solr_data.get('ISSN')
-        self.collection = solr_data.get('Fonds_fac')
-        self.authors = person_list(solr_data.get('AuteurNP_fac'))
-        self.volume = solr_data.get('Volume')
-        collection_title = solr_data.get('TitreCollection_fac')
+
+    @property
+    def year(self):
+        return self.solr_data['Annee'][0] if 'Annee' in self.solr_data else None
+
+    @property
+    def publication_date(self):
+        return self.solr_data.get('AnneePublication')
+
+    @property
+    def issn(self):
+        return self.solr_data.get('ISSN')
+
+    @property
+    def collection(self):
+        return self.solr_data.get('Fonds_fac')
+
+    @property
+    def authors(self):
+        return person_list(self.solr_data.get('AuteurNP_fac'))
+
+    @property
+    def volume(self):
+        return self.solr_data.get('Volume')
+
+    @property
+    def series(self):
+        collection_title = self.solr_data.get('TitreCollection_fac')
         if collection_title:
-            self.series = collection_title[0]
+            return collection_title[0]
         else:
-            self.series = None
-        self.url = solr_data['URLDocument'][0] if 'URLDocument' in solr_data else None
-        self.numero = solr_data.get('Numero')
-        if not {'PremierePage', 'DernierePage'}.issubset(set(solr_data.keys())):
-            self.pages = None
+            return None
+
+    @property
+    def url(self):
+        return self.solr_data['URLDocument'][0] if 'URLDocument' in self.solr_data else None
+
+    @property
+    def numero(self):
+        return self.solr_data.get('Numero')
+
+    @property
+    def pages(self):
+        if not {'PremierePage', 'DernierePage'}.issubset(set(self.solr_data.keys())):
+            return None
         else:
-            self.pages = _('Pages {firstpage}-{lastpage}'.format(
-                firstpage=solr_data['PremierePage'],
-                lastpage=solr_data['DernierePage']
+            return _('Pages {firstpage}-{lastpage}'.format(
+                firstpage=self.solr_data['PremierePage'],
+                lastpage=self.solr_data['DernierePage']
             ))
+
+    @property
+    def title(self):
         TITLE_ATTRS = ['Titre_fr', 'Titre_en', 'TitreRefBiblio_aff']
-        self.title = _("(Sans titre)")
         for attrname in TITLE_ATTRS:
-            if attrname in solr_data:
-                self.title = solr_data[attrname]
-                break
+            if attrname in self.solr_data:
+                return self.solr_data[attrname]
+        return _("(Sans titre)")
 
 
-# These models below are temporary shims that we implement with the same API as the old serializers
-# but we instantiate them on the "other side" of the REST API. We do this to ease the transition.
-# otherwise, we would have to change the search result template at the same time as we strip the
-# django rest framework.
+# These models below are wrappers around their corresponding models in `erudit.models`. For thesis,
+# it's mostly noise that's present for legacy reasons, but for articles, this wrapper allows us to
+# properly fall back to solr data when we're in the presence of an out-of-fedora article while still
+# output the search result as an article transparently in the template.
 
 
-class Article:
-    document_type = 'article'
-
-    def __init__(self, localidentifier):
-        self.localidentifier = localidentifier
-        self.obj = erudit_models.Article.objects.get(localidentifier=localidentifier)
+class Article(Generic):
+    def __init__(self, solr_data):
+        super().__init__(solr_data)
+        self.obj = erudit_models.Article.objects.get(localidentifier=self.localidentifier)
         self.id = self.obj.id
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
 
+    def can_cite(self):
+        # We cannot cite articles we don't have in fedora. ref #1491
+        return self.obj.is_in_fedora
+
+    def cite_url(self, type):
+        return reverse('public:journal:article_citation_{}'.format(type), kwargs={
+            'journal_code': self.obj.issue.journal.code,
+            'issue_slug': self.obj.issue.volume_slug,
+            'issue_localid': self.obj.issue.localidentifier,
+            'localid': self.localidentifier,
+        })
+
+    def cite_enw_url(self):
+        return self.cite_url('enw')
+
+    def cite_bib_url(self):
+        return self.cite_url('bib')
+
+    def cite_ris_url(self):
+        return self.cite_url('ris')
+
+    @property
+    def document_type(self):
+        return 'article'
+
     @property
     def authors(self):
-        return self.obj.get_formatted_authors()
+        if self.obj.is_in_fedora:
+            return self.obj.get_formatted_authors()
+        else:
+            return super().authors
+
+    @property
+    def authors_mla(self):
+        return self.obj.get_formatted_authors(style='mla')
+
+    @property
+    def authors_apa(self):
+        return self.obj.get_formatted_authors(style='apa')
+
+    @property
+    def authors_chicago(self):
+        return self.obj.get_formatted_authors(style='chicago')
 
     @property
     def type(self):
@@ -75,18 +152,30 @@ class Article:
         return _('Article')
 
     @property
-    def paral_titles(self):
-        paral_titles = self.obj.titles.filter(paral=True)
-        return list(t.title for t in paral_titles)
+    def title(self):
+        if self.obj.is_in_fedora:
+            return self.obj.title
+        else:
+            return super().title
 
     @property
-    def paral_subtitles(self):
-        paral_subtitles = self.obj.subtitles.filter(paral=True)
-        return list(t.title for t in paral_subtitles)
+    def paral_titles(self):
+        if self.obj.is_in_fedora:
+            titles = self.obj.erudit_object.get_titles()
+            # NOTE: 'equivalent' is supposed to be for parallel titles that aren't in an officially
+            # supported language, but the old "django import" method also imported equivalent
+            # titles, so to stay in line with the old behavior, we keep 'equivalent' in. But we
+            # might want to change that.
+            return titles['paral'] + titles['equivalent']
+        else:
+            return []
 
     @property
     def abstract(self):
-        return self.obj.abstract
+        if self.obj.is_in_fedora:
+            return self.obj.abstract
+        else:
+            return ''
 
     @property
     def collection(self):
@@ -96,10 +185,6 @@ class Article:
     def reviewed_works(self):
         if self.obj.fedora_object and self.obj.fedora_object.exists:
             return self.obj.erudit_object.get_reviewed_works()
-
-    @property
-    def journal_code(self):
-        return self.obj.issue.journal.code
 
     @property
     def series(self):
@@ -134,10 +219,6 @@ class Article:
         ))
 
     @property
-    def issue_localidentifier(self):
-        return self.obj.issue.localidentifier
-
-    @property
     def issue_title(self):
         return self.obj.issue.name_with_themes
 
@@ -152,10 +233,6 @@ class Article:
     @property
     def issue_published(self):
         return self.obj.issue.publication_period or self.obj.issue.year
-
-    @property
-    def issue_volume_slug(self):
-        return self.obj.issue.volume_slug
 
     @property
     def pdf_url(self):
@@ -181,19 +258,45 @@ class Article:
 
     @property
     def keywords(self):
-        return [keyword.name for keyword in self.obj.keywords.all()]
+        if self.is_in_fedora:
+            lang = get_language()
+            keyword_sets = self.obj.erudit_object.get_keywords()
+            for keyword_set in keyword_sets:
+                if keyword_set['lang'] == lang:
+                    return keyword_set['keywords']
+        return []
 
 
-class Thesis:
-    document_type = 'thesis'
-
-    def __init__(self, localidentifier):
-        self.localidentifier = localidentifier
-        self.obj = erudit_models.Thesis.objects.get(localidentifier=localidentifier)
+class Thesis(Generic):
+    def __init__(self, solr_data):
+        super().__init__(solr_data)
+        self.obj = erudit_models.Thesis.objects.get(localidentifier=self.localidentifier)
         self.id = self.obj.id
 
     def __getattr__(self, name):
         return getattr(self.obj, name)
+
+    def can_cite(self):
+        return True
+
+    def cite_url(self, type):
+        return reverse('public:thesis:thesis_citation_{}'.format(type), args=[
+            self.collection,
+            self.id,
+        ])
+
+    def cite_enw_url(self):
+        return self.cite_url('enw')
+
+    def cite_bib_url(self):
+        return self.cite_url('bib')
+
+    def cite_ris_url(self):
+        return self.cite_url('ris')
+
+    @property
+    def document_type(self):
+        return 'thesis'
 
     @property
     def authors(self):
@@ -227,15 +330,14 @@ def get_model_instance(solr_data):
         'Culturel': 'article',
         'Thèses': 'thesis',
     }.get(corpus, 'generic')
-    localidentifier = solr_data['ID']
     if doctype == 'thesis':
         try:
-            return Thesis(localidentifier)
+            return Thesis(solr_data)
         except ObjectDoesNotExist:
             pass
     elif doctype == 'article':
         try:
-            return Article(localidentifier)
+            return Article(solr_data)
         except ObjectDoesNotExist:
             pass
 

@@ -42,8 +42,6 @@ from .core import Copyright
 from .core import EruditDocument
 from .core import Publisher
 
-from .utils import person_list
-
 
 class JournalType(models.Model):
     """ The type of a Journal instance. """
@@ -757,14 +755,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
     """ The last page of the article """
 
-    formatted_title = models.CharField(max_length=1000, null=True, blank=True)
-
-    surtitle = models.CharField(max_length=600, null=True, blank=True)
-    """ The surtitle of the article """
-
-    html_title = models.CharField(max_length=800, null=True, blank=True)
-    """ The title of the article (HTML) """
-
     language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
     """ The language code of the article """
 
@@ -805,10 +795,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name=_("Publication autorisée par le titulaire du droit d'auteur"), default=True)
     """ Defines if the article can be published on the Érudit platform accrding to the copyright holders """  # noqa
 
-    copyrights = models.ManyToManyField(
-        Copyright, related_name=_('articles'), verbose_name=_("Droits d'auteurs"))
-    """ The copyrights of the article """
-
     objects = PolymorphicManager()
     internal_objects = InternalArticleManager()
 
@@ -816,38 +802,16 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
 
-    def get_formatted_authors(self):
-        authors = None
-        if self.is_in_fedora:
-            authors = self.erudit_object.get_authors(formatted=True)
-        else:
-            authors = person_list(
-                [str(a) for a in self.authors.all()]
-            )
-        return authors
+    def get_formatted_authors(self, style=None):
+        return self.erudit_object.get_authors(formatted=True, style=style)
 
     @property
     def title(self):
-        if self.formatted_title:
-            return self.formatted_title
-
-        if self.is_in_fedora:
-            return self.erudit_object.get_formatted_title()
-        # TODO: remove ArticleTitle when all formated_title are imported
-        else:
-            title = self.titles.filter(paral=False).first()
-            return str(title.title) if title else None
+        return self.erudit_object.get_formatted_title()
 
     @property
     def html_title(self):
-        if self.is_in_fedora:
-            return self.erudit_object.get_formatted_html_title()
-        return self.title
-
-    @cached_property
-    def subtitle(self):
-        title = self.subtitles.filter(paral=False).first()
-        return str(title) if title else None
+        return self.erudit_object.get_formatted_html_title()
 
     def __str__(self):
         if self.title:
@@ -886,39 +850,27 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     @property
     def abstract(self):
         """ Returns an abstract that can be used with the current language. """
-        abstracts = self.abstracts.values('text', 'language')
+        abstracts = self.erudit_object.abstracts
         lang = get_language()
-        _abstracts = list(filter(lambda r: r['language'] == lang, abstracts))
-        _abstract_lang = _abstracts[0]['text'] if len(_abstracts) else None
-        _abstract = abstracts[0]['text'] if len(abstracts) else None
+        _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
+        _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
+        _abstract = abstracts[0]['content'] if len(abstracts) else None
         return _abstract_lang or _abstract
 
     @property
     def section_title_1(self):
-        if self.is_in_fedora:
-            section_titles = self.erudit_object.get_section_titles(level=1)
-            return section_titles['main'] if section_titles else None
-        else:
-            title = next(filter(lambda s: s.level == 1 and not s.paral, self._section_titles), None)
-            return title.title if title else None
+        section_titles = self.erudit_object.get_section_titles(level=1)
+        return section_titles['main'] if section_titles else None
 
     @property
     def section_title_1_paral(self):
-        if self.is_in_fedora:
-            section_titles = self.erudit_object.get_section_titles(level=1)
-            return section_titles['paral'].values() if section_titles else None
-        else:
-            title = next(filter(lambda s: s.level == 1 and s.paral, self._section_titles), None)
-            return title.title if title else []
+        section_titles = self.erudit_object.get_section_titles(level=1)
+        return section_titles['paral'].values() if section_titles else None
 
     @property
     def section_title_2(self):
-        if self.is_in_fedora:
-            section_titles = self.erudit_object.get_section_titles(level=2)
-            return section_titles['main'] if section_titles else None
-        else:
-            title = next(filter(lambda s: s.level == 2 and not s.paral, self._section_titles), None)
-            return title.title if title else None
+        section_titles = self.erudit_object.get_section_titles(level=2)
+        return section_titles['main'] if section_titles else None
 
     @property
     def section_title_2_paral(self):
@@ -931,100 +883,13 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def section_title_3(self):
-        if self.is_in_fedora:
-            section_titles = self.erudit_object.get_section_titles(level=3)
-            return section_titles['main'] if section_titles else None
-        else:
-            title = next(filter(lambda s: s.level == 3 and not s.paral, self._section_titles), None)
-            return title.title if title else None
+        section_titles = self.erudit_object.get_section_titles(level=3)
+        return section_titles['main'] if section_titles else None
 
     @property
     def section_title_3_paral(self):
-        if self.is_in_fedora:
-            section_titles = self.erudit_object.get_section_titles(level=3)
-            return section_titles['paral'].values()
-        else:
-            title = next(filter(lambda s: s.level == 3 and s.paral, self._section_titles), None)
-            return title.title if title else []
-
-    @property
-    def _section_titles(self):
-        return list(self.section_titles.all())
-
-
-class ArticleAbstract(models.Model):
-    """ Represents an abstract associated with an article. """
-
-    article = models.ForeignKey(Article, related_name='abstracts', verbose_name=_('Article'))
-    text = models.TextField(verbose_name=_('Résumé'))
-    language = models.CharField(max_length=10, verbose_name=_('Code langue'))
-
-    class Meta:
-        verbose_name = _("Résumé d'article")
-        verbose_name_plural = _("Résumés d'articles")
-
-    def __str__(self):
-        return '{} / {}'.format(str(self.article), self.language)
-
-
-class ArticleTitleMixin(models.Model):
-    """ Represents the title of an article """
-
-    title = models.CharField(max_length=600, verbose_name=_('Titre'), blank=True, null=True)
-    language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
-    paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
-
-    def __lt__(self, other):
-        if isinstance(other, ArticleTitleMixin):
-            return self.title < other.title
-        elif isinstance(other, str):
-            return self.title < other
-        raise NotImplemented
-
-    def __gt__(self, other):
-        return not self < other
-
-    def __str__(self):
-        if self.title:
-            return self.title
-        return _('Aucun titre')
-
-    class Meta:
-        abstract = True
-
-
-class ArticleTitle(ArticleTitleMixin):
-    """ The title of an article """
-    article = models.ForeignKey(Article, related_name='titles', verbose_name=_('Article'))
-
-    class Meta:
-        verbose_name = _("Titre d'article")
-        verbose_name_plural = _("Titres d'articles")
-
-
-class ArticleSubtitle(ArticleTitleMixin):
-    """ The subtitle of an article """
-    article = models.ForeignKey(Article, related_name='subtitles', verbose_name=_('Article'))
-
-    class Meta:
-        verbose_name = _("Sous-titre d'article")
-        verbose_name_plural = _("Sous-titres d'articles")
-
-
-class ArticleSectionTitle(models.Model):
-    """ Represents a section title associated with an article. """
-
-    article = models.ForeignKey(Article, related_name='section_titles', verbose_name=_('Article'))
-    title = models.CharField(max_length=600, verbose_name=_('Titre'))
-    level = models.PositiveIntegerField(verbose_name=_('Niveau du titre section'))
-    paral = models.BooleanField(default=False, verbose_name=_('Titre parallèle'))
-
-    class Meta:
-        verbose_name = _("Titre de section d'article")
-        verbose_name_plural = _("Titres de sections d'articles")
-
-    def __str__(self):
-        return self.title[:50]
+        section_titles = self.erudit_object.get_section_titles(level=3)
+        return section_titles['paral'].values()
 
 
 class JournalInformation(models.Model):

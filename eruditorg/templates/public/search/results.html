@@ -166,16 +166,14 @@
                 {# We use both 'id' and 'localidentifier' because some documents have no localidentifier, some have no id, but all have either #}
                 {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.id document.localidentifier LANGUAGE_CODE %}
                 {% if document.document_type == 'article' %}
-                {% url 'public:journal:article_detail' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier as article_url %}
+                {% url 'public:journal:article_detail' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier as article_url %}
                 {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
                 {% endif %}
                 <div class="header">
                   {# authors #}
-                  {% if document.authors or document.author %}
                   <p class="authors">
                     {{ document.authors }}
                   </p>
-                  {% endif %}
                   {# title #}
                   <h3>
                     <a href="
@@ -197,12 +195,10 @@
                       {% endif %}
                       {% if document.paral_titles %}
                         {% for paral_title in document.paral_titles %}
-                            <br><span>{{ paral_title|safe }}</span>
-                        {% endfor %}
-                      {% endif %}
-                      {% if document.paral_subtitles %}
-                        {% for paral_title in document.paral_subtitles %}
-                            <br><span>{{ paral_title|safe }}</span>
+                            <br><span>{{ paral_title.title|safe }}</span>
+                            {% if paral_title.subtitle %}
+                            <br><span>{{ paral_title.subtitle|safe }}</span>
+                            {% endif %}
                         {% endfor %}
                       {% endif %}
                       {% if document.reviewed_works %}
@@ -311,12 +307,14 @@
                     </a>
                   </li>
                   {% endif %}
+                  {% if document.can_cite %}
                   <li>
                     <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ document.id }}">
                       <span class="ion-quote toolbox-cite"></span>
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
                   </li>
+                  {% endif %}
                   {% with pdf_url=document.pdf_url %}
                   {% if pdf_url %}
                   <li>
@@ -339,6 +337,7 @@
 
                 {# Modal window #}
                 <div class="hidden">
+                  {% if document.can_cite %}
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <p class="modal-header">{% trans "Outils de citation" %}</p>
                     <div class="modal-body">
@@ -348,31 +347,7 @@
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
-                          {% if article.authors|length == 2 %}
-                            {% for author in article.authors %}
-                              {% if author.firstname and author.lastname %}
-                                {% if forloop.first %}
-                                {{ author.lastname }}, {{ author.firstname }} {% trans 'et' %}
-                                {% else %}
-                                {{ author.firstname }} {{ author.lastname }}.
-                                {% endif %}
-                              {% elif author.othername %}
-                                {{ author.othername }} {% if forloop.first %}{% trans 'et' %}{% endif %}
-                              {% endif %}
-                            {% endfor %}
-                          {% elif article.authors|length > 1 %}
-                            {% with article.authors|first as author %}
-                            {{ author.lastname }}, {{ author.firstname }}, et al.
-                            {% endwith %}
-                          {% else %}
-                            {% for author in article.authors %}
-                              {% if author.firstname and author.lastname %}
-                                {{ author.lastname }}, {{ author.firstname }}.
-                              {% elif author.othername %}
-                                {{ author.othername }}.
-                              {% endif %}
-                            {% endfor %}
-                          {% endif %}
+                          {{ article.authors_mla }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
                           <em>{{ article.series }}</em>,
                           {{ article.publication_date|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
@@ -380,13 +355,7 @@
 
                         <dt>APA</dt>
                         <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
-                          {% for author in article.authors %}
-                            {% if author.firstname and author.lastname %}
-                              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
-                            {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
-                              {{ author.othername }}.
-                            {% endif %}
-                          {% endfor %}
+                          {{ article.authors_apa }}
                           ({{ article.issue_published }}).
                           {{ article.title|safe }}
                           <em>{{ article.issue.series }}</em>,
@@ -396,19 +365,7 @@
 
                         <dt>Chicago</dt>
                         <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
-                          {% for author in article.authors %}
-                            {% if author.firstname and author.lastname %}
-                              {% if article.authors|length == 1 %}
-                                {{ author.lastname }}, {{ author.firstname }}.
-                              {% elif forloop.counter == 1 %}
-                                {{ author.lastname }}, {{ author.firstname }},
-                              {% else %}
-                                {{ author.firstname }} {{ author.lastname }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
-                              {% endif %}
-                            {% elif author.othername %}
-                              {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
-                            {% endif %}
-                          {% endfor %}
+                          {{ article.authors_chicago }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
                           <em>{{ article.series }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
@@ -421,40 +378,26 @@
 
                       <p>{% trans "Exporter la notice de ce document" %}</p>
                       <p>
-                        <a href="
-                        {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_enw' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
-                        {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_enw' document.collection document.id %}
-                        {% endif %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_enw_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.ENW</span>
                         </a>
                         EndNote, Zotero
                       </p>
                       <p>
-                        <a href="
-                        {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_ris' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
-                        {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_ris' document.collection document.id %}
-                        {% endif %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_ris_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.RIS</span>
                         </a>
                         Papers, Reference Manager, RefWorks, Zotero
                       </p>
                       <p>
-                        <a href="
-                        {% if document.document_type == 'article' %}
-                        {% url 'public:journal:article_citation_bib' journal_code=document.journal_code issue_slug=document.issue_volume_slug issue_localid=document.issue_localidentifier localid=document.localidentifier %}
-                        {% elif document.document_type == 'thesis' %}
-                        {% url 'public:thesis:thesis_citation_bib' document.collection document.id %}
-                        {% endif %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_bib_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.BIB</span>
                         </a>
                         BibTeX, JabRef, Mendeley, Zotero
                       </p>
                     </div>
                   </div>
+                  {% endif %} {# document.can_cite #}
                 </div>
               </div>
             </li>

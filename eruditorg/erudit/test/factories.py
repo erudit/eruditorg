@@ -207,26 +207,6 @@ class NonEmbargoedArticleFactory(ArticleFactory):
     issue = factory.SubFactory(NonEmbargoedIssueFactory)
 
 
-class ArticleTitleFactory(factory.django.DjangoModelFactory):
-
-    article = factory.SubFactory(ArticleFactory)
-    title = factory.Sequence(lambda n: 'Article {}'.format(n))
-    paral = False
-
-    class Meta:
-        model = 'erudit.ArticleTitle'
-
-
-class ArticleSectionTitleFactory(factory.django.DjangoModelFactory):
-
-    article = factory.SubFactory(ArticleFactory)
-    title = factory.sequence(lambda n: "Section {}".format(n))
-    paral = False
-
-    class Meta:
-        model = 'erudit.ArticleSectionTitle'
-
-
 class AuthorFactory(factory.django.DjangoModelFactory):
     lastname = faker.last_name()
     firstname = faker.first_name()
