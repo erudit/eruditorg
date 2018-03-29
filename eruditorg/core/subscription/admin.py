@@ -106,7 +106,7 @@ class JournalAccessSubscriptionAdmin(admin.ModelAdmin):
         'pk', 'get_user', 'sponsor', 'organisation', 'get_journal_management_subscription',
     )
     list_display_links = ('pk', 'get_user', 'organisation', )
-    list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter)
+    list_filter = (SubscriptionTypeListFilter, SubscriptionJournalListFilter, 'sponsor')
 
 
 class JournalManagementPlanAdmin(admin.ModelAdmin):
