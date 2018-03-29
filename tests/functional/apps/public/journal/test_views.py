@@ -1073,8 +1073,8 @@ def test_article_citation_doesnt_html_escape(export_type):
     # a proper mechanism in the upcoming fake fedora API to fake values on the fly yet.
     title = "rock & rollin'"
     article = ArticleFactory.create()
-    with repository.api.tweak_article(article.get_full_identifier()) as tweaker:
-        tweaker.set_title(title)
+    with repository.api.open_article(article.get_full_identifier()) as wrapper:
+        wrapper.set_title(title)
     issue = article.issue
     url = reverse('public:journal:article_citation_{}'.format(export_type), kwargs={
         'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,

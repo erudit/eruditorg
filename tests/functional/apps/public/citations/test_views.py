@@ -45,12 +45,12 @@ class TestSavedCitationListView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        with repository.api.tweak_article(self.article_1.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Ghi', firstname='Jlk')
-        with repository.api.tweak_article(self.article_2.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Jlk', firstname='mno')
-        with repository.api.tweak_article(self.article_3.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.open_article(self.article_1.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.open_article(self.article_2.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Jlk', firstname='mno')
+        with repository.api.open_article(self.article_3.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Ghi', firstname='Jlk')
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)
@@ -165,12 +165,12 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        with repository.api.tweak_article(self.article_1.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Ghi', firstname='Jlk')
-        with repository.api.tweak_article(self.article_2.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Jlk', firstname='mno')
-        with repository.api.tweak_article(self.article_3.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.open_article(self.article_1.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.open_article(self.article_2.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Jlk', firstname='mno')
+        with repository.api.open_article(self.article_3.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Ghi', firstname='Jlk')
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)
@@ -230,12 +230,12 @@ class TestBaseEruditDocumentsCitationView(EruditClientTestCase):
         self.article_1 = ArticleFactory.create(issue=self.issue_1)
         self.article_2 = ArticleFactory.create(issue=self.issue_1)
         self.article_3 = ArticleFactory.create(issue=self.issue_2)
-        with repository.api.tweak_article(self.article_1.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Ghi', firstname='Jlk')
-        with repository.api.tweak_article(self.article_2.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Jlk', firstname='mno')
-        with repository.api.tweak_article(self.article_3.get_full_identifier()) as tweaker:
-            tweaker.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.open_article(self.article_1.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Ghi', firstname='Jlk')
+        with repository.api.open_article(self.article_2.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Jlk', firstname='mno')
+        with repository.api.open_article(self.article_3.get_full_identifier()) as wrapper:
+            wrapper.set_author(lastname='Ghi', firstname='Jlk')
         clist = SavedCitationListFactory.create(user=self.user)
         clist.documents.add(self.thesis_1)
         clist.documents.add(self.thesis_2)

@@ -10,7 +10,7 @@ Author = namedtuple('Author', 'firstname lastname othername')
 SectionTitle = namedtuple('SectionTitle', 'level paral title')
 
 
-class EruditArticleTweaker:
+class EruditArticleDomChanger:
     def __init__(self, xml):
         self.root = remove_xml_namespaces(etree.fromstring(xml))
 

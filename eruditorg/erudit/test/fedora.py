@@ -3,7 +3,7 @@ from contextlib import contextmanager
 
 from eulfedora.api import ApiFacade
 
-from .domtweak import EruditArticleTweaker
+from .domchange import EruditArticleDomChanger
 
 # NOTE: This fake API is far from complete but is enough to make tests pass
 #       as they are now. We'll have to improve this as we expand testing areas.
@@ -107,11 +107,11 @@ class FakeAPI(ApiFacade):
         self._article_content_map[pid] = xml
 
     @contextmanager
-    def tweak_article(self, pid):
+    def open_article(self, pid):
         xml = self.get_article_xml(pid)
-        tweaker = EruditArticleTweaker(xml)
-        yield tweaker
-        newxml = tweaker.tostring()
+        dom_wrapper = EruditArticleDomChanger(xml)
+        yield dom_wrapper
+        newxml = dom_wrapper.tostring()
         self.set_article_xml(pid, newxml)
 
     def get(self, url, **kwargs):

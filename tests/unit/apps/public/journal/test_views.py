@@ -11,7 +11,7 @@ from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora import repository
 from erudit.models import Issue
 from erudit.test.factories import ArticleFactory
-from erudit.test.domtweak import SectionTitle
+from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import IssueDetailView, ArticleDetailView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
@@ -22,8 +22,8 @@ class TestIssueDetailSummary:
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()
         article_1, article_2, article_3 = ArticleFactory.create_batch(3)
-        with repository.api.tweak_article(article_3.get_full_identifier()) as tweaker:
-            tweaker.set_section_titles([SectionTitle(1, False, "section 1")])
+        with repository.api.open_article(article_3.get_full_identifier()) as wrapper:
+            wrapper.set_section_titles([SectionTitle(1, False, "section 1")])
         sections_tree = view.generate_sections_tree([article_1, article_2, article_3])
         assert sections_tree == {
             'titles': {'paral': None, 'main': None},
@@ -44,8 +44,8 @@ class TestIssueDetailSummary:
         view = IssueDetailView()
         article = ArticleFactory()
 
-        with repository.api.tweak_article(article.get_full_identifier()) as tweaker:
-            tweaker.set_section_titles([
+        with repository.api.open_article(article.get_full_identifier()) as wrapper:
+            wrapper.set_section_titles([
                 SectionTitle(1, False, "section 1"),
                 SectionTitle(2, False, "section 2"),
                 SectionTitle(3, False, "section 3"),
@@ -80,15 +80,15 @@ class TestIssueDetailSummary:
         view = IssueDetailView()
         articles = ArticleFactory.create_batch(3)
 
-        with repository.api.tweak_article(articles[0].get_full_identifier()) as tweaker:
-            tweaker.set_section_titles([SectionTitle(1, False, "section 1")])
-        with repository.api.tweak_article(articles[1].get_full_identifier()) as tweaker:
-            tweaker.set_section_titles([
+        with repository.api.open_article(articles[0].get_full_identifier()) as wrapper:
+            wrapper.set_section_titles([SectionTitle(1, False, "section 1")])
+        with repository.api.open_article(articles[1].get_full_identifier()) as wrapper:
+            wrapper.set_section_titles([
                 SectionTitle(1, False, "section 1"),
                 SectionTitle(2, False, "section 1.1"),
             ])
-        with repository.api.tweak_article(articles[2].get_full_identifier()) as tweaker:
-            tweaker.set_section_titles([SectionTitle(1, False, "section 1")])
+        with repository.api.open_article(articles[2].get_full_identifier()) as wrapper:
+            wrapper.set_section_titles([SectionTitle(1, False, "section 1")])
 
         sections_tree = view.generate_sections_tree(articles)
         assert sections_tree == {
