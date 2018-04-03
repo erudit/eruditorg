@@ -1200,6 +1200,9 @@
     </div>
   </xsl:template>
 
+  <xsl:template match="objetmedia/texte">
+  </xsl:template>
+
   <!-- lists -->
   <xsl:template match="listenonord">
     <xsl:variable name="signe" select="@signe"/>
