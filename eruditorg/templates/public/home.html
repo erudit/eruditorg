@@ -125,9 +125,6 @@
             {{ journal.name }}
           </a>
         </h3>
-        <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{{ journal.name }}">
-          <img src="{% url 'public:journal:journal_logo' journal.code %}" class="img-responsive logo" alt="{% blocktrans with journal_name=journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
-        </a>
       </li>
       {% endfor %}
     </ul>
