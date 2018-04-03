@@ -54,9 +54,8 @@
     {% endif %}
     <p>{% blocktrans trimmed %}
         Veuillez téléverser un fichier CSV qui contient une adresse courriel
-        par ligne. Ce fichier peut aussi avoir une ligne d'entête. Chaque
-        courriel contenu dans ce fichier sera, après confirmation, désabonné
-        de la revue.
+        par ligne. Chaque courriel contenu dans ce fichier sera, après
+        confirmation, désabonné de la revue.
     {% endblocktrans %}</p>
     <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}

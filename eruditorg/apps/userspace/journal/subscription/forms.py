@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from account_actions.models import AccountActionToken
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from core.subscription.account_actions import IndividualSubscriptionAction
 from core.subscription.models import JournalAccessSubscription
@@ -15,7 +13,10 @@ class JournalAccessSubscriptionCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.management_subscription = kwargs.pop('management_subscription')
-        super(JournalAccessSubscriptionCreateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        self.fields['email'].label = _("Courriel")
+        self.fields['first_name'].label = _("Prénom")
+        self.fields['last_name'].label = _("Nom")
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
