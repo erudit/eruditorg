@@ -137,6 +137,9 @@ class FakeAPI(ApiFacade):
                 elif subselection == '/SUMMARY/content':
                     with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
                         result = xml.read()
+                elif subselection == '/PAGES/content':
+                    with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
+                        result = xml.read()
             elif len(pidelems) == 2:  # journal
                 if not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
