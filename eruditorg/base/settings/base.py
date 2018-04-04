@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 from pathlib import Path
 from structlog import configure
 from structlog.stdlib import LoggerFactory
-from celery.schedules import crontab
 
 DEBUG = True
 COMPRESS_ENABLED = True
@@ -210,8 +209,6 @@ PUBLISHER_EMAIL = 'edition@erudit.org'
 COMMUNICATION_EMAIL = 'media@erudit.org'
 SUBSCRIPTION_EMAIL = 'client@erudit.org'
 
-WSGI_APPLICATION = 'eruditorg.wsgi.application'
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -407,22 +404,6 @@ configure(logger_factory=LoggerFactory())
 # Raven settings
 RAVEN_CONFIG = {
     'dsn': None,
-}
-
-# Celery settings
-# -----------------------------------
-
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'EST'
-CELERY_TASK_RESULT_EXPIRES = None
-
-CELERYBEAT_SCHEDULE = {
-    'issuesubmission-files-removal': {
-        'task': 'core.editor.tasks.handle_issuesubmission_files_removal',
-        'schedule': crontab(minute=0, hour=0),  # Executed daily at midnight
-    },
 }
 
 # MailChimp settings

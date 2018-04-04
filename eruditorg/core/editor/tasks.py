@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-
 import logging
 import datetime as dt
 
-from celery import shared_task
 from django.utils import timezone as tz
 
 from core.email import Email
@@ -54,6 +51,3 @@ There is NO production team """)
             subject_template='emails/editor/issue_files_deletion_subject.html',
             extra_context={'issue_submissions': issue_submissions_to_email})
         email.send()
-
-
-handle_issuesubmission_files_removal = shared_task(_handle_issuesubmission_files_removal)

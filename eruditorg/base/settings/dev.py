@@ -28,8 +28,6 @@ INSTALLED_APPS += (
     'debug_toolbar',
     'debug_toolbar_line_profiler',
     'template_timings_panel',
-    'djcelery',
-    'kombu.transport.django',
     'eulfedora',
 )
 
@@ -37,9 +35,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 ]
-
-BROKER_URL = 'django://'
-CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.timer.TimerPanel',
