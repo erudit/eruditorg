@@ -28,7 +28,7 @@ class InstitutionIPAddressRangeListView(
 
     def get_queryset(self):
         qs = super(InstitutionIPAddressRangeListView, self).get_queryset()
-        return qs.filter(subscription__organisation=self.current_organisation)
+        return qs.filter(subscription__organisation=self.current_organisation).order_by('pk')
 
 
 class InstitutionIPAddressRangeCreateView(
