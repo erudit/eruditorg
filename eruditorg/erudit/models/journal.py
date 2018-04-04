@@ -823,9 +823,13 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         return self.get_formatted_authors(style='chicago')
 
     def sync_with_erudit_object(self, erudit_object=None, ephemeral=False):
-        # ephemeral: our Article instance is a short lived instance. Don't save after sync and
-        # don't bother syncing authors (they're only there for author index pages which don't index
-        # ephemeral articles).
+        """ Copy ``erudit_object``'s values in appropriate fields in ``self``.
+
+        :param erudit_object: A ``EruditArticle``.
+        :param ephemeral: If True, our Article instance is a short lived instance. Don't save after
+                          sync and don't bother syncing authors (they're only there for author index
+                          pages which don't index ephemeral articles).
+        """
         if erudit_object is None:
             erudit_object = self.erudit_object
 
