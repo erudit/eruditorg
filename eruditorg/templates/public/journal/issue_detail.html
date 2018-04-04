@@ -114,7 +114,7 @@
       {% endif %}
     </h1>
     {% if issue.journal.type.code == 'C' %}
-    <p><a href="http://retro.erudit.org/feuilletage/index.html?{{ issue.journal.localidentifier }}.{{ issue.localidentifier }}@132&height=800&width=618&heightL=1800&widthL=1390&p=oui" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
+    <p><a href="{{ reader_url }}" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
     {% endif %}
     {% if notegens %}
     <div class="row">
