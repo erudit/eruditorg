@@ -95,6 +95,8 @@ class ArticleDigitalObject(models.DigitalObject):
     @property
     def infoimg_dict(self):
         """ Returns the content of the INFOIMG datastream as a dictionary. """
+        if not self.infoimg.exists:
+            return {}
         infoimg_tree = et.fromstring(self.infoimg.content.serialize())
         infoimg_dict = OrderedDict()
         for im_tree in infoimg_tree.findall('im'):

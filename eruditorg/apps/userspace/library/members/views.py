@@ -35,7 +35,7 @@ class OrganisationMemberListView(
         return context
 
     def get_queryset(self):
-        return self.current_organisation.members.all()
+        return self.current_organisation.members.order_by('pk')
 
 
 class OrganisationMemberCreateView(

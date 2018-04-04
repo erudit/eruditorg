@@ -5,7 +5,7 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
-git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.1#egg=django-resumable-uploads
+git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.3#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
 git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.20#egg=liberuditarticle
 babel==2.3.4
@@ -17,9 +17,9 @@ chardet==3.0.4
 cssselect2==0.2.1         # via cairosvg, weasyprint
 cssselect==1.0.3          # via lxml
 defusedxml==0.5.0         # via cairosvg
-django-ckeditor==5.0.3
+django-ckeditor==5.2.2
 django-easy-pjax==1.3.0
-django-fsm==2.3.0
+django-fsm==2.6.0
 django-ipware==2.1.0
 django-js-reverse==0.8.1
 django-modeltranslation==0.12.2
@@ -29,7 +29,7 @@ django-redis==4.7.0
 django-taggit==0.22.2
 django-waffle==0.14.0
 django-widget-tweaks==1.4.2
-django==1.10.8
+django==1.11.13
 et-xmlfile==1.0.1         # via openpyxl
 eulfedora==1.7.2
 feedparser==5.2.1
@@ -57,15 +57,15 @@ pysocks==1.6.8            # via requests
 pysolr==3.7.0
 python-dateutil==2.7.3    # via eulfedora, influxdb
 python-utils==2.3.0       # via progressbar2
-pytz==2018.4              # via babel, influxdb
-raven==6.7.0
+pytz==2018.4              # via babel, django, influxdb
+raven==6.8.0
 rdflib==4.2.2             # via eulfedora
 redis==2.10.6             # via django-redis
 requests-toolbelt==0.8.0  # via eulfedora
 requests[socks]==2.18.4
 rules==1.3
 sickle==0.6.3
-simplejson==3.14.0
+simplejson==3.15.0
 six==1.11.0               # via eulfedora, html5lib, influxdb, isodate, progressbar2, python-dateutil, python-utils, structlog
 sqlparse==0.2.4
 structlog==18.1.0
