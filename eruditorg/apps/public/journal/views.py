@@ -176,7 +176,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
 
 
 class JournalDetailView(
-        RedirectExceptionsToFallbackWebsiteMixin, FallbackObjectViewMixin,
+        RedirectExceptionsToFallbackWebsiteMixin,
         SingleJournalMixin, ContentAccessCheckMixin, DetailView):
     """
     Displays a journal.
@@ -184,29 +184,6 @@ class JournalDetailView(
     context_object_name = 'journal'
     model = Journal
     template_name = 'public/journal/journal_detail.html'
-
-    def get_fallback_url_format(self):
-        journal = self.object
-
-        if journal.collection.code == 'unb':
-            return "/revue/{code}/apropos.html"
-
-        if journal.type and journal.type.code == 'S' or journal.code == 'liaison':
-            return "http://{code}.erudit.org"
-
-    def get_fallback_url_format_kwargs(self):
-        journal = self.object
-        if journal.type and journal.type.code == 'S' or journal.code == 'liaison':
-            code = None
-            if journal.next_journal:
-                next_journal = journal.next_journal
-                while next_journal:
-                    last_journal = next_journal
-                    next_journal = next_journal.next_journal
-                code = last_journal.code
-            else:
-                code = journal.code
-            return {'code': code}
 
     def get_context_data(self, **kwargs):
         context = super(JournalDetailView, self).get_context_data(**kwargs)
