@@ -226,10 +226,10 @@
                       {% endif %}
                       {# document type for articles #}
                       {% if article.type == 'note' or article.type == 'Note' %}{% trans 'publiée' %}{% else %}{% trans 'publié' %}{% endif %}
-                      {% trans "dans la revue" %}
                       {# journal type and collection #}
-                      {% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}
-                      <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series }}</a></em> ({{ article.collection }})
+                      {% trans "dans" %}
+                      <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series }}</a></em>
+                      ({% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection }})
                       <br/>
                       {# issue theme #}
                     {% endwith %}
