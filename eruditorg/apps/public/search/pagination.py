@@ -4,7 +4,8 @@ from .utils import remove_query_param, replace_query_param
 
 logger = structlog.getLogger(__name__)
 
-class PaginationOutOfBoundsExeception(Exception):
+
+class PaginationOutOfBoundsException(Exception):
     pass
 
 
@@ -44,7 +45,7 @@ def get_pagination_info(stats, request):
 
     if not stats.is_within_bounds():
         logger.error("PaginationOutOfBounds", stats=stats)
-        raise PaginationOutOfBoundsExeception()
+        raise PaginationOutOfBoundsException()
 
     baseurl = request.build_absolute_uri()
 

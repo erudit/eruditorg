@@ -21,7 +21,7 @@ from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .models import get_model_instance
-from .pagination import PaginationOutOfBoundsExeception
+from .pagination import PaginationOutOfBoundsException
 from .saved_searches import SavedSearchList
 from .utils import get_search_elements
 
@@ -155,7 +155,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         try:
             pagination_info, documents, aggregations_dict = filters.SolrFilter() \
                 .filter(self.request)
-        except PaginationOutOfBoundsExeception:
+        except PaginationOutOfBoundsException:
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
 
         # This is a specific case in order to remove some sub-strings from the localidentifiers
