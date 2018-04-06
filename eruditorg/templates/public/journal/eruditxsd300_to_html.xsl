@@ -1073,7 +1073,7 @@
   </xsl:template>
 
   <xsl:template match="figure|tableau">
-    <xsl:apply-templates select="objetmedia"/>
+    <xsl:apply-templates/>
   </xsl:template>
 
   <xsl:template match="figure/objetmedia|tableau/objetmedia">
@@ -1094,6 +1094,198 @@
         <a href="#li{../@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
       </p>
     </figure>
+  </xsl:template>
+
+  <!-- text tables -->
+  <xsl:template match="tabtexte">
+    <xsl:variable name="valeurID" select="@id"/>
+    <xsl:variable name="type" select="@type"/>
+    <xsl:element name="table">
+      <xsl:attribute name="id">
+        <xsl:value-of select="$valeurID"/>
+      </xsl:attribute>
+      <xsl:attribute name="lang">
+        <xsl:value-of select="@lang"/>
+      </xsl:attribute>
+      <xsl:attribute name="class">
+        <xsl:value-of select="concat( 'tabtexte', $type )"/>
+      </xsl:attribute>
+      <xsl:attribute name="frame">
+        <xsl:choose>
+          <xsl:when test="$type = '1' or $type = '2'"><xsl:text>hsides</xsl:text></xsl:when>
+          <xsl:when test="$type = '3' or $type = '4'"><xsl:text>box</xsl:text></xsl:when>
+          <xsl:otherwise><xsl:text>void</xsl:text></xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:attribute name="rules">
+        <xsl:choose>
+          <xsl:when test="$type = '5'"><xsl:text>none</xsl:text></xsl:when>
+          <xsl:otherwise><xsl:text>groups</xsl:text></xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template name="tradAttr">
+    <xsl:param name="noeudTab"/>
+    <xsl:variable name="id" select="$noeudTab/@id"/>
+    <xsl:variable name="identete" select="$noeudTab/@identete"/>
+    <xsl:variable name="nbcol" select="$noeudTab/@nbcol"/>
+    <xsl:variable name="nbligne" select="$noeudTab/@nbligne"/>
+    <xsl:variable name="portee" select="$noeudTab/@portee"/>
+    <xsl:variable name="alignh" select="$noeudTab/@alignh"/>
+    <xsl:variable name="carac" select="$noeudTab/@carac"/>
+    <xsl:variable name="alignv" select="$noeudTab/@alignv"/>
+
+    <xsl:if test="$id">
+      <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
+    </xsl:if>
+    <xsl:if test="$identete">
+      <xsl:attribute name="headers"><xsl:value-of select="$identete"/></xsl:attribute>
+    </xsl:if>
+    <xsl:if test="$nbcol">
+      <xsl:choose>
+        <xsl:when test="$noeudTab/self::tabgrcol">
+          <xsl:attribute name="span">
+            <xsl:value-of select="$nbcol"/>
+          </xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="span">
+            <xsl:value-of select="$nbcol"/>
+          </xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="$nbligne">
+      <xsl:attribute name="rowspan"><xsl:value-of select="$nbligne"/></xsl:attribute>
+    </xsl:if>
+    <xsl:if test="$portee">
+      <xsl:choose>
+        <xsl:when test="$portee = 'ligne'">
+          <xsl:attribute name="scope"><xsl:text>row</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$portee = 'colonne'">
+          <xsl:attribute name="scope"><xsl:text>col</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$portee = 'grligne'">
+          <xsl:attribute name="scope"><xsl:text>rowgroup</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$portee = 'grcolonne'">
+          <xsl:attribute name="scope"><xsl:text>colgroup</xsl:text></xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="$alignh">
+      <xsl:choose>
+        <xsl:when test="$alignh = 'gauche'">
+          <xsl:attribute name="align"><xsl:text>left</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignh = 'centre'">
+          <xsl:attribute name="align"><xsl:text>center</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignh = 'droite'">
+          <xsl:attribute name="class"><xsl:text>droite</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignh = 'justifie'">
+          <xsl:attribute name="align"><xsl:text>justify</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignh = 'carac'">
+          <xsl:attribute name="align"><xsl:text>char</xsl:text></xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:if>
+    <xsl:if test="$carac">
+      <xsl:attribute name="char"><xsl:value-of select="$carac"/></xsl:attribute>
+    </xsl:if>
+    <xsl:if test="$alignv">
+      <xsl:choose>
+        <xsl:when test="$alignv = 'haut'">
+          <xsl:attribute name="valign"><xsl:text>top</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignv = 'centre'">
+          <xsl:attribute name="valign"><xsl:text>middle</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignv = 'bas'">
+          <xsl:attribute name="valign"><xsl:text>bottom</xsl:text></xsl:attribute>
+        </xsl:when>
+        <xsl:when test="$alignv = 'lignebase'">
+          <xsl:attribute name="valign"><xsl:text>baseline</xsl:text></xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="tabcol">
+    <xsl:element name="col">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabgrcol">
+    <xsl:element name="colgroup">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- tabcol* -->
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabentete">
+    <xsl:element name="thead">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- tabligne+ -->
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabligne">
+    <xsl:element name="tr">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- (tabcellulee | tabcelluled)+ -->
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabcelluled">
+    <xsl:element name="td">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- blocimbrique+ -->
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabcellulee">
+    <xsl:element name="th">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- blocimbrique+ -->
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabpied">
+    <xsl:element name="tfoot">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- tabligne+ -->
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="tabgrligne">
+    <xsl:element name="tbody">
+      <xsl:call-template name="tradAttr">
+        <xsl:with-param name="noeudTab" select="."/>
+      </xsl:call-template>
+      <xsl:apply-templates/> <!-- tabligne+ -->
+    </xsl:element>
   </xsl:template>
 
   <!-- equations, examples & insets/boxed text -->
@@ -1693,215 +1885,6 @@
     </xsl:if>
   </xsl:template>
 
-  <!-- tables -->
-  <xsl:template match="tabtexte">
-    <xsl:variable name="valeurID" select="@id"/>
-    <xsl:variable name="type" select="@type"/>
-    <xsl:element name="table">
-      <xsl:attribute name="id">
-        <xsl:value-of select="$valeurID"/>
-      </xsl:attribute>
-      <xsl:attribute name="lang">
-        <xsl:value-of select="@lang"/>
-      </xsl:attribute>
-      <xsl:attribute name="class">
-        <xsl:value-of select="concat( 'tabtexte type', $type )"/>
-      </xsl:attribute>
-      <xsl:apply-templates/>
-    </xsl:element>
-  </xsl:template>
-  <xsl:template name="tradAttr">
-    <xsl:param name="noeudTab"/>
-    <xsl:variable name="id" select="$noeudTab/@id"/>
-    <xsl:variable name="identete" select="$noeudTab/@identete"/>
-    <xsl:variable name="nbcol" select="$noeudTab/@nbcol"/>
-    <xsl:variable name="nbligne" select="$noeudTab/@nbligne"/>
-    <xsl:variable name="portee" select="$noeudTab/@portee"/>
-    <xsl:variable name="alignh" select="$noeudTab/@alignh"/>
-    <xsl:variable name="carac" select="$noeudTab/@carac"/>
-    <xsl:variable name="alignv" select="$noeudTab/@alignv"/>
-    <xsl:if test="$id">
-      <xsl:attribute name="id">
-        <xsl:value-of select="$id"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="$identete">
-      <xsl:attribute name="headers">
-        <xsl:value-of select="$identete"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="$nbcol">
-      <xsl:choose>
-        <xsl:when test="$noeudTab/self::tabgrcol">
-          <xsl:attribute name="colspan">
-            <xsl:value-of select="$nbcol"/>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:attribute name="colspan">
-            <xsl:value-of select="$nbcol"/>
-          </xsl:attribute>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:if>
-    <xsl:if test="$nbligne">
-      <xsl:attribute name="rowspan">
-        <xsl:value-of select="$nbligne"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="$portee">
-      <xsl:choose>
-        <xsl:when test="$portee = 'ligne'">
-          <xsl:attribute name="scope">
-            <xsl:text>row</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$portee = 'colonne'">
-          <xsl:attribute name="scope">
-            <xsl:text>col</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$portee = 'grligne'">
-          <xsl:attribute name="scope">
-            <xsl:text>rowgroup</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$portee = 'grcolonne'">
-          <xsl:attribute name="scope">
-            <xsl:text>colgroup</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:if>
-    <xsl:if test="$alignh">
-      <xsl:choose>
-        <xsl:when test="$alignh = 'gauche'">
-          <xsl:attribute name="style">
-            <xsl:text>text-align: left;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'centre'">
-          <xsl:attribute name="style">
-            <xsl:text>text-align: center;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'droite'">
-          <xsl:attribute name="style">
-            <xsl:text>text-align: right;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'justifie'">
-          <xsl:attribute name="style">
-            <xsl:text>text-align: justify;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'carac'">
-          <xsl:attribute name="style">
-            <xsl:text>char</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:if>
-    <xsl:if test="$carac">
-      <xsl:attribute name="char">
-        <xsl:value-of select="$carac"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="$alignv">
-      <xsl:choose>
-        <xsl:when test="$alignv = 'haut'">
-          <xsl:attribute name="style">
-            <xsl:text>vertical-align: top;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignv = 'centre'">
-          <xsl:attribute name="style">
-            <xsl:text>vertical-align: middle;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignv = 'bas'">
-          <xsl:attribute name="style">
-            <xsl:text>vertical-align: bottom;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignv = 'lignebase'">
-          <xsl:attribute name="style">
-            <xsl:text>vertical-align: baseline;</xsl:text>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:if>
-  </xsl:template>
-  <xsl:template match="tabcol">
-    <xsl:element name="col">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabgrcol">
-    <xsl:element name="colgroup">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- tabcol* -->
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabentete">
-    <xsl:element name="thead">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- tabligne+ -->
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabligne">
-    <xsl:element name="tr">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- (tabcellulee | tabcelluled)+ -->
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabcelluled">
-    <xsl:element name="td">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- blocimbrique+ -->
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabcellulee">
-    <xsl:element name="th">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- blocimbrique+ -->
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabpied">
-    <xsl:element name="tfoot">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- tabligne+ -->
-    </xsl:element>
-  </xsl:template>
-  <xsl:template match="tabgrligne">
-    <xsl:element name="tbody">
-      <xsl:call-template name="tradAttr">
-        <xsl:with-param name="noeudTab" select="."/>
-      </xsl:call-template>
-      <xsl:apply-templates/>
-      <!-- tabligne+ -->
-    </xsl:element>
-  </xsl:template>
 
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
