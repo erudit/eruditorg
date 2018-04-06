@@ -1,3 +1,5 @@
+import structlog
+
 import copy
 import urllib.parse as urlparse
 from functools import reduce
@@ -23,6 +25,7 @@ from .pagination import PaginationOutOfBoundsExeception
 from .saved_searches import SavedSearchList
 from .utils import get_search_elements
 
+logger = structlog.getLogger(__name__)
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
@@ -179,6 +182,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             results=results, documents=results.get('results')))
 
     def forms_invalid(self, search_form, options_form):
+        logger.error('search.form.invalid', search_form=search_form.errors, options_form=options_form.errors)
         return HttpResponseRedirect(
             '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))
 
