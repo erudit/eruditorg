@@ -23,18 +23,13 @@
   padding: 1em 0;
   border-top: 1px dotted $mid-grey;
 
-  img {
-    margin: auto;
+  p, ul, ol, blockquote {
+    margin-bottom: 0;
+    font-size: smaller;
+    @include font-styles('sans');
   }
 
   figcaption {
-
-    .no {
-      display: block;
-      font-size: 14px;
-      line-height: 1;
-      @include fw-mono;
-    }
 
     .legende {
 
@@ -44,27 +39,25 @@
 
     }
 
-    .notefigtab {
-      margin-bottom: 0.75em;
+  }
 
-      .alinea {
-        display: inline;
-        padding-left: 0.25em;
-      }
+  .objetmedia {
+    margin: 1em 0;
+    display: block;
+  }
 
+  .notefigtab {
+    margin: 0 0.25em 0.75em 0;
+
+    .alinea {
+      display: inline;
     }
 
   }
 
   .voirliste {
-    @include fw-sans;
-    font-size: 14px;
     margin: 0.75em 0;
     text-align: right;
-  }
-
-  .voirliste, .allertexte {
-    padding: 0 0.5em;
   }
 
 }

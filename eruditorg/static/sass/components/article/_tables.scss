@@ -45,13 +45,7 @@
 }
 
 table[class^=tabtexte] {
-
-  p, ul, ol, blockquote {
-    margin-bottom: 0;
-    font-size: smaller;
-    @include font-styles('sans');
-  }
-
+  
   p + p, li + li {
     margin-top: 11.5px;
   }
