@@ -426,14 +426,14 @@
         <xsl:if test="//figure">
           <section id="figures" class="article-section figures" role="complementary">
             <h2>{% trans "Liste des figures" %}</h2>
-            <xsl:apply-templates select="//figure/objetmedia" mode="liste"/>
+            <xsl:apply-templates select="//figure" mode="liste"/>
           </section>
         </xsl:if>
 
         <xsl:if test="//tableau">
           <section id="tableaux" class="article-section tableaux" role="complementary">
             <h2>{% trans "Liste des tableaux" %}</h2>
-            <xsl:apply-templates select="//tableau/objetmedia" mode="liste"/>
+            <xsl:apply-templates select="//tableau" mode="liste"/>
           </section>
         </xsl:if>
         {% endif %}
@@ -1005,11 +1005,6 @@
   <xsl:template match="no">
     <xsl:apply-templates/>
   </xsl:template>
-  <xsl:template match="no" mode="liste">
-    <span class="no">
-      <xsl:apply-templates select="*[not(self::renvoi)]"/>
-    </span>
-  </xsl:template>
   <xsl:template match="legende/titre | legende/sstitre">
     <p class="legende">
       <xsl:for-each select=".">
@@ -1018,15 +1013,6 @@
         </strong>
       </xsl:for-each>
     </p>
-  </xsl:template>
-  <xsl:template match="legende/titre | legende/sstitre" mode="liste">
-    <div class="legende">
-      <xsl:for-each select=".">
-        <div class="{name()}">
-          <xsl:apply-templates select="*[not(self::renvoi)]"/>
-        </div>
-      </xsl:for-each>
-    </div>
   </xsl:template>
   <xsl:template match="ligne">
     <xsl:apply-templates/>
@@ -1073,27 +1059,28 @@
   </xsl:template>
 
   <xsl:template match="figure|tableau">
-    <xsl:apply-templates/>
+    <figure class="{name()}" id="{@id}">
+      <figcaption>
+        <p class="no"><xsl:apply-templates select="no"/></p>
+        <xsl:apply-templates select="legende/titre | legende/sstitre"/>
+      </figcaption>
+      <xsl:apply-templates select="tabtexte | objetmedia"/>
+      <xsl:apply-templates select="legende/alinea | legende/bloccitation | legende/listenonord | legende/listeord | legende/listerelation | legende/objetmedia | legende/refbiblio | legende/tabtexte | legende/verbatim"/>
+      <xsl:apply-templates select="notefig | notetabl"/>
+      <xsl:apply-templates select="source"/>
+      <p class="voirliste">
+        <a href="#li{@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="self::figure">figures</xsl:if><xsl:if test="self::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
+      </p>
+    </figure>
   </xsl:template>
 
+  <!-- media tables -->
   <xsl:template match="figure/objetmedia|tableau/objetmedia">
     <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
     <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
-    <figure class="{name(..)}" id="{../@id}">
-      <figcaption>
-        <xsl:apply-templates select="../no"/>
-        <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
-        <xsl:apply-templates select="../legende/alinea | ../legende/bloccitation | ../legende/listenonord | ../legende/listeord | ../legende/listerelation | ../legende/objetmedia | ../legende/refbiblio | ../legende/tabtexte | ../legende/verbatim"/>
-        <xsl:apply-templates select="../notefig|../notetabl"/>
-        <xsl:apply-templates select="../source"/>
-      </figcaption>
-      <a href="{{ request.get_full_path }}media/{$imgPlGr}" class="lightbox"  title="{normalize-space(../legende)}">
-        <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende)}" class="img-responsive"/>
-      </a>
-      <p class="voirliste">
-        <a href="#li{../@id}">{% blocktrans %}-> Voir la liste des <xsl:if test="parent::figure">figures</xsl:if><xsl:if test="parent::tableau">tableaux</xsl:if>{% endblocktrans %}</a>
-      </p>
-    </figure>
+    <a href="{{ request.get_full_path }}media/{$imgPlGr}" class="lightbox {name()}"  title="{normalize-space(../legende/titre)}">
+      <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende/titre)}" class="img-responsive"/>
+    </a>
   </xsl:template>
 
   <!-- text tables -->
@@ -1885,7 +1872,6 @@
     </xsl:if>
   </xsl:template>
 
-
   <!--*** APPPENDIX ***-->
   <xsl:template match="partiesann">
     <section class="{name()} col-xs-12">
@@ -1935,7 +1921,7 @@
 
   <!-- appendices / supplements -->
   <xsl:template match="annexe">
-    <div class="article-section-content" role="subsection">
+    <div class="article-section-content" role="complementary">
       <xsl:if test="no or titre">
         <h4 class="titreann">
           <xsl:if test="titre and no">
@@ -2121,21 +2107,41 @@
   </xsl:template>
 
   <!--*** LISTS OF TABLES & FIGURES ***-->
-  <xsl:template match="tableau/objetmedia | figure/objetmedia" mode="liste">
-    <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
-    <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
+  <xsl:template match="tableau | figure" mode="liste">
     <xsl:for-each select=".">
-      <figure class="{name(..)}" id="li{../@id}">
+      <figure class="{name()}" id="li{@id}">
         <figcaption class="notitre">
-          <span class="allertexte"><a href="#{../@id}">|^</a></span>
-          <xsl:apply-templates select="../no"/>
-          <xsl:apply-templates select="../legende/titre | ../legende/sstitre"/>
+          <p class="allertexte"><a href="#{@id}">|^</a></p>
+          <p class="no"><xsl:apply-templates select="no"/></p>
+          <xsl:apply-templates select="legende/titre | legende/sstitre"/>
         </figcaption>
-        <a href="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende)}" class="lightbox">
-          <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende)}" class="img-responsive"/>
-        </a>
+        <xsl:apply-templates select="objetmedia | tabtexte"/>
       </figure>
     </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="no" mode="liste">
+    <span class="no">
+      <xsl:apply-templates select="*[not(self::renvoi)]"/>
+    </span>
+  </xsl:template>
+
+  <xsl:template match="legende/titre | legende/sstitre" mode="liste">
+    <div class="legende">
+      <xsl:for-each select=".">
+        <div class="{name()}">
+          <xsl:apply-templates select="*[not(self::renvoi)]"/>
+        </div>
+      </xsl:for-each>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="objetmedia" mode="liste">
+    <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
+    <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
+    <a href="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende/titre)}" class="lightbox">
+      <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende/titre)}" class="img-responsive"/>
+    </a>
   </xsl:template>
 
   <!--*** all-purpose typographic markup ***-->
