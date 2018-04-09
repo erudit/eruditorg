@@ -1096,18 +1096,14 @@
       </xsl:attribute>
       <xsl:attribute name="class">
         <xsl:value-of select="concat( 'tabtexte', $type )"/>
-      </xsl:attribute>
-      <xsl:attribute name="frame">
         <xsl:choose>
-          <xsl:when test="$type = '1' or $type = '2'"><xsl:text>hsides</xsl:text></xsl:when>
-          <xsl:when test="$type = '3' or $type = '4'"><xsl:text>box</xsl:text></xsl:when>
-          <xsl:otherwise><xsl:text>void</xsl:text></xsl:otherwise>
+          <xsl:when test="$type = '1' or $type = '2'"><xsl:text> frame-hsides</xsl:text></xsl:when>
+          <xsl:when test="$type = '3' or $type = '4'"><xsl:text> frame-box</xsl:text></xsl:when>
+          <xsl:otherwise><xsl:text> frame-void</xsl:text></xsl:otherwise>
         </xsl:choose>
-      </xsl:attribute>
-      <xsl:attribute name="rules">
         <xsl:choose>
-          <xsl:when test="$type = '5'"><xsl:text>none</xsl:text></xsl:when>
-          <xsl:otherwise><xsl:text>groups</xsl:text></xsl:otherwise>
+          <xsl:when test="$type = '5'"><xsl:text> rules-none</xsl:text></xsl:when>
+          <xsl:otherwise><xsl:text> rules-groups</xsl:text></xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
       <xsl:apply-templates/>
@@ -1130,6 +1126,47 @@
     </xsl:if>
     <xsl:if test="$identete">
       <xsl:attribute name="headers"><xsl:value-of select="$identete"/></xsl:attribute>
+    </xsl:if>
+    <xsl:if test="$alignh | $alignv">
+      <xsl:attribute name="class">
+        <xsl:if test="$alignh">
+          <xsl:text>align </xsl:text>
+          <xsl:choose>
+            <xsl:when test="$alignh = 'gauche'">
+              <xsl:text>align-left</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignh = 'centre'">
+              <xsl:text>align-center</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignh = 'droite'">
+              <xsl:text>align-right</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignh = 'justifie'">
+              <xsl:text>align-justify</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignh = 'carac'">
+              <xsl:text>align-char</xsl:text>
+            </xsl:when>
+          </xsl:choose>
+        </xsl:if>
+        <xsl:if test="$alignv">
+          <xsl:text>valign </xsl:text>
+          <xsl:choose>
+            <xsl:when test="$alignv = 'haut'">
+              <xsl:text>valign-top</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignv = 'centre'">
+              <xsl:text>valign-middle</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignv = 'bas'">
+              <xsl:text>valign-bottom</xsl:text>
+            </xsl:when>
+            <xsl:when test="$alignv = 'lignebase'">
+              <xsl:text>valign-baseline</xsl:text>
+            </xsl:when>
+          </xsl:choose>
+        </xsl:if>
+      </xsl:attribute>
     </xsl:if>
     <xsl:if test="$nbcol">
       <xsl:choose>
@@ -1164,43 +1201,8 @@
         </xsl:when>
       </xsl:choose>
     </xsl:if>
-    <xsl:if test="$alignh">
-      <xsl:choose>
-        <xsl:when test="$alignh = 'gauche'">
-          <xsl:attribute name="align"><xsl:text>left</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'centre'">
-          <xsl:attribute name="align"><xsl:text>center</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'droite'">
-          <xsl:attribute name="class"><xsl:text>droite</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'justifie'">
-          <xsl:attribute name="align"><xsl:text>justify</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignh = 'carac'">
-          <xsl:attribute name="align"><xsl:text>char</xsl:text></xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:if>
     <xsl:if test="$carac">
       <xsl:attribute name="char"><xsl:value-of select="$carac"/></xsl:attribute>
-    </xsl:if>
-    <xsl:if test="$alignv">
-      <xsl:choose>
-        <xsl:when test="$alignv = 'haut'">
-          <xsl:attribute name="valign"><xsl:text>top</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignv = 'centre'">
-          <xsl:attribute name="valign"><xsl:text>middle</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignv = 'bas'">
-          <xsl:attribute name="valign"><xsl:text>bottom</xsl:text></xsl:attribute>
-        </xsl:when>
-        <xsl:when test="$alignv = 'lignebase'">
-          <xsl:attribute name="valign"><xsl:text>baseline</xsl:text></xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
     </xsl:if>
   </xsl:template>
 
