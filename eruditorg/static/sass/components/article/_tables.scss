@@ -50,6 +50,23 @@ table[class^=tabtexte] {
     margin-top: 11.5px;
   }
 
+  thead {
+    border-bottom: 1px solid $dark-grey;
+  }
+
+  td, th {
+    padding: 0.75em;
+  }
+
+  &.frame-hsides {
+    border-top: 1px solid $mid-grey;
+    border-bottom: 1px solid $mid-grey;
+  }
+
+  &.frame-box {
+    border: 1px solid $mid-grey;
+  }
+
   .align-left {
     text-align: left;
   }
