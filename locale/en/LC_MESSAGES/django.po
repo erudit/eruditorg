@@ -416,7 +416,7 @@ msgstr "NRC Research Press"
 
 #: apps/public/search/forms.py:50
 msgid "Fonds de Recherche du Québec"
-msgstr ""
+msgstr "Fonds de Recherche du Québec"
 
 #: apps/public/search/forms.py:54
 msgid "Articles savants"
@@ -439,7 +439,7 @@ msgstr "Cultural articles"
 #: templates/public/thesis/home.html:22 templates/public/thesis/home.html:46
 #: templates/public/thesis/home.html:58 templates/public/thesis/home.html:68
 msgid "Thèses et mémoires"
-msgstr ""
+msgstr "Theses and dissertations"
 
 #: apps/public/search/forms.py:57 apps/userspace/reporting/forms.py:19
 msgid "Livres"
@@ -595,8 +595,9 @@ msgstr "Disciplines"
 
 #: apps/public/search/forms.py:182 core/editor/models.py:222
 #: core/subscription/models.py:85 core/subscription/models.py:124
-#: erudit/models/journal.py:197 templates/base.html:142 templates/base.html:371
-#: templates/public/home.html:88 templates/public/journal/article_base.html:117
+#: erudit/models/journal.py:197 templates/base.html:142
+#: templates/base.html:371 templates/public/home.html:88
+#: templates/public/journal/article_base.html:117
 #: templates/public/journal/article_base.html:154
 #: templates/public/journal/article_detail.html:37
 #: templates/public/journal/article_summary.html:35
@@ -2508,23 +2509,23 @@ msgstr "Log Out"
 
 #: templates/base.html:186 templates/base.html:189 templates/base.html:384
 msgid "À propos d’Érudit"
-msgstr ""
+msgstr "About Érudit"
 
 #: templates/base.html:192 templates/base.html:387
 msgid "À propos de la Coalition Publi.ca"
-msgstr ""
+msgstr "About Coalition Publi.ca"
 
 #: templates/base.html:192 templates/base.html:387
 msgid "Coalition Publi.ca"
-msgstr ""
+msgstr "Coalition Publi.ca"
 
 #: templates/base.html:195 templates/base.html:390
 msgid "À propos du projet CO.SHS"
-msgstr ""
+msgstr "About CO.SHS"
 
 #: templates/base.html:195 templates/base.html:390
 msgid "CO.SHS"
-msgstr ""
+msgstr "CO.SHS"
 
 #: templates/base.html:198 templates/base.html:402
 msgid "Jamais trop érudit"
@@ -2532,27 +2533,23 @@ msgstr "Never know too much"
 
 #: templates/base.html:201 templates/base.html:393
 msgid "À propos de nos partenariats"
-msgstr ""
+msgstr "About our partnerships"
 
 #: templates/base.html:201 templates/base.html:393
 msgid "Partenariat"
-msgstr ""
+msgstr "Partnership"
 
 #: templates/base.html:204 templates/base.html:396
-#, fuzzy
-#| msgid "Consulter les rapports de redevances"
 msgid "Consulter le rapport annuel"
-msgstr "Access royalty reports"
+msgstr "See the annual report"
 
 #: templates/base.html:204 templates/base.html:396
-#, fuzzy
-#| msgid "Rapport de redevances"
 msgid "Rapport annuel"
-msgstr "Royalty Report"
+msgstr "Annual report"
 
 #: templates/base.html:207 templates/base.html:399
 msgid "Consulter Salons"
-msgstr ""
+msgstr "Visit Salons"
 
 #: templates/base.html:207 templates/base.html:399
 #: templates/public/home.html:197
@@ -3640,8 +3637,8 @@ msgstr[1] "%(counter)s cultural articles"
 #, python-format
 msgid "%(counter)s thèse"
 msgid_plural "%(counter)s thèses et mémoires"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s thesis"
+msgstr[1] "%(counter)s theses and dissertations"
 
 #: templates/public/citations/list.html:48
 msgid "0 document"
@@ -4185,7 +4182,7 @@ msgstr "List of tables"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:284
 msgid "Salons. Un éclairage sur la société par les revues savantes."
-msgstr ""
+msgstr "Salons. Perspectives on society through scholarly journals"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:302
 #: templates/public/journal/eruditxsd300_to_html.xsl:342
@@ -4238,14 +4235,17 @@ msgid ""
 "concernant cet article\n"
 "        "
 msgstr ""
+"\n"
+"        --> See the <a href=\"{@href}\"><strong>erratum</strong></a> for this article\n"
+"        "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:622
 msgid ">Volume&#160;"
-msgstr ""
+msgstr ">Volume"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:630
 msgid "Numéro&#160;"
-msgstr ""
+msgstr "Issue"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:831
 #: templates/public/journal/eruditxsd300_to_html.xsl:844
@@ -4258,7 +4258,7 @@ msgstr ""
 #: templates/public/journal/eruditxsd300_to_html.xsl:2196
 #: templates/public/journal/eruditxsd300_to_html.xsl:2209
 msgid "special"
-msgstr ""
+msgstr "special"
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:859
 msgid "Annexe"
@@ -4301,6 +4301,8 @@ msgid ""
 "Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
 "jour."
 msgstr ""
+"Your browser does not support audio files. Please update it for optimal "
+"viewing of this site. "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1189
 msgid "Image de l’équation"
@@ -4311,14 +4313,16 @@ msgid ""
 "Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
 "jour."
 msgstr ""
+"Your browser does not support video files. Please update it for optimal "
+"viewing of this site. "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:1909
 msgid "Parties annexes"
-msgstr ""
+msgstr "Appendices "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:2238
 msgid "alias"
-msgstr ""
+msgstr "alias"
 
 #: templates/public/journal/issue_detail.html:6
 #, python-format
@@ -4376,6 +4380,8 @@ msgid ""
 "La lecture de ces articles nécessite une redirection vers le site de la "
 "revue."
 msgstr ""
+"You will be redirected to the journal's website in order to read these "
+"articles."
 
 #: templates/public/journal/issue_detail.html:159
 #: templates/public/journal/journal_base.html:41
@@ -4947,6 +4953,9 @@ msgid ""
 "\"><strong>historique</strong></a></p>\n"
 "            "
 msgstr ""
+"\n"
+"            <p>View my <a href=\"%(advanced_search)s#search-history\"><strong>saved search history</strong></a></p>\n"
+"            "
 
 #: templates/public/search/results.html:130
 msgid "Options de tris"
@@ -4990,7 +4999,7 @@ msgstr "Consult this thematic issue"
 
 #: templates/public/search/results.html:270
 msgid "Plus d’information"
-msgstr ""
+msgstr "More information"
 
 #: templates/public/search/results.html:282
 #: templates/public/thesis/collection_list_base.html:100
@@ -5015,7 +5024,7 @@ msgstr "New search"
 #: templates/public/thesis/collection_list_per_year.html:12
 #, python-format
 msgid "Thèses et mémoires de %(collection)s"
-msgstr ""
+msgstr "%(collection)s’s theses and dissertations"
 
 #: templates/public/thesis/collection_home.html:6
 #: templates/public/thesis/collection_home.html:18
@@ -5029,7 +5038,7 @@ msgstr "Access %(collection)s's theses and dissertations on Érudit."
 #: templates/public/thesis/collection_home.html:84
 #: templates/public/thesis/home.html:69 templates/public/thesis/home.html:109
 msgid "documents"
-msgstr ""
+msgstr "documents"
 
 #: templates/public/thesis/collection_home.html:99
 #: templates/public/thesis/home.html:113
@@ -5057,6 +5066,8 @@ msgid ""
 "La lecture de ces thèses nécessite une redirection vers le site du dépôt "
 "institutionnel."
 msgstr ""
+"You will be redirected to the institution’s website in order to read these "
+"documents. "
 
 #: templates/public/thesis/collection_list_base.html:74
 msgid "Trier par"
@@ -5073,7 +5084,7 @@ msgstr "no keyword"
 
 #: templates/public/thesis/collection_list_base.html:122
 msgid "Nombre de documents"
-msgstr ""
+msgstr "Number of documents"
 
 #: templates/public/thesis/collection_list_base.html:128
 msgid "En un coup d’œil"
@@ -5095,7 +5106,7 @@ msgstr ""
 #: templates/public/thesis/collection_list_per_author_name.html:48
 #, python-format
 msgid "Thèses et mémoires par auteur commençant par %(letter)s"
-msgstr ""
+msgstr "Theses and dissertations by author name (%(letter)s)"
 
 #: templates/public/thesis/collection_list_per_author_name.html:53
 msgid "Parcourir d'autres auteurs"
@@ -5105,7 +5116,7 @@ msgstr "Browse other authors"
 #: templates/public/thesis/collection_list_per_year.html:48
 #, python-format
 msgid "Thèses et mémoires publiés en %(year)s"
-msgstr ""
+msgstr "Theses and dissertations published in %(year)s"
 
 #: templates/public/thesis/collection_list_per_year.html:6
 #, python-format
@@ -5113,6 +5124,8 @@ msgid ""
 "Consultez les thèses et mémoires de %(collection)s publiés en %(year)s sur "
 "la plateforme Érudit."
 msgstr ""
+"Look up %(collection)s’s theses and dissertations published in %(year)s on "
+"Érudit."
 
 #: templates/public/thesis/collection_list_per_year.html:18
 #: templates/public/thesis/collection_list_per_year.html:29
@@ -5366,7 +5379,7 @@ msgstr "Status"
 
 #: templates/userspace/journal/editor/detail.html:54
 msgid "[Non renseigné]"
-msgstr ""
+msgstr "[Not specified]"
 
 #: templates/userspace/journal/editor/detail.html:60
 #: templates/userspace/journal/editor/form.html:99

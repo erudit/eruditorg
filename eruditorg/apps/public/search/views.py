@@ -1,3 +1,5 @@
+import logging
+
 import copy
 import urllib.parse as urlparse
 from functools import reduce
@@ -19,10 +21,11 @@ from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .models import get_model_instance
-from .pagination import PaginationOutOfBoundsExeception
+from .pagination import PaginationOutOfBoundsException
 from .saved_searches import SavedSearchList
 from .utils import get_search_elements
 
+logger = logging.getLogger(__name__)
 
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
@@ -152,7 +155,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
         try:
             pagination_info, documents, aggregations_dict = filters.SolrFilter() \
                 .filter(self.request)
-        except PaginationOutOfBoundsExeception:
+        except PaginationOutOfBoundsException:
             return HttpResponseRedirect(reverse('public:search:advanced_search'))
 
         # This is a specific case in order to remove some sub-strings from the localidentifiers
@@ -179,6 +182,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             results=results, documents=results.get('results')))
 
     def forms_invalid(self, search_form, options_form):
+        logger.error('search.form.invalid', extra={'stack': True})
         return HttpResponseRedirect(
             '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))
 

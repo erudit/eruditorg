@@ -1,7 +1,9 @@
+import logging
 from .utils import remove_query_param, replace_query_param
 
+logger = logging.getLogger(__name__)
 
-class PaginationOutOfBoundsExeception(Exception):
+class PaginationOutOfBoundsException(Exception):
     pass
 
 
@@ -40,7 +42,8 @@ class ResultsStats:
 def get_pagination_info(stats, request):
 
     if not stats.is_within_bounds():
-        raise PaginationOutOfBoundsExeception()
+        logger.error("PaginationOutOfBoundsException", extra={'stack':True})
+        raise PaginationOutOfBoundsException()
 
     baseurl = request.build_absolute_uri()
 
