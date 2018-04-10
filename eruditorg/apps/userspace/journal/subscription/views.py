@@ -4,6 +4,7 @@ import io
 import logging
 import os
 import urllib.parse
+import chardet
 
 from account_actions.models import AccountActionToken
 from django.contrib import messages
@@ -149,7 +150,8 @@ class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, Temp
     template_name = 'userspace/journal/subscription/individualsubscription_batch_subscribe.html'
 
     def parse_csv(self, csv_bytes):
-        fp = io.StringIO(csv_bytes.decode('utf-8').strip())
+        encoding = chardet.detect(csv_bytes)
+        fp = io.StringIO(csv_bytes.decode(encoding['encoding']).strip())
         csvreader = csv.reader(fp, delimiter=';')
         validator = EmailValidator()
         management_subscription = JournalManagementSubscription.objects.get(
