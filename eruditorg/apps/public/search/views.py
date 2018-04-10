@@ -27,6 +27,7 @@ from .utils import get_search_elements
 
 logger = logging.getLogger(__name__)
 
+
 class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, FormMixin, View):
     """ Displays the search form in order to perform advanced searches for Érudit documents. """
     form_class = SearchForm
