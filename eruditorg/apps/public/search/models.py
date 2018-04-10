@@ -8,12 +8,24 @@ from requests.exceptions import ConnectionError
 from erudit import models as erudit_models
 from erudit.templatetags.model_formatters import person_list
 
+from . import solr_search
+
 
 class Generic:
     def __init__(self, solr_data):
         self.localidentifier = solr_data['ID']
         self.corpus = solr_data['Corpus_fac']
         self.solr_data = solr_data
+
+    @staticmethod
+    def from_solr_id(solr_id):
+        results = solr_search.client.search(q='ID:"{}"'.format(solr_id))
+        if not results.hits:
+            raise ValueError("No Solr object found")
+        elif results.hits > 1:
+            raise ValueError("Multiple Solr objects found")
+        solr_data = results.docs[0]
+        return get_model_instance(solr_data)
 
     def can_cite(self):
         return False
@@ -25,6 +37,9 @@ class Generic:
             'Livres': 'book',
             'Actes': 'book',
             'Rapport': 'report',
+            'Article': 'article',
+            'Culturel': 'article',
+            'Thèses': 'thesis',
         }.get(self.corpus, 'generic')
 
     @property
@@ -198,7 +213,7 @@ class Article(Generic):
 
     @property
     def publication_date(self):
-        return self.obj.issue.abbreviated_volume_title
+        return self.obj.issue.year
 
     @property
     def journal_url(self):
@@ -300,7 +315,11 @@ class Thesis(Generic):
 
     @property
     def authors(self):
-        return str(self.obj.author)
+        author = self.obj.author
+        if author.firstname:
+            return "{}, {}".format(author.lastname, author.firstname)
+        else:
+            return author.lastname
 
     @property
     def collection(self):
@@ -324,18 +343,13 @@ class Thesis(Generic):
 
 
 def get_model_instance(solr_data):
-    corpus = solr_data['Corpus_fac']
-    doctype = {
-        'Article': 'article',
-        'Culturel': 'article',
-        'Thèses': 'thesis',
-    }.get(corpus, 'generic')
-    if doctype == 'thesis':
+    generic = Generic(solr_data)
+    if generic.document_type == 'thesis':
         try:
             return Thesis(solr_data)
         except ObjectDoesNotExist:
             pass
-    elif doctype == 'article':
+    elif generic.document_type == 'article':
         try:
             return Article(solr_data)
         except ObjectDoesNotExist:

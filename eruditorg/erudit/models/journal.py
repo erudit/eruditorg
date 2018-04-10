@@ -819,6 +819,20 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     def html_title(self):
         return self.erudit_object.get_formatted_html_title()
 
+    @property
+    def solr_id(self):
+        collection_code = self.issue.journal.collection.code
+        if collection_code == 'erudit':
+            # For the Érudit collection, we use the articleès fedora id directly
+            return self.localidentifier
+        elif collection_code == 'unb':
+            return 'unb:{}'.format(self.localidentifier)
+        elif collection_code == 'persee':
+            # For Persée too, we directly use localidentifier
+            return self.localidentifier
+        else:
+            raise ValueError("Can't search this type of article in Solr")
+
     def __str__(self):
         if self.title:
             return self.title

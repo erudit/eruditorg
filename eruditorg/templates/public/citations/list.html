@@ -36,15 +36,18 @@
         <p data-scientific-article-count="{{ scientific_articles_count }}">
           {% blocktrans count counter=scientific_articles_count %}{{ counter }} article savant{% plural %}{{ counter }} articles savants{% endblocktrans %}
         </p>
-        {% elif cultural_articles_count %}
+        {% endif %}
+        {% if cultural_articles_count %}
         <p data-cultural-article-count="{{ cultural_articles_count }}">
           {% blocktrans count counter=cultural_articles_count %}{{ counter }} article culturel{% plural %}{{ counter }} articles culturels{% endblocktrans %}
         </p>
-        {% elif theses_count %}
+        {% endif %}
+        {% if theses_count %}
         <p data-thesis-count="{{ theses_count }}">
           {% blocktrans count counter=theses_count %}{{ counter }} thèse{% plural %}{{ counter }} thèses et mémoires{% endblocktrans %}
         </p>
-        {% else %}
+        {% endif %}
+        {% if not scientific_articles_count and not cultural_articles_count and not theses_count %}
         <p>{% trans "0 document" %}</p>
         {% endif %}
       </div>
@@ -98,8 +101,8 @@
             </div>
             <ul class="documents">
               {% for document in documents %}
-              {% if document.polymorphic_ctype_id == article_ct.id %}
-              <li data-document-id="{{ document.id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="document">
+              {% if document.document_type == 'article' %}
+              <li data-document-id="{{ document.solr_id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="document">
                 <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
@@ -130,7 +133,7 @@
                     {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
                   </a>
                 </h3>
-                <div class="document-authors-publication-year text-muted">{% for a in document.authors.all %}{{ a.lastname }}{% if a.firstname %}, {{ a.firstname }}{% if not forloop.last %} ; {% else %}&nbsp;{% endif %}{% endif %}{% endfor %}({{ document.issue.year }})</div>
+                <div class="document-authors-publication-year text-muted">{{ document.authors }} ({{ document.issue.year }})</div>
                 <div class="hidden">
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
@@ -139,44 +142,14 @@
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ document.id }}" class="cite-mla">
-                          {% if document.erudit_object.authors|length == 2 %}
-                            {% for author in document.erudit_object.authors %}
-                              {% if author.firstname and author.lastname %}
-                                {% if forloop.first %}
-                                {{ author.lastname }}, {{ author.firstname }} {% trans 'et' %}
-                                {% else %}
-                                {{ author.firstname }} {{ author.lastname }}.
-                                {% endif %}
-                              {% elif author.othername %}
-                                {{ author.othername }} {% if forloop.first %}{% trans 'et' %}{% endif %}
-                              {% endif %}
-                            {% endfor %}
-                          {% elif document.erudit_object.authors|length > 1 %}
-                            {% with document.erudit_object.authors|first as author %}
-                            {{ author.lastname }}, {{ author.firstname }}, et al.
-                            {% endwith %}
-                          {% else %}
-                            {% for author in document.erudit_object.authors %}
-                              {% if author.firstname and author.lastname %}
-                                {{ author.lastname }}, {{ author.firstname }}.
-                              {% elif author.othername %}
-                                {{ author.othername }}.
-                              {% endif %}
-                            {% endfor %}
-                          {% endif %}
+                          {{ document.authors_mla }}
                           {% trans '«&nbsp;' %}{{ document.title }}.{% trans '&nbsp;»' %}
                           <em>{{ document.issue.journal.name }}</em>, {{ document.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
                         <dd id="id_cite_apa_{{ document.id }}" class="cite-apa">
-                          {% for author in document.erudit_object.authors %}
-                            {% if author.firstname and author.lastname %}
-                              {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
-                            {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
-                              {{ author.othername }}.
-                            {% endif %}
-                          {% endfor %}
+                          {{ document.authors_apa }}
                           ({{ document.issue.year }}).
                           {{ document.title }}
                           <em>{{ document.issue.journal.name }}</em>,
@@ -186,19 +159,7 @@
 
                         <dt>Chicago</dt>
                         <dd id="id_cite_chicago_{{ document.id }}" class="cite-chicago">
-                          {% for author in document.erudit_object.authors %}
-                            {% if author.firstname and author.lastname %}
-                              {% if article.erudit_object.authors|length == 1 %}
-                                {{ author.lastname }}, {{ author.firstname }}.
-                              {% elif forloop.counter == 1 %}
-                                {{ author.lastname }}, {{ author.firstname }},
-                              {% else %}
-                                {{ author.firstname }} {{ author.lastname }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
-                              {% endif %}
-                            {% elif author.othername %}
-                              {{ author.othername }}{% if forloop.revcounter == 2 %} {% trans 'et' %} {% elif not forloop.last %}, {% else %}.{% endif %}
-                            {% endif %}
-                          {% endfor %}
+                          {{ document.authors_chicago }}
                           {% trans '«&nbsp;' %}{{ document.title }}{% trans '&nbsp;»' %}.
                           <em>{{ document.issue.journal.name }}</em>
                           {% if document.issue.volume %}{{ document.issue.volume }}, {% endif %}{% if document.issue.number %}{% trans 'n<sup>o</sup>' %} {{ document.issue.number }}{% endif %}
@@ -231,8 +192,8 @@
                   </div>
                 </div>
               </li>
-              {% elif document.polymorphic_ctype_id == thesis_ct.id %}
-              <li data-document-id="{{ document.id }}" data-document-type="thesis" class="document">
+              {% elif document.document_type == 'thesis' %}
+              <li data-document-id="{{ document.solr_id }}" data-document-type="thesis" class="document">
                 <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
@@ -256,26 +217,26 @@
                 <h3 class="document-title">
                   <a href="{{ document.url }}" target="_blank">{{ document.title }}</a>
                 </h3>
-                <div class="document-authors-publication-year text-muted">{{ document.author.lastname }}{% if document.author.firstname %}, {{ document.author.firstname }}{% endif %}&nbsp;({{ document.publication_year }})</div>
+                <div class="document-authors-publication-year text-muted">{{ document.authors }}&nbsp;({{ document.publication_year }})</div>
                 <div class="hidden">
                   <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
                     <div class="modal-body">
                       <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
                       <p>
-                        <a href="{% url 'public:thesis:thesis_citation_enw' document.collection.id document.id %}" class="btn btn-primary cite-export">
+                        <a href="{% url 'public:thesis:thesis_citation_enw' document.collection document.id %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.ENW</span>
                         </a>
                         EndNote, Zotero
                       </p>
                       <p>
-                        <a href="{% url 'public:thesis:thesis_citation_ris' document.collection.id document.id %}" class="btn btn-primary cite-export">
+                        <a href="{% url 'public:thesis:thesis_citation_ris' document.collection document.id %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.RIS</span>
                         </a>
                         Papers, Reference Manager, RefWorks, Zotero
                       </p>
                       <p>
-                        <a href="{% url 'public:thesis:thesis_citation_bib' document.collection.id document.id %}" class="btn btn-primary cite-export">
+                        <a href="{% url 'public:thesis:thesis_citation_bib' document.collection document.id %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.BIB</span>
                         </a>
                         BibTeX, JabRef, Mendeley, Zotero

@@ -80,7 +80,7 @@
     id="article-{{ article.id }}"
     class="container"
     data-document-id="{{ article.id }}"
-    {% if article.id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
+    {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
   >
 
   {% cache FOREVER_TTL "public_article_summary_content" article.id in_citation_list LANGUAGE_CODE %}

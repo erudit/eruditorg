@@ -1,11 +1,13 @@
 import os
 import pytest
+import pysolr
 
 from base.viewmixins import FedoraServiceRequiredMixin, SolrServiceRequiredMixin
 from eruditarticle.objects.article import EruditArticle
 from eruditarticle.objects.publication import EruditPublication
 from eruditarticle.objects.journal import EruditJournal
 from erudit.test.fedora import FakeAPI
+from erudit.test.solr import FakeSolrClient
 import erudit.fedora.repository
 import erudit.fedora.modelmixins
 
@@ -26,6 +28,19 @@ def mock_fedora_api(monkeypatch):
         SolrServiceRequiredMixin,
         'check_solr_status',
         lambda self, request: self._pytest_check_solr_status_result)
+
+
+@pytest.fixture(autouse=True)
+def mock_solr_client(monkeypatch):
+    from apps.public.search import solr_search
+    client = FakeSolrClient()
+    monkeypatch.setattr(pysolr, 'Solr', lambda *a, **kw: client)
+    monkeypatch.setattr(solr_search, 'client', client)
+
+
+@pytest.fixture
+def solr_client():
+    return pysolr.Solr()
 
 
 @pytest.fixture(

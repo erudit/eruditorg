@@ -53,7 +53,8 @@ export default {
       let documentId = $document.data('document-id');
       $.ajax({
         type: 'POST',
-        url: Urls['public:citations:remove_citation'](documentId),
+        url: Urls['public:citations:remove_citation'](),
+        data: { document_id: documentId }
       }).done(function() {
         $document.remove();
         updateDocumentSelectionCount();

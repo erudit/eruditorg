@@ -308,10 +308,10 @@
               </a>
             </li>
             <li>
-              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
               </a>
-              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
               </a>
             </li>
@@ -344,11 +344,11 @@
             {% switch "maintenance" %}
             {% else %}
             <li>
-              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </a>
-              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </a>
