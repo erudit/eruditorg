@@ -59,6 +59,13 @@ PUB_TYPES_CHOICES = (
     ('Dépot', _('Rapports de recherche')),
 )
 
+ARTICLE_TYPES_CHOICES = (
+    ('Article', _("Article")),
+    ('Compte rendu', _("Compte rendu")),
+    ('Autre', _("Autre")),
+    ('Note', _("Note")),
+)
+
 language_label_correspondence = {
     'ar': _('Arabe'),
     'ca': _('Catalan'),
@@ -270,7 +277,8 @@ class ResultsFilterForm(forms.Form):
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
                 aggregations['article_type'],
                 sort_key=lambda x: x[1],
-                sort_reverse=True
+                sort_reverse=True,
+                display_names=dict(ARTICLE_TYPES_CHOICES),
             )
 
             # Prepares the languages fields

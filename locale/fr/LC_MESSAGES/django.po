@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 10:45-0500\n"
+"POT-Creation-Date: 2018-04-10 14:39-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,12 +145,12 @@ msgstr ""
 msgid "Année (décroissant)"
 msgstr ""
 
-#: apps/public/citations/views.py:30 apps/public/search/forms.py:328
+#: apps/public/citations/views.py:30 apps/public/search/forms.py:336
 #: apps/public/thesis/views.py:100
 msgid "Titre (A–Z)"
 msgstr ""
 
-#: apps/public/citations/views.py:31 apps/public/search/forms.py:329
+#: apps/public/citations/views.py:31 apps/public/search/forms.py:337
 #: apps/public/thesis/views.py:101
 msgid "Titre (Z–A)"
 msgstr ""
@@ -446,146 +446,166 @@ msgstr ""
 msgid "Rapports de recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:63
-msgid "Arabe"
+#: apps/public/search/forms.py:63 apps/public/search/models.py:152
+#: apps/userspace/reporting/forms.py:15 erudit/models/journal.py:779
+#: erudit/models/journal.py:802
+#: templates/public/journal/article_pdf_coverpage.html:202
+msgid "Article"
 msgstr ""
 
-#: apps/public/search/forms.py:64
-msgid "Catalan"
+#: apps/public/search/forms.py:64 erudit/models/journal.py:780
+msgid "Compte rendu"
 msgstr ""
 
-#: apps/public/search/forms.py:65
-msgid "Anglais"
+#: apps/public/search/forms.py:65 erudit/models/journal.py:782
+msgid "Autre"
 msgstr ""
 
-#: apps/public/search/forms.py:66
-msgid "Espagnol"
-msgstr ""
-
-#: apps/public/search/forms.py:67
-msgid "Allemand"
-msgstr ""
-
-#: apps/public/search/forms.py:68
-msgid "Grec moderne"
-msgstr ""
-
-#: apps/public/search/forms.py:69
-msgid "Français"
+#: apps/public/search/forms.py:66 erudit/models/journal.py:781
+#: templates/public/journal/eruditxsd300_to_html.xsl:877
+msgid "Note"
 msgstr ""
 
 #: apps/public/search/forms.py:70
-msgid "Hébreu"
+msgid "Arabe"
 msgstr ""
 
 #: apps/public/search/forms.py:71
-msgid "Bosniaque"
+msgid "Catalan"
 msgstr ""
 
 #: apps/public/search/forms.py:72
-msgid "Créole haïtien"
+msgid "Anglais"
 msgstr ""
 
 #: apps/public/search/forms.py:73
-msgid "Indonésien"
+msgid "Espagnol"
 msgstr ""
 
 #: apps/public/search/forms.py:74
-msgid "Langues iroquoiennes"
+msgid "Allemand"
 msgstr ""
 
 #: apps/public/search/forms.py:75
-msgid "Italien"
+msgid "Grec moderne"
 msgstr ""
 
 #: apps/public/search/forms.py:76
-msgid "Japonais"
+msgid "Français"
 msgstr ""
 
 #: apps/public/search/forms.py:77
-msgid "Coréen"
+msgid "Hébreu"
 msgstr ""
 
 #: apps/public/search/forms.py:78
-msgid "Latin"
+msgid "Bosniaque"
 msgstr ""
 
 #: apps/public/search/forms.py:79
-msgid "Néerlandais"
+msgid "Créole haïtien"
 msgstr ""
 
 #: apps/public/search/forms.py:80
-msgid "Occitan"
+msgid "Indonésien"
 msgstr ""
 
 #: apps/public/search/forms.py:81
-msgid "Polonais"
+msgid "Langues iroquoiennes"
 msgstr ""
 
 #: apps/public/search/forms.py:82
-msgid "Portugais"
+msgid "Italien"
 msgstr ""
 
 #: apps/public/search/forms.py:83
-msgid "Kichwa"
+msgid "Japonais"
 msgstr ""
 
 #: apps/public/search/forms.py:84
-msgid "Roumain"
+msgid "Coréen"
 msgstr ""
 
 #: apps/public/search/forms.py:85
-msgid "Espéranto"
+msgid "Latin"
 msgstr ""
 
 #: apps/public/search/forms.py:86
-msgid "Russe"
+msgid "Néerlandais"
 msgstr ""
 
 #: apps/public/search/forms.py:87
+msgid "Occitan"
+msgstr ""
+
+#: apps/public/search/forms.py:88
+msgid "Polonais"
+msgstr ""
+
+#: apps/public/search/forms.py:89
+msgid "Portugais"
+msgstr ""
+
+#: apps/public/search/forms.py:90
+msgid "Kichwa"
+msgstr ""
+
+#: apps/public/search/forms.py:91
+msgid "Roumain"
+msgstr ""
+
+#: apps/public/search/forms.py:92
+msgid "Espéranto"
+msgstr ""
+
+#: apps/public/search/forms.py:93
+msgid "Russe"
+msgstr ""
+
+#: apps/public/search/forms.py:94
 msgid "Chinois"
 msgstr ""
 
-#: apps/public/search/forms.py:125 templates/public/home.html:70
+#: apps/public/search/forms.py:132 templates/public/home.html:70
 #: templates/public/search/base.html:6
 msgid "Recherche"
 msgstr ""
 
-#: apps/public/search/forms.py:127
+#: apps/public/search/forms.py:134
 msgid "Inclure les champs"
 msgstr ""
 
-#: apps/public/search/forms.py:157
+#: apps/public/search/forms.py:164
 msgid "De…"
 msgstr ""
 
-#: apps/public/search/forms.py:160
+#: apps/public/search/forms.py:167
 msgid "À…"
 msgstr ""
 
-#: apps/public/search/forms.py:164
+#: apps/public/search/forms.py:171
 msgid "Dans Érudit depuis"
 msgstr ""
 
-#: apps/public/search/forms.py:168 apps/public/search/forms.py:214
+#: apps/public/search/forms.py:175 apps/public/search/forms.py:221
 #: apps/userspace/library/collection/forms.py:36 erudit/models/core.py:110
 #: templates/public/journal/journal_list_per_names.html:144
 msgid "Fonds"
 msgstr ""
 
-#: apps/public/search/forms.py:172
+#: apps/public/search/forms.py:179
 msgid "Types de publication"
 msgstr ""
 
-#: apps/public/search/forms.py:176 apps/public/search/forms.py:210
+#: apps/public/search/forms.py:183 apps/public/search/forms.py:217
 msgid "Langues"
 msgstr ""
 
-#: apps/public/search/forms.py:180 erudit/models/core.py:123
+#: apps/public/search/forms.py:187 erudit/models/core.py:123
 msgid "Disciplines"
 msgstr ""
 
-#: apps/public/search/forms.py:182 core/editor/models.py:222
+#: apps/public/search/forms.py:189 core/editor/models.py:222
 #: core/subscription/models.py:85 core/subscription/models.py:124
 #: erudit/models/journal.py:197 templates/base.html:142 templates/base.html:371
 #: templates/public/home.html:88 templates/public/journal/article_base.html:117
@@ -603,39 +623,39 @@ msgstr ""
 msgid "Revues"
 msgstr ""
 
-#: apps/public/search/forms.py:190
+#: apps/public/search/forms.py:197
 msgid "Expression ou mot-clé"
 msgstr ""
 
-#: apps/public/search/forms.py:202
+#: apps/public/search/forms.py:209
 msgid "Cette intervalle est incorrecte"
 msgstr ""
 
-#: apps/public/search/forms.py:207
+#: apps/public/search/forms.py:214
 msgid "Dans les résultats"
 msgstr ""
 
-#: apps/public/search/forms.py:208
+#: apps/public/search/forms.py:215
 msgid "Années"
 msgstr ""
 
-#: apps/public/search/forms.py:209
+#: apps/public/search/forms.py:216
 msgid "Types d'articles"
 msgstr ""
 
-#: apps/public/search/forms.py:211
+#: apps/public/search/forms.py:218
 #: templates/userspace/library/collection/landing.html:5
 msgid "Collections"
 msgstr ""
 
-#: apps/public/search/forms.py:212 erudit/models/core.py:135
+#: apps/public/search/forms.py:219 erudit/models/core.py:135
 #: erudit/models/journal.py:741
 #: templates/public/journal/journal_authors_list.html:62
 #: templates/public/journal/journal_authors_list.html:72
 msgid "Auteurs"
 msgstr ""
 
-#: apps/public/search/forms.py:215
+#: apps/public/search/forms.py:222
 msgid ""
 "Les revues diffusées sur Érudit sont consultables\n"
 "                    directement sur la plateforme ; les revues des "
@@ -644,11 +664,11 @@ msgid ""
 "partenaire."
 msgstr ""
 
-#: apps/public/search/forms.py:220 templates/base.html:139
+#: apps/public/search/forms.py:227 templates/base.html:139
 msgid "Types de publications"
 msgstr ""
 
-#: apps/public/search/forms.py:221
+#: apps/public/search/forms.py:228
 msgid ""
 "Les revues savantes publient des articles scientifiques révisés\n"
 "                    par les pairs ; les revues culturelles présentent des "
@@ -656,37 +676,37 @@ msgid ""
 "                    domaines artistique, littéraire et socioculturel."
 msgstr ""
 
-#: apps/public/search/forms.py:250 erudit/models/core.py:180
+#: apps/public/search/forms.py:257 erudit/models/core.py:180
 #: templates/base.html:241
 #: templates/public/search/partials/advanced_search_q.html:15
 msgid "Mots-clés"
 msgstr ""
 
-#: apps/public/search/forms.py:323
+#: apps/public/search/forms.py:331
 msgid "Résultats par page"
 msgstr ""
 
-#: apps/public/search/forms.py:325
+#: apps/public/search/forms.py:333
 msgid "Trier par..."
 msgstr ""
 
-#: apps/public/search/forms.py:327
+#: apps/public/search/forms.py:335
 msgid "Pertinence"
 msgstr ""
 
-#: apps/public/search/forms.py:330
+#: apps/public/search/forms.py:338
 msgid "Premier auteur (A–Z)"
 msgstr ""
 
-#: apps/public/search/forms.py:331
+#: apps/public/search/forms.py:339
 msgid "Premier auteur (Z–A)"
 msgstr ""
 
-#: apps/public/search/forms.py:332 apps/public/thesis/views.py:98
+#: apps/public/search/forms.py:340 apps/public/thesis/views.py:98
 msgid "Date de publication (croissant)"
 msgstr ""
 
-#: apps/public/search/forms.py:333 apps/public/thesis/views.py:99
+#: apps/public/search/forms.py:341 apps/public/thesis/views.py:99
 msgid "Date de publication (décroissant)"
 msgstr ""
 
@@ -697,12 +717,6 @@ msgstr ""
 
 #: apps/public/search/models.py:86
 msgid "(Sans titre)"
-msgstr ""
-
-#: apps/public/search/models.py:152 apps/userspace/reporting/forms.py:15
-#: erudit/models/journal.py:779 erudit/models/journal.py:802
-#: templates/public/journal/article_pdf_coverpage.html:202
-msgid "Article"
 msgstr ""
 
 #: apps/public/search/urls.py:10
@@ -740,11 +754,11 @@ msgstr ""
 msgid " {op} (Publié jusqu'à {end})"
 msgstr ""
 
-#: apps/public/search/views.py:204
+#: apps/public/search/views.py:205
 msgid "Querystring incorrecte"
 msgstr ""
 
-#: apps/public/search/views.py:223
+#: apps/public/search/views.py:224
 msgid "Cette recherche n'est pas sauvegardée"
 msgstr ""
 
@@ -1042,44 +1056,44 @@ msgstr ""
 msgid "^institutionnel/exports/telecharger/$"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:79
+#: apps/userspace/journal/subscription/views.py:80
 msgid "Vous avez épuisé la limite du nombre d'abonnements pour cette revue."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:92
+#: apps/userspace/journal/subscription/views.py:93
 msgid "Vous ne pouvez pas gérer les abonnements de votre revue"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:104
+#: apps/userspace/journal/subscription/views.py:105
 msgid "L'abonnement a été créé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:120
+#: apps/userspace/journal/subscription/views.py:121
 msgid "L'abonnement a été supprimé avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:143
+#: apps/userspace/journal/subscription/views.py:144
 msgid "La proposition d'abonnement a été annulée avec succès"
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:196
+#: apps/userspace/journal/subscription/views.py:198
 msgid "{} invitation d'abonnement a été envoyée avec succès."
 msgid_plural "{} invitations d'abonnement ont été envoyées avec succès."
 msgstr[0] ""
 msgstr[1] ""
 
-#: apps/userspace/journal/subscription/views.py:216
+#: apps/userspace/journal/subscription/views.py:218
 msgid ""
 "Vous tentez d'abonner {} personnes alors qu'il reste {} places à votre "
 "forfait."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:221
-#: apps/userspace/journal/subscription/views.py:286
+#: apps/userspace/journal/subscription/views.py:223
+#: apps/userspace/journal/subscription/views.py:288
 msgid "Le CSV fourni n'est pas du bon format."
 msgstr ""
 
-#: apps/userspace/journal/subscription/views.py:268
+#: apps/userspace/journal/subscription/views.py:270
 msgid "{} abonnement a été supprimé avec succès."
 msgid_plural "{} abonnements ont été supprimé avec succès."
 msgstr[0] ""
@@ -2270,19 +2284,6 @@ msgstr ""
 msgid ""
 "Renseigner si le PDF de l'article est hébergé à l'extérieur de la plateforme "
 "Érudit"
-msgstr ""
-
-#: erudit/models/journal.py:780
-msgid "Compte rendu"
-msgstr ""
-
-#: erudit/models/journal.py:781
-#: templates/public/journal/eruditxsd300_to_html.xsl:877
-msgid "Note"
-msgstr ""
-
-#: erudit/models/journal.py:782
-msgid "Autre"
 msgstr ""
 
 #: erudit/models/journal.py:788
