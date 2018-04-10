@@ -12,7 +12,9 @@
   line-height: 1.35;
   font-size: 12px;
   @include font-styles('sans');
-  @include force-break;
+  -ms-word-break: normal;
+  word-break: normal;
+  word-break: normal;
 }
 
 [data-hint] {
