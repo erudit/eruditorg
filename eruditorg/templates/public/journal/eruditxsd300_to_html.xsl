@@ -991,15 +991,7 @@
   <xsl:template match="no" mode="para"></xsl:template>
   <xsl:template match="section1/alinea|section2/alinea|section3/alinea|section4/alinea|section5/alinea|section6/alinea|grannexe/alinea"  priority="1">
     <p class="horspara">
-      <xsl:choose>
-        <xsl:when test="objetmedia">
-          <xsl:apply-templates select="objetmedia/image"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:apply-templates/>
-        </xsl:otherwise>
-      </xsl:choose>
-
+      <xsl:apply-templates/>
     </p>
   </xsl:template>
   <xsl:template match="no">
