@@ -263,7 +263,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.type.embargo_duration() if self.type else \
             erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
 
-    @property
+    # We cache this because published_issues is expensive and this is called often when generating
+    # the journal detail view.
+    @cached_property
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
         if self.open_access or self.published_issues.count() == 0:
@@ -293,6 +295,8 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     # Issues-related methods and properties
     # --
 
+    # PERFORMANCE WARNING: this query is somewhat expensive, call responsibly. We can't cache this
+    # property because the result is a queryset, not actual results.
     @property
     def published_issues(self):
         """ Return the published issues of this Journal. """
@@ -332,7 +336,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         # TODO return from Fedora
         return self.published_issues.order_by('date_published').first()
 
-    @property
+    # We cache this because published_issues is expensive and this is called often when generating
+    # the journal detail view.
+    @cached_property
     def last_issue(self):
         """ Return the last published Issue of this Journal. """
         if self.is_in_fedora:
