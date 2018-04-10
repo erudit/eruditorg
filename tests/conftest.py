@@ -39,10 +39,10 @@ def eruditarticle(request):
 
 @pytest.fixture(
     scope="session",
-    params=os.listdir('./tests/fixtures/issue/')
+    params=[entry for entry in os.scandir('./tests/fixtures/issue/') if entry.is_file()]
 )
 def eruditpublication(request):
-    with open('./tests/fixtures/issue/{}'.format(request.param), 'rb') as xml:
+    with open('./tests/fixtures/issue/{}'.format(request.param.name), 'rb') as xml:
         return EruditPublication(xml.read())
 
 

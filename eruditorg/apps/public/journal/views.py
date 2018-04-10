@@ -392,7 +392,38 @@ class IssueDetailView(
         articles = sorted(articles, key=lambda a: article_li.index(a.localidentifier))
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
+        context['reader_url'] = self._get_reader_url()
         return context
+
+    def _get_reader_url(self):
+        issue = self.get_object()
+        pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
+        pages = et.fromstring(pages_ds.content.serialize())
+        last_page = pages[::-1][0].get('valeur')
+
+        width, w_idthL, height, h_eightL = None, None, None, None
+        if pages.get('smallImage') == 'true':
+            w_idthL = pages.get('imageWidth')
+            h_eightL = pages.get('imageHeight')
+            width = pages.get('smallImageWidth')
+            height = pages.get('smallImageHeight')
+
+        base_url = "http://retro.erudit.org/feuilletage/index.html?{journal_localidentifier}.{issue_localidentifier}@{pages}".format(  # noqa
+            journal_localidentifier=issue.journal.localidentifier,
+            issue_localidentifier=issue.localidentifier,
+            pages=last_page
+        )
+
+        if width and height and w_idthL and h_eightL:
+            base_url = "{base_url}&height=800&width=618&h_eightL={h_eightL}&w_idthL={w_idthL}&p=oui".format(  # noqa
+                base_url=base_url,
+                h_eightL=h_eightL,
+                w_idthL=w_idthL,
+                height=height,
+                width=width
+            )
+
+        return base_url
 
     def generate_sections_tree(self, articles, title=None, title_paral=None, level=0):
         sections_tree = {
