@@ -674,8 +674,37 @@
   <!-- copyright -->
   <xsl:template match="droitsauteur">
     <p class="{name()}">
-      <small><xsl:value-of select="."/></small>
+      <small><xsl:apply-templates mode="copyright"/></small>
     </p>
+  </xsl:template>
+
+  <xsl:template match="nompers" mode="copyright">
+    <span class="nompers">
+      <xsl:call-template name="element_nompers_affichage">
+        <xsl:with-param name="nompers" select="."/>
+      </xsl:call-template>
+    </span>
+  </xsl:template>
+
+  <xsl:template match="liensimple" mode="copyright">
+    <xsl:element name="a">
+      <xsl:attribute name="href">
+        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+      </xsl:attribute>
+      <xsl:attribute name="id">
+        <xsl:value-of select="@id"/>
+      </xsl:attribute>
+      <xsl:attribute name="target">_blank</xsl:attribute>
+      <xsl:apply-templates mode="copyright"/>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="objetmedia/image" mode="copyright">
+    <xsl:element name="img">
+      <xsl:attribute name="src">
+        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+      </xsl:attribute>
+    </xsl:element>
   </xsl:template>
 
   <!-- abstracts -->
