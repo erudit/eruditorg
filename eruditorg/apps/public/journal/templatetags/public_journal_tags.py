@@ -27,6 +27,13 @@ def format_article_title(article):
 
 
 @register.filter
+def prepublication_querystring(article):
+    return "ticket={ticket}".format(
+        ticket=article.issue.prepublication_ticket
+    )
+
+
+@register.filter
 def join_author_list(author_list):
     author_list = list(author_list)
     if not author_list:
