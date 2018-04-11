@@ -2,6 +2,8 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
+from .. import utils
+
 register = template.Library()
 
 
@@ -28,9 +30,7 @@ def format_article_title(article):
 
 @register.filter
 def prepublication_querystring(article):
-    return "ticket={ticket}".format(
-        ticket=article.issue.prepublication_ticket
-    )
+    return utils.prepublication_querystring(article)
 
 
 @register.filter
