@@ -28,6 +28,7 @@ blockquote {
 
     p, li {
       font-size: 14px;
+      @include font-styles('sans');
     }
 
   }
@@ -87,6 +88,6 @@ blockquote {
   display: block;
   text-align: right;
   color: $dark-grey;
-  font-size: smaller;
+  font-size: 14px;
   margin-top: 0.75em;
 }
