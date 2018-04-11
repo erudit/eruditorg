@@ -397,6 +397,8 @@ class IssueDetailView(
 
     def _get_reader_url(self):
         issue = self.get_object()
+        if issue.journal.type.code != 'C':
+            return None
         pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
         pages = et.fromstring(pages_ds.content.serialize())
         last_page = pages[::-1][0].get('valeur')

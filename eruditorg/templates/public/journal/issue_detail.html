@@ -113,7 +113,7 @@
       <span class="theme-guest-editor">{% trans 'Sous la direction de' %} {{ guest_editors|person_list|safe }}</span>
       {% endif %}
     </h1>
-    {% if issue.journal.type.code == 'C' %}
+    {% if reader_url%}
     <p><a href="{{ reader_url }}" class="btn btn-secondary"><span class="ion-ios-book"></span>&nbsp;&nbsp;{% trans 'Feuilleter ce numéro' %}</a></p>
     {% endif %}
     {% if notegens %}
