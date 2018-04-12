@@ -674,37 +674,16 @@
   <!-- copyright -->
   <xsl:template match="droitsauteur">
     <p class="{name()}">
-      <small><xsl:apply-templates mode="copyright"/></small>
+      <small><xsl:apply-templates/></small>
     </p>
   </xsl:template>
 
-  <xsl:template match="nompers" mode="copyright">
+  <xsl:template match="droitsauteur/nompers">
     <span class="nompers">
       <xsl:call-template name="element_nompers_affichage">
         <xsl:with-param name="nompers" select="."/>
       </xsl:call-template>
     </span>
-  </xsl:template>
-
-  <xsl:template match="liensimple" mode="copyright">
-    <xsl:element name="a">
-      <xsl:attribute name="href">
-        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
-      </xsl:attribute>
-      <xsl:attribute name="id">
-        <xsl:value-of select="@id"/>
-      </xsl:attribute>
-      <xsl:attribute name="target">_blank</xsl:attribute>
-      <xsl:apply-templates mode="copyright"/>
-    </xsl:element>
-  </xsl:template>
-
-  <xsl:template match="objetmedia/image" mode="copyright">
-    <xsl:element name="img">
-      <xsl:attribute name="src">
-        <xsl:value-of select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
-      </xsl:attribute>
-    </xsl:element>
   </xsl:template>
 
   <!-- abstracts -->
@@ -1386,11 +1365,6 @@
     </audio>
   </xsl:template>
 
-  <xsl:template match="objetmedia/image">
-    <xsl:variable name="nomImg" select="@*[local-name()='href']"/>
-    <img src="{{ request.get_full_path }}media/{$nomImg}" alt="{% trans 'Image de l’équation' %}" id="{@id}"/>
-  </xsl:template>
-
   <xsl:template match="objetmedia/video">
     <xsl:variable name="videohref" select="@*[local-name()='href']"/>
     <xsl:variable name="nomVid" select="substring-before($videohref, '.')"/>
@@ -1400,6 +1374,18 @@
         <p><em>{% trans 'Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à jour.' %}</em></p>
       </video>
     </div>
+  </xsl:template>
+
+  <xsl:template match="objetmedia/image">
+    <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+    <xsl:element name="img">
+      <xsl:attribute name="src">
+        <xsl:if test="not(starts-with($nomImg , 'http'))">{{ request.get_full_path }}media/</xsl:if><xsl:value-of select="$nomImg"/>
+      </xsl:attribute>
+      <xsl:attribute name="id">
+        <xsl:value-of select="@id"/>
+      </xsl:attribute>
+    </xsl:element>
   </xsl:template>
 
   <xsl:template match="objetmedia/texte">
@@ -2241,7 +2227,7 @@
       <xsl:if test="not(starts-with( @href , 'http://www.erudit.org'))">
         <xsl:attribute name="target">_blank</xsl:attribute>
       </xsl:if>
-      <xsl:value-of select="."/>
+      <xsl:apply-templates/>
     </xsl:element>
   </xsl:template>
 
