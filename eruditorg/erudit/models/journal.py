@@ -11,7 +11,7 @@ from django.db import models
 from django.db.models import Q, Case, When
 from django.utils.functional import cached_property
 from django.utils.translation import get_language
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, pgettext
 from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
@@ -784,7 +784,7 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     TYPE_CHOICES = (
         (ARTICLE_DEFAULT, _('Article')),
         (ARTICLE_REPORT, _('Compte rendu')),
-        (ARTICLE_NOTE, _('Note')),
+        (ARTICLE_NOTE, pgettext("Article Note", "Note")),
         (ARTICLE_OTHER, _('Autre')),
     )
     type = models.CharField(max_length=64, choices=TYPE_CHOICES, verbose_name=_('Type'))

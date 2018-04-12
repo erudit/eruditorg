@@ -4,7 +4,7 @@ import datetime as dt
 import re
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext
 
 from erudit.models import Discipline
 from erudit.models import Journal
@@ -63,7 +63,7 @@ ARTICLE_TYPES_CHOICES = (
     ('Article', _("Article")),
     ('Compte rendu', _("Compte rendu")),
     ('Autre', _("Autre")),
-    ('Note', _("Note")),
+    ('Note', pgettext("Article Note", "Note")),
 )
 
 language_label_correspondence = {
