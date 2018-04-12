@@ -47,13 +47,10 @@ class SavedCitationListView(ListView):
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
 
-        # Computes the number of scientific articles, theses, ...
-        def count(corpus):
-            return len([x for x in documents if x.corpus == corpus])
-
-        context['scientific_articles_count'] = count('Article')
-        context['cultural_articles_count'] = count('Culturel')
-        context['theses_count'] = count('Thèses')
+        counts = collections.Counter(d.corpus for d in documents)
+        context['scientific_articles_count'] = counts.get('Article', 0)
+        context['cultural_articles_count'] = counts.get('Culturel', 0)
+        context['theses_count'] = counts.get('Thèses', 0)
 
         return context
 
