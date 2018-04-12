@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-11 12:45-0500\n"
+"POT-Creation-Date: 2018-04-12 10:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,7 +347,7 @@ msgstr ""
 
 #: apps/public/search/forms.py:29
 #: templates/public/journal/eruditxsd300_to_html.xsl:891
-#: templates/public/journal/eruditxsd300_to_html.xsl:2080
+#: templates/public/journal/eruditxsd300_to_html.xsl:2051
 msgid "Bibliographie"
 msgstr ""
 
@@ -4046,8 +4046,8 @@ msgstr ""
 #: templates/public/journal/eruditxsd300_to_html.xsl:945
 #: templates/public/journal/eruditxsd300_to_html.xsl:958
 #: templates/public/journal/eruditxsd300_to_html.xsl:972
-#: templates/public/journal/eruditxsd300_to_html.xsl:2191
-#: templates/public/journal/eruditxsd300_to_html.xsl:2204
+#: templates/public/journal/eruditxsd300_to_html.xsl:2182
+#: templates/public/journal/eruditxsd300_to_html.xsl:2195
 msgid "special"
 msgstr ""
 
@@ -4083,33 +4083,33 @@ msgstr ""
 msgid "Bibliographies"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1086
+#: templates/public/journal/eruditxsd300_to_html.xsl:1064
 msgid ""
-"-> Voir la liste des <xsl:if test=\"parent::figure\">figures</xsl:if><xsl:if "
-"test=\"parent::tableau\">tableaux</xsl:if>"
+"-> Voir la liste des <xsl:if test=\"self::figure\">figures</xsl:if><xsl:if "
+"test=\"self::tableau\">tableaux</xsl:if>"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1175
+#: templates/public/journal/eruditxsd300_to_html.xsl:1356
 msgid ""
 "Votre navigateur ne supporte pas les fichiers audio. Veuillez le mettre à "
 "jour."
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1181
+#: templates/public/journal/eruditxsd300_to_html.xsl:1362
 msgid "Image de l’équation"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1190
+#: templates/public/journal/eruditxsd300_to_html.xsl:1371
 msgid ""
 "Votre navigateur ne supporte pas les fichiers vidéo. Veuillez le mettre à "
 "jour."
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:1904
+#: templates/public/journal/eruditxsd300_to_html.xsl:1875
 msgid "Parties annexes"
 msgstr ""
 
-#: templates/public/journal/eruditxsd300_to_html.xsl:2233
+#: templates/public/journal/eruditxsd300_to_html.xsl:2224
 msgid "alias"
 msgstr ""
 
@@ -4139,7 +4139,7 @@ msgstr ""
 #: templates/public/journal/issue_detail.html:97
 #: templates/public/journal/issue_detail.html:150
 #: templates/public/search/results.html:216
-#: templates/public/search/results.html:232
+#: templates/public/search/results.html:231
 msgid "Consulter la revue"
 msgstr ""
 
@@ -4702,16 +4702,20 @@ msgstr ""
 msgid "publié"
 msgstr ""
 
-#: templates/public/search/results.html:229
-msgid "dans la revue"
+#: templates/public/search/results.html:230
+msgid "dans"
 msgstr ""
 
-#: templates/public/search/results.html:231
+#: templates/public/search/results.html:232
 msgid "culturelle"
 msgstr ""
 
-#: templates/public/search/results.html:231
+#: templates/public/search/results.html:232
 msgid "savante"
+msgstr ""
+
+#: templates/public/search/results.html:232
+msgid "fonds"
 msgstr ""
 
 #: templates/public/search/results.html:241
