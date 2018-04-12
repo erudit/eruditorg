@@ -55,12 +55,12 @@
             </div>
           </div>
         </div>
+        {% include "public/search/partials/advanced_search_q.html" with qnb=1 qoperator_field=form.advanced_search_operator1 qterm_field=form.advanced_search_term1 qfield_field=form.advanced_search_field1 %}
         <div id="id_advanced_q_wrapper">
-          {% include "public/search/partials/advanced_search_q.html" with qnb=1 qoperator_field=form.advanced_search_operator1 qterm_field=form.advanced_search_term1 qfield_field=form.advanced_search_field1 %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=2 qoperator_field=form.advanced_search_operator2 qterm_field=form.advanced_search_term2 qfield_field=form.advanced_search_field2 %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=3 qoperator_field=form.advanced_search_operator3 qterm_field=form.advanced_search_term3 qfield_field=form.advanced_search_field3 %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=4 qoperator_field=form.advanced_search_operator4 qterm_field=form.advanced_search_term4 qfield_field=form.advanced_search_field4 %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=5 qoperator_field=form.advanced_search_operator5 qterm_field=form.advanced_search_term5 qfield_field=form.advanced_search_field5 %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=2 qoperator_field=form.advanced_search_operator2 qterm_field=form.advanced_search_term2 qfield_field=form.advanced_search_field2 style='display:none;' %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=3 qoperator_field=form.advanced_search_operator3 qterm_field=form.advanced_search_term3 qfield_field=form.advanced_search_field3 style='display:none;' %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=4 qoperator_field=form.advanced_search_operator4 qterm_field=form.advanced_search_term4 qfield_field=form.advanced_search_field4 style='display:none;' %}
+          {% include "public/search/partials/advanced_search_q.html" with qnb=5 qoperator_field=form.advanced_search_operator5 qterm_field=form.advanced_search_term5 qfield_field=form.advanced_search_field5 style='display:none;' %}
         </div>
         <div class="row btn-row">
           <div class="col-xs-6 col-md-5 col-md-offset-1">
@@ -79,6 +79,24 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-sm-6 filter-types">
+          <div id="div_id_{{ form.publication_types.html_name }}" class="form-group{% if form.publication_types.errors %} has-error{% endif %}">
+            <fieldset>
+              <legend class="control-label">{{ form.publication_types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel.' %}"><span class="ion-help-circled"></span></span></legend>
+              {{ form.publication_types|add_class:'form-control' }}
+              {% for error in form.publication_types.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </fieldset>
+          </div>
+        </div>
+        <div class="col-sm-6 filter-collections">
+          <div id="div_id_{{ form.funds.html_name }}" class="form-group{% if form.funds.errors %} has-error{% endif %}">
+            <fieldset>
+              <legend class="control-label">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></legend>
+              {{ form.funds|add_class:'form-control' }}
+              {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </fieldset>
+          </div>
+        </div>
         <div class="col-sm-4 filter-disciplines">
           <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
             <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
@@ -98,25 +116,6 @@
             <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
             {{ form.journals|add_class:'form-control' }}
             {% for error in form.journals.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
-        </div>
-        <div class="col-sm-6 filter-types">
-          <div id="div_id_{{ form.publication_types.html_name }}" class="form-group{% if form.publication_types.errors %} has-error{% endif %}">
-            <fieldset>
-              <legend class="control-label">{{ form.publication_types.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues savantes publient des articles scientifiques révisés par les pairs&nbsp;; les revues culturelles présentent des articles dans les domaines artistique, littéraire et socioculturel.' %}"><span class="ion-help-circled"></span></span></legend>
-              {{ form.publication_types|add_class:'form-control' }}
-              {% for error in form.publication_types.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </fieldset>
-          </div>
-
-        </div>
-        <div class="col-sm-6 filter-collections">
-          <div id="div_id_{{ form.funds.html_name }}" class="form-group{% if form.funds.errors %} has-error{% endif %}">
-            <fieldset>
-              <legend class="control-label">{{ form.funds.label }}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues diffusées sur Érudit sont consultables directement sur la plateforme&nbsp;; les revues des collections Persée et NRC Research Press redirigent vers la plateforme du partenaire.' %}"><span class="ion-help-circled"></span></span></legend>
-              {{ form.funds|add_class:'form-control' }}
-              {% for error in form.funds.errors %}<p class="error">{{ error }}</p>{% endfor %}
-            </fieldset>
           </div>
         </div>
         <div class="col-sm-6 filter-years">

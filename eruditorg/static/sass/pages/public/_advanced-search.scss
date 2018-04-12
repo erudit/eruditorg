@@ -43,7 +43,6 @@
 
     input[type='text'],
     select,
-    .remove-qbox,
     .operator {
       margin: 15px 0;
     }
@@ -52,7 +51,7 @@
       background-color: transparent;
       border-width: 0 0 1px 0;
       text-transform: uppercase;
-      width: auto;
+      width: 55px;
       font-size: 12px;
       @include fw-mono;
     }
@@ -68,7 +67,7 @@
     }
 
     .remove-qbox {
-      line-height: 40px;
+      line-height: 110px;
       font-size: 20px;
       display: block;
       color: #000;
