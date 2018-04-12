@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load cache %}
-{% load model_formatters %}
+{% load cache i18n model_formatters waffle_tags %}
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'public:journal:journal_list' %}">{% trans "Revues" %}</a></li>
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
@@ -63,9 +61,18 @@
       {# journal meta infos #}
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
+        {% switch "maintenance" %}
+        {% else %}
         <p>
-          -> <a href="//{{ journal.code }}.erudit.org/user/login{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank" class="publisher-login">{% trans 'Accès éditeur' %}</a>
+          {% if request.user.is_anonymous %}
+          -> <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="journal-login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
+            {% trans 'Accès éditeur' %}
+          </a>
+          {% else %}
+          -> <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord des éditeurs" %}</a>
+          {% endif %}
         </p>
+        {% endswitch %}
         {% block aside_authors_list %}
         <p>
           -> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
