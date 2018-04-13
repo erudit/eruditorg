@@ -2087,41 +2087,31 @@
 
   <!--*** LISTS OF TABLES & FIGURES ***-->
   <xsl:template match="tableau | figure" mode="liste">
-    <xsl:for-each select=".">
-      <figure class="{name()}" id="li{@id}">
-        <figcaption class="notitre">
-          <p class="allertexte"><a href="#{@id}">|^</a></p>
-          <p class="no"><xsl:apply-templates select="no"/></p>
-          <xsl:apply-templates select="legende/titre | legende/sstitre"/>
-        </figcaption>
-        <xsl:apply-templates select="objetmedia | tabtexte"/>
-      </figure>
-    </xsl:for-each>
+    <figure class="{name()}" id="li{@id}">
+      <figcaption class="notitre">
+        <p class="allertexte"><a href="#{@id}">|^</a></p>
+        <p class="no"><xsl:apply-templates select="no" mode="liste"/></p>
+        <xsl:apply-templates select="legende/titre | legende/sstitre" mode="liste"/>
+      </figcaption>
+      <xsl:apply-templates select="objetmedia | tabtexte"/>
+    </figure>
   </xsl:template>
 
   <xsl:template match="no" mode="liste">
     <span class="no">
-      <xsl:apply-templates select="*[not(self::renvoi)]"/>
+      <xsl:apply-templates mode="liste"/>
     </span>
   </xsl:template>
 
   <xsl:template match="legende/titre | legende/sstitre" mode="liste">
     <div class="legende">
-      <xsl:for-each select=".">
-        <div class="{name()}">
-          <xsl:apply-templates select="*[not(self::renvoi)]"/>
-        </div>
-      </xsl:for-each>
+      <p class="{name()}">
+        <xsl:apply-templates mode="liste"/>
+      </p>
     </div>
   </xsl:template>
 
-  <xsl:template match="objetmedia" mode="liste">
-    <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
-    <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
-    <a href="{{ request.get_full_path }}media/{$imgPlGr}" title="{normalize-space(../legende/titre)}" class="lightbox">
-      <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende/titre)}" class="img-responsive"/>
-    </a>
-  </xsl:template>
+  <xsl:template match="tableau//renvoi | figure//renvoi" mode="liste"/>
 
   <!--*** all-purpose typographic markup ***-->
   <xsl:template match="espacev">
