@@ -10,6 +10,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
 from account_actions.models import AccountActionToken
 
@@ -269,6 +270,48 @@ class JournalManagementSubscription(AbstractSubscription):
         nowd = dt.datetime.now().date()
         return JournalManagementSubscriptionPeriod.objects.filter(
             subscription=self, start__lte=nowd, end__gte=nowd).exists()
+
+    def subscribe_email(self, email, firstname=None, lastname=None):
+        """ Create a JournalAccessSubscription for the given email
+
+        Subscribe an email to the journal related to this
+        management subscription.
+
+        If a user account with the target email exists, it will be subscribed. Otherwise,
+        it will be created and subscribed.
+
+        :param email: the email to subscribe
+        :param first_name: first name of the user. Only used if the user is created.
+        :param last_name: last name of the user. Only used if the user is created.
+        """
+
+        User = get_user_model()
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            user = User(email=email, username=email)
+            if firstname:
+                user.first_name = firstname
+            if lastname:
+                user.last_name = lastname
+            user.save()
+            logger.info("user.created", user=user.username)
+        finally:
+            try:
+                JournalAccessSubscription.objects.get(
+                    journal_management_subscription=self, user=user
+                )
+            except JournalAccessSubscription.DoesNotExist:
+                subscription = JournalAccessSubscription(
+                    journal_management_subscription=self, user=user
+                )
+                subscription.save()
+                subscription.journals.add(self.journal)
+                subscription.save()
+                logger.info(
+                    "subscription.created",
+                    user=user.username, journal=self.journal.code, plan=self.pk
+                )
 
     def get_pending_subscriptions(self):
         return AccountActionToken.pending_objects.get_for_object(self)
