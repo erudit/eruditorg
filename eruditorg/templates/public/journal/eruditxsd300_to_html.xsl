@@ -1345,12 +1345,18 @@
 
   <xsl:template match="objetmedia/image">
     <xsl:variable name="nomImg" select="@href" xmlns:xlink="http://www.w3.org/1999/xlink" />
+    <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:element name="img">
       <xsl:attribute name="src">
         <xsl:if test="not(starts-with($nomImg , 'http'))">{{ request.get_full_path }}media/</xsl:if><xsl:value-of select="$nomImg"/>
       </xsl:attribute>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>
+      </xsl:attribute>
+      <xsl:attribute name="alt">
+        <xsl:value-of select="@typeimage"/>
+        <xsl:text>: </xsl:text>
+        <xsl:value-of select="desc | $titreImg"/>
       </xsl:attribute>
     </xsl:element>
   </xsl:template>
