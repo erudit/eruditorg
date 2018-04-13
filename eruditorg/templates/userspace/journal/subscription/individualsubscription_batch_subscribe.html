@@ -42,6 +42,9 @@
         {% for email, first_name, last_name in toadd %}
         <input type="hidden" name="toadd" value="{{ email }};{{ first_name }};{{ last_name }}">
         {% endfor %}
+        <input type="checkbox" id="send_email" name="send_email" checked="true">
+        <label for="send_email">{% trans "Envoyer le courriel" %}</label>
+
         <input class="btn btn-primary" type="submit" value="{% trans "Abonner" %}">
     </form>
 {% else %}
