@@ -1,7 +1,7 @@
 {% for document in documents %}
-{% if document.polymorphic_ctype_id == article_ct.id %}
+{% if document.document_type == 'article' %}
 {% include "public/journal/citation/article.bib" with article=document %}
-{% elif document.polymorphic_ctype_id == thesis_ct.id %}
+{% elif document.document_type == 'thesis' %}
 {% include "public/thesis/citation/thesis.bib" with thesis=document %}
 {% endif %}
 

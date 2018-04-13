@@ -427,7 +427,11 @@ class TestIssue(BaseEruditTestCase):
         # Setup
         now_dt = dt.datetime.now()
         journal = JournalFactory()
-        j2 = JournalFactory.create(type_code='C', open_access=False)
+        j2 = JournalFactory.create(
+            type_code='C',
+            open_access=False,
+            collection=CollectionFactory.create(code='not-erudit'),
+        )
         journal.last_publication_year = now_dt.year
         journal.open_access = True
         journal.save()

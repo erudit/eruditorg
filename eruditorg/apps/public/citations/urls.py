@@ -8,9 +8,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.SavedCitationListView.as_view(), name='list'),
-    url(_(r'^ajout/(?P<document_id>\d+)/$'),
+    url(_(r'^ajout/$'),
         views.SavedCitationAddView.as_view(), name='add_citation'),
-    url(_(r'^suppression/(?P<document_id>\d+)/$'),
+    url(_(r'^suppression/$'),
         views.SavedCitationRemoveView.as_view(), name='remove_citation'),
     url(_(r'^suppression/batch/$'),
         views.SavedCitationBatchRemoveView.as_view(), name='remove_citation_batch'),

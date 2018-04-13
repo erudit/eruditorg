@@ -24,7 +24,8 @@ class SavedCitationList {
     let documentAttrId = $document.attr('id');
     $.ajax({
       type: 'POST',
-      url: Urls['public:citations:add_citation'](documentId),
+      url: Urls['public:citations:add_citation'](),
+      data: { document_id: documentId }
     }).done(() => {
       $document.data(this.options.documentIsSavedDataAttribute, true);
       $('[data-' + this.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').hide();
@@ -41,7 +42,8 @@ class SavedCitationList {
     let documentAttrId = $document.attr('id');
     $.ajax({
       type: 'POST',
-      url: Urls['public:citations:remove_citation'](documentId),
+      url: Urls['public:citations:remove_citation'](),
+      data: { document_id: documentId }
     }).done(() => {
       $document.data(this.options.documentIsSavedDataAttribute, false);
       $('[data-' + this.options.documentAddDataAttribute + '="#' + documentAttrId + '"]').show();

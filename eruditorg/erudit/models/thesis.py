@@ -36,3 +36,9 @@ class Thesis(EruditDocument, OAIDated):
 
     def __str__(self):
         return self.title
+
+    @property
+    def solr_id(self):
+        # A thesis localidentifier looks like oai:something.usomething.ca:1234/32
+        # This is exactly the value we hold in solr's ID field
+        return self.localidentifier
