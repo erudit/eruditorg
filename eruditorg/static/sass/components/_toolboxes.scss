@@ -1,8 +1,81 @@
 /**
  * Article / bibliographic record toolbox
  */
+
 .toolbox-wrapper {
   z-index: 10;
+}
+
+@mixin toolbox-compact {
+  width: 30px;
+
+  li {
+    height: 30px;
+
+    .tool-btn {
+      min-width: 30px;
+      font-size: 0.65em;
+      color: #FFF;
+      background-color: #000;
+
+      &:hover, &:focus, &:active:focus, &.saved {
+        background: $coral-red;
+      }
+
+      .tools-label {
+        padding: 0 10px 0 30px;
+        line-height: 30px;
+      }
+
+    }
+
+    .toolbox-top {
+      font-size: 16px;
+      left: 10px;
+    }
+
+    .toolbox-remove {
+      font-size: 14px;
+      left: 10px;
+    }
+
+    .toolbox-save {
+      font-size: 18px;
+      left: 12px;
+    }
+
+    .toolbox-cite,
+    .toolbox-share {
+      font-size: 14px;
+      left: 10px;
+    }
+
+    .toolbox-pdf {
+      left: 7px;
+      font-size: 9px;
+    }
+
+    .toolbox-html {
+      left: 3px;
+      font-size: 9px;
+    }
+
+  }
+
+}
+
+@mixin toolbox-horizontal {
+  margin: 0 0 0 15px;
+  padding: 0;
+  width: auto;
+
+  li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    outline: 1px solid #FFF;
+  }
+
 }
 
 .toolbox {
@@ -84,86 +157,44 @@
   /**
   * compact mode
   */
+
   &.toolbox-compact {
-    width: 30px;
-
-    li {
-      height: 30px;
-
-      .tool-btn {
-        min-width: 30px;
-        font-size: 0.65em;
-        color: #FFF;
-        background-color: #000;
-
-        &:hover, &:focus, &:active:focus, &.saved {
-          background: $coral-red;
-        }
-
-        .tools-label {
-          padding: 0 10px 0 30px;
-          line-height: 30px;
-        }
-
-      }
-
-      .toolbox-top {
-        font-size: 16px;
-        left: 10px;
-      }
-
-      .toolbox-remove {
-        font-size: 14px;
-        left: 10px;
-      }
-
-      .toolbox-save {
-        font-size: 18px;
-        left: 12px;
-      }
-
-      .toolbox-cite,
-      .toolbox-share {
-        font-size: 14px;
-        left: 10px;
-      }
-
-      .toolbox-pdf {
-        left: 7px;
-        font-size: 9px;
-      }
-
-      .toolbox-html {
-        left: 3px;
-        font-size: 9px;
-      }
-
-    }
-
+    @include toolbox-compact;
   }
 
   &.toolbox-horizontal {
-    margin: 0 0 0 15px;
-    padding: 0;
-    width: auto;
-
-    li {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      outline: 1px solid #FFF;
-    }
-
+    @include toolbox-horizontal;
   }
 
 }
 
-.toolbox-mobile {
-  text-align: right;
-  padding-right: 11px;
 
-  &.is_stuck {
-    margin-top: -20px;
+// Mobile toolbox in article page
+
+@media (max-width: $screen-sm-max) {
+
+  #article_detail {
+
+    .toolbox-wrapper {
+      text-align: right;
+      padding-right: 11px;
+
+      &.is_stuck {
+        margin-top: -20px;
+      }
+
+    }
+
+    .toolbox {
+      @include toolbox-compact;
+      @include toolbox-horizontal;
+
+      li .tools-label {
+        display: none;
+      }
+
+    }
+
   }
 
 }

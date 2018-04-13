@@ -297,50 +297,16 @@
           {% include "public/partials/subscription_sponsor_badge.html" %}
         </nav>
 
-        <!-- mobile / tablet toolbox -->
-        <aside class="hidden-md hidden-lg toolbox-wrapper toolbox-mobile">
+        <!-- toolbox -->
+        <aside class="pull-right toolbox-wrapper">
           <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
-          <ul class="toolbox toolbox-compact toolbox-horizontal">
-            {% spaceless %}
-            <li>
+          {% spaceless %}
+          <ul class="unstyled toolbox">
+            <li class="hidden-md hidden-lg">
               <a class="scroll-top tool-btn tool-top" href="#top" title="{% trans 'Retourner en haut de la page' %}" aria-label="{% trans 'Retourner en haut de la page' %}">
                 <span class="ion-android-arrow-up toolbox-top"></span>
               </a>
             </li>
-            <li>
-              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" title="{% trans 'Sauvegarder la notice' %}" data-citation-save="#article-{{ article.id }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
-                <span class="ion-bookmark toolbox-save"></span>
-              </a>
-              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" title="{% trans 'Retirer cette notice sauvegardée' %}" data-citation-remove="#article-{{ article.id }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
-                <span class="ion-bookmark toolbox-save"></span>
-              </a>
-            </li>
-            <li>
-              <a class="tool-btn tool-download" title="{% trans 'Télécharger le PDF de cet article' %}" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">
-                <span class="toolbox-pdf">PDF</span>
-              </a>
-            </li>
-            <li>
-              <a class="tool-btn tool-cite" title="{% trans 'Citer cet article' %}" data-modal-id="#id_cite_modal_{{ article.id }}">
-                <span class="ion-quote toolbox-cite"></span>
-              </a>
-            </li>
-            <li>
-              <a class="tool-btn tool-share" title="{% trans 'Partager cet article' %}" data-cite="#id_cite_mla_{{ article.id }}">
-                <xsl:attribute name="data-title">
-                  {{ article|format_article_title|escape }}
-                </xsl:attribute>
-                <span class="ion-android-share toolbox-share"></span>
-              </a>
-            </li>
-            {% endspaceless %}
-          </ul>
-        </aside>
-
-        <!-- desktop toolbox -->
-        <aside class="pull-right hidden-xs hidden-sm toolbox-wrapper">
-          <h2 class="sr-only">{% trans "Boîte à outils" %}</h2>
-          <ul class="unstyled toolbox">
             {% switch "maintenance" %}
             {% else %}
             <li>
@@ -378,6 +344,7 @@
               </a>
             </li>
           </ul>
+          {% endspaceless %}
         </aside>
       </xsl:if>
 
