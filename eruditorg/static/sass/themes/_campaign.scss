@@ -31,17 +31,15 @@ $peach:       #FFE7B0;
   overflow-y: hidden;
   height: 370px;
   margin-bottom: 1em;
-  @include transition(background-position 300ms linear);
   outline: 1px solid $mid-grey;
-  background-image: url('../img/salons-fr.png');
+  background-image: url('../img/banners/acfas2018-erudit-bann270x370.gif');
 
   &.en {
-    background-image: url('../img/salons-en.png');
+    background-image: url('../img/banners/acfas2018-erudit-bann270x370.gif');
   }
 
   &:hover, &:focus, &:active {
     outline: 1px solid $dark-grey;
-    background-position: center -80px;
   }
 
   img {
