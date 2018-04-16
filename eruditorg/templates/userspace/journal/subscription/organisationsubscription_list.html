@@ -1,15 +1,21 @@
 {% extends "userspace/journal/subscription/base.html" %}
 {% load i18n waffle_tags %}
 
-{% block title %}{% trans "Abonnements" %} {{ block.super }}{% endblock title %}
+{% block title %}{% trans "Abonnements institutionnels" %} {{ block.super }}{% endblock title %}
 
 {% block breadcrumb %}{{ block.super }}
 <li><a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Abonnements" %}</a></li>
 {% endblock breadcrumb %}
 
 {% block section_title %}
-{% trans "Abonnements" %}
+{% trans "Abonnements institutionnels" %}
 {% endblock %}
+
+{% block section_intro %}
+{% blocktrans %}
+<p>Cette page vous présente la liste des institutions abonnées à votre revue sur Érudit, avec le type d’abonnement (panier ou nom du consortium). À noter que les revues en libre accès complet ne présentent pas de données sur cette page.</p>
+{% endblocktrans %}
+{% endblock section_intro %}
 
 {% block content_main %}
 {{ block.super }}
