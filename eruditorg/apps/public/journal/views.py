@@ -235,6 +235,8 @@ class JournalAuthorsListView(SingleJournalMixin, TemplateView):
             self.article_type = None
 
     def get_solr_article_type(self):
+        if not self.has_multiple_article_types:
+            return None
         if self.article_type == 'compterendu':
             return 'Compte rendu'
         elif self.article_type == 'article':
@@ -252,6 +254,10 @@ class JournalAuthorsListView(SingleJournalMixin, TemplateView):
                 return {}
         return solr.get_journal_authors_dict(
             self.journal.solr_code, self.letter, self.get_solr_article_type())
+
+    @cached_property
+    def has_multiple_article_types(self):
+        return len(solr.get_journal_authors_article_types(self.journal.solr_code)) > 1
 
     @cached_property
     def letters_exists(self):

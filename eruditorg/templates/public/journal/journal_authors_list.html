@@ -83,6 +83,7 @@
   </header>
 
   <div class="authors-wrapper main-content">
+    {% if view.has_multiple_article_types %}
     <nav class="btn-group">
       <h2 class="sr-only">{% trans 'Par type d’article' %}</h2>
       {% url 'public:journal:journal_authors_list' journal.code as authors_list_url %}
@@ -90,6 +91,7 @@
       <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn{% if article_type == 'article' %} active{% endif %}">{% trans "Articles" %}</a>
       <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn{% if article_type == 'compterendu' %} active{% endif %}">{% trans "Comptes rendus" %}</a>
     </nav>
+    {% endif %}
     <nav>
       <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
       <ul class="alpha-nav">

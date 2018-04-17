@@ -388,8 +388,10 @@ class TestJournalAuthorsListView:
         """ Test that for a given selection in the authors list view, only the letters for which
         results are present are shown """
         issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        solr_client.add_article(article_1, ['atest'])
+        article1 = ArticleFactory.create(issue=issue_1, type='article')
+        article2 = ArticleFactory.create(issue=issue_1, type='compterendu')
+        solr_client.add_article(article1, ['atest'])
+        solr_client.add_article(article2, ['btest'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, {"article_type": 'compterendu'})
 
@@ -437,6 +439,20 @@ class TestJournalAuthorsListView:
         assert response.context['letters_exists']['C']
         for letter in 'adefghijklmnopqrstuvwxyz':
             assert not response.context['letters_exists'][letter.upper()]
+
+    @pytest.mark.parametrize('article_type,expected', [('compterendu', True), ('article', False)])
+    def test_view_has_multiple_article_types(self, article_type, expected, solr_client):
+        article1 = ArticleFactory.create(type='article')
+        article2 = ArticleFactory.create(issue=article1.issue, type=article_type)
+        solr_client.add_article(article1, ['btest'])
+        solr_client.add_article(article2, ['btest'])
+
+        url = reverse(
+            'public:journal:journal_authors_list',
+            kwargs={'code': article1.issue.journal.code})
+        response = Client().get(url)
+
+        assert response.context['view'].has_multiple_article_types == expected
 
 
 class TestIssueDetailView:

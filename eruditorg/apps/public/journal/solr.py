@@ -22,6 +22,21 @@ def _get_first_letter(name):
     return name[0].upper()
 
 
+def get_journal_authors_article_types(journal_code):
+    client = get_client()
+    query = 'RevueAbr:{}'.format(journal_code)
+    args = {
+        'q': query,
+        'rows': '0',
+        'facet.field': 'TypeArticle_fac',
+    }
+    solr_results = client.search(**args)
+    facets = solr_results.facets['facet_fields']['TypeArticle_fac']
+    # See comment for same line in get_journal_authors_letters()
+    article_types = facets[::2]
+    return set(article_types)
+
+
 def get_journal_authors_letters(journal_code, article_type, normalized=True):
     # To get a list of available letters for a particular journal in the fastest way possible,
     # we use face results so that we don't have to iterate through mathcing articles, but matching

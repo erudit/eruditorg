@@ -1,3 +1,4 @@
+from collections import Counter
 import re
 
 
@@ -72,6 +73,13 @@ class FakeSolrClient:
                 result['RevueAbr'] = article['journal_code']
             return result
 
+        def get_facet(elems):
+            counter = Counter(elems)
+            result = []
+            for k, v in counter.items():
+                result += [k, v]
+            return result
+
         q = kwargs.get('q') or args[0]
         m = re.match(r'^RevueAbr:([\w\-]+) AuteurNP_fac:\((\w)\*\).*$', q)
         if m:
@@ -89,18 +97,22 @@ class FakeSolrClient:
             return FakeSolrResults(docs=result)
         m = re.match(r'^RevueAbr:([\w\-]+).*$', q)
         if m:
-            # letter list, return facets
+            # letter list or article types, return facets
             journal_code = m.group(1)
             filter_by_type = get_filter_by_type(q)
             authors = []
+            article_types = []
             for author, articles in self.authors.items():
                 for article in articles:
                     if filter_by_type and article['type'] != filter_by_type:
                         continue
                     if article['journal_code'] == journal_code:
-                        authors += [author, 42]
-                        break
-            return FakeSolrResults(facet_fields={'AuteurNP_fac': authors})
+                        authors.append(author)
+                        article_types.append(article['type'])
+            return FakeSolrResults(facet_fields={
+                'AuteurNP_fac': get_facet(authors),
+                'TypeArticle_fac': get_facet(article_types),
+            })
 
         m = re.match(r'^ID:"(.+)"$', q)
         if m:
