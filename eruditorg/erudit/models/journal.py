@@ -242,7 +242,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @cache_fedora_result
     def get_titles(self):
         last_issue = self.last_issue
-        if not last_issue:
+        if not self.is_in_fedora or not last_issue:
             titles = {'main': self.name}
         else:
             titles = last_issue.erudit_object.get_journal_title()

@@ -25,7 +25,7 @@ def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_
     """
 
     def wrapper(self, *args, **kwargs):
-        key = "{localidentifier}-{method_name}".format(
+        key = "fedora_result-{localidentifier}-{method_name}".format(
             localidentifier=self.localidentifier,
             method_name=method.__name__
         )
