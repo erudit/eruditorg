@@ -183,17 +183,27 @@ class JournalIndividualSubscriptionBatchSubscribe(JournalSubscriptionMixin, Temp
             journal=self.current_journal)
         slots_left = management_subscription.slots_left
         toadd = request.POST.getlist('toadd')
+        send_email = request.POST.get('send_email')
         if toadd:
             toadd = toadd[:slots_left]
             for line in toadd:
                 email, first_name, last_name = line.split(';')
-                AccountActionToken.objects.create(
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name,
-                    action=IndividualSubscriptionAction.name,
-                    content_object=management_subscription,
-                )
+                if send_email:
+                    AccountActionToken.objects.create(
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name,
+                        action=IndividualSubscriptionAction.name,
+                        content_object=management_subscription,
+                    )
+
+                if not send_email:
+                    management_subscription.subscribe_email(
+                        email,
+                        firstname=first_name,
+                        lastname=last_name
+                    )
+
             msg = ngettext(
                 "{} invitation d'abonnement a été envoyée avec succès.",
                 "{} invitations d'abonnement ont été envoyées avec succès.",

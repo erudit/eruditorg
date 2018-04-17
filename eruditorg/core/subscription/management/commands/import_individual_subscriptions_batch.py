@@ -7,10 +7,8 @@ from django.core.management.base import BaseCommand
 
 from erudit.models import Journal
 
-from core.subscription.models import (
-    JournalAccessSubscription, JournalManagementSubscription
-)
-from django.contrib.auth.models import User
+from core.subscription.models import JournalManagementSubscription
+
 
 logger = structlog.get_logger(__name__)
 
@@ -55,25 +53,4 @@ class Command(BaseCommand):
             self.subscriptions = [tuple(row) for row in csvreader]
 
         for email, firstname, lastname in self.subscriptions:
-            try:
-                user = User.objects.get(email=email)
-            except User.DoesNotExist:
-                user = User(email=email, username=email, first_name=firstname, last_name=lastname)
-                user.save()
-                logger.info("user.created", user=user.username)
-            finally:
-                try:
-                    JournalAccessSubscription.objects.get(
-                        journal_management_subscription=plan, user=user
-                    )
-                except JournalAccessSubscription.DoesNotExist:
-                    subscription = JournalAccessSubscription(
-                        journal_management_subscription=plan, user=user
-                    )
-                    subscription.save()
-                    subscription.journals.add(journal)
-                    subscription.save()
-                    logger.info(
-                        "subscription.created",
-                        user=user.username, journal=journal_shortname, plan=plan.pk
-                    )
+            plan.subscribe_email(email, firstname=firstname, lastname=lastname)

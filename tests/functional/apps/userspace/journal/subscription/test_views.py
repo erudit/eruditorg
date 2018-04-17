@@ -375,7 +375,21 @@ def test_batch_subscribe_over_limit():
     assert len(response.context['messages']) == 1
 
 
-def test_batch_subscribe_proceed():
+def test_batch_subscribe_send_email_proceed():
+    journal, user = journal_that_can_subscribe()
+    lines = [
+        'foo@example.com;Foo;Bar',
+        'other@example.com;Other;Name']
+    client = Client()
+    client.login(username=user.username, password='default')
+    url = reverse('userspace:journal:subscription:batch_subscribe', args=[journal.pk])
+    response = client.post(url, {'toadd': lines, 'send_email': True}, follow=True)
+
+    assert response.status_code == 200
+    assert AccountActionToken.objects.count() == len(lines)
+
+
+def test_batch_subscribe_directly_proceed():
     journal, user = journal_that_can_subscribe()
     lines = [
         'foo@example.com;Foo;Bar',
@@ -386,11 +400,9 @@ def test_batch_subscribe_proceed():
     response = client.post(url, {'toadd': lines}, follow=True)
 
     assert response.status_code == 200
-    assert AccountActionToken.objects.count() == len(lines)
+    assert JournalAccessSubscription.objects.count() == len(lines)
 
 # Batch delete
-
-
 def hit_batch_delete_with_csv_and_test(
         user, journal, csvlines, expected_todelete, expected_ignored, expected_errors):
     fp = io.BytesIO('\n'.join(csvlines).encode())

@@ -258,6 +258,24 @@ class TestJournalManagementSubscription:
         assert subscription_1.is_ongoing
         assert not subscription_2.is_ongoing
 
+    @pytest.mark.parametrize("email,firstname,lastname", (
+        ('test@test.com', 'First', 'Name'),
+        ('test2@test.com', None, None),
+    ))
+    def test_can_subscribe_email(self, email, firstname, lastname):
+        plan = JournalManagementPlanFactory(is_unlimited=True)
+        subscription = JournalManagementSubscriptionFactory.create(plan=plan)
+        subscription.subscribe_email(email, firstname, lastname)
+
+        assert JournalAccessSubscription.objects.filter(
+            user__first_name=firstname if firstname else "",
+            user__last_name=lastname if lastname else "",
+            user__email=email,
+            user__username=email,
+            journals=subscription.journal,
+            journal_management_subscription=subscription
+        ).exists()
+
     def test_unlimited_plans_are_never_full(self):
         plan = JournalManagementPlanFactory(is_unlimited=True)
         subscription = JournalManagementSubscriptionFactory.create(plan=plan)
