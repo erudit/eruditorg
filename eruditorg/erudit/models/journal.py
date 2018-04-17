@@ -6,6 +6,7 @@ from hashlib import md5
 
 from lxml import etree as et
 
+from django.core.cache import caches
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -30,7 +31,10 @@ from ..fedora.objects import ArticleDigitalObject
 from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
 from ..fedora.cache import get_cached_datastream_content
+from ..fedora.cache import cache_fedora_result
 from ..fedora.utils import localidentifier_from_pid
+
+
 from ..managers import InternalArticleManager
 from ..managers import InternalIssueManager
 from ..managers import InternalJournalManager
@@ -42,6 +46,8 @@ from .core import Collection
 from .core import Copyright
 from .core import EruditDocument
 from .core import Publisher
+
+cache = caches['fedora']
 
 
 class JournalType(models.Model):
@@ -232,6 +238,15 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
     def get_erudit_class(self):
         return EruditJournal
+
+    @cache_fedora_result
+    def get_titles(self):
+        last_issue = self.last_issue
+        if not last_issue:
+            titles = {'main': self.name}
+        else:
+            titles = last_issue.erudit_object.get_journal_title()
+        return titles
 
     # Journal-related methods and properties
     # --

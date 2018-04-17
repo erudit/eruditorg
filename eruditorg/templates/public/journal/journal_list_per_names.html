@@ -156,7 +156,7 @@
             <a class="journal-row" href="{% if journal.redirect_to_external_url %}{% url 'public:journal:journal_external_redirect' journal.code %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
               <div class="row">
                 <div class="col-sm-6 journal-title">
-                  {% with journal.last_issue.erudit_object.get_journal_title as titles %}
+                  {% with journal.get_titles as titles %}
                   <span class="journal-name">{{ titles.main.title}}{% if journal.is_new %} <span class="new-journal-tag">{% trans '(nouveauté)' %}</span>{% endif %}</span>
                   {% if titles.main.subtitle %}
                   <span class="journal-subtitle">{{ titles.main.subtitle }}</span>
