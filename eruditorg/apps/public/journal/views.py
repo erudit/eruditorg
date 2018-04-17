@@ -132,6 +132,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
         context['sorting'] = self.sorting
         context['sorted_objects'] = self.apply_sorting(context.get(self.context_object_name))
         context['disciplines'] = Discipline.objects.all().order_by('name')
+        context['journal_count'] = self.get_queryset().count()
         return context
 
     def get_filter_form(self):
