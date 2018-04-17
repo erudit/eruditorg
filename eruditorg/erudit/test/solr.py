@@ -1,6 +1,9 @@
 from collections import Counter
-import re
 
+from luqum.tree import (
+    SearchField, Group, AndOperation, OrOperation, UnknownOperation, FieldGroup
+)
+from luqum.parser import parser
 
 # This fake solr client doesn't try to re-implement solr query parser. It expects a very specific
 # list of queries and return results according to its very basic database.
@@ -17,6 +20,61 @@ class FakeSolrResults:
         self.facets = {
             'facet_fields': facet_fields,
         }
+
+
+def unescape(s):
+    if s.startswith('"') and s.endswith('"'):
+        s = s[1:-1]
+    return s.replace('\\-', '-')
+
+
+def normalize_pq(pq):
+    if isinstance(pq, (Group, FieldGroup)):
+        return normalize_pq(pq.children[0])
+    elif isinstance(pq, (AndOperation, OrOperation, UnknownOperation)):
+        children = map(normalize_pq, pq.children)
+        normalised_class = type(pq)
+        if isinstance(pq, UnknownOperation):
+            normalised_class = AndOperation
+        return normalised_class(*children)
+    elif isinstance(pq, SearchField):
+        return SearchField(pq.name, normalize_pq(pq.children[0]))
+    return pq
+
+
+# example pattern: (SearchField, {'name': 'RevueAbr'}, [])
+def matches_pattern(pq, pattern):
+    pclass, pattrs, pchildren = pattern
+    if not isinstance(pq, pclass):
+        return False
+    for k, v in pattrs.items():
+        if k != 'flags' and getattr(pq, k) != v:
+            return False
+    if pchildren:
+        # Order doesn't matter for children matching
+        for c1 in pq.children:
+            for c2 in list(pchildren):
+                if matches_pattern(c1, c2):
+                    pchildren.remove(c2)
+                    break
+            else:
+                return False
+        for child in pchildren:
+            child_attrs = child[1]
+            if 'optional' not in child_attrs.get('flags', set()):
+                return False
+        return True
+    else:
+        return True
+
+
+def extract_pq_searchvals(pq):
+    result = {}
+    for child in pq.children:
+        result.update(extract_pq_searchvals(child))
+    if isinstance(pq, SearchField):
+        result[pq.name] = unescape(pq.expr.value)
+    return result
 
 
 class FakeSolrClient:
@@ -55,13 +113,6 @@ class FakeSolrClient:
         self.by_id[thesis_dict['id']] = thesis_dict
 
     def search(self, *args, **kwargs):
-        def get_filter_by_type(q):
-            m = re.match(r'^.*TypeArticle_fac:"(.+)"$', q)
-            if m:
-                return m.group(1)
-            else:
-                return None
-
         def single_result(article):
             result = {
                 'ID': article['id'],
@@ -81,25 +132,27 @@ class FakeSolrClient:
             return result
 
         q = kwargs.get('q') or args[0]
-        m = re.match(r'^RevueAbr:([\w\-]+) AuteurNP_fac:\((\w)\*\).*$', q)
-        if m:
-            # query for articles with matching author names
-            journal_code = m.group(1)
-            first_letter = m.group(2)
-            filter_by_type = get_filter_by_type(q)
-            result = []
-            for author, articles in self.authors.items():
-                if author.startswith(first_letter):
-                    for article in articles:
-                        if filter_by_type and article['type'] != filter_by_type:
-                            continue
-                        result.append(single_result(article))
-            return FakeSolrResults(docs=result)
-        m = re.match(r'^RevueAbr:([\w\-]+).*$', q)
-        if m:
+        pq = normalize_pq(parser.parse(q))
+        print(q, repr(pq))
+        my_pattern = (SearchField, {'name': 'ID'}, [])
+        if matches_pattern(pq, my_pattern):
+            searchvals = extract_pq_searchvals(pq)
+            solr_id = searchvals['ID']
+            try:
+                return FakeSolrResults(docs=[single_result(self.by_id[solr_id])])
+            except KeyError:
+                return FakeSolrResults()
+
+        my_pattern1 = (SearchField, {'name': 'RevueAbr'}, [])
+        my_pattern2 = (AndOperation, {}, [
+            (SearchField, {'name': 'RevueAbr'}, []),
+            (SearchField, {'name': 'TypeArticle_fac'}, []),
+        ])
+        if matches_pattern(pq, my_pattern1) or matches_pattern(pq, my_pattern2):
             # letter list or article types, return facets
-            journal_code = m.group(1)
-            filter_by_type = get_filter_by_type(q)
+            searchvals = extract_pq_searchvals(pq)
+            journal_code = searchvals['RevueAbr']
+            filter_by_type = searchvals.get('TypeArticle_fac')
             authors = []
             article_types = []
             for author, articles in self.authors.items():
@@ -114,13 +167,25 @@ class FakeSolrClient:
                 'TypeArticle_fac': get_facet(article_types),
             })
 
-        m = re.match(r'^ID:"(.+)"$', q)
-        if m:
-            solr_id = m.group(1)
-            try:
-                return FakeSolrResults(docs=[single_result(self.by_id[solr_id])])
-            except KeyError:
-                return FakeSolrResults()
+        my_pattern = (AndOperation, {}, [
+            (SearchField, {'name': 'RevueAbr'}, []),
+            (SearchField, {'name': 'AuteurNP_fac'}, []),
+            (SearchField, {'name': 'TypeArticle_fac', 'flags': {'optional'}}, []),
+        ])
+        if matches_pattern(pq, my_pattern):
+            # query for articles with matching author names
+            searchvals = extract_pq_searchvals(pq)
+            journal_code = searchvals['RevueAbr']
+            first_letter = searchvals['AuteurNP_fac'][:1]
+            filter_by_type = searchvals.get('TypeArticle_fac')
+            result = []
+            for author, articles in self.authors.items():
+                if author.startswith(first_letter):
+                    for article in articles:
+                        if filter_by_type and article['type'] != filter_by_type:
+                            continue
+                        result.append(single_result(article))
+            return FakeSolrResults(docs=result)
 
-        print("Unexpected query {}".format(q))
+        print("Unexpected query {} {}".format(q, repr(pq)))
         return FakeSolrResults()
