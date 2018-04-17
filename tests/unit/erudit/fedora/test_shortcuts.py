@@ -2,7 +2,7 @@
 
 import unittest.mock
 
-from erudit.fedora.shortcuts import get_cached_datastream_content
+from erudit.fedora.cache import get_cached_datastream_content
 from erudit.test import BaseEruditTestCase
 
 

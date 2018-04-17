@@ -29,7 +29,7 @@ from ..fedora.modelmixins import FedoraMixin
 from ..fedora.objects import ArticleDigitalObject
 from ..fedora.objects import JournalDigitalObject
 from ..fedora.objects import PublicationDigitalObject
-from ..fedora.shortcuts import get_cached_datastream_content
+from ..fedora.cache import get_cached_datastream_content
 from ..fedora.utils import localidentifier_from_pid
 from ..managers import InternalArticleManager
 from ..managers import InternalIssueManager
