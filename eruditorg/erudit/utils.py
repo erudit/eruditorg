@@ -1,6 +1,9 @@
 import locale
+import logging
 import re
 
+
+logger = logging.getLogger(__name__)
 
 # Mind your order! Longer stopwords should come first to avoid shorter ones applying first.
 # (example: "Les" has to come before "Le").
@@ -37,7 +40,13 @@ def locale_aware_sort(elems, keyfunc=None, localename='fr_CA.UTF-8'):
     if oldlocale == localename:
         oldlocale = None
     else:
-        locale.setlocale(locale.LC_COLLATE, localename)
+        try:
+            locale.setlocale(locale.LC_COLLATE, localename)
+        except locale.Error:
+            # Will not sort properly, but let's not crash for that...
+            logger.warning("Unable to set locale %s", localename)
+            oldlocale = None
+
     sort_key_func = get_sort_key_func(localename[:2])
     if keyfunc is not None:
         key = lambda x: sort_key_func(keyfunc(x))  # noqa

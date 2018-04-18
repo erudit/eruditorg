@@ -1,6 +1,19 @@
+import pytest
+import locale
 from erudit.utils import locale_aware_sort, get_sort_key_func
 
 
+try:
+    locale.setlocale(locale.LC_COLLATE, 'fr_CA.UTF-8')
+except locale.Error:
+    has_fr_ca = False
+else:
+    has_fr_ca = True
+
+needs_fr_ca = pytest.mark.skipif(not has_fr_ca, reason="Needs fr_CA.UTF-8 locale")
+
+
+@needs_fr_ca
 def test_locale_aware_sort():
     # We sort "naturally" in the french language.
     NAMES = ["avion", "Foulard", "épicentre", "[banquet]"]
@@ -8,6 +21,7 @@ def test_locale_aware_sort():
     assert locale_aware_sort(NAMES) == EXPECTED
 
 
+@needs_fr_ca
 def test_locale_aware_sort_stopwords():
     # Names beginning with an article are ignored
     NAMES = ["L'hiver", "Poutine", "La souris", "l’apostrophe"]
@@ -15,6 +29,7 @@ def test_locale_aware_sort_stopwords():
     assert locale_aware_sort(NAMES) == EXPECTED
 
 
+@needs_fr_ca
 def test_locale_aware_sort_keyfunc():
     ELEMS = [('a', 'églantine'), ('b', 'à voir')]
     EXPECTED = [('b', 'à voir'), ('a', 'églantine')]
