@@ -1,6 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
 {% load i18n %}
-{% load cache %}
 {% load public_journal_tags %}
 
 {% block title %}{% trans "Index des auteurs" %} – {{ journal.name|safe }}{% endblock title %}
@@ -84,6 +83,7 @@
   </header>
 
   <div class="authors-wrapper main-content">
+    {% if view.has_multiple_article_types %}
     <nav class="btn-group">
       <h2 class="sr-only">{% trans 'Par type d’article' %}</h2>
       {% url 'public:journal:journal_authors_list' journal.code as authors_list_url %}
@@ -91,6 +91,7 @@
       <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn{% if article_type == 'article' %} active{% endif %}">{% trans "Articles" %}</a>
       <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn{% if article_type == 'compterendu' %} active{% endif %}">{% trans "Comptes rendus" %}</a>
     </nav>
+    {% endif %}
     <nav>
       <h2 class="sr-only">{% trans 'Par lettre' %}</h2>
       <ul class="alpha-nav">
@@ -105,30 +106,26 @@
     </nav>
     <ul class="authors">
       <h2 class="sr-only">{% blocktrans %}Auteurs commençant par {{ letter }}{% endblocktrans %}</h2>
-      {% cache LONG_TTL "public_journal_authors" journal.id letter article_type LANGUAGE_CODE %}
-      {% for author_dict in authors_dicts %}
+      {% for author, articles in authors_dicts.items %}
         <li class="author-group">
-          <h3 class="author-name">{{ author_dict.author.full_name }}</h3>
+          <h3 class="author-name">{{ author }}</h3>
           <ul class="author-articles">
-            {% for article_author in author_dict.articles %}
-            {% cache FOREVER_TTL "public_journal_authors_item" journal.id article_author.article.id author.id LANGUAGE_CODE %}
+            {% for article in articles %}
               <li class="author-article">
                 {% spaceless %}
-                <span class="article-year">{{ article_author.article.issue.year }}</span> —
-                {% if article_author.contributors %}
-                  {{ article_author.contributors|join_author_list }},
+                <span class="article-year">{{ article.year }}</span> —
+                {% if article.contributors %}
+                  {{ article.contributors|join_author_list }},
                 {% endif %}
-                <a href="{% if article_author.article.external_url %}{{ article_author.article.external_url }}{% else %}{% url 'public:journal:article_detail' journal_code=journal.code issue_slug=article_author.article.issue.volume_slug issue_localid=article_author.article.issue.localidentifier localid=article_author.article.localidentifier %}{% endif %}">
-                  {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article_author.article.title }}</span>{% trans '&nbsp;&raquo;' %}
+                <a href="{{ article.url }}">
+                  {% trans '&laquo;&nbsp;' %}<span class="article-title">{{ article.title }}</span>{% trans '&nbsp;&raquo;' %}
                 </a>
                 {% endspaceless %}
               </li>
-            {% endcache %}
             {% endfor %}
           </ul>
         </li>
       {% endfor %}
-      {% endcache %}
     </ul>
   </div>
 </main>

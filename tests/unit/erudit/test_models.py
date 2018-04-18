@@ -3,6 +3,7 @@ import dateutil.relativedelta as dr
 import io
 import unittest.mock
 
+import pytest
 from django.conf import settings
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
@@ -20,6 +21,9 @@ from erudit.test.factories import (
     IssueContributorFactory,
     IssueThemeFactory,
 )
+
+
+pytestmark = pytest.mark.django_db
 
 
 def reldate(inc_days):
@@ -558,13 +562,7 @@ class TestIssueContributor(BaseEruditTestCase):
         assert contributor.format_name() == "Tryphon Tournesol (Professeur)"
 
 
-class TestArticle(BaseEruditTestCase):
-
-    def setUp(self):
-        super(TestArticle, self).setUp()
-        self.issue = IssueFactory.create(journal=self.journal)
-        self.article = ArticleFactory.create(issue=self.issue)
-
+class TestArticle:
     def test_only_has_fedora_object_if_collection_has_localidentifier(self):
         c1 = CollectionFactory.create(localidentifier=None)
         j1 = JournalFactory.create(collection=c1)
@@ -594,38 +592,31 @@ class TestArticle(BaseEruditTestCase):
         assert article_1.get_full_identifier() is not None
 
     def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
-        # Setup
         j1 = JournalFactory.create(open_access=True)
         j2 = JournalFactory.create(open_access=False)
         issue_1 = IssueFactory.create(journal=j1)
         article_1 = ArticleFactory.create(issue=issue_1)
         issue_2 = IssueFactory.create(journal=j2)
         article_2 = ArticleFactory.create(issue=issue_2)
-        # Run 1 check
-        self.assertTrue(article_1.open_access)
-        self.assertFalse(article_2.open_access)
+        assert article_1.open_access
+        assert not article_2.open_access
 
     def test_knows_if_it_is_in_open_access_if_its_journal_is_in_open_access(self):
-        # Setup
-        self.journal.open_access = True
-        self.journal.save()
+        j1 = JournalFactory.create(open_access=True)
         j2 = JournalFactory.create(open_access=False)
-        issue_1 = IssueFactory.create(journal=self.journal)
+        issue_1 = IssueFactory.create(journal=j1)
         article_1 = ArticleFactory.create(issue=issue_1)
         issue_2 = IssueFactory.create(journal=j2)
         article_2 = ArticleFactory.create(issue=issue_2)
-        # Run 1 check
-        self.assertTrue(article_1.open_access)
-        self.assertFalse(article_2.open_access)
+        assert article_1.open_access
+        assert not article_2.open_access
 
     def test_knows_if_it_is_embargoed(self):
-        # Setup
         now_dt = dt.date.today()
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(collection=self.collection)
-        journal.open_access = False
-        journal.last_publication_year = now_dt.year
-        journal.save()
+        collection = CollectionFactory(code="erudit", localidentifier="erudit", name="Érudit")
+        journal = JournalFactory(
+            collection=collection, open_access=False, last_publication_year=now_dt.year)
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
         date_issue_3 = dt.date(
@@ -655,12 +646,21 @@ class TestArticle(BaseEruditTestCase):
         article_3 = ArticleFactory.create(issue=issue_3)
         article_4 = ArticleFactory.create(issue=issue_4)
         article_5 = ArticleFactory.create(issue=issue_5)
-        # Run & check
-        self.assertTrue(article_1.embargoed)
-        self.assertTrue(article_2.embargoed)
-        self.assertTrue(article_3.embargoed)
-        self.assertFalse(article_4.embargoed)
-        self.assertFalse(article_5.embargoed)
+        assert article_1.embargoed
+        assert article_2.embargoed
+        assert article_3.embargoed
+        assert not article_4.embargoed
+        assert not article_5.embargoed
+
+    def test_sync_with_erudit_object_doesnt_crash(self):
+        # There's not much to test in sync_with_erudit_object() that is interesting. It simply
+        # copies over stuff from its erudit_object. However, we want to make sure that it doesn't
+        # crash. This code was copied over from import_journals_from_fedora which was never
+        # unit-tested, so this code isn't fool-proof. Just... run through it.
+        article = ArticleFactory.create()
+        article.sync_with_erudit_object()
+        # that's the DOI from the default article fixture.
+        assert article.doi == '10.7202/009255ar'
 
 
 class TestAuthor(BaseEruditTestCase):

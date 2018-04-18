@@ -17,9 +17,7 @@ from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
 from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
-from ...models import Affiliation
 from ...models import Article
-from ...models import Author
 from ...models import Collection
 from ...models import Copyright
 from ...models import Issue
@@ -83,10 +81,6 @@ class Command(BaseCommand):
             help='Python path to a function to test the XSLT transformation of articles')
 
         parser.add_argument(
-            '--make-published', action='store_true', dest='make_published', default=False,
-            help='Determines if the issues should be considered published (default: false)')
-
-        parser.add_argument(
             '--pid', action='store', dest='journal_pid', help='Journal PID to manually import.')
 
         parser.add_argument(
@@ -102,7 +96,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.full_import = options.get('full', False)
         self.test_xslt = options.get('test_xslt', None)
-        self.make_published = options.get('make_published', False)
         self.journal_pid = options.get('journal_pid', None)
         self.modification_date = options.get('mdate', None)
         self.journal_precendence_relations = []
@@ -514,13 +507,10 @@ class Command(BaseCommand):
         try:
             issue = Issue.objects.get(localidentifier=issue_localidentifier)
         except Issue.DoesNotExist:
-            # TODO check diffusion / prediffusion
             issue = Issue()
             issue.localidentifier = issue_localidentifier
             issue.journal = journal
             issue.fedora_created = fedora_issue.created
-            if self.make_published:
-                issue.is_published = True
 
         summary_tree = remove_xml_namespaces(
             et.fromstring(fedora_issue.summary.content.serialize()))
@@ -540,6 +530,8 @@ class Command(BaseCommand):
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
         issue.fedora_updated = fedora_issue.modified
+        # TODO: uncomment this when we're confident about milestone 70
+        # issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
         issue.save()
         issue.contributors.all().delete()
 
@@ -733,68 +725,8 @@ class Command(BaseCommand):
         self, article, issue_article_node, article_erudit_object=None
     ):
         """ Imports an article using the EruditArticle v3 specification. """
-        article_erudit_object = article_erudit_object or article.erudit_object
-
-        # Set the proper values on the Article instance
-        processing = article_erudit_object.processing
-        processing_mapping = {'minimal': 'M', 'complet': 'C', '': 'M', }
-        try:
-            article.processing = processing_mapping[processing]
-        except KeyError:
-            raise ValueError(
-                'Unable to determine the processing type of the article '
-                'with PID {0}'.format(article.pid))
-
-        article.type = article_erudit_object.article_type
-        article.ordseq = int(article_erudit_object.ordseq)
-        article.doi = article_erudit_object.doi
-        article.first_page = article_erudit_object.first_page
-        article.last_page = article_erudit_object.last_page
-        article.subtitle = article_erudit_object.subtitle
-
-        surtitle = article_erudit_object.get_section_titles(level=1)
-        if surtitle:
-            article.surtitle = surtitle['main']
-        article.language = article_erudit_object.language
         article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
-        article.formatted_title = article_erudit_object.get_formatted_title()
-        article.clean()
-        article.save()
-
-        article.authors.clear()
-        for author_xml in article_erudit_object.findall('liminaire//grauteur//auteur'):
-            firstname_xml = author_xml.find('.//nompers/prenom')
-            firstname = firstname_xml.text if firstname_xml is not None else None
-            lastname_xml = author_xml.find('.//nompers/nomfamille')
-            lastname = lastname_xml.text if lastname_xml is not None else None
-            suffix_xml = author_xml.find('.//nompers/suffixe')
-            suffix = suffix_xml.text if suffix_xml is not None else None
-            organization_xml = author_xml.find('.//nomorg')
-            organization = organization_xml.text if organization_xml is not None else None
-            affiliations = [
-                affiliation_dom.text
-                for affiliation_dom in author_xml.findall('.//affiliation/alinea')]
-
-            if firstname is None and lastname is None and organization is None:
-                continue
-
-            author_query_kwargs = {
-                'firstname': firstname, 'lastname': lastname, 'othername': organization}
-
-            author = Author.objects.filter(**author_query_kwargs).first()
-            if author is None:
-                author = Author(**author_query_kwargs)
-            author.suffix = suffix
-            author.save()
-
-            author.affiliations.clear()
-            for aff in affiliations:
-                if not aff:
-                    continue
-                affiliation, _ = Affiliation.objects.get_or_create(name=aff)
-                author.affiliations.add(affiliation)
-
-            article.authors.add(author)
+        article.sync_with_erudit_object(article_erudit_object, ephemeral=False)
 
         if self.test_xslt:
             try:

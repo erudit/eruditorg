@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from functools import reduce
 from itertools import groupby
-from string import ascii_lowercase
+from string import ascii_uppercase
 import io
 
 from django.conf import settings
@@ -33,7 +33,6 @@ from erudit.fedora.objects import PublicationDigitalObject
 from erudit.fedora.views.generic import FedoraFileDatastreamView
 from erudit.models import Discipline
 from erudit.models import Article
-from erudit.models import Author
 from erudit.models import Journal
 from erudit.models import Issue
 
@@ -52,6 +51,7 @@ from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from .viewmixins import PrepublicationTokenRequiredMixin
+from . import solr
 
 
 class RedirectToExternalSourceMixin:
@@ -209,12 +209,10 @@ class JournalDetailView(
         return context
 
 
-class JournalAuthorsListView(SingleJournalMixin, ListView):
+class JournalAuthorsListView(SingleJournalMixin, TemplateView):
     """
     Displays a list of authors associated with a specific journal.
     """
-    context_object_name = 'authors'
-    model = Author
     template_name = 'public/journal/journal_authors_list.html'
 
     def get(self, request, *args, **kwargs):
@@ -236,76 +234,42 @@ class JournalAuthorsListView(SingleJournalMixin, ListView):
         except AssertionError:
             self.article_type = None
 
-    def get_base_queryset(self):
-        """ Returns the base queryset that will be used to retrieve the authors. """
+    def get_solr_article_type(self):
+        if not self.has_multiple_article_types:
+            return None
+        if self.article_type == 'compterendu':
+            return 'Compte rendu'
+        elif self.article_type == 'article':
+            return 'Article'
+        else:
+            return None
 
-        base_query = Q(
-            lastname__isnull=False,
-            article__issue__journal__id=self.journal.id,
-            article__issue__is_published=True)
-
-        if self.article_type:
-            base_query &= Q(article__type=self.article_type)
-        return Author.objects.filter(base_query).order_by('lastname').distinct()
-
-    def get_letters_queryset_dict(self):
-        """ Returns an ordered dict containing a list of authors for each letter. """
-        # FIXME avoid authors with empty firstname or lastname in the first place
-        qs = self.get_base_queryset().exclude(firstname='', lastname='')
-        grouped = groupby(
-            sorted(qs, key=lambda a: a.letter_prefix), key=lambda a: a.letter_prefix)
-        letter_qsdict = OrderedDict([
-            (g[0], sorted(list(g[1]), key=lambda a: a.lastname or a.othername)) for g in grouped])
-        return letter_qsdict
-
-    def get_queryset(self):
-        qsdict = self.get_letters_queryset_dict()
-
-        if not qsdict.get(self.letter):
-            # The user requested a letter for which there is no article
-            self.letter = None
-
+    def get_authors_dict(self):
         if self.letter is None:
-            keys = list(qsdict.keys())
-            if len(keys) == 0:
-                return Author.objects.none()
-            self.letter = keys[0]
-        return qsdict[self.letter]
+            for letter, exists in self.letters_exists.items():
+                if exists:
+                    self.letter = letter
+                    break
+            else:
+                return {}
+        return solr.get_journal_authors_dict(
+            self.journal.solr_code, self.letter, self.get_solr_article_type())
+
+    @cached_property
+    def has_multiple_article_types(self):
+        return len(solr.get_journal_authors_article_types(self.journal.solr_code)) > 1
 
     @cached_property
     def letters_exists(self):
         """ Returns an ordered dict containing the number of authors for each letter. """
-        qsdict = self.get_letters_queryset_dict()
-
-        letters_exists = OrderedDict([(l.upper(), 0) for l in ascii_lowercase])
-        for letter, qs in qsdict.items():
-            letters_exists[letter] = len(qs)
-        return letters_exists
+        letters = solr.get_journal_authors_letters(
+            self.journal.solr_code, self.get_solr_article_type())
+        all_letters = ascii_uppercase
+        return OrderedDict((l, l in letters) for l in all_letters)
 
     def get_context_data(self, **kwargs):
         context = super(JournalAuthorsListView, self).get_context_data(**kwargs)
-        authors = context.get(self.context_object_name)
-        articles = Article.objects.filter(
-            issue__journal_id=self.journal.id,
-            issue__is_published=True,
-            authors__in=authors) \
-            .select_related('issue', 'issue__journal') \
-            .prefetch_related('authors').distinct()
-
-        if self.article_type:
-            articles = articles.filter(type=self.article_type)
-        authors_dicts = {}
-        for article in articles:
-            for author in article.authors.all():
-                if author in authors:
-                    if author.id not in authors_dicts:
-                        authors_dicts[author.id] = {'author': author, 'articles': []}
-                    authors_dicts[author.id]['articles'].append({
-                        'article': article,
-                        'contributors': article.authors.exclude(pk=author.pk)
-                    })
-            context['authors_dicts'] = sorted(
-                list(authors_dicts.values()), key=lambda a: a['author'].full_name)
+        context['authors_dicts'] = self.get_authors_dict()
         context['journal'] = self.journal
         context['letter'] = self.letter
         context['article_type'] = self.article_type
@@ -506,7 +470,24 @@ class BaseArticleDetailView(
     def get_object(self, queryset=None, allow_external=False):
         if allow_external:
             queryset = Article.objects
-        return super().get_object(queryset=queryset)
+
+        try:
+            return super().get_object(queryset=queryset)
+        except Http404:
+            if not allow_external:
+                if Article.objects.filter(localidentifier=self.kwargs['localid']).exists():
+                    # we don't want to return an ephemeral article if we have an existing external
+                    # object. raise the 404 so that the external redirect system kick in.
+                    raise
+            issue = get_object_or_404(Issue, localidentifier=self.kwargs['issue_localid'])
+            article = Article()
+            article.issue = issue
+            article.localidentifier = self.kwargs['localid']
+            if article.is_in_fedora:
+                article.sync_with_erudit_object(ephemeral=True)
+                return article
+            else:
+                raise
 
     def get_context_data(self, **kwargs):
 
@@ -522,7 +503,10 @@ class BaseArticleDetailView(
         # Pick the previous article and the next article
         try:
             sorted_articles = list(related_articles)
-            obj_index = sorted_articles.index(obj)
+            if obj in sorted_articles:
+                obj_index = sorted_articles.index(obj)
+            else:
+                obj_index = len(sorted_articles)
             previous_article = sorted_articles[obj_index - 1] if obj_index > 0 else None
             next_article = sorted_articles[obj_index + 1] if obj_index + 1 < len(sorted_articles) \
                 else None
@@ -534,13 +518,16 @@ class BaseArticleDetailView(
             context['previous_article'] = previous_article
             context['next_article'] = next_article
 
-        keywords = self.object.keywords.all()
-        keywords_grouped = groupby(keywords, lambda k: k.language)
-        context['keywords_dict'] = {k[0]: list(k[1]) for k in keywords_grouped}
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
         # return 4 randomly
         context['related_articles'] = related_articles.order_by('?')[:4]
+
+        # don't cache anything when the issue is unpublished. That means that we're still working
+        # on it and we want to see fresh renderings every time.
+        # we also never want to cache ephemeral articles (id = None)
+        shouldcache = obj.issue.is_published and obj.id
+        context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
 
         return context
 

@@ -3,6 +3,7 @@ import datetime as dt
 import factory
 from faker import Factory
 
+from ..fedora import repository
 from ..models import JournalType
 
 faker = Factory.create()
@@ -190,6 +191,12 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         if extracted:
             obj.formatted_title = extracted
             obj.save()
+
+    @factory.post_generation
+    def post(obj, create, extracted, **kwargs):
+        # we always register non-null localidentifiers with our fake API server.
+        if obj.localidentifier:
+            repository.api.register_article(obj.get_full_identifier())
 
 
 class OpenAccessArticleFactory(ArticleFactory):

@@ -7,6 +7,7 @@ import itertools
 from hashlib import md5
 
 from django.contrib.auth.models import AnonymousUser
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
@@ -18,7 +19,6 @@ import pytest
 from erudit.models import JournalType, Issue, Article
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
-from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
 from erudit.test.factories import IssueFactory
@@ -307,237 +307,152 @@ class TestJournalDetailView:
         assert response.context['subscription_type'] == 'individual'
 
 
-class TestJournalAuthorsListView(BaseEruditTestCase):
-    def test_supports_authors_with_empty_firstnames_and_empty_lastnames(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
-        author_1 = AuthorFactory.create(firstname='', lastname='')
-        article_1.authors.add(author_1)
-
-        issue_2 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
-        article_2 = ArticleFactory.create(issue=issue_2)
-        author_2 = AuthorFactory.create(firstname='Ada', lastname='Lovelace')
-        article_2.authors.add(author_2)
-
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        # Run
-        response = self.client.get(url)
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-
-    def test_supports_authors_with_only_special_characters_in_their_name(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
-        author_1 = AuthorFactory.create(lastname=':')
-        article_1.authors.add(author_1)
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        # Run
-        response = self.client.get(url)
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-
-    def test_provides_only_authors_for_the_first_available_letter_by_default(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+class TestJournalAuthorsListView:
+    def test_provides_only_authors_for_the_first_available_letter_by_default(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
 
-        author_1 = AuthorFactory.create(lastname='btest')
-        author_2 = AuthorFactory.create(lastname='ctest1')
-        author_3 = AuthorFactory.create(lastname='ctest2')
+        solr_client.add_article(article_1, ['btest', 'ctest1', 'ctest2'])
 
-        article_1.authors.add(author_1)
-        article_1.authors.add(author_2)
-        article_1.authors.add(author_3)
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url)
 
-        # Run
-        response = self.client.get(url)
+        assert response.status_code == 200
+        assert set(response.context['authors_dicts'].keys()) == {'btest', }
 
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(list(response.context['authors']), [author_1, ])
-
-    def test_only_provides_authors_for_the_given_letter(self):
-        # Seetup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+    def test_only_provides_authors_for_the_given_letter(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
+        solr_client.add_article(article_1, ['btest', 'ctest1'])
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url, letter='b')
 
-        author_1 = AuthorFactory.create(lastname='btest')
-        author_2 = AuthorFactory.create(lastname='ctest1')
-
-        article_1.authors.add(author_1)
-        article_1.authors.add(author_2)
-        article_1.save()
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        # Run
-        response = self.client.get(url, letter='b')
-
-        # Check
-        self.assertEqual(response.status_code, 200)
+        assert response.status_code == 200
         authors_dicts = response.context['authors_dicts']
         assert len(authors_dicts) == 1
-        assert authors_dicts[0]['author'] == author_1
+        assert authors_dicts.keys() == {'btest', }
 
-    def test_can_provide_contributors_of_article(self):
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+    def test_can_provide_contributors_of_article(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
 
-        author_1 = AuthorFactory.create(lastname='btest')
-        author_2 = AuthorFactory.create(lastname='ctest1')
+        solr_client.add_article(article_1, ['btest', 'ctest1'])
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url, letter='b')
 
-        article_1.authors.add(author_1)
-        article_1.authors.add(author_2)
-        article_1.save()
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        # Run
-        response = self.client.get(url, letter='b')
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-
+        assert response.status_code == 200
         authors_dicts = response.context['authors_dicts']
-        contributors = authors_dicts[0]['articles'][0]['contributors']
+        contributors = authors_dicts['btest'][0]['contributors']
+        assert contributors == ['ctest1']
 
-        assert len(contributors) == 1
-        assert contributors[0].pk == author_2.pk
-
-    def test_dont_show_unpublished_articles(self):
+    def test_dont_show_unpublished_articles(self, solr_client):
         issue1 = IssueFactory.create(is_published=False)
         issue2 = IssueFactory.create(journal=issue1.journal, is_published=True)
         article1 = ArticleFactory.create(issue=issue1)
-        article2 = ArticleFactory.create(issue=issue2)
-        author = AuthorFactory.create(lastname='foo')
-        article1.authors.add(author)
-        article2.authors.add(author)
+        ArticleFactory.create(issue=issue2)
+
+        solr_client.add_article(article1, ['foo'])
+        # Unpublished articles aren't in solr
+
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue1.journal.code})
-        response = self.client.get(url, letter='f')
+        response = Client().get(url, letter='f')
 
         authors_dicts = response.context['authors_dicts']
         # only one of the two articles are there
-        assert len(authors_dicts[0]['articles']) == 1
+        assert len(authors_dicts['foo']) == 1
 
-    def test_can_filter_by_article_type(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+    def test_can_filter_by_article_type(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        ArticleFactory.create(issue=issue_1, type='compterendu')  # noqa
+        article_2 = ArticleFactory.create(issue=issue_1, type='compterendu')  # noqa
 
-        author_1 = AuthorFactory.create(lastname='btest')
-        article_1.authors.add(author_1)
+        solr_client.add_article(article_1, ['btest'])
+        solr_client.add_article(article_2, ['btest'])
 
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        # Run
-        response = self.client.get(url, article_type='article')
-
-        # Check
-        self.assertEqual(response.status_code, 200)
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url, article_type='article')
+        assert response.status_code == 200
         authors_dicts = response.context['authors_dicts']
-
         assert len(authors_dicts) == 1
 
-    def test_can_filter_by_article_type_when_no_article_of_type(self):
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+    def test_can_filter_by_article_type_when_no_article_of_type(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        author_1 = AuthorFactory.create(lastname='atest')
-        article_1.authors.add(author_1)
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+        solr_client.add_article(article_1, ['atest'])
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url, {"article_type": 'compterendu'})
 
-        # Run
-        response = self.client.get(url, {"article_type": 'compterendu'})
+        assert response.status_code == 200
 
-        # Check
-        self.assertEqual(response.status_code, 200)
-
-    def test_only_letters_with_results_are_active(self):
+    def test_only_letters_with_results_are_active(self, solr_client):
         """ Test that for a given selection in the authors list view, only the letters for which
         results are present are shown """
         issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
+        article1 = ArticleFactory.create(issue=issue_1, type='article')
+        article2 = ArticleFactory.create(issue=issue_1, type='compterendu')
+        solr_client.add_article(article1, ['atest'])
+        solr_client.add_article(article2, ['btest'])
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url, {"article_type": 'compterendu'})
+
+        assert response.status_code == 200
+        assert not response.context['letters_exists'].get('A')
+
+    def test_do_not_fail_when_user_requests_a_letter_with_no_articles(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        author_1 = AuthorFactory.create(lastname='atest')
-        article_1.authors.add(author_1)
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+        solr_client.add_article(article_1, ['btest'])
 
-        # Run
-        response = self.client.get(url, {"article_type": 'compterendu'})
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url, {"article_type": 'compterendu', 'letter': 'A'})
 
-        # Check
-        self.assertEqual(response.status_code, 200)
-        assert response.context['letters_exists'].get('A') == 0
+        assert response.status_code == 200
 
-    def test_do_not_fail_when_user_requests_a_letter_with_no_articles(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        author_1 = AuthorFactory.create(lastname='btest')
-        article_1.authors.add(author_1)
-
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        response = self.client.get(url, {"article_type": 'compterendu', 'letter': 'A'})
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-
-    def test_inserts_the_current_letter_in_the_context(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+    def test_inserts_the_current_letter_in_the_context(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
 
-        author_1 = AuthorFactory.create(lastname='btest')
-        author_2 = AuthorFactory.create(lastname='ctest1')
-        author_3 = AuthorFactory.create(lastname='ctest2')
+        solr_client.add_article(article_1, ['btest', 'ctest1', 'ctest2'])
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response_1 = Client().get(url)
+        response_2 = Client().get(url, {'letter': 'C'})
+        response_3 = Client().get(url, {'letter': 'invalid'})
 
-        article_1.authors.add(author_1)
-        article_1.authors.add(author_2)
-        article_1.authors.add(author_3)
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
+        assert response_1.status_code == 200
+        assert response_1.status_code == 200
+        assert response_1.status_code == 200
+        assert response_1.context['letter'] == 'B'
+        assert response_2.context['letter'] == 'C'
+        assert response_3.context['letter'] == 'B'
 
-        # Run
-        response_1 = self.client.get(url)
-        response_2 = self.client.get(url, {'letter': 'C'})
-        response_3 = self.client.get(url, {'letter': 'invalid'})
-
-        # Check
-        self.assertEqual(response_1.status_code, 200)
-        self.assertEqual(response_2.status_code, 200)
-        self.assertEqual(response_3.status_code, 200)
-        self.assertEqual(response_1.context['letter'], 'B')
-        self.assertEqual(response_2.context['letter'], 'C')
-        self.assertEqual(response_3.context['letter'], 'B')
-
-    def test_inserts_a_dict_with_the_letters_counts_in_the_context(self):
-        # Setup
-        issue_1 = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+    def test_inserts_a_dict_with_the_letters_counts_in_the_context(self, solr_client):
+        issue_1 = IssueFactory.create(date_published=dt.datetime.now())
         article_1 = ArticleFactory.create(issue=issue_1)
 
-        author_1 = AuthorFactory.create(lastname='btest')
-        author_2 = AuthorFactory.create(lastname='ctest1')
-        author_3 = AuthorFactory.create(lastname='ctest2')
+        solr_client.add_article(article_1, ['btest', 'ctest1', 'ctest2'])
+        url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
+        response = Client().get(url)
 
-        article_1.authors.add(author_1)
-        article_1.authors.add(author_2)
-        article_1.authors.add(author_3)
-        url = reverse('public:journal:journal_authors_list', kwargs={'code': self.journal.code})
-
-        # Run
-        response = self.client.get(url)
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['letters_exists']), 26)
-        self.assertEqual(response.context['letters_exists']['B'], 1)
-        self.assertEqual(response.context['letters_exists']['C'], 2)
+        assert response.status_code == 200
+        assert len(response.context['letters_exists']) == 26
+        assert response.context['letters_exists']['B']
+        assert response.context['letters_exists']['C']
         for letter in 'adefghijklmnopqrstuvwxyz':
-            self.assertEqual(response.context['letters_exists'][letter.upper()], 0)
+            assert not response.context['letters_exists'][letter.upper()]
+
+    @pytest.mark.parametrize('article_type,expected', [('compterendu', True), ('article', False)])
+    def test_view_has_multiple_article_types(self, article_type, expected, solr_client):
+        article1 = ArticleFactory.create(type='article')
+        article2 = ArticleFactory.create(issue=article1.issue, type=article_type)
+        solr_client.add_article(article1, ['btest'])
+        solr_client.add_article(article2, ['btest'])
+
+        url = reverse(
+            'public:journal:journal_authors_list',
+            kwargs={'code': article1.issue.journal.code})
+        response = Client().get(url)
+
+        assert response.context['view'].has_multiple_article_types == expected
 
 
 class TestIssueDetailView:
@@ -598,7 +513,6 @@ class TestIssueDetailView:
         assert articles == [a2, a1]
 
 
-@pytest.mark.django_db
 class TestArticleDetailView:
     @override_settings(CACHES=settings.NO_CACHES)
     def test_can_render_erudit_articles(self, monkeypatch, eruditarticle):
@@ -640,12 +554,41 @@ class TestArticleDetailView:
         # ref #1651
         issue = IssueFactory.create(
             date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(issue=issue, localidentifier='articleid',
-            external_url='http://example.com')
+        article = ArticleFactory.create(
+            issue=issue, localidentifier='articleid', external_url='http://example.com')
         url = article_detail_url(article)
         response = Client().get(url)
         assert response.status_code == 302
         assert response.url == 'http://example.com'
+
+    def test_dont_cache_articles_of_unpublished_issues(self):
+        issue = IssueFactory.create(is_published=False)
+        article = ArticleFactory.create(issue=issue, doi='thiswillendupinhtml')
+        url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
+        response = Client().get(url)
+        assert response.status_code == 200
+        assert b'thiswillendupinhtml' in response.content
+
+        article.doi = 'thiswillreplaceoldinhtml'
+        article.save()
+        response = Client().get(url)
+        assert response.status_code == 200
+        assert b'thiswillendupinhtml' not in response.content
+        assert b'thiswillreplaceoldinhtml' in response.content
+
+    def test_allow_ephemeral_articles(self):
+        # When receiving a request for an article that doesn't exist in the DB, try querying fedora
+        # for the requested PID before declaring a failure.
+        issue = IssueFactory.create()
+        article_localidentifier = 'foo'
+        repository.api.register_article(
+            '{}.{}'.format(issue.get_full_identifier(), article_localidentifier)
+        )
+        url = reverse('public:journal:article_detail', kwargs={
+            'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,
+            'issue_localid': issue.localidentifier, 'localid': article_localidentifier})
+        response = Client().get(url)
+        assert response.status_code == 200
 
 
 @override_settings(DEBUG=True)
@@ -994,7 +937,6 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         response = self.client.get(journal_url)
         redirect_url = response.url
         assert self.FALLBACK_URL in redirect_url
-
 
     def test_legacy_url_for_nonexistent_issues_redirect_to_fallback_website(self, issue_url):
         response = self.client.get(issue_url)
