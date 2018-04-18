@@ -319,7 +319,7 @@ class JournalRawLogoView(CacheMixin, SingleJournalMixin, FedoraFileDatastreamVie
     """
     Returns the image file associated with a Journal instance.
     """
-    cache_timeout = 60 * 60 * 24 * 15  # 15 days
+    cache_timeout = 60 * 60 * 2  # 2 hours
     content_type = 'image/jpeg'
     datastream_name = 'logo'
     fedora_object_class = JournalDigitalObject
