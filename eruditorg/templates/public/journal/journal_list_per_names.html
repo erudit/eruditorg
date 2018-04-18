@@ -47,7 +47,7 @@
   <header class="page-header-main container">
     <div class="row">
       <div class="col-md-8">
-        <h1>{% trans "Revues par ordre alphabétique" %} ({{ journals|length }})</h1>
+        <h1>{% trans "Revues par ordre alphabétique" %} ({{ journal_count }})</h1>
       </div>
       <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6">
         <nav class="text-right nav-btn">
@@ -156,10 +156,20 @@
             <a class="journal-row" href="{% if journal.redirect_to_external_url %}{% url 'public:journal:journal_external_redirect' journal.code %}{% else %}{% url 'public:journal:journal_detail' journal.code %}{% endif %}">
               <div class="row">
                 <div class="col-sm-6 journal-title">
-                  <span class="journal-name">{{ journal.name }}{% if journal.is_new %} <span class="new-journal-tag">{% trans '(nouveauté)' %}</span>{% endif %}</span>
-                  {% if journal.subtitle %}
-                  <span class="journal-subtitle">{{ journal.subtitle }}</span>
+                  {% with journal.get_titles as titles %}
+                  <span class="journal-name">{{ titles.main.title}}{% if journal.is_new %} <span class="new-journal-tag">{% trans '(nouveauté)' %}</span>{% endif %}</span>
+                  {% if titles.main.subtitle %}
+                  <span class="journal-subtitle">{{ titles.main.subtitle }}</span>
                   {% endif %}
+                  {% for title in titles.paral %}
+                  {% if title.title != titles.main.title %}
+                  <span class="journal-name">{{ title.title}}</span>
+                  {% endif %}
+                  {% if title.subtitle and title.subtitle != titles.main.subtitle %}
+                  <span class="journal-subtitle">{{ title.subtitle }}</span>
+                  {% endif %}
+                  {% endfor %}
+                  {% endwith %}
                   {% if journal.previous_journal or journal.next_journal %}
                   <div class="journal-history">
                     {% if journal.previous_journal %}

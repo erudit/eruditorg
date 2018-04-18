@@ -1,9 +1,43 @@
 # -*- coding: utf-8 -*-
 
+import random
+
 from django.core.cache import caches
 
 from .serializers import get_datastream_cache_serializer
 from ..conf import settings as erudit_settings
+
+cache = caches['fedora']
+
+
+def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT):
+    """ Cache the result of a FedoraMixin method
+
+    Assumes that the method is bound to a FedoraMixin object, or at least that the object has a
+    ``localidentifier`` attribute.
+
+    Will cache the result for the value of ``duration``, plus or minus ``duration`` * 0.25. This
+    is to avoid expiring all the cached resources at the same time.
+
+    :param method: the method to decorate
+    :param duration: expected duration of result cache
+    :return: the decorated method
+    """
+
+    def wrapper(self, *args, **kwargs):
+        key = "fedora_result-{localidentifier}-{method_name}".format(
+            localidentifier=self.localidentifier,
+            method_name=method.__name__
+        )
+
+        val = cache.get(key)
+
+        if not val:
+            duration_deviation = random.randint(-(duration // 4), duration // 4)
+            val = method(self, *args, **kwargs)
+            cache.set(key, val, duration + duration_deviation)
+        return val
+    return wrapper
 
 
 def get_datastream_file_cache():

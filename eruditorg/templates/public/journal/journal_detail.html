@@ -66,8 +66,14 @@
     <div class="col-sm-12">
       <div class="row">
         <h1 class="col-xs-10 col-sm-11">
-          <span class="journal-title">{{ journal.name }}</span>
-          {% if journal.subtitle %}<span class="journal-subtitle">{{ journal.subtitle }}</span>{% endif %}
+          <span class="journal-title">{{ main_title.title }}</span>
+          {% if main_title.subtitle %}<span class="journal-subtitle">{{ main_title.subtitle }}</span>{% endif %}
+          {% for title in paral_titles %}
+          {% if title.title != main_title.title %}
+          <span class="journal-title">{{ title.title }}</span>
+          {% endif %}
+          {% if title.subtitle and title.subtitle != main_title.subtitle %}<span class="journal-subtitle">{{ title.subtitle }}</span>{% endif %}
+          {% endfor %}
         </h1>
       {% if journal.open_access %}
       <span class="hint--bottom-left hint--no-animate text-right col-xs-2 col-sm-1" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">

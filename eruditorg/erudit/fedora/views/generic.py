@@ -16,7 +16,7 @@ from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 
 from ..repository import api
-from ..shortcuts import get_cached_datastream_content
+from ..cache import get_cached_datastream_content
 
 logger = logging.getLogger(__name__)
 

@@ -3,7 +3,7 @@
 import logging
 
 from django.conf import settings
-from django.core.cache import cache
+from django.core.cache import caches
 from django.utils.functional import cached_property
 
 from eulfedora.util import RequestFailed
@@ -13,6 +13,7 @@ from ..conf import settings as erudit_settings
 from .repository import api
 
 logger = logging.getLogger(__name__)
+cache = caches['fedora']
 
 
 class FedoraMixin:
