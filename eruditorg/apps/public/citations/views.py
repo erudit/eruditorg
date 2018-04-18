@@ -11,6 +11,7 @@ from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
 from core.metrics.viewmixins import MetricCaptureMixin
 from apps.public.search.models import Generic
+from erudit.utils import locale_aware_sort
 
 
 class SavedCitationListView(ListView):
@@ -36,10 +37,16 @@ class SavedCitationListView(ListView):
             'title': 'title',
         }.get(sortby, 'title')
 
-        def key(doc):
-            return (str(getattr(doc, attrname, '')) or '', doc.localidentifier)
+        # fallback sort
+        objects_list = sorted(objects_list, key=lambda d: d.localidentifier)
 
-        return sorted(objects_list, key=key, reverse=reverse)
+        def key(doc):
+            return str(getattr(doc, attrname, '')) or ''
+
+        result = locale_aware_sort(objects_list, keyfunc=key)
+        if reverse:
+            result = list(reversed(result))
+        return result
 
     def get_context_data(self, **kwargs):
         context = super(SavedCitationListView, self).get_context_data(**kwargs)
