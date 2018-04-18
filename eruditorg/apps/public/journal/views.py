@@ -114,7 +114,7 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
                     'name': d.name,
                     'objects': _disciplines_dict[d]
                 }
-                for d in sorted(_disciplines_dict, key=attrgetter('name'))
+                for d in locale_aware_sort(_disciplines_dict, keyfunc=attrgetter('name'))
             ]
 
             # Only for "disciplines" sorting
