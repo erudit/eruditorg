@@ -530,7 +530,8 @@ class Command(BaseCommand):
         issue.date_produced = issue.erudit_object.production_date \
             or issue.erudit_object.publication_date
         issue.fedora_updated = fedora_issue.modified
-        issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
+        # TODO: uncomment this when we're confident about milestone 70
+        # issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
         issue.save()
         issue.contributors.all().delete()
 
