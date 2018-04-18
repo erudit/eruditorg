@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 import re
+from operator import attrgetter
 
 from django import forms
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _, pgettext
 
 from erudit.models import Discipline
 from erudit.models import Journal
+from erudit.utils import locale_aware_sort
 
 from apps.public.search import legacy
 
@@ -181,7 +182,9 @@ class SearchForm(forms.Form):
 
     languages = forms.MultipleChoiceField(
         label=_('Langues'),
-        choices=[(k, v,) for k, v in language_label_correspondence.items()],
+        choices=list(locale_aware_sort(
+            language_label_correspondence.items(),
+            keyfunc=lambda pair: force_text(pair[1]))),
         required=False)
 
     disciplines = forms.MultipleChoiceField(label=_('Disciplines'), required=False)
@@ -196,8 +199,10 @@ class SearchForm(forms.Form):
                      'advanced_search_term3', 'advanced_search_term4', 'advanced_search_term5']:
             self.fields[fkey].widget.attrs['placeholder'] = _('Expression ou mot-clé')
 
-        self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in Discipline.objects.all()]
-        self.fields['journals'].choices = [(j.name, j.name) for j in Journal.objects.all()]
+        disciplines = locale_aware_sort(Discipline.objects.all(), keyfunc=attrgetter('name'))
+        self.fields['disciplines'].choices = [(d.name_fr, d.name) for d in disciplines]
+        journals = locale_aware_sort(Journal.objects.all(), keyfunc=attrgetter('name'))
+        self.fields['journals'].choices = [(j.name, j.name) for j in journals]
 
     def clean(self):
         cleaned_data = super(SearchForm, self).clean()
