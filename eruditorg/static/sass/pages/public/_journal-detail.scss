@@ -10,12 +10,18 @@
 
   header {
 
+    h1 {
+      font-size: 1.75em;
+      margin-bottom: 1.5em;
+    }
+
     .journal-title {
       margin-bottom: 0.25em;
     }
 
     .journal-subtitle {
       color: $dark-grey;
+      margin-bottom: 0.25em;
     }
 
     .erudicon-open-access {
