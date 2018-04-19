@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
@@ -27,4 +24,4 @@ class UserspaceHomeView(LoginRequiredMixin, TemplateView):
         elif organisation_exists:
             return HttpResponseRedirect(reverse('userspace:library:entrypoint'))
         else:
-            raise PermissionDenied
+            return HttpResponseRedirect(reverse('public:auth:personal_data'))
