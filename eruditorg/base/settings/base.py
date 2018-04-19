@@ -193,10 +193,8 @@ CACHES = {
     },
 }
 
-
-# Put this in settings.py
 POST_OFFICE = {
-    'DEFAULT_PRIORITY': 'now',
+    'BATCH_SIZE': 25,
 }
 
 MANAGED_COLLECTIONS = tuple()
