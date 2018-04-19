@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 from django.contrib.auth.models import Group
-from django.test import RequestFactory
+from django.test import RequestFactory, Client
 from django.contrib.auth.models import AnonymousUser
 
 import factory
@@ -22,11 +20,12 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     @factory.post_generation
     def password(self, create, extracted, **kwargs):
-
         if extracted:
-            self.set_password(extracted)
+            password = extracted
         else:
-            self.set_password("default")
+            password = "default"
+        self._plaintext_password = password
+        self.set_password(password)
         self.save()
 
 
@@ -54,3 +53,12 @@ def get_anonymous_request():
     request.subscriptions = UserSubscriptions()
     request.session = dict()
     return request
+
+
+def logged_client(user=None):
+    if user is None:
+        user = UserFactory.create()
+    print(user.is_superuser)
+    client = Client()
+    client.login(username=user.username, password=user._plaintext_password)
+    return client
