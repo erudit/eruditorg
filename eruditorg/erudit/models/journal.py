@@ -1,7 +1,6 @@
 import copy
 import datetime as dt
 import dateutil.relativedelta as dr
-from functools import reduce
 from hashlib import md5
 
 from lxml import etree as et
@@ -41,6 +40,7 @@ from ..managers import InternalJournalManager
 from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
+from ..utils import get_sort_key_func, strip_stopwords_prefix
 
 from .core import Collection, Copyright, EruditDocument, Publisher, Author, Affiliation
 
@@ -251,8 +251,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def letter_prefix(self):
         """ Returns its name first letter """
-        sortable_name = self.sortable_name
-        return slugify(sortable_name[0]).upper() if sortable_name else None
+        return slugify(strip_stopwords_prefix(self.name))[:1].upper()
 
     @property
     def sortable_name(self):
@@ -260,9 +259,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
 
         This value should not be used to display the name of the Journal instance!
         """
-        replacements = ('La ', 'Le ', 'L\'', '[', ']', )
-        return slugify(
-            reduce(lambda a, kv: a.replace(*kv), ((r, '') for r in replacements), self.name))
+        return get_sort_key_func()(self.name)
 
     @property
     def publication_period(self):

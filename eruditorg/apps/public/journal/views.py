@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from functools import reduce
 from itertools import groupby
+from operator import attrgetter
 from string import ascii_uppercase
 import io
 
@@ -35,6 +36,7 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
+from erudit.utils import locale_aware_sort
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
@@ -88,13 +90,17 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
     def apply_sorting(self, objects):
         if self.sorting == 'name':
             objects = objects.select_related('previous_journal').select_related('next_journal')
-            grouped = groupby(
-                sorted(objects, key=lambda j: j.letter_prefix), key=lambda j: j.letter_prefix)
-            first_pass_results = [{'key': g[0], 'name': g[0], 'objects': sorted(
-                list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
-            return first_pass_results
         elif self.sorting == 'disciplines':
             objects = objects.prefetch_related('disciplines')
+
+        objects = locale_aware_sort(objects, keyfunc=attrgetter('name'))
+        if self.sorting == 'name':
+            grouped = groupby(objects, key=attrgetter('letter_prefix'))
+            first_pass_results = [
+                {'key': g[0], 'name': g[0], 'objects': list(g[1])}
+                for g in grouped]
+            return first_pass_results
+        elif self.sorting == 'disciplines':
             _disciplines_dict = {}
             for o in objects:
                 for d in o.disciplines.all():
@@ -102,21 +108,27 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
                         _disciplines_dict[d] = []
                     _disciplines_dict[d].append(o)
 
-            first_pass_results = [{'key': d.code, 'name': d.name, 'objects': sorted(
-                _disciplines_dict[d], key=lambda j: j.sortable_name)}
-                for d in sorted(_disciplines_dict, key=lambda i: i.name)]
+            first_pass_results = [
+                {
+                    'key': d.code,
+                    'name': d.name,
+                    'objects': _disciplines_dict[d]
+                }
+                for d in locale_aware_sort(_disciplines_dict, keyfunc=attrgetter('name'))
+            ]
 
-        # Only for "disciplines" sorting
-        second_pass_results = []
-        for r in first_pass_results:
-            grouped = groupby(
-                sorted(r['objects'], key=lambda j: j.collection_id), key=lambda j: j.collection)
-            del r['objects']
-            r['collections'] = [{'key': g[0], 'objects': sorted(
-                list(g[1]), key=lambda j: j.sortable_name)} for g in grouped]
-            second_pass_results.append(r)
+            # Only for "disciplines" sorting
+            second_pass_results = []
+            for r in first_pass_results:
+                grouped = groupby(
+                    sorted(r['objects'], key=attrgetter('collection_id')),
+                    key=attrgetter('collection'))
+                del r['objects']
+                r['collections'] = [
+                    {'key': g[0], 'objects': list(g[1])} for g in grouped]
+                second_pass_results.append(r)
 
-        return second_pass_results
+            return second_pass_results
 
     def get(self, request, *args, **kwargs):
         sorting = self.request.GET.get('sorting', 'name')
