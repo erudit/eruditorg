@@ -1015,6 +1015,25 @@ class JournalInformation(models.Model):
     journal = models.OneToOneField(
         Journal, verbose_name=_('Journal'), related_name='information')
 
+    # Contact
+    organisation_name = models.TextField(
+        verbose_name=_("Prénom et nom OU nom de l’organisation"),
+        blank=True)
+    email = models.EmailField(verbose_name=_("Adresse courriel"), blank=True)
+    subscription_email = models.EmailField(
+        verbose_name=_("Adresse courriel pour abonnements"),
+        blank=True)
+    phone = models.TextField(verbose_name=_("Numéro de téléphone"), blank=True)
+    facebook_url = models.URLField(verbose_name=_("Facebook"), blank=True)
+    facebook_enable_feed = models.BooleanField(
+        verbose_name=_("Afficher votre fil d’activités Facebook ?"),
+        default=False)
+    twitter_url = models.URLField(verbose_name=_("Twitter"), blank=True)
+    twitter_enable_feed = models.BooleanField(
+        verbose_name=_("Afficher votre fil d’activités Twitter ?"),
+        default=False)
+    website_url = models.URLField(verbose_name=_("Site Web officiel"), blank=True)
+
     # Information fields
     about = models.TextField(verbose_name=_('Revue'), blank=True, null=True)
     editorial_policy = models.TextField(
