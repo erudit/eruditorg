@@ -74,3 +74,7 @@ TRACKING_INFLUXDB_PASSWORD = 'root'
 
 FEDORA_ROOT = 'http://erudit.org'
 SOLR_ROOT = 'http://erudit.org'
+
+POST_OFFICE = {
+    'DEFAULT_PRIORITY': 'now',
+}
