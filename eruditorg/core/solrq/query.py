@@ -30,6 +30,9 @@ class Q:
     def _negate(self):
         self.negated = not self.negated
 
+    def __repr__(self):
+        return '<Q {}, {}>'.format(self.operator, repr(self.operands))
+
     def __or__(self, other):
         return self._combine(other, self.OR)
 
@@ -63,6 +66,9 @@ class Query:
         self.search = search
         self._q = q
         self._fq = fq
+
+    def __repr__(self):
+        return '<Query {}>'.format(self._q)
 
     def _prepare_querystring(self, base_qs, *args, safe=False, **kwargs):
         # Inserts Q params if applicable

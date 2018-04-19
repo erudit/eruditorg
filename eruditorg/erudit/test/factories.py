@@ -249,3 +249,13 @@ class ThesisFactory(factory.Factory):
 
     class Meta:
         model = SolrDocument
+
+
+class SolrDocumentFactory(factory.Factory):
+    id = factory.Sequence(lambda n: 'solr_id_{}'.format(n))
+    title = factory.Sequence(lambda n: 'title_{}'.format(n))
+    type = 'Article'
+    authors = []
+
+    class Meta:
+        model = SolrDocument

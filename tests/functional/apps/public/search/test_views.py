@@ -12,9 +12,7 @@ from django.test.client import Client
 import pytest
 
 from core.solrq.query import Query
-from erudit.test import BaseEruditTestCase
-from erudit.test.factories import ArticleFactory
-from erudit.test.factories import IssueFactory
+from erudit.test.factories import ArticleFactory, IssueFactory, SolrDocumentFactory
 from erudit.models import Article
 
 from apps.public.search.saved_searches import SavedSearchList
@@ -105,13 +103,15 @@ class TestEruditSearchResultsView:
         results = response.context['results']
         assert results['pagination']['count'] == 50
 
-    @unittest.mock.patch.object(Query, 'get_results')
-    def test_can_return_erudit_documents_not_in_database(self, mock_get_results):
-        mock_get_results.side_effect = fake_get_results_external
+    def test_can_return_erudit_documents_not_in_database(self, solr_client):
+        doc = SolrDocumentFactory(title='foo')
+        solr_client.add_document(doc)
+        doc = SolrDocumentFactory(title='bar')
+        solr_client.add_document(doc)
         url = reverse('public:search:results')
         response = Client().get(url, data={'basic_search_term': 'foo'})
         results = response.context['results']
-        assert results['pagination']['count'] == 50
+        assert results['pagination']['count'] == 1
 
     # This NO_CACHES override is needed because otherwise the cache.set() call tries to picke our
     # mock erudit object and crashes.
@@ -130,6 +130,19 @@ class TestEruditSearchResultsView:
 
         obj = results['results'][0]
         assert obj.pdf_url is None
+
+    def test_search_by_article_type(self, solr_client):
+        doc = SolrDocumentFactory(title='foo', article_type='Article')
+        solr_client.add_document(doc)
+        doc = SolrDocumentFactory(title='foo', article_type='Compte rendu')
+        solr_client.add_document(doc)
+        url = reverse('public:search:results')
+        response = Client().get(url, data={
+            'basic_search_term': 'foo',
+            'article_types': ['Compte rendu']
+        })
+        results = response.context['results']
+        assert results['pagination']['count'] == 1
 
 
 class TestAdvancedSearchView:
@@ -153,23 +166,19 @@ class TestAdvancedSearchView:
         assert response.context_data['saved_searches'][0]['results_count'] == 100
 
 
-class TestSearchResultsView(BaseEruditTestCase):
+class TestSearchResultsView:
     def test_redirects_to_the_advanced_search_form_if_no_parameters_are_present(self):
-        # Setup
         url = reverse('public:search:results')
-        # Run
-        response = self.client.get(url, follow=True)
-        # Check
-        self.assertTrue(len(response.redirect_chain))
+        response = Client().get(url, follow=True)
+        assert len(response.redirect_chain) > 0
         last_url, status_code = response.redirect_chain[-1]
-        self.assertTrue(reverse('public:search:advanced_search') in last_url)
+        assert reverse('public:search:advanced_search') in last_url
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_redirects_to_the_advanced_search_form_if_the_search_api_does_not_return_a_200(self, mock_get_results):  # noqa
         url = reverse('public:search:results')
-        # Run
         mock_get_results.side_effect = fake_get_results
-        response = self.client.get(url, follow=True, data={'basic_search_term': 'poulet', 'page': '6'})
+        response = Client().get(url, follow=True, data={'basic_search_term': 'poulet', 'page': '6'})
 
         assert len(response.redirect_chain) == 1
         last_url, status_code = response.redirect_chain[-1]
@@ -180,7 +189,7 @@ class TestSearchResultsView(BaseEruditTestCase):
         # A query yielding empty results don't redirect us. It shows the results page.
         url = reverse('public:search:results')
         mock_get_results.side_effect = fake_get_results_empty
-        response = self.client.get(url, data={'basic_search_term': 'poulet'})
+        response = Client().get(url, data={'basic_search_term': 'poulet'})
 
         assert response.status_code == 200
 
@@ -188,7 +197,8 @@ class TestSearchResultsView(BaseEruditTestCase):
 class TestSavedSearchAddView:
     def test_can_add_a_search_to_the_list_of_saved_searches(self):
         # Setup
-        request = RequestFactory().post('/', {'querystring': 'foo=bar&xyz=test', 'results_count': 100})
+        request = RequestFactory().post(
+            '/', {'querystring': 'foo=bar&xyz=test', 'results_count': 100})
         request.user = AnonymousUser()
         SessionMiddleware().process_request(request)
         view = SavedSearchAddView.as_view()

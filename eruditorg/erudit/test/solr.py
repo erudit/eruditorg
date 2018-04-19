@@ -198,6 +198,9 @@ class FakeSolrClient:
                     sort_args = [sort_args]
                 for sort_arg in reversed(sort_args):
                     field_name, order = sort_arg.split()
+                    if field_name == 'score':
+                        # we don't support that, skip
+                        continue
                     reverse = order == 'desc'
                     sortattr = SOLR2DOC[field_name]
                     docs = sorted(docs, key=attrgetter(sortattr), reverse=reverse)
@@ -260,6 +263,7 @@ class FakeSolrClient:
             # free-text query. For now, we perform a very simple search on title
             searchvals = extract_pq_searchvals(pq)
             searched_words = set(searchvals['TexteComplet'].lower().split())
+            del searchvals['TexteComplet']
             result = []
             docs = self.by_id.values()
             docs = apply_filters(docs, searchvals)

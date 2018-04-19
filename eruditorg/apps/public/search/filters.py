@@ -99,6 +99,11 @@ class SolrFilter:
         if publication_types:
             filters.update({'publication_types': publication_types})
 
+        # Article types filter
+        article_types = query_params.getlist('article_types', [])
+        if article_types:
+            filters.update({'article_types': article_types})
+
         # Disciplines filter
         disciplines = query_params.getlist('disciplines', [])
         if disciplines:
@@ -172,6 +177,7 @@ class SolrFilter:
         languages = filters.get('languages', [])
         funds = filters.get('funds', [])
         publication_types = filters.get('publication_types', [])
+        article_types = filters.get('article_types', [])
         disciplines = filters.get('disciplines', [])
         journals = filters.get('journals', [])
 
@@ -228,6 +234,10 @@ class SolrFilter:
         # Applies the publication types filter
         if publication_types:
             sqs = self._filter_solr_multiple(sqs, 'Corpus_fac', publication_types, safe=True)
+
+        # Applies the publication types filter
+        if article_types:
+            sqs = self._filter_solr_multiple(sqs, 'TypeArticle_fac', article_types, safe=True)
 
         # Applies the disciplines filter
         if disciplines:
@@ -295,7 +305,7 @@ class SolrFilter:
             return 'Annee_tri desc'
 
     def filter(self, request):
-        # Firt we have to retrieve all the considered Solr filters.
+        # First we have to retrieve all the considered Solr filters.
         filters = self.build_solr_filters(request.GET.copy())
 
         # Then apply the filters in order to get lazy query containing all the filters.

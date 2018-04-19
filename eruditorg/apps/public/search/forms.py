@@ -174,11 +174,25 @@ class SearchForm(forms.Form):
 
     funds = forms.MultipleChoiceField(
         label=_('Fonds'), widget=forms.CheckboxSelectMultiple, choices=FUNDS_CHOICES,
-        required=False)
+        required=False,
+        help_text=_(
+            "Les revues diffusées sur Érudit sont consultables directement sur la "
+            "plateforme ; les revues des collections Persée et NRC Research Press redirigent "
+            "vers la plateforme du partenaire."
+        ))
 
     publication_types = forms.MultipleChoiceField(
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
-        choices=PUB_TYPES_CHOICES, required=False)
+        choices=PUB_TYPES_CHOICES, required=False,
+        help_text=_(
+            "Les revues savantes publient des articles scientifiques révisés par les pairs ; "
+            "les revues culturelles présentent des articles dans les domaines artistique, "
+            "littéraire et socioculturel."
+        ))
+
+    article_types = forms.MultipleChoiceField(
+        label=_("Types d'articles savants"), widget=forms.CheckboxSelectMultiple,
+        choices=ARTICLE_TYPES_CHOICES, required=False)
 
     languages = forms.MultipleChoiceField(
         label=_('Langues'),
