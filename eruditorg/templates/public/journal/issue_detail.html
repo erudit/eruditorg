@@ -92,7 +92,7 @@
 
 {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
 {# Issue summary #}
-<main role="main" class="col-sm-9 col-md-8">
+<main role="main" class="col-sm-8 col-md-7">
   <header class="page-header-main">
     <p class="title-tag"><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a></p>
     <h1>

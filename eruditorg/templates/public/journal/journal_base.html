@@ -5,6 +5,20 @@
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
 {% endblock breadcrumb %}
 
+{% block extrahead %}
+{% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
+{{ block.super }}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+{% endif %}
+{% endblock extrahead %}
+
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 <div class="container">
@@ -12,7 +26,7 @@
     {# Main content #}
     {% block inner_main %}{% endblock inner_main %}
     {# Journal information sidebar #}
-    <aside id="journal-meta" class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
+    <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
 
       {# latest and back issues #}
       {% block aside_issue %}
@@ -58,26 +72,15 @@
         </div>
       </div>
 
+      <div class="sidebar-block search-journal">
+        {% block aside_authors_list %}
+        <h2>-> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a></h2>
+        {% endblock aside_authors_list %}
+      </div>
+
       {# journal meta infos #}
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
-        {% switch "maintenance" %}
-        {% else %}
-        <p>
-          {% if request.user.is_anonymous %}
-          -> <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="journal-login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
-            {% trans 'Accès éditeur' %}
-          </a>
-          {% else %}
-          -> <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord des éditeurs" %}</a>
-          {% endif %}
-        </p>
-        {% endswitch %}
-        {% block aside_authors_list %}
-        <p>
-          -> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
-        </p>
-        {% endblock aside_authors_list %}
         {% if meta_info_issue %}
         <p>
           -> <a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>
@@ -176,9 +179,9 @@
           </dd>
           {% endif %}
 
-          {% if journal.website_url %}
+          {% if journal_info.website_url %}
           <dt>{% trans "Site web" %}</dt>
-          <dd><a href="{{ journal.website_url }}">{{ journal.website_url }}</a></dd>
+          <dd><a href="{{ journal_info.website_url }}">{{ journal_info.website_url }}</a></dd>
           {% endif %}
 
           {% if journal.previous_journal %}
@@ -201,6 +204,18 @@
         {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
       </div>
+
+      {% if journal_info.twitter_enable_feed and journal_info.twitter_url %}
+      <div class="journal-meta--list">
+        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+      {% endif %}
+      
+      {% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
+      <div class="journal-meta--list">
+        <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
+      </div>
+      {% endif %}
     </aside>
   </div>
 </div>
