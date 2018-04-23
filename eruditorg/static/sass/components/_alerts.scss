@@ -5,12 +5,6 @@
 
 .alert {
 
-  &.alert-success {
-    p {
-      background-color: $white;
-    }
-  }
-
   p {
     border: 1px solid $mid-grey;
     padding: 0.75em 0.75em;
@@ -24,6 +18,22 @@
 
   > p + p {
     margin-top: 5px;
+  }
+
+  &.alert-success {
+
+    p {
+      background-color: $darker-grey;
+      border: 0;
+      color: #fff;
+      font-size: 14px;
+
+      a {
+        color: #fff;
+      }
+
+    }
+
   }
 
   &.fallback {
