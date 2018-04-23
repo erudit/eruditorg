@@ -1019,9 +1019,11 @@ class JournalInformation(models.Model):
     organisation_name = models.TextField(
         verbose_name=_("Prénom et nom OU nom de l’organisation"),
         blank=True)
-    email = models.EmailField(verbose_name=_("Adresse courriel"), blank=True)
+    email = models.EmailField(
+        verbose_name=_("Adresse courriel pour demandes générales"),
+        blank=True)
     subscription_email = models.EmailField(
-        verbose_name=_("Adresse courriel pour abonnements"),
+        verbose_name=_("Adresse courriel pour abonnements individuels"),
         blank=True)
     phone = models.TextField(verbose_name=_("Numéro de téléphone"), blank=True)
     facebook_url = models.URLField(verbose_name=_("Facebook"), blank=True)
