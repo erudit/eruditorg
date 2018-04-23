@@ -11,10 +11,15 @@ cache = caches['fedora']
 
 
 def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_DEFAULT_TIMEOUT):
-    """ Cache the result of a FedoraMixin method
+    """ Cache the result of a method called on a FedoraMixin object
 
     Assumes that the method is bound to a FedoraMixin object, or at least that the object has a
     ``localidentifier`` attribute.
+
+    If the value of ``localidentifier`` is ``None``, cache will not be queried and the decorated
+    method will be called directly.
+
+    This decorator assumes that the localidentifier is unique for ALL Fedora objects.
 
     Will cache the result for the value of ``duration``, plus or minus ``duration`` * 0.25. This
     is to avoid expiring all the cached resources at the same time.
@@ -23,8 +28,11 @@ def cache_fedora_result(method, duration=erudit_settings.FEDORA_FILEBASED_CACHE_
     :param duration: expected duration of result cache
     :return: the decorated method
     """
-
     def wrapper(self, *args, **kwargs):
+
+        if not self.localidentifier:
+            return method(self, *args, **kwargs)
+
         key = "fedora_result-{localidentifier}-{method_name}".format(
             localidentifier=self.localidentifier,
             method_name=method.__name__
