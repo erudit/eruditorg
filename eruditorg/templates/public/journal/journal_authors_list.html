@@ -1,6 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load i18n %}
-{% load public_journal_tags %}
+{% load i18n public_journal_tags %}
 
 {% block title %}{% trans "Index des auteurs" %} – {{ journal.name|safe }}{% endblock title %}
 
@@ -131,4 +130,9 @@
 </main>
 {% endblock inner_main %}
 
-{% block aside_authors_list %}{% endblock aside_authors_list %}
+{% block aside_authors_list %}
+{% url 'public:journal:journal_detail' journal.code as journal_detail_url %}
+<li>
+  <a href="{{ journal_detail_url }}" title="{% trans 'Consulter la revue' %}">{% trans "À propos" %}</a>
+</li>
+{% endblock aside_authors_list %}

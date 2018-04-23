@@ -32,7 +32,7 @@
       {% block aside_issue %}
       <div class="sidebar-block clearfix latest-issue">
         {% if latest_issue %}
-        <h2>{% trans "Dernier numéro" %} (<a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>)</h2>
+        <h2>{% trans "Dernier numéro" %}</h2>
         <p>
           <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
             {% if latest_issue.html_title %}
@@ -57,35 +57,38 @@
       </div>
       {% endblock aside_issue %}
 
-      <div class="sidebar-block search-journal">
-        <h2>{% trans "Rechercher dans la revue" %}</h2>
-        <div class="search-box">
-          <form action="{% url 'public:search:results' %}" method="get">
-            <div class="input-group">
-              <input type="search" class="form-control" name="basic_search_term" placeholder="{% trans "Recherchez par mot-clé…" %}">
-              <input type="hidden" name="journals" value="{{ journal.name }}">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-secondary"><span class="ion-search"></span></button>
-              </span>
+      {# Explore this journal #}
+      <div class="sidebar-block">
+        <h2>{% trans "Explorer" %}</h2>
+        <ul class="journal-explore">
+          <li class="search-journal">
+            <div class="search-box">
+              <form action="{% url 'public:search:results' %}" method="get">
+                <label for="journal-search">{% trans "Rechercher dans la revue" %}</label>
+                <div class="input-group">
+                  <input type="search" class="form-control" name="basic_search_term" id="journal-search" placeholder="{% trans "Recherchez par mot-clé…" %}">
+                  <input type="hidden" name="journals" value="{{ journal.name }}">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-secondary">
+                      <span class="sr-only">Rechercher</span>
+                      <span class="ion ion-ios-search-strong"></span>
+                    </button>
+                  </span>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
-
-      <div class="sidebar-block search-journal">
-        {% block aside_authors_list %}
-        <h2>-> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a></h2>
-        {% endblock aside_authors_list %}
+          </li>
+          {% block aside_authors_list %}
+          <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a></li>
+          {% endblock aside_authors_list %}
+          <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a></li>
+        </ul>
       </div>
 
       {# journal meta infos #}
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
-        {% if meta_info_issue %}
-        <p>
-          -> <a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>
-        </p>
-        {% endif %}
+
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
         <dl class="journal-meta--list">
 
@@ -142,7 +145,6 @@
           <dt>{% trans "Période de publication" %}</dt>
           <dd>{{ journal.publication_period }}</dd>
 
-
           {% if journal.first_issue %}
           <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
           <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
@@ -184,6 +186,11 @@
           <dd><a href="{{ journal_info.website_url }}">{{ journal_info.website_url }}</a></dd>
           {% endif %}
 
+          {% if journal_info.email %}
+          <dt>{% trans "Courriel général" %}</dt>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
+          {% endif %}
+
           {% if journal.previous_journal %}
           <dt>{% trans "Revue précédée de…" %}</dt>
           <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
@@ -210,7 +217,7 @@
         <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
       {% endif %}
-      
+
       {% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
       <div class="journal-meta--list">
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
