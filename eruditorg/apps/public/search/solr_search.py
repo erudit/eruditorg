@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*-
-
-from django.conf import settings
-import pysolr
-
+from erudit.solr.models import client
 from core.solrq import Search as BaseSearch
-
-
-# This is the object that will be used to query the Solr index.
-client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 
 class Search(BaseSearch):

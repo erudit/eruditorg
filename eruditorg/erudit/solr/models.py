@@ -4,11 +4,13 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _, get_language
 from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
+import pysolr
 
 from erudit import models as erudit_models
 from erudit.templatetags.model_formatters import person_list
 
-from . import solr_search
+# This is the object that will be used to query the Solr index.
+client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 
 class Generic:
@@ -19,7 +21,7 @@ class Generic:
 
     @staticmethod
     def from_solr_id(solr_id):
-        results = solr_search.client.search(q='ID:"{}"'.format(solr_id))
+        results = client.search(q='ID:"{}"'.format(solr_id))
         if not results.hits:
             raise ValueError("No Solr object found")
         elif results.hits > 1:
