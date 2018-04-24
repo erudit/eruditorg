@@ -1,7 +1,7 @@
 @phdthesis{{ '{' }}{{ thesis.localidentifier }},
   title="{{ thesis.title|safe }}",
   author="{{ thesis.author.lastname|safe }}, {{ thesis.author.firstname|safe }}",
-  school="{{ thesis.collection.name|safe }}",
+  school="{{ thesis.collection_name|safe }}",
   url="{{ thesis.url }}",
   year="{{ thesis.publication_year }}"
 }

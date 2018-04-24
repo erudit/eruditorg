@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-
 from collections import OrderedDict
 
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -11,6 +10,7 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from erudit.models import Collection
 from erudit.models import Thesis
+from erudit.solr.models import Generic
 
 from apps.public.thesis.legacy import format_thesis_collection_code
 from core.thesis.shortcuts import get_thesis_collections
@@ -211,22 +211,29 @@ class ThesisPublicationAuthorNameListView(FallbackObjectViewMixin, BaseThesisLis
             Q(author__lastname__startswith=letter.lower()))
 
 
-class ThesisEnwCitationView(DetailView):
+class BaseThesisCitationView(TemplateView):
+    def get_context_data(self, **kwargs):
+        result = super().get_context_data(**kwargs)
+        try:
+            result['thesis'] = Generic.from_solr_id(self.kwargs['solr_id'])
+        except ValueError:
+            raise Http404()
+        return result
+
+
+class ThesisEnwCitationView(BaseThesisCitationView):
     """ Returns the enw file of a specific thesis. """
     content_type = 'application/x-endnote-refer'
-    model = Thesis
     template_name = 'public/thesis/citation/thesis.enw'
 
 
-class ThesisRisCitationView(DetailView):
+class ThesisRisCitationView(BaseThesisCitationView):
     """ Returns the ris file of a specific thesis. """
     content_type = 'application/x-research-info-systems'
-    model = Thesis
     template_name = 'public/thesis/citation/thesis.ris'
 
 
-class ThesisBibCitationView(DetailView):
+class ThesisBibCitationView(BaseThesisCitationView):
     """ Returns the bib file of a specific thesis. """
     content_type = 'application/x-bibtex'
-    model = Thesis
     template_name = 'public/thesis/citation/thesis.bib'

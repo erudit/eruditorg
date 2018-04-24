@@ -14,6 +14,7 @@ montreal = timezone("America/Montreal")
 
 pytestmark = pytest.mark.django_db
 
+
 class TestThesisHomeView:
     def test_inserts_collection_information_into_the_context(self):
         author = AuthorFactory.create()
@@ -592,6 +593,7 @@ class TestThesisPublicationAuthorNameListView:
         assert response.status_code == 200
         assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
 
+
 class TestCitationExports:
     ALL_EXPORT_VIEWS = [
         'public:thesis:thesis_citation_enw',
@@ -600,14 +602,15 @@ class TestCitationExports:
     ]
 
     @pytest.mark.parametrize('view_name', ALL_EXPORT_VIEWS)
-    def test_no_html_escape_in_title_and_author(self, view_name):
+    def test_no_html_escape_in_title_and_author(self, view_name, solr_client):
         # ref support#183
         title = "ceci contient une apostroph'"
         firstname = "Jo' est mon prénom"
         lastname = "Blo' est ma condition"
         author = AuthorFactory.create(lastname=lastname, firstname=firstname)
         thesis = ThesisFactory.create(title=title, author=author)
-        url = reverse(view_name, args=[thesis.collection.code, thesis.pk])
+        solr_client.add_thesis(thesis)
+        url = reverse(view_name, args=[thesis.collection.code, thesis.solr_id])
         response = Client().get(url)
         content = response.content.decode('utf-8')
         # values hasn't been mangled in the rendering process.
@@ -615,14 +618,15 @@ class TestCitationExports:
         assert firstname in content
         assert lastname in content
 
-    def test_no_html_escape_in_collection(self):
+    def test_no_html_escape_in_collection(self, solr_client):
         # same as test_no_html_escape_in_title_and_author but only bib has collection name
         cname = "Col'ection"
         collection = CollectionFactory.create(name=cname)
         thesis = ThesisFactory.create(collection=collection)
+        solr_client.add_thesis(thesis)
         url = reverse(
             'public:thesis:thesis_citation_bib',
-            args=[thesis.collection.code, thesis.pk])
+            args=[thesis.collection.code, thesis.solr_id])
         response = Client().get(url)
         content = response.content.decode('utf-8')
         # values hasn't been mangled in the rendering process.

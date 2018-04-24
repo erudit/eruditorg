@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.conf.urls import url
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import cache_page
@@ -31,17 +29,17 @@ urlpatterns = [
     ),
 
     url(
-        _(r'^(?P<collection_code>[\w-]+)/t/(?P<pk>\d+)\.enw$'),
+        _(r'^(?P<collection_code>[\w-]+)/t/(?P<solr_id>.+)\.enw$'),
         cache_page(60 * 15)(views.ThesisEnwCitationView.as_view()),
         name='thesis_citation_enw'
     ),
     url(
-        _(r'^(?P<collection_code>[\w-]+)/t/(?P<pk>\d+)\.ris$'),
+        _(r'^(?P<collection_code>[\w-]+)/t/(?P<solr_id>.+)\.ris$'),
         cache_page(60 * 15)(views.ThesisRisCitationView.as_view()),
         name='thesis_citation_ris'
     ),
     url(
-        _(r'^(?P<collection_code>[\w-]+)/t/(?P<pk>\d+)\.bib$'),
+        _(r'^(?P<collection_code>[\w-]+)/t/(?P<solr_id>.+)\.bib$'),
         cache_page(60 * 15)(views.ThesisBibCitationView.as_view()),
         name='thesis_citation_bib'
     ),

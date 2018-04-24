@@ -303,7 +303,7 @@ class Thesis(Generic):
     def cite_url(self, type):
         return reverse('public:thesis:thesis_citation_{}'.format(type), args=[
             self.collection,
-            self.id,
+            self.localidentifier,
         ])
 
     def cite_enw_url(self):
