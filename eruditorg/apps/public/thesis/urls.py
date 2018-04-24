@@ -29,18 +29,18 @@ urlpatterns = [
     ),
 
     url(
-        _(r'^(?P<collection_code>[\w-]+)/t/(?P<solr_id>.+)\.enw$'),
-        cache_page(60 * 15)(views.ThesisEnwCitationView.as_view()),
+        _(r'^citation/(?P<solr_id>.+)\.enw$'),
+        views.ThesisEnwCitationView.as_view(),
         name='thesis_citation_enw'
     ),
     url(
-        _(r'^(?P<collection_code>[\w-]+)/t/(?P<solr_id>.+)\.ris$'),
-        cache_page(60 * 15)(views.ThesisRisCitationView.as_view()),
+        _(r'^citation/(?P<solr_id>.+)\.ris$'),
+        views.ThesisRisCitationView.as_view(),
         name='thesis_citation_ris'
     ),
     url(
-        _(r'^(?P<collection_code>[\w-]+)/t/(?P<solr_id>.+)\.bib$'),
-        cache_page(60 * 15)(views.ThesisBibCitationView.as_view()),
+        _(r'^citation/(?P<solr_id>.+)\.bib$'),
+        views.ThesisBibCitationView.as_view(),
         name='thesis_citation_bib'
     ),
 

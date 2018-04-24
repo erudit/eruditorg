@@ -1,5 +1,5 @@
 %0 Thesis
 %T {{ thesis.title|safe }}
-%A {{ thesis.author.lastname|safe }}, {{ thesis.author.firstname|safe }}
+%A {{ thesis.authors|safe }}
 %D {{ thesis.publication_year }}
 %U {{ thesis.url }}

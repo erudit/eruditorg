@@ -610,7 +610,7 @@ class TestCitationExports:
         author = AuthorFactory.create(lastname=lastname, firstname=firstname)
         thesis = ThesisFactory.create(title=title, author=author)
         solr_client.add_thesis(thesis)
-        url = reverse(view_name, args=[thesis.collection.code, thesis.solr_id])
+        url = reverse(view_name, args=[thesis.solr_id])
         response = Client().get(url)
         content = response.content.decode('utf-8')
         # values hasn't been mangled in the rendering process.
@@ -626,7 +626,7 @@ class TestCitationExports:
         solr_client.add_thesis(thesis)
         url = reverse(
             'public:thesis:thesis_citation_bib',
-            args=[thesis.collection.code, thesis.solr_id])
+            args=[thesis.solr_id])
         response = Client().get(url)
         content = response.content.decode('utf-8')
         # values hasn't been mangled in the rendering process.

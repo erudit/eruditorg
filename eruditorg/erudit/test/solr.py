@@ -91,11 +91,14 @@ class FakeSolrClient:
             article_type = 'Compte rendu'
         else:
             article_type = 'Article' if article.issue.journal.is_scientific() else 'Culturel'
+        journal = article.issue.journal
         article_dict = {
             'id': article.localidentifier,
-            'journal_code': article.issue.journal.code,
+            'journal_code': journal.code,
             'title': article.title,
             'type': article_type,
+            'year': str(article.issue.year),
+            'collection': journal.collection.name,
             'authors': authors,
         }
         for author in authors:
@@ -108,6 +111,8 @@ class FakeSolrClient:
             'id': thesis.localidentifier,
             'title': thesis.title,
             'type': 'Thèses',
+            'year': str(thesis.publication_year),
+            'collection': thesis.collection.name,
             'authors': [str(thesis.author)],
         }
         self.by_id[thesis_dict['id']] = thesis_dict
@@ -119,6 +124,9 @@ class FakeSolrClient:
                 'AuteurNP_fac': article['authors'],
                 'Titre_fr': article['title'],
                 'Corpus_fac': article['type'],
+                'AnneePublication': article['year'],
+                'Fonds_fac': article['collection'],
+                'Editeur': article['collection'],
             }
             if 'journal_code' in article:
                 result['RevueAbr'] = article['journal_code']
