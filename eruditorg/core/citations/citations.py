@@ -1,5 +1,5 @@
 from erudit.models import EruditDocument
-from apps.public.search.models import Generic
+from erudit.solr.models import Generic
 from .models import SavedCitation
 
 

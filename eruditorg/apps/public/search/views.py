@@ -12,6 +12,7 @@ from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
 from django.utils.translation import ugettext
 
+from erudit.solr.models import get_model_instance
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin
@@ -20,7 +21,6 @@ from . import filters, legacy
 from .forms import ResultsFilterForm
 from .forms import ResultsOptionsForm
 from .forms import SearchForm
-from .models import get_model_instance
 from .pagination import PaginationOutOfBoundsException
 from .saved_searches import SavedSearchList
 from .utils import get_search_elements

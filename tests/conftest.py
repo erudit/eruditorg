@@ -40,10 +40,10 @@ def mock_fedora_api(monkeypatch):
 
 @pytest.fixture(autouse=True)
 def mock_solr_client(monkeypatch):
-    from apps.public.search import solr_search
+    import erudit.solr.models
     client = FakeSolrClient()
     monkeypatch.setattr(pysolr, 'Solr', lambda *a, **kw: client)
-    monkeypatch.setattr(solr_search, 'client', client)
+    monkeypatch.setattr(erudit.solr.models, 'client', client)
 
 
 @pytest.fixture

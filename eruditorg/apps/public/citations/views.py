@@ -10,7 +10,7 @@ from django.views.generic import View
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
 from core.metrics.viewmixins import MetricCaptureMixin
-from apps.public.search.models import Generic
+from erudit.solr.models import Generic
 from erudit.utils import locale_aware_sort
 
 

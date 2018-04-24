@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.utils.text import slugify
 import pysolr
 
-from ..search.models import Generic
+from erudit.solr.models import Generic
 
 
 def get_client():
