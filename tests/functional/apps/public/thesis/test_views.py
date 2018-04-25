@@ -6,9 +6,9 @@ from django.core.urlresolvers import reverse
 from django.core.cache import cache
 from django.test import Client
 
-from erudit.test.factories import AuthorFactory
-from erudit.test.factories import CollectionFactory
-from erudit.test.factories import ThesisFactory
+from erudit.test.factories import (
+    AuthorFactory, CollectionFactory, ThesisFactory, ThesisProviderFactory
+)
 
 montreal = timezone("America/Montreal")
 
@@ -16,47 +16,49 @@ pytestmark = pytest.mark.django_db
 
 
 class TestThesisHomeView:
-    def test_inserts_collection_information_into_the_context(self):
+    def test_inserts_collection_information_into_the_context(self, solr_client):
         author = AuthorFactory.create()
-        collection_1 = CollectionFactory.create()
-        collection_2 = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection_1, author=author,
-            publication_year=2010)
+        provider1 = ThesisProviderFactory.create()
+        provider2 = ThesisProviderFactory.create()
+        thesis_1 = ThesisFactory.create(
+            localidentifier='thesis-1', author=author, publication_year=2010)
+        solr_client.add_thesis(thesis_1, collection=provider1.solr_name)
         thesis_2 = ThesisFactory.create(
-            localidentifier='thesis-2', collection=collection_1, author=author,
-            publication_year=2012)
+            localidentifier='thesis-2', author=author, publication_year=2012)
+        solr_client.add_thesis(thesis_2, collection=provider1.solr_name)
         thesis_3 = ThesisFactory.create(
-            localidentifier='thesis-3', collection=collection_1, author=author,
-            publication_year=2013)
+            localidentifier='thesis-3', author=author, publication_year=2013)
+        solr_client.add_thesis(thesis_3, collection=provider1.solr_name)
         thesis_4 = ThesisFactory.create(
-            localidentifier='thesis-4', collection=collection_1, author=author,
-            publication_year=2014)
+            localidentifier='thesis-4', author=author, publication_year=2014)
+        solr_client.add_thesis(thesis_4, collection=provider1.solr_name)
         thesis_5 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-5', collection=collection_2, author=author,
-            publication_year=2010)
+            localidentifier='thesis-5', author=author, publication_year=2010)
+        solr_client.add_thesis(thesis_5, collection=provider2.solr_name)
         thesis_6 = ThesisFactory.create(
-            localidentifier='thesis-6', collection=collection_2, author=author,
-            publication_year=2012)
+            localidentifier='thesis-6', author=author, publication_year=2012)
+        solr_client.add_thesis(thesis_6, collection=provider2.solr_name)
         thesis_7 = ThesisFactory.create(
-            localidentifier='thesis-7', collection=collection_2, author=author,
-            publication_year=2013)
+            localidentifier='thesis-7', author=author, publication_year=2013)
+        solr_client.add_thesis(thesis_7, collection=provider2.solr_name)
         thesis_8 = ThesisFactory.create(
-            localidentifier='thesis-8', collection=collection_2, author=author,
-            publication_year=2014)
+            localidentifier='thesis-8', author=author, publication_year=2014)
+        solr_client.add_thesis(thesis_8, collection=provider2.solr_name)
         url = reverse('public:thesis:home')
         response = Client().get(url)
         assert response.status_code == 200
-        assert 'collections_dict' in response.context
-        assert len(response.context['collections_dict']) == 2
-        assert collection_1.id in response.context['collections_dict']
-        assert collection_2.id in response.context['collections_dict']
-        assert response.context['collections_dict'][collection_1.id]['thesis_count'] == 4
-        assert response.context['collections_dict'][collection_2.id]['thesis_count'] == 4
-        assert response.context['collections_dict'][collection_1.id]['recent_theses'] == \
-            [thesis_4, thesis_3, thesis_2, ]
-        assert response.context['collections_dict'][collection_2.id]['recent_theses'] == \
-            [thesis_8, thesis_7, thesis_6, ]
+        assert 'provider_summaries' in response.context
+        assert len(response.context['provider_summaries']) == 2
+        assert response.context['provider_summaries'][0]['thesis_count'] == 4
+        assert response.context['provider_summaries'][1]['thesis_count'] == 4
+        ids = [
+            t.localidentifier for t in
+            response.context['provider_summaries'][0]['recent_theses']]
+        assert ids == [thesis_4.solr_id, thesis_3.solr_id, thesis_2.solr_id, ]
+        ids = [
+            t.localidentifier for t in
+            response.context['provider_summaries'][1]['recent_theses']]
+        assert ids == [thesis_8.solr_id, thesis_7.solr_id, thesis_6.solr_id, ]
 
 
 class TestThesisCollectionHomeView:

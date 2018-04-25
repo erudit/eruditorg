@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
 from django.utils.translation import gettext as _
 
-from ..models import Thesis
+from ..models import Thesis, ThesisProvider
 
 
 class ThesisAdmin(admin.ModelAdmin):
@@ -28,3 +26,4 @@ class ThesisAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Thesis, ThesisAdmin)
+admin.site.register(ThesisProvider)

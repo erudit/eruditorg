@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -8,6 +6,21 @@ from ..abstract_models import OAIDated
 from .core import Author
 from .core import Collection
 from .core import EruditDocument
+
+
+class ThesisProvider(models.Model):
+    code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
+    name = models.CharField(max_length=200, verbose_name=_('Nom'))
+    # Most of the time, same as "name", but not always...
+    solr_name = models.CharField(max_length=200, db_index=True, verbose_name=_('Nom dans Solr'))
+    logo = models.ImageField(verbose_name=_('Logo'), blank=True)
+
+    class Meta:
+        verbose_name = _("Éditeur de thèses")
+        verbose_name_plural = _("Éditeurs de thèses")
+
+    def __str__(self):
+        return self.code
 
 
 class Thesis(EruditDocument, OAIDated):

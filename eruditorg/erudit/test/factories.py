@@ -233,6 +233,16 @@ class LegacyOrganisationProfileFactory(factory.django.DjangoModelFactory):
         model = 'erudit.LegacyOrganisationProfile'
 
 
+class ThesisProviderFactory(factory.django.DjangoModelFactory):
+    code = factory.Sequence(lambda n: 'provider{}'.format(n))
+    name = factory.Sequence(lambda n: 'Provider{}'.format(n))
+    solr_name = factory.Sequence(lambda n: 'Provider{}'.format(n))
+
+    class Meta:
+        model = 'erudit.ThesisProvider'
+        django_get_or_create = ('code',)
+
+
 class ThesisFactory(factory.django.DjangoModelFactory):
     collection = factory.SubFactory(CollectionFactory)
     author = factory.SubFactory(AuthorFactory)

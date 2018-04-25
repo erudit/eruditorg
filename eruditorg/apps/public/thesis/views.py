@@ -9,8 +9,8 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from erudit.models import Collection
-from erudit.models import Thesis
-from erudit.solr.models import Generic
+from erudit.models import Thesis, ThesisProvider
+from erudit.solr.models import Generic, Thesis as SolrThesis
 
 from apps.public.thesis.legacy import format_thesis_collection_code
 from core.thesis.shortcuts import get_thesis_collections
@@ -18,6 +18,7 @@ from core.thesis.shortcuts import get_thesis_counts_per_author_first_letter
 from core.thesis.shortcuts import get_thesis_counts_per_publication_year
 
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
+from . import solr
 
 
 class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
@@ -29,20 +30,19 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
         context = super(ThesisHomeView, self).get_context_data(**kwargs)
 
         # Total number of theses for all collections
-        context['total_count'] = Thesis.objects.count()
+        context['total_count'] = solr.get_thesis_count()
 
         # Fetches the collections associated with theses.
-        collections = get_thesis_collections().order_by('name')
-        collections_dict = OrderedDict()
-        for collection in collections:
-            collections_dict[collection.id] = {
-                'collection': collection,
-                'thesis_count': Thesis.objects.filter(collection=collection).count(),
-                'recent_theses': list(
-                    Thesis.objects.filter(collection=collection)
-                    .order_by('-publication_year', '-oai_datestamp')[:3])
-            }
-        context['collections_dict'] = collections_dict
+        providers = ThesisProvider.objects.all().order_by('name')
+        provider_summaries = []
+        for provider in providers:
+            count, latest_thesis_data = solr.get_provider_summary(provider.solr_name)
+            provider_summaries.append({
+                'provider': provider,
+                'thesis_count': count,
+                'recent_theses': [SolrThesis(solr_data) for solr_data in latest_thesis_data],
+            })
+        context['provider_summaries'] = provider_summaries
 
         return context
 
