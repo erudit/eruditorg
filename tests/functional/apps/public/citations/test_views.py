@@ -10,6 +10,7 @@ from base.test.testcases import EruditClientTestCase
 from core.citations.middleware import SavedCitationListMiddleware
 from erudit.fedora import repository
 
+from erudit.test import needs_fr_ca
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
@@ -72,6 +73,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert response.context['cultural_articles_count'] == 1
         assert response.context['theses_count'] == 2
 
+    # needs fr_ca locale to properly sort authors
+    @needs_fr_ca
     @pytest.mark.parametrize('criteria,expected_order', [
         ('title_asc', ['a1', 'a2', 'a3', 't1', 't2']),
         ('title_desc', ['t2', 't1', 'a3', 'a2', 'a1']),
