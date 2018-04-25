@@ -1,7 +1,5 @@
 {% extends "public/journal/article_base.html" %}
-{% load i18n staticfiles %}
-{% load public_journal_tags %}
-{% load cache %}
+{% load cache i18n public_journal_tags staticfiles %}
 
 {% block title %}{% trans 'Notice.' %} {{ block.super }}{% endblock title %}
 
