@@ -1,6 +1,3 @@
-import datetime as dt
-from pytz import timezone
-
 import pytest
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
@@ -9,8 +6,6 @@ from django.test import Client
 from erudit.test.factories import (
     AuthorFactory, CollectionFactory, ThesisFactory, ThesisProviderFactory
 )
-
-montreal = timezone("America/Montreal")
 
 pytestmark = pytest.mark.django_db
 
@@ -183,409 +178,201 @@ class TestThesisCollectionHomeView:
 
 
 class TestThesisPublicationYearListView:
-    def test_returns_only_theses_for_a_given_publication_year(self):
-        # Setup
-        author = AuthorFactory.create()
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2010)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2013)
-        thesis_4 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-4', collection=collection, author=author,
-            publication_year=2014)
-        thesis_5 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-5', collection=collection, author=author,
-            publication_year=2012)
-        thesis_6 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-6', collection=collection, author=author,
-            publication_year=2012)
-        thesis_7 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-7', collection=collection, author=author,
-            publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url)
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_2, thesis_5, thesis_6, ]
+    def test_returns_only_theses_for_a_given_publication_year(self, solr_client):
+        provider = ThesisProviderFactory.create()
+        theses = [
+            ThesisFactory.create(publication_year=2010),
+            ThesisFactory.create(publication_year=2012),
+            ThesisFactory.create(publication_year=2013),
+            ThesisFactory.create(publication_year=2014),
+            ThesisFactory.create(publication_year=2012),
+            ThesisFactory.create(publication_year=2012),
+            ThesisFactory.create(publication_year=2014),
+        ]
+        for thesis in theses:
+            solr_client.add_thesis(thesis, collection=provider.solr_name)
 
-    def test_embeds_the_other_publication_years_aggregation_results_into_the_context(self):
-        # Setup
+        url = reverse('public:thesis:collection_list_per_year', args=(provider.code, 2012))
+        response = Client().get(url)
+        assert response.status_code == 200
+        ids = {t.localidentifier for t in response.context['theses']}
+        EXPECTED = {1, 4, 5}
+        assert ids == {theses[i].solr_id for i in EXPECTED}
+
+    def test_embeds_the_publication_years_aggregation_results_into_the_context(self, solr_client):
         cache.clear()
-        author = AuthorFactory.create()
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2010)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2013)
-        thesis_4 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-4', collection=collection, author=author,
-            publication_year=2014)
-        thesis_5 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-5', collection=collection, author=author,
-            publication_year=2012)
-        thesis_6 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-6', collection=collection, author=author,
-            publication_year=2012)
-        thesis_7 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-7', collection=collection, author=author,
-            publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
+        provider = ThesisProviderFactory.create()
+        theses = [
+            ThesisFactory.create(publication_year=2010),
+            ThesisFactory.create(publication_year=2012),
+            ThesisFactory.create(publication_year=2013),
+            ThesisFactory.create(publication_year=2014),
+            ThesisFactory.create(publication_year=2012),
+            ThesisFactory.create(publication_year=2012),
+            ThesisFactory.create(publication_year=2014),
+        ]
+        for thesis in theses:
+            solr_client.add_thesis(thesis, collection=provider.solr_name)
+
+        url = reverse('public:thesis:collection_list_per_year', args=(provider.code, 2012))
         response = Client().get(url)
-        # Check
         assert response.status_code == 200
-        assert response.context['other_publication_years'][0] == \
-            {'publication_year': 2014, 'total': 2}
-        assert response.context['other_publication_years'][1] == \
-            {'publication_year': 2013, 'total': 1}
-        assert response.context['other_publication_years'][2] == \
-            {'publication_year': 2012, 'total': 3}
-        assert response.context['other_publication_years'][3] == \
-            {'publication_year': 2010, 'total': 1}
+        EXPECTED = [
+            ('2014', 2),
+            ('2013', 1),
+            ('2012', 3),
+            ('2010', 1),
+        ]
+        assert response.context['other_publication_years'] == EXPECTED
 
-    def test_can_sort_theses_by_ascending_author_name(self):
-        # Setup
+    @pytest.mark.parametrize('sort_by,desc', [
+        ('author_asc', False),
+        ('author_desc', True),
+    ])
+    def test_can_sort_theses_by_author_name(self, sort_by, desc, solr_client):
         author_1 = AuthorFactory.create(lastname='Aname')
-        author_2 = AuthorFactory.create(lastname='Bname')
-        author_3 = AuthorFactory.create(lastname='Cname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author_1,
-            publication_year=2012)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author_3,
-            publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url, {'sort_by': 'author_asc'})
-        # Check
+        author_2 = AuthorFactory.create(lastname='Cname')
+        author_3 = AuthorFactory.create(lastname='Bname')
+        provider = ThesisProviderFactory.create()
+        theses = [
+            ThesisFactory.create(publication_year=2012, author=author_1),
+            ThesisFactory.create(publication_year=2012, author=author_2),
+            ThesisFactory.create(publication_year=2012, author=author_3),
+        ]
+        for thesis in theses:
+            solr_client.add_thesis(thesis, collection=provider.solr_name)
+        url = reverse('public:thesis:collection_list_per_year', args=(provider.code, 2012))
+        response = Client().get(url, {'sort_by': sort_by})
         assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
+        ids = [t.localidentifier for t in response.context['theses']]
+        EXPECTED = [0, 2, 1]
+        if desc:
+            EXPECTED = reversed(EXPECTED)
+        assert ids == [theses[i].solr_id for i in EXPECTED]
 
-    def test_can_sort_theses_by_descending_author_name(self):
-        # Setup
-        author_1 = AuthorFactory.create(lastname='Aname')
-        author_2 = AuthorFactory.create(lastname='Bname')
-        author_3 = AuthorFactory.create(lastname='Cname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author_1,
-            publication_year=2012)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author_3,
-            publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url, {'sort_by': 'author_desc'})
-        # Check
+    @pytest.mark.parametrize('sort_by,desc', [
+        ('date_asc', False),
+        ('date_desc', True),
+    ])
+    def test_can_sort_theses_by_date(self, sort_by, desc, solr_client):
+        provider = ThesisProviderFactory.create()
+        thesis_attrs = [
+            (2012, '20120101'),
+            (2012, '20140101'),
+            (2012, '20120102'),
+        ]
+        theses = []
+        for publication_year, date_added in thesis_attrs:
+            thesis = ThesisFactory.create(publication_year=publication_year)
+            theses.append(thesis)
+            solr_client.add_thesis(thesis, collection=provider.solr_name, date_added=date_added)
+        url = reverse('public:thesis:collection_list_per_year', args=(provider.code, 2012))
+        response = Client().get(url, {'sort_by': sort_by})
         assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
-
-    def test_can_sort_theses_by_ascending_date(self):
-        # Setup
-        dt_now = dt.datetime.now(tz=montreal)
-        author = AuthorFactory.create()
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url, {'sort_by': 'date_asc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
-
-    def test_can_sort_theses_by_descending_date(self):
-        # Setup
-        dt_now = dt.datetime.now(tz=montreal)
-        author = AuthorFactory.create()
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url, {'sort_by': 'date_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
-
-    def test_can_sort_theses_by_ascending_title(self):
-        # Setup
-        author = AuthorFactory.create()
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, title='Atitle')
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, title='Btitle')
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url, {'sort_by': 'title_asc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
-
-    def test_can_sort_theses_by_descending_title(self):
-        # Setup
-        author = AuthorFactory.create()
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, title='Atitle')
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, title='Btitle')
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_year', args=(collection.code, 2012))
-        # Run
-        response = Client().get(url, {'sort_by': 'title_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
+        ids = [t.localidentifier for t in response.context['theses']]
+        EXPECTED = [0, 2, 1]
+        if desc:
+            EXPECTED = reversed(EXPECTED)
+        assert ids == [theses[i].solr_id for i in EXPECTED]
 
 
 class TestThesisPublicationAuthorNameListView:
-    def test_returns_only_theses_for_a_given_author_first_letter(self):
-        # Setup
+    def test_returns_only_theses_for_a_given_author_first_letter(self, solr_client):
         author_1 = AuthorFactory.create(lastname='Aname')
         author_2 = AuthorFactory.create(lastname='Bname')
         author_3 = AuthorFactory.create(lastname='Cname')
-        author_4 = AuthorFactory.create(lastname='Dname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author_1,
-            publication_year=2010)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author_3,
-            publication_year=2013)
-        thesis_4 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-4', collection=collection, author=author_4,
-            publication_year=2014)
-        thesis_5 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-5', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_6 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-6', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_7 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-7', collection=collection, author=author_4,
-            publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
+        provider = ThesisProviderFactory.create()
+        theses = [
+            ThesisFactory.create(author=author_1),
+            ThesisFactory.create(author=author_2),
+            ThesisFactory.create(author=author_3),
+        ]
+        for thesis in theses:
+            solr_client.add_thesis(thesis, collection=provider.solr_name)
+        url = reverse('public:thesis:collection_list_per_author_name', args=(provider.code, 'B'))
         response = Client().get(url)
-        # Check
         assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_2, thesis_5, thesis_6, ]
+        ids = {t.localidentifier for t in response.context['theses']}
+        EXPECTED = {1}
+        assert ids == {theses[i].solr_id for i in EXPECTED}
 
-    def test_embeds_the_other_author_first_letter_aggregation_results_into_the_context(self):
-        # Setup
+    def test_embeds_the_author_first_letter_aggregation_results_into_the_context(self, solr_client):
         cache.clear()
         author_1 = AuthorFactory.create(lastname='Aname')
         author_2 = AuthorFactory.create(lastname='Bname')
         author_3 = AuthorFactory.create(lastname='Cname')
-        author_4 = AuthorFactory.create(lastname='Dname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author_1,
-            publication_year=2010)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author_3,
-            publication_year=2013)
-        thesis_4 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-4', collection=collection, author=author_4,
-            publication_year=2014)
-        thesis_5 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-5', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_6 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-6', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_7 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-7', collection=collection, author=author_4,
-            publication_year=2014)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
+        provider = ThesisProviderFactory.create()
+        theses = [
+            ThesisFactory.create(author=author_1),
+            ThesisFactory.create(author=author_2),
+            ThesisFactory.create(author=author_2),
+            ThesisFactory.create(author=author_3),
+            ThesisFactory.create(author=author_3),
+            ThesisFactory.create(author=author_3),
+        ]
+        for thesis in theses:
+            solr_client.add_thesis(thesis, collection=provider.solr_name)
+        url = reverse('public:thesis:collection_list_per_author_name', args=(provider.code, 'B'))
         response = Client().get(url)
-        # Check
         assert response.status_code == 200
-        assert response.context['other_author_letters'][0] == \
-            {'author_firstletter': 'A', 'total': 1}
-        assert response.context['other_author_letters'][1] == \
-            {'author_firstletter': 'B', 'total': 3}
-        assert response.context['other_author_letters'][2] == \
-            {'author_firstletter': 'C', 'total': 1}
-        assert response.context['other_author_letters'][3] == \
-            {'author_firstletter': 'D', 'total': 2}
+        EXPECTED = [
+            ('A', 1),
+            ('B', 2),
+            ('C', 3),
+        ]
+        assert response.context['other_author_letters'] == EXPECTED
 
-    def test_can_sort_theses_by_ascending_author_name(self):
-        # Setup
+    @pytest.mark.parametrize('sort_by,desc', [
+        ('author_asc', False),
+        ('author_desc', True),
+    ])
+    def test_can_sort_theses_by_author_name(self, sort_by, desc, solr_client):
         author_1 = AuthorFactory.create(lastname='BAname')
-        author_2 = AuthorFactory.create(lastname='BBname')
-        author_3 = AuthorFactory.create(lastname='BCname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author_1,
-            publication_year=2012)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author_3,
-            publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
-        response = Client().get(url, {'sort_by': 'author_asc'})
-        # Check
+        author_2 = AuthorFactory.create(lastname='BCname')
+        author_3 = AuthorFactory.create(lastname='BBname')
+        provider = ThesisProviderFactory.create()
+        theses = [
+            ThesisFactory.create(author=author_1),
+            ThesisFactory.create(author=author_2),
+            ThesisFactory.create(author=author_3),
+        ]
+        for thesis in theses:
+            solr_client.add_thesis(thesis, collection=provider.solr_name)
+        url = reverse('public:thesis:collection_list_per_author_name', args=(provider.code, 'B'))
+        response = Client().get(url, {'sort_by': sort_by})
         assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
+        ids = [t.localidentifier for t in response.context['theses']]
+        EXPECTED = [0, 2, 1]
+        if desc:
+            EXPECTED = reversed(EXPECTED)
+        assert ids == [theses[i].solr_id for i in EXPECTED]
 
-    def test_can_sort_theses_by_descending_author_name(self):
-        # Setup
-        author_1 = AuthorFactory.create(lastname='BAname')
-        author_2 = AuthorFactory.create(lastname='BBname')
-        author_3 = AuthorFactory.create(lastname='BCname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author_1,
-            publication_year=2012)
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author_2,
-            publication_year=2012)
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author_3,
-            publication_year=2012)
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
-        response = Client().get(url, {'sort_by': 'author_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
-
-    def test_can_sort_theses_by_ascending_date(self):
-        # Setup
-        dt_now = dt.datetime.now(tz=montreal)
+    @pytest.mark.parametrize('sort_by,desc', [
+        ('date_asc', False),
+        ('date_desc', True),
+    ])
+    def test_can_sort_theses_by_date(self, sort_by, desc, solr_client):
         author = AuthorFactory.create(lastname='Bname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
-        response = Client().get(url, {'sort_by': 'date_asc'})
-        # Check
+        provider = ThesisProviderFactory.create()
+        thesis_attrs = [
+            (2012, '20120101'),
+            (2012, '20140101'),
+            (2012, '20120102'),
+            (2013, '20130101'),
+        ]
+        theses = []
+        for publication_year, date_added in thesis_attrs:
+            thesis = ThesisFactory.create(publication_year=publication_year, author=author)
+            theses.append(thesis)
+            solr_client.add_thesis(thesis, collection=provider.solr_name, date_added=date_added)
+        url = reverse('public:thesis:collection_list_per_author_name', args=(provider.code, 'B'))
+        response = Client().get(url, {'sort_by': sort_by})
         assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
-
-    def test_can_sort_theses_by_descending_date(self):
-        # Setup
-        dt_now = dt.datetime.now(tz=montreal)
-        author = AuthorFactory.create(lastname='Bname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=3)))
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=2)))
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, oai_datestamp=(dt_now - dt.timedelta(days=1)))
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
-        response = Client().get(url, {'sort_by': 'date_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
-
-    def test_can_sort_theses_by_ascending_title(self):
-        # Setup
-        author = AuthorFactory.create(lastname='Bname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, title='Atitle')
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, title='Btitle')
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
-        response = Client().get(url, {'sort_by': 'title_asc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_1, thesis_2, thesis_3, ]
-
-    def test_can_sort_theses_by_descending_title(self):
-        # Setup
-        author = AuthorFactory.create(lastname='Bname')
-        collection = CollectionFactory.create()
-        thesis_1 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-1', collection=collection, author=author,
-            publication_year=2012, title='Atitle')
-        thesis_2 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-2', collection=collection, author=author,
-            publication_year=2012, title='Btitle')
-        thesis_3 = ThesisFactory.create(  # noqa
-            localidentifier='thesis-3', collection=collection, author=author,
-            publication_year=2012, title='Ctitle')
-        url = reverse('public:thesis:collection_list_per_author_name', args=(collection.code, 'B'))
-        # Run
-        response = Client().get(url, {'sort_by': 'title_desc'})
-        # Check
-        assert response.status_code == 200
-        assert list(response.context['theses']) == [thesis_3, thesis_2, thesis_1, ]
+        ids = [t.localidentifier for t in response.context['theses']]
+        EXPECTED = [0, 2, 1, 3]
+        if desc:
+            EXPECTED = reversed(EXPECTED)
+        assert ids == [theses[i].solr_id for i in EXPECTED]
 
 
 class TestCitationExports:

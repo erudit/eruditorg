@@ -67,3 +67,42 @@ def pairify(iterable):
     Example: pairify(['foo', 1, 'bar', 2]) -> [('foo', 1), ('bar', 2)]
     """
     return zip(islice(iterable, None, None, 2), islice(iterable, 1, None, 2))
+
+
+class PaginatedAlready:
+    """ Mocks django's Paginator object to wrap items that are *already* paginated.
+
+    You will usually want to use this in templates to re-use a standard paginated template
+    without needing to modify it.
+    """
+    def __init__(self, paginate_by, total_count, page_number):
+        self.paginate_by = paginate_by
+        self.total_count = total_count
+        self.number = int(page_number)
+
+    @property
+    def num_pages(self):
+        if not self.paginate_by:
+            return 1
+        result, modulo = divmod(self.total_count, self.paginate_by)
+        if modulo:
+            result += 1
+        return result
+
+    @property
+    def has_previous(self):
+        return self.number > 1
+
+    @property
+    def has_next(self):
+        return self.number < self.num_pages
+
+    @property
+    def previous_page_number(self):
+        if self.has_previous:
+            return self.number - 1
+
+    @property
+    def next_page_number(self):
+        if self.has_next:
+            return self.number + 1

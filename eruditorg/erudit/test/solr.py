@@ -14,12 +14,13 @@ from luqum.parser import parser
 SOLR2DOC = {
     'ID': 'id',
     'AuteurNP_fac': 'authors',
+    'Auteur_tri': 'authors',
     'Titre_fr': 'title',
     'Corpus_fac': 'type',
     'TypeArticle_fac': 'article_type',
     'RevueAbr': 'journal_code',
     'AnneePublication': 'year',
-    'DateAjoutErudit': 'year',
+    'DateAjoutErudit': 'date_added',
     'Fonds_fac': 'collection',
     'Editeur': 'collection',
 }
@@ -31,13 +32,10 @@ class SolrDocument:
         self.title = title
         self.type = type
         self.authors = authors
-        self.article_type = kwargs.get('article_type')
-        self.journal_code = kwargs.get('journal_code')
-        self.collection = kwargs.get('collection')
-        self.year = kwargs.get('year')
-
-    def __repr__(self):
-        return " ".join([self.id, self.year])
+        OPTIONAL_ARGS = [
+            'article_type', 'journal_code', 'collection', 'year', 'date_added']
+        for attr in OPTIONAL_ARGS:
+            setattr(self, attr, kwargs.get(attr))
 
     @staticmethod
     def from_article(article, authors=None):
@@ -60,9 +58,11 @@ class SolrDocument:
             collection=journal.collection.name)
 
     @staticmethod
-    def from_thesis(thesis, collection=None):
+    def from_thesis(thesis, collection=None, date_added=None):
         if collection is None:
             collection = thesis.collection.name
+        if date_added is None:
+            date_added = thesis.publication_year
         return SolrDocument(
             id=thesis.localidentifier,
             title=thesis.title,
@@ -70,6 +70,7 @@ class SolrDocument:
             authors=["{}, {}".format(thesis.author.lastname, thesis.author.firstname)],
             year=str(thesis.publication_year),
             collection=collection,
+            date_added=str(date_added),
         )
 
     def as_result(self):
@@ -165,8 +166,8 @@ class FakeSolrClient:
     def add_article(self, article, authors=None):
         self.add_document(SolrDocument.from_article(article, authors=authors))
 
-    def add_thesis(self, thesis, collection=None):
-        self.add_document(SolrDocument.from_thesis(thesis, collection=collection))
+    def add_thesis(self, thesis, **kwargs):
+        self.add_document(SolrDocument.from_thesis(thesis, **kwargs))
 
     def search(self, *args, **kwargs):
         def get_facet(elems):
@@ -181,13 +182,24 @@ class FakeSolrClient:
             return result
 
         def apply_filters(docs, searchvals):
-            filter_by_type = searchvals.get('TypeArticle_fac')
-            if filter_by_type:
-                docs = [d for d in docs if d.type == filter_by_type]
-            filter_by_collection = searchvals.get('Editeur')
-            if filter_by_collection:
-                docs = [d for d in docs if d.collection == filter_by_collection]
-            return docs
+            def val_matches(docval, searchval):
+                if searchval.endswith('*'):
+                    if docval.startswith(searchval[:-1]):
+                        return True
+                elif docval == searchval:
+                    return True
+                return False
+
+            def matches(doc):
+                for k, v in searchvals.items():
+                    docval = getattr(doc, SOLR2DOC[k])
+                    if not isinstance(docval, list):
+                        docval = [docval]
+                    if not any(val_matches(subval, v) for subval in docval):
+                        return False
+                return True
+
+            return list(filter(matches, docs))
 
         def create_results(docs, facets=[]):
             # Add facets
@@ -196,14 +208,15 @@ class FakeSolrClient:
                 facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
 
             # apply sorting
-            sort_arg = kwargs.get('sort')
-            if sort_arg:
-                reverse = False
-                if sort_arg.endswith(' desc'):
-                    sort_arg = sort_arg[:-len(' desc')]
-                    reverse = True
-                sortattr = SOLR2DOC[sort_arg]
-                docs = sorted(docs, key=attrgetter(sortattr), reverse=reverse)
+            sort_args = kwargs.get('sort')
+            if sort_args:
+                if isinstance(sort_args, str):
+                    sort_args = [sort_args]
+                for sort_arg in reversed(sort_args):
+                    field_name, order = sort_arg.split()
+                    reverse = order == 'desc'
+                    sortattr = SOLR2DOC[field_name]
+                    docs = sorted(docs, key=attrgetter(sortattr), reverse=reverse)
 
             return FakeSolrResults(docs=docs, facet_fields=facet_fields, rows=kwargs.get('rows'))
 
@@ -276,6 +289,8 @@ class FakeSolrClient:
         my_pattern2 = (AndOperation, {}, [
             (SearchField, {'name': 'Corpus_fac'}, []),
             (SearchField, {'name': 'Editeur'}, []),
+            (SearchField, {'name': 'AnneePublication', 'flags': {'optional'}}, []),
+            (SearchField, {'name': 'Auteur_tri', 'flags': {'optional'}}, []),
         ])
         if matches_pattern(pq, my_pattern1) or matches_pattern(pq, my_pattern2):
             # Thesis listing

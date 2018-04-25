@@ -24,11 +24,11 @@ def get_thesis_count():
     return solr_results.hits
 
 
-ProviderSummary = namedtuple('ProviderSummary', 'count latest_thesis_data by_year by_author')
+ProviderSummary = namedtuple('ProviderSummary', 'count solr_dicts by_year by_author')
 
 
 def get_provider_summary(provider_name):
-    cache_key = 'get_thesis_summary-{}'.format(slugify(provider_name))
+    cache_key = 'get_provider_summary-{}'.format(slugify(provider_name))
     cached_result = cache.get(cache_key)
     if cached_result is not None:
         return cached_result
@@ -49,4 +49,32 @@ def get_provider_summary(provider_name):
         list(pairify(solr_results.facets['facet_fields']['AuteurNP_fac'])),
     )
     cache.set(cache_key, result)
+    return result
+
+
+Theses = namedtuple('Theses', 'count solr_dicts')
+
+
+def get_theses(provider_name, rows=50, page=1, sort=None, year=None, author_letter=None):
+    if sort is None:
+        sort = ['DateAjoutErudit desc']
+    client = get_client()
+    query = 'Corpus_fac:Thèses Editeur:"{}"'.format(provider_name)
+    if year:
+        query += ' AnneePublication:{}'.format(year)
+    if author_letter:
+        query += ' Auteur_tri:{}*'.format(author_letter)
+    start = (page - 1) * rows
+    args = {
+        'q': query,
+        'rows': str(rows),
+        'start': start,
+        'sort': sort,
+        'facet.limit': '0',
+    }
+    solr_results = client.search(**args)
+    result = Theses(
+        solr_results.hits,
+        list(solr_results.docs),
+    )
     return result

@@ -33,5 +33,6 @@ def get_full_path_with_overrides(context, **kwargs):
     """ Returns the current full path and inserts keyword arguments into the final path. """
     request = context.get('request')
     request_get = request.GET.copy()
-    request_get.update(kwargs)
+    for k, v in kwargs.items():
+        request_get[k] = str(v)
     return request.path + '?' + request_get.urlencode()
