@@ -1,4 +1,5 @@
 from collections import Counter
+from itertools import chain
 from operator import attrgetter
 
 from luqum.tree import (
@@ -15,6 +16,7 @@ SOLR2DOC = {
     'AuteurNP_fac': 'authors',
     'Titre_fr': 'title',
     'Corpus_fac': 'type',
+    'TypeArticle_fac': 'article_type',
     'RevueAbr': 'journal_code',
     'AnneePublication': 'year',
     'DateAjoutErudit': 'year',
@@ -29,6 +31,7 @@ class SolrDocument:
         self.title = title
         self.type = type
         self.authors = authors
+        self.article_type = kwargs.get('article_type')
         self.journal_code = kwargs.get('journal_code')
         self.collection = kwargs.get('collection')
         self.year = kwargs.get('year')
@@ -42,16 +45,16 @@ class SolrDocument:
             if hasattr(article, 'erudit_object'):
                 authors = article.erudit_object.get_authors()
             authors = authors or []
-        if article.type == 'compterendu':
+        article_type = article.type
+        if article_type == 'compterendu':
             article_type = 'Compte rendu'
-        else:
-            article_type = 'Article' if article.issue.journal.is_scientific() else 'Culturel'
         journal = article.issue.journal
         return SolrDocument(
             id=article.localidentifier,
             journal_code=journal.code,
             title=article.title,
-            type=article_type,
+            type='Article' if article.issue.journal.is_scientific() else 'Culturel',
+            article_type=article_type,
             authors=authors,
             year=str(article.issue.year),
             collection=journal.collection.name)
@@ -64,7 +67,7 @@ class SolrDocument:
             id=thesis.localidentifier,
             title=thesis.title,
             type='Thèses',
-            authors=[str(thesis.author)],
+            authors=["{}, {}".format(thesis.author.lastname, thesis.author.firstname)],
             year=str(thesis.publication_year),
             collection=collection,
         )
@@ -167,7 +170,11 @@ class FakeSolrClient:
 
     def search(self, *args, **kwargs):
         def get_facet(elems):
-            counter = Counter(elems)
+            try:
+                counter = Counter(elems)
+            except TypeError:
+                # elems are lists
+                counter = Counter(chain(*elems))
             result = []
             for k, v in counter.items():
                 result += [k, v]
@@ -182,7 +189,12 @@ class FakeSolrClient:
                 docs = [d for d in docs if d.collection == filter_by_collection]
             return docs
 
-        def create_results(docs, facet_fields=None):
+        def create_results(docs, facets=[]):
+            # Add facets
+            facet_fields = {}
+            for facet in facets:
+                facet_fields[facet] = get_facet([getattr(d, SOLR2DOC[facet]) for d in docs])
+
             # apply sorting
             sort_arg = kwargs.get('sort')
             if sort_arg:
@@ -218,18 +230,11 @@ class FakeSolrClient:
             # letter list or article types, return facets
             searchvals = extract_pq_searchvals(pq)
             journal_code = searchvals['RevueAbr']
-            authors = []
-            article_types = []
+            result = []
             for author, docs in self.authors.items():
                 docs = apply_filters(docs, searchvals)
-                for doc in docs:
-                    if doc.journal_code == journal_code:
-                        authors.append(author)
-                        article_types.append(doc.type)
-            return create_results([], facet_fields={
-                'AuteurNP_fac': get_facet(authors),
-                'TypeArticle_fac': get_facet(article_types),
-            })
+                result += [doc for doc in docs if doc.journal_code == journal_code]
+            return create_results(result, facets=['AuteurNP_fac', 'TypeArticle_fac'])
 
         my_pattern = (AndOperation, {}, [
             (SearchField, {'name': 'RevueAbr'}, []),
@@ -278,7 +283,7 @@ class FakeSolrClient:
             result = []
             docs = self.by_id.values()
             docs = apply_filters(docs, searchvals)
-            return create_results(docs=docs)
+            return create_results(docs=docs, facets=['AnneePublication', 'AuteurNP_fac'])
 
         print("Unexpected query {} {}".format(q, repr(pq)))
         return FakeSolrResults()

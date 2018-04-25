@@ -1,6 +1,7 @@
 import locale
 import logging
 import re
+from itertools import islice
 
 
 logger = logging.getLogger(__name__)
@@ -56,3 +57,13 @@ def locale_aware_sort(elems, keyfunc=None, localename='fr_CA.UTF-8'):
     if oldlocale:
         locale.setlocale(locale.LC_COLLATE, oldlocale)
     return result
+
+
+def pairify(iterable):
+    """ Pair every two items of a list into a tuple.
+
+    Useful for solr facets.
+
+    Example: pairify(['foo', 1, 'bar', 2]) -> [('foo', 1), ('bar', 2)]
+    """
+    return zip(islice(iterable, None, None, 2), islice(iterable, 1, None, 2))

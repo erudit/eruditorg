@@ -1,4 +1,5 @@
-from collections import OrderedDict
+import re
+from collections import OrderedDict, defaultdict
 
 from django.db.models import Q
 from django.http import Http404
@@ -13,7 +14,6 @@ from erudit.models import Thesis, ThesisProvider
 from erudit.solr.models import Generic, Thesis as SolrThesis
 
 from apps.public.thesis.legacy import format_thesis_collection_code
-from core.thesis.shortcuts import get_thesis_collections
 from core.thesis.shortcuts import get_thesis_counts_per_author_first_letter
 from core.thesis.shortcuts import get_thesis_counts_per_publication_year
 
@@ -36,11 +36,12 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
         providers = ThesisProvider.objects.all().order_by('name')
         provider_summaries = []
         for provider in providers:
-            count, latest_thesis_data = solr.get_provider_summary(provider.solr_name)
+            summary = solr.get_provider_summary(provider.solr_name)
+            theses = [SolrThesis(solr_data) for solr_data in summary.latest_thesis_data]
             provider_summaries.append({
                 'provider': provider,
-                'thesis_count': count,
-                'recent_theses': [SolrThesis(solr_data) for solr_data in latest_thesis_data],
+                'thesis_count': summary.count,
+                'recent_theses': theses,
             })
         context['provider_summaries'] = provider_summaries
 
@@ -49,8 +50,8 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
 
 class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
     """ Displays the home page of a collection repository. """
-    context_object_name = 'collection'
-    model = Collection
+    context_object_name = 'provider'
+    model = ThesisProvider
     slug_url_kwarg = 'collection_code'
     slug_field = 'code'
     template_name = 'public/thesis/collection_home.html'
@@ -63,31 +64,34 @@ class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
         return querystring_dict
 
     def get_context_data(self, **kwargs):
-        context = super(ThesisCollectionHomeView, self).get_context_data(**kwargs)
-        collection = self.object
+        context = super().get_context_data(**kwargs)
+        provider = self.object
+        self.summary = solr.get_provider_summary(provider.solr_name)
+        theses = [SolrThesis(solr_data) for solr_data in self.summary.latest_thesis_data]
 
         # Inserts recent theses into the context.
-        context['recent_theses'] = list(
-            Thesis.objects.select_related('author').filter(collection=collection)
-            .order_by('-publication_year', '-oai_datestamp')[:3])
+        context['recent_theses'] = theses
 
         # Inserts the number of theses associated with this collection into the context.
-        context['thesis_count'] = Thesis.objects.filter(collection=collection).count()
-
-        # Inserts the thesis groups into the context.
-        context['thesis_groups'] = self.get_thesis_groups()
+        context['thesis_count'] = self.summary.count
 
         return context
 
-    def get_queryset(self):
-        return get_thesis_collections()
+    def by_publication_year(self):
+        for year, count in sorted(self.summary.by_year, reverse=True):
+            if not year.isdigit():
+                continue
+            yield year, count
 
-    def get_thesis_groups(self):
-        collection = self.object
-        theses = Thesis.objects.select_related('author').filter(collection=collection)
-        publication_year_group = get_thesis_counts_per_publication_year(theses)
-        author_name_group = get_thesis_counts_per_author_first_letter(theses)
-        return {'by_publication_year': publication_year_group, 'by_author_name': author_name_group}
+    def by_author_first_letter(self):
+        counts = defaultdict(int)
+
+        for author, count in self.summary.by_author:
+            m = re.search(r'\w', author)
+            if m:
+                counts[m.group(0).upper()] += count
+
+        return sorted(counts.items())
 
 
 class BaseThesisListView(ListView):

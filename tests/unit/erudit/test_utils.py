@@ -1,4 +1,4 @@
-from erudit.utils import locale_aware_sort, get_sort_key_func
+from erudit.utils import locale_aware_sort, get_sort_key_func, pairify
 from erudit.test import needs_fr_ca
 
 
@@ -48,3 +48,7 @@ def test_get_sort_key_func_stopwords_need_space():
     # Only replace stopwords that are actually words
     f = get_sort_key_func('fr')
     assert f('lavoir') < f('phronesis')
+
+
+def test_pairify():
+    assert list(pairify(['foo', 1, 'bar', 2])) == [('foo', 1), ('bar', 2)]
