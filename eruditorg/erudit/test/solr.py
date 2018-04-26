@@ -33,9 +33,12 @@ class SolrDocument:
         self.type = type
         self.authors = authors
         OPTIONAL_ARGS = [
-            'article_type', 'journal_code', 'collection', 'year', 'date_added']
+            'article_type', 'journal_code', 'collection', 'year', 'date_added', 'provider']
         for attr in OPTIONAL_ARGS:
-            setattr(self, attr, kwargs.get(attr))
+            val = kwargs.get(attr)
+            if isinstance(val, int):
+                val = str(val)
+            setattr(self, attr, val)
 
     @staticmethod
     def from_article(article, authors=None):
@@ -56,22 +59,6 @@ class SolrDocument:
             authors=authors,
             year=str(article.issue.year),
             collection=journal.collection.name)
-
-    @staticmethod
-    def from_thesis(thesis, collection=None, date_added=None):
-        if collection is None:
-            collection = thesis.collection.name
-        if date_added is None:
-            date_added = thesis.publication_year
-        return SolrDocument(
-            id=thesis.localidentifier,
-            title=thesis.title,
-            type='Thèses',
-            authors=["{}, {}".format(thesis.author.lastname, thesis.author.firstname)],
-            year=str(thesis.publication_year),
-            collection=collection,
-            date_added=str(date_added),
-        )
 
     def as_result(self):
         result = {}
@@ -165,9 +152,6 @@ class FakeSolrClient:
 
     def add_article(self, article, authors=None):
         self.add_document(SolrDocument.from_article(article, authors=authors))
-
-    def add_thesis(self, thesis, **kwargs):
-        self.add_document(SolrDocument.from_thesis(thesis, **kwargs))
 
     def search(self, *args, **kwargs):
         def get_facet(elems):

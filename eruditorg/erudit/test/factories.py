@@ -5,6 +5,7 @@ from faker import Factory
 
 from ..fedora import repository
 from ..models import JournalType
+from .solr import SolrDocument
 
 faker = Factory.create()
 
@@ -217,14 +218,6 @@ class NonEmbargoedArticleFactory(ArticleFactory):
     issue = factory.SubFactory(NonEmbargoedIssueFactory)
 
 
-class AuthorFactory(factory.django.DjangoModelFactory):
-    lastname = faker.last_name()
-    firstname = faker.first_name()
-
-    class Meta:
-        model = 'erudit.Author'
-
-
 class LegacyOrganisationProfileFactory(factory.django.DjangoModelFactory):
     organisation = factory.SubFactory(OrganisationFactory)
     account_id = factory.sequence(lambda n: n)
@@ -236,20 +229,23 @@ class LegacyOrganisationProfileFactory(factory.django.DjangoModelFactory):
 class ThesisProviderFactory(factory.django.DjangoModelFactory):
     code = factory.Sequence(lambda n: 'provider{}'.format(n))
     name = factory.Sequence(lambda n: 'Provider{}'.format(n))
-    solr_name = factory.Sequence(lambda n: 'Provider{}'.format(n))
+    solr_name = factory.LazyAttribute(lambda obj: obj.name)
 
     class Meta:
         model = 'erudit.ThesisProvider'
         django_get_or_create = ('code',)
 
 
-class ThesisFactory(factory.django.DjangoModelFactory):
-    collection = factory.SubFactory(CollectionFactory)
-    author = factory.SubFactory(AuthorFactory)
+class ThesisFactory(factory.Factory):
+    id = factory.Sequence(lambda n: 'thesis-{}'.format(n))
     title = factory.Sequence(lambda n: 'Thèse {}'.format(n))
+    type = 'Thèses'
+    authors = ["{}, {}".format(faker.last_name(), faker.first_name())]
+    year = faker.year()
+    date_added = factory.LazyFunction(lambda: dt.datetime.now().isoformat())
+    provider = factory.SubFactory(ThesisProviderFactory, code='default')
+    collection = factory.LazyAttribute(lambda obj: obj.provider.solr_name)
     url = faker.url()
-    publication_year = faker.year()
-    localidentifier = factory.Sequence(lambda n: 'thesis-{}'.format(n))
 
     class Meta:
-        model = 'erudit.Thesis'
+        model = SolrDocument
