@@ -9,7 +9,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from erudit.models import ThesisProvider
-from erudit.solr.models import Generic, Thesis as SolrThesis
+from erudit.solr.models import Generic, Thesis
 from erudit.utils import PaginatedAlready
 
 from apps.public.thesis.legacy import format_thesis_collection_code
@@ -52,7 +52,7 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
         provider_summaries = []
         for provider in providers:
             theses = solr.get_theses(provider.solr_name, rows=3)
-            recent_theses = list(map(SolrThesis, theses.solr_dicts))
+            recent_theses = list(map(Thesis, theses.solr_dicts))
             provider_summaries.append({
                 'provider': provider,
                 'thesis_count': theses.count,
@@ -82,7 +82,7 @@ class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
         context = super().get_context_data(**kwargs)
         provider = self.object
         self.summary = solr.get_provider_summary(provider.solr_name)
-        recent_theses = list(map(SolrThesis, self.summary.solr_dicts))
+        recent_theses = list(map(Thesis, self.summary.solr_dicts))
 
         # Inserts recent theses into the context.
         context['recent_theses'] = recent_theses
@@ -128,12 +128,12 @@ class BaseThesisListView(ListView):
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
         context['thesis_count'] = self.summary.count
-        context['sidebar_theses'] = list(map(SolrThesis, self.summary.solr_dicts))
+        context['sidebar_theses'] = list(map(Thesis, self.summary.solr_dicts))
 
         return context
 
     def get_queryset(self):
-        return list(map(SolrThesis, self.theses.solr_dicts))
+        return list(map(Thesis, self.theses.solr_dicts))
 
     def get_sort_by(self):
         sort_by = self.request.GET.get('sort_by', 'author_asc')
