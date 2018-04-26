@@ -1,5 +1,5 @@
 TY  - THES
 T1  - {{ thesis.title|safe }}
-A1  - {{ thesis.author.lastname|safe }}, {{ thesis.author.firstname|safe }}
+A1  - {{ thesis.authors|safe }}
 Y1  - {{ thesis.publication_year }}
 ER  -

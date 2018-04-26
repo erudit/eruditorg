@@ -1,32 +1,32 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load humanize i18n %}
 
-{% block title %}{% blocktrans with letter=author_letter collection=collection.name %}Auteurs commençant par {{ letter }}{% endblocktrans %} – Thèses et mémoires de {{ collection }}{% endblock title %}
+{% block title %}{% blocktrans with letter=author_letter provider=provider.name %}Auteurs commençant par {{ letter }}{% endblocktrans %} – Thèses et mémoires de {{ provider }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ collection }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with letter=author_letter provider=provider.name %}Consultez les thèses et mémoires de {{ provider }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktrans with provider=provider.name %}Thèses et mémoires de {{ provider }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-{% if collection.logo %}
-<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
+{% if provider.logo %}
+<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ provider.logo.url }}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ collection }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ provider }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
-{% if collection.logo %}
-<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
+{% if provider.logo %}
+<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ provider.logo.url }}">
 {% endif %}
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ collection.name }}">
-<meta name="twitter:description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ collection }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ provider.name }}">
+<meta name="twitter:description" content="{% blocktrans with letter=author_letter %}Consultez les thèses et mémoires de {{ provider }} par auteur commençant par {{ letter }} sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}
 
 {% block structured_data_breadcrumb_tail %}
@@ -34,14 +34,14 @@
   "@type": "ListItem",
   "position": 4,
   "item": {
-    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}",
+    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_author_name' provider.code author_letter %}",
     "name": "{% blocktrans with letter=author_letter %}Thèses et mémoires par auteur commençant par {{ letter }}{% endblocktrans %}"
   }
 }
 {% endblock structured_data_breadcrumb_tail %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' collection.code author_letter %}">{% blocktrans with letter=author_letter %}Thèses et mémoires par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_author_name' provider.code author_letter %}">{% blocktrans with letter=author_letter %}Thèses et mémoires par auteur commençant par {{ letter }}{% endblocktrans %}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_title %}
@@ -54,8 +54,8 @@
 </dt>
 <dd>
   <select id="switch_letter" onChange="window.location.href=this.value">
-    {% for letter in other_author_letters %}
-    <option value="{% url 'public:thesis:collection_list_per_author_name' collection.code letter.author_firstletter %}?sort_by={{ sort_by }}"{% if letter.author_firstletter == author_letter %} selected disabled{% endif %}>{{ letter.author_firstletter }} ({{ letter.total|intcomma }})</option>
+    {% for letter, count in other_author_letters %}
+    <option value="{% url 'public:thesis:collection_list_per_author_name' provider.code letter %}?sort_by={{ sort_by }}"{% if letter == author_letter %} selected disabled{% endif %}>{{ letter }} ({{ count|intcomma }})</option>
     {% endfor %}
   </select>
 </dd>

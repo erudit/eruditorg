@@ -100,7 +100,8 @@ class Generic:
 
     @property
     def title(self):
-        TITLE_ATTRS = ['Titre_fr', 'Titre_en', 'TitreRefBiblio_aff']
+        TITLE_ATTRS = [
+            'Titre_fr', 'Titre_en', 'Titre_defaut', 'TitreRefBiblio_aff']
         for attrname in TITLE_ATTRS:
             if attrname in self.solr_data:
                 return self.solr_data[attrname]
@@ -289,21 +290,12 @@ class Article(Generic):
 
 
 class Thesis(Generic):
-    def __init__(self, solr_data):
-        super().__init__(solr_data)
-        self.obj = erudit_models.Thesis.objects.get(localidentifier=self.localidentifier)
-        self.id = self.obj.id
-
-    def __getattr__(self, name):
-        return getattr(self.obj, name)
-
     def can_cite(self):
         return True
 
     def cite_url(self, type):
         return reverse('public:thesis:thesis_citation_{}'.format(type), args=[
-            self.collection,
-            self.id,
+            self.localidentifier,
         ])
 
     def cite_enw_url(self):
@@ -316,36 +308,16 @@ class Thesis(Generic):
         return self.cite_url('ris')
 
     @property
-    def document_type(self):
-        return 'thesis'
-
-    @property
-    def authors(self):
-        author = self.obj.author
-        if author.firstname:
-            return "{}, {}".format(author.lastname, author.firstname)
-        else:
-            return author.lastname
-
-    @property
     def collection(self):
-        return self.obj.collection.code
-
-    @property
-    def collection_name(self):
-        return self.obj.collection.name
-
-    @property
-    def publication_date(self):
-        return self.obj.publication_year
+        return self.solr_data.get('Editeur')
 
     @property
     def description(self):
-        return self.obj.description
+        return self.solr_data.get('Resume_fr')
 
     @property
-    def keywords(self):
-        return [keyword.name for keyword in self.obj.keywords.all()]
+    def publication_year(self):
+        return self.publication_date
 
 
 def get_model_instance(solr_data):

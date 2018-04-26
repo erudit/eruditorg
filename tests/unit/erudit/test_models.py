@@ -13,7 +13,6 @@ from erudit.fedora.objects import PublicationDigitalObject
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import (
     ArticleFactory,
-    AuthorFactory,
     IssueFactory,
     JournalFactory,
     JournalTypeFactory,
@@ -663,66 +662,8 @@ class TestArticle:
         assert article.doi == '10.7202/009255ar'
 
 
-class TestAuthor(BaseEruditTestCase):
-    def test_can_return_articles_written_for_a_given_journal(self):
-        # Setup
-        other_journal = JournalFactory.create(
-            publishers=[self.publisher])
-        other_issue = IssueFactory.create(
-            journal=other_journal, date_published=dt.datetime.now())
-        other_article = ArticleFactory.create(issue=other_issue)
-
-        issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue)
-
-        author = AuthorFactory.create()
-
-        article.authors.add(author)
-        other_article.authors.add(author)
-
-        # Run
-        self.assertEqual(list(author.articles_in_journal(self.journal)), [article, ])
-
-    def test_can_return_its_letter_prefix(self):
-        # Setup
-        author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
-        author_2 = AuthorFactory.create(lastname=None, firstname='Def')
-        author_3 = AuthorFactory.create(lastname=None, firstname='Def', othername='Ghi')
-        author_4 = AuthorFactory.create(lastname=':', firstname='Def')
-        author_5 = AuthorFactory.create(lastname=':', firstname=None)
-
-        # Run & check
-        assert author_1.letter_prefix == 'A'
-        assert author_2.letter_prefix == 'D'
-        assert author_3.letter_prefix == 'G'
-        assert author_4.letter_prefix == 'D'
-        assert author_5.letter_prefix is None
-
-    def test_can_return_abbreviated_volume_title_when_not_in_fedora(self):
-        issue1 = IssueFactory(volume=1, number=2, publication_period='may', localidentifier=None)
-        issue2 = IssueFactory(volume=1, number=None, publication_period='may', localidentifier=None)
-        issue3 = IssueFactory(number=2, publication_period='may', localidentifier=None)
-
-        assert issue1.abbreviated_volume_title == 'Vol. 1, n<sup>o</sup> 2, may'
-        assert issue2.abbreviated_volume_title == 'Vol. 1, may'
-        assert issue3.abbreviated_volume_title == 'N<sup>o</sup> 2, may'
-
-    def test_can_return_its_name(self):
-        author_1 = AuthorFactory()
-
-        assert str(author_1) == "{firstname} {lastname}".format(
-            lastname=author_1.lastname, firstname=author_1.firstname
-        )
-
-        author_1.suffix = 'PhD'
-
-        assert str(author_1) == "{suffix} {firstname} {lastname}".format(
-            suffix=author_1.suffix, firstname=author_1.firstname, lastname=author_1.lastname
-        )
-
-    def test_journaltype_can_return_embargo_duration_in_days(self):
-        journal_type = JournalTypeFactory.create(code='S')
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        duration = dt.date.today() - (dt.date.today() - dr.relativedelta(months=ml))
-        assert journal_type.embargo_duration(unit="days") == duration.days
+def test_journaltype_can_return_embargo_duration_in_days():
+    journal_type = JournalTypeFactory.create(code='S')
+    from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+    duration = dt.date.today() - (dt.date.today() - dr.relativedelta(months=ml))
+    assert journal_type.embargo_duration(unit="days") == duration.days

@@ -91,27 +91,27 @@
       </header>
 
       <ul class="repositories row">
-        {% for collection_info in collections_dict.values %}
+        {% for summary in provider_summaries %}
         <li class="col-sm-6 col-md-4 col-lg-3 repository">
-          <a href="{% url 'public:thesis:collection_home' collection_info.collection.code %}" class="collection-link">
-            {% if collection_info.collection.logo %}
+          <a href="{% url 'public:thesis:collection_home' summary.provider.code %}" class="collection-link">
+            {% if summary.provider.logo %}
             <span class="collection-logo">
-              <img src="{{ collection_info.collection.logo.url }}" alt="{% blocktrans with collection_info.collection.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
+              <img src="{{ summary.provider.logo.url }}" alt="{% blocktrans with summary.provider.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
             </span>
             {% endif %}
           </a>
           <h3 class="collection-title">
-            <a href="{% url 'public:thesis:collection_home' collection_info.collection.code %}" class="collection-link">
-              <strong>{{ collection_info.collection.name }}</strong>
+            <a href="{% url 'public:thesis:collection_home' summary.provider.code %}" class="collection-link">
+              <strong>{{ summary.provider.name }}</strong>
             </a>
           </h3>
           <div class="thesis-count">
-            {{ collection_info.thesis_count|intcomma }} {% trans "documents" %}
+            {{ summary.thesis_count|intcomma }} {% trans "documents" %}
           </div>
-          {% if collection_info.recent_theses %}
+          {% if summary.recent_theses %}
           <div class="recent-theses">
             <h4>{% trans "Dernièrement diffusées" %}</h4>
-            {% for thesis in collection_info.recent_theses %}
+            {% for thesis in summary.recent_theses %}
             <a href="{{ thesis.url }}" class="thesis" target="_blank">{{ thesis.title }}</a>
             {% endfor %}
           </div>

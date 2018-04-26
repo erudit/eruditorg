@@ -10,8 +10,8 @@ from base.test.testcases import EruditClientTestCase
 from core.citations.middleware import SavedCitationListMiddleware
 from erudit.fedora import repository
 
+from erudit.test import needs_fr_ca
 from erudit.test.factories import ArticleFactory
-from erudit.test.factories import AuthorFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
@@ -25,17 +25,13 @@ class TestSavedCitationListView(EruditClientTestCase):
 
     @pytest.fixture(autouse=True)
     def setup(self, solr_client):
-        author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
-        author_2 = AuthorFactory.create(lastname='Def', firstname='ghi')
         self.collection_1 = CollectionFactory.create()
         self.thesis_1 = ThesisFactory.create(
-            localidentifier='t1', collection=self.collection_1, author=author_1, title='Thesis A',
-            publication_year=2014)
-        solr_client.add_thesis(self.thesis_1)
+            id='t1', authors=['Abc, Def'], title='Thesis A', year=2014)
+        solr_client.add_document(self.thesis_1)
         self.thesis_2 = ThesisFactory.create(
-            localidentifier='t2', collection=self.collection_1, author=author_2, title='Thesis B',
-            publication_year=2011)
-        solr_client.add_thesis(self.thesis_2)
+            id='t2', authors=['Def, ghi'], title='Thesis B', year=2011)
+        solr_client.add_document(self.thesis_2)
         self.journal_1 = JournalFactory.create(
             collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
@@ -57,8 +53,8 @@ class TestSavedCitationListView(EruditClientTestCase):
             wrapper.set_title("Article 3")
             wrapper.set_author(lastname='Ghi', firstname='Jlk')
         solr_client.add_article(self.article_3)
-        self.user.saved_citations.create(solr_id=self.thesis_1.localidentifier)
-        self.user.saved_citations.create(solr_id=self.thesis_2.localidentifier)
+        self.user.saved_citations.create(solr_id=self.thesis_1.id)
+        self.user.saved_citations.create(solr_id=self.thesis_2.id)
         self.user.saved_citations.create(solr_id=self.article_1.localidentifier)
         self.user.saved_citations.create(solr_id=self.article_2.localidentifier)
         self.user.saved_citations.create(solr_id=self.article_3.localidentifier)
@@ -72,6 +68,8 @@ class TestSavedCitationListView(EruditClientTestCase):
         assert response.context['cultural_articles_count'] == 1
         assert response.context['theses_count'] == 2
 
+    # needs fr_ca locale to properly sort authors
+    @needs_fr_ca
     @pytest.mark.parametrize('criteria,expected_order', [
         ('title_asc', ['a1', 'a2', 'a3', 't1', 't2']),
         ('title_desc', ['t2', 't1', 'a3', 'a2', 'a1']),
@@ -97,7 +95,7 @@ class TestSavedCitationListView(EruditClientTestCase):
         # Run
         response = self.client.get(
             url, data={'document_ids': [
-                self.thesis_1.localidentifier, self.article_1.localidentifier
+                self.thesis_1.id, self.article_1.localidentifier
             ]}
         )
         # Check
@@ -175,17 +173,12 @@ class TestSavedCitationRemoveView(EruditClientTestCase):
 class TestSavedCitationBatchRemoveView(EruditClientTestCase):
     @pytest.fixture(autouse=True)
     def setup(self, solr_client):
-        author_1 = AuthorFactory.create(lastname='Abc', firstname='Def')
-        author_2 = AuthorFactory.create(lastname='Def', firstname='ghi')
-        self.collection_1 = CollectionFactory.create()
         self.thesis_1 = ThesisFactory.create(
-            localidentifier='t1', collection=self.collection_1, author=author_1, title='Thesis A',
-            publication_year=2014)
-        solr_client.add_thesis(self.thesis_1)
+            id='t1', authors=['Abc, Def'], title='Thesis A', year=2014)
+        solr_client.add_document(self.thesis_1)
         self.thesis_2 = ThesisFactory.create(
-            localidentifier='t2', collection=self.collection_1, author=author_2, title='Thesis B',
-            publication_year=2011)
-        solr_client.add_thesis(self.thesis_2)
+            id='t2', authors=['Def, ghi'], title='Thesis B', year=2011)
+        solr_client.add_document(self.thesis_2)
         self.journal_1 = JournalFactory.create(
             collection=self.collection, type_code='S')
         self.journal_2 = JournalFactory.create(
@@ -204,8 +197,8 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
             wrapper.set_author(lastname='Jlk', firstname='mno')
         with repository.api.open_article(self.article_3.get_full_identifier()) as wrapper:
             wrapper.set_author(lastname='Ghi', firstname='Jlk')
-        self.user.saved_citations.create(solr_id=self.thesis_1.localidentifier)
-        self.user.saved_citations.create(solr_id=self.thesis_2.localidentifier)
+        self.user.saved_citations.create(solr_id=self.thesis_1.id)
+        self.user.saved_citations.create(solr_id=self.thesis_2.id)
         self.user.saved_citations.create(solr_id=self.article_1.localidentifier)
         self.user.saved_citations.create(solr_id=self.article_2.localidentifier)
         self.user.saved_citations.create(solr_id=self.article_3.localidentifier)
@@ -216,7 +209,7 @@ class TestSavedCitationBatchRemoveView(EruditClientTestCase):
         url = reverse('public:citations:remove_citation_batch')
         # Run
         idlist = [
-            self.thesis_1.localidentifier,
+            self.thesis_1.id,
             self.article_1.localidentifier,
         ]
         response = self.client.post(url, data={'document_ids': idlist})

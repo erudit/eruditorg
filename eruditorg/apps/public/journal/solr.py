@@ -54,7 +54,7 @@ def get_journal_authors_letters(journal_code, article_type, normalized=True):
         'q': query,
         'rows': '0',
         'facet.field': 'AuteurNP_fac',
-        'facet.limit': '9999',  # all authors
+        'facet.limit': '99999',  # all authors
     }
     solr_results = client.search(**args)
     facets = solr_results.facets['facet_fields']['AuteurNP_fac']

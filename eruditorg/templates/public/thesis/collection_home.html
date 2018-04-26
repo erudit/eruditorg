@@ -1,32 +1,32 @@
 {% extends "base.html" %}
 {% load humanize i18n %}
 
-{% block title %}{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}{% endblock title %}
+{% block title %}{% blocktrans with provider=provider.name %}Thèses et mémoires de {{ provider }}{% endblocktrans %}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with provider=provider.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ provider }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with collection=collection.name %}Thèses et mémoires de {{ collection }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktrans with provider=provider.name %}Thèses et mémoires de {{ provider }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-{% if collection.logo %}
-<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
+{% if provider.logo %}
+<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ provider.logo.url }}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktrans with provider=provider.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ provider }} sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
-{% if collection.logo %}
-<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ collection.logo.url }}">
+{% if provider.logo %}
+<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ provider.logo.url }}">
 {% endif %}
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ collection.name }}">
-<meta name="twitter:description" content="{% blocktrans with collection=collection.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ collection }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ provider.name }}">
+<meta name="twitter:description" content="{% blocktrans with provider=provider.name %}Accédez aux thèses et mémoires du dépôt institutionnel de {{ provider }} sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}
 
 {% block structured_data %}
@@ -53,8 +53,8 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' collection.code %}",
-      "name": "{{ collection.name }}"
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' provider.code %}",
+      "name": "{{ provider.name }}"
     }
   }]
 }
@@ -68,7 +68,7 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
-<li><a href="{% url 'public:thesis:collection_home' collection.code %}">{{ collection.name }}</a></li>
+<li><a href="{% url 'public:thesis:collection_home' provider.code %}">{{ provider.name }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -79,16 +79,16 @@
         <div class="row">
           <div class="col-md-10 col-xs-8">
             <h1>
-              {{ collection.name }}
+              {{ provider.name }}
               <span class="thesis-count">
                 {{ thesis_count|intcomma }} {% trans "documents" %}
               </span>
             </h1>
           </div>
           <div class="col-md-2 col-xs-4">
-            {% if collection.logo %}
+            {% if provider.logo %}
             <span class="collection-logo">
-              <img src="{{ collection.logo.url }}" alt="{% trans 'Logo pour' %} {{ collection.name }}" class="img-responsive"/>
+              <img src="{{ provider.logo.url }}" alt="{% trans 'Logo pour' %} {{ provider.name }}" class="img-responsive"/>
             </span>
             {% endif %}
           </div>
@@ -104,7 +104,7 @@
             <a href="{{ thesis.url }}" class="recent-thesis" target="_blank">{{ thesis.title }}</a>
           </p>
           <p class="thesis-author">
-            <strong>{{ thesis.author.lastname }}{% if thesis.author.firstname %}, {{ thesis.author.firstname }}{% endif %}</strong>
+            <strong>{{ thesis.authors }}</strong>
           </p>
         </div>
         {% endfor %}
@@ -117,9 +117,9 @@
         <div class="col-md-6">
           <h2>{% trans "Par année" %}</h2>
           <ul class="theses-list">
-          {% for year in thesis_groups.by_publication_year %}
+          {% for year, count in view.by_publication_year %}
             <li>
-              <a href="{% url 'public:thesis:collection_list_per_year' collection.code year.publication_year %}" class="aggregation-link">{{ year.publication_year }} [{{ year.total|intcomma }}]</a>
+              <a href="{% url 'public:thesis:collection_list_per_year' provider.code year %}" class="aggregation-link">{{ year }} [{{ count|intcomma }}]</a>
             </li>
           {% endfor %}
         </ul>
@@ -127,9 +127,9 @@
         <div class="col-md-6">
           <h2>{% trans "Par nom d'auteur" %}</h2>
           <ul class="theses-list">
-          {% for author in thesis_groups.by_author_name %}
+          {% for letter, count in view.by_author_first_letter %}
             <li>
-              <a href="{% url 'public:thesis:collection_list_per_author_name' collection.code author.author_firstletter %}" class="aggregation-link">{{ author.author_firstletter }} [{{ author.total|intcomma }}]</a>
+              <a href="{% url 'public:thesis:collection_list_per_author_name' provider.code letter %}" class="aggregation-link">{{ letter }} [{{ count|intcomma }}]</a>
             </li>
           {% endfor %}
         </ul>

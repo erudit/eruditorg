@@ -102,7 +102,7 @@
             <ul class="documents">
               {% for document in documents %}
               {% if document.document_type == 'article' %}
-              <li data-document-id="{{ document.solr_id }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="document">
+              <li data-document-id="{{ document.localidentifier }}" data-document-type="{% if document.issue.journal.type.code == 'C' %}cultural-article{% else %}scientific-article{% endif %}" class="document">
                 <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
@@ -193,7 +193,7 @@
                 </div>
               </li>
               {% elif document.document_type == 'thesis' %}
-              <li data-document-id="{{ document.solr_id }}" data-document-type="thesis" class="document">
+              <li data-document-id="{{ document.localidentifier }}" data-document-type="thesis" class="document">
                 <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
                   {% spaceless %}
                   <li>
@@ -224,19 +224,19 @@
                     <div class="modal-body">
                       <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
                       <p>
-                        <a href="{% url 'public:thesis:thesis_citation_enw' document.collection document.id %}" class="btn btn-primary cite-export">
+                        <a href="{% url 'public:thesis:thesis_citation_enw' document.localidentifier %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.ENW</span>
                         </a>
                         EndNote, Zotero
                       </p>
                       <p>
-                        <a href="{% url 'public:thesis:thesis_citation_ris' document.collection document.id %}" class="btn btn-primary cite-export">
+                        <a href="{% url 'public:thesis:thesis_citation_ris' document.localidentifier %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.RIS</span>
                         </a>
                         Papers, Reference Manager, RefWorks, Zotero
                       </p>
                       <p>
-                        <a href="{% url 'public:thesis:thesis_citation_bib' document.collection document.id %}" class="btn btn-primary cite-export">
+                        <a href="{% url 'public:thesis:thesis_citation_bib' document.localidentifier %}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.BIB</span>
                         </a>
                         BibTeX, JabRef, Mendeley, Zotero

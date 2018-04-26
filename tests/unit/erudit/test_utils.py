@@ -1,16 +1,5 @@
-import pytest
-import locale
-from erudit.utils import locale_aware_sort, get_sort_key_func
-
-
-try:
-    locale.setlocale(locale.LC_COLLATE, 'fr_CA.UTF-8')
-except locale.Error:
-    has_fr_ca = False
-else:
-    has_fr_ca = True
-
-needs_fr_ca = pytest.mark.skipif(not has_fr_ca, reason="Needs fr_CA.UTF-8 locale")
+from erudit.utils import locale_aware_sort, get_sort_key_func, pairify
+from erudit.test import needs_fr_ca
 
 
 @needs_fr_ca
@@ -59,3 +48,7 @@ def test_get_sort_key_func_stopwords_need_space():
     # Only replace stopwords that are actually words
     f = get_sort_key_func('fr')
     assert f('lavoir') < f('phronesis')
+
+
+def test_pairify():
+    assert list(pairify(['foo', 1, 'bar', 2])) == [('foo', 1), ('bar', 2)]
