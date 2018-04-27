@@ -367,8 +367,6 @@
             <xsl:attribute name="class">
               article-section grresume
             </xsl:attribute>
-            <h2 class="sr-only">{% trans 'Résumés' %}</h2>
-            <xsl:apply-templates select="//resume"/>
           </section>
         </xsl:if>
 
@@ -663,114 +661,6 @@
         <xsl:with-param name="nompers" select="."/>
       </xsl:call-template>
     </span>
-  </xsl:template>
-
-  <!-- abstracts -->
-  <xsl:template match="//resume">
-    <section id="{name()}-{@lang}" class="{name()}">
-      <xsl:if test="@lang='fr'">
-        <h3>
-          <xsl:choose>
-            <xsl:when test="titre">
-              <xsl:value-of select="titre"/>
-            </xsl:when>
-            <xsl:otherwise>
-              Résumé
-            </xsl:otherwise>
-          </xsl:choose>
-        </h3>
-        <p>
-          <xsl:apply-templates select="*[not(self::titre)]"/>
-        </p>
-        <xsl:if test="//grmotcle[@lang='fr']/motcle">
-          <div class="motscles">
-            <p><strong>Mots-clés </strong></p>
-            <ul class="inline">
-              <xsl:for-each select="//grmotcle[@lang='fr']/motcle">
-                <li class="keyword">
-                  <xsl:apply-templates/>
-                  <xsl:if test="position() != last()">
-                    <xsl:text>, </xsl:text>
-                  </xsl:if>
-                </li>
-              </xsl:for-each>
-            </ul>
-          </div>
-        </xsl:if>
-      </xsl:if>
-      <xsl:if test="@lang='en'">
-        <h3>
-          <xsl:choose>
-            <xsl:when test="titre">
-              <xsl:value-of select="titre"/>
-            </xsl:when>
-            <xsl:otherwise>
-              Abstract
-            </xsl:otherwise>
-          </xsl:choose>
-        </h3>
-        <xsl:apply-templates select="//grtitre/titreparal[@lang='en']" mode="abstract"/>
-        <p>
-          <xsl:apply-templates select="*[not(self::titre)]"/>
-        </p>
-        <xsl:if test="//grmotcle[@lang='en']/motcle">
-          <div class="motscles">
-            <p><strong>Keywords </strong></p>
-            <ul class="inline">
-              <xsl:for-each select="//grmotcle[@lang='en']/motcle">
-                <li class="keyword">
-                  <xsl:apply-templates/>
-                  <xsl:if test="position() != last()">
-                    <xsl:text>, </xsl:text>
-                  </xsl:if>
-                </li>
-              </xsl:for-each>
-            </ul>
-          </div>
-        </xsl:if>
-      </xsl:if>
-      <xsl:if test="@lang='es'">
-        <h3>
-          <xsl:choose>
-            <xsl:when test="titre">
-              <xsl:value-of select="titre"/>
-            </xsl:when>
-            <xsl:otherwise>
-              Resumen
-            </xsl:otherwise>
-          </xsl:choose>
-        </h3>
-        <xsl:apply-templates select="//grtitre/titreparal[@lang='es']" mode="abstract"/>
-        <p>
-          <xsl:apply-templates select="*[not(self::titre)]"/>
-        </p>
-        <xsl:if test="//grmotcle[@lang='es']/motcle">
-          <div class="motscles">
-            <p><strong>Palabras clave </strong></p>
-            <ul class="inline">
-              <xsl:for-each select="//grmotcle[@lang='es']/motcle">
-                <li class="keyword">
-                  <xsl:apply-templates/>
-                  <xsl:if test="position() != last()">
-                    <xsl:text>, </xsl:text>
-                  </xsl:if>
-                </li>
-              </xsl:for-each>
-            </ul>
-          </div>
-        </xsl:if>
-      </xsl:if>
-    </section>
-  </xsl:template>
-
-  <xsl:template match="titreparal" mode="abstract">
-    <p class="{name()}">
-      <strong><xsl:apply-templates/></strong>
-    </p>
-  </xsl:template>
-
-  <xsl:template match="resume/alinea">
-    <xsl:apply-templates/>
   </xsl:template>
 
   <!--*** ARTICLE OUTLINE ***-->
