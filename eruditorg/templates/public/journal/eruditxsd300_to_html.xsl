@@ -361,14 +361,31 @@
       </xsl:if>
 
       <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
+        {% if html_abstracts.main %}
         <!-- abstract -->
-        <xsl:if test="//resume">
-          <section id="resume" role="complementary">
-            <xsl:attribute name="class">
-              article-section grresume
-            </xsl:attribute>
+        {% with main_abstract=html_abstracts.main paral_abstracts=html_abstracts.paral eq_abstracts=html_abstracts.equivalent %}
+          <section id="resume" role="complementary" class="article-section grresume">
+            <h2 class="sr-only">{% trans 'Résumés' %}</h2>
+            <section id="resume-{{ main_abstract.lang }}" class="resume main-abstract">
+              <h3>{% include "public/journal/partials/article_abstract_title.html" with lang=main_abstract.lang %}</h3>
+              {% if paral_abstracts %}
+              <h4>{{ titles.main.title|safe }}{% if titles.main.subtitle %} <br/>{{ titles.main.subtitle|safe }}{% endif %}</h4>
+              {% endif %}
+              {{ main_abstract.content|safe }}
+            </section>
+            {% if paral_abstracts %}
+            {% for abstract in paral_abstracts %}
+              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.paral %}
+            {% endfor %}
+            {% endif %}
+            {% if eq_abstracts %}
+            {% for abstract in eq_abstracts %}
+              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.equivalent %}
+            {% endfor %}
+            {% endif %}
           </section>
-        </xsl:if>
+        {% endwith %}
+        {% endif %}
 
         {% if content_access_granted and not only_summary and article.publication_allowed %}
           {% if article.erudit_object.processing == 'complet' %}

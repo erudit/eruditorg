@@ -1,0 +1,9 @@
+<section id="resume-{{ abstract.lang }}" class="resume">
+  <h3>{% include "public/journal/partials/article_abstract_title.html" with lang=abstract.lang %}</h3>
+  {% for title_group in titles %}
+  {% if title_group.lang == abstract.lang %}
+  <h4>{{ title_group.title|safe }}{% if title_group.subtitle %} <br/>{{ title_group.subtitle|safe }}{% endif %}</h4>
+  {% endif %}
+  {% endfor %}
+  {{ abstract.content|safe }}
+</section>

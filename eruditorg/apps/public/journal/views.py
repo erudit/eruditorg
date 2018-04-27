@@ -517,6 +517,21 @@ class BaseArticleDetailView(
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
         obj = context.get(self.context_object_name)
 
+        # Display HTML abstracts
+        try:
+            context['html_abstracts'] = self.object.erudit_object.get_abstracts(html=True)
+        except ObjectDoesNotExist:
+            pass
+
+        # Display abstracts without HTML for metatags
+        try:
+            context['meta_abstracts'] = self.object.erudit_object.get_abstracts(html=False)
+        except ObjectDoesNotExist:
+            pass
+
+        # Display all titles for an article
+        context['titles'] = self.object.erudit_object.get_titles()
+
         # Get all article from associated Issue
         related_articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \
