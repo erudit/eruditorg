@@ -9,9 +9,16 @@
     padding-bottom: 2em;
     @include column-break-inside(avoid);
 
-    h2, h3 {
-      color: #333;
+    h2, h3, h4 {
+      color: #000;
       margin-top: 0;
+    }
+
+    h4 {
+      font-size: 14px;
+      margin: 0 0 0.5em 0;
+      line-height: 1.35;
+      @include font-styles('sans-medium');
     }
 
     p, li, blockquote {
