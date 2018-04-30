@@ -49,15 +49,9 @@
 {% endfor %}
 {% endfor %}
 {% if meta_abstracts %}
-{% with main_abstract=meta_abstracts.main paral_abstracts=meta_abstracts.paral eq_abstracts=meta_abstracts.equivalent %}
-<meta name="citation_abstract" lang="{{ main_abstract.lang }}" content="{{ main_abstract.content }}" />
-{% for abstract in paral_abstracts %}
+{% for abstract in meta_abstracts %}
 <meta name="citation_abstract" lang="{{ abstract.lang }}" content="{{ abstract.content }}" />
 {% endfor %}
-{% for abstract in eq_abstracts %}
-<meta name="citation_abstract" lang="{{ abstract.lang }}" content="{{ abstract.content }}" />
-{% endfor %}
-{% endwith %}
 {% endif %}
 <meta name="citation_language" content="{{ article.language }}" />
 {% if article.first_page %}
