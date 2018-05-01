@@ -33,7 +33,7 @@ class SolrDocument:
         self.type = type
         self.authors = authors
         OPTIONAL_ARGS = [
-            'article_type', 'journal_code', 'collection', 'year', 'date_added', 'provider']
+            'article_type', 'journal_code', 'collection', 'year', 'date_added', 'repository']
         for attr in OPTIONAL_ARGS:
             val = kwargs.get(attr)
             if isinstance(val, int):

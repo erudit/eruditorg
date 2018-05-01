@@ -130,7 +130,7 @@ class Copyright(models.Model):
         verbose_name_plural = _("Droits d'auteurs")
 
 
-class ThesisProvider(models.Model):
+class ThesisRepository(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
     name = models.CharField(max_length=200, verbose_name=_('Nom'))
     # Most of the time, same as "name", but not always...
@@ -138,8 +138,8 @@ class ThesisProvider(models.Model):
     logo = models.ImageField(verbose_name=_('Logo'), blank=True)
 
     class Meta:
-        verbose_name = _("Éditeur de thèses")
-        verbose_name_plural = _("Éditeurs de thèses")
+        verbose_name = _("Dépôt institutionnel")
+        verbose_name_plural = _("Dépôts institutionnels")
 
     def __str__(self):
         return self.code

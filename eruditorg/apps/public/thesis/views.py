@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
-from erudit.models import ThesisProvider
+from erudit.models import ThesisRepository
 from erudit.solr.models import Generic, Thesis
 from erudit.utils import PaginatedAlready
 
@@ -48,25 +48,25 @@ class ThesisHomeView(FallbackAbsoluteUrlViewMixin, TemplateView):
         context['total_count'] = solr.get_thesis_count()
 
         # Fetches the collections associated with theses.
-        providers = ThesisProvider.objects.all().order_by('name')
-        provider_summaries = []
-        for provider in providers:
-            theses = solr.get_theses(provider.solr_name, rows=3)
+        repositories = ThesisRepository.objects.all().order_by('name')
+        repository_summaries = []
+        for repository in repositories:
+            theses = solr.get_theses(repository.solr_name, rows=3)
             recent_theses = list(map(Thesis, theses.solr_dicts))
-            provider_summaries.append({
-                'provider': provider,
+            repository_summaries.append({
+                'repository': repository,
                 'thesis_count': theses.count,
                 'recent_theses': recent_theses,
             })
-        context['provider_summaries'] = provider_summaries
+        context['repository_summaries'] = repository_summaries
 
         return context
 
 
 class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
     """ Displays the home page of a collection repository. """
-    context_object_name = 'provider'
-    model = ThesisProvider
+    context_object_name = 'repository'
+    model = ThesisRepository
     slug_url_kwarg = 'collection_code'
     slug_field = 'code'
     template_name = 'public/thesis/collection_home.html'
@@ -80,8 +80,8 @@ class ThesisCollectionHomeView(FallbackObjectViewMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        provider = self.object
-        self.summary = solr.get_provider_summary(provider.solr_name)
+        repository = self.object
+        self.summary = solr.get_repository_summary(repository.solr_name)
         recent_theses = list(map(Thesis, self.summary.solr_dicts))
 
         # Inserts recent theses into the context.
@@ -124,7 +124,7 @@ class BaseThesisListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(BaseThesisListView, self).get_context_data(**kwargs)
-        context['provider'] = self.provider
+        context['repository'] = self.repository
         context['available_tris'] = self.available_tris
         context['sort_by'] = self.get_sort_by()
         context['thesis_count'] = self.summary.count
@@ -150,20 +150,20 @@ class BaseThesisListView(ListView):
         return int(self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1)
 
     @cached_property
-    def provider(self):
+    def repository(self):
         return get_object_or_404(
-            ThesisProvider,
+            ThesisRepository,
             code=self.kwargs.get(self.collection_code_url_kwarg))
 
     @cached_property
     def theses(self):
         return solr.get_theses(
-            self.provider.solr_name, rows=self.paginate_by, page=self.page_number,
+            self.repository.solr_name, rows=self.paginate_by, page=self.page_number,
             sort=self.get_solr_sort_arg(), **self.get_extra_theses_kwargs())
 
     @cached_property
     def summary(self):
-        return solr.get_provider_summary(self.provider.solr_name)
+        return solr.get_repository_summary(self.repository.solr_name)
 
 
 class ThesisPublicationYearListView(FallbackObjectViewMixin, BaseThesisListView):
@@ -174,12 +174,12 @@ class ThesisPublicationYearListView(FallbackObjectViewMixin, BaseThesisListView)
 
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
-        querystring_dict['src'] = format_thesis_collection_code(self.provider.code)
+        querystring_dict['src'] = format_thesis_collection_code(self.repository.code)
         return querystring_dict
 
     def get_fallback_url_format_kwargs(self):
         kwargs = {}
-        kwargs['code'] = format_thesis_collection_code(self.provider.code)
+        kwargs['code'] = format_thesis_collection_code(self.repository.code)
         return kwargs
 
     def get_context_data(self, **kwargs):
@@ -200,7 +200,7 @@ class ThesisPublicationAuthorNameListView(FallbackObjectViewMixin, BaseThesisLis
 
     def get_fallback_querystring_dict(self):
         querystring_dict = super().get_fallback_querystring_dict()
-        querystring_dict['src'] = format_thesis_collection_code(self.provider.code)
+        querystring_dict['src'] = format_thesis_collection_code(self.repository.code)
         querystring_dict['lettre'] = self.kwargs.get(self.letter_url_kwarg).upper()
         return querystring_dict
 
