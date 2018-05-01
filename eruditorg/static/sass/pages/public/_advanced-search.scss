@@ -286,3 +286,31 @@
   }
 
 }
+
+/**
+* block alignment of filters
+*/
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+  .filters [class*='filter-'] {
+
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-md-min) {
+
+  .filters [class*='filter-'] {
+
+    &:nth-child(3n+1) {
+      clear: both;
+    }
+
+  }
+
+}
