@@ -27,7 +27,7 @@ class PublisherFactory(factory.django.DjangoModelFactory):
 class CollectionFactory(factory.django.DjangoModelFactory):
     code = factory.Sequence(lambda n: 'col-{}'.format(n))
     name = factory.Sequence(lambda n: 'Col{}'.format(n))
-    localidentifier = factory.Sequence(lambda n: 'col-{}'.format(n))
+    localidentifier = factory.LazyAttribute(lambda o: o.code)
 
     class Meta:
         model = 'erudit.Collection'
@@ -148,19 +148,6 @@ class NonEmbargoedIssueFactory(IssueFactory):
             code='not-erudit',
         )
     )
-
-
-class IssueThemeFactory(factory.django.DjangoModelFactory):
-
-    issue = factory.SubFactory(IssueFactory)
-
-    name = factory.Sequence(lambda n: 'Theme-{}'.format(n))
-    subname = factory.Sequence(lambda n: 'Theme-subname{}'.format(n))
-    html_name = factory.Sequence(lambda n: 'Theme-htmlname-{}'.format(n))
-    html_subname = factory.Sequence(lambda n: 'Theme-htmlsubname{}'.format(n))
-
-    class Meta:
-        model = 'erudit.IssueTheme'
 
 
 class ArticleFactory(factory.django.DjangoModelFactory):

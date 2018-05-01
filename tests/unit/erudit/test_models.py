@@ -10,6 +10,7 @@ from eruditarticle.objects import EruditPublication
 
 from erudit.fedora.objects import JournalDigitalObject
 from erudit.fedora.objects import PublicationDigitalObject
+from erudit.fedora import repository
 from erudit.test import BaseEruditTestCase
 from erudit.test.factories import (
     ArticleFactory,
@@ -17,7 +18,6 @@ from erudit.test.factories import (
     JournalFactory,
     JournalTypeFactory,
     CollectionFactory,
-    IssueThemeFactory,
 )
 
 
@@ -249,49 +249,37 @@ class TestJournal(BaseEruditTestCase):
         assert list(i1.journal.published_issues.all()) == [i2, i1]
 
 
-class TestIssue(BaseEruditTestCase):
-    def setUp(self):
-        super(TestIssue, self).setUp()
-        self.issue = IssueFactory.create(journal=self.journal)
-
+class TestIssue:
     def test_can_return_the_associated_eulfedora_model(self):
-        # Run & check
-        self.assertEqual(self.issue.fedora_model, PublicationDigitalObject)
+        issue = IssueFactory()
+        assert issue.fedora_model == PublicationDigitalObject
 
     def test_can_return_the_associated_erudit_class(self):
-        # Run & check
-        self.assertEqual(self.issue.erudit_class, EruditPublication)
+        issue = IssueFactory()
+        assert issue.erudit_class == EruditPublication
 
     def test_can_return_its_full_identifier(self):
-        # Setup
-        self.journal.localidentifier = 'dummy139'
-        self.journal.save()
-        self.issue.localidentifier = 'dummy1234'
-        self.issue.save()
-        # Run & check
-        self.assertEqual(self.issue.get_full_identifier(), 'erudit:erudit.dummy139.dummy1234')
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, localidentifier='dummy139')
+        issue = IssueFactory(journal=journal, localidentifier='dummy1234')
+        assert issue.get_full_identifier() == 'erudit:erudit.dummy139.dummy1234'
 
     def test_issue_has_no_full_identifier_if_a_part_is_missing(self):
-        self.journal.localidentifier = "dummy139"
-        self.journal.save()
-        self.issue.localidentifier = None
-        self.issue.save()
-
-        assert self.issue.get_full_identifier() is None
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, localidentifier='dummy139')
+        issue = IssueFactory(journal=journal, localidentifier=None)
+        assert issue.get_full_identifier() is None
 
     def test_can_return_an_appropriate_fedora_pid(self):
-        # Setup
-        self.journal.localidentifier = 'dummy139'
-        self.journal.save()
-        self.issue.localidentifier = 'dummy1234'
-        self.issue.save()
-        # Run & check
-        self.assertEqual(self.issue.pid, 'erudit:erudit.dummy139.dummy1234')
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, localidentifier='dummy139')
+        issue = IssueFactory(journal=journal, localidentifier='dummy1234')
+        assert issue.pid == 'erudit:erudit.dummy139.dummy1234'
 
     def test_knows_if_it_is_embargoed_in_case_of_scientific_journals(self):
-        # Setup
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(collection=self.collection)
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, )
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
@@ -326,20 +314,18 @@ class TestIssue(BaseEruditTestCase):
         issue_7 = IssueFactory.create(
             journal=journal, year=date_issue_1.year - 10,
             date_published=date_issue_1, force_free_access=True)
-        # Run & check
-        self.assertTrue(issue_1.embargoed)
-        self.assertTrue(issue_2.embargoed)
-        self.assertTrue(issue_3.embargoed)
-        self.assertFalse(issue_4.embargoed)
-        self.assertFalse(issue_5.embargoed)
-        self.assertTrue(issue_6.embargoed)
-        self.assertFalse(issue_7.embargoed)
+        assert issue_1.embargoed
+        assert issue_2.embargoed
+        assert issue_3.embargoed
+        assert not issue_4.embargoed
+        assert not issue_5.embargoed
+        assert issue_6.embargoed
+        assert not issue_7.embargoed
 
     def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
-        # Setup
         from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(
-            type_code='C', collection=self.collection)
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, type_code='C')
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
@@ -374,19 +360,18 @@ class TestIssue(BaseEruditTestCase):
         issue_7 = IssueFactory.create(
             journal=journal, year=date_issue_5.year - 10,
             date_published=date_issue_5, force_free_access=True)
-        # Run & check
-        self.assertTrue(issue_1.embargoed)
-        self.assertTrue(issue_2.embargoed)
-        self.assertTrue(issue_3.embargoed)
-        self.assertFalse(issue_4.embargoed)
-        self.assertFalse(issue_5.embargoed)
-        self.assertTrue(issue_6.embargoed)
-        self.assertFalse(issue_7.embargoed)
+        assert issue_1.embargoed
+        assert issue_2.embargoed
+        assert issue_3.embargoed
+        assert not issue_4.embargoed
+        assert not issue_5.embargoed
+        assert issue_6.embargoed
+        assert not issue_7.embargoed
 
     def test_issues_with_a_next_year_published_date_are_embargoed(self):
         now_dt = dt.datetime.now()
-        journal = JournalFactory(
-            type_code='C', collection=self.collection)
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, type_code='C')
         journal.last_publication_year = now_dt.year + 1
         journal.save()
         issue = IssueFactory.create(
@@ -396,9 +381,9 @@ class TestIssue(BaseEruditTestCase):
         assert issue.embargoed is True
 
     def test_knows_that_issues_with_open_access_are_not_embargoed(self):
-        # Setup
         now_dt = dt.datetime.now()
-        journal = JournalFactory()
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, )
         j2 = JournalFactory.create(
             type_code='C',
             open_access=False,
@@ -416,14 +401,13 @@ class TestIssue(BaseEruditTestCase):
         issue_3 = IssueFactory.create(
             journal=j2, year=now_dt.year,
             date_published=dt.date(now_dt.year, 3, 20))
-        # Run & check
-        self.assertFalse(issue_1.embargoed)
-        self.assertFalse(issue_2.embargoed)
-        self.assertFalse(issue_3.embargoed)
+        assert not issue_1.embargoed
+        assert not issue_2.embargoed
+        assert not issue_3.embargoed
 
     def test_knows_if_it_has_a_coverpage(self):
-        # Setup
-        journal = JournalFactory()
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection)
         journal.open_access = True
         journal.save()
         with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
@@ -440,27 +424,23 @@ class TestIssue(BaseEruditTestCase):
         # We don't crash trying to check the fedora object. We return False
         issue_3 = IssueFactory.create(journal=journal)
 
-        # Run & check
-        self.assertTrue(issue_1.has_coverpage)
-        self.assertFalse(issue_2.has_coverpage)
-        self.assertFalse(issue_3.has_coverpage)
+        assert issue_1.has_coverpage
+        assert not issue_2.has_coverpage
+        assert not issue_3.has_coverpage
 
     def test_knows_that_an_issue_with_an_empty_coverpage_has_no_coverpage(self):
-        # Setup
-        self.journal.open_access = True
-        self.journal.save()
+        collection = CollectionFactory(code='erudit')
+        journal = JournalFactory(collection=collection, open_access=True)
         with open(settings.MEDIA_ROOT + '/coverpage_empty.png', 'rb') as f:
-            issue = IssueFactory.create(journal=self.journal)
+            issue = IssueFactory.create(journal=journal)
             issue.fedora_object = unittest.mock.MagicMock()
             issue.fedora_object.pid = "issue"
             issue.fedora_object.coverpage = unittest.mock.MagicMock()
             issue.fedora_object.coverpage.content = io.BytesIO(f.read())
 
-        # Run & check
-        self.assertFalse(issue.has_coverpage)
+        assert not issue.has_coverpage
 
     def test_can_return_a_slug_that_can_be_used_in_urls(self):
-        # Setup
         issue_1 = IssueFactory.create(
             year=2015, volume='4', number='1', localidentifier='i1')
         issue_2 = IssueFactory.create(
@@ -473,25 +453,24 @@ class TestIssue(BaseEruditTestCase):
             year=2015, volume=None, number=None, localidentifier='i5')
         issue_6 = IssueFactory.create(
             year=2015, volume='2 bis', number='39', localidentifier='i6')
-        # Run & check
-        self.assertEqual(issue_1.volume_slug, '2015-v4-n1')
-        self.assertEqual(issue_2.volume_slug, '2015-v4')
-        self.assertEqual(issue_3.volume_slug, '2015-n2')
-        self.assertEqual(issue_4.volume_slug, '2015-v2-3-n39')
-        self.assertEqual(issue_5.volume_slug, '2015')
-        self.assertEqual(issue_6.volume_slug, '2015-v2-bis-n39')
+        assert issue_1.volume_slug == '2015-v4-n1'
+        assert issue_2.volume_slug == '2015-v4'
+        assert issue_3.volume_slug == '2015-n2'
+        assert issue_4.volume_slug == '2015-v2-3-n39'
+        assert issue_5.volume_slug == '2015'
+        assert issue_6.volume_slug == '2015-v2-bis-n39'
 
-    def test_can_return_its_name_with_themes(self):
-        theme1 = IssueThemeFactory(issue=self.issue)
-        assert self.issue.name_with_themes == "{html_name}: {html_subname}".format(
-            html_name=theme1.html_name, html_subname=theme1.html_subname
+    @pytest.mark.parametrize('fixture_name,expected', [
+        ('inter02349', "Affirmation autochtone"),
+        ('images1080663', "David Cronenberg / La production au Qu&#233;bec: Cinq cin&#233;astes sur le divan"),  # noqa
+    ])
+    def test_can_return_its_name_with_themes(self, fixture_name, expected):
+        issue = IssueFactory()
+        repository.api.set_publication_xml(
+            issue.get_full_identifier(),
+            open('./tests/fixtures/issue/{}.xml'.format(fixture_name), 'rb').read(),
         )
-
-        theme2 = IssueThemeFactory(issue=self.issue)
-        assert self.issue.name_with_themes == "{html_name}: {html_subname} / {html_name2}: {html_subname2}".format(  # noqa
-            html_name=theme1.html_name, html_subname=theme1.html_subname,
-            html_name2=theme2.html_name, html_subname2=theme2.html_subname,
-        )
+        assert issue.name_with_themes == expected
 
 
 class TestArticle:

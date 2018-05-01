@@ -351,7 +351,7 @@ class IssueDetailView(
             return super(IssueDetailView, self).get_object(queryset)
 
         qs = Issue.objects if allow_external else Issue.internal_objects
-        qs = qs.select_related('journal', 'journal__collection').prefetch_related('themes')
+        qs = qs.select_related('journal', 'journal__collection')
         return get_object_or_404(qs, localidentifier=self.kwargs['localidentifier'])
 
     def get_context_data(self, **kwargs):

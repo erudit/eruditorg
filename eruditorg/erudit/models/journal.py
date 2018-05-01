@@ -661,13 +661,14 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     @property
     def name_with_themes(self):
         def _format_theme(theme):
-            if theme.html_subname:
+            if theme.get('html_subname'):
                 return "{html_name}: {html_subname}".format(
-                    html_name=theme.html_name,
-                    html_subname=theme.html_subname
+                    html_name=theme['html_name'],
+                    html_subname=theme['html_subname']
                 )
-            return theme.html_name
-        themes = list(self.themes.all())
+            return theme['html_name']
+
+        themes = list(self.erudit_object.themes.values())
         if len(themes) > 1:
             first_theme = themes.pop(0)
             return "{first_theme} / {themes}".format(
@@ -677,29 +678,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         if len(themes) == 1:
             return _format_theme(themes.pop())
         return self.title
-
-
-class IssueTheme(models.Model):
-    """ A theme that is associated with an issue. """
-
-    issue = models.ForeignKey(Issue, related_name='themes', verbose_name=_('Numéro'))
-    identifier = models.SlugField(
-        max_length=50, verbose_name=_('Identifiant du thème'), blank=True, null=True)
-    name = models.CharField(max_length=255, verbose_name=_('Nom du thème'))
-    subname = models.CharField(
-        max_length=255, verbose_name=_('Sous-thème'), blank=True, null=True)
-    html_name = models.CharField(
-        max_length=400, verbose_name=_('Nom du thème (HTML)'), blank=True, null=True)
-    html_subname = models.CharField(
-        max_length=400, verbose_name=_('Sous-thème (HTML)'), blank=True, null=True)
-    paral = models.BooleanField(default=False, verbose_name=_('Thème parallèle'))
-
-    class Meta:
-        verbose_name = _("Thème d'un numéro")
-        verbose_name_plural = _("Thèmes de numéros")
-
-    def __str__(self):
-        return self.name
 
 
 class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):

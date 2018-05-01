@@ -93,10 +93,25 @@ class FakeAPI(ApiFacade):
 
     def __init__(self):
         super().__init__(self.BASE_URL, 'username', 'password')
+        self._publication_content_map = {}
         self._article_content_map = {}
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
         raise AssertionError()  # we should never get there in a testing environment
+
+    def get_publication_xml(self, pid):
+        if pid in self._publication_content_map:
+            content = self._publication_content_map[pid]
+            if content:
+                return content
+            else:
+                # default fixture
+                with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
+                    return xml.read()
+        else:
+            # for now, we always return a publication (unlike articles which have to be registered)
+            with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
+                return xml.read()
 
     def get_article_xml(self, pid):
         if pid in self._article_content_map:
@@ -115,6 +130,11 @@ class FakeAPI(ApiFacade):
         # but for when you don't really care about the contents.
         if pid not in self._article_content_map:
             self._article_content_map[pid] = None
+
+    def set_publication_xml(self, pid, xml):
+        if isinstance(xml, str):
+            xml = xml.encode('utf-8')
+        self._publication_content_map[pid] = xml
 
     def set_article_xml(self, pid, xml):
         if isinstance(xml, str):
@@ -161,8 +181,7 @@ class FakeAPI(ApiFacade):
                 elif not subselection:  # we want a datastream list
                     result = FAKE_ISSUE_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/SUMMARY/content':
-                    with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
-                        result = xml.read()
+                    result = self.get_publication_xml(pid)
                 elif subselection == '/PAGES/content':
                     with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
                         result = xml.read()

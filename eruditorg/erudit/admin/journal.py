@@ -8,7 +8,6 @@ from django import forms
 
 from ..models import Article
 from ..models import Issue
-from ..models import IssueTheme
 from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
@@ -89,19 +88,7 @@ class JournalAdmin(admin.ModelAdmin):
         formset.save_m2m()
 
 
-class IssueThemeAdmin(admin.ModelAdmin):
-    list_display = ('identifier', 'name', 'subname', )
-    list_display_links = ('identifier', 'name', )
-    raw_id_fields = ('issue', )
-
-
-class IssueThemeInline(admin.TabularInline):
-    extra = 0
-    model = IssueTheme
-
-
 class IssueAdmin(admin.ModelAdmin):
-    inlines = (IssueThemeInline, )
     list_display = (
         'journal', 'year', 'volume', 'number', 'title', 'localidentifier',
         'is_published', 'is_published_in_fedora', 'view_issue_on_site', )
@@ -283,7 +270,6 @@ class JournalTypeAdmin(TranslationAdmin):
 
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
-admin.site.register(IssueTheme, IssueThemeAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.unregister(JournalType)
