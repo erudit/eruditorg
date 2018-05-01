@@ -2,9 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 from polymorphic.models import PolymorphicModel
-from taggit.managers import TaggableManager
-from taggit.models import GenericTaggedItemBase
-from taggit.models import TagBase
 
 from ..managers.core import LegacyOrganisationManager
 from ..modelfields import SizeConstrainedImageField
@@ -133,20 +130,6 @@ class Copyright(models.Model):
         verbose_name_plural = _("Droits d'auteurs")
 
 
-class KeywordTag(TagBase):
-    """ A keyword tag that can be used to add tags to a model. """
-    language = models.CharField(max_length=10, verbose_name=_('Code langue'), blank=True, null=True)
-    """ The language code associated with the keyword """
-
-    class Meta:
-        verbose_name = _('Mot-clé')
-        verbose_name_plural = _('Mots-clés')
-
-
-class KeywordTaggedWhatever(GenericTaggedItemBase):
-    tag = models.ForeignKey(KeywordTag, related_name='%(app_label)s_%(class)s_items')
-
-
 class ThesisProvider(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
     name = models.CharField(max_length=200, verbose_name=_('Nom'))
@@ -172,9 +155,6 @@ class EruditDocument(PolymorphicModel):
         help_text=_('Identifiant Fedora du document'),
     )
     """ The unique identifier of an Érudit document. """
-
-    keywords = TaggableManager(blank=True, through=KeywordTaggedWhatever)
-    """ An Érudit document can be associated with multiple keywords. """
 
     class Meta:
         verbose_name = _('Document Érudit')
