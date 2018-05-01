@@ -309,7 +309,11 @@ class Thesis(Generic):
 
     @property
     def collection(self):
-        return self.solr_data.get('Editeur')
+        result = self.solr_data.get('Editeur')
+        if isinstance(result, list):
+            return result[0] if result else ''
+        else:
+            return result
 
     @property
     def description(self):

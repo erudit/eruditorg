@@ -238,7 +238,7 @@
                     {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}
                       {% trans "Thèse" %} {% trans "déposée à" %}
-                      {{ document.collection_name }}
+                      {{ document.collection }}
                     {# metadata for books #}
                     {% elif document.document_type == 'book' %}
                       {% if document.pages %}
