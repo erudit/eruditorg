@@ -164,10 +164,6 @@
               <div class="container-fluid result-info">
                 <span class="position">{{ start_at|add:forloop.counter }}.</span>
                 {% cache LONG_TTL "public_search_result_document_fragment" document.document_type document.localidentifier LANGUAGE_CODE %}
-                {% if document.document_type == 'article' %}
-                {% url 'public:journal:article_detail' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier as article_url %}
-                {% url 'public:journal:article_external_redirect' document.localidentifier as article_redirect_url %}
-                {% endif %}
                 <div class="header">
                   {# authors #}
                   <p class="authors">
@@ -175,19 +171,7 @@
                   </p>
                   {# title #}
                   <h3>
-                    <a href="
-                    {% if document.document_type == 'article' %}
-                      {% if document.external_url %}
-                      {{ article_redirect_url }}
-                      {% else %}
-                      {{ article_url }}
-                      {% endif %}
-                    {% else %}
-                      {{ document.url }}
-                    {% endif %}"
-                    {% if document.external_url or document.url %}
-                    target="_blank"
-                    {% endif %}>
+                    <a href="{{ document.url }}" target="_blank">
                       <span>{{ document.title|safe }}</span>
                       {% if document.subtitle %}
                       <span><br/>{{ document.subtitle|safe }}</span>
