@@ -352,7 +352,21 @@ class IssueDetailView(
 
         qs = Issue.objects if allow_external else Issue.internal_objects
         qs = qs.select_related('journal', 'journal__collection')
-        return get_object_or_404(qs, localidentifier=self.kwargs['localidentifier'])
+        try:
+            return qs.get(localidentifier=self.kwargs['localidentifier'])
+        except Issue.DoesNotExist:
+            if not allow_external:
+                if Issue.objects.filter(localidentifier=self.kwargs['localidentifier']).exists():
+                    # we don't want to return an ephemeral issue if we have an existing external
+                    # object. raise the 404 so that the external redirect system kick in.
+                    raise Http404()
+            try:
+                return Issue.from_fedora_ids(
+                    journal_code=self.kwargs['journal_code'],
+                    issue_id=self.kwargs['localidentifier'],
+                )
+            except Issue.DoesNotExist:
+                raise Http404()
 
     def get_context_data(self, **kwargs):
         context = super(IssueDetailView, self).get_context_data(**kwargs)
@@ -373,17 +387,7 @@ class IssueDetailView(
         context["notegens"] = self.object.erudit_object.get_notegens_edito(html=True)
         context["guest_editors"] = None if len(guest_editors) == 0 else guest_editors
         context['themes'] = self.object.erudit_object.get_themes(formatted=True, html=True)
-        # order articles by their position in the issue summary. ordseq cannot be used for
-        # this as it is sometimes erroneous.
-        article_li = [
-            art.get('idproprio')
-            for art in self.object.get_erudit_object().findall('article')
-        ]
-        articles = Article.objects \
-            .select_related('issue', 'issue__journal', 'issue__journal__collection') \
-            .filter(issue=self.object, localidentifier__in=article_li)
-
-        articles = sorted(articles, key=lambda a: article_li.index(a.localidentifier))
+        articles = list(self.object.get_articles_from_fedora())
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
         context['reader_url'] = self._get_reader_url()
@@ -504,15 +508,15 @@ class BaseArticleDetailView(
                     # we don't want to return an ephemeral article if we have an existing external
                     # object. raise the 404 so that the external redirect system kick in.
                     raise
-            issue = get_object_or_404(Issue, localidentifier=self.kwargs['issue_localid'])
-            article = Article()
-            article.issue = issue
-            article.localidentifier = self.kwargs['localid']
-            if article.is_in_fedora:
-                article.sync_with_erudit_object()
-                return article
-            else:
-                raise
+
+            try:
+                return Article.from_fedora_ids(
+                    journal_code=self.kwargs['journal_code'],
+                    issue_id=self.kwargs['issue_localid'],
+                    article_id=self.kwargs['localid'],
+                )
+            except Article.DoesNotExist:
+                raise Http404()
 
     def get_context_data(self, **kwargs):
 

@@ -17,6 +17,7 @@ from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
+from eruditarticle.utils import remove_xml_namespaces
 from eulfedora.util import RequestFailed
 from PIL import Image
 from polymorphic.manager import PolymorphicManager
@@ -507,6 +508,63 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             )
         return None
 
+    @staticmethod
+    def from_fedora_ids(journal_code, issue_id):
+        """ Returns an Issue from the DB if it exists or an ephemeral if it doesn't
+
+        If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
+        """
+        try:
+            return Issue.objects.get(localidentifier=issue_id)
+        except Issue.DoesNotExist:
+            try:
+                journal = Journal.objects.get(code=journal_code)
+            except Journal.DoesNotExist:
+                raise Issue.DoesNotExist()
+            else:
+                issue = Issue()
+                issue.journal = journal
+                issue.localidentifier = issue_id
+                if issue.is_in_fedora:
+                    issue.sync_with_erudit_object()
+                    return issue
+                else:
+                    raise Issue.DoesNotExist()
+
+    def sync_with_erudit_object(self, erudit_object=None):
+        """ Copy ``erudit_object``'s values in appropriate fields in ``self``.
+
+        :param erudit_object: A ``EruditPublication``.
+        """
+        if erudit_object is None:
+            erudit_object = self.erudit_object
+
+        self.year = erudit_object.publication_year
+        self.publication_period = erudit_object.publication_period
+        self.volume = erudit_object.volume
+        self.number = erudit_object.number
+        self.first_page = erudit_object.first_page
+        self.last_page = erudit_object.last_page
+        self.title = erudit_object.theme
+        self.html_title = erudit_object.html_theme
+        self.thematic_issue = erudit_object.theme is not None
+        self.date_published = erudit_object.publication_date \
+            or dt.datetime(int(self.year), 1, 1)
+        self.date_produced = erudit_object.production_date \
+            or erudit_object.publication_date
+
+    def get_articles_from_fedora(self):
+        # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
+        # elegant way to generalize that code. This mechanism will probably change soon anyway.
+        summary_tree = remove_xml_namespaces(
+            et.fromstring(self.fedora_object.summary.content.serialize()))
+        xml_article_nodes = summary_tree.findall('.//article')
+        for article_node in xml_article_nodes:
+            try:
+                yield Article.from_issue_and_fedora_id(self, article_node.get('idproprio'))
+            except Article.DoesNotExist:
+                pass
+
     @cached_property
     def has_coverpage(self):
         """ Returns a boolean indicating if the considered issue has a coverpage. """
@@ -816,6 +874,37 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
                 self.localidentifier
             )
         return None
+
+    @staticmethod
+    def from_issue_and_fedora_id(issue, article_id, try_db_lookup=True):
+        if try_db_lookup:
+            qs = Article.objects.filter(localidentifier=article_id)
+            if qs.exists():
+                return qs.get()
+        article = Article()
+        article.issue = issue
+        article.localidentifier = article_id
+        if article.is_in_fedora:
+            article.sync_with_erudit_object()
+            return article
+        else:
+            raise Article.DoesNotExist()
+
+    @staticmethod
+    def from_fedora_ids(journal_code, issue_id, article_id):
+        """ Returns an Article from the DB if it exists or an ephemeral if it doesn't
+
+        If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
+        """
+        try:
+            return Article.objects.get(localidentifier=article_id)
+        except Article.DoesNotExist:
+            try:
+                issue = Issue.from_fedora_ids(journal_code, issue_id)
+            except Issue.DoesNotExist:
+                raise Article.DoesNotExist()
+            else:
+                return Article.from_issue_and_fedora_id(issue, article_id, try_db_lookup=False)
 
     # Article-related methods and properties
     # --

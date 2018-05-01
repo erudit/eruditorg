@@ -109,9 +109,7 @@ class FakeAPI(ApiFacade):
                 with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
                     return xml.read()
         else:
-            # for now, we always return a publication (unlike articles which have to be registered)
-            with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
-                return xml.read()
+            return None
 
     def get_article_xml(self, pid):
         if pid in self._article_content_map:
@@ -124,6 +122,10 @@ class FakeAPI(ApiFacade):
                     return xml.read()
         else:
             return None
+
+    def register_publication(self, pid):
+        if pid not in self._publication_content_map:
+            self._publication_content_map[pid] = None
 
     def register_article(self, pid):
         # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
@@ -181,7 +183,7 @@ class FakeAPI(ApiFacade):
                 elif not subselection:  # we want a datastream list
                     result = FAKE_ISSUE_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/SUMMARY/content':
-                    result = self.get_publication_xml(pid)
+                    result = self.get_publication_xml(pid) or b''
                 elif subselection == '/PAGES/content':
                     with open('./tests/fixtures/issue/datastream/pages/liberte03419.xml', 'rb') as xml:  # noqa
                         result = xml.read()

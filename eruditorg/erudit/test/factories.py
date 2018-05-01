@@ -122,6 +122,12 @@ class IssueFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'erudit.issue'
 
+    @factory.post_generation
+    def post(obj, create, extracted, **kwargs):
+        # we always register non-null localidentifiers with our fake API server.
+        if obj.get_full_identifier():
+            repository.api.register_publication(obj.get_full_identifier())
+
 
 class EmbargoedIssueFactory(IssueFactory):
 

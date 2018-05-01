@@ -485,19 +485,7 @@ class Command(BaseCommand):
             et.fromstring(fedora_issue.summary.content.serialize()))
 
         # Set the proper values on the Issue instance
-        issue.year = issue.erudit_object.publication_year
-        issue.publication_period = issue.erudit_object.publication_period
-        issue.volume = issue.erudit_object.volume
-        issue.number = issue.erudit_object.number
-        issue.first_page = issue.erudit_object.first_page
-        issue.last_page = issue.erudit_object.last_page
-        issue.title = issue.erudit_object.theme
-        issue.html_title = issue.erudit_object.html_theme
-        issue.thematic_issue = issue.erudit_object.theme is not None
-        issue.date_published = issue.erudit_object.publication_date \
-            or dt.datetime(int(issue.year), 1, 1)
-        issue.date_produced = issue.erudit_object.production_date \
-            or issue.erudit_object.publication_date
+        issue.sync_with_erudit_object()
         issue.fedora_updated = fedora_issue.modified
         # TODO: uncomment this when we're confident about milestone 70
         # issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
