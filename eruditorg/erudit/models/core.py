@@ -120,16 +120,6 @@ class Publisher(models.Model):
         return self.name
 
 
-class Copyright(models.Model):
-    """ A simple copyright. """
-    text = models.CharField(max_length=600, verbose_name=_('Texte du copyright'))
-    url = models.URLField(verbose_name=_('URL du copyright'), blank=True, null=True)
-
-    class Meta:
-        verbose_name = _("Droit d'auteur")
-        verbose_name_plural = _("Droits d'auteurs")
-
-
 class ThesisRepository(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
     name = models.CharField(max_length=200, verbose_name=_('Nom'))

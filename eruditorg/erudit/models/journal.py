@@ -42,7 +42,7 @@ from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 from ..utils import get_sort_key_func, strip_stopwords_prefix
 
-from .core import Collection, Copyright, EruditDocument, Publisher
+from .core import Collection, EruditDocument, Publisher
 
 cache = caches['fedora']
 
@@ -463,10 +463,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             if self.localidentifier in issue_node.get('pid'):
                 return True
         return False
-
-    copyrights = models.ManyToManyField(
-        Copyright, related_name=_('issues'), verbose_name=_("Droits d'auteurs"))
-    """ The copyrights of the issue """
 
     localidentifier = models.CharField(
         max_length=100, unique=True, blank=True, null=True, verbose_name=_('Identifiant Fedora'))

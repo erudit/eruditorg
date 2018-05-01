@@ -19,7 +19,6 @@ from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
 from ...models import Article
 from ...models import Collection
-from ...models import Copyright
 from ...models import Issue
 from ...models import Journal
 
@@ -503,15 +502,6 @@ class Command(BaseCommand):
         # TODO: uncomment this when we're confident about milestone 70
         # issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
         issue.save()
-        issue.copyrights.clear()
-        copyrights_dicts = issue.erudit_object.droitsauteur or []
-        for copyright_dict in copyrights_dicts:
-            copyright_text = copyright_dict.get('text', None)
-            copyright_url = copyright_dict.get('url', None)
-            if copyright_text is None:
-                continue
-            copyright, _ = Copyright.objects.get_or_create(text=copyright_text, url=copyright_url)
-            issue.copyrights.add(copyright)
 
         # STEP 4: patches the journal associated with the issue
         # --
