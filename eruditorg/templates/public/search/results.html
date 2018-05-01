@@ -171,22 +171,6 @@
                   <h3>
                     <a href="{{ document.url }}" target="_blank">
                       <span>{{ document.title|safe }}</span>
-                      {% if document.subtitle %}
-                      <span><br/>{{ document.subtitle|safe }}</span>
-                      {% endif %}
-                      {% if document.paral_titles %}
-                        {% for paral_title in document.paral_titles %}
-                            <br><span>{{ paral_title.title|safe }}</span>
-                            {% if paral_title.subtitle %}
-                            <br><span>{{ paral_title.subtitle|safe }}</span>
-                            {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                      {% if document.reviewed_works %}
-                      {% for reference in document.reviewed_works %}
-                      <br><span>{{ reference|safe }}</span>
-                      {% endfor %}
-                      {% endif %}
                     </a>
                   </h3>
                 </div>

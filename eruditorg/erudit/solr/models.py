@@ -174,13 +174,6 @@ class Article(Generic):
         return _('Article')
 
     @property
-    def title(self):
-        if self.obj.is_in_fedora:
-            return self.obj.title
-        else:
-            return super().title
-
-    @property
     def paral_titles(self):
         if self.obj.is_in_fedora:
             titles = self.obj.erudit_object.get_titles()
