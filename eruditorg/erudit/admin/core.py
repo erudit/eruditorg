@@ -1,10 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from ..models import Affiliation
-from ..models import Author
 from ..models import Collection
 from ..models import Discipline
 from ..models import JournalType
@@ -42,8 +38,6 @@ class OrganisationAdmin(admin.ModelAdmin):
     filter_horizontal = ('members',)
 
 
-admin.site.register(Affiliation)
-admin.site.register(Author)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(JournalType)
 admin.site.register(Publisher)
