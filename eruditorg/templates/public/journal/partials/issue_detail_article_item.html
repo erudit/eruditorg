@@ -74,12 +74,12 @@
       <span class="affiliations akkordion" data-akkordion-single="true">
         <a class="affiliations-label akkordion-title">{% trans 'Résumé' %} <span class="icon ion-ios-arrow-down"></span></a>
         <span class="akkordion-content unstyled">
-          {{ main_abstract.content|safe }}<br><br>
+          <br><strong>{{ main_abstract.lang|upper }}{% trans '&nbsp;:' %}</strong> {{ main_abstract.content|safe }}<br><br>
           {% for abstract in paral_abstracts %}
-          {{ abstract.content|safe }}<br><br>
+          <strong>{{ abstract.lang|upper }}{% trans '&nbsp;:' %}</strong> {{ abstract.content|safe }}<br><b<strong>{{ abstract.lang }}{% trans '&nbsp;:' %}</strong> r>
           {% endfor %}
           {% for abstract in eq_abstracts %}
-          {{ abstract.content|safe }}<br><br>
+          <strong>{{ abstract.lang|upper }}{% trans '&nbsp;:' %}</strong> {{ abstract.content|safe }}<br><br>
           {% endfor %}
         </span>
       </span>
