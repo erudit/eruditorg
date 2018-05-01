@@ -377,16 +377,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
             'to': open_access_issues.first().date_published
         }
 
-    def get_directors(self):
-        """ The directors of a journal are the directors of the last issue """
-        if self.last_issue:
-            return self.last_issue.get_directors()
-
-    def get_editors(self):
-        """ The editors of a journal are the editors of the last issue """
-        if self.last_issue:
-            return self.last_issue.get_editors()
-
     def is_scientific(self):
         """ Helper method that returns True if this journal is a scientific journal """
         return self.type.code == JournalType.CODE_SCIENTIFIC
@@ -394,9 +384,6 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def is_cultural(self):
         """ Helper method that returns True if this journal is a scientific journal """
         return self.type.code == JournalType.CODE_CULTURAL
-
-    editors = cached_property(get_editors)
-    directors = cached_property(get_directors)
 
 
 class Issue(FedoraMixin, FedoraDated, OAIDated):
@@ -531,12 +518,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 self.localidentifier
             )
         return None
-
-    def get_directors(self):
-        return self.contributors.filter(is_director=True)
-
-    def get_editors(self):
-        return self.contributors.filter(is_editor=True)
 
     @cached_property
     def has_coverpage(self):
@@ -696,45 +677,6 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         if len(themes) == 1:
             return _format_theme(themes.pop())
         return self.title
-
-
-class IssueContributor(models.Model):
-    """ A contributor of an issue """
-
-    issue = models.ForeignKey(Issue, related_name='contributors', verbose_name=_('Numéro'))
-
-    firstname = models.CharField(max_length=255, verbose_name=_('Prénom du contributeur'))
-    """ Firstname of the contributor """
-
-    lastname = models.CharField(max_length=255, null=True, verbose_name=_('Nom du contributeur'))
-    """ Lastname of the contributor """
-
-    role_name = models.CharField(
-        max_length=255, null=True, blank=True, verbose_name=_('Rôle du contributeur'))
-    """ Name of the role of the contributor """
-
-    is_director = models.NullBooleanField(verbose_name=_('Est un directeur'), null=True)
-    """ Determines if the person contributes as a director """
-
-    is_editor = models.NullBooleanField(verbose_name=_('Est un rédacteur'), null=True)
-    """ Determines if the person contributes as an editor """
-
-    def format_name(self):
-        formatted_name = self.firstname
-
-        if self.lastname:
-            formatted_name = "{formatted_name} {lastname}".format(
-                formatted_name=formatted_name,
-                lastname=self.lastname
-            )
-
-        if self.role_name:
-            formatted_name = "{formatted_name} ({role_name})".format(
-                formatted_name=formatted_name,
-                role_name=self.role_name
-            )
-
-        return formatted_name
 
 
 class IssueTheme(models.Model):

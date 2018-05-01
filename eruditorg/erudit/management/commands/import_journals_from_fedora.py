@@ -22,38 +22,9 @@ from ...models import Collection
 from ...models import Copyright
 from ...models import Issue
 from ...models import IssueTheme
-from ...models import IssueContributor
 from ...models import Journal
 
 logger = structlog.getLogger(__name__)
-
-
-def _create_issue_contributor_object(issue_contributor, issue, is_director=False, is_editor=False):
-    contributor = IssueContributor(
-        firstname=issue_contributor.firstname,
-        lastname=issue_contributor.lastname,
-        issue=issue
-    )
-
-    if is_director:
-        contributor.is_director = True
-    if is_editor:
-        contributor.is_editor = True
-    contributor_roles = issue_contributor.role
-    if contributor_roles:
-        role_fr = contributor_roles.get('fr')
-        role_en = contributor_roles.get('en')
-
-        if role_fr and role_en:
-            raise ValueError('Only one of role_fr or role_en should be defined')
-        if role_fr:
-            contributor.role_name = role_fr
-        if role_en:
-            contributor.role_name = role_en
-        if not role_fr and not role_en:
-            if len(contributor_roles.keys()) > 0:
-                _, contributor.role_name = contributor_roles.popitem()
-    return contributor
 
 
 class Command(BaseCommand):
@@ -533,24 +504,6 @@ class Command(BaseCommand):
         # TODO: uncomment this when we're confident about milestone 70
         # issue.is_published = issue_pid in journal.erudit_object.get_published_issues_pids()
         issue.save()
-        issue.contributors.all().delete()
-
-        for director in issue.erudit_object.directors:
-            contributor = _create_issue_contributor_object(
-                director,
-                issue,
-                is_director=True
-            )
-            contributor.save()
-
-        for editor in issue.erudit_object.editors:
-            contributor = _create_issue_contributor_object(
-                editor,
-                issue,
-                is_editor=True
-            )
-            contributor.save()
-
         issue.copyrights.clear()
         copyrights_dicts = issue.erudit_object.droitsauteur or []
         for copyright_dict in copyrights_dicts:

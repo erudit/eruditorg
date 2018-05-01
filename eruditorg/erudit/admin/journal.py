@@ -9,7 +9,6 @@ from django import forms
 from ..models import Article
 from ..models import Issue
 from ..models import IssueTheme
-from ..models import IssueContributor
 from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
@@ -101,13 +100,8 @@ class IssueThemeInline(admin.TabularInline):
     model = IssueTheme
 
 
-class IssueContributorInline(admin.TabularInline):
-    extra = 0
-    model = IssueContributor
-
-
 class IssueAdmin(admin.ModelAdmin):
-    inlines = (IssueThemeInline, IssueContributorInline)
+    inlines = (IssueThemeInline, )
     list_display = (
         'journal', 'year', 'volume', 'number', 'title', 'localidentifier',
         'is_published', 'is_published_in_fedora', 'view_issue_on_site', )

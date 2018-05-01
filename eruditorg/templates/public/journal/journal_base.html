@@ -93,19 +93,23 @@
         <dl class="journal-meta--list">
 
           {% if meta_info_issue %}
-          {% if meta_info_issue.get_directors %}
+          {% with directors=meta_info_issue.erudit_object.get_directors %}
+          {% if directors %}
           <dt>{% trans "Direction" %}</dt>
-          {% for issue_contributor in meta_info_issue.get_directors %}
+          {% for issue_contributor in directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
+          {% endwith %}
 
-          {% if meta_info_issue.erudit_object.get_editors %}
+          {% with editors=meta_info_issue.erudit_object.get_editors %}
+          {% if editors %}
           <dt>{% trans "Rédaction" %}</dt>
-          {% for issue_contributor in meta_info_issue.erudit_object.get_editors %}
+          {% for issue_contributor in editors %}
           <dd>{{ issue_contributor | format_editor }}</dd>
           {% endfor %}
           {% endif %}
+          {% endwith %}
 
           {% if meta_info_issue.erudit_object.publishers %}
           <dt>

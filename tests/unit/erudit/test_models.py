@@ -17,7 +17,6 @@ from erudit.test.factories import (
     JournalFactory,
     JournalTypeFactory,
     CollectionFactory,
-    IssueContributorFactory,
     IssueThemeFactory,
 )
 
@@ -201,36 +200,6 @@ class TestJournal(BaseEruditTestCase):
                 'to': issue_4.date_published
             }
         )
-
-    def test_knows_its_directors(self):
-        now_dt = dt.datetime.now()
-        journal = JournalFactory()
-        first_issue = IssueFactory.create(
-            journal=self.journal, date_published=now_dt - dt.timedelta(days=1)
-        )
-
-        first_issue_director = IssueContributorFactory(
-            issue=first_issue, is_director=True
-        )
-
-        last_issue = IssueFactory.create(journal=journal, date_published=now_dt)
-        last_issue_director = IssueContributorFactory(issue=last_issue, is_director=True)
-
-        assert last_issue_director in journal.get_directors()
-        assert first_issue_director not in journal.get_directors()
-
-    def test_knows_its_editors(self):
-        journal = JournalFactory()
-        first_issue = IssueFactory.create(
-            journal=journal, date_published=reldate(-1)
-        )
-        first_issue_editor = IssueContributorFactory(issue=first_issue, is_editor=True)
-
-        last_issue = IssueFactory.create(journal=journal, date_published=reldate(0))
-        last_issue_editor = IssueContributorFactory(issue=last_issue, is_editor=True)
-
-        assert last_issue_editor in journal.get_editors()
-        assert first_issue_editor not in journal.get_editors()
 
     def test_published_issues_uses_fedora_order(self):
         # The `published_issues` queryset returns a list that uses order fetched from fedora.
@@ -512,14 +481,6 @@ class TestIssue(BaseEruditTestCase):
         self.assertEqual(issue_5.volume_slug, '2015')
         self.assertEqual(issue_6.volume_slug, '2015-v2-bis-n39')
 
-    def test_knows_its_directors(self):
-        contributor = IssueContributorFactory(issue=self.issue, is_director=True)
-        assert contributor in self.issue.get_directors()
-
-    def test_knows_its_editors(self):
-        contributor = IssueContributorFactory(issue=self.issue, is_editor=True)
-        assert contributor in self.issue.get_editors()
-
     def test_can_return_its_name_with_themes(self):
         theme1 = IssueThemeFactory(issue=self.issue)
         assert self.issue.name_with_themes == "{html_name}: {html_subname}".format(
@@ -531,34 +492,6 @@ class TestIssue(BaseEruditTestCase):
             html_name=theme1.html_name, html_subname=theme1.html_subname,
             html_name2=theme2.html_name, html_subname2=theme2.html_subname,
         )
-
-
-class TestIssueContributor(BaseEruditTestCase):
-
-    def test_can_format_its_name(self):
-        contributor = IssueContributorFactory(
-            firstname="Tryphon",
-            lastname=None,
-            role_name=None
-        )
-
-        assert contributor.format_name() == "Tryphon"
-
-        contributor = IssueContributorFactory(
-            firstname="Tryphon",
-            lastname="Tournesol",
-            role_name=None
-        )
-
-        assert contributor.format_name() == "Tryphon Tournesol"
-
-        contributor = IssueContributorFactory(
-            firstname="Tryphon",
-            lastname="Tournesol",
-            role_name="Professeur"
-        )
-
-        assert contributor.format_name() == "Tryphon Tournesol (Professeur)"
 
 
 class TestArticle:
