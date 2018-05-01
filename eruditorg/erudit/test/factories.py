@@ -116,7 +116,6 @@ class IssueFactory(factory.django.DjangoModelFactory):
     journal = factory.SubFactory(JournalFactory)
     localidentifier = factory.Sequence(lambda n: 'issue{}'.format(n))
     date_published = dt.datetime.now().date()
-    formatted_volume_title = factory.Sequence(lambda n: "number-{}".format(n))
     year = dt.datetime.now().year
     is_published = True
 
