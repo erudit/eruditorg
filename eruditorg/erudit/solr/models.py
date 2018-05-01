@@ -215,7 +215,7 @@ class Article(Generic):
     @property
     def journal_type(self):
         if self.obj.issue.journal.type:
-            return self.obj.issue.journal.type.get_code_display().lower()
+            return self.obj.issue.journal.type.code
         return ''
 
     @property
@@ -289,6 +289,13 @@ class Article(Generic):
         return []
 
 
+class SolrArticle(Generic):
+
+    @property
+    def journal_type(self):
+        return 'S'
+
+
 class Thesis(Generic):
     def can_cite(self):
         return True
@@ -335,6 +342,6 @@ def get_model_instance(solr_data):
         try:
             return Article(solr_data)
         except ObjectDoesNotExist:
-            pass
+            return SolrArticle(solr_data)
 
     return Generic(solr_data)
