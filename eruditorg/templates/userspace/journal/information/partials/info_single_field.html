@@ -1,0 +1,27 @@
+<div class="col-sm-8 col-md-6 form-group">
+  <label class="control-label" for="field.id_for_label">
+    {{ field.label }}
+    {% if icon %}
+      &nbsp;<span class="{{ icon }}"></span>
+    {% endif %}
+  </label>
+  <input
+    id="{{ field.id_for_label }}"
+    name="{{ field.name }}"
+    value="{{ field.value }}"
+    type="{{ type|default:"text" }}"
+    autocomplete="{{ autocomplete|default:"name" }}"/>
+  {% if checkbox_field %}
+  <div class="checkbox">
+    <input
+        id="{{ checkbox_field.id_for_label }}"
+        type="checkbox"
+        name="{{ checkbox_field.name }}"
+        class="styled"
+        {% if checkbox_field.value %}checked{% endif %}>
+    <label for="{{ checkbox_field.id_for_label }}">{{ checkbox_field.label }}</label>
+  </div>
+  {% endif %}
+  {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+</div>
+

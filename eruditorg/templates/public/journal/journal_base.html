@@ -5,6 +5,20 @@
 <li><a href="{% url 'public:journal:journal_detail' journal.code %}">{{ journal.name }}</a></li>
 {% endblock breadcrumb %}
 
+{% block extrahead %}
+{% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
+{{ block.super }}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+{% endif %}
+{% endblock extrahead %}
+
 {% block content %}
 {% trans "inconnu" as i18n_unknown %}
 <div class="container">
@@ -12,13 +26,13 @@
     {# Main content #}
     {% block inner_main %}{% endblock inner_main %}
     {# Journal information sidebar #}
-    <aside id="journal-meta" class="col-sm-3 col-md-offset-1 col-md-3 journal-meta">
+    <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
 
       {# latest and back issues #}
       {% block aside_issue %}
       <div class="sidebar-block clearfix latest-issue">
         {% if latest_issue %}
-        <h2>{% trans "Dernier numéro" %} (<a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>)</h2>
+        <h2>{% trans "Dernier numéro" %}</h2>
         <p>
           <a href="{% url 'public:journal:issue_detail' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}">
             {% if latest_issue.html_title %}
@@ -43,46 +57,38 @@
       </div>
       {% endblock aside_issue %}
 
-      <div class="sidebar-block search-journal">
-        <h2>{% trans "Rechercher dans la revue" %}</h2>
-        <div class="search-box">
-          <form action="{% url 'public:search:results' %}" method="get">
-            <div class="input-group">
-              <input type="search" class="form-control" name="basic_search_term" placeholder="{% trans "Recherchez par mot-clé…" %}">
-              <input type="hidden" name="journals" value="{{ journal.name }}">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-secondary"><span class="ion-search"></span></button>
-              </span>
+      {# Explore this journal #}
+      <div class="sidebar-block">
+        <h2>{% trans "Explorer" %}</h2>
+        <ul class="journal-explore">
+          <li class="search-journal">
+            <div class="search-box">
+              <form action="{% url 'public:search:results' %}" method="get">
+                <label for="journal-search">{% trans "Rechercher dans la revue" %}</label>
+                <div class="input-group">
+                  <input type="search" class="form-control" name="basic_search_term" id="journal-search" placeholder="{% trans "Recherchez par mot-clé…" %}">
+                  <input type="hidden" name="journals" value="{{ journal.name }}">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-secondary">
+                      <span class="sr-only">Rechercher</span>
+                      <span class="ion ion-ios-search-strong"></span>
+                    </button>
+                  </span>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
+          </li>
+          {% block aside_authors_list %}
+          <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a></li>
+          {% endblock aside_authors_list %}
+          <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a></li>
+        </ul>
       </div>
 
       {# journal meta infos #}
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
-        {% switch "maintenance" %}
-        {% else %}
-        <p>
-          {% if request.user.is_anonymous %}
-          -> <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="journal-login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
-            {% trans 'Accès éditeur' %}
-          </a>
-          {% else %}
-          -> <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord des éditeurs" %}</a>
-          {% endif %}
-        </p>
-        {% endswitch %}
-        {% block aside_authors_list %}
-        <p>
-          -> <a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a>
-        </p>
-        {% endblock aside_authors_list %}
-        {% if meta_info_issue %}
-        <p>
-          -> <a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a>
-        </p>
-        {% endif %}
+
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
         <dl class="journal-meta--list">
 
@@ -139,7 +145,6 @@
           <dt>{% trans "Période de publication" %}</dt>
           <dd>{{ journal.publication_period }}</dd>
 
-
           {% if journal.first_issue %}
           <dt>{% trans "Disponible dans Érudit depuis" %}</dt>
           <dd>{{ journal.first_issue.date_published|date:"Y" }}</dd>
@@ -176,9 +181,14 @@
           </dd>
           {% endif %}
 
-          {% if journal.website_url %}
+          {% if journal_info.website_url %}
           <dt>{% trans "Site web" %}</dt>
-          <dd><a href="{{ journal.website_url }}">{{ journal.website_url }}</a></dd>
+          <dd><a href="{{ journal_info.website_url }}">{{ journal_info.website_url }}</a></dd>
+          {% endif %}
+
+          {% if journal_info.email %}
+          <dt>{% trans "Courriel général" %}</dt>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
           {% endif %}
 
           {% if journal.previous_journal %}
@@ -201,6 +211,18 @@
         {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
       </div>
+
+      {% if journal_info.twitter_enable_feed and journal_info.twitter_url %}
+      <div class="journal-meta--list">
+        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+      {% endif %}
+
+      {% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
+      <div class="journal-meta--list">
+        <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
+      </div>
+      {% endif %}
     </aside>
   </div>
 </div>

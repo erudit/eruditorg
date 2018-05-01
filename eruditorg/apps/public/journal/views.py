@@ -293,6 +293,10 @@ class JournalAuthorsListView(SingleJournalMixin, TemplateView):
         context['letters_exists'] = self.letters_exists
         context['latest_issue'] = self.journal.last_issue
         context['meta_info_issue'] = context['latest_issue']
+        try:
+            context['journal_info'] = self.journal.information
+        except ObjectDoesNotExist:
+            pass
         return context
 
 
@@ -354,6 +358,10 @@ class IssueDetailView(
         context = super(IssueDetailView, self).get_context_data(**kwargs)
 
         context['journal'] = self.object.journal
+        try:
+            context['journal_info'] = self.object.journal.information
+        except ObjectDoesNotExist:
+            pass
 
         context['meta_info_issue'] = self.object
         guest_editors = self.object.erudit_object.get_redacteurchef(
@@ -545,6 +553,11 @@ class BaseArticleDetailView(
         # we also never want to cache ephemeral articles (id = None)
         shouldcache = obj.issue.is_published and obj.id
         context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
+
+        try:
+            context['journal_info'] = obj.issue.journal.information
+        except ObjectDoesNotExist:
+            pass
 
         return context
 

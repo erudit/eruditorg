@@ -86,26 +86,38 @@
               {% if not content_access_granted and not only_summary %}
               <div class="alert">
                 <p>
-                  {% blocktrans trimmed with journal=article.issue.journal.name %}
-                  L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Toutes les archives des revues sont disponibles en libre accès. Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue {{ journal }} – Accès aux articles">client@erudit.org</a>.
+                  {% blocktrans trimmed with code=article.issue.journal.code %}
+                  L’accès aux articles des numéros courants de cette revue est réservé aux abonnés. Pour accéder aux numéros d’archives disponibles en libre accès, consultez l’<a href="https://www.erudit.org/fr/revues/{{ code }}">historique des numéros</a>.
                   {% endblocktrans %}
-                  <br/>
+                  {% url 'public:auth:landing' as login_url %}
+                  {% if request.user.is_anonymous %}
+                  <br/><br/>
+                  {% blocktrans %}
+                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" class="main-section" id="article-login-modal" title="Se connecter au tableau de bord">en vous connectant</a>.
+                  {% endblocktrans %}
+                  {% endif %}
+                  <br/><br/>
+                  {% if journal_info.subscription_email or journal_info.phone %}
+                    {% blocktrans trimmed with journal=article.issue.journal.name email=journal_info.subscription_email phone=journal_info.phone %}
+                    Si vous souhaitez vous abonner à titre individuel, et/ou à la version papier, nous vous invitons à communiquer directement avec l’équipe de <em>{{ journal }}</em> à l’adresse <a href="mailto:{{ email }}?subject=Abonnement%20à%20la%20revue%20{{ journal }}">{{ email }}</a> ou par téléphone au {{ phone }}.
+                    {% endblocktrans %}
+                  {% else %}
+                    {% blocktrans trimmed with journal=article.issue.journal.name %}
+                    Pour plus d’informations, veuillez communiquer avec nous à l’adresse <a href="mailto:client@erudit.org?subject=Revue%20{{ journal }} – Accès aux articles">client@erudit.org</a>.
+                    {% endblocktrans %}
+                  {% endif %}
                   <strong>
                     {% if not article.erudit_object.abstracts and can_display_first_pdf_page %}
+                    <br/><br/>
                     {% trans "Seule la première page du PDF sera affichée." %}
                     {% elif article.erudit_object.abstracts %}
+                    <br/><br/>
                     {% trans "Seul le résumé sera affiché." %}
                     {% elif article.is_scientific %}
+                    <br/><br/>
                     {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
                     {% endif %}
                   </strong>
-                  <br/><br/>
-                  {% flag "INDIVIDUAL_SUBSCRIPTIONS" %}
-                  {% url 'public:auth:landing' as login_url %}
-                  {% blocktrans %}
-                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" id="article-login-modal" title="Se connecter">en vous connectant</a>.
-                  {% endblocktrans %}
-                  {% endflag %}
                 </p>
               </div>
               {% endif %}

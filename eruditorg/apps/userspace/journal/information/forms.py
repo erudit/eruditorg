@@ -14,13 +14,22 @@ class JournalInformationForm(forms.ModelForm):
         'team', 'contact', 'partners',
     ]
 
+    # Fields that aren't translatable. You could be wanting to but them in Meta.fields, but that
+    # would likely be a mistake because you'll notice that when you do that, the contents of the
+    # i18n fields will be blank.
+    non_i18n_field_names = [
+        'organisation_name', 'email', 'subscription_email',
+        'phone', 'facebook_url', 'facebook_enable_feed',
+        'twitter_url', 'twitter_enable_feed', 'website_url',
+    ]
+
     class Meta:
         model = JournalInformation
         fields = []
 
     def __init__(self, *args, **kwargs):
         self.language_code = kwargs.pop('language_code')
-        super(JournalInformationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Fetches proper labels for for translatable fields: this is necessary
         # in order to remove language indications from labels (eg. "Team [en]")
@@ -39,6 +48,13 @@ class JournalInformationForm(forms.ModelForm):
                 labels=i18n_fields_label,
                 widgets=i18n_field_widgets,
                 help_texts=self.i18n_field_help_texts,
+            )
+        )
+
+        self.fields.update(
+            fields_for_model(
+                self.Meta.model,
+                fields=self.non_i18n_field_names,
             )
         )
 
@@ -78,10 +94,13 @@ class JournalInformationForm(forms.ModelForm):
     def get_i18n_field_name(self, fname):
         return fname + '_' + self.language_code
 
+    def get_textbox_fields(self):
+        return [f for f in self if f.name[:-3] in self.i18n_field_bases]
+
     def save(self, commit=True):
-        obj = super(JournalInformationForm, self).save(commit)
-        # Forces the save of dynamic i18n fields
-        for fname in self.i18n_field_names:
+        obj = super().save(commit)
+        # Our dynamically-generated fields aren't automatically saved. Save them.
+        for fname in self.i18n_field_names + self.non_i18n_field_names:
             setattr(obj, fname, self.cleaned_data[fname])
 
         if commit:

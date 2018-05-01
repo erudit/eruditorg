@@ -1,6 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load i18n %}
-{% load public_journal_tags %}
+{% load i18n public_journal_tags %}
 
 {% block title %}{% trans "Index des auteurs" %} – {{ journal.name|safe }}{% endblock title %}
 
@@ -72,7 +71,7 @@
 {% endblock breadcrumb %}
 
 {% block inner_main %}
-<main role="main" class="col-sm-9 col-md-8">
+<main role="main" class="col-sm-8 col-md-7">
   <header class="page-header-main row">
     <div class="col-xs-12">
       <h1>
@@ -131,4 +130,9 @@
 </main>
 {% endblock inner_main %}
 
-{% block aside_authors_list %}{% endblock aside_authors_list %}
+{% block aside_authors_list %}
+{% url 'public:journal:journal_detail' journal.code as journal_detail_url %}
+<li>
+  <a href="{{ journal_detail_url }}" title="{% trans 'Consulter la revue' %}">{% trans "À propos" %}</a>
+</li>
+{% endblock aside_authors_list %}

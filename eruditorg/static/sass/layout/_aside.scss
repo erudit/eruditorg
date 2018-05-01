@@ -6,8 +6,9 @@ aside {
 
   h2 {
     border-bottom: 1px solid $mid-grey;
-    padding-bottom: 0.35em;
+    padding: 0.35em 0;
     font-size: 1.35em;
+    color: $dark-grey;
   }
 
   h3 {
@@ -74,6 +75,22 @@ aside {
     margin-top: 1em;
   }
 
+  .journal-explore {
+    margin: 0;
+    list-style-type: none;
+
+    li {
+      margin-bottom: 1.35em;
+    }
+
+    label, li a {
+      font-size: 1.35em;
+      margin-bottom: 0.5em;
+      display: block;
+    }
+
+  }
+
   .search-journal {
 
     input[type="search"] {
@@ -93,6 +110,7 @@ aside {
     .btn {
       width: 50px;
       height: 50px;
+      font-size: 1.5em;
     }
 
   }
