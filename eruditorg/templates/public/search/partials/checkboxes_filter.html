@@ -1,0 +1,13 @@
+{% load widget_tweaks %}
+<div class="col-sm-4 filter-collections">
+  <div id="div_id_{{ field.html_name }}" class="form-group{% if field.errors %} has-error{% endif %}">
+    <fieldset>
+      <legend class="control-label">
+        {{ field.label }}{% if field.help_text %}&nbsp;<span class="hint--bottom hint--no-animate" data-hint="{{ field.help_text }}"><span class="ion-help-circled"></span></span>{% endif %}
+      </legend>
+      {{ field|add_class:'form-control' }}
+      {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+    </fieldset>
+  </div>
+</div>
+

@@ -1,4 +1,4 @@
-from erudit.solr.models import client
+import erudit.solr.models
 from core.solrq import Search as BaseSearch
 
 
@@ -36,4 +36,4 @@ class Search(BaseSearch):
 
 def get_search():
     """ Returns a search object allowing to perform queries. """
-    return Search(client)
+    return Search(erudit.solr.models.client)

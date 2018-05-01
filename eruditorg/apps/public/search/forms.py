@@ -173,11 +173,28 @@ class SearchForm(forms.Form):
 
     funds = forms.MultipleChoiceField(
         label=_('Fonds'), widget=forms.CheckboxSelectMultiple, choices=FUNDS_CHOICES,
-        required=False)
+        required=False,
+        help_text=_(
+            "Les revues diffusées sur Érudit sont consultables directement sur la "
+            "plateforme ; les revues des collections Persée et NRC Research Press redirigent "
+            "vers la plateforme du partenaire."
+        ))
 
     publication_types = forms.MultipleChoiceField(
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,
-        choices=PUB_TYPES_CHOICES, required=False)
+        choices=PUB_TYPES_CHOICES, required=False,
+        help_text=_(
+            "Les revues savantes publient des articles scientifiques révisés par les pairs ; "
+            "les revues culturelles présentent des articles dans les domaines artistique, "
+            "littéraire et socioculturel."
+        ))
+
+    article_types = forms.MultipleChoiceField(
+        label=_("Types d'articles savants"), widget=forms.CheckboxSelectMultiple,
+        choices=ARTICLE_TYPES_CHOICES, required=False,
+        help_text=_(
+            "Ces filtres s’appliquent aux articles savants uniquement."
+        ))
 
     languages = forms.MultipleChoiceField(
         label=_('Langues'),
@@ -217,7 +234,12 @@ class ResultsFilterForm(forms.Form):
     filter_extra_q = forms.CharField(
         label=_('Dans les résultats'), widget=forms.TextInput, required=False)
     filter_years = forms.MultipleChoiceField(label=_('Années'), required=False)
-    filter_article_types = forms.MultipleChoiceField(label=_('Types d\'articles'), required=False)
+    filter_article_types = forms.MultipleChoiceField(
+        label=_('Types d’articles'),
+        help_text=_(
+            "Ces filtres s’appliquent aux articles savants uniquement."
+        ),
+        required=False)
     filter_languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
     filter_collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
     filter_authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
