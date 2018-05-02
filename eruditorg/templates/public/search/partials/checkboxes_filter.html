@@ -14,7 +14,7 @@
           class="styled"
           id="test-{{ field.auto_id }}_{{ forloop.counter }}"
           value="{{ choice.0 }}"
-          {% if choice.0 == 'Érudit' or choice.0 == 'UNB' %}
+          {% if choice.0 in field.initial %}
           checked="checked"
           {% endif %}
         >
