@@ -178,7 +178,9 @@ class SearchForm(forms.Form):
             "Les revues diffusées sur Érudit sont consultables directement sur la "
             "plateforme ; les revues des collections Persée et NRC Research Press redirigent "
             "vers la plateforme du partenaire."
-        ))
+        ),
+        initial=('Érudit', 'UNB')
+    )
 
     publication_types = forms.MultipleChoiceField(
         label=_('Types de publication'), widget=forms.CheckboxSelectMultiple,

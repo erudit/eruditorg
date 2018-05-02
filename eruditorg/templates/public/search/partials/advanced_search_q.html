@@ -1,7 +1,6 @@
-{% load i18n %}
-{% load widget_tweaks %}
+{% load i18n widget_tweaks %}
 
-<div id="id_qblock_{{ qnb }}" class="row form-row" style="{{ style }}" data-q-id="{{ qnb }}" data-q-used="false">
+<div id="id_qblock_{{ qnb }}" class="row form-row qblock" style="{{ style }}" data-q-id="{{ qnb }}" data-q-used="false">
   <div class="col-xs-12 col-md-1">
     <div id="div_id_{{ qoperator_field.html_name }}" class="form-group{% if qoperator_field.errors %} has-error{% endif %} operator">
       <label for="id_{{ qoperator_field.html_name }}" class="sr-only">{% trans 'Opérateur booléen' %}</label>
@@ -21,7 +20,7 @@
   <div class="col-xs-5 col-md-3 search-field">
     <div id="div_id_{{ qfield_field.html_name }}" class="form-group{% if qfield_field.errors %} has-error{% endif %}">
       <div class="controls">
-        <label for="id_{{ qfield_field.html_name }}">{% trans 'Dans…' %}</label>
+        <label for="id_{{ qfield_field.html_name }}" class="sr-only">{% trans 'Dans…' %}</label>
         {{ qfield_field|add_class:'form-control' }}
         {% for error in qfield_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
       </div>

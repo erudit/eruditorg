@@ -56,16 +56,6 @@
       @include fw-mono;
     }
 
-    .search-field {
-
-      label {
-        position: absolute;
-        font-size: 14px;
-        top: -5px;
-      }
-
-    }
-
     .remove-qbox {
       line-height: 110px;
       font-size: 20px;
@@ -99,6 +89,10 @@
           clear: both;
         }
 
+      }
+
+      .checkbox {
+        margin-bottom: 15px;
       }
 
       // radio button filters
@@ -281,6 +275,34 @@
         margin: 0;
       }
 
+    }
+
+  }
+
+}
+
+/**
+* block alignment of filters
+*/
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+  .filters [class*='filter-'] {
+
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-md-min) {
+
+  .filters [class*='filter-'] {
+
+    &:nth-child(3n+1) {
+      clear: both;
     }
 
   }
