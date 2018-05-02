@@ -21,9 +21,12 @@ $.ajaxSetup({
     if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
       xhr.setRequestHeader("X-CSRFToken", getCsrfToken());
     }
-  }
+  },
+  // Normally, the "X-CSRFToken" should be enough for our purpose, but
+  // some proxies strip this header so it's safer to also include it in
+  // the POST values.
+  data: { csrfmiddlewaretoken: getCsrfToken() }
 });
-
 
 // Defines the router and initializes it!
 let router = new DOMRouter(controllers);
