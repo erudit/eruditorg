@@ -22,7 +22,12 @@ def clear_cache():
 
 @pytest.fixture(autouse=True)
 def mock_fedora_api(monkeypatch):
+    def shouldnt_call(*args, **kwargs):
+        raise AssertionError('Never supposed to be called')
+
+    monkeypatch.setattr(erudit.fedora.repository.repo.api, '_make_request', shouldnt_call)
     mocked_api = FakeAPI()
+    monkeypatch.setattr(erudit.fedora.repository.repo.api, 'get', mocked_api.get)
     monkeypatch.setattr(erudit.fedora.repository.repo, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.repository, 'api', mocked_api)
     monkeypatch.setattr(erudit.fedora.modelmixins, 'api', mocked_api)

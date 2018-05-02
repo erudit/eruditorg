@@ -117,7 +117,10 @@ class Generic:
 class Article(Generic):
     def __init__(self, solr_data):
         super().__init__(solr_data)
-        self.obj = erudit_models.Article.objects.get(localidentifier=self.localidentifier)
+        self.obj = erudit_models.Article.from_fedora_ids(
+            solr_data.get('RevueID'),
+            solr_data.get('NumeroID'),
+            self.localidentifier)
         self.id = self.obj.id
 
     def __getattr__(self, name):
@@ -347,3 +350,18 @@ def get_model_instance(solr_data):
             return SolrArticle(solr_data)
 
     return Generic(solr_data)
+
+
+def get_fedora_ids(localidentifier):
+    query = 'ID:{}'.format(localidentifier)
+    args = {
+        'q': query,
+        'facet.limit': '0',
+        'fl': 'ID,NumeroID,RevueID',
+    }
+    solr_results = client.search(**args)
+    if solr_results.hits:
+        doc = solr_results.docs[0]
+        return (doc['RevueID'], doc['NumeroID'], doc['ID'])
+    else:
+        return None

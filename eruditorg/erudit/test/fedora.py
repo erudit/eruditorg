@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from eulfedora.api import ApiFacade
 from eulfedora.util import RequestFailed
 
-from .domchange import EruditArticleDomChanger
+from .domchange import EruditArticleDomChanger, EruditPublicationDomChanger
 
 # NOTE: This fake API is far from complete but is enough to make tests pass
 #       as they are now. We'll have to improve this as we expand testing areas.
@@ -106,7 +106,7 @@ class FakeAPI(ApiFacade):
                 return content
             else:
                 # default fixture
-                with open('./tests/fixtures/issue/liberte1035607.xml', 'rb') as xml:
+                with open('./tests/fixtures/issue/minimal.xml', 'rb') as xml:
                     return xml.read()
         else:
             return None
@@ -152,6 +152,20 @@ class FakeAPI(ApiFacade):
         yield dom_wrapper
         newxml = dom_wrapper.tostring()
         self.set_article_xml(pid, newxml)
+
+    @contextmanager
+    def open_publication(self, pid):
+        # we implicitly register a pid that we tweak
+        self.register_publication(pid)
+        xml = self.get_publication_xml(pid)
+        dom_wrapper = EruditPublicationDomChanger(xml)
+        yield dom_wrapper
+        newxml = dom_wrapper.tostring()
+        self.set_publication_xml(pid, newxml)
+
+    def add_article_to_parent_publication(self, article):
+        with self.open_publication(article.issue.pid) as wrapper:
+            wrapper.add_article(article)
 
     def get(self, url, **kwargs):
         result = None
@@ -206,4 +220,7 @@ class FakeAPI(ApiFacade):
                 response.text = pid
                 raise RequestFailed(response)
         else:
-            raise ValueError("unsupported URL for fake fedora API: {}".format(url))
+            print("WARNING: unsupported URL for fake fedora API: {}".format(url))
+            response = FakeResponse(b'', url)
+            response.text = pid
+            raise RequestFailed(response)

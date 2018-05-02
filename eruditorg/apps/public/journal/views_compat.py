@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
@@ -8,6 +7,7 @@ from django.views.generic import RedirectView
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
+from erudit.solr.models import get_fedora_ids
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from base.viewmixins import ActivateLegacyLanguageViewMixin
 
@@ -93,9 +93,10 @@ class ArticleDetailRedirectView(
         if 'format_identifier' in kwargs and kwargs['format_identifier'] == 'pdf':
             self.pattern_name = 'public:journal:article_raw_pdf'
         if 'localid' in kwargs:
-            article = get_object_or_404(
-                Article.objects.select_related('issue', 'issue__journal'),
-                localidentifier=kwargs['localid'])
+            fedora_ids = get_fedora_ids(kwargs['localid'])
+            if not fedora_ids:
+                raise Http404()
+            article = Article.from_fedora_ids(*fedora_ids)
             return reverse(self.pattern_name, kwargs={
                 'journal_code': article.issue.journal.code, 'issue_slug': article.issue.volume_slug,
                 'issue_localid': article.issue.localidentifier,

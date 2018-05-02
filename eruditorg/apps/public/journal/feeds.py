@@ -7,7 +7,6 @@ from django.http import Http404
 from django.utils.translation import gettext as _
 
 from base.feedgenerator import EruditRssFeedGenerator
-from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
 
@@ -91,4 +90,4 @@ class LatestJournalArticlesFeed(Feed):
                 item.localidentifier])
 
     def items(self, obj):
-        return Article.objects.filter(issue_id=self.last_issue).order_by('ordseq')
+        return list(self.last_issue.get_articles_from_fedora())

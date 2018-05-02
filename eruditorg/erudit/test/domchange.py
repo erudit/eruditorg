@@ -10,10 +10,15 @@ Author = namedtuple('Author', 'firstname lastname othername')
 SectionTitle = namedtuple('SectionTitle', 'level paral title')
 
 
-class EruditArticleDomChanger:
+class BaseDomChanger:
     def __init__(self, xml):
         self.root = remove_xml_namespaces(etree.fromstring(xml))
 
+    def tostring(self):
+        return etree.tostring(self.root)
+
+
+class EruditArticleDomChanger(BaseDomChanger):
     def set_authors(self, authors):
         # authors is a list of element with lastname/firstname/othername attributes.
         grauteur = self.root.find('.//grauteur')
@@ -71,3 +76,12 @@ class EruditArticleDomChanger:
 
     def tostring(self):
         return etree.tostring(self.root)
+
+
+class EruditPublicationDomChanger(BaseDomChanger):
+    def add_article(self, article):
+        if self.root.find('article[idproprio="{}"]'.format(article.localidentifier)) is not None:
+            return  # already there
+        num_articles = len(self.root.findall('article'))
+        elem = E.article(idproprio=article.localidentifier, lang='fr', ordseq=str(num_articles))
+        self.root.getroot().append(elem)

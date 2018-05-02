@@ -3,6 +3,7 @@ from itertools import groupby
 from operator import attrgetter
 from string import ascii_uppercase
 import io
+import random
 
 from django.conf import settings
 from django.shortcuts import redirect
@@ -34,6 +35,7 @@ from erudit.models import Discipline
 from erudit.models import Article
 from erudit.models import Journal
 from erudit.models import Issue
+from erudit.solr.models import get_fedora_ids
 from erudit.utils import locale_aware_sort
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
@@ -479,7 +481,6 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin,
         FedoraServiceRequiredMixin,
-        RedirectToExternalSourceMixin,
         FallbackObjectViewMixin,
         ContentAccessCheckMixin,
         SingleArticleWithScholarMetadataMixin,
@@ -490,27 +491,15 @@ class BaseArticleDetailView(
     model = Article
     tracking_view_type = 'html'
 
-    def get_object(self, queryset=None, allow_external=False):
-        if allow_external:
-            queryset = Article.objects
-
+    def get_object(self, queryset=None):
         try:
-            return super().get_object(queryset=queryset)
-        except Http404:
-            if not allow_external:
-                if Article.objects.filter(localidentifier=self.kwargs['localid']).exists():
-                    # we don't want to return an ephemeral article if we have an existing external
-                    # object. raise the 404 so that the external redirect system kick in.
-                    raise
-
-            try:
-                return Article.from_fedora_ids(
-                    journal_code=self.kwargs['journal_code'],
-                    issue_id=self.kwargs['issue_localid'],
-                    article_id=self.kwargs['localid'],
-                )
-            except Article.DoesNotExist:
-                raise Http404()
+            return Article.from_fedora_ids(
+                journal_code=self.kwargs['journal_code'],
+                issue_id=self.kwargs['issue_localid'],
+                article_id=self.kwargs['localid'],
+            )
+        except Article.DoesNotExist:
+            raise Http404()
 
     def get_context_data(self, **kwargs):
 
@@ -544,20 +533,17 @@ class BaseArticleDetailView(
         context['titles'] = self.object.erudit_object.get_titles()
 
         # Get all article from associated Issue
-        related_articles = Article.objects \
-            .select_related('issue', 'issue__journal', 'issue__journal__collection') \
-            .filter(issue=obj.issue) \
-            .order_by('ordseq')
+        related_articles = list(obj.issue.get_articles_from_fedora())
 
         # Pick the previous article and the next article
         try:
-            sorted_articles = list(related_articles)
-            if obj in sorted_articles:
-                obj_index = sorted_articles.index(obj)
+            if obj in related_articles:
+                obj_index = related_articles.index(obj)
             else:
-                obj_index = len(sorted_articles)
-            previous_article = sorted_articles[obj_index - 1] if obj_index > 0 else None
-            next_article = sorted_articles[obj_index + 1] if obj_index + 1 < len(sorted_articles) \
+                obj_index = len(related_articles)
+            previous_article = related_articles[obj_index - 1] if obj_index > 0 else None
+            next_article = related_articles[obj_index + 1] \
+                if obj_index + 1 < len(related_articles) \
                 else None
         except AttributeError:  # pragma: no cover
             # Passes the error if we are in DEBUG mode
@@ -570,7 +556,8 @@ class BaseArticleDetailView(
         context['in_citation_list'] = self.object.solr_id in self.request.saved_citations
 
         # return 4 randomly
-        context['related_articles'] = related_articles.order_by('?')[:4]
+        random.shuffle(related_articles)
+        context['related_articles'] = related_articles[:4]
 
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
@@ -698,9 +685,10 @@ class IdEruditArticleRedirectView(RedirectView):
     pattern_name = 'public:journal:article_detail'
 
     def get_redirect_url(self, *args, **kwargs):
-        article = get_object_or_404(
-            Article.objects.select_related('issue', 'issue__journal'),
-            localidentifier=kwargs['localid'])
+        fedora_ids = get_fedora_ids(kwargs['localid'])
+        if not fedora_ids:
+            raise Http404()
+        article = Article.from_fedora_ids(*fedora_ids)
         return reverse(self.pattern_name, args=[
             article.issue.journal.code, article.issue.volume_slug, article.issue.localidentifier,
             article.localidentifier, ])

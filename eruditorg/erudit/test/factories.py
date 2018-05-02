@@ -1,6 +1,7 @@
 import datetime as dt
 
 import factory
+import pysolr
 from faker import Factory
 
 from ..fedora import repository
@@ -196,6 +197,17 @@ class ArticleFactory(factory.django.DjangoModelFactory):
                 repository.api.set_article_xml(obj.pid, xml)
             else:
                 repository.api.register_article(obj.pid)
+
+    @factory.post_generation
+    def add_to_fedora_issue(obj, create, extracted, **kwargs):
+        if obj.localidentifier and (extracted is None or extracted):
+            repository.api.add_article_to_parent_publication(obj)
+
+    @factory.post_generation
+    def authors(obj, create, extracted, **kwargs):
+        if obj.pid and obj.issue.is_published:
+            solr_client = pysolr.Solr()
+            solr_client.add_article(obj, authors=extracted)
 
 
 class OpenAccessArticleFactory(ArticleFactory):

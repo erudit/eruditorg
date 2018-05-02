@@ -34,7 +34,6 @@ from core.metrics.conf import settings as metrics_settings
 
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
-from apps.public.journal.views import ArticleXmlView
 
 from base.test.testcases import EruditClientTestCase
 
@@ -313,11 +312,9 @@ class TestJournalDetailView:
 
 
 class TestJournalAuthorsListView:
-    def test_provides_only_authors_for_the_first_available_letter_by_default(self, solr_client):
+    def test_provides_only_authors_for_the_first_available_letter_by_default(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
-
-        solr_client.add_article(article_1, ['btest', 'ctest1', 'ctest2'])
+        ArticleFactory.create(issue=issue_1, authors=['btest', 'ctest1', 'ctest2'])
 
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url)
@@ -325,10 +322,9 @@ class TestJournalAuthorsListView:
         assert response.status_code == 200
         assert set(response.context['authors_dicts'].keys()) == {'btest', }
 
-    def test_only_provides_authors_for_the_given_letter(self, solr_client):
+    def test_only_provides_authors_for_the_given_letter(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
-        solr_client.add_article(article_1, ['btest', 'ctest1'])
+        ArticleFactory.create(issue=issue_1, authors=['btest', 'ctest1'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, letter='b')
 
@@ -337,11 +333,9 @@ class TestJournalAuthorsListView:
         assert len(authors_dicts) == 1
         assert authors_dicts.keys() == {'btest', }
 
-    def test_can_provide_contributors_of_article(self, solr_client):
+    def test_can_provide_contributors_of_article(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
-
-        solr_client.add_article(article_1, ['btest', 'ctest1'])
+        ArticleFactory.create(issue=issue_1, authors=['btest', 'ctest1'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, letter='b')
 
@@ -350,15 +344,13 @@ class TestJournalAuthorsListView:
         contributors = authors_dicts['btest'][0]['contributors']
         assert contributors == ['ctest1']
 
-    def test_dont_show_unpublished_articles(self, solr_client):
+    def test_dont_show_unpublished_articles(self):
         issue1 = IssueFactory.create(is_published=False)
         issue2 = IssueFactory.create(journal=issue1.journal, is_published=True)
-        article1 = ArticleFactory.create(issue=issue1)
-        ArticleFactory.create(issue=issue2)
+        ArticleFactory.create(issue=issue1, authors=['foo'])
+        ArticleFactory.create(issue=issue2, authors=['foo'])
 
-        solr_client.add_article(article1, ['foo'])
         # Unpublished articles aren't in solr
-
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue1.journal.code})
         response = Client().get(url, letter='f')
 
@@ -366,13 +358,10 @@ class TestJournalAuthorsListView:
         # only one of the two articles are there
         assert len(authors_dicts['foo']) == 1
 
-    def test_can_filter_by_article_type(self, solr_client):
+    def test_can_filter_by_article_type(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        article_2 = ArticleFactory.create(issue=issue_1, type='compterendu')  # noqa
-
-        solr_client.add_article(article_1, ['btest'])
-        solr_client.add_article(article_2, ['btest'])
+        ArticleFactory.create(issue=issue_1, type='article', authors=['btest'])
+        ArticleFactory.create(issue=issue_1, type='compterendu', authors=['btest'])
 
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, article_type='article')
@@ -380,44 +369,39 @@ class TestJournalAuthorsListView:
         authors_dicts = response.context['authors_dicts']
         assert len(authors_dicts) == 1
 
-    def test_can_filter_by_article_type_when_no_article_of_type(self, solr_client):
+    def test_can_filter_by_article_type_when_no_article_of_type(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        solr_client.add_article(article_1, ['atest'])
+        ArticleFactory.create(issue=issue_1, type='article', authors=['atest'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, {"article_type": 'compterendu'})
 
         assert response.status_code == 200
 
-    def test_only_letters_with_results_are_active(self, solr_client):
+    def test_only_letters_with_results_are_active(self):
         """ Test that for a given selection in the authors list view, only the letters for which
         results are present are shown """
         issue_1 = IssueFactory.create(journal=JournalFactory(), date_published=dt.datetime.now())
-        article1 = ArticleFactory.create(issue=issue_1, type='article')
-        article2 = ArticleFactory.create(issue=issue_1, type='compterendu')
-        solr_client.add_article(article1, ['atest'])
-        solr_client.add_article(article2, ['btest'])
+        ArticleFactory.create(issue=issue_1, type='article', authors=['atest'])
+        ArticleFactory.create(issue=issue_1, type='compterendu', authors=['btest'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, {"article_type": 'compterendu'})
 
         assert response.status_code == 200
         assert not response.context['letters_exists'].get('A')
 
-    def test_do_not_fail_when_user_requests_a_letter_with_no_articles(self, solr_client):
+    def test_do_not_fail_when_user_requests_a_letter_with_no_articles(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1, type='article')
-        solr_client.add_article(article_1, ['btest'])
+        ArticleFactory.create(issue=issue_1, type='article', authors=['btest'])
 
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url, {"article_type": 'compterendu', 'letter': 'A'})
 
         assert response.status_code == 200
 
-    def test_inserts_the_current_letter_in_the_context(self, solr_client):
+    def test_inserts_the_current_letter_in_the_context(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
+        ArticleFactory.create(issue=issue_1, authors=['btest', 'ctest1', 'ctest2'])
 
-        solr_client.add_article(article_1, ['btest', 'ctest1', 'ctest2'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response_1 = Client().get(url)
         response_2 = Client().get(url, {'letter': 'C'})
@@ -430,11 +414,10 @@ class TestJournalAuthorsListView:
         assert response_2.context['letter'] == 'C'
         assert response_3.context['letter'] == 'B'
 
-    def test_inserts_a_dict_with_the_letters_counts_in_the_context(self, solr_client):
+    def test_inserts_a_dict_with_the_letters_counts_in_the_context(self):
         issue_1 = IssueFactory.create(date_published=dt.datetime.now())
-        article_1 = ArticleFactory.create(issue=issue_1)
+        ArticleFactory.create(issue=issue_1, authors=['btest', 'ctest1', 'ctest2'])
 
-        solr_client.add_article(article_1, ['btest', 'ctest1', 'ctest2'])
         url = reverse('public:journal:journal_authors_list', kwargs={'code': issue_1.journal.code})
         response = Client().get(url)
 
@@ -446,11 +429,9 @@ class TestJournalAuthorsListView:
             assert not response.context['letters_exists'][letter.upper()]
 
     @pytest.mark.parametrize('article_type,expected', [('compterendu', True), ('article', False)])
-    def test_view_has_multiple_article_types(self, article_type, expected, solr_client):
-        article1 = ArticleFactory.create(type='article')
-        article2 = ArticleFactory.create(issue=article1.issue, type=article_type)
-        solr_client.add_article(article1, ['btest'])
-        solr_client.add_article(article2, ['btest'])
+    def test_view_has_multiple_article_types(self, article_type, expected):
+        article1 = ArticleFactory.create(type='article', authors=['btest'])
+        ArticleFactory.create(issue=article1.issue, type=article_type, authors=['btest'])
 
         url = reverse(
             'public:journal:journal_authors_list',
@@ -511,11 +492,11 @@ class TestIssueDetailView:
         issue = IssueFactory.create()
         a1 = ArticleFactory.create(issue=issue, localidentifier='31492ac')
         a2 = ArticleFactory.create(issue=issue, localidentifier='31491ac')
-        ArticleFactory.create(issue=issue, localidentifier='not-there')
+        ArticleFactory.create(issue=issue, localidentifier='not-there', add_to_fedora_issue=False)
         url = issue_detail_url(issue)
         response = Client().get(url)
         articles = response.context['articles']
-        assert articles == [a2, a1]
+        assert articles == [a1, a2]
 
 
 class TestArticleDetailView:
@@ -526,7 +507,7 @@ class TestArticleDetailView:
         # argument here is a parametrization argument which causes this test to run for each
         # fixture we have.
         monkeypatch.setattr(metrics_settings, 'ACTIVATED', False)
-        monkeypatch.setattr(Article, 'get_erudit_object', lambda self: eruditarticle)
+        monkeypatch.setattr(Article, 'get_erudit_object', lambda *a, **kw: eruditarticle)
         journal = JournalFactory.create(open_access=True)
         issue = IssueFactory.create(
             journal=journal, date_published=dt.datetime.now(), localidentifier='test_issue')
@@ -552,19 +533,6 @@ class TestArticleDetailView:
             data = {'ticket': ticket}
         response = Client().get(url, data=data)
         assert response.status_code == expected_code
-
-    def test_fedora_article_with_external_url_redirects(self):
-        # When we have an article with a fedora localidentifier *and* external_url set, we redirect
-        # to that external url when we hit the detail view.
-        # ref #1651
-        issue = IssueFactory.create(
-            date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(
-            issue=issue, localidentifier='articleid', external_url='http://example.com')
-        url = article_detail_url(article)
-        response = Client().get(url)
-        assert response.status_code == 302
-        assert response.url == 'http://example.com'
 
     def test_dont_cache_articles_of_unpublished_issues(self):
         issue = IssueFactory.create(is_published=False)
@@ -704,8 +672,7 @@ class TestArticleRawPdfView:
         issue = IssueFactory.create(
             date_published=dt.datetime.now(), localidentifier='test')
         article = ArticleFactory.create(
-            issue=issue, localidentifier='articleid',
-            external_url='http://example.com')
+            issue=issue, localidentifier='articleid', external_url='http://example.com')
         url = article_raw_pdf_url(article)
         response = Client().get(url)
         assert response.status_code == 302
@@ -966,41 +933,24 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         assert self.FALLBACK_URL in redirect_url
 
 
-class TestArticleXmlView(TestCase):
-    @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
-    @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
-    def test_can_retrieve_xml_of_existing_articles(self, mock_ds, mock_pdf):
-
-        with open(os.path.join(FIXTURE_ROOT, '1023796ar.xml'), 'r') as f:
-            from eulxml.xmlmap import load_xmlobject_from_file
-            mock_pdf.content = load_xmlobject_from_file(f)
-        mock_ds = ['ERUDITXSD300', ]  # noqa
-
+class TestArticleXmlView:
+    def test_can_retrieve_xml_of_existing_articles(self):
+        journal = JournalFactory(open_access=True)
         issue = IssueFactory.create(
-            year=2010,
+            journal=journal, year=2010, is_published=True,
             date_published=dt.datetime.now() - dt.timedelta(days=1000))
-        IssueFactory.create(
-            journal=issue.journal, year=2010,
-            date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
+
         journal_id = issue.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = reverse('public:journal:article_raw_xml', args=(
             journal_id, issue.volume_slug, issue_id, article_id
         ))
-        request = RequestFactory().get(url)
-        request.user = AnonymousUser()
-        request.subscriptions = UserSubscriptions()
+        response = Client().get(url)
 
-        # Run
-        response = ArticleXmlView.as_view()(
-            request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
-            localid=article_id)
-
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'application/xml')
+        assert response.status_code == 200
+        assert response['Content-Type'] == 'application/xml'
 
 
 class TestArticleMediaView(TestCase):

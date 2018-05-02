@@ -17,7 +17,6 @@ from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
-from eruditarticle.utils import remove_xml_namespaces
 from eulfedora.util import RequestFailed
 from PIL import Image
 from polymorphic.manager import PolymorphicManager
@@ -512,7 +511,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             return Issue.objects.get(localidentifier=issue_id)
         except Issue.DoesNotExist:
             try:
-                journal = Journal.objects.get(code=journal_code)
+                journal = Journal.objects.get(
+                    Q(code=journal_code) | Q(localidentifier=journal_code))
             except Journal.DoesNotExist:
                 raise Issue.DoesNotExist()
             else:
@@ -557,8 +557,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     def get_articles_from_fedora(self):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
         # elegant way to generalize that code. This mechanism will probably change soon anyway.
-        summary_tree = remove_xml_namespaces(
-            et.fromstring(self.fedora_object.summary.content.serialize()))
+        summary_tree = self.fedora_object.summary.content.node
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:

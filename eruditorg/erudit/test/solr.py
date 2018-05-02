@@ -13,6 +13,8 @@ from luqum.parser import parser
 
 SOLR2DOC = {
     'ID': 'id',
+    'NumeroID': 'issue_localidentifier',
+    'RevueID': 'journal_code',
     'AuteurNP_fac': 'authors',
     'Auteur_tri': 'authors',
     'Titre_fr': 'title',
@@ -34,7 +36,8 @@ class SolrDocument:
         self.type = type
         self.authors = authors
         OPTIONAL_ARGS = [
-            'article_type', 'journal_code', 'collection', 'year', 'date_added', 'repository']
+            'article_type', 'journal_code', 'collection', 'year', 'date_added', 'repository',
+            'issue_localidentifier']
         for attr in OPTIONAL_ARGS:
             val = kwargs.get(attr)
             if isinstance(val, int):
@@ -43,18 +46,36 @@ class SolrDocument:
 
     @staticmethod
     def from_article(article, authors=None):
+        # NOTE ABOUT get_erudit_object(): You might think that it's weird how we check for
+        # get_erudit_object() and call it instead of relying on Article's properties that proxy
+        # erudit_object. That's because we very often don't want a call to `from_article()` to
+        # cause erudit_object's property to be cached because it's possible we're not done tweaking
+        # the fedora XML yet (and it we cache `erudit_object` before we tweak, we won't get tweaked
+        # values during our tests).
+        assert article.pid is not None
+        if hasattr(article, 'get_erudit_object'):
+            erudit_article = article.get_erudit_object(fedora_object=article.get_fedora_object())
+        else:
+            erudit_article = None
+
         if not authors:
-            if hasattr(article, 'erudit_object'):
-                authors = article.erudit_object.get_authors()
+            if erudit_article:
+                authors = erudit_article.get_authors()
+                authors = [a.format_name() for a in authors]
             authors = authors or []
         article_type = article.type
         if article_type == 'compterendu':
             article_type = 'Compte rendu'
         journal = article.issue.journal
+        if erudit_article:
+            title = erudit_article.get_formatted_title()
+        else:
+            title = article.title
         return SolrDocument(
             id=article.localidentifier,
             journal_code=journal.code,
-            title=article.title,
+            issue_localidentifier=article.issue.localidentifier,
+            title=title,
             type='Article' if article.issue.journal.is_scientific() else 'Culturel',
             article_type=article_type,
             authors=authors,

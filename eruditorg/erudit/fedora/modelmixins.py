@@ -67,7 +67,7 @@ class FedoraMixin:
     def erudit_class(self):
         return self.get_erudit_class()
 
-    def get_erudit_object(self):
+    def get_erudit_object(self, fedora_object=None):
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
@@ -76,7 +76,9 @@ class FedoraMixin:
 
         try:
             assert fedora_xml_content is None
-            fedora_xml_content = self.fedora_object.xml_content
+            if fedora_object is None:
+                fedora_object = self.fedora_object
+            fedora_xml_content = fedora_object.xml_content
         except (RequestFailed, ConnectionError) as e:  # pragma: no cover
             logger.warn("Exception: {}, pid: {}".format(e, self.pid))
             if settings.DEBUG:
