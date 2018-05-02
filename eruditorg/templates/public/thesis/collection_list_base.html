@@ -25,8 +25,8 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' provider.code %}",
-      "name": "{{ provider.name }}"
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_home' repository.code %}",
+      "name": "{{ repository.name }}"
     }
   },{% block structured_data_breadcrumb_tail %}{% endblock structured_data_breadcrumb_tail %}]
 }
@@ -40,7 +40,7 @@
 {% block breadcrumb %}
 {{ block.super }}
 <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
-<li><a href="{% url 'public:thesis:collection_home' provider.code %}">{{ provider.name }}</a></li>
+<li><a href="{% url 'public:thesis:collection_home' repository.code %}">{{ repository.name }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -50,14 +50,14 @@
       <div class="row">
         <div class="col-sm-9 col-xs-8">
           <h1>
-            <span class="thesis-collection">{{ provider.name }}</span>
+            <span class="thesis-collection">{{ repository.name }}</span>
               <span class="thesis-page-title">{% block inner_title %}{% endblock inner_title %}</span>
             </h1>
         </div>
         <div class="col-md-2 col-md-offset-1 col-sm-3 col-xs-4">
-          {% if provider.logo %}
+          {% if repository.logo %}
           <span class="collection-logo">
-            <img src="{{ provider.logo.url }}" alt="{% trans 'Logo pour'%} {{ provider.name }}" class="img-responsive"/>
+            <img src="{{ repository.logo.url }}" alt="{% trans 'Logo pour'%} {{ repository.name }}" class="img-responsive"/>
           </span>
           {% endif %}
         </div>

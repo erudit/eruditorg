@@ -1,32 +1,32 @@
 {% extends "public/thesis/collection_list_base.html" %}
 {% load humanize i18n %}
 
-{% block title %}{% blocktrans with year=publication_year provider=provider.name %}Thèses et mémoires publiés en {{ year }}{% endblocktrans %} – {{ provider }}{% endblock title %}
+{% block title %}{% blocktrans with year=publication_year repository=repository.name %}Thèses et mémoires publiés en {{ year }}{% endblocktrans %} – {{ repository }}{% endblock title %}
 
-{% block meta_description %}{% blocktrans with year=publication_year provider=provider.name %}Consultez les thèses et mémoires de {{ provider }} publiés en {{ year }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% blocktrans with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiés en {{ year }} sur la plateforme Érudit.{% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{% blocktrans with provider=provider.name %}Thèses et mémoires de {{ provider }}{% endblocktrans %}">
+<meta property="og:title" content="{% blocktrans with repository=repository.name %}Thèses et mémoires de {{ repository }}{% endblocktrans %}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
-{% if provider.logo %}
-<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ provider.logo.url }}">
+{% if repository.logo %}
+<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
-<meta property="og:description" content="{% blocktrans with year=publication_year provider=provider.name %}Consultez les thèses et mémoires de {{ provider }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta property="og:description" content="{% blocktrans with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta name="twitter:title" content="{% trans 'Thèses et mémoires' %} – Érudit">
-{% if provider.logo %}
-<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ provider.logo.url }}">
+{% if repository.logo %}
+<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ repository.logo.url }}">
 {% endif %}
-<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ provider.name }}">
-<meta name="twitter:description" content="{% blocktrans with year=publication_year provider=provider.name %}Consultez les thèses et mémoires de {{ provider }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
+<meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ repository.name }}">
+<meta name="twitter:description" content="{% blocktrans with year=publication_year repository=repository.name %}Consultez les thèses et mémoires de {{ repository }} publiées en {{ year }} sur la plateforme Érudit.{% endblocktrans %}">
 {% endblock meta_tags %}
 
 {% block structured_data_breadcrumb_tail %}
@@ -34,14 +34,14 @@
   "@type": "ListItem",
   "position": 4,
   "item": {
-    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_year' provider.code publication_year %}",
+    "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:thesis:collection_list_per_year' repository.code publication_year %}",
     "name": "{{ publication_year }}"
   }
 }
 {% endblock structured_data_breadcrumb_tail %}
 
 {% block breadcrumb %}
-  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_year' provider.code publication_year %}">{{ publication_year }}</a></li>
+  {{ block.super }} <li><a href="{% url 'public:thesis:collection_list_per_year' repository.code publication_year %}">{{ publication_year }}</a></li>
 {% endblock breadcrumb %}
 
 {% block inner_title %}
@@ -56,7 +56,7 @@
   <select id="switch_year" onChange="window.location.href=this.value">
     {% for current_year, count in other_publication_years %}
     <option
-      value="{% url 'public:thesis:collection_list_per_year' provider.code current_year %}?sort_by={{ sort_by }}"
+      value="{% url 'public:thesis:collection_list_per_year' repository.code current_year %}?sort_by={{ sort_by }}"
       {% if current_year == publication_year %} selected disabled{% endif %}>
       {{ current_year }} ({{ count|intcomma }})
     </option>

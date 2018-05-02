@@ -726,7 +726,9 @@ class Command(BaseCommand):
     ):
         """ Imports an article using the EruditArticle v3 specification. """
         article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
-        article.sync_with_erudit_object(article_erudit_object, ephemeral=False)
+        article.sync_with_erudit_object(article_erudit_object)
+        self.clean()
+        self.save()
 
         if self.test_xslt:
             try:

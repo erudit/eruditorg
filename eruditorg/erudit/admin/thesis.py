@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from ..models import ThesisProvider
+from ..models import ThesisRepository
 
-admin.site.register(ThesisProvider)
+admin.site.register(ThesisRepository)

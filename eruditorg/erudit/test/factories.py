@@ -226,13 +226,13 @@ class LegacyOrganisationProfileFactory(factory.django.DjangoModelFactory):
         model = 'erudit.LegacyOrganisationProfile'
 
 
-class ThesisProviderFactory(factory.django.DjangoModelFactory):
-    code = factory.Sequence(lambda n: 'provider{}'.format(n))
-    name = factory.Sequence(lambda n: 'Provider{}'.format(n))
+class ThesisRepositoryFactory(factory.django.DjangoModelFactory):
+    code = factory.Sequence(lambda n: 'repository{}'.format(n))
+    name = factory.Sequence(lambda n: 'repository{}'.format(n))
     solr_name = factory.LazyAttribute(lambda obj: obj.name)
 
     class Meta:
-        model = 'erudit.ThesisProvider'
+        model = 'erudit.ThesisRepository'
         django_get_or_create = ('code',)
 
 
@@ -243,8 +243,8 @@ class ThesisFactory(factory.Factory):
     authors = ["{}, {}".format(faker.last_name(), faker.first_name())]
     year = faker.year()
     date_added = factory.LazyFunction(lambda: dt.datetime.now().isoformat())
-    provider = factory.SubFactory(ThesisProviderFactory, code='default')
-    collection = factory.LazyAttribute(lambda obj: obj.provider.solr_name)
+    repository = factory.SubFactory(ThesisRepositoryFactory, code='default')
+    collection = factory.LazyAttribute(lambda obj: obj.repository.solr_name)
     url = faker.url()
 
     class Meta:

@@ -509,7 +509,7 @@ class BaseArticleDetailView(
             article.issue = issue
             article.localidentifier = self.kwargs['localid']
             if article.is_in_fedora:
-                article.sync_with_erudit_object(ephemeral=True)
+                article.sync_with_erudit_object()
                 return article
             else:
                 raise
@@ -522,7 +522,7 @@ class BaseArticleDetailView(
         # Get all article from associated Issue
         related_articles = Article.objects \
             .select_related('issue', 'issue__journal', 'issue__journal__collection') \
-            .prefetch_related('authors').filter(issue=obj.issue) \
+            .filter(issue=obj.issue) \
             .order_by('ordseq')
 
         # Pick the previous article and the next article

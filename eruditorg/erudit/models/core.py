@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 from polymorphic.models import PolymorphicModel
-from taggit.managers import TaggableManager
-from taggit.models import GenericTaggedItemBase
-from taggit.models import TagBase
 
-from ..abstract_models import Person
 from ..managers.core import LegacyOrganisationManager
 from ..modelfields import SizeConstrainedImageField
 
@@ -59,19 +53,6 @@ class LegacyOrganisationProfile(models.Model):
 
     def __str__(self):
         return "{} / {}".format(self.organisation.name, self.account_id)
-
-
-class Affiliation(models.Model):
-    """ A simple affiliation. """
-    name = models.CharField(max_length=600, verbose_name=_('Nom'))
-    """ The name of the affiliation. """
-
-    class Meta:
-        verbose_name = _('Affiliation')
-        verbose_name_plural = _('Affiliations')
-
-    def __str__(self):
-        return self.name
 
 
 class Collection(models.Model):
@@ -126,27 +107,6 @@ class Discipline(models.Model):
         return self.name
 
 
-class Author(Person):
-    """ A simple author. """
-    suffix = models.CharField(max_length=50, verbose_name=_('Suffixe'), blank=True, null=True)
-
-    class Meta:
-        verbose_name = _('Auteur')
-        verbose_name_plural = _('Auteurs')
-
-    def __str__(self):
-        if self.suffix:
-            # XXX why is suffix first?
-            return _('{suffix} {firstname} {lastname}').format(
-                suffix=self.suffix, firstname=self.firstname, lastname=self.lastname)
-        return "{firstname} {lastname}".format(lastname=self.lastname, firstname=self.firstname)
-
-    def articles_in_journal(self, journal):
-        """ Returns the articles written by the author for a given journal. """
-        return self.article_set.select_related('issue') \
-            .filter(issue__journal_id=journal.id)
-
-
 class Publisher(models.Model):
     """ A simple publisher. """
     name = models.CharField(max_length=255, verbose_name=_('Nom'))
@@ -170,18 +130,19 @@ class Copyright(models.Model):
         verbose_name_plural = _("Droits d'auteurs")
 
 
-class KeywordTag(TagBase):
-    """ A keyword tag that can be used to add tags to a model. """
-    language = models.CharField(max_length=10, verbose_name=_('Code langue'), blank=True, null=True)
-    """ The language code associated with the keyword """
+class ThesisRepository(models.Model):
+    code = models.CharField(max_length=10, unique=True, verbose_name=_('Code'))
+    name = models.CharField(max_length=200, verbose_name=_('Nom'))
+    # Most of the time, same as "name", but not always...
+    solr_name = models.CharField(max_length=200, db_index=True, verbose_name=_('Nom dans Solr'))
+    logo = models.ImageField(verbose_name=_('Logo'), blank=True)
 
     class Meta:
-        verbose_name = _('Mot-clé')
-        verbose_name_plural = _('Mots-clés')
+        verbose_name = _("Dépôt institutionnel")
+        verbose_name_plural = _("Dépôts institutionnels")
 
-
-class KeywordTaggedWhatever(GenericTaggedItemBase):
-    tag = models.ForeignKey(KeywordTag, related_name='%(app_label)s_%(class)s_items')
+    def __str__(self):
+        return self.code
 
 
 class EruditDocument(PolymorphicModel):
@@ -194,9 +155,6 @@ class EruditDocument(PolymorphicModel):
         help_text=_('Identifiant Fedora du document'),
     )
     """ The unique identifier of an Érudit document. """
-
-    keywords = TaggableManager(blank=True, through=KeywordTaggedWhatever)
-    """ An Érudit document can be associated with multiple keywords. """
 
     class Meta:
         verbose_name = _('Document Érudit')

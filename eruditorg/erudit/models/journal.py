@@ -42,7 +42,7 @@ from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 from ..utils import get_sort_key_func, strip_stopwords_prefix
 
-from .core import Collection, Copyright, EruditDocument, Publisher, Author, Affiliation
+from .core import Collection, Copyright, EruditDocument, Publisher
 
 cache = caches['fedora']
 
@@ -766,9 +766,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     issue = models.ForeignKey('Issue', related_name='articles', verbose_name=_('Numéro'))
     """ The issue of the article """
 
-    authors = models.ManyToManyField('Author', verbose_name=_('Auteurs'))
-    """ An article can have many authors """
-
     doi = models.CharField(max_length=50, verbose_name=_('DOI'), blank=True, null=True)
     """ The DOI of the article """
 
@@ -842,13 +839,10 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
     def get_formatted_authors_chicago(self):
         return self.get_formatted_authors(style='chicago')
 
-    def sync_with_erudit_object(self, erudit_object=None, ephemeral=False):
+    def sync_with_erudit_object(self, erudit_object=None):
         """ Copy ``erudit_object``'s values in appropriate fields in ``self``.
 
         :param erudit_object: A ``EruditArticle``.
-        :param ephemeral: If True, our Article instance is a short lived instance. Don't save after
-                          sync and don't bother syncing authors (they're only there for author index
-                          pages which don't index ephemeral articles).
         """
         if erudit_object is None:
             erudit_object = self.erudit_object
@@ -872,38 +866,6 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         self.first_page = erudit_object.first_page
         self.last_page = erudit_object.last_page
         self.language = erudit_object.language
-
-        if ephemeral:
-            return
-
-        self.clean()
-        self.save()
-
-        self.authors.clear()
-        for author in erudit_object.get_authors():
-            firstname = author.firstname
-            lastname = author.lastname
-            suffix = author.suffix
-            organization = author.organization
-            affiliations = author.affiliations
-
-            author_query_kwargs = {
-                'firstname': firstname, 'lastname': lastname, 'othername': organization}
-
-            author = Author.objects.filter(**author_query_kwargs).first()
-            if author is None:
-                author = Author(**author_query_kwargs)
-            author.suffix = suffix
-            author.save()
-
-            author.affiliations.clear()
-            for aff in affiliations:
-                if not aff:
-                    continue
-                affiliation, _ = Affiliation.objects.get_or_create(name=aff)
-                author.affiliations.add(affiliation)
-
-            self.authors.add(author)
 
     @property
     def title(self):
