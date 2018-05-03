@@ -701,6 +701,9 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def name_with_themes(self):
+        if not self.is_in_fedora:
+            return None
+
         def _format_theme(theme):
             if theme.get('html_subname'):
                 return "{html_name}: {html_subname}".format(
