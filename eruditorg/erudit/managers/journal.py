@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django.db import models
 from django.db.models import Q
 from django.http.response import Http404
-from polymorphic.manager import PolymorphicManager
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
@@ -97,20 +94,5 @@ class InternalIssueManager(models.Manager):
         """ Returns all the internal Issue instances. """
         has_no_external_url = Q(external_url__isnull=True) | Q(external_url='')
         return super(InternalIssueManager, self).get_queryset().filter(
-            has_no_external_url
-        )
-
-
-class InternalArticleManager(PolymorphicManager):
-    """ Provides methods to work with articles that are not external.
-
-    That is articles without external URLs. We make the assumption that instances without external
-    URLs are instances that should be fully displayed.
-    """
-
-    def get_queryset(self):
-        """ Returns all the internal Article instances. """
-        has_no_external_url = Q(external_url__isnull=True) | Q(external_url='')
-        return super(InternalArticleManager, self).get_queryset().filter(
             has_no_external_url
         )

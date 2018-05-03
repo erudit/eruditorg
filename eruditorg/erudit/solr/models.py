@@ -365,3 +365,15 @@ def get_fedora_ids(localidentifier):
         return (doc['RevueID'], doc['NumeroID'], doc['ID'])
     else:
         return None
+
+
+def get_all_articles(rows, page):
+    query = 'Fonds_fac:Érudit Corpus_fac:Article'
+    args = {
+        'q': query,
+        'facet.limit': '0',
+        'rows': str(rows),
+        'start': str((page - 1) * rows),
+    }
+    solr_results = client.search(**args)
+    return [Article(d) for d in solr_results.docs]

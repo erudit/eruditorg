@@ -54,7 +54,7 @@ class JournalFactory(factory.django.DjangoModelFactory):
         IssueFactory(journal=instance)
         return instance
 
-    collection = factory.SubFactory(CollectionFactory, code='erudit')
+    collection = factory.SubFactory(CollectionFactory, code='erudit', name='Érudit')
     type = factory.LazyAttribute(lambda o: JournalTypeFactory(code=o.type_code))
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))

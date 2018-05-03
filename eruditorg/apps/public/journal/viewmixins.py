@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.http import Http404
-from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property
 
 from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
+from erudit.solr.models import get_fedora_ids
 
 from core.metrics.metric import metric
 
@@ -113,11 +111,22 @@ class ContentAccessCheckMixin:
 
 
 class SingleArticleMixin:
-    """ Simply allows retrieving an Article instance. """
-
     def get_object(self, queryset=None):
-        queryset = Article.internal_objects.all() if queryset is None else queryset
-        return get_object_or_404(queryset, localidentifier=self.kwargs['localid'])
+        # We support two IDing scheme here: full PID or localidentifier-only. If we have the full
+        # PID, great! that saves us a request to Solr. If not, it's alright too, we just need to
+        # fetch the full PID from Solr first.
+        journal_code = self.kwargs.get('journal_code')
+        issue_localid = self.kwargs.get('issue_localid')
+        localidentifier = self.kwargs['localid']
+        if not (journal_code and issue_localid):
+            fedora_ids = get_fedora_ids(localidentifier)
+            if fedora_ids is None:
+                raise Http404()
+            journal_code, issue_localid, localidentifier = fedora_ids
+        try:
+            return Article.from_fedora_ids(journal_code, issue_localid, localidentifier)
+        except Article.DoesNotExist:
+            raise Http404()
 
 
 class SingleArticleWithScholarMetadataMixin(SingleArticleMixin):

@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
+import datetime as dt
 
 from django.contrib import sitemaps
 from django.core.urlresolvers import reverse
 
-from erudit.models import Article
 from erudit.models import Issue
 from erudit.models import Journal
+from erudit.solr.models import get_all_articles
 
 
 class JournalSitemap(sitemaps.Sitemap):  # pragma: no cover
@@ -48,16 +48,29 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
     limit = 1000
     priority = 0.5
 
+    def get_urls(self, page=1, *args, **kwargs):
+        self.page = int(page)
+        return super().get_urls(page, *args, **kwargs)
+
+    @property
+    def paginator(self):
+        items = self.items()
+
+        class FakePaginator:
+            def page(self, number):
+
+                class FakePage:
+                    object_list = items
+
+                return FakePage()
+
+        return FakePaginator()
+
     def items(self):
-        return Article.internal_objects.select_related('issue', 'issue__journal') \
-            .filter(publication_allowed=True) \
-            .filter(issue__is_published=True)
+        return get_all_articles(self.limit, getattr(self, 'page', 1))
 
     def lastmod(self, obj):
-        return obj.fedora_updated
+        return dt.datetime.strptime(obj.solr_data['DateAjoutIndex'][:10], '%Y-%m-%d')
 
     def location(self, obj):
-        return reverse(
-            'public:journal:article_detail', args=(
-                obj.issue.journal.code, obj.issue.volume_slug, obj.issue.localidentifier,
-                obj.localidentifier))
+        return obj.get_absolute_url()

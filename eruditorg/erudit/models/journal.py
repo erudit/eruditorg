@@ -8,6 +8,7 @@ from lxml import etree as et
 from django.core.cache import caches
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q, Case, When
 from django.utils.functional import cached_property
@@ -19,7 +20,6 @@ from eruditarticle.objects import EruditJournal
 from eruditarticle.objects import EruditPublication
 from eulfedora.util import RequestFailed
 from PIL import Image
-from polymorphic.manager import PolymorphicManager
 from requests.exceptions import ConnectionError
 
 from ..abstract_models import FedoraDated
@@ -34,7 +34,6 @@ from ..fedora.cache import cache_fedora_result
 from ..fedora.utils import localidentifier_from_pid
 
 
-from ..managers import InternalArticleManager
 from ..managers import InternalIssueManager
 from ..managers import InternalJournalManager
 from ..managers import LegacyJournalManager
@@ -802,12 +801,16 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         verbose_name=_("Publication autorisée par le titulaire du droit d'auteur"), default=True)
     """ Defines if the article can be published on the Érudit platform accrding to the copyright holders """  # noqa
 
-    objects = PolymorphicManager()
-    internal_objects = InternalArticleManager()
-
     class Meta:
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
+
+    def get_absolute_url(self):
+        return reverse(
+            'public:journal:article_detail', args=(
+                self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
+                self.localidentifier)
+        )
 
     def get_formatted_authors(self, style=None):
         return self.erudit_object.get_authors(formatted=True, style=style)

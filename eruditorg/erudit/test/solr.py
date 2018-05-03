@@ -303,7 +303,6 @@ class FakeSolrClient:
         searchvals = extract_pq_searchvals(pq)
         if all(key in SOLR2DOC for key in searchvals):
             # generic search
-            searchvals = extract_pq_searchvals(pq)
             result = []
             docs = self.by_id.values()
             docs = apply_filters(docs, searchvals)
