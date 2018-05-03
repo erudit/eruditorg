@@ -508,13 +508,13 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return None
 
     @staticmethod
-    def from_fedora_ids(journal_code, issue_id):
+    def from_fedora_ids(journal_code, localidentifier):
         """ Returns an Issue from the DB if it exists or an ephemeral if it doesn't
 
         If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
         """
         try:
-            return Issue.objects.get(localidentifier=issue_id)
+            return Issue.objects.get(localidentifier=localidentifier)
         except Issue.DoesNotExist:
             try:
                 journal = Journal.objects.get(
@@ -524,7 +524,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             else:
                 issue = Issue()
                 issue.journal = journal
-                issue.localidentifier = issue_id
+                issue.localidentifier = localidentifier
                 if issue.is_in_fedora:
                     issue.sync_with_erudit_object()
                     return issue
@@ -576,7 +576,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
-                yield Article.from_issue_and_fedora_id(self, article_node.get('idproprio'))
+                yield Article.from_issue_and_localidentifier(self, article_node.get('idproprio'))
             except Article.DoesNotExist:
                 pass
 
@@ -916,14 +916,14 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         return None
 
     @staticmethod
-    def from_issue_and_fedora_id(issue, article_id, try_db_lookup=True):
+    def from_issue_and_localidentifier(issue, localidentifier, try_db_lookup=True):
         if try_db_lookup:
-            qs = Article.objects.filter(localidentifier=article_id)
+            qs = Article.objects.filter(localidentifier=localidentifier)
             if qs.exists():
                 return qs.get()
         article = Article()
         article.issue = issue
-        article.localidentifier = article_id
+        article.localidentifier = localidentifier
         if article.is_in_fedora:
             article.sync_with_erudit_object()
             return article
@@ -931,20 +931,21 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
             raise Article.DoesNotExist()
 
     @staticmethod
-    def from_fedora_ids(journal_code, issue_id, article_id):
+    def from_fedora_ids(journal_code, issue_localidentifier, localidentifier):
         """ Returns an Article from the DB if it exists or an ephemeral if it doesn't
 
         If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
         """
         try:
-            return Article.objects.get(localidentifier=article_id)
+            return Article.objects.get(localidentifier=localidentifier)
         except Article.DoesNotExist:
             try:
-                issue = Issue.from_fedora_ids(journal_code, issue_id)
+                issue = Issue.from_fedora_ids(journal_code, issue_localidentifier)
             except Issue.DoesNotExist:
                 raise Article.DoesNotExist()
             else:
-                return Article.from_issue_and_fedora_id(issue, article_id, try_db_lookup=False)
+                return Article.from_issue_and_localidentifier(
+                    issue, localidentifier, try_db_lookup=False)
 
     # Article-related methods and properties
     # --
