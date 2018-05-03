@@ -288,6 +288,15 @@ class SolrArticle(Generic):
     def journal_type(self):
         return 'S'
 
+    @property
+    def type(self):
+        if 'TypeArticle_fac' not in self.solr_data:
+            return _('Article')
+        article_type = self.solr_data['TypeArticle_fac']
+        if article_type == 'Compterendu':
+            return _("Compte rendu")
+        return _('Article')
+
 
 class Thesis(Generic):
     def can_cite(self):
