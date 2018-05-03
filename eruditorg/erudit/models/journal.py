@@ -898,6 +898,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
             return self.title
         return _('Aucun titre')
 
+    def __eq__(self, other):
+        return self.localidentifier is not None and self.localidentifier == other.localidentifier
+
     # Fedora-related methods and properties
     # --
 
@@ -916,14 +919,8 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         return None
 
     @staticmethod
-    def from_issue_and_localidentifier(issue, localidentifier, try_db_lookup=True):
-        if try_db_lookup:
-            qs = Article.objects.filter(localidentifier=localidentifier)
-            if qs.exists():
-                return qs.get()
-        article = Article()
-        article.issue = issue
-        article.localidentifier = localidentifier
+    def from_issue_and_localidentifier(issue, localidentifier):
+        article = Article(issue=issue, localidentifier=localidentifier)
         if article.is_in_fedora:
             article.sync_with_erudit_object()
             return article
@@ -932,20 +929,12 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @staticmethod
     def from_fedora_ids(journal_code, issue_localidentifier, localidentifier):
-        """ Returns an Article from the DB if it exists or an ephemeral if it doesn't
-
-        If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
-        """
         try:
-            return Article.objects.get(localidentifier=localidentifier)
-        except Article.DoesNotExist:
-            try:
-                issue = Issue.from_fedora_ids(journal_code, issue_localidentifier)
-            except Issue.DoesNotExist:
-                raise Article.DoesNotExist()
-            else:
-                return Article.from_issue_and_localidentifier(
-                    issue, localidentifier, try_db_lookup=False)
+            issue = Issue.from_fedora_ids(journal_code, issue_localidentifier)
+        except Issue.DoesNotExist:
+            raise Article.DoesNotExist()
+        else:
+            return Article.from_issue_and_localidentifier(issue, localidentifier)
 
     # Article-related methods and properties
     # --

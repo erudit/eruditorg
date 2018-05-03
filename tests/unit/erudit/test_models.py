@@ -477,14 +477,6 @@ class TestArticle:
         assert article.id is None
         assert article.get_full_identifier() == ephemeral_pid
 
-    def test_get_from_fedora_ids_can_return_django_models(self):
-        article = ArticleFactory()
-        issue = article.issue
-        result = Article.from_fedora_ids(
-            issue.journal.code, issue.localidentifier, article.localidentifier)
-        assert result.id is not None
-        assert result.id == article.id
-
     def test_get_from_fedora_ids_can_raise_DoesNotExist(self):
         issue = IssueFactory()
         with pytest.raises(Article.DoesNotExist):

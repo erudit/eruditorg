@@ -536,14 +536,14 @@ class TestArticleDetailView:
 
     def test_dont_cache_articles_of_unpublished_issues(self):
         issue = IssueFactory.create(is_published=False)
-        article = ArticleFactory.create(issue=issue, doi='thiswillendupinhtml')
+        article = ArticleFactory.create(issue=issue, title='thiswillendupinhtml')
         url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
         response = Client().get(url)
         assert response.status_code == 200
         assert b'thiswillendupinhtml' in response.content
 
-        article.doi = 'thiswillreplaceoldinhtml'
-        article.save()
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_title('thiswillreplaceoldinhtml')
         response = Client().get(url)
         assert response.status_code == 200
         assert b'thiswillendupinhtml' not in response.content

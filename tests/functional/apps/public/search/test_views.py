@@ -130,7 +130,7 @@ class TestEruditSearchResultsView:
         results = response.context['results']
 
         obj = results['results'][0]
-        assert obj.pdf_url is None
+        assert not hasattr(obj, 'pdf_url') or obj.pdf_url is None
 
     def test_search_by_article_type(self, solr_client):
         doc = SolrDocumentFactory(title='foo', article_type='Article')

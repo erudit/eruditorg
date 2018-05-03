@@ -192,12 +192,9 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 
     @factory.post_generation
     def title(obj, create, extracted, **kwargs):
-        # This will be a challenge to properly implement with fedora stubs, but for now let's just
-        # hack the thing and do whatever is simpler to ensure that article.title will return the
-        # value we specify
-        if extracted:
-            obj.formatted_title = extracted
-            obj.save()
+        if extracted and obj.localidentifier:
+            with repository.api.open_article(obj.pid) as wrapper:
+                wrapper.set_title(extracted)
 
     @factory.post_generation
     def from_fixture(obj, create, extracted, **kwargs):
