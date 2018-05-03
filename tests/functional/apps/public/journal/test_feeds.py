@@ -38,14 +38,11 @@ class TestLatestIssuesFeed:
 class TestLatestJournalArticlesFeed:
     def test_can_return_all_the_articles_associated_with_the_last_issue_of_a_journal(self):
         journal = JournalFactory()
-        issue1 = IssueFactory.create(
-            journal=journal, year=2010, date_published=dt.datetime.now())
-        article1 = ArticleFactory.create(issue=issue1)
-        article2 = ArticleFactory.create(issue=issue1)
-        issue2 = IssueFactory.create(
-            journal=journal, year=2010,
-            date_published=dt.datetime.now() - dt.timedelta(days=2))
-        ArticleFactory.create(issue=issue2)
+        issue1 = IssueFactory.create(journal=journal, is_published=True)
+        issue2 = IssueFactory.create(journal=journal, is_published=True)
+        ArticleFactory.create(issue=issue1)
+        article1 = ArticleFactory.create(issue=issue2)
+        article2 = ArticleFactory.create(issue=issue2)
         request = RequestFactory().get('/')
         f = LatestJournalArticlesFeed()
         f.get_object(request, journal.code)

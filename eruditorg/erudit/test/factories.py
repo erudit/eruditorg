@@ -98,6 +98,12 @@ class JournalFactory(factory.django.DjangoModelFactory):
                 d = DisciplineFactory(code=discipline)
                 self.disciplines.add(d)
 
+    @factory.post_generation
+    def post(obj, create, extracted, **kwargs):
+        # we always register non-null localidentifiers with our fake API server.
+        if obj.localidentifier:
+            repository.api.register_pid(obj.pid)
+
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):
 
@@ -141,6 +147,11 @@ class IssueFactory(factory.django.DjangoModelFactory):
         # we always register non-null localidentifiers with our fake API server.
         if obj.get_full_identifier():
             repository.api.register_publication(obj.get_full_identifier())
+
+    @factory.post_generation
+    def add_to_fedora_issue(obj, create, extracted, **kwargs):
+        if obj.localidentifier and obj.is_published and (extracted is None or extracted):
+            repository.api.add_publication_to_parent_journal(obj)
 
 
 class EmbargoedIssueFactory(IssueFactory):

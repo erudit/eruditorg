@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 import random
 
@@ -8,7 +6,7 @@ from django.core.management.base import BaseCommand
 from django.db.models import Q
 
 from core.subscription.models import JournalAccessSubscription
-from erudit.models import Article
+from erudit.solr.models import get_all_articles
 
 from ...metric import metric
 
@@ -48,8 +46,7 @@ class Command(BaseCommand):
             return
 
         total_seconds = int((end - start).total_seconds())
-        articles = list(
-            Article.objects.select_related('issue', 'issue__journal').all().order_by('?'))
+        articles = get_all_articles(rows=10**6, page=1)
 
         # Generates metrics
         for i in range(number):

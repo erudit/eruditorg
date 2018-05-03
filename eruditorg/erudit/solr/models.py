@@ -376,4 +376,13 @@ def get_all_articles(rows, page):
         'start': str((page - 1) * rows),
     }
     solr_results = client.search(**args)
-    return [Article(d) for d in solr_results.docs]
+
+    def get(solr_data):
+        try:
+            return Article(solr_data)
+        except ObjectDoesNotExist:
+            print("Warning: Article {} from Solr does not exist in Fedora!".format(solr_data['ID']))
+            return None
+
+    result = (get(d) for d in solr_results.docs)
+    return [a for a in result if a is not None]

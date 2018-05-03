@@ -117,29 +117,18 @@ class TestJournal:
         journal.last_publication_year = now_dt.year
         journal.open_access = False
         journal.save()
-        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
-        date_issue_2 = now_dt - dr.relativedelta(months=ml)
-        date_issue_3 = date_issue_2 - dr.relativedelta(days=1)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
-        IssueFactory.create(
-            journal=journal, year=date_issue_1.year,
-            date_published=date_issue_1)
-        IssueFactory.create(
-            journal=journal, year=date_issue_2.year,
-            date_published=date_issue_2)
-        issue_3 = IssueFactory.create(
-            journal=journal, year=date_issue_3.year,
-            date_published=date_issue_3)
-        IssueFactory.create(
-            journal=journal, year=date_issue_4.year,
-            date_published=date_issue_4)
-        issue_5 = IssueFactory.create(
-            journal=journal, year=date_issue_5.year,
-            date_published=date_issue_5)
+        DATES = [
+            dt.date(now_dt.year, now_dt.month, 1),
+            now_dt - dr.relativedelta(months=ml),
+            now_dt - dr.relativedelta(months=(ml + 5)),
+            now_dt - dr.relativedelta(months=((ml + 5) * 2)),
+        ]
+
+        for d in reversed(DATES):
+            IssueFactory(journal=journal, year=d.year, date_published=d)
         EXPECTED = {
-            'from': issue_5.date_published,
-            'to': issue_3.date_published
+            'from': DATES[3],
+            'to': DATES[2],
         }
         assert journal.published_open_access_issues_period_coverage == EXPECTED
 
@@ -301,10 +290,10 @@ class TestIssue:
         outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
         issue1 = IssueFactory(date_published=outside_embargo)
         issue2 = IssueFactory(journal=issue1.journal, date_published=outside_embargo)
-        assert issue1 == issue1.journal.last_issue
-        assert issue1.embargoed
-        assert issue2 != issue2.journal.last_issue
-        assert not issue2.embargoed
+        assert issue1 != issue1.journal.last_issue
+        assert not issue1.embargoed
+        assert issue2 == issue2.journal.last_issue
+        assert issue2.embargoed
 
     def test_last_issue_is_not_always_embargoed_when_next_journal(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
@@ -459,13 +448,16 @@ class TestArticle:
 
     def test_knows_if_it_is_embargoed(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        article = ArticleFactory(
-            issue__journal__open_access=False, issue__date_published=dt.date.today())
-        assert article.embargoed
-        article = ArticleFactory(
-            issue__journal=article.issue.journal,
+        article1 = ArticleFactory(
+            issue__journal__open_access=False,
             issue__date_published=dt.date.today() - dr.relativedelta(months=ml + 1))
-        assert not article.embargoed
+        article2 = ArticleFactory(
+            issue__journal=article1.issue.journal, issue__date_published=dt.date.today())
+        # the 3rd article is to take the "last issue spot" in embargo rules.
+        article3 = ArticleFactory(issue__journal=article1.issue.journal)
+        assert not article1.embargoed
+        assert article2.embargoed
+        assert article3.embargoed
 
     def test_sync_with_erudit_object_doesnt_crash(self):
         # There's not much to test in sync_with_erudit_object() that is interesting. It simply

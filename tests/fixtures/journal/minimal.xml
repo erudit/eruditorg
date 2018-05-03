@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="erudit:erudit.mi115" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="Series Erudit"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE=""/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2011-06-08T05:59:24.512Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2015-06-05T18:07:20.756Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="PUBLICATIONS" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="PUBLICATIONS.55" LABEL="PUBLICATIONS" CREATED="2015-06-05T18:07:19.926Z" MIMETYPE="text/xml" SIZE="5740">
+<foxml:xmlContent>
+<numeros>
+  <originator app="Tournesol 0.4.2" date="2015-06-05" username="robichac"/>
+  <revue>
+  </revue>
+  <liste>
+    <decennie dannee="2018" pannee="2008">
+    </decennie>
+  </liste>
+</numeros>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="THEMES" STATE="A" CONTROL_GROUP="M" VERSIONABLE="false">
+<foxml:datastreamVersion ID="THEMES.31" LABEL="THEMES" CREATED="2015-06-05T18:07:20.756Z" MIMETYPE="text/xml" SIZE="5945">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="erudit:erudit.mi115+THEMES+THEMES.31"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>

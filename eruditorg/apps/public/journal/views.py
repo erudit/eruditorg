@@ -491,16 +491,6 @@ class BaseArticleDetailView(
     model = Article
     tracking_view_type = 'html'
 
-    def get_object(self, queryset=None):
-        try:
-            return Article.from_fedora_ids(
-                journal_code=self.kwargs['journal_code'],
-                issue_id=self.kwargs['issue_localid'],
-                article_id=self.kwargs['localid'],
-            )
-        except Article.DoesNotExist:
-            raise Http404()
-
     def get_context_data(self, **kwargs):
 
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)

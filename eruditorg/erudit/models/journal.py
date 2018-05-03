@@ -340,20 +340,27 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         else:
             return self.published_issues
 
-    @property
+    @cached_property
     def first_issue(self):
-        """ Return the first published issue of this Journal.
-        """
-        # TODO return from Fedora
-        return self.published_issues.order_by('date_published').first()
+        if self.is_in_fedora:
+            pids = self.erudit_object.get_published_issues_pids()
+            if pids:
+                return Issue.from_fedora_pid(pids[0])
+            else:
+                return None
+        else:
+            return self.published_issues.order_by('date_published').first()
 
     # We cache this because published_issues is expensive and this is called often when generating
     # the journal detail view.
     @cached_property
     def last_issue(self):
-        """ Return the last published Issue of this Journal. """
         if self.is_in_fedora:
-            return self.published_issues.first()
+            pids = self.erudit_object.get_published_issues_pids()
+            if pids:
+                return Issue.from_fedora_pid(pids[-1])
+            else:
+                return None
         else:
             return self.published_issues.order_by('-date_published').first()
 
@@ -524,6 +531,11 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 else:
                     raise Issue.DoesNotExist()
 
+    @staticmethod
+    def from_fedora_pid(pid):
+        _, journalid, issueid = pid.split('.')
+        return Issue.from_fedora_ids(journalid, issueid)
+
     def sync_with_erudit_object(self, erudit_object=None):
         """ Copy ``erudit_object``'s values in appropriate fields in ``self``.
 
@@ -541,8 +553,11 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         self.title = erudit_object.theme
         self.html_title = erudit_object.html_theme
         self.thematic_issue = erudit_object.theme is not None
-        self.date_published = erudit_object.publication_date \
-            or dt.datetime(int(self.year), 1, 1)
+        pubdate = erudit_object.publication_date
+        if pubdate:
+            self.date_published = dt.datetime.strptime(pubdate, '%Y-%m-%d').date()
+        else:
+            self.date_published = dt.datetime(int(self.year), 1, 1)
         self.date_produced = erudit_object.production_date \
             or erudit_object.publication_date
         try:
@@ -552,6 +567,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         else:
             if first_article.erudit_object.is_of_type_roc:
                 self.force_free_access = True
+        self.is_published = self.pid in self.journal.erudit_object.get_published_issues_pids()
 
     def get_articles_from_fedora(self):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an

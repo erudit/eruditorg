@@ -4,7 +4,9 @@ from contextlib import contextmanager
 from eulfedora.api import ApiFacade
 from eulfedora.util import RequestFailed
 
-from .domchange import EruditArticleDomChanger, EruditPublicationDomChanger
+from .domchange import (
+    EruditArticleDomChanger, EruditPublicationDomChanger, EruditJournalDomChanger
+)
 
 # NOTE: This fake API is far from complete but is enough to make tests pass
 #       as they are now. We'll have to improve this as we expand testing areas.
@@ -93,15 +95,26 @@ class FakeAPI(ApiFacade):
 
     def __init__(self):
         super().__init__(self.BASE_URL, 'username', 'password')
-        self._publication_content_map = {}
-        self._article_content_map = {}
+        self._content_map = {}
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
         raise AssertionError()  # we should never get there in a testing environment
 
+    def get_journal_xml(self, pid):
+        if pid in self._content_map:
+            content = self._content_map[pid]
+            if content:
+                return content
+            else:
+                # default fixture
+                with open('./tests/fixtures/journal/minimal.xml', 'rb') as xml:
+                    return xml.read()
+        else:
+            return None
+
     def get_publication_xml(self, pid):
-        if pid in self._publication_content_map:
-            content = self._publication_content_map[pid]
+        if pid in self._content_map:
+            content = self._content_map[pid]
             if content:
                 return content
             else:
@@ -112,8 +125,8 @@ class FakeAPI(ApiFacade):
             return None
 
     def get_article_xml(self, pid):
-        if pid in self._article_content_map:
-            content = self._article_content_map[pid]
+        if pid in self._content_map:
+            content = self._content_map[pid]
             if content:
                 return content
             else:
@@ -123,25 +136,22 @@ class FakeAPI(ApiFacade):
         else:
             return None
 
-    def register_publication(self, pid):
-        if pid not in self._publication_content_map:
-            self._publication_content_map[pid] = None
-
-    def register_article(self, pid):
+    def register_pid(self, pid):
         # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
         # but for when you don't really care about the contents.
-        if pid not in self._article_content_map:
-            self._article_content_map[pid] = None
+        if pid not in self._content_map:
+            self._content_map[pid] = None
 
-    def set_publication_xml(self, pid, xml):
+    register_publication = register_pid
+    register_article = register_pid
+
+    def set_xml_for_pid(self, pid, xml):
         if isinstance(xml, str):
             xml = xml.encode('utf-8')
-        self._publication_content_map[pid] = xml
+        self._content_map[pid] = xml
 
-    def set_article_xml(self, pid, xml):
-        if isinstance(xml, str):
-            xml = xml.encode('utf-8')
-        self._article_content_map[pid] = xml
+    set_publication_xml = set_xml_for_pid
+    set_article_xml = set_xml_for_pid
 
     @contextmanager
     def open_article(self, pid):
@@ -163,9 +173,23 @@ class FakeAPI(ApiFacade):
         newxml = dom_wrapper.tostring()
         self.set_publication_xml(pid, newxml)
 
+    @contextmanager
+    def open_journal(self, pid):
+        # we implicitly register a pid that we tweak
+        self.register_pid(pid)
+        xml = self.get_journal_xml(pid)
+        dom_wrapper = EruditJournalDomChanger(xml)
+        yield dom_wrapper
+        newxml = dom_wrapper.tostring()
+        self.set_xml_for_pid(pid, newxml)
+
     def add_article_to_parent_publication(self, article):
         with self.open_publication(article.issue.pid) as wrapper:
             wrapper.add_article(article)
+
+    def add_publication_to_parent_journal(self, issue):
+        with self.open_journal(issue.journal.pid) as wrapper:
+            wrapper.add_issue(issue)
 
     def get(self, url, **kwargs):
         result = None
@@ -210,8 +234,7 @@ class FakeAPI(ApiFacade):
                 elif not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
                 elif subselection == '/PUBLICATIONS/content':
-                    with open('./tests/fixtures/journal/mi115.xml', 'rb') as xml:
-                        result = xml.read()
+                    result = self.get_journal_xml(pid) or b''
         if result is not None:
             response = FakeResponse(result, url)
             if response.status_code == 200:

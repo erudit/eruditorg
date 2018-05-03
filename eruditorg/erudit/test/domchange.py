@@ -85,3 +85,20 @@ class EruditPublicationDomChanger(BaseDomChanger):
         num_articles = len(self.root.findall('article'))
         elem = E.article(idproprio=article.localidentifier, lang='fr', ordseq=str(num_articles))
         self.root.getroot().append(elem)
+
+
+class EruditJournalDomChanger(BaseDomChanger):
+    def add_issue(self, issue):
+        if not issue.pid:
+            return
+        if self.root.find('.//numero[pid="{}"]'.format(issue.pid)) is not None:
+            return  # already there
+        num_issues = len(self.root.findall('.//numero'))
+        parentelem = self.root.find('.//decennie')
+        assert parentelem is not None
+        elem = E.numero(
+            pid=issue.pid,
+            annee=str(issue.year),
+            nonumero=str(num_issues + 1),
+            volume='42')
+        parentelem.append(elem)
