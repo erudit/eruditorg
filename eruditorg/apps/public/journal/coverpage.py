@@ -163,7 +163,7 @@ def get_pdf():
     # BODY
 
     # Issue info
-    ptext1 = """
+    left_text = """
         <font name='Maax-Regular' size='10'>Numéro</font>
         <br/><br/>
         <font name='Maax-Regular'>%s</font>
@@ -176,7 +176,7 @@ def get_pdf():
 
     # Publisher info
     for publisher in journal_publishers:
-        ptext1 = ptext1 + """
+        left_text = left_text + """
             <font name='Maax-Regular'>%s</font>
             <br/><br/>
             <font name='Maax-Regular' color='#ff4242'>%s</font>
@@ -186,33 +186,33 @@ def get_pdf():
     # TODO: ISSN
 
     # How to cite
-    ptext1 = ptext1 + """
+    left_text = left_text + """
         <font name='Maax-Regular' size='10'>Citer cet article</font>
         <br/><br/>
         <font name='Maax-Regular'>%s</font>
     """ % (article_citation)
 
     # Article abstracts
-    ptext2 = """
+    right_text = """
         <font name='Maax-Regular' size='10'>Résumé de l’article</font>
         <br/><br/>
     """
 
     if abstracts:
         for abstract in abstracts:
-            ptext2 = ptext2 + """
+            right_text = right_text + """
                 <font name='Maax-Regular'>%s</font>
                 <br/>
             """ % (abstract)
     else:
-        ptext2 = ptext2 + """
+        right_text = right_text + """
             <font name='Maax-Regular'>
             [Aucun résumé pour cet article]</font>
         """
 
     # Body table
     issue_info = [
-        (Paragraph(ptext1, styles["Small"]), Paragraph(ptext2, styles["Small"]),)
+        (Paragraph(left_text, styles["Small"]), Paragraph(right_text, styles["Small"]),)
     ]
     table = Table(
         issue_info,
