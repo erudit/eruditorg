@@ -2,10 +2,15 @@ import io
 
 from datetime import datetime
 
+from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
-from reportlab.platypus import Flowable, Image, SimpleDocTemplate, Paragraph, Spacer
+from reportlab.platypus import (Flowable,
+                                Image,
+                                SimpleDocTemplate,
+                                Paragraph,
+                                Spacer)
 from reportlab.platypus.tables import Table, TableStyle
 
 from reportlab.pdfbase import pdfmetrics
@@ -28,6 +33,7 @@ class line(Flowable):
     def draw(self):
         self.canv.setStrokeColor(self.color)
         self.canv.line(0, self.height, self.width, self.height)
+
 
 def get_pdf():
     buf = io.BytesIO()
@@ -53,7 +59,6 @@ def get_pdf():
         "HSTC Bulletin : revue d’histoire des sciences, des techniques et de la \
         médecine au Canada",
     ]
-    journal_logo = Image("https://www.erudit.org/fr/revues/hstc/logo.jpg")
     journal_url = "https://www.erudit.org/fr/revues/hstc/"
     journal_publishers = [
         "HSTC Publications",
@@ -110,7 +115,6 @@ def get_pdf():
     styles.add(ParagraphStyle(name="Heading", fontSize=14, leading=15))
     styles.add(ParagraphStyle(name="Small", fontSize=8, leading=10))
     styles.add(ParagraphStyle(name="FooterText", fontSize=6, leading=7))
-
 
     # -----------------------------------------------------------------------------
     # HEADER
@@ -228,24 +232,26 @@ def get_pdf():
     # FOOTER
 
     # Copyright info
-    ptext1 = """
+    copyright_text = """
         <font name='Maax-Regular'>Lorem ipsum dolor sit amet</font>
+        <br/><br/>
     """
 
     # Legal statement
-    ptext2 = """
+    statement_text = """
         <font name='Maax-Regular'>Ce document est protégé par la loi sur
         le droit d'auteur. L'utilisation des services d'Érudit (y compris la
         reproduction) est assujettie à sa politique d'utilisation que vous
         pouvez consulter en ligne.
         [https://apropos.erudit.org/fr/usagers/politique-dutilisation]
         </font>
+        <br/><br/>
     """
 
     # Legal information table
     legal_info = [(
-        Paragraph(ptext1, styles["FooterText"]),
-        Paragraph(ptext2, styles["FooterText"])
+        Paragraph(copyright_text, styles["FooterText"]),
+        Paragraph(statement_text, styles["FooterText"])
     )]
     table = Table(
         legal_info,
@@ -255,42 +261,43 @@ def get_pdf():
     table.setStyle([
         ("VALIGN", (0, 0), (-1, -1), "BOTTOM"),
     ])
-    Story.append(table)
-
-    Story.append(Spacer(0.25, 5))
-    Story.append(fullBlackLine)
-    Story.append(Spacer(0.25, 5))
 
     # Mission statement
-    ptext = """
+    mission_text = """
         <font name='Maax-Regular' size='10'>Cet article est diffusé
         et préservé par Érudit.</font>
         <br/><br/>
         <font name='Maax-Regular'>Érudit est un consortium
         interuniversitaire sans but lucratif composé de l’Université de Montréal,
         l’Université Laval et l’Université du Québec à Montréal. Il a pour mission
-        la promotion et la valorisation de la recherche. [https://www.erudit.org]
+        la promotion et la valorisation de la recherche. [%s]
         </font>
-    """
+    """ % (erudit_url)
 
     # Footer table
-    erudit_info = [(
-        erudit_logo,
-        Paragraph(ptext, styles["FooterText"])
-    )]
-    table = Table(
+    erudit_info = [
+        (Paragraph(copyright_text, styles["FooterText"]), Paragraph(statement_text, styles["FooterText"])),
+        (erudit_logo, Paragraph(mission_text, styles["FooterText"]))
+    ]
+    footer_table = Table(
         erudit_info,
         colWidths=276,
-        rowHeights=40,
+        rowHeights=50,
     )
-    table.setStyle([
+    footer_table.setStyle([
         ("VALIGN", (0, 0), (-1, -1), "BOTTOM"),
+        ("LINEABOVE", (0, 1), (-1, -1), 0.25, colors.black),
     ])
-    Story.append(table)
 
+    def footerContent(canvas, doc):
+        canvas.saveState()
+        footer = footer_table
+        w, h = footer.wrap(276, doc.bottomMargin)
+        footer.drawOn(canvas, 35, 15)
+        canvas.restoreState()
 
     # -----------------------------------------------------------------------------
     # BUILD COVERPAGE
 
-    c.build(Story)
+    c.build(Story, onFirstPage=footerContent)
     return buf
