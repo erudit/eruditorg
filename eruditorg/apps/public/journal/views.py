@@ -57,6 +57,8 @@ from .viewmixins import PrepublicationTokenRequiredMixin
 
 from . import solr
 
+from .coverpage import get_pdf
+
 
 class RedirectToExternalSourceMixin:
     """ Redirects to get_object().external_url if set.
@@ -817,13 +819,8 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
             'authors': erudit_object.get_formatted_authors(),
             'apa_authors': erudit_object.get_authors(formatted=True, style='apa'),
         }
-        coverpage = generate_pdf(
-            'public/journal/article_pdf_coverpage.html',
-            context=RequestContext(self.request).update(coverpage_context),
-            base_url="https://{host}/".format(
-                host=self.request._get_raw_host()
-            )
-        )
+
+        coverpage = get_pdf()
 
         response.content = add_coverpage_to_pdf(coverpage, content)
 
