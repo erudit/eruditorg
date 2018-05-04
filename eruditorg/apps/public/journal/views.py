@@ -517,9 +517,22 @@ class BaseArticleDetailView(
         context = super(BaseArticleDetailView, self).get_context_data(**kwargs)
         obj = context.get(self.context_object_name)
 
+        abstracts = self.object.erudit_object.get_abstracts(html=True)
+        abstracts_keywords = self.object.erudit_object.get_keywords()
+        other_keywords = abstracts_keywords.copy()
         # Display HTML abstracts
+        abstracts_languages = [
+            o['lang'] for o in
+            chain([abstracts['main']], abstracts['paral'], abstracts['equivalent'])
+        ]
+
+        for lang in abstracts_languages:
+            other_keywords.pop(lang)
+
         try:
-            context['html_abstracts'] = self.object.erudit_object.get_abstracts(html=True)
+            context['html_abstracts'] = abstracts
+            context['html_abstracts_keywords'] = abstracts_keywords
+            context['html_other_keywords'] = other_keywords
         except ObjectDoesNotExist:
             pass
 

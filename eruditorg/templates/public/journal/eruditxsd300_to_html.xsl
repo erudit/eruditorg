@@ -372,17 +372,38 @@
               <h4>{{ titles.main.title|safe }}{% if titles.main.subtitle %} <br/>{{ titles.main.subtitle|safe }}{% endif %}</h4>
               {% endif %}
               {{ main_abstract.content|safe }}
+              {% for lang, keywords in html_abstracts_keywords.items %}
+              {% if lang == titles.main.lang %}
+                {{ keywords }}
+              {% endif %}
+              {% endfor %}
+
             </section>
             {% if paral_abstracts %}
             {% for abstract in paral_abstracts %}
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.paral %}
+              {% for lang, keywords in html_abstracts_keywords.items %}
+              {% if lang == abstract.lang %}
+                {{ keywords }}
+              {% endif %}
+              {% endfor %}
             {% endfor %}
             {% endif %}
             {% if eq_abstracts %}
             {% for abstract in eq_abstracts %}
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.equivalent %}
+              {% for lang, keywords in html_abstracts_keywords.items %}
+              {% if lang == abstract.lang %}
+                {{ keywords }}
+              {% endif %}
+              {% endfor %}
             {% endfor %}
+            {% if lang == abstract.lang %}
+                {{ keywords }}
             {% endif %}
+            {% endif %}
+
+            {{ html_other_keywords }}
           </section>
         {% endwith %}
         {% endif %}
