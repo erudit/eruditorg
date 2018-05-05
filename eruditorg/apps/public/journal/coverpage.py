@@ -51,6 +51,7 @@ def get_pdf():
     Story = []
     date = "{:%B %d, %Y}".format(datetime.now())
     institution = "Université de Montréal"
+    policy_url = "https://apropos.erudit.org/fr/usagers/politique-dutilisation"
     erudit_url = "https://www.erudit.org"
     erudit_logo = Image("https://gitlab.erudit.org/erudit/portail/eruditorg/raw/master/eruditorg/static/img/logo-erudit.png")
     journal_titles = [
@@ -76,33 +77,22 @@ def get_pdf():
     issue = "Volume 8, Numéro 2, décembre, December, 1984, p. 160–161"
     issue_url = "https://www.erudit.org/fr/revues/hstc/1984-v8-n2-hstc3217/"
     abstracts = [
-        "The diorama on the rue Sanson in Paris (1822–39) created a blended image \
-        by rotating the auditorium between two tableaux, each painted back and \
-        front and illuminated with colored light to create a sense of animation. \
-        What I call the “diorama effect” is the way the diorama used projection \
-        and reflection—both literally and figuratively—to create the illusion of \
-        places and characters known to the audience while simultaneously dissolving\
-         these references, seemingly into thin air. The 1825 diorama, the example \
-        in this essay, featured a tableau by Charles-Marie Bouton depicting a view\
-         of Paris and its new gas meter, and a second tableau by Louis Daguerre \
-         presenting a colonnade that disappears. To understand the way that these \
-         tableaux participated in then-contemporary debates on gaslight each is \
-         read in relation to narratives from the time—notably, the program notes \
-         for the diorama, the popular fairy tale of Aladdin and the magic lamp, \
-         and public debates in which the gas lamp figures as a political symbol \
-         of insurrection or, conversely, as a romantic symbol of exoticism.",
+        "Lorsque le directeur de La Revue musicale sim, Jules Écorcheville, part pour le front en 1914, il écrit à son ami Émile Vuillermoz :Si je ne reviens pas, je vous recommande notre oeuvre, cher ami. Et surtout, si vous tenez à me faire plaisir dans l’autre monde, efforcez-vous de maintenir la concorde et l’harmonie entre les différents éléments qui vont se trouver en présence à ma disparition. Notre revue est faite de différentes pièces ajustées (Amis, sim, etc.), qui tiennent en équilibre par miracle, quelques années de cohésion sont absolument nécessaires encore et c’est précisément cette concentration de nos différentes forces qu’il faudrait maintenir. En tout cas, il ne faudrait pas que ma disparition entraînât celle d’une oeuvre qui nous a coûté, à tous, tant de peine. N’est-il pas vrai ?…",
+        "When the director of La Revue sim, Jules Ecorcheville, left for the front in 1914, he wrote to his friend Émile Vuillermoz:If I do not come back, I recommend our work, dear friend. And above all, if you want to please me in the other world, try to maintain concord and harmony between the various elements that will be in the presence of my disappearance. Our periodical is made of different adjusted pieces (Friends, sim, etc.), which balance by miracle, a few years of cohesion are absolutely necessary again and it is precisely this concentration of our different strengths that should be maintained. In any case, my disappearance should not entailed that of a work which cost us, all, so much trouble. Is not it true?…",
     ]
     article_citation = "Bowen, Dore. « The Diorama Effect: Gas, Politics, and Opera\
      in the 1825 Paris Diorama », Intermédialités : histoire et théorie des arts,\
       des lettres et des techniques / Intermediality: History and Theory of the\
        Arts, Literature and Technologies, n° 24-25, automne 2014, printemps 2015.\
         DOI: 10.7202/1034155ar"
+    article_url = "http://id.erudit.org/iderudit/1043218ar"
 
     # Horizontal rules
     fullBlackLine = line('black', 552)
     fullGreyLine = line('#cccccc', 552)
 
     # Links
+    article_link = '<link href="' + article_url + '">' + 'Consulter l’article en ligne' + '</link>'
     issue_link = '<link href="' + issue_url + '">' + 'Aller au sommaire du numéro' + '</link>'
     journal_link = '<link href="' + journal_url + '">' + 'Découvrir la revue' + '</link>'
 
@@ -115,6 +105,7 @@ def get_pdf():
     styles.add(ParagraphStyle(name="Heading", fontSize=14, leading=15))
     styles.add(ParagraphStyle(name="Small", fontSize=8, leading=10))
     styles.add(ParagraphStyle(name="FooterText", fontSize=6, leading=7))
+
 
     # -----------------------------------------------------------------------------
     # HEADER
@@ -149,7 +140,7 @@ def get_pdf():
 
     # Article authors
     Story.append(Spacer(0.25, 25))
-    ptext = "<font name='Maax-Regular' size='10'>"
+    ptext = "<font name='Spectral' size='10'>"
     for author in article_authors:
         ptext = ptext + "%s, " % (author)
     ptext = ptext + "</font>"
@@ -201,14 +192,19 @@ def get_pdf():
     if abstracts:
         for abstract in abstracts:
             right_text = right_text + """
-                <font name='Maax-Regular'>%s</font>
-                <br/>
+                <font name='Spectral' color='grey'>%s</font>
+                <br/><br/>
             """ % (abstract)
     else:
         right_text = right_text + """
-            <font name='Maax-Regular'>
-            [Aucun résumé pour cet article]</font>
+            <font name='Spectral' color='grey'>
+            [Aucun résumé pour cet article]
+            </font>
         """
+
+    right_text = right_text + """
+        <font name='Maax-Regular' color='#ff4242'>%s</font>
+        """ % (article_link)
 
     # Body table
     issue_info = [
@@ -243,10 +239,10 @@ def get_pdf():
         le droit d'auteur. L'utilisation des services d'Érudit (y compris la
         reproduction) est assujettie à sa politique d'utilisation que vous
         pouvez consulter en ligne.
-        [https://apropos.erudit.org/fr/usagers/politique-dutilisation]
+        [%s]
         </font>
         <br/><br/>
-    """
+    """ % (policy_url)
 
     # Legal information table
     legal_info = [(
