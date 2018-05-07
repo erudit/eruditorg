@@ -104,8 +104,8 @@
     </div>
   </header>
 
-  {% if journal.published_issues.exists %}
   <section class="clearfix latest-issue" id="latest-issue">
+    {% if journal.published_issues.exists %}
     <div class="row">
       {% if latest_issue %}
       <div class="col-sm-8">
@@ -134,8 +134,12 @@
         </p>
       </div>
     </div>
+    {% else %}
+    <h2>-> <em>{% trans 'Numéros à venir' %}</em></h2>
+    <br/>
+    <h3>{% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</h3>
+    {% endif %}
   </section>
-  {% endif %}
 
   {% if journal_info %}
   <div class="journal-infos" role="tablist" aria-multiselectable="true">
