@@ -2,6 +2,8 @@ import io
 
 from datetime import datetime
 
+from django.core.urlresolvers import reverse
+
 from reportlab.lib import colors
 from reportlab.lib.fonts import addMapping
 from reportlab.lib.pagesizes import letter
@@ -44,7 +46,7 @@ class line(Flowable):
         self.canv.line(0, self.height, self.width, self.height)
 
 
-def get_pdf():
+def get_coverpage(context=None):
     buf = io.BytesIO()
     # Letter size: 612px x 792px
     c = SimpleDocTemplate(
@@ -71,23 +73,28 @@ def get_pdf():
     ]
     journal_url = "https://www.erudit.org/fr/revues/hstc/"
     journal_publishers = [
-        "HSTC Publications",
+        p.name for p in context['journal'].publishers.all()
     ]
     article_titles = [
-        "Féminisme sans frontières ?... les défis conceptuels",
-        "DUFOUR, Pascale, Dominique MASSON et Dominique CAOUETTE (dir.). 2010. <em>Solidarities Beyond Borders : Transnationalizing Women’s Movements</em>. Vancouver, Toronto, UBC Press",
-        "FALQUET, Jules, Helena HIRATA, Danièle KERGOAT, Brahim LABARI, Nicky LE FEUVRE et Fatou SOW (dir.). 2010. <em>Le sexe de la mondialisation : genre, classe, race et nouvelle division du travail</em>. Paris, Presses de Sciences Po",
-        "MARQUES-PEREIRA, Bérengère, Petra MEIER et David PATERNOTTE (dir.). 2010. <em>Au-delà et en deçà de l’État : Le genre entre dynamiques transnationales et multi-niveaux</em>. Bruxelles, Academia Bruylant",
+        context['article'].erudit_object.get_formatted_title()
     ]
     article_authors = [
-        "Bostjan Zupanćić",
-        "Elżbieta M. Goździak"
+        context['article'].erudit_object.get_authors(formatted=True)
     ]
-    issue = "Volume 8, Numéro 2, décembre, December, 1984, p. 160–161"
-    issue_url = "https://www.erudit.org/fr/revues/hstc/1984-v8-n2-hstc3217/"
+    issue = context['issue'].erudit_object.get_volume_numbering(formatted=True)
+    issue_url = "https://www.erudit.org{path}".format(
+        path=reverse(
+            'public:journal:issue_detail',
+            kwargs=dict(
+                journal_code=context['issue'].journal.code,
+                issue_slug=context['issue'].volume_slug,
+                localidentifier=context['issue'].localidentifier
+            )
+        )
+    )
+
     abstracts = [
-        "Lorsque le directeur de La Revue musicale sim, Jules Écorcheville, part pour le front en 1914, il écrit à son ami Émile Vuillermoz : Si je ne reviens pas, je vous recommande notre oeuvre, cher ami. Et surtout, si vous tenez à me faire plaisir dans l’autre monde, efforcez-vous de maintenir la concorde et l’harmonie entre les différents éléments qui vont se trouver en présence à ma disparition. Notre revue est faite de différentes pièces ajustées (Amis, sim, etc.), qui tiennent en équilibre par miracle, quelques années de cohésion sont absolument nécessaires encore et c’est précisément cette concentration de nos différentes forces qu’il faudrait maintenir. En tout cas, il ne faudrait pas que ma disparition entraînât celle d’une oeuvre qui nous a coûté, à tous, tant de peine. N’est-il pas vrai ?…",
-        "When the director of La Revue sim, Jules Ecorcheville, left for the front in 1914, he wrote to his friend Émile Vuillermoz: If I do not come back, I recommend our work, dear friend. And above all, if you want to please me in the other world, try to maintain concord and harmony between the various elements that will be in the presence of my disappearance. Our periodical is made of different adjusted pieces (Friends, sim, etc.), which balance by miracle, a few years of cohesion are absolutely necessary again and it is precisely this concentration of our different strengths that should be maintained. In any case, my disappearance should not entailed that of a work which cost us, all, so much trouble. Is not it true?…",
+        a['content'] for a in context['article'].erudit_object.get_abstracts(formatted=True)
     ]
     article_citation = "Bowen, Dore. « The Diorama Effect: Gas, Politics, and Opera\
      in the 1825 Paris Diorama », Intermédialités : histoire et théorie des arts,\
