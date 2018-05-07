@@ -3,6 +3,7 @@ import io
 from datetime import datetime
 
 from reportlab.lib import colors
+from reportlab.lib.fonts import addMapping
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
@@ -16,8 +17,16 @@ from reportlab.platypus.tables import Table, TableStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-pdfmetrics.registerFont(TTFont('Maax-Regular', 'https://gitlab.erudit.org/erudit/portail/eruditorg/raw/master/eruditorg/static/fonts/maax/Sans-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral', './eruditorg/static/fonts/spectral/Spectral-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral-Italic', './eruditorg/static/fonts/spectral/Spectral-Italic.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral-Bold', './eruditorg/static/fonts/spectral/Spectral-Bold.ttf'))
+pdfmetrics.registerFont(TTFont('Spectral-BoldItalic', './eruditorg/static/fonts/spectral/Spectral-BoldItalic.ttf'))
+pdfmetrics.registerFontFamily('Spectral', normal='Spectral', bold='Spectral-Bold', italic='Spectral-Italic',)
 
+addMapping('Spectral', 0, 0, 'Spectral')
+addMapping('Spectral-Italic', 0, 1, 'Spectral Italic')
+addMapping('Spectral-Bold', 1, 0, 'Spectral Bold')
+addMapping('Spectral-BoldItalic', 1, 1, 'Spectral Bold Italic')
 
 class line(Flowable):
 
@@ -93,9 +102,9 @@ def get_pdf():
     fullGreyLine = line('#cccccc', 552)
 
     # Links
-    article_link = '<link href="' + article_url + '">' + 'Consulter l’article en ligne' + '</link>'
-    issue_link = '<link href="' + issue_url + '">' + 'Aller au sommaire du numéro' + '</link>'
-    journal_link = '<link href="' + journal_url + '">' + 'Découvrir la revue' + '</link>'
+    article_link = '<link href="' + article_url + '">' + '→ Consulter l’article en ligne' + '</link>'
+    issue_link = '<link href="' + issue_url + '">' + '→ Aller au sommaire du numéro' + '</link>'
+    journal_link = '<link href="' + journal_url + '">' + '→ Découvrir la revue' + '</link>'
 
     # Image dimensions
     erudit_logo.drawHeight = 25
@@ -103,15 +112,24 @@ def get_pdf():
 
     # Text styles
     styles = getSampleStyleSheet()
-    styles.add(ParagraphStyle(name="Heading", fontSize=14, leading=15))
-    styles.add(ParagraphStyle(name="Small", fontSize=8, leading=10))
-    styles.add(ParagraphStyle(name="FooterText", fontSize=6, leading=7))
+    styles.add(ParagraphStyle(
+        name="Heading", fontName="Spectral", fontSize=14, leading=15
+    ))
+    styles.add(ParagraphStyle(
+        name="Small", fontName="Spectral", fontSize=8, leading=10
+    ))
+    styles.add(ParagraphStyle(
+        name="FooterText", fontName="Spectral", fontSize=6, leading=7
+    ))
+    styles.add(ParagraphStyle(
+        name="Subheading", fontName="Spectral", fontSize=10, leading=10
+    ))
 
     # -----------------------------------------------------------------------------
     # HEADER
     # Admin info: PDF creation, institution
     ptext = """
-        <font name='Maax-Regular' color='grey'>Document généré le %s.
+        <font color='grey'>Document généré le %s.
         Accès offert par : %s.</font>
     """ % (date, institution)
     Story.append(Paragraph(ptext, styles["Small"]))
@@ -123,9 +141,9 @@ def get_pdf():
     Story.append(Spacer(0.25, 10))
     for title in journal_titles:
         ptext = """
-            <font name='Maax-Regular' size='10' color='grey'>%s</font>
+            <font size='10' color='grey'>%s</font>
         """ % (title)
-    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Paragraph(ptext, styles["Subheading"]))
 
     Story.append(Spacer(0.25, 5))
 
@@ -133,18 +151,18 @@ def get_pdf():
     Story.append(Spacer(0.25, 10))
     for title in article_titles:
         ptext = """
-            <font name='Maax-Regular'>%s</font>
+            <font>%s</font>
         """ % (title)
         Story.append(Paragraph(ptext, styles["Heading"]))
         Story.append(Spacer(0.25, 7.5))
 
     # Article authors
     Story.append(Spacer(0.25, 25))
-    ptext = "<font name='Spectral' size='10'>"
+    ptext = "<font size='10'>"
     for author in article_authors:
         ptext = ptext + "%s, " % (author)
     ptext = ptext + "</font>"
-    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Paragraph(ptext, styles["Subheading"]))
 
     Story.append(Spacer(0.25, 10))
     Story.append(fullGreyLine)
@@ -155,22 +173,22 @@ def get_pdf():
 
     # Issue info
     left_text = """
-        <font name='Maax-Regular' size='10'>Numéro</font>
+        <font size='10'>Numéro</font>
         <br/><br/>
-        <font name='Maax-Regular'>%s</font>
+        <font>%s</font>
         <br/><br/>
-        <font name='Maax-Regular' color='#ff4242'>%s</font>
+        <font color='#ff4242'>%s</font>
         <br/><br/><br/>
-        <font name='Maax-Regular' size='10'>Éditeurs</font>
+        <font size='10'>Éditeurs</font>
         <br/><br/>
     """ % (issue, issue_link)
 
     # Publisher info
     for publisher in journal_publishers:
         left_text = left_text + """
-            <font name='Maax-Regular'>%s</font>
+            <font>%s</font>
             <br/><br/>
-            <font name='Maax-Regular' color='#ff4242'>%s</font>
+            <font color='#ff4242'>%s</font>
             <br/><br/><br/>
         """ % (publisher, journal_link)
 
@@ -178,38 +196,39 @@ def get_pdf():
 
     # How to cite
     left_text = left_text + """
-        <font name='Maax-Regular' size='10'>Citer cet article</font>
+        <font size='10'>Citer cet article</font>
         <br/><br/>
-        <font name='Maax-Regular'>%s</font>
+        <font>%s</font>
     """ % (article_citation)
 
     # Article abstracts
     right_text = """
-        <font name='Maax-Regular' size='10'>Résumé de l’article</font>
+        <font size='10'>Résumé de l’article</font>
         <br/><br/>
     """
 
     if abstracts:
         for abstract in abstracts:
             right_text = right_text + """
-                <font name='Spectral' color='grey'>%s</font>
+                <font color='grey'>%s</font>
                 <br/><br/>
             """ % (abstract)
     else:
         right_text = right_text + """
-            <font name='Spectral' color='grey'>
+            <font color='grey'>
             [Aucun résumé pour cet article]
             </font>
         """
 
     right_text = right_text + """
-        <font name='Maax-Regular' color='#ff4242'>%s</font>
+        <font color='#ff4242'>%s</font>
         """ % (article_link)
 
     # Body table
-    issue_info = [
-        (Paragraph(left_text, styles["Small"]), Paragraph(right_text, styles["Small"]),)
-    ]
+    issue_info = [(
+        Paragraph(left_text, styles["Small"]),
+        Paragraph(right_text, styles["Small"])
+    )]
     table = Table(
         issue_info,
         colWidths=276,
@@ -229,13 +248,13 @@ def get_pdf():
 
     # Copyright info
     copyright_text = """
-        <font name='Maax-Regular'>Lorem ipsum dolor sit amet</font>
+        <font>Lorem ipsum dolor sit amet</font>
         <br/><br/>
     """
 
     # Legal statement
     statement_text = """
-        <font name='Maax-Regular'>Ce document est protégé par la loi sur
+        <font>Ce document est protégé par la loi sur
         le droit d'auteur. L'utilisation des services d'Érudit (y compris la
         reproduction) est assujettie à sa politique d'utilisation que vous
         pouvez consulter en ligne.
@@ -260,10 +279,10 @@ def get_pdf():
 
     # Mission statement
     mission_text = """
-        <font name='Maax-Regular' size='10'>Cet article est diffusé
+        <font size='10'>Cet article est diffusé
         et préservé par Érudit.</font>
         <br/><br/>
-        <font name='Maax-Regular'>Érudit est un consortium
+        <font>Érudit est un consortium
         interuniversitaire sans but lucratif composé de l’Université de Montréal,
         l’Université Laval et l’Université du Québec à Montréal. Il a pour mission
         la promotion et la valorisation de la recherche. [%s]
@@ -271,8 +290,9 @@ def get_pdf():
     """ % (erudit_url)
 
     # Footer table
-    erudit_info = [
-        (Paragraph(copyright_text, styles["FooterText"]), Paragraph(statement_text, styles["FooterText"])),
+    erudit_info = [(
+        Paragraph(copyright_text, styles["FooterText"]),
+        Paragraph(statement_text, styles["FooterText"])),
         (erudit_logo, Paragraph(mission_text, styles["FooterText"]))
     ]
     footer_table = Table(
