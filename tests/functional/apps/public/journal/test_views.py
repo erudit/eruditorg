@@ -590,6 +590,18 @@ class TestArticleDetailView:
         response = Client().get(url)
         assert response.status_code == 200
 
+    def test_querystring_doesnt_mess_media_urls(self):
+        journal = JournalFactory(open_access=True)  # so we see the whole article
+        issue = IssueFactory(journal=journal)
+        article = ArticleFactory(issue=issue, from_fixture='1003446ar')  # this article has media
+        url = '{}?foo=bar'.format(article_detail_url(article))
+        response = Client().get(url)
+        # we have some media urls
+        assert b'media/' in response.content
+        # We don't have any messed up media urls, that is, an URL with our querystring in the
+        # middle
+        assert b'barmedia/' not in response.content
+
 
 @override_settings(DEBUG=True)
 class TestArticleRawPdfView(BaseEruditTestCase):

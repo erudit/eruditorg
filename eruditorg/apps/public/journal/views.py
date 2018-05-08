@@ -558,6 +558,17 @@ class BaseArticleDetailView(
         shouldcache = obj.issue.is_published and obj.id
         context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
 
+        # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
+        # media URL and then remove the media_localid part to get the prefix only.
+        url = reverse('public:journal:article_media', kwargs={
+            'journal_code': obj.issue.journal.code,
+            'issue_slug': obj.issue.volume_slug,
+            'issue_localid': obj.issue.localidentifier,
+            'localid': obj.localidentifier,
+            'media_localid': 'x',  # that last 'x' will be removed.
+        })
+        context['media_url_prefix'] = url[:-1]
+
         try:
             context['journal_info'] = obj.issue.journal.information
         except ObjectDoesNotExist:
