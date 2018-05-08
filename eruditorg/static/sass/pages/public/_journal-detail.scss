@@ -22,6 +22,11 @@
     .journal-subtitle {
       color: $dark-grey;
       margin-bottom: 0.25em;
+
+      &::first-letter  {
+        text-transform: capitalize;
+      }
+
     }
 
     .erudicon-open-access {
