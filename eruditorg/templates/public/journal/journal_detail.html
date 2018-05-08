@@ -66,7 +66,7 @@
     <div class="col-sm-12">
       <div class="row">
         <h1 class="col-xs-10 col-sm-11">
-          <span class="journal-title">{{ main_title.title }}</span>
+          <span class="journal-title">{% if main_title %}{{ main_title.title }}{% else %}{{ journal.name }}{% endif %}</span>
           {% if main_title.subtitle %}<span class="journal-subtitle">{{ main_title.subtitle }}</span>{% endif %}
           {% for title in paral_titles %}
           {% if title.title != main_title.title %}
