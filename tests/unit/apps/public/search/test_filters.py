@@ -317,7 +317,7 @@ class TestEruditDocumentSolrFilter(BaseEruditTestCase):
         self.assertEqual(
             filt.sqs._q, '(Metadonnees:test)')
         self.assertEqual(
-            filt.sqs._fq, 'TexteComplet:foobar')
+            filt.sqs._fq, 'TexteComplet:"foobar"')
 
     @unittest.mock.patch.object(Query, 'get_results')
     def test_can_filter_on_disciplines(self, mock_get_results):

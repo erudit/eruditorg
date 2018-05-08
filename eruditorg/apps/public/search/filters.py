@@ -251,6 +251,7 @@ class SolrFilter:
         # --
 
         if extra_q:
+            extra_q = '"{}"'.format(extra_q)
             sqs = sqs.filter_query(all=extra_q, safe=True)
 
         # STEP 4: applies the aggregation-related filters

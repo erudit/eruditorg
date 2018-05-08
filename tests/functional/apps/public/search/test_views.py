@@ -144,6 +144,15 @@ class TestEruditSearchResultsView:
         results = response.context['results']
         assert results['pagination']['count'] == 1
 
+    def test_extra_q_is_properly_escaped(self):
+        ArticleFactory(title='foo')
+        url = reverse('public:search:results')
+        response = Client().get(url, data={
+            'basic_search_term': 'foo',
+            'filter_extra_q': '+foo',
+        })
+        assert response.status_code == 200
+
 
 class TestAdvancedSearchView:
     def test_can_insert_the_saved_searches_into_the_context(self):
