@@ -175,10 +175,14 @@ class ArticleFactory(factory.django.DjangoModelFactory):
             obj.save()
 
     @factory.post_generation
-    def post(obj, create, extracted, **kwargs):
+    def from_fixture(obj, create, extracted, **kwargs):
         # we always register non-null localidentifiers with our fake API server.
         if obj.localidentifier:
-            repository.api.register_article(obj.get_full_identifier())
+            if extracted:
+                xml = open('./tests/fixtures/article/{}.xml'.format(extracted)).read()
+                repository.api.set_article_xml(obj.pid, xml)
+            else:
+                repository.api.register_article(obj.pid)
 
 
 class OpenAccessArticleFactory(ArticleFactory):

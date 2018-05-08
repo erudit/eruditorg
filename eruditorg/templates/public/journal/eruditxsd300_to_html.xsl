@@ -1057,8 +1057,8 @@
   <xsl:template match="figure/objetmedia|tableau/objetmedia">
     <xsl:variable name="imgPlGrId" select="concat('plgr-', image/@id)"/>
     <xsl:variable name="imgPlGr" select="$vars[@n = $imgPlGrId]/@value" />
-    <a href="{{ request.get_full_path }}media/{$imgPlGr}" class="lightbox {name()}"  title="{normalize-space(../legende/titre)}">
-      <img src="{{ request.get_full_path }}media/{$imgPlGr}" alt="{normalize-space(../legende/titre)}" class="img-responsive"/>
+    <a href="{{ media_url_prefix }}{$imgPlGr}" class="lightbox {name()}"  title="{normalize-space(../legende/titre)}">
+      <img src="{{ media_url_prefix }}{$imgPlGr}" alt="{normalize-space(../legende/titre)}" class="img-responsive"/>
     </a>
   </xsl:template>
 
@@ -1360,7 +1360,7 @@
     <xsl:variable name="titreImg" select="@title" xmlns:xlink="http://www.w3.org/1999/xlink" />
     <xsl:element name="img">
       <xsl:attribute name="src">
-        <xsl:if test="not(starts-with($nomImg , 'http'))">{{ request.get_full_path }}media/</xsl:if><xsl:value-of select="$nomImg"/>
+        <xsl:if test="not(starts-with($nomImg , 'http'))">{{ media_url_prefix }}</xsl:if><xsl:value-of select="$nomImg"/>
       </xsl:attribute>
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>
