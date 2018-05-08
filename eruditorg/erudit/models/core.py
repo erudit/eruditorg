@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
-from polymorphic.models import PolymorphicModel
 
 from ..managers.core import LegacyOrganisationManager
 from ..modelfields import SizeConstrainedImageField
@@ -133,19 +132,3 @@ class ThesisRepository(models.Model):
 
     def __str__(self):
         return self.code
-
-
-class EruditDocument(PolymorphicModel):
-    """ An Érudit document.
-
-    It can be an article, a thesis... This is a polymorphic model.
-    """
-    localidentifier = models.CharField(
-        max_length=100, unique=True, verbose_name=_('Identifiant unique'), db_index=True,
-        help_text=_('Identifiant Fedora du document'),
-    )
-    """ The unique identifier of an Érudit document. """
-
-    class Meta:
-        verbose_name = _('Document Érudit')
-        verbose_name_plural = _('Documents Érudit')

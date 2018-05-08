@@ -135,14 +135,13 @@ class TestJournal:
     def test_published_issues_uses_fedora_order(self):
         # The `published_issues` queryset returns a list that uses order fetched from fedora.
         journal = JournalFactory.create()
-        issue1 = IssueFactory.create(journal=journal)
-        issue2 = IssueFactory.create(journal=journal)
-        issue3 = IssueFactory.create(journal=journal)
+        issue1 = IssueFactory.create(journal=journal, add_to_fedora_journal=False)
+        issue2 = IssueFactory.create(journal=journal, add_to_fedora_journal=False)
+        issue3 = IssueFactory.create(journal=journal, add_to_fedora_journal=False)
+        # add issues to their fedora journal in a different order
         ordered_issues = [issue3, issue1, issue2]
-        ordered_pids = [i.get_full_identifier() for i in ordered_issues]
-        journal.erudit_object = unittest.mock.MagicMock()
-        journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
-            return_value=ordered_pids)
+        for issue in ordered_issues:
+            repository.api.add_publication_to_parent_journal(issue)
 
         assert list(journal.published_issues.all()) == ordered_issues
 
@@ -156,11 +155,6 @@ class TestJournal:
         # non-fedora
         i3 = IssueFactory.create_published_after(i2, localidentifier=None)
         i4 = IssueFactory.create_published_after(i3, localidentifier=None)
-        ordered_fedora_issues = [i1, i2]
-        ordered_pids = [i.get_full_identifier() for i in ordered_fedora_issues]
-        i1.journal.erudit_object = unittest.mock.MagicMock()
-        i1.journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
-            return_value=ordered_pids)
 
         assert list(i1.journal.published_issues.all()) == [i4, i3, i1, i2]
 
@@ -169,13 +163,8 @@ class TestJournal:
         # issue at the *end* of the list. We do that because cases of missing issues are most
         # likely old issues and we don't want them to end up being considered as the journal's
         # latest issue. See #1664
-        i1 = IssueFactory.create()
+        i1 = IssueFactory.create(add_to_fedora_journal=False)
         i2 = IssueFactory.create_published_after(i1)
-        ordered_fedora_issues = [i2]
-        ordered_pids = [i.get_full_identifier() for i in ordered_fedora_issues]
-        i1.journal.erudit_object = unittest.mock.MagicMock()
-        i1.journal.erudit_object.get_published_issues_pids = unittest.mock.MagicMock(
-            return_value=ordered_pids)
 
         assert list(i1.journal.published_issues.all()) == [i2, i1]
 
@@ -319,14 +308,14 @@ class TestIssue:
         with open(settings.MEDIA_ROOT + '/coverpage.png', 'rb') as f:
             issue_1 = IssueFactory.create(journal=journal)
             issue_2 = IssueFactory.create(journal=journal)
-            issue_1.fedora_object = unittest.mock.MagicMock()
-            issue_1.fedora_object.pid = "pid"
-            issue_1.fedora_object.coverpage = unittest.mock.MagicMock()
-            issue_1.fedora_object.coverpage.content = io.BytesIO(f.read())
-            issue_2.fedora_object = unittest.mock.MagicMock()
-            issue_2.fedora_object.pid = "pid2"
-            issue_2.fedora_object.coverpage = unittest.mock.MagicMock()
-            issue_2.fedora_object.coverpage.content = ''
+            issue_1._fedora_object = unittest.mock.MagicMock()
+            issue_1._fedora_object.pid = "pid"
+            issue_1._fedora_object.coverpage = unittest.mock.MagicMock()
+            issue_1._fedora_object.coverpage.content = io.BytesIO(f.read())
+            issue_2._fedora_object = unittest.mock.MagicMock()
+            issue_2._fedora_object.pid = "pid2"
+            issue_2._fedora_object.coverpage = unittest.mock.MagicMock()
+            issue_2._fedora_object.coverpage.content = ''
         # We don't crash trying to check the fedora object. We return False
         issue_3 = IssueFactory.create(journal=journal)
 
@@ -338,10 +327,10 @@ class TestIssue:
         journal = JournalFactory(open_access=True)
         with open(settings.MEDIA_ROOT + '/coverpage_empty.png', 'rb') as f:
             issue = IssueFactory.create(journal=journal)
-            issue.fedora_object = unittest.mock.MagicMock()
-            issue.fedora_object.pid = "issue"
-            issue.fedora_object.coverpage = unittest.mock.MagicMock()
-            issue.fedora_object.coverpage.content = io.BytesIO(f.read())
+            issue._fedora_object = unittest.mock.MagicMock()
+            issue._fedora_object.pid = "issue"
+            issue._fedora_object.coverpage = unittest.mock.MagicMock()
+            issue._fedora_object.coverpage.content = io.BytesIO(f.read())
 
         assert not issue.has_coverpage
 
@@ -402,29 +391,8 @@ class TestArticle:
         c1 = CollectionFactory.create(localidentifier=None)
         j1 = JournalFactory.create(collection=c1)
         issue_1 = IssueFactory.create(journal=j1)
-        article_1 = ArticleFactory.create(issue=issue_1)
-        assert article_1.fedora_object is None
-
-    def test_only_has_full_identifier_if_complete(self):
-        c1 = CollectionFactory.create(localidentifier=None)
-
-        j1 = JournalFactory.create(collection=c1, localidentifier=None)
-        i1 = IssueFactory.create(journal=j1)
-        article_1 = ArticleFactory.create(issue=i1)
-
-        assert article_1.get_full_identifier() is None
-
-        i1.localidentifier = 'issue1'
-        i1.save()
-        assert article_1.get_full_identifier() is None
-
-        j1.localidentifier = 'journal1'
-        j1.save()
-        assert article_1.get_full_identifier() is None
-
-        c1.localidentifier = 'c1'
-        c1.save()
-        assert article_1.get_full_identifier() is not None
+        with pytest.raises(Article.DoesNotExist):
+            ArticleFactory.create(issue=issue_1)
 
     def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
         j1 = JournalFactory.create(open_access=True)
@@ -459,22 +427,11 @@ class TestArticle:
         assert article2.embargoed
         assert article3.embargoed
 
-    def test_sync_with_erudit_object_doesnt_crash(self):
-        # There's not much to test in sync_with_erudit_object() that is interesting. It simply
-        # copies over stuff from its erudit_object. However, we want to make sure that it doesn't
-        # crash. This code was copied over from import_journals_from_fedora which was never
-        # unit-tested, so this code isn't fool-proof. Just... run through it.
-        article = ArticleFactory.create()
-        article.sync_with_erudit_object()
-        # that's the DOI from the default article fixture.
-        assert article.doi == '10.7202/009255ar'
-
     def test_get_from_fedora_ids_can_return_ephemeral_issues(self):
         issue = IssueFactory()
         ephemeral_pid = '{}.dummy123'.format(issue.get_full_identifier())
         repository.api.register_article(ephemeral_pid)
         article = Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
-        assert article.id is None
         assert article.get_full_identifier() == ephemeral_pid
 
     def test_get_from_fedora_ids_can_raise_DoesNotExist(self):

@@ -1,23 +1,19 @@
 import datetime as dt
 import structlog
 import re
-import urllib.parse
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.encoding import smart_str
-from eruditarticle.objects import EruditArticle
 from eruditarticle.utils import remove_xml_namespaces
 import lxml.etree as et
 
 from ...conf import settings as erudit_settings
-from ...fedora.objects import ArticleDigitalObject
 from ...fedora.objects import JournalDigitalObject
 from ...fedora.objects import PublicationDigitalObject
 from ...fedora.utils import get_pids
 from ...fedora.utils import get_unimported_issues_pids
 from ...fedora.repository import api
-from ...models import Article
 from ...models import Collection
 from ...models import Issue
 from ...models import Journal
@@ -477,9 +473,6 @@ class Command(BaseCommand):
             issue.journal = journal
             issue.fedora_created = fedora_issue.created
 
-        summary_tree = remove_xml_namespaces(
-            et.fromstring(fedora_issue.summary.content.serialize()))
-
         # Set the proper values on the Issue instance
         issue.sync_with_erudit_object()
         issue.fedora_updated = fedora_issue.modified
@@ -494,151 +487,3 @@ class Command(BaseCommand):
         if journal.name is None:
             journal.name = issue.erudit_object.get_journal_title(formatted=True)
         journal.save()
-
-        # STEP 5: imports all the articles associated with the issue
-        # --
-
-        article_count = 0
-        localidentifiers = []
-
-        xml_article_nodes = summary_tree.findall('.//article')
-        for article_node in xml_article_nodes:
-            try:
-                localidentifier = article_node.get('idproprio')
-                localidentifiers.append(localidentifier)
-                apid = '.'.join([issue_pid, localidentifier])
-                self._import_article(apid, article_node, issue)
-            except Exception as e:
-                logger.error(
-                    'article.import.error',
-                    article_pid=apid,
-                )
-                raise
-            else:
-                article_count += 1
-
-        logger.info(
-            "issue.imported",
-            issue_pid=issue.pid
-        )
-
-        # STEP 6: Clean local articles that aren't referenced in our fedora issue
-        # --
-        # WARNING: This is done **only** with unpublished issues. We never want to delete published
-        # articles from the DB, we would lose all FKs pointing to it such as bookmarks. We want to
-        # delete unreferenced articles from unpublished issues because sometimes, before
-        # publication, we mess up and create bad articles. We don't want them to stick in the DB
-        # forever.
-
-        if not issue.is_published:
-            unreferenced_articles = issue.articles.exclude(localidentifier__in=localidentifiers)
-            for article in unreferenced_articles.all():
-                article.delete()
-                logger.warn(
-                    'article.delete',
-                    article_pid=article.get_full_identifier(),
-                )
-
-        return article_count
-
-    def _import_article(self, article_pid, issue_article_node, issue):
-        """ Imports an article using its PID. """
-
-        # STEP 1: fetches the full Article fedora object
-        # --
-
-        try:
-            fedora_article = ArticleDigitalObject(api, article_pid)
-            assert fedora_article.exists
-        except AssertionError:
-            # FIXME handle this more elegantly
-            #
-            # A hack has been used to implement continuous publication for ageo.
-            # The consequence of this hack is that issue summaries reference articles that do not
-            # exist in Fedora. To bypass this, we silently ignore non-existent articles for ageo.
-            #
-            # ref https://redmine.erudit.team/issues/2296
-            if "ageo1499289" in article_pid:
-                logger.warn(
-                    'article.import.skip',
-                    article_pid='ageo1499289'
-                )
-                return
-            else:
-                logger.error(
-                    'article.import.error',
-                    article_pid=article_pid,
-                    msg='Article does not exist'
-                )
-                raise
-
-        # STEP 2: creates or updates the article object
-        # --
-
-        # Fetches the Article instance... or creates a new one
-        article_localidentifier = article_pid.split('.')[-1]
-        try:
-            article = Article.objects.get(localidentifier=article_localidentifier)
-        except Article.DoesNotExist:
-            article = Article()
-            article.localidentifier = article_localidentifier
-            article.issue = issue
-            article.fedora_created = fedora_article.created
-
-        article.fedora_updated = fedora_article.modified
-
-        urlnode = issue_article_node.find('.//urlhtml')
-        urlnode = issue_article_node.find('.//urlpdf') if urlnode is None else urlnode
-        is_external_article = False
-        if urlnode is not None:
-            urlnode_parsed = urllib.parse.urlparse(urlnode.text)
-            is_external_article = len(urlnode_parsed.netloc) and \
-                'erudit.org' not in urlnode_parsed.netloc
-
-        if is_external_article:
-            self._import_article_from_issue_node(article, issue_article_node)
-        elif fedora_article.erudit_xsd300.exists:
-            self._import_article_from_eruditarticle_v3(article, issue_article_node)
-
-    def _import_article_from_issue_node(self, article, issue_article_node):
-        """ Imports an article using its definition in the issue's summary. """
-        xml = et.tostring(issue_article_node)
-        erudit_object = EruditArticle(xml)
-        self._import_article_from_eruditarticle_v3(
-            article,
-            issue_article_node,
-            article_erudit_object=erudit_object
-        )
-
-        urlhtml = issue_article_node.find('.//urlhtml')
-        urlpdf = issue_article_node.find('.//urlpdf')
-        article.external_url = urlhtml.text if urlhtml is not None else urlpdf.text
-        if urlpdf is not None:
-            article.external_pdf_url = urlpdf.text
-        article.save()
-
-    def _get_is_publication_allowed(self, issue_article_node):
-        """ Return True if the publication of this article is allowed """
-        accessible = issue_article_node.find('accessible')
-        if accessible is not None and accessible.text == 'non':
-            return False
-        return True
-
-    def _import_article_from_eruditarticle_v3(
-        self, article, issue_article_node, article_erudit_object=None
-    ):
-        """ Imports an article using the EruditArticle v3 specification. """
-        article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
-        article.sync_with_erudit_object(article_erudit_object)
-        article.clean()
-        article.save()
-
-        if self.test_xslt:
-            try:
-                self.xslt_test_func({}, article)
-            except Exception as e:
-                logger.error(
-                    'article.xslt.error',
-                    article_pid=article.pid,
-                    msg='Cannot perform XSLT transformation'
-                )

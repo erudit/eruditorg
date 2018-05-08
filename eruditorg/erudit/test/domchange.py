@@ -60,6 +60,15 @@ class EruditArticleDomChanger(BaseDomChanger):
         titre = self.root.find('.//grtitre/titre')
         titre.text = title
 
+    def set_publication_allowed(self, publication_allowed):
+        if publication_allowed:
+            elem = self.root.find('.//accessible')
+            if elem is not None:
+                elem.parent.remove(elem)
+        else:
+            elem = E.accessible("non")
+            self.root.getroot().append(elem)
+
     def set_roc(self):
         elem = self.root.find('//corps/texte')
         if elem is not None:

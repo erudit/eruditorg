@@ -53,8 +53,6 @@ urlpatterns = [
             views.JournalExternalURLRedirectView.as_view(), name='journal_external_redirect'),
         url(_(r'^numero/(?P<localidentifier>[\w-]+)/$'),
             views.IssueExternalURLRedirectView.as_view(), name='issue_external_redirect'),
-        url(_(r'^article/(?P<localidentifier>[\w-]+)/$'),
-            views.ArticleExternalURLRedirectView.as_view(), name='article_external_redirect'),
     ])),
 
     # Google Scholar URLs

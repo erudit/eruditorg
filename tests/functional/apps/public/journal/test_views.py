@@ -665,19 +665,6 @@ class TestArticleRawPdfView:
             journal_id, issue.volume_slug, issue_id, article_id
         ))
 
-    def test_fedora_issue_with_external_url_redirects(self):
-        # When we have an article with a fedora localidentifier *and* external_url set, we redirect
-        # to that external url when we hit the raw PDF view.
-        # ref #1651
-        issue = IssueFactory.create(
-            date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(
-            issue=issue, localidentifier='articleid', external_url='http://example.com')
-        url = article_raw_pdf_url(article)
-        response = Client().get(url)
-        assert response.status_code == 302
-        assert response.url == 'http://example.com'
-
 
 class TestLegacyUrlsRedirection:
 
@@ -978,19 +965,7 @@ class TestArticleMediaView(TestCase):
         self.assertEqual(response['Content-Type'], 'image/png')
 
 
-class TestExternalURLRedirectViews(TestCase):
-
-    def test_can_redirect_to_article_external_url(self):
-        issue = IssueFactory.create(date_published=dt.datetime.now())
-        article = ArticleFactory.create(issue=issue, external_url='http://www.erudit.org')
-        response = Client().get(
-            reverse(
-                'public:journal:article_external_redirect',
-                kwargs={'localidentifier': article.localidentifier}
-            )
-        )
-        assert response.status_code == 302
-
+class TestExternalURLRedirectViews:
     def test_can_redirect_to_issue_external_url(self):
         issue = IssueFactory.create(
             date_published=dt.datetime.now(),
@@ -1022,9 +997,7 @@ def test_article_citation_doesnt_html_escape(export_type):
     # TODO: test authors name. Templates directly refer to `erudit_object` and we we don't have
     # a proper mechanism in the upcoming fake fedora API to fake values on the fly yet.
     title = "rock & rollin'"
-    article = ArticleFactory.create()
-    with repository.api.open_article(article.get_full_identifier()) as wrapper:
-        wrapper.set_title(title)
+    article = ArticleFactory.create(title=title)
     issue = article.issue
     url = reverse('public:journal:article_citation_{}'.format(export_type), kwargs={
         'journal_code': issue.journal.code, 'issue_slug': issue.volume_slug,

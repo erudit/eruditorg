@@ -1,4 +1,4 @@
-from erudit.models import EruditDocument
+from erudit.models import Article
 from erudit.solr.models import Generic
 from .models import SavedCitation
 
@@ -18,24 +18,11 @@ class SavedCitationList(set):
         else:
             # Otherwise the documents IDs are retrieved in the user's session.
             solr_ids = request.session.get(self.name, [])
-            # special case: if all ids are numeric, that very probably means that it's a legacy
-            # list containing EruditDocument ids (all solr ids have at least one letter in them).
-            # Convert them to solr ids
-            if all(x.isdigit() for x in solr_ids):
-                def get_solr_id(doc_id):
-                    try:
-                        return EruditDocument.objects.get(pk=doc_id).get_real_instance().solr_id
-                    except (EruditDocument.DoesNotExist, ValueError):
-                        return None
-
-                solr_ids = map(get_solr_id, solr_ids)
-                solr_ids = [x for x in solr_ids if x]
-
         self.update(solr_ids)
 
     @staticmethod
     def _coerce(elem):
-        if isinstance(elem, EruditDocument):
+        if isinstance(elem, Article):
             return elem.solr_id
         elif isinstance(elem, Generic):
             return elem.localidentifier

@@ -551,8 +551,7 @@ class BaseArticleDetailView(
 
         # don't cache anything when the issue is unpublished. That means that we're still working
         # on it and we want to see fresh renderings every time.
-        # we also never want to cache ephemeral articles (id = None)
-        shouldcache = obj.issue.is_published and obj.id
+        shouldcache = obj.issue.is_published
         context['cache_timeout'] = (7 * 24 * 60 * 60) if shouldcache else 0
 
         # This prefix is needed to generate media URLs in the XSD. We need to generate a valid
@@ -689,7 +688,7 @@ class ArticleEnwCitationView(SingleArticleMixin, DetailView):
     Returns the enw file of a specific article.
     """
     content_type = 'application/x-endnote-refer'
-    model = Article
+    context_object_name = 'article'
     template_name = 'public/journal/citation/article.enw'
 
 
@@ -698,7 +697,7 @@ class ArticleRisCitationView(SingleArticleMixin, DetailView):
     Returns the ris file of a specific article.
     """
     content_type = 'application/x-research-info-systems'
-    model = Article
+    context_object_name = 'article'
     template_name = 'public/journal/citation/article.ris'
 
 
@@ -707,17 +706,17 @@ class ArticleBibCitationView(SingleArticleMixin, DetailView):
     Returns the bib file of a specific article.
     """
     content_type = 'application/x-bibtex'
-    model = Article
+    context_object_name = 'article'
     template_name = 'public/journal/citation/article.bib'
 
 
 class ArticleFormatDownloadView(
         RedirectExceptionsToFallbackWebsiteMixin, ArticleViewMetricCaptureMixin,
-        ContentAccessCheckMixin, PermissionRequiredMixin,
+        ContentAccessCheckMixin, PermissionRequiredMixin, SingleArticleMixin,
         FedoraFileDatastreamView):
 
     def get_content(self):
-        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
+        return self.get_object()
 
     def get_fedora_object_pid(self):
         article = self.get_content()
@@ -728,14 +727,10 @@ class ArticleFormatDownloadView(
 
     def has_permission(self):
         obj = self.get_permission_object()
-        return (not obj.external_url) and obj.publication_allowed and self.content_access_granted
+        return obj.publication_allowed and self.content_access_granted
 
     def handle_no_permission(self):
-        obj = self.get_permission_object()
-        if obj.external_url:
-            return redirect(obj.external_url)
-        else:
-            return redirect('public:journal:article_detail', **self.kwargs)
+        return redirect('public:journal:article_detail', **self.kwargs)
 
 
 class ArticleXmlView(ArticleFormatDownloadView):
@@ -834,7 +829,7 @@ class ArticleMediaView(CacheMixin, SingleArticleMixin, FedoraFileDatastreamView)
     fedora_object_class = MediaDigitalObject
 
     def get_fedora_object_pid(self):
-        article = get_object_or_404(Article, localidentifier=self.kwargs['localid'])
+        article = self.get_object()
         issue_pid = article.issue.pid
         return '{0}.{1}'.format(issue_pid, self.kwargs['media_localid'])
 
@@ -911,11 +906,3 @@ class IssueExternalURLRedirectView(BaseExternalURLRedirectView):
 
     def get_collection(self, obj):
         return obj.journal.collection
-
-
-class ArticleExternalURLRedirectView(BaseExternalURLRedirectView):
-    model = Article
-    object_identifier_field = 'localidentifier'
-
-    def get_collection(self, obj):
-        return obj.issue.journal.collection

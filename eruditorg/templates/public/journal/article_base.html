@@ -6,7 +6,7 @@
 {% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal.name|safe article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
-{% cache cache_timeout "public_article_detail_metatags" article.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_article_detail_metatags" article.localidentifier LANGUAGE_CODE %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="article">
@@ -95,7 +95,7 @@
 
 {% block structured_data %}
 {{ block.super }}
-{% cache cache_timeout "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_article_detail_structured_data" article.localidentifier LANGUAGE_CODE %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
 <script type="application/ld+json">
@@ -177,7 +177,7 @@
   <h2>{% trans "Autres articles de ce numéro" %}</h2>
   <ul class="row">
     {% for related_article in related_articles %}
-    {% cache cache_timeout "public_article_detail_related_article" related_article.id LANGUAGE_CODE %}
+    {% cache cache_timeout "public_article_detail_related_article" related_article.localidentifier LANGUAGE_CODE %}
     <li class="related-article col-sm-6 col-md-3">
       <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
         <p class="related-article-title">{{ related_article|format_article_html_title }}</p>

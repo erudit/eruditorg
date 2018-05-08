@@ -121,7 +121,6 @@ class Article(Generic):
             solr_data.get('RevueID'),
             solr_data.get('NumeroID'),
             self.localidentifier)
-        self.id = self.obj.id
 
     def __getattr__(self, name):
         return getattr(self.obj, name)

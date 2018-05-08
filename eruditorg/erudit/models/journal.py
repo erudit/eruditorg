@@ -8,12 +8,13 @@ from lxml import etree as et
 from django.core.cache import caches
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q, Case, When
 from django.utils.functional import cached_property
 from django.utils.translation import get_language
-from django.utils.translation import gettext_lazy as _, pgettext
+from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
@@ -41,7 +42,7 @@ from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 from ..utils import get_sort_key_func, strip_stopwords_prefix
 
-from .core import Collection, EruditDocument, Publisher
+from .core import Collection, Publisher
 
 cache = caches['fedora']
 
@@ -576,7 +577,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
-                yield Article.from_issue_and_localidentifier(self, article_node.get('idproprio'))
+                yield Article(self, article_node.get('idproprio'))
             except Article.DoesNotExist:
                 pass
 
@@ -757,96 +758,23 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return self.title
 
 
-class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
-    """ An article of an issue. """
-
-    issue = models.ForeignKey('Issue', related_name='articles', verbose_name=_('Numéro'))
-    """ The issue of the article """
-
-    doi = models.CharField(max_length=50, verbose_name=_('DOI'), blank=True, null=True)
-    """ The DOI of the article """
-
-    ordseq = models.PositiveIntegerField(verbose_name=_('Ordonnancement'))
-    """ A value that can be used to sort articles """
-
-    first_page = models.CharField(
-        max_length=16, null=True, blank=True, verbose_name=_('Première page'))
-    """ The first page of the article """
-
-    last_page = models.CharField(
-        max_length=16, null=True, blank=True, verbose_name=_('Dernière page'))
-    """ The last page of the article """
-
-    language = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('Code langue'))
-    """ The language code of the article """
-
-    external_url = models.URLField(
-        null=True, blank=True, verbose_name=_('URL'),
-        help_text=_("Renseigner si l'article est hébergé à l'extérieur de la plateforme Érudit"),
-    )
-    """ External URL of the article """
-
-    external_pdf_url = models.URLField(
-        null=True, blank=True, verbose_name=_('URL PDF'),
-        help_text=_("Renseigner si le PDF de l'article est hébergé à l'extérieur de la plateforme Érudit")  # noqa
-
-    )
-    """ External URL of the PDF version of the article """
+class Article(FedoraMixin):
+    class DoesNotExist(ObjectDoesNotExist):
+        pass
 
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
         'article', 'compterendu', 'autre', 'note'
     )
+    PROCESSING_FULL = 'C'
+    PROCESSING_MINIMAL = 'M'
 
-    TYPE_CHOICES = (
-        (ARTICLE_DEFAULT, _('Article')),
-        (ARTICLE_REPORT, _('Compte rendu')),
-        (ARTICLE_NOTE, pgettext("Article Note", "Note")),
-        (ARTICLE_OTHER, _('Autre')),
-    )
-    type = models.CharField(max_length=64, choices=TYPE_CHOICES, verbose_name=_('Type'))
-
-    PROCESSING_FULL, PROCESSING_MINIMAL = 'C', 'M'
-    PROCESSING_CHOICES = (
-        (PROCESSING_FULL, _('Complet')),
-        (PROCESSING_MINIMAL, _('Minimal')),
-    )
-    processing = models.CharField(max_length=1, choices=PROCESSING_CHOICES)
-    """ Type of processing of the article """
-
-    publication_allowed = models.BooleanField(
-        verbose_name=_("Publication autorisée par le titulaire du droit d'auteur"), default=True)
-    """ Defines if the article can be published on the Érudit platform accrding to the copyright holders """  # noqa
-
-    class Meta:
-        verbose_name = _('Article')
-        verbose_name_plural = _('Articles')
-
-    def get_absolute_url(self):
-        return reverse(
-            'public:journal:article_detail', args=(
-                self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
-                self.localidentifier)
-        )
-
-    def get_formatted_authors(self, style=None):
-        return self.erudit_object.get_authors(formatted=True, style=style)
-
-    def get_formatted_authors_mla(self):
-        return self.get_formatted_authors(style='mla')
-
-    def get_formatted_authors_apa(self):
-        return self.get_formatted_authors(style='apa')
-
-    def get_formatted_authors_chicago(self):
-        return self.get_formatted_authors(style='chicago')
-
-    def sync_with_erudit_object(self, erudit_object=None):
-        """ Copy ``erudit_object``'s values in appropriate fields in ``self``.
-
-        :param erudit_object: A ``EruditArticle``.
-        """
-        if erudit_object is None:
-            erudit_object = self.erudit_object
+    def __init__(self, issue, localidentifier, **kwargs):
+        super().__init__()
+        self.issue = issue
+        self.localidentifier = localidentifier
+        if not self.is_in_fedora:
+            raise Article.DoesNotExist()
+        erudit_object = self.erudit_object
 
         processing = erudit_object.processing
         processing_mapping = {
@@ -867,6 +795,32 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         self.first_page = erudit_object.first_page
         self.last_page = erudit_object.last_page
         self.language = erudit_object.language
+        node = erudit_object._dom.find('accessible')
+        self.publication_allowed = node is None or node.text != 'non'
+        urlpdf = erudit_object._dom.find('.//urlpdf')
+        self.external_pdf_url = urlpdf.text if urlpdf is not None else None
+
+        for key, val in kwargs.items():
+            setattr(self, key, val)
+
+    def get_absolute_url(self):
+        return reverse(
+            'public:journal:article_detail', args=(
+                self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
+                self.localidentifier)
+        )
+
+    def get_formatted_authors(self, style=None):
+        return self.erudit_object.get_authors(formatted=True, style=style)
+
+    def get_formatted_authors_mla(self):
+        return self.get_formatted_authors(style='mla')
+
+    def get_formatted_authors_apa(self):
+        return self.get_formatted_authors(style='apa')
+
+    def get_formatted_authors_chicago(self):
+        return self.get_formatted_authors(style='chicago')
 
     @property
     def title(self):
@@ -898,6 +852,9 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
             return self.title
         return _('Aucun titre')
 
+    def __repr__(self):
+        return "<Article: {}>".format(self.pid)
+
     def __eq__(self, other):
         return self.localidentifier is not None and self.localidentifier == other.localidentifier
 
@@ -919,22 +876,13 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
         return None
 
     @staticmethod
-    def from_issue_and_localidentifier(issue, localidentifier):
-        article = Article(issue=issue, localidentifier=localidentifier)
-        if article.is_in_fedora:
-            article.sync_with_erudit_object()
-            return article
-        else:
-            raise Article.DoesNotExist()
-
-    @staticmethod
     def from_fedora_ids(journal_code, issue_localidentifier, localidentifier):
         try:
             issue = Issue.from_fedora_ids(journal_code, issue_localidentifier)
         except Issue.DoesNotExist:
             raise Article.DoesNotExist()
         else:
-            return Article.from_issue_and_localidentifier(issue, localidentifier)
+            return Article(issue, localidentifier)
 
     # Article-related methods and properties
     # --

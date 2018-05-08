@@ -55,22 +55,6 @@ def test_can_save_the_set_of_articles_to_the_session():
     assert request.session['saved-citations'] == [article.solr_id]
 
 
-def test_converts_legacy_sessions():
-    # We would previously save EruditDocument pk in our saved lists and because
-    # some lists are stores in cookies, we can't deal with the pk->solr_id
-    # migrations with a simple data migration. We have to make sure that "legacy"
-    # sessions are properly supported.
-    issue = IssueFactory.create()
-    article = ArticleFactory.create(issue=issue)
-    request = RequestFactory().get('/')
-    request.user = AnonymousUser()
-    middleware = SessionMiddleware()
-    middleware.process_request(request)
-    request.session['saved-citations'] = [str(article.id)]
-    citation_list = SavedCitationList(request)
-    assert citation_list == {article.solr_id}
-
-
 def test_can_associate_the_article_to_the_registered_users():
     issue = IssueFactory.create()
     article = ArticleFactory.create(issue=issue)

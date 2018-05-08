@@ -5,7 +5,7 @@ import pysolr
 from faker import Factory
 
 from ..fedora import repository
-from ..models import JournalType
+from ..models import JournalType, Article
 from .solr import SolrDocument
 
 faker = Factory.create()
@@ -149,7 +149,7 @@ class IssueFactory(factory.django.DjangoModelFactory):
             repository.api.register_publication(obj.get_full_identifier())
 
     @factory.post_generation
-    def add_to_fedora_issue(obj, create, extracted, **kwargs):
+    def add_to_fedora_journal(obj, create, extracted, **kwargs):
         if obj.localidentifier and obj.is_published and (extracted is None or extracted):
             repository.api.add_publication_to_parent_journal(obj)
 
@@ -180,21 +180,24 @@ class NonEmbargoedIssueFactory(IssueFactory):
     )
 
 
-class ArticleFactory(factory.django.DjangoModelFactory):
-
+class ArticleFactory(factory.Factory):
     issue = factory.SubFactory(IssueFactory)
     localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
-    type = 'article'
-    ordseq = 0
 
     class Meta:
-        model = 'erudit.article'
+        model = Article
 
-    @factory.post_generation
-    def title(obj, create, extracted, **kwargs):
-        if extracted and obj.localidentifier:
-            with repository.api.open_article(obj.pid) as wrapper:
-                wrapper.set_title(extracted)
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        issue = kwargs['issue']
+        localidentifier = kwargs['localidentifier']
+        assert localidentifier
+        pid = "{}.{}".format(issue.pid, localidentifier)
+        repository.api.register_article(pid)
+        result = model_class(*args, **kwargs)
+        # reset erudit_object so that tweaked fedora attributes can take effect
+        result.reset_fedora_objects()
+        return result
 
     @factory.post_generation
     def from_fixture(obj, create, extracted, **kwargs):
@@ -207,8 +210,26 @@ class ArticleFactory(factory.django.DjangoModelFactory):
                 repository.api.register_article(obj.pid)
 
     @factory.post_generation
+    def title(obj, create, extracted, **kwargs):
+        if extracted:
+            with repository.api.open_article(obj.pid) as wrapper:
+                wrapper.set_title(extracted)
+
+    @factory.post_generation
+    def section_titles(obj, create, extracted, **kwargs):
+        if extracted is not None:
+            with repository.api.open_article(obj.pid) as wrapper:
+                wrapper.set_section_titles(extracted)
+
+    @factory.post_generation
+    def publication_allowed(obj, create, extracted, **kwargs):
+        if extracted is not None:
+            with repository.api.open_article(obj.pid) as wrapper:
+                wrapper.set_publication_allowed(extracted)
+
+    @factory.post_generation
     def add_to_fedora_issue(obj, create, extracted, **kwargs):
-        if obj.localidentifier and (extracted is None or extracted):
+        if extracted is None or extracted:
             repository.api.add_article_to_parent_publication(obj)
 
     @factory.post_generation

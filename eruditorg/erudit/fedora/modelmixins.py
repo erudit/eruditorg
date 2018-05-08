@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from django.conf import settings
@@ -53,9 +51,11 @@ class FedoraMixin:
         if self.get_full_identifier():
             return self.fedora_model(api, self.pid)
 
-    @cached_property
+    @property
     def fedora_object(self):
-        return self.get_fedora_object()
+        if getattr(self, '_fedora_object', None) is None:
+            self._fedora_object = self.get_fedora_object()
+        return self._fedora_object
 
     def get_erudit_class(self):
         """
@@ -111,6 +111,12 @@ class FedoraMixin:
         except RequestFailed:
             return False
 
-    @cached_property
+    @property
     def erudit_object(self):
-        return self.get_erudit_object()
+        if getattr(self, '_erudit_object', None) is None:
+            self._erudit_object = self.get_erudit_object()
+        return self._erudit_object
+
+    def reset_fedora_objects(self):
+        self._fedora_object = None
+        self._erudit_object = None

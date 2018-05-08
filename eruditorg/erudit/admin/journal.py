@@ -1,12 +1,10 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
-from django.db.models import Q
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 from django import forms
 
-from ..models import Article
 from ..models import Issue
 from ..models import Journal
 from ..models import JournalInformation
@@ -148,118 +146,6 @@ class IssueAdmin(admin.ModelAdmin):
     view_issue_on_site.short_description = _("Voir le numéro sur le site")
 
 
-class ArticleExternalStatusFilter(admin.SimpleListFilter):
-    title = "Lien Externe"
-    parameter_name = 'external_status'
-    query_field_name = 'external_url'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('yes', "Oui"),
-            ('no', "Non"),
-        )
-
-    def queryset(self, request, queryset):
-        fn = self.query_field_name
-        external_is_empty = Q(**{'%s__isnull' % fn: True}) | Q(**{fn: ''})
-        if self.value() == 'yes':
-            return queryset.filter(~external_is_empty)
-        if self.value() == 'no':
-            return queryset.filter(external_is_empty)
-
-
-class ArticleExternalPDFStatusFilter(ArticleExternalStatusFilter):
-    title = "Lien PDF Externe"
-    parameter_name = 'external_pdf_status'
-    query_field_name = 'external_pdf_url'
-
-
-class ArticleAdmin(admin.ModelAdmin):
-
-    readonly_fields = (
-        'issue', 'type', 'article_title', 'doi', 'localidentifier', 'article_journal',
-        'fedora_created', 'fedora_updated',
-    )
-
-    list_display = (
-        'localidentifier',
-        'issue__localidentifier',
-        'issue__year',
-        'title',
-        'external_status',
-    )
-    raw_id_fields = ('issue', )
-    search_fields = ('id', 'localidentifier', )
-    list_filter = (
-        'type',
-        ArticleExternalStatusFilter,
-        ArticleExternalPDFStatusFilter,
-        'issue__journal__collection',
-        'issue__journal',
-        'issue__year')
-
-    def issue__localidentifier(self, obj):
-        return obj.issue.localidentifier
-
-    issue__localidentifier.short_description = "Numéro"
-    issue__localidentifier.admin_order_field = 'issue__localidentifier'
-
-    def issue__year(self, obj):
-        return obj.issue.year
-
-    issue__year.short_description = "Année"
-    issue__year.admin_order_field = 'issue__year'
-
-    def article_title(self, obj):
-        return obj.title
-
-    def article_journal(self, obj):
-        return obj.issue.journal
-
-    article_journal.short_description = 'Revue'
-    article_title.short_description = "Titre de l'article"
-
-    def external_status(self, obj):
-        if obj.external_url:
-            if obj.external_pdf_url:
-                return "HTML + PDF"
-            else:
-                return "HTML"
-        else:
-            if obj.external_pdf_url:
-                return "PDF"
-            else:
-                return "Non"
-
-    external_status.short_description = 'Externe?'
-
-    fieldsets = [
-        ('Identification', {
-            'fields': (
-                ('localidentifier', 'type'),
-                ('article_title',),
-                ('article_journal', 'issue',),
-            ),
-        }),
-        ("Synchronisation", {
-            'fields': (
-                ('fedora_created', 'fedora_updated', )
-            )
-        }),
-        ("Localisation de l'article", {
-            'fields': (
-                'external_url', 'external_pdf_url',
-            )
-        }),
-
-        ("Restrictions d'accès", {
-            'fields': (
-                'publication_allowed',
-            )
-        }),
-    ]
-
-
 class JournalInformationAdmin(TranslationAdmin):
     pass
 
@@ -270,7 +156,6 @@ class JournalTypeAdmin(TranslationAdmin):
 
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Issue, IssueAdmin)
-admin.site.register(Article, ArticleAdmin)
 admin.site.register(JournalInformation, JournalInformationAdmin)
 admin.site.unregister(JournalType)
 admin.site.register(JournalType, JournalTypeAdmin)
