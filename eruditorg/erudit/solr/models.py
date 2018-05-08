@@ -174,13 +174,6 @@ class Article(Generic):
         return _('Article')
 
     @property
-    def title(self):
-        if self.obj.is_in_fedora:
-            return self.obj.title
-        else:
-            return super().title
-
-    @property
     def paral_titles(self):
         if self.obj.is_in_fedora:
             titles = self.obj.erudit_object.get_titles()
@@ -215,7 +208,7 @@ class Article(Generic):
     @property
     def journal_type(self):
         if self.obj.issue.journal.type:
-            return self.obj.issue.journal.type.get_code_display().lower()
+            return self.obj.issue.journal.type.code
         return ''
 
     @property
@@ -289,6 +282,22 @@ class Article(Generic):
         return []
 
 
+class SolrArticle(Generic):
+
+    @property
+    def journal_type(self):
+        return 'S'
+
+    @property
+    def type(self):
+        if 'TypeArticle_fac' not in self.solr_data:
+            return _('Article')
+        article_type = self.solr_data['TypeArticle_fac']
+        if article_type == 'Compterendu':
+            return _("Compte rendu")
+        return _('Article')
+
+
 class Thesis(Generic):
     def can_cite(self):
         return True
@@ -335,6 +344,6 @@ def get_model_instance(solr_data):
         try:
             return Article(solr_data)
         except ObjectDoesNotExist:
-            pass
+            return SolrArticle(solr_data)
 
     return Generic(solr_data)

@@ -171,22 +171,6 @@
                   <h3>
                     <a href="{{ document.url }}" target="_blank">
                       <span>{{ document.title|safe }}</span>
-                      {% if document.subtitle %}
-                      <span><br/>{{ document.subtitle|safe }}</span>
-                      {% endif %}
-                      {% if document.paral_titles %}
-                        {% for paral_title in document.paral_titles %}
-                            <br><span>{{ paral_title.title|safe }}</span>
-                            {% if paral_title.subtitle %}
-                            <br><span>{{ paral_title.subtitle|safe }}</span>
-                            {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                      {% if document.reviewed_works %}
-                      {% for reference in document.reviewed_works %}
-                      <br><span>{{ reference|safe }}</span>
-                      {% endfor %}
-                      {% endif %}
                     </a>
                   </h3>
                 </div>
@@ -209,8 +193,9 @@
                       {% if article.type == 'note' or article.type == 'Note' %}{% trans 'publiée' %}{% else %}{% trans 'publié' %}{% endif %}
                       {# journal type and collection #}
                       {% trans "dans" %}
+
                       <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series }}</a></em>
-                      ({% if article.journal_type == 'culturel' %}{% trans "culturelle" %}{% elif article.journal_type == 'savant' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection }})
+                      ({% if article.journal_type == 'C' %}{% trans "culturelle" %}{% elif article.journal_type == 'S' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection }})
                       <br/>
                       {# issue theme #}
                     {% endwith %}
