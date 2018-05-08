@@ -217,13 +217,13 @@
       </div>
 
       {% if journal_info.twitter_enable_feed and journal_info.twitter_url %}
-      <div class="journal-meta--list">
+      <div class="text-center journal-meta--list">
         <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
       {% endif %}
 
       {% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
-      <div class="journal-meta--list">
+      <div class="text-center journal-meta--list">
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
       </div>
       {% endif %}
