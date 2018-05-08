@@ -3,7 +3,6 @@
  */
 
 .grresume {
-  padding-bottom: $padding-vertical-default;
 
   > .resume {
     padding-bottom: 2em;
@@ -35,16 +34,30 @@
 
     }
 
-  }
+    &:last-of-type {
+      border: 0;
+      padding-bottom: 0;
+    }
 
-  &:last-of-type {
-    border: none;
   }
 
   &.double-col {
 
     @media (min-width: $screen-sm-min) {
         @include column-count(2);
+    }
+
+  }
+
+  .keywords {
+    margin-top: $margin-vertical-default/2;
+
+    p, ul, li {
+      display: inline;
+      line-height: 1.15;
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
   }

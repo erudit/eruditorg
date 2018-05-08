@@ -20,7 +20,7 @@ $article-toolbar-width: 80px;
   .article-header {
     position: relative;
     margin-bottom: 1em;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $mid-grey;
 
     h1 {
       margin-bottom: 0.25em;
@@ -175,7 +175,7 @@ $article-toolbar-width: 80px;
 
     .meta-article,
     .meta-journal {
-      border-top: 1px solid $dark-grey;
+      border-top: 1px solid $mid-grey;
       padding: 1em 0;
     }
 
@@ -319,7 +319,7 @@ $article-toolbar-width: 80px;
   * Article body
   */
   .grresume + .corps {
-    border-top: 1px solid #000;
+    border-top: 1px solid $dark-grey;
     padding-top: 1em;
   }
 
@@ -393,29 +393,13 @@ $article-toolbar-width: 80px;
   }
 
   /**
-  * keywords
-  */
-  .motscles {
-    margin-top: $margin-vertical-default/2;
-
-    ul {
-      @media (max-width: $screen-xs-max) {
-        display: block;
-      }
-    }
-
-  }
-
-  /**
   * Appendices (grannexe | merci | grnotebio | grnote | grbiblio)
   */
 
   .partiesann {
 
     > section:first-of-type h2 {
-      margin-top: 0;
-      padding-top: 0.25em;
-      border-top: 1px solid #000;
+      margin-top: 1em;
     }
 
   }

@@ -374,36 +374,72 @@
               {{ main_abstract.content|safe }}
               {% for lang, keywords in html_abstracts_keywords.items %}
               {% if lang == titles.main.lang %}
-                {{ keywords }}
+              <div class="keywords">
+                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
+                <ul>
+                  {% for k in keywords %}
+                  <li class="keyword">{{ k }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
               {% endif %}
               {% endfor %}
-
             </section>
             {% if paral_abstracts %}
+            <section id="resume-{{ paral_abstracts.lang }}" class="resume">
             {% for abstract in paral_abstracts %}
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.paral %}
               {% for lang, keywords in html_abstracts_keywords.items %}
               {% if lang == abstract.lang %}
-                {{ keywords }}
+              <div class="keywords">
+                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
+                <ul>
+                  {% for k in keywords %}
+                  <li class="keyword">{{ k }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
               {% endif %}
               {% endfor %}
             {% endfor %}
+            </section>
             {% endif %}
             {% if eq_abstracts %}
             {% for abstract in eq_abstracts %}
+            <section id="resume-{{ eq_abstracts.lang }}" class="resume">
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.equivalent %}
               {% for lang, keywords in html_abstracts_keywords.items %}
               {% if lang == abstract.lang %}
-                {{ keywords }}
+              <div class="keywords">
+                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
+                <ul>
+                  {% for k in keywords %}
+                  <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
+                  {% endfor %}
+                </ul>
+              </div>
               {% endif %}
               {% endfor %}
+            </section>
             {% endfor %}
             {% if lang == abstract.lang %}
                 {{ keywords }}
             {% endif %}
             {% endif %}
-
-            {{ html_other_keywords }}
+            {% if html_other_keywords %}
+            <section class="resume">
+              {% for lang, keywords in html_other_keywords.items %}
+              <div class="keywords">
+                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
+                <ul>
+                  {% for k in keywords %}
+                  <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endfor %}
+            </section>
+            {% endif %}
           </section>
         {% endwith %}
         {% endif %}
