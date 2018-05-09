@@ -23,15 +23,6 @@ export default {
   },
 
   stickyElements: function() {
-    function stickyFilterForm(offset) {
-      let form = $('.filters');
-
-      if ($(window).scrollTop() >= offset) {
-        form.addClass('sticky');
-      } else {
-        form.removeClass('sticky');
-      }
-    }
 
     function stickyItemsMenu(offset) {
       let menu = $('.list-header');
@@ -49,7 +40,6 @@ export default {
 
       $(window).scroll(function () {
         var origOffsetY = $('#journal_list_per_names').offset().top + 390;
-        stickyFilterForm(origOffsetY);
         stickyItemsMenu(origOffsetY);
       });
 
