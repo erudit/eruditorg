@@ -7,7 +7,6 @@ import itertools
 from hashlib import md5
 
 from django.contrib.auth.models import AnonymousUser
-from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
@@ -72,7 +71,6 @@ def article_raw_pdf_url(article):
     ))
 
 
-@pytest.mark.django_db
 class TestJournalListView:
 
     @pytest.fixture(autouse=True)
@@ -214,7 +212,6 @@ class TestJournalListView:
         assert set(response.context['journals']) == {j1, j2, j3}
 
 
-@pytest.mark.django_db
 class TestJournalDetailView:
 
     @pytest.fixture(autouse=True)
@@ -296,7 +293,7 @@ class TestJournalDetailView:
         # when an issue has an external url, we never show a little lock icon next to it.
         external_url = 'https://example.com'
         collection = CollectionFactory.create(code='erudit')
-        journal = JournalFactory(open_access=False, collection=collection) # embargoed
+        journal = JournalFactory(open_access=False, collection=collection)  # embargoed
         issue1 = IssueFactory.create(journal=journal, external_url=external_url)
 
         url = journal_detail_url(issue1.journal)
@@ -612,16 +609,10 @@ class TestArticleDetailView:
         assert b'barmedia/' not in response.content
 
 
-@override_settings(DEBUG=True)
-class TestArticleRawPdfView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestArticleRawPdfView, self).setUp()
-        self.factory = RequestFactory()
-
+class TestArticleRawPdfView:
     @unittest.mock.patch.object(ArticleDigitalObject, 'pdf')
     @unittest.mock.patch.object(subprocess, 'check_call')
     def test_can_retrieve_the_pdf_of_existing_articles(self, mock_check_call, mock_pdf):
-        # Setup
         with open(os.path.join(FIXTURE_ROOT, 'dummy.pdf'), 'rb') as f:
             mock_pdf.content = io.BytesIO()
             mock_pdf.content.write(f.read())
@@ -637,25 +628,22 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = article_raw_pdf_url(article)
-        request = self.factory.get(url)
+        request = RequestFactory().get(url)
         request.user = AnonymousUser()
         request.subscriptions = UserSubscriptions()
 
-        # Run
         response = ArticleRawPdfView.as_view()(
             request, journal_code=journal_id, issue_slug=issue.volume_slug, issue_localid=issue_id,
             localid=article_id)
 
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'application/pdf')
+        assert response.status_code == 200
+        assert response['Content-Type'] == 'application/pdf'
 
     def test_cannot_retrieve_the_pdf_of_inexistant_articles(self):
         # Note: as there is no Erudit fedora repository used during the
         # test, any tentative of retrieving the PDF of an article should
         # fail.
 
-        # Setup
         journal_id = 'dummy139'
         issue_slug = 'test'
         issue_id = 'dummy1515298'
@@ -663,28 +651,23 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         url = reverse('public:journal:article_raw_pdf', args=(
             journal_id, issue_slug, issue_id, article_id
         ))
-        # Run
-        response = self.client.get(url)
-        # Check that we are redirected
-        self.assertEqual(response.status_code, 302)
+        response = Client().get(url)
+        assert response.status_code == 302
 
     def test_cannot_be_accessed_if_the_article_is_not_in_open_access(self):
-        # Setup
-        self.journal.open_access = False
-        self.journal.save()
+        journal = JournalFactory(open_access=False)
         issue = IssueFactory.create(
-            journal=self.journal, year=dt.datetime.now().year, date_published=dt.datetime.now())
+            journal=journal, year=dt.datetime.now().year, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
-        journal_id = self.journal.localidentifier
+        journal_id = journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = article_raw_pdf_url(article)
 
-        request = self.factory.get(url)
+        request = RequestFactory().get(url)
         request.user = AnonymousUser()
         request.subscriptions = UserSubscriptions()
 
-        # Run & check
         response = ArticleRawPdfView.as_view()(
             request, journal_code=journal_id, issue_slug=issue.volume_slug,
             issue_localid=issue_id, localid=article_id)
@@ -695,20 +678,17 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         ))
 
     def test_cannot_be_accessed_if_the_publication_of_the_article_is_not_allowed_by_its_authors(self):  # noqa
-        # Setup
-        self.journal.open_access = False
-        self.journal.save()
+        journal = JournalFactory(open_access=False)
         issue = IssueFactory.create(
-            journal=self.journal, year=2010, date_published=dt.datetime.now())
+            journal=journal, year=2010, date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue, publication_allowed=False)
-        journal_id = self.journal.localidentifier
+        journal_id = journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = article_raw_pdf_url(article)
-        request = self.factory.get(url)
+        request = RequestFactory().get(url)
         request.user = AnonymousUser()
 
-        # Run & check
         response = ArticleRawPdfView.as_view()(
             request, journal_code=journal_id, issue_slug=issue.volume_slug,
             issue_localid=issue_id, localid=article_id)
@@ -723,21 +703,22 @@ class TestArticleRawPdfView(BaseEruditTestCase):
         # to that external url when we hit the raw PDF view.
         # ref #1651
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
-        article = ArticleFactory.create(issue=issue, localidentifier='articleid',
+            date_published=dt.datetime.now(), localidentifier='test')
+        article = ArticleFactory.create(
+            issue=issue, localidentifier='articleid',
             external_url='http://example.com')
         url = article_raw_pdf_url(article)
-        response = self.client.get(url)
+        response = Client().get(url)
         assert response.status_code == 302
         assert response.url == 'http://example.com'
 
 
-class TestLegacyUrlsRedirection(BaseEruditTestCase):
+class TestLegacyUrlsRedirection:
 
     def test_can_redirect_issue_support_only_volume_and_year(self):
         journal = JournalFactory(code='test')
         issue = IssueFactory(journal=journal, volume="1", number="1", year="2017")
-        issue_2 = IssueFactory(journal=issue.journal, volume="1", number="2", year="2017")
+        IssueFactory(journal=issue.journal, volume="1", number="2", year="2017")
         article = ArticleFactory()
         article.issue.volume = "1"
         article.issue.number = "1"
@@ -756,7 +737,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             volume=article.issue.volume,
         )
 
-        resp = self.client.get(url)
+        resp = Client().get(url)
 
         assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
             journal_code=article2.issue.journal.code,
@@ -765,7 +746,6 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         ))
 
     def test_can_redirect_issue_detail_with_empty_volume(self):
-        from django.utils.translation import deactivate_all
         issue = IssueFactory(number="1", volume="1", year="2017")
         issue2 = IssueFactory(journal=issue.journal, volume="2", number="1", year="2017")
         url = "/revue/{journal_code}/{year}/v/n{number}/".format(
@@ -774,7 +754,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             year=issue.year,
         )
 
-        resp = self.client.get(url)
+        resp = Client().get(url)
 
         assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
             journal_code=issue2.journal.code,
@@ -796,7 +776,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             article_localidentifier=article.localidentifier
         )
 
-        resp = self.client.get(url)
+        resp = Client().get(url)
         assert resp.status_code == 301
 
 
@@ -807,7 +787,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             article_localidentifier=article.localidentifier
         )
 
-        resp = self.client.get(url)
+        resp = Client().get(url)
 
         assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
             journal_code=article.issue.journal.code,
@@ -819,7 +799,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         assert resp.status_code == 301
 
         deactivate_all()
-        resp = self.client.get(url + "?lang=en")
+        resp = Client().get(url + "?lang=en")
 
         assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
             journal_code=article.issue.journal.code,
@@ -837,7 +817,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             article_localidentifier=article.localidentifier
         )
         deactivate_all()
-        resp = self.client.get(url)
+        resp = Client().get(url)
 
         assert resp.url == reverse('public:journal:article_detail', kwargs=dict(
             journal_code=article.issue.journal.code,
@@ -860,7 +840,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
             volume=article.issue.volume,
             number=article.issue.number
         )
-        resp = self.client.get(url)
+        resp = Client().get(url)
 
         assert resp.url == reverse('public:journal:issue_detail', kwargs=dict(
             journal_code=article.issue.journal.code,
@@ -877,7 +857,7 @@ class TestLegacyUrlsRedirection(BaseEruditTestCase):
         url = "/revue/{code}/".format(
             code=article.issue.journal.code,
         )
-        resp = self.client.get(url)
+        resp = Client().get(url)
 
         assert resp.url == journal_detail_url(article.issue.journal)
         assert resp.status_code == 301
@@ -887,46 +867,60 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
 
     FALLBACK_URL = settings.FALLBACK_BASE_URL
 
-    @pytest.fixture(params=itertools.product([
-        {'code': 'nonexistent'}], ['legacy_journal:legacy_journal_detail', 'legacy_journal:legacy_journal_detail_index',
-        'legacy_journal:legacy_journal_authors', 'legacy_journal:legacy_journal_detail_culture',
-        'legacy_journal:legacy_journal_detail_culture_index', 'legacy_journal:legacy_journal_authors_culture'
-    ]))
+    @pytest.fixture(params=itertools.product(
+        [{'code': 'nonexistent'}],
+        [
+            'legacy_journal:legacy_journal_detail',
+            'legacy_journal:legacy_journal_detail_index',
+            'legacy_journal:legacy_journal_authors',
+            'legacy_journal:legacy_journal_detail_culture',
+            'legacy_journal:legacy_journal_detail_culture_index',
+            'legacy_journal:legacy_journal_authors_culture'
+        ]
+    ))
     def journal_url(self, request):
         kwargs = request.param[0]
         url = request.param[1]
         return reverse(url, kwargs=kwargs)
 
     @pytest.fixture(params=itertools.chain(
-            itertools.product(
-                [{
-                    'journal_code': 'nonexistent',
-                    'year': "1974",
-                    'v': "7",
-                    'n': "1",
-                }],
-                ["legacy_journal:legacy_issue_detail", "legacy_journal:legacy_issue_detail_index"]
-            ),
-            itertools.product([{
+        itertools.product(
+            [{
                 'journal_code': 'nonexistent',
                 'year': "1974",
                 'v': "7",
-                }], ["legacy_journal:legacy_issue_detail_no_number",
-                     "legacy_journal:legacy_issue_detail_index_no_number"],
-            ),
-            itertools.product([{
+                'n': "1",
+            }],
+            ["legacy_journal:legacy_issue_detail", "legacy_journal:legacy_issue_detail_index"]
+        ),
+        itertools.product(
+            [{
                 'journal_code': 'nonexistent',
                 'year': "1974",
                 'v': "7",
-                }], ["legacy_journal:legacy_issue_detail_no_number",
-                     "legacy_journal:legacy_issue_detail_index_no_number"],
-            ),
-            itertools.product([{
+            }],
+            [
+                "legacy_journal:legacy_issue_detail_no_number",
+                "legacy_journal:legacy_issue_detail_index_no_number"
+            ],
+        ),
+        itertools.product(
+            [{
                 'journal_code': 'nonexistent',
-                'localidentifier': 'nonexistent'
-            }], ["legacy_journal:legacy_issue_detail_culture",
-                 "legacy_journal:legacy_issue_detail_culture_index"],
-            )
+                'year': "1974",
+                'v': "7",
+            }],
+            [
+                "legacy_journal:legacy_issue_detail_no_number",
+                "legacy_journal:legacy_issue_detail_index_no_number"
+            ],
+        ),
+        itertools.product([{
+            'journal_code': 'nonexistent',
+            'localidentifier': 'nonexistent'
+        }], ["legacy_journal:legacy_issue_detail_culture",
+             "legacy_journal:legacy_issue_detail_culture_index"],
+        )
     ))
     def issue_url(self, request):
         kwargs = request.param[0]
@@ -934,20 +928,23 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         return reverse(url, kwargs=kwargs)
 
     @pytest.fixture(params=itertools.chain(
-            itertools.product([{
+        itertools.product(
+            [{
                 'journal_code': 'nonexistent', 'year': 2004, 'v': 1, 'issue_number': 'nonexistent',
                 'localid': 'nonexistent', 'format_identifier': 'html', 'lang': 'fr'
-                }], ["legacy_journal:legacy_article_detail",
-                     "legacy_journal:legacy_article_detail_culture"],
-            ),
+            }],
             [
-                ({'localid': 'nonexistent'}, 'legacy_journal:legacy_article_id'),
-                ({'journal_code': 'nonexistent',
-                  'issue_localid': 'nonexistent', 'localid': 'nonexistent',
-                  'format_identifier': 'html'},
-                 'legacy_journal:legacy_article_detail_culture_localidentifier')
-            ]
+                "legacy_journal:legacy_article_detail",
+                "legacy_journal:legacy_article_detail_culture"
+            ],
         ),
+        [
+            ({'localid': 'nonexistent'}, 'legacy_journal:legacy_article_id'),
+            ({'journal_code': 'nonexistent',
+              'issue_localid': 'nonexistent', 'localid': 'nonexistent',
+              'format_identifier': 'html'},
+             'legacy_journal:legacy_article_detail_culture_localidentifier')
+        ]),
     )
     def article_url(self, request):
         kwargs = request.param[0]
