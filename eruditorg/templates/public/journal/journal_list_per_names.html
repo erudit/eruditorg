@@ -181,6 +181,14 @@
           </li>
           {% endfor %}
         </ul>
+        {% empty %}
+        <div class="alert alert-info">
+          <p class="text-center">
+            {% trans "Aucune revue ne correspond à cette combinaison de filtres&nbsp;!" %}
+            <br><br>
+            <a href="{% url 'public:journal:journal_list' %}">{% trans "Retourner à la liste complète des revues." %}</a>
+          </p>
+        </div>
         {% endfor %}
       </div>
       {% endcache %}
