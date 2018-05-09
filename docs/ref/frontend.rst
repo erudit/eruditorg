@@ -1,6 +1,16 @@
 Développement front-end
 =======================
 
+La façon facile
+---------------
+
+Pour compiler les assets de production, la façon facile est de faire:
+
+::
+
+    make assets
+
+Si on préfère se compliquer la vie, on peut continuer à lire.
 
 Configuration de Gulp
 ---------------------
