@@ -204,6 +204,15 @@ class TestJournalListView:
         # Check
         assert list(response.context['journals']) == [journal_2, ]
 
+    def test_can_filter_the_journals_by_disciplines(self):
+        j1 = JournalFactory.create_with_issue(disciplines=['d1', 'd2'])
+        j2 = JournalFactory.create_with_issue(disciplines=['d2'])
+        j3 = JournalFactory.create_with_issue(disciplines=['d3'])
+        JournalFactory.create_with_issue(disciplines=['d4'])
+        url = reverse('public:journal:journal_list')
+        response = self.client.get(url, data={'disciplines': ['d2', 'd3']})
+        assert set(response.context['journals']) == {j1, j2, j3}
+
 
 @pytest.mark.django_db
 class TestJournalDetailView:

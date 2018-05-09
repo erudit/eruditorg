@@ -36,10 +36,11 @@ class CollectionFactory(factory.django.DjangoModelFactory):
 
 class DisciplineFactory(factory.django.DjangoModelFactory):
     code = factory.Sequence(lambda n: 'discipline-{}'.format(n))
-    name = factory.Sequence(lambda n: 'Discipline{}'.format(n))
+    name = factory.LazyAttribute(lambda o: o.code)
 
     class Meta:
         model = 'erudit.Discipline'
+        django_get_or_create = ('code', )
 
 
 class JournalFactory(factory.django.DjangoModelFactory):
@@ -83,6 +84,16 @@ class JournalFactory(factory.django.DjangoModelFactory):
         if extracted:
             for member in extracted:
                 self.members.add(member)
+
+    @factory.post_generation
+    def disciplines(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for discipline in extracted:
+                d = DisciplineFactory(code=discipline)
+                self.disciplines.add(d)
 
 
 class JournalTypeFactory(factory.django.DjangoModelFactory):

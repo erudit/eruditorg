@@ -1,5 +1,4 @@
 from collections import OrderedDict
-from functools import reduce
 from itertools import groupby
 from operator import attrgetter
 from string import ascii_uppercase
@@ -9,7 +8,6 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
@@ -164,24 +162,20 @@ class JournalListView(FallbackAbsoluteUrlViewMixin, ListView):
             pk__in=Journal.upcoming_objects.exclude(is_new=True).values_list('pk', flat=True)
         )
 
-        qs = qs.select_related('collection', 'type')
-
         # Filter the queryset
         if self.filter_form.is_valid():
-            if self.filter_form.cleaned_data['open_access']:
+            cleaned = self.filter_form.cleaned_data
+            if cleaned['open_access']:
                 qs = qs.filter(open_access=True)
-            if self.filter_form.cleaned_data['is_new']:
+            if cleaned['is_new']:
                 qs = qs.filter(is_new=True)
-            if self.filter_form.cleaned_data['types']:
-                qs = qs.filter(reduce(
-                    lambda q, jtype: q | Q(type__code=jtype),
-                    self.filter_form.cleaned_data['types'], Q()))
-            if self.filter_form.cleaned_data['collections']:
-                qs = qs.filter(reduce(
-                    lambda q, collection: q | Q(collection__code=collection),
-                    self.filter_form.cleaned_data['collections'], Q()))
-
-        return qs.select_related('collection')
+            if cleaned['types']:
+                qs = qs.filter(type__code__in=cleaned['types'])
+            if cleaned['collections']:
+                qs = qs.filter(collection__code__in=cleaned['collections'])
+            if cleaned['disciplines']:
+                qs = qs.filter(disciplines__code__in=cleaned['disciplines'])
+        return qs.select_related('collection', 'type')
 
     def get_template_names(self):
         if self.sorting == 'name':
