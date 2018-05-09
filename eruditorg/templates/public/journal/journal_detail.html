@@ -135,9 +135,10 @@
       </div>
     </div>
     {% else %}
-    <h2>-> <em>{% trans 'Numéros à venir' %}</em></h2>
-    <br/>
-    <h3>{% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</h3>
+    <h2>-> {% trans 'Numéros à venir' %}</h2>
+    <div class="alert alert-info">
+      <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
+    </div>
     {% endif %}
   </section>
 

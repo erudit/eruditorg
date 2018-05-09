@@ -126,7 +126,11 @@
     <h2>
       {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})
     </h2>
-    {% if issue.journal.collection.code == 'unb' %}<p><em>{% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</em></p>{% endif %}
+    {% if issue.journal.collection.code == 'unb' %}
+    <div class="alert alert-info">
+      <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</p>
+    </div>
+    {% endif %}
   </header>
   {% if articles_per_section %}
   {% include "public/journal/partials/issue_detail_section.html" %}
