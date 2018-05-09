@@ -4,14 +4,14 @@
 
 aside {
 
-  h2 {
+  h2, .h2 {
     border-bottom: 1px solid $mid-grey;
     padding: 0.35em 0;
     font-size: 1.35em;
     color: $dark-grey;
   }
 
-  h3 {
+  h3, .h3 {
     border-bottom: 1px solid $mid-grey;
     font-size: 1.1em;
     padding-bottom: 0.15em;
