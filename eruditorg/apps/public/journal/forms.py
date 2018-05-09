@@ -24,7 +24,12 @@ class JournalListFilterForm(forms.Form):
         )
     )
     disciplines = forms.MultipleChoiceField(
-        label=_('Par discipline'), required=False)
+        label=_('Par discipline'), required=False,
+        help_text=_(
+            "Cliquez sur la boîte suivante afin de voir la liste complète des disciplines OU "
+            "recherchez en saisissant le terme."
+        )
+    )
 
     def clean_collections(self):
         data = self.cleaned_data['collections']
