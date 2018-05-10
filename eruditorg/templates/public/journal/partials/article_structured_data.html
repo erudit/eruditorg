@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n public_journal_tags %}
 
 <script type="application/ld+json">
 {
@@ -40,7 +40,7 @@
       ],
       {% if article.first_page %}"pageStart": "{{ article.first_page }}",{% endif %}
       {% if article.last_page %}"pageEnd": "{{ article.last_page }}",{% endif %}
-      "name": "{{ article.title }}",
+      "name": "{{ citation_title_metadata }}",
       {% if article.doi %}"sameAs": "http://dx.doi.org/{{ article.doi }}",{% endif %}
       "publisher": "{{ article.publisher.name }}"
     }

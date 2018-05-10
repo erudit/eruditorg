@@ -1,7 +1,5 @@
 {% extends "public/journal/article_base.html" %}
-{% load i18n staticfiles %}
-{% load public_journal_tags %}
-{% load cache %}
+{% load cache i18n public_journal_tags staticfiles %}
 
 {% block title %}{% trans 'Notice.' %} {{ block.super }}{% endblock title %}
 
@@ -53,7 +51,7 @@
     "position": 5,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
-      "name": "{{ article.title }}"
+      "name": "{{ article|format_article_html_title }}"
     }
   },{
     "@type": "ListItem",

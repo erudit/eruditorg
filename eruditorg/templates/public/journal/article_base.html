@@ -1,18 +1,16 @@
 {% extends "base.html" %}
-{% load i18n staticfiles %}
-{% load public_journal_tags %}
-{% load cache %}
+{% load cache i18n public_journal_tags staticfiles %}
 
-{% block title %}{{ article|format_article_title|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
+{% block title %}{{ citation_title_metadata|truncatechars:50 }} – {{ article.issue.journal.name|safe }}{% endblock title %}
 
-{% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal.name|safe article=article.title %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
+{% block meta_description %}{% autoescape off %}{% firstof article.issue.html_title article.issue.volume_title_with_pages as volume_title %}{% endautoescape %}{% blocktrans with journal=article.issue.journal.name|safe article=citation_title_metadata %}{{ article }}. Un article de la revue {{ journal }} ({{ volume_title }}) diffusée par la plateforme Érudit. {% endblocktrans %}{% endblock meta_description %}
 
 {% block meta_tags %}
 {% cache cache_timeout "public_article_detail_metatags" article.id LANGUAGE_CODE %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="{{ article.title|safe }} – {{ article.issue.journal.name|safe }}">
+<meta property="og:title" content="{{ citation_title_metadata }} – {{ article.issue.journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% if article.issue.has_coverpage %}{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' article.issue.journal.code %}{% endif %}">
@@ -22,7 +20,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{{ article.title|safe }} – {{ article.issue.journal.name|safe }} – Érudit">
+<meta name="twitter:title" content="{{ citation_title_metadata }} – {{ article.issue.journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% trans 'Logo pour' %} {{ article.issue.journal.name|safe }}">
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% if article.issue.has_coverpage %}{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' article.issue.journal.code %}{% endif %}">
 <meta name="twitter:description" content="{% blocktrans with journal=article.issue.journal.name|safe %}Un article de la revue {{ journal }}, diffusée par la plateforme Érudit. {% endblocktrans %}">
@@ -135,7 +133,7 @@
     "position": 5,
     "item": {
       "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}",
-      "name": "{{ article.title }}"
+      "name": "{{ citation_title_metadata }}"
     }
   }]
 }
@@ -166,7 +164,7 @@
   </a>
 </li>
 <li>
-  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ article|format_article_title|truncatewords_html:10 }}</a>
+  <a href="{% url 'public:journal:article_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}">{{ citation_title_metadata|truncatewords_html:10 }}</a>
 </li>
 {% endblock breadcrumb %}
 
