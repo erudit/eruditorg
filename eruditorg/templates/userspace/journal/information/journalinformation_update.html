@@ -58,8 +58,15 @@
   <fieldset>
     <legend>{% trans "Liens" %}</legend>
     <div class="row">
-      {% include field_template with field=form.facebook_url type="url" autocomplete="url" icon="ion-social-facebook" checkbox_field=form.facebook_enable_feed only %}
-      {% include field_template with field=form.twitter_url type="url" autocomplete="url" icon="ion-social-twitter" checkbox_field=form.twitter_enable_feed only %}
+      <div class="col-sm-9">
+        <p>
+          {% blocktrans %}
+          Les informations saisies seront disponibles publiquement, dans la page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.
+          {% endblocktrans %}
+        </p>
+      </div>
+      {% include field_template with field=form.facebook_url type="url" autocomplete="url" icon="ion-social-facebook" only %}
+      {% include field_template with field=form.twitter_url type="url" autocomplete="url" icon="ion-social-twitter" only %}
       {% include field_template with field=form.website_url type="url" autocomplete="url" icon="ion-ios-world-outline" only %}
     </div>
   </fieldset>

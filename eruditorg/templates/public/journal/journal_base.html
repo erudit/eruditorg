@@ -82,6 +82,9 @@
           <li><a href="{% url 'public:journal:journal_authors_list' journal.code %}" class="authors-index">{% trans "Index des auteurs" %}</a></li>
           {% endblock aside_authors_list %}
           <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a></li>
+          {% if journal_info.website_url %}
+          <li><a href="{{ journal_info.website_url }}">{% trans "Site web" %}</a></li>
+          {% endif %}
         </ul>
       </div>
 
@@ -185,11 +188,6 @@
           </dd>
           {% endif %}
 
-          {% if journal_info.website_url %}
-          <dt>{% trans "Site web" %}</dt>
-          <dd><a href="{{ journal_info.website_url }}">{{ journal_info.website_url }}</a></dd>
-          {% endif %}
-
           {% if journal_info.email %}
           <dt>{% trans "Courriel général" %}</dt>
           <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
@@ -216,14 +214,14 @@
         {% include "public/partials/subscription_sponsor_badge.html" %}
       </div>
 
-      {% if journal_info.twitter_enable_feed and journal_info.twitter_url %}
-      <div class="text-center journal-meta--list">
+      {% if journal_info.twitter_url %}
+      <div class="journal-meta--list">
         <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
       {% endif %}
 
-      {% if journal_info.facebook_enable_feed and journal_info.facebook_url %}
-      <div class="text-center journal-meta--list">
+      {% if journal_info.facebook_url %}
+      <div class="journal-meta--list">
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
       </div>
       {% endif %}
