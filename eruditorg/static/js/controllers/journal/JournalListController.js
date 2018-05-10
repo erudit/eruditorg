@@ -1,8 +1,11 @@
+import Select2 from 'select2/dist/js/select2.full';
+
 export default {
 
   init: function() {
     this.smoothScroll();
     this.stickyElements();
+    $('#id_disciplines').select2();
   },
 
   smoothScroll: function() {

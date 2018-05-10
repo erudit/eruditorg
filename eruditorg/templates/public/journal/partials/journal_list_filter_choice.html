@@ -1,0 +1,17 @@
+<div id="div_id_{{ field.html_name }}" class="form-group">
+  <h3>{{ field.label }}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{{ field.help_text }}"><span class="ion-help-circled"></span></span></h3>
+  <div class="controls">
+    {% for choice in field.field.choices %}
+    <div class="checkbox">
+      <input type="checkbox"
+             name="{{ field.html_name }}"
+             class="styled"
+             id="{{ field.auto_id }}_{{ forloop.counter }}"
+             value="{{ choice.0 }}"
+             {% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %}>
+      <label for="{{ field.auto_id }}_{{ forloop.counter }}" class="">{{ choice.1 }}</label>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
