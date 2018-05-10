@@ -347,7 +347,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         if self.is_in_fedora:
             pids = self.erudit_object.get_published_issues_pids()
             if pids:
-                return Issue.from_fedora_pid(pids[0])
+                return Issue.from_fedora_pid(pids[-1])
             else:
                 return None
         else:
@@ -360,7 +360,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         if self.is_in_fedora:
             pids = self.erudit_object.get_published_issues_pids()
             if pids:
-                return Issue.from_fedora_pid(pids[-1])
+                return Issue.from_fedora_pid(pids[0])
             else:
                 return None
         else:

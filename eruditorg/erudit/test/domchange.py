@@ -110,4 +110,5 @@ class EruditJournalDomChanger(BaseDomChanger):
             annee=str(issue.year),
             nonumero=str(num_issues + 1),
             volume='42')
-        parentelem.append(elem)
+        # Publications are in reverse order
+        parentelem.insert(0, elem)

@@ -143,7 +143,7 @@ class TestJournal:
         for issue in ordered_issues:
             repository.api.add_publication_to_parent_journal(issue)
 
-        assert list(journal.published_issues.all()) == ordered_issues
+        assert list(journal.published_issues.all()) == list(reversed(ordered_issues))
 
     def test_published_issues_can_mix_fedora_and_non_fedora(self):
         # A journal with incomplete fedora PIDs are "mixed" journals who left Erudit. We keep
@@ -156,7 +156,7 @@ class TestJournal:
         i3 = IssueFactory.create_published_after(i2, localidentifier=None)
         i4 = IssueFactory.create_published_after(i3, localidentifier=None)
 
-        assert list(i1.journal.published_issues.all()) == [i4, i3, i1, i2]
+        assert list(i1.journal.published_issues.all()) == [i4, i3, i2, i1]
 
     def test_published_issues_missing_pid(self):
         # When a PID is missing from the PID list *but* that the issue is a fedora one, put that
