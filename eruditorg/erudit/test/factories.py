@@ -175,9 +175,41 @@ class NonEmbargoedIssueFactory(IssueFactory):
         JournalFactory,
         collection=factory.SubFactory(
             CollectionFactory,
-            code='not-erudit',
+            code='persee',  # not erudit
         )
     )
+
+
+class ArticleRef(Article):
+    """ An article that creates its own solr/fedora references upon instantiation. """
+    def __init__(
+            self, issue, localidentifier, from_fixture=None, title=None, section_titles=None,
+            publication_allowed=None, authors=None, add_to_fedora_issue=True, solr_attrs=None,
+            **kwargs):
+        self.issue = issue
+        self.localidentifier = localidentifier
+        if self.pid is not None:
+            repository.api.register_article(self.pid)
+            if from_fixture:
+                xml = open('./tests/fixtures/article/{}.xml'.format(from_fixture)).read()
+                repository.api.set_article_xml(self.pid, xml)
+            if title is not None:
+                with repository.api.open_article(self.pid) as wrapper:
+                    wrapper.set_title(title)
+            if section_titles is not None:
+                with repository.api.open_article(self.pid) as wrapper:
+                    wrapper.set_section_titles(section_titles)
+            if publication_allowed is not None:
+                with repository.api.open_article(self.pid) as wrapper:
+                    wrapper.set_publication_allowed(publication_allowed)
+            if add_to_fedora_issue:
+                repository.api.add_article_to_parent_publication(self)
+        super().__init__(issue, localidentifier, **kwargs)
+        if self.pid is not None and self.issue.is_published:
+            solr_client = pysolr.Solr()
+            solr_client.add_document(
+                SolrDocument.from_article(self, authors=authors, solr_attrs=solr_attrs)
+            )
 
 
 class ArticleFactory(factory.Factory):
@@ -185,58 +217,7 @@ class ArticleFactory(factory.Factory):
     localidentifier = factory.Sequence(lambda n: 'article{}'.format(n))
 
     class Meta:
-        model = Article
-
-    @classmethod
-    def _create(cls, model_class, *args, **kwargs):
-        issue = kwargs['issue']
-        localidentifier = kwargs['localidentifier']
-        assert localidentifier
-        pid = "{}.{}".format(issue.pid, localidentifier)
-        repository.api.register_article(pid)
-        result = model_class(*args, **kwargs)
-        # reset erudit_object so that tweaked fedora attributes can take effect
-        result.reset_fedora_objects()
-        return result
-
-    @factory.post_generation
-    def from_fixture(obj, create, extracted, **kwargs):
-        # we always register non-null localidentifiers with our fake API server.
-        if obj.localidentifier:
-            if extracted:
-                xml = open('./tests/fixtures/article/{}.xml'.format(extracted)).read()
-                repository.api.set_article_xml(obj.pid, xml)
-            else:
-                repository.api.register_article(obj.pid)
-
-    @factory.post_generation
-    def title(obj, create, extracted, **kwargs):
-        if extracted:
-            with repository.api.open_article(obj.pid) as wrapper:
-                wrapper.set_title(extracted)
-
-    @factory.post_generation
-    def section_titles(obj, create, extracted, **kwargs):
-        if extracted is not None:
-            with repository.api.open_article(obj.pid) as wrapper:
-                wrapper.set_section_titles(extracted)
-
-    @factory.post_generation
-    def publication_allowed(obj, create, extracted, **kwargs):
-        if extracted is not None:
-            with repository.api.open_article(obj.pid) as wrapper:
-                wrapper.set_publication_allowed(extracted)
-
-    @factory.post_generation
-    def add_to_fedora_issue(obj, create, extracted, **kwargs):
-        if extracted is None or extracted:
-            repository.api.add_article_to_parent_publication(obj)
-
-    @factory.post_generation
-    def authors(obj, create, extracted, **kwargs):
-        if obj.pid and obj.issue.is_published:
-            solr_client = pysolr.Solr()
-            solr_client.add_article(obj, authors=extracted)
+        model = ArticleRef
 
 
 class OpenAccessArticleFactory(ArticleFactory):

@@ -126,7 +126,7 @@
     <h2>
       {% trans "Sommaire" %} ({{ articles|length }} {% trans "articles" %})
     </h2>
-    {% if issue.journal.collection.code == 'unb' %}
+    {% if issue.is_external %}
     <div class="alert alert-info">
       <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</p>
     </div>

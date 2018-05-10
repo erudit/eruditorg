@@ -30,11 +30,13 @@ SOLR2DOC = {
 
 
 class SolrDocument:
-    def __init__(self, id, title, type, authors, **kwargs):
+    def __init__(self, id, title, type, authors, solr_attrs=None, **kwargs):
         self.id = id
         self.title = title
         self.type = type
         self.authors = authors
+        # values that are returned as-is in as_result
+        self.solr_attrs = solr_attrs
         OPTIONAL_ARGS = [
             'article_type', 'journal_code', 'collection', 'year', 'date_added', 'repository',
             'issue_localidentifier']
@@ -45,7 +47,7 @@ class SolrDocument:
             setattr(self, attr, val)
 
     @staticmethod
-    def from_article(article, authors=None):
+    def from_article(article, authors=None, solr_attrs=None):
         # NOTE ABOUT get_erudit_object(): You might think that it's weird how we check for
         # get_erudit_object() and call it instead of relying on Article's properties that proxy
         # erudit_object. That's because we very often don't want a call to `from_article()` to
@@ -72,7 +74,7 @@ class SolrDocument:
         else:
             title = article.title
         return SolrDocument(
-            id=article.localidentifier,
+            id=article.solr_id,
             journal_code=journal.code,
             issue_localidentifier=article.issue.localidentifier,
             title=title,
@@ -80,7 +82,8 @@ class SolrDocument:
             article_type=article_type,
             authors=authors,
             year=str(article.issue.year),
-            collection=journal.collection.name)
+            collection=journal.collection.name,
+            solr_attrs=solr_attrs)
 
     def as_result(self):
         result = {}
@@ -88,6 +91,8 @@ class SolrDocument:
             val = getattr(self, attrname)
             if val is not None:
                 result[solr] = val
+        if self.solr_attrs:
+            result.update(self.solr_attrs)
         return result
 
 
@@ -238,6 +243,7 @@ class FakeSolrClient:
         fq = kwargs.get('fq')
         if fq:
             q = '{} AND {}'.format(q, fq)
+        q = q.replace('\\', '')
         pq = normalize_pq(parser.parse(q))
         my_pattern = (SearchField, {'name': 'ID'}, [])
         if matches_pattern(pq, my_pattern):

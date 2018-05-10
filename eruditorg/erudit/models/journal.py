@@ -40,6 +40,7 @@ from ..managers import InternalJournalManager
 from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
+from ..solr.models import Generic
 from ..utils import get_sort_key_func, strip_stopwords_prefix
 
 from .core import Collection, Publisher
@@ -612,6 +613,10 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     # --
 
     @property
+    def is_external(self):
+        return self.journal.collection.code == 'unb'
+
+    @property
     def number_for_display(self):
         if self.number:
             return self.number
@@ -758,6 +763,11 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return self.title
 
 
+# Implementation note: This class is transitioning from a Django model to a Solr/Fedora model. This
+#                      transition is a big one and it's now in a hybrid state where it seems that
+#                      it's role is blurred with the role of erudit.solr.models.Article. It's
+#                      temporary. In time, these two models will be one.
+
 class Article(FedoraMixin):
     class DoesNotExist(ObjectDoesNotExist):
         pass
@@ -803,12 +813,19 @@ class Article(FedoraMixin):
         for key, val in kwargs.items():
             setattr(self, key, val)
 
+    @cached_property
+    def _solr_object(self):
+        return Generic.from_solr_id(self.solr_id, specialized_class=False)
+
     def get_absolute_url(self):
-        return reverse(
-            'public:journal:article_detail', args=(
-                self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
-                self.localidentifier)
-        )
+        if self.is_external:
+            return self._solr_object.url
+        else:
+            return reverse(
+                'public:journal:article_detail', args=(
+                    self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
+                    self.localidentifier)
+            )
 
     def get_formatted_authors(self, style=None):
         return self.erudit_object.get_authors(formatted=True, style=style)
@@ -821,6 +838,10 @@ class Article(FedoraMixin):
 
     def get_formatted_authors_chicago(self):
         return self.get_formatted_authors(style='chicago')
+
+    @property
+    def is_external(self):
+        return self.issue.is_external
 
     @property
     def title(self):

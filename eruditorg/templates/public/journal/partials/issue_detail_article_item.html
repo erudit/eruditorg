@@ -24,7 +24,7 @@
     {% endif %}
     {% if article.erudit_object.processing == 'complet' and article.publication_allowed %}
     <li>
-      <a class="tool-btn" href="{% if article.external_url %}{% url 'public:journal:article_external_redirect' article.localidentifier %}{% else %}{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% endif %}" {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+      <a class="tool-btn" href="{{ article.get_absolute_url }}" {% if article.is_external %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
         <span class="toolbox-html">HTML</span>
       </a>
     </li>
@@ -36,13 +36,8 @@
     <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}"><span class="ion-help-circled"></span></span>
     {% endif %}
     {% spaceless %}
-    <a href="
-    {% if article.external_url %}
-    {% url 'public:journal:article_external_redirect' article.localidentifier %}
-    {% else %}
-    {% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% if not article.issue.is_published %}?{{ article|prepublication_querystring }}{% endif %}
-    {% endif %}"
-    {% if issue.journal.collection.code == 'unb' %}target="_blank"{% endif %}
+    <a href="{{ article.get_absolute_url }}"
+    {% if article.is_external %}target="_blank"{% endif %}
     title="{% blocktrans %}Lire l'article{% endblocktrans %}">
     {{ article|format_article_html_title }}
     </a>

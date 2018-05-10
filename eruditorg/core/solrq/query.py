@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 """
@@ -47,15 +46,20 @@ class Q:
         return obj
 
 
+# thanks to https://github.com/swistakm/solrq
+ESCAPE_RE = re.compile(r'(?<!\\)(?P<char>[ &|+\\\-!(){}[\]*^"~?:])')
+
+
+def solr_escape(val):
+    return ESCAPE_RE.sub(r'\\\g<char>', val)
+
+
 class Query:
     """
     A Query object used to apply filters to a given Solr search.
     """
     filters_mapping = {}
     extra_params = {}
-
-    # thanks to https://github.com/swistakm/solrq
-    ESCAPE_RE = re.compile(r'(?<!\\)(?P<char>[ &|+\\\-!(){}[\]*^"~?:])')
 
     def __init__(self, search, q=None, fq=None):
         """ Search request to Solr.
@@ -146,7 +150,7 @@ class Query:
         # Inserts kwargs params
         for k, v in params_dict.items():
             if not safe:
-                v = self.ESCAPE_RE.sub(r'\\\g<char>', v)
+                v = solr_escape(v)
             if k in self.search.filters_mapping:
                 subqs = self.search.filters_mapping[k].format(**{k: v})
             else:

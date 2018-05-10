@@ -439,6 +439,21 @@ class TestArticle:
         with pytest.raises(Article.DoesNotExist):
             Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
 
+    @pytest.mark.parametrize('collection_code,is_external', [('erudit', False), ('unb', True)])
+    def test_is_external(self, collection_code, is_external):
+        # an article is "external" if its collection code is "unb"
+        article = ArticleFactory(issue__journal__collection__code=collection_code)
+        assert article.is_external == is_external
+
+    def test_absolute_url_when_external(self):
+        # When an article is "external", its absolute_url is the value of its first "URLDocument"
+        # in Solr
+        article = ArticleFactory(
+            issue__journal__collection__code='unb',
+            solr_attrs={'URLDocument': ['http://example.com']}
+        )
+        assert article.get_absolute_url() == 'http://example.com'
+
 
 def test_journaltype_can_return_embargo_duration_in_days():
     journal_type = JournalTypeFactory.create(code='S')

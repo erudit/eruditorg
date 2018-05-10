@@ -6,6 +6,7 @@ from eulfedora.util import RequestFailed
 from requests.exceptions import ConnectionError
 import pysolr
 
+from core.solrq.query import solr_escape
 from erudit import models as erudit_models
 from erudit.templatetags.model_formatters import person_list
 
@@ -20,14 +21,17 @@ class Generic:
         self.solr_data = solr_data
 
     @staticmethod
-    def from_solr_id(solr_id):
-        results = client.search(q='ID:"{}"'.format(solr_id))
+    def from_solr_id(solr_id, specialized_class=True):
+        results = client.search(q='ID:"{}"'.format(solr_escape(solr_id)))
         if not results.hits:
             raise ValueError("No Solr object found")
         elif results.hits > 1:
             raise ValueError("Multiple Solr objects found")
         solr_data = results.docs[0]
-        return get_model_instance(solr_data)
+        if specialized_class:
+            return get_model_instance(solr_data)
+        else:
+            return Generic(solr_data)
 
     def can_cite(self):
         return False
@@ -81,8 +85,13 @@ class Generic:
             return None
 
     @property
+    def urls(self):
+        return self.solr_data['URLDocument'] if 'URLDocument' in self.solr_data else []
+
+    @property
     def url(self):
-        return self.solr_data['URLDocument'][0] if 'URLDocument' in self.solr_data else None
+        urls = self.urls
+        return urls[0] if urls else None
 
     @property
     def numero(self):
