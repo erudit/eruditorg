@@ -29,17 +29,12 @@ $peach:       #FFE7B0;
   background-position: top;
   background-repeat: no-repeat;
   overflow-y: hidden;
-  height: 370px;
+  height: 450px;
   margin-bottom: 1em;
-  outline: 1px solid $mid-grey;
-  background-image: url('../img/banners/acfas2018-erudit-bann270x370.gif');
+  background-image: url('../img/banners/partenariat_fr.jpg');
 
   &.en {
-    background-image: url('../img/banners/acfas2018-erudit-bann270x370.gif');
-  }
-
-  &:hover, &:focus, &:active {
-    outline: 1px solid $dark-grey;
+    background-image: url('../img/banners/partenariat_en.jpg');
   }
 
   img {

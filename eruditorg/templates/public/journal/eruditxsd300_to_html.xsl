@@ -294,9 +294,9 @@
           <!-- promotional campaign -->
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'Salons. Un éclairage sur la société par les revues savantes.' %}</h2>
-            <a href="http://bit.ly/2qD7JYU" target="_blank" class="campaign-sidebar">
+            <a href="{% if LANGUAGE_CODE == 'en' %}http://bit.ly/2Ivl3c8{% else %}http://bit.ly/2KPUVqE{% endif %}" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% static 'img/banners/acfas2018-erudit-bann270x370.gif' %}" class="img-responsive"/>
+                <img src="{% static 'img/banners/partenariat_fr.jpg' %}" class="img-responsive"/>
               </div>
             </a>
           </aside>
