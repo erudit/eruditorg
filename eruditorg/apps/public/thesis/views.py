@@ -147,7 +147,10 @@ class BaseThesisListView(ListView):
     @property
     def page_number(self):
         page_kwarg = self.page_kwarg
-        return int(self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1)
+        try:
+            return int(self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1)
+        except ValueError:
+            return 1
 
     @cached_property
     def repository(self):

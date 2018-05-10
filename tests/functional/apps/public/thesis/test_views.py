@@ -212,6 +212,15 @@ class TestThesisPublicationYearListView:
             EXPECTED = reversed(EXPECTED)
         assert ids == [theses[i].id for i in EXPECTED]
 
+    def test_invalid_page_in_querystring(self, solr_client):
+        thesis = ThesisFactory(year=2012)
+        solr_client.add_document(thesis)
+        url = reverse(
+            'public:thesis:collection_list_per_year', args=(thesis.repository.code, 2012))
+        url += '?page=10,11'
+        response = Client().get(url)
+        assert response.status_code == 200
+
 
 class TestThesisPublicationAuthorNameListView:
     def test_returns_only_theses_for_a_given_author_first_letter(self, solr_client):
