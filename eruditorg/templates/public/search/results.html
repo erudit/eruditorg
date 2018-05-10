@@ -314,7 +314,7 @@
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
                           {{ article.authors_mla }}
-                          {% trans '«&nbsp;' %}{{ article|format_article_html_title }}.{% trans '&nbsp;»' %}
+                          {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
                           <em>{{ article.series }}</em>,
                           {{ article.publication_date|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>
@@ -323,7 +323,7 @@
                         <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
                           {{ article.authors_apa }}
                           ({{ article.issue_published }}).
-                          {{ article|format_article_html_title }}
+                          {{ article.title|safe }}
                           <em>{{ article.issue.series }}</em>,
                           {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
                           {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
@@ -332,7 +332,7 @@
                         <dt>Chicago</dt>
                         <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
                           {{ article.authors_chicago }}
-                          {% trans '«&nbsp;' %}{{ article|format_article_html_title }}{% trans '&nbsp;»' %}.
+                          {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
                           <em>{{ article.series }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
                           ({{ article.issue_published }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}

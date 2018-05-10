@@ -833,11 +833,11 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def title(self):
-        return self.erudit_object.get_formatted_title()
+        return self.erudit_object.get_title(formatted=True, html=False)
 
     @property
     def html_title(self):
-        return self.erudit_object.get_formatted_html_title()
+        return self.erudit_object.get_title(formatted=True, html=True)
 
     @property
     def solr_id(self):
