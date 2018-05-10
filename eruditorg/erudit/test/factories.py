@@ -183,9 +183,9 @@ class NonEmbargoedIssueFactory(IssueFactory):
 class ArticleRef(Article):
     """ An article that creates its own solr/fedora references upon instantiation. """
     def __init__(
-            self, issue, localidentifier, from_fixture=None, title=None, section_titles=None,
-            publication_allowed=None, authors=None, add_to_fedora_issue=True, solr_attrs=None,
-            **kwargs):
+            self, issue, localidentifier, from_fixture=None, title=None, type=None,
+            section_titles=None, publication_allowed=None, authors=None, add_to_fedora_issue=True,
+            solr_attrs=None):
         self.issue = issue
         self.localidentifier = localidentifier
         if self.pid is not None:
@@ -193,18 +193,19 @@ class ArticleRef(Article):
             if from_fixture:
                 xml = open('./tests/fixtures/article/{}.xml'.format(from_fixture)).read()
                 repository.api.set_article_xml(self.pid, xml)
-            if title is not None:
+            if any(x is not None for x in (title, section_titles, publication_allowed, type)):
                 with repository.api.open_article(self.pid) as wrapper:
-                    wrapper.set_title(title)
-            if section_titles is not None:
-                with repository.api.open_article(self.pid) as wrapper:
-                    wrapper.set_section_titles(section_titles)
-            if publication_allowed is not None:
-                with repository.api.open_article(self.pid) as wrapper:
-                    wrapper.set_publication_allowed(publication_allowed)
+                    if title is not None:
+                        wrapper.set_title(title)
+                    if section_titles is not None:
+                        wrapper.set_section_titles(section_titles)
+                    if publication_allowed is not None:
+                        wrapper.set_publication_allowed(publication_allowed)
+                    if type is not None:
+                        wrapper.set_type(type)
             if add_to_fedora_issue:
                 repository.api.add_article_to_parent_publication(self)
-        super().__init__(issue, localidentifier, **kwargs)
+        super().__init__(issue, localidentifier)
         if self.pid is not None and self.issue.is_published:
             solr_client = pysolr.Solr()
             solr_client.add_document(

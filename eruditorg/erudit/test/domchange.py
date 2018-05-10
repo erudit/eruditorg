@@ -69,6 +69,9 @@ class EruditArticleDomChanger(BaseDomChanger):
             elem = E.accessible("non")
             self.root.getroot().append(elem)
 
+    def set_type(self, type):
+        self.root.getroot().attrib['typeart'] = type
+
     def set_roc(self):
         elem = self.root.find('//corps/texte')
         if elem is not None:

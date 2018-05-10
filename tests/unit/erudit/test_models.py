@@ -296,8 +296,7 @@ class TestIssue:
         article = ArticleFactory()
         with repository.api.open_article(article.pid) as wrapper:
             wrapper.set_roc()
-        # TODO: use helper functions from the fake fedora API after we merge the de-article branch
-        article.issue.get_articles_from_fedora = lambda: iter([article])
+        repository.api.add_article_to_parent_publication(article)
         article.issue.sync_with_erudit_object()
         assert article.issue.force_free_access
 

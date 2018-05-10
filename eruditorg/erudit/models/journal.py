@@ -778,7 +778,7 @@ class Article(FedoraMixin):
     PROCESSING_FULL = 'C'
     PROCESSING_MINIMAL = 'M'
 
-    def __init__(self, issue, localidentifier, **kwargs):
+    def __init__(self, issue, localidentifier):
         super().__init__()
         self.issue = issue
         self.localidentifier = localidentifier
@@ -809,9 +809,6 @@ class Article(FedoraMixin):
         self.publication_allowed = node is None or node.text != 'non'
         urlpdf = erudit_object._dom.find('.//urlpdf')
         self.external_pdf_url = urlpdf.text if urlpdf is not None else None
-
-        for key, val in kwargs.items():
-            setattr(self, key, val)
 
     @cached_property
     def _solr_object(self):
