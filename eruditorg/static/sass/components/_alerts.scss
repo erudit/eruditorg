@@ -20,6 +20,22 @@
     margin-top: 5px;
   }
 
+  &.alert-info {
+    background-color: $light-grey;
+    @include font-styles('mono');
+
+    p {
+      border: 0;
+      font-size: 14px;
+      letter-spacing: -0.015em;
+    }
+
+    .alert-info-icon {
+      font-size: 18px;
+    }
+
+  }
+
   &.alert-success {
 
     p {

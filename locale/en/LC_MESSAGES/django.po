@@ -3928,9 +3928,9 @@ msgid ""
 " des numéros</a>."
 msgstr ""
 "Access to articles of this journal’s current issues is restricted to "
-"subscribers. To see all available open access content, please refer to the "
-"list of <a href=\"https://www.erudit.org/fr/revues/%(code)s\">back "
-"issues</a>."
+"subscribers. You may consult the <a "
+"href=\"https://www.erudit.org/en/journals/%(code)s\">back issues</a> to see "
+"all available open access content."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:95
 #, python-format
@@ -3940,7 +3940,7 @@ msgid ""
 "                  "
 msgstr ""
 "\n"
-"                  If you hold an individual subscriber account with this journal, please <a href=\"%(login_url)s\" class=\"main-section\" id=\"article-login-modal\" title=\"Log in to the dashboard\">log in to your account</a>.\n"
+"                  If you hold an individual subscriber account with this journal, <a href=\"%(login_url)s\" class=\"main-section\" id=\"article-login-modal\" title=\"Log in to the dashboard\">log in to your account</a>.\n"
 "                  "
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:101
@@ -3953,7 +3953,7 @@ msgid ""
 " ou par téléphone au %(phone)s."
 msgstr ""
 "If you wish to subscribe as an individual and/or to the paper version of "
-"<em>%(journal)s</em>, please contact the journal at <a "
+"<em>%(journal)s</em>, you may contact the journal at <a "
 "href=\"mailto:%(email)s?subject=Subscription%%20to%%20the%%20journal%%20%(journal)s\">%(email)s</a>"
 " or by phone at %(phone)s."
 
@@ -3964,13 +3964,13 @@ msgid ""
 "href=\"mailto:client@erudit.org?subject=Revue%%20%(journal)s – Accès aux "
 "articles\">client@erudit.org</a>."
 msgstr ""
-"For more information, please contact us at <a "
+"For more information, contact us at <a "
 "href=\"mailto:client@erudit.org?subject=Journal%%20%(journal)s – Article "
 "access\">client@erudit.org</a>."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:112
 msgid "Seule la première page du PDF sera affichée."
-msgstr "The PDF's first page will be displayed."
+msgstr "The PDF’s first page will be displayed."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:115
 msgid "Seul le résumé sera affiché."
@@ -5781,7 +5781,7 @@ msgstr ""
 
 #: templates/userspace/journal/subscription/organisationsubscription_list.html:23
 msgid "Institutions abonnées par année"
-msgstr ""
+msgstr "Institutional subscribers per year"
 
 #: templates/userspace/library/authorization/authorization_create.html:18
 #, python-format

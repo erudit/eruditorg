@@ -135,9 +135,10 @@
       </div>
     </div>
     {% else %}
-    <h2>-> <em>{% trans 'Numéros à venir' %}</em></h2>
-    <br/>
-    <h3>{% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</h3>
+    <h2>-> {% trans 'Numéros à venir' %}</h2>
+    <div class="alert alert-info">
+      <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
+    </div>
     {% endif %}
   </section>
 
@@ -156,38 +157,14 @@
     </section>
     {% endif %}
 
-    {% if journal_info.contact %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-contact" role="tabpanel">
-      <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-contact-content">
-        {% trans "Coordonnées" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-contact-content" class="akkordion-content" aria-labelledby="journal-info-contact">
-        {{ journal_info.contact|default:tab_empty_msg|safe }}
-      </section>
-    </section>
-    {% endif %}
-
     {% if journal_info.editorial_policy %}
     <section class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
-      <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-editorial-policy-content">
+      <h2 class="akkordion-title" role="button" aria-expanded="true" aria-controls="journal-info-editorial-policy-content">
         {% trans "Politique éditoriale" %}
         <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
       </h2>
-      <section id="journal-info-editorial-policy-content" class="akkordion-content" aria-labelledby="journal-info-editorial-policy">
+      <section id="journal-info-editorial-policy-content" class="akkordion-content akkordion-active" aria-labelledby="journal-info-editorial-policy">
         {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
-      </section>
-    </section>
-    {% endif %}
-
-    {% if journal_info.subscriptions %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
-      <h2 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
-        {% trans "Abonnements" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
-        {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
       </section>
     </section>
     {% endif %}
@@ -215,6 +192,31 @@
       </section>
     </section>
     {% endif %}
+
+    {% if journal_info.contact %}
+    <section class="journal-info-block akkordion" role="tab" id="journal-info-contact" role="tabpanel">
+      <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-contact-content">
+        {% trans "Coordonnées" %}
+        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+      </h2>
+      <section id="journal-info-contact-content" class="akkordion-content" aria-labelledby="journal-info-contact">
+        {{ journal_info.contact|default:tab_empty_msg|safe }}
+      </section>
+    </section>
+    {% endif %}
+
+    {% if journal_info.subscriptions %}
+    <section class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
+      <h2 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
+        {% trans "Abonnements" %}
+        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
+      </h2>
+      <section id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
+        {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
+      </section>
+    </section>
+    {% endif %}
+
   </div>
   {% endif %}
 </main>
