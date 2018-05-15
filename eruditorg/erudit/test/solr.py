@@ -3,7 +3,7 @@ from itertools import chain
 from operator import attrgetter
 
 from luqum.tree import (
-    SearchField, Group, AndOperation, OrOperation, UnknownOperation, FieldGroup
+    SearchField, Group, AndOperation, OrOperation, UnknownOperation, FieldGroup, Plus
 )
 from luqum.parser import parser
 
@@ -16,6 +16,7 @@ SOLR2DOC = {
     'AuteurNP_fac': 'authors',
     'Auteur_tri': 'authors',
     'Titre_fr': 'title',
+    'TexteComplet': 'title',
     'Corpus_fac': 'type',
     'TypeArticle_fac': 'article_type',
     'RevueAbr': 'journal_code',
@@ -91,6 +92,7 @@ def unescape(s):
 
 
 def normalize_pq(pq):
+    # We also check for known malformed queries
     if isinstance(pq, (Group, FieldGroup)):
         return normalize_pq(pq.children[0])
     elif isinstance(pq, (AndOperation, OrOperation, UnknownOperation)):
@@ -100,6 +102,10 @@ def normalize_pq(pq):
             normalised_class = AndOperation
         return normalised_class(*children)
     elif isinstance(pq, SearchField):
+        if isinstance(pq.children[0], Plus):
+            # Operators such as + are supposed to be properly escaped in search fields. We aren't
+            # supposed to have one here.
+            raise ValueError("Illegal unescaped operator in SearchField: {}".format(pq))
         return SearchField(pq.name, normalize_pq(pq.children[0]))
     return pq
 
@@ -273,20 +279,15 @@ class FakeSolrClient:
                     result.append(doc)
             return create_results(docs=result)
 
-        my_pattern1 = (SearchField, {'name': 'Corpus_fac'}, [])
-        my_pattern2 = (AndOperation, {}, [
-            (SearchField, {'name': 'Corpus_fac'}, []),
-            (SearchField, {'name': 'Editeur'}, []),
-            (SearchField, {'name': 'AnneePublication', 'flags': {'optional'}}, []),
-            (SearchField, {'name': 'Auteur_tri', 'flags': {'optional'}}, []),
-        ])
-        if matches_pattern(pq, my_pattern1) or matches_pattern(pq, my_pattern2):
-            # Thesis listing
+        searchvals = extract_pq_searchvals(pq)
+        if all(key in SOLR2DOC for key in searchvals):
+            # generic search
             searchvals = extract_pq_searchvals(pq)
             result = []
             docs = self.by_id.values()
             docs = apply_filters(docs, searchvals)
-            return create_results(docs=docs, facets=['AnneePublication', 'AuteurNP_fac'])
+            facets = kwargs.get('facet.field', ['AnneePublication', 'AuteurNP_fac'])
+            return create_results(docs=docs, facets=facets)
 
         print("Unexpected query {} {}".format(q, repr(pq)))
         return FakeSolrResults()
