@@ -275,20 +275,13 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.type.embargo_duration() if self.type else \
             erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
 
-    # We cache this because published_issues is expensive and this is called often when generating
-    # the journal detail view.
-    @cached_property
+    @property
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
-        if self.open_access or self.published_issues.count() == 0:
+        if self.open_access:
             return None
         else:
-            date_embargo_begins = dt.date(
-                self.last_issue.date_published.year,
-                self.last_issue.date_published.month,
-                1
-            ) - dr.relativedelta(months=self.embargo_in_months)
-            return date_embargo_begins
+            return dt.date.today() - dr.relativedelta(months=self.embargo_in_months)
 
     @property
     def days_not_available_from_today(self):
