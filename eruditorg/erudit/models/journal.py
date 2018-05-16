@@ -691,7 +691,8 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             return True
         if self.force_free_access:
             return False
-        threshold = self.journal.date_embargo_begins
+        journal = self.journal
+        threshold = journal.date_embargo_begins
         if threshold is None:
             # the journal doesn't embargo its issues
             return False
@@ -699,7 +700,11 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             # we should normally be out of embargo, *but*, we have an exception for the last issue
             # of a journal. A journal that is not in open access always has its last issue
             # embargoed.
-            if self == self.journal.last_issue:
+            # On top of this, another exception: we don't apply the exception if the journal has
+            # a "next_journal" because that means that the journal hasn't stopped publishing, it
+            # merely changed its name. We don't want the last issue of the old journal to be stuck
+            # in embargo forever.
+            if journal.next_journal is None and self == journal.last_issue:
                 return True
             else:
                 return False

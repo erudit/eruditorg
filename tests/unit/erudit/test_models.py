@@ -308,6 +308,14 @@ class TestIssue:
         assert issue2 != issue2.journal.last_issue
         assert not issue2.embargoed
 
+    def test_last_issue_is_not_always_embargoed_when_next_journal(self):
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+        outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
+        issue = IssueFactory(
+            journal__next_journal=JournalFactory(),
+            date_published=outside_embargo)
+        assert not issue.embargoed
+
     def test_knows_if_it_has_a_coverpage(self):
         journal = JournalFactory()
         journal.open_access = True
