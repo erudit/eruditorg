@@ -298,6 +298,16 @@ class TestIssue:
         assert not issue_2.embargoed
         assert not issue_3.embargoed
 
+    def test_last_issue_is_always_embargoed(self):
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+        outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
+        issue1 = IssueFactory(date_published=outside_embargo)
+        issue2 = IssueFactory(journal=issue1.journal, date_published=outside_embargo)
+        assert issue1 == issue1.journal.last_issue
+        assert issue1.embargoed
+        assert issue2 != issue2.journal.last_issue
+        assert not issue2.embargoed
+
     def test_knows_if_it_has_a_coverpage(self):
         journal = JournalFactory()
         journal.open_access = True
@@ -438,7 +448,7 @@ class TestArticle:
             issue__journal__open_access=False, issue__date_published=dt.date.today())
         assert article.embargoed
         article = ArticleFactory(
-            issue__journal__open_access=False,
+            issue__journal=article.issue.journal,
             issue__date_published=dt.date.today() - dr.relativedelta(months=ml + 1))
         assert not article.embargoed
 

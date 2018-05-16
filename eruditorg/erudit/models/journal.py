@@ -278,7 +278,8 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @property
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
-        if self.open_access:
+        # FIXME avoid hardcoding the collection code
+        if self.open_access or self.collection.code != 'erudit':
             return None
         else:
             return dt.date.today() - dr.relativedelta(months=self.embargo_in_months)
@@ -683,14 +684,27 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     def embargoed(self):
         """ Returns a boolean indicating if the issue is embargoed. """
 
-        # FIXME avoid hardcoding the collection code
-        if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            if self.force_free_access is False:
-                return dt.date(
-                    self.date_published.year, self.date_published.month, self.date_published.day
-                ) >= self.journal.date_embargo_begins if self.is_published \
-                    else True
-        return False
+        if not self.is_published:
+            # Technically, we're not "embargoed", we're not published at all! If we're asking
+            # whether an unpublished issue is embargoed, something wen't wrong. Let's go with the
+            # safe answer here: embargo the issue.
+            return True
+        if self.force_free_access:
+            return False
+        threshold = self.journal.date_embargo_begins
+        if threshold is None:
+            # the journal doesn't embargo its issues
+            return False
+        if self.date_published < threshold:
+            # we should normally be out of embargo, *but*, we have an exception for the last issue
+            # of a journal. A journal that is not in open access always has its last issue
+            # embargoed.
+            if self == self.journal.last_issue:
+                return True
+            else:
+                return False
+        else:
+            return True
 
     @property
     def name_with_themes(self):
