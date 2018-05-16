@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-15 14:24-0500\n"
+"POT-Creation-Date: 2018-05-16 10:21-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,7 +165,7 @@ msgid "Syndication d'Érudit"
 msgstr ""
 
 #: apps/public/journal/forms.py:8 apps/userspace/library/collection/forms.py:27
-#: erudit/models/journal.py:133
+#: erudit/models/journal.py:133 templates/public/home.html:197
 msgid "Libre accès"
 msgstr ""
 
@@ -380,7 +380,7 @@ msgstr ""
 
 #: apps/public/search/forms.py:32
 #: templates/public/journal/article_pdf_coverpage.html:226
-#: templates/public/journal/journal_base.html:128
+#: templates/public/journal/journal_base.html:131
 msgid "ISSN"
 msgstr ""
 
@@ -2066,11 +2066,11 @@ msgstr ""
 msgid "Revue précédente"
 msgstr ""
 
-#: erudit/models/journal.py:191 templates/public/journal/journal_base.html:189
+#: erudit/models/journal.py:191 templates/public/journal/journal_base.html:86
 msgid "Site web"
 msgstr ""
 
-#: erudit/models/journal.py:406 templates/public/journal/journal_base.html:149
+#: erudit/models/journal.py:406 templates/public/journal/journal_base.html:152
 msgid "Période de publication"
 msgstr ""
 
@@ -2449,7 +2449,6 @@ msgid "Consulter Salons"
 msgstr ""
 
 #: templates/base.html:207 templates/base.html:401
-#: templates/public/home.html:197
 msgid "Salons"
 msgstr ""
 
@@ -3602,15 +3601,13 @@ msgid "Nouvelles"
 msgstr ""
 
 #: templates/public/home.html:198
-msgid "Passer l’hiver"
+msgid "Partenariat pour le libre accès"
 msgstr ""
 
 #: templates/public/home.html:199
 msgid ""
-"Sous les gestes (boire, manger, danser, jouer, donner…), il s’agit de "
-"conjurer ensemble le danger de la mort qui rôde et qui prend la forme du "
-"froid qui paralyse et tue. Par les fêtes, les jeux, les sports, nous "
-"transformons l’hiver en attendant le printemps qui toujours revient."
+"Le Partenariat pour le libre accès soutient depuis 2014 les revues "
+"canadiennes en SHS dans une transition graduelle vers le libre accès."
 msgstr ""
 
 #: templates/public/home.html:209
@@ -3694,7 +3691,7 @@ msgstr ""
 #: templates/public/journal/article_base.html:24
 #: templates/public/journal/issue_detail.html:22
 #: templates/public/journal/journal_authors_list.html:23
-#: templates/public/journal/journal_base.html:210
+#: templates/public/journal/journal_base.html:208
 #: templates/public/journal/journal_detail.html:23
 #: templates/public/journal/journal_list_per_disciplines.html:128
 #: templates/public/thesis/collection_home.html:28
@@ -3735,12 +3732,12 @@ msgid "Éditeur(s)"
 msgstr ""
 
 #: templates/public/journal/article_pdf_coverpage.html:226
-#: templates/public/journal/journal_base.html:130
+#: templates/public/journal/journal_base.html:133
 msgid "imprimé"
 msgstr ""
 
 #: templates/public/journal/article_pdf_coverpage.html:227
-#: templates/public/journal/journal_base.html:133
+#: templates/public/journal/journal_base.html:136
 msgid "numérique"
 msgstr ""
 
@@ -3904,7 +3901,7 @@ msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:202
 #: templates/public/journal/eruditxsd300_to_html.xsl:306
-#: templates/public/journal/journal_base.html:212
+#: templates/public/journal/journal_base.html:210
 msgid "Vous êtes abonné à cette revue."
 msgstr ""
 
@@ -3950,7 +3947,7 @@ msgstr ""
 #: templates/public/journal/eruditxsd300_to_html.xsl:327
 #: templates/public/journal/partials/issue_detail_article_item.html:10
 #: templates/public/search/results.html:268
-#: templates/userspace/journal/information/journalinformation_update.html:83
+#: templates/userspace/journal/information/journalinformation_update.html:90
 msgid "Sauvegarder"
 msgstr ""
 
@@ -4246,20 +4243,20 @@ msgstr ""
 msgid "Fil RSS"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:90
+#: templates/public/journal/journal_base.html:93
 #: templates/public/thesis/collection_list_base.html:122
 msgid "Fiche"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:98
+#: templates/public/journal/journal_base.html:101
 msgid "Direction"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:107
+#: templates/public/journal/journal_base.html:110
 msgid "Rédaction"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:116
+#: templates/public/journal/journal_base.html:119
 msgid ""
 "\n"
 "            Éditeur\n"
@@ -4271,11 +4268,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/journal/journal_base.html:139
+#: templates/public/journal/journal_base.html:142
 msgid "Fréquence"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:141
+#: templates/public/journal/journal_base.html:144
 #, python-format
 msgid ""
 "\n"
@@ -4288,48 +4285,48 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/journal/journal_base.html:153
+#: templates/public/journal/journal_base.html:156
 msgid "Disponible dans Érudit depuis"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:157
+#: templates/public/journal/journal_base.html:160
 msgid "Type de support"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:160
+#: templates/public/journal/journal_base.html:163
 msgid "Numérique et papier"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:162
+#: templates/public/journal/journal_base.html:165
 msgid "Numérique"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:166
+#: templates/public/journal/journal_base.html:169
 msgid "Politique d'accès"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:168
+#: templates/public/journal/journal_base.html:171
 msgid "Disponible en libre accès"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:168
+#: templates/public/journal/journal_base.html:171
 #: templates/public/journal/journal_detail.html:79
 msgid ""
 "Les numéros courants et les archives de cette revue sont disponibles en "
 "libre accès."
 msgstr ""
 
-#: templates/public/journal/journal_base.html:170
+#: templates/public/journal/journal_base.html:173
 msgid "Accès restreint"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:170
+#: templates/public/journal/journal_base.html:173
 msgid ""
 "L’accès aux numéros courants de cette revue nécessite un abonnement, tandis "
 "que l’ensemble de ses archives est disponible en libre accès."
 msgstr ""
 
-#: templates/public/journal/journal_base.html:175
+#: templates/public/journal/journal_base.html:178
 msgid ""
 "\n"
 "            Discipline\n"
@@ -4341,20 +4338,20 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/public/journal/journal_base.html:194
+#: templates/public/journal/journal_base.html:192
 msgid "Courriel général"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:195
+#: templates/public/journal/journal_base.html:193
 #, python-format
 msgid "Demande%%20générale"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:199
+#: templates/public/journal/journal_base.html:197
 msgid "Revue précédée de…"
 msgstr ""
 
-#: templates/public/journal/journal_base.html:203
+#: templates/public/journal/journal_base.html:201
 msgid "Revue suivie de…"
 msgstr ""
 
@@ -5355,6 +5352,14 @@ msgstr ""
 
 #: templates/userspace/journal/information/journalinformation_update.html:59
 msgid "Liens"
+msgstr ""
+
+#: templates/userspace/journal/information/journalinformation_update.html:63
+msgid ""
+"\n"
+"          Les informations saisies seront disponibles publiquement, dans la "
+"page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.\n"
+"          "
 msgstr ""
 
 #: templates/userspace/journal/partials/menu.html:38
