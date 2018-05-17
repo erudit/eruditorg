@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 import pytest
 import datetime as dt
 
 from django.contrib.auth.models import AnonymousUser
 
-from erudit.test import BaseEruditTestCase
 from erudit.test.factories import OrganisationFactory
 
 from base.test.factories import UserFactory

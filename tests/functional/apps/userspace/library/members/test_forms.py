@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-
 from account_actions.models import AccountActionToken
 from account_actions.test.factories import AccountActionTokenFactory
+from django.test import TestCase
 from faker import Factory
 
-from erudit.test import BaseEruditTestCase
+from base.test.factories import UserFactory
 from erudit.test.factories import OrganisationFactory
 
 from core.journal.account_actions import OrganisationMembershipAction
@@ -14,7 +13,7 @@ from apps.userspace.library.members.forms import OrganisationMembershipTokenCrea
 faker = Factory.create()
 
 
-class TestOrganisationMembershipTokenCreateForm(BaseEruditTestCase):
+class TestOrganisationMembershipTokenCreateForm(TestCase):
     def setUp(self):
         super(TestOrganisationMembershipTokenCreateForm, self).setUp()
         self.organisation = OrganisationFactory.create()
@@ -47,9 +46,10 @@ class TestOrganisationMembershipTokenCreateForm(BaseEruditTestCase):
 
     def test_cannot_validate_if_the_email_is_already_used_by_a_member_of_the_organisation(self):
         # Setup
-        self.organisation.members.add(self.user)
+        user = UserFactory()
+        self.organisation.members.add(user)
         form_data = {
-            'email': self.user.email,
+            'email': user.email,
             'first_name': faker.first_name(),
             'last_name': faker.last_name(),
         }

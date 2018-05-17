@@ -1,8 +1,6 @@
 import pytest
 import locale
 
-from .testcases import *  # noqa
-
 try:
     locale.setlocale(locale.LC_COLLATE, 'fr_CA.UTF-8')
 except locale.Error:

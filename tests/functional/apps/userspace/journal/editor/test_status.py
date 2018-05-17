@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
 from lxml import etree
 
 from django.core.urlresolvers import reverse
 
+from base.test.testcases import Client
 from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
 
@@ -14,7 +13,7 @@ class TestIssueSubmissionStatus(BaseEditorTestCase):
         super().setUp()
 
         # We need to be logged in for all the tests
-        self.client.login(username='david', password='top_secret')
+        self.client = Client(logged_user=self.user)
 
         self.draft_submission = IssueSubmission.objects.create(
             journal=self.journal,
