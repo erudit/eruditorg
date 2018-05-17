@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-
 import os
 import unittest.mock
-import pytest
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -12,27 +9,24 @@ from django.core import mail
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
+from django.test import RequestFactory
 from influxdb import InfluxDBClient
 from lxml import etree
 from resumable_uploads.models import ResumableFile
 
+from base.test.factories import UserFactory
+from base.test.testcases import Client, extract_post_args
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.test.factories import AuthorizationFactory
 from core.editor.models import IssueSubmission
 from core.editor.test import BaseEditorTestCase
+from erudit.test.factories import JournalFactory, PublisherFactory
 
 from apps.userspace.journal.editor.views import IssueSubmissionApproveView
 from apps.userspace.journal.editor.views import IssueSubmissionCreate
 from apps.userspace.journal.editor.views import IssueSubmissionRefuseView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
-
-_test_points = []
-
-
-def fake_write_points(points):
-    global _test_points
-    _test_points.extend(points)
 
 
 class TestIssueSubmissionDetailView(BaseEditorTestCase):
@@ -41,13 +35,12 @@ class TestIssueSubmissionDetailView(BaseEditorTestCase):
         self.issue_submission.submit()
         self.issue_submission.refuse()
         self.issue_submission.save()
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        self.client.login(username='admin', password='top_secret')
+        user = UserFactory(is_superuser=True)
+        client = Client(logged_user=user)
         url = reverse(
             'userspace:journal:editor:detail', args=(self.journal.pk, self.issue_submission.pk))
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         assert response.status_code == 200
         assert len(response.context['status_tracks']) == 2
@@ -56,22 +49,18 @@ class TestIssueSubmissionDetailView(BaseEditorTestCase):
 
 
 class TestIssueSubmissionView(BaseEditorTestCase):
-    def tearDown(self):
-        super(TestIssueSubmissionView, self).tearDown()
-        global _test_points
-        _test_points = []
-
     def test_editor_views_are_login_protected(self):
         """ Editor views should all be login protected """
 
-        result = self.client.get(reverse('userspace:journal:editor:add', args=(self.journal.pk, )))
+        client = Client()
+        result = client.get(reverse('userspace:journal:editor:add', args=(self.journal.pk, )))
         self.assertIsInstance(result, HttpResponseRedirect)
 
-        result = self.client.get(
+        result = client.get(
             reverse('userspace:journal:editor:issues', args=(self.journal.pk, )))
         self.assertIsInstance(result, HttpResponseRedirect)
 
-        result = self.client.get(
+        result = client.get(
             reverse('userspace:journal:editor:update', kwargs={
                 'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
         )
@@ -81,16 +70,20 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         """ A user should only be able to see the editor's submissions
             related to his journal's membership.
         """
-        login = self.client.login(
-            username=self.user.username,
-            password="top_secret"
+        self.other_user = UserFactory()
+        self.other_publisher = PublisherFactory()
+        self.other_journal = JournalFactory(publishers=[self.other_publisher])
+        self.other_journal.members.add(self.other_user)
+        self.other_journal.save()
+        self.other_issue_submission = IssueSubmission.objects.create(
+            journal=self.other_journal,
+            volume="2",
+            contact=self.user,
         )
 
-        self.assertTrue(
-            login
-        )
+        client = Client(logged_user=self.user)
 
-        response = self.client.get(
+        response = client.get(
             reverse(
                 'userspace:journal:editor:update',
                 kwargs={'journal_pk': self.other_journal.pk, 'pk': self.other_issue_submission.pk}
@@ -104,31 +97,28 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
             Previously, we would crash due to a bad reverse match.
         """
-        self.client.login(
-            username=self.user.username,
-            password="top_secret"
-        )
+        client = Client(logged_user=self.user)
         url = reverse(
             'userspace:journal:editor:update',
             kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk}
         )
-        response = self.client.get(url)
+        response = client.get(url)
         root = etree.HTML(response.content)
-        args = self.extract_post_args(root)
+        args = extract_post_args(root)
         # The issue in our DB doesn't have a year or number, but they are required, so here we go.
         args['year'] = '2016'
         args['number'] = '01'
-        response = self.client.post(url, data=args)
+        response = client.post(url, data=args)
         expected_url = reverse('userspace:journal:editor:detail',
                                args=(self.journal.pk, self.issue_submission.pk))
         self.assertRedirects(response, expected_url)
 
     def test_logged_add_journalsubmission(self):
         """ Logged users should be able to see journal submissions """
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=self.user)
 
-        result = self.client.get(reverse('userspace:journal:editor:add',
-                                 kwargs={'journal_pk': self.journal.pk}))
+        result = client.get(
+            reverse('userspace:journal:editor:add', kwargs={'journal_pk': self.journal.pk}))
         self.assertIsInstance(
             result, TemplateResponse
         )
@@ -139,8 +129,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         We need to save it before the IssueSubmission before
         uploading so that file chunks are associated with the issue
         submission."""
-        self.client.login(username='david', password='top_secret')
-        response = self.client.get(
+        client = Client(logged_user=self.user)
+        response = client.get(
             reverse('userspace:journal:editor:add', kwargs={'journal_pk': self.journal.pk}))
         root = etree.HTML(response.content)
         self.assertFalse(
@@ -162,9 +152,9 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             'comment': 'lorem ipsum dolor sit amet',
         }
 
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=self.user)
 
-        self.client.post(
+        client.post(
             reverse('userspace:journal:editor:add', args=(self.journal.pk, )),
             data
         )
@@ -182,9 +172,9 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         Files are uploaded to an existing IssueSubmission so
         progress can be tracked.
         """
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=self.user)
 
-        response = self.client.get(
+        response = client.get(
             reverse('userspace:journal:editor:update', kwargs={
                 'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
         )
@@ -201,7 +191,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
         Make sure the list contains all the contacts of the publisher
         and only that """
-        request = self.factory.get(
+        request = RequestFactory().get(
             reverse('userspace:journal:editor:add'), args=(self.journal.pk, ))
         request.user = self.user
         middleware = SessionMiddleware()
@@ -229,8 +219,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
 
         Make sure the list contains only issue submission link to a journal
         with his membership"""
-        self.client.login(username=self.user.username, password='top_secret')
-        response = self.client.get(
+        client = Client(logged_user=self.user)
+        response = client.get(
             reverse('userspace:journal:editor:issues', args=(self.journal.pk, )), user=self.user)
         journal_ids = [j.id for j in self.user.journals.all()]
         issues = set(IssueSubmission.objects.filter(journal__in=journal_ids))
@@ -242,7 +232,8 @@ class TestIssueSubmissionView(BaseEditorTestCase):
     def test_can_capture_a_metric_when_a_submission_is_created(
             self, mock_write_points, mock_list_db, mock_create_db):
         # Setup
-        mock_write_points.side_effect = fake_write_points
+        test_points = []
+        mock_write_points.side_effect = test_points.extend
 
         post_data = {
             'journal': self.journal.pk,
@@ -253,7 +244,7 @@ class TestIssueSubmissionView(BaseEditorTestCase):
             'comment': 'lorem ipsum dolor sit amet',
         }
 
-        request = self.factory.post(
+        request = RequestFactory().post(
             reverse('userspace:journal:editor:add', args=(self.journal.pk, )), post_data)
         request.user = self.user
         middleware = SessionMiddleware()
@@ -267,11 +258,11 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         view.post(request)
 
         # Check
-        global _test_points
-        self.assertEqual(len(_test_points), 1)
+        global test_points
+        self.assertEqual(len(test_points), 1)
         issuesubmission = IssueSubmission.objects.last()
         self.assertEqual(
-            _test_points,
+            test_points,
             [{
                 'tags': {},
                 'fields': {
@@ -286,12 +277,12 @@ class TestIssueSubmissionView(BaseEditorTestCase):
         # Setup
         self.issue_submission.submit()
         self.issue_submission.save()
-        self.client.login(username=self.user.username, password='top_secret')
+        client = Client(logged_user=self.user)
         url = reverse(
             'userspace:journal:editor:update',
             kwargs={'journal_pk': self.journal.pk, 'pk': self.issue_submission.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         assert response.status_code == 403
 
@@ -304,13 +295,12 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
                 path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
                 filesize=f.tell(), uploadsize=f.tell())
 
-        User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
-        self.client.login(username='dummy', password='top_secret')
+        user = UserFactory()
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={'pk': rfile.pk})
         # Run
-        response = self.client.get(url, follow=False)
+        response = client.get(url, follow=False)
         # Check
         self.assertEqual(response.status_code, 403)
 
@@ -321,8 +311,7 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
                 path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
                 filesize=f.tell(), uploadsize=f.tell())
 
-        user = User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
         self.journal.members.add(user)
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal),
@@ -330,12 +319,12 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
             user=user,
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
 
@@ -346,18 +335,17 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
                 path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
                 filesize=f.tell(), uploadsize=f.tell())
 
-        user = User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
         AuthorizationFactory.create(
             user=user, authorization_codename=AC.can_review_issuesubmission.codename)
         self.journal.members.add(user)
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
 
@@ -368,14 +356,13 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
                 path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
                 filesize=f.tell(), uploadsize=f.tell())
 
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        self.client.login(username='admin', password='top_secret')
+        user = UserFactory(is_superuser=True)
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'image/png')
@@ -388,14 +375,13 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
                 path=os.path.join(FIXTURE_ROOT, 'pixel, .png'),
                 filesize=f.tell(), uploadsize=f.tell())
 
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        self.client.login(username='admin', password='top_secret')
+        user = UserFactory(is_superuser=True)
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'image/png')
@@ -408,14 +394,13 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
                 path=os.path.join(FIXTURE_ROOT, 'dummy.kyz'),
                 filesize=f.tell(), uploadsize=f.tell())
 
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        self.client.login(username='admin', password='top_secret')
+        user = UserFactory(is_superuser=True)
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'text/plain')
@@ -425,14 +410,13 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         # Setup
         rfile = ResumableFile.objects.create(
             path='/dummy/dummy.png', filesize=1, uploadsize=1)
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
-        self.client.login(username='admin', password='top_secret')
+        user = UserFactory(is_superuser=True)
+        client = Client(logged_user=user)
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
         # Check
         self.assertEqual(response.status_code, 404)
 
@@ -440,23 +424,21 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
 class TestIssueSubmissionSubmitView(BaseEditorTestCase):
     def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
         # Setup
-        User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_submit',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
 
     def test_can_submit_an_issue_submission(self):
         # Setup
-        user = User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
         self.journal.members.add(user)
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal),
@@ -464,12 +446,12 @@ class TestIssueSubmissionSubmitView(BaseEditorTestCase):
             user=user,
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_submit', args=(
             self.journal.pk, self.issue_submission.pk, ))
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -478,15 +460,9 @@ class TestIssueSubmissionSubmitView(BaseEditorTestCase):
 
 
 class TestIssueSubmissionApproveView(BaseEditorTestCase):
-    def tearDown(self):
-        super(TestIssueSubmissionApproveView, self).tearDown()
-        global _test_points
-        _test_points = []
-
     def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
         # Setup
-        user = User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
         self.journal.members.add(user)
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal),
@@ -494,22 +470,21 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
             user=user,
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_approve',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
 
     def test_can_approve_an_issue_submission(self):
         # Setup
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
+        user = UserFactory(is_superuser=True)
 
-        self.client.login(username='admin', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_approve',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
@@ -517,7 +492,7 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         self.issue_submission.save()
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -529,8 +504,8 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
     @unittest.mock.patch.object(InfluxDBClient, 'write_points')
     def test_can_capture_a_metric_on_status_change(
             self, mock_write_points, mock_list_db, mock_create_db):
-        # Setup
-        mock_write_points.side_effect = fake_write_points
+        test_points = []
+        mock_write_points.side_effect = test_points.extend
 
         self.issue_submission.submit()
         self.issue_submission.save()
@@ -538,7 +513,7 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:transition_approve',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
-        request = self.factory.post(url)
+        request = RequestFactory().post(url)
         request.user = self.user
         SessionMiddleware().process_request(request)
         MessageMiddleware().process_request(request)
@@ -553,10 +528,10 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         view.post(request)
 
         # Check
-        global _test_points
-        self.assertEqual(len(_test_points), 1)
+        global test_points
+        self.assertEqual(len(test_points), 1)
         self.assertEqual(
-            _test_points,
+            test_points,
             [{
                 'tags': {'old_status': 'S', 'new_status': 'V'},
                 'fields': {
@@ -569,10 +544,9 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
 
     def test_sends_a_notification_email(self):
         # Setup
-        u = User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
+        u = UserFactory(is_superuser=True)
 
-        self.client.login(username='admin', password='top_secret')
+        client = Client(logged_user=u)
         url = reverse('userspace:journal:editor:transition_approve',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
@@ -581,7 +555,7 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
         self.issue_submission.save()
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         assert response.status_code == 302
@@ -592,15 +566,9 @@ class TestIssueSubmissionApproveView(BaseEditorTestCase):
 
 
 class TestIssueSubmissionRefuseView(BaseEditorTestCase):
-    def tearDown(self):
-        super(TestIssueSubmissionRefuseView, self).tearDown()
-        global _test_points
-        _test_points = []
-
     def test_cannot_be_browsed_by_a_user_who_cannot_review_issue_submissions(self):
         # Setup
-        user = User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
         self.journal.members.add(user)
         AuthorizationFactory.create(
             content_type=ContentType.objects.get_for_model(self.journal),
@@ -608,22 +576,21 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
             user=user,
             authorization_codename=AC.can_manage_issuesubmission.codename)
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_refuse',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
 
     def test_can_refuse_an_issue_submission(self):
         # Setup
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
+        user = UserFactory(is_superuser=True)
 
-        self.client.login(username='admin', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_refuse',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
@@ -631,7 +598,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         self.issue_submission.save()
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -639,10 +606,9 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
 
     def test_can_refuse_an_issue_submission_with_a_comment(self):
         # Setup
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
+        user = UserFactory(is_superuser=True)
 
-        self.client.login(username='admin', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:transition_refuse',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
@@ -650,7 +616,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         self.issue_submission.save()
 
         # Run
-        response = self.client.post(url, {'comment': 'This is a comment!'})
+        response = client.post(url, {'comment': 'This is a comment!'})
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -663,8 +629,8 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
     @unittest.mock.patch.object(InfluxDBClient, 'write_points')
     def test_can_capture_a_metric_on_status_change(
             self, mock_write_points, mock_list_db, mock_create_db):
-        # Setup
-        mock_write_points.side_effect = fake_write_points
+        test_points = []
+        mock_write_points.side_effect = test_points.extend
 
         self.issue_submission.submit()
         self.issue_submission.save()
@@ -672,7 +638,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         url = reverse('userspace:journal:editor:transition_refuse',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
-        request = self.factory.post(url)
+        request = RequestFactory().post(url)
         request.user = self.user
         SessionMiddleware().process_request(request)
         MessageMiddleware().process_request(request)
@@ -687,10 +653,10 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         view.post(request)
 
         # Check
-        global _test_points
-        self.assertEqual(len(_test_points), 1)
+        global test_points
+        self.assertEqual(len(test_points), 1)
         self.assertEqual(
-            _test_points,
+            test_points,
             [{
                 'tags': {'old_status': 'S', 'new_status': 'D'},
                 'fields': {
@@ -703,10 +669,9 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
 
     def test_sends_a_notification_email(self):
         # Setup
-        u = User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
+        u = UserFactory(is_superuser=True)
 
-        self.client.login(username='admin', password='top_secret')
+        client = Client(logged_user=u)
         url = reverse('userspace:journal:editor:transition_refuse',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
@@ -715,7 +680,7 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
         self.issue_submission.save()
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         assert response.status_code == 302
@@ -728,31 +693,29 @@ class TestIssueSubmissionRefuseView(BaseEditorTestCase):
 class TestIssueSubmissionDeleteView(BaseEditorTestCase):
     def test_cannot_be_browsed_by_a_user_who_cannot_manage_issue_submissions(self):
         # Setup
-        User.objects.create_user(
-            username='dummy', email='dummy@xyz.com', password='top_secret')
+        user = UserFactory()
 
-        self.client.login(username='dummy', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:delete',
                       args=(self.journal.pk, self.issue_submission.pk, ))
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         assert response.status_code == 403
 
     def test_can_delete_an_issue_submission(self):
         # Setup
-        User.objects.create_superuser(
-            username='admin', email='admin@xyz.com', password='top_secret')
+        user = UserFactory(is_superuser=True)
 
-        self.client.login(username='admin', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:journal:editor:delete',
                       args=(self.journal.pk, self.issue_submission.pk, ))
         deleted_pk = self.issue_submission.pk
 
         # Run
-        response = self.client.post(url)
+        response = client.post(url)
 
         # Check
         self.assertEqual(response.status_code, 302)

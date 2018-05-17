@@ -20,6 +20,8 @@ class OrganisationFactory(factory.django.DjangoModelFactory):
 
 class PublisherFactory(factory.django.DjangoModelFactory):
 
+    name = factory.Sequence(lambda n: 'publisher{}'.format(n))
+
     class Meta:
         model = 'erudit.Publisher'
 
