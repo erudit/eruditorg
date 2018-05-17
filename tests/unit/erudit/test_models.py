@@ -56,6 +56,10 @@ class TestJournal:
         EXPECTED = dt.date.today() - dr.relativedelta(months=42)
         assert journal.date_embargo_begins == EXPECTED
 
+    def test_inactive_journal_never_embargoes(self):
+        journal = JournalFactory(active=False)
+        assert journal.date_embargo_begins is None
+
     def test_can_return_its_first_issue(self):
         journal = JournalFactory()
         issue_1 = IssueFactory.create(
