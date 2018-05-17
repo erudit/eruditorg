@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import format_html
 
 from .models import IssueSubmission
 from .models import IssueSubmissionFilesVersion
@@ -13,10 +14,19 @@ class IssueSubmissionAdmin(admin.ModelAdmin):
         'id',
         'journal',
         'contact',
+        'status',
         'date_created',
         'date_modified',
+        'url'
     )
-    list_filter = ('journal', 'status', )
+    list_filter = ('status', 'journal')
+
+    def url(self, obj):
+        return format_html(
+            "<a href={}>{}</a>",
+            obj.get_absolute_url(),
+            _("Voir sur le site")
+        )
 
 
 class IssueSubmissionFilesVersionAdmin(admin.ModelAdmin):
