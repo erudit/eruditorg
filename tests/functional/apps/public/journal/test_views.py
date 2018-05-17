@@ -10,13 +10,12 @@ from django.contrib.auth.models import AnonymousUser
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.test import Client
-from django.test import RequestFactory
+from django.test import TestCase, RequestFactory
 from django.conf import settings
 from django.test.utils import override_settings
 import pytest
 
 from erudit.models import JournalType, Issue, Article
-from erudit.test import BaseEruditTestCase
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import DisciplineFactory
@@ -967,7 +966,7 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         assert self.FALLBACK_URL in redirect_url
 
 
-class TestArticleXmlView(BaseEruditTestCase):
+class TestArticleXmlView(TestCase):
     @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
     @unittest.mock.patch.object(ArticleDigitalObject, 'ds_list')
     def test_can_retrieve_xml_of_existing_articles(self, mock_ds, mock_pdf):
@@ -978,13 +977,13 @@ class TestArticleXmlView(BaseEruditTestCase):
         mock_ds = ['ERUDITXSD300', ]  # noqa
 
         issue = IssueFactory.create(
-            journal=self.journal, year=2010,
+            year=2010,
             date_published=dt.datetime.now() - dt.timedelta(days=1000))
         IssueFactory.create(
-            journal=self.journal, year=2010,
+            journal=issue.journal, year=2010,
             date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
-        journal_id = self.journal.localidentifier
+        journal_id = issue.journal.localidentifier
         issue_id = issue.localidentifier
         article_id = article.localidentifier
         url = reverse('public:journal:article_raw_xml', args=(
@@ -1004,11 +1003,7 @@ class TestArticleXmlView(BaseEruditTestCase):
         self.assertEqual(response['Content-Type'], 'application/xml')
 
 
-class TestArticleMediaView(BaseEruditTestCase):
-    def setUp(self):
-        super(TestArticleMediaView, self).setUp()
-        self.factory = RequestFactory()
-
+class TestArticleMediaView(TestCase):
     @unittest.mock.patch.object(MediaDigitalObject, 'content')
     def test_can_retrieve_the_pdf_of_existing_articles(self, mock_content):
         # Setup
@@ -1017,15 +1012,15 @@ class TestArticleMediaView(BaseEruditTestCase):
             mock_content.content.write(f.read())
         mock_content.mimetype = 'image/png'
 
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue = IssueFactory.create(date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue)
         issue_id = issue.localidentifier
         article_id = article.localidentifier
-        request = self.factory.get('/')
+        request = RequestFactory().get('/')
 
         # Run
         response = ArticleMediaView.as_view()(
-            request, journal_code=self.journal.code, issue_localid=issue_id,
+            request, journal_code=issue.journal.code, issue_localid=issue_id,
             localid=article_id, media_localid='test')
 
         # Check
@@ -1033,16 +1028,12 @@ class TestArticleMediaView(BaseEruditTestCase):
         self.assertEqual(response['Content-Type'], 'image/png')
 
 
-class TestExternalURLRedirectViews(BaseEruditTestCase):
-
-    def setUp(self):
-        super().setUp()
-        self.client = Client()
+class TestExternalURLRedirectViews(TestCase):
 
     def test_can_redirect_to_article_external_url(self):
-        issue = IssueFactory.create(journal=self.journal, date_published=dt.datetime.now())
+        issue = IssueFactory.create(date_published=dt.datetime.now())
         article = ArticleFactory.create(issue=issue, external_url='http://www.erudit.org')
-        response = self.client.get(
+        response = Client().get(
             reverse(
                 'public:journal:article_external_redirect',
                 kwargs={'localidentifier': article.localidentifier}
@@ -1052,12 +1043,11 @@ class TestExternalURLRedirectViews(BaseEruditTestCase):
 
     def test_can_redirect_to_issue_external_url(self):
         issue = IssueFactory.create(
-            journal=self.journal,
             date_published=dt.datetime.now(),
             external_url="http://www.erudit.org"
         )
 
-        response = self.client.get(
+        response = Client().get(
             reverse(
                 'public:journal:issue_external_redirect',
                 kwargs={'localidentifier': issue.localidentifier}
@@ -1067,7 +1057,7 @@ class TestExternalURLRedirectViews(BaseEruditTestCase):
 
     def test_can_redirect_to_journal_external_url(self):
         journal = JournalFactory(code='journal1', external_url='http://www.erudit.org')
-        response = self.client.get(
+        response = Client().get(
             reverse(
                 'public:journal:journal_external_redirect',
                 kwargs={'code': journal.code}
