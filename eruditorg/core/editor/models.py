@@ -26,7 +26,7 @@ class IssueSubmission(models.Model):
         (VALID, _("Validé")),
     )
 
-    status = FSMField(default=DRAFT, protected=False)
+    status = FSMField(default=DRAFT, protected=False, choices=STATUS_CHOICES)
 
     journal = models.ForeignKey(
         'erudit.journal',
