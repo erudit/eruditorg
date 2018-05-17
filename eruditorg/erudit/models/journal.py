@@ -546,6 +546,13 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             or dt.datetime(int(self.year), 1, 1)
         self.date_produced = erudit_object.production_date \
             or erudit_object.publication_date
+        try:
+            first_article = next(self.get_articles_from_fedora())
+        except StopIteration:
+            pass
+        else:
+            if first_article.erudit_object.is_of_type_roc:
+                self.force_free_access = True
 
     def get_articles_from_fedora(self):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an

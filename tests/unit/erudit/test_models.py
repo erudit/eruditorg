@@ -24,12 +24,6 @@ from erudit.test.factories import (
 pytestmark = pytest.mark.django_db
 
 
-def reldate(inc_days):
-    """ Return today + inc_days. """
-    now_dt = dt.date.today()
-    return now_dt + dt.timedelta(days=inc_days)
-
-
 class TestJournal:
     def test_can_return_the_associated_eulfedora_model(self):
         journal = JournalFactory()
@@ -315,6 +309,15 @@ class TestIssue:
             journal__next_journal=JournalFactory(),
             date_published=outside_embargo)
         assert not issue.embargoed
+
+    def test_issue_with_roc_article_is_forced_to_free_access(self):
+        article = ArticleFactory()
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_roc()
+        # TODO: use helper functions from the fake fedora API after we merge the de-article branch
+        article.issue.get_articles_from_fedora = lambda: iter([article])
+        article.issue.sync_with_erudit_object()
+        assert article.issue.force_free_access
 
     def test_knows_if_it_has_a_coverpage(self):
         journal = JournalFactory()

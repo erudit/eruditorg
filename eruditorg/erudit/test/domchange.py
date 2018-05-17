@@ -55,5 +55,12 @@ class EruditArticleDomChanger:
         titre = self.root.find('.//grtitre/titre')
         titre.text = title
 
+    def set_roc(self):
+        elem = self.root.find('//corps/texte')
+        if elem is not None:
+            elem.attrib['typetexte'] = 'roc'
+        else:
+            self.root.find('//corps').insert(0, E.texte(typetexte='roc'))
+
     def tostring(self):
         return etree.tostring(self.root)
