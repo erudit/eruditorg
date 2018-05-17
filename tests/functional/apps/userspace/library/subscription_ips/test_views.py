@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
+from django.test import TestCase
 
 from base.test.factories import UserFactory
-from erudit.test import BaseEruditTestCase
+from base.test.testcases import Client
 from erudit.test.factories import OrganisationFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
@@ -12,12 +11,11 @@ from core.authorization.test.factories import AuthorizationFactory
 from core.subscription.models import InstitutionIPAddressRange
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
-from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
 
 
-class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
+class TestInstitutionIPAddressRangeListView(TestCase):
     def setUp(self):
-        super(TestInstitutionIPAddressRangeListView, self).setUp()
+        self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.user.is_staff = True
         self.user.save()
@@ -27,12 +25,12 @@ class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
     def test_cannot_be_accessed_by_a_user_who_is_not_in_the_organisation(self):
         # Setup
         user = UserFactory()
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:subscription_ips:list', kwargs={
             'organisation_pk': self.organisation.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -49,12 +47,12 @@ class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
         ip_range_2 = InstitutionIPAddressRangeFactory.create(
             subscription=self.subscription, ip_start='20.0.0.0', ip_end='21.0.0.0')
 
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=self.user)
         url = reverse('userspace:library:subscription_ips:list', kwargs={
             'organisation_pk': self.organisation.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 200)
@@ -62,9 +60,9 @@ class TestInstitutionIPAddressRangeListView(BaseEruditTestCase):
             list(response.context['subscription_ip_ranges']), [ip_range_1, ip_range_2, ])
 
 
-class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
+class TestInstitutionIPAddressRangeCreateView(TestCase):
     def setUp(self):
-        super(TestInstitutionIPAddressRangeCreateView, self).setUp()
+        self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(valid=True, organisation=self.organisation)
@@ -72,12 +70,12 @@ class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_subscriptions_ips(self):
         # Setup
         self.organisation.members.clear()
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=self.user)
         url = reverse('userspace:library:subscription_ips:create', kwargs={
             'organisation_pk': self.organisation.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -86,7 +84,7 @@ class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
         # Setup
         user = UserFactory(is_staff=True)
 
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:subscription_ips:create', kwargs={
             'organisation_pk': self.organisation.pk, })
 
@@ -96,7 +94,7 @@ class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
         }
 
         # Run
-        response = self.client.post(url, post_data, follow=False)
+        response = client.post(url, post_data, follow=False)
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -106,9 +104,9 @@ class TestInstitutionIPAddressRangeCreateView(BaseEruditTestCase):
         self.assertEqual(ip_range_qs.first().ip_end, '11.0.0.0')
 
 
-class TestInstitutionIPAddressRangeDeleteView(BaseEruditTestCase):
+class TestInstitutionIPAddressRangeDeleteView(TestCase):
     def setUp(self):
-        super(TestInstitutionIPAddressRangeDeleteView, self).setUp()
+        self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(valid=True, organisation=self.organisation)
@@ -119,12 +117,12 @@ class TestInstitutionIPAddressRangeDeleteView(BaseEruditTestCase):
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_subscriptions_ips(self):
         # Setup
         self.organisation.members.clear()
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=self.user)
         url = reverse('userspace:library:subscription_ips:delete', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': self.ip_range.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -133,12 +131,12 @@ class TestInstitutionIPAddressRangeDeleteView(BaseEruditTestCase):
         # Setup
         user = UserFactory(is_staff=True)
 
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:subscription_ips:delete', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': self.ip_range.pk, })
 
         # Run
-        response = self.client.post(url, follow=False)
+        response = client.post(url, follow=False)
 
         # Check
         self.assertEqual(response.status_code, 302)

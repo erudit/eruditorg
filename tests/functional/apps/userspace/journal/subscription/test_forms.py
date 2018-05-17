@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 import pytest
 
 from account_actions.models import AccountActionToken
 from account_actions.test.factories import AccountActionTokenFactory
 from faker import Factory
 
-from erudit.test import BaseEruditTestCase
 from core.subscription.test.factories import JournalManagementSubscriptionFactory
 
 from core.subscription.account_actions import IndividualSubscriptionAction
