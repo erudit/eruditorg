@@ -55,7 +55,9 @@ class TestJournal:
         )
         assert set(journal.published_issues) == {issue_1, issue_2}
 
-    def test_can_return_when_date_embargo_begins(self):
+    def test_can_return_when_date_embargo_begins(self, monkeypatch):
+        import erudit.conf.settings
+        monkeypatch.setattr(erudit.conf.settings, 'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS', 1)
         journal = JournalFactory(open_access=False)
         date_issue_1 = dt.date(2017, 3, 8)
         date_issue_2 = date_issue_1 - dr.relativedelta(months=5)
