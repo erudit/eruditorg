@@ -449,10 +449,6 @@ class Command(BaseCommand):
     @transaction.atomic
     def _import_issue(self, issue_pid, journal):
         """ Imports an issue using its PID. """
-        logger.info(
-            "issue.import.start",
-            issue_pid=issue_pid
-        )
 
         # STEP 1: fetches the full Issue fedora object
         # --
@@ -634,8 +630,8 @@ class Command(BaseCommand):
         """ Imports an article using the EruditArticle v3 specification. """
         article.publication_allowed = self._get_is_publication_allowed(issue_article_node)
         article.sync_with_erudit_object(article_erudit_object)
-        self.clean()
-        self.save()
+        article.clean()
+        article.save()
 
         if self.test_xslt:
             try:
