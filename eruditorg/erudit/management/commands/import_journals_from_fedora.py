@@ -449,10 +449,6 @@ class Command(BaseCommand):
     @transaction.atomic
     def _import_issue(self, issue_pid, journal):
         """ Imports an issue using its PID. """
-        logger.info(
-            "issue.import.start",
-            issue_pid=issue_pid
-        )
 
         # STEP 1: fetches the full Issue fedora object
         # --
