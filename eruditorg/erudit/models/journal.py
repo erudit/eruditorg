@@ -703,7 +703,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         if threshold is None:
             # the journal doesn't embargo its issues
             return False
-        if self.date_published < threshold:
+        elif self.date_published < threshold:
             # we should normally be out of embargo, *but*, we have an exception for the last issue
             # of a journal. A journal that is not in open access always has its last issue
             # embargoed.
