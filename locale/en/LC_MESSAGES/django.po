@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-16 10:21-0500\n"
+"POT-Creation-Date: 2018-05-22 13:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Emilie Chouinard <emilie.chouinard@erudit.org>, 2018\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -1538,7 +1538,11 @@ msgstr "Select EITHER User OR Group"
 msgid "Impossible de changer l'autorisation liée à un objet en particulier"
 msgstr "Cannot change permission linked to a specific object."
 
-#: core/editor/admin.py:31
+#: core/editor/admin.py:28 erudit/admin/journal.py:146
+msgid "Voir sur le site"
+msgstr "See on the website"
+
+#: core/editor/admin.py:41
 msgid "Nombre de fichiers"
 msgstr "Number of Files"
 
@@ -1878,10 +1882,6 @@ msgstr ""
 #: erudit/admin/journal.py:129
 msgid "Ne pas contraindre ces numéros au libre accès"
 msgstr ""
-
-#: erudit/admin/journal.py:146
-msgid "Voir sur le site"
-msgstr "See on the website"
 
 #: erudit/admin/journal.py:148
 msgid "Voir le numéro sur le site"
@@ -2661,7 +2661,7 @@ msgstr "Go to erudit.org"
 #: templates/emails/auth/password_reset_email.html:25
 #: templates/emails/editor/issue_files_deletion_content.html:28
 #: templates/emails/organisation/new_member_content.html:26
-#: templates/emails/subscription/journal/new_subscription_content.html:28
+#: templates/emails/subscription/journal/new_subscription_content.html:27
 msgid "L’Équipe Érudit"
 msgstr "The Érudit team"
 
@@ -2884,26 +2884,25 @@ msgid "[Érudit] Rejoindre l'organisation %(organisation_name)s"
 msgstr "[Érudit] Join the Organization %(organisation_name)s"
 
 #: templates/emails/subscription/journal/new_subscription_content.html:5
-msgid "Abonnement à une revue"
-msgstr "Journal subscription"
+msgid "Abonnement à la revue {{ token.content_object.name }}"
+msgstr "Subscription to {{ token.content_object.name }}"
 
 #: templates/emails/subscription/journal/new_subscription_content.html:12
 #, python-format
 msgid ""
-"Une proposition d’abonnement à la revue <strong>%(journal_name)s</strong> "
-"vous a été envoyée."
+"L'éditeur de <strong>%(journal_name)s</strong> vous envoie un abonnement à "
+"sa revue sur erudit.org. Veuillez cliquer sur le lien suivant pour "
+"l'accepter."
 msgstr ""
-"You have received a subscription offer to <strong>%(journal_name)s</strong>."
+"The Editor of <strong>%(journal_name)s</strong> is sending you a "
+"subscription to their journal on erudit.org. Click on the following link to "
+"accept it."
 
-#: templates/emails/subscription/journal/new_subscription_content.html:16
-msgid "Veuillez cliquer sur le lien suivant pour l'accepter"
-msgstr "Please click on the following link to accept. "
-
-#: templates/emails/subscription/journal/new_subscription_content.html:24
+#: templates/emails/subscription/journal/new_subscription_content.html:23
 msgid "Accepter l’abonnement"
 msgstr "Accept subscription"
 
-#: templates/emails/subscription/journal/new_subscription_content.html:29
+#: templates/emails/subscription/journal/new_subscription_content.html:28
 msgid ""
 "\n"
 "<a href=\"mailto:info@erudit.org?subject=Abonnement individuel à une revue\">info@erudit.org</a>\n"
@@ -2911,10 +2910,10 @@ msgstr ""
 "\n"
 "<a href=\"mailto:info@erudit.org?subject=Individual journal subscription\">info@erudit.org</a>\n"
 
-#: templates/emails/subscription/journal/new_subscription_subject.html:1
+#: templates/emails/subscription/journal/new_subscription_subject.html:2
 #, python-format
-msgid "[Érudit] Abonnement à la revue %(journal_name)s"
-msgstr "[Érudit] Subscribe to the Journal %(journal_name)s"
+msgid "[Érudit] Abonnement à la revue %(journal_name)s\n"
+msgstr ""
 
 #: templates/public/403.html:4
 msgid "403. Permission refusée"
