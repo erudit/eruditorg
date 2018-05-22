@@ -24,12 +24,6 @@ from erudit.test.factories import (
 pytestmark = pytest.mark.django_db
 
 
-def reldate(inc_days):
-    """ Return today + inc_days. """
-    now_dt = dt.date.today()
-    return now_dt + dt.timedelta(days=inc_days)
-
-
 class TestJournal:
     def test_can_return_the_associated_eulfedora_model(self):
         journal = JournalFactory()
@@ -57,21 +51,14 @@ class TestJournal:
 
     def test_can_return_when_date_embargo_begins(self, monkeypatch):
         import erudit.conf.settings
-        monkeypatch.setattr(erudit.conf.settings, 'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS', 1)
+        monkeypatch.setattr(erudit.conf.settings, 'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS', 42)
         journal = JournalFactory(open_access=False)
-        date_issue_1 = dt.date(2017, 3, 8)
-        date_issue_2 = date_issue_1 - dr.relativedelta(months=5)
-        date_issue_3 = date_issue_1 + dr.relativedelta(months=5)
-        IssueFactory.create(
-            journal=journal, year=date_issue_1.year,
-            is_published=True, date_published=date_issue_1)
-        IssueFactory.create(
-            journal=journal, year=date_issue_2.year,
-            is_published=True, date_published=date_issue_2)
-        IssueFactory.create(
-            journal=journal, year=date_issue_3.year,
-            is_published=False, date_published=date_issue_3)
-        assert journal.date_embargo_begins == dt.date(2017, 2, 1)
+        EXPECTED = dt.date.today() - dr.relativedelta(months=42)
+        assert journal.date_embargo_begins == EXPECTED
+
+    def test_inactive_journal_never_embargoes(self):
+        journal = JournalFactory(active=False)
+        assert journal.date_embargo_begins is None
 
     def test_can_return_its_first_issue(self):
         journal = JournalFactory()
@@ -108,42 +95,20 @@ class TestJournal:
         assert journal_1.letter_prefix == 'T'
 
     def test_can_return_the_published_open_access_issues(self):
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        now_dt = dt.date.today()
-        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
-        date_issue_2 = now_dt - dr.relativedelta(months=ml)
-        date_issue_3 = dt.date(
-            now_dt.year,
-            now_dt.month,
-            1
-        ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
-        journal = JournalFactory()
-        journal.open_access = False
-        journal.save()
-        issue_1 = IssueFactory.create(  # noqa: F841
-            journal=journal, year=date_issue_1.year,
-            is_published=True, date_published=date_issue_1)
-        issue_2 = IssueFactory.create(  # noqa: F841
-            journal=journal, year=date_issue_2.year,
-            is_published=True, date_published=date_issue_2)
-        issue_3 = IssueFactory.create(  # noqa: F841
-            journal=journal, year=date_issue_3.year,
-            is_published=True, date_published=date_issue_3)
-        issue_4 = IssueFactory.create(
-            journal=journal, number=2, year=date_issue_4.year,
-            is_published=True, date_published=date_issue_4)
-        issue_5 = IssueFactory.create(
-            journal=journal, number=1, year=date_issue_5.year,
-            is_published=True, date_published=date_issue_5)
-        issue_6 = IssueFactory.create(
-            journal=journal, number=7, year=date_issue_1.year - 10,
-            is_published=True, date_published=date_issue_1, force_free_access=True)
-        issue_7 = IssueFactory.create(  # noqa: F841
-            journal=journal, year=date_issue_5.year,
-            is_published=False, date_published=date_issue_5)
-        assert set(journal.published_open_access_issues) == {issue_6, issue_5, issue_4, }
+        journal = JournalFactory(open_access=False)
+        embargo_date = journal.date_embargo_begins
+        # inside embargo date, not published
+        issue_1 = IssueFactory.create(  # noqa
+            journal=journal, is_published=True, date_published=embargo_date)
+        # after embargo date, published
+        issue_2 = IssueFactory.create(
+            journal=journal, is_published=True,
+            date_published=embargo_date - dr.relativedelta(days=1))
+        # inside embargo date, but whitelisted
+        issue_3 = IssueFactory.create(
+            journal=journal, is_published=True, date_published=embargo_date,
+            force_free_access=True)
+        assert set(journal.published_open_access_issues) == {issue_2, issue_3}
 
     def test_can_return_the_published_open_access_issues_period_coverage(self):
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
@@ -154,11 +119,7 @@ class TestJournal:
         journal.save()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
-        date_issue_3 = dt.date(
-            now_dt.year,
-            now_dt.month,
-            1
-        ) - dr.relativedelta(months=ml)
+        date_issue_3 = date_issue_2 - dr.relativedelta(days=1)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
         date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         IssueFactory.create(
@@ -167,10 +128,10 @@ class TestJournal:
         IssueFactory.create(
             journal=journal, year=date_issue_2.year,
             date_published=date_issue_2)
-        IssueFactory.create(
+        issue_3 = IssueFactory.create(
             journal=journal, year=date_issue_3.year,
             date_published=date_issue_3)
-        issue_4 = IssueFactory.create(
+        IssueFactory.create(
             journal=journal, year=date_issue_4.year,
             date_published=date_issue_4)
         issue_5 = IssueFactory.create(
@@ -178,7 +139,7 @@ class TestJournal:
             date_published=date_issue_5)
         EXPECTED = {
             'from': issue_5.date_published,
-            'to': issue_4.date_published
+            'to': issue_3.date_published
         }
         assert journal.published_open_access_issues_period_coverage == EXPECTED
 
@@ -254,20 +215,21 @@ class TestIssue:
         issue = IssueFactory(journal=journal, localidentifier='dummy1234')
         assert issue.pid == 'erudit:erudit.dummy139.dummy1234'
 
-    def test_knows_if_it_is_embargoed_in_case_of_scientific_journals(self):
-        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory()
+    @pytest.mark.parametrize('journal_type,conf_name', [
+        ('S', 'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS'),
+        ('C', 'CULTURAL_JOURNAL_EMBARGO_IN_MONTHS'),
+    ])
+    def test_knows_if_it_is_embargoed(self, journal_type, conf_name):
+        import erudit.conf.settings
+        ml = getattr(erudit.conf.settings, conf_name)
+        journal = JournalFactory(type_code=journal_type)
         now_dt = dt.date.today()
         journal.last_publication_year = now_dt.year
         journal.open_access = False
         journal.save()
         date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
         date_issue_2 = now_dt - dr.relativedelta(months=ml)
-        date_issue_3 = dt.date(
-            now_dt.year,
-            now_dt.month,
-            1
-        ) - dr.relativedelta(months=ml)
+        date_issue_3 = date_issue_2 - dr.relativedelta(days=1)
         date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
         date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
         issue_1 = IssueFactory.create(
@@ -293,52 +255,7 @@ class TestIssue:
             date_published=date_issue_1, force_free_access=True)
         assert issue_1.embargoed
         assert issue_2.embargoed
-        assert issue_3.embargoed
-        assert not issue_4.embargoed
-        assert not issue_5.embargoed
-        assert issue_6.embargoed
-        assert not issue_7.embargoed
-
-    def test_knows_if_it_is_embargoed_in_case_of_non_scientific_journals(self):
-        from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_MONTHS as ml
-        journal = JournalFactory(type_code='C')
-        now_dt = dt.date.today()
-        journal.last_publication_year = now_dt.year
-        journal.open_access = False
-        journal.save()
-        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
-        date_issue_2 = now_dt - dr.relativedelta(months=ml)
-        date_issue_3 = dt.date(
-            now_dt.year,
-            now_dt.month,
-            1
-        ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
-        issue_1 = IssueFactory.create(
-            journal=journal, year=date_issue_1.year,
-            date_published=date_issue_1)
-        issue_2 = IssueFactory.create(
-            journal=journal, year=date_issue_2.year,
-            date_published=date_issue_2)
-        issue_3 = IssueFactory.create(
-            journal=journal, year=date_issue_3.year,
-            date_published=date_issue_3)
-        issue_4 = IssueFactory.create(
-            journal=journal, year=date_issue_4.year,
-            date_published=date_issue_4)
-        issue_5 = IssueFactory.create(
-            journal=journal, year=date_issue_5.year,
-            date_published=date_issue_5)
-        issue_6 = IssueFactory.create(
-            journal=journal, year=date_issue_1.year - 10,
-            date_published=date_issue_1)
-        issue_7 = IssueFactory.create(
-            journal=journal, year=date_issue_5.year - 10,
-            date_published=date_issue_5, force_free_access=True)
-        assert issue_1.embargoed
-        assert issue_2.embargoed
-        assert issue_3.embargoed
+        assert not issue_3.embargoed
         assert not issue_4.embargoed
         assert not issue_5.embargoed
         assert issue_6.embargoed
@@ -378,6 +295,33 @@ class TestIssue:
         assert not issue_1.embargoed
         assert not issue_2.embargoed
         assert not issue_3.embargoed
+
+    def test_last_issue_is_always_embargoed(self):
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+        outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
+        issue1 = IssueFactory(date_published=outside_embargo)
+        issue2 = IssueFactory(journal=issue1.journal, date_published=outside_embargo)
+        assert issue1 == issue1.journal.last_issue
+        assert issue1.embargoed
+        assert issue2 != issue2.journal.last_issue
+        assert not issue2.embargoed
+
+    def test_last_issue_is_not_always_embargoed_when_next_journal(self):
+        from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
+        outside_embargo = dt.date.today() - dr.relativedelta(months=ml + 1)
+        issue = IssueFactory(
+            journal__next_journal=JournalFactory(),
+            date_published=outside_embargo)
+        assert not issue.embargoed
+
+    def test_issue_with_roc_article_is_forced_to_free_access(self):
+        article = ArticleFactory()
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_roc()
+        # TODO: use helper functions from the fake fedora API after we merge the de-article branch
+        article.issue.get_articles_from_fedora = lambda: iter([article])
+        article.issue.sync_with_erudit_object()
+        assert article.issue.force_free_access
 
     def test_knows_if_it_has_a_coverpage(self):
         journal = JournalFactory()
@@ -514,45 +458,14 @@ class TestArticle:
         assert not article_2.open_access
 
     def test_knows_if_it_is_embargoed(self):
-        now_dt = dt.date.today()
         from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as ml
-        collection = CollectionFactory(code="erudit", localidentifier="erudit", name="Érudit")
-        journal = JournalFactory(
-            collection=collection, open_access=False, last_publication_year=now_dt.year)
-        date_issue_1 = dt.date(now_dt.year, now_dt.month, 1)
-        date_issue_2 = now_dt - dr.relativedelta(months=ml)
-        date_issue_3 = dt.date(
-            now_dt.year,
-            now_dt.month,
-            1
-        ) - dr.relativedelta(months=ml)
-        date_issue_4 = now_dt - dr.relativedelta(months=(ml + 5))
-        date_issue_5 = now_dt - dr.relativedelta(months=((ml + 5) * 2))
-        issue_1 = IssueFactory.create(
-            journal=journal, year=date_issue_1.year,
-            date_published=date_issue_1)
-        issue_2 = IssueFactory.create(
-            journal=journal, year=date_issue_2.year,
-            date_published=date_issue_2)
-        issue_3 = IssueFactory.create(
-            journal=journal, year=date_issue_3.year,
-            date_published=date_issue_3)
-        issue_4 = IssueFactory.create(
-            journal=journal, year=date_issue_4.year,
-            date_published=date_issue_4)
-        issue_5 = IssueFactory.create(
-            journal=journal, year=date_issue_5.year,
-            date_published=date_issue_5)
-        article_1 = ArticleFactory.create(issue=issue_1)
-        article_2 = ArticleFactory.create(issue=issue_2)
-        article_3 = ArticleFactory.create(issue=issue_3)
-        article_4 = ArticleFactory.create(issue=issue_4)
-        article_5 = ArticleFactory.create(issue=issue_5)
-        assert article_1.embargoed
-        assert article_2.embargoed
-        assert article_3.embargoed
-        assert not article_4.embargoed
-        assert not article_5.embargoed
+        article = ArticleFactory(
+            issue__journal__open_access=False, issue__date_published=dt.date.today())
+        assert article.embargoed
+        article = ArticleFactory(
+            issue__journal=article.issue.journal,
+            issue__date_published=dt.date.today() - dr.relativedelta(months=ml + 1))
+        assert not article.embargoed
 
     def test_sync_with_erudit_object_doesnt_crash(self):
         # There's not much to test in sync_with_erudit_object() that is interesting. It simply

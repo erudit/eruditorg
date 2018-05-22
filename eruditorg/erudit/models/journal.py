@@ -275,20 +275,14 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return self.type.embargo_duration() if self.type else \
             erudit_settings.DEFAULT_JOURNAL_EMBARGO_IN_MONTHS
 
-    # We cache this because published_issues is expensive and this is called often when generating
-    # the journal detail view.
-    @cached_property
+    @property
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
-        if self.open_access or self.published_issues.count() == 0:
+        # FIXME avoid hardcoding the collection code
+        if self.open_access or not self.active or self.collection.code != 'erudit':
             return None
         else:
-            date_embargo_begins = dt.date(
-                self.last_issue.date_published.year,
-                self.last_issue.date_published.month,
-                1
-            ) - dr.relativedelta(months=self.embargo_in_months)
-            return date_embargo_begins
+            return dt.date.today() - dr.relativedelta(months=self.embargo_in_months)
 
     @property
     def days_not_available_from_today(self):
@@ -552,6 +546,13 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             or dt.datetime(int(self.year), 1, 1)
         self.date_produced = erudit_object.production_date \
             or erudit_object.publication_date
+        try:
+            first_article = next(self.get_articles_from_fedora())
+        except StopIteration:
+            pass
+        else:
+            if first_article.erudit_object.is_of_type_roc:
+                self.force_free_access = True
 
     def get_articles_from_fedora(self):
         # this is a bit of copy/paste from import_journals_from_fedora but I couldn't find an
@@ -690,14 +691,32 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
     def embargoed(self):
         """ Returns a boolean indicating if the issue is embargoed. """
 
-        # FIXME avoid hardcoding the collection code
-        if not self.journal.open_access and self.journal.collection.code == 'erudit':
-            if self.force_free_access is False:
-                return dt.date(
-                    self.date_published.year, self.date_published.month, self.date_published.day
-                ) >= self.journal.date_embargo_begins if self.is_published \
-                    else True
-        return False
+        if not self.is_published:
+            # Technically, we're not "embargoed", we're not published at all! If we're asking
+            # whether an unpublished issue is embargoed, something wen't wrong. Let's go with the
+            # safe answer here: embargo the issue.
+            return True
+        if self.force_free_access:
+            return False
+        journal = self.journal
+        threshold = journal.date_embargo_begins
+        if threshold is None:
+            # the journal doesn't embargo its issues
+            return False
+        elif self.date_published < threshold:
+            # we should normally be out of embargo, *but*, we have an exception for the last issue
+            # of a journal. A journal that is not in open access always has its last issue
+            # embargoed.
+            # On top of this, another exception: we don't apply the exception if the journal has
+            # a "next_journal" because that means that the journal hasn't stopped publishing, it
+            # merely changed its name. We don't want the last issue of the old journal to be stuck
+            # in embargo forever.
+            if journal.next_journal is None and self == journal.last_issue:
+                return True
+            else:
+                return False
+        else:
+            return True
 
     @property
     def name_with_themes(self):
