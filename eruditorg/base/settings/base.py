@@ -298,9 +298,7 @@ LOGGING = {
             'format': '%(levelname)s %(asctime)s %(module)s '
                       '%(process)d %(thread)d %(message)s'
         },
-        'userspace.journal.editor': {
-            'format': '{"level": "%(levelname)s", "time": "%(asctime)s", "username": "%(username)s", "journal_code": "%(journal_code)s", "message": "%(message)s", "issue_submission": "%(issue_submission)s"}'  # noqa
-        }
+
     },
     'handlers': {
         'sentry': {
@@ -321,7 +319,7 @@ LOGGING = {
         'userspace.journal.editor.console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'userspace.journal.editor'
+            'formatter': 'structured'
         },
 
         'userspace.journal.editor.file': {
@@ -330,8 +328,9 @@ LOGGING = {
             'filename': '/tmp/userspace.journal.editor.log',
             'maxBytes': 1024 * 1024 * 1,
             'backupCount': 5,
-            'formatter': 'userspace.journal.editor',
+            'formatter': 'structured',
         },
+
         'error_file': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
