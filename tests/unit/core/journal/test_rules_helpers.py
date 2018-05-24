@@ -23,12 +23,12 @@ class TestGetEditableJournals:
     def test_a_superuser_can_edit_everything(self, managed_collection):
         journals = JournalFactory.create_batch(2, collection=managed_collection)
         superuser = UserFactory(is_superuser=True)
-        assert list(get_editable_journals(superuser)) == journals
+        assert set(get_editable_journals(superuser)) == set(journals)
 
     def test_a_staff_user_can_edit_everything(self, managed_collection):
         journals = JournalFactory.create_batch(2, collection=managed_collection)
         superuser = UserFactory(is_staff=True)
-        assert list(get_editable_journals(superuser)) == journals
+        assert set(get_editable_journals(superuser)) == set(journals)
 
     def test_a_user_can_edit_journals_he_is_a_member_of(self):
         user = UserFactory()
