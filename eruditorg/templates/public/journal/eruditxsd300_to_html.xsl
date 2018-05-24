@@ -361,34 +361,20 @@
       </xsl:if>
 
       <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
-        {% if html_abstracts.main %}
+        {% if html_abstracts %}
         <!-- abstract -->
-        {% with main_abstract=html_abstracts.main paral_abstracts=html_abstracts.paral eq_abstracts=html_abstracts.equivalent %}
           <section id="resume" role="complementary" class="article-section grresume">
             <h2 class="sr-only">{% trans 'Résumés' %}</h2>
-            <section id="resume-{{ main_abstract.lang }}" class="resume main-abstract">
-              <h3>{% include "public/journal/partials/article_abstract_title.html" with lang=main_abstract.lang %}</h3>
-              {% if paral_abstracts %}
-              <h4>{{ titles.main.title|safe }}{% if titles.main.subtitle %} <br/>{{ titles.main.subtitle|safe }}{% endif %}</h4>
-              {% endif %}
-              {{ main_abstract.content|safe }}
-              {% for lang, keywords in html_abstracts_keywords.items %}
-              {% if lang == titles.main.lang %}
-              <div class="keywords">
-                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
-                <ul>
-                  {% for k in keywords %}
-                  <li class="keyword">{{ k }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              {% endif %}
-              {% endfor %}
-            </section>
-            {% if paral_abstracts %}
+            {% if html_abstracts %}
             <section id="resume-{{ paral_abstracts.lang }}" class="resume">
-            {% for abstract in paral_abstracts %}
+            {% for abstract in html_abstracts %}
+              {% if abstract.type == "paral" %}
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.paral %}
+              {% elif abstract.type == "equivalent" %}
+              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.equivalent %}
+              {% elif abstract.type == "main" %}
+              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.main %}
+              {% endif %}
               {% for lang, keywords in html_abstracts_keywords.items %}
               {% if lang == abstract.lang %}
               <div class="keywords">
@@ -403,28 +389,6 @@
               {% endfor %}
             {% endfor %}
             </section>
-            {% endif %}
-            {% if eq_abstracts %}
-            {% for abstract in eq_abstracts %}
-            <section id="resume-{{ eq_abstracts.lang }}" class="resume">
-              {% include "public/journal/partials/article_abstract_content.html" with titles=titles.equivalent %}
-              {% for lang, keywords in html_abstracts_keywords.items %}
-              {% if lang == abstract.lang %}
-              <div class="keywords">
-                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
-                <ul>
-                  {% for k in keywords %}
-                  <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              {% endif %}
-              {% endfor %}
-            </section>
-            {% endfor %}
-            {% if lang == abstract.lang %}
-                {{ keywords }}
-            {% endif %}
             {% endif %}
             {% if html_other_keywords %}
             <section class="resume">
@@ -441,7 +405,6 @@
             </section>
             {% endif %}
           </section>
-        {% endwith %}
         {% endif %}
 
         {% if content_access_granted and not only_summary and article.publication_allowed %}

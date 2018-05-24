@@ -521,13 +521,11 @@ class BaseArticleDetailView(
         abstracts_keywords = self.object.erudit_object.get_keywords()
         other_keywords = abstracts_keywords.copy()
         # Display HTML abstracts
-        abstracts_languages = [
-            o['lang'] for o in
-            chain([abstracts['main']], abstracts['paral'], abstracts['equivalent'])
-        ]
+        abstracts_languages = [o['lang'] for o in abstracts]
 
         for lang in abstracts_languages:
-            other_keywords.pop(lang)
+            if lang in other_keywords.keys():
+                other_keywords.pop(lang)
 
         try:
             context['html_abstracts'] = abstracts
