@@ -94,7 +94,7 @@ def get_coverpage(context=None):
     )
 
     abstracts = [
-        a['content'] for a in context['article'].erudit_object.get_abstracts(formatted=True)
+        context['article'].erudit_object.get_abstracts(formatted=True)[0]['content']
     ]
     article_citation = "Bowen, Dore. « The Diorama Effect: Gas, Politics, and Opera\
      in the 1825 Paris Diorama », Intermédialités : histoire et théorie des arts,\
