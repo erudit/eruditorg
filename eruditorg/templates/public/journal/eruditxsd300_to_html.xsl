@@ -366,7 +366,6 @@
           <section id="resume" role="complementary" class="article-section grresume">
             <h2 class="sr-only">{% trans 'Résumés' %}</h2>
             {% if html_abstracts %}
-            <section id="resume-{{ paral_abstracts.lang }}" class="resume">
             {% for abstract in html_abstracts %}
               {% if abstract.type == "paral" %}
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.paral %}
@@ -375,34 +374,19 @@
               {% elif abstract.type == "main" %}
               {% include "public/journal/partials/article_abstract_content.html" with titles=titles.main %}
               {% endif %}
-              {% for lang, keywords in html_abstracts_keywords.items %}
-              {% if lang == abstract.lang %}
-              <div class="keywords">
-                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
-                <ul>
-                  {% for k in keywords %}
-                  <li class="keyword">{{ k }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              {% endif %}
-              {% endfor %}
             {% endfor %}
-            </section>
             {% endif %}
             {% if html_other_keywords %}
-            <section class="resume">
-              {% for lang, keywords in html_other_keywords.items %}
-              <div class="keywords">
-                <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
-                <ul>
-                  {% for k in keywords %}
-                  <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-              {% endfor %}
-            </section>
+            {% for lang, keywords in html_other_keywords.items %}
+            <div class="keywords">
+              <p><strong>{% include "public/journal/partials/keywords_label.html" with lang=lang %}{% trans "&#160;:" %}</strong></p>
+              <ul>
+                {% for k in keywords %}
+                <li class="keyword">{{ k }}{% if not forloop.last %}, {% endif %}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
             {% endif %}
           </section>
         {% endif %}

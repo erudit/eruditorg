@@ -4,6 +4,11 @@
 
 .grresume {
 
+  p, li, blockquote {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
   > .resume {
     padding-bottom: 2em;
     @include column-break-inside(avoid);
@@ -18,11 +23,6 @@
       margin: 0 0 0.5em 0;
       line-height: 1.35;
       @include font-styles('sans-medium');
-    }
-
-    p, li, blockquote {
-      font-size: 14px;
-      line-height: 1.5;
     }
 
     &:first-of-type {
