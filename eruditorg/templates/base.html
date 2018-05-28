@@ -103,6 +103,31 @@
     </script>
     <script src="{% static 'js/modernizr.js' %}"></script>
 
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#000000",
+          "text": "#ffffff"
+        },
+        "button": {
+          "background": "#ff4242",
+          "text": "#ffffff"
+        }
+      },
+      "content": {
+        "message": "{% trans 'erudit.org  utilise des cookies (« témoins de connexion ») à des fins de statistiques et d’amélioration de l’expérience utilisateur. Ces données sont anonymes. En poursuivant votre visite, vous acceptez l’utilisation de ces cookies, que vous pourrez désactiver en tout temps dans votre fureteur web.' %}",
+        "dismiss": "{% trans 'J’ai compris' %}",
+        "link": "{% trans 'En savoir plus' %}",
+        "href": "{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}"
+      },
+      "position": "bottom-right"
+    })});
+    </script>
+
     {% block extrahead %}{% endblock extrahead %}
   </head>
   <body

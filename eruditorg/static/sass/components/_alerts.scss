@@ -105,3 +105,14 @@
     padding-bottom: 1em;
   }
 }
+
+
+// Cookie consent
+.cc-message {
+  @include font-styles('sans');
+  font-size: 14px;
+}
+
+.cc-dismiss {
+  @include font-styles('sans-medium');
+}
