@@ -429,12 +429,20 @@
                 <p>
                   © {% now "Y" %} {% trans "Consortium Érudit" %}
                 </p>
-                {% switch "maintenance" %}
-                {% else %}
-                <p>
-                  <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
-                </p>
-                {% endswitch %}
+                <ul class="unstyled">
+                  <li>
+                    <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique de confidentialité" %}">{% trans "Politique de confidentialité" %}</a> <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                  </li>
+                  <li>
+                    <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique relative aux cookies" %}">{% trans "Politique relative aux cookies" %}</a> <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                  </li>
+                  {% switch "maintenance" %}
+                  {% else %}
+                  <li>
+                    <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
+                  </li>
+                  {% endswitch %}
+                </ul>
               </div>
 
               <div class="col-sm-6">

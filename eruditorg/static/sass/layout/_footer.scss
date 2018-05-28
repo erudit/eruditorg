@@ -69,8 +69,9 @@ footer#site-footer {
     padding-bottom: $margin-vertical-default;
     color: #fff;
 
-    p {
+    p, li {
       font-size: 14px;
+      line-height: 1.5;
     }
 
     svg {
