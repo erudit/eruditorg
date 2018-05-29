@@ -2,18 +2,19 @@
 {% load i18n %}
 
 {% block subject %}
-{% trans "Abonnement à une revue" %}
+Abonnement / Subscription
 {% endblock subject %}
 
 {% block content %}
-<p>{% trans "Bonjour," %}</p>
-
+<p>Bonjour,</p>
 <p>
-{% blocktrans trimmed with journal_name=token.content_object.name %}
-  Une proposition d’abonnement à la revue <strong>{{ journal_name }}</strong> vous a été envoyée.
-{% endblocktrans %}
+  L'éditeur de <strong>{{ token.content_object.journal.name }}</strong> vous envoie un abonnement à sa revue sur erudit.org. Veuillez cliquer sur le lien suivant pour l'accepter.
 </p>
-<p>{% trans "Veuillez cliquer sur le lien suivant pour l'accepter" %}</p>
+<hr>
+<p>Hi,</p>
+<p>
+  The Editor of <strong>{{ token.content_object.journal.name }}</strong> is sending you a subscription to their journal on erudit.org. Click the following link to accept it.
+</p>
 {% endblock content %}
 
 {% block cta_url %}
@@ -21,12 +22,12 @@ http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}
 {% endblock cta_url %}
 
 {% block cta_text %}
-{% trans "Accepter l’abonnement" %}
+Accepter l’abonnement / Accept subscription
 {% endblock cta_text %}
 
 {% block signature %}
-{% trans 'L’Équipe Érudit' %}<br>
-{% blocktrans %}
+L’Équipe Érudit / The Érudit team<br>
 <a href="mailto:info@erudit.org?subject=Abonnement individuel à une revue">info@erudit.org</a>
-{% endblocktrans %}
 {% endblock signature %}
+
+
