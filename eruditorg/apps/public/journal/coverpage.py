@@ -19,16 +19,27 @@ from reportlab.platypus.tables import Table, TableStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-pdfmetrics.registerFont(TTFont('Spectral', './eruditorg/static/fonts/spectral/Spectral-Regular.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Italic', './eruditorg/static/fonts/spectral/Spectral-Italic.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-Bold', './eruditorg/static/fonts/spectral/Spectral-Bold.ttf'))
-pdfmetrics.registerFont(TTFont('Spectral-BoldItalic', './eruditorg/static/fonts/spectral/Spectral-BoldItalic.ttf'))
-pdfmetrics.registerFontFamily('Spectral', normal='Spectral', bold='Spectral-Bold', italic='Spectral-Italic',)
+pdfmetrics.registerFont(
+    TTFont('Spectral', './eruditorg/static/fonts/spectral/Spectral-Regular.ttf')
+)
+pdfmetrics.registerFont(
+    TTFont('Spectral-Italic', './eruditorg/static/fonts/spectral/Spectral-Italic.ttf')
+)
+pdfmetrics.registerFont(
+    TTFont('Spectral-Bold', './eruditorg/static/fonts/spectral/Spectral-Bold.ttf')
+)
+pdfmetrics.registerFont(
+    TTFont('Spectral-BoldItalic', './eruditorg/static/fonts/spectral/Spectral-BoldItalic.ttf')
+)
+pdfmetrics.registerFontFamily(
+    'Spectral', normal='Spectral', bold='Spectral-Bold', italic='Spectral-Italic',
+)
 
 addMapping('Spectral', 0, 0, 'Spectral')
 addMapping('Spectral-Italic', 0, 1, 'Spectral Italic')
 addMapping('Spectral-Bold', 1, 0, 'Spectral Bold')
 addMapping('Spectral-BoldItalic', 1, 1, 'Spectral Bold Italic')
+
 
 class line(Flowable):
 
@@ -71,7 +82,7 @@ def get_coverpage(context=None):
         "HSTC Bulletin : revue d’histoire des sciences, des techniques et de la \
         médecine au Canada",
     ]
-    journal_url = "https://www.erudit.org/fr/revues/hstc/"
+    journal_url = "https://www.erudit.org"
     journal_publishers = [
         p.name for p in context['journal'].publishers.all()
     ]
@@ -195,9 +206,13 @@ def get_coverpage(context=None):
         left_text = left_text + """
             <font>%s</font>
             <br/><br/>
-            <font color='#ff4242'>%s</font>
-            <br/><br/><br/>
-        """ % (publisher, journal_link)
+        """ % (publisher)
+
+    # Journal info
+    left_text = left_text + """
+        <font color='#ff4242'>%s</font>
+        <br/><br/><br/>
+    """ % (journal_link)
 
     # TODO: ISSN
 
@@ -217,7 +232,7 @@ def get_coverpage(context=None):
     if abstracts:
         for abstract in abstracts:
             right_text = right_text + """
-                <font color='grey'>%s</font>
+                <font color='grey'>%s…</font>
                 <br/><br/>
             """ % (abstract)
     else:
