@@ -55,5 +55,12 @@ class EruditArticleDomChanger:
         titre = self.root.find('.//grtitre/titre')
         titre.text = title
 
+    def add_keywords(self, lang, keywords):
+        elem = E.grmotcle(
+            *[E.motcle(k) for k in keywords],
+            lang=lang)
+        liminaire = self.root.find('./liminaire')
+        liminaire.append(elem)
+
     def tostring(self):
         return etree.tostring(self.root)
