@@ -68,16 +68,18 @@
       </a>
       {% endif %}
     </p>
+    {% if article.erudit_object.abstracts %}
     <p class="article-links col-xs-9">
-      {% if article.abstract %}
       <span class="affiliations akkordion" data-akkordion-single="true">
         <a class="affiliations-label akkordion-title">{% trans 'Résumé' %} <span class="icon ion-ios-arrow-down"></span></a>
         <span class="akkordion-content unstyled">
-          {{ article.abstract }}
+          {% for abstract in article.erudit_object.abstracts %}
+          <br><strong>{{ abstract.lang|upper }}{% trans '&nbsp;:' %}</strong> {{ abstract.content|safe }}<br>
+          {% endfor %}
         </span>
       </span>
-      {% endif %}
     </p>
+    {% endif %}
   </div>
 </li>
 {% endcache %}

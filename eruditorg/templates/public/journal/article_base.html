@@ -48,9 +48,11 @@
 <meta name="citation_author_institution" content="{{ aff }}" />
 {% endfor %}
 {% endfor %}
-{% for abstract in article.erudit_object.abstracts %}
+{% if meta_abstracts %}
+{% for abstract in meta_abstracts %}
 <meta name="citation_abstract" lang="{{ abstract.lang }}" content="{{ abstract.content }}" />
 {% endfor %}
+{% endif %}
 <meta name="citation_language" content="{{ article.language }}" />
 {% if article.first_page %}
 <meta name="citation_firstpage" content="{{ article.first_page }}" />
