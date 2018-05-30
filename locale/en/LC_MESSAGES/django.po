@@ -2605,7 +2605,7 @@ msgstr "Érudit Consortium"
 
 #: templates/base.html:435
 msgid "https://www.iubenda.com/privacy-policy/79766356"
-msgstr ""
+msgstr "https://www.iubenda.com/privacy-policy/15308125"
 
 #: templates/base.html:435
 msgid "Politique de confidentialité"
@@ -2613,7 +2613,7 @@ msgstr "Privacy policy"
 
 #: templates/base.html:438 templates/base.html:513
 msgid "https://www.iubenda.com/privacy-policy/79766356/cookie-policy"
-msgstr ""
+msgstr "https://www.iubenda.com/privacy-policy/15308125/cookie-policy"
 
 #: templates/base.html:438
 msgid "Politique relative aux cookies"
