@@ -276,9 +276,9 @@ class Article(Generic):
         if self.is_in_fedora:
             lang = get_language()
             keyword_sets = self.obj.erudit_object.get_keywords()
-            for keyword_set in keyword_sets:
-                if keyword_set['lang'] == lang:
-                    return keyword_set['keywords']
+            for keywords_lang, keywords in keyword_sets.items():
+                if keywords_lang == lang:
+                    return keywords
         return []
 
 

@@ -12,6 +12,7 @@ from django.test.client import Client
 import pytest
 
 from core.solrq.query import Query
+from erudit.fedora import repository
 from erudit.test.factories import ArticleFactory, IssueFactory, SolrDocumentFactory
 from erudit.models import Article
 
@@ -152,6 +153,20 @@ class TestEruditSearchResultsView:
             'filter_extra_q': '+foo',
         })
         assert response.status_code == 200
+
+    def test_renders_keywords(self, solr_client):
+        article = ArticleFactory(title='foo')
+        with repository.api.open_article(article.pid) as wrapper:
+            wrapper.set_title('foo')
+            wrapper.add_keywords('fr', ['aybabtu'])
+        solr_client.add_article(article)
+        url = reverse('public:search:results')
+        response = Client().get(url, data={
+            'basic_search_term': 'foo',
+        })
+        results = response.context['results']
+        assert results['pagination']['count'] == 1
+        assert b'aybabtu' in response.content
 
 
 class TestAdvancedSearchView:

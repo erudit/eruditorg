@@ -148,7 +148,7 @@ class TestRenderArticleTemplateTag(TestCase):
         article = ArticleFactory.create(issue=issue)
         view = ArticleDetailView()
         view.request = unittest.mock.MagicMock(return_value={})
-        view.get_context_data = unittest.mock.MagicMock(return_value=Context({}))
+        view.get_context_data = unittest.mock.MagicMock(return_value={})
         view.get_object = unittest.mock.MagicMock(return_value=article)
 
         # Run
@@ -173,7 +173,7 @@ class TestRenderArticleTemplateTag(TestCase):
         article = ArticleFactory.create(issue=issue)
         view = ArticleDetailView()
         view.request = unittest.mock.MagicMock(return_value={})
-        view.get_context_data = unittest.mock.MagicMock(return_value=Context({}))
+        view.get_context_data = unittest.mock.MagicMock(return_value={})
         view.get_object = unittest.mock.MagicMock(return_value=article)
 
         # Run

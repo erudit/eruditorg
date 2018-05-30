@@ -62,5 +62,12 @@ class EruditArticleDomChanger:
         else:
             self.root.find('//corps').insert(0, E.texte(typetexte='roc'))
 
+    def add_keywords(self, lang, keywords):
+        elem = E.grmotcle(
+            *[E.motcle(k) for k in keywords],
+            lang=lang)
+        liminaire = self.root.find('./liminaire')
+        liminaire.append(elem)
+
     def tostring(self):
         return etree.tostring(self.root)

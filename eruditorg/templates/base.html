@@ -101,7 +101,8 @@
     <script>
       var LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
     </script>
-    <script src="{% static 'js/modernizr.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
 
     {% block extrahead %}{% endblock extrahead %}
   </head>
@@ -429,12 +430,20 @@
                 <p>
                   © {% now "Y" %} {% trans "Consortium Érudit" %}
                 </p>
-                {% switch "maintenance" %}
-                {% else %}
-                <p>
-                  <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
-                </p>
-                {% endswitch %}
+                <ul class="unstyled">
+                  <li>
+                    <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique de confidentialité" %}">{% trans "Politique de confidentialité" %}</a>
+                  </li>
+                  <li>
+                    <a href="{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}" class="iubenda-nostyle iubenda-embed " title="{% trans "Politique relative aux cookies" %}">{% trans "Politique relative aux cookies" %}</a>
+                  </li>
+                  {% switch "maintenance" %}
+                  {% else %}
+                  <li>
+                    <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/usagers/politique-dutilisation/{% else %}https://apropos.erudit.org/en/users/policy-on-use/{% endif %}" target="_blank">{% trans "Politique et licence d’utilisation" %}</a>
+                  </li>
+                  {% endswitch %}
+                </ul>
               </div>
 
               <div class="col-sm-6">
@@ -479,10 +488,36 @@
     </footer>
     {% endblock footer %}
 
+    <script src="{% static 'js/modernizr.js' %}"></script>
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script type="text/javascript" src="{% url 'js_reverse' %}"></script>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#000000",
+          "text": "#ffffff"
+        },
+        "button": {
+          "background": "#ff4242",
+          "text": "#ffffff"
+        }
+      },
+      "content": {
+        "message": "{% trans 'erudit.org  utilise des cookies (« témoins de connexion ») à des fins de statistiques et d’amélioration de l’expérience utilisateur. Ces données sont anonymes. En poursuivant votre visite, vous acceptez l’utilisation de ces cookies, que vous pourrez désactiver en tout temps dans votre fureteur web.' %}",
+        "dismiss": "{% trans 'J’ai compris' %}",
+        "link": "{% trans 'En savoir plus' %}",
+        "href": "{% trans 'https://www.iubenda.com/privacy-policy/79766356/cookie-policy' %}"
+      },
+      "position": "bottom-right"
+    })});
+    </script>
     {% block scripts %}
     <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/app.js' %}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
     {% endblock scripts %}
 
     {% block footerscript %}{% endblock footerscript %}
