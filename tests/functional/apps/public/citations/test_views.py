@@ -6,7 +6,8 @@ from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 import pytest
 
-from base.test.testcases import EruditClientTestCase
+from base.test.factories import UserFactory
+from base.test.testcases import Client, EruditClientTestCase
 from core.citations.middleware import SavedCitationListMiddleware
 from erudit.fedora import repository
 
@@ -16,9 +17,12 @@ from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import ThesisFactory
+from erudit.test.factories import SolrDocumentFactory
 
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
+
+pytestmark = pytest.mark.django_db
 
 
 class TestSavedCitationListView(EruditClientTestCase):
@@ -118,6 +122,18 @@ class TestSavedCitationListView(EruditClientTestCase):
         response = self.client.get(url, data={'document_ids': ['foo', 'bar', ]})
         # Check
         assert response.status_code == 404
+
+
+def test_cannot_cite_article_not_in_fedora(solr_client):
+    doc = SolrDocumentFactory()
+    solr_client.add_document(doc)
+    user = UserFactory()
+    user.saved_citations.create(solr_id=doc.id)
+    client = Client(logged_user=user)
+    url = reverse('public:citations:list')
+    response = client.get(url)
+    assert b'data-document-id' in response.content
+    assert b'id_cite_modal_' not in response.content
 
 
 class TestSavedCitationAddView(EruditClientTestCase):
