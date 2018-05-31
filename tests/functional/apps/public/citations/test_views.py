@@ -18,9 +18,12 @@ from erudit.test.factories import CollectionFactory
 from erudit.test.factories import IssueFactory
 from erudit.test.factories import JournalFactory
 from erudit.test.factories import ThesisFactory
+from erudit.test.factories import SolrDocumentFactory
 
 from apps.public.citations.views import SavedCitationAddView
 from apps.public.citations.views import SavedCitationRemoveView
+
+pytestmark = pytest.mark.django_db
 
 
 pytestmark = pytest.mark.django_db
@@ -116,6 +119,18 @@ class TestSavedCitationListView:
 
 
 class TestSavedCitationAddView:
+
+    def test_cannot_cite_article_not_in_fedora(self, solr_client):
+        doc = SolrDocumentFactory()
+        solr_client.add_document(doc)
+        user = UserFactory()
+        user.saved_citations.create(solr_id=doc.id)
+        client = Client(logged_user=user)
+        url = reverse('public:citations:list')
+        response = client.get(url)
+        assert b'data-document-id' in response.content
+        assert b'id_cite_modal_' not in response.content
+
     def test_can_add_an_article_to_a_citation_list(self):
         issue = IssueFactory.create()
         article = ArticleFactory.create(issue=issue)

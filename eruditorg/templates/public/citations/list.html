@@ -110,18 +110,20 @@
                       <span class="ion-close toolbox-remove"></span>
                     </a>
                   </li>
+                  {% if document.can_cite %}
                   <li>
-                    <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
+                    <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite>
                       <span class="ion-quote toolbox-cite"></span>
                     </a>
                   </li>
+                  {% endif %}
                   <li>
-                    <a class="tool-btn" href="{% if document.external_url %}{{ document.external_pdf_url|default:document.external_url }}{% else %}{% url 'public:journal:article_raw_pdf' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank">
+                    <a class="tool-btn" href="{{ document.pdf_url }}" title="{% trans 'Télécharger' %}" target="_blank">
                       <span class="toolbox-pdf">PDF</span>
                     </a>
                   </li>
                   <li>
-                    <a class="tool-btn" href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                    <a class="tool-btn" href="{{ document.get_absolute_url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
                       <span class="toolbox-html">HTML</span>
                     </a>
                   </li>
@@ -129,26 +131,26 @@
                 </ul>
                 <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
                 <h3 class="document-title">
-                  <a href="{% if document.external_url %}{% url 'public:journal:article_external_redirect' document.localidentifier %}{% else %}{% url 'public:journal:article_detail' document.issue.journal.code document.issue.volume_slug document.issue.localidentifier document.localidentifier %}{% endif %}" target="_blank">
+                  <a href="{{ document.get_absolute_url }}" target="_blank">
                     {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
                   </a>
                 </h3>
                 <div class="document-authors-publication-year text-muted">{{ document.authors }} ({{ document.issue.year }})</div>
+                {% if document.can_cite %}
                 <div class="hidden">
-                  <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                  <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
                     <div class="modal-body">
-                      {% if document.is_in_fedora %}
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
-                        <dd id="id_cite_mla_{{ document.id }}" class="cite-mla">
+                        <dd class="cite-mla">
                           {{ document.authors_mla }}
                           {% trans '«&nbsp;' %}{{ document.title }}.{% trans '&nbsp;»' %}
                           <em>{{ document.issue.journal.name }}</em>, {{ document.issue.volume_title|lower }}, {% trans 'p.' %}&nbsp;{{ document.first_page }}–{{ document.last_page }}. {% if document.doi %}doi:{{ document.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
-                        <dd id="id_cite_apa_{{ document.id }}" class="cite-apa">
+                        <dd class="cite-apa">
                           {{ document.authors_apa }}
                           ({{ document.issue.year }}).
                           {{ document.title }}
@@ -158,7 +160,7 @@
                         </dd>
 
                         <dt>Chicago</dt>
-                        <dd id="id_cite_chicago_{{ document.id }}" class="cite-chicago">
+                        <dd class="cite-chicago">
                           {{ document.authors_chicago }}
                           {% trans '«&nbsp;' %}{{ document.title }}{% trans '&nbsp;»' %}.
                           <em>{{ document.issue.journal.name }}</em>
@@ -168,22 +170,21 @@
                       </dl>
 
                       <hr />
-                      {% endif %}
                       <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>
                       <p>
-                        <a href="{% url 'public:journal:article_citation_enw' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_enw_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.ENW</span>
                         </a>
                         EndNote, Zotero
                       </p>
                       <p>
-                        <a href="{% url 'public:journal:article_citation_ris' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_ris_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.RIS</span>
                         </a>
                         Papers, Reference Manager, RefWorks, Zotero
                       </p>
                       <p>
-                        <a href="{% url 'public:journal:article_citation_bib' journal_code=document.issue.journal.code issue_slug=document.issue.volume_slug issue_localid=document.issue.localidentifier localid=document.localidentifier %}" class="btn btn-primary cite-export">
+                        <a href="{{ document.cite_bib_url }}" class="btn btn-primary cite-export">
                           <span class="show cite-export-title">.BIB</span>
                         </a>
                         BibTeX, JabRef, Mendeley, Zotero
@@ -191,6 +192,7 @@
                     </div>
                   </div>
                 </div>
+                {% endif %}
               </li>
               {% elif document.document_type == 'thesis' %}
               <li data-document-id="{{ document.localidentifier }}" data-document-type="thesis" class="document">
@@ -202,7 +204,7 @@
                     </a>
                   </li>
                   <li>
-                    <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ document.id }}" data-cite>
+                    <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite>
                       <span class="ion-quote toolbox-cite"></span>
                     </a>
                   </li>
@@ -219,7 +221,7 @@
                 </h3>
                 <div class="document-authors-publication-year text-muted">{{ document.authors }}&nbsp;({{ document.publication_year }})</div>
                 <div class="hidden">
-                  <div id="id_cite_modal_{{ document.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+                  <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
                     <h4 class="modal-header">{% trans "Outils de citation" %}</h4>
                     <div class="modal-body">
                       <p><strong>{% trans "Exporter la notice de ce document" %}</strong></p>

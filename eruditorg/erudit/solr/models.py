@@ -2,8 +2,6 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _, get_language
-from eulfedora.util import RequestFailed
-from requests.exceptions import ConnectionError
 import pysolr
 
 from erudit import models as erudit_models
@@ -123,30 +121,12 @@ class Article(Generic):
     def __getattr__(self, name):
         return getattr(self.obj, name)
 
-    def can_cite(self):
-        # We cannot cite articles we don't have in fedora. ref #1491
-        return self.obj.is_in_fedora
-
-    def cite_url(self, type):
-        return reverse('public:journal:article_citation_{}'.format(type), kwargs={
-            'journal_code': self.obj.issue.journal.code,
-            'issue_slug': self.obj.issue.volume_slug,
-            'issue_localid': self.obj.issue.localidentifier,
-            'localid': self.localidentifier,
-        })
-
-    def cite_enw_url(self):
-        return self.cite_url('enw')
-
-    def cite_bib_url(self):
-        return self.cite_url('bib')
-
-    def cite_ris_url(self):
-        return self.cite_url('ris')
-
     @property
     def document_type(self):
         return 'article'
+
+    def can_cite(self):
+        return self.obj.can_cite()
 
     @property
     def authors(self):
@@ -248,28 +228,6 @@ class Article(Generic):
     @property
     def issue_published(self):
         return self.obj.issue.publication_period or self.obj.issue.year
-
-    @property
-    def pdf_url(self):
-        if self.obj.external_pdf_url:
-            # If we have a external_pdf_url, then it's always the proper one to return.
-            return self.obj.external_pdf_url
-        if self.obj.issue.external_url:
-            # special case. if our issue has an external_url, regardless of whether we have a
-            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
-            return None
-        try:
-            if self.obj.fedora_object:
-                return reverse('public:journal:article_raw_pdf', kwargs={
-                    'journal_code': self.obj.issue.journal.code,
-                    'issue_slug': self.obj.issue.volume_slug,
-                    'issue_localid': self.obj.issue.localidentifier,
-                    'localid': self.obj.localidentifier,
-                })
-        except (RequestFailed, ConnectionError):  # pragma: no cover
-            if settings.DEBUG:
-                return False
-            raise
 
     @property
     def keywords(self):
