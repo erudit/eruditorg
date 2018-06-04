@@ -23,7 +23,8 @@ class RetroRestrictionsView(View):
                 E.years(';'.join(map(str, embargoed_years))),
                 identifier=journal.legacy_code)
 
-        journals = Journal.objects.filter(collection__code='erudit', open_access=False)
+        journals = Journal.objects.filter(
+            collection__is_main_collection=True, open_access=False, active=True)
         root = E.revues(
             *map(get_revue_elem, journals.all())
         )

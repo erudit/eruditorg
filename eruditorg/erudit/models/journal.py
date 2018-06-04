@@ -279,7 +279,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
         # FIXME avoid hardcoding the collection code
-        if self.open_access or not self.active or self.collection.code != 'erudit':
+        if self.open_access or not self.active or not self.collection.is_main_collection:
             return None
         else:
             return dt.date.today() - dr.relativedelta(months=self.embargo_in_months)
