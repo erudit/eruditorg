@@ -132,19 +132,7 @@
     </div>
     {% endif %}
   </header>
-  {% if articles_per_section %}
   {% include "public/journal/partials/issue_detail_section.html" %}
-  {% else %}
-
-  {# This is displayed only if the Fedora repository is unavailable #}
-
-  <ol class="issue_detail--articles unstyled section-1">
-    {% for article in articles %}
-    {% include "public/journal/partials/issue_detail_article_item.html" %}
-    {% endfor %}
-  </ol>
-
-  {% endif %}
 </main>
 {% endcache %}
 {% endblock inner_main %}

@@ -786,19 +786,6 @@ class Article(FedoraMixin):
             raise Article.DoesNotExist()
         erudit_object = self.erudit_object
 
-        processing = erudit_object.processing
-        processing_mapping = {
-            'minimal': self.PROCESSING_MINIMAL,
-            '': self.PROCESSING_MINIMAL,
-            'complet': self.PROCESSING_FULL,
-        }
-        try:
-            self.processing = processing_mapping[processing]
-        except KeyError:
-            raise ValueError(
-                'Unable to determine the processing type of the article '
-                'with PID {0}'.format(self.pid))
-
         self.type = erudit_object.article_type
         self.ordseq = int(erudit_object.ordseq)
         self.doi = erudit_object.doi
@@ -809,6 +796,37 @@ class Article(FedoraMixin):
         self.publication_allowed = node is None or node.text != 'non'
         urlpdf = erudit_object._dom.find('.//urlpdf')
         self.external_pdf_url = urlpdf.text if urlpdf is not None else None
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        return _('Aucun titre')
+
+    def __repr__(self):
+        return "<Article: {}>".format(self.pid)
+
+    def __eq__(self, other):
+        return self.localidentifier is not None and self.localidentifier == other.localidentifier
+
+    # Fedora-related methods and properties
+    # --
+
+    def get_fedora_model(self):
+        return ArticleDigitalObject
+
+    def get_erudit_class(self):
+        return EruditArticle
+
+    def get_full_identifier(self):
+        if self.issue.journal.provided_by_fedora:
+            return '{}.{}'.format(
+                self.issue.get_full_identifier(),
+                self.localidentifier
+            )
+        return None
+
+    # Article-related methods and properties
+    # --
 
     @cached_property
     def _solr_object(self):
@@ -823,6 +841,10 @@ class Article(FedoraMixin):
                     self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
                     self.localidentifier)
             )
+
+    @property
+    def authors(self):
+        return self.erudit_object.get_authors()
 
     def get_formatted_authors(self, style=None):
         return self.erudit_object.get_authors(formatted=True, style=style)
@@ -865,34 +887,6 @@ class Article(FedoraMixin):
     def prepublication_ticket(self):
         return self.issue.prepublication_ticket
 
-    def __str__(self):
-        if self.title:
-            return self.title
-        return _('Aucun titre')
-
-    def __repr__(self):
-        return "<Article: {}>".format(self.pid)
-
-    def __eq__(self, other):
-        return self.localidentifier is not None and self.localidentifier == other.localidentifier
-
-    # Fedora-related methods and properties
-    # --
-
-    def get_fedora_model(self):
-        return ArticleDigitalObject
-
-    def get_erudit_class(self):
-        return EruditArticle
-
-    def get_full_identifier(self):
-        if self.issue.journal.provided_by_fedora:
-            return '{}.{}'.format(
-                self.issue.get_full_identifier(),
-                self.localidentifier
-            )
-        return None
-
     @staticmethod
     def from_fedora_ids(journal_code, issue_localidentifier, localidentifier):
         try:
@@ -927,23 +921,6 @@ class Article(FedoraMixin):
         return self.cite_url('ris')
 
     @property
-    def pdf_url(self):
-        if self.external_pdf_url:
-            # If we have a external_pdf_url, then it's always the proper one to return.
-            return self.external_pdf_url
-        if self.issue.external_url:
-            # special case. if our issue has an external_url, regardless of whether we have a
-            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
-            return None
-        if self.fedora_object:
-            return reverse('public:journal:article_raw_pdf', kwargs={
-                'journal_code': self.issue.journal.code,
-                'issue_slug': self.issue.volume_slug,
-                'issue_localid': self.issue.localidentifier,
-                'localid': self.localidentifier,
-            })
-
-    @property
     def open_access(self):
         """ Returns a boolean indicating if the article is in open access. """
         return self.issue.journal.open_access
@@ -953,9 +930,13 @@ class Article(FedoraMixin):
         return self.issue.embargoed
 
     @property
+    def abstracts(self):
+        return self.erudit_object.abstracts
+
+    @property
     def abstract(self):
         """ Returns an abstract that can be used with the current language. """
-        abstracts = self.erudit_object.abstracts
+        abstracts = self.abstracts
         lang = get_language()
         _abstracts = list(filter(lambda r: r['lang'] == lang, abstracts))
         _abstract_lang = _abstracts[0]['content'] if len(_abstracts) else None
@@ -995,6 +976,54 @@ class Article(FedoraMixin):
     def section_title_3_paral(self):
         section_titles = self.erudit_object.get_section_titles(level=3)
         return section_titles['paral'].values()
+
+    @property
+    def has_pdf(self):
+        return self.fedora_object.pdf.exists()
+
+    @property
+    def pdf_url(self):
+        if self.external_pdf_url:
+            # If we have a external_pdf_url, then it's always the proper one to return.
+            return self.external_pdf_url
+        if self.issue.external_url:
+            # special case. if our issue has an external_url, regardless of whether we have a
+            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
+            return None
+        if self.fedora_object:
+            return reverse('public:journal:article_raw_pdf', kwargs={
+                'journal_code': self.issue.journal.code,
+                'issue_slug': self.issue.volume_slug,
+                'issue_localid': self.issue.localidentifier,
+                'localid': self.localidentifier,
+            })
+
+    @property
+    def processing(self):
+        processing = self.erudit_object.processing
+        processing_mapping = {
+            'minimal': self.PROCESSING_MINIMAL,
+            '': self.PROCESSING_MINIMAL,
+            'complet': self.PROCESSING_FULL,
+        }
+        try:
+            return processing_mapping[processing]
+        except KeyError:
+            raise ValueError(
+                'Unable to determine the processing type of the article '
+                'with PID {0}'.format(self.pid))
+
+    @property
+    def copyrights(self):
+        return self.erudit_object.get_droitsauteur()
+
+    @property
+    def keywords(self):
+        return self.erudit_object.get_keywords()
+
+    @property
+    def html_body(self):
+        return self.erudit_object.get_html_body()
 
 
 class JournalInformation(models.Model):

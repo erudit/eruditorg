@@ -234,7 +234,7 @@
           <div class="main-hr"></div>
           <div class="sub-title">{% trans "Citer cet article" %}</div>
           <div class="cite">
-            {% for author in article.erudit_object.authors %}
+            {% for author in article.authors %}
               {% if author.firstname and author.lastname %}
                 {{ author.lastname }}, {{ author.firstname|slice:"1" }}.{% if forloop.revcounter == 2 %} & {% elif not forloop.last %}, {% endif %}
               {% elif author.othername %}{% if forloop.revcounter == 2 %} & {% else %}, {% endif %}
@@ -270,7 +270,7 @@
           {% endblocktrans %}
           </div>
           <div id="journal_copyright">
-          {% for copyright in article.erudit_object.droitsauteur %}
+          {% for copyright in article.copyrights %}
             <p>{{ copyright.text|safe }}</p>
           {% endfor %}
           </div>

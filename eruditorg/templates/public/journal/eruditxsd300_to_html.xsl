@@ -107,10 +107,10 @@
                     {% endblocktrans %}
                   {% endif %}
                   <strong>
-                    {% if not article.erudit_object.abstracts and can_display_first_pdf_page %}
+                    {% if not article.abstracts and can_display_first_pdf_page %}
                     <br/><br/>
                     {% trans "Seule la première page du PDF sera affichée." %}
-                    {% elif article.erudit_object.abstracts %}
+                    {% elif article.abstracts %}
                     <br/><br/>
                     {% trans "Seul le résumé sera affiché." %}
                     {% elif article.is_scientific %}
@@ -232,7 +232,7 @@
               </li>
             </xsl:if>
             {% endif %}
-            {% if article.erudit_object.processing == 'minimal' and article.localidentifier %}
+            {% if article.processing == 'M' and article.localidentifier %}
             <li>
               <a href="#pdf-viewer">{% trans 'Texte intégral (PDF)' %}</a>
             </li>
@@ -360,7 +360,7 @@
         </aside>
       </xsl:if>
 
-      <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
+      <div class="full-article {% if article.processing == 'C' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
         {% if html_abstracts %}
         <!-- abstract -->
           <section id="resume" role="complementary" class="article-section grresume">
@@ -392,7 +392,7 @@
         {% endif %}
 
         {% if content_access_granted and not only_summary and article.publication_allowed %}
-          {% if article.erudit_object.processing == 'complet' %}
+          {% if article.processing == 'C' %}
           <!-- body -->
           <section id="corps" class="article-section corps" role="main">
             <h2 class="sr-only">{% trans "Corps de l’article" %}</h2>
@@ -404,13 +404,13 @@
             <p>{% trans 'Veuillez télécharger l’article en PDF pour le lire.' %}<br/><br/><a href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier%}" class="btn btn-secondary">{% trans 'Télécharger' %}</a></p>
           </div>
           {% endif %}
-        {% elif article.erudit_object.abstracts %}
-        {% elif not article.erudit_object.abstracts and can_display_first_pdf_page %}
+        {% elif article.abstracts %}
+        {% elif not article.abstracts and can_display_first_pdf_page %}
         <p>
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
         </p>
         {% elif article.is_scientific %}
-          {{ article.erudit_object.html_body|safe|truncatewords_html:600 }}
+          {{ article.html_body|safe|truncatewords_html:600 }}
         {% endif %}
 
 
