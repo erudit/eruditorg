@@ -14,7 +14,7 @@ from django.db import models
 from django.db.models import Q, Case, When
 from django.utils.functional import cached_property
 from django.utils.translation import get_language
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, pgettext
 from django.utils.text import slugify
 from eruditarticle.objects import EruditArticle
 from eruditarticle.objects import EruditJournal
@@ -775,6 +775,12 @@ class Article(FedoraMixin):
     ARTICLE_DEFAULT, ARTICLE_REPORT, ARTICLE_OTHER, ARTICLE_NOTE = (
         'article', 'compterendu', 'autre', 'note'
     )
+    TYPE_DISPLAY = {
+        ARTICLE_DEFAULT: _('Article'),
+        ARTICLE_REPORT: _('Compte rendu'),
+        ARTICLE_NOTE: pgettext("Article Note", "Note"),
+        ARTICLE_OTHER: _('Autre'),
+    }
     PROCESSING_FULL = 'C'
     PROCESSING_MINIMAL = 'M'
 
@@ -841,6 +847,9 @@ class Article(FedoraMixin):
                     self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
                     self.localidentifier)
             )
+
+    def get_type_display(self):
+        return self.TYPE_DISPLAY.get(self.type, self.type)
 
     @property
     def authors(self):
