@@ -578,7 +578,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         xml_article_nodes = summary_tree.findall('.//article')
         for article_node in xml_article_nodes:
             try:
-                yield Article(self, article_node.get('idproprio'))
+                yield Article.from_issue_and_localidentifier(self, article_node.get('idproprio'))
             except Article.DoesNotExist:
                 pass
 
@@ -788,20 +788,6 @@ class Article(FedoraMixin):
         super().__init__()
         self.issue = issue
         self.localidentifier = localidentifier
-        if not self.is_in_fedora:
-            raise Article.DoesNotExist()
-        erudit_object = self.erudit_object
-
-        self.type = erudit_object.article_type
-        self.ordseq = int(erudit_object.ordseq)
-        self.doi = erudit_object.doi
-        self.first_page = erudit_object.first_page
-        self.last_page = erudit_object.last_page
-        self.language = erudit_object.language
-        node = erudit_object._dom.find('accessible')
-        self.publication_allowed = node is None or node.text != 'non'
-        urlpdf = erudit_object._dom.find('.//urlpdf')
-        self.external_pdf_url = urlpdf.text if urlpdf is not None else None
 
     def __str__(self):
         if self.title:
@@ -830,6 +816,36 @@ class Article(FedoraMixin):
                 self.localidentifier
             )
         return None
+
+    def sync_with_erudit_object(self):
+        if not self.is_in_fedora:
+            raise Article.DoesNotExist()
+        erudit_object = self.erudit_object
+        self.type = erudit_object.article_type
+        self.ordseq = int(erudit_object.ordseq)
+        self.doi = erudit_object.doi
+        self.first_page = erudit_object.first_page
+        self.last_page = erudit_object.last_page
+        self.language = erudit_object.language
+        node = erudit_object._dom.find('accessible')
+        self.publication_allowed = node is None or node.text != 'non'
+        urlpdf = erudit_object._dom.find('.//urlpdf')
+        self.external_pdf_url = urlpdf.text if urlpdf is not None else None
+
+    @staticmethod
+    def from_issue_and_localidentifier(issue, localidentifier):
+        article = Article(issue, localidentifier)
+        article.sync_with_erudit_object()
+        return article
+
+    @staticmethod
+    def from_fedora_ids(journal_code, issue_localidentifier, localidentifier):
+        try:
+            issue = Issue.from_fedora_ids(journal_code, issue_localidentifier)
+        except Issue.DoesNotExist:
+            raise Article.DoesNotExist()
+        else:
+            return Article.from_issue_and_localidentifier(issue, localidentifier)
 
     # Article-related methods and properties
     # --
@@ -895,15 +911,6 @@ class Article(FedoraMixin):
 
     def prepublication_ticket(self):
         return self.issue.prepublication_ticket
-
-    @staticmethod
-    def from_fedora_ids(journal_code, issue_localidentifier, localidentifier):
-        try:
-            issue = Issue.from_fedora_ids(journal_code, issue_localidentifier)
-        except Issue.DoesNotExist:
-            raise Article.DoesNotExist()
-        else:
-            return Article(issue, localidentifier)
 
     # Article-related methods and properties
     # --
