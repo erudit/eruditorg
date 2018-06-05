@@ -51,7 +51,7 @@ class Generic:
         return self.solr_data['Annee'][0] if 'Annee' in self.solr_data else None
 
     @property
-    def publication_date(self):
+    def publication_year(self):
         return self.solr_data.get('AnneePublication')
 
     @property
@@ -147,18 +147,6 @@ class Article(Generic):
             return super().authors
 
     @property
-    def authors_mla(self):
-        return self.obj.get_formatted_authors(style='mla')
-
-    @property
-    def authors_apa(self):
-        return self.obj.get_formatted_authors(style='apa')
-
-    @property
-    def authors_chicago(self):
-        return self.obj.get_formatted_authors(style='chicago')
-
-    @property
     def type(self):
         if self.obj.type:
             return self.obj.get_type_display()
@@ -177,20 +165,8 @@ class Article(Generic):
             return []
 
     @property
-    def abstract(self):
-        if self.obj.is_in_fedora:
-            return self.obj.abstract
-        else:
-            return ''
-
-    @property
     def collection(self):
         return self.obj.issue.journal.collection.name
-
-    @property
-    def reviewed_works(self):
-        if self.obj.fedora_object and self.obj.fedora_object.exists:
-            return self.obj.erudit_object.get_reviewed_works()
 
     @property
     def series(self):
@@ -203,7 +179,7 @@ class Article(Generic):
         return ''
 
     @property
-    def publication_date(self):
+    def publication_year(self):
         return self.obj.issue.year
 
     @property
@@ -296,10 +272,6 @@ class Thesis(Generic):
     @property
     def description(self):
         return self.solr_data.get('Resume_fr')
-
-    @property
-    def publication_year(self):
-        return self.publication_date
 
 
 def get_model_instance(solr_data):

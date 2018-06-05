@@ -33,7 +33,7 @@ class SavedCitationListView(ListView):
         reverse = asc == 'desc'
         attrname = {
             'author': 'authors',
-            'year': 'publication_date',
+            'year': 'publication_year',
             'title': 'title',
         }.get(sortby, 'title')
 

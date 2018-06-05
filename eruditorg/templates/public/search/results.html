@@ -216,7 +216,7 @@
                   </p>
                   <p class="col-sm-4 text-right pub-date">
                     {# publication date for all document types #}
-                    {% if document.document_type == 'article' %}<a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.publication_date|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
+                    {% if document.document_type == 'article' %}<a href="{{ document.issue_url }}" title="{% trans 'Consulter le numéro' %}">{% endif %}{{ document.publication_year|safe }}{% if document.document_type == 'article' %}</a>{% endif %}
                   </p>
                   {# issue theme or department for a thesis #}
                   {% if document.document_type == 'article' %}
@@ -313,15 +313,15 @@
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
                         <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
-                          {{ article.authors_mla }}
+                          {{ article.get_formatted_authors_mla }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
                           <em>{{ article.series }}</em>,
-                          {{ article.publication_date|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+                          {{ article.publication_year|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>
 
                         <dt>APA</dt>
                         <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
-                          {{ article.authors_apa }}
+                          {{ article.get_formatted_authors_apa }}
                           ({{ article.issue_published }}).
                           {{ article.title|safe }}
                           <em>{{ article.issue.series }}</em>,
@@ -331,7 +331,7 @@
 
                         <dt>Chicago</dt>
                         <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
-                          {{ article.authors_chicago }}
+                          {{ article.get_formatted_authors_chicago }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
                           <em>{{ article.series }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
