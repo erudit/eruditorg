@@ -1,6 +1,6 @@
 import pytest
 
-
+from django.core.management import call_command
 from erudit.models.core import Organisation
 from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
@@ -143,3 +143,25 @@ def test_import_deletions():
     # Run & check
     assert JournalAccessSubscription.objects.count() == 1
     assert JournalAccessSubscription.objects.first().journals.count() == 0
+
+
+@pytest.mark.django_db
+def test_existing_organisation_is_renamed_properly():
+
+    abonne1 = AbonneFactory.create()
+    abonne1.save()
+    revue1 = RevueFactory.create(titrerevabr=JournalFactory())
+
+    sub1 = RevueabonneFactory.create(
+        abonneid=abonne1.abonneid,
+        revueid=revue1.revueid
+    )
+
+    call_command("import_restrictions", *[], **{})
+    assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
+
+    abonne1.abonne = "new name"
+    abonne1.save()
+
+    call_command("import_restrictions", *[], **{})
+    assert Organisation.objects.filter(name=abonne1.abonne).count() == 1

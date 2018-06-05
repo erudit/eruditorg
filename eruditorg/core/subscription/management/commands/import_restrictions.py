@@ -101,6 +101,34 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
         subscriber_id=restriction_subscriber.pk
     )
 
+    try:
+        profile = LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
+        profile.organisation.name = restriction_subscriber.abonne
+
+    except LegacyOrganisationProfile.DoesNotExist:
+
+        organisation, created = Organisation.objects.get_or_create(
+            name=restriction_subscriber.abonne
+        )
+        profile = LegacyOrganisationProfile.objects.create(
+            organisation=organisation
+        )
+
+        profile.sushi_requester_id = restriction_subscriber.requesterid
+        profile.account_id = restriction_subscriber.pk
+        profile.save()
+        logger.info(
+            "organisationprofile.created",
+            account_id=restriction_subscriber.pk,
+            sushi_requester_id=restriction_subscriber.requesterid
+        )
+
+        if created:
+            logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
+    finally:
+        profile.organisation.save()
+        organisation = profile.organisation
+
     # gets or creates the RestrictionProfile instance
     # --
 
@@ -126,35 +154,6 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
                 email=restriction_subscriber.courriel
             )
 
-        try:
-            profile = LegacyOrganisationProfile.objects.get(account_id=restriction_subscriber.pk)
-            profile.organisation.name = restriction_subscriber.abonne
-
-        except LegacyOrganisationProfile.DoesNotExist:
-
-            organisation, created = Organisation.objects.get_or_create(
-                name=restriction_subscriber.abonne
-            )
-            profile = LegacyOrganisationProfile.objects.create(
-                organisation=organisation
-            )
-
-            profile.sushi_requester_id = restriction_subscriber.requesterid
-            profile.account_id = restriction_subscriber.pk
-            profile.save()
-            logger.info(
-                "organisationprofile.created",
-                account_id=restriction_subscriber.pk,
-                sushi_requester_id=restriction_subscriber.requesterid
-            )
-
-            if created:
-                logger.info("organisation.created", pk=organisation.pk, name=organisation.name)
-        finally:
-            profile.organisation.members.add(user)
-            profile.organisation.save()
-            organisation = profile.organisation
-
         restriction_profile = LegacyAccountProfile.objects.create(
             origin=LegacyAccountProfile.DB_RESTRICTION,
             legacy_id=str(restriction_subscriber.pk),
@@ -168,7 +167,9 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
             organisation.badge.save(restriction_subscriber.icone, image_file, save=True)
             organisation.save()
             f.close()
-
+    finally:
+        organisation.members.add(user)
+        organisation.save()
     # Delete all subscriptions for this subscriber!
     #
     # Why can we do this? Because this import script is the *only* source of subscription
