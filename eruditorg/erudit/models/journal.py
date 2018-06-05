@@ -40,7 +40,7 @@ from ..managers import InternalJournalManager
 from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
-from ..solr.models import Generic
+from ..solr.models import SolrDocument
 from ..utils import get_sort_key_func, strip_stopwords_prefix
 
 from .core import Collection, Publisher
@@ -852,7 +852,7 @@ class Article(FedoraMixin):
 
     @cached_property
     def _solr_object(self):
-        return Generic.from_solr_id(self.solr_id, specialized_class=False)
+        return SolrDocument.from_solr_id(self.solr_id, specialized_class=False)
 
     def get_absolute_url(self):
         if self.is_external:

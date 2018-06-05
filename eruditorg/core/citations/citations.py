@@ -1,5 +1,5 @@
 from erudit.models import Article
-from erudit.solr.models import Generic
+from erudit.solr.models import SolrDocument
 from .models import SavedCitation
 
 
@@ -24,7 +24,7 @@ class SavedCitationList(set):
     def _coerce(elem):
         if isinstance(elem, Article):
             return elem.solr_id
-        elif isinstance(elem, Generic):
+        elif isinstance(elem, SolrDocument):
             return elem.localidentifier
         elif isinstance(elem, str):
             return elem

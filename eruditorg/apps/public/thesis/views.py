@@ -9,7 +9,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from erudit.models import ThesisRepository
-from erudit.solr.models import Generic, Thesis
+from erudit.solr.models import SolrDocument, Thesis
 from erudit.utils import PaginatedAlready
 
 from apps.public.thesis.legacy import format_thesis_collection_code
@@ -221,7 +221,7 @@ class BaseThesisCitationView(TemplateView):
     def get_context_data(self, **kwargs):
         result = super().get_context_data(**kwargs)
         try:
-            result['thesis'] = Generic.from_solr_id(self.kwargs['solr_id'])
+            result['thesis'] = SolrDocument.from_solr_id(self.kwargs['solr_id'])
         except ValueError:
             raise Http404()
         return result

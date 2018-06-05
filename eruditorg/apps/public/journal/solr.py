@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.utils.text import slugify
 import pysolr
 
-from erudit.solr.models import Generic
+from erudit.solr.models import SolrDocument
 
 
 def get_client():
@@ -102,7 +102,7 @@ def get_journal_authors_dict(journal_code, first_letter, article_type):
     solr_results = client.search(**args)
     result = defaultdict(list)
     for solr_data in solr_results.docs:
-        article = Generic(solr_data)
+        article = SolrDocument(solr_data)
         authors = article.authors_list
         article_dict = {
             'id': article.localidentifier,

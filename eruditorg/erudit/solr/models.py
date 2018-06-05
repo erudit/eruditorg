@@ -12,7 +12,7 @@ from erudit.templatetags.model_formatters import person_list
 client = pysolr.Solr(settings.SOLR_ROOT, timeout=settings.SOLR_TIMEOUT)
 
 
-class Generic:
+class SolrDocument:
     def __init__(self, solr_data):
         self.localidentifier = solr_data['ID']
         self.corpus = solr_data.get('Corpus_fac')
@@ -29,7 +29,7 @@ class Generic:
         if specialized_class:
             return get_model_instance(solr_data)
         else:
-            return Generic(solr_data)
+            return SolrDocument(solr_data)
 
     def can_cite(self):
         return False
@@ -121,7 +121,7 @@ class Generic:
 # output the search result as an article transparently in the template.
 
 
-class Article(Generic):
+class Article(SolrDocument):
     def __init__(self, solr_data):
         super().__init__(solr_data)
         self.obj = erudit_models.Article.from_fedora_ids(
@@ -227,7 +227,7 @@ class Article(Generic):
         return []
 
 
-class SolrArticle(Generic):
+class SolrArticle(SolrDocument):
 
     @property
     def journal_type(self):
@@ -243,7 +243,7 @@ class SolrArticle(Generic):
         return _('Article')
 
 
-class Thesis(Generic):
+class Thesis(SolrDocument):
     def can_cite(self):
         return True
 
@@ -275,7 +275,7 @@ class Thesis(Generic):
 
 
 def get_model_instance(solr_data):
-    generic = Generic(solr_data)
+    generic = SolrDocument(solr_data)
     if generic.document_type == 'thesis':
         try:
             return Thesis(solr_data)
@@ -287,7 +287,7 @@ def get_model_instance(solr_data):
         except ObjectDoesNotExist:
             return SolrArticle(solr_data)
 
-    return Generic(solr_data)
+    return SolrDocument(solr_data)
 
 
 def get_fedora_ids(localidentifier):

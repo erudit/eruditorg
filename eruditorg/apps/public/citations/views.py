@@ -10,7 +10,7 @@ from django.views.generic import View
 from base.http import JsonAckResponse
 from base.http import JsonErrorResponse
 from core.metrics.viewmixins import MetricCaptureMixin
-from erudit.solr.models import Generic
+from erudit.solr.models import SolrDocument
 from erudit.utils import locale_aware_sort
 
 
@@ -66,7 +66,7 @@ class SavedCitationListView(ListView):
         documents = []
         for solr_id in solr_ids:
             try:
-                documents.append(Generic.from_solr_id(solr_id))
+                documents.append(SolrDocument.from_solr_id(solr_id))
             except ValueError:
                 pass
 
@@ -129,7 +129,7 @@ class BaseEruditDocumentsCitationView(TemplateView):
         if not solr_ids:
             raise Http404()
         try:
-            documents = [Generic.from_solr_id(x) for x in solr_ids]
+            documents = [SolrDocument.from_solr_id(x) for x in solr_ids]
         except ValueError:
             raise Http404()
         context = self.get_context_data(documents=documents, **kwargs)
