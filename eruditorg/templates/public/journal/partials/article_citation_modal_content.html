@@ -1,12 +1,12 @@
 {% load i18n public_journal_tags %}
 
-<div id="id_cite_modal_{{ article.id }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
+<div id="id_cite_modal_{{ article.localidentifier }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">
   <h2 class="modal-header">{% trans "Outils de citation" %}</h2>
   <div class="modal-body">
     <h3>{% trans "Citer cet article" %}</h3>
     <dl class="cite-modal--style-list">
       <dt><strong>MLA</strong></dt>
-      <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
+      <dd id="id_cite_mla_{{ article.localidentifier }}" class="cite-mla">
         {{ article.get_formatted_authors_mla }}
         {% trans '«&nbsp;' %}{{ article|format_article_html_title }}.{% trans '&nbsp;»' %}
         <em>{{ article.issue.journal.name }}</em>,
@@ -14,7 +14,7 @@
       </dd>
 
       <dt><strong>APA</strong></dt>
-      <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
+      <dd id="id_cite_apa_{{ article.localidentifier }}" class="cite-apa">
         {{ article.get_formatted_authors_apa }}
         ({{ article.issue.year }}).
         {{ article|format_article_html_title }}.
@@ -24,7 +24,7 @@
       </dd>
 
       <dt><strong>Chicago</strong></dt>
-      <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
+      <dd id="id_cite_chicago_{{ article.localidentifier }}" class="cite-chicago">
         {{ article.get_formatted_authors_chicago }}
         {% trans '«&nbsp;' %}{{ article|format_article_html_title }}{% trans '&nbsp;»' %}.
         <em>{{ article.issue.journal.name }}</em>

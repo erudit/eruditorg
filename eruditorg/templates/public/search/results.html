@@ -230,17 +230,20 @@
                   {% endif %}
                 </div>
                 {# abstract #}
-                {% if document.abstract or document.description or document.keywords %}
+                {% if document.abstract or document.keywords %}
                 <div class="akkordion" data-akkordion-single="true">
                   <div class="akkordion-title abstract-title">
                     {% trans "Plus d’information" %}
                     <span class="ion-ios-arrow-down"></span>
                   </div>
                   <div class="summary-content akkordion-content abstract">
-                    {% if document.abstract or document.description %}
+                    {% if document.abstract %}
                     <p>
+                    {% if document.document_type == 'thesis' %}
+                      {{ document.abstract|truncatewords_html:125 }}
+                    {% else %}
                       {{ document.abstract }}
-                      {{ document.description|truncatewords_html:125 }}
+                    {% endif %}
                     </p>
                     {% endif %}
                     {% if document.keywords_display %}
@@ -310,7 +313,7 @@
                       {% with article=document %}
                       <dl class="cite-modal--style-list">
                         <dt>MLA</dt>
-                        <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
+                        <dd id="id_cite_mla_{{ forloop.counter }}" class="cite-mla">
                           {{ article.get_formatted_authors_mla }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
                           <em>{{ article.series_display }}</em>,
@@ -318,7 +321,7 @@
                         </dd>
 
                         <dt>APA</dt>
-                        <dd id="id_cite_apa_{{ article.id }}" class="cite-apa">
+                        <dd id="id_cite_apa_{{ forloop.counter }}" class="cite-apa">
                           {{ article.get_formatted_authors_apa }}
                           ({{ article.issue_published }}).
                           {{ article.title|safe }}
@@ -328,7 +331,7 @@
                         </dd>
 
                         <dt>Chicago</dt>
-                        <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
+                        <dd id="id_cite_chicago_{{ forloop.counter }}" class="cite-chicago">
                           {{ article.get_formatted_authors_chicago }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
                           <em>{{ article.series_display }}</em>

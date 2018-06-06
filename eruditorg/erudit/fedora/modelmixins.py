@@ -113,10 +113,13 @@ class FedoraMixin:
 
     @property
     def erudit_object(self):
-        if getattr(self, '_erudit_object', None) is None:
+        if not self.fedora_is_loaded():
             self._erudit_object = self.get_erudit_object()
         return self._erudit_object
 
     def reset_fedora_objects(self):
         self._fedora_object = None
         self._erudit_object = None
+
+    def fedora_is_loaded(self):
+        return hasattr(self, '_erudit_object') and self._erudit_object is not None

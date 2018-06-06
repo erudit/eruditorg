@@ -7,5 +7,5 @@
   {% if article.issue.number %}number="{{ article.issue.number }}",{% endif %}
   {% if article.first_page and article.last_page %}pages="{{ article.first_page }}--{{ article.last_page }}",{% endif %}
   year="{{ article.issue.year }}",
-  publisher="{{ article.publisher.name }}"
+  publisher="{{ article.publisher_name }}"
 }

@@ -113,7 +113,7 @@
                     {% elif article.abstracts %}
                     <br/><br/>
                     {% trans "Seul le résumé sera affiché." %}
-                    {% elif article.is_scientific %}
+                    {% elif article.issue.journal.is_scientific %}
                     <br/><br/>
                     {% trans "Seuls les 600 premiers mots du texte seront affichés." %}
                     {% endif %}
@@ -322,11 +322,11 @@
             {% switch "maintenance" %}
             {% else %}
             <li>
-              <a class="tool-btn" id="tool-citation-save-{{ article.id }}" data-citation-save="#article-{{ article.id }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn" id="tool-citation-save-{{ article.localidentifier }}" data-citation-save="#article-{{ article.localidentifier }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </a>
-              <a class="tool-btn saved" id="tool-citation-remove-{{ article.id }}" data-citation-remove="#article-{{ article.id }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
+              <a class="tool-btn saved" id="tool-citation-remove-{{ article.localidentifier }}" data-citation-remove="#article-{{ article.localidentifier }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
                 <span class="ion-bookmark toolbox-save"></span>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </a>
@@ -341,13 +341,13 @@
             </li>
             {% endif %}
             <li>
-              <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.id }}">
+              <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.localidentifier }}">
                 <span class="ion-quote toolbox-cite"></span>
                 <span class="tools-label">{% trans "Citer cet article" %}</span>
               </a>
             </li>
             <li>
-              <a class="tool-btn tool-share" data-cite="#id_cite_mla_{{ article.id }}">
+              <a class="tool-btn tool-share" data-cite="#id_cite_mla_{{ article.localidentifier }}">
                 <xsl:attribute name="data-title">
                   {{ article|format_article_title|escape }}
                 </xsl:attribute>
@@ -409,7 +409,7 @@
         <p>
           <object id="pdf-viewer" data="{% url 'public:journal:article_raw_pdf_firstpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}?embed" type="application/pdf" width="100%" height="700px"></object>
         </p>
-        {% elif article.is_scientific %}
+        {% elif article.issue.journal.is_scientific %}
           {{ article.html_body|safe|truncatewords_html:600 }}
         {% endif %}
 

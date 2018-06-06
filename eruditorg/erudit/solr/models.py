@@ -110,47 +110,6 @@ class SolrDocument:
         return _("(Sans titre)")
 
 
-# These models below are wrappers around their corresponding models in `erudit.models`. For thesis,
-# it's mostly noise that's present for legacy reasons, but for articles, this wrapper allows us to
-# properly fall back to solr data when we're in the presence of an out-of-fedora article while still
-# output the search result as an article transparently in the template.
-
-
-class Article(SolrDocument):
-    def __init__(self, solr_data):
-        super().__init__(solr_data)
-        self.obj = erudit_models.Article.from_fedora_ids(
-            solr_data.get('RevueID'),
-            solr_data.get('NumeroID'),
-            self.localidentifier)
-
-    def __getattr__(self, name):
-        return getattr(self.obj, name)
-
-    def can_cite(self):
-        return self.obj.can_cite()
-
-    @property
-    def authors_display(self):
-        return self.obj.authors_display
-
-    @property
-    def collection_display(self):
-        return self.obj.collection_display
-
-    @property
-    def series_display(self):
-        return self.obj.series_display
-
-    @property
-    def publication_year(self):
-        return self.obj.publication_year
-
-    @property
-    def type_display(self):
-        return self.obj.get_type_display()
-
-
 class SolrArticle(SolrDocument):
 
     @property
@@ -198,7 +157,7 @@ class Thesis(SolrDocument):
             return result
 
     @property
-    def description(self):
+    def abstract(self):
         return self.solr_data.get('Resume_fr')
 
 
@@ -211,8 +170,11 @@ def get_model_instance(solr_data):
             pass
     elif generic.document_type == 'article':
         try:
-            return Article(solr_data)
-        except ObjectDoesNotExist:
+            return erudit_models.Article.from_fedora_ids(
+                solr_data.get('RevueID'),
+                solr_data.get('NumeroID'),
+                solr_data['ID'])
+        except erudit_models.Article.DoesNotExist:
             return SolrArticle(solr_data)
 
     return SolrDocument(solr_data)
@@ -245,7 +207,7 @@ def get_all_articles(rows, page):
 
     def get(solr_data):
         try:
-            return Article(solr_data)
+            return get_model_instance(solr_data)
         except ObjectDoesNotExist:
             print("Warning: Article {} from Solr does not exist in Fedora!".format(solr_data['ID']))
             return None

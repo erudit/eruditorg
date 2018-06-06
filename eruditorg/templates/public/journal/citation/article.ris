@@ -11,5 +11,5 @@ JO  - {{ article.issue.journal.name }}
 {% if article.last_page %}EP  - {{ article.last_page }}{% endif %}
 SN  - {{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}
 Y1  - {{ article.issue.year }}
-PB  - {{ article.publisher.name }}
+PB  - {{ article.publisher_name }}
 ER  -

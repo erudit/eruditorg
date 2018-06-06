@@ -10,4 +10,4 @@
 %P {% if article.first_page and article.last_page %}{{ article.first_page }}-{{ article.last_page }}{% endif %}
 %@ {{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}
 %D {{ article.issue.year }}
-%I {{ article.publisher.name }}
+%I {{ article.publisher_name }}

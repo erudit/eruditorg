@@ -800,6 +800,11 @@ class Article(FedoraMixin):
     def __eq__(self, other):
         return self.localidentifier is not None and self.localidentifier == other.localidentifier
 
+    def __getattr__(self, name):
+        if name.startswith('_'):
+            return super().__getattr__(name)
+        return getattr(self._solr_object, name)
+
     # Fedora-related methods and properties
     # --
 
@@ -876,7 +881,8 @@ class Article(FedoraMixin):
             issue.localidentifier,
         ))
 
-    def get_type_display(self):
+    @property
+    def type_display(self):
         return self.TYPE_DISPLAY.get(self.type, self.type)
 
     @property
@@ -1105,6 +1111,14 @@ class Article(FedoraMixin):
     @property
     def issue_published(self):
         return self.issue.publication_period or self.issue.year
+
+    @property
+    def publisher_name(self):
+        publisher = self.issue.journal.publishers.first()
+        if publisher:
+            return publisher.name
+        else:
+            return ''
 
 
 class JournalInformation(models.Model):

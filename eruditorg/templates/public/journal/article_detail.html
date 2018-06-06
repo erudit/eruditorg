@@ -13,7 +13,7 @@
 
 {% block structured_data %}
 {{ block.super }}
-{% cache cache_timeout "public_article_detail_structured_data" article.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_article_detail_structured_data" article.localidentifier LANGUAGE_CODE %}
 {% include "public/journal/partials/article_structured_data.html" %}
 {% endcache %}
 {% endblock structured_data %}
@@ -22,7 +22,7 @@
 {% csrf_token %}
 <main
     class="container"
-    id="article-{{ article.id }}"
+    id="article-{{ article.localidentifier }}"
     data-document-id="{{ article.solr_id }}"
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
     role="main"
@@ -61,7 +61,7 @@
     {% endif %}
   </div>
 
-  {% cache cache_timeout "public_article_detail_content" article.id content_access_granted in_citation_list LANGUAGE_CODE %}
+  {% cache cache_timeout "public_article_detail_content" article.localidentifier content_access_granted in_citation_list LANGUAGE_CODE %}
   {# XSL transformation article render #}
   {{ view.render_xml_contents }}
   {% endcache %}
@@ -69,7 +69,7 @@
 
 {{ block.super }}
 
-{% cache cache_timeout "public_article_detail_citation" article.id LANGUAGE_CODE %}
+{% cache cache_timeout "public_article_detail_citation" article.localidentifier LANGUAGE_CODE %}
 <div class="hidden">
   {% include "public/journal/partials/article_citation_modal_content.html" %}
 </div>

@@ -7,7 +7,7 @@
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.4#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.22#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@9b4288252a65d50f0bd440956994f5838397ffb1#egg=liberuditarticle
 babel==2.3.4
 cairocffi==0.8.1          # via cairosvg, weasyprint
 cairosvg==2.1.3           # via weasyprint
@@ -58,7 +58,7 @@ pysolr==3.7.0
 python-dateutil==2.7.3    # via eulfedora, influxdb
 python-utils==2.3.0       # via progressbar2
 pytz==2018.4              # via babel, django, influxdb
-raven==6.8.0
+raven==6.9.0
 rdflib==4.2.2             # via eulfedora
 redis==2.10.6             # via django-redis
 requests-toolbelt==0.8.0  # via eulfedora

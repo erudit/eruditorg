@@ -388,7 +388,7 @@ class TestIssue:
 class TestArticle:
     def test_properties(self):
         article = ArticleFactory(type='compterendu')
-        assert article.get_type_display() == 'Compte rendu'
+        assert article.type_display == 'Compte rendu'
 
     def test_only_has_fedora_object_if_collection_has_localidentifier(self):
         c1 = CollectionFactory.create(localidentifier=None)
