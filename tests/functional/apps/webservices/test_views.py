@@ -10,13 +10,15 @@ from erudit.test.factories import IssueFactory
 pytestmark = pytest.mark.django_db
 
 
-class TestRetroRestrictionsView:
+class TestRestrictionsView:
     def test_that_it_works(self):
-        # This view is transitional and mimicks legacy stuff. It's going away soon and we just
-        # want to test that it works, not test all embargo scenarios.
         issue = IssueFactory(journal__collection__code='erudit')
-        url = reverse('webservices:restrictions_retro')
+        url = reverse('webservices:restrictions')
         response = Client().get(url)
         root = etree.fromstring(response.content.decode())
         assert root[0].attrib['identifier'] == issue.journal.code
-        assert root[0].find('years').text == str(dt.date.today().year)
+        TODAY = dt.date.today()
+        EXPECTED = str(TODAY.year)
+        assert root[0].find('years').text == EXPECTED
+        EXPECTED = issue.journal.date_embargo_begins.strftime('%Y-%m-%d')
+        assert root[0].find('embargo_date').text == EXPECTED

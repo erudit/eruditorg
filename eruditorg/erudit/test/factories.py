@@ -54,7 +54,8 @@ class JournalFactory(factory.django.DjangoModelFactory):
         IssueFactory(journal=instance)
         return instance
 
-    collection = factory.SubFactory(CollectionFactory, code='erudit', name='Érudit')
+    collection = factory.SubFactory(
+        CollectionFactory, code='erudit', name='Érudit', is_main_collection=True)
     type = factory.LazyAttribute(lambda o: JournalTypeFactory(code=o.type_code))
     code = factory.Sequence(lambda n: 'journal-{}'.format(n))
     name = factory.Sequence(lambda n: 'Revue{}'.format(n))
@@ -158,13 +159,7 @@ class EmbargoedIssueFactory(IssueFactory):
 
     date_published = dt.datetime.now().date()
     year = date_published.year
-    journal = factory.SubFactory(
-        JournalFactory,
-        collection=factory.SubFactory(
-            CollectionFactory,
-            code='erudit',
-        )
-    )
+    journal = factory.SubFactory(JournalFactory)
 
 
 class NonEmbargoedIssueFactory(IssueFactory):
@@ -176,6 +171,7 @@ class NonEmbargoedIssueFactory(IssueFactory):
         collection=factory.SubFactory(
             CollectionFactory,
             code='persee',  # not erudit
+            is_main_collection=False,
         )
     )
 

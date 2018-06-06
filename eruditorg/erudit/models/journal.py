@@ -41,7 +41,7 @@ from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 from ..solr.models import SolrDocument
-from ..utils import get_sort_key_func, strip_stopwords_prefix
+from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 
 from .core import Collection, Publisher
 
@@ -238,6 +238,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
         return EruditJournal
 
     @cache_fedora_result
+    @catch_and_log
     def get_titles(self):
         last_issue = self.last_issue
         if not self.is_in_fedora or not last_issue:
@@ -279,7 +280,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def date_embargo_begins(self):
         """Return the embargo begining date if apply """
         # FIXME avoid hardcoding the collection code
-        if self.open_access or not self.active or self.collection.code != 'erudit':
+        if self.open_access or not self.active or not self.collection.is_main_collection:
             return None
         else:
             return dt.date.today() - dr.relativedelta(months=self.embargo_in_months)
@@ -311,6 +312,7 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     # PERFORMANCE WARNING: this query is somewhat expensive, call responsibly. We can't cache this
     # property because the result is a queryset, not actual results.
     @property
+    @catch_and_log
     def published_issues(self):
         """ Return the published issues of this Journal. """
         qs = self.issues.filter(is_published=True)
@@ -617,6 +619,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return self.journal.collection.code == 'unb'
 
     @property
+    @catch_and_log
     def number_for_display(self):
         if self.number:
             return self.number
@@ -631,6 +634,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return None
 
     @cached_property
+    @catch_and_log
     def abbreviated_volume_title(self):
         """ For more information please refer to :meth:`~.volume_title`
 
@@ -658,6 +662,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
                 number=number, publication_date=publication_period.lower()))
 
     @cached_property
+    @catch_and_log
     def volume_title(self):
         """ Returns a title for the current issue using its volume and its number.
 
@@ -739,6 +744,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             return True
 
     @property
+    @catch_and_log
     def name_with_themes(self):
         if not self.is_in_fedora:
             return None
@@ -961,18 +967,22 @@ class Article(FedoraMixin):
         return self.get_formatted_authors(style='chicago')
 
     @property
+    @catch_and_log
     def title(self):
         return self.erudit_object.get_title(formatted=True, html=False)
 
     @property
+    @catch_and_log
     def html_title(self):
         return self.erudit_object.get_title(formatted=True, html=True)
 
     @property
+    @catch_and_log
     def abstracts(self):
         return self.erudit_object.abstracts
 
     @property
+    @catch_and_log
     def abstract(self):
         """ Returns an abstract that can be used with the current language. """
         abstracts = self.abstracts
@@ -983,21 +993,25 @@ class Article(FedoraMixin):
         return _abstract_lang or _abstract
 
     @property
+    @catch_and_log
     def section_title_1(self):
         section_titles = self.erudit_object.get_section_titles(level=1)
         return section_titles['main'] if section_titles else None
 
     @property
+    @catch_and_log
     def section_title_1_paral(self):
         section_titles = self.erudit_object.get_section_titles(level=1)
         return section_titles['paral'].values() if section_titles else None
 
     @property
+    @catch_and_log
     def section_title_2(self):
         section_titles = self.erudit_object.get_section_titles(level=2)
         return section_titles['main'] if section_titles else None
 
     @property
+    @catch_and_log
     def section_title_2_paral(self):
         if self.is_in_fedora:
             section_titles = self.erudit_object.get_section_titles(level=2)
@@ -1007,11 +1021,13 @@ class Article(FedoraMixin):
             return title.title if title else []
 
     @property
+    @catch_and_log
     def section_title_3(self):
         section_titles = self.erudit_object.get_section_titles(level=3)
         return section_titles['main'] if section_titles else None
 
     @property
+    @catch_and_log
     def section_title_3_paral(self):
         section_titles = self.erudit_object.get_section_titles(level=3)
         return section_titles['paral'].values()
@@ -1021,6 +1037,7 @@ class Article(FedoraMixin):
         return self.fedora_object.pdf.exists()
 
     @property
+    @catch_and_log
     def processing(self):
         processing = self.erudit_object.processing
         processing_mapping = {
@@ -1036,10 +1053,12 @@ class Article(FedoraMixin):
                 'with PID {0}'.format(self.pid))
 
     @property
+    @catch_and_log
     def copyrights(self):
         return self.erudit_object.get_droitsauteur()
 
     @property
+    @catch_and_log
     def keywords(self):
         if self.is_in_fedora:
             return self.erudit_object.get_keywords()
@@ -1054,6 +1073,7 @@ class Article(FedoraMixin):
                 return ','.join(keywords)
 
     @property
+    @catch_and_log
     def html_body(self):
         return self.erudit_object.get_html_body()
 
@@ -1063,6 +1083,7 @@ class Article(FedoraMixin):
         return node is None or node.text != 'non'
 
     @cached_property
+    @catch_and_log
     def doi(self):
         return self.erudit_object.doi
 

@@ -1,4 +1,4 @@
-from erudit.utils import locale_aware_sort, get_sort_key_func, pairify
+from erudit.utils import locale_aware_sort, get_sort_key_func, pairify, catch_and_log
 from erudit.test import needs_fr_ca
 
 
@@ -52,3 +52,13 @@ def test_get_sort_key_func_stopwords_need_space():
 
 def test_pairify():
     assert list(pairify(['foo', 1, 'bar', 2])) == [('foo', 1), ('bar', 2)]
+
+
+def test_catch_and_log(caplog):
+
+    @catch_and_log
+    def zerodiv():
+        return 1 / 0
+
+    assert zerodiv() is None
+    assert 'ZeroDivisionError' in caplog.text

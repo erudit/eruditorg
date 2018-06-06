@@ -2,6 +2,7 @@ import locale
 import logging
 import re
 from itertools import islice
+from functools import wraps
 
 
 logger = logging.getLogger(__name__)
@@ -106,3 +107,16 @@ class PaginatedAlready:
     def next_page_number(self):
         if self.has_next:
             return self.number + 1
+
+
+def catch_and_log(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception:
+            logger.exception("Exception raised in a @catch_and_log function")
+            return None
+
+    return wrapper
