@@ -165,7 +165,7 @@
                 <div class="header">
                   {# authors #}
                   <p class="authors">
-                    {{ document.authors }}
+                    {{ document.authors_display }}
                   </p>
                   {# title #}
                   <h3>
@@ -178,7 +178,7 @@
                   <p class="col-sm-8">
                     {# metadata for articles #}
                     {% if document.document_type == 'generic' %}
-                      <em><a href="{{ document.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ document.series }}</a></em> ({{ document.collection }})
+                      <em><a href="{{ document.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ document.series_display }}</a></em> ({{ document.collection_display }})
                       <br/>
                     {% endif %}
 
@@ -187,29 +187,29 @@
                       {% if article.type == 'autre' or article.type == 'Autre' %}
                         {% trans 'Document' %}
                       {% else %}
-                        <strong>{{ article.type }}</strong>
+                        <strong>{{ article.type_display }}</strong>
                       {% endif %}
                       {# document type for articles #}
                       {% if article.type == 'note' or article.type == 'Note' %}{% trans 'publiée' %}{% else %}{% trans 'publié' %}{% endif %}
                       {# journal type and collection #}
                       {% trans "dans" %}
 
-                      <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series }}</a></em>
-                      ({% if article.journal_type == 'C' %}{% trans "culturelle" %}{% elif article.journal_type == 'S' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection }})
+                      <em><a href="{{ article.journal_url }}" title="{% trans 'Consulter la revue' %}">{{ article.series_display }}</a></em>
+                      ({% if article.journal_type == 'C' %}{% trans "culturelle" %}{% elif article.journal_type == 'S' %}{% trans "savante" %}{% endif %}, {% trans "fonds" %} {{ article.collection_display }})
                       <br/>
                       {# issue theme #}
                     {% endwith %}
                     {# metadata for report #}
                     {% elif document.document_type == 'report' %}
-                    {% if document.series %}{{ document.series }}{% endif %}
+                    {% if document.series_display %}{{ document.series_display }}{% endif %}
                     {# metadata for theses #}
                     {% elif document.document_type == 'thesis' %}
                       {% trans "Thèse" %} {% trans "déposée à" %}
-                      {{ document.collection }}
+                      {{ document.collection_display }}
                     {# metadata for books #}
                     {% elif document.document_type == 'book' %}
                       {% if document.pages %}
-                        <span>{% if document.series %}{{ document.series }}, {% endif %}{% if document.volume %}{% trans "Volume" %} {{ document.volume }}, {% endif %}{% if document.year %}{{ document.year }}, {% endif %}{{ document.pages }}</span>
+                        <span>{% if document.series_display %}{{ document.series_display }}, {% endif %}{% if document.volume %}{% trans "Volume" %} {{ document.volume }}, {% endif %}{% if document.year %}{{ document.year }}, {% endif %}{{ document.pages }}</span>
                       {% endif %}
                     {% endif %}
 
@@ -243,12 +243,10 @@
                       {{ document.description|truncatewords_html:125 }}
                     </p>
                     {% endif %}
-                    {% if document.keywords %}
+                    {% if document.keywords_display %}
                     <p>
                       <strong>{% trans "Mots-clés&nbsp;:" %}</strong>
-                      {% for keyword in document.keywords %}
-                      {{ keyword }}{% if not forloop.last %}, {% endif %}
-                      {% endfor %}
+                      {{ document.keywords_display }}
                     </p>
                     {% endif %}
                   </div>
@@ -315,7 +313,7 @@
                         <dd id="id_cite_mla_{{ article.id }}" class="cite-mla">
                           {{ article.get_formatted_authors_mla }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}.{% trans '&nbsp;»' %}
-                          <em>{{ article.series }}</em>,
+                          <em>{{ article.series_display }}</em>,
                           {{ article.publication_year|safe|lower }}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>
 
@@ -324,7 +322,7 @@
                           {{ article.get_formatted_authors_apa }}
                           ({{ article.issue_published }}).
                           {{ article.title|safe }}
-                          <em>{{ article.issue.series }}</em>,
+                          <em>{{ article.series_display }}</em>,
                           {% if article.issue_volume %}<em>{{ article.issue_volume }}</em>{% endif %}{% if article.issue_number %}({{ article.issue_number }}){% endif %},
                           {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>
@@ -333,7 +331,7 @@
                         <dd id="id_cite_chicago_{{ article.id }}" class="cite-chicago">
                           {{ article.get_formatted_authors_chicago }}
                           {% trans '«&nbsp;' %}{{ article.title|safe }}{% trans '&nbsp;»' %}.
-                          <em>{{ article.series }}</em>
+                          <em>{{ article.series_display }}</em>
                           {% if article.issue_volume %}{{ article.issue_volume }}, {% endif %}{% if article.issue_number %}{% trans 'n<sup>o</sup>' %} {{ article.issue_number }}{% endif %}
                           ({{ article.issue_published }}){% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
                         </dd>

@@ -822,15 +822,9 @@ class Article(FedoraMixin):
             raise Article.DoesNotExist()
         erudit_object = self.erudit_object
         self.type = erudit_object.article_type
-        self.ordseq = int(erudit_object.ordseq)
         self.doi = erudit_object.doi
         self.first_page = erudit_object.first_page
         self.last_page = erudit_object.last_page
-        self.language = erudit_object.language
-        node = erudit_object._dom.find('accessible')
-        self.publication_allowed = node is None or node.text != 'non'
-        urlpdf = erudit_object._dom.find('.//urlpdf')
-        self.external_pdf_url = urlpdf.text if urlpdf is not None else None
 
     @staticmethod
     def from_issue_and_localidentifier(issue, localidentifier):
@@ -863,6 +857,24 @@ class Article(FedoraMixin):
                     self.issue.journal.code, self.issue.volume_slug, self.issue.localidentifier,
                     self.localidentifier)
             )
+
+    @property
+    def journal_url(self):
+        journal = self.issue.journal
+        if journal.external_url:
+            return journal.external_url
+        return reverse('public:journal:journal_detail', args=(journal.code, ))
+
+    @property
+    def issue_url(self):
+        issue = self.issue
+        if issue.external_url:
+            return issue.external_url
+        return reverse('public:journal:issue_detail', args=(
+            issue.journal.code,
+            issue.volume_slug,
+            issue.localidentifier,
+        ))
 
     def get_type_display(self):
         return self.TYPE_DISPLAY.get(self.type, self.type)
@@ -911,9 +923,6 @@ class Article(FedoraMixin):
 
     def prepublication_ticket(self):
         return self.issue.prepublication_ticket
-
-    # Article-related methods and properties
-    # --
 
     def can_cite(self):
         # We cannot cite articles we don't have in fedora. ref #1491
@@ -999,9 +1008,10 @@ class Article(FedoraMixin):
 
     @property
     def pdf_url(self):
-        if self.external_pdf_url:
-            # If we have a external_pdf_url, then it's always the proper one to return.
-            return self.external_pdf_url
+        urlpdf = self.erudit_object._dom.find('.//urlpdf')
+        if urlpdf is not None and urlpdf.text:
+            # If we have a external pdf url, then it's always the proper one to return.
+            return urlpdf.text
         if self.issue.external_url:
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
@@ -1035,11 +1045,66 @@ class Article(FedoraMixin):
 
     @property
     def keywords(self):
-        return self.erudit_object.get_keywords()
+        if self.is_in_fedora:
+            return self.erudit_object.get_keywords()
+        else:
+            return {}
+
+    @property
+    def keywords_display(self):
+        lang = get_language()
+        for keywords_lang, keywords in self.keywords.items():
+            if keywords_lang == lang:
+                return ','.join(keywords)
 
     @property
     def html_body(self):
         return self.erudit_object.get_html_body()
+
+    @property
+    def language(self):
+        return self.erudit_object.language
+
+    @property
+    def publication_allowed(self):
+        node = self.erudit_object._dom.find('accessible')
+        return node is None or node.text != 'non'
+
+    @property
+    def authors_display(self):
+        return self.get_formatted_authors()
+
+    @property
+    def collection_display(self):
+        return self.issue.journal.collection.name
+
+    @property
+    def series_display(self):
+        return self.issue.journal.name
+
+    @property
+    def journal_type(self):
+        return self.issue.journal.type.code
+
+    @property
+    def publication_year(self):
+        return self.issue.year
+
+    @property
+    def issue_title(self):
+        return self.issue.name_with_themes
+
+    @property
+    def issue_number(self):
+        return self.issue.number_for_display
+
+    @property
+    def issue_volume(self):
+        return self.issue.volume
+
+    @property
+    def issue_published(self):
+        return self.issue.publication_period or self.issue.year
 
 
 class JournalInformation(models.Model):

@@ -32,7 +32,7 @@ class SavedCitationListView(ListView):
         sortby, asc = self.get_sort_by().split('_')
         reverse = asc == 'desc'
         attrname = {
-            'author': 'authors',
+            'author': 'authors_display',
             'year': 'publication_year',
             'title': 'title',
         }.get(sortby, 'title')
