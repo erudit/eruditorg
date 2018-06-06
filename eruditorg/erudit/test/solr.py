@@ -55,24 +55,18 @@ class SolrDocument:
         # the fedora XML yet (and it we cache `erudit_object` before we tweak, we won't get tweaked
         # values during our tests).
         assert article.pid is not None
-        if hasattr(article, 'get_erudit_object'):
-            erudit_article = article.get_erudit_object(fedora_object=article.get_fedora_object())
-        else:
-            erudit_article = None
+        erudit_article = article.get_erudit_object(fedora_object=article.get_fedora_object())
 
         if not authors:
             if erudit_article:
                 authors = erudit_article.get_authors()
                 authors = [a.format_name() for a in authors]
             authors = authors or []
-        article_type = article.type
+        article_type = erudit_article.article_type
         if article_type == 'compterendu':
             article_type = 'Compte rendu'
         journal = article.issue.journal
-        if erudit_article:
-            title = erudit_article.get_formatted_title()
-        else:
-            title = article.title
+        title = erudit_article.get_formatted_title()
         return SolrDocument(
             id=article.solr_id,
             journal_code=journal.code,

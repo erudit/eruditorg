@@ -206,7 +206,6 @@ class ArticleRef(Article):
             if add_to_fedora_issue:
                 repository.api.add_article_to_parent_publication(self)
         super().__init__(issue, localidentifier)
-        self.sync_with_erudit_object()
         if self.pid is not None and self.issue.is_published:
             solr_client = pysolr.Solr()
             solr_client.add_document(

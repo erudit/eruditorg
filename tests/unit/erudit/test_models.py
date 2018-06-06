@@ -394,8 +394,8 @@ class TestArticle:
         c1 = CollectionFactory.create(localidentifier=None)
         j1 = JournalFactory.create(collection=c1)
         issue_1 = IssueFactory.create(journal=j1)
-        with pytest.raises(Article.DoesNotExist):
-            ArticleFactory.create(issue=issue_1)
+        article = ArticleFactory.create(issue=issue_1)
+        assert not article.is_in_fedora
 
     def test_knows_that_it_is_in_open_access_if_its_issue_is_in_open_access(self):
         j1 = JournalFactory.create(open_access=True)

@@ -110,24 +110,26 @@ class SolrDocument:
         return _("(Sans titre)")
 
 
-class SolrArticle(SolrDocument):
+class Article(SolrDocument):
+    @property
+    def article_type(self):
+        if 'TypeArticle_fac' not in self.solr_data:
+            return 'article'
+        article_type = self.solr_data['TypeArticle_fac']
+        return {
+            'Compterendu': 'compterendu',
+            'Autre': 'autre',
+            'Note': 'note',
+        }.get(article_type, 'article')
+
+    @property
+    def type_display(self):
+        article_type = self.article_type
+        return erudit_models.Article.TYPE_DISPLAY.get(article_type, article_type)
 
     @property
     def journal_type(self):
         return 'S'
-
-    @property
-    def type(self):
-        if 'TypeArticle_fac' not in self.solr_data:
-            return _('Article')
-        article_type = self.solr_data['TypeArticle_fac']
-        if article_type == 'Compterendu':
-            return _("Compte rendu")
-        return _('Article')
-
-    @property
-    def type_display(self):
-        return self.type
 
 
 class Thesis(SolrDocument):
@@ -164,20 +166,14 @@ class Thesis(SolrDocument):
 def get_model_instance(solr_data):
     generic = SolrDocument(solr_data)
     if generic.document_type == 'thesis':
-        try:
-            return Thesis(solr_data)
-        except ObjectDoesNotExist:
-            pass
+        return Thesis(solr_data)
     elif generic.document_type == 'article':
         try:
-            return erudit_models.Article.from_fedora_ids(
-                solr_data.get('RevueID'),
-                solr_data.get('NumeroID'),
-                solr_data['ID'])
+            return erudit_models.Article.from_solr_object(SolrDocument(solr_data))
         except erudit_models.Article.DoesNotExist:
-            return SolrArticle(solr_data)
-
-    return SolrDocument(solr_data)
+            return Article(solr_data)
+    else:
+        return SolrDocument(solr_data)
 
 
 def get_fedora_ids(localidentifier):

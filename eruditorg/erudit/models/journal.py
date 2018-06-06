@@ -784,10 +784,11 @@ class Article(FedoraMixin):
     PROCESSING_FULL = 'C'
     PROCESSING_MINIMAL = 'M'
 
-    def __init__(self, issue, localidentifier):
+    def __init__(self, issue, localidentifier, solr_object=None):
         super().__init__()
         self.issue = issue
         self.localidentifier = localidentifier
+        self._solr_object = solr_object
 
     def __str__(self):
         if self.title:
@@ -803,7 +804,12 @@ class Article(FedoraMixin):
     def __getattr__(self, name):
         if name.startswith('_'):
             return super().__getattr__(name)
-        return getattr(self._solr_object, name)
+        if self.fedora_is_loaded:
+            try:
+                return getattr(self.erudit_object, name)
+            except AttributeError:
+                pass
+        return getattr(self.solr_object, name)
 
     # Fedora-related methods and properties
     # --
@@ -822,19 +828,11 @@ class Article(FedoraMixin):
             )
         return None
 
-    def sync_with_erudit_object(self):
-        if not self.is_in_fedora:
-            raise Article.DoesNotExist()
-        erudit_object = self.erudit_object
-        self.type = erudit_object.article_type
-        self.doi = erudit_object.doi
-        self.first_page = erudit_object.first_page
-        self.last_page = erudit_object.last_page
-
     @staticmethod
     def from_issue_and_localidentifier(issue, localidentifier):
         article = Article(issue, localidentifier)
-        article.sync_with_erudit_object()
+        if not article.is_in_fedora:
+            raise Article.DoesNotExist()
         return article
 
     @staticmethod
@@ -846,16 +844,45 @@ class Article(FedoraMixin):
         else:
             return Article.from_issue_and_localidentifier(issue, localidentifier)
 
-    # Article-related methods and properties
+    # Solr-related methods and properties
     # --
 
-    @cached_property
-    def _solr_object(self):
-        return SolrDocument.from_solr_id(self.solr_id, specialized_class=False)
+    @property
+    def solr_object(self):
+        if self._solr_object is None:
+            self._solr_object = SolrDocument.from_solr_id(self.solr_id, specialized_class=False)
+        return self._solr_object
+
+    @staticmethod
+    def from_solr_object(solr_object):
+        solr_data = solr_object.solr_data
+        try:
+            issue = Issue.from_fedora_ids(solr_data.get('RevueID'), solr_data.get('NumeroID'))
+        except Issue.DoesNotExist:
+            raise Article.DoesNotExist()
+        article = Article(issue, solr_object.localidentifier, solr_object=solr_object)
+        return article
+
+    @property
+    def solr_id(self):
+        collection_code = self.issue.journal.collection.code
+        if collection_code == 'erudit':
+            # For the Érudit collection, we use the articleès fedora id directly
+            return self.localidentifier
+        elif collection_code == 'unb':
+            return 'unb:{}'.format(self.localidentifier)
+        elif collection_code == 'persee':
+            # For Persée too, we directly use localidentifier
+            return self.localidentifier
+        else:
+            raise ValueError("Can't search this type of article in Solr")
+
+    # URLs
+    # --
 
     def get_absolute_url(self):
         if self.is_external:
-            return self._solr_object.url
+            return self.solr_object.url
         else:
             return reverse(
                 'public:journal:article_detail', args=(
@@ -882,57 +909,22 @@ class Article(FedoraMixin):
         ))
 
     @property
-    def type_display(self):
-        return self.TYPE_DISPLAY.get(self.type, self.type)
-
-    @property
-    def authors(self):
-        return self.erudit_object.get_authors()
-
-    def get_formatted_authors(self, style=None):
-        return self.erudit_object.get_authors(formatted=True, style=style)
-
-    def get_formatted_authors_mla(self):
-        return self.get_formatted_authors(style='mla')
-
-    def get_formatted_authors_apa(self):
-        return self.get_formatted_authors(style='apa')
-
-    def get_formatted_authors_chicago(self):
-        return self.get_formatted_authors(style='chicago')
-
-    @property
-    def is_external(self):
-        return self.issue.is_external
-
-    @property
-    def title(self):
-        return self.erudit_object.get_title(formatted=True, html=False)
-
-    @property
-    def html_title(self):
-        return self.erudit_object.get_title(formatted=True, html=True)
-
-    @property
-    def solr_id(self):
-        collection_code = self.issue.journal.collection.code
-        if collection_code == 'erudit':
-            # For the Érudit collection, we use the articleès fedora id directly
-            return self.localidentifier
-        elif collection_code == 'unb':
-            return 'unb:{}'.format(self.localidentifier)
-        elif collection_code == 'persee':
-            # For Persée too, we directly use localidentifier
-            return self.localidentifier
-        else:
-            raise ValueError("Can't search this type of article in Solr")
-
-    def prepublication_ticket(self):
-        return self.issue.prepublication_ticket
-
-    def can_cite(self):
-        # We cannot cite articles we don't have in fedora. ref #1491
-        return self.is_in_fedora
+    def pdf_url(self):
+        urlpdf = self.erudit_object._dom.find('.//urlpdf')
+        if urlpdf is not None and urlpdf.text:
+            # If we have a external pdf url, then it's always the proper one to return.
+            return urlpdf.text
+        if self.issue.external_url:
+            # special case. if our issue has an external_url, regardless of whether we have a
+            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
+            return None
+        if self.fedora_object:
+            return reverse('public:journal:article_raw_pdf', kwargs={
+                'journal_code': self.issue.journal.code,
+                'issue_slug': self.issue.volume_slug,
+                'issue_localid': self.issue.localidentifier,
+                'localid': self.localidentifier,
+            })
 
     def cite_url(self, type):
         return reverse('public:journal:article_citation_{}'.format(type), kwargs={
@@ -951,14 +943,30 @@ class Article(FedoraMixin):
     def cite_ris_url(self):
         return self.cite_url('ris')
 
+    # Proxies to erudit_object
     @property
-    def open_access(self):
-        """ Returns a boolean indicating if the article is in open access. """
-        return self.issue.journal.open_access
+    def authors(self):
+        return self.erudit_object.get_authors()
+
+    def get_formatted_authors(self, style=None):
+        return self.erudit_object.get_authors(formatted=True, style=style)
+
+    def get_formatted_authors_mla(self):
+        return self.get_formatted_authors(style='mla')
+
+    def get_formatted_authors_apa(self):
+        return self.get_formatted_authors(style='apa')
+
+    def get_formatted_authors_chicago(self):
+        return self.get_formatted_authors(style='chicago')
 
     @property
-    def embargoed(self):
-        return self.issue.embargoed
+    def title(self):
+        return self.erudit_object.get_title(formatted=True, html=False)
+
+    @property
+    def html_title(self):
+        return self.erudit_object.get_title(formatted=True, html=True)
 
     @property
     def abstracts(self):
@@ -1013,24 +1021,6 @@ class Article(FedoraMixin):
         return self.fedora_object.pdf.exists()
 
     @property
-    def pdf_url(self):
-        urlpdf = self.erudit_object._dom.find('.//urlpdf')
-        if urlpdf is not None and urlpdf.text:
-            # If we have a external pdf url, then it's always the proper one to return.
-            return urlpdf.text
-        if self.issue.external_url:
-            # special case. if our issue has an external_url, regardless of whether we have a
-            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
-            return None
-        if self.fedora_object:
-            return reverse('public:journal:article_raw_pdf', kwargs={
-                'journal_code': self.issue.journal.code,
-                'issue_slug': self.issue.volume_slug,
-                'issue_localid': self.issue.localidentifier,
-                'localid': self.localidentifier,
-            })
-
-    @property
     def processing(self):
         processing = self.erudit_object.processing
         processing_mapping = {
@@ -1068,17 +1058,35 @@ class Article(FedoraMixin):
         return self.erudit_object.get_html_body()
 
     @property
-    def language(self):
-        return self.erudit_object.language
-
-    @property
     def publication_allowed(self):
         node = self.erudit_object._dom.find('accessible')
         return node is None or node.text != 'non'
 
+    @cached_property
+    def doi(self):
+        return self.erudit_object.doi
+
     @property
     def authors_display(self):
         return self.get_formatted_authors()
+
+    # Convenience proxies to issue and journal
+    # -
+    def prepublication_ticket(self):
+        return self.issue.prepublication_ticket
+
+    @property
+    def is_external(self):
+        return self.issue.is_external
+
+    @property
+    def open_access(self):
+        """ Returns a boolean indicating if the article is in open access. """
+        return self.issue.journal.open_access
+
+    @property
+    def embargoed(self):
+        return self.issue.embargoed
 
     @property
     def collection_display(self):
@@ -1119,6 +1127,20 @@ class Article(FedoraMixin):
             return publisher.name
         else:
             return ''
+
+    # Other
+    # -
+    @property
+    def type(self):
+        return self.article_type
+
+    @property
+    def type_display(self):
+        return self.TYPE_DISPLAY.get(self.type, self.type)
+
+    def can_cite(self):
+        # We cannot cite articles we don't have in fedora. ref #1491
+        return self.is_in_fedora
 
 
 class JournalInformation(models.Model):
