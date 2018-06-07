@@ -4,6 +4,7 @@ from django.test import Client
 from erudit.fedora import repository
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
+from erudit.test.factories import JournalFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -49,3 +50,24 @@ def test_can_handle_legacy_journal_year_number_pattern():
     )
 
     assert Client().get(legacy_url).status_code == 301
+
+
+def test_will_propagate_prepublication_ticket_received_in_querystring():
+    journal = JournalFactory(code="dummy")
+
+    # Create a fake fedora issue for this journal
+    issue_localidentifier = "{}.fake_publication".format(journal.pid)
+    repository.api.register_publication(issue_localidentifier)
+
+
+    legacy_url = "/revue/{journal_code}/1000/v1/n1/index.html".format(  # noqa
+        journal_code=journal.code,
+    )
+    data = dict(
+        id="fake_publication",
+        ticket="ticket"
+    )
+
+    resp = Client().get(legacy_url, data=data)
+    assert "?ticket=ticket" in resp.url
+    assert resp.status_code == 301
