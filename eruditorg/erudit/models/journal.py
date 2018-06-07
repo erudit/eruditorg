@@ -6,6 +6,7 @@ from hashlib import md5
 from lxml import etree as et
 
 from django.core.cache import caches
+from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -939,6 +940,55 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     # Article-related methods and properties
     # --
+
+    def can_cite(self):
+        # We cannot cite articles we don't have in fedora. ref #1491
+        return self.is_in_fedora
+
+    def cite_url(self, type):
+        return reverse('public:journal:article_citation_{}'.format(type), kwargs={
+            'journal_code': self.issue.journal.code,
+            'issue_slug': self.issue.volume_slug,
+            'issue_localid': self.issue.localidentifier,
+            'localid': self.localidentifier,
+        })
+
+    def cite_enw_url(self):
+        return self.cite_url('enw')
+
+    def cite_bib_url(self):
+        return self.cite_url('bib')
+
+    def cite_ris_url(self):
+        return self.cite_url('ris')
+
+    def get_absolute_url(self):
+        if self.external_url:
+            return self.external_url
+        elif self.pid:
+            return reverse('public:journal:article_detail', args=(
+                self.issue.journal.code,
+                self.issue.volume_slug,
+                self.issue.localidentifier,
+                self.localidentifier)
+            )
+
+    @property
+    def pdf_url(self):
+        if self.external_pdf_url:
+            # If we have a external_pdf_url, then it's always the proper one to return.
+            return self.external_pdf_url
+        if self.issue.external_url:
+            # special case. if our issue has an external_url, regardless of whether we have a
+            # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
+            return None
+        if self.fedora_object:
+            return reverse('public:journal:article_raw_pdf', kwargs={
+                'journal_code': self.issue.journal.code,
+                'issue_slug': self.issue.volume_slug,
+                'issue_localid': self.issue.localidentifier,
+                'localid': self.localidentifier,
+            })
 
     @property
     def open_access(self):
