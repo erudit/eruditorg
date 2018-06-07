@@ -1,5 +1,7 @@
 import pytest
 from django.test import Client
+
+from erudit.fedora import repository
 from erudit.test.factories import ArticleFactory
 from erudit.test.factories import IssueFactory
 
@@ -12,19 +14,26 @@ def test_can_redirect_to_retro_for_unknown_urls():
     assert response.status_code == 301
 
 
-def test_legacy_urls_return_are_redirected_with_http_301():
-    ArticleFactory()
+@pytest.mark.django_db
+class TestCanRedirectToRetro:
 
-    legacy_urls = [
+
+    def test_can_redirect_to_retro_for_unknown_urls(self):
+        # Setup
+        url = '/fr/test/unknown'
+        # Run
+        response = Client().get(url)
+        # Check
+        assert response.status_code == 301
+
+    @pytest.mark.parametrize('url', [
         "/recherche/index.html",
         "/client/login.jsp",
         "/client/login.jsp?lang=en",
         "/these/liste.html",
         "/rss.xml",
-
-    ]
-
-    for url in legacy_urls:
+    ])
+    def test_legacy_urls_return_are_redirected_with_http_301(self, url):
         assert Client().get(url).status_code == 301
 
 
