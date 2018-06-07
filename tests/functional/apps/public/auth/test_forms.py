@@ -1,38 +1,29 @@
-# -*- coding: utf-8 -*-
-
+import pytest
 from django.contrib.auth.tokens import default_token_generator
 from django.core import mail
-from erudit.test import BaseEruditTestCase
+from django.test import TestCase
 
 from base.test.factories import UserFactory
-from base.test.testcases import EruditTestCase
 
 from apps.public.auth.forms import PasswordResetForm
 from apps.public.auth.forms import UserParametersForm
 
 
-class TestPasswordResetForm(BaseEruditTestCase):
+class TestPasswordResetForm(TestCase):
     def test_can_properly_choose_standard_users_with_usable_passwords(self):
-        # Setup
-        self.user.email = 'foobar@example.com'
-        self.user.save()
-        # Run & check
+        user = UserFactory(email='foobar@example.com')
         form = PasswordResetForm({})
-        self.assertEqual(list(form.get_users('foobar@example.com')), [self.user, ])
+        self.assertEqual(list(form.get_users('foobar@example.com')), [user, ])
 
     def test_can_choose_users_without_usable_passwords(self):
-        # Setup
-        self.user.set_unusable_password()
-        self.user.email = 'foobar@example.com'
-        self.user.save()
-        # Run & check
+        user = UserFactory(email='foobar@example.com')
+        user.set_unusable_password()
+        user.save()
         form = PasswordResetForm({})
         self.assertTrue(len(list(form.get_users('foobar@example.com'))))
 
     def test_can_properly_send_the_reset_email(self):
-        # Setup
-        self.user.email = 'foobar@example.com'
-        self.user.save()
+        UserFactory(email='foobar@example.com')
         form_data = {
             'email': 'foobar@example.com',
         }
@@ -49,7 +40,8 @@ class TestPasswordResetForm(BaseEruditTestCase):
         self.assertEqual(mail.outbox[0].to[0], 'foobar@example.com')
 
 
-class TestUserParametersForm(EruditTestCase):
+@pytest.mark.django_db
+class TestUserParametersForm:
     def test_cannot_allow_users_to_use_the_email_associated_with_another_user(self):
         # Setup
         u1 = UserFactory.create(username='foo1', email='foo1@erudit.org')

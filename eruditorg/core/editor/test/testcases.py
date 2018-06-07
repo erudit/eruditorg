@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib.contenttypes.models import ContentType
+from django.test import TestCase
 
-from erudit.test import BaseEruditTestCase
+from base.test.factories import UserFactory
+from erudit.test.factories import JournalFactory, PublisherFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
 from core.authorization.models import Authorization
@@ -10,19 +10,18 @@ from core.authorization.models import Authorization
 from ..models import IssueSubmission
 
 
-class BaseEditorTestCase(BaseEruditTestCase):
+class BaseEditorTestCase(TestCase):
 
     def setUp(self):
-        super().setUp()
+        self.user = UserFactory()
+        self.publisher = PublisherFactory()
+
+        # Add a journal with a member
+        self.journal = JournalFactory(publishers=[self.publisher])
+        self.journal.members.add(self.user)
 
         self.issue_submission = IssueSubmission.objects.create(
             journal=self.journal,
-            volume="2",
-            contact=self.user,
-        )
-
-        self.other_issue_submission = IssueSubmission.objects.create(
-            journal=self.other_journal,
             volume="2",
             contact=self.user,
         )

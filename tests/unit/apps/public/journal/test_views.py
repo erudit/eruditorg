@@ -4,8 +4,8 @@ import pytest
 import unittest.mock
 
 from django.template import Context
+from django.test import TestCase
 
-from erudit.test import BaseEruditTestCase
 from erudit.test.factories import IssueFactory, JournalFactory
 from erudit.fedora.objects import ArticleDigitalObject
 from erudit.fedora import repository
@@ -15,9 +15,9 @@ from erudit.test.domchange import SectionTitle
 from apps.public.journal.views import IssueDetailView, ArticleDetailView
 
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
+pytestmark = pytest.mark.django_db
 
 
-@pytest.mark.django_db
 class TestIssueDetailSummary:
     def test_can_generate_section_tree_with_contiguous_articles(self):
         view = IssueDetailView()
@@ -136,16 +136,15 @@ class TestIssueDetailSummary:
     'has_coverpage',
     return_value=True
 )
-class TestRenderArticleTemplateTag(BaseEruditTestCase):
+class TestRenderArticleTemplateTag(TestCase):
 
     def test_can_transform_article_xml_to_html(
             self, mock_has_coverpage, mock_ds, mock_xsd300, mock_eo):
-        # Setup
         with open(FIXTURE_ROOT + '/article.xml', mode='r') as fp:
             xml = fp.read()
         mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value=xml)
         issue = IssueFactory.create(
-            journal=self.journal, date_published=dt.datetime.now(), localidentifier='test')
+            date_published=dt.datetime.now(), localidentifier='test')
         article = ArticleFactory.create(issue=issue)
         view = ArticleDetailView()
         view.request = unittest.mock.MagicMock(return_value={})

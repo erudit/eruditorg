@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pytest
 
 import datetime as dt
@@ -27,7 +26,7 @@ def superuser():
 @pytest.fixture()
 def staff_user():
     user = UserFactory()
-    user.is_staff=True
+    user.is_staff = True
     user.save()
     return user
 
@@ -57,9 +56,7 @@ class TestManageIndividualSubscriptionRule:
         assert user.has_perm('subscription.manage_individual_subscription', journal)
 
     def test_knows_if_a_simple_user_cannot_manage_individual_subscriptions(self):
-        # Setup
         user = UserFactory()
-        # Run & checkBaseEruditTestCase
         assert not user.has_perm('subscription.manage_individual_subscription', JournalFactory())
 
 

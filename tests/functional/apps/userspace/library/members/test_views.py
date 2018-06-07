@@ -1,17 +1,15 @@
-# -*- coding: utf-8 -*-
-
 import datetime as dt
 
 from account_actions.models import AccountActionToken
 from account_actions.test.factories import AccountActionTokenFactory
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core import mail
 from django.core.urlresolvers import reverse
+from django.test import TestCase
 from faker import Factory
-from base.test.factories import UserFactory
 
-from erudit.test import BaseEruditTestCase
+from base.test.factories import UserFactory
+from base.test.testcases import Client
 from erudit.test.factories import OrganisationFactory
 
 from core.authorization.defaults import AuthorizationConfig as AC
@@ -22,7 +20,7 @@ from core.subscription.test.factories import JournalAccessSubscriptionPeriodFact
 faker = Factory.create()
 
 
-class TestOrganisationMemberListView(BaseEruditTestCase):
+class TestOrganisationMemberListView(TestCase):
     def setUp(self):
         super(TestOrganisationMemberListView, self).setUp()
         self.user = UserFactory(is_staff=True)
@@ -37,19 +35,20 @@ class TestOrganisationMemberListView(BaseEruditTestCase):
 
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
         # Setup
-        self.client.login(username='david', password='top_secret')
+        user = UserFactory()
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:list', kwargs={
             'organisation_pk': self.organisation.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
 
     def test_provides_only_members_associated_with_the_current_organisation(self):
         # Setup
-        User.objects.create_user(
+        UserFactory(
             username='foo', email='foo.bar@example.org', password='test_password')
 
         AuthorizationFactory.create(
@@ -57,22 +56,23 @@ class TestOrganisationMemberListView(BaseEruditTestCase):
             object_id=self.organisation.id, user=self.user,
             authorization_codename=AC.can_manage_organisation_members.codename)
 
-        self.client.login(username=self.user.username, password='default')
+        client = Client(logged_user=self.user)
         url = reverse('userspace:library:members:list', kwargs={
             'organisation_pk': self.organisation.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['members']), [self.user, ])
 
 
-class TestOrganisationMemberCreateView(BaseEruditTestCase):
+class TestOrganisationMemberCreateView(TestCase):
     def setUp(self):
         super(TestOrganisationMemberCreateView, self).setUp()
 
+        self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
@@ -85,12 +85,12 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
     def test_cannot_be_accessed_by_a_user_who_cannot_manage_organisation_members(self):
         # Setup
         user = UserFactory()
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:create', kwargs={
             'organisation_pk': self.organisation.pk})
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -105,12 +105,12 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
             'last_name': faker.last_name(),
         }
 
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:create', kwargs={
             'organisation_pk': self.organisation.pk})
 
         # Run
-        response = self.client.post(url, post_data, follow=False)
+        response = client.post(url, post_data, follow=False)
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -132,12 +132,12 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
             'last_name': faker.last_name(),
         }
 
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:create', kwargs={
             'organisation_pk': self.organisation.pk})
 
         # Run
-        response = self.client.post(url, post_data, follow=False)
+        response = client.post(url, post_data, follow=False)
 
         # Check
         self.assertEqual(response.status_code, 302)
@@ -145,9 +145,10 @@ class TestOrganisationMemberCreateView(BaseEruditTestCase):
         self.assertEqual(mail.outbox[0].to[0], post_data['email'])
 
 
-class TestOrganisationMemberDeleteView(BaseEruditTestCase):
+class TestOrganisationMemberDeleteView(TestCase):
     def setUp(self):
         super(TestOrganisationMemberDeleteView, self).setUp()
+        self.user = UserFactory()
         self.organisation = OrganisationFactory.create()
         self.organisation.members.add(self.user)
         self.subscription = JournalAccessSubscriptionFactory.create(organisation=self.organisation)
@@ -159,16 +160,16 @@ class TestOrganisationMemberDeleteView(BaseEruditTestCase):
 
     def test_cannot_be_accessed_by_a_user_who_is_not_staff(self):
         # Setup
-        user = User.objects.create_user(
+        user = UserFactory(
             username='foo', email='foo.bar@example.org', password='test_password')
         self.organisation.members.add(user)
 
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:delete', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': user.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -181,19 +182,19 @@ class TestOrganisationMemberDeleteView(BaseEruditTestCase):
         self.organisation.members.add(member)
         self.organisation.save()
 
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:delete', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': member.pk, })
 
         # Run
-        response = self.client.post(url, follow=False)
+        response = client.post(url, follow=False)
 
         # Check
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(list(self.organisation.members.all()), [self.user, ])
+        self.assertEqual(list(self.organisation.members.all()), [self.user])
 
 
-class TestOrganisationMemberCancelView(BaseEruditTestCase):
+class TestOrganisationMemberCancelView(TestCase):
     def setUp(self):
         super(TestOrganisationMemberCancelView, self).setUp()
         self.organisation = OrganisationFactory.create()
@@ -206,14 +207,15 @@ class TestOrganisationMemberCancelView(BaseEruditTestCase):
 
     def test_cannot_be_accessed_by_a_user_who_is_not_staff(self):
         # Setup
+        user = UserFactory()
         token = AccountActionTokenFactory.create(content_object=self.organisation)
 
-        self.client.login(username='david', password='top_secret')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:cancel', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': token.pk, })
 
         # Run
-        response = self.client.get(url)
+        response = client.get(url)
 
         # Check
         self.assertEqual(response.status_code, 403)
@@ -224,12 +226,12 @@ class TestOrganisationMemberCancelView(BaseEruditTestCase):
 
         token = AccountActionTokenFactory.create(content_object=self.organisation)
 
-        self.client.login(username=user.username, password='default')
+        client = Client(logged_user=user)
         url = reverse('userspace:library:members:cancel', kwargs={
             'organisation_pk': self.organisation.pk, 'pk': token.pk, })
 
         # Run
-        response = self.client.post(url, follow=False)
+        response = client.post(url, follow=False)
 
         # Check
         self.assertEqual(response.status_code, 302)

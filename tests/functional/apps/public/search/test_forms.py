@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 import pytest
-from erudit.test import BaseEruditTestCase
+from django.test import TestCase
 
 from apps.public.search.forms import ResultsFilterForm
 from apps.public.search.forms import SearchForm
 
 
-class TestSearchForm(BaseEruditTestCase):
+class TestSearchForm(TestCase):
     def test_cannot_validate_a_search_without_a_main_query(self):
         # Setup
         form_data = {}
@@ -26,7 +25,7 @@ class TestSearchForm(BaseEruditTestCase):
         self.assertFalse(form.is_valid())
 
 
-class TestResultsFilterForm(BaseEruditTestCase):
+class TestResultsFilterForm(TestCase):
 
     @pytest.fixture(autouse=True)
     def aggregation_dict(self):

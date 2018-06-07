@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
-
 import pytest
 
 from django.http import Http404
 from django.test import RequestFactory
 from django.views.generic import DetailView
 
-from erudit.test import BaseEruditTestCase
-from erudit.test.factories import ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory
+from erudit.test.factories import (
+    ArticleFactory, EmbargoedArticleFactory, NonEmbargoedArticleFactory, OpenAccessArticleFactory
+)
 from erudit.models import Article
 
 from apps.public.journal.viewmixins import ContentAccessCheckMixin
@@ -16,8 +15,10 @@ from apps.public.journal.viewmixins import SingleJournalMixin
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.middleware import SubscriptionMiddleware
 from base.test.factories import get_anonymous_request, get_authenticated_request
+from erudit.test.factories import JournalFactory
 
 middleware = SubscriptionMiddleware()
+pytestmark = pytest.mark.django_db
 
 
 @pytest.fixture()
@@ -35,9 +36,8 @@ def single_article_view():
     return MyView
 
 
-class TestSingleArticleMixin(BaseEruditTestCase):
+class TestSingleArticleMixin:
     def test_can_retrieve_the_article_using_the_local_identifier(self):
-        # Setup
         article_1 = ArticleFactory.create(localidentifier='test_article')
 
         class MyView(SingleArticleMixin, DetailView):
@@ -45,31 +45,24 @@ class TestSingleArticleMixin(BaseEruditTestCase):
 
         view = MyView()
         view.kwargs = {'localid': article_1.localidentifier}
-
-        # Run & check
         assert view.get_object() == article_1
 
 
-class TestSingleJournalMixin(BaseEruditTestCase):
+class TestSingleJournalMixin:
     def test_can_return_a_journal_based_on_its_code(self):
-        # Setup
-        code = self.journal.code
+        journal = JournalFactory()
         mixin = SingleJournalMixin()
-        mixin.kwargs = {'code': code}
-        # Run & check
-        assert mixin.get_object() == self.journal
+        mixin.kwargs = {'code': journal.code}
+        assert mixin.get_object() == journal
 
     def test_returns_http_404_if_the_journal_does_not_exist(self):
-        # Setup
-        code = self.journal.code
+        journal = JournalFactory()
         mixin = SingleJournalMixin()
-        mixin.kwargs = {'code': code + 'dummy'}
-        # Run & check
-        with self.assertRaises(Http404):
+        mixin.kwargs = {'code': journal.code + 'dummy'}
+        with pytest.raises(Http404):
             mixin.get_object()
 
 
-@pytest.mark.django_db
 class TestContentAccessCheckMixin:
 
     def setUp(self):

@@ -1,30 +1,24 @@
-# -*- coding: utf-8 -*-
 import unittest
 import datetime as dt
 
+import pytest
 from django.contrib.auth.models import AnonymousUser
 from django.test import RequestFactory
 from django.http import HttpResponse
 
-from erudit.test import BaseEruditTestCase
 from erudit.test.factories import OrganisationFactory
 
 from base.test.factories import UserFactory, get_anonymous_request, get_authenticated_request
-from erudit.test.factories import EmbargoedArticleFactory
+from erudit.test.factories import EmbargoedArticleFactory, JournalFactory
 from core.subscription.middleware import SubscriptionMiddleware
-from core.subscription.models import UserSubscriptions
 from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.test.factories import JournalAccessSubscriptionPeriodFactory
-from core.subscription.test.factories import ValidJournalAccessSubscriptionPeriodFactory
-from core.subscription.test.factories import InstitutionRefererFactory
+
+pytestmark = pytest.mark.django_db
 
 
-class TestSubscriptionMiddleware(BaseEruditTestCase):
-    def setUp(self):
-        super(TestSubscriptionMiddleware, self).setUp()
-        self.factory = RequestFactory()
-
+class TestSubscriptionMiddleware:
     def test_associates_institution_subscription_to_request(self):
         # Setup
         now_dt = dt.datetime.now()
@@ -53,12 +47,12 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         assert subscription in request.subscriptions._subscriptions
 
     def test_associates_the_subscription_type_to_the_request_in_case_of_individual_access(self):
-        # Setup
+        journal = JournalFactory()
         request = get_authenticated_request()
 
         subscription = JournalAccessSubscriptionFactory.create(
             user=request.user,
-            journal=self.journal,
+            journal=journal,
             post__valid=True
         )
 
@@ -163,7 +157,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
 
     @unittest.mock.patch('core.subscription.middleware.logger')
     def test_subscription_middleware_log_requests_in_case_of_referer(self, mock_log):
-        request = self.factory.get('/revues/shortname/issue/article.html')
+        request = RequestFactory().get('/revues/shortname/issue/article.html')
         request.user = AnonymousUser()
         request.session = dict()
         request.META['HTTP_REFERER'] = 'http://www.umontreal.ca'
@@ -248,7 +242,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         assert request.subscriptions._subscriptions == []
 
     def test_staff_users_can_fake_ip(self):
-        request = self.factory.get('/')
+        request = RequestFactory().get('/')
         request.user = UserFactory(is_staff=True)
         request.session = dict()
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
@@ -257,7 +251,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         assert middleware._get_user_ip_address(request) == '1.2.3.4'
 
     def test_non_staff_users_cannot_fake_ip(self):
-        request = self.factory.get('/')
+        request = RequestFactory().get('/')
         request.user = UserFactory(is_staff=False)
         request.session = dict()
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'
@@ -266,7 +260,7 @@ class TestSubscriptionMiddleware(BaseEruditTestCase):
         assert middleware._get_user_ip_address(request) == '1.1.1.1'
 
     def test_anonymous_users_cannot_fake_ip(self):
-        request = self.factory.get('/')
+        request = RequestFactory().get('/')
         request.user = AnonymousUser()
         request.session = dict()
         request.META['HTTP_X_FORWARDED_FOR'] = '1.1.1.1'

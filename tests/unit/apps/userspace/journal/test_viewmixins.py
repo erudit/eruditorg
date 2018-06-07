@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pytest
 
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -8,8 +7,6 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.views.generic import TemplateView
 
-from erudit.models import Journal
-from erudit.test import BaseEruditTestCase
 from erudit.test.factories import CollectionFactory
 from erudit.test.factories import JournalFactory
 
@@ -31,11 +28,7 @@ def get_request(url='/'):
 
 
 @pytest.mark.django_db
-class TestJournalScopeMixin(object):
-
-    @pytest.fixture(autouse=True)
-    def setUp(self):
-        self.factory = RequestFactory()
+class TestJournalScopeMixin:
 
     def test_can_use_a_journal_passed_in_the_url(self):
         # Setup
