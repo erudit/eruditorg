@@ -183,9 +183,9 @@ class FakeAPI(ApiFacade):
         newxml = dom_wrapper.tostring()
         self.set_xml_for_pid(pid, newxml)
 
-    def add_article_to_parent_publication(self, article):
+    def add_article_to_parent_publication(self, article, publication_allowed=True):
         with self.open_publication(article.issue.pid) as wrapper:
-            wrapper.add_article(article)
+            wrapper.add_article(article, publication_allowed=publication_allowed)
 
     def add_publication_to_parent_journal(self, issue):
         with self.open_journal(issue.journal.pid) as wrapper:

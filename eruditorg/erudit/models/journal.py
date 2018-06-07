@@ -1077,9 +1077,12 @@ class Article(FedoraMixin):
     def html_body(self):
         return self.erudit_object.get_html_body()
 
-    @property
+    @cached_property
+    @catch_and_log
     def publication_allowed(self):
-        node = self.erudit_object._dom.find('accessible')
+        summary_tree = self.issue.fedora_object.summary.content.node
+        xpath = './/article[@idproprio="{}"]/accessible'.format(self.localidentifier)
+        node = summary_tree.find(xpath)
         return node is None or node.text != 'non'
 
     @cached_property

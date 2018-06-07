@@ -60,15 +60,6 @@ class EruditArticleDomChanger(BaseDomChanger):
         titre = self.root.find('.//grtitre/titre')
         titre.text = title
 
-    def set_publication_allowed(self, publication_allowed):
-        if publication_allowed:
-            elem = self.root.find('.//accessible')
-            if elem is not None:
-                elem.parent.remove(elem)
-        else:
-            elem = E.accessible("non")
-            self.root.getroot().append(elem)
-
     def set_type(self, type):
         self.root.getroot().attrib['typeart'] = type
 
@@ -91,11 +82,14 @@ class EruditArticleDomChanger(BaseDomChanger):
 
 
 class EruditPublicationDomChanger(BaseDomChanger):
-    def add_article(self, article):
-        if self.root.find('article[idproprio="{}"]'.format(article.localidentifier)) is not None:
+    def add_article(self, article, publication_allowed=True):
+        if self.root.find('article[@idproprio="{}"]'.format(article.localidentifier)) is not None:
             return  # already there
         num_articles = len(self.root.findall('article'))
         elem = E.article(idproprio=article.localidentifier, lang='fr', ordseq=str(num_articles))
+        if not publication_allowed:
+            subelem = E.accessible("non")
+            elem.append(subelem)
         self.root.getroot().append(elem)
 
 

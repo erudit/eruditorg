@@ -180,7 +180,7 @@ class ArticleRef(Article):
     """ An article that creates its own solr/fedora references upon instantiation. """
     def __init__(
             self, issue, localidentifier, from_fixture=None, title=None, type=None,
-            section_titles=None, publication_allowed=None, authors=None, add_to_fedora_issue=True,
+            section_titles=None, publication_allowed=True, authors=None, add_to_fedora_issue=True,
             solr_attrs=None):
         self.issue = issue
         self.localidentifier = localidentifier
@@ -195,12 +195,11 @@ class ArticleRef(Article):
                         wrapper.set_title(title)
                     if section_titles is not None:
                         wrapper.set_section_titles(section_titles)
-                    if publication_allowed is not None:
-                        wrapper.set_publication_allowed(publication_allowed)
                     if type is not None:
                         wrapper.set_type(type)
             if add_to_fedora_issue:
-                repository.api.add_article_to_parent_publication(self)
+                repository.api.add_article_to_parent_publication(
+                    self, publication_allowed=publication_allowed)
         super().__init__(issue, localidentifier)
         if self.pid is not None and self.issue.is_published:
             solr_client = pysolr.Solr()
