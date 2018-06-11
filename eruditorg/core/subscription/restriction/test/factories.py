@@ -1,3 +1,4 @@
+from datetime import datetime as dt
 import factory
 import factory.fuzzy
 
@@ -11,6 +12,7 @@ class AbonneFactory(factory.django.DjangoModelFactory):
 
     courriel = factory.fuzzy.FuzzyText()
     abonne = factory.fuzzy.FuzzyText()
+    abonneid = factory.Sequence(lambda n: str(n))
 
 
 class RevueFactory(factory.django.DjangoModelFactory):
@@ -23,6 +25,8 @@ class RevueFactory(factory.django.DjangoModelFactory):
 
 
 class RevueabonneFactory(factory.django.DjangoModelFactory):
+
+    anneeabonnement = dt.now().year
 
     class Meta:
         model = Revueabonne

@@ -4,8 +4,9 @@ from django.core.management import call_command
 from erudit.models.core import Organisation
 from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod
 from core.subscription.restriction.models import Revueabonne
+from core.subscription.test.factories import JournalAccessSubscriptionFactory
 from core.subscription.restriction.test.factories import (
     AbonneFactory, RevueFactory, RevueabonneFactory
 )
@@ -122,11 +123,11 @@ def test_user_email_is_updated_when_updated_at_the_source():
     profile = LegacyAccountProfile.objects.first()
     assert profile.user.email == abonne.courriel
 
+
 @pytest.mark.django_db
 def test_import_deletions():
     # Verify that subscription deletions are properly imported, that is, that deletions propagate.
     # Setup
-    legacy_organisation_profile = LegacyOrganisationProfileFactory()
     journal1 = JournalFactory.create()
     abonne1 = AbonneFactory.create()
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
@@ -135,14 +136,29 @@ def test_import_deletions():
         revueid=revue1.revueid,
         anneeabonnement=2018)
 
-    subscription_qs = Revueabonne.objects
-    import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
+    assert JournalAccessSubscriptionPeriod.objects.count() == 0
+    call_command("import_restrictions", *[], **{})
+    subscription = JournalAccessSubscription.objects.first()
+
+    assert subscription.journals.count() == 1
+    assert subscription.journalaccesssubscriptionperiod_set.count() == 1
+
     sub1.delete()
-    import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
+    call_command("import_restrictions", *[], **{})
 
     # Run & check
     assert JournalAccessSubscription.objects.count() == 1
     assert JournalAccessSubscription.objects.first().journals.count() == 0
+
+@pytest.mark.django_db
+def test_import_deletion_will_not_modify_individual_subscriptions():
+    journal = JournalFactory()
+    individual_subscription = JournalAccessSubscriptionFactory(valid=True, type="individual")
+    individual_subscription.journals.add(journal)
+    individual_subscription.save()
+    assert individual_subscription.journals.count() == 1
+    call_command("import_restrictions", *[], **{})
+    assert individual_subscription.journals.count() == 1
 
 
 @pytest.mark.django_db

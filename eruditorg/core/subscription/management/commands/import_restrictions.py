@@ -43,6 +43,67 @@ created_objects = {
 }
 
 
+@transaction.atomic
+def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
+    """ Update stale subscription for the given year
+
+    A stale subscription is a subscriptions that exists in the eruditorg database
+    but does not exist in the restriction database. When an organisation is unsubscribed,
+    the corresponding rows in revueabonne are not updated, they are simply deleted.
+
+    This function will determine the set of subscriptions present in eruditorg, the
+    set of subscriptions present in restriction, and diff them to find the set of
+    subscriptions that are present in eruditorg but not in restriction. It will then
+    update them to delete all their journals and subscription periods.
+
+    :param year: the year for which stale subscriptions should be deleted
+    """
+
+    # Get all organisations that do not have a subcription in restriction for the
+    # given year.
+
+    restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement__gte=year)
+    restriction_subscriber_names = restriction_subscriptions.order_by('abonneid') \
+        .values_list('abonneid', flat=True) \
+        .distinct()
+
+    orgs_with_no_restriction = Organisation.objects.exclude(
+        legacyaccountprofile__legacy_id__in=set(restriction_subscriber_names)
+    )
+
+    # Get all organisations that have a valid subscription
+    orgs_with_valid_subscription = JournalAccessSubscription.valid_objects.all().values_list(
+        'organisation', flat=True
+    ).distinct()
+
+    # diff the sets and find the subscribers with no active subscription
+    orgs_with_eruditorg_and_no_restriction = orgs_with_valid_subscription.filter(
+        pk__in=orgs_with_no_restriction
+    )
+
+    # get their subscriptions
+    stale_subscriptions = set(JournalAccessSubscription.valid_objects.filter(
+        organisation__in=orgs_with_eruditorg_and_no_restriction
+    ))
+
+    # Delete their periods
+    nowd = dt.datetime.now()
+    JournalAccessSubscriptionPeriod.objects.filter(
+        subscription__in=stale_subscriptions,
+        start__lte=nowd,
+        end__gte=nowd,
+    ).delete()
+
+    for subscription in stale_subscriptions:
+        logger.info(
+            'subscription.stale_subscription_updated',
+            subscription_pk=subscription.pk,
+            organisation=subscription.organisation.name
+        )
+        subscription.journals.clear()
+        subscription.save()
+
+
 class Command(BaseCommand):
     """ Import restrictions from the restriction database """
     help = 'Import data from the "restriction" database'
@@ -91,6 +152,8 @@ class Command(BaseCommand):
                 import_restriction_subscriber(subscriber, subscription_qs)
             except ImportException:
                 pass
+        delete_stale_subscriptions(year, logger)
+
         logger.info("import.finished", **created_objects)
 
 
