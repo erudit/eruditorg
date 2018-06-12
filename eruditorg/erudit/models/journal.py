@@ -975,6 +975,8 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def pdf_url(self):
+        if not self.publication_allowed:
+            return None
         if self.external_pdf_url:
             # If we have a external_pdf_url, then it's always the proper one to return.
             return self.external_pdf_url
@@ -982,13 +984,14 @@ class Article(EruditDocument, FedoraMixin, FedoraDated, OAIDated):
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
             return None
-        if self.fedora_object:
+        if self.fedora_object and self.fedora_object.pdf.exists:
             return reverse('public:journal:article_raw_pdf', kwargs={
                 'journal_code': self.issue.journal.code,
                 'issue_slug': self.issue.volume_slug,
                 'issue_localid': self.issue.localidentifier,
                 'localid': self.localidentifier,
             })
+        return None
 
     @property
     def open_access(self):

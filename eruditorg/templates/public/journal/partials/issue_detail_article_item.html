@@ -15,9 +15,9 @@
       </a>
     </li>
     {% endswitch %}
-    {% if article.fedora_object.pdf.exists and article.publication_allowed %}
+    {% if article.pdf_url %}
     <li>
-      <a class="tool-btn" href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?{{ article|prepublication_querystring }}{% endif %}" title="{% trans 'Télécharger' %}" target="_blank">
+      <a class="tool-btn" href="{{ article.pdf_url }}" title="{% trans 'Télécharger' %}" target="_blank">
         <span class="toolbox-pdf">PDF</span>
       </a>
     </li>

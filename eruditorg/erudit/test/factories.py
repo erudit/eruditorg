@@ -192,6 +192,11 @@ class ArticleFactory(factory.django.DjangoModelFactory):
             else:
                 repository.api.register_article(obj.pid)
 
+    @factory.post_generation
+    def with_pdf(obj, create, extracted, **kwargs):
+        if obj.localidentifier and extracted:
+            repository.api.register_article(obj.pid, with_pdf=True)
+
 
 class OpenAccessArticleFactory(ArticleFactory):
     issue = factory.SubFactory(

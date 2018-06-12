@@ -76,6 +76,7 @@ FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <datastream dsid="UNIT" label="UNIT" mimeType="text/xml"/>
 <datastream dsid="DC" label="Dublin Core Record for this object" mimeType="text/xml"/>
 <datastream dsid="RELS-EXT" label="Relationships" mimeType="application/rdf+xml"/>
+{extra}
 </objectDatastreams>
 """ # noqa
 
@@ -95,6 +96,7 @@ class FakeAPI(ApiFacade):
         super().__init__(self.BASE_URL, 'username', 'password')
         self._publication_content_map = {}
         self._article_content_map = {}
+        self._articles_with_pdf = set()
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
         raise AssertionError()  # we should never get there in a testing environment
@@ -127,11 +129,13 @@ class FakeAPI(ApiFacade):
         if pid not in self._publication_content_map:
             self._publication_content_map[pid] = None
 
-    def register_article(self, pid):
+    def register_article(self, pid, with_pdf=False):
         # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
         # but for when you don't really care about the contents.
         if pid not in self._article_content_map:
             self._article_content_map[pid] = None
+        if with_pdf:
+            self._articles_with_pdf.add(pid)
 
     def set_publication_xml(self, pid, xml):
         if isinstance(xml, str):
@@ -171,7 +175,11 @@ class FakeAPI(ApiFacade):
                         pid=pid, full_url=self.BASE_URL + url
                     ).encode()
                 elif not subselection:  # we want a datastream list
-                    result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid).encode()
+                    if pid in self._articles_with_pdf:
+                        extra = "<datastream dsid=\"PDF\" label=\"PDF\" mimeType=\"application/pdf\"/>"  # noqa
+                    else:
+                        extra = ""
+                    result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid, extra=extra).encode()
                 elif subselection == '/ERUDITXSD300/content':
                     result = self.get_article_xml(pid) or b''
             elif len(pidelems) == 3:  # issue
