@@ -35,8 +35,6 @@ from core.metrics.conf import settings as metrics_settings
 from apps.public.journal.views import ArticleMediaView
 from apps.public.journal.views import ArticleRawPdfView
 
-from base.test.testcases import EruditClientTestCase
-
 FIXTURE_ROOT = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 
@@ -816,7 +814,7 @@ class TestLegacyUrlsRedirection:
         assert resp.status_code == 301
 
 
-class TestArticleFallbackRedirection(EruditClientTestCase):
+class TestArticleFallbackRedirection:
 
     FALLBACK_URL = settings.FALLBACK_BASE_URL
 
@@ -905,17 +903,17 @@ class TestArticleFallbackRedirection(EruditClientTestCase):
         return reverse(url, kwargs=kwargs)
 
     def test_legacy_url_for_nonexistent_journals_redirects_to_fallback_website(self, journal_url):
-        response = self.client.get(journal_url)
+        response = Client().get(journal_url)
         redirect_url = response.url
         assert self.FALLBACK_URL in redirect_url
 
     def test_legacy_url_for_nonexistent_issues_redirect_to_fallback_website(self, issue_url):
-        response = self.client.get(issue_url)
+        response = Client().get(issue_url)
         redirect_url = response.url
         assert self.FALLBACK_URL in redirect_url
 
     def test_legacy_url_for_nonexistent_article_redirect_to_fallback_website(self, article_url):
-        response = self.client.get(article_url)
+        response = Client().get(article_url)
         redirect_url = response.url
         assert self.FALLBACK_URL in redirect_url
 

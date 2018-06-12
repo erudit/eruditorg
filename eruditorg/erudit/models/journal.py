@@ -977,6 +977,10 @@ class Article(FedoraMixin):
     def title(self):
         return self.erudit_object.get_title(formatted=True, html=False)
 
+    def can_cite(self):
+        # We cannot cite articles we don't have in fedora. ref #1491
+        return self.is_in_fedora
+
     @property
     @catch_and_log
     def html_title(self):
@@ -1167,10 +1171,6 @@ class Article(FedoraMixin):
     @property
     def type_display(self):
         return self.TYPE_DISPLAY.get(self.type, self.type)
-
-    def can_cite(self):
-        # We cannot cite articles we don't have in fedora. ref #1491
-        return self.is_in_fedora
 
 
 class JournalInformation(models.Model):
