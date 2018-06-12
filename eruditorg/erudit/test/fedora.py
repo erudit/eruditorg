@@ -78,6 +78,7 @@ FAKE_ARTICLE_DATASTREAM_LIST = """<?xml version="1.0" encoding="UTF-8"?>
 <datastream dsid="UNIT" label="UNIT" mimeType="text/xml"/>
 <datastream dsid="DC" label="Dublin Core Record for this object" mimeType="text/xml"/>
 <datastream dsid="RELS-EXT" label="Relationships" mimeType="application/rdf+xml"/>
+{extra}
 </objectDatastreams>
 """ # noqa
 
@@ -96,6 +97,7 @@ class FakeAPI(ApiFacade):
     def __init__(self):
         super().__init__(self.BASE_URL, 'username', 'password')
         self._content_map = {}
+        self._articles_with_pdf = set()
 
     def _make_request(self, reqmeth, url, *args, **kwargs):
         raise AssertionError()  # we should never get there in a testing environment
@@ -145,6 +147,9 @@ class FakeAPI(ApiFacade):
     register_publication = register_pid
     register_article = register_pid
 
+    def add_pdf_to_article(self, pid):
+        self._articles_with_pdf.add(pid)
+
     def set_xml_for_pid(self, pid, xml):
         if isinstance(xml, str):
             xml = xml.encode('utf-8')
@@ -183,9 +188,13 @@ class FakeAPI(ApiFacade):
         newxml = dom_wrapper.tostring()
         self.set_xml_for_pid(pid, newxml)
 
-    def add_article_to_parent_publication(self, article, publication_allowed=True):
+    def add_article_to_parent_publication(
+            self, article, publication_allowed=True, external_pdf_url=None):
         with self.open_publication(article.issue.pid) as wrapper:
-            wrapper.add_article(article, publication_allowed=publication_allowed)
+            wrapper.add_article(
+                article,
+                publication_allowed=publication_allowed,
+                external_pdf_url=external_pdf_url)
 
     def add_publication_to_parent_journal(self, issue):
         with self.open_journal(issue.journal.pid) as wrapper:
@@ -209,7 +218,11 @@ class FakeAPI(ApiFacade):
                         pid=pid, full_url=self.BASE_URL + url
                     ).encode()
                 elif not subselection:  # we want a datastream list
-                    result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid).encode()
+                    if pid in self._articles_with_pdf:
+                        extra = "<datastream dsid=\"PDF\" label=\"PDF\" mimeType=\"application/pdf\"/>"  # noqa
+                    else:
+                        extra = ""
+                    result = FAKE_ARTICLE_DATASTREAM_LIST.format(pid=pid, extra=extra).encode()
                 elif subselection == '/ERUDITXSD300/content':
                     result = self.get_article_xml(pid) or b''
             elif len(pidelems) == 3:  # issue

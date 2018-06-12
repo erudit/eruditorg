@@ -464,6 +464,27 @@ class TestArticle:
         )
         assert article.get_absolute_url() == 'http://example.com'
 
+    def test_pdf_url_when_no_pdf(self):
+        article = ArticleFactory()
+        assert article.pdf_url is None
+
+    def test_pdf_url_when_fedora_pdf(self):
+        article = ArticleFactory(with_pdf=True)
+        assert article.pdf_url
+
+    def test_pdf_url_when_external_pdf(self):
+        article = ArticleFactory(external_pdf_url='http://example.com')
+        assert article.pdf_url == 'http://example.com'
+
+    def test_pdf_url_when_issue_external_pdf(self):
+        issue = IssueFactory(external_url='http://example.com')
+        article = ArticleFactory(issue=issue, with_pdf=True)
+        assert article.pdf_url is None
+
+    def test_pdf_url_when_not_publication_allowed(self):
+        article = ArticleFactory(publication_allowed=False, with_pdf=True)
+        assert article.pdf_url is None
+
 
 def test_journaltype_can_return_embargo_duration_in_days():
     journal_type = JournalTypeFactory.create(code='S')

@@ -840,6 +840,11 @@ class Article(FedoraMixin):
             )
         return None
 
+    def get_summary_node(self):
+        summary_tree = self.issue.fedora_object.summary.content.node
+        xpath = './/article[@idproprio="{}"]'.format(self.localidentifier)
+        return summary_tree.find(xpath)
+
     @staticmethod
     def from_issue_and_localidentifier(issue, localidentifier):
         article = Article(issue, localidentifier)
@@ -922,21 +927,26 @@ class Article(FedoraMixin):
 
     @property
     def pdf_url(self):
-        urlpdf = self.erudit_object._dom.find('.//urlpdf')
-        if urlpdf is not None and urlpdf.text:
-            # If we have a external pdf url, then it's always the proper one to return.
-            return urlpdf.text
+        if not self.publication_allowed:
+            return None
+        summary_node = self.get_summary_node()
+        if summary_node is not None:
+            urlpdf = summary_node.find('urlpdf')
+            if urlpdf is not None and urlpdf.text:
+                # If we have a external pdf url, then it's always the proper one to return.
+                return urlpdf.text
         if self.issue.external_url:
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
             return None
-        if self.fedora_object:
+        if self.fedora_object and self.fedora_object.pdf.exists:
             return reverse('public:journal:article_raw_pdf', kwargs={
                 'journal_code': self.issue.journal.code,
                 'issue_slug': self.issue.volume_slug,
                 'issue_localid': self.issue.localidentifier,
                 'localid': self.localidentifier,
             })
+        return None
 
     def cite_url(self, type):
         return reverse('public:journal:article_citation_{}'.format(type), kwargs={
@@ -1090,9 +1100,10 @@ class Article(FedoraMixin):
     @cached_property
     @catch_and_log
     def publication_allowed(self):
-        summary_tree = self.issue.fedora_object.summary.content.node
-        xpath = './/article[@idproprio="{}"]/accessible'.format(self.localidentifier)
-        node = summary_tree.find(xpath)
+        summary_node = self.get_summary_node()
+        if summary_node is None:
+            return None
+        node = summary_node.find('accessible')
         return node is None or node.text != 'non'
 
     @cached_property

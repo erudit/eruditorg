@@ -15,7 +15,7 @@
       </a>
     </li>
     {% endswitch %}
-    {% if article.has_pdf and article.publication_allowed %}
+    {% if article.pdf_url %}
     <li>
       <a class="tool-btn"
          href="{{ article.pdf_url }}{% if not article.issue.is_published %}?{{ article|prepublication_querystring }}{% endif %}"

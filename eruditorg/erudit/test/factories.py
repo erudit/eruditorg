@@ -181,7 +181,7 @@ class ArticleRef(Article):
     def __init__(
             self, issue, localidentifier, from_fixture=None, title=None, type=None,
             section_titles=None, publication_allowed=True, authors=None, add_to_fedora_issue=True,
-            solr_attrs=None):
+            with_pdf=False, external_pdf_url=None, solr_attrs=None):
         self.issue = issue
         self.localidentifier = localidentifier
         if self.pid is not None:
@@ -199,7 +199,11 @@ class ArticleRef(Article):
                         wrapper.set_type(type)
             if add_to_fedora_issue:
                 repository.api.add_article_to_parent_publication(
-                    self, publication_allowed=publication_allowed)
+                    self,
+                    publication_allowed=publication_allowed,
+                    external_pdf_url=external_pdf_url)
+            if with_pdf:
+                repository.api.add_pdf_to_article(self.pid)
         super().__init__(issue, localidentifier)
         if self.pid is not None and self.issue.is_published:
             solr_client = pysolr.Solr()
