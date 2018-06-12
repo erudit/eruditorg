@@ -84,6 +84,22 @@ class TestJournal:
             date_published=dt.datetime.now() + dt.timedelta(days=30))
         assert journal.last_issue == issue_2
 
+    def test_last_issue_of_renamed_journal(self):
+        # A renamed journal ends up with a list of issue pids of *all* its issues, even when
+        # its journal pid has changed. When we call get_published_issues_pids(), we actually want
+        # all issues to show up, so that's ok. However, for last_issue, it's special: we want the
+        # last published issue *that is part of the journal before the rename*.
+        j1 = JournalFactory()
+        j2 = JournalFactory(previous_journal=j1)
+        j1.next_journal = j2
+        j1.save()
+        i1 = IssueFactory(journal=j1)
+        i2 = IssueFactory(journal=j2)
+        repository.api.add_publication_to_parent_journal(i1, journal=i2.journal)
+        repository.api.add_publication_to_parent_journal(i2, journal=i1.journal)
+        assert j1.last_issue == i1
+        assert j2.last_issue == i2
+
     def test_knows_if_it_is_provided_by_fedora(self):
         journal = JournalFactory(localidentifier='dummy139')
         assert journal.provided_by_fedora

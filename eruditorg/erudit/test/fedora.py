@@ -196,8 +196,10 @@ class FakeAPI(ApiFacade):
                 publication_allowed=publication_allowed,
                 external_pdf_url=external_pdf_url)
 
-    def add_publication_to_parent_journal(self, issue):
-        with self.open_journal(issue.journal.pid) as wrapper:
+    def add_publication_to_parent_journal(self, issue, journal=None):
+        if journal is None:
+            journal = issue.journal
+        with self.open_journal(journal.pid) as wrapper:
             wrapper.add_issue(issue)
 
     def get(self, url, **kwargs):

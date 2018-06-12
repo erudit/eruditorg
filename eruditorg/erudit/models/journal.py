@@ -361,7 +361,12 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     @cached_property
     def last_issue(self):
         if self.is_in_fedora:
+            journal_pid = self.pid
             pids = self.erudit_object.get_published_issues_pids()
+            # Fedora holds pids for all issues of the journal even when it has been renamed. When
+            # we query for last_issue for a renamed journal, we want it to return the last_issue
+            # of the journal *before* the rename, hence, the pid prefix filter below.
+            pids = [pid for pid in pids if pid.startswith(journal_pid)]
             if pids:
                 return Issue.from_fedora_pid(pids[0])
             else:
