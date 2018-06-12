@@ -304,7 +304,7 @@ class ResultsFilterForm(forms.Form):
 
             self.fields['filter_article_types'].choices = self._get_aggregation_choices(
                 aggregations['article_type'],
-                sort_key=lambda x: x[1],
+                sort_key=lambda x: (x[1], x[0]),
                 sort_reverse=True,
                 display_names=dict(ARTICLE_TYPES_CHOICES),
             )
@@ -318,12 +318,12 @@ class ResultsFilterForm(forms.Form):
 
             self.fields['filter_collections'].choices = self._get_aggregation_choices(
                 aggregations['collection'],
-                sort_key=lambda x: x[1],
+                sort_key=lambda x: (x[1], x[0]),
                 sort_reverse=True
             )
             self.fields['filter_authors'].choices = self._get_aggregation_choices(
                 aggregations['author'],
-                sort_key=lambda x: x[1],
+                sort_key=lambda x: (x[1], x[0]),
                 sort_reverse=True
             )
 
@@ -335,7 +335,7 @@ class ResultsFilterForm(forms.Form):
 
             self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
                 aggregations['publication_type'],
-                sort_key=lambda x: x[1], sort_reverse=True,
+                sort_key=lambda x: (x[1], x[0]), sort_reverse=True,
                 display_names=dict(PUB_TYPES_CHOICES)
             )
 
