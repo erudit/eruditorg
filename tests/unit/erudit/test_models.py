@@ -466,10 +466,15 @@ class TestArticle:
             Article.from_fedora_ids(issue.journal.code, issue.localidentifier, 'dummy123')
 
     @pytest.mark.parametrize('collection_code,is_external', [('erudit', False), ('unb', True)])
-    def test_is_external(self, collection_code, is_external):
+    def test_is_external_by_collection(self, collection_code, is_external):
         # an article is "external" if its collection code is "unb"
         article = ArticleFactory(issue__journal__collection__code=collection_code)
         assert article.is_external == is_external
+
+    def test_is_external_from_external_url(self):
+        # An article that has an external issue is external
+        article = ArticleFactory(issue__external_url='http://example.com')
+        assert article.is_external
 
     def test_absolute_url_when_external(self):
         # When an article is "external", its absolute_url is the value of its first "URLDocument"

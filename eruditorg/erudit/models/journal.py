@@ -628,7 +628,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
     @property
     def is_external(self):
-        return self.journal.collection.code == 'unb'
+        return bool(self.external_url) or self.journal.collection.code == 'unb'
 
     @property
     @catch_and_log
