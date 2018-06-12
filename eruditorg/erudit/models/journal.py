@@ -2,6 +2,7 @@ import copy
 import datetime as dt
 import dateutil.relativedelta as dr
 from hashlib import md5
+from functools import wraps
 
 from lxml import etree as et
 
@@ -775,10 +776,32 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         return self.title
 
 
-# Implementation note: This class is transitioning from a Django model to a Solr/Fedora model. This
-#                      transition is a big one and it's now in a hybrid state where it seems that
-#                      it's role is blurred with the role of erudit.solr.models.Article. It's
-#                      temporary. In time, these two models will be one.
+def fedora_only(method):
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        if not self.is_in_fedora:
+            return None
+        return method(self, *args, **kwargs)
+
+    return wrapper
+
+
+# This is a read-only Hybrid Article proxy. It is instantiated through a localidentifier and proxies
+# information from either fedora, solr or both.
+#
+# Whenever we ask for an information about an article, we check if fedora (erudit_object) is loaded.
+# If it's not, we check if our solr_object has the information we need. If erudit_object is loaded,
+# we always fetch from it first and fall back to solr_object if erudit_object doesn't have what we
+# need.
+#
+# The goal here is to open the door to relying on solr more and more and avoiding fedora XML
+# loading. But as of now, In most cases, your Article is already going to come with a fedora object
+# pre-loaded. The only case where Article isn't initialized with fedora pre-loaded is
+# "from_solr_object()". But this is used in search results and search results use some fedora-only
+# attributes. So we pretty much always load fedora.
+#
+# But slowly, we'll get there.
 
 class Article(FedoraMixin):
     class DoesNotExist(ObjectDoesNotExist):
@@ -814,14 +837,21 @@ class Article(FedoraMixin):
         return self.localidentifier is not None and self.localidentifier == other.localidentifier
 
     def __getattr__(self, name):
-        if name.startswith('_'):
-            return super().__getattr__(name)
-        if self.fedora_is_loaded:
+        if name.startswith('_') or name in {'erudit_object', 'solr_object'}:
+            # Something's wrong, avoid infinite recursion
+            raise AttributeError()
+        if self.fedora_is_loaded():
+            # if fedora is already loaded, always check in there first.
             try:
                 return getattr(self.erudit_object, name)
             except AttributeError:
                 pass
-        return getattr(self.solr_object, name)
+        try:
+            # If fedora isn't loaded or if it doesn't have out attr, check in solr.
+            return getattr(self.solr_object, name)
+        except AttributeError:
+            # If solr doesn't have our attr, load fedora and check again
+            return getattr(self.erudit_object, name)
 
     # Fedora-related methods and properties
     # --
@@ -867,7 +897,7 @@ class Article(FedoraMixin):
     @property
     def solr_object(self):
         if self._solr_object is None:
-            self._solr_object = SolrDocument.from_solr_id(self.solr_id, specialized_class=False)
+            self._solr_object = SolrDocument.from_solr_id(self.solr_id)
         return self._solr_object
 
     @staticmethod
@@ -898,6 +928,10 @@ class Article(FedoraMixin):
     # --
 
     def get_absolute_url(self):
+        return self.url
+
+    @property
+    def url(self):
         if self.is_external:
             return self.solr_object.url
         else:
@@ -926,15 +960,10 @@ class Article(FedoraMixin):
         ))
 
     @property
+    @fedora_only
     def pdf_url(self):
         if not self.publication_allowed:
             return None
-        summary_node = self.get_summary_node()
-        if summary_node is not None:
-            urlpdf = summary_node.find('urlpdf')
-            if urlpdf is not None and urlpdf.text:
-                # If we have a external pdf url, then it's always the proper one to return.
-                return urlpdf.text
         if self.issue.external_url:
             # special case. if our issue has an external_url, regardless of whether we have a
             # fedora object, we *don't* have a PDF url. See the RECMA situation at #1651
@@ -946,6 +975,12 @@ class Article(FedoraMixin):
                 'issue_localid': self.issue.localidentifier,
                 'localid': self.localidentifier,
             })
+        summary_node = self.get_summary_node()
+        if summary_node is not None:
+            urlpdf = summary_node.find('urlpdf')
+            if urlpdf is not None and urlpdf.text:
+                # If we have a external pdf url, then it's always the proper one to return.
+                return urlpdf.text
         return None
 
     def cite_url(self, type):
@@ -985,7 +1020,10 @@ class Article(FedoraMixin):
     @property
     @catch_and_log
     def title(self):
-        return self.erudit_object.get_title(formatted=True, html=False)
+        if self.fedora_is_loaded():
+            return self.erudit_object.get_title(formatted=True, html=False)
+        else:
+            return self.solr_object.title
 
     def can_cite(self):
         # We cannot cite articles we don't have in fedora. ref #1491
@@ -998,11 +1036,13 @@ class Article(FedoraMixin):
 
     @property
     @catch_and_log
+    @fedora_only
     def abstracts(self):
         return self.erudit_object.abstracts
 
     @property
     @catch_and_log
+    @fedora_only
     def abstract(self):
         """ Returns an abstract that can be used with the current language. """
         abstracts = self.abstracts
@@ -1058,6 +1098,7 @@ class Article(FedoraMixin):
 
     @property
     @catch_and_log
+    @fedora_only
     def processing(self):
         processing = self.erudit_object.processing
         processing_mapping = {

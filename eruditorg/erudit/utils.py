@@ -116,7 +116,7 @@ def catch_and_log(func):
         try:
             return func(*args, **kwargs)
         except Exception:
-            logger.exception("Exception raised in a @catch_and_log function")
+            logger.exception("Exception raised in a @catch_and_log function %s", func.__name__)
             return None
 
     return wrapper

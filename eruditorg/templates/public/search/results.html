@@ -294,7 +294,7 @@
                   {% endwith %}
                   {% if document.processing == 'C' %}
                   <li>
-                    <a class="tool-btn" href="{{ article_url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+                    <a class="tool-btn" href="{{ document.url }}" title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
                       <span class="toolbox-html">HTML</span>
                       <span class="tools-label">{% trans "Lire en texte intégral" %}</span>
                     </a>

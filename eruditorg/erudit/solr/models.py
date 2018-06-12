@@ -19,12 +19,9 @@ class SolrDocument:
         self.solr_data = solr_data
 
     @staticmethod
-    def from_solr_id(solr_id, specialized_class=True):
+    def from_solr_id(solr_id):
         solr_data = get_solr_data_from_id(solr_id)
-        if specialized_class:
-            return get_model_instance(solr_data)
-        else:
-            return SolrDocument(solr_data)
+        return get_model_instance(solr_data)
 
     def can_cite(self):
         return False
@@ -118,6 +115,7 @@ class Article(SolrDocument):
         article_type = self.solr_data['TypeArticle_fac']
         return {
             'Compterendu': 'compterendu',
+            'Compte rendu': 'compterendu',
             'Autre': 'autre',
             'Note': 'note',
         }.get(article_type, 'article')
@@ -169,8 +167,11 @@ def get_model_instance(solr_data):
         return Thesis(solr_data)
     elif generic.document_type == 'article':
         try:
-            return erudit_models.Article.from_solr_object(SolrDocument(solr_data))
+            return erudit_models.Article.from_solr_object(Article(solr_data))
         except erudit_models.Article.DoesNotExist:
+            # The only case where this can happen is if we don't have a parent Issue. Otherwise,
+            # even when erudit_models.Article referes to an article that isn't in fedora, it's
+            # supposed to do fine.
             return Article(solr_data)
     else:
         return SolrDocument(solr_data)
