@@ -10,6 +10,7 @@ from apps.public.auth.forms import UserParametersForm
 
 
 class TestPasswordResetForm(TestCase):
+
     def test_can_properly_choose_standard_users_with_usable_passwords(self):
         user = UserFactory(email='foobar@example.com')
         form = PasswordResetForm({})
