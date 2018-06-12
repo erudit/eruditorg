@@ -183,8 +183,9 @@ class Command(BaseCommand):
 
 
 @transaction.atomic
-def import_restriction_subscriber(restriction_subscriber, subscription_qs):
-    logger = structlog.get_logger(__name__)
+def import_restriction_subscriber(restriction_subscriber, subscription_qs, logger=None):
+    if not logger:
+        logger = structlog.get_logger(__name__)
     logger = logger.bind(
         subscriber_id=restriction_subscriber.pk
     )
@@ -282,12 +283,13 @@ def import_restriction_subscriber(restriction_subscriber, subscription_qs):
 
     for subscription in subscription_qs.all():
         import_restriction_subscription(
-            subscription, restriction_subscriber, restriction_profile)
+            subscription, restriction_subscriber, restriction_profile, logger=logger)
 
 
 def import_restriction_subscription(
-        restriction_subscription, restriction_subscriber, restriction_profile):
-    logger = structlog.get_logger(__name__)
+        restriction_subscription, restriction_subscriber, restriction_profile, logger=None):
+    if not logger:
+        logger = structlog.get_logger(__name__)
     logger = logger.bind(
         subscriber_id=restriction_subscriber.pk,
         subscription_id=restriction_subscription.pk
@@ -311,10 +313,10 @@ def import_restriction_subscription(
         logger.error("Journal.DoesNotExist", titrerevabr=restriction_journal.titrerevabr)
         return
 
-    subscription, created = JournalAccessSubscription.objects.get_or_create(
+    subscription, subscription_created = JournalAccessSubscription.objects.get_or_create(
         organisation=restriction_profile.organisation)
     logger = logger.bind(subscription_pk=subscription.pk)
-    if created:
+    if subscription_created:
         created_objects['subscription'] += 1
         logger.info("subscription.created")
     if not subscription.journals.filter(pk=journal.pk):
@@ -323,79 +325,79 @@ def import_restriction_subscription(
 
     # creates the subscription period
     # --
-
-    start_date = dt.date(restriction_subscription.anneeabonnement, 2, 1)
-    end_date = dt.date(restriction_subscription.anneeabonnement + 1, 2, 1)
-    subscription_period, created = JournalAccessSubscriptionPeriod.objects.get_or_create(
-        subscription=subscription,
-        start=start_date,
-        end=end_date
-    )
-
-    if created:
-        created_objects['period'] += 1
-        logger.info(
-            'subscriptionperiod.created',
-            pk=subscription_period.pk,
+    if subscription_created:
+        start_date = dt.date(restriction_subscription.anneeabonnement, 2, 1)
+        end_date = dt.date(restriction_subscription.anneeabonnement + 1, 2, 1)
+        subscription_period, created = JournalAccessSubscriptionPeriod.objects.get_or_create(
+            subscription=subscription,
             start=start_date,
             end=end_date
         )
 
-    try:
-        subscription_period.clean()
-    except ValidationError as ve:
-        # We are saving multiple periods for multiple journals under the same subscription
-        # instance so period validation errors can happen.
-        logger.error('subscriptionperiod.validationerror')
-        raise
-    else:
-        subscription_period.save()
-
-    # create the subscription referer
-    # --
-
-    if restriction_subscriber.referer:
-        referer, created = InstitutionReferer.objects.get_or_create(
-            subscription=subscription,
-            referer=restriction_subscriber.referer
-        )
-
         if created:
-            logger.info("referer.created", referer=restriction_subscriber.referer)
+            created_objects['period'] += 1
+            logger.info(
+                'subscriptionperiod.created',
+                pk=subscription_period.pk,
+                start=start_date,
+                end=end_date
+            )
 
-    # creates the IP whitelist associated with the subscription
-    # --
+        try:
+            subscription_period.clean()
+        except ValidationError as ve:
+            # We are saving multiple periods for multiple journals under the same subscription
+            # instance so period validation errors can happen.
+            logger.error('subscriptionperiod.validationerror')
+            raise
+        else:
+            subscription_period.save()
 
-    restriction_subscriber_ips_set1 = Ipabonne.objects.filter(
-        abonneid=str(restriction_subscriber.pk))
-    for ip in restriction_subscriber_ips_set1:
-        ip_start, ip_end = get_ip_range_from_ip(ip.ip)
-        ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
-            subscription=subscription, ip_start=ip_start, ip_end=ip_end)
-        if created:
-            created_objects['iprange'] += 1
-            logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
+        # create the subscription referer
+        # --
 
-    restriction_subscriber_ips_set2 = Adressesip.objects.filter(
-        abonneid=restriction_subscriber.pk)
-    for ip in restriction_subscriber_ips_set2:
-        ip_start, ip_end = get_ip_range_from_ip(ip.ip)
-        ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
-            subscription=subscription, ip_start=ip_start, ip_end=ip_end)
-        if created:
-            created_objects['iprange'] += 1
-            logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
+        if restriction_subscriber.referer:
+            referer, created = InstitutionReferer.objects.get_or_create(
+                subscription=subscription,
+                referer=restriction_subscriber.referer
+            )
 
-    restriction_subscriber_ips_ranges = Ipabonneinterval.objects.filter(
-        abonneid=restriction_subscriber.pk)
-    for ip_range in restriction_subscriber_ips_ranges:
-        ip_start = get_ip(ip_range.debutinterval, repl='0')
-        ip_end = get_ip(ip_range.fininterval, repl='255')
-        ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
-            subscription=subscription, ip_start=ip_start, ip_end=ip_end)
-        if created:
-            created_objects['iprange'] += 1
-            logger.info("ipabonneinterval.created", ip_start=ip_start, ip_end=ip_end)
+            if created:
+                logger.info("referer.created", referer=restriction_subscriber.referer)
+
+        # creates the IP whitelist associated with the subscription
+        # --
+
+        restriction_subscriber_ips_set1 = Ipabonne.objects.filter(
+            abonneid=str(restriction_subscriber.pk))
+        for ip in restriction_subscriber_ips_set1:
+            ip_start, ip_end = get_ip_range_from_ip(ip.ip)
+            ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
+                subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+            if created:
+                created_objects['iprange'] += 1
+                logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
+
+        restriction_subscriber_ips_set2 = Adressesip.objects.filter(
+            abonneid=restriction_subscriber.pk)
+        for ip in restriction_subscriber_ips_set2:
+            ip_start, ip_end = get_ip_range_from_ip(ip.ip)
+            ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
+                subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+            if created:
+                created_objects['iprange'] += 1
+                logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
+
+        restriction_subscriber_ips_ranges = Ipabonneinterval.objects.filter(
+            abonneid=restriction_subscriber.pk)
+        for ip_range in restriction_subscriber_ips_ranges:
+            ip_start = get_ip(ip_range.debutinterval, repl='0')
+            ip_end = get_ip(ip_range.fininterval, repl='255')
+            ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
+                subscription=subscription, ip_start=ip_start, ip_end=ip_end)
+            if created:
+                created_objects['iprange'] += 1
+                logger.info("ipabonneinterval.created", ip_start=ip_start, ip_end=ip_end)
 
 
 def get_ip_range_from_ip(ip):
