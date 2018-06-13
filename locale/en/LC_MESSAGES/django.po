@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 14:17-0500\n"
+"POT-Creation-Date: 2018-06-13 14:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Emilie Chouinard <emilie.chouinard@erudit.org>, 2018\n"
 "Language-Team: English (https://www.transifex.com/erudit/teams/65752/en/)\n"
@@ -4118,6 +4118,7 @@ msgid "Cliquez pour copier le DOI de cet article."
 msgstr "Click to copy the DOI to your clipboard."
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:181
+#: templates/public/journal/issue_detail.html:156
 msgid "Diffusion numérique"
 msgstr "Publication date"
 
@@ -4372,12 +4373,6 @@ msgid ""
 msgstr ""
 "You will be redirected to the journal's website in order to read these "
 "articles."
-
-#: templates/public/journal/issue_detail.html:156
-#, fuzzy
-#| msgid "numérique"
-msgid "Diffusion numérique :"
-msgstr "digital"
 
 #: templates/public/journal/issue_detail.html:164
 #: templates/public/journal/journal_base.html:53
@@ -6782,3 +6777,8 @@ msgstr[1] ""
 "\n"
 "The corpus includes %(counter)s articles.\n"
 "          "
+
+#, fuzzy
+#~| msgid "numérique"
+#~ msgid "Diffusion numérique :"
+#~ msgstr "digital"

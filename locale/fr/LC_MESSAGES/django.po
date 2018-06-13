@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 14:17-0500\n"
+"POT-Creation-Date: 2018-06-13 14:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3897,6 +3897,7 @@ msgid "Cliquez pour copier le DOI de cet article."
 msgstr ""
 
 #: templates/public/journal/eruditxsd300_to_html.xsl:181
+#: templates/public/journal/issue_detail.html:156
 msgid "Diffusion numérique"
 msgstr ""
 
@@ -4136,10 +4137,6 @@ msgstr ""
 msgid ""
 "La lecture de ces articles nécessite une redirection vers le site de la "
 "revue."
-msgstr ""
-
-#: templates/public/journal/issue_detail.html:156
-msgid "Diffusion numérique :"
 msgstr ""
 
 #: templates/public/journal/issue_detail.html:164
