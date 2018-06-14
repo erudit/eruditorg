@@ -536,7 +536,10 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
         if erudit_object is None:
             erudit_object = self.erudit_object
 
-        self.year = erudit_object.publication_year
+        # TODO: this "or" below was hotfixed without test because the proper
+        # tools to test this (domchange at the publication level) are in the
+        # de-article branch. Test null publication_year properly after merge.
+        self.year = erudit_object.publication_year or dt.date.today().year
         self.publication_period = erudit_object.publication_period
         self.volume = erudit_object.volume
         self.number = erudit_object.number
