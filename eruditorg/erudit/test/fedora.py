@@ -138,11 +138,13 @@ class FakeAPI(ApiFacade):
         else:
             return None
 
-    def register_pid(self, pid):
+    def register_pid(self, pid, with_pdf=False):
         # tell the FakeAPI to return the default article fixture for pid. Same as set_article_xml(),
         # but for when you don't really care about the contents.
         if pid not in self._content_map:
             self._content_map[pid] = None
+        if with_pdf:
+            self._articles_with_pdf.add(pid)
 
     register_publication = register_pid
     register_article = register_pid

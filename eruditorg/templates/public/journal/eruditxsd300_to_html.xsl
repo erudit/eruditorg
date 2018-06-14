@@ -178,6 +178,8 @@
                   </span>
                 </dd>
               </xsl:if>
+              <dt>{% trans "Diffusion numérique" %} :</dt>
+              <dd>{{ article.issue.date_published }}</dd>
             </dl>
             <xsl:apply-templates select="liminaire/erratum"/>
             <xsl:apply-templates select="admin/histpapier"/>
