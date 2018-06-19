@@ -183,7 +183,14 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             results=results, documents=results.get('results')))
 
     def forms_invalid(self, search_form, options_form):
-        logger.error('search.form.invalid', extra={'stack': True})
+        GET = self.request.GET
+        if 'basic_search_term' in GET and not GET.get('basic_search_term'):
+            # This is simply a case of clicking on homepage's search magnifier without a search
+            # param. We don't want to log those, we just want to silently redirect.
+            pass
+        else:
+            # We have some unhandled form validation here that we'd like to know about.
+            logger.error('search.form.invalid', extra={'stack': True})
         return HttpResponseRedirect(
             '{}?{}'.format(reverse('public:search:advanced_search'), self.request.GET.urlencode()))
 
