@@ -243,7 +243,7 @@ class ResultsFilterForm(forms.Form):
         ),
         required=False)
     filter_languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
-    filter_collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
+    filter_collections = forms.MultipleChoiceField(label=_('Revues'), required=False)
     filter_authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
     filter_funds = forms.MultipleChoiceField(
         label=_('Fonds'),
