@@ -14,6 +14,9 @@ from pathlib import Path
 from structlog import configure
 from structlog.stdlib import LoggerFactory
 
+from structlog.processors import JSONRenderer
+from datetime import datetime
+
 DEBUG = True
 COMPRESS_ENABLED = True
 
@@ -400,7 +403,20 @@ LOGGING = {
     },
 }
 
-configure(logger_factory=LoggerFactory())
+
+def add_timestamp(_, __, event_dict):
+    event_dict['timestamp'] = datetime.utcnow().strftime("%x %X")
+    return event_dict
+
+
+configure(
+    logger_factory=LoggerFactory(),
+    processors=[
+        add_timestamp,
+        JSONRenderer(sort_keys=True)
+    ]
+)
+
 
 # Raven settings
 RAVEN_CONFIG = {
