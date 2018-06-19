@@ -1,8 +1,18 @@
 from datetime import datetime as dt
+import random
 import factory
 import factory.fuzzy
 
-from ..models import Abonne, Revue, Revueabonne
+from ..models import Abonne, Revue, Revueabonne, Ipabonne
+
+
+class IpabonneFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Ipabonne
+
+    ip = ".".join(map(str, (random.randint(0, 255) for _ in range(4))))
+    abonneid = factory.fuzzy.FuzzyText()
+    id = factory.Sequence(lambda n: str(n))
 
 
 class AbonneFactory(factory.django.DjangoModelFactory):

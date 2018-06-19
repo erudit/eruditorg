@@ -104,6 +104,21 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
         subscription.save()
 
 
+class DryRun(transaction.Atomic):
+
+    def __init__(self, using=None, savepoint=True, dry_run=False):
+        super().__init__(using, savepoint)
+        self.dry_run = dry_run
+
+    def __enter__(self):
+        super().__enter__()
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.dry_run:
+            transaction.set_rollback(True)
+        super().__exit__(exc_type, exc_value, traceback)
+
+
 class Command(BaseCommand):
     """ Import restrictions from the restriction database """
     help = 'Import data from the "restriction" database'
@@ -115,6 +130,11 @@ class Command(BaseCommand):
         )
 
         parser.add_argument(
+            '--dry-run', action='store_true', dest='dry_run', help="run in dry run mode",
+            default=False
+        )
+
+        parser.add_argument(
             '--year', action='store', dest='year', help="year to import", type=int,
             default=dt.datetime.now().year
         )
@@ -122,7 +142,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         organisation_id = options.get('organisation_id', None)
         year = options.get('year')
+        dry_run = options.get('dry_run')
+
         logger = structlog.get_logger(__name__)
+        if dry_run:
+            logger = logger.bind(dry_run=dry_run)
+
         restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement__gte=year)
 
         if organisation_id:
@@ -140,21 +165,21 @@ class Command(BaseCommand):
             to_process=len(restriction_subscriber_ids)
         )
 
-        for subscriber_id in restriction_subscriber_ids:
-            # Fetches the subscriber
-            try:
-                subscriber = Abonne.objects.get(pk=subscriber_id)
-            except Abonne.DoesNotExist:
-                logger.error('Abonne.DoesNotExist', abonne_id=subscriber_id)
-                raise ImportException
-            subscription_qs = restriction_subscriptions.filter(abonneid=subscriber_id)
-            try:
-                import_restriction_subscriber(subscriber, subscription_qs)
-            except ImportException:
-                pass
-        delete_stale_subscriptions(year, logger)
-
-        logger.info("import.finished", **created_objects)
+        with DryRun(dry_run=dry_run):
+            for subscriber_id in restriction_subscriber_ids:
+                # Fetches the subscriber
+                try:
+                    subscriber = Abonne.objects.get(pk=subscriber_id)
+                except Abonne.DoesNotExist:
+                    logger.error('Abonne.DoesNotExist', abonne_id=subscriber_id)
+                    raise ImportException
+                subscription_qs = restriction_subscriptions.filter(abonneid=subscriber_id)
+                try:
+                    import_restriction_subscriber(subscriber, subscription_qs, logger=logger)
+                except ImportException:
+                    pass
+            delete_stale_subscriptions(year, logger)
+            logger.info("import.finished", **created_objects)
 
 
 @transaction.atomic
