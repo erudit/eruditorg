@@ -325,7 +325,7 @@ def import_restriction_subscription(
 
     # creates the subscription period
     # --
-    if subscription_created:
+    if True:
         start_date = dt.date(restriction_subscription.anneeabonnement, 2, 1)
         end_date = dt.date(restriction_subscription.anneeabonnement + 1, 2, 1)
         subscription_period, created = JournalAccessSubscriptionPeriod.objects.get_or_create(
