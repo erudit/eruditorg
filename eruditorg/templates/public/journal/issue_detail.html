@@ -133,6 +133,12 @@
     {% endif %}
   </header>
   {% include "public/journal/partials/issue_detail_section.html" %}
+
+<p>
+  {% for copyright in issue.erudit_object.droitsauteur %}
+    <small>{{ copyright.text|safe }}</small>
+  {% endfor %}
+</p>
 </main>
 {% endcache %}
 {% endblock inner_main %}

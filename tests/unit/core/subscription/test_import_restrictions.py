@@ -1,13 +1,16 @@
 import pytest
 
+from django.core.management import call_command
+from django.contrib.auth import get_user_model
 
-from erudit.models.core import Organisation
+from erudit.models import Organisation, LegacyOrganisationProfile
 from erudit.test.factories import OrganisationFactory
 from core.accounts.models import LegacyAccountProfile
-from core.subscription.models import JournalAccessSubscription
+from core.subscription.models import JournalAccessSubscription, JournalAccessSubscriptionPeriod, InstitutionReferer
 from core.subscription.restriction.models import Revueabonne
+from core.subscription.test.factories import JournalAccessSubscriptionFactory, InstitutionIPAddressRange
 from core.subscription.restriction.test.factories import (
-    AbonneFactory, RevueFactory, RevueabonneFactory
+    AbonneFactory, RevueFactory, RevueabonneFactory, IpabonneFactory
 )
 from core.subscription.management.commands import import_restrictions
 
@@ -122,11 +125,11 @@ def test_user_email_is_updated_when_updated_at_the_source():
     profile = LegacyAccountProfile.objects.first()
     assert profile.user.email == abonne.courriel
 
+
 @pytest.mark.django_db
 def test_import_deletions():
     # Verify that subscription deletions are properly imported, that is, that deletions propagate.
     # Setup
-    legacy_organisation_profile = LegacyOrganisationProfileFactory()
     journal1 = JournalFactory.create()
     abonne1 = AbonneFactory.create()
     revue1 = RevueFactory.create(titrerevabr=journal1.code)
@@ -135,11 +138,74 @@ def test_import_deletions():
         revueid=revue1.revueid,
         anneeabonnement=2018)
 
-    subscription_qs = Revueabonne.objects
-    import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
+    assert JournalAccessSubscriptionPeriod.objects.count() == 0
+    call_command("import_restrictions", *[], **{})
+    subscription = JournalAccessSubscription.objects.first()
+
+    assert subscription.journals.count() == 1
+    assert subscription.journalaccesssubscriptionperiod_set.count() == 1
+
     sub1.delete()
-    import_restrictions.import_restriction_subscriber(abonne1, subscription_qs)
+    call_command("import_restrictions", *[], **{})
 
     # Run & check
     assert JournalAccessSubscription.objects.count() == 1
     assert JournalAccessSubscription.objects.first().journals.count() == 0
+
+@pytest.mark.django_db
+def test_import_deletion_will_not_modify_individual_subscriptions():
+    journal = JournalFactory()
+    individual_subscription = JournalAccessSubscriptionFactory(valid=True, type="individual")
+    individual_subscription.journals.add(journal)
+    individual_subscription.save()
+    assert individual_subscription.journals.count() == 1
+    call_command("import_restrictions", *[], **{})
+    assert individual_subscription.journals.count() == 1
+
+
+@pytest.mark.django_db
+def test_existing_organisation_is_renamed_properly():
+
+    abonne1 = AbonneFactory.create()
+    abonne1.save()
+    revue1 = RevueFactory.create(titrerevabr=JournalFactory())
+
+    sub1 = RevueabonneFactory.create(
+        abonneid=abonne1.abonneid,
+        revueid=revue1.revueid
+    )
+
+    call_command("import_restrictions", *[], **{})
+    assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
+
+    abonne1.abonne = "new name"
+    abonne1.save()
+
+    call_command("import_restrictions", *[], **{})
+    assert Organisation.objects.filter(name=abonne1.abonne).count() == 1
+
+
+@pytest.mark.django_db
+def test_dry_run_mode_does_not_create_anything():
+    journal = JournalFactory()
+    abonne1 = AbonneFactory.create(referer='http://www.erudit.org/')
+    abonne1.save()
+
+    IpabonneFactory.create(abonneid=abonne1.pk)
+    revue1 = RevueFactory.create(titrerevabr=journal.code)
+
+    sub1 = RevueabonneFactory.create(
+        abonneid=abonne1.abonneid,
+        revueid=revue1.revueid
+    )
+
+    call_command("import_restrictions", *[], **{'dry_run': True})
+
+    assert get_user_model().objects.count() == 0
+    assert InstitutionReferer.objects.count() == 0
+    assert LegacyAccountProfile.objects.count() == 0
+    assert JournalAccessSubscriptionPeriod.objects.count() == 0
+    assert LegacyOrganisationProfile.objects.count() == 0
+    assert Organisation.objects.count() == 0
+    assert JournalAccessSubscription.objects.count() == 0
+    assert InstitutionIPAddressRange.objects.count() == 0

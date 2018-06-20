@@ -243,6 +243,8 @@ class ResultsFilterForm(forms.Form):
         ),
         required=False)
     filter_languages = forms.MultipleChoiceField(label=_('Langues'), required=False)
+    # It is intentional to have a discrepancy between the "Revues" label and "Collections" below.
+    # See #1814 for details.
     filter_collections = forms.MultipleChoiceField(label=_('Collections'), required=False)
     filter_authors = forms.MultipleChoiceField(label=_('Auteurs'), required=False)
     filter_funds = forms.MultipleChoiceField(

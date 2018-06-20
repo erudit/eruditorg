@@ -14,6 +14,9 @@ from pathlib import Path
 from structlog import configure
 from structlog.stdlib import LoggerFactory
 
+from structlog.processors import JSONRenderer
+from datetime import datetime
+
 DEBUG = True
 COMPRESS_ENABLED = True
 
@@ -295,9 +298,7 @@ LOGGING = {
             'format': '%(levelname)s %(asctime)s %(module)s '
                       '%(process)d %(thread)d %(message)s'
         },
-        'userspace.journal.editor': {
-            'format': '{"level": "%(levelname)s", "time": "%(asctime)s", "username": "%(username)s", "journal_code": "%(journal_code)s", "message": "%(message)s", "issue_submission": "%(issue_submission)s"}'  # noqa
-        }
+
     },
     'handlers': {
         'sentry': {
@@ -318,7 +319,7 @@ LOGGING = {
         'userspace.journal.editor.console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'userspace.journal.editor'
+            'formatter': 'structured'
         },
 
         'userspace.journal.editor.file': {
@@ -327,8 +328,9 @@ LOGGING = {
             'filename': '/tmp/userspace.journal.editor.log',
             'maxBytes': 1024 * 1024 * 1,
             'backupCount': 5,
-            'formatter': 'userspace.journal.editor',
+            'formatter': 'structured',
         },
+
         'error_file': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -400,7 +402,20 @@ LOGGING = {
     },
 }
 
-configure(logger_factory=LoggerFactory())
+
+def add_timestamp(_, __, event_dict):
+    event_dict['timestamp'] = datetime.utcnow().strftime("%x %X")
+    return event_dict
+
+
+configure(
+    logger_factory=LoggerFactory(),
+    processors=[
+        add_timestamp,
+        JSONRenderer(sort_keys=True)
+    ]
+)
+
 
 # Raven settings
 RAVEN_CONFIG = {

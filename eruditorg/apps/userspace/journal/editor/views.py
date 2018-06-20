@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime as dt
-import logging
+import structlog
 import mimetypes
 import unicodedata
 
@@ -35,7 +35,7 @@ from .forms import IssueSubmissionTransitionCommentForm
 from .forms import IssueSubmissionUploadForm
 from .signals import userspace_post_transition
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class IssueSubmissionListView(
@@ -102,7 +102,11 @@ class IssueSubmissionCreate(
         return context
 
     def get_success_url(self):
-        logger.info('create', extra=self.get_context_info())
+        logger.info(
+            'editor.issuesubmission.create',
+            url=self.object.get_absolute_url(),
+            **self.get_context_info()
+        )
         messages.success(self.request, _('La demande a été créée avec succès'))
         return reverse(
             'userspace:journal:editor:update', args=(self.current_journal.pk, self.object.pk, ))
@@ -170,7 +174,7 @@ class IssueSubmissionUpdate(
         return qs.filter(journal=self.current_journal)
 
     def get_success_url(self):
-        logger.debug('update', self.get_context_info())
+        logger.debug('update', **self.get_context_info())
         messages.success(self.request, _('La demande a été enregistrée avec succès'))
         return reverse(
             'userspace:journal:editor:detail', args=(self.current_journal.pk, self.object.pk, ))
@@ -219,6 +223,8 @@ class IssueSubmissionTransitionView(
                 track = self.object.last_status_track
                 track.comment = comment
                 track.save()
+        else:
+            comment = None
 
         # Capture a metric when the status changes
         if self.object.status != old_status:
@@ -227,12 +233,13 @@ class IssueSubmissionTransitionView(
                 tags={'old_status': old_status, 'new_status': self.object.status},
                 author_id=self.request.user.id, submission_id=self.object.id)
 
-        logger.debug(
-            '{old_status} -> {new_status}'.format(
-                old_status=old_status,
-                new_status=self.object.status
-            ),
-            extra=self.get_context_info()
+        logger.info(
+            'editor.issuesubmission.update',
+            old_status=old_status,
+            new_status=self.object.status,
+            comment=comment,
+            url=self.object.get_absolute_url(),
+            **self.get_context_info()
         )
         # Send a signal in order to notify the update of the issue submission's status
         self.transition_signal.send(
