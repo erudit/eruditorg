@@ -39,6 +39,13 @@ def positive_int(integer_string, strict=False, cutoff=None):
     return ret
 
 
+def GET_as_dict(GET, multi_params=None):
+    multi_params = multi_params or []
+    return {
+        k: GET.getlist(k) if k in multi_params else GET.get(k)
+        for k in GET}
+
+
 def get_search_elements(queryparams):
         """ Returns the search query elements in a readable way.
 

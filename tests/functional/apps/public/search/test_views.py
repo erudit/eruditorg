@@ -1,5 +1,6 @@
 import unittest.mock
 from faker import Faker
+from lxml import etree
 
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
@@ -8,9 +9,9 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 from django.test.utils import override_settings
 from django.utils.timezone import now
-from django.test.client import Client
 import pytest
 
+from base.test.testcases import Client, extract_post_args
 from core.solrq.query import Query
 from erudit.fedora import repository
 from erudit.test.factories import ArticleFactory, IssueFactory, SolrDocumentFactory
@@ -171,7 +172,6 @@ class TestEruditSearchResultsView:
 
 class TestAdvancedSearchView:
     def test_can_insert_the_saved_searches_into_the_context(self):
-        # Setup
         url = reverse('public:search:advanced_search')
         request = RequestFactory().get(url)
         request.user = AnonymousUser()
@@ -180,14 +180,20 @@ class TestAdvancedSearchView:
         searches = SavedSearchList(request)
         searches.add('foo=bar&xyz=test', 100)
         searches.save()
-        # Run
         response = view(request)
-        # Check
         assert response.status_code == 200
         assert len(response.context_data['saved_searches']) == 1
         assert response.context_data['saved_searches'][0]['querystring'] \
             == searches[0]['querystring']
         assert response.context_data['saved_searches'][0]['results_count'] == 100
+
+    def test_GET_params_are_honored(self):
+        params = '?article_types=Article&article_types=Note'
+        url = reverse('public:search:advanced_search') + params
+        response = Client().get(url)
+        root = etree.HTML(response.content)
+        args = extract_post_args(root)
+        assert args['article_types'] == {'Article', 'Note'}
 
 
 class TestSearchResultsView:
