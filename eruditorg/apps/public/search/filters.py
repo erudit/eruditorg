@@ -28,8 +28,6 @@ class SolrFilter:
         'Annee': 'year',
         'TypeArticle_fac': 'article_type',
         'Langue': 'language',
-        # 'collection' is a bit of a misnomer here: the contents of this aggregation is journal
-        # names. keep that in mind.
         'TitreCollection_fac': 'collection',
         'Auteur_tri': 'author',
         'Fonds_fac': 'fund',
