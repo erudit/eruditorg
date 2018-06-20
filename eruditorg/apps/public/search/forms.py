@@ -1,4 +1,5 @@
 import datetime as dt
+import structlog
 import re
 from operator import attrgetter
 
@@ -6,11 +7,13 @@ from django import forms
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _, pgettext
 
-from erudit.models import Discipline
-from erudit.models import Journal
+from erudit.models import Discipline, Journal, Collection
 from erudit.utils import locale_aware_sort
 
 from apps.public.search import legacy
+
+logger = structlog.getLogger(__name__)
+
 
 OPERATORS = (
     ('AND', _('Et')),
@@ -43,12 +46,24 @@ AVAILABILITY_CHOICES = (
     ((dt.date.today() - dt.timedelta(days=365)), _('1 an')),
 )
 
-FUNDS_CHOICES = (
-    ('Érudit', _('Érudit')),
-    ('UNB', _('UNB Libraries')),
-    ('Persée', _('Persée')),
-    ('FRQ', _('Fonds de Recherche du Québec')),
-)
+
+def get_funds_choices():
+
+    def get(fundid):
+        try:
+            return Collection.objects.get(code=fundid).name
+        except Collection.DoesNotExist:
+            # Something is deeply wrong...
+            logger.error('search.form.missing_collection', id=fundid)
+            return ''
+
+    return (
+        ('Érudit', get('erudit')),
+        ('UNB', get('unb')),
+        ('Persée', get('persee')),
+        ('FRQ', get('nrc')),
+    )
+
 
 PUB_TYPES_CHOICES = (
     ('Article', _('Articles savants')),
@@ -172,7 +187,7 @@ class SearchForm(forms.Form):
         required=False)
 
     funds = forms.MultipleChoiceField(
-        label=_('Fonds'), widget=forms.CheckboxSelectMultiple, choices=FUNDS_CHOICES,
+        label=_('Fonds'), widget=forms.CheckboxSelectMultiple, choices=get_funds_choices,
         required=False,
         help_text=_(
             "Les revues diffusées sur Érudit sont consultables directement sur la "
@@ -319,7 +334,7 @@ class ResultsFilterForm(forms.Form):
             self.fields['filter_collections'].choices = self._get_aggregation_choices(
                 aggregations['collection'],
                 sort_key=lambda x: x[1],
-                sort_reverse=True
+                sort_reverse=True,
             )
             self.fields['filter_authors'].choices = self._get_aggregation_choices(
                 aggregations['author'],
@@ -327,10 +342,12 @@ class ResultsFilterForm(forms.Form):
                 sort_reverse=True
             )
 
-            funds_code = [funds[0] for funds in FUNDS_CHOICES]
+            funds_choices = get_funds_choices()
+            funds_code = [funds[0] for funds in funds_choices]
             self.fields['filter_funds'].choices = self._get_aggregation_choices(
                 aggregations['fund'],
-                sort_key=lambda x: funds_code.index(x[0]) if x[0] in funds_code else -1
+                sort_key=lambda x: funds_code.index(x[0]) if x[0] in funds_code else -1,
+                display_names=dict(funds_choices),
             )
 
             self.fields['filter_publication_types'].choices = self._get_aggregation_choices(
