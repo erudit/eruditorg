@@ -363,7 +363,7 @@
       </xsl:if>
 
       <div class="full-article {% if article.erudit_object.processing == 'complet' %}col-md-7 col-md-offset-1{% else %} col-md-11 col-lg-8{% endif %}">
-        {% if html_abstracts %}
+        {% if html_abstracts or html_other_keywords %}
         <!-- abstract -->
           <section id="resume" role="complementary" class="article-section grresume">
             <h2 class="sr-only">{% trans 'Résumés' %}</h2>
