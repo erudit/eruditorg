@@ -11,7 +11,6 @@
 ## Adding new features
 
 * Is the feature documented?
-* If you are adding new Django views that make use of Fedora commons functionalities or Solr functionalities, please make sure you use either the ``base.viewmixins.FedoraServiceRequiredMixin`` or the ``base.viewmixins.SolrServiceRequiredMixin``
 
 ## Internationalization
 

@@ -273,7 +273,6 @@ FEDORA_PASSWORD = 'fcAdmin'
 
 # Solr settings
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
-SOLR_ADMIN = 'http://10.1.1.33:8080/solr/admin/cores/'
 SOLR_TIMEOUT = 10
 
 # Victor settings
