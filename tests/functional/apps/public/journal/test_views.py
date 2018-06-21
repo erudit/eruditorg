@@ -515,6 +515,18 @@ class TestIssueDetailView:
         articles = response.context['articles']
         assert articles == [a2, a1]
 
+    def test_publishing_issue_invalidates_cache(self):
+        # When publishing an issue, invalidate caches associated with that issue so that we have
+        # a proper view rendering. See #1856
+        issue = IssueFactory.create(is_published=False, journal__open_access=True)
+        url = issue_detail_url(issue)
+        response = Client().get(url, {'ticket': issue.prepublication_ticket})
+        assert b'ion-locked' in response.content
+        issue.is_published = True
+        issue.save()
+        response = Client().get(url)
+        assert b'ion-locked' not in response.content
+
 
 class TestArticleDetailView:
     @override_settings(CACHES=settings.NO_CACHES)
