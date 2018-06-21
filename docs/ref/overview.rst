@@ -6,11 +6,27 @@ Cette section décrit les liens entre Fedora Commons, Solr, Django, eulfedora et
 Résumé
 ------
 
-* Les modèles Django décrivent les objets stockés dans Fedora Commons;
+* La grande majorité des informations traitées par eruditorg provient de systèmes externes;
+* Les classes `Journal`, `Issue` et `Article` décrivent les objets stockés dans Fedora Commons;
 * Les articles et revues sont stockées dans Fedora Commons;
 * Django utilise eulfedora pour récupérer les objets Fedora Commons;
 * liberuditarticle est utilisé pour parser le contenu des articles;
-* Les documents Solr sont des descriptions des objets Fedora Commons.
+* Les documents Solr sont une indexation des objets Fedora Commons.
+
+Autorité des données
+--------------------
+
+eruditorg est un portail donnant accès à des données fournies en grand majorité par des systèmes
+externes et fait autorité sur très peu de ces données. Liste des données pour lesquelles eruditorg
+fait présentement autorité:
+
+* Abonnements individuels
+* Whitelisting pour embargo de numéros
+* Profiles de revues (à propos, etc)
+* Citations sauvegardées
+
+La liste des revues est aussi maintenue en partie manuellement (les revues OAI sont importées, mais
+pas les revues fedora) dans l'admin Django mais ne fait pas autorité sur d'autres systèmes.
 
 Modèles Django
 --------------
@@ -24,6 +40,28 @@ Les trois modèles suivants sont utilisés pour récupérer les données des art
 Le modèle suivant est utilisé pour récupérer les données des Thèses:
 
 * :py:class:`Thesis <erudit.models.core.Thesis>`
+
+Modèles hybrides
+----------------
+
+Initialement, le système était entièrement basé sur la synchronisation régulière de la BD django
+avec les systèmes externes. Une telle synchronisation vient avec pleins de petits problèmes au
+niveau de la cohérence des données qui finissent par devenir une montagne.
+
+Depuis un certain temps, on se désengage de cette voie pour s'appuyer directement sur Solr et Fedora
+lors du rendering de vues. Il y a donc un effort de "dé-django-isation" en cours qui mènera à terme
+à des modèles ``Article`` et ``Issue`` qui ne réfèrent à aucune table de la BD django mais seulement
+à un ``localidentifier`` qui permet d'aller chercher les données pertinentes dans Solr et Fedora.
+C'est au niveau du modèle lui-même qu'il y a la logique à savoir si telle ou telle information à
+propos d'un article ou numéro doit provenir de Fedora, Solr ou (temporairement, le temps de la
+migration) la BD django.
+
+Idéalement, pour des raisons de performances, on voudra aller chercher le plus d'informations
+possible dans Solr et utiliser Fedora seulement quand c'est nécessaire, mais pour l'instant, dans
+chaque vue qui fait référence à un article, on doit charger un `erudit_object` (ce qui a un coût
+important). À ce moment, toutes les vues qui impliquent un numéro ou un article doivent charger
+un ``erudit_object``. Avec le temps, on voudra s'appuyer de plus en plus sur Solr pour réduire le
+nombre de ces vues.
 
 Récupération des données dans Fedora
 ------------------------------------
@@ -41,6 +79,22 @@ Par exemple, on peut accéder à la page couverture d'un numéro avec le code su
 
 
 .. _eulfedora: https://www.github.com/emory-libraries/eulfedora
+
+Cache des objets Fedora
+-----------------------
+
+Ouvrir les articles, publication et sommaires Fedora et les charger dans un objet
+``liberuditarticle`` est couteux. Avant la "dé-django-isation" des modèles, ce cout était mitigé par
+une cache au niveau des templates, mais depuis qu'on se base de plus en plus sur ``erudit_object``,
+il faut ajouter un nouveau niveau de cache: la cache ``erudit_object``. Les ``erudit_object``
+post-load sont cachés avec une invalidation d'une heure. 
+
+Ça permet de faire en sorte que l'apport plus important qu'apporte notre instance Fedora à la
+génération des vues n'impacte pas trop nos performances.
+
+Ça veut aussi dire que la cache est devenue indispensable au bon fonctionnement du site.
+D'invalider entièrement la cache fait en sorte que certaines vues (comme le listing des revues)
+vont être très très longues à générer.
 
 liberuditarticle
 ----------------

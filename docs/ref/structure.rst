@@ -8,19 +8,18 @@ Aperçu::
   │   ├── public
   │   │   ├── journal
   │   │   │   ├── templates
-  │   │   │   └── tests
   │   ├── userspace
   │   │   └─ journal
-  │   │        └── tests
   │   └─ webservices
   │       └-─ sushi
   ├── base
   │   ├── migrations
   │   ├── settings
-  │   └── tests
+  │   └── test
   ├── core
   │   └── journal
-  │       └── tests
+  ├── erudit
+  │   └── test
   ├── templates
   │   ├── base.html
   │   ├── base_email.html
@@ -56,9 +55,20 @@ La base du projet. Contient les settings, les context_processor, etc.
 
 Contient les modèles qui sont utilisés par les apps.
 
+**erudit**
+
+Contient les modèles de base ``Journal``` ``Issue`` ``Article`` etc. Logiquement, pourrait être
+fusionné à ``core`` mais est séparé parce qu'historiquement il était dans un dépôt de source
+externe.
+
 **templates**
 
 Les templates du projet. Réplique la hiérarchie qui est sous apps. Il convient de noter que les emails envoyés depuis l'application Érudit doivent hériter du template ``base_email.html`` et doivent être rangés par application logique sous le répertoire "emails".
+
+**test**
+
+``erudit`` et ``base`` contiennent un sous-package ``test`` qui contient des utilitaires de tests
+comme par exemple des factories et des mocks.
 
 **tests**
 
