@@ -44,7 +44,7 @@ created_objects = {
 
 
 @transaction.atomic
-def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
+def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organisation_id=None):
     """ Update stale subscription for the given year
 
     A stale subscription is a subscriptions that exists in the eruditorg database
@@ -57,6 +57,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
     update them to delete all their journals and subscription periods.
 
     :param year: the year for which stale subscriptions should be deleted
+    :param logger: the logger to use
     :param organisation_id: limit deleting stale subscriptions of a specific organisation
     """
 
@@ -78,6 +79,10 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
         ).distinct()
     )
 
+    if organisation_id is not None:
+        orgs_with_valid_subscription = orgs_with_valid_subscription.filter(
+            legacyorganisationprofile__account_id=organisation_id
+        )
 
     # diff the sets and find the subscribers with no revueabonne
     orgs_with_subscription_and_no_revueabonne = orgs_with_valid_subscription.filter(
@@ -181,7 +186,8 @@ class Command(BaseCommand):
                     import_restriction_subscriber(subscriber, subscription_qs, logger=logger)
                 except ImportException:
                     pass
-            delete_stale_subscriptions(year, logger)
+
+            delete_stale_subscriptions(year, logger, organisation_id=organisation_id)
             logger.info("import.finished", **created_objects)
 
 
