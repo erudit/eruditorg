@@ -299,11 +299,13 @@ class TestJournalDetailView:
         assert not response.context['latest_issue'].extra.is_locked()
 
     def test_embeds_subscription_info_to_context(self):
-        journal = JournalManagementSubscriptionFactory(valid=True).journal
-        JournalAccessSubscriptionFactory(
-            type='individual', user=self.user, post__journals=[journal])
+        subscription = JournalAccessSubscriptionFactory(
+            type='individual',
+            user=self.user,
+            valid=True,
+        )
         self.client.login(username='foobar', password='notsecret')
-        url = journal_detail_url(journal)
+        url = journal_detail_url(subscription.journal_management_subscription.journal)
         response = self.client.get(url)
         assert response.status_code == 200
         assert response.context['content_access_granted']
