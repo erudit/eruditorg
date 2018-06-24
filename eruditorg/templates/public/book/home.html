@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load humanize i18n staticfiles %}
+
+{% block title %}{% trans "Livres et actes" %}{% endblock title %}
+
+{% block body_class %}{{ block.super }} book_home{% endblock body_class %}
+{% block body_id %}book_home{% endblock body_id %}
+
+{% block breadcrumb %}
+  {{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<main role="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <header class="page-header-main">
+          <h1>
+            {% trans "Livres et actes" %}
+          </h1>
+        </header>
+        <div class="page-intro">
+          {% url 'public:search:advanced_search' as advanced_search %}
+          {% blocktrans %}
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          {% endblocktrans %}
+        </div>
+      </div>
+      <ul>
+        {% for book in books %}
+        <li>
+          <span class="title">{{ book.get_title }}</span>
+          <span class="subtitle">{{ book.get_subtitle }}</span>
+          <span class="authors">{{ book.get_authors }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+  </div>
+</main>
+{% endblock content %}

@@ -289,6 +289,9 @@ FEDORA_PASSWORD = 'fcAdmin'
 SOLR_ROOT = 'http://10.1.1.33:8080/solr/eruditpersee/'
 SOLR_TIMEOUT = 10
 
+# Books directory
+BOOKS_DIRECTORY = None
+
 # Victor settings
 VICTOR_SOAP_URL = None
 VICTOR_SOAP_USERNAME = None

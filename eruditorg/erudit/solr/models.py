@@ -305,3 +305,13 @@ def get_model_instance(solr_data):
             return SolrArticle(solr_data)
 
     return Generic(solr_data)
+
+
+def get_all_books():
+    results = client.search(q='Corpus_fac:Livres')
+    book_titles = results.facets['facet_fields']['TitreContexte_fac'][::2]
+
+    for title in book_titles:
+        book_data = client.search(q='TitreContexte_fac:"{title}"'.format(title=title))
+        import ipdb; ipdb.set_trace()
+    return book_titles

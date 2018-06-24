@@ -145,11 +145,15 @@
                   <li>
                     <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a>
                   </li>
+                  <li>
+                    {% flag "BOOKS" %}
+                    <a href="{% url 'public:book:home' %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
+                    {% else %}
+                    <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
+                    {% endflag %}
+                  </li>
                   {% switch "maintenance" %}
                   {% else %}
-                  <li>
-                    <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
-                  </li>
                   <li>
                     <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a>
                   </li>
