@@ -18,14 +18,17 @@ class RestrictionsView(View):
             if not date_embargo_begins:
                 return E.revue()
             min_year = dt.date.today().year + 1
+            embargoed = []
             for issue in journal.published_issues:
                 if issue.embargoed:
                     date_embargo_begins = min(date_embargo_begins, issue.date_published)
                     min_year = min(min_year, issue.date_published.year)
+                    embargoed.append(issue.localidentifier)
             embargoed_years = range(min_year, dt.date.today().year + 1)
             return E.revue(
                 E.years(';'.join(map(str, embargoed_years))),
                 E.embargo_date(date_embargo_begins.strftime('%Y-%m-%d')),
+                E.embargoed_issues(*[E.issue(localidentifier=x) for x in embargoed]),
                 identifier=journal.legacy_code)
 
         journals = Journal.objects.filter(
