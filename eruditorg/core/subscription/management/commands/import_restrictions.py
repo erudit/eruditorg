@@ -63,7 +63,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organis
 
     # Get all Revueabonne for the given year.
     abonneid_for_year = Revueabonne.objects.filter(
-        anneeabonnement__gte=year
+        anneeabonnement=year
     ).order_by('abonneid').values_list('abonneid', flat=True).distinct()
 
     orgs_with_no_revueabonne = Organisation.objects.exclude(
@@ -156,7 +156,7 @@ class Command(BaseCommand):
         if dry_run:
             logger = logger.bind(dry_run=dry_run)
 
-        restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement__gte=year)
+        restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement=year)
 
         if organisation_id:
             restriction_subscriptions = restriction_subscriptions.filter(
