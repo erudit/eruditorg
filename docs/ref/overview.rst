@@ -87,7 +87,14 @@ Ouvrir les articles, publication et sommaires Fedora et les charger dans un obje
 ``liberuditarticle`` est couteux. Avant la "dé-django-isation" des modèles, ce cout était mitigé par
 une cache au niveau des templates, mais depuis qu'on se base de plus en plus sur ``erudit_object``,
 il faut ajouter un nouveau niveau de cache: la cache ``erudit_object``. Les ``erudit_object``
-post-load sont cachés avec une invalidation d'une heure. 
+post-load sont cachés avec une invalidation d'une heure. Pour plus de précisions voir la classe
+:py:class:`erudit.fedora.modelmixins.FedoraMixin`
+
+Les résultats de fonctions qui utilisent des données provenant de Fedora peuvent être aussi mis en cache,
+avec le code suivant:
+
+.. automodule :: erudit.fedora.cache
+   :members:
 
 Ça permet de faire en sorte que l'apport plus important qu'apporte notre instance Fedora à la
 génération des vues n'impacte pas trop nos performances.
