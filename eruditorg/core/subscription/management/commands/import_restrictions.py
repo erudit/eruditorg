@@ -44,7 +44,7 @@ created_objects = {
 
 
 @transaction.atomic
-def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
+def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger, organisation_id=None):
     """ Update stale subscription for the given year
 
     A stale subscription is a subscriptions that exists in the eruditorg database
@@ -57,33 +57,41 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
     update them to delete all their journals and subscription periods.
 
     :param year: the year for which stale subscriptions should be deleted
+    :param logger: the logger to use
+    :param organisation_id: limit deleting stale subscriptions of a specific organisation
     """
 
-    # Get all organisations that do not have a subcription in restriction for the
-    # given year.
+    # Get all Revueabonne for the given year.
+    abonneid_for_year = Revueabonne.objects.filter(
+        anneeabonnement=year
+    ).order_by('abonneid').values_list('abonneid', flat=True).distinct()
 
-    restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement__gte=year)
-    restriction_subscriber_names = restriction_subscriptions.order_by('abonneid') \
-        .values_list('abonneid', flat=True) \
-        .distinct()
-
-    orgs_with_no_restriction = Organisation.objects.exclude(
-        legacyaccountprofile__legacy_id__in=set(restriction_subscriber_names)
+    orgs_with_no_revueabonne = Organisation.objects.exclude(
+        legacyorganisationprofile__account_id__in=set(abonneid_for_year)
     )
 
     # Get all organisations that have a valid subscription
-    orgs_with_valid_subscription = JournalAccessSubscription.valid_objects.all().values_list(
-        'organisation', flat=True
-    ).distinct()
+    orgs_with_valid_subscription = Organisation.objects.filter(
+        pk__in=JournalAccessSubscription.valid_objects.exclude(
+            organisation=None
+        ).values_list(
+            'organisation', flat=True
+        ).distinct()
+    )
 
-    # diff the sets and find the subscribers with no active subscription
-    orgs_with_eruditorg_and_no_restriction = orgs_with_valid_subscription.filter(
-        pk__in=orgs_with_no_restriction
+    if organisation_id is not None:
+        orgs_with_valid_subscription = orgs_with_valid_subscription.filter(
+            legacyorganisationprofile__account_id=organisation_id
+        )
+
+    # diff the sets and find the subscribers with no revueabonne
+    orgs_with_subscription_and_no_revueabonne = orgs_with_valid_subscription.filter(
+        pk__in=[o.pk for o in orgs_with_no_revueabonne]
     )
 
     # get their subscriptions
     stale_subscriptions = set(JournalAccessSubscription.valid_objects.filter(
-        organisation__in=orgs_with_eruditorg_and_no_restriction
+        organisation__in=orgs_with_subscription_and_no_revueabonne
     ))
 
     # Delete their periods
@@ -96,7 +104,7 @@ def delete_stale_subscriptions(year: int, logger: structlog.BoundLogger):
 
     for subscription in stale_subscriptions:
         logger.info(
-            'subscription.stale_subscription_updated',
+            'subscription.stale_subscription_deleted',
             subscription_pk=subscription.pk,
             organisation=subscription.organisation.name
         )
@@ -148,7 +156,7 @@ class Command(BaseCommand):
         if dry_run:
             logger = logger.bind(dry_run=dry_run)
 
-        restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement__gte=year)
+        restriction_subscriptions = Revueabonne.objects.filter(anneeabonnement=year)
 
         if organisation_id:
             restriction_subscriptions = restriction_subscriptions.filter(
@@ -178,7 +186,8 @@ class Command(BaseCommand):
                     import_restriction_subscriber(subscriber, subscription_qs, logger=logger)
                 except ImportException:
                     pass
-            delete_stale_subscriptions(year, logger)
+
+            delete_stale_subscriptions(year, logger, organisation_id=organisation_id)
             logger.info("import.finished", **created_objects)
 
 

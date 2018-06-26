@@ -11,17 +11,21 @@ from core.subscription.test.factories import InstitutionIPAddressRangeFactory
 pytestmark = pytest.mark.django_db
 
 def test_valid_objects_filters_valid_subscriptions():
-    subscribed_journal = JournalManagementSubscriptionFactory(valid=True).journal
-    unsubscribed_journal = JournalManagementSubscriptionFactory(expired=True).journal
+    valid_jms = JournalManagementSubscriptionFactory(valid=True)
+    expired_jms = JournalManagementSubscriptionFactory(expired=True)
     valid_accesses = {
         # institutional subscription need a valid period
         JournalAccessSubscriptionFactory.create(type='institutional', valid=True),
         # individual subscription needs a journal with an active management plan, but it doesn't
         # need an active period on the subscription itself
         JournalAccessSubscriptionFactory.create(
-            type='individual', post__journals=[subscribed_journal]),
+            type='individual',
+            journal_management_subscription=valid_jms,
+        ),
         JournalAccessSubscriptionFactory.create(
-            type='individual', post__journals=[subscribed_journal], expired=True),
+            type='individual',
+            journal_management_subscription=valid_jms,
+            expired=True),
     }
 
     # institutional subscription without a valid period aren't valid
@@ -29,7 +33,9 @@ def test_valid_objects_filters_valid_subscriptions():
     JournalAccessSubscriptionFactory.create(type='institutional', expired=True)
     # individual subscription on a journal that has an expired plan aren't valid
     JournalAccessSubscriptionFactory.create(
-        type='individual', post__journals=[unsubscribed_journal])
+        type='individual',
+        journal_management_subscription=expired_jms,
+    )
     assert set(JournalAccessSubscription.valid_objects.all()) == valid_accesses
 
 
