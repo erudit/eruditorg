@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import datetime as dt
 import structlog
 import mimetypes
 import unicodedata
+import os
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -356,24 +356,23 @@ class IssueSubmissionAttachmentView(
     raise_exception = True
 
     def render_to_response(self, context, **response_kwargs):
-        filename = self.object.get_filename(sanitize=True)
-        normalized_filename = unicodedata.normalize('NFKD', filename)
-        filename = normalized_filename.encode('ascii', 'ignore').decode('ascii')
-        try:
-            fsock = open(self.object.path, 'rb')
-        except FileNotFoundError:  # noqa
+        if not os.path.exists(self.object.path):
             # The feed is not available.
             logger.error('Resumable file not found: {}'.format(self.object.path),
                          exc_info=True, extra=self.get_context_info())
             raise Http404
 
+        filename = self.object.get_filename(sanitize=True)
+        normalized_filename = unicodedata.normalize('NFKD', filename)
+        filename = normalized_filename.encode('ascii', 'ignore').decode('ascii')
         # Try to guess the content type of the given file
         content_type, _ = mimetypes.guess_type(self.object.path)
         if not content_type:
             content_type = 'text/plain'
 
-        response = HttpResponse(fsock, content_type=content_type)
+        response = HttpResponse('', content_type=content_type)
         response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+        response['X-Sendfile'] = self.object.path
 
         return response
 
