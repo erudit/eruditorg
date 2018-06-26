@@ -4,6 +4,7 @@ import mimetypes
 import unicodedata
 import os
 
+from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import F
@@ -372,7 +373,12 @@ class IssueSubmissionAttachmentView(
 
         response = HttpResponse('', content_type=content_type)
         response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
-        response['X-Sendfile'] = self.object.path
+
+        path = self.object.path
+        if path.startswith(settings.MEDIA_ROOT):
+            path = path[len(settings.MEDIA_ROOT):]
+        path = settings.XSENDFILE_ROOT + path
+        response['X-Sendfile'] = path
 
         return response
 
