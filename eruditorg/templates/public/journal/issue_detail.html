@@ -90,7 +90,7 @@
   {% endfor %}
 </div>
 
-{% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE %}
+{% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE issue.is_published %}
 {# Issue summary #}
 <main role="main" class="col-sm-8 col-md-7">
   <header class="page-header-main">
