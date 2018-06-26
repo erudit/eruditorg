@@ -38,7 +38,6 @@ from erudit.utils import locale_aware_sort
 
 from base.pdf import generate_pdf, add_coverpage_to_pdf, get_pdf_first_page
 from base.viewmixins import CacheMixin
-from base.viewmixins import FedoraServiceRequiredMixin
 from core.metrics.metric import metric
 from apps.public.viewmixins import FallbackAbsoluteUrlViewMixin, FallbackObjectViewMixin
 
@@ -478,7 +477,6 @@ class IssueRawCoverpageView(FedoraFileDatastreamView):
 
 class BaseArticleDetailView(
         RedirectExceptionsToFallbackWebsiteMixin,
-        FedoraServiceRequiredMixin,
         RedirectToExternalSourceMixin,
         FallbackObjectViewMixin,
         ContentAccessCheckMixin,
