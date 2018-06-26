@@ -178,8 +178,22 @@ DATABASES = {
         'NAME': 'eruditorg',
         'USER': 'root',
         'PASSWORD': '',
-    }
+    },
+
+    'restriction': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'restriction',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '',
+    },
+
 }
+
+DATABASE_ROUTERS = [
+    'core.subscription.restriction.router.RestrictionRouter',
+]
+
 
 # Cache configuration
 

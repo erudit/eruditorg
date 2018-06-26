@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 
 
@@ -9,13 +7,13 @@ from django.conf import settings
 SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS = getattr(
     settings,
     'SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS',
-    1
+    12
 )
 
 CULTURAL_JOURNAL_EMBARGO_IN_MONTHS = getattr(
     settings,
     'CULTURAL_JOURNAL_EMBARGO_IN_MONTHS',
-    1
+    36
 )
 
 DEFAULT_PRODUCTION_DELAY_IN_MONTHS = getattr(
