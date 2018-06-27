@@ -41,7 +41,6 @@ from ..managers import InternalJournalManager
 from ..managers import LegacyJournalManager
 from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
-from ..solr.models import SolrDocument
 from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 
 from .core import Collection, Publisher
@@ -904,6 +903,7 @@ class Article(FedoraMixin):
 
     @property
     def solr_object(self):
+        from ..solr.models import SolrDocument
         if self._solr_object is None:
             self._solr_object = SolrDocument.from_solr_id(self.solr_id)
         return self._solr_object
