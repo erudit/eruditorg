@@ -19,11 +19,25 @@ def extract_post_args(dom_elem):
     """
     result = {}
     for input in dom_elem.iterdescendants('input'):
+        name = input.attrib['name']
+        value = input.attrib.get('value', '')
         if input.attrib['type'] == 'checkbox':
-            value = 'on' if input.attrib.get('checked') else ''
+            if not input.attrib.get('checked'):
+                value = ''
+            if isinstance(result.get(name, None), list):
+                result[name].append(value)
+            else:
+                result[name] = [value]
         else:
-            value = input.attrib.get('value', '')
-        result[input.attrib['name']] = value
+            result[name] = value
+    for k, v in list(result.items()):
+        if isinstance(v, list):
+            # post-process checkbox values
+            if len(v) == 1:
+                # single checkbox, converto into simple 'on' or '' value
+                result[k] = 'on' if v[0] else ''
+            else:
+                result[k] = {x for x in v if x}
     for select in dom_elem.iterdescendants('select'):
         options = list(select.xpath('option[@selected=\'selected\']'))
         if 'multiple' in select.attrib:

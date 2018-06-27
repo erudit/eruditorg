@@ -23,7 +23,7 @@ from .forms import ResultsOptionsForm
 from .forms import SearchForm
 from .pagination import PaginationOutOfBoundsException
 from .saved_searches import SavedSearchList
-from .utils import get_search_elements
+from .utils import get_search_elements, GET_as_dict
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +63,11 @@ class AdvancedSearchView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Fo
     def get_form_kwargs(self):
         kwargs = {'initial': self.get_initial(), 'prefix': self.get_prefix()}
         if self.request.GET:
-            kwargs.update({'data': self.request.GET})
+            MULTI = {
+                'article_types', 'publication_types', 'funds', 'disciplines', 'languages',
+                'journals',
+            }
+            kwargs['initial'].update(GET_as_dict(self.request.GET, MULTI))
         return kwargs
 
 

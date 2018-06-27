@@ -41,6 +41,7 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
 
     @factory.post_generation
     def post(obj, create, extracted, **kwargs):
+
         if kwargs.get('valid', False):
             ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
         if kwargs.get('referers', None):
@@ -68,13 +69,29 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
 
     @factory.post_generation
     def type(obj, create, extracted, **kwargs):
+
         if extracted == 'individual':
+            # FIXME individual subscriptions are not linked to an organisations. Rather, they
+            # are linked to a JournalManagementSubscription. Because the organisation is created
+            # through a SubFactory, and because many tests rely on this behaviour, we set the
+            # organistion to None and delete the related object when we create individual
+            # individual subscriptions. A proper fix would be to remove the SubFactory and specify
+            # the organisation in a post hook.
+            organisation = obj.organisation
             obj.organisation = None
+            organisation.delete()
+
+            # Only set the journal management subscription if it has not been set. User may want
+            # to specify this themselves.
+            if not obj.journal_management_subscription:
+                obj.journal_management_subscription = JournalManagementSubscriptionFactory()
+                obj.journal_management_subscription.save()
+                obj.journal = obj.journal_management_subscription.journal
             obj.save()
 
     @factory.post_generation
     def journal(obj, create, extracted, **kwargs):
-        if extracted is not None:
+        if extracted:
             obj.journal = extracted
             obj.journal_management_subscription = JournalManagementSubscription.objects \
                 .filter(journal=extracted).first()
@@ -82,7 +99,12 @@ class JournalAccessSubscriptionFactory(factory.DjangoModelFactory):
     @factory.post_generation
     def valid(obj, create, extracted, **kwargs):
         if extracted:
-            ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
+            if obj.journal_management_subscription is not None:
+                ValidJournalManagementSubscriptionPeriodFactory(
+                    subscription=obj.journal_management_subscription
+                )
+            period = ValidJournalAccessSubscriptionPeriodFactory(subscription=obj)
+            period.save()
 
     @factory.post_generation
     def expired(obj, create, extracted, **kwargs):
@@ -161,3 +183,9 @@ class JournalManagementSubscriptionPeriodFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = JournalManagementSubscriptionPeriod
+
+
+class ValidJournalManagementSubscriptionPeriodFactory(JournalManagementSubscriptionPeriodFactory):
+
+    start = dt.datetime.now() - dt.timedelta(days=10)
+    end = dt.datetime.now() + dt.timedelta(days=10)

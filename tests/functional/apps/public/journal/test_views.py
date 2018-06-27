@@ -298,11 +298,13 @@ class TestJournalDetailView:
         assert not response.context['latest_issue'].extra.is_locked()
 
     def test_embeds_subscription_info_to_context(self):
-        journal = JournalManagementSubscriptionFactory(valid=True).journal
-        JournalAccessSubscriptionFactory(
-            type='individual', user=self.user, post__journals=[journal])
+        subscription = JournalAccessSubscriptionFactory(
+            type='individual',
+            user=self.user,
+            valid=True,
+        )
         self.client.login(username='foobar', password='notsecret')
-        url = journal_detail_url(journal)
+        url = journal_detail_url(subscription.journal_management_subscription.journal)
         response = self.client.get(url)
         assert response.status_code == 200
         assert response.context['content_access_granted']
@@ -495,6 +497,18 @@ class TestIssueDetailView:
         response = Client().get(url)
         articles = response.context['articles']
         assert articles == [a1, a2]
+
+    def test_publishing_issue_invalidates_cache(self):
+        # When publishing an issue, invalidate caches associated with that issue so that we have
+        # a proper view rendering. See #1856
+        issue = IssueFactory.create(is_published=False, journal__open_access=True)
+        url = issue_detail_url(issue)
+        response = Client().get(url, {'ticket': issue.prepublication_ticket})
+        assert b'ion-locked' in response.content
+        issue.is_published = True
+        issue.save()
+        response = Client().get(url)
+        assert b'ion-locked' not in response.content
 
 
 class TestArticleDetailView:

@@ -152,6 +152,32 @@ def test_import_deletions():
     assert JournalAccessSubscription.objects.count() == 1
     assert JournalAccessSubscription.objects.first().journals.count() == 0
 
+
+@pytest.mark.django_db
+def test_delete_existing_subscriptions():
+    journal = JournalFactory()
+
+    organisation = OrganisationFactory()
+
+    JournalAccessSubscriptionFactory(valid=True, type="individual")
+
+    organisation_profile = LegacyAccountProfileFactory(
+        legacy_id=1179,
+        organisation=organisation
+    )
+
+    subscription = JournalAccessSubscriptionFactory(
+        organisation=organisation,
+        valid=True,
+    )
+    subscription.journals.add(journal)
+    subscription.save()
+
+    call_command("import_restrictions", *[], **{})
+
+    assert subscription.journals.count() == 0
+
+
 @pytest.mark.django_db
 def test_import_deletion_will_not_modify_individual_subscriptions():
     journal = JournalFactory()
