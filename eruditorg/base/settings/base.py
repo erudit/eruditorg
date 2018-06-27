@@ -27,12 +27,6 @@ STATIC_ROOT = str(ROOT_DIR / 'static')
 MEDIA_ROOT = str(ROOT_DIR / 'media')
 UPLOAD_ROOT = str(ROOT_DIR / 'media' / 'uploads')
 
-# When returning a X-Sendfile response, prefix it with this string. Used when the apache server
-# doesn't have the same absolute path to media files as the django server does.
-# This *replaces* MEDIA_ROOT. for example, a path "{MEDIA_ROOT}/foo/bar.txt" would become
-# "{XSENDFILE_ROOT}/foo/bar.txt", *not* "{XSENDFILE_ROOT}/{MEDIA_ROOT}/foo/bar.txt"
-XSENDFILE_ROOT = MEDIA_ROOT
-
 # destination path for https://gitlab.erudit.org/erudit/rapports/rapports_editeurs
 SUBSCRIPTION_EXPORTS_ROOT = str(ROOT_DIR / 'rapports_editeurs')
 
