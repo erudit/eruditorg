@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
 import datetime as dt
 import structlog
-import mimetypes
-import unicodedata
 
+from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import F
-from django.http import Http404
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.utils.formats import date_format
@@ -356,26 +352,10 @@ class IssueSubmissionAttachmentView(
     raise_exception = True
 
     def render_to_response(self, context, **response_kwargs):
-        filename = self.object.get_filename(sanitize=True)
-        normalized_filename = unicodedata.normalize('NFKD', filename)
-        filename = normalized_filename.encode('ascii', 'ignore').decode('ascii')
-        try:
-            fsock = open(self.object.path, 'rb')
-        except FileNotFoundError:  # noqa
-            # The feed is not available.
-            logger.error('Resumable file not found: {}'.format(self.object.path),
-                         exc_info=True, extra=self.get_context_info())
-            raise Http404
-
-        # Try to guess the content type of the given file
-        content_type, _ = mimetypes.guess_type(self.object.path)
-        if not content_type:
-            content_type = 'text/plain'
-
-        response = HttpResponse(fsock, content_type=content_type)
-        response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
-
-        return response
+        path = self.object.path
+        if path.startswith(settings.MEDIA_ROOT):
+            path = path[len(settings.MEDIA_ROOT):]
+        return HttpResponseRedirect(settings.MEDIA_URL + path)
 
     def has_permission(self):
         obj = self.get_permission_object()
