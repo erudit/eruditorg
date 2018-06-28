@@ -135,7 +135,7 @@
                     {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
                   </a>
                 </h3>
-                <div class="document-authors-publication-year text-muted">{{ document.authors }} ({{ document.issue.year }})</div>
+                <div class="document-authors-publication-year text-muted">{{ document.authors_display }} ({{ document.issue.year }})</div>
                 {% if document.can_cite %}
                 <div class="hidden">
                   <div id="id_cite_modal_{{ forloop.counter }}" class="modal cite-modal col-lg-4 col-md-5 col-sm-6 col-xs-12 col-centered">

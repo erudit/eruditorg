@@ -95,6 +95,8 @@ class TestSavedCitationListView:
 
         assert response.status_code == 200
         assert ordered_ids == expected_order
+        assert b'Ghi' in response.content
+        assert b'Jlk' in response.content
 
     def test_can_generate_an_export_for_multiple_documents(self):
         url = reverse('public:citations:citation_enw')
