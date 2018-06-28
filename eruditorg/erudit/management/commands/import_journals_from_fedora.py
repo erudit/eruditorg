@@ -169,7 +169,7 @@ class Command(BaseCommand):
 
         # Imports each collection
         journal_count, journal_errored_count = 0, 0
-        issue_count, issue_errored_count, article_count = 0, 0, 0
+        issue_count, issue_errored_count = 0, 0
         for collection_config in erudit_settings.JOURNAL_PROVIDERS.get('fedora'):
             collection_code = collection_config.get('collection_code')
             try:
@@ -179,12 +179,11 @@ class Command(BaseCommand):
                     code=collection_code, name=collection_config.get('collection_title'),
                     localidentifier=collection_config.get('localidentifier'))
             else:
-                _jc, _jec, _ic, _iec, _ac = self.import_collection(collection)
+                _jc, _jec, _ic, _iec = self.import_collection(collection)
                 journal_count += _jc
                 journal_errored_count += _jec
                 issue_count += _ic
                 issue_errored_count += _iec
-                article_count += _ac
 
         logger.info(
             "import.finished",
@@ -192,7 +191,6 @@ class Command(BaseCommand):
             journal_errored=journal_errored_count,
             issue_count=issue_count,
             issue_errored_count=issue_errored_count,
-            article_count=article_count
         )
 
     def import_collection(self, collection):
@@ -273,7 +271,7 @@ class Command(BaseCommand):
         # STEP 5: import each issue using its PID
         # --
 
-        issue_count, issue_errored_count, article_count = 0, 0, 0
+        issue_count, issue_errored_count = 0, 0
 
         for ipid in issue_pids:
             try:
@@ -289,7 +287,7 @@ class Command(BaseCommand):
                 )
             else:
                 try:
-                    _ac = self._import_issue(ipid, journal)
+                    self._import_issue(ipid, journal)
                 except Exception as e:
                     issue_errored_count += 1
                     logger.error(
@@ -298,9 +296,8 @@ class Command(BaseCommand):
                     )
                 else:
                     issue_count += 1
-                    article_count += _ac
 
-        return journal_count, journal_errored_count, issue_count, issue_errored_count, article_count
+        return journal_count, journal_errored_count, issue_count, issue_errored_count
 
     def import_journal_precedences(self, precendences_relations):
         """ Associates previous/next Journal instances with each journal. """
@@ -423,7 +420,7 @@ class Command(BaseCommand):
         if import_issues is False:
             return 0, 0
 
-        issue_count, article_count = 0, 0
+        issue_count = 0
 
         issue_fedora_query = "pid~erudit:{collectionid}.{journalid}.* label='Publication Erudit'"
         issue_fedora_query = issue_fedora_query.format(
@@ -436,11 +433,10 @@ class Command(BaseCommand):
                 # Imports the issue only if its PID is prefixed with the PID of the journal object.
                 # In any other case this means that the issue is associated with another journal and
                 # it will be imported later.
-                _ac = self._import_issue(ipid, journal)
+                self._import_issue(ipid, journal)
                 issue_count += 1
-                article_count += _ac
 
-        return issue_count, article_count
+        return issue_count
 
     @transaction.atomic
     def _import_issue(self, issue_pid, journal):
