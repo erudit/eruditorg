@@ -221,6 +221,15 @@ class TestThesisPublicationYearListView:
         response = Client().get(url)
         assert response.status_code == 200
 
+    def test_rendered_contents(self, solr_client):
+        thesis = ThesisFactory(title='foobar_title', authors=['foobar_author'], year=2012)
+        solr_client.add_document(thesis)
+        url = reverse(
+            'public:thesis:collection_list_per_year', args=(thesis.repository.code, 2012))
+        response = Client().get(url)
+        assert b'foobar_author' in response.content
+        assert b'foobar_title' in response.content
+
 
 class TestThesisPublicationAuthorNameListView:
     def test_returns_only_theses_for_a_given_author_first_letter(self, solr_client):

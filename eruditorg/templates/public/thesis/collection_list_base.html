@@ -88,7 +88,7 @@
         {% for thesis in theses %}
           <li class="thesis row">
             <div class="col-xs-11">
-              <div class="thesis-author"><strong>{{ thesis.authors }}</strong></div>
+              <div class="thesis-author"><strong>{{ thesis.authors_display }}</strong></div>
               <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
               {% if thesis.description or thesis.keywords %}
               <div class="thesis-description">
