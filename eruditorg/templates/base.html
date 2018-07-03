@@ -375,7 +375,7 @@
                   <li><a href="{% url 'public:thesis:home' %}">{% trans "Thèses et mémoires" %}</a></li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans "Livres & actes" %}</a></li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" target="_blank">{% trans "Rapports de recherche" %}</a></li>
-                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="https://retro.erudit.org/aide/aide/aide.html" target="_blank">{% trans "Aide" %}</a></li>
+                  <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="{% trans 'https://www.erudit.org/public/documents/Guide_recherche.pdf' %}" target="_blank">{% trans "Aide" %}</a></li>
                   <li class="disabled">{% trans "Plan du site" %}</li>
                   <li{% switch "maintenance" %} class="disabled"{% endswitch %}><a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/erudit/contact/{% else %}https://apropos.erudit.org/en/erudit-en/contact/{% endif %}" target="_blank">{% trans "Nous contacter" %}</a></li>
                 </ul>
