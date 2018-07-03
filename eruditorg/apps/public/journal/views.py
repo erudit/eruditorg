@@ -392,6 +392,10 @@ class IssueDetailView(
             return None
         pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
         pages = et.fromstring(pages_ds.content.serialize())
+
+        if len(pages) == 0:
+            return None
+
         last_page = pages[::-1][0].get('valeur')
 
         width, w_idthL, height, h_eightL = None, None, None, None
