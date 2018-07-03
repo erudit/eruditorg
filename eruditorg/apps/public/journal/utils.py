@@ -9,6 +9,8 @@ def prepublication_querystring(object):
         issue = object.issue
     else:
         raise ValueError()
+    if issue.is_published:
+        return None
     return "ticket={ticket}".format(
         ticket=issue.prepublication_ticket
     )
