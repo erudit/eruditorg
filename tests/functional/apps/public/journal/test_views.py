@@ -1,3 +1,5 @@
+from lxml import etree as et
+
 import datetime as dt
 import io
 import os
@@ -564,6 +566,31 @@ class TestArticleDetailView:
             data = {'ticket': ticket}
         response = Client().get(url, data=data)
         assert response.status_code == expected_code
+
+    @pytest.mark.parametrize("is_published,ticket_expected", [
+        (True, False),
+        (False, True),
+    ])
+    def test_prepublication_ticket_is_propagated_to_other_pages(self, is_published, ticket_expected):
+        localidentifier = "espace03368"
+        issue = IssueFactory(localidentifier=localidentifier, is_published=is_published)
+        articles = ArticleFactory.create_batch(issue=issue, size=3)
+        article = articles[1]
+        url = article_detail_url(article)
+        ticket = md5(localidentifier.encode()).hexdigest()
+        response = Client().get(url, data={'ticket': ticket})
+
+        from io import StringIO
+        tree = et.parse(StringIO(response.content.decode()), et.HTMLParser())
+
+        # Test that the ticket is in the breadcrumbs
+        bc_hrefs = [e.get('href') for e in tree.findall('.//nav[@id="breadcrumbs"]//a')]
+        pa_hrefs = [e.get('href') for e in tree.findall('.//div[@class="pagination-arrows"]/a')]
+
+        # This is easier to debug than a generator
+        for href in bc_hrefs + pa_hrefs:
+            assert ('ticket' in href) == ticket_expected
+
 
     def test_fedora_article_with_external_url_redirects(self):
         # When we have an article with a fedora localidentifier *and* external_url set, we redirect
