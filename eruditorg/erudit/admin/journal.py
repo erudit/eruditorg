@@ -12,8 +12,6 @@ from ..models import Journal
 from ..models import JournalInformation
 from ..models import JournalType
 
-from apps.public.journal.utils import prepublication_querystring
-
 
 class JournalDisciplineInline(admin.TabularInline):
     model = Journal.disciplines.through
@@ -138,9 +136,9 @@ class IssueAdmin(admin.ModelAdmin):
                 'issue_slug': obj.volume_slug, 'localidentifier': obj.localidentifier, }
         )
         if not obj.is_published:
-            url = "{url}?{querystring}".format(
+            url = "{url}?ticket={ticket}".format(
                 url=url,
-                querystring=prepublication_querystring(obj)
+                querystring=obj.prepublication_ticket
             )
         return format_html(
             '<a href={}>{}</a>', url, _("Voir sur le site")

@@ -21,8 +21,17 @@ class InstitutionRefererInline(admin.TabularInline):
     model = InstitutionReferer
 
 
+class InstitutionIPAddressRangeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subscription'].queryset = JournalAccessSubscription.objects.exclude(
+            organisation=None
+        ).prefetch_related('organisation')
+
+
 class InstitutionIPAddressRangeAdmin(admin.ModelAdmin):
     search_fields = ('subscription__organisation__name',)
+    form = InstitutionIPAddressRangeForm
 
 
 class SubscriptionTypeListFilter(admin.SimpleListFilter):

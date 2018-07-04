@@ -2,8 +2,6 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
-from .. import utils
-
 register = template.Library()
 
 
@@ -26,11 +24,6 @@ def format_article_title(article):
     Display the title if it exists otherwise display "untitled"
     """
     return article.title if article.title else _("[Article sans titre]")
-
-
-@register.filter
-def prepublication_querystring(article):
-    return utils.prepublication_querystring(article)
 
 
 @register.filter

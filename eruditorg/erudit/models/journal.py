@@ -511,11 +511,12 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
         If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
         """
+
         try:
             return Issue.objects.get(localidentifier=issue_id)
         except Issue.DoesNotExist:
             try:
-                journal = Journal.objects.get(code=journal_code)
+                journal = Journal.legacy_objects.get_by_id(journal_code)
             except Journal.DoesNotExist:
                 raise Issue.DoesNotExist()
             else:
