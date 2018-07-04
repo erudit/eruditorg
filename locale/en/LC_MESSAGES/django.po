@@ -5441,7 +5441,7 @@ msgstr ""
 "\n"
 "<p>The Dashboard gives you access to all services and information related to the production and dissemination of your journal: file submissions, list of institutional subscribers, statistics and royalty reports, etc.</p>\n"
 "\n"
-"<p>If you have any questions, check the <a href=\"https://www.erudit.org/public/documents/Guide_journaldashboard.pdf\" target=\"_blank\">Dashboard guide</a>, or contact us at <a href=\"mailto:edition@erudit.org?subject=Dashboard%%20&ndash;%%20%(journal)s\">edition@erudit.org</a>.%%%%%%%%</p>\n"
+"<p>If you have any questions, check the <a href=\"https://www.erudit.org/public/documents/Guide_journaldashboard.pdf\" target=\"_blank\">Dashboard guide</a>, or contact us at <a href=\"mailto:edition@erudit.org?subject=Dashboard%%20&ndash;%%20%(journal)s\">edition@erudit.org</a>.%%20%%20%%20%%20</p>\n"
 "\n"
 "<p><br>Sincerely, <br><br>The Érudit team.</p>\n"
 
@@ -5463,7 +5463,7 @@ msgstr ""
 "Publishing and digital production:<br>\n"
 " Hocine Chehab, <br>Digital Publishing Officer<br>\n"
 "<a href=\"mailto:hocine.chehab@erudit.org?subject=Dashboard%%20&ndash;%%20%(journal)s\">hocine.chehab@erudit.org</a><br>\n"
-"<a href=\"tel:1-514-343-6111,44607\">+1 514-343-6111 ext. 44607</a>%%%%%%%%"
+"<a href=\"tel:1-514-343-6111,44607\">+1 514-343-6111 ext. 44607</a>%%20%%20%%20%%20"
 
 #: templates/userspace/journal/home.html:47
 #, python-format
@@ -5479,7 +5479,7 @@ msgstr ""
 "        Subscriptions, royalties and partnerships:<br>\n"
 "        Émilie Chouinard, <br>Partnerships Officer<br>\n"
 "        <a href=\"mailto:emilie.chouinard@erudit.org?subject=Dashboard%%20&ndash;%%20%(journal)s\">emilie.chouinard@erudit.org</a><br>\n"
-"        <a href=\"tel:1-514-343-6111,16563\">+1 514-343-6111 ext. 16563</a>%%%%%%%%\n"
+"        <a href=\"tel:1-514-343-6111,16563\">+1 514-343-6111 ext. 16563</a>%%20%%20%%20%%20\n"
 "        "
 
 #: templates/userspace/journal/home.html:60
@@ -5496,7 +5496,7 @@ msgstr ""
 "Communications and promotion: <br>\n"
 "Gwendal Henry, <br>Communications Officer<br>\n"
 "<a href=\"mailto:gwendal.henry@erudit.org?subject=Dashboard%%20&ndash;%%20%(journal)s\">gwendal.henry@erudit.org</a><br>\n"
-"<a href=\"tel:1-514-343-6111,2723\">+1 514-343-6111 ext. 2723</a>%%%%%%%%"
+"<a href=\"tel:1-514-343-6111,2723\">+1 514-343-6111 ext. 2723</a>%%20%%20%%20%%20"
 
 #: templates/userspace/journal/home.html:73
 #, python-format
@@ -5506,7 +5506,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"       If you have any other questions, send a message to our general email address: <a href=\"mailto:info@erudit.org?subject=Dashboard%%20–%%20%%20%(journal)s\">info@erudit.org</a>.%%%%%%\n"
+"       If you have any other questions, send a message to our general email address: <a href=\"mailto:info@erudit.org?subject=Dashboard%%20–%%20%%20%(journal)s\">info@erudit.org</a>.%%20%%20%%20\n"
 "        "
 
 #: templates/userspace/journal/information/journalinformation_update.html:15
@@ -5760,7 +5760,7 @@ msgstr "Batch <br><strong>subscription</strong>"
 
 #: templates/userspace/journal/subscription/individualsubscription_list.html:36
 msgid "<strong>Désabonner</strong> <br>en lot"
-msgstr "Batch <br><strong>subscription cancellation</strong>"
+msgstr "Batch <br><strong>cancellation</strong>"
 
 #: templates/userspace/journal/subscription/individualsubscription_list.html:42
 msgid "Liste des abonnés"
@@ -5789,7 +5789,7 @@ msgid ""
 "<p>Cette page vous présente la liste des institutions abonnées à votre revue sur Érudit, avec le type d’abonnement (panier ou nom du consortium). À noter que les revues en libre accès complet ne présentent pas de données sur cette page.</p>\n"
 msgstr ""
 "\n"
-"<p>This section lists institutions that are subscribed to your journal on Érudit, along with the type of subscription (by basket or consortium name). Please note that journals with a full open access policy are not included in this list.</p>\n"
+"<p>This section lists institutions that are subscribed to your journal on Érudit, along with the type of subscription (for example, by collection, \"panier\", or single title, \"titre\"). Please note that journals with a full open access policy are not included in this list.</p>\n"
 
 #: templates/userspace/journal/subscription/organisationsubscription_list.html:23
 msgid "Institutions abonnées par année"
@@ -6057,7 +6057,7 @@ msgstr ""
 "\n"
 "<p>The Dashboard gives you access to all services and info regarding your organization's subscription to Érudit journals: usage statistics, ranges of IP addresses, institutional logo, collection management, records, etc.</p>\n"
 "\n"
-"<p>If you have any questions, check the <a href=\"https://www.erudit.org/public/documents/Guide_dashboard_library.pdf\" target=\"_blank\">Dashboard guide</a>, or contact us at  <a href=\"mailto:client@erudit.org?subject=Dashboard%%20–%%20%(organisation)s\">client@erudit.org</a>.%%%%%%%%</p>\n"
+"<p>If you have any questions, check the <a href=\"https://www.erudit.org/public/documents/Guide_dashboard_library.pdf\" target=\"_blank\">Dashboard guide</a>, or contact us at  <a href=\"mailto:client@erudit.org?subject=Dashboard%%20–%%20%(organisation)s\">client@erudit.org</a>.%%20%%20%%20%%20</p>\n"
 "\n"
 "<p>\n"
 "  <br>Sincerely,\n"
@@ -6082,7 +6082,7 @@ msgstr ""
 "        Subscriptions, usage and access:<br>\n"
 "        Émilie Chouinard, <br>Partnerships Officer<br>\n"
 "        <a href=\"mailto:emilie.chouinard@erudit.org?subject=Library%%20dashboard%%20–%%20%%20%(organisation)s\">emilie.chouinard@erudit.org</a><br>\n"
-"        <a href=\"tel:1-514-343-6111,16563\">+1 514-343-6111, extension 16563</a>\n"
+"        <a href=\"tel:1-514-343-6111,16563\">+1 514-343-6111, ext. 16563</a>\n"
 "        "
 
 #: templates/userspace/library/home.html:51
