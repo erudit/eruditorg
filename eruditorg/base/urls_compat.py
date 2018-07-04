@@ -94,13 +94,13 @@ journal_url_patterns = [
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_culture_year_volume"),
-    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/index\.html?$',  # noqa
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<year>\d{4})/v(?P<v>[\w-]*)/(?P<localidentifier>[\w-]+)/[\w-]+\.html?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_culture_year_volume_index"),
     url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/?$',
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_culture"),
-    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/index\.html?$',  # noqa
+    url(r'^culture/(?P<journal_code>[\w-]+)/(?P<localidentifier>[\w-]+)/[\w-]+\.html?$',  # noqa
         journal_views_compat.IssueDetailRedirectView.as_view(),
         name="legacy_issue_detail_culture_index"),
 
