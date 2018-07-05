@@ -135,10 +135,10 @@ class IssueAdmin(admin.ModelAdmin):
                 'journal_code': obj.journal.code,
                 'issue_slug': obj.volume_slug, 'localidentifier': obj.localidentifier, }
         )
-        if not obj.is_published:
+        if not obj.is_published and obj.journal.collection.is_main_collection:
             url = "{url}?ticket={ticket}".format(
                 url=url,
-                querystring=obj.prepublication_ticket
+                ticket=obj.prepublication_ticket
             )
         return format_html(
             '<a href={}>{}</a>', url, _("Voir sur le site")
