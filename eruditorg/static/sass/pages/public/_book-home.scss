@@ -1,0 +1,165 @@
+/**
+* Books and proceedings homepage
+*/
+
+#book_home {
+
+  .glory {
+    padding: 2.5em 0;
+    margin: 1em 0 2em 0;
+  }
+
+  .latest-book {
+    padding: 1.5em;
+
+    h3 {
+      font-size: 14px;
+      border: 0;
+      line-height: 1.35;
+    }
+
+    blockquote {
+      padding: 0;
+      margin-left: 0;
+      font-size: 14px;
+      border: 0;
+      @include fw-sans-italic;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    img {
+      margin: 0 1em 0 0;
+    }
+
+  }
+
+  .collection-list {
+    list-style: none;
+    margin: 1.5em 0;
+
+    @include column-count(2);
+
+    @media (max-width: $screen-sm-max) {
+      @include column-count(1);
+    }
+
+    li {
+      margin-bottom: 1.5em;
+    }
+
+    a {
+      color: #000;
+    }
+
+  }
+
+  .sorting-group {
+    margin-top: 3em;
+
+    ul {
+      list-style: none;
+      margin: 0;
+    }
+
+    &.even {
+      background: $light-grey;
+      padding: 3em 0;
+    }
+
+    .collection-title h3 {
+      color: $coral-red;
+      font-size: 1em;
+    }
+
+    .book-item {
+
+      p, li {
+        font-size: 14px;
+        line-height: 1.25;
+
+        &.book-authors, &.book-copyright {
+          color: $dark-grey;
+        }
+
+        &.book-copyright {
+          margin-top: 1em;
+          line-height: 1;
+        }
+
+      }
+
+      > a {
+        display: block;
+        padding: 0.75em 0.35em;
+        border-top: 1px solid $mid-grey;
+
+        &:hover, &:active, &:focus, &:active:focus {
+          background: $coral-red;
+          color: #FFF;
+          text-decoration: none;
+          border-color: $coral-red;
+
+          img {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+          }
+
+          .book-title span + span,
+          .book-authors,
+          .book-copyright {
+            color: #FFF;
+          }
+
+        }
+
+      }
+    }
+  }
+
+}
+
+/**
+* Row alignment for different viewport sizes / responsive
+**/
+
+@media (max-width: $screen-xs-max) {
+
+  .book-item,
+  .collection-title {
+
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
+@media (max-width: $screen-sm-max) {
+
+  .book-item,
+  .collection-title {
+
+    &:nth-child(4n+1) {
+      clear: both;
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-md-min) {
+
+  .book-item,
+  .collection-title {
+
+    &:nth-child(6n+1) {
+      clear: both;
+    }
+
+  }
+
+}
