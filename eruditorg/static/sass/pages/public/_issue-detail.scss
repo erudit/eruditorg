@@ -98,7 +98,7 @@
     font-size: 18px;
   }
 
-  .issue_detail--articles {
+  .bib-records {
 
     &.section-2{
       margin-left: 20px;
@@ -108,67 +108,9 @@
       margin-left: 40px;
     }
 
-    .article-item {
-      padding: 1.5em 0;
-      border-bottom: 1px solid $mid-grey;
-
-      &:first-child {
-        border-top: 1px solid $mid-grey;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      .article-title {
-        margin-bottom: 0.5em;
-        padding-right: 65px;
-        font-size: 1.15em;
-        line-height: 1.25;
-        letter-spacing: normal;
-        @include font-styles(serif);
-      }
-
-      .article-metadata {
-        margin-top: 1.25em;
-      }
-
-      .article-author {
-        font-size: 14px;
-      }
-
-      .article-pagination,
-      .article-record {
-        font-size: 12px;
-        text-align: right;
-      }
-
-      .article-links,
-      .article-record {
-        font-size: 12px;
-        color: $dark-grey;
-
-        a {
-          color: $coral-red;
-
-          &:hover, &:focus {
-            text-decoration: none;
-          }
-
-        }
-
-        .akkordion .icon {
-          float: none;
-          margin-left: 0.25em;
-        }
-
-      }
-
-    }
-
     .article-restricted {
 
-      .article-title {
+      .bib-record__title {
 
         a {
           color: $dark-grey;
@@ -185,7 +127,7 @@
 
   }
 
-  .issue_detail--articles + .issue_detail--articles {
+  .bib-records + .bib-records {
 
     .article-item:first-child {
       border-top: 1px solid $dark-grey;

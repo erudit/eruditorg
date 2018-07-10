@@ -1,0 +1,68 @@
+/**
+ * Bibliographic records
+ * Used in issue summaries, book chapter TOCs, search results, My Library...
+ */
+
+.bib-records {
+   margin: 0;
+}
+
+.bib-record {
+  padding: 1.5em 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid $mid-grey;
+
+  &:first-child {
+    border-top: 1px solid $mid-grey;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+}
+
+.bib-record__title {
+  margin-bottom: 0.5em;
+  padding-right: 65px;
+  font-size: 1.15em;
+  line-height: 1.25;
+  letter-spacing: normal;
+  @include font-styles(serif);
+}
+
+.bib-record__metadata {
+  margin-top: 1.25em;
+}
+
+.bib-record__authors {
+  font-size: 14px;
+}
+
+.bib-record__pages,
+.bib-record__record-link {
+  font-size: 12px;
+  text-align: right;
+}
+
+.bib-record__abstract,
+.bib-record__record-link {
+  font-size: 12px;
+  color: $dark-grey;
+
+  a {
+    color: $coral-red;
+
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+
+  }
+
+  .akkordion .icon {
+    float: none;
+    margin-left: 0.25em;
+  }
+
+}

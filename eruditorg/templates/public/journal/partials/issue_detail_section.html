@@ -1,6 +1,6 @@
 {% for group in articles_per_section.groups %}
   {% if group.type == 'objects' %}
-    <ol class="issue_detail--articles unstyled section-{{ group.level }}">
+    <ol class="bib-records section-{{ group.level }}">
       {% for article in group.objects %}
       {% include "public/journal/partials/issue_detail_article_item.html" %}
       {% endfor %}

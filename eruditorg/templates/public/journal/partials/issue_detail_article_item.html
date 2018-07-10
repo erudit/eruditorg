@@ -1,7 +1,7 @@
 {% load cache i18n model_formatters public_journal_tags waffle_tags %}
 
 {% cache FOREVER_TTL "public_issue_detail_articles_item" article.id LANGUAGE_CODE %}
-<li class="article-item{% if not article.publication_allowed %} article-restricted{% endif %}">
+<li class="bib-record{% if not article.publication_allowed %} article-restricted{% endif %}">
   <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
     {% spaceless %}
     <li>
@@ -31,7 +31,7 @@
     {% endif %}
     {% endspaceless %}
   </ul>
-  <h6 class="article-title">
+  <h6 class="bib-record__title">
     {% if not article.publication_allowed %}
     <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}"><span class="ion-help-circled"></span></span>
     {% endif %}
@@ -48,11 +48,11 @@
     </a>
     {% endspaceless %}
   </h6>
-  <div class="article-metadata row">
-    <p class="article-author col-sm-9">
+  <div class="bib-record__metadata row">
+    <p class="bib-record__authors col-sm-9">
       {{ article.erudit_object.get_formatted_authors | safe }}
     </p>
-    <p class="article-pagination col-sm-3">
+    <p class="bib-record__pages col-sm-3">
       {% with first_page=article.first_page last_page=article.last_page %}
       {% if first_page and last_page and first_page != last_page %}
       {% blocktrans trimmed with first_page=first_page last_page=last_page %}p.&nbsp;{{ first_page }}–{{ last_page }}{% endblocktrans %}
@@ -61,7 +61,7 @@
       {% endif %}
       {% endwith %}
     </p>
-    <p class="article-record col-sm-3 pull-right">
+    <p class="bib-record__record-link col-sm-3 pull-right">
       {% if issue.journal.collection.code == 'erudit' %}
       <a href="{% url 'public:journal:article_summary' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" title="{% blocktrans %}Voir la notice{% endblocktrans %}">
         {% trans "Notice" %}
@@ -69,7 +69,7 @@
       {% endif %}
     </p>
     {% if article.erudit_object.abstracts %}
-    <p class="article-links col-xs-9">
+    <p class="bib-record__abstract col-xs-9">
       <span class="affiliations akkordion" data-akkordion-single="true">
         <a class="affiliations-label akkordion-title">{% trans 'Résumé' %} <span class="icon ion-ios-arrow-down"></span></a>
         <span class="akkordion-content unstyled">
