@@ -96,7 +96,10 @@
           </div>
           <div class="documents-wrapper">
             <div class="documents-head">
-              <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Tout sélectionner" %}</span><input type="checkbox"></label></div>
+              <div class="document-checkbox-wrapper checkbox">
+                <input type="checkbox" name="select-all" class="form-control" id="select-all">
+                <label><span class="sr-only" for="select-all">{% trans "Tout sélectionner" %}</span></label>
+              </div>
               <div class="document-title"><strong>{% trans "Titres" %}</strong></div>
             </div>
             <ul class="documents">
@@ -129,7 +132,11 @@
                   </li>
                   {% endspaceless %}
                 </ul>
-                <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
+
+                <div class="document-checkbox-wrapper checkbox">
+                  <input type="checkbox" name="select-document-{{ document.id }}" class="form-control" id="select-document-{{ document.id }}">
+                  <label><span class="sr-only" for="select-document-{{ document.id }}">{% trans "Sélectionner" %}</span></label>
+                </div>
                 <h3 class="document-title">
                   <a href="{{ document.get_absolute_url }}" target="_blank">
                     {{ document.title }}{% if document.subtitle %}{% trans "&nbsp;:" %} {{ document.subtitle }}{% endif %}
@@ -215,7 +222,12 @@
                   </li>
                   {% endspaceless %}
                 </ul>
-                <div class="document-checkbox-wrapper"><label><span class="sr-only">{% trans "Sélectionner" %}</span><input type="checkbox"></label></div>
+
+                <div class="document-checkbox-wrapper checkbox">
+                  <input type="checkbox" name="select-document-{{ document.id }}" class="form-control" id="select-document-{{ document.id }}">
+                  <label><span class="sr-only" for="select-document-{{ document.id }}">{% trans "Sélectionner" %}</span></label>
+                </div>
+
                 <h3 class="document-title">
                   <a href="{{ document.url }}" target="_blank">{{ document.title }}</a>
                 </h3>
