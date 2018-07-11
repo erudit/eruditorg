@@ -23,9 +23,9 @@
 {% endblock section_intro %}
 
 {% block content_main %}
-<ul class="tabs-group">
+<ul class="tabs">
   {% for langcode, langname in LANGUAGES %}
-  <li class="tab {% if langcode == selected_language %}active{% endif %}">
+  <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
     <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ langcode }}">{{ langname }}</a>
   </li>
   {% endfor %}

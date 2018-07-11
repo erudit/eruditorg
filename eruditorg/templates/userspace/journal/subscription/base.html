@@ -12,17 +12,17 @@
 {% endblock %}
 
 {% block content_main %}
-<ul class="tabs-group">
+<ul class="tabs">
   {% has_perm 'subscription.manage_individual_subscription' request.user scope_current_journal as can_manage_individual_subscription %}
   {% has_perm 'subscription.manage_institutional_subscription' request.user scope_current_journal as can_manage_institutional_subscription %}
 
   {% if can_manage_institutional_subscription %}
-  <li class="tab {% if view.is_org_view %}active{% endif %}">
+  <li class="tabs__item{% if view.is_org_view %} tabs__item_active{% endif %}">
     <a href="{% url 'userspace:journal:subscription:org_list' scope_current_journal.pk %}">{% trans "Institutionnels" %}</a>
   </li>
   {% endif %}
   {% if can_manage_individual_subscription %}
-  <li class="tab {% if not view.is_org_view %}active{% endif %}">
+  <li class="tabs__item{% if not view.is_org_view %} tabs__item_active{% endif %}">
     <a href="{% url 'userspace:journal:subscription:list' scope_current_journal.pk %}">{% trans "Individuels" %}</a>
   </li>
   {% endif %}

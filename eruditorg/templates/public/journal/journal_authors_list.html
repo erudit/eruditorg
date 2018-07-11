@@ -86,14 +86,14 @@
     <nav>
       <h2 class="sr-only">{% trans 'Par type d’article' %}</h2>
       {% url 'public:journal:journal_authors_list' journal.code as authors_list_url %}
-      <ul class="tabs-group">
-        <li class="tab{% if request.get_full_path == authors_list_url %} active{% endif %}">
+      <ul class="tabs">
+        <li class="tabs__item{% if request.get_full_path == authors_list_url %} tabs__item_active{% endif %}">
           <a href="{{ authors_list_url }}" title="{% trans 'Voir tous les auteurs' %}">{% trans "Tous" %}</a>
         </li>
-        <li class="tab{% if article_type == 'article' %} active{% endif %}">
+        <li class="tabs__item{% if article_type == 'article' %} tabs__item_active{% endif %}">
           <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}">{% trans "Articles" %}</a>
         </li>
-        <li class="tab{% if article_type == 'compterendu' %} active{% endif %}">
+        <li class="tabs__item{% if article_type == 'compterendu' %} tabs__item_active{% endif %}">
           <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}">{% trans "Comptes rendus" %}</a>
         </li>
       </ul>

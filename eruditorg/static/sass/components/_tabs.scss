@@ -2,38 +2,35 @@
  * Tabs
  */
 
-.tabs-group {
+.tabs {
   display: block;
   border-bottom: 1px solid $mid-grey;
   margin: 50px 0;
   padding: 0;
+}
 
-  .tab {
-    display: inline-block;
-    margin: 0 $grid-gutter-width/4 0 0;
-    padding: 0;
-    a {
-      @include transition(all 250ms);
-      padding: $padding-base-vertical $padding-base-horizontal;
-      display: block;
-      background: $light-grey;
-      &:hover {
-        background-color: $coral-red;
-        border-color: $coral-red;
-        color: #fff;
-        text-decoration: none;
-      }
+.tabs__item {
+  display: inline-block;
+  margin: 0 $grid-gutter-width/4 0 0;
+  padding: 0;
+  a {
+    @include transition(all 250ms);
+    padding: $padding-base-vertical $padding-base-horizontal;
+    display: block;
+    background: $light-grey;
+    &:hover {
+      background-color: $coral-red;
+      border-color: $coral-red;
+      color: #fff;
+      text-decoration: none;
     }
-
-
-    &.active {
-      a {
-        background-color: $coral-red;
-        color: #fff;
-        border-color: $coral-red;
-      }
-    }
-
   }
+}
 
+.tabs__item_active {
+  a {
+    background-color: $coral-red;
+    color: #fff;
+    border-color: $coral-red;
+  }
 }
