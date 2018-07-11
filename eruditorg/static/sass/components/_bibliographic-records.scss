@@ -23,6 +23,13 @@
 
 }
 
+.bib-record__type {
+  font-size: 12px;
+  color: $dark-grey;
+  text-transform: uppercase;
+  @include font-styles(mono);
+}
+
 .bib-record__title {
   margin-bottom: 0.5em;
   padding-right: 65px;
@@ -32,8 +39,16 @@
   @include font-styles(serif);
 }
 
+.bib-record__counter:before {
+  content: attr(data-record-counter)" ";
+  color: $coral-red;
+  font-size: 14px;
+  @include font-styles(mono);
+}
+
 .bib-record__metadata {
   margin-top: 1.25em;
+  font-size: 14px;
 }
 
 .bib-record__authors {
