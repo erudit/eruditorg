@@ -1,2 +1,314 @@
 {% extends "base.html" %}
 {% load humanize i18n staticfiles %}
+
+{% block title %}Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle){% endblock title %}
+
+{% block meta_description %}{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}{% endblock meta_description %}
+
+{% block meta_tags %}
+<!-- Facebook / Open Graph -->
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)">
+<meta property="og:site_name" content="Érudit">
+<meta property="og:locale" content="{{ language_code }}_CA">
+<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+<meta property="og:description" content="{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@eruditorg">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:title" content="Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle) – Érudit">
+<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+<meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
+<meta name="twitter:description" content="{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}">
+{% endblock meta_tags %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:home' %}",
+      "name": "{% trans 'Livres et actes' %}"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' %}",
+      "name": "{% trans 'Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)' %}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
+{% block body_class %}{{ block.super }} book_detail{% endblock body_class %}
+{% block body_id %}book_detail{% endblock body_id %}
+{% block data_controller %}public:book:book_detail{% endblock data_controller %}
+
+{% block breadcrumb %}
+{{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
+<li><a href="{% url 'public:book:book_detail' %}">Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a></li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {# Book TOC #}
+    <main role="main" class="col-sm-8 col-md-7">
+      <header class="main-header">
+        <p class="title-tag">{% trans "Livres" %}</p>
+        <h1 class="book-title">
+          <span>Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</span>
+        </h1>
+        <p class="book-authors">{% trans 'Sous la direction de' %} Patrick Thériault</p>
+        <div class="main-header__intro">
+          <p>Le présent volume dérive d’un constat&nbsp;: un idéal incantatoire féconde de part en part la modernité littéraire et continue encore aujourd’hui d’exercer son charme. De fait, le corpus de la littérature moderne et contemporaine offre une variété de créations verbales se désignant comme des incantations ou pouvant de bon droit être désignées comme telles&nbsp;; et on n’y compte plus les propos d’auteur, les commentaires et les élaborations théoriques qui sollicitent, à des fins d’analyse ou d’analogie, le nom «&nbsp;incantation&nbsp;» et les lexèmes qui y sont apparentés.</p>
+          <p>Les études ici réunies cherchent à donner un relief plus net à cet idéal incantatoire.   C’est dire qu’en faisant saillir les riches ressources d’expressivité   et de figuralité de l’incantation, en donnant à voir et à entendre ses multiples   aspects et échos, elles espèrent ouvrir de prometteuses pistes de réflexion sur   l’engouement marqué pour l’opérativité du langage dont témoigne la littérature   des deux derniers siècles.</p>
+          <p><i>Les Presses françaises de l’Université de Toronto ont pour mission d’assurer le rayonnement     des meilleures contributions scientifiques issues des activités de recherche organisées par     les membres du Département d’études françaises de l’Université de Toronto et des autres     unités de recherche de l’Université de Toronto associées aux études françaises. Cette maison     d’édition exclusivement numérique a été fondée en 2017, à l’initiative du professeur Patrick     Thériault. Pour toute information, prière de vous adresser à Patrick Thériault (<a href="mailto:patrick.theriault@utoronto.ca">patrick.theriault@utoronto.ca</a>). </i></p>
+        </div>
+      </header>
+
+      <section class="toc">
+        <h2 class="toc__title">{% trans "Table des matières" %} ({{ articles|length }} {% trans "chapitres" %})</h2>
+
+        <h3 class="toc__heading">
+          <strong>Introduction</strong>
+        </h3>
+        <ol class="bib-records">
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: le cas exemplaire de la modernité symboliste
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+        </ol>
+
+        <h3 class="toc__heading">
+          <strong>XIX<sup>e</sup> siècle</strong>
+        </h3>
+        <ol class="bib-records">
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">Rimbaud&nbsp;: <em>incanto</em>, <em>excanto</em> et au-delà</a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Seth Whidden</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">Rimbaud et l’incantation au second degré</a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Denis Saint-Amand</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Rimbaud : incanto, excanto et au-delà
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Rimbaud : incanto, excanto et au-delà
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Rimbaud : incanto, excanto et au-delà
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+
+
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Rimbaud : incanto, excanto et au-delà
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+        </ol>
+
+        <h3 class="toc__heading">
+          <strong>XX<sup>e</sup> siècle</strong>
+        </h3>
+        <ol class="bib-records">
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Une littérature « comme incantatoire » : le cas exemplaire de la modernité symboliste
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+
+
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Rimbaud : incanto, excanto et au-delà
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+
+
+          <li class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="#" title="Sauvegarder" data-citation-save="#"><span class="ion-bookmark toolbox-save"></span></a><a class="tool-btn saved" href="#" title="Supprimer" data-citation-remove="#" style="display: none;"><span class="ion-bookmark toolbox-save"></span></a></li><li><a class="tool-btn" href="#" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
+
+            <h6 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' %}" title="Lire le chapitre">
+                Rimbaud : incanto, excanto et au-delà
+              </a>
+            </h6>
+
+            <div class="bib-record__metadata row">
+              <p class="bib-record__authors col-sm-9">Patrick Thériault</p>
+              <p class="bib-record__pages col-sm-3">pp. 9&ndash;34</p>
+            </div>
+          </li>
+        </ol>
+
+        <p class="toc__copyright">
+          <small>© Les Presses de l’Université Laval, 1994</small>
+        </p>
+      </section>
+    </main>
+
+    {# Book information sidebar #}
+    <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
+
+      <div class="sidebar-block clearfix latest-issue">
+        <h2>{% trans "Couverture" %}</h2>
+        <a href="http://retro.erudit.org/livre/images/incantation2018.jpg" class="lightbox"  title="{% trans 'Voir la couverture de ce livre' %}">
+          <img src="http://retro.erudit.org/livre/images/incantation2018.jpg" alt="Couverture de Langue, espace, société. Les variétés du français en Amérique du Nord" class="img-responsive latest-issue--cover issue-cover lightbox"/>
+        </a>
+      </div>
+
+      <div class="sidebar-block">
+        <h2>{% trans "Fiche" %}</h2>
+
+        <dl class="journal-meta--list">
+          <dt>{% trans "Collection" %}</dt>
+          <dd><a href="#">Culture française d’Amérique</a></dd>
+
+          <dt>{% trans "Année de publication" %}</dt>
+          <dd>2018</dd>
+
+          <dt>{% trans "Éditeur" %}</dt>
+          <dd>Presses françaises de l’Université de Toronto</dd>
+
+          <dt>{% trans "ISBN" %}</dt>
+          <dd>978-2-9817251-0-3</dd>
+
+          <dt>{% trans "Droit d’auteur" %}</dt>
+          <dd>© Presses françaises de l’Université de Toronto, 2018</dd>
+        </dl>
+      </div>
+    </aside>
+  </div>
+</div>
+
+{# Bottom content in "glory" container #}
+{% block inner_footer %}{% endblock inner_footer %}
+{% endblock %}
