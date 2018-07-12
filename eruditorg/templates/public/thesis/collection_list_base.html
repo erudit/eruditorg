@@ -44,103 +44,101 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<main role="main">
-  <div class="container">
-    <header class="main-header">
-      <div class="row">
-        <div class="col-sm-9 col-xs-8">
-          <h1>
-            <span class="thesis-collection">{{ repository.name }}</span>
-              <span class="thesis-page-title">{% block inner_title %}{% endblock inner_title %}</span>
-            </h1>
-        </div>
-        <div class="col-md-2 col-md-offset-1 col-sm-3 col-xs-4">
-          {% if repository.logo %}
-          <span class="collection-logo">
-            <img src="{{ repository.logo.url }}" alt="{% trans 'Logo pour'%} {{ repository.name }}" class="img-responsive"/>
-          </span>
-          {% endif %}
-        </div>
-      </div>
-    </header>
-
+<main role="main" class="container">
+  <header class="main-header">
     <div class="row">
-      <div class="col-sm-9 col-md-8 main-content">
-        <h2>{% trans "Liste complète" %}</h2>
-        <div class="alert alert-info">
-          <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
-        </div>
-        <div class="actions-wrapper">
-          <div id="div_id_sort_by" class="form-group">
-            <div class="controls">
-              <label class="control-label" for="sort_by">{% trans "Trier par" %}</label>
-              &nbsp;
-              <select id="sort_by" onChange="window.location.href=this.value">
-                {% for sort_option in available_tris.items %}
-                <option value="?sort_by={{ sort_option.0 }}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
-                {% endfor %}
-              </select>
-            </div>
+      <div class="col-sm-9 col-xs-8">
+        <h1>
+          <span class="thesis-collection">{{ repository.name }}</span>
+          <span class="thesis-page-title">{% block inner_title %}{% endblock inner_title %}</span>
+        </h1>
+      </div>
+      <div class="col-md-2 col-md-offset-1 col-sm-3 col-xs-4">
+        {% if repository.logo %}
+        <span class="collection-logo">
+          <img src="{{ repository.logo.url }}" alt="{% trans 'Logo pour'%} {{ repository.name }}" class="img-responsive"/>
+        </span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <section class="row">
+    <div class="col-sm-9 col-md-8 main-content">
+      <h2>{% trans "Liste complète" %}</h2>
+      <div class="alert alert-info">
+        <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
+      </div>
+      <div class="actions-wrapper">
+        <div id="div_id_sort_by" class="form-group">
+          <div class="controls">
+            <label class="control-label" for="sort_by">{% trans "Trier par" %}</label>
+            &nbsp;
+            <select id="sort_by" onChange="window.location.href=this.value">
+              {% for sort_option in available_tris.items %}
+              <option value="?sort_by={{ sort_option.0 }}"{% if sort_by == sort_option.0 %} selected{% endif %}>{{ sort_option.1 }}</option>
+              {% endfor %}
+            </select>
           </div>
         </div>
-        <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
-        <ul class="theses">
-        {% for thesis in theses %}
-          <li class="thesis row">
-            <div class="col-xs-11">
-              <div class="thesis-author"><strong>{{ thesis.authors }}</strong></div>
-              <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
-              {% if thesis.description or thesis.keywords %}
-              <div class="thesis-description">
-                {% if thesis.description %}
-                <p class="thesis-abstract">
-                  {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}"><strong>-->&nbsp;{% trans 'Lire la suite' %}</strong></a>
-                </p>
-                {% endif %}
-                {% if thesis.keywords %}
-                <p class="keywords">
-                  <span><strong>{% trans "Mots-clés&nbsp;:" %}</strong></span>
-                  <span>{{ thesis.keywords }}</span>
-                </p>
-                {% endif %}
-              </div>
+      </div>
+      <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
+      <ul class="theses">
+      {% for thesis in theses %}
+        <li class="thesis row">
+          <div class="col-xs-11">
+            <div class="thesis-author"><strong>{{ thesis.authors }}</strong></div>
+            <a href="{{ thesis.url }}" class="thesis-title" target="_blank" title="{% trans 'Consulter cette thèse' %}">{{ thesis.publication_year }} — {{ thesis.title }}</a>
+            {% if thesis.description or thesis.keywords %}
+            <div class="thesis-description">
+              {% if thesis.description %}
+              <p class="thesis-abstract">
+                {{ thesis.description|truncatewords_html:100 }} <a href="{{ thesis.url }}" target="_blank" title="{% trans 'Consulter cette thèse' %}"><strong>-->&nbsp;{% trans 'Lire la suite' %}</strong></a>
+              </p>
+              {% endif %}
+              {% if thesis.keywords %}
+              <p class="keywords">
+                <span><strong>{% trans "Mots-clés&nbsp;:" %}</strong></span>
+                <span>{{ thesis.keywords }}</span>
+              </p>
               {% endif %}
             </div>
-            {% if thesis.description or thesis.keywords.all %}
-            <div class="col-xs-1 text-right">
-              <a href="#" class="thesis-extend"><span class="ion-plus"></span></a>
-              <a href="#" class="thesis-reduce"><span class="ion-minus"></span></a>
-            </div>
             {% endif %}
-          </li>
-        {% endfor %}
-        </ul>
-        <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
-      </div>
-      <aside class="col-sm-3 col-md-offset-1 repository-meta">
-        <div class="sidebar-block">
-          <h2>{% trans "Fiche" %}</h2>
-          <dl>
-            <dt>{% trans "Nombre de documents" %}</dt>
-            <dd>{{ thesis_count|intcomma }}</dd>
-            {% block inner_list_switcher %}{% endblock inner_list_switcher %}
-          </dl>
-        </div>
-        <div class="sidebar-block">
-          <h3>{% trans "En un coup d’œil" %}</h3>
-          <ul class="random-theses">
-            {% for thesis in sidebar_theses %}
-            <li>
-              <a href="{{ thesis.url }}">
-                <span class="thesis-title">{{ thesis.title }}</span>
-                <span class="thesis-author"><strong>{{ thesis.authors }}</strong></span>
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </aside>
+          </div>
+          {% if thesis.description or thesis.keywords.all %}
+          <div class="col-xs-1 text-right">
+            <a href="#" class="thesis-extend"><span class="ion-plus"></span></a>
+            <a href="#" class="thesis-reduce"><span class="ion-minus"></span></a>
+          </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+      <div class="pagination-wrapper">{% include "public/partials/pagination.html" %}</div>
     </div>
-  </div>
+    <aside class="col-sm-3 col-md-offset-1 repository-meta">
+      <div class="sidebar-block">
+        <h2>{% trans "Fiche" %}</h2>
+        <dl>
+          <dt>{% trans "Nombre de documents" %}</dt>
+          <dd>{{ thesis_count|intcomma }}</dd>
+          {% block inner_list_switcher %}{% endblock inner_list_switcher %}
+        </dl>
+      </div>
+      <div class="sidebar-block">
+        <h3>{% trans "En un coup d’œil" %}</h3>
+        <ul class="random-theses">
+          {% for thesis in sidebar_theses %}
+          <li>
+            <a href="{{ thesis.url }}">
+              <span class="thesis-title">{{ thesis.title }}</span>
+              <span class="thesis-author"><strong>{{ thesis.authors }}</strong></span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+  </section>
 </main>
 {% endblock content %}

@@ -22,32 +22,30 @@
   <div id="id_search_results_metadata" data-results-count="{{ results.pagination.count }}"></div>
 
   {# Header #}
-  <div class="glory">
+  <header class="glory main-header">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <header class="main-header">
-            <h1>{% trans "Résultats de recherche" %}</h1>
-            <div class="main-header__intro">
-              {% if documents %}
-              <p>
-                {% blocktrans trimmed count counter=results.pagination.count %}
-                <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
-                {% plural %}
-                <strong>{{ counter }}</strong> résultats trouvés pour la requête&nbsp;:
-                {% endblocktrans %}
-              </p>
-              {% else %}
-              <p><strong>0</strong> {% trans "résultat trouvé pour la requête&nbsp;:" %}</p>
-              {% endif %}
-              {% if search_elements %}
-              <p class="search-query">
-                {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
-              </p>
-              {% endif %}
-              <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
-            </div>
-          </header>
+          <h1>{% trans "Résultats de recherche" %}</h1>
+          <div class="main-header__intro">
+            {% if documents %}
+            <p>
+              {% blocktrans trimmed count counter=results.pagination.count %}
+              <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
+              {% plural %}
+              <strong>{{ counter }}</strong> résultats trouvés pour la requête&nbsp;:
+              {% endblocktrans %}
+            </p>
+            {% else %}
+            <p><strong>0</strong> {% trans "résultat trouvé pour la requête&nbsp;:" %}</p>
+            {% endif %}
+            {% if search_elements %}
+            <p class="search-query">
+              {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
+            </p>
+            {% endif %}
+            <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
+          </div>
         </div>
         {% if documents %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">
@@ -60,10 +58,10 @@
         {% endif %}
       </div>
     </div>
-  </div>
+  </header>
 
   {# Main content #}
-  <div class="main-content">
+  <section class="main-content">
     <div class="container">
       <div class="row">
       {% if documents %}
@@ -151,7 +149,7 @@
           </aside>
         </form>
         {# Search results #}
-        <div id="search-results" class="col-md-8 col-md-offset-1 search-results">
+        <section id="search-results" class="col-md-8 col-md-offset-1 search-results">
           <h2 class="sr-only">{% trans "Documents repérés" %}</h2>
           {% include "public/search/partials/results_pagination.html" %}
           <ol class="results">
@@ -370,18 +368,18 @@
             {% endfor %}
           </ol>
           {% include "public/search/partials/results_pagination.html" %}
-        </div>
+        </section>
       {% else %}
       {# No results found #}
-        <div class="col-xs-12 no-results">
+        <section class="col-xs-12 no-results">
           <h3>{% trans "Aucun document trouvé&nbsp;!" %}</h3>
           <p>
             <a href="{% url 'public:search:advanced_search' %}" class="btn btn-primary">{% trans "Effectuer une nouvelle recherche" %}</a>
           </p>
-        </div>
+        </section>
       {% endif %}
       </div>
     </div>
-  </div>
+  </section>
 </main>
 {% endblock content %}

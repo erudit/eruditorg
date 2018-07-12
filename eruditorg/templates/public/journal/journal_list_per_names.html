@@ -59,8 +59,8 @@
       </nav>
     </div>
   </div>
-  <div id="id_journal_list_body" class="row">
-      <div class="list-nav">
+  <section id="id_journal_list_body" class="row">
+      <nav class="list-nav">
         <aside class="col-md-3 col-lg-2 sidebar-block filters">
           {% cache LONG_TTL "public_journal_list_form" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value %}
           <form id="filter_form" action="#" method="get" class="akkordion">
@@ -126,7 +126,7 @@
             </ul>
           </div>
         </nav>
-      </div>
+      </nav>
       {% cache LONG_TTL "public_journal_list_list" LANGUAGE_CODE filter_form.collections.value filter_form.types.value filter_form.disciplines.value filter_form.open_access.value filter_form.is_new.value %}
       <div class="col-md-9 col-lg-offset-1 journals-list">
         {% for objects_group in sorted_objects %}
@@ -186,6 +186,6 @@
         {% endfor %}
       </div>
       {% endcache %}
-    </div>
+    </section>
 </main>
 {% endblock content %}

@@ -73,28 +73,26 @@
 
 {% block content %}
 <main role="main">
-  <div class="glory">
+  <header class="glory">
     <div class="container">
-      <header class="main-header">
-        <div class="row">
-          <div class="col-md-10 col-xs-8">
-            <h1>
-              {{ repository.name }}
-              <span class="thesis-count">
-                {{ thesis_count|intcomma }} {% trans "documents" %}
-              </span>
-            </h1>
-          </div>
-          <div class="col-md-2 col-xs-4">
-            {% if repository.logo %}
-            <span class="collection-logo">
-              <img src="{{ repository.logo.url }}" alt="{% trans 'Logo pour' %} {{ repository.name }}" class="img-responsive"/>
+      <div class="row">
+        <div class="col-md-10 col-xs-8">
+          <h1>
+            {{ repository.name }}
+            <span class="thesis-count">
+              {{ thesis_count|intcomma }} {% trans "documents" %}
             </span>
-            {% endif %}
-          </div>
+          </h1>
         </div>
-      </header>
-      <div class="row recent-theses">
+        <div class="col-md-2 col-xs-4">
+          {% if repository.logo %}
+          <span class="collection-logo">
+            <img src="{{ repository.logo.url }}" alt="{% trans 'Logo pour' %} {{ repository.name }}" class="img-responsive"/>
+          </span>
+          {% endif %}
+        </div>
+      </div>
+      <section class="row recent-theses">
         <div class="col-md-3">
           <h2>{% trans "Dernièrement diffusées" %}</h2>
         </div>
@@ -108,34 +106,33 @@
           </p>
         </div>
         {% endfor %}
+      </section>
+    </div>
+  </header>
+
+  <section class="container main-content">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>{% trans "Par année" %}</h2>
+        <ul class="theses-list">
+        {% for year, count in view.by_publication_year %}
+          <li>
+            <a href="{% url 'public:thesis:collection_list_per_year' repository.code year %}" class="aggregation-link">{{ year }} [{{ count|intcomma }}]</a>
+          </li>
+        {% endfor %}
+      </ul>
+      </div>
+      <div class="col-md-6">
+        <h2>{% trans "Par nom d'auteur" %}</h2>
+        <ul class="theses-list">
+        {% for letter, count in view.by_author_first_letter %}
+          <li>
+            <a href="{% url 'public:thesis:collection_list_per_author_name' repository.code letter %}" class="aggregation-link">{{ letter }} [{{ count|intcomma }}]</a>
+          </li>
+        {% endfor %}
+      </ul>
       </div>
     </div>
-  </div>
-  <div class="main-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>{% trans "Par année" %}</h2>
-          <ul class="theses-list">
-          {% for year, count in view.by_publication_year %}
-            <li>
-              <a href="{% url 'public:thesis:collection_list_per_year' repository.code year %}" class="aggregation-link">{{ year }} [{{ count|intcomma }}]</a>
-            </li>
-          {% endfor %}
-        </ul>
-        </div>
-        <div class="col-md-6">
-          <h2>{% trans "Par nom d'auteur" %}</h2>
-          <ul class="theses-list">
-          {% for letter, count in view.by_author_first_letter %}
-            <li>
-              <a href="{% url 'public:thesis:collection_list_per_author_name' repository.code letter %}" class="aggregation-link">{{ letter }} [{{ count|intcomma }}]</a>
-            </li>
-          {% endfor %}
-        </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 </main>
 {% endblock content %}
