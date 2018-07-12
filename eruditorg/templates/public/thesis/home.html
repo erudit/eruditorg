@@ -63,19 +63,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <header class="page-header-main">
+        <header class="main-header">
           <h1>
             {% trans "Thèses et mémoires" %}
             <span class="thesis-count">{{ total_count|intcomma }} {% trans "documents" %}</span>
           </h1>
+          <div class="main-header__intro">
+            {% url 'public:search:advanced_search' as advanced_search %}
+            {% blocktrans %}
+            <p>Érudit offre un accès centralisé aux dépôts de thèses et mémoires de plusieurs universités canadiennes. La recherche peut être effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de ceux-ci à partir de l’<a href="{{ advanced_search }}">outil de recherche avancée</a>&nbsp;; la consultation du document nécessite cependant une redirection vers la plateforme de l’institution d’attache.</p>
+            <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt à l’université correspondante.</p>
+            {% endblocktrans %}
+          </div>
         </header>
-        <div class="page-intro">
-          {% url 'public:search:advanced_search' as advanced_search %}
-          {% blocktrans %}
-          <p>Érudit offre un accès centralisé aux dépôts de thèses et mémoires de plusieurs universités canadiennes. La recherche peut être effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de ceux-ci à partir de l’<a href="{{ advanced_search }}">outil de recherche avancée</a>&nbsp;; la consultation du document nécessite cependant une redirection vers la plateforme de l’institution d’attache.</p>
-          <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt à l’université correspondante.</p>
-          {% endblocktrans %}
-        </div>
       </div>
     </div>
 

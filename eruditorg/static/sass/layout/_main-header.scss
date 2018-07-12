@@ -1,21 +1,19 @@
 /**
- * Page headers (containing page title in <h1> and introductory paragraph)
+ * Main headers (containing page title in <h1> and introductory paragraph)
  */
 
-.page-header-main {
+.main-header {
 
   h1 {
     margin-bottom: 0.5em;
-
     > span {
       display: block;
     }
-
   }
 
 }
 
-.page-intro {
+.main-header__intro {
   margin-bottom: 2em;
 
   a {

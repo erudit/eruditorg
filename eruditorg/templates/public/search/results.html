@@ -26,28 +26,28 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <header class="page-header-main">
+          <header class="main-header">
             <h1>{% trans "Résultats de recherche" %}</h1>
+            <div class="main-header__intro">
+              {% if documents %}
+              <p>
+                {% blocktrans trimmed count counter=results.pagination.count %}
+                <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
+                {% plural %}
+                <strong>{{ counter }}</strong> résultats trouvés pour la requête&nbsp;:
+                {% endblocktrans %}
+              </p>
+              {% else %}
+              <p><strong>0</strong> {% trans "résultat trouvé pour la requête&nbsp;:" %}</p>
+              {% endif %}
+              {% if search_elements %}
+              <p class="search-query">
+                {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
+              </p>
+              {% endif %}
+              <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
+            </div>
           </header>
-          <div class="page-intro">
-            {% if documents %}
-            <p>
-              {% blocktrans trimmed count counter=results.pagination.count %}
-              <strong>{{ counter }}</strong> résultat trouvé pour la requête&nbsp;:
-              {% plural %}
-              <strong>{{ counter }}</strong> résultats trouvés pour la requête&nbsp;:
-              {% endblocktrans %}
-            </p>
-            {% else %}
-            <p><strong>0</strong> {% trans "résultat trouvé pour la requête&nbsp;:" %}</p>
-            {% endif %}
-            {% if search_elements %}
-            <p class="search-query">
-              {% for search_element in search_elements %}{{ search_element.str }}{% endfor %}
-            </p>
-            {% endif %}
-            <p><a href="{% url 'public:search:advanced_search' %}?{{ request.GET.urlencode }}" id="id_return_to_advanced" class="btn btn-secondary">{% trans "Modifier la requête" %}</a></p>
-          </div>
         </div>
         {% if documents %}
         <div class="col-md-offset-1 col-md-3 col-sm-offset-3 col-sm-6 text-right">

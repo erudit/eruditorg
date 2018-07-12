@@ -18,17 +18,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 clearfix">
-        <header class="page-header-main">
+        <header class="main-header">
           <h1>
             <span>{% trans "Ma bibliothèque" %}</span>
           </h1>
+          <div class="main-header__intro">
+            {% blocktrans %}
+            <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span class="ion-bookmark toolbox-save"></span>.</p>
+            <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<span class="ion-quote toolbox-cite"></span>.</p>
+            {% endblocktrans %}
+          </div>
         </header>
-        <div class="page-intro">
-          {% blocktrans %}
-          <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span class="ion-bookmark toolbox-save"></span>.</p>
-          <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<span class="ion-quote toolbox-cite"></span>.</p>
-          {% endblocktrans %}
-        </div>
         <div class="main-content documents-list-wrapper">
           <h2>{{ documents|length }} {% trans "notices sauvegardées" %}</h2>
           {% if documents %}

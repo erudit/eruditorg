@@ -93,7 +93,7 @@
 {% cache LONG_TTL "public_issue_detail_summary" issue.id LANGUAGE_CODE issue.is_published %}
 {# Issue summary #}
 <main role="main" class="col-sm-8 col-md-7">
-  <header class="page-header-main">
+  <header class="main-header">
     <p class="title-tag"><a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter la revue' %}">{{ issue.journal.name }}</a></p>
     <h1>
       <span class="issue-number">{{ issue.volume_title }}{% if issue.embargoed and not content_access_granted %}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement.' %}"><span class="ion-locked"></span></span>{% endif %}</span>
