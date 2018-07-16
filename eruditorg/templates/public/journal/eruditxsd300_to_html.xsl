@@ -48,7 +48,7 @@
   <xsl:template match="article">
 
     <!-- main header -->
-    <header class="page-header-main article-header" id="article-header">
+    <header class="main-header article-header" id="article-header">
 
       <div class="row article-title-group">
 
