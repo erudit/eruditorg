@@ -45,11 +45,6 @@
 
     }
 
-    h2 {
-      margin: 2.5em 0 0.75em 0;
-      color: $dark-grey;
-    }
-
     .notegen {
 
       p, ol, ul, blockquote {
@@ -63,77 +58,25 @@
   }
 
   /**
-  * List of articles
+  * Restricted articles
   */
-  h3.section {
-    border-top: 1px solid $dark-grey;
-    color: $coral-red;
-  }
+  .article-restricted {
 
-  h4.section,
-  h5.section {
-    border-top: 1px solid $mid-grey;
-    margin-left: 20px;
-    color: #333;
-  }
+    .bib-record__title {
 
-  h5.section {
-    margin-left: 40px;
-    color: $dark-grey;
-  }
-
-  h3.section + h4.section {
-    margin-left: 0;
-    text-indent: 20px;
-  }
-
-  h4.section + h5.section {
-    margin-left: 20px;
-    text-indent: 20px;
-  }
-
-  .section {
-    padding: 20px 0;
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .bib-records {
-
-    &.section-2{
-      margin-left: 20px;
-    }
-
-    &.section-3{
-      margin-left: 40px;
-    }
-
-    .article-restricted {
-
-      .bib-record__title {
-
-        a {
-          color: $dark-grey;
-          pointer-events: none;
-        }
-
-      }
-
-      .ion-help-circled {
-        color: #000;
+      a {
+        color: $dark-grey;
+        pointer-events: none;
       }
 
     }
 
-  }
-
-  .bib-records + .bib-records {
-
-    .article-item:first-child {
-      border-top: 1px solid $dark-grey;
+    .ion-help-circled {
+      color: #000;
     }
 
   }
+
 
   /**
   * Back issues section

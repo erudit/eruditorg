@@ -4,7 +4,16 @@
  */
 
 .bib-records {
-   margin: 0;
+  margin: 0;
+}
+
+
+.bib-records + .bib-records {
+
+  .bib-record:first-child {
+    border-top: 1px solid $dark-grey;
+  }
+
 }
 
 .bib-record {
