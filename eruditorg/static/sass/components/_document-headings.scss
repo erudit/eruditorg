@@ -1,0 +1,69 @@
+/**
+ * Document detail headings: single article, single chapter
+ * PDF or HTML formats
+ */
+
+.doc-head {
+  position: relative;
+  margin-bottom: 1em;
+  border-bottom: 1px solid $mid-grey;
+
+  p, li, dl, label {
+    font-size: 12px;
+  }
+
+  a {
+    color: $coral-red;
+  }
+
+}
+
+.doc-head__title {
+  margin-bottom: 0.25em;
+  font-size: 1.75em;
+  line-height: 1.15;
+  > span + span {
+    margin-top: 0.35em;
+  }
+}
+
+.doc-head__authors {
+  list-style: none;
+  margin: 0;
+}
+
+.doc-head__author {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #000;
+}
+
+.doc-head__more-info {
+
+  > p {
+    color: $coral-red;
+  }
+
+  .icon {
+    margin-left: 0.25em;
+    float: none;
+  }
+
+}
+
+.doc-head__metadata {
+  margin-top: 20px;
+  padding-bottom: 20px;
+
+  p:first-child,
+  dl:first-child {
+    border-top: 1px solid $mid-grey;
+    padding-top: 20px;
+  }
+
+}
+
+.doc-head__img {
+  margin-bottom: 25px;
+  float: right;
+}

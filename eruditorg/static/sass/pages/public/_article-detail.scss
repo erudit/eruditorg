@@ -15,198 +15,87 @@ $article-toolbar-width: 80px;
 #article_detail main {
 
   /**
-  * main article header
+  * EruditArticle-specific heading elements
   */
-  .article-header {
-    position: relative;
-    margin-bottom: 1em;
-    border-bottom: 1px solid $mid-grey;
+  .surtitre,
+  .surtitreparal {
+    color: $dark-grey;
 
-    h1 {
-      margin-bottom: 0.25em;
-      font-size: 1.75em;
-      line-height: 1.15;
-      > span + span {
-        margin-top: 0.35em;
-      }
+    &::after {
+      content: ' / ';
     }
 
-    a {
-      color: $coral-red;
-    }
+    &:last-of-type {
 
-    .btn.btn-full-text{
-      float: right;
-      color: $white;
-
-      &:hover, &:focus, &:active {
-        color: $coral-red;
-      }
-
-      @media (max-width: $screen-sm-max) {
-        float: none;
+      &::after {
+        content: none;
       }
 
     }
+
+  }
+
+  .titre:first-child,
+  .trefbiblio:only-child,
+  .trefbiblio:first-child,
+  .trefbiblio:first-child + .trefbiblio,
+  .titreparal {
+    color: #000;
+  }
+
+  .sstitre,
+  .sstitreparal,
+  .titre,
+  .titre + .titreparal,
+  .titreparal + .titreparal,
+  .trefbiblio  {
+    color: $dark-grey;
+
+    + .trefbiblio {
+      color: $dark-grey;
+    }
+
+  }
+
+  .sstitre {
+    margin: 0.35em 0;
+  }
+
+  .notegen {
+    margin-top: 1.5em;
 
     h2 {
-      margin: 1em 0 0 0;
+      margin: 0 0 0.5em 0;
       font-size: 1.35em;
     }
 
-    dl, p {
-      font-size: small;
-      line-height: 1.5;
+  }
+
+  .notegen,
+  .histpapier,
+  .erratum {
+    font-size: small;
+  }
+
+  .histpapier,
+  .erratum {
+    margin-top: 1em;
+  }
+
+  /**
+  * abstract page
+  */
+
+  .btn-full-text{
+    float: right;
+    color: $white;
+
+    &:hover, &:focus, &:active {
+      color: $coral-red;
     }
 
-    .article-title-group {
-      padding: 0 0 1em 0;
-
-      .grauteur {
-        list-style: none;
-        margin: 0;
-        font-size: 12px;
-      }
-
-      .auteur {
-        display: inline-block;
-        margin-bottom: 0;
-
-        p {
-          margin: 0;
-          color: $dark-grey;
-        }
-
-        .nompers,
-        .nomorg {
-          color: #000;
-        }
-
-      }
-
-      .affiliations {
-
-        p {
-          font-size: 12px;
-        }
-
-        .affiliations-label {
-          color: $coral-red;
-        }
-
-        .icon {
-          margin-left: 0.25em;
-          float: none;
-        }
-
-      }
-
-      .traducteur {
-        @extend em;
-      }
-
-    }
-
-    .title-tag {
-      margin-top: 0;
-    }
-
-    .surtitre,
-    .surtitreparal {
-      color: $dark-grey;
-
-      &::after {
-        content: ' / ';
-      }
-
-      &:last-of-type {
-
-        &::after {
-          content: none;
-        }
-
-      }
-
-    }
-
-    .titre:first-child,
-    .trefbiblio:only-child,
-    .trefbiblio:first-child,
-    .trefbiblio:first-child + .trefbiblio,
-    .titreparal {
-      color: #000;
-    }
-
-    .sstitre,
-    .sstitreparal,
-    .titre,
-    .titre + .titreparal,
-    .titreparal + .titreparal,
-    .trefbiblio  {
-      color: $dark-grey;
-
-      + .trefbiblio {
-        color: $dark-grey;
-      }
-
-    }
-
-    .sstitre {
-      margin: 0.35em 0;
-    }
-
-    .issue-image {
-
-      img {
-        margin-bottom: 1em;
-        float: right;
-      }
-
-    }
-
-    .notegen {
-      margin-top: 1.5em;
-
-      h2 {
-        margin: 0 0 0.5em 0;
-      }
-
-    }
-
-    .meta-article,
-    .meta-journal {
-      border-top: 1px solid $mid-grey;
-      padding: 1em 0;
-    }
-
-    .meta-journal {
-
-      .meta-journal--title {
-        display: block;
-        margin-top: 5px;
-      }
-
-      .theme {
-        display: block;
-      }
-
-      .pagination {
-        margin: 0;
-        padding: 0;
-        display: inline;
-      }
-
-    }
-
-    .notegen,
-    .histpapier,
-    .erratum {
-      font-size: small;
-    }
-
-    .histpapier,
-    .erratum {
-      margin-top: 1em;
+    @media (max-width: $screen-sm-max) {
+      float: none;
     }
 
   }
