@@ -1,37 +1,176 @@
-from lxml import etree as et
+from django.contrib import admin
+from django.db import models
+from django.utils.translation import gettext as _
+
+class BookCollection(models.Model):
+
+    """ A collection of conference proceedings volumes or books,
+    grouped under a theme or an organisation """
+
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_('Titre de collection')
+    )
+    logo = models.ImageField(
+        blank=True,
+        null=True,
+        verbose_name=_('Logo de collection'),
+    )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        max_length=1500,
+        verbose_name=_('Description de la collection'),
+    )
+
+    class Meta:
+        verbose_name = _('Collection d’actes ou de livres')
+        verbose_name_plural = _('Collections d’actes ou de livres')
+
+    def __str__(self):
+        return self.name
 
 
-class Book:
+class Book(models.Model):
 
-    def __init__(self, root):
-        self.root = root
+    """ A single volume of conference proceedings or
+    a single book """
 
-    def _get_text(self, xpath):
-        node = self.root.find(xpath)
-        if node is not None:
-            et.strip_tags(node, "*")
-            return node.text
+    TYPE_CHOICES = (
+        ('li', _('Livre')),
+        ('co', _('Actes')),
+    )
 
-    def get_title(self):
-        return self._get_text('.//p[@class="titre"]')
+    title = models.CharField(
+        max_length=400,
+        verbose_name=_('Titre'),
+    )
+    subtitle = models.CharField(
+        blank=True,
+        null=True,
+        max_length=200,
+        verbose_name=_('Sous-titre'),
+    )
+    year = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name=_('Année de publication'),
+    )
+    cover = models.ImageField(
+        blank=True,
+        null=True,
+        verbose_name=_('Couverture'),
+        upload_to=('book_cover')
+    )
+    publisher = models.CharField(
+        blank=True,
+        null=True,
+        max_length=200,
+        verbose_name=_('Éditeur'),
+    )
+    publisher_url = models.URLField(
+        blank=True,
+        null=True,
+        max_length=200,
+        verbose_name=_('Site web de l’éditeur'),
+    )
+    type = models.CharField(
+        max_length=2,
+        choices=TYPE_CHOICES,
+        default='li',
+    )
+    isbn = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        verbose_name=_('ISBN'),
+    )
+    digital_isbn = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        verbose_name=_('ISBN numérique'),
+    )
+    authors = models.CharField(
+        blank=True,
+        null=True,
+        max_length=200,
+        verbose_name=_('Auteurs'),
+    )
 
-    def get_subtitle(self):
-        return self._get_text('.//p[@class="sstitre"]')
+    contributors = models.CharField(
+        blank=True,
+        null=True,
+        max_length=200,
+        verbose_name=_('Contributeurs'),
+    )
 
-    def get_subtitle2(self):
-        return self._get_text('.//p[@class="sstitre2"]')
+    contribution = models.BooleanField(
+        verbose_name=_('Contribution des auteurs de type direction ?'),
+        help_text=_('La liste des auteurs sera précédée de \
+        la mention «&nbsp;Sous la direction de…&nbsp;».'),
+        default=False,
+    )
+    collection = models.ForeignKey(
+        BookCollection,
+        blank=True,
+        null=True,
+    )
+    copyright = models.CharField(
+        blank=True,
+        null=True,
+        max_length=200,
+        verbose_name=_('Mention du droit d’auteur'),
+    )
 
-    def get_isbn(self):
-        return self._get_text('.//p[@class="isbn"]')
+    class Meta:
+        verbose_name = _('Livre')
+        verbose_name_plural = _('Livres')
 
-    def get_digital_isbn(self):
-        return self._get_text('.//p[@class="isbnnumerique"]')
+    def __str__(self):
+        return self.title
 
-    def get_year(self):
-        return self._get_text('.//p[@class="anneepublication"]')
 
-    def get_authors(self):
-        return self._get_text('.//p[@class="auteur"]')
-
-    def get_copyright(self):
-        return self._get_text('.//p[@class="droitauteur"]')
+class BookAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {
+            'fields': (
+                ('type', 'collection',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('title', 'subtitle',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('year',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('publisher', 'publisher_url',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('authors', 'contribution',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('isbn', 'digital_isbn',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('cover',),
+            )
+        }),
+        (None, {
+            'fields': (
+                ('copyright',),
+            )
+        }),
+    ]

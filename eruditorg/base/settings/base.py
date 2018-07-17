@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'core.subscription',
 
     # Third-party apps
+    'isbn_field',
     'modeltranslation',
     'polymorphic',
     'post_office',

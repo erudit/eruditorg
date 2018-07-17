@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from erudit.solr.models import get_all_books
-from . import books
+
 
 
 class BookListView(TemplateView):
@@ -9,7 +9,7 @@ class BookListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['books'] = books
+        context['books'] = None
         return context
 
 
