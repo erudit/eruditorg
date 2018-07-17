@@ -61,7 +61,7 @@ def get_funds_choices():
         ('Érudit', get('erudit')),
         ('UNB', get('unb')),
         ('Persée', get('persee')),
-        ('FRQ', get('nrc')),
+        ('FRQ', _('Fonds de Recherche du Québec')),
     )
 
 

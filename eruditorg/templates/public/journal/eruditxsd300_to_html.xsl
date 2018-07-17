@@ -336,7 +336,7 @@
             {% endswitch %}
             {% if content_access_granted and pdf_exists %}
             <li>
-              <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?{{ article|prepublication_querystring }}{% endif %}">
+              <a class="tool-btn tool-download" data-href="{% url 'public:journal:article_raw_pdf' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier article.localidentifier %}{% if not article.issue.is_published %}?ticket={{ article.issue.prepublication_ticket }}{% endif %}">
                 <span class="toolbox-pdf">PDF</span>
                 <span class="tools-label">{% trans "Télécharger" %}</span>
               </a>

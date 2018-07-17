@@ -52,6 +52,7 @@ from .viewmixins import SingleArticleWithScholarMetadataMixin
 from .viewmixins import SingleJournalMixin
 from .viewmixins import RedirectExceptionsToFallbackWebsiteMixin
 from .viewmixins import PrepublicationTokenRequiredMixin
+
 from . import solr
 
 
@@ -386,6 +387,8 @@ class IssueDetailView(
         context['articles_per_section'] = self.generate_sections_tree(articles)
         context['articles'] = articles
         context['reader_url'] = self._get_reader_url()
+        if not self.object.is_published:
+            context['ticket'] = self.object.prepublication_ticket
         return context
 
     def _get_reader_url(self):
@@ -394,6 +397,10 @@ class IssueDetailView(
             return None
         pages_ds = issue.fedora_object.getDatastreamObject('PAGES')
         pages = et.fromstring(pages_ds.content.serialize())
+
+        if len(pages) == 0:
+            return None
+
         last_page = pages[::-1][0].get('valeur')
 
         width, w_idthL, height, h_eightL = None, None, None, None
@@ -567,6 +574,9 @@ class BaseArticleDetailView(
             context['journal_info'] = obj.issue.journal.information
         except ObjectDoesNotExist:
             pass
+
+        if not obj.issue.is_published:
+            context['ticket'] = obj.issue.prepublication_ticket
 
         return context
 

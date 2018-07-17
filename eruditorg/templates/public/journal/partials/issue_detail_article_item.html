@@ -39,7 +39,8 @@
     <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}"><span class="ion-help-circled"></span></span>
     {% endif %}
     {% spaceless %}
-    <a href="{{ article.get_absolute_url }}"
+
+    <a href="{{ article.get_absolute_url }}{% if not article.issue.is_published and ticket %}?ticket={{ticket}}{% endif %}"
     {% if article.is_external %}target="_blank"{% endif %}
     title="{% blocktrans %}Lire l'article{% endblocktrans %}">
     {{ article|format_article_html_title }}

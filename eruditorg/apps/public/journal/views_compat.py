@@ -69,7 +69,7 @@ class IssueDetailRedirectView(
         if 'journal_code' in kwargs and 'localidentifier' in kwargs:
             issue = get_object_or_404(issue_qs, localidentifier=kwargs['localidentifier'])
             return reverse(self.pattern_name, args=[
-                kwargs['journal_code'], issue.volume_slug, kwargs['localidentifier'], ])
+                journal.code, issue.volume_slug, kwargs['localidentifier'], ])
         elif 'journal_code' in kwargs and 'v' in kwargs and 'n' in kwargs:
             additional_filter = (Q(number=kwargs['n']) | Q(localidentifier=kwargs['n']))
             if kwargs['v']:
@@ -83,18 +83,18 @@ class IssueDetailRedirectView(
             if not issue:
                 raise Http404
             return reverse(self.pattern_name, args=[
-                kwargs['journal_code'], issue.volume_slug, issue.localidentifier, ])
+                journal.code, issue.volume_slug, issue.localidentifier, ])
         elif 'journal_code' in kwargs and 'v' in kwargs and 'year' in kwargs:
             issue = issue_qs.filter(volume=kwargs['v'], year=kwargs['year']).last()
             if not issue:
                 raise Http404
             return reverse(self.pattern_name, args=[
-                kwargs['journal_code'], issue.volume_slug, issue.localidentifier,
+                journal.code, issue.volume_slug, issue.localidentifier,
             ])
         elif 'journal_code' in kwargs and 'v' in kwargs:
             issue = get_object_or_404(issue_qs, volume=kwargs['v'])
             return reverse(self.pattern_name, args=[
-                kwargs['journal_code'], issue.volume_slug, issue.localidentifier, ])
+                journal.code, issue.volume_slug, issue.localidentifier, ])
         else:  # pragma: no cover
             raise Http404
 

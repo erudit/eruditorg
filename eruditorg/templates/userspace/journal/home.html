@@ -14,14 +14,12 @@
 {% endblock %}
 
 {% block section_intro %}
-{% blocktrans %}
-<p>Bienvenue dans la nouvelle version du Tableau de bord de votre revue sur Érudit&nbsp;!</p>
+{% blocktrans with journal=scope_current_journal.name %}
+<p>Bienvenue dans le Tableau de bord de votre revue sur Érudit&nbsp;!</p>
 
-<p>Anciennement appelé <em>Espace éditeur</em>, le Tableau de bord vous donne accès à tous les services et informations qui concernent la production et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des institutions abonnées, statistiques, rapports de redevances, etc.</p>
+<p>Vous avez accès ici à tous les services et informations qui concernent la production et la diffusion de votre revue&nbsp;: dépôt de fichiers, liste des institutions abonnées, statistiques, rapports de redevances, etc.</p>
 
-<p>Certains services n’ont pas encore été intégrés dans ce nouvel espace, et vous serez donc redirigé vers les anciennes versions des pages.</p>
-
-<p>Vous pouvez consulter les guides d’utilisation de <a href="http://www.erudit.org/public/documents/guide-editeur-a_propos.pdf" target="_blank">l’À propos</a> et <a href="http://www.erudit.org/public/documents/guide-editeur-depot.pdf" target="_blank">du Dépôt de fichiers</a>, ou encore communiquer avec nous à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau de bord des éditeurs">edition@erudit.org</a> pour toute question.</p>
+<p>Pour toute question, vous pouvez consulter le <a href="https://www.erudit.org/public/documents/Guide_tableaudebord_revues.pdf" target="_blank">guide d’utilisation du Tableau de bord</a>, ou encore communiquer avec nous à l’adresse <a href="mailto:edition@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">edition@erudit.org</a>.</p>
 
 <p><br>Bien cordialement, <br><br>L’équipe d’Érudit.</p>
 {% endblocktrans %}
@@ -33,10 +31,10 @@
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans %}
+        {% blocktrans with journal=scope_current_journal.name %}
         Édition et production numérique&nbsp;:<br>
         Hocine Chehab, <br>Chargé d’édition numérique<br>
-        <a href="mailto:hocine.chehab@erudit.org?subject=Tableau de bord des éditeurs">hocine.chehab@erudit.org</a><br>
+        <a href="mailto:hocine.chehab@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">hocine.chehab@erudit.org</a><br>
         <a href="tel:1-514-343-6111,44607">+1 514-343-6111 poste 44607</a>
         {% endblocktrans %}
       </small>
@@ -46,10 +44,10 @@
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans %}
+        {% blocktrans with journal=scope_current_journal.name %}
         Abonnements, redevances et partenariats&nbsp;:<br>
         Émilie Chouinard, <br>Chargée des partenariats<br>
-        <a href="mailto:emilie.chouinard@erudit.org?subject=Tableau de bord des éditeurs">emilie.chouinard@erudit.org</a><br>
+        <a href="mailto:emilie.chouinard@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">emilie.chouinard@erudit.org</a><br>
         <a href="tel:1-514-343-6111,16563">+1 514-343-6111 poste 16563</a>
         {% endblocktrans %}
       </small>
@@ -59,10 +57,10 @@
   <li class="col-md-4">
     <p>
       <small>
-        {% blocktrans %}
+        {% blocktrans with journal=scope_current_journal.name %}
         Communications et promotion de votre revue numérique&nbsp;:<br>
         Gwendal Henry, <br>Chargé de communication<br>
-        <a href="mailto:gwendal.henry@erudit.org?subject=Tableau de bord des éditeurs">gwendal.henry@erudit.org</a><br>
+        <a href="mailto:gwendal.henry@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">gwendal.henry@erudit.org</a><br>
         <a href="tel:1-514-343-6111,2723">+1 514-343-6111 poste 2723</a>
         {% endblocktrans %}
       </small>
@@ -72,8 +70,8 @@
   <li>
     <p>
       <small>
-        {% blocktrans %}
-        Pour toutes autres questions, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau de bord des éditeurs">info@erudit.org</a>.
+        {% blocktrans with journal=scope_current_journal.name  %}
+        Pour toutes autres questions, communiquez à l’adresse générale à <a href="mailto:info@erudit.org?subject=Tableau%20de%20bord%20des%20revues%20&ndash;%20{{ journal }}">info@erudit.org</a>.
         {% endblocktrans %}
       </small>
     </p>

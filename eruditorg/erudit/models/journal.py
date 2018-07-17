@@ -522,6 +522,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
 
         If the ID doesn't exist either in the DB or in Fedora, raise DoesNotExist.
         """
+
         if not localidentifier:
             raise Issue.DoesNotExist()
         # special case: Persée issue ids that come from solr are prefixed. differently in our DB
@@ -532,8 +533,7 @@ class Issue(FedoraMixin, FedoraDated, OAIDated):
             return Issue.objects.get(localidentifier=localidentifier)
         except Issue.DoesNotExist:
             try:
-                journal = Journal.objects.get(
-                    Q(code=journal_code) | Q(localidentifier=journal_code))
+                journal = Journal.legacy_objects.get_by_id(journal_code)
             except Journal.DoesNotExist:
                 raise Issue.DoesNotExist()
             else:
