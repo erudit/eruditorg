@@ -1,0 +1,32 @@
+/**
+ * Navigation between documents within a TOC
+ * Left / right arrows and titles to see previous / next docs
+ * Used in article and chapter details
+ */
+
+.toc-nav {
+  font-size: smaller;
+  @include font-styles('sans-italic');
+}
+
+.toc-nav__prev {
+  display: block;
+  color: $dark-grey;
+}
+
+.toc-nav__next {
+  display: block;
+  text-align: right;
+  color: $dark-grey;
+
+  .toc-nav__arrow {
+    margin-right: -11px;
+  }
+
+}
+
+.toc-nav__arrow {
+  color: $coral-red;
+  display: block;
+  @include font-styles('sans-medium');
+}
