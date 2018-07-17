@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import unittest.mock
 
@@ -20,34 +21,34 @@ class DummyModel(FedoraMixin):
         return EruditArticle
 
 
-class TestFedoraMixin(TestCase):
+class TestFedoraMixin:
     def test_can_return_the_pid_of_the_object(self):
         # Setup
         obj = DummyModel()
         # Run & check
-        self.assertEqual(obj.get_full_identifier(), 'dummy139')
-        self.assertEqual(obj.pid, 'dummy139')
+        assert obj.get_full_identifier() == 'dummy139'
+        assert obj.pid == 'dummy139'
 
     def test_can_return_the_eulfedora_model(self):
         # Setup
         obj = DummyModel()
         # Run & check
-        self.assertEqual(obj.get_fedora_model(), ArticleDigitalObject)
-        self.assertEqual(obj.fedora_model, ArticleDigitalObject)
+        assert obj.get_fedora_model() == ArticleDigitalObject
+        assert obj.fedora_model == ArticleDigitalObject
 
     def test_can_return_the_eulfedora_object(self):
         # Setup
         obj = DummyModel()
         # Run & check
-        self.assertTrue(isinstance(obj.get_fedora_object(), ArticleDigitalObject))
-        self.assertTrue(isinstance(obj.fedora_object, ArticleDigitalObject))
+        assert isinstance(obj.get_fedora_object(), ArticleDigitalObject)
+        assert isinstance(obj.fedora_object, ArticleDigitalObject)
 
     def test_can_return_the_erudit_class(self):
         # Setup
         obj = DummyModel()
         # Run & check
-        self.assertEqual(obj.get_erudit_class(), EruditArticle)
-        self.assertEqual(obj.erudit_class, EruditArticle)
+        assert obj.get_erudit_class() == EruditArticle
+        assert obj.erudit_class == EruditArticle
 
     @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
     @unittest.mock.patch.object(ArticleDigitalObject, '_get_datastreams')
@@ -58,8 +59,8 @@ class TestFedoraMixin(TestCase):
         mock_xsd300.content.serialize = unittest.mock.MagicMock(return_value='<article></article>')
         obj = DummyModel()
         # Run & check
-        self.assertTrue(isinstance(obj.get_erudit_object(), EruditArticle))
-        self.assertTrue(isinstance(obj.erudit_object, EruditArticle))
+        assert isinstance(obj.get_erudit_object(), EruditArticle)
+        assert isinstance(obj.erudit_object, EruditArticle)
 
     @unittest.mock.patch('erudit.fedora.modelmixins.cache')
     @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
@@ -75,8 +76,8 @@ class TestFedoraMixin(TestCase):
         # Run
         dummy = obj.erudit_object, EruditArticle  # noqa
         # Check
-        self.assertEqual(mock_cache.get.call_count, 1)
-        self.assertEqual(mock_cache.set.call_count, 1)
+        assert mock_cache.get.call_count == 1
+        assert mock_cache.set.call_count == 1
 
     @unittest.mock.patch('erudit.fedora.modelmixins.cache')
     @unittest.mock.patch.object(ArticleDigitalObject, 'erudit_xsd300')
@@ -92,5 +93,5 @@ class TestFedoraMixin(TestCase):
         # Run
         dummy = obj.erudit_object, EruditArticle  # noqa
         # Check
-        self.assertEqual(mock_cache.get.call_count, 1)
-        self.assertEqual(mock_cache.set.call_count, 0)
+        assert mock_cache.get.call_count == 1
+        assert mock_cache.set.call_count == 0
