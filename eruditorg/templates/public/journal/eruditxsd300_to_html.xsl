@@ -753,7 +753,7 @@
   <xsl:template match="grannexe | grnotebio | grnote | merci | grbiblio"  mode="toc-heading">
     <xsl:if test="self::grannexe">
       <xsl:choose>
-        <xsl:when test="titre">
+        <xsl:when test="titre and titre != null">
           <xsl:value-of select="titre"/>
         </xsl:when>
         <xsl:when test="count(annexe) = 1">{% trans "Annexe" %}</xsl:when>
@@ -762,7 +762,7 @@
     </xsl:if>
     <xsl:if test="self::grnotebio">
       <xsl:choose>
-        <xsl:when test="titre">
+        <xsl:when test="titre and titre != null">
           <xsl:value-of select="titre"/>
         </xsl:when>
         <xsl:when test="count(notebio) = 1">{% trans "Note biographique" %}</xsl:when>
@@ -771,7 +771,7 @@
     </xsl:if>
     <xsl:if test="self::grnote">
       <xsl:choose>
-        <xsl:when test="titre">
+        <xsl:when test="titre and titre != null">
           <xsl:value-of select="titre"/>
         </xsl:when>
         <xsl:when test="count(note) = 1">{% trans "Note" %}</xsl:when>
@@ -780,7 +780,7 @@
     </xsl:if>
     <xsl:if test="self::merci">
       <xsl:choose>
-        <xsl:when test="titre">
+        <xsl:when test="titre and titre != null" >
           <xsl:value-of select="titre"/>
         </xsl:when>
         <xsl:otherwise>{% trans "Remerciements" %}</xsl:otherwise>
