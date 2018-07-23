@@ -13,4 +13,5 @@ User-agent: CORE
 Crawl-Delay: 5
 
 User-agent: *
+Crawl-delay: 10
 Disallow:
