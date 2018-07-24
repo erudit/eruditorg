@@ -295,10 +295,10 @@
           {% else %}
           <!-- promotional campaign -->
           <aside class="campaign">
-            <h2 class="sr-only">{% trans 'Salons. Un éclairage sur la société par les revues savantes.' %}</h2>
-            <a href="{% if LANGUAGE_CODE == 'en' %}http://bit.ly/2Ivl3c8{% else %}http://bit.ly/2KPUVqE{% endif %}" target="_blank" class="campaign-sidebar">
+            <h2 class="sr-only">{% trans 'Force 2018' %}</h2>
+            <a href="https://goo.gl/CMS5RD" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% static 'img/banners/partenariat_fr.jpg' %}" class="img-responsive"/>
+                <img src="{% if LANGUAGE_CODE == 'en' %}{% static 'img/banners/f18-en.png' %}{% else %}{% static 'img/banners/f18-fr.png' %}{% endif %}" class="img-responsive"/>
               </div>
             </a>
           </aside>
