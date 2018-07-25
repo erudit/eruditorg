@@ -25,19 +25,8 @@
 
   }
 
-  #site-header {
-    background: none;
-    border: none;
-
-    &.compact {
-      background: #FFF;
-      border-bottom: 1px solid $mid-grey;
-    }
-
-    &.inverted {
-      background: $coral-red;
-    }
-
+  .site-header {
+    @include box-shadow(0);
   }
 
   .banner {

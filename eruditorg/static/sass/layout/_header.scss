@@ -1,115 +1,29 @@
 // -----------------------------------------------------------------------------
-// Styles related to the page header (fixed except for article page)
+// Erudit’s site header (contains main navigation, logo, search bar)
 // -----------------------------------------------------------------------------
 
 .fixed-header {
   padding-top: 50px;
 }
 
-/**
-* Erudit Public #page-header
-*/
-#site-header {
+.site-header {
   position: relative;
-  border-bottom: 1px solid $mid-grey;
-  @include transition(all 0.15s);
-  background-color: #fff;
-  float: none;
+  width: 100%;
+  height: 50px;
   z-index: $zindex-navbar;
+  background-color: transparent;
+  @include box-shadow(0 3px 5px rgba(0,0,0,0.1));
+  @include transition(all 0.15s);
+}
 
-  &.fixed {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-  }
+.site-header__fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+}
 
-  &.compact {
-    padding-top: 0;
-    padding-bottom: 0;
-    height: auto;
-  }
-
-  #brand {
-    font-size: inherit;
-    margin: 0;
-    display: inline-block;
-    img,
-    svg {
-      height: 35px;
-      overflow: visible;
-      path, rect {
-        @include transition(fill 250ms);
-      }
-    }
-  }
-
-  &.inverted {
-    background-color: $coral-red;
-
-    a {
-      color: #fff !important;
-    }
-
-    svg {
-      path, rect {
-        fill: #fff;
-      }
-    }
-
-  }
-
-  #brand {
-    &:hover {
-      path, rect {
-        @include animation(logo-dance 0.4s ease alternate infinite);
-        &:nth-child(1) {
-          @include animation-delay(0.05s);
-        }
-        &:nth-child(2) {
-          @include animation-delay(0.1s);
-        }
-        &:nth-child(3) {
-          @include animation-delay(0.15s);
-        }
-        &:nth-child(4) {
-          @include animation-delay(0.2s);
-        }
-        &:nth-child(5) {
-          @include animation-delay(0.25s);
-        }
-        &:nth-child(6) {
-          @include animation-delay(0.3s);
-        }
-        &:nth-child(7) {
-          @include animation-delay(0.35s);
-        }
-        &:nth-child(8) {
-          @include animation-delay(0.4s);
-        }
-      }
-    }
-    path, rect {
-      @include animation(logo-stand 0.4s ease alternate infinite);
-    }
-  }
-
-  @include keyframes(logo-stand) {
-    0% {
-      @include translate(0, 0);
-    }
-    100% {
-      @include translate(0, 0);
-    }
-  }
-
-  @include keyframes(logo-dance) {
-    0% {
-      @include translate(0, 0px);
-    }
-    100% {
-      @include translate(0, -10px);
-    }
-  }
-
+.site-header__scrolled {
+  padding-top: 0;
+  padding-bottom: 0;
 }

@@ -1,0 +1,43 @@
+/**
+ * main navigation search form
+ */
+
+.nav-search {
+  display: none;
+}
+
+ .search-form {
+   display: none;
+
+   .search-terms {
+     background-color: transparent;
+     border: 2px solid #fff;
+     color: #fff;
+     @include fw-sans-medium;
+
+     &::placeholder {
+       color: #fff;
+       @include fw-sans-medium;
+     }
+   }
+ }
+
+.nav-search__form {}
+
+.nav-search__label {}
+
+.nav-search__input {
+  height: 46px;
+}
+
+.nav-search__btn {
+  border: 2px solid #fff;
+  height: 50px;
+  color: #fff;
+  line-height: 0.85;
+  margin-left: -2px;
+  vertical-align: top;
+  font-size: 20px;
+}
+
+.nav-search__btn-icon {}

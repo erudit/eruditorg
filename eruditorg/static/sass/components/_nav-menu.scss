@@ -1,0 +1,72 @@
+/**
+ * main navigation menu
+ */
+
+.nav-menu {}
+
+.nav-menu__list {
+  right: 20px;
+  list-style: none;
+}
+
+.nav-menu__item {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.nav-menu__caret {
+  padding: 0 0 0 0.5em;
+  @include transition(transform 0.3s linear);
+}
+
+.nav-menu__icon {
+  display: block;
+
+  &:before {
+    vertical-align: middle;
+    font-size: 30px;
+  }
+}
+
+.nav-menu__item_has-submenu {
+  position: relative;
+
+  .nav-menu__link {
+    display: block;
+    cursor: pointer;
+  }
+
+  &:hover, &:focus, &:active, &:focus:active {
+
+    > .nav-submenu {
+      display: block;
+      width: auto;
+    }
+
+    .nav-menu__caret {
+      padding: 0.15em 0 0 0.5em;
+      display: inline-block;
+      @include transform(scale(1, -1));
+      @include backface-visibility(hidden);
+    }
+
+  }
+
+}
+
+.nav-menu__link {
+  display: block;
+  padding: 10px 0;
+  font-size: 14px;
+  position: relative;
+  color: #000;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &.selected {
+    color: $coral-red;
+    text-decoration: none;
+  }
+}
