@@ -2,10 +2,7 @@
  * main navigation menu
  */
 
-.nav-menu {
-   margin: 0;
-   padding: 0;
- }
+.nav-menu {}
 
 .nav-menu__list {
   right: 20px;
@@ -14,7 +11,7 @@
 
 .nav-menu__item {
   display: inline-block;
-  margin: 0 0 0 20px;
+  margin: 0 10px;
   font-size: 14px;
 }
 
@@ -28,20 +25,7 @@
 
   &:before {
     vertical-align: middle;
-    font-size: 20px;
-    background-color: $light-grey;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    padding-top: 8px;
-    @include border-radius(50%);
-  }
-
-  &:hover, &:active, &:focus {
-    &:before {
-      background-color: #000;
-      color: $light-grey;
-    }
+    font-size: 30px;
   }
 }
 

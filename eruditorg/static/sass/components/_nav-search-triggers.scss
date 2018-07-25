@@ -13,46 +13,10 @@
     margin: 10px;
     font-size: 30px;
   }
-
-  &:hover, &:active, &:focus {
-    &:before {
-      background-color: #000;
-      color: $light-grey;
-    }
-  }
-}
-
-.nav-search-triggers__open .nav-search-triggers__icon {
-  &:before {
-    font-size: 20px;
-    background-color: $light-grey;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    padding-top: 8px;
-    margin-left: 0;
-    @include border-radius(50%);
-  }
-
-  &:hover, &:active, &:focus {
-    &:before {
-      background-color: #000;
-      color: $light-grey;
-    }
-  }
 }
 
 .nav-search-triggers__close {
   display: none;
   cursor: pointer;
   color: #fff;
-
-  .nav-search-triggers__icon {
-    &:hover, &:active, &:focus {
-      &:before {
-        background-color: transparent;
-        color: #000;
-      }
-    }
-  }
 }
