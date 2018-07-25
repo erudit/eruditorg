@@ -115,37 +115,60 @@
     >
 
     {% block header %}
-    <header id="site-header" class="{% block header_class %}fixed{% endblock header_class %} clearfix">
+    <header id="site-header" class="{% block header_class %}site-header__fixed{% endblock header_class %} clearfix site-header">
       <nav>
         <div class="container-fluid">
-          <div class="navbar-header">
+
+          {# Érudit logo #}
+          <div class="navbar-header pull-left">
+            <h1 class="header-logo">
+              <a href="/" id="title" title="{% trans 'Aller à l’accueil' %}" aria-label="{% trans 'Aller à l’accueil' %}" class="header-logo__link">
+                <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg header-logo__img" alt="Érudit" />
+              </a>
+            </h1>
+          </div>
+
+          {# Hamburger menu on mobile / tablet viewports #}
+          <div class="navbar-header pull-right nav-menu-trigger">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-nav" aria-label="{% trans 'menuPrincipal' %}">
               <span class="bar"></span>
               <span class="bar"></span>
               <span class="bar"></span>
             </button>
-            <h1 id="brand" class="navbar-brand">
-              <a href="/" id="title" title="{% trans 'Aller à l’accueil' %}" aria-label="{% trans 'Aller à l’accueil' %}">
-                <img src="{% static 'svg/logo-erudit.svg' %}" class="inline-svg" alt="Érudit" />
-              </a>
-            </h1>
           </div>
+
+          {# Simple search form #}
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 nav-search">
+            <form id="search-form" action="{% url 'public:search:results' %}" class="navbar-form nav-search__form" method="get">
+              <label for="basic_search_term" class="nav-search__label">{% trans "Mots-clés" %}</label>
+              <input name="basic_search_term" id="basic_search_term" type="search" class="search-terms nav-search__input" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
+              <input type="hidden" name="funds" value="Érudit">
+              <input type="hidden" name="funds" value="UNB">
+              <button type="submit" class="btn btn-secondary nav-search__btn">
+                <span class="ion-ios-search-strong nav-search__btn-icon"></span>
+              </button>
+            </form>
+          </div>
+
+          {# Main menu bar, including search button #}
           {% url 'public:journal:journal_list' as journal_list_url %}
-          <div id="main-nav" class="navbar-collapse collapse">
+          <div class="nav navbar-right nav-menu">
             <h2 class="hidden">{% trans "Menu principal" %}</h2>
-            <ul class="row nav navbar-nav navbar-right">
+
+            {# Menu items #}
+            <ul id="main-nav" class="navbar-nav collapse navbar-collapse nav-menu__list">
               {% block mainnav %}
               {% block inner_nav %}{% endblock inner_nav %}
-              <li class="nav-publications dropdown">
-                <a href="#" class="select main-section hidden-xs hidden-sm">{% trans "Types de publications" %}<span class="ion-ios-arrow-down caret"></span></a>
-                <ul>
-                  <li>
+              <li class="nav-menu__item nav-menu__item_has-submenu">
+                <a href="#" class="hidden-xs hidden-sm nav-menu__link">{% trans "Types de publications" %}<span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+                <ul class="nav-submenu">
+                  <li class="nav-submenu__item">
                     <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     {% flag "BOOKS" %}
                     <a href="{% url 'public:book:home' %}" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
                     {% else %}
@@ -154,7 +177,7 @@
                   </li>
                   {% switch "maintenance" %}
                   {% else %}
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a>
                   </li>
                   {% endswitch %}
@@ -163,106 +186,101 @@
               {% switch "maintenance" %}
               {% else %}
               {% if request.user.is_anonymous %}
-              <li class="nav-login">
-                <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="main-section" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
+              <li class="nav-menu__item">
+                <a href="{% url 'public:auth:landing' %}?next={{ request.get_full_path|urlencode }}" class="nav-menu__link" id="login-modal" title="{% trans 'Se connecter au tableau de bord' %}">
                   {% trans "Connexion" %}
                 </a>
               </li>
               {% else %}
-              <li class="nav-account dropdown">
-                <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="select main-section">{% trans "Mon compte" %}<span class="ion-ios-arrow-down caret"></span></a>
-                <ul class="hidden-xs hidden-sm">
+              <li class="nav-menu__item nav-menu__item_has-submenu">
+                <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="nav-menu__link">{% trans "Mon compte" %}<span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+                <ul class="hidden-xs hidden-sm nav-submenu">
                   {% has_perm 'userspace.access' request.user as can_access_userspace %}
                   {% if can_access_userspace %}
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="{% url 'userspace:dashboard' %}" title="{% trans 'Accéder à au tableau de bord' %}">{% trans "Tableau de bord" %}</a>
                   </li>
                   {% endif %}
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="{% url 'public:auth:personal_data' %}" title="{% trans 'Modifier mes paramètres' %}">{% trans "Paramètres" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="{% url 'public:auth:logout' %}?next={{ request.get_full_path|urlencode }}" title="{% trans 'Se déconnecter' %}">{% trans "Déconnexion" %}</a>
                   </li>
                 </ul>
               </li>
               {% endif %}
-              <li class="nav-about dropdown">
-                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="select main-section" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <span class="ion-ios-arrow-down caret"></span></a>
-                <ul class="hidden-xs hidden-sm">
-                  <li>
+              <li class="nav-menu__item nav-menu__item_has-submenu">
+                <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="nav-menu__link" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+                <ul class="hidden-xs hidden-sm nav-submenu">
+                  <li class="nav-submenu__item">
                     <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://www.coalition-publi.ca/{% if LANGUAGE_CODE == 'fr' %}le-projet{% endif %}" target="_blank" title="{% trans 'À propos de la Coalition Publi.ca' %}">{% trans "Coalition Publi.ca" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://co-shs.ca/" target="_blank" title="{% trans 'À propos du projet CO.SHS' %}">{% trans "CO.SHS" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://jamaistrop.erudit.org/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" target="_blank">{% trans 'Jamais trop érudit' %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% trans 'À propos de nos partenariats' %}">{% trans "Partenariat" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://www.erudit.org/rapport/2017/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter le rapport annuel' %}">{% trans "Rapport annuel" %}</a>
                   </li>
-                  <li>
+                  <li class="nav-submenu__item">
                     <a href="https://salons.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'Consulter Salons' %}">{% trans "Salons" %}</a>
                   </li>
                 </ul>
               </li>
               {% endswitch %}
-              <li class="nav-advanced-search">
-                <a href="{% url 'public:search:advanced_search' %}" class="main-section" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
+              <li class="nav-menu__item">
+                <a href="{% url 'public:search:advanced_search' %}" class="nav-menu__link" title="{% trans 'Effectuer une recherche avancée' %}">{% trans "Recherche avancée" %}</a>
               </li>
-              <li class="nav-language dropdown">
+              <li class="nav-menu__item nav-menu__item_has-submenu">
                 {% get_current_language as LANGUAGE_CODE %}
                 {% get_available_languages as LANGUAGES %}
-                <a href="#" class="select main-section hidden-xs hidden-sm">{{ LANGUAGE_CODE }}<span class="ion-ios-arrow-down caret"></span></a>
-                <ul>
+                <a href="#" class="hidden-xs hidden-sm nav-menu__link">{{ LANGUAGE_CODE|upper }}<span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+                <ul class="nav-submenu">
                   {% for language in LANGUAGES %}
                   {% get_language_info for language.0 as lang %}
-                  <li><a href="{% trans_current_url language.0 %}" {% if language.0 != LANGUAGE_CODE %}class="disabled"{% else %}class="active"{% endif %}>{{ lang.name_local|title }}</a></li>
+                  <li class="nav-submenu__item">
+                    <a href="{% trans_current_url language.0 %}" class="{% if language.0 != LANGUAGE_CODE %}disabled{% else %}active{% endif %}">
+                      {{ lang.name_local|title }}
+                    </a>
+                  </li>
                   {% endfor %}
                 </ul>
               </li>
               {% switch "maintenance" %}
               {% else %}
-              <li class="nav-my-library">
-                <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="main-section">
-                  <span class="ion-bookmark toolbox-save hidden-xs hidden-sm"></span>
+              <li class="nav-menu__item">
+                <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="nav-menu__link">
+                  <span class="ion-bookmark hidden-xs hidden-sm nav-menu__icon"></span>
                   <span class="hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
                 </a>
               </li>
               {% endswitch %}
-              <li class="nav-search">
-                <a href="#" data-trigger-search-bar class="search main-section" title="{% trans 'Effectuer une recherche simple' %}"><span class="ion-ios-search-strong"></span></a>
-                <div class="search-form">
-                  <form action="{% url 'public:search:results' %}" class="search-bar" method="get">
-                    <div class="form-group">
-                      <div class="input-group-btn">
-                        <label for="basic_search_term" class="sr-only">{% trans "Mots-clés" %}</label>
-                        <input name="basic_search_term" id="basic_search_term" type="search" class="search-terms form-control" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
-                        <input type="hidden" name="funds" value="Érudit">
-                        <input type="hidden" name="funds" value="UNB">
-                        <button type="submit" class="btn btn-secondary">
-                          <span class="hidden-xs hidden-sm">{% trans 'Rechercher' %}</span>
-                          <span class="ion-ios-search-strong hidden-md hidden-lg"></span>
-                        </button>
-                      </div>
-                      <a data-trigger-search-bar class="close"><span class="ion-android-close"></span></a>
-                    </div>
-                  </form>
-                </div>
-              </li>
               {% endblock mainnav %}
             </ul>
+
+            {# Search bar triggers (open / close) #}
+            <div class="pull-right nav-search-triggers">
+              <a href="#" data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__open" title="{% trans 'Effectuer une recherche simple' %}">
+                <span class="ion-ios-search-strong nav-search-triggers__icon"></span>
+              </a>
+              <a data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__close" title="{% trans 'Fermer la recherche simple (touche Échap)' %}">
+                <span class="ion-android-close nav-search-triggers__icon"></span>
+              </a>
+            </div>
           </div>
+
         </div>
       </nav>
-    </header>
+  </header>
     <nav id="breadcrumb" class="container-fluid breadcrumb">
       <h2 class="hidden">{% trans "Fil d'Ariane" %}</h2>
       <div class="container">
@@ -361,7 +379,7 @@
                 <div class="dropdown-buttons">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
-                  <div class="select main-section">{{ LANGUAGE_CODE|language_name_local|title }} <span class="ion-ios-arrow-down caret"></span></div>
+                  <div class="select">{{ LANGUAGE_CODE|language_name_local|title }} <span class="ion-ios-arrow-down nav-menu__caret"></span></div>
                   <ul>
                     {% for language in LANGUAGES %}
                     {% get_language_info for language.0 as lang %}
