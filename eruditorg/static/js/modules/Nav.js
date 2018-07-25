@@ -35,12 +35,12 @@ class Nav {
    */
   stickyHeader() {
 
-    // toggle compact or regular header size
+    // different states for the header when user scrolls the page
     var headerSize = function() {
       if ( $(window).scrollTop() >= minTopScroll ) {
-        $(siteHeader).addClass('compact')
+        $(siteHeader).addClass('site-header__scrolled')
       } else {
-        $(siteHeader).removeClass('compact')
+        $(siteHeader).removeClass('site-header__scrolled')
       }
     };
 
@@ -54,25 +54,31 @@ class Nav {
    * Search bar toggle in nav
    */
   searchBar() {
-    var searchBarTrigger = "#main-nav [data-trigger-search-bar]";
-    var searchBar        = "#main-nav .search-form";
-    var searchInput      = "#main-nav .search-form input.search-terms";
+    var searchBarTrigger = "[data-trigger-search-bar]";
+    var searchBar        = "#search-form";
+    var searchInput      = "#search-form input.search-terms";
 
     // show or hide search bar
     var toggleSearch = function() {
       var visible = $(searchBar).hasClass('visible');
       $(searchBar).toggleClass('visible');
-      $(siteHeader).toggleClass('inverted');
+      $(siteHeader).toggleClass('inverted-search-bar');
 
       // focus to field when visible
       if (!visible) $(searchInput).focus();
     };
 
     // elements trigger
-    $(searchBarTrigger).on('click', function(event) {
-      event.preventDefault();
+    $(searchBarTrigger).on('click', function(e) {
+      e.preventDefault();
       toggleSearch();
     });
+
+    // close search bar on esc key press
+    $(document).keyup(function(e) {
+     if (e.keyCode === 27) $('.nav-search-triggers__close').click()
+    });
+
   }
 }
 
