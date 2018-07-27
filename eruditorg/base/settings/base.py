@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 from pathlib import Path
-from structlog import configure
+import structlog
 from structlog.stdlib import LoggerFactory
 
 from structlog.processors import JSONRenderer
@@ -346,10 +346,13 @@ def add_timestamp(_, __, event_dict):
     return event_dict
 
 
-configure(
+structlog.configure(
     logger_factory=LoggerFactory(),
     processors=[
         add_timestamp,
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.add_logger_name,
+        structlog.processors.format_exc_info,
         JSONRenderer(sort_keys=True)
     ]
 )
