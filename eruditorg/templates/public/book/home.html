@@ -75,16 +75,12 @@
         {# List of collections #}
         <nav class="collection-nav">
           <h2>{% trans "Par collection" %}</h2>
-          <ul class="collection-list">
-            <li><a href="#">{% trans "[Hors collection]" %}</a></li>
-            <li><a href="#">{% trans "Actes des colloques de l’ACFAS – Sudbury" %}</a></li>
-            <li><a href="#">{% trans "Actes des colloques de l'Association Internationale des Démographes de Langue Française" %}</a></li>
-            <li><a href="#">{% trans "Actes des colloques d’Artefact" %}</a></li>
-            <li><a href="#">{% trans "Comprendre la famille" %}</a></li>
-            <li><a href="#">{% trans "Actes du Colloque sur la recherche en enseignement des arts visuels" %}</a></li>
-            <li><a href="#">{% trans "Culture française d'Amérique" %}</a></li>
-            <li><a href="#">{% trans "New Perspectives in Québec Studies" %}</a></li>
-          </ul>
+          {% for collection in collections %}
+            <li><a href="#">{{ collection |safe}}</a></li>
+          {% for book in collection.books.all %}
+          <li>{{ book | safe}}</li>
+          {% endfor %}
+          {% endfor %}
         </nav>
       </div>
 

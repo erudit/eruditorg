@@ -115,6 +115,7 @@ class Book(models.Model):
         BookCollection,
         blank=True,
         null=True,
+        related_name='books',
     )
     copyright = models.CharField(
         blank=True,

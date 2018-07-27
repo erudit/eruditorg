@@ -1,3 +1,4 @@
+from apps.public.book.models import BookCollection
 from django.views.generic import TemplateView
 from erudit.solr.models import get_all_books
 
@@ -9,7 +10,7 @@ class BookListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['books'] = None
+        context['collections'] = BookCollection.objects.all()
         return context
 
 
