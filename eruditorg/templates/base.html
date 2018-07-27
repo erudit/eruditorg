@@ -137,19 +137,6 @@
             </button>
           </div>
 
-          {# Simple search form #}
-          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 nav-search">
-            <form id="search-form" action="{% url 'public:search:results' %}" class="navbar-form nav-search__form" method="get">
-              <label for="basic_search_term" class="nav-search__label">{% trans "Mots-clés" %}</label>
-              <input name="basic_search_term" id="basic_search_term" type="search" class="search-terms nav-search__input" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
-              <input type="hidden" name="funds" value="Érudit">
-              <input type="hidden" name="funds" value="UNB">
-              <button type="submit" class="btn btn-secondary nav-search__btn">
-                <span class="ion-ios-search-strong nav-search__btn-icon"></span>
-              </button>
-            </form>
-          </div>
-
           {# Main menu bar, including search button #}
           {% url 'public:journal:journal_list' as journal_list_url %}
           <div class="nav navbar-right nav-menu">
@@ -269,13 +256,28 @@
 
             {# Search bar triggers (open / close) #}
             <div class="pull-right nav-search-triggers">
-              <a href="#" data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__open" title="{% trans 'Effectuer une recherche simple' %}">
+              <a href="#" data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__open " title="{% trans 'Effectuer une recherche simple' %}">
                 <span class="ion-ios-search-strong nav-search-triggers__icon"></span>
               </a>
               <a data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__close" title="{% trans 'Fermer la recherche simple (touche Échap)' %}">
                 <span class="ion-android-close nav-search-triggers__icon"></span>
               </a>
             </div>
+          </div>
+
+          {# Simple search form #}
+          <div class="nav-search">
+            <form id="search-form" action="{% url 'public:search:results' %}" class="navbar-form nav-search__form" method="get">
+                <label for="basic_search_term" class="nav-search__label sr-only">{% trans "Recherche simple" %}</label>
+              <div class="nav-search__input-group">
+                <input name="basic_search_term" id="basic_search_term" type="search" class="search-terms nav-search__input" placeholder="{% trans 'Par auteur, titre, mots-clés...' %}">
+                <input type="hidden" name="funds" value="Érudit">
+                <input type="hidden" name="funds" value="UNB">
+                <button type="submit" class="btn btn-secondary nav-search__btn">
+                  <span class="ion-ios-search-strong nav-search__btn-icon"></span>
+                </button>
+              </div>
+            </form>
           </div>
 
         </div>
