@@ -1,4 +1,4 @@
-import logging
+import structlog
 import datetime as dt
 
 from django.utils import timezone as tz
@@ -9,7 +9,7 @@ from .conf import settings as editor_settings
 from .models import IssueSubmission
 from .shortcuts import get_production_team_group
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def _handle_issuesubmission_files_removal():
@@ -26,8 +26,8 @@ def _handle_issuesubmission_files_removal():
     production_team = get_production_team_group()
     if production_team is None:
         logger.error(
-            """Cannot send issue submission removal notification email.
-There is NO production team """)
+            "email.error", msg="Cannot send issue submission removal notification email. There is NO production team"  # noqa
+        )
         return
 
     # Now fetches the issue submissions that will soon be deleted. The production team must be

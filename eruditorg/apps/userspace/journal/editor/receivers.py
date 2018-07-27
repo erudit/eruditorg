@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import logging
-
 from django.dispatch import receiver
 
 from core.editor.shortcuts import get_production_team_group
@@ -9,8 +5,6 @@ from core.email import Email
 from django.conf import settings
 
 from .signals import userspace_post_transition
-
-logger = logging.getLogger(__name__)
 
 
 @receiver(userspace_post_transition)

@@ -300,7 +300,7 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'root': {
-        'level': 'WARNING',
+        'level': 'INFO',
         'handlers': ['sentry', 'console'],
     },
     'formatters': {
@@ -314,7 +314,7 @@ LOGGING = {
     },
     'handlers': {
         'sentry': {
-            'level': 'ERROR',
+            'level': 'WARNING',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
         },
         'referer': {

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import structlog
 
 from erudit.models import Journal
 
 from .conf import settings as editor_settings
 from .models import ProductionTeam
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def get_production_team_group(journal=None):
@@ -20,8 +20,11 @@ def get_production_team_group(journal=None):
             identifier=editor_settings.MAIN_PRODUCTION_TEAM_IDENTIFIER)
         production_team_group = production_team.group
     except ProductionTeam.DoesNotExist:  # pragma: no cover
-        logger.error('Unable to find the main production team group with identifier {}'.format(
-            editor_settings.MAIN_PRODUCTION_TEAM_IDENTIFIER), exc_info=True)
+        logger.error(
+            'configuration.error',
+            msg="no production team",
+            identifier=editor_settings.MAIN_PRODUCTION_TEAM_IDENTIFIER
+        )
         production_team_group = None
     return production_team_group
 

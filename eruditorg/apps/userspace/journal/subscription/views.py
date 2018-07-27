@@ -1,7 +1,7 @@
 import csv
 import datetime as dt
 import io
-import logging
+import structlog
 import os
 import urllib.parse
 import chardet
@@ -29,7 +29,7 @@ from ..views import journal_reports_path, BaseReportsDownload
 
 from .forms import JournalAccessSubscriptionCreateForm
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class JournalSubscriptionMixin(JournalScopePermissionRequiredMixin, MenuItemMixin):
@@ -83,7 +83,7 @@ class IndividualJournalAccessSubscriptionCreateView(JournalSubscriptionMixin, Cr
 
             return super(IndividualJournalAccessSubscriptionCreateView, self) \
                 .get(request, *args, **kwargs)
-        except JournalManagementSubscription.DoesNotExist:  # pragna: no cover
+        except JournalManagementSubscription.DoesNotExist:  # pragma: no cover
             logger.error(
                 'Unable to find the management subscription of the following journal: {}'.format(
                     self.current_journal.name),
