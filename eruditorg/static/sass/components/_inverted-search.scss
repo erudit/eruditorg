@@ -5,16 +5,8 @@
 
 .inverted-search-bar {
   background-color: rgba(255, 66, 66, 0.9);
-  height: 100vh;
+  height: 50px;
   color: #fff;
-
-  a {
-    color: #fff;
-
-    &:hover, &:active, &:focus {
-      color: #fff;
-    }
-  }
 
   .header-logo__img path,
   .header-logo__img rect {
@@ -28,7 +20,8 @@
   }
 
   .nav-search-triggers__close {
-    display: inline;
+    display: block;
+    margin-left: 10px;
   }
 
   .nav-search {
