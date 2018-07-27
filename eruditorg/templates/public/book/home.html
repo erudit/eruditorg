@@ -75,18 +75,17 @@
         {# List of collections #}
         <nav class="collection-nav">
           <h2>{% trans "Par collection" %}</h2>
-          {% for collection in collections %}
-            <li><a href="#">{{ collection |safe}}</a></li>
-          {% for book in collection.books.all %}
-          <li>{{ book | safe}}</li>
-          {% endfor %}
-          {% endfor %}
+          <ul class="collection-list">
+            {% for collection in collections %}
+              <li><a href="#{{ collection.id }}">{{ collection | safe }}</a></li>
+            {% endfor %}
+          </ul>
         </nav>
       </div>
 
       {# Latest book #}
-      <aside class="col-sm-6 col-md-4 glory latest-book">
-        <h2>{% trans "Nouveauté" %}</h2>
+      <!-- <aside class="col-sm-6 col-md-4 glory latest-book">
+        <h2>{% trans "Derniere parution" %}</h2>
         <h3><strong><a href="{% url 'public:book:book_detail' %}">Une littérature «&nbsp;comme incantatoire&nbsp;»</strong> <br>Aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a>. <br><br>Sous la direction de Patrick Thériault</h3>
         <a href="{% url 'public:book:book_detail' %}">
           <img src="http://retro.erudit.org/livre/images/incantation.jpg" alt="Couverture" width="125px" class="img-responsive pull-left"/>
@@ -94,40 +93,40 @@
         <blockquote>Le présent volume dérive d’un constat : un idéal incantatoire féconde de part en part la modernité littéraire et continue encore aujourd’hui d’exercer son charme. De fait, le corpus de la littérature moderne et contemporaine offre une variété de créations verbales se désignant comme des incantations ou pouvant de bon droit être désignées comme telles ; et on n’y compte plus les propos d’auteur, les commentaires et les élaborations théoriques qui sollicitent, à des fins d’analyse ou d’analogie, le nom « incantation » et les lexèmes qui y sont apparentés.</blockquote>
         <p><a href="{% url 'public:book:book_detail' %}">{% trans "Lire la suite…" %}</a></p>
         <small>© Presses françaises de l’Université de Toronto, 2018</small>
-      </aside>
+      </aside>-->
     </div>
   </div>
 
-  {# Alternating sections - Odd group #}
-  <a id="#" class="invisible"></a>
-  <section class="sorting-group">
+  {% for collection in collections %}
+  <a id="{{ collection.id }}" class="invisible"></a>
+  <section class="sorting-group {% cycle 'odd' 'even' %}">
     <div class="container">
       <ul class="row">
         <li class="col-xs-6 col-sm-3 col-md-2 collection-title">
-          <h3><strong>{% trans "[Hors collection]" %} (5)&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}">|^</a></strong></h3>
+          <h3><strong>{{ collection|safe }}&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}">|^</a></strong></h3>
         </li>
-        {% for book in books %}
+        {% for book in collection.books.all %}
         <li class="col-xs-6 col-sm-3 col-md-2 book-item">
           <a href="#">
             <p class="book-title">
-              <span><strong>{{ book.get_title }}</strong></span>
-              {% if book.get_subtitle %}
-              <span><br/>{{ book.get_subtitle }}</span>
-              {% endif %}
-              {% if book.get_subtitle2 %}
-              <span><br/>{{ book.get_subtitle2 }}</span>
+              <span>{{ book.type }}</span>
+              <span><br/><strong>{{ book.title|safe }}</strong></span>
+              {% if book.subtitle %}
+              <span><br/>{{ book.subtitle|safe }}</span>
               {% endif %}
             </p>
-            {% if book.get_authors %}
-            <p class="book-authors">{{ book.get_authors }}</p>
+            {% if book.authors %}
+            <p class="book-authors">{{ book.authors|safe }}</p>
             {% endif %}
+            {% if book.cover %}
             <div class="row">
               <div class="col-sm-10">
-                <img src="http://retro.erudit.org/livre/images/2000v10n1.jpg" alt="Couverture" width="125px" class="img-responsive"/>
+                <img src="/media/{{ book.cover }}" alt="Couverture" width="75px" class="img-responsive"/>
               </div>
             </div>
-            {% if book.get_copyright %}
-            <p class="book-copyright"><small>{{ book.get_copyright }}</small></p>
+            {% endif %}
+            {% if book.copyright %}
+            <p class="book-copyright"><small>{{ book.copyright }}</small></p>
             {% endif %}
           </a>
         </li>
@@ -135,48 +134,6 @@
       </ul>
     </div>
   </section>
-
-  {# Alternating sections - Even group #}
-  <a id="#" class="invisible"></a>
-  <section class="sorting-group even">
-    <div class="container">
-      <ul class="row">
-        <li class="col-xs-6 col-sm-3 col-md-2 collection-title">
-          <h3><strong>Actes des colloques de l’ACFAS – Sudbury (5)</strong>&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}">|^</a></h3>
-        </li>
-        {% for book in books %}
-        <li class="col-xs-6 col-sm-3 col-md-2 book-item">
-          <a href="{% url 'public:book:book_detail' %}">
-            <p class="book-title">
-              <span><strong>{{ book.get_title }}</strong></span>
-              {% if book.get_subtitle %}
-              <span><br/>{{ book.get_subtitle }}</span>
-              {% endif %}
-              {% if book.get_subtitle2 %}
-              <span><br/>{{ book.get_subtitle2 }}</span>
-              {% endif %}
-            </p>
-            {% if book.get_authors %}
-            <p class="book-authors">{{ book.get_authors }}</p>
-            {% endif %}
-            <div class="row">
-              <div class="col-sm-10">
-                <img src="http://retro.erudit.org/livre/images/2000v10n1.jpg" alt="Couverture" width="125px" class="img-responsive"/>
-              </div>
-            </div>
-            {% if book.get_copyright %}
-            <p class="book-copyright">
-              <small>
-                {{ book.get_copyright }}, {% if book.get_year %}{{ book.get_year }}{% endif %}
-              </small>
-            </p>
-            {% endif %}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </section>
-
+  {% endfor %}
 </main>
 {% endblock content %}
