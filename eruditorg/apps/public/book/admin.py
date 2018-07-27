@@ -3,6 +3,10 @@ from .models import Book, BookCollection
 
 
 class BookAdmin(admin.ModelAdmin):
+
+    list_display = ('collection', 'title')
+    list_filter = ('collection',)
+
     fieldsets = [
         (None, {
             'fields': (
