@@ -42,10 +42,11 @@ will create the virtualenv and install python dependencies in it.
 
 ## Database
 
-then, you need a database:
+then, you need databases:
 
     $ mysql
-    $ create database eruditorg character set utf8;
+    MariaDB [(none)]> create database eruditorg character set utf8;
+    MariaDB [(none)]> create database restriction character set utf8;
 
 ## Initial data
 
@@ -54,6 +55,11 @@ into your local database. Generating local data from scratch is possible, but it
 this road is bumpy. To import a dump in mysql:
 
     $ gzip -dc dump.sql.gz | mysql -u root -D eruditorg
+    
+To be able to restore production data, you will need to configure your mariadb 
+server to use the Barracuda file format by adding this line in your `my.cnf`:
+
+    innodb_file_format = Barracuda 
 
 ## Creating settings_env.py
 
