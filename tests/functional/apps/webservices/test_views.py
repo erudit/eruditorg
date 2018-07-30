@@ -33,4 +33,4 @@ class TestRestrictionsView:
         root = etree.fromstring(response.content.decode())
         elem = root[0].find('embargoed_issues')
         assert len(elem[:]) == 1
-        assert elem[0].attrib['localidentifier'] == issue.localidentifier
+        assert elem[0].attrib['identifier'] == issue.localidentifier

@@ -28,7 +28,7 @@ class RestrictionsView(View):
             return E.revue(
                 E.years(';'.join(map(str, embargoed_years))),
                 E.embargo_date(date_embargo_begins.strftime('%Y-%m-%d')),
-                E.embargoed_issues(*[E.issue(localidentifier=x) for x in embargoed]),
+                E.embargoed_issues(*[E.issue(identifier=x) for x in embargoed]),
                 identifier=journal.legacy_code)
 
         journals = Journal.objects.filter(
