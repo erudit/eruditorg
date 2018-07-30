@@ -16,7 +16,7 @@ class RestrictionsView(View):
         def get_revue_elem(journal):
             date_embargo_begins = journal.date_embargo_begins
             if not date_embargo_begins:
-                return E.revue()
+                return E.journal()
             min_year = dt.date.today().year + 1
             embargoed = []
             for issue in journal.published_issues:
@@ -25,7 +25,7 @@ class RestrictionsView(View):
                     min_year = min(min_year, issue.date_published.year)
                     embargoed.append(issue.localidentifier)
             embargoed_years = range(min_year, dt.date.today().year + 1)
-            return E.revue(
+            return E.journal(
                 E.years(';'.join(map(str, embargoed_years))),
                 E.embargo_date(date_embargo_begins.strftime('%Y-%m-%d')),
                 E.embargoed_issues(*[E.issue(identifier=x) for x in embargoed]),
@@ -33,7 +33,7 @@ class RestrictionsView(View):
 
         journals = Journal.objects.filter(
             collection__is_main_collection=True, open_access=False, active=True)
-        root = E.revues(
+        root = E.journals(
             *map(get_revue_elem, journals.all())
         )
         return HttpResponse(etree.tostring(root), content_type='text/xml')
