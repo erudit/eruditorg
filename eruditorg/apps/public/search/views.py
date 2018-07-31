@@ -188,7 +188,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
 
     def forms_invalid(self, search_form, options_form):
         GET = self.request.GET
-        if not 'basic_search_term' in GET:
+        if 'basic_search_term' not in GET:
             # This is simply a case of typing the /recherche/ url directly. We don't want to log
             # those.
             pass
