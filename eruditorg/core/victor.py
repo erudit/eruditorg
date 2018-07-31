@@ -40,4 +40,4 @@ class Victor:
         try:
             return result.SubscriberContactInformation
         except AttributeError:
-            return None
+            return []

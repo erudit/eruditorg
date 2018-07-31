@@ -1,5 +1,6 @@
 import datetime as dt
 import io
+from unittest.mock import Mock
 
 import pytest
 from account_actions.models import AccountActionToken
@@ -490,19 +491,23 @@ def test_batch_delete_proceed():
     assert not JournalAccessSubscription.objects.exists()
 
 
-def test_subscription_live_report_contents(monkeypatch):
-    # Asking for current year returns live results from Victor
 
-    class Result:
-        Id = '42'
-        InstitutionName = 'Foo'
-        NotThere = 'Bar'
-        # let's not bother with the whole shebang...
+@pytest.mark.parametrize('should_be_in_export,should_not_be_in_export', [
+    (dict(Id='42', InstitutionName='Foo'), dict(NotThere='Bar')),
+    (dict(), dict())
+])
+def test_subscription_live_report_contents(
+    monkeypatch,
+    should_be_in_export,
+    should_not_be_in_export):
+    # Asking for current year returns live results from Victor
 
     class MockedVictor:
         def get_subscriber_contact_informations(self, product_name):
             assert product_name == journal.code
-            return [Result]
+            victor_data = should_be_in_export.copy()
+            victor_data.update(should_not_be_in_export)
+            return [Mock(**victor_data)]
 
     journal, user = journal_that_can_subscribe()
 
@@ -513,6 +518,10 @@ def test_subscription_live_report_contents(monkeypatch):
 
     url = reverse('userspace:journal:subscription:org_export')
     response = client.get(url, follow=True)
-    assert b'42' in response.content
-    assert b'Foo' in response.content
-    assert b'Bar' not in response.content
+
+    for key in should_be_in_export.keys():
+        assert should_be_in_export[key].encode('utf-8') in response.content
+
+    for key in should_not_be_in_export.keys():
+        assert should_not_be_in_export[key].encode('utf-8') not in response.content
+
