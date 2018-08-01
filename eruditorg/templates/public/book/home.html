@@ -126,7 +126,7 @@
             </div>
             {% endif %}
             {% if book.copyright %}
-            <p class="book-copyright"><small>{{ book.copyright }}</small></p>
+            <p class="book-copyright"><small>{{ book.copyright|safe }}</small></p>
             {% endif %}
           </a>
         </li>
