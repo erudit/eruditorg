@@ -24,8 +24,7 @@ def get_unicode_root(fd):
 def _get_text(node):
     if node is None:
         return None
-    text = etree.tostring(node)
-    return text.split(b'>', 1)[1].rsplit(b'<', 1)[0].decode('utf-8')
+    return " ".join(node.text_content().split())
 
 
 class Command(BaseCommand):
