@@ -41,7 +41,9 @@ class RestrictionsView(View):
             )
 
         journals = Journal.objects.filter(
-            collection__is_main_collection=True, open_access=False, active=True)
+            collection__is_main_collection=True, open_access=False, active=True).filter(
+            issues__is_published=True
+        )
         root = E.journals(
             *map(get_journal_elem, journals.all())
         )

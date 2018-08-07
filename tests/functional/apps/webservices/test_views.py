@@ -24,6 +24,16 @@ class TestRestrictionsView:
         EXPECTED = issue.journal.date_embargo_begins.strftime('%Y-%m-%d')
         assert root[0].find('embargo_date').text == EXPECTED
 
+    def test_excludes_journals_with_unpublished_issues(self):
+
+        issue = IssueFactory(journal__collection__code='erudit')
+        issue.is_published = False
+        issue.save()
+        url = reverse('webservices:restrictions')
+        response = Client().get(url)
+        root = etree.fromstring(response.content.decode())
+        assert len(root) == 0
+
     def test_whitelisting(self):
         issue = IssueFactory(journal__collection__code='erudit')
         IssueFactory(journal=issue.journal, force_free_access=True)
