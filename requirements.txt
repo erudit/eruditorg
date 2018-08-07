@@ -4,11 +4,12 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
-git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.5#egg=django-resumable-uploads
-git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.27#egg=liberuditarticle
+-e git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
+-e git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.5#egg=django-resumable-uploads
+-e git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
+-e git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.27#egg=liberuditarticle
 babel==2.3.4
+beautifulsoup4==4.6.1
 cairocffi==0.8.1          # via cairosvg, weasyprint
 cairosvg==2.1.3           # via weasyprint
 certifi==2018.4.16        # via requests
