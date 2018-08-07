@@ -56,6 +56,22 @@
       @include transition(fill 250ms);
     }
   }
+
+  // only display the `é` symbol on smaller viewports
+  @media only screen and (max-width : 780px) {
+
+    .header-logo__link {
+      width: 40px;
+    }
+
+    rect {
+      display: none;
+    }
+
+    path:not(:first-child):not(:nth-child(2)) {
+      display: none;
+    }
+  }
 }
 
 @include keyframes(logo-stand) {
