@@ -28,8 +28,15 @@ class RestrictionsView(View):
             return E.journal(
                 E.years(';'.join(map(str, embargoed_years))),
                 E.embargo_date(date_embargo_begins.strftime('%Y-%m-%d')),
-                E.embargoed_issues(*[E.issue(identifier=x) for x in embargoed]),
-                identifier=journal.legacy_code)
+                E.embargo_duration(
+                    str(journal.embargo_in_months),
+                    unit='month'
+                ),
+                E.embargoed_issues(*[E.issue(localidentifier=x) for x in embargoed]),
+                code=journal.code,
+                localidentifier=journal.localidentifier,
+                embargo_duration=str(journal.embargo_in_months)
+            )
 
         journals = Journal.objects.filter(
             collection__is_main_collection=True, open_access=False, active=True)
