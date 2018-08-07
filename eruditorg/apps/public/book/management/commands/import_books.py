@@ -27,6 +27,20 @@ def _get_text(node):
     return " ".join(node.text_content().split())
 
 
+def _get_by_label(root_node, label):
+    nodes = root_node.xpath(
+        './/text[text()="{}"]'.format(label),
+        namespaces={'i18n': 'http://apache.org/cocoon/i18n/2.1'})
+    if len(nodes) and nodes[0].tail:
+        return nodes[0].tail
+    else:
+        return None
+
+
+def cleanup_isbn(isbn):
+    return re.sub('[^0-9\-X]', '', isbn)
+
+
 class Command(BaseCommand):
     help = 'Import books from file structure'
 
@@ -47,10 +61,11 @@ class Command(BaseCommand):
                 collection.description = _get_text(description)
             collection.save()
             for book in root.findall('.//div[@class="entreetdm"]'):
-                book_path = "{directory}/{path}".format(directory=self.directory, path=book.find('.//a').get('href').replace('html', 'xml').replace('htm', 'xml'))
-                self.import_book(collection, book_path)
+                subpath = book.find('.//a').get('href').replace('html', 'xml').replace('htm', 'xml')
+                book_path = "{directory}/{path}".format(directory=self.directory, path=subpath)
+                self.import_book(collection, book_path, None)
 
-    def import_book(self, collection, book_path):
+    def import_book(self, collection, book_path, book_notice):
         if book_path.startswith('http'):
             return  # handle later
         print(book_path, os.path.exists(book_path))
@@ -69,7 +84,45 @@ class Command(BaseCommand):
                     book.authors = _get_text(authors[0])
                     if len(authors) > 1:
                         book.contributors = _get_text(authors[1])
-            book.title = _get_text(root.find('.//h1[@class="titrelivre"]'))
+            if book_notice:
+                book.title = _get_text(book_notice.find('.//div[@class="texte"]/p[@class="titre"]'))
+                book.subtitle = _get_text(
+                    book_notice.find('.//div[@class="texte"]/p[@class="sstitre"]'))
+                year = _get_by_label(book_notice, 'anneepublication')
+                if year:
+                    book.year = re.sub('[^0-9]', '', year)
+                isbn = _get_by_label(book_notice, 'isbn')
+                if isbn:
+                    book.isbn = cleanup_isbn(isbn)
+                digital_isbn = _get_by_label(book_notice, 'isbnnumerique')
+                if digital_isbn:
+                    book.digital_isbn = cleanup_isbn(digital_isbn)
+                publisher_tag = book_notice.find('.//div[@class="texte"]/p/a')
+                if publisher_tag is not None:
+                    href = publisher_tag.attrib['href']
+                    text = _get_text(publisher_tag)
+                    if href:
+                        book.publisher_url = href
+                    if text:
+                        book.publisher = text
+                copyrights = book_notice.xpath('.//p[starts-with(., "©")]')
+                if len(copyrights):
+                    book.copyright = _get_text(copyrights[0])
+            else:
+                book.title = _get_text(root.find('.//h1[@class="titrelivre"]'))
+                isbn_nodes = root.xpath('.//div[@class="editeur" and starts-with(., "ISBN")]')
+                if len(isbn_nodes):
+                    isbn_text = " ".join(isbn_nodes[0].text_content().split())
+                    isbns = isbn_text.split(';')
+                    for isbn in isbns:
+                        if 'PDF' in isbn:
+                            book.digital_isbn = cleanup_isbn(isbn)
+                        else:
+                            book.isbn = cleanup_isbn(isbn)
+                copyright_node = root.find('.//div[@class="piedlivre"]/p')
+                if copyright_node is not None:
+                    book.copyright = _get_text(copyright_node)
+
             editeur = root.find('.//h1[@class="editeur"]')
             if editeur is not None:
                 book.publisher = _get_text(editeur)
@@ -121,7 +174,7 @@ class Command(BaseCommand):
                             'htm', 'xml').lstrip(" ")
                         book_fs_path = "{directory}/{path}".format(directory=self.directory,
                                                                    path=book_path)
-                        self.import_book(self.default_collection, book_fs_path)
+                        self.import_book(self.default_collection, book_fs_path, notice)
                 else:
                     print(notice)
                     continue
