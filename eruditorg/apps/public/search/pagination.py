@@ -43,7 +43,6 @@ class ResultsStats:
 def get_pagination_info(stats, request):
 
     if not stats.is_within_bounds():
-        logger.error("PaginationOutOfBoundsException", extra={'stack': True})
         raise PaginationOutOfBoundsException()
 
     baseurl = request.build_absolute_uri()

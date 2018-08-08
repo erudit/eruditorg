@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import structlog
 
 from requests.exceptions import ConnectionError
 
 from .client import get_client
 from .conf import settings as metrics_settings
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def metric(metric_name, num=1, time=None, tags={}, **kwargs):
@@ -47,4 +47,4 @@ def metric(metric_name, num=1, time=None, tags={}, **kwargs):
         # The tracking is deactivated, so there's nothing else to do
         pass
     except ConnectionError:
-        logger.error('InfluxDB server unavailable', exc_info=True)
+        logger.error('configuration.error', msg="InfluxDB server unavailable")

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import logging
+import structlog
 from django.core.management.base import BaseCommand
 from erudit.fedora.utils import get_unimported_issues_pids
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -25,5 +25,5 @@ class Command(BaseCommand):
 
         nb_missing_issues = len(unimported_issues)
         for unimported_issue_pid in unimported_issues:
-            logger.info(unimported_issue_pid)
-        logger.info('Total Missing issues: {}'.format(nb_missing_issues))
+            logger.info("missing.issue", issue_pid=unimported_issue_pid)
+        logger.info('command.finished', total=nb_missing_issues)

@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
-
-import logging
+import structlog
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class EmailBackend(ModelBackend):
@@ -26,8 +24,10 @@ class EmailBackend(ModelBackend):
                 user = UserModel.objects.get(email=email_or_username.lower())
             except UserModel.MultipleObjectsReturned:
                 logger.warning(
-                    'Unable to authenticate {} because many users have '
-                    'the same e-mail address'.format(email_or_username), exc_info=True)
+                    'login.error',
+                    msg="Multiple users with e-mail address",
+                    email=email_or_username
+                )
                 raise UserModel.DoesNotExist
             except ValidationError:
                 user = UserModel.objects.get(username=email_or_username)

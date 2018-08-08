@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 from pathlib import Path
-from structlog import configure
+import structlog
 from structlog.stdlib import LoggerFactory
 
 from structlog.processors import JSONRenderer
@@ -298,124 +298,49 @@ VICTOR_SOAP_USERNAME = None
 VICTOR_SOAP_PASSWORD = None
 
 # Logging settings
+
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
+        'level': 'INFO',
+        'handlers': ['sentry', 'console'],
     },
     'formatters': {
         'structured': {
             'format': '%(message)s'
         },
-
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s '
                       '%(process)d %(thread)d %(message)s'
         },
-
     },
     'handlers': {
         'sentry': {
-            'level': 'ERROR',
+            'level': 'WARNING',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-            'tags': {'custom-tag': 'x'},
         },
+        'referer': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'when': 'midnight',
+            'filename': '/tmp/www.erudit.org.referer.log',
+            'formatter': 'verbose',
+        },
+
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-        'console_structured': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
             'formatter': 'structured'
         },
-        'userspace.journal.editor.console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'structured'
-        },
-
-        'userspace.journal.editor.file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/userspace.journal.editor.log',
-            'maxBytes': 1024 * 1024 * 1,
-            'backupCount': 5,
-            'formatter': 'structured',
-        },
-
-        'error_file': {
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/errors.log',
-            'maxBytes': 1024 * 1024 * 1,
-            'backupCount': 5,
-            'formatter': 'verbose'
-        },
-        'fedora_file': {
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/fedora.log',
-            'maxBytes': 1024 * 1024 * 1,
-            'backupCount': 5,
-            'formatter': 'verbose'
-        }
-
     },
     'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'apps.userspace.journal.editor.views': {
-            'level': 'DEBUG',
-            'handlers': ['userspace.journal.editor.console', ],
-            'propagate': False,
-        },
-        'core.subscription.management.commands.check_ongoing_restrictions': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'error_file', ],
-            'propagate': False,
-        },
-        'core': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
         'core.subscription.middleware': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'erudit.fedora': {
             'level': 'INFO',
-            'handlers': ['fedora_file', ],
+            'handlers': ['referer', ],
             'propagate': False,
         },
-        'erudit': {
-            'level': 'DEBUG',
-            'handlers': ['console', ],
-        },
-        'erudit.management.commands.import_journals_from_fedora': {
-            'level': 'DEBUG',
-            'handlers': ['console_structured'],
-            'propagate': False,
-        }
-    },
+    }
 }
 
 
@@ -424,10 +349,13 @@ def add_timestamp(_, __, event_dict):
     return event_dict
 
 
-configure(
+structlog.configure(
     logger_factory=LoggerFactory(),
     processors=[
         add_timestamp,
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.add_logger_name,
+        structlog.processors.format_exc_info,
         JSONRenderer(sort_keys=True)
     ]
 )

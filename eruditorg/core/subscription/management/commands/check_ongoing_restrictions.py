@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import logging
+import structlog
 import datetime as dt
 
 from django.core.management.base import BaseCommand
@@ -19,7 +19,7 @@ from core.subscription.restriction.models import (
     Revueabonne,
 )
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class ImportException(Exception):
@@ -40,22 +40,17 @@ class Command(BaseCommand):
         restriction_subscriptions = Revueabonne.objects.filter(
             anneeabonnement__in=[year - 1, year, ])
 
-        logger.info(self.style.MIGRATE_HEADING(
-            'Start checking {0} ongoing "restriction" subscriptions for year {1}!'.format(
-                restriction_subscriptions.count(),
-                year
-            )))
-
+        logger.info(
+            "ongoing.restrictions.check.started",
+            year=year,
+            count=restriction_subscriptions.count()
+        )
         for restriction_subscription in restriction_subscriptions:
             try:
-                logger.info(self.style.MIGRATE_LABEL(
-                    '    Start checking the subscription with ID: {0}'.format(
-                        restriction_subscription.id)),
-                )
                 self._check_restriction_subscription(restriction_subscription)
-                logger.info(self.style.SUCCESS('  [OK]'))
+                logger.info("subscription.check", id=restriction_subscription.id, status="OK")
             except AssertionError as e:
-                logger.error(self.style.ERROR('  {0}'.format(e.args[0])))
+                logger.info("subscription.check", id=restriction_subscription.id, status="ERROR")
 
     def _check_restriction_subscription(self, restriction_subscription):
         # Fetches the subscriber

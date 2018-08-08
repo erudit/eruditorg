@@ -1,11 +1,8 @@
 import inspect
-import logging
 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
 from django.utils.translation import activate
-
-logger = logging.getLogger(__name__)
 
 
 class CacheMixin:

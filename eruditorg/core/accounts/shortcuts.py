@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import structlog
 from django.contrib.auth import get_user_model
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def get_or_create_legacy_user(username, email, hashed_password=None):
@@ -22,7 +22,11 @@ def get_or_create_legacy_user(username, email, hashed_password=None):
     except user_model.DoesNotExist:
         try:
             user_model.objects.get(username=username)
-            logger.warn("A user with the username {} already exists. Cannot create.")
+            logger.warn(
+                "user.create.error",
+                msg="User already exists",
+                username=username
+            )
             return None, False
         except user_model.DoesNotExist:
             user = user_model.objects.create(username=username, email=email)
