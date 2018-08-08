@@ -181,9 +181,9 @@
     <li class="related-article col-sm-6 col-md-3">
       <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
         <p class="related-article-title">{{ related_article|format_article_html_title }}</p>
-        {% if related_article.authors.all|length > 0 %}
+        {% if related_article.authors %}
         <p class="related-article-authors">{% trans 'Par' %}
-          {% for author in related_article.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}{% endfor %}
+          {% for author in related_article.authors %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{{ author.format_name }}{% endfor %}
         </p>
         {% endif %}
       </a>
