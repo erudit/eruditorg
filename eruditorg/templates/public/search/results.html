@@ -22,14 +22,12 @@
   <div id="id_search_results_metadata" data-results-count="{{ results.pagination.count }}"></div>
 
   {# Header #}
-  <div class="glory">
+  <header class="glory main-header">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <header class="page-header-main">
-            <h1>{% trans "Résultats de recherche" %}</h1>
-          </header>
-          <div class="page-intro">
+          <h1>{% trans "Résultats de recherche" %}</h1>
+          <div class="main-header__intro">
             {% if documents %}
             <p>
               {% blocktrans trimmed count counter=results.pagination.count %}
@@ -60,10 +58,10 @@
         {% endif %}
       </div>
     </div>
-  </div>
+  </header>
 
   {# Main content #}
-  <div class="main-content">
+  <section class="main-content">
     <div class="container">
       <div class="row">
       {% if documents %}
@@ -151,7 +149,7 @@
           </aside>
         </form>
         {# Search results #}
-        <div id="search-results" class="col-md-8 col-md-offset-1 search-results">
+        <section id="search-results" class="col-md-8 col-md-offset-1 search-results">
           <h2 class="sr-only">{% trans "Documents repérés" %}</h2>
           {% include "public/search/partials/results_pagination.html" %}
           <ol class="results">
@@ -371,18 +369,18 @@
             {% endfor %}
           </ol>
           {% include "public/search/partials/results_pagination.html" %}
-        </div>
+        </section>
       {% else %}
       {# No results found #}
-        <div class="col-xs-12 no-results">
+        <section class="col-xs-12 no-results">
           <h3>{% trans "Aucun document trouvé&nbsp;!" %}</h3>
           <p>
             <a href="{% url 'public:search:advanced_search' %}" class="btn btn-primary">{% trans "Effectuer une nouvelle recherche" %}</a>
           </p>
-        </div>
+        </section>
       {% endif %}
       </div>
     </div>
-  </div>
+  </section>
 </main>
 {% endblock content %}

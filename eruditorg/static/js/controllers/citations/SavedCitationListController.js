@@ -6,12 +6,12 @@ export default {
      * Update the text that displays the total count of selected documents.
      */
     function updateDocumentSelectionCount() {
-      let documentsSelectedCount = $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').length;
+      let documentsSelectedCount = $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').length;
       let gettextContext = {count: documentsSelectedCount, };
 
       let fmts = ngettext('%(count)s document sélectionné', '%(count)s documents sélectionnés', gettextContext.count);
       let s = interpolate(fmts, gettextContext, true);
-      $('.selection-action-wrapper p').text(s);
+      $('.saved-citations strong').text(s);
       if (documentsSelectedCount) { $('#id_selection_tools').show(); } else { $('#id_selection_tools').hide(); }
     }
 
@@ -67,8 +67,8 @@ export default {
      */
     function getSelectedDocumentIds() {
       var documentIds = new Array();
-      $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
-        let $document = $(this).parents('li.document');
+      $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').each(function() {
+        let $document = $(this).parents('li\.bib-record');
         documentIds.push($document.data('document-id'));
       });
       return documentIds;
@@ -77,23 +77,23 @@ export default {
     $('.documents-head input[type=checkbox]').on('change', function(ev) {
       if ($(this).is(':checked')) {
         // Check all the checkboxes associated with each document
-        $('ul.documents .document-checkbox-wrapper input[type=checkbox]').each(function() {
+        $('#citations_list .bib-records .checkbox input[type=checkbox]').each(function() {
           $(this).prop('checked', true);
         });
       } else {
         // Uncheck all the checkboxes associated with each document
-        $('ul.documents .document-checkbox-wrapper input[type=checkbox]').each(function() {
+        $('#citations_list .bib-records .checkbox input[type=checkbox]').each(function() {
           $(this).prop('checked', false);
         });
       }
-      $('ul.documents .document-checkbox-wrapper input[type=checkbox]').change();
+      $('#citations_list .bib-records .checkbox input[type=checkbox]').change();
     });
 
-    $('ul.documents .document-checkbox-wrapper input[type=checkbox]').on('change', updateDocumentSelectionCount);
+    $('#citations_list .bib-records .checkbox input[type=checkbox]').on('change', updateDocumentSelectionCount);
 
     $('a[data-remove]').click(function(ev) {
       ev.preventDefault();
-      let $document = $(this).parents('li.document');
+      let $document = $(this).parents('li\.bib-record');
       removeDocument($document);
     });
 
@@ -111,8 +111,8 @@ export default {
         data: { document_ids: documentIds },
         traditional: true
       }).done(function() {
-        $('ul.documents .document-checkbox-wrapper input[type=checkbox]:checked').each(function() {
-          let $document = $(this).parents('li.document');
+        $('#citations_list .bib-records .checkbox input[type=checkbox]:checked').each(function() {
+          let $document = $(this).parents('li\.bib-record');
           updateDocumentTypeCount($document);
           $document.remove();
           updateDocumentSelectionCount();

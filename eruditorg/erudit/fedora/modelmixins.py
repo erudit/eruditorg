@@ -1,4 +1,4 @@
-import logging
+import structlog
 
 from django.conf import settings
 from django.core.cache import caches
@@ -10,7 +10,7 @@ from requests.exceptions import ConnectionError
 from ..conf import settings as erudit_settings
 from .repository import api
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 cache = caches['fedora']
 
 
@@ -80,7 +80,7 @@ class FedoraMixin:
                 fedora_object = self.fedora_object
             fedora_xml_content = fedora_object.xml_content
         except (RequestFailed, ConnectionError) as e:  # pragma: no cover
-            logger.warn("Exception: {}, pid: {}".format(e, self.pid))
+            logger.warn("fedora.exception", e={}, pid=self.pid)
             if settings.DEBUG:
                 # In DEBUG mode RequestFailed or ConnectionError errors can occur
                 # really often because the dataset provided by the Fedora repository

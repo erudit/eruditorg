@@ -2,10 +2,8 @@
 // Styles related to the page header (fixed except for article page)
 // -----------------------------------------------------------------------------
 
-$header-height: 50px;
-
-body.fixed-header {
-  padding-top: $header-height;
+.fixed-header {
+  padding-top: 50px;
 }
 
 /**

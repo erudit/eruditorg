@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
-import logging
+import structlog
 import time
 
 from django.core.cache import cache
@@ -15,7 +15,7 @@ from erudit.models import Issue
 from erudit.models import Journal
 from erudit.models import Discipline
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def internal_error_view(request):
@@ -68,8 +68,7 @@ class HomeView(TemplateView):
                 assert status_code == 200 or status_code == 304
             except AssertionError:
                 # The feed is not available.
-                logger.error('Apropos feeds unavailable ({})'.format(feed_url),
-                             exc_info=True, extra={'request': self.request, })
+                logger.error('apropos.unavailable', url=feed_url, request=self.request)
                 return []
             entries = parsed.get('entries', [])[:3]
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import inspect
-import logging
+import structlog
 
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse
@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from lxml import etree as et
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class SoapWebServiceView(View):
@@ -119,8 +119,9 @@ class SoapWebServiceView(View):
             # An error occured when executing the operation. We should return a proper SOAP response
             # but this error should be logged!
             logger.error(
-                'Unable to execute the {0} operation'.format(operation_name), exc_info=True,
-                extra={'request': request, })
+                'soap.error',
+                operation=operation_name
+            )
             return self.soap_fault_server(str(e))
 
         return self.render_to_response(self.get_soap_envelope(response_node))

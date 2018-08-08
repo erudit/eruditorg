@@ -3,7 +3,7 @@
   /**
   * Page header overrides
   */
-  .page-header-main {
+  .main-header {
 
     h1 {
       font-size: 1.953em;
@@ -45,11 +45,6 @@
 
     }
 
-    h2 {
-      margin: 2.5em 0 0.75em 0;
-      color: $dark-grey;
-    }
-
     .notegen {
 
       p, ol, ul, blockquote {
@@ -63,135 +58,25 @@
   }
 
   /**
-  * List of articles
+  * Restricted articles
   */
-  h3.section {
-    border-top: 1px solid $dark-grey;
-    color: $coral-red;
-  }
+  .article-restricted {
 
-  h4.section,
-  h5.section {
-    border-top: 1px solid $mid-grey;
-    margin-left: 20px;
-    color: #333;
-  }
+    .bib-record__title {
 
-  h5.section {
-    margin-left: 40px;
-    color: $dark-grey;
-  }
-
-  h3.section + h4.section {
-    margin-left: 0;
-    text-indent: 20px;
-  }
-
-  h4.section + h5.section {
-    margin-left: 20px;
-    text-indent: 20px;
-  }
-
-  .section {
-    padding: 20px 0;
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .issue_detail--articles {
-
-    &.section-2{
-      margin-left: 20px;
-    }
-
-    &.section-3{
-      margin-left: 40px;
-    }
-
-    .article-item {
-      padding: 1.5em 0;
-      border-bottom: 1px solid $mid-grey;
-
-      &:first-child {
-        border-top: 1px solid $mid-grey;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      .article-title {
-        margin-bottom: 0.5em;
-        padding-right: 65px;
-        font-size: 1.15em;
-        line-height: 1.25;
-        letter-spacing: normal;
-        @include font-styles(serif);
-      }
-
-      .article-metadata {
-        margin-top: 1.25em;
-      }
-
-      .article-author {
-        font-size: 14px;
-      }
-
-      .article-pagination,
-      .article-record {
-        font-size: 12px;
-        text-align: right;
-      }
-
-      .article-links,
-      .article-record {
-        font-size: 12px;
+      a {
         color: $dark-grey;
-
-        a {
-          color: $coral-red;
-
-          &:hover, &:focus {
-            text-decoration: none;
-          }
-
-        }
-
-        .akkordion .icon {
-          float: none;
-          margin-left: 0.25em;
-        }
-
+        pointer-events: none;
       }
 
     }
 
-    .article-restricted {
-
-      .article-title {
-
-        a {
-          color: $dark-grey;
-          pointer-events: none;
-        }
-
-      }
-
-      .ion-help-circled {
-        color: #000;
-      }
-
+    .ion-help-circled {
+      color: #000;
     }
 
   }
 
-  .issue_detail--articles + .issue_detail--articles {
-
-    .article-item:first-child {
-      border-top: 1px solid $dark-grey;
-    }
-
-  }
 
   /**
   * Back issues section

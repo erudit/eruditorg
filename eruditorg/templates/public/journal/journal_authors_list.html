@@ -72,7 +72,7 @@
 
 {% block inner_main %}
 <main role="main" class="col-sm-8 col-md-7">
-  <header class="page-header-main row">
+  <header class="main-header row">
     <div class="col-xs-12">
       <h1>
         <span>{% trans 'Index des auteurs' %}</span>
@@ -81,14 +81,22 @@
     </div>
   </header>
 
-  <div class="authors-wrapper main-content">
+  <section class="authors-wrapper main-content">
     {% if view.has_multiple_article_types %}
-    <nav class="btn-group">
+    <nav>
       <h2 class="sr-only">{% trans 'Par type d’article' %}</h2>
       {% url 'public:journal:journal_authors_list' journal.code as authors_list_url %}
-      <a href="{{ authors_list_url }}" title="{% trans 'Voir tous les auteurs' %}" class="btn{% if request.get_full_path == authors_list_url %} active{% endif %}">{% trans "Tous" %}</a>
-      <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}" class="btn{% if article_type == 'article' %} active{% endif %}">{% trans "Articles" %}</a>
-      <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}" class="btn{% if article_type == 'compterendu' %} active{% endif %}">{% trans "Comptes rendus" %}</a>
+      <ul class="tabs">
+        <li class="tabs__item{% if request.get_full_path == authors_list_url %} tabs__item_active{% endif %}">
+          <a href="{{ authors_list_url }}" title="{% trans 'Voir tous les auteurs' %}">{% trans "Tous" %}</a>
+        </li>
+        <li class="tabs__item{% if article_type == 'article' %} tabs__item_active{% endif %}">
+          <a href="{{ authors_list_url }}?article_type=article" title="{% trans 'Voir les auteurs d’articles' %}">{% trans "Articles" %}</a>
+        </li>
+        <li class="tabs__item{% if article_type == 'compterendu' %} tabs__item_active{% endif %}">
+          <a href="{{ authors_list_url }}?article_type=compterendu" title="{% trans 'Voir les auteurs de comptes rendus' %}">{% trans "Comptes rendus" %}</a>
+        </li>
+      </ul>
     </nav>
     {% endif %}
     <nav>
@@ -126,7 +134,7 @@
         </li>
       {% endfor %}
     </ul>
-  </div>
+  </section>
 </main>
 {% endblock inner_main %}
 

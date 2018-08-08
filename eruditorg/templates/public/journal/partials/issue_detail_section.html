@@ -1,17 +1,17 @@
 {% for group in articles_per_section.groups %}
   {% if group.type == 'objects' %}
-    <ol class="issue_detail--articles unstyled section-{{ group.level }}">
+    <ol class="bib-records toc__section-{{ group.level }}">
       {% for article in group.objects %}
       {% include "public/journal/partials/issue_detail_article_item.html" %}
       {% endfor %}
     </ol>
   {% else %}
-      <h{{ group.level|add:"1" }} class="section">
+      <h{{ group.level|add:"2" }} class="toc__heading">
         <strong>
           {{ group.titles.main|safe }}
           {% for paral in group.titles.paral %}&nbsp;/ {{ paral|safe }}{% endfor %}
         </strong>
-      </h{{ group.level|add:"1" }}>
+      </h{{ group.level|add:"2" }}>
       {% with articles_per_section=group %}
         {% include "public/journal/partials/issue_detail_section.html" %}
       {% endwith %}

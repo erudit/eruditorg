@@ -1,0 +1,54 @@
+/**
+ * Table of contents
+ * Used in issue details and book details
+ */
+
+.toc {
+   margin-top: 0;
+}
+
+.toc__title {
+  margin: 2.5em 0 0.75em 0;
+  color: $dark-grey;
+}
+
+.toc__heading {
+  padding: 20px 0;
+  margin: 0;
+  font-size: 18px;
+}
+
+h3.toc__heading {
+  border-top: 1px solid $dark-grey;
+  color: $coral-red;
+}
+
+h4.toc__heading,
+h5.toc__heading {
+  border-top: 1px solid $mid-grey;
+  margin-left: 20px;
+  color: #333;
+}
+
+h5.toc__heading {
+  margin-left: 40px;
+  color: $dark-grey;
+}
+
+h3.toc__heading + h4.toc__heading {
+  margin-left: 0;
+  text-indent: 20px;
+}
+
+h4.toc__heading + h5.toc__heading {
+  margin-left: 20px;
+  text-indent: 20px;
+}
+
+.toc__section-2 {
+  margin-left: 20px;
+}
+
+.toc__section-3 {
+  margin-left: 40px;
+}

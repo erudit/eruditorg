@@ -54,3 +54,6 @@ requests[socks]>=2.18.4,<2.19
 django-waffle>=0.12.0
 django-redis>=4.7.0,<4.8
 suds-py3>=1.3.3
+
+beautifulsoup4==4.6.1
+django-isbn-field==0.5.2

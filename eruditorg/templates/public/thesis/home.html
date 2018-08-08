@@ -59,68 +59,58 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<main role="main">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <header class="page-header-main">
-          <h1>
-            {% trans "Thèses et mémoires" %}
-            <span class="thesis-count">{{ total_count|intcomma }} {% trans "documents" %}</span>
-          </h1>
-        </header>
-        <div class="page-intro">
-          {% url 'public:search:advanced_search' as advanced_search %}
-          {% blocktrans %}
-          <p>Érudit offre un accès centralisé aux dépôts de thèses et mémoires de plusieurs universités canadiennes. La recherche peut être effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de ceux-ci à partir de l’<a href="{{ advanced_search }}">outil de recherche avancée</a>&nbsp;; la consultation du document nécessite cependant une redirection vers la plateforme de l’institution d’attache.</p>
-          <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt à l’université correspondante.</p>
-          {% endblocktrans %}
-        </div>
+<main role="main" class="container">
+  <header class="row main-header">
+    <div class="col-md-8">
+      <h1>
+        {% trans "Thèses et mémoires" %}
+        <span class="thesis-count">{{ total_count|intcomma }} {% trans "documents" %}</span>
+      </h1>
+      <div class="main-header__intro">
+        {% url 'public:search:advanced_search' as advanced_search %}
+        {% blocktrans %}
+        <p>Érudit offre un accès centralisé aux dépôts de thèses et mémoires de plusieurs universités canadiennes. La recherche peut être effectuée sur Érudit à l’intérieur de chaque dépôt ou dans l’ensemble de ceux-ci à partir de l’<a href="{{ advanced_search }}">outil de recherche avancée</a>&nbsp;; la consultation du document nécessite cependant une redirection vers la plateforme de l’institution d’attache.</p>
+        <p>Érudit n’est pas responsable des documents diffusés dans cette zone. En cas de besoin, veuillez communiquer directement avec la personne en charge du dépôt à l’université correspondante.</p>
+        {% endblocktrans %}
       </div>
     </div>
+  </header>
 
-    <div class="main-content">
-      <header class="row">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <h2>{% trans "Par dépôt institutionnel" %}</h2>
-            </div>
-          </div>
-        </div>
-      </header>
+  <section class="main-content">
+    <header class="row">
+      <h2>{% trans "Par dépôt institutionnel" %}</h2>
+    </header>
 
-      <ul class="repositories row">
-        {% for summary in repository_summaries %}
-        <li class="col-sm-6 col-md-4 col-lg-3 repository">
-          <a href="{% url 'public:thesis:collection_home' summary.repository.code %}" class="collection-link">
-            {% if summary.repository.logo %}
-            <span class="collection-logo">
-              <img src="{{ summary.repository.logo.url }}" alt="{% blocktrans with summary.repository.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
-            </span>
-            {% endif %}
-          </a>
-          <h3 class="collection-title">
-            <a href="{% url 'public:thesis:collection_home' summary.repository.code %}" class="collection-link">
-              <strong>{{ summary.repository.name }}</strong>
-            </a>
-          </h3>
-          <div class="thesis-count">
-            {{ summary.thesis_count|intcomma }} {% trans "documents" %}
-          </div>
-          {% if summary.recent_theses %}
-          <div class="recent-theses">
-            <h4>{% trans "Dernièrement diffusées" %}</h4>
-            {% for thesis in summary.recent_theses %}
-            <a href="{{ thesis.url }}" class="thesis" target="_blank">{{ thesis.title }}</a>
-            {% endfor %}
-          </div>
+    <ul class="repositories row">
+      {% for summary in repository_summaries %}
+      <li class="col-sm-6 col-md-4 col-lg-3 repository">
+        <a href="{% url 'public:thesis:collection_home' summary.repository.code %}" class="collection-link">
+          {% if summary.repository.logo %}
+          <span class="collection-logo">
+            <img src="{{ summary.repository.logo.url }}" alt="{% blocktrans with summary.repository.name as name %}Logo {{ name }}{% endblocktrans %}" title="{% blocktrans with collection_info.collection.name as name %}Voir le dépôt {{ name }}{% endblocktrans %}" class="img-responsive"/>
+          </span>
           {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
+        </a>
+        <h3 class="collection-title">
+          <a href="{% url 'public:thesis:collection_home' summary.repository.code %}" class="collection-link">
+            <strong>{{ summary.repository.name }}</strong>
+          </a>
+        </h3>
+        <div class="thesis-count">
+          {{ summary.thesis_count|intcomma }} {% trans "documents" %}
+        </div>
+        {% if summary.recent_theses %}
+        <div class="recent-theses">
+          <h4>{% trans "Dernièrement diffusées" %}</h4>
+          {% for thesis in summary.recent_theses %}
+          <a href="{{ thesis.url }}" class="thesis" target="_blank">{{ thesis.title }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
 
-  </div>
 </main>
 {% endblock content %}

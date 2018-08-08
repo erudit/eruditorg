@@ -12,14 +12,12 @@
 
 {% block content %}
 <section>
-  <div class="glory">
+  <header class="glory main-header">
     <div class="container">
       <div class="row">
         <div class="col-sm-7 col-xs-12">
-          <header class="page-header-main">
-            <h1>{% trans "Recherche avancée" %}</h1>
-          </header>
-          <div class="page-intro">
+          <h1>{% trans "Recherche avancée" %}</h1>
+          <div class="main-header__intro">
             {% blocktrans %}
             <p>Affinez votre recherche dans le corpus de documents offerts sur Érudit en indiquant différents mots-clés et en sélectionnant les filtres disponibles.</p>
             <p>Vous pouvez obtenir de l’aide dans votre recherche en consultant notre <a href="https://www.erudit.org/public/documents/Guide_recherche.pdf?utm_source=platform_guide&utm_campaign=rechercheavancee" target="_blank">guide en ligne</a>, ou encore nous envoyer vos commentaires à l’aide de l’outil <em>Votre avis</em> à droite de cette page.</p>
@@ -28,143 +26,143 @@
         </div>
       </div>
     </div>
-  </div>
-  <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form main-content" method="get">
-    <fieldset class="glory">
-      <div class="container">
+  </header>
+
+  <section>
+    <h2 class="sr-only">{% trans "Formulaire de recherche" %}</h2>
+    <form action="{% url 'public:search:results' %}" id="id_search" class="advanced-search-form main-content" method="get">
+      <fieldset class="glory">
+        <div class="container">
+          <div class="row">
+            <h2 class="sr-only">{% trans 'Par mots-clés' %}</h2>
+            <div class="col-xs-5 col-md-6 col-md-offset-1 search-term">
+              <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
+                <div class="controls">
+                  <label for="id_{{ qterm_field.html_name }}">{% trans 'Mots-clés' %}</label>
+                  {{ form.basic_search_term|add_class:'form-control' }}
+                  {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+                <div class="alert advanced-search-popup-error" style="display:none;">
+                  {% trans "Vous devez saisir une expression ou des mots-clés." %}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-5 col-md-3 search-field">
+              <div id="div_id_{{ form.basic_search_field.html_name }}" class="form-group{% if form.basic_search_field.errors %} has-error{% endif %}">
+                <div class="controls">
+                  <label for="{{ form.basic_search_field.auto_id }}">{% trans 'Dans…' %}</label>
+                  {{ form.basic_search_field|add_class:'form-control' }}
+                  {% for error in form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% include "public/search/partials/advanced_search_q.html" with qnb=1 qoperator_field=form.advanced_search_operator1 qterm_field=form.advanced_search_term1 qfield_field=form.advanced_search_field1 %}
+          <div id="id_advanced_q_wrapper">
+            {% include "public/search/partials/advanced_search_q.html" with qnb=2 qoperator_field=form.advanced_search_operator2 qterm_field=form.advanced_search_term2 qfield_field=form.advanced_search_field2 style='display:none;' %}
+            {% include "public/search/partials/advanced_search_q.html" with qnb=3 qoperator_field=form.advanced_search_operator3 qterm_field=form.advanced_search_term3 qfield_field=form.advanced_search_field3 style='display:none;' %}
+            {% include "public/search/partials/advanced_search_q.html" with qnb=4 qoperator_field=form.advanced_search_operator4 qterm_field=form.advanced_search_term4 qfield_field=form.advanced_search_field4 style='display:none;' %}
+            {% include "public/search/partials/advanced_search_q.html" with qnb=5 qoperator_field=form.advanced_search_operator5 qterm_field=form.advanced_search_term5 qfield_field=form.advanced_search_field5 style='display:none;' %}
+          </div>
+          <div class="row btn-row">
+            <div class="col-xs-6 col-md-5 col-md-offset-1">
+              <a href="#" id="id_add_q_field" class="btn btn-secondary add-btn"><span class="ion-plus"></span></a>
+            </div>
+            <div class="col-xs-6 col-xs-pull-2 col-md-5 col-md-pull-1 text-right">
+              <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="container filters">
         <div class="row">
-          <h2 class="sr-only">{% trans 'Par mots-clés' %}</h2>
-          <div class="col-xs-5 col-md-6 col-md-offset-1 search-term">
-            <div id="div_id_{{ form.basic_search_term.html_name }}" class="form-group{% if form.basic_search_term.errors %} has-error{% endif %}">
-              <div class="controls">
-                <label for="id_{{ qterm_field.html_name }}">{% trans 'Mots-clés' %}</label>
-                {{ form.basic_search_term|add_class:'form-control' }}
-                {% for error in form.basic_search_term.errors %}<p class="error">{{ error }}</p>{% endfor %}
+          <div class="col-xs-12">
+            <h2>{% trans "Filtres" %}</h2>
+          </div>
+        </div>
+        <div class="row">
+          {% include "public/search/partials/checkboxes_filter.html" with field=form.publication_types only %}
+          {% include "public/search/partials/checkboxes_filter.html" with field=form.article_types only %}
+          {% include "public/search/partials/checkboxes_filter.html" with field=form.funds only %}
+          <div class="col-sm-6 col-md-4 filter-disciplines">
+            <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
+              <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
+              {{ form.disciplines|add_class:'form-control' }}
+              {% for error in form.disciplines.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 filter-languages">
+            <div id="div_id_{{ form.languages.html_name }}" class="form-group{% if form.languages.errors %} has-error{% endif %}">
+              <label class="control-label" for="{{ form.languages.auto_id }}">{{ form.languages.label }}</label>
+              {{ form.languages|add_class:'form-control' }}
+              {% for error in form.languages.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 filter-journals">
+            <div id="div_id_{{ form.journals.html_name }}" class="form-group{% if form.journals.errors %} has-error{% endif %}">
+              <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
+              {{ form.journals|add_class:'form-control' }}
+              {% for error in form.journals.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            </div>
+          </div>
+          <div class="col-sm-6 filter-years">
+            <div id="div_id_years">
+              <label class="control-label">{% trans "Année ou intervalle d'années" %}</label>
+              <div class="row">
+                <div class="col-xs-6 year-start">
+                  <label for="{{ form.pub_year_start.auto_id }}">{{ form.pub_year_start.label }}</label>
+                  {{ form.pub_year_start|add_class:'form-control' }}
+                </div>
+                <div class="col-xs-6 year-end">
+                  <label for="{{ form.pub_year_end.auto_id }}">{{ form.pub_year_end.label }}</label>
+                  {{ form.pub_year_end|add_class:'form-control' }}
+                </div>
               </div>
-              <div class="alert advanced-search-popup-error" style="display:none;">
-                {% trans "Vous devez saisir une expression ou des mots-clés." %}
+              <div class="row">
+                <div class="col-md-12">
+                  {% for error in form.pub_year_start.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                  {% for error in form.pub_year_end.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-xs-5 col-md-3 search-field">
-            <div id="div_id_{{ form.basic_search_field.html_name }}" class="form-group{% if form.basic_search_field.errors %} has-error{% endif %}">
-              <div class="controls">
-                <label for="{{ form.basic_search_field.auto_id }}">{% trans 'Dans…' %}</label>
-                {{ form.basic_search_field|add_class:'form-control' }}
-                {% for error in form.basic_search_field.errors %}<p class="error">{{ error }}</p>{% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-        {% include "public/search/partials/advanced_search_q.html" with qnb=1 qoperator_field=form.advanced_search_operator1 qterm_field=form.advanced_search_term1 qfield_field=form.advanced_search_field1 %}
-        <div id="id_advanced_q_wrapper">
-          {% include "public/search/partials/advanced_search_q.html" with qnb=2 qoperator_field=form.advanced_search_operator2 qterm_field=form.advanced_search_term2 qfield_field=form.advanced_search_field2 style='display:none;' %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=3 qoperator_field=form.advanced_search_operator3 qterm_field=form.advanced_search_term3 qfield_field=form.advanced_search_field3 style='display:none;' %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=4 qoperator_field=form.advanced_search_operator4 qterm_field=form.advanced_search_term4 qfield_field=form.advanced_search_field4 style='display:none;' %}
-          {% include "public/search/partials/advanced_search_q.html" with qnb=5 qoperator_field=form.advanced_search_operator5 qterm_field=form.advanced_search_term5 qfield_field=form.advanced_search_field5 style='display:none;' %}
-        </div>
-        <div class="row btn-row">
-          <div class="col-xs-6 col-md-5 col-md-offset-1">
-            <a href="#" id="id_add_q_field" class="btn btn-secondary add-btn"><span class="ion-plus"></span></a>
-          </div>
-          <div class="col-xs-6 col-xs-pull-2 col-md-5 col-md-pull-1 text-right">
+          <div class="col-sm-6 filter-btn text-right">
             <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
           </div>
         </div>
-      </div>
-    </fieldset>
-    <fieldset class="container filters">
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>{% trans "Filtres" %}</h2>
-        </div>
-      </div>
-      <div class="row">
-        {% include "public/search/partials/checkboxes_filter.html" with field=form.publication_types only %}
-        {% include "public/search/partials/checkboxes_filter.html" with field=form.article_types only %}
-        {% include "public/search/partials/checkboxes_filter.html" with field=form.funds only %}
-        <div class="col-sm-6 col-md-4 filter-disciplines">
-          <div id="div_id_{{ form.disciplines.html_name }}" class="form-group{% if form.disciplines.errors %} has-error{% endif %}">
-            <label class="control-label" for="{{ form.disciplines.auto_id }}">{{ form.disciplines.label }}</label>
-            {{ form.disciplines|add_class:'form-control' }}
-            {% for error in form.disciplines.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 filter-languages">
-          <div id="div_id_{{ form.languages.html_name }}" class="form-group{% if form.languages.errors %} has-error{% endif %}">
-            <label class="control-label" for="{{ form.languages.auto_id }}">{{ form.languages.label }}</label>
-            {{ form.languages|add_class:'form-control' }}
-            {% for error in form.languages.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 filter-journals">
-          <div id="div_id_{{ form.journals.html_name }}" class="form-group{% if form.journals.errors %} has-error{% endif %}">
-            <label class="control-label" for="{{ form.journals.auto_id }}">{{ form.journals.label }}</label>
-            {{ form.journals|add_class:'form-control' }}
-            {% for error in form.journals.errors %}<p class="error">{{ error }}</p>{% endfor %}
-          </div>
-        </div>
-        <div class="col-sm-6 filter-years">
-          <div id="div_id_years">
-            <label class="control-label">{% trans "Année ou intervalle d'années" %}</label>
-            <div class="row">
-              <div class="col-xs-6 year-start">
-                <label for="{{ form.pub_year_start.auto_id }}">{{ form.pub_year_start.label }}</label>
-                {{ form.pub_year_start|add_class:'form-control' }}
-              </div>
-              <div class="col-xs-6 year-end">
-                <label for="{{ form.pub_year_end.auto_id }}">{{ form.pub_year_end.label }}</label>
-                {{ form.pub_year_end|add_class:'form-control' }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                {% for error in form.pub_year_start.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                {% for error in form.pub_year_end.errors %}<p class="error">{{ error }}</p>{% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 filter-btn text-right">
-          <button type="submit" class="btn btn-primary">{% trans "Rechercher" %}</button>
-        </div>
-      </div>
-    </fieldset>
-  </form>
+      </fieldset>
+    </form>
+  </section>
 
   {% if saved_searches %}
   <section id="search-history" class="container main-content search-history">
-    <div class="row">
+    <header class="row">
       <div class="col-md-12">
         <h2>{% trans "Historique des recherches sauvegardées" %}</h2>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <table>
-          <thead>
-            <tr>
-              <th>n<sup>o</sup></th>
-              <th>{% trans "Requête" %}</th>
-              <th>{% trans "Résultats" %}</th>
-              <th>{% trans "Supprimer" %}</th>
-              <th>{% trans "Relancer" %}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for search in saved_searches %}
-            <tr class="saved-search" data-uuid="{{ search.uuid }}">
-              <td>{{ forloop.counter }}</td>
-              <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
-              <td>{{ search.results_count }}</td>
-              <td><a href="#" class="remove-search">x</td>
-              <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}">--></a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </header>
+    <table>
+      <thead>
+        <tr>
+          <th>n<sup>o</sup></th>
+          <th>{% trans "Requête" %}</th>
+          <th>{% trans "Résultats" %}</th>
+          <th>{% trans "Supprimer" %}</th>
+          <th>{% trans "Relancer" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for search in saved_searches %}
+        <tr class="saved-search" data-uuid="{{ search.uuid }}">
+          <td>{{ forloop.counter }}</td>
+          <td>{% for search_element in search.elements %}{{ search_element.str }}{% endfor %}</td>
+          <td>{{ search.results_count }}</td>
+          <td><a href="#" class="remove-search">x</td>
+          <td><a href="{% url 'public:search:results' %}?{{ search.querystring }}">--></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </section>
   {% endif %}
 

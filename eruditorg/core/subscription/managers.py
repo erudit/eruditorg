@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import structlog
 import re
 
 import datetime as dt
@@ -10,7 +10,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models import Q
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class JournalAccessSubscriptionQueryset(models.QuerySet):
@@ -32,7 +32,10 @@ class JournalAccessSubscriptionQueryset(models.QuerySet):
             return self.filter(institutionipaddressrange__in=ip_range).distinct()
 
         if 'psycopg2' not in database_engine:
-            logger.warn("Doing string comparison on IP addresses. The results may not be accurate.")
+            logger.warning(
+                "db.query",
+                msg="Doing string comparison on IP addresses. The results may not be accurate."
+            )
 
         return self.filter(
             institutionipaddressrange__ip_start__lte=ip_address,

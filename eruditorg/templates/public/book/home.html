@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load humanize i18n staticfiles %}
+
+{% block title %}{% trans "Livres et actes" %}{% endblock title %}
+
+{% block meta_description %}{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}{% endblock meta_description %}
+
+{% block meta_tags %}
+<!-- Facebook / Open Graph -->
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{% blocktrans %}Livres et actes{% endblocktrans %}">
+<meta property="og:site_name" content="Érudit">
+<meta property="og:locale" content="{{ language_code }}_CA">
+<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+<meta property="og:description" content="{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@eruditorg">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:title" content="{% trans 'Livres et actes' %} – Érudit">
+<meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'img/illustration-erudit.png' %}">
+<meta name="twitter:image:alt" content="{% trans 'Illustration « Cultivez votre savoir »' %}">
+<meta name="twitter:description" content="{% blocktrans %}Consultez notre collection de livres et d’actes de colloques en sciences humaines et sociales.{% endblocktrans %}">
+{% endblock meta_tags %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:home' %}",
+      "name": "{% trans 'Livres et actes' %}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
+{% block body_class %}{{ block.super }} book_home{% endblock body_class %}
+{% block body_id %}book_home{% endblock body_id %}
+{% block data_controller %}public:book:book_home{% endblock data_controller %}
+
+{% block breadcrumb %}
+{{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-8">
+        <header class="page-header-main">
+          <h1>{% trans "Livres et actes" %}</h1>
+        </header>
+        <div class="page-intro">
+          {% blocktrans %}
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          {% endblocktrans %}
+        </div>
+
+        {# List of collections #}
+        <nav class="collection-nav">
+          <h2>{% trans "Par collection" %}</h2>
+          <ul class="collection-list">
+            {% for collection in collections %}
+              <li><a href="#{{ collection.id }}">{{ collection | safe }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+
+      {# Latest book #}
+      <!-- <aside class="col-sm-6 col-md-4 glory latest-book">
+        <h2>{% trans "Derniere parution" %}</h2>
+        <h3><strong><a href="{% url 'public:book:book_detail' %}">Une littérature «&nbsp;comme incantatoire&nbsp;»</strong> <br>Aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a>. <br><br>Sous la direction de Patrick Thériault</h3>
+        <a href="{% url 'public:book:book_detail' %}">
+          <img src="http://retro.erudit.org/livre/images/incantation.jpg" alt="Couverture" width="125px" class="img-responsive pull-left"/>
+        </a>
+        <blockquote>Le présent volume dérive d’un constat : un idéal incantatoire féconde de part en part la modernité littéraire et continue encore aujourd’hui d’exercer son charme. De fait, le corpus de la littérature moderne et contemporaine offre une variété de créations verbales se désignant comme des incantations ou pouvant de bon droit être désignées comme telles ; et on n’y compte plus les propos d’auteur, les commentaires et les élaborations théoriques qui sollicitent, à des fins d’analyse ou d’analogie, le nom « incantation » et les lexèmes qui y sont apparentés.</blockquote>
+        <p><a href="{% url 'public:book:book_detail' %}">{% trans "Lire la suite…" %}</a></p>
+        <small>© Presses françaises de l’Université de Toronto, 2018</small>
+      </aside>-->
+    </div>
+  </div>
+
+  {% for collection in collections %}
+  <a id="{{ collection.id }}" class="invisible"></a>
+  <section class="sorting-group {% cycle 'odd' 'even' %}">
+    <div class="container">
+      <ul class="row">
+        <li class="col-xs-6 col-sm-3 col-md-2 collection-title">
+          <h3><strong>{{ collection|safe }}&nbsp;<a href="#top" class="scroll-top" title="{% trans 'Retourner en haut' %}">|^</a></strong></h3>
+        </li>
+        {% for book in collection.books.all %}
+        <li class="col-xs-6 col-sm-3 col-md-2 book-item">
+          <a href="#">
+            <p class="book-title">
+              <span>{{ book.type }}</span>
+              <span><br/><strong>{{ book.title|safe }}</strong></span>
+              {% if book.subtitle %}
+              <span><br/>{{ book.subtitle|safe }}</span>
+              {% endif %}
+            </p>
+            {% if book.authors %}
+            <p class="book-authors">{{ book.authors|safe }}</p>
+            {% endif %}
+            {% if book.cover %}
+            <div class="row">
+              <div class="col-sm-10">
+                <img src="/media/{{ book.cover }}" alt="Couverture" width="75px" class="img-responsive"/>
+              </div>
+            </div>
+            {% endif %}
+            {% if book.copyright %}
+            <p class="book-copyright"><small>{{ book.copyright|safe }}</small></p>
+            {% endif %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endfor %}
+</main>
+{% endblock content %}

@@ -1,88 +1,23 @@
+/**
+ * Ma bibliothèque / My Library page
+ * List of saved citations for articles, theses, any documents.
+ */
+
 #citations_list {
 
-  .sidebar-block {
+  .documents-head {
+    margin-top: 20px;
+    margin-bottom: 20px;
 
-    h2 {
-      border-bottom: 1px solid $mid-grey;
-      padding-bottom: 0.5em;
-      font-size: 1.5em;
+    .checkbox {
+      padding-left: 31px;
     }
-
+    
   }
 
-  .documents-list-wrapper {
-
-    .selection-action-wrapper {
-      padding: 20px;
-      height: 70px;
-      background: $light-grey;
-
-      p {
-        margin: 0;
-      }
-
-    }
-
-    .documents-wrapper {
-
-      .documents-head {
-        padding: 20px 0;
-
-        border-bottom: 1px solid $black;
-
-        .document-checkbox-wrapper {
-          float: left;
-        }
-
-        .document-title {
-          padding-left: 25px;
-        }
-
-      }
-
-      .documents {
-        margin-left: 0;
-        margin-right: 0;
-        padding: 0;
-        list-style: none;
-
-        > li {
-          margin: 0;
-          padding: 15px 0;
-          border-bottom: 1px solid darken($light-grey, 5%);
-
-          .document-checkbox-wrapper {
-            float: left;
-          }
-
-          .document-title,
-          .document-authors-publication-year {
-            padding-left: 25px;
-            font-size: 16px;
-            line-height: 1.15;
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
-
-  .actions-wrapper {
-    height: 50px;
-
-    .form-group {
-
-      label {
-        display: inline-block;
-      }
-
-      select {
-        display: inline-block;
-        width: auto;
-      }
-
-    }
-
+  .saved-citations {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
 }

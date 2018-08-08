@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-
-import logging
-
 from django.dispatch import receiver
 from django_fsm import signals
 
 from core.editor.models import IssueSubmission
 from core.editor.models import IssueSubmissionStatusTrack
-
-logger = logging.getLogger(__name__)
 
 
 @receiver(signals.post_transition, sender=IssueSubmission)

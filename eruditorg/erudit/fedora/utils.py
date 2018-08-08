@@ -1,4 +1,4 @@
-import logging
+import structlog
 import lxml.etree as et
 
 from eulfedora.util import RequestFailed
@@ -7,7 +7,8 @@ from .repository import api
 from .objects import JournalDigitalObject
 from eruditarticle.utils import remove_xml_namespaces
 
-logger = logging.getLogger(__name__)
+
+logger = structlog.getLogger(__name__)
 
 
 def get_pids(query):
@@ -29,18 +30,11 @@ def get_pids(query):
             session_token = tree.find('./type:listSession//type:token', ns_type)
             _pids = [n.text for n in pid_nodes]
         except RequestFailed as e:
-            logger.info('[FAIL]')
             return
         else:
             pids.extend(_pids)
 
         remaining_pids = len(_pids) and session_token is not None
-
-    logger.info('[OK]')
-    if not len(pids):
-        logger.info('No PIDs found')
-    else:
-        logger.info('  {0} PIDs found!'.format(len(pids)))
 
     return pids
 
@@ -53,9 +47,7 @@ def is_issue_published_in_fedora(issue_pid, journal=None, journal_pid=None):
         fedora_journal = JournalDigitalObject(api, journal_pid)
         assert fedora_journal.exists
     except AssertionError:
-        msg = 'The journal with PID "{}" seems to be inexistant'.format(journal.pid)
-        logger.error(msg, exc_info=True)
-        logger.debug(msg)
+        logger.error("journal.DoesNotExist", pid=journal.pid)
         return False
     else:
         publications_tree = remove_xml_namespaces(
@@ -85,7 +77,7 @@ def get_unimported_issues_pids(include_unpublished_issues=False):
             is_published = is_issue_published_in_fedora(issue_pid, journal_pid=journal_pid)
             if is_published or (not is_issue_published_in_fedora and include_unpublished_issues):  # noqa
                 missing_issues.append(issue_pid)
-                logger.info({'pid': issue_pid, 'published_in_fedora': is_published})
+                logger.info("issue.unimported", pid=issue_pid, published_in_fedora=is_published)
     return missing_issues
 
 

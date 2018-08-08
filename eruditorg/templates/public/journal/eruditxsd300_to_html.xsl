@@ -48,7 +48,7 @@
   <xsl:template match="article">
 
     <!-- main header -->
-    <header class="page-header-main article-header" id="article-header">
+    <header class="main-header doc-head" id="article-header">
 
       <div class="row article-title-group">
 
@@ -59,7 +59,7 @@
               <xsl:apply-templates select="liminaire/grtitre/surtitreparal" mode="title"/>
             </p>
           </xsl:if>
-          <h1>
+          <h1 class="doc-head__title">
             <xsl:apply-templates select="liminaire/grtitre/titre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/sstitre" mode="title"/>
             <xsl:apply-templates select="liminaire/grtitre/titreparal" mode="title"/>
@@ -68,13 +68,13 @@
             {% if only_summary %}<span><em>[{% trans 'Notice' %}]</em></span>{% endif %}
           </h1>
           <xsl:if test="liminaire/grauteur">
-            <ul class="grauteur">
+            <ul class="grauteur doc-head__authors">
               <xsl:apply-templates select="liminaire/grauteur/auteur[not(contribution[@typecontrib != 'aut'])]" mode="author"/>
             </ul>
           </xsl:if>
           <xsl:if test="liminaire/grauteur/auteur/contribution or liminaire/grauteur/auteur/affiliation or liminaire/grauteur/auteur/courriel or liminaire/grauteur/auteur/siteweb">
-            <div class="affiliations akkordion" data-akkordion-single="true">
-              <p class="affiliations-label akkordion-title">{% trans '…plus d’informations' %} <span class="icon ion-ios-arrow-down"></span></p>
+            <div class="akkordion doc-head__more-info" data-akkordion-single="true">
+              <p class="akkordion-title">{% trans '…plus d’informations' %} <span class="icon ion-ios-arrow-down"></span></p>
               <ul class="akkordion-content unstyled">
                 <xsl:apply-templates select="liminaire/grauteur/auteur" mode="affiliations"/>
               </ul>
@@ -133,78 +133,71 @@
         </div>
 
         <!-- issue cover image or journal logo -->
-        <div class="issue-image col-md-3">
-          {% if article.issue.has_coverpage %}
+        <div class="col-md-3">
           <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
-            <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}
-              {{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
-            </a>
-          {% else %}
-          <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" title="{% blocktrans with journal=article.issue.journal.name %}Consulter ce numéro de la revue {{ journal|escape }}{% endblocktrans %}">
-            <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive journal-logo" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
+            {% if article.issue.has_coverpage %}
+            <img src="{% url 'public:journal:issue_coverpage' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}" class="img-responsive doc-head__img" alt="{% trans 'Couverture de' %} {% if article.issue.html_title %}{{ article.issue.html_title|escape }}, {% endif %}{{ article.issue.volume_title_with_pages|escape }}, {{ article.issue.journal.name|escape }}" />
+            {% else %}
+            <img src="{% url 'public:journal:journal_logo' article.issue.journal.code %}" class="img-responsive doc-head__img" alt="{% trans 'Logo de' %} {{ article.issue.journal.name|escape }}" />
+            {% endif %}
           </a>
-          {% endif %}
           {% if only_summary %}
           <a href="{% url 'public:journal:article_detail' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" class="btn btn-primary btn-full-text">{% trans "Lire le texte intégral" %} <span class="ion ion-arrow-right-c"></span></a>
           {% endif %}
         </div>
       </div>
 
-      <div class="row article-metadata-group">
+      <div class="row">
         <!-- article metadata -->
-        <div class="col-sm-6">
-          <div class="meta-article">
-            <dl class="mono-space idpublic">
-              <dt>URI</dt>
+        <div class="col-sm-6 doc-head__metadata">
+          <xsl:apply-templates select="liminaire/erratum"/>
+          <xsl:apply-templates select="admin/histpapier"/>
+          <p>{% trans "Diffusion numérique&#160;" %}: {{ article.issue.date_published }}
+          <dl class="mono-space idpublic">
+            <dt>URI</dt>
+            <dd>
+              <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
+                <a href="http://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
+                  http://id.erudit.org/iderudit/{{ article.localidentifier }}
+                  <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
+                  <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
+                </a>
+              </span>
+            </dd>
+
+            <xsl:if test="$doi">
+              <dt>DOI</dt>
               <dd>
-                <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
-                  <a href="http://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
-                    http://id.erudit.org/iderudit/{{ article.localidentifier }}
+                <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
+                  <a href="{$doiStart}{$doi}" class="clipboard-data">
+                    <xsl:value-of select="$doi"/>
                     <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                     <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                   </a>
                 </span>
               </dd>
-
-              <xsl:if test="$doi">
-                <dt>DOI</dt>
-                <dd>
-                  <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
-                    <a href="{$doiStart}{$doi}" class="clipboard-data">
-                      <xsl:value-of select="$doi"/>
-                      <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
-                      <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
-                    </a>
-                  </span>
-                </dd>
-              </xsl:if>
-              <dt>{% trans "Diffusion numérique" %} :</dt>
-              <dd>{{ article.issue.date_published }}</dd>
-            </dl>
-            <xsl:apply-templates select="liminaire/erratum"/>
-            <xsl:apply-templates select="admin/histpapier"/>
-          </div>
+            </xsl:if>
+          </dl>
+          </p>
         </div>
 
         <!-- journal metadata -->
-        <div class="col-sm-6">
-          <div class="meta-journal">
-            <p>
-              {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
-              <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
-            </p>
-            <p class="refpapier">
-              <xsl:apply-templates select="admin/numero" mode="refpapier"/>
-              <xsl:if test="admin/infoarticle/pagination">
-                <xsl:apply-templates select="admin/infoarticle/pagination"/>
-              </xsl:if>
-              <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
-            </p>
-            {% if content_access_granted and subscription_type == 'individual' %}
-            <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
-            {% endif %}
-            <xsl:apply-templates select="admin/droitsauteur"/>
-          </div>
+        <div class="col-sm-6 doc-head__metadata">
+          <p>
+            {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
+            <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
+          </p>
+          <p class="refpapier">
+            <xsl:apply-templates select="admin/numero" mode="refpapier"/>
+            <xsl:if test="admin/infoarticle/pagination">
+              <xsl:apply-templates select="admin/infoarticle/pagination"/>
+            </xsl:if>
+            <xsl:apply-templates select="admin/numero/grtheme/theme" mode="refpapier"/>
+          </p>
+          {% if content_access_granted and subscription_type == 'individual' %}
+          <p><strong>{% trans "Vous êtes abonné à cette revue." %}</strong></p>
+          {% endif %}
+          <xsl:apply-templates select="admin/droitsauteur"/>
         </div>
       </div>
     </header>
@@ -502,7 +495,7 @@
 
   <!-- author(s) - person or organisation -->
   <xsl:template match="auteur[not(contribution[@typecontrib = 'trl'])]" mode="author">
-    <li class="{name()}">
+    <li class="{name()} doc-head__author">
       <xsl:choose>
         <xsl:when test="nompers">
           <span class="nompers">
@@ -645,15 +638,13 @@
   </xsl:template>
 
   <xsl:template match="pagination">
-    <span class="{name()}">
-      <xsl:if test="ppage[normalize-space()] | dpage[normalize-space()]">
-        <xsl:text>, </xsl:text>
-        <xsl:choose>
-          <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
-          <xsl:otherwise>{% trans 'p.' %}&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
-        </xsl:choose>
-      </xsl:if>
-    </span>
+    <xsl:if test="ppage[normalize-space()] | dpage[normalize-space()]">
+      <xsl:text>, </xsl:text>
+      <xsl:choose>
+        <xsl:when test="ppage = dpage">p.&#160;<xsl:value-of select="ppage"/></xsl:when>
+        <xsl:otherwise>{% trans 'p.' %}&#160;<xsl:value-of select="ppage"/>–<xsl:value-of select="dpage"/></xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="ppage | dpage">
@@ -665,6 +656,7 @@
   <!-- themes -->
   <xsl:template match="admin/numero/grtheme/theme" mode="refpapier">
     <span class="{name()}">
+      <br/>
       <strong>
         <a href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}"><xsl:apply-templates select="."/></a>
       </strong>
