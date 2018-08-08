@@ -1,6 +1,6 @@
-from django.contrib import admin
 from django.db import models
 from django.utils.translation import gettext as _
+
 
 class BookCollection(models.Model):
 
@@ -22,6 +22,12 @@ class BookCollection(models.Model):
         max_length=1500,
         verbose_name=_('Description de la collection'),
     )
+    path = models.CharField(
+        max_length=200,
+        verbose_name=_('répertoire'),
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = _('Collection d’actes ou de livres')
@@ -38,7 +44,7 @@ class Book(models.Model):
 
     TYPE_CHOICES = (
         ('li', _('Livre')),
-        ('co', _('Actes')),
+        ('ac', _('Actes')),
     )
 
     title = models.CharField(
@@ -60,7 +66,7 @@ class Book(models.Model):
         blank=True,
         null=True,
         verbose_name=_('Couverture'),
-        upload_to=('book_cover')
+        upload_to='book_cover'
     )
     publisher = models.CharField(
         blank=True,
@@ -122,6 +128,12 @@ class Book(models.Model):
         null=True,
         max_length=200,
         verbose_name=_('Mention du droit d’auteur'),
+    )
+    path = models.CharField(
+        max_length=200,
+        verbose_name=_('répertoire'),
+        null=True,
+        blank=True,
     )
 
     class Meta:

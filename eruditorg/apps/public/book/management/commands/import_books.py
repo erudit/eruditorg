@@ -1,5 +1,7 @@
 import re
 import os
+from pathlib import Path
+
 from lxml import html
 # noinspection PyProtectedMember
 from bs4 import UnicodeDammit
@@ -53,27 +55,24 @@ class Command(BaseCommand):
         # TODO fix encoding issues
         # TODO import all child of description
         # TODO import books
-        with open(path, 'rb') as index:
+        with open(str(self.directory / path), 'rb') as index:
             root = get_unicode_root(index)
             title = _get_text(root.find('.//h1'))
-            collection = BookCollection(name=title)
+            collection = BookCollection(name=title, path=path.parent)
             description = root.find('.//div[@class="desclivre"]/p')
             if description is not None:
                 collection.description = _get_text(description)
             collection.save()
             for book in root.findall('.//div[@class="entreetdm"]'):
                 subpath = book.find('.//a').get('href').replace('html', 'xml').replace('htm', 'xml')
-                book_path = "{directory}/{path}".format(directory=self.directory, path=subpath)
-                self.import_book(collection, book_path, None)
+                self.import_book(collection, Path(subpath.lstrip(' /')), None)
 
     def import_book(self, collection, book_path, book_notice):
-        if book_path.startswith('http'):
-            return  # handle later
-        print(book_path, os.path.exists(book_path))
-        with open(book_path, 'rb') as index:
+        full_path = self.directory / book_path
+        print(full_path, full_path.exists())
+        with open(str(full_path), 'rb') as index:
             root = get_unicode_root(index)
-            book = Book()
-            book.collection = collection
+            book = Book(collection=collection, path=book_path.parent)
             authors = root.findall('.//div[@class="auteurtdm"]')
             if len(authors) > 0:
                 book.authors = _get_text(authors[0])
@@ -151,7 +150,7 @@ class Command(BaseCommand):
         Book.objects.all().delete()
 
         # noinspection PyAttributeOutsideInit
-        self.directory = options.get('livre_directory')[0]
+        self.directory = Path(options.get('livre_directory')[0])
         default_collection = BookCollection.objects.create(name="[Hors collection]")
 
         with open('{directory}/livre/index.xml'.format(directory=self.directory), 'rb') as index:
@@ -163,16 +162,13 @@ class Command(BaseCommand):
                 if book_id_match:
                     collection = book_id_match.group(1)
                     # collections have an index.xml file in their directory
-                    path = "{directory}/livre/{collection}/index.xml".format(
-                        directory=self.directory, collection=collection)
-                    if os.path.exists(path) and collection in to_import:
+                    path = Path("livre/{collection}/index.xml".format(collection=collection))
+                    if (self.directory / path).exists() and collection in to_import:
                         self.import_collection(collection, notice, path)
                     else:
                         book_path = notice.find('.//div[@class="format"]/a').get('href')
                         book_path = book_path.replace('html', 'xml').replace('htm', 'xml')
-                        book_fs_path = "{directory}/{path}".format(directory=self.directory,
-                                                                   path=book_path.lstrip(" "))
-                        self.import_book(default_collection, book_fs_path, notice)
+                        self.import_book(default_collection, Path(book_path.lstrip(" /")), notice)
                 else:
                     print(notice)
                     continue
