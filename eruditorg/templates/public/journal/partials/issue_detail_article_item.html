@@ -18,7 +18,7 @@
     {% if article.pdf_url %}
     <li>
       <a class="tool-btn"
-         href="{{ article.pdf_url }}{% if not article.issue.is_published %}?{{ article|prepublication_querystring }}{% endif %}"
+         href="{{ article.pdf_url }}{% if not article.issue.is_published and ticket %}?ticket={{ticket}}{% endif %}"
          title="{% trans 'Télécharger' %}"
          target="_blank">
         <span class="toolbox-pdf">PDF</span>
