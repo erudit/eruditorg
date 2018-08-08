@@ -50,5 +50,6 @@ class BookAdmin(admin.ModelAdmin):
         }),
     ]
 
+
 admin.site.register(BookCollection)
 admin.site.register(Book, BookAdmin)

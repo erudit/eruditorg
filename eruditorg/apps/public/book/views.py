@@ -1,7 +1,5 @@
 from apps.public.book.models import BookCollection
 from django.views.generic import TemplateView
-from erudit.solr.models import get_all_books
-
 
 
 class BookListView(TemplateView):
