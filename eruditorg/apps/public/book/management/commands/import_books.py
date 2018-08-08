@@ -1,5 +1,4 @@
 import re
-import os
 from pathlib import Path
 
 from lxml import html
@@ -11,9 +10,7 @@ from django.core.management.base import BaseCommand
 from apps.public.book.models import BookCollection, Book
 
 
-to_import = ('ACFASSudbury', 'aidelf', 'artefact', 'sqrsf', 'artsVisuels', 'CEFAN', 'npqs',)
-
-# TODO fix book import
+to_import = ('ACFASSudbury', 'aidelf', 'artefact', 'sqrsf', 'artsVisuels', 'CEFAN', 'npqs', )
 
 
 def get_unicode_root(fd):
@@ -50,11 +47,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('livre_directory', nargs=1, type=str)
 
-    def import_collection(self, collection_id, notice, path):
-        # TODO import the cover
-        # TODO fix encoding issues
-        # TODO import all child of description
-        # TODO import books
+    def import_collection(self, path):
         with open(str(self.directory / path), 'rb') as index:
             root = get_unicode_root(index)
             title = _get_text(root.find('.//h1'))
@@ -164,7 +157,7 @@ class Command(BaseCommand):
                     # collections have an index.xml file in their directory
                     path = Path("livre/{collection}/index.xml".format(collection=collection))
                     if (self.directory / path).exists() and collection in to_import:
-                        self.import_collection(collection, notice, path)
+                        self.import_collection(path)
                     else:
                         book_path = notice.find('.//div[@class="format"]/a').get('href')
                         book_path = book_path.replace('html', 'xml').replace('htm', 'xml')
