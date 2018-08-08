@@ -86,3 +86,64 @@
     text-decoration: none;
   }
 }
+
+// Hamburger menu / menu on mobile
+@media (max-width: $screen-sm-max) {
+  #main-nav {
+    &.nav-menu__list {
+      background: $coral-red;
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      padding: 0;
+      margin: -5px -11px;
+      height: 100vh;
+      max-height: none;
+      width: 100vw;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    .nav-menu__item_has-submenu {
+
+      > ul {
+        display: block;
+        position: static;
+        border: none;
+        background: none;
+
+        li {
+          border: none;
+        }
+      }
+    }
+
+    .nav-menu__item,
+    .nav-submenu__item {
+      text-align: right;
+      margin: 0;
+      display: block;
+
+      > a {
+        color: #FFF;
+        font-size: 18px;
+        margin: 0;
+        padding: 15px 10px;
+        line-height: 20px;
+        border-bottom: 1px solid #FFF;
+
+        &:hover, &:active, &:focus {
+          color: #FFF;
+          text-decoration: none;
+          @include fw-sans-bold;
+        }
+      }
+    }
+
+    .nav-submenu__link_is-active,
+    .nav-menu__caret {
+      display: none;
+    }
+  }
+}

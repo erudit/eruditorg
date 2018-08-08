@@ -115,3 +115,10 @@
 
   }
 }
+
+// disable Bootstrap menu animation
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
+    display: none;
+}
