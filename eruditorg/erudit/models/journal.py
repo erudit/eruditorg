@@ -294,7 +294,9 @@ class Journal(FedoraMixin, FedoraDated, OAIDated):
     def legacy_code(self):
         """ Returns the code used to identify the journal in our "legacy" systems.
         """
-        if self.is_scientific():
+        if self.code == 'cd1':
+            return 'cd'
+        elif self.is_scientific():
             return self.code
         elif self.is_cultural():
             return self.localidentifier

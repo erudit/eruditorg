@@ -31,10 +31,11 @@ $peach:       #FFE7B0;
   overflow-y: hidden;
   height: 450px;
   margin-bottom: 1em;
-  background-image: url('../img/banners/partenariat_fr.jpg');
+  background-size: 268px;
+  background-image: url('../img/banners/f18-fr.png');
 
   &.en {
-    background-image: url('../img/banners/partenariat_en.jpg');
+    background-image: url('../img/banners/f18-en.png');
   }
 
   img {

@@ -14,6 +14,7 @@ This readme only contains installation instructions for more information please 
 * libxslt
 * zlib
 * git
+* libffi-dev
 * qpdf for PDF generation
 * An access to our Solr database
 * An access to our Fedora repository
@@ -23,7 +24,7 @@ instances, you can't really run this app locally if you're not part of Érudit.
 
 On Ubuntu 18.04, requirements can be installed with:
 
-    $ sudo apt-get install -y python3-venv python3-dev mariadb-server libxml2-dev libxslt1-dev zlib1g-dev git
+    $ sudo apt-get install -y python3-venv python3-dev mariadb-server libxml2-dev libxslt1-dev zlib1g-dev git libffi-dev
 
 ## Clone the repository:
 
@@ -41,10 +42,11 @@ will create the virtualenv and install python dependencies in it.
 
 ## Database
 
-then, you need a database:
+then, you need databases:
 
     $ mysql
-    $ create database eruditorg character set utf8;
+    MariaDB [(none)]> create database eruditorg character set utf8;
+    MariaDB [(none)]> create database restriction character set utf8;
 
 ## Initial data
 
@@ -53,6 +55,11 @@ into your local database. Generating local data from scratch is possible, but it
 this road is bumpy. To import a dump in mysql:
 
     $ gzip -dc dump.sql.gz | mysql -u root -D eruditorg
+    
+To be able to restore production data, you will need to configure your mariadb 
+server to use the Barracuda file format by adding this line in your `my.cnf`:
+
+    innodb_file_format = Barracuda 
 
 ## Creating settings_env.py
 

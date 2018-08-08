@@ -305,7 +305,6 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_can_be_browsed_by_users_who_can_manage_issue_submissions(self):
-        # Setup
         with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
             rfile = ResumableFile.objects.create(
                 path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
@@ -323,13 +322,11 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
-        # Run
         response = client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
+        # we're redirected to the attachment path in the media folder
+        self.assertEqual(response.status_code, 302)
 
     def test_can_be_browsed_by_users_who_can_review_issue_submissions(self):
-        # Setup
         with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
             rfile = ResumableFile.objects.create(
                 path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
@@ -344,81 +341,8 @@ class TestIssueSubmissionAttachmentView(BaseEditorTestCase):
         self.issue_submission.last_files_version.submissions.add(rfile)
         url = reverse('userspace:journal:editor:attachment_detail', kwargs={
             'journal_pk': self.journal.pk, 'pk': rfile.pk})
-        # Run
         response = client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
-
-    def test_embed_the_correct_http_headers_in_the_response(self):
-        # Setup
-        with open(os.path.join(FIXTURE_ROOT, 'pixel.png'), mode='rb') as f:
-            rfile = ResumableFile.objects.create(
-                path=os.path.join(FIXTURE_ROOT, 'pixel.png'),
-                filesize=f.tell(), uploadsize=f.tell())
-
-        user = UserFactory(is_superuser=True)
-        client = Client(logged_user=user)
-        self.issue_submission.last_files_version.submissions.add(rfile)
-        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
-            'journal_pk': self.journal.pk, 'pk': rfile.pk})
-        # Run
-        response = client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'image/png')
-        self.assertEqual(response['Content-Disposition'], 'attachment; filename=pixel.png')
-
-    def test_can_upload_file_with_spaces_and_commas(self):
-        # Setup
-        with open(os.path.join(FIXTURE_ROOT, 'pixel, .png'), mode='rb') as f:
-            rfile = ResumableFile.objects.create(
-                path=os.path.join(FIXTURE_ROOT, 'pixel, .png'),
-                filesize=f.tell(), uploadsize=f.tell())
-
-        user = UserFactory(is_superuser=True)
-        client = Client(logged_user=user)
-        self.issue_submission.last_files_version.submissions.add(rfile)
-        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
-            'journal_pk': self.journal.pk, 'pk': rfile.pk})
-        # Run
-        response = client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'image/png')
-        self.assertEqual(response['Content-Disposition'], 'attachment; filename=pixel__.png')
-
-    def test_is_able_to_handle_unknown_file_content_types(self):
-        # Setup
-        with open(os.path.join(FIXTURE_ROOT, 'dummy.kyz'), mode='rb') as f:
-            rfile = ResumableFile.objects.create(
-                path=os.path.join(FIXTURE_ROOT, 'dummy.kyz'),
-                filesize=f.tell(), uploadsize=f.tell())
-
-        user = UserFactory(is_superuser=True)
-        client = Client(logged_user=user)
-        self.issue_submission.last_files_version.submissions.add(rfile)
-        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
-            'journal_pk': self.journal.pk, 'pk': rfile.pk})
-        # Run
-        response = client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'text/plain')
-        self.assertEqual(response['Content-Disposition'], 'attachment; filename=dummy.kyz')
-
-    def test_raises_http404_if_the_file_does_not_exist(self):
-        # Setup
-        rfile = ResumableFile.objects.create(
-            path='/dummy/dummy.png', filesize=1, uploadsize=1)
-        user = UserFactory(is_superuser=True)
-        client = Client(logged_user=user)
-        self.issue_submission.last_files_version.submissions.add(rfile)
-        url = reverse('userspace:journal:editor:attachment_detail', kwargs={
-            'journal_pk': self.journal.pk, 'pk': rfile.pk})
-        # Run
-        response = client.get(url)
-        # Check
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
 
 class TestIssueSubmissionSubmitView(BaseEditorTestCase):
