@@ -131,6 +131,10 @@ class Command(BaseCommand):
     """ Import restrictions from the restriction database """
     help = 'Import data from the "restriction" database'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.created_subscriptions = set()
+
     def add_arguments(self, parser):
         parser.add_argument(
             '--organisation-id', action='store', dest='organisation_id',
@@ -333,7 +337,8 @@ class Command(BaseCommand):
 
         # creates the subscription period
         # --
-        if True:
+        if subscription.pk not in self.created_subscriptions:
+            self.created_subscriptions.add(subscription.pk)
             start_date = dt.date(restriction_subscription.anneeabonnement, 2, 1)
             end_date = dt.date(restriction_subscription.anneeabonnement + 1, 2, 1)
             subscription_period, created = JournalAccessSubscriptionPeriod.objects.get_or_create(
