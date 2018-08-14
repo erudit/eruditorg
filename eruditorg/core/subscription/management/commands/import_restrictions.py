@@ -23,7 +23,6 @@ from core.subscription.models import JournalAccessSubscriptionPeriod
 from core.subscription.restriction.conf import settings as restriction_settings
 from core.subscription.restriction.models import (
     Abonne,
-    Adressesip,
     Ipabonne,
     Ipabonneinterval,
     Revue,
@@ -384,16 +383,6 @@ class Command(BaseCommand):
             restriction_subscriber_ips_set1 = Ipabonne.objects.filter(
                 abonneid=str(restriction_subscriber.pk))
             for ip in restriction_subscriber_ips_set1:
-                ip_start, ip_end = get_ip_range_from_ip(ip.ip)
-                ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
-                    subscription=subscription, ip_start=ip_start, ip_end=ip_end)
-                if created:
-                    created_objects['iprange'] += 1
-                    logger.info("ipabonne.created", ip_start=ip_start, ip_end=ip_end)
-
-            restriction_subscriber_ips_set2 = Adressesip.objects.filter(
-                abonneid=restriction_subscriber.pk)
-            for ip in restriction_subscriber_ips_set2:
                 ip_start, ip_end = get_ip_range_from_ip(ip.ip)
                 ip_range, created = InstitutionIPAddressRange.objects.get_or_create(
                     subscription=subscription, ip_start=ip_start, ip_end=ip_end)
