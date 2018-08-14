@@ -71,7 +71,7 @@ class RestrictionsByJournalView(View):
                     E.year(str(x.year)),
                     localidentifier=x.localidentifier,
                     embargoed=str(x.embargoed),
-                    whitelisted=str(issue.force_free_access)
+                    whitelisted=str(x.force_free_access)
                 ) for x in journal.published_issues],
                 count=str(len(journal.published_issues)),
                 embargoed_count=str(len(embargoed_issues)),

@@ -1,5 +1,5 @@
 import datetime as dt
-
+from dateutil.relativedelta import relativedelta
 import factory
 import pysolr
 from faker import Factory
@@ -7,6 +7,8 @@ from faker import Factory
 from ..fedora import repository
 from ..models import JournalType, Article
 from .solr import SolrDocument
+from erudit.conf.settings import SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS as months_sc
+from erudit.conf.settings import CULTURAL_JOURNAL_EMBARGO_IN_MONTHS as months_cult
 
 faker = Factory.create()
 
@@ -173,7 +175,6 @@ class EmbargoedIssueFactory(IssueFactory):
 
 
 class NonEmbargoedIssueFactory(IssueFactory):
-
     date_published = dt.datetime.now().date()
     year = date_published.year - 5
     journal = factory.SubFactory(
@@ -191,6 +192,13 @@ class OpenAccessIssueFactory(IssueFactory):
         JournalFactory,
         open_access=True,
     )
+
+
+class OpenAccessIssueFactory(IssueFactory):
+    date_published = dt.datetime.now().date() - \
+        relativedelta(years=1 + max(months_cult, months_sc) / 12)
+    year = date_published.year
+    journal = factory.SubFactory(JournalFactory)
 
 
 class ArticleRef(Article):
