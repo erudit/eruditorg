@@ -8,9 +8,6 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-INTERNAL_IPS = (
-    '127.0.0.1',
-)
 
 STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static' / 'build_dev'),
@@ -18,11 +15,6 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-MIDDLEWARE += (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
 
 INSTALLED_APPS += (
     'debug_toolbar',

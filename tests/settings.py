@@ -78,3 +78,5 @@ SOLR_ROOT = 'http://erudit.org'
 POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now',
 }
+
+EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER = 'main'
