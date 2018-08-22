@@ -35,13 +35,14 @@ TOCSection = namedtuple(
 
 TableOfContents = namedtuple(
     'TableOfContents',
-    ('entries', 'book_description', 'book_title', 'book_author')
+    ('entries', 'book_description', 'book_title', 'book_author', 'previous_chapters',
+     'next_chapters', 'chapters')
 )
 
 
 def read_toc(book_path: Path) -> TableOfContents:
     books_root = book_path.parent.parent
-    book_relative_path = book_path.relative_to(books_root)
+    book_relative_path = book_path.relative_to(books_root.parent)
     xml = get_xml_from_file(book_path / 'index.xml')
     book_desc = stringify_children(xml.find('.//div[@class="desclivre"]'))
     book_title = stringify_children(xml.find('.//h1[@class="titrelivre"]'))
@@ -74,8 +75,22 @@ def read_toc(book_path: Path) -> TableOfContents:
                 id=chapter_id, title=title, authors=authors, first_page=first_page,
                 last_page=last_page, pdf_path=str(pdf_path), is_section=False
             ))
+    previous_chapters = {}
+    next_chapters = {}
+    chapters = [entry for entry in toc_entries if not entry.is_section]
+    for i, chapter in enumerate(chapters):
+        if i > 0:
+            previous_chapters[chapter.id] = chapters[i - 1]
+        else:
+            previous_chapters[chapter.id] = None
+        if i < (len(chapters) - 1):
+            next_chapters[chapter.id] = chapters[i + 1]
+        else:
+            next_chapters[chapter.id] = None
+
     return TableOfContents(entries=toc_entries, book_description=book_desc, book_title=book_title,
-                           book_author=book_author)
+                           book_author=book_author, previous_chapters=previous_chapters,
+                           next_chapters=next_chapters, chapters={c.id: c for c in chapters})
 
 
 def find_chapter_xml(book_path: Path, chapter_id: str) -> XMLElement:

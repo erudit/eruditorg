@@ -40,3 +40,23 @@ def test_can_extract_book_info():
         "et échos de l\u2019incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> "\
         "siècle)"
     assert toc.book_author == 'Sous la direction de Patrick Thériault'
+
+
+def test_can_give_none_as_previous_chapter_for_first_chapter():
+    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
+    assert toc.previous_chapters['000274li'] is None
+
+
+def test_can_give_previous_chapter():
+    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
+    assert toc.previous_chapters['000275li'].id == '000274li'
+
+
+def test_can_give_none_as_next_chapter_for_last_chapter():
+    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
+    assert toc.next_chapters['000285li'] is None
+
+
+def test_can_give_next_chapter():
+    toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
+    assert toc.next_chapters['000274li'].id == '000275li'

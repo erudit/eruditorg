@@ -49,14 +49,14 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' slug=book.slug pk=book.pk %}",
       "name": "Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)"
     }
   },{
     "@type": "ListItem",
     "position": 4,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' slug=book.slug pk=book.pk chapter_id=chapter.id %}",
       "name": "Rimbaud et l’incantation au second degré"
     }
   }]
@@ -76,10 +76,10 @@
   <a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a>
 </li>
 <li>
-  <a href="{% url 'public:book:book_detail' %}">Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)</a>
+  <a href="#">Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)</a>
 </li>
 <li>
-  <a href="{% url 'public:book:chapter_detail' %}">Rimbaud et l’incantation au second degré</a>
+  <a href="#">Rimbaud et l’incantation au second degré</a>
 </li>
 {% endblock breadcrumb %}
 
@@ -89,7 +89,7 @@
     <div class="row">
       <div class="col-md-9">
         <p class="title-tag">XIX<sup>e</sup> siècle</p>
-        <h1 class="doc-head__title">Rimbaud et l’incantation au second degré</h1>
+        <h1 class="doc-head__title">{{ chapter.title }}</h1>
         <ul class="doc-head__authors">
           <li class="doc-head__author">Denis Saint-Amand</li>
         </ul>
@@ -102,7 +102,7 @@
     </div>
     <div class="row">
       <div class="col-sm-6 doc-head__metadata">
-        <p>Un chapitre du livre <a href="{% url 'public:book:book_detail' %}">Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a></p>
+        <p>Un chapitre du livre <a href="#">Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a></p>
         <div class="form-group">
           <label for="chapter-select">{% trans "Naviguer par chapitre&nbsp;:" %}</label>
           <select id="chapter-select" class="form-control">
@@ -127,7 +127,7 @@
   <section class="row">
     <h3 class="sr-only">{% trans "Naviguer par chapitres" %}</h3>
     <nav class="hidden-xs col-sm-4 toc-nav">
-      <a href="#" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}"><span class="toc-nav__arrow"><---</span> Rimbaud&nbsp;: incanto, excanto et au-delà</a>
+      <a href="#" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}"><span class="toc-nav__arrow"><---</span>{{ previous_chapter.title }}</a>
     </nav>
     <div class="col-sm-4 text-center">
       <ul class="toolbox toolbox-compact toolbox-horizontal">
@@ -159,7 +159,8 @@
       </ul>
     </div>
     <nav class="hidden-xs col-sm-4 toc-nav">
-      <a href="#" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}"><span class="toc-nav__arrow">---></span> L’incantation du vers dans les textes de souvenirs de Verlaine</a>
+      <a href="#" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}"><span class="toc-nav__arrow">---></span>
+        {{ next_chapter.title }}</a>
     </nav>
   </section>
 
