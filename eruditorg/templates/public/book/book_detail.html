@@ -49,8 +49,8 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' %}",
-      "name": "{% trans 'Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)' %}"
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' slug=book.slug pk=book.pk %}",
+      "name": "{{ toc.book_title }}"
     }
   }]
 }
@@ -63,7 +63,7 @@
 
 {% block breadcrumb %}
 {{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
-<li><a href="{% url 'public:book:book_detail' %}">Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a></li>
+<li><a href="{% url 'public:book:book_detail' slug=book.slug pk=book.pk %}">{{ toc.book_title }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -74,18 +74,16 @@
       <header class="main-header">
         <p class="title-tag">{% trans "Livres" %}</p>
         <h1 class="book-title">
-          <span>Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</span>
+          <span>{{ toc.book_title }}</span>
         </h1>
-        <p class="book-authors">{% trans 'Sous la direction de' %} Patrick Thériault</p>
+        <p class="book-authors">{{ toc.book_author }}</p>
         <div class="main-header__intro">
-          <p>Le présent volume dérive d’un constat&nbsp;: un idéal incantatoire féconde de part en part la modernité littéraire et continue encore aujourd’hui d’exercer son charme. De fait, le corpus de la littérature moderne et contemporaine offre une variété de créations verbales se désignant comme des incantations ou pouvant de bon droit être désignées comme telles&nbsp;; et on n’y compte plus les propos d’auteur, les commentaires et les élaborations théoriques qui sollicitent, à des fins d’analyse ou d’analogie, le nom «&nbsp;incantation&nbsp;» et les lexèmes qui y sont apparentés.</p>
-          <p>Les études ici réunies cherchent à donner un relief plus net à cet idéal incantatoire.   C’est dire qu’en faisant saillir les riches ressources d’expressivité   et de figuralité de l’incantation, en donnant à voir et à entendre ses multiples   aspects et échos, elles espèrent ouvrir de prometteuses pistes de réflexion sur   l’engouement marqué pour l’opérativité du langage dont témoigne la littérature   des deux derniers siècles.</p>
-          <p><i>Les Presses françaises de l’Université de Toronto ont pour mission d’assurer le rayonnement     des meilleures contributions scientifiques issues des activités de recherche organisées par     les membres du Département d’études françaises de l’Université de Toronto et des autres     unités de recherche de l’Université de Toronto associées aux études françaises. Cette maison     d’édition exclusivement numérique a été fondée en 2017, à l’initiative du professeur Patrick     Thériault. Pour toute information, prière de vous adresser à Patrick Thériault (<a href="mailto:patrick.theriault@utoronto.ca">patrick.theriault@utoronto.ca</a>). </i></p>
+          {{ toc.book_description|safe }}
         </div>
       </header>
 
       <section class="toc">
-        <h2 class="toc__title">{% trans "Table des matières" %} ({{ articles|length }} {% trans "chapitres" %})</h2>
+        <h2 class="toc__title">{% trans "Table des matières" %} ({{ toc.entries|length }} {% trans "chapitres" %})</h2>
 
         <h3 class="toc__heading">
           <strong>Introduction</strong>

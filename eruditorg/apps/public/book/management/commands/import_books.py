@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 
+from django.utils.text import slugify
 from lxml import html
 # noinspection PyProtectedMember
 from bs4 import UnicodeDammit
@@ -51,7 +52,7 @@ class Command(BaseCommand):
         with open(str(self.directory / path), 'rb') as index:
             root = get_unicode_root(index)
             title = _get_text(root.find('.//h1'))
-            collection = BookCollection(name=title, path=path.parent)
+            collection = BookCollection(name=title, path=path.parent, slug=slugify(title))
             description = root.find('.//div[@class="desclivre"]/p')
             if description is not None:
                 collection.description = _get_text(description)
@@ -116,6 +117,7 @@ class Command(BaseCommand):
                 if copyright_node is not None:
                     book.copyright = _get_text(copyright_node)
 
+            book.slug = slugify(book.title)
             editeur = root.find('.//h1[@class="editeur"]')
             if editeur is not None:
                 book.publisher = _get_text(editeur)

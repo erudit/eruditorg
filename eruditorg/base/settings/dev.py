@@ -53,3 +53,5 @@ DEBUG_TOOLBAR_PANELS = (
 # in order to use hot reloading!
 
 # WEBPACK_DEV_SERVER_URL = 'http://localhost:8080'
+
+BOOKS_DIRECTORY = str(ROOT_DIR.parent)
