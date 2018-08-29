@@ -817,6 +817,14 @@ class TestLegacyUrlsRedirection:
         resp = Client().get(url)
         assert resp.status_code == 301
 
+        url = '/revue/{journal_code}/{issue_year}/v/n/{article_localidentifier}.html'.format(  # noqa
+            journal_code=article.issue.journal.code,
+            issue_year=article.issue.year,
+            article_localidentifier=article.localidentifier
+        )
+
+        resp = Client().get(url)
+        assert resp.status_code == 301
 
         url = '/revue/{journal_code}/{issue_year}/v/n{issue_number}/{article_localidentifier}.html'.format(  # noqa
             journal_code=article.issue.journal.code,
@@ -869,7 +877,7 @@ class TestLegacyUrlsRedirection:
 
     @pytest.mark.parametrize("pattern", (
         "/revue/{journal_code}/{year}/v{volume}/n{number}/",
-        "/culture/{journal_localidentifier}/{issue_localidentifier}/{article_localidentifier}.html"
+        "/culture/{journal_localidentifier}/{issue_localidentifier}/index.html"
     ))
     def test_can_redirect_issues_from_legacy_urls(self, pattern):
         article = ArticleFactory()
