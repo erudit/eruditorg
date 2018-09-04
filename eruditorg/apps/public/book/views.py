@@ -55,8 +55,8 @@ class ChapterDetailView(DetailView):
         return context
 
 
-def chapter_pdf_view(request, slug, pk, chapter_id):
-    book = get_object_or_404(Book, pk=pk)
+def chapter_pdf_view(request, slug, chapter_id):
+    book = get_object_or_404(Book, slug=slug)
     toc = read_toc(Path(settings.BOOKS_DIRECTORY) / book.path)
     chapter = toc.chapters[chapter_id]
 
