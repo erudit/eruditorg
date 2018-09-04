@@ -141,9 +141,13 @@ class Book(models.Model):
     )
     path = models.CharField(
         max_length=200,
-        verbose_name=_('répertoire'),
+        verbose_name=_('Répertoire'),
         null=True,
         blank=True,
+    )
+    is_open_access = models.BooleanField(
+        verbose_name=_('Disponible en libre accès ?'),
+        default=False,
     )
 
     class Meta:
