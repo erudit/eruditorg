@@ -5,6 +5,7 @@ from django.conf.urls import include
 
 from .views import RedirectRetroUrls
 from apps.public.journal import views_compat as journal_views_compat
+from apps.public.book import views_compat as book_views_compat
 
 # Thesis url patterns
 # -----------------------------------------------------------------------------
@@ -131,6 +132,16 @@ journal_url_patterns = [
     )
 ]
 
+book_url_patterns = [
+    url(r'^$', book_views_compat.BooksHomeRedirectView.as_view(),
+        name='legacy_books_home'),
+    url(r'^(?P<path>[\w]+)/index\.htm$', book_views_compat.CollectionRedirectView.as_view(),
+        name='legacy_collection_home'),
+    url(r'^(?P<path>[\w/]+)/index\.htm$', book_views_compat.BookRedirectView.as_view(),
+        name='legacy_book'),
+]
+
+
 # Base legacy url patterns
 # -----------------------------------------------------------------------------
 
@@ -156,6 +167,7 @@ urlpatterns = [
 
         url(r'^recherche/', include(search_url_patterns, namespace="legacy_search")),
         url(r'^these/', include(thesis_url_patterns, namespace="legacy_thesis")),
+        url(r'^livre/', include(book_url_patterns, namespace="legacy_book")),
         url(r'^', include(journal_url_patterns, namespace="legacy_journal")),
         url(r'^', include(public_url_patterns)),
     ]),),
