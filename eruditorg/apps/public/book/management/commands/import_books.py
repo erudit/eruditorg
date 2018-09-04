@@ -42,6 +42,20 @@ def cleanup_isbn(isbn):
     return re.sub('[^0-9\-X]', '', isbn)
 
 
+def extract_ibsn_from_book_index(root):
+    digital_isbn = isbn = None
+    isbn_nodes = root.xpath('.//div[@class="editeur" and starts-with(., "ISBN")]')
+    if len(isbn_nodes):
+        isbn_text = " ".join(isbn_nodes[0].text_content().split())
+        isbns = isbn_text.split(';')
+        for isbn_str in isbns:
+            if 'PDF' in isbn_str:
+                digital_isbn = cleanup_isbn(isbn_str)
+            else:
+                isbn = cleanup_isbn(isbn_str)
+    return digital_isbn, isbn
+
+
 class Command(BaseCommand):
     help = 'Import books from file structure'
 
@@ -85,12 +99,20 @@ class Command(BaseCommand):
                 year = _get_by_label(book_notice, 'anneepublication')
                 if year:
                     book.year = re.sub('[^0-9]', '', year)
-                isbn = _get_by_label(book_notice, 'isbn')
-                if isbn:
-                    book.isbn = cleanup_isbn(isbn)
-                digital_isbn = _get_by_label(book_notice, 'isbnnumerique')
-                if digital_isbn:
-                    book.digital_isbn = cleanup_isbn(digital_isbn)
+                digital_isbn, isbn = extract_ibsn_from_book_index(root)
+                if not isbn:
+                    isbn = _get_by_label(book_notice, 'isbn')
+                    if isbn:
+                        isbn = cleanup_isbn(isbn)
+                if not digital_isbn:
+                    digital_isbn = _get_by_label(book_notice, 'isbnnumerique')
+                    if not digital_isbn:
+                        digital_isbn = _get_by_label(book_notice, 'ISBN PDF')
+
+                    if digital_isbn:
+                        digital_isbn = cleanup_isbn(digital_isbn)
+                book.isbn = isbn
+                book.digital_isbn = digital_isbn
                 publisher_tag = book_notice.find('.//div[@class="texte"]/p/a')
                 if publisher_tag is not None:
                     href = publisher_tag.attrib['href']
@@ -104,20 +126,17 @@ class Command(BaseCommand):
                     book.copyright = _get_text(copyrights[0])
             else:
                 book.title = _get_text(root.find('.//h1[@class="titrelivre"]'))
-                isbn_nodes = root.xpath('.//div[@class="editeur" and starts-with(., "ISBN")]')
-                if len(isbn_nodes):
-                    isbn_text = " ".join(isbn_nodes[0].text_content().split())
-                    isbns = isbn_text.split(';')
-                    for isbn in isbns:
-                        if 'PDF' in isbn:
-                            book.digital_isbn = cleanup_isbn(isbn)
-                        else:
-                            book.isbn = cleanup_isbn(isbn)
+                digital_isbn, isbn = extract_ibsn_from_book_index(root)
+                book.digital_isbn = digital_isbn
+                book.isbn = isbn
                 copyright_node = root.find('.//div[@class="piedlivre"]/p')
                 if copyright_node is not None:
                     book.copyright = _get_text(copyright_node)
 
-            book.slug = slugify(book.title)
+            slug = slugify(book.title)
+            if book.isbn or book.digital_isbn:
+                slug = '{}--{}'.format(slug, book.digital_isbn or book.isbn)
+            book.slug = slug
             editeur = root.find('.//h1[@class="editeur"]')
             if editeur is not None:
                 book.publisher = _get_text(editeur)
