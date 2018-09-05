@@ -13,6 +13,21 @@ from apps.public.book.models import BookCollection, Book
 
 to_import = ('ACFASSudbury', 'aidelf', 'artefact', 'sqrsf', 'artsVisuels', 'CEFAN', 'npqs', )
 
+STOPWORDS = {'le', 'la', 'un', 'une', 'de', 'd', 'du', 'des', 'et', 'son', 'sa', 'ses'}
+
+
+def short_slug(s):
+    s = slugify(s)
+    parts = s.split('-')
+    parts = [part for part in parts if part not in STOPWORDS]
+    length = 0
+    for i, part in enumerate(parts):
+        length += len(part) + 1
+        if length > 80:
+            parts = parts[:i]
+            break
+    return '-'.join(parts)
+
 
 def get_unicode_root(fd):
     content = fd.read()
@@ -133,7 +148,7 @@ class Command(BaseCommand):
                 if copyright_node is not None:
                     book.copyright = _get_text(copyright_node)
 
-            slug = slugify(book.title)
+            slug = short_slug(book.title)
             if book.isbn or book.digital_isbn:
                 slug = '{}--{}'.format(slug, book.digital_isbn or book.isbn)
             book.slug = slug
