@@ -1,7 +1,10 @@
 from pathlib import Path
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import (
+    HttpResponse,
+    Http404,
+)
 from django.shortcuts import get_object_or_404
 
 from apps.public.book.models import (
@@ -49,7 +52,11 @@ class ChapterDetailView(DetailView):
         toc = read_toc(Path(settings.BOOKS_DIRECTORY) / self.object.path)
         context['toc'] = toc
         chapter_id = self.kwargs['chapter_id']
-        context['chapter'] = toc.chapters[chapter_id]
+        try:
+            context['chapter'] = toc.chapters[chapter_id]
+        except KeyError:
+            # no chapter with that id in this book
+            raise Http404
         context['previous_chapter'] = toc.previous_chapters[chapter_id]
         context['next_chapter'] = toc.next_chapters[chapter_id]
         return context
@@ -58,8 +65,11 @@ class ChapterDetailView(DetailView):
 def chapter_pdf_view(request, slug, chapter_id):
     book = get_object_or_404(Book, slug=slug)
     toc = read_toc(Path(settings.BOOKS_DIRECTORY) / book.path)
-    chapter = toc.chapters[chapter_id]
-
+    try:
+        chapter = toc.chapters[chapter_id]
+    except KeyError:
+        # no chapter with that id in this book
+        raise Http404
     pdf_file = open(str(Path(settings.BOOKS_DIRECTORY) / chapter.pdf_path), 'rb')
     response = HttpResponse(content=pdf_file)
     response['Content-Type'] = 'application/pdf'
