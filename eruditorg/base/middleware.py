@@ -37,6 +37,7 @@ class RedirectToFallbackMiddleware(MiddlewareMixin):
     DO_NOT_REDIRECT_NAMESPACES = set((
         'userspace',
         'citations',
+        'book',
     ))
 
     def should_redirect(self, request):
