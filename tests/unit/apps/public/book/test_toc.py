@@ -25,6 +25,7 @@ def test_can_create_section_toc_entry():
 def test_can_create_chapter_toc_entry():
     toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
     assert toc.entries[2].title == 'Une littérature «\xA0comme incantatoire\xA0»'
+    assert toc.entries[2].subtitle == 'Le cas exemplaire de la modernité symboliste'
     assert toc.entries[2].pdf_path == 'incantation/2018/000274li.pdf'
     assert not toc.entries[2].is_section
 

@@ -24,7 +24,7 @@ def stringify_children(node):
 
 TOCChapter = namedtuple(
     'TOCChapter',
-    ('id', 'title', 'authors', 'first_page', 'last_page', 'pdf_path', 'is_section')
+    ('id', 'title', 'subtitle', 'authors', 'first_page', 'last_page', 'pdf_path', 'is_section')
 )
 
 
@@ -63,6 +63,8 @@ def read_toc(book_path: Path) -> TableOfContents:
             lang = chapter_xml.find('.//field[@name="Langue"]').text
             title_field_path = './/field[@name="Titre_{}"]'.format(lang)
             title = stringify_children(chapter_xml.find(title_field_path))
+            subtitle_field_path = './/field[@name="SousTitre_{}"]'.format(lang)
+            subtitle = stringify_children(chapter_xml.find(subtitle_field_path))
             authors = []
             for author_elem in chapter_xml.findall('.//field[@name="Auteur_fac"]'):
                 author = stringify_children(author_elem)
@@ -72,8 +74,8 @@ def read_toc(book_path: Path) -> TableOfContents:
             last_page = chapter_xml.find('.//field[@name="DernierePage"]').text
             pdf_path = book_relative_path / href
             toc_entries.append(TOCChapter(
-                id=chapter_id, title=title, authors=authors, first_page=first_page,
-                last_page=last_page, pdf_path=str(pdf_path), is_section=False
+                id=chapter_id, title=title, subtitle=subtitle, authors=authors,
+                first_page=first_page, last_page=last_page, pdf_path=str(pdf_path), is_section=False
             ))
     previous_chapters = {}
     next_chapters = {}

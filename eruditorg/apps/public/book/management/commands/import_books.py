@@ -108,7 +108,6 @@ class Command(BaseCommand):
                     if len(authors) > 1:
                         book.contributors = _get_text(authors[1])
             if book_notice:
-                book.title = _get_text(book_notice.find('.//div[@class="texte"]/p[@class="titre"]'))
                 book.subtitle = _get_text(
                     book_notice.find('.//div[@class="texte"]/p[@class="sstitre"]'))
                 year = _get_by_label(book_notice, 'anneepublication')
@@ -140,7 +139,6 @@ class Command(BaseCommand):
                 if len(copyrights):
                     book.copyright = _get_text(copyrights[0])
             else:
-                book.title = _get_text(root.find('.//h1[@class="titrelivre"]'))
                 digital_isbn, isbn = extract_ibsn_from_book_index(root)
                 book.digital_isbn = digital_isbn
                 book.isbn = isbn
@@ -148,6 +146,7 @@ class Command(BaseCommand):
                 if copyright_node is not None:
                     book.copyright = _get_text(copyright_node)
 
+            book.title = _get_text(root.find('.//h1[@class="titrelivre"]'))
             slug = short_slug(book.title)
             if book.isbn or book.digital_isbn:
                 slug = '{}--{}'.format(slug, book.digital_isbn or book.isbn)
