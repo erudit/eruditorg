@@ -58,11 +58,16 @@ class BookAdmin(admin.ModelAdmin):
 
     actions = [
         'mark_as_oa',
+        'remove_cover',
     ]
 
     def mark_as_oa(self, request, queryset):
         queryset.update(is_open_access=True)
     mark_as_oa.short_description = _('Afficher en libre accès')
+
+    def remove_cover(self, request, queryset):
+        queryset.update(cover=None)
+    remove_cover.short_description = _('Supprimer les couvertures')
 
 
 admin.site.register(BookCollection)
