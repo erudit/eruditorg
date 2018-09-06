@@ -22,10 +22,6 @@
   list-style: none;
   border-bottom: 1px solid $mid-grey;
 
-  &:first-child {
-    border-top: 1px solid $mid-grey;
-  }
-
   &:last-child {
     border-bottom: none;
   }

@@ -8,8 +8,8 @@
   ul {
     @include list-unstyled;
     display: block;
+    padding-top: $margin-vertical-default/2.5;
     padding-bottom: $margin-vertical-default/2.5;
-    border-bottom: 1px solid $dark-grey;
   }
 
   li {
