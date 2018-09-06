@@ -13,6 +13,13 @@ from apps.public.book.models import BookCollection, Book
 
 to_import = ('ACFASSudbury', 'aidelf', 'artefact', 'sqrsf', 'artsVisuels', 'CEFAN', 'npqs', )
 
+BOOKS_TO_SKIP = (
+    'livre/carleym/2001',
+    'livre/hellyd/2001',
+    'livre/lachapellej/2001',
+    'livre/larouchej/2001',
+)
+
 STOPWORDS = {'le', 'la', 'un', 'une', 'de', 'd', 'du', 'des', 'et', 'son', 'sa', 'ses'}
 
 
@@ -91,6 +98,8 @@ class Command(BaseCommand):
                 self.import_book(collection, Path(subpath.lstrip(' /')), None)
 
     def import_book(self, collection, book_path, book_notice):
+        if str(book_path.parent) in BOOKS_TO_SKIP:
+            return
         full_path = self.directory / book_path
         print(full_path, full_path.exists())
         with open(str(full_path), 'rb') as index:
