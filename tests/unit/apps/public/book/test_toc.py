@@ -17,22 +17,22 @@ def test_can_find_chapter_xml_when_located_in_solr_directory():
 
 def test_can_create_section_toc_entry():
     toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.entries[0].level == 'h2'
-    assert toc.entries[0].title == 'Table des matières'
+    assert toc.entries[0].level == 'h3'
+    assert toc.entries[0].title == 'Introduction'
     assert toc.entries[0].is_section
 
 
 def test_can_create_chapter_toc_entry():
     toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.entries[2].title == 'Une littérature «\xA0comme incantatoire\xA0»'
-    assert toc.entries[2].subtitle == 'Le cas exemplaire de la modernité symboliste'
-    assert toc.entries[2].pdf_path == 'incantation/2018/000274li.pdf'
-    assert not toc.entries[2].is_section
+    assert toc.entries[1].title == 'Une littérature «\xA0comme incantatoire\xA0»'
+    assert toc.entries[1].subtitle == 'Le cas exemplaire de la modernité symboliste'
+    assert toc.entries[1].pdf_path == 'incantation/2018/000274li.pdf'
+    assert not toc.entries[1].is_section
 
 
 def test_can_preserve_markup_in_toc_text():
     toc = read_toc(FIXTURE_ROOT / 'incantation' / '2018')
-    assert toc.entries[3].title == 'XIX<sup>e</sup> siècle'
+    assert toc.entries[2].title == 'XIX<sup>e</sup> siècle'
 
 
 def test_can_extract_book_info():

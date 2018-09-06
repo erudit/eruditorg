@@ -47,11 +47,11 @@ def read_toc(book_path: Path) -> TableOfContents:
     book_desc = stringify_children(xml.find('.//div[@class="desclivre"]'))
     book_title = stringify_children(xml.find('.//h1[@class="titrelivre"]'))
     book_author = stringify_children(xml.find('.//div[@class="auteurlivre"]'))
-    toc_elements = xml.xpath('.//*[self::h2 or self::h3 or self::h4 or '
+    toc_elements = xml.xpath('.//*[self::h3 or self::h4 or '
                              'self::div[@class="entreetdm"]]')
     toc_entries = []
     for toc_element in toc_elements:
-        if toc_element.tag in ('h2', 'h3', 'h4'):
+        if toc_element.tag in ('h3', 'h4'):
             title = stringify_children(toc_element)
             toc_entries.append(TOCSection(title=title, level=toc_element.tag, is_section=True))
         else:
