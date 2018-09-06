@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load humanize i18n staticfiles waffle_tags %}
 
-{% block title %}Rimbaud et l’incantation au second degré{% endblock title %}
+{% block title %}{{ chapter.title|striptags }}{% endblock title %}
 
 {% block meta_description %}{% trans "Consultez" %} Rimbaud et l’incantation au second degré, {% trans "un chapitre du livre" %} Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle).{% endblock meta_description %}
 
@@ -49,14 +49,14 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' slug=book.slug pk=book.pk %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' slug=book.slug %}",
       "name": "Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)"
     }
   },{
     "@type": "ListItem",
     "position": 4,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' slug=book.slug pk=book.pk chapter_id=chapter.id %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' slug=book.slug chapter_id=chapter.id %}",
       "name": "Rimbaud et l’incantation au second degré"
     }
   }]
@@ -76,10 +76,10 @@
   <a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a>
 </li>
 <li>
-  <a href="#">Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)</a>
+  <a href="{% url 'public:book:book_detail' slug=book.slug %}">{{ book.title }}</a>
 </li>
 <li>
-  <a href="#">Rimbaud et l’incantation au second degré</a>
+  <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=chapter.id %}">{{ chapter.title|striptags }}</a>
 </li>
 {% endblock breadcrumb %}
 
@@ -87,85 +87,95 @@
 <main class="container" id="article-{{ article.id }}" data-document-id="{{ article.solr_id }}" role="main">
   <header class="main-header doc-head">
     <div class="row">
-      <div class="col-md-9">
-        <p class="title-tag">XIX<sup>e</sup> siècle</p>
-        <h1 class="doc-head__title">{{ chapter.title }}</h1>
+      <div class="col-xs-9">
+        <h1 class="doc-head__title">
+          <span>{{ chapter.title|safe }}</span>
+          {% if chapter.subtitle %}<span>{{ chapter.subtitle|safe }}</span>{% endif %}
+        </h1>
         <ul class="doc-head__authors">
-          <li class="doc-head__author">Denis Saint-Amand</li>
+          {% for author in chapter.authors %}
+          <li class="doc-head__author">{{ author }}{% if not forloop.last %}, {% endif %}</li>
+          {% endfor %}
         </ul>
       </div>
-      <div class="col-md-3">
-        <a href="http://retro.erudit.org/livre/images/incantation2018.jpg" class="lightbox" title="{% trans 'Voir la couverture de ce livre' %}">
-          <img src="http://retro.erudit.org/livre/images/incantation2018.jpg" alt="" class="img-responsive lightbox doc-head__img"/>
-        </a>
+      {% if book.cover %}
+      <div class="col-xs-3">
+        <img src="/media/{{ book.cover }}" alt="" class="img-responsive lightbox doc-head__img"/>
       </div>
+      {% endif %}
     </div>
     <div class="row">
       <div class="col-sm-6 doc-head__metadata">
-        <p>Un chapitre du livre <a href="#">Une littérature « comme incantatoire » : aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)</a></p>
-        <div class="form-group">
-          <label for="chapter-select">{% trans "Naviguer par chapitre&nbsp;:" %}</label>
-          <select id="chapter-select" class="form-control">
-            <option>Chapitre 1</option>
-            <option>Chapitre 2</option>
-            <option>Chapitre 3</option>
-            <option>Chapitre 4</option>
-            <option>Chapitre 5</option>
-            <option>Chapitre 6</option>
-          </select>
-        </div>
+        <p>{% trans 'Un chapitre de l’ouvrage' %}
+          <a href="{% url 'public:book:book_detail' slug=book.slug %}">{{ book.title|safe }}{% if book.subtitle %}{% trans '&nbsp;:' %} {{ book.subtitle|safe }}{% endif %}</a>, {{ book.year }}
+        </p>
       </div>
       <div class="col-sm-6 doc-head__metadata">
-        <p class="">{% trans 'ISBN&nbsp;:' %} 978-2-9817251-0-3</p>
-        <p class="">
-          <small>Tous droits réservés © Revue Intermédialités, 2008</small>
+        <dl>
+          {% if book.isbn %}
+          <dt>{% trans "ISBN papier&nbsp;:" %}</dt>
+          <dd>{{ book.isbn }}</dd>
+          {% endif %}
+          {% if book.digital_isbn %}
+          <dt>{% trans "ISBN numérique&nbsp;:" %}</dt>
+          <dd>{{ book.digital_isbn }}</dd>
+          {% endif %}
+        </dl>
+        <p>
+          <br>
+          <small>{{ book.copyright }}</small>
         </p>
       </div>
     </div>
   </header>
 
-  <section class="row">
-    <h3 class="sr-only">{% trans "Naviguer par chapitres" %}</h3>
-    <nav class="hidden-xs col-sm-4 toc-nav">
-      <a href="#" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}"><span class="toc-nav__arrow"><---</span>{{ previous_chapter.title }}</a>
-    </nav>
-    <div class="col-sm-4 text-center">
-      <ul class="toolbox toolbox-compact toolbox-horizontal">
-        {% spaceless %}
-        <li>
-          <a class="tool-btn" href="#" title="{% trans 'Télécharger' %}">
-            <span class="toolbox-pdf">PDF</span>
-          </a>
-        </li>
-        <li>
-          {% switch "maintenance" %}
-          {% else %}
-          <a class="tool-btn" href="#" title="{% trans 'Sauvegarder' %}">
-            <span class="ion-bookmark toolbox-save"></span>
-          </a>
-        </li>
-        {% endswitch %}
-        <li>
-          <a class="tool-btn tool-cite" title="{% trans 'Citer' %}">
-            <span class="ion-quote toolbox-cite"></span>
-          </a>
-        </li>
-        <li>
-          <a class="tool-btn tool-share" title="{% trans 'Partager' %}">
-            <span class="ion-android-share toolbox-share"></span>
-          </a>
-        </li>
-        {% endspaceless %}
-      </ul>
+  <nav class="row toc-nav">
+    <h3 class="sr-only">
+      {% trans "Feuilleter les chapitres de cet ouvrage" %}
+    </h3>
+    <div class="hidden-xs col-sm-4">
+      {% if previous_chapter %}
+      <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=previous_chapter.id %}" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}">
+        <span class="toc-nav__arrow"><---</span>
+        <h4 class="toc-nav__title">
+          {{ previous_chapter.title|striptags }}
+        </h4>
+      </a>
+      {% else %}
+      <a href="{% url 'public:book:book_detail' slug=book.slug %}" class="toc-nav__prev" title="{% trans 'Aller à la table des matières' %}">
+        <span class="toc-nav__arrow"><---</span>
+        <h4 class="toc-nav__title">
+          <em>{% trans '[Début de l’ouvrage] <br>Retour à la table des matières' %}</em>
+        </h4>
+      </a>
+      {% endif %}
     </div>
-    <nav class="hidden-xs col-sm-4 toc-nav">
-      <a href="#" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}"><span class="toc-nav__arrow">---></span>
-        {{ next_chapter.title }}</a>
-    </nav>
-  </section>
+
+    <div class="hidden-xs col-sm-offset-4 col-sm-4">
+      {% if next_chapter %}
+      <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=next_chapter.id %}" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}">
+        <span class="toc-nav__arrow">---></span>
+        <h4 class="toc-nav__title">
+          {{ next_chapter.title|striptags }}
+        </h4>
+      </a>
+      {% else %}
+      <a href="{% url 'public:book:book_detail' slug=book.slug %}" class="toc-nav__next" title="{% trans 'Aller à la table des matières' %}">
+        <span class="toc-nav__arrow">---></span>
+        <h4 class="toc-nav__title">
+          <em>{% trans '[Fin de l’ouvrage] <br>Retour à la table des matières' %}</em>
+        </h4>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
 
   <section>
-    <h2 class="text-center"><strong>PDF GOES HERE</strong></h2>
+    <h2 class="sr-only">{% trans 'Texte intégral en PDF' %}</h2>
+    <iframe
+      src="https://retro.erudit.org/livre/{{ chapter.pdf_path }}"
+      style="width: 100%; height: 95vh;" frameborder="0">
+    </iframe>
   </section>
 
 </main>
