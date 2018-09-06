@@ -26,6 +26,7 @@ class BookListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['collections'] = BookCollection.objects.all()
+        context['books'] = Book.objects.all()
         return context
 
 
