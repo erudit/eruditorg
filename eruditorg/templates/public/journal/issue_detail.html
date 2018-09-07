@@ -185,24 +185,20 @@
         </a>
       </h3>
     </header>
-    <ul class="issue-list">
+    <div class="row">
       {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
       {% if published_issue != issue %}
-      <li class="issue-list--item col-xs-6 col-sm-3">
-        {% if issue.has_coverpage %}
-        <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-          <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture représentant ' %}{% if published_issue.html_title %}{% trans 'la thématique ' %}{{ published_issue.html_title|safe }}{% else %}{% trans 'le ' %}{{ published_issue.volume_title }}{% endif %}" />
+      <article class="col-xs-6 col-sm-3">
+        <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="card">
+          {% if issue.has_coverpage %}
+          <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" alt="{% trans 'Couverture représentant ' %}{% if published_issue.html_title %}{% trans 'la thématique ' %}{{ published_issue.html_title|safe }}{% else %}{% trans 'le ' %}{{ published_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
+          {% endif %}
+          <h5 class="card__title">
+            <span>{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
+            {% if published_issue.html_title %}<br><span><strong>{{ published_issue.html_title|safe }}</strong></span>{% endif %}
+          </h5>
         </a>
-        {% endif %}
-        <div class="issue-list--title">
-          <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-            <h5>
-              <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-              {% if published_issue.html_title %}<span class="issue-list--theme"><strong>{{ published_issue.html_title|safe }}</strong></span>{% endif %}
-            </h5>
-          </a>
-        </div>
-      </li>
+      </article>
       {% endif %}
       {% endfor %}
     </ul>

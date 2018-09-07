@@ -69,9 +69,9 @@
   </header>
   {% cache FOREVER_TTL "public_journal_list_disciplines" LANGUAGE_CODE %}
   {% for objects_group in sorted_objects %}
-  <a id="{% if not objects_group.key %}section-void{% else %}{{ objects_group.key }}{% endif %}" class="invisible"></a>
-  <section class="sorting-group container-fluid {% cycle "odd" "even" %}">
-    <header class="row sorting-group--title">
+  <section class="container-fluid alternating-row">
+    <a id="{% if not objects_group.key %}section-void{% else %}{{ objects_group.key }}{% endif %}" class="invisible"></a>
+    <header class="row alternating-row__header">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 title">
@@ -88,10 +88,10 @@
       </div>
     </header>
     {% for collection_group in objects_group.collections %}
-    <section class="container sorting-group--collection">
-      <ul class="row sorting-group--journals">
-        <li class="col-xs-6 col-md-3 collection-title">
-          <h3 {% if collection_group.key.code == "erudit" %}class="collection-erudit"{% endif %}>
+    <section class="container">
+      <ul class="row alternating-row__list">
+        <li class="col-xs-6 col-md-3 alternating-row__list-item">
+          <h3 class="alternating-row__list-title {% if collection_group.key.code == "erudit" %}collection-erudit{% endif %}">
             <strong>{{ collection_group.key.name }} ({{ collection_group.objects|length }})</strong>
             {% if collection_group.key.code == "persee" %}
             <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues de la collection Persée redirigent vers la plateforme du partenaire.' %}">
@@ -105,27 +105,28 @@
           </h3>
         </li>
         {% for journal in collection_group.objects %}
-        <li class="col-xs-6 col-md-3 journal-item">
+        <li class="col-xs-6 col-md-3 journal-item alternating-row__list-item">
           <a
           {% if journal.external_url %}
           href="{% url 'public:journal:journal_external_redirect' journal.code %}"
           target="_blank"
           {% else %}
           href="{% url 'public:journal:journal_detail' journal.code %}"
-          {% endif %}>
-            <div class="journal-title">
+          {% endif %}
+          class="card">
+            <h4 class="card__title">
               <span>{{ journal.name }}</span>
               {% if journal.subtitle %}
               <span><br/>{{ journal.subtitle }}</span>
               {% endif %}
-            </div>
+            </h4>
             {% if journal.open_access %}
             <div class="erudicon erudicon-open-access"></div>
             {% endif %}
             {% if journal.provided_by_fedora %}
             <div class="row">
               <div class="col-xs-4 pull-right">
-                <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive" />
+                <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive card__figure" />
               </div>
             </div>
             {% endif %}
