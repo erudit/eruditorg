@@ -90,42 +90,36 @@
       </header>
 
       <section class="toc">
+        <h2 class="toc__title">{% trans "Table des matières" %}</h2>
         {% for entry in toc.entries %}
-          {# TOC heading #}
-          {% if entry.level == 'h2' %}
-          <h2 class="toc__title">{% trans "Table des matières" %}</h2>
+          {# Section title #}
+          {% if entry.is_section %}
+          <{{ entry.level }} class="toc__heading">
+            <strong>{{ entry.title|safe }}</strong>
+          </{{ entry.level }}>
 
-          {# TOC entries #}
+          {# Chapter / article titles #}
           {% else %}
-            {# Section title #}
-            {% if entry.is_section %}
-            <{{ entry.level }} class="toc__heading">
-              <strong>{{ entry.title|safe }}</strong>
-            </{{ entry.level }}>
+          <div class="bib-record">
+            <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
+              <li><a class="tool-btn" href="https://retro.erudit.org/{{ entry.pdf_path }}" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+            </ul>
 
-            {# Chapter / article titles #}
-            {% else %}
-            <div class="bib-record">
-              <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
-                <li><a class="tool-btn" href="https://retro.erudit.org/{{ entry.pdf_path }}" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
-              </ul>
+            <h5 class="bib-record__title">
+              <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=entry.id %}" title="{% trans 'Lire le chapitre' %}">
+                <span>{{ entry.title|safe }}</span>{% if entry.subtitle %}<span>{{ entry.subtitle|safe }}</span>{% endif %}
+              </a>
+            </h5>
 
-              <h5 class="bib-record__title">
-                <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=entry.id %}" title="{% trans 'Lire le chapitre' %}">
-                  {{ entry.title|safe }}
-                </a>
-              </h5>
-
-              <div class="row bib-record__metadata">
-                <p class="col-sm-9 bib-record__authors">
-                  {% for author in entry.authors %}{% if not forloop.first %}, {% endif %}{{ author }}{% endfor %}
-                </p>
-                <p class="col-sm-3 bib-record__pages">
-                  pp. {{ entry.first_page }}&ndash;{{ entry.last_page }}
-                </p>
-              </div>
+            <div class="row bib-record__metadata">
+              <p class="col-sm-9 bib-record__authors">
+                {% for author in entry.authors %}{% if not forloop.first %}, {% endif %}{{ author }}{% endfor %}
+              </p>
+              <p class="col-sm-3 bib-record__pages">
+                pp. {{ entry.first_page }}&ndash;{{ entry.last_page }}
+              </p>
             </div>
-            {% endif %}
+          </div>
           {% endif %}
         {% endfor %}
 
