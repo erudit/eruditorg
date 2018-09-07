@@ -1,0 +1,45 @@
+/**
+ * Clickble "cards"
+ * Each card is a single `<a>`
+ * Used in Books & Proceedings home, list of journals by discipline,
+ * "Related articles" at bottom of articles, "Previous issues" at bottom of issues
+ */
+
+.card {
+  display: block;
+  padding: 0.75em 0.35em;
+  border-top: 1px solid $mid-grey;
+  @include transition(all 100ms);
+
+  &:hover, &:active, &:focus, &:active:focus {
+    background: $coral-red;
+    border-color: $coral-red;
+    color: #FFF;
+    text-decoration: none;
+
+    .card__figure {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      mix-blend-mode: multiply;
+    }
+
+    .card__metadata {
+      color: #FFF;
+    }
+  }
+}
+
+.card__title {
+  font-size: 1em;
+  line-height: 1.25;
+}
+
+.card__metadata {
+  color: $dark-grey;
+  font-size: 1em;
+  line-height: 1.25;
+}
+
+.card__figure {
+  margin-bottom: 1em;
+}

@@ -5,6 +5,8 @@
  */
 
 .toc-nav {
+  margin-top: 2em;
+  margin-bottom: 3em;
   font-size: smaller;
   @include font-styles('sans-italic');
 }
@@ -29,4 +31,9 @@
   color: $coral-red;
   display: block;
   @include font-styles('sans-medium');
+}
+
+.toc-nav__title {
+  font-size: 1em;
+  line-height: 1.35;
 }
