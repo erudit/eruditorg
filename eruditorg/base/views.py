@@ -37,6 +37,8 @@ class RedirectRetroUrls(RedirectView, ActivateLegacyLanguageViewMixin):
 def canonical_journal_urls_view(request):
     language = get_language()
     default_lang_url = '/{}{}'.format(settings.LANGUAGE_CODE, request.path)
+    if default_lang_url[-1] != '/':
+        default_lang_url += '/'
     supported_languages_codes = [l[0] for l in settings.LANGUAGES]
     if language == settings.LANGUAGE_CODE or language not in supported_languages_codes:
         return redirect(default_lang_url)
