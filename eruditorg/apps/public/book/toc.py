@@ -10,7 +10,7 @@ from lxml.etree import _Element as XMLElement
 def get_xml_from_file(path) -> XMLElement:
     with open(str(path), 'rb') as file:
         content = file.read()
-    return etree.fromstring(content)
+    return etree.fromstring(content, parser=etree.XMLParser(recover=True))
 
 
 def stringify_children(node):
@@ -70,8 +70,10 @@ def read_toc(book_path: Path) -> TableOfContents:
                 author = stringify_children(author_elem)
                 if author:
                     authors.append(author)
-            first_page = chapter_xml.find('.//field[@name="PremierePage"]').text
-            last_page = chapter_xml.find('.//field[@name="DernierePage"]').text
+            first_page_element = chapter_xml.find('.//field[@name="PremierePage"]')
+            first_page = None if first_page_element is None else first_page_element.text
+            last_page_element = chapter_xml.find('.//field[@name="DernierePage"]')
+            last_page = None if last_page_element is None else last_page_element.text
             pdf_path = book_relative_path / href
             toc_entries.append(TOCChapter(
                 id=chapter_id, title=title, subtitle=subtitle, authors=authors,
