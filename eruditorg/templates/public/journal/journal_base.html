@@ -93,7 +93,7 @@
         <h2>{% trans "Fiche" %}</h2>
 
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
-        <dl class="journal-meta--list">
+        <dl>
 
           {% if meta_info_issue %}
           {% with directors=meta_info_issue.erudit_object.get_directors %}

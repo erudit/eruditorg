@@ -81,7 +81,7 @@
             </span>
             {% endif %}
           </h1>
-        <p class="book-authors">{{ toc.book_author }}</p>
+        {% if toc.book_author %}<p class="book-authors">{{ toc.book_author }}</p>{% endif %}
         {% if toc.book_description %}
         <div class="main-header__intro">
           {{ toc.book_description|safe }}
@@ -116,7 +116,7 @@
                 {% for author in entry.authors %}{% if not forloop.first %}, {% endif %}{{ author }}{% endfor %}
               </p>
               <p class="col-sm-3 bib-record__pages">
-                pp. {{ entry.first_page }}&ndash;{{ entry.last_page }}
+                {% if entry.first_page %}p. {{ entry.first_page }}&ndash;{{ entry.last_page }}{% endif %}
               </p>
             </div>
           </div>
@@ -144,7 +144,7 @@
 
         <dl class="journal-meta--list">
           <dt>{% trans "Collection" %}</dt>
-          <dd><a href="#">{{ book.collection }}</a></dd>
+          <dd>{{ book.collection }}</dd>
 
           <dt>{% trans "Année de publication" %}</dt>
           <dd>{{ book.year }}</dd>
