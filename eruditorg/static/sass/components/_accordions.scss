@@ -5,15 +5,16 @@
 
 .akkordion {
 
+  h3.akkordion-title:not([data-akkordion-active]) {
+    border-bottom: 0;
+  }
+
   .icon {
     float: right;
     display: inline-block;
     position: relative;
     top: 2px;
-  }
-
-  .akkordion-content {
-    padding-bottom: $margin-vertical-default/2;
+    color: $dark-grey;
   }
 
   [data-akkordion-active] {
