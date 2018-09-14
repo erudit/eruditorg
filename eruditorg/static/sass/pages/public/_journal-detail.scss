@@ -42,71 +42,32 @@
   }
 
   /**
-  * Latest issue section
-  */
-  .latest-issue {
-    margin: 1em 0 2em 0;
-    padding-top: 1em;
-    border-top: 1px solid $mid-grey;
-
-    h2 {
-      font-size: 1.75em;
-    }
-
-    .latest-issue-title {
-      font-size: 1.25em;
-      margin-bottom: 1em;
-    }
-
-    .latest-issue-cover {
-      display: inline-block;
-      float: left;
-      margin-right: 1em;
-    }
-
-  }
-
-  /**
   * About section
   */
-  .journal-infos {
+  .journal-info-block {
     margin-bottom: 2.5em;
 
-    .journal-info-block {
-      border-top: 1px solid $mid-grey;
-      padding-top: 1em;
-      padding-bottom: $margin-vertical-default;
+    h1, h2, h3, h4, h5, h6 {
+      @include font-styles('serif-bold');
+      color: $coral-red;
 
-      .akkordion-title {
-        margin: 0 0 15px 0;
-        font-size: 1.75em;
-
-        .icon {
-          color: $dark-grey;
-        }
-
+      &:not(:first-child) {
+        margin-top: 2.5em;
       }
+    }
 
-      .akkordion-content {
+    ul {
+      margin-left: 20px;
+    }
 
-        h1, h2, h3, h4, h5, h6 {
-          @include font-styles('serif-bold');
-          margin-top: 0.75em;
-          color: $coral-red;
-        }
+    section, p, li {
+      font-size: 16px;
+      line-height: 1.45;
+      @include font-styles('serif');
+    }
 
-        ul {
-          margin-left: 20px;
-        }
-
-        section, p, li {
-          font-size: 16px;
-          line-height: 1.5;
-          @include font-styles('serif');
-        }
-
-      }
-
+    a {
+      text-decoration: underline;
     }
 
   }
@@ -197,27 +158,10 @@
 
   }
 
-  @media (min-width: $screen-sm-min),
-  (orientation: landscape) and (max-width: $screen-xs-max) {
-
-    .year-list {
-      @include column-count(2);
-    }
-
-  }
-
   @media (min-width: $screen-md-min) {
 
     .year-list {
-      @include column-count(3);
-    }
-
-  }
-
-  @media (min-width: $screen-lg-min) {
-
-    .year-list {
-      @include column-count(4);
+      @include column-count(2);
     }
 
   }

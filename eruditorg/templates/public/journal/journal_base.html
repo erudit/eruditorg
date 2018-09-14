@@ -30,7 +30,8 @@
 
       {# latest and back issues #}
       {% block aside_issue %}
-      <div class="sidebar-block clearfix latest-issue">
+      <div class="sidebar-block clearfix">
+        {% if journal.published_issues.exists %}
         {% if latest_issue %}
         <h2>{% trans "Dernier numéro" %}</h2>
         <p>
@@ -48,12 +49,12 @@
         </a>
         {% endif %}
         {% endif %}
-        <p>
-          {% url 'public:journal:journal_detail' journal.code as journal_detail_url %}
-          <a href="{% if request.get_full_path != journal_detail_url %}{{ journal_detail_url }}{% endif %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
-            {% trans "Voir tous les numéros" %}
-          </a>
-        </p>
+        {% else %}
+        <h2>-> {% trans 'Numéros à venir' %}</h2>
+        <div class="alert alert-info">
+          <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
+        </div>
+        {% endif %}
       </div>
       {% endblock aside_issue %}
 
@@ -83,7 +84,7 @@
           {% endblock aside_authors_list %}
           <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a></li>
           {% if journal_info.website_url %}
-          <li><a href="{{ journal_info.website_url }}">{% trans "Site web" %}</a></li>
+          <li><a href="{{ journal_info.website_url }}" target="_blank" rel="noopener noreferrer">{% trans "Site web" %}</a></li>
           {% endif %}
         </ul>
       </div>
@@ -225,6 +226,14 @@
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
       </div>
       {% endif %}
+
+      {% if journal_info.partners %}
+      <div class="sidebar-block">
+        <h2>{% trans "Partenaires" %}</h2>
+        {{ journal_info.partners|safe }}
+      </div>
+      {% endif %}
+
     </aside>
   </div>
 </div>

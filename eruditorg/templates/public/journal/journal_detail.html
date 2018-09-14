@@ -104,164 +104,69 @@
     </div>
   </header>
 
-  <section class="clearfix latest-issue" id="latest-issue">
-    {% if journal.published_issues.exists %}
-    <div class="row">
-      {% if latest_issue %}
-      <div class="col-sm-8">
-        <h2>{% trans "Dernier numéro" %}</h2>
-        {% if latest_issue.has_coverpage %}
-        <a {{ latest_issue.extra.detail_link_attrs }} class="latest-issue-cover">
-          <img src="{% url 'public:journal:issue_coverpage' latest_issue.journal.code latest_issue.volume_slug latest_issue.localidentifier %}" class="img-responsive issue-cover" alt="{{ latest_issue.title }}" />
-        </a>
-        {% endif %}
-        <p class="latest-issue-title">
-          <a {{ latest_issue.extra.detail_link_attrs }}>
-            {% if latest_issue.html_title %}
-            <span>{{ latest_issue.html_title|safe }}</span>
-            <br/>
-            {% endif %}
-            <span>{% with latest=latest_issue.volume_title %}{{ latest }}{% endwith %}</span>
-          </a>
-        </p>
-        {% endif %}
-      </div>
-      <div class="col-sm-4">
-        <p class="pull-right">
-          <a href="#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
-            {% trans "Voir tous les numéros" %}
-          </a>
-        </p>
-      </div>
-    </div>
-    {% else %}
-    <h2>-> {% trans 'Numéros à venir' %}</h2>
-    <div class="alert alert-info">
-      <p><span class="ion-information-circled alert-info-icon"></span> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
-    </div>
-    {% endif %}
-  </section>
+  {% if journal_info or issues %}
+  <ul class="nav-tabs" role="tablist">
+    {% if journal_info.about %}<li role="presentation" class="active"><a href="#journal-info-about" role="tab" data-toggle="tab">{% trans "À propos" %}</a></li>{% endif %}
 
-  {% if journal_info %}
-  <div class="journal-infos" role="tablist" aria-multiselectable="true">
-    {% trans "Aucune information" as tab_empty_msg %}
-    {% if journal_info.about %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-about" role="tabpanel">
-      <h2 class="akkordion-title" role="button" aria-expanded="true" aria-controls="journal-info-about-content">
-        {% trans "À propos" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-about-content" class="akkordion-content akkordion-active" aria-labelledby="journal-info-about">
-        {{ journal_info.about|default:tab_empty_msg|safe }}
-      </section>
+    {% if journal_info.editorial_policy %}<li role="presentation"><a href="#journal-info-editorial_policy" role="tab" data-toggle="tab">{% trans "Politique éditoriale" %}</a></li>{% endif %}
+
+    {% if journal_info.team %}<li role="presentation"><a href="#journal-info-team" role="tab" data-toggle="tab">{% trans "Équipe" %}</a></li>{% endif %}
+
+    {% if issues %}<li role="presentation"><a href="#back-issues" role="tab" data-toggle="tab">{% trans "Numéros" %}</a></li>{% endif %}
+  </ul>
+
+  <div class="tab-content">
+    <section role="tabpanel" class="tab-pane active journal-info-block" id="journal-info-about">
+      {% if journal_info.about %}{{ journal_info.about|safe }}{% endif %}
     </section>
-    {% endif %}
 
     {% if journal_info.editorial_policy %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-editorial-policy" role="tabpanel">
-      <h2 class="akkordion-title" role="button" aria-expanded="true" aria-controls="journal-info-editorial-policy-content">
-        {% trans "Politique éditoriale" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-editorial-policy-content" class="akkordion-content akkordion-active" aria-labelledby="journal-info-editorial-policy">
-        {{ journal_info.editorial_policy|default:tab_empty_msg|safe }}
-      </section>
+    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-editorial_policy">
+      {{ journal_info.editorial_policy|safe }}
     </section>
     {% endif %}
 
     {% if journal_info.team %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-team" role="tabpanel">
-      <h2 class="akkordion-title" href="#journal-info-team-content" aria-expanded="false" aria-controls="journal-info-team-content">
-        {% trans "Équipe" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-team-content" class="akkordion-content" aria-labelledby="journal-info-team">
-        {{ journal_info.team|default:tab_empty_msg|safe }}
-      </section>
+    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-team">
+      {{ journal_info.team|safe }}
     </section>
     {% endif %}
 
-    {% if journal_info.partners %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-partners" role="tabpanel">
-      <h2 class="akkordion-title" href="#journal-info-partners-content" aria-expanded="false" aria-controls="journal-info-partners-content">
-        {% trans "Partenaires" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-partners-content" class="akkordion-content" aria-labelledby="journal-info-partners">
-        {{ journal_info.partners|default:tab_empty_msg|safe }}
-      </section>
+    {% if issues %}
+    <section role="tabpanel" class="tab-pane" id="back-issues">
+      {% cache LONG_TTL "public_journal_detail_issues" journal.id content_access_granted LANGUAGE_CODE %}
+      <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
+      <div class="row">
+        {% regroup issues|dictsortreversed:"year" by year as year_list %}
+        <ul class="year-list col-xs-12">
+          {% for year in year_list %}
+          <li class="year-list--item"><h4>{{ year.grouper }}</h4>
+            <ul class="issue-list">
+              {% for issue in year.list %}
+              {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
+              <li class="issue-list--item">
+                <a {{ issue.extra.detail_link_attrs }}>
+                  {% if issue.extra.is_locked %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
+                  {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
+                </a>
+              </li>
+              {% endcache %}
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% if issues|length > 50 %}
+      <div class="text-center">
+        <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}">|^</a>
+      </div>
+      {% endif %}
+      {% endcache %}
     </section>
     {% endif %}
-
-    {% if journal_info.contact %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-contact" role="tabpanel">
-      <h2 class="akkordion-title" role="button" aria-expanded="false" aria-controls="journal-info-contact-content">
-        {% trans "Coordonnées" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-contact-content" class="akkordion-content" aria-labelledby="journal-info-contact">
-        {{ journal_info.contact|default:tab_empty_msg|safe }}
-      </section>
-    </section>
-    {% endif %}
-
-    {% if journal_info.subscriptions %}
-    <section class="journal-info-block akkordion" role="tab" id="journal-info-subscriptions" role="tabpanel">
-      <h2 class="akkordion-title" href="#journal-info-subscriptions-content" aria-expanded="false" aria-controls="journal-info-subscriptions-content">
-        {% trans "Abonnements" %}
-        <span class="collapse-chevron ion-chevron-down pull-right icon"></span>
-      </h2>
-      <section id="journal-info-subscriptions-content" class="akkordion-content" aria-labelledby="journal-info-subscriptions">
-        {{ journal_info.subscriptions|default:tab_empty_msg|safe }}
-      </section>
-    </section>
-    {% endif %}
-
   </div>
   {% endif %}
+
 </main>
 {% endblock inner_main %}
-
-{% block aside_issue %}{% endblock aside_issue %}
-
-{% block inner_footer %}
-{% cache LONG_TTL "public_journal_detail_issues" journal.id content_access_granted LANGUAGE_CODE %}
-{% if issues %}
-<section id="back-issues" class="back-issues">
-  <div class="container">
-    <div class="row">
-      <header class="back-issues--header col-xs-12">
-        <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
-      </header>
-    </div>
-    <div class="row">
-      {% regroup issues|dictsortreversed:"year" by year as year_list %}
-      <ul class="year-list col-xs-12">
-        {% for year in year_list %}
-        <li class="year-list--item"><h4>{{ year.grouper }}</h4>
-          <ul class="issue-list">
-            {% for issue in year.list %}
-            {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
-            <li class="issue-list--item">
-              <a {{ issue.extra.detail_link_attrs }}>
-                {% if issue.extra.is_locked %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
-                {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
-              </a>
-            </li>
-            {% endcache %}
-            {% endfor %}
-          </ul>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% if issues|length > 50 %}
-    <div class="text-center">
-      <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}">|^</a>
-    </div>
-    {% endif %}
-  </div>
-</section>
-{% endif %}
-{% endcache %}
-{% endblock inner_footer %}
