@@ -22,6 +22,7 @@
 
 .nav-menu__icon {
   display: block;
+  font-size: 25px;
 
   &:before {
     vertical-align: middle;
@@ -42,13 +43,6 @@
     > .nav-submenu {
       display: block;
       width: auto;
-    }
-
-    .nav-menu__caret {
-      padding: 0.15em 0 0 0.5em;
-      display: inline-block;
-      @include transform(scale(1, -1));
-      @include backface-visibility(hidden);
     }
 
   }

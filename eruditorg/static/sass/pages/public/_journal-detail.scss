@@ -2,10 +2,6 @@
 * Journal about page
 */
 
-/**
-* Page-specific mixins
-*/
-
 #journal_detail {
 
   header {
@@ -17,9 +13,11 @@
 
     .journal-title {
       margin-bottom: 0.25em;
+      display: block;
     }
 
     .journal-subtitle {
+      display: block;
       color: $dark-grey;
       margin-bottom: 0.25em;
 
@@ -28,11 +26,6 @@
       }
 
     }
-
-    .erudicon-open-access {
-      font-size: 3em;
-    }
-
   }
 
   .journal-history {

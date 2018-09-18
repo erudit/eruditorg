@@ -2,12 +2,9 @@
  * main navigation search trigger buttons (magnifying glass / x)
  */
 
-.nav-search-triggers {
-  font-size: 30px;
-}
-
 .nav-search-triggers__icon {
   display: block;
+  font-size: 30px;
 
   &:before {
     margin: 10px;
