@@ -1,5 +1,5 @@
 {% extends "public/journal/journal_base.html" %}
-{% load i18n staticfiles cache %}
+{% load cache i18n model_formatters staticfiles %}
 
 {% block title %}{{ journal.name|safe }}{% if journal.subtitle %}{% trans ' :' %} {{ journal.subtitle }}{% endif %}{% endblock title %}
 
@@ -64,23 +64,48 @@
 <main role="main" class="col-sm-8 col-md-7">
   <header class="main-header row">
     <div class="col-sm-12">
+      {# Title #}
       <div class="row">
-        <h1 class="col-xs-10 col-sm-11">
-          <span class="journal-title">{% if main_title %}{{ main_title.title }}{% else %}{{ journal.name }}{% endif %}</span>
-          {% if main_title.subtitle %}<span class="journal-subtitle">{{ main_title.subtitle }}</span>{% endif %}
-          {% for title in paral_titles %}
-          {% if title.title != main_title.title %}
-          <span class="journal-title">{{ title.title }}</span>
-          {% endif %}
-          {% if title.subtitle and title.subtitle != main_title.subtitle %}<span class="journal-subtitle">{{ title.subtitle }}</span>{% endif %}
-          {% endfor %}
+        <h1>
+          <div class="col-xs-10 col-sm-9">
+            <span class="journal-title">{% if main_title %}{{ main_title.title }}{% else %}{{ journal.name }}{% endif %}</span>
+            {% if main_title.subtitle %}<span class="journal-subtitle">{{ main_title.subtitle }}</span>{% endif %}
+            {% for title in paral_titles %}
+            {% if title.title != main_title.title %}
+            <span class="journal-title">{{ title.title }}</span>
+            {% endif %}
+            {% if title.subtitle and title.subtitle != main_title.subtitle %}<span class="journal-subtitle">{{ title.subtitle }}</span>{% endif %}
+            {% endfor %}
+          </div>
+          {# Access & peer review #}
+          <div class="col-xs-2 col-sm-3 text-right">
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+              <ion-icon name="ios-checkmark-circle"></ion-icon>
+            </span>
+            {% if journal.open_access %}
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
+              <span class="erudicon erudicon-open-access"></span>
+            </span>
+            {% endif %}
+          </div>
         </h1>
-      {% if journal.open_access %}
-      <span class="hint--bottom-left hint--no-animate text-right col-xs-2 col-sm-1" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}">
-        <span class="erudicon erudicon-open-access"></span>
-      </span>
-      {% endif %}
       </div>
+
+      {# Directors and editors #}
+      <p>
+        <small>
+        {% with directors=meta_info_issue.erudit_object.get_directors editors=meta_info_issue.erudit_object.get_editors %}
+        {% if directors %}
+        {% for issue_contributor in directors %}{% if not forloop.first %}, {% endif %}{{ issue_contributor.format_name }}{% endfor %}
+        {% endif %}
+        {% if editors %}
+        {% for issue_contributor in editors %}{% if not forloop.first %}, {% endif %}{{ issue_contributor | format_editor }}</dd>{% endfor %}
+        {% endif %}
+        {% endwith %}
+        </small>
+      </p>
+
+      {# History #}
       {% if journal.previous_journal or journal.next_journal %}
       <p class="journal-history">
       {% if journal.previous_journal %}
@@ -146,7 +171,7 @@
               {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
               <li class="issue-list--item">
                 <a {{ issue.extra.detail_link_attrs }}>
-                  {% if issue.extra.is_locked %}<span class="ion-locked"></span>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
+                  {% if issue.extra.is_locked %}<ion-icon name="ios-lock"></ion-icon>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
                   {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
                 </a>
               </li>
