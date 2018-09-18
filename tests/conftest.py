@@ -9,6 +9,7 @@ from eruditarticle.objects.publication import EruditPublication
 from eruditarticle.objects.journal import EruditJournal
 from erudit.test.fedora import FakeAPI
 from erudit.test.solr import FakeSolrClient
+
 import erudit.fedora.repository
 import erudit.fedora.modelmixins
 
