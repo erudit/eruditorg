@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from django.conf import settings
+from django.db.models import Prefetch
 from django.http import (
     HttpResponse,
     Http404,
@@ -25,8 +26,11 @@ class BookListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['collections'] = BookCollection.objects.all()
-        context['books'] = Book.objects.all()
+        books = Book.objects.select_related('collection')
+
+        context['collections'] = BookCollection.objects \
+            .prefetch_related(Prefetch('books', queryset=books)).all()
+        context['books_count'] = Book.objects.count()
         return context
 
 
@@ -63,7 +67,8 @@ class ChapterDetailView(DetailView):
         return context
 
 
-def chapter_pdf_view(request, slug, chapter_id):
+# noinspection PyUnusedLocal
+def chapter_pdf_view(request, collection_slug, slug, chapter_id):
     book = get_object_or_404(Book, slug=slug)
     toc = read_toc(Path(settings.BOOKS_DIRECTORY) / book.path)
     try:
@@ -74,5 +79,5 @@ def chapter_pdf_view(request, slug, chapter_id):
     pdf_file = open(str(Path(settings.BOOKS_DIRECTORY) / chapter.pdf_path), 'rb')
     response = HttpResponse(content=pdf_file)
     response['Content-Type'] = 'application/pdf'
-    response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(chapter_id)
+    response['Content-Disposition'] = 'filename="{}.pdf"'.format(chapter_id)
     return response

@@ -49,14 +49,14 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' slug=book.slug %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}",
       "name": "Une littérature «&nbsp;comme incantatoire&nbsp;»&nbsp;: aspects et échos de l’incantation en littérature (XIX<sup>e</sup>-XXI<sup>e</sup> siècle)"
     }
   },{
     "@type": "ListItem",
     "position": 4,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' slug=book.slug chapter_id=chapter.id %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=chapter.id %}",
       "name": "Rimbaud et l’incantation au second degré"
     }
   }]
@@ -76,10 +76,10 @@
   <a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a>
 </li>
 <li>
-  <a href="{% url 'public:book:book_detail' slug=book.slug %}">{{ book.title }}</a>
+  <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ book.title }}</a>
 </li>
 <li>
-  <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=chapter.id %}">{{ chapter.title|striptags }}</a>
+  <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=chapter.id %}">{{ chapter.title|striptags }}</a>
 </li>
 {% endblock breadcrumb %}
 
@@ -107,7 +107,7 @@
     <div class="row">
       <div class="col-sm-6 doc-head__metadata">
         <p>{% trans 'Un chapitre de l’ouvrage' %}
-          <a href="{% url 'public:book:book_detail' slug=book.slug %}">{{ book.title|safe }}{% if book.subtitle %}{% trans '&nbsp;:' %} {{ book.subtitle|safe }}{% endif %}</a>, {{ book.year }}
+          <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ book.title|safe }}{% if book.subtitle %}{% trans '&nbsp;:' %} {{ book.subtitle|safe }}{% endif %}</a>, {{ book.year }}
         </p>
       </div>
       <div class="col-sm-6 doc-head__metadata">
@@ -135,14 +135,14 @@
     </h3>
     <div class="hidden-xs col-sm-4">
       {% if previous_chapter %}
-      <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=previous_chapter.id %}" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}">
+      <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=previous_chapter.id %}" class="toc-nav__prev" title="{% trans 'Chapitre précédent' %}">
         <span class="toc-nav__arrow"><---</span>
         <h4 class="toc-nav__title">
           {{ previous_chapter.title|striptags }}
         </h4>
       </a>
       {% else %}
-      <a href="{% url 'public:book:book_detail' slug=book.slug %}" class="toc-nav__prev" title="{% trans 'Aller à la table des matières' %}">
+      <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__prev" title="{% trans 'Aller à la table des matières' %}">
         <span class="toc-nav__arrow"><---</span>
         <h4 class="toc-nav__title">
           <em>{% trans '[Début de l’ouvrage] <br>Retour à la table des matières' %}</em>
@@ -153,14 +153,14 @@
 
     <div class="hidden-xs col-sm-offset-4 col-sm-4">
       {% if next_chapter %}
-      <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=next_chapter.id %}" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}">
+      <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=next_chapter.id %}" class="toc-nav__next" title="{% trans 'Chapitre suivant' %}">
         <span class="toc-nav__arrow">---></span>
         <h4 class="toc-nav__title">
           {{ next_chapter.title|striptags }}
         </h4>
       </a>
       {% else %}
-      <a href="{% url 'public:book:book_detail' slug=book.slug %}" class="toc-nav__next" title="{% trans 'Aller à la table des matières' %}">
+      <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="toc-nav__next" title="{% trans 'Aller à la table des matières' %}">
         <span class="toc-nav__arrow">---></span>
         <h4 class="toc-nav__title">
           <em>{% trans '[Fin de l’ouvrage] <br>Retour à la table des matières' %}</em>
@@ -173,7 +173,7 @@
   <section>
     <h2 class="sr-only">{% trans 'Texte intégral en PDF' %}</h2>
     <iframe
-      src="https://retro.erudit.org/livre/{{ chapter.pdf_path }}"
+      src="{% url 'public:book:chapter_pdf' collection_slug=book.collection.slug slug=book.slug chapter_id=chapter.id %}"
       style="width: 100%; height: 95vh;" frameborder="0">
     </iframe>
   </section>

@@ -64,7 +64,7 @@
     <div class="row">
       <div class="col-sm-6 col-md-8">
         <header class="page-header-main">
-          <h1>{% trans "Livres et actes" %} ({{ books|length }} {% trans 'titres' %})</h1>
+          <h1>{% trans "Livres et actes" %} ({{ books_count }} {% trans 'titres' %})</h1>
         </header>
         <div class="page-intro">
           {% blocktrans %}
@@ -86,7 +86,7 @@
         </li>
         {% for book in collection.books.all %}
         <li class="col-xs-6 col-sm-3 col-md-2 alternating-row__list-item">
-          <a href="{% url 'public:book:book_detail' slug=book.slug %}" class="card">
+          <a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}" class="card">
             <p class="card__metadata">{{ book.get_type_display }}</p>
             <h4 class="card__title">
               <span><strong>{{ book.title|safe }}</strong></span>

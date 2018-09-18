@@ -25,8 +25,10 @@ def test_collection_redirect(client):
 
 @pytest.mark.django_db
 def test_book_redirect(client):
-    Book.objects.create(slug='book-slug', path='livre/collectionpath/bookpath')
+    collection = BookCollection.objects.create(name='hors collection', slug='hors-collection')
+    Book.objects.create(slug='book-slug', path='livre/collectionpath/bookpath',
+                        collection=collection)
     response = client.get('/livre/collectionpath/bookpath/index.htm')
     assert isinstance(response, HttpResponsePermanentRedirect)
-    assert response.url == '/fr/livres/book-slug/'
+    assert response.url == '/fr/livres/hors-collection/book-slug/'
 

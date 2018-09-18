@@ -49,7 +49,7 @@
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' slug=book.slug %}",
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}",
       "name": "{{ toc.book_title|striptags }}"
     }
   }]
@@ -63,7 +63,7 @@
 
 {% block breadcrumb %}
 {{ block.super }} <li><a href="{% url 'public:book:home' %}">{% trans "Livres et actes" %}</a></li>
-<li><a href="{% url 'public:book:book_detail' slug=book.slug %}">{{ toc.book_title|safe }}</a></li>
+<li><a href="{% url 'public:book:book_detail' collection_slug=book.collection.slug slug=book.slug %}">{{ toc.book_title|safe }}</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -102,11 +102,11 @@
           {% else %}
           <div class="bib-record">
             <ul class="toolbox toolbox-compact toolbox-horizontal pull-right">
-              <li><a class="tool-btn" href="https://retro.erudit.org/{{ entry.pdf_path }}" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
+              <li><a class="tool-btn" href="{% url 'public:book:chapter_pdf' collection_slug=book.collection.slug slug=book.slug chapter_id=entry.id %}" title="Télécharger" target="_blank"><span class="toolbox-pdf">PDF</span></a></li>
             </ul>
 
             <h5 class="bib-record__title">
-              <a href="{% url 'public:book:chapter_detail' slug=book.slug chapter_id=entry.id %}" title="{% trans 'Lire le chapitre' %}">
+              <a href="{% url 'public:book:chapter_detail' collection_slug=book.collection.slug slug=book.slug chapter_id=entry.id %}" title="{% trans 'Lire le chapitre' %}">
                 <span>{{ entry.title|safe }}</span>{% if entry.subtitle %}<span>{{ entry.subtitle|safe }}</span>{% endif %}
               </a>
             </h5>
