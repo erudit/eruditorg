@@ -41,7 +41,6 @@ TableOfContents = namedtuple(
 
 
 def read_toc(book_path: Path) -> TableOfContents:
-    books_root = book_path.parent.parent
     book_relative_path = book_path.relative_to(book_path.parent.parent.parent)
     xml = get_xml_from_file(book_path / 'index.xml')
     book_desc = stringify_children(xml.find('.//div[@class="desclivre"]'))
