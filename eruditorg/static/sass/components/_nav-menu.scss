@@ -13,6 +13,11 @@
   display: inline-block;
   margin: 0 10px;
   font-size: 14px;
+
+  // overriding Select2’s default style...
+  .select2.select2-container--default .select2-selection {
+    border: 0;
+  }
 }
 
 .nav-menu__caret {
@@ -21,7 +26,8 @@
 }
 
 .nav-menu__icon {
-  display: block;
+  vertical-align: middle;
+  text-align: center;
   font-size: 25px;
 
   &:before {
@@ -46,15 +52,13 @@
     }
 
   }
-
 }
 
 .nav-menu__link {
   display: block;
-  padding: 10px 0;
-  font-size: 14px;
   position: relative;
   color: #000;
+  margin: 5px 0;
 
   &:hover,
   &:active,
