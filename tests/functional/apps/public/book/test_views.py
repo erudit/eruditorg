@@ -8,6 +8,12 @@ from apps.public.book.models import (
     BookCollection,
 )
 
+from waffle.models import Flag
+
+@pytest.fixture
+def book_flag():
+    Flag.objects.get_or_create(name='BOOKS', everyone=True)
+
 
 @pytest.fixture(autouse=True)
 def use_book_test_fixture(settings):
@@ -22,7 +28,7 @@ def book():
 
 
 @pytest.mark.django_db
-def test_books_home_view(client):
+def test_books_home_view(client, book_flag):
     response = client.get(reverse('public:book:home'))
     assert response.status_code == 200
 
@@ -51,7 +57,7 @@ def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book):
 
 
 @pytest.mark.django_db
-def test_chapter_pdf(client, book):
+def test_chapter_pdf(client, book, book_flag):
     response = client.get(reverse('public:book:chapter_pdf',
                                   kwargs={'collection_slug': book.collection.slug,
                                           'slug': book.slug, 'chapter_id': '000274li'}))
