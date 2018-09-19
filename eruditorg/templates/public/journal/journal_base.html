@@ -96,17 +96,34 @@
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
         <dl>
 
+          {% if journal.type.code == 'S' %}
+          <dt>{% trans "Évalué par les pairs" %}</dt>
+          <dd>{% trans "Oui" %}
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+              <ion-icon name="ios-checkmark-circle"></ion-icon>
+            </span>
+          </dd>
+          {% endif %}
+
+          <dt>{% trans "Politique d'accès" %}</dt>
+          {% if journal.open_access %}
+          <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="erudicon erudicon-open-access"></span></span></dd>
+          {% else %}
+          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><ion-icon name="help-circle"></ion-icon></span></dd>
+          {% endif %}
+
+          <dt>{% trans "Archivage numérique" %}</dt>
+          <dd>{% trans "Oui&nbsp;: avec" %} <a href="https://www.portico.org/" target="_blank">Portico</a></dd>
+
           {% if meta_info_issue %}
-          {% with directors=meta_info_issue.erudit_object.get_directors %}
+          {% with directors=meta_info_issue.erudit_object.get_directors editors=meta_info_issue.erudit_object.get_editors %}
           {% if directors %}
           <dt>{% trans "Direction" %}</dt>
           {% for issue_contributor in directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
-          {% endwith %}
 
-          {% with editors=meta_info_issue.erudit_object.get_editors %}
           {% if editors %}
           <dt>{% trans "Rédaction" %}</dt>
           {% for issue_contributor in editors %}
@@ -140,7 +157,7 @@
           {% endif %} {# if meta_info_issue #}
 
           {% if journal.issues_per_year %}
-          <dt>{% trans "Fréquence" %}</dt>
+          <dt>{% trans "Fréquence de publication" %}</dt>
           <dd>
             {% blocktrans count issues_per_year=journal.issues_per_year %}
             {{ issues_per_year }} numéro par année
@@ -166,13 +183,6 @@
             {% trans "Numérique" %}
             {% endif %}
           </dd>
-
-          <dt>{% trans "Politique d'accès" %}</dt>
-          {% if journal.open_access %}
-          <dd>{% trans "Disponible en libre accès" %} <span class="erudicon erudicon-open-access"></span> <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><ion-icon name="help-circle"></ion-icon></span></dd>
-          {% else %}
-          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><ion-icon name="help-circle"></ion-icon></span></dd>
-          {% endif %}
 
           {% if journal.disciplines.all|length > 0 %}
           <dt>
@@ -205,8 +215,10 @@
 
         </dl>
 
-        <div class="text-center journal-meta--list">
-          <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
+        <div>
+          <a href="{% url 'public:journal:journal_detail' journal.code %}">
+            <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
+          </a>
           {% if content_access_granted and subscription_type == 'individual' %}
           <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
           {% endif %}
@@ -215,23 +227,23 @@
         {% include "public/partials/subscription_sponsor_badge.html" %}
       </div>
 
-      {% if journal_info.twitter_url %}
-      <div class="journal-meta--list">
-        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      </div>
-      {% endif %}
-
-      {% if journal_info.facebook_url %}
-      <div class="journal-meta--list">
-        <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
-      </div>
-      {% endif %}
-
       {% if journal_info.partners %}
       <div class="sidebar-block">
         <h2>{% trans "Partenaires" %}</h2>
         {{ journal_info.partners|safe }}
       </div>
+      {% endif %}
+
+      {% if journal_info.facebook_url or journal_info.twitter_url %}
+      <section class="sidebar-block">
+        <h2>{% trans 'Sur les réseaux sociaux' %}</h2>
+        {% if journal_info.twitter_url %}
+        <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        {% endif %}
+        {% if journal_info.facebook_url %}
+        <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
+        {% endif %}
+      </section>
       {% endif %}
 
     </aside>

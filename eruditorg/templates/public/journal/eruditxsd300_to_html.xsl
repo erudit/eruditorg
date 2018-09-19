@@ -54,7 +54,7 @@
 
         <div class="col-md-9">
           <xsl:if test="liminaire/grtitre/surtitre">
-            <p class="title-tag">
+            <p class="main-header__meta">
               <xsl:apply-templates select="liminaire/grtitre/surtitre" mode="title"/>
               <xsl:apply-templates select="liminaire/grtitre/surtitreparal" mode="title"/>
             </p>
@@ -481,6 +481,14 @@
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
       <xsl:apply-templates select="."/>
+      <xsl:if test="self::titre">
+        {# Peer review seal #}
+        {% if article.issue.journal.type.code == 'S' %} 
+        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+          <ion-icon name="ios-checkmark-circle" size="small"></ion-icon>
+        </span>
+        {% endif %}
+      </xsl:if>
     </span>
   </xsl:template>
 
