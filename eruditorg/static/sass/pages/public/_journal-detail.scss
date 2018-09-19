@@ -34,64 +34,36 @@
     margin: 0.5em 0;
   }
 
+
+
   /**
   * About section
   */
   .journal-info-block {
-    margin-bottom: 2.5em;
+    margin-bottom: 5em;
 
     h1, h2, h3, h4, h5, h6 {
-      @include font-styles('serif-bold');
       color: $coral-red;
+      font-size: 1em;
 
       &:not(:first-child) {
-        margin-top: 2.5em;
+        margin-top: 2em;
       }
-    }
-
-    ul {
-      margin-left: 20px;
     }
 
     section, p, li {
       font-size: 16px;
       line-height: 1.45;
-      @include font-styles('serif');
     }
 
     a {
       text-decoration: underline;
     }
-
   }
 
   /**
   * Back issues section
   */
-  .back-issues {
-    margin-top: $margin-vertical-default * 2;
-    background: $light-grey;
-    padding: 50px 0;
-
-    .back-issues--header {
-      padding-top: $margin-vertical-default;
-      padding-bottom: $margin-vertical-default;
-      margin-top: 1em;
-    }
-
-    .scroll-issues {
-      margin-top: 1em;
-      font-size: 2em;
-
-      &:hover, &:focus, &:active {
-        text-decoration: none;
-        color: $coral-red;
-      }
-
-    }
-
-  }
-
   .year-list {
     list-style: none;
     margin: 0;
