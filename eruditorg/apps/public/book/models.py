@@ -11,6 +11,11 @@ class BookCollection(models.Model):
         max_length=200,
         verbose_name=_('Titre de collection')
     )
+    slug = models.SlugField(
+        max_length=200,
+        null=False,
+        blank=False,
+    )
     logo = models.ImageField(
         blank=True,
         null=True,
@@ -50,6 +55,11 @@ class Book(models.Model):
     title = models.CharField(
         max_length=400,
         verbose_name=_('Titre'),
+    )
+    slug = models.SlugField(
+        max_length=200,
+        null=False,
+        blank=False,
     )
     subtitle = models.CharField(
         blank=True,
@@ -131,9 +141,13 @@ class Book(models.Model):
     )
     path = models.CharField(
         max_length=200,
-        verbose_name=_('répertoire'),
+        verbose_name=_('Répertoire'),
         null=True,
         blank=True,
+    )
+    is_open_access = models.BooleanField(
+        verbose_name=_('Disponible en libre accès ?'),
+        default=False,
     )
 
     class Meta:

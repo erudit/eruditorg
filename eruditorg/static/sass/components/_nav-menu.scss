@@ -1,0 +1,149 @@
+/**
+ * main navigation menu
+ */
+
+.nav-menu {
+   margin: 0;
+   padding: 0;
+ }
+
+.nav-menu__list {
+  right: 20px;
+  list-style: none;
+}
+
+.nav-menu__item {
+  display: inline-block;
+  margin: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.nav-menu__caret {
+  padding: 0 0 0 0.5em;
+  @include transition(transform 0.3s linear);
+}
+
+.nav-menu__icon {
+  display: block;
+
+  &:before {
+    vertical-align: middle;
+    font-size: 20px;
+    background-color: $light-grey;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    padding-top: 8px;
+    @include border-radius(50%);
+  }
+
+  &:hover, &:active, &:focus {
+    &:before {
+      background-color: #000;
+      color: $light-grey;
+    }
+  }
+}
+
+.nav-menu__item_has-submenu {
+  position: relative;
+
+  .nav-menu__link {
+    display: block;
+    cursor: pointer;
+  }
+
+  &:hover, &:focus, &:active, &:focus:active {
+
+    > .nav-submenu {
+      display: block;
+      width: auto;
+    }
+
+    .nav-menu__caret {
+      padding: 0.15em 0 0 0.5em;
+      display: inline-block;
+      @include transform(scale(1, -1));
+      @include backface-visibility(hidden);
+    }
+
+  }
+
+}
+
+.nav-menu__link {
+  display: block;
+  padding: 10px 0;
+  font-size: 14px;
+  position: relative;
+  color: #000;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &.selected {
+    color: $coral-red;
+    text-decoration: none;
+  }
+}
+
+// Hamburger menu / menu on mobile
+@media (max-width: $screen-sm-max) {
+  #main-nav {
+    &.nav-menu__list {
+      background: $coral-red;
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      padding: 0;
+      margin: -5px -11px;
+      height: 100vh;
+      max-height: none;
+      width: 100vw;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    .nav-menu__item_has-submenu {
+
+      > ul {
+        display: block;
+        position: static;
+        border: none;
+        background: none;
+
+        li {
+          border: none;
+        }
+      }
+    }
+
+    .nav-menu__item,
+    .nav-submenu__item {
+      text-align: right;
+      margin: 0;
+      display: block;
+
+      > a {
+        color: #FFF;
+        font-size: 18px;
+        margin: 0;
+        padding: 15px 10px;
+        line-height: 20px;
+        border-bottom: 1px solid #FFF;
+
+        &:hover, &:active, &:focus {
+          color: #FFF;
+          text-decoration: none;
+          @include fw-sans-bold;
+        }
+      }
+    }
+
+    .nav-submenu__link_is-active,
+    .nav-menu__caret {
+      display: none;
+    }
+  }
+}

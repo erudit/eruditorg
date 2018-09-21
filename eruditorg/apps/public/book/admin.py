@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import Book, BookCollection
+from django.utils.translation import gettext as _
 
 
 class BookAdmin(admin.ModelAdmin):
 
-    list_display = ('title', 'collection')
-    list_filter = ('collection',)
+    list_display = ('title', 'year', 'authors', 'collection',)
+    list_filter = ('collection', 'is_open_access',)
 
     fieldsets = [
         (None, {
@@ -48,7 +49,25 @@ class BookAdmin(admin.ModelAdmin):
                 ('copyright',),
             )
         }),
+        (None, {
+            'fields': (
+                ('is_open_access',),
+            )
+        }),
     ]
+
+    actions = [
+        'mark_as_oa',
+        'remove_cover',
+    ]
+
+    def mark_as_oa(self, request, queryset):
+        queryset.update(is_open_access=True)
+    mark_as_oa.short_description = _('Afficher en libre accès')
+
+    def remove_cover(self, request, queryset):
+        queryset.update(cover=None)
+    remove_cover.short_description = _('Supprimer les couvertures')
 
 
 admin.site.register(BookCollection)

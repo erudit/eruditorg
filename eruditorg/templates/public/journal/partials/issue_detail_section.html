@@ -6,14 +6,19 @@
       {% endfor %}
     </ol>
   {% else %}
-      <h{{ group.level|add:"2" }} class="toc__heading">
+    <section class="akkordion" data-akkordion-single="true">
+      <h{{ group.level|add:"2" }} class="akkordion-title toc__heading">
         <strong>
           {{ group.titles.main|safe }}
           {% for paral in group.titles.paral %}&nbsp;/ {{ paral|safe }}{% endfor %}
         </strong>
+        <span class="icon ion-ios-arrow-down"></span>
       </h{{ group.level|add:"2" }}>
+      <div class="akkordion-content akkordion-active">
       {% with articles_per_section=group %}
         {% include "public/journal/partials/issue_detail_section.html" %}
       {% endwith %}
+      </div>
+    </section>
   {% endif %}
 {% endfor %}

@@ -1,0 +1,50 @@
+/**
+ * Grey / white alternating sections presented as rows
+ * Each section may contain a list of items, or any other block elements
+ * Used in Books & Proceedings home, list of journals by discipline
+ */
+
+.alternating-row {
+ margin-top: 2.5rem;
+ padding: 2.5rem 0;
+
+ &:first-child {
+   margin-top: 0;
+ }
+
+ &:nth-child(odd) {
+   background: $light-grey;
+ }
+}
+
+.alternating-row__header {
+
+  .title {
+    padding-top: 1.75em;
+    margin-top: 1.75em;
+    border-top: 1px solid #000;
+
+    a {
+      display: inline-block;
+      color: $dark-grey;
+      font-size: 30px;
+
+      &:hover, &:active, &:focus, &:active:focus {
+        text-decoration: none;
+        color: $coral-red;
+      }
+
+    }
+
+  }
+
+}
+
+.alternating-row__list {
+  list-style: none;
+}
+
+.alternating-row__list-title {
+  color: $coral-red;
+  font-size: 1em;
+}

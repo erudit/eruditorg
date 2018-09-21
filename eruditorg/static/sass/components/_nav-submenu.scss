@@ -1,0 +1,36 @@
+/**
+ * main navigation submenus
+ */
+
+.nav-submenu {
+  display: none;
+  position: absolute;
+  min-width: 100%;
+  width: auto;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  text-align: left;
+  background-color: #FFF;
+  border: 1px solid $mid-grey;
+  z-index: $zindex-dropdown;
+}
+
+.nav-submenu__item {
+  display: block;
+  margin: 0;
+  border-bottom: 1px solid $mid-grey;
+
+  a {
+    display: block;
+    width: 100%;
+    padding: 0.5em 0.75em 0.5em 0.5em;
+    font-size: 14px;
+
+    &:hover, &:focus, &:active, &:active:focus {
+      background: $coral-red;
+      color: #FFF;
+      text-decoration: none;
+    }
+  }
+}

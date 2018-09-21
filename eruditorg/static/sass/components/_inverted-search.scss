@@ -1,0 +1,30 @@
+/**
+ * main navigation simple search bar when triggered (button has been clicked)
+ * search bar colours are inverted
+ */
+
+.inverted-search-bar {
+  background-color: rgba(255, 66, 66, 0.9);
+  height: 50px;
+  color: #fff;
+
+  .header-logo__img path,
+  .header-logo__img rect {
+    fill: #fff;
+  }
+
+  .nav-search-triggers__open,
+  .nav-menu-trigger,
+  .nav-menu__list {
+    display: none !important;
+  }
+
+  .nav-search-triggers__close {
+    display: block;
+    margin-left: 10px;
+  }
+
+  .nav-search {
+    display: block;
+  }
+}

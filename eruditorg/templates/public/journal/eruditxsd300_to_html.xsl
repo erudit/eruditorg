@@ -93,7 +93,7 @@
                   {% if request.user.is_anonymous %}
                   <br/><br/>
                   {% blocktrans %}
-                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" class="main-section" id="article-login-modal" title="Se connecter au tableau de bord">en vous connectant</a>.
+                  Si vous détenez un abonnement individuel à cette revue, veuillez vous identifier <a href="{{ login_url }}" id="article-login-modal" title="Se connecter au tableau de bord">en vous connectant</a>.
                   {% endblocktrans %}
                   {% endif %}
                   <br/><br/>

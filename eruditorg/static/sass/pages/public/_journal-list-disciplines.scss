@@ -39,141 +39,28 @@
 
 	}
 
-	// each sorting group
-	.sorting-group {
-		padding-top: 2em;
+  .card {
+    font-size: 14px;
+  }
 
-		&.even {
-			background: $light-grey;
-		}
+  //Row alignment for different viewport sizes / responsive
 
-    .sorting-group--collection {
-      padding: 1.5em 0 0 0;
-    }
-
-    .sorting-group--journals {
-      list-style: none;
-      margin: 0;
-    }
-
-    .sorting-group--title {
-
-      .title {
-        padding-top: 1.75em;
-        margin-top: 1.75em;
-        border-top: 1px solid #000;
-
-        a {
-          display: inline-block;
-          color: $dark-grey;
-          font-size: 30px;
-
-          &:hover, &:active, &:focus, &:active:focus {
-            text-decoration: none;
-            color: $coral-red;
-          }
-
-        }
-
-      }
-
-    }
-
-    .collection-title h3 {
-      color: $coral-red;
-      font-size: 1.15em;
-      letter-spacing: 0.05em;
-    }
-
-    .journal-item {
-      margin-bottom: 2em;
-
-      > a {
-        display: block;
-        padding: 0.75em 0.5em 1em;
-        font-size: 14px;
-        border-top: 1px solid $mid-grey;
-        @include transition(all 100ms);
-
-        img {
-          margin-top: 0.5em;
-          float: right;
-          mix-blend-mode: multiply;
-        }
-
-        .journal-title span + span {
-          color: $dark-grey;
-        }
-
-        .erudicon-open-access {
-          font-size: 1.5em;
-          color: $coral-red;
-          margin-top: 0.25em;
-        }
-
-        &:hover, &:active, &:focus, &:active:focus {
-          background: $coral-red;
-          color: #FFF;
-          text-decoration: none;
-          border-color: $coral-red;
-
-          img {
-            visibility: hidden;
-          }
-
-          .erudicon-open-access {
-            color: #FFF;
-          }
-
-          .journal-title span + span {
-            color: #FFF;
-          }
-
-        }
-
-      }
-
-    }
-
-	}
-
-}
-
-/**
-* Row alignment for different viewport sizes / responsive
-**/
-
-@media (max-width: $screen-sm-max) {
-
-  .journal-item,
-  .collection-title {
-
-    &:nth-child(2n+1) {
+  @media (max-width: $screen-sm-max) {
+    .alternating-row__list-item:nth-child(2n+1) {
       clear: both;
     }
-
   }
 
-}
-
-@media (min-width: $screen-md-min) {
-
-  .journal-item,
-  .collection-title {
-
-    &:nth-child(4n+1) {
+  @media (min-width: $screen-md-min) {
+    .alternating-row__list-item:nth-child(4n+1) {
       clear: both;
     }
-
   }
 
-}
-
-@media (max-width: $screen-sm-max) {
-
-  .nav-btn {
-    text-align: center;
-    margin-bottom: 1em;
+  @media (max-width: $screen-sm-max) {
+    .nav-btn {
+      text-align: center;
+      margin-bottom: 1em;
+    }
   }
-
 }

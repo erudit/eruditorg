@@ -1,14 +1,14 @@
 {% extends "public/journal/journal_base.html" %}
 {% load cache i18n model_formatters staticfiles %}
 
-{% block title %}{% if issue.html_title %}{{ issue.html_title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal.name|safe }}{% endblock title %}
+{% block title %}{% if issue.title %}{{ issue.title|safe }}.{% else %}{{ issue.volume_title }} –{% endif %} {{ issue.journal.name|safe }}{% endblock title %}
 
 {% block meta_description %}{% blocktrans with journal=issue.journal.name|safe volume_title=issue.volume_title|lower %}Consultez le {{ volume_title }} de la revue {{ journal }} sur Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.{% endblock meta_description %}
 
 {% block meta_tags %}
 <!-- Facebook / Open Graph -->
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
-<meta property="og:title" content="{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }}">
+<meta property="og:title" content="{% if issue.title %}{{ issue.title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }}">
 <meta property="og:site_name" content="Érudit">
 <meta property="og:locale" content="{{ language_code }}_CA">
 <meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% if issue.has_coverpage %}{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@eruditorg">
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
-<meta name="twitter:title" content="{% if issue.html_title %}{{ issue.html_title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }} – Érudit">
+<meta name="twitter:title" content="{% if issue.title %}{{ issue.title|safe }}. {% endif %}{{ issue.volume_title }} – {{ issue.journal.name|safe }} – Érudit">
 <meta name="twitter:image:alt" content="{% if issue.has_coverpage %}{% trans 'Couverture pour ce numéro de la revue' %}{% else %}{% trans 'Logo pour' %}{% endif %} {{ journal.name|safe }}">
 <meta name="twitter:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% if issue.has_coverpage %}{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}{% else %}{% url 'public:journal:journal_logo' issue.journal.code %}{% endif %}">
 <meta name="twitter:description" content="{% blocktrans with journal=issue.journal.name|safe %}Consultez le sommaire de ce numéro de la revue {{ journal }} sur la plateforme Érudit.{% endblocktrans %} {% trans 'Discipline : ' %}{% for discipline in issue.journal.disciplines.all %}{{ discipline.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.">
@@ -142,7 +142,6 @@
     {% endfor %}
   </ol>
 
-  {% endif %}
   <p>
   {% for copyright in issue.erudit_object.droitsauteur %}
     <small>{{ copyright.text|safe }}</small>
@@ -159,7 +158,7 @@
   <p>{% trans "Diffusion numérique" %} : {{ issue.date_published }}</p>
   {% if issue.has_coverpage %}
   <div>
-    <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.html_title %}{{ issue.html_title|safe }}, {% endif %}
+    <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" class="img-responsive issue-cover" alt="{% trans 'Couverture de' %} {% if issue.title %}{{ issue.title|safe }}, {% endif %}
       {{ issue.volume_title_with_pages }} {{ journal.name }}" />
   </div>
   {% endif %}
@@ -183,24 +182,20 @@
         </a>
       </h3>
     </header>
-    <ul class="issue-list">
+    <div class="row">
       {% for published_issue in journal.published_issues|dictsortreversed:"year"|slice:":4" %}
       {% if published_issue != issue %}
-      <li class="issue-list--item col-xs-6 col-sm-3">
-        {% if issue.has_coverpage %}
-        <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-          <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="img-responsive" alt="{% trans 'Couverture représentant ' %}{% if published_issue.html_title %}{% trans 'la thématique ' %}{{ published_issue.html_title|safe }}{% else %}{% trans 'le ' %}{{ published_issue.volume_title }}{% endif %}" />
+      <article class="col-xs-6 col-sm-3">
+        <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" class="card">
+          {% if issue.has_coverpage %}
+          <img src="{% url 'public:journal:issue_coverpage' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}" alt="{% trans 'Couverture représentant ' %}{% if published_issue.title %}{% trans 'la thématique ' %}{{ published_issue.title|safe }}{% else %}{% trans 'le ' %}{{ published_issue.volume_title }}{% endif %}" class="img-responsive card__figure" />
+          {% endif %}
+          <h5 class="card__title">
+            <span>{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
+            {% if published_issue.html_title %}<br><span><strong>{{ published_issue.html_title|safe }}</strong></span>{% endif %}
+          </h5>
         </a>
-        {% endif %}
-        <div class="issue-list--title">
-          <a href="{% url 'public:journal:issue_detail' published_issue.journal.code published_issue.volume_slug published_issue.localidentifier %}">
-            <h5>
-              <span class="issue-list--volume">{% with title=published_issue.volume_title %}{{ title }}{% endwith %}</span>
-              {% if published_issue.html_title %}<span class="issue-list--theme"><strong>{{ published_issue.html_title|safe }}</strong></span>{% endif %}
-            </h5>
-          </a>
-        </div>
-      </li>
+      </article>
       {% endif %}
       {% endfor %}
     </ul>

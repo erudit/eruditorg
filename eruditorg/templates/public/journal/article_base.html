@@ -171,26 +171,25 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-{# article footer with related articles #}
 {% if related_articles %}
-<footer class="container related-articles">
+<footer class="container">
   <h2>{% trans "Autres articles de ce numéro" %}</h2>
-  <ul class="row">
+  <div class="row">
     {% for related_article in related_articles %}
     {% cache cache_timeout "public_article_detail_related_article" related_article.localidentifier LANGUAGE_CODE %}
-    <li class="related-article col-sm-6 col-md-3">
-      <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}">
-        <p class="related-article-title">{{ related_article|format_article_html_title }}</p>
-        {% if related_article.authors %}
-        <p class="related-article-authors">{% trans 'Par' %}
-          {% for author in related_article.authors %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{{ author.format_name }}{% endfor %}
+    <article class="col-sm-6 col-md-3">
+      <a href="{% url 'public:journal:article_detail' journal_code=related_article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=related_article.issue.localidentifier localid=related_article.localidentifier %}" class="card">
+        <h3 class="card__title">{{ related_article|format_article_html_title }}</h3>
+        {% if related_article.authors|length > 0 %}
+        <p class="card__metadata">{% trans 'Par' %}
+          {% for author in related_article.erudit_object.authors %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans 'et' %} {% else %}, {% endif %}{% endif %}{% if author.firstname and author.lastname %}{{ author.firstname }} {{ author.lastname }}{% elif author.othername %}{{ author.othername }}{% endif %}{% endfor %}
         </p>
         {% endif %}
       </a>
-    </li>
+    </article>
     {% endcache %}
     {% endfor %}
-  </ul>
+  </div>
 
 </footer>
 {% endif %}

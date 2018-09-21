@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+  <doc>
+    <field name="ID">000285li</field>
+    <field name="ISBNNum">978-2-9817251-0-3</field>
+    <field name="Corpus_fac">Livres</field>
+    <field name="AnneePublication">2018</field>
+    <field name="Fonds_fac">Érudit</field>
+    <field name="TypePublication_fac">Livres</field>
+    <field name="Titre_fr">Présentation des auteurs</field><!-- OU Titre_en OU Titre_es OU Titre_defaut (autre langue) -->
+    <field name="Auteur_fac"></field>
+    <field name="AuteurNP_fac"></field>
+    <field name="Auteur_tri"></field><!-- /!\ SEULEMENT POUR LE PREMIER AUTEUR -->
+    <field name="NumeroID">incantation2018</field>
+    <field name="TitreCollection_fac">Une littérature «&#x00A0;comme incantatoire&#x00A0;»</field>
+    <field name="TitreContexte_fac">Une littérature «&#x00A0;comme incantatoire&#x00A0;»&#x00A0;: aspects et échos de l’incantation en littérature (XIXe-XXIe siècle)</field>
+    <field name="Editeur">Presses françaises de l’Université de Toronto</field>
+    <field name="Annee">2018</field>
+    <field name="NombrePage">3</field>
+    <field name="PremierePage">189</field>
+    <field name="DernierePage">191</field>
+    <field name="URLDocument">http://www.erudit.org/livre/incantation/2018/000285li.pdf</field>
+    <field name="Langue">fr</field>
+    <field name="MIMEType">application/pdf</field>
+    <field name="TexteIntegral">Présentation des auteurs
+      Arnaud Bernadet
+      Arnaud Bernadet est Associate Professor au Département de langue et de littérature françaises de l’Université McGill. Ses travaux portent sur la théorie du langage et la théorie de la littérature, spécialement sur la poésie et le théâtre du XIXe au XXIe siècle. Il a publié « En sourdine, à ma manière ». Poétique de Verlaine (Classiques Garnier, 2014) et dirigé avec Bertrand Degott La corde bouffonne. De Banville à Apollinaire, Études françaises, nº51-3 (Presses universitaires de Montréal, 2015). Son dernier essai à paraître en 2018 chez Classiques Garnier s’intitule : La phrase continuée. Variations sur un trope théorique.
+      
+      Adrien Cavallaro
+      Agrégé de Lettres modernes, docteur ès lettres de l’Université Paris-Sorbonne, Adrien Cavallaro est spécialiste de la poésie du XIXe siècle et des questions de réception. Il a récemment soutenu une thèse intitulée « Rimbaud et le rimbaldisme. XIXe siècle-XXe siècle » qui explore toutes les modalités de réappropriation et les usages de l’œuvre rimbaldienne par les écrivains et critiques majeurs de la fin du XIXe siècle et du premier XXe siècle. Ses travaux portent principalement sur Rimbaud et sa réception, mais aussi sur Verlaine, ainsi que le surréalisme, en particulier Breton et Aragon. 
+      
+      Eric Chevrette
+      Eric Chevrette termine une thèse de doctorat au Département d’études françaises de l’Université de Toronto. Il y analyse les modalités éthiques, esthétiques et politiques de la mémoire chez Patrick Modiano, Annie Ernaux et J.M.G. Le Clézio. Plus largement, il s’intéresse aux relations entre philosophie et littérature dans les corpus contemporains français et québécois. Il a fait paraître un article sur l’« esth/éthique du maldicible » dans Dora Bruder de P. Modiano.
+      
+      Michela Gardini
+      Michela Gardini, docteur en recherches sur l’imaginaire de l’Université Stendhal de Grenoble (France), est professeur associé en littérature française à l’Université de Bergame (Italie). Elle est l’auteur de plusieurs essais et articles sur la littérature française moderne et contemporaine portant d’une part sur les rapports entre littérature et religion et les représentations du surnaturel, notamment en régime fin de siècle et, d’autre part, sur le rapport entre littérature et justice. Elle a publié en 2015 Joséphin Péladan. Esthétique, magie et politique (Paris, Classiques Garnier).
+      
+      Arnaud Maïsetti
+      Arnaud Maïsetti, agrégé de lettres modernes, docteur en études théâtrales, est maître de conférences en arts de la scène à l’Université Aix-Marseille (LESA, EA 3274). Ses travaux portent sur les scènes contemporaines et l’enjeu politique et lyrique de leur inscription dans l’Histoire. Auteur (récit, théâtre), il est également dramaturge pour la compagnie de théâtre La Controverse. Son dernier ouvrage est Bernard-Marie Koltès, une biographie (Minuit, 2018).
+      
+      Dominique Rabaté
+      Ancien élève de l’ENS, Dominique Rabaté, essayiste et critique, est professeur de littérature française du XXe siècle à l’Université Paris Diderot. Membre senior de l’Institut Universitaire de France, il dirige la revue Modernités, et deux collections chez Classiques Garnier. Il a écrit de nombreux livres : sur Louis-René des Forêts, Pascal Quignard, Marie NDiaye, sur le roman et le récit au XXe siècle, ou le sujet lyrique. Derniers titres parus : chez Corti, Le roman et le sens de la vie, en 2010, Gestes lyriques en 2013, et en 2015 Désirs de disparaître aux éditions Tangence au Québec. À paraître en 2018 chez Corti : La passion de l’impossible. Une histoire du récit au XXe siècle.
+      
+      Denis Saint-Amand
+      Denis Saint-Amand est maître de conférences invité à l’Université de Namur et titulaire, en 2017-2018, d’un mandat de chercheur CRSH à l’Université de Sherbrooke. Codirecteur des revues Parade sauvage et COnTEXTES, il coordonne également le projet Lexique Socius avec Anthony Glinoer (http://ressources-socius.info/). Il est l’auteur de La littérature à l’ombre. Sociologie du Zutisme (Classiques Garnier, 2012), Le dictionnaire détourné (PUR, 2013), La dynamique des groupes littéraires (dir. – PULg, 2016) et La préface. Formes et enjeux d’un discours d’escorte (dir. avec Marie-Pier Luneau – Classiques Garnier, 2016) et coéditeur d’une édition de l’Album zutique et des Dixains réalistes avec Daniel Grojnowski (GF, 2016).
+      
+      Patrick Thériault
+      Patrick Thériault est professeur de littérature française à l’Université de Toronto. Il assume actuellement la codirection de la revue spécialisée en études françaises Arborescences. Ses recherches portent principalement sur la modernité poétique et l'histoire des idées au XXe siècle.
+      Il a publié, entre autres travaux, Le (dé)montage impie de la Fiction : la révélation moderne de Mallarmé (Champion, 2010) et Composer avec la mort de Dieu : littérature et athéisme au XIXe siècle (codirigé avec J.-J. Hamm, Presses de l’Université Laval/Hermann, 2014).
+      
+      Nicolas Valazza
+      Nicolas Valazza est professeur agrégé de littérature française à l’université d’Indiana et correspondant pour les États-Unis de la Société des études romantiques et dix-neuviémistes. Ses recherches se concentrent, d’une part, sur les rapports entre littérature et peinture, et d’autre part sur l’édition de la poésie dans la seconde moitié du XIXe siècle. Son livre Crise de plume et souveraineté du pinceau. Écrire la peinture de Diderot à Proust a paru aux éditions Classiques Garnier en 2013. Il vient d’achever un nouveau livre, intitulé La Poésie délivrée. Le livre en question du Parnasse à Mallarmé, à paraître chez Droz en 2018.
+      
+      Myriam Watthee-Delmotte
+      Myriam Watthee-Delmotte est directrice de recherches du Fonds National de la Recherche Scientifique belge, professeur à l’Université catholique de Louvain, où elle a fondé le Centre de Recherche sur l’Imaginaire, et membre de l’Académie royale de Belgique (Classe des Lettres, Sciences morales et politiques). Elle est la Directrice scientifique du Fonds Henry Bauchau créé à Louvain-la-Neuve à l’initiative de l’écrivain, et l’auteur de la monographie Henry Bauchau sous l’éclat de la Sibylle (Actes Sud, 2013). Elle développe une approche anthropologique et sémiologique des représentations littéraires et analyse entre autres la littérature contemporaine en tant que vecteur de sacralisation (écritures et postures auctoriales). Son ouvrage Littérature et ritualité. Enjeux du rite dans la littérature française contemporaine (2010) a obtenu le Prix Emmanuel Vossaert. Elle pilote aussi à l’UCL un Pôle d’Attraction Interuniversitaire sur la littérature et les innovations médiatiques. 
+      
+      Seth Whidden
+      Ancien corédacteur de Parade sauvage, Seth Whidden est professeur de littérature française à l’Université d’Oxford (Queen’s College) et chercheur associé à l’IHRIM (Institut d’Histoire des Représentations et des Idées dans les Modernités). Rédacteur en chef de la revue scientifique Nineteenth-Century French Studies, il est l’auteur de nombreux articles et essais sur la littérature du dix-neuvième siècle, dont Authority in Crisis in French Literature (2014) et Leaving Parnassus: The Lyric Subject in Verlaine and Rimbaud (2007). Il a dirigé les ouvrages collectifs La poésie jubilatoire : Rimbaud, Verlaine et l’Album zutique (2010) et Models of Collaboration in Nineteenth-Century French Literature: Several Authors, One Pen (2009) et l’édition critique Poèmes choisis, suivis d’Essais critiques de Marie Krysinska (2013). Il termine actuellement une biographie de Rimbaud, qui devrait paraître aux éditions Reaktion Books. </field>
+  </doc>
+</add>

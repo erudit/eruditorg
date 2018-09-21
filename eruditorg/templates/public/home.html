@@ -69,6 +69,8 @@
             <div class="form-group">
               <label for="basic-search" class="h3">{% trans "Recherche" %}</label>
               <div class="input-group">
+                <input type="hidden" name="funds" value="Érudit">
+                <input type="hidden" name="funds" value="UNB">
                 <input name="basic_search_term" id="basic-search" type="search" class="form-control" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
                 <div class="input-group-addon">
                   <button type="submit" class="btn">
@@ -91,7 +93,13 @@
               <h3><a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a></h3>
             </li>
             <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
-              <h3><a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a></h3>
+              <h3>
+                {% flag "BOOKS" %}
+                <a href="{% url 'public:book:home' %}" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
+                {% else %}
+                <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
+                {% endflag %}
+              </h3>
             </li>
             <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
               <h3><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a></h3>

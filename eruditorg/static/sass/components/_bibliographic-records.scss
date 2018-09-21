@@ -22,10 +22,6 @@
   list-style: none;
   border-bottom: 1px solid $mid-grey;
 
-  &:first-child {
-    border-top: 1px solid $mid-grey;
-  }
-
   &:last-child {
     border-bottom: none;
   }
@@ -46,6 +42,11 @@
   line-height: 1.25;
   letter-spacing: normal;
   @include font-styles(serif);
+
+  span + span {
+    display: block;
+    color: $dark-grey;
+  }
 }
 
 .bib-record__counter:before {

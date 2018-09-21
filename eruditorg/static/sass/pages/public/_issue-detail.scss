@@ -85,52 +85,6 @@
   .back-issues {
     background: $light-grey;
     padding: 75px 0;
-
-    .back-issues--header {
-      font-size: 1.25em;
-      padding-top: $margin-vertical-default;
-      padding-bottom: $margin-vertical-default;
-    }
-
-    .issue-list--item img {
-      height: 175px;
-    }
-
-    .issue-list {
-      margin: 0;
-      list-style: none;
-    }
-
-    .issue-list--title {
-      margin-top: 1em;
-
-      h5 {
-        margin: 0;
-        line-height: 1.25;
-
-        > span {
-          display: block;
-
-        }
-
-      }
-
-      a {
-        border-top: 1px solid $mid-grey;
-        padding: 1em 0.25em;
-        display: block;
-
-        &:hover, &:focus, &:active, &:active:focus {
-          background: $coral-red;
-          color: #FFF;
-          text-decoration: none;
-          border-color: $coral-red;
-        }
-
-      }
-
-    }
-
   }
 
 }
