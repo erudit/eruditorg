@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "20 ans d’Érudit" %}{% endblock title %}
+
+{% block meta_description %}{% blocktrans %}20 ans d’Érudit{% endblocktrans %}{% endblock meta_description %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}",
+      "name": "Érudit"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "{{ request.scheme }}://{{ request.site.domain }}{% url 'public:brand_assets' %}",
+      "name": "{% trans '20 ans d’Érudit' %}"
+    }
+  }]
+}
+</script>
+{% endblock structured_data %}
+
+{% block content %}
+<main role="main" class="container">
+  <section class="row">
+    <h2 class="col-sm-4">Mot de l’équipe</h2>
+    <div class="col-sm-8 col-md-6">
+      <p>Érudit célèbre cet automne ses 20 ans. </p>
+      <p>20 ans, c’est un âge vénérable dans le numérique, un secteur où les choses évoluent à un rythme effréné. Érudit est pourtant en pleine forme, plus dynamique que jamais.</p>
+      <p>20 ans durant, nous avons consacré toute notre énergie à notre mission&nbsp;: la libre diffusion des connaissances pour toutes et tous.</p>
+      <p>20 ans durant, notre équipe a travaillé avec plus de 200 revues savantes et culturelles pour les diffuser à travers le monde, grâce à la collaboration de centaines de centres de recherche, de presses universitaires, de bibliothèques et d’autres institutions de diffusion du savoir.</p>
+      <p>À l’occasion de cet anniversaire, nous vous invitons à découvrir un bref historique de notre organisme, et les grands projets en cours qui constitueront les bases d’un écosystème de la publication scientifique encore plus riche et plus équitable pour les années à venir.</p>
+      <p>Bonne lecture&nbsp;!</p>
+      <p>&ndash; L’équipe d’Érudit</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <h2 class="col-sm-4">Historique</h2>
+    <div class="col-sm-8 col-md-7 col-lg-6">
+      <ul>
+        <li>
+          <h3>1996&ndash;1997 <br/>Projet pilote</h3>
+          <p>L’ancêtre d’Érudit est créé par les Presses de l’Université de Montréal (PUM) afin d’accompagner cinq revues savantes vers le numérique&nbsp;: <a href="https://web.archive.org/web/19991013211916/http://www.erudit.org:80/erudit/gpq/index.html" target="_blank">Géographie physique et Quaternaire</a>, <a href="https://web.archive.org/web/19990502024927/http://www.erudit.org:80/erudit/meta/index.html" target="_blank">Meta</a>, <a href="https://web.archive.org/web/19991001094723/http://www.erudit.org:80/erudit/ri/index.html" target="_blank">Relations Industrielles&nbsp;/ Industrial Relations</a>, <a href="https://web.archive.org/web/19990428135922/http://www.erudit.org:80/erudit/haf/index.html" target="_blank">Revue d’histoire de l’Amérique française</a> et <a href="https://web.archive.org/web/19991004202426/http://www.erudit.org:80/erudit/socsoc/index.html" target="_blank">Sociologie et Sociétés</a>. Le projet est lancé par Gérard Boismenu, alors directeur scientifique des PUM, et Guylaine Beaudry, alors récemment diplômée de la maîtrise à l’École de bibliothéconomie et des sciences de l’information.</p>
+          <p>Les revues sont produites en format SGML (<em>Standard Generalized Markup Language</em>), l’un des premiers langages qui permettent de décrire un document numérique à l’aide de balises.</p>
+          <figure>
+            <img src="{% static 'img/20years/1.jpg' %}" class="img-responsive"/>
+          </figure>
+        </li>
+
+        <li>
+          <h3>1998 <br/>1<sup>re</sup> plateforme</h3>
+          <p>La première version de la plateforme est enfin en ligne&nbsp;!</p>
+          <p>Les internautes à travers le monde peuvent y consulter gratuitement les derniers articles parus dans ces cinq revues savantes. La plateforme diffuse également <a href="https://pum.umontreal.ca/revues/surfaces/" target="_blank">Surfaces</a>, l’une des toutes premières revues scientifiques francophones entièrement numériques, dirigée par Jean-Claude Guédon, professeur de littérature à l’Université de Montréal qui a largement contribué à l’internet libre.</p>
+          <figure>
+            <img src="{% static 'img/20years/2.png' %}" class="img-responsive"/>
+          </figure>
+          <h4>La même année</h4>
+          <p>Création de <a href="https://www.scielo.org/php/index.php?lang=en" target="_blank">SciELO</a>, qui est aujourd’hui la principale plateforme non commerciale de diffusion numérique pour les revues savantes d’Amérique du Sud, avec plus de 1500 revues diffusées.</p>
+        </li>
+
+        <li>
+          <h3>1999 <br/>Diffusion des archives de revues</h3>
+          <p>Les articles en sciences humaines et sociales ont une longue durée de vie et sont toujours utiles pour les chercheurs, même plusieurs dizaines d’années après leur publication. C’est pourquoi Érudit entame la numérisation et la diffusion de numéros d’archives avec deux revues scientifiques historiques issues du monde francophone&nbsp;: Meta (fondée en 1966) et Sociologie et sociétés (1969).</p>
+          <figure>
+            <img src="{% static 'img/20years/3.png' %}" class="img-responsive"/>
+          </figure>
+          <h4>La même année</h4>
+          <p>Le moteur de recherche Google, lancé à l’automne 1998, dépasse les 3 millions de requêtes par jour et devient l’un des premiers sites consultés dans le monde.</p>
+        </li>
+
+        <li>
+          <h3>2000 <br/>Pilotage interuniversitaire</h3>
+          <p>Devant la demande de la communauté universitaire canadienne pour des services d’édition numérique, un Groupe interuniversitaire pour l’édition numérique est mis en place afin de piloter Érudit. Il comprend des instances de l’Université de Montréal, de l’Université Laval, de l’Université du Québec à Montréal et du Réseau d’informations scientifiques du Québec (RISQ). Ce groupe sera à l’origine de la fondation du Consortium Érudit en 2004.</p>
+        </li>
+
+        <li>
+          <h3>2001 <br/>2<sup>e</sup> version de la plateforme</h3>
+          <p>Cette nouvelle version nous a permis de diffuser d’autres types de contenus en format numérique (livres, prépublications et thèses). La plateforme comprend à l’époque 6&nbsp;000 documents numériques, tous disponibles en libre accès.</p>
+          <figure>
+            <img src="{% static 'img/20years/4.png' %}" class="img-responsive"/>
+          </figure>
+        </li>
+
+        <li>
+          <h3>2004 <br/>Mise en place du Consortium</h3>
+          <p>Afin d’être plus représentatif de sa mission, Érudit devient un consortium comprenant l’Université de Montréal, l’Université Laval et l’Université du Québec à Montréal. La plateforme devient également le lieu de diffusion des revues soutenues par le Fonds de recherche du Québec.</p>
+          <p>29 revues supplémentaires sont diffusées&nbsp;: <em>Anthropologie et sociétés</em>, <em>Cinémas</em>, <em>Phytoprotection</em>, <em>Théologiques</em> et <em>Voix et images</em>, pour ne citer que quelques exemples.</p>
+          <h4>L’année précédente (2003)</h4>
+          <p>En 2003, la <a href="https://openaccess.mpg.de/68042/BerlinDeclaration_wsis_fr.pdf" target="_blank">Déclaration de Berlin</a> sur le Libre Accès à la connaissance est signé par plus de 400 responsables d’universités dans le monde, qui s’engagent ainsi à promouvoir le libre accès à la connaissance.</p>
+        </li>
+
+        <li>
+          <h3>2006 <br/>Début de la commercialisation</h3>
+          <p>La majorité des revues, qui voient la vente de leurs exemplaires imprimés diminuer, demandent à mettre en place un abonnement numérique sur Érudit pour compenser cette perte financière. L’accès aux articles des numéros publiés au cours des deux dernières années se voit limité aux institutions abonnées, tandis que l’ensemble des archives demeure en libre accès.</p>
+        </li>
+
+        <li>
+          <h3>2008 <br/>3<sup>e</sup> version de la plateforme</h3>
+          <p>Les consultations de la plateforme, notamment de l’extérieur du Canada, deviennent de plus en plus importantes. Une nouvelle version, qui comprend une interface trilingue (français, anglais et espagnol) et de nouvelles fonctionnalités (exportation de notices, recherche avancée, etc.), est mise en ligne.</p>
+          <figure>
+            <img src="{% static 'img/20years/5.png' %}" class="img-responsive"/>
+          </figure>
+        </li>
+
+        <li>
+          <h3>2010 <br/>Arrivée des revues culturelles</h3>
+          <p>Un projet de numérisation rétrospective des revues culturelles membres de la Société de développement des périodiques culturels québécois (SODEP) est lancé. 250&nbsp;000 pages sont numérisées et plus de 60&nbsp;000 articles sont mis en ligne grâce à une subvention accordée par Patrimoine canadien à la SODEP.</p>
+          <figure>
+            <img src="{% static 'img/20years/6.png' %}" class="img-responsive"/>
+          </figure>
+          <h4>L’année suivante (2011)</h4>
+          <p>Lancement du portail <a href="https://www.openedition.org/" target="_blank">OpenEdition</a> qui regroupe les 3 plateformes&nbsp;: Revues.org, Calenda et Hypothèses.</p>
+        </li>
+
+        <li>
+          <h3>2013 <br/>Consolidation de la zone Thèses</h3>
+          <p>Érudit moissonne gratuitement les métadonnées des dépôts de thèses des bibliothèques universitaires canadiennes afin de valoriser leurs contenus. En 2013, avec l’arrivée de plusieurs nouvelles universités (UQAM, UQAT, UQTR, UQAC), ce sont plus de 55&nbsp;000 thèses et mémoires qui sont référencés.</p>
+        </li>
+
+        <li>
+          <h3>2015 <br/>Partenariat pour le libre accès</h3>
+          <p>En association avec le Réseau canadien de documentation pour la recherche, Érudit met en place son premier <a href="https://erudit.squarespace.com/accueil" target="_blank">Partenariat pour le libre accès</a>, réunissant 107 revues canadiennes et 53 bibliothèques universitaires. Autre fait marquant, la plateforme Érudit est maintenant reconnue comme une <a href="https://apropos.erudit.org/fr/investissement-de-14-million-dans-la-plateforme-erudit-par-la-fondation-canadienne-pour-linnovation/" target="_blank">Initiative scientifique majeure</a> par la Fondation canadienne pour l’innovation.</p>
+          <figure>
+            <img src="{% static 'img/20years/7.png' %}" class="img-responsive"/>
+          </figure>
+        </li>
+
+        <li>
+          <h3>2016 <br/>Création de CO.SHS</h3>
+          <p>Financée par la Fondation Canadienne pour l’innovation et dirigée par le professeur Vincent Larivière (Université de Montréal), la <a href="https://co-shs.ca/fr/" target="_blank">Cyberinfrastructure ouverte pour les sciences humaines et sociales</a> (CO.SHS) est une initiative nationale de recherche en sciences humaines et sociales et en arts et lettres qui vise à soutenir la découverte d’information, l’exploration de vastes corpus de données textuelles et la production de nouveaux résultats de recherche. Le projet est issu d’une collaboration entre Érudit, plusieurs équipes multidisciplinaires de recherche et différentes institutions documentaires au pays et à l’international.</p>
+          <figure>
+            <img src="{% static 'img/20years/8.png' %}" class="img-responsive"/>
+          </figure>
+          <h4>La même année</h4>
+          <p>Les Bibliothèques de l’Université de Montréal prennent la décision de <a href="http://www.bib.umontreal.ca/communiques/20160505-DC-annulation-springer.htm" target="_blank">déconstruir leurs entente concernants les grands ensembles de revues commercialisés avec leurs éditeurs commerciaux</a>.</p>
+        </li>
+
+        <li>
+          <h3>2017 <br/>4<sup>e</sup> version de la plateforme</h3>
+          <p>Une nouvelle version de la plateforme Érudit a été instaurée afin d’améliorer l’expérience de lecture, d’optimiser la diffusion et le référencement des documents, et de prévoir l’arrivée de nouveaux services.</p>
+          <figure>
+            <img src="{% static 'img/20years/9fr.png' %}" class="img-responsive"/>
+          </figure>
+          <h4>L’année suivante (2018)</h4>
+          <p>L’<a href="https://jussieucall.org/#call" target="_blank">Appel de Jussieu</a> pour la Science ouverte et la bibliodiversité est signé par plusieurs dizaines d’institutions et acteurs majeurs de l’édition scientifique.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row">
+    <h2 class="col-sm-4">Aujourd’hui</h2>
+    <p class="col-sm-8 col-md-7 col-lg-6">Érudit diffuse et préserve 206 revues scientifiques et culturelles, ce qui représente 210 000 articles. Plus de 21 millions de pages vues sont enregistrées chaque année sur la plateforme &ndash; et ce, grâce à un bassin d’utilisateur.trice.s provenant de plus de 85 pays différents &ndash; et 1 100 ententes partenariales ou commerciales avec des institutions documentaires à travers le monde ont été établies.</p>
+    <ul>
+      <li class="col-sm-4">
+        <h3>Volet recherche et développement stratégique</h3>
+        <p>Avec la création d’une direction scientifique assurée par le professeur Vincent Larivière en 2015 et d’un comité scientifique en 2017, Érudit bénéficie maintenant de l’expertise de nombreux.ses acteur.trice.s du milieu de la recherche au Québec et au Canada, qui participent à la définition des grandes orientations stratégiques d’Érudit et à la réflexion sur les enjeux qui concernent les revues en sciences humaines et sociales. C’est aussi dans ce contexte que nous développons de nouveaux services aux chercheur.e.s dans le cadre de CO.SHS.</p>
+        <p>--> <a href="https://co-shs.ca/fr/" target="_blank">En savoir plus</a></p>
+        <p>--> <a href="https://apropos.erudit.org/fr/chercheurs/activites-de-recherche/" target="_blank">Sur nos activités de recherche</a></p>
+      </li>
+
+      <li class="col-sm-4">
+        <h3>Le <em>Partenariat pour le libre accès</em></h3>
+        <p>Le <em>Partenariat pour le libre accès</em> est un modèle économique innovant de collaboration entre les bibliothèques universitaires et les revues savantes dans un contexte de transition vers le libre accès. Il est actuellement soutenu par 90 institutions à travers le monde, en collaboration avec des consortiums du Canada, de la France et de la Belgique. Nous travaillons actuellement à développer le <em>Partenariat</em> en Europe, notamment au Royaume-Uni avec l’organisme JISC.</p>
+        <p>--> <a href="https://partnership.erudit.org/accueil" target="_blank">En savoir plus</a></p>
+      </li>
+
+      <li class="col-sm-4">
+        <h3>Coalition Publi.ca</h3>
+        <p>Érudit et l’organisme Public Knowledge Project se sont associés pour lancer Coalition Publi.ca au printemps 2017, un partenariat stratégique pancanadien. L’un des objectifs principaux de cette initiative est de présenter une offre de services complète aux revues savantes canadiennes, francophones et anglophones, en collaboration avec l’ensemble des acteurs du milieu de la diffusion scientifique.</p>
+        <p>Coalition Publi.ca s’inscrit dans le mouvement international de redéfinition des rapports de forces dans le milieu pour soutenir la circulation libre des savoirs, la bibliodiversité, et le développement d’outils en code source ouvert.</p>
+        <p>--> <a href="https://www.coalition-publi.ca/le-projet/" target="_blank">En savoir plus</a></p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="row">
+    <h2 class="col-sm-4">Citations</h2>
+    <div class="col-sm-8 col-md-7 col-lg-6">
+      <blockquote><p>Partenaires de longue date d’Érudit, les Fonds de recherche du Québec reconnaissent l’importance d’offrir à la communauté scientifique un outil unique et performant en matière de publication savante en ligne. Cette plateforme numérique de pointe fait rayonner nos publications en sciences sociales et humaines, en arts et en lettres dans la Francophonie.</p></blockquote>
+      <cite>Rémi Quirion, scientifique en chef du Québec</cite>
+
+      <blockquote><p>Grâce à Érudit, nous avons assisté ces deux dernières décennies à un accès sans précédent à la production canadienne en sciences humaines et sociales. Érudit a su miser sur des partenariats dans le monde de la recherche, de l’édition, des universités, des bibliothèques, pour bâtir ce qui est devenu aujourd’hui une plateforme incontournable.</p></blockquote>
+      <cite>Guy Berthiaume, Bibliothécaire et archiviste du Canada</cite>
+
+      <blockquote><p>Pour l’ACS, les 20 ans d’Érudit, c’est 20 ans à enrichir la culture scientifique de la population québécoise par une diffusion plus étendue de la recherche en sciences humaines et sociales. Félicitations à toute l’équipe d’Érudit pour son travail innovant et merci d’être un fidèle partenaire de notre association.</p></blockquote>
+      <cite>Sophie Montreuil, Directrice générale, Association des communicateurs scientifiques du Québec</cite>
+
+      <blockquote><p>Tout bibliothécaire travaillant dans une bibliothèque universitaire valorise la documentation de qualité auprès des étudiants. Dans le domaine des arts, des lettres, des sciences humaines et sociales, Érudit est devenue une ressource incontournable pour la recherche en ligne d’articles de revues scientifiques québécoises en langue française dont plusieurs sont en libre accès.</p></blockquote>
+      <cite>Aminata Keita, Bibliothécaire, Université de Montréal</cite>
+
+      <blockquote><p>Sans Érudit, la revue Santé mentale au Québec ne serait pas là où elle en est aujourd’hui. Le support indéfectible dont nous avons joui lors de notre transition vers le libre accès est inestimable. Érudit : une collaboration chaleureuse, humaine et hyperprofessionnelle.</p></blockquote>
+      <cite>Jean-Marie Bioteau, rédacteur adjoint, revue Santé mentale au Québec</cite>
+
+      <blockquote><p>Vingt ans déjà que les fondateurs d’Érudit ont trouvé la clé pour libérer le savoir accumulé dans les revues savantes et le rendre ainsi accessible à toute personne curieuse. Érudit contribue de manière essentielle à remettre dans le domaine public un savoir essentiellement produit grâce à des fonds publics. Longue vie à Érudit&nbsp;!</p></blockquote>
+      <cite>Yves Gingras, directeur de la Chaire de recherche du Canada en histoire et sociologie des sciences</cite>
+
+      <blockquote><p>Érudit rend accessible notre mémoire collective.</p></blockquote>
+      <cite>L’équipe de la revue Liberté</cite>
+
+      <blockquote><p>Je salue la vision, la compétence et la détermination d’Érudit, qui a développé au cours des vingt dernières années une plateforme de diffusion exceptionnelle dans les domaines des sciences humaines et sociales, des arts et des lettres. Le FRQSC est fier de s’associer à ces travaux, et souhaite étendre encore nos collaborations. Bravo et bon vent pour les vingt prochaines années.</p></blockquote>
+      <cite>Louise Poissant, Directrice scientifique, Fonds de recherche du Québec – Société et culture</cite>
+
+      <blockquote><p>Études internationales est entièrement diffusée par Érudit depuis 2009. Nous n’avons eu qu’à nous féliciter de cette entreprise, car Érudit fournit un service hors pair en matière de construction de métadonnées (compétences technologiques inaccessibles aux éditeurs de revue) et de diffusion (déploiement de stratégies commerciales tout aussi inaccessibles). Ces services, en plus des efforts incessants du consortium pour aider les revues dans leur transition vers le libre accès, rendent Érudit incontournable pour Études internationales. Nous en avons pleinement conscience et l’apprécions énormément&nbsp;!</p></blockquote>
+      <cite>Pauline Curien, Rédactrice de la revue Études internationales</cite>
+
+      <blockquote><p>Érudit a commencé avec deux revues, une de géologie du quaternaire, et la revue Surfaces, purement électronique, que j’avais lancée en 1991 avec l’aide de Bill Readings. Sur le plan de la publication électronique, Érudit a ouvert beaucoup de chemins, et je salue bas ce succès. Sur le plan de l’accès libre, ce fut plus long, mais, petit à petit, Érudit a trouvé le moyen de se réorienter dans cette direction. Je l’en félicite, ainsi que ses têtes pensantes. Il reste encore beaucoup à faire, mais le monde francophone, désormais, dispose de deux plateformes non commerciales de taille significative, et Érudit est l’une d’entre elles.</p></blockquote>
+      <cite>Jean-Claude Guédon, Expert pour l’UNESCO sur le libre accès non commercial</cite>
+
+      <blockquote><p>Le partenariat du Laval théologique et philosophique (LTP) avec Érudit a permis une croissance constante des abonnements institutionnels à la version électronique de la revue. Par son appui, Érudit offre au LTP une plus grande visibilité. Merci et félicitations pour les vingt ans d’existence d’Érudit&nbsp;!</p></blockquote>
+      <cite>Guy Jobin, Directeur de la revue Laval théologique et philosophique, Université Laval</cite>
+
+      <blockquote><p>Érudit est une plateforme incontournable pour l’accessibilité au savoir francophone en sciences humaines et sociales. Je m’y rends régulièrement pour des revues dans mon domaine en sciences de l’information ou en gestion. Et c’est avec plaisir que je découvre dans la lettre d’information mensuelle des articles dans d’autres disciplines. Érudit ouvre les horizons et stimule la curiosité&nbsp;!</p></blockquote>
+      <cite>Elsa Drevon, Doctorante en sciences de l’information, Université de Montréal</cite>
+
+      <blockquote><p>L’accès à l’information est fondamental dans le monde d’aujourd’hui. C’est ce qu’offre Érudit&nbsp;: un accès à l’information, mais pas n’importe laquelle… de l’information validée dans le domaine de la recherche avec les revues scientifiques (information validée par les pairs) et dans le domaine culturel avec les revues de la SODEP. Et le tout au bout d’un clic&nbsp;!</p></blockquote>
+      <cite>Daniel Marquis, bibliothécaire professionnel, Cégep de Granby</cite>
+
+      <blockquote><p>La plateforme Érudit nous a permis de rejoindre l’ensemble des professionnels et professionnelles de l’information aux quatre coins du globe. Nous pouvons maintenant «&nbsp;cultiver notre savoir&nbsp;» en bibliothéconomie partout sur la planète&nbsp;!</p></blockquote>
+      <cite>Lionel Villalonga, directeur général de l’Association pour l’avancement des sciences et des techniques de la documentation (ASTED)</cite>
+    </div>
+  </section>
+
+  <section class="row">
+    <h2 class="col-sm-4">Sur le libre accès</h2>
+    <div class="col-sm-8 col-md-7 col-lg-6">
+      <ol>
+        <li>Paquin, É. (2013). Les modèles économiques de l’accès libre&nbsp;: réflexions à partir de l’expérience d’Érudit. <em>Documentation et bibliothèques</em>, <em>59</em>(3), 155–160. <a href="https://doi.org/10.7202/1018845ar" target="_blank">https://doi.org/10.7202/1018845ar</a></li>
+        <li>Allnutt, V. & Goulet, M. (2015). Libre accès&nbsp;: vers une science plus ouverte. <em>Documentation et bibliothèques</em>, <em>61</em>(1), 3–5. <a href="https://doi.org/10.7202/1028998ar" target="_blank">https://doi.org/10.7202/1028998ar</a></li>
+        <li>Bernatchez, J. (2015). Le libre accès aux articles scientifiques&nbsp;: référentiels, principes, normes et modalités. <em>Documentation et bibliothèques</em>, <em>61</em>(1), 6–14. <a href="https://doi.org/10.7202/1028999ar" target="_blank">https://doi.org/10.7202/1028999ar</a></li>
+        <li>Cameron-Pesant, S., Sainte-Marie, M., Jansen, Y. & Larivière, V. (2018). Criminologie à portée de clic&nbsp;: analyse de l’usage de la revue numérique. <em>Criminologie</em>, <em>51</em>(1), 111–142. <a href="https://doi.org/10.7202/1045310ar" target="_blank">https://doi.org/10.7202/1045310ar</a></li>
+        <li>Rolfe, V. (2017). Striving Toward Openness: But What Do We Really Mean? <em>International Review of Research in Open and Distributed Learning</em>, <em>18</em>(7). <a href="https://doi.org/10.19173/irrodl.v18i7.3207" target="_blank">https://doi.org/10.19173/irrodl.v18i7.3207</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="row">
+    <h2 class="col-sm-4">Partenaires</h2>
+    <div class="col-sm-8 col-md-7 col-lg-6">
+      <section class="row">
+        <h3 class="sr-only">Universitaires</h3>
+        <figure class="col-xs-4">
+          <img src="{% static 'img/20years/logo-udem.png' %}" class="img-responsive" alt="Logo de l’Université de Montréal"/>
+        </figure>
+        <figure class="col-xs-4">
+          <img src="{% static 'img/20years/logo-ulaval.png' %}" class="img-responsive" alt="Logo de l’Université Laval"/>
+        </figure>
+        <figure class="col-xs-4">
+          <img src="{% static 'img/20years/logo-uqam.png' %}" class="img-responsive" alt="Logo de l’UQAM"/>
+        </figure>
+      </section>
+      <section class="row">
+        <h3 class="sr-only">Autres</h3>
+        <figure class="col-xs-6">
+          <img src="{% static 'img/20years/logo-frq.png' %}" class="img-responsive" alt="Logo du Fonds de recherche du Québec"/>
+        </figure>
+        <figure class="col-xs-6">
+          <img src="{% static 'img/20years/logo-cfi.jpg' %}" class="img-responsive" alt="Logo de la Fondation canadienne pour l’Innovation"/>
+        </figure>
+      </section>
+    </div>
+  </section>
+
+</main>
+{% endblock content %}
