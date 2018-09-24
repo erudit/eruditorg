@@ -151,7 +151,8 @@ urlpatterns = [
         permanent=True
     )),
     url(r'^(?:(?P<lang>[\w-]{2})/)?', include([
-        url(r'^index.html?$', RedirectRetroUrls.as_view(pattern_name='home', permanent=True)),
+        url(r'^index.html?$', RedirectRetroUrls.as_view(pattern_name='public:home',
+                                                        permanent=True)),
         url(r'^revue/?$', RedirectRetroUrls.as_view(
             pattern_name='public:journal:journal_list',
             permanent=True)),
