@@ -26,7 +26,7 @@ django-isbn-field==0.5.2
 django-js-reverse==0.8.2
 django-modeltranslation==0.12.2
 django-polymorphic==1.3.1
-django-post-office==3.1.0
+django-post-office==3.0.4
 django-redis==4.7.0
 django-taggit==0.23.0
 django-waffle==0.14.0
@@ -50,9 +50,9 @@ pdfrw==0.4                # via weasyprint
 pillow==5.2.0
 ply==3.11
 progressbar2==3.38.0      # via eulfedora
-pycparser==2.18           # via cffi
+pycparser==2.19           # via cffi
 pycrypto==2.6.1           # via eulfedora
-pyparsing==2.2.0          # via rdflib
+pyparsing==2.2.1          # via rdflib
 pypdf2==1.25.1
 pyphen==0.9.5             # via weasyprint
 pysocks==1.6.8            # via requests
@@ -69,7 +69,7 @@ requests[socks]==2.18.4
 rules==2.0
 sickle==0.6.3
 simplejson==3.16.0
-six==1.11.0               # via django-isbn-field, eulfedora, html5lib, influxdb, isodate, progressbar2, python-dateutil, python-utils, structlog
+six==1.11.0               # via django-isbn-field, eulfedora, html5lib, influxdb, isodate, progressbar2, python-dateutil, python-utils, six, structlog
 sqlparse==0.2.4
 structlog==18.2.0
 suds-py3==1.3.3.0
