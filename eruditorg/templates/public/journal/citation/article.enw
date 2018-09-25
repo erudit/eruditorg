@@ -4,10 +4,11 @@
 {% spaceless %}{% for author in article.authors %}
 {% if author.firstname and author.lastname %}%A {{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}%A {{ author.othername|safe }}{% endif %}
 {% endfor %}{% endspaceless %}
-%J {{ article.issue.journal.name }}
+%J {{ article.issue.journal.name|safe }}
 %V {% if article.issue.volume %}{{ article.issue.volume }}{% endif %}
 %N {% if article.issue.number %}{{ article.issue.number }}{% endif %}
 %P {% if article.first_page and article.last_page %}{{ article.first_page }}-{{ article.last_page }}{% endif %}
 %@ {{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}
 %D {{ article.issue.year }}
-%I {{ article.publisher_name }}
+%I {{ article.publisher_name|safe }}
+%R {% if article.doi %}{{ article.doi }}{% endif %}
