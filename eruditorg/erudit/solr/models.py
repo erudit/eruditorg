@@ -213,6 +213,11 @@ def get_all_articles(rows, page):
     return [a for a in result if a is not None]
 
 
+def get_total_number_of_articles():
+    query = 'Fonds_fac:Érudit Corpus_fac:Article'
+    return client.search(query).hits
+
+
 def get_solr_data_from_id(solr_id):
     results = client.search(q='ID:"{}"'.format(solr_escape(solr_id)))
     if not results.hits:

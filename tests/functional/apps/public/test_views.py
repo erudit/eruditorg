@@ -7,7 +7,10 @@ from django.core.urlresolvers import reverse
 from django.test import Client
 from django.test.utils import override_settings
 
-from erudit.test.factories import IssueFactory
+from erudit.test.factories import (
+    IssueFactory,
+    ArticleFactory,
+)
 from erudit.test.factories import JournalFactory
 from django.test import TestCase
 
@@ -60,3 +63,17 @@ class TestHomeView(TestCase):
         response = Client().get(url)
         # Check
         self.assertEqual(response.status_code, 200)
+
+    def test_sitemaps(self):
+        journal = JournalFactory()
+        issues = IssueFactory.create_batch(100, journal=journal)
+        for issue in issues:
+            ArticleFactory.create_batch(11, issue=issue,
+                                        solr_attrs={'DateAjoutIndex': '2018-09-21T20:16:50.149Z'})
+        url = reverse('sitemaps', kwargs={'section': 'article'})
+        response = Client().get(url)
+        self.assertEqual(response.status_code, 200)
+        url = reverse('sitemap')
+        response = Client().get(url)
+        self.assertEqual(response.status_code, 200)
+
