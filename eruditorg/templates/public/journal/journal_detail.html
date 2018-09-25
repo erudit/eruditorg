@@ -152,7 +152,7 @@
     </section>
 
     {% if issues %}
-    <section role="tabpanel" class="tab-pane journal-info-block" id="back-issues">
+    <section role="tabpanel" class="tab-pane" id="back-issues">
       {% cache LONG_TTL "public_journal_detail_issues" journal.id content_access_granted LANGUAGE_CODE %}
       <h2>{% trans "Historique de la revue" %} ({{ issues|length }}&nbsp;{% trans "numéros" %})</h2>
       {% if journal.collection.code == 'erudit' %}
@@ -164,27 +164,25 @@
         </p>
       </div>
       {% endif %}
-      <div class="row">
-        {% regroup issues|dictsortreversed:"year" by year as year_list %}
-        <ul class="year-list col-xs-12">
-          {% for year in year_list %}
-          <li class="year-list--item"><h4>{{ year.grouper }}</h4>
-            <ul class="issue-list">
-              {% for issue in year.list %}
-              {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
-              <li class="issue-list--item">
-                <a {{ issue.extra.detail_link_attrs }}>
-                  {% if issue.extra.is_locked %}<ion-icon name="ios-lock"></ion-icon>&nbsp;{% endif %}<span class="issue-list--volume">{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
-                  {% if issue.html_title %}<br/><span class="issue-list--theme">{{ issue.html_title|safe }}</span>{% endif %}
-                </a>
-              </li>
-              {% endcache %}
-              {% endfor %}
-            </ul>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
+      {% regroup issues|dictsortreversed:"year" by year as year_list %}
+      <ul class="year-list">
+        {% for year in year_list %}
+        <li class="year-list__item"><h3 class="year-list__title">{{ year.grouper }}</h3>
+          <ul class="issue-list">
+            {% for issue in year.list %}
+            {% cache FOREVER_TTL "public_journal_detail_issues_item" issue.id content_access_granted LANGUAGE_CODE %}
+            <li class="issue-list__item">
+              <a {{ issue.extra.detail_link_attrs }}>
+                {% if issue.extra.is_locked %}<ion-icon name="ios-lock"></ion-icon>&nbsp;{% endif %}<span>{% with title=issue.volume_title %}{{ title }}{% endwith %}</span>
+                {% if issue.html_title %}<br/><span class="issue-list__theme">{{ issue.html_title|safe }}</span>{% endif %}
+              </a>
+            </li>
+            {% endcache %}
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
       {% if issues|length > 50 %}
       <div class="text-center">
         <a href="#back-issues" class="scroll-issues" title="{% trans 'Retourner en haut' %}">|^</a>

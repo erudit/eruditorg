@@ -28,13 +28,6 @@
     }
   }
 
-  .journal-history {
-    font-size: smaller;
-    color: $dark-grey;
-    margin: 0.5em 0;
-  }
-
-
 
   /**
   * About section
@@ -64,54 +57,48 @@
   /**
   * Back issues section
   */
-  .year-list {
-    list-style: none;
-    margin: 0;
 
-    .year-list--item {
-      margin-bottom: 0;
-      padding: 0 0 2.5em 0.5em;
-      line-height: 1.15;
-      border-left: 1px solid $mid-grey;
-      @include column-break-inside(avoid);
-
-      h4 {
-        @include fw-mono;
-        margin-bottom: 0.25em;
-        padding-bottom: 0.25em;
-      }
-
-    }
-
+  #back-issues h2 {
+    font-size: 1em;
   }
 
-  .issue-list {
+  .year-list, .issue-list {
     list-style: none;
     margin: 0;
+  }
 
-    .issue-list--item {
-      margin: 0;
+  .year-list__item {
+    margin: 0 0 2em 0;
+    line-height: 1.15;
+    @include column-break-inside(avoid);
+  }
 
-      a {
-        font-size: smaller;
-        padding: 0.35em 0;
-        display: block;
-        @include transition(padding 0.15s ease-in);
+  .year-list__title {
+    @include fw-mono;
+    font-size: 0.85em;
+    margin: 0 0 0.75em 0;
+  }
 
-        &:hover, &:focus, &:active {
-          color: $coral-red;
-          text-decoration: none;
-        }
+  .issue-list__item {
+    margin: 0;
 
-      }
-
-    }
-
-    .issue-list--theme {
+    a {
+      font-size: smaller;
+      padding: 0 0 0.5em 0;
       display: block;
-      margin: 0.25em 0;
-    }
+      @include transition(padding 0.15s ease-in);
 
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .issue-list__theme {
+    display: block;
+    margin: 0 0 0.15em 0;
+    @include font-styles('sans-medium');
   }
 
   // responsive styles
