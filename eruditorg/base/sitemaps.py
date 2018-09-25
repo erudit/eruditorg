@@ -1,11 +1,15 @@
 import datetime as dt
+from math import ceil
 
 from django.contrib import sitemaps
 from django.core.urlresolvers import reverse
 
 from erudit.models import Issue
 from erudit.models import Journal
-from erudit.solr.models import get_all_articles
+from erudit.solr.models import (
+    get_all_articles,
+    get_total_number_of_articles,
+)
 
 
 class JournalSitemap(sitemaps.Sitemap):  # pragma: no cover
@@ -55,21 +59,34 @@ class ArticleSitemap(sitemaps.Sitemap):  # pragma: no cover
     @property
     def paginator(self):
         items = self.items()
+        hits = self.hits()
 
         class FakePaginator:
-            def page(self, number):
+            per_page = self.limit
+
+            @staticmethod
+            def page(number):
 
                 class FakePage:
                     object_list = items
 
                 return FakePage()
 
+            @property
+            def num_pages(self):
+                return int(ceil(hits / float(self.per_page)))
+
         return FakePaginator()
 
     def items(self):
         return get_all_articles(self.limit, getattr(self, 'page', 1))
 
-    def lastmod(self, obj):
+    @staticmethod
+    def hits():
+        return get_total_number_of_articles()
+
+    @staticmethod
+    def lastmod(obj):
         return dt.datetime.strptime(obj.solr_data['DateAjoutIndex'][:10], '%Y-%m-%d')
 
     def location(self, obj):
