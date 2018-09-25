@@ -136,12 +136,6 @@
 
   {# This is displayed only if the Fedora repository is unavailable #}
 
-  <ol class="bib-records section-1">
-    {% for article in articles %}
-    {% include "public/journal/partials/issue_detail_article_item.html" %}
-    {% endfor %}
-  </ol>
-
   <p>
   {% for copyright in issue.erudit_object.droitsauteur %}
     <small>{{ copyright.text|safe }}</small>
