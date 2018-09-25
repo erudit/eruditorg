@@ -192,7 +192,7 @@ class SearchResultsView(FallbackAbsoluteUrlViewMixin, TemplateResponseMixin, Con
             # This is simply a case of typing the /recherche/ url directly. We don't want to log
             # those.
             pass
-        if 'basic_search_term' in GET and not GET.get('basic_search_term'):
+        elif 'basic_search_term' in GET and not GET.get('basic_search_term'):
             # This is simply a case of clicking on homepage's search magnifier without a search
             # param. We don't want to log those, we just want to silently redirect.
             pass

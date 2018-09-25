@@ -1949,7 +1949,7 @@
   <xsl:template match="biblio">
     <h2>
       <xsl:choose>
-        <xsl:when test="self::titre">
+        <xsl:when test="titre">
           <xsl:value-of select="titre"/>
         </xsl:when>
         <xsl:otherwise>
