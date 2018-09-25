@@ -793,7 +793,9 @@ class ArticleRawPdfView(ArticleFormatDownloadView):
         return response
 
 
-class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamView):
+class ArticleRawPdfFirstPageView(
+    PermissionRequiredMixin, SingleArticleMixin, FedoraFileDatastreamView
+):
     """
     Returns the PDF file associated with an article.
     """
@@ -804,7 +806,7 @@ class ArticleRawPdfFirstPageView(PermissionRequiredMixin, FedoraFileDatastreamVi
     tracking_view_type = 'pdf'
 
     def get_content(self):
-        return get_object_or_404(Article, localidentifier=self.kwargs['localid'])
+        return self.get_object()
 
     def get_fedora_object_pid(self):
         article = self.get_content()
