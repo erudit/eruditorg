@@ -189,6 +189,12 @@
       </div>
       {% endif %}
       {% endcache %}
+      {% if journal_info.subscriptions %}
+      <hr/>
+      <div class="journal-info-block">
+        {{ journal_info.subscriptions|safe }}
+      </div>
+      {% endif %}
     </section>
     {% endif %}
 
