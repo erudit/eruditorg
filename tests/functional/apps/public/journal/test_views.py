@@ -514,6 +514,14 @@ class TestIssueDetailView:
 
         assert b'ion-lock' not in response.content
 
+    def test_can_return_301_when_issue_doesnt_exist(self):
+        issue = IssueFactory.create(
+            date_published=dt.datetime.now(), localidentifier='test')
+        issue.localidentifier = 'fail'
+        url = issue_detail_url(issue)
+        response = Client().get(url)
+        assert response.status_code == 301
+
 
 class TestArticleDetailView:
     @override_settings(CACHES=settings.NO_CACHES)

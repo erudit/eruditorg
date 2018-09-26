@@ -358,8 +358,8 @@ class IssueDetailView(
                     raise Http404()
             try:
                 return Issue.from_fedora_ids(
-                    journal_code=self.kwargs['journal_code'],
-                    issue_id=self.kwargs['localidentifier'],
+                    self.kwargs['journal_code'],
+                    self.kwargs['localidentifier'],
                 )
             except Issue.DoesNotExist:
                 raise Http404()

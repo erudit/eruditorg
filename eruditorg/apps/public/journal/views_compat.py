@@ -47,8 +47,8 @@ class IssueDetailRedirectView(
             ticket = self.request.GET.get('ticket')
             try:
                 issue = Issue.from_fedora_ids(
-                    journal_code=self.kwargs['journal_code'],
-                    localidentifier=localidentifier
+                    self.kwargs['journal_code'],
+                    localidentifier
                 )
                 redirect_url = reverse(self.pattern_name, args=[
                     kwargs['journal_code'], issue.volume_slug, localidentifier, ])
