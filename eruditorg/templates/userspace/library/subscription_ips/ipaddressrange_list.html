@@ -33,7 +33,7 @@
   </div>
   {% if has_staff_access %}
   <div class="col-md-4 text-right">
-    <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
+    <a href="{% url 'userspace:library:subscription_ips:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">&plus;&nbsp;{% trans "Ajouter" %}</a>
   </div>
   {% endif %}
   {% if not has_active_subscription %}
@@ -64,7 +64,7 @@
         {% if has_staff_access %}
         <span class="col-sm-3">
           <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
-            <span class="ion-ios-close table-row-delete"></span>
+            <ion-icon name="close" class="table-row-delete"></ion-icon>
           </a>
         </span>
         {% endif %}
