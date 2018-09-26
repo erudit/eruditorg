@@ -27,10 +27,11 @@
     {% block inner_main %}{% endblock inner_main %}
     {# Journal information sidebar #}
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
+      <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>
 
       {# latest and back issues #}
       {% block aside_issue %}
-      <div class="sidebar-block clearfix">
+      <section class="sidebar-block clearfix">
         {% if journal.published_issues.exists %}
         {% if latest_issue %}
         <h2>{% trans "Dernier numéro" %}</h2>
@@ -55,11 +56,11 @@
           <p><ion-icon name="information-circle" class="alert-info-icon"></ion-icon> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
         </div>
         {% endif %}
-      </div>
+      </section>
       {% endblock aside_issue %}
 
       {# Explore this journal #}
-      <div class="sidebar-block">
+      <section class="sidebar-block">
         <h2>{% trans "Explorer" %}</h2>
         <ul class="journal-explore">
           <li class="search-journal">
@@ -87,10 +88,10 @@
           <li><a href="{{ journal_info.website_url }}" target="_blank" rel="noopener noreferrer">{% trans "Site web" %}</a></li>
           {% endif %}
         </ul>
-      </div>
+      </section>
 
       {# journal meta infos #}
-      <div class="sidebar-block">
+      <section class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
 
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
@@ -154,7 +155,7 @@
           <dd>{{ meta_info_issue.erudit_object.issn_num }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
-          {% endif %} {# if meta_info_issue #}
+          {% endif %}
 
           {% if journal.issues_per_year %}
           <dt>{% trans "Fréquence de publication" %}</dt>
@@ -199,11 +200,6 @@
           </dd>
           {% endif %}
 
-          {% if journal_info.email %}
-          <dt>{% trans "Courriel général" %}</dt>
-          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
-          {% endif %}
-
           {% if journal.previous_journal %}
           <dt>{% trans "Revue précédée de…" %}</dt>
           <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
@@ -225,13 +221,28 @@
         </div>
         {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
-      </div>
+      </section>
 
-      {% if journal_info.partners %}
-      <div class="sidebar-block">
-        <h2>{% trans "Partenaires" %}</h2>
-        {{ journal_info.partners|safe }}
-      </div>
+      {% if journal_info.email or journal_info.subscription_email or journal_info.phone %}
+      <section class="sidebar-block">
+        <h2>{% trans "Coordonnées" %}</h2>
+        <dl>
+          {% if journal_info.email %}
+          <dt>{% trans "Courriel général" %}</dt>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
+          {% endif %}
+
+          {% if journal_info.subscription_email %}
+          <dt>{% trans "Pour abonnements individuels" %}</dt>
+          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
+          {% endif %}
+
+          {% if journal_info.phone %}
+          <dt>{% trans "Téléphone" %}</dt>
+          <dd><a href="tel:{{ journal_info.phone }}">{{ journal_info.phone }}</a></dd>
+          {% endif %}
+        </dl>
+      </section>
       {% endif %}
 
       {% if journal_info.facebook_url or journal_info.twitter_url %}
@@ -243,6 +254,13 @@
         {% if journal_info.facebook_url %}
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
         {% endif %}
+      </section>
+      {% endif %}
+
+      {% if journal_info.partners %}
+      <section class="sidebar-block">
+        <h2>{% trans "Partenaires" %}</h2>
+        {{ journal_info.partners|safe }}
       </section>
       {% endif %}
 

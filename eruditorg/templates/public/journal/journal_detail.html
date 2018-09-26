@@ -147,8 +147,12 @@
 
   <div class="tab-content">
     <section role="tabpanel" class="tab-pane active journal-info-block" id="journal-info-about">
+      <h2 class="sr-only">{% trans "À propos" %}</h2>
       {% if journal_info.about %}{{ journal_info.about|safe }}{% endif %}
-      {% if journal_info.contact %}{{ journal_info.contact|safe }}{% endif %}
+      <section>
+        <h2 class="sr-only">{% trans "Coordonnées" %}</h2>
+        {% if journal_info.contact %}{{ journal_info.contact|safe }}{% endif %}
+      </section>
     </section>
 
     {% if issues %}
@@ -200,19 +204,15 @@
 
     {% if journal_info.editorial_policy %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-editorial_policy">
+      <h2 class="sr-only">{% trans "Politique éditoriale et éthique" %}</h2>
       {{ journal_info.editorial_policy|safe }}
     </section>
     {% endif %}
 
     {% if journal_info.team %}
     <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-team">
+      <h2 class="sr-only">{% trans "Comité de rédaction" %}</h2>
       {{ journal_info.team|safe }}
-    </section>
-    {% endif %}
-
-    {% if journal_info.contact %}
-    <section role="tabpanel" class="tab-pane journal-info-block" id="journal-info-contact">
-      {{ journal_info.contact|safe }}
     </section>
     {% endif %}
 
