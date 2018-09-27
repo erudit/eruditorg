@@ -27,41 +27,6 @@
     {% if article.solr_id in request.saved_citations %}data-is-in-citation-list="true"{% else %}data-is-in-citation-list="false"{% endif %}
     role="main"
   >
-  <div class="pagination-arrows">
-    {% if not only_summary %}
-
-    {% if previous_article %}
-    <a href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}" class="hidden-xs hidden-sm pagination-arrow previous-page">
-      <span class="hint--bottom-right hint--no-animate" data-hint="{{ previous_article|format_article_title }}">
-        <span class="ion ion-ios-arrow-left"></span>
-      </span>
-    </a>
-    {% endif %}
-    {% if next_article %}
-    <a href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}" class="hidden-xs hidden-sm pagination-arrow next-page">
-      <span class="hint--bottom-left hint--no-animate" data-hint="{{ next_article|format_article_title }}">
-        <span class="ion ion-ios-arrow-right"></span>
-      </span>
-    </a>
-    {% endif %}
-    {% else %}
-    {% if previous_article %}
-    <a href="{% url 'public:journal:article_summary' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}" class="hidden-xs hidden-sm pagination-arrow previous-page">
-      <span class="hint--bottom-right hint--no-animate" data-hint="{{ previous_article|format_article_title }}">
-        <span class="ion ion-ios-arrow-left"></span>
-      </span>
-    </a>
-    {% endif %}
-    {% if next_article %}
-    <a href="{% url 'public:journal:article_summary' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}" class="hidden-xs hidden-sm pagination-arrow next-page">
-      <span class="hint--bottom-left hint--no-animate" data-hint="{{ next_article|format_article_title }}">
-        <span class="ion ion-ios-arrow-right"></span>
-      </span>
-    </a>
-    {% endif %}
-    {% endif %}
-  </div>
-
   {% cache cache_timeout "public_article_detail_content" article.localidentifier content_access_granted in_citation_list LANGUAGE_CODE %}
   {# XSL transformation article render #}
   {{ view.render_xml_contents }}
