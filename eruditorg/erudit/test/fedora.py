@@ -1,6 +1,5 @@
 import re
 from contextlib import contextmanager
-from collections import defaultdict
 from lxml import etree
 from lxml.builder import E
 
@@ -178,7 +177,7 @@ class FakeAPI(ApiFacade):
             self._articles_with_pdf.add(pid)
 
     def register_datastream(self, pid, datastream_id, datastream_content):
-        if not pid in self._datastream_map.keys():
+        if pid not in self._datastream_map.keys():
             self._datastream_map[pid] = {}
         self._datastream_map[pid][datastream_id] = datastream_content
 
@@ -320,7 +319,8 @@ class FakeAPI(ApiFacade):
                 elif not subselection:  # we want a datastream list
                     result = FAKE_JOURNAL_DATASTREAM_LIST.format(pid=pid).encode()
 
-                elif pid in self._datastream_map.keys() and subselection in self._datastream_map[pid].keys():
+                elif pid in self._datastream_map.keys() and \
+                        subselection in self._datastream_map[pid].keys():
                     result = self._datastream_map[pid][subselection]
 
                 elif subselection in subselections:

@@ -3,8 +3,10 @@ import pytest
 import unittest
 
 from django.core.management import call_command
+from erudit.fedora import repository
 
-from erudit.test.factories import IssueFactory
+from erudit.test.factories import IssueFactory, CollectionFactory
+from erudit.models import Journal
 
 
 pytestmark = pytest.mark.django_db
@@ -18,6 +20,7 @@ pytestmark = pytest.mark.django_db
     ({'mdate': dt.datetime.now().date().isoformat()}),
 ])
 def test_import_journals_from_fedora(mock_cache, kwargs):
+
     # Issue in fedora & already published, should stay published.
     issue_1 = IssueFactory(journal__localidentifier='journal_test', is_published=True, add_to_fedora_journal=True)
     # Issue no longer in fedora & already unpublished, should stay unpublished.
@@ -46,6 +49,33 @@ def test_import_journals_from_fedora(mock_cache, kwargs):
         issue_1.localidentifier,
         issue_3.localidentifier,
     ]
+
+
+def test_import_nonexisting_journal_creates_code():
+    CollectionFactory(code='erudit')
+
+    repository.api.register_pid('erudit:erudit.bc1000004')
+    repository.api.register_datastream(
+        'erudit:erudit.bc1000004',
+        '/PUBLICATIONS/content',
+        open('./tests/fixtures/journal/publications.xml').read()
+    )
+
+    repository.api.register_datastream(
+        'erudit:erudit.bc1000004',
+        '/OAISET_INFO/content',
+        open('./tests/fixtures/journal/oaiset_info.xml').read()
+    )
+
+    repository.api.register_datastream(
+        'erudit:erudit.bc1000004',
+        '/RELS-EXT/content',
+        open('./tests/fixtures/journal/rels_ext.xml').read()
+    )
+
+    repository.api.register_pid('erudit:erudit.bc1000004.bc1000451')
+    call_command("import_journals_from_fedora", *[], **{'pid': 'erudit:erudit.bc1000004'})
+    assert Journal.objects.filter(code='bc').exists()
 
 
 @unittest.mock.patch('erudit.management.commands.import_journals_from_fedora.cache')

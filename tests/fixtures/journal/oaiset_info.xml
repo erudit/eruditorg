@@ -1,0 +1,15 @@
+<setDescriptions>
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Biscuit Chinois : Littérature pop</dc:title>
+      <dc:identifier>http://www.erudit.org/culture/biscuitchinois</dc:identifier>
+      <dc:publisher>Éditions Biscuit Chinois</dc:publisher>
+      <dc:description xml:lang="fr">Biscuit Chinois se consacre entièrement à la culture populaire. 
+    Dans populaire, il y a « pop », comme dans musique pop, comme dans pop art, comme dans pop corn. 
+    Notre intention, c’est de publier de la littérature qui ne se prend pas trop au sérieux, histoire de la désacraliser 
+    et de la rendre accessible à tous, sans pour autant négliger la qualité.</dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</setDescriptions>
