@@ -1,0 +1,54 @@
+{% load i18n public_journal_tags %}
+
+<nav class="row toc-nav">
+  <h3 class="sr-only">
+    {% trans "Feuilleter les articles de ce numéro" %}
+  </h3>
+  <div class="hidden-xs col-sm-4">
+    {% if previous_article %}
+    <a
+      href="{% url 'public:journal:article_detail' journal_code=previous_article.issue.journal.code issue_slug=previous_article.issue.volume_slug issue_localid=previous_article.issue.localidentifier localid=previous_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
+      class="toc-nav__prev"
+      title="{% trans 'Article précédent' %}">
+      <span class="toc-nav__arrow">&lt;--</span>
+      <h4 class="toc-nav__title">
+        {{ previous_article|format_article_title }}
+      </h4>
+    </a>
+    {% else %}
+    <a
+      href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
+      class="toc-nav__prev"
+      title="{% trans 'Aller au sommaire' %}">
+      <span class="toc-nav__arrow">&lt;---</span>
+      <h4 class="toc-nav__title">
+        <em>{% trans '[Début du numéro] <br/>Retour au sommaire' %}</em>
+      </h4>
+    </a>
+    {% endif %}
+  </div>
+
+  <div class="hidden-xs col-sm-offset-4 col-sm-4">
+    {% if next_article %}
+    <a
+      href="{% url 'public:journal:article_detail' journal_code=next_article.issue.journal.code issue_slug=next_article.issue.volume_slug issue_localid=next_article.issue.localidentifier localid=next_article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}"
+      class="toc-nav__next"
+      title="{% trans 'Article suivant' %}">
+      <span class="toc-nav__arrow">--&gt;</span>
+      <h4 class="toc-nav__title">
+        {{ next_article|format_article_title }}
+      </h4>
+    </a>
+    {% else %}
+    <a
+      href="{% url 'public:journal:issue_detail' article.issue.journal.code article.issue.volume_slug article.issue.localidentifier %}{% if ticket %}?ticket={{ ticket }}{% endif %}"
+      class="toc-nav__next"
+      title="{% trans 'Aller au sommaire' %}">
+      <span class="toc-nav__arrow">---&gt;</span>
+      <h4 class="toc-nav__title">
+        <em>{% trans '[Fin du numéro] <br/>Retour au sommaire' %}</em>
+      </h4>
+    </a>
+    {% endif %}
+  </div>
+</nav>

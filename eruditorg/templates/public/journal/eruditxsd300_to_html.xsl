@@ -210,6 +210,10 @@
     </header>
 
     <div id="article-content" class="row article-content">
+
+      {# Article navigation arrows #}
+      {% include "public/journal/partials/article_detail_toc_nav.html" %}
+
       <xsl:if test="//corps">
         <!-- article outline -->
         <nav class="hidden-xs hidden-sm hidden-md col-md-3 article-table-of-contents" role="navigation">
