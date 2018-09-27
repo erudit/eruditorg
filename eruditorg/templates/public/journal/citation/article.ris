@@ -4,12 +4,13 @@ T1  - {{ article|format_article_title|safe }}
 {% spaceless %}{% for author in article.authors %}
 {% if author.firstname and author.lastname %}A1  - {{ author.lastname|safe }}, {{ author.firstname|safe }}{% elif author.othername %}A1  - {{ author.othername|safe }}{% endif %}
 {% endfor %}{% endspaceless %}
-JO  - {{ article.issue.journal.name }}
+JO  - {{ article.issue.journal.name|safe }}
 {% if article.issue.volume %}VL  - {{ article.issue.volume }}{% endif %}
 {% if article.issue.number %}IS  - {{ article.issue.number }}{% endif %}
 {% if article.first_page %}SP  - {{ article.first_page }}{% endif %}
 {% if article.last_page %}EP  - {{ article.last_page }}{% endif %}
 SN  - {{ article.issue.journal.issn_print|default:article.issue.journal.issn_web }}
 Y1  - {{ article.issue.year }}
-PB  - {{ article.publisher_name }}
+PB  - {{ article.publisher_name|safe }}
+{% if article.doi %}DO  - {{ article.doi }}{% endif %}
 ER  -
