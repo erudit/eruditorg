@@ -5,7 +5,7 @@
 
 {% block inner_nav %}
 {% if scope_user_journals|length > 1 %}
-<li class="nav-menu__item">
+<li class="select">
   <select id="id_scope_chooser" onChange="window.location.href=this.value">
     {% for j in scope_user_journals %}
       {% if journal_permission_required %}{% has_perm journal_permission_required request.user j as can_switch %}{% endif %}

@@ -27,12 +27,10 @@
     {% block inner_main %}{% endblock inner_main %}
     {# Journal information sidebar #}
     <aside id="journal-meta" class="col-sm-4 col-md-offset-1 col-md-4 journal-meta">
-      <h2 class="sr-only">{% trans "Plus d’informations" %}</h2>
 
       {# latest and back issues #}
       {% block aside_issue %}
-      <section class="sidebar-block clearfix">
-        {% if journal.published_issues.exists %}
+      <div class="sidebar-block clearfix latest-issue">
         {% if latest_issue %}
         <h2>{% trans "Dernier numéro" %}</h2>
         <p>
@@ -50,17 +48,17 @@
         </a>
         {% endif %}
         {% endif %}
-        {% else %}
-        <h2>-> {% trans 'Numéros à venir' %}</h2>
-        <div class="alert alert-info">
-          <p><ion-icon name="information-circle" class="alert-info-icon"></ion-icon> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
-        </div>
-        {% endif %}
-      </section>
+        <p>
+          {% url 'public:journal:journal_detail' journal.code as journal_detail_url %}
+          <a href="{% if request.get_full_path != journal_detail_url %}{{ journal_detail_url }}{% endif %}#back-issues" class="btn btn-primary see-issues-btn" title="{% trans 'Historique de la revue' %}">
+            {% trans "Voir tous les numéros" %}
+          </a>
+        </p>
+      </div>
       {% endblock aside_issue %}
 
       {# Explore this journal #}
-      <section class="sidebar-block">
+      <div class="sidebar-block">
         <h2>{% trans "Explorer" %}</h2>
         <ul class="journal-explore">
           <li class="search-journal">
@@ -72,8 +70,8 @@
                   <input type="hidden" name="journals" value="{{ journal.name }}">
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-secondary">
-                      <span class="sr-only">{% trans 'Rechercher' %}</span>
-                      <ion-icon name="ios-search"></ion-icon>
+                      <span class="sr-only">Rechercher</span>
+                      <span class="ion ion-ios-search-strong"></span>
                     </button>
                   </span>
                 </div>
@@ -85,46 +83,29 @@
           {% endblock aside_authors_list %}
           <li><a href="{% url 'public:journal:journal_articles_rss' journal.code %}">{% trans 'Fil RSS' %}</a></li>
           {% if journal_info.website_url %}
-          <li><a href="{{ journal_info.website_url }}" target="_blank" rel="noopener noreferrer">{% trans "Site web" %}</a></li>
+          <li><a href="{{ journal_info.website_url }}">{% trans "Site web" %}</a></li>
           {% endif %}
         </ul>
-      </section>
+      </div>
 
       {# journal meta infos #}
-      <section class="sidebar-block">
+      <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
 
         {% cache LONG_TTL "journal_metadata" LANGUAGE_CODE journal.id meta_info_issue.id %}
         <dl>
 
-          {% if journal.type.code == 'S' %}
-          <dt>{% trans "Évalué par les pairs" %}</dt>
-          <dd>{% trans "Oui" %}
-            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-              <ion-icon name="ios-checkmark-circle"></ion-icon>
-            </span>
-          </dd>
-          {% endif %}
-
-          <dt>{% trans "Politique d'accès" %}</dt>
-          {% if journal.open_access %}
-          <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="erudicon erudicon-open-access"></span></span></dd>
-          {% else %}
-          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><ion-icon name="help-circle"></ion-icon></span></dd>
-          {% endif %}
-
-          <dt>{% trans "Archivage numérique" %}</dt>
-          <dd>{% trans "Oui&nbsp;: avec" %} <a href="https://www.portico.org/" target="_blank">Portico</a></dd>
-
           {% if meta_info_issue %}
-          {% with directors=meta_info_issue.erudit_object.get_directors editors=meta_info_issue.erudit_object.get_editors %}
+          {% with directors=meta_info_issue.erudit_object.get_directors %}
           {% if directors %}
           <dt>{% trans "Direction" %}</dt>
           {% for issue_contributor in directors %}
           <dd>{{ issue_contributor.format_name }}</dd>
           {% endfor %}
           {% endif %}
+          {% endwith %}
 
+          {% with editors=meta_info_issue.erudit_object.get_editors %}
           {% if editors %}
           <dt>{% trans "Rédaction" %}</dt>
           {% for issue_contributor in editors %}
@@ -155,10 +136,10 @@
           <dd>{{ meta_info_issue.erudit_object.issn_num }} ({% trans "numérique" %})</dd>
           {% endif %}
           {% endif %}
-          {% endif %}
+          {% endif %} {# if meta_info_issue #}
 
           {% if journal.issues_per_year %}
-          <dt>{% trans "Fréquence de publication" %}</dt>
+          <dt>{% trans "Fréquence" %}</dt>
           <dd>
             {% blocktrans count issues_per_year=journal.issues_per_year %}
             {{ issues_per_year }} numéro par année
@@ -185,6 +166,13 @@
             {% endif %}
           </dd>
 
+          <dt>{% trans "Politique d'accès" %}</dt>
+          {% if journal.open_access %}
+          <dd>{% trans "Disponible en libre accès" %} <span class="erudicon erudicon-open-access"></span> <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
+          {% else %}
+          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><span class="ion-help-circled"></span></span></dd>
+          {% endif %}
+
           {% if journal.disciplines.all|length > 0 %}
           <dt>
             {% blocktrans count journal.disciplines.all|length as disciplines_count %}
@@ -200,6 +188,11 @@
           </dd>
           {% endif %}
 
+          {% if journal_info.email %}
+          <dt>{% trans "Courriel général" %}</dt>
+          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
+          {% endif %}
+
           {% if journal.previous_journal %}
           <dt>{% trans "Revue précédée de…" %}</dt>
           <dd><a href="{% url 'public:journal:journal_detail' journal.previous_journal.code %}">{{ journal.previous_journal.name }}</a></dd>
@@ -211,59 +204,27 @@
 
         </dl>
 
-        <div>
-          <a href="{% url 'public:journal:journal_detail' journal.code %}">
-            <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
-          </a>
+        <div class="text-center journal-meta--list">
+          <img src="{% url 'public:journal:journal_logo' journal.code %}" alt="{% trans 'Logo pour'%} {{ journal.name }}" class="img-responsive journal_logo" />
           {% if content_access_granted and subscription_type == 'individual' %}
           <p><em>{% trans "Vous êtes abonné à cette revue." %}</em></p>
           {% endif %}
         </div>
         {% endcache %}
         {% include "public/partials/subscription_sponsor_badge.html" %}
-      </section>
+      </div>
 
-      {% if journal_info.email or journal_info.subscription_email or journal_info.phone %}
-      <section class="sidebar-block">
-        <h2>{% trans "Coordonnées" %}</h2>
-        <dl>
-          {% if journal_info.email %}
-          <dt>{% trans "Courriel général" %}</dt>
-          <dd><a href="mailto:{{ journal_info.email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20générale' %}">{{ journal_info.email }}</a></dd>
-          {% endif %}
-
-          {% if journal_info.subscription_email %}
-          <dt>{% trans "Pour abonnements individuels" %}</dt>
-          <dd><a href="mailto:{{ journal_info.subscription_email }}?subject={{ journal.name }}%20–%20{% trans 'Demande%20d’abonnement' %}">{{ journal_info.subscription_email }}</a></dd>
-          {% endif %}
-
-          {% if journal_info.phone %}
-          <dt>{% trans "Téléphone" %}</dt>
-          <dd><a href="tel:{{ journal_info.phone }}">{{ journal_info.phone }}</a></dd>
-          {% endif %}
-        </dl>
-      </section>
-      {% endif %}
-
-      {% if journal_info.facebook_url or journal_info.twitter_url %}
-      <section class="sidebar-block">
-        <h2>{% trans 'Sur les réseaux sociaux' %}</h2>
-        {% if journal_info.twitter_url %}
+      {% if journal_info.twitter_url %}
+      <div class="journal-meta--list">
         <a class="twitter-timeline" data-lang="{{ LANGUAGE_CODE }}" data-height="450" data-link-color="#ff4242" href="{{ journal_info.twitter_url }}">{{ journal.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        {% endif %}
-        {% if journal_info.facebook_url %}
+      </div>
+      {% endif %}
+
+      {% if journal_info.facebook_url %}
+      <div class="journal-meta--list">
         <div class="fb-page" data-href="{{ journal_info.facebook_url }}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ journal_info.facebook_url }}" class="fb-xfbml-parse-ignore"><a href="{{ journal_info.facebook_url }}">{{ journal.name }}</a></blockquote></div>
-        {% endif %}
-      </section>
+      </div>
       {% endif %}
-
-      {% if journal_info.partners %}
-      <section class="sidebar-block">
-        <h2>{% trans "Partenaires" %}</h2>
-        {{ journal_info.partners|safe }}
-      </section>
-      {% endif %}
-
     </aside>
   </div>
 </div>

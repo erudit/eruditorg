@@ -507,12 +507,11 @@ class TestIssueDetailView:
         issue = IssueFactory.create(is_published=False, journal__open_access=True)
         url = issue_detail_url(issue)
         response = Client().get(url, {'ticket': issue.prepublication_ticket})
-        assert b'ios-lock' in response.content
+        assert b'ion-locked' in response.content
         issue.is_published = True
         issue.save()
         response = Client().get(url)
-
-        assert b'ion-lock' not in response.content
+        assert b'ion-locked' not in response.content
 
     def test_can_return_301_when_issue_doesnt_exist(self):
         issue = IssueFactory.create(

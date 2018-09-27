@@ -2,14 +2,43 @@
  * main navigation search trigger buttons (magnifying glass / x)
  */
 
+.nav-search-triggers {
+  font-size: 30px;
+}
+
 .nav-search-triggers__icon {
   display: block;
-  font-size: 25px;
-  padding-top: 13px;
-  padding-bottom: 10px;
+
+  &:before {
+    margin: 10px;
+    font-size: 30px;
+  }
 
   &:hover, &:active, &:focus {
-    color: $coral-red;
+    &:before {
+      background-color: #000;
+      color: $light-grey;
+    }
+  }
+}
+
+.nav-search-triggers__open .nav-search-triggers__icon {
+  &:before {
+    font-size: 20px;
+    background-color: $light-grey;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    padding-top: 8px;
+    margin-left: 0;
+    @include border-radius(50%);
+  }
+
+  &:hover, &:active, &:focus {
+    &:before {
+      background-color: #000;
+      color: $light-grey;
+    }
   }
 }
 
@@ -20,7 +49,10 @@
 
   .nav-search-triggers__icon {
     &:hover, &:active, &:focus {
-      color: #fff;
+      &:before {
+        background-color: transparent;
+        color: #000;
+      }
     }
   }
 }

@@ -83,11 +83,6 @@ footer#site-footer {
 
     a {
       color: #fff;
-
-      &:hover, &:focus, &:active {
-        color: $coral-red;
-      }
-
     }
 
     .erudit-headline {
@@ -103,9 +98,18 @@ footer#site-footer {
   /**
   * social icons
   */
-  .social-icons a {
+  .social-icons {
     font-size: 24px;
-    margin-right: 7px;
+
+    a {
+      margin-right: 7px;
+
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+      }
+
+    }
+
   }
 
 }

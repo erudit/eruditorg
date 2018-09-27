@@ -5,7 +5,7 @@
 
 {% block inner_nav %}
 {% if scope_user_organisations|length > 1 %}
-<li class="nav-menu__item">
+<li class="select">
   <select id="id_scope_chooser" onChange="window.location.href=this.value">
     {% for o in scope_user_organisations %}
       {% if organisation_permission_required %}{% has_perm organisation_permission_required request.user o as can_switch %}{% endif %}

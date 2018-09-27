@@ -8,10 +8,10 @@
       {% switch "maintenance" %}
       {% else %}
       <a class="tool-btn" href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.localidentifier }}">
-        <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+        <span class="ion-bookmark toolbox-save"></span>
       </a>
       <a class="tool-btn saved" href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.localidentifier }}">
-        <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+        <span class="ion-bookmark toolbox-save"></span>
       </a>
     </li>
     {% endswitch %}
@@ -36,8 +36,7 @@
   </ul>
   <h6 class="bib-record__title">
     {% if not article.publication_allowed %}
-    <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}">
-    <ion-icon name="ios-help-circle"></ion-icon></span>
+    <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}"><span class="ion-help-circled"></span></span>
     {% endif %}
     {% spaceless %}
 

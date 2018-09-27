@@ -122,7 +122,7 @@
             {% if f.is_complete %}
               <li>
                 <a href="{% url 'userspace:journal:editor:attachment_detail' pk=f.id %}">
-                  {{ f.get_filename }}&nbsp;&nbsp;<ion-icon name="cloud-download"></ion-icon></span>
+                  {{ f.get_filename }}&nbsp;&nbsp;<span class="ion-ios-download-outline"></span>
                 </a>
               </li>
             {% else %}

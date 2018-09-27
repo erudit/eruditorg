@@ -22,8 +22,8 @@
       </h1>
       <div class="main-header__intro">
         {% blocktrans %}
-        <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>.</p>
-        <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<ion-icon name="ios-quote" class="toolbox-cite">.</p>
+        <p>Cette page présente les notices des documents que vous avez sauvegardées depuis la plateforme Érudit à l’aide de l’icône&nbsp;<span class="ion-bookmark toolbox-save"></span>.</p>
+        <p>Il est possible d’exporter la liste des notices sauvegardées dans différents formats de citation (EndNote, Zotero, Papers, Reference Manager, RefWorks, BibTeX, JabRef et Mendeley) à l’aide de l’icône&nbsp;<span class="ion-quote toolbox-cite"></span>.</p>
         {% endblocktrans %}
       </div>
     </header>
@@ -79,12 +79,12 @@
               {% spaceless %}
               <li>
                 <a class="tool-btn remove-selection" href="#" title="{% trans 'Supprimer les notices sélectionnées' %}">
-                  <ion-icon name="ios-close" class="toolbox-remove">
+                  <span class="ion-close toolbox-remove"></span>
                 </a>
               </li>
               <li>
                 <a class="tool-btn" href="#" title="{% trans 'Citer les notices sélectionnées' %}" data-modal-id="#id_cite_selection_modal" data-cite>
-                  <ion-icon name="ios-quote" class="toolbox-cite">
+                  <span class="ion-quote toolbox-cite"></span>
                 </a>
               </li>
               {% endspaceless %}
@@ -102,13 +102,13 @@
               {% spaceless %}
               <li>
                 <a class="tool-btn" href="#" title="{% trans 'Supprimer' %}" data-remove>
-                  <ion-icon name="ios-close" class="toolbox-remove">
+                  <span class="ion-close toolbox-remove"></span>
                 </a>
               </li>
               {% if document.can_cite %}
               <li>
                 <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite>
-                  <ion-icon name="ios-quote" class="toolbox-cite">
+                  <span class="ion-quote toolbox-cite"></span>
                 </a>
               </li>
               {% endif %}
@@ -212,12 +212,12 @@
               {% spaceless %}
               <li>
                 <a class="tool-btn" href="#" title="{% trans 'Supprimer' %}" data-remove>
-                  <ion-icon name="close" class="toolbox-remove">
+                  <span class="ion-close toolbox-remove"></span>
                 </a>
               </li>
               <li>
                 <a class="tool-btn" href="#" title="{% trans 'Citer' %}" data-modal-id="#id_cite_modal_{{ forloop.counter }}" data-cite>
-                  <ion-icon name="ios-quote" class="toolbox-cite">
+                  <span class="ion-quote toolbox-cite"></span>
                 </a>
               </li>
               <li>
@@ -308,7 +308,7 @@
       </div>
       {% else %}
       <div class="alert alert-info">
-        <p><ion-icon name="information-circle" class="alert-info-icon"></ion-icon> {% trans "Aucune notice&nbsp;!" %} <br/></br>{% blocktrans %}Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-page&nbsp;<ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>.{% endblocktrans %}</p>
+        <p><span class="ion-information-circled alert-info-icon"></span> {% trans "Aucune notice&nbsp;!" %} <br/></br>{% blocktrans %}Sauvegardez des articles et d’autres documents à l’aide de l’icône marque-page&nbsp;<span class="ion-bookmark toolbox-save"></span>{% endblocktrans %}</p>
       </div>
       {% endif %}
     </section>

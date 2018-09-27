@@ -2,7 +2,10 @@
  * main navigation menu
  */
 
-.nav-menu {}
+.nav-menu {
+   margin: 0;
+   padding: 0;
+ }
 
 .nav-menu__list {
   right: 20px;
@@ -11,13 +14,8 @@
 
 .nav-menu__item {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 0 0 20px;
   font-size: 14px;
-
-  // overriding Select2’s default style...
-  .select2.select2-container--default .select2-selection {
-    border: 0;
-  }
 }
 
 .nav-menu__caret {
@@ -26,13 +24,24 @@
 }
 
 .nav-menu__icon {
-  vertical-align: middle;
-  text-align: center;
-  font-size: 25px;
+  display: block;
 
   &:before {
     vertical-align: middle;
-    font-size: 30px;
+    font-size: 20px;
+    background-color: $light-grey;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    padding-top: 8px;
+    @include border-radius(50%);
+  }
+
+  &:hover, &:active, &:focus {
+    &:before {
+      background-color: #000;
+      color: $light-grey;
+    }
   }
 }
 
@@ -51,14 +60,23 @@
       width: auto;
     }
 
+    .nav-menu__caret {
+      padding: 0.15em 0 0 0.5em;
+      display: inline-block;
+      @include transform(scale(1, -1));
+      @include backface-visibility(hidden);
+    }
+
   }
+
 }
 
 .nav-menu__link {
   display: block;
+  padding: 10px 0;
+  font-size: 14px;
   position: relative;
   color: #000;
-  margin: 5px 0;
 
   &:hover,
   &:active,

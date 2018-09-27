@@ -13,18 +13,12 @@
 
 }
 
-.main-header__meta {
-  font-size: small;
-  @include font-styles('sans-medium');
-}
-
 .main-header__intro {
   margin-bottom: 2em;
 
   p, li {
     font-size: 0.85em;
     color: $dark-grey;
-    margin: 0.5em 0;
   }
 
   a {

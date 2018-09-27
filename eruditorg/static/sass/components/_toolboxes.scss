@@ -35,22 +35,19 @@
     }
 
     .toolbox-remove {
-      font-size: 20px;
-      left: 5px;
-      top: 12px;
+      font-size: 14px;
+      left: 10px;
     }
 
     .toolbox-save {
-      font-size: 16px;
-      left: 7px;
-      top: 13px;
+      font-size: 18px;
+      left: 12px;
     }
 
     .toolbox-cite,
     .toolbox-share {
-      font-size: 16px;
-      left: 7px;
-      top: 14px;
+      font-size: 14px;
+      left: 10px;
     }
 
     .toolbox-pdf {
@@ -116,10 +113,15 @@
 
       [class*=toolbox-] {
         position: absolute;
-        left: 15px;
-        top: 45%;
+        left: 21px;
+        top: 50%;
         font-size: 20px;
         @include translate(0,-35%);
+      }
+
+      .toolbox-share,
+      .toolbox-cite {
+        left: 18px;
       }
 
       .toolbox-pdf,

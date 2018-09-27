@@ -1,5 +1,5 @@
 {
-  "name": "erudit.org",
+  "name": "Erudit.org",
   "description": "TODO",
   "main": "index.js",
   "authors": [
@@ -30,6 +30,7 @@
     "jquery.validation": "latest",
     "jquery.maskedinput": "latest",
     "animate.css": "latest",
+    "ionicons": "latest",
     "font-awesome": "latest",
     "imagesloaded": "~3.1.8",
     "blazy": "latest",

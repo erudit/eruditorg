@@ -92,7 +92,7 @@
               {% include 'public/journal/partials/journal_list_filter_choice.html' with field=filter_form.collections only %}
 
               <div id="div_id_{{ filter_form.disciplines.html_name }}" class="form-group">
-                <label class="control-label h3" for="{{ filter_form.disciplines.auto_id }}">{{ filter_form.disciplines.label }}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{{ filter_form.disciplines.help_text }}"><ion-icon name="ios-help-circle"></ion-icon></span></label>
+                <label class="control-label h3" for="{{ filter_form.disciplines.auto_id }}">{{ filter_form.disciplines.label }}&nbsp;<span class="hint--bottom-left hint--no-animate" data-hint="{{ filter_form.disciplines.help_text }}"><span class="ion-help-circled"></span></span></label>
                 <div class="controls">
                   {{ filter_form.disciplines|add_class:'form-control' }}
                 </div>

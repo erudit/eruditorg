@@ -54,6 +54,25 @@ aside {
   /**
   * journal meta infos on sidebars
   */
+  &.journal-meta {
+
+    p {
+      font-size: 0.85em;
+    }
+
+    .journal_logo {
+      margin: 1em auto;
+    }
+
+    .twitter-timeline, .fb-page {
+      margin: 1em 0;
+    }
+
+  }
+
+  .see-issues-btn {
+    margin-top: 1em;
+  }
 
   .journal-explore {
     margin: 0;

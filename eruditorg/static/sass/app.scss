@@ -16,9 +16,11 @@
   'utils/variables';
 
 // 2. Vendors
+$ionicons-font-path: '~ionicons/fonts';
 @import
   '~akkordion/dist/akkordion.css',
   '~hint.css/hint.base.css',
+  '~ionicons/scss/ionicons',
   '~select2/dist/css/select2',
   'vendor/magnific-popup/magnific-popup.scss',
   'vendor/normalize';

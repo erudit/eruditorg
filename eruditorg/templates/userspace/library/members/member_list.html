@@ -25,7 +25,7 @@
     <h2>{% trans "Membres de l’organisation actifs" %}</h2>
   </div>
   <div class="col-md-4 text-right">
-    <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary">&plus;&nbsp;{% trans "Ajouter" %}</a>
+    <a href="{% url 'userspace:library:members:create' organisation_pk=scope_current_organisation.pk %}" class="btn btn-primary"><span class="ion-plus"></span>&nbsp;{% trans "Ajouter" %}</a>
   </div>
 </div>
 
@@ -49,7 +49,7 @@
         <span class="col-sm-3">{{ member.last_login|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
           <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}" title="{% trans 'Supprimer ce membre' %}">
-            <ion-icon name="close" class="table-row-delete"></ion-icon>
+            <span class="ion-ios-close table-row-delete"></span>
           </a>
         </span>
       </div>
@@ -89,7 +89,7 @@
         <span class="col-sm-4">{{ pmember.expiration_date|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
           <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" title="{% trans 'Supprimer ce membre' %}">
-            <ion-icon name="close" class="table-row-delete"></ion-icon>
+            <span class="ion-ios-close table-row-delete"></span>
           </a>
         </span>
       </div>
