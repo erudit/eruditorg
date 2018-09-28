@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db.models import Q
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
 from django.utils.functional import cached_property

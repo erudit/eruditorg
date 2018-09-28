@@ -2,8 +2,8 @@ import pytest
 
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import resolve
-from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.urls import reverse
 from django.test import RequestFactory
 from django.views.generic import TemplateView
 

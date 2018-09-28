@@ -2,8 +2,8 @@ import os
 import pickle
 import datetime as dt
 
-import unittest
-from django.core.urlresolvers import reverse
+import unittest.mock
+from django.urls import reverse
 from django.test import Client
 from django.test.utils import override_settings
 

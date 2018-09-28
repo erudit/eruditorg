@@ -5,7 +5,7 @@ from urllib.parse import quote
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf

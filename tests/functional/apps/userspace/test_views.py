@@ -1,5 +1,5 @@
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from base.test.factories import logged_client, UserFactory
 from erudit.test.factories import JournalFactory, OrganisationFactory
 

@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.images import get_image_dimensions
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test.client import Client
 
 from erudit.test.factories import OrganisationFactory

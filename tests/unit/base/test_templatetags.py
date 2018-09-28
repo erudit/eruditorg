@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from django.core.urlresolvers import resolve
-from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.urls import reverse
 from django.template import Context
 from django.template.base import Template
 from django.test import RequestFactory

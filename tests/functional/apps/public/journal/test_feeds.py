@@ -1,7 +1,7 @@
 import datetime as dt
 import pytest
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import RequestFactory
 
 from erudit.test.factories import ArticleFactory

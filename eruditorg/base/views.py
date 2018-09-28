@@ -6,7 +6,7 @@ from django.http import (
     Http404,
 )
 from django.shortcuts import redirect
-from django.core.urlresolvers import (
+from django.urls import (
     reverse,
     resolve,
 )

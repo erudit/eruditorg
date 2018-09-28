@@ -2,7 +2,7 @@ from account_actions.action_base import AccountActionBase
 from account_actions.action_pool import actions
 from account_actions.test.factories import AccountActionTokenFactory
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from faker import Factory
 

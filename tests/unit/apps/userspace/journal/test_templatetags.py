@@ -1,6 +1,6 @@
 import pytest
-from django.core.urlresolvers import resolve
-from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.urls import reverse
 from django.test import RequestFactory
 
 from erudit.test.factories import JournalFactory, PublisherFactory

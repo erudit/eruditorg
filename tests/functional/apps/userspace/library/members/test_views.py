@@ -4,7 +4,7 @@ from account_actions.models import AccountActionToken
 from account_actions.test.factories import AccountActionTokenFactory
 from django.contrib.contenttypes.models import ContentType
 from django.core import mail
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from faker import Factory
 

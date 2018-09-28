@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from base.viewmixins import MenuItemMixin
 from core.authorization.defaults import AuthorizationConfig as AC
