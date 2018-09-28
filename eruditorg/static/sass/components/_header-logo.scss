@@ -9,40 +9,6 @@
   font-size: 18px;
   overflow: visible;
 
-  &:hover {
-    path, rect {
-      @include animation(logo-dance 0.4s ease alternate infinite);
-      &:nth-child(1) {
-        @include animation-delay(0.05s);
-      }
-      &:nth-child(2) {
-        @include animation-delay(0.1s);
-      }
-      &:nth-child(3) {
-        @include animation-delay(0.15s);
-      }
-      &:nth-child(4) {
-        @include animation-delay(0.2s);
-      }
-      &:nth-child(5) {
-        @include animation-delay(0.25s);
-      }
-      &:nth-child(6) {
-        @include animation-delay(0.3s);
-      }
-      &:nth-child(7) {
-        @include animation-delay(0.35s);
-      }
-      &:nth-child(8) {
-        @include animation-delay(0.4s);
-      }
-    }
-  }
-
-  path, rect {
-    @include animation(logo-stand 0.4s ease alternate infinite);
-  }
-
   .header-logo__link {
     display: block;
     height: 30px;
@@ -68,26 +34,8 @@
       display: none;
     }
 
-    path:not(:first-child):not(:nth-child(2)) {
+    path:not(:first-of-type):not(:nth-of-type(2)) {
       display: none;
     }
-  }
-}
-
-@include keyframes(logo-stand) {
-  0% {
-    @include translate(0, 0);
-  }
-  100% {
-    @include translate(0, 0);
-  }
-}
-
-@include keyframes(logo-dance) {
-  0% {
-    @include translate(0, 0px);
-  }
-  100% {
-    @include translate(0, -10px);
   }
 }
