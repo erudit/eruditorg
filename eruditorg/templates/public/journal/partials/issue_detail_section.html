@@ -12,7 +12,7 @@
           {{ group.titles.main|safe }}
           {% for paral in group.titles.paral %}&nbsp;/ {{ paral|safe }}{% endfor %}
         </strong>
-        <span class="icon ion-ios-arrow-down"></span>
+        <i class="icon ion-ios-arrow-down caret"></i>
       </h{{ group.level|add:"2" }}>
       <div class="akkordion-content akkordion-active">
       {% with articles_per_section=group %}

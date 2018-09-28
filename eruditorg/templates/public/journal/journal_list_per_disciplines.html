@@ -95,11 +95,11 @@
             <strong>{{ collection_group.key.name }} ({{ collection_group.objects|length }})</strong>
             {% if collection_group.key.code == "persee" %}
             <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues de la collection Persée redirigent vers la plateforme du partenaire.' %}">
-              <ion-icon name="ios-help-circle"></ion-icon>
+              <i class="icon ion-ios-help-circle"></i>
             </span>
             {% elif collection_group.key.code == "nrc" %}
             <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Les revues de la collection NRC Research Press redirigent vers la plateforme du partenaire.' %}">
-              <ion-icon name="ios-help-circle"></ion-icon>
+              <i class="icon ion-ios-help-circle"></i>
             </span>
             {% endif %}
           </h3>

@@ -53,7 +53,7 @@
         {% else %}
         <h2>-> {% trans 'Numéros à venir' %}</h2>
         <div class="alert alert-info">
-          <p><ion-icon name="information-circle" class="alert-info-icon"></ion-icon> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
+          <p><i class="icon ion-information-circle alert-info-icon"></i> {% trans 'L’intégration de cette revue à la plateforme est en cours de finalisation.' %}</p>
         </div>
         {% endif %}
       </section>
@@ -73,7 +73,7 @@
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-secondary">
                       <span class="sr-only">{% trans 'Rechercher' %}</span>
-                      <ion-icon name="ios-search"></ion-icon>
+                      <i class="icon ion-ios-search"></i>
                     </button>
                   </span>
                 </div>
@@ -101,7 +101,7 @@
           <dt>{% trans "Évalué par les pairs" %}</dt>
           <dd>{% trans "Oui" %}
             <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-              <ion-icon name="ios-checkmark-circle"></ion-icon>
+              <i class="icon ion-ios-checkmark-circle"></i>
             </span>
           </dd>
           {% endif %}
@@ -110,7 +110,7 @@
           {% if journal.open_access %}
           <dd>{% trans "Disponible en libre accès" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'Les numéros courants et les archives de cette revue sont disponibles en libre accès.' %}"><span class="erudicon erudicon-open-access"></span></span></dd>
           {% else %}
-          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><ion-icon name="help-circle"></ion-icon></span></dd>
+          <dd>{% trans "Accès restreint" %} <span class="hint--top hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement, tandis que l’ensemble de ses archives est disponible en libre accès.' %}"><i class="icon ion-ios-help-circle"></i></span></dd>
           {% endif %}
 
           <dt>{% trans "Archivage numérique" %}</dt>

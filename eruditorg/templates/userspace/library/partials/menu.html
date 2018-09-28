@@ -12,7 +12,7 @@
 <ul>
   <li class="sidenav-item">
     <a href="{% url 'userspace:library:home' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-home" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-home sidenav-icon"></i>
       <h2 class="sidenav-label">{{ scope_current_organisation.name }}</h2>
     </a>
   </li>
@@ -20,7 +20,7 @@
   {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'stats' %} active{% endif %}">
     <a href="{% url 'userspace:library:stats:landing' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-analytics" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-analytics sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Consultations" %}</span>
     </a>
   </li>
@@ -29,7 +29,7 @@
   {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'subscription_ips' %} active{% endif %}">
     <a href="{% url 'userspace:library:subscription_ips:list' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-pin" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-pin sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Adresses IP" %}</span>
     </a>
   </li>
@@ -37,7 +37,7 @@
 
   <li class="sidenav-item{% if menu_library == 'collection' %} active{% endif %}">
     <a href="{% url 'userspace:library:collection:landing' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-archive" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-archive sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Collections" context "dashboard" %}</span>
     </a>
   </li>
@@ -45,7 +45,7 @@
   {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'subscription_information' %} active{% endif %}">
     <a href="{% url 'userspace:library:subscription_information:update' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-cloud-upload" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-cloud-upload sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Logo institutionnel" %}</span>
     </a>
   </li>
@@ -54,7 +54,7 @@
   {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'connection' %} active{% endif %}">
     <a href="{% url 'userspace:library:connection:landing' %}">
-      <ion-icon name="ios-cog" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-cog sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Paramètres de connexion" %}</span>
     </a>
   </li>
@@ -63,7 +63,7 @@
   {% if has_staff_access %}
   <li class="sidenav-item{% if menu_library == 'authorization' %} active{% endif %}">
     <a href="{% url 'userspace:library:authorization:list' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-lock" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-lock sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Autorisations" %}</span>
     </a>
   </li>
@@ -72,7 +72,7 @@
   {% if has_staff_access %}
   <li class="sidenav-item{% if menu_library == 'members' %} active{% endif %}">
     <a href="{% url 'userspace:library:members:list' organisation_pk=scope_current_organisation.pk %}">
-      <ion-icon name="ios-people" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-people sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Membres" %}</span>
     </a>
   </li>
@@ -81,7 +81,7 @@
   {% if can_access_library_dashboard %}
   <li class="sidenav-item{% if menu_library == 'diagnosis' %} active{% endif %}">
     <a href="{% url 'userspace:library:diagnosis:landing' %}">
-      <ion-icon name="ios-medkit" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-medkit sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Diagnostic" %}</span>
     </a>
   </li>

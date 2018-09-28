@@ -31,10 +31,10 @@ class ShareModal {
                   </header>\
                   <div class="panel-body share-modal--body">\
                     <ul class="unstyled">\
-                      <li><button id="share-email" class="btn btn-primary btn-block"><ion-icon name="ios-mail"></ion-icon> ' + gettext('Courriel') + '</button></li>\
-                      <li><button id="share-twitter" class="btn btn-primary btn-block"><ion-icon name="logo-twitter"></ion-icon> Twitter</button></li>\
-                      <li><button id="share-facebook" class="btn btn-primary btn-block"><ion-icon name="logo-facebook"></ion-icon> Facebook</button></li>\
-                      <li><button id="share-linkedin" class="btn btn-primary btn-block"><ion-icon name="logo-linkedin"></ion-icon> LinkedIn</button></li>\
+                      <li><button id="share-email" class="btn btn-primary btn-block"><i class="icon ion-ios-mail"></i> ' + gettext('Courriel') + '</button></li>\
+                      <li><button id="share-twitter" class="btn btn-primary btn-block"><i class="icon ion-logo-twitter"></i> Twitter</button></li>\
+                      <li><button id="share-facebook" class="btn btn-primary btn-block"><i class="icon ion-logo-facebook"></i> Facebook</button></li>\
+                      <li><button id="share-linkedin" class="btn btn-primary btn-block"><i class="icon ion-logo-linkedin"></i> LinkedIn</button></li>\
                     </ul>\
                   </div>\
                 </div>\

@@ -67,7 +67,7 @@
     <div class="col-sm-9 col-md-8 main-content">
       <h2>{% trans "Liste complète" %}</h2>
       <div class="alert alert-info">
-        <p><ion-icon name="information-circle" class="alert-info-icon"></ion-icon> {% trans 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
+        <p><i class="icon ion-information-circle alert-info-icon"></i> {% trans 'La lecture de ces thèses nécessite une redirection vers le site du dépôt institutionnel.' %}</p>
       </div>
       <div class="actions-wrapper">
         <div id="div_id_sort_by" class="form-group">
@@ -107,8 +107,8 @@
           </div>
           {% if thesis.description or thesis.keywords.all %}
           <div class="col-xs-1 text-right">
-            <a href="#" class="thesis-extend"><ion-icon name="add"></ion-icon></a>
-            <a href="#" class="thesis-reduce"><ion-icon name="remove"></ion-icon></a>
+            <a href="#" class="thesis-extend"><i class="icon ion-add"></i></a>
+            <a href="#" class="thesis-reduce"><i class="icon ion-remove"></i></a>
           </div>
           {% endif %}
         </li>

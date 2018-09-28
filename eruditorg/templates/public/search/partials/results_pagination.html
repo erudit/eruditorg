@@ -4,10 +4,10 @@
   <h3 class="sr-only">{% trans 'Pagination' %}</h3>
   <div class="pagination">
     {% if results.pagination.links.first %}
-    <a href="{{ results.pagination.links.first }}"><ion-icon name="ios-arrow-back"></ion-icon><ion-icon name="ios-arrow-back"></ion-icon></a>
+    <a href="{{ results.pagination.links.first }}"><i class="icon ion-ios-arrow-back"></i><i class="icon ion-ios-arrow-back"></i></a>
     {% endif %}
     {% if results.pagination.links.previous %}
-    <a href="{{ results.pagination.links.previous }}"><ion-icon name="ios-arrow-back"></ion-icon></a>
+    <a href="{{ results.pagination.links.previous }}"><i class="icon ion-ios-arrow-back"></i></a>
     {% endif %}
     <span class="page-position">
     {% blocktrans trimmed with current_page=results.pagination.current_page page_count=results.pagination.num_pages %}
@@ -15,10 +15,10 @@
     {% endblocktrans %}
     </span>
     {% if results.pagination.links.next %}
-    <a href="{{ results.pagination.links.next }}"><ion-icon name="ios-arrow-forward"></ion-icon></a>
+    <a href="{{ results.pagination.links.next }}"><i class="icon ion-ios-arrow-forward"></i></a>
     {% endif %}
     {% if results.pagination.links.last %}
-    <a href="{{ results.pagination.links.last }}"><ion-icon name="ios-arrow-forward"></ion-icon><ion-icon name="ios-arrow-forward"></ion-icon></a>
+    <a href="{{ results.pagination.links.last }}"><i class="icon ion-ios-arrow-forward"></i><i class="icon ion-ios-arrow-forward"></i></a>
     {% endif %}
   </div>
 </nav>

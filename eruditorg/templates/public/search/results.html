@@ -103,7 +103,7 @@
               <div id="div_id_{{ filter_form.filter_extra_q.html_name }}" class="filter{% if filter_form.filter_extra_q.errors %} has-error{% endif %}">
                 <span class="filter-label akkordion-title">{{ filter_form.filter_extra_q.label }}</span>
                 <div class="controls">
-                  {{ filter_form.filter_extra_q|add_class:'form-control' }}<button id="id_extra_q_button" type="submit" class="btn btn-primary"><ion-icon name="ios-search"></ion-icon></button>
+                  {{ filter_form.filter_extra_q|add_class:'form-control' }}<button id="id_extra_q_button" type="submit" class="btn btn-primary"><i class="icon ion-ios-search"></i></button>
                   {% for error in filter_form.filter_extra_q.errors %}<p class="error">{{ error }}</p>{% endfor %}
                 </div>
               </div>
@@ -232,7 +232,7 @@
                 <div class="akkordion" data-akkordion-single="true">
                   <div class="akkordion-title abstract-title">
                     {% trans "Plus d’information" %}
-                    <ion-icon name="ios-arrow-down"></ion-icon>
+                    <i class="icon ion-ios-arrow-down"></i>
                   </div>
                   <div class="summary-content akkordion-content abstract">
                     {% if document.abstract %}
@@ -263,11 +263,11 @@
                   {% if document.document_type == 'article' or document.document_type == 'thesis' %}
                   <li>
                     <a class="tool-btn" id="tool-citation-save-{{ forloop.counter }}" data-citation-save="#document-{{ forloop.counter }}"{% if document.localidentifier in request.saved_citations %} style="display:none;"{% endif %}>
-                      <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+                      <i class="icon ion-ios-bookmark toolbox-save"></i>
                       <span class="tools-label">{% trans "Sauvegarder" %}</span>
                     </a>
                     <a class="tool-btn saved" id="tool-citation-remove-{{ forloop.counter }}" data-citation-remove="#document-{{ forloop.counter }}"{% if not document.localidentifier in request.saved_citations %} style="display:none;"{% endif %}>
-                      <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+                      <i class="icon ion-ios-bookmark toolbox-save"></i>
                       <span class="tools-label">{% trans "Supprimer" %}</span>
                     </a>
                   </li>
@@ -275,7 +275,7 @@
                   {% if document.can_cite %}
                   <li>
                     <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ forloop.counter }}">
-                      <ion-icon name="ios-quote" class="toolbox-cite"></ion-icon>
+                      <i class="icon ion-ios-quote toolbox-cite"></i>
                       <span class="tools-label">{% trans "Citer cet article" %}</span>
                     </a>
                   </li>

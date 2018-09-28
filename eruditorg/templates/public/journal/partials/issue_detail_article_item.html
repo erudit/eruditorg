@@ -8,10 +8,10 @@
       {% switch "maintenance" %}
       {% else %}
       <a class="tool-btn" href="#" title="{% trans 'Sauvegarder' %}" data-citation-save="#article-{{ article.localidentifier }}">
-        <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+        <i class="icon ion-ios-bookmark toolbox-save"></i>
       </a>
       <a class="tool-btn saved" href="#" title="{% trans 'Supprimer' %}" data-citation-remove="#article-{{ article.localidentifier }}">
-        <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+        <i class="icon ion-ios-bookmark toolbox-save"></i>
       </a>
     </li>
     {% endswitch %}
@@ -37,7 +37,7 @@
   <h6 class="bib-record__title">
     {% if not article.publication_allowed %}
     <span class="hint--top hint--no-animate" data-hint="{% trans 'Le contenu de ce document est inaccessible en raison du droit d’auteur.' %}">
-    <ion-icon name="ios-help-circle"></ion-icon></span>
+    <i class="icon ion-ios-help-circle"></i></span>
     {% endif %}
     {% spaceless %}
 
@@ -71,7 +71,7 @@
     {% if article.abstracts %}
     <p class="bib-record__abstract col-xs-9">
       <span class="affiliations akkordion" data-akkordion-single="true">
-        <a class="affiliations-label akkordion-title">{% trans 'Résumé' %} <span class="icon ion-ios-arrow-down"></span></a>
+        <a class="affiliations-label akkordion-title">{% trans 'Résumé' %} <i class="icon ion-ios-arrow-down"></i></a>
         <span class="akkordion-content unstyled">
           {% for abstract in article.abstracts %}
           <br><strong>{{ abstract.lang|upper }}{% trans '&nbsp;:' %}</strong> {{ abstract.content|safe }}<br>

@@ -311,18 +311,18 @@
           <ul class="unstyled toolbox">
             <li class="hidden-md hidden-lg">
               <a class="scroll-top tool-btn tool-top" href="#top" title="{% trans 'Retourner en haut de la page' %}" aria-label="{% trans 'Retourner en haut de la page' %}">
-                <span class="ion-android-arrow-up toolbox-top"></span>
+                <i class="icon ion-ios-arrow-up toolbox-top"></i>
               </a>
             </li>
             {% switch "maintenance" %}
             {% else %}
             <li>
               <a class="tool-btn" id="tool-citation-save-{{ article.localidentifier }}" data-citation-save="#article-{{ article.localidentifier }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
-                <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+                <i class="icon ion-ios-bookmark toolbox-save"></i>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </a>
               <a class="tool-btn saved" id="tool-citation-remove-{{ article.localidentifier }}" data-citation-remove="#article-{{ article.localidentifier }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
-                <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
+                <i class="icon ion-ios-bookmark toolbox-save"></i>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </a>
             </li>
@@ -337,7 +337,7 @@
             {% endif %}
             <li>
               <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.localidentifier }}">
-                <ion-icon name="quote" class="toolbox-cite"></ion-icon>
+                <i class="icon ion-ios-quote toolbox-cite"></i>
                 <span class="tools-label">{% trans "Citer cet article" %}</span>
               </a>
             </li>
@@ -346,7 +346,7 @@
                 <xsl:attribute name="data-title">
                   {{ article|format_article_title|escape }}
                 </xsl:attribute>
-                <ion-icon name="share-alt" class="toolbox-share"></ion-icon>
+                <i class="icon ion-ios-share-alt toolbox-share"></i>
                 <span class="tools-label">{% trans "Partager" %}</span>
               </a>
             </li>
@@ -485,7 +485,7 @@
         {# Peer review seal #}
         {% if article.issue.journal.type.code == 'S' %}
         <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-          <ion-icon name="ios-checkmark-circle" size="small"></ion-icon>
+          <i class="icon ion-ios-checkmark-circle" size="small"></i>
         </span>
         {% endif %}
       </xsl:if>

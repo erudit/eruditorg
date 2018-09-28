@@ -99,7 +99,7 @@
       {# Peer review seal #}
       {% if issue.journal.type.code == 'S' %}
       <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-        <ion-icon name="ios-checkmark-circle"></ion-icon>
+        <i class="icon ion-ios-checkmark-circle"></i>
       </span>
       {% endif %}
     </p>
@@ -108,7 +108,7 @@
         {# Embargoed / locked issue #}
         {% if issue.embargoed and not content_access_granted %}
         <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'L’accès aux numéros courants de cette revue nécessite un abonnement.' %}">
-          <ion-icon name="ios-lock"></ion-icon>
+          <i class="icon ion-ios-lock"></i>
         </span>
         {% endif %}
       </span>
@@ -143,7 +143,7 @@
     </h2>
     {% if issue.is_external %}
     <div class="alert alert-info">
-      <p><ion-icon name="information-circle" class="alert-info-icon"></ion-icon> {% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</p>
+      <p><i class="icon ion-information-circle alert-info-icon"></i> {% trans 'La lecture de ces articles nécessite une redirection vers le site de la revue.' %}</p>
     </div>
     {% endif %}
   </header>

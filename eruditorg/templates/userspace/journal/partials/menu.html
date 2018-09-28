@@ -11,14 +11,14 @@
 <ul>
   <li class="sidenav-item{% if menu_journal == 'home' %} active{% endif %}">
     <a href="{% url 'userspace:journal:home' journal_pk=scope_current_journal.pk %}">
-      <ion-icon name="ios-home" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-home sidenav-icon"></i>
       <h2 class="sidenav-label">{{ scope_current_journal.name }}</h2>
     </a>
   </li>
   {% if can_manage_information %}
   <li class="sidenav-item{% if menu_journal == 'information' %} active{% endif %}">
     <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}">
-      <ion-icon name="ios-book" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-book sidenav-icon"></i>
       <span class="sidenav-label">{% trans "À propos" %}</span>
     </a>
   </li>
@@ -26,7 +26,7 @@
   {% if can_manage_issuesubmission or can_review_issuesubmission %}
   <li class="sidenav-item{% if menu_journal == 'editor' %} active{% endif %}">
     <a href="{% url 'userspace:journal:editor:issues' journal_pk=scope_current_journal.pk %}">
-      <ion-icon name="ios-cloud-upload" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-cloud-upload sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Dépôt" %}</span>
     </a>
   </li>
@@ -34,7 +34,7 @@
   {% if can_consult_royalty_reports %}
   <li class="sidenav-item{% if menu_journal == 'royalty_reports' %} active{% endif %}">
     <a href="{% url 'userspace:journal:royalty_reports' journal_pk=scope_current_journal.pk %}">
-      <ion-icon name="logo-usd" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-logo-usd sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Redevances" %}</span>
     </a>
   </li>
@@ -48,7 +48,7 @@
       href="{% url 'userspace:journal:subscription:list' journal_pk=scope_current_journal.pk %}"
     {% endif %}
     >
-      <ion-icon name="ios-people" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-people sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Abonnements" %}</span>
     </a>
   </li>
@@ -56,7 +56,7 @@
   <li class="sidenav-item">
     <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous devez vous connecter à un site externe pour accéder à vos rapports statistiques. L’identifiant et le mot de passe correspondent à ceux de votre ancien Espace éditeur sur Érudit.' %}">
       <a href="https://secur.erudit.org/statusage/index.php" target="_blank">
-        <ion-icon name="ios-analytics" class="sidenav-icon"></ion-icon>
+        <i class="icon ion-ios-analytics sidenav-icon"></i>
         <span class="sidenav-label">{% trans "Consultations" %}</span>
       </a>
     </span>
@@ -65,7 +65,7 @@
     <li class="sidenav-item">
       <span class="hint--bottom hint--no-animate" data-hint="{% trans 'Vous devez vous connecter à un site externe pour accéder à OJS. L’identifiant et le mot de passe de ce service sont différents de celui de votre Espace éditeur. Si vous ne les connaissez pas, vous pouvez communiquer avec Érudit à l’adresse edition@erudit.org.' %}">
         <a href="https://www.erudit.org/ojs/index.php/{{ scope_current_journal.code }}/login" target="_blank">
-          <ion-icon name="ios-create" class="sidenav-icon"></ion-icon>
+          <i class="icon ion-ios-create sidenav-icon"></i>
           <span class="sidenav-label">{% trans "Manuscrits" %}</span>
         </a>
       </span>
@@ -74,7 +74,7 @@
   {% if can_manage_authorizations %}
   <li class="sidenav-item{% if menu_journal == 'authorization' %} active{% endif %}">
     <a href="{% url 'userspace:journal:authorization:list' journal_pk=scope_current_journal.pk %}">
-      <ion-icon name="ios-lock" class="sidenav-icon"></ion-icon>
+      <i class="icon ion-ios-lock sidenav-icon"></i>
       <span class="sidenav-label">{% trans "Autorisations" %}</span>
     </a>
   </li>

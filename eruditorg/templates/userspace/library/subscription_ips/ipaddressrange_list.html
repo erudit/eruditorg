@@ -64,7 +64,7 @@
         {% if has_staff_access %}
         <span class="col-sm-3">
           <a href="{% url 'userspace:library:subscription_ips:delete' organisation_pk=scope_current_organisation.pk pk=ip_range.pk %}" title="{% trans 'Supprimer cette plage d’adresses IP' %}">
-            <ion-icon name="close" class="table-row-delete"></ion-icon>
+            <i class="icon ion-close table-row-delete"></i>
           </a>
         </span>
         {% endif %}
