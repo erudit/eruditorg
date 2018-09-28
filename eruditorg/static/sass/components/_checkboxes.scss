@@ -4,8 +4,7 @@
 // -----------------------------------------------------------------------------
 
 $font-icon: 'Ionicons' !default;
-$fa-var-check: "\f122" !default;
-$check-icon: $fa-var-check !default;
+$check-icon: "\f3ff" !default;
 
 @mixin checkbox-variant($parent, $color) {
   #{$parent} input[type="checkbox"]:checked + label,
@@ -142,11 +141,12 @@ input[type="checkbox"] {
       width: 16px;
       height: 16px;
       left: 1px;
-      top: 0;
+      top: -7px;
       margin-left: -20px;
       padding-left: 3px;
       padding-top: 1px;
-      font-size: 11px;
+      font-size: 20px;
+      font-weight: bolder;
       color: $dark-grey;
     }
   }

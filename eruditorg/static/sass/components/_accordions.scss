@@ -9,7 +9,7 @@
     border-bottom: 0;
   }
 
-  .icon {
+  .caret {
     float: right;
     display: inline-block;
     position: relative;
@@ -18,7 +18,7 @@
   }
 
   [data-akkordion-active] {
-    .icon {
+    .caret {
       position: relative;
       top: -3px;
       @include rotate(180deg);
