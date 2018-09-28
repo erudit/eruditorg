@@ -1,5 +1,5 @@
 /**
-* Home main container
+* Homepage-specific styles
 */
 
 #homepage {
@@ -8,174 +8,79 @@
     display: none;
   }
 
-  // Custom underline style for homepage links
-  p a {
-    color: $dark-grey;
-
-    &:hover, &:focus, &:active {
-      color: #000;
-      text-decoration: none;
-      background-image: linear-gradient(to top,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0) 2px,
-        #000 2px,
-        #000 3px,
-        rgba(0, 0, 0, 0) 3px);
-    }
-
-  }
-
-  .site-header {
-    @include box-shadow(0);
-  }
-
-  .banner {
-    background: url('../img/banner.png') no-repeat center bottom;
+  /* Header / "cover page" */
+  .home-header {
+    background: url('../img/homepage/bg-1.png') no-repeat center 55px;
     background-size: cover;
-    height: 375px;
-    max-height: 50vh;
-    width: 100%;
-    margin-top: -100px;
-
-    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-      background-position: -200px 100px;
-    }
-
-    @media (max-width: $screen-sm-max) {
-      background-position: center 150px;
-    }
-
-    @media screen and (orientation: landscape) {
-      background-position: center 55px;
-    }
-
-    .banner-header {
-      text-align: left;
-      margin-top: 125px;
-      font-size: 4vh;
-      color: $coral-red;
-    }
-
+    min-height: 50vh;
+    margin-top: -150px;
   }
 
-  .explore {
-    padding: 50px 0;
+  .home-header__title {
+    margin-top: 300px;
+    font-size: 4vh;
+    color: #fff;
+  }
 
-    header {
-      margin-bottom: 30px;
-    }
+  /* Search tool */
+  .home-search {
+    margin: 10vh 0;
+    color: #fff;
 
-    .subsection-search,
-    .subsection-publicationtypes,
-    .subsection-disciplines {
-      @include grid-cell-border('top', 1px, $mid-grey);
-      padding-top: 20px;
-      padding-bottom: 20px;
-      margin-bottom: 25px;
-      @media (min-width: $screen-sm-min) {
-        margin-bottom: 0;
-      }
-      h3, .h3 {
-        margin: 0 0 20px 0;
-        line-height: 1;
-        font-size: 25px;
-      }
-    }
-
-    .subsection-search {
-      margin-top: 0;
-      .form-group {
-        padding-left: 0;
-        padding-right: 0;
-      }
-      label {
-        margin: 0;
-      }
-      input[type="search"] {
-        border-width: $border-width;
-        border-right: none;
-        height: 50px;
-        line-height: 50px;
-        box-sizing: border-box;
-        font-size: 16px;
-        background-color: $white;
-        @include border-radius(0);
-        @include placeholder($dark-grey);
-      }
-      .input-group-addon {
-        padding: 0;
-        border: none;
-        @include border-radius(0);
-      }
-      .btn {
-        font-size: 1.5em;
-        width: 50px;
-        height: 50px;
-        line-height: 54px;
-        padding: 0;
-        margin: 0;
-        border: none;
-        background-color: $coral-red;
-        color: #FFF;
-      }
-    }
-    .subsection-publicationtypes {
-      ol {
-        counter-reset: a 0;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        .glory--publication-types--item {
-          counter-increment: a 1;
-          margin: 0 0 20px 0;
-          line-height: 1;
-          &:last-child {
-            margin-bottom: 0;
-          }
-          &.disabled a {
-            color: $dark-grey;
-            pointer-events: none;
-            cursor: default;
-
-          }
-          &:before {
-            content: counter(a, decimal-leading-zero) '. ';
-            left: 0;
-            color: $coral-red;
-            font-size: 1.75em;
-          }
-          h3 {
-            display: inline;
-          }
-          a {
-            color: #000;
-          }
-        }
-      }
-    }
-    .subsection-disciplines {
-      margin-bottom: 0;
-      p {
-        font-size: 18px;
-        line-height: 29px;
-      }
-
-      a {
-        font-size: 15px;
-
-        &:before {
-          content: '+ ';
-        }
-      }
+    a {
+      color: #fff;
     }
   }
 
-  .section-separator {
-    border-color: #000;
-    margin-top: 2em;
+  .home-search__form {
+    margin-bottom: 2.5vh;
   }
 
-  .new-journals, .latest-issues {
+  .home-search__input {
+    border: 1px solid #fff;
+    border-right: none;
+    height: 50px;
+    line-height: 50px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: $white;
+    @include border-radius(0);
+    @include placeholder($dark-grey);
+
+  }
+
+  .home-search__addon {
+    padding: 0;
+    border: none;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+  .home-search__btn {
+    font-size: 1.5em;
+    width: 50px;
+    height: 50px;
+    line-height: 54px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: #fff;
+    color: $midnight-blue;
+
+    .icon:before {
+      font-weight: bolder;
+    }
+  }
+
+  .latest-issues {
+    background-color: $midnight-blue;
+    color: #fff;
+
+    a {
+      color: #fff;
+    }
 
     ul {
       list-style: none;
@@ -184,31 +89,15 @@
     li {
       margin: 1em 0;
       padding-top: 0.75em;
-      @include grid-cell-border('top', 1px, $mid-grey);
-
-      img {
-        width: 100%;
-        margin-bottom: 10px;
-      }
-
     }
 
     h3 {
-      font-size: 16px;
-    }
-
-    h4 {
-
-      span + span {
-        color: $dark-grey;
-      }
-
+      font-size: 1em;
     }
 
     p {
       font-size: 12px;
       margin-bottom: 0.5em;
-      color: $dark-grey;
     }
 
     .logo {
@@ -231,6 +120,15 @@
   }
 
   .news {
+    background-color: $light-grey;
+
+    &:before {
+      background: url('../img/homepage/bg-2.png') no-repeat left top;
+      background-size: cover;
+      min-height: 238px;
+      content: " ";
+      display: block;
+    }
 
     .latest-news {
       list-style: none;
@@ -335,32 +233,12 @@
 * Row alignment for different viewport sizes / responsive
 **/
 
-@media (max-width: $screen-xs-max) {
-
-  .new-journals li {
-
-    &:nth-child(2n+1) {
-      clear: both;
-    }
-
-  }
-
-}
-
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
   .latest-issues li,
   .news--article {
 
     &:nth-child(2n+1) {
-      clear: both;
-    }
-
-  }
-
-  .new-journals li {
-
-    &:nth-child(3n+1) {
       clear: both;
     }
 
@@ -373,14 +251,6 @@
   .latest-issues li {
 
     &:nth-child(4n+1) {
-      clear: both;
-    }
-
-  }
-
-  .new-journals li {
-
-    &:nth-child(6n+1) {
       clear: both;
     }
 
