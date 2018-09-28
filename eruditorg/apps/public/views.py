@@ -39,7 +39,7 @@ class HomeView(TemplateView):
         context['new_journals'] = Journal.objects.filter(is_new=True)
         context['latest_issues'] = Issue.internal_objects.filter(
             date_published__isnull=False, is_published=True) \
-            .select_related('journal').order_by('-date_published')[:8]
+            .select_related('journal').order_by('-date_published')[:20]
 
         # Includes the 'apropos' news ; note that this is a temporary behavior as
         # these news will likely be included in the new Érudit website in the future.

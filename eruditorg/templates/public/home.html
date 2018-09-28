@@ -82,33 +82,32 @@
 
   {# LATEST ISSUES #}
   {% if latest_issues %}
-  <section class="latest-issues">
+  <section class="home-issues">
     <div class="container">
       <h2>{% trans "Derniers numéros" %}</h2>
-      <ul class="row">
+      <ul class="home-issues__list">
         {% for issue in latest_issues %}
-        <li class="col-xs-12 col-sm-6 col-md-3">
+        <li class="home-issues__item">
+          <p><small>{{ issue.journal.disciplines.all|join:", " }}</small></p>
           {% if issue.has_coverpage %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive">
+            <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive  home-issues__img">
           </a>
           {% else %}
           <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
+            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}" class="img-responsive home-issues__img"/>
           </a>
           {% endif %}
-          <p>{{ issue.journal.disciplines.all|join:", " }} ({{ issue.journal.type|lower }})</p>
           <h3>
-            <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-              {{ issue.journal.name }}
-            </a>
-          </h3>
-          <h4>
             <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-              {% if issue.title %}<span class="issue-theme">{{ issue.title }}</span>{% endif %}
-              {% if issue.volume_title %}<span class="issue-volume">{{ issue.volume_title }}</span>{% endif %}
+              {% if issue.title %}<span class="home-issues__theme">{{ issue.title }}</span>{% endif %}
+              {% if issue.volume_title %}<span class="home-issues__volume">{{ issue.volume_title }}</span>{% endif %}
             </a>
-          </h4>
+            <br/>
+            <div class="home-issues__journal">
+              {% trans "De la revue" %} <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">{{ issue.journal.name }}</a>
+            </div>
+          </h3>
         </li>
         {% endfor %}
       </ul>

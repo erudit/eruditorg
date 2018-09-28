@@ -74,50 +74,60 @@
     }
   }
 
-  .latest-issues {
+  /* Latest issues */
+  .home-issues {
     background-color: $midnight-blue;
     color: #fff;
+
+    p {
+      line-height: 1;
+      font-size: 14px;
+    }
 
     a {
       color: #fff;
     }
-
-    ul {
-      list-style: none;
-    }
-
-    li {
-      margin: 1em 0;
-      padding-top: 0.75em;
-    }
-
-    h3 {
-      font-size: 1em;
-    }
-
-    p {
-      font-size: 12px;
-      margin-bottom: 0.5em;
-    }
-
-    .logo {
-      height: auto;
-      margin-top: 1em;
-      padding-right: 50%;
-    }
-
-    .issue-cover {
-      width: auto;
-    }
-
-    .issue-theme,
-    .issue-volume {
-      font-size: 14px;
-      display: block;
-      line-height: 1.25;
-    }
-
   }
+
+  .home-issues__list {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .home-issues__item {
+    flex-shrink: 0;
+    width: 175px;
+    margin-right: 2em;
+  }
+
+  .home-issues__img {
+    margin-bottom: 1em;
+    padding-right: 15%;
+
+    &:hover, &:focus, &:active {
+      mix-blend-mode: multiply;
+    }
+  }
+
+  .home-issues__journal,
+  .home-issues__theme,
+  .home-issues__volume {
+    font-size: 14px;
+    line-height: 1.25;
+    display: block;
+  }
+
+  .home-issues__journal a {
+    text-decoration: underline;
+  }
+
+  .home-issues__theme {
+    @include font-styles('sans-medium');
+  }
+
 
   .news {
     background-color: $light-grey;
@@ -235,7 +245,6 @@
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
-  .latest-issues li,
   .news--article {
 
     &:nth-child(2n+1) {
@@ -247,14 +256,6 @@
 }
 
 @media (min-width: $screen-md-min) {
-
-  .latest-issues li {
-
-    &:nth-child(4n+1) {
-      clear: both;
-    }
-
-  }
 
   .news--article {
 
