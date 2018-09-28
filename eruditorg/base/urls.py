@@ -7,7 +7,7 @@ from django.contrib.sitemaps import views as sitemap_views
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 from django_js_reverse import views as js_reverse_views
 
 from resumable_uploads import urls as resumable_uploads_urls
@@ -41,7 +41,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict, name='javascript-catalog'),
     url(r'^jsreverse/$', js_reverse_views.urls_js, name='js_reverse'),
 
     url(r'^' + settings.ADMIN_URL, admin.site.urls),
