@@ -37,7 +37,7 @@ def get_last_valid_subscription(organisation):
 def get_managed_organisations(user):
     """ Returns all the organisation that can be managed by a given user. """
     # Anonymous users cannot be part of an organisation!
-    if user.is_anonymous():
+    if user.is_anonymous:
         return
 
     # Superusers or staff members should've access to all organisations while other users'

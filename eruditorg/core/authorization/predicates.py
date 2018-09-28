@@ -15,7 +15,7 @@ class AuthorizationChecker:
         self.foreign_key = foreign_key
 
     def __call__(self, user, obj=None):
-        if user.is_anonymous():
+        if user.is_anonymous:
             # Anonymous users cannot have authorizations.
             return False
 

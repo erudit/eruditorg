@@ -48,4 +48,4 @@ class AccountActionRegisterView(PermissionRequiredMixin, AccountActionTokenMixin
         return self.action.get_consumption_redirect_url(self.token)
 
     def has_permission(self):
-        return not self.request.user.is_authenticated() and self.token.can_be_consumed
+        return not self.request.user.is_authenticated and self.token.can_be_consumed

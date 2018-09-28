@@ -52,7 +52,7 @@ class SubscriptionMiddleware(MiddlewareMixin):
             request.session['HTTP_REFERER'] = referer
 
         # Tries to determine if the user has an individual account
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             for subscription in JournalAccessSubscription.valid_objects.select_related(
                 'sponsor'
             ).filter(user=request.user):

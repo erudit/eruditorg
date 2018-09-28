@@ -41,7 +41,7 @@ class OrganisationMembershipAction(AccountActionBase):
         email.send()
 
     def _member_exists(self, token, user):
-        if user.is_authenticated():
+        if user.is_authenticated:
             return token.content_object.members.filter(pk=user.pk).exists()
         else:
             return False

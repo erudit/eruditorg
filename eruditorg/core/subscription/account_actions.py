@@ -49,7 +49,7 @@ class IndividualSubscriptionAction(AccountActionBase):
         email.send()
 
     def _subscription_exists(self, token, user):
-        if user.is_authenticated():
+        if user.is_authenticated:
             # Computes a boolean indicating if a subscription already exists for the current user.
             return JournalAccessSubscription.objects.filter(
                 user_id=user.id, journal_management_subscription=token.object_id).exists()

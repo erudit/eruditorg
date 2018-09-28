@@ -11,7 +11,7 @@ class SavedCitationList(set):
         self.request = request
         self.name = name
 
-        if hasattr(self.request, 'user') and self.request.user.is_authenticated():
+        if hasattr(self.request, 'user') and self.request.user.is_authenticated:
             # If the user is authenticated we want saved citations list items to be retrieved from
             # the database and not from the session.
             solr_ids = self.request.user.saved_citations.values_list('solr_id', flat=True)
@@ -38,7 +38,7 @@ class SavedCitationList(set):
         """ Saves a list of citations into the user's session or in the database. """
         # If the user is authenticated the list of articles should be associated to the User
         # instance by creating or updating a SavedCitationList instance.
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             self.request.user.saved_citations.all().delete()
             to_create = [SavedCitation(user=self.request.user, solr_id=x) for x in self]
             self.request.user.saved_citations.bulk_create(to_create)
