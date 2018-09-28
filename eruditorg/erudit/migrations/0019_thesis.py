@@ -16,13 +16,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Thesis',
             fields=[
-                ('eruditdocument_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='erudit.EruditDocument')),
+                ('eruditdocument_ptr', models.OneToOneField(auto_created=True, on_delete=models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='erudit.EruditDocument')),
                 ('title', models.CharField(max_length=600, verbose_name='Titre')),
                 ('url', models.URLField(verbose_name='URL')),
                 ('publication_year', models.PositiveIntegerField(verbose_name='Année de publication')),
                 ('description', models.TextField(blank=True, null=True, verbose_name='Résumé')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='erudit.Author', verbose_name='Auteur')),
-                ('collection', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='erudit.Collection', verbose_name='Collection')),
+                ('author', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Author', verbose_name='Auteur')),
+                ('collection', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Collection', verbose_name='Collection')),
             ],
             options={
                 'verbose_name_plural': 'Thèses',

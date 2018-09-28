@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('password', models.CharField(max_length=50, blank=True, verbose_name='Mot de passe')),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
+                ('user', models.OneToOneField(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
             ],
             options={
                 'verbose_name_plural': 'Comptes personnels',
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('synced_with_mandragore', models.BooleanField(default=False, verbose_name='Synchronisé avec Mandragore')),
                 ('mandragore_id', models.CharField(max_length=7, blank=True, null=True, verbose_name='Identifiant Mandragore')),
                 ('sync_date', models.DateField(blank=True, null=True)),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
+                ('user', models.OneToOneField(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
             ],
         ),
     ]

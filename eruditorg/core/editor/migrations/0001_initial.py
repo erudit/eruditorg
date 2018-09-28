@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
                 ('date_created', models.DateTimeField(verbose_name="Date de l'envoi", auto_now_add=True)),
                 ('date_modified', models.DateTimeField(auto_now=True, verbose_name='Date de modification')),
                 ('comment', models.TextField(verbose_name='Commentaire', null=True, blank=True)),
-                ('contact', models.ForeignKey(to=settings.AUTH_USER_MODEL, verbose_name='Personne contact')),
-                ('journal', models.ForeignKey(to='erudit.Journal', verbose_name='Revue')),
+                ('contact', models.ForeignKey(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Personne contact')),
+                ('journal', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', verbose_name='Revue')),
             ],
             options={
                 'verbose_name': 'Envoi de numéro',
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('created', models.DateTimeField(verbose_name='Date de création', auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True, verbose_name='Date de modification')),
-                ('issue_submission', models.ForeignKey(verbose_name='Envoi de numéro', to='editor.IssueSubmission', related_name='files_versions')),
+                ('issue_submission', models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Envoi de numéro', to='editor.IssueSubmission', related_name='files_versions')),
                 ('submissions', models.ManyToManyField(to='resumable_uploads.ResumableFile')),
             ],
             options={
@@ -55,8 +55,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('created', models.DateTimeField(verbose_name='Date de création', auto_now_add=True)),
                 ('status', models.CharField(max_length=100, verbose_name='statut')),
-                ('files_version', models.ForeignKey(verbose_name='Version des fichiers', to='editor.IssueSubmissionFilesVersion', null=True, blank=True)),
-                ('issue_submission', models.ForeignKey(verbose_name='Changements de statut', to='editor.IssueSubmission', related_name='status_tracks')),
+                ('files_version', models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Version des fichiers', to='editor.IssueSubmissionFilesVersion', null=True, blank=True)),
+                ('issue_submission', models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Changements de statut', to='editor.IssueSubmission', related_name='status_tracks')),
             ],
             options={
                 'verbose_name': "Changement de statut d'un envoi de numéro",

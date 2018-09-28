@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('account_id', models.CharField(max_length=10, verbose_name='Identifiant')),
                 ('sushi_requestor_id', models.CharField(max_length=10, verbose_name='Identifiant SUSHI')),
-                ('organisation', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='erudit.Organisation')),
+                ('organisation', models.OneToOneField(on_delete=models.deletion.CASCADE, to='erudit.Organisation')),
             ],
         ),
         migrations.AlterField(

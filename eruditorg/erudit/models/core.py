@@ -38,7 +38,7 @@ class Organisation(models.Model):
 class LegacyOrganisationProfile(models.Model):
     """ Profile of the organisation in the legacy ``restriction`` database. """
 
-    organisation = models.OneToOneField('erudit.Organisation')
+    organisation = models.OneToOneField('erudit.Organisation', on_delete=models.CASCADE)
     account_id = models.CharField(max_length=10, verbose_name=_('Identifiant'))
     sushi_requester_id = models.CharField(
         max_length=10,

@@ -17,7 +17,10 @@ class LegacyAccountProfile(models.Model):
     * ...
 
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'))
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_('Utilisateur'),
+        on_delete=models.CASCADE
+    )
     """ The user associated with the considered legacy profile. """
 
     # Mandragore used to be 3
@@ -35,7 +38,8 @@ class LegacyAccountProfile(models.Model):
     """ Defines the legacy identifier associated with the account (the ID in the legacy DB). """
 
     organisation = models.OneToOneField(
-        Organisation, verbose_name=_('Organisation'), blank=True, null=True)
+        Organisation, verbose_name=_('Organisation'), blank=True, null=True,
+        on_delete=models.CASCADE)
     """ The legacy profile can be associated with an organisation. """
 
     synced_with_origin = models.BooleanField(

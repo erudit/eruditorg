@@ -33,8 +33,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('object_id', models.IntegerField(db_index=True, verbose_name='Object id')),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='erudit_keywordtaggedwhatever_tagged_items', to='contenttypes.ContentType', verbose_name='Content type')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='erudit_keywordtaggedwhatever_items', to='erudit.KeywordTag')),
+                ('content_type', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='erudit_keywordtaggedwhatever_tagged_items', to='contenttypes.ContentType', verbose_name='Content type')),
+                ('tag', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='erudit_keywordtaggedwhatever_items', to='erudit.KeywordTag')),
             ],
             options={
                 'abstract': False,

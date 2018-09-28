@@ -37,11 +37,11 @@ class Migration(migrations.Migration):
                 ('renew_cycle', models.PositiveSmallIntegerField(verbose_name='Cycle du renouvellement (en jours)', null=True, blank=True)),
                 ('comment', models.TextField(verbose_name='Commentaire', null=True, blank=True)),
                 ('full_access', models.BooleanField(verbose_name='Accès complet', default=False)),
-                ('collection', models.ForeignKey(to='erudit.Collection', related_name='+', blank=True, verbose_name='Collection', null=True)),
-                ('journal', models.ForeignKey(to='erudit.Journal', related_name='+', blank=True, verbose_name='Revue', null=True)),
+                ('collection', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Collection', related_name='+', blank=True, verbose_name='Collection', null=True)),
+                ('journal', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', related_name='+', blank=True, verbose_name='Revue', null=True)),
                 ('journals', models.ManyToManyField(verbose_name='Revues', to='erudit.Journal', related_name='_journalaccesssubscription_journals_+', blank=True)),
-                ('organisation', models.ForeignKey(to='erudit.Organisation', blank=True, verbose_name='Organisation', null=True)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, blank=True, verbose_name='Utilisateur', null=True)),
+                ('organisation', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Organisation', blank=True, verbose_name='Organisation', null=True)),
+                ('user', models.ForeignKey(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, blank=True, verbose_name='Utilisateur', null=True)),
             ],
             options={
                 'verbose_name': 'Abonnement aux revues',
@@ -72,8 +72,8 @@ class Migration(migrations.Migration):
                 ('date_renew', models.DateField(verbose_name='Date de renouvellement', null=True, blank=True)),
                 ('renew_cycle', models.PositiveSmallIntegerField(verbose_name='Cycle du renouvellement (en jours)', null=True, blank=True)),
                 ('comment', models.TextField(verbose_name='Commentaire', null=True, blank=True)),
-                ('journal', models.ForeignKey(verbose_name='Revue', to='erudit.Journal')),
-                ('plan', models.ForeignKey(verbose_name='Forfait', to='subscription.JournalManagementPlan')),
+                ('journal', models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Revue', to='erudit.Journal')),
+                ('plan', models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Forfait', to='subscription.JournalManagementPlan')),
             ],
             options={
                 'verbose_name': 'Abonnement de gestion de revue',
@@ -83,6 +83,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='institutionipaddressrange',
             name='subscription',
-            field=models.ForeignKey(verbose_name='Abonnement aux revues', to='subscription.JournalAccessSubscription'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, verbose_name='Abonnement aux revues', to='subscription.JournalAccessSubscription'),
         ),
     ]

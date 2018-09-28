@@ -105,31 +105,42 @@ class JournalAccessSubscription(AbstractSubscription):
 
     # The subscription can be associated either with a user or an organisation.
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('Abonné individuel'), blank=True, null=True)
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('Abonné individuel'), blank=True, null=True,
+        on_delete=models.CASCADE
+    )
     """ User associated to the subscription"""
 
     organisation = models.ForeignKey(
-        Organisation, verbose_name=_('Abonné institutionnel'), blank=True, null=True)
+        Organisation, verbose_name=_('Abonné institutionnel'), blank=True, null=True,
+        on_delete=models.CASCADE
+    )
     """ Organisation associated to the subscription """
 
     journal_management_subscription = models.ForeignKey(
         "JournalManagementSubscription", verbose_name=_('Forfait'), blank=True, null=True,
         related_name="subscriptions",
+        on_delete=models.CASCADE,
     )
     """ JournalManagementSubscription towards which the subscription will count """
 
     # Which Journal instances can be accessed using this subscription?
     journal = models.ForeignKey(
-        Journal, verbose_name=_('Revue'), blank=True, null=True, related_name='+')
+        Journal, verbose_name=_('Revue'), blank=True, null=True, related_name='+',
+        on_delete=models.CASCADE)
     journals = models.ManyToManyField(
         Journal, verbose_name=_('Revues'), related_name='+', blank=True)
     basket = models.ForeignKey(
-        AccessBasket, verbose_name=_("Panier"), blank=True, null=True, related_name='accesses')
+        AccessBasket, verbose_name=_("Panier"), blank=True, null=True, related_name='accesses',
+        on_delete=models.CASCADE
+    )
 
     # The subscription can be sponsored by a specific organisation
     sponsor = models.ForeignKey(
         Organisation, verbose_name=_('Commanditaire'), blank=True, null=True,
-        related_name='sponsored_subscriptions')
+        related_name='sponsored_subscriptions',
+        on_delete=models.CASCADE
+    )
 
     objects = models.Manager()
     valid_objects = JournalAccessSubscriptionValidManager()
@@ -200,7 +211,8 @@ class JournalAccessSubscription(AbstractSubscription):
 
 class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
     """ Defines a period in which a user or an organisation is allowed to access journals. """
-    subscription = models.ForeignKey(JournalAccessSubscription, verbose_name=_('Abonnement'))
+    subscription = models.ForeignKey(JournalAccessSubscription, verbose_name=_('Abonnement'),
+                                     on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Période d’abonnement aux revues")
@@ -209,14 +221,16 @@ class JournalAccessSubscriptionPeriod(AbstractSubscriptionPeriod):
 
 class InstitutionReferer(models.Model):
     subscription = models.ForeignKey(
-        JournalAccessSubscription, verbose_name=_("Abonnement aux revues"), related_name='referers'
+        JournalAccessSubscription, verbose_name=_("Abonnement aux revues"), related_name='referers',
+        on_delete=models.CASCADE
     )
     referer = models.URLField(verbose_name=_("URL référent"))
 
 
 class InstitutionIPAddressRange(models.Model):
     subscription = models.ForeignKey(
-        JournalAccessSubscription, verbose_name=_('Abonnement aux revues'))
+        JournalAccessSubscription, verbose_name=_('Abonnement aux revues'),
+        on_delete=models.CASCADE)
     ip_start = models.GenericIPAddressField(verbose_name=_('Adresse IP de début'))
     ip_end = models.GenericIPAddressField(verbose_name=_('Adresse IP de fin'))
 
@@ -256,8 +270,9 @@ class InstitutionIPAddressRange(models.Model):
 
 class JournalManagementSubscription(AbstractSubscription):
     """ Defines a subscription allowing the members of a journal to manage its subscriptions. """
-    journal = models.ForeignKey(Journal, verbose_name=_('Revue'))
-    plan = models.ForeignKey('JournalManagementPlan', verbose_name=_('Forfait'))
+    journal = models.ForeignKey(Journal, verbose_name=_('Revue'), on_delete=models.CASCADE)
+    plan = models.ForeignKey('JournalManagementPlan', verbose_name=_('Forfait'),
+                             on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Abonnement aux forfaits d'abonnements individuels")
@@ -366,7 +381,8 @@ class JournalManagementPlan(models.Model):
 class JournalManagementSubscriptionPeriod(AbstractSubscriptionPeriod):
     """ Defines a period in which the member of a journal is allowed to manage subscriptions. """
     subscription = models.ForeignKey(
-        JournalManagementSubscription, related_name='period', verbose_name=_('Abonnement')
+        JournalManagementSubscription, related_name='period', verbose_name=_('Abonnement'),
+        on_delete=models.CASCADE
     )
 
     class Meta:

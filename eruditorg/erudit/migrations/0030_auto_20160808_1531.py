@@ -188,7 +188,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='publisher',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='erudit.Publisher', verbose_name='Éditeur'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=models.deletion.CASCADE, to='erudit.Publisher', verbose_name='Éditeur'),
         ),
         migrations.AddField(
             model_name='article',
@@ -292,17 +292,17 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='issuetheme',
             name='issue',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='themes', to='erudit.Issue', verbose_name='Numéro'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='themes', to='erudit.Issue', verbose_name='Numéro'),
         ),
         migrations.AddField(
             model_name='articlesectiontitle',
             name='article',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='section_titles', to='erudit.Article', verbose_name='Article'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='section_titles', to='erudit.Article', verbose_name='Article'),
         ),
         migrations.AddField(
             model_name='articleabstract',
             name='article',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='abstracts', to='erudit.Article', verbose_name='Article'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='abstracts', to='erudit.Article', verbose_name='Article'),
         ),
         migrations.AddField(
             model_name='issue',

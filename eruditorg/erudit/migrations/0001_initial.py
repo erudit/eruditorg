@@ -140,8 +140,8 @@ class Migration(migrations.Migration):
                 ('time', models.DateTimeField(auto_now_add=True, verbose_name='Date/Heure')),
                 ('target_object_id', models.PositiveIntegerField()),
                 ('comment', models.TextField(verbose_name='Commentaire')),
-                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL, verbose_name='Auteur')),
-                ('target_content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('author', models.ForeignKey(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Auteur')),
+                ('target_content_type', models.ForeignKey(on_delete=models.deletion.CASCADE, to='contenttypes.ContentType')),
             ],
             options={
                 'verbose_name_plural': 'Événements',
@@ -155,7 +155,7 @@ class Migration(migrations.Migration):
                 ('amount', models.DecimalField(null=True, max_digits=15, decimal_places=2, blank=True, verbose_name='Montant')),
                 ('date_start', models.DateField(null=True, blank=True, verbose_name='Date de début')),
                 ('date_end', models.DateField(null=True, blank=True, verbose_name='Date de fin')),
-                ('currency', models.ForeignKey(blank=True, null=True, verbose_name='Devise', to='erudit.Currency')),
+                ('currency', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, verbose_name='Devise', to='erudit.Currency')),
             ],
             options={
                 'verbose_name_plural': 'Subventions',
@@ -209,7 +209,7 @@ class Migration(migrations.Migration):
                 ('total_invoice_subcontractor', models.DecimalField(max_digits=15, help_text='Total de la facture du sous-contractant (ex.: CEN-R)', decimal_places=2, blank=True, null=True, verbose_name='Total facture sous-contractant')),
                 ('total', models.DecimalField(null=True, max_digits=15, decimal_places=2, blank=True, verbose_name='Total')),
                 ('status', models.CharField(choices=[('D', 'Draft'), ('V', 'Valid'), ('S', 'Sent'), ('P', 'Paid')], max_length=255, verbose_name='Statut')),
-                ('currency', models.ForeignKey(blank=True, null=True, verbose_name='Devise', to='erudit.Currency')),
+                ('currency', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, verbose_name='Devise', to='erudit.Currency')),
             ],
             options={
                 'verbose_name_plural': 'Factures',
@@ -259,9 +259,9 @@ class Migration(migrations.Migration):
                 ('address', models.TextField(null=True, blank=True, verbose_name='Adresse')),
                 ('active', models.BooleanField(help_text="Une revue inactive n'édite plus de numéros", default=True, verbose_name='Actif')),
                 ('upcoming', models.BooleanField(default=False, verbose_name='Prochainement disponible')),
-                ('collection', models.ForeignKey(blank=True, null=True, to='erudit.Collection')),
+                ('collection', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, to='erudit.Collection')),
                 ('disciplines', models.ManyToManyField(related_name='journals', to='erudit.Discipline')),
-                ('formerly', models.ForeignKey(help_text="Choisir l'ancien nom de la revue", blank=True, null=True, verbose_name='Anciennement', to='erudit.Journal')),
+                ('formerly', models.ForeignKey(on_delete=models.deletion.CASCADE, help_text="Choisir l'ancien nom de la revue", blank=True, null=True, verbose_name='Anciennement', to='erudit.Journal')),
                 ('members', models.ManyToManyField(related_name='journals', to=settings.AUTH_USER_MODEL, verbose_name='Membres')),
             ],
             options={
@@ -293,7 +293,7 @@ class Migration(migrations.Migration):
                 ('partners', models.TextField(null=True, blank=True, verbose_name='Partenaires')),
                 ('partners_fr', models.TextField(null=True, blank=True, verbose_name='Partenaires')),
                 ('partners_en', models.TextField(null=True, blank=True, verbose_name='Partenaires')),
-                ('journal', models.OneToOneField(to='erudit.Journal', related_name='information', verbose_name='Journal')),
+                ('journal', models.OneToOneField(on_delete=models.deletion.CASCADE, to='erudit.Journal', related_name='information', verbose_name='Journal')),
             ],
             options={
                 'verbose_name_plural': 'Informations de revue',
@@ -304,7 +304,7 @@ class Migration(migrations.Migration):
             name='JournalProduction',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
-                ('journal', models.ForeignKey(to='erudit.Journal', related_name='production', verbose_name='Revue')),
+                ('journal', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', related_name='production', verbose_name='Revue')),
             ],
             options={
                 'verbose_name_plural': 'Productions de revue',
@@ -403,7 +403,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(null=True, blank=True)),
                 ('date_start', models.DateField(null=True, blank=True)),
                 ('date_end', models.DateField(null=True, blank=True)),
-                ('journal', models.ForeignKey(blank=True, null=True, to='erudit.Journal')),
+                ('journal', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, to='erudit.Journal')),
             ],
         ),
         migrations.CreateModel(
@@ -411,8 +411,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('total', models.DecimalField(null=True, decimal_places=2, blank=True, max_digits=15)),
-                ('currency', models.ForeignKey(blank=True, null=True, to='erudit.Currency')),
-                ('quotation', models.ForeignKey(to='erudit.Quotation')),
+                ('currency', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, to='erudit.Currency')),
+                ('quotation', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Quotation')),
             ],
         ),
         migrations.CreateModel(
@@ -423,8 +423,8 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(null=True, max_digits=15, decimal_places=2, blank=True, verbose_name='Prix')),
                 ('approved', models.BooleanField(default=False, verbose_name='Approuvé')),
                 ('date_approved', models.DateField(null=True, blank=True, verbose_name="Date d'approbation")),
-                ('currency', models.ForeignKey(blank=True, null=True, verbose_name='Devise', to='erudit.Currency')),
-                ('journal', models.ForeignKey(to='erudit.Journal', verbose_name='Revue')),
+                ('currency', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, verbose_name='Devise', to='erudit.Currency')),
+                ('journal', models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', verbose_name='Revue')),
             ],
             options={
                 'verbose_name_plural': "Tarifs d'abonnement",
@@ -461,7 +461,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('eruditdocument_ptr', models.OneToOneField(serialize=False, to='erudit.EruditDocument', primary_key=True, parent_link=True, auto_created=True)),
+                ('eruditdocument_ptr', models.OneToOneField(on_delete=models.deletion.CASCADE, serialize=False, to='erudit.EruditDocument', primary_key=True, parent_link=True, auto_created=True)),
                 ('surtitle', models.CharField(null=True, max_length=500, blank=True)),
                 ('title', models.CharField(null=True, max_length=500, blank=True)),
                 ('processing', models.CharField(choices=[('C', 'Complet'), ('M', 'Minimal')], max_length=1)),
@@ -475,22 +475,22 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='subscriptionprice',
             name='type',
-            field=models.ForeignKey(to='erudit.SubscriptionType', verbose_name='Type'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.SubscriptionType', verbose_name='Type'),
         ),
         migrations.AddField(
             model_name='subscriptionprice',
             name='zone',
-            field=models.ForeignKey(to='erudit.SubscriptionZone', verbose_name='Zone'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.SubscriptionZone', verbose_name='Zone'),
         ),
         migrations.AddField(
             model_name='journalproduction',
             name='production_center',
-            field=models.ForeignKey(help_text='Centre de production responsable\n            de la production de la revue.', blank=True, null=True, verbose_name='Centre de production', to='erudit.ProductionCenter'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, help_text='Centre de production responsable\n            de la production de la revue.', blank=True, null=True, verbose_name='Centre de production', to='erudit.ProductionCenter'),
         ),
         migrations.AddField(
             model_name='journalproduction',
             name='production_type',
-            field=models.ForeignKey(blank=True, null=True, verbose_name='Type de production', to='erudit.ProductionType'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, verbose_name='Type de production', to='erudit.ProductionType'),
         ),
         migrations.AddField(
             model_name='journal',
@@ -500,52 +500,52 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journal',
             name='type',
-            field=models.ForeignKey(blank=True, null=True, verbose_name='Type', to='erudit.JournalType'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, verbose_name='Type', to='erudit.JournalType'),
         ),
         migrations.AddField(
             model_name='issue',
             name='journal',
-            field=models.ForeignKey(to='erudit.Journal', related_name='issues', verbose_name='Revue'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', related_name='issues', verbose_name='Revue'),
         ),
         migrations.AddField(
             model_name='invoice',
             name='journal',
-            field=models.ForeignKey(help_text='Revue facturée', blank=True, null=True, verbose_name='Revue', to='erudit.Journal'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, help_text='Revue facturée', blank=True, null=True, verbose_name='Revue', to='erudit.Journal'),
         ),
         migrations.AddField(
             model_name='indexation',
             name='indexer',
-            field=models.ForeignKey(to='erudit.Indexer', verbose_name='Indexeur'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Indexer', verbose_name='Indexeur'),
         ),
         migrations.AddField(
             model_name='indexation',
             name='journal',
-            field=models.ForeignKey(to='erudit.Journal', verbose_name='Revue'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', verbose_name='Revue'),
         ),
         migrations.AddField(
             model_name='grant',
             name='granting_agency',
-            field=models.ForeignKey(to='erudit.GrantingAgency', verbose_name='Organisme subventionnaire'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.GrantingAgency', verbose_name='Organisme subventionnaire'),
         ),
         migrations.AddField(
             model_name='grant',
             name='journal',
-            field=models.ForeignKey(help_text='Revue ayant obtenu cette subvention', to='erudit.Journal', related_name='grants', verbose_name='Revue'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, help_text='Revue ayant obtenu cette subvention', to='erudit.Journal', related_name='grants', verbose_name='Revue'),
         ),
         migrations.AddField(
             model_name='contract',
             name='journal',
-            field=models.ForeignKey(to='erudit.Journal', related_name='contracts', verbose_name='Revue'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Journal', related_name='contracts', verbose_name='Revue'),
         ),
         migrations.AddField(
             model_name='contract',
             name='status',
-            field=models.ForeignKey(blank=True, related_name='contracts', null=True, verbose_name='État', to='erudit.ContractStatus'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, related_name='contracts', null=True, verbose_name='État', to='erudit.ContractStatus'),
         ),
         migrations.AddField(
             model_name='contract',
             name='type',
-            field=models.ForeignKey(to='erudit.ContractType', related_name='contracts', verbose_name='Type'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.ContractType', related_name='contracts', verbose_name='Type'),
         ),
         migrations.AddField(
             model_name='basket',
@@ -555,7 +555,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='author',
             name='organisation',
-            field=models.ForeignKey(blank=True, null=True, verbose_name='Organisation', to='erudit.Organisation'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, null=True, verbose_name='Organisation', to='erudit.Organisation'),
         ),
         migrations.AddField(
             model_name='article',
@@ -565,6 +565,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='issue',
-            field=models.ForeignKey(to='erudit.Issue', related_name='issues', verbose_name='Numéro'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='erudit.Issue', related_name='issues', verbose_name='Numéro'),
         ),
     ]

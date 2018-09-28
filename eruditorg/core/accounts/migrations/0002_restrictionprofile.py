@@ -20,8 +20,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('password', models.CharField(blank=True, max_length=50, verbose_name='Mot de passe')),
                 ('restriction_id', models.PositiveIntegerField(verbose_name='Identifiant DB Restriction')),
-                ('organisation', models.OneToOneField(to='erudit.Organisation', verbose_name='Organisation')),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
+                ('organisation', models.OneToOneField(on_delete=models.deletion.CASCADE, to='erudit.Organisation', verbose_name='Organisation')),
+                ('user', models.OneToOneField(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Utilisateur')),
             ],
             options={
                 'verbose_name_plural': 'Comptes personnels Restriction',

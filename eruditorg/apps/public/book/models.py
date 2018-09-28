@@ -137,6 +137,7 @@ class Book(models.Model):
         blank=True,
         null=True,
         related_name='books',
+        on_delete=models.CASCADE,
     )
     copyright = models.CharField(
         blank=True,

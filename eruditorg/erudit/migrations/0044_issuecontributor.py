@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('role_name', models.CharField(max_length=255, verbose_name='Rôle du contributeur')),
                 ('is_director', models.NullBooleanField(verbose_name='Est un directeur')),
                 ('is_editor', models.NullBooleanField(verbose_name='Est un rédacteur')),
-                ('issue', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='contributors', to='erudit.Issue', verbose_name='Numéro')),
+                ('issue', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='contributors', to='erudit.Issue', verbose_name='Numéro')),
             ],
         ),
     ]
