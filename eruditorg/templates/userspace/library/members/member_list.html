@@ -49,7 +49,7 @@
         <span class="col-sm-3">{{ member.last_login|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
           <a href="{% url 'userspace:library:members:delete' organisation_pk=scope_current_organisation.pk pk=member.pk %}" title="{% trans 'Supprimer ce membre' %}">
-            <i class="icon ion-close table-row-delete"></i>
+            <i class="icon ion-ios-close table-row-delete"></i>
           </a>
         </span>
       </div>
@@ -89,7 +89,7 @@
         <span class="col-sm-4">{{ pmember.expiration_date|date:"SHORT_DATE_FORMAT" }}</span>
         <span class="col-sm-2">
           <a href="{% url 'userspace:library:members:cancel' organisation_pk=scope_current_organisation.pk pk=pmember.pk %}" title="{% trans 'Supprimer ce membre' %}">
-            <i class="icon ion-close table-row-delete"></i>
+            <i class="icon ion-ios-close table-row-delete"></i>
           </a>
         </span>
       </div>

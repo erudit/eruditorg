@@ -52,7 +52,7 @@
         <li class="col-xs-2">{{ auth.user.last_login|date:"SHORT_DATE_FORMAT" }}</li>
         <li class="col-xs-1 authorization-delete">
           <a href="{% url 'userspace:library:authorization:delete' auth.pk %}" title="{% trans 'Supprimer cet usager' %}">
-            <i class="icon ion-close"></i>
+            <i class="icon ion-ios-close"></i>
           </a>
         </li>
       </ul>
