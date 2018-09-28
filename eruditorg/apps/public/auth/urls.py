@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from . import forms
 from . import views
 
+app_name = "auth"
 
 urlpatterns = [
     # Sign in / sign out

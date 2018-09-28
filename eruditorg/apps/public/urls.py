@@ -7,11 +7,12 @@ from django.views.generic import TemplateView
 
 from . import views
 
+app_name = "public"
 
 urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='home'),
 
-    url(_(r'^compte/'), include('apps.public.auth.urls', namespace='auth')),
+    url(_(r'^compte/'), include('apps.public.auth.urls')),
     url(_(r'^compte/actions/'), include(
         'apps.public.account_actions.urls', namespace='account_actions')),
     url(_(r'^notices/'), include('apps.public.citations.urls', namespace='citations')),
@@ -24,5 +25,5 @@ urlpatterns = [
         name='20_years'),
 
     # The journal URLs are at the end of the list because some of them are catchalls.
-    url(r'^', include('apps.public.journal.urls', namespace='journal')),
+    url(r'^', include('apps.public.journal.urls')),
 ]

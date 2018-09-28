@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = "reporting"
 
 urlpatterns = [
     url(r'^$', views.ReportingHomeView.as_view(), name='home'),

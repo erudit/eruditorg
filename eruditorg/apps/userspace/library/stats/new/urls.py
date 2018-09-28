@@ -6,6 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from apps.userspace.library.stats.new import views
 from apps.userspace.library.stats.common.views import StatsLandingView
 
+app_name = "stats"
+
 urlpatterns = [
     url(r'^$', StatsLandingView.as_view(), name='landing'),
     url(_(r'^rapport/jr1/csv/$'),

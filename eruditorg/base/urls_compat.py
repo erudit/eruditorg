@@ -10,7 +10,7 @@ from apps.public.book import views_compat as book_views_compat
 # Thesis url patterns
 # -----------------------------------------------------------------------------
 
-thesis_url_patterns = [
+thesis_url_patterns = ([
     url(r'^$', RedirectRetroUrls.as_view(
         pattern_name='public:thesis:home',
         permanent=True)),
@@ -23,7 +23,7 @@ thesis_url_patterns = [
         permanent=True
     )),
 
-]
+], 'legacy_thesis')
 
 # Public legacy patterns
 # -----------------------------------------------------------------------------
@@ -40,15 +40,15 @@ public_url_patterns = [
 # Search legacy patterns
 # -----------------------------------------------------------------------------
 
-search_url_patterns = [
+search_url_patterns = ([
     url(r'^index\.html?$',
         RedirectRetroUrls.as_view(pattern_name='public:search:advanced_search', permanent=True))
-]
+], 'legacy_search')
 
 # Journal legacy patterns
 # ------------------------------------------------------------------------------
 
-journal_url_patterns = [
+journal_url_patterns = ([
     # Journal
     url(r'^revue/(?P<code>[\w-]+)/?$',
         journal_views_compat.JournalDetailCheckRedirectView.as_view(
@@ -130,16 +130,16 @@ journal_url_patterns = [
         journal_views_compat.ArticleDetailRedirectView.as_view(),
         name="legacy_article_detail_culture_localidentifier"
     )
-]
+], 'legacy_journal')
 
-book_url_patterns = [
+book_url_patterns = ([
     url(r'^$', book_views_compat.BooksHomeRedirectView.as_view(),
         name='legacy_books_home'),
     url(r'^(?P<path>[\w]+)/index\.htm$', book_views_compat.CollectionRedirectView.as_view(),
         name='legacy_collection_home'),
     url(r'^(?P<path>[\w/]+)/index\.htm$', book_views_compat.BookRedirectView.as_view(),
         name='legacy_book'),
-]
+], 'legacy_book')
 
 
 # Base legacy url patterns
@@ -166,10 +166,10 @@ urlpatterns = [
         url(r'^abonnement/modifierPassword\.jsp$',
             RedirectRetroUrls.as_view(pattern_name='password_change', permanent=True)),
 
-        url(r'^recherche/', include(search_url_patterns, namespace="legacy_search")),
-        url(r'^these/', include(thesis_url_patterns, namespace="legacy_thesis")),
-        url(r'^livre/', include(book_url_patterns, namespace="legacy_book")),
-        url(r'^', include(journal_url_patterns, namespace="legacy_journal")),
+        url(r'^recherche/', include(search_url_patterns)),
+        url(r'^these/', include(thesis_url_patterns)),
+        url(r'^livre/', include(book_url_patterns)),
+        url(r'^', include(journal_url_patterns)),
         url(r'^', include(public_url_patterns)),
     ]),),
 ]

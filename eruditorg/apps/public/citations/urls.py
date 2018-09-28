@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = "citations"
 
 urlpatterns = [
     url(r'^$', views.SavedCitationListView.as_view(), name='list'),

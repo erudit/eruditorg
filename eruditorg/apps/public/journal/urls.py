@@ -8,6 +8,7 @@ from . import feeds
 from . import views
 from . import views_compat
 
+app_name = "journal"
 
 urlpatterns = [
     url(_(r'^revues/$'), views.JournalListView.as_view(), name='journal_list'),

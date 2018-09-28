@@ -4,17 +4,18 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
+app_name = 'journal'
 
 section_apps_urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(_(r'^autorisations/'),
-        include('apps.userspace.journal.authorization.urls', namespace='authorization')),
+        include('apps.userspace.journal.authorization.urls')),
     url(_(r'^editeur/'),
-        include('apps.userspace.journal.editor.urls', namespace='editor')),
+        include('apps.userspace.journal.editor.urls')),
     url(_(r'^informations/'),
-        include('apps.userspace.journal.information.urls', namespace='information')),
+        include('apps.userspace.journal.information.urls')),
     url(_(r'^abonnements/'),
-        include('apps.userspace.journal.subscription.urls', namespace='subscription')),
+        include('apps.userspace.journal.subscription.urls')),
     url(
         _(r'^redevances/$'),
         views.RoyaltiesListView.as_view(),
