@@ -46,192 +46,124 @@
 <main role="main">
   <h1 class="sr-only">{% trans "Accueil d’Érudit" %}</h1>
   {% cache LONG_TTL "public_home" LANGUAGE_CODE %}
-  <section class="banner">
+  {# SEARCH #}
+  <header class="home-header">
     <div class="container">
-      <h2 class="banner-header">{% trans "Cultivez <br/>votre savoir." %}</h2>
-    </div>
-  </section>
-
-  <!-- SEARCH PUBLICATIONS -->
-  <section class="glory explore">
-    <div class="container">
+      <h2 class="home-header__title">{% trans "Érudit <br/>célèbre <br/>ses 20 ans&nbsp;!" %}</h2>
       <div class="row">
-        <header class="col-xs-12 col-md-10 col-lg-8">
-          <h3>
-            {% trans "Explorez plus de 200&nbsp;000 publications savantes et culturelles en sciences humaines et sociales." %}
-          </h3>
-        </header>
-      </div>
-      <div class="row">
-        <!-- BASIC SEARCH -->
-        <section class="col-xs-12 col-sm-6 col-md-4 subsection-search">
-          <form action="{% url 'public:search:results' %}" id="id-search" method="get">
-            <div class="form-group">
-              <label for="basic-search" class="h3">{% trans "Recherche" %}</label>
-              <div class="input-group">
-                <input type="hidden" name="funds" value="Érudit">
-                <input type="hidden" name="funds" value="UNB">
-                <input name="basic_search_term" id="basic-search" type="search" class="form-control" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
-                <div class="input-group-addon">
-                  <button type="submit" class="btn">
-                    <span class="sr-only">{% trans "Rechercher" %}</span>
-                    <span class="ion ion-ios-search-strong"></span>
-                  </button>
-                </div>
+        <section class="col-sm-8 col-md-6 home-search">
+          <h3 class="sr-only">{% trans "Effectuer une recherche simple" %}</h3>
+          <form action="{% url 'public:search:results' %}" class="home-search__form" id="id-search" method="get">
+            <label for="basic-search" class="home-search__label">{% trans "Recherche" %}</label>
+            <div class="input-group">
+              <input type="hidden" name="funds" value="Érudit">
+              <input type="hidden" name="funds" value="UNB">
+              <input name="basic_search_term" id="basic-search" type="search" class="home-search__input" placeholder="{% trans "Par auteur, titre, mots-clés&hellip;" %}" autofocus>
+              <div class="home-search__addon">
+                <button type="submit" class="home-search__btn">
+                  <span class="sr-only">{% trans "Rechercher" %}</span>
+                  <i class="icon ion-ios-search"></i>
+                </button>
               </div>
             </div>
-            <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
           </form>
-        </section>
-        <!-- PUBLICATION TYPES -->
-        <section class="col-xs-12 col-sm-6 col-md-4 subsection-publicationtypes">
-          <ol>
-            <li class="glory--publication-types--item">
-              <h3><a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a></h3>
-            </li>
-            <li class="glory--publication-types--item">
-              <h3><a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a></h3>
-            </li>
-            <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
-              <h3>
-                {% flag "BOOKS" %}
-                <a href="{% url 'public:book:home' %}" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
-                {% else %}
-                <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
-                {% endflag %}
-              </h3>
-            </li>
-            <li class="glory--publication-types--item{% switch "maintenance" %} disabled{% endswitch %}">
-              <h3><a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a></h3>
-            </li>
-          </ol>
-        </section>
-        <!-- DISCIPLINES -->
-        <section class="col-xs-12 col-md-4 subsection-disciplines">
-          <h3>{{ disciplines|length }} {% trans "disciplines" %}</h3>
-          <p>{{ disciplines|slice:":10"|join:", "|lower }}&hellip;<br /><a href="{% url 'public:journal:journal_list' %}?sorting=disciplines">{% trans "Voir toutes les disciplines" %}</a></p>
-        </section>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEW JOURNALS -->
-  {% if new_journals %}
-  <section class="container new-journals">
-    <hr class="section-separator">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>{% trans 'Nouvelles revues' %}</h2>
-      </div>
-    </div>
-    <ul class="row">
-      {% for journal in new_journals %}
-      <li class="col-xs-6 col-sm-4 col-md-2">
-        <p>{{ journal.disciplines.all|join:", " }} ({{ journal.type|lower }})</p>
-        <h3>
-          <a href="{% url 'public:journal:journal_detail' journal.code %}" title="{% trans 'Consulter' %} {{ journal.name }}">
-            {{ journal.name }}
-          </a>
-        </h3>
-      </li>
-      {% endfor %}
-    </ul>
-  </section>
-  {% endif %}
-
-  <!-- LATEST ISSUES -->
-  {% if latest_issues %}
-  <section class="container latest-issues">
-    <hr class="section-separator">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>{% trans "Derniers numéros" %}</h2>
-      </div>
-    </div>
-    <ul class="row">
-      {% for issue in latest_issues %}
-      <li class="col-xs-12 col-sm-6 col-md-3">
           <div class="row">
-            <div class="col-xs-4 col-sm-12">
-              <p>{{ issue.journal.disciplines.all|join:", " }} ({{ issue.journal.type|lower }})</p>
-              <h3>
-                <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                  {{ issue.journal.name }}
-                </a>
-              </h3>
+            <div class="col-xs-6">
+              <a href="#"><strong>--> {% trans "Vers les revues" %}</strong></a>
             </div>
-            <div class="col-xs-8 col-sm-12">
-              {% if issue.has_coverpage %}
-              <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive issue-cover">
-              </a>
-              {% else %}
-              <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive logo" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
-              </a>
-              {% endif %}
-              <h4>
-                <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
-                  {% if issue.title %}<span class="issue-theme">{{ issue.title }}</span>{% endif %}
-                  {% if issue.volume_title %}<span class="issue-volume">{{ issue.volume_title }}</span>{% endif %}
-                </a>
-              </h4>
+            <div class="col-xs-6 text-right">
+              <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
             </div>
           </div>
-      </li>
-      {% endfor %}
-    </ul>
+        </section>
+      </div>
+    </div>
+  </header>
+
+  {# LATEST ISSUES #}
+  {% if latest_issues %}
+  <section class="latest-issues">
+    <div class="container">
+      <h2>{% trans "Derniers numéros" %}</h2>
+      <ul class="row">
+        {% for issue in latest_issues %}
+        <li class="col-xs-12 col-sm-6 col-md-3">
+          {% if issue.has_coverpage %}
+          <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
+            <img src="{% url 'public:journal:issue_coverpage' issue.journal.code issue.volume_slug issue.localidentifier %}" alt="{% blocktrans with journal_name=issue.journal.name issue_title=issue.title|default:issue.volume_title %}Couverture du numéro '{{ issue_title }}' de la revue '{{ journal_name }}'{% endblocktrans %}" class="img-responsive">
+          </a>
+          {% else %}
+          <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
+            <img src="{% url 'public:journal:journal_logo' issue.journal.code %}" class="img-responsive" alt="{% blocktrans with journal_name=issue.journal.name %}Logo de la revue {{ journal_name }}{% endblocktrans %}"/>
+          </a>
+          {% endif %}
+          <p>{{ issue.journal.disciplines.all|join:", " }} ({{ issue.journal.type|lower }})</p>
+          <h3>
+            <a href="{% url 'public:journal:journal_detail' issue.journal.code %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
+              {{ issue.journal.name }}
+            </a>
+          </h3>
+          <h4>
+            <a href="{% url 'public:journal:issue_detail' issue.journal.code issue.volume_slug issue.localidentifier %}" title="{{ issue.journal.name }} - {% if issue.title %}{{ issue.title }}, {% endif %}{{ issue.volume_title }}">
+              {% if issue.title %}<span class="issue-theme">{{ issue.title }}</span>{% endif %}
+              {% if issue.volume_title %}<span class="issue-volume">{{ issue.volume_title }}</span>{% endif %}
+            </a>
+          </h4>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </section>
   {% endif %}
 
   {% switch "maintenance" %}
   {% else %}
-  <!-- NEWS -->
+  {# NEWS #}
   {% if latest_news %}
-  <section class="container news">
-    <hr class="section-separator">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>{% trans "Nouvelles" %}</h2>
+  <section class="news">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{% trans "Nouvelles" %}</h2>
+        </div>
       </div>
-    </div>
-    <div class="row news--campaign">
-      <div class="col-xs-12 col-md-8">
-        <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">
-          <div id="campaign-banner" class="campaign-banner"></div>
-        </a>
+      <div class="row news--campaign">
+        <div class="col-xs-12 col-md-8">
+          <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">
+            <div id="campaign-banner" class="campaign-banner"></div>
+          </a>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <p class="category-tag">{% trans 'Libre accès' %}</p>
+          <h3 class="news--campaign--title"><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">{% trans 'Partenariat pour le libre accès' %}</a></h3>
+          <p class="news--campaign--desc">{% blocktrans %}Le Partenariat pour le libre accès soutient depuis 2014 les revues canadiennes en SHS dans une transition graduelle vers le libre accès.{% endblocktrans %}</p>
+          <p><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">-> partnership.erudit.org</a></p>
+        </div>
       </div>
-      <div class="col-xs-12 col-md-4">
-        <p class="category-tag">{% trans 'Libre accès' %}</p>
-        <h3 class="news--campaign--title"><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">{% trans 'Partenariat pour le libre accès' %}</a></h3>
-        <p class="news--campaign--desc">{% blocktrans %}Le Partenariat pour le libre accès soutient depuis 2014 les revues canadiennes en SHS dans une transition graduelle vers le libre accès.{% endblocktrans %}</p>
-        <p><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">-> partnership.erudit.org</a></p>
-      </div>
-    </div>
 
-    <ul class="row latest-news">
-      {% for entry in latest_news %}
-      <li class="col-md-4 col-sm-6 news--article">
-        <p class="category-tag">{{ entry.category }}</p>
-        <h3 class="news--article--title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
-        <p class="summary">{{ entry.summary|safe|truncatewords_html:20 }}&nbsp;<a href="{{ entry.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
-        <time class="news--article--date text-muted" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
-      </li>
-      {% endfor %}
-    </ul>
+      <ul class="row latest-news">
+        {% for entry in latest_news %}
+        <li class="col-md-4 col-sm-6 news--article">
+          <p class="category-tag">{{ entry.category }}</p>
+          <h3 class="news--article--title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
+          <p class="summary">{{ entry.summary|safe|truncatewords_html:20 }}&nbsp;<a href="{{ entry.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
+          <time class="news--article--date text-muted" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
+        </li>
+        {% endfor %}
+      </ul>
 
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn btn-secondary news--btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn btn-secondary news--btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
+        </div>
       </div>
     </div>
   </section>
   {% endif %}
   {% endswitch %}
 
-  <!-- ABOUT ERUDIT.ORG -->
+  {# ABOUT ERUDIT.ORG #}
   <section class="container">
-    <hr class="section-separator">
     <div class="row about-erudit">
       <div class="col-xs-12">
         <div class="row">
