@@ -69,7 +69,7 @@
           </form>
           <div class="row">
             <div class="col-xs-6">
-              <a href="#"><strong>--> {% trans "Vers les revues" %}</strong></a>
+              <a href="{% url 'public:journal:journal_list' %}"><strong>--> {% trans "Vers les revues" %}</strong></a>
             </div>
             <div class="col-xs-6 text-right">
               <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
@@ -84,7 +84,7 @@
   {% if latest_issues %}
   <section class="home-issues">
     <div class="container">
-      <h2>{% trans "Derniers numéros" %}</h2>
+      <h2 class="home-issues__title">{% trans "Derniers numéros" %}</h2>
       <ul class="home-issues__list">
         {% for issue in latest_issues %}
         <li class="home-issues__item">
@@ -111,6 +111,9 @@
         </li>
         {% endfor %}
       </ul>
+      <p>
+        <a href="{% url 'public:journal:journal_list' %}" class="btn home-issues__btn">{% trans "Voir toutes les revues" %}</a>
+      </p>
     </div>
   </section>
   {% endif %}

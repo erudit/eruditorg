@@ -8,9 +8,41 @@
     display: none;
   }
 
+  .site-header__fixed {
+    background-color: transparent;
+    @include box-shadow(none);
+
+    .header-logo__img rect,
+    .header-logo__img path {
+      fill: #fff;
+    }
+
+    .nav-menu__link {
+      &:hover, &:focus, &:active {
+        color: #000;
+      }
+    }
+  }
+
+  .site-header__scrolled {
+    background-color: #fff;
+    @include box-shadow(0 3px 5px rgba(0,0,0,0.1));
+
+    .header-logo__img rect,
+    .header-logo__img path {
+      fill: $coral-red;
+    }
+
+    .nav-menu__link {
+      &:hover, &:focus, &:active {
+        color: $coral-red;
+      }
+    }
+  }
+
   /* Header / "cover page" */
   .home-header {
-    background: url('../img/homepage/bg-1.png') no-repeat center 55px;
+    background: url('../img/homepage/bg-1.png') no-repeat left 55px;
     background-size: cover;
     min-height: 50vh;
     margin-top: -150px;
@@ -34,6 +66,12 @@
 
   .home-search__form {
     margin-bottom: 2.5vh;
+  }
+
+  .home-search__label {
+    display: block;
+    margin-bottom: 2.5vh;
+    font-size: 1rem;
   }
 
   .home-search__input {
@@ -89,6 +127,10 @@
     }
   }
 
+  .home-issues__title {
+    font-size: 1rem;
+  }
+
   .home-issues__list {
     margin: 0;
     list-style: none;
@@ -126,6 +168,16 @@
 
   .home-issues__theme {
     @include font-styles('sans-medium');
+  }
+
+  .home-issues__btn {
+    margin-top: 2.5vh;
+    border: 1px solid #fff;
+
+    &:hover, &:focus, &:active {
+      background-color: #fff;
+      color: $midnight-blue;
+    }
   }
 
 
