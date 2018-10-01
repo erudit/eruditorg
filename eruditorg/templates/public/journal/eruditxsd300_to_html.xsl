@@ -54,7 +54,7 @@
 
         <div class="col-md-9">
           <xsl:if test="liminaire/grtitre/surtitre">
-            <p class="title-tag">
+            <p class="main-header__meta">
               <xsl:apply-templates select="liminaire/grtitre/surtitre" mode="title"/>
               <xsl:apply-templates select="liminaire/grtitre/surtitreparal" mode="title"/>
             </p>
@@ -318,11 +318,11 @@
             {% else %}
             <li>
               <a class="tool-btn" id="tool-citation-save-{{ article.localidentifier }}" data-citation-save="#article-{{ article.localidentifier }}"{% if article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
-                <span class="ion-bookmark toolbox-save"></span>
+                <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
                 <span class="tools-label">{% trans "Sauvegarder" %}</span>
               </a>
               <a class="tool-btn saved" id="tool-citation-remove-{{ article.localidentifier }}" data-citation-remove="#article-{{ article.localidentifier }}"{% if not article.solr_id in request.saved_citations %} style="display:none;"{% endif %}>
-                <span class="ion-bookmark toolbox-save"></span>
+                <ion-icon name="ios-bookmark" class="toolbox-save"></ion-icon>
                 <span class="tools-label">{% trans "Supprimer" %}</span>
               </a>
             </li>
@@ -337,7 +337,7 @@
             {% endif %}
             <li>
               <a class="tool-btn tool-cite" data-modal-id="#id_cite_modal_{{ article.localidentifier }}">
-                <span class="ion-quote toolbox-cite"></span>
+                <ion-icon name="quote" class="toolbox-cite"></ion-icon>
                 <span class="tools-label">{% trans "Citer cet article" %}</span>
               </a>
             </li>
@@ -346,7 +346,7 @@
                 <xsl:attribute name="data-title">
                   {{ article|format_article_title|escape }}
                 </xsl:attribute>
-                <span class="ion-android-share toolbox-share"></span>
+                <ion-icon name="share-alt" class="toolbox-share"></ion-icon>
                 <span class="tools-label">{% trans "Partager" %}</span>
               </a>
             </li>
@@ -481,6 +481,14 @@
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
       <xsl:apply-templates select="."/>
+      <xsl:if test="self::titre">
+        {# Peer review seal #}
+        {% if article.issue.journal.type.code == 'S' %}
+        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+          <ion-icon name="ios-checkmark-circle" size="small"></ion-icon>
+        </span>
+        {% endif %}
+      </xsl:if>
     </span>
   </xsl:template>
 

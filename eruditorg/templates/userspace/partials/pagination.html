@@ -5,7 +5,7 @@
         {% if page_obj.has_previous %}
         <li class="prev">
             <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
-              <span class="ion-ios-arrow-left"></span>
+              <ion-icon name="ios-arrow-back"></ion-icon>
             </a>
         </li>
         {% endif %}
@@ -33,7 +33,7 @@
         {% if page_obj.has_next %}
         <li class="next">
             <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
-              <span class="ion-ios-arrow-right"></span>
+              <ion-icon name="ios-arrow-forward"></ion-icon>
             </a>
         </li>
         {% endif %}

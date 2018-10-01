@@ -130,10 +130,10 @@
         {# Search bar triggers (open / close) #}
         <div class="pull-right nav-search-triggers">
           <a href="#" data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__open " title="{% trans 'Effectuer une recherche simple' %}">
-            <span class="ion-ios-search-strong nav-search-triggers__icon"></span>
+            <ion-icon name="ios-search" class="nav-search-triggers__icon"></ion-icon>
           </a>
           <a data-trigger-search-bar class="nav-search-triggers__link nav-search-triggers__close" title="{% trans 'Fermer la recherche simple (touche Échap)' %}">
-            <span class="ion-android-close nav-search-triggers__icon"></span>
+            <ion-icon name="ios-close" class="nav-search-triggers__icon"></ion-icon>
           </a>
         </div>
 
@@ -153,7 +153,7 @@
             {% block mainnav %}
             {% block inner_nav %}{% endblock inner_nav %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="#" class="hidden-xs hidden-sm nav-menu__link">{% trans "Types de publications" %}<span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+              <a href="#" class="hidden-xs hidden-sm nav-menu__link">{% trans "Types de publications" %}<ion-icon name="ios-arrow-down" class="nav-menu__caret"></ion-icon></a>
               <ul class="nav-submenu">
                 <li class="nav-submenu__item">
                   <a href="{% url 'public:journal:journal_list' %}" title="{% trans 'Index des revues' %}">{% trans "Revues" %}</a>
@@ -161,11 +161,15 @@
                 <li class="nav-submenu__item">
                   <a href="{% url 'public:thesis:home' %}" title="{% trans 'Index des dépôts institutionnels' %}">{% trans "Thèses et mémoires" %}</a>
                 </li>
+                <li class="nav-submenu__item">
+                  {% flag "BOOKS" %}
+                  <a href="{% url 'public:book:home' %}" title="{% trans 'Index des livres et actes' %}">{% trans "Livres et actes" %}</a>
+                  {% else %}
+                  <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
+                  {% endflag %}
+                </li>
                 {% switch "maintenance" %}
                 {% else %}
-                <li class="nav-submenu__item">
-                  <a href="https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}" title="{% trans 'Index des livres et actes' %}" target="_blank">{% trans "Livres et actes" %}</a>
-                </li>
                 <li class="nav-submenu__item">
                   <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}" title="{% trans 'Index des rapports de recherche' %}" target="_blank">{% trans "Rapports de recherche" %}</a>
                 </li>
@@ -182,7 +186,7 @@
             </li>
             {% else %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="nav-menu__link">{% trans "Mon compte" %}<span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+              <a href="{% url 'userspace:dashboard' %}"  title="{% trans 'Accéder à au tableau de bord' %}" class="nav-menu__link">{% trans "Mon compte" %} <ion-icon name="ios-arrow-down" class="nav-menu__caret"></ion-icon></a>
               <ul class="hidden-xs hidden-sm nav-submenu">
                 {% has_perm 'userspace.access' request.user as can_access_userspace %}
                 {% if can_access_userspace %}
@@ -200,7 +204,7 @@
             </li>
             {% endif %}
             <li class="nav-menu__item nav-menu__item_has-submenu">
-              <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="nav-menu__link" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+              <a href="{% if LANGUAGE_CODE == 'fr' %}https://apropos.erudit.org/fr/{% else %}https://apropos.erudit.org/en/{% endif %}" target="_blank" class="nav-menu__link" title="{% blocktrans %}À propos d’Érudit{% endblocktrans %}">{% trans "À propos" %} <ion-icon name="ios-arrow-down" class="nav-menu__caret"></ion-icon></a>
               <ul class="hidden-xs hidden-sm nav-submenu">
                 <li class="nav-submenu__item">
                   <a href="https://apropos.erudit.org/{% if LANGUAGE_CODE == 'en' %}en{% endif %}" target="_blank" title="{% trans 'À propos d’Érudit' %}">{% trans "Érudit" %}</a>
@@ -232,7 +236,7 @@
             <li class="nav-menu__item nav-menu__item_has-submenu">
               {% get_current_language as LANGUAGE_CODE %}
               {% get_available_languages as LANGUAGES %}
-              <a href="#" class="hidden-xs hidden-sm nav-menu__link">{{ LANGUAGE_CODE|upper }}<span class="ion-ios-arrow-down nav-menu__caret"></span></a>
+              <a href="#" class="hidden-xs hidden-sm nav-menu__link">{{ LANGUAGE_CODE|upper }} <ion-icon name="ios-arrow-down" class="nav-menu__caret"></ion-icon></a>
               <ul class="nav-submenu">
                 {% for language in LANGUAGES %}
                 {% get_language_info for language.0 as lang %}
@@ -248,7 +252,7 @@
             {% else %}
             <li class="nav-menu__item">
               <a href="{% url 'public:citations:list' %}" title="{% trans 'Voir ma bibliothèque' %}" class="nav-menu__link">
-                <span class="ion-bookmark hidden-xs hidden-sm nav-menu__icon"></span>
+                <ion-icon name="ios-bookmark" class="hidden-xs hidden-sm nav-menu__icon"></ion-icon>
                 <span class="hidden-md hidden-lg">{% trans 'Ma bibliothèque' %}</span>
               </a>
             </li>
@@ -266,7 +270,7 @@
               <input type="hidden" name="funds" value="Érudit">
               <input type="hidden" name="funds" value="UNB">
               <button type="submit" class="btn btn-secondary nav-search__btn">
-                <span class="ion-ios-search-strong nav-search__btn-icon"></span>
+                <ion-icon name="ios-search" class="nav-search__btn-icon"></ion-icon>
               </button>
             </div>
           </form>
@@ -372,7 +376,7 @@
                 <div class="dropdown-buttons">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
-                  <div class="select">{{ LANGUAGE_CODE|language_name_local|title }} <span class="ion-ios-arrow-down nav-menu__caret"></span></div>
+                  <div class="select">{{ LANGUAGE_CODE|language_name_local|title }} <ion-icon name="ios-arrow-down" class="caret"></ion-icon></div>
                   <ul>
                     {% for language in LANGUAGES %}
                     {% get_language_info for language.0 as lang %}
@@ -470,27 +474,27 @@
                 <ul class="social-icons inline">
                   <li>
                     <a href="https://www.facebook.com/%C3%89rudit-141469165320/" title="Facebook">
-                      <span class="ion-social-facebook"></span>
+                      <ion-icon name="logo-facebook"></ion-icon>
                     </a>
                   </li>
                   <li>
                     <a href="https://twitter.com/eruditorg" title="Twitter">
-                      <span class="ion-social-twitter"></span>
+                      <ion-icon name="logo-twitter"></ion-icon>
                     </a>
                   </li>
                   <li>
                     <a href="https://github.com/erudit/" title="Github">
-                      <span class="ion-social-github"></span>
+                      <ion-icon name="logo-github"></ion-icon>
                     </a>
                   </li>
                   <li>
                     <a href="https://www.linkedin.com/company/3628951" title="LinkedIn">
-                      <span class="ion-social-linkedin"></span>
+                      <ion-icon name="logo-linkedin"></ion-icon>
                     </a>
                   </li>
                   <li>
                     <a href="{% url 'public:journal:latest_issues_rss' %}" title="RSS">
-                      <span class="ion-social-rss"></span>
+                      <ion-icon name="logo-rss"></ion-icon>
                     </a>
                   </li>
                 </ul>
@@ -535,6 +539,8 @@
       "position": "bottom-right"
     })});
     </script>
+    {# Ionicon Web Component #}
+    <script src="https://unpkg.com/ionicons@4.4.2/dist/ionicons.js"></script>
     {% block scripts %}
     <script type="text/javascript" src="{{ WEBPACK_DEV_SERVER_URL|default:'' }}{% static 'js/app.js' %}"></script>
     {% endblock scripts %}

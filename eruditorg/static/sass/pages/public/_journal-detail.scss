@@ -2,10 +2,6 @@
 * Journal about page
 */
 
-/**
-* Page-specific mixins
-*/
-
 #journal_detail {
 
   header {
@@ -17,9 +13,11 @@
 
     .journal-title {
       margin-bottom: 0.25em;
+      display: block;
     }
 
     .journal-subtitle {
+      display: block;
       color: $dark-grey;
       margin-bottom: 0.25em;
 
@@ -28,164 +26,80 @@
       }
 
     }
-
-    .erudicon-open-access {
-      font-size: 3em;
-    }
-
   }
 
-  .journal-history {
-    font-size: smaller;
-    color: $dark-grey;
-    margin: 0.5em 0;
-  }
-
-  /**
-  * Latest issue section
-  */
-  .latest-issue {
-    margin: 1em 0 2em 0;
-    padding-top: 1em;
-    border-top: 1px solid $mid-grey;
-
-    h2 {
-      font-size: 1.75em;
-    }
-
-    .latest-issue-title {
-      font-size: 1.25em;
-      margin-bottom: 1em;
-    }
-
-    .latest-issue-cover {
-      display: inline-block;
-      float: left;
-      margin-right: 1em;
-    }
-
-  }
 
   /**
   * About section
   */
-  .journal-infos {
-    margin-bottom: 2.5em;
+  .journal-info-block {
+    margin-bottom: 5em;
 
-    .journal-info-block {
-      border-top: 1px solid $mid-grey;
-      padding-top: 1em;
-      padding-bottom: $margin-vertical-default;
+    h1, h2, h3, h4, h5, h6 {
+      color: $coral-red;
+      font-size: 1em;
 
-      .akkordion-title {
-        margin: 0 0 15px 0;
-        font-size: 1.75em;
-
-        .icon {
-          color: $dark-grey;
-        }
-
+      &:not(:first-child) {
+        margin-top: 2em;
       }
-
-      .akkordion-content {
-
-        h1, h2, h3, h4, h5, h6 {
-          @include font-styles('serif-bold');
-          margin-top: 0.75em;
-          color: $coral-red;
-        }
-
-        ul {
-          margin-left: 20px;
-        }
-
-        section, p, li {
-          font-size: 16px;
-          line-height: 1.5;
-          @include font-styles('serif');
-        }
-
-      }
-
     }
 
+    section, p, li {
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    a {
+      text-decoration: underline;
+      word-break: break-word;
+    }
   }
 
   /**
   * Back issues section
   */
-  .back-issues {
-    margin-top: $margin-vertical-default * 2;
-    background: $light-grey;
-    padding: 50px 0;
 
-    .back-issues--header {
-      padding-top: $margin-vertical-default;
-      padding-bottom: $margin-vertical-default;
-      margin-top: 1em;
-    }
+  #back-issues h2 {
+    font-size: 1em;
+  }
 
-    .scroll-issues {
-      margin-top: 1em;
-      font-size: 2em;
+  .year-list, .issue-list {
+    list-style: none;
+    margin: 0;
+  }
+
+  .year-list__item {
+    margin: 0 0 2em 0;
+    line-height: 1.15;
+    @include column-break-inside(avoid);
+  }
+
+  .year-list__title {
+    @include fw-mono;
+    font-size: 0.85em;
+    margin: 0 0 0.75em 0;
+  }
+
+  .issue-list__item {
+    margin: 0;
+
+    a {
+      font-size: smaller;
+      padding: 0 0 0.5em 0;
+      display: block;
+      @include transition(padding 0.15s ease-in);
 
       &:hover, &:focus, &:active {
-        text-decoration: none;
         color: $coral-red;
+        text-decoration: none;
       }
-
     }
-
   }
 
-  .year-list {
-    list-style: none;
-    margin: 0;
-
-    .year-list--item {
-      margin-bottom: 0;
-      padding: 0 0 2.5em 0.5em;
-      line-height: 1.15;
-      border-left: 1px solid $mid-grey;
-      @include column-break-inside(avoid);
-
-      h4 {
-        @include fw-mono;
-        margin-bottom: 0.25em;
-        padding-bottom: 0.25em;
-      }
-
-    }
-
-  }
-
-  .issue-list {
-    list-style: none;
-    margin: 0;
-
-    .issue-list--item {
-      margin: 0;
-
-      a {
-        font-size: smaller;
-        padding: 0.35em 0;
-        display: block;
-        @include transition(padding 0.15s ease-in);
-
-        &:hover, &:focus, &:active {
-          color: $coral-red;
-          text-decoration: none;
-        }
-
-      }
-
-    }
-
-    .issue-list--theme {
-      display: block;
-      margin: 0.25em 0;
-    }
-
+  .issue-list__theme {
+    display: block;
+    margin: 0 0 0.15em 0;
+    @include font-styles('sans-medium');
   }
 
   // responsive styles
@@ -197,27 +111,10 @@
 
   }
 
-  @media (min-width: $screen-sm-min),
-  (orientation: landscape) and (max-width: $screen-xs-max) {
-
-    .year-list {
-      @include column-count(2);
-    }
-
-  }
-
   @media (min-width: $screen-md-min) {
 
     .year-list {
-      @include column-count(3);
-    }
-
-  }
-
-  @media (min-width: $screen-lg-min) {
-
-    .year-list {
-      @include column-count(4);
+      @include column-count(2);
     }
 
   }

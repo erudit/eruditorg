@@ -52,7 +52,7 @@
         <li class="col-xs-2">{{ auth.user.last_login|date:"SHORT_DATE_FORMAT" }}</li>
         <li class="col-xs-1 authorization-delete">
           <a href="{% url 'userspace:journal:authorization:delete' auth.pk %}" title="{% trans 'Supprimer cet usager' %}">
-            <span class="ion-ios-close"></span>
+            <ion-icon name="ios-close"></ion-icon>
           </a>
         </li>
       </ul>
@@ -68,7 +68,7 @@
     <div class="row authorization-create">
       <span class="col-xs-12">
         <a href="{% url 'userspace:journal:authorization:create' scope_current_journal.pk %}?codename={{ choice }}">
-          <span class="ion-ios-plus"></span>
+          &plus;
         </a>
       </span>
     </div>

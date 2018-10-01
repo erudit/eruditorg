@@ -21,17 +21,18 @@
   }
 
   &.alert-info {
+    margin-bottom: 1em;
     background-color: $light-grey;
     @include font-styles('mono');
 
     p {
       border: 0;
       font-size: 14px;
-      letter-spacing: -0.015em;
+      letter-spacing: -0.025em;
     }
 
     .alert-info-icon {
-      font-size: 18px;
+      font-size: 20px;
     }
 
   }
