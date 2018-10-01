@@ -118,99 +118,98 @@
   </section>
   {% endif %}
 
-  {% switch "maintenance" %}
-  {% else %}
-  {# NEWS #}
-  {% if latest_news %}
-  <section class="news">
+  {# BANNER / AD SPACE #}
+  <section class="home-banner">
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>{% trans "Nouvelles" %}</h2>
-        </div>
-      </div>
-      <div class="row news--campaign">
-        <div class="col-xs-12 col-md-8">
+      <h2 class="sr-only">{% trans "Annonce" %}</h2>
+      <div class="row home-banner__content">
+        <div class="col-xs-12 col-sm-6 col-md-8 home-banner__img">
           <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">
             <div id="campaign-banner" class="campaign-banner"></div>
           </a>
         </div>
-        <div class="col-xs-12 col-md-4">
-          <p class="category-tag">{% trans 'Libre accès' %}</p>
-          <h3 class="news--campaign--title"><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">{% trans 'Partenariat pour le libre accès' %}</a></h3>
-          <p class="news--campaign--desc">{% blocktrans %}Le Partenariat pour le libre accès soutient depuis 2014 les revues canadiennes en SHS dans une transition graduelle vers le libre accès.{% endblocktrans %}</p>
-          <p><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">-> partnership.erudit.org</a></p>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <h3 class="home-banner__title"><a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">{% trans 'Partenariat pour le libre accès' %}</a></h3>
+          <p class="home-banner__desc">{% blocktrans %}Le Partenariat pour le libre accès soutient depuis 2014 les revues canadiennes en SHS dans une transition graduelle vers le libre accès.{% endblocktrans %}</p>
+          <p>-> <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" class="home-banner__link" target="_blank">partnership.erudit.org</a></p>
         </div>
       </div>
+      <hr/>
+    </div>
+  </section>
 
-      <ul class="row latest-news">
+  {% switch "maintenance" %}
+  {% else %}
+  {# NEWS #}
+  {% if latest_news %}
+  <section class="home-news">
+    <div class="container home-news__content">
+      <h2>{% trans "Nouvelles" %}</h2>
+
+      <ul class="row home-news__list">
         {% for entry in latest_news %}
-        <li class="col-md-4 col-sm-6 news--article">
+        <li class="col-md-4 col-sm-6 home-news__item">
           <p class="category-tag">{{ entry.category }}</p>
-          <h3 class="news--article--title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
-          <p class="summary">{{ entry.summary|safe|truncatewords_html:20 }}&nbsp;<a href="{{ entry.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
-          <time class="news--article--date text-muted" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
+          <h3 class="home-news__title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
+          <p class="home-news__summary">{{ entry.summary|safe|truncatewords_html:30 }}</p>
+          <p><a href="{{ entry.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
+          <time class="home-news__date" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
         </li>
         {% endfor %}
       </ul>
 
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn btn-secondary news--btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
-        </div>
-      </div>
+      <a href="{% if LANGUAGE_CODE == 'en' %}https://apropos.erudit.org/en/erudit-en/blog/{% else %}https://apropos.erudit.org/fr/erudit/blogue/{% endif %}" target="_blank" class="btn home-news__btn">{% trans "Toutes les nouvelles d'Érudit" %}</a>
     </div>
   </section>
   {% endif %}
   {% endswitch %}
 
   {# ABOUT ERUDIT.ORG #}
-  <section class="container">
-    <div class="row about-erudit">
-      <div class="col-xs-12">
-        <div class="row">
-          <div class="col-sm-4 col-md-3"><h2 class="about-erudit--title">erudit.<br>org</h2></div>
-          <div class="col-sm-4 col-md-3">
-            <p class="about-erudit--description">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br /><br /><a href="http://apropos.erudit.org" target="_blank" class="text-muted">{% trans "En savoir plus" %}</a></p>
-          </div>
-          <div class="col-sm-4 col-md-6">
-            <div class="about-erudit--video-container">
-              <video
-                id="about_erudit_video"
-                class="video-js vjs-default-skin"
-                controls
-                preload="auto"
-                width="1280"
-                height="720"
-                data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'>
-              </video>
-            </div>
+  <section class="home-about">
+    <div class="container home-about__container">
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <h2 class="home-about__title">erudit.<br/>org</h2>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <p class="home-about__desc">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="http://apropos.erudit.org" target="_blank">{% trans "En savoir plus" %}</a></p>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="home-about__video-container">
+            <video
+              id="about_erudit_video"
+              class="video-js vjs-default-skin home-about__video"
+              controls
+              preload="auto"
+              width="1280"
+              height="720"
+              data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'>
+            </video>
           </div>
         </div>
-
-        <ul class="row about-users">
-          <li class="col-sm-6 col-md-3 about-erudit--article">
-            <h3 class="about-erudit--article--title">{% trans "Bibliothécaires" %}</h3>
-            <p>{% blocktrans %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktrans %}</p>
-            <p><a href="https://apropos.erudit.org/fr/bibliotheques/" target="_blank" class="text-muted">{% trans "Abonnez-vous" %}</a></p>
-          </li>
-          <li class="col-sm-6 col-md-3 about-erudit--article">
-            <h3 class="about-erudit--article--title">{% trans "Éditeurs" %}</h3>
-            <p>{% blocktrans %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktrans %}</p>
-            <p><a href="https://apropos.erudit.org/fr/editeurs/" target="_blank" class="text-muted">{% trans "Publiez avec nous" %}</a></p>
-          </li>
-          <li class="col-sm-6 col-md-3 about-erudit--article">
-            <h3 class="about-erudit--article--title">{% trans "Chercheurs" %}</h3>
-            <p>{% blocktrans %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktrans %}</p>
-            <p><a href="https://apropos.erudit.org/fr/chercheurs/" target="_blank" class="text-muted">{% trans "Explorez nos données" %}</a></p>
-          </li>
-          <li class="col-sm-6 col-md-3 about-erudit--article">
-            <h3 class="about-erudit--article--title">{% trans "Utilisateurs" %}</h3>
-            <p>{% blocktrans %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktrans %}</p>
-            <p><a href="https://apropos.erudit.org/fr/usagers/" target="_blank" class="text-muted">{% trans "Repérez des articles" %}</a></p>
-          </li>
-        </ul>
       </div>
+      <ul class="row home-about__users">
+        <li class="col-sm-6 col-md-3 home-about__users-block">
+          <h3 class="home-about__users-title">{% trans "Bibliothécaires" %}</h3>
+          <p>{% blocktrans %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktrans %}</p>
+          <p><a href="https://apropos.erudit.org/fr/bibliotheques/" target="_blank" class="text-muted">{% trans "Abonnez-vous" %}</a></p>
+        </li>
+        <li class="col-sm-6 col-md-3 home-about__users-block">
+          <h3 class="home-about__users-title">{% trans "Éditeurs" %}</h3>
+          <p>{% blocktrans %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktrans %}</p>
+          <p><a href="https://apropos.erudit.org/fr/editeurs/" target="_blank" class="text-muted">{% trans "Publiez avec nous" %}</a></p>
+        </li>
+        <li class="col-sm-6 col-md-3 home-about__users-block">
+          <h3 class="home-about__users-title">{% trans "Chercheurs" %}</h3>
+          <p>{% blocktrans %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktrans %}</p>
+          <p><a href="https://apropos.erudit.org/fr/chercheurs/" target="_blank" class="text-muted">{% trans "Explorez nos données" %}</a></p>
+        </li>
+        <li class="col-sm-6 col-md-3 home-about__users-block">
+          <h3 class="home-about__users-title">{% trans "Utilisateurs" %}</h3>
+          <p>{% blocktrans %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktrans %}</p>
+          <p><a href="https://apropos.erudit.org/fr/usagers/" target="_blank" class="text-muted">{% trans "Repérez des articles" %}</a></p>
+        </li>
+      </ul>
     </div>
   </section>
 </main>

@@ -38,6 +38,15 @@
         color: $coral-red;
       }
     }
+
+    &.inverted-search-bar {
+      background-color: $coral-red;
+
+      .header-logo__img rect,
+      .header-logo__img path {
+        fill: #fff;
+      }
+    }
   }
 
   /* Header / "cover page" */
@@ -180,8 +189,15 @@
     }
   }
 
+  /* General pale-background section styles */
+  .home-banner, .home-news, .home-about {
+    p a {
+      color: $dark-grey;
+    }
+  }
 
-  .news {
+  /* Banner */
+  .home-banner {
     background-color: $light-grey;
 
     &:before {
@@ -191,104 +207,129 @@
       content: " ";
       display: block;
     }
-
-    .latest-news {
-      list-style: none;
-    }
-
-    .news--campaign {
-      margin-bottom: 2em;
-      padding-top: 1.5em;
-      @include grid-cell-border('top', 1px, #cccccc);
-
-      .news--campaign--title {
-        font-size: 2.5em;
-      }
-
-      .news--campaign--desc {
-        font-size: 20px;
-        line-height: 1.35;
-      }
-
-    }
-
-    .news--article {
-      margin: 1em 0;
-      padding-top: 0.75em;
-      @include grid-cell-border('top', 1px, #cccccc);
-
-      .news--article--title {
-        margin: 0 0 0.75em 0;
-        font-size: 1.75em;
-      }
-
-      .news--article--date {
-        font-size: small;
-      }
-    }
-    .news--btn {
-      font-size: 16px;
-      display: block;
-
-      @media (min-width: $screen-sm-min) {
-        display: inline-block;
-        padding-left: 3em;
-        padding-right: 3em;
-      }
-    }
   }
 
-  .about-erudit {
+  .home-banner__content {
+    margin: 10vh 0;
+  }
+
+  .home-banner__title a {
+    font-size: 36px;
+    color: #000;
+  }
+
+  .home-banner__desc {
+    margin-top: 2.5vh;
+    font-size: 18px;
+  }
+
+  .home-banner__link {
+    margin-top: 5vh;
+    font-size: 24px;
+  }
+
+  /* News */
+  .home-news {
+    padding-bottom: 5vh;
+    background-color: $light-grey;
+  }
+
+  .home-news__list {
+    list-style: none;
+  }
+
+  .home-news__item {
+    margin: 1em 0;
     padding-top: 0.75em;
-
-    .about-erudit--title {
-      font-size: 4em;
-      line-height: 0.65;
-      margin: 0 0 0.5em 0;
-      @include fw-sans-bold;
-    }
-    .about-erudit--description {
-      font-size: 18px;
-      margin: 0 0 1em 0;
-    }
-    .about-erudit--video-container {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: percentage(9/16);
-
-      .video-js {
-        width: 100%;
-        height: auto;
-
-        .vjs-big-play-button {
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          margin: auto;
-        }
-      }
-    }
-    .about-users {
-      list-style: none;
-
-      .about-erudit--article {
-        margin: 1.75em 0;
-        padding-top: 1em;
-        @include grid-cell-border('top', 1px, #cccccc);
-      }
-
-      .about-erudit--article--title {
-        @include fw-sans-bold;
-        font-size: 1.5em;
-        color: $coral-red;
-      }
-
-    }
-
   }
 
+  .home-news__summary {
+    font-size: 16px;
+  }
+
+  .home-news__title a {
+    margin: 0 0 0.75em 0;
+    font-size: 24px;
+    color: #000;
+  }
+
+  .home-news__date {
+    font-size: small;
+    color: $dark-grey;
+  }
+
+  .home-news__btn {
+    margin-top: 2.5vh;
+    border: 1px solid $coral-red;
+    color: $coral-red;
+
+    &:hover, &:focus, &:active {
+      background-color: $coral-red;
+      color: #fff;
+    }
+  }
+
+  /* About Érudit */
+  .home-about {
+
+    p {
+      font-size: 18px;
+    }
+
+    &:before {
+      margin-top: -5px;
+      background: url('../img/homepage/bg-3.png') no-repeat left top;
+      background-size: cover;
+      min-height: 250px;
+      content: " ";
+      display: block;
+    }
+  }
+
+  .home-about__container {
+    margin-top: -150px;
+  }
+
+  .home-about__title {
+    margin-bottom: 5vh;
+    font-size: 48px;
+    line-height: 0.65;
+    @include fw-sans-bold;
+  }
+
+  .home-about__video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: percentage(9/16);
+  }
+
+  .home-about__video {
+    width: 100%;
+    height: auto;
+
+    .vjs-big-play-button {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+
+  .home-about__users {
+    list-style: none;
+  }
+
+  .home-about__users-block {
+    margin: 5vh 0;
+  }
+
+  .home-about__users-title {
+    @include fw-sans-bold;
+    font-size: 24px;
+    color: $coral-red;
+  }
 }
 
 /**
@@ -297,7 +338,7 @@
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
-  .news--article {
+  .home-news__title {
 
     &:nth-child(2n+1) {
       clear: both;
@@ -309,7 +350,7 @@
 
 @media (min-width: $screen-md-min) {
 
-  .news--article {
+  .home-news__title {
 
     &:nth-child(3n+1) {
       clear: both;
