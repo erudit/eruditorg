@@ -144,33 +144,6 @@ gulp.task('build-iconfont', function(){
     .pipe(gulp.dest(font_dir + '/erudicon/'));
 });
 
-gulp.task('build-videojs-js', function() {
-  return gulp.src([
-        bower_dir + '/video.js/dist/video.min.js',
-        bower_dir + '/videojs-vimeo/src/Vimeo.js',
-      ])
-    .pipe(concat('videojs.js'))
-    .pipe(PROD_ENV ? uglify() : gutil.noop())
-    .pipe(gulp.dest(build_dir + '/js'));
-});
-gulp.task('build-videojs-js-map', function() {
-  return gulp.src(bower_dir + '/video.js/dist/video.min.js.map')
-    .pipe(gulp.dest(build_dir + '/js'));
-});
-gulp.task('build-videojs-css', function() {
-  return gulp.src(bower_dir + '/video.js/dist/video-js.min.css')
-    .pipe(rename('videojs.css'))
-    .pipe(gulp.dest(build_dir + '/css'));
-});
-
-gulp.task('build-videojs-fonts', function() {
-  return gulp.src(bower_dir + '/video.js/dist/font/VideoJS.eot')
-    .pipe(rename('VideoJS.eot'))
-    .pipe(gulp.dest(build_dir + '/css/font'));
-});
-
-gulp.task('build-videojs', ['build-videojs-js', 'build-videojs-js-map', 'build-videojs-css', 'build-videojs-fonts' ]);
-
 gulp.task('build-pdfjs-css', function() {
   return gulp.src([
         sass_dir + '/pages/pdf_viewer.scss',
@@ -232,7 +205,7 @@ gulp.task('build-sprite', function () {
  */
 
 gulp.task('build', [
-  'build-modernizr', 'build-iconfont', 'build-videojs', 'build-pdfjs',
+  'build-modernizr', 'build-iconfont', 'build-pdfjs',
   'build-webpack-assets',
 ]);
 

@@ -34,10 +34,6 @@
 </script>
 {% endblock structured_data %}
 
-{% block extrahead %}
-<link rel="stylesheet" href="{% static 'css/videojs.css' %}" />
-{% endblock extrahead %}
-
 {% block body_id %}homepage{% endblock body_id %}
 {% block data_controller %}public:home{% endblock data_controller %}
 
@@ -211,7 +207,3 @@
 </main>
 {% endcache %}
 {% endblock content %}
-
-{% block footerscript %}
-<script type="text/javascript" src="{% static 'js/videojs.js' %}"></script>
-{% endblock footerscript %}

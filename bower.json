@@ -36,8 +36,6 @@
     "swiper": "~3.3.0",
     "inline-svg": "latest",
     "bourbon": "latest",
-    "video.js": "^5.8.0",
-    "videojs-vimeo": "^2.0.0",
     "get-prefix": "~1.0.0",
     "magnific-popup": "~1.1.0",
     "akkordion": "0.2.4",
