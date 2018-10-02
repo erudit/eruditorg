@@ -45,7 +45,13 @@
   {# SEARCH #}
   <header class="home-header">
     <div class="container">
-      <h2 class="home-header__title">{% trans "Érudit <br/>célèbre <br/>ses 20 ans&nbsp;!" %}</h2>
+      <h2 class="home-header__title">
+        <a href="{% url 'public:20_years' %}" title="{% trans 'Aller vers la page du 20e anniversaire d’Érudit' %}">
+          {% trans "Érudit <br/>célèbre <br/>ses" %}
+           <img src="{% static 'svg/icon-20.svg' %}" class="inline-svg icon-20-white" alt="20" />
+           {% trans "ans&nbsp;!" %}
+        </a>
+      </h2>
       <div class="row">
         <section class="col-sm-8 col-md-6 home-search">
           <h3 class="sr-only">{% trans "Effectuer une recherche simple" %}</h3>
