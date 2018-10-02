@@ -176,15 +176,11 @@
         </div>
         <div class="col-xs-12 col-md-6">
           <div class="home-about__video-container">
-            <video
-              id="about_erudit_video"
-              class="video-js vjs-default-skin home-about__video"
-              controls
-              preload="auto"
-              width="1280"
-              height="720"
-              data-setup='{ "techOrder": ["vimeo"], "sources": [{ "type": "video/vimeo", "src": "{% if LANGUAGE_CODE == 'en' %}https://vimeo.com/106401822{% else %}https://vimeo.com/106409712{% endif %}"}] }'>
-            </video>
+            {% if LANGUAGE_CODE == 'fr' %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/_ThmnQn9bpA?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            {% else %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/125MMiC1vu8?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            {% endif %}
           </div>
         </div>
       </div>
