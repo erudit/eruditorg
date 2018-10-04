@@ -148,7 +148,7 @@
           <p class="category-tag">{{ entry.category }}</p>
           <h3 class="home-news__title"><a href="{{ entry.link }}" target="_blank">{{ entry.title }}</a></h3>
           <p class="home-news__summary">{{ entry.summary|safe|truncatewords_html:30 }}</p>
-          <p><a href="{{ entry.link }}" target="_blank">{% trans "Lire la suite" %}</a></p>
+          <p><a href="{{ entry.link }}" class="home-news__link" target="_blank">{% trans "Lire la suite" %}</a></p>
           <time class="home-news__date" datetime="2001-05-15">{{ entry.dt_published|date:"DATE_FORMAT" }}</time>
         </li>
         {% endfor %}
@@ -168,29 +168,29 @@
           <h2 class="home-about__title">erudit.<br/>org</h2>
         </div>
         <div class="col-sm-6">
-          <p class="home-about__desc">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="http://apropos.erudit.org" target="_blank">{% trans "En savoir plus" %}</a></p>
+          <p class="home-about__desc">{% trans "Érudit offre l'accès à de nombreuses collections de documents en sciences humaines et sociales&nbsp;: revues, livres et actes, thèses, rapports de recherche." %}<br/><br/><a href="http://apropos.erudit.org" target="_blank" class="home-about__link">{% trans "En savoir plus" %}</a></p>
         </div>
       </div>
       <ul class="row home-about__users">
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title">{% trans "Bibliothécaires" %}</h3>
+          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/bibliotheques/' %}" target="_blank">{% trans "Bibliothécaires" %}</a></h3>
           <p>{% blocktrans %}Offrez l’accès à du contenu savant et culturel de haut niveau à vos usagers.{% endblocktrans %}</p>
-          <p><a href="https://apropos.erudit.org/fr/bibliotheques/" target="_blank" class="text-muted">{% trans "Abonnez-vous" %}</a></p>
+          <p><a href="{% trans 'https://apropos.erudit.org/fr/bibliotheques/' %}" target="_blank" class="home-about__link">{% trans "Abonnez-vous" %}</a></p>
         </li>
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title">{% trans "Éditeurs" %}</h3>
+          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/editeurs/' %}" target="_blank">{% trans "Éditeurs" %}</a></h3>
           <p>{% blocktrans %}Diffusez votre revue en format numérique partout dans le monde.{% endblocktrans %}</p>
-          <p><a href="https://apropos.erudit.org/fr/editeurs/" target="_blank" class="text-muted">{% trans "Publiez avec nous" %}</a></p>
+          <p><a href="{% trans 'https://apropos.erudit.org/fr/editeurs/' %}" target="_blank" class="home-about__link">{% trans "Publiez avec nous" %}</a></p>
         </li>
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title">{% trans "Chercheurs" %}</h3>
+          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/chercheurs/' %}" target="_blank">{% trans "Chercheurs" %}</a></h3>
           <p>{% blocktrans %}Accédez à des services adaptés à l’exploitation de corpus.{% endblocktrans %}</p>
-          <p><a href="https://apropos.erudit.org/fr/chercheurs/" target="_blank" class="text-muted">{% trans "Explorez nos données" %}</a></p>
+          <p><a href="{% trans 'https://apropos.erudit.org/fr/chercheurs/' %}" target="_blank" class="home-about__link">{% trans "Explorez nos données" %}</a></p>
         </li>
         <li class="col-sm-6 col-md-3 home-about__users-block">
-          <h3 class="home-about__users-title">{% trans "Utilisateurs" %}</h3>
+          <h3 class="home-about__users-title"><a href="{% trans 'https://apropos.erudit.org/fr/usagers/' %}" target="_blank">{% trans "Utilisateurs" %}</a></h3>
           <p>{% blocktrans %}Trouvez les ressources et données pertinentes pour vos recherches.{% endblocktrans %}</p>
-          <p><a href="https://apropos.erudit.org/fr/usagers/" target="_blank" class="text-muted">{% trans "Repérez des articles" %}</a></p>
+          <p><a href="{% trans 'https://apropos.erudit.org/fr/usagers/' %}" target="_blank" class="home-about__link">{% trans "Repérez des articles" %}</a></p>
         </li>
       </ul>
     </div>

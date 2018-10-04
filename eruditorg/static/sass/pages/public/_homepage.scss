@@ -58,7 +58,7 @@
   }
 
   .home-header__title {
-    margin-top: 300px;
+    margin-top: 25vh;
     font-size: 4vh;
     color: #fff;
   }
@@ -123,8 +123,10 @@
 
   /* Latest issues */
   .home-issues {
+    margin-top: -5px;
     background-color: $midnight-blue;
     color: #fff;
+    border-bottom: 1px solid $midnight-blue;
 
     p {
       line-height: 1;
@@ -195,6 +197,16 @@
     p a {
       color: $dark-grey;
     }
+
+    // all non-heading links
+    [class$='__link'] {
+      border-bottom: 1px dotted $dark-grey;
+
+      &:hover, &:focus, &:active {
+        border-bottom: 1px solid $dark-grey;
+      }
+    }
+
   }
 
   /* Banner */
@@ -202,6 +214,7 @@
     background-color: $light-grey;
 
     &:before {
+      margin-top: -5px;
       background: url('../img/homepage/bg-2.png') no-repeat left top;
       background-size: cover;
       min-height: 238px;
@@ -306,7 +319,8 @@
     margin: 5vh 0;
   }
 
-  .home-about__users-title {
+  .home-about__users-title a {
+    display: block;
     margin-bottom: 2.5vh;
     @include fw-sans-bold;
     font-size: 24px;
@@ -320,7 +334,7 @@
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
-  .home-news__title {
+  .home-news__item {
 
     &:nth-child(2n+1) {
       clear: both;
@@ -332,7 +346,7 @@
 
 @media (min-width: $screen-md-min) {
 
-  .home-news__title {
+  .home-news__item {
 
     &:nth-child(3n+1) {
       clear: both;
