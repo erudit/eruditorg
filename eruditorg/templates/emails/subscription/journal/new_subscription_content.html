@@ -17,13 +17,12 @@ Abonnement / Subscription
 </p>
 {% endblock content %}
 
-{% block cta_url %}
-http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}
-{% endblock cta_url %}
-
-{% block cta_text %}
-Accepter l’abonnement / Accept subscription
-{% endblock cta_text %}
+{% block cta %}
+{% url 'public:account_actions:landing' key=token.key as action_url %}
+{% with cta_url="http://"|add:site.domain|add:action_url cta_text="Accepter l’abonnement / Accept subscription" %}
+{{ block.super }}
+{% endwith %}
+{% endblock cta %}
 
 {% block signature %}
 L’Équipe Érudit / The Érudit team<br>

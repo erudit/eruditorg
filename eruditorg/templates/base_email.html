@@ -947,17 +947,24 @@
                                 {% block content %}
                                 {% endblock content %}
                                 <br>
+
+                                {% block cta %}
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td>
                                       <table border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                          <td bgcolor="#ff4242" style="padding: 12px 18px 12px 18px; -webkit-border-radius:3px; border-radius:3px" align="center"><a href="{% block cta_url %}{% endblock cta_url %}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; display: inline-block;">{% block cta_text %}{% endblock cta_text %}</a></td>
+                                          <td bgcolor="#ff4242" style="padding: 12px 18px 12px 18px; -webkit-border-radius:3px; border-radius:3px" align="center"><a href="{{ cta_url }}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; display: inline-block;">{{ cta_text }}</a></td>
                                         </tr>
                                       </table>
                                     </td>
                                   </tr>
                                 </table>
+                                <p>
+                                {% blocktrans %}Le bouton ne fonctionne pas? Veuillez copier-coller cet url dans votre navigateur: <strong>{{ cta_url }}</strong>{% endblocktrans %}
+                                </p>
+
+                                {% endblock cta %}
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
                                   <tbody class="mcnTextBlockOuter">
                                     <tr>

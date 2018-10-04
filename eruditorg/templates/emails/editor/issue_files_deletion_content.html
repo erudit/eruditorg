@@ -16,13 +16,13 @@
 <p>{% trans "Assurez-vous d’en avoir une copie." %}</p>
 {% endblock content %}
 
-{% block cta_url %}
-{% url 'userspace:dashboard' %}
-{% endblock cta_url %}
-
-{% block cta_text %}
-{% trans "Accéder au tableau de bord" %}
-{% endblock cta_text %}
+{% block cta %}
+{% url 'userspace:dashboard' as cta_url %}
+{% trans "Accéder au tableau de bord" as cta_text %}
+{% with cta_url=cta_url cta_text=cta_text %}
+{{ block.super }}
+{% endwith %}
+{% endblock cta %}
 
 {% block signature %}
 {% trans 'L’Équipe Érudit' %}<br>
