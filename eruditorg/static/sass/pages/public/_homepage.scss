@@ -273,10 +273,6 @@
   /* About Érudit */
   .home-about {
 
-    p {
-      font-size: 18px;
-    }
-
     &:before {
       margin-top: -5px;
       background: url('../img/homepage/bg-3.png') no-repeat left top;
@@ -298,19 +294,8 @@
     @include fw-sans-bold;
   }
 
-  .home-about__video-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: percentage(9/16);
-
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+  .home-about__desc {
+    font-size: 24px;
   }
 
   .home-about__users {
@@ -322,6 +307,7 @@
   }
 
   .home-about__users-title {
+    margin-bottom: 2.5vh;
     @include fw-sans-bold;
     font-size: 24px;
     color: $coral-red;
