@@ -12,14 +12,13 @@
 {% endblocktrans %}
 {% endblock content %}
 
-{% block cta_url %}
+{% block cta %}
 {% url 'userspace:journal:editor:detail' issue.journal.pk issue.pk as issue_url %}
-http://{{ site.domain }}{{ issue_url }}
-{% endblock cta_url %}
-
-{% block cta_text %}
-{% trans "Consulter le numéro" %}
-{% endblock cta_text %}
+{% trans "Consulter le numéro" as cta_text %}
+{% with cta_url="http://"|add:site.domain|add:issue_url cta_text=cta_text %}
+{{ block.super }}
+{% endwith %}
+{% endblock cta %}
 
 {% block signature %}
 {% blocktrans %}

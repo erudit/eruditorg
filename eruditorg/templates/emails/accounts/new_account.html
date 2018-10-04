@@ -15,13 +15,12 @@
 {% endblocktrans %}
 {% endblock content %}
 
-{% block cta_url %}
-{{ protocol }}://{{ domain }}
-{% endblock cta_url %}
-
-{% block cta_text %}
-{% trans "Consulter erudit.org" %}
-{% endblock cta_text %}
+{% block cta %}
+{% trans "Consulter erudit.org" as cta_text %}
+{% with cta_url=protocol|add:"://"|add:domain %}
+{{ block.super }}
+{% endwith %}
+{% endblock cta %}
 
 {% block signature %}
 {% trans 'L’Équipe Érudit' %}<br>

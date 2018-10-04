@@ -14,13 +14,13 @@
   <p>{% trans "Veuillez cliquer sur le lien suivant pour l’accepter" %}</p>
 {% endblock content %}
 
-{% block cta_url %}
-http://{{ site.domain }}{% url 'public:account_actions:landing' key=token.key %}
-{% endblock cta_url %}
-
-{% block cta_text %}
-{% trans "Accepter la proposition" %}
-{% endblock cta_text %}
+{% block cta %}
+{% url 'public:account_actions:landing' key=token.key as action_url %}
+{% trans "Accepter la proposition" as cta_text %}
+{% with cta_url="http://"|add:site.domain|add:action_url %}
+{{ block.super }}
+{% endwith %}
+{% endblock cta %}
 
 {% block signature %}
 {% trans 'L’Équipe Érudit' %}
