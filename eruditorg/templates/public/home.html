@@ -120,8 +120,8 @@
       <h2 class="sr-only">{% trans "Annonce" %}</h2>
       <div class="row home-banner__content">
         <div class="col-xs-12 col-sm-6 col-md-8 home-banner__img">
-          <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank">
-            <div id="campaign-banner" class="campaign-banner"></div>
+          <a href="http://partnership.erudit.org/{% if LANGUAGE_CODE == 'fr' %}accueil{% endif %}" target="_blank" title="{% trans 'Voir le site du partenariat' %}">
+            <div id="campaign-banner" class="campaign-banner" alt="{% trans 'Illustration du partenariat' %}"></div>
           </a>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
