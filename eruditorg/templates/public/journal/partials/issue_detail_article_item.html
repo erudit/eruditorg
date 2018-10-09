@@ -27,7 +27,7 @@
     {% endif %}
     {% if article.processing == 'C' and article.publication_allowed %}
     <li>
-      <a class="tool-btn" href="{{ article.get_absolute_url }}" {% if article.is_external %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
+      <a class="tool-btn" href="{{ article.get_absolute_url }}{% if ticket %}?ticket={{ticket}}{% endif %}" {% if article.is_external %}target="_blank"{% endif %} title="{% blocktrans %}Lire l'article en texte intégral{% endblocktrans %}">
         <span class="toolbox-html">HTML</span>
       </a>
     </li>
@@ -63,7 +63,7 @@
     </p>
     <p class="bib-record__record-link col-sm-3 pull-right">
       {% if issue.journal.collection.code == 'erudit' %}
-      <a href="{% url 'public:journal:article_summary' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}" title="{% blocktrans %}Voir la notice{% endblocktrans %}">
+      <a href="{% url 'public:journal:article_summary' journal_code=article.issue.journal.code issue_slug=article.issue.volume_slug issue_localid=article.issue.localidentifier localid=article.localidentifier %}{% if ticket %}?ticket={{ticket}}{% endif %}" title="{% blocktrans %}Voir la notice{% endblocktrans %}">
         {% trans "Notice" %}
       </a>
       {% endif %}

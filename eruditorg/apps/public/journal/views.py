@@ -320,6 +320,13 @@ class IssueDetailView(
     model = Issue
     template_name = 'public/journal/issue_detail.html'
 
+    def get_fallback_querystring_dict(self):
+        querystring_dict = super().get_fallback_querystring_dict()
+        obj = self.get_object()
+        if obj.prepublication_ticket:
+            querystring_dict['ticket'] = obj.prepublication_ticket
+        return querystring_dict
+
     def get_fallback_url_format(self):
         obj = self.get_object()
         if obj.journal.type and obj.journal.type.code == 'S':
@@ -639,6 +646,13 @@ class ArticleDetailView(BaseArticleDetailView):
     """
     fallback_url_format = "/revue/{code}/{year}/v{volume}/n{number}/{article_pid}.html"
     template_name = 'public/journal/article_detail.html'
+
+    def get_fallback_querystring_dict(self):
+        querystring_dict = super().get_fallback_querystring_dict()
+        obj = self.get_object()
+        if obj.prepublication_ticket:
+            querystring_dict['ticket'] = obj.issue.prepublication_ticket
+        return querystring_dict
 
     def get_fallback_url_format(self):
         obj = self.get_object()
