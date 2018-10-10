@@ -65,7 +65,10 @@
           </form>
           <div class="row">
             <div class="col-xs-6">
-              <a href="{% url 'public:journal:journal_list' %}"><strong>--> {% trans "Vers les revues" %}</strong></a>
+              <a href="{% url 'public:journal:journal_list' %}"><strong>--> {% trans "Revues" %}</strong></a><br/>
+              <a href="{% flag 'BOOKS' %}{% url 'public:book:home' %}{% else %}https://retro.erudit.org/livre/{% if LANGUAGE_CODE == 'en' %}?lang=en{% endif %}{% endflag %}"><strong>--> {% trans "Livres et actes" %}</strong></a><br/>
+              <a href="{% url 'public:thesis:home' %}"><strong>--> {% trans "Thèses et mémoires" %}</strong></a><br/>
+              <a href="https://depot.erudit.org/{% if LANGUAGE_CODE == 'en' %}?locale=en{% endif %}"><strong>--> {% trans "Rapports de recherche" %}</strong></a>
             </div>
             <div class="col-xs-6 text-right">
               <a href="{% url 'public:search:advanced_search' %}">{% trans "Recherche avancée" %}</a>
