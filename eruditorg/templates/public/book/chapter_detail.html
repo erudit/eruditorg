@@ -100,7 +100,7 @@
       </div>
       {% if book.cover %}
       <div class="col-xs-3">
-        <img src="/media/{{ book.cover }}" alt="" class="img-responsive lightbox doc-head__img"/>
+        <img src="{{ book.cover.url }}" alt="" class="img-responsive lightbox doc-head__img"/>
       </div>
       {% endif %}
     </div>

@@ -100,7 +100,7 @@
             {% if book.cover %}
             <div class="row">
               <div class="col-sm-10">
-                <img src="/media/{{ book.cover }}" alt="Couverture" width="75px" class="img-responsive card__figure"/>
+                <img src="{{ book.cover.url }}" alt="Couverture" width="75px" class="img-responsive card__figure"/>
               </div>
             </div>
             {% endif %}

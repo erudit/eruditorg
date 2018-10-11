@@ -135,14 +135,14 @@
       {% if book.cover %}
       <div class="sidebar-block">
         <h2>{% trans "Couverture" %}</h2>
-        <img src="/media/{{ book.cover }}" alt="Couverture de {{ book.title }}" class="img-responsive"/>
+        <img src="{{ book.cover.url }}" alt="Couverture de {{ book.title }}" class="img-responsive"/>
       </div>
       {% endif %}
 
       <div class="sidebar-block">
         <h2>{% trans "Fiche" %}</h2>
 
-        <dl>
+        <dl class="journal-meta--list">
           <dt>{% trans "Collection" %}</dt>
           <dd>{{ book.collection }}</dd>
 
