@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load humanize i18n staticfiles %}
+{% load humanize i18n staticfiles cache %}
 
 {% block title %}{{ book.title|striptags }}{% endblock title %}
 
@@ -67,6 +67,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+{% cache LONG_TTL "book_detail_content" LANGUAGE_CODE %}
 <div class="container">
   <div class="row">
     {# Book TOC #}
@@ -167,4 +168,5 @@
     </aside>
   </div>
 </div>
+{% endcache %}
 {% endblock %}

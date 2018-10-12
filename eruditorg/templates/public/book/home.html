@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load humanize i18n staticfiles %}
+{% load humanize i18n staticfiles cache %}
 
 {% block title %}{% trans "Livres et actes" %}{% endblock title %}
 
@@ -59,6 +59,7 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+{% cache LONG_TTL "book_home_content" LANGUAGE_CODE %}
 <main>
   <div class="container">
     <div class="row">
@@ -75,6 +76,7 @@
       </div>
     </div>
   </div>
+
 
   {% for collection in collections %}
   <section class="alternating-row">
@@ -115,4 +117,5 @@
   </section>
   {% endfor %}
 </main>
+{% endcache %}
 {% endblock content %}

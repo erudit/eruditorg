@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load humanize i18n staticfiles waffle_tags %}
+{% load humanize i18n staticfiles waffle_tags cache %}
 
 {% block title %}{{ chapter.title|striptags }}{% endblock title %}
 
@@ -84,6 +84,8 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+{% with chapter.title|slugify as chapter_slug %}
+{% cache LONG_TTL "chapter_detail_content" chapter_slug LANGUAGE_CODE %}
 <main class="container" id="article-{{ article.id }}" data-document-id="{{ article.solr_id }}" role="main">
   <header class="main-header doc-head">
     <div class="row">
@@ -179,5 +181,6 @@
   </section>
 
 </main>
-
+{% endcache %}
+{% endwith %}
 {% endblock content %}
