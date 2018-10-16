@@ -899,6 +899,11 @@ class Article(FedoraMixin):
         else:
             return Article.from_issue_and_localidentifier(issue, localidentifier)
 
+    def _should_use_cache(self):
+        if self.issue.is_published:
+            return True
+        return False
+
     # Solr-related methods and properties
     # --
 

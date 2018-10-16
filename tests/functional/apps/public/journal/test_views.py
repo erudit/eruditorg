@@ -582,8 +582,7 @@ class TestArticleDetailView:
         for href in bc_hrefs + pa_hrefs:
             assert ('ticket' in href) == ticket_expected
 
-
-    def test_dont_cache_articles_of_unpublished_issues(self):
+    def test_dont_cache_html_of_articles_of_unpublished_issues(self):
         issue = IssueFactory.create(is_published=False)
         article = ArticleFactory.create(issue=issue, title='thiswillendupinhtml')
         url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
@@ -597,6 +596,19 @@ class TestArticleDetailView:
         assert response.status_code == 200
         assert b'thiswillendupinhtml' not in response.content
         assert b'thiswillreplaceoldinhtml' in response.content
+
+    def test_dont_cache_fedora_objects_of_articles_of_unpublished_issues(self):
+
+        with unittest.mock.patch('erudit.fedora.modelmixins.cache') as cache_mock:
+            cache_mock.get.return_value = None
+            issue = IssueFactory.create(is_published=False)
+            article = ArticleFactory.create(issue=issue)
+            url = '{}?ticket={}'.format(article_detail_url(article), issue.prepublication_ticket)
+            response = Client().get(url)
+            assert response.status_code == 200
+            # Assert that the cache has only be called once, to store an issue
+            assert len(cache_mock.get.mock_calls) == 1
+            assert 'issue' in cache_mock.get.call_args[0][0]
 
     def test_allow_ephemeral_articles(self):
         # When receiving a request for an article that doesn't exist in the DB, try querying fedora
