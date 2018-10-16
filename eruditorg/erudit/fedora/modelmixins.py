@@ -44,18 +44,34 @@ class FedoraMixin:
     def fedora_model(self):
         return self.get_fedora_model()
 
+    def _should_use_cache(self):
+        """ Tells FedoraMixin to use cache or not
+
+        This method lets the child objects of ``FedoraMixin`` implement the rules by which
+        ``FedoraMixin`` will determine if the cache should be used or not.
+
+        :return: True if the cache should be used for the given object.
+        """
+        return True
+
     def get_fedora_object(self):
         """
         Returns the eulfedora's object associated with the considered Django object.
         """
-        if self.get_full_identifier():
+
+        if not self.get_full_identifier():
+            return None
+
+        if not self._should_use_cache():
             return self.fedora_model(api, self.pid)
+
+        if getattr(self, '_fedora_object', None) is None:
+            self._fedora_object = self.fedora_model(api, self.pid)
+        return self._fedora_object
 
     @property
     def fedora_object(self):
-        if getattr(self, '_fedora_object', None) is None:
-            self._fedora_object = self.get_fedora_object()
-        return self._fedora_object
+        return self.get_fedora_object()
 
     def get_erudit_class(self):
         """
@@ -71,13 +87,17 @@ class FedoraMixin:
         """
         Returns the liberuditarticle's object associated with the considered Django object.
         """
-        fedora_xml_content_key = 'fedora-object-{pid}'.format(pid=self.pid)
-        fedora_xml_content = cache.get(fedora_xml_content_key, None)
+
+        if self._should_use_cache():
+            fedora_xml_content_key = 'fedora-object-{pid}'.format(pid=self.pid)
+            fedora_xml_content = cache.get(fedora_xml_content_key, None)
+        else:
+            fedora_xml_content_key = None
+            fedora_xml_content = None
 
         try:
             assert fedora_xml_content is None
-            if fedora_object is None:
-                fedora_object = self.fedora_object
+            fedora_object = self.get_fedora_object()
             fedora_xml_content = fedora_object.xml_content
         except (RequestFailed, ConnectionError) as e:  # pragma: no cover
             logger.warn("fedora.exception", e={}, pid=self.pid)
@@ -95,8 +115,11 @@ class FedoraMixin:
             pass
         else:
             # Stores the XML content of the object for further use
-            cache.set(
-                fedora_xml_content_key, fedora_xml_content, self.fedora_xml_content_cache_timeout)
+            if self._should_use_cache():
+                cache.set(
+                    fedora_xml_content_key, fedora_xml_content,
+                    self.fedora_xml_content_cache_timeout
+                )
 
         return self.erudit_class(fedora_xml_content) if fedora_xml_content else None
 

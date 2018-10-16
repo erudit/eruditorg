@@ -48,14 +48,8 @@ class SolrDocument:
 
     @staticmethod
     def from_article(article, authors=None, solr_attrs=None):
-        # NOTE ABOUT get_erudit_object(): You might think that it's weird how we check for
-        # get_erudit_object() and call it instead of relying on Article's properties that proxy
-        # erudit_object. That's because we very often don't want a call to `from_article()` to
-        # cause erudit_object's property to be cached because it's possible we're not done tweaking
-        # the fedora XML yet (and it we cache `erudit_object` before we tweak, we won't get tweaked
-        # values during our tests).
         assert article.pid is not None
-        erudit_article = article.get_erudit_object(fedora_object=article.get_fedora_object())
+        erudit_article = article.get_erudit_object()
 
         if not authors:
             if erudit_article:

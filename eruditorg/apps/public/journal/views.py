@@ -594,7 +594,8 @@ class BaseArticleDetailView(
     def _prepare_dom(self, article):
         # Before sending it through the XSL, there are a couple of manipulations that we might need
         # to make on the DOM.
-        eruditarticle = article.erudit_object
+
+        eruditarticle = article.get_erudit_object()
 
         if eruditarticle.is_of_type_roc:
             # If the first "corps/texte" element of the article is of type "roc" that means that
