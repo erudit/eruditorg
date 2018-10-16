@@ -342,24 +342,26 @@
                       {% endif  %}
 
                       <p>{% trans "Exporter la notice de ce document" %}</p>
-                      <p>
-                        <a href="{{ document.cite_enw_url }}" class="btn btn-primary cite-export">
-                          <span class="show cite-export-title">.ENW</span>
-                        </a>
-                        EndNote, Zotero
-                      </p>
-                      <p>
-                        <a href="{{ document.cite_ris_url }}" class="btn btn-primary cite-export">
-                          <span class="show cite-export-title">.RIS</span>
-                        </a>
-                        Papers, Reference Manager, RefWorks, Zotero
-                      </p>
-                      <p>
-                        <a href="{{ document.cite_bib_url }}" class="btn btn-primary cite-export">
-                          <span class="show cite-export-title">.BIB</span>
-                        </a>
-                        BibTeX, JabRef, Mendeley, Zotero
-                      </p>
+                      <div class="row">
+                        <p class="col-xs-4">
+                          <a href="{{ document.cite_ris_url }}" class="btn btn-secondary cite-export">
+                            <span class="show cite-export-title">RIS</span>
+                          </a>
+                          <br/><br/>EndNote, Papers, Reference Manager, RefWorks, Zotero
+                        </p>
+                        <p class="col-xs-4">
+                          <a href="{{ document.cite_enw_url }}" class="btn btn-secondary cite-export">
+                            <span class="show cite-export-title">ENW</span>
+                          </a>
+                          <br/><br/>EndNote, Zotero
+                        </p>
+                        <p class="col-xs-4">
+                          <a href="{{ document.cite_bib_url }}" class="btn btn-secondary cite-export">
+                            <span class="show cite-export-title">BIB</span>
+                          </a>
+                          <br/><br/>BibTeX, JabRef, Mendeley, Zotero
+                        </p>
+                      </div>
                     </div>
                   </div>
                   {% endif %} {# document.can_cite #}
