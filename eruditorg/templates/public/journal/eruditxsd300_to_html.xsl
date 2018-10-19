@@ -288,10 +288,10 @@
           {% else %}
           <!-- promotional campaign -->
           <aside class="campaign">
-            <h2 class="sr-only">{% trans 'Force 2018' %}</h2>
-            <a href="https://goo.gl/CMS5RD" target="_blank" class="campaign-sidebar">
+            <h2 class="sr-only">{% trans 'ACFAS 2019' %}</h2>
+            <a href="https://www.acfas.ca/evenements/congres/appel-propositions" target="_blank" class="campaign-sidebar">
               <div id="campaign-sidebar" class="campaign-sidebar {% if LANGUAGE_CODE == 'en' %}en{% endif %}">
-                <img src="{% if LANGUAGE_CODE == 'en' %}{% static 'img/banners/f18-en.png' %}{% else %}{% static 'img/banners/f18-fr.png' %}{% endif %}" class="img-responsive"/>
+                <img src="{% static 'img/banners/acfas-2019.gif' %}" class="img-responsive"/>
               </div>
             </a>
           </aside>
