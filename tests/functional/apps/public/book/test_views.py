@@ -47,6 +47,34 @@ def test_books_home_view(client, book_flag):
 #
 #
 
+@pytest.mark.django_db
+def test_book_view_returns_404_when_book_is_not_published(client, book, book_flag):
+    book.is_published = False
+    book.save()
+    response = client.get(reverse('public:book:chapter_detail',
+                                  kwargs={'collection_slug': book.collection.slug,
+                                          'slug': book.slug, 'chapter_id': 'nochapter'}))
+    assert response.status_code == 404
+
+
+@pytest.mark.django_db
+def test_home_view_does_not_list_unpublished_books(client, book, book_flag):
+    book.is_published = False
+    book.save()
+    response = client.get(reverse('public:book:home'))
+    assert book.slug not in response.content.decode('utf-8')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_chapter_view_returns_404_when_book_is_not_publised(client, book, book_flag):
+    book.is_published = False
+    book.save()
+    response = client.get(reverse('public:book:chapter_detail',
+                                  kwargs={'collection_slug': book.collection.slug,
+                                          'slug': book.slug, 'chapter_id': 'nochapter'}))
+    assert response.status_code == 404
+
 
 @pytest.mark.django_db
 def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book, book_flag):

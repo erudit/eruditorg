@@ -26,10 +26,14 @@ class BookListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        books = Book.objects.select_related('collection')
+
+        context['published_books_cache_key'] = ",".join(
+            [str(b.id) for b in Book.published_objects.order_by('pk').all()]
+        )
 
         context['collections'] = BookCollection.objects \
-            .prefetch_related(Prefetch('books', queryset=books)).all()
+            .prefetch_related(Prefetch('books', queryset=Book.published_objects.all())).all()
+
         context['books_count'] = Book.objects.count()
         return context
 
@@ -38,6 +42,12 @@ class BookDetailView(DetailView):
 
     model = Book
     template_name = "public/book/book_detail.html"
+
+    def get_object(self):
+        object = super().get_object()
+        if not object.is_published:
+            raise Http404
+        return object
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -50,6 +60,12 @@ class ChapterDetailView(DetailView):
 
     model = Book
     template_name = "public/book/chapter_detail.html"
+
+    def get_object(self):
+        object = super().get_object()
+        if not object.is_published:
+            raise Http404
+        return object
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
