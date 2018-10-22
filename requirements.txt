@@ -7,12 +7,12 @@
 git+https://gitlab.erudit.org/erudit/portail/django-account-actions.git@master#egg=django-account-actions
 git+https://gitlab.erudit.org/erudit/portail/django-resumable-uploads.git@1.0.5#egg=django-resumable-uploads
 git+https://gitlab.erudit.org/erudit/portail/eulxml.git@with-erudit-patches#egg=eulxml
-git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.29#egg=liberuditarticle
+git+https://gitlab.erudit.org/erudit/portail/liberuditarticle.git@0.2.30#egg=liberuditarticle
 babel==2.3.4
 beautifulsoup4==4.6.1
 cairocffi==0.9.0          # via cairosvg, weasyprint
 cairosvg==2.2.1           # via weasyprint
-certifi==2018.8.24        # via requests
+certifi==2018.10.15       # via requests
 cffi==1.11.5              # via cairocffi, weasyprint
 chardet==3.0.4
 cssselect2==0.2.1         # via cairosvg, weasyprint
@@ -37,7 +37,7 @@ eulfedora==1.7.2
 feedparser==5.2.1
 html2text==2018.1.9
 html5lib==1.0.1           # via weasyprint
-humanfriendly==4.16.1
+humanfriendly==4.17
 idna==2.6                 # via requests
 influxdb==2.12.0
 isodate==0.6.0            # via rdflib
@@ -58,7 +58,7 @@ pyphen==0.9.5             # via weasyprint
 pysocks==1.6.8            # via requests
 pysolr==3.8.1
 python-dateutil==2.7.3    # via eulfedora, influxdb
-python-stdnum==1.9        # via django-isbn-field
+python-stdnum==1.10       # via django-isbn-field
 python-utils==2.3.0       # via progressbar2
 pytz==2018.5              # via babel, django, influxdb
 raven==6.9.0
