@@ -8,6 +8,8 @@ from apps.public.book.models import (
     BookCollection,
 )
 
+from apps.public.book.test.factories import BookCollectionFactory, BookFactory
+
 from waffle.models import Flag
 
 @pytest.fixture
@@ -18,13 +20,6 @@ def book_flag():
 @pytest.fixture(autouse=True)
 def use_book_test_fixture(settings):
     settings.BOOKS_DIRECTORY = Path(__file__).parent
-
-
-@pytest.fixture(autouse=True)
-def book():
-    collection = BookCollection.objects.create(name='Hors collection', slug='hors-collection')
-    return Book.objects.create(path='fixtures/incantation/2018', slug='incant',
-                               collection=collection)
 
 
 @pytest.mark.django_db
@@ -48,9 +43,8 @@ def test_books_home_view(client, book_flag):
 #
 
 @pytest.mark.django_db
-def test_book_view_returns_404_when_book_is_not_published(client, book, book_flag):
-    book.is_published = False
-    book.save()
+def test_book_view_returns_404_when_book_is_not_published(client, book_flag):
+    book = BookFactory(is_published=False)
     response = client.get(reverse('public:book:chapter_detail',
                                   kwargs={'collection_slug': book.collection.slug,
                                           'slug': book.slug, 'chapter_id': 'nochapter'}))
@@ -58,18 +52,16 @@ def test_book_view_returns_404_when_book_is_not_published(client, book, book_fla
 
 
 @pytest.mark.django_db
-def test_home_view_does_not_list_unpublished_books(client, book, book_flag):
-    book.is_published = False
-    book.save()
+def test_home_view_does_not_list_unpublished_books(client, book_flag):
+    book = BookFactory(is_published=False)
     response = client.get(reverse('public:book:home'))
     assert book.slug not in response.content.decode('utf-8')
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_chapter_view_returns_404_when_book_is_not_publised(client, book, book_flag):
-    book.is_published = False
-    book.save()
+def test_chapter_view_returns_404_when_book_is_not_publised(client, book_flag):
+    book = BookFactory(is_published=False)
     response = client.get(reverse('public:book:chapter_detail',
                                   kwargs={'collection_slug': book.collection.slug,
                                           'slug': book.slug, 'chapter_id': 'nochapter'}))
@@ -77,7 +69,8 @@ def test_chapter_view_returns_404_when_book_is_not_publised(client, book, book_f
 
 
 @pytest.mark.django_db
-def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book, book_flag):
+def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book_flag):
+    book = BookFactory()
     response = client.get(reverse('public:book:chapter_detail',
                                   kwargs={'collection_slug': book.collection.slug,
                                           'slug': book.slug, 'chapter_id': 'nochapter'}))
@@ -85,7 +78,8 @@ def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book, book_f
 
 
 @pytest.mark.django_db
-def test_chapter_pdf(client, book, book_flag):
+def test_chapter_pdf(client, book_flag):
+    book = BookFactory()
     response = client.get(reverse('public:book:chapter_pdf',
                                   kwargs={'collection_slug': book.collection.slug,
                                           'slug': book.slug, 'chapter_id': '000274li'}))
