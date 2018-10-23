@@ -49,7 +49,7 @@ def test_books_home_view(client, book_flag):
 
 
 @pytest.mark.django_db
-def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book):
+def test_chapter_view_returns_404_when_chapter_doesnt_exist(client, book, book_flag):
     response = client.get(reverse('public:book:chapter_detail',
                                   kwargs={'collection_slug': book.collection.slug,
                                           'slug': book.slug, 'chapter_id': 'nochapter'}))
