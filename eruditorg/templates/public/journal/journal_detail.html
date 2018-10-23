@@ -153,6 +153,13 @@
         <h2 class="sr-only">{% trans "Coordonnées" %}</h2>
         {% if journal_info.contact %}{{ journal_info.contact|safe }}{% endif %}
       </section>
+
+      {% if journal_info.subscriptions %}
+      <hr/>
+      <section class="journal-info-block">
+        {{ journal_info.subscriptions|safe }}
+      </section>
+      {% endif %}
     </section>
 
     {% if issues %}
@@ -193,12 +200,6 @@
       </div>
       {% endif %}
       {% endcache %}
-      {% if journal_info.subscriptions %}
-      <hr/>
-      <div class="journal-info-block">
-        {{ journal_info.subscriptions|safe }}
-      </div>
-      {% endif %}
     </section>
     {% endif %}
 
