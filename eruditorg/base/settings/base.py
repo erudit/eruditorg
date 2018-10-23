@@ -6,36 +6,98 @@ from structlog.stdlib import LoggerFactory
 from structlog.processors import JSONRenderer
 from datetime import datetime
 
-env = environ.Env()
-environ.Env.read_env('.env')
+BASE_DIR = Path(__file__).parent
+ROOT_DIR = BASE_DIR.parents[2]
+
+env = environ.Env(
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, None),
+    ADMIN_URL=(str, '/admin'),
+    FALLBACK_BASE_URL=(str, None),
+    ALLOWED_HOSTS=(list, []),
+    STATIC_ROOT=(str, str(ROOT_DIR / 'static')),
+    MEDIA_ROOT=(str, str(ROOT_DIR / 'media')),
+    UPLOAD_ROOT=(str, str(ROOT_DIR / 'media' / 'uploads')),
+    MANAGED_COLLECTIONS=(list, ['erudit', 'unb']),
+
+    MAIN_DATABASE_URL=(str, 'mysql://root@localhost/eruditorg'),
+    RESTRICTION_DATABASE_URL=(str, 'mysql://root@localhost/restriction'),
+
+    CACHE_URL=(str, 'locmemcache://'),
+
+    EMAIL_HOST=(str, None),
+    EMAIL_PORT=(int, 25),
+    EMAIL_HOST_USER=(str, None),
+    EMAIL_HOST_PASSWORD=(str, None),
+
+    MAILCHIMP_UUID=(str, None),
+    MAILCHIMP_ACTION_URL=(str, None),
+
+    DEFAULT_FROM_EMAIL=(str, 'info@erudit.org'),
+    DEBUG_EMAIL_ADDRESS=(str, 'info@erudit.org'),
+
+    FEDORA_ROOT=(str, None),
+    FEDORA_USER=(str, None),
+    FEDORA_PASSWORD=(str, None),
+
+    SOLR_ROOT=(str, None),
+
+    VICTOR_SOAP_URL=(str, None),
+    VICTOR_SOAP_USERNAME=(str, None),
+    VICTOR_SOAP_PASSWORD=(str, None),
+
+    ERUDIT_OCLC_BACKEND_URL=(str, None),
+    ERUDIT_KBART_BACKEND_URL=(str, None),
+    ERUDIT_KBART_2014_BACKEND_URL=(str, None),
+
+    Z3950_HOST=(str, None),
+    Z3950_PORT=(int, None),
+    Z3950_DATABASE=(str, None),
+
+    SUSHI_URL=(str, None),
+
+    ERUDIT_COUNTER_BACKEND_URL=(str, None),
+
+    SUBSCRIPTION_EXPORTS_ROOT=(str, None),
+    BOOKS_DIRECTORY=(str, None),
+    RESTRICTION_ABONNE_ICONS_PATH=(str, None),
+    EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER=(str, None),
+    SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS=(int, 12),
+    CULTURAL_JOURNAL_EMBARGO_IN_MONTHS=(int, 16),
+
+    DJANGO_LOG_DIRECTORY=(str, None),
+    RAVEN_DSN=(str, None),
+
+    FIXTURE_ROOT=(str, None),
+    JOURNAL_FIXTURES=(str, None),
+
+    ANALYTICS_HOTJAR_TRACKING_CODE=(str, None),
+    ANALYTICS_GOOGLE_TRACKING_CODE=(str, None),
+
+)
+environ.Env.read_env(str(ROOT_DIR / '.env'))
 
 # General configuration
 # -----------------------------------------------------------------------------
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=list())
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 INTERNAL_IPS = ('127.0.0.1',)
-DEBUG = env('DEBUG', default=True)
-ACTIVATE_DEBUG_TOOLBAR = env("ACTIVATE_DEBUG_TOOLBAR", default=True)
-SECRET_KEY = env('SECRET_KEY', default='insecure')
-ADMIN_URL = env('ADMIN_URL', default='/admin')
-FALLBACK_BASE_URL = env('FALLBACK_BASE_URL', default=None)
-MANAGED_COLLECTIONS = env.tuple('MANAGED_COLLECTIONS', default=tuple('erudit',))
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+ADMIN_URL = env('ADMIN_URL')
+FALLBACK_BASE_URL = env('FALLBACK_BASE_URL')
+MANAGED_COLLECTIONS = env('MANAGED_COLLECTIONS')
 
 # Static and media files
 # -----------------------------------------------------------------------------
 
-BASE_DIR = Path(__file__)
-ROOT_DIR = BASE_DIR.parents[3]
-STATIC_ROOT = env('STATIC_ROOT', default='/static')
-MEDIA_ROOT = env('MEDIA_ROOT', default='/media')
-UPLOAD_ROOT = env('UPLOAD_ROOT', default='/uploads')
+STATIC_ROOT = env('STATIC_ROOT')
+MEDIA_ROOT = env('MEDIA_ROOT')
+UPLOAD_ROOT = env('UPLOAD_ROOT')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATICFILES_STORAGE = env(
-    "STATICFILES_STORAGE",
-    default='django.contrib.staticfiles.storage.StaticFilesStorage'
-)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -47,8 +109,6 @@ STATICFILES_DIRS = (
     str(ROOT_DIR / 'eruditorg' / 'static'),
 )
 
-if DEBUG:
-    STATICFILES_DIRS += (str(ROOT_DIR / 'eruditorg' / 'static' / 'build_dev'),)
 
 # Application definition
 # -----------------------------------------------------------------------------
@@ -171,41 +231,13 @@ TEMPLATES = [
 LOGIN_URL = 'public:auth:login'
 LOGIN_REDIRECT_URL = 'public:home'
 
-if ACTIVATE_DEBUG_TOOLBAR:
-    INSTALLED_APPS += (
-        'debug_toolbar',
-        'debug_toolbar_line_profiler',
-        'template_timings_panel',
-        'eulfedora',
-    )
-
-    TEMPLATES[0]['OPTIONS']['loaders'] = [
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    ]
-
-    DEBUG_TOOLBAR_PANELS = (
-        'debug_toolbar.panels.timer.TimerPanel',
-        'debug_toolbar.panels.headers.HeadersPanel',
-        'debug_toolbar.panels.request.RequestPanel',
-        'debug_toolbar.panels.sql.SQLPanel',
-        'debug_toolbar.panels.templates.TemplatesPanel',
-        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-        'debug_toolbar.panels.cache.CachePanel',
-        'debug_toolbar.panels.signals.SignalsPanel',
-        'debug_toolbar.panels.logging.LoggingPanel',
-    )
-
-    MIDDLEWARE += (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
 
 # Databases
 # -----------------------------------------------------------------------------
 
 DATABASES = {
-    'default': env.db(default="database"),
-    'restriction': env.db('RESTRICTION_DATABASE_URL', default="restriction")
+    'default': env.db('MAIN_DATABASE_URL'),
+    'restriction': env.db('RESTRICTION_DATABASE_URL'),
 }
 
 DATABASE_ROUTERS = [
@@ -217,9 +249,9 @@ DATABASE_ROUTERS = [
 # -----------------------------------------------------------------------------
 
 CACHES = {
-    'default': env.cache("CACHE_URL", default='pymemcache://'),
-    'fedora': env.cache('FEDORA_CACHE_URL', default='pymemcache://'),
-    'files': env.cache('FEDORA_CACHE_URL', default='pymemcache://')
+    'default': env.cache("CACHE_URL"),
+    'fedora': env.cache("CACHE_URL"),
+    'files': env.cache("CACHE_URL"),
 }
 
 # Emails
@@ -230,14 +262,15 @@ POST_OFFICE = {
 }
 
 EMAIL_BACKEND = 'post_office.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST', default=None)
-EMAIL_PORT = env('EMAIL_PORT', default=25)
-EMAIL_HOST_USER = env("EMAIL_HOST_USER", default=None)
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 # Addresses
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default="info@erudit.org")
-DEBUG_EMAIL_ADDRESS = DEFAULT_FROM_EMAIL
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+DEBUG_EMAIL_ADDRESS = env('DEBUG_EMAIL_ADDRESS')
+
 TECH_EMAIL = 'tech@erudit.org'
 PUBLISHER_EMAIL = 'edition@erudit.org'
 COMMUNICATION_EMAIL = 'media@erudit.org'
@@ -286,27 +319,23 @@ PASSWORD_HASHERS = [
 # -----------------------------------------------------------------------------
 
 # Fedora settings
-FEDORA_ROOT = env('FEDORA_ROOT', default="/fedora")
-FEDORA_USER = env('FEDORA_USER', default="user")
-FEDORA_PASSWORD = env('FEDORA_PASSWORD', default="password")
+FEDORA_ROOT = env('FEDORA_ROOT')
+FEDORA_USER = env('FEDORA_USER')
+FEDORA_PASSWORD = env('FEDORA_PASSWORD')
 
 # Solr settings
-SOLR_ROOT = env('SOLR_ROOT', default="http://localhost:8080/solr")
-
+SOLR_ROOT = env('SOLR_ROOT')
 SOLR_TIMEOUT = 10
 
 # Victor settings
-VICTOR_SOAP_URL = env('VICTOR_SOAP_URL', default="http://localhost:8181/")
-VICTOR_SOAP_USERNAME = env('VICTOR_SOAP_USERNAME', default="user")
-VICTOR_SOAP_PASSWORD = env('VICTOR_SOAP_PASSWORD', default="password")
+VICTOR_SOAP_URL = env('VICTOR_SOAP_URL')
+VICTOR_SOAP_USERNAME = env('VICTOR_SOAP_USERNAME')
+VICTOR_SOAP_PASSWORD = env('VICTOR_SOAP_PASSWORD')
 
 # KBART
-ERUDIT_KBART_BACKEND_URL = env('ERUDIT_KBART_BACKEND_URL', default="http://localhost:8080/kbart")
-ERUDIT_KBART_2014_BACKEND_URL = env(
-    'ERUDIT_KBART_2014_BACKEND_URL',
-    default="http://localhost:8080/kbart2014"
-)
-ERUDIT_OCLC_BACKEND_URL = env("ERUDIT_OCLC_BACKEND_URL", default="http://localhost:8080/oclc")
+ERUDIT_KBART_BACKEND_URL = env('ERUDIT_KBART_BACKEND_URL')
+ERUDIT_KBART_2014_BACKEND_URL = env('ERUDIT_KBART_2014_BACKEND_URL')
+ERUDIT_OCLC_BACKEND_URL = env('ERUDIT_OCLC_BACKEND_URL')
 
 # Journal providers
 ERUDIT_JOURNAL_PROVIDERS = {
@@ -332,33 +361,32 @@ ERUDIT_JOURNAL_PROVIDERS = {
     ],
 }
 
-Z3950_HOST = env("Z3950_HOST", default="http://localhost")
-Z3950_PORT = env("Z3950_PORT", default="8080")
-Z3950_DATABASE = env("Z3950_DATABASE", default="Z3950")
+SUSHI_URL = env("SUSHI_URL")
+Z3950_HOST = env("Z3950_HOST")
+Z3950_PORT = env("Z3950_PORT")
+Z3950_DATABASE = env("Z3950_DATABASE")
 
-ERUDIT_COUNTER_BACKEND_URL = env("ERUDIT_COUNTER_BACKEND_URL", default=None)
+ERUDIT_COUNTER_BACKEND_URL = env("ERUDIT_COUNTER_BACKEND_URL")
 
 
 # Metrics and analytics
 # -----------------------------------------------------------------------------
-METRICS_ACTIVATED = env('METRICS_ACTIVATED', default=False)
-METRICS_INFLUXDB_HOST = env("METRICS_INFLUXDB_HOST", default='localhost')
-METRICS_INFLUXDB_PORT = env("METRICS_INFLUXDB_PORT", default=0)
-METRICS_INFLUXDB_DBNAME = env("METRICS_INFLUXDB_DBNAME", default="db")
-METRICS_INFLUXDB_USER = env("METRICS_INFLUXDB_USER", default="db")
-METRICS_INFLUXDB_PASSWORD = env("METRICS_INFLUXDB_PASSWORD", default="password")
-ANALYTICS_TRACKING_CODES = env.list("ANALYTICS_TRACKING_CODES", default=list())
+METRICS_ACTIVATED = False
+# METRICS_INFLUXDB_HOST = env("METRICS_INFLUXDB_HOST", default='localhost')
+# METRICS_INFLUXDB_PORT = env("METRICS_INFLUXDB_PORT", default=0)
+# METRICS_INFLUXDB_DBNAME = env("METRICS_INFLUXDB_DBNAME", default="db")
+# METRICS_INFLUXDB_USER = env("METRICS_INFLUXDB_USER", default="db")
+# METRICS_INFLUXDB_PASSWORD = env("METRICS_INFLUXDB_PASSWORD", default="password")
 
 # Paths
 # -----------------------------------------------------------------------------
 
-SUBSCRIPTION_EXPORTS_ROOT = env('SUBSCRIPTION_EXPORTS_ROOT', default="/exports")
-BOOKS_DIRECTORY = env('BOOKS_DIRECTORY', default="/books")
-RESTRICTION_ABONNE_ICONS_PATH = env('RESTRICTION_ABONNE_ICONS_PATH', default="/icons")
+SUBSCRIPTION_EXPORTS_ROOT = env('SUBSCRIPTION_EXPORTS_ROOT')
+BOOKS_DIRECTORY = env('BOOKS_DIRECTORY')
 
 # Editor
 # -----------------------------------------------------------------------------
-EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER = env("EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER", default=None)
+EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER = env('EDITOR_MAIN_PRODUCTION_TEAM_IDENTIFIER')
 
 # Logging settings
 # -----------------------------------------------------------------------------
@@ -426,8 +454,9 @@ structlog.configure(
 
 # Raven settings
 
-RAVEN_CONFIG = env.dict('RAVEN_CONFIG', default=dict())
-
+RAVEN_CONFIG = {
+    'dsn': env('RAVEN_DSN')
+}
 
 # Openmetrics
 # -----------------------------------
@@ -443,8 +472,8 @@ MAILCHIMP_ACTION_URL = env('MAILCHIMP_ACTION_URL', default=None)
 # Embargo
 # -----------------------------------------------------------------------------
 
-SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS = env.int('SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS', default=12)
-CULTURAL_JOURNAL_EMBARGO_IN_MONTHS = env.int('CULTURAL_JOURNAL_EMBARGO_IN_MONTHS', default=16)
+SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS = env('SCIENTIFIC_JOURNAL_EMBARGO_IN_MONTHS')
+CULTURAL_JOURNAL_EMBARGO_IN_MONTHS = env('CULTURAL_JOURNAL_EMBARGO_IN_MONTHS')
 
 # Django JS reverse settings
 # -----------------------------------
