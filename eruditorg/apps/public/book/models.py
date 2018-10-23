@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
+from .managers import PublishedBooksManager
+
 
 class BookCollection(models.Model):
 
@@ -149,6 +151,13 @@ class Book(models.Model):
         verbose_name=_('Disponible en libre accès ?'),
         default=False,
     )
+    is_published = models.BooleanField(
+        verbose_name=_('Est publié ?'),
+        default=True
+    )
+
+    objects = models.Manager()
+    published_objects = PublishedBooksManager()
 
     class Meta:
         verbose_name = _('Livre')

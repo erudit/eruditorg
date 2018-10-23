@@ -5,8 +5,8 @@ from django.utils.translation import gettext as _
 
 class BookAdmin(admin.ModelAdmin):
 
-    list_display = ('title', 'year', 'authors', 'collection',)
-    list_filter = ('collection', 'is_open_access',)
+    list_display = ('title', 'year', 'authors', 'collection', 'is_published')
+    list_filter = ('collection', 'is_open_access', 'is_published')
 
     fieldsets = [
         (None, {
@@ -51,7 +51,7 @@ class BookAdmin(admin.ModelAdmin):
         }),
         (None, {
             'fields': (
-                ('is_open_access',),
+                ('is_open_access', 'is_published'),
             )
         }),
     ]
