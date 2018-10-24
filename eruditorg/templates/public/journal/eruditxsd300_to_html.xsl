@@ -286,6 +286,7 @@
           </ul>
           {% switch "maintenance" %}
           {% else %}
+          {% if article.issue.is_published %}
           <!-- promotional campaign -->
           <aside class="campaign">
             <h2 class="sr-only">{% trans 'ACFAS 2019' %}</h2>
@@ -295,6 +296,7 @@
               </div>
             </a>
           </aside>
+          {% endif %}
           {% endswitch %}
           {% if content_access_granted and subscription_type == 'individual' %}
           <div class="text-center">
