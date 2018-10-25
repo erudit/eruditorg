@@ -52,6 +52,8 @@
       {% include field_template with field=form.phone type="tel" autocomplete="tel" only %}
       {% include field_template with field=form.email type="email" autocomplete="email" only %}
       {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
+      {% include field_template with select_field=form.peer_review_process only %}
+
     </div>
   </fieldset>
 

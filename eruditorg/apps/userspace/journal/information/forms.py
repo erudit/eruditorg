@@ -11,7 +11,7 @@ from erudit.models import JournalInformation
 class JournalInformationForm(forms.ModelForm):
     i18n_field_bases = [
         'about', 'editorial_policy', 'subscriptions',
-        'team', 'contact', 'partners',
+        'team', 'contact', 'partners', 'publishing_ethics', 'instruction_for_authors'
     ]
 
     # Fields that aren't translatable. You could be wanting to but them in Meta.fields, but that
@@ -21,6 +21,7 @@ class JournalInformationForm(forms.ModelForm):
         'organisation_name', 'email', 'subscription_email',
         'phone', 'facebook_url', 'facebook_enable_feed',
         'twitter_url', 'twitter_enable_feed', 'website_url',
+        'peer_review_process'
     ]
 
     class Meta:

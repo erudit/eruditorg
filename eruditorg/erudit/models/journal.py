@@ -1256,6 +1256,23 @@ class JournalInformation(models.Model):
         verbose_name=_("Adresse courriel pour abonnements individuels"),
         blank=True)
     phone = models.TextField(verbose_name=_("Numéro de téléphone"), blank=True)
+
+    publishing_ethics = models.TextField(
+        verbose_name=_("Politique anti-plagiat ou d’éthique"), null=True, blank=True
+    )
+    instruction_for_authors = models.TextField(
+        verbose_name=_("Instructions pour les auteurs"), null=True, blank=True
+    )
+    peer_review_process = models.CharField(
+        choices=(
+            ('SB', _('Simple aveugle')),
+            ('DB', _('Double aveugle')),
+            ('OR', _('Ouverte')),
+        ),
+        max_length=2,
+        verbose_name=_("Type de processus d’évaluation par les pairs"), null=True, blank=True
+    )
+
     facebook_url = models.URLField(verbose_name=_("Facebook"), blank=True)
     facebook_enable_feed = models.BooleanField(
         verbose_name=_("Afficher votre fil d’activités Facebook ?"),

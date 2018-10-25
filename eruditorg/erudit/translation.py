@@ -9,7 +9,7 @@ from .models import JournalType
 class JournalInformationTranslationOptions(TranslationOptions):
     fields = (
         'about', 'editorial_policy', 'subscriptions', 'team',
-        'contact', 'partners',
+        'contact', 'partners', 'publishing_ethics', 'instruction_for_authors',
     )
 
 
