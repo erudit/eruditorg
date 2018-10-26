@@ -1,6 +1,6 @@
 {% extends "userspace/journal/base.html" %}
 {% load i18n widget_tweaks waffle_tags %}
-
+{% block data_controller %}userspace:journalinformation:update{% endblock %}
 {% block title %}{% trans "À propos" %} {{ block.super }}{% endblock title %}
 
 {% block extrahead %}
@@ -91,6 +91,10 @@
     </li>
     {% endfor %}
   </ul>
+
+  <h2><label>{{ form.languages.label }}</label></h2>
+  {{ form.languages|add_class:'form-control' }}
+  <hr>
 
   {% for field in form.get_textbox_fields %}
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
