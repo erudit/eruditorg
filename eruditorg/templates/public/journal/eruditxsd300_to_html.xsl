@@ -186,6 +186,13 @@
           <p>
             {% blocktrans %}<xsl:apply-templates select="../article/@typeart"/> de la revue{% endblocktrans %}
             <a href="{{ request.is_secure|yesno:'https,http' }}://{{ request.site.domain }}{% url 'public:journal:journal_detail' article.issue.journal.code %}"><xsl:value-of select="admin/revue/titrerev"/></a>
+            {# Peer review seal #}
+            {% if article.issue.journal.type.code == 'S' %}
+            <xsl:text>&#160;</xsl:text>
+            <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
+              <i class="icon ion-ios-checkmark-circle" size="small"></i>
+            </span>
+            {% endif %}
           </p>
           <p class="refpapier">
             <xsl:apply-templates select="admin/numero" mode="refpapier"/>
@@ -482,14 +489,6 @@
   <xsl:template match="article/liminaire/grtitre/titre | article/liminaire/grtitre/trefbiblio | article/liminaire/grtitre/sstitre" mode="title">
     <span class="{name()}">
       <xsl:apply-templates select="."/>
-      <xsl:if test="self::titre">
-        {# Peer review seal #}
-        {% if article.issue.journal.type.code == 'S' %}
-        <span class="hint--bottom-left hint--no-animate" data-hint="{% trans 'Tous les articles de cette revue sont soumis à un processus d’évaluation par les pairs.' %}">
-          <i class="icon ion-ios-checkmark-circle" size="small"></i>
-        </span>
-        {% endif %}
-      </xsl:if>
     </span>
   </xsl:template>
 
