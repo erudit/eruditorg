@@ -17,8 +17,10 @@
   </div>
   {% elif select_field %}
   <div>
+    <label class="control-label" for="{{ checkbox_field.id_for_label }}">
+      {{ select_field.label }}
+    </label>
     {{ select_field }}
-    <label for="{{ checkbox_field.id_for_label }}">{{ select_field.label }}</label>
   </div>
   {% else %}
   <input
@@ -30,4 +32,3 @@
   {% endif %}
   {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
 </div>
-

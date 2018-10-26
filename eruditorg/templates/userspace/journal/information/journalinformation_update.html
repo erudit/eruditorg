@@ -23,13 +23,7 @@
 {% endblock section_intro %}
 
 {% block content_main %}
-<ul class="tabs">
-  {% for langcode, langname in LANGUAGES %}
-  <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
-    <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ langcode }}">{{ langname }}</a>
-  </li>
-  {% endfor %}
-</ul>
+
 <form  class="form-vertical"
        method="post"
        action="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ selected_language }}">{% csrf_token %}
@@ -39,6 +33,7 @@
   {% endfor %}
   {% endif %}
 
+
   <h2>{% trans "Coordonnées générales" %}</h2>
   {% with field_template="userspace/journal/information/partials/info_single_field.html" %}
   <fieldset>
@@ -46,34 +41,56 @@
       <p class="col-sm-9">
         {% trans "Les coordonnées de la revue seront affichées sur le site pour orienter les usagers concernant certaines demandes, notamment les abonnements individuels." %}
       </p>
-    </div>
-    <div class="row">
       {% include field_template with field=form.organisation_name only %}
       {% include field_template with field=form.phone type="tel" autocomplete="tel" only %}
       {% include field_template with field=form.email type="email" autocomplete="email" only %}
       {% include field_template with field=form.subscription_email type="email" autocomplete="email" only %}
-      {% include field_template with select_field=form.peer_review_process only %}
-
     </div>
   </fieldset>
+
+  <hr/>
+
+  <fieldset>
+    <legend>{% trans "Gestion de la revue" %}</legend>
+    <div class="row">
+      <p class="col-sm-9">
+        {% blocktrans %}
+        Saisissez ici les informations liées à l’administration, l’aspect légal et le processus de publication de votre revue.
+        {% endblocktrans %}
+      </p>
+      {% include field_template with select_field=form.peer_review_process only %}
+    </div>
+    </div>
+  </fieldset>
+
+  <hr/>
 
   <fieldset>
     <legend>{% trans "Liens" %}</legend>
     <div class="row">
-      <div class="col-sm-9">
-        <p>
-          {% blocktrans %}
-          Les informations saisies seront disponibles publiquement, dans la page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.
-          {% endblocktrans %}
-        </p>
-      </div>
+      <p class="col-sm-9">
+        {% blocktrans %}
+        Les informations saisies seront disponibles publiquement, dans la page <em>À propos</em> de cette revue, à la sauvegarde de ce formulaire.
+        {% endblocktrans %}
+      </p>
       {% include field_template with field=form.facebook_url type="url" autocomplete="url" icon="ion-social-facebook" only %}
       {% include field_template with field=form.twitter_url type="url" autocomplete="url" icon="ion-social-twitter" only %}
       {% include field_template with field=form.website_url type="url" autocomplete="url" icon="ion-ios-world-outline" only %}
     </div>
   </fieldset>
   {% endwith %}
-  <hr>
+
+  <div class="text-right">
+    <button id="submit-id-submit" class="btn btn-primary" name="submit" type="submit">{% trans 'Sauvegarder' %}</button>
+  </div>
+
+  <ul class="tabs">
+    {% for langcode, langname in LANGUAGES %}
+    <li class="tabs__item{% if langcode == selected_language %} tabs__item_active{% endif %}">
+      <a href="{% url 'userspace:journal:information:update' journal_pk=scope_current_journal.pk %}?lang={{ langcode }}">{{ langname }}</a>
+    </li>
+    {% endfor %}
+  </ul>
 
   {% for field in form.get_textbox_fields %}
   <fieldset id="div_id_{{ field.html_name }}"{% if field.errors %} class="has-error"{% endif %}>
