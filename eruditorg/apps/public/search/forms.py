@@ -207,7 +207,7 @@ class SearchForm(forms.Form):
         ))
 
     article_types = forms.MultipleChoiceField(
-        label=_("Types d'articles savants"), widget=forms.CheckboxSelectMultiple,
+        label=_("Types d’articles savants"), widget=forms.CheckboxSelectMultiple,
         choices=ARTICLE_TYPES_CHOICES, required=False,
         help_text=_(
             "Ces filtres s’appliquent aux articles savants uniquement."
@@ -252,7 +252,7 @@ class ResultsFilterForm(forms.Form):
         label=_('Dans les résultats'), widget=forms.TextInput, required=False)
     filter_years = forms.MultipleChoiceField(label=_('Années'), required=False)
     filter_article_types = forms.MultipleChoiceField(
-        label=_('Types d’articles'),
+        label=_('Types d’articles savants'),
         help_text=_(
             "Ces filtres s’appliquent aux articles savants uniquement."
         ),
