@@ -23,8 +23,8 @@
     </xsl:choose>
   </xsl:variable>
   <xsl:variable name="titreAbrege" select="article/admin/revue/titrerevabr"/>
-  <xsl:variable name="uriStart">http://id.erudit.org/iderudit/</xsl:variable>
-  <xsl:variable name="doiStart">http://dx.doi.org/</xsl:variable>
+  <xsl:variable name="uriStart">https://id.erudit.org/iderudit/</xsl:variable>
+  <xsl:variable name="doiStart">https://doi.org/</xsl:variable>
 
   <v:variables>
     {% for imid, infoimg in article.fedora_object.infoimg_dict.items %}
@@ -157,8 +157,8 @@
             <dt>URI</dt>
             <dd>
               <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier l'URI de cet article.{% endblocktrans %}">
-                <a href="http://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
-                  http://id.erudit.org/iderudit/{{ article.localidentifier }}
+                <a href="https://id.erudit.org/iderudit/{{ article.localidentifier }}" class="clipboard-data">
+                  https://id.erudit.org/iderudit/{{ article.localidentifier }}
                   <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                   <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                 </a>
@@ -170,7 +170,7 @@
               <dd>
                 <span class="hint--top hint--no-animate" data-hint="{% blocktrans %}Cliquez pour copier le DOI de cet article.{% endblocktrans %}">
                   <a href="{$doiStart}{$doi}" class="clipboard-data">
-                    <xsl:value-of select="$doi"/>
+                    <xsl:value-of select="$doiStart"/><xsl:value-of select="$doi"/>
                     <span class="clipboard-msg clipboard-success">{% trans "adresse copiée" %}</span>
                     <span class="clipboard-msg clipboard-error">{% trans "une erreur s'est produite" %}</span>
                   </a>
@@ -448,7 +448,6 @@
       <xsl:if test="contains( . , '10.7202')">
         <img src="{% static 'svg/symbole-erudit.svg' %}" title="DOI Érudit" alt="Icône pour les DOIs Érudit" class="erudit-doi"/>
       </xsl:if>
-      <xsl:text>DOI:</xsl:text>
       <xsl:value-of select="."/>
     </a>
   </xsl:template>

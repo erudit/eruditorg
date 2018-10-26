@@ -10,7 +10,7 @@
         {{ article.get_formatted_authors_mla }}
         {% trans '«&nbsp;' %}{{ article|format_article_html_title }}.{% trans '&nbsp;»' %}
         <em>{{ article.issue.journal.name }}</em>,
-        {{ article.issue.volume_title|lower }}{% if article.first_page %}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        {{ article.issue.volume_title|lower }}{% if article.first_page %}, {% trans 'p.' %}&nbsp;{{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
       </dd>
 
       <dt><strong>APA</strong></dt>
@@ -20,7 +20,7 @@
         {{ article|format_article_html_title }}.
         <em>{{ article.issue.journal.name }}</em>,
         {% if article.issue.volume %}<em>{{ article.issue.volume }}</em>{% endif %}{% if article.issue.number %}({{ article.issue.number }}){% endif %}{% if article.first_page %},
-        {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
       </dd>
 
       <dt><strong>Chicago</strong></dt>
@@ -29,7 +29,7 @@
         {% trans '«&nbsp;' %}{{ article|format_article_html_title }}{% trans '&nbsp;»' %}.
         <em>{{ article.issue.journal.name }}</em>
         {% if article.issue.volume %}{{ article.issue.volume }}, {% endif %}{% if article.issue.number %}{% trans 'n<sup>o</sup>' %} {{ article.issue.number }}{% endif %}
-        ({{ article.issue.year }}){% if article.first_page %}{% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}doi:{{ article.doi }}{% endif %}
+        ({{ article.issue.year }}){% if article.first_page %}{% trans '&nbsp;:' %} {{ article.first_page }}–{{ article.last_page }}{% endif %}. {% if article.doi %}https://doi.org/{{ article.doi }}{% endif %}
       </dd>
     </dl>
 
