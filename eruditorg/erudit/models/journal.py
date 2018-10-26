@@ -43,7 +43,7 @@ from ..managers import UpcomingJournalManager
 from ..managers import ManagedJournalManager
 from ..utils import get_sort_key_func, strip_stopwords_prefix, catch_and_log
 
-from .core import Collection, Publisher
+from .core import Collection, Publisher, Language
 
 cache = caches['fedora']
 
@@ -1256,6 +1256,8 @@ class JournalInformation(models.Model):
         verbose_name=_("Adresse courriel pour abonnements individuels"),
         blank=True)
     phone = models.TextField(verbose_name=_("Numéro de téléphone"), blank=True)
+
+    languages = models.ManyToManyField(verbose_name=_('Langues'), blank=True, to=Language)
 
     publishing_ethics = models.TextField(
         verbose_name=_("Politique anti-plagiat ou d’éthique"), null=True, blank=True

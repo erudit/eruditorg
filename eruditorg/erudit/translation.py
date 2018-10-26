@@ -4,6 +4,7 @@ from modeltranslation.translator import translator
 from .models import Discipline
 from .models import JournalInformation
 from .models import JournalType
+from .models import Language
 
 
 class JournalInformationTranslationOptions(TranslationOptions):
@@ -25,6 +26,13 @@ class JournalTypeTranslationOptions(TranslationOptions):
     )
 
 
+class LanguageTranslationOptions(TranslationOptions):
+    fields = (
+        'name',
+    )
+
+
 translator.register(JournalInformation, JournalInformationTranslationOptions)
 translator.register(JournalType, JournalTypeTranslationOptions)
 translator.register(Discipline, DisciplineTranslationOptions)
+translator.register(Language, LanguageTranslationOptions)
