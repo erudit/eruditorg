@@ -1258,10 +1258,12 @@ class JournalInformation(models.Model):
     phone = models.TextField(verbose_name=_("Numéro de téléphone"), blank=True)
 
     frequency = models.IntegerField(
-        verbose_name=_("Fréquence de publication"), blank=True, null=True
+        verbose_name=_("Fréquence de publication (numéros par année)"), blank=True, null=True
     )
 
-    languages = models.ManyToManyField(verbose_name=_('Langues de publication'), blank=True, to=Language)
+    languages = models.ManyToManyField(
+        verbose_name=_('Langues de publication'), blank=True, to=Language
+    )
 
     publishing_ethics = models.TextField(
         verbose_name=_("Politique anti-plagiat ou d’éthique"), null=True, blank=True
